@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Affine Sets &#8212; Convex Optimization</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathcal{T}", "Chi": "\\mathcal{X}", "Eta": "\\mathcal{H}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbb{1}", "ZeroVec": "0", "OneMat": "\\mathbf{1}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Convex Sets" href="convex.html" />
+    <link rel="prev" title="Convex Sets" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Convex Optimization</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   Convex Sets
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Affine Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex.html">
+     Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hyperplane.html">
+     Hyperplanes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ball.html">
+     Euclidean Balls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="norm_ball.html">
+     Norm balls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="norm_cone.html">
+     Norm cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polyhedron.html">
+     Polyhedra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="psd_cone.html">
+     Positive Semi-Definite Cone
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convexity_ops.html">
+     Convexity Preserving Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     Generalized Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../convex_functions/intro.html">
+   Convex Functions
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/convex_sets/affine.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fconvex_sets/affine.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="affine-sets">
+<h1>Affine Sets<a class="headerlink" href="#affine-sets" title="Permalink to this headline">¶</a></h1>
+<div class="proof definition admonition" id="definition-0">
+<span id="def-line"></span><p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> be two points in <span class="math notranslate nohighlight">\(\RR^N\)</span>. Points of the form</p>
+<div class="math notranslate nohighlight">
+\[
+y = \theta x_1 + (1 - \theta) x_2 \text{ where } \theta \in \RR
+\]</div>
+<p>form a <em>line</em> passing through <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>.</p>
+</div>
+</div><ul class="simple">
+<li><p>at <span class="math notranslate nohighlight">\(\theta=0\)</span> we have <span class="math notranslate nohighlight">\(y=x_2\)</span>.</p></li>
+<li><p>at <span class="math notranslate nohighlight">\(\theta=1\)</span> we have <span class="math notranslate nohighlight">\(y=x_1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> corresponds to the points belonging
+to the [closed] <em>line segment</em> between <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>.</p></li>
+</ul>
+<p>We can also rewrite <span class="math notranslate nohighlight">\(y\)</span> as
+$<span class="math notranslate nohighlight">\(
+y = x_2 + \theta (x_1 - x_2)
+\)</span>$
+In this definition:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_2\)</span> is called the <em>base point</em> for this line.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_1 - x_2\)</span> defines the <em>direction</em> of the line.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is the sum of the base point and the direction scaled by the parameter <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+<li><p>As <span class="math notranslate nohighlight">\(\theta\)</span> increases from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(y\)</span> moves from <span class="math notranslate nohighlight">\(x_2\)</span> to <span class="math notranslate nohighlight">\(x_1\)</span>.</p></li>
+</ul>
+<div class="proof definition admonition" id="definition-1">
+<span id="def-affine-set"></span><p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(C \subseteq \RR^N\)</span> is <strong>affine</strong> if the line through
+any two distinct points in <span class="math notranslate nohighlight">\(C\)</span> lies in <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>In other words, for any <span class="math notranslate nohighlight">\(x_1, x_2 \in C\)</span>, we have <span class="math notranslate nohighlight">\(\theta x_1 + (1 - \theta) x_2 \in C\)</span>
+for all <span class="math notranslate nohighlight">\(\theta \in \RR\)</span>.</p>
+</div>
+</div><p>If we denote <span class="math notranslate nohighlight">\(\alpha = \theta\)</span> and <span class="math notranslate nohighlight">\(\beta = (1 - \theta)\)</span> we see that
+<span class="math notranslate nohighlight">\(\alpha x_1 + \beta x_2\)</span> represents a linear combination of points in <span class="math notranslate nohighlight">\(C\)</span>
+such that <span class="math notranslate nohighlight">\(\alpha + \beta = 1\)</span>.</p>
+<p>The idea can be generalized in following way.</p>
+<div class="proof definition admonition" id="definition-2">
+<span id="def-affine-combination"></span><p class="admonition-title"><span class="caption-number">Definition 3 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A point of the form <span class="math notranslate nohighlight">\(\theta_1 x_1 + \dots + \theta_k x_k\)</span> where
+<span class="math notranslate nohighlight">\(\theta_1 + \dots + \theta_k = 1\)</span> with <span class="math notranslate nohighlight">\(\theta_i \in \RR\)</span> and <span class="math notranslate nohighlight">\(x_i \in \RR^N\)</span>, is called
+an <strong>affine combination</strong> of the points <span class="math notranslate nohighlight">\(x_1,\dots,x_k\)</span>.</p>
+</div>
+</div><p>It can be shown easily that an affine set <span class="math notranslate nohighlight">\(C\)</span> contains all affine combinations of its points.</p>
+<div class="proof remark admonition" id="remark-3">
+<p class="admonition-title"><span class="caption-number">Remark 1 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(C\)</span> is an affine set, <span class="math notranslate nohighlight">\(x_1, \dots, x_k \in C\)</span>, and <span class="math notranslate nohighlight">\(\theta_1 + \dots + \theta_k = 1\)</span>, then
+the point <span class="math notranslate nohighlight">\(y = \theta_1 x_1 + \dots + \theta_k x_k\)</span> also belongs to <span class="math notranslate nohighlight">\(C\)</span>.</p>
+</div>
+</div><div class="proof lemma admonition" id="lemma-4">
+<p class="admonition-title"><span class="caption-number">Lemma 1 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be an affine set and <span class="math notranslate nohighlight">\(x_0\)</span> be any element in <span class="math notranslate nohighlight">\(C\)</span>. Then the set</p>
+<div class="math notranslate nohighlight">
+\[
+    V = C  - x_0 = \{ x  - x_0 | x \in C\}
+\]</div>
+<p>is a subspace of <span class="math notranslate nohighlight">\(\RR^N\)</span>.</p>
+</div>
+</div><p>To show that <span class="math notranslate nohighlight">\(V\)</span> is indeed a vector space, we can show that
+every linear combination of two arbitrary elements in <span class="math notranslate nohighlight">\(V\)</span>
+belongs to <span class="math notranslate nohighlight">\(V\)</span>.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(v_1\)</span> and <span class="math notranslate nohighlight">\(v_2\)</span> be two elements in <span class="math notranslate nohighlight">\(V\)</span>. Then by definition, there exist <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> in <span class="math notranslate nohighlight">\(C\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    v_1 = x_1 - x_0
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    v_2 = x_2 - x_0
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    a v_1 + v_2 = a (x_1 - x_0) + x_2 - x_0 = (a x_1 + x_2  - a x_0 )  - x_0 \Forall a \in \RR.
+\]</div>
+<p>But since <span class="math notranslate nohighlight">\(a + 1 - a = 1\)</span>, hence <span class="math notranslate nohighlight">\(x_3 = (a x_1 + x_2  - a x_0 ) \in C\)</span> (an affine combination).</p>
+<p>Hence <span class="math notranslate nohighlight">\(a v_1 + v_2 = x_3 - x_0 \in V\)</span> [by definition of <span class="math notranslate nohighlight">\(V\)</span>].</p>
+<p>Thus any linear combination of elements in <span class="math notranslate nohighlight">\(V\)</span> belongs to <span class="math notranslate nohighlight">\(V\)</span>. Hence <span class="math notranslate nohighlight">\(V\)</span> is a subspace of <span class="math notranslate nohighlight">\(\RR^N\)</span>.</p>
+</div>
+<p>With this, we can use the following notation:</p>
+<div class="math notranslate nohighlight">
+\[
+    C = V + x_0 = \{ v + x_0 | v \in V\}
+\]</div>
+<p>i.e. an affine set is a subspace with an offset.</p>
+<div class="proof remark admonition" id="remark-5">
+<p class="admonition-title"><span class="caption-number">Remark 2 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be an affine set and let <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> be two distinct elements.
+Let <span class="math notranslate nohighlight">\(V_1 = C - x_1\)</span> and <span class="math notranslate nohighlight">\(V_2 = C - x_2\)</span>, then the subspaces <span class="math notranslate nohighlight">\(V_1\)</span> and <span class="math notranslate nohighlight">\(V_2\)</span>
+are identical.</p>
+</div>
+</div><p>Thus the subspace <span class="math notranslate nohighlight">\(V\)</span> associated with an affine set <span class="math notranslate nohighlight">\(C\)</span> doesn’t depend upon
+the choice of offset <span class="math notranslate nohighlight">\(x_0\)</span> in <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<div class="proof definition admonition" id="definition-6">
+<span id="def-affine-dimension"></span><p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>We define the <strong>affine dimension</strong> of an affine set <span class="math notranslate nohighlight">\(C\)</span> as the dimension
+of the associated subspace <span class="math notranslate nohighlight">\(V = C - x_0\)</span> for some <span class="math notranslate nohighlight">\(x_0 \in C\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="example-7">
+<p class="admonition-title"><span class="caption-number">Example 1 </span> (Solution set of linear equations)</p>
+<div class="example-content section" id="proof-content">
+<p>We show that the solution set of linear equations forms an affine set.</p>
+<p>Let <span class="math notranslate nohighlight">\(C = \{ x | A x = b\}\)</span> where <span class="math notranslate nohighlight">\(A \in \RR^{M \times N}\)</span> and <span class="math notranslate nohighlight">\(b \in \RR^M\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be the set of all vectors <span class="math notranslate nohighlight">\(x \in \RR^N\)</span> which satisfy the system of linear
+equations given by <span class="math notranslate nohighlight">\(A x = b\)</span>.
+Then <span class="math notranslate nohighlight">\(C\)</span> is an affine set.</p>
+<p>Let <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> belong to <span class="math notranslate nohighlight">\(C\)</span>.  Then we have</p>
+<div class="math notranslate nohighlight">
+\[
+    A x_1 = b
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    A x_2 = b
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;\theta A x_1 + ( 1 - \theta ) A x_2 = \theta b + (1 - \theta ) b\\
+    &amp;\implies A (\theta x_1 + (1  - \theta) x_2) = b\\
+    &amp;\implies (\theta x_1 + (1  - \theta) x_2) \in C
+\end{split}\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(C\)</span> is an affine set.</p>
+<p>The subspace associated with <span class="math notranslate nohighlight">\(C\)</span> is nothing but the
+null space of <span class="math notranslate nohighlight">\(A\)</span> denoted as <span class="math notranslate nohighlight">\(\NullSpace(A)\)</span>.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-8">
+<p class="admonition-title"><span class="caption-number">Remark 3 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Every affine set can be expressed as the solution set of a
+system of linear equations.</p>
+</div>
+</div><div class="proof example admonition" id="example-9">
+<p class="admonition-title"><span class="caption-number">Example 2 </span> (More affine sets)</p>
+<div class="example-content section" id="proof-content">
+<ul class="simple">
+<li><p>The empty set <span class="math notranslate nohighlight">\(\EmptySet\)</span> is affine.</p></li>
+<li><p>A singleton set containing a single point <span class="math notranslate nohighlight">\(x_0\)</span> is affine.
+Its corresponding subspace is <span class="math notranslate nohighlight">\(\{0 \}\)</span> of zero dimension.</p></li>
+<li><p>The whole euclidean space <span class="math notranslate nohighlight">\(\RR^N\)</span> is affine.</p></li>
+<li><p>Any line is affine. The associated subspace is a line parallel to it
+which passes through origin.</p></li>
+<li><p>Any plane is affine. If it passes through origin, it’s a
+subspace. The associated subspace is the plane parallel to it
+which passes through origin.</p></li>
+</ul>
+</div>
+</div><div class="proof definition admonition" id="definition-10">
+<span id="def-affine-hull"></span><p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>The set of all affine combinations of points in some arbitrary set
+<span class="math notranslate nohighlight">\(S \subseteq \RR^N\)</span>
+is called the <strong>affine hull</strong> of <span class="math notranslate nohighlight">\(S\)</span> and denoted as <span class="math notranslate nohighlight">\(\AffineHull(S)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \AffineHull(S) = \{\theta_1 x_1 + \dots + \theta_k x_k | x_1, \dots, x_k \in S \text{ and } \theta_1 + \dots + \theta_k = 1\}.
+\]</div>
+</div>
+</div><div class="proof remark admonition" id="remark-11">
+<p class="admonition-title"><span class="caption-number">Remark 4 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>The affine hull is the smallest affine set containing <span class="math notranslate nohighlight">\(S\)</span>. In other words, let <span class="math notranslate nohighlight">\(C\)</span> be any affine set
+with <span class="math notranslate nohighlight">\(S \subseteq C\)</span>. Then <span class="math notranslate nohighlight">\(\AffineHull(S) \subseteq C\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="definition-12">
+<span id="def-affine-independence"></span><p class="admonition-title"><span class="caption-number">Definition 6 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A set of vectors <span class="math notranslate nohighlight">\(v_0, v_1, \dots, v_K \in \RR^N\)</span> is called <strong>affine independent</strong>,
+if the vectors <span class="math notranslate nohighlight">\(v_1 - v_0, \dots, v_K - v_0\)</span> are linearly independent.</p>
+</div>
+</div><p>In other words, the difference vectors <span class="math notranslate nohighlight">\(v_k - v_0\)</span>
+belong to the associated subspace.</p>
+<p>If the associated subspace has dimension <span class="math notranslate nohighlight">\(L\)</span> then a maximum of <span class="math notranslate nohighlight">\(L\)</span> vectors can
+be linearly independent in it. Hence a maximum of <span class="math notranslate nohighlight">\(L+1\)</span> vectors can be affine
+independent for the affine set.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./convex_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Convex Sets</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="convex.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Convex Sets</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Shailesh Kumar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
