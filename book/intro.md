@@ -15,6 +15,17 @@ optimization problems where:
 In the sequel, we will elaborate on these requirements.
 
 
+```{figure} images/convex_function.png
+---
+name: convex_function
+---
+For a convex function, the line segment between any two
+points on the graph of the function does not lie below
+the graph between the two points. Its epigraph is a 
+convex set. A local minimum of a convex function 
+is also a global minimum.
+``` 
+
 ## Convex Optimization Problems
 
 Convex optimization problems are usually further classified into
