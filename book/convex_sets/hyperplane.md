@@ -1,8 +1,9 @@
 # Hyperplanes and Half spaces
 
-(def:hyperplane)=
-````{prf:definition}
-A **hyperplane**  is a set of the form
+````{prf:definition} Hyperplane
+:label: def-hyperplane
+
+A *hyperplane*  is a set of the form
 
 $$
        H =  \{ x : a^T x = b \}
@@ -10,7 +11,7 @@ $$
 
 where $a \in \RR^N, a \neq 0$ and $b \in \RR$.
 
-The vector $a$ is called the **normal vector** to the hyperplane.
+The vector $a$ is called the *normal vector* to the hyperplane.
 ````
 
 
@@ -58,9 +59,10 @@ $$
 Thus, the hyperplane consists of an offset $x_0$ plus 
 all vectors orthogonal to the (normal) vector $a$.
 
-(def:halfspace)=
-````{prf:definition}
-A hyperplane divides $\RR^N$ into two **halfspaces**.
+````{prf:definition} halfspace
+:label: def-halfspace
+
+A hyperplane divides $\RR^N$ into two *halfspaces*.
 The two (closed) halfspaces are given by
 
 $$
@@ -93,8 +95,8 @@ where $x_0$ is any point in the associated hyperplane $H$.
 points in $H_-$ make an obtuse angle with $a$.
 
 
-(def:open_halfspace)=
-````{prf:definition}
+````{prf:definition}  Open halfspace
+:label: def-open-halfspace
 The sets given by
 
 $$
@@ -102,6 +104,6 @@ $$
     \Interior{H_-} = \{ x | a^T x < b\}
 $$
 
-are called **open halfspaces**. They are the interior
+are called *open halfspaces*. They are the interior
 of corresponding closed halfspaces.
 ````
