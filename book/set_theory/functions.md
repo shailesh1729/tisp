@@ -3,7 +3,8 @@
 ````{prf:definition} Function
 :label: def-st-function
 
-A *function* from a set $A$ to a set $B$, in symbols $f : A \to B$ (or $A \xrightarrow{f} B$
+A *partial function* (or simply *function*) 
+from a set $A$ to a set $B$, in symbols $f : A \to B$ (or $A \xrightarrow{f} B$
 or $x \mapsto f(x)$) is a specific *rule* that assigns 
 a *unique* element $y \in B$
 to an element $x \in A$.
@@ -16,7 +17,9 @@ Following {cite}`boyd2004convex`,
 our definition of functions is somewhat different from the 
 traditional definition. In particular, we don't require that
 $f$ maps *each* element of $A$ to an element of $B$. It may 
-map only some elements of $A$ to $B$.  
+map only some elements of $A$ to $B$. 
+
+See also : {prf:ref}`total function <def-st-total-function>` below. 
 ```
 
 
@@ -42,6 +45,15 @@ $$
 \dom f \triangleq \{x \in A \ST \exists \; y \in B \text{ such that } y = f(x) \}.
 $$ 
 ```
+
+```{prf:definition} Total function
+:label: def-st-total-function
+
+A function $f : A \to B$ is called a *total function* if $\dom f = A$.
+```
+
+The normal set-theoretic definition of a function coincides with the
+definition of *total function* above.
 
 ```{prf:definition} Range of a function
 :label: def-st-function-range
@@ -108,6 +120,16 @@ $ y = f(x)$.
 
 A function $f : A \to B$ is called *one-one* or *injective* if $x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$.
 ````
+
+````{prf:definition} Bijective function
+:label: def-st-bijective-function
+
+A *total* function $f : A \to B$ is called *one-one onto* or *bijective* 
+if it is injective as well as surjective.
+````
+
+For a bijective function $\dom f = A$, $\range f = B$, the elements
+of $A$ and $B$ are in one-to-one mapping, hence they have same cardinality.
 
 
 ````{prf:definition} Image of a set under a function
@@ -286,6 +308,24 @@ $$
 $$
 ````
 
+````{prf:definition} Inverse of a total function
+:label: def-st-inverse-total-function
+
+If a total function $f : X \to Y$ is bijective, 
+then for every $y$ in $Y$,
+there exists a unique $x \in X$ such that $y = f(x)$.  
+This unique element
+is denoted by $f^{-1}(y)$. 
+Thus, a total function $f^{-1} : Y \to X$ can be defined
+by
+
+$$
+    f^{-1}(y) = x \text{ whenever } f(x) = y.
+$$
+
+The total function $f^{-1}$ is called the *inverse* of $f$.
+````
+
 ## Identity Function
 
 ````{prf:definition} Identity function
@@ -300,7 +340,8 @@ $$
 ````
 
 ````{prf:remark}
-Identify function is one-one and onto.
+Identify function is one-one and onto. It is a total function
+and is bijective.
 ````
 
 Thus we have:
@@ -316,10 +357,9 @@ $$
 ````{prf:theorem} Schröder-Bernstein Theorem
 :label: res-st-schroder-bernstein-theorem
 
-Given two one-one functions $f : X \to Y$ with $\dom f = X$
-and $g : Y \to X$ with $\dom g = Y$, there exists
-a one-one onto function $h : X \to Y$ with $\dom h = X$
-and $\range h = Y$.
+Given two one-one {prf:ref}`total functions <def-st-total-function>` 
+$f : X \to Y$ and $g : Y \to X$, there exists
+a bijective total function $h : X \to Y$.
 ````
 
 ````{prf:proof}
