@@ -1,237 +1,38 @@
-# Convex Functions
-
-## Functions
-
-We quickly recall some important definitions which will 
-be useful later on.
-
-```{prf:definition} Domain of a function
-:label: def-function-domain
-
-For a function $f: A \to B$ the *domain* of the
-function is the subset of $A$ for which the function
-is defined. It is denoted by $\dom f$. 
-```
-The notation $f : \RR^n \to \RR^m$ means that f maps
-(some) n-vectors into m-vectors. $f$ need not be defined
-for all of $\RR^n$.
-
-```{prf:example} 
-The set of $n \times n$ real symmetric matrices is denoted by $\SS^n$. 
-The set of positive semidefinite symmetric matrices is denoted by $\SS^n_+$. 
-The set of positive definite symmetric matrices is denoted by $\SS^n_{++}$.
-
-Consider the function $f : \SS^n \to \RR$ given by
-
-$$
-f (X) = \log \det (X).
-$$
-
-The domain of the function is $\dom f = \SS^n_{++}$. The function
-is not defined for matrices which are not positive definite.
-```
-
-By $\int \dom f$, we shall mean the interior of the domain of $f$.
-
-```{prf:definition} Graph of a function
-:label: def-function-graph
-
-Given a function $f : X \to Y$, 
-the set of ordered pairs $(x, y)$ where
-$x \in \dom f$ and $y = f(x)$,
-is known as the *graph* of a function.
-
-$$
-G(f) \triangleq \{ (x, f(x)) : x \in X \}
-$$
-
-The graph of a function is the subset of the
-Cartesian product  $X \times Y$. 
-```
-
-* For a function $f : \RR^n \to \RR$,
-  its graph is a subset of $\RR^{n+1}$.
-* We say that a point $(x, f(x))$ in the graph of $f$
-  is above (resp. below) of another point $(y, f(y))$
-  if $f(x) \geq f(y)$ (resp. $f(x) \leq f(y)$).
-* A line segment connecting the two points 
-  $(x_1, f(x_1))$ and $(x_2, f(x_2))$ is called a
-  *chord* of the graph of the function.
-
-```{prf:definition} Epigraph
-:label: def-epigraph
-
-The *epigraph* of a real valued function $f: \RR^n \to \RR$ is
-defined as:
-
-$$
-\epi f \triangleq \{ (x,t) \in \RR^{n+1} \, | \, x \in \dom f, f(x) \leq t \}.
-$$ 
-```
-The epigraph lies above (and includes) the graph of a function.
-
-```{prf:definition} Sub-level set
-:label: def-epigraph
-
-For a real valued function $f: \RR^n \to \RR$, the sublevel set
-for some $\alpha \in \RR$ is defined as 
-
-$$
-\{ x \in \dom f \,|\, f(x) \leq \alpha \}.
-$$
-```
+# Functions
 
 
-```{prf:definition} Continuous function
-:label: def-continuous-function
+Chapter objectives
 
-A function $f : \RR^n \to \RR^m$ is *continuous* at a 
-point $x \in \dom f$ if for every $\epsilon > 0$ there exists
-$\delta > 0$ such that 
-for every $y \in \dom f$,
-
-$$ 
-\| y - x \|_2 \leq \delta \implies \| f(y)  - f(x) \|_2 \leq \epsilon .
-$$
-
-A function is *continuous* if it is continuous at every point
-in its domain.
-```
-
-```{prf:definition} Closed function
-:label: def-closed-function
-
-A function $f : \RR^n \to \RR$ is *closed* if for each $\alpha \in \RR$,
-the corresponding sublevel set is closed. 
-
-In other words, the set:
-
-$$
-\{ x \in \dom f \,|\, f(x) \leq \alpha \}
-$$
-
-is closed for every $\alpha \in \RR$.
-```
-```{prf:lemma}
-The epigraph of a closed function is closed.
-```
-
-```{prf:lemma}
-If $f: \RR^n \to \RR$ is continuous and $\dom f$ is closed, then 
-$f$ is closed.
-```
-
-```{prf:lemma}
-If $f: \RR^n \to \RR$ is continuous and $\dom f$ is open, then
-$f$ is closed if and only if $f$ converges to $\infty$ along
-every sequence converging to a boundary point of $\dom f$. 
-```
+* Review of functions
+* Convex functions and their properties
+* Extended valued functions
+* Subgradients
+* Conjugate functions
+* Norms and dual norms
+* Strong convexity
+* Convexity preserving operations
+* Smoothness
+* Quasiconvex functions
+* Proximal mappings
 
 
-## Convex Functions
+We will primarily be considered with functions 
+of type $\EE \to \VV$ where $\EE$ and $\VV$ are
+inner product spaces.
 
-```{prf:definition} Convex function
-:label: def-convex-function
+In particular, we will concern ourselves with 
+real valued functions $\EE \to \RR$ from an 
+inner product space $\EE$ to real line. 
+Their extensions $\tilde{f} : \EE \to [-\infty, \infty]$
+will play a crucial role in simplifying analysis.
+Real-valued functions are equipped with a total order in the codomain
+$\RR$. Thus, it is possible to compare $f(x)$ with $f(y)$
+for some $x, y \in \EE$ to establish whether 
+$f(x) < f(y)$ or $f(x) = f(y)$ or $f(x) > f(y)$.
 
-A function $f: \RR^n \to \RR$ is *convex* if 
-$\dom f$ is a convex set and for all $x_1,x_2 \in \dom f$, 
-and $\theta \in [0, 1]$, we have:
+Examples of inner product spaces:
 
-$$
-f(\theta x_1 + (1-\theta) x_2) \leq \theta f(x_1) + (1-\theta) f(x_2).
-$$
-```
+- Euclidean space $\RR^n$
+- Space of matrices $\RR^{m \times n}$
+- Space of symmetric matrices $\SS^n$.
 
-
-
-```{figure} ../images/convex_function.png
----
-name: convex_function
----
-Graph of a convex function. The line segment
-between any two points on the graph lies 
-above the graph.
-```
-
-* For a convex function, every chord lies above 
-  the graph of the function. 
-
-
-```{prf:definition} Strictly convex function
-:label: def-strictly-convex-function
-
-A convex function $f: \RR^n \to \RR$ is *strictly convex* 
-if for all $x_1,x_2 \in \dom f$, 
-where $x_1$ and $x_2$ are distinct, 
-and $\theta \in (0, 1)$, we have:
-
-$$
-f(\theta x_1 + (1-\theta) x_2) < \theta f(x_1) + (1-\theta) f(x_2).
-$$
-In other words, the inequality is a strict inequality 
-whenever the point $x = \theta x_1 + (1-\theta) x_2$ is
-distinct from $x_1$ and $x_2$ both.
-```
-
-```{prf:definition} Concave function
-:label: def-concave-function
-
-We say that a function $f$ is *concave* if $-f$ is convex.
-A function $f$ is *strictly concave* if $-f$ is 
-strictly convex.
-```
-
-```{prf:example} Linear functional
-A *linear functional* on $\RR^n$ is defined in terms of 
-a vector $a \in \RR^n$ as 
-
-$$
-f_a (x) \triangleq \langle a, x \rangle
-$$
-i.e. the inner product of $a$ with $x$.
-```
-
-```{prf:example} Affine functional
-An *affine functional* on $\RR^n$ is defined in terms of 
-a vector $a \in \RR^n$ and a scalar $b \in \RR$ as 
-
-$$
-f_{a, b} (x) \triangleq \langle a, x \rangle + b
-$$
-i.e. the inner product of $a$ with $x$ followed by a translation.
-```
-
-
-```{prf:remark}
-All affine functionals and linear functionals are
-convex as well as concave.
-```
-
-
-```{prf:property}
-A function $f$ is convex if and only if for all
-$x \in \dom f$ and all $v$, the function 
-$g(t) = f(x + tv)$ is convex (on its domain
-    , $\{ t : x + tv \in \dom f\}$).
-
-In other words, $f$ is convex if and only if 
-it is convex when restricted to any line that
-intersects its domain.
-```
-
-
-## Extended-value extensions
-
-```{prf:definition} Extended-value extension
-:label: def-extended-value-extension
-
-If $f$ is convex, we define its *extended-value extension*
-$\tilde{f} : \RR^n \to \RR \cup \{ \infty \}$ by
-
-$$
-    \tilde{f}(x) = \begin{cases} 
-     f(x) & \text{for} & x \in \dom f \\
-    \infty & \text{for} & x \notin \dom f
-    \end{cases}
-$$
-```
