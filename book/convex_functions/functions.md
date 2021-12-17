@@ -3,13 +3,6 @@
 We quickly recall some important definitions which will 
 be useful later on.
 
-```{prf:definition} Domain of a function
-:label: def-function-domain
-
-For a function $f: A \to B$ the *domain* of the
-function is the subset of $A$ for which the function
-is defined. It is denoted by $\dom f$. 
-```
 The notation $f : \RR^n \to \RR^m$ means that f maps
 (some) n-vectors into m-vectors. $f$ need not be defined
 for all of $\RR^n$.
