@@ -13,6 +13,20 @@ $$
 is called the *dual cone* of $C$. 
 ```
 
+```{rubric} Geometric interpretation
+```
+
+* For a vector $y$, the set $H_{y, +} \{ x \ST \langle y, x \rangle \geq 0\}$ is 
+  a {prf:ref}`halfspace <def-halfspace>` passing through origin.
+* $y$ is the normal vector of the halfspace along (in the direction of) the halfspace.
+* If $y$ belongs to the dual cone of $C$, then for every $x \in C$, we have
+  $ \langle y, x \rangle \geq 0$. 
+* Thus, the set $C$ is contained in the halfspace $H_{y, +}$.
+* In particular, if $C$ is a cone, then it will also touch the boundary of 
+  the half space $H_{y, +}$ as $C$ contains the zero vector.
+
+
+
 ## Properties
 
 ```{prf:property}
@@ -161,16 +175,6 @@ Thus, $y$ cannot belong to $V^*$. A contradiction.
 Thus, $V^* = V^{\perp}$.
 ```
 
-
-```{rubric} Geometric interpretation
-```
-
-* For a vector $y$, the set $H_{y, +} \{ x \ST \langle y, x \rangle \geq 0\}$ is 
-  a halfspace passing through origin.
-* If $y$ belongs to the dual cone of $C$, then for every $x \in C$, we have
-  $ \langle y, x \rangle \geq 0$. 
-* Thus, the set $C$ is contained in the halfspace $H_{y, +}$.
-* In particular, if $C$ is a cone, then it must be supported by the half space $H_{y, +}$ as $C$ contains the $0$ vector.
 
 
 ## Self dual cones

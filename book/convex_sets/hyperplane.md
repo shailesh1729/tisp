@@ -59,6 +59,8 @@ $$
 Thus, the hyperplane consists of an offset $x_0$ plus 
 all vectors orthogonal to the (normal) vector $a$.
 
+## Half spaces
+
 ````{prf:definition} halfspace
 :label: def-halfspace
 
