@@ -330,13 +330,69 @@ $$
 $$
 ```
 
+## Maximum over a Set of Functions
+
+```{rubric} Proper functions
+```
+
+```{div}
+Let $f_1, f_2, \dots, f_m : \EE \to (-\infty,\infty]$ be a set of
+proper functions. Let
+
+$$
+f(x) = \max \{ f_1(x), f_2(x), \dots, f_m(x)\}.
+$$
+
+Let $x \in \cap_{i=1}^m \interior \dom f_i$ be a point common to the
+domains of all the functions.
+Let $d \in \EE$ be a direction. 
+
+If $f'_i(x;d)$ exist for all $i$, we have,
+
+$$
+f'(x; d) = \underset{i \in I(x)}{\max} f'_i(x;d)
+$$
+where $I(x) = \{ i \ST f_i(x) = f(x)\}$.
+
+In other words, we identify the functions $f_i$ which achieve the maximum
+$f(x)$ at $x$, compute the directional derivatives of these functions at $x$
+for the direction $d$ and then compute the maximum of the directional derivatives.
+```
+
+```{rubric} Proper convex functions
+```
+
+```{div}
+For proper convex functions $f_i$, the directional derivatives exist 
+always. The statement can be modified accordingly.
+
+Subgradient set of $f$ from subgradients of $f_i$:
+
+$$
+\partial f(x) = \text{conv } \left ( \bigcup_{i\in I(x)} \partial f_i (x) \right ).
+$$
+
+```
+
+```{rubric} Differentiable functions
+```
+
+```{div}
+If $f_i$ are differentiable at $x$, then
+
+$$
+f'(x; d) = \underset{i \in I(x)}{\max} f'_i(x;d) 
+= \underset{i \in I(x)}{\max} \langle \nabla f_i(x) , d \rangle.
+$$
+```
+
 ## Norm Functions
 
 ```{div}
 Subdifferential of a norm $\| \cdot \|: \EE \to \RR$ at $x = \ZeroVec$:
 
 $$
-\partial f(\ZeroVec) = B_{\| \cdot \|_*} [0, 1] = \{ g \in \EE^* \ST \|g\|_* \leq 1 \}. 
+\partial f(\ZeroVec) = B_{\| \cdot \|_*} [\ZeroVec, 1] = \{ g \in \EE^* \ST \|g\|_* \leq 1 \}. 
 $$
 ```
 
@@ -348,7 +404,7 @@ Let $f : \RR^n \to \RR$ be given by $f(x) = \| x \|_1$.
 Subdifferential of $f$ at $x = \ZeroVec$:
 
 $$
-\partial f(\ZeroVec) = B_{\| \cdot \|_{\infty}} [0, 1] = [-1, 1]^n. 
+\partial f(\ZeroVec) = B_{\| \cdot \|_{\infty}} [\ZeroVec, 1] = [-1, 1]^n. 
 $$
 ```
 
@@ -433,7 +489,8 @@ Let $f : \RR^n \to \RR$ be given by $f(x) = \| x \|_2$.
 Subdifferential of $f$ at $x = \ZeroVec$:
 
 $$
-\partial f(\ZeroVec) = B_{\| \cdot \|_2} [0, 1] = \{ g \in \RR^n \ST \|g\|_2 \leq 1 \}. 
+\partial f(\ZeroVec) = B_{\| \cdot \|_2} [\ZeroVec, 1] 
+= \{ g \in \RR^n \ST \|g\|_2 \leq 1 \}. 
 $$
 
 At $x \neq \ZeroVec$, $f$ is differentiable with the gradient:
@@ -447,11 +504,48 @@ Combining the two, we get:
 $$
 \partial f (x) = \begin{cases} 
 \left \{ \frac{x}{ \| x \|_2} \right \} & \text{for} & x \neq \ZeroVec \\
-B_{\| \cdot \|_2} [0, 1] & \text{for} & x  = 0
+B_{\| \cdot \|_2} [\ZeroVec, 1] & \text{for} & x  = 0
 \end{cases}.
 $$
 ```
 
+### $\ell_{\infty}$-Norm
+
+```{div}
+Let $f : \RR^n \to \RR$ be given by $f(x) = \| x \|_{\infty}$.
+```
+
+```{div}
+Subdifferential of $f$ at $x = \ZeroVec$:
+
+$$
+\partial f(\ZeroVec) = B_{\| \cdot \|_1} [\ZeroVec, 1] 
+= \{ x \in \RR^n \ST \|x\|_1 \leq 1 \}. 
+$$
+
+Subdifferential of $f$ at $x \neq \ZeroVec$.
+
+We have:
+
+$$
+f(x) = \max \{f_1(x), f_2(x), \dots, f_n(x)\}
+$$
+where $f_i(x) = |x_i|$. We set:
+
+$$
+I(x) = \{i \ST |x_i | = f(x) = \| x \|_{\infty} \}.
+$$
+
+We have
+
+$$
+\partial f_i(x) = \{\sgn (x_i)  e_i \} \Forall i \in I(x).
+$$
+
+$$
+\partial f(x) = \text{conv } \left (\bigcup_{i \in I(x)} \{\sgn (x_i)  e_i \} \right ).
+$$
+```
 
 ### $\ell_1$ Norm over Affine Transformation  
 
@@ -504,7 +598,7 @@ We have:
 $$
 \partial f (Ax + b) = \begin{cases} 
 \left \{ \frac{A x + b}{ \| A x + b \|_2} \right \} & \text{for} & Ax + b \neq \ZeroVec \\
-B_{\| \cdot \|_2} [0, 1] & \text{for} & A x + b  = 0
+B_{\| \cdot \|_2} [\ZeroVec, 1] & \text{for} & A x + b  = 0
 \end{cases}.
 $$
 
@@ -515,14 +609,14 @@ $$
 \partial h (x) = A^T \partial f (Ax + b) 
 = \begin{cases} 
 \left \{ \frac{A^T (A x + b)}{ \| A x + b \|_2} \right \} & \text{for} & Ax + b \neq \ZeroVec \\
-A^T B_{\| \cdot \|_2} [0, 1] & \text{for} & A x + b  = 0
+A^T B_{\| \cdot \|_2} [\ZeroVec, 1] & \text{for} & A x + b  = 0
 \end{cases}.
 $$
 
 For $x \ST A x + b = 0$, we can write this as 
 
 $$
-\partial h (x) = A^T B_{\| \cdot \|_2} [0, 1] = \{A^T y \ST \| y \|_2 \leq 1 \}.
+\partial h (x) = A^T B_{\| \cdot \|_2} [\ZeroVec, 1] = \{A^T y \ST \| y \|_2 \leq 1 \}.
 $$
 ```
 
@@ -600,44 +694,48 @@ where $v$ is a normalized eigen-vector of $X$ associated with its maximum eigen 
 ```
 
 
-## Maximum over a Set of Functions
+
+## The Max Function
 
 ```{div}
-Let $f_1, f_2, \dots, f_m : \EE \to (-\infty,\infty]$ be a set of
-proper functions. Let
+Let $f : \RR^n \to \RR$ be given by:
 
 $$
-f(x) = \max \{ f_1(x), f_2(x), \dots, f_m(x)\}.
+f(x) = \max \{ x_1, x_2, \dots, x_n\}.
 $$
 
-Let $x \in \cap_{i=1}^m \interior \dom f_i$ be a point common to the
-domains of all the functions.
-Let $d \in \EE$ be a direction. If $f'_i(x;d)$ exist for all $i$,
-we have,
+Let $f_i(x) = x_i$. Then
 
 $$
-f'(x; d) = \underset{i \in I(x)}{\max} f'_i(x;d)
-$$
-where $I(x) = \{ i \ST f_i(x) = f(x)\}$.
-
-In other words, we identify the functions $f_i$ which achieve the maximum
-$f(x)$ at $x$, compute the directional derivatives of these functions at $x$
-for the direction $d$ and then compute the maximum of the directional derivatives.
-
-For proper convex functions $f_i$, the directional derivatives exist 
-always. The statement can be modified accordingly.
-
-If $f_i$ are differentiable at $x$, then
-
-$$
-f'(x; d) = \underset{i \in I(x)}{\max} f'_i(x;d) 
-= \underset{i \in I(x)}{\max} \langle \nabla f_i(x) , d \rangle.
+f_(x) = \max \{ f_1(x), f_2(x), \dots, f_n(x)\}.
 $$
 
+$$
+\partial f_i(x) = \{ e_i\}.
+$$
 
+We denote:
+
+$$
+I (x) = \{ i \ST f(x) = x_i\}.
+$$
+
+Using the max rule for functions:
+
+$$
+\partial f (x) = \text{conv } \left ( \bigcup_{i \in I(x)} \partial f_i(x) \right )
+  = \text{conv } \left ( \bigcup_{i \in I(x)} \{ e_i\} \right ).
+$$
 ```
 
-## Distance from a convex set
+For the vector of all ones:
+
+$$
+\partial f (\alpha \OneVec) = \Delta_n \Forall \alpha \in \RR.
+$$
+
+
+## Distance from a Convex Set
 
 
 Let $C \subseteq \EE$ be a nonempty closed and convex set.
@@ -672,8 +770,43 @@ $$
 \nabla \phi_C(x) = x - P_C(x)  \Forall x \in \EE.
 $$
 
+```{div}
+We note that $\phi_C = g \circ d_C$ where 
+$g(t) = \frac{1}{2}[t]_+^2$.
 
-## Space of matrices
+Applying chain rule:
+
+$$
+\partial \phi_C (x) = [d_C(x)]_+ \partial d_C(x) = d_C(x) \partial d_C(x).
+$$
+
+For any $x \notin C$, $d_C(x) \neq 0$, and we have:
+
+$$
+d_C(x) = \left \{ \frac{x - P_C(x)}{d_C(x)}\right \} \Forall x \notin C.
+$$
+
+$d_C$ is differentiable at $x \notin C$.
+
+
+For $x \in C$:
+
+$$
+\partial d_C (x) = N_C(x) \cap B[\ZeroVec, 1].
+$$
+
+Combining cases:
+
+$$
+\partial d_C (x) = \begin{cases} 
+ \left \{ \frac{x - P_C(x)}{d_C(x)}\right \}, & x \notin C\\
+N_C(x) \cap B[\ZeroVec, 1], & x \in C
+\end{cases}.
+$$
+```
+
+
+## Space of Matrices
 
 ```{div}
 Let $\EE = \RR^{m \times n}$. Let the standard
@@ -702,3 +835,35 @@ Then
 $$
 \nabla f(x) = H^{-1} D_f(x).
 $$
+
+
+## Convex Piecewise Linear Function
+
+
+```{div}
+Let a convex piecewise linear function $f : \RR^n \to \RR$ be given by:
+
+$$
+f(x) = \underset{1 \leq i \leq m}{\max} \{a_i^T x + b_i \}.
+$$
+
+We define $f_i(x) = a_i^T x + b_i$. Then 
+
+$$
+f(x) = \underset{1 \leq i \leq m}{\max} \{ f_i(x)\}.
+$$
+
+We set:
+
+$$
+I(x) = \{i \ST f(x) = a_i^T x + b_i \}.
+$$
+
+Then we have:
+
+$$
+\partial f(x) = \left \{  \sum_{i \in I(x)} \lambda_i a_i \ST 
+  \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0 \Forall j \in I(x)
+  \right \}
+$$
+```
