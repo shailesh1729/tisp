@@ -1,12 +1,20 @@
+(sec:subgradients:summary)=
 # Chapter Summary
 
 ## Subgradients
 
 ```{div}
+
+Let $\EE$ be a vector space equipped with the standard inner product.
+
+Let $f : \EE \to (-\infty, \infty]$ be a proper function.
+Let $\bx \in \dom f$. Let $\by \in \EE$. Let $\bg \in \EE^*$
+be a subgradient of $f$ at $x$. 
+
 Subgradient inequality:
 
 $$
-f(y) \geq f(x) + \langle g, y - x \rangle \Forall y \in \EE.
+f(\by) \geq f(\bx) + \langle \bg, \by - \bx \rangle \Forall \by \in \EE.
 $$
 ```
 
@@ -14,7 +22,7 @@ $$
 Alternative form:
 
 $$
-f(y) \geq f(x) + \langle g, y - x \rangle \Forall y \in \dom f.
+f(\by) \geq f(\bx) + \langle \bg, \by - \bx \rangle \Forall \by \in \dom f.
 $$
 ```
 
@@ -22,31 +30,30 @@ $$
 Subdifferential set:
 
 $$
-\partial f(x) \triangleq \{ g \in \EE^* \ST f (y) \geq f(x) + \langle g, y - x \rangle \Forall y \in \EE \}.
+\partial f(\bx) \triangleq 
+\{ \bg \in \EE^* \ST f (\by) \geq f(\bx) + \langle \bg, \by - \bx \rangle 
+  \Forall \by \in \EE \}.
 $$
 ```
 
-### Proper Functions
-
-Let $f : \EE \to (-\infty, \infty]$ be a proper function.
-
-* The subdifferential set $\partial f (x)$ is closed and convex for any $x \in \EE$.
-* $\partial f (x)$ may be empty at some $x \in \EE$.
-* $f$ is called subdifferentiable at $x \in \EE$
-  if $\partial f (x) \neq \EmptySet$.
+* The subdifferential set $\partial f (\bx)$ is closed and convex for any $\bx \in \EE$.
+* $\partial f (\bx)$ may be empty at some $\bx \in \EE$.
+* $f$ is called subdifferentiable at $\bx \in \EE$
+  if $\partial f (\bx) \neq \EmptySet$.
 * The set of points at which $f$ is subdifferentiable is denoted by
 
   $$
-  \dom \partial f = \{ x  \in \EE \ST \partial f (x) \neq \EmptySet \}.
+  \dom \partial f = \{ \bx  \in \EE \ST \partial f (\bx) \neq \EmptySet \}.
   $$
-* If $\dom f$ is convex and $\partial f(x)$ is nonempty at every 
-  $x \in \dom f$, then $f$ is convex.
-* Multiplication by a positive scalar: Let $x \in \dom f$.
-  For any $\alpha > 0$, 
+* If $\dom f$ is convex and $\partial f(\bx)$ is nonempty at every 
+  $\bx \in \dom f$, then $f$ is convex.
 
-  $$
-  \partial (\alpha f)(x) = \alpha \partial f(x).
-  $$
+Multiplication by a positive scalar: Let $\bx \in \dom f$.
+For any $\alpha > 0$, 
+
+$$
+\partial (\alpha f)(\bx) = \alpha \partial f(\bx).
+$$
 
 
 ### Proper Convex Functions
@@ -54,12 +61,12 @@ Let $f : \EE \to (-\infty, \infty]$ be a proper function.
 Let $f : \EE \to (-\infty, \infty]$ be a proper convex function.
 
 * $f$ need not be subdifferentiable at every point in $\dom f$.
-* For a point $x \in \interior \dom f$, $\partial f (x)$ is non-empty and bounded.
+* For a point $\bx \in \interior \dom f$, $\partial f (x)$ is non-empty and bounded.
 * $f$ is subdifferentiable at every point in the interior of its domain.
 * In other words, the subdifferential set may be empty only on the boundary of 
   $\dom f$ for a proper convex function.
 * If $X \subseteq \interior \dom f$ is nonempty and compact, then 
-  $Y = \cup_{x \in X} \partial f (x)$ is nonempty and bounded. i.e., the
+  $Y = \cup_{\bx \in X} \partial f (\bx)$ is nonempty and bounded. i.e., the
   subdifferentiables over a compact set in the domain are nonempty 
   and bounded.
 * $f$ is subdifferentiable at a point in its relative interior.
@@ -67,11 +74,11 @@ Let $f : \EE \to (-\infty, \infty]$ be a proper convex function.
   $$
   \relint \dom f \subseteq \dom \partial f.
   $$ 
-* There exists $x \in \dom f$ where $\partial f(x)$ is nonempty. In other
+* There exists $\bx \in \dom f$ where $\partial f(\bx)$ is nonempty. In other
   words, $\dom \partial f$ is not empty since $\relint \dom f$ is always
   nonempty.
-* If $\Dim(\dom f) < \Dim(\EE)$ and $\partial f(x)$ is nonempty for some
-  $x \in \dom f$, then $\partial f(x)$ is unbounded.  
+* If $\Dim(\dom f) < \Dim(\EE)$ and $\partial f(\bx)$ is nonempty for some
+  $\bx \in \dom f$, then $\partial f(\bx)$ is unbounded. 
 
 ### Convex Functions
 
@@ -85,11 +92,11 @@ Let $f : \EE \to \RR$ be convex.
 
 ```{div}
 Let $f : \EE \to (-\infty, \infty]$ be a proper function.
-Let $x \in \interior \dom f$. 
-The *directional derivative* at $x$ in the direction $d \in \EE$ is defined by 
+Let $\bx \in \interior \dom f$. 
+The *directional derivative* at $\bx$ in the direction $\bd \in \EE$ is defined by 
 
 $$
-f'(x;d) \triangleq \lim_{\alpha \to 0^+} \frac{f(x + \alpha d) - f(x)}{\alpha}.
+f'(\bx;\bd) \triangleq \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd) - f(\bx)}{\alpha}.
 $$
 ```
 The directional derivative is a scalar quantity ($\in \RR$).
@@ -97,28 +104,28 @@ The directional derivative is a scalar quantity ($\in \RR$).
 ### Proper Convex Functions
 
 Let $f : \EE \to (-\infty, \infty]$ be a proper convex function.
-Let $x \in \interior \dom f$. 
+Let $\bx \in \interior \dom f$. 
 
-* For any $d \in \EE$, the directional derivative $f'(x; d)$ exists.
-* $f(y) \geq f(x) + f'(x; y -x) \Forall y \in \dom f$.
-* Max formula: For any $d \in \EE$, 
+* For any $\bd \in \EE$, the directional derivative $f'(\bx; \bd)$ exists.
+* $f(\by) \geq f(\bx) + f'(\bx; \by -\bx) \Forall \by \in \dom f$.
+* Max formula: For any $\bd \in \EE$, 
 
   $$
-  f'(x;d) = \max \{ \langle g, d \rangle \ST g \in \partial f(x) \}.
+  f'(\bx;\bd) = \max \{ \langle \bg, \bd \rangle \ST \bg \in \partial f(\bx) \}.
   $$
 
 * Max formula alternative formulation using the support function notation:
 
   $$
-  f'(x;d) = \sigma_{\partial f(x)}(d).
+  f'(\bx;\bd) = \sigma_{\partial f(\bx)}(\bd).
   $$
 
-For a proper convex function, at a point $x \in \interior \dom f$, we define 
-a mapping $g : \EE \to \RR$ given by $ g(d) \triangleq f'(x;d)$.
-In other words, $g$ performs $d \mapsto f'(x;d)$ mapping at $x$.
+For a proper convex function, at a point $\bx \in \interior \dom f$, we define 
+a mapping $g : \EE \to \RR$ given by $ g(\bd) \triangleq f'(\bx;\bd)$.
+In other words, $g$ performs $\bd \mapsto f'(\bx;\bd)$ mapping at $\bx$.
 
 * $g$ is convex.
-* $g$ is homogeneous. i.e. $g(\lambda d) = \lambda g(d)$ for some $\lambda \geq 0$.
+* $g$ is homogeneous. i.e. $g(\lambda \bd) = \lambda g(\bd)$ for some $\lambda \geq 0$.
 
 
 
@@ -126,48 +133,49 @@ In other words, $g$ performs $d \mapsto f'(x;d)$ mapping at $x$.
 
 ```{div}
 Let $f : \EE \to (-\infty, \infty]$ be a proper function.
-Let $x \in \interior \dom f$. 
-$f$ is said to be *differentiable* at $x \in \interior \dom f$
-if there exists $g \in \EE^*$ such that:
+Let $\bx \in \interior \dom f$. 
+$f$ is said to be *differentiable* at $\bx \in \interior \dom f$
+if there exists $\bg \in \EE^*$ such that:
 
 $$
-\underset{h \to 0}{\lim} \frac{f(x + h) - f(x) - \langle g, h \rangle}{\| h \|} = 0.
+\underset{\bh \to 0}{\lim} 
+\frac{f(\bx + \bh) - f(\bx) - \langle \bg, \bh \rangle}{\| \bh \|} = 0.
 $$
-The unique vector $g$ satisfying this condition is called
-the *gradient* of $f$ at $x$ and is denoted by $\nabla f(x)$.
+The unique vector $\bg$ satisfying this condition is called
+the *gradient* of $f$ at $\bx$ and is denoted by $\nabla f(\bx)$.
 ```
 
 
 ```{div}
 Let $f : \EE \to (-\infty, \infty]$ be a proper function.
-Let $x \in \interior \dom f$. Assume $f$ to be 
-differentiable at $x$. 
+Let $\bx \in \interior \dom f$. Assume $f$ to be 
+differentiable at $\bx$. 
 
 * Directional derivative in terms of gradient: 
 
   $$
-  f'(x; d) = \langle \nabla f(x) , d \rangle \Forall d \in \EE.
+  f'(\bx; \bd) = \langle \nabla f(\bx) , \bd \rangle \Forall \bd \in \EE.
   $$
 
 * The i-th component of the gradient:
 
   $$
-  (\nabla f(x))_i = \langle \nabla f(x), e_i \rangle = f'(x; e_i).
+  (\nabla f(\bx))_i = \langle \nabla f(\bx), \be_i \rangle = f'(\bx; \be_i).
   $$
 
   $$
-  \frac{\partial f}{\partial x_i} (x) = (\nabla f(x))_i = f'(x; e_i).
+  \frac{\partial f}{\partial \bx_i} (x) = (\nabla f(\bx))_i = f'(\bx; \be_i).
   $$
 
 * The gradient in terms of partial derivatives:
 
   $$
-  \nabla f(x) = D_f(x) \triangleq
+  \nabla f(\bx) = D_f(\bx) \triangleq
     \begin{pmatrix}
-    \frac{\partial f}{\partial x_1} (x)\\
-    \frac{\partial f}{\partial x_2} (x)\\
+    \frac{\partial f}{\partial x_1} (\bx)\\
+    \frac{\partial f}{\partial x_2} (\bx)\\
     \vdots \\
-    \frac{\partial f}{\partial x_n} (x)
+    \frac{\partial f}{\partial x_n} (\bx)
     \end{pmatrix}
   $$
   This holds if $\EE$ is endowed with the standard dot product 
@@ -175,19 +183,19 @@ differentiable at $x$.
 * Directional derivative in terms of partial derivatives:
 
   $$
-  f'(x; d) = D_f(x)^T d = \sum_{i=1}^n \frac{\partial f}{\partial x_i} (x) d_i.
+  f'(\bx; \bd) = D_f(\bx)^T \bd = \sum_{i=1}^n \frac{\partial f}{\partial x_i} (\bx) d_i.
   $$
 
-* For a general inner product $\langle x, y \rangle = x^T H y$
-  where $H$ is is a positive definite matrix:
+* For a general inner product $\langle \bx, \by \rangle_{\bH} = \bx^T \bH \by$
+  where $\bH$ is is a positive definite matrix:
 
   $$
   \begin{aligned}
-  (\nabla f(x))_i
-  &= \nabla f(x)^T e_i \\ 
-  &= \langle \nabla f(x), H^{-1} e_i \rangle\\ 
-  &= f'(x; H^{-1} e_i)\\
-  &= D_f(x)^T H^{-1} e_i.
+  (\nabla f(\bx))_i
+  &= \nabla f(\bx)^T \be_i \\ 
+  &= \langle \nabla f(\bx), \bH^{-1} \be_i \rangle_{\bH}\\ 
+  &= f'(\bx; \bH^{-1} \be_i)\\
+  &= D_f(\bx)^T \bH^{-1} \be_i.
   \end{aligned}
   $$
 
@@ -195,31 +203,31 @@ differentiable at $x$.
   general inner product:
 
   $$
-  \nabla f(x) = H^{-1} D_f(x).
+  \nabla f(\bx) = \bH^{-1} D_f(\bx).
   $$
 ```
 
 
 ```{div}
 Let $f : \EE \to (-\infty, \infty]$ be a proper convex function.
-Let $x \in \interior \dom f$. 
-Assume $f$ to be differentiable at $x$. 
+Let $\bx \in \interior \dom f$. 
+Assume $f$ to be differentiable at $\bx$. 
 
-* The subdifferential set at $x$ is a singleton.
+* The subdifferential set at $\bx$ is a singleton.
 
   $$
-  \partial f(x) = \{\nabla f(x) \}.
+  \partial f(\bx) = \{\nabla f(\bx) \}.
   $$
 
 
 Let $f : \EE \to (-\infty, \infty]$ be a proper convex function.
 Let $x \in \interior \dom f$. 
 
-* If $f$ has a unique subdifferential at $x$, then it is 
-  differentiable at x with:
+* If $f$ has a unique subdifferential at $\bx$, then it is 
+  differentiable at $\bx$ with:
 
   $$
-  \partial f(x) = \{\nabla f(x) \}.
+  \partial f(\bx) = \{\nabla f(\bx) \}.
   $$
 ```
 
@@ -343,7 +351,7 @@ $$
 f(x) = \max \{ f_1(x), f_2(x), \dots, f_m(x)\}.
 $$
 
-Let $x \in \cap_{i=1}^m \interior \dom f_i$ be a point common to the
+Let $x \in \bigcap_{i=1}^m \interior \dom f_i$ be a point common to the
 domains of all the functions.
 Let $d \in \EE$ be a direction. 
 
@@ -363,15 +371,31 @@ for the direction $d$ and then compute the maximum of the directional derivative
 ```
 
 ```{div}
+
+
+Let $f_1, f_2, \dots, f_m : \EE \to (-\infty,\infty]$ be a set of
+proper convex functions. Let
+
+$$
+f(x) = \max \{ f_1(x), f_2(x), \dots, f_m(x)\}.
+$$
+
+Let $x \in \bigcap_{i=1}^m \interior \dom f_i$ be a point common to the
+domains of all the functions.
+Let $d \in \EE$ be a direction. 
 For proper convex functions $f_i$, the directional derivatives exist 
-always. The statement can be modified accordingly.
+always. We have:
+
+$$
+f'(x; d) = \underset{i \in I(x)}{\max} f'_i(x;d)
+$$
+where $I(x) = \{ i \ST f_i(x) = f(x)\}$.
 
 Subgradient set of $f$ from subgradients of $f_i$:
 
 $$
 \partial f(x) = \text{conv } \left ( \bigcup_{i\in I(x)} \partial f_i (x) \right ).
 $$
-
 ```
 
 ```{rubric} Differentiable functions
@@ -384,6 +408,25 @@ $$
 f'(x; d) = \underset{i \in I(x)}{\max} f'_i(x;d) 
 = \underset{i \in I(x)}{\max} \langle \nabla f_i(x) , d \rangle.
 $$
+```
+
+```{rubric} Infinite set of functions
+```
+We have a weak rule for the subdifferential of the supremum of 
+an arbitrary set of functions.
+
+```{div}
+Let $I$ be an arbitrary index set indexing a set of proper 
+convex functions $f_i : \EE \to (-\infty, \infty]$ where $i \in I$.
+
+Then for any  $x \in \dom f$, 
+
+$$
+\text{conv } \left ( \bigcup_{i \in I(x)} \partial f_i(x)
+  \right ) \subseteq \partial f(x)
+$$
+
+where $I (x) = \{i \in I \ST f(x) = f_i (x) \}$.
 ```
 
 ## Norm Functions
@@ -504,7 +547,7 @@ Combining the two, we get:
 $$
 \partial f (x) = \begin{cases} 
 \left \{ \frac{x}{ \| x \|_2} \right \} & \text{for} & x \neq \ZeroVec \\
-B_{\| \cdot \|_2} [\ZeroVec, 1] & \text{for} & x  = 0
+B_{\| \cdot \|_2} [\ZeroVec, 1] & \text{for} & x  = \ZeroVec
 \end{cases}.
 $$
 ```
@@ -544,6 +587,25 @@ $$
 
 $$
 \partial f(x) = \text{conv } \left (\bigcup_{i \in I(x)} \{\sgn (x_i)  e_i \} \right ).
+$$
+
+We can rewrite this as:
+
+$$
+\partial f(x) = \left \{\sum_{i \in I(x)} \lambda_i \sgn(x_i) e_i \ST 
+ \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0, j \in I(x) \right \}.
+$$
+
+
+Combining the two cases, we get:
+
+$$
+\partial f (x) = \begin{cases} 
+\left \{\sum_{i \in I(x)} \lambda_i \sgn(x_i) e_i \ST 
+ \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0, j \in I(x) \right \},
+& x \neq \ZeroVec \\
+B_{\| \cdot \|_1} [\ZeroVec, 1], & x  = \ZeroVec
+\end{cases}.
 $$
 ```
 
@@ -620,6 +682,31 @@ $$
 $$
 ```
 
+### $\ell_{\infty}$ Norm over Affine Transformation  
+
+```{div}
+Let $A \in \RR^{m \times n}$. Let $b \in \RR^m$. 
+Let $f : \RR^m \to \RR$ be given by $f(y) = \| y \|_{\infty}$.
+
+Let $h : \RR^n \to \RR$ be the function 
+$h(x) = \| A x + b \|_{\infty} = f(A x + b)$.
+
+We use the affine transformation rule on the subdifferential of $f$ to obtain:
+
+$$
+\partial h (x) = \begin{cases} 
+\left \{\sum_{i \in I(x)} \lambda_i \sgn(a_i^T x + b_i) a_i \ST 
+ \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0, j \in I(x) \right \},
+& A x + b \neq \ZeroVec \\
+A^T B_{\| \cdot \|_1} [\ZeroVec, 1], & A x + b = \ZeroVec
+\end{cases}
+$$
+where $a_1^T, \dots, a_m^T$ are the rows of $A$ and 
+
+$$
+I(x) = \{i \ST: |A x + b |_i = \| A x + b \|_{\infty} \}.
+$$
+```
 ## Indicator Functions
 
 ```{div}
