@@ -4,6 +4,7 @@
 ## What's New
 
 * [Subgradients and subdifferentials summary](sec:subgradients:summary)
+* [Conjugate functions summary](sec:conjugate-functions:summary)
 
 ## Mathematical Optimization Problems
 

@@ -1,3 +1,4 @@
+(sec:conjugate-functions:summary)=
 # Chapter Summary
 
 ## Conjugate Function
@@ -188,6 +189,86 @@ $$
 h^*(\by) = \alpha f^*(\by) \Forall \by \in \EE^*.
 $$ 
 ```
+
+## Useful Results
+
+```{rubric} Fenchel's duality theorem
+```
+
+```{div}
+Let $f,g : \EE \to (-\infty, \infty]$ be proper convex function.
+If $\relint \dom f \cap \relint \dom g \neq \EmptySet$, then 
+
+$$
+\underset{\bx \in \EE}{\sup} \{f(\bx) + g(\bx) \}
+= \underset{\by \in \EE^*}{\sup} \{ - f^*(\by) - g^*(-\by) \}.
+$$
+The supremum of R.H.S. is attained whenever it is finite.
+```
+
+```{rubric} Infimal Convolution
+```
+
+```{div}
+Recall that the *infimal convolution* of two functions
+$f,g : \EE \to \ERL$ is defined as:
+
+$$
+(f \square g)(\bx) \triangleq 
+\underset{\by \in \EE}{\inf} (f(\bx - \by) + g(\by)). 
+$$
+
+For two proper functions 
+$h_1, h_2: \EE \to \RERL$, it holds that:
+
+$$
+(h_1 \square h_2)^*  = h_1^*  + h_2^*.
+$$
+
+Let $h_1 : \EE \to \RERL$ be a proper convex
+function and $h_2 : \EE \to \RR$ be a real valued
+convex function. Then
+
+$$
+(h_1 + h_2)^* = h_1^* \square h_2^*.
+$$
+
+Let $h_1 : \EE \to \RERL$ be a proper closed convex
+function and $h_2 : \EE \to \RR$ be a real valued
+convex function. Then
+
+$$
+h_1 + h_2 = (h_1^* \square h_2^*)^*.
+$$
+
+Let $h_1 : \EE \to \RERL$ be a proper convex
+function and $h_2 : \EE \to \RR$ be a real valued
+convex function. Suppose $h_1 \square h_2$ is 
+a real valued function. Then
+
+
+$$
+h_1 \square h_2 = (h_1^* + h_2^*)^*.
+$$
+```
+
+```{rubric} Conjugate subgradient theorem
+```
+
+```{div}
+Let $f : \EE \to \RERL$ be proper and convex. 
+The following claims are equivalent for any $\bx \in \EE$
+and $\by \in \EE^*$:
+
+1. $\langle \by, \bx \rangle = f(\bx) + f^*(\by)$.
+2. $\by \in \partial f(\bx)$.
+
+If $f$ is closed, then 1 and 2 are equivalent to:
+
+3. $\bx \in \partial f^*(\by)$.
+```
+
+
 
 ## 1-dim Functions
 
@@ -478,6 +559,57 @@ Then, the conjugate $f^* : \EE^* \to \ERL$ for any $\by \in \EE^*$
 is given by:
 
 $$
-f^*(\by) = \sqrt{\| y \|_* + 1}.
+f^*(\by) = \sqrt{\| y \|_*^2 + 1}.
+$$
+
+Let $f_{\alpha}$ for some $\alpha > 0$ be defined as
+
+$$
+f_{\alpha}(\bx) \triangleq \begin{cases}
+- \sqrt{\alpha^2 - \| x \|^2} & \| x \| \leq \alpha\\
+\infty & \text{ otherwise }
+\end{cases}.
+$$
+
+The conjugate:
+
+$$
+f_{\alpha}^*(\by) = \alpha \sqrt{\| y \|_*^2 + 1}.
+$$
+
+
+In the reverse direction, let $g_{\alpha} : \EE \to \RR$ 
+for some $\alpha > 0$ be given by:
+
+$$
+g_{\alpha} (\bx) = \sqrt{\alpha^2 + \| x \|^2}.
+$$
+
+Then the conjugate is:
+
+$$
+g_{\alpha}^*(\by) = \begin{cases}
+-\alpha \sqrt{1 - \| y \|_*^2} & \| y \|_* \leq 1\\
+\infty & \text{ otherwise }
+\end{cases}.
+$$
+```
+
+
+```{rubric} Squared Norm
+```
+
+```{div}
+Let $f : \EE \to \RR$ be given by
+
+$$
+f(\bx) = \frac{1}{2}\| \bx \|^2
+$$
+
+Then, the conjugate $f^* : \EE^* \to \ERL$ for any $\by \in \EE^*$
+is given by:
+
+$$
+f^*(\by) = \frac{1}{2} \| \by \|_*^2.
 $$
 ```
