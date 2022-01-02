@@ -4,7 +4,8 @@
 ```{prf:definition} Distance function/Metric
 :label: def-ms-distance-function
 
-Let $X$ be a nonempty set. A function $d : X \times X \to \RR$ 
+Let $X$ be a nonempty set. 
+A {prf:ref}`function <def-st-total-function>` $d : X \times X \to \RR$ 
 is called a *distance function* or a *metric* if it satisfies the 
 following properties for any elements $x,y,z \in X$:
 
@@ -71,7 +72,7 @@ is a metric and $(\RR^n, d_p)$ is a metric space.
 ```
 
 
-```{prf:remark} $\RR^n$ Euclidean space
+```{prf:example} $\RR^n$ Euclidean space
 The $d_2$ metric over $\RR^n$:
 
 $$
@@ -82,4 +83,71 @@ the metric space $(\RR^n, d_2)$ is known as the
 *n-dimensional Euclidean (metric) space*.
 
 The standard metric for $\RR^n$ is the Euclidean metric.
+```
+
+
+```{prf:example} $\ERL$ A metric space for the extended real line
+
+Consider the mapping $\varphi : \ERL \to [-1, 1]$ given by:
+
+$$
+\varphi(x) = \begin{cases}
+\frac{t}{1 + |t|} & x \in \RR \\
+-1 & x = -\infty \\
+1 & x = \infty
+\end{cases}.
+$$
+
+$\varphi$ is a bijection from $\ERL$ onto $[-1, 1]$. 
+
+$[-1, 1]$ is a metric space with the standard metric
+for the real line $d_{\RR}(x, y) = |x - y|$ restricted to $[-1, 1]$.
+
+
+Consider a function $d: \ERL \times \ERL \to \RR$ defined as
+
+$$
+d (s, t) = | \varphi(s) - \varphi(t)|.
+$$
+
+The function $d$ satisfies all the requirements of a metric. 
+It is the standard metric on $\ERL$.
+``` 
+
+```{prf:example} $\ell^p$ Real sequences
+For any $1 \leq p < \infty$, we define:
+
+$$
+\ell^p = \left \{ \{ a_n \} \in \RR^{\Nat} \ST \sum_{i=1}^{\infty} |a_i|^p  \right \}
+$$
+as the set of real sequences $\{ a_n \}$ such that the series 
+$\sum a_n^p$ is absolutely summable.
+
+It can be shown that the set $\ell^p$ is closed under sequence 
+addition.
+
+Define a map $d_p : \ell^p \times \ell^p \to \RR$ as 
+
+$$
+d_p (\{a_n \}, \{ b_n \}) = \sum_{i=1}^{\infty} |a_i - b_i|^p.
+$$
+
+$d_p$ is a valid distance function over $\ell^p$. We metrize $\ell^p$
+with $d_p$ as the standard metric. 
+```
+
+```{prf:example} Finite products of metric spaces
+
+Let $(X_1, d_1), (X_2, d_2), \dots, (X_n, d_n)$ be $n$ metric spaces.
+
+Let $X = X_1 \times X_2 \times \dots \times X_n$. 
+Define a map $\rho : X \times X \to \RR$ as:
+
+$$
+\rho ((a_1, a_2, \dots, a_n), (b_1, b_2, \dots, b_n)) 
+= \sum_{i=1}^n d_i (a_i, b_i).
+$$  
+
+$\rho$ is a distance function on $X$. The metric space
+$(X, \rho)$ is called the *product* of metric spaces $(X_i, d_i)$.
 ```

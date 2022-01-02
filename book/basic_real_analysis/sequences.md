@@ -709,6 +709,16 @@ $$
 Now, since $\{ t_k \}$ diverges, hence $\{ s_{2^k} \}$ too diverges. Thus, the series diverges.
 ````
 
+```{prf:definition} Absolutely summable
+:label: def-bra-absolutely-summable-series
+
+A series $\sum x_n$ is called *absolutely summable* if 
+$\sum |x_n|$ converges. 
+
+A sequence $\{x_n \}$ is called *absolutely summable* if
+$\sum |x_n|$ converges.
+```
+
 
 ## Subsequences
 

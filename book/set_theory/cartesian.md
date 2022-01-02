@@ -63,6 +63,11 @@ which can take only one of the two values $0$ or $1$.
 Let $A = \{0, 1\}$. $A^{\Nat}$ is a set of all sequences of $0$s and $1$s.
 ```
 
+```{prf:example} Real sequences
+$\RR^{\Nat}$ is a set of all real sequences. 
+It is also denoted as $\RR^{\infty}$.
+```
+
 ```{prf:example} Real valued functions on the real line 
 
 $\RR^\RR$ is a set of all functions from $\RR$ to $\RR$.
