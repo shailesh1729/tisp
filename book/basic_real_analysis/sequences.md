@@ -150,24 +150,6 @@ if there exists a number $M > 0$ such that
 $| x_n | \leq M \Forall n \in \Nat$.
 ````
 
-
-````{prf:definition} Monotonic sequences
-:label: def-bra-monotone-sequence
-
-* A sequence $\{ x_n \}$ is said to be *increasing* 
-  if $x_n \leq x_{n + 1}$ for each $n$.
-* A sequence $\{ x_n \}$ is said to be *decreasing* 
-  if $x_n \geq x_{n + 1}$ for each $n$.
-* A sequence $\{ x_n \}$ is said to be *monotone* if 
-  it is either increasing or decreasing.
-* The notation $x_n \uparrow x$ means $\{ x_n \}$ is increasing 
-  and $x  = \sup \{ x_n \}$. It applies if $\{x_n \}$ is bounded from above.
-* The notation $x_n \downarrow x$ means $\{ x_n \}$ is decreasing 
-  and $x  = \inf \{ x_n \}$. It applies if $\{x_n \}$ is bounded from below.
-* If a sequence $\{ x_n \}$ satisfies $x_n = c$ 
-  for all $n$, then it is called a *constant* sequence.
-````
-
 ````{prf:theorem}
 :label: res-bra-convergent-bounded
 
@@ -187,6 +169,105 @@ $$
 
 Now define $M = \max \{|x_1|, |x_2|, \dots, |x_{n_0}|,  | x | + 1 \}$.
 It follows that $|x_n | \leq M \Forall n \in \Nat$ as desired.
+````
+
+```{prf:definition} Unbounded above 
+:label: def-bra-unbounded-above-sequence
+
+A sequence $\{ x_n \}$ is said to be *unbounded above* 
+if there exists no $u \in \RR$ such that
+$x_n \leq u \Forall n \in \Nat$.
+
+In other words, for every $u \in \RR$, there exists an $x_n > u$.
+```
+
+```{prf:definition} Unbounded below 
+:label: def-bra-unbounded-below-sequence
+
+A sequence $\{ x_n \}$ is said to be *unbounded below* 
+if there exists no $l \in \RR$ such that
+$x_n \geq l \Forall n \in \Nat$.
+
+In other words, for every $l \in \RR$, there exists an $x_n < l$.
+```
+
+## Monotone Sequences
+
+````{prf:definition} Monotone sequences
+:label: def-bra-monotone-sequence
+
+* A sequence $\{ x_n \}$ is said to be *increasing* 
+  if $x_n \leq x_{n + 1}$ for each $n$.
+* A sequence $\{ x_n \}$ is said to be *decreasing* 
+  if $x_n \geq x_{n + 1}$ for each $n$.
+* A sequence $\{ x_n \}$ is said to be *monotone* if 
+  it is either increasing or decreasing.
+* The notation $x_n \uparrow x$ means $\{ x_n \}$ is increasing 
+  and $x  = \sup \{ x_n \}$. It applies if $\{x_n \}$ is bounded from above.
+* The notation $x_n \downarrow x$ means $\{ x_n \}$ is decreasing 
+  and $x  = \inf \{ x_n \}$. It applies if $\{x_n \}$ is bounded from below.
+* If a sequence $\{ x_n \}$ satisfies $x_n = c$ 
+  for all $n$, then it is called a *constant* sequence.
+````
+An increasing sequence is bounded from below. Its greatest
+lower bound is $x_1$. 
+
+A decreasing sequence is bounded from above. Its least 
+upper bound is $x_1$.
+
+```{prf:remark} Unbounded increasing sequences
+
+Let $\{x_n\}$ be an increasing and unbounded sequence. 
+Then for every $M > 0$, there exists $n_0 \in \Nat$ such that
+for every $n > n_0$, $x_n > M$.
+```
+
+```{prf:remark} Unbounded decreasing sequences
+
+Let $\{x_n\}$ be an decreasing and unbounded sequence. 
+Then for every $M < 0$, there exists $n_0 \in \Nat$ such that
+for every $n > n_0$, $x_n < M$.
+```
+
+````{prf:theorem} Convergence of bounded monotone sequences
+:label: res-bra-sequence-monotone-bounded-convergence
+
+Every monotone bounded sequence of real numbers is convergent.
+````
+
+
+````{prf:proof}
+Let $\{ x_n \}$ be increasing and bounded sequence. From
+{prf:ref}`completeness axiom <axm-rl-completeness-axiom>` 
+it follows that there exists
+$x = \sup \{ x_n \}$. 
+We claim that $x$ itself is the limit of $\{ x_n \}$.
+From
+{prf:ref}`res-rl-supremum-epsilon` we recall that 
+for every $\epsilon > 0$,
+there exists a number $x_{n_0} \in \{ x_n \}$, such that
+
+$$
+    x - \epsilon < x_{n_0} \leq x.
+$$
+
+Since $\{ x_n \}$ is increasing, hence
+
+$$
+    x - \epsilon < x_{n} \leq x \quad \Forall n \geq n_0.
+$$
+
+This means that $| x - x_n | = x - x_n < \epsilon \Forall n \geq n_0$. Thus $x$ is
+indeed the limit. We follow similar steps to prove for decreasing sequence.
+````
+
+````{prf:theorem} Convergence of constant sequences
+:label: res-limit-constant-sequence
+
+Let  $\{ x_n \}$ be a constant sequence with $x_n = c$. Then $\lim \{ x_n \} = c$.
+````
+````{prf:proof}
+For all $\epsilon > 0$, $| x_n - c | = 0 < \epsilon$ for all $n \in \Nat$.
 ````
 
 
@@ -483,48 +564,6 @@ Although in absolute value it converges to $1$, the sequence itself doesn't conv
 Thus, the converse is not true.
 ````
 
-
-
-````{prf:theorem} Convergence of bounded monotone sequences
-:label: res-bra-sequence-monotone-bounded-convergence
-
-Every monotone bounded sequence of real numbers is convergent.
-````
-
-
-````{prf:proof}
-Let $\{ x_n \}$ be increasing and bounded sequence. From
-{prf:ref}`completeness axiom <axm-rl-completeness-axiom>` 
-it follows that there exists
-$x = \sup \{ x_n \}$. 
-We claim that $x$ itself is the limit of $\{ x_n \}$.
-From
-{prf:ref}`res-rl-supremum-epsilon` we recall that 
-for every $\epsilon > 0$,
-there exists a number $x_{n_0} \in \{ x_n \}$, such that
-
-$$
-    x - \epsilon < x_{n_0} \leq x.
-$$
-
-Since $\{ x_n \}$ is increasing, hence
-
-$$
-    x - \epsilon < x_{n} \leq x \quad \Forall n \geq n_0.
-$$
-
-This means that $| x - x_n | = x - x_n < \epsilon \Forall n \geq n_0$. Thus $x$ is
-indeed the limit. We follow similar steps to prove for decreasing sequence.
-````
-
-````{prf:theorem} Convergence of constant sequences
-:label: res-limit-constant-sequence
-
-Let  $\{ x_n \}$ be a constant sequence with $x_n = c$. Then $\lim \{ x_n \} = c$.
-````
-````{prf:proof}
-For all $\epsilon > 0$, $| x_n - c | = 0 < \epsilon$ for all $n \in \Nat$.
-````
 
 
 ## Infinite Series
