@@ -1,6 +1,8 @@
-# Cartesian product
+# General Cartesian Product
 
-## General definition
+In this section, we extend the definition of
+Cartesian product to an arbitrary number of sets.
+
 
 ```{prf:definition} Cartesian product
 :label: def-st-cartesian-product
@@ -49,78 +51,7 @@ $$
 i.e. $A^I$ is the set of all functions from $I$ to $A$.
 ```
 
-
-## Finite cases
-
-```{prf:definition} Binary Cartesian product
-:label: def-st-binary-cartesian-product
-
-If a family consists of two sets, say $A$ and $B$, then
-the *Cartesian product* of the sets $A$ and $B$ is denoted
-by $A \times B$.  The members of $A \times B$ are denoted
-as *ordered pairs*:
-
-$$
-    A \times B  = \{ (a, b) \ST a \in A \text{  and  } b \in B \}.
-$$
-```
-
-```{prf:definition} Finite Cartesian product
-:label: def-st-finite-cartesian-product
-
-Similarly, the Cartesian product of a finite family of
-sets $\{ A_1, \dots, A_n\}$ is written as
-$A_1 \times \dots \times A_n$ and its members are
-denoted as $n$-tuples, i.e.:
-
-$$
-    A_1 \times \dots \times  A_n = \{(a_1, \dots, a_n) \ST a_i \in A_i \Forall
-    i = 1,\dots,n\}.
-$$
-```
-
-Note that $(a_1,\dots, a_n) = (b_1,\dots,b_n)$ if and only if
-$a_i = b_i \Forall i = 1,\dots,n$.
-
-```{prf:remark}
-If $A_1 = A_2 = \dots = A_n = A$, then it is standard to write
-$A_1 \times \dots \times A_n$ as $A^n$.
-```
-
 ## Examples
-
-```{prf:example} $A^n$
-
-Let $A = \{ 0, +1, -1\}$.
-
-Then $A^2$  is
-
-$$
-    \{\\
-    &(0,0), (0,+1), (0,-1),\\
-    &(+1,0), (+1,+1), (+1,-1),\\
-    &(-1,0), (-1,+1), (-1,-1)\\
-    \}.
-$$
-
-And $A^3$ is given by
-
-$$
-     \{\\
-    &(0,0,0), (0,0,+1), (0,0,-1),\\
-    &(0,+1,0), (0,+1,+1), (0,+1,-1),\\
-    &(0,-1,0), (0,-1,+1), (0,-1,-1),\\
-    &(+1,0,0), (+1,0,+1), (+1,0,-1),\\
-    &(+1,+1,0), (+1,+1,+1), (+1,+1,-1),\\
-    &(+1,-1,0), (+1,-1,+1), (+1,-1,-1),\\
-    &(-1,0,0), (-1,0,+1), (-1,0,-1),\\
-    &(-1,+1,0), (-1,+1,+1), (-1,+1,-1),\\
-    &(-1,-1,0), (-1,-1,+1), (-1,-1,-1)\\
-    &\}.
-$$
-
-```
-
 
 ```{prf:example} Binary functions on the real line
 
@@ -170,7 +101,3 @@ there exists a set $E \subseteq \cup_{i \in I} A_i$ such that
 $E \cap A_i$ consists of precisely one element for each
 $i \in I$.
 ```
-
-
-
-

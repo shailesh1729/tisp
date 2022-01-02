@@ -245,3 +245,124 @@ We have the following results:
 *  $(A \cap B)^c = A^c \cup B^c$.
 ```
 
+## Ordered Pairs and n-Tuples
+
+We will introduce the notion of *ordered pairs* informally 
+following {cite}`wiki:ordered-pair`.
+
+```{prf:definition} Ordered pair
+:label: def-st-ordered-pair
+
+For any two objects a and b, the *ordered pair* (a, b) is a 
+notation specifying the two objects a and b, in that order.
+```
+
+```{prf:property} Equality of ordered pairs
+$$
+(a_1, a_2) = (b_1, b_2) \iff a_1 = b_1 \text{ and } a_2 = b_2.
+$$
+```
+
+A tuple {cite}`wiki:tuple` is a finite ordered list of elements.
+An n-tuple is a sequence (ordered list) of $n$ elements where 
+$n$ is a non-negative integer.
+
+* A tuple may contain multiple instances of the same element.
+* Tuple elements are ordered.
+* A tuple has a finite number of elements.
+
+Following is an informal definition
+
+```{prf:definition} n-tuple
+:label: def-st-n-tuple
+
+For any $n$ objects $a_1, a_2, \dots, a_n$ where $n \in \Nat$, the
+*n-tuple* $(a_1, a_2, \dots, a_n)$ is a notation specifying the
+$n$ objects in that order.
+
+The 0-tuple $()$ is an tuple containing $0$ elements.  
+```
+
+```{prf:property} Equality of n-tuples
+$$
+(a_1, a_2, \dots, a_n) = (b_1, b_2, \dots, b_n) \iff a_1 = b_1, a_2 = b_2, \dots, \text{ and } a_n = b_n.
+$$
+```
+In other words, $(a_1,\dots, a_n) = (b_1,\dots,b_n)$ if and only if
+$a_i = b_i \Forall i = 1,\dots,n$.
+
+
+## Cartesian Products
+
+In this section, we restrict our
+attention to finite Cartesian products.
+Cartesian product over infinite sets is 
+discussed later.
+
+
+```{prf:definition} Binary Cartesian product
+:label: def-st-binary-cartesian-product
+
+The *Cartesian product* of the two sets $A$ and $B$ denoted
+by $A \times B$ is the set of all possible ordered pairs
+of elements where the first element is from $A$ and the second
+is from $B$:
+
+$$
+    A \times B  \triangleq \{ (a, b) \ST a \in A \text{  and  } b \in B \}.
+$$
+```
+
+```{prf:definition} Finite Cartesian product
+:label: def-st-finite-cartesian-product
+
+Similarly, the Cartesian product of a finite family of
+sets $(A_1, \dots, A_n)$ is written as
+$A_1 \times \dots \times A_n$ and its members are
+denoted as $n$-tuples, i.e.:
+
+$$
+    A_1 \times \dots \times  A_n = \{(a_1, \dots, a_n) \ST a_i \in A_i \Forall
+    i = 1,\dots,n\}.
+$$
+
+The sets $A_i$ may be same of different.
+```
+
+```{prf:remark}
+If $A_1 = A_2 = \dots = A_n = A$, then it is standard to write
+$A_1 \times \dots \times A_n$ as $A^n$.
+```
+
+## Examples
+
+```{prf:example} $A^n$
+
+Let $A = \{ 0, +1, -1\}$.
+
+Then $A^2$  is
+
+$$
+    \{\\
+    &(0,0), (0,+1), (0,-1),\\
+    &(+1,0), (+1,+1), (+1,-1),\\
+    &(-1,0), (-1,+1), (-1,-1)\\
+    \}.
+$$
+
+And $A^3$ is given by
+
+$$
+     \{\\
+    &(0,0,0), (0,0,+1), (0,0,-1),\\
+    &(0,+1,0), (0,+1,+1), (0,+1,-1),\\
+    &(0,-1,0), (0,-1,+1), (0,-1,-1),\\
+    &(+1,0,0), (+1,0,+1), (+1,0,-1),\\
+    &(+1,+1,0), (+1,+1,+1), (+1,+1,-1),\\
+    &(+1,-1,0), (+1,-1,+1), (+1,-1,-1),\\
+    &(-1,0,0), (-1,0,+1), (-1,0,-1),\\
+    &(-1,+1,0), (-1,+1,+1), (-1,+1,-1),\\
+    &(-1,-1,0), (-1,-1,+1), (-1,-1,-1)\\
+    &\}.
+$$
+```

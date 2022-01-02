@@ -64,38 +64,6 @@ is called the *range* of $f$ denoted by $\range f$.
 
 The domain is a subset of $A$ and the range is a subset of $B$.
 
-````{prf:example} Dirichlet's unruly indicator function for rational numbers
-:label: ex-st-dirichlet-unruly-indicator-function
-
-$$
-    g(x) =
-     \left\{
-            \begin{array}{ll}
-                1 & \mbox{if $x \in \QQ$};\\
-                0 & \mbox{if $x \notin \QQ$}.
-            \end{array}
-          \right.
-$$
-
-This function is not continuous anywhere on the real line.
-````
-
-````{prf:example} Absolute value function
-:label: ex-st-absolute-value-function
-
-$$
-    | x | =
-     \left\{
-            \begin{array}{ll}
-                x & \mbox{if $x \geq 0$};\\
-                -x & \mbox{if $x < 0$}.
-            \end{array}
-          \right.
-$$
-
-This function is continuous but not differentiable at $x=0$.
-````
-
 
 ````{prf:definition} Equality of functions
 :label: def-st-function-equal
@@ -129,13 +97,119 @@ if it is injective as well as surjective.
 ````
 
 For a bijective function $\dom f = A$, $\range f = B$, the elements
-of $A$ and $B$ are in one-to-one mapping, hence they have same cardinality.
+of $A$ and $B$ are in one-to-one mapping.
 
+
+```{prf:example} Square root
+
+Let $f: \RR \to \RR$ be defined as:
+
+$$
+f(x) = \sqrt{x}.
+$$
+
+$\dom f = [0, \infty)$. $\range f = [0, \infty)$.
+
+$f$ is partial and injective. It is neither surjective nor bijective.
+```
+
+
+```{prf:example} Logarithm
+
+Let $f: \RR \to \RR$ be defined as:
+
+$$
+f(x) = \log (x).
+$$
+
+$\dom f = (0, \infty)$. $\range f = (-\infty, \infty) = \RR$.
+
+$f$ is partial, injective and surjective (but not bijective).
+```
+
+```{prf:example} Exponential
+
+Let $f: \RR \to \RR$ be defined as:
+
+$$
+f(x) = e^x.
+$$
+
+$\dom f = (-\infty, \infty) = \RR$. $\range f = (0, \infty) = \RR$.
+
+$f$ is total and injective but not surjective.
+```
+
+```{prf:example} Extended value extension of exponential
+
+Let $f: \RR \cup \{-\infty, \infty \} \to \RR \cup \{-\infty, \infty \}$ 
+be defined as:
+
+$$
+f(x) = \begin{cases} 
+e^x & x \in \RR \\
+0  & x = -\infty \\
+\infty & x = \infty
+\end{cases}.
+$$
+
+$\dom f = [-\infty, \infty]$. $\range f = [0, \infty] = \RR$.
+
+$f$ is total and injective but not surjective.
+```
+
+````{prf:example} Dirichlet's unruly indicator function for rational numbers
+:label: ex-st-dirichlet-unruly-indicator-function
+
+Let $g : \RR \to \RR$ be defined as:
+
+$$
+    g(x) \triangleq
+     \left\{
+            \begin{array}{ll}
+                1 & \mbox{if $x \in \QQ$};\\
+                0 & \mbox{if $x \notin \QQ$}.
+            \end{array}
+          \right.
+$$
+
+$\dom g = \RR$, $\range g = $\{0, 1 \}$.
+````
+
+````{prf:example} Absolute value function
+:label: ex-st-absolute-value-function
+
+$$
+    f(x) = | x | =
+     \left\{
+            \begin{array}{ll}
+                x & \mbox{if $x \geq 0$};\\
+                -x & \mbox{if $x < 0$}.
+            \end{array}
+          \right.
+$$
+
+The domain is $\RR$ and the range is $\RR_+ = [0, \infty)$.
+
+$f$ is total. It is not injective. It is not surjective. 
+````
+
+In summary, for a function $f : A \to B$:
+
+* If $\dom f = A$ then, the function is total.
+* If $\range f = B$ then, the function is surjective.
+* If $f(x_1) = f(x_2) \implies x_1 = x_2$, then the function is injective.
+* If $f$ is total, injective and surjective, then it is bijective.
+
+
+## Image under a function
+
+Let $f : X \to Y$ be  a (partial) function.
 
 ````{prf:definition} Image of a set under a function
 :label: def-set-set-image-under-function
 
-Let $f : X \to Y$ be  a function. 
+
 If $A \subseteq X$, then *image* of $A$ under $f$
 denoted as $f(A)$ (a subset of $Y$) is defined by
 
@@ -158,12 +232,16 @@ f^{-1} (B) = \{ x \in X \ST f(x) \in B\}.
 $$
 ````
 
+```{prf:remark}
+If $B \cap \range f = \EmptySet$ then $f^{-1}(B) = \EmptySet$.
+```
+
+
 ````{prf:proposition} 
-Let $f : X \to Y$.
 Let $\{A_i\}_{i \in I}$  be a family of subsets of $X$.
 Let $\{B_i\}_{i \in I}$ be a family of subsets of $Y$.
 
-Then the following results hold:
+Then, the following results hold:
 
 Image of the union of $A_i$ is the union of the images of $A_i$.
 
@@ -197,6 +275,8 @@ $$
     \subseteq X \setminus f^{-1}(B).
 $$
 ````
+
+
 
 ## Function Composition
 
@@ -273,6 +353,14 @@ This is a direct result of combining
 and {prf:ref}`res-st-composition-of-onto-functions`.
 ````
 
+````{prf:corollary}
+:label: res-st-composition-of-bijective-functions
+
+Given two bijective (total) functions $f : X \to Y$ 
+and $g : Y \to Z$, their composition
+$g \circ f$ is bijective.
+````
+
 ## Inverse Function
 
 ````{prf:definition} Inverse function
@@ -308,6 +396,11 @@ $$
 $$
 ````
 
+```{prf:remark}
+The inverse of an injective (partial) function is injective.
+```
+
+
 ````{prf:definition} Inverse of a total function
 :label: def-st-inverse-total-function
 
@@ -326,7 +419,9 @@ $$
 The total function $f^{-1}$ is called the *inverse* of $f$.
 ````
 
-## Identity Function
+```{prf:remark}
+The inverse of a bijective function is bijective.
+```
 
 ````{prf:definition} Identity function
 :label: def-st-identity-function
@@ -344,12 +439,14 @@ Identify function is one-one and onto. It is a total function
 and is bijective.
 ````
 
-Thus we have:
+```{prf:remark} Composition of a total function with its inverse
+For a total function $f: X \to Y$:
 
 $$
         & f \circ f^{-1} = I_Y.\\
         & f^{-1} \circ f = I_X.
 $$
+```
 
 
 ## Schröder-Bernstein Theorem

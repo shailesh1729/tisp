@@ -1,10 +1,10 @@
 # Relations
 
-Relations on a set $X$ are subsets of the Cartesian product
-of $X$ with itself. General Cartesian products are 
-formally defined {prf:ref}`later <def-st-cartesian-product>`.
+Relations {cite}`wiki:relation` between two sets $X$ and $Y$ are subsets of 
+the Cartesian product of two sets $X \times Y$. 
 
-For now, we will define the product $X \times X$ as follows:
+Relations on a set $X$ are subsets of the Cartesian
+product $X \times X$. We recall:
 
 $$
 X \times X = \{ (a, b) \ST a \in X \text{ and } b \in X \}.
@@ -15,16 +15,150 @@ ordered pairs of elements of $X$.
 ````{prf:definition} Binary relation
 :label: def-st-binary-relation
 
-A *binary relation* on a set $X$ is defined as a subset $\mathcal{R}$ of
-$X \times X$.
+Given sets $X$ and $Y$, a *binary relation* over sets $X$ and $Y$
+is defined as a subset $\RRR$ of the Cartesian product $X \times Y$.
 
-If $(x,y) \in \mathcal{R}$ then $x$ is said to be in relation $\mathcal{R}$
-with $y$. This is denoted by $x \mathcal{R} y$.
+If $(x,y) \in \RRR$ then $x$ is said to be in relation $\RRR$
+with $y$. This is denoted by $x \RRR y$.
+
+$X$ is called the *domain* or set of departure of $\RRR$ and 
+$Y$ is called the *codomain* or set of destination of $\RRR$.
+
+A *binary relation* on a set $X$ is defined as a subset of
+$X \times X$. It is also known as a *homogeneous relation*.
+
+When $X \neq Y$, then the relation is called a *heterogeneous relation*.
 ````
+
+## Types of relations
+
+```{prf:definition} Injective relation
+:label: def-st-injective-relation
+
+A relation $\RRR : X \to Y$ is called *injective* if $x \RRR y$ 
+and $z \RRR y$ implies $x = z$. In other words, for each
+$y \in Y$, there is at-most one $x \in X$ such that $x \RRR y$. 
+```
+
+If $X$ is the set of men, $Y$ is the set of women
+and $\RRR$ is the relation of marriage, then 
+we are saying that each woman can have at most one husband.
+
+A man may have multiple wives. 
+Some men or women may be unmarried too.
+
+```{prf:definition} Functional relation
+:label: def-st-functional-relation
+
+A relation $\RRR : X \to Y$ is called *functional* if $x \RRR y$ 
+and $x \RRR z$ implies $y = z$. In other words, for each
+$x \in X$, there is at-most one $y \in Y$ such that $x \RRR y$. 
+Such binary relations are also called *partial functions*.
+```
+
+We are saying that each man can have at most one wife.
+
+A woman may have multiple husbands. 
+Some men or women may be unmarried too.
+
+```{prf:definition} One-to-one relation
+:label: def-st-one-one-relation
+
+A relation is called *one-to-one* if it is injective and functional.
+```
+
+We are saying that each woman can have at most one husband
+and each man can have at most one wife.
+
+Some men or women may still be unmarried.
+
+```{prf:definition} One-to-many relation
+:label: def-st-one-many-relation
+
+A relation is called *one-to-many* if it is injective but not functional.
+```
+
+While each woman has at most one husband, there are some men who 
+have multiple wives. 
+
+Some men or women may still be unmarried.
+
+```{prf:definition} Many-to-one relation
+:label: def-st-many-one-relation
+
+A relation is called *many-to-one* if it is functional but not injective.
+```
+
+While each man can have at most one wife, there are women 
+who have multiple husbands.
+
+Some men or women may still be unmarried.
+
+```{prf:definition} Many-to-many relation
+:label: def-st-many-many-relation
+
+A relation is called *many-to-many* if it is neither injective nor functional.
+```
+
+No spouse, one spouse, multiple spouses, all are permitted.
+
+```{prf:definition} Serial relation
+:label: def-st-serial-relation
+
+A relation  $\RRR : X \to Y$ is called *serial* if for every
+$x \in X$ there exists at least one $y\in Y$ such that $x \RRR y$.
+```
+
+Every man has at least one wife.
+
+Some women may still be unmarried. 
+
+```{prf:definition} Surjective relation
+:label: def-st-surjective-relation
+
+A relation  $\RRR : X \to Y$ is called *surjective* if for every
+$y \in Y$ there exists at least one $x\in X$ such that $x \RRR y$.
+```
+
+Every woman has at least one husband.
+
+Some men may still be unmarried.
+
+## Operations on Relations
+
+Let $R$ and $S$ be relations over sets $X$ and $Y$.
+
+```{prf:definition} Union of relations
+:label: def-st-relation-union
+
+$$
+R \cup S = \{(x, y) \ST x R y \text{ or } x S y\}.
+$$
+```
+
+```{prf:definition} Intersection of relations
+:label: def-st-relation-intersection
+
+$$
+R \cap S = \{(x, y) \ST x R y \text{ and } x S y\}.
+$$
+```
+
+```{prf:definition} Composition of relations
+:label: def-st-relation-composition
+
+Let $R : X \to Y$ and $S : Y \to Z$ be two relations. Then,
+there composition is defined as:
+
+$$
+S \circ R \triangleq \{ (x,z) \in X \times Z \ST \text{ there exists } y \in Y 
+\text{ such that } x R y \text{ and } y R z \}.
+$$
+```
 
 ##  Equivalence Relations
 
-The most interesting relations are equivalence relations.
+An interesting type of relations are equivalence relations over a set $X$.
 
 ````{prf:definition}  Equivalence relation
 :label: def-st-equivalence-relation
@@ -47,7 +181,7 @@ Let $\mathcal{R}$ be an equivalence relation on a set $X$. Then the
 denoted by $[x]$ and is defined as
 
 $$
-    [x]  = \{ y \in X : x \mathcal{R} y\}
+    [x]  = \{ y \in X \ST x \mathcal{R} y\}
 $$
 
 i.e. all elements in $X$ which are related to $x$.
@@ -121,7 +255,7 @@ set $A_i$ in the family of sets $\{A_i\}$ such that both $x$ and $y$ belong to $
 
 ## Order
 
-Another important type of relation is an order relation.
+Another important type of relation is an order relation over a set $X$.
 
 ````{prf:definition} Partial order
 :label: def-st-partial-order
