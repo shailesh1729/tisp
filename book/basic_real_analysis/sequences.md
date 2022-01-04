@@ -47,7 +47,7 @@ Thus, the sequence converges to 0.
 Given a real number $x \in \RR$ and $\epsilon > 0$, the set
 
 $$
-    V_{\epsilon}(x)  = \{y \in \RR : | y - x | < \epsilon\}
+    V_{\epsilon}(x)  = \{y \in \RR \ST | y - x | < \epsilon\}
 $$
 
 is called the $\epsilon$-neighborhood of $x$. 

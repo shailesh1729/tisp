@@ -85,6 +85,67 @@ the metric space $(\RR^n, d_2)$ is known as the
 The standard metric for $\RR^n$ is the Euclidean metric.
 ```
 
+```{prf:proposition} Triangle inequality alternate form
+Let $(X, d)$ be a metric space. Let $x,y,z \in X$.
+
+$$
+|d (x, z)  - d(y, z)| \leq d(x,y).
+$$
+```
+
+```{prf:proof}
+From triangle inequality:
+
+$$
+d (x, z) \leq d(x, y) + d (y, z) \implies d (x, z) - d(y, z) \leq d (x, y).
+$$
+
+Interchanging $x$ and $y$ gives:
+
+$$
+d (y, z) - d (x, z) \leq d (y, x) = d (x, y).
+$$
+
+Combining the two, we get:
+
+$$
+|d (x, z)  - d(y, z)| \leq d(x,y).
+$$
+```
+
+```{prf:example}
+Let $X$ be a nonempty set:
+
+Define:
+
+$$
+d(x,y) = \begin{cases}
+0 & x = y \\
+1 & x \neq y
+\end{cases}.
+$$
+
+$(X, d)$ is a metric space. This distance is called *discrete distance* 
+and the metric space is called a *discrete metric space*.
+```
+
+```{prf:definition} Metric subspace
+Let $(X, d)$ be a metric space. Let $Y \subset X$ be a nonempty
+subset of $X$. Then, $Y$ can be viewed as a metric space
+in its own right with the distance function $d$ restricted
+to $Y \times Y$, denoted as $d|_{Y \times Y}$. We then say
+that $(Y, d|_{Y \times Y})$ or simply $Y$ is a 
+*metric subspace* of $X$.
+```
+
+```{prf:example}
+$[0,1]$ is a metric subspace of $\RR$ with the standard
+metric $d(x, y) = |x -y|$ restricted to $[0,1]$. 
+In other words, the distance between any two points
+$x, y \in [0, 1]$ is calculated by viewing $x,y$ as 
+points in $\RR$ and using the standard metric for $\RR$.
+```
+
 
 ```{prf:example} $\ERL$ A metric space for the extended real line
 
@@ -151,3 +212,5 @@ $$
 $\rho$ is a distance function on $X$. The metric space
 $(X, \rho)$ is called the *product* of metric spaces $(X_i, d_i)$.
 ```
+
+
