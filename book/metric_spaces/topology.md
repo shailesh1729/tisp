@@ -457,42 +457,51 @@ Together, the equality is established.
 
 ## Boundary
 
+```{prf:definition} Boundary point
+:label: def-ms-boundary-point
+
+A point $x \in X$ is called a *boundary point* of $A$ if
+every open ball $B(x, r)$ at $x$ contains points from 
+$A$ as well as $X \setminus A$. 
+
+In other words, $B(x, r) \cap A \neq \EmptySet$ 
+and $B(x, r) \cap X \setminus A \neq \EmptySet$
+for every $r> 0$. 
+```
+
 ```{prf:definition} Boundary
 :label: def-ms-boundary
 
-The *boundary* of a set $S \subseteq X$ (relative to $X$), 
-denoted by $\boundary S$ or $\aboundary_X S$ is defined as
-
-$$
-\boundary S = \closure S \setminus \interior S.
-$$
+The *boundary* of a set $A \subseteq X$ (relative to $X$), 
+denoted by $\boundary A$ or $\aboundary_X A$ is defined as
+the set of all boundary points of $A$.
 ```
-
-
-```{prf:remark}
-Let $Y$ be a metric subspace of $X$ and $S \subseteq Y$.
-The interior, closure and boundary of $S$ w.r.t. $X$ 
-and w.r.t. $Y$ may be different.
-
-If a subspace hasn't been specified, by default, we shall
-assume that we are computing the interior, closure and 
-boundary w.r.t. the metric space $X$.
-```
-
-
-## Subspace Topology
 
 ```{prf:proposition}
-Let $Y$ be a metric subspace of $X$. Let $S \subseteq Y$.
-
-$S$ is open in $Y$ if and only if $S = O \cap Y$ where $O$ 
-is an open subset of $X$.
+$$
+\boundary A = \closure A \setminus \interior A.
+$$
 ```
 
 ```{prf:proof}
-abc
+Let $x$ be a boundary point of $A$. 
+
+1.  $B(x, r) \cap A \neq \EmptySet$ for every $r > 0$.
+1. Thus $x$ is a closure point of $A$.
+1. $B(x, r) \cap X \setminus A \neq \EmptySet$ for every $r > 0$.
+1. Thus, there is no $r > 0$ such that $B(x,r) \subseteq A$.
+1. Thus, $x$ is not an interior point of $A$.
+1. Thus, $x \in \closure A \setminus \interior A$.
+1. Thus, $\boundary A \subseteq \closure A \setminus \interior A$.
+
+Let $x \in \closure A \setminus \interior A$.
+
+1. $x$ is a closure point.
+1. Thus, $B(x, r) \cap A \neq \EmptySet$ for every $r > 0$.
+1. $x$ is not an interior point.
+1. Thus, there is no $r > 0$ such that $B(x,r) \subseteq A$.
+1. Thus, for every $r> 0$, $B(x,r) \cap X \setminus A \neq \EmptySet$.
+1. Combining, $x$ is a boundary point.
+1. Thus, $\closure A \setminus \interior A \subseteq \boundary A$.
 ```
 
-```{prf:example}
-* $[0, 1)$ is open in the metric space $\RR_+$.
-```

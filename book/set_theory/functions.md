@@ -361,6 +361,21 @@ and $g : Y \to Z$, their composition
 $g \circ f$ is bijective.
 ````
 
+
+````{prf:definition} Composition of total functions
+:label: def-st-total-function-composition
+
+Given two total functions 
+$f : X \to Y$ and $g : Y \to Z$, their *composition*
+$g \circ f$ is the function $g \circ f : X \to Z$ defined by
+
+$$
+(g \circ f)(x) =  g(f(x)) \quad \forall x \in X.
+$$
+````
+Since $\dom f = X$ and $\dom g = Y$, hence
+composition is well defined over all of $X$.
+
 ## Inverse Function
 
 ````{prf:definition} Inverse function
