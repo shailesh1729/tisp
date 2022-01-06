@@ -515,6 +515,19 @@ Assume $\lim x_n = x$ and $\lim y_n = y$.
 We throw away the first $n_0$ terms from each sequence and 
 apply the theorem on the remaining part(s).
 
+```{prf:example} Limits don't preserve strict inequality
+:label: ex-bra-order-limit-strict-inequality
+
+Consider $x_n = \frac{1}{n}$ and $y_n = \frac{1}{n+1}$. 
+$\lim x_n = 0$. $\lim y_n = 0$. 
+
+Thus, $x_n > y_n$ doesn't imply $\lim x_n > \lim y_n$.
+We only have $x_n > y_n \implies x_n \geq y_n \implies \lim x_n \geq \lim y_n$.
+
+Similarly,  $x_n > 0$ implies that $\lim x_n \geq 0$.
+Or $x_n < r$ implies that $\lim x_n \leq r$.
+```
+
 ````{prf:theorem} Squeeze theorem for sequences
 :label: res-bra-sequence-squeeze
 
@@ -823,11 +836,11 @@ A Cauchy sequence is bounded.
 ````{prf:proof}
 Let $\{ x_n \}$. Choose $\epsilon = 1$. Then there exists
 $n_0 \in \Nat$ such that $ | x_n - x_m | < 1$ whenever $m, n \geq n_0$.
-In particular, the statement is valid when $m  = n_1 = n_0 + 1$. i.e. $ | x_n - x_{n_1} | < 1$ .
+In particular, the statement is valid when $m  = n_0$. i.e. $ | x_n - x_{n_0} | < 1$ .
 But,
 
 $$
-    | x_n - x_{n_0 + 1} | < 1 \implies | | x_n | - | x_{n_0 } | | < 1 \implies |x_n | < 1  + | x_{n_0 } | \Forall n \geq n_0.
+    | x_n - x_{n_0} | < 1 \implies | | x_n | - | x_{n_0 } | | < 1 \implies |x_n | < 1  + | x_{n_0 } | \Forall n \geq n_0.
 $$
 
 Choosing $M = \max(|x_1|, \dots, |x_{n_0-1}|, |x_{n_0}| + 1)$, it is clear that $| x_n | \leq M$, hence $\{ x_n \}$ is bounded.
@@ -888,3 +901,32 @@ Thus, $\{ x_n \}$ is Cauchy.
 For the converse, in the previous theorem, we proved that a Cauchy sequence is convergent.
 ````
 
+```{prf:remark}
+Let $\{ x_n \}$ be a Cauchy sequence with $\lim x_n = x$. 
+Let $\epsilon > 0$. Choose $n_0$ such that $m, n > n_0$ implies
+$|x_m - x_n| < \epsilon$.
+
+Then
+
+$$
+|x_n - x | \leq \epsilon \Forall n > n_0.
+$$
+```
+
+```{prf:proof}
+We have, for all $m, n > n_0$
+
+$$
+|x_m - x_n | < \epsilon \iff x_m - \epsilon < x_n < x_m + \epsilon.
+$$
+We will fix $n$ and vary $n$ to compute the limit inequalities. 
+
+1. Consider the strict inequality: $x_m - \epsilon < x_n$ for all $m > n_0$.
+1. Taking the limit on the sequence $x_m$ (in L.H.S.), we get: $x - \epsilon \leq x_n$.
+1. Consider the strict inequality: $x_n < x_m + \epsilon$ for all $m > n_0$.
+1. Taking the limit on the sequence $x_m$ (in R.H.S.), we get: $x_n \leq x + \epsilon$.
+1. Together, we get: $$x - \epsilon \leq x_n \leq x + \epsilon$.
+1. Combining, we get $|x_n -x| \leq \epsilon$ for all $n > n_0$.
+
+See also {prf:ref}`ex-bra-order-limit-strict-inequality`.
+```
