@@ -3,87 +3,6 @@
 Let $(X, d)$ be a metric space.
 
 
-## Accumulation Points
-
-
-```{prf:definition} Accumulation point
-:label: def-ms-accumulation-point
-
-A point $x \in X$ is called an *accumulation point* of a set $A \subseteq X$,
-if every open ball $B(x,r)$ contains a point in $A$ distinct from $A$.
-
-$$
-B(x, r) \cap A \setminus \{ x \} \neq \EmptySet \Forall r > 0.
-$$
-```
-
-Note that an accumulation point need not belong to the set $A$.
-
-```{prf:remark} 
-Every accumulation point is a closure point.
-```
-
-
-Although, every closure point need not be an accumulation point.
-
-```{prf:definition} Derived set
-:label: def-ms-derived-set
-
-The set of accumulation points of a set $A$ is called its *derived set* 
-and is denoted by $A'$.
-```
-
-```{prf:definition} Isolated point
-:label: def-ms-isolated-point
-
-A point $x \in A$ is called isolated if there is an open ball
-$B(x, r)$ which doesn't contain any other point of $A$.
-
-In other words, there exists an $r > 0$ such that:
-
-$$
-B(x, r) \cap A \setminus \{ x \} = \EmptySet.
-$$
-```
-
-```{prf:proposition} 
-A closure point is either an accumulation point or an isolated point.
-```
-
-```{prf:proof}
-Let $x \in \closure A$. Assume that $x$ is not an accumulation point.
-
-We need to show that $x \in A$ and $x$ is isolated.
-
-1. Since $x$ is not an accumulation point, there exists $r > 0$ such that 
-   $B(x, r) \cap A \setminus \{ x \} = \EmptySet$.
-1. Since $x$ is a closure point, hence 
-   $B(x,r) \cap A$ is not empty.
-1. Then, $B(x, r) \cap A$ must be $\{ x \}$. 
-1. Thus, $x \in A$.
-1. Finally, since $B(x, r) \cap A \setminus \{ x \} = \EmptySet$, 
-   $x$ is an isolated point of $A$.
-```
-
-
-```{prf:proposition} 
-$$
-\closure A = A \cup A'.
-$$
-```
-This is a restatement of the previous result.
-
-```{prf:proposition} 
-A set is closed if and only if it contains all its accumulation points.
-```
-
-```{prf:proof}
-$A' \subseteq A \implies A \cup A' = A$. But $A \cup A' = \closure A$.
-Thus, $A' \subseteq A \implies A = \closure A$.
-
-$A = \closure A \implies  A =  A \cup A' \implies A' \subseteq A$.
-```
-
 ## Sequences
 
 ````{prf:definition}
@@ -207,6 +126,33 @@ We assume that $x$ is an accumulation point of $A$.
 1. Thus, the sequence converges to $x$.
 ```
 
+```{prf:proposition}
+:label: res-ms-closure-convergence
+
+Let $A$ be a subset of $X$. $A$ is closed if and only if 
+every convergent sequence of $A$ converges in $A$.
+```
+
+```{prf:proof}
+
+Assume $A$ to be closed.
+
+1. Let $\{x_n\}$ be a convergent sequence of $A$. 
+1. By {prf:ref}`res-ms-closure-point-as-limit` $x = \lim x_n$ is a closure
+   point of $A$.
+1. Since $A$ is closed, hence it contains all its closure points.
+1. Thus, $\{x_n\}$ converges in $A$.
+
+
+Assume that every convergent sequence of $A$ converges in $A$.
+
+1. Let $x$ be a closure point of $A$. 
+1. By {prf:ref}`res-ms-closure-point-as-limit`, there exists a
+   convergent sequence $\{ x_n \}$ of $A$ that converges to $x$.
+1. But since, $\{ x_n \}$ converges in $A$, hence $x \in A$.
+1. Thus, $A$ contains all its closure points.
+1. Hence, $A$ is closed.
+```
 
 ## Dense Sets
 

@@ -505,3 +505,84 @@ Let $x \in \closure A \setminus \interior A$.
 1. Thus, $\closure A \setminus \interior A \subseteq \boundary A$.
 ```
 
+## Accumulation
+
+
+```{prf:definition} Accumulation point
+:label: def-ms-accumulation-point
+
+A point $x \in X$ is called an *accumulation point* of a set $A \subseteq X$,
+if every open ball $B(x,r)$ contains a point in $A$ distinct from $x$.
+
+$$
+B(x, r) \cap A \setminus \{ x \} \neq \EmptySet \Forall r > 0.
+$$
+```
+
+Note that an accumulation point need not belong to the set $A$.
+
+```{prf:remark} 
+Every accumulation point is a closure point.
+```
+
+
+Although, every closure point need not be an accumulation point.
+
+```{prf:definition} Derived set
+:label: def-ms-derived-set
+
+The set of accumulation points of a set $A$ is called its *derived set* 
+and is denoted by $A'$.
+```
+
+```{prf:definition} Isolated point
+:label: def-ms-isolated-point
+
+A point $x \in A$ is called isolated if there is an open ball
+$B(x, r)$ which doesn't contain any other point of $A$.
+
+In other words, there exists an $r > 0$ such that:
+
+$$
+B(x, r) \cap A \setminus \{ x \} = \EmptySet.
+$$
+```
+
+```{prf:proposition} 
+A closure point is either an accumulation point or an isolated point.
+```
+
+```{prf:proof}
+Let $x \in \closure A$. Assume that $x$ is not an accumulation point.
+
+We need to show that $x \in A$ and $x$ is isolated.
+
+1. Since $x$ is not an accumulation point, there exists $r > 0$ such that 
+   $B(x, r) \cap A \setminus \{ x \} = \EmptySet$.
+1. Since $x$ is a closure point, hence 
+   $B(x,r) \cap A$ is not empty.
+1. Then, $B(x, r) \cap A$ must be $\{ x \}$. 
+1. Thus, $x \in A$.
+1. Finally, since $B(x, r) \cap A \setminus \{ x \} = \EmptySet$, 
+   $x$ is an isolated point of $A$.
+```
+
+
+```{prf:proposition} 
+$$
+\closure A = A \cup A'.
+$$
+```
+This is a restatement of the previous result.
+
+```{prf:proposition} 
+A set is closed if and only if it contains all its accumulation points.
+```
+
+```{prf:proof}
+$A' \subseteq A \implies A \cup A' = A$. But $A \cup A' = \closure A$.
+Thus, $A' \subseteq A \implies A = \closure A$.
+
+$A = \closure A \implies  A =  A \cup A' \implies A' \subseteq A$.
+```
+
