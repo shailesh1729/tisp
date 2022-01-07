@@ -1,4 +1,4 @@
-# Real Valued Functions and Extensions
+# Real Valued Functions
 
 
 ## Real Valued Functions
