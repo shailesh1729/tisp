@@ -123,7 +123,11 @@ We first show that the identity mapping $I : (X, d) \to (X, \rho)$ is continuous
 
 Let $a \in X$ and choose $\epsilon > 0$. 
 Recall that $\rho$ is bounded with $\rho(x,y) < 1$. 
-Hence, our attention is restricted to $\epsilon < 1$.
+
+Thus, if $\epsilon \geq 1$, we can choose any $\delta > 0$ leading 
+to $\rho(x,y) < \epsilon$  whenever $d(x,y) < \delta$.
+
+Now, consider the case $\epsilon < 1$.
 
 $$
 \begin{aligned}
