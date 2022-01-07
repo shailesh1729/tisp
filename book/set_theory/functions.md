@@ -30,7 +30,7 @@ If $f$ maps an element $x \in A$ to an element $y \in B$,
 We say that the element $y$ is the *value* of the function $f$ 
 at $x$ (or the *image* of $x$ under $f$) 
 and denote as $f(x)$, that is, $y = f(x)$.
-
+We also say that $f$ *attains* or *assumes* the value $y$ at $x$.
 We also sometimes say that $y$ is the *output* of $f$ when the *input* is $x$.
 ````
 
@@ -60,6 +60,9 @@ definition of *total function* above.
 
 The set $\{y \in B \ST \exists \; x \in A \text{ such that } y = f(x)\}$ 
 is called the *range* of $f$ denoted by $\range f$.
+
+In other words, the set of values *attained* by $f$ is called 
+its range.
 ```
 
 The domain is a subset of $A$ and the range is a subset of $B$.
