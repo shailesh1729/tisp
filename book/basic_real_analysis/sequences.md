@@ -41,38 +41,6 @@ $$
 Thus, the sequence converges to 0.
 ````
 
-````{prf:definition} Neighborhood
-:label: def-bra-neighborhood
-
-Given a real number $x \in \RR$ and $\epsilon > 0$, the set
-
-$$
-    V_{\epsilon}(x)  = \{y \in \RR \ST | y - x | < \epsilon\}
-$$
-
-is called the $\epsilon$-neighborhood of $x$. 
-It is also called an *open neighborhood* or an *open interval*.
-````
-
-In other words, $V_{\epsilon}(x) = (x - \epsilon, x + \epsilon)$.
-
-
-````{prf:definition} Closed Neighborhood
-:label: def-bra-closed-neighborhood
-
-Given a real number $x \in \RR$ and $\epsilon > 0$, the set
-
-$$
-    C_{\epsilon}(x)  = \{y \in \RR : | y - x | \leq \epsilon\}
-$$
-
-is called the $\epsilon$-closed-neighborhood of $x$. 
-It is also called a *closed interval*.
-````
-
-In other words, $C_{\epsilon}(x) = [x - \epsilon, x + \epsilon]$.
-
-
 ````{prf:definition} Divergence
 :label: def-bra-divergence
 
