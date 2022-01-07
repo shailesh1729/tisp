@@ -43,7 +43,7 @@ definition of real numbers.
 We present the axiomatic definition of real numbers.
 
 
-````{prf:definition} Real numbers
+````{prf:definition} Real Numbers
 :label: def-real-numbers
 
 The *real numbers* are the members of a nonempty set $\RR$ equipped with two operations
@@ -242,8 +242,28 @@ This contradicts our assumption that for every $\epsilon > 0$
 $| a  - b | < \epsilon$. Hence $a  = b$.
 ````
 
+## Intervals
 
-## Completeness axiom
+```{prf:definition} Interval
+:label: def-rl-interval
+
+A subset $S$ of $\RR$ is called an *interval* if
+for every $a,b \in S$ such that $a < b$, 
+$S$ contains all the real numbers between $a$ and $b$.
+In other words, if $a < x < b$, then $x \in S$.
+
+* An *open interval* does not include its endpoints and is denoted
+  as $(a,b) \triangleq \{ x \in \RR \ST a < x < b\}$.
+* A *closed interval* does not include its endpoints and is denoted
+  as $[a,b] \triangleq \{ x \in \RR \ST a \leq x \leq b\}$.
+* A *half-open interval* includes one of its its endpoints
+  : $[a,b) \triangleq \{ x \in \RR \ST a \leq x < b\}$;
+  $(a,b] \triangleq \{ x \in \RR \ST a < x \leq b\}$.
+* A *degenerate interval* is an interval of the form $[a,a]$
+  which is a singleton containing $a \in \RR$.
+```
+
+## Completeness Axiom
 
 
 ````{prf:definition} Upper and lower bounds
@@ -812,7 +832,3 @@ countable.
 Thus, $\RR$ is uncountable only if $(0, 1)$ is uncountable. In other words,
 $(0, 1)$ is uncountable if $\RR$ is uncountable.
 ````
-
-
-
-
