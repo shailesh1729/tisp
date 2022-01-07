@@ -1,3 +1,4 @@
+(sec:ms:metric-topology)=
 # Metric Topology
 
 Let $(X,d)$ be a metric space. 
@@ -188,7 +189,7 @@ We proceed as follows:
 ## Interior
 
 ```{prf:definition} Interior point
-:label: def-ms-interior
+:label: def-ms-interior-point
 
 A point $x$ is called an interior point of a set $A \subseteq X$ if there
 exists an open ball $B(x, r)$ such that $B(x, r) \subseteq A$. 
