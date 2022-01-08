@@ -83,12 +83,12 @@ The deleted neighborhood doesn't include $x$.
 ```{prf:definition} Open sets
 :label: def-rl-open-set
 
-A subset $S$ of $\RR$ is said to be *open* in $\RR$ 
-if for every $x \in S$ there exists an "open ball" entirely
-within $S$. 
+A subset $A$ of $\RR$ is said to be *open* in $\RR$ 
+if for every $x \in A$ there exists an "open ball" entirely
+within $A$. 
 
 In other words, there exists an $r > 0$ such that
-$(x-r, x+r) \subseteq S$. 
+$(x-r, x+r) \subseteq A$. 
 ```
 
 We claim without proving:
@@ -104,8 +104,8 @@ We claim without proving:
 ```{prf:definition} Closed sets
 :label: def-rl-closed-set
 
-A subset $S$ of $\RR$ is said to be *closed* in $\RR$ 
-if $\RR \setminus S$ is open in $\RR$.
+A subset $A$ of $\RR$ is said to be *closed* in $\RR$ 
+if $\RR \setminus A$ is open in $\RR$.
 ```
 
 We claim without proving:
@@ -117,6 +117,9 @@ We claim without proving:
 1. Half open intervals are neither open nor closed.
 1. Arbitrary intersections of closed sets are closed sets.
 1. Finite unions of closed sets are closed sets.
+1. Any finite set is closed.
+1. The set of natural numbers is closed.
+1. The set of integers is closed.
 
 
 ## Interior
@@ -154,7 +157,7 @@ We claim without proving.
 :label: def-rl-closure-point
 
 A point $x \in \RR$ is called a *closure point* of a subset $A$ of $\RR$ 
-if every open ball at $x$ contains (at least) one point in $A$.
+if every open ball/neighborhood at $x$ contains (at least) one point in $A$.
 
 In other words:
 
@@ -185,6 +188,18 @@ We claim without proving:
    $$
    \RR \setminus (\interior A) = \closure (\RR \setminus A).
    $$
+
+
+
+```{prf:example}
+Consider $\QQ$, the set of rational numbers.
+
+1. Recall that every interval of real numbers contains a rational number
+   ({prf:ref}`res-rl-rational-existence`).
+1. Thus, every neighborhood of a real number contains a rational number.
+1. Thus, every real number is a closure point of $\QQ$.
+1. Thus, $\closure \QQ = \RR$.
+```
 
 ## Boundary
 
@@ -217,12 +232,19 @@ We claim without proving:
 :label: def-rl-accumulation-point
 
 A point $x \in \RR$ is called an *accumulation point* of a set $A \subseteq \RR$,
-if every open ball $(x-r,x+r)$ contains a point in $A$ distinct from $x$.
+if every neighborhood of $x$ contains a point in $A$ distinct from $x$.
 
 $$
 (x-r, x+r) \cap A \setminus \{ x \} \neq \EmptySet \Forall r > 0.
 $$
+
+In other words, every deleted neighborhood of $x$ contains
+a point in $A$.
 ```
+
+Some authors call accumulation points as limit points. 
+Some authors make a distinction between accumulation points
+and limit points.
 
 ```{prf:definition} Derived set
 :label: def-rl-derived-set
@@ -234,8 +256,8 @@ and is denoted by $A'$.
 ```{prf:definition} Isolated point
 :label: def-rl-isolated-point
 
-A point $x \in A$ is called isolated if there is an open ball
-$(x-r, x+r)$ which doesn't contain any other point of $A$.
+A point $x \in A$ is called isolated if there is a neighborhood
+of $x$ that doesn't contain any other point of $A$.
 ```
 
 We claim without proving:
@@ -244,3 +266,74 @@ We claim without proving:
 1. A closure point is either an accumulation point or an isolated point.
 1. $\closure A = A \cup A'$.
 1. A set is closed if and only if it contains all its accumulation points.
+1. In other words, a set is closed if and only if its complement doesn't contain any of its accumulation points.
+1. A singleton set $\{ x \}$ doesn't have any accumulation points.
+1. A set consisting of isolated points doesn't have any accumulation points.
+
+
+
+## Exterior
+
+```{prf:definition} Exterior point
+:label: def-rl-exterior-point
+
+A point $x$ is called *exterior* to a set $A \subseteq \RR$ 
+if it is interior to $RR \setminus A$. 
+```
+
+```{prf:definition} Exterior
+:label: def-rl-exterior
+
+The set of all exterior points of $A$ is called its exterior.
+```
+
+## Open Cover
+
+```{prf:definition} Open cover
+:label: def-rl-open-cover
+
+A collection $\OOO$ of open sets is called an *open cover*
+or *open covering* of a set $A$ if for every $x \in A$,
+there exists a set $O \in \OOO$ such that $x \in O$.
+
+In other words:
+
+$$
+A \subseteq \bigcup_{O \in \OOO} O.
+$$
+
+An open cover is called *finite* or *finite open cover*
+if it consists of finitely many open sets.
+
+A subset of a cover is known as a *subcover*.
+```
+
+```{prf:theorem} Heine-Borel theorem
+:label: res-rl-heine-borel
+
+If $\OOO$ is an open cover of a closed and bounded subset 
+$A \subseteq \RR$,
+then $A$ has an open cover $\PPP$ consisting of finitely
+many open sets belonging to $\OOO$.
+```
+
+## Compact Sets
+
+```{prf:definition} Compact set
+:label: def-rl-compact-set
+
+A set $A \subseteq \RR$ is called *compact* if it is 
+closed and bounded.
+```
+
+We claim without proving:
+
+1. If every open cover of $A$ contains a finite subcover, 
+   then $A$ is compact.
+
+```{prf:theorem} Bolzano-Weierstrass theorem
+:label: res-rl-bolzano-weierstrass
+
+Every bounded infinite set of real numbers has at least one
+limit point.
+```
