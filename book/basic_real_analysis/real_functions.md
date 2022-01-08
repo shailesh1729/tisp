@@ -516,6 +516,8 @@ $$
 f(c^-) = f(c) = f(c^+).
 $$
 ```
+This theorem is a restatement of continuity definition 
+in the form of $\epsilon-\delta$ rules.
 
 ```{prf:definition} Continuity on an interval
 :label: def-bra-rf-continuity-interval
@@ -538,6 +540,91 @@ $S$ is continuous on every interval in $S$.
 When we say that $f$ is continuous on some set $S \subseteq \dom f$, 
 we mean that $S$ is a union of finitely or infinitely many 
 disjoint intervals.
+
+
+```{prf:proposition} Continuity on a closed interval $[a,b]$
+:label: res-bra-rf-continuity-closed-interval-cover
+
+Let $f$ be continuous on $[a,b]$. Then, for every $t \in [a,b]$,
+and for every $\epsilon > 0$, 
+there exists an open interval $I_t = (c,d)$ containing $t$ such that
+
+$$
+|f(x) - f(t)| < \epsilon \text{ whenever } x \in I_t \cap [a,b].
+$$ 
+```
+
+```{prf:proof}
+
+Assume $a < t < b$.  Then, there exists $\delta > 0$, such that:
+
+$$
+|f(x) - f(t)| < \epsilon \text{ whenever }  t - \delta < x < t + \delta.
+$$ 
+
+Choose $I_t = (t-\delta, t+\delta)$.
+
+Now, assume $t=a$. $f$ must be continuous from the right at $t=a$. 
+There exists $\delta > 0$ such that:
+
+$$
+|f(x) - f(t)| < \epsilon \text{ whenever } t \leq x < t  + \delta.
+$$
+
+Choose $I_t = (t - \delta, t+\delta)$. 
+Then $I_t \cap (a,b) = [t, t+\delta)$.
+
+Finally, assume $t=b$. $f$ must be continuous from the left at $t=b$. 
+There exists $\delta > 0$ such that:
+
+$$
+|f(x) - f(t)| < \epsilon \text{ whenever } t - \delta < x \leq t.
+$$
+
+Choose $I_t = (t - \delta, t+\delta)$. 
+Then $I_t \cap (a,b) = (t-\delta, t]$.  
+```
+
+The set $\OOO \triangleq \{I_t \Forall t \in [a,b] \}$ forms an
+*open cover* of $[a,b]$.
+
+```{prf:proposition}
+:label: res-bra-rf-continuous-gap-neighborhood
+
+Let $f$ be continuous at $x=a$ 
+
+1. If $f(a) > \mu$, then $f(x) > \mu$ in some neighborhood of $a$.
+1. If $f(a) < \mu$, then $f(x) < \mu$ in some neighborhood of $a$.
+```
+
+```{prf:proof}
+(1) Let $\epsilon = f(a) - \mu$. $\epsilon > 0$ as $f(a) > \mu$.
+There exists $\delta > 0$ such that
+
+$$
+|f(x) - f(a)| < \epsilon \text{ whenever } | x - a | < \delta. 
+$$
+
+Thus, in the neighborhood $x \in (a-\delta, a+\delta)$:
+
+$$
+f(a) - \epsilon < f(x) < f(a) + \epsilon \implies \mu < f(x) < 2 f(a) - \mu.
+$$
+
+(2) Let $\epsilon = \mu - f(a)$. $\epsilon > 0$ as $f(a) < \mu$.
+There exists $\delta > 0$ such that
+
+$$
+|f(x) - f(a)| < \epsilon \text{ whenever } | x - a | < \delta. 
+$$
+
+Thus, in the neighborhood $x \in (a-\delta, a+\delta)$:
+
+$$
+f(a) - \epsilon < f(x) < f(a) + \epsilon \implies \mu - 2 f(a) < f(x) < \mu.
+$$
+
+```
 
 ```{prf:definition} Piecewise continuity
 :label: def-bra-rf-piecewise-continuity
@@ -593,7 +680,315 @@ $$
 is continuous at $x=a$.
 ```
 
+
+
+## Continuity with Function Composition
+
 Next, we look at continuity w.r.t. 
 {prf:ref}`function composition <def-st-function-composition>`.
 
+
+```{prf:theorem}
+Suppose $f$ is continuous at $x=a$; $f(a)$ is an
+{prf:ref}`interior point <def-rl-interior-point>` 
+of $\dom g$ and $g$ is continuous
+at $f(a)$. Then $g \circ f$ is continuous at $x=a$. 
+```
+
+```{prf:proof}
+
+We proceed as follows:
+
+1. Let $\epsilon > 0$ be arbitrary.
+1. Since $g$ is continuous at $f(a)$, there is $\delta_1 > 0$
+   such that 
+
+   $$
+   |g(t) - g(f(a))| < \epsilon \text{ whenever } | t - f(a)| < \delta_1.
+   $$
+1. Since $f$ is continuous at $a$, hence, there exists $\delta > 0$
+   such that
+
+   $$
+   |f(x) - f(a)| < \delta_1 \text{ whenever } | x - a | < \delta.
+   $$
+1. Together, they imply that
+
+   $$
+   |g(f(x)) - g(f(a)) | < \epsilon \text{ whenever } | x - a | < \delta.
+   $$
+1. Therefore, $g \circ f$ is continuous at $x=a$.
+```
+
+## Boundedness
+
+```{prf:definition} Bounded function
+:label: def-bra-rf-bounded-function
+
+A real function $f$ is *bounded below* on a set 
+$S \subseteq \dom f$ if 
+there is a real number $m$ such that
+
+$$
+f(x) \geq m \Forall x \in S.
+$$
+
+Then, the set  
+
+$$
+V  = \{f(x) \ST x \in S \}
+$$
+
+has a infimum (due to {prf:ref}`res-rl-completeness-lower`),
+and we write:
+
+$$
+\alpha = \underset{x \in S}{\inf} f(x).
+$$ 
+
+If there is a point $c \in S$ such that $\alpha = f(c)$,
+we say that $\alpha$ is the *minimum* of $f$ on $S$
+and $f$ *attains* the minimum at $x=c$. 
+
+
+A real function $f$ is *bounded above* on a set 
+$S \subseteq \dom f$ if 
+there is a real number $M$ such that
+
+$$
+f(x) \leq M \Forall x \in S.
+$$
+
+Then, the set $V$
+has a supremum (due to {prf:ref}`axm-rl-completeness-axiom`),
+and we write:
+
+$$
+\beta = \underset{x \in S}{\sup} f(x).
+$$ 
+
+If there is a point $d \in S$ such that $\beta = f(d)$,
+we say that $\beta$ is the *maximum* of $f$ on $S$
+and $f$ *attains* the maximum at $x=d$. 
+
+If $f$ is bounded above and below on a set $S$, we 
+say that $f$ is *bounded* on $S$.
+```
+
+```{prf:theorem}
+:label: res-bra-rf-continuous-interval-bounded
+
+If $f$ is continuous on a finite closed interval $[a,b]$, then
+$f$ is bounded on $[a,b]$.
+```
+
+```{prf:proof}
+Let $f$ be continuous on $[a,b]$. Let $t \in [a,b]$.
+Choose $\epsilon = 1$. Then,
+due to {prf:ref}`res-bra-rf-continuity-closed-interval-cover`,
+there exists an interval $I_t$ such that
+
+$$
+|f(x) - f(t) | < 1 \text{ whenever } x \in I_t \cap [a,b].
+$$
+
+The set $\OOO \triangleq \{I_t \Forall t \in [a,b] \}$ forms an
+*open cover* of $[a,b]$.
+
+Due to {prf:ref}`Heine-Borel theorem <res-rl-heine-borel>`,
+$[a,b]$ has a finite subcover contained in $\OOO$.
+
+Let $t_1 < t_2 < \dots < t_n$ index the finite open subcover.
+We have:
+
+$$
+[a,b] \subset \bigcup_{i=1}^n \left ( I_{t_i} \cap [a,b] \right ).
+$$
+
+Then, for each $t_i$:
+
+$$
+|f(x) - f(t_i) | < 1 \text{ whenever } x \in I_{t_i} \cap [a,b].
+$$
+
+Therefore, 
+
+$$
+|f(x)| = |f(x) - f(t_i) + f(t_i)| \leq |f(x) - f(t_i)| + |f(t_i)|
+\leq 1 + |f(t_i)| \text{ whenever } x \in I_{t_i} \cap [a,b].
+$$
+
+Thus, for every $x \in [a,b]$, there exists a $t_i \in [a,b]$ such that,
+
+$$
+|f(x) | \leq 1 + |f(t_i)|.
+$$
+
+Taking the maximum on the R.H.S. over all the inequalities, we get:
+
+$$
+|f(x) \leq 1 + \underset{1 \leq i \leq n}{\max} |f(t_i)|.
+$$
+
+Thus, $f$ is bounded with a bound:
+
+$$
+M = 1 + \underset{1 \leq i \leq n}{\max} |f(t_i)|.
+$$
+```
+
+```{prf:corollary}
+If $f$ is continuous on a finite closed interval $[a,b]$, then
+$f$ has an infimum and a supremum.
+```
+
+```{prf:proof}
+By {prf:ref}`res-bra-rf-continuous-interval-bounded`, $f$ 
+is bounded. Let
+
+$$
+V  = \{f(x) \ST x \in [a,b] \}.
+$$
+
+Since $f$ is bounded, hence $V$ is bounded, hence
+$V$ has an infimum as well as a supremum. 
+```
+
+```{prf:theorem}
+Let $f$ be continuous on a finite closed interval $[a,b]$.
+Let
+
+$$
+\alpha = \underset{a \leq x \leq b}{\inf}f(x) \text{ and }
+\beta = \underset{a \leq x \leq b}{\sup}f(x).
+$$
+
+Then, $\alpha$ and $\beta$ are respectively, the 
+minimum and maximum values of $f$ on $[a,b]$ and $f$
+attains these values at some points in $[a,b]$.
+
+I.e., there exists $x_1, x_2 \in [a,b]$ such that:
+
+$$
+f(x_1) = \alpha \text{ and } f(x_2) = \beta.
+$$
+```
+
+```{prf:proof}
+Assume that $\alpha$ is the infimum of $f$ over $[a,b]$
+and there is no $x_1 \in [a,b]$ such that $f(x_1) = \alpha$.
+Then $f(x) > \alpha$ for all $x\in [a,b]$.
+
+Let $t \in [a,b]$. Then, $f(t)> \alpha$. 
+Thus, 
+
+$$
+f(t) > \frac{f(t) + \alpha}{2} > \alpha.
+$$
+
+By {prf:ref}`res-bra-rf-continuity-closed-interval-cover` 
+and {prf:ref}`res-bra-rf-continuous-gap-neighborhood`, 
+there is a open interval $I_t$ at $t$ such that
+
+$$
+f(x) > \frac{f(t) + \alpha}{2}  \text{ whenever } x \in I_t \cap [a,b]. 
+$$
+
+The set $\OOO = \{ I_t \ST a \leq t \leq b \}$ is an open cover
+of $[a,b]$.
+
+
+Due to {prf:ref}`Heine-Borel theorem <res-rl-heine-borel>`,
+$[a,b]$ has a finite subcover contained in $\OOO$.
+Thus, there are finitely many points $t_1, t_2, \dots, t_n$
+such that:
+
+$$
+[a,b] \subset \bigcup_{i=1}^n \left ( I_{t_i} \cap [a,b] \right ).
+$$
+
+Define:
+
+$$
+\alpha_1 = \underset{1 \leq i \leq n}{\min}\frac{f(t_i) + \alpha}{2}.
+$$
+Due to the finite cover; for every $x \in [a,b]$, there exists $t_i$ 
+such that $x \in I_{t_i} \cap [a,b]$ and thus, 
+$f(x) > \frac{f(t_i) + \alpha}{2} \geq \alpha_1$. 
+Thus,
+
+$$
+f(x) > \alpha_1 \Forall x \in [a,b].
+$$
+But $\alpha_1 > \alpha$. Thus, $\alpha$ cannot be the infimum of 
+$f$ over $[a,b]$. We arrive at the contradiction.
+
+Thus, there exists some $x=x_1$ such that $f(x_1) = \alpha$.
+
+A similar argument shows that $f$ attains $\beta$ at some $x_2 \in [a,b]$.
+```
+
+
+```{prf:theorem} Intermediate value theorem
+
+Let $f$ be continuous on a finite closed interval $[a,b]$. 
+Assume that $f(a) \neq f(b)$.
+Let $\mu$ be in between $f(a)$ and $f(b)$.
+Then $f$ attains the value of $\mu$ at some $x=c \in [a,b]$. 
+
+In other words, there exists $c \in [a,b]$ such that $f(c)=\mu$. 
+```
+
+```{prf:proof}
+Let us assume that $f(a) < \mu < f(b)$.
+
+Define the set:
+
+$$
+A = \{x \in [a,b] \ST f(x) \leq \mu \}.
+$$
+
+1. The set is bounded since $a \leq x \leq b$.
+1. The set is nonempty since $f(a) < \mu$. 
+   And since $f$ is continuous from the right at $a$, 
+   hence there exists an interval $[a, a+\delta)$ such that $f(x) < \mu$ 
+   in this interval.
+1. Thus, $A$ has an infimum(obviously $a$) and a supremum. 
+1. Let $c = \sup A$. 
+1. We will claim that $f(c) = \mu$.
+
+If $f(c) > \mu$, then:
+
+1. $c > a$.
+1. $f$ is continuous at $x=c$. 
+1. Thus, there exists an $\epsilon > 0$ such that 
+   $f(x) > \mu$ whenever $c - \epsilon < x \leq c$.
+1. Therefore, the interval $(c - \epsilon, c]$ is not included in $A$.
+1. Therefore, $c-\epsilon$ is an upper bound for $A$.
+1. This contradicts the assumption that $c = \sup A$.
+
+
+If $f(c) < \mu$, then:
+
+1. $c < b$. 
+1. $f$ is continuous at $x=c$. 
+1. Thus, there exists an $\epsilon > 0$ such that 
+   $f(x) < \mu$ whenever $c \leq x < c + \epsilon$.
+1. Therefore, the interval $[c, c + \epsilon)$ is included in $A$.
+1. Therefore, $c$ is not an upper bound for $A$.
+1. This also contradicts the assumption that $c = \sup A$.
+
+Therefore $f(c) = \mu$ must be true.
+
+A similar argument can be pursued when $f(b) < \mu < f(a)$.
+```
+
+Note that the proof picks up just one possible value of $x$ 
+such that $f(x) = \mu$. It is quite possible that $f$ attains
+$\mu$ more than one times in the interval $[a,b]$. The proof
+doesn't claim to find all such values of $x$.
+
+In this sense, this theorem is a weak result as it claims
+the existence of just one point at which $f(x) = \mu$. 
+It doesn't claim to characterize the set of points at which $f(x) = \mu$.
 
