@@ -1048,12 +1048,12 @@ The clause $x \in \dom f$ in the definition is important.
 
 1. If $x_0$ is an interior point of $\dom f$, we can pick
    an interval $(x_0 - \delta, x_0 + \delta)$.
-1. If $x_0$ is an accumulation point of $\dom f$, we can pick up
+1. If $x_0$ is a non-interior point of $\dom f$, we can pick up
    a half-open interval $(x_0 - \delta, x_0]$ or $[x_0, x_0 + \delta)$
    whichever is applicable.
 1. If $x_0$ is an isolated point, we pick the degenerate interval
    $[x_0, x_0]$ with suitable choice of $\delta$.
-1. Thus, on the accumulation points, $f$ is either continuous from
+1. Thus, on the non-interior points, $f$ is either continuous from
    the left or right while on the interior points, $f$ is continuous.
 
 The key issue here is that the size of the interval 
