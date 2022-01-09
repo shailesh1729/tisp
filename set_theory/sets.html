@@ -1,0 +1,1042 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.1. Sets &#8212; Optimization for Sparse Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.2. Relations" href="relations.html" />
+    <link rel="prev" title="1. Set Theory" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   1. Set Theory
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.3. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.4. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.5. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   5. Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/affine.html">
+     5.2. Affine Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     5.3. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     5.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/hyperplane.html">
+     5.5. Hyperplanes and Half spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/ball.html">
+     5.6. Euclidean Balls and Ellipsoids
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_ball.html">
+     5.7. Norm Balls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_cone.html">
+     5.8. Norm Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/polyhedron.html">
+     5.9. Polyhedra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     5.10. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convexity_ops.html">
+     5.11. Convexity Preserving Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/dual_cones.html">
+     5.12. Dual Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     5.13. Generalized Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_functions/intro.html">
+   6. Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/functions.html">
+     6.1. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/convex_functions.html">
+     6.2. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
+     6.3. Extensions for Convex Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradients/chapter.html">
+   7. Subgradients
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradients/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   8. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   9. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   10. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   11. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     11.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   12. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     12.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     12.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   13. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   14. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   15. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     15.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/set_theory/sets.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fset_theory/sets.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#family-of-sets">
+   1.1.1. Family of sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ordered-pairs-and-n-tuples">
+   1.1.2. Ordered Pairs and n-Tuples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cartesian-products">
+   1.1.3. Cartesian Products
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   1.1.4. Examples
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="sets">
+<h1><span class="section-number">1.1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h1>
+<p>In this section we will review basic concepts of set theory.</p>
+<div class="proof definition admonition" id="def-set">
+<p class="admonition-title"><span class="caption-number">Definition 1.1 </span> (Set)</p>
+<div class="definition-content section" id="proof-content">
+<p>A <em>set</em> is a collection of objects viewed as a single entity.</p>
+</div>
+</div><p>It is just a working definition which we will use in this book.</p>
+<ul class="simple">
+<li><p>Sets are denoted by capital letters.</p></li>
+<li><p>Objects in a set are called <em>members</em>, <em>elements</em> or <em>points</em>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x \in A\)</span> means that element <span class="math notranslate nohighlight">\(x\)</span> belongs to set <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x \notin A\)</span> means that <span class="math notranslate nohighlight">\(x\)</span> doesn’t belong to set <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{ a,b,c\}\)</span> denotes a set with elements <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(c\)</span>. Their order
+is not relevant.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{ x \ST  \text{property}(x) \}\)</span> is a set of elements which satisfy a given property
+(a predicate or a condition or a rule).</p></li>
+</ul>
+<div class="proof definition admonition" id="def-singleton-set">
+<p class="admonition-title"><span class="caption-number">Definition 1.2 </span> (Singleton set)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set with only one element is known as a <em>singleton</em> set.</p>
+</div>
+</div><div class="proof definition admonition" id="def-equal-sets">
+<p class="admonition-title"><span class="caption-number">Definition 1.3 </span> (Set equality)</p>
+<div class="definition-content section" id="proof-content">
+<p>Two sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are said to be equal (<span class="math notranslate nohighlight">\(A=B\)</span>) if they have precisely the same elements. i.e.
+if <span class="math notranslate nohighlight">\(x \in A\)</span> then <span class="math notranslate nohighlight">\(x \in B\)</span> and vice versa. Otherwise, they are not equal (<span class="math notranslate nohighlight">\(A \neq B\)</span>).</p>
+</div>
+</div><div class="proof definition admonition" id="def-subset">
+<p class="admonition-title"><span class="caption-number">Definition 1.4 </span> (Subset)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(A\)</span> is called a <em>subset</em> of another set <span class="math notranslate nohighlight">\(B\)</span> if every element of <span class="math notranslate nohighlight">\(A\)</span> belongs to <span class="math notranslate nohighlight">\(B\)</span>.
+This is denoted as <span class="math notranslate nohighlight">\(A \subseteq B\)</span>. Formally <span class="math notranslate nohighlight">\(A \subseteq B \iff (x \in A \implies x \in B)\)</span>.</p>
+</div>
+</div><div class="proof remark admonition" id="rem-set-subset-equal">
+<p class="admonition-title"><span class="caption-number">Remark 1.1 </span></p>
+<div class="remark-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(A = B \iff (A \subseteq B \text{ and } B \subseteq A)\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-proper-subset">
+<p class="admonition-title"><span class="caption-number">Definition 1.5 </span> (Proper subset)</p>
+<div class="definition-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A \subseteq B\)</span> and <span class="math notranslate nohighlight">\(A \neq B\)</span> then <span class="math notranslate nohighlight">\(A\)</span> is called a <em>proper subset</em> of <span class="math notranslate nohighlight">\(B\)</span> denoted by <span class="math notranslate nohighlight">\(A \subset B\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-empty-set">
+<p class="admonition-title"><span class="caption-number">Definition 1.6 </span> (Empty set)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set without any elements is called the <em>empty</em> or <em>void</em> set. It is denoted by <span class="math notranslate nohighlight">\(\EmptySet\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-set-operations">
+<p class="admonition-title"><span class="caption-number">Definition 1.7 </span> (Set operations)</p>
+<div class="definition-content section" id="proof-content">
+<p>We define fundamental set operations below</p>
+<ul class="simple">
+<li><p>The <em>union</em> <span class="math notranslate nohighlight">\(A \cup B\)</span> of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+            A \cup B  = \{ x \ST x \in A \text{ or } x \in B\}.
+\]</div>
+<ul class="simple">
+<li><p>The <em>intersection</em> <span class="math notranslate nohighlight">\(A \cap B\)</span> of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+            A \cap B  = \{ x \ST x \in A \text{ and } x \in B\}.
+\]</div>
+<ul class="simple">
+<li><p>The <em>difference</em> <span class="math notranslate nohighlight">\(A \setminus B\)</span> of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+            A \setminus B  = \{ x \ST x \in A \text{ and } x \notin B\}.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-disjoint-sets">
+<p class="admonition-title"><span class="caption-number">Definition 1.8 </span> (Disjoint sets)</p>
+<div class="definition-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are called <em>disjoint</em> if <span class="math notranslate nohighlight">\(A \cap B = \EmptySet\)</span>.</p>
+</div>
+</div><p>Some useful identities</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((A \cup B) \cap C = (A \cup C) \cap (B \cup C)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((A \cap B) \cup C = (A \cap C) \cup (B \cap C)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((A \cup B) \setminus C = (A \setminus C) \cap (B \setminus C)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((A \cap B) \setminus C = (A \setminus C) \cap (B \setminus C)\)</span>.</p></li>
+</ul>
+<div class="proof definition admonition" id="def-symmetric-difference">
+<p class="admonition-title"><span class="caption-number">Definition 1.9 </span> (Symmetric difference)</p>
+<div class="definition-content section" id="proof-content">
+<p><em>Symmetric difference</em> between sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+        A \Delta B = ( A \setminus B) \cup (B \setminus A)
+\]</div>
+<p>i.e. the elements which are in <span class="math notranslate nohighlight">\(A\)</span> but not in <span class="math notranslate nohighlight">\(B\)</span> and the elements which are in <span class="math notranslate nohighlight">\(B\)</span> but not in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="section" id="family-of-sets">
+<h2><span class="section-number">1.1.1. </span>Family of sets<a class="headerlink" href="#family-of-sets" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-set-family">
+<p class="admonition-title"><span class="caption-number">Definition 1.10 </span> (Family of sets)</p>
+<div class="definition-content section" id="proof-content">
+<p>A <em>Family of sets</em> is a nonempty set <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> whose members are sets by themselves.</p>
+</div>
+</div><div class="proof definition admonition" id="def-index-set">
+<p class="admonition-title"><span class="caption-number">Definition 1.11 </span> (Families indexed by an index set)</p>
+<div class="definition-content section" id="proof-content">
+<p>If for each element <span class="math notranslate nohighlight">\(i\)</span> of a non-empty set <span class="math notranslate nohighlight">\(I\)</span>,
+a subset <span class="math notranslate nohighlight">\(A_i\)</span> of a fixed set <span class="math notranslate nohighlight">\(X\)</span> is assigned,
+then <span class="math notranslate nohighlight">\(\{ A_i\}_{i \in I}\)</span> ( or <span class="math notranslate nohighlight">\(\{ A_i \ST i \in I\}\)</span> or simply <span class="math notranslate nohighlight">\(\{A_i\}\)</span>
+denotes the family whose members are the sets
+<span class="math notranslate nohighlight">\(A_i\)</span>.
+The set <span class="math notranslate nohighlight">\(I\)</span> is called the <em>index set</em> of the family and
+its members are known as <em>indices</em>.</p>
+</div>
+</div><div class="proof example admonition" id="ex-index-sets">
+<p class="admonition-title"><span class="caption-number">Example 1.1 </span> (Index sets)</p>
+<div class="example-content section" id="proof-content">
+<p>Following are some examples of index sets</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\{1,2,3,4\}\)</span>: the family consists of only 4 sets.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{0,1,2,3\}\)</span>: the family consists again of only 4 sets but indices are different.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Nat\)</span>: The sets in family are indexed by natural numbers. They are
+countably infinite.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\ZZ\)</span>: The sets in family are indexed by integers. They are countably
+infinite.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\QQ\)</span>: The sets in family are indexed by rational numbers. They are
+countably infinite.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\RR\)</span>: There are uncountably infinite sets in the family.</p></li>
+</ul>
+</div>
+</div><div class="proof remark admonition" id="remark-13">
+<p class="admonition-title"><span class="caption-number">Remark 1.2 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> is a family of sets,
+then by letting <span class="math notranslate nohighlight">\(I=\mathcal{F}\)</span> and
+<span class="math notranslate nohighlight">\(A_i = i \quad \forall i \in I\)</span>,
+we can express <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> in the form of
+<span class="math notranslate nohighlight">\(\{ A_i\}_{i \in I}\)</span>.</p>
+<p>In other words, a family of sets can index itself.</p>
+</div>
+</div><div class="proof definition admonition" id="def-union-family-of-sets">
+<p class="admonition-title"><span class="caption-number">Definition 1.12 </span> (Union of families of sets)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{ A_i\}_{i \in I}\)</span> be a family of sets. The <em>union</em> of the family is defined to be</p>
+<div class="math notranslate nohighlight">
+\[
+\bigcup_{i\in I} A_i = \{ x \ST \exists i \in I \text{ such that } x \in A_i\}.
+\]</div>
+<p>In words, every element of the union exists in one of the members of the family.</p>
+</div>
+</div><div class="proof definition admonition" id="def-intersection-family-of-sets">
+<p class="admonition-title"><span class="caption-number">Definition 1.13 </span> (Intersection of families of sets)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{ A_i\}_{i \in I}\)</span> be a family of sets. The <em>intersection</em> of the family is defined to be</p>
+<div class="math notranslate nohighlight">
+\[
+\bigcap_{i \in I} A_i  = \{ x \ST x \in A_i \quad \forall i \in I\}.
+\]</div>
+<p>In words, every element of the union exists in every member of the family.</p>
+</div>
+</div><p>We will also use simpler notation <span class="math notranslate nohighlight">\(\bigcup A_i\)</span>, <span class="math notranslate nohighlight">\(\bigcap A_i\)</span>
+for denoting the union and intersection of family.</p>
+<p>If <span class="math notranslate nohighlight">\(I =\Nat = \{1,2,3,\dots\}\)</span> (the set of natural numbers),
+then we will denote
+union and intersection by <span class="math notranslate nohighlight">\(\bigcup_{i=1}^{\infty}A_i\)</span> and <span class="math notranslate nohighlight">\(\bigcap_{i=1}^{\infty}A_i\)</span>.</p>
+<div class="proof proposition admonition" id="proposition-16">
+<p class="admonition-title"><span class="caption-number">Proposition 1.1 </span> (Generalized distributive laws)</p>
+<div class="proposition-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+        &amp;\left ( \bigcup_{i\in I} A_i \right ) \cap B = \bigcup_{i\in I}  \left ( A_i \cap B \right )\\
+        &amp;\left ( \bigcap_{i\in I} A_i \right ) \cup B = \bigcap_{i\in I}  \left ( A_i \cup B \right )
+\end{split}\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-pairwise-disjoint-sets">
+<p class="admonition-title"><span class="caption-number">Definition 1.14 </span> (Family of pairwise disjoint sets)</p>
+<div class="definition-content section" id="proof-content">
+<p>A family of sets <span class="math notranslate nohighlight">\(\{ A_i\}_{i \in I}\)</span> is called <em>pairwise disjoint</em>
+if for each pair <span class="math notranslate nohighlight">\(i, j \in I\)</span>
+the sets <span class="math notranslate nohighlight">\(A_i\)</span> and <span class="math notranslate nohighlight">\(A_j\)</span>  are disjoint i.e. <span class="math notranslate nohighlight">\(A_i \cap A_j = \EmptySet\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-power-set">
+<p class="admonition-title"><span class="caption-number">Definition 1.15 </span> (Power set)</p>
+<div class="definition-content section" id="proof-content">
+<p>The set of all subsets of a set <span class="math notranslate nohighlight">\(A\)</span> is called its <em>power set</em> and is denoted by
+<span class="math notranslate nohighlight">\(\Power (A)\)</span>.</p>
+</div>
+</div><p>In the following <span class="math notranslate nohighlight">\(X\)</span> is a big fixed set (sort of a frame of reference) and
+we will be considering different subsets of it.</p>
+<div class="proof remark admonition" id="remark-19">
+<p class="admonition-title"><span class="caption-number">Remark 1.3 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a fixed set. If <span class="math notranslate nohighlight">\(P(x)\)</span> is a property well defined for all <span class="math notranslate nohighlight">\(x \in X\)</span>, then
+the set of all <span class="math notranslate nohighlight">\(x\)</span> for which <span class="math notranslate nohighlight">\(P(x)\)</span> is true is denoted by <span class="math notranslate nohighlight">\(\{x \in X \ST P(x)\}\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-complement-set">
+<p class="admonition-title"><span class="caption-number">Definition 1.16 </span> (Complement of a set)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a set. Its <em>complement</em> w.r.t. a fixed set <span class="math notranslate nohighlight">\(X\)</span> is the set  <span class="math notranslate nohighlight">\(A^c = X \setminus A\)</span>.</p>
+</div>
+</div><div class="proof proposition admonition" id="proposition-21">
+<p class="admonition-title"><span class="caption-number">Proposition 1.2 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a fixed set, <span class="math notranslate nohighlight">\(A, B\)</span> be subsets of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(A^c\)</span> denote the
+complement of some subset <span class="math notranslate nohighlight">\(A\)</span> of <span class="math notranslate nohighlight">\(X\)</span> w.r.t. <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>We have the following results:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((A^c)^c = A\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A \cap A^c = \EmptySet\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A \cup A^c = X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\setminus B = A \cap B^c\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A \subseteq B \iff B^c \subseteq A^c\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((A \cup B)^c = A^c \cap B^c\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((A \cap B)^c = A^c \cup B^c\)</span>.</p></li>
+</ul>
+</div>
+</div></div>
+<div class="section" id="ordered-pairs-and-n-tuples">
+<h2><span class="section-number">1.1.2. </span>Ordered Pairs and n-Tuples<a class="headerlink" href="#ordered-pairs-and-n-tuples" title="Permalink to this headline">¶</a></h2>
+<p>We will introduce the notion of <em>ordered pairs</em> informally
+following <span id="id1">[<a class="reference internal" href="../bib.html#id11">10</a>]</span>.</p>
+<div class="proof definition admonition" id="def-st-ordered-pair">
+<p class="admonition-title"><span class="caption-number">Definition 1.17 </span> (Ordered pair)</p>
+<div class="definition-content section" id="proof-content">
+<p>For any two objects a and b, the <em>ordered pair</em> (a, b) is a
+notation specifying the two objects a and b, in that order.</p>
+</div>
+</div><div class="proof property admonition" id="property-23">
+<p class="admonition-title"><span class="caption-number">Property 1.1 </span> (Equality of ordered pairs)</p>
+<div class="property-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+(a_1, a_2) = (b_1, b_2) \iff a_1 = b_1 \text{ and } a_2 = b_2.
+\]</div>
+</div>
+</div><p>A tuple <span id="id2">[<a class="reference internal" href="../bib.html#id13">12</a>]</span> is a finite ordered list of elements.
+An n-tuple is a sequence (ordered list) of <span class="math notranslate nohighlight">\(n\)</span> elements where
+<span class="math notranslate nohighlight">\(n\)</span> is a non-negative integer.</p>
+<ul class="simple">
+<li><p>A tuple may contain multiple instances of the same element.</p></li>
+<li><p>Tuple elements are ordered.</p></li>
+<li><p>A tuple has a finite number of elements.</p></li>
+</ul>
+<p>Following is an informal definition</p>
+<div class="proof definition admonition" id="def-st-n-tuple">
+<p class="admonition-title"><span class="caption-number">Definition 1.18 </span> (n-tuple)</p>
+<div class="definition-content section" id="proof-content">
+<p>For any <span class="math notranslate nohighlight">\(n\)</span> objects <span class="math notranslate nohighlight">\(a_1, a_2, \dots, a_n\)</span> where <span class="math notranslate nohighlight">\(n \in \Nat\)</span>, the
+<em>n-tuple</em> <span class="math notranslate nohighlight">\((a_1, a_2, \dots, a_n)\)</span> is a notation specifying the
+<span class="math notranslate nohighlight">\(n\)</span> objects in that order.</p>
+<p>The 0-tuple <span class="math notranslate nohighlight">\(()\)</span> is an tuple containing <span class="math notranslate nohighlight">\(0\)</span> elements.</p>
+</div>
+</div><div class="proof property admonition" id="property-25">
+<p class="admonition-title"><span class="caption-number">Property 1.2 </span> (Equality of n-tuples)</p>
+<div class="property-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+(a_1, a_2, \dots, a_n) = (b_1, b_2, \dots, b_n) \iff a_1 = b_1, a_2 = b_2, \dots, \text{ and } a_n = b_n.
+\]</div>
+</div>
+</div><p>In other words, <span class="math notranslate nohighlight">\((a_1,\dots, a_n) = (b_1,\dots,b_n)\)</span> if and only if
+<span class="math notranslate nohighlight">\(a_i = b_i \Forall i = 1,\dots,n\)</span>.</p>
+</div>
+<div class="section" id="cartesian-products">
+<h2><span class="section-number">1.1.3. </span>Cartesian Products<a class="headerlink" href="#cartesian-products" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we restrict our
+attention to finite Cartesian products.
+Cartesian product over infinite sets is
+discussed later.</p>
+<div class="proof definition admonition" id="def-st-binary-cartesian-product">
+<p class="admonition-title"><span class="caption-number">Definition 1.19 </span> (Binary Cartesian product)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>Cartesian product</em> of the two sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> denoted
+by <span class="math notranslate nohighlight">\(A \times B\)</span> is the set of all possible ordered pairs
+of elements where the first element is from <span class="math notranslate nohighlight">\(A\)</span> and the second
+is from <span class="math notranslate nohighlight">\(B\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    A \times B  \triangleq \{ (a, b) \ST a \in A \text{  and  } b \in B \}.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-st-finite-cartesian-product">
+<p class="admonition-title"><span class="caption-number">Definition 1.20 </span> (Finite Cartesian product)</p>
+<div class="definition-content section" id="proof-content">
+<p>Similarly, the Cartesian product of a finite family of
+sets <span class="math notranslate nohighlight">\((A_1, \dots, A_n)\)</span> is written as
+<span class="math notranslate nohighlight">\(A_1 \times \dots \times A_n\)</span> and its members are
+denoted as <span class="math notranslate nohighlight">\(n\)</span>-tuples, i.e.:</p>
+<div class="math notranslate nohighlight">
+\[
+    A_1 \times \dots \times  A_n = \{(a_1, \dots, a_n) \ST a_i \in A_i \Forall
+    i = 1,\dots,n\}.
+\]</div>
+<p>The sets <span class="math notranslate nohighlight">\(A_i\)</span> may be same of different.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-28">
+<p class="admonition-title"><span class="caption-number">Remark 1.4 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A_1 = A_2 = \dots = A_n = A\)</span>, then it is standard to write
+<span class="math notranslate nohighlight">\(A_1 \times \dots \times A_n\)</span> as <span class="math notranslate nohighlight">\(A^n\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="examples">
+<h2><span class="section-number">1.1.4. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="proof example admonition" id="example-29">
+<p class="admonition-title"><span class="caption-number">Example 1.2 </span> (<span class="math notranslate nohighlight">\(A^n\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A = \{ 0, +1, -1\}\)</span>.</p>
+<p>Then <span class="math notranslate nohighlight">\(A^2\)</span>  is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \{\\
+    &amp;(0,0), (0,+1), (0,-1),\\
+    &amp;(+1,0), (+1,+1), (+1,-1),\\
+    &amp;(-1,0), (-1,+1), (-1,-1)\\
+    \}.
+\end{split}\]</div>
+<p>And <span class="math notranslate nohighlight">\(A^3\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \{\\
+    &amp;(0,0,0), (0,0,+1), (0,0,-1),\\
+    &amp;(0,+1,0), (0,+1,+1), (0,+1,-1),\\
+    &amp;(0,-1,0), (0,-1,+1), (0,-1,-1),\\
+    &amp;(+1,0,0), (+1,0,+1), (+1,0,-1),\\
+    &amp;(+1,+1,0), (+1,+1,+1), (+1,+1,-1),\\
+    &amp;(+1,-1,0), (+1,-1,+1), (+1,-1,-1),\\
+    &amp;(-1,0,0), (-1,0,+1), (-1,0,-1),\\
+    &amp;(-1,+1,0), (-1,+1,+1), (-1,+1,-1),\\
+    &amp;(-1,-1,0), (-1,-1,+1), (-1,-1,-1)\\
+    &amp;\}.
+\end{split}\]</div>
+</div>
+</div></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./set_theory"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>Set Theory</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="relations.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.2. </span>Relations</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Shailesh Kumar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

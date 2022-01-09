@@ -1,0 +1,1505 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.3. Sequences and Series &#8212; Optimization for Sparse Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.4. The Extended Real Line" href="erl.html" />
+    <link rel="prev" title="2.2. Topology of Real Line" href="topology.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.3. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.4. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.5. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   5. Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/affine.html">
+     5.2. Affine Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     5.3. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     5.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/hyperplane.html">
+     5.5. Hyperplanes and Half spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/ball.html">
+     5.6. Euclidean Balls and Ellipsoids
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_ball.html">
+     5.7. Norm Balls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_cone.html">
+     5.8. Norm Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/polyhedron.html">
+     5.9. Polyhedra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     5.10. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convexity_ops.html">
+     5.11. Convexity Preserving Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/dual_cones.html">
+     5.12. Dual Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     5.13. Generalized Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_functions/intro.html">
+   6. Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/functions.html">
+     6.1. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/convex_functions.html">
+     6.2. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
+     6.3. Extensions for Convex Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradients/chapter.html">
+   7. Subgradients
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradients/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   8. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   9. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   10. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   11. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     11.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   12. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     12.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     12.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   13. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   14. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   15. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     15.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/basic_real_analysis/sequences.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fbasic_real_analysis/sequences.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monotone-sequences">
+   2.3.1. Monotone Sequences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-calculus-of-limits">
+   2.3.2. The calculus of limits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#infinite-series">
+   2.3.3. Infinite Series
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subsequences">
+   2.3.4. Subsequences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cauchy-sequence">
+   2.3.5. Cauchy Sequence
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="sequences-and-series">
+<h1><span class="section-number">2.3. </span>Sequences and Series<a class="headerlink" href="#sequences-and-series" title="Permalink to this headline">¶</a></h1>
+<p>This section collects results on sequences and series of real numbers.</p>
+<div class="proof definition admonition" id="def-bra-sequence">
+<p class="admonition-title"><span class="caption-number">Definition 2.28 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A <a class="reference internal" href="../set_theory/sequences.html#def-st-sequence">sequence</a> of real numbers is a
+function <span class="math notranslate nohighlight">\(f : \Nat \to \RR\)</span>.</p>
+</div>
+</div><p>A sequence can be thought of as an ordered (countable) list of real numbers.</p>
+<div class="proof definition admonition" id="def-bra-convergence">
+<p class="admonition-title"><span class="caption-number">Definition 2.29 </span> (Convergence)</p>
+<div class="definition-content section" id="proof-content">
+<p>A sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> of real numbers is said to <em>converge</em> to <span class="math notranslate nohighlight">\(x \in \RR\)</span>
+if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,
+there exists a natural number <span class="math notranslate nohighlight">\(n_0\)</span> (depending upon <span class="math notranslate nohighlight">\(\epsilon\)</span>) such that</p>
+<div class="math notranslate nohighlight">
+\[
+    | x_n - x | &lt; \epsilon \Forall n &gt; n_0.
+\]</div>
+<p>The real number <span class="math notranslate nohighlight">\(x\)</span> is called the <em>limit</em> of the sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span>,
+and we write <span class="math notranslate nohighlight">\(x_n \to x\)</span> or <span class="math notranslate nohighlight">\(x = \lim_{n \to \infty} x_n\)</span>.</p>
+</div>
+</div><p>In other words, a sequence of real numbers
+<span class="math notranslate nohighlight">\(\{ x_n \}\)</span> converges to some real number <span class="math notranslate nohighlight">\(x\)</span>
+if and only if for each <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, the terms <span class="math notranslate nohighlight">\(x_n\)</span> are eventually <span class="math notranslate nohighlight">\(\epsilon\)</span>-close to <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="proof example admonition" id="example-2">
+<p class="admonition-title"><span class="caption-number">Example 2.6 </span> (Sequence convergence)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span>, where <span class="math notranslate nohighlight">\(x_n = \frac{1}{\sqrt{n}}\)</span>.
+For a given <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, choose <span class="math notranslate nohighlight">\(n_0 &gt; \frac{1}{\epsilon^2}\)</span>.
+Then, for every <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\left |\frac{1}{n^2} - 0 \right | = \frac{1}{n^2} &lt; \epsilon.
+\]</div>
+<p>Thus, the sequence converges to 0.</p>
+</div>
+</div><div class="proof definition admonition" id="def-bra-divergence">
+<p class="admonition-title"><span class="caption-number">Definition 2.30 </span> (Divergence)</p>
+<div class="definition-content section" id="proof-content">
+<p>A sequence which doesn’t converge, is said to <em>diverge</em>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-bra-sequence-limit-uniqueness">
+<p class="admonition-title"><span class="caption-number">Theorem 2.3 </span> (Sequence Limit Uniqueness)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A sequence of real numbers can have utmost one limit.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If a sequence diverges, then there is nothing to prove.
+Otherwise, suppose a sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> converges to
+two limits <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.
+Thus, for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there
+exist <span class="math notranslate nohighlight">\(n_1, n_2 \in \Nat\)</span> such that
+<span class="math notranslate nohighlight">\(|x_n - x | &lt; \epsilon \Forall n &gt; n_1\)</span>  and
+<span class="math notranslate nohighlight">\(| x_n - y | &lt; \epsilon \Forall n &gt; n_2\)</span>.
+Now, choose <span class="math notranslate nohighlight">\(n_0 = \max (n_1, n_2)\)</span>.
+Then, by triangle inequality, for every <span class="math notranslate nohighlight">\(n &gt; n_0\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+    0 \leq | x  - y  | \leq | x - x_n | + | x_n - y |  &lt; \epsilon + \epsilon = 2\epsilon.
+\]</div>
+<p>Since this is true for all <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, hence <span class="math notranslate nohighlight">\(x = y\)</span>.
+Since <span class="math notranslate nohighlight">\(x,y\)</span> are arbitrarily close, they must be equal.</p>
+</div>
+<p>Recall that the notion of <span class="math notranslate nohighlight">\(\sup\)</span> and <span class="math notranslate nohighlight">\(\inf\)</span> was
+introduced in the <a class="reference internal" href="real_line.html#def-rl-bounds">Definition 2.5</a>.
+The same notation can be used for sequences also.</p>
+<div class="proof definition admonition" id="def-bra-sequence-bounds">
+<p class="admonition-title"><span class="caption-number">Definition 2.31 </span> (Upper and lower bounds )</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X = \{ x_n \}\)</span> be a sequence of <span class="math notranslate nohighlight">\(\RR\)</span>.</p>
+<ul class="simple">
+<li><p>An <em>upper bound</em> of <span class="math notranslate nohighlight">\(X\)</span> is any
+<span class="math notranslate nohighlight">\(u \in \RR\)</span> such that <span class="math notranslate nohighlight">\( x_n \leq u \Forall n \in \Nat\)</span>.</p></li>
+<li><p>A <em>lower bound</em> of <span class="math notranslate nohighlight">\(X\)</span> is any
+<span class="math notranslate nohighlight">\(l \in \RR\)</span> such that <span class="math notranslate nohighlight">\( x_n \geq l \Forall n \in \Nat\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> has an upper bound it is said to be <em>bounded from above</em>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> has a lower bound it is said to be <em>bounded from below</em>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> is both bounded from above and below, then <span class="math notranslate nohighlight">\(X\)</span> is said to
+be <em>bounded</em>.</p></li>
+<li><p>A real number is called a <em>least upper bound</em> or <em>supremum</em> of <span class="math notranslate nohighlight">\(X\)</span>
+if it is an upper bound of <span class="math notranslate nohighlight">\(X\)</span>, and it is less than or equal to
+every other upper bound of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>The least upper bound is denoted by <span class="math notranslate nohighlight">\(\sup(X)\)</span>.</p></li>
+<li><p>A real number is called a <em>greatest lower bound</em> or
+<em>infimum</em> of <span class="math notranslate nohighlight">\(X\)</span> if it is a lower bound of <span class="math notranslate nohighlight">\(X\)</span>,
+and it is greater than or equal to every other
+lower bound of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>The greatest lower bound is denoted by <span class="math notranslate nohighlight">\(\inf(X)\)</span>.</p></li>
+</ul>
+</div>
+</div><div class="proof remark admonition" id="remark-6">
+<p class="admonition-title"><span class="caption-number">Remark 2.6 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Due to the <a class="reference internal" href="real_line.html#axm-rl-completeness-axiom">completeness axiom</a>,
+if a sequence <span class="math notranslate nohighlight">\(\{x_n\}\)</span> has an upper bound, it has a least upper bound
+denoted by <span class="math notranslate nohighlight">\(\sup\{ x_n \}\)</span> and if it has a lower bound, it has a
+greatest lower bound denoted by  <span class="math notranslate nohighlight">\(\inf\{ x_n \}\)</span>.</p>
+</div>
+</div><p>The notion of upper boundedness and lower boundedness can be
+subsumed into a single definition.</p>
+<div class="proof definition admonition" id="def-bra-bounded-sequence">
+<p class="admonition-title"><span class="caption-number">Definition 2.32 </span> (Boundedness)</p>
+<div class="definition-content section" id="proof-content">
+<p>A sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is said to be <em>bounded</em>
+if there exists a number <span class="math notranslate nohighlight">\(M &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(| x_n | \leq M \Forall n \in \Nat\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-bra-convergent-bounded">
+<p class="admonition-title"><span class="caption-number">Theorem 2.4 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Every convergent sequence is bounded.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> converge to <span class="math notranslate nohighlight">\(x\)</span>.
+Choosing a particular value of <span class="math notranslate nohighlight">\(\epsilon = 1\)</span>, there
+exists <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that
+<span class="math notranslate nohighlight">\(| x_n - x | &lt; 1 \Forall n &gt; n_0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(x_n \in (x - 1, x + 1)\)</span>.
+This means that</p>
+<div class="math notranslate nohighlight">
+\[
+    | x_n | &lt; | x | + 1 \Forall n &gt; n_0.
+\]</div>
+<p>Now define <span class="math notranslate nohighlight">\(M = \max \{|x_1|, |x_2|, \dots, |x_{n_0}|,  | x | + 1 \}\)</span>.
+It follows that <span class="math notranslate nohighlight">\(|x_n | \leq M \Forall n \in \Nat\)</span> as desired.</p>
+</div>
+<div class="proof definition admonition" id="def-bra-unbounded-above-sequence">
+<p class="admonition-title"><span class="caption-number">Definition 2.33 </span> (Unbounded above )</p>
+<div class="definition-content section" id="proof-content">
+<p>A sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is said to be <em>unbounded above</em>
+if there exists no <span class="math notranslate nohighlight">\(u \in \RR\)</span> such that
+<span class="math notranslate nohighlight">\(x_n \leq u \Forall n \in \Nat\)</span>.</p>
+<p>In other words, for every <span class="math notranslate nohighlight">\(u \in \RR\)</span>, there exists an <span class="math notranslate nohighlight">\(x_n &gt; u\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-bra-unbounded-below-sequence">
+<p class="admonition-title"><span class="caption-number">Definition 2.34 </span> (Unbounded below )</p>
+<div class="definition-content section" id="proof-content">
+<p>A sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is said to be <em>unbounded below</em>
+if there exists no <span class="math notranslate nohighlight">\(l \in \RR\)</span> such that
+<span class="math notranslate nohighlight">\(x_n \geq l \Forall n \in \Nat\)</span>.</p>
+<p>In other words, for every <span class="math notranslate nohighlight">\(l \in \RR\)</span>, there exists an <span class="math notranslate nohighlight">\(x_n &lt; l\)</span>.</p>
+</div>
+</div><div class="section" id="monotone-sequences">
+<h2><span class="section-number">2.3.1. </span>Monotone Sequences<a class="headerlink" href="#monotone-sequences" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-bra-monotone-sequence">
+<p class="admonition-title"><span class="caption-number">Definition 2.35 </span> (Monotone sequences)</p>
+<div class="definition-content section" id="proof-content">
+<ul class="simple">
+<li><p>A sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is said to be <em>increasing</em>
+if <span class="math notranslate nohighlight">\(x_n \leq x_{n + 1}\)</span> for each <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>A sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is said to be <em>decreasing</em>
+if <span class="math notranslate nohighlight">\(x_n \geq x_{n + 1}\)</span> for each <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>A sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is said to be <em>monotone</em> if
+it is either increasing or decreasing.</p></li>
+<li><p>The notation <span class="math notranslate nohighlight">\(x_n \uparrow x\)</span> means <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is increasing
+and <span class="math notranslate nohighlight">\(x  = \sup \{ x_n \}\)</span>. It applies if <span class="math notranslate nohighlight">\(\{x_n \}\)</span> is bounded from above.</p></li>
+<li><p>The notation <span class="math notranslate nohighlight">\(x_n \downarrow x\)</span> means <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is decreasing
+and <span class="math notranslate nohighlight">\(x  = \inf \{ x_n \}\)</span>. It applies if <span class="math notranslate nohighlight">\(\{x_n \}\)</span> is bounded from below.</p></li>
+<li><p>If a sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> satisfies <span class="math notranslate nohighlight">\(x_n = c\)</span>
+for all <span class="math notranslate nohighlight">\(n\)</span>, then it is called a <em>constant</em> sequence.</p></li>
+</ul>
+</div>
+</div><p>An increasing sequence is bounded from below. Its greatest
+lower bound is <span class="math notranslate nohighlight">\(x_1\)</span>.</p>
+<p>A decreasing sequence is bounded from above. Its least
+upper bound is <span class="math notranslate nohighlight">\(x_1\)</span>.</p>
+<div class="proof remark admonition" id="remark-12">
+<p class="admonition-title"><span class="caption-number">Remark 2.7 </span> (Unbounded increasing sequences)</p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{x_n\}\)</span> be an increasing and unbounded sequence.
+Then for every <span class="math notranslate nohighlight">\(M &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that
+for every <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>, <span class="math notranslate nohighlight">\(x_n &gt; M\)</span>.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-13">
+<p class="admonition-title"><span class="caption-number">Remark 2.8 </span> (Unbounded decreasing sequences)</p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{x_n\}\)</span> be an decreasing and unbounded sequence.
+Then for every <span class="math notranslate nohighlight">\(M &lt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that
+for every <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>, <span class="math notranslate nohighlight">\(x_n &lt; M\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-bra-sequence-monotone-bounded-convergence">
+<p class="admonition-title"><span class="caption-number">Theorem 2.5 </span> (Convergence of bounded monotone sequences)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every monotone bounded sequence of real numbers is convergent.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> be increasing and bounded sequence. From
+<a class="reference internal" href="real_line.html#axm-rl-completeness-axiom">completeness axiom</a>
+it follows that there exists
+<span class="math notranslate nohighlight">\(x = \sup \{ x_n \}\)</span>.
+We claim that <span class="math notranslate nohighlight">\(x\)</span> itself is the limit of <span class="math notranslate nohighlight">\(\{ x_n \}\)</span>.
+From
+<a class="reference internal" href="real_line.html#res-rl-supremum-epsilon">Proposition 2.6</a> we recall that
+for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,
+there exists a number <span class="math notranslate nohighlight">\(x_{n_0} \in \{ x_n \}\)</span>, such that</p>
+<div class="math notranslate nohighlight">
+\[
+    x - \epsilon &lt; x_{n_0} \leq x.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is increasing, hence</p>
+<div class="math notranslate nohighlight">
+\[
+    x - \epsilon &lt; x_{n} \leq x \quad \Forall n \geq n_0.
+\]</div>
+<p>This means that <span class="math notranslate nohighlight">\(| x - x_n | = x - x_n &lt; \epsilon \Forall n \geq n_0\)</span>. Thus <span class="math notranslate nohighlight">\(x\)</span> is
+indeed the limit. We follow similar steps to prove for decreasing sequence.</p>
+</div>
+<div class="proof theorem admonition" id="res-limit-constant-sequence">
+<p class="admonition-title"><span class="caption-number">Theorem 2.6 </span> (Convergence of constant sequences)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let  <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> be a constant sequence with <span class="math notranslate nohighlight">\(x_n = c\)</span>. Then <span class="math notranslate nohighlight">\(\lim \{ x_n \} = c\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For all <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, <span class="math notranslate nohighlight">\(| x_n - c | = 0 &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(n \in \Nat\)</span>.</p>
+</div>
+</div>
+<div class="section" id="the-calculus-of-limits">
+<h2><span class="section-number">2.3.2. </span>The calculus of limits<a class="headerlink" href="#the-calculus-of-limits" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> and <span class="math notranslate nohighlight">\(\{ y_n \}\)</span> be convergent sequences of <span class="math notranslate nohighlight">\(\RR\)</span>.
+Our concern here is to understand what happens to the limits if
+the sequences are combined.</p>
+<p>Let <span class="math notranslate nohighlight">\(\lim \{x_n\} = x\)</span> and <span class="math notranslate nohighlight">\(\lim \{y_n\}  = y\)</span>. Then:</p>
+<div class="proof theorem admonition" id="res-bra-seq-calculus-scaling">
+<p class="admonition-title"><span class="caption-number">Theorem 2.7 </span> (Scaling a sequence)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\lim \{\alpha x_n \} = \alpha x \Forall \alpha \in \RR.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(\alpha = 0\)</span>, then we have a constant sequence and the result is trivial.
+So assume that <span class="math notranslate nohighlight">\(\alpha \neq 0\)</span>. Then:</p>
+<div class="math notranslate nohighlight">
+\[
+    |\alpha x_n - \alpha x | = | \alpha |  | x_n - x |.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> and choose <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that <span class="math notranslate nohighlight">\(| x - x_n | &lt; \frac{\epsilon}{ | \alpha | }\)</span>
+for all <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+    |\alpha x_n - \alpha x | = | \alpha |  | x_n - x | &lt; | \alpha | \frac{\epsilon}{ | \alpha | } = \epsilon \Forall n &gt; n_0.
+\]</div>
+</div>
+<div class="proof corollary admonition" id="res-bra-seq-calculus-negation">
+<p class="admonition-title"><span class="caption-number">Corollary 2.4 </span> (Negating a sequence)</p>
+<div class="corollary-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\lim \{-x_n \} = -x.
+\]</div>
+</div>
+</div><p>We get this result by choosing <span class="math notranslate nohighlight">\(\alpha = -1\)</span>.</p>
+<div class="proof theorem admonition" id="res-bra-seq-calculus-addition">
+<p class="admonition-title"><span class="caption-number">Theorem 2.8 </span> (Addition of sequences)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\lim \{x_n  + y_n\} =  x + y.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From triangle inequality we get:</p>
+<div class="math notranslate nohighlight">
+\[
+    | x_n + y_n - (x + y) | \leq | x_n - x | + | y_n - y |.
+\]</div>
+<p>For any <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, choose <span class="math notranslate nohighlight">\(n_1\)</span> such that <span class="math notranslate nohighlight">\(| x_n - x | &lt; \frac{\epsilon}{2} \Forall n &gt; n_1\)</span>.
+Similarly, choose <span class="math notranslate nohighlight">\(n_2\)</span> such that <span class="math notranslate nohighlight">\(| y_n - y | &lt; \frac{\epsilon}{2} \Forall n &gt; n_2\)</span>.
+Now choose <span class="math notranslate nohighlight">\(n_0 = \max (n_1, n_2)\)</span>. Then:</p>
+<div class="math notranslate nohighlight">
+\[
+    | x_n + y_n - (x + y) |  \leq | x_n - x | + | y_n - y | &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+    \Forall n &gt; n_0.
+\]</div>
+</div>
+<div class="proof corollary admonition" id="res-bra-seq-calculus-subtraction">
+<p class="admonition-title"><span class="caption-number">Corollary 2.5 </span> (Subtraction of sequences)</p>
+<div class="corollary-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\lim \{x_n  - y_n\} =  x - y.
+\]</div>
+</div>
+</div><p>Negate <span class="math notranslate nohighlight">\(\{ y_n \}\)</span> and add to <span class="math notranslate nohighlight">\(\{x_n \}\)</span>.</p>
+<div class="proof theorem admonition" id="res-bra-seq-calculus-multiplication">
+<p class="admonition-title"><span class="caption-number">Theorem 2.9 </span> (Multiplication of sequences)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\lim \{x_n  y_n\} =  x y.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. First let us assume that <span class="math notranslate nohighlight">\(x \neq 0\)</span>.
+We note that:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    | x_n y_n - x y | &amp;= | x_n y_n - x y_n + x y_n - x y | \\
+    &amp;\leq | x_n y_n - x y_n | + | x y_n - x y |\\
+    &amp;= | y_n | |x_n - x |  + | x | | y_n - y |.
+\end{split}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> be arbitrary. Choose <span class="math notranslate nohighlight">\(n_1 &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    n &gt; n_1 \implies  |y_n - y | &lt; \frac{1}{| x  |} \frac{\epsilon}{2}.
+\]</div>
+<p>Since <a class="reference internal" href="#res-bra-convergent-bounded">every convergent sequence is bounded</a>,
+let <span class="math notranslate nohighlight">\(M &gt; 0\)</span> be a bound of <span class="math notranslate nohighlight">\(\{y_n \}\)</span> (i.e. <span class="math notranslate nohighlight">\(-M \leq y_n \leq M \)</span>). Choose <span class="math notranslate nohighlight">\(n_2 &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    n &gt; n_2 \implies  |x_n - x | &lt; \frac{1}{M} \frac{\epsilon}{2}.
+\]</div>
+<p>Further choose <span class="math notranslate nohighlight">\(n_0 = \max(n_1, n_2)\)</span>. Then, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    | x_n y_n - x y | \leq | y_n | |x_n - x |  + | x | | y_n - y |
+    &lt; | y_n | \frac{1}{M} \frac{\epsilon}{2}  + | x | \frac{1}{| x  |} \frac{\epsilon}{2}
+    \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\epsilon\)</span> is arbitrary, hence we have shown that <span class="math notranslate nohighlight">\(\lim \{ x_n y_n \} = x y \)</span>.</p>
+<p>Now consider the case where <span class="math notranslate nohighlight">\(x = 0\)</span>. We need to show that  <span class="math notranslate nohighlight">\(\lim \{ x_n y_n \} = 0 \)</span>.
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> and choose <span class="math notranslate nohighlight">\(n_0\)</span> such that <span class="math notranslate nohighlight">\( |x_n - 0 | = | x_n | &lt; \frac{\epsilon}{M}\)</span> for all <span class="math notranslate nohighlight">\(n  &gt; n_0\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+    | x_n y_n - 0 | \leq |x_n | | y_n| \leq |x_n | M &lt;\frac{\epsilon}{M}  M  = \epsilon.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-bra-seq-calculus-division">
+<p class="admonition-title"><span class="caption-number">Theorem 2.10 </span> (Division of sequences)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\lim \{x_n / y_n\} =  x / y \text{ provided } y \neq 0.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If we can prove that <span class="math notranslate nohighlight">\(y_n \to y\)</span> implies that <span class="math notranslate nohighlight">\(\frac{1}{y_n} \to \frac{1}{y}\)</span>
+whenever <span class="math notranslate nohighlight">\(y \neq 0\)</span>, then the division of sequences
+reduces to multiplication of sequences <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> and <span class="math notranslate nohighlight">\(\{ \frac{1}{y_n} \}\)</span>.
+But</p>
+<div class="math notranslate nohighlight">
+\[
+    \left | \frac{1}{y_n} - \frac{1}{y} \right | =  \frac{| y - y_n | }{ | y | |y_n |}.
+\]</div>
+<p>Choose <span class="math notranslate nohighlight">\(\epsilon_0 = | y | / 2\)</span>. Then there exists <span class="math notranslate nohighlight">\(n_1 \in \Nat\)</span> such that
+<span class="math notranslate nohighlight">\(| y - y_n | &lt; \epsilon_0 = | y | / 2\)</span> whenever <span class="math notranslate nohighlight">\(n &gt; n_1\)</span>. This gives us,
+<span class="math notranslate nohighlight">\(| y_n | &gt; | y | / 2\)</span> whenever <span class="math notranslate nohighlight">\(n &gt; n_1\)</span> (i.e. <span class="math notranslate nohighlight">\(y_n\)</span> is so close to <span class="math notranslate nohighlight">\(y\)</span> that
+its magnitude is much larger than <span class="math notranslate nohighlight">\(| y | / 2\)</span>). Equivalently, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{1}{ | y_n | } &lt; \frac{2}{| y |} \quad \forall n &gt; n_1.
+\]</div>
+<p>Next, for arbitrary <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, we choose <span class="math notranslate nohighlight">\(n_2\)</span> such that for all <span class="math notranslate nohighlight">\(n &gt; n_2\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+    | y_n - y | &lt; \frac{\epsilon | y |^2}{2}.
+\]</div>
+<p>Finally, pick <span class="math notranslate nohighlight">\(n_0 = \max(n_1, n_2)\)</span>. Then <span class="math notranslate nohighlight">\(n &gt; n_0\)</span> implies</p>
+<div class="math notranslate nohighlight">
+\[
+    \left  | \frac{1}{y_n} - \frac{1}{y} \right |  = \frac{| y - y_n |}{ | y | |y_n |} &lt;
+    \frac{\epsilon | y |^2}{2} \frac{1}{| y |} \frac{2}{| y |} = \epsilon.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(y_n \to y\)</span> implies that <span class="math notranslate nohighlight">\(\frac{1}{y_n} \to \frac{1}{y}\)</span>
+whenever <span class="math notranslate nohighlight">\(y \neq 0\)</span>. Now division reduces to multiplication and we are done.</p>
+</div>
+<p>Although some elements of <span class="math notranslate nohighlight">\(\{ y_n\}\)</span> may be zero, but eventually
+<span class="math notranslate nohighlight">\(y_n\)</span> becomes arbitrarily close to <span class="math notranslate nohighlight">\(y\)</span> and since <span class="math notranslate nohighlight">\(y \neq 0\)</span>, hence,</p>
+<div class="math notranslate nohighlight">
+\[
+0 &lt; \frac{|y|}{2} &lt; | y_n | &lt; | y|  \Forall n &gt; \text{ some } m.
+\]</div>
+<p>In other words, there comes a point <span class="math notranslate nohighlight">\(m\)</span> in the sequence <span class="math notranslate nohighlight">\(Y\)</span> so that all elements
+in <span class="math notranslate nohighlight">\(Y\)</span> after <span class="math notranslate nohighlight">\(y_m\)</span> are non-zero with magnitude larger than <span class="math notranslate nohighlight">\(|y|/2\)</span>.
+We can practically throw away the first <span class="math notranslate nohighlight">\(m\)</span> terms
+from both the sequences <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> and focus on the convergence of remaining
+sequence.</p>
+<p>Next, we examine some of the order properties of the limits of sequences.</p>
+<div class="proof theorem admonition" id="res-bra-order-limit">
+<p class="admonition-title"><span class="caption-number">Theorem 2.11 </span> (Order limit theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Assume <span class="math notranslate nohighlight">\(\lim x_n = x\)</span> and <span class="math notranslate nohighlight">\(\lim y_n = y\)</span>.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(x_n \geq 0\)</span> for all <span class="math notranslate nohighlight">\(n \in \Nat\)</span>, then <span class="math notranslate nohighlight">\(x \geq 0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x_n \leq y_n\)</span> for all <span class="math notranslate nohighlight">\(n \in \Nat\)</span>, then <span class="math notranslate nohighlight">\(x \leq y\)</span>.</p></li>
+<li><p>If there exists <span class="math notranslate nohighlight">\(\alpha \in \RR\)</span> for which
+<span class="math notranslate nohighlight">\(\alpha \leq y_n\)</span> for all <span class="math notranslate nohighlight">\(n \in \Nat\)</span>, then
+<span class="math notranslate nohighlight">\(\alpha \leq y\)</span>. Similarly if <span class="math notranslate nohighlight">\(x_n \leq \alpha\)</span>
+for all <span class="math notranslate nohighlight">\(n \in \Nat\)</span>, then <span class="math notranslate nohighlight">\(x \leq \alpha\)</span>.</p></li>
+</ol>
+</div>
+</div><p>In words,</p>
+<ol class="simple">
+<li><p>If a sequence is non-negative, then its limit is non-negative.</p></li>
+<li><p>If one sequence is less than equal to another sequence for every term
+in the sequence, then its limit is also less than equal to the other sequence.</p></li>
+<li><p>A lower bound of a sequence is less than equal to its limit.
+An upper bound of a sequence is greater than equal to its limit.</p></li>
+</ol>
+<div class="proof admonition" id="proof">
+<p>Proof. (1) By contradiction, assume that <span class="math notranslate nohighlight">\(x &lt; 0\)</span>.  Then <span class="math notranslate nohighlight">\(x + | x | = 0\)</span>.
+Now consider <span class="math notranslate nohighlight">\(\epsilon = | x |\)</span>. Since <span class="math notranslate nohighlight">\(\{x_n \}\)</span>
+is convergent, there exists <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that <span class="math notranslate nohighlight">\( | x_n - x | &lt; \epsilon = | x |\)</span>. Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    | x_n - x | &lt; | x | \implies x - | x | &lt; x_n &lt; x + | x | \implies x_n &lt; 0.
+\]</div>
+<p>This is a contradiction. Hence <span class="math notranslate nohighlight">\(x \geq 0\)</span>.</p>
+<p>(2) By <a class="reference internal" href="#res-bra-seq-calculus-subtraction">Corollary 2.5</a> we have,
+<span class="math notranslate nohighlight">\(\lim (y_n - x_n) = y - x\)</span>. Since <span class="math notranslate nohighlight">\(y_n \geq x_n\)</span>, hence <span class="math notranslate nohighlight">\(y_n - x_n \geq 0\)</span>. From
+(1), we get <span class="math notranslate nohighlight">\(y - x \geq 0\)</span>. This implies <span class="math notranslate nohighlight">\(y \geq x\)</span>.</p>
+<p>(3) Take <span class="math notranslate nohighlight">\(x_n = \alpha\)</span>. Then <span class="math notranslate nohighlight">\(y_n \geq \alpha = x_n \implies y \geq \alpha\)</span> (using (2)).</p>
+</div>
+<div class="proof corollary admonition" id="res-bra-order-limit-2">
+<p class="admonition-title"><span class="caption-number">Corollary 2.6 </span> (Order limit theorem extension)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Assume <span class="math notranslate nohighlight">\(\lim x_n = x\)</span> and <span class="math notranslate nohighlight">\(\lim y_n = y\)</span>.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(x_n \geq 0\)</span> for all <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>, then <span class="math notranslate nohighlight">\(x \geq 0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x_n \leq y_n\)</span> for all <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>, then <span class="math notranslate nohighlight">\(x \leq y\)</span>.</p></li>
+<li><p>If there exists <span class="math notranslate nohighlight">\(\alpha \in \RR\)</span> for which
+<span class="math notranslate nohighlight">\(\alpha \leq y_n\)</span> for all <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>, then
+<span class="math notranslate nohighlight">\(\alpha \leq y\)</span>. Similarly if <span class="math notranslate nohighlight">\(x_n \leq \alpha\)</span>
+for all <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>, then <span class="math notranslate nohighlight">\(x \leq \alpha\)</span>.</p></li>
+</ol>
+</div>
+</div><p>We throw away the first <span class="math notranslate nohighlight">\(n_0\)</span> terms from each sequence and
+apply the theorem on the remaining part(s).</p>
+<div class="proof example admonition" id="ex-bra-order-limit-strict-inequality">
+<p class="admonition-title"><span class="caption-number">Example 2.7 </span> (Limits don’t preserve strict inequality)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider <span class="math notranslate nohighlight">\(x_n = \frac{1}{n}\)</span> and <span class="math notranslate nohighlight">\(y_n = \frac{1}{n+1}\)</span>.
+<span class="math notranslate nohighlight">\(\lim x_n = 0\)</span>. <span class="math notranslate nohighlight">\(\lim y_n = 0\)</span>.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(x_n &gt; y_n\)</span> doesn’t imply <span class="math notranslate nohighlight">\(\lim x_n &gt; \lim y_n\)</span>.
+We only have <span class="math notranslate nohighlight">\(x_n &gt; y_n \implies x_n \geq y_n \implies \lim x_n \geq \lim y_n\)</span>.</p>
+<p>Similarly,  <span class="math notranslate nohighlight">\(x_n &gt; 0\)</span> implies that <span class="math notranslate nohighlight">\(\lim x_n \geq 0\)</span>.
+Or <span class="math notranslate nohighlight">\(x_n &lt; r\)</span> implies that <span class="math notranslate nohighlight">\(\lim x_n \leq r\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-bra-sequence-squeeze">
+<p class="admonition-title"><span class="caption-number">Theorem 2.12 </span> (Squeeze theorem for sequences)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(x_n \leq y_n \leq z_n\)</span> for all <span class="math notranslate nohighlight">\(n \in \Nat\)</span> and
+if <span class="math notranslate nohighlight">\(\lim x_n = \lim z_n = l\)</span>, then
+<span class="math notranslate nohighlight">\(\lim y_n = l\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\lim y_n = y\)</span>. Using <a class="reference internal" href="#res-bra-order-limit">order limit theorem</a>,
+<span class="math notranslate nohighlight">\(x_n \leq y_n\)</span> gives us <span class="math notranslate nohighlight">\(l \leq y\)</span> and <span class="math notranslate nohighlight">\(y_n \leq z_n\)</span> gives us <span class="math notranslate nohighlight">\(y \leq l\)</span>. Thus,
+<span class="math notranslate nohighlight">\(l \leq y \leq l \implies y = l\)</span>.</p>
+</div>
+<div class="proof corollary admonition" id="res-bra-sequence-squeeze-2">
+<p class="admonition-title"><span class="caption-number">Corollary 2.7 </span> (Squeeze theorem for sequences extension)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\lim x_n = \lim z_n = l\)</span>. If there exists <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that
+for all <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>, <span class="math notranslate nohighlight">\(x_n \leq y_n \leq z_n\)</span>,
+then <span class="math notranslate nohighlight">\(\lim y_n = l\)</span>.</p>
+</div>
+</div><p>Drop the first <span class="math notranslate nohighlight">\(n_0\)</span> terms from all the three sequences and then apply the theorem
+on remaining sequences.</p>
+<div class="proof theorem admonition" id="res-bra-sequence-convergence-absolute">
+<p class="admonition-title"><span class="caption-number">Theorem 2.13 </span> (Convergence of absolute sequence)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(x_n \to x\)</span>, then <span class="math notranslate nohighlight">\(| x_n | \to x\)</span>. But the converse is not true.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(x_n \to x\)</span>, for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that
+<span class="math notranslate nohighlight">\(n &gt; 0\)</span> implies <span class="math notranslate nohighlight">\( | x_n  - x | &lt; \epsilon\)</span>. By triangle inequality</p>
+<div class="math notranslate nohighlight">
+\[
+    | | x_n | - | x | | \leq | x_n - x | &lt; \epsilon.
+\]</div>
+<p>This completes the proof.</p>
+<p>Now consider the sequence</p>
+<div class="math notranslate nohighlight">
+\[
+    \{ 1, -1, 1, -1, 1, -1, \dots \}.
+\]</div>
+<p>Although in absolute value it converges to <span class="math notranslate nohighlight">\(1\)</span>, the sequence itself doesn’t converge.
+Thus, the converse is not true.</p>
+</div>
+</div>
+<div class="section" id="infinite-series">
+<h2><span class="section-number">2.3.3. </span>Infinite Series<a class="headerlink" href="#infinite-series" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-bra-infinite-series">
+<p class="admonition-title"><span class="caption-number">Definition 2.36 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> be a sequence. An <em>infinite series</em> is a formal expression of the form</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{n  = 1}^{\infty} x_n = x_1 + x_2 + x_3 + x_4 + \dots.
+\]</div>
+<p>The corresponding <em>sequence of partial sums</em> <span class="math notranslate nohighlight">\(\{ s_m\}\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+    s_m = x_1 + \dots + x_m.
+\]</div>
+<p>We say that the series <span class="math notranslate nohighlight">\(\sum_{n  = 1}^{\infty} x_n\)</span> converges to some <span class="math notranslate nohighlight">\(s \in \RR\)</span>
+if the sequence
+<span class="math notranslate nohighlight">\(\{ s_m \}\)</span> converges to <span class="math notranslate nohighlight">\(s\)</span>. In this case we write</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{n  = 1}^{\infty} x_n = s.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="example-29">
+<p class="admonition-title"><span class="caption-number">Example 2.8 </span> (Convergent series)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{n  = 1}^{\infty} \frac{1}{n^2}.
+\]</div>
+<p>Looking at the partial sums, we observe:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    s_m &amp;= 1 + \frac{1}{4} + \frac{1}{9} \dots + \frac{1}{m^2}\\
+    &amp; &lt; 1 + \frac{1}{2 \cdot 1} + \frac{1}{3 \cdot 2} + \dots \frac{1}{m \cdot (m - 1)}\\
+    &amp; =  1 + \left (1  - \frac{1}{2} \right) + \left (\frac{1}{2}  - \frac{1}{3} \right)
+    + \dots + \left (\frac{1}{m - 1}  - \frac{1}{m} \right) \\
+    &amp; = 1 + 1  - \frac{1}{m} \\
+    &amp;&lt; 2.
+\end{split}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(2\)</span> is an upper bound of the sequence of partial sums. Hence, by
+<a class="reference internal" href="#res-bra-sequence-monotone-bounded-convergence">monotone convergence theorem</a>,
+the series converges to some (unknown) limit less than 2.</p>
+</div>
+</div><div class="proof example admonition" id="example-30">
+<p class="admonition-title"><span class="caption-number">Example 2.9 </span> (Harmonic series)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{n  = 1}^{\infty} \frac{1}{n}.
+\]</div>
+<p>We note that</p>
+<div class="math notranslate nohighlight">
+\[
+    s_4 = 1 + \frac{1}{2} + \left (\frac{1}{3} + \frac{1}{4} \right )
+    &gt; 1 + \frac{1}{2}  + \left (\frac{1}{4} + \frac{1}{4} \right ) = 2.
+\]</div>
+<p>Similarly, we find that <span class="math notranslate nohighlight">\(s_8 &gt; 2\frac{1}{2}\)</span>.
+Further, we note that:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    s_{2^k} &amp;= 1 + \frac{1}{2} + \left (\frac{1}{3} + \frac{1}{4} \right )  +
+    \left (\frac{1}{5} +  \dots + \frac{1}{8} \right ) + \dots +
+    \left (\frac{1}{2^{k - 1} + 1} + \dots + \frac{1}{2^k} \right )  \\
+    &amp;&gt; 1 + \frac{1}{2} + \left (\frac{1}{4} + \frac{1}{4} \right )  +
+    \left (\frac{1}{8} +  \dots + \frac{1}{8} \right ) + \dots +
+    \left (\frac{1}{2^k} + \dots + \frac{1}{2^k} \right )  \\
+    &amp;= 1 + \frac{1}{2} + 2 \frac{1}{4} + 4 \frac{1}{8} + \dots + 2^{k - 1} \frac{1}{2^k} \\
+    &amp;= 1 + \frac{1}{2} + \frac{1}{2} + \frac{1}{2} + \dots + \frac{1}{2}\\
+    &amp;= 1 + k \frac{1}{2}.
+\end{split}\]</div>
+<p>Thus, the harmonic series is unbounded.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-bra-cauchy-condensation-test">
+<p class="admonition-title"><span class="caption-number">Theorem 2.14 </span> (Cauchy condensation test)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is decreasing and satisfies <span class="math notranslate nohighlight">\(x_n \geq 0\)</span> for all <span class="math notranslate nohighlight">\(n \in \Nat\)</span>.
+Then, the series <span class="math notranslate nohighlight">\(\sum_{n  = 1}^{\infty} x_n\)</span> converges if and only if the
+series</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{n  = 0}^{\infty} 2^n x_{2^n} = x_1 + 2 x_2 + 4 x_4 + 8 x_8 + 16 x_{16} + \dots
+\]</div>
+<p>converges.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(y_n = 2^{n-1} x_{2^{n-1}}\)</span>. Then, the second series is <span class="math notranslate nohighlight">\(\sum_{n  = 1}^{\infty} y_n\)</span>.
+Let the partial sums of <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> be <span class="math notranslate nohighlight">\(s_m\)</span> and the partial sums of <span class="math notranslate nohighlight">\(\{ y_n\}\)</span> be
+<span class="math notranslate nohighlight">\(t_k\)</span>.</p>
+<p>First, assume that  <span class="math notranslate nohighlight">\(\sum_{n  = 1}^{\infty} y_n\)</span> converges. Thus, the
+sequence <span class="math notranslate nohighlight">\(\{ t_k \}\)</span> converges.
+Since <a class="reference internal" href="#res-bra-convergent-bounded">every convergent sequence is bounded</a>,
+the sequence <span class="math notranslate nohighlight">\(\{ t_k \}\)</span> is bounded. Thus, there exists <span class="math notranslate nohighlight">\(M &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(t_k \leq M\)</span> for all <span class="math notranslate nohighlight">\(k \in \Nat\)</span>. Since <span class="math notranslate nohighlight">\(x_n \geq 0\)</span>, the partial sums <span class="math notranslate nohighlight">\(s_m\)</span>
+are increasing. Thus, if we show that <span class="math notranslate nohighlight">\( \{ s_m \}\)</span> is bounded, then by
+<a class="reference internal" href="#res-bra-sequence-monotone-bounded-convergence">monotone convergence theorem</a>,
+we would have shown that <span class="math notranslate nohighlight">\(\{s_m\}\)</span> converges, hence the series
+<span class="math notranslate nohighlight">\(\sum_{n  = 1}^{\infty} x_n\)</span> converges.</p>
+<p>Let us fix <span class="math notranslate nohighlight">\(m\)</span> and choose <span class="math notranslate nohighlight">\(k\)</span> to be large enough so that <span class="math notranslate nohighlight">\(m \leq 2^{k + 1} - 1\)</span>.
+Then <span class="math notranslate nohighlight">\(s_m \leq s_{2^{k + 1} - 1}\)</span>. Now,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    s_{2^{k + 1} - 1} &amp;= x_1 + (x_2 + x_3) + (x_4 + \dots x_7) + \dots
+    + \dots + (x_{2^k} + \dots + x_{2^{k + 1} - 1})\\
+    &amp;\leq x_1 + (x_2 + x_2) + (x_4 + x_4 + x_4 + x_4) + \dots + (x_{2^k} + \dots + x_{2^k})\\
+    &amp;= x_1 + 2 x_2 + \dots + 2^k x_{2^k}\\
+    &amp;= y_1 + y_2 + \dots + y_k \\
+    &amp;= t_k.
+\end{split}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(s_m \leq t_k \leq M\)</span>. <span class="math notranslate nohighlight">\(\{s_m \}\)</span> is bounded, hence convergent.</p>
+<p>We now show that if <span class="math notranslate nohighlight">\(\sum_{n  = 1}^{\infty} y_n\)</span> diverges, then
+<span class="math notranslate nohighlight">\(\sum_{n  = 1}^{\infty} x_n\)</span> diverges too.</p>
+<p>Consider the sum</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    s_{2^k} &amp;= x_1 + x_2 + (x_3 + x_4) + (x_5 + \dots + x_8) + \dots  +
+    (x_{2^{k -1 } + 1} + \dots x^{2^k})\\
+    &amp;\geq x_1 + x_2 +  (x_4 + x_4) + (x_8 + \dots + x_8) + \dots  +
+    (x_{2^k} + \dots x_{2^k})\\
+    &amp;= x_1 + x_2 + 2 x_4 + 4 x_8 + \dots 2^{k - 1} x_{2^k}\\
+    &amp;= \frac{1}{2} x_1 + \frac{1}{2} \left (x_1 + 2 x_2 + 4 x_4 + 8 x_8 + \dots + 2^k x^{2^k} \right )\\
+    &amp;= \frac{1}{2} x_1 + t_k \geq t_k.
+\end{split}\]</div>
+<p>Now, since <span class="math notranslate nohighlight">\(\{ t_k \}\)</span> diverges, hence <span class="math notranslate nohighlight">\(\{ s_{2^k} \}\)</span> too diverges. Thus, the series diverges.</p>
+</div>
+<div class="proof definition admonition" id="def-bra-absolutely-summable-series">
+<p class="admonition-title"><span class="caption-number">Definition 2.37 </span> (Absolutely summable)</p>
+<div class="definition-content section" id="proof-content">
+<p>A series <span class="math notranslate nohighlight">\(\sum x_n\)</span> is called <em>absolutely summable</em> if
+<span class="math notranslate nohighlight">\(\sum |x_n|\)</span> converges.</p>
+<p>A sequence <span class="math notranslate nohighlight">\(\{x_n \}\)</span> is called <em>absolutely summable</em> if
+<span class="math notranslate nohighlight">\(\sum |x_n|\)</span> converges.</p>
+</div>
+</div></div>
+<div class="section" id="subsequences">
+<h2><span class="section-number">2.3.4. </span>Subsequences<a class="headerlink" href="#subsequences" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-subsequence-convergence">
+<p class="admonition-title"><span class="caption-number">Theorem 2.15 </span> (Subsequence convergence)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Subsequences of a convergent sequence converge to the same limit
+as the original sequence.
+If <span class="math notranslate nohighlight">\(\lim_{n \to \infty} x_n = x\)</span>, then <span class="math notranslate nohighlight">\(\lim_{n \to \infty} y_n = x\)</span> for every
+<a class="reference internal" href="../set_theory/sequences.html#def-st-sub-sequence">subsequence</a> <span class="math notranslate nohighlight">\(\{ y_n \}\)</span> of <span class="math notranslate nohighlight">\(\{ x_n \}\)</span>.</p>
+<p>Conversely, if two different subsequences of <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> converge to different limits,
+then the sequence  <span class="math notranslate nohighlight">\(\{ x_n \}\)</span>  does not converge.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\lim_{n \to \infty} x_n = x\)</span>, for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that
+<span class="math notranslate nohighlight">\(| x - x_n | &lt; \epsilon \Forall n &gt; n_0\)</span>.
+Now, if <span class="math notranslate nohighlight">\(\{ y_n \}\)</span> is a subsequence, then there exists a strictly increasing sequence
+<span class="math notranslate nohighlight">\(\{ k_n \}\)</span> of natural numbers (i.e. <span class="math notranslate nohighlight">\(1 \leq k_1 &lt; k_2  &lt; k_3 &lt; \ldots)\)</span>
+such that <span class="math notranslate nohighlight">\(y_n = x_{k_n}\)</span> holds for each <span class="math notranslate nohighlight">\(n\)</span>. Clearly, there exists a <span class="math notranslate nohighlight">\(k_0 &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(k_n \geq n_0 \Forall n &gt; k_0\)</span>. Then,
+<span class="math notranslate nohighlight">\(| x - y_n | &lt; \epsilon \Forall n &gt; k_0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\{ y_n \}\)</span> converges to <span class="math notranslate nohighlight">\(x\)</span> too.</p>
+</div>
+<div class="proof theorem admonition" id="res-bolzano-weierstrass-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 2.16 </span> (Bolzano Weierstrass theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every bounded sequence contains a convergent subsequence.</p>
+</div>
+</div><p>The proof of this theorem follows a constructive approach
+(i.e., we will construct a subsequence and show that it is convergent).
+We construct a sequence of nested closed intervals with increasingly
+smaller lengths and pick a point in each such interval to form
+a subsequence.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> be a bounded sequence. Thus, there exists <span class="math notranslate nohighlight">\(M &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\( | x_n | \leq M\)</span> for all <span class="math notranslate nohighlight">\(n \in \Nat\)</span>. Divide the interval <span class="math notranslate nohighlight">\([-M, M]\)</span> into
+two equal closed intervals <span class="math notranslate nohighlight">\([-M, 0]\)</span> and <span class="math notranslate nohighlight">\([0, M]\)</span>. At least one of the two halves must have
+an infinite number of points in <span class="math notranslate nohighlight">\(\{ x_n \}\)</span>
+(since if both halves had finite number of points, then the total number of points
+in the sequence would be finite which is a contradiction).
+Choose a half for which this is true, and label this half as <span class="math notranslate nohighlight">\(I_1\)</span>.
+Choose a point <span class="math notranslate nohighlight">\(x_{n_1} \in I_1\)</span>. Now divide <span class="math notranslate nohighlight">\(I_1\)</span> into two equal closed intervals.
+Again, since <span class="math notranslate nohighlight">\(I_1\)</span> contains infinite number of points, hence at least one
+of the halves must have infinite number of points. Pick a half which contains
+infinite number of points and label it as <span class="math notranslate nohighlight">\(I_2\)</span>. Now, pick a point <span class="math notranslate nohighlight">\(x_{n_2}\)</span> from
+<span class="math notranslate nohighlight">\(I_2\)</span> such that <span class="math notranslate nohighlight">\(n_2 &gt; n_1\)</span>. In general, construct a closed interval <span class="math notranslate nohighlight">\(I_k\)</span> from
+a half of <span class="math notranslate nohighlight">\(I_{k-1}\)</span> containing infinite number of points. Further, we choose
+a point <span class="math notranslate nohighlight">\(x_{n_k}\)</span> such that <span class="math notranslate nohighlight">\(n_k &gt; n_{k-1} &gt; \dots &gt; n_2 &gt; n_1\)</span> and <span class="math notranslate nohighlight">\(x_{n_k} \in I_k\)</span>.
+We claim that the subsequence <span class="math notranslate nohighlight">\(\{x_{n_k} \}\)</span> is a convergent subsequence. For this, we need
+a limit for the sequence. Since</p>
+<div class="math notranslate nohighlight">
+\[
+    I_1 \supseteq I_2 \supseteq \dots \supseteq I_k \supseteq \dots
+\]</div>
+<p>are a nested sequence of closed intervals, hence by
+<a class="reference internal" href="real_line.html#res-rl-nested-interval-property">nested interval property</a>, their
+intersection <span class="math notranslate nohighlight">\(I = \bigcap_{k=1}^{\infty} I_k\)</span>
+is non-empty.
+Actually, it’s easy to show that this <span class="math notranslate nohighlight">\(I\)</span> is a
+singleton too. If there were two distinct points <span class="math notranslate nohighlight">\(x, y\)</span> in <span class="math notranslate nohighlight">\(I\)</span>, then
+considering <span class="math notranslate nohighlight">\(d = | x - y | &gt; 0\)</span>, we could find an interval <span class="math notranslate nohighlight">\(I_j\)</span> whose length
+is smaller than <span class="math notranslate nohighlight">\(d\)</span>. Thus both <span class="math notranslate nohighlight">\(x, y\)</span> could not fit in <span class="math notranslate nohighlight">\(I_j\)</span>. Hence <span class="math notranslate nohighlight">\(I\)</span> contains
+only one point. Let <span class="math notranslate nohighlight">\(I = \{ x \}\)</span>. We now
+show that <span class="math notranslate nohighlight">\(x_{n_k} \to x\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>. By construction, the length of <span class="math notranslate nohighlight">\(I_k\)</span> is <span class="math notranslate nohighlight">\(M\frac{1}{2^{k-1}}\)</span>. Since
+it converges to 0, hence, we can choose <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that for every <span class="math notranslate nohighlight">\(k &gt; n_0\)</span>,
+the length of <span class="math notranslate nohighlight">\(I_k\)</span> is less than <span class="math notranslate nohighlight">\(\epsilon\)</span>. Since <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(x_{n_k}\)</span> are both in <span class="math notranslate nohighlight">\(I_k\)</span>,
+hence it follows that <span class="math notranslate nohighlight">\(| x_{n_k} - x| &lt; \epsilon\)</span>.</p>
+</div>
+</div>
+<div class="section" id="cauchy-sequence">
+<h2><span class="section-number">2.3.5. </span>Cauchy Sequence<a class="headerlink" href="#cauchy-sequence" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-bra-cauchy-sequence">
+<p class="admonition-title"><span class="caption-number">Definition 2.38 </span> (Cauchy sequence)</p>
+<div class="definition-content section" id="proof-content">
+<p>A sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> in <span class="math notranslate nohighlight">\(\RR\)</span> is called a <em>Cauchy sequence</em> if,
+for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> (depending on <span class="math notranslate nohighlight">\(\epsilon\)</span>)
+such that whenever <span class="math notranslate nohighlight">\(m, n &gt; n_0\)</span> it follows that <span class="math notranslate nohighlight">\(| x_m - x_n | &lt; \epsilon\)</span>.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-36">
+<p class="admonition-title"><span class="caption-number">Remark 2.9 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>A little thought would show that  saying <span class="math notranslate nohighlight">\(m, n &gt; n_0\)</span> or <span class="math notranslate nohighlight">\(m, n \geq n_1\)</span> doesn’t make much difference
+in the definition. The two thresholds can be related by : <span class="math notranslate nohighlight">\(n_1 = n_0 + 1\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-bra-cauchy-sequence-bounded">
+<p class="admonition-title"><span class="caption-number">Theorem 2.17 </span> (Boundedness of Cauchy sequences)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A Cauchy sequence is bounded.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\{ x_n \}\)</span>. Choose <span class="math notranslate nohighlight">\(\epsilon = 1\)</span>. Then there exists
+<span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that <span class="math notranslate nohighlight">\( | x_n - x_m | &lt; 1\)</span> whenever <span class="math notranslate nohighlight">\(m, n \geq n_0\)</span>.
+In particular, the statement is valid when <span class="math notranslate nohighlight">\(m  = n_0\)</span>. i.e. <span class="math notranslate nohighlight">\( | x_n - x_{n_0} | &lt; 1\)</span> .
+But,</p>
+<div class="math notranslate nohighlight">
+\[
+    | x_n - x_{n_0} | &lt; 1 \implies | | x_n | - | x_{n_0 } | | &lt; 1 \implies |x_n | &lt; 1  + | x_{n_0 } | \Forall n \geq n_0.
+\]</div>
+<p>Choosing <span class="math notranslate nohighlight">\(M = \max(|x_1|, \dots, |x_{n_0-1}|, |x_{n_0}| + 1)\)</span>, it is clear that <span class="math notranslate nohighlight">\(| x_n | \leq M\)</span>, hence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is bounded.</p>
+</div>
+<div class="proof theorem admonition" id="res-bra-cauchy-sequence-convergent">
+<p class="admonition-title"><span class="caption-number">Theorem 2.18 </span> (Convergence of Cauchy sequences)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A Cauchy sequence is convergent.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> be a Cauchy sequence.
+Hence it is <a class="reference internal" href="#res-bra-cauchy-sequence-bounded">bounded</a>.
+Hence, by <a class="reference internal" href="#res-bolzano-weierstrass-theorem">Bolzano Weierstrass theorem</a>,
+it has a convergent subsequence.</p>
+<p>Let <span class="math notranslate nohighlight">\(\{ x_{n_k} \}\)</span> be such a convergent subsequence with the limit <span class="math notranslate nohighlight">\(\lim x_{n_k} = x\)</span>.</p>
+<p>Thus, for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(n_1 \in \Nat\)</span> such that for all <span class="math notranslate nohighlight">\(k &gt; n_1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+| x_{n_k} - x | &lt; \frac{\epsilon}{2}.
+\]</div>
+<p>Also, since <span class="math notranslate nohighlight">\(\{x_n \}\)</span> is Cauchy, there exists <span class="math notranslate nohighlight">\(n_2 \in \Nat\)</span> such that for all
+<span class="math notranslate nohighlight">\(n, m &gt; n_2\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+|x_n - x_m | &lt; \frac{\epsilon}{2}.
+\]</div>
+<p>Pick any <span class="math notranslate nohighlight">\(k &gt; n_1\)</span> such that <span class="math notranslate nohighlight">\(n_k &gt; n_2\)</span>. Then, for all <span class="math notranslate nohighlight">\(n &gt; n_2\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+|x_n - x | \leq |x_n - x_{n_k} | + |x_{n_k} - x | &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\lim x_n = x\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-bra-cauchy-sequence-convergence">
+<p class="admonition-title"><span class="caption-number">Theorem 2.19 </span> (Convergence and Cauchyness)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A sequence of real numbers converges if and only if it is a Cauchy sequence.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let a sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> converge to <span class="math notranslate nohighlight">\(\epsilon\)</span>. Then for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists
+<span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that <span class="math notranslate nohighlight">\(| x_n - x | &lt; \epsilon / 2\)</span> for all <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>. Clearly, if <span class="math notranslate nohighlight">\(m, n &gt; n_0\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+    | x_m - x_n | \leq | x_m - x | + | x - x_n | &lt; \frac{\epsilon}{2}  + \frac{\epsilon}{2}  = \epsilon.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is Cauchy.</p>
+<p>For the converse, in the previous theorem, we proved that a Cauchy sequence is convergent.</p>
+</div>
+<div class="proof remark admonition" id="remark-40">
+<p class="admonition-title"><span class="caption-number">Remark 2.10 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> be a Cauchy sequence with <span class="math notranslate nohighlight">\(\lim x_n = x\)</span>.
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>. Choose <span class="math notranslate nohighlight">\(n_0\)</span> such that <span class="math notranslate nohighlight">\(m, n &gt; n_0\)</span> implies
+<span class="math notranslate nohighlight">\(|x_m - x_n| &lt; \epsilon\)</span>.</p>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+|x_n - x | \leq \epsilon \Forall n &gt; n_0.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have, for all <span class="math notranslate nohighlight">\(m, n &gt; n_0\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+|x_m - x_n | &lt; \epsilon \iff x_m - \epsilon &lt; x_n &lt; x_m + \epsilon.
+\]</div>
+<p>We will fix <span class="math notranslate nohighlight">\(n\)</span> and vary <span class="math notranslate nohighlight">\(n\)</span> to compute the limit inequalities.</p>
+<ol class="simple">
+<li><p>Consider the strict inequality: <span class="math notranslate nohighlight">\(x_m - \epsilon &lt; x_n\)</span> for all <span class="math notranslate nohighlight">\(m &gt; n_0\)</span>.</p></li>
+<li><p>Taking the limit on the sequence <span class="math notranslate nohighlight">\(x_m\)</span> (in L.H.S.), we get: <span class="math notranslate nohighlight">\(x - \epsilon \leq x_n\)</span>.</p></li>
+<li><p>Consider the strict inequality: <span class="math notranslate nohighlight">\(x_n &lt; x_m + \epsilon\)</span> for all <span class="math notranslate nohighlight">\(m &gt; n_0\)</span>.</p></li>
+<li><p>Taking the limit on the sequence <span class="math notranslate nohighlight">\(x_m\)</span> (in R.H.S.), we get: <span class="math notranslate nohighlight">\(x_n \leq x + \epsilon\)</span>.</p></li>
+<li><p>Together, we get: $<span class="math notranslate nohighlight">\(x - \epsilon \leq x_n \leq x + \epsilon\)</span>.</p></li>
+<li><p>Combining, we get <span class="math notranslate nohighlight">\(|x_n -x| \leq \epsilon\)</span> for all <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>.</p></li>
+</ol>
+<p>See also <a class="reference internal" href="#ex-bra-order-limit-strict-inequality">Example 2.7</a>.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./basic_real_analysis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="topology.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2.2. </span>Topology of Real Line</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="erl.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.4. </span>The Extended Real Line</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Shailesh Kumar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

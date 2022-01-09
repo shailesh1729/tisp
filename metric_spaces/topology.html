@@ -1,0 +1,1283 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.2. Metric Topology &#8212; Optimization for Sparse Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.3. Sequences" href="sequences.html" />
+    <link rel="prev" title="3.1. Introduction" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   3. Metric Spaces
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequences.html">
+     3.3. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="continuity.html">
+     3.4. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="boundedness.html">
+     3.5. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   5. Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/affine.html">
+     5.2. Affine Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     5.3. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     5.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/hyperplane.html">
+     5.5. Hyperplanes and Half spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/ball.html">
+     5.6. Euclidean Balls and Ellipsoids
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_ball.html">
+     5.7. Norm Balls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_cone.html">
+     5.8. Norm Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/polyhedron.html">
+     5.9. Polyhedra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     5.10. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convexity_ops.html">
+     5.11. Convexity Preserving Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/dual_cones.html">
+     5.12. Dual Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     5.13. Generalized Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_functions/intro.html">
+   6. Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/functions.html">
+     6.1. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/convex_functions.html">
+     6.2. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
+     6.3. Extensions for Convex Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradients/chapter.html">
+   7. Subgradients
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradients/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   8. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   9. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   10. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   11. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     11.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   12. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     12.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     12.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   13. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   14. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   15. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     15.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/metric_spaces/topology.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fmetric_spaces/topology.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#balls">
+   3.2.1. Balls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#open-sets">
+   3.2.2. Open Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closed-sets">
+   3.2.3. Closed Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interior">
+   3.2.4. Interior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closure">
+   3.2.5. Closure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#boundary">
+   3.2.6. Boundary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accumulation">
+   3.2.7. Accumulation
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="metric-topology">
+<span id="sec-ms-metric-topology"></span><h1><span class="section-number">3.2. </span>Metric Topology<a class="headerlink" href="#metric-topology" title="Permalink to this headline">¶</a></h1>
+<p>Let <span class="math notranslate nohighlight">\((X,d)\)</span> be a metric space.</p>
+<div class="section" id="balls">
+<h2><span class="section-number">3.2.1. </span>Balls<a class="headerlink" href="#balls" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ms-open-ball">
+<p class="admonition-title"><span class="caption-number">Definition 3.4 </span> (Open ball)</p>
+<div class="definition-content section" id="proof-content">
+<p>Given a point <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0\)</span>, the set</p>
+<div class="math notranslate nohighlight">
+\[
+    B(x,r)  \triangleq \{y \in X \ST d(x, y) &lt; r\}
+\]</div>
+<p>is called an <em>open ball</em> at <span class="math notranslate nohighlight">\(x\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span> in <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</div>
+</div><p>This definition is a generalization of the concept of
+<a class="reference internal" href="../basic_real_analysis/topology.html#def-bra-neighborhood">neighborhood</a> on a real line.</p>
+<div class="proof definition admonition" id="def-ms-closed-ball">
+<p class="admonition-title"><span class="caption-number">Definition 3.5 </span> (Closed ball)</p>
+<div class="definition-content section" id="proof-content">
+<p>Given a point <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0\)</span>, the set</p>
+<div class="math notranslate nohighlight">
+\[
+    B[x,r]  \triangleq \{y \in X \ST d(x, y) \leq r\}
+\]</div>
+<p>is called a <em>closed ball</em> at <span class="math notranslate nohighlight">\(x\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span> in <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="open-sets">
+<h2><span class="section-number">3.2.2. </span>Open Sets<a class="headerlink" href="#open-sets" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ms-open-set">
+<p class="admonition-title"><span class="caption-number">Definition 3.6 </span> (Open sets)</p>
+<div class="definition-content section" id="proof-content">
+<p>A subset <span class="math notranslate nohighlight">\(S\)</span> of <span class="math notranslate nohighlight">\(X\)</span> is said to be <em>open</em> in <span class="math notranslate nohighlight">\(X\)</span>
+if for every <span class="math notranslate nohighlight">\(x \in S\)</span> there exists an “open ball” entirely
+within <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<p>In other words, there exists an <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(B(x, r) \subseteq S\)</span>.</p>
+</div>
+</div><div class="proof proposition admonition" id="proposition-3">
+<p class="admonition-title"><span class="caption-number">Proposition 3.2 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Every open ball is an open set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(x \in X\)</span> and consider the open ball</p>
+<div class="math notranslate nohighlight">
+\[
+    A = B (x, \epsilon)  = \{y \in X \ST d(x, y) &lt; \epsilon\}
+\]</div>
+<p>for some <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>. We need to show that for every point
+in <span class="math notranslate nohighlight">\(A\)</span>, there exists an open ball entirely contained in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(p \in A\)</span>. Let <span class="math notranslate nohighlight">\(r = \epsilon - d(x,p)\)</span>. By definition <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.</p>
+<p>Consider the open ball:</p>
+<div class="math notranslate nohighlight">
+\[
+    S = B(p, r)  = \{y \in X \ST d(p, y) &lt; r\}.
+\]</div>
+<p>For any <span class="math notranslate nohighlight">\(y \in S\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+d(x, y) \leq  d(x, p) + d(p, y) &lt; d(x, p) + r  = \epsilon.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(y \in A\)</span>. Thus, <span class="math notranslate nohighlight">\(S \subseteq A\)</span>. Thus, there exists
+an open ball around <span class="math notranslate nohighlight">\(p\)</span> which is entirely contained in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+<div class="proof proposition admonition" id="proposition-4">
+<p class="admonition-title"><span class="caption-number">Proposition 3.3 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Arbitrary unions of open sets are open sets.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We prove this by showing that for every element in an
+arbitrary union of open sets, there exists an open ball around
+it entirely contained inside the union.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\{ A_i \}_{i \in I}\)</span> be a family of open subsets of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(A = \bigcup_{i \in I}A_i\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(x \in A\)</span>.</p></li>
+<li><p>Then, there exists an <span class="math notranslate nohighlight">\(i \in I\)</span> such that <span class="math notranslate nohighlight">\(x \in A_i\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(A_i\)</span> is open, there exists an open ball
+<span class="math notranslate nohighlight">\(B(x, r) \subseteq A_i \subseteq A\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(A\)</span> is open.</p></li>
+</ol>
+</div>
+<div class="proof proposition admonition" id="proposition-5">
+<p class="admonition-title"><span class="caption-number">Proposition 3.4 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Finite intersections of open sets are open sets.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We prove this by showing that for every element in a
+finite intersection of open sets, there exists an open ball around
+it entirely contained inside the intersection.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\{A_1, A_2, \dots, A_n\}\)</span> be a finite collection of open subsets of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(A = \bigcap_{i=1}^n A_i\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(x \in A\)</span>. Then <span class="math notranslate nohighlight">\(x \in A_i \Forall 1 \leq i \leq n\)</span>.</p></li>
+<li><p>Thus, for each <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span>, there exists an open ball <span class="math notranslate nohighlight">\(B(x, r_i) \subseteq A_i\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r = \min \{ r_1, r_2, \dots, r_n \}\)</span>. Since <span class="math notranslate nohighlight">\(r_i &gt; 0\)</span>, hence <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.</p></li>
+<li><p>Thus, we can construct an open ball <span class="math notranslate nohighlight">\(B(x, r)\)</span> at <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(B(x, r) \subseteq B(x, r_i) \subseteq A_i\)</span>.</p></li>
+<li><p>In other words, <span class="math notranslate nohighlight">\(B(x, r) \subseteq A_i \Forall 1 \leq i \leq n\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(B(x, r) \subseteq A\)</span>.</p></li>
+<li><p>Thus, for every <span class="math notranslate nohighlight">\(x \in A\)</span>, there exists an open ball at <span class="math notranslate nohighlight">\(x\)</span> entirely contained in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(A\)</span> is open.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="closed-sets">
+<h2><span class="section-number">3.2.3. </span>Closed Sets<a class="headerlink" href="#closed-sets" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ms-closed-set">
+<p class="admonition-title"><span class="caption-number">Definition 3.7 </span> (Closed sets)</p>
+<div class="definition-content section" id="proof-content">
+<p>A subset <span class="math notranslate nohighlight">\(S\)</span> of <span class="math notranslate nohighlight">\(X\)</span> is said to be <em>closed</em> in <span class="math notranslate nohighlight">\(X\)</span>
+if <span class="math notranslate nohighlight">\(X \setminus S\)</span> is open in <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</div>
+</div><div class="proof proposition admonition" id="proposition-7">
+<p class="admonition-title"><span class="caption-number">Proposition 3.5 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\EmptySet\)</span> and <span class="math notranslate nohighlight">\(X\)</span> are both open and closed subsets of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(\EmptySet\)</span> is vacuously open since it has no points
+thus every point in <span class="math notranslate nohighlight">\(\EmptySet\)</span> has an open ball that lies
+within <span class="math notranslate nohighlight">\(\EmptySet\)</span>. Thus, <span class="math notranslate nohighlight">\(X\)</span> is closed.</p>
+<p><span class="math notranslate nohighlight">\(X\)</span> is open since for every point <span class="math notranslate nohighlight">\(x \in X\)</span>, every open ball at <span class="math notranslate nohighlight">\(x\)</span>
+lies entirely in <span class="math notranslate nohighlight">\(X\)</span> (by definition). Thus, <span class="math notranslate nohighlight">\(\EmptySet\)</span> is closed.</p>
+</div>
+<div class="proof proposition admonition" id="proposition-8">
+<p class="admonition-title"><span class="caption-number">Proposition 3.6 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Every singleton is a closed set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(x \in X\)</span> and consider the singleton set <span class="math notranslate nohighlight">\(A = \{x\}\)</span>.
+Let <span class="math notranslate nohighlight">\(B = X \setminus A\)</span>. We show that <span class="math notranslate nohighlight">\(B\)</span> is open. Then <span class="math notranslate nohighlight">\(A\)</span> is closed.</p>
+<p>Let <span class="math notranslate nohighlight">\(y \in B\)</span> and let <span class="math notranslate nohighlight">\(r = d(x, y)\)</span>. Then, the open ball
+<span class="math notranslate nohighlight">\(B(y, r)\)</span> doesn’t contain <span class="math notranslate nohighlight">\(x\)</span>. Thus, <span class="math notranslate nohighlight">\(B(y, r) \subseteq B\)</span>. Thus,
+<span class="math notranslate nohighlight">\(B\)</span> is open.</p>
+</div>
+<div class="proof example admonition" id="example-9">
+<p class="admonition-title"><span class="caption-number">Example 3.8 </span></p>
+<div class="example-content section" id="proof-content">
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((0, 1)\)</span> is open in <span class="math notranslate nohighlight">\(\RR\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\([0, 1]\)</span> is closed in <span class="math notranslate nohighlight">\(\RR\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((0, 1]\)</span> is neither open nor closed in <span class="math notranslate nohighlight">\(\RR\)</span>.</p></li>
+</ul>
+</div>
+</div><div class="proof proposition admonition" id="proposition-10">
+<p class="admonition-title"><span class="caption-number">Proposition 3.7 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Arbitrary intersections of closed sets are closed sets.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\{ A_i \}_{i \in I}\)</span> be a family of closed subsets of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\{ X \setminus A_i \}_{i \in I}\)</span> is a family of open subsets of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Then, their union <span class="math notranslate nohighlight">\(\bigcup_{i \in I} (X \setminus A_i)\)</span> is an open set.</p></li>
+<li><p>Hence, its complement <span class="math notranslate nohighlight">\(X \setminus \bigcup_{i \in I} (X \setminus A_i)\)</span> is a closed set.</p></li>
+<li><p>But, by De Morgan’s law: <span class="math notranslate nohighlight">\(X \setminus \bigcup_{i \in I} (X \setminus A_i) = \bigcap_{i \in I} A_i\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\( \bigcap_{i \in I} A_i\)</span> is a closed set.</p></li>
+</ol>
+</div>
+<div class="proof proposition admonition" id="proposition-11">
+<p class="admonition-title"><span class="caption-number">Proposition 3.8 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Finite unions of closed sets are closed sets.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\{A_1, A_2, \dots, A_n\}\)</span> be a finite collection of closed subsets of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\{X \setminus A_1, X \setminus A_2, \dots, X \setminus A_n\}\)</span> are open.</p></li>
+<li><p>Then, their union <span class="math notranslate nohighlight">\(\bigcup_{i=1}^n X \setminus A_i\)</span>  is  open.</p></li>
+<li><p>Then, its complement <span class="math notranslate nohighlight">\(X \setminus \bigcup_{i=1}^n X \setminus A_i\)</span> is closed.</p></li>
+<li><p>By De Morgan’s law:
+<span class="math notranslate nohighlight">\(X \setminus \bigcup_{i=1}^n X \setminus A_i = \bigcap_{i=1}^n A_i\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bigcap_{i=1}^n A_i\)</span> is a closed set.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="interior">
+<h2><span class="section-number">3.2.4. </span>Interior<a class="headerlink" href="#interior" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ms-interior-point">
+<p class="admonition-title"><span class="caption-number">Definition 3.8 </span> (Interior point)</p>
+<div class="definition-content section" id="proof-content">
+<p>A point <span class="math notranslate nohighlight">\(x\)</span> is called an interior point of a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> if there
+exists an open ball <span class="math notranslate nohighlight">\(B(x, r)\)</span> such that <span class="math notranslate nohighlight">\(B(x, r) \subseteq A\)</span>.</p>
+</div>
+</div><p>By definition an interior point of a set belongs to the set too.
+<span class="math notranslate nohighlight">\(x \in B(x, r) \subseteq A\)</span>.</p>
+<div class="proof definition admonition" id="def-ms-interior">
+<p class="admonition-title"><span class="caption-number">Definition 3.9 </span> (Interior)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span>. The largest open set in <span class="math notranslate nohighlight">\(X\)</span> that is contained
+in <span class="math notranslate nohighlight">\(A\)</span> is called the <em>interior</em> of <span class="math notranslate nohighlight">\(A\)</span> (relative to <span class="math notranslate nohighlight">\(X\)</span>)
+and is denoted by <span class="math notranslate nohighlight">\(\interior A\)</span> or <span class="math notranslate nohighlight">\(\ainterior_X A\)</span>.</p>
+</div>
+</div><p>Note that <span class="math notranslate nohighlight">\(\interior A \subseteq A\)</span>.</p>
+<div class="proof proposition admonition" id="proposition-14">
+<p class="admonition-title"><span class="caption-number">Proposition 3.9 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(O \subseteq A\)</span> be an open set. Then <span class="math notranslate nohighlight">\(O \subseteq \interior A\)</span>.</p>
+<p>In words, every open set that is contained in <span class="math notranslate nohighlight">\(A\)</span>, is
+contained in its interior.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(O\)</span> and <span class="math notranslate nohighlight">\(\interior A\)</span> are open sets, hence their union
+<span class="math notranslate nohighlight">\(O \cup \interior A\)</span> is open. But <span class="math notranslate nohighlight">\(O \subseteq A\)</span> and
+<span class="math notranslate nohighlight">\(\interior A \subseteq A\)</span> implies <span class="math notranslate nohighlight">\(O \cup \interior A \subseteq A\)</span>.
+Also, <span class="math notranslate nohighlight">\(\interior A \subseteq O \cup \interior A\)</span>.
+But <span class="math notranslate nohighlight">\(\interior A\)</span> is the largest open subset of <span class="math notranslate nohighlight">\(A\)</span>. Thus,
+<span class="math notranslate nohighlight">\(\interior A = O \cup \interior A\)</span>. Thus, <span class="math notranslate nohighlight">\(O \subseteq \interior A\)</span>.</p>
+</div>
+<div class="proof proposition admonition" id="proposition-15">
+<p class="admonition-title"><span class="caption-number">Proposition 3.10 </span> (Interior is set of interior points)</p>
+<div class="proposition-content section" id="proof-content">
+<p>The interior of a set <span class="math notranslate nohighlight">\(A\)</span> is the collection of all the interior points
+of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(I\)</span> be the collection of all interior points of <span class="math notranslate nohighlight">\(A\)</span>.
+Thus, <span class="math notranslate nohighlight">\(I \subseteq A\)</span>. Our claim is that <span class="math notranslate nohighlight">\(I = \interior A\)</span>.</p>
+<p>We first show that  <span class="math notranslate nohighlight">\(I \subseteq \interior A\)</span>.
+Let <span class="math notranslate nohighlight">\(x \in I\)</span>.
+Then, there exists an open ball <span class="math notranslate nohighlight">\(B(x, r_x) \subseteq A\)</span>.
+Then, the union <span class="math notranslate nohighlight">\(C = \bigcup_{x \in I} B(x, r_x) \subseteq A\)</span>.
+But <span class="math notranslate nohighlight">\(C\)</span> is an arbitrary union of open sets. Hence <span class="math notranslate nohighlight">\(C\)</span> is open.
+But every open subset of <span class="math notranslate nohighlight">\(A\)</span> is a subset of <span class="math notranslate nohighlight">\(\interior A\)</span>.
+Thus,  <span class="math notranslate nohighlight">\(C \subseteq \interior A\)</span>.
+Also <span class="math notranslate nohighlight">\(I \subseteq C \implies I \subseteq \interior A\)</span>.</p>
+<p>For the converse, we proceed as follows.</p>
+<p><span class="math notranslate nohighlight">\(\interior A\)</span> is open.
+Thus, for every <span class="math notranslate nohighlight">\(x \in \interior I\)</span>,
+there exists an open ball <span class="math notranslate nohighlight">\(B(x, r_x) \subseteq I \subseteq A\)</span>.
+Thus, <span class="math notranslate nohighlight">\(x\)</span> is an interior point of <span class="math notranslate nohighlight">\(A\)</span>.
+In other words, <span class="math notranslate nohighlight">\(\interior A \subseteq I\)</span>.</p>
+</div>
+<p>This result is simply a different characterization of the
+interior of <span class="math notranslate nohighlight">\(A\)</span>. We could have started with the definition
+that the interior is the set of all interior points and then
+proved that it is the largest open set contained in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="proof proposition admonition" id="proposition-16">
+<p class="admonition-title"><span class="caption-number">Proposition 3.11 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(A\)</span> is open if and only if <span class="math notranslate nohighlight">\(A = \interior A\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume, <span class="math notranslate nohighlight">\(A\)</span> is open.
+Then, <span class="math notranslate nohighlight">\(A\)</span> is the largest open set contained in <span class="math notranslate nohighlight">\(A\)</span>.
+Hence, <span class="math notranslate nohighlight">\(A = \interior A\)</span>.</p>
+<p>Assume <span class="math notranslate nohighlight">\(A = \interior A\)</span>.
+Then, since <span class="math notranslate nohighlight">\(\interior A\)</span> is open, hence <span class="math notranslate nohighlight">\(A\)</span> is open.</p>
+</div>
+</div>
+<div class="section" id="closure">
+<h2><span class="section-number">3.2.5. </span>Closure<a class="headerlink" href="#closure" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ms-closure-point">
+<p class="admonition-title"><span class="caption-number">Definition 3.10 </span> (Closure point)</p>
+<div class="definition-content section" id="proof-content">
+<p>A point <span class="math notranslate nohighlight">\(x \in X\)</span> is called a <em>closure point</em> of a subset <span class="math notranslate nohighlight">\(A\)</span> of <span class="math notranslate nohighlight">\(X\)</span>
+if every open ball at <span class="math notranslate nohighlight">\(x\)</span> contains (at least) one point in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>In other words:</p>
+<div class="math notranslate nohighlight">
+\[
+B(x, r) \cap A \neq \EmptySet \Forall r &gt; 0.
+\]</div>
+</div>
+</div><div class="proof proposition admonition" id="proposition-18">
+<p class="admonition-title"><span class="caption-number">Proposition 3.12 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Every point in <span class="math notranslate nohighlight">\(A\)</span> is a closure point of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(x \in A\)</span>. Then <span class="math notranslate nohighlight">\(x \in B(x, r)\)</span> for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(x \in B(x, r) \cap A\)</span> for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(B(x, r) \cap A\)</span> is not empty for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(x\)</span> is a closure point of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+<div class="proof definition admonition" id="def-ms-closure">
+<p class="admonition-title"><span class="caption-number">Definition 3.11 </span> (Closure)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span>. The smallest closed set in <span class="math notranslate nohighlight">\(X\)</span> that contains
+<span class="math notranslate nohighlight">\(A\)</span> is called the <em>closure</em> of <span class="math notranslate nohighlight">\(A\)</span> (relative to <span class="math notranslate nohighlight">\(X\)</span>)
+and is denoted by <span class="math notranslate nohighlight">\(\closure A\)</span> or <span class="math notranslate nohighlight">\(\aclosure_X A\)</span>.</p>
+</div>
+</div><div class="proof proposition admonition" id="proposition-20">
+<p class="admonition-title"><span class="caption-number">Proposition 3.13 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a closed subset of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(A \subseteq C\)</span>.
+Then <span class="math notranslate nohighlight">\(\closure A \subseteq C\)</span>.</p>
+<p>In words, every closed set that contains <span class="math notranslate nohighlight">\(A\)</span>, contains
+its closure.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider the set <span class="math notranslate nohighlight">\(D = C \cap \closure A\)</span>. Since, intersection
+of two closed sets is closed, hence <span class="math notranslate nohighlight">\(D\)</span> is closed.
+Since <span class="math notranslate nohighlight">\(A \subseteq C\)</span> and <span class="math notranslate nohighlight">\(A \subseteq \closure A\)</span>, hence
+<span class="math notranslate nohighlight">\(A \subseteq D\)</span>. At the same time, <span class="math notranslate nohighlight">\(D \subseteq \closure A\)</span>.
+Thus, we have <span class="math notranslate nohighlight">\(A \subseteq D \subseteq \closure A\)</span>.
+But <span class="math notranslate nohighlight">\(\closure A\)</span> is the smallest closed set containing <span class="math notranslate nohighlight">\(A\)</span>.
+Hence, <span class="math notranslate nohighlight">\(D = \closure A\)</span> must be true.
+But <span class="math notranslate nohighlight">\(D \subseteq C\)</span>. Hence <span class="math notranslate nohighlight">\(\closure A \subseteq C\)</span>.</p>
+</div>
+<div class="proof proposition admonition" id="proposition-21">
+<p class="admonition-title"><span class="caption-number">Proposition 3.14 </span> (Closure is set of closure points)</p>
+<div class="proposition-content section" id="proof-content">
+<p>The closure of a set <span class="math notranslate nohighlight">\(A\)</span> is the collection of all the closure points
+of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(D\)</span> be the set of all closure points of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>We first show that <span class="math notranslate nohighlight">\(D\)</span> is a closed set.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(x \notin D\)</span> (i.e. <span class="math notranslate nohighlight">\(x \in X \setminus D\)</span>).</p></li>
+<li><p>Then, there exists an open ball <span class="math notranslate nohighlight">\(B(x, r)\)</span>
+such that <span class="math notranslate nohighlight">\(B(x, r) \cap A = \EmptySet\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(y \in B(x, r)\)</span>, then, there exists an open ball <span class="math notranslate nohighlight">\(B(y, s)\)</span>
+such that <span class="math notranslate nohighlight">\(B(y, s) \subseteq B(x, r)\)</span> (since <span class="math notranslate nohighlight">\(B(x,r)\)</span> is an open set).</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(B(y, s)\cap A = \EmptySet\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(y \notin D\)</span>.
+In other words, the open ball <span class="math notranslate nohighlight">\(B(x, r)\)</span> doesn’t contain
+any closure point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(B(x, r) \subseteq X \setminus D\)</span>.</p></li>
+<li><p>Thus, for every point <span class="math notranslate nohighlight">\(x \in X \setminus D\)</span>, there exists an open ball
+<span class="math notranslate nohighlight">\(B(x, r) \subseteq X \setminus D\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(X \setminus D\)</span> is open.</p></li>
+<li><p>Consequently, <span class="math notranslate nohighlight">\(D\)</span> is closed.</p></li>
+</ol>
+<p>Next, we show that <span class="math notranslate nohighlight">\(\closure A \subseteq D\)</span>.</p>
+<ol class="simple">
+<li><p>Since every point of <span class="math notranslate nohighlight">\(A\)</span> is a closure point, hence <span class="math notranslate nohighlight">\(A \subseteq D\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\closure A\)</span> is a subset of any closed set containing <span class="math notranslate nohighlight">\(A\)</span>,
+hence <span class="math notranslate nohighlight">\(\closure A \subseteq D\)</span>.</p></li>
+</ol>
+<p>Last, we show that <span class="math notranslate nohighlight">\(D \subseteq \closure A\)</span>.
+In fact, we show a stronger result that <span class="math notranslate nohighlight">\(D \subseteq C\)</span>
+for any closed <span class="math notranslate nohighlight">\(C \supseteq  A\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(C\)</span> be a closed set such that <span class="math notranslate nohighlight">\(A \subseteq C\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(X \setminus C\)</span> is open.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(x \in X \setminus C\)</span>, there exists an open ball
+<span class="math notranslate nohighlight">\(B(x, r) \subseteq X \setminus C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(B(x, r) \cap C = \EmptySet\)</span>.</p></li>
+<li><p>In particular, <span class="math notranslate nohighlight">\(B(x, r) \cap A = \EmptySet\)</span> (since <span class="math notranslate nohighlight">\(A \subseteq C\)</span>).</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(x\)</span> is not a closure point of <span class="math notranslate nohighlight">\(A\)</span> (i.e. <span class="math notranslate nohighlight">\(x \notin D\)</span>).</p></li>
+<li><p>Thus, no point in <span class="math notranslate nohighlight">\(X \setminus C\)</span> is a closure point.</p></li>
+<li><p>Thus, every closure point belongs to <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(D \subseteq C\)</span>.</p></li>
+<li><p>We have established that <span class="math notranslate nohighlight">\(D\)</span> is a subset of any closed set that contains <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>In particular, <span class="math notranslate nohighlight">\(D \subseteq \closure A\)</span> since <span class="math notranslate nohighlight">\(\closure A\)</span> is closed
+and <span class="math notranslate nohighlight">\(A \subseteq \closure A\)</span> (by definition).</p></li>
+</ol>
+<p>Together, <span class="math notranslate nohighlight">\(D = \closure A\)</span>.</p>
+</div>
+<p>This result is simply a different characterization of the
+closure of <span class="math notranslate nohighlight">\(A\)</span>. We could have started with the definition
+that the closure is the set of all closure points and then
+proved that it is the smallest closed set containing <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="proof proposition admonition" id="proposition-22">
+<p class="admonition-title"><span class="caption-number">Proposition 3.15 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(A\)</span> is closed if and only if <span class="math notranslate nohighlight">\(A = \closure A\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume, <span class="math notranslate nohighlight">\(A\)</span> is closed.
+Then, <span class="math notranslate nohighlight">\(A\)</span> is the smallest closed set containing <span class="math notranslate nohighlight">\(A\)</span>.
+Hence, <span class="math notranslate nohighlight">\(A = \closure A\)</span>.</p>
+<p>Assume <span class="math notranslate nohighlight">\(A = \closure A\)</span>.
+Then, since <span class="math notranslate nohighlight">\(\closure A\)</span> is closed, hence <span class="math notranslate nohighlight">\(A\)</span> is closed.</p>
+</div>
+<div class="proof proposition admonition" id="proposition-23">
+<p class="admonition-title"><span class="caption-number">Proposition 3.16 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>A closed ball is a closed set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(x \in X\)</span>. Let <span class="math notranslate nohighlight">\(r &gt; 0\)</span>. Let</p>
+<div class="math notranslate nohighlight">
+\[
+C = B[x, r] = \{y \in X \ST d(x, y) \leq r\}
+\]</div>
+<p>be a closed ball.
+We proceed by showing that its complement is open:</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(y \in X \setminus C\)</span>. Then <span class="math notranslate nohighlight">\(d(x, y) &gt; r\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r_1 = d(x, y) - r &gt; 0\)</span>.</p></li>
+<li><p>Consider the open ball <span class="math notranslate nohighlight">\(B(y, r_1)\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(z \in B(y, r_1)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   d(x, y) \leq d(x, z) + d(z, y) &lt; d(x, z) + r_1
+   \implies d(x, z) &gt; d(x, y) - r_1 = r. 
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(z \notin C\)</span>, i.e. <span class="math notranslate nohighlight">\(z \in X \setminus C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(B(y, r_1) \subseteq X \setminus C\)</span>.</p></li>
+<li><p>In other words, for every point in <span class="math notranslate nohighlight">\(X \setminus C\)</span>, there
+exists an open ball contained in <span class="math notranslate nohighlight">\(X \setminus C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(X \setminus C\)</span> is an open set.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is closed.</p></li>
+</ol>
+</div>
+<div class="proof proposition admonition" id="proposition-24">
+<p class="admonition-title"><span class="caption-number">Proposition 3.17 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+X \setminus (\interior A) = \closure (X \setminus A).
+\]</div>
+<p>In words, complement of interior is the closure of the complement.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(x \in X \setminus (\interior A)\)</span>,
+i.e., <span class="math notranslate nohighlight">\(x\)</span> is not an interior point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Then, for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>, <span class="math notranslate nohighlight">\(B(x, r)\)</span> is not a subset of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Thus, for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>, <span class="math notranslate nohighlight">\(B(x, r) \cap X \setminus A\)</span> is not empty.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(x\)</span> is a closure point of <span class="math notranslate nohighlight">\(X \setminus A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(X \setminus (\interior A) \subseteq \closure (X \setminus A)\)</span>.</p></li>
+</ol>
+<p>The same logic for the converse:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(x \in \closure (X \setminus A)\)</span>,
+i.e., <span class="math notranslate nohighlight">\(x\)</span> is a closure point of <span class="math notranslate nohighlight">\(X \setminus A\)</span>.</p></li>
+<li><p>Thus, for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>, <span class="math notranslate nohighlight">\(B(x, r) \cap (X \setminus A)\)</span> is not empty.</p></li>
+<li><p>Thus, for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>,  <span class="math notranslate nohighlight">\(B(x, r)\)</span> is not a subset of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(x\)</span> is not an interior point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\closure (X \setminus A) \subseteq X \setminus (\interior A)\)</span>.</p></li>
+</ol>
+<p>Together, the equality is established.</p>
+</div>
+</div>
+<div class="section" id="boundary">
+<h2><span class="section-number">3.2.6. </span>Boundary<a class="headerlink" href="#boundary" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ms-boundary-point">
+<p class="admonition-title"><span class="caption-number">Definition 3.12 </span> (Boundary point)</p>
+<div class="definition-content section" id="proof-content">
+<p>A point <span class="math notranslate nohighlight">\(x \in X\)</span> is called a <em>boundary point</em> of <span class="math notranslate nohighlight">\(A\)</span> if
+every open ball <span class="math notranslate nohighlight">\(B(x, r)\)</span> at <span class="math notranslate nohighlight">\(x\)</span> contains points from
+<span class="math notranslate nohighlight">\(A\)</span> as well as <span class="math notranslate nohighlight">\(X \setminus A\)</span>.</p>
+<p>In other words, <span class="math notranslate nohighlight">\(B(x, r) \cap A \neq \EmptySet\)</span>
+and <span class="math notranslate nohighlight">\(B(x, r) \cap X \setminus A \neq \EmptySet\)</span>
+for every <span class="math notranslate nohighlight">\(r&gt; 0\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-ms-boundary">
+<p class="admonition-title"><span class="caption-number">Definition 3.13 </span> (Boundary)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>boundary</em> of a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> (relative to <span class="math notranslate nohighlight">\(X\)</span>),
+denoted by <span class="math notranslate nohighlight">\(\boundary A\)</span> or <span class="math notranslate nohighlight">\(\aboundary_X A\)</span> is defined as
+the set of all boundary points of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="proof proposition admonition" id="proposition-27">
+<p class="admonition-title"><span class="caption-number">Proposition 3.18 </span></p>
+<div class="proposition-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\boundary A = \closure A \setminus \interior A.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(x\)</span> be a boundary point of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(B(x, r) \cap A \neq \EmptySet\)</span> for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(x\)</span> is a closure point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(B(x, r) \cap X \setminus A \neq \EmptySet\)</span> for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.</p></li>
+<li><p>Thus, there is no <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B(x,r) \subseteq A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(x\)</span> is not an interior point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(x \in \closure A \setminus \interior A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\boundary A \subseteq \closure A \setminus \interior A\)</span>.</p></li>
+</ol>
+<p>Let <span class="math notranslate nohighlight">\(x \in \closure A \setminus \interior A\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is a closure point.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(B(x, r) \cap A \neq \EmptySet\)</span> for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is not an interior point.</p></li>
+<li><p>Thus, there is no <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B(x,r) \subseteq A\)</span>.</p></li>
+<li><p>Thus, for every <span class="math notranslate nohighlight">\(r&gt; 0\)</span>, <span class="math notranslate nohighlight">\(B(x,r) \cap X \setminus A \neq \EmptySet\)</span>.</p></li>
+<li><p>Combining, <span class="math notranslate nohighlight">\(x\)</span> is a boundary point.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\closure A \setminus \interior A \subseteq \boundary A\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="accumulation">
+<h2><span class="section-number">3.2.7. </span>Accumulation<a class="headerlink" href="#accumulation" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ms-accumulation-point">
+<p class="admonition-title"><span class="caption-number">Definition 3.14 </span> (Accumulation point)</p>
+<div class="definition-content section" id="proof-content">
+<p>A point <span class="math notranslate nohighlight">\(x \in X\)</span> is called an <em>accumulation point</em> of a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span>,
+if every open ball <span class="math notranslate nohighlight">\(B(x,r)\)</span> contains a point in <span class="math notranslate nohighlight">\(A\)</span> distinct from <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+B(x, r) \cap A \setminus \{ x \} \neq \EmptySet \Forall r &gt; 0.
+\]</div>
+</div>
+</div><p>Note that an accumulation point need not belong to the set <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="proof remark admonition" id="remark-29">
+<p class="admonition-title"><span class="caption-number">Remark 3.1 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Every accumulation point is a closure point.</p>
+</div>
+</div><p>Although, every closure point need not be an accumulation point.</p>
+<div class="proof definition admonition" id="def-ms-derived-set">
+<p class="admonition-title"><span class="caption-number">Definition 3.15 </span> (Derived set)</p>
+<div class="definition-content section" id="proof-content">
+<p>The set of accumulation points of a set <span class="math notranslate nohighlight">\(A\)</span> is called its <em>derived set</em>
+and is denoted by <span class="math notranslate nohighlight">\(A'\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-ms-isolated-point">
+<p class="admonition-title"><span class="caption-number">Definition 3.16 </span> (Isolated point)</p>
+<div class="definition-content section" id="proof-content">
+<p>A point <span class="math notranslate nohighlight">\(x \in A\)</span> is called isolated if there is an open ball
+<span class="math notranslate nohighlight">\(B(x, r)\)</span> which doesn’t contain any other point of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>In other words, there exists an <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+B(x, r) \cap A \setminus \{ x \} = \EmptySet.
+\]</div>
+</div>
+</div><div class="proof proposition admonition" id="proposition-32">
+<p class="admonition-title"><span class="caption-number">Proposition 3.19 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>A closure point is either an accumulation point or an isolated point.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(x \in \closure A\)</span>. Assume that <span class="math notranslate nohighlight">\(x\)</span> is not an accumulation point.</p>
+<p>We need to show that <span class="math notranslate nohighlight">\(x \in A\)</span> and <span class="math notranslate nohighlight">\(x\)</span> is isolated.</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(x\)</span> is not an accumulation point, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(B(x, r) \cap A \setminus \{ x \} = \EmptySet\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(x\)</span> is a closure point, hence
+<span class="math notranslate nohighlight">\(B(x,r) \cap A\)</span> is not empty.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(B(x, r) \cap A\)</span> must be <span class="math notranslate nohighlight">\(\{ x \}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(x \in A\)</span>.</p></li>
+<li><p>Finally, since <span class="math notranslate nohighlight">\(B(x, r) \cap A \setminus \{ x \} = \EmptySet\)</span>,
+<span class="math notranslate nohighlight">\(x\)</span> is an isolated point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof proposition admonition" id="proposition-33">
+<p class="admonition-title"><span class="caption-number">Proposition 3.20 </span></p>
+<div class="proposition-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\closure A = A \cup A'.
+\]</div>
+</div>
+</div><p>This is a restatement of the previous result.</p>
+<div class="proof proposition admonition" id="proposition-34">
+<p class="admonition-title"><span class="caption-number">Proposition 3.21 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>A set is closed if and only if it contains all its accumulation points.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(A' \subseteq A \implies A \cup A' = A\)</span>. But <span class="math notranslate nohighlight">\(A \cup A' = \closure A\)</span>.
+Thus, <span class="math notranslate nohighlight">\(A' \subseteq A \implies A = \closure A\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(A = \closure A \implies  A =  A \cup A' \implies A' \subseteq A\)</span>.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./metric_spaces"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3.1. </span>Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="sequences.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>Sequences</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Shailesh Kumar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

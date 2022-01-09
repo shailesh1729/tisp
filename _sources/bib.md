@@ -1,5 +1,5 @@
 # Bibliography
 
 ```{bibliography}
-:style: alpha
+:style: plain
 ```

@@ -1,0 +1,1477 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.1. Real Line &#8212; Optimization for Sparse Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.2. Topology of Real Line" href="topology.html" />
+    <link rel="prev" title="2. Elementary Real Analysis" href="chapter.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.3. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.4. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.5. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   5. Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/affine.html">
+     5.2. Affine Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     5.3. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     5.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/hyperplane.html">
+     5.5. Hyperplanes and Half spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/ball.html">
+     5.6. Euclidean Balls and Ellipsoids
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_ball.html">
+     5.7. Norm Balls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_cone.html">
+     5.8. Norm Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/polyhedron.html">
+     5.9. Polyhedra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     5.10. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convexity_ops.html">
+     5.11. Convexity Preserving Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/dual_cones.html">
+     5.12. Dual Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     5.13. Generalized Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_functions/intro.html">
+   6. Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/functions.html">
+     6.1. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/convex_functions.html">
+     6.2. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
+     6.3. Extensions for Convex Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradients/chapter.html">
+   7. Subgradients
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradients/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   8. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   9. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   10. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   11. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     11.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   12. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     12.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     12.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   13. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   14. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   15. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     15.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/basic_real_analysis/real_line.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fbasic_real_analysis/real_line.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prelude">
+   2.1.1. Prelude
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-numbers">
+   2.1.2. Real numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intervals">
+   2.1.3. Intervals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#completeness-axiom">
+   2.1.4. Completeness Axiom
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#archimedian-property">
+   2.1.5. Archimedian Property
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rational-numbers">
+   2.1.6. Rational Numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#irrational-numbers">
+   2.1.7. Irrational Numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uncountability">
+   2.1.8. Uncountability
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algebraic-numbers">
+   2.1.9. Algebraic Numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transcendental-numbers">
+   2.1.10. Transcendental Numbers
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="real-line">
+<h1><span class="section-number">2.1. </span>Real Line<a class="headerlink" href="#real-line" title="Permalink to this headline">¶</a></h1>
+<p>The set of real numbers is also known as <em>real line</em>.</p>
+<div class="section" id="prelude">
+<h2><span class="section-number">2.1.1. </span>Prelude<a class="headerlink" href="#prelude" title="Permalink to this headline">¶</a></h2>
+<p>We look at some justification for why real numbers are needed.</p>
+<div class="proof proposition admonition" id="res-rl-no-rational-sqrt-2">
+<p class="admonition-title"><span class="caption-number">Proposition 2.1 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>There is no rational number whose square root is 2.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let us assume that there indeed is a rational number whose square root is 2:</p>
+<div class="math notranslate nohighlight">
+\[
+    \left ( \frac{p}{q} \right )^2 = 2.
+\]</div>
+<p>We assume that <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> have no common factor.
+Then we have: <span class="math notranslate nohighlight">\(p^2 = 2 q^2\)</span>.
+This means that <span class="math notranslate nohighlight">\(p^2\)</span> is even.
+Thus, <span class="math notranslate nohighlight">\(p\)</span> is even. Let <span class="math notranslate nohighlight">\(p = 2r\)</span>.
+Then <span class="math notranslate nohighlight">\(4r^2  = 2q^2 \implies q^2 = 2r^2\)</span>.
+This means that <span class="math notranslate nohighlight">\(q^2\)</span> is even.
+Thus, <span class="math notranslate nohighlight">\(q\)</span> is even.
+But this contradicts our assumption that <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> have no common factor.</p>
+</div>
+<p>This argument shows that the set of rational numbers is not complete
+in the sense that we can posit the existence of numbers which are not rational.</p>
+<p>We extend the set further to a larger number system known as real numbers.
+The <a class="reference internal" href="#axm-rl-completeness-axiom">completeness axiom</a>
+plays a major role in the
+definition of real numbers.</p>
+</div>
+<div class="section" id="real-numbers">
+<h2><span class="section-number">2.1.2. </span>Real numbers<a class="headerlink" href="#real-numbers" title="Permalink to this headline">¶</a></h2>
+<p>We present the axiomatic definition of real numbers.</p>
+<div class="proof definition admonition" id="def-real-numbers">
+<p class="admonition-title"><span class="caption-number">Definition 2.1 </span> (Real Numbers)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>real numbers</em> are the members of a nonempty set <span class="math notranslate nohighlight">\(\RR\)</span> equipped with two operations
+<span class="math notranslate nohighlight">\(+\)</span> and <span class="math notranslate nohighlight">\(\cdot\)</span> from <span class="math notranslate nohighlight">\(\RR \times \RR\)</span> into <span class="math notranslate nohighlight">\(\RR\)</span> called <em>addition</em> and <em>multiplication</em>,
+that satisfy following axioms. We will denote arbitrary members of <span class="math notranslate nohighlight">\(\RR\)</span> as <span class="math notranslate nohighlight">\(x, y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>.
+We will also abbreviate multiplication <span class="math notranslate nohighlight">\(x \cdot y\)</span>  as <span class="math notranslate nohighlight">\(x y\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(x + y = y + x\)</span> and <span class="math notranslate nohighlight">\(x y = y x\)</span>; <em>commutative laws</em>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x + (y + z) = (x + y) + z\)</span> and <span class="math notranslate nohighlight">\(x (y z) = (x y) z\)</span>; <em>associative laws</em>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x(y + z)  = x y + x z\)</span>; <em>distributive law</em>.</p></li>
+<li><p>There exists an element <span class="math notranslate nohighlight">\(0 \in \RR\)</span> such that <span class="math notranslate nohighlight">\(x + 0 = x \Forall x \in \RR\)</span>; <em>additive identity</em>.</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(x \in \RR\)</span> there exists an element in <span class="math notranslate nohighlight">\(\RR\)</span> denoted by <span class="math notranslate nohighlight">\(-x\)</span> such that
+<span class="math notranslate nohighlight">\(x + (-x) = 0\)</span>; <em>additive inverse</em>.</p></li>
+<li><p>There exists an element <span class="math notranslate nohighlight">\(1 \in \RR\)</span> with <span class="math notranslate nohighlight">\(1 \neq 0\)</span> satisfying
+<span class="math notranslate nohighlight">\(1\cdot x = x \Forall x \in \RR\)</span>; <em>multiplicative identity</em>.</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(x \neq 0\)</span> there exists an element in <span class="math notranslate nohighlight">\(\RR\)</span> denoted by <span class="math notranslate nohighlight">\(x^{-1}\)</span> satisfying
+<span class="math notranslate nohighlight">\(x x^{-1} = 1\)</span>; <em>multiplicative inverse</em>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(x, y \in \RR\)</span> either <span class="math notranslate nohighlight">\( x \geq y\)</span> or <span class="math notranslate nohighlight">\(y \geq x\)</span> holds; <em>total order</em>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x \geq y\)</span>, then <span class="math notranslate nohighlight">\( x + z \geq y + z\)</span> holds for each <span class="math notranslate nohighlight">\(z \in \RR\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x \geq y\)</span> and <span class="math notranslate nohighlight">\(z \geq 0\)</span> then <span class="math notranslate nohighlight">\(x z \geq y z\)</span>.</p></li>
+<li><p>Every nonempty set of real numbers that is bounded from above has a least upper bound; <em>completeness axiom</em>.</p></li>
+</ol>
+</div>
+</div><p>Axioms (1-7) are <em>field</em> axioms. Axioms (8-10) establish that <span class="math notranslate nohighlight">\(\RR\)</span> is an <em>ordered field</em>.
+Axiom (11) is discussed further in <a class="reference internal" href="#axm-rl-completeness-axiom">Axiom 2.1</a>.</p>
+<p>It can be shown that if <span class="math notranslate nohighlight">\(\RR\)</span> and <span class="math notranslate nohighlight">\(\SS\)</span> are two different
+sets satisfying these axioms then they are isomorphic and
+for all practical purposes identical.</p>
+<p>Several remarks immediately follow from the definition.</p>
+<ul class="simple">
+<li><p>The zero element (additive identity) is unique.</p></li>
+<li><p>The one element (multiplicative identity) is unique.</p></li>
+<li><p>The additive inverse <span class="math notranslate nohighlight">\(-x\)</span> is unique.</p></li>
+<li><p><span class="math notranslate nohighlight">\(-x= (-1)x\)</span> holds.</p></li>
+<li><p>The  multiplicative inverse <span class="math notranslate nohighlight">\(x^{-1}\)</span> for <span class="math notranslate nohighlight">\(x \neq 0\)</span> is unique.</p></li>
+<li><p><span class="math notranslate nohighlight">\(0 \cdot x = 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( - ( - x) = x\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((-x) (-y) = x y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( x - y = x + (-y) = - (y - x)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((x^{-1})^{-1} = x \Forall x \neq 0\)</span>.</p></li>
+</ul>
+<p>Remarks above are derived from field properties of real line.</p>
+<p>Further remarks on order property</p>
+<ul class="simple">
+<li><p>An alternative notation for <span class="math notranslate nohighlight">\(x \geq y\)</span> is <span class="math notranslate nohighlight">\(y \leq x\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x &gt; y\)</span> means that <span class="math notranslate nohighlight">\(x \geq y\)</span> and <span class="math notranslate nohighlight">\(x \neq y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x &lt; y\)</span> means that <span class="math notranslate nohighlight">\(x \leq y\)</span> and <span class="math notranslate nohighlight">\(x \neq y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( x &lt; y \iff y &gt; x \iff y - x &gt; x - x  = 0\)</span>.</p></li>
+</ul>
+<div class="proof definition admonition" id="def-rl-positive-number">
+<p class="admonition-title"><span class="caption-number">Definition 2.2 </span> (Positive and negative numbers)</p>
+<div class="definition-content section" id="proof-content">
+<ul class="simple">
+<li><p>Any number <span class="math notranslate nohighlight">\(x \in \RR\)</span> satisfying <span class="math notranslate nohighlight">\( x &gt; 0\)</span> is called a <em>positive number</em>.</p></li>
+<li><p>Any number <span class="math notranslate nohighlight">\(x \in \RR\)</span> satisfying <span class="math notranslate nohighlight">\( x &lt; 0\)</span> is called a <em>negative number</em>.</p></li>
+<li><p>Any number <span class="math notranslate nohighlight">\(x \in \RR\)</span> satisfying <span class="math notranslate nohighlight">\( x \geq 0\)</span> is called
+a <em>non-negative number</em>.</p></li>
+<li><p>Any number <span class="math notranslate nohighlight">\(x \in \RR\)</span> satisfying <span class="math notranslate nohighlight">\( x \leq 0\)</span> is
+called a <em>non-positive number</em>.</p></li>
+</ul>
+</div>
+</div><div class="proof proposition admonition" id="res-rl-epsilon-order">
+<p class="admonition-title"><span class="caption-number">Proposition 2.2 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(x + \epsilon \geq y\)</span> for each <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, then <span class="math notranslate nohighlight">\( x \geq y\)</span> holds.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If the result doesn’t hold, then <span class="math notranslate nohighlight">\(x &lt; y \implies y - x &gt; 0\)</span>.
+Let <span class="math notranslate nohighlight">\( \epsilon = \frac{1}{2} (y - x)\)</span>. Then <span class="math notranslate nohighlight">\( x + \epsilon = \frac{1}{2} (x + y) \geq y\)</span>.
+This implies <span class="math notranslate nohighlight">\( \frac{1}{2} ( y - x) \geq 0 \iff  y - x &lt; 0\)</span>, which is a contradiction.</p>
+</div>
+<div class="proof definition admonition" id="def-rl-absolute-value">
+<p class="admonition-title"><span class="caption-number">Definition 2.3 </span> (Absolute value)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>absolute value</em> <span class="math notranslate nohighlight">\(| a |\)</span> of a real number  <span class="math notranslate nohighlight">\(a \in \RR\)</span> is defined as follows.
+if <span class="math notranslate nohighlight">\(a \geq 0\)</span>, then <span class="math notranslate nohighlight">\(| a | = a\)</span> and if <span class="math notranslate nohighlight">\(a &lt; 0\)</span>, then <span class="math notranslate nohighlight">\(| a |  = -a\)</span>.
+<span class="math notranslate nohighlight">\(a \vee b\)</span> denotes the larger of the two numbers. <span class="math notranslate nohighlight">\(a \wedge b\)</span> denotes the smaller of
+the two numbers.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-5">
+<p class="admonition-title"><span class="caption-number">Remark 2.1 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Thus <span class="math notranslate nohighlight">\(| a | = a \vee (-a) \Forall a \in \RR\)</span>. Further <span class="math notranslate nohighlight">\(| a | = |-a |\)</span>.</p>
+</div>
+</div><div class="proof proposition admonition" id="res-absolute-value-properties">
+<p class="admonition-title"><span class="caption-number">Proposition 2.3 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>The absolute value satisfies following properties:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(| a | \geq 0\)</span> for each <span class="math notranslate nohighlight">\(a \in \RR\)</span>, and <span class="math notranslate nohighlight">\( | a | = 0 \iff a = 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( | a b |  = | a | \cdot | b | \Forall a, b \in \RR\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( | a + b | \leq  | a | + | b | \Forall a, b \in \RR\)</span>; the triangle inequality.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(a=0\)</span> then by definition <span class="math notranslate nohighlight">\(| a | = 0\)</span>. Again from definition, for any non-zero value,
+<span class="math notranslate nohighlight">\(| a |\)</span> is not zero. Hence <span class="math notranslate nohighlight">\( | a | = 0 \iff a = 0\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> two non-negative numbers. Then <span class="math notranslate nohighlight">\(| a |  = a\)</span> and <span class="math notranslate nohighlight">\( | b | = b\)</span>. Thus,
+<span class="math notranslate nohighlight">\(| a | | b | = a b = | a b | \)</span>. Further <span class="math notranslate nohighlight">\(| a | + | b |  = a + b = | a  +  b |\)</span>.</p>
+<p>Now, let <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> two non-positive numbers. Then <span class="math notranslate nohighlight">\(| a |  = - a\)</span> and <span class="math notranslate nohighlight">\( | b | = - b\)</span>.
+<span class="math notranslate nohighlight">\(a b\)</span> is non-negative, hence <span class="math notranslate nohighlight">\(| a b | = a b\)</span>. <span class="math notranslate nohighlight">\(a + b\)</span> is non-positive, hence <span class="math notranslate nohighlight">\(| a + b | = - (a + b)\)</span>.
+Thus,
+<span class="math notranslate nohighlight">\(| a | | b | = (- a) ( - b) = a b = | a b | \)</span>.
+Further, <span class="math notranslate nohighlight">\(| a | + | b |  = (-a) + (-b) = -(a +  b) = | a + b |\)</span>.</p>
+<p>Now lets consider when <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are of opposite signs. WLOG (without loss of generality), let
+us assume that <span class="math notranslate nohighlight">\(a\)</span> is positive and <span class="math notranslate nohighlight">\(b\)</span> is negative.
+Further let us assume that <span class="math notranslate nohighlight">\(| a | \geq | b |\)</span>. Clearly, then <span class="math notranslate nohighlight">\( | a + b | &lt; | a | + | b |\)</span>.
+Also <span class="math notranslate nohighlight">\(| a b | = - a b = | a | | b |\)</span>.</p>
+</div>
+<div class="proof corollary admonition" id="res-rl-triangle-inequality-for-difference">
+<p class="admonition-title"><span class="caption-number">Corollary 2.1 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>For <span class="math notranslate nohighlight">\(a , b \in \RR\)</span> the following hold:</p>
+<div class="math notranslate nohighlight">
+\[
+    | a - b | \leq | a | + | b |.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    | | a | - | b | | \leq | a - b |.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We know that</p>
+<div class="math notranslate nohighlight">
+\[
+    | a + b | \leq  | a | + | b |.
+\]</div>
+<p>Replacing <span class="math notranslate nohighlight">\(b\)</span> with <span class="math notranslate nohighlight">\(-b\)</span> we get:</p>
+<div class="math notranslate nohighlight">
+\[
+    | a - b | \leq | a | + | b |.
+\]</div>
+<p>Again, replacing <span class="math notranslate nohighlight">\(b\)</span> with <span class="math notranslate nohighlight">\(b - a\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+    | a + b - a | \leq | a | + | b - a  | \implies  | b | - | a | \leq | a - b |.
+\]</div>
+<p>Further, replacing <span class="math notranslate nohighlight">\(a\)</span> with <span class="math notranslate nohighlight">\(a - b\)</span> in <span class="math notranslate nohighlight">\(|a + b | \leq |a | + |b|\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+    | a - b + b | \leq | a - b | + | b | \implies  
+    | a |  - | b | \leq | a  - b |.
+\]</div>
+<p>Combining the two, we get our result.</p>
+</div>
+<div class="proof proposition admonition" id="res-rl-distance-triangle-inequality">
+<p class="admonition-title"><span class="caption-number">Proposition 2.4 </span> (Distance triangle inequality)</p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\( a, b, c \in \RR\)</span>. Then:</p>
+<div class="math notranslate nohighlight">
+\[
+    | a - b | \leq | a - c | + | c - b |.
+\]</div>
+</div>
+</div><p>This is straight-forward application of <a class="reference internal" href="#res-absolute-value-properties">Proposition 2.3</a>.</p>
+<div class="math notranslate nohighlight">
+\[
+| a - c | + | c - b | \geq | (a - c) + (c - b) | = | a - b |.
+\]</div>
+<div class="proof proposition admonition" id="ref-rl-real-equality">
+<p class="admonition-title"><span class="caption-number">Proposition 2.5 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Two real numbers <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are equal if and only if for every real number <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,
+<span class="math notranslate nohighlight">\(| a - b | &lt; \epsilon\)</span> holds.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(a = b\)</span>, then <span class="math notranslate nohighlight">\(a - b = 0 \implies | a - b | = 0 &lt; \epsilon\)</span> for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>.
+Now for the converse, we are given that for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, <span class="math notranslate nohighlight">\(| a - b | &lt; \epsilon\)</span>.
+We have to show that <span class="math notranslate nohighlight">\(a = b\)</span>. Let as assume that <span class="math notranslate nohighlight">\(a \neq b\)</span>. Choose <span class="math notranslate nohighlight">\(\epsilon_0 = | a -  b |\)</span>.
+Clearly, for <span class="math notranslate nohighlight">\(\epsilon_0 &gt; 0\)</span>, <span class="math notranslate nohighlight">\( | a - b | &lt; \epsilon_0\)</span> doesn’t hold.
+This contradicts our assumption that for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>
+<span class="math notranslate nohighlight">\(| a  - b | &lt; \epsilon\)</span>. Hence <span class="math notranslate nohighlight">\(a  = b\)</span>.</p>
+</div>
+</div>
+<div class="section" id="intervals">
+<h2><span class="section-number">2.1.3. </span>Intervals<a class="headerlink" href="#intervals" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-rl-interval">
+<p class="admonition-title"><span class="caption-number">Definition 2.4 </span> (Interval)</p>
+<div class="definition-content section" id="proof-content">
+<p>A subset <span class="math notranslate nohighlight">\(S\)</span> of <span class="math notranslate nohighlight">\(\RR\)</span> is called an <em>interval</em> if
+for every <span class="math notranslate nohighlight">\(a,b \in S\)</span> such that <span class="math notranslate nohighlight">\(a &lt; b\)</span>,
+<span class="math notranslate nohighlight">\(S\)</span> contains all the real numbers between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.
+In other words, if <span class="math notranslate nohighlight">\(a &lt; x &lt; b\)</span>, then <span class="math notranslate nohighlight">\(x \in S\)</span>.</p>
+<ul class="simple">
+<li><p>An <em>open interval</em> does not include its endpoints and is denoted
+as <span class="math notranslate nohighlight">\((a,b) \triangleq \{ x \in \RR \ST a &lt; x &lt; b\}\)</span>.</p></li>
+<li><p>A <em>closed interval</em> does not include its endpoints and is denoted
+as <span class="math notranslate nohighlight">\([a,b] \triangleq \{ x \in \RR \ST a \leq x \leq b\}\)</span>.</p></li>
+<li><p>A <em>half-open interval</em> includes one of its its endpoints
+: <span class="math notranslate nohighlight">\([a,b) \triangleq \{ x \in \RR \ST a \leq x &lt; b\}\)</span>;
+<span class="math notranslate nohighlight">\((a,b] \triangleq \{ x \in \RR \ST a &lt; x \leq b\}\)</span>.</p></li>
+<li><p>A <em>degenerate interval</em> is an interval of the form <span class="math notranslate nohighlight">\([a,a]\)</span>
+which is a singleton containing <span class="math notranslate nohighlight">\(a \in \RR\)</span>.</p></li>
+</ul>
+</div>
+</div></div>
+<div class="section" id="completeness-axiom">
+<h2><span class="section-number">2.1.4. </span>Completeness Axiom<a class="headerlink" href="#completeness-axiom" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-rl-bounds">
+<p class="admonition-title"><span class="caption-number">Definition 2.5 </span> (Upper and lower bounds)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a nonempty subset of <span class="math notranslate nohighlight">\(\RR\)</span>.</p>
+<ul class="simple">
+<li><p>An <em>upper bound</em> of <span class="math notranslate nohighlight">\(A\)</span> is any
+<span class="math notranslate nohighlight">\(u \in \RR\)</span> such that <span class="math notranslate nohighlight">\( x \leq u \Forall x \in A\)</span>.</p></li>
+<li><p>A <em>lower bound</em> of <span class="math notranslate nohighlight">\(A\)</span> is any <span class="math notranslate nohighlight">\( l \in \RR\)</span> such that <span class="math notranslate nohighlight">\( x \geq l \Forall x \in A\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A\)</span> has an upper bound it is said to be <em>bounded from above</em>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A\)</span> has a lower bound it is said to be <em>bounded from below</em>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A\)</span> is both bounded from above and below, then <span class="math notranslate nohighlight">\(A\)</span> is said to be <em>bounded</em>.</p></li>
+<li><p>A real number is called a <em>least upper bound</em> or <em>supremum</em> of <span class="math notranslate nohighlight">\(A\)</span> if it
+is an upper bound of <span class="math notranslate nohighlight">\(A\)</span>, and it is less than or equal to every other upper bound of <span class="math notranslate nohighlight">\(A\)</span>.
+The least upper bound is denoted by <span class="math notranslate nohighlight">\(\sup (A)\)</span>.</p></li>
+<li><p>A real number is called a <em>greatest lower bound</em> or <em>infimum</em> of <span class="math notranslate nohighlight">\(A\)</span> if it
+is a lower bound of <span class="math notranslate nohighlight">\(A\)</span>, and it is greater than or equal to every other lower bound of <span class="math notranslate nohighlight">\(A\)</span>.
+The greatest lower bound is denoted by <span class="math notranslate nohighlight">\(\inf(A)\)</span>.</p></li>
+</ul>
+</div>
+</div><div class="proof remark admonition" id="remark-12">
+<p class="admonition-title"><span class="caption-number">Remark 2.2 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(A\)</span> can have at most one least upper bound and at most one greatest lower bound.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-13">
+<p class="admonition-title"><span class="caption-number">Remark 2.3 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>The infimum or supremum of a set <span class="math notranslate nohighlight">\(A\)</span> need not belong to the set itself.</p>
+</div>
+</div><p>The set <span class="math notranslate nohighlight">\(S = \{ x \ST 0 &lt; x &lt; 1\}\)</span> has an infimum <span class="math notranslate nohighlight">\(0\)</span> and a supremum <span class="math notranslate nohighlight">\(1\)</span>.
+Neither belong to the set.</p>
+<p>The completeness axiom asserts that every nonempty set bounded from above has a least
+upper bound. We restate the axiom independently for emphasis.</p>
+<div class="proof axiom admonition" id="axm-rl-completeness-axiom">
+<p class="admonition-title"><span class="caption-number">Axiom 2.1 </span> (Completeness axiom)</p>
+<div class="axiom-content section" id="proof-content">
+<p>Every nonempty set of real numbers that is bounded from above has a least upper bound.</p>
+</div>
+</div><div class="proof example admonition" id="example-15">
+<p class="admonition-title"><span class="caption-number">Example 2.1 </span> (Least upper and lower bounds)</p>
+<div class="example-content section" id="proof-content">
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+    A = \left \{ \frac{1}{n} : n \in \Nat \right \}.
+\]</div>
+<p>The set is bounded from above with <span class="math notranslate nohighlight">\(\sup(A) = 1\)</span>.
+The set is bounded from below with <span class="math notranslate nohighlight">\(\inf(A) = 0\)</span>.</p>
+<p>The open interval <span class="math notranslate nohighlight">\((0, 2) = \{x \in \RR : 0 &lt; x &lt; 2 \}\)</span>
+has lower and upper bounds as <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(2\)</span> respectively. So does
+the closed interval <span class="math notranslate nohighlight">\([0, 2] = \{x \in \RR : 0 \leq x \leq 2 \}\)</span>.
+But <span class="math notranslate nohighlight">\((0,2)\)</span> has no maximum or minimum element. <span class="math notranslate nohighlight">\([0,2]\)</span> has both.
+Further, <span class="math notranslate nohighlight">\((0,2]\)</span> has maximum element but not minimum, and <span class="math notranslate nohighlight">\([0,2)\)</span> has
+minimum element but not maximum.</p>
+</div>
+</div><div class="proof example admonition" id="example-16">
+<p class="admonition-title"><span class="caption-number">Example 2.2 </span> (Distinction with rational numbers)</p>
+<div class="example-content section" id="proof-content">
+<p>The set <span class="math notranslate nohighlight">\(S = \{ x \in \QQ : x^2 \leq 2\}\)</span> doesn’t have a least upper bound
+in the set of rational numbers.
+For every <span class="math notranslate nohighlight">\(x \in S\)</span>, it is possible to find a <span class="math notranslate nohighlight">\(y \in \QQ\)</span> such that
+<span class="math notranslate nohighlight">\( y &gt; x\)</span> and <span class="math notranslate nohighlight">\(y^2 &lt; 2\)</span>.</p>
+<p>The axiomatic definition of real numbers claims that since
+the set <span class="math notranslate nohighlight">\(S = \{ x \in \RR : x^2 \leq 2\}\)</span> is bounded from above,
+hence there exists a real number which is the least upper bound
+of this set. We simply denote this number as:</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{2} \triangleq \sup \{ x \in \RR : x^2 \leq 2\}.
+\]</div>
+</div>
+</div><div class="proof corollary admonition" id="res-rl-completeness-lower">
+<p class="admonition-title"><span class="caption-number">Corollary 2.2 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Every nonempty set of real numbers that is bounded from below has a greatest lower bound.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A \subset \RR\)</span> be a nonempty set bounded from below. Consider the set of lower bounds for <span class="math notranslate nohighlight">\(A\)</span>
+defined as</p>
+<div class="math notranslate nohighlight">
+\[
+    B = \{b \in \RR : b \leq x  \Forall x \in A \}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(B\)</span> is bounded from above by numbers in <span class="math notranslate nohighlight">\(A\)</span>, hence by completeness axiom, <span class="math notranslate nohighlight">\(B\)</span> has
+a least upper bound denoted by <span class="math notranslate nohighlight">\(\sup (B)\)</span>. This indeed is the greatest lower bound of <span class="math notranslate nohighlight">\(A\)</span>
+as <span class="math notranslate nohighlight">\(\sup (B) = \inf(A)\)</span>.</p>
+</div>
+<p>This result demonstrates that we only need an axiom for the least upper bound. The
+idea of existence of greatest lower bound immediately follows from it. We could
+have easily started with the existence of greatest lower bound as an axiom and derived
+the existence of least upper bound from it.</p>
+<div class="proof remark admonition" id="remark-18">
+<p class="admonition-title"><span class="caption-number">Remark 2.4 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>If a set <span class="math notranslate nohighlight">\(A\)</span> has a maximum (resp. minimum) element, then <span class="math notranslate nohighlight">\(\max(A) = \sup (A)\)</span>
+(resp. <span class="math notranslate nohighlight">\(\min(A) = \inf (A)\)</span> ).</p>
+<p>On the other hand, if the supremum of a set <span class="math notranslate nohighlight">\(A\)</span> exists and <span class="math notranslate nohighlight">\(\sup (A) \in A\)</span>, then
+<span class="math notranslate nohighlight">\(\sup(A)\)</span> is the maximum element of <span class="math notranslate nohighlight">\(A\)</span>. Similarly if the infimum of a set <span class="math notranslate nohighlight">\(A\)</span>
+exists and <span class="math notranslate nohighlight">\(\inf(A) \in A\)</span>, then <span class="math notranslate nohighlight">\(\inf(A)\)</span> is the minimum element of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="proof proposition admonition" id="res-rl-supremum-epsilon">
+<p class="admonition-title"><span class="caption-number">Proposition 2.6 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Assume that the supremum of a subset <span class="math notranslate nohighlight">\(A\)</span> of <span class="math notranslate nohighlight">\(\RR\)</span> exists. Then for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,
+there exists some <span class="math notranslate nohighlight">\(x \in A\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    \sup (A) - \epsilon &lt; x \leq \sup (A).
+\]</div>
+<p>Conversely, let <span class="math notranslate nohighlight">\(a\)</span> be an upper bound of <span class="math notranslate nohighlight">\(A \subseteq \RR\)</span> such that for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,
+there exists an <span class="math notranslate nohighlight">\(x \in A\)</span> such that <span class="math notranslate nohighlight">\( a - \epsilon &lt; x\)</span>, then <span class="math notranslate nohighlight">\(a\)</span> is the least upper bound of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Clearly, if <span class="math notranslate nohighlight">\(x \in A\)</span> then <span class="math notranslate nohighlight">\( x \leq \sup (A)\)</span>. Now, if for every <span class="math notranslate nohighlight">\(x \in A\)</span> we have <span class="math notranslate nohighlight">\(x \leq \sup (A)  - \epsilon\)</span>, then
+<span class="math notranslate nohighlight">\(\sup (A) - \epsilon\)</span> is an upper bound of <span class="math notranslate nohighlight">\(A\)</span>, which is less than the least upper bound. This is
+a contradiction.  Thus, for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists an <span class="math notranslate nohighlight">\(x \in A\)</span> such that
+<span class="math notranslate nohighlight">\(\sup (A) - \epsilon &lt; x \leq \sup (A)\)</span>.</p>
+<p>Conversely, no matter how small <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> is chosen, <span class="math notranslate nohighlight">\(a - \epsilon\)</span> cannot be an upper bound of
+<span class="math notranslate nohighlight">\(A\)</span> since there exists some <span class="math notranslate nohighlight">\(x \in A\)</span> such that <span class="math notranslate nohighlight">\(x &gt; a - \epsilon\)</span>. Hence <span class="math notranslate nohighlight">\(a\)</span> is indeed the least
+upper bound of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+<div class="proof proposition admonition" id="res-rl-subset-upper-bound">
+<p class="admonition-title"><span class="caption-number">Proposition 2.7 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be two subsets of <span class="math notranslate nohighlight">\(\RR\)</span> bounded above with <span class="math notranslate nohighlight">\(B \subseteq A\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \sup(B) \leq \sup(A).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(a\)</span> be an upper bound of <span class="math notranslate nohighlight">\(A\)</span>. Then <span class="math notranslate nohighlight">\(a \geq x \Forall x \in A\)</span>. Since <span class="math notranslate nohighlight">\(B \subseteq A\)</span>,
+hence <span class="math notranslate nohighlight">\(a \geq y \Forall y \in B\)</span> too. Thus, every upper bound of <span class="math notranslate nohighlight">\(A\)</span> is also an upper bound of <span class="math notranslate nohighlight">\(B\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\sup(A)\)</span> is also an upper bound of <span class="math notranslate nohighlight">\(B\)</span>. Since <span class="math notranslate nohighlight">\(\sup(B)\)</span> is least upper bound of <span class="math notranslate nohighlight">\(B\)</span>,
+it is smaller than or equal to any other upper bound of <span class="math notranslate nohighlight">\(B\)</span>. Thus <span class="math notranslate nohighlight">\(\sup(B) \leq \sup(A)\)</span>.</p>
+</div>
+<div class="proof proposition admonition" id="res-rl-nat-numbers-unbounded">
+<p class="admonition-title"><span class="caption-number">Proposition 2.8 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>The set of natural numbers <span class="math notranslate nohighlight">\(\Nat\)</span> is unbounded.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume by contradiction that <span class="math notranslate nohighlight">\(\Nat\)</span> is bounded. Since <span class="math notranslate nohighlight">\(\Nat \subset \RR\)</span>, hence by completeness
+axiom, there exists a least upper bound of <span class="math notranslate nohighlight">\(\Nat\)</span>. Let <span class="math notranslate nohighlight">\(s = \sup(\Nat)\)</span>. Then  <span class="math notranslate nohighlight">\( n \leq s \Forall n \in \Nat\)</span>.
+Then by <a class="reference internal" href="#res-rl-supremum-epsilon">Proposition 2.6</a>, for <span class="math notranslate nohighlight">\(\epsilon = 1\)</span> there exists  some <span class="math notranslate nohighlight">\(k \in \Nat\)</span> such that
+<span class="math notranslate nohighlight">\( s - 1 &lt; k\)</span>. This implies <span class="math notranslate nohighlight">\( s &lt; k+1\)</span>. Further since <span class="math notranslate nohighlight">\(s\)</span> is the supremum, hence <span class="math notranslate nohighlight">\( k + 1 \leq s\)</span>. Thus,
+<span class="math notranslate nohighlight">\( s &lt; k+1 \leq s\)</span>, which is impossible.</p>
+</div>
+<div class="proof proposition admonition" id="res-rl-nested-interval-property">
+<p class="admonition-title"><span class="caption-number">Proposition 2.9 </span> (Nested interval property)</p>
+<div class="proposition-content section" id="proof-content">
+<p>For each <span class="math notranslate nohighlight">\(n \in \Nat\)</span>, assume that we are given a closed interval
+<span class="math notranslate nohighlight">\(I_n = [a_n, b_n] = \{x \in \RR : a_n \leq x \leq b_n\}\)</span>. Assume
+also that each <span class="math notranslate nohighlight">\(I_n\)</span> contains <span class="math notranslate nohighlight">\(I_{n + 1}\)</span>. Then, the resulting nested sequence of
+closed intervals</p>
+<div class="math notranslate nohighlight">
+\[
+    I_1 \supseteq I_2 \supseteq \dots \supseteq  I_n \supseteq  I_{n + 1} \supseteq  \dots
+\]</div>
+<p>has a nonempty intersection; i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+    \bigcap_{n= 1}^{\infty} I_n \neq \EmptySet.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider the set of lower bounds</p>
+<div class="math notranslate nohighlight">
+\[
+    A = \{ a_n : n \in \Nat \}.
+\]</div>
+<p>Due to <a class="reference internal" href="#axm-rl-completeness-axiom">completeness axiom</a>, the set has a least upper bound.
+Let <span class="math notranslate nohighlight">\(x = \sup (A)\)</span>.  Further, due to nested structure, each <span class="math notranslate nohighlight">\(b_n\)</span> is also an upper bound of <span class="math notranslate nohighlight">\(A\)</span>.
+Since <span class="math notranslate nohighlight">\(x\)</span> is the least upper bound, hence <span class="math notranslate nohighlight">\(x \leq b_n \Forall n \in \Nat\)</span>. Thus, we have <span class="math notranslate nohighlight">\(a_n \leq x \leq b_n\)</span>
+<span class="math notranslate nohighlight">\(\Forall n \in \Nat\)</span>. Hence, <span class="math notranslate nohighlight">\(x \in I_n \Forall n \implies x \in \bigcap_{n= 1}^{\infty} I_n\)</span> .</p>
+</div>
+</div>
+<div class="section" id="archimedian-property">
+<h2><span class="section-number">2.1.5. </span>Archimedian Property<a class="headerlink" href="#archimedian-property" title="Permalink to this headline">¶</a></h2>
+<div class="proof proposition admonition" id="res-rl-archimedian">
+<p class="admonition-title"><span class="caption-number">Proposition 2.10 </span> (Archimedian property)</p>
+<div class="proposition-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are two positive real numbers, then there exists some natural number <span class="math notranslate nohighlight">\(n\)</span> such that
+<span class="math notranslate nohighlight">\(n x &gt; y\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For contradiction assume that <span class="math notranslate nohighlight">\( n x \leq y\)</span> holds for every <span class="math notranslate nohighlight">\(n \in \Nat\)</span>. Since, <span class="math notranslate nohighlight">\(x, y &gt; 0\)</span>,
+<span class="math notranslate nohighlight">\( n \leq y x ^{-1} \Forall n \in \Nat\)</span>. This contradicts
+<a class="reference internal" href="#res-rl-nat-numbers-unbounded">Proposition 2.8</a>.</p>
+</div>
+<p>This also tells us that for any real number <span class="math notranslate nohighlight">\(x &gt; 0\)</span>, there exists an <span class="math notranslate nohighlight">\(n \in \Nat\)</span> satisfying
+<span class="math notranslate nohighlight">\(\frac{1}{n} &lt; x\)</span>. By choosing <span class="math notranslate nohighlight">\(y = 1\)</span> in above, we get <span class="math notranslate nohighlight">\(n x &gt; 1 \implies x &gt; \frac{1}{n}\)</span>.</p>
+<div class="proof example admonition" id="example-24">
+<p class="admonition-title"><span class="caption-number">Example 2.3 </span></p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A = \{\frac{1}{n} : n \in \Nat \}\)</span>. We show that <span class="math notranslate nohighlight">\(\inf (A)  = 0\)</span>. Clearly 0 is a lower bound.
+Now if <span class="math notranslate nohighlight">\(x &gt; 0\)</span> then we can find <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> such that <span class="math notranslate nohighlight">\(1/n_0 &lt; x\)</span>. Thus <span class="math notranslate nohighlight">\(x &gt; 0\)</span> cannot be a lower bound of
+<span class="math notranslate nohighlight">\(A\)</span>. Hence <span class="math notranslate nohighlight">\(0\)</span> is the greatest lower bound of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="rational-numbers">
+<h2><span class="section-number">2.1.6. </span>Rational Numbers<a class="headerlink" href="#rational-numbers" title="Permalink to this headline">¶</a></h2>
+<div class="proof proposition admonition" id="res-rl-rational-existence">
+<p class="admonition-title"><span class="caption-number">Proposition 2.11 </span> (Density of <span class="math notranslate nohighlight">\(\QQ\)</span> in <span class="math notranslate nohighlight">\(\RR\)</span>)</p>
+<div class="proposition-content section" id="proof-content">
+<p>Between any two distinct real numbers there exists a rational number.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> be the two distinct real numbers.
+If the two numbers are of opposite sign, then 0 is an obvious rational number between them.
+If <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are both non-positive, then the rational number can be chosen to be the negative of the rational number
+between <span class="math notranslate nohighlight">\(-a\)</span> and <span class="math notranslate nohighlight">\(-b\)</span>.
+We now consider the case where both <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are non-negative. Without loss of generality,
+we assume that <span class="math notranslate nohighlight">\(0 \leq a &lt; b\)</span>. Consider the set</p>
+<div class="math notranslate nohighlight">
+\[
+    A = \left \{n \in \Nat : n &gt; \max\left \{\frac{1}{b - a}, \frac{1}{b} \right \} \right \}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\Nat\)</span> is not bounded from above, <span class="math notranslate nohighlight">\(A\)</span> is nonempty. Fix an element <span class="math notranslate nohighlight">\(q \in A\)</span>.
+Clearly,  <span class="math notranslate nohighlight">\(0 &lt; \frac{1}{q} &lt; b - a\)</span> and <span class="math notranslate nohighlight">\( 1 &lt; b q\)</span>.
+Now, let</p>
+<div class="math notranslate nohighlight">
+\[
+    B = \{n \in \Nat : n &lt; b q \}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(1 \in B\)</span>,  B is nonempty.
+Also, <span class="math notranslate nohighlight">\(B\)</span> is a finite set. Let <span class="math notranslate nohighlight">\(p = \max (B)\)</span>. Clearly, <span class="math notranslate nohighlight">\(p \in B\)</span> and <span class="math notranslate nohighlight">\(p + 1 \notin B\)</span>.</p>
+<p>Finally, we will show that <span class="math notranslate nohighlight">\( a &lt; \frac{p}{q} &lt; b\)</span>.
+Since <span class="math notranslate nohighlight">\(p \in B\)</span>, <span class="math notranslate nohighlight">\( p &lt; b q \implies \frac{p}{q} &lt; b\)</span>.
+Further,</p>
+<div class="math notranslate nohighlight">
+\[
+    p + 1 \geq  b q  \implies  b \leq \frac{p}{q} + \frac{1}{q} &lt; \frac{p}{q} + b - a \implies a &lt; \frac{p}{q}.
+\]</div>
+</div>
+<div class="proof proposition admonition" id="res-rl-existence-of-square-root-2">
+<p class="admonition-title"><span class="caption-number">Proposition 2.12 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>There exists a real number <span class="math notranslate nohighlight">\(\alpha \in \RR\)</span> satisfying <span class="math notranslate nohighlight">\(\alpha^2 = 2\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider the set</p>
+<div class="math notranslate nohighlight">
+\[
+    A = \{ x \in \RR : x^2 &lt; 2 \}.
+\]</div>
+<p>Clearly, A is bounded above. Now, choose <span class="math notranslate nohighlight">\(\alpha = \sup(A)\)</span>. We show that <span class="math notranslate nohighlight">\(\alpha^2 = 2\)</span>
+by ruling out <span class="math notranslate nohighlight">\(\alpha^2 &lt; 2\)</span> and <span class="math notranslate nohighlight">\(\alpha^2 &gt; 2\)</span>.
+Assume that <span class="math notranslate nohighlight">\(\alpha^2 &lt; 2\)</span>. Consider for some <span class="math notranslate nohighlight">\(n \in \Nat\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \left ( \alpha + \frac{1}{n}\right )^2 &amp;= \alpha^2 + \frac{2 \alpha}{n} + \frac{1}{n^2}\\
+    &amp;&lt; \alpha^2 + \frac{2 \alpha}{n}  + \frac{1}{n}\\
+    &amp; = \alpha^2 + \frac{2 \alpha + 1}{n}.
+\end{split}\]</div>
+<p>Now choose <span class="math notranslate nohighlight">\(n_0 \in \Nat\)</span> large enough so that</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{1}{n_0} &lt; \frac{2 - \alpha^2}{ 2 \alpha + 1}.
+\]</div>
+<p>This implies <span class="math notranslate nohighlight">\(\frac{2 \alpha + 1}{n_0} &lt; 2 - \alpha^2\)</span>. Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    \left ( \alpha + \frac{1}{n_0}\right )^2 &lt; \alpha^2 + (2 - \alpha^2) = 2.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\alpha + \frac{1}{n_0} \in A\)</span> contradicting the assumption that <span class="math notranslate nohighlight">\(\alpha^2\)</span> is an upper bound of <span class="math notranslate nohighlight">\(A\)</span>.
+Hence <span class="math notranslate nohighlight">\(\alpha^2 &lt; 2\)</span> is not possible.</p>
+<p>Now assuming <span class="math notranslate nohighlight">\(\alpha^2 &gt; 2\)</span>, we show that it cannot be the least upper bound of <span class="math notranslate nohighlight">\(A\)</span>.
+We start with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \left ( \alpha - \frac{1}{n}\right )^2 &amp;= \alpha^2 - \frac{2 \alpha}{n} + \frac{1}{n^2}\\
+    &amp; &gt; \alpha^2 - \frac{2 \alpha}{n}.
+\end{split}\]</div>
+<p>Choosing <span class="math notranslate nohighlight">\(n_0 &gt; 2 \alpha / (\alpha^2 - 2)\)</span>, we get <span class="math notranslate nohighlight">\(\frac{2 \alpha}{n_0} &lt; \alpha^2 - 2\)</span>.
+Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \left ( \alpha - \frac{1}{n_0}\right )^2 &gt; \alpha^2 - (\alpha^2 - 2) = 2.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\left ( \alpha - \frac{1}{n_0}\right )^2\)</span> is also an upper bound of <span class="math notranslate nohighlight">\(A\)</span>.
+But</p>
+<div class="math notranslate nohighlight">
+\[
+    \left ( \alpha - \frac{1}{n_0}\right )^2 &lt; \alpha^2.
+\]</div>
+<p>Hence, <span class="math notranslate nohighlight">\(\alpha^2\)</span> cannot be the least upper bound of <span class="math notranslate nohighlight">\(A\)</span>. Thus, <span class="math notranslate nohighlight">\(\alpha^2 &gt; 2\)</span> is not possible.
+Since for every real number <span class="math notranslate nohighlight">\(\alpha^2\)</span>, exactly one of the possibilities <span class="math notranslate nohighlight">\(\alpha^2 &lt; 2\)</span>, <span class="math notranslate nohighlight">\(\alpha^2 &gt; 2\)</span>
+or <span class="math notranslate nohighlight">\(\alpha^2 = 2\)</span> has to be true, hence <span class="math notranslate nohighlight">\(\alpha^2 = 2\)</span>.</p>
+</div>
+</div>
+<div class="section" id="irrational-numbers">
+<h2><span class="section-number">2.1.7. </span>Irrational Numbers<a class="headerlink" href="#irrational-numbers" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-irrational-number">
+<p class="admonition-title"><span class="caption-number">Definition 2.6 </span> (Irrational number)</p>
+<div class="definition-content section" id="proof-content">
+<p>A real number which is not rational is known as <em>irrational number</em>. The
+set of irrational numbers is denoted by <span class="math notranslate nohighlight">\(\II\)</span>.</p>
+</div>
+</div><p>Clearly, <span class="math notranslate nohighlight">\(\II = \RR \setminus \QQ\)</span>. Also, <span class="math notranslate nohighlight">\(\RR = \QQ \cup \II\)</span>.
+Although <span class="math notranslate nohighlight">\(\QQ\)</span> forms a field, but <span class="math notranslate nohighlight">\(\II\)</span> does not. For example <span class="math notranslate nohighlight">\(\sqrt{2} \times \sqrt{2} = 2\)</span>
+is rational. Thus <span class="math notranslate nohighlight">\(\II\)</span> is not closed under multiplication. Further, <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>
+(the additive and multiplicative identities) don’t belong to <span class="math notranslate nohighlight">\(\II\)</span>.</p>
+<div class="proof proposition admonition" id="res-rl-rational-irrational-sum-product">
+<p class="admonition-title"><span class="caption-number">Proposition 2.13 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>The sum of a rational and an irrational number is irrational.
+The product of a non-zero rational number and an irrational number is irrational.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(q \in \QQ\)</span> and <span class="math notranslate nohighlight">\(i \in \II\)</span>.  Let <span class="math notranslate nohighlight">\(r = q + i\)</span>. Then <span class="math notranslate nohighlight">\(i = r - q\)</span>. If <span class="math notranslate nohighlight">\(r\)</span> were rational, then
+<span class="math notranslate nohighlight">\(i\)</span> would have to be rational (since <span class="math notranslate nohighlight">\(\QQ\)</span> is closed under addition). But <span class="math notranslate nohighlight">\(i\)</span> is irrational, hence
+<span class="math notranslate nohighlight">\(r\)</span> is irrational.</p>
+<p>Now let <span class="math notranslate nohighlight">\(q \neq 0\)</span>. Let <span class="math notranslate nohighlight">\(r = q i\)</span>. Then <span class="math notranslate nohighlight">\(i = r / q\)</span>.  If <span class="math notranslate nohighlight">\(r\)</span> were rational, then <span class="math notranslate nohighlight">\(i\)</span> would have
+to be rational since <span class="math notranslate nohighlight">\(\QQ\)</span> is closed under multiplication.</p>
+</div>
+<div class="proof proposition admonition" id="res-rl-irrational-existence">
+<p class="admonition-title"><span class="caption-number">Proposition 2.14 </span> (Density of <span class="math notranslate nohighlight">\(\II\)</span> in <span class="math notranslate nohighlight">\(\RR\)</span>)</p>
+<div class="proposition-content section" id="proof-content">
+<p>Between any two distinct real numbers there exists an irrational number.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(a, b \in \RR\)</span>. Without loss of generality, assume <span class="math notranslate nohighlight">\(a &lt; b\)</span>. Consider the numbers:
+<span class="math notranslate nohighlight">\(a - \sqrt{2}, b - \sqrt{2}\)</span>.  Since <span class="math notranslate nohighlight">\(\QQ\)</span> is dense in <span class="math notranslate nohighlight">\(\RR\)</span> (<a class="reference internal" href="#res-rl-rational-existence">Proposition 2.11</a>),
+there exists a rational number <span class="math notranslate nohighlight">\(q\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    a - \sqrt{2} &lt; q &lt; b - \sqrt{2}.
+\]</div>
+<p>Clearly <span class="math notranslate nohighlight">\(a &lt; q + \sqrt{2} &lt; b\)</span>. But by <a class="reference internal" href="#res-rl-rational-irrational-sum-product">Proposition 2.13</a>,
+<span class="math notranslate nohighlight">\(q + \sqrt{2}\)</span> is irrational. This completes the proof.</p>
+</div>
+<div class="proof proposition admonition" id="res-rl-existence-of-roots">
+<p class="admonition-title"><span class="caption-number">Proposition 2.15 </span> (Existence of roots)</p>
+<div class="proposition-content section" id="proof-content">
+<p>For a real number <span class="math notranslate nohighlight">\(a\)</span> and any natural number <span class="math notranslate nohighlight">\(n \geq 2\)</span>, we have the following:</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(a \geq 0\)</span> and <span class="math notranslate nohighlight">\(n\)</span> is even, there exists a unique <span class="math notranslate nohighlight">\(b \geq 0\)</span> such that <span class="math notranslate nohighlight">\( b^n = a\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(a \in \RR\)</span> and <span class="math notranslate nohighlight">\(n\)</span> is odd, then there exists a unique <span class="math notranslate nohighlight">\(b \in \RR\)</span> such that <span class="math notranslate nohighlight">\(b^n = a\)</span>.</p></li>
+</ol>
+</div>
+</div></div>
+<div class="section" id="uncountability">
+<h2><span class="section-number">2.1.8. </span>Uncountability<a class="headerlink" href="#uncountability" title="Permalink to this headline">¶</a></h2>
+<div class="proof proposition admonition" id="res-rl-real-numbers-uncountable">
+<p class="admonition-title"><span class="caption-number">Proposition 2.16 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>The set <span class="math notranslate nohighlight">\(\RR\)</span> is uncountable.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume that <span class="math notranslate nohighlight">\(\RR\)</span> is countable. Then it is possible to enumerate <span class="math notranslate nohighlight">\(\RR\)</span> as
+<span class="math notranslate nohighlight">\(\RR = \{ x_1, x_2, \dots \}\)</span>. Consider a closed interval <span class="math notranslate nohighlight">\(I_1\)</span> which doesn’t contain <span class="math notranslate nohighlight">\(x_1\)</span>.
+Further, consider a second closed interval <span class="math notranslate nohighlight">\(I_2 \subseteq I_1\)</span>
+which doesn’t contain <span class="math notranslate nohighlight">\(x_2\)</span>. If <span class="math notranslate nohighlight">\(I_1 = [a, b]\)</span>, then by choosing
+<span class="math notranslate nohighlight">\(c_1 = (a + b) / 3\)</span>, and <span class="math notranslate nohighlight">\(c_2 = 2 (a + b) / 3\)</span>, we get disjoint closed sub-intervals <span class="math notranslate nohighlight">\([a, c_1]\)</span> and
+<span class="math notranslate nohighlight">\([c_2, b]\)</span>. <span class="math notranslate nohighlight">\(x_2\)</span>  can lie in at most one of them, hence it is always possible to choose <span class="math notranslate nohighlight">\(I_2 \subseteq I_1\)</span>
+as desired. Now given <span class="math notranslate nohighlight">\(I_n\)</span> has been chosen, choose <span class="math notranslate nohighlight">\(I_{n + 1}\)</span> such that:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(I_{n + 1} \subseteq I_n\)</span> and</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{n + 1} \notin I_{n + 1}\)</span>.</p></li>
+</ol>
+<p>Now, consider the countable intersection of nested closed sets</p>
+<div class="math notranslate nohighlight">
+\[
+    I = \bigcap_{n = 1}^{\infty} I_n.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(x_i \in \RR\)</span> (as an element in the enumeration of <span class="math notranslate nohighlight">\(\RR\)</span>), then <span class="math notranslate nohighlight">\(x_i \notin I_i\)</span>. Thus
+<span class="math notranslate nohighlight">\(x_i \notin I\)</span>. Thus, if <span class="math notranslate nohighlight">\(\RR\)</span> is countable, then no real number lies in <span class="math notranslate nohighlight">\(I\)</span>. But by
+<a class="reference internal" href="#res-rl-nested-interval-property">nested interval property</a>, <span class="math notranslate nohighlight">\(I\)</span> is not empty.
+This contradicts our assumption that <span class="math notranslate nohighlight">\(\RR\)</span> is countable.</p>
+</div>
+<div class="proof corollary admonition" id="res-rl-irrationals-uncountable">
+<p class="admonition-title"><span class="caption-number">Corollary 2.3 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>The set of <span class="xref std std-ref">irrational numbers</span> is uncountable.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(\II\)</span> were countable, then <span class="math notranslate nohighlight">\(\RR = \QQ \cup \II\)</span> would also be countable. But
+this is not true. Hence <span class="math notranslate nohighlight">\(\II\)</span> is uncountable.</p>
+</div>
+</div>
+<div class="section" id="algebraic-numbers">
+<h2><span class="section-number">2.1.9. </span>Algebraic Numbers<a class="headerlink" href="#algebraic-numbers" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-rl-algebraic-real-number">
+<p class="admonition-title"><span class="caption-number">Definition 2.7 </span> (Algebraic real number)</p>
+<div class="definition-content section" id="proof-content">
+<p>A real number is called <em>algebraic</em> if it is the root of a polynomial with integer coefficients.
+i.e. <span class="math notranslate nohighlight">\(x \in \RR\)</span> is algebraic if
+there exist integers <span class="math notranslate nohighlight">\(a_0, a_1, \dots, a_n \in \ZZ\)</span>, not all zero, such that</p>
+<div class="math notranslate nohighlight">
+\[
+    a_n x^n + a_{n -1} x^{n - 1} + \dots + a_1 x + a_0  = 0.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="example-34">
+<p class="admonition-title"><span class="caption-number">Example 2.4 </span> (Algebraic real numbers)</p>
+<div class="example-content section" id="proof-content">
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sqrt{2}\)</span> is algebraic since it is the root of the equation <span class="math notranslate nohighlight">\(x^2 - 2 = 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sqrt[3]{2}\)</span> is algebraic since it is the root of the equation <span class="math notranslate nohighlight">\(x^3 - 2 = 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sqrt{2} + \sqrt{3}\)</span> is algebraic since it is the root of the equation <span class="math notranslate nohighlight">\(x^4 - 10 x^2 + 1 = 0\)</span>.</p></li>
+</ul>
+</div>
+</div><div class="proof proposition admonition" id="res-rl-algebraic-numbers-countable">
+<p class="admonition-title"><span class="caption-number">Proposition 2.17 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>The set of algebraic numbers is countable.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(n \in \Nat\)</span>. Let <span class="math notranslate nohighlight">\(A_n\)</span> be the algebraic numbers obtained as roots of polynomials
+with integer coefficients that have degree <span class="math notranslate nohighlight">\(n\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+    a_n x^n + a_{n -1} x^{n - 1} + \dots + a_1 x + a_0  = 0.
+\]</div>
+<p>Each polynomial can be represented by an <span class="math notranslate nohighlight">\(n+ 1\)</span>-tuple given by</p>
+<div class="math notranslate nohighlight">
+\[
+    (a_n, a_{n-1}, \dots, a_1, a_0).
+\]</div>
+<p>Thus, it has a one-one correspondence with the Cartesian product <span class="math notranslate nohighlight">\(\ZZ^{n+ 1}\)</span>.
+Since finite Cartesian product of countable sets is countable,
+hence <span class="math notranslate nohighlight">\(\ZZ^{n + 1}\)</span> is countable. This means that the number of polynomials of
+order <span class="math notranslate nohighlight">\(n\)</span> is countable. Since each polynomial of order <span class="math notranslate nohighlight">\(n\)</span> can have at most <span class="math notranslate nohighlight">\(n\)</span> roots,
+hence <span class="math notranslate nohighlight">\(A_n\)</span> is countable.</p>
+<p>Now consider the union</p>
+<div class="math notranslate nohighlight">
+\[
+    A = \bigcup_{n= 1}^{\infty} A_n
+\]</div>
+<p>as the set of algebraic numbers. Since union of a countable family of countable sets
+is countable,
+hence <span class="math notranslate nohighlight">\(A\)</span> is countable.</p>
+</div>
+</div>
+<div class="section" id="transcendental-numbers">
+<h2><span class="section-number">2.1.10. </span>Transcendental Numbers<a class="headerlink" href="#transcendental-numbers" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-rl-transcendental-numbers">
+<p class="admonition-title"><span class="caption-number">Definition 2.8 </span> (Transcendental numbers)</p>
+<div class="definition-content section" id="proof-content">
+<p>A real number is called <em>transcendental</em> if it is not algebraic.</p>
+</div>
+</div><div class="proof proposition admonition" id="res-rl-existence-transcendental-numbers">
+<p class="admonition-title"><span class="caption-number">Proposition 2.18 </span> (Existence of transcendental numbers)</p>
+<div class="proposition-content section" id="proof-content">
+<p>Transcendental numbers exist and they are uncountable.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A\)</span> denote the set of algebraic numbers and <span class="math notranslate nohighlight">\(B\)</span> denote the set of transcendental numbers.
+Then <span class="math notranslate nohighlight">\(\RR = A \cup B\)</span>. Since <span class="math notranslate nohighlight">\(A\)</span> is countable and <span class="math notranslate nohighlight">\(\RR\)</span> is uncountable, hence <span class="math notranslate nohighlight">\(B\)</span> is non-empty
+and is uncountable.</p>
+</div>
+<div class="proof proposition admonition" id="res-rl-unit-open-interval-uncountable">
+<p class="admonition-title"><span class="caption-number">Proposition 2.19 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>The open interval <span class="math notranslate nohighlight">\((0, 1) = \{x \in \RR : 0 &lt; x &lt; 1 \}\)</span> is uncountable.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume that <span class="math notranslate nohighlight">\((0, 1)\)</span> is countable. Then, the numbers <span class="math notranslate nohighlight">\(x \in (0, 1)\)</span> can be
+enumerated. Let <span class="math notranslate nohighlight">\(f : \Nat \to (0, 1)\)</span> be such an enumeration. Let <span class="math notranslate nohighlight">\(f(m)\)</span> be
+given by (in the decimal representation)</p>
+<div class="math notranslate nohighlight">
+\[
+    f(m) = .a_{m 1} a_{m 2} \dots.
+\]</div>
+<p>Define a real number <span class="math notranslate nohighlight">\(x \in (0, 1)\)</span> with the decimal expansion</p>
+<div class="math notranslate nohighlight">
+\[
+    x = . b_1 b_2 \dots
+\]</div>
+<p>using the rule:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    b_n =
+     \left\{
+            \begin{array}{ll}
+                2 &amp; \mbox{if $a_{n n} \neq 2$};\\
+                3 &amp; \mbox{if $a_{n n}  = 2$}.
+            \end{array}
+          \right.
+\end{split}\]</div>
+<p>The number <span class="math notranslate nohighlight">\(x\)</span> cannot be <span class="math notranslate nohighlight">\(f(1)\)</span> since <span class="math notranslate nohighlight">\(b_1 \neq a_{11}\)</span>.
+The number <span class="math notranslate nohighlight">\(x\)</span> cannot be <span class="math notranslate nohighlight">\(f(n) \Forall n \in \Nat\)</span> since <span class="math notranslate nohighlight">\(b_n \neq a_{n n}\)</span>.
+Thus <span class="math notranslate nohighlight">\(x\)</span> doesn’t belong to the suggested enumeration of <span class="math notranslate nohighlight">\((0, 1)\)</span>. Thus,
+<span class="math notranslate nohighlight">\((0, 1)\)</span> is uncountable.</p>
+</div>
+<div class="proof proposition admonition" id="proposition-39">
+<p class="admonition-title"><span class="caption-number">Proposition 2.20 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\((0, 1)\)</span> is uncountable if and only if <span class="math notranslate nohighlight">\(\RR\)</span> is uncountable.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(\RR\)</span> were countable, then <span class="math notranslate nohighlight">\((0, 1)\)</span> would be countable since <span class="math notranslate nohighlight">\((0, 1) \subset \RR\)</span>.
+Thus, <span class="math notranslate nohighlight">\((0, 1)\)</span> can be uncountable only if <span class="math notranslate nohighlight">\(\RR\)</span> is uncountable.</p>
+<p>Now if <span class="math notranslate nohighlight">\((0, 1)\)</span> were countable then <span class="math notranslate nohighlight">\(\RR\)</span> would be countable since
+<span class="math notranslate nohighlight">\(\RR\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+    \RR = \bigcup_{n = -\infty}^{\infty} (n, n + 1)  \cup \ZZ.
+\]</div>
+<p>Every open interval <span class="math notranslate nohighlight">\((n, n + 1)\)</span>  has the same cardinality as <span class="math notranslate nohighlight">\((0, 1)\)</span> and <span class="math notranslate nohighlight">\(\ZZ\)</span> is
+countable.
+Thus, <span class="math notranslate nohighlight">\(\RR\)</span> is uncountable only if <span class="math notranslate nohighlight">\((0, 1)\)</span> is uncountable. In other words,
+<span class="math notranslate nohighlight">\((0, 1)\)</span> is uncountable if <span class="math notranslate nohighlight">\(\RR\)</span> is uncountable.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./basic_real_analysis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chapter.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>Elementary Real Analysis</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="topology.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.2. </span>Topology of Real Line</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Shailesh Kumar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1.10. Positive Semidefinite Cone &#8212; Convex Optimization</title>
+    <title>5.10. Symmetric Matrices &#8212; Optimization for Sparse Signal Processing</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -44,7 +44,7 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathcal{T}", "Chi": "\\mathcal{X}", "Eta": "\\mathcal{H}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbb{1}", "ZeroVec": "0", "OneMat": "\\mathbf{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -54,14 +54,24 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.11. Convexity Preserving Operations" href="convexity_ops.html" />
-    <link rel="prev" title="1.9. Polyhedra" href="polyhedron.html" />
+    <link rel="next" title="5.11. Convexity Preserving Operations" href="convexity_ops.html" />
+    <link rel="prev" title="5.9. Polyhedra" href="polyhedron.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
 
     <!-- Google Analytics -->
     
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
@@ -79,7 +89,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">Convex Optimization</h1>
+      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -90,86 +100,424 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../intro.html">
-   Introduction
+   Welcome
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.3. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.4. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.5. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Analysis
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="intro.html">
-   1. Convex Sets
+   5. Convex Sets
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="affine.html">
-     1.2. Affine Sets
+     5.2. Affine Sets
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="convex.html">
-     1.3. Convex Sets
+     5.3. Convex Sets
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="cone.html">
-     1.4. Cones
+     5.4. Cones
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="hyperplane.html">
-     1.5. Hyperplanes and Half spaces
+     5.5. Hyperplanes and Half spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="ball.html">
-     1.6. Euclidean Balls and Ellipsoids
+     5.6. Euclidean Balls and Ellipsoids
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="norm_ball.html">
-     1.7. Norm Balls
+     5.7. Norm Balls
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="norm_cone.html">
-     1.8. Norm Cones
+     5.8. Norm Cones
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="polyhedron.html">
-     1.9. Polyhedra
+     5.9. Polyhedra
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     1.10. Positive Semidefinite Cone
+     5.10. Symmetric Matrices
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="convexity_ops.html">
-     1.11. Convexity Preserving Operations
+     5.11. Convexity Preserving Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dual_cones.html">
+     5.12. Dual Cones
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="generalized_inequality.html">
-     1.12. Generalized Inequalities
+     5.13. Generalized Inequalities
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../convex_functions/intro.html">
-   2. Convex Functions
+   6. Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/functions.html">
+     6.1. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/convex_functions.html">
+     6.2. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
+     6.3. Extensions for Convex Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradients/chapter.html">
+   7. Subgradients
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradients/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   8. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   9. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   10. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   11. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     11.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   12. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     12.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     12.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   13. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   14. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   15. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     15.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../bib.html">
-   3. Bibliography
+   Bibliography
   </a>
  </li>
 </ul>
@@ -254,6 +602,29 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#positive-semi-definite-matrices">
+   5.10.1. Positive semi-definite matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#positive-definite-matrices">
+   5.10.2. Positive definite matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#positive-semi-definite-cone">
+   5.10.3. Positive semi-definite cone
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -262,64 +633,97 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="positive-semidefinite-cone">
-<h1><span class="section-number">1.10. </span>Positive Semidefinite Cone<a class="headerlink" href="#positive-semidefinite-cone" title="Permalink to this headline">¶</a></h1>
-<div class="proof definition admonition" id="definition-0">
-<span id="def-symmetric-matrices"></span><p class="admonition-title"><span class="caption-number">Definition 1.24 </span></p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="symmetric-matrices">
+<h1><span class="section-number">5.10. </span>Symmetric Matrices<a class="headerlink" href="#symmetric-matrices" title="Permalink to this headline">¶</a></h1>
+<div class="proof definition admonition" id="def-symmetric-matrix">
+<p class="admonition-title"><span class="caption-number">Definition 5.27 </span> (Symmetric matrix)</p>
 <div class="definition-content section" id="proof-content">
-<p>We define the <strong>set of symmetric <span class="math notranslate nohighlight">\(N\times N\)</span> matrices</strong> as</p>
+<p>A <em>symmetric matrix</em> is a matrix <span class="math notranslate nohighlight">\(X \in \RR^{n \times n}\)</span>
+which satisfies <span class="math notranslate nohighlight">\(X = X^T\)</span>.</p>
+<p>We define the <em>set of symmetric <span class="math notranslate nohighlight">\(n\times n\)</span> matrices</em> as</p>
 <div class="math notranslate nohighlight">
 \[
-    S^N = \{X \in \RR^{N \times N} | X = X^T\}.
+    \SS^n = \{X \in \RR^{n \times n} | X = X^T\}.
 \]</div>
 </div>
-</div><div class="proof lemma admonition" id="lemma-1">
-<p class="admonition-title"><span class="caption-number">Lemma 1.4 </span></p>
-<div class="lemma-content section" id="proof-content">
-<p><span class="math notranslate nohighlight">\(S^N\)</span> is a vector space with dimension <span class="math notranslate nohighlight">\(\frac{N(N+1)}{2}\)</span>.</p>
+</div><div class="proof proposition admonition" id="proposition-1">
+<p class="admonition-title"><span class="caption-number">Proposition 5.1 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\SS^n\)</span> is a vector space with dimension <span class="math notranslate nohighlight">\(\frac{n(n+1)}{2}\)</span>.</p>
 </div>
-</div><div class="proof definition admonition" id="definition-2">
-<span id="def-positive-semidefinite-matrices"></span><p class="admonition-title"><span class="caption-number">Definition 1.25 </span></p>
+</div><p>It suffices to show that any linear combination of symmetric
+matrices is also symmetric. The dimension of this vector
+space comes from the number of entries in a symmetric matrix
+which can be independently chosen.</p>
+<div class="proof definition admonition" id="def-matrix-inner-product">
+<p class="admonition-title"><span class="caption-number">Definition 5.28 </span> (Matrix inner product)</p>
 <div class="definition-content section" id="proof-content">
-<p>We define the <strong>set of symmetric positive semidefinite matrices</strong> as</p>
+<p>An inner-product on the vector space of <span class="math notranslate nohighlight">\(n \times n\)</span> real matrices
+can be defined as</p>
 <div class="math notranslate nohighlight">
 \[
-    S_+^N = \{X \in S^N | X \succeq 0 \}.
+\langle A, B \rangle \triangleq \sum_i \sum_j A_{i,j} B_{i, j} 
+ = \Trace (A^T B) = \Trace (B^T A).
 \]</div>
-<p>The notation <span class="math notranslate nohighlight">\(X \succeq 0\)</span> means <span class="math notranslate nohighlight">\(v^T X v \geq 0 \Forall v \in \RR^N\)</span>.</p>
+<p>This is known as the <em>Frobenius inner product</em>.</p>
 </div>
-</div><div class="proof definition admonition" id="definition-3">
-<span id="def-positive-definite-matrices"></span><p class="admonition-title"><span class="caption-number">Definition 1.26 </span></p>
+</div><div class="section" id="positive-semi-definite-matrices">
+<h2><span class="section-number">5.10.1. </span>Positive semi-definite matrices<a class="headerlink" href="#positive-semi-definite-matrices" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-positive-semidefinite-symmetric-matrix">
+<p class="admonition-title"><span class="caption-number">Definition 5.29 </span> (Positive semidefinite matrix)</p>
 <div class="definition-content section" id="proof-content">
-<p>We define the <strong>set of symmetric positive definite matrices</strong> as</p>
+<p>A symmetric matrix <span class="math notranslate nohighlight">\(X \in \SS^n\)</span> is called <em>positive semi-definite</em> if
+<span class="math notranslate nohighlight">\(v^T X v \geq 0\)</span> for all <span class="math notranslate nohighlight">\(v \in \RR^n\)</span>.</p>
+<p>The notation <span class="math notranslate nohighlight">\(X \succeq 0\)</span> means <span class="math notranslate nohighlight">\(v^T X v \geq 0 \Forall v \in \RR^n\)</span>
+or the matrix <span class="math notranslate nohighlight">\(X\)</span> is positive semi-definite.</p>
+<p>We define the <em>set of symmetric positive semidefinite matrices</em> as</p>
 <div class="math notranslate nohighlight">
 \[
-    S_{++}^N = \{X \in S^N | X \succ 0 \}.
+    \SS_+^n = \{X \in \SS^n | X \succeq 0 \}.
 \]</div>
-<p>The notation <span class="math notranslate nohighlight">\(X \succ 0\)</span> means <span class="math notranslate nohighlight">\(v^T X v  &gt; 0 \Forall v \in \RR^N\)</span>.</p>
 </div>
-</div><div class="proof lemma admonition" id="lemma-4">
-<p class="admonition-title"><span class="caption-number">Lemma 1.5 </span></p>
-<div class="lemma-content section" id="proof-content">
-<p>The set <span class="math notranslate nohighlight">\(S_+^N\)</span> is a convex cone.</p>
+</div></div>
+<div class="section" id="positive-definite-matrices">
+<h2><span class="section-number">5.10.2. </span>Positive definite matrices<a class="headerlink" href="#positive-definite-matrices" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-positive-definite-symmetric-matrix">
+<p class="admonition-title"><span class="caption-number">Definition 5.30 </span> (Positive definite matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>A symmetric matrix <span class="math notranslate nohighlight">\(X \in \SS^n\)</span> is called <em>positive definite</em> if
+<span class="math notranslate nohighlight">\(v^T X v &gt; 0\)</span> for all non-zero <span class="math notranslate nohighlight">\(v \in \RR^n\)</span>.</p>
+<p>The notation <span class="math notranslate nohighlight">\(X \succ 0\)</span> means <span class="math notranslate nohighlight">\(v^T X v  &gt; 0 \Forall v \in \RR^n, v \neq 0\)</span>
+or the matrix <span class="math notranslate nohighlight">\(X\)</span> is positive definite.</p>
+<p>We define the <em>set of symmetric positive definite matrices</em> as</p>
+<div class="math notranslate nohighlight">
+\[
+    \SS_{++}^n = \{X \in \SS^n | X \succ 0 \}.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="positive-semi-definite-cone">
+<h2><span class="section-number">5.10.3. </span>Positive semi-definite cone<a class="headerlink" href="#positive-semi-definite-cone" title="Permalink to this headline">¶</a></h2>
+<div class="proof proposition admonition" id="proposition-5">
+<p class="admonition-title"><span class="caption-number">Proposition 5.2 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>The set <span class="math notranslate nohighlight">\(\SS_+^n\)</span> is a convex cone.</p>
 </div>
 </div><div class="proof admonition" id="proof">
-<p>Proof. Let <span class="math notranslate nohighlight">\(A, B \in S_+^N\)</span> and <span class="math notranslate nohighlight">\(\theta_1, \theta_2 \geq 0\)</span>. We have to show that
-<span class="math notranslate nohighlight">\(\theta_1 A + \theta_2 B \in S_+^N\)</span>.</p>
+<p>Proof. Let <span class="math notranslate nohighlight">\(A, B \in \SS_+^n\)</span> and <span class="math notranslate nohighlight">\(\theta_1, \theta_2 \geq 0\)</span>. We have to show that
+<span class="math notranslate nohighlight">\(\theta_1 A + \theta_2 B \in \SS_+^n\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[
-    A \in S_+^N \implies v^T A v \geq 0 \Forall v \in \RR^N.
+    A \in \SS_+^n \implies v^T A v \geq 0 \Forall v \in \RR^n.
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-    B \in S_+^N \implies v^T B v \geq 0 \Forall v \in \RR^N.
+    B \in \SS_+^n \implies v^T B v \geq 0 \Forall v \in \RR^n.
 \]</div>
 <p>Now</p>
 <div class="math notranslate nohighlight">
 \[
-    v^T (\theta_1 A + \theta_2 B) v = \theta_1 v^T A v + \theta_2 v^T B v \geq 0 \Forall v \in \RR^N.
+    v^T (\theta_1 A + \theta_2 B) v = \theta_1 v^T A v + \theta_2 v^T B v \geq 0 \Forall v \in \RR^n.
 \]</div>
-<p>Hence <span class="math notranslate nohighlight">\(\theta_1 A + \theta_2 B \in S_+^N\)</span>.</p>
+<p>Hence <span class="math notranslate nohighlight">\(\theta_1 A + \theta_2 B \in \SS_+^n\)</span>.</p>
+</div>
 </div>
 </div>
 
@@ -352,13 +756,13 @@
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">1.9. </span>Polyhedra</p>
+            <p class="prev-next-title"><span class="section-number">5.9. </span>Polyhedra</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="convexity_ops.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.11. </span>Convexity Preserving Operations</p>
+        <p class="prev-next-title"><span class="section-number">5.11. </span>Convexity Preserving Operations</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

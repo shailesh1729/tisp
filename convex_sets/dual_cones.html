@@ -1,0 +1,903 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.12. Dual Cones &#8212; Optimization for Sparse Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.13. Generalized Inequalities" href="generalized_inequality.html" />
+    <link rel="prev" title="5.11. Convexity Preserving Operations" href="convexity_ops.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.3. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.4. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.5. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   5. Convex Sets
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="affine.html">
+     5.2. Affine Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex.html">
+     5.3. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     5.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hyperplane.html">
+     5.5. Hyperplanes and Half spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ball.html">
+     5.6. Euclidean Balls and Ellipsoids
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="norm_ball.html">
+     5.7. Norm Balls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="norm_cone.html">
+     5.8. Norm Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polyhedron.html">
+     5.9. Polyhedra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="psd_cone.html">
+     5.10. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convexity_ops.html">
+     5.11. Convexity Preserving Operations
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.12. Dual Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     5.13. Generalized Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_functions/intro.html">
+   6. Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/functions.html">
+     6.1. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/convex_functions.html">
+     6.2. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
+     6.3. Extensions for Convex Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradients/chapter.html">
+   7. Subgradients
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradients/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   8. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   9. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   10. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   11. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     11.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   12. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     12.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     12.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   13. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   14. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   15. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     15.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/convex_sets/dual_cones.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fconvex_sets/dual_cones.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties">
+   5.12.1. Properties
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#self-dual-cones">
+   5.12.2. Self dual cones
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="dual-cones">
+<h1><span class="section-number">5.12. </span>Dual Cones<a class="headerlink" href="#dual-cones" title="Permalink to this headline">¶</a></h1>
+<div class="proof definition admonition" id="def-dual-cone">
+<p class="admonition-title"><span class="caption-number">Definition 5.33 </span> (Dual cone)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C \subset \RR^n\)</span>. The set</p>
+<div class="math notranslate nohighlight">
+\[
+C^* \triangleq \{ y \,|\, \langle y, x \rangle \geq 0 \Forall x \in C \}
+\]</div>
+<p>is called the <em>dual cone</em> of <span class="math notranslate nohighlight">\(C\)</span>.</p>
+</div>
+</div><p class="rubric">Geometric interpretation</p>
+<ul class="simple">
+<li><p>For a vector <span class="math notranslate nohighlight">\(y\)</span>, the set <span class="math notranslate nohighlight">\(H_{y, +} \{ x \ST \langle y, x \rangle \geq 0\}\)</span> is
+a <a class="reference internal" href="hyperplane.html#def-halfspace">halfspace</a> passing through origin.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is the normal vector of the halfspace along (in the direction of) the halfspace.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(y\)</span> belongs to the dual cone of <span class="math notranslate nohighlight">\(C\)</span>, then for every <span class="math notranslate nohighlight">\(x \in C\)</span>, we have
+<span class="math notranslate nohighlight">\( \langle y, x \rangle \geq 0\)</span>.</p></li>
+<li><p>Thus, the set <span class="math notranslate nohighlight">\(C\)</span> is contained in the halfspace <span class="math notranslate nohighlight">\(H_{y, +}\)</span>.</p></li>
+<li><p>In particular, if <span class="math notranslate nohighlight">\(C\)</span> is a cone, then it will also touch the boundary of
+the half space <span class="math notranslate nohighlight">\(H_{y, +}\)</span> as <span class="math notranslate nohighlight">\(C\)</span> contains the zero vector.</p></li>
+</ul>
+<div class="section" id="properties">
+<h2><span class="section-number">5.12.1. </span>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<div class="proof property admonition" id="property-1">
+<p class="admonition-title"><span class="caption-number">Property 5.1 </span></p>
+<div class="property-content section" id="proof-content">
+<p>Dual cone is a cone.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(y \in C^*\)</span>. Then, by definition,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle y, x \rangle \geq 0 \Forall x \in C.
+\]</div>
+<p>Thus, for some <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \alpha y, x \rangle = \alpha \langle y, x \rangle \geq 0 \Forall x \in C.
+\]</div>
+<p>Thus, for every <span class="math notranslate nohighlight">\(y \in C^*\)</span>, <span class="math notranslate nohighlight">\(\alpha y \in C^*\)</span> for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(C^*\)</span> is a cone.</p>
+</div>
+<div class="proof property admonition" id="property-2">
+<p class="admonition-title"><span class="caption-number">Property 5.2 </span></p>
+<div class="property-content section" id="proof-content">
+<p>Dual cone is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(y_1, y_2 \in C^*\)</span>. Let <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+y = \theta y_1 + (1 - \theta) y_2.
+\]</div>
+<p>Then for an arbitrary <span class="math notranslate nohighlight">\(x \in C\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle y, x \rangle = \langle \theta y_1 + (1-\theta) y_2, x \rangle
+= \theta \langle y_1, x \rangle + (1-\theta) \langle y_2, x \rangle \geq 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(y \in C^*\)</span>.</p>
+</div>
+<p>We note that dual cone is a convex cone even if the original set <span class="math notranslate nohighlight">\(C\)</span>
+is neither convex nor a cone.</p>
+<div class="proof property admonition" id="property-3">
+<p class="admonition-title"><span class="caption-number">Property 5.3 </span></p>
+<div class="property-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be two subsets of <span class="math notranslate nohighlight">\(\RR^n\)</span> and let
+<span class="math notranslate nohighlight">\(C_1^*\)</span> and <span class="math notranslate nohighlight">\(C_2^*\)</span> be their corresponding dual cones.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+C_1 \subseteq C_2 \implies C_2^* \subseteq C_1^*.
+\]</div>
+</div>
+</div><p>The dual cone of the subset contains the dual cone of the superset.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(y \in C_2^*\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\langle y , x \rangle \Forall x \in C_2 \implies 
+\langle y , x \rangle \Forall x \in C_1 \implies
+y \in C_1^*.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(C_2^* \subseteq C_1^*\)</span>.</p>
+</div>
+<div class="proof property admonition" id="property-4">
+<p class="admonition-title"><span class="caption-number">Property 5.4 </span></p>
+<div class="property-content section" id="proof-content">
+<p>The interior of the dual cone <span class="math notranslate nohighlight">\(C^*\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\interior C^* = \{ y \ST \langle y , x \rangle &gt; 0 \Forall x \in C \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let</p>
+<div class="math notranslate nohighlight">
+\[
+A = \{ y \ST \langle y , x \rangle &gt; 0 \Forall x \in C \}
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(y \in A\)</span>. By definition <span class="math notranslate nohighlight">\(y \in C^*\)</span>. i.e., <span class="math notranslate nohighlight">\(A \subseteq C^*\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(\langle y , x \rangle &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(x \in C\)</span>,
+hence <span class="math notranslate nohighlight">\(\langle y +u , x \rangle &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(x \in C\)</span>
+and every sufficiently small <span class="math notranslate nohighlight">\(u\)</span>. Hence, <span class="math notranslate nohighlight">\(y \in \interior C^*\)</span>.
+We have shown that <span class="math notranslate nohighlight">\(A \subseteq \interior C^*\)</span>.</p>
+<p>Now, let <span class="math notranslate nohighlight">\(y \notin A\)</span> but <span class="math notranslate nohighlight">\(y \in C^*\)</span>.
+Then, <span class="math notranslate nohighlight">\(\langle y, x \rangle = 0\)</span> for some <span class="math notranslate nohighlight">\(x \in C\)</span>. But then
+<span class="math notranslate nohighlight">\(\langle y - tx, x \rangle = \langle y, x \rangle - t \langle x, x \rangle &lt; 0\)</span>
+for all <span class="math notranslate nohighlight">\(t &lt; 0\)</span>. Thus, <span class="math notranslate nohighlight">\(y \notin \interior C^*\)</span>.</p>
+<p>Hence, <span class="math notranslate nohighlight">\(A = \interior C^*\)</span>.</p>
+</div>
+<div class="proof property admonition" id="property-5">
+<p class="admonition-title"><span class="caption-number">Property 5.5 </span></p>
+<div class="property-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(C\)</span> has a non-empty interior, then its dual cone <span class="math notranslate nohighlight">\(C^*\)</span> is pointed.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C\)</span> have a non-empty interior and assume that its dual cone <span class="math notranslate nohighlight">\(C^*\)</span>
+is not pointed. Then, there exists a non-zero <span class="math notranslate nohighlight">\(y \in C^*\)</span> such that
+<span class="math notranslate nohighlight">\(-y \in C^*\)</span> holds too.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(\langle y, x \rangle \geq 0\)</span> as well as
+<span class="math notranslate nohighlight">\(\langle -y, x \rangle \geq 0\)</span> for every <span class="math notranslate nohighlight">\(x \in C\)</span>,
+i.e, <span class="math notranslate nohighlight">\(\langle y, x \rangle = 0\)</span> for every <span class="math notranslate nohighlight">\(x \in C\)</span>.
+But this means that <span class="math notranslate nohighlight">\(C\)</span> lies in a hyperplane and hence has an empty interior.
+A contradiction.</p>
+</div>
+<div class="proof proposition admonition" id="proposition-6">
+<p class="admonition-title"><span class="caption-number">Proposition 5.3 </span> (Dual cone of a subspace)</p>
+<div class="proposition-content section" id="proof-content">
+<p>The dual cone of a subspace <span class="math notranslate nohighlight">\(V \subseteq \RR^n\)</span> is its orthogonal
+complete <span class="math notranslate nohighlight">\(V^{\perp}\)</span> defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+V^{\perp} = \{ y \ST \langle y, v \rangle = 0 \Forall v \in V \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(V^*\)</span> be the dual cone of <span class="math notranslate nohighlight">\(V\)</span>. If <span class="math notranslate nohighlight">\(v \in V^{\perp}\)</span>, then
+by definition, <span class="math notranslate nohighlight">\(v \in V^*\)</span>. Thus, <span class="math notranslate nohighlight">\(V^{\perp} \subseteq V^*\)</span>.</p>
+<p>Let us now assume that there is a vector <span class="math notranslate nohighlight">\(y \in V^*\)</span> s.t. <span class="math notranslate nohighlight">\(y \notin V^{\perp}\)</span>.</p>
+<p>Then, there exists <span class="math notranslate nohighlight">\(v \in V\)</span> such that  <span class="math notranslate nohighlight">\(\langle y, v \rangle &gt; 0\)</span>.
+Since <span class="math notranslate nohighlight">\(V\)</span> is a subspace, it follows that <span class="math notranslate nohighlight">\(-v \in V\)</span>.
+But then</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle y, -v \rangle &lt; 0 = - \langle y, v \rangle &lt; 0
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(y\)</span> cannot belong to <span class="math notranslate nohighlight">\(V^*\)</span>. A contradiction.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(V^* = V^{\perp}\)</span>.</p>
+</div>
+</div>
+<div class="section" id="self-dual-cones">
+<h2><span class="section-number">5.12.2. </span>Self dual cones<a class="headerlink" href="#self-dual-cones" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-self-dual-cone">
+<p class="admonition-title"><span class="caption-number">Definition 5.34 </span> (Self dual cone)</p>
+<div class="definition-content section" id="proof-content">
+<p>A cone <span class="math notranslate nohighlight">\(C\)</span> is called self dual if <span class="math notranslate nohighlight">\(C^* = C\)</span>, i.e., it is its own dual cone.</p>
+</div>
+</div><div class="proof example admonition" id="example-8">
+<p class="admonition-title"><span class="caption-number">Example 5.13 </span></p>
+<div class="example-content section" id="proof-content">
+<p>The non-negative orthant <span class="math notranslate nohighlight">\(\RR^n_+\)</span> is self dual.</p>
+<p>Let <span class="math notranslate nohighlight">\(C = \RR^n_+\)</span>. For some <span class="math notranslate nohighlight">\(u, v \in C\)</span>,  <span class="math notranslate nohighlight">\(\langle u, v \rangle \geq 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\RR^n_+ \subseteq C^*\)</span>.</p>
+<p>Now, for some <span class="math notranslate nohighlight">\(v \notin \RR^n_+\)</span>, there is at least one component which is negative.
+Without loss of generality, assume that the first component <span class="math notranslate nohighlight">\(v_1 &lt; 0\)</span>.</p>
+<p>Now consider the vector <span class="math notranslate nohighlight">\(u = [1, 0, \dots, 0] \in \RR^n_+\)</span>.
+<span class="math notranslate nohighlight">\(\langle v, u \rangle &lt; 0\)</span>. Thus, <span class="math notranslate nohighlight">\(v \notin C^*\)</span>.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(C^* = \RR^n_+\)</span>. It is self dual.</p>
+</div>
+</div><div class="proof example admonition" id="example-9">
+<p class="admonition-title"><span class="caption-number">Example 5.14 </span></p>
+<div class="example-content section" id="proof-content">
+<p>The positive semi-definite cone <span class="math notranslate nohighlight">\(\SS^n_+\)</span> is self dual.</p>
+<p>Let <span class="math notranslate nohighlight">\(C = \SS^n_+\)</span> and <span class="math notranslate nohighlight">\(Y \in C\)</span>. We first show that <span class="math notranslate nohighlight">\(Y \in C^*\)</span>.</p>
+<p>Choose an arbitrary <span class="math notranslate nohighlight">\(X \in C\)</span>.  Express <span class="math notranslate nohighlight">\(X\)</span> in terms of its eigenvalue
+decomposition as</p>
+<div class="math notranslate nohighlight">
+\[
+X = \sum \lambda_i q_i q_i^T.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(X\)</span> is PSD, hence, <span class="math notranslate nohighlight">\( \lambda_i \geq 0\)</span>.</p>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\langle Y, X \rangle 
+&amp;= \Trace (X Y) = \Trace (Y X) \\
+&amp;= \Trace \left ( Y \sum \lambda_i q_i q_i^T \right )\\
+&amp;= \sum \lambda_i \Trace \left (Y q_i q_i^T \right) \\
+&amp;= \sum \lambda_i \Trace \left(q_i^T Y q_i \right)\\
+&amp;= \sum \lambda_i (q_i^T Y q_i).
+\end{aligned}
+\end{split}\]</div>
+<p>But since <span class="math notranslate nohighlight">\(Y\)</span> is PSD, hence <span class="math notranslate nohighlight">\(q_i^T Y q_i \geq 0\)</span>. Hence <span class="math notranslate nohighlight">\(\langle Y, X \rangle \geq 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(Y \in C^*\)</span>.</p>
+<p>Now, suppose <span class="math notranslate nohighlight">\(Y \notin \SS^n_+\)</span>. Then there exists a vector <span class="math notranslate nohighlight">\(v \in \RR^n\)</span>
+such that <span class="math notranslate nohighlight">\(v^T Y v &lt; 0\)</span>. Consider the PSD matrix <span class="math notranslate nohighlight">\(V = v v^T\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\langle Y, V \rangle = \Trace(VY) = \Trace (v v^T Y) = \Trace (v^T Y v) &lt; 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(Y \notin C^*\)</span>.</p>
+<p>This completes the proof that <span class="math notranslate nohighlight">\(C^* = C = \SS^n_+\)</span>,
+i.e., the positive semi-definite cone is self dual.</p>
+</div>
+</div></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./convex_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="convexity_ops.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">5.11. </span>Convexity Preserving Operations</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="generalized_inequality.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5.13. </span>Generalized Inequalities</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Shailesh Kumar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,37 +1,22 @@
 # Generalized Inequalities
 
-(def:proper_cone)=
+A {prf:ref}`proper cone <def-proper-cone>` $K$ can be used to define 
+a *generalized inequality*, which is a partial ordering on $\RR^n$.
+
 ````{prf:definition}
-A cone $K \in \RR^N$ is called a **proper cone** if it satisfies the following:
+:label: def-generalized-inequality
 
-*  $K$ is *convex*.
-*  $K$ is *closed*.
-*  $k$ is *solid* i.e. it has a nonempty interior.
-*  $K$ is *pointed* i.e. it contains no line. In other words
-
-$$
-    x \in K, -x \in K \implies x = 0.
-$$
-
-````
-A proper cone $K$ can be used to define a *generalized inequality*,
-which is a partial ordering on $\RR^N$.
-
-(def:generalized_inequality)=
-(def:proper_cone_partial_ordering)=
-(def:proper_cone_strict_partial_ordering)=
-````{prf:definition}
-Let $K \subseteq \RR^N$ be a proper cone. A **partial ordering** on
-$\RR^N$ associated with the proper cone $K$ is defined as
+Let $K \subseteq \RR^n$ be a proper cone. A *partial ordering* on
+$\RR^n$ associated with the proper cone $K$ is defined as
 
 $$
     x \preceq_{K} y \iff y - x \in K.
 $$
 
 We also write $x \succeq_K y$ if $y \preceq_K x$. This is also known
-as a **generalized inequality**.
+as a *generalized inequality*.
 
-A **strict partial ordering** on $\RR^N$ associated with the proper cone $K$
+A *strict partial ordering* on $\RR^n$ associated with the proper cone $K$
 is defined as
 
 $$
@@ -40,7 +25,7 @@ $$
 
 where $\Interior{K}$ is the interior of $K$.
 We also write $x \succ_K y$ if $y \prec_K x$.
-This is also known as a **strict generalized inequality**.
+This is also known as a *strict generalized inequality*.
 
 ````
 
@@ -49,27 +34,27 @@ and $\prec_K$ is same as usual $<$ operators on $\RR_+$.
 
 (def:component_wise_inequality)=
 ````{prf:example} Nonnegative orthant and component-wise inequality
-The nonnegative orthant $K=\RR_+^N$ is a proper cone. Then the
+The nonnegative orthant $K=\RR_+^n$ is a proper cone. Then the
 associated generalized inequality $\preceq_{K}$ means that
 
 $$
-    x \preceq_K y \implies (y-x) \in \RR_+^N
-    \implies x_i \leq y_i \Forall i= 1,\dots,N.
+    x \preceq_K y \implies (y-x) \in \RR_+^n
+    \implies x_i \leq y_i \Forall i= 1,\dots,n.
 $$
 
-This is usually known as **component-wise inequality** and
+This is usually known as *component-wise inequality* and
 usually denoted as $x \preceq y$.
 
 ````
 
 ````{prf:example} Positive semidefinite cone and matrix inequality
-The positive semidefinite cone $S_+^N \subseteq S^N$ is a proper
-cone in the vector space $S^N$.
+The positive semidefinite cone $S_+^n \subseteq S^n$ is a proper
+cone in the vector space $S^n$.
 
 The associated generalized inequality means
 
 $$
-    X \preceq_{S_+^N} Y \implies Y - X \in S_+^N
+    X \preceq_{S_+^n} Y \implies Y - X \in S_+^n
 $$
 
 i.e. $Y - X$ is positive semidefinite.
@@ -81,14 +66,14 @@ This is also usually denoted as $X \preceq Y$.
 
 
 
-## Minimum and minimal elements
+## Minima and maxima
 
 
 
 The generalized inequalities ($\preceq_K, \prec_K$) w.r.t. the proper cone
-$K \subset \RR^N$ 
+$K \subset \RR^n$ 
 define
-a partial ordering over any arbitrary set $S \subseteq \RR^N$.
+a partial ordering over any arbitrary set $S \subseteq \RR^n$.
 
 But since they may not enforce a total ordering on $S$,  not every
 pair of elements $x, y\in S$ may be related by $\preceq_K$ or $\prec_K$.
@@ -108,7 +93,7 @@ no ordering holds.
 
 (def:generalized_inequality_minimum_element)=
 ````{prf:definition}
-We say that $x \in S \subseteq \RR^N$ is **the minimum element** of $S$
+We say that $x \in S \subseteq \RR^n$ is *the minimum element* of $S$
 w.r.t. the generalized inequality $\preceq_K$ if for every $ y \in S$ we have
 $x \preceq y$.
 
@@ -122,7 +107,7 @@ $x \preceq y$.
 
 (def:generalized_inequality_maximum_element)=
 ````{prf:definition}
-We say that $x \in S \subseteq \RR^N$ is **the maximum element** of $S$
+We say that $x \in S \subseteq \RR^n$ is *the maximum element* of $S$
 w.r.t. the generalized inequality $\preceq_K$ if for every $ y \in S$ we have
 $y \preceq x$.
 
@@ -135,13 +120,13 @@ $y \preceq x$.
 
 
 ````{prf:example} Minimum element
-Consider $K = \RR^N_+$ and $S = \RR^N_+$. Then $0 \in S$ is the minimum element
-since $0 \preceq x \Forall x \in \RR^N_+$.
+Consider $K = \RR^n_+$ and $S = \RR^n_+$. Then $0 \in S$ is the minimum element
+since $0 \preceq x \Forall x \in \RR^n_+$.
 ````
 
 
 ````{prf:example} Maximum element
-Consider $K = \RR^N_+$ and $S = \{x | x_i \leq 0 \Forall i=1,\dots,N\}$.
+Consider $K = \RR^n_+$ and $S = \{x | x_i \leq 0 \Forall i=1,\dots,n\}$.
 Then $0 \in S$ is the maximum element
 since $x \preceq 0 \Forall x \in S$.
 ````
@@ -154,7 +139,7 @@ we can define a slightly weaker concept known as minimal element.
 
 (def:generalized_inequality_minimal_element)=
 ````{prf:definition}
-An element $x\in S$ is called a **minimal element** of $S$
+An element $x\in S$ is called a *minimal element* of $S$
 w.r.t. the generalized inequality $\preceq_K$ if there is no
 element $y \in S$ distinct from $x$ such that $y \preceq_K x$.
 In other words $y \preceq_K x \implies y = x$.
@@ -163,7 +148,7 @@ In other words $y \preceq_K x \implies y = x$.
 
 (def:generalized_inequality_maximal_element)=
 ````{prf:definition}
-An element $x\in S$ is called a **maximal element** of $S$
+An element $x\in S$ is called a *maximal element* of $S$
 w.r.t. the generalized inequality $\preceq_K$ if there is no
 element $y \in S$ distinct from $x$ such that $x \preceq_K y$.
 In other words $x \preceq_K y \implies y = x$.
@@ -236,7 +221,7 @@ $$
     \iff x - r \in K \iff  r \preceq_K x.
 $$
 
-Thus $x - K$ consists of all points $r \in \RR^N$ which satisfy
+Thus $x - K$ consists of all points $r \in \RR^n$ which satisfy
 $ r \preceq_K x$. But there is only one such point in $S$ namely $x$
 which satisfies this. Hence
 

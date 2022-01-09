@@ -1,0 +1,1123 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.4. Cardinality &#8212; Optimization for Sparse Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.5. Sequences" href="sequences.html" />
+    <link rel="prev" title="1.3. Functions" href="functions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   1. Set Theory
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.3. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.4. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.5. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   5. Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/affine.html">
+     5.2. Affine Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     5.3. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     5.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/hyperplane.html">
+     5.5. Hyperplanes and Half spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/ball.html">
+     5.6. Euclidean Balls and Ellipsoids
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_ball.html">
+     5.7. Norm Balls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_cone.html">
+     5.8. Norm Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/polyhedron.html">
+     5.9. Polyhedra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     5.10. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convexity_ops.html">
+     5.11. Convexity Preserving Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/dual_cones.html">
+     5.12. Dual Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     5.13. Generalized Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_functions/intro.html">
+   6. Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/functions.html">
+     6.1. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/convex_functions.html">
+     6.2. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
+     6.3. Extensions for Convex Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradients/chapter.html">
+   7. Subgradients
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradients/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   8. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   9. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   10. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   11. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     11.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   12. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     12.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     12.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   13. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   14. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   15. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     15.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/set_theory/cardinality.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fset_theory/cardinality.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cardinality-and-natural-numbers">
+   1.4.1. Cardinality and Natural Numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#well-ordering-principle">
+   1.4.2. Well Ordering Principle
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#infinite-sets">
+   1.4.3. Infinite Sets
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="cardinality">
+<h1><span class="section-number">1.4. </span>Cardinality<a class="headerlink" href="#cardinality" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we deal with questions concerning the <em>size</em> of a set.
+When do we say that two sets have same number of elements?</p>
+<p>If we can find a one-to-one correspondence between two sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> then
+we can say that the two sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> have same number of elements.</p>
+<p>In other words, if there exists a <a class="reference internal" href="functions.html#def-st-bijective-function">bijective</a>
+function <span class="math notranslate nohighlight">\(f : A \to B\)</span>, we say that <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> have same number of
+elements.</p>
+<div class="proof definition admonition" id="def-st-equivalent-sets">
+<p class="admonition-title"><span class="caption-number">Definition 1.59 </span> (Equivalent sets)</p>
+<div class="definition-content section" id="proof-content">
+<p>Two sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are said to be <em>equivalent</em> (denoted as <span class="math notranslate nohighlight">\(A \sim B\)</span>)
+if there exists a bijective function <span class="math notranslate nohighlight">\(f : A \to B\)</span>.
+When two sets are equivalent, we say that they have <em>same cardinality</em>.</p>
+</div>
+</div><p>Note that two sets may be equivalent yet not equal to each other.</p>
+<div class="proof example admonition" id="example-1">
+<p class="admonition-title"><span class="caption-number">Example 1.15 </span> (Equivalent sets)</p>
+<div class="example-content section" id="proof-content">
+<ul>
+<li><p>The set of natural numbers <span class="math notranslate nohighlight">\(\Nat\)</span> is equivalent to the set of integers <span class="math notranslate nohighlight">\(\ZZ\)</span>.
+Consider the function <span class="math notranslate nohighlight">\(f : \Nat \to \ZZ\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   f (n) =
+   \left\{
+        \begin{array}{ll}
+            (n - 1) / 2 &amp; \mbox{if $n$ is odd};\\
+            -n / 2 &amp; \mbox{if $n$ is even}.
+        \end{array}
+      \right.
+   \end{split}\]</div>
+<p>It is easy to show that this function is bijective.</p>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\Nat\)</span> is equivalent to the set of even natural numbers <span class="math notranslate nohighlight">\(E\)</span>.
+Consider the function <span class="math notranslate nohighlight">\(f  : \Nat \to E\)</span> given by <span class="math notranslate nohighlight">\(f(n) = 2n\)</span>.
+This is a bijective mapping.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Nat\)</span> is equivalent to the set of rational numbers <span class="math notranslate nohighlight">\(\QQ\)</span>.</p></li>
+<li><p>The sets <span class="math notranslate nohighlight">\(\{a, b, c\}\)</span> and <span class="math notranslate nohighlight">\(\{1,4, 9\}\)</span> are equivalent but not equal.</p></li>
+</ul>
+</div>
+</div><div class="proof theorem admonition" id="res-st-equivalence-is-equivalence-relation">
+<p class="admonition-title"><span class="caption-number">Theorem 1.5 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A, B, C\)</span> be sets. Then:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(A \sim A\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A \sim B\)</span>, then <span class="math notranslate nohighlight">\(B \sim A\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A \sim B\)</span>, and <span class="math notranslate nohighlight">\(B \sim C\)</span>, then <span class="math notranslate nohighlight">\(A \sim C\)</span>.</p></li>
+</ol>
+<p>Thus it is an equivalence relation.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. (1). Construct a function <span class="math notranslate nohighlight">\(f : A \to A\)</span> given by <span class="math notranslate nohighlight">\(f (a) = a \Forall a \in A\)</span>.
+This is bijective. Hence <span class="math notranslate nohighlight">\(A \sim A\)</span>.</p>
+<p>(2). It is given that <span class="math notranslate nohighlight">\(A \sim B\)</span>. Thus, there exists a function
+<span class="math notranslate nohighlight">\(f : A \to B\)</span> which is bijective. Thus, there exists an
+<a class="reference internal" href="functions.html#def-st-inverse-total-function">inverse function</a>
+<span class="math notranslate nohighlight">\(g : B \to A\)</span> which is bijective. Thus, <span class="math notranslate nohighlight">\(B \sim A\)</span>.</p>
+<p>(3). It is given that <span class="math notranslate nohighlight">\(A \sim B\)</span> and <span class="math notranslate nohighlight">\(B \sim C\)</span>.
+Thus, there exist two bijective
+functions <span class="math notranslate nohighlight">\(f : A \to B\)</span> and <span class="math notranslate nohighlight">\(g : B \to C\)</span>.
+Define a function <span class="math notranslate nohighlight">\( h : A \to C\)</span> given by
+<span class="math notranslate nohighlight">\( h = g \circ f\)</span>. Since
+<a class="reference internal" href="functions.html#res-st-composition-of-bijective-functions">composition of bijective functions is bijective</a>
+, <span class="math notranslate nohighlight">\(h\)</span> is bijective. Thus, <span class="math notranslate nohighlight">\(A \sim C\)</span>.</p>
+</div>
+<div class="section" id="cardinality-and-natural-numbers">
+<h2><span class="section-number">1.4.1. </span>Cardinality and Natural Numbers<a class="headerlink" href="#cardinality-and-natural-numbers" title="Permalink to this headline">¶</a></h2>
+<p>We now look closely at the set of natural numbers <span class="math notranslate nohighlight">\(\Nat = \{1,2,3,\dots\}\)</span>.</p>
+<div class="proof definition admonition" id="def-st-segment-natural-numbers">
+<p class="admonition-title"><span class="caption-number">Definition 1.60 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>Any subset of <span class="math notranslate nohighlight">\(\Nat\)</span> of the form <span class="math notranslate nohighlight">\(\{1,\dots, n\}\)</span> is called a
+<em>segment</em> of <span class="math notranslate nohighlight">\(\Nat\)</span>.
+<span class="math notranslate nohighlight">\(n\)</span> is called the <em>number of elements</em> in the segment or its <em>cardinality</em>.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-4">
+<p class="admonition-title"><span class="caption-number">Remark 1.12 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Two segments <span class="math notranslate nohighlight">\(\{1,\dots,m\}\)</span> and <span class="math notranslate nohighlight">\(\{1,\dots,n\}\)</span> are equivalent
+only if <span class="math notranslate nohighlight">\(m= n\)</span>.</p>
+</div>
+</div><p>Thus, a proper subset of a segment cannot be equivalent to the segment.</p>
+<div class="proof definition admonition" id="def-finite-set">
+<p class="admonition-title"><span class="caption-number">Definition 1.61 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A set that is equivalent to a segment is called a <em>finite set</em>.</p>
+<p>The <em>cardinality</em> or number of elements of a set
+which is equivalent to a segment is equal to the
+number of elements in the segment.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-6">
+<p class="admonition-title"><span class="caption-number">Remark 1.13 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>The empty set <span class="math notranslate nohighlight">\(\EmptySet\)</span> is also considered to be finite with zero elements.</p>
+</div>
+</div><div class="proof definition admonition" id="definition-7">
+<p class="admonition-title"><span class="caption-number">Definition 1.62 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A set that is not finite is called an <em>infinite set</em>.</p>
+</div>
+</div><p>It should be noted that so far we have defined number of elements only
+for sets which are equivalent to a segment.</p>
+<div class="proof definition admonition" id="def-st-countable-sets">
+<p class="admonition-title"><span class="caption-number">Definition 1.63 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(A\)</span> is called <em>countable</em> if it is equivalent to <span class="math notranslate nohighlight">\(\Nat\)</span>,
+i.e., if there exists a bijective correspondence of <span class="math notranslate nohighlight">\(\Nat\)</span> with the
+elements of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-st-enumeration">
+<p class="admonition-title"><span class="caption-number">Definition 1.64 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A countable set <span class="math notranslate nohighlight">\(A\)</span> is usually written as <span class="math notranslate nohighlight">\(A = \{a_1, a_2, \dots\}\)</span>
+which indicates the one-to-one correspondence of <span class="math notranslate nohighlight">\(A\)</span> with the set of
+natural numbers <span class="math notranslate nohighlight">\(\Nat\)</span>.
+This notation is also known as the <em>enumeration</em> of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-st-uncountable-set">
+<p class="admonition-title"><span class="caption-number">Definition 1.65 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>An infinite set which is not countable is called an <em>uncountable set</em>.</p>
+</div>
+</div><p>With the definitions in place, we are now ready to study the connections
+between countable, uncountable and finite sets.</p>
+</div>
+<div class="section" id="well-ordering-principle">
+<h2><span class="section-number">1.4.2. </span>Well Ordering Principle<a class="headerlink" href="#well-ordering-principle" title="Permalink to this headline">¶</a></h2>
+<p>We recall some properties of natural numbers which will be
+used later.</p>
+<div class="proof property admonition" id="res-st-well-ordering-principle">
+<p class="admonition-title"><span class="caption-number">Property 1.3 </span> (Well ordering principle)</p>
+<div class="property-content section" id="proof-content">
+<p>Every nonempty subset of <span class="math notranslate nohighlight">\(\Nat\)</span> has a least element.</p>
+</div>
+</div><p>Well ordering principle is equivalent to the principle of
+mathematical induction.</p>
+<div class="proof theorem admonition" id="res-st-principle-mathematical-induction">
+<p class="admonition-title"><span class="caption-number">Theorem 1.6 </span> (Principle of mathematical induction)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If a subset <span class="math notranslate nohighlight">\(S\)</span> of <span class="math notranslate nohighlight">\(\Nat\)</span> satisfies the following properties:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(1 \in S\)</span> and</p></li>
+<li><p><span class="math notranslate nohighlight">\(n \in S \implies n + 1 \in S\)</span>,</p></li>
+</ul>
+<p>then <span class="math notranslate nohighlight">\(S = \Nat\)</span>.</p>
+</div>
+</div><p>The principle of mathematical induction is applied as follows.
+We consider a set <span class="math notranslate nohighlight">\(S \triangleq \{ n \in \Nat \ST n \text{ satisfies } P \}\)</span>
+where <span class="math notranslate nohighlight">\(P\)</span> is some property that the members of this set satisfy.
+We then show that <span class="math notranslate nohighlight">\(1\)</span> satisfies the property <span class="math notranslate nohighlight">\(P\)</span>. Further, we
+show that if <span class="math notranslate nohighlight">\(n\)</span> satisfies property <span class="math notranslate nohighlight">\(P\)</span>, then <span class="math notranslate nohighlight">\(n + 1\)</span> also
+has to satisfy <span class="math notranslate nohighlight">\(P\)</span>.
+Then, applying the principle of mathematical
+induction, we claim that <span class="math notranslate nohighlight">\(S = \Nat\)</span> i.e. every number <span class="math notranslate nohighlight">\(n \in \Nat\)</span>
+satisfies the property <span class="math notranslate nohighlight">\(P\)</span>.</p>
+</div>
+<div class="section" id="infinite-sets">
+<h2><span class="section-number">1.4.3. </span>Infinite Sets<a class="headerlink" href="#infinite-sets" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="theorem-13">
+<p class="admonition-title"><span class="caption-number">Theorem 1.7 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Every infinite set contains a countable subset.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A\)</span> be an infinite set.
+Clearly, <span class="math notranslate nohighlight">\(A \neq \EmptySet\)</span>.
+Pick an element <span class="math notranslate nohighlight">\(a_1 \in A\)</span>.
+Consider the set <span class="math notranslate nohighlight">\(A_1 \triangleq A \setminus \{a_1 \}\)</span>.
+Since <span class="math notranslate nohighlight">\(A\)</span> is infinite, hence <span class="math notranslate nohighlight">\(A_1\)</span> is nonempty.
+Pick an element <span class="math notranslate nohighlight">\(a_2 \in A_1\)</span>.
+Clearly, <span class="math notranslate nohighlight">\(a_2 \neq a_1\)</span>.
+Consider the set <span class="math notranslate nohighlight">\(A_2 \triangleq A \setminus \{a_1, a_2 \}\)</span>.
+Again, by the same argument, since
+<span class="math notranslate nohighlight">\(A\)</span> is infinite, <span class="math notranslate nohighlight">\(A_2\)</span> is non-empty.
+We can pick <span class="math notranslate nohighlight">\(a_3 \in A_2\)</span>.
+Proceeding in the
+same way we construct a set
+<span class="math notranslate nohighlight">\(B \triangleq \{a_1, a_2, a_3, \dots \}\)</span>.
+The set is countable and by construction it is a subset of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-st-subset-of-countable-set-is-countable">
+<p class="admonition-title"><span class="caption-number">Theorem 1.8 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Every subset of a countable set is either finite or countable. i.e. if <span class="math notranslate nohighlight">\(A\)</span> is
+countable and <span class="math notranslate nohighlight">\(B \subseteq A\)</span>,
+then either <span class="math notranslate nohighlight">\(B\)</span> is finite or <span class="math notranslate nohighlight">\(B \sim A\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A\)</span> be a countable set and <span class="math notranslate nohighlight">\(B \subseteq A\)</span>.
+If <span class="math notranslate nohighlight">\(B\)</span> is finite, then there is nothing to prove.
+So we consider <span class="math notranslate nohighlight">\(B\)</span> as infinite and show that it is countable.
+Since <span class="math notranslate nohighlight">\(A\)</span> is countable, hence <span class="math notranslate nohighlight">\(A \sim \Nat\)</span>.
+Thus, <span class="math notranslate nohighlight">\(B\)</span> is equivalent to a subset of <span class="math notranslate nohighlight">\(\Nat\)</span>.
+Without loss of generality, let us assume that <span class="math notranslate nohighlight">\(B\)</span> is a subset of <span class="math notranslate nohighlight">\(\Nat\)</span>.
+We now construct a mapping <span class="math notranslate nohighlight">\(f : \Nat \to B\)</span> as follows. Let <span class="math notranslate nohighlight">\(b_1\)</span> be the
+least element of <span class="math notranslate nohighlight">\(B\)</span> (which exists due to the
+<a class="reference internal" href="#res-st-well-ordering-principle">well ordering principle</a>).
+We assign <span class="math notranslate nohighlight">\(f(1) = b_1\)</span>.
+Now, let <span class="math notranslate nohighlight">\(b_2\)</span> be the least element of <span class="math notranslate nohighlight">\(B \setminus \{ b_1\}\)</span>.
+We assign <span class="math notranslate nohighlight">\(f(2) = b_2\)</span>.
+Similarly, assuming that <span class="math notranslate nohighlight">\(f(1) = b_1, f(2) = b_2, \dots , f(n) = b_n\)</span> has
+been assigned,
+we assign <span class="math notranslate nohighlight">\(f(n+1) = \)</span> the least element of <span class="math notranslate nohighlight">\(B \setminus \{b_1, \dots, b_n\}\)</span>.
+This least element again exists due to the
+<a class="reference internal" href="#res-st-well-ordering-principle">well ordering principle</a>.
+This completes the definition of <span class="math notranslate nohighlight">\(f\)</span> using the
+<a class="reference internal" href="#res-st-principle-mathematical-induction">principle of mathematical induction</a>.
+It is easy to show that the function is bijective.<br />
+This proves that <span class="math notranslate nohighlight">\(B \sim \Nat\)</span>.</p>
+</div>
+<p>We present different characterizations of a countable set.</p>
+<div class="proof theorem admonition" id="res-countable-set-characterization">
+<p class="admonition-title"><span class="caption-number">Theorem 1.9 </span> (Characterizations of countable sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be an infinite set. The following are equivalent:</p>
+<ol class="simple">
+<li><p>A is countable.</p></li>
+<li><p>There exists a (partial) function <span class="math notranslate nohighlight">\(f: \Nat \to A\)</span> that is onto.</p></li>
+<li><p>There exists a (total) function <span class="math notranslate nohighlight">\(g : A \to \Nat\)</span> that is one-one.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. (1)<span class="math notranslate nohighlight">\(\implies\)</span> (2). Since <span class="math notranslate nohighlight">\(A\)</span> is countable,
+there exists a function <span class="math notranslate nohighlight">\(f : \Nat \to A\)</span> which
+is bijective. Choosing <span class="math notranslate nohighlight">\(B = \Nat\)</span>, we get the result.</p>
+<p>(2)<span class="math notranslate nohighlight">\(\implies\)</span> (3).
+We are given that there exists a (partial) function <span class="math notranslate nohighlight">\(f: \Nat \to A\)</span> that is onto.
+For some <span class="math notranslate nohighlight">\(a \in A\)</span>, consider <span class="math notranslate nohighlight">\(f^{-1}(a) = \{ b \in \Nat \ST f(b) = a \}\)</span>.
+Since <span class="math notranslate nohighlight">\(f\)</span> is onto, hence <span class="math notranslate nohighlight">\(f^{-1}(a)\)</span> is nonempty.
+Since <span class="math notranslate nohighlight">\(f^{-1}(a)\)</span> is a subset of natural numbers,
+it has a least element due to the
+<a class="reference internal" href="#res-st-well-ordering-principle">well ordering principle</a>.
+Further, if <span class="math notranslate nohighlight">\(a_1, a_2 \in A\)</span> are distinct, then <span class="math notranslate nohighlight">\(f^{-1}(a_1)\)</span>
+and <span class="math notranslate nohighlight">\(f^{-1}(a_2)\)</span> are disjoint and the corresponding least elements are distinct.
+Assign <span class="math notranslate nohighlight">\(g(a) = \text{ least element of } f^{-1}(a) \Forall a \in A\)</span>.
+Such a function is well defined by construction.
+Clearly, the function is one-one.</p>
+<p>(3)<span class="math notranslate nohighlight">\(\implies\)</span> (1).
+We are given that there exists a function <span class="math notranslate nohighlight">\(g : A \to \Nat\)</span> that is one-one.
+Clearly, <span class="math notranslate nohighlight">\(A \sim g(A)\)</span> where <span class="math notranslate nohighlight">\(g(A) \subseteq \Nat\)</span>. Since <span class="math notranslate nohighlight">\(A\)</span> is infinite,
+hence <span class="math notranslate nohighlight">\(g(A)\)</span> is also infinite. Due to
+<a class="reference internal" href="#res-st-subset-of-countable-set-is-countable">Theorem 1.8</a>,
+<span class="math notranslate nohighlight">\(g(A)\)</span> is countable since it is the subset of a countable set <span class="math notranslate nohighlight">\(\Nat\)</span>.
+Then, <span class="math notranslate nohighlight">\(g(A) \sim \Nat\)</span>. Thus, <span class="math notranslate nohighlight">\(A \sim g(A) \sim \Nat\)</span> and <span class="math notranslate nohighlight">\(A\)</span> is countable.</p>
+</div>
+<div class="proof theorem admonition" id="res:st:countable-union-countable-sets">
+<p class="admonition-title"><span class="caption-number">Theorem 1.10 </span> (Countable union of countable sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{A_1, A_2, \dots \}\)</span> be a countable family of sets where each <span class="math notranslate nohighlight">\(A_i\)</span> is a countable set. Then</p>
+<div class="math notranslate nohighlight">
+\[
+    A = \bigcup_{i=1}^{\infty} A_i
+\]</div>
+<p>is countable.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A_n = \{a_1^n, a_2^n, \dots\} \Forall n \in \Nat\)</span>. Further, let
+<span class="math notranslate nohighlight">\(B = \{2^k 3^n : k, n \in \Nat \}\)</span>. Note that every element of <span class="math notranslate nohighlight">\(B\)</span> is a natural number,
+hence <span class="math notranslate nohighlight">\(B \subseteq \Nat\)</span>. Since <span class="math notranslate nohighlight">\(B\)</span> is infinite, hence by   <span class="xref std std-ref">here</span>
+<span class="math notranslate nohighlight">\(B\)</span> is countable, i.e. <span class="math notranslate nohighlight">\(B \sim \Nat\)</span>.
+We note that if <span class="math notranslate nohighlight">\(b_1 = 2^{k_1} 3^{n_1}\)</span> and <span class="math notranslate nohighlight">\(b_2 = 2^{k_2} 3^{n_2}\)</span>,
+then <span class="math notranslate nohighlight">\(b_1 = b_2\)</span> if and only if <span class="math notranslate nohighlight">\(k_1 = k_2\)</span> and <span class="math notranslate nohighlight">\(n_1 = n_2\)</span>.
+Now define a mapping <span class="math notranslate nohighlight">\(f : \Nat \to A\)</span> with <span class="math notranslate nohighlight">\(\dom f = B\)</span>, given by
+<span class="math notranslate nohighlight">\(f (2^k 3^n) = a^n_k\)</span> (picking <span class="math notranslate nohighlight">\(k\)</span>-th element from <span class="math notranslate nohighlight">\(n\)</span>-th set).
+Clearly, <span class="math notranslate nohighlight">\(f\)</span> is well-defined and onto.
+Thus, using <a class="reference internal" href="#res-countable-set-characterization">Theorem 1.9</a>, <span class="math notranslate nohighlight">\(A\)</span> is countable.</p>
+</div>
+<div class="proof theorem admonition" id="theorem-17">
+<span id="res-set-finite-cartesian-product-of-countable-sets"></span><p class="admonition-title"><span class="caption-number">Theorem 1.11 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{A_1, A_2, \dots, A_n \}\)</span> be a finite collection of sets such that each <span class="math notranslate nohighlight">\(A_i\)</span> is countable.
+Then their Cartesian product <span class="math notranslate nohighlight">\(A = A_1 \times A_2 \times \dots \times A_n\)</span> is countable.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A_i = \{a_1^i, a_2^i, \dots\} \Forall 1 \leq i \leq n\)</span>. Choose <span class="math notranslate nohighlight">\(n\)</span> distinct prime
+numbers <span class="math notranslate nohighlight">\(p_1, p_2, \dots, p_n\)</span>. Consider the set
+<span class="math notranslate nohighlight">\(B  = \{p_1^{k_1}p_2^{k_2} \dots p_n^{k_n} : k_1, k_2, \dots, k_n \in \Nat \}\)</span>.
+Clearly, <span class="math notranslate nohighlight">\(B \subset \Nat\)</span>.
+Define a function <span class="math notranslate nohighlight">\(f : A \to \Nat \)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+    f (a^1_{k_1}, a^2_{k_2}, \dots, a^n_{k_n}) = p_1^{k_1}p_2^{k_2} \dots p_n^{k_n}.
+\]</div>
+<p>By fundamental theorem of arithmetic, every natural number has a unique prime factorization. Thus,
+<span class="math notranslate nohighlight">\(f\)</span> is one-one. Invoking <span class="xref std std-ref">here</span>, <span class="math notranslate nohighlight">\(A\)</span> is countable.</p>
+</div>
+<div class="proof theorem admonition" id="theorem-18">
+<span id="res-set-rationals-countable"></span><p class="admonition-title"><span class="caption-number">Theorem 1.12 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The set of rational numbers <span class="math notranslate nohighlight">\(\QQ\)</span> is countable.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\frac{p}{q}\)</span> be a positive rational number with <span class="math notranslate nohighlight">\(p &gt; 0\)</span> and <span class="math notranslate nohighlight">\(q &gt; 0\)</span> having no common factor.
+Consider a mapping <span class="math notranslate nohighlight">\(f(\frac{p}{q})  = 2^p 3^q\)</span>. This is a one-one mapping into natural numbers.
+Hence invoking <span class="xref std std-ref">here</span>, the set of positive rational
+numbers is countable. Similarly, the set of negative rational numbers is countable.
+Invoking <span class="xref std std-ref">here</span>, <span class="math notranslate nohighlight">\(\QQ\)</span> is countable.</p>
+</div>
+<div class="proof theorem admonition" id="theorem-19">
+<span id="res-set-finite-subsets-countable"></span><p class="admonition-title"><span class="caption-number">Theorem 1.13 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The set of all finite subsets of <span class="math notranslate nohighlight">\(\Nat\)</span> is countable.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(F\)</span> denote the set of finite subsets of <span class="math notranslate nohighlight">\(\Nat\)</span>. Let <span class="math notranslate nohighlight">\(f \in F\)</span>. Then
+we can write <span class="math notranslate nohighlight">\(f = \{n_1, \dots, n_k\}\)</span> where <span class="math notranslate nohighlight">\(k\)</span> is the number of elements
+in <span class="math notranslate nohighlight">\(f\)</span>. Consider the sequence of prime numbers <span class="math notranslate nohighlight">\(\{p_n\}\)</span> where <span class="math notranslate nohighlight">\(p_n\)</span> denotes
+<span class="math notranslate nohighlight">\(n\)</span>-th prime number. Now, define a mapping <span class="math notranslate nohighlight">\(g : F \to \Nat\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+    g (f ) = \prod_{i=1}^k p_{n_i}.
+\]</div>
+<p>The mapping <span class="math notranslate nohighlight">\(g\)</span> is one-one, since the prime decomposition of a natural number
+is unique. Hence invoking <span class="xref std std-ref">here</span>, <span class="math notranslate nohighlight">\(F\)</span> is countable.</p>
+</div>
+<div class="proof corollary admonition" id="corollary-20">
+<span id="res-set-finite-subsets-of-countable-set-is-countable"></span><p class="admonition-title"><span class="caption-number">Corollary 1.2 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>The set of all finite subsets of a countable set is countable.</p>
+</div>
+</div><div class="proof definition admonition" id="definition-21">
+<p class="admonition-title"><span class="caption-number">Definition 1.66 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>We say that <span class="math notranslate nohighlight">\(A \preceq B\)</span> whenever there exists a one-one function <span class="math notranslate nohighlight">\(f : A \to B\)</span>.
+In other words, <span class="math notranslate nohighlight">\(A\)</span> is equivalent to a subset of <span class="math notranslate nohighlight">\(B\)</span>.</p>
+</div>
+</div><p>In this sense, <span class="math notranslate nohighlight">\(B\)</span> has at least as many elements as <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="proof theorem admonition" id="theorem-22">
+<p class="admonition-title"><span class="caption-number">Theorem 1.14 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The relation <span class="math notranslate nohighlight">\(\preceq\)</span> satisfies following properties
+[label=<em>\roman</em>.*]</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A \preceq A\)</span> for all sets <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A \preceq B\)</span> and <span class="math notranslate nohighlight">\(b \preceq C\)</span>, then <span class="math notranslate nohighlight">\(A \preceq C\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A \preceq B\)</span> and <span class="math notranslate nohighlight">\(B \preceq A\)</span>, then <span class="math notranslate nohighlight">\(A \sim B\)</span>.</p></li>
+</ul>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. (i). We can use the identity function <span class="math notranslate nohighlight">\(f (a ) = a \Forall a \in A\)</span>.</p>
+<p>(ii). Straightforward application of the result that
+<span class="xref std std-ref">composition of injective functions is injective</span>.</p>
+<p>(iii). Straightforward application of
+<span class="xref std std-ref">Schr{“o</span>der-Bernstein theorem}.</p>
+</div>
+<div class="proof theorem admonition" id="theorem-23">
+<span id="res-set-set-power-set-cardinality"></span><p class="admonition-title"><span class="caption-number">Theorem 1.15 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A\)</span> is a set, then <span class="math notranslate nohighlight">\(A \preceq \Power (A)\)</span> and <span class="math notranslate nohighlight">\(A \nsim \Power (A)\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(A = \EmptySet\)</span>, then <span class="math notranslate nohighlight">\(\Power(A) = \{ \EmptySet\}\)</span> and the result is trivial.
+So, lets consider non-empty <span class="math notranslate nohighlight">\(A\)</span>.
+We can choose <span class="math notranslate nohighlight">\(f : A \to \Power(A)\)</span> given by <span class="math notranslate nohighlight">\(f (x) = \{ x\} \Forall x \in A\)</span>. This
+is clearly a one-one function leading to <span class="math notranslate nohighlight">\(A \preceq \Power (A)\)</span>.</p>
+<p>Now for the sake of contradiction, lets us assume that <span class="math notranslate nohighlight">\(A \sim \Power (A)\)</span>. Then,
+there exists a bijective function <span class="math notranslate nohighlight">\(g : A \to \Power(A)\)</span>.
+Consider the set <span class="math notranslate nohighlight">\(B = \{ a \in A : a \notin g(a) \}\)</span>.
+Since <span class="math notranslate nohighlight">\(B \subseteq A\)</span>, and <span class="math notranslate nohighlight">\(g\)</span> is bijective, there exists
+<span class="math notranslate nohighlight">\(a \in A\)</span> such that <span class="math notranslate nohighlight">\(g (a) = B\)</span>.</p>
+<p>Now if <span class="math notranslate nohighlight">\(a \in B\)</span> then <span class="math notranslate nohighlight">\(a \notin g(a) = B\)</span>.
+And if <span class="math notranslate nohighlight">\(a \notin B\)</span>, then <span class="math notranslate nohighlight">\(a \in g(a) = B\)</span>.
+This is impossible, hence <span class="math notranslate nohighlight">\(A \nsim \Power(A)\)</span>.</p>
+</div>
+<div class="proof definition admonition" id="definition-24">
+<span id="def-set-cardinality"></span><p class="admonition-title"><span class="caption-number">Definition 1.67 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>For every set <span class="math notranslate nohighlight">\(A\)</span> a symbol (playing the role of a number) can be assigned that
+designates the number of elements in the set. This number is known as <em>cardinal number</em>
+of the set and is denoted by \Card{A} or <span class="math notranslate nohighlight">\(| A |\)</span>. It is also known as <em>cardinality</em>.</p>
+</div>
+</div><p>Note that the cardinal numbers are different from natural numbers, real numbers etc.
+If <span class="math notranslate nohighlight">\(A\)</span> is finite, with <span class="math notranslate nohighlight">\(A = \{a_1, a_2, \dots, a_n \}\)</span>, then <span class="math notranslate nohighlight">\(\Card{A} = n\)</span>.
+We use the symbol <span class="math notranslate nohighlight">\(\aleph_0\)</span> to denote the cardinality of <span class="math notranslate nohighlight">\(\Nat\)</span>. By saying
+<span class="math notranslate nohighlight">\(A\)</span> has the cardinality of <span class="math notranslate nohighlight">\(\aleph_0\)</span>, we simply mean that <span class="math notranslate nohighlight">\(A \sim \Nat\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are two cardinal numbers, then by <span class="math notranslate nohighlight">\(a \leq b\)</span>, we mean that
+there exist two sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> such that <span class="math notranslate nohighlight">\(\Card{A} = a\)</span>, <span class="math notranslate nohighlight">\(\Card{B} = b\)</span> and
+<span class="math notranslate nohighlight">\(A \preceq B\)</span>. By <span class="math notranslate nohighlight">\(a &lt; b\)</span>, we mean that <span class="math notranslate nohighlight">\(A \preceq B\)</span>
+and <span class="math notranslate nohighlight">\(A \nsim B\)</span>. <span class="math notranslate nohighlight">\(a \leq b\)</span> and <span class="math notranslate nohighlight">\(b \leq a\)</span> guarantees that <span class="math notranslate nohighlight">\(a = b\)</span>.</p>
+<p>It can be shown that <span class="math notranslate nohighlight">\(\Power(\Nat) \sim \RR\)</span>. The cardinality of <span class="math notranslate nohighlight">\(\RR\)</span> is denoted by
+<span class="math notranslate nohighlight">\(\mathfrak{c}\)</span>.</p>
+<div class="proof definition admonition" id="definition-25">
+<span id="def-set-infinite-cardinal-number"></span><p class="admonition-title"><span class="caption-number">Definition 1.68 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A cardinal number <span class="math notranslate nohighlight">\(a\)</span> satisfying <span class="math notranslate nohighlight">\(\aleph_0 \leq a\)</span> is known as <em>infinite cardinal number</em>.</p>
+</div>
+</div><div class="proof definition admonition" id="definition-26">
+<span id="def-set-cardinality-continuum"></span><p class="admonition-title"><span class="caption-number">Definition 1.69 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>The cardinality of <span class="math notranslate nohighlight">\(\RR\)</span> denoted by <span class="math notranslate nohighlight">\(\mathfrak{c}\)</span> is known as the <em>cardinality of the continuum</em>.</p>
+</div>
+</div><div class="proof theorem admonition" id="theorem-27">
+<p class="admonition-title"><span class="caption-number">Theorem 1.16 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(2 = \{ 0, 1 \}\)</span>. Then <span class="math notranslate nohighlight">\(2^X \sim \Power (X) \)</span> for every set <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(2^X\)</span> is the set of all functions <span class="math notranslate nohighlight">\(f : X \to 2\)</span>. i.e. a function from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\{ 0, 1 \}\)</span> which can
+take only one the two values <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>Define a function <span class="math notranslate nohighlight">\(g : \Power (X) \to 2^X\)</span> as follows. Let <span class="math notranslate nohighlight">\(y \in \Power(X)\)</span>.
+Then <span class="math notranslate nohighlight">\(g(y)\)</span> is a function <span class="math notranslate nohighlight">\(f : X \to \{ 0, 1 \}\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    f(x) =
+     \left\{
+            \begin{array}{ll}
+                1 &amp; \mbox{if $x \in y$};\\
+                0 &amp; \mbox{if $x \notin y$}.
+            \end{array}
+          \right.
+\end{split}\]</div>
+<p>The function <span class="math notranslate nohighlight">\(g\)</span> is one-one and on-to. Thus <span class="math notranslate nohighlight">\(2^X \sim \Power(X)\)</span>.</p>
+</div>
+<p>We denote the cardinal number of <span class="math notranslate nohighlight">\(\Power(X)\)</span> by <span class="math notranslate nohighlight">\(2^{\Card{X}}\)</span>. Thus, <span class="math notranslate nohighlight">\(\mathfrak{c} = 2^{\aleph_0}\)</span>.</p>
+<p>The following inequalities of cardinal numbers hold:</p>
+<div class="math notranslate nohighlight">
+\[
+    0 &lt; 1 &lt; 2 &lt; \dots &lt; n \dots &lt; \aleph_0 &lt; 2^{\aleph_0} = \mathfrak{c} &lt; 2^ \mathfrak{c} &lt; 2^{2^{ \mathfrak{c}}} \dots.
+\]</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./set_theory"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="functions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">1.3. </span>Functions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="sequences.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.5. </span>Sequences</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Shailesh Kumar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

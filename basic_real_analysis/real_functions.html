@@ -1,0 +1,1912 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.6. Real Functions &#8212; Optimization for Sparse Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.7. Differentiable Functions" href="differentiability.html" />
+    <link rel="prev" title="2.5. Real Valued Functions" href="real_valued_functions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.3. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.4. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.5. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   5. Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/affine.html">
+     5.2. Affine Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     5.3. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     5.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/hyperplane.html">
+     5.5. Hyperplanes and Half spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/ball.html">
+     5.6. Euclidean Balls and Ellipsoids
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_ball.html">
+     5.7. Norm Balls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/norm_cone.html">
+     5.8. Norm Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/polyhedron.html">
+     5.9. Polyhedra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     5.10. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convexity_ops.html">
+     5.11. Convexity Preserving Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/dual_cones.html">
+     5.12. Dual Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     5.13. Generalized Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_functions/intro.html">
+   6. Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/functions.html">
+     6.1. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/convex_functions.html">
+     6.2. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
+     6.3. Extensions for Convex Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradients/chapter.html">
+   7. Subgradients
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradients/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   8. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   9. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   10. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   11. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     11.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   12. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     12.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     12.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convex Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   13. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   14. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   15. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     15.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/basic_real_analysis/real_functions.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fbasic_real_analysis/real_functions.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#limits">
+   2.6.1. Limits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monotonicity">
+   2.6.2. Monotonicity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continuity">
+   2.6.3. Continuity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discontinuities">
+   2.6.4. Discontinuities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continuity-with-function-composition">
+   2.6.5. Continuity with Function Composition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#boundedness">
+   2.6.6. Boundedness
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uniform-continuity">
+   2.6.7. Uniform Continuity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continuity-and-monotonic-functions">
+   2.6.8. Continuity and Monotonic Functions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="real-functions">
+<h1><span class="section-number">2.6. </span>Real Functions<a class="headerlink" href="#real-functions" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we will deal with functions of type <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span>.
+Main references are
+<span id="id1">[<a class="reference internal" href="../bib.html#id2">1</a>, <a class="reference internal" href="../bib.html#id10">9</a>]</span>.</p>
+<p>Our goal is a cursory review of the relevant theory. We will
+state the main definitions and results and provide a few
+examples wherever needed. Detailed proofs will be skipped.</p>
+<div class="proof definition admonition" id="def-bra-real-function">
+<p class="admonition-title"><span class="caption-number">Definition 2.53 </span> (Real function)</p>
+<div class="definition-content section" id="proof-content">
+<p>A (partial) function of type <span class="math notranslate nohighlight">\(f: \RR \to \RR\)</span> mapping
+real values to real values is called a <em>real function</em>.</p>
+</div>
+</div><p>The domain and range of a real function are both subsets of <span class="math notranslate nohighlight">\(\RR\)</span>.</p>
+<div class="proof definition admonition" id="def-bra-real-function-arithmetic">
+<p class="admonition-title"><span class="caption-number">Definition 2.54 </span> (Arithmetic operators)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f,g\)</span> be real functions with <span class="math notranslate nohighlight">\(\dom f \cap \dom g \neq \EmptySet\)</span>.</p>
+<p>We define <span class="math notranslate nohighlight">\(f+g\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+(f + g)(x) = f(x) + g(x) \Forall x \in \dom f \cap \dom g.
+\]</div>
+<p>We define <span class="math notranslate nohighlight">\(f-g\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+(f - g)(x) = f(x) - g(x) \Forall x \in \dom f \cap \dom g.
+\]</div>
+<p>We define <span class="math notranslate nohighlight">\(f g\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+(f g)(x) = f(x) g(x) \Forall x \in \dom f \cap \dom g.
+\]</div>
+<p>We define the quotient <span class="math notranslate nohighlight">\(f/g\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+\left ( \frac{f}{g} \right )(x) = \frac{f(x)}{g(x)} 
+\Forall x \in \dom f \cap \dom g \text{ such that } g(x) \neq 0.
+\]</div>
+<p>For some <span class="math notranslate nohighlight">\(c \in \RR\)</span>, we define <span class="math notranslate nohighlight">\(cf\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+(cf)(x) = cf(x) \Forall x \in \dom f.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="example-2">
+<p class="admonition-title"><span class="caption-number">Example 2.10 </span></p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f_1, f_2, \dots, f_n\)</span> be real functions.</p>
+<p>Then, their sum is defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+(f_1 + f_2 + \dots + f_n)(x) = f_1(x) + f_2(x) + \dots + f_n(x) 
+\Forall x \in \bigcap_{i=1}^n \dom f_i
+\]</div>
+<p>and their product is defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+(f_1 f_2 \dots f_n)(x) = f_1(x) f_2(x) \dots f_n(x) 
+\Forall x \in \bigcap_{i=1}^n \dom f_i
+\]</div>
+<p>provided the domain <span class="math notranslate nohighlight">\(D = \bigcap_{i=1}^n \dom f_i\)</span> is nonempty.</p>
+<p>If <span class="math notranslate nohighlight">\(f = f_1 = f_2 = \dots = f_n\)</span>, then the n-th power of <span class="math notranslate nohighlight">\(f\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+(f^n)(x) = (f(x))^n \Forall x \in \dom f.
+\]</div>
+</div>
+</div><div class="section" id="limits">
+<h2><span class="section-number">2.6.1. </span>Limits<a class="headerlink" href="#limits" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-bra-real-function-limit">
+<p class="admonition-title"><span class="caption-number">Definition 2.55 </span> (Limit)</p>
+<div class="definition-content section" id="proof-content">
+<p>We say that <span class="math notranslate nohighlight">\(f\)</span> approaches the limit <span class="math notranslate nohighlight">\(a\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches <span class="math notranslate nohighlight">\(x_0\)</span>
+and write:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to x_0} f(x) = a
+\]</div>
+<p>if <span class="math notranslate nohighlight">\(f\)</span> is defined on some
+<a class="reference internal" href="topology.html#def-bra-deleted-neighborhood">deleted neighborhood</a>
+of <span class="math notranslate nohighlight">\(x_0\)</span> and for every
+<span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there is <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - a | &lt; \epsilon  \text{ whenever } 0 &lt; | x - x_0 | &lt; \delta.
+\]</div>
+</div>
+</div><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> may or may not be defined at <span class="math notranslate nohighlight">\(x=x_0\)</span>. But, it must be defined
+in the neighborhood around <span class="math notranslate nohighlight">\(x_0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f\)</span> is defined at <span class="math notranslate nohighlight">\(x=x_0\)</span>, then <span class="math notranslate nohighlight">\(f(x_0)\)</span> doesn’t need to be equal to <span class="math notranslate nohighlight">\(a\)</span>.</p></li>
+</ul>
+<div class="proof example admonition" id="example-4">
+<p class="admonition-title"><span class="caption-number">Example 2.11 </span></p>
+<div class="example-content section" id="proof-content">
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = x \sin \frac{1}{x}, \quad x \neq 0.
+\]</div>
+<p>We have <span class="math notranslate nohighlight">\(\dom f = \RR \setminus \{ 0 \} = (-\infty, 0) \cup (0, \infty)\)</span>.
+We can compute the limit of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(x=0\)</span>. We will show that:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to 0} f(x) = 0.
+\]</div>
+<p>Assume, <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> and let <span class="math notranslate nohighlight">\(\delta  = \epsilon\)</span>.</p>
+<p>Then, for any <span class="math notranslate nohighlight">\(x\)</span> satisfying <span class="math notranslate nohighlight">\(0 &lt; |x - 0| &lt; \delta\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - 0| = \left | x \sin \frac{1}{x} \right | 
+= |x| \left |\sin \frac{1}{x} \right |
+\leq | x | &lt; \delta = \epsilon.
+\]</div>
+<p>Thus, for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>,
+given by <span class="math notranslate nohighlight">\(\delta = \epsilon\)</span>, such that:</p>
+<div class="math notranslate nohighlight">
+\[
+0 &lt; |x - 0| &lt; \delta \implies |f(x) - 0|  &lt; \epsilon.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to 0} f(x) = 0.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="def-bra-rf-limit-uniqueness">
+<p class="admonition-title"><span class="caption-number">Theorem 2.21 </span> (Limit uniqueness)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\lim_{x \to x_0} f(x)\)</span> exists, then it is unique.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume that the limit exists and assume that:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to x_0} f(x) = a_1 \text{ and } \lim_{x \to x_0} f(x) = a_2 
+\]</div>
+<p>hold true. We will show that <span class="math notranslate nohighlight">\(a_1=a_2\)</span> must be true.</p>
+<p>Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>. Since, the limit exists, hence there are
+positive numbers <span class="math notranslate nohighlight">\(\delta_1\)</span> and <span class="math notranslate nohighlight">\(\delta_2\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - a_i | &lt; \epsilon \text{ whenever } 0 &lt; | x - x_0 | &lt; \delta_i, \quad i=1,2.
+\]</div>
+<p>Choose <span class="math notranslate nohighlight">\(\delta = \min(\delta_1, \delta_2)\)</span>.</p>
+<p>Then:</p>
+<div class="math notranslate nohighlight">
+\[
+|a_1 - a_2 | \leq |f(x) - a_1 | + | f(x) - a_2 | \leq 2 \epsilon 
+\text{ whenever } 0 &lt; | x - x_0 | &lt; \delta.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(| a_1 - a_2 | &lt; 2 \epsilon\)</span>. Since this is valid for
+every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, hence <span class="math notranslate nohighlight">\(a_1 = a_2\)</span> must be true
+(<a class="reference internal" href="real_line.html#ref-rl-real-equality">Proposition 2.5</a>).</p>
+</div>
+<div class="proof theorem admonition" id="def-bra-rf-limit-arithmetic">
+<p class="admonition-title"><span class="caption-number">Theorem 2.22 </span> (Arithmetic of limits)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\lim_{x \to x_0}f(x) = a\)</span> and <span class="math notranslate nohighlight">\(\lim_{x \to x_0} g(x) = b\)</span>.</p>
+<p>Then, we have the following rules.</p>
+<p>Addition of limits:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to x_0} (f + g)(x) = a + b.
+\]</div>
+<p>Subtraction of limits:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to x_0} (f - g)(x) = a - b.
+\]</div>
+<p>Multiplication of limits:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to x_0} (f g)(x) = a b.
+\]</div>
+<p>Division of limits. If <span class="math notranslate nohighlight">\(b \neq 0\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to x_0} \left (\frac{f}{g} \right )(x) = \frac{a}{b}.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-bra-rf-one-sided-limit">
+<p class="admonition-title"><span class="caption-number">Definition 2.56 </span> (One sided limits)</p>
+<div class="definition-content section" id="proof-content">
+<p>We that that <span class="math notranslate nohighlight">\(f\)</span> approaches the <em>left hand limit</em> <span class="math notranslate nohighlight">\(p\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches <span class="math notranslate nohighlight">\(a\)</span>
+from the left and write:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to a^-} f(x) = p
+\]</div>
+<p>if <span class="math notranslate nohighlight">\(f\)</span> is defined on some open interval <span class="math notranslate nohighlight">\((a - b, a)\)</span> (with <span class="math notranslate nohighlight">\(b &gt; 0\)</span>)
+and for each <span class="math notranslate nohighlight">\(\epsilon &gt;0\)</span>,
+there is a <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - p | &lt; \epsilon \text{ whenever } a - \delta &lt; x &lt; a.
+\]</div>
+<p>We that that <span class="math notranslate nohighlight">\(f\)</span> approaches the <em>right hand limit</em> <span class="math notranslate nohighlight">\(p\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches <span class="math notranslate nohighlight">\(a\)</span>
+from the right and write:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to a^+} f(x) = p
+\]</div>
+<p>if <span class="math notranslate nohighlight">\(f\)</span> is defined on some open interval <span class="math notranslate nohighlight">\((a, a+b)\)</span> (with <span class="math notranslate nohighlight">\(b &gt; 0\)</span>)
+and for each <span class="math notranslate nohighlight">\(\epsilon &gt;0\)</span>,
+there is a <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - p | &lt; \epsilon \text{ whenever } a &lt; x &lt; a + \delta.
+\]</div>
+<p>The left and right hand limits are called <em>one sided limits</em>.</p>
+<p>We often write simplify the notation as:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to a^-} f(x) =  f(a^-) \text{ and } \lim_{x \to a^+} f(x) = f(a^+).
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="theorem-8">
+<p class="admonition-title"><span class="caption-number">Theorem 2.23 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> has a limit at <span class="math notranslate nohighlight">\(x=a\)</span> if and only if it has left and
+right hand limits at <span class="math notranslate nohighlight">\(x=a\)</span> and they are equal.</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to a} f(x) = p \iff f(a^-) = f(a^+) = p.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-bra-rf-limit-at-infinity">
+<p class="admonition-title"><span class="caption-number">Definition 2.57 </span> (Limits at infinities)</p>
+<div class="definition-content section" id="proof-content">
+<p>We say that <span class="math notranslate nohighlight">\(f\)</span> approaches the limit <span class="math notranslate nohighlight">\(p\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches <span class="math notranslate nohighlight">\(\infty\)</span>
+and write:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to \infty} f(x) = p
+\]</div>
+<p>if <span class="math notranslate nohighlight">\(f\)</span> is defined on an interval <span class="math notranslate nohighlight">\((a, \infty)\)</span> and
+for each <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists a number <span class="math notranslate nohighlight">\(b\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - p | &lt; \epsilon \text{ whenever } x &gt; b.
+\]</div>
+<p>We say that <span class="math notranslate nohighlight">\(f\)</span> approaches the limit <span class="math notranslate nohighlight">\(p\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches <span class="math notranslate nohighlight">\(-\infty\)</span>
+and write:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to -\infty} f(x) = p
+\]</div>
+<p>if <span class="math notranslate nohighlight">\(f\)</span> is defined on an interval <span class="math notranslate nohighlight">\((-\infty, a)\)</span> and
+for each <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists a number <span class="math notranslate nohighlight">\(b\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - p | &lt; \epsilon \text{ whenever } x &lt; b.
+\]</div>
+<p>We sometimes write:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to \infty} f(x) = f(\infty) \text{ and } \lim_{x \to -\infty} f(x) = f(-\infty).
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-bra-rf-infinite-limit">
+<p class="admonition-title"><span class="caption-number">Definition 2.58 </span> (Infinite limits)</p>
+<div class="definition-content section" id="proof-content">
+<p>We say that <span class="math notranslate nohighlight">\(f\)</span> approaches <span class="math notranslate nohighlight">\(\infty\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches <span class="math notranslate nohighlight">\(a\)</span> from the
+left, and write:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to a^-} f(x) = \infty
+\]</div>
+<p>if <span class="math notranslate nohighlight">\(f\)</span> is defined on an interval <span class="math notranslate nohighlight">\((a-b, a)\)</span> (with <span class="math notranslate nohighlight">\(b &gt; 0\)</span>), and,
+for each real number <span class="math notranslate nohighlight">\(M\)</span>, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) &gt; M \text{ whenever } a - \delta &lt; x &lt; a.
+\]</div>
+<p>We say that <span class="math notranslate nohighlight">\(f\)</span> approaches <span class="math notranslate nohighlight">\(\infty\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches <span class="math notranslate nohighlight">\(a\)</span> from the
+right, and write:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to a^+} f(x) = \infty
+\]</div>
+<p>if <span class="math notranslate nohighlight">\(f\)</span> is defined on an interval <span class="math notranslate nohighlight">\((a, a+b)\)</span> (with <span class="math notranslate nohighlight">\(b &gt; 0\)</span>), and,
+for each real number <span class="math notranslate nohighlight">\(M\)</span>, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) &gt; M \text{ whenever } a &lt; x &lt; a + \delta.
+\]</div>
+<p>We say that <span class="math notranslate nohighlight">\(f\)</span> approaches <span class="math notranslate nohighlight">\(-\infty\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches <span class="math notranslate nohighlight">\(a\)</span> from the
+left, and write:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to a^-} f(x) = -\infty
+\]</div>
+<p>if <span class="math notranslate nohighlight">\(f\)</span> is defined on an interval <span class="math notranslate nohighlight">\((a-b, a)\)</span> (with <span class="math notranslate nohighlight">\(b &gt; 0\)</span>), and,
+for each real number <span class="math notranslate nohighlight">\(M\)</span>, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) &lt; M \text{ whenever } a - \delta &lt; x &lt; a.
+\]</div>
+<p>We say that <span class="math notranslate nohighlight">\(f\)</span> approaches <span class="math notranslate nohighlight">\(-\infty\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches <span class="math notranslate nohighlight">\(a\)</span> from the
+right, and write:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{x \to a^+} f(x) = -\infty
+\]</div>
+<p>if <span class="math notranslate nohighlight">\(f\)</span> is defined on an interval <span class="math notranslate nohighlight">\((a, a+b)\)</span> (with <span class="math notranslate nohighlight">\(b &gt; 0\)</span>), and,
+for each real number <span class="math notranslate nohighlight">\(M\)</span>, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) &lt; M \text{ whenever } a &lt; x &lt; a + \delta.
+\]</div>
+<p>If left hand and right hand limits are equal, we say that
+the limit at <span class="math notranslate nohighlight">\(x=a\)</span> given by <span class="math notranslate nohighlight">\(\lim_{x \to a} f(a)\)</span> exists and
+is equal to <span class="math notranslate nohighlight">\(f(a^+)\)</span> or <span class="math notranslate nohighlight">\(f(a^-)\)</span>.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-11">
+<p class="admonition-title"><span class="caption-number">Remark 2.13 </span></p>
+<div class="remark-content section" id="proof-content">
+<p><a class="reference internal" href="#def-bra-rf-limit-uniqueness">Theorem 2.21</a> can be extended for
+the following too:</p>
+<ul class="simple">
+<li><p>If a left hand limit exists, it is unique.</p></li>
+<li><p>If a right hand limit exists, it is unique.</p></li>
+<li><p>If a limit at infinity exists, it is unique.</p></li>
+<li><p>If the limit value is infinite, it is unique.</p></li>
+</ul>
+<p><a class="reference internal" href="#def-bra-rf-limit-arithmetic">Theorem 2.22</a> remains valid for
+the following too:</p>
+<ul class="simple">
+<li><p>Left hand limits</p></li>
+<li><p>Right hand limits</p></li>
+<li><p>Limits at infinity</p></li>
+</ul>
+<p>Addition, subtraction and multiplication rules remain
+valid if either or both limits are infinite,
+provided that the R.H.S. is not indeterminate.
+E.g., if <span class="math notranslate nohighlight">\(\lim f = \infty\)</span> and <span class="math notranslate nohighlight">\(\lim g = \infty\)</span>, then
+<span class="math notranslate nohighlight">\(\lim (f - g) = \lim f - \lim g\)</span>
+doesn’t make sense as <span class="math notranslate nohighlight">\(\infty - \infty\)</span> is
+indeterminate.</p>
+<p>Division rule for limits remains valid if <span class="math notranslate nohighlight">\(\lim f / \lim g\)</span>
+is not indeterminate and <span class="math notranslate nohighlight">\(\lim g \neq 0\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="monotonicity">
+<h2><span class="section-number">2.6.2. </span>Monotonicity<a class="headerlink" href="#monotonicity" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-rf-monotonic-function">
+<p class="admonition-title"><span class="caption-number">Definition 2.59 </span> (Monotonic function)</p>
+<div class="definition-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is <em>increasing</em> on an interval <span class="math notranslate nohighlight">\(I\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[
+f(x_1) \leq f(x_2) \text{ whenever } x_1 &lt; x_2 \Forall x_1, x_2 \in I.
+\]</div>
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is <em>decreasing</em> on an interval <span class="math notranslate nohighlight">\(I\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[
+f(x_1) \geq f(x_2) \text{ whenever } x_1 &lt; x_2 \Forall x_1, x_2 \in I.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is <em>increasing</em> or <em>decreasing</em> on <span class="math notranslate nohighlight">\(I\)</span>, then we say that
+<span class="math notranslate nohighlight">\(f\)</span> is <em>monotonic</em> on <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is <em>strictly increasing</em> on an interval <span class="math notranslate nohighlight">\(I\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[
+f(x_1) &lt; f(x_2) \text{ whenever } x_1 &lt; x_2 \Forall x_1, x_2 \in I.
+\]</div>
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is <em>strictly decreasing</em> on an interval <span class="math notranslate nohighlight">\(I\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[
+f(x_1) &lt;  f(x_2) \text{ whenever } x_1 &lt; x_2 \Forall x_1, x_2 \in I.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is <em>strictly increasing</em> or
+<em>strictly decreasing</em> on <span class="math notranslate nohighlight">\(I\)</span>, then we say that
+<span class="math notranslate nohighlight">\(f\)</span> is <em>strictly monotonic</em> on <span class="math notranslate nohighlight">\(I\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-bra-rf-monotonic-func-limits">
+<p class="admonition-title"><span class="caption-number">Theorem 2.24 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be monotonic of an interval <span class="math notranslate nohighlight">\((a, b)\)</span>. Let</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha = \underset{a &lt; x &lt; b}{\inf} f(x) \text{ and }
+\beta = \underset{a &lt; x &lt; b}{\sup} f(x).
+\]</div>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(f\)</span> is increasing, then <span class="math notranslate nohighlight">\(f(a^+) = \alpha\)</span> and <span class="math notranslate nohighlight">\(f(b^-) = \beta\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f\)</span> is decreasing, then <span class="math notranslate nohighlight">\(f(a^+) = \beta\)</span> and <span class="math notranslate nohighlight">\(f(b^-) = \alpha\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(a &lt; c &lt; b\)</span>, then <span class="math notranslate nohighlight">\(f(c^+)\)</span> and <span class="math notranslate nohighlight">\(f(c^-)\)</span> exist and are finite.
+Moreover, if <span class="math notranslate nohighlight">\(f\)</span> is increasing, then:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(c^-) \leq f(c) \leq f(c^+)
+   \]</div>
+<p>and, if <span class="math notranslate nohighlight">\(f\)</span> is decreasing, then:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(c^-) \geq f(c) \geq f(c^+).
+   \]</div>
+</li>
+</ol>
+</div>
+</div></div>
+<div class="section" id="continuity">
+<h2><span class="section-number">2.6.3. </span>Continuity<a class="headerlink" href="#continuity" title="Permalink to this headline">¶</a></h2>
+<p>If the limit of a function at a point matches its value at that
+point, then the function is continuous at that point.</p>
+<div class="proof definition admonition" id="def-bra-rf-continuity">
+<p class="admonition-title"><span class="caption-number">Definition 2.60 </span> (Continuity)</p>
+<div class="definition-content section" id="proof-content">
+<ol class="simple">
+<li><p>We say that <span class="math notranslate nohighlight">\(f\)</span> is <em>continuous</em> at <span class="math notranslate nohighlight">\(x=c\)</span> if <span class="math notranslate nohighlight">\(f\)</span> is defined
+on an interval <span class="math notranslate nohighlight">\((a,b)\)</span> containing <span class="math notranslate nohighlight">\(c\)</span> (i.e. <span class="math notranslate nohighlight">\(a &lt; c &lt; b\)</span>)
+and <span class="math notranslate nohighlight">\(\lim_{x \to c} f(x) = f(c)\)</span>.</p></li>
+<li><p>We say that <span class="math notranslate nohighlight">\(f\)</span> is <em>continuous from the left</em> at <span class="math notranslate nohighlight">\(x=c\)</span> if <span class="math notranslate nohighlight">\(f\)</span> is defined
+on an interval <span class="math notranslate nohighlight">\((a,c]\)</span> and <span class="math notranslate nohighlight">\(f(c^-) = f(c)\)</span>.</p></li>
+<li><p>We say that <span class="math notranslate nohighlight">\(f\)</span> is <em>continuous from the right</em> at <span class="math notranslate nohighlight">\(x=c\)</span> if <span class="math notranslate nohighlight">\(f\)</span> is defined
+on an interval <span class="math notranslate nohighlight">\([c,b)\)</span> and <span class="math notranslate nohighlight">\(f(c^+) = f(c)\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof theorem admonition" id="theorem-15">
+<p class="admonition-title"><span class="caption-number">Theorem 2.25 </span> (Characterization of continuity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(x=c\)</span> if and only if <span class="math notranslate nohighlight">\(f\)</span> is defined
+on an interval <span class="math notranslate nohighlight">\((a,b)\)</span> containing <span class="math notranslate nohighlight">\(c\)</span> and for each <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,
+there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(c)| &lt; \epsilon \text{ whenever } |x -c | &lt; \delta.
+\]</div>
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is continuous from the left at <span class="math notranslate nohighlight">\(x=c\)</span>
+if and only if <span class="math notranslate nohighlight">\(f\)</span> is defined
+on an interval <span class="math notranslate nohighlight">\((a,c]\)</span> and for each <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,
+there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(c)| &lt; \epsilon \text{ whenever } c - \delta &lt; x \leq c.
+\]</div>
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is continuous from the right at <span class="math notranslate nohighlight">\(x=c\)</span>
+if and only if <span class="math notranslate nohighlight">\(f\)</span> is defined
+on an interval <span class="math notranslate nohighlight">\([c,b)\)</span> and for each <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,
+there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(c)| &lt; \epsilon \text{ whenever } c \leq x &lt; c  + \delta.
+\]</div>
+<p><span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(x=c\)</span> if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+f(c^-) = f(c) = f(c^+).
+\]</div>
+</div>
+</div><p>This theorem is a restatement of continuity definition
+in the form of <span class="math notranslate nohighlight">\(\epsilon-\delta\)</span> rules.</p>
+<div class="proof definition admonition" id="def-bra-rf-continuity-interval">
+<p class="admonition-title"><span class="caption-number">Definition 2.61 </span> (Continuity on an interval)</p>
+<div class="definition-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is <em>continuous</em> on an open interval <span class="math notranslate nohighlight">\((a,b)\)</span>
+if it is continuous at every point in <span class="math notranslate nohighlight">\((a, b)\)</span>.</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(f(b^-) = f(b)\)</span> holds too (i.e. <span class="math notranslate nohighlight">\(f\)</span> is continuous from the left at <span class="math notranslate nohighlight">\(b\)</span>),
+then <span class="math notranslate nohighlight">\(f\)</span> is continuous on <span class="math notranslate nohighlight">\((a,b]\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(a^+) = f(a)\)</span> holds too (i.e. <span class="math notranslate nohighlight">\(f\)</span> is continuous from the right at <span class="math notranslate nohighlight">\(a\)</span>),
+then <span class="math notranslate nohighlight">\(f\)</span> is continuous on <span class="math notranslate nohighlight">\([a,b)\)</span>.</p></li>
+<li><p>If both <span class="math notranslate nohighlight">\(f(a^+) = f(a)\)</span> and <span class="math notranslate nohighlight">\(f(b^-) = f(b)\)</span> hold true, then
+<span class="math notranslate nohighlight">\(f\)</span> is continuous on the closed interval <span class="math notranslate nohighlight">\([a,b]\)</span>.</p></li>
+</ul>
+<p>If <span class="math notranslate nohighlight">\(S\)</span> is a subset of <span class="math notranslate nohighlight">\(\dom f\)</span> consisting of finitely or infinitely
+many disjoint intervals, then <span class="math notranslate nohighlight">\(f\)</span> is continuous on <span class="math notranslate nohighlight">\(S\)</span> if
+<span class="math notranslate nohighlight">\(S\)</span> is continuous on every interval in <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</div>
+</div><p>When we say that <span class="math notranslate nohighlight">\(f\)</span> is continuous on some set <span class="math notranslate nohighlight">\(S \subseteq \dom f\)</span>,
+we mean that <span class="math notranslate nohighlight">\(S\)</span> is a union of finitely or infinitely many
+disjoint intervals.</p>
+<div class="proof proposition admonition" id="res-bra-rf-continuity-closed-interval-cover">
+<p class="admonition-title"><span class="caption-number">Proposition 2.22 </span> (Continuity on a closed interval <span class="math notranslate nohighlight">\([a,b]\)</span>)</p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be continuous on <span class="math notranslate nohighlight">\([a,b]\)</span>. Then, for every <span class="math notranslate nohighlight">\(t \in [a,b]\)</span>,
+and for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,
+there exists an open interval <span class="math notranslate nohighlight">\(I_t = (c,d)\)</span> containing <span class="math notranslate nohighlight">\(t\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(t)| &lt; \epsilon \text{ whenever } x \in I_t \cap [a,b].
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(a &lt; t &lt; b\)</span>.  Then, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>, such that:</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(t)| &lt; \epsilon \text{ whenever }  t - \delta &lt; x &lt; t + \delta.
+\]</div>
+<p>Choose <span class="math notranslate nohighlight">\(I_t = (t-\delta, t+\delta)\)</span>.</p>
+<p>Now, assume <span class="math notranslate nohighlight">\(t=a\)</span>. <span class="math notranslate nohighlight">\(f\)</span> must be continuous from the right at <span class="math notranslate nohighlight">\(t=a\)</span>.
+There exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(t)| &lt; \epsilon \text{ whenever } t \leq x &lt; t  + \delta.
+\]</div>
+<p>Choose <span class="math notranslate nohighlight">\(I_t = (t - \delta, t+\delta)\)</span>.
+Then <span class="math notranslate nohighlight">\(I_t \cap (a,b) = [t, t+\delta)\)</span>.</p>
+<p>Finally, assume <span class="math notranslate nohighlight">\(t=b\)</span>. <span class="math notranslate nohighlight">\(f\)</span> must be continuous from the left at <span class="math notranslate nohighlight">\(t=b\)</span>.
+There exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(t)| &lt; \epsilon \text{ whenever } t - \delta &lt; x \leq t.
+\]</div>
+<p>Choose <span class="math notranslate nohighlight">\(I_t = (t - \delta, t+\delta)\)</span>.
+Then <span class="math notranslate nohighlight">\(I_t \cap (a,b) = (t-\delta, t]\)</span>.</p>
+</div>
+<p>The set <span class="math notranslate nohighlight">\(\OOO \triangleq \{I_t \Forall t \in [a,b] \}\)</span> forms an
+<em>open cover</em> of <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+<div class="proof proposition admonition" id="res-bra-rf-continuous-gap-neighborhood">
+<p class="admonition-title"><span class="caption-number">Proposition 2.23 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be continuous at <span class="math notranslate nohighlight">\(x=a\)</span></p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(f(a) &gt; \mu\)</span>, then <span class="math notranslate nohighlight">\(f(x) &gt; \mu\)</span> in some neighborhood of <span class="math notranslate nohighlight">\(a\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(a) &lt; \mu\)</span>, then <span class="math notranslate nohighlight">\(f(x) &lt; \mu\)</span> in some neighborhood of <span class="math notranslate nohighlight">\(a\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. (1) Let <span class="math notranslate nohighlight">\(\epsilon = f(a) - \mu\)</span>. <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> as <span class="math notranslate nohighlight">\(f(a) &gt; \mu\)</span>.
+There exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(a)| &lt; \epsilon \text{ whenever } | x - a | &lt; \delta. 
+\]</div>
+<p>Thus, in the neighborhood <span class="math notranslate nohighlight">\(x \in (a-\delta, a+\delta)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+f(a) - \epsilon &lt; f(x) &lt; f(a) + \epsilon \implies \mu &lt; f(x) &lt; 2 f(a) - \mu.
+\]</div>
+<p>(2) Let <span class="math notranslate nohighlight">\(\epsilon = \mu - f(a)\)</span>. <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> as <span class="math notranslate nohighlight">\(f(a) &lt; \mu\)</span>.
+There exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(a)| &lt; \epsilon \text{ whenever } | x - a | &lt; \delta. 
+\]</div>
+<p>Thus, in the neighborhood <span class="math notranslate nohighlight">\(x \in (a-\delta, a+\delta)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+f(a) - \epsilon &lt; f(x) &lt; f(a) + \epsilon \implies \mu - 2 f(a) &lt; f(x) &lt; \mu.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="theorem-19">
+<p class="admonition-title"><span class="caption-number">Theorem 2.26 </span> (Continuity and arithmetic)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are continuous on a set <span class="math notranslate nohighlight">\(S\)</span>, then so are
+<span class="math notranslate nohighlight">\(f+g\)</span>, <span class="math notranslate nohighlight">\(f-g\)</span>, and <span class="math notranslate nohighlight">\(f g\)</span>.
+<span class="math notranslate nohighlight">\(\frac{f}{g}\)</span> is continuous at each <span class="math notranslate nohighlight">\(x \in S\)</span> such that
+<span class="math notranslate nohighlight">\(g(x) \neq 0\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="discontinuities">
+<h2><span class="section-number">2.6.4. </span>Discontinuities<a class="headerlink" href="#discontinuities" title="Permalink to this headline">¶</a></h2>
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is discontinuous at some <span class="math notranslate nohighlight">\(x=c\)</span> in its domain <span class="math notranslate nohighlight">\(\dom f\)</span> if
+either <span class="math notranslate nohighlight">\(\lim_{x\to c} f(x)\)</span> doesn’t exist or <span class="math notranslate nohighlight">\(\lim_{x\to c} f(x) \neq f(c)\)</span>.</p>
+<div class="proof definition admonition" id="def-bra-rf-jump-discontinuity">
+<p class="admonition-title"><span class="caption-number">Definition 2.62 </span> (Jump discontinuity)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be a real function and let <span class="math notranslate nohighlight">\([a,b] \subseteq \dom f\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> has a <em>jump discontinuity</em> at a point <span class="math notranslate nohighlight">\(c \in (a,b)\)</span> if both
+the left hand limit <span class="math notranslate nohighlight">\(f(c^-)\)</span> and the right hand limit <span class="math notranslate nohighlight">\(f(c^+)\)</span> exist
+but <span class="math notranslate nohighlight">\(f(c^-) \neq f(c^+)\)</span>. In this case, <span class="math notranslate nohighlight">\(\lim_{x \to c} f(x)\)</span> doesn’t
+exist and <span class="math notranslate nohighlight">\(f\)</span> is not continuous at <span class="math notranslate nohighlight">\(x=c\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> has a <em>jump discontinuity</em> at <span class="math notranslate nohighlight">\(x=a\)</span> if the right hand limit
+<span class="math notranslate nohighlight">\(f(a^+)\)</span> exists but <span class="math notranslate nohighlight">\(f(a) \neq f(a^+)\)</span>. In this case, <span class="math notranslate nohighlight">\(f\)</span> is not
+continuous from the right at <span class="math notranslate nohighlight">\(x=a\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> has a <em>jump discontinuity</em> at <span class="math notranslate nohighlight">\(x=b\)</span> if the left hand limit
+<span class="math notranslate nohighlight">\(f(b^-)\)</span> exists but <span class="math notranslate nohighlight">\(f(b) \neq f(b^-)\)</span>. In this case, <span class="math notranslate nohighlight">\(f\)</span> is not
+continuous from the left at <span class="math notranslate nohighlight">\(x=b\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof definition admonition" id="def-bra-rf-piecewise-continuity">
+<p class="admonition-title"><span class="caption-number">Definition 2.63 </span> (Piecewise continuity)</p>
+<div class="definition-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is <em>piecewise-continuous</em> on <span class="math notranslate nohighlight">\([a,b]\)</span> if</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x^+)\)</span> exists for all <span class="math notranslate nohighlight">\(a \leq x &lt; b\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x^-)\)</span> exists for all <span class="math notranslate nohighlight">\(a &lt; x \leq b\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x^+) = f(x^-) = f(x)\)</span> for all but finitely many points in <span class="math notranslate nohighlight">\((a,b)\)</span>.</p></li>
+</ol>
+<p>Jump discontinuities:</p>
+<ul class="simple">
+<li><p>If (3) fails to hold at some <span class="math notranslate nohighlight">\(x=c\)</span> in <span class="math notranslate nohighlight">\((a,b)\)</span>,
+<span class="math notranslate nohighlight">\(f\)</span> has a <em>jump discontinuity</em> at <span class="math notranslate nohighlight">\(x=c\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> has a jump discontinuity at <span class="math notranslate nohighlight">\(a\)</span> if <span class="math notranslate nohighlight">\(f(a^+) \neq f(a)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> has a jump discontinuity at <span class="math notranslate nohighlight">\(b\)</span> if <span class="math notranslate nohighlight">\(f(b^-) \neq f(b)\)</span>.</p></li>
+</ul>
+</div>
+</div><p>In other words:</p>
+<ul class="simple">
+<li><p>Left hand limits exist everywhere (except at <span class="math notranslate nohighlight">\(x=b\)</span>).</p></li>
+<li><p>Right hand limits exist everywhere (except at <span class="math notranslate nohighlight">\(x=a\)</span>).</p></li>
+<li><p>There are only a finite number of points where these two limits don’t match.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is not continuous at those finite number of points.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is continuous everywhere else in the open interval <span class="math notranslate nohighlight">\((a,b)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> may not be continuous at the boundaries <span class="math notranslate nohighlight">\(x=a\)</span> and <span class="math notranslate nohighlight">\(x=b\)</span>.</p></li>
+<li><p>At a jump discontinuity, <span class="math notranslate nohighlight">\(f\)</span> may be continuous from the right
+or continuous from the left or neither.</p></li>
+</ul>
+<div class="proof definition admonition" id="definition-22">
+<p class="admonition-title"><span class="caption-number">Definition 2.64 </span> (Removable discontinuity)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be discontinuous at some <span class="math notranslate nohighlight">\(x=a\)</span>. If
+<span class="math notranslate nohighlight">\(\lim_{x \to a} f(x)\)</span> exists, then we say that
+the discontinuity at <span class="math notranslate nohighlight">\(x=a\)</span> is a <em>removable discontinuity</em>.
+Moreover, the function:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g(x) \triangleq \begin{cases}
+f(x) &amp; x \in \dom f \setminus \{ a \} \\
+\lim_{x \to a} f(x) &amp; x = a
+\end{cases}
+\end{split}\]</div>
+<p>is continuous at <span class="math notranslate nohighlight">\(x=a\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-bra-rf-essential-discontinuity">
+<p class="admonition-title"><span class="caption-number">Definition 2.65 </span> (Essential discontinuity)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(x\)</span> be an interior point of <span class="math notranslate nohighlight">\(\dom f\)</span>. If either of
+the one sided limits <span class="math notranslate nohighlight">\(f(x^+)\)</span>, or <span class="math notranslate nohighlight">\(f(x^-)\)</span> don’t exist, then
+<span class="math notranslate nohighlight">\(f\)</span> has an <em>essential discontinuity</em> at <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(x \in \dom f\)</span> is a boundary point, then only
+a one sided limit is possible (left or right hand limit).
+If such a limit doesn’t exist, then <span class="math notranslate nohighlight">\(f\)</span> has an <em>essential
+discontinuity</em> at the boundary point <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="continuity-with-function-composition">
+<h2><span class="section-number">2.6.5. </span>Continuity with Function Composition<a class="headerlink" href="#continuity-with-function-composition" title="Permalink to this headline">¶</a></h2>
+<p>Next, we look at continuity w.r.t.
+<a class="reference internal" href="../set_theory/functions.html#def-st-function-composition">function composition</a>.</p>
+<div class="proof theorem admonition" id="theorem-24">
+<p class="admonition-title"><span class="caption-number">Theorem 2.27 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(x=a\)</span>; <span class="math notranslate nohighlight">\(f(a)\)</span> is an
+<a class="reference internal" href="topology.html#def-rl-interior-point">interior point</a>
+of <span class="math notranslate nohighlight">\(\dom g\)</span> and <span class="math notranslate nohighlight">\(g\)</span> is continuous
+at <span class="math notranslate nohighlight">\(f(a)\)</span>. Then <span class="math notranslate nohighlight">\(g \circ f\)</span> is continuous at <span class="math notranslate nohighlight">\(x=a\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> be arbitrary.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(g\)</span> is continuous at <span class="math notranslate nohighlight">\(f(a)\)</span>, there is <span class="math notranslate nohighlight">\(\delta_1 &gt; 0\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   |g(t) - g(f(a))| &lt; \epsilon \text{ whenever } | t - f(a)| &lt; \delta_1.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(a\)</span>, hence, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   |f(x) - f(a)| &lt; \delta_1 \text{ whenever } | x - a | &lt; \delta.
+   \]</div>
+</li>
+<li><p>Together, they imply that</p>
+<div class="math notranslate nohighlight">
+\[
+   |g(f(x)) - g(f(a)) | &lt; \epsilon \text{ whenever } | x - a | &lt; \delta.
+   \]</div>
+</li>
+<li><p>Therefore, <span class="math notranslate nohighlight">\(g \circ f\)</span> is continuous at <span class="math notranslate nohighlight">\(x=a\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="boundedness">
+<h2><span class="section-number">2.6.6. </span>Boundedness<a class="headerlink" href="#boundedness" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-bra-rf-bounded-function">
+<p class="admonition-title"><span class="caption-number">Definition 2.66 </span> (Bounded function)</p>
+<div class="definition-content section" id="proof-content">
+<p>A real function <span class="math notranslate nohighlight">\(f\)</span> is <em>bounded below</em> on a set
+<span class="math notranslate nohighlight">\(S \subseteq \dom f\)</span> if
+there is a real number <span class="math notranslate nohighlight">\(m\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) \geq m \Forall x \in S.
+\]</div>
+<p>Then, the set</p>
+<div class="math notranslate nohighlight">
+\[
+V  = \{f(x) \ST x \in S \}
+\]</div>
+<p>has a infimum (due to <a class="reference internal" href="real_line.html#res-rl-completeness-lower">Corollary 2.2</a>),
+and we write:</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha = \underset{x \in S}{\inf} f(x).
+\]</div>
+<p>If there is a point <span class="math notranslate nohighlight">\(c \in S\)</span> such that <span class="math notranslate nohighlight">\(\alpha = f(c)\)</span>,
+we say that <span class="math notranslate nohighlight">\(\alpha\)</span> is the <em>minimum</em> of <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\(S\)</span>
+and <span class="math notranslate nohighlight">\(f\)</span> <em>attains</em> the minimum at <span class="math notranslate nohighlight">\(x=c\)</span>.</p>
+<p>A real function <span class="math notranslate nohighlight">\(f\)</span> is <em>bounded above</em> on a set
+<span class="math notranslate nohighlight">\(S \subseteq \dom f\)</span> if
+there is a real number <span class="math notranslate nohighlight">\(M\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) \leq M \Forall x \in S.
+\]</div>
+<p>Then, the set <span class="math notranslate nohighlight">\(V\)</span>
+has a supremum (due to <a class="reference internal" href="real_line.html#axm-rl-completeness-axiom">Axiom 2.1</a>),
+and we write:</p>
+<div class="math notranslate nohighlight">
+\[
+\beta = \underset{x \in S}{\sup} f(x).
+\]</div>
+<p>If there is a point <span class="math notranslate nohighlight">\(d \in S\)</span> such that <span class="math notranslate nohighlight">\(\beta = f(d)\)</span>,
+we say that <span class="math notranslate nohighlight">\(\beta\)</span> is the <em>maximum</em> of <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\(S\)</span>
+and <span class="math notranslate nohighlight">\(f\)</span> <em>attains</em> the maximum at <span class="math notranslate nohighlight">\(x=d\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is bounded above and below on a set <span class="math notranslate nohighlight">\(S\)</span>, we
+say that <span class="math notranslate nohighlight">\(f\)</span> is <em>bounded</em> on <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-bra-rf-continuous-interval-bounded">
+<p class="admonition-title"><span class="caption-number">Theorem 2.28 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is continuous on a finite closed interval <span class="math notranslate nohighlight">\([a,b]\)</span>, then
+<span class="math notranslate nohighlight">\(f\)</span> is bounded on <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(f\)</span> be continuous on <span class="math notranslate nohighlight">\([a,b]\)</span>. Let <span class="math notranslate nohighlight">\(t \in [a,b]\)</span>.
+Choose <span class="math notranslate nohighlight">\(\epsilon = 1\)</span>. Then,
+due to <a class="reference internal" href="#res-bra-rf-continuity-closed-interval-cover">Proposition 2.22</a>,
+there exists an interval <span class="math notranslate nohighlight">\(I_t\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(t) | &lt; 1 \text{ whenever } x \in I_t \cap [a,b].
+\]</div>
+<p>The set <span class="math notranslate nohighlight">\(\OOO \triangleq \{I_t \Forall t \in [a,b] \}\)</span> forms an
+<em>open cover</em> of <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+<p>Due to <a class="reference internal" href="topology.html#res-rl-heine-borel">Heine-Borel theorem</a>,
+<span class="math notranslate nohighlight">\([a,b]\)</span> has a finite subcover contained in <span class="math notranslate nohighlight">\(\OOO\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(t_1 &lt; t_2 &lt; \dots &lt; t_n\)</span> index the finite open subcover.
+We have:</p>
+<div class="math notranslate nohighlight">
+\[
+[a,b] \subset \bigcup_{i=1}^n \left ( I_{t_i} \cap [a,b] \right ).
+\]</div>
+<p>Then, for each <span class="math notranslate nohighlight">\(t_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(t_i) | &lt; 1 \text{ whenever } x \in I_{t_i} \cap [a,b].
+\]</div>
+<p>Therefore,</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x)| = |f(x) - f(t_i) + f(t_i)| \leq |f(x) - f(t_i)| + |f(t_i)|
+\leq 1 + |f(t_i)| \text{ whenever } x \in I_{t_i} \cap [a,b].
+\]</div>
+<p>Thus, for every <span class="math notranslate nohighlight">\(x \in [a,b]\)</span>, there exists a <span class="math notranslate nohighlight">\(t_i \in [a,b]\)</span> such that,</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) | \leq 1 + |f(t_i)|.
+\]</div>
+<p>Taking the maximum on the R.H.S. over all the inequalities, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) \leq 1 + \underset{1 \leq i \leq n}{\max} |f(t_i)|.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is bounded with a bound:</p>
+<div class="math notranslate nohighlight">
+\[
+M = 1 + \underset{1 \leq i \leq n}{\max} |f(t_i)|.
+\]</div>
+</div>
+<div class="proof corollary admonition" id="corollary-27">
+<p class="admonition-title"><span class="caption-number">Corollary 2.8 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is continuous on a finite closed interval <span class="math notranslate nohighlight">\([a,b]\)</span>, then
+<span class="math notranslate nohighlight">\(f\)</span> has an infimum and a supremum.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. By <a class="reference internal" href="#res-bra-rf-continuous-interval-bounded">Theorem 2.28</a>, <span class="math notranslate nohighlight">\(f\)</span>
+is bounded. Let</p>
+<div class="math notranslate nohighlight">
+\[
+V  = \{f(x) \ST x \in [a,b] \}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(f\)</span> is bounded, hence <span class="math notranslate nohighlight">\(V\)</span> is bounded, hence
+<span class="math notranslate nohighlight">\(V\)</span> has an infimum as well as a supremum.</p>
+</div>
+<div class="proof theorem admonition" id="theorem-28">
+<p class="admonition-title"><span class="caption-number">Theorem 2.29 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be continuous on a finite closed interval <span class="math notranslate nohighlight">\([a,b]\)</span>.
+Let</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha = \underset{a \leq x \leq b}{\inf}f(x) \text{ and }
+\beta = \underset{a \leq x \leq b}{\sup}f(x).
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are respectively, the
+minimum and maximum values of <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span> and <span class="math notranslate nohighlight">\(f\)</span>
+attains these values at some points in <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+<p>I.e., there exists <span class="math notranslate nohighlight">\(x_1, x_2 \in [a,b]\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x_1) = \alpha \text{ and } f(x_2) = \beta.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume that <span class="math notranslate nohighlight">\(\alpha\)</span> is the infimum of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\([a,b]\)</span>
+and there is no <span class="math notranslate nohighlight">\(x_1 \in [a,b]\)</span> such that <span class="math notranslate nohighlight">\(f(x_1) = \alpha\)</span>.
+Then <span class="math notranslate nohighlight">\(f(x) &gt; \alpha\)</span> for all <span class="math notranslate nohighlight">\(x\in [a,b]\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(t \in [a,b]\)</span>. Then, <span class="math notranslate nohighlight">\(f(t)&gt; \alpha\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+f(t) &gt; \frac{f(t) + \alpha}{2} &gt; \alpha.
+\]</div>
+<p>By <a class="reference internal" href="#res-bra-rf-continuity-closed-interval-cover">Proposition 2.22</a>
+and <a class="reference internal" href="#res-bra-rf-continuous-gap-neighborhood">Proposition 2.23</a>,
+there is a open interval <span class="math notranslate nohighlight">\(I_t\)</span> at <span class="math notranslate nohighlight">\(t\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) &gt; \frac{f(t) + \alpha}{2}  \text{ whenever } x \in I_t \cap [a,b]. 
+\]</div>
+<p>The set <span class="math notranslate nohighlight">\(\OOO = \{ I_t \ST a \leq t \leq b \}\)</span> is an open cover
+of <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+<p>Due to <a class="reference internal" href="topology.html#res-rl-heine-borel">Heine-Borel theorem</a>,
+<span class="math notranslate nohighlight">\([a,b]\)</span> has a finite subcover contained in <span class="math notranslate nohighlight">\(\OOO\)</span>.
+Thus, there are finitely many points <span class="math notranslate nohighlight">\(t_1, t_2, \dots, t_n\)</span>
+such that:</p>
+<div class="math notranslate nohighlight">
+\[
+[a,b] \subset \bigcup_{i=1}^n \left ( I_{t_i} \cap [a,b] \right ).
+\]</div>
+<p>Define:</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha_1 = \underset{1 \leq i \leq n}{\min}\frac{f(t_i) + \alpha}{2}.
+\]</div>
+<p>Due to the finite cover; for every <span class="math notranslate nohighlight">\(x \in [a,b]\)</span>, there exists <span class="math notranslate nohighlight">\(t_i\)</span>
+such that <span class="math notranslate nohighlight">\(x \in I_{t_i} \cap [a,b]\)</span> and thus,
+<span class="math notranslate nohighlight">\(f(x) &gt; \frac{f(t_i) + \alpha}{2} \geq \alpha_1\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) &gt; \alpha_1 \Forall x \in [a,b].
+\]</div>
+<p>But <span class="math notranslate nohighlight">\(\alpha_1 &gt; \alpha\)</span>. Thus, <span class="math notranslate nohighlight">\(\alpha\)</span> cannot be the infimum of
+<span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\([a,b]\)</span>. We arrive at the contradiction.</p>
+<p>Thus, there exists some <span class="math notranslate nohighlight">\(x=x_1\)</span> such that <span class="math notranslate nohighlight">\(f(x_1) = \alpha\)</span>.</p>
+<p>A similar argument shows that <span class="math notranslate nohighlight">\(f\)</span> attains <span class="math notranslate nohighlight">\(\beta\)</span> at some <span class="math notranslate nohighlight">\(x_2 \in [a,b]\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-bra-rf-intermediate-value">
+<p class="admonition-title"><span class="caption-number">Theorem 2.30 </span> (Intermediate value theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be continuous on a finite closed interval <span class="math notranslate nohighlight">\([a,b]\)</span>.
+Assume that <span class="math notranslate nohighlight">\(f(a) \neq f(b)\)</span>.
+Let <span class="math notranslate nohighlight">\(\mu\)</span> be in between <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(b)\)</span>.
+Then <span class="math notranslate nohighlight">\(f\)</span> attains the value of <span class="math notranslate nohighlight">\(\mu\)</span> at some <span class="math notranslate nohighlight">\(x=c \in (a,b)\)</span>.</p>
+<p>In other words, there exists <span class="math notranslate nohighlight">\(c \in (a,b)\)</span> such that <span class="math notranslate nohighlight">\(f(c)=\mu\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let us assume that <span class="math notranslate nohighlight">\(f(a) &lt; \mu &lt; f(b)\)</span>.</p>
+<p>Define the set:</p>
+<div class="math notranslate nohighlight">
+\[
+A = \{x \in [a,b] \ST f(x) \leq \mu \}.
+\]</div>
+<ol class="simple">
+<li><p>The set is bounded since <span class="math notranslate nohighlight">\(a \leq x \leq b\)</span>.</p></li>
+<li><p>The set is nonempty since <span class="math notranslate nohighlight">\(f(a) &lt; \mu\)</span>.
+And since <span class="math notranslate nohighlight">\(f\)</span> is continuous from the right at <span class="math notranslate nohighlight">\(a\)</span>,
+hence there exists an interval <span class="math notranslate nohighlight">\([a, a+\delta)\)</span> such that <span class="math notranslate nohighlight">\(f(x) &lt; \mu\)</span>
+in this interval.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(A\)</span> has an infimum(obviously <span class="math notranslate nohighlight">\(a\)</span>) and a supremum.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c = \sup A\)</span>.</p></li>
+<li><p>We will claim that <span class="math notranslate nohighlight">\(f(c) = \mu\)</span>.</p></li>
+</ol>
+<p>If <span class="math notranslate nohighlight">\(f(c) &gt; \mu\)</span>, then:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(c &gt; a\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(x=c\)</span>.</p></li>
+<li><p>Thus, there exists an <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(f(x) &gt; \mu\)</span> whenever <span class="math notranslate nohighlight">\(c - \epsilon &lt; x \leq c\)</span>.</p></li>
+<li><p>Therefore, the interval <span class="math notranslate nohighlight">\((c - \epsilon, c]\)</span> is not included in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Therefore, <span class="math notranslate nohighlight">\(c-\epsilon\)</span> is an upper bound for <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>This contradicts the assumption that <span class="math notranslate nohighlight">\(c = \sup A\)</span>.</p></li>
+</ol>
+<p>If <span class="math notranslate nohighlight">\(f(c) &lt; \mu\)</span>, then:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(c &lt; b\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(x=c\)</span>.</p></li>
+<li><p>Thus, there exists an <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(f(x) &lt; \mu\)</span> whenever <span class="math notranslate nohighlight">\(c \leq x &lt; c + \epsilon\)</span>.</p></li>
+<li><p>Therefore, the interval <span class="math notranslate nohighlight">\([c, c + \epsilon)\)</span> is included in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Therefore, <span class="math notranslate nohighlight">\(c\)</span> is not an upper bound for <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>This also contradicts the assumption that <span class="math notranslate nohighlight">\(c = \sup A\)</span>.</p></li>
+</ol>
+<p>Therefore <span class="math notranslate nohighlight">\(f(c) = \mu\)</span> must be true.</p>
+<p>A similar argument can be pursued when <span class="math notranslate nohighlight">\(f(b) &lt; \mu &lt; f(a)\)</span>.</p>
+</div>
+<p>Note that the proof picks up just one possible value of <span class="math notranslate nohighlight">\(x\)</span>
+such that <span class="math notranslate nohighlight">\(f(x) = \mu\)</span>. It is quite possible that <span class="math notranslate nohighlight">\(f\)</span> attains
+<span class="math notranslate nohighlight">\(\mu\)</span> more than one times in the interval <span class="math notranslate nohighlight">\([a,b]\)</span>. The proof
+doesn’t claim to find all such values of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>In this sense, this theorem is a weak result as it claims
+the existence of just one point at which <span class="math notranslate nohighlight">\(f(x) = \mu\)</span>.
+It doesn’t claim to characterize the set of points at which <span class="math notranslate nohighlight">\(f(x) = \mu\)</span>.</p>
+</div>
+<div class="section" id="uniform-continuity">
+<h2><span class="section-number">2.6.7. </span>Uniform Continuity<a class="headerlink" href="#uniform-continuity" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-bra-rf-continuity-over-set">
+<p class="admonition-title"><span class="caption-number">Definition 2.67 </span> (Continuity over a set)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq \dom f\)</span>. We say that <span class="math notranslate nohighlight">\(f\)</span> is <em>continuous</em>
+over the set <span class="math notranslate nohighlight">\(A\)</span> if for each <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> and each
+<span class="math notranslate nohighlight">\(x_0 \in A\)</span>, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>
+(depending on <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span>) such that</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(x_0)| &lt; \epsilon \text{ whenever } |x - x_0| &lt; \delta 
+\text{ and } x \in \dom f.
+\]</div>
+</div>
+</div><p>The clause <span class="math notranslate nohighlight">\(x \in \dom f\)</span> in the definition is important.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(x_0\)</span> is an interior point of <span class="math notranslate nohighlight">\(\dom f\)</span>, we can pick
+an interval <span class="math notranslate nohighlight">\((x_0 - \delta, x_0 + \delta)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x_0\)</span> is a non-interior point of <span class="math notranslate nohighlight">\(\dom f\)</span>, we can pick up
+a half-open interval <span class="math notranslate nohighlight">\((x_0 - \delta, x_0]\)</span> or <span class="math notranslate nohighlight">\([x_0, x_0 + \delta)\)</span>
+whichever is applicable.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x_0\)</span> is an isolated point, we pick the degenerate interval
+<span class="math notranslate nohighlight">\([x_0, x_0]\)</span> with suitable choice of <span class="math notranslate nohighlight">\(\delta\)</span>.</p></li>
+<li><p>Thus, on the non-interior points, <span class="math notranslate nohighlight">\(f\)</span> is either continuous from
+the left or right while on the interior points, <span class="math notranslate nohighlight">\(f\)</span> is continuous.</p></li>
+</ol>
+<p>The key issue here is that the size of the interval
+(decided by <span class="math notranslate nohighlight">\(\delta\)</span>) may depend on both <span class="math notranslate nohighlight">\(\epsilon\)</span>
+as well as the point <span class="math notranslate nohighlight">\(x_0\)</span>. This is not always desirable.
+Uniform continuity addresses this concern.</p>
+<div class="proof definition admonition" id="def-bra-rf-uniform-continuity">
+<p class="admonition-title"><span class="caption-number">Definition 2.68 </span> (Uniform continuity)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \RR \to \RR\)</span> be a real function.
+Let <span class="math notranslate nohighlight">\(A \subseteq \dom f\)</span>.
+We say that <span class="math notranslate nohighlight">\(f\)</span> is <em>uniformly continuous</em>
+over the set <span class="math notranslate nohighlight">\(A\)</span> if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,
+there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> (depending on <span class="math notranslate nohighlight">\(\epsilon\)</span>) such that</p>
+<div class="math notranslate nohighlight">
+\[
+|f(x) - f(y)| &lt; \epsilon \text{ whenever } |x - y| &lt; \delta 
+\text{ and } x, y \in A.
+\]</div>
+</div>
+</div><p>Few observations on this definition:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\delta\)</span> depends on <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta\)</span> is independent of the choice of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta\)</span> might depend on the set <span class="math notranslate nohighlight">\(A\)</span>. E.g., if
+<span class="math notranslate nohighlight">\(A\)</span> is a bounded set, it may depend on its size.</p></li>
+<li><p>The definition is restricted to points in <span class="math notranslate nohighlight">\(A\)</span>.
+It doesn’t consider points in <span class="math notranslate nohighlight">\(\dom f \setminus A\)</span>.</p></li>
+</ol>
+<div class="proof remark admonition" id="remark-32">
+<p class="admonition-title"><span class="caption-number">Remark 2.14 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is not uniformly continuous on a set <span class="math notranslate nohighlight">\(A\)</span>, then
+there is an <span class="math notranslate nohighlight">\(\epsilon_0 &gt; 0\)</span> such that for any <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>,
+there are points <span class="math notranslate nohighlight">\(x,y\)</span> in <span class="math notranslate nohighlight">\(A\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+|x - y | &lt; \delta \text{ but } |f(x) - f(y)| \geq \epsilon_0.
+\]</div>
+</div>
+</div><p>While a continuous function may not be uniformly continuous
+in general, it is so on a compact subset.</p>
+<div class="proof theorem admonition" id="theorem-33">
+<p class="admonition-title"><span class="caption-number">Theorem 2.31 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is continuous on a closed and bounded (compact)
+interval <span class="math notranslate nohighlight">\([a,b]\)</span>, then <span class="math notranslate nohighlight">\(f\)</span> is uniformly continuous on <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> be arbitrary. Since <span class="math notranslate nohighlight">\(f\)</span> is continuous
+on <span class="math notranslate nohighlight">\([a,b]\)</span>, for every <span class="math notranslate nohighlight">\(t \in [a,b]\)</span>, there exists <span class="math notranslate nohighlight">\(\delta_t &gt; 0\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+| f(x) - f(t) | &lt; \frac{\epsilon}{2} \text{ whenever } | x - t | &lt; 2 \delta_t
+\text{ and } x \in [a,b].
+\]</div>
+<p>Choose an open interval <span class="math notranslate nohighlight">\(I_t = (t - \delta_t, t + \delta_t)\)</span> for
+every <span class="math notranslate nohighlight">\(t \in [a,b]\)</span>.</p>
+<p>The collection <span class="math notranslate nohighlight">\(\OOO = \{ I_t \ST t \in [a,b] \}\)</span> is an open cover
+for <span class="math notranslate nohighlight">\([a,b]\)</span>. Since <span class="math notranslate nohighlight">\([a,b]\)</span> is closed and bounded (compact), hence
+due to <a class="reference internal" href="topology.html#res-rl-heine-borel">Heine-Borel theorem</a>,
+there are finitely many points <span class="math notranslate nohighlight">\(t_1, t_2, \dots, t_n\)</span> in <span class="math notranslate nohighlight">\([a,b]\)</span>
+such that <span class="math notranslate nohighlight">\(\PPP = \{ I_{t_1}, I_{t_2}, \dots, I_{t_n} \}\)</span> form a finite
+open cover of <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+<p>Define:</p>
+<div class="math notranslate nohighlight">
+\[
+\delta = \min \{\delta_{t_1}, \delta_{t_2}, \dots, \delta_{t_n}\}.
+\]</div>
+<p>Assume that <span class="math notranslate nohighlight">\(|x - y| &lt; \delta\)</span> and <span class="math notranslate nohighlight">\(x,y \in [a,b]\)</span>.
+Assume that <span class="math notranslate nohighlight">\(x \in I_{t_r}\)</span> for some <span class="math notranslate nohighlight">\(r\)</span>.
+This is true since <span class="math notranslate nohighlight">\(\PPP\)</span> is a cover for <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+<p>Now, from triangle inequality:</p>
+<div class="math notranslate nohighlight">
+\[
+| f(x) - f(y) | = | f(x) - f(t_r) + f(t_r)  - f(y)| \leq | f(x) - f(t_r) | + | f(t_r) - f(y)|.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(x \in I_{t_r}\)</span>, hence <span class="math notranslate nohighlight">\(|x - t_r | &lt; \delta_{t_r}\)</span>, hence:</p>
+<div class="math notranslate nohighlight">
+\[
+| f(x) - f(t_r) | &lt; \frac{\epsilon}{2}.
+\]</div>
+<p>On the other hand:</p>
+<div class="math notranslate nohighlight">
+\[
+|y - t_r |  \leq |y - x | + | x - t_r | &lt; \delta + \delta_{t_r} \leq 2 \delta_{t_r}.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+| f(t_r) - f(y)| &lt; \frac{\epsilon}{2}.
+\]</div>
+<p>Together, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+| f(x) - f(y) | &lt; \epsilon.
+\]</div>
+<p>We have shown that for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, a <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> can be chosen
+such that, <span class="math notranslate nohighlight">\(|x - y | &lt; \delta\)</span> with <span class="math notranslate nohighlight">\(x,y \in [a,b]\)</span> implies
+<span class="math notranslate nohighlight">\(|f(x) - f(y)| &lt; \epsilon\)</span>.
+Thus, <span class="math notranslate nohighlight">\(f\)</span> is uniformly continuous over <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+</div>
+<div class="proof corollary admonition" id="corollary-34">
+<p class="admonition-title"><span class="caption-number">Corollary 2.9 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is continuous on a set <span class="math notranslate nohighlight">\(A\)</span>, then <span class="math notranslate nohighlight">\(f\)</span> is uniformly continuous
+on any finite closed interval contained in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="continuity-and-monotonic-functions">
+<h2><span class="section-number">2.6.8. </span>Continuity and Monotonic Functions<a class="headerlink" href="#continuity-and-monotonic-functions" title="Permalink to this headline">¶</a></h2>
+<div class="proof proposition admonition" id="proposition-35">
+<p class="admonition-title"><span class="caption-number">Proposition 2.24 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is monotonic on an interval <span class="math notranslate nohighlight">\(I\)</span>, then <span class="math notranslate nohighlight">\(f\)</span> is either
+continuous or has a jump discontinuity at each <span class="math notranslate nohighlight">\(x \in I\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(I\)</span> be an open interval <span class="math notranslate nohighlight">\((a,b)\)</span>.
+Then, due to <a class="reference internal" href="#res-bra-rf-monotonic-func-limits">Theorem 2.24</a>,
+both left hand and right hand limits exist at each point in <span class="math notranslate nohighlight">\((a,b)\)</span>.</p>
+<p>Consider some <span class="math notranslate nohighlight">\(c \in (a,b)\)</span>.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(f(c^-) = f(c^+)\)</span>, then by monotonicity, <span class="math notranslate nohighlight">\(f(c^-) = f(c) = f(c^+)\)</span>,
+thus <span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(c\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(c^-) \neq f(c^+)\)</span>, then we have a jump discontinuity.</p></li>
+</ol>
+<p>Next, the boundary points. Consider <span class="math notranslate nohighlight">\(x=a\)</span>.</p>
+<ol class="simple">
+<li><p>The right hand limit <span class="math notranslate nohighlight">\(f(a^+)\)</span> exists
+due to <a class="reference internal" href="#res-bra-rf-monotonic-func-limits">monotonicity</a>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(a) = f(a^+)\)</span>, then <span class="math notranslate nohighlight">\(f\)</span> is continuous from the right at <span class="math notranslate nohighlight">\(x=a\)</span>.</p></li>
+<li><p>Otherwise, we have a jump discontinuity at <span class="math notranslate nohighlight">\(x=a\)</span>.</p></li>
+</ol>
+<p>Similarly, for <span class="math notranslate nohighlight">\(x=b\)</span>:</p>
+<ol class="simple">
+<li><p>The left hand limit <span class="math notranslate nohighlight">\(f(b^-)\)</span> exists
+due to <a class="reference internal" href="#res-bra-rf-monotonic-func-limits">monotonicity</a>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(b) = f(b^-)\)</span>, then <span class="math notranslate nohighlight">\(f\)</span> is continuous from the left at <span class="math notranslate nohighlight">\(x=b\)</span>.</p></li>
+<li><p>Otherwise, we have a jump discontinuity at <span class="math notranslate nohighlight">\(x=b\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-bra-rf-monotonic-continuous-closed-range">
+<p class="admonition-title"><span class="caption-number">Theorem 2.32 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is monotonic on <span class="math notranslate nohighlight">\([a,b]\)</span>, then <span class="math notranslate nohighlight">\(f\)</span> is continuous
+on <span class="math notranslate nohighlight">\([a,b]\)</span> if and only if its range
+<span class="math notranslate nohighlight">\(R_f = f([a,b]) = \{f(x) \ST a \leq x \leq b \}\)</span> is
+a closed interval with endpoints <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(b)\)</span>.</p>
+<p>In other words, <span class="math notranslate nohighlight">\(f\)</span> is continuous on <span class="math notranslate nohighlight">\([a,b]\)</span> if and only if:</p>
+<div class="math notranslate nohighlight">
+\[
+f([a,b]) = [f(a), f(b)] \text{ if } f(a) \leq f(b) \text { else } [f(b), f(a)].
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(f\)</span> is constant over <span class="math notranslate nohighlight">\([a,b]\)</span>, there is nothing to prove.
+Hence, we shall restrict our attention to the case where <span class="math notranslate nohighlight">\(f\)</span> is non-constant.
+Then <span class="math notranslate nohighlight">\(f(a) \neq f(b)\)</span> since <span class="math notranslate nohighlight">\(f\)</span> is monotonic.
+Without loss of generality, assume that <span class="math notranslate nohighlight">\(f(a) &lt; f(b)\)</span> (<span class="math notranslate nohighlight">\(f\)</span> is increasing).
+If <span class="math notranslate nohighlight">\(f(a) &gt; f(b)\)</span>, we can replace <span class="math notranslate nohighlight">\(f\)</span> by <span class="math notranslate nohighlight">\(-f\)</span> and proceed.</p>
+<p>Consider the set</p>
+<div class="math notranslate nohighlight">
+\[
+S_f = \{ f((a,b)) \} = \{f(x) \ST a &lt; x &lt; b \}.
+\]</div>
+<p>Due to <a class="reference internal" href="#res-bra-rf-monotonic-func-limits">Theorem 2.24</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+S_f \subseteq [f(a^+), f(b^-)].
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+R_f = \{ f(a) \} \cup S_f \cup \{ f(b) \} \subseteq \{ f(a) \} \cup [f(a^+), f(b^-)] \cup \{ f(b) \}. 
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is continuous on <span class="math notranslate nohighlight">\([a,b]\)</span>, then <span class="math notranslate nohighlight">\(f(a) = f(a^+)\)</span>
+and <span class="math notranslate nohighlight">\(f(b) = f(b^-)\)</span>. Thus, we have:
+<span class="math notranslate nohighlight">\(R_f \subseteq [f(a), f(b)]\)</span>.</p>
+<p>Further, due to <a class="reference internal" href="#res-bra-rf-intermediate-value">intermediate value theorem</a>,
+for every <span class="math notranslate nohighlight">\(f(a) &lt; \mu &lt; f(b)\)</span>, there exists <span class="math notranslate nohighlight">\(x \in (a,b)\)</span>, such that
+<span class="math notranslate nohighlight">\(\mu = f(x)\)</span>. Thus,
+<span class="math notranslate nohighlight">\(R_f = [f(a), f(b)]\)</span>.</p>
+<p>We now assume that <span class="math notranslate nohighlight">\(R_f = [f(a), f(b)]\)</span> and show that <span class="math notranslate nohighlight">\(f\)</span> must be continuous.</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is increasing, hence <span class="math notranslate nohighlight">\(f(a) \leq f(a^+)\)</span> and <span class="math notranslate nohighlight">\(f(b^+) \leq f(b)\)</span>.</p></li>
+<li><p>We also have: <span class="math notranslate nohighlight">\([f(a), f(b)] \subseteq \{ f(a) \} \cup [f(a^+), f(b^-)] \cup \{ f(b)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(a) &lt; f(a^+)\)</span> were true, then the subset relationship above will be invalid.
+Similar case with <span class="math notranslate nohighlight">\(f(b^-) &lt; f(b)\)</span>.</p></li>
+<li><p>Thus, we both <span class="math notranslate nohighlight">\(f(a) = f(a+)\)</span> and <span class="math notranslate nohighlight">\(f(b) = f(b^-)\)</span> must be true.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is continuous from the right at <span class="math notranslate nohighlight">\(a\)</span> and from the left at <span class="math notranslate nohighlight">\(b\)</span>.</p></li>
+<li><p>Also, since <span class="math notranslate nohighlight">\(f\)</span> is increasing, hence for any <span class="math notranslate nohighlight">\(c \in (a,b)\)</span>, we have
+<span class="math notranslate nohighlight">\(f(c^-) \leq f(c) \leq f(c^+)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(c^-) &lt; f(c)\)</span>, then <span class="math notranslate nohighlight">\((f(c^-), f(c))\)</span> cannot be part of <span class="math notranslate nohighlight">\(R_f\)</span>.
+Thus, <span class="math notranslate nohighlight">\(f(c^-) = f(c)\)</span></p></li>
+</ol>
+</div>
+<p>For strictly monotonic functions which are continuous on an
+interval <span class="math notranslate nohighlight">\([a,b]\)</span>, it is possible to find an inverse function
+on the same interval.</p>
+<div class="proof theorem admonition" id="theorem-37">
+<p class="admonition-title"><span class="caption-number">Theorem 2.33 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be a strictly increasing and continuous function on
+an interval <span class="math notranslate nohighlight">\([a,b]\)</span>.
+Let <span class="math notranslate nohighlight">\(f(a) = c\)</span> and <span class="math notranslate nohighlight">\(f(b) = d\)</span>. Then, there is a unique
+function <span class="math notranslate nohighlight">\(g\)</span> defined on <span class="math notranslate nohighlight">\([c,d]\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+g (f(x)) = x \Forall a \leq x \leq b
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+f(g(y)) = y \Forall c \leq y \leq d.
+\]</div>
+<p>Moreover, <span class="math notranslate nohighlight">\(g\)</span> is continuous and strictly increasing on <span class="math notranslate nohighlight">\([c,d]\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that such a function <span class="math notranslate nohighlight">\(g\)</span> can be defined:</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is (strictly) monotone, hence
+due to <a class="reference internal" href="#res-bra-rf-monotonic-continuous-closed-range">Theorem 2.32</a>,
+<span class="math notranslate nohighlight">\(f([a,b]) = [c,d]\)</span>.</p></li>
+<li><p>In other words, <span class="math notranslate nohighlight">\(f\)</span> restricted to <span class="math notranslate nohighlight">\([a,b]\)</span> as <span class="math notranslate nohighlight">\(f : [a,b] \to [c,d]\)</span>
+is <a class="reference internal" href="../set_theory/functions.html#def-st-total-function">total</a>
+and <a class="reference internal" href="../set_theory/functions.html#def-st-surjective-function">surjective</a>.</p></li>
+<li><p>Thus, for each <span class="math notranslate nohighlight">\(y \in [c,d]\)</span>, there exists <span class="math notranslate nohighlight">\(x \in [a,b]\)</span>
+such that <span class="math notranslate nohighlight">\(y = f(x)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is strictly increasing, hence <span class="math notranslate nohighlight">\(f(x_1) \neq f(x_2)\)</span>
+for any <span class="math notranslate nohighlight">\(x_1, x_2 \in [a,b]\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(f : [a,b] \to [c,d]\)</span> is
+<a class="reference internal" href="../set_theory/functions.html#def-st-injective-function">injective</a>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f : [a,b] \to [c,d]\)</span> is
+<a class="reference internal" href="../set_theory/functions.html#def-st-bijective-function">bijective</a>.</p></li>
+<li><p>Thus, we can introduce an
+<a class="reference internal" href="../set_theory/functions.html#def-st-inverse-total-function">inverse function</a>
+<span class="math notranslate nohighlight">\(g : [c,d] \to [a,b]\)</span> with the rule <span class="math notranslate nohighlight">\(g(y) = x\)</span> whenever <span class="math notranslate nohighlight">\(f(x) = y\)</span>.</p></li>
+</ol>
+<p>Next, we show that <span class="math notranslate nohighlight">\(g\)</span> is strictly increasing.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(y_1, y_2 \in [c,d]\)</span> such that <span class="math notranslate nohighlight">\(y_1 &lt; y_2\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(x_1, x_2 \in [a,b]\)</span> such that <span class="math notranslate nohighlight">\(y_1 = f(x_1)\)</span> and <span class="math notranslate nohighlight">\(y_2 = f(x_2)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(x_1 = g(y_1)\)</span> and <span class="math notranslate nohighlight">\(x_2 = g(y_2)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is strictly increasing, hence <span class="math notranslate nohighlight">\(f(x_1) &lt; f(x_2)\)</span> implies <span class="math notranslate nohighlight">\(x_1 &lt; x_2\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(y_1 &lt; y_2\)</span> implies <span class="math notranslate nohighlight">\(g(y_1) = x_1 &lt; g(y_2) = x_2\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g\)</span> is strictly increasing.</p></li>
+</ol>
+<p>Finally, notice that <span class="math notranslate nohighlight">\(g\)</span> is monotonic and
+the range <span class="math notranslate nohighlight">\(g([c,d]) = [a,b]\)</span> is a closed interval with the
+end points <span class="math notranslate nohighlight">\(a = g(c)\)</span> and <span class="math notranslate nohighlight">\(b=g(d)\)</span>.
+Thus, due to <a class="reference internal" href="#res-bra-rf-monotonic-continuous-closed-range">Theorem 2.32</a>,
+<span class="math notranslate nohighlight">\(g\)</span> is continuous.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./basic_real_analysis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="real_valued_functions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2.5. </span>Real Valued Functions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="differentiability.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.7. </span>Differentiable Functions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Shailesh Kumar<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
