@@ -440,6 +440,8 @@ $f$ is *strictly monotonic* on $I$.
 ```
 
 ```{prf:theorem}
+:label: res-bra-rf-monotonic-func-limits
+
 Let $f$ be monotonic of an interval $(a, b)$. Let
 
 $$
@@ -623,7 +625,36 @@ Thus, in the neighborhood $x \in (a-\delta, a+\delta)$:
 $$
 f(a) - \epsilon < f(x) < f(a) + \epsilon \implies \mu - 2 f(a) < f(x) < \mu.
 $$
+```
 
+```{prf:theorem} Continuity and arithmetic
+If $f$ and $g$ are continuous on a set $S$, then so are
+$f+g$, $f-g$, and $f g$. 
+$\frac{f}{g}$ is continuous at each $x \in S$ such that 
+$g(x) \neq 0$. 
+```
+
+
+## Discontinuities
+
+A function $f$ is discontinuous at some $x=c$ in its domain $\dom f$ if 
+either $\lim_{x\to c} f(x)$ doesn't exist or $\lim_{x\to c} f(x) \neq f(c)$.
+
+```{prf:definition} Jump discontinuity
+:label: def-bra-rf-jump-discontinuity
+
+Let $f : \RR \to \RR$ be a real function and let $[a,b] \subseteq \dom f$.
+
+1. $f$ has a *jump discontinuity* at a point $c \in (a,b)$ if both 
+   the left hand limit $f(c^-)$ and the right hand limit $f(c^+)$ exist
+   but $f(c^-) \neq f(c^+)$. In this case, $\lim_{x \to c} f(x)$ doesn't
+   exist and $f$ is not continuous at $x=c$.
+1. $f$ has a *jump discontinuity* at $x=a$ if the right hand limit 
+   $f(a^+)$ exists but $f(a) \neq f(a^+)$. In this case, $f$ is not
+   continuous from the right at $x=a$. 
+1. $f$ has a *jump discontinuity* at $x=b$ if the left hand limit 
+   $f(b^-)$ exists but $f(b) \neq f(b^-)$. In this case, $f$ is not
+   continuous from the left at $x=b$. 
 ```
 
 ```{prf:definition} Piecewise continuity
@@ -656,13 +687,6 @@ In other words:
 
 
 
-```{prf:theorem}
-If $f$ and $g$ are continuous on a set $S$, then so are
-$f+g$, $f-g$, and $f g$. 
-$\frac{f}{g}$ is continuous at each $x \in S$ such that 
-$g(x) \neq 0$. 
-```
-
 
 ```{prf:definition} Removable discontinuity
 
@@ -680,7 +704,18 @@ $$
 is continuous at $x=a$.
 ```
 
+```{prf:definition} Essential discontinuity
+:label: def-bra-rf-essential-discontinuity
 
+Let $x$ be an interior point of $\dom f$. If either of 
+the one sided limits $f(x^+)$, or $f(x^-)$ don't exist, then
+$f$ has an *essential discontinuity* at $x$.
+
+If $x \in \dom f$ is a boundary point, then only
+a one sided limit is possible (left or right hand limit).
+If such a limit doesn't exist, then $f$ has an *essential
+discontinuity* at the boundary point $x$.
+```
 
 ## Continuity with Function Composition
 
@@ -930,13 +965,14 @@ A similar argument shows that $f$ attains $\beta$ at some $x_2 \in [a,b]$.
 
 
 ```{prf:theorem} Intermediate value theorem
+:label: res-bra-rf-intermediate-value
 
 Let $f$ be continuous on a finite closed interval $[a,b]$. 
 Assume that $f(a) \neq f(b)$.
 Let $\mu$ be in between $f(a)$ and $f(b)$.
-Then $f$ attains the value of $\mu$ at some $x=c \in [a,b]$. 
+Then $f$ attains the value of $\mu$ at some $x=c \in (a,b)$. 
 
-In other words, there exists $c \in [a,b]$ such that $f(c)=\mu$. 
+In other words, there exists $c \in (a,b)$ such that $f(c)=\mu$. 
 ```
 
 ```{prf:proof}
@@ -992,3 +1028,308 @@ In this sense, this theorem is a weak result as it claims
 the existence of just one point at which $f(x) = \mu$. 
 It doesn't claim to characterize the set of points at which $f(x) = \mu$.
 
+## Uniform Continuity
+
+```{prf:definition} Continuity over a set
+:label: def-bra-rf-continuity-over-set
+
+Let $A \subseteq \dom f$. We say that $f$ is *continuous* 
+over the set $A$ if for each $\epsilon > 0$ and each
+$x_0 \in A$, there exists $\delta > 0$ 
+(depending on $x_0$ and $\epsilon$) such that
+
+$$
+|f(x) - f(x_0)| < \epsilon \text{ whenever } |x - x_0| < \delta 
+\text{ and } x \in \dom f.
+$$
+```
+
+The clause $x \in \dom f$ in the definition is important.
+
+1. If $x_0$ is an interior point of $\dom f$, we can pick
+   an interval $(x_0 - \delta, x_0 + \delta)$.
+1. If $x_0$ is an accumulation point of $\dom f$, we can pick up
+   a half-open interval $(x_0 - \delta, x_0]$ or $[x_0, x_0 + \delta)$
+   whichever is applicable.
+1. If $x_0$ is an isolated point, we pick the degenerate interval
+   $[x_0, x_0]$ with suitable choice of $\delta$.
+1. Thus, on the accumulation points, $f$ is either continuous from
+   the left or right while on the interior points, $f$ is continuous.
+
+The key issue here is that the size of the interval 
+(decided by $\delta$) may depend on both $\epsilon$ 
+as well as the point $x_0$. This is not always desirable. 
+Uniform continuity addresses this concern.
+
+```{prf:definition} Uniform continuity
+:label: def-bra-rf-uniform-continuity
+
+Let $f: \RR \to \RR$ be a real function. 
+Let $A \subseteq \dom f$. 
+We say that $f$ is *uniformly continuous*
+over the set $A$ if for every $\epsilon > 0$, 
+there exists $\delta > 0$ (depending on $\epsilon$) such that
+
+$$
+|f(x) - f(y)| < \epsilon \text{ whenever } |x - y| < \delta 
+\text{ and } x, y \in A.
+$$
+```
+
+Few observations on this definition:
+
+1. $\delta$ depends on $\epsilon$. 
+1. $\delta$ is independent of the choice of $x$ and $y$.
+1. $\delta$ might depend on the set $A$. E.g., if 
+   $A$ is a bounded set, it may depend on its size.
+1. The definition is restricted to points in $A$.
+   It doesn't consider points in $\dom f \setminus A$.
+
+
+```{prf:remark}
+If $f$ is not uniformly continuous on a set $A$, then
+there is an $\epsilon_0 > 0$ such that for any $\delta > 0$,
+there are points $x,y$ in $A$ such that:
+
+$$
+|x - y | < \delta \text{ but } |f(x) - f(y)| \geq \epsilon_0.
+$$
+```
+
+While a continuous function may not be uniformly continuous
+in general, it is so on a compact subset.
+
+```{prf:theorem}
+If $f$ is continuous on a closed and bounded (compact)
+interval $[a,b]$, then $f$ is uniformly continuous on $[a,b]$.
+```
+
+```{prf:proof}
+Let $\epsilon > 0$ be arbitrary. Since $f$ is continuous 
+on $[a,b]$, for every $t \in [a,b]$, there exists $\delta_t > 0$
+such that
+
+$$
+| f(x) - f(t) | < \frac{\epsilon}{2} \text{ whenever } | x - t | < 2 \delta_t
+\text{ and } x \in [a,b].
+$$
+
+Choose an open interval $I_t = (t - \delta_t, t + \delta_t)$ for 
+every $t \in [a,b]$. 
+
+The collection $\OOO = \{ I_t \ST t \in [a,b] \}$ is an open cover
+for $[a,b]$. Since $[a,b]$ is closed and bounded (compact), hence
+due to {prf:ref}`Heine-Borel theorem <res-rl-heine-borel>`, 
+there are finitely many points $t_1, t_2, \dots, t_n$ in $[a,b]$
+such that $\PPP = \{ I_{t_1}, I_{t_2}, \dots, I_{t_n} \}$ form a finite 
+open cover of $[a,b]$.
+
+Define:
+
+$$
+\delta = \min \{\delta_{t_1}, \delta_{t_2}, \dots, \delta_{t_n}\}.
+$$
+
+Assume that $|x - y| < \delta$ and $x,y \in [a,b]$. 
+Assume that $x \in I_{t_r}$ for some $r$. 
+This is true since $\PPP$ is a cover for $[a,b]$.
+
+Now, from triangle inequality:
+
+$$
+| f(x) - f(y) | = | f(x) - f(t_r) + f(t_r)  - f(y)| \leq | f(x) - f(t_r) | + | f(t_r) - f(y)|.
+$$ 
+
+Since $x \in I_{t_r}$, hence $|x - t_r | < \delta_{t_r}$, hence:
+
+$$
+| f(x) - f(t_r) | < \frac{\epsilon}{2}.
+$$
+
+On the other hand:
+
+$$
+|y - t_r |  \leq |y - x | + | x - t_r | < \delta + \delta_{t_r} \leq 2 \delta_{t_r}.
+$$
+
+Thus,
+
+$$
+| f(t_r) - f(y)| < \frac{\epsilon}{2}.
+$$
+
+Together, we have:
+
+$$
+| f(x) - f(y) | < \epsilon.
+$$
+
+We have shown that for any $\epsilon > 0$, a $\delta > 0$ can be chosen 
+such that, $|x - y | < \delta$ with $x,y \in [a,b]$ implies
+$|f(x) - f(y)| < \epsilon$.
+Thus, $f$ is uniformly continuous over $[a,b]$.
+```
+
+```{prf:corollary}
+If $f$ is continuous on a set $A$, then $f$ is uniformly continuous
+on any finite closed interval contained in $A$.
+```
+
+## Continuity and Monotonic Functions
+
+```{prf:proposition}
+If $f$ is monotonic on an interval $I$, then $f$ is either 
+continuous or has a jump discontinuity at each $x \in I$. 
+```
+
+```{prf:proof}
+Let $I$ be an open interval $(a,b)$. 
+Then, due to {prf:ref}`res-bra-rf-monotonic-func-limits`, 
+both left hand and right hand limits exist at each point in $(a,b)$.
+
+Consider some $c \in (a,b)$.
+
+1. If $f(c^-) = f(c^+)$, then by monotonicity, $f(c^-) = f(c) = f(c^+)$,
+   thus $f$ is continuous at $c$.
+1. If $f(c^-) \neq f(c^+)$, then we have a jump discontinuity.
+
+Next, the boundary points. Consider $x=a$. 
+
+1. The right hand limit $f(a^+)$ exists 
+   due to {prf:ref}`monotonicity <res-bra-rf-monotonic-func-limits>`. 
+1. If $f(a) = f(a^+)$, then $f$ is continuous from the right at $x=a$.
+1. Otherwise, we have a jump discontinuity at $x=a$.
+
+Similarly, for $x=b$:
+
+1. The left hand limit $f(b^-)$ exists 
+   due to {prf:ref}`monotonicity <res-bra-rf-monotonic-func-limits>`. 
+1. If $f(b) = f(b^-)$, then $f$ is continuous from the left at $x=b$.
+1. Otherwise, we have a jump discontinuity at $x=b$.
+
+
+```
+
+```{prf:theorem}
+:label: res-bra-rf-monotonic-continuous-closed-range
+
+If $f$ is monotonic on $[a,b]$, then $f$ is continuous
+on $[a,b]$ if and only if its range 
+$R_f = f([a,b]) = \{f(x) \ST a \leq x \leq b \}$ is
+a closed interval with endpoints $f(a)$ and $f(b)$.
+
+In other words, $f$ is continuous on $[a,b]$ if and only if:
+
+$$
+f([a,b]) = [f(a), f(b)] \text{ if } f(a) \leq f(b) \text { else } [f(b), f(a)].
+$$
+```
+
+```{prf:proof}
+If $f$ is constant over $[a,b]$, there is nothing to prove.
+Hence, we shall restrict our attention to the case where $f$ is non-constant.
+Then $f(a) \neq f(b)$ since $f$ is monotonic.
+Without loss of generality, assume that $f(a) < f(b)$ ($f$ is increasing). 
+If $f(a) > f(b)$, we can replace $f$ by $-f$ and proceed.
+
+Consider the set 
+
+$$
+S_f = \{ f((a,b)) \} = \{f(x) \ST a < x < b \}.
+$$
+Due to {prf:ref}`res-bra-rf-monotonic-func-limits`:
+
+$$
+S_f \subseteq [f(a^+), f(b^-)].
+$$
+
+Thus, 
+
+$$
+R_f = \{ f(a) \} \cup S_f \cup \{ f(b) \} \subseteq \{ f(a) \} \cup [f(a^+), f(b^-)] \cup \{ f(b) \}. 
+$$
+
+If $f$ is continuous on $[a,b]$, then $f(a) = f(a^+)$
+and $f(b) = f(b^-)$. Thus, we have:
+$R_f \subseteq [f(a), f(b)]$.
+
+Further, due to {prf:ref}`intermediate value theorem <res-bra-rf-intermediate-value>`,
+for every $f(a) < \mu < f(b)$, there exists $x \in (a,b)$, such that
+$\mu = f(x)$. Thus, 
+$R_f = [f(a), f(b)]$.
+
+
+We now assume that $R_f = [f(a), f(b)]$ and show that $f$ must be continuous.
+
+1. Since $f$ is increasing, hence $f(a) \leq f(a^+)$ and $f(b^+) \leq f(b)$. 
+1. We also have: $[f(a), f(b)] \subseteq \{ f(a) \} \cup [f(a^+), f(b^-)] \cup \{ f(b)$.
+1. If $f(a) < f(a^+)$ were true, then the subset relationship above will be invalid. 
+   Similar case with $f(b^-) < f(b)$.
+1. Thus, we both $f(a) = f(a+)$ and $f(b) = f(b^-)$ must be true.
+1. $f$ is continuous from the right at $a$ and from the left at $b$.
+1. Also, since $f$ is increasing, hence for any $c \in (a,b)$, we have
+   $f(c^-) \leq f(c) \leq f(c^+)$.
+1. If $f(c^-) < f(c)$, then $(f(c^-), f(c))$ cannot be part of $R_f$.
+   Thus, $f(c^-) = f(c)$ 
+```
+
+For strictly monotonic functions which are continuous on an
+interval $[a,b]$, it is possible to find an inverse function
+on the same interval.
+
+```{prf:theorem}
+Let $f$ be a strictly increasing and continuous function on 
+an interval $[a,b]$.
+Let $f(a) = c$ and $f(b) = d$. Then, there is a unique 
+function $g$ defined on $[c,d]$ such that:
+
+$$
+g (f(x)) = x \Forall a \leq x \leq b
+$$ 
+and 
+
+$$
+f(g(y)) = y \Forall c \leq y \leq d.
+$$
+
+Moreover, $g$ is continuous and strictly increasing on $[c,d]$.
+```
+
+```{prf:proof}
+
+We first show that such a function $g$ can be defined:
+
+1. Since $f$ is (strictly) monotone, hence 
+   due to {prf:ref}`res-bra-rf-monotonic-continuous-closed-range`,
+   $f([a,b]) = [c,d]$. 
+1. In other words, $f$ restricted to $[a,b]$ as $f : [a,b] \to [c,d]$ 
+   is {prf:ref}`total <def-st-total-function>`
+   and {prf:ref}`surjective <def-st-surjective-function>`.
+1. Thus, for each $y \in [c,d]$, there exists $x \in [a,b]$ 
+   such that $y = f(x)$.
+1. Since $f$ is strictly increasing, hence $f(x_1) \neq f(x_2)$
+   for any $x_1, x_2 \in [a,b]$.
+1. Hence, $f : [a,b] \to [c,d]$ is 
+   {prf:ref}`injective <def-st-injective-function>`.
+1. Thus, $f : [a,b] \to [c,d]$ is 
+   {prf:ref}`bijective <def-st-bijective-function>`.
+1. Thus, we can introduce an 
+   {prf:ref}`inverse function <def-st-inverse-total-function>`
+   $g : [c,d] \to [a,b]$ with the rule $g(y) = x$ whenever $f(x) = y$.  
+
+Next, we show that $g$ is strictly increasing.
+
+1. Let $y_1, y_2 \in [c,d]$ such that $y_1 < y_2$. 
+1. Let $x_1, x_2 \in [a,b]$ such that $y_1 = f(x_1)$ and $y_2 = f(x_2)$.
+1. Thus, $x_1 = g(y_1)$ and $x_2 = g(y_2)$.
+1. Since $f$ is strictly increasing, hence $f(x_1) < f(x_2)$ implies $x_1 < x_2$.
+1. Thus, $y_1 < y_2$ implies $g(y_1) = x_1 < g(y_2) = x_2$. 
+1. Thus, $g$ is strictly increasing.
+
+
+Finally, notice that $g$ is monotonic and
+the range $g([c,d]) = [a,b]$ is a closed interval with the
+end points $a = g(c)$ and $b=g(d)$.
+Thus, due to {prf:ref}`res-bra-rf-monotonic-continuous-closed-range`,
+$g$ is continuous.
+```
