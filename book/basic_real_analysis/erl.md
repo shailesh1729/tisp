@@ -2,6 +2,7 @@ The Extended Real Line
 =========================
 
 ```{prf:definition} Extended real line
+:label: def-bra-extended-real-line
 
 The *extended real number system* or *extended real line* 
 is obtained from the real number system $\RR$ by adding 
