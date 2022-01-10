@@ -640,7 +640,7 @@ The case of $f'(a) > \mu > f'(b)$ can be handled by applying the
 same argument to $-f$.
 ```
 
-# Mean Values
+## Mean Values
 
 
 ```{prf:theorem} Generalized mean value theorem
@@ -695,7 +695,9 @@ $$
 $$
 ```
 
-```{prf:remark}
+````{prf:remark}
+:label: res-bra-df-smvt-impl
+
 Assume $f$ to be differentiable on some open interval $(a,b)$.
 Assume $x_1, x_2 \in (a,b)$. We haven't specified whether $x_1 < x_2$ or $x_1 > x_2$.
 
@@ -704,11 +706,12 @@ Assume $x_1, x_2 \in (a,b)$. We haven't specified whether $x_1 < x_2$ or $x_1 > 
 1. $f$ is differentiable on the interior of this closed interval.
 1. By {prf:ref}`mean value theorem <res-bra-df-smvt>`:
 
-   $$
+   ```{math}
+   :label: eq-bra-df-mvt
    f(x_2) - f(x_1)  = f'(c) (x_2 - x_1)
-   $$(eq-bra-df-mvt)
+   ```
    for some $c$ in the open interval between $x_1$ and $x_2$.
-```
+````
 
 
 ```{prf:theorem}

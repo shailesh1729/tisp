@@ -170,10 +170,10 @@ Calculus
       - :prf:ref:`def-bra-rf-nth-derivative`
     * - :math:`f'_-(a)`
       - Left hand derivative of :math:`f` at :math:`x=a`
-      - :prf:ref:`def-bra-rf-one-sided-derivative`
+      - :prf:ref:`def-bra-df-one-sided-derivative`
     * - :math:`f'_+(a)`
       - Right hand derivative of :math:`f` at :math:`x=a`
-      - :prf:ref:`def-bra-rf-one-sided-derivative`
+      - :prf:ref:`def-bra-df-one-sided-derivative`
     * - :math:`\nabla f`
       - Gradient of :math:`f`
       -
