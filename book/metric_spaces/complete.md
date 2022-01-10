@@ -175,3 +175,104 @@ Let $A$ be complete. We shall show that it contains all its closure points.
 1. Thus, $x \in A$.
 1. Thus, $A$ contains all its closure points. $A$ is closed. 
 ```
+
+Recall that the 
+{prf:ref}`diameter <def-ms-diameter>` of a set
+is defined to be the supremum of distances between
+all pairs of points of the set.
+
+```{prf:theorem}
+Let $(X, d)$ be a complete metric space. 
+Let $\{A_n\}$ be a sequence of closed, nonempty subsets of $X$ such that
+$A_{n+1} \subseteq A_{n}$ for each $n$ and 
+
+$$
+\lim_{n \to \infty} \diam A_n = 0.
+$$
+
+Then the intersection $\bigcap_{n=1}^{\infty}A_n$ consists of precisely one point.
+```
+This result is due to G. Cantor. 
+A similar result was seen in 
+{prf:ref}`nested interval property<res-rl-nested-interval-property>` for real line.
+
+```{prf:proof}
+
+Define:
+
+$$
+A = \bigcap_{n=1}^{\infty}A_n.
+$$
+
+We shall first prove that $A$ cannot have more than one point.
+
+1. Assume $x, y \in A$.
+1. Thus, $x,y \in A_n \Forall n$.
+1. Thus, $0 \leq d(x,y) \leq \diam A_n \Forall n$.
+1. But then, $\lim_{n \to \infty} \diam A_n = 0$ implies that $d(x, y) = 0$.
+1. But, $d(x,y) = 0 \implies x = y$ as $d$ is a metric (Identity of indiscernibles).
+1. Thus, if $x,y \in \bigcap_{n=1}^{\infty}A_n$, then $x=y$.
+1. Thus, $A$ contains at most one point.
+
+We now show that $A$ cannot be empty.
+
+1. For each $n$ choose $x_n \in A_n$. It is possible due to
+   {prf:ref}`axiom of choice <ax-st-axiom-of-choice>`. 
+1. Since $A_{n+p} \subseteq A_n$, 
+   hence $d(x_{n+p}, x_n) \leq \diam A_n$ holds for every $n, p$.
+1. Thus, $\{x_n\}$ is a Cauchy sequence of $X$.
+1. Since $X$ is complete, $\{x_n\}$ is convergent.
+1. Hence, the limit $x = \lim_{n\to\infty} x_n$ exists and $x \in X$.
+1. Since $x_m \in A_n$ for all $m \geq n$, 
+   hence $x$ is a closure point of $A_n$ for each $n$ 
+   ({prf:ref}`res-ms-closure-point-as-limit`).
+1. But since $A_n$ is closed, hence $x \in A_n$ for each $n$.
+1. Thus, $x \in A$.
+```
+
+## Nowhere Dense Sets
+
+```{prf:definition} Nowhere dense
+:label: def-ms-nowhere-dense-set
+
+A subset $A$ of $(X,d)$ is *nowhere dense* if its closure 
+has an empty interior; i.e., 
+
+$$
+\interior \closure A = \EmptySet.
+$$
+```
+
+```{prf:remark}
+$A$ is nowhere dense if and only if $X \setminus (\closure A)$ 
+is dense in $X$.
+```
+```{prf:proof}
+Let $B = \closure A$.
+
+Recall from {prf:ref}`res-ms-int-cl-comp-rel` that:
+
+$$
+\begin{aligned}
+&X \setminus (\interior B) = \closure (X \setminus B)\\
+\iff & \interior B = X \setminus (\closure (X \setminus B)).
+\end{aligned}
+$$
+
+Now,
+
+$$
+\begin{aligned}
+& \interior \closure A = \EmptySet \\
+\iff & \interior B = \EmptySet \\
+\iff & X \setminus (\closure (X \setminus B)) = \EmptySet\\
+\iff & \closure (X \setminus B) = X\\
+\iff & \closure (X \setminus (\closure A)) = X\\
+\iff & X \setminus (\closure A) \text{ is dense in $X$}.
+\end{aligned}
+$$
+```
+
+```{prf:example}
+The set of integers $\ZZ$ is nowhere dense in $\RR$.
+```

@@ -424,6 +424,8 @@ We proceed by showing that its complement is open:
 ```
 
 ```{prf:proposition}
+:label: res-ms-int-cl-comp-rel
+
 Let $A \subseteq X$. Then
 
 $$
