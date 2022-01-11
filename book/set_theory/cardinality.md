@@ -42,7 +42,7 @@ Note that two sets may be equivalent yet not equal to each other.
 *  The sets $\{a, b, c\}$ and $\{1,4, 9\}$ are equivalent but not equal.
 ````
 
-````{prf:theorem}
+````{prf:theorem} Cardinality as equivalence relation
 :label: res-st-equivalence-is-equivalence-relation
 
 Let $A, B, C$ be sets. Then:
@@ -51,7 +51,7 @@ Let $A, B, C$ be sets. Then:
 1.  If $A \sim B$, then $B \sim A$.
 1.  If $A \sim B$, and $B \sim C$, then $A \sim C$.
 
-Thus it is an equivalence relation.
+Thus, it is an equivalence relation.
 ````
 
 ````{prf:proof}
@@ -282,7 +282,7 @@ is countable.
 ````{prf:proof}
 Let $A_n = \{a_1^n, a_2^n, \dots\} \Forall n \in \Nat$. Further, let
 $B = \{2^k 3^n : k, n \in \Nat \}$. Note that every element of $B$ is a natural number,
-hence $B \subseteq \Nat$. Since $B$ is infinite, hence by   {ref}`here <res:set:subset_of_countable_set>`
+hence $B \subseteq \Nat$. Since $B$ is infinite, hence by   {prf:ref}`res-st-subset-of-countable-set-is-countable`
 $B$ is countable, i.e. $B \sim \Nat$. 
 We note that if $b_1 = 2^{k_1} 3^{n_1}$ and $b_2 = 2^{k_2} 3^{n_2}$,
 then $b_1 = b_2$ if and only if $k_1 = k_2$ and $n_1 = n_2$. 
@@ -310,24 +310,25 @@ $$
 $$
 
 By fundamental theorem of arithmetic, every natural number has a unique prime factorization. Thus,
-$f$ is one-one. Invoking {ref}`here <res:set:countable_set_characterization>`, $A$ is countable.
+$f$ is one-one. Invoking {prf:ref}`res-countable-set-characterization`, $A$ is countable.
 ````
 
-(res:set:rationals_countable)=
-````{prf:theorem}
+````{prf:theorem} Cardinality of rational numbers
+:label: res-st-rationals-countable
 
 The set of rational numbers $\QQ$ is countable.
 ````
 ````{prf:proof}
 Let $\frac{p}{q}$ be a positive rational number with $p > 0$ and $q > 0$ having no common factor.
 Consider a mapping $f(\frac{p}{q})  = 2^p 3^q$. This is a one-one mapping into natural numbers.
-Hence invoking {ref}`here <res:set:countable_set_characterization>`, the set of positive rational
+Hence invoking {prf:ref}`res-countable-set-characterization`, the set of positive rational
 numbers is countable. Similarly, the set of negative rational numbers is countable.
-Invoking {ref}`here <res:set:countable_union_countable_sets>`, $\QQ$ is countable.
+Invoking {prf:ref}`res:st:countable-union-countable-sets`, $\QQ$ is countable.
 ````
 
-(res:set:finite_subsets_countable)=
-````{prf:theorem}
+````{prf:theorem} Cardinality of set of finite subsets
+:label: res-st-finite-subsets-countable
+
 The set of all finite subsets of $\Nat$ is countable.
 
 ````
@@ -342,121 +343,164 @@ $$
 $$
 
 The mapping $g$ is one-one, since the prime decomposition of a natural number
-is unique. Hence invoking {ref}`here <res:set:countable_set_characterization>`, $F$ is countable.
+is unique. Hence invoking {prf:ref}`res-countable-set-characterization`, $F$ is countable.
 ````
 
-(res:set:finite_subsets_of_countable_set_is_countable)=
 ````{prf:corollary}
+:label: res-st-finite-subsets-countable-set-countable
 
 The set of all finite subsets of a countable set is countable.
 ````
 
-````{prf:definition}
-We say that $A \preceq B$ whenever there exists a one-one function $f : A \to B$.
+## Partial Order for Cardinality
+
+````{prf:definition} Equivalence with subset
+We say that $A \preceq B$ whenever there exists 
+a (total) one-one function $f : A \to B$.
 In other words, $A$ is equivalent to a subset of $B$.
 ````
 In this sense, $B$ has at least as many elements as $A$.
+
 ````{prf:theorem}
 The relation $\preceq$ satisfies following properties
-[label=*\roman*.*]
-*  $A \preceq A$ for all sets $A$.
-*  If $A \preceq B$ and $b \preceq C$, then $A \preceq C$.
-*  If $A \preceq B$ and $B \preceq A$, then $A \sim B$.
 
+1.  Reflexivity: $A \preceq A$ for all sets $A$.
+1.  Transitivity: If $A \preceq B$ and $B \preceq C$, then $A \preceq C$.
+1.  Antisymmetry: If $A \preceq B$ and $B \preceq A$, then $A \sim B$.
+
+Thus, $\preceq$ is a {prf:ref}`partial order <def-st-partial-order>`.
 ````
 ````{prf:proof}
-(i). We can use the identity function $f (a ) = a \Forall a \in A$.
+(1). We can use the identity function $f (a ) = a \Forall a \in A$.
 
-(ii). Straightforward application of the result that
-{ref}`composition of injective functions is injective <res:composition_of_one_one_functions>`.
+(2). Straightforward application of
+{prf:ref}`res-st-composition-of-one-one-functions`
+that composition of injective functions is injective.
 
-(iii). Straightforward application of
-{ref}`Schr{\"o <res:function:schroder_bernstein_theorem>`der-Bernstein theorem}.
+(3). Straightforward application of
+{prf:ref}`Schröder-Bernstein Theorem <res-st-schroder-bernstein-theorem>`.
 ````
 
-(res:set:set_power_set_cardinality)=
-````{prf:theorem}
+## Power Sets
+
+````{prf:theorem} Cardinality of power set
+:label: res-st-power-set-cardinality
 
 If $A$ is a set, then $A \preceq \Power (A)$ and $A \nsim \Power (A)$.
 ````
+
+This result establishes that the power set 
+of a set is larger than itself.
+
 ````{prf:proof}
-If $A = \EmptySet$, then $\Power(A) = \{ \EmptySet\}$ and the result is trivial.
-So, lets consider non-empty $A$.
-We can choose $f : A \to \Power(A)$ given by $f (x) = \{ x\} \Forall x \in A$. This
-is clearly a one-one function leading to $A \preceq \Power (A)$.
 
-Now for the sake of contradiction, lets us assume that $A \sim \Power (A)$. Then,
-there exists a bijective function $g : A \to \Power(A)$.
-Consider the set $B = \{ a \in A : a \notin g(a) \}$.
-Since $B \subseteq A$, and $g$ is bijective, there exists
-$a \in A$ such that $g (a) = B$.
+We first show that $A \preceq \Power (A)$:
 
-Now if $a \in B$ then $a \notin g(a) = B$.
-And if $a \notin B$, then $a \in g(a) = B$.
-This is impossible, hence $A \nsim \Power(A)$.
+1. If $A = \EmptySet$, then $\Power(A) = \{ \EmptySet\}$ and the result is trivial.
+1. So, lets consider non-empty $A$.
+1. We can choose $f : A \to \Power(A)$ given by 
+   $f (x) = \{ x\} \Forall x \in A$. 
+1. This is clearly a one-one (total) function leading to 
+   $A \preceq \Power (A)$.
+
+Next we show that $A \nsim \Power (A)$:
+
+1. For the sake of contradiction, lets us assume that 
+   $A \sim \Power (A)$. 
+1. Then, there exists a bijective function $g : A \to \Power(A)$.
+1. Consider the set $B = \{ a \in A \ST a \notin g(a) \}$.
+1. Since $B \subseteq A$, hence $B \in \Power(A)$. 
+1. Since $g$ is bijective, 
+   there exists $a \in A$ such that $g(a) = B$.
+1. Now if $a \in B$ then $a \notin g(a) = B$.
+1. And if $a \notin B$, then $a \in g(a) = B$.
+1. This is impossible, hence $A \nsim \Power(A)$.
 ````
 
-(def:set:cardinality)=
-````{prf:definition}
+## Cardinal Numbers
 
-For every set $A$ a symbol (playing the role of a number) can be assigned that
-designates the number of elements in the set. This number is known as *cardinal number*
-of the set and is denoted by \Card{A} or $| A |$. It is also known as *cardinality*.
+We now introduce a general definition for cardinality.
+
+````{prf:definition} Cardinal numbers
+:label: def-st-cardinality
+
+For every set $A$ a symbol (playing the role of a number) 
+can be assigned that
+designates the number of elements in the set. 
+This number is known as *cardinal number*
+of the set and is denoted by $\card{A}$ or $| A |$. 
+It is also known as *cardinality*.
 ````
-Note that the cardinal numbers are different from natural numbers, real numbers etc.
-If $A$ is finite, with $A = \{a_1, a_2, \dots, a_n \}$, then $\Card{A} = n$.
-We use the symbol $\aleph_0$ to denote the cardinality of $\Nat$. By saying
-$A$ has the cardinality of $\aleph_0$, we simply mean that $A \sim \Nat$.
+Note that the cardinal numbers are different 
+from natural numbers, real numbers etc.
 
-If $a$ and $b$ are two cardinal numbers, then by $a \leq b$, we mean that
-there exist two sets $A$ and $B$ such that $\Card{A} = a$, $\Card{B} = b$ and
-$A \preceq B$. By $a < b$, we mean that $A \preceq B$ 
-and $A \nsim B$. $a \leq b$ and $b \leq a$ guarantees that $a = b$.
+1. If $A$ is finite, with $A = \{a_1, a_2, \dots, a_n \}$, 
+   then $\card{A} = n$.
+1. We use the symbol $\aleph_0$ to denote the cardinality of 
+   $\Nat$. 
+1. By saying $A$ has the cardinality of $\aleph_0$, 
+   we simply mean that $A \sim \Nat$.
+1. If $a$ and $b$ are two cardinal numbers, then by $a \leq b$, 
+   we mean that there exist two sets $A$ and $B$ such that 
+   $\card{A} = a$, $\card{B} = b$ and $A \preceq B$. 
+1. By $a < b$, we mean that $A \preceq B$  and $A \nsim B$. 
+1. $a \leq b$ and $b \leq a$ guarantees that $a = b$.
 
-It can be shown that $\Power(\Nat) \sim \RR$. The cardinality of $\RR$ is denoted by
-$\mathfrak{c}$.
+```{prf:remark}
+It can be shown that $\Power(\Nat) \sim \RR$. 
+The cardinality of $\RR$ is denoted by $\mathfrak{c}$.
+```
 
-(def:set:infinite_cardinal_number)=
-````{prf:definition}
+````{prf:definition} Infinite cardinal number
+:label: def-st-infinite-cardinal-number
 
-A cardinal number $a$ satisfying $\aleph_0 \leq a$ is known as *infinite cardinal number*.
+A cardinal number $a$ satisfying $\aleph_0 \leq a$ 
+is known as *infinite cardinal number*.
 ````
 
-(def:set:cardinality_continuum)=
-````{prf:definition}
+````{prf:definition} Cardinality of the continuum
+:label: def-cardinality-continuum 
 
-The cardinality of $\RR$ denoted by $\mathfrak{c}$ is known as the *cardinality of the continuum*.
+The cardinality of $\RR$ denoted by $\mathfrak{c}$ 
+is known as the *cardinality of the continuum*.
 ````
 
-````{prf:theorem}
+````{prf:theorem} Power sets and binary functions
 Let $2 = \{ 0, 1 \}$. Then $2^X \sim \Power (X) $ for every set $X$.
 ````
 ````{prf:proof}
 $2^X$ is the set of all functions $f : X \to 2$. i.e. a function from $X$ to $\{ 0, 1 \}$ which can
 take only one the two values $0$ and $1$.
 
-Define a function $g : \Power (X) \to 2^X$ as follows. Let $y \in \Power(X)$.
+Define a mapping $g : \Power (X) \to 2^X$ as follows. 
+
+Let $y \in \Power(X)$.
 Then $g(y)$ is a function $f : X \to \{ 0, 1 \}$ given by
 
 $$
-    f(x) =
-     \left\{
-            \begin{array}{ll}
-                1 & \mbox{if $x \in y$};\\
-                0 & \mbox{if $x \notin y$}.
-            \end{array}
-          \right.
+f(x) =
+ \left\{
+        \begin{array}{ll}
+            1 & \mbox{if $x \in y$};\\
+            0 & \mbox{if $x \notin y$}.
+        \end{array}
+      \right.
 $$
 
-The function $g$ is one-one and on-to. Thus $2^X \sim \Power(X)$.
+The function $g$ is bijective. Thus $2^X \sim \Power(X)$.
 ````
 
-We denote the cardinal number of $\Power(X)$ by $2^{\Card{X}}$. Thus, $\mathfrak{c} = 2^{\aleph_0}$.
+```{prf:remark}
+We denote the cardinal number of $\Power(X)$ by $2^{\card{X}}$. 
+Thus, $\mathfrak{c} = 2^{\aleph_0}$.
+```
 
+```{prf:remark} An ordering of cardinal numbers
 The following inequalities of cardinal numbers hold:
 
 $$
     0 < 1 < 2 < \dots < n \dots < \aleph_0 < 2^{\aleph_0} = \mathfrak{c} < 2^ \mathfrak{c} < 2^{2^{ \mathfrak{c}}} \dots.
 $$
+```
 
 
