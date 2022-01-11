@@ -446,9 +446,48 @@ from natural numbers, real numbers etc.
 1. By $a < b$, we mean that $A \preceq B$  and $A \nsim B$. 
 1. $a \leq b$ and $b \leq a$ guarantees that $a = b$.
 
-```{prf:remark}
-It can be shown that $\Power(\Nat) \sim \RR$. 
-The cardinality of $\RR$ is denoted by $\mathfrak{c}$.
+```{prf:theorem} Real numbers as power set of natural numbers
+:label: res-st-real-line-cardinality
+
+$\Power(\Nat) \sim \RR$. 
+```
+
+```{prf:proof}
+
+We shall proceed as follows:
+
+1. Establish a (total) injective mapping  $\RR \to \Power(\Nat)$. 
+1. Establish a (total) injective mapping $\Power(\Nat) \to \RR$.
+1. Claim that a bijective mapping between the two exists due to
+   {prf:ref}`Schröder-Bernstein theorem  <res-st-schroder-bernstein-theorem>`.
+
+
+$\RR \to \Power(\Nat)$
+
+1. Define $g : \RR \to \Power(\QQ)$ as 
+   
+   $$
+   g(r) = \{q \in \QQ \ST q < r \}.
+   $$
+1. Note that $g$ is injective. If $r_1 < r_2$ then there is a rational 
+   number $q$ such that $r_1 < q < r_2$. Thus, $g(r_1) \neq g(r_2)$.
+1. Since, $\QQ \sim \Nat$, hence there exists a bijection between
+   $\Power(\QQ)$ and $\Power(\Nat)$.
+1. Thus, there exists an injection from $\RR$ to $\Power(\Nat)$.
+
+
+$\Power(\Nat) \to \RR$
+
+1. Recall that $2^{\Nat} \sim  \Power(\Nat)$.
+1. Thus, each subset of $\Nat$ corresponds to a sequence 
+   $x = \{ x_n \}$ in $2^{\Nat}$.
+1. Define a mapping $h :  2^{\Nat} \to \RR$ as:
+   
+   $$
+   h(x) =  \sum_{n=1}^{\infty} \frac{x_n}{3^{n}}
+   $$
+1. $h$ maps each sequence $x$ to a unique number $y \in [0,1]$.
+1. $h$ is an injective mapping.
 ```
 
 ````{prf:definition} Infinite cardinal number
@@ -466,14 +505,18 @@ is known as the *cardinality of the continuum*.
 ````
 
 ````{prf:theorem} Power sets and binary functions
+:label: res-st-power-set-binary-func
+
 Let $2 = \{ 0, 1 \}$. Then $2^X \sim \Power (X) $ for every set $X$.
 ````
+We mention that the notation $A^B$ means the set of all functions
+of type $f : B \to A$.
+
 ````{prf:proof}
 $2^X$ is the set of all functions $f : X \to 2$. i.e. a function from $X$ to $\{ 0, 1 \}$ which can
 take only one the two values $0$ and $1$.
 
 Define a mapping $g : \Power (X) \to 2^X$ as follows. 
-
 Let $y \in \Power(X)$.
 Then $g(y)$ is a function $f : X \to \{ 0, 1 \}$ given by
 
