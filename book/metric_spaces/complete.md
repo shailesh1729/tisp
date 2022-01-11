@@ -276,3 +276,229 @@ $$
 ```{prf:example}
 The set of integers $\ZZ$ is nowhere dense in $\RR$.
 ```
+
+
+## Cantor Set
+
+```{prf:definition} Cantor set
+:label: def-ms-cantor-set
+
+*Cantor set* $C$ is a subset of $[0,1]$. It is constructed as follows:
+
+1. Let $C_0 = [0,1]$. 
+1. Trisect $C_0$  into 
+   $[0, \frac{1}{3}], (\frac{1}{3}, \frac{2}{3}) , [\frac{2}{3}, 1]$.
+1. Remove the middle open interval $(\frac{1}{3}, \frac{2}{3})$ and
+   form $C_1 = [0, \frac{1}{3}]\cup [\frac{2}{3}, 1]$.
+1. Note that $C_1$ is a disjoint union of $2=2^1$ closed intervals.
+1. Trisect each closed interval of $C_1$ and remove the middle 
+   open interval from each one of the trisections in an identical manner.
+1. Let $C_2 = [0, \frac{1}{9}] \cup [\frac{2}{9}, \frac{1}{3}] \cup [\frac{2}{3}, \frac{7}{9}] \cup [\frac{8}{9}, 1]$.
+1. Note that $C_2$ is a union of $4=2^2$ disjoint closed intervals 
+   each of length $\frac{1}{9} = \frac{1}{3^2}$.
+1. Inductively build $C_{n+1}$ from $C_n$ using this procedure. 
+1. Note that $C_n$ is a union of $2^n$ disjoint closed intervals 
+   of length $\frac{1}{3^n}$ each.
+1. When $C_{n+1}$ is constructed from $C_n$, we get $2^{n+1}$ 
+   disjoint intervals of length $\frac{1}{3^{n+1}}$ each.
+1. Clearly $C_{n+1} \subseteq C_{n}$ by construction for all $n$.
+1. Define the Cantor set as:
+
+   $$
+   C \triangleq \bigcap_{n=1}^{\infty} C_n.
+   $$
+```
+
+We next discuss different properties of the Cantor set.
+
+```{prf:property} Characterization in ternary expansions
+:label: res-ms-cantor-set-ternary-expansion
+
+
+Consider the set $E \subset [0,1]$ whose 
+every element has a ternary (base 3) expansion
+of only 0s and 2s; i.e., for every $x \in E$, we have a representation:
+
+$$
+x = .d_1 d_2 d_3 \dots  \text{ where } d_i \in \{0, 2 \}
+$$
+
+Then, $E=C$. In other words:
+
+$$
+C = E \triangleq \left \{ \sum_{n=1}^{\infty} \frac{d_n}{3^n}, 
+\text{ where } d_n \in \{ 0, 2\} \right \}.
+$$
+
+```
+
+```{prf:proof}
+In the ternary (base 3), representation, each number $x\in[0, 1]$
+can be written as:
+
+$$
+x = .d_1 d_2 d_3 \dots  \text{ where } d_i \in \{0, 1, 2 \}
+$$
+
+such that
+
+$$
+x = \sum_{i=1}^{\infty} \frac{d_i}{3^i}.
+$$
+
+For example
+
+$$
+1 = .2222222... = 2 \sum_{i=1}^{\infty} \frac{1}{3^i} 
+= 2\frac{1/3}{2/3} = 2\frac{1}{2} = 1.
+$$
+
+It is possible that a number has two different ternary expansions.
+We can see that $\frac{1}{3} \in C_k$ for every $k$. 
+Hence, $\frac{1}{3} \in C$.Interestingly, 
+
+$$
+\frac{1}{3} = .1  = .022222... .
+$$
+has two different ternary representations. 
+One is a finite representation, and the other
+is an infinite representation involving only 0s and 2s.
+We say that $\frac{1}{3} \in C$ as it has a ternary 
+representation consisting of only 0s and 2s.
+
+We have to prove two things:
+
+1. $E \subseteq C$. Every number in $[0,1]$ which has a ternary expansion 
+   containing only 0s and 2s belongs to $C$.
+1. $C \subseteq E$. Every number in $C$ has a ternary expansion
+   containing only of 0s and 2s.
+
+
+Note that if $A = [a, a + \frac{1}{3^n}]$ is a closed interval contained in $C_n$
+then:
+
+1. $[a, a + \frac{1}{3^{n+1}}]$ is the first closed interval drawn from $A$ in $C_{n+1}$.
+1. $[a+ \frac{2}{3^{n+1}}, a + \frac{1}{3^{n}}]$ is the second closed interval drawn from $A$ in $C_{n+1}$.
+
+
+$E \subseteq C$
+
+1. Let $x = .d_1 d_2 \dots$ with $d_i \in \{0, 2\}$.
+1. Start with $A_0 = [0,1]$.
+1. Given $A_0$:
+   1. If $d_1 = 0$, then let $A_1$ be the first closed interval drawn from $A_0$ : $[0, \frac{1}{3}]$ contained in $C_1$.
+   1. Otherwise, if $d_1 = 2$, then let $A_1$ the second closed interval drawn from $A_0$ : $[\frac{2}{3}, 1]$ contained in $C_1$.
+1. Given $A_{n-1} = [a, a + \frac{1}{3^{n-1}}]$, 
+   1. If $d_n = 0$, then let $A_n$ be the first closed interval drawn from $A_{n-1}$ contained in $C_n$.
+   1. Otherwise (if $d_n = 2$), then let $A_n$ be the second closed interval drawn from $A_{n-1}$ contained in $C_n$. 
+1. Inductively, we can keep picking closed interval $A_n$ contained in $C_n$ 
+   for every digit in the ternary expansion of $x$.
+1. Thus, $x \in C$.
+
+$C \subseteq E$
+
+1. For every $x \in C$, we can construct a ternary expansion as follows.
+1. If $x \in [0, \frac{1}{3}]$, then $d_1 = 0$.
+1. Otherwise if $x \in [\frac{2}{3}, 1]$, then $d_1 = 2$.
+1. Subsequently, whenever the first closed interval is chosen, then $d_n = 0$
+   and whenever the second closed interval is chosen, then $d_n = 2$.
+1. Thus, $x$ has a ternary expansion consisting entirely of 0s and 2s.
+1. Thus, $x \in E$.
+```
+
+```{prf:property}
+Cantor set doesn't contain any open interval.
+```
+```{prf:proof}
+Note that the total length of disjoint closed intervals in $C_n$ is
+$\frac{2^n}{3^n} = \left ( \frac{2}{3} \right )^n$.
+
+1. Assume that there is an open interval $(a,b) \subseteq C$.
+1. Then, the length of the interval is $b-a > 0$.
+1. But then there exists an $n$ such that $\left ( \frac{2}{3} \right )^n < b - a$.
+1. Then, for all $k \geq n$, $(a,b)$ cannot be contained in $C_k$.
+1. We arrive at a contradiction.
+```
+
+```{prf:property}
+Cantor set has an empty interior.
+```
+```{prf:proof}
+Assume $C$ has a nonempty interior and $x \in \interior C$.
+
+1. Then there is a neighborhood $(x - \epsilon , x + \epsilon) \subset C$.
+1. But, $C$ doesn't contain any open intervals.
+1. We arrive at a contradiction.
+
+Thus, $C$ has an empty interior.
+
+```
+
+```{prf:property}
+Cantor set is a closed nowhere dense subset of $\RR$.
+```
+```{prf:proof}
+$C$ is an (infinite) intersection of closed sets. Hence $C$ is closed. $\closure C = C$.
+$C$ has an empty interior. Thus, $C$ is nowhere dense.
+```
+
+```{prf:property}
+The total length of the removed intervals from $[0,1]$ to get $C$ equals 1.
+```
+
+```{prf:proof}
+At the n-th step, we remove $2^{n-1}$ open intervals of length $3^{-n}$ each.
+
+Thus, total length removed in n-th step is $\frac{1}{2} \left ( \frac{2}{3} \right )^n$.
+
+Thus, total length removed is:
+
+$$
+\sum_{n=1}^{\infty} \frac{1}{2} \left ( \frac{2}{3} \right )^n 
+= \frac{1}{2} \frac{2/3}{1 - 2/3} = 1.
+$$
+```
+
+
+```{prf:property}
+Cantor set is uncountable. In particular:
+
+$$
+\card {C} = \card {2^{\Nat}} = \card{\RR} = \mathfrak{c}.
+$$
+```
+Recall that $\mathfrak{c}$ denotes the cardinality of the
+continuum ({prf:ref}`def-cardinality-continuum`). 
+The notation $2^{\Nat}$ was introduced in
+{prf:ref}`res-st-power-set-binary-func` to describe power sets.
+{prf:ref}`res-st-real-line-cardinality` established that
+
+$$
+2^{\Nat} \sim \Power(\Nat) \sim \RR.
+$$
+
+```{prf:proof}
+Recall that two sets are called {prf:ref}`equivalent <def-st-equivalent-sets>`
+($A \sim B$) if there is a bijective mapping between them.
+
+Recall from {prf:ref}`res-ms-cantor-set-ternary-expansion` that:
+
+$$
+C = \left \{ \sum_{n=1}^{\infty} \frac{d_n}{3^n}, 
+\text{ where } d_n \in \{ 0, 2\} \right \}.
+$$
+1. Thus, each $x \in C$ can be identified with a sequence $d : \Nat \to \{ 0, 2\}$
+   given by $d = \{ d_n \}$. 
+1. Thus, we have a bijective mapping between $C$ and the set $\{0, 2\}^{\Nat}$.
+1. Thus, $C \sim \{0, 2\}^{\Nat}$.
+1. This, in turn can be identified with a sequence $c : \Nat \to \{0, 1\}$ 
+   where $c = \{ c_n \}$ with $c_n = 0$ if $d_n = 0$ and $c_n = 1$ if $d_n = 2$.
+1. This gives us a bijective mapping between $\{0, 2\}^{\Nat}$ and $\{0, 1\}^{\Nat}$.
+1. Recall that $2^{\Nat} = \{0, 1\}^{\Nat}$ with 
+   $2 = \{0, 1\}$ ({prf:ref}`res-st-power-set-binary-func`).
+1. Thus $C \sim  2^{\Nat}$ and 
+
+   $$
+   \card C = \card 2^{\Nat} = \card \RR = \mathfrak{c}.
+   $$
+```
