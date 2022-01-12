@@ -1,0 +1,143 @@
+# Discrete Metric Space
+
+This section collects results on the discrete metric space.
+The discrete space is trivial and not very useful in applications. 
+However, it helps clarify many of the theoretical 
+underpinnings of the topology of metric spaces.
+Hence, its study is quite useful.
+
+```{prf:definition}
+:label: def-ms-discrete-space
+
+Let $X$ be a nonempty set:
+
+Define:
+
+$$
+d(x,y) = \begin{cases}
+0 & x = y \\
+1 & x \neq y
+\end{cases}.
+$$
+
+$(X, d)$ is a metric space. This distance is called *discrete distance* 
+and the metric space is called a *discrete metric space*.
+```
+
+In the rest of the section $X$ will denote the discrete metric
+space with the distance function defined above.
+
+```{prf:proposition}
+Every singleton in a discrete metric space is open.
+```
+
+
+```{prf:proof}
+
+Let $x \in X$. Consider the open ball $B(x, \frac{1}{2}):
+
+$$
+B(x, \frac{1}{2}) = \left \{y \in X \ST d(x,y) < \frac{1}{2} \right \}.
+$$
+
+By definition of the discrete metric:
+
+$$
+B(x, \frac{1}{2}) = \{ x \}.
+$$
+Thus, every singleton is an open ball. Hence it is an open set.
+```
+
+```{prf:proposition}
+Every subset of a discrete space is open.
+```
+```{prf:proof}
+Let $A \subseteq X$.  If $A = \EmptySet$ then there is nothing to prove.
+
+For a nonempty $A$, write it as:
+
+$$
+A = \bigcup_{x \in A} \{ x \}.
+$$
+
+Since every singleton is open and an arbitrary union of open sets is open
+hence $A$ is open. 
+```
+
+
+```{prf:proposition}
+Every subset of a discrete set is closed.
+```
+```{prf:proof}
+Let $A \subseteq X$. Let $B = X \setminus A$. 
+By previous result, $B$ is open. Hence, $A$ must be closed.
+```
+
+
+```{prf:proposition}
+The only rare (nowhere dense) subset of $X$ is $\EmptySet$.
+```
+
+```{prf:proof}
+Let $A \subseteq X$. $A$ is open as well as closed.
+Hence $\closure A = A$ and $\interior \closure A = \interior A = A$.
+Thus, $A$ is rare if and only if $A = \EmptySet$.
+```
+
+
+```{prf:proposition}
+In a discrete metric space, a Cauchy sequence is eventually
+constant.
+```
+
+```{prf:proof}
+Let $\{x_n \}$ be a Cauchy sequence of $X$. 
+Then, there exists $k$ such that for all $m,n > k$, 
+
+$$
+d(x_m, x_n) < \frac{1}{2}.
+$$
+
+But then for all $m,n > k$, $x_m = x_n$. Thus, 
+$\{ x_n \}$ must be eventually constant.
+```
+
+```{prf:proposition}
+A discrete metric space is complete.
+```
+
+```{prf:proof}
+Since every Cauchy sequence is eventually constant, hence
+it converges. Thus the discrete metric space is complete.
+```
+
+```{prf:proposition}
+The only meager set in $X$ is $\EmptySet$.
+```
+
+```{prf:proof}
+Recall from {prf:ref}`res-ms-complete-meager-interior-empty`
+that a meager set has an empty interior.
+
+Since every nonempty subset of $X$ is open hence it doesn't have
+an empty interior. 
+
+Thus, the only meager set is $\EmptySet$.
+```
+
+```{prf:observation}
+Let $X$ be a countable set with a discrete metric.
+
+$X$ is complete and it satisfies the Baire category theorem.
+
+Let $\{x_n\}$ be an enumeration of $X$.
+Then, we can write $X$ as:
+
+$$
+X = \bigcup_{n=1}^{\infty} \{ x_n\}.
+$$
+
+Now, although it's a countable union of singletons, 
+the singletons themselves are not rare sets. 
+Hence, we cannot say that $X$ meager.
+```
