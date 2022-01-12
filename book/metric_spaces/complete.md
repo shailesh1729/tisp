@@ -232,7 +232,7 @@ We now show that $A$ cannot be empty.
 
 ## Nowhere Dense Sets
 
-```{prf:definition} Nowhere dense
+```{prf:definition} Nowhere dense/Rare
 :label: def-ms-nowhere-dense-set
 
 A subset $A$ of $(X,d)$ is *nowhere dense* if its closure 
@@ -241,9 +241,13 @@ has an empty interior; i.e.,
 $$
 \interior \closure A = \EmptySet.
 $$
+
+It is also called a *rare* set.
 ```
 
-```{prf:remark}
+```{prf:theorem}
+:label: res-ms-complement-closure-rare-dense
+
 $A$ is nowhere dense if and only if $X \setminus (\closure A)$ 
 is dense in $X$.
 ```
@@ -277,7 +281,39 @@ $$
 The set of integers $\ZZ$ is nowhere dense in $\RR$.
 ```
 
+```{prf:theorem}
+:label: res-ms-rare-complement-dense
 
+The complement of a rare (nowhere dense) set is dense.
+```
+```{prf:proof}
+Let $A \subseteq X$ be rare (nowhere dense).
+
+1. The interior of its closure is empty.
+1. Thus, its closure $\closure A$ contains no open sets.
+1. Thus, $A$ contains no open sets.
+1. Thus, every open set in $X$ intersects with $X \setminus A$.
+1. Thus, $X \setminus A$ is dense.
+```
+
+```{prf:proposition}
+The subset of a rare (nowhere dense) set is rare. 
+```
+
+```{prf:proof}
+Let $A \subseteq B$ and $B$ be nowhere dense.
+Now
+
+$$
+A \subseteq B \implies \closure A \subseteq \closure B
+\implies \interior \closure A \subseteq \interior \closure B.
+$$
+
+Since $B$ is nowhere dense, hence $\interior \closure B$ is
+empty. 
+This in turn implies that $\interior \closure A$ is empty.
+Thus, $A$ is nowhere dense.
+```
 ## Cantor Set
 
 ```{prf:definition} Cantor set
@@ -501,4 +537,291 @@ $$
    $$
    \card C = \card 2^{\Nat} = \card \RR = \mathfrak{c}.
    $$
+```
+
+
+## Baire Category Theorem
+
+
+```{prf:definition} Meager set
+A union of countably many rare (nowhere dense) sets is said to be
+of *first category* or a *meager* set.
+
+In other words, a subset $A$  is called *meager* 
+(or of *first category*) if there 
+exists a sequence $\{ A_n \}$ of nowhere dense subsets such that
+
+$$
+A = \bigcup_{n=1}^{\infty} A_n.
+$$
+```
+
+```{prf:definition} Co-meager set
+The complement of a meager set is called *co-meager*.
+```
+
+```{prf:definition} Non-meager set
+A subset that is not meager is said to be *non-meager*
+or of *second category*.
+```
+
+
+```{prf:example}
+
+Consider the metric space $\RR$.
+
+1. Singleton sets are rare (nowhere dense) in $\RR$ as they are 
+   closed and their interior is empty.
+1. The set of natural numbers $\Nat$ is rare since it is closed 
+   and its interior is empty (no open intervals in $\Nat$).
+1. The set $\QQ$ is not rare since its closure is entire $\RR$.
+   It is meager since it is a countable union of rare singleton sets.
+1. The set of irrational numbers $\II$ is co-meager as $\II = \RR \setminus \QQ$.
+1. The set $\RR$ is non-meager.  
+```
+
+
+```{prf:theorem}
+The subset of a meager set is meager.
+```
+```{prf:proof}
+Let $A$ be a meager set and let $B \subseteq A$. Then,
+
+$$
+A = \bigcup_{n=1}^{\infty} A_n
+$$
+where $A_n$ are rare (nowhere dense).
+
+But then
+
+$$
+B = B \cap A = B \cap \bigcup_{n=1}^{\infty} A_n
+= \bigcup_{n=1}^{\infty} A_n \cap B.
+$$
+
+Since subset of a nowhere dense set is nowhere dense,
+hence $B_n = A_n \cap B$ are nowhere dense.
+Hence
+
+$$
+B = \bigcup_{n=1}^{\infty} B_n
+$$
+is meager (as it is a countable union of nowhere dense sets).
+```
+
+```{prf:theorem}
+The union of countably many meager sets is meager.
+```
+```{prf:proof}
+Recall from {prf:ref}`res:st:countable-union-countable-sets`
+that countable union of countable sets is countable.
+
+1. Let $\{M_n\}$ be a countable collection of meager sets.
+1. Then, each $M_n$ is a countable union of rare sets.
+1. Write $M_n$ as $\bigcup_i A_{n, i}$.
+1. Thus, 
+
+   $$
+   M = \bigcup_n M_n = \bigcup_n \bigcup_i A_{n, i}
+   = \bigcup_{n, i} A_{n, i}.
+   $$ 
+1. The family $\{ A_{n, i} \}$ is countable.
+1. Thus, $M$ is a countable union of rare sets.
+1. Thus, $M$ is meager.
+```
+
+```{prf:corollary}
+Since co-meager sets are complements of meager sets:
+
+1. Superset of a co-meager set is co-meager.
+1. Countable intersection of co-meager sets is co-meager.
+```
+
+```{prf:theorem} Baire category theorem
+A (nonempty) complete metric space is non-meager in itself.
+```
+
+In other words:
+
+* A (nonempty) complete metric space is not a countable union of rare sets.
+
+
+```{prf:proof}
+
+Our proof strategy is following:
+
+1. For contradiction, we assume that $X$ is meager with $X = \bigcup_i A_i$. 
+1. We form a Cauchy sequence from points $x_i \notin A_i$.
+1. Since $X$ is complete, we claim its convergence $x = \lim x_i$.
+1. We further show that the limit point $x$ cannot belong to any $A_i$.
+
+Let us assume that $X$ is a complete metric space which is 
+meager in itself; i.e., there exists a countable collections
+of rare sets (rare in $X$) such that $X$ is their union.
+
+$$
+X = \bigcup_{k=1}^{\infty} A_k
+$$
+where $A_k$ are rare (nowhere dense); i.e. $\interior \closure A_k = \EmptySet$.
+
+Recall from {prf:ref}`res-ms-complement-closure-rare-dense` that 
+$B_k = X \setminus \closure A_k$ are dense in $X$.
+Also, $B_k$ are open since they are complement of closed sets.
+Also, recall from {prf:ref}`res-ms-dense-open-intersect`
+that a dense set has a nonempty intersection with every nonempty open set.
+
+
+1. $B_1 = X \setminus \closure A_1$ is a nonempty open set.
+1. Thus, there exists an interior point $x_1$ in $B_1$ with
+   an open ball $B(x_1, \epsilon_1) \subseteq B_1$ 
+   where we can make $\epsilon_1 < \frac{1}{2}$.
+1. $B_2$ is nonempty, open and dense. 
+   Thus, $C_2 = B_2 \cap B\left (x_1, \frac{\epsilon_1}{2}\right)$ is nonempty and open.
+1. Thus, we can choose $x_2 \in C_2$ such that
+   $x \in B(x_2, \epsilon_2) \subseteq C_2$ with $\epsilon_2 \leq \frac{\epsilon_1}{2}$.
+1. Proceeding inductively in this manner, we obtain a sequence $\{ x_n \}$ such that
+   
+   $$
+   x_n \in B(x_n, \epsilon_n) \subseteq B_n \cap 
+   B\left (x_{n-1}, \frac{\epsilon_{n-1}}{2} \right).
+   $$
+1. We have $A_n \cap B(x_n, \epsilon_n) = \EmptySet$. 
+   $\epsilon_n \leq \frac{\epsilon_{n-1}}{2}$ with $\epsilon_1 < \frac{1}{2}$.
+1. By definition, $x_m \in B\left (x_n, \frac{\epsilon_n}{2} \right)$ for every $m > n$.
+1. Thus, $d(x_m, x_n) < \frac{\epsilon_n}{2}$ for every $m > n$.
+1. Since $\epsilon_1 < \frac{1}{2}$, hence $\epsilon_n < \frac{1}{2^{n+1}}$.
+1. Thus, $d(x_m, x_n) \to 0$ as $m,n \to \infty$. 
+1. Thus, $\{x_n\}$ is a Cauchy sequence.
+1. Since $X$ is complete, hence every Cauchy sequence is convergent. 
+1. Thus there exists $x \in X$ such that $x = \lim x_n$. 
+   To which $A_k$ does $x$ belong then?
+1. Fix some $n \in \Nat$. For every $m>n$ we have:
+
+   $$
+   d(x, x_n) \leq d(x, x_m) + d(x_n, x_m) < d(x, x_m) + \frac{\epsilon_n}{2}.
+   $$
+1. Thus taking the limit $m \to \infty$ leading to $d(x, x_m) \to 0$, 
+   we get 
+
+   $$
+   d(x, x_n) \leq \frac{\epsilon_n}{2} < \epsilon_n.
+   $$
+1. Hence $x \in B(x_n, \epsilon_n)$ for all $n \in \Nat$.
+1. Since $A_n \cap B(x_n, \epsilon_n) = \EmptySet$, hence $x \notin A_n$ for all $n$.
+1. But then $x \notin X$ since $X = \bigcup_n A_n$. A contradiction.
+1. Hence, $X$ must be non-meager.
+```
+
+```{prf:proposition}
+The set of irrational numbers is non-meager.
+```
+
+```{prf:proof}
+Recall that $\RR = \QQ \cup \II$ where $\II$ is the set of irrational numbers.
+
+1. $\RR$ is complete. Hence $\RR$ is non-meager.
+1. $\QQ$ is meager as it is a countable union of singletons which are rare sets.
+1. Countable union of meager sets is meager.
+1. Thus, if $\II$ was meager, then $\RR$ would be meager which is not true.
+1. Hence, $II$ must be non-meager.
+```
+
+
+```{prf:theorem} Interior of a meager set
+:label: res-ms-complete-meager-interior-empty
+
+A meager set has an empty interior in a complete metric space.
+```
+
+```{prf:proof}
+Let $M \subseteq X$ be meager. Then, we can write $M$ as
+
+$$
+M = \bigcup_{n=1}^{\infty} A_n
+$$
+such that $A_n$ are rare in $X$.
+
+
+Let $B_n = X \setminus \closure A_n$. 
+Then $B_n$ are dense, nonempty and open in $X$.
+Hence $B_n \cap U$ is nonempty and open 
+for every nonempty open set $U \subseteq X$.
+
+1. Let $U$ be an arbitrary nonempty open set in $X$.
+1. There exists $x_1 \in B_1 \cap U$ such that 
+   $x_1 \in B(x_1, \epsilon_1) \subseteq B_1 \cap U$
+   where $\epsilon_1 < \frac{1}{2}$.
+1. $B_2$ is dense and open so 
+   $C_2 = B_2 \cap B\left(x_1, \frac{\epsilon_1}{2}\right)$ 
+   is nonempty and open.
+1. We can choose a point $x_2 \in B(x_2, \epsilon_2) \subseteq C_2$
+   where $\epsilon_2 \leq \frac{\epsilon_1}{2}$.
+1. Proceeding in this manner, we choose points
+
+   $$
+   x_n \in B(x_n, \epsilon_n) \subseteq B_n \cap B\left (x_{n-1}, \frac{\epsilon_{n-1}}{2}\right)
+   $$
+   to form a sequence $\{ x_n \}$.
+1. The sequence $\{ x_n \}$ is Cauchy, $X$ is complete, hence 
+   $x = \lim x_n$ exists in $X$.
+1. Also, $x \in B(x_n, \epsilon_n)$ for all $n$.
+1. In particular $x \in B(x_1, \epsilon_1) \subseteq U$
+   and $x \in B(x_n, \epsilon_n) \subseteq B_n$.
+1. Thus, $x \in B_n \cap U$ for all $n$.
+1. Thus,
+   
+   $$
+   \begin{aligned}
+   & x \in U \cap \left ( \bigcap_{n} B_n \right )\\
+   & \implies x \in U \cap \left ( \bigcap_{n} (X \setminus \closure A_n) \right )\\
+   & \implies x \in U \cap \left ( X \setminus  \left ( \bigcup_{n} (\closure A_n) \right ) \right )\\
+   & \implies x \in U \cap \left ( X \setminus  \left ( \bigcup_{n} A_n \right ) \right )\\
+   & \implies x \in U \cap ( X \setminus M ).
+   \end{aligned} 
+   $$
+1. Thus, $U$ has a nonempty intersection with $X \setminus M$.
+1. Since $U$ is arbitrary, hence $X \setminus M$ intersects 
+   with every nonempty open set in $X$.
+1. Thus, $X \setminus M$ is dense in $X$ 
+   ({prf:ref}`res-ms-dense-open-intersect`). 
+1. Thus, $M$ has an empty interior
+   ({prf:ref}`res-ms-dense-complement-interior-empty`).
+```
+
+
+```{prf:example}
+
+$\QQ$ in $\RR$
+
+1. The set $\QQ$ is meager in $\RR$. 
+1. $\RR$ is complete.
+1. The interior of $\QQ$ in $\RR$ is empty.
+
+$\QQ$ in $\QQ$
+
+1. $\QQ$ by itself is not a complete metric space.
+1. Singletons are rare sets in $\QQ$.
+1. Thus, $\QQ$ is meager in $\QQ$ as it is a countable union of rare sets. 
+1. However, the interior of $\QQ$ is not empty. In fact it is whole of $QQ$.
+1. {prf:ref}`res-ms-complete-meager-interior-empty` does not apply since
+   $\QQ$ is not a complete metric space.
+```
+
+
+## Baire Spaces
+
+```{prf:definition} Baire space
+A metric space is called a *Baire space* if every nonempty 
+open set is not a meager set.
+```
+
+
+
+```{prf:theorem} Characterization of Baire space
+For a metric space $X$, the following statements are equivalent:
+
+1. $X$ is a Baire space.
+1. Every countable intersection of open dense sets is also dense.
+1. If $X = \bigcup_{n=1}^{\infty} F_n$ and each $F_n$ is a closed set, then
+   the open set $\bigcup_{n=1}^{\infty} \interior F_n$ is dense.
 ```
