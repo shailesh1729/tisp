@@ -155,6 +155,27 @@ $B$ is open.
 * $[0, 1]$ is closed in $\RR$.
 * $(0, 1]$ is neither open nor closed in $\RR$.
 ```
+
+```{prf:proposition}
+The set of natural numbers $\Nat$ is closed in $\RR$.
+```
+
+```{prf:proof}
+We prove it by showing that its complement is open.
+The set $\RR \setminus \Nat$ can be written as a union of open intervals:
+
+$$ 
+\RR \setminus \Nat = \bigcup \left \{ (-\infty, 1), (1, 2), (2, 3), 
+\dots, (n, n+1), \dots \right \}.
+$$ 
+
+1. Each open interval is an open set.
+1. The arbitrary union of open sets is open.
+1. Thus, $\RR \setminus \Nat$ is open.
+5. Thus, $\Nat$ is closed. 
+
+```
+
 ```{prf:proposition}
 Arbitrary intersections of closed sets are closed sets.
 ```
@@ -208,6 +229,8 @@ and is denoted by $\interior A$ or $\ainterior_X A$.
 Note that $\interior A \subseteq A$.
 
 ```{prf:proposition}
+:label: res-ms-open-subset-interior-subset
+
 Let $O \subseteq A$ be an open set. Then $O \subseteq \interior A$. 
 
 In words, every open set that is contained in $A$, is 
@@ -270,6 +293,31 @@ Assume $A = \interior A$.
 Then, since $\interior A$ is open, hence $A$ is open.
 ```
 
+```{prf:proposition}
+If $A \subseteq B$ then $\interior A \subseteq \interior B$.
+```
+```{prf:proof}
+We have:
+
+$$
+\interior A \subseteq A \subseteq B.
+$$
+But $\interior A$ is open. 
+Hence, by {prf:ref}`res-ms-open-subset-interior-subset`:
+
+$$
+\interior A \subseteq \interior B.
+$$
+
+Alternate proof.
+
+1. Let $x$ be an interior point of $A$.
+1. Then $x$ is an interior point of $B$ too since $A \subseteq B$.
+1. Thus, $x \in \interior B$.
+1. Thus $ \interior A \subseteq \interior B$.
+```
+
+
 ## Closure
 
 ```{prf:definition} Closure point
@@ -305,6 +353,8 @@ and is denoted by $\closure A$ or $\aclosure_X A$.
 ```
 
 ```{prf:proposition}
+:label: res-ms-closed-superset-closure-superset
+
 Let $C$ be a closed subset of $X$ such that $A \subseteq C$.
 Then $\closure A \subseteq C$.
 
@@ -458,6 +508,28 @@ The same logic for the converse:
 Together, the equality is established. 
 ```
 
+```{prf:proposition}
+If $A \subseteq B$ then $\closure A \subseteq \closure B$.
+```
+```{prf:proof}
+We have: $A \subseteq \closure A$ and 
+$A \subseteq B \subseteq \closure B$.
+But then by {prf:ref}`res-ms-closed-superset-closure-superset`
+every closed set that contains $A$ contains its closure.
+Thus:
+
+$$
+ \closure A \closure B.
+$$
+
+Alternate proof.
+
+1. Let $x$ be a closure point of $A$.
+1. Then $x$ is a closure point of $B$ too since $A \subseteq B$.
+1. Thus, $x \in \closure B$.
+1. Thus $ \closure A \subseteq \closure B$.
+```
+
 ## Boundary
 
 ```{prf:definition} Boundary point
@@ -506,6 +578,43 @@ Let $x \in \closure A \setminus \interior A$.
 1. Thus, for every $r> 0$, $B(x,r) \cap X \setminus A \neq \EmptySet$.
 1. Combining, $x$ is a boundary point.
 1. Thus, $\closure A \setminus \interior A \subseteq \boundary A$.
+```
+
+```{prf:definition} Frontier point
+:label: def-ms-frontier-point
+
+A *frontier point* of a set $A$ is a boundary point
+that belongs to $A$.
+```
+
+```{prf:definition} Frontier
+:label: def-ms-frontier
+
+The set of all frontier points of a set $A$,
+denoted by $\frontier A$, is called
+its *frontier*.
+```
+
+```{prf:proposition}
+$$
+\frontier A = A \setminus \interior A = \boundary A \cap A.
+$$
+```
+```{prf:proof}
+$\frontier A = \boundary A \cap A$ is by definition as 
+a frontier point is a boundary point which belongs to $A$.
+
+If $x \in A$ is an interior point then it's not a boundary point.
+All other points in $A$ are boundary points. Hence,
+
+$\frontier A = A \setminus \interior A$.
+```
+
+```{prf:proposition}
+For a closed set, the frontier and boundary are same.
+```
+```{prf:proof}
+Every boundary point belongs to the closed set.
 ```
 
 ## Accumulation
