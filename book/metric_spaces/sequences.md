@@ -172,6 +172,8 @@ $\lim x_n = x$.
 This is a direct application of {prf:ref}`res-ms-closure-point-as-limit`.
 
 ```{prf:proposition}
+:label: res-ms-dense-open-intersect
+
 A set $A$ is dense if and only if $O \cap A \neq \EmptySet$ holds
 for every nonempty open set $O$ in $X$. 
 ```
@@ -195,3 +197,29 @@ Assume $A \cap O \neq \EmptySet$ for every open and nonempty $O$.
 1. Thus, $A$ is dense in $X$.
 ```
 
+
+```{prf:proposition}
+:label: res-ms-dense-complement-interior-empty
+
+Complement of a dense set has an empty interior.
+```
+```{prf:proof}
+Recall from {prf:ref}`res-ms-int-cl-comp-rel` that:
+
+$$
+X \setminus (\interior A) = \closure (X \setminus A).
+$$
+
+Now, let $B$ be dense and $A = X \setminus B$. 
+Then, 
+
+$$
+\begin{aligned}
+& X \setminus (\interior A) = \closure (X \setminus A)\\
+& \iff X \setminus (\interior A) = \closure B\\
+& \iff X \setminus (\interior A) = X \\
+& \iff \interior A = X \setminus X = \EmptySet.
+\end{aligned}
+$$
+Thus, $A$ has an empty interior.
+```
