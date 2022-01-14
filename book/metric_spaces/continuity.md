@@ -1,4 +1,7 @@
 # Continuity
+The material in this section is primarily based on
+{cite}`aliprantis1998principles`.
+
 
 Let $(X,d)$ and $(Y, \rho)$ be metric spaces.
 
@@ -239,4 +242,22 @@ Assume that $I$ is a homeomorphism.
 1. $I^{-1}$ is continuous. Hence $\lim d_2(x_n, x) = 0$ implies 
    $\lim d_1(I^{-1}(x_n), I^{-1}(x)) = d_1(x_n, x) = 0$.
 1. Hence, the metrics $d_1$ and $d_2$ are equivalent.
+```
+
+## Uniform Continuity
+
+```{prf:definition} Uniform continuity
+
+A function $f: (X, d) \to (Y, \rho)$ between two
+metric spaces is called *uniformly continuous*
+if for every $\epsilon > 0$, there exists some $\delta > 0$
+(depending on $\epsilon$) such that
+
+$$
+\rho(f(x), f(y)) < \epsilon \text{ whenever } d(x, y) < \delta.
+$$
+```
+
+```{prf:remark}
+Every uniformly continuous function is continuous.
 ```
