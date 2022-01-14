@@ -44,7 +44,7 @@ In other words, there exists an $r > 0$ such that
 $B(x, r) \subseteq S$. 
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 Every open ball is an open set.
 ```
 
@@ -75,7 +75,7 @@ Thus, $y \in A$. Thus, $S \subseteq A$. Thus, there exists
 an open ball around $p$ which is entirely contained in $A$. 
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 Arbitrary unions of open sets are open sets.
 ```
 
@@ -93,7 +93,7 @@ it entirely contained inside the union.
 1. Hence, $A$ is open.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 Finite intersections of open sets are open sets.
 ```
 
@@ -124,7 +124,7 @@ A subset $S$ of $X$ is said to be *closed* in $X$
 if $X \setminus S$ is open in $X$.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 $\EmptySet$ and $X$ are both open and closed subsets of $X$.
 ```
 
@@ -137,7 +137,7 @@ $X$ is open since for every point $x \in X$, every open ball at $x$
 lies entirely in $X$ (by definition). Thus, $\EmptySet$ is closed.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 Every singleton is a closed set.
 ```
 
@@ -176,7 +176,9 @@ $$
 
 ```
 
-```{prf:proposition}
+```{prf:theorem}
+:label: res-ms-intersection-closed-sets
+
 Arbitrary intersections of closed sets are closed sets.
 ```
 
@@ -191,7 +193,9 @@ We proceed as follows:
 1. Thus, $ \bigcap_{i \in I} A_i$ is a closed set.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
+:label: res-ms-finite-union-closed
+
 Finite unions of closed sets are closed sets.
 ```
 
@@ -247,7 +251,7 @@ $\interior A = O \cup \interior A$. Thus, $O \subseteq \interior A$.
 ```
 
 
-```{prf:proposition} Interior is set of interior points
+```{prf:theorem} Interior is set of interior points
 The interior of a set $A$ is the collection of all the interior points 
 of $A$.
 ```
@@ -293,7 +297,7 @@ Assume $A = \interior A$.
 Then, since $\interior A$ is open, hence $A$ is open.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 If $A \subseteq B$ then $\interior A \subseteq \interior B$.
 ```
 ```{prf:proof}
@@ -373,7 +377,7 @@ Hence, $D = \closure A$ must be true.
 But $D \subseteq C$. Hence $\closure A \subseteq C$.
 ```
 
-```{prf:proposition} Closure is set of closure points
+```{prf:theorem} Closure is set of closure points
 The closure of a set $A$ is the collection of all the closure points 
 of $A$.
 ```
@@ -443,7 +447,7 @@ Assume $A = \closure A$.
 Then, since $\closure A$ is closed, hence $A$ is closed.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 A closed ball is a closed set.
 ```
 
@@ -473,7 +477,7 @@ We proceed by showing that its complement is open:
 1. Thus, $C$ is closed.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 :label: res-ms-int-cl-comp-rel
 
 Let $A \subseteq X$. Then
@@ -508,7 +512,7 @@ The same logic for the converse:
 Together, the equality is established. 
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 If $A \subseteq B$ then $\closure A \subseteq \closure B$.
 ```
 ```{prf:proof}
@@ -528,6 +532,81 @@ Alternate proof.
 1. Then $x$ is a closure point of $B$ too since $A \subseteq B$.
 1. Thus, $x \in \closure B$.
 1. Thus $ \closure A \subseteq \closure B$.
+```
+
+```{prf:theorem}
+:label: res-ms-closure-union-contains
+
+Closure of union contains union of closures.
+```
+```{prf:proof}
+Let $\AA$ be a family of subsets of $X$.
+Let
+
+$$
+K = \bigcup_{A \in \AA} A.
+$$
+
+Let 
+
+$$
+L = \bigcup_{A \in \AA} \closure A.
+$$
+
+1. Let $x \in L$.
+1. Then $x \in \closure A$ for some $A \in \AA$.
+1. Then $x$ is a closure point of some $A \in \AA$.
+1. Then $x$ is a closure point of $K$.
+1. Thus, $x \in \closure K$.
+
+We arrive at the result:
+
+$$
+\bigcup_{A \in \AA} \closure A \subseteq \closure \left ( \bigcup_{A \in \AA} A \right ).
+$$
+```
+
+```{prf:theorem}
+:label: res-ms-closure-finite-union-equal
+
+Closure of a finite union is equal to the union of closures.
+
+$$
+\bigcup_{i=1}^n (\closure A_i) = \closure \left ( \bigcup_{i=1}^n A_i \right).
+$$
+```
+
+```{prf:proof}
+Let $\{ A_1, A_2, \dots, A_n\}$ be a finite family of subsets of $X$.
+
+Let 
+
+$$
+K = \bigcup_{i=1}^n A_i.
+$$
+
+Let 
+
+$$
+L = \bigcup_{i=1}^n (\closure A_i).
+$$
+
+From the previous result, we have established that
+
+$$
+L \subseteq \closure K.
+$$
+
+We now seek to prove that $\closure K \subseteq L$.
+
+1. $\closure A_i$ are closed.
+1. $L$ is a finite union of closed sets.
+1. Hence, $L$ is closed due to {prf:ref}`res-ms-finite-union-closed`.
+1. $A_i \subseteq \closure A_i$.
+1. Thus, $\bigcup A_i \subseteq \bigcup \closure A_i$.
+1. Thus, $K \subseteq L$.
+1. Thus, $\closure K \subseteq L$ 
+   due to {prf:ref}`res-ms-closed-superset-closure-superset`.
 ```
 
 ## Boundary
@@ -552,7 +631,7 @@ denoted by $\boundary A$ or $\aboundary_X A$ is defined as
 the set of all boundary points of $A$.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 $$
 \boundary A = \closure A \setminus \interior A.
 $$
@@ -580,6 +659,26 @@ Let $x \in \closure A \setminus \interior A$.
 1. Thus, $\closure A \setminus \interior A \subseteq \boundary A$.
 ```
 
+```{prf:proposition}
+Boundary of a set is closed.
+```
+
+```{prf:proof}
+By definition: 
+
+$$
+\boundary A = \closure A \setminus \interior A = \closure A \cap (X \setminus \interior A).
+$$
+
+1. $\interior A$ is open. Hence $X \setminus \interior A$ is closed.
+1. $\closure A$ is closed.
+1. Thus, $\boundary A$ is an intersection of two closed sets.
+1. Thus, $\boundary A$ is closed ({prf:ref}`res-ms-intersection-closed-sets`). 
+```
+
+## Frontier
+
+
 ```{prf:definition} Frontier point
 :label: def-ms-frontier-point
 
@@ -595,6 +694,15 @@ denoted by $\frontier A$, is called
 its *frontier*.
 ```
 
+```{note}
+Some authors treat boundary points as frontier points. 
+They treat boundary and frontier as synonymous.
+There is no consistent terminology for the set 
+$A \setminus \interior A$. 
+Our definitions distinguish between boundary points
+and frontier points.
+```
+
 ```{prf:proposition}
 $$
 \frontier A = A \setminus \interior A = \boundary A \cap A.
@@ -607,7 +715,9 @@ a frontier point is a boundary point which belongs to $A$.
 If $x \in A$ is an interior point then it's not a boundary point.
 All other points in $A$ are boundary points. Hence,
 
-$\frontier A = A \setminus \interior A$.
+$$
+\frontier A = A \setminus \interior A.
+$$
 ```
 
 ```{prf:proposition}
@@ -615,6 +725,15 @@ For a closed set, the frontier and boundary are same.
 ```
 ```{prf:proof}
 Every boundary point belongs to the closed set.
+```
+
+```{prf:proposition}
+The frontier of a closed set is closed.
+```
+
+```{prf:proof}
+For a closed set $\frontier A = \boundary A$. The 
+boundary of any set is closed. 
 ```
 
 ## Accumulation
@@ -687,7 +806,9 @@ $$
 ```
 This is a restatement of the previous result.
 
-```{prf:proposition} 
+```{prf:theorem}
+:label: res-ms-closed-set-accumulation-all
+
 A set is closed if and only if it contains all its accumulation points.
 ```
 
@@ -698,3 +819,52 @@ Thus, $A' \subseteq A \implies A = \closure A$.
 $A = \closure A \implies  A =  A \cup A' \implies A' \subseteq A$.
 ```
 
+
+## Interior II
+
+```{prf:theorem}
+Interior of a finite intersection is the intersection of interiors.
+
+$$
+\interior \bigcap_{i=1}^n A_i = \bigcap_{i=1}^n (\interior A_i).
+$$
+```
+
+```{prf:proof}
+Define:
+
+$$
+A = \bigcap_{i=1}^n A_i.
+$$
+
+From {prf:ref}`res-ms-int-cl-comp-rel`:
+
+$$
+\begin{aligned}
+\interior A &= X \setminus \left ( \closure (X \setminus A) \right )\\
+&= X \setminus \left ( \closure \left (
+   X \setminus \left ( \bigcap_{i=1}^n A_i \right)
+   \right) \right )\\
+&= X \setminus \left ( \closure \left (
+     \bigcup_{i=1}^n \left ( X \setminus A_i \right)
+   \right) \right )\\
+&= X \setminus \left (
+     \bigcup_{i=1}^n  ( \closure  (X \setminus A_i) )
+   \right)\\
+&= X \setminus \left (
+     \bigcup_{i=1}^n  (X \setminus (\interior A_i) )
+   \right)\\
+&= X \setminus \left (
+     X \setminus \left ( \bigcap_{i=1}^n  (\interior A_i) \right )
+   \right)\\
+&= \bigcap_{i=1}^n  (\interior A_i).
+\end{aligned}
+$$
+
+In this derivation, we have made use of the facts that:
+
+1. complement of interior equals closure of complement
+   ({prf:ref}`res-ms-int-cl-comp-rel`).
+1. closure of a finite union is a union of the closures
+   ({prf:ref}`res-ms-closure-finite-union-equal`).
+```
