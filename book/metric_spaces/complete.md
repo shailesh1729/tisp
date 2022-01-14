@@ -281,6 +281,22 @@ $$
 The set of integers $\ZZ$ is nowhere dense in $\RR$.
 ```
 
+```{prf:corollary}
+:label: res-ms-open-dense-complement-rare
+
+If a set is open and dense, then its complement is rare (nowhere dense).
+```
+
+```{prf:proof}
+Let $A$ be open and dense. 
+
+1. $B = X \setminus A$ is closed.
+1. Thus, $\closure B = B$. 
+1. Hence, $X \setminus (\closure B) = X \setminus B = A$.
+1. But $A$ is dense, hence $B$ must be nowhere dense
+   due to {prf:ref}`res-ms-complement-closure-rare-dense`.
+```
+
 ```{prf:theorem}
 :label: res-ms-rare-complement-dense
 
@@ -297,6 +313,8 @@ Let $A \subseteq X$ be rare (nowhere dense).
 ```
 
 ```{prf:proposition}
+:label: res-ms-rare-subset-rare
+
 The subset of a rare (nowhere dense) set is rare. 
 ```
 
@@ -314,6 +332,30 @@ empty.
 This in turn implies that $\interior \closure A$ is empty.
 Thus, $A$ is nowhere dense.
 ```
+
+```{prf:proposition}
+:label: res-ms-boundary-closed-rare
+
+The boundary of a closed set is nowhere dense (rare).
+```
+
+```{prf:proof}
+
+Let $A$ be closed. Thus, $A = \closure A$.
+Since $\boundary A = \closure A \setminus \interior A$,
+hence $\boundary A \subseteq A$ for a closed set.
+
+1. Assume $\boundary A$ has a nonempty interior.
+1. Let $x$ be an interior point of $\boundary A$.
+1. Since $x \in \boundary A \subseteq A$, hence $x$ is an interior point of $A$.
+1. But boundary of $A$ doesn't includes its interior points.
+1. Hence, a contradiction.
+1. Thus, $\boundary A$ has an empty interior.
+1. Finally $\interior \closure \boundary A$ = \interior \boundary A = \EmptySet$ 
+   since $\boundary A$ is closed.
+1. Thus, $\boundary A$ is rare.
+```
+
 ## Cantor Set
 
 ```{prf:definition} Cantor set
@@ -638,6 +680,8 @@ Since co-meager sets are complements of meager sets:
 ```
 
 ```{prf:theorem} Baire category theorem
+:label: res-ms-baire-category-theorem
+
 A (nonempty) complete metric space is non-meager in itself.
 ```
 
@@ -788,6 +832,10 @@ for every nonempty open set $U \subseteq X$.
    ({prf:ref}`res-ms-dense-complement-interior-empty`).
 ```
 
+```{prf:corollary}
+If a set in a complete metric space has a non-empty interior, then it
+is not meager.
+```
 
 ```{prf:example}
 
@@ -796,6 +844,11 @@ $\QQ$ in $\RR$
 1. The set $\QQ$ is meager in $\RR$. 
 1. $\RR$ is complete.
 1. The interior of $\QQ$ in $\RR$ is empty.
+1. The closure of $\QQ$ is $\RR$. 
+1. Thus, while a meager set may have an empty interior, 
+   its closure need not have an empty interior.
+   This is different from rare sets whose closure 
+   has an empty interior. 
 
 $\QQ$ in $\QQ$
 
@@ -807,6 +860,24 @@ $\QQ$ in $\QQ$
    $\QQ$ is not a complete metric space.
 ```
 
+```{prf:theorem}
+The set $[0,1]$ is uncountable.
+```
+```{prf:proof}
+We prove this using 
+{prf:ref}`Baire category theorem <res-ms-baire-category-theorem>`.
+
+1. $[0,1]$ is a complete metric space with the standard metric.
+1. Assume $[0,1]$ to be countable.
+1. Then, $[0,1] = \{ x_n \}_{n \in \Nat}$ is an enumeration of $[0,1]$.
+1. The singleton set $\{x_n \}$ is rare in $[0,1]$.
+1. Then $[0,1]$ being a countable union of rare sets would be
+   meager.
+1. But Baire category theorem says that a complete metric space
+   is non-meager.
+1. We have a contradiction.
+1. Thus, $[0,1]$ must be uncountable.
+```
 
 ## Baire Spaces
 
@@ -815,13 +886,140 @@ A metric space is called a *Baire space* if every nonempty
 open set is not a meager set.
 ```
 
+```{prf:theorem}
+Every complete metric space is a Baire space.
+```
+```{prf:proof}
+Let $A$ be a nonempty open subset of a complete metric space $(X,d)$.
+If it was meager, then it would have an empty interior 
+({prf:ref}`res-ms-complete-meager-interior-empty`).
+Thus, it must be non-meager.
+
+Hence $X$ is a Baire space.
+```
 
 
 ```{prf:theorem} Characterization of Baire space
+:label: res-ms-baire-space-characterization
+
 For a metric space $X$, the following statements are equivalent:
 
 1. $X$ is a Baire space.
 1. Every countable intersection of open dense sets is also dense.
 1. If $X = \bigcup_{n=1}^{\infty} F_n$ and each $F_n$ is a closed set, then
    the open set $\bigcup_{n=1}^{\infty} \interior F_n$ is dense.
+```
+
+```{prf:proof}
+
+(1) $\implies$ (2)
+
+1. Assume $X$ is a Baire space.
+1. Let $\{ A_n\}$ be a sequence of open dense sets in $X$.
+1. Let $A  = \bigcap_{n=1}^{\infty}A_n$. We need to show that $A$ is dense.
+1. We will show that $A$ has a nonempty intersection
+   with every nonempty open set of $X$. 
+   Thus, claim that $A$ is dense due to 
+   {prf:ref}`res-ms-dense-open-intersect`.
+1. Let $\OOO \subseteq X$ be an arbitrary nonempty open set.
+1. Assume, for contradiction that $A \cap \OOO = \EmptySet$.
+1. Then, $X = X \setminus \EmptySet = X \setminus (A \cap \OOO) = (X \setminus A) \cup (X \setminus O)$.
+1. Thus, 
+
+   $$
+   \begin{aligned}
+   \OOO &= X \cap \OOO = ((X \setminus A) \cup (X \setminus O)) \cap \OOO 
+   = (X \setminus A) \cap \OOO\\
+   &=  \left (X \setminus \left ( \bigcap_{n=1}^{\infty}A_n \right ) \right) \cap \OOO\\
+   &= \bigcup_{n=1}^{\infty} ((X \setminus A_n) \cap \OOO).
+   \end{aligned}
+   $$
+
+1. Due to {prf:ref}`res-ms-open-dense-complement-rare`, $X \setminus A_n$ are rare.
+1. Due to {prf:ref}`res-ms-rare-subset-rare`, $(X \setminus A_n) \cap \OOO$ are rare.
+1. Thus, $\OOO$ being a countable union of rare sets, is meager.
+1. But, in a Baire space, every nonempty open set is not meager.
+1. We have a contradiction. 
+1. Thus, $A \cap \OOO$ must be nonempty.
+1. Thus, $A$ has a nonempty intersection with every nonempty open set in $A$.
+1. Thus, $A$ is dense in $X$.
+
+
+(2) $\implies$ (3)
+
+1. We assume that every countable intersection of open dense sets is dense.
+1. Let $\{ F_n \}$ be a sequence of closed sets in $X$ satisfying
+   $X = \bigcup_{n=1}^{\infty} F_n$.
+1. Let $A_n = \interior F_n$ and let $A = \bigcup_{i=1}^{\infty} A_n$.
+   By definition, $A$ is open.
+1. Since $F_n$ is closed, hence $E_n = F_n \setminus (\interior F_n)$ 
+   is its boundary. 
+1. Due to {prf:ref}`res-ms-boundary-closed-rare`, $E_n$ 
+   is rare.
+1. Thus, the set $E = \bigcup_{n=1}^{\infty}E_n$ is a meager set.
+1. Since $E_n$ is closed and rare, hence $X \setminus E_n$ is open and dense
+   ({prf:ref}`res-ms-rare-complement-dense`).
+1. By our hypothesis (2), the set 
+  
+   $$
+   X \setminus E = X \setminus \left ( \bigcup_{n=1}^{\infty}E_n \right )
+   =  \bigcap_{n=1}^{\infty} (X \setminus  E_n)
+   $$
+
+   is also a dense set as it is a countable intersection of open dense sets $X \setminus E_n$.
+1. Now, notice that:
+
+   $$
+   \begin{aligned}
+   X \setminus A &= X \setminus \left ( \bigcup_{i=1}^{\infty} A_n \right)\\
+   &= \bigcup_{n=1}^{\infty} F_n \setminus \left ( \bigcup_{i=1}^{\infty} (\interior F_n) \right)\\
+   &\subseteq \bigcup_{n=1}^{\infty} [F_n \setminus (\interior F_n)]\\
+   &= \bigcup_{n=1}^{\infty} E_n\\
+   &= E.
+   \end{aligned}
+   $$
+
+ 1. And $X \setminus A \subseteq E$ implies $X \setminus E \subseteq A$.
+ 1. Since $X \setminus E$ is dense, hence $A$ is also dense.
+
+(3) $\implies$ (1). We need to show that every nonempty open set is non-meager.
+
+1. Let $V$ be a nonempty open set. Assume $V$ to be meager.
+1. Then $V$ is a countable union of rare sets:
+
+   $$
+   V = \bigcup_{n=1}^{\infty} A_n
+   $$
+   where $A_n$ are rare, thus $\interior \closure A_n = \EmptySet$.
+
+1. We can write $X$ as:
+
+   $$
+   \begin{aligned}
+   X &= (X \setminus V) \cup V\\ 
+     &= (X \setminus V) \cup A_1 \cup A_2 \cup \dots\\
+     &= (X \setminus V) \cup (\closure A_1) \cup (\closure A_2) \cup \dots.
+   \end{aligned}
+   $$
+   The last expression is correct since $\closure A_n \subseteq X$.
+
+1. In this form, $X$ is a countable union of closed sets.
+1. By our hypothesis (3), the open set:
+
+   $$
+   (\interior (X \setminus V)) \cup (\interior (\closure A_1))
+   \cup (\interior (\closure A_2)) \cup \dots
+   = \interior (X \setminus V)
+   $$
+   is dense in $X$. 
+   Here, we used the fact that $A_n$ are rare.
+1. Since $\interior (X \setminus V) \subseteq X \setminus V$, hence
+   $X \setminus V$ is also dense in $X$.
+1. In particular $V \cap (X \setminus V) \neq \EmptySet$ since
+   a dense set has a nonempty intersection with every nonempty 
+   open set ({prf:ref}`res-ms-dense-open-intersect`).
+1. But this is impossible since $V \cap (X \setminus V) = \EmptySet$. 
+1. Thus, $V$ cannot be not a meager set.
+1. We have established that any nonempty open $V$ is not a meager set. 
+1. Hence, $X$ is a Baire space. 
 ```
