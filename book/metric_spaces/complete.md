@@ -1,4 +1,6 @@
 # Completeness
+The material in this section is primarily based on
+{cite}`aliprantis1998principles,gopal2020introduction`.
 
 Let $(X,d)$ and $(Y, \rho)$ be metric spaces.
 
@@ -582,7 +584,7 @@ $$
 ```
 
 
-## Baire Category Theorem
+## Meager Sets
 
 
 ```{prf:definition} Meager set
@@ -679,6 +681,9 @@ Since co-meager sets are complements of meager sets:
 1. Countable intersection of co-meager sets is co-meager.
 ```
 
+## Baire Category Theorem
+
+
 ```{prf:theorem} Baire category theorem
 :label: res-ms-baire-category-theorem
 
@@ -754,6 +759,20 @@ that a dense set has a nonempty intersection with every nonempty open set.
 1. Since $A_n \cap B(x_n, \epsilon_n) = \EmptySet$, hence $x \notin A_n$ for all $n$.
 1. But then $x \notin X$ since $X = \bigcup_n A_n$. A contradiction.
 1. Hence, $X$ must be non-meager.
+```
+
+```{prf:theorem}
+If $(X, d)$ is complete and $X = \bigcup_{n=1}^{\infty} A_n$,
+then at least one $A_n$ is non-rare; i.e.,
+$\interior \closure A_n \neq \EmptySet$ for some $n$.
+```
+
+```{prf:proof}
+If every $A_n$ were rare, then $X$ would be a meager set.
+But as per {prf:ref}`Baire category theorem <res-ms-baire-category-theorem>`,
+$X$ must be non-meager since it is complete. 
+
+Hence, at least one $A_n$ would be non-rare.
 ```
 
 ```{prf:proposition}
@@ -1023,3 +1042,4 @@ For a metric space $X$, the following statements are equivalent:
 1. We have established that any nonempty open $V$ is not a meager set. 
 1. Hence, $X$ is a Baire space. 
 ```
+
