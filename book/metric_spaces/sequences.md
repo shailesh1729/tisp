@@ -154,6 +154,84 @@ Assume that every convergent sequence of $A$ converges in $A$.
 1. Hence, $A$ is closed.
 ```
 
+```{prf:theorem}
+:label: res-ms-sequence-distance-limit
+
+If $\lim x_n = x $ and $\lim y_n = y$, then
+
+$$
+\lim_{n \to \infty} d(x_n, y_n) = d(x, y).
+$$
+```
+
+```{prf:proof}
+
+Recall from the triangle inequality:
+
+$$
+| d(x,z) - d(z, y) | \leq d(x,y).
+$$
+
+Now
+
+$$
+\begin{aligned}
+| d(x_n, y_n) - d(x, y) | &\leq | d(x_n, y_n) - d(x, y_n) | + | d(x, y_n) - d (x, y) |\\
+&\leq d (x_n, x) +  d(y_n, y).
+\end{aligned}
+$$
+
+Choose $n_0$ such that for all $n > n_0$,  
+
+$$
+d(x_n, x) < \frac{\epsilon}{2} \text { and } d(y_n, y) <  \frac{\epsilon}{2}.
+$$ 
+
+Then  $| d(x_n, y_n) - d(x, y) | <  \epsilon$.  
+
+Thus, for every $\epsilon > 0$, there exists $n_0$ such that for all $n > n_0$,
+$| d(x_n, y_n) - d(x, y) | <  \epsilon$ holds. Thus,
+
+$$
+\lim_{n \to \infty} d(x_n, y_n) = d(x, y).
+$$
+```
+
+## Subsequences
+
+````{prf:theorem} Subsequence convergence
+:label: res-ms-subsequence-convergence
+
+Subsequences of a convergent sequence converge to the same limit 
+as the original sequence.
+If $\lim_{n \to \infty} x_n = x$, then $\lim_{n \to \infty} y_n = x$ for every
+{prf:ref}`subsequence <def-st-sub-sequence>` $\{ y_n \}$ of $\{ x_n \}$.
+
+Conversely, if two different subsequences of $\{ x_n \}$ converge to different limits,
+then the sequence  $\{ x_n \}$  does not converge.
+````
+This result is a generalization of {prf:ref}`res-subsequence-convergence`
+for metric spaces.
+
+````{prf:proof}
+
+Let $\{x_n\}$ be a convergent sequence of $X$ and
+Let $\{ y_n\}$ be a subsequence of $\{ x_n\}$. 
+
+1. Since $\lim_{n \to \infty} x_n = x$, for every $\epsilon > 0$, 
+   there exists $n_0 \in \Nat$ such that
+   $d (x, x_n) < \epsilon \Forall n > n_0$.
+1. Since $\{ y_n \}$ is a subsequence, there exists 
+   a strictly increasing sequence
+   $\{ k_n \}$ of natural numbers (i.e. $1 \leq k_1 < k_2  < k_3 < \ldots)$
+   such that $y_n = x_{k_n}$ holds for each $n$. 
+1. Thus, there exists a $k_0 > 0$ such that
+   $k_n \geq n_0 \Forall n > k_0$. Then,
+1. $d(x,y_n) < \epsilon \Forall n > k_0$.
+1. Thus, $\{ y_n \}$ converges to $x$ too.
+````
+
+
 ## Dense Sets
 
 ```{prf:definition} Dense subsets
