@@ -145,7 +145,8 @@ Towards this, introduce a zero function $z: X \to \RR$ as $z(x) = 0$.
 
 ## Closed Subsets
 
-```{prf:theorem} 
+```{prf:theorem}
+:label: res-ms-closed-subset-complete 
 
 Let $(X,d)$ be a complete metric space. Then a subset
 $A$ of $X$ is closed if and only if $(A, d)$ is a complete
@@ -1043,3 +1044,263 @@ For a metric space $X$, the following statements are equivalent:
 1. Hence, $X$ is a Baire space. 
 ```
 
+## Completion
+
+```{prf:theorem}
+:label: res-ms-uniform-continuous-complete-extension 
+
+Let $(X, d)$  be a metric space and let $(Y, \rho)$ be
+a complete metric space. 
+If $f : X \to Y$ with $A = \dom f$ is a 
+{prf:ref}`uniformly continuous <def-ms-uniform-continuity>`
+function on $A$ then $f$ has a unique uniformly continuous 
+{prf:ref}`extension <def-st-function-extension>` 
+to the {prf:ref}`closure <def-ms-closure>` of $A$.
+```
+
+```{prf:proof}
+If a sequence $\{x_n\}$ of $A$ converges to a closure point $x = \lim x_n$,
+then the sequence $\{f(x_n)\}$ of $Y$ converges to some limit $y = \lim f(x_n)$.
+
+1. Let $x \in \closure A$.
+1. There exists a sequence $\{ x_n \}$ of $A$ such that $\lim x_n = x$.
+1. Consider the sequence $\{ f (x_n) \}$ of $Y$.
+1. Choose $\epsilon > 0$.
+1. Since $f$ is uniformly continuous on $A$, hence 
+   there exists $\delta > 0$ such that
+   $\rho(f(x), f(y)) < \epsilon$ whenever $d(x,y)< \delta$.
+1. Since $\{ x_n \}$ is convergent and hence Cauchy, we can pick
+   $n_0$ such that $d(x_m, x_n) < \delta$ for all $m, n > n_0$.
+1. Thus, $\rho(f(x_m), f(x_n)) < \epsilon$ for all $m, n > n_0$.
+1. Thus, $\{ f(x_n) \}$ is a Cauchy sequence of $Y$.
+1. Since $Y$ is complete, hence every sequence converges.
+1. Thus, there is a limit $y = \lim f(x_n)$.
+
+For any sequence $\{x_n\}$ of $A$ converging to $x = \lim x_n$, the
+corresponding sequence  $\{f(x_n)\}$ of $Y$  has the same limit.
+
+
+1. Assume that $x = \lim x_n = \lim y_n$ where $\{x_n \}$ and $\{ y_n\}$ are
+   two different sequences converging to $x$.
+1. Let $u = \lim f(x_n)$ and $v = \lim f(y_n)$. We claim that $u = v$.
+1. Consider the sequence $\{ z_n \}$ defined as $z_{2n} = x_n$ and 
+   $z_{2n-1} = y_n$. 
+1. It is easy to show that $\{z_n \}$ converges to $x$.
+1. Then, $\lim f(z_n)$ exists in $Y$. 
+1. If a sequence converges, then all its subsequences converge to
+   the same limit.
+1. Thus, $\lim f(x_n) = \lim f(y_n) = \lim f(z_n)$.
+1. Thus, $u = v$.
+1. Therefore $\lim f(x_n)$ is independent of the choice
+   of sequence $\{ x_n \}$ as long as $x = \lim x_n$.
+
+
+We define a function $f^* : X \to Y$ with
+$\dom g = \closure A$ given the function $f : X \to Y$ 
+with $\dom f = A$ as:
+
+$$
+f^*(x) = \lim f(x_n) 
+$$
+where $\{x_n\}$ is any sequence converging to $x \in \closure A$;
+i.e., $x = \lim x_n$.
+
+$f^*$ is well defined since $\lim f(x_n)$ is independent 
+of the choice of the sequence $\{ x_n \}$  converging to $x \in \closure A$. 
+
+We next establish that $f^*$ is uniformly continuous. 
+
+1. Let $\epsilon > 0$.
+1. We can choose $\delta > 0$ such that $\rho(f(x), f(y)) < \epsilon$
+   whenever $d(x,y) < \delta$ for any $x,y \in A$.
+1. Now let, $x,y \in \closure A$ satisfying $d(x,y) < \delta$. 
+1. Let $\{x_n\}$ and $\{y_n\}$ be convergent sequences of $A$
+   with $\lim x_n = x$ and $\lim y_n = y$.
+1. Then $\lim d(x_n, y_n) = d(x, y)$ due to 
+   {prf:ref}`res-ms-sequence-distance-limit`.
+1. Since $d(x,y) < \delta$, 
+   we can pick $n_0$ such that $d(x_n, y_n) < \delta$
+   for all $n > n_0$.
+1. But since $x_n, y_n \in A$ and $f$ is 
+   uniformly continuous, we have,
+   $\rho(f(x_n), f(y_n)) < \epsilon$ for all $n > n_0$.
+1. Since $\{f(x_n)\}$ and $\{f(y_n)\}$ are convergent
+   sequences of $Y$, hence
+   $\lim \rho(f(x_n), f(y_n)) = \rho(f(x), f(y))$
+   again due to {prf:ref}`res-ms-sequence-distance-limit`.
+1. Thus, $\rho(f(x), f(y)) \leq \epsilon$.
+1. Thus, $f^*$ is uniformly continuous on $\closure A$.
+```
+
+
+```{prf:definition} Completion of a metric space
+A complete metric space $(Y, \rho)$ is called
+a *completion* of a metric space $(X, d)$ if there
+exists an {prf:ref}`isometry <def-ms-isometry>` 
+$f: (X, d) \to (Y, \rho)$ with $\dom f = X$
+such that $f(X)$ is 
+{prf:ref}`dense <def-ms-dense-set>` in $Y$.
+```
+
+If we think of $X$ and $f(X)$ as identical
+(up to an isometry), then we can think of
+$X$ as a subset of $Y$.
+
+
+```{prf:theorem}
+:label: res-ms-completions-isometric
+
+Any two completions of a metric space are
+{prf:ref}`isometric <def-ms-isometric-spaces>`.
+```
+
+```{prf:proof}
+Let $(Y_1, \rho_1)$ and $(Y_2, \rho_2)$ be
+two different completions of $(X,d)$.
+
+1. Then there are isometries $f : X \to Y_1$ 
+   and $g : X \to Y_2$ with $\dom f = \dom g = X$.
+1. $g$ is an isometry with $\dom g = X$ and $\range g = g(X)$.
+1. $f^{-1}$ is an isometry with $\dom f^{-1} = f(X)$
+   and $\range f^{-1} = X$.
+1. Then, $h = g \circ f^{-1}$ is an isometry 
+   from $Y_1$ to $Y_2$ with 
+   $\dom h = f(X)$ and  $\range h = g(X)$.
+1. $f(X)$ is dense in $Y_1$. Hence $\closure f(X) = Y_1$.
+1. $h$ is uniformly continuous (since it is an isometry).
+1. $Y_2$ is complete.
+1. Then, 
+   due to {prf:ref}`res-ms-uniform-continuous-complete-extension`,
+   there exists a uniformly continuous extension $h^*$
+   of $h$ to all of $Y_1$.
+
+We have established that $h^*$ is uniformly continuous. 
+
+We next show that $h^*$ is an isometry.
+
+1. Let $u,v \in Y_1$ and $z = h^*(u)$ and $w = h^*(v)$.
+1. There is a sequence $\{ x_n \}$ of $X$ such that $\lim f(x_n) = u$.
+1. There is a sequence $\{ y_n \}$ of $X$ such that $\lim f(y_n) = v$.
+1. Let $u_n = f(x_n)$ and $v_n = g(y_n)$.
+1. Let $z_n = g(u_n)$ and $w_n = g(y_n)$.
+1. We have $\lim z_n = z$ and $\lim w_n = w$.
+1. Since $f$ is an isometry, hence $d(x_n, y_n) = \rho_1(u_n, v_n)$.
+1. Since $g$ is an isometry, hence $d(x_n, y_n) = \rho_2(z_n, w_n)$.
+1. Thus, $\rho_1(u_n, v_n) =  \rho_2(z_n, w_n)$.
+1. Taking limits, we get $\rho_1(u, v) = \rho_2(z, w)$.
+1. Thus, $h^*$ is an isometry. 
+1. Since it is an isometry, hence it is injective. 
+
+We next show that $h^*$ is surjective (onto).
+
+1. Let $v \in Y_2$.
+1. There exists a sequence $\{ x_n \}$ such that $\lim g(x_n) = v$. 
+1. There exists $u \in Y_1$ such that $\lim f(x_n) = u$.
+1. Let $f(x_n) = u_n$ and $g(x_n) = v_n$. 
+1. Then, $h(u_n) = (g \circ f^{-1})(u_n) = g(x_n) = v_n$. 
+1. Thus, $h^*(u_n) = v_n$.
+1. Then, since $h^*$ is uniformly continuous,
+   $\lim u_n = u$ \implies $\lim h^*(u_n) = \lim v_n = v = h^*(u)$.
+1. Thus, for every $v \in Y_2$, there exists $u \in Y_1$ such that
+   $h^*(u) = v$.
+1. Thus, $h^*(u)$ is surjective.
+
+
+Together since $h^*$ is an isometric which is onto,
+hence $Y_1$ and $Y_2$ are isometric.
+```
+
+```{prf:remark}
+:label: res-ms-mapping-closure-completion
+
+If $f : (X, d) \to (Y, \rho)$ is an isometry with $\dom f = X$ and
+$Y$ is a complete metric space, then
+$\closure f(X)$ is a completion of $X$.
+```
+
+```{prf:proof}
+Let Z = $\closure f(X)$. Then $Z$ is a closed subset of $Y$.
+By {prf:ref}`res-ms-closed-subset-complete`, $(Z, \rho)$
+is a complete subspace.
+
+Now define $g : (X, d) \to (Z, \rho)$ as:
+
+$$
+g(x) = f(x).
+$$
+
+Then, $g$ is an isometry and $g(X)$ is dense in $Z$.
+Thus, $Z$ is a completion of $X$.
+```
+
+```{prf:theorem}
+Every metric space has a unique (up to an isometry) completion.
+```
+
+```{prf:proof}
+We prove this theorem by constructing a metric space which is
+a completion of a given metric space. 
+
+1. Let $(X,d)$ be a metric space.
+1. Fix an element $a \in X$.
+1. Now, for every $x \in X$, we introduce a function
+   $f_x : X \to \RR$ defined as:
+
+   $$
+   f_x(y) = d(x,y) - d(y,a) \Forall y \in X.
+   $$
+
+   Note that $\dom f_x = X$.
+
+1. From the triangular inequality we have:
+
+   $$
+   |f_x(y)| = |d(x,y) - d(y,a) | \leq d(x,a) \Forall y \in X.
+   $$
+1. Thus, for a given $x$ and fixed $a$, the parametrized 
+   function $f_x$ is bounded by $d(x,a)$.
+1. Thus, $f_x \in B(X)$, the space of bounded functions from $X$ to $\RR$.
+1. We established in {prf:ref}`ex-ms-bounded-functions-metric-space` that
+   the metric space $B(X)$ is a complete metric space.
+
+We next show that the mapping $f: X \to B(X)$ given by 
+$x \mapsto f_x$ is an isometry.
+Recall that the distance between two functions $g, h \in B(X)$
+is given by:
+
+$$
+D(g, h) = \sup\{ | g(x) - h(x) | \ST x \in X\}.
+$$
+
+Now for some $x,z \in X$ with corresponding function
+$f_x , f_z \in B(X)$, for any $y \in X$, we have:
+
+$$
+\begin{aligned}
+|f_x(y) - f_z(y)| &= | d(x, y) - d(y, a) - [d(z,y) - d(y,a)] |\\
+&= |d(x,y) - d(z,y) | \leq d(x, z).
+\end{aligned}
+$$
+
+At the same time:
+
+$$
+|f_x(z) - f_z(z)| = | d(x, z) - d(z, z)| = d(x, z).
+$$
+
+Thus, 
+
+$$
+D(f_x, f_z) = \sup\{ | f_x(y) - f_z(y) | \ST y \in X\} = d(x, z).
+$$
+
+Thus, $f$ is an isometry.
+Since $(B(X), D)$ is a complete metric space, hence
+as per {prf:ref}`res-ms-mapping-closure-completion`,
+$(\closure f(X), D)$ is a completion of $X$.
+
+We have already established in
+{prf:ref}`res-ms-completions-isometric` that 
+any two completions of $X$ are isometric to each other.
+Thus, the completion is unique up to an isometry.
+```
