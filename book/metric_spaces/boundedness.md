@@ -23,7 +23,7 @@ $$
 ```
 
 ```{prf:remark}
-$(X, d)$ is bounded if and only if $\dim X$ is finite. 
+$(X, d)$ is bounded if and only if $\diam X$ is finite. 
 ```
 
 ```{prf:example}
