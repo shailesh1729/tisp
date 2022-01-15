@@ -515,7 +515,41 @@ and $g$ can serve as a bijection.
 ````
 
 
+## Restriction and Extension
 
 
+```{prf:definition} Restriction of a function
+:label: def-st-function-restriction
 
+Let $f : A \to B$ be a function. Let $C$ be a subset of $A$.
+Then, the *restriction* of $f$ to $C$ is the function
+$f|_C : A \to B$ given by
+
+$$
+f|_C (x) = f(x) \Forall x \in C \cap \dom f.
+$$
+
+```
+
+```{div}
+In other words, the domain of $f$ gets restricted to 
+$C \cap \dom f$ and $f$ is no longer defined for 
+any $x \in \dom f \setminus C$.
+```
+
+```{prf:remark}
+For total functions, the convention is to change the
+signature from $f : A \to B$ to $f|_C : C \to B$.
+This way, the restriction $f|_C$ is also a total function.
+```
+
+
+```{prf:definition} Extension of a function
+:label: def-st-function-extension
+
+An *extension* of a function $f$ is any function $g$ such that
+$f$ is a restriction of $g$.
+```
+
+If $g$ is an extension of $f$ then $\dom f \subset \dom g$.
 
