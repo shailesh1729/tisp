@@ -1,34 +1,135 @@
 # Continuity
 The material in this section is primarily based on
-{cite}`aliprantis1998principles`.
+{cite}`aliprantis1998principles,gopal2020introduction`.
 
 
 Let $(X,d)$ and $(Y, \rho)$ be metric spaces.
 
 ## Continuous Functions
 
-We restrict our attention to 
-{prf:ref}`total <def-st-total-function>` functions.
+Recall that for a function $f: (X,d) \to (Y, \rho)$:
+
+1. If $f$ is a {prf:ref}`partial <def-st-function>`
+   function, then $\dom f \subseteq X$.
+1. If $f$ is a {prf:ref}`total <def-st-total-function>`
+   function, then $\dom f = X$. 
+
+We will primarily focus on total functions while
+some definition and results are valid for partial functions too.
 
 ```{prf:definition} Continuous function
 :label: def-ms-continuous-function
 
-A (total) function $f: X \to Y$ between the two metric spaces
-is said to be *continuous at a point* $a \in X$ if
-for every $\epsilon > 0$, there exists $\delta > 0$
-(depending on $\epsilon$) such that
+A function $f: X \to Y$ between the two metric spaces
+is said to be *continuous at a point* $a \in \dom f$ 
+if for every $\epsilon > 0$, there exists $\delta > 0$
+(depending on $\epsilon$ and $a$) such that
+for all $x \in \dom f$
 
 $$
-\rho (f(x), f(a)) < \epsilon \text{ whenever } d(x, a) < \delta.
+d(x, a) < \delta \implies \rho (f(x), f(a)) < \epsilon
 $$
+holds true.
 
-$f$ is said to be *continuous* on $X$ if $f$ is continuous
-at every point of $X$.
+$f$ is said to be *continuous* on $A \subseteq \dom f$ if $f$ is continuous
+at every point of $A$.
 ```
 
 In other words, there is an open ball $B_X(a, \delta)$ 
 around $a$ 
 which maps within the open ball $B_Y(f(a), \epsilon)$ around $f(a)$.
+
+The "continuity at a point" definition above is valid for 
+both partial and total functions.
+
+1. If $a$ is an isolated point in $\dom f$, then $f$ is continuous
+   at $a$. 
+1. If $a$ is an accumulation point of $\dom f$ then, 
+   $\lim_{x \to a} f(x) = f(a)$ must hold true for $f$ to be
+   continuous at $x=a$. 
+
+```{prf:remark}
+If $f$ is continuous on $A$ then $A \subseteq \dom f$.
+If $f$ is continuous on $X$ then $\dom f = X$.
+```
+
+```{note}
+If $f : (X,d) \to (Y, \rho)$ is not defined for all of $X$, then
+we can consider the restriction of $f$ to $A  =\dom f$
+and work with $\tilde{f}: (A,d) \to (Y, \rho)$ given by 
+$\tilde{f}(x) = f(x) \Forall x \in A$
+where $(A,d)$ is a metric subspace of $(X, d)$. 
+Then $f'$ is a total function.
+```
+
+```{prf:example} Distance to a set
+
+The distance to a set $A \subseteq X$ from any point $x\in X$ 
+is defined as:
+
+$$
+d(x, A) = \inf \{ d(x,a) \Forall x \in A \}.
+$$
+
+If we fix $A$, then we can define a function 
+$d_A : X \to \RR$ as:
+
+$$
+d_A(x) = d(x, A).
+$$
+The function is well defined since the set 
+$\{ d(x,a) \Forall x \in A \}$ is bounded from below
+and thus has a unique greatest lower bound.
+
+We now show that $d_A$ is continuous.
+
+We first establish some basic inequalities.
+For any $x,y \in X$ and $a \in A$ we have:
+
+$$
+d(a,x) \leq d(a,y) + d(x,y)
+$$
+
+Thus, 
+
+$$
+d(a, y) \geq d(a, x) - d(x,y).
+$$
+Since $d(a,x) \geq d_A(x)$, we get:
+
+$$
+d(a,y) \geq d_A(x) - d(x,y).
+$$
+
+Since this inequality is valid for every $a \in A$, taking the
+infimum on the L.H.S, we get:
+
+$$
+d_A(y) \geq d_A(x) - d(x,y) \iff d_A(x) - d_A(y) \leq d(x,y).
+$$
+
+Interchanging $x$ with $y$, we get:
+
+$$
+d_A(y) - d_A(x) \leq d(y, x) = d(x,y).
+$$
+
+Combining the two, we get:
+
+$$
+|d_A(x)  - d_A(y)| \leq d(x,y).
+$$
+
+Now for any $\epsilon > 0$, choosing $\delta = \epsilon$, we get that
+
+$$
+d (x, y) < \delta \implies |d_A(x)  - d_A(y)| < \delta = \epsilon.
+$$
+
+Hence, $d_A$ is continuous on $X$.
+```
+
+## Continuity Characterization
 
 ```{prf:theorem} Characterization of continuous functions
 :label: res-ms-continuous-function-characterization
@@ -134,7 +235,7 @@ at any $x \in X$.
 1. Since $a$ is arbitrary, hence $f$ is continuous on $X$.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 {prf:ref}`Composition <def-st-total-function-composition>` 
 of continuous (total) functions is continuous. 
 ```
@@ -162,6 +263,20 @@ Assume that $\lim x_n = x$. Let $y = f(x)$ and $z = g(y)$.
    again due to {prf:ref}`res-ms-continuous-function-characterization`.
 ```
 
+## Discontinuity
+
+```{prf:definition} Discontinuity
+:label: def-ms-point-discontinuity
+
+A function $f: X \to Y$ between the two metric spaces
+is said to be *discontinuous at a point* $a \in \dom f$ 
+if there exists $\epsilon > 0$, such that
+for every $\delta > 0$
+there exists $x \in \dom f$
+with $d(x, a) < \delta$ and $\rho (f(x), f(a)) \geq \epsilon$. 
+```
+
+
 ## Homeomorphism
 
 ```{prf:definition} Homeomorphism
@@ -178,7 +293,6 @@ Procedure to show that two metric spaces are homeomorphic:
 1. Pick a suitable bijective function $f : X \to Y$.
 1. Show that $f$ is continuous.
 1. Show that $f^{-1}$ is continuous.
-
 
 ## Equivalent Metrics
 
@@ -204,7 +318,7 @@ Procedure to show that two metrics are equivalent.
 * Show that $\lim d_1(x_n, x) = 0$.
 
 
-```{prf:proposition}
+```{prf:theorem}
 :label: res-ms-equivalent-metric-homeomorphic-identity
 
 Two metrics $d_1$ and $d_2$ on $X$ are equivalent if 
@@ -247,17 +361,96 @@ Assume that $I$ is a homeomorphism.
 ## Uniform Continuity
 
 ```{prf:definition} Uniform continuity
+:label: def-ms-uniform-continuity
 
 A function $f: (X, d) \to (Y, \rho)$ between two
-metric spaces is called *uniformly continuous*
+metric spaces is called *uniformly continuous* on $A \subseteq \dom f$
 if for every $\epsilon > 0$, there exists some $\delta > 0$
 (depending on $\epsilon$) such that
 
 $$
-\rho(f(x), f(y)) < \epsilon \text{ whenever } d(x, y) < \delta.
+\rho(f(x), f(y)) < \epsilon \text{ whenever } d(x, y) < \delta \text{ and } x, y \in A.
 $$
 ```
 
 ```{prf:remark}
-Every uniformly continuous function is continuous.
+If $f$ is uniformly continuous on $A \subseteq \dom f$, then $f$ is continuous on $A$.
 ```
+
+## Isometry
+
+```{prf:definition}
+:label: def-ms-isometry
+
+A function $f : (X, d) \to (Y, \rho)$ is an isometry if 
+for all $x, y \in \dom f$,  we have:
+
+$$
+\rho(f(x), f(y)) = d(x, y).
+$$
+```
+
+```{prf:theorem}
+:label: res-ms-isometry-one-one
+Any isometry is injective.
+```
+```{prf:proof}
+
+We proceed as follows:
+
+1. Let $f$ to be an isometry from $(X, d)$ to $(Y, \rho)$.
+1. Let $x_1, x_2 \in \dom f$ with $x_1 \neq x_2$.
+1. Then, $d(x_1, x_2) > 0$ since $d$ is a metric. 
+1. Since $f$ is an isometry, hence
+   $\rho(f(x_1), f(x_2)) = d(x_1, x_2) > 0$.
+1. Thus, $f(x_1) \neq f(x_2)$ since $\rho$ is a metric.
+1. Thus, $x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$.
+1. Thus, $f$ is injective.
+```
+
+```{prf:theorem}
+:label: res-ms-isometry-continuous
+
+Any isometry between two metric spaces is uniformly continuous.
+```
+
+```{prf:proof}
+Let $f$ be an isometry. Let $\epsilon > 0$. 
+Choose $\delta = \epsilon$. Then, for any $x,y \in \dom f$,
+
+$$
+d(x,y) < \delta \implies \rho(f(x), f(y)) < \delta = \epsilon
+$$
+since $f$ is an isometry.
+Thus, $f$ is uniformly continuous on $\dom f$.
+```
+
+```{prf:definition}
+:label: def-ms-isometric-spaces
+
+Two metric spaces $(X, d)$ and $(Y, \rho)$ are called
+*isometric* if there exists an isometry 
+$f : X \to Y$ such that $\dom f = X$ and $\range f = Y$.
+
+Such an isometry is bijective.
+```
+
+
+```{prf:theorem}
+:label: res-ms-isometric-homeomorphic
+
+Two metric spaces which are isometric are necessarily
+homeomorphic. 
+```
+
+```{prf:proof}
+Let $(X,d)$ and $(Y, \rho)$ be isometric.
+Then, there exists an isometry $f$ from $X$ to $Y$
+which is bijective. 
+Since $f$ is an isometry, it is continuous. 
+It is easy to see that $f^{-1}$ is also 
+an isometry and is continuous. 
+Thus, the metric spaces are homeomorphic.
+```
+
+
