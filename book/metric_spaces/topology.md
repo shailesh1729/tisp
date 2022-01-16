@@ -868,3 +868,71 @@ In this derivation, we have made use of the facts that:
 1. closure of a finite union is a union of the closures
    ({prf:ref}`res-ms-closure-finite-union-equal`).
 ```
+
+
+## Dense Sets
+
+```{prf:definition} Dense subsets
+:label: def-ms-dense-set
+
+A subset $A$ of $X$ is called *dense* in $X$ if 
+$\closure A = X$.
+```
+
+
+```{prf:theorem}
+:label: res-ms-dense-open-intersect
+
+A set $A$ is dense if and only if $O \cap A \neq \EmptySet$ holds
+for every nonempty open set $O$ in $X$. 
+```
+
+```{prf:proof}
+
+Assume $A$ is dense and $O$ is open and non-empty.
+
+1. Let $x \in O$.
+1. There exists $r > 0$ such that $B(x, r) \subseteq O$.
+1. Since $x \in \closure A$, $B(x, r) \cap A \neq \EmptySet$.
+1. Thus, $O \cap A$ is not empty. 
+
+Assume $A \cap O \neq \EmptySet$ for every open and nonempty $O$.
+
+1. Let $x \in X$. If $x \in A$ then $x$ is a closure point of $A$.
+   So assume $x \in X \setminus A$.
+1. Let $r> 0$ and consider the open ball $B(x,r)$.
+1. Since $B(x,r)$ is nonempty and open, hence $B(x, r) \cap A \neq \EmptySet$.
+1. Thus, $x$ is a closure point of $A$.
+1. Thus, $A$ is dense in $X$.
+```
+
+
+```{prf:theorem}
+:label: res-ms-dense-complement-interior-empty
+
+Complement of a dense set has an empty interior.
+```
+```{prf:proof}
+Recall from {prf:ref}`res-ms-int-cl-comp-rel` that:
+
+$$
+X \setminus (\interior A) = \closure (X \setminus A).
+$$
+
+Now, let $B$ be dense and $A = X \setminus B$. 
+Then, 
+
+$$
+\begin{aligned}
+& X \setminus (\interior A) = \closure (X \setminus A)\\
+& \iff X \setminus (\interior A) = \closure B\\
+& \iff X \setminus (\interior A) = X \\
+& \iff \interior A = X \setminus X = \EmptySet.
+\end{aligned}
+$$
+Thus, $A$ has an empty interior.
+```
+
+Dense sets can be characterized in terms
+of convergent sequences. This is
+discussed in {prf:ref}`res-ms-dense-sequence-limit`.
