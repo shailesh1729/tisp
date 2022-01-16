@@ -1,5 +1,6 @@
 # Introduction
 
+## Distance Functions
 
 ```{prf:definition} Distance function/Metric
 :label: def-ms-distance-function
@@ -15,14 +16,8 @@ following properties for any elements $x,y,z \in X$:
 1. Triangle inequality: $d(x,y) \leq d(x, z) + d(z, y)$
 ```
 
-```{prf:definition} Metric space
-:label: def-ms-metric-space
-
-Let $d$ be a distance function on a set $X$. Then 
-we say that $(X, d)$ is a *metric space*. The 
-elements of $X$ are called points.
-```
-
+* It is customary to call the elements of a set $X$ 
+  associated with a distance function as points.
 * Distance functions are real valued.
 * Distance functions map an ordered pair of points in $X$ to
   a real number.
@@ -38,6 +33,17 @@ elements of $X$ are called points.
 * Triangle inequality says that the direct distance between two 
   points can never be longer than the distance covered through
   an intermediate point. 
+
+## Metric Spaces
+
+```{prf:definition} Metric space
+:label: def-ms-metric-space
+
+Let $d$ be a distance function on a set $X$. Then 
+we say that $(X, d)$ is a *metric space*. The 
+elements of $X$ are called points.
+```
+
 * In general, a set $X$ can be associated with different metrics
   (distance functions) say $d_1$ and $d_2$. In that case, the 
   corresponding metric spaces $(X, d_1)$ and $(X, d_2)$ are different.
@@ -60,30 +66,7 @@ in the type signature of the function (i.e. the codomain specification)
 and doesn't need to be stated explicitly. 
 ```
 
-
-```{prf:example} $\RR^n$ p-distance
-For some $1 \leq p \lt \infty$, the function $d_p : \RR^n \times \RR^n \to \RR$:
-
-$$
-d_p (x, y) \triangleq \left ( \sum_{i=1}^n |x_i - y_i|^p \right )^{\frac{1}{p}}
-$$
-
-is a metric and $(\RR^n, d_p)$ is a metric space.
-```
-
-
-```{prf:example} $\RR^n$ Euclidean space
-The $d_2$ metric over $\RR^n$:
-
-$$
-d_2 (x, y) \triangleq \left ( \sum_{i=1}^n |x_i - y_i|^2 \right )^{\frac{1}{2}}
-$$
-is known as the *Euclidean distance* and 
-the metric space $(\RR^n, d_2)$ is known as the 
-*n-dimensional Euclidean (metric) space*.
-
-The standard metric for $\RR^n$ is the Euclidean metric.
-```
+## Properties of Metrics
 
 ```{prf:proposition} Triangle inequality alternate form
 Let $(X, d)$ be a metric space. Let $x,y,z \in X$.
@@ -113,7 +96,60 @@ $$
 $$
 ```
 
+## Metric Subspaces
+
+```{prf:definition} Metric subspace
+Let $(X, d)$ be a metric space. Let $Y \subset X$ be a nonempty
+subset of $X$. Then, $Y$ can be viewed as a metric space
+in its own right with the distance function $d$
+{prf:ref}`restricted <def-st-function-restriction>`
+to $Y \times Y$, denoted as $d|_{Y \times Y}$. We then say
+that $(Y, d|_{Y \times Y})$ or simply $Y$ is a 
+*metric subspace* of $X$.
+
+It is customary to drop the subscript $Y \times Y$ from the
+restriction of $d$ and write the subspace simply as
+$(Y, d)$.
+```
+
 ```{prf:example}
+$[0,1]$ is a metric subspace of $\RR$ with the standard
+metric $d(x, y) = |x -y|$ restricted to $[0,1]$. 
+In other words, the distance between any two points
+$x, y \in [0, 1]$ is calculated by viewing $x,y$ as 
+points in $\RR$ and using the standard metric for $\RR$.
+```
+
+
+
+## Examples
+
+```{prf:example} $\RR^n$ p-distance
+For some $1 \leq p \lt \infty$, the function $d_p : \RR^n \times \RR^n \to \RR$:
+
+$$
+d_p (x, y) \triangleq \left ( \sum_{i=1}^n |x_i - y_i|^p \right )^{\frac{1}{p}}
+$$
+
+is a metric and $(\RR^n, d_p)$ is a metric space.
+```
+
+
+```{prf:example} $\RR^n$ Euclidean space
+The $d_2$ metric over $\RR^n$:
+
+$$
+d_2 (x, y) \triangleq \left ( \sum_{i=1}^n |x_i - y_i|^2 \right )^{\frac{1}{2}}
+$$
+is known as the *Euclidean distance* and 
+the metric space $(\RR^n, d_2)$ is known as the 
+*n-dimensional Euclidean (metric) space*.
+
+The standard metric for $\RR^n$ is the Euclidean metric.
+```
+
+
+```{prf:example} Discrete metric
 Let $X$ be a nonempty set:
 
 Define:
@@ -129,23 +165,9 @@ $(X, d)$ is a metric space. This distance is called *discrete distance*
 and the metric space is called a *discrete metric space*.
 ```
 
-```{prf:definition} Metric subspace
-Let $(X, d)$ be a metric space. Let $Y \subset X$ be a nonempty
-subset of $X$. Then, $Y$ can be viewed as a metric space
-in its own right with the distance function $d$ restricted
-to $Y \times Y$, denoted as $d|_{Y \times Y}$. We then say
-that $(Y, d|_{Y \times Y})$ or simply $Y$ is a 
-*metric subspace* of $X$.
-```
-
-```{prf:example}
-$[0,1]$ is a metric subspace of $\RR$ with the standard
-metric $d(x, y) = |x -y|$ restricted to $[0,1]$. 
-In other words, the distance between any two points
-$x, y \in [0, 1]$ is calculated by viewing $x,y$ as 
-points in $\RR$ and using the standard metric for $\RR$.
-```
-
+Discrete metric spaces are discussed in depth in 
+{ref}`discrete-metric-space`. They help clarify 
+many subtle issues in the theory of metric spaces.
 
 ```{prf:example} $\ERL$ A metric space for the extended real line
 
@@ -197,7 +219,9 @@ $d_p$ is a valid distance function over $\ell^p$. We metrize $\ell^p$
 with $d_p$ as the standard metric. 
 ```
 
-```{prf:example} Finite products of metric spaces
+## Products of Metric Spaces
+
+```{prf:definition} Finite products of metric spaces
 
 Let $(X_1, d_1), (X_2, d_2), \dots, (X_n, d_n)$ be $n$ metric spaces.
 
@@ -213,4 +237,43 @@ $\rho$ is a distance function on $X$. The metric space
 $(X, \rho)$ is called the *product* of metric spaces $(X_i, d_i)$.
 ```
 
+
+## Distance between Sets and Points
+
+```{prf:definition} Distance between a point and a set
+:label: def-ms-point-set-distance
+
+The distance between a nonempty set $A \subseteq X$ 
+and a point $x\in X$ is defined as:
+
+$$
+d(x, A) \triangleq \inf \{ d(x,a) \Forall a \in A \}.
+$$
+```
+
+* Since $A$ is nonempty, hence the set
+  $D = \{ d(x,a) \Forall a \in A \}$ is not empty.
+* $D$ is bounded from below since $d(x, a) \geq 0$.
+* Since $D$ is bounded from below, hence it does have
+  an infimum.
+* Thus, $d(x, A)$ is well-defined and finite.
+* Since $A$ is non-empty, hence there exists $a \in A$.
+* $d(x, a) \in D$.
+* Thus, $D$ is bounded from above too.
+* Thus, $0 \leq d(x, A) \leq d(x, a)$.
+* If $x \in A$, then $d(x, A) = 0$.
+
+```{prf:theorem}
+If $x \in A$, then $d(x, A) = 0$.
+```
+
+```{prf:example}
+1. Let $X = \RR$ and $A  = (0, 1)$.
+1. Let $x = 0$.
+1. Then $d(x, A) = 0$.
+1. However, $x \notin A$.
+1. Thus, $d(x,A) = 0$ doesn't imply that $x \in A$.
+```
+
+## Distance between Sets
 
