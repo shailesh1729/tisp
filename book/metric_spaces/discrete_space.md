@@ -1,3 +1,4 @@
+(sec:ms:discrete-metric-space)=
 # Discrete Metric Space
 
 This section collects results on the discrete metric space.
@@ -34,7 +35,7 @@ Every singleton in a discrete metric space is open.
 
 ```{prf:proof}
 
-Let $x \in X$. Consider the open ball $B(x, \frac{1}{2}):
+Let $x \in X$. Consider the open ball $B(x, \frac{1}{2})$:
 
 $$
 B(x, \frac{1}{2}) = \left \{y \in X \ST d(x,y) < \frac{1}{2} \right \}.
@@ -73,6 +74,31 @@ Let $A \subseteq X$. Let $B = X \setminus A$.
 By previous result, $B$ is open. Hence, $A$ must be closed.
 ```
 
+```{prf:proposition}
+:label: def-ms-ds-ball-diam
+
+The {prf:ref}`diameter <def-ms-diameter>` 
+of the open ball $B(x, 1)$ is 0.
+```
+
+```{prf:proof}
+Note that 
+
+$$
+B(x, 1) = \{ x\}.
+$$
+Thus, $B(x, 1)$ is a singleton set. 
+
+Hence, 
+
+$$
+\diam B(x, 1) = \sup \{ d(x,y) \ST x, y \in B(x, 1) \}
+= d(x,x) = 0.
+$$
+```
+This result is a counter example to explain that
+while $\diam B(x,r) \leq 2 r$ always, it doesn't need
+to be equal to $2 r$. 
 
 ```{prf:proposition}
 The only rare (nowhere dense) subset of $X$ is $\EmptySet$.
