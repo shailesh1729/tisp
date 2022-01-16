@@ -46,9 +46,32 @@ following the notation in {prf:ref}`def-vs-set-arithmetic`.
 Let $x_1$ and $x_2$ be two points in $\VV$. Points of the form
 
 $$
-y = \theta x_1 + (1 - \theta) x_2 \text{ where } 0 \leq \theta \leq 1
+y = (1 - \theta) x_1 + \theta x_2 \text{ where } 0 \leq \theta \leq 1
 $$ 
-form a (closed) *line-segment* between $x_1$ and $x_2$.
+form a (closed) *line-segment* between $x_1$ and $x_2$. 
+The closed line segment is denoted by $[x_1, x_2]$.
+
+$$
+[x_1, x_2] \triangleq \{ (1 - \theta) x_1 + \theta x_2 \ST 0 \leq \theta \leq 1 \}.
+$$ 
+
+Similarly, we define an *open line segment* as:
+
+$$
+(x_1, x_2) \triangleq \{ (1 - \theta) x_1 + \theta x_2 \ST 0 < \theta < 1 \}.
+$$ 
+
+The half-open segment $(x_1, x_2]$ is defined as:
+
+$$
+(x_1, x_2] \triangleq \{ (1 - \theta) x_1 + \theta x_2 \ST 0 < \theta \leq 1 \}.
+$$ 
+
+The half-open segment $[x_1, x_2)$ is defined as:
+
+$$
+[x_1, x_2) \triangleq \{ (1 - \theta) x_1 + \theta x_2 \ST 0 \leq \theta < 1 \}.
+$$ 
 ```
 
 ## Affine Sets
@@ -285,7 +308,7 @@ We show that $V_1 \subseteq V_2$ and $V_2 \subseteq V_1$.
 Thus the subspace $V$ associated with a nonempty affine set $C$ doesn't depend upon
 the choice of offset $x_0$ in $C$.
 
-## Affine Subspace and Dimension
+## Affine Subspaces and Dimension
 
 ```{prf:definition} Affine subspace
 :label: def-affine-subspace
@@ -387,6 +410,21 @@ This is from the definition of affine sets
 and {prf:ref}`res-aff-set-contains-aff-combs`.
 ```
 
+```{prf:observation}
+Let $C$ be an affine subspace. 
+Let $V$ be the linear subspace associated with $C$ given by $V = C - x$.
+Then every vector $v \in V$ can be written as $v = y - x$ where $y \in C$.
+Since $V$ doesn't depend on the choice of $x$, hence 
+$V$ is the set of all vectors of the form $y - x$ where $y, x \in C$.
+
+Thus, following the notation in 
+{prf:ref}`def-vs-set-arithmetic`,
+we can write $V$ as:
+
+$$
+V = C - C.
+$$
+```
 
 ## Affine Hull 
 
@@ -446,6 +484,11 @@ Let $C$ be an arbitrary affine subspace such that $S \subseteq C$.
    $\affine S$ is an affine subspace. 
 1. Thus, it is the smallest affine subspace containing $S$.
 ```
+
+```{prf:corollary}
+The affine hull of a set is the intersection of all affine subspaces containing it.
+```
+
 
 ```{prf:definition}
 :label: def-affine-independence
