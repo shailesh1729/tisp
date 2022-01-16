@@ -275,5 +275,20 @@ If $x \in A$, then $d(x, A) = 0$.
 1. Thus, $d(x,A) = 0$ doesn't imply that $x \in A$.
 ```
 
+Distance of a set with its accumulation points is 0.
+See {prf:ref}`res-ms-set-accumulation-point-distance`.
+
+
 ## Distance between Sets
+
+```{prf:definition} Distance sets
+:label: def-ms-set-set-distance
+
+The distance between two nonempty sets $A,B \subseteq X$ 
+is defined as:
+
+$$
+d(A, B) \triangleq \inf \{ d(a,b) \ST a \in A, b \in B \}.
+$$
+```
 

@@ -819,6 +819,30 @@ Thus, $A' \subseteq A \implies A = \closure A$.
 $A = \closure A \implies  A =  A \cup A' \implies A' \subseteq A$.
 ```
 
+Recall that $d(x,A)$ denotes the
+{prf:ref}`distance <def-ms-point-set-distance>` 
+between a set $A$ and a point $x$.
+
+```{prf:theorem}
+:label: res-ms-set-accumulation-point-distance
+
+If $x$ is an accumulation point of $A$ then 
+$d(x, A) = 0$.
+```
+
+```{prf:proof}
+
+Let $x$ be an accumulation point of $A$.
+
+1. If $x \in A$ then $d(x,A) = 0$. 
+1. So consider the case where $x \notin A$.
+1. For every $r > 0$, there exists $a \in A$ 
+   such that $d(x, a) < r$.
+1. Thus, $d(x,A) < r$ for every $ r > 0$.
+1. At the same time, $d(x,A) \geq 0$.
+1. Thus, $d(x, A) = 0$.
+```
+
 
 ## Interior II
 
