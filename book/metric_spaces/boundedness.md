@@ -1,8 +1,22 @@
 # Boundedness
 
+Let $(X, d)$ be a metric space.
 
-```{prf:definition} Boundedness
-:label: def-ms-boundedness
+
+```{prf:definition} Boundedness of a set
+:label: def-ms-boundedness-set
+
+A subset $A \subseteq X$ is called *bounded* if there exists
+a number $M > 0$ such that 
+
+$$
+d(x, y) \leq M \Forall x, y \in A.
+$$
+```
+
+
+```{prf:definition} Boundedness of the metric space
+:label: def-ms-boundedness-space
 
 A metric space $(X,d)$ is called *bounded* if there exists
 a number $M > 0$ such that 
@@ -11,149 +25,170 @@ $$
 d(x, y) \leq M \Forall x, y \in X.
 $$
 ```
+Even if a metric space $(X,d)$ is unbounded, 
+it is possible to introduce a metric $\rho$ for it
+which makes the metric space $(X, \rho)$ bounded.
+See {prf:ref}`res-ms-bounded-metric` for details.
+
+## Diameter
 
 ```{prf:definition} Diameter
 :label: def-ms-diameter
 
-The *diameter* of a subset $A$ of $(X, d)$ is defined as:
+The *diameter* of a nonempty subset $A$ of $(X, d)$ is defined as:
 
 $$
 \diam A \triangleq \sup \{ d(x,y) \ST x, y \in A \}.
 $$
+
+$A$ is bounded if its diameter is finite
+(i.e. the supremum on the R.H.S. exists). 
+Otherwise, it is *unbounded*.
 ```
 
 ```{prf:remark}
 $(X, d)$ is bounded if and only if $\diam X$ is finite. 
 ```
 
-```{prf:example}
-If $d$ is a metric on a set $X$, then the function
-$\rho$ given by
 
-$$
-\rho(x, y) = \frac{d(x,y)}{1 + d(x,y)}
-$$
-
-is also a metric on $X$. Besides, $(X, \rho)$ is bounded and 
-$\rho$ is equivalent of $d$.
+```{prf:proposition}
+The diameter of an open ball $B(x, r)$ is bounded by $2 r$.
 ```
 
-We structure the proof into three parts:
-
-1. Show that $\rho$ is a metric.
-1. Show that $(X, \rho)$ is bounded.
-1. Show that $\rho$ and $d$ are equivalent.
-
-```{prf:proof} 
-$\rho$ is a  
-{prf:ref}`metric <def-ms-distance-function>`.
-
-(1) Non-negativity: Since $d(x,y) \geq 0$, hence $\rho(x, y) \geq 0$
-as it is a ratio of a non-negative number with a positive number.
-
-(2) Identity of indiscernibles:
-
-1. Assume $\rho(x, y) = 0$. 
-1. Then $d(x,y)=0$. 
-1. Thus $x=y$ since $d$ is a metric.
-1. Now, assume $x=y$. 
-1. Then $d(x,y)=0$.
-1. Thus, $\rho(x,y)=0$. 
-
-
-(3) Symmetry:
+```{prf:proof}
+Let $y,z \in B(x,r)$. Then by triangle inequality:
 
 $$
-\rho(y, x) = \frac{d(y,x)}{1 + d(y,x)} = \frac{d(x,y)}{1 + d(x,y)} = \rho(x, y).
+d(y,z) \leq d(x,y) + d(x,z) < r + r = 2 r.
 $$
-
-
-(4) Triangle inequality. This will require some work.
-
-Consider the function $f: \RR \to \RR$:
+Taking supremum on the L.H.S., we get:
 
 $$
-f(t) = \frac{t}{1+t}
-$$
-with $\dom f = \RR_+$.
-
-
-Its derivative is 
-
-$$
-f'(t) = \frac{1}{(1+t)^2}.
-$$
-
-$f'(t) \geq 0$ for $t \in \RR_+$. Thus, $f$ is an increasing function
-on $t \geq 0$. In particular:
-
-$$
-d(x, y)\leq d(x, z) + d(z, y) \implies f(d(x,y)) \leq f(d(x, z) + d(z, y)).
-$$
-
-Now, we proceed as follows:
-
-$$
-\begin{aligned}
-\rho(x, y) &= f(d(x,y)) \\
-&\leq f(d(x, z) + d(z, y))\\
-&= \frac{d(x, z) + d(z, y)}{1 + d(x, z) + d(z, y)}\\
-&= \frac{d(x, z)}{1 + d(x, z) + d(z, y)} + \frac{d(z, y)}{1 + d(x, z) + d(z, y)}\\
-&\leq \frac{d(x, z)}{1 + d(x, z)} + \frac{d(z, y)}{1 + d(z, y)}\\
-&= \rho(x,z) + \rho(z,y).
-\end{aligned}
+\diam B(x,r) = \sup d(y, z) \leq 2 r.
 $$
 ```
 
-```{prf:proof} 
-$\rho$ is a bounded
+For an example where $B(x,r ) < 2 r$, see
+{prf:ref}`def-ms-ds-ball-diam`.
 
-It is easy to see that
 
-$$
-\sup \rho(x, y) = 1.
-$$
-
-Thus, $(X, \rho)$ is bounded.
+```{prf:proposition}
+$\diam A = 0$ if and only if $A$ is a singleton set.
 ```
 
-```{prf:proof} $\rho$ is equivalent to $d$
+```{prf:proof}
+Let $A$ be singleton. Then, $A = \{ x \}$. 
+Then $\diam A = d(x, x ) = 0$. 
 
-We first show that the identity mapping $I : (X, d) \to (X, \rho)$ is continuous.
+For the converse, we proceed as follows:
 
-Let $a \in X$ and choose $\epsilon > 0$. 
-Recall that $\rho$ is bounded with $\rho(x,y) < 1$. 
-
-Thus, if $\epsilon \geq 1$, we can choose any $\delta > 0$ leading 
-to $\rho(x,y) < \epsilon$  whenever $d(x,y) < \delta$.
-
-Now, consider the case $\epsilon < 1$.
-
-$$
-\begin{aligned}
-&\rho(x, a) < \epsilon\\
-&\iff \frac{d(x,a)}{1 + d(x,a)} < \epsilon\\
-&\iff 1 - \frac{d(x,a)}{1 + d(x,a)} > 1 - \epsilon\\
-&\iff \frac{1}{1 + d(x,a)} > 1 - \epsilon\\
-&\iff 1 + d(x, a) < \frac{1}{1 - \epsilon}\\
-&\iff  d(x,a) < \frac{\epsilon}{1 - \epsilon}. 
-\end{aligned}
-$$
-
-Now, choosing $\delta = \frac{\epsilon}{1 - \epsilon}$, we note that
-$\delta > 0$ for $0 < \epsilon < 1$.
-
-Thus, for every $\epsilon > 0$, there exists $\delta > 0$ 
-such that $\rho(x, a) < \epsilon$ whenever $d(x, a) < \delta$.
-
-Hence, $I$ is continuous. A similar argument also shows that
-$I^{-1}$ is continuous.
-
-Thus, $I$ is homeomorphism and the metric spaces 
-$(X, d)$ and $(X, \rho)$ are homeomorphic. 
-
-Hence, due to {prf:ref}`res-ms-equivalent-metric-homeomorphic-identity`,
-the two metrics are equivalent.
+1. Let $\diam A = 0$. 
+1. Assume $A$ is not a singleton.
+1. Then there exist distinct $x, y \in A$. 
+1. Since $x \neq y$, hence $d(x, y) > 0$. 
+1. But then, $\diam A  \geq d(x,y) > 0$. 
+1. A contradiction.
+1. Hence, $A$ must be a singleton.
 ```
 
+```{prf:proposition}
+If $A \subseteq B$, then $\diam A \leq \diam B$.
+```
 
+```{prf:proof}
+
+We proceed as follows:
+
+1. Let $x, y \in A$.
+1. Then $x, y \in B$.
+1. Thus, $d(x,y) \leq \diam B$ (by definition).
+1. Taking supremum over all pairs of $x, y \in A$ in the L.H.S., we get:
+   $\diam A \leq \diam B$.
+```
+
+```{prf:proposition}
+Let $x \in A$ and $y \in B$. Then $d(x,y) \leq \diam (A \cup B)$.
+```
+```{prf:proof}
+Since $x$ and $y$ both belong to $A \cup B$, hence, 
+by {prf:ref}`definition <def-ms-diameter>`:
+
+$$
+d(x,y) \leq \diam (A \cup B).
+$$
+```
+
+```{prf:proposition}
+If $A \cap B \neq \EmptySet$, then
+
+$$
+\diam (A \cup B) \leq \diam A + \diam B.
+$$ 
+```
+
+```{prf:proof}
+Let $x, y \in A\cup B$.
+
+1. If both $x,y \in A$, then $d(x,y) \leq \diam A$.
+1. If both $x,y \in B$, then $d(x,y) \leq \diam B$.
+1. Now, consider the case when $x \in A$ and $y \in B$.
+1. Since $A \cap B \neq \EmptySet$, we can pick $z \in A \cap B$.
+1. Then, by triangle inequality:
+
+   $$
+   d(x, y) \leq d(x, z) + d(y, z).
+   $$
+1. Since $x, z \in A$, hence $d(x, z) \leq \diam A$.
+1. Since $y, z \in B$, hence $d(y, z) \leq \diam B$.
+1. Combining $d(x, y) \leq \diam A + \diam B$.
+1. Taking the supremum over all pairs $x, y \in A \cup B$, 
+   
+
+   $$
+   \diam (A \cup B) \leq \diam A + \diam B.
+   $$
+```
+
+## Characterization of Boundedness
+
+```{prf:theorem}
+:label: def-ms-bounded-set-in-open-ball
+
+A set $A \subseteq X$ is bounded if and only if
+there exists $a \in X$  and $r > 0$ such that
+
+$$
+A \subseteq B(a, r).
+$$
+
+In other words, $A$ is bounded if and only if
+$A$ is contained in an open ball.
+```
+
+```{prf:proof}
+
+Assume $A$ is bounded.
+
+1. Let $r = \diam A$.
+1. Fix some $a \in A$.
+1. Consider an open ball $B(a, r + 1)$.
+1. Consider any $x \in A$. 
+1. Since $r$ is diameter of $A$ and $a, x \in A$, hence
+   $d(a,x) \leq r$.
+1. Thus, $d (x, a) \leq r < r + 1$.
+1. Thus, $x \in B(a, r+1)$.
+1. Since $x$ was arbitrary, hence $A \subseteq B(a, r+1)$.
+
+Now assume that there is some $a \in X$ and $r > 0$ such
+that $A \subseteq B(a, r)$.
+
+1. Let $x,y \in A$. Then, $x,y \in B(a, r)$.
+1. By triangle inequality 
+   
+   $$
+   d(x, y) \leq d(a, x) + d(a, y) < r + r = 2 r.
+   $$
+1. Taking supremum on the L.H.S. over all $x,y \in A$, we get
+   $\diam A \leq 2 r$.
+1. Thus, $A$ is bounded.
+```
