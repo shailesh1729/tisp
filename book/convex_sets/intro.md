@@ -159,3 +159,43 @@ $$
 $T$ is affine if and only if the mapping $\bx \mapsto T(\bx) - T(\bzero)$
 is linear.
 ```
+
+
+## Topology 
+
+If $\VV$ is equipped with a norm $\| \cdot \| : \VV \to \RR$, 
+it induces a {prf:ref}`metric <def-ms-distance-function>` 
+$d: \VV \times \VV \to \RR$ given by:
+
+$$
+d (x, y) = \| x - y \|.
+$$
+
+$\VV$ equipped with this metric becomes a 
+{prf:ref}`metric space <def-ms-metric-space>`.
+
+The topology of a metric space is discussed in detail in
+{ref}`sec:ms:metric-topology` and sections thereafter.
+
+```{prf:definition} Closed unit ball
+A ball centered at origin $\bzero \in \VV$ is 
+called a *unit ball* if its radius is $1$. 
+$B[\bzero, 1]$ denotes a *closed unit ball*
+and $(\bzero, 1)$ denotes an *open unit ball*.
+```
+
+```{prf:observation}
+Following the notation in {prf:ref}`def-vs-set-arithmetic`,
+a closed ball can be expressed in terms of closed unit ball as:
+
+$$
+B[\bx, r] = \bx + r B[\bzero, 1].
+$$
+
+Similarly, any open ball can be expressed in terms of 
+the open unit ball as:
+
+$$
+B(\bx, r) = \bx + r B(\bzero, 1).
+$$
+```
