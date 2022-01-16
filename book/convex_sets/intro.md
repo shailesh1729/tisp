@@ -11,6 +11,16 @@
 * Generalized inequalities on convex cones
 
 
+We recall that 
+
+```{div}
+* $\RR$ denotes the real line
+* $\ERL$ denotes the extended real line
+* $\RR_+$ denotes the set of nonnegative reals.
+* $\RR_{++}$ denotes the set of positive reals.
+```
+
+
 ## Real Vector Spaces
 
 We shall concern ourselves with subsets of real vector spaces.
@@ -89,4 +99,63 @@ Let $C$ be a nonempty subset of $\VV$.
 The intersection of all the linear subspaces of $\VV$ 
 containing $C$ is called the *span* of $C$ and is denoted
 by $\span C$.
+```
+
+
+## Operators
+
+```{prf:definition} Homogeneous operator
+Let $\XX$ and $\YY$ be real vector spaces. 
+An operator $T : \XX \to \YY$ is called *homogeneous* if
+for every $\bx \in \XX$ and for every $\lambda \in \RR$
+
+$$
+T(\lambda \bx) = \lambda T (\bx).
+$$
+```
+
+```{prf:definition} Positively homogeneous operator
+Let $\XX$ and $\YY$ be real vector spaces. 
+An operator $T : \XX \to \YY$ is called *positively homogeneous* if
+for every $\bx \in \XX$ and for every $\lambda \in \RR_{++}$
+
+$$
+T(\lambda \bx) = \lambda T (\bx).
+$$
+```
+
+```{prf:definition} Additive operator
+Let $\XX$ and $\YY$ be real vector spaces. 
+An operator $T : \XX \to \YY$ is called *additive* if
+for every $\bx,\by \in \XX$
+
+$$
+T (\bx + \by) = T(\bx) + T(\by).
+$$
+```
+
+```{prf:definition} Linear operator
+Let $\XX$ and $\YY$ be real vector spaces. 
+An operator $T : \XX \to \YY$ is called *linear* if
+for every $\bx,\by \in \XX$ and for every $\lambda \in \RR$
+
+$$
+T (\lambda \bx + \by) = \lambda T(\bx) + T(\by).
+$$
+```
+
+```{prf:definition} Affine operator
+Let $\XX$ and $\YY$ be real vector spaces. 
+An operator $T : \XX \to \YY$ is called *affine* if
+for every $\bx,\by \in \XX$ and for every $\lambda \in \RR$
+
+$$
+T (\lambda \bx + (1 - \lambda) \by) = \lambda T(\bx) + (1 - \lambda) T(\by).
+$$
+```
+
+
+```{prf:remark}
+$T$ is affine if and only if the mapping $\bx \mapsto T(\bx) - T(\bzero)$
+is linear.
 ```
