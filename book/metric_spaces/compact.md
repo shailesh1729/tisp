@@ -3,39 +3,21 @@
 The material in this section is primarily based on
 {cite}`aliprantis1998principles,gopal2020introduction`.
 
-## Covers
 
-
-```{prf:definition} Cover
-:label: def-ms-cover
-
-A family $\{ A_i \}_{i \in I}$ of subsets of $X$ is said to *cover* a set
-$A$ if
+```{div}
+Recall from {prf:ref}`def-st-cover` that for a subset $A \subseteq X$,
+a cover is a family $\{ A_i \}_{i \in I}$ of subsets of $X$ such that
 
 $$
 A \subseteq \bigcup_{i \in I} A_i.
 $$
-Here $I$ is an index set indexing the sets in the family. $I$ 
-could be finite, countable or uncountable.
 ```
-
-```{prf:remark}
-The definition of a *cover* doesn't require $X$ to be a metric space.
-$X$ can be any set.
-```
-```{prf:definition} Subcover
-:label: def-ms-subcover
-
-If a subfamily of a cover $\{ A_i \}_{i \in I}$  of $A$ also covers
-$A$, then the subfamily is called a *subcover*.
-```
-
 ## Open Covers
 
 ```{prf:definition} Open cover
 :label: def-ms-open-cover
 
-A family of open subsets $\{ A_i \}_{i \in I}$ of subsets of $(X,d)$  
+A family of open subsets $\{ A_i \}_{i \in I}$ of subsets of $(X,d)$
 is an *open cover* of $A$ if it covers $A$.
 ```
 
@@ -43,20 +25,20 @@ is an *open cover* of $A$ if it covers $A$.
 
 ```{prf:theorem} Lindelöf
 
-Every open cover of a subset of $\RR^n$ can be reduced to 
+Every open cover of a subset of $\RR^m$ can be reduced to 
 an at-most countable subcover.
 ```
 
 ```{prf:proof}
-We call a point $a = (a_1, \dots, a_n) \in \RR^n$ a rational point
+We call a point $a = (a_1, \dots, a_m) \in \RR^m$ a rational point
 if every component of $a$ is a rational number.
 
-1. Let $A$ be a subset of $\RR^n$.
+1. Let $A$ be a subset of $\RR^m$.
 1. Let $\{ \OOO_i \}_{i \in I}$ be an open cover of $A$ (possibly uncountable).
 1. Thus, $A \subseteq \bigcup_{i \in I} \OOO_i$.
 1. For each $x \in A$, 
    1. Choose an index $i_x \in I$ such that $x \in \OOO_{i_x}$.
-   1. Pick a rational point $a_x \in \RR^n$ and a rational positive number $r_x$
+   1. Pick a rational point $a_x \in \RR^m$ and a rational positive number $r_x$
       such that $x \in B(a_x, r_x) \subseteq \OOO_{i_x}$.
 1. Consider the collection $C = \{ B(a_x, r_x) \ST x \in A \}$.
 1. Since the set of rational points is countable and the set of rational numbers is countable,
@@ -89,6 +71,22 @@ compact set, then $(X,d)$ is called a *compact metric space*.
 ```
 
 ## Characterization of Compactness
+
+We have defined compactness as a property where every open
+cover can be reduced to a finite subcover. 
+The characterization of a property involves identifying
+other properties which are equivalent in the sense that
+property A $\iff$ property B. If one is true then 
+the other must be true and vice versa.
+
+We will see later that compactness of a set $A$ is equivalent 
+to the property that every sequence of $A$ has a subsequence
+that converges to a point in $A$. However, before we go there,
+let us examine some implications of this
+property that every sequence of a set $A$ has a subsequence that
+converges within the set $A$. These results will be
+useful later in the characterization of compact sets.
+
 
 ```{prf:lemma} Lebesgue number
 :label: res-ms-open-cover-lebesgue-number
@@ -129,7 +127,7 @@ Assume the claim is false.
 ```
 
 
-```{prf:lemma} Existence of finite open cover
+```{prf:lemma} Existence of finite cover of open balls
 :label: res-ms-compact-set-existence-of-finite-cover
 
 Let $A \subseteq X$ of a metric space $(X,d)$.
@@ -141,6 +139,8 @@ $$
 A \subseteq \bigcup_{j=1}^n B(x_j, r).
 $$
 ```
+This lemma simply claims that we can construct a finite open cover
+of open balls for $A$ for every $r > 0$. 
 ```{prf:proof}
 Assume the claim to be false. Choose $r > 0$ such that it is not possible to 
 select a finite number of points from $A$ such that 
@@ -266,3 +266,121 @@ The following statements are equivalent.
 1. Thus, the open cover of $A$ has a finite subcover.
 1. Thus, $A$ is compact.
 ```
+
+## Implications of Compactness
+
+```{prf:theorem} Compact sets are closed and bounded
+:label: res-ms-compact-is-closed-bounded
+
+A compact set is closed and bounded.
+```
+```{prf:proof}
+Assume $A$ to be compact. We shall show that $A$ must be bounded.
+
+1. Choose an open cover for $A$ as $A \subseteq \bigcup_{x \in A}B(x, 1)$.
+1. Since $A$ is compact, hence there exist finite set of points $\{ x_1, \dots x_n \} \subseteq A$
+   such that $A \subseteq \bigcup_{i=1}^n B(x_i, 1)$.
+1. Let $M = \max \{ d(x_i, x_j) \ST 1 \leq i, j \leq n\}$.
+1. For any $x, y \in A$, choose $i, j$ such that $x \in B(x_i, 1)$ and $y \in B(x_j, 1)$.
+1. Then, by triangle inequality, we have:
+
+   $$
+   d(x, y) \leq d(x, x_i) + d(x_i, x_j) + d(x_j, y) < M + 2 < \infty.
+   $$
+1. Thus, $\diam A = \sup d(x,y)$ is finite and $A$ is bounded.
+
+
+We now show that if $A$ is compact then $A$ must be closed too. 
+Towards this, we show that $A$ contains all its closure points. 
+
+1. Let $x \in \closure A$. 
+1. Due to {prf:ref}`res-ms-closure-point-as-limit`, there exists
+   a sequence $\{ x_n \}$ of $A$ with $\lim x_n = x$.
+1. Due to {prf:ref}`def-ms-compact-characterization`, $\{x_n\}$ has
+   a subsequence that converges to a point of $A$ (since $A$ is compact by hypothesis).
+1. As per {prf:ref}`res-ms-subsequence-convergence`, subsequences of
+   a convergent sequence converge to the same limit. 
+1. Thus, $x$ must be in $A$.
+1. Thus, $\closure A \subseteq A$. Thus, $\closure A = A$. Thus, $A$ is closed.
+```
+
+Although every compact set is closed and bounded, the converse need
+not be true. See {prf:ref}`ex-discrete-space-closed-bounded-not-compact`
+for an example of closed and bounded set (in discrete space)
+which is not compact.
+
+In the specific case of Euclidean spaces, all closed and
+bounded sets are compact too.
+
+
+## Euclidean Space
+
+Recall that $\RR^m$ are called Euclidean spaces with the standard metric:
+
+$$
+d (x, y) \triangleq \left ( \sum_{i=1}^m |x_i - y_i|^2 \right )^{\frac{1}{2}}.
+$$
+
+By $0 \in \RR^m$ we shall mean the vector $(0, \dots, 0)$.
+
+The compact subsets of a Euclidean space are precisely those
+sets which are closed and bounded.
+
+```{prf:theorem} Heine-Borel theorem
+A subset of a Euclidean space is compact if and
+only if it is closed and bounded.
+```
+Compare this to {prf:ref}`Heine-Borel theorem <res-rl-heine-borel>` for the real line.
+We established there that for a closed and bounded subset of $\RR$, 
+any open cover can be reduced to a finite subcover. There, we defined
+closed and bounded sets as compact sets. Our treatment of compactness
+in this section is more general. 
+
+We start here with the definition that a compact set is one for which
+any open cover can be reduced to a finite subcover. 
+We then show in this theorem that in the special case of 
+Euclidean spaces $\RR^m$, the compact subsets are identical to the
+closed and bounded subsets of $\RR^m$.
+
+```{prf:proof}
+We have shown in {prf:ref}`res-ms-compact-is-closed-bounded` that
+every compact set is closed and bounded.
+
+For the converse, we assume $A$ is a closed and bounded subset of $\RR^m$.
+We will show that every sequence of $A$ has a subsequence converging in $A$.
+
+1. Since $A$ is bounded, we can pick $M > 0$ such that $d(x, y) \leq M$ for all $x, y \in A$.
+1. Fix an element $y \in A$.
+1. Let $a = (a_1, \dots, a_m) \in A$ be some arbitrary point of $A$. Then
+
+   $$
+   |a_i | \leq d(a, 0) \leq d(a, y) + d(y, 0) \leq M + d(y, 0)
+   $$
+   holds for every $1 \leq i \leq m$. 
+1. Thus, the set of real numbers consisting of the $i$-th coordinates 
+   of the elements of $A$ is a bounded set.
+1. Choose an arbitrary sequence $\{ x_n \}$ of $A$.
+1. Recall from {prf:ref}`Bolzano Weierstrass theorem <res-bolzano-weierstrass-theorem>` for real numbers
+   that every bounded sequence of real numbers has a convergent subsequence.
+1. Note that if we form the sequence of real numbers from 
+   any particular coordinate of $\{x_n\}$, (say first coordinates or second coordinates)
+   then the sequence is bounded by $M + d(y, 0)$.
+1. Every such sequence of real numbers (from a fixed coordinate of $\{x_n\}$) will
+   have a convergent subsequence.
+1. Thus, there is a subsequence $\{x^1_n\}$ of $\{x_n\}$ whose first coordinates 
+   form a sequence in $\RR$ that converges in $\RR$.
+1. Now, we choose $\{x^2_n\}$ as a subsequence of $\{x^1_n\}$ so that the
+   corresponding sequence of second coordinates of $\{x^2_n\}$ converge in $\RR$.
+1. Proceeding in this manner, after $m$ steps, we have a subsequence
+   $\{x^m_n\}$ of $\{x_n\}$ with the property that for each $1 \leq i \leq m$,
+   the sequence of its $i$-th coordinates forms a convergent subsequence in $\RR$.
+1. Since each of the coordinates of $\{x^m_n\}$ converges in $\RR$,
+   hence, $\{x^m_n\}$ converges in $\RR^m$. 
+1. But since $A$ is closed, hence $\{x^m_n\}$ converges to a point of $A$.
+1. Thus, every sequence of $A$ has a convergent subsequence in $A$. 
+1. Thus, by {prf:ref}`def-ms-compact-characterization`, $A$ is compact. 
+```
+
+Note that the property *convergence in individual coordinates
+implies convergence in $\RR^m$* is due to the specific choice
+of Euclidean metric.
