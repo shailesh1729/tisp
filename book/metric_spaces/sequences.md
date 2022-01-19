@@ -44,7 +44,7 @@ Thus, $\{ x_n \}$ converges if $\lim d(x_n, x) = 0$.
 ````
 
 
-````{prf:proposition} Sequence Limit Uniqueness
+````{prf:theorem} Sequence Limit Uniqueness
 :label: res-ms-sequence-limit-uniqueness
 
 A sequence of points can have utmost one limit.
@@ -73,7 +73,7 @@ This result and proof is adapted from
 {prf:ref}`res-bra-sequence-limit-uniqueness`.
 
 
-```{prf:proposition} Characterization of closure points as limits
+```{prf:theorem} Characterization of closure points as limits
 :label: res-ms-closure-point-as-limit
 
 A point $x \in X$ is a closure point of $A \subseteq X$ if and
@@ -104,7 +104,9 @@ Assume a sequence $\{x_n\}$ of $A$ converges to $x$.
 If $x \in A$, we can simply pick the constant sequence $\{ x_n = x \}$.
 It's more challenging only when $x \in \closure A \setminus A$.
 
-```{prf:proposition} 
+```{prf:theorem}
+:label: res-ms-accum-point-distinct-sequence
+ 
 Let $x$ be an accumulation point of $A$. 
 Then, there exists a sequence $\{x_n \}$ of $A$ with
 distinct terms, that converges to $x$.
@@ -126,7 +128,7 @@ We assume that $x$ is an accumulation point of $A$.
 1. Thus, the sequence converges to $x$.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 :label: res-ms-closure-convergence
 
 Let $A$ be a subset of $X$. $A$ is closed if and only if 
