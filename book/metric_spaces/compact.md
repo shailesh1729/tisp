@@ -313,6 +313,15 @@ The following statements are equivalent.
 1. Thus, $A$ is compact.
 ```
 
+```{prf:definition} Bolzano-Weierstrass property
+A set $A$ in a metric space has the *Bolzano-Weierstrass property* if
+every sequence in $A$ has a convergent subsequence that converges
+to a point in $A$.
+```
+```{prf:observation}
+A compact set has the Bolzano-Weierstrass property.
+```
+
 ## Implications of Compactness
 
 ```{prf:theorem} Compact sets are closed and bounded
@@ -567,6 +576,39 @@ Let $A$ be a compact subset of $\dom f$.
 1. Since $f(A)$ is closed, hence its infimum and supremum lie inside $f(A)$ itself.
 1. Thus, $f$ attains a maximum and minimum value in $A$.
 ```
+
+
+```{prf:theorem} Bolzano Weierstrass theorem for bounded subsets of $\RR^m$
+:label: res-ms-bw-theorem-rn-closed-bounded-set
+
+Every sequence in a closed and bounded set in $\RR^m$ 
+has a convergent subsequence.
+```
+
+```{prf:proof}
+Let $A$ be a closed and bounded subset of $\RR^n$.
+
+1. By {prf:ref}`res-ms-heine-borel-euclidean`,  $A$ is compact.
+1. By {prf:ref}`def-ms-compact-characterization`, 
+   every sequence in $A$ has a subsequence which converges to a point of $A$.
+``` 
+
+```{prf:theorem} Bolzano Weierstrass theorem for bounded sequences of $\RR^m$
+:label: res-ms-bw-theorem-rn-bounded-sequence
+
+Every bounded sequence in $\RR^m$ has a convergent subsequence.
+```
+```{prf:proof}
+Let $\{ x_m \}$ be a bounded sequence of $\RR^m$.
+Then there exists a closed ball $B[0, M]$ such that 
+$\{ x_m \} \subset B[0, M]$.
+
+$B[0, M]$ is closed and bounded.
+From {prf:ref}`res-ms-bw-theorem-rn-closed-bounded-set`,
+every sequence in a closed and bounded subset of $\RR^n$
+has a convergent subsequence.
+```
+
 
 ## Totally Bounded Metric Spaces
 ```{prf:definition} Totally bounded space
