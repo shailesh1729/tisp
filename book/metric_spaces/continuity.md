@@ -63,7 +63,7 @@ both partial and total functions.
 
 1. If $a$ is an isolated point in $\dom f$, then $f$ is continuous
    at $a$. 
-1. If $a$ is an accumulation point of $\dom f$ then, 
+1. If $a$ is an accumulation point in $\dom f$ then, 
    $\lim_{x \to a} f(x) = f(a)$ must hold true for $f$ to be
    continuous at $x=a$. 
 

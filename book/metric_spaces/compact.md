@@ -343,6 +343,8 @@ can be reduced to a finite subcover.
 ```
 
 ```{prf:theorem}
+:label: res-ms-compact-closed-subset
+
 Every closed subset of a compact space is compact.
 ```
 ```{prf:proof}
@@ -363,6 +365,72 @@ Let $(X, d)$ be a compact metric space and let $A$ be a closed subset of $X$.
 1. Thus, $A$ is compact.   
 ```
 
+
+```{prf:theorem}
+Let $(X, d)$ be a compact metric space and suppose that 
+$f : (X, d) \to (Y, \rho)$ is a (total) continuous function.
+Then $f$ is a {prf:ref}`closed mapping <def-ms-closed-mapping>`.
+If $f$ is bijective, then $f$ is a 
+{prf:ref}`homeomorphism <def-ms-homeomorphism>`.
+```
+```{prf:proof}
+Let $C$ be a closed subset of $X$.
+
+1. Due to {prf:ref}`res-ms-compact-closed-subset`, $C$ is compact.
+1. Since $f$ is continuous, hence, due to {prf:Ref}`res-ms-compact-continuous-map`,
+   $f(A)$ is compact.
+1. As per {prf:ref}`res-ms-compact-is-closed-bounded`,
+   since $f(A)$ is compact, hence $f(A)$ is closed.
+1. Thus, $f$ maps every closed set to a closed set.
+1. Thus, $f$ is a closed mapping.
+
+Now, assume that $f$ is bijective too.
+
+1. Thus, $f^{-1}$ exists. Let $g = f^{-1}$.
+1. Then, due to bijection property $g^{-1}(A) = f(A)$ holds for every subset $A$ of $X$.
+1. Thus, $g^{-1}(A) = f(A)$ is a closed subset of $Y$ whenever $A$ is a closed subset of $X$.
+1. Thus, as per {prf:ref}`res-ms-continuous-function-characterization` $[(5) \implies (1)]$, $g$ is continuous.
+1. Thus, both $f$ and $f^{-1} = g$ are continuous.
+1. Thus, $f$ is a homeomorphism.
+```
+
+
+```{prf:theorem} Compact domain + Continuity = Uniform continuity
+Let $f: (X, d) \to (Y, \rho)$ be {prf:ref}`continuous <def-ms-continuous-function>` on $X$.
+If $X$ is compact, then $f$ is 
+{prf:ref}`uniformly continuous <def-ms-uniform-continuity>`.
+```
+```{prf:proof}
+We proceed as follows.
+
+1. Let $\epsilon > 0$. 
+1. Since $f$ is continuous on $X$, hence for every $x \in X$, 
+   there exists $r_x > 0$ such that
+   $\rho(f(y), f(x)) < \epsilon$ holds whenever $d(x, y) < 2 r_x$.
+1. The collection of open balls $B(x, r_x)$ covers $X$;
+   i.e., $X = \bigcup_{x \in X}B(x, r_x)$.
+1. Since $X$ is compact, there exists a set of finite number of points $x_1, \dots, x_n$ 
+   such that $X = \bigcup_{i=1}^n B(x_i, r_{x_i})$.
+1. Now, let $\delta = \min \{r_{x_1}, \dots, r_{x_n} \}$.
+1. Since $\delta$ is the minimum of a finite number of positive numbers, hence $\delta > 0$.
+1. Now, pick any $x, y \in X$ that satisfy $d(x, y) < \delta$. 
+1. There exists an integer $i$ such that $d(x, x_i) < r_{x_i}$
+   (due to the finite open cover). 
+1. Therefore, $\rho(f(x), f(x_i)) < \epsilon$.
+1. Now, by triangle inequality:
+
+   $$
+   d(y, x_i) \leq d(y, x) + d(x, x_i) < \delta + r_{x_i} \leq 2 r_{x_i}
+   $$ 
+   holds true.
+1. Thus, $\rho(f(x_i), f(y)) < \epsilon$, since $d(y, x_i) < 2 r_{x_i}$. 
+1. Thus,
+
+   $$
+   \rho(f(x), f(y)) \leq \rho(f(x), f(x_i)) + \rho(f(x_i), f(y)) < \epsilon + \epsilon = 2\epsilon.
+   $$
+1. Thus, $f$ is uniformly continuous.
+```
 
 ## Euclidean Spaces
 
