@@ -71,7 +71,9 @@ compact set, then $(X,d)$ is called a *compact metric space*.
 ```
 
 
-```{prf:example}
+```{prf:example} $(0,1)$ is not compact
+:label: ex-0-1-not-compact
+
 The set $(0,1)$ is not compact in $\RR$.
 We first show this the hard way by picking an
 open cover for $(0,1)$ which cannot be
@@ -566,11 +568,11 @@ Let $A$ be a compact subset of $\dom f$.
 1. Thus, $f$ attains a maximum and minimum value in $A$.
 ```
 
-## Totally Bound Metric Spaces
-```{prf:definition} Totally bound space
-A metric space $(X,d)$ is called totally bound if for each
+## Totally Bounded Metric Spaces
+```{prf:definition} Totally bounded space
+A metric space $(X,d)$ is called *totally bounded* if for each
 $r > 0$, there exists a finite number of points 
-$x_1, \dots, x_n$ such that 
+$x_1, \dots, x_n \in X$ such that 
 
 $$
 X = \bigcup_{i=1}^n B(x_i, r).
@@ -579,7 +581,9 @@ $$
 
 
 ```{prf:theorem}
-A compact metric space is totally bound.
+:label: res-ms-compact-is-totally-bounded
+
+A compact metric space is totally bounded.
 ```
 ```{prf:proof}
 Let $(X,d)$ be a compact metric space.
@@ -588,6 +592,120 @@ Let $(X,d)$ be a compact metric space.
 1. Consider the family of open balls $\{ B(x, r) \}_{x \in X}$.
 1. Then $X = \bigcup_{x \in X} B(x, r)$.
 1. Since $X$ is compact, there is a finite subcover of open balls. 
-1. Thus, for every $r > 0$, there is a finite open cover of $X$.
-1. Thus, $X$ is totally bound.
+1. Thus, for every $r > 0$, there $X$ is a union of finite open balls.
+1. Thus, $X$ is totally bounded.
+```
+
+```{prf:example}
+We showed earlier in {prf:ref}`ex-0-1-not-compact`
+that $(0,1)$ is not compact.
+
+However $(0,1)$ is totally bounded.
+
+1. Let $r > 0$.
+1. Pick any $n> \frac{1}{r}$. Thus, $r > \frac{1}{n}$.
+1. Consider the points $\frac{1}{n}, \frac{2}{n}, \dots, \frac{n-1}{n}$.
+1. $\frac{k}{n} + r > \frac{k}{n} + \frac{1}{n} = \frac{k+1}{n}$.
+1. $\frac{k}{n} - r < \frac{k}{n} - \frac{1}{n} = \frac{k-1}{n}$.
+1. Thus, 
+
+   $$
+   \left (\frac{k-1}{n}, \frac{k+1}{n}\right ) \subseteq B\left (\frac{k}{n}, r \right )
+   $$ 
+1. Thus, 
+
+   $$
+   (0, 1) = \bigcup_{k=1}^{n-1}B\left (\frac{k}{n}, r \right ).
+   $$
+   with the caveat that the first and last balls are restricted within the set $(0,1)$.
+1. Thus, we have a finite union of open balls.
+1. Thus, $(0,1)$ is totally bounded.
+```
+
+
+```{prf:theorem} Completeness and Compactness
+:label: res-ms-complete-totally-bounded-compact
+
+A metric space is compact if and only if it is complete and totally bounded.
+```
+
+```{prf:proof}
+Let $(X,d)$ be a metric space. Assume that $(X,d)$ is
+compact. 
+
+1. $(X,d)$ is totally bounded ({prf:ref}`res-ms-compact-is-totally-bounded`).
+1. Since $(X,d)$ is compact, hence every sequence has a convergent
+   subsequence that converges to a point in $X$ ({prf:ref}`def-ms-compact-characterization` (3)).
+1. Thus, if $\{x_n\}$ is a Cauchy subsequence of $X$, then it has
+   a subsequence with limit $x \in X$ leading to $\lim x_n = x$.
+1. Thus, every Cauchy sequence of $X$ converges in $X$. 
+1. Thus, $(X,d)$ is complete.
+
+For the converse, assume that $(X,d)$ is complete and totally bounded.
+To show that $(X,d)$ is compact, we will show that
+every infinite subset of $X$ has an accumulation point in $X$
+({prf:ref}`def-ms-compact-characterization` (2)).
+
+1. Let $A$ be an infinite subset of $X$.
+1. Since $X$ is totally bounded, 
+   there exists a finite subset $F_1 \subset X$ 
+   such that 
+
+   $$
+   X = \bigcup_{x \in F_1} B(x, 1).
+   $$
+1. We can extend the open balls with closed balls without problem:
+
+   $$
+   X = \bigcup_{x \in F_1} B[x, 1].
+   $$
+1. Thus:
+
+   $$
+   A = A \cap X  = \bigcup_{x \in F_1}( A \cap B[x, 1]).
+   $$
+1. Since $A$ is infinite, there is some $x_1 \in F_1$ such that $A_1 = A \cap B[x_1, 1]$
+   is an infinite set.
+   1. If $A \cap B[x, 1]$ were finite for each $x \in F$, then $A$ would be finite
+      as a finite union of finite sets.
+1. Since $X$ is totally bounded, we can again find a finite subset $F_2 \subset X$ such that
+
+   $$
+   X = \bigcup_{x \in F_2} B\left [x, \frac{1}{2}\right].
+   $$
+1. Since $A_1$ is infinite, there is some $x_2 \in F_2$ such that $A_2 = A_1 \cap B\left[x_2, \frac{1}{2} \right]$
+   is an infinite set.
+1. Proceeding inductively, if $x_1, x_2, \dots, x_n$ have been chosen, we can 
+   choose $x_{n+1}$ such that the set
+
+   $$
+   A \cap B[x_1, 1] \cap B\left [x_2, \frac{1}{2} \right] 
+   \cap \dots \cap B\left [x_n, \frac{1}{n}\right] 
+   \cap B\left [x_{n+1}, \frac{1}{n+1} \right]
+   $$
+   is infinite.
+1. Define 
+
+   $$
+   E_n  = B[x_1, 1] \cap B\left [x_2, \frac{1}{2} \right] 
+   \cap \dots \cap B\left [x_n, \frac{1}{n}\right]
+   $$
+   for each $n$.
+1. Then for each $n$: 
+   1. $E_n$ is nonempty and closed. 
+   1. $A \cap E_n$ is infinite.
+   1. $E_{n+1} \subseteq E_{n}$.
+   1. $\diam E_n \leq \frac{2}{n}$. $\lim \diam E_n = 0$.
+1. Due to {prf:ref}`res-ms-complete-nested-closed-nonempty`, 
+   there exists $a \in X$, such that $a \in E_n$ for each $n$.
+1. Now, if $y \in A \cap E_n$, then
+
+   $$
+   d(a, y) \leq d(a, x_n) + d(x_n, y) < \frac{1}{n} + \frac{1}{n} = \frac{2}{n}.
+   $$
+1. Thus, for every $r > 0$, we can pick $n > \frac{2}{r}$ such that 
+   for every $y \in A \cap E_n$, $y \in B(a, r)$.
+1. Thus, $a$ is an accumulation point of $A$.
+1. Thus, every infinite subset of $X$ has an accumulation point in $X$.
+1. Thus, $X$ is compact.
 ```

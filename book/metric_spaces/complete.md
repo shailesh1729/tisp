@@ -185,6 +185,8 @@ is defined to be the supremum of distances between
 all pairs of points of the set.
 
 ```{prf:theorem}
+:label: res-ms-complete-nested-closed-nonempty
+
 Let $(X, d)$ be a complete metric space. 
 Let $\{A_n\}$ be a sequence of closed, nonempty subsets of $X$ such that
 $A_{n+1} \subseteq A_{n}$ for each $n$ and 
