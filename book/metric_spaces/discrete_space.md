@@ -18,7 +18,7 @@ $$
 d(x,y) = \begin{cases}
 0 & x = y \\
 1 & x \neq y
-\end{cases}.
+\end{cases}\;.
 $$
 
 $(X, d)$ is a metric space. This distance is called *discrete distance* 
@@ -28,10 +28,11 @@ and the metric space is called a *discrete metric space*.
 In the rest of the section $X$ will denote the discrete metric
 space with the distance function defined above.
 
+## Open and Closed Sets
+
 ```{prf:proposition}
 Every singleton in a discrete metric space is open.
 ```
-
 
 ```{prf:proof}
 
@@ -74,6 +75,8 @@ Let $A \subseteq X$. Let $B = X \setminus A$.
 By previous result, $B$ is open. Hence, $A$ must be closed.
 ```
 
+## Boundedness
+
 ```{prf:proposition}
 :label: def-ms-ds-ball-diam
 
@@ -101,6 +104,20 @@ while $\diam B(x,r) \leq 2 r$ always, it doesn't need
 to be equal to $2 r$. 
 
 ```{prf:proposition}
+:label: def-ms-ds-bounded
+
+The discrete space is bounded.
+```
+```{prf:proof}
+Let $x, y \in X$. 
+1. If $x \neq y$, then $d(x,y) = 1$.
+1. Thus, $\diam X = \sup d(x,y) = 1$.
+1. $X$ is bounded.
+```
+
+## Rare Sets
+
+```{prf:proposition}
 The only rare (nowhere dense) subset of $X$ is $\EmptySet$.
 ```
 
@@ -110,6 +127,7 @@ Hence $\closure A = A$ and $\interior \closure A = \interior A = A$.
 Thus, $A$ is rare if and only if $A = \EmptySet$.
 ```
 
+## Cauchy Sequences
 
 ```{prf:proposition}
 In a discrete metric space, a Cauchy sequence is eventually
@@ -128,6 +146,8 @@ But then for all $m,n > k$, $x_m = x_n$. Thus,
 $\{ x_n \}$ must be eventually constant.
 ```
 
+## Completeness
+
 ```{prf:proposition}
 A discrete metric space is complete.
 ```
@@ -136,6 +156,8 @@ A discrete metric space is complete.
 Since every Cauchy sequence is eventually constant, hence
 it converges. Thus the discrete metric space is complete.
 ```
+
+## Meager Sets
 
 ```{prf:proposition}
 The only meager set in $X$ is $\EmptySet$.
@@ -150,6 +172,8 @@ an empty interior.
 
 Thus, the only meager set is $\EmptySet$.
 ```
+
+## Baire Category Theorem
 
 ```{prf:observation}
 Let $X$ be a countable set with a discrete metric.
@@ -166,4 +190,21 @@ $$
 Now, although it's a countable union of singletons, 
 the singletons themselves are not rare sets. 
 Hence, we cannot say that $X$ meager.
+```
+
+## Compactness
+
+```{prf:example}
+:label: ex-discrete-space-closed-bounded-not-compact
+
+We can construct a closed and bounded set which is not compact.
+
+1. Let $X$ be an infinite set with the 
+   {prf:ref}`discrete metric <def-ms-discrete-space>`.
+1. Then, $B(x,1) = \{ x\}$ is a singleton for every $x \in X$.
+1. $X$ is closed.
+1. $X$ is bounded since $d(x, y) \leq 1$ for every $x, y \in X$. Hence $\diam X = 1$.
+1. Consider the open cover $X = \bigcup_{x \in X} B(x, 1)$. 
+1. This cover cannot be reduced to a finite subcover.
+1. Thus, $X$ is not compact even though it is closed and bounded.
 ```
