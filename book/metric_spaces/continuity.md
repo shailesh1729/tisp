@@ -1,11 +1,9 @@
-# Continuity
+# Functions and Continuity
 The material in this section is primarily based on
 {cite}`aliprantis1998principles,gopal2020introduction`.
 
 
 Let $(X,d)$ and $(Y, \rho)$ be metric spaces.
-
-## Continuous Functions
 
 Recall that for a function $f: (X,d) \to (Y, \rho)$:
 
@@ -16,6 +14,27 @@ Recall that for a function $f: (X,d) \to (Y, \rho)$:
 
 We will primarily focus on total functions while
 some definition and results are valid for partial functions too.
+
+```{prf:definition} Open mapping
+:label: def-ms-open-mapping
+
+A (total) function $f : (X, d) \to (Y, \rho)$ is called 
+an *open mapping* if $f(A)$ is open whenever $A$ is open.
+
+In other words, $f$ maps open sets to open sets.
+```
+
+```{prf:definition} Closed mapping
+:label: def-ms-closed-mapping
+
+A (total) function $f : (X, d) \to (Y, \rho)$ is called 
+a *closed mapping* if $f(A)$ is closed whenever $A$ is closed.
+
+In other words, $f$ maps closed sets to closed sets.
+```
+
+## Continuous Functions
+
 
 ```{prf:definition} Continuous function
 :label: def-ms-continuous-function
