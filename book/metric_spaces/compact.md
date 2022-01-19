@@ -70,6 +70,50 @@ Let $(X,d)$ be a metric space. If $X$ is itself a
 compact set, then $(X,d)$ is called a *compact metric space*.
 ```
 
+
+```{prf:example}
+The set $(0,1)$ is not compact in $\RR$.
+We first show this the hard way by picking an
+open cover for $(0,1)$ which cannot be
+reduced to a finite subcover.
+Later, we discuss how to verify compactness
+through easy checks.
+
+1. Consider the family of open intervals:
+
+   $$
+   C = \left \{ \left(\frac{1}{n}, 1 \right ) \ST n \geq 2 \right \}.
+   $$
+1. For every $x \in (0,1)$, there is a natural number $n$ such that $x > \frac{1}{n}$.
+1. Thus, $x \in  \left(\frac{1}{n}, 1 \right )$.
+1. Thus,
+   
+   $$
+   (0, 1) \subseteq \bigcup_{n=2}^{\infty} \left(\frac{1}{n}, 1 \right )
+   $$
+   implying that $C$ is an open cover of $(0,1)$.
+1. At the same time for every $n \geq 2$, we have:
+
+   $$
+   \left(\frac{1}{n}, 1 \right ) \subseteq (0, 1)
+   $$
+   since $\frac{1}{n} > 0$.
+1. Thus, 
+
+   $$
+   (0, 1) = \bigcup_{n=2}^{\infty} \left(\frac{1}{n}, 1 \right ).
+   $$
+1. But there is no finite subcover of $(0,1)$ in $C$.
+1. If there was a finite subcover, we could pick a maximum $n$ among those intervals.
+1. But then $x = \frac{1}{n}$ won't belong to any of those intervals in the finite subcover. 
+1. Hence $(0,1)$ is not compact.
+
+We later show in {prf:ref}`res-ms-compact-is-closed-bounded`
+that every compact set is closed and bounded. 
+Hence, an easy way to say that $(0,1)$ is not 
+compact is by noticing that it is not closed.
+```
+
 ## Characterization of Compactness
 
 We have defined compactness as a property where every open
@@ -520,4 +564,30 @@ Let $A$ be a compact subset of $\dom f$.
 1. Since $f(A)$ is bounded, hence it has an infimum and supremum.
 1. Since $f(A)$ is closed, hence its infimum and supremum lie inside $f(A)$ itself.
 1. Thus, $f$ attains a maximum and minimum value in $A$.
+```
+
+## Totally Bound Metric Spaces
+```{prf:definition} Totally bound space
+A metric space $(X,d)$ is called totally bound if for each
+$r > 0$, there exists a finite number of points 
+$x_1, \dots, x_n$ such that 
+
+$$
+X = \bigcup_{i=1}^n B(x_i, r).
+$$
+```
+
+
+```{prf:theorem}
+A compact metric space is totally bound.
+```
+```{prf:proof}
+Let $(X,d)$ be a compact metric space.
+
+1. Let $r > 0$.
+1. Consider the family of open balls $\{ B(x, r) \}_{x \in X}$.
+1. Then $X = \bigcup_{x \in X} B(x, r)$.
+1. Since $X$ is compact, there is a finite subcover of open balls. 
+1. Thus, for every $r > 0$, there is a finite open cover of $X$.
+1. Thus, $X$ is totally bound.
 ```
