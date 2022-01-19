@@ -310,10 +310,61 @@ for an example of closed and bounded set (in discrete space)
 which is not compact.
 
 In the specific case of Euclidean spaces, all closed and
-bounded sets are compact too.
+bounded sets are compact too. 
+See {prf:ref}`Heine-Borel theorem <res-ms-heine-borel-euclidean>` below.
 
 
-## Euclidean Space
+```{prf:theorem} Continuous images of compact sets are compact
+:label: res-ms-compact-continuous-map
+
+Let $f: (X, d) \to (Y, \rho)$ be a continuous function. 
+Let $A$ be a compact subset of $X$ with $A \subseteq \dom f$.
+Then $f(A)$ is a compact subset of $Y$.
+```
+
+```{prf:proof}
+We prove this by showing that any open cover of $f(A)$ 
+can be reduced to a finite subcover.
+
+1. Let $f(A) \subseteq \bigcup_{i \in I} \OOO_i$ be an open cover for $f(A)$.
+1. Then $A \subset \bigcup_{i \in I} f^{-1} (\OOO_i)$.
+1. Since $f$ is continuous, 
+   hence $f^{-1} (\OOO_i)$ is an open subset of $X$ for every $i \in I$.
+1. Since $A$ is compact, there exist indices $i_1, \dots, i_n$ such that
+   $A \subseteq \bigcup_{j=1}^n f^{-1}(\OOO_{i_j})$.
+1. Then
+
+   $$
+   f(A) \subseteq f\left ( \bigcup_{j=1}^n f^{-1}(\OOO_{i_j}) \right ) 
+   = \bigcup_{j=1}^n f(f^{-1}(\OOO_{i_j}))
+   \subseteq  \bigcup_{j=1}^n \OOO_{i_j}.
+   $$
+1. Thus, $A$ is compact.
+```
+
+```{prf:theorem}
+Every closed subset of a compact space is compact.
+```
+```{prf:proof}
+Let $(X, d)$ be a compact metric space and let $A$ be a closed subset of $X$.
+
+1. Let $\{\OOO_i\}_{i \in I}$ be an open cover of $A$. 
+   We have, $A \subseteq \bigcup_{i \in I}\OOO_i$.
+1. $X = A \cup (X \setminus A)$.
+1. Then, $X \subseteq (X \setminus A) \cup \bigcup_{i \in I} \OOO_i$.
+1. Since all $\OOO_i$ are subsets of $X$, hence we can write it as:
+   $X = (X \setminus A) \cup \bigcup_{i \in I} \OOO_i$.
+1. Since $A$ is closed, hence $X \setminus A$ is open.
+1. Thus, $(X \setminus A) \cup \bigcup_{i \in I} \OOO_i$ is an open cover of $X$.
+1. But $X$ is compact. Hence, there exist finite indices $i_1, \dots, i_n$ such that
+   $X = (X \setminus A) \cup \OOO_{i_1} \cup \dots \cup \OOO_{i_n}$.
+1. But then $A \subseteq X$  and $A \cap (X \setminus A) = \EmptySet$ imply that:
+   $A \subseteq \OOO_{i_1} \cup \dots \cup \OOO_{i_n}$.
+1. Thus, $A$ is compact.   
+```
+
+
+## Euclidean Spaces
 
 Recall that $\RR^m$ are called Euclidean spaces with the standard metric:
 
@@ -327,6 +378,8 @@ The compact subsets of a Euclidean space are precisely those
 sets which are closed and bounded.
 
 ```{prf:theorem} Heine-Borel theorem
+:label: res-ms-heine-borel-euclidean
+
 A subset of a Euclidean space is compact if and
 only if it is closed and bounded.
 ```
@@ -384,3 +437,19 @@ We will show that every sequence of $A$ has a subsequence converging in $A$.
 Note that the property *convergence in individual coordinates
 implies convergence in $\RR^m$* is due to the specific choice
 of Euclidean metric.
+
+
+```{prf:theorem}
+Let $f : (X, d) \to \RR$ be a real valued function.
+If $f$ is continuous then $f$ attains a maximum and minimum value on 
+every compact subset of $\dom f$.
+```
+```{prf:proof}
+Let $A$ be a compact subset of $\dom f$. 
+
+1. Then, $f(A)$ is compact in $\RR$ due to {prf:ref}`res-ms-compact-continuous-map`.
+1. Then, $f(A)$ is closed and bounded due to {prf:ref}`Heine-Borel theorem <res-ms-heine-borel-euclidean>`.
+1. Since $f(A)$ is bounded, hence it has an infimum and supremum.
+1. Since $f(A)$ is closed, hence its infimum and supremum lie inside $f(A)$ itself.
+1. Thus, $f$ attains a maximum and minimum value in $A$.
+```
