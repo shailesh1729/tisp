@@ -394,6 +394,7 @@ in detail elsewhere. Follow the links.
 
 1. The {prf:ref}`space<def-la-is-bounded-functions-space>`
    of bounded real valued functions $B(X)$ over a nonempty
-   set $X$ 
+   set $X$ equipped with 
+   {prf:ref}`sup norm <def-la-is-bx-sup-norm>`
    is {prf:ref}`complete <res-la-is-bx-complete>`.
 ```

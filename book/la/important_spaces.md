@@ -42,12 +42,16 @@ h (x) \triangleq \alpha f(x) \Forall x \in X.
 $$
 ```
 
-```{prf:definition} Norm for the space of bounded functions
+```{prf:definition} Sup norm for the space of bounded functions
+:label: def-la-is-bx-sup-norm
+
 The standard norm for $B(X)$ is defined for any $f \in B(X)$ as:
 
 $$
 \| f \| \triangleq  \sup \{ |f(x) | \Forall x \in X\}.
 $$
+
+This norm is known as *sup norm* and often written as $\| f \|_{\infty}$.
 ```
 
 ```{prf:definition} Metric induced by the norm
