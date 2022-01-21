@@ -17,6 +17,8 @@ In this section, we discuss results which are specific
 to normed linear spaces as they take advantage of 
 the additional structure provided by the vector space.
 
+## Unit Balls
+
 ```{prf:definition} Unit ball
 :label: def-la-unit-ball
 
@@ -42,6 +44,7 @@ B(\bx, r) = \bx + r B(\bzero, 1).
 $$
 ```
 
+## Open Sets
 
 ```{prf:theorem}
 If $A$ and $B$ are open, then their sum $A+B$ is open.
@@ -56,6 +59,8 @@ A + B = \bigcup_{x \in B} x + A
 $$
 is a union of open sets. Hence, it is open.
 ```
+
+## Closed Sets
 
 ```{prf:theorem}
 If $A$ is closed and $B$ is compact, then their sum $A+B$ is closed.
