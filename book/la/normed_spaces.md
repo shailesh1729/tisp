@@ -1,3 +1,4 @@
+(sec:la:normed-spaces)=
 # Normed Spaces
 
 Norms are a generalization of the notion of length.

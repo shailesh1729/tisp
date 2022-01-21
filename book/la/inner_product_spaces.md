@@ -1,3 +1,4 @@
+(sec:la:inner-product-spaces)=
 # Inner Product Spaces
 
 Inner products are a generalization of the notion of dot product.
@@ -128,7 +129,7 @@ Remarks:
 *  A set of orthogonal vectors is linearly independent.
 
 
-````{prf:definition} Pre-Hilbert space
+````{prf:definition} Inner product space / Pre-Hilbert space
 :label: def-la-pre-hilbert-space
 
 An $\FF$-vector space $\VV$ equipped with an inner product 

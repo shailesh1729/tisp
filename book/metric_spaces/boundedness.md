@@ -1,3 +1,4 @@
+(sec:ms:boundedness)=
 # Boundedness
 
 Let $(X, d)$ be a metric space.

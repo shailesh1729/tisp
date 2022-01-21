@@ -1,3 +1,4 @@
+(sec:ms:sequences)=
 # Sequences
 
 Let $(X, d)$ be a metric space.

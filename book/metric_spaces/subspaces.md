@@ -1,3 +1,4 @@
+(sec:ms:subspaces)=
 # Subspace Topology
 
 Let $(X, d)$ be a metric space. Let $Y \subseteq X$. 

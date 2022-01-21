@@ -1,3 +1,4 @@
+(sec:ms:compactness)=
 # Compactness
 
 The material in this section is primarily based on

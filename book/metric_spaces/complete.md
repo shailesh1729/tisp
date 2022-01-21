@@ -1,3 +1,4 @@
+(sec:ms:completeness)=
 # Completeness
 The material in this section is primarily based on
 {cite}`aliprantis1998principles,gopal2020introduction`.
