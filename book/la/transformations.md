@@ -1,3 +1,4 @@
+(sec:la:linear-transformations)=
 # Linear Transformations
 In this section, we will be using symbols $\VV$ and $\WW$
 to represent arbitrary vector spaces over a field $\FF$. 
@@ -9,7 +10,7 @@ $\VV$ and $\WW$ are defined over
 different fields, but we will assume that they are defined over the same field $\FF$
 for simplicity of discourse.
 
-````{prf:definition}
+````{prf:definition} Linear transformation
 :label: def-la-linear-transformation
 
 We call a map $\TT : \VV \to \WW$ a *linear transformation* 
