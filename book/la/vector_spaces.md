@@ -1005,3 +1005,75 @@ $$
 \text{codim} \WW = \dim \VV - \dim \WW.
 $$
 ````
+
+
+
+## Sets in Vector Spaces
+
+```{prf:definition} Arithmetic on sets
+:label: def-vs-set-arithmetic
+
+Let $C$, $D$ be subsets of an $\FF$ vector space
+$\VV$. Let $\bz \in \VV$. 
+Let $\lambda \in \FF$.
+Let $\Lambda \subseteq \FF$.
+
+The addition of sets is defined as:
+
+$$
+C + D \triangleq \{ \bx + \by \ST \bx \in C, \by \in D \}.
+$$
+
+The subtraction of sets is defined as:
+
+$$
+C - D \triangleq \{ \bx - \by \ST \bx \in C, \by \in D \}.
+$$
+
+Addition of a set with a vector is defined as:
+
+$$
+\bz + C \triangleq \{ \bz + \bx \ST \bx \in C\} = \{ \bz \} + C.
+$$
+
+Subtraction of set with a vector is defined as:
+
+$$
+C - \bz \triangleq \{ \bx - \bz \ST \bx \in C\} = C - \{ \bz \}.
+$$
+
+Scalar multiplication of a set with a scalar is defined as:
+
+$$
+\lambda C \triangleq \{ \lambda \bx \ST \bx \in C \}.
+$$
+
+Multiplication of a set of scalars with a set of vectors is defined as:
+
+$$
+\Lambda C \triangleq \bigcup_{\lambda \in \Lambda} \lambda C.
+$$
+
+Multiplication of a set of scalars with a vector is defined as:
+
+$$
+\Lambda \bz \triangleq \Lambda \{ \bz \} = \{ \lambda \bz \ST \lambda \in \Lambda\}.
+$$
+```
+
+## Real Vector Spaces
+
+```{prf:definition} Real vector space
+:label: def-la-real-vector-space
+
+A *real vector space* $\VV$ is a vector space
+defined over the real field $\RR$.
+
+In other words, the scalars come from the field of
+real numbers.
+```
+
+There are several features associated with the real field.
+
+* $\RR$ is {prf:ref}`totally ordered <def-st-totally-ordered-set>`.
+* $\RR$ is {prf:ref}`complete <def-ms-complete-metric-space>`.
