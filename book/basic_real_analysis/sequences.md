@@ -239,8 +239,8 @@ For all $\epsilon > 0$, $| x_n - c | = 0 < \epsilon$ for all $n \in \Nat$.
 ````
 
 
-
-## The calculus of limits
+(sec:bra:sequences:calculus:limits)=
+## The Calculus of Limits
 
 Let $\{ x_n \}$ and $\{ y_n \}$ be convergent sequences of $\RR$.
 Our concern here is to understand what happens to the limits if
