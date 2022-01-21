@@ -1,5 +1,5 @@
 (sec:la:real-euclidean-space)=
-# The Real Euclidean Space
+# The Euclidean Space
 
 This section consolidates major results for 
 the real Euclidean space $\RR^n$ as a ready reference. 
