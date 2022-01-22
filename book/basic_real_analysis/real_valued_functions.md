@@ -1,3 +1,4 @@
+(sec:bra:real-valued-functions)=
 # Real Valued Functions
 
 
@@ -149,6 +150,46 @@ it is bounded from above as well as below.
    a metric space. 
    See {prf:ref}`ex-ms-bounded-functions-metric-space`. 
 
+## Graph
+
+* For a function $f : \RR^n \to \RR$,
+  its graph is a subset of $\RR^{n+1}$.
+* We say that a point $(x, f(x))$ in the graph of $f$
+  is above (resp. below) of another point $(y, f(y))$
+  if $f(x) \geq f(y)$ (resp. $f(x) \leq f(y)$).
+* A line segment connecting the two points 
+  $(x_1, f(x_1))$ and $(x_2, f(x_2))$ is called a
+  *chord* of the graph of the function.
+
+
+## Epigraph
+
+```{prf:definition} Epigraph
+:label: def-bra-epigraph
+
+The *epigraph* of a real valued function $f: X \to \RR$ is
+defined as:
+
+$$
+\epi f \triangleq \{ (x,t) \in X \times \RR \, | \, x \in \dom f, f(x) \leq t \}.
+$$ 
+```
+The epigraph lies above (and includes) the graph of a function.
+
+## Sub-level Sets
+
+```{prf:definition} Sub-level set
+:label: def-bra-sub-level-set
+
+For a real valued function $f: X \to \RR$, the sublevel set
+for some $\alpha \in \RR$ is defined as 
+
+$$
+\{ x \in \dom f \,|\, f(x) \leq \alpha \}.
+$$
+```
+
+
 
 ## Extended Real Valued Functions
 
@@ -218,3 +259,4 @@ $$
 \end{cases}
 $$
 ```
+
