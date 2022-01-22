@@ -1,3 +1,4 @@
+(sec:la:sequence-spaces)=
 # Sequence Spaces
 
 We shall assume the field of scalars $\FF$ to be either $\RR$ or $\CC$.

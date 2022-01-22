@@ -1,3 +1,4 @@
+(sec:la:operators)=
 # Operators
 
 Operators are mappings from one vector space to another space.
