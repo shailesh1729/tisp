@@ -773,6 +773,8 @@ Then $\RR = A \cup B$. Since $A$ is countable and $\RR$ is uncountable, hence $B
 and is uncountable.
 ````
 
+## Intervals are Uncountable
+
 ````{prf:proposition}
 :label: res-rl-unit-open-interval-uncountable
 
