@@ -197,6 +197,22 @@ The domain is $\RR$ and the range is $\RR_+ = [0, \infty)$.
 $f$ is total. It is not injective. It is not surjective. 
 ````
 
+```{prf:example}  Logarithm of the determinant
+The set of $n \times n$ real symmetric matrices is denoted by $\SS^n$. 
+The set of positive semidefinite symmetric matrices is denoted by $\SS^n_+$. 
+The set of positive definite symmetric matrices is denoted by $\SS^n_{++}$.
+
+Consider the function $f : \SS^n \to \RR$ given by
+
+$$
+f (X) = \log \det (X).
+$$
+
+The domain of the function is $\dom f = \SS^n_{++}$. The function
+is not defined for matrices which are not positive definite.
+```
+
+
 In summary, for a function $f : A \to B$:
 
 * If $\dom f = A$ then, the function is total.
@@ -552,6 +568,26 @@ $f$ is a restriction of $g$.
 ```
 
 If $g$ is an extension of $f$ then $\dom f \subset \dom g$.
+
+## Graph
+
+```{prf:definition} Graph of a function
+:label: def-st-function-graph
+
+Given a function $f : X \to Y$, 
+the set of ordered pairs $(x, y)$ where
+$x \in \dom f$ and $y = f(x)$,
+is known as the *graph* of a function.
+
+$$
+\graph f \triangleq \{ (x, f(x)) \ST x \in X \}
+$$
+
+The graph of a function is the subset of the
+Cartesian product  $X \times Y$. 
+```
+
+
 
 ## Set Valued Functions
 
