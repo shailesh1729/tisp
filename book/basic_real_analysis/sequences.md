@@ -1,3 +1,4 @@
+(sec:bra:sequences)=
 # Sequences and Series
 
 This section collects results on sequences and series of real numbers.

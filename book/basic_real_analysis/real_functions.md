@@ -1,3 +1,4 @@
+(sec:bra:real-functions)=
 # Real Functions
 In this section, we will deal with functions of type $f : \RR \to \RR$. 
 Main references are 
