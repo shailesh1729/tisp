@@ -55,7 +55,9 @@ $$
 Thus, the inequality indeed reduces to equality at $t=1$.
 ```
 
-```{prf:definition} Conjugate exponents
+```{prf:definition} Conjugate exponent
+:label: def-bra-conjugate-exponent
+
 
 Let $p,q$ be extended real numbers with 
 $p,q \in [1,\infty]$. 
