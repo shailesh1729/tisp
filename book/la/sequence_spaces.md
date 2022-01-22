@@ -177,7 +177,7 @@ Now suppose that $\sum_{n=1}^{\infty} | x_n | = 0$. The sum of
 a non-negative sequence is zero only if each term is 0. Thus,
 $\{x_n \} = \bzero$.
 
-[Scalar multiplication]
+[Positive homogeneity]
 Let $\bx = \{ x_n \}$ be absolutely summable. 
 From {prf:ref}`res-la-ss-sequence-scaling-closure`,
 we have:

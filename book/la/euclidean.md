@@ -242,7 +242,7 @@ is a {prf:ref}`norm <def-la-norm>`.
 By definition, if $\bu \neq \bzero$, then $\| \bu \|_p > 0$.
 Similarly, $\| \bu \|_p = 0$ implies $\bu = \bzero$.
 
-[Scalar multiplication]
+[Positive homogeneity]
 Let $\alpha \in \RR$. If $p < \infty$, then
 
 $$

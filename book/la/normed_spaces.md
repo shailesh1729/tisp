@@ -32,7 +32,7 @@ satisfying following properties:
    $$
    \| \bv\| \geq 0 \quad \forall \bv \in \VV \text{  and  } \| \bv\| = 0 \iff \bv = \bzero.
    $$
-1. [Scalar multiplication]
+1. [Positive homogeneity]
 
    $$
     \| \alpha \bv \| = | \alpha | \| \bv \| \quad \forall \alpha \in \FF; \forall \bv \in \VV.
