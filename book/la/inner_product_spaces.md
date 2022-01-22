@@ -35,7 +35,72 @@ satisfying following properties:
    $$
 ````
 
-Remarks
+```{prf:proposition}
+Let $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ be an inner product.
+Then
+
+$$
+\langle \bv, \alpha \bw \rangle =  \overline{\alpha} \langle \bv, \bw \rangle.
+$$
+```
+
+```{prf:proof}
+We proceed as follows:
+
+$$
+\langle \bv, \alpha \bw \rangle = \overline{\langle \alpha \bw, \bv \rangle}
+= \overline{\alpha \langle  \bw, \bv \rangle}
+= \overline{\alpha}\overline{\langle  \bw, \bv \rangle}
+= \overline{\alpha}\langle \bv, \bw \rangle.
+$$
+```
+
+```{prf:proposition}
+Let $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ be an inner product.
+Then for any $\bv, \bx, \by \in \VV$:
+
+$$
+\langle \bv, \bx + \by \rangle = \langle \bv, \bx \rangle + \langle \bv, \by \rangle.
+$$
+```
+
+```{prf:proof}
+We proceed as follows:
+
+$$
+\langle \bv, \bx + \by \rangle = \overline{\langle \bx + \by , \bv \rangle}
+= \overline{\langle \bx, \bv \rangle + \langle \by, \bv \rangle}
+= \overline{\langle \bx, \bv \rangle} + \overline{\langle \by, \bv \rangle}
+= \langle \bv, \bx \rangle + \langle \bv, \by \rangle.
+$$
+
+```
+
+
+```{prf:proposition}
+Let $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ be an inner product.
+Then,
+
+$$
+\langle \bzero , \bv \rangle  = 0 \Forall \bv \in \VV.
+$$
+```
+
+```{prf:proof}
+We proceed as follows:
+
+$$
+\langle \bu , \bv \rangle = \langle \bu + \bzero , \bv \rangle
+= \langle \bu , \bv \rangle + \langle \bzero , \bv \rangle.
+$$
+
+By cancelling terms, we get:
+
+$$
+\langle \bzero , \bv \rangle = 0.
+$$
+```
+
 
 
 * Linearity in first argument extends to any arbitrary linear combination:
@@ -257,37 +322,7 @@ While the presentation in rest of the section will be based on the
 general conjugate symmetric inner product, it will be easy to 
 extrapolate the results for the special case of real inner products.
 
-## Orthogonality
-
-````{prf:definition} Orthogonal vectors
-:label: def-la-orthogonal-vectors
-
-A set of non-zero vectors $\{\bv_1, \dots, \bv_p\}$ is called *orthogonal* if
-
-$$
-     \langle \bv_i, \bv_j  \rangle = 0  \text{ if } i \neq j \quad \forall 1 \leq i, j \leq p.
-$$
-````
-
-````{prf:definition} Orthonormal vectors
-:label: def-la-orthonormal-vectors
-
-A set of non-zero vectors $\{\bv_1, \dots, \bv_p\}$ is called *orthonormal* if
-
-$$
-\begin{aligned}
- &\langle \bv_i, \bv_j  \rangle = 0  \text{ if } i \neq j \quad \forall 1 \leq i, j \leq p\\
- &\langle \bv_i, \bv_i  \rangle = 1  \quad \forall 1 \leq i \leq p
-\end{aligned} \, .
-$$
-
-i.e. $\langle \bv_i, \bv_j  \rangle = \delta(i, j)$.
-````
-
-Remarks:
-
-*  A set of orthogonal vectors is linearly independent.
-
+## Inner Product Space
 
 ````{prf:definition} Inner product space / Pre-Hilbert space
 :label: def-la-pre-hilbert-space
@@ -297,6 +332,297 @@ $\langle, \rangle : \VV \times \VV \to \FF$ is known
 as an *inner product space* or a *pre-Hilbert space*.
 ````
 
+
+
+## Orthogonality
+
+Orthogonality is the generalization of the notion of
+perpendicularity from elementary geometry.
+
+```{prf:definition} Orthogonal vectors
+:label: def-la-orthogonal-pair
+
+Any two vectors $\bu , \bv \in \VV$ are called *orthogonal* to each other
+if  $\langle \bu, \bv \rangle = 0$. 
+
+We write $\bu \perp \bv$ if $\bu$ and $\bv$ are orthogonal to each other.
+```
+
+
+````{prf:definition} Set of orthogonal vectors
+:label: def-la-orthogonal-vectors
+
+A set of non-zero vectors $\{\bv_1, \dots, \bv_p\}$ is called *orthogonal*
+or *pairwise orthogonal* if
+
+$$
+     \langle \bv_i, \bv_j  \rangle = 0  \text{ if } i \neq j \quad \forall 1 \leq i, j \leq p.
+$$
+````
+
+```{prf:theorem}
+A set of orthogonal vectors is linearly independent.
+```
+
+```{prf:proof}
+Let $\bv_1, \dots \bv_n$ be a set of orthogonal vectors. 
+Suppose there is a linear combination:
+
+$$
+\alpha_1 \bv_1 + \dots + \alpha_n \bv_n = \bzero.
+$$
+
+Taking inner product on both sides with $\bv_j$, we get:
+
+$$
+\begin{aligned}
+& \langle \alpha_1 \bv_1 + \dots + \alpha_n \bv_n, \bv_j \rangle = \langle \bzero , \bv_j \rangle\\
+&\iff 0 + \dots + \alpha_j \langle \bv_j, \bv_j \rangle + \dots + 0 = 0\\
+&\iff \alpha_j \langle \bv_j, \bv_j \rangle = 0\\
+&\iff \alpha_j =  0.
+\end{aligned}
+$$
+
+Thus, the only zero linear combination is the trivial combination.
+Thus, the vectors are linearly independent.
+```
+
+## Norm Induced by Inner Product
+
+```{prf:definition} Norm induced by inner product
+:label: def-la-ip-induced-norm
+
+Every inner product $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ 
+on a vector space $\VV$
+induces a {prf:ref}`norm <def-la-norm>`  $\| \cdot \| : \VV \to \RR$ 
+given by:
+
+$$
+\| \bv \| = \sqrt{\langle \bv , \bv \rangle} \Forall \bv \in \VV.
+$$
+```
+
+We shall justify that this function satisfies all the properties of a norm
+later. But before that, let us examine some implications of this definition
+which are useful in their own right.
+
+Note that it is easy to see that $\| \cdot \|$ is positive definite;
+i.e., $\| \bzero \| = 0$ and $\| \bv \| > 0$ if $\bv \neq \bzero$.
+
+Also, it is positively homogeneous, since:
+
+$$
+\| \alpha \bv \|  = \sqrt{\langle \alpha \bv , \alpha \bv \rangle}
+= \sqrt{\alpha \overline{\alpha} \langle \bv, \bv \rangle} 
+= |\alpha| \sqrt{\langle \bv, \bv \rangle} = |\alpha| \| \bv \|.
+$$
+
+```{prf:theorem} Pythagoras theorem
+If $\bu \perp \bv$ then
+
+$$
+\| \bu + \bv \|^2 = \| \bu \|^2 + \| \bv \|^2.
+$$
+```
+
+```{prf:proof}
+Expanding:
+
+$$
+\| \bu + \bv \|^2 = \langle \bu + \bv , \bu + \bv \rangle 
+= \langle \bu, \bu \rangle + \langle \bu, \bv \rangle + \langle \bv, \bu \rangle + \langle \bv, \bv \rangle
+= \| \bu \|^2 + \| \bv \|^2  
+$$
+where we used the fact that: $\langle \bu, \bv \rangle = \langle \bv, \bu \rangle = 0$
+since  $\bu \perp \bv$.
+```
+
+```{prf:theorem} Cauchy Schwartz inequality
+For any $\bu, \bv \in \VV$:
+
+$$
+| \langle \bu, \bv \rangle | \leq \| \bu \| \| \bv \|.
+$$
+The equality holds if and only if $\bu$ and $\bv$ are linearly dependent.
+```
+
+```{prf:proof}
+If either $\bu = \bzero$ or $\bv = \bzero$ then the equality holds.
+So, suppose that neither of them are zero vectors.
+In particular $\bv \neq \bzero$ means $\| \bv \| > 0$.
+
+Define 
+
+$$
+\bw = \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv.
+$$
+
+Then,
+
+$$
+\begin{aligned}
+\langle \bw, \bu - \bw \rangle &= 
+\left \langle \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv, 
+\bu  - \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv \right \rangle\\
+&= \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \left \langle \bv, 
+\bu  - \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv \right \rangle\\
+&= \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \left ( 
+\langle \bv, \bu \rangle - 
+\left \langle \bv, \bv \right \rangle
+\right )\\
+&= \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \left ( 
+\langle \bv, \bu \rangle - 
+\frac{\overline{\langle \bu, \bv \rangle}}{\| \bv \|^2}  \langle \bv, \bv \rangle \right )\\
+&= \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \left ( 
+\langle \bv, \bu \rangle - 
+\frac{\langle \bv, \bu \rangle}{\| \bv \|^2}  \| \bv \|^2 \right )\\
+&= 0.
+\end{aligned}
+$$
+
+Thus, $\bw \perp \bu - \bw$. Therefore, by Pythagorean theorem,
+
+$$
+\begin{aligned}
+\| \bu \|^2 &= \| \bu - \bw + \bw \|^2\\
+&=  \| \bu - \bw \|^2 + \| \bw \|^2\\
+&\geq \| \bw \|^2\\
+&= \left \| \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv \right \|^2\\
+&= \left | \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \right |^2 \| \bv \|^2\\
+&= \frac{|\langle \bu, \bv \rangle|^2}{\| \bv \|^2}.
+\end{aligned}
+$$
+
+Multiplying on both sides by $\| \bv \|^2$, we obtain:
+
+$$
+\| \bu \|^2 \| \bv \|^2 \geq |\langle \bu, \bv \rangle|^2.
+$$
+
+Taking square roots on both sides, 
+
+$$
+|\langle \bu, \bv \rangle| \leq \| \bu \| \| \bv \|.
+$$
+
+In the derivation above, the equality holds if and only if
+
+$$
+\bzero = \bu - \bw = \bu - \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv
+$$
+which means that $\bu$ and $\bv$ are linearly dependent.
+
+Conversely, if $\bu$ and $\bv$ are linearly dependent, then
+$\bu = \alpha \bv$ for some $\alpha \in \FF$, and
+
+$$
+\bw = \frac{\langle \alpha \bv, \bv \rangle}{\| \bv \|^2}\bv
+=\frac{\alpha \langle \bv, \bv \rangle}{\| \bv \|^2}\bv
+= \alpha \bv = \bu
+$$
+giving us $\bu - \bw = \bzero$. Hence, the equality holds.
+```
+
+
+```{prf:theorem}
+The function $\| \cdot \| : \VV \to \RR$ induced by the inner product
+$\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ as defined in
+{prf:ref}`def-la-ip-induced-norm` is indeed a norm.
+```
+
+```{prf:proof}
+We need to verify that $\| \cdot \|$ so defined is indeed a norm.
+We have already shown that it is positive definite and positive homogeneous.
+We now show the triangle inequality. We will take help of the
+Cauchy Schwartz inequality shown above:
+
+$$
+\begin{aligned}
+\| \bu + \bv \|^2 
+&= \langle \bu + \bv , \bu + \bv \rangle\\ 
+&= \langle \bu, \bu \rangle + \langle \bu, \bv \rangle + \langle \bv, \bu \rangle + \langle \bv, \bv \rangle\\
+&= \| \bu \|^2 + \langle \bu, \bv \rangle + \overline{\langle \bu, \bv \rangle} + \| \bv \|^2\\  
+&= \| \bu \|^2 + 2\Re\langle \bu, \bv \rangle + \| \bv \|^2\\  
+&\leq \| \bu \|^2 + 2|\langle \bu, \bv \rangle| + \| \bv \|^2\\
+&\leq \| \bu \|^2 + 2\|\bu\|\|\bv\| + \| \bv \|^2\\
+&=(\| \bu \| + \| \bv \|)^2.
+\end{aligned}
+$$
+
+Taking square root on both sides, we obtain:
+
+$$
+\| \bu + \bv \| \leq \| \bu \| + \| \bv \|.
+$$
+Thus, $\| \cdot \|$ is indeed a norm.
+```
+We recap the sequence of results to emphasize the logical flow:
+
+1. We started with just the definition of $\| \cdot \|$ in {prf:ref}`def-la-ip-induced-norm`.
+1. We proved positive definiteness from the definition itself.
+1. We proved positive homogeneity also from the definition itself.
+1. We proved Pythagoras theorem utilizing previously established results for inner products.
+1. We proved Cauchy Schwartz inequality using positive definiteness,
+   positive homogeneity and Pythagoras theorem.
+1. We proved triangle inequality using Cauchy Schwartz inequality.
+
+```{prf:theorem}
+Every inner product space is a normed space. Hence it is also a metric space.
+```
+
+```{prf:proof}
+An inner product induces a norm which makes the vector space a normed space.
+A norm induces a metric which makes the vector space a metric space.
+```
+
+## Hilbert Spaces
+
+```{prf:definition}
+An inner product space $\VV$ that is
+{prf:ref}`complete <def-ms-complete-metric-space>`
+with respect to the metric induced by the norm
+induced by its inner product
+is called a *Hilbert space*.
+
+In other words, $\VV$ is a Hilbert space if
+every Cauchy sequence of $\VV$ converges in $\VV$.
+```
+
+## Orthonormality
+
+````{prf:definition} Set of orthonormal vectors
+:label: def-la-orthonormal-vectors
+
+A set of non-zero vectors $\{\bv_1, \dots, \bv_p\}$ is called *orthonormal* if
+
+$$
+\begin{aligned}
+ &\langle \bv_i, \bv_j  \rangle = 0  \text{ if } i \neq j \quad \forall 1 \leq i, j \leq p\\
+ &\langle \bv_i, \bv_i  \rangle = 1  \quad \forall 1 \leq i \leq p
+\end{aligned} \, ;
+$$
+i.e., $\langle \bv_i, \bv_j  \rangle = \delta(i, j)$.
+
+In other words, the vectors are unit norm ($\| \bv_j \| = 1$) and are
+pairwise orthogonal.
+````
+
+Since orthonormal vectors are orthogonal, hence they are linearly independent.
+
+```{prf:definition} Orthonormal basis
+A set of orthonormal vectors form an *orthonormal basis* for their span.
+```
+
+
+```{prf:proposition} Expansion of a vector in an orthonormal basis
+
+Let $\{\bv_1, \dots, \bv_n\}$  be an orthonormal basis for $\VV$.
+Then, any $\bv \in \VV$ can be written as:
+
+$$
+\bv = \langle \bv, \bv_1 \rangle \bv_1 + \dots +  \langle \bv, \bv_n \rangle \bv_n.
+$$
+```
 
 
 ## Projection
