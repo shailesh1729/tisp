@@ -1,6 +1,7 @@
+(sec:la:normed-space-topology)=
 # Topology of Normed Linear Spaces
-
-If $\VV$ is equipped with a norm $\| \cdot \| : \VV \to \RR$, 
+{prf:ref}`Recall <def-la-norm-induced-metric>` that
+if $\VV$ is equipped with a norm $\| \cdot \| : \VV \to \RR$, 
 it induces a {prf:ref}`metric <def-ms-distance-function>` 
 $d: \VV \times \VV \to \RR$ given by:
 
@@ -17,7 +18,39 @@ In this section, we discuss results which are specific
 to normed linear spaces as they take advantage of 
 the additional structure provided by the vector space.
 
-## Unit Balls
+1. There is a special zero vector $\bzero \in \VV$.
+   It provides a reference point to define unit balls.
+1. Vectors in $\VV$ can be added, subtracted and scaled.
+   Thus, general balls can be described in terms of unit
+   balls.
+1. It is possible to introduce the notion of translation
+   of sets. Recall that the metric induced by the norm
+   is {prf:ref}`translation invariant <res-la-ns-metric-translation-invariant>`. 
+1. Sets of vectors in a vector space can be added/subtracted/scaled 
+   since the underlying vectors can be.
+   This produces a number of interesting phenomena.
+
+## Balls
+
+An {prf:ref}`open ball <def-ms-open-ball>` in
+a normed space is defined analogously as:
+
+$$
+B(\ba,r) = \{ \bx \in \VV \ST \| \bx - \ba \| < r \}.
+$$
+
+A {prf:ref}`closed ball <def-ms-closed-ball>` in
+a normed space is defined analogously as:
+
+$$
+B[\ba,r] = \{ \bx \in \VV \ST \| \bx - \ba \| \leq r \}.
+$$
+
+We sometimes use the notation
+$B_{\| \cdot \|}(\ba,r)$
+and $B_{\| \cdot \|}[\ba,r]$
+to identify the specific norm being used to
+describe the open and closed balls.
 
 ```{prf:definition} Unit ball
 :label: def-la-unit-ball
