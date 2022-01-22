@@ -49,7 +49,133 @@ $$
 \left \langle \bv, \sum \alpha_i \bw_i \right \rangle = \sum \overline{\alpha_i} \langle \bv, \bw_i \rangle.
 $$
 
+```{prf:example}
+The standard inner product on $\RR^n$ is defined as:
 
+$$
+\langle \bx, \by \rangle = \sum_{i=1}^n x_i y_i.
+$$
+
+This is often called the *dot product* or *scalar product*.
+```
+
+```{prf:example}
+The standard inner product on $\CC^n$ is defined as:
+
+$$
+\langle \bx, \by \rangle = \sum_{i=1}^n x_i \overline{y_i}.
+$$
+```
+
+```{prf:example}
+Let $\bx, \by \in \RR^2$. Define:
+
+$$
+\langle \bx, \by \rangle = x_1 y_1 - x_2 y_1 - x_1 y_2  + 4 x_2 y_2.
+$$
+
+Now:
+
+1. $\langle \bx, \bx \rangle = (x_1 - x_2)^2 + 3 x_2^2$.
+   Thus, $\bx = \bzero \iff \langle \bx, \bx \rangle = 0$. 
+   Thus, it is positive definite.
+1. $\langle \by, \bx \rangle = y_1 x_1 - y_2 x_1 - y_1 x_2 + 4 y_2 x_2 = \langle \bx, \by \rangle$.
+   It is symmetric.
+1. We can also verify that it is linear in the first argument.
+
+Thus, it satisfies all the properties of an inner product. 
+
+
+Note that, in the matrix notation, we can write this 
+inner product as:
+
+$$
+\langle \bx, \by \rangle = 
+\begin{bmatrix} x_1 & x_2 \end{bmatrix}
+\begin{bmatrix} 1 & -1 \\ -1 & 4 \end{bmatrix}
+\begin{bmatrix} y_1 \\ y_2 \end{bmatrix}
+$$
+
+The matrix
+
+$$
+A = \begin{bmatrix} 1 & -1 \\ -1 & 4 \end{bmatrix}
+$$
+is positive definite.
+Its trace is $5$ and its determinant is $3$.
+Its eigen values are $4.303, 0.697$.
+```
+
+```{prf:example}
+Let $\CC^{n \times n}$ be the space of $n \times n$ matrices.
+For any $\bA = (a_{ij})$ and $\bB = (b_{ij})$ in $\CC^{n \times n}$,
+we define the inner product as:
+
+$$
+\langle \bA, \bB \rangle = \sum_{j, k} a_{j k} \overline{b_{j k}}.
+$$
+
+It can be easily seen that:
+
+$$
+\langle \bA, \bB \rangle = \Trace (\bA \bB^H) = \Trace (\bB^H \bA)
+$$
+where $\bB^H$ is the conjugate transpose of $\bB$ and $\Trace$ computes
+the trace of a matrix (sum of its diagonal values).
+```
+
+```{prf:example}
+Let $\CC^{n \times 1}$ be the space of column vectors. 
+Let $\bQ$ be an arbitrary $n \times n$ invertible matrix over $\CC$. 
+
+For any $\bx, \by \in \CC^{n \times 1}$, define
+
+$$
+\langle \bx, \by \rangle  = \by^H \bQ^H \bQ \bx.
+$$
+We identify the $1 \times 1$ matrix in the R.H.S. with its
+single entry as a complex number $\CC$. This is a valid inner product.
+
+When $\bQ = \bI$, the identity matrix, the inner product reduces to:
+
+$$
+\langle \bx, \by \rangle  = \by^H \bx.
+$$
+
+This is the *standard inner product* on the space of column vectors.
+```
+
+```{prf:proposition}
+For complex inner products, the inner product is determined identified
+by its real part. 
+```
+```{prf:proof}
+
+Let
+
+$$
+\langle \bx, \by \rangle = \Re\langle \bx, \by \rangle + i \Im\langle \bx, \by \rangle.
+$$
+
+For any complex number $z = x + i y \in \CC$, we have:
+
+$$
+\Re (- i z) = \Re ( -i (x + i y)) = \Re (y - i x) = y = \Im (z).
+$$
+
+Since, $\langle \bx, \by \rangle$ is a complex number, hence:
+
+$$
+\Im \langle \bx, \by \rangle = \Re (-i \langle \bx, \by \rangle) 
+= \Re \langle \bx, i \by \rangle.
+$$
+
+Thus,
+
+$$
+\langle \bx, \by \rangle = \Re\langle \bx, \by \rangle + i \Re \langle \bx, i \by \rangle.
+$$
+```
 
 ## Real Inner Product
 
@@ -91,6 +217,40 @@ satisfying following properties:
 $$
 \left \langle \bv, \sum \alpha_i \bw_i \right \rangle = \sum \alpha_i \langle \bv, \bw_i \rangle.
 $$
+
+
+```{prf:example}
+Let $z_1, z_2$ be complex numbers:
+
+$$
+z_1 \overline{z_2} = (a_1 + i b_1) (a_2 - i b_2) = a_1 a_2 + b_1 b_2 + i (b_1 a_2 - a_1 b_2).
+$$
+
+Then
+
+$$
+\Re (z_1 \overline{z_2}) = a_1 a_2 + b_1 b_2.
+$$
+
+1. $\Re (z \overline{z}) = x^2 + y^2$ is positive definite;
+   i.e., $\Re (z \overline{z}) = 0 \iff z = 0 + i 0$.
+1. $\Re (z_1 \overline{z_2}) = \Re (z_2 \overline{z_1})$ is symmetric.
+1. For any $\alpha \in \RR$ $\Re (\alpha z_1 \overline{z_2}) = \alpha \Re (z_1 \overline{z_2})$.
+   Thus, it is linear in first argument.
+
+Now, for any $\bx, \by \in \CC^n$, define:
+
+$$
+\langle \bx, \by \rangle = \Re \left ( \sum_{i=1}^n x_i \overline{y_i} \right ).
+$$
+
+Following the argument above, it is a real inner product on $\CC^n$.
+
+Interestingly, if $\bu \in \CC^n$ is identified with $\bv \in \RR^{2 n}$ by
+stacking the real and imaginary parts, then the real inner product 
+defined above for $\CC^n$ is nothing but the standard inner product for
+$\RR^{2 n}$.
+```
 
 
 While the presentation in rest of the section will be based on the
