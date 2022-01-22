@@ -1,4 +1,4 @@
-# Functions
+# Convex Functions
 
 
 Chapter objectives
