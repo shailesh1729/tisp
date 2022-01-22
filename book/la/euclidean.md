@@ -113,7 +113,7 @@ The angle $\theta$ between two vectors is given by:
 $$
 \theta = \cos^{-1} \frac{ \langle \bx, \by \rangle }{\| \bx \| \| \by \|}.
 $$
-
+```
 
 
 
@@ -126,15 +126,209 @@ $\ell_p$ norms over $\RR^n$.
 ````{prf:definition} $\ell_p$ norm
 :label: def-la-euclidean-lp_norm
 
-$l_p$ norm is defined as:
+Let $p \in [1, \infty]$. For any $n \in \Nat$,
+the $l_p$ norm denoted as $\| \cdot \|_p : \RR^n \to \RR$ 
+mapping any vector $\bx \in \RR^n$ to a non-negative number
+is defined as:
 
 $$
 \| \bx \|_p = \begin{cases}
- \left ( \sum_{i=1}^{n} | x |_i^p  \right ) ^ {\frac{1}{p}} &  p \in [1, \infty)\\
-\underset{1 \leq i \leq n}{\max} |x_i| &  p = \infty
-\end{cases}
+\left ( \sum_{i=1}^{n} | x_i |^p  \right ) ^ {\frac{1}{p}} & \text{ if } & p \in [1, \infty)\\
+\underset{1 \leq i \leq n}{\max} |x_i| & \text{ if } &  p = \infty
+\end{cases}\, .
 $$
 ````
+```{div}
+We mention the special cases. $p=1$ gives us:
+
+$$
+\|\bx\|_1 = \sum_{i=1}^n |x_i|= |x_1| + |x_2| + \dots  + | x_n|.
+$$
+
+$p=2$ gives us:
+
+$$
+\| \bx \|_2 = \left ( \sum_{i=1}^{n} | x_i |^2  \right ) ^ {\frac{1}{2}}
+$$
+which is same as the standard
+{prf:ref}`Euclidean norm <def-la-euclidean-norm>`. 
+
+$p=\infty$ gives us:
+
+$$
+\|\bx\|_{\infty} = \underset{1 \leq i \leq n}{\max} |x_i|.
+$$
+
+
+We need to justify that $\ell_p$ norm defined as above is indeed a norm.
+Before that, we state the Hölder's inequality for the Euclidean space.
+```
+
+````{prf:theorem} Hölder's inequality
+
+Let $\bu, \bv \in \RR^n$. 
+Let $p \in [1, \infty]$ and let $q$ be its 
+{prf:ref}`conjugate exponent <def-bra-conjugate-exponent>`.
+
+We have:
+
+```{math}
+:label: eq-la-finite-holder-inequality
+\| \bu \bv \|_1 \leq \| \bu \|_p \| \bv \|_q
+```
+
+where $\bu \bv$ denotes the element-wise multiplication given by:
+
+$$
+\bu \bv = (u_1 v_1, \dots, u_n v_n).
+$$
+````
+
+```{prf:proof}
+If $\bu = \bzero$ or $\bv = \bzero$, then {eq}`eq-la-finite-holder-inequality`
+follows immediately. 
+
+Now, consider the case where $\bu \neq \bzero$ and $\bv \neq \bzero$.
+
+If $p=1$, then $q = \infty$. We have:
+
+$$
+\| \bu \bv \|_1 = \sum_{i=1}^n |u_i v_i| 
+\leq \underset{1 \leq j \leq n}{\max} |v_j| \sum_{i=1}^n |u_i | 
+= \| \bu \|_1 \| \bv \|_{\infty}.
+$$
+The same argument applies for the case of $p=\infty$ and $q=1$ too.
+For the case of $p,q \in (1,\infty)$, we have:
+
+$$
+\| \bu \|_p = \left (\sum_{k=1}^{n} | u_k |^p  \right ) ^ {\frac{1}{p}}
+\text {and }
+\| \bv \|_q = \left (\sum_{k=1}^{n} | v_k |^q  \right ) ^ {\frac{1}{q}}.
+$$
+
+We recall the
+{prf:ref}`Hölder's inequality <res-bra-holder-inequality>` for real numbers.
+For any $n \in \Nat$, 
+$a_1, \dots, a_n \geq 0$, 
+$b_1, \dots, b_n \geq 0$, $p, q$ being
+conjugate exponents, we have:
+
+$$
+\sum_{k=1}^n a_k b_k \leq \left ( \sum_{k=1}^n a_k^p \right )^{\frac{1}{p}}
+\left ( \sum_{k=1}^n b_k^q \right )^{\frac{1}{q}}.
+$$
+
+Let $a_k = |u_k|$ and $b_k = |v_k|$. Then
+
+$$
+\| \bu \bv \|_1 = \sum_{k=1}^n |u_k v_k| 
+\leq \sum_{k=1}^n |u_k | |v_k| 
+\leq \left ( \sum_{k=1}^n |u_k |^p \right )^{\frac{1}{p}}
+\left ( \sum_{k=1}^n |v_k|^q \right )^{\frac{1}{q}}
+= \| \bu \|_p \| \bv \|_q.
+$$
+```
+
+We are now ready to prove that $\ell_p$ norm is indeed a norm.
+
+```{prf:theorem}
+For any $n \in \Nat$ and any $p \in [1, \infty]$, the function
+$\| \cdot \|_p$ as defined in {prf:ref}`def-la-euclidean-lp_norm`
+is a {prf:ref}`norm <def-la-norm>`.
+```
+
+```{prf:proof}
+[Positive definiteness]
+By definition, if $\bu \neq \bzero$, then $\| \bu \|_p > 0$.
+Similarly, $\| \bu \|_p = 0$ implies $\bu = \bzero$.
+
+[Scalar multiplication]
+Let $\alpha \in \RR$. If $p < \infty$, then
+
+$$
+\| \alpha \bu \|_p = \left (\sum_{k=1}^{n} | \alpha u_k |^p  \right ) ^ {\frac{1}{p}}
+= | \alpha | \left (\sum_{k=1}^{n} | u_k |^p  \right ) ^ {\frac{1}{p}}
+= | \alpha | \| \bu \|_p.
+$$
+
+For $p=\infty$, 
+
+$$
+\| \alpha \bu \|_{\infty} = \underset{1 \leq i \leq n}{\max} |\alpha u_i|
+= | \alpha | \underset{1 \leq i \leq n}{\max} |u_i|
+= |\alpha | \| \bu \|_{\infty}.
+$$
+
+
+[Triangle inequality]
+Let $\bu, \bv \in \RR^n$. If $p=1$, then
+
+$$
+\| \bu + \bv \|_1 = \sum_{i=1}^n | u_i + v_i |
+\leq \sum_{i=1}^n | u_i | + |v_i | = \| \bu \|_1 + \| \bv \|_1.
+$$
+
+If $p=\infty$, then:
+
+$$
+\| \bu + \bv \|_{\infty} = \underset{1 \leq i \leq n}{\max} | u_i + v_i|
+\leq \underset{1 \leq i \leq n}{\max} (| u_i| + |v_i|)
+\leq \underset{1 \leq i \leq n}{\max} |u_i| + \underset{1 \leq i \leq n}{\max} |v_i|
+= \| \bu \|_{\infty} + \| \bv \|_{\infty}.
+$$
+
+We are left with the case $p \in (1, \infty)$.
+
+
+$$
+\begin{aligned}
+\| \bu + \bv \|_p^p  &= \sum_{i=1}^n |u_i + v_i |^p \\
+&=  \sum_{i=1}^n |u_i + v_i | |u_i + v_i |^{p-1}\\
+&\leq \sum_{i=1}^n |u_i | |u_i + v_i |^{p-1} 
++ \sum_{i=1}^n |v_i | |u_i + v_i |^{p-1}.
+\end{aligned}
+$$
+
+By Hölder's inequality:
+
+$$
+\begin{aligned}
+\sum_{i=1}^n |u_i | |u_i + v_i |^{p-1} &\leq 
+\left (\sum_{i=1}^n |u_i |^p \right )^{\frac{1}{p}}
+\left (\sum_{i=1}^n |u_i + v_i|^{(p-1)q} \right )^{\frac{1}{q}}\\
+&= \| \bu \|_p \left (\sum_{i=1}^n |u_i + v_i|^p \right )^{\frac{1}{q}}\\
+&= \| \bu \|_p \| \bu + \bv \|_p^{\frac{p}{q}}.
+\end{aligned}
+$$
+
+Note that $(p-1)q = p$ since $p,q$ are conjugate exponents.
+
+Similarly:
+
+$$
+\sum_{i=1}^n |v_i | |u_i + v_i |^{p-1} \leq
+\| \bv \|_p \| \bu + \bv \|_p^{\frac{p}{q}}. 
+$$
+
+Combining, we get:
+
+$$
+\| \bu + \bv \|_p^p  \leq (\| \bu \|_p + \| \bv \|_p)  \| \bu + \bv \|_p^{\frac{p}{q}}.
+$$
+
+Note that:
+
+$$
+p - \frac{p}{q} = p \left (1 - \frac{1}{q} \right ) = p \frac{1}{p} = 1.
+$$
+
+Thus, dividing both sides by $\| \bu + \bv \|_p^{\frac{p}{q}}$, we get:
+
+$$
+\| \bu + \bv \|_p \leq \| \bu \|_p + \| \bv \|_p
+$$
+as desired.
+```
 
 ### $\ell_2$ Norm
 
