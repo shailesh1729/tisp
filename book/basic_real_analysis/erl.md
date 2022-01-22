@@ -1,3 +1,4 @@
+(sec:bra:extended-real-line)=
 The Extended Real Line
 =========================
 
@@ -40,6 +41,17 @@ Following notations are useful:
 - $\RR \cup \{ -\infty\} = [-\infty, \infty)$
 - $\RR \cup \{ -\infty, \infty\} = [-\infty, \infty]$
 
+
+```{prf:definition} Infimum and supremum in extended real line
+Let $A$ be a subset of $\RR$.
+
+* If $A$ is bounded from below, then $\inf A$ denotes its greatest lower bound.
+* If $A$ is bounded from above, then $\sup A$ denotes its least upper bound.
+* If $A$ is not bounded from below, we write: $\inf A = -\infty$.
+* If $A$ is not bounded from above, we write: $\sup A = \infty$.
+* For an empty set, we follow the convention as: 
+  $\inf \EmptySet = \infty$ and $\sup \EmptySet = -\infty$.
+```
 
 ## Arithmetic
 
