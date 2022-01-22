@@ -137,6 +137,8 @@ We will assume that the vector space is non-trivial;
 i.e., different from $\{ \bzero \}$.
 ```
 
+### Metric
+
 ```{prf:definition} Metric induced by a norm
 :label: def-la-norm-induced-metric
 
@@ -166,7 +168,7 @@ We proceed as follows:
    1. Thus, $\bx = \by$ since $\| \cdot \|$ is positive definite.
    1. Now, assume $\bx = \by$. 
    1. Then, $d(\bx, \by) = \| \bx - \by \| = \| \bzero \| = 0$ since $\| \cdot \|$ is positive definite.
-1. Symmetry: $d(\bx, \by) = \| \bx - \by \| = \| (-1)(\by - \bx) \| = |-1| \| \by - \bx \| = d(\by, \bx)$ using the scalar multiplication property of $\| \cdot \|$.
+1. Symmetry: $d(\bx, \by) = \| \bx - \by \| = \| (-1)(\by - \bx) \| = |-1| \| \by - \bx \| = d(\by, \bx)$ using the positive homogeneity property of $\| \cdot \|$.
 1.  Triangle inequality: See {prf:ref}`def-la-ns-distance-triangle-inequality` above.
 ```
 
@@ -184,6 +186,28 @@ If the norm and induced metric are clear from the context,
 then we shall simply write it as $\VV$.
 ```
 
+```{prf:theorem} Translation invariance
+:label: res-la-ns-metric-translation-invariant
+
+The metric induced by a norm is translation invariant.
+
+For any $\bu, \bv, \bw \in \VV$:
+
+$$
+d(\bu, \bv) = d(\bu + \bw, \bv  + \bw). 
+$$
+```
+
+```{prf:proof}
+Expanding from definition:
+
+$$
+d(\bu + \bw, \bv  + \bw) = \| \bu + \bw - (\bv  + \bw) \|
+= \| \bu  - \bv \| = d(\bu, \bv).
+$$
+```
+
+### Continuity
 
 ```{prf:theorem}
 A function $\| \cdot \| : \VV \to \RR$ satisfying
