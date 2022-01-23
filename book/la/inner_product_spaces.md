@@ -813,6 +813,20 @@ S^{\perp} \triangleq \{\bv \in \VV \ST \bv \perp \bs \Forall \bs \in S \}.
 $$
 ```
 
+```{prf:definition} Orthogonal complement of a vector
+:label: def-la-orthogonal-complement-vector
+
+Let $\ba \in \VV$. 
+The *orthogonal complement* of $\ba$ is
+the set of all vectors in $\VV$ that are
+orthogonal to $\ba$. 
+It is denoted by $\ba^{\perp}$.
+
+$$
+\ba^{\perp} \triangleq \{\bv \in \VV \ST \bv \perp \ba \}.
+$$
+```
+
 ```{prf:theorem}
 If $\VV$ is an inner product space and $S \subseteq \VV$, then
 $S^{\perp}$ is a subspace.
@@ -974,9 +988,9 @@ is the zero vector.
 
 ## Orthogonal Projection
 
-Consider a {prf:ref}`projection <def-la-projection>` 
+Recall that a {prf:ref}`projection <def-la-projection>` 
 operator $P : \VV \to \VV$ 
-where $\VV$ is an inner product space.
+is an operator which satisfies $P^2 = P$.
 
 The range of $P$ is given by
 
