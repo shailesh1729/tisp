@@ -1,14 +1,25 @@
 # Convex Functions
 
+Throughout this section, we assume that $\VV, \WW$ are 
+real vector spaces. Wherever necessary, 
+they are equipped with a
+{prf:ref}`norm <def-la-norm>` $\| \cdot \|$
+or an {prf:ref}`real inner product <def-la-real-inner-product>`
+$\langle \cdot, \cdot \rangle$. 
+They are also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$
+as needed.
+
+
+
 ```{prf:definition} Convex function
 :label: def-convex-function
 
-A function $f: \RR^n \to \RR$ is *convex* if 
-$\dom f$ is a convex set and for all $x_1,x_2 \in \dom f$, 
+A real valued function $f: \VV \to \RR$ is *convex* if 
+$\dom f$ is a convex set and for all $\bx_1,\bx_2 \in \dom f$, 
 and $\theta \in [0, 1]$, we have:
 
 $$
-f(\theta x_1 + (1-\theta) x_2) \leq \theta f(x_1) + (1-\theta) f(x_2).
+f(\theta \bx_1 + (1-\theta) \bx_2) \leq \theta f(\bx_1) + (1-\theta) f(\bx_2).
 $$
 ```
 
@@ -30,17 +41,17 @@ above the graph.
 ```{prf:definition} Strictly convex function
 :label: def-strictly-convex-function
 
-A convex function $f: \RR^n \to \RR$ is *strictly convex* 
-if for all $x_1,x_2 \in \dom f$, 
-where $x_1$ and $x_2$ are distinct, 
+A convex function $f: \VV \to \RR$ is *strictly convex* 
+if for all $\bx_1,\bx_2 \in \dom f$, 
+where $\bx_1$ and $\bx_2$ are distinct, 
 and $\theta \in (0, 1)$, we have:
 
 $$
-f(\theta x_1 + (1-\theta) x_2) < \theta f(x_1) + (1-\theta) f(x_2).
+f(\theta \bx_1 + (1-\theta) \bx_2) < \theta f(\bx_1) + (1-\theta) f(\bx_2).
 $$
 In other words, the inequality is a strict inequality 
-whenever the point $x = \theta x_1 + (1-\theta) x_2$ is
-distinct from $x_1$ and $x_2$ both.
+whenever the point $\bx = \theta \bx_1 + (1-\theta) \bx_2$ is
+distinct from $\bx_1$ and $\bx_2$ both.
 ```
 
 ```{prf:definition} Concave function
@@ -52,23 +63,23 @@ strictly convex.
 ```
 
 ```{prf:example} Linear functional
-A *linear functional* on $\RR^n$ is defined in terms of 
-a vector $a \in \RR^n$ as 
+A *linear functional* on $\VV$ is defined in terms of 
+a vector $\ba \in \VV$ as 
 
 $$
-f_a (x) \triangleq \langle a, x \rangle
+f_a (\bx) \triangleq \langle \ba, \bx \rangle
 $$
-i.e. the inner product of $a$ with $x$.
+i.e. the inner product of $\ba$ with $\bx$.
 ```
 
 ```{prf:example} Affine functional
-An *affine functional* on $\RR^n$ is defined in terms of 
-a vector $a \in \RR^n$ and a scalar $b \in \RR$ as 
+An *affine functional* on $\VV$ is defined in terms of 
+a vector $\ba \in \VV$ and a scalar $b \in \RR$ as 
 
 $$
-f_{a, b} (x) \triangleq \langle a, x \rangle + b
+f_{\ba, b} (\bx) \triangleq \langle \ba, \bx \rangle + b
 $$
-i.e. the inner product of $a$ with $x$ followed by a translation.
+i.e. the inner product of $\ba$ with $\bx$ followed by a translation.
 ```
 
 
@@ -79,10 +90,10 @@ convex as well as concave.
 
 
 ```{prf:property}
-A function $f$ is convex if and only if for all
-$x \in \dom f$ and all $v$, the function 
-$g(t) = f(x + tv)$ is convex (on its domain
-    , $\{ t : x + tv \in \dom f\}$).
+A function $f$ is convex if and only if for any
+$\bx \in \dom f$ and any $\bv \in \VV$, the function 
+$g(t) = f(\bx + t\bv)$ is convex (on its domain
+    , $\{ t \in \RR \ST \bx + t\bv \in \dom f\}$).
 
 In other words, $f$ is convex if and only if 
 it is convex when restricted to any line that
