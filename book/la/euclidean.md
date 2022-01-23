@@ -84,6 +84,22 @@ $$
 It is a {prf:ref}`real inner product <def-la-real-inner-product>`.
 ```
 
+
+
+```{prf:definition} $\bQ$ inner product
+:label: def-la-q-inner-product
+
+Let $\bQ$ be an $n \times n$ real symmetric positive definite
+matrix. The $\bQ$ inner product is defined as:
+
+$$
+\langle \bx, \by \rangle_Q \triangleq \bx^T \bQ \by.
+$$
+```
+
+$\bQ$ inner product reduces to standard dot product
+when $\bQ = \bI$.
+
 ## Norms
 
 We use norms as a measure of strength of a signal 
@@ -394,6 +410,15 @@ $$
 \lim_{p\to 0} \| \bx \|_p^p = | \supp(\bx) |.
 $$
 which justifies the notation.
+```
+
+
+```{prf:definition} $\bQ$ norm
+The $\bQ$ norm induced by $\bQ$ inner product is given by
+
+$$
+\| \bx \|_Q = \sqrt{\bx^T \bQ \bx}.
+$$
 ```
 
 
