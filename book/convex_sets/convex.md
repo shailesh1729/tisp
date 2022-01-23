@@ -314,7 +314,7 @@ let $C$ be any convex set such that $S \subseteq C$. Then $\ConvexHull(S) \subse
 ## Infinite Convex Combinations
 
 We can generalize convex combinations to include infinite sums.
-````{prf:lemma}
+````{prf:theorem}
 Let $\theta_1, \theta_2, \dots$ satisfy
 
 $$
@@ -331,7 +331,7 @@ if the series converges.
 ````
 
 We can generalize it further to density functions.
-````{prf:lemma}
+````{prf:theorem}
 Let $p : \VV \to \RR$ satisfy $p(x) \geq 0$ for all  $x \in C$
 and
 
@@ -350,3 +350,175 @@ provided the integral exists.
 
 Note that $p$ above can be treated as a probability density function if
 we define $p(x) = 0 \Forall x \in \VV \setminus C$.
+
+
+
+## Convexity Preserving Operations
+
+In the following, we will discuss several operations which
+transform a convex set into another convex set, and thus
+preserve convexity.
+
+Understanding these operations is useful for determining
+the convexity of a wide variety of sets.
+
+Usually, it is easier to prove that a set is convex by showing
+that it is obtained by a convexity preserving operation from
+a convex set compared to directly verifying the convexity property
+i.e. 
+
+$$
+t \bx_1 + (1 - t) \bx_2 \in C \Forall \bx_1, \bx_2 \in C, t \in [0,1].
+$$
+
+### Intersection
+
+````{prf:theorem}
+If $S_1$ and $S_2$ are convex sets then $S_1 \cap S_2$ is convex.
+````
+
+````{prf:proof}
+Let $\bx_1, \bx_2 \in S_1 \cap S_2$. We have to show that
+
+$$
+t \bx_1 + (1 - t) \bx_2 \in S_1 \cap S_2, \Forall t \in [0,1].
+$$
+
+Since $S_1$ is convex and $\bx_1, \bx_2 \in S_1$, hence
+
+$$
+t \bx_1 + (1 - t) \bx_2 \in S_1, \Forall t \in [0,1].
+$$
+
+Similarly
+
+$$
+t \bx_1 + (1 - t) \bx_2 \in S_2, \Forall t \in [0,1].
+$$
+
+Thus
+
+$$
+t \bx_1 + (1 - t) \bx_2 \in S_1 \cap S_2, \Forall t \in [0,1].
+$$
+
+which completes the proof.
+````
+
+We can generalize it further.
+
+````{prf:theorem}
+Let $\{ A_i\}_{i \in I}$ be a family of sets such that $A_i$ is convex
+for all $i \in I$.  Then $\cap_{i \in I} A_i$ is convex.
+````
+
+````{prf:proof}
+Let $\bx_1, \bx_2$ be any two arbitrary elements in $\cap_{i \in I} A_i$.
+
+$$
+&\bx_1, \bx_2 \in \cap_{i \in I} A_i\\
+\implies & \bx_1, \bx_2 \in A_i \Forall i \in I\\
+\implies &t \bx_1 + (1 - t) \bx_2 \in A_i \Forall t \in [0,1] \Forall i \in I
+\text{ since $A_i$ is convex }\\
+\implies &t \bx_1 + (1 - t) \bx_2 \in \cap_{i \in I} A_i.
+$$
+
+Hence $\cap_{i \in I} A_i$ is convex.
+````
+
+### Affine Functions
+
+Recall that an
+{prf:ref}`affine function <def-la-affine-operator>`
+$f : \VV \to \EE$ from a real vector space $\VV$ to
+another real vector space $\EE$ is a function which satisfies
+
+$$
+f(t \bx + (1-t)\by) = tf(\bx) + (1 -t) f(\by)
+$$ 
+for every $t \in \RR$. 
+
+Recall from {prf:ref}`res-la-op-affine-linear-p-offset`
+that an affine function can be written as 
+a linear transformation followed by a translation:
+
+$$
+f(\bx) = T (\bx) + \bb
+$$
+where $T$ is a {prf:ref}`linear operator <def-la-linear-operator>`.
+
+````{prf:example}
+An affine function $f : \RR^n \to \RR^m$ takes
+the form of a matrix multiplication plus a vector addition:
+
+$$
+f(\bx) = \bA \bx + \bb
+$$
+
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$.
+````
+
+
+
+````{prf:theorem}
+Let $S \subseteq \VV$ be convex and 
+$f : \VV \to \EE$ be an affine function. 
+Then the image of $S$ under $f$ given by
+
+$$
+    f(S) = \{ f(\bx) | \bx \in S\}
+$$
+is a convex set.
+````
+
+It applies in the reverse direction also.
+````{prf:theorem}
+Let $f : \VV \to \EE$ be affine and 
+$S \subseteq \EE$ be convex.
+Then the inverse image of $S$ under $f$ given by
+
+$$
+f^{-1}(S) = \{ \bx \in \VV | f(\bx) \in S\}
+$$
+is convex.
+````
+
+````{prf:example} Affine functions preserving convexity
+
+Let $S \in \RR^N$ be convex.
+
+*   For some $\alpha \in \RR$ ,
+$\alpha S$  given by
+
+$$
+    \alpha S = \{\alpha x | x \in S\}
+$$
+
+is convex. This is the *scaling* operation.
+*  For some $a \in \RR^N$, $ S + a$ given by
+
+$$
+    S + a = \{x + a | x \in S\}
+$$
+
+is convex. This is the *translation* operation.
+*  Let $N = M + K$ where $M, N \in \Nat$. Then, let
+$\RR^N = \RR^M \times \RR^K$.
+A vector $x \in S$ can be written as $x = (x_1, x_2)$
+where $x_1 \in \RR^M$ and $x_2 \in \RR^K$.
+Then
+
+$$
+    T = \{ x_1 \in \RR^M | (x_1, x_2) \in S \text{ for some } x_2 \in \RR^K\}
+$$
+
+is convex. This is the *projection* operation.
+
+````
+
+### Set Addition
+
+````{prf:theorem}
+Let $S_1$ and $S_2$ be two convex subsets of $\VV$. Then
+$S_1 + S_2$ is convex.
+````
