@@ -2,13 +2,61 @@
 # Linear Transformations
 In this section, we will be using symbols $\VV$ and $\WW$
 to represent arbitrary vector spaces over a field $\FF$. 
-
 Unless otherwise specified, the two vector spaces won't be related in any way.
-
 Following results can be restated for more general situations where 
 $\VV$ and $\WW$ are defined over
 different fields, but we will assume that they are defined over the same field $\FF$
 for simplicity of discourse.
+
+## Operators
+
+Operators are mappings from one vector space to another space.
+Normally, they are {prf:ref}`total functions <def-st-total-function>`.
+
+In this section, we introduce different types of operators
+between vector spaces. Some operators are relevant 
+only for {prf:ref}`real vector spaces <def-la-real-vector-space>`.
+
+```{prf:definition} Homogeneous operator
+:label: def-la-homogeneous-operator
+
+Let $\VV$ and $\WW$ be vector spaces (over some field $\FF$). 
+An operator $T : \VV \to \WW$ is called *homogeneous* if
+for every $\bx \in \VV$ and for every $\lambda \in \FF$
+
+$$
+T(\lambda \bx) = \lambda T (\bx).
+$$
+```
+
+```{prf:definition} Positively homogeneous operator
+:label: def-la-positive-homogeneous-operator
+
+Let $\VV$ and $\WW$ be *real* vector spaces (on field $\RR$). 
+An operator $T : \VV \to \WW$ is called *positively homogeneous* if
+for every $\bx \in \VV$ and for every $\lambda \in \RR_{++}$
+
+$$
+T(\lambda \bx) = \lambda T (\bx).
+$$
+```
+
+```{prf:definition} Additive operator
+:label: def-la-additive-operator
+
+Let $\VV$ and $\WW$ be vector spaces. 
+An operator $T : \VV \to \WW$ is called *additive* if
+for every $\bx,\by \in \VV$
+
+$$
+T (\bx + \by) = T(\bx) + T(\by).
+$$
+```
+
+## Linear Transformations
+
+A linear operator is additive and homogeneous.
+
 
 ````{prf:definition} Linear transformation
 :label: def-la-linear-transformation
