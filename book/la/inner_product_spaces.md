@@ -35,7 +35,7 @@ satisfying following properties:
    $$
 ````
 
-```{prf:proposition}
+```{prf:theorem}
 Let $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ be an inner product.
 Then
 
@@ -55,7 +55,7 @@ $$
 $$
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 Let $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ be an inner product.
 Then for any $\bv, \bx, \by \in \VV$:
 
@@ -77,7 +77,7 @@ $$
 ```
 
 
-```{prf:proposition}
+```{prf:theorem}
 Let $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ be an inner product.
 Then,
 
@@ -210,7 +210,7 @@ $$
 This is the *standard inner product* on the space of column vectors.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 For complex inner products, the inner product is determined identified
 by its real part. 
 ```
@@ -593,18 +593,18 @@ every Cauchy sequence of $\VV$ converges in $\VV$.
 ````{prf:definition} Set of orthonormal vectors
 :label: def-la-orthonormal-vectors
 
-A set of non-zero vectors $\{\bv_1, \dots, \bv_p\}$ is called *orthonormal* if
+A set of non-zero vectors $\{\be_1, \dots, \be_p\}$ is called *orthonormal* if
 
 $$
 \begin{aligned}
- &\langle \bv_i, \bv_j  \rangle = 0  \text{ if } i \neq j \quad \forall 1 \leq i, j \leq p\\
- &\langle \bv_i, \bv_i  \rangle = 1  \quad \forall 1 \leq i \leq p
+ &\langle \be_i, \be_j  \rangle = 0  \text{ if } i \neq j \quad \forall 1 \leq i, j \leq p\\
+ &\langle \be_i, \be_i  \rangle = 1  \quad \forall 1 \leq i \leq p
 \end{aligned} \, ;
 $$
-i.e., $\langle \bv_i, \bv_j  \rangle = \delta(i, j)$.
+i.e., $\langle \be_i, \be_j  \rangle = \delta(i, j)$.
 
-In other words, the vectors are unit norm ($\| \bv_j \| = 1$) and are
-pairwise orthogonal.
+In other words, the vectors are unit norm ($\| \be_i \| = 1$) and are
+pairwise orthogonal ($\be_i \perp \be_j)$ whenever $i \neq j$).
 ````
 
 Since orthonormal vectors are orthogonal, hence they are linearly independent.
@@ -614,16 +614,255 @@ A set of orthonormal vectors form an *orthonormal basis* for their span.
 ```
 
 
-```{prf:proposition} Expansion of a vector in an orthonormal basis
+```{prf:theorem} Expansion of a vector in an orthonormal basis
 
-Let $\{\bv_1, \dots, \bv_n\}$  be an orthonormal basis for $\VV$.
+Let $\{\be_1, \dots, \be_n\}$  be an orthonormal basis for $\VV$.
 Then, any $\bv \in \VV$ can be written as:
 
 $$
-\bv = \langle \bv, \bv_1 \rangle \bv_1 + \dots +  \langle \bv, \bv_n \rangle \bv_n.
+\bv = \langle \bv, \be_1 \rangle \be_1 + \dots +  \langle \bv, \be_n \rangle \be_n.
 $$
 ```
 
+
+```{prf:proof}
+Since $\{\be_1, \dots, \be_n\}$ forms a basis for $\VV$,
+hence every every $\bv \in \VV$ can be written as:
+
+$$
+\bv = \alpha_1 \be_1 + \dots + \alpha_n \be_n
+$$
+where $\alpha_1, \dots, \alpha_n \in \FF$.
+
+Taking inner product with $\be_j$ on both sides, we get:
+
+
+$$
+\langle \bv, \be_j \rangle = \alpha_1 \langle \be_1, \be_j \rangle + \dots + \alpha_n \langle \be_n, \be_j \rangle.
+$$
+
+Since $\langle \be_i, \be_j \rangle = \delta(i, j)$, 
+hence the above reduces to:
+
+$$
+\langle \bv, \be_j \rangle = \alpha_j.
+$$
+```
+
+
+```{prf:theorem} Norm of a vector in an orthonormal basis
+
+Let $\{\be_1, \dots, \be_n\}$  be an orthonormal basis for $\VV$.
+For any $\bv \in \VV$, let its expansion in the orthonormal basis be:
+
+$$
+\bv = \alpha_1 \be_1 + \dots + \alpha_n \be_n.
+$$
+
+Then,
+
+$$
+\| \bv \|^2 = | \alpha_1|^2 + \dots + | \alpha_n|^2 = \sum_{i=1}^n |\alpha_i|^2.
+$$
+```
+
+```{prf:proof}
+Expanding the expression for norm squared:
+
+$$
+\| \bv \|^2 = \langle \bv , \bv \rangle 
+= \langle \alpha_1 \be_1 + \dots + \alpha_n \be_n, \alpha_1 \be_1 + \dots + \alpha_n \be_n \rangle
+= \sum_{i=1}^n \sum_{j = 1}^n \langle \alpha_i \be_i , \alpha_j \be_j \rangle
+= \sum_{i=1}^n | \alpha_i|^2.
+$$
+```
+
+Here are some interesting questions:
+
+* Can a basis in an inner product space be converted into an orthonormal basis?
+* Does a finite dimensional inner product space have an orthonormal basis? 
+* Does every finite dimensional subspace of an inner product space have an
+  orthonormal basis? 
+
+The answer to these questions is yes. 
+We provide a constructive answer by the Gram-Schmidt algorithm described
+in the next section.
+
+## The Gram-Schmidt Algorithm
+
+The Gram-Schmidt algorithm (described below) can construct 
+an orthonormal basis from an arbitrary basis for the
+span of the basis.
+
+```{prf:algorithm} The Gram-Schmidt algorithm
+
+**Inputs** $\bv_1, \bv_2, \dots, \bv_n$, a set of linearly independent vectors
+
+**Outputs** $\be_1, \be_2, \dots, \be_n$, a set of orthonormal vectors
+
+1. $\bw_1 = \bv_1$.
+1. $\be_1 = \frac{\bw_1}{\| \bw_1 \|}$.
+1. For $j=2, \dots, n$:
+   1. $\bw_j = \bv_j - \sum_{i=1}^{j-1} \langle \bv_j, \be_i \rangle \be_i$.
+   1. $\be_j = \frac{\bw_j}{\| \bw_j \|}$.
+```
+
+```{prf:theorem} Justification for Gram-Schmidt algorithm
+:label: res-la-gram-schmidt-correctness
+
+Let $\bv_1, \bv_2, \dots, \bv_n$ be linearly independent.
+The Gram-Schmidt algorithm described above generates a set of orthonormal vectors.
+
+Moreover, for each $j = 1, \dots, n$, the set $\be_1, \dots, \be_j$
+is an orthonormal basis for the subspace: $\span \{\bv_1, \dots, \bv_j \}$.
+```
+
+
+```{prf:proof}
+We prove this by mathematical induction.
+Consider the base case for $j=1$. 
+
+1. $\bw_1 = \bv_1$. 
+1. $\be_1 = \frac{\bw_1}{\| \bw_1 \|} = \frac{\bv_1}{\| \bv_1 \|}$.
+1. Thus, $\| \be_1 \| = 1$. 
+1. $\span \{ \be_1 \} = \span \{ \bv_1 \}$ because $\be_1$ is a nonzero scalar multiple of $\bv_1$.
+
+
+Now, assume that the set $\be_1, \dots, \be_{j-1}$
+is an orthonormal basis for $\span \{\bv_1, \dots, \bv_{j-1} \}$.
+
+1. Thus, $\span \{\be_1, \dots, \be_{j-1} \} = \span \{\bv_1, \dots, \bv_{j-1} \}$.
+1. Since $\bv_j$ is linearly independent from $\bv_1, \dots, \bv_{j-1}$, hence
+   $\bv_j \notin \span \{\bv_1, \dots, \bv_{j-1} \}$.
+1. Thus, $\bv_j \notin \span \{\be_1, \dots, \be_{j-1} \}$.
+1. Hence, $\bw_j = \bv_j - \sum_{i=1}^{j-1} \langle \bv_j, \be_i \rangle \be_i \neq \bzero$.
+   If it was $\bzero$, then $\bv_j$ would be linearly dependent on $\be_1, \dots, \be_{j-1}$.
+1. Thus, $\| \bw_j \| > 0$.
+1. Thus, $\be_j = \frac{\bw_j}{\| \bw_j \|}$ is well-defined.
+1. Also, $\| \be_j \| = 1$ by construction, thus, $\be_j$ is unit-norm.
+1. Note that $\bw_j$ is orthogonal to $\be_1, \dots, \be_{j-1}$.
+   For any $1 \leq k < j$, we have:
+
+   $$
+   \begin{aligned}
+   \langle \bw_j, \be_k \rangle &= \left \langle 
+   \bv_j - \sum_{i=1}^{j-1} \langle \bv_j, \be_i \rangle \be_i, 
+   \be_k \right \rangle\\
+   &= \langle \bv_j \be_k \rangle - \sum_{i=1}^{j-1} 
+   \langle \bv_j, \be_i \rangle \langle \be_i, \be_k \rangle\\
+   &= \langle \bv_j \be_k \rangle - \langle \bv_j, \be_k \rangle \langle \be_k, \be_k \rangle\\
+   &= \langle \bv_j \be_k \rangle - \langle \bv_j, \be_k \rangle = 0.
+   \end{aligned}
+   $$
+   since $\be_1, \dots, \be_{j-1}$ are orthonormal.
+1. Thus, for any $1 \leq k < j$:
+
+   $$
+   \langle \be_j, \be_k \rangle 
+   = \left \langle \frac{\bw_j}{\| \bw_j \|}, \be_k \right \rangle
+   = \frac{\langle \bw_j, \be_k \rangle}{\| \bw_j \|}
+   = 0.
+   $$
+1. Thus, $\be_j$ is orthogonal to $\be_1, \dots, \be_{j-1}$.
+1. Since, all of them are unit norm, hence, $\be_1, \dots, \be_{j-1}, \be_j$ are
+   indeed orthonormal.
+
+We also need to show that $\span \{\be_1, \dots, \be_{j} \} = \span \{\bv_1, \dots, \bv_{j} \}$.
+
+1. Note that $\bw_j \in \span \{\bv_j, \be_1, \dots, \be_{j-1} \} = \span \{\bv_1, \dots, \bv_j \}$
+   since $\span \{\be_1, \dots, \be_{j-1} \} = \span \{\bv_1, \dots, \bv_{j-1} \}$
+   by inductive hypothesis.
+1. Thus, $\be_j \in \span \{\bv_1, \dots, \bv_j \}$
+   since $\be_j$ is just scaled $\bw_j$.
+1. Thus, $\span \{\be_1, \dots, \be_{j} \} \subseteq \span \{\bv_1, \dots, \bv_{j} \}$.
+1. For the converse, by definition $\bv_j = \bw_j + \sum_{i=1}^{j-1} \langle \bv_j, \be_i \rangle \be_i$.
+1. Hence, $\bv_j \in \span \{\bw_j,  \be_1, \dots, \be_{j-1}\} = \span \{\be_1, \dots, \be_{j} \}$.
+1. Thus, $\span \{\bv_1, \dots, \bv_{j} \} \subseteq \span \{\be_1, \dots, \be_{j} \}$.
+1. Thus, $\span \{\be_1, \dots, \be_{j} \} = \span \{\bv_1, \dots, \bv_{j} \}$ must be true.
+```
+
+```{prf:theorem} 
+Every finite dimensional inner product space has an orthonormal basis.
+```
+
+```{prf:proof}
+This is a simple application of the Gram-Schmidt algorithm.
+
+1. Every finite dimensional vector space has a finite basis.
+1. Every finite basis can be turned into an orthonormal basis by
+   the {prf:ref}`Gram-Schmidt algorithm <res-la-gram-schmidt-correctness>`.
+1. Thus, we have an orthonormal basis.
+```
+
+```{prf:corollary} 
+Every finite dimensional subspace of an inner product space has an orthonormal basis.
+```
+
+
+## Orthogonal Complements
+
+```{prf:definition} Orthogonal complement
+:label: def-la-orthogonal-complement
+
+Let $S$ be a subset of an inner product space $\VV$. 
+The *orthogonal complement* of $S$ is the set of all vectors in $\VV$ that are
+orthogonal to every element of $S$. It is denoted by $S^{\perp}$.
+
+$$
+S^{\perp} \triangleq \{\bv \in \VV \ST \bv \perp \bs \Forall \bs \in S \}.
+$$
+```
+
+```{prf:theorem}
+If $\VV$ is an inner product space and $S \subseteq \VV$, then
+$S^{\perp}$ is a subspace.
+```
+
+```{prf:proof}
+To verify that $S^{\perp}$ is a subspace, we need to check the following.
+
+1. It contains the zero vector.
+1. It is closed under vector addition.
+1. It is closed under scalar multiplication.
+
+We proceed as follows:
+
+1. $\langle \bzero , \bs \rangle = 0$ holds for any $\bs \in S$. 
+   Thus, $\bzero \in S^{\perp}$.
+1. Let $\bu, \bv \in S^{\perp}$. Then, 
+   1. $\langle \bu, \bs \rangle = 0$ and $\langle \bv, \bs \rangle = 0$ for every $s \in S$.
+   1. Thus, $\langle \bu + \bv, \bs \rangle = \langle \bu, \bs \rangle + \langle \bv, \bs \rangle = 0 + 0 = 0$
+      for every $s \in S$.
+   1. Thus, $\bu + \bv \in S^{\perp}$.
+1. Similarly, if $\bv \in S^{\perp}$, then
+   $\langle \alpha \bv, \bs \rangle = \alpha \langle \bv, \bs \rangle = 0$
+   for every $\bs \in S$.
+
+Thus, $S^{\perp}$ is a subspace of $\VV$.
+```
+
+```{prf:remark}
+The orthogonal complement of the inner product space $\VV$ is its trivial subspace
+containing just the zero vector.
+
+$$
+\VV^{\perp} = \{ \bzero \}.
+$$
+```
+
+```{prf:theorem}
+Let $\VV$ be an inner product space and $S$ be a finite dimensional subspace of $\VV$.
+Then, every $\bv \in \VV$ can be written as:
+
+$$
+\bv = \bv_{\parallel}  + \bv_{\perp}
+$$
+where $\bv_{\parallel} \in S$ and $\bv_{\perp} \in S^{\perp}$.
+```
+
+```{prf:proof}
+Let $\be_1, \dots, \be_p$ be an orthonormal basis for $S$. 
+```
 
 ## Projection
 
@@ -738,7 +977,7 @@ $$
 $$
 ````
 
-````{prf:proposition}
+````{prf:theorem}
 A projection operator is orthogonal if and only if it is self adjoint.
 ````
 
