@@ -445,7 +445,7 @@ a linear transformation followed by a translation:
 $$
 f(\bx) = T (\bx) + \bb
 $$
-where $T$ is a {prf:ref}`linear operator <def-la-linear-operator>`.
+where $T$ is a {prf:ref}`linear operator <def-la-linear-transformation>`.
 
 ````{prf:example}
 An affine function $f : \RR^n \to \RR^m$ takes
