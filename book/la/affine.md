@@ -1,16 +1,39 @@
-# Affine Sets
+# Affine Sets and Transformations
 
-In this section $\VV$ denotes a real vector space.
+In this section $\VV$ denotes a vector space on some field $\FF$
+which can be either $\FF$ or $\CC$.
+
+
+```{note}
+The notion of lines in a complex vector space may sound 
+very confusing as a complex line is topologically 
+equivalent to a real plane, not a real line. 
+If you are getting lost while reading this section, 
+just think of $\FF$ as $\RR$ and visualize everything
+in a real vector space. The algebraic presentation
+of affine sets and spaces is equally valid for
+complex vector spaces.
+
+A key property of $\RR$ is that $\RR$ is totally
+ordered. 
+Hence, the scalars from $\RR$ can be compared.
+There is no natural order in $\CC$, the field
+of complex numbers.
+As you study this section, you will notice that 
+scalar comparison is never needed in the treatment
+of affine sets, subspaces and transformations in this
+section.
+```
 
 ## Lines
 
-```{prf:definition}
+```{prf:definition} Line
 :label: def-aff-line
 
 Let $x_1$ and $x_2$ be two points in $\VV$. Points of the form
 
 $$
-y = \theta x_1 + (1 - \theta) x_2 \text{ where } \theta \in \RR
+y = \theta x_1 + (1 - \theta) x_2 \text{ where } \theta \in \FF
 $$ 
 form a *line* passing through $x_1$ and $x_2$.
 ```
@@ -24,35 +47,35 @@ form a *line* passing through $x_1$ and $x_2$.
 We can also rewrite $y$ as 
 
 $$
-y = x_2 + \theta (x_1 - x_2) \Forall \theta \in \RR.
+y = x_2 + \theta (x_1 - x_2) \Forall \theta \in \FF.
 $$
 In this definition:
 
 * $x_2$ is called the *base point* for this line.
 * $x_1 - x_2$ defines the *direction* of the line.
 * $y$ is the sum of the base point and the direction scaled by the parameter $\theta$.
-* As $\theta$ increases from $0$ to $1$, $y$ moves from $x_2$ to $x_1$.
+* As $\theta$ goes from $0$ to $1$, $y$ moves from $x_2$ to $x_1$.
 
 ```{prf:remark}
-An alternative notation for the line as a set is $x_2 + \RR (x_1 - x_2)$
+An alternative notation for the line as a set is $x_2 + \FF (x_1 - x_2)$
 following the notation in {prf:ref}`def-vs-set-arithmetic`.
 ```
 
 ## Affine Sets
 
-```{prf:definition}
+```{prf:definition} Affine set
 :label: def-affine-set
 
 A set $C \subseteq \VV$ is *affine* if the line through
 any two distinct points in $C$ lies in $C$.
 
 In other words, for any $x_1, x_2 \in C$, we have $\theta x_1 + (1 - \theta) x_2 \in C$ 
-for all $\theta \in \RR$.
+for all $\theta \in \FF$.
 
 Another way to write this is:
 
 $$
-\Forall \theta \in \RR, \quad C = \theta C + (1 - \theta) C.
+\Forall \theta \in \FF, \quad C = \theta C + (1 - \theta) C.
 $$
 ```
 
@@ -71,7 +94,7 @@ is inside it vacuously.
 In fact:
 
 $$
-\theta x  + (1 - \theta) x = x \Forall \theta \in \RR.
+\theta x  + (1 - \theta) x = x \Forall \theta \in \FF.
 $$
 ```
 
@@ -86,11 +109,11 @@ $\alpha x_1 + \beta x_2$ represents a linear combination of points in $C$
 such that $\alpha + \beta = 1$.
 The idea can be generalized in following way.
 
-```{prf:definition}
+```{prf:definition} Affine combination
 :label: def-affine-combination
 
 A point of the form $x = \theta_1 x_1 + \dots + \theta_k x_k$ where 
-$\theta_1 + \dots + \theta_k = 1$ with $\theta_i \in \RR$ and $x_i \in \VV$, 
+$\theta_1 + \dots + \theta_k = 1$ with $\theta_i \in \FF$ and $x_i \in \VV$, 
 is called an *affine combination* of the points $x_1,\dots,x_k$.
 ```
 Note that the definition only considers finite number of terms in the
@@ -130,7 +153,7 @@ all its 2 term affine combinations.
 Now, assume that $C$ contains all its $k-1$ term affine combinations.
 
 1. Consider points $x_1, \dots, x_{k-1}, x_k \in C$.
-1. Let $\theta_1, \dots, \theta_{k-1}, \theta_k \in \RR$ 
+1. Let $\theta_1, \dots, \theta_{k-1}, \theta_k \in \FF$ 
    such that $\theta_1 + \dots + \theta_{k-1} + \theta_k = 1$.
 1. Without loss of generality, assume that $\theta_k \neq 1$. Thus, $1 - \theta_k \neq 0$.
 1. Note that $\theta_1 + \dots + \theta_{k-1} = 1 - \theta_k$.
@@ -221,7 +244,7 @@ Thus
 
 $$
     a v_1 + v_2 = a (x_1 - x_0) + x_2 - x_0 
-    = (a x_1 + x_2  - a x_0 )  - x_0 \Forall a \in \RR.
+    = (a x_1 + x_2  - a x_0 )  - x_0 \Forall a \in \FF.
 $$
 
 But since $a + 1 - a = 1$, 
@@ -284,12 +307,12 @@ Another way to express this is as follows. $C$ is an
 affine subspace of $\VV$ if:
 
 $$
-C \neq \EmptySet \text{ and } \Forall \theta \in \RR, \quad C = \theta C + (1 - \theta) C.
+C \neq \EmptySet \text{ and } \Forall \theta \in \FF, \quad C = \theta C + (1 - \theta) C.
 $$
 ```
 
 
-```{prf:definition}
+```{prf:definition} Affine dimension
 :label: def-affine-dimension
 
 We define the *affine dimension* of an affine subspace $C$ as the dimension
@@ -313,9 +336,9 @@ Thus, the singleton set has an affine dimension of 0.
 ```{prf:example} Solution set of linear equations
 We show that the solution set of linear equations forms an affine set.
 
-Let $C = \{ x | A x = b\}$ where $A \in \RR^{M \times N}$ and $b \in \RR^M$.
+Let $C = \{ x | A x = b\}$ where $A \in \FF^{m \times n}$ and $b \in \FF^m$.
 
-Let $C$ be the set of all vectors $x \in \RR^N$ which satisfy the system of linear
+Let $C$ be the set of all vectors $x \in \FF^n$ which satisfy the system of linear
 equations given by $A x = b$. 
 Then $C$ is an affine set.
 
@@ -346,7 +369,7 @@ null space of $A$ denoted as $\NullSpace(A)$.
 ```
 
 ```{prf:remark}
-Every affine set of $\RR^n$ can be expressed as the solution set of a 
+Every affine set of $\FF^n$ can be expressed as the solution set of a 
 system of linear equations.
 If the system of equations is infeasible, then its solution set is
 $\EmptySet$. Otherwise, its solution set is an affine subspace.
@@ -356,11 +379,12 @@ set is a singleton set which is an affine subspace of dimension 0.
 
 
 ```{prf:example} More affine sets
-* The whole euclidean space $\RR^N$ is affine.
-* Any line is affine. The associated subspace is a line 
+* The euclidean space $\RR^n$ is affine.
+* Any line is affine. The associated linear subspace is a line 
   parallel to it which passes through origin.
-* Any plane is affine. If it passes through origin, it's a
-  subspace. The associated subspace is the plane parallel to it
+* Any plane is affine. If it passes through origin, it is a
+  linear subspace. 
+  The associated linear subspace is the plane parallel to it
   which passes through origin.
 ```
 
@@ -392,7 +416,7 @@ $$
 
 ## Affine Hull 
 
-```{prf:definition}
+```{prf:definition} Affine hull
 :label: def-affine-hull
 
 The set of all affine combinations of points in some arbitrary nonempty set 
@@ -454,7 +478,7 @@ The affine hull of a set is the intersection of all affine subspaces containing 
 ```
 
 
-```{prf:definition}
+```{prf:definition} Affine independence
 :label: def-affine-independence
 
 A set of vectors $v_0, v_1, \dots, v_K \in \VV$ is called *affine independent*,
@@ -467,3 +491,136 @@ If the associated subspace has dimension $L$ then a maximum of $L$ vectors can
 be linearly independent in it. Hence a maximum of $L+1$ vectors can be affine
 independent for the affine set.
 
+
+## Affine Transformations
+
+```{prf:definition} Translation operator
+:label: def-la-translation-operator
+
+Let $\XX$ be a vector space. An operator
+$T : \XX \to \XX$ is called a translation 
+operator if 
+
+$$
+T(\bx) = \bx + \ba \Forall \bx \in \XX
+$$
+where $\ba \in \XX$ is a fixed (translation) vector.
+```
+
+
+```{prf:definition} Affine transformation
+:label: def-la-affine-operator
+
+Let $\XX$ and $\YY$ be vector spaces. 
+A (total) function $T : \XX \to \YY$ (on some field $\FF$)
+is called an *affine transformation* if
+for every $\bx,\by \in \XX$ and for every $t \in \FF$
+
+$$
+T (t \bx + (1 - t) \by) = t T(\bx) + (1 - t) T(\by).
+$$
+
+An affine transformation is also known as an *affine function*
+or an *affine operator*.
+```
+
+
+```{prf:theorem} Affine = Linear + Translation
+:label: res-la-op-affine-linear-p-offset
+
+$T$ is affine if and only if the mapping $\bx \mapsto T(\bx) - T(\bzero)$
+is linear.
+
+In other words, an affine transformation can be written as a linear
+transformation followed by a translation.
+```
+
+```{prf:proof}
+Let $T : \XX \to \YY$ be some mapping. Define:
+
+$$
+L (\bx) = T (\bx)  - T(\bzero).
+$$
+
+Assume $T$ to be affine. We shall show that $L$ is linear.
+
+Let $\bx, \by \in \XX$ and $t \in \FF$. Then
+
+$$
+L(t\bx) &= T (t\bx) - T(\bzero)\\
+&= T(t\bx + (1-t) \bzero) - T(\bzero)\\
+&= t T(\bx) + (1-t)T(\bzero) - T(\bzero)\\
+&= t (T(\bx) - T(\bzero)) = t L(\bx).
+$$
+
+$$
+L (\bx + \by) &= T (\bx + \by)  - T(\bzero)\\
+&= T(\frac{1}{2} 2 \bx + \frac{1}{2} 2 \by) - T(\bzero)\\
+&= \frac{1}{2} T (2 \bx) + \frac{1}{2} T(2 \by) - T(\bzero)\\
+&= \frac{1}{2} (T (2\bx) - T(\bzero)) + \frac{1}{2}( T(2\by) - T(\bzero))\\
+&= \frac{1}{2} (L (2\bx)  + L (2\by))\\
+&= \frac{1}{2} (2 L (\bx)  + 2 L (\by))\\
+&= L(\bx) + L (\by).
+$$
+Thus, $L$ is linear.
+Here, we used the fact that $L(2\bx) = T(2\bx) - T(\bzero)$
+and $L$ was already shown to be homogeneous above giving 
+$L(2\bx) = 2 L(\bx)$.
+
+
+Now, assume $L$ to be linear. We shall show that $T$ is affine.
+
+
+Let $\bx, \by \in \XX$ and $t \in \FF$. Then
+
+$$
+T (t \bx + (1 - t) \by) 
+&= L (t \bx + (1 - t) \by) + T(\bzero)  \\
+&= t L(\bx) + (1 -t) L (\by) + T(\bzero) \\
+&= t L(\bx) + t T(\bzero) + (1 -t) L (\by) + (1-t)T(\bzero) \\
+&= t (L (\bx) + T(\bzero)) + (1 -t) (L (\by) + T(\bzero))\\
+&= tT (\bx) + (1- t) T(\by).
+$$
+Thus, $T$ is affine.
+```
+
+We show that affine functions distribute over
+arbitrary affine combinations.
+
+```{prf:theorem} Affine functions on affine combinations
+:label: res-la-aff-func-aff-comb
+
+Let $\XX$ and $\YY$ be vector spaces on a field $\FF$.
+Let $T : \XX \to \YY$ be affine. 
+
+Let $\bx_0, \bx_1, \dots, \bx_k \in \XX$ and 
+$t_0, t_1, \dots, t_k \in \FF$ such that
+$\sum_{i=0}^k t_i = 1$.
+Then,
+
+$$
+T \left ( \sum_{i=0}^k t_i \bx_i \right ) = \sum_{i=0}^k t_i T(\bx_i).
+$$
+```
+
+```{prf:proof}
+
+Define:
+
+$$
+L(\bx) = T(\bx)  - T(\bzero).
+$$
+
+We know that $L$ is linear. We have $T(\bx) = L(\bx) + T(\bzero)$.
+
+Now,
+
+$$
+T \left ( \sum_{i=0}^k t_i \bx_i \right ) 
+&= L \left ( \sum_{i=0}^k t_i \bx_i \right )  + T(\bzero)\\
+&= \sum_{i=0}^k t_i L( \bx_i)  + T(\bzero)\\
+&= \sum_{i=0}^k t_i L( \bx_i)  + (\sum_{i=0}^k t_i) T(\bzero)\\
+&= \sum_{i=0}^k t_i \left (L( \bx_i)  + T(\bzero) \right )\\
+&= \sum_{i=0}^k t_i T( \bx_i).
+$$
+```
