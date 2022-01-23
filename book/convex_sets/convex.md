@@ -61,19 +61,129 @@ $$
 $$
 ````
 
-````{prf:example} Convex sets
-:label: def-ray
+```{prf:observation}
+Since a convex set contains the line segment between any
+two points, any line segment is convex by definition.
+```
 
-*  A line segment is convex.
-*  A circle [including its interior] is convex.
-*  A *ray* is defined as $\{ \bx_0 + \theta \bv | \theta \geq 0 \}$ 
-   where $\bv \neq \bzero$ indicates the direction of ray 
-   and $\bx_0$ is the base or origin of ray. 
-   A ray is convex but not affine.
-*  Any affine set is convex.
+```{prf:theorem}
+:label: res-convex-linear-subspace
 
-````
+Any linear subspace is convex.
+```
 
+```{prf:proof}
+Let $\EE$ be a linear subspace of $\VV$.
+Then $\EE$ is closed under addition
+and scalar multiplication. 
+Thus, for any $\bx, \by \in \EE$ and $0 \leq t \leq 1$,
+
+$$
+t \bx + (1-t)\by \in \EE.
+$$
+
+Thus, $\EE$ is convex.
+```
+
+```{prf:theorem}
+:label: res-convex-affine-set
+
+Any {prf:ref}`affine set <def-affine-set>` is convex.
+```
+```{prf:proof}
+Let $C \subseteq \VV$ be an affine set.
+By definition, for any $\bx, \by \in C$
+and any $t \in \RR$,
+$t \bx + (1-t)\by \in C$.
+It is valid in particular for $0 \leq t \leq 1$.
+Thus, $C$ is convex.
+```
+
+```{prf:theorem}
+:label: res-convex-hyperplane
+
+Any {prf:ref}`hyperplane <def-hyperplane>` is convex
+since it is affine.
+```
+
+```{prf:theorem}
+:label: res-convex-half-space
+
+{prf:ref}`Half spaces <def-halfspace>` are convex.
+```
+
+```{prf:proof}
+Consider $H_+$ defined as:
+
+$$
+    H_+ = \{ x : \langle \ba, \bx \rangle \geq b \}
+$$
+
+Let $\bx, \by \in H_+$. Then:
+
+$$
+\langle \ba, \bx \rangle \geq b
+\text{ and }
+\langle \ba, \by \rangle \geq b.
+$$
+
+For some $0 \leq t \leq 1$:
+
+$$
+\langle \ba, t \bx + (1 - t) \by \rangle
+= t \langle \ba, \bx \rangle + (1 - t)\langle \ba, \by \rangle
+\geq t b + (1 -t )b  = b.
+$$
+
+Thus, $\bx + (1 - t) \by \in H_+$.
+Analogous proofs apply for other types of half spaces.
+```
+
+## Rays
+
+```{prf:definition} Ray
+:label: def-convex-ray
+
+A *ray* $R$ is defined as 
+
+$$
+R \triangleq \{ \bx_0 + t \bv \ST t \geq 0 \}
+$$ 
+where $\bv \neq \bzero$ indicates the direction of ray 
+and $\bx_0$ is the base or origin of ray.
+```
+
+```{prf:theorem}
+:label: res-convex-ray
+
+A ray is convex.
+```
+```{prf:proof}
+
+Let a ray be given as:
+
+$$
+R = \{ \bx_0 + t \bv \ST t \geq 0 \}.
+$$
+
+Let $\bu, \bv \in R$. Thus, there is $t_u, t_v \geq 0$
+such that:
+
+$$
+\bu = \bx_0 + t_u \bv \text{ and }
+\bv = \bx_0 + t_v \bv.
+$$
+
+Now, for some $0 \leq r \leq 1$,
+
+$$
+r \bu + (1 - r) \bv 
+&= r (\bx_0 + t_u \bv) + (1 - r) (\bx_0 + t_v \bv)\\
+&= \bx_0 + (r t_u + (1 - r) t_v) \bv.
+$$
+Since $r t_u + (1 - r) t_v \geq 0$, hence
+$r \bu + (1 - r) \bv  \in R$.
+```
 
 ## Balls
 

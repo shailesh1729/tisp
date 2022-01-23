@@ -1,6 +1,8 @@
 (sec:convex:hyperplane)=
 # Hyperplanes and Half spaces
 
+## hyperplanes
+
 In this section $\VV$ is a real inner product space.
 
 ````{prf:definition} Hyperplane
@@ -109,13 +111,13 @@ A hyperplane divides $\VV$ into two *halfspaces*.
 The two (closed) halfspaces are given by
 
 $$
-    H_+ = \{ x : \langle \ba, \bx \rangle \geq b \}
+    H_+ = \{ \bx : \langle \ba, \bx \rangle \geq b \}
 $$
 
 and
 
 $$
-    H_- = \{ x : \langle \ba, \bx \rangle \leq b \}
+    H_- = \{ \bx : \langle \ba, \bx \rangle \leq b \}
 $$
 
 The halfspace $H_+$ extends in the direction of $\ba$ while
@@ -124,7 +126,6 @@ $H_-$ extends in the direction of $-\ba$.
 
 
 *  A halfspace is the solution set of one (nontrivial) linear inequality.
-*  A halfspace  is convex but not affine.
 *  The halfspace can be written alternatively as 
 
 $$
