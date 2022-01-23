@@ -841,7 +841,7 @@ We proceed as follows:
 Thus, $S^{\perp}$ is a subspace of $\VV$.
 ```
 
-```{prf:remark}
+```{prf:observation}
 The orthogonal complement of the inner product space $\VV$ is its trivial subspace
 containing just the zero vector.
 
@@ -850,9 +850,37 @@ $$
 $$
 ```
 
-```{prf:theorem}
+```{prf:observation}
+If $S$ is a subspace of $\VV$, then to show that some vector 
+$\bu \in S^{\perp}$, it is sufficient to show that $\bu$ is
+orthogonal to all the vectors in some basis of $S$.
+```
+```{prf:proof}
+Let $\be_1, \dots, \be_p$ be a basis for $S$. 
+
+Then, for any $\bs \in S$:
+
+$$
+\bs = \sum_{i=1}^p \alpha_p \be_p.
+$$
+
+Now, if $\bu$ is orthogonal to every vector in $\be_1, \dots, \be_p$,
+then
+
+$$
+\langle \bs, \bu \rangle = \sum_{i=1}^p \alpha_p \langle \be_p, \bu \rangle = 0.
+$$
+
+Thus, $\bu \perp \bs$. 
+Since $\bs$ was arbitrarily chosen from $S$, hence $\bu \in S^{\perp}$.
+```
+
+
+```{prf:theorem} Orthogonal decomposition
+:label: res-la-orthogonal-decomposition
+
 Let $\VV$ be an inner product space and $S$ be a finite dimensional subspace of $\VV$.
-Then, every $\bv \in \VV$ can be written as:
+Then, every $\bv \in \VV$ can be written uniquely in the form:
 
 $$
 \bv = \bv_{\parallel}  + \bv_{\perp}
@@ -860,94 +888,94 @@ $$
 where $\bv_{\parallel} \in S$ and $\bv_{\perp} \in S^{\perp}$.
 ```
 
-```{prf:proof}
+````{prf:proof}
 Let $\be_1, \dots, \be_p$ be an orthonormal basis for $S$. 
+
+Define:
+
+```{math}
+:label: eq-la-orth-dec-parallel
+\bv_{\parallel} \triangleq \sum_{i=1}^p \langle \bv, \be_i \rangle \be_i.
 ```
 
-## Projection
+And
+
+$$
+\bv_{\perp} = \bv - \bv_{\parallel}.
+$$
+
+By construction, $\bv_{\parallel}  \in \span \{ \be_1, \dots, \be_p\} = S$.
+
+Now, for every $0 \leq i \leq p$:
+
+$$
+\begin{aligned}
+\langle \bv_{\perp}, \be_i \rangle 
+&= \langle \bv - \bv_{\parallel}, \be_i \rangle\\
+&= \langle \bv, \be_i \rangle - \langle \bv_{\parallel}, \be_i \rangle\\
+&= \langle \bv, \be_i \rangle - \langle \bv, \be_i \rangle = 0.
+\end{aligned}
+$$
+
+Thus, $\bv_{\perp} \in S^{\perp}$.
 
 
-````{prf:definition}
-:label: def-la-projection
+We have shown that the existence of the decomposition of an vector
+$\bv$ in components which belong to $S$ and $S^{\perp}$.
+Next, we need to show that the decomposition is unique.
 
-A *projection* is a linear transformation $P$ from a 
-vector space $\VV$ to itself such that $P^2=P$;
-i.e., if $ P \bv = \bx$, then $P \bx = \bx$. 
+For contradiction, assume there was another decomposition:
+
+$$
+\bv = \bu_{\parallel}  + \bu_{\perp}
+$$
+such that $\bu_{\parallel} \in S$ and $\bu_{\perp} \in S^{\perp}$.
+
+Then,
+
+$$
+\bv_{\parallel}  + \bv_{\perp} = \bv = \bu_{\parallel}  + \bu_{\perp}
+$$
+gives us:
+
+$$
+\bw = \bv_{\parallel} - \bu_{\parallel} = \bu_{\perp} - \bv_{\perp}.
+$$
+Thus, $\bw \in S$ as well as $\bw \in S^{\perp}$. 
+But then, $\bw \perp \bw$ giving us:
+
+$$
+\langle \bw , \bw \rangle = 0 
+= \langle \bv_{\parallel} - \bu_{\parallel}, \bv_{\parallel} - \bu_{\parallel}\rangle 
+= \| \bv_{\parallel} - \bu_{\parallel} \|^2.
+$$
+This is possible only if  $\bv_{\parallel} - \bu_{\parallel} = \bzero$, 
+thus, $\bv_{\parallel} = \bu_{\parallel}$.
+Consequently, $\bu_{\perp} = \bv_{\perp}$ too.
+
+Thus, 
+
+$$
+\bv = \bv_{\parallel}  + \bv_{\perp}
+$$
+is a unique decomposition.
 ````
 
-```{prf:remark}
-Whenever $P$ is applied twice (or more) to any vector, 
-it gives the same result as if it was applied once.
+```{prf:corollary}
+If $S$ is a finite dimensional subspace of an inner product space $\VV$, then
 
-Thus, $P$ is an *idempotent* operator.
+$$
+S \cap S^{\perp} = \{ \bzero \}.
+$$
+
+In other words, the only vector common between $S$ and its orthogonal complement
+is the zero vector.
 ```
-
-````{prf:example} Projection operators
-
-Consider the operator $P : \RR^3 \to \RR^3$ defined as
-
-$$
-P = \begin{bmatrix}
-1 & 0 & 0\\
-0 & 1 & 0 \\
-0 & 0 & 0
-\end{bmatrix}.
-$$
-
-Then application of $P$ on any arbitrary vector is given by
-
-$$
-P
-\begin{pmatrix}
-x \\ y \\z
-\end{pmatrix}
-=
-\begin{pmatrix}
-x \\ y \\ 0
-\end{pmatrix}
-$$
-
-A second application doesn't change it
-
-$$
-P
-\begin{pmatrix}
-x \\ y \\0
-\end{pmatrix}
-=
-\begin{pmatrix}
-x \\ y \\ 0
-\end{pmatrix}
-$$
-
-Thus $P$ is a projection operator.
-
-Often, we can directly verify the property by computing $P^2$ as
-
-$$
-P^2 = \begin{bmatrix}
-1 & 0 & 0\\
-0 & 1 & 0 \\
-0 & 0 & 0
-\end{bmatrix}
-\begin{bmatrix}
-1 & 0 & 0\\
-0 & 1 & 0 \\
-0 & 0 & 0
-\end{bmatrix}
-= \begin{bmatrix}
-1 & 0 & 0\\
-0 & 1 & 0 \\
-0 & 0 & 0
-\end{bmatrix}
-= P.
-$$
-````
-
 
 ## Orthogonal Projection
 
-Consider a projection operator $P : \VV \to \VV$ 
+Consider a {prf:ref}`projection <def-la-projection>` 
+operator $P : \VV \to \VV$ 
 where $\VV$ is an inner product space.
 
 The range of $P$ is given by
@@ -973,9 +1001,151 @@ $\NullSpace(P)$ as defined above are orthogonal to each other;
 i.e.
 
 $$
-\langle \br, \bn \rangle = \bzero \Forall \br \in \Range(P) , \Forall \bn \in \NullSpace(P).
+\br \perp \bn \Forall \br \in \Range(P) , \Forall \bn \in \NullSpace(P).
 $$
 ````
+
+```{prf:theorem}
+Let $S$ be a finite dimensional subspace of $\VV$. 
+Let $\{\be_1, \dots, \be_p\}$ be an orthonormal basis of $S$.
+Let the operator $P_S: \VV \to \VV$ be defined as:
+
+$$
+P_S \bv \triangleq \bv_{\parallel}
+$$
+where
+
+$$
+\bv = \bv_{\parallel} + \bv_{\perp}
+$$
+is the unique orthogonal decomposition of $\bv$ w.r.t. the subspace $S$
+as defined in {prf:ref}`res-la-orthogonal-decomposition`.
+Then,
+
+1. $P_S \bv = \sum_{i=1}^p \langle \bv, \be_i \rangle \be_i$.
+1. For any $\bv \in \VV$, $\bv - P_S \bv \perp S$.
+1. $P_S$ is a linear map.
+1. $P_S$ is the identity map when restricted to $S$;
+   i.e., $P_S \bs = \bs \Forall \bs \in S$.
+1. $\Range(P_S) = S$.
+1. $\NullSpace(P_S) = S^{\perp}$.
+1. $P_S^2 = P_S$.
+1. For any $\bv \in \VV$, $\| P_S \bv \| \leq \| \bv \|$.
+1. For any $\bv \in \VV$ and $\bs \in S$:
+
+   $$
+   \| \bv - P_S \bv \| \leq \| \bv - \bs \|
+   $$
+   with equality if and only if $\bs = P_S \bv$.
+
+$P_S$ is indeed an *orthogonal projection* onto $S$.
+```
+```{prf:proof}
+For the sake of brevity, we abbreviate $P = P_S$.
+
+Following {eq}`eq-la-orth-dec-parallel`, indeed:
+
+$$
+P = \sum_{i=1}^p \langle \bv, \be_i \rangle \be_i.
+$$
+
+For any $\bv \in \VV$ (due to {prf:ref}`res-la-orthogonal-decomposition`):
+
+$$
+\bv - P \bv = \bv - \bv_{\parallel} = \bv_{\perp}.
+$$
+Since $\bv_{\perp} \in S^{\perp}$ hence $\bv - P \bv \perp S$.
+
+[Linear map]
+1. Let $\bu, \bv \in \VV$.
+1. Let $\bu = \bu_{\parallel} + \bu_{\perp}$ and $\bv = \bv_{\parallel} + \bv_{\perp}$.
+1. Consider $\bu + \bv = (\bu_{\parallel} + \bv_{\parallel}) + (\bu_{\perp} + \bv_{\perp})$.
+1. Then, $\bu_{\parallel} + \bv_{\parallel} \in S$ and
+   $\bu_{\perp} + \bv_{\perp} \in S^{\perp}$.
+1. Since, the orthogonal decomposition is unique, hence
+   $P (\bu + \bv) = \bu_{\parallel} + \bv_{\parallel} = P \bu + P \bv$.
+1. Similarly, for $\alpha \in \FF$, 
+   $\alpha \bu = \alpha \bu_{\parallel} + \alpha\bu_{\perp}$.
+1. With $\alpha \bu_{\parallel} \in S$ and $\alpha\bu_{\perp} \in S^{\perp}$,
+   $P (\alpha \bu) = \alpha \bu_{\parallel} = \alpha P \bu$.
+
+Thus, $P$ is a linear map.
+
+For any $\bs \in S$, we can write it as $\bs = \bs + \bzero$.
+With $\bs \in S$ and $\bzero \in S^{\perp}$,
+we have: $P \bs = \bs$.
+
+[Range]
+
+1. Since $P$ maps $\bv$ to a component in $S$, hence $\Range(P) \subseteq S$.
+1. Since for every $\bs \in S$, there is $\bv \in S$ such that $P \bv  = \bs$
+   (specifically $\bv = \bs$),
+   hence $S \subseteq \Range(P)$.
+1. Combining $\Range(P) = S$.
+
+[Null space]
+
+1. Let $\bv \in \NullSpace(P)$. Write $\bv = \bv_{\parallel} + \bv_{\perp}$.
+1. Then, $P \bv = \bv_{\parallel} = \bzero$ as $\bv$ is in the null space of $P$.
+1. Hence, $\bv = \bv_{\perp} \in S^{\perp}$.
+1. Thus, $\NullSpace(P) \subseteq S^{\perp}$.
+1. Now, let $\bv \in S^{\perp}$. 
+1. We can write $\bv$ as $\bv = \bzero + \bv$
+   where $\bzero \in S$ and $\bv \in S^{\perp}$.
+1. Thus, $P \bv = \bzero$.
+1. Thus, $S^{\perp} \subseteq \NullSpace(P)$.
+1. Combining, $S^{\perp} = \NullSpace(P)$.
+
+[$P^2 = P$]
+
+1. For any $\bv \in \VV$, we have, $P \bv = \bv_{\parallel}$.
+1. Since $\bv_{\parallel} \in S$, hence $P \bv_{\parallel} = \bv_{\parallel}$.
+1. Thus, $P^2 \bv = P \bv_{\parallel} = \bv_{\parallel} = P v$.
+1. Since $\bv$ was arbitrary, hence, $P^2 = P$.
+
+
+[$\| P \bv \| \leq \| \bv \|$]
+
+1. We have $\bv = \bv_{\parallel} + \bv_{\perp} = P \bv + \bv_{\perp}$.
+1. By Pythagoras theorem: $ \| \bv \|^2 =  \| P \bv \|^2 + \| \bv_{\perp}\|^2$.
+1. Thus, $ \| \bv \|^2 \geq \| P \bv \|^2$.
+1. Taking square root on both sides: $\| P \bv \| \leq \| \bv \|$.
+
+[$\| \bv - P \bv \| \leq \| \bv - \bs \|$]
+
+1. Let $\bv \in \VV$ and $\bs \in S$.
+1. Note that $P \bv \in S$ hence $P \bv - \bs \in S$.
+1. By definition $\bv - P \bv \in S^{\perp}$.
+1. Thus, $\bv - P \bv \perp P \bv - \bs$.
+1. We have: $\bv - \bs = (\bv - P \bv) + (P \bv - \bs)$. 
+1. Applying Pythagoras theorem:
+
+   $$
+   \| \bv - \bs \|^2 = \| \bv - P \bv\|^2 + \| P \bv - \bs \|^2
+   \geq \| \bv - P \bv\|^2.
+   $$
+1. Taking square root on both sides:
+
+   $$
+   \| \bv - P \bv \| \leq \| \bv - \bs \|.
+   $$
+1. Equality holds if and only if $\| P \bv - \bs \|^2 = 0$
+   if and only if $P \bv = \bs$.
+
+In order to show that $P$ is an orthogonal projection, we need to show 
+that:
+
+1. $P$ is a projection operator.
+1. $\br \perp \bn \Forall \br \in \Range(P) , \Forall \bn \in \NullSpace(P)$.
+
+We have shown that:
+
+1. $P^2 = P$. Hence $P$ is a projection operator.
+1. $\Range(P)  = S$ and $\NullSpace(P) = S^{\perp}$.
+1. By definition, for any $\br \in S$ and $\bn \in S^{\perp}$, $\br \perp \bn$.
+1. Thus, $P$ is an orthogonal projection operator.
+
+```
 
 ````{prf:theorem}
 A projection operator is orthogonal if and only if it is self adjoint.
