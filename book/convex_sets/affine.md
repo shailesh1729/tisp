@@ -38,42 +38,6 @@ An alternative notation for the line as a set is $x_2 + \RR (x_1 - x_2)$
 following the notation in {prf:ref}`def-vs-set-arithmetic`.
 ```
 
-## Line Segments
-
-```{prf:definition}
-:label: def-aff-line-segment
-
-Let $x_1$ and $x_2$ be two points in $\VV$. Points of the form
-
-$$
-y = (1 - \theta) x_1 + \theta x_2 \text{ where } 0 \leq \theta \leq 1
-$$ 
-form a (closed) *line-segment* between $x_1$ and $x_2$. 
-The closed line segment is denoted by $[x_1, x_2]$.
-
-$$
-[x_1, x_2] \triangleq \{ (1 - \theta) x_1 + \theta x_2 \ST 0 \leq \theta \leq 1 \}.
-$$ 
-
-Similarly, we define an *open line segment* as:
-
-$$
-(x_1, x_2) \triangleq \{ (1 - \theta) x_1 + \theta x_2 \ST 0 < \theta < 1 \}.
-$$ 
-
-The half-open segment $(x_1, x_2]$ is defined as:
-
-$$
-(x_1, x_2] \triangleq \{ (1 - \theta) x_1 + \theta x_2 \ST 0 < \theta \leq 1 \}.
-$$ 
-
-The half-open segment $[x_1, x_2)$ is defined as:
-
-$$
-[x_1, x_2) \triangleq \{ (1 - \theta) x_1 + \theta x_2 \ST 0 \leq \theta < 1 \}.
-$$ 
-```
-
 ## Affine Sets
 
 ```{prf:definition}
