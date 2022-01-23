@@ -471,6 +471,30 @@ $$
 is a convex set.
 ````
 
+```{prf:proof}
+We proceed as follows:
+
+1. Let $\bu, \bv \in f(S)$. 
+1. Then, $\bu = f(\bx)$ and $\bv = f(\by)$
+   for some $\bx, \by \in S$.
+1. Let $0 \leq t \leq 1$.
+1. Then, $\bz = t \bx + (1-t)\by \in S$ since $S$
+   is convex.
+1. Since $f$ is affine, hence
+   
+   $$
+   f(\bz) = f(t \bx + (1-t)\by )
+   = t f(\bx) + (1-t)f(\by)
+   = t \bu + (1-t)\bv.
+   $$
+1. Since $\bz \in S$, 
+   hence $f(\bz) = t \bu + (1-t)\bv \in f(S)$.
+1. We have shown that for any $\bu, \bv \in f(S)$
+   and any $0 \leq t \leq 1$, 
+   $t \bu + (1-t)\bv \in f(S)$.
+1. Thus, $f(S)$ is convex.
+```
+
 It applies in the reverse direction also.
 ````{prf:theorem}
 Let $f : \VV \to \EE$ be affine and 
@@ -478,42 +502,61 @@ $S \subseteq \EE$ be convex.
 Then the inverse image of $S$ under $f$ given by
 
 $$
-f^{-1}(S) = \{ \bx \in \VV | f(\bx) \in S\}
+f^{-1}(S) = \{ \bx \in \VV \ST f(\bx) \in S\}
 $$
 is convex.
 ````
 
+```{prf:proof}
+Denote $R = f^{-1}(S)$. We need to show that
+if $S$ is convex then $R$ is convex too.
+
+We proceed as follows:
+
+1. Let $\bx, \by \in R$. 
+1. Let $\bu = f(\bx)$ and $\bv = f(\by)$.
+1. $\bu, \bv \in S$.
+1. Let $0 \leq t \leq 1$.
+1. Then, $\bw = t \bu + (1-t)\bv \in S$ since $S$
+   is convex.
+1. Let $\bz = t \bx + (1-t) \by$. 
+1. Since $f$ is affine, hence
+   
+   $$
+   \bw = t \bu + (1-t)\bv
+   = t f(\bx) + (1-t) f(\by)
+   = f(t \bx + (1-t) \by)
+   = f(\bz).
+   $$
+1. Since $\bw \in S$, hence $\bz \in R$
+   as $\bw = f(\bz)$.
+1. We have shown that for any $\bx, \by \in R$
+   and any $0 \leq t \leq 1$, 
+   $t \bx + (1-t)\by \in R$.
+1. Thus, $R$ is convex.
+```
+
 ````{prf:example} Affine functions preserving convexity
 
-Let $S \in \RR^N$ be convex.
+Let $S \in \RR^n$ be convex.
 
-*   For some $\alpha \in \RR$ ,
-$\alpha S$  given by
+* For some $\alpha \in \RR$,
+  $\alpha S$ is convex. This is the *scaling* operation.
+* For some $\ba \in \RR^n$, $S + \ba$
+  is convex. This is the *translation* operation.
+* Let $n = m + k$. 
+  Then, let $\RR^n = \RR^m \times \RR^k$.
+  A vector $\bx \in S$ can be written as $\bx = (\bx_1, \bx_2)$
+  where $\bx_1 \in \RR^m$ and $\bx_2 \in \RR^k$.
+  Then
 
-$$
-    \alpha S = \{\alpha x | x \in S\}
-$$
-
-is convex. This is the *scaling* operation.
-*  For some $a \in \RR^N$, $ S + a$ given by
-
-$$
-    S + a = \{x + a | x \in S\}
-$$
-
-is convex. This is the *translation* operation.
-*  Let $N = M + K$ where $M, N \in \Nat$. Then, let
-$\RR^N = \RR^M \times \RR^K$.
-A vector $x \in S$ can be written as $x = (x_1, x_2)$
-where $x_1 \in \RR^M$ and $x_2 \in \RR^K$.
-Then
-
-$$
-    T = \{ x_1 \in \RR^M | (x_1, x_2) \in S \text{ for some } x_2 \in \RR^K\}
-$$
-
-is convex. This is the *projection* operation.
-
+  $$
+    T = \{ \bx_1 \in \RR^m \ST 
+        (\bx_1, \bx_2) \in S \text{ for some } \bx_2 \in \RR^k\}
+  $$
+  is convex. This is the *projection* operation.
+  It projects vectors from $\RR^n$ to $\RR^m$ by
+  dropping last $k$ entries.
 ````
 
 ### Set Addition
@@ -522,3 +565,27 @@ is convex. This is the *projection* operation.
 Let $S_1$ and $S_2$ be two convex subsets of $\VV$. Then
 $S_1 + S_2$ is convex.
 ````
+
+```{prf:proof}
+We proceed as follows:
+
+1. Let $\bx, \by \in S_1 + S_2$. 
+1. Then, $\bx = \bx_1 + \bx_2$ for some $\bx_1 \in S_1$ 
+   and some $\bx_2 \in S_2$.
+1. Similarly, $\by = \by_1 + \by_2$ for some $\by_1 \in S_1$ 
+   and some $\by_2 \in S_2$.
+1. Let $0 \leq t \leq 1$.
+1. Then:
+   
+   $$
+   t \bx + (1 - t) \by 
+   = t (\bx_1 + \bx_2) + (1-t)(\by_1 + \by_2)
+   = t \bx_1 + (1 - t) \by_1 + t \bx_2 + (1 - t) \by_2. 
+   $$
+1. But, $\bz_1 = t \bx_1 + (1 - t) \by_1 \in S_1$ since
+   $S_1$ is convex.
+1. Similarly, $\bz_2 = t \bx_2 + (1 - t) \by_2 \in S_2$ since
+   $S_2$ is convex.
+1. Hence, $t \bx + (1 - t) \by = \bz_1 + \bz_2 \in S_1 + S_2$.
+1. Thus, $S_1 + S_2$ is convex.
+```
