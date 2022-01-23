@@ -713,3 +713,82 @@ Then, the following hold
 1. $[\alpha \TT]_{\BBB}^{\Gamma} = \alpha [\TT]_{\BBB}^{\Gamma} \Forall \alpha \in \FF$.
 ````
 
+## Projections
+
+
+````{prf:definition}
+:label: def-la-projection
+
+A *projection* is a linear transformation $P$ from a 
+vector space $\VV$ to itself such that $P^2=P$;
+i.e., if $ P \bv = \bx$, then $P \bx = \bx$. 
+````
+
+```{prf:remark}
+Whenever $P$ is applied twice (or more) to any vector, 
+it gives the same result as if it was applied once.
+
+Thus, $P$ is an *idempotent* operator.
+```
+
+````{prf:example} Projection operators
+
+Consider the operator $P : \RR^3 \to \RR^3$ defined as
+
+$$
+P = \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{bmatrix}.
+$$
+
+Then application of $P$ on any arbitrary vector is given by
+
+$$
+P
+\begin{bmatrix}
+x \\ y \\z
+\end{bmatrix}
+=
+\begin{bmatrix}
+x \\ y \\ 0
+\end{bmatrix}
+$$
+
+A second application doesn't change it
+
+$$
+P
+\begin{bmatrix}
+x \\ y \\0
+\end{bmatrix}
+=
+\begin{bmatrix}
+x \\ y \\ 0
+\end{bmatrix}
+$$
+
+Thus $P$ is a projection operator.
+
+Often, we can directly verify the property by computing $P^2$ as
+
+$$
+P^2 = \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+= \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+= P.
+$$
+````
