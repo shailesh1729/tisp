@@ -35,7 +35,9 @@ satisfying following properties:
    $$
 ````
 
-```{prf:theorem}
+```{prf:theorem} Scaling in second argument
+:label: res-la-ip-scaling-second
+
 Let $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ be an inner product.
 Then
 
@@ -55,7 +57,9 @@ $$
 $$
 ```
 
-```{prf:theorem}
+```{prf:theorem} Distribution in second argument
+:label: res-la-ip-dist-second
+
 Let $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ be an inner product.
 Then for any $\bv, \bx, \by \in \VV$:
 
@@ -77,12 +81,14 @@ $$
 ```
 
 
-```{prf:theorem}
+```{prf:theorem} Inner product with zero
+:label: res-la-ip-product-with-zero
+
 Let $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ be an inner product.
 Then,
 
 $$
-\langle \bzero , \bv \rangle  = 0 \Forall \bv \in \VV.
+\langle \bzero , \bv \rangle  = \langle \bv , \bzero \rangle = 0 \Forall \bv \in \VV.
 $$
 ```
 
@@ -98,6 +104,13 @@ By cancelling terms, we get:
 
 $$
 \langle \bzero , \bv \rangle = 0.
+$$
+
+Using the conjugate symmetry, we get:
+
+$$
+\langle \bv , \bzero \rangle = \overline{\langle \bzero , \bv \rangle}
+= \overline{0} = 0.
 $$
 ```
 
@@ -211,9 +224,27 @@ This is the *standard inner product* on the space of column vectors.
 ```
 
 ```{prf:theorem}
+:label: res-la-ip-complex-real-part
+
 For complex inner products, the inner product is determined identified
 by its real part. 
 ```
+
+This statement may be confusing. Let us unpack what it means.
+Let
+
+$$
+\langle \bx, \by \rangle = \Re\langle \bx, \by \rangle + i \Im\langle \bx, \by \rangle.
+$$
+
+Then, computing the inner product involves computing the
+real part as well as computing the complex part. 
+What the statement means is that, if we know how to 
+compute $\Re\langle \bx, \by \rangle$ for any
+$\bx, \by \in \VV$, then, we can use the same
+method to compute  $\Im\langle \bx, \by \rangle$
+too; but using different inputs. See below.
+
 ```{prf:proof}
 
 Let
@@ -246,11 +277,13 @@ $$
 
 From the perspective of convex analysis, the general inner product is not very useful.
 We prefer a special class of inner products whose value is always real.
+This is applicable on vector spaces where the field of scalars is
+$\RR$.
 
 ````{prf:definition} Real inner product
 :label: def-la-real-inner-product
 
-A *real inner product* over an $\FF$-vector space $\VV$ is any map
+A *real inner product* over an $\RR$-vector space $\VV$ is any map
 $\langle, \rangle : \VV \times \VV \to \RR$
 mapping $(\bv_1, \bv_2) \mapsto \langle \bv_1, \bv_2 \rangle$
 satisfying following properties:
@@ -269,13 +302,14 @@ satisfying following properties:
 
    $$
     \begin{aligned}
-    &\langle \alpha \bv, \bw \rangle = \alpha \langle \bv, \bw \rangle \quad \forall \bv, \bw \in \VV; \forall \alpha \in \FF\\
+    &\langle \alpha \bv, \bw \rangle = \alpha \langle \bv, \bw \rangle \quad \forall \bv, \bw \in \VV; \forall \alpha \in \RR\\
     &\langle \bv_1 + \bv_2, \bw \rangle = \langle \bv_1, \bw \rangle + \langle \bv_2, \bw \rangle \quad \forall \bv_1, \bv_2,\bw \in \VV
     \end{aligned}
    $$
 ````
 
-* Real inner product is always real valued no matter whether  the scalar field is real or complex.
+* Real inner product is always real valued no matter whether  the 
+  vectors are real or complex.
 * Since the real inner product is symmetric, hence since it is linear in first argument,
   it is linear in second argument too.
 
@@ -284,7 +318,12 @@ $$
 $$
 
 
-```{prf:example}
+```{prf:example} A real inner product for $\CC^n$ over $\RR$
+In this example, we are dealing with $n$-tuples of complex numbers
+in $\CC^n$ with the field of scalars being $\RR$.
+It can be easily checked that $\CC^n$ over $\RR$ is a 
+vector space.
+
 Let $z_1, z_2$ be complex numbers:
 
 $$
@@ -360,7 +399,9 @@ $$
 $$
 ````
 
-```{prf:theorem}
+```{prf:theorem} Orthogonality implies independence
+:label: res-la-ip-orthogonal-independent
+
 A set of orthogonal vectors is linearly independent.
 ```
 
@@ -418,6 +459,8 @@ $$
 $$
 
 ```{prf:theorem} Pythagoras theorem
+:label: res-la-ip-pythagoras
+
 If $\bu \perp \bv$ then
 
 $$
@@ -438,6 +481,8 @@ since  $\bu \perp \bv$.
 ```
 
 ```{prf:theorem} Cauchy Schwartz inequality
+:label: res-la-ip-cauchy-chwartz-inequality
+
 For any $\bu, \bv \in \VV$:
 
 $$
@@ -524,7 +569,9 @@ giving us $\bu - \bw = \bzero$. Hence, the equality holds.
 ```
 
 
-```{prf:theorem}
+```{prf:theorem} Inner product induced norm justification
+:label: res-la-ip-induced-norm-valid
+
 The function $\| \cdot \| : \VV \to \RR$ induced by the inner product
 $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$ as defined in
 {prf:ref}`def-la-ip-induced-norm` is indeed a norm.
@@ -566,7 +613,9 @@ We recap the sequence of results to emphasize the logical flow:
    positive homogeneity and Pythagoras theorem.
 1. We proved triangle inequality using Cauchy Schwartz inequality.
 
-```{prf:theorem}
+```{prf:theorem} Inner product space to metric space
+:label: res-la-ip-implies-norm-metric
+
 Every inner product space is a normed space. Hence it is also a metric space.
 ```
 
@@ -577,7 +626,9 @@ A norm induces a metric which makes the vector space a metric space.
 
 ## Hilbert Spaces
 
-```{prf:definition}
+```{prf:definition} Hilbert space
+:label: def-la-ip-hilbert-space
+
 An inner product space $\VV$ that is
 {prf:ref}`complete <def-ms-complete-metric-space>`
 with respect to the metric induced by the norm
@@ -615,6 +666,7 @@ A set of orthonormal vectors form an *orthonormal basis* for their span.
 
 
 ```{prf:theorem} Expansion of a vector in an orthonormal basis
+:label: res-la-ip-onb-expansion
 
 Let $\{\be_1, \dots, \be_n\}$  be an orthonormal basis for $\VV$.
 Then, any $\bv \in \VV$ can be written as:
@@ -651,6 +703,7 @@ $$
 
 
 ```{prf:theorem} Norm of a vector in an orthonormal basis
+:label: res-la-ip-onb-norm
 
 Let $\{\be_1, \dots, \be_n\}$  be an orthonormal basis for $\VV$.
 For any $\bv \in \VV$, let its expansion in the orthonormal basis be:
@@ -781,7 +834,9 @@ We also need to show that $\span \{\be_1, \dots, \be_{j} \} = \span \{\bv_1, \do
 1. Thus, $\span \{\be_1, \dots, \be_{j} \} = \span \{\bv_1, \dots, \bv_{j} \}$ must be true.
 ```
 
-```{prf:theorem} 
+```{prf:theorem} Existence of orthonormal basis
+:label: res-la-ip-finite-onb-existence
+
 Every finite dimensional inner product space has an orthonormal basis.
 ```
 
@@ -795,6 +850,8 @@ This is a simple application of the Gram-Schmidt algorithm.
 ```
 
 ```{prf:corollary} 
+:label: res-la-ip-finite-subspace-onb-existence
+
 Every finite dimensional subspace of an inner product space has an orthonormal basis.
 ```
 
@@ -827,7 +884,19 @@ $$
 $$
 ```
 
-```{prf:theorem}
+```{prf:observation}
+:label: res-la-ip-orth-comp-vec-set
+
+$\ba^{\perp}$ is just a notational convenience.
+
+$$
+\ba^{\perp} = \{ \ba \}^{\perp} = (\span \{\ba \})^{\perp}.
+$$
+```
+
+```{prf:theorem} Orthogonal complement is a linear subspace
+:label: res-la-ip-orth-comp-subspace
+
 If $\VV$ is an inner product space and $S \subseteq \VV$, then
 $S^{\perp}$ is a subspace.
 ```
@@ -1004,7 +1073,7 @@ $$
 $$
 
 
-````{prf:definition}
+````{prf:definition} Orthogonal projection operator
 :label: def-la-orthogonal-projector
 
 A projection operator $P : \VV \to \VV$
@@ -1019,7 +1088,9 @@ $$
 $$
 ````
 
-```{prf:theorem}
+```{prf:theorem} Orthogonal projection operator for a subspace
+:label: res-la-ip-subspace-orth-proj
+
 Let $S$ be a finite dimensional subspace of $\VV$. 
 Let $\{\be_1, \dots, \be_p\}$ be an orthonormal basis of $S$.
 Let the operator $P_S: \VV \to \VV$ be defined as:
@@ -1161,7 +1232,9 @@ We have shown that:
 
 ```
 
-````{prf:theorem}
+````{prf:theorem} Orthogonal projectors are adjoint
+:label: res-la-ip-orth-proj-adjoint
+
 A projection operator is orthogonal if and only if it is self adjoint.
 ````
 
