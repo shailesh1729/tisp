@@ -265,55 +265,266 @@ We quickly look at some vector spaces which will appear again and again in our d
 
 ### N-Tuples
 
-````{prf:example} $N$-tuples as a vector space
+````{prf:example} $n$-tuples as a vector space
 :label: def-la-n-tuple-vector-space
 
 Let $\FF$ be some field.
-
-The set of all $N$-tuples $(a_1, a_2, \dots, a_N)$ with $a_1, a_2, \dots, a_N \in \FF$
-is denoted as $\FF^N$. 
-This is a vector space with the operations of coordinate-wise
+The set of all $n$-tuples $(a_1, a_2, \dots, a_n)$
+with $a_1, a_2, \dots, a_n \in \FF$
+is denoted as $\FF^n$.
+This is a vector space over $\FF$ 
+with the operations of coordinate-wise
 addition and scalar multiplication.
 
-Let $\bu, \bv \in \FF^N$ with
+Let $\bu, \bv \in \FF^n$ with
 
 $$
-    \bu = (u_1, \dots, u_N)
+    \bu = (u_1, \dots, u_n)
 $$
 
 and
 
 $$
-    \bv = (v_1, \dots, v_N).
+    \bv = (v_1, \dots, v_n).
 $$
 
-Addition is defined as
+Vector addition is defined as
 
 $$
-    \bu + \bv \triangleq (u_1 + v_1,  \dots, u_N + v_N).
+\bu + \bv \triangleq (u_1 + v_1,  \dots, u_n + v_n).
+$$
+
+The zero vector is defined as:
+
+$$
+\bzero = (0, \dots, 0).
 $$
 
 Let $c \in \FF$. Scalar multiplication is defined as
 
 $$
-    c \bu \triangleq (c u_1, \dots, c u_N).
+    c \bu \triangleq (c u_1, \dots, c u_n).
 $$
 
-$\bu, \bv$ are called equal if $u_1 = v_1, \dots, u_N = v_N$.
+$\bu, \bv$ are called equal if $u_1 = v_1, \dots, u_n = v_n$.
 
-In matrix notation, vectors in $\FF^N$ are also written as row vectors
-
-$$
-    \bu = \begin{bmatrix} u_1 & \dots & u_N \end{bmatrix}
-$$
-
-or column vectors
+In matrix notation, vectors in $\FF^n$ can also be
+written as row vectors:
 
 $$
-    \bu = \begin{bmatrix} u_1 \\ \vdots \\ u_N \end{bmatrix}
+\bu = \begin{bmatrix} u_1 & \dots & u_n \end{bmatrix}
+$$
+or column vectors:
+
+$$
+\bu = \begin{bmatrix} u_1 \\ \vdots \\ u_n \end{bmatrix}.
 $$
 
+We next verify that $\FF^n$ equipped with the
+vector addition and scalar multiplication defined
+above satisfies all the properties of a vector space.
+Let us assume $\bx, \by, \bz \in \FF^n$ and 
+$\alpha, \beta, \gamma \in \FF$.
+
+We can now verify all the properties of the vector space:
+
+1. $\FF^n$ is closed under vector addition.
+   
+   $$
+   \bx + \by = (x_1 + y_1, \dots, x_n + y_n).
+   $$
+   Since $x_i + y_i \in \FF$, hence $\bx + \by \in \FF^n$.
+1. Vector addition is associative. 
+
+   $$
+   \bx + (\by + \bz) 
+   &= (x_1, \dots, x_n) + ((y_1, \dots, y_n) + (z_1, \dots, z_n))\\ 
+   &= (x_1, \dots, x_n) + (y_1 + z_1, \dots, y_n + z_n)\\
+   &= (x_1 + (y_1 + z_1), \dots, x_n + (y_n + z_n))\\
+   &= ((x_1 + y_1) + z_1, \dots, (x_n + y_n) + z_n)\\
+   &= (x_1+y_1, \dots, x_n + y_n) + (z_1, \dots, z_n)\\
+   &= ((x_1, \dots, x_n) + (y_1, \dots, y_n)) + (z_1, \dots, z_n)\\
+   &= (\bx + \by) + \bz.
+   $$
+1. Vector addition is commutative.
+
+   $$
+   \bx + \by = (x_1 + y_1, \dots, x_n + y_n)
+   = (y_1 + x_1, \dots, y_n + x_n)
+   = \by + \bx .
+   $$
+1. Additive identity: 
+  
+   $$
+   \bx + \bzero =  (x_1, \dots, x_n) + (0, \dots, 0) = (x_1, \dots, x_n) = \bx.
+   $$
+   Since commutativity is already established, hence:
+
+   $$
+   \bzero + \bx = \bx + \bzero = \bx.
+   $$
+   Thus, $\bzero$ is the additive identity element. 
+1. Additive inverse: Let 
+   
+   $$
+   \bu = (-x_1, \dots, -x_n).
+   $$
+
+   Then,
+
+   $$
+   \bx + \bu = (x_1, \dots, x_n) + (-x_1, \dots, -x_n)
+   = (x_1 + (-x_1), \dots, x_n + (-x_n)) 
+   = (0, \dots, 0) = \bzero.
+   $$
+   By commutativity $\bu + \bx = \bx + \bu = \bzero$.
+   Thus, every vector has an additive inverse.
+   We can write $\bu = -\bx$.
+1. Scalar multiplication distributes over vector addition.
+
+   $$
+   \alpha (\bx + \by) 
+   &= \alpha (x_1 + y_1, \dots, x_n + y_n) \\
+   &= (\alpha (x_1 + y_1), \dots, \alpha (x_n + y_n))\\
+   &= (\alpha x_1 + \alpha y_1, \dots, \alpha x_n + \alpha y_n)\\
+   &= (\alpha x_1, \dots, \alpha x_n) + (\alpha y_1, \dots, \alpha y_n)\\
+   &= \alpha (x_1, \dots, x_n) + \alpha (y_1, \dots, y_n)\\
+   &= \alpha \bx + \alpha \by.
+   $$
+1. Addition in $\FF$ distributes over scalar multiplication.
+
+   $$
+   (\alpha + \beta) \bx 
+   &= (\alpha + \beta) (x_1, \dots, x_n)\\
+   &=  ((\alpha + \beta) x_1, \dots, (\alpha + \beta)x_n)\\
+   &=  (\alpha x_1 + \beta x_1, \dots, \alpha x_n + \beta x_n)\\
+   &=  (\alpha x_1, \dots, \alpha x_n) + (\beta x_1, \dots, \beta x_n)\\
+   &= \alpha \bx + \beta \bx.
+   $$
+
+1. Multiplication commutes over scalar multiplication:
+
+   $$
+   (\alpha \beta) \bx 
+   &= (\alpha \beta) (x_1, \dots, x_n)\\  
+   &= ((\alpha \beta)x_1, \dots, (\alpha \beta)x_n)\\
+   &= (\alpha (\beta x_1), \dots, \alpha (\beta x_n))\\
+   &= \alpha (\beta x_1, \dots, \beta x_n)\\
+   &= \alpha (\beta (x_1, \dots, x_n))\\
+   &= \alpha (\beta \bx).
+   $$
+
+   Similarly,
+
+   $$
+   (\alpha \beta) \bx = (\beta \alpha) \bx = \beta (\alpha \bx).
+   $$
+
+1. Scalar multiplication from multiplicative identity of $\FF$.
+
+   $$
+   1 \bx = 1 (x_1, \dots, x_n) = (x_1, \dots, x_n) = \bx.
+   $$
+
+Thus, $\FF^n$ supports all the properties of a vector space.
+It is indeed a vector space.
 ````
+
+```{prf:example} A field is a vector space
+:label: ex-field-is-vector-space
+
+A field of scalars $\FF$ is a vector space over $\FF$ 
+in its own right. One way to see this is by 
+treating the scalar as a tuple with one value
+(i.e., 1-tuple). So, we can write it as $\FF^1$.
+
+The real line $\RR$ is a vector space in its own
+right as $\RR^1$. 
+Similarly, the complex plane $\CC$ is a vector space.
+
+More formally, let $\VV = \FF$. We will call
+the element of $\VV$ as vectors and elements
+of $\FF$ as scalars.
+
+1. For every $x \in \FF$, let $\bx$ be corresponding
+   vector in $\VV$ with $\bx = x$.
+1. Define vector addition on $\VV$ as as the corresponding 
+   addition in the field $\FF$:
+
+   $$
+   \bx + \by = x + y \Forall \bx, \by \in \VV.
+   $$
+1. Define scalar multiplication on $\VV$ as the corresponding
+   multiplication in the field $\FF$:
+
+   $$
+   \alpha \bx = \alpha x \Forall \alpha \in \FF and \bx \in \VV.
+   $$
+1. Define zero vector as $0 \in \FF$: $\bzero = 0$.
+
+We can now verify all the properties of the vector space:
+
+1. $\VV$ is closed under vector addition. Let $\bx + \by \in \VV$.
+   Then, $\bx + \by = x + y$. Since $x + y \in \FF$, hence
+   $\bx + \by \in \VV$.
+1. Vector addition is associative. 
+   For every $\bx, \by, \bz \in \VV$:
+
+   $$
+   \bx + (\by + \bz) = x + (y + z) = (x + y) + z 
+   = (\bx + \by) + \bz.
+   $$
+1. Vector addition is commutative.
+
+   $$
+   \bx + \by = x + y = y + x = \by + \bx.
+   $$
+1. For every $\bx \in \VV$, 
+  
+  $$
+  \bx + \bzero =  x + 0 = x = \bx = x = 0 + x = \bzero + \bx.
+  $$
+  Thus, $\bzero$ is the additive identity element. 
+1. Let $\bx \in \VV$. Define $\by = -x$. 
+   Since $-x \in \FF$, hence $\by \in \VV$.
+   Now,
+
+   $$
+   \bx + \by = x + (-x) = 0 = \bzero.
+   $$
+   Thus, every vector has an additive inverse.
+1. Scalar multiplication distributes over vector addition.
+   Let $\alpha \in \FF$ and $\bx, \by \in \VV$.
+
+   $$
+   \alpha (\bx + \by) = \alpha (x + y) = \alpha x + \alpha y
+   = \alpha \bx + \alpha \by.
+   $$
+1. Addition in $\FF$ distributes over scalar multiplication.
+   Let $\alpha, \beta \in \FF$ and $\bx \in \VV$.
+
+   $$
+   (\alpha + \beta) \bx = (\alpha + \beta) x 
+   = \alpha x + \beta x = \alpha \bx + \beta \bx.
+   $$
+
+1. Multiplication commutes over scalar multiplication:
+
+   $$
+   (\alpha \beta) \bx = (\alpha \beta) x  
+   = \alpha (\beta x) = \alpha (\beta \bx).
+   $$
+
+1. Scalar multiplication from multiplicative identity of $\FF$.
+
+   $$
+   1 \bx = 1 x = x = \bx.
+   $$
+
+Thus, $\VV=\FF$ satisfies all requirements of being
+a vector space. It is indeed a vector space in its
+own right.
+```
 
 ### Matrices
 
