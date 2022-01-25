@@ -417,6 +417,67 @@ $$
 $$
 ```
 
+## Hyperplanes
+
+We present a general definition of hyperplanes in this
+section. For a definition specific to real vector spaces,
+see {prf:ref}`def-hyperplane`.
+
+```{prf:definition} Hyperplane
+:label: def-la-hyperplane-functional
+
+Let $\bf$ be a nonzero linear functional on $\VV$. Let $a \in \FF$.
+A set of the form:
+
+$$
+H_{\bf, a} \triangleq \{ \bx \in \VV \ST \bf(\bx) = a \}
+$$
+is called a hyperplane. In other words,
+
+$$
+H_{\bf, a} = \bf^{-1}(a).
+$$
+```
+
+```{prf:theorem} Hyperplane as a span
+:label: res-la-lf-hyperplane-span
+
+Let $\VV$ be a finite dimensional space with $\dim \VV = n$.
+Let $S = \{\bv_1, \dots, \bv_{n-1} \}$ be any set of
+$n-1$ linearly independent vectors of $\VV$. Then,
+$\span S$ is a hyperplane.
+```
+
+```{prf:proof}
+Since $\dim \VV = n$, it is possible to select
+a vector $\bv_n$ such that $\BBB = S \cup \{ \bv_n \}$
+is linearly independent and forms a basis for $\VV$.
+
+Following {prf:ref}`res-la-finite-dual-space-basis`,
+it is possible to construct a linear functional $\bf$
+such that:
+
+$$
+\bf(\bv_i) = \begin{cases}
+1 && \text{ if } && i = n\\
+0 && \text{ if } && 1 \leq i < n
+\end{cases} . 
+$$
+
+Now, consider the null space of $\bf$
+given by  $\bf^{-1}(0)$. It is clear by definition
+that $\bv_i \in \bf^{-1}(0)$ for $i=1,\dots, n-1$.
+
+From {prf:ref}`res-la-linear-functional-kernel-dim`,
+$\dim \bf^{-1}(0) = n -1$. Thus, $S$ forms a basis
+for $\bf^{-1}(0)$ and:
+
+$$
+\span S = \bf^{-1}(0).
+$$
+
+Thus, $\span S$ is a hyperplane.
+```
 ## Dual Space of Dual Space
 
 ```{div}
@@ -595,7 +656,7 @@ In other words,
 $$
 T_{\bzero} = \bzero \in \VV^*
 $$
-and there is no other $\vv \in V$ such that $T_{\bv} = \bzero$.
+and there is no other $\bv \in V$ such that $T_{\bv} = \bzero$.
 ```
 
 ```{prf:proof}
@@ -606,7 +667,7 @@ T_{\bzero}(\bv) = \langle \bv, \bzero \rangle = 0.
 $$
 
 Thus, $T_{\bzero}$ is the zero functional. 
-To show that there is no other $\vv \in \VV$ such that
+To show that there is no other $\bv \in \VV$ such that
 $T_{\bv}$ is a zero functional, we note that,
 
 $$
