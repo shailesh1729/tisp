@@ -1,5 +1,5 @@
 (sec:la:dual_spaces)=
-# Dual spaces
+# Dual Spaces
 
 
 Recall from {prf:ref}`def-la-lt-vector-space`
@@ -27,6 +27,14 @@ its field of scalars $\FF$.
 A linear functional is a member of the 
 vector space $\LinTSpace(\VV, \FF)$. 
 ```
+A linear functional is both *homogeneous* and *additive*.
+If $\bf$ is a linear functional, then
+
+$$
+\bf(t \bx + \by)  = t \bf(\bx) + \bf(\by)
+$$
+holds true for all $\bx, \by \in \VV$.
+
 
 Recall that two functions are considered equal
 if they have identical domain and they produce
@@ -109,13 +117,17 @@ $$
 $$
 ```
 
+```{div}
 It is easy to see that the zero functional is linear
 and indeed a member of $\LinTSpace(\VV, \FF)$.
 
 We will be using the same symbol $\bzero$ to denote both the
-zero functional and the zero vector. It should be clear
-from the context which one is being referred to.
+zero functional in $\VV^*$ and the zero vector in $\VV$. 
+It should be clear from the context which one is being referred to.
 
+If $\bf \neq \bzero$, then there exists at least one $\bx \in \VV$
+such that $\bf (\bx) \neq 0$. 
+```
 
 
 When we have a vector space, it is natural to ask for
@@ -324,6 +336,136 @@ T_{\bv} (\alpha \bx + \by) = \langle \alpha \bx + \by , \bv \rangle
 =  \alpha T_{\bv} (\bx) + T_{\bv} (\by).
 $$
 Thus, the functional $T_{\bv}$ is linear.
+```
+
+```{prf:theorem} Arithmetic on linear functionals
+:label: res-la-ip-linear-functional-arithmetic
+
+Addition of inner product based linear functionals:
+
+$$
+T_{\bx} + T_{\by} = T_{\bx + \by}.
+$$
+Scalar multiplication on inner product based linear functions:
+
+$$
+\alpha T_{\bx} = T_{ \overline{\alpha} \bx}.
+$$
+```
+
+```{prf:proof}
+Recall that sum of functions is defined as:
+
+$$
+(T_{\bx} + T_{\by}) (\bv) = T_{\bx}(\bv) + T_{\by}(\bv).
+$$
+Now,
+
+$$
+T_{\bx + \by}(\bv) = \langle \bv, \bx + \by \rangle 
+= \langle \bv, \bx \rangle + \langle \bv, \by \rangle
+=  T_{\bx}(\bv) + T_{\by}(\bv)
+= (T_{\bx} + T_{\by}) (\bv)
+$$
+
+Thus, $T_{\bx + \by} = T_{\bx + \by}$.
+
+Recall that scaling of a function is defined as:
+
+$$
+(\alpha T_{\bx}) (\bv) = \alpha (T_{\bx}(\bv)).
+$$
+
+Now,
+
+$$
+\alpha (T_{\bx}(\bv))
+= \alpha \langle \bv, \bx \rangle
+= \langle \bv, \overline{\alpha} \bx \rangle
+= T_{ \overline{\alpha} \bx} (\bv).
+$$
+
+Thus, $\alpha T_{\bx} = T_{ \overline{\alpha} \bx}$.
+```
+
+
+
+```{prf:theorem} Linear functional as inner product
+:label: res-la-linear-functional-inner-product
+
+Let $\VV$ be a finite dimensional inner product space and let
+$\bf$ be a linear functional in $\VV^*$. 
+Then, there exists a vector $\bv \in \VV$ 
+such that $\bf = T_{\bv}$. 
+
+In other words, every linear functional is an inner product.
+```
+
+```{prf:proof}
+Recall from {prf:ref}`res-la-ip-finite-onb-existence`
+that every finite dimensional inner product space
+has an orthonormal basis.
+
+Let $\BBB = \{\be_1, \dots, \be_n \}$
+be an orthonormal basis of $\VV$.
+
+Now, consider the corresponding linear functionals $T_{\be_j}$
+for $j = 1, \dots, n$.
+
+Note that:
+
+$$
+T_{\be_j} (\be_i) = \langle \be_i , \be_j \rangle = \delta(i, j)
+$$
+since $\BBB$ is an orthonormal basis.
+
+Then, following {prf:ref}`res-la-finite-dual-space-basis`,
+the set $\FFF = \{T_{\be_1}, \dots, T_{\be_n} \}$
+forms a basis $\VV^*$.
+
+Thus, any $\bf \in \VV^*$ can be written as:
+
+$$
+\bf = \sum_{j=1}^n c_j T_{\be_j} 
+= \sum_{j=1}^n  T_{\overline{c_j}\be_j} 
+= T_{\sum_{j=1}^n \overline{c_j}\be_j}
+$$
+using {prf:ref}`res-la-ip-linear-functional-arithmetic` above.
+
+Thus, $\bf$ is equal to an inner product by the vector
+$\sum_{j=1}^n \overline{c_j}\be_j$.
+```
+
+```{prf:theorem} Zero functional in inner product space
+:label: res-la-ip-zero-functional
+
+Let $\VV$ be an inner product space. Then,
+$\bzero \in \VV^*$ is same as $T_{\bzero} = \langle \cdot, \bzero \rangle$.
+
+In other words,
+
+$$
+T_{\bzero} = \bzero \in \VV^*
+$$
+and there is no other $\vv \in V$ such that $T_{\bv} = \bzero$.
+```
+
+```{prf:proof}
+For $\bzero \in \VV$, it is straight-forward to see that
+
+$$
+T_{\bzero}(\bv) = \langle \bv, \bzero \rangle = 0.
+$$
+
+Thus, $T_{\bzero}$ is the zero functional. 
+To show that there is no other $\vv \in \VV$ such that
+$T_{\bv}$ is a zero functional, we note that,
+
+$$
+\bv \neq 0 \implies \langle \bv, \bv \rangle > 0.
+$$
+
+Thus, $T_{\bv} (\bv) > 0$ if $\bv \neq \bzero$.
 ```
 
 
