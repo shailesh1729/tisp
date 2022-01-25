@@ -111,6 +111,8 @@ i.e. the inner product of $\bx$ with $\ba$ followed by a translation
 by the amount of $b$.
 ```
 
+## Characterization of Convex Functions
+
 ```{prf:theorem} 
 :label: res-cvxf-affine-functional-convex
 
