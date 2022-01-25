@@ -350,6 +350,8 @@ $$
 
 We define the *affine dimension* of an affine subspace $C$ as the dimension
 of the associated linear subspace $V = C - \bx_0$ for some $\bx_0 \in C$. 
+
+The dimension of $\EmptySet$ (empty affine set) is $-1$ by convention.
 ```
 The definition is consistent since $V$ is independent of the choice of
 $\bx_0 \in C$.
@@ -365,6 +367,53 @@ Its corresponding linear subspace is $\{ \bzero \}$ of zero dimension.
 
 Thus, the singleton set has an affine dimension of 0.
 ```
+
+```{prf:remark}
+The affine sets of dimension 0, 1 and 2 are called
+points, lines and planes respectively.
+
+An affine set of dimension $k$ is often called a
+$k$-*flat*.
+```
+
+### Hyper Planes
+
+Recall from {prf:ref}`def-la-hyperplane-functional` that
+a set of the form:
+
+$$
+H_{\bf, a} \triangleq \{ \bx \in \VV \ST \bf(\bx) = a \}
+$$
+where $\bf$ is a {prf:ref}`linear functional <def-la-linear-functional>`
+on $\VV$ and $a \in \FF$ 
+is called a hyperplane.
+
+```{prf:theorem}
+:label: res-la-aff-hyperplane-affine
+
+Every hyperplane is affine.
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. Let $\bx, \by \in H_{\bf, a}$.
+1. Then, $\bf(\bx) = a$ and $\bf(\by) = a$.
+1. Consider any $t \in \FF$ and let $\bz = t \bx + (1-t) \by$.
+1. Then, due to linearity of $\bf$,
+
+   $$
+   \bf(\bz)
+   &= \bf(t \bx + (1-t) \by)\\
+   &= t \bf(\bx) + (1-t) \bf(\by)\\
+   &= t a + (1-t) a = a.
+   $$
+1. Thus, $\bz \in H_{\bf, a}$.
+1. Thus, $H_{\bf, a}$ is an affine set.
+```
+
+
+### Linear Equations
 
 ```{prf:example} Solution set of linear equations
 We show that the solution set of linear equations forms an affine set.
@@ -529,20 +578,121 @@ be linearly independent in it. Hence a maximum of $l+1$ vectors can be affine
 independent for the affine set.
 
 
-## Affine Transformations
+## Translations
 
 ```{prf:definition} Translation operator
 :label: def-la-translation-operator
 
-Let $\XX$ be a vector space. An operator
-$T : \XX \to \XX$ is called a translation 
-operator if 
+Let $\VV$ be a vector space.
+An operator
+$T_{\ba} : \VV \to \VV$ 
+is called a *translation operator* if 
 
 $$
-T(\bx) = \bx + \ba \Forall \bx \in \XX
+T_{\ba}(\bx) = \bx + \ba \Forall \bx \in \XX
 $$
 where $\ba \in \XX$ is a fixed (translation) vector.
 ```
+
+It can be easily seen that $T_{\ba}(C) = \ba + C = C + \ba$. 
+
+```{prf:definition} Translate
+:label: def-la-translate
+
+Let $C \subseteq \VV$. The *translate* of $C$ by
+some $\ba \in \VV$ is defined to be the set $C + \ba$.
+```
+```{prf:observation}
+$$
+\VV + \ba = \VV \Forall \ba \in \VV.
+$$
+Translating the whole vector space doesn't change it.
+
+$$
+\EmptySet + \ba = \EmptySet.
+$$
+This follows from the definition of the set vector addition.
+
+$$
+\{ \bzero \} + \ba = \{ \ba \}.
+$$
+The translate of the trivial subspace is a singleton set.
+```
+
+```{prf:theorem} Affine translate
+A translate of an affine set is affine.
+```
+
+
+```{prf:proof}
+Let $C$ be affine and $\ba \in \VV$.
+
+1. Let $\bx, \by \in C + \ba$. 
+1. Then, $\bx = \bu + \ba$ and $\by  = \bv + \ba$ for some $\bu, \bv \in C$.
+1. Then for some $t \in \FF$, 
+   
+   $$
+   t \bx + (1-t) \by
+   &= t (\bu + \ba) + (1-t) (\bv + \ba)\\
+   &= t \bu + (1-t)\bv + t \ba + (1-t)\ba\\
+   &= t \bu + (1-t)\bv + \ba.
+   $$
+1. But $\bw = t \bu + (1-t)\bv \in C$ since $C$ is affine. 
+1. Hence, $t \bx + (1-t) \by = \bw + \ba \in C + \ba$.
+1. Thus, $C + \ba$ is affine. 
+```
+
+```{prf:definition} Parallel affine sets
+:label: def-la-affine-parallel-set
+
+Two affine sets $C$ and $D$ are called *parallel* to each other if
+
+$$
+D = C + \ba
+$$
+for some $\ba \in \VV$.
+We denote this by $C \parallel D$.
+```
+Clearly, every affine set is parallel to its associated linear subspace.
+
+This definition of parallelism is more restrictive 
+as it allows comparing only those affine sets
+which have the same dimension. 
+Thus, we cannot compare a line with a plane. 
+
+Every point is parallel to every other point.
+
+```{prf:theorem} Parallelism equivalence relation
+:label: res-la-affine-parallel-equivalence-relation
+
+Consider the class of all affine subsets of a vector space $\VV$. 
+The relation $C \parallel D$ is an equivalence relation.
+```
+
+```{prf:proof}
+[Reflexivity]
+
+1. $C = C + \bzero$. 
+1. Hence $C \parallel C$.
+
+[Symmetry]
+
+1. Let $C \parallel D$. 
+1. Then, there exists $\ba \in \VV$ such that
+   $D = C + \ba$.
+1. But then, $C = D + (-\ba)$.
+1. Thus, $D \parallel C$.
+
+[Transitivity]
+1. Let $C \parallel D$ and $D \parallel E$.
+1. Then, $D = C + \ba$ and $E = D + \bb$ for some $\ba, \bb \in \VV$.
+1. But then, $E = C + (\ba + \bb)$. 
+1. Thus, $C \parallel E$.
+```
+
+
+## Affine Transformations
+
 
 
 ```{prf:definition} Affine transformation

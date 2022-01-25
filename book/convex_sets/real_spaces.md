@@ -102,6 +102,16 @@ The vector $\ba$ is called the *normal vector* to the hyperplane.
    Thus, it is an affine set.
 *  Geometrically, it is a set of points with a 
    constant inner product to a given vector $\ba$.
+* The representation of $H_{\ba, b}$ is unique up to
+  a common nonzero multiple. In other words,
+
+  $$
+  H_{\ba, b} = H_{\alpha \ba, \alpha b} \Forall \alpha \neq 0.
+  $$
+* Every other normal of $H_{\ba, b}$ is either a
+  positive or negative multiple of $\ba$.
+* Thus, we can think of $H_{\ba, b}$ having two sides,
+  one along the normal $\ba$ and one opposite to the normal.
 
 ```{prf:theorem} Hyperplane second form
 Let $\bx_0$ be an arbitrary element in $H_{\ba, b}$. Then

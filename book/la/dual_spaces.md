@@ -417,7 +417,7 @@ $$
 $$
 ```
 
-## Hyperplanes
+## Hyper Planes
 
 We present a general definition of hyperplanes in this
 section. For a definition specific to real vector spaces,
@@ -439,7 +439,7 @@ H_{\bf, a} = \bf^{-1}(a).
 $$
 ```
 
-```{prf:theorem} Hyperplane as a span
+```{prf:theorem} A span as a hyperplane
 :label: res-la-lf-hyperplane-span
 
 Let $\VV$ be a finite dimensional space with $\dim \VV = n$.
