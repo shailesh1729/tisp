@@ -66,6 +66,18 @@ Since a convex set contains the line segment between any
 two points, any line segment is convex by definition.
 ```
 
+Geometrically, a convex set has no holes, hollows, pits or dimples.
+A set is convex if from each point in the set, it is possible 
+to see every other point without having the line of sight pass
+outside the set.
+
+```{prf:example} Real line
+On the real line $\RR$, the empty set, sing points,
+intervals (closed, open, half open), half lines, 
+and the entire real line are convex sets. 
+There are no other convex sets possible.
+```
+
 ```{prf:theorem}
 :label: res-convex-linear-subspace
 
@@ -280,7 +292,9 @@ a *convex combination* of the points $\bx_1, \dots, \bx_k$.
 ````
 It is like a weighted average of the points $\bx_i$.
 
-````{prf:remark}
+````{prf:theorem}
+:label: res-cvx-convex-set-convex-combinations
+
 A set is convex if and only if it contains all convex combinations of its points.
 ````
 
@@ -300,7 +314,9 @@ $$
 
 ````
 
-````{prf:remark}
+````{prf:theorem}
+:label: res-cvx-convex-hull-convex
+
 The convex hull $\ConvexHull(S)$ of a set $S$ is always convex.
 ````
 
@@ -310,6 +326,29 @@ The convex hull $\ConvexHull(S)$ of a set $S$ is always convex.
 The convex hull of a set $S$ is the smallest convex set containing it. In other words,
 let $C$ be any convex set such that $S \subseteq C$. Then $\ConvexHull(S) \subseteq C$.
 ````
+
+## Relative Interior
+
+```{prf:theorem} Line segment property of relative interior
+:label: res-cvx-convex-relint-convex
+
+Let $C$ be a nonempty convex set. Let $\bx \in \relint C$
+and $\by \in \closure C$. Then, 
+
+$$
+t \bx + (1-t) \by \in \relint C \Forall t \in (0,1].
+$$
+```
+
+```{prf:proof}
+Let $C$ be a convex set. Fix some $t \in [0,1]$. 
+We need to show that $\bz = t \bx + (1-t)\by \in \relint C$.
+Recall that $\affine C$ denotes the affine hull of $C$.
+
+1. Since $\by \in \closure C$, hence for all $\epsilon > 0$, 
+   we have 
+
+```
 
 ## Infinite Convex Combinations
 
