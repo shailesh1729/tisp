@@ -80,6 +80,7 @@ Thus, if $\bf (\bv_i) = \bg (\bv_i)$ for $i=1, \dots, n$, then
 $\bf$ and $\bg$ equal on every $\bv \in \VV$.
 ```
 
+
 ## Dual Spaces
 
 ```{prf:definition} Dual space
@@ -268,6 +269,153 @@ $$
 $$
 ```
 
+## Null Space of Linear Functionals
+
+We shall describe the null space of a linear functional
+and show that for finite dimensional vector spaces,
+its codimension is 1.
+
+```{prf:theorem} Null space/kernel of a linear functional
+:label: res-la-linear-functional-kernel
+
+If $\bf$ is a linear functional on $\VV$, then
+
+$$
+\bf^{-1}(0) = \{ \bx \in \VV \ST \bf (\bv) = 0 \}
+$$
+is a linear subspace of $\VV$.
+```
+```{prf:proof}
+We know that $0$ is the zero vector of the vector space $\FF$.
+Thus, $\bf^{-1}(0)$ is nothing but the null space of $\bf$
+and hence it is a linear subspace of $\VV$.
+
+Another proof from first principles:
+
+1. Let $\bu, \bv \in \bf^{-1}(0)$. 
+1. Then, $\bf (\alpha \bu + \bv) = \alpha \bf (\bu) + \bf (\bv) = 0$.
+1. Thus, $\alpha \bu + \bv \in \bf^{-1}(0)$.
+1. Hence, $\bf^{-1}(0)$ is a subspace.
+```
+
+```{prf:theorem} 
+:label: res-la-linear-functional-kernel-rep
+
+Let $\bf$ be a nonzero linear functional on $\VV$. 
+Let $\ba \in \VV$ be such that $\bf(\ba)\neq 0$. 
+Then, any point $\bp \in \VV$ can be written 
+uniquely as:
+
+$$
+\bp = \lambda \ba + \bx
+$$
+where $\lambda \in \FF$ and $\bx \in \bf^{-1}(0)$.
+```
+In this representation, $\bf$ and $\ba$ are fixed
+while $\lambda$ and $\bx$ are allowed to vary.
+
+```{prf:proof}
+Let $\bp \in \VV$ be arbitrary. We wish to
+construct a representation:
+
+$$
+\bp = \lambda \ba + \bx
+$$
+such that $\bx \in \bf^{-1}(0)$ and $\lambda \in \FF$.
+
+Applying $\bf$ on both sides, we get:
+
+$$
+\bf(\bp) = \lambda \bf(\ba) + \bf(\bx) = \lambda \bf(\ba) 
+$$
+since $\bx \in \bf^{-1}(0)$.
+
+This gives us:
+
+$$
+\lambda = \frac{\bf(\bp)}{\bf(\ba)}
+$$
+since we know that $\bf(\ba)\neq 0$.
+
+Putting this particular value of $\lambda$, we get:
+
+$$
+\bx = \bp  - \frac{\bf(\bp)}{\bf(\ba)} \ba.
+$$
+Thus, for every $\bp \in \VV$, we can find
+$\lambda = \frac{\bf(\bp)}{\bf(\ba)}$ and
+$\bx =  \bp  - \frac{\bf(\bp)}{\bf(\ba)} \ba$ 
+such that $\bf(\bx) = 0$  and:
+
+$$
+\bp = \lambda \ba + \bx.
+$$
+
+We have established existence of this representation.
+Next, we establish that this representation is unique.
+
+Suppose their was another representation:
+
+$$
+\bp = \mu \ba + \by
+$$
+with $\bf(\by) = 0$ and $\mu \in \FF$.
+
+Then, we would have:
+
+$$
+\bf(\mu \ba + \by) = \mu \bf(\ba) = \bf (\lambda \ba + \bx) = \lambda \bf (\ba).
+$$
+
+Since $\bf (\ba) \neq 0$, hence $\lambda = \mu$ must hold.
+Therefore, $\bx = \by$ must hold true too.
+Hence, the representation is unique.
+```
+
+```{prf:theorem} Dimension of the kernel of a linear functional
+:label: res-la-linear-functional-kernel-dim
+
+Let $\VV$ be a finite dimensional vector space
+of dimension $n$. Then, the dimension of
+the null space of any nonzero linear functional on $\VV$ is $n-1$.
+In other words, the codimension of the kernel of a nonzero
+linear functional is 1.
+````
+```{prf:proof}
+Let $\BBB = \{\bv_1, \dots, \bv_k \}$ the any basis
+for the space $\bf^{-1}(0)$. 
+
+Choose any $\ba \in \VV$ such that $\bf(\ba) \neq 0$.
+
+Then, the set:
+
+$$
+\CCC = \{\ba, \bv_1, \dots, \bv_k \}
+$$
+is linearly independent since $\ba \notin \bf^{-1}(0)$.
+
+At the same time, since any vector $\bx \in \VV$ can be
+represented using $\ba$ and the null space spanned
+by $\BBB$, hence $\CCC$ spans $\VV$ 
+(while $\BBB$ doesn't).
+Thus,
+
+$$
+n = k + 1.
+$$
+
+Alternatively:
+
+$$
+\dim \bf^{-1}(0) = k = n - 1
+$$
+
+or 
+
+$$
+\codim \bf^{-1}(0) = n - \dim \bf^{-1}(0) = 1.
+$$
+```
 
 ## Dual Space of Dual Space
 
