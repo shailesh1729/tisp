@@ -36,7 +36,13 @@ $t \bx + (1 - t) \by$ where $t \in \RR$
 form a *line*.
 
 Any subset $C \subseteq \VV$ is *affine* if $C = t C + (1-t)C$ 
-for all $t \in \RR$. Empty set is affine. Singletons are affine.
+for all $t \in \RR$. 
+An affine set contains all its lines. 
+Other terms used for affine sets are *affine manifolds*,
+*affine varieties*, *linear varieties* or *flats*.
+Empty set is affine. 
+The whole vector space $\VV$ is affine.
+Singletons (sets with a single point) are affine.
 Any line is affine.
 
 A point of the form $\bx = t_1 \bx_1 + \dots + t_k \bx_k$ where 
@@ -72,6 +78,11 @@ if the vectors $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ are linearly independent.
 
 (sec:convex:hyperplane)=
 ## Hyper Planes
+
+Hyperplanes for general vector spaces are
+described in {prf:ref}`def-la-hyperplane-functional`
+in terms of linear functionals. Here, we focus
+specifically on hyperplanes in a real inner product space.
 
 ````{prf:definition} Hyperplane
 :label: def-hyperplane
