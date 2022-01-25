@@ -31,34 +31,34 @@ section.
 ```{prf:definition} Line
 :label: def-aff-line
 
-Let $x_1$ and $x_2$ be two points in $\VV$. Points of the form
+Let $\bx_1$ and $\bx_2$ be two points in $\VV$. Points of the form
 
 $$
-y = \theta x_1 + (1 - \theta) x_2 \text{ where } \theta \in \FF
+\by = \theta \bx_1 + (1 - \theta) \bx_2 \text{ where } \theta \in \FF
 $$ 
-form a *line* passing through $x_1$ and $x_2$.
+form a *line* passing through $\bx_1$ and $\bx_2$.
 ```
 
-* at $\theta=0$ we have $y=x_2$.
-* at $\theta=1$ we have $y=x_1$.
+* at $\theta=0$ we have $\by=\bx_2$.
+* at $\theta=1$ we have $\by=\bx_1$.
 
 
 
 
-We can also rewrite $y$ as 
+We can also rewrite $\by$ as 
 
 $$
-y = x_2 + \theta (x_1 - x_2) \Forall \theta \in \FF.
+\by = \bx_2 + \theta (\bx_1 - \bx_2) \Forall \theta \in \FF.
 $$
 In this definition:
 
-* $x_2$ is called the *base point* for this line.
-* $x_1 - x_2$ defines the *direction* of the line.
-* $y$ is the sum of the base point and the direction scaled by the parameter $\theta$.
-* As $\theta$ goes from $0$ to $1$, $y$ moves from $x_2$ to $x_1$.
+* $\bx_2$ is called the *base point* for this line.
+* $\bx_1 - \bx_2$ defines the *direction* of the line.
+* $\by$ is the sum of the base point and the direction scaled by the parameter $\theta$.
+* As $\theta$ goes from $0$ to $1$, $\by$ moves from $\bx_2$ to $\bx_1$.
 
 ```{prf:remark}
-An alternative notation for the line as a set is $x_2 + \FF (x_1 - x_2)$
+An alternative notation for the line as a set is $\bx_2 + \FF (\bx_1 - \bx_2)$
 following the notation in {prf:ref}`def-vs-set-arithmetic`.
 ```
 
@@ -70,7 +70,8 @@ following the notation in {prf:ref}`def-vs-set-arithmetic`.
 A set $C \subseteq \VV$ is *affine* if the line through
 any two distinct points in $C$ lies in $C$.
 
-In other words, for any $x_1, x_2 \in C$, we have $\theta x_1 + (1 - \theta) x_2 \in C$ 
+In other words, for any $\bx_1, \bx_2 \in C$, 
+we have $\theta \bx_1 + (1 - \theta) \bx_2 \in C$ 
 for all $\theta \in \FF$.
 
 Another way to write this is:
@@ -87,15 +88,15 @@ is inside it vacuously.
 ```
 
 ```{prf:example}
-For any $x \in \VV$, the singleton set $\{ x \}$ is affine vacuously.
+For any $\bx \in \VV$, the singleton set $\{ \bx \}$ is affine vacuously.
 It contains only one point. 
-Hence, every line passing through two distinct points in $\{ x \}$
+Hence, every line passing through two distinct points in $\{ \bx \}$
 is inside it vacuously.
 
 In fact:
 
 $$
-\theta x  + (1 - \theta) x = x \Forall \theta \in \FF.
+\theta \bx  + (1 - \theta) \bx = \bx \Forall \theta \in \FF.
 $$
 ```
 
@@ -106,16 +107,16 @@ Any line in $\VV$ is an affine set.
 ## Affine Combinations
 
 If we denote $\alpha = \theta$ and $\beta = (1 - \theta)$ we see that 
-$\alpha x_1 + \beta x_2$ represents a linear combination of points in $C$
+$\alpha \bx_1 + \beta \bx_2$ represents a linear combination of points in $C$
 such that $\alpha + \beta = 1$.
 The idea can be generalized in following way.
 
 ```{prf:definition} Affine combination
 :label: def-affine-combination
 
-A point of the form $x = \theta_1 x_1 + \dots + \theta_k x_k$ where 
-$\theta_1 + \dots + \theta_k = 1$ with $\theta_i \in \FF$ and $x_i \in \VV$, 
-is called an *affine combination* of the points $x_1,\dots,x_k$.
+A point of the form $\bx = \theta_1 \bx_1 + \dots + \theta_k \bx_k$ where 
+$\theta_1 + \dots + \theta_k = 1$ with $\theta_i \in \FF$ and $\bx_i \in \VV$, 
+is called an *affine combination* of the points $\bx_1,\dots,\bx_k$.
 ```
 Note that the definition only considers finite number of terms in the
 affine combination.
@@ -123,19 +124,19 @@ affine combination.
 It can be shown easily that an affine set $C$ 
 contains all affine combinations of its points.
 
-```{prf:proposition}
+```{prf:theorem} Affine set contains affine combinations
 :label: res-aff-set-contains-aff-combs
 
 If $C$ is an affine set,
-$x_1, \dots, x_k \in C$,
+$\bx_1, \dots, \bx_k \in C$,
 and $\theta_1 + \dots + \theta_k = 1$, then
-the point $x = \theta_1 x_1 + \dots + \theta_k x_k$ 
+the point $\bx = \theta_1 \bx_1 + \dots + \theta_k \bx_k$ 
 also belongs to $C$. 
 ```
 
 ```{prf:proof}
 
-We shall call $\theta_1 x_1 + \dots + \theta_k x_k = \sum_{i=1}^k \theta_i x_i$
+We shall call $\theta_1 \bx_1 + \dots + \theta_k \bx_k = \sum_{i=1}^k \theta_i \bx_i$
 with $\sum_{i=1}^k \theta_i = 1$ as $k$ term affine combinations.
 
 Our proof strategy is as follows:
@@ -146,14 +147,14 @@ Our proof strategy is as follows:
 1. Thus, by principle of mathematical induction, it contains all its
    affine combinations.
 
-An affine combination of two points is of the form $\theta_1 x_1 + \theta_2 x_2$
+An affine combination of two points is of the form $\theta_1 \bx_1 + \theta_2 \bx_2$
 where $\theta_1 + \theta_2 = 1$.
 By {prf:ref}`definition <def-affine-set>` an affine set contains
 all its 2 term affine combinations.
 
 Now, assume that $C$ contains all its $k-1$ term affine combinations.
 
-1. Consider points $x_1, \dots, x_{k-1}, x_k \in C$.
+1. Consider points $\bx_1, \dots, \bx_{k-1}, \bx_k \in C$.
 1. Let $\theta_1, \dots, \theta_{k-1}, \theta_k \in \FF$ 
    such that $\theta_1 + \dots + \theta_{k-1} + \theta_k = 1$.
 1. Without loss of generality, assume that $\theta_k \neq 1$. Thus, $1 - \theta_k \neq 0$.
@@ -163,40 +164,40 @@ Now, assume that $C$ contains all its $k-1$ term affine combinations.
 
    $$
    \begin{aligned}
-   x &= \sum_{i=1}^k \theta_i x_i =  \sum_{i=1}^{k-1} \theta_i x_i + \theta_k x_k \\
-   &= (1 - \theta_k) \sum_{i=1}^{k-1} \frac{\theta_i}{1 - \theta_k} x_i + \theta_k x_k.
+   \bx &= \sum_{i=1}^k \theta_i \bx_i =  \sum_{i=1}^{k-1} \theta_i \bx_i + \theta_k \bx_k \\
+   &= (1 - \theta_k) \sum_{i=1}^{k-1} \frac{\theta_i}{1 - \theta_k} \bx_i + \theta_k \bx_k.
    \end{aligned}
    $$
-1. Note that the term $y = \sum_{i=1}^{k-1} \frac{\theta_i}{1 - \theta_k} x_i$ is
+1. Note that the term $\by = \sum_{i=1}^{k-1} \frac{\theta_i}{1 - \theta_k} \bx_i$ is
    an affine combination of $k-1$ terms. 
-1. Thus, by inductive hypothesis, $y \in C$.
+1. Thus, by inductive hypothesis, $\by \in C$.
 1. We are left with 
 
    $$
-   x = (1 - \theta_k) y + \theta_k x_k.
+   \bx = (1 - \theta_k) \by + \theta_k \bx_k.
    $$
-1. This is a two term affine combination. Since $y, x_k \in C$, hence $x \in C$.
+1. This is a two term affine combination. Since $\by, \bx_k \in C$, hence $\bx \in C$.
 1. Thus, we established that if $C$ contains its $k-1$ term affine combinations,
    it contains its $k$ term affine combinations too.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 :label: res-aff-comb-aff-comb-aff-comb
 
 An affine combination of affine combinations is an affine combination.
 ```
 
 ```{prf:proof}
-Let $u = \sum_{i=1}^k \theta_i x_i$ and $v = \sum_{j=1}^l \lambda_j y_j$
-where $x_i , y_j \in \VV$ and $\sum \theta_i = 1$ and $\sum \lambda_j = 1$.
+Let $\bu = \sum_{i=1}^k \theta_i \bx_i$ and $\bv = \sum_{j=1}^l \lambda_j \by_j$
+where $\bx_i , \by_j \in \VV$ and $\sum \theta_i = 1$ and $\sum \lambda_j = 1$.
 
-We claim that $w = \gamma u + ( 1 - \gamma) v$ is also an affine combination.
+We claim that $\bw = \gamma \bu + ( 1 - \gamma) \bv$ is also an affine combination.
 
 $$
 \begin{aligned}
-w &= \gamma u + ( 1 - \gamma) v \\
-&= \gamma \sum_{i=1}^k \theta_i x_i + ( 1 - \gamma) \sum_{j=1}^l \lambda_j y_j\\
-&= \sum_{i=1}^k \gamma \theta_i x_i + \sum_{j=1}^l ( 1 - \gamma)  \lambda_j y_j.
+\bw &= \gamma \bu + ( 1 - \gamma) \bv \\
+&= \gamma \sum_{i=1}^k \theta_i \bx_i + ( 1 - \gamma) \sum_{j=1}^l \lambda_j \by_j\\
+&= \sum_{i=1}^k \gamma \theta_i \bx_i + \sum_{j=1}^l ( 1 - \gamma)  \lambda_j \by_j.
 \end{aligned}
 $$ 
 
@@ -210,7 +211,7 @@ $$
 \end{aligned}
 $$
 
-Thus, $w$ is an affine combination of the points $x_i$ and $y_j$.
+Thus, $\bw$ is an affine combination of the points $\bx_i$ and $\by_j$.
 
 We can use the mathematical induction to show that arbitrary
 affine combinations of affine combinations are affine combinations.
@@ -218,13 +219,25 @@ affine combinations of affine combinations are affine combinations.
 
 ## Connection with Linear Subspaces
 
-```{prf:proposition}
+```{prf:theorem} Linear subspaces are affine
+A linear subspace $\WW$ of $\VV$ is affine.
+```
+
+```{prf:proof}
+Let $\bx, \by \in \WW$. Then, by linearity, any
+$\alpha \bx + \beta \by \in \WW$. In particular,
+for some $\theta \in \FF$,
+$\theta \bx  + (1 - \theta)\bw \in \WW$ holds too.
+Thus, $\WW$ is affine.
+```
+
+```{prf:theorem} affine - point = linear
 :label: res-aff-offset-plus-linear-subspace
 
-Let $C$ be a nonempty affine set and $x_0$ be any element in $C$. Then the set
+Let $C$ be a nonempty affine set and $\bx_0$ be any element in $C$. Then the set
 
 $$
-    V = C  - x_0 = \{ x  - x_0 | x \in C\}
+    V = C  - \bx_0 = \{ \bx  - \bx_0 | \bx \in C\}
 $$
 
 is a linear subspace of $\VV$.
@@ -234,24 +247,24 @@ every linear combination of two arbitrary elements in $V$
 belongs to $V$.
 
 ```{prf:proof}
-Let $v_1$ and $v_2$ be two elements in $V$. 
-Then by definition, there exist $x_1$ and $x_2$ in $C$ such that
+Let $\bv_1$ and $\bv_2$ be two elements in $V$. 
+Then by definition, there exist $\bx_1$ and $\bx_2$ in $C$ such that
 
 $$
-    v_1 = x_1 - x_0 \text{ and } v_2 = x_2 - x_0.
+    \bv_1 = \bx_1 - \bx_0 \text{ and } \bv_2 = \bx_2 - \bx_0.
 $$
 
 Thus 
 
 $$
-    a v_1 + v_2 = a (x_1 - x_0) + x_2 - x_0 
-    = (a x_1 + x_2  - a x_0 )  - x_0 \Forall a \in \FF.
+    a \bv_1 + \bv_2 = a (\bx_1 - \bx_0) + \bx_2 - \bx_0 
+    = (a \bx_1 + \bx_2  - a \bx_0 )  - \bx_0 \Forall a \in \FF.
 $$
 
 But since $a + 1 - a = 1$, 
-hence $x_3 = (a x_1 + x_2  - a x_0 ) \in C$ (an affine combination). 
+hence $\bx_3 = (a \bx_1 + \bx_2  - a \bx_0 ) \in C$ (an affine combination). 
 
-Hence $a v_1 + v_2 = x_3 - x_0 \in V$ [by definition of $V$].
+Hence $a \bv_1 + \bv_2 = \bx_3 - \bx_0 \in V$ [by definition of $V$].
 
 Thus, any linear combination of elements in $V$ belongs to $V$. 
 Hence, $V$ is a linear subspace of $\VV$.
@@ -261,40 +274,59 @@ Hence, $V$ is a linear subspace of $\VV$.
 With the previous result, we can use the following notation:
 
 $$
-    C = V + x_0 = \{ v + x_0 | v \in V\}
+    C = V + \bx_0 = \{ \bv + \bx_0 | \bv \in V\}
 $$
-where $V$ is a linear subspace of $\VV$ and $x_0 \in \VV$.
+where $V$ is a linear subspace of $\VV$ and $\bx_0 \in \VV$.
 In other words, a nonempty affine set is a linear subspace with an offset.
 ```
 We need to justify this notation by establishing that there
 is one and only linear subspace associated with an affine set.
 This is done in the next result.
 
-```{prf:proposition}
+```{prf:theorem}
 Let $C$ be a nonempty affine set and
-let $x_1$ and $x_2$ be two distinct elements in $C$.
-Let $V_1 = C - x_1$ and $V_2 = C - x_2$, then the 
+let $\bx_1$ and $\bx_2$ be two distinct elements in $C$.
+Let $V_1 = C - \bx_1$ and $V_2 = C - \bx_2$, then the 
 linear subspaces $V_1$ and $V_2$ are identical.
 ```
 ```{prf:proof}
 
 We show that $V_1 \subseteq V_2$ and $V_2 \subseteq V_1$.
 
-1. Let $v \in V_1$. 
-1. There exists $x \in C$ such that $v = x - x_1$.
-1. Then, $v = x - x_1 + x_2 - x_2$.
-1. Let $y = x - x_1 + x_2$. Note that $x, x_1, x_2 \in C$ and
-   $y$ is an affine combination of $x, x_1, x_2$.
-1. Thus, $y \in C$.
-1. We can now write $v = y - x_2$.
-1. Thus, $v \in V_2$ as $V_2 = C - x_2$. 
+1. Let $\bv \in V_1$. 
+1. There exists $\bx \in C$ such that $\bv = \bx - \bx_1$.
+1. Then, $\bv = \bx - \bx_1 + \bx_2 - \bx_2$.
+1. Let $\by = \bx - \bx_1 + \bx_2$. Note that $\bx, \bx_1, \bx_2 \in C$ and
+   $\by$ is an affine combination of $\bx, \bx_1, \bx_2$.
+1. Thus, $\by \in C$.
+1. We can now write $\bv = \by - \bx_2$.
+1. Thus, $\bv \in V_2$ as $V_2 = C - \bx_2$. 
 1. Thus, $V_1 \subseteq V_2$.
-1. An identical reasoning starting with some $v \in V_2$ gives us $V_2 \subseteq V_1$.
+1. An identical reasoning starting with some $\bv \in V_2$ gives us $V_2 \subseteq V_1$.
 1. Thus, $V_1 = V_2$.
 ```
 
 Thus the subspace $V$ associated with a nonempty affine set $C$ doesn't depend upon
-the choice of offset $x_0$ in $C$.
+the choice of offset $\bx_0$ in $C$.
+
+
+```{prf:corollary}
+:label: res-aff-with-zero-is-linear
+
+If an affine set contains $\bzero$ then it is a linear subspace.
+```
+
+```{prf:proof}
+The linear subspace associated with an affine set $C$ is given by
+$V = C - \bx_0$ for any $\bx_0 \in \VV$.
+
+In particular, if $C$ contains $\bzero$, then
+
+$$
+V = C - \bzero = C.
+$$
+Thus, $C$ is a linear subspace.
+```
 
 ## Affine Subspaces and Dimension
 
@@ -317,19 +349,19 @@ $$
 :label: def-affine-dimension
 
 We define the *affine dimension* of an affine subspace $C$ as the dimension
-of the associated linear subspace $V = C - x_0$ for some $x_0 \in C$. 
+of the associated linear subspace $V = C - \bx_0$ for some $\bx_0 \in C$. 
 ```
 The definition is consistent since $V$ is independent of the choice of
-$x_0 \in C$.
+$\bx_0 \in C$.
 
 
 ```{prf:example}
-For any $x \in \VV$, the singleton set $\{ x\}$ can be expressed as
+For any $\bx \in \VV$, the singleton set $\{ \bx\}$ can be expressed as
 
 $$
-\{ x\} = x + \{ 0 \}.
+\{ \bx\} = \bx + \{ \bzero \}.
 $$
-Its corresponding linear subspace is $\{0 \}$ of zero dimension.
+Its corresponding linear subspace is $\{ \bzero \}$ of zero dimension.
 
 Thus, the singleton set has an affine dimension of 0.
 ```
@@ -337,36 +369,32 @@ Thus, the singleton set has an affine dimension of 0.
 ```{prf:example} Solution set of linear equations
 We show that the solution set of linear equations forms an affine set.
 
-Let $C = \{ x | A x = b\}$ where $A \in \FF^{m \times n}$ and $b \in \FF^m$.
+Let $C = \{ \bx \ST \bA \bx = \bb\}$ where $\bA \in \FF^{m \times n}$ and $\bb \in \FF^m$.
 
-Let $C$ be the set of all vectors $x \in \FF^n$ which satisfy the system of linear
-equations given by $A x = b$. 
+Let $C$ be the set of all vectors $\bx \in \FF^n$ which satisfy the system of linear
+equations given by $\bA \bx = \bb$. 
 Then $C$ is an affine set.
 
-Let $x_1$ and $x_2$ belong to $C$.  Then we have
+Let $\bx_1$ and $\bx_2$ belong to $C$.  Then we have
 
 $$
-    A x_1 = b
-$$ 
-
-and 
-
-$$
-    A x_2 = b
+\bA \bx_1 = \bb
+\text{ and }
+\bA \bx_2 = \bb
 $$
 
 Thus 
 
 $$
-    &\theta A x_1 + ( 1 - \theta ) A x_2 = \theta b + (1 - \theta ) b\\
-    &\implies A (\theta x_1 + (1  - \theta) x_2) = b\\
-    &\implies (\theta x_1 + (1  - \theta) x_2) \in C
+&\theta \bA \bx_1 + ( 1 - \theta ) \bA \bx_2 = \theta \bb + (1 - \theta ) \bb\\
+&\implies \bA (\theta \bx_1 + (1  - \theta) \bx_2) = \bb\\
+&\implies (\theta \bx_1 + (1  - \theta) \bx_2) \in C
 $$
 
 Thus, $C$ is an affine set.
 
 The subspace associated with $C$ is nothing but the
-null space of $A$ denoted as $\NullSpace(A)$.
+null space of $\bA$ denoted as $\NullSpace(\bA)$.
 ```
 
 ```{prf:remark}
@@ -389,7 +417,7 @@ set is a singleton set which is an affine subspace of dimension 0.
   which passes through origin.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 :label: res-aff-space-closed-aff-comb
 
 An affine subspace is closed under affine combinations.
@@ -401,10 +429,10 @@ and {prf:ref}`res-aff-set-contains-aff-combs`.
 
 ```{prf:observation}
 Let $C$ be an affine subspace. 
-Let $V$ be the linear subspace associated with $C$ given by $V = C - x$.
-Then every vector $v \in V$ can be written as $v = y - x$ where $y \in C$.
-Since $V$ doesn't depend on the choice of $x$, hence 
-$V$ is the set of all vectors of the form $y - x$ where $y, x \in C$.
+Let $V$ be the linear subspace associated with $C$ given by $V = C - \bx$.
+Then every vector $\bv \in V$ can be written as $\bv = \by - \bx$ where $\by \in C$.
+Since $V$ doesn't depend on the choice of $\bx$, hence 
+$V$ is the set of all vectors of the form $\by - \bx$ where $\by, \bx \in C$.
 
 Thus, following the notation in 
 {prf:ref}`def-vs-set-arithmetic`,
@@ -414,6 +442,13 @@ $$
 V = C - C.
 $$
 ```
+One way to think of affine sets as collections of points
+in an arbitrary space and the associated linear subspace as
+the collection of difference vectors between points. 
+
+$$
+\text{vector ab} = \text{point b} - \text{point a}.
+$$
 
 ## Affine Hull 
 
@@ -425,37 +460,38 @@ $S \subseteq \VV$
 is called the *affine hull* of $S$ and denoted as $\affine S$:
 
 $$
-    \affine S = \{\theta_1 x_1 + \dots + \theta_k x_k | x_1, \dots, x_k \in S \text{ and } \theta_1 + \dots + \theta_k = 1\}.
+\affine S = \{\theta_1 \bx_1 + \dots + \theta_k \bx_k \ST 
+    \bx_1, \dots, \bx_k \in S \text{ and } \theta_1 + \dots + \theta_k = 1\}.
 $$
 ```
-```{prf:proposition}
+```{prf:theorem}
 :label: res-aff-hull-subspace
 
 An affine hull is an affine subspace.
 ```
 ```{prf:proof}
 Let $S \subset \VV$ be nonempty. Let $T = \affine S$. 
-Let $u, v \in T$. Then
+Let $\bu, \bv \in T$. Then
 
 $$
-u = \sum_{i=1}^{k} \theta_i x_i \text {and } v = \sum_{j=1}^{l} \lambda_j y_j
+\bu = \sum_{i=1}^{k} \theta_i \bx_i \text {and } v = \sum_{j=1}^{l} \lambda_j \by_j
 $$ 
-where $x_i, y_j \in S$, $\sum \theta_i  = 1$ and $\sum \lambda_j = 1$.
+where $\bx_i, \by_j \in S$, $\sum \theta_i  = 1$ and $\sum \lambda_j = 1$.
 
 Then, as shown in {prf:ref}`res-aff-comb-aff-comb-aff-comb`,
 
 $$
-w = \gamma u + (1 - \gamma) v
+\bw = \gamma \bu + (1 - \gamma) \bv
 $$
-is an affine combination of points $x_i, y_j \in S$.
+is an affine combination of points $\bx_i, \by_j \in S$.
 
-Thus, $w \in T$. 
+Thus, $\bw \in T$. 
 Hence, $T$ is an affine set. 
 Since $T$ is nonempty, hence $T$ is an affine subspace.
 ```
 
 
-```{prf:proposition}
+```{prf:theorem}
 The affine hull of a nonempty set $S$ is the smallest affine subspace containing $S$. 
 More specifically, let $C$ be any affine subspace
 with $S \subseteq C$. Then $\affine S \subseteq C$.
@@ -482,14 +518,14 @@ The affine hull of a set is the intersection of all affine subspaces containing 
 ```{prf:definition} Affine independence
 :label: def-affine-independence
 
-A set of vectors $v_0, v_1, \dots, v_K \in \VV$ is called *affine independent*,
-if the vectors $v_1 - v_0, \dots, v_K - v_0$ are linearly independent.
+A set of vectors $\bv_0, \bv_1, \dots, \bv_k \in \VV$ is called *affine independent*,
+if the vectors $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ are linearly independent.
 
-In other words, the difference vectors $v_k - v_0$ 
+In other words, the difference vectors $\bv_k - \bv_0$ 
 belong to the associated linear subspace. 
 ```
-If the associated subspace has dimension $L$ then a maximum of $L$ vectors can 
-be linearly independent in it. Hence a maximum of $L+1$ vectors can be affine
+If the associated subspace has dimension $l$ then a maximum of $l$ vectors can 
+be linearly independent in it. Hence a maximum of $l+1$ vectors can be affine
 independent for the affine set.
 
 
