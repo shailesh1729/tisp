@@ -1,3 +1,4 @@
+(sec:la:affine_sets)=
 # Affine Sets and Transformations
 
 In this section $\VV$ denotes a vector space on some field $\FF$
