@@ -9,7 +9,7 @@ This section focuses on important convex subsets of $\RR^n$.
 The *nonnegative orthant* denoted by $\RR_+^n$ is defined as:
 
 $$
-\RR_+^N \triangleq \{ \bx \in \RR^n \ST x_i \geq 0 , i = 1, \dots , n\}  
+\RR_+^n \triangleq \{ \bx \in \RR^n \ST x_i \geq 0 , i = 1, \dots , n\}  
 = \{\bx \in \RR^n \| x \succeq \bzero \}.
 $$
 ```
@@ -27,37 +27,16 @@ $$
 
 ## Simplex
 
-````{prf:definition} $k$-simplex
-:label: def-convex-simplex
+Recall from {prf:ref}`def-convex-simplex` that
+a simplex is the convex hull of a finite collection
+of affine independent points.
+Points, line segments, triangles and tetrahedrons
+are common examples of simplices in $\RR^n$.
+Here, we describe simplices in $\RR^n$ further.
 
-Let $k+1$ points $\bv_0, \dots, \bv_k \in \RR^n$ be 
-{prf:ref}`affine independent <def-affine-independence>`.
+A simplex has vertices, edges and faces. 
+The faces of a simplex don't have any curvature.
 
-The *simplex* determined by them is given by
-
-$$
-C = \ConvexHull \{ \bv_0, \dots, \bv_k\}
-= \{ t_0 \bv_0 + \dots + t_k \bv_k \ST 
-    \bt \succeq 0, \bone^T \bt = 1\}
-$$
-
-where $\bt = [t_1, \dots, t_k]^T$ and
-$\bone$ denotes a vector of appropriate size $(k)$ 
-with all entries one.
-
-In other words, $C$ is the convex hull of the set 
-$\{\bv_0, \dots, \bv_k\}$.
-````
-A simplex is a convex set since it is a convex hull of its vertices.
-
-```{prf:example}
-
-* A 0-simplex is a point.
-* A 1-simplex is a line segment.
-* A 2-simplex is a triangle.
-* A 3-simplex is a tetrahedron.
-* A 4-simplex is a 5-cell.
-```
 
 ```{prf:definition} Regular simplex
 :label: def-convex-regular-simplex
@@ -89,7 +68,7 @@ $$
 ````{prf:definition} Polyhedron
 :label: def-convex-polyhedron
 
-A *polyhedron* is defined as the solution set of a finite number of linear inequalities.
+A *polyhedron* is defined as the solution set of a finite number of linear inequalities and linear equations.
 
 $$
     P = \{ \bx | \langle \ba_j, \bx \rangle \leq b_j, j = 1, \dots, m,
@@ -114,13 +93,9 @@ A polyhedron is a convex set.
 ```{prf:proof}
 Intersection of convex sets is convex.
 ```
-
-````{prf:definition} Polytope
-:label: def-convex-polytope
-
-A bounded polyhedron is known as a *polytope*.
-````
-
+Polyhedra are considerably better behaved convex sets
+than others (like norm balls or ellipsoids)
+because of their *lack* of curvature.
 
 We can combine the set of inequalities and equalities in the form of
 linear matrix inequalities and equalities.
@@ -178,6 +153,26 @@ is a polyhedron (solution set of
 $n$ linear inequalities). 
 It is also a convex cone.
 ````
+
+## Polytopes
+
+````{prf:definition} Polytope
+:label: def-convex-polytope
+
+A bounded polyhedron is known as a *polytope*.
+````
+
+```{prf:theorem}
+:label: res-cvx-polytope-convex-hull-finite-set
+
+A nonempty set $C$ of $\RR^n$ is a (convex) polytope
+if and only if it is a convex hull of a finite set of
+points.
+```
+Some authors define a polytope as a convex hull
+of a finite set of points and then show that 
+it must be a bounded polyhedron.
+
 
 
 
