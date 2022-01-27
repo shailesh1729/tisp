@@ -280,3 +280,55 @@ $$
 \relbd C \triangleq \closure C \setminus \relint C.
 $$
 ```
+
+
+## The $\VV \times \RR$ Vector Space
+
+While studying convex cones, 
+we often find dealing with the set $\VV \times \RR$. 
+It is important to introduce a vector space
+structure to this set which can be used in 
+analysis. We provide a vector space structure below
+which aligns with the vector space structure of $\RR^{n+1}$
+if $\VV = \RR^n$. 
+
+```{prf:definition} Product vector space $\VV \times \RR$
+:label: def-cvx-real-vector-space-r-prod
+
+Let $\VV$ be a real vector space. 
+A vector space structure can be introduced to the set $\VV \times \RR$
+as per the following definitions.
+
+1. [Vector addition] Let $(\bx, s)$ and $(\by, t)$ be in $\VV \times \RR$.
+   Then, their sum is defined as:
+
+   $$
+   (\bx, s) + (\by, t) \triangleq (\bx + \by, s + t).
+   $$
+
+1. [Scalar multiplication] Let $(\bx, s) \in \VV \times \RR$ and
+   $\alpha \in \RR$. Then, the scalar multiplication is defined as:
+
+   $$
+   \alpha (\bx, s) \triangleq (\alpha \bx, \alpha s).
+   $$
+1. [Inner product] If $\VV$ is an inner product space, then 
+   with $(\bx, s)$ and $(\by, t)$ be in $\VV \times \RR$, 
+   the inner product is defined as:
+
+   $$
+   \langle (\bx, s), (\by, t) \rangle
+   \triangleq \langle \bx, \by \rangle + st.
+   $$
+1. [Norm] If $\VV$ is a normed linear space, then
+   for any $(\bx, s) \in \VV \times \RR$, the norm
+   is defined as:
+
+   $$
+   \| (\bx, s) \| \triangleq \sqrt{\| \bx \|^2 + s^2}.
+   $$
+```
+
+Readers can verify that these definitions satisfy
+all the properties of real vector spaces, 
+normed linear spaces and inner product spaces.
