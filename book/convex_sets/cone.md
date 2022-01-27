@@ -10,57 +10,36 @@ material is applicable for any real vector space.
 A set $C$ is called a *cone* or *nonnegative homogeneous*, 
 if for every $\bx \in C$
 and $t \geq 0$, we have $t \bx \in C$.
+
+In other words, a set is a cone if it is closed under
+nonnegative scalar multiplication.
 ````
 
 * By definition we have $\bzero \in C$.
 * Some authors prefer to restrict the definition to $t > 0$
   thus the origin is not included in the cone by default.
 * In our definition, a cone always includes the origin.
+* Thus, a cone is always nonempty.
+* When we think of cones, ice-cream cones naturally come 
+  to mind. Hence, we kind of think that cones happen
+  to be pointed (at origin) and emanate in one 
+  general direction from there.
+  However, our definition above is more general. 
+  It allows for lines (passing through origin)
+  and linear subspaces to be cones too.
+* Pointed cones are a special class of cones
+  which are discussed {prf:ref}`below <def-pointed-cone>`.
 
 
-## Convex cones
+
+
+## Convex Cones
 
 ````{prf:definition} Convex cone
 :label: def-convex-cone
 
 A set $C$ is called a *convex cone* if it is convex and a cone.
-In other words, for every $\bx_1, \bx_2 \in C$ and $t_1, t_2 \geq 0$,
-we have
-
-$$
-    t_1 \bx_1 + t_2 \bx_2 \in C
-$$
 ````
-
-
-## Conic Combinations
-
-````{prf:definition} Conic combination
-:label: def-conic-combination
-
-A point of the form $t_1 \bx_1 + \dots + t_k \bx_k $ with
-$t_1 , \dots, t_k \geq 0$ is called a *conic combination*
-(or a *non-negative linear combination*) of $\bx_1,\dots, \bx_k$.
-````
-
-* A convex cone is closed under non-negative linear/conic combinations.
-* One way to prove that a set is a convex cone is to show that it
-  contains all its conic combinations.
-
-
-````{prf:theorem} Convex cone contains all conic combinations
-:label: res-cvx-convex-cone-conic-combs
-
-Let $C$ be a convex cone. Then for every $\bx_1, \dots, \bx_k \in C$,
-every conic combination $t_1 \bx_1 + \dots + t_k \bx_k $ with
-$t_i \geq 0$ belongs to $C$.
-
-Conversely, if a set $C$ contains all conic combinations of its
-points, then it is a convex cone.
-````
-
-The idea of conic combinations can be generalized to infinite sums
-and integrals.
 
 ````{prf:example} Convex cones
 :label: ex-cvx-convex-cone-examples
@@ -78,25 +57,313 @@ A subspace is a convex cone.
 ```
 
 ```{prf:proof}
-Short proof:
-
-Every subspace contains the $\bzero$ vector. 
-Every conic combination is also a linear combination
-and a subspace is closed under linear combinations.
-Hence, it is also closed under conic combinations.
-
-Detailed proof:
-
-Let $V \subseteq \VV$ be a subspace. We show that it is also 
-a convex cone.
-
-Let $\bv_1, \bv_2 \in V$ and $t_1, t_2 \geq 0$, then
-
-$$
-\bv = t_1 \bv_1 + t_2 \bv_2
-$$
-is a linear combination of $\bv_1$ and $\bv_2$. Hence $\bv \in V$. 
+Let $V \subseteq \VV$ be a subspace. 
+We know that $V$ is convex since $V$ contains
+all its linear combinations and every 
+convex combination is a linear combination.
+Now, let $\bv \in V$. Then, $t \bv \in V$
+for every $t \geq 0$ since $V$ is closed
+under scalar multiplication. Thus, $V$ is a cone too.
 Thus, $V$ is a convex cone.
+```
+
+```{prf:theorem} Convex cone characterization
+:label: res-convex-cone-characterization
+
+A set is a convex cone if and only if it is closed under addition
+and nonnegative scalar multiplication.
+
+In other words, $C$ is a convex cone if and only if
+for every $\bx_1, \bx_2 \in C$ and $t_1, t_2 \geq 0$,
+the following holds true:
+
+$$
+    t_1 \bx_1 + t_2 \bx_2 \in C.
+$$
+```
+
+```{prf:proof}
+Let $C \subseteq \VV$. Let $\bx_1, \bx_2 \in C$.
+
+If $C$ is a convex cone, then:
+1. $\bx = \frac{1}{2} \bx_1 + \frac{1}{2} \bx_2 \in C$.
+1. But then, $2 \bx = \bx_1 + \bx_2 \in C$ since $C$ is a cone.
+1. Thus, $C$ is closed under addition.
+1. $C$ being a cone, it is closed under nonnegative scalar multiplication.
+1. Combining, we see that $t_1 \bx_1 + t_2 \bx_2 \in C$.
+
+Now, assume that $C$ is closed under addition and
+nonnegative scalar multiplication.
+
+1. $C$ is a cone since it is closed under nonnegative scalar multiplication.
+1. In particular $t \bx_1 \in C$ for all $t \in [0,1]$
+   and $(1-t) \bx_2 \in C$ for all $t \in [0,1]$.
+1. Since $C$ is closed under addition, hence $t \bx_1 + (1-t) \bx_2 \in C$
+   for all $t \in [0,1]$.
+1. Thus, $C$ is convex too. 
+```
+
+
+````{prf:theorem} Intersection of arbitrary collection of convex cones
+:label: res-cvx-convex-cone-inf-intersect
+
+Let $\{ A_i\}_{i \in I}$ be a family of sets such that 
+$A_i$ is a convex cone
+for all $i \in I$.  Then $\cap_{i \in I} A_i$ is a convex cone.
+````
+
+````{prf:proof}
+Let $\bx_1, \bx_2$ be any two arbitrary elements in $A = \cap_{i \in I} A_i$.
+
+$$
+&\bx_1, \bx_2 \in A\\
+\implies & \bx_1, \bx_2 \in A_i \Forall i \in I\\
+\implies &t_1 \bx_1 + t_2 \bx_2 \in A_i \Forall t_1, t_2 \geq 0 \Forall i \in I
+\text{ since $A_i$ is a convex cone}\\
+\implies &t_1 \bx_1 + t_2 \bx_2 \in A.
+$$
+
+Hence $A$ is a convex cone.
+````
+
+As a consequence, an arbitrary intersection of 
+half-spaces (at origin) and hyperplanes (at origin) is a convex
+cone.
+Thus, the solution set of a system of linear equations and
+inequalities is a convex cone if the equations and 
+inequalities are homogeneous.
+
+
+## Conic Combinations
+
+````{prf:definition} Conic combination
+:label: def-conic-combination
+
+A point of the form $t_1 \bx_1 + \dots + t_k \bx_k $ with
+$t_1 , \dots, t_k \geq 0$ is called a *conic combination*
+(or a *non-negative linear combination*) of $\bx_1,\dots, \bx_k$.
+````
+
+* A convex cone is closed under non-negative linear/conic combinations.
+* One way to prove that a set is a convex cone is to show that it
+  contains all its conic combinations.
+
+
+````{prf:theorem} Convex cone characterization with conic combinations
+:label: res-cvx-convex-cone-conic-combs
+
+Let $C$ be a convex cone. Then for every $\bx_1, \dots, \bx_k \in C$,
+every conic combination $t_1 \bx_1 + \dots + t_k \bx_k $ with
+$t_i \geq 0$ belongs to $C$.
+
+Conversely, if a set $C$ contains all conic combinations of its
+points, then it is a convex cone.
+
+In other words, $C$ is a convex cone if and only if it is
+closed under conic combinations.
+````
+
+```{prf:proof}
+
+Assume that $C$ is a convex cone.
+Then it is closed under addition and nonnegative scalar multiplication.
+
+1. Let $\bx_1, \dots, \bx_k \in C$.
+1. Then, $t_1 \bx_1, \dots, t_k \bx_k \in C$ for all $t_1,\dots, t_k \geq 0$
+   since $C$ is closed under nonnegative scalar multiplication.
+1. Then, $t_1 \bx_1 + \dots + t_k \bx_k \in C$ since $C$ is closed
+   under addition.
+1. Thus, $C$ contains all its conic combinations.
+
+
+For the converse, assume that $C$ contains all its conic combinations.
+
+1. Let $\bx \in C$.
+1. Then, $t \bx \in C$ for all $t \geq 0$ since $t \bx$
+   is a conic combination.
+1. Thus, $C$ is a cone.
+1. Now, let $\bx, \by \in C$ and $t \in [0,1]$. Then, $1-t \in [0,1]$ too.
+1. Thus, $t \bx + (1-t) \by$ is a conic combination of $\bx, \by$.
+1. Hence, $t \bx + (1-t) \by \in C$.
+1. Thus, $C$ is convex.
+1. Combining, $C$ is a convex cone.  
+```
+
+Here is another proof that a linear subspace is a convex cone
+using the idea of conic combinations.
+
+1. Every subspace contains the $\bzero$ vector. 
+1. Every conic combination is also a linear combination.
+1. A subspace is closed under linear combinations.
+1. Hence, it is also closed under conic combinations.
+1. Hence, it is a convex cone.
+
+
+```{prf:theorem}
+:label: res-cvx-conic-comb-conic-comb
+
+A conic combination of conic combinations is a conic combination.
+```
+
+```{prf:proof}
+Let $S \subseteq \VV$. Note that $S$ is arbitrary (no convexity 
+or conic structure assumed).
+
+1. Consider $n$ points $\by_i$, $i=1,\dots, n$ described as below.
+1. Let $\by_i = \sum_{j=1}^{m_j}t_{i,j} \bx_{i,j}$ be conic combinations
+   of $m_j$ points: 
+   * $\bx_{i,1}, \dots, \bx_{i,m_j} \in S$.
+   * $t_{i,j} \geq 0$. 
+1. Consider the conic combination $\by = \sum_{i=1}^n r_i \by_i$.
+   with $r_i \geq 0$.
+1. We need to show that $\by$ is a conic combination of points of $S$.
+
+Towards this:
+
+$$
+\by &= \sum_{i=1}^n r_i \by_i\\
+&= \sum_{i=1}^n r_i \sum_{j=1}^{m_j}t_{i,j} \bx_{i,j}\\
+&= \sum_{i=1}^n \sum_{j=1}^{m_j} r_i t_{i,j} \bx_{i,j}.
+$$
+
+Consider the terms:
+
+$$
+s_{i, j} =  r_i t_{i,j}.
+$$
+
+Since $r_i \geq 0$ and $t_{i, j} \geq 0$, hence $s_{i, j } \geq 0$.
+Hence,
+
+$$
+\by = \sum_{i,j} s_{i, j} x_{i, j}
+$$
+is a conic combination of points of $S$.
+```
+
+The idea of conic combinations can be generalized to infinite sums
+and integrals.
+
+
+
+## Conic Hulls
+
+````{prf:definition} Conic hull
+:label: def-conic-hull
+
+The *conic hull* of a set $S$ is the set of all conic combinations
+of points in $S$. i.e.
+
+$$
+    \{t_1 \bx_1 + \dots t_k \bx_k \ST \bx_i \in S, t_i \geq 0, i = 1, \dots, k \}.
+$$
+````
+
+```{prf:theorem}
+:label: res-cvx-conic-hull-smallest
+
+A conic hull is a convex cone.
+```
+
+```{prf:proof}
+Let $C$ be the conic hull of a set $S$.
+
+1. Let $\bx, \by \in C$.
+1. Then, $\bx, \by$ are conic combinations of $S$.
+1. Let $\bz = t_1 \bx + t_2 \by$ with $t_1, t_2 \geq 0$.
+1. Then, $\bz$ is a conic combination of conic combinations of $S$.
+1. By {prf:ref}`res-cvx-conic-comb-conic-comb`,
+   $\bz$ is a conic combination of $S$.
+1. Since $C$ contains all conic combinations of $S$, hence $C$ contains $\bz$.
+1. Thus, for any $\bx, \by \in C$, $\bz = t_1 \bx + t_2 \by$ with $t_1, t_2 \geq 0$ is in $C$.
+1. Thus, $C$ is a convex cone.
+```
+
+```{prf:theorem}
+:label: res-cvx-conic-hull-smallest
+
+Conic hull of a set is the smallest convex cone that contains the set.
+```
+
+```{prf:proof}
+
+Let $S$ be an arbitrary set and $C$ be its conic hull.
+
+1. We have already shown that $C$ is a convex cone.
+1. Assume $D$ to be a convex cone such that $S \subseteq D$.
+1. Then, $D$ contains every conic combination of $S$ since a convex cone
+   is closed under conic combinations.
+1. Thus, $C \subseteq D$ since $C$ is the set of all conic combinations of $S$. 
+```
+
+```{prf:theorem} Conic hull of a convex set
+:label: res-cvx-conic-hull-convex-set
+
+Let $C$ be a convex set. Let $K$ be defined as:
+
+$$
+K \triangleq \{ t \bx \ST t \geq 0, \bx \in C\}.
+$$
+Then, $K$ is the conic hull of $C$.
+```
+
+```{prf:proof}
+Let $H$ be the conic hull of $C$; i.e.,
+$H$ is the set of all conic combinations of $C$.
+We show that $K \subseteq H$ and $H \subseteq K$.
+
+$K \subseteq H$
+
+1. For any $\bx \in C$ and $t \geq 0$, $t \bx$ is a conic
+   combination of $C$.
+1. Hence $t \bx \in H$.
+1. Thus, $K \subseteq H$.
+
+$H \subseteq K$
+
+1. Let $ \bx = t_1 \bx_1 + \dots + t_k \bx_k$ be a conic combination of $C$.
+1. Thus, $t_i \geq 0$ and $\bx_i \in C$.
+1. By definition of $K$, $\bzero \in K$.
+1. If $t_i = 0$ for $0 \leq i \leq k$, then $\bx = \bzero$. So $\bx \in K$.
+1. Now consider the case where at least one $t_i > 0$.
+1. Let $t = \sum t_i$. Clearly, $t > 0$.
+1. Consider $\bz = \frac{t_1}{t} \bx_1 + \dots + \frac{t_k}{t} \bx_k$.
+1. Note that $\bz$ is a convex combination of $\bx_1, \dots, bx_k \in C$.
+1. Since $C$ is convex, hence $\bz \in C$.
+1. Then, $bx = t \bz \in S$ since $t > 0$ and $\bz \in C$.
+1. Thus, $K$ contains all conic combinations of $C$.
+1. Thus, $H \subseteq K$.
+```
+
+```{prf:observation} Convex sets as cross sections of cones
+:label: res-cvx-convex-cross-section-cone
+
+A convex set $C \subseteq \VV$ can be regarded as a cross section of some convex cone
+$K \subseteq \VV \times \RR$ 
+(with appropriate {prf:ref}`vector space structure <def-cvx-real-vector-space-r-prod>` added to
+$\VV \times \RR$). 
+
+Let $K$ be conic hull of points $(\bx, 1) \in \VV \times \RR$ such that $\bx \in C$.
+Then, 
+
+$$
+K = \{ (t \bx, t) \in \VV \times \RR \ST \bx \in C, t \geq 0 \}.
+$$
+
+Now consider the hyperplane in $\VV \times \RR$ given by:
+
+$$
+H = \{ (\by, t) \in \VV \times \RR \ST t = 1 \}.
+$$
+
+The intersection of $H$ with $K$ can be regarded as $C$.
+
+$$
+H \cap K = \{(t\bx, t) \in \VV \times \RR \ST \bx \in C, t=1\}
+= \{ (\bx, 1) \in \VV \times \RR \ST \bx \in C\}.
+$$
+The projection of $H \cap K$ on $\VV$ is given by $C$
+(by dropping the last coordinate).
 ```
 
 ## Pointed Cones
@@ -133,26 +400,6 @@ Finally, $\RR^n_+$ is pointed as
 $\bx \in \RR^n_+$ and $-\bx \in \RR^n_+$ both hold true
 only if $\bx = \bzero$.
 ```
-
-## Conic Hulls
-
-````{prf:definition} Conic hull
-:label: def-conic-hull
-
-The *conic hull* of a set $S$ is the set of all conic combinations
-of points in $S$. i.e.
-
-$$
-    \{t_1 \bx_1 + \dots t_k \bx_k \ST \bx_i \in S, t_i \geq 0, i = 1, \dots, k \}.
-$$
-````
-
-````{prf:theorem}
-:label: res-cvx-conic-hull-smallest
-
-Conic hull of a set is the smallest convex cone that contains the set.
-````
-
 
 ## Proper Cones
 
@@ -558,3 +805,162 @@ i.e., the positive semi-definite cone is self dual.
 ```
 
 
+## Normal Cones
+
+```{prf:definition} Normal vector
+:label: def-cvx-convex-set-normal-vector
+
+Let $C$ be a convex set of $\VV$.
+A vector $\bx^* \in \VV^*$ is said to be *normal*
+$C$ at a point $\ba \in C$
+if $\bx^*$ does not make an acute angle with
+any line segment in $C$ with $\ba$ as endpoint;
+i.e., if
+
+$$
+\langle \bx - \ba, \bx^* \rangle \leq 0 \Forall \bx \in C.
+$$ 
+```
+
+```{prf:example} Normal vector
+
+Let $C$ be a half space given by:
+
+$$
+C  = \{ \bx \ST \langle \bx, \bb \rangle \leq s\}.
+$$
+
+Let $\ba$ be any point on the boundary hyperplane of $C$
+given by $\langle \ba, \bb \rangle = s$.
+
+Then, $\bb$ is normal to $C$ at $\ba$ since for any $\bx \in C$
+
+$$
+\langle \bx - \ba , \bb \rangle 
+= \langle \bx, \bb \rangle - \langle \ba, \bb \rangle
+\leq s - s = 0.
+$$
+Note that $\bb$ points opposite to the direction of the
+halfspace.
+```
+
+```{prf:definition} Normal cone
+:label: def-cvx-convex-set-normal-cone
+
+The set of all vectors $\bx^*$ normal to $C$ at 
+a point $\ba \in C$ is called the
+*normal cone* to $C$ at $\ba$. 
+```
+
+
+```{prf:theorem}
+A normal cone is always a convex cone.
+```
+
+```{prf:proof}
+Let $C$ be a convex set and let $\ba \in C$.
+Let $N$ denote the set of normal vectors to $C$ at $a$.
+We have to show that $N$ is a convex cone;
+i.e., we have to show that $N$ contains all its conic combinations.
+
+For any $\bx \in C$:
+
+$$
+\langle \bx - \ba , \bzero \rangle = 0.
+$$
+
+Thus, $\bzero \in N$.
+
+Assume $\bu \in N$. 
+Then, 
+
+$$
+\langle \bx - \ba, \bu \rangle \leq 0 \Forall \bx \in C.
+$$
+
+But then for any $t \geq 0$,
+
+$$
+\langle \bx - \ba, t\bu \rangle 
+= t \langle \bx - \ba, \bu \rangle
+\leq 0 \Forall \bx \in C.
+$$
+Thus, $t \bu \in N$. Thus, $N$ is closed under
+nonnegative scalar multiplication.
+
+Now, let $\bu, \bv \in N$. 
+Then,
+
+$$
+\langle \bx - \ba, \bu + \bv \rangle 
+=  \langle \bx - \ba, \bu \rangle
+   + \langle \bx - \ba, \bv \rangle
+\leq 0 \Forall \bx \in C.
+$$
+since sum of two nonpositive quantities is nonpositive. 
+
+Thus, $\bu + \bv \in N$.
+Thus, $N$ is closed under vector addition.
+
+Combining these two observations, $N$ is closed
+under conic combinations. Hence, $N$ is a convex cone.
+```
+
+
+## Barrier Cones
+
+```{prf:definition} Barrier vector
+:label: def-cvx-convex-set-barrier vector
+
+Let $C$ be a convex set of $\VV$. 
+A vector $\bx^* \in \VV^*$ is called a
+*barrier* vector to $C$ if for some $\beta \in \RR$,
+
+$$
+\langle \bx , \bx^* \rangle \leq \beta \Forall \bx \in C.
+$$
+In other words, the set of inner products of points in $C$
+with $\bx^*$ is bounded from above.
+```
+
+```{prf:definition} Barrier cone
+:label: def-cvx-convex-set-barrier-cone
+
+The set of all barrier vectors to a convex set $C$
+is called its *barrier cone*.
+```
+
+```{prf:theorem}
+:label: res-cvx-barrier-cone-convex
+
+The barrier cone of a convex set is convex.
+```
+
+```{prf:proof}
+Let $C$ be a convex set and let $B$ be its barrier cone.
+Let $\bu, \bv \in B$. Let $t \geq 0$.
+
+$$
+\langle \bx , \bzero \rangle = 0 \leq 0 \Forall \bx \in C.
+$$
+Thus, $\bzero \in B$.
+
+$$
+\langle \bx , \bu \rangle \leq \alpha
+\implies \langle \bx , t\bu \rangle \leq t\alpha \Forall \bx \in C.
+$$
+Thus, the set of inner products with $t \bu$ is bounded
+from above by $t \alpha$. Thus, $t \bu \in B$.
+
+$$
+\langle \bx , \bu \rangle \leq \alpha 
+\text{ and }
+\langle \bx , \bv \rangle \leq \beta 
+\implies \langle \bx , \bu + \bv \rangle \leq \alpha + \beta \Forall \bx \in C.
+$$
+Thus, the set of inner products with $\bu + \bv$ is bounded
+from above by $\alpha + \beta$. Thus, $\bu + \bv \in B$.
+
+Thus, $B$ is closed under nonnegative scalar multiplication
+and vector addition. $B$ is a convex cone.
+```
