@@ -133,6 +133,113 @@ Thus, the solution set of a system of linear equations and
 inequalities is a convex cone if the equations and 
 inequalities are homogeneous.
 
+```{prf:theorem} Containing and contained subspaces
+:label: res-cvx-convex-cone-containing-contained-subspaces
+
+Let $C$ be a convex cone. Then, there is a smallest linear subspace
+containing $C$ given by:
+
+$$
+U \triangleq C - C = \{ \bx - \by \ST \bx, \by \in C\} = \affine C.
+$$
+
+And, there is a largest linear subspace contained in $C$ given by
+
+$$
+L \triangleq (-C) \cap C.
+$$
+```
+
+```{prf:proof}
+We show that $U = C - C$ is a subspace containing $C$.
+
+Since $\bzero \in C$, hence $\bzero = \bzero - \bzero \in U$.
+Also, this means that $C - \bzero = C \subseteq U$.
+
+Let $\bu, \bv \in U$. 
+
+1. $\bu = \bx - \by$ for some $\bx, \by \in C$.
+1. $\bv = \bz - \bw$ for some $\bz, \bw \in C$.
+1. $\bu + \bv = (\bx + \bz) - (\by + \bw)$.
+1. Since $C$ is a convex cone, it is closed under addition.
+1. Hence, $\bx + \bz, \by + \bw \in C$.
+1. Hence, $\bu + \bv \in U$ (as it is a difference of two vectors in $C$).
+1. Thus, $U$ is closed under vector addition.
+
+Let $t \in \RR$, $\bu \in U$.
+
+1. $\bu = \bx - \by$ for some $\bx, \by \in C$.
+1. $ t \bu = t\bx - t \by$.
+1. If $t \geq 0$, then $t \bx, t \by \in C$, thus $t \bu \in U$.
+1. If $t < 0$, then $-t\bx, -t\by \in C$. 
+   We can write $t \bu = (-t \by) - (-t \bx)$. Thus, $t \bu \in U$.
+1. Thus, $U$ is closed under scalar multiplication.
+
+Next, we show that it is the smallest subspace containing $C$.
+
+1. Let $V$ be a subspace that contains $C$
+1. Then $V$ contains $-C$ also.
+1. Then, $V$ contains $C + (-C) = C- C = U$ also.
+1. Thus, $U$ is the smallest subspace containing $C$. 
+
+
+In summary,
+$C$ is closed under addition and nonnegative scalar multiplication.
+$C$ contains $\bzero$. To be a subspace, a set must be closed under
+multiplication by $-1$ too. $C - C$ is the smallest such subspace.
+
+Since $C$ contains $\bzero$, 
+hence its affine hull contains $\bzero$ too.
+Thus, its affine hull must be a linear subspace.
+The affine hull then is the smallest subspace containing $C$.
+Thus, 
+
+$$
+\affine C = C - C.
+$$
+
+
+We show that $L = (-C) \cap C$ is a subspace contained in $C$.
+
+[zero vector]
+
+1. Since $\bzero \in C$ and $\bzero \in -C$, hence $\bzero \in L$.
+
+[Scalar multiplication]
+
+1. Let a nonzero $\bx \in L$. Then, $\bx \in C$ and $\bx \in -C$.
+1. $\bx \in -C \implies -\bx \in C$.
+1. $\bx \in C \implies -\bx \in -C$.
+1. This means that $-\bx \in C$ and $-\bx \in -C$ too. 
+1. Thus, $-\bx \in L$.
+1. In summary $\bx \in L$ implies $\bx, -\bx \in C$ and $\bx, -\bx \in C$.
+1. Then, for any $t \geq 0$
+   1. $\bx \in C \implies t \bx \in C$.
+   1. $-\bx \in C \implies - t\bx \in C$.
+   1. $-t \bx \in C \implies t \bx \in -C$.
+   1. Thus, $t \bx \in L$.
+1. And, for any $t < 0$
+   1. $\bx \in C \implies -t \bx \in C$.
+   1. $-\bx \in C \implies t \bx \in C$.
+   1. $-t \bx \in C \implies t \bx \in -C$.
+   1. Thus, $t \bx \in L$.
+1. Thus, $L$ is closed under scalar multiplication.
+
+[Vector addition]
+
+1. Let $\bu, \bv \in L$.
+1. Then, $\bu, \bv \in C$ and $\bu, \bv \in -C$.
+1. Thus, $-\bu, -\bv \in C$.
+1. Since $C$ is closed under addition, hence $\bu + \bv \in C$
+   and $-\bu - \bv \in C$.
+1. But then, $-\bu -\bv \in -C$ and $\bu + \bv \in -C$.
+1. Thus, $\bu + \bv \in L$. $-\bu -\bv \in L$ too.
+1. Thus, $L$ is closed under addition.
+
+Thus, $L$ is a vector space contained in $C$.
+$L$ is the largest such subspace since any subspace contained
+in $C$ should be contained in $-C$ too.
+```
 
 ## Conic Combinations
 
