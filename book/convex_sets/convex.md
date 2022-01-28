@@ -664,6 +664,19 @@ $S \subset C$ such that $\dim S = \dim C$.
 1. Thus, $\dim C = m$.
 ```
 
+## Symmetric Reflections
+
+
+The {prf:ref}`symmetric reflection <def-vs-symmetric-reflection>`
+of a convex set is convex
+since convexity is preserved under scalar multiplication.
+See {prf:ref}`res-cvx-convexity-scalar-multiplication` below.
+
+If a {prf:ref}`symmetric <def-vs-symmetric-set>` convex set 
+contains a nonzero vector $\bx$, then it contains
+the entire line segment between $-\bx$ and $\bx$.
+
+
 ## Relative Interior
 
 ```{prf:theorem} Line segment property of relative interior
@@ -846,7 +859,95 @@ We proceed as follows:
 * Hence, their intersection is convex.
 ```
 
+```{prf:theorem}
+:label: res-cvx-convex-pair-largest-smallest
+
+Let $C_1$ and $C_2$ be convex in $\VV$.
+Then, the largest convex set contained in both is $C_1 \cap C_2$.
+And, the smallest convex set containing both is $\ConvexHull (C_1 \cup C_2)$.
+```
+```{prf:proof}
+Let $C$ be a convex set contained in both $C_1$ and $C_2$. Then,
+$C \subseteq C_1 \cap C_2$.
+But $C_1 \cap C_2$ is convex ({prf:ref}`res-cvx-intersection`).
+Hence, $C_1 \cap C_2$ is the largest convex set contained in both $C_1$
+and $C_2$.
+
+
+Let $C$ be a convex set which contains both $C_1$ and $C_2$.
+Then, $C_1 \cup C_2 \subseteq C$.
+The smallest convex set containing $C_1 \cup C_2$ is its
+convex hull given by $\ConvexHull(C_1 \cup C_2)$
+({prf:ref}`res-cvx-convex-hull-smallest`).
+```
+
 ### Affine Functions
+
+Let us start with some simple results.
+
+```{prf:theorem} Convexity and translation
+:label: res-cvx-convexity-translation
+
+Convexity is preserved under translation. 
+
+$C$ (a subset of $\VV$) is convex
+if and only if $C + \ba$ is convex for every $\ba \in \VV$.
+```
+
+
+```{prf:proof}
+Let $C \subseteq \VV$.
+
+1. Assume $C$ is convex.
+1. Then, for every $\bx, \by \in C$ and every $t \in [0,1]$, 
+   $t \bx + (1-t) \by \in C$.
+1. Let $\ba \in \VV$.
+1. Let $\bu, \bv \in C + \ba$.
+1. Then, $\bu = \bx + \ba$ and $\bv = \by + \ba$ for some $\bx, \by \in C$.
+1. Then, 
+   
+   $$
+   t \bu + (1-t) \bv 
+   &= t (\bx + \ba) + (1-t ) (\by + \ba)\\
+   &= t \bx + (1-t) \by + \ba. 
+   $$
+1. But $t \bx + (1-t) \by \in C$ since $C$ is convex.
+1. Then, $t \bx + (1-t) \by + \ba \in C + \ba$.
+1. Thus, $t \bu + (1-t) \bv \in C + \ba$.
+1. Thus, $C + \ba$ is convex.
+
+We can follow the same argument in the opposite direction
+to establish that $C + \ba$ is convex implies $C$ is convex.
+```
+
+```{prf:theorem} Convexity and scalar multiplication
+:label: res-cvx-convexity-scalar-multiplication
+
+Convexity is preserved under scalar multiplication. 
+
+$C$ (a subset of $\VV$) is convex
+if and only if $ \alpha C$ is convex for every $\alpha \in \RR$.
+```
+
+
+```{prf:proof}
+Let $C \subseteq \VV$.
+
+1. Assume $C$ is convex.
+1. Let $\alpha \in \RR$.
+1. Let $\bu, \by \in \alpha C$.
+1. Then, $\bu = \alpha \bx$ and $\bv = \alpha \by$ 
+   for some $\bx, \by \in C$.
+1. Let $t \in [0,1]$.
+1. $t\bu + (1-t)\bv = \alpha (t \bx + (1-t)\by)$.
+1. But $t \bx + (1-t)\by \in C$ since $C$ is convex.
+1. Hence, $\alpha (t \bx + (1-t)\by)$ in $\alpha C$.
+1. Hence, $t\bu + (1-t)\bv \in \alpha C$.
+1. Thus, $\alpha C$ is convex. 
+
+Similar argument in opposite direction establishes
+that $\alpha C$ is convex implies $C$ is convex.
+```
 
 Recall that an
 {prf:ref}`affine function <def-la-affine-operator>`
@@ -981,19 +1082,21 @@ Let $S \in \RR^n$ be convex.
 
 ### Set Addition
 
-````{prf:theorem}
-Let $S_1$ and $S_2$ be two convex subsets of $\VV$. Then
-$S_1 + S_2$ is convex.
+````{prf:theorem} Convexity and set addition
+:label: res-cvx-convexity-set-addition
+
+Let $C_1$ and $C_2$ be two convex subsets of $\VV$. Then
+$C_1 + C_2$ is convex.
 ````
 
 ```{prf:proof}
 We proceed as follows:
 
-1. Let $\bx, \by \in S_1 + S_2$. 
-1. Then, $\bx = \bx_1 + \bx_2$ for some $\bx_1 \in S_1$ 
-   and some $\bx_2 \in S_2$.
-1. Similarly, $\by = \by_1 + \by_2$ for some $\by_1 \in S_1$ 
-   and some $\by_2 \in S_2$.
+1. Let $\bx, \by \in C_1 + C_2$. 
+1. Then, $\bx = \bx_1 + \bx_2$ for some $\bx_1 \in C_1$ 
+   and some $\bx_2 \in C_2$.
+1. Similarly, $\by = \by_1 + \by_2$ for some $\by_1 \in C_1$ 
+   and some $\by_2 \in C_2$.
 1. Let $0 \leq t \leq 1$.
 1. Then:
    
@@ -1002,10 +1105,104 @@ We proceed as follows:
    = t (\bx_1 + \bx_2) + (1-t)(\by_1 + \by_2)
    = t \bx_1 + (1 - t) \by_1 + t \bx_2 + (1 - t) \by_2. 
    $$
-1. But, $\bz_1 = t \bx_1 + (1 - t) \by_1 \in S_1$ since
-   $S_1$ is convex.
-1. Similarly, $\bz_2 = t \bx_2 + (1 - t) \by_2 \in S_2$ since
-   $S_2$ is convex.
-1. Hence, $t \bx + (1 - t) \by = \bz_1 + \bz_2 \in S_1 + S_2$.
-1. Thus, $S_1 + S_2$ is convex.
+1. But, $\bz_1 = t \bx_1 + (1 - t) \by_1 \in C_1$ since
+   $C_1$ is convex.
+1. Similarly, $\bz_2 = t \bx_2 + (1 - t) \by_2 \in C_2$ since
+   $C_2$ is convex.
+1. Hence, $t \bx + (1 - t) \by = \bz_1 + \bz_2 \in C_1 + C_2$.
+1. Thus, $C_1 + C_2$ is convex.
 ```
+One way to think geometrically about set addition is as the
+union of all translates of $C_1$ given by $C_1 + \bx$
+as $\bx$ varies over $C_2$.
+
+```{prf:theorem}
+:label: res-cvx-convex-set-as-set-cvx-comb
+
+A set $C$ is convex if and only if 
+
+$$
+(1-t) C + t C = C \Forall t \in [0,1].
+$$
+```
+```{prf:proof}
+
+Assume $C$ is convex:
+
+1. $(1-t) C + t C = \{ t \bx + (1-t) \by \ST \bx, \by \in C \}$.
+1. Thus, $(1-t) C + t C \subseteq C$.
+1. For every $\bx \in C$, $(1-t)\bx \in (1-t)C$
+   and $t \bx \in t C$.
+1. Thus, $(1-t)\bx + t \bx = \bx \in (1-t) C + t C$.
+1. Thus, $C \subseteq (1-t) C + t C$.
+1. Combining, we get $(1-t) C + t C = C$.
+
+Assume $(1-t) C + t C = C$ for every $t \in [0,1]$.
+
+1. Let $\bx, \by \in C$ and $t\in [0,1]$.
+1. Then, $(1-t)\bx \in (1-t)C$
+   and $t \by \in t C$. 
+1. Hence, $(1-t)\bx + t \by \in (1-t) C + t C = C$.
+1. Thus, $C$ is convex.
+```
+
+
+```{prf:theorem} Convexity and linear combination
+:label: res-cvx-convexity-linear-combination
+
+Convexity is preserved under linear combinations. 
+
+Let $C_1, \dots, C_k$ be convex. 
+Let $t_1, \dots, t_k \in \RR$.
+Then, their linear combination:
+
+$$
+C = t_1 C_1 + \dots  + t_k C_k
+$$
+is convex.
+```
+
+```{prf:proof} 
+Due to {prf:ref}`res-cvx-convexity-scalar-multiplication`,
+$t_i C_i$ are convex for $i=1,\dots,k$.
+
+By (finite) repeated application of {prf:ref}`res-cvx-convexity-set-addition`,
+their sum is also convex.
+```
+
+
+```{prf:theorem} Nonnegative scalar multiplication distributive law
+:label: res-cvx-convex-set-conic-dist
+
+Let $C$ be convex and $t_1, t_2 \geq 0$. Then
+
+$$
+(t_1 + t_2)C = t_1 C + t_2 C.
+$$
+```
+```{prf:proof}
+From {prf:ref}`res-vs-set-arithmetic-props`, we know that:
+
+$$
+(t_1 + t_2)C \subseteq t_1 C + t_2 C.
+$$
+
+We now show that $t_1 C + t_2 C \subseteq (t_1 + t_2)C$.
+
+1. If both $t_1 = t_2 = 0$, then we have trivial equality.
+1. If either of $t_1$ or $t_2$ is 0, then also we have trivial equality.
+1. Now, consider the case $t_1, t_2 > 0$.
+1. Define $t = t_1 + t_2 > 0$ and $r = \frac{t_1}{t}$.
+1. Then, $1-r = \frac{t_2}{t}$.
+1. Then, since $C$ is convex, hence $r C + (1-r) C \subseteq C$.
+1. Multiplying by $t$ on both sides, we get: $ r C + (1-r)C \subseteq t C$. 
+```
+
+For the special case of $t_1 = r$ and $t_2 = 1 - r$ with $r \in [0,1]$, we get:
+
+$$
+C = r C + (1- r)C.
+$$
+
+Some implications are $C + C = 2C$, $C+C+C=3C$ and so forth
+if $C$ is convex.
