@@ -1218,6 +1218,52 @@ $$
 ````
 
 
+## Product Vector Spaces
+
+Consider two vector spaces $\VV$ and $\WW$ over 
+same scalar field $\FF$. Often, it is 
+useful to consider the Cartesian product set $\VV \times \WW$ 
+and add a vector space structure to it.
+One common example is $\VV=\RR^n$, $\WW=\RR^m$
+and $\VV \times \WW = \RR^{n+m}$.
+
+
+```{prf:definition} Product vector space
+:label: def-vs-product-vector-space
+
+Let $\VV$ and $\WW$ be two different vector spaces over some
+field $\FF$. 
+A vector space structure over the field $\FF$ 
+can be introduced to the set $\VV \times \WW$
+as per the following definitions.
+
+1. Let $\bzero_v \in \VV$ and $\bzero_w \in \WW$ be the
+   additive identities of $\VV$ and $\WW$ respectively. 
+   The additive identity of $\VV \times \WW$ is given by
+
+   $$
+   \bzero = (\bzero_v, \bzero_w).
+   $$ 
+
+1. [Vector addition] Let $(\bx, \bu)$ and $(\by, \bv)$ be 
+   in $\VV \times \WW$.
+   Then, their sum is defined as:
+
+   $$
+   (\bx, \bu) + (\by, \bv) \triangleq (\bx + \by, \bu + \bv).
+   $$
+
+1. [Scalar multiplication] Let $(\bx, \bu) \in \VV \times \WW$ and
+   $\alpha \in \FF$. 
+   Then, the scalar multiplication is defined as:
+
+   $$
+   \alpha (\bx, \bu) \triangleq (\alpha \bx, \alpha \bu).
+   $$
+
+$\VV \times \WW$ equipped with these definitions
+is a vector space over $\FF$ in its own right.
+```
 
 ## Sets in Vector Spaces
 
@@ -1326,6 +1372,55 @@ Let $C, D, E \subseteq \VV$ and $\alpha, \beta \in \FF$.
 
 Additive inverses don't exist for sets containing more than
 one element.
+
+
+```{prf:definition} Direct sum over two different vector spaces
+:label: def-vs-direct-sum-two-spaces
+
+Let $\VV$ and $\WW$ be vector spaces over $\FF$.
+Let $C \subseteq \VV$ and $D \subseteq \WW$. 
+Then, the *direct sum* of $C$ and $D$ is defined as
+
+$$
+C \oplus D \triangleq \{ \bx = (\by, \bz) \ST \by \in C, \bz \in D \}.
+$$
+
+$C \oplus D$ is a subset of the product vector space
+$\VV \times \WW$.
+```
+
+```{prf:definition} Direct sum in same vector space
+:label: def-vs-direct-sum-same-space
+Let $C,D$ be subsets of $\VV$.
+If each vector $\bx \in C+D$ can be expressed *uniquely*
+in the form
+
+$$
+\bx = \by + \bz, \by \in C, \bz \in D;
+$$
+then the sum $C + D$ is called a *direct sum*
+of $C$ and $D$ and is denoted by $C \oplus D$.
+```
+
+The key idea behind a direct sum is that
+it enables a unique decomposition of a vector
+into its components belonging to individual sets.
+
+```{prf:theorem}
+Two subsets $C, D$ of $\VV$ are eligible for 
+a direct sum if and only if 
+the symmetric sets $C - C$ and $D - D$ 
+have only the zero vector $\bzero$ in common.
+```
+
+If two subspaces of $\VV$ have only $\bzero$
+in common, then any vector in their sum can
+be decomposed uniquely between the two subspaces.
+
+The spans of basis vectors have only $\bzero$
+in common. They indeed offer a unique
+decomposition of any vector in the space.
+
 
 ## Real Vector Spaces
 
