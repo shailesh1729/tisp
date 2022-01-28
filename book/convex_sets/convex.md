@@ -760,7 +760,7 @@ $$
 t \bx_1 + (1 - t) \bx_2 \in C \Forall \bx_1, \bx_2 \in C, t \in [0,1].
 $$
 
-### Intersection
+### Intersection and Union
 
 ````{prf:theorem} Intersection of convex sets
 :label: res-cvx-intersection
@@ -859,7 +859,7 @@ We proceed as follows:
 * Hence, their intersection is convex.
 ```
 
-```{prf:theorem}
+```{prf:theorem} Intersection and union of two sets
 :label: res-cvx-convex-pair-largest-smallest
 
 Let $C_1$ and $C_2$ be convex in $\VV$.
@@ -880,6 +880,39 @@ The smallest convex set containing $C_1 \cup C_2$ is its
 convex hull given by $\ConvexHull(C_1 \cup C_2)$
 ({prf:ref}`res-cvx-convex-hull-smallest`).
 ```
+
+
+```{prf:theorem} Intersection and union of arbitrary sets
+:label: res-cvx-convex-collection-largest-smallest
+
+Let $I$ be an index set and $\FFF = \{ C_i \}_{i \in I}$
+be a family of convex sets in $\VV$. 
+Then, the largest convex set contained in every set of $\FFF$ is:
+
+$$
+\bigcap_{i \in I}C_i.
+$$
+And, the smallest convex set containing every set of $\FF$ is 
+
+$$
+\ConvexHull \left (\bigcup_{i \in I} C_i \right ).
+$$
+```
+```{prf:proof}
+Let $C$ be a convex set contained in every set of  $\FFF$. Then,
+$C \subseteq \bigcap_{i \in I}C_i$.
+But $\bigcap_{i \in I}C_i$ is convex ({prf:ref}`res-cvx-arbitrary-intersection`).
+Hence, $\bigcap_{i \in I}C_i$ is the largest convex set contained in 
+every set of $\FFF$.
+
+
+Let $C$ be a convex set which contains every set of $\FF$.
+Then, $\bigcup_{i \in I} C_i \subseteq C$.
+The smallest convex set containing every set of $\FF$ is its
+convex hull given by $\ConvexHull(\bigcup_{i \in I} C_i)$
+({prf:ref}`res-cvx-convex-hull-smallest`).
+```
+
 
 ### Affine Functions
 
@@ -981,7 +1014,9 @@ where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$.
 
 
 
-````{prf:theorem}
+````{prf:theorem} Image under affine function
+:label: res-cvx-convex-set-affine-image
+
 Let $S \subseteq \VV$ be convex and 
 $f : \VV \to \EE$ be an affine function. 
 Then the image of $S$ under $f$ given by
@@ -1017,7 +1052,9 @@ We proceed as follows:
 ```
 
 It applies in the reverse direction also.
-````{prf:theorem}
+````{prf:theorem} Inverse image under affine function
+:label: res-cvx-convex-set-inverse-affine-image
+
 Let $f : \VV \to \EE$ be affine and 
 $S \subseteq \EE$ be convex.
 Then the inverse image of $S$ under $f$ given by
@@ -1079,6 +1116,55 @@ Let $S \in \RR^n$ be convex.
   It projects vectors from $\RR^n$ to $\RR^m$ by
   dropping last $k$ entries.
 ````
+```{prf:example} System of linear equations
+Consider the system of linear equations $\bA \bx = \by$
+where $A \in \RR^{m \times n}$.
+
+If $\by$ ranges over a convex set, then the corresponding
+set of solutions also ranges over a convex set
+due to {prf:ref}`res-cvx-convex-set-inverse-affine-image`.
+
+The {prf:ref}`nonnegative orthant <def-convex-nonnegative-orthant>`
+$\RR^n_+$ is a convex set.
+
+Let $Y = \RR^m_+ + \ba$ for some $\ba \in \RR^m$; i.e.,
+
+$$
+Y = \{ \by \ST \by \succeq \ba \}.
+$$
+
+Then, $\bA^{-1} Y$ is the set of vectors satisfying the inequality
+
+$$
+\bA \bx \succeq \ba.
+$$
+
+Thus, the solution set of a system of linear inequalities
+of the form $\bA \bx \succeq \ba$ is convex.
+
+Now, if $X = \RR^n_+$, then $\bA X$ is the set of vectors
+$\by \in \RR^m$ such that the equation $\bA \bx = \by$ 
+has a nonnegative solution ($\bx \succeq \bzero$).
+Since $X$ is convex,  so is $\bA X$.
+```
+
+```{prf:theorem} Orthogonal projection of convex set
+:label: res-cvx-convex-set-orthogonal-projection
+
+The {prf:ref}`orthogonal projection <def-la-orthogonal-projector>`
+of a convex set $C$ on a 
+subspace $V$ is another convex set.
+```
+
+```{prf:proof}
+We recall that orthogonal projection is a 
+{prf:ref}`linear mapping <res-la-ip-subspace-orth-proj>`
+and thus an affine function. 
+By {prf:ref}`res-cvx-convex-set-affine-image`, image
+of a convex set under an affine function is convex.
+Hence proved.
+```
+
 
 ### Set Addition
 
@@ -1206,3 +1292,61 @@ $$
 
 Some implications are $C + C = 2C$, $C+C+C=3C$ and so forth
 if $C$ is convex.
+
+
+```{prf:theorem} Convex combinations over arbitrary unions
+:label: res-cvx-arb-cvx-un-cvx-comb
+
+Let $I$ be an index set and 
+$\FFF = \{C_i \}_{i \in I}$ be a family of convex
+sets in $\VV$. Let $C$ be given as:
+
+$$
+C = \ConvexHull\left (\bigcup_{i \in I} C_i \right);
+$$
+i.e., $C$ is the convex hull of the union of the 
+family of sets $\FFF$. 
+Then,
+
+$$
+C = \bigcup \left \{\sum_{i \in I} t_i C_i \right \} 
+$$
+where the union is taken over all finite convex combinations 
+(i.e. over all nonnegative choices of $t_i$ such that only
+finitely many $t_i$ are nonzero and they add up to 1).
+```
+
+```{prf:proof}
+
+We proceed as follows:
+
+1. Let $\bx \in C$.
+1. Then, $\bx$ is a convex combination of elements in $\bigcup_{i \in I} C_i$.
+1. Thus, $\bx = \sum_{i=1}^m a_i \by_i$ where
+   $\by_i \in \bigcup_{i \in I} C_i$, $a_i \geq 0$ and $\sum a_i = 1$.
+1. Drop all the terms from $\bx$ where $a_i = 0$.
+1. If $\by_i, \by_j$ belong to some same $C_k$, then, we can replace
+   $a_i \by_i + a_j \by_j$ with some $a \by  = a_i \by_i + a_j \by_j$ 
+   where $a = a_i + a_j$. 
+   Note that, with these assumptions,
+   $\by = \frac{a_i}{a_i + a_j} \by_i + \frac{a_j}{a_i + a_j} \by_j$
+   is a convex combination of $\by_i$ and $\by_j$, hence $\by \in C_k$
+   since $C_k$ is convex.
+1. Thus, terms from a single $C_k$ in $\bx$ can be reduced by a single term.
+1. Thus, we can simplify $\bx$ such that
+   
+   $$
+   \bx = \sum_{j=1}^p b_j \bx_j
+   $$
+   such that each $\bx_j$ belongs to a different $C_{i_j}$ with $i_j \in I$, 
+   $b_j > 0$ and $\sum b_j = 1$.
+1. Thus, $C$ is a union of finite convex combinations of the form
+
+   $$
+   b_1 C_{i_1} + \dots + b_p C_{i_p}
+   $$
+   where $i_1, \dots, i_p \in I$ are different indices
+   and $b_j > 0$, $\sum b_j = 1$.
+1. This is the same set as $\bigcup \left \{\sum_{i \in I} t_i C_i \right \}$
+   except for notational differences.
+```
