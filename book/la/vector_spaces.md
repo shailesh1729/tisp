@@ -1272,6 +1272,61 @@ $$
 $$
 ```
 
+```{prf:definition} Symmetric reflection
+:label: def-vs-symmetric-reflection
+
+The *symmetric reflection* of a set $C$ 
+across the origin is given by
+$-C = (-1) C$.  
+```
+
+```{prf:definition} Symmetric set
+:label: def-vs-symmetric-set
+A set $C$ is said to be *symmetric* if 
+$-C = C$ holds true.
+```
+If a nonempty set is symmetric, it must contain
+$\bzero$ since $-\bzero = \bzero$.
+
+
+
+```{prf:theorem} Properties of set arithmetic
+:label: res-vs-set-arithmetic-props
+
+Let $C, D, E \subseteq \VV$ and $\alpha, \beta \in \FF$.
+
+1. Set addition is commutative:
+   
+   $$
+   C + D = D + C.
+   $$
+1. Set addition is associative:
+
+   $$
+   C + (D + E) = (C + D) + E.
+   $$
+1. Scalar multiplication with a set commutes with multiplication in $\FF$:
+
+   $$
+   \alpha (\beta C) = (\alpha \beta) C = (\beta \alpha )C = \beta (\alpha C).
+   $$
+1. Scalar multiplication distributes over set addition:
+
+   $$
+   \alpha (C + D) = (\alpha C) + (\alpha D).
+   $$
+1. The set $\{ \bzero \}$ is the identity element for set addition:
+
+   $$
+   C + \{ \bzero \} = \{ \bzero \} + C = C.
+   $$
+1. The set $F = C + (-C)$ is symmetric and $\bzero \in F$.
+1. $ (\alpha + \beta) C \subseteq \alpha C + \beta C$.
+```
+
+Additive inverses don't exist for sets containing more than
+one element.
+
 ## Real Vector Spaces
 
 ```{prf:definition} Real vector space
