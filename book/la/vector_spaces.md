@@ -1218,7 +1218,7 @@ $$
 ````
 
 
-## Product Vector Spaces
+## Direct Sum of Vector Spaces
 
 Consider two vector spaces $\VV$ and $\WW$ over 
 same scalar field $\FF$. Often, it is 
@@ -1228,8 +1228,8 @@ One common example is $\VV=\RR^n$, $\WW=\RR^m$
 and $\VV \times \WW = \RR^{n+m}$.
 
 
-```{prf:definition} Product vector space
-:label: def-vs-product-vector-space
+```{prf:definition} Direct sum of vector spaces
+:label: def-vs-direct-sum-vector-spaces
 
 Let $\VV$ and $\WW$ be two different vector spaces over some
 field $\FF$. 
@@ -1262,10 +1262,51 @@ as per the following definitions.
    $$
 
 $\VV \times \WW$ equipped with these definitions
-is a vector space over $\FF$ in its own right.
+is a vector space over $\FF$ in its own right
+and is called the *direct sum*
+of $\VV$ and $\WW$ denoted by $\VV \oplus \WW$.
+```
+
+```{note}
+Some authors prefer to call $\VV \oplus \WW$ as
+*direct product* (Cartesian product with vector space structure)
+and reserve the term *direct sum* for the sums within the same
+vector space ({prf:ref}`def-vs-direct-sum-same-space` below).
+
+For them, external direct sum is a direct product and
+internal direct sum is a direct sum.
+```
+
+
+```{prf:example}
+With the definition of direct sum given above, 
+we have:
+
+$$
+\FF^2 = \FF \oplus \FF
+$$
+or more generally,
+
+$$
+\FF^{n} = \FF \oplus \FF \oplus \dots \oplus \FF = \bigoplus_{i=1}^n \FF.
+$$
+
+Specifically,
+
+$$
+\RR^n = \bigoplus_{i=1}^n \RR.
+$$
+
+Also,
+
+$$
+\RR^{n + m} = \RR^n \times \RR^m.
+$$
 ```
 
 ## Sets in Vector Spaces
+
+### Set Arithmetic
 
 ```{prf:definition} Arithmetic on sets
 :label: def-vs-set-arithmetic
@@ -1318,6 +1359,8 @@ $$
 $$
 ```
 
+### Symmetry
+
 ```{prf:definition} Symmetric reflection
 :label: def-vs-symmetric-reflection
 
@@ -1335,6 +1378,7 @@ If a nonempty set is symmetric, it must contain
 $\bzero$ since $-\bzero = \bzero$.
 
 
+### Set Arithmetic Properties
 
 ```{prf:theorem} Properties of set arithmetic
 :label: res-vs-set-arithmetic-props
@@ -1373,8 +1417,9 @@ Let $C, D, E \subseteq \VV$ and $\alpha, \beta \in \FF$.
 Additive inverses don't exist for sets containing more than
 one element.
 
+### Direct Sums
 
-```{prf:definition} Direct sum over two different vector spaces
+```{prf:definition} (External) direct sum over two different vector spaces
 :label: def-vs-direct-sum-two-spaces
 
 Let $\VV$ and $\WW$ be vector spaces over $\FF$.
@@ -1385,11 +1430,12 @@ $$
 C \oplus D \triangleq \{ \bx = (\by, \bz) \ST \by \in C, \bz \in D \}.
 $$
 
-$C \oplus D$ is a subset of the product vector space
-$\VV \times \WW$.
+$C \oplus D$ is a subset of the 
+{prf:ref}`(direct sum) vector space <def-vs-direct-sum-vector-spaces>`
+$\VV \oplus \WW$.
 ```
 
-```{prf:definition} Direct sum in same vector space
+```{prf:definition} (Internal) direct sum of sets in same vector space
 :label: def-vs-direct-sum-same-space
 Let $C,D$ be subsets of $\VV$.
 If each vector $\bx \in C+D$ can be expressed *uniquely*
@@ -1417,10 +1463,35 @@ If two subspaces of $\VV$ have only $\bzero$
 in common, then any vector in their sum can
 be decomposed uniquely between the two subspaces.
 
+
+```{prf:definition} (Internal) direct sum of subspaces
+:label: def-vs-direct-sum-subspaces
+
+If $\WW_1$ and $\WW_2$ are two subspaces of $\VV$
+such that $\WW_1 \cap \WW_2 = \{ \bzero \}$, 
+then the *direct sum* of $\WW_1$ and $\WW_2$
+is defined as:
+
+$$
+\WW_1 \oplus \WW_2 \triangleq \WW_1 + \WW_2 
+= \{ \bx_1 + \bx_2 \ST \bx_1 \in \WW_1, \bx_2 \in \WW_2 \}.
+$$
+If, in particular, $\VV = \WW_1 + \WW_2$, we say that
+$\VV$ is a *direct sum* of its subspaces $\WW_1$ and $\WW_2$
+and write as $\VV = \WW_1 \oplus \WW_2$.
+```
+
+```{prf:example} Vector space as direct sum of spans of basis vectors
 The spans of basis vectors have only $\bzero$
 in common. They indeed offer a unique
 decomposition of any vector in the space.
+Thus, for a finite dimensional space $\VV$ 
+with a basis $\BBB = \{\bv_1, \dots \bv_n \}$
 
+$$
+\VV = \bigoplus_{i=1}^n \span \{ \bv_i \}.
+$$
+```
 
 ## Real Vector Spaces
 
