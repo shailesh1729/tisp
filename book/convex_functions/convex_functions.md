@@ -150,6 +150,7 @@ f_{\ba, b} (t \bx + (1 - t) \by)
 $$
 ```
 
+### Convexity on lines in domain
 
 ```{prf:theorem} $f$ is convex = $f$ is convex on lines in domain
 :label: res-cvxf-convx-on-lines
@@ -273,4 +274,61 @@ $$
    $$
 1. We have a contradiction.
 1. Thus, $f$ must be convex.
+```
+
+### Epigraph
+
+The {prf:ref}`epigraph <def-bra-epigraph>`
+of a function $f: \VV \to \RR$ is given by:
+
+$$
+\epi f = \{ (\bx,t) \in \VV \oplus \RR \ST \bx \in \dom f, f(\bx) \leq t \}.
+$$
+$\VV \oplus \RR$ is the 
+{prf:ref}`direct sum <def-cvx-real-vector-space-r-prod>`
+of $\VV$ and $\RR$ having appropriate vector space 
+structure.
+
+```{prf:theorem} Function convexity = Epigraph convexity
+:label: res-cvxf-convexity-epigraph
+
+A function $f$ is convex if and only if its epigraph
+$\epi f$ is a convex set.
+```
+
+```{prf:proof}
+Let $C = \epi f$.
+
+Assume $f$ is convex.
+
+1. Let $(\bx_1, t_1), (\bx_2, t_2) \in \epi f$.
+1. Then, $f(\bx_1) \leq t_1$ and $f(\bx_2) \leq t_2$. 
+1. Let $r \in [0,1]$.
+1. Consider the point $(\bx, t) = r(\bx_1, t_1) + (1-r)(\bx_2, t_2)$.
+1. We have $\bx = r \bx_1 + (1 -r)(\bx_2)$.
+1. And $t = r t_1 + (1-r)t_2$.
+1. Then, $ r f(\bx_1) + (1-r) f(\bx_2) \leq r t_1 + (1-r)t_2 = t$.
+1. Since $f$ is convex, 
+   hence $f(\bx) = f(r \bx_1 + (1 -r)(\bx_2)) \leq r f(\bx_1) + (1-r)f(\bx_2)$.
+1. But then, $f(\bx) \leq t$.
+1. Thus, $(\bx, t) \in \epi f$.
+1. Thus, $(\bx_1, t_1), (\bx_2, t_2) \in \epi f$ 
+   implies $r(\bx_1, t_1) + (1-r)(\bx_2, t_2) \in \epi f$ for all $r \in [0,1]$.
+1. Thus, $\epi f$ is convex.
+
+Assume $\epi f$ is convex.
+
+1. Let $\bx_1, \bx_2 \in \dom f$.
+1. Let $t_1 = f(\bx_1)$ and $t_2 = f(\bx_2)$.
+1. Then, $(\bx_1, t_1), (\bx_2, t_2) \in \epi f$.
+1. Let $r \in [0,1]$.
+1. Let $\bx = r \bx_1 + (1-r)\bx_2$.
+1. Since $\epi f$ is convex, hence $r(\bx_1, t_1) + (1-r)(\bx_2, t_2) \in \epi f$.
+1. i.e., $(r \bx_1 + (1-r)\bx_2, r t_1 + (1-r)t_2) \in \epi f$.
+1. Thus, $\bx = r \bx_1 + (1-r)\bx_2 \in \dom f$.
+1. And, $f(\bx) \leq r t_1 + (1-r)t_2$.
+1. But $r t_1 + (1-r)t_2 = r f(\bx_1) + (1-r)f(\bx_2)$.
+1. Thus, $f(r \bx_1 + (1-r)\bx_2) \leq r f(\bx_1) + (1-r)f(\bx_2)$.
+1. Thus, $f$ is convex as $\bx_1, \bx_2 \in \dom f$ and $r \in [0,1]$ 
+   were arbitrary. 
 ```
