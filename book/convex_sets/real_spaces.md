@@ -282,23 +282,30 @@ $$
 ```
 
 
-## The $\VV \times \RR$ Vector Space
+## The $\VV \oplus \RR$ Vector Space
 
 While studying convex cones, 
-we often find dealing with the set $\VV \times \RR$. 
-It is important to introduce a vector space
-structure to this set which can be used in 
-analysis. We provide a vector space structure below
+we often find dealing with the set $\VV \times \RR$.
+Since $\RR$ is a vector space over $\RR$ by itself
+(see {prf:ref}`ex-field-is-vector-space`),
+hence we have a 
+{prf:ref}`direct sum <def-vs-direct-sum-vector-spaces>` 
+$\VV \oplus \RR$ vector space.  
+We provide an extended vector space structure below
+(providing inner product and norm features)
 which aligns with the vector space structure of $\RR^{n+1}$
 if $\VV = \RR^n$. 
 
-```{prf:definition} Product vector space $\VV \times \RR$
+```{prf:definition} Direct sum $\VV \oplus \RR$
 :label: def-cvx-real-vector-space-r-prod
 
 Let $\VV$ be a real vector space. 
 A vector space structure can be introduced to the set $\VV \times \RR$
 as per the following definitions.
 
+1. [Additive identity] Let $\bzero$ be the additive identity for $\VV$.
+   Then, the additive identity for $\VV \times \RR$ is given by 
+   $(\bzero, 0)$.
 1. [Vector addition] Let $(\bx, s)$ and $(\by, t)$ be in $\VV \times \RR$.
    Then, their sum is defined as:
 
@@ -327,6 +334,11 @@ as per the following definitions.
    $$
    \| (\bx, s) \| \triangleq \sqrt{\| \bx \|^2 + s^2}.
    $$
+
+$\VV \times \RR$ equipped with these definitions
+is a vector space over $\RR$ in its own right
+and is called the *direct sum*
+of $\VV$ and $\RR$ denoted by $\VV \oplus \RR$.
 ```
 
 Readers can verify that these definitions satisfy
