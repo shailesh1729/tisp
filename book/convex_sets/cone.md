@@ -442,37 +442,6 @@ $H \subseteq K$
 1. Thus, $H \subseteq K$.
 ```
 
-```{prf:observation} Convex sets as cross sections of cones
-:label: res-cvx-convex-cross-section-cone
-
-A convex set $C \subseteq \VV$ can be regarded as a cross section of some convex cone
-$K \subseteq \VV \times \RR$ 
-(with appropriate {prf:ref}`vector space structure <def-cvx-real-vector-space-r-prod>` added to
-$\VV \times \RR$). 
-
-Let $K$ be conic hull of points $(\bx, 1) \in \VV \times \RR$ such that $\bx \in C$.
-Then, 
-
-$$
-K = \{ (t \bx, t) \in \VV \times \RR \ST \bx \in C, t \geq 0 \}.
-$$
-
-Now consider the hyperplane in $\VV \times \RR$ given by:
-
-$$
-H = \{ (\by, t) \in \VV \times \RR \ST t = 1 \}.
-$$
-
-The intersection of $H$ with $K$ can be regarded as $C$.
-
-$$
-H \cap K = \{(t\bx, t) \in \VV \times \RR \ST \bx \in C, t=1\}
-= \{ (\bx, 1) \in \VV \times \RR \ST \bx \in C\}.
-$$
-The projection of $H \cap K$ on $\VV$ is given by $C$
-(by dropping the last coordinate).
-```
-
 ## Pointed Cones
 
 ```{prf:definition} Pointed cone
@@ -1071,3 +1040,265 @@ from above by $\alpha + \beta$. Thus, $\bu + \bv \in B$.
 Thus, $B$ is closed under nonnegative scalar multiplication
 and vector addition. $B$ is a convex cone.
 ```
+
+## Operations Preserving Conic Convexity
+
+We consider operations on convex cones which
+generate convex cones.
+
+```{prf:theorem} Closure under set intersection
+:label: res-cvx-convex-cone-closure-intersection
+
+If $K_1$ and $K_2$ are convex cones, then 
+$K = K_1 \cap K_2$ is convex cone.
+```
+
+```{prf:proof}
+We show that $K$ is closed under nonnegative scalar multiplication.
+
+1. Let $\bx \in K$ and $t \geq 0$. 
+1. Then, $\bx \in K_1$ and $\bx \in K_2$.
+1. Hence, $t \bx \in K_1$ and $t \bx \in K_2$ since
+   both are closed under nonnegative scalar multiplication.
+1. Thus, $t\bx \in K$.
+1. Hence, $K$ is closed under nonnegative scalar multiplication.  
+
+We show that $K$ is closed under vector addition too.
+
+1. Let $\bx, \by \in K$.
+1. Then, $\bx, \by \in K_1$ and $\bx, \by \in K_2$.
+1. But then, $\bx + \by \in K_1$ and $\bx + \by \in K_2$
+   since both are closed under vector addition.
+1. Thus, $\bx + \by \in K$.
+1. Hence, $K$ is closed under vector addition.
+
+Thus, $K$ is closed under nonnegative scalar multiplication
+and vector addition. $K$ is a convex cone.
+```
+
+```{prf:theorem} Closure under set addition
+:label: res-cvx-convex-cone-closure-addition
+
+If $K_1$ and $K_2$ are convex cones, then 
+$K = K_1 + K_2$ is convex cone.
+```
+
+```{prf:proof}
+We show that $K$ is closed under nonnegative scalar multiplication.
+
+1. Let $\bx \in K$ and $t \geq 0$.
+1. Then, $\bx = \bx_1 + \bx_2$ where $\bx_1 \in K_1$, and $\bx_2 \in K_2$.
+1. Then, $t \bx_1 \in K_1$ and $t \bx_2 \in K_2$ since $K_1$ and $K_2$ are cone.
+1. Then, $ t \bx = t(\bx_1 + \bx_2) = t \bx_1 + t \bx_2 \in K$.
+1. Thus, $K$ is closed under nonnegative scalar multiplication.
+
+We show that $K$ is closed under vector addition too.
+
+1. Let $\bx, \by \in K$. 
+1. Then, $\bx = \bx_1 + \bx_2$ with some $\bx_1 \in K_1$ and $\bx_2 \in K_2$.
+1. And, $\by = \by_1 + \by_2$ with some $\by_1 \in K_1$ and $\by_2 \in K_2$.
+1. Then, $\bx + \by = (\bx_1 + \by_1) + (\bx_2 + \by_2)$.
+1. Now, $\bx_1 + \by_1 \in K_1$ and $\bx_2 + \by_2 \in K_2$ since
+   $K_1$ and $K_2$ are closed under addition (they are convex cones).
+1. Thus, $\bx + \by \in K$.
+1. Thus, $K$ is closed under vector addition.
+
+
+Thus, $K$ is closed under nonnegative scalar multiplication
+and vector addition. $K$ is a convex cone.
+
+
+We mention that by {prf:ref}`res-cvx-convexity-set-addition`, $K$ is convex.
+Hence, we just needed to show that $K$ is a cone too.
+```
+
+```{prf:theorem} Positive scalar multiplication
+:label: res-cvx-convex-cone-scaling-same
+
+Let $K$ be a convex cone. Then
+
+$$
+t K = K \Forall t > 0.
+$$
+```
+```{prf:proof}
+We proceed as follows:
+
+
+1. Let $t > 0$.
+1. Let $\bx \in t K$. 
+1. Then, $\frac{1}{t} \bx \in K$. 
+1. But then, $t \frac{1}{t}\bx = \bx \in K$ too 
+   since $K$ is closed under nonnegative scalar multiplication.
+1. Thus, $t K \subseteq K$.
+1. Similarly, $\bx \in K$ implies $\bx \in tK$.
+1. Thus, $K \subseteq t K$.
+1. Hence, $K = t K$ for all $t > 0$.
+```
+
+Note that $0K = \{ \bzero \} \neq K$.
+
+```{prf:theorem} Convex hull of the union
+:label: res-cvx-cones-union-hull-sum
+
+If $K_1$ and $K_2$ are convex cones, then 
+
+$$
+K_1 + K_2 = \ConvexHull (K_1 \cup K_2).
+$$
+```
+
+```{prf:proof}
+By {prf:ref}`res-cvx-hull-union-cvx-combs`,
+
+$$
+\ConvexHull (K_1 \cup K_2) = \bigcup_{t \in [0,1]} 
+\left [ (1 - t) K_1 + t K_2 \right ].
+$$
+
+Now for $t \in (0,1)$, 
+by {prf:ref}`res-cvx-convex-cone-scaling-same`,
+$(1-t)K_1 = K_1$ and $t K_2 = K_2$.
+
+Thus, for $t \in (0,1)$:
+
+$$
+(1 - t) K_1 + t K_2 = K_1 + K_2.
+$$
+
+For, $t=0$ we are left with $K_1$ and for
+$t=1$, we are left with $K_2$.
+
+Since $\bzero \in K_1$ and $\bzero \in K_2$,
+hence  $K_1 \subseteq K_1 + K_2$ 
+and $K_2 \subseteq K_1 + K_2$.
+Thus,
+
+$$
+\ConvexHull (K_1 \cup K_2) = \bigcup_{t \in [0,1]} 
+\left [ (1 - t) K_1 + t K_2 \right ] = K_1 + K_2.
+$$
+```
+
+## Cone Generated by a Convex Set
+
+The direct sum vector space $\VV \oplus \RR$ has
+been described in {prf:ref}`def-cvx-real-vector-space-r-prod`.
+
+```{prf:observation} Convex sets as cross sections of cones
+:label: res-cvx-convex-cross-section-cone
+
+A convex set $C \subseteq \VV$ can be regarded as a 
+cross section of some convex cone
+$K \subseteq \VV \oplus \RR$. 
+
+Let $K$ be conic hull of points $(\bx, 1) \in \VV \oplus \RR$ such that $\bx \in C$.
+Then, 
+
+$$
+K = \{ (t \bx, t) \in \VV \oplus \RR \ST \bx \in C, t \geq 0 \}.
+$$
+
+Now consider the hyperplane in $\VV \oplus \RR$ given by:
+
+$$
+H = \{ (\by, t) \in \VV \oplus \RR \ST t = 1 \}.
+$$
+
+The intersection of $H$ with $K$ can be regarded as $C$.
+
+$$
+H \cap K = \{(t\bx, t) \in \VV \oplus \RR \ST \bx \in C, t=1\}
+= \{ (\bx, 1) \in \VV \oplus \RR \ST \bx \in C\}.
+$$
+The projection of $H \cap K$ on $\VV$ is given by $C$
+(by dropping the last coordinate).
+```
+
+
+```{prf:remark}
+For every convex set $C \subseteq \VV$, there is
+precisely one convex cone $K \subseteq \VV \oplus \RR$ 
+generated by the set $\{(\bx, 1) \in \VV \oplus \RR \ST \bx \in C \}$
+(its conic hull).
+
+These convex cones have only $(\bzero, 0)$ in common
+with the half space $\{(\bx, t) \in \VV \oplus \RR \ST t \leq 0 \}$.
+
+We shall call this class of convex cones in $\VV \oplus \RR$
+generated by the convex sets in $\VV$ as $\CCC$.
+```
+
+An operation that is closed under the class $\CCC$ 
+corresponds to an operation on the convex sets in $\VV$;
+e.g., if $C_1$ and $C_2$ are convex sets with corresponding
+cones $K_1$ and $K_2$, then $C_1 \cap C_2$ is another
+convex set corresponding to a different convex cone $K_3$.
+It is natural to ask if there is a way to construct
+$K_3$ from $K_1$ and $K_2$ directly in $\VV \oplus \RR$.
+
+Each vector $(\bx, t) \in \VV \oplus \RR$
+can be split as a direct sum with $\bx \in \VV$ and $t \in \RR$.
+Thus, it is possible to define different kinds of 
+{prf:ref}`partial sums <res-cvx-convex-set-partial-addition>`
+on $\VV \oplus \RR$. 
+Recall that partial sums on convex sets preserve the convexity.
+It turns out that they can do more. We can define
+partial sums which are closed under the family $\CCC$ of
+convex cones in $\VV \oplus \RR$ generated by 
+the convex sets in $\VV$.
+
+We can define four types of partial sums:
+
+1. Addition in $\VV$, intersection in $\RR$.
+1. Addition in $\VV$, addition in $\RR$.
+1. Intersection in $\VV$, intersection in $\RR$.
+1. Intersection in $\VV$, addition in $\RR$.
+
+Suppose that $K_1$ and $K_2$ are convex cones 
+generated by the convex sets $C_1$ and $C_2$ respectively.
+Let $K$ be their partial sum. Let us find out
+what is the corresponding convex set $C$ in $\VV$ 
+based on the type of partial sum in $\VV \oplus \RR$.
+
+[Addition in $\VV$, intersection in $\RR$.]
+
+1. In this case, $(\bx, 1) \in K$ if and only if 
+   $\bx = \bx_1 + \bx_2$ for some $(\bx_1, 1) \in K_1$ and
+   $(\bx_2, 1) \in K_2$.
+1. Thus, the convex set corresponding to $K$ is $C = C_1 + C_2$.
+
+[Addition in $\VV$, addition in $\RR$.]
+
+1. $(\bx, 1) \in K$ if and only if $\bx = \bx_1 + \bx_2$
+   and $1 = t_1 + t_2$ with $t_1 \geq 0$ and $t_2 \geq 0$
+   for some $(\bx_1, t_1) \in K_1$ and $(\bx_2, t_2) \in K_2$.
+1. Thus, $C$ is the union of the sets $t_1 C_1 + t_2 C_2$ over
+   $t_1 \geq 0$, $t_2 \geq 0$ and $t_1 + t_2 = 1$.
+1. But, this is same as $C = \ConvexHull (C_1 \cup C_2)$
+   as per {prf:ref}`res-cvx-arb-cvx-un-cvx-comb`. 
+
+[TODO] Clarify this further. It is not obvious.
+
+
+[Intersection in $\VV$, intersection in $\RR$]
+
+1. $(\bx, 1) \in K$ if and only if $(\bx, 1) \in K_1$
+   as well as $(\bx, 1) \in K_2$.
+1. Thus, $C = C_1 \cap C_2$.
+
+
+[Intersection in $\VV$, addition in $\RR$]
+
+1. $(\bx, 1) \in K$ if and only if $(\bx, t_1) \in K_1$
+   and $(\bx, t_2) \in K_2$ for some $t_1, t_2 \geq 0$
+   with $t_1 + t_2 = 1$.
+1. In this case, we can write $C$ as:
+
+   $$
+   C &= \bigcup \{ t_1 C_1 \cap t_2 C_2 \ST t_1, t_2 \geq 0, t_1 + t_2 =1 \}\\
+   &= \bigcup \{ (1 - t) C_1 \cap t C_2 \ST t \in [0, 1]\}. 
+   $$
+
+[TODO] Clarify this further. It is not obvious.
+
