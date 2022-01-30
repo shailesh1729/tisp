@@ -230,6 +230,50 @@ $$
 ```
 
 
+```{prf:example} Chain rule for restriction on a line
+:label: ex-f-rest-line-chain-rule
+
+Let $f : \RR^n \to \RR$ be a real valued differentiable
+function. Consider the restriction of $f$ on a line
+in its domain
+
+$$
+g(t) = f(\bx + t \bv)
+$$
+where $\bx \in \dom f$ and $\bv \in \RR^n$ 
+with the domain
+
+$$
+\dom g = \{t \ST \bx + t \bv \in \dom f\}.
+$$ 
+
+If we define $h : \RR \to \RR^n$ as:
+
+$$
+h(t) = \bx + t \bv;
+$$
+we can see that:
+
+$$
+g(t) = f(h(t))
+$$
+
+By chain rule:
+
+$$
+g'(t) = Df(h(t)) Dh(t) = \nabla f(h(t))^T \bv 
+= \nabla f(\bx + t \bv)^T \bv.
+$$
+
+In particular, if $\bv = \by - \bx$, with $\by \in \dom f$,
+
+$$
+g'(t) = \nabla f(\bx + t (\by -\bx) )^T (\by - \bx)
+= \nabla f(t \by + (1-t) \bx)^T (\by - \bx).
+$$
+```
+
+
 ## Hessian
 
 In this section, we review the second derivative
