@@ -229,7 +229,7 @@ as it extends the domain to the whole of $X$.
 :label: def-bra-extension-domain
 
 For an extended valued function $\tilde{f} : X \to \ERL$, its 
-domain is defined as:
+*effective domain* is defined as:
 
 $$
 \dom \tilde{f} \triangleq \{ x \in X \ST \tilde{f}(x) < \infty \}.

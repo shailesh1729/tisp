@@ -144,7 +144,7 @@ $$
 is closed for every $\alpha \in \RR$.
 ```
 ```{prf:proposition}
-The epigraph of a closed function is closed.
+The {prf:ref}`epigraph <def-bra-epigraph>` of a closed function is closed.
 ```
 
 ```{prf:proposition}
