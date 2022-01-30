@@ -26,38 +26,127 @@ at $\bx$.
 There can be at most one $Df(\bx)$ satisfying the limit in
 {eq}`eq-mvc-f-m-n-jacobian-limit`.
 
+
+```{prf:observation}
+:label: res-mvc-f-m-n-jacobian-limit-alt
+
+If we write $\bz = \bx + \bh$ then an alternative form for 
+{eq}`eq-mvc-f-m-n-jacobian-limit` is given by:
+
+$$
+\underset{\bx + \bh \in \dom f, \bh \neq \bzero, \bh \to \bzero}{\lim}
+\frac{\| f(\bx + \bh) - f(\bx) - Df(\bx) \bh \|_2}{\| \bh \|_2} = 0.
+$$
+```
+
 ```{div}
 The matrix $Df(\bx)$ can be obtained from the partial
 derivatives:
 
 $$
-Df(\bx)_{ij} = \frac{\partial f_i(\bx)}{\partial \bx_j}, \quad
+Df(\bx)_{ij} = \frac{\partial f_i(\bx)}{\partial x_j}, \quad
 i=1,\dots,m, \quad j=1,\dots,n.
 $$
 
 $$
 Df(\bx) = \begin{bmatrix}
- \frac{\partial f_1(\bx)}{\partial \bx_1} 
- &  \frac{\partial f_1(\bx)}{\partial \bx_2} 
+ \frac{\partial f_1(\bx)}{\partial x_1} 
+ &  \frac{\partial f_1(\bx)}{\partial x_2} 
  & \dots 
- &  \frac{\partial f_1(\bx)}{\partial \bx_n}\\
- \frac{\partial f_2(\bx)}{\partial \bx_1} 
- &  \frac{\partial f_2(\bx)}{\partial \bx_2} 
+ &  \frac{\partial f_1(\bx)}{\partial x_n}\\
+ \frac{\partial f_2(\bx)}{\partial x_1} 
+ &  \frac{\partial f_2(\bx)}{\partial x_2} 
  & \dots 
- &  \frac{\partial f_2(\bx)}{\partial \bx_n}\\
+ &  \frac{\partial f_2(\bx)}{\partial x_n}\\
  \vdots & \vdots & \ddots & \vdots \\
- \frac{\partial f_m(\bx)}{\partial \bx_1} 
- &  \frac{\partial f_m(\bx)}{\partial \bx_2} 
+ \frac{\partial f_m(\bx)}{\partial x_1} 
+ &  \frac{\partial f_m(\bx)}{\partial x_2} 
  & \dots 
- &  \frac{\partial f_m(\bx)}{\partial \bx_n}
+ &  \frac{\partial f_m(\bx)}{\partial x_n}
 \end{bmatrix}.
 $$
 
+1. The Jacobian $Df(\bx)$ is an $m \times n$ real matrix.
 1. Partial derivatives of each component of $f$ (i.e., $f_i$) 
    line up on the $i$-th row.
 1. Partial derivatives for one coordinate $x_j$ line up 
    on the $j$-th column.
 1. If $f$ is single valued, then the Jacobian $Df(\bx)$ is a row vector. 
+```
+
+```{prf:example} Jacobian of identity function
+:label: ex-mvc-derivative-identity-map
+
+Let $f: \RR^n \to \RR^n$ be defined as: 
+
+$$
+f(\bx) = \bx.
+$$
+
+Then,  $f_i(\bx) = x_i$. Hence,
+
+$$
+\frac{\partial f_i(\bx)}{\partial x_j} = \delta(i, j).
+$$
+
+Thus 
+
+$$
+D f(\bx) = \bI_n
+$$
+the $n\times n$ identity matrix.
+```
+
+```{prf:example} Jacobian of linear transformation
+:label: ex-mvc-derivative-linear-map
+
+Let $f: \RR^n \to \RR^m$ be defined as: 
+
+$$
+f(\bx) = \bA \bx
+$$
+where $\bA = (a_{i j})$ is an $m \times n$ real matrix.
+
+Then,  $f_i(\bx) = \sum_{j=1}^n a_{i j} x_j$. Hence,
+
+$$
+\frac{\partial f_i(\bx)}{\partial x_j} = a_{i j}.
+$$
+
+Thus 
+
+$$
+D f(\bx) = \bA.
+$$
+```
+
+
+
+```{prf:example} Jacobian of affine transformation
+:label: ex-mvc-derivative-affine-map
+
+Let $f: \RR^n \to \RR^m$ be defined as: 
+
+$$
+f(\bx) = \bA \bx + \bb
+$$
+where $\bA = (a_{i j}) \in \RR^{m \times n}$
+and $\bb \in \RR^m$.
+
+Then,  $f_i(\bx) = \sum_{j=1}^n a_{i j} x_j + b_i$. Hence,
+
+$$
+\frac{\partial f_i(\bx)}{\partial x_j} = a_{i j}.
+$$
+
+Thus 
+
+$$
+D f(\bx) = \bA.
+$$
+
+The vector $\bb$ is a constant offset. It has no impact
+on the derivative.
 ```
 
 ````{prf:definition} Differentiable function
@@ -112,6 +201,184 @@ i=1,\dots,n.
 $$ 
 ```
 
+```{prf:example} Gradient of linear functional
+:label: ex-mvc-gradient-linear-functional
+
+Let $f : \RR^n \to \RR$ be a linear functional given by:
+
+$$
+f(\bx) = \langle \bx, \ba \rangle = \ba^T \bx.
+$$
+
+We can expand it as:
+
+$$
+f(\bx) = \sum_{j=1}^n a_j x_j.
+$$
+
+Computing partial derivative with respect to $x_i$, we get:
+
+$$
+\frac{\partial f(\bx)}{\partial x_i} 
+= \frac{\partial }{\partial x_i}\left (\sum_{j=1}^n a_j x_j \right )
+= a_i.
+$$
+
+Putting the partial derivatives together, we get:
+
+$$
+\nabla f(\bx) = \ba.
+$$
+```
+
+```{prf:example} Gradient of affine functional
+:label: ex-mvc-gradient-affine-functional
+
+Let $f : \RR^n \to \RR$ be a affine functional given by:
+
+$$
+f(\bx) = \ba^T \bx + b
+$$
+where $\ba \in \RR^n$ and $b \in \RR$.
+
+We can expand it as:
+
+$$
+f(\bx) = \sum_{j=1}^n a_j x_j + b.
+$$
+
+Computing partial derivative with respect to $x_i$, we get:
+
+$$
+\frac{\partial f(\bx)}{\partial x_i} 
+= \frac{\partial }{\partial x_i}\left (\sum_{j=1}^n a_j x_j  + b \right)
+= a_i.
+$$
+
+Putting the partial derivatives together, we get:
+
+$$
+\nabla f(\bx) = \ba.
+$$
+The intercept $b$ is a constant term which doesn't affect the 
+gradient.
+```
+
+
+```{prf:example} Gradient of quadratic form
+:label: ex-mvc-gradient-quadratic-form
+
+Let $f : \RR^n \to \RR$ be a quadratic form given by:
+
+$$
+f(\bx) = \bx^T \bA \bx
+$$
+where $\bA \in \RR^{n \times n}$.
+
+We can expand it as:
+
+$$
+f(\bx) = \sum_{i=1}^n \sum_{j=1}^n x_i a_{i j} x_j.
+$$
+Note that the diagonal elements $a_{ii}$ give us terms of the 
+form $a_{i i} x_i^2$. Let us split the expression into
+diagonal and non-diagonal terms:
+
+$$
+f(\bx) = \sum_{i=1}^n a_{i i }x_i^2 + \sum_{\substack{i, j\\i \neq j}} x_i a_{i j} x_j.
+$$
+There are $n$ terms in the first sum (the diagonal entries of $\bA$)
+and $n^2 - n$ terms in the second sum (the non-diagonal entries of $\bA$).
+
+Taking partial derivative w.r.t. $x_k$, we obtain:
+
+$$
+\frac{\partial f(\bx)}{\partial x_k}
+= 2 a_{k k} x_k 
++ \sum_{\substack{i\\i \neq k}} x_i a_{ i k} 
++ \sum_{\substack{j\\j \neq k}} a_{k j} x_j.
+$$
+* The first term comes from $a_{k k}$ term that is quadratic in $x_k$.
+* The first sum comes from linear terms where $k=j$ and $i=1,\dots,n$ except $i\neq k$.
+* The second sum comes from linear terms where $k=i$ and $j=1,\dots,n$ except $j\neq k$.
+* There are $2n -2$ terms in the sums and $2$ $a_{k k} x_k$ terms.
+* We can move one $a_{k k }x_k$ into each sum to simplify the partial derivative
+  as:
+
+$$
+\frac{\partial f(\bx)}{\partial x_k}
+= \sum_{i=1}^n x_i a_{i k}  + \sum_{j = 1}^n a_{k j} x_j. 
+$$
+
+Note that the $k$-th component of the vector $\bu = \bA \bx$ is
+$\sum_{j=1}^n a_{k j} x_j$.
+
+Similarly, the $k$-th component of the vector $\bv = \bA^T \bx$ is
+$\sum_{i=1}^n a_{i k} x_i$.
+
+
+Thus, 
+
+$$
+\frac{\partial f(\bx)}{\partial x_k} = v_k + u_k.
+$$
+
+Putting together the partial derivatives, we obtain:
+
+$$
+\nabla f(\bx) = \bv + \bu = \bA^T \bx + \bA \bx 
+= (\bA^T  + \bA) \bx
+= (\bA  + \bA^T) \bx.
+$$
+
+If $\bA$ is symmetric then,
+
+$$
+\nabla f(\bx) =  2 \bA \bx.
+$$
+```
+
+```{prf:example} Gradient of quadratic functional
+:label: ex-mvc-gradient-quadratic-functional
+
+Let $\bP \in \SS^n$ be a symmetric matrix. 
+Let $\bq \in \RR^n$ and $r \in \RR$. 
+Consider the quadratic functional $f: \RR^n \to \RR$ given as:
+
+$$
+f(\bx) = \frac{1}{2} \bx^T \bP \bx + \bq^T \bx + r.
+$$
+
+We can compute the gradient as follows:
+
+$$
+\nabla f(\bx) 
+&= \nabla \left( \frac{1}{2} \bx^T \bP \bx + \bq^T \bx + r \right )\\
+&= \frac{1}{2} \nabla (\bx^T \bP \bx) + \nabla (\bq^T \bx)  + \nabla r \\
+&= \frac{1}{2} (\bP + \bP^T) \bx + \bq \\
+&= \frac{1}{2} (\bP + \bP) \bx + \bq\\
+&= \bP \bx + \bq.
+$$
+* We took advantage of the fact that gradient operation commutes with
+  scalar multiplication and distributes on vector addition.
+* Since $r$ is a constant, it has no contribution to the derivative.
+* We reused results from previous examples.
+* We utilized the fact that $\bP = \bP^T$ since $\bP$ is symmetric.
+
+In summary:
+
+$$
+\nabla f(\bx) 
+= \bP \bx + \bq.
+$$
+
+The derivative of $f$ is then obtained by taking the transpose of the gradient:
+
+$$
+Df (\bx) = \bx^T \bP + \bq^T.
+$$
+```
+
 ````{prf:definition} First order approximation of real valued functions
 :label: def-mvc-first-order-approx-real
 
@@ -126,28 +393,6 @@ a real valued function $f$ at $\bx=\ba \in \interior \dom f$.
 ````
 
 
-```{prf:example} Quadratic functional
-
-Let $\bP \in \SS^n$ be a symmetric matrix. 
-Let $\bq \in \RR^n$ and $r \in \RR$. 
-Consider the quadratic functional $f: \RR^n \to \RR$ given as:
-
-$$
-f(\bx) = \frac{1}{2} \bx^T \bP \bx + \bq^T \bx + r.
-$$
-
-The derivative of $f$ is given by:
-
-$$
-Df (\bx) = \bx^T \bP + \bq^T.
-$$
-
-The gradient is given by:
-
-$$
-\nabla f(\bx) = \bP \bx + \bq.
-$$
-```
 
 ```{prf:definition} Gradient mapping
 If a real valued function $f: \RR^n \to \RR$ 
@@ -183,7 +428,7 @@ matrix multiplication.
 
 
 ```{prf:corollary} Chain rule for real valued functions
-:label: res-mvc-chain-rule
+:label: res-mvc-chain-rule-real
 
 Suppose $f : \RR^n \to \RR$ is differentiable
 at $\bx \in \interior \dom f$ and $g : \RR \to \RR$
@@ -203,7 +448,7 @@ $$
 ```
 
 ```{prf:corollary} Chain rule for composition with affine function
-:label: res-mvc-chain-rule
+:label: res-mvc-chain-rule-affine-composition
 
 Suppose $f : \RR^n \to \RR^m$ is differentiable.
 Let $\bA \in \RR^{n \times p}$ and $\bb \in \RR^n$.
@@ -292,6 +537,125 @@ $\nabla^2 f$, is given by:
 provided $f$ is twice differentiable at $\bx$.
 ````
 
+```{prf:example} Hessian of linear functional
+:label: ex-mvc-hessian-linear-functional
+
+Let $f : \RR^n \to \RR$ be a linear functional given by:
+
+$$
+f(\bx) = \langle \bx, \ba \rangle = \ba^T \bx.
+$$
+
+We can expand it as:
+
+$$
+f(\bx) = \sum_{j=1}^n a_j x_j.
+$$
+
+Computing partial derivative with respect to $x_i$, we get:
+
+$$
+\frac{\partial f(\bx)}{\partial x_i} 
+= \frac{\partial }{\partial x_i}\left (\sum_{j=1}^n a_j x_j \right )
+= a_i.
+$$
+
+If we further compute the partial derivative w.r.t. $x_j$, we get:
+
+$$
+\frac{\partial^2 f(\bx)}{\partial x_i \partial x_j} 
+= \frac{\partial a_i}{\partial x_j}
+= 0.
+$$
+
+Thus, the Hessian is an $n \times n$ 0 matrix:
+
+$$
+\nabla^2 f(\bx) = \ZERO_n.
+$$
+```
+
+```{prf:theorem} 
+:label: res-mvc-hessian-derivative-gradient
+
+Hessian is the derivative of the gradient mapping.
+
+$$
+D \nabla f(\bx) = \nabla^2 f(\bx).
+$$
+```
+
+```{prf:example} Hessian of quadratic form
+:label: ex-mvc-hessian-quadratic-form
+
+Let $f : \RR^n \to \RR$ be a quadratic form given by:
+
+$$
+f(\bx) = \bx^T \bA \bx
+$$
+where $\bA \in \RR^{n \times n}$.
+
+Recall from {prf:ref}`ex-mvc-gradient-quadratic-form`
+that:
+
+$$
+\nabla f(\bx)  = (\bA^T  + \bA) \bx.
+$$
+
+Also recall from {prf:ref}`ex-mvc-derivative-linear-map`
+that 
+
+$$
+D (\bC \bx) = \bC 
+$$
+for all $\bC \in \RR^{m \times n}$.
+
+Thus, using {prf:ref}`res-mvc-hessian-derivative-gradient`
+
+$$
+\nabla^2 f(\bx)  
+= D \nabla f(\bx) 
+= D ((\bA^T  + \bA) \bx)
+= \bA^T  + \bA.
+$$
+
+If $\bA$ is symmetric then
+
+
+$$
+\nabla^2 f(\bx) = 2 \bA.
+$$
+```
+
+```{prf:example} Derivatives for least squares cost function
+:label: ex-mvc-derivatives-ls-cost-func
+
+Let $\bA \in \RR^{m \times n}$. Let $\bb \in \RR^n$.
+Consider the least squares cost function:
+
+$$
+f(\bx) = \frac{1}{2} \| \bA \bx - \bb \|_2^2.  
+$$
+
+Expanding it, we get:
+
+$$
+f(\bx) = \frac{1}{2} \bx^T \bA^T \bA \bx - \bb^T \bA \bx + \frac{1}{2} \bb^T \bb. 
+$$
+
+Note that $\bA^T \bA$ is symmetric. Using previous results,
+we obtain the gradient:
+
+$$
+\nabla f(\bx) = \bA^T \bA \bx - \bA^T \bb.
+$$
+
+And the Hessian is:
+
+$$
+\nabla^ f(\bx) = D \nabla f (\bx) = \bA^T \bA.
+$$
+```
 
 ````{prf:definition} Second order approximation
 :label: def-mvp-snd-ord-approx
