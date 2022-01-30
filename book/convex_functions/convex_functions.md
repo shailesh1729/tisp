@@ -532,4 +532,155 @@ The statement is obvious. And quite powerful.
 Let us look at the special case of 
 real valued functions over $\RR^n$.
 
- 
+````{prf:theorem} First order characterization of convexity
+Let $f : \RR^n \to \RR$ be a real valued function
+which is {prf:ref}`differentiable <def-mvc-differentiable-function>`
+at each point in $\dom f$ which is open.
+
+Then $f$ is convex if and only if $\dom f$ is convex
+and 
+
+```{math}
+:label: eq-cvxf-first-order-convexity-condition
+f(\by) \geq f(\bx) + \nabla f(\bx)^T (\by - \bx)
+```
+holds true for all $\bx, \by \in \dom f$.
+````
+
+
+```{prf:proof}
+To prove {eq}`eq-cvxf-first-order-convexity-condition`,
+we first show that a differentiable real function $f: \RR \to \RR$
+is convex if and only if  
+
+$$
+f(y) \geq f(x) + f'(x)(y - x)
+$$
+holds true for all $x, y \in \dom f$.
+
+
+Assume that $f$ is convex. Hence, $\dom f$ is convex too.
+
+1. Let $x,y \in \dom f$.
+1. Since $\dom f$ is convex, hence 
+   $ (1-t) x + t y = x + t(y-x) \in \dom f$ for all $t \in [0, 1]$.
+1. By convexity of $f$, we have:
+
+   $$
+   f(x + t(y-x)) \leq (1-t) f(x) + t f(y).
+   $$
+1. If we divide by $t$ on both sides, we obtain:
+
+   $$
+   f(y) \geq f(x) + \frac{f(x + t(y-x)) - f(x)}{t}.
+   $$
+1. Taking the limit as $t \to 0^+$, we obtain:
+
+   $$
+   f(y) \geq f(x) + f'(x)(y-x).
+   $$
+
+For the converse, assume that $\dom f$ is convex and
+
+$$
+f(y) \geq f(x) + f'(x)(y - x)
+$$
+holds true for all $x, y \in \dom f$.
+
+1. Recall that in $\RR$ the only convex sets are 
+   intervals. Thus, $\dom f$ is an open interval.
+1. Choose any $x, y \in \dom f$ such that $x \neq y$.
+1. Choose $t \in [0,1]$.
+1. Let $z = t x + (1-t)y$.
+1. By hypothesis, we have:
+   
+   $$
+   f(x) \geq f(z) + f'(z) (x - z)
+   $$
+   and
+
+   $$
+   f(y) \geq f(z) + f'(z) (y - z).
+   $$
+1. Multiplying the first inequality with $t$ and second
+   with $(1-t)$ and adding them yields:
+   
+   $$
+   t f(x) + (1-t) f(y) \geq f(z) = f(tx + (1-t)y).
+   $$
+1. Thus, $f$ is convex.
+
+
+We now prove for the general case with $f : \RR^n \to \RR$.
+Recall from {prf:ref}`res-cvxf-convx-on-lines`
+that for any $\bx, \by \in \dom f$ 
+the restriction of $f$ on the line passing through $\bx$ and $\by$
+is given by:
+
+$$
+g(t) = f(t\by + (1-t) \bx) = f(\bx + t(\by - \bx)).
+$$
+
+Note that, by chain rule ({prf:ref}`ex-f-rest-line-chain-rule`):
+
+$$
+g'(t) = \nabla f(t\by + (1-t) \bx)^T (\by - \bx)
+$$
+
+Assume $f$ is convex.
+1. Let $\bx, \by \in \dom f$ such that $\bx \neq \by$.
+1. Let $g$ be the restriction of $f$ on the line passing through
+   $\bx, \by$ as described above.
+1. Due to {prf:ref}`res-cvxf-convx-on-lines`, $g$ is convex.
+1. By the argument for real functions above:
+
+   $$
+   g(t') \geq g(t) + g'(t)(t' - t)
+   $$
+   holds true for all $t, t' \in \dom g$.
+1. In particular, with $t'=1$ and $t=0$, we have:
+
+   $$
+   g(1) \geq g(0) + g'(0).
+   $$
+1. But $g'(0) = \nabla f(\bx)^T (\by - \bx)$.
+1. Also, $g(1) = f(\by)$ and $g(0) = f(\bx)$.
+1. Thus, we get:
+
+   $$
+   f(\by) \geq f(\bx) + \nabla f(\bx)^T (\by - \bx)
+   $$
+   as desired.
+
+
+For the converse, assume that this inequality holds
+for all $\bx, \by \in \dom f$ and $\dom f$ is convex.
+
+1. Pick some $\bx, \by \in \dom f$ with $\bx \neq \by$.
+1. Let $g$ be the restriction of $f$ on the line passing through
+   $\bx, \by$ as described above.
+1. Pick $t_1, t_2 \in \dom g$.
+1. Then, $\bz_1 = t_1\by + (1-t_1) \bx$ and 
+   $\bz_2 = t_2\by + (1-t_2) \bx$
+   are in $\dom f$.
+1. Consider $g(t_1) = f(t_1\by + (1-t_1) \bx) = f(\bz_1)$
+   and $g(t_2) = f(t_2\by + (1-2_1) \bx) = f(\bz_2)$.
+1. Note that $g'(t_2) =  \nabla f(t_2\by + (1-t_2) \bx)^T (\by - \bx) = \nabla f(\bz_2)^T (\by - \bx)$.
+1. By hypothesis, we have:
+
+   $$
+   f(\bz_1) \geq f(\bz_2) + \nabla f(\bz_2)^T (\bz_1 - \bz_2).
+   $$
+1. But $\bz_1  - \bz_2 = (t_1 - t_2) (\by - \bx)$.
+1. Thus, we get:
+
+   $$
+   g'(t_1) \geq g'(t_2) + g'(t_2)(t_1 - t_2).
+   $$
+1. This holds for every $t_1, t_2 \in \dom g$.
+1. But then, $g$ is convex by previous argument for
+   real functions.
+1. Since this is valid for every restriction of $f$ 
+   to a line passing through its domain, hence
+   by {prf:ref}`res-cvxf-convx-on-lines` $f$ is convex.
+```
