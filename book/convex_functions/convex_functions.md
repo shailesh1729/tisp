@@ -530,9 +530,12 @@ The statement is obvious. And quite powerful.
 ## First Order Conditions
 
 Let us look at the special case of 
-real valued functions over $\RR^n$.
+real valued functions over $\RR^n$ 
+which are differentiable.
 
 ````{prf:theorem} First order characterization of convexity
+:label: res-cvxf-gradient-convexity-relation
+
 Let $f : \RR^n \to \RR$ be a real valued function
 which is {prf:ref}`differentiable <def-mvc-differentiable-function>`
 at each point in $\dom f$ which is open.
@@ -684,3 +687,87 @@ for all $\bx, \by \in \dom f$ and $\dom f$ is convex.
    to a line passing through its domain, hence
    by {prf:ref}`res-cvxf-convx-on-lines` $f$ is convex.
 ```
+
+
+## Second Order Conditions
+
+We continue further with 
+real valued functions over $\RR^n$ 
+which are twice differentiable.
+
+```{prf:theorem} Second order characterization of convexity
+:label: res-cvxf-hessian-convexity-relation
+
+Let $f : \RR^n \to \RR$ be twice differentiable;
+i.e., its {prf:ref}`Hessian <def-mvp-hessian>`
+or second derivative $\nabla^2 f$ exists 
+at every point in $\dom f$ which is open.
+
+Then, $f$ is convex if and only if
+$\dom f$ is convex and its Hessian is positive semidefinite
+for every $\bx \in \dom f$:
+
+$$
+\nabla^2 f(\bx) \succeq \ZERO \quad \Forall \bx \in \dom f.
+$$ 
+```
+
+For real functions, the Hessian is simply the
+second derivative $f''$.
+
+```{prf:corollary} Convexity characterization for twice differentiable real functions
+:label: res-cvxf-2nd-derivative-convexity-relation
+
+Let $f : \RR \to \RR$ be twice differentiable;
+i.e., second derivative $f''$ exists 
+at every point in $\dom f$ which is open.
+
+Then, $f$ is convex if and only if
+$\dom f$ is an interval and its second derivative is non-negative
+for every $x \in \dom f$:
+
+$$
+f''(x) \geq 0 \quad \Forall x \in \dom f.
+$$ 
+```
+
+
+
+```{prf:corollary} Second order characterization of concavity
+:label: res-cvxf-hessian-concavity-relation
+
+Let $f : \RR^n \to \RR$ be twice differentiable;
+
+Then, $f$ is concave if and only if
+$\dom f$ is convex and its Hessian is negative semidefinite
+for every $\bx \in \dom f$:
+
+$$
+\nabla^2 f(\bx) \preceq \ZERO \quad \Forall \bx \in \dom f.
+$$ 
+```
+
+
+```{prf:example} Convexity of a quadratic function
+:label: ex-cvxf-quadratic-func-convexity
+
+Let $\bP \in \SS^n$ be a symmetric matrix. 
+Let $\bq \in \RR^n$ and $r \in \RR$. 
+Consider the quadratic functional $f: \RR^n \to \RR$ given as:
+
+$$
+f(\bx) = \frac{1}{2} \bx^T \bP \bx + \bq^T \bx + r.
+$$
+
+As shown in {prf:ref}`ex-mvc-hessian-quadratic-form`, 
+the Hessian of $f$ is:
+
+$$
+\nabla^2 f (\bx) = \bP \quad \Forall \bx \in \RR^n.
+$$
+Thus, $f$ is convex if and only if $\bP \succeq \ZERO$ 
+(i.e., it is positive semidefinite).
+
+In fact $f$ is strictly convex if and only if $P \succ \ZERO$.
+```
+
