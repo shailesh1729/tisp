@@ -112,6 +112,8 @@ by simply interchanging $p$ with $q$.
 ## Cauchy Inequality
 
 ```{prf:theorem} Cauchy inequality
+:label: res-bra-cauchy-inequality
+
 $$
 2 a b \leq a^2 + b^2.
 $$
@@ -276,4 +278,147 @@ $$
 \left ( \sum_{k=1}^n b_k^q \right )^{\frac{1}{q}}
 $$
 as desired.
+```
+
+
+## AM-GM Inequalities
+These inequalities establish relationship between
+arithmetic mean and geometric mean of a set of
+nonnegative real numbers.
+
+We start with the simplest one.
+
+```{prf:theorem} AM-GM inequality for two numbers
+:label: res-bra-am-gm-inequality-2
+
+Let $a,b \geq 0$. Then
+
+$$
+\sqrt{a b} \leq \frac{a + b}{2}.
+$$
+```
+
+```{prf:proof}
+We proceed as follows:
+
+$$
+& (a - b)^2 \geq 0\\
+& \iff a^2 -2 a b + b^2 \geq 0 \\
+& \iff 2 a b \leq a^2 + b^2\\
+& \iff 4 a b \leq a^2 + b^2 + 2 ab\\
+& \iff 4 a b \leq (a + b)^2 \\
+& \iff ab \leq \left (\frac{a + b}{2} \right )^2\\
+& \iff \sqrt{ab} \leq \frac{a + b}{2}.
+$$
+```
+
+
+```{prf:theorem} Unweighted AM-GM inequality
+:label: res-bra-unweighted-am-gm-inequality
+
+Let $a_1,a_2,\dots, a_n \geq 0$. Then
+
+$$
+\left (\prod_{i=1}^n a_i \right )^{\frac{1}{n}} \leq 
+\frac{1}{n} \left ( \sum_{i=1}^n a_i \right ).
+$$
+```
+
+
+```{prf:proof}
+If any of the numbers is 0, then the geometric mean is 0
+and the inequality is satisfied trivially.
+Thus, we shall assume that all numbers are positive. 
+
+We prove this by Cauchy induction.
+1. The base case for $n=2$ is proved in 
+   {prf:ref}`res-bra-am-gm-inequality-2` above.
+1. We show that if the inequality is true for some $n$,
+   then it is also true for $2n$.
+1. We then show that if the inequality is true for some $n$,
+   then it is true for $n-1$ too.
+1. Then, by principle of Cauchy induction, the proof is complete.
+
+
+$(n) \implies (2n)$
+
+Assume that the inequality holds true for any set of $n$ 
+positive numbers. Now for $2 n$ numbers:
+
+$$
+\frac{a_1 + \dots + a_{2 n}}{2 n} 
+= \frac{ \frac{a_1 + \dots + a_n}{n} + \frac{a_{n+1} + \dots + a_{2 n}}{n} }{2}.
+$$
+
+Since the inequality holds true for $n$, hence:
+
+$$
+\frac{a_1 + \dots + a_n}{n} \geq \sqrt[n]{a_1 \dots a_n}
+\text{ and }
+\frac{a_{n+1} + \dots + a_{2n}}{n} \geq \sqrt[n]{a_{n+1} \dots a_{2 n}}.
+$$ 
+Thus,
+
+$$
+\frac{a_1 + \dots + a_{2 n}}{2 n} 
+\geq \frac{\sqrt[n]{a_1 \dots a_n} + \sqrt[n]{a_{n+1} \dots a_{2 n}}}{2}.
+$$
+The R.H.S. is an arithmetic mean of 2 numbers. 
+Applying {prf:ref}`res-bra-am-gm-inequality-2`:
+
+$$
+\frac{\sqrt[n]{a_1 \dots a_n} + \sqrt[n]{a_{n+1} \dots a_{2 n}}}{2} 
+\geq \sqrt{\sqrt[n]{a_1 \dots a_n} \sqrt[n]{a_{n+1} \dots a_{2 n}}}
+= \sqrt[2n]{a_1 \dots a_{2n}}.
+$$
+
+Combining, we get the desired result:
+
+$$
+\frac{a_1 + \dots + a_{2 n}}{2 n}  \geq \sqrt[2n]{a_1 \dots a_{2n}}.
+$$
+
+
+$(n) \implies (n-1)$
+
+By induction hypothesis, for any $n$ positive numbers, we have:
+
+$$
+\frac{a_1 + \dots + a_n}{n} \geq \sqrt[n]{a_1 \dots a_n}.
+$$
+
+Choose:
+
+$$
+a_n = \frac{a_1 + \dots + a_{n-1}}{n-1}.
+$$
+Then
+
+$$
+\frac{a_1 + \dots + a_n}{n} 
+= \frac{a_1 + \dots + \frac{a_1 + \dots + a_{n-1}}{n-1}}{n}
+= \frac{a_1 + \dots + a_{n-1}}{n-1}.
+$$
+
+Thus, we have:
+
+$$
+\frac{a_1 + \dots + a_{n-1}}{n-1} \geq 
+\sqrt[n]{a_1 \dots a_{n-1} \cdot \frac{a_1 + \dots + a_{n-1}}{n-1} }. 
+$$
+
+Taking $n$-th power on both sides, we get:
+
+$$
+& \left ( \frac{a_1 + \dots + a_{n-1}}{n-1} \right )^n
+\geq a_1 \dots a_{n-1} \cdot \frac{a_1 + \dots + a_{n-1}}{n-1}\\
+& \implies \left ( \frac{a_1 + \dots + a_{n-1}}{n-1} \right )^{n-1}
+ \geq a_1 \dots a_{n-1} \\
+ & \implies \frac{a_1 + \dots + a_{n-1}}{n-1} 
+  \geq \sqrt[n-1]{a_1 \dots a_{n-1}}
+$$
+as desired. The division by $\frac{a_1 + \dots + a_{n-1}}{n-1}$ 
+is valid since it is a positive number. 
+
+By Cauchy induction, the proof is complete.
 ```
