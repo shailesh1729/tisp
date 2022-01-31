@@ -10,6 +10,7 @@ They are also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$
 as needed.
 
 
+## Convexity of a Function
 
 ````{prf:definition} Convex function
 :label: def-convex-function
@@ -112,7 +113,6 @@ i.e. the inner product of $\bx$ with $\ba$ followed by a translation
 by the amount of $b$.
 ```
 
-## Characterization of Convex Functions
 
 ```{prf:theorem} 
 :label: res-cvxf-affine-functional-convex
@@ -150,6 +150,97 @@ f_{\ba, b} (t \bx + (1 - t) \by)
 &= t f_{\ba, b}(\bx) + (1-t) f_{\ba, b} (\by).
 $$
 ```
+
+```{prf:example} Absolute value
+:label: ex-cvxf-real-abs
+
+Let $f : \RR \to \RR$ be:
+
+$$
+f(x) = |x|.
+$$
+with $\dom f = \RR$.
+
+Recall that $|x|$ is a norm on the real line $\RR$. 
+Thus, it satisfies the triangle inequality:
+
+$$
+|x + y | \leq |x | + |y| \Forall x, y \in \RR.
+$$
+
+In particular, for any $t \in [0,1]$
+
+$$
+|t x + (1-t)y | \leq |t x | + | (1- t) y| 
+= |t| | x| + |1 - t| | y |
+= t |x| + (1-t) | y |.
+$$
+
+Thus $f$ satisfies the convexity defining inequality 
+{eq}`eq-convexity-inequality`: 
+
+$$
+f(t x + (1-t) y) \leq t f(x) + (1- t) f(y) \Forall x, y \in \RR.
+$$
+Hence, $f$ is convex.
+```
+
+```{prf:theorem} All norms are convex
+:label: res-cvxf-norms-convex
+
+Let $\| \cdot \| \to \RR$ be a 
+{prf:ref}`norm <def-la-norm>` on a vector space $\VV$.
+Then, it satisfies the triangle inequality:
+
+$$
+\|\bx + \by \| \leq \|\bx \| + \|\by\| \Forall \bx, \by \in \VV.
+$$
+
+In particular, for any $t \in [0,1]$
+
+$$
+\|t \bx + (1-t)\by \| \leq \|t \bx \| + \| (1- t) \by\| 
+= |t| \| \bx \| + |1 - t| \| \by \|
+= t \|\bx \| + (1-t) \| \by \|.
+$$
+
+Thus $f$ satisfies the convexity defining inequality 
+{eq}`eq-convexity-inequality`. 
+Hence, $f$ is convex.
+```
+
+```{prf:example} Max function
+:label: ex-cvxf-euclidean-n-max
+
+Let $f : \RR^n \to \RR$ be:
+
+$$
+f(\bx) = \max \{x_1, \dots, x_n \}.
+$$
+with $\dom f = \RR^n$.
+
+
+Let $\bx, \by \in \RR^n$ and $t \in [0,1]$.
+
+1. Let $x = f(\bx) = \max \{ x_1, \dots, x_n \}$ and $y =  f(\by) = \max \{ y_1, \dots, y_n\}$.
+1. Then, for every $k=1,\dots,n$, we have: $x_k \leq x$ and $y_k \leq y$.
+1. Thus, $t x_k + (1-t) y_k \leq t x + (1-t) y$.
+1. Taking maximum on the left hand side, we obtain:
+
+   $$
+   \max_{k=1}^n (t x_k + (1-t) y_k) \leq t x  + (1-t) y.
+   $$
+1. But $f(t \bx + (1-t) \by ) = \max_{k=1}^n (t x_k + (1-t) y_k)$.
+1. Thus, $f$ satisfies the convexity defining
+   inequality {eq}`eq-convexity-inequality`:
+
+   $$
+   f(t \bx + (1-t) \by ) \leq t f(\bx) + (1-t) f(\by).
+   $$
+1. Thus, $f$ is convex.
+```
+
+## Characterization of Convex Functions
 
 ### Convexity on lines in domain
 
@@ -343,6 +434,7 @@ as the projection is a linear operation.
 
 
 
+
 ## Extended Value Extensions
 Tracking domains of convex functions is difficult.
 It is often convenient to extend a convex function
@@ -490,12 +582,11 @@ naturally.
 ```{prf:definition} Indicator function
 :label: def-cvxf-indicator-function
 
-Let $C \subseteq \VV$ be convex. Then, its 
+Let $C \subseteq \VV$. Then, its 
 *indicator function* is given by
 $I_C(\bx) = 0 \Forall \bx \in C$. 
 Here, $\dom I_C = C$.
 
-The indicator function is convex.
 The extended value extension of an indicator
 function is given by:
 
@@ -505,6 +596,27 @@ $$
 \infty & \text{for} & \bx \notin C.
 \end{cases}
 $$
+```
+
+```{prf:theorem} Indicator functions and convexity
+:label: res-cvxf-indicator-func-convex-set
+
+An indicator function is convex if and only if its domain is a convex set.
+```
+
+```{prf:proof}
+Let $C$ be convex. Let $I_C$ be its indicator function. 
+Let $\bx, \by \in C$. Then, for any $t \in [0,1]$
+
+$$
+I_C(t \bx + (1-t) \by) = 0 \leq t I_C(\bx) + (1-t) I_C(\bx) = 0.
+$$
+since $t \bx + (1-t) \by \in C$ as $C$ is convex. 
+
+Thus, $I_C$ is convex.
+
+If $C$ is not convex, then $\dom I_C$ is not convex.
+Hence, $I_C$ is not convex.
 ```
 
 
@@ -524,8 +636,6 @@ The statement is obvious. And quite powerful.
 
 * The problem of minimizing a function $f$ over a set $C$
   is same as minimizing $f + I_C$ over $\VV$.
-
-
 
 ## First Order Conditions
 
@@ -771,3 +881,222 @@ Thus, $f$ is convex if and only if $\bP \succeq \ZERO$
 In fact $f$ is strictly convex if and only if $P \succ \ZERO$.
 ```
 
+```{prf:example} Identity
+:label: ex-cvxf-real-identity
+
+Let $f : \RR \to \RR$ be:
+
+$$
+f(x) = x.
+$$
+
+We have $f'(x) = 1$ and $f''(x) = 0$.
+
+$f$ is both convex and concave. 
+```
+
+```{prf:example} Exponential
+:label: ex-cvxf-real-exponential
+
+Let $f : \RR \to \RR$ be:
+
+$$
+f(x) = e^{ax}
+$$
+with $\dom f = \RR$.
+
+We have $f'(x) = a e^{ax}$ and $f''(x) = a^2 e^{ax}$. 
+
+For any $a,x \in \RR$, $a^2 e^{ax} > 0$. 
+Thus, $f$ is strictly convex.
+```
+
+
+
+```{prf:example} Powers
+:label: ex-cvxf-real-power-x-a
+
+
+Let $f : \RR \to \RR$ be:
+
+$$
+f(x) = x^a
+$$
+with $\dom f = \RR_{++}$.
+
+Now, $f'(x) = a x^{a-1}$ and $f''(x) = a (a - 1) x^{a-2}$.
+
+1. We have $x > 0$.
+1. For $a \geq 1$, $f''(x) \geq 0$. 
+   $f$ is convex for $a \geq 1$.
+1. For $a \leq 0$, $a (a -1) \geq 0$. 
+   Thus, $f''(x) \geq 0$. $f$ is convex for $a \leq 0$.
+1. For $0 \leq a \leq 1$, $a (a-1) \leq 0$. Thus, $f''(x) \leq 0$. 
+   $f$ is concave on $0 \leq a \leq 1$.
+```
+
+
+```{prf:example} Powers of absolute value
+:label: ex-cvxf-real-power-absolute-x-a
+
+
+Let $f : \RR \to \RR$ be:
+
+$$
+f(x) = |x|^a
+$$
+with $\dom f = \RR_{++}$.
+```
+
+```{prf:example} Reciprocal powers
+:label: ex-cvxf-real-reciprocal-power-x-r
+
+Let $f : \RR \to \RR$ be:
+
+$$
+f(x) = \frac{1}{x^r} = x^{-r}.
+$$
+with $\dom f = \RR_{++}$.
+
+Now, $f'(x) = (-r) x^{-r-1}$ and $f''(x) = (-r)(-r - 1) x^{-r-2} = r(r+1) x^{-(r+2)}$.
+
+1. We have $x > 0$.
+1. For $r \geq 0$, $f''(x) \geq 0$. 
+   $f$ is convex for $r \geq 0$.
+```
+
+
+```{prf:example} Logarithm
+:label: ex-cvxf-real-logarithm
+
+Let $f : \RR \to \RR$ be:
+
+$$
+f(x) = \ln x.
+$$
+with $\dom f = \RR_{++}$.
+
+Now, $f'(x) = \frac{1}{x}$ and $f''(x) = \frac{-1}{x^2}$.
+
+1. $f''(x) < 0$ for all $x > 0$.
+1. Thus, $f$ is concave for all $x > 0$.
+```
+
+
+```{prf:example} Negative entropy
+:label: ex-cvxf-real-negative-entropy
+
+Let $f : \RR \to \RR$ be:
+
+$$
+f(x) = x \ln x.
+$$
+with $\dom f = \RR_{++}$.
+
+Now, $f'(x) = \ln x + 1$ and $f''(x) = \frac{1}{x}$.
+
+1. $f''(x) > 0$ for all $x > 0$.
+1. Thus, $f$ is convex for all $x > 0$.
+```
+
+```{prf:example} Quadratic over linear form
+:label: ex-cvxf-r-r-quad-lin
+
+Let $f : \RR \times \RR \to \RR$ be given by:
+
+$$
+f(x, y) = \frac{x^2}{y}
+$$
+with $\dom f = \{ (x, y) \ST y > 0\}$.
+
+From {prf:ref}`ex-mvc-derivatives-quad-lin-func`, 
+the Hessian is:
+
+
+$$
+\nabla^2 f(x, y) = 
+\frac{2}{y^3} \begin{bmatrix}
+y^2 & - x y\\
+- x y & x^2
+\end{bmatrix}
+= \frac{2}{y^3} 
+\begin{bmatrix} y\\ - x \end{bmatrix}
+\begin{bmatrix} y\\ - x \end{bmatrix}^T .
+$$
+
+Recall that for any $\bx \in \RR^n$, the matrix $\bx \bx^T$
+is positive semi-definite. 
+Hence,
+
+$$
+\begin{bmatrix} y\\ - x \end{bmatrix}
+\begin{bmatrix} y\\ - x \end{bmatrix}^T
+$$
+is positive semi-definite.
+
+For $y > 0$, $\frac{2}{y^3} > 0$. Combining:
+
+$$
+\nabla^2 f(x, y) \succeq \ZERO.
+$$
+
+Thus, $f$ is convex.
+```
+
+
+```{prf:example} Log sum exponential
+:label: ex-cvxf-log-sum-exp
+
+Let $f : \RR^n \to \RR$ be given by:
+
+$$
+f(\bx) = \ln \left ( \sum_{i=1}^n e^{x_i} \right )
+$$
+with $\dom f = \RR^n$.
+
+From {prf:ref}`ex-mvc-hessian-log-sum-exp`, we have
+
+$$
+\nabla^2 f(\bx) = \frac{1}{(\bone^T \bz)^2} \left ((\bone^T \bz) \Diag (\bz) - \bz \bz^T \right )
+$$
+
+where 
+
+$$
+\bz = \begin{bmatrix}
+e^{x_1} \\ 
+\vdots \\
+e^{x_n}
+\end{bmatrix}.
+$$
+
+To show that $\nabla^2 f(\bx)$ is p.s.d., it suffices to
+show that $(\bone^T \bz) \Diag (\bz) - \bz \bz^T$ is p.s.d..
+
+Now for any $\bv \in \RR^n$. 
+
+$$
+&\bv^T \left ( (\bone^T \bz) \Diag (\bz) - \bz \bz^T \right ) \bv\\
+&= (\bone^T \bz) (\bv^T \Diag (\bz) \bv) - \bv^T  \bz \bz^T \bv \\
+&= (\bone^T \bz) (\bv^T \Diag (\bz) \bv) - (\bv^T  \bz)^2 \\
+&= \left (\sum_{i=1}^n z_i \right ) 
+\left (\sum_{i=1}^n v_i^2 z_i \right)
+- \left (\sum_{i=1}^n v_i z_i \right )^2.
+$$
+
+If we define vectors $\ba$ and $\bb$ with
+$a_i  = v_i \sqrt{z_i}$ and $b_i = \sqrt{z_i}$,
+then by 
+{prf:ref}`Cauchy-Schwartz inequality <res-la-ip-cauchy-chwartz-inequality>`
+, we have:
+
+$$
+(\ba^T \ba)(\bb^T \bb) \geq (\ba^T \bb)^2
+\iff (\ba^T \ba)(\bb^T \bb) - (\ba^T \bb)^2 \geq 0.
+$$
+
+But this is exactly the expression above.
+Thus, $\nabla^2 f(\bx) \succeq \ZERO$.
+
+Hence, $f$ is convex.
+```
