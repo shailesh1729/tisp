@@ -151,7 +151,7 @@ f_{\ba, b} (t \bx + (1 - t) \by)
 $$
 ```
 
-```{prf:example} Absolute value
+```{prf:example} Absolute value is convex
 :label: ex-cvxf-real-abs
 
 Let $f : \RR \to \RR$ be:
@@ -209,7 +209,7 @@ Thus $f$ satisfies the convexity defining inequality
 Hence, $f$ is convex.
 ```
 
-```{prf:example} Max function
+```{prf:example} Max function is convex
 :label: ex-cvxf-euclidean-n-max
 
 Let $f : \RR^n \to \RR$ be:
@@ -881,7 +881,7 @@ Thus, $f$ is convex if and only if $\bP \succeq \ZERO$
 In fact $f$ is strictly convex if and only if $P \succ \ZERO$.
 ```
 
-```{prf:example} Identity
+```{prf:example} Identity is convex and concave
 :label: ex-cvxf-real-identity
 
 Let $f : \RR \to \RR$ be:
@@ -895,7 +895,7 @@ We have $f'(x) = 1$ and $f''(x) = 0$.
 $f$ is both convex and concave. 
 ```
 
-```{prf:example} Exponential
+```{prf:example} Exponential is convex
 :label: ex-cvxf-real-exponential
 
 Let $f : \RR \to \RR$ be:
@@ -966,7 +966,7 @@ Now, $f'(x) = (-r) x^{-r-1}$ and $f''(x) = (-r)(-r - 1) x^{-r-2} = r(r+1) x^{-(r
 ```
 
 
-```{prf:example} Logarithm
+```{prf:example} Logarithm is concave
 :label: ex-cvxf-real-logarithm
 
 Let $f : \RR \to \RR$ be:
@@ -983,7 +983,7 @@ Now, $f'(x) = \frac{1}{x}$ and $f''(x) = \frac{-1}{x^2}$.
 ```
 
 
-```{prf:example} Negative entropy
+```{prf:example} Negative entropy is convex
 :label: ex-cvxf-real-negative-entropy
 
 Let $f : \RR \to \RR$ be:
@@ -999,7 +999,7 @@ Now, $f'(x) = \ln x + 1$ and $f''(x) = \frac{1}{x}$.
 1. Thus, $f$ is convex for all $x > 0$.
 ```
 
-```{prf:example} Quadratic over linear form
+```{prf:example} Quadratic over linear form is convex
 :label: ex-cvxf-r-r-quad-lin
 
 Let $f : \RR \times \RR \to \RR$ be given by:
@@ -1044,7 +1044,7 @@ Thus, $f$ is convex.
 ```
 
 
-```{prf:example} Log sum exponential
+```{prf:example} Log sum exponential is convex
 :label: ex-cvxf-log-sum-exp
 
 Let $f : \RR^n \to \RR$ be given by:
