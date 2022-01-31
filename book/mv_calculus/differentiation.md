@@ -447,6 +447,65 @@ $$
 $$
 ```
 
+```{prf:example} Gradient of log-sum-exp
+:label: ex-mvc-gradient-log-sum-exp
+
+Let $h : \RR^n \to \RR$ be given by:
+
+$$
+h(\bx) = \ln \left ( \sum_{i=1}^n \exp x_i \right )
+$$
+with $\dom h = \RR^n$.
+
+Let $g(y) = \ln y$ and 
+
+$$
+f(\bx) = \sum_{i=1}^n \exp x_i
+$$
+
+Then, we can see that $h(\bx) = g (f (\bx))$.
+Now $g'(y) = \frac{1}{y}$ and
+
+$$
+\nabla f(\bx) = \begin{bmatrix}
+\exp x_1 \\ 
+\vdots \\
+\exp x_n
+\end{bmatrix}.
+$$
+
+Thus,
+
+$$
+\nabla h(\bx) = \frac{1}{\sum_{i=1}^n \exp x_i} 
+\begin{bmatrix}
+\exp x_1 \\ 
+\vdots \\
+\exp x_n
+\end{bmatrix}.
+$$
+
+Now, if we define 
+
+$$
+\bz = \begin{bmatrix}
+\exp x_1 \\ 
+\vdots \\
+\exp x_n
+\end{bmatrix}
+$$
+then, we see that:
+
+$$
+\bone^T \bz = \sum_{i=1}^n \exp x_i.
+$$
+Using this notation:
+
+$$
+\nabla h(\bx) = \frac{1}{\bone^T \bz} \bz.
+$$
+```
+
 ```{prf:corollary} Chain rule for composition with affine function
 :label: res-mvc-chain-rule-affine-composition
 
@@ -627,6 +686,84 @@ $$
 $$
 ```
 
+
+
+```{prf:example} Hessian of log-sum-exp
+:label: ex-mvc-hessian-log-sum-exp
+
+Let $f : \RR^n \to \RR$ be given by:
+
+$$
+f(\bx) = \ln \left ( \sum_{i=1}^n e^{x_i} \right )
+$$
+with $\dom f = \RR^n$.
+
+Define 
+
+$$
+\bz = \begin{bmatrix}
+e^{x_1} \\ 
+\vdots \\
+e^{x_n}
+\end{bmatrix}
+$$
+then, we see that:
+
+$$
+\bone^T \bz = \sum_{i=1}^n e^{x_i}.
+$$
+Using this notation:
+
+$$
+f(\bx) = \ln \left (\bone^T \bz \right).
+$$
+
+We have:
+
+$$
+\frac{\partial z_i}{\partial x_i} 
+= \frac{\partial}{\partial x_i} e^{x_i}
+= e^{x_i} = z_i.
+$$
+$\frac{\partial z_j}{\partial x_i} = 0$ for $i \neq j$. 
+Now,
+
+$$
+\frac{\partial }{\partial x_i} f(\bx)
+&= \frac{\partial}{\partial z_i} \ln \left (\bone^T \bz \right) \cdot \frac{\partial z_i}{\partial x_i} \\
+&= \frac{1}{\bone^T \bz}\frac{\partial}{\partial z_i} \bone^T \bz \cdot z_i \\
+&= \frac{1}{\bone^T \bz} z_i.
+$$
+
+Proceeding to compute the second derivatives:
+
+$$
+\frac{\partial^2 }{\partial x_i \partial x_j} f(\bx)
+&= \frac{\partial }{\partial x_i} \left (\frac{1}{\bone^T \bz} z_j \right )\\
+&= \frac{\partial }{\partial z_i} \left (\frac{1}{\bone^T \bz} z_j \right ) \cdot \frac{\partial z_i}{\partial x_i} \\
+&= \frac{\bone^T \bz \delta_{i j} - z_j}{(\bone^T \bz)^2} \cdot z_i\\
+&= \frac{\bone^T \bz \delta_{i j} z_i - z_i z_j}{(\bone^T \bz)^2}\\
+&=\frac{\delta_{i j} z_i}{\bone^T \bz} - \frac{z_i z_j}{(\bone^T \bz)^2}.
+$$
+
+Now, note that $(\bz \bz^T)_{i j} = z_i z_j$.
+And, $(\Diag (\bz))_{i j} = \delta_{ i j} z_i $. 
+
+Thus,
+
+$$
+\nabla^2 f(\bx) = \frac{1}{\bone^T \bz} \Diag (\bz) - \frac{1}{(\bone^T \bz)^2} \bz \bz^T.
+$$
+
+Alternatively,
+
+$$
+\nabla^2 f(\bx) = \frac{1}{(\bone^T \bz)^2} \left ((\bone^T \bz) \Diag (\bz) - \bz \bz^T \right ).
+$$
+
+```
+
+
 ```{prf:example} Derivatives for least squares cost function
 :label: ex-mvc-derivatives-ls-cost-func
 
@@ -653,9 +790,46 @@ $$
 And the Hessian is:
 
 $$
-\nabla^ f(\bx) = D \nabla f (\bx) = \bA^T \bA.
+\nabla^2 f(\bx) = D \nabla f (\bx) = \bA^T \bA.
 $$
 ```
+
+```{prf:example} Derivatives for quadratic over linear function
+:label: ex-mvc-derivatives-quad-lin-func
+
+Let $f : \RR \times \RR \to \RR$ be given by:
+
+$$
+f(x, y) = \frac{x^2}{y}
+$$
+with $\dom f = \{ (x, y) \ST y > 0\}$.
+
+The gradient is obtained by computing the partial derivatives
+w.r.t. $x$ and $y$:
+
+$$
+\nabla f(x,y) = \begin{bmatrix}
+\frac{2x}{y}\\
+\frac{-x^2}{y^2}
+\end{bmatrix}.
+$$
+
+The Hessian is obtained by computing second order partial
+derivatives:
+
+$$
+\nabla^2 f(x, y) = \begin{bmatrix}
+\frac{2}{y} & \frac{-2 x}{y^2}\\
+\frac{-2 x}{y^2} & \frac{2 x^2}{y^3} 
+\end{bmatrix}
+= \frac{2}{y^3} \begin{bmatrix}
+y^2 & - x y\\
+- x y & x^2
+\end{bmatrix}.
+$$
+```
+
+
 
 ````{prf:definition} Second order approximation
 :label: def-mvp-snd-ord-approx
