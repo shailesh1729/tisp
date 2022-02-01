@@ -64,6 +64,8 @@ strictly convex.
 ```
 
 ```{prf:example} Linear functional
+:label: ex-cvxf-linear-functional
+
 A *linear functional* on $\VV$ in an inner product space 
 has the form of an inner product parameterized by 
 a vector $\ba \in \VV$ as 
@@ -93,6 +95,33 @@ Thus, $f_{\ba}$ is convex. We can also see that $-f_{\ba}$ is
 convex too. Hence, $f_{\ba}$ is concave too.
 ```
 
+
+```{prf:example} Arithmetic mean is convex and concave
+:label: ex-cvxf-arithmetic-mean
+
+Let $f : \RR^n \to \RR$ be given by:
+
+$$
+f(\bx) = \frac{x_1 + \dots + x_n}{n}.
+$$
+
+Arithmetic mean is a linear function. In fact
+
+$$
+f(\alpha \bx + \beta \by) 
+&= \frac{1}{n} \left (\sum_{i=1}^n (\alpha x_i + \beta y_i) \right )\\
+&= \alpha \frac{x_1 + \dots + x_n}{n} + \beta \frac{y_1 + \dots + y_n}{n}\\
+&= \alpha f(\bx) + \beta f(\by)
+$$
+for all $\alpha,\beta \in \RR$.
+
+Thus, for $t \in [0,1]$
+
+$$
+f(t \bx + (1-t) \by) = t f(\bx) + (1-t) f(\by).
+$$
+Thus, arithmetic mean is both convex and concave.
+```
 
 
 ```{prf:example} Affine functional
@@ -293,9 +322,7 @@ $$
 1. Thus, $f$ is concave.
 ```
 
-## Characterization of Convex Functions
-
-### Convexity on lines in domain
+## Convexity on Lines in Domain
 
 ```{prf:theorem} $f$ is convex = $f$ is convex on lines in domain
 :label: res-cvxf-convx-on-lines
@@ -425,7 +452,7 @@ A good application of this result is in showing the
 concavity of the log determinant function in
 {prf:ref}`ex-cvxf-log-det` below.
 
-### Epigraph
+## Epigraph
 
 The {prf:ref}`epigraph <def-bra-epigraph>`
 of a function $f: \VV \to \RR$ is given by:
@@ -488,47 +515,6 @@ from $\VV \oplus \RR$ to $\VV$.
 Due to {prf:ref}`res-cvx-convex-set-affine-image`,
 $\epi f$ convex implies $\dom f$ convex
 as the projection is a linear operation.
-
-
-### Sublevel Sets
-
-Recall from {prf:ref}`def-bra-sub-level-set`
-that the $\alpha$-sublevel set for a 
-real valued function $f : \VV \to \RR$ is given by
-
-$$
-C_{\alpha} = \{ x \in \dom f \,|\, f(x) \leq \alpha \}.
-$$
-
-
-```{prf:theorem}
-:label: res-cvxf-convexity-sublevel-sets
-
-If $f : \VV \to \RR$ is convex, 
-then its sublevel sets are convex.
-```
-
-```{prf:proof}
-Assume $f$ is convex.
-
-1. Let $\bx, \by \in C_{\alpha}$.
-1. Then, $f(\bx) \leq \alpha$ and $f(\by) \leq \alpha$.
-1. Let $t \in [0,1]$.
-1. Let $\bz = t \bx + (1-t)\by$.
-1. Since $f$ is convex, hence:
-
-   $$
-   f(\bz) \leq t f(\bx) + (1-t) f(\by) = t \alpha + (1-t) \alpha = \alpha.
-   $$
-1. Thus, $f(\bz) \leq \alpha$.
-1. Thus, $\bz \in C_{\alpha}$.
-1. Thus, $C_{\alpha}$ is convex.
-```
-
-The converse is not true.
-A function need not be convex even if all its
-sublevel sets are convex.
-
 
 
 
@@ -1278,4 +1264,274 @@ g''(t) = -\sum_{i=1}^n \frac{\lambda_i^2}{(1 + t \lambda_i)^2}.
 $$
 
 Since $g''(t) \leq 0$, hence $f$ is concave.
+```
+
+## Algebra of Convexity I
+
+Here we show some basic results about operations
+that preserve convexity
+
+```{prf:theorem} Nonnegative multiplication
+:label: res-cvxf-nonnegative-mult-cvx
+
+If $f$ is convex, then so is $\alpha f$ for all $\alpha \geq 0$.
+```
+```{prf:proof}
+
+Assume $f$ is convex.
+Note that $\dom f = \dom \alpha f$. 
+Thus, $\dom \alpha f$ is convex since $\dom f$ is convex.
+
+Now, let $\bx, \by \in \dom f$ and $t \in [0,1]$. Then
+
+$$
+& f(t\bx + (1-t) \by) \leq t f(\bx) + (1-t)f(\by)\\
+& \implies  \alpha f(t\bx + (1-t) \by) \leq \alpha (t f(\bx) + (1-t)f(\by)) \Forall \alpha \geq 0\\
+& \implies (\alpha f)(t\bx + (1-t) \by) \leq  t (\alpha f)(\bx) + (1-t) (\alpha f)(\by) \Forall \alpha \geq 0.
+$$
+Thus, $\alpha f$ is convex for every $\alpha \geq 0$.
+```
+
+
+```{prf:theorem} Function sum
+:label: res-cvxf-func-sum
+
+If $f$ and $g$ are convex, then so is $f + g$
+with $\dom (f + g) = \dom f \cap \dom g$.
+```
+```{prf:proof}
+We discussed earlier that $\dom (f + g) = \dom f \cap \dom g$
+as $f + g$ is defined only for the points where both $f$ and $g$
+are defined.
+
+Recall from {prf:ref}`res-cvx-intersection`
+that intersection of convex sets is convex.
+Thus, $\dom (f + g)$ is convex since $\dom f$ and $\dom g$
+are both convex.
+
+Now let $\bx, \by \in \dom (f + g)$ and $t \in [0, 1]$.
+
+1. Since $f$ is convex, hence
+   
+   $$
+   f(t\bx + (1-t) \by) \leq t f(\bx) + (1-t) f(\by).
+   $$
+1. Since $g$ is convex, hence
+   
+   $$
+   g(t\bx + (1-t) \by) \leq t g(\bx) + (1-t) g(\by).
+   $$
+1. Adding the two inequalities, we get:
+
+   $$
+   & f(t\bx + (1-t) \by) + g(t\bx + (1-t) \by) \leq 
+   t f(\bx) + (1-t) f(\by) + t g(\bx) + (1-t) g(\by)\\
+   & \implies 
+   (f + g)(t\bx + (1-t) \by) \leq t (f + g)(\bx) + (1-t) (f + g)(\by).
+   $$
+1. Thus, $f+g$ is convex.
+```
+
+```{prf:theorem} Set of convex functions is a convex cone
+:label: res-cvxf-func-set-cone
+
+If $f_1, \dots, f_n$ are convex, then for any
+$t_1, \dots, t_n \geq 0$, the 
+{prf:ref}`conic combination <def-conic-combination>`
+of functions given by:
+
+$$
+f = t_1 f_1 + \dots + t_n f_n
+$$
+is also convex.
+
+Since every conic combination of convex functions
+is convex, hence the set of convex functions is
+a convex cone.
+```
+
+
+Note that the set of real valued functions forms a vector
+space over $\RR$ with the standard definitions of
+function scalar multiplication and function addition.
+See {prf:ref}`def-la-is-real-valued-functions-space`
+for details.
+We are examining the convexity of the set of functions
+under this vector space.
+
+```{prf:proof}
+Due to {prf:ref}`res-cvxf-nonnegative-mult-cvx`,
+$t_i f_i$ are convex since $f_i$ are convex and $t_i \geq 0$.
+
+Due to {prf:ref}`res-cvxf-func-sum`, sum
+of two convex functions is convex.
+
+It can be easily shown by mathematical induction
+that sum of $n$ convex functions is convex too.
+
+Thus, $f$ is convex.
+```
+
+
+
+## Sublevel Sets
+
+Recall from {prf:ref}`def-bra-sub-level-set`
+that the $\alpha$-sublevel set for a 
+real valued function $f : \VV \to \RR$ is given by
+
+$$
+C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}.
+$$
+
+
+```{prf:theorem}
+:label: res-cvxf-convexity-sublevel-sets
+
+If $f : \VV \to \RR$ is convex, 
+then its sublevel sets are convex.
+```
+
+```{prf:proof}
+Assume $f$ is convex.
+
+1. Let $\bx, \by \in C_{\alpha}$.
+1. Then, $f(\bx) \leq \alpha$ and $f(\by) \leq \alpha$.
+1. Let $t \in [0,1]$.
+1. Let $\bz = t \bx + (1-t)\by$.
+1. Since $f$ is convex, hence:
+
+   $$
+   f(\bz) \leq t f(\bx) + (1-t) f(\by) \leq t \alpha + (1-t) \alpha = \alpha.
+   $$
+1. Thus, $f(\bz) \leq \alpha$.
+1. Thus, $\bz \in C_{\alpha}$.
+1. Thus, $C_{\alpha}$ is convex.
+```
+
+The converse is not true.
+A function need not be convex even if all its
+sublevel sets are convex.
+
+
+```{prf:example}
+:label: ex-cvxf-log-concave-sublevel-convex
+
+Consider the function $f(x) = \ln x$. 
+It is concave ({prf:ref}`ex-cvxf-real-logarithm`).
+
+Its sublevel sets are convex as they are intervals.
+
+```
+
+
+## Hypograph
+
+The {prf:ref}`hypograph <def-bra-hypograph>`
+of a function $f: \VV \to \RR$ is given by:
+
+$$
+\hypo f = \{ (\bx,t) \in \VV \oplus \RR \ST \bx \in \dom f, f(\bx) \geq t \}.
+$$
+
+Just like function convexity is connected to epigraph convexity,
+similarly function concavity is connected to hypograph convexity.
+
+
+```{prf:theorem} Function concavity = Epigraph convexity
+:label: res-cvxf-concavity-hypograph
+
+A function $f$ is concave if and only if its hypograph
+$\hypo f$ is a convex set.
+```
+
+```{prf:proof}
+
+$f$ is concave if and only if $-f$ is convex
+if and only if the epigraph of $-f$ is convex
+if and only if the hypograph of $f$ is convex.
+```
+
+
+## Super-level Sets
+
+Recall from {prf:ref}`def-bra-super-level-set`
+that the $\alpha$-sublevel set for a 
+real valued function $f : \VV \to \RR$ is given by
+
+$$
+D_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \geq \alpha \}.
+$$
+
+
+```{prf:theorem}
+:label: res-cvxf-concavity-super-level-sets
+
+If $f : \VV \to \RR$ is concave, 
+then its super-level sets are convex.
+```
+
+```{prf:proof}
+Assume $f$ is concave.
+
+1. Let $\bx, \by \in D_{\alpha}$.
+1. Then, $f(\bx) \geq \alpha$ and $f(\by) \geq \alpha$.
+1. Let $t \in [0,1]$.
+1. Let $\bz = t \bx + (1-t)\by$.
+1. Since $f$ is concave, hence:
+
+   $$
+   f(\bz) \geq t f(\bx) + (1-t) f(\by) \geq t \alpha + (1-t) \alpha = \alpha.
+   $$
+1. Thus, $f(\bz) \geq \alpha$.
+1. Thus, $\bz \in D_{\alpha}$.
+1. Thus, $D_{\alpha}$ is convex.
+```
+
+The converse is not true.
+A function need not be concave even if all its
+super-level sets are convex.
+
+
+```{prf:example} 
+
+Let geometric mean be given by:
+
+$$
+g(\bx) =  \left ( \prod_{i=1}^n x_i \right )^{\frac{1}{n}}
+$$
+with $\dom g = \RR^n_{+}$
+(with the interpretation that $0^{\frac{1}{n}} = 0$).
+
+
+Let arithmetic mean be given by:
+
+$$
+a(\bx) = \frac{1}{n}\sum_{i=1}^n x_i.
+$$
+
+Consider the set:
+
+$$
+A = \{ \bx \in \RR^n_+ \ST g(\bx) \geq \alpha a(\bx) \}.
+$$
+
+$A$ is the set of nonnegative vectors where the geometric
+mean of the components is at least $\alpha$ times larger
+than the arithmetic mean.
+
+
+1. In {prf:ref}`ex-cvxf-geom-mean` we establish that
+   $g$ is concave.
+1. In {prf:ref}`ex-cvxf-arithmetic-mean` we established that
+   $a$ is convex as well as concave.
+1. Thus, $-\alpha a$ is concave.
+1. Thus, $g - \alpha a$ is concave (with $\dom g - \alpha a = \RR^n_+$).
+1. Note that $A$ can be redefined as:
+
+   $$
+   A = \{ \bx \in \RR^n_+ \ST g(\bx) - \alpha a(\bx) \geq 0 \}.
+   $$
+1. Thus, $A$ is a $0$-super-level set of $g - \alpha a$.
+1. Since $g - \alpha a$ is concave, hence $A$ is convex.
 ```
