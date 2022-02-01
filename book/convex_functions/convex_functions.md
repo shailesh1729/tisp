@@ -240,6 +240,59 @@ Let $\bx, \by \in \RR^n$ and $t \in [0,1]$.
 1. Thus, $f$ is convex.
 ```
 
+```{prf:example} Geometric mean is concave
+:label: ex-cvxf-geom-mean
+
+Let $f : \RR^n \to \RR$ be given by:
+
+$$
+f(\bx) =  \left ( \prod_{i=1}^n x_i \right )^{\frac{1}{n}}
+$$
+with $\dom f = \RR^n_{++}$.
+
+
+Recall from
+{prf:ref}`AM-GM inequality <res-bra-unweighted-am-gm-inequality>`:
+
+$$
+\left (\prod_{i=1}^n a_i \right )^{\frac{1}{n}} \leq 
+\frac{1}{n} \left ( \sum_{i=1}^n a_i \right ).
+$$
+
+1. Let $\bx, \by \in \RR^n_{++}$ and $t \in [0,1]$.
+1. Let $\bz = t \bx + (1-t) \by$. 
+1. Note that $\bz \in \RR^n_{++}$ too, hence every component
+   of $\bz$ is positive.
+1. With $a_i  = \frac{x_i}{z_i}$, and applying
+   AM-GM inequality:
+
+   $$
+   \frac{f(\bx)}{f(\bz)} = \left ( \prod_{i=1}^n \frac{x_i}{z_i} \right )^{\frac{1}{n}}
+   \leq \frac{1}{n} \left ( \sum_{i=1}^n \frac{x_i}{z_i} \right ).
+   $$
+1. With $a_i  = \frac{y_i}{z_i}$, and applying
+   AM-GM inequality:
+
+   $$
+   \frac{f(\by)}{f(\bz)} = \left ( \prod_{i=1}^n \frac{y_i}{z_i} \right )^{\frac{1}{n}}
+   \leq \frac{1}{n} \left ( \sum_{i=1}^n \frac{y_i}{z_i} \right ).
+   $$
+1. Multiplying the first inequality by $t$ and the second by $(1-t)$ and
+   adding them, we get:
+
+   $$
+   \frac{t f(\bx) + (1-t) f(\by)}{f(\bz)} \leq
+   \frac{1}{n} \left ( \sum_{i=1}^n\frac{t x_i}{z_i} +  \frac{(1-t) y_i}{z_i} \right ).
+   $$
+1. Recall that $z_i = t x_i + (1-t) y_i$. Thus, the inequality above simplifies to:
+
+   $$
+   &\frac{t f(\bx) + (1-t) f(\by)}{f(\bz)} \leq 1 \\
+   &\iff t f(\bx) + (1-t) f(\by) \leq f(\bz) = f(t \bx + (1-t) \by).
+   $$
+1. Thus, $f$ is concave.
+```
+
 ## Characterization of Convex Functions
 
 ### Convexity on lines in domain
@@ -1100,3 +1153,4 @@ Thus, $\nabla^2 f(\bx) \succeq \ZERO$.
 
 Hence, $f$ is convex.
 ```
+
