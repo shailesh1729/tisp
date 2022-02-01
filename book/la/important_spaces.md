@@ -4,7 +4,41 @@ In this section, we will list some important
 vector spaces which occur frequently in analysis
 and optimization.
 
+## The Vector Space of Real Valued Functions
 
+```{prf:definition} The vector space of (partial) real valued functions
+:label: def-la-is-real-valued-functions-space
+
+Let $X$ be a non-empty set. 
+Let $F(X)$ be the set of 
+{prf:ref}`real valued functions <def-bra-real-valued-function>` on $X$.
+The set $F(X)$ is a vector space of real valued functions
+over the scalar field of $\RR$
+with the definitions following 
+{prf:ref}`def-bra-real-valued-partial-function-vector-space`:
+
+Vector addition: If $f,g \in F(X)$, then $h = f + g$ is defined as:
+
+$$
+h(\bx) \triangleq f(\bx) + g(\bx) \Forall \bx \in \dom f \cap \dom g.
+$$
+
+Scalar multiplication: if $\alpha \in \RR$ and $f \in F(X)$, then $h = \alpha f$ is defined as:
+
+$$
+h (\bx) \triangleq \alpha f(\bx) \Forall \dom f.
+$$
+
+Additive identity: There exists a function $\bzero \in F(X)$ given by:
+
+$$
+\bzero(\bx) = 0 \Forall \bx \in X.
+$$
+```
+
+It is not possible to introduce a norm or an inner product
+on this space. However, if the functions are bounded,
+then it is possible to introduce more structure on the space.
 
 ## The Vector Space of Bounded Functions
 
