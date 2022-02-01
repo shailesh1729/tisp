@@ -182,10 +182,12 @@ The epigraph lies above (and includes) the graph of a function.
 :label: def-bra-sub-level-set
 
 For a real valued function $f: X \to \RR$, the sublevel set
-for some $\alpha \in \RR$ is defined as 
+for some $\alpha \in \RR$,
+denoted by $C_{\alpha}$,
+is defined as 
 
 $$
-\{ x \in \dom f \,|\, f(x) \leq \alpha \}.
+C_{\alpha} \triangleq \{ x \in \dom f \,|\, f(x) \leq \alpha \}.
 $$
 ```
 

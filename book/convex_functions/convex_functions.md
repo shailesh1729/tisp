@@ -421,6 +421,10 @@ $$
 1. Thus, $f$ must be convex.
 ```
 
+A good application of this result is in showing the
+concavity of the log determinant function in
+{prf:ref}`ex-cvxf-log-det` below.
+
 ### Epigraph
 
 The {prf:ref}`epigraph <def-bra-epigraph>`
@@ -484,6 +488,47 @@ from $\VV \oplus \RR$ to $\VV$.
 Due to {prf:ref}`res-cvx-convex-set-affine-image`,
 $\epi f$ convex implies $\dom f$ convex
 as the projection is a linear operation.
+
+
+### Sublevel Sets
+
+Recall from {prf:ref}`def-bra-sub-level-set`
+that the $\alpha$-sublevel set for a 
+real valued function $f : \VV \to \RR$ is given by
+
+$$
+C_{\alpha} = \{ x \in \dom f \,|\, f(x) \leq \alpha \}.
+$$
+
+
+```{prf:theorem}
+:label: res-cvxf-convexity-sublevel-sets
+
+If $f : \VV \to \RR$ is convex, 
+then its sublevel sets are convex.
+```
+
+```{prf:proof}
+Assume $f$ is convex.
+
+1. Let $\bx, \by \in C_{\alpha}$.
+1. Then, $f(\bx) \leq \alpha$ and $f(\by) \leq \alpha$.
+1. Let $t \in [0,1]$.
+1. Let $\bz = t \bx + (1-t)\by$.
+1. Since $f$ is convex, hence:
+
+   $$
+   f(\bz) \leq t f(\bx) + (1-t) f(\by) = t \alpha + (1-t) \alpha = \alpha.
+   $$
+1. Thus, $f(\bz) \leq \alpha$.
+1. Thus, $\bz \in C_{\alpha}$.
+1. Thus, $C_{\alpha}$ is convex.
+```
+
+The converse is not true.
+A function need not be convex even if all its
+sublevel sets are convex.
+
 
 
 
@@ -1154,3 +1199,83 @@ Thus, $\nabla^2 f(\bx) \succeq \ZERO$.
 Hence, $f$ is convex.
 ```
 
+
+```{prf:example} Log determinant function is concave
+:label: ex-cvxf-log-det
+
+Let $f : \SS^n \to \RR$ be:
+
+$$
+f(\bX) = \log \det X.
+$$
+with $\dom f = \SS^n_{++}$ (the set of symmetric positive definite matrices).
+
+Let any line in $\SS^n$ be given by:
+
+$$
+\bX = \bZ + t \bV 
+$$
+where $\bZ, \bV \in \SS^n$.
+
+Consider the restriction of $f$ on a line:
+
+$$
+g(t) = \log \det (\bZ + t \bV) 
+$$
+to the interval of values where $\bZ + t \bV \succ \ZERO$ 
+(since $\dom f = \SS^n_{++}$ ).
+In other words, 
+
+$$
+\dom g = \{t \in \RR \ST \bZ + t \bV \succ \ZERO \}.
+$$
+
+Without any loss of generality, we can assume that $t=0 \in \dom g$;
+i.e. $\bZ \succ \ZERO$.
+
+Recall that:
+1. $\det (AB) = \det(A) \det(B)$ for square matrices.
+1. $ \det (A) = \prod_{i=1}^n \lambda_i $ for symmetric matrices with $\lambda_i$ 
+   being their eigen values.
+1. If $\lambda_i$ are eigen values of $A$, then the eigen values of $I + t A$ are
+   $1 + t \lambda_i$.
+
+
+Now
+
+$$
+g(t) &= \log \det (\bZ + t \bV) \\
+&= \log \det (\bZ^{\frac{1}{2}} (\bZ^{\frac{1}{2}} + t \bZ^{-\frac{1}{2}} \bV) )\\
+&= \log \det (\bZ^{\frac{1}{2}} (I + t \bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}) \bZ^{\frac{1}{2}})\\
+&= \log \det(\bZ^{\frac{1}{2}}) + \log \det (I + t \bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}})
+  + \log \det(\bZ^{\frac{1}{2}})\\
+&= \log \det(\bZ) + \log \det (I + t \bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}).
+$$
+
+1. Let $\lambda_i$ be the eigen values of $\bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}$. 
+1. Then, $1 + t \lambda_i$ are eigen values of $I + t\bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}$.
+1. Thus, $\log \det (I + t\bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}) = \sum_{i=1}^n \log \det (1 + t\lambda_i)$.
+
+
+Thus,
+
+$$
+g(t) = \sum_{i=1}^n \log \det (1 + t\lambda_i) + \log \det(\bZ).
+$$
+Note that $\log \det(\bZ)$ doesn't depend on $t$.
+Similarly, $\lambda_i$ only depend on $\bZ$ and $\bV$, hence they don't depend on $t$.
+
+Differentiating $g$ w.r.t. $t$, we get:
+
+$$
+g'(t) = \sum_{i=1}^n \frac{\lambda_i}{1 + t \lambda_i}.
+$$
+
+Differentiating again, we get:
+
+$$
+g''(t) = -\sum_{i=1}^n \frac{\lambda_i^2}{(1 + t \lambda_i)^2}.
+$$
+
+Since $g''(t) \leq 0$, hence $f$ is concave.
+```
