@@ -54,6 +54,8 @@ $$
 ```
 
 ```{prf:definition}
+:label: def-bra-real-valued-partial-function-vector-space
+
 The algebraic structure can be extended to partial functions too.
 
 Let $f,g$ be (partial) real valued functions  from $X$ to $\RR$.
@@ -191,6 +193,35 @@ C_{\alpha} \triangleq \{ x \in \dom f \,|\, f(x) \leq \alpha \}.
 $$
 ```
 
+## Hypograph
+
+```{prf:definition} Hypograph
+:label: def-bra-hypograph
+
+The *hypograph* of a real valued function $f: X \to \RR$ is
+defined as:
+
+$$
+\hypo f \triangleq \{ (x,t) \in X \times \RR \, | \, x \in \dom f, t \leq f(x) \}.
+$$ 
+```
+The epigraph lies above (and includes) the graph of a function.
+
+
+## Super-level Sets
+
+```{prf:definition} Super-level set
+:label: def-bra-super-level-set
+
+For a real valued function $f: X \to \RR$, the super-level set
+for some $\alpha \in \RR$,
+denoted by $D_{\alpha}$,
+is defined as 
+
+$$
+D_{\alpha} \triangleq \{ x \in \dom f \,|\, f(x) \geq \alpha \}.
+$$
+```
 
 
 ## Extended Real Valued Functions
