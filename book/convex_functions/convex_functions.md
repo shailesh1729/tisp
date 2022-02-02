@@ -1332,8 +1332,8 @@ Now let $\bx, \by \in \dom (f + g)$ and $t \in [0, 1]$.
 1. Thus, $f+g$ is convex.
 ```
 
-```{prf:theorem} Set of convex functions is a convex cone
-:label: res-cvxf-func-set-cone
+```{prf:theorem} Conic combinations of convex sets
+:label: res-cvxf-func-conic-combs
 
 If $f_1, \dots, f_n$ are convex, then for any
 $t_1, \dots, t_n \geq 0$, the 
@@ -1344,20 +1344,7 @@ $$
 f = t_1 f_1 + \dots + t_n f_n
 $$
 is also convex.
-
-Since every conic combination of convex functions
-is convex, hence the set of convex functions is
-a convex cone.
 ```
-
-
-Note that the set of real valued functions forms a vector
-space over $\RR$ with the standard definitions of
-function scalar multiplication and function addition.
-See {prf:ref}`def-la-is-real-valued-functions-space`
-for details.
-We are examining the convexity of the set of functions
-under this vector space.
 
 ```{prf:proof}
 Due to {prf:ref}`res-cvxf-nonnegative-mult-cvx`,
@@ -1372,6 +1359,26 @@ that sum of $n$ convex functions is convex too.
 Thus, $f$ is convex.
 ```
 
+```{prf:theorem}
+:label: res-cvxf-total-funcs-cvx-cone
+
+The set of convex functions 
+in the {prf:ref}`vector space of real valued functions <def-la-is-real-valued-functions-space>`
+form a convex cone.
+```
+
+Note that the set of real valued functions forms a vector
+space over $\RR$ with the standard definitions of
+function scalar multiplication and function addition.
+We are examining the convexity of the set of functions
+under this vector space.
+
+
+```{prf:proof}
+Since every conic combination of convex functions
+is convex, hence the set of convex functions is
+a convex cone.
+```
 
 
 ## Sublevel Sets

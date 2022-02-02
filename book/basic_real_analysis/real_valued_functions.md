@@ -14,7 +14,9 @@ from $X$ to $\RR$.
 ```
 
 
-```{prf:definition}
+```{prf:definition} The set of real valued total functions
+:label: def-bra-rvf-set
+
 The set $\FFF (X, \RR)$ denotes the set of all real valued (total) functions
 from $X$ to $\RR$.
 ```
@@ -53,10 +55,10 @@ f g: x \mapsto f(x) g(x) \Forall x \in X.
 $$
 ```
 
-```{prf:definition}
-:label: def-bra-real-valued-partial-function-vector-space
+```{prf:definition} An algebra for partial functions
+:label: def-bra-rvpf-algebra
 
-The algebraic structure can be extended to partial functions too.
+An algebraic structure can be provided to partial functions too.
 
 Let $f,g$ be (partial) real valued functions  from $X$ to $\RR$.
 
@@ -85,6 +87,17 @@ $$
 f g: x \mapsto f(x) g(x) \text{ with } \dom f g = \dom f \cap \dom g.
 $$
 ```
+However, there are certain limitations/odd behaviors with the structure.
+
+* If $f$ and $g$ are such that $\dom f \cap \dom g = \EmptySet$.
+  Then $f + g$ is an empty function.
+* The function $f + (-f)$ is 0 over $\dom f$ but not defined
+  over $X \setminus \dom f$. 
+  Thus, it is not equal to the $\bzero$ function.
+  Thus, an additive inverse doesn't exist.
+* Scalar multiplication with $0$ leads to a function which 
+  is $0$ only over $\dom f$. It is not defined over $X \setminus \dom f$.
+
 
 
 
