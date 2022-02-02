@@ -322,6 +322,31 @@ $$
 1. Thus, $f$ is concave.
 ```
 
+```{prf:observation} Empty function is convex
+:label: res-cvxf-empty-func-convex
+
+Let $f: \VV \to \RR$ be such that $\dom f = \EmptySet$.
+Then $f$ is convex.
+```
+
+```{prf:proof}
+The empty set $\dom f$ is vacuously convex. 
+The defining inequality {eq}`eq-convexity-inequality`
+is vacuously true for $f$ since its domain is empty.
+```
+
+This observation may sound uninteresting however
+it is important in the algebra of convex functions.
+{prf:ref}`def-bra-rvpf-algebra` provides
+definitions for sum of two partial functions
+and scalar multiplication with a partial
+function. If two convex functions $f$ and $g$
+are such that $\dom f \cap \dom g = \EmptySet$,
+then their sum $f+g$ is empty function. 
+The observation above says that $f+g$ is still
+a convex function.
+
+
 ## Convexity on Lines in Domain
 
 ```{prf:theorem} $f$ is convex = $f$ is convex on lines in domain
