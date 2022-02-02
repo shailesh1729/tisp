@@ -1291,7 +1291,7 @@ $$
 Since $g''(t) \leq 0$, hence $f$ is concave.
 ```
 
-## Algebra of Convexity I
+## Scaling and Addition of Convex Functions
 
 Here we show some basic results about operations
 that preserve convexity
@@ -1318,7 +1318,7 @@ Thus, $\alpha f$ is convex for every $\alpha \geq 0$.
 ```
 
 
-```{prf:theorem} Function sum
+```{prf:theorem} Convex function sum
 :label: res-cvxf-func-sum
 
 If $f$ and $g$ are convex, then so is $f + g$
@@ -1357,7 +1357,7 @@ Now let $\bx, \by \in \dom (f + g)$ and $t \in [0, 1]$.
 1. Thus, $f+g$ is convex.
 ```
 
-```{prf:theorem} Conic combinations of convex sets
+```{prf:theorem} Conic combinations of convex functions
 :label: res-cvxf-func-conic-combs
 
 If $f_1, \dots, f_n$ are convex, then for any
@@ -1370,6 +1370,9 @@ f = t_1 f_1 + \dots + t_n f_n
 $$
 is also convex.
 ```
+
+The conic combinations are also called nonnegative weighted
+sums.
 
 ```{prf:proof}
 Due to {prf:ref}`res-cvxf-nonnegative-mult-cvx`,
@@ -1405,6 +1408,45 @@ is convex, hence the set of convex functions is
 a convex cone.
 ```
 
+```{prf:theorem} Concave function sum
+:label: res-cvxf-concave-func-sum
+
+If $f$ and $g$ are concave, then so is $f + g$
+with $\dom (f + g) = \dom f \cap \dom g$.
+```
+```{prf:proof}
+We proceed as follows:
+
+1. Let $f$ and $g$ be concave.
+1. $-f$ and $-g$ are convex.
+1. By {prf:ref}`res-cvxf-func-sum`, $(-f) + (-g) = -(f + g)$
+   is convex.
+1. Thus, $f+g$ is concave.
+```
+
+```{prf:theorem} Conic combinations of cave functions
+:label: res-cvxf-concave-func-conic-combs
+
+If $f_1, \dots, f_n$ are concave, then for any
+$t_1, \dots, t_n \geq 0$, the 
+{prf:ref}`conic combination <def-conic-combination>`
+of functions given by:
+
+$$
+f = t_1 f_1 + \dots + t_n f_n
+$$
+is also concave.
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. If $f_1, \dots, f_n$ are concave then $-f_1, \dots, -f_n$ are convex.
+1. By {prf:ref}`res-cvxf-func-conic-combs`, 
+   $(-t_1 f_1) + \dots + (-t_n f_n)$ is convex.
+1. Thus, $-(t_1 f_1 + \dots + t_n f_n)$ is convex.
+1. Thus, $t_1 f_1 + \dots + t_n f_n$ is concave. 
+```
 
 ## Sublevel Sets
 
@@ -1566,4 +1608,185 @@ than the arithmetic mean.
    $$
 1. Thus, $A$ is a $0$-super-level set of $g - \alpha a$.
 1. Since $g - \alpha a$ is concave, hence $A$ is convex.
+```
+
+## Composition with Affine Mapping
+
+
+```{prf:theorem} Affine transformations preserve convexity
+:label: res-cvx-affine-composition
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $T : \VV \to \WW$ be a linear transformation.
+Let $\bb \in \WW$.
+Let $f : \WW \to \RR$ be a function.
+Define $g : \VV \to \RR$ as:
+
+$$
+g(\bx) = f(T(\bx) + \bb)
+$$
+with $\dom g = \{\bx \in \VV \ST T(\bx) + \bb \in \dom f \}$.
+
+If $f$ is convex, then so is $g$.
+If $f$ is concave, then so is $g$.
+```
+
+
+```{prf:proof}
+
+Assume $f$ is convex.
+
+1. If we define $A : \VV \to \WW$ as $A(\bx) = T(\bx) + \bb $
+   then $\dom g = A^{-1}(\dom f)$.
+1. $A$, so defined, is an affine transformation.
+1. By {prf:ref}`res-cvx-convex-set-inverse-affine-image`,
+   $\dom g$ is convex since $\dom f$ is convex. 
+1. Let $\bx, \by \in \dom g$.
+1. $g(\bx) = f(T(\bx) + \bb)$. Define $\bu = T(\bx) + \bb$.
+1. $g(\by) = f(T(\by) + \bb)$. Define $\bv = T(\by) + \bb$.
+1. By definition, $\bu, \bv \in \dom f$.
+1. Let $t \in [0,1]$.
+1. Since $f$ is convex, hence
+
+   $$
+   f(t\bu + (1-t) \bv) \leq t f(\bu) + (1-t)f(\bv).
+   $$
+1. Now 
+
+   $$
+   g(t\bx + (1-t) \by)
+   &= f(T(t\bx + (1-t) \by) + \bb)\\
+   &= f(tT(\bx) + (1-t) T(\by) + (t + (1-t))\bb)\\
+   &= f(t(T(\bx) + \bb) + (1-t) (T(\by) + \bb))\\
+   &= f(t\bu + (1-t) \bv )\\
+   &\leq t f(\bu) + (1-t) f(\bv)\\
+   &= t g(\bx) + (1-t) g(\by).
+   $$
+1. Thus, $g$ satisfies the 
+   convexity defining inequality {eq}`eq-convexity-inequality`.
+1. Thus, $g$ is convex.
+
+A similar argument shows that if $f$ is concave
+then so is $g$.
+```
+
+
+## Pointwise Supremum
+
+```{prf:theorem} Pointwise maximum of two convex functions
+:label: res-cvx-ptws-max-2
+
+Let $f_1$ and $f_2$ be convex functions. Define
+their pointwise maximum as
+
+$$
+f(\bx) = \max \{f_1(\bx), f_2(\bx) \}
+$$
+with $\dom f = \dom f_1 \cap \dom f_2$.
+Then, $f$ is convex.
+```
+
+```{prf:proof}
+$\dom f$ is an intersection of convex sets. Hence, it is convex.
+
+Let $\bx, \by \in \dom f$ and $t \in [0,1]$.
+
+$$
+f(t \bx + (1-t) \by)
+&= \max \{f_1(t \bx + (1-t) \by), f_2(t \bx + (1-t) \by) \}\\
+&\leq \max \{t f_1(\bx) + (1-t) f_1(\by), t f_2(\bx) + (1-t) f_2(\by) \}\\
+&\leq t \max \{f_1(\bx), f_2(\bx) \} + (1-t)\max \{f_1(\by), f_2(\by) \}\\
+&= t f(\bx) + (1-t) f(\by).
+$$
+Thus, $f$ is convex.
+```
+
+
+```{prf:theorem} Pointwise maximum of multiple convex functions
+:label: res-cvx-ptws-max-n
+
+Let $f_1, f_2, \dots, f_n$ be convex functions. Define
+their pointwise maximum as
+
+$$
+f(\bx) = \max \{f_1(\bx), \dots, f_n(\bx) \}
+$$
+with $\dom f = \dom f_1 \cap \dots \cap \dom f_n$.
+Then, $f$ is convex.
+```
+
+```{prf:proof}
+The result has been proved for the base case of 2 functions
+in {prf:ref}`res-cvx-ptws-max-2`.
+
+Assume that it is true for $n$ functions. We
+can easily show it true for $n+1$ functions since
+
+$$
+\max \{f_1(\bx), \dots, f_{n+1}(\bx) \}
+= \max \{\max \{f_1(\bx), \dots, f_n(\bx) \}, f_{n+1}(\bx) \}.
+$$
+
+Thus, by principle of mathematical induction, the result
+is true for all $n$.
+```
+
+```{prf:theorem} Pointwise supremum of a family of convex functions
+:label: res-cvx-ptws-supremum
+
+Let $I$ be an index set.
+Let $\{ f_i : \VV \to \RR \}_{i \in I}$ be a family of convex functions. 
+Define their pointwise supremum as
+
+$$
+f(\bx) = \sup \{f_i(\bx)\}_{i \in I}
+$$
+with 
+
+$$
+\dom f = \bigcap_{i \in I} \dom f_i.
+$$
+Then, $f$ is convex.
+Moreover,
+
+$$
+\epi f = \bigcap_{i \in I} \epi f_i.
+$$
+```
+
+```{prf:proof}
+We  shall first verify the epigraph equality.
+
+1. Let $(\bx, t) \in \epi f$.
+1. Then, $f(\bx) \leq t$.
+1. Thus, $f_i(\bx) \leq t$ for all $i \in I$ 
+   since $f(\bx) = \sup \{f_i(\bx)\}_{i \in I}$.
+1. Thus, $(\bx, t) \in \epi f_i$ for all $i \in I$.
+1. Thus, $\epi f \subseteq \bigcap_{i \in I} \epi f_i$.
+
+
+Now, for the converse:
+
+1. Let $(\bx, t) \in \bigcap_{i \in I} \epi f_i$.
+1. Thus, $(\bx, t) \in \epi f_i$ for all $i \in I$.
+1. Thus, $f_i(\bx) \leq t$ for all $i \in I$.
+1. Taking the supremum over $i \in I$ on the L.H.S., we obtain:
+
+   $$
+   \sup \{f_i(\bx)\}_{i \in I} = f(\bx) \leq t.
+   $$
+1. Thus, $(\bx, t) \in \epi f$.
+1. Thus, $\bigcap_{i \in I} \epi f_i \subseteq \epi f$.
+
+Combining the two, we get:
+
+$$
+\epi f = \bigcap_{i \in I} \epi f_i.
+$$
+
+1. Since $f_i$ are convex functions, hence $\epi f_i$ are convex sets
+   due to {prf:ref}`res-cvxf-convexity-epigraph`.
+1. Thus, $\epi f$ is a convex set due to {prf:ref}`res-cvx-arbitrary-intersection`.
+1. But then, $f$ is convex
+   again due to {prf:ref}`res-cvxf-convexity-epigraph`.
 ```
