@@ -367,7 +367,7 @@ $$
 ````
 
 ```{prf:theorem}
-:label: res-cvx-conic-hull-smallest
+:label: res-cvx-conic-hull-convex
 
 A conic hull is a convex cone.
 ```
@@ -886,15 +886,15 @@ i.e., the positive semi-definite cone is self dual.
 ```{prf:definition} Normal vector
 :label: def-cvx-convex-set-normal-vector
 
-Let $C$ be a convex set of $\VV$.
-A vector $\bx^* \in \VV^*$ is said to be *normal*
-$C$ at a point $\ba \in C$
-if $\bx^*$ does not make an acute angle with
-any line segment in $C$ with $\ba$ as endpoint;
+Let $S$ be an arbitrary subset of $\VV$.
+A vector $\bv \in \VV^*$ is said to be *normal*
+to $S$ at a point $\ba \in S$
+if $\bv$ does not make an acute angle with
+any line segment starting from $\ba$ and ending at some $\bx \in S$;
 i.e., if
 
 $$
-\langle \bx - \ba, \bx^* \rangle \leq 0 \Forall \bx \in C.
+\langle \bx - \ba, \bv \rangle \leq 0 \Forall \bx \in S.
 $$ 
 ```
 
@@ -921,25 +921,35 @@ halfspace.
 ```
 
 ```{prf:definition} Normal cone
-:label: def-cvx-convex-set-normal-cone
+:label: def-cvx-normal-cone
 
-The set of all vectors $\bx^*$ normal to $C$ at 
-a point $\ba \in C$ is called the
-*normal cone* to $C$ at $\ba$. 
+The set of all vectors normal to a set $S$ at 
+a point $\ba \in S$, denoted by $N_S(\ba)$, is called the
+*normal cone* to $S$ at $\ba$. 
+
+$$
+N_S(\ba) \triangleq \{ \bv \in \VV^* \ST 
+   \langle \bx - \ba , \bv \rangle \leq 0 
+   \Forall \bx \in S \}.
+$$
+
+We customarily define $N_S(\ba) = \EmptySet$ for any $\ba \notin S$.
 ```
 
 
-```{prf:theorem}
+```{prf:property}
+:label: res-cvx-normal-cone-convex
+
 A normal cone is always a convex cone.
 ```
 
 ```{prf:proof}
-Let $C$ be a convex set and let $\ba \in C$.
-Let $N$ denote the set of normal vectors to $C$ at $a$.
+Let $S$ be a subset of $\VV$ and let $\ba \in S$.
+Let $N$ denote the set of normal vectors to $S$ at $\ba$.
 We have to show that $N$ is a convex cone;
 i.e., we have to show that $N$ contains all its conic combinations.
 
-For any $\bx \in C$:
+For any $\bx \in S$:
 
 $$
 \langle \bx - \ba , \bzero \rangle = 0.
@@ -951,7 +961,7 @@ Assume $\bu \in N$.
 Then, 
 
 $$
-\langle \bx - \ba, \bu \rangle \leq 0 \Forall \bx \in C.
+\langle \bx - \ba, \bu \rangle \leq 0 \Forall \bx \in S.
 $$
 
 But then for any $t \geq 0$,
@@ -959,7 +969,7 @@ But then for any $t \geq 0$,
 $$
 \langle \bx - \ba, t\bu \rangle 
 = t \langle \bx - \ba, \bu \rangle
-\leq 0 \Forall \bx \in C.
+\leq 0 \Forall \bx \in S.
 $$
 Thus, $t \bu \in N$. Thus, $N$ is closed under
 nonnegative scalar multiplication.
@@ -971,7 +981,7 @@ $$
 \langle \bx - \ba, \bu + \bv \rangle 
 =  \langle \bx - \ba, \bu \rangle
    + \langle \bx - \ba, \bv \rangle
-\leq 0 \Forall \bx \in C.
+\leq 0 \Forall \bx \in S.
 $$
 since sum of two nonpositive quantities is nonpositive. 
 
@@ -982,6 +992,95 @@ Combining these two observations, $N$ is closed
 under conic combinations. Hence, $N$ is a convex cone.
 ```
 
+```{prf:property}
+:label: res-cvx-normal-cone-closed
+
+A normal cone is closed.
+
+
+Specifically, if $N_S(\ba)$ is the normal cone 
+to a set $S$ at a point $\ba \in S$,
+then:
+
+$$
+N_S(\ba) 
+= \bigcap_{\bx \in S} 
+\{ \bv \in \VV^* \ST \langle \bx - \ba , \bv \rangle \leq 0 \}.
+$$
+```
+
+```{prf:proof}
+For some fixed $\ba \in S$ and any fixed $\bx \in \VV$, define:
+
+$$
+H_{-}(\bx - \ba) = \{ \bv \in \VV^* \ST \langle \bx - \ba , \bv \rangle \leq 0 \}.
+$$
+Note that $H_{-}(\bx - \ba)$ is a closed {prf:ref}`half-space <def-halfspace>`
+passing through origin of $\VV^*$ extending opposite to the direction $\bx - \ba$.
+
+Let $\bv \in N_S(\ba)$ be a normal vector to $S$ at $\ba$.
+
+1. Then, for every $\bx \in S$, $\langle \bx - \ba, \bv \rangle \leq 0$.
+1. Thus,  for every $\bx \in S$, $\bv \in H_{-}(\bx - \ba)$.
+1. Thus, $\bv \in \bigcap_{\bx \in S} H_{-}(\bx - \ba)$.
+1. Thus, $N_S(\ba) \subseteq \bigcap_{\bx \in S} H_{-}(\bx - \ba)$.
+
+Going in the opposite direction:
+
+1. Let $\bv \in \bigcap_{\bx \in S} H_{-}(\bx - \ba)$.
+1. Then, for every $\bx \in S$, $\bv \in H_{-}(\bx - \ba)$.
+1. Thus, for every $\bx \in S$, $\langle \bx - \ba , \bv \rangle \leq 0$.
+1. Thus, $\bv$ is a normal vector to $S$ at $\ba$.
+1. Thus, $\bv \in N_S(\ba)$.
+1. Thus, $\bigcap_{\bx \in S} H_{-}(\bx - \ba) \subseteq N_S(\ba)$.
+
+Combining, we get:
+
+$$
+N_S(\ba) = \bigcap_{\bx \in S} H_{-}(\bx - \ba).
+$$
+
+Now, since $N_S(\ba)$ is an arbitrary intersection of closed
+half spaces which are individually closed sets, hence
+$N_S(\ba)$ is closed.
+
+Since each half space is convex and intersection of 
+convex sets is convex, hence, as a bonus, this proof also
+shows that $N_S(\ba)$ is convex.
+```
+
+```{prf:theorem} Normal cone of unit ball
+:label: res-cvxf-normal-cone-unit-ball
+
+$$
+N_{B[\bzero, 1]} (\bx) = \{ \by \in \VV^* \ST \| \by \|_* \leq \langle \bx, \by \rangle \}.
+$$
+```
+
+```{prf:proof}
+The unit ball at origin is given by:
+
+$$
+S = B[\bzero, 1] = \{\bx \in \VV  \ST \| \bx \| \leq 1 \}.
+$$
+
+Consider $\bx \in S$.
+Then, $\by \in N_S(\bx)$ if and only if
+
+$$
+& \langle \bz - \bx , \by \rangle \leq 0 \Forall \bz \in S\\
+& \iff \langle \bz , \by \rangle \leq \langle \bx, \by \rangle \Forall \bz \in S\\
+& \iff \underset{\| \bz \|  \leq 1}{\sup} \langle \bz , \by \rangle
+\leq \langle \bx, \by \rangle \\
+& \iff \| \by \|_* \leq \langle \bx, \by \rangle.
+$$
+
+Therefore, for any $\bx \in S$:
+
+$$
+N_S(\bx) = \{ \by \in \VV^* \ST \| \by \|_* \leq \langle \bx, \by \rangle \}.
+$$
+```
 
 ## Barrier Cones
 
@@ -989,14 +1088,14 @@ under conic combinations. Hence, $N$ is a convex cone.
 :label: def-cvx-convex-set-barrier vector
 
 Let $C$ be a convex set of $\VV$. 
-A vector $\bx^* \in \VV^*$ is called a
+A vector $\bv \in \VV^*$ is called a
 *barrier* vector to $C$ if for some $\beta \in \RR$,
 
 $$
-\langle \bx , \bx^* \rangle \leq \beta \Forall \bx \in C.
+\langle \bx , \bv \rangle \leq \beta \Forall \bx \in C.
 $$
 In other words, the set of inner products of points in $C$
-with $\bx^*$ is bounded from above.
+with $\bv$ is bounded from above.
 ```
 
 ```{prf:definition} Barrier cone
