@@ -499,7 +499,7 @@ without the choice of a basis. Such an isomorphism is said to be *natural*.
 
 ## Normed Vector Spaces
 
-If $\VV$ is equipped with a norm $\| \cdot \|$, it makes sense
+If $\VV$ is endowed with a norm $\| \cdot \|$, it makes sense
 to come up with the notion of a norm on the dual space too.
 The *dual norm* is a measure of size of the linear functional.
 By size of a functional, we mean how big is the number $|f(\bx)|$
@@ -508,13 +508,70 @@ with respect to the size of $\bx$ given by $\| \bx \|$.
 ```{prf:definition} Dual norm
 :label: def-la-dual-norm
 
-Let $\VV$ be a normed vector space and $\VV^*$ be its dual space
+Let $\VV$ be a normed linear space
+endowed with a norm $\| \cdot \| : \VV \to \RR$
+and $\VV^*$ be its dual space
 of linear functionals. 
-The *dual norm* of a linear functional $\bf$ belonging to $\VV^*$
-is defined as:
+The *dual norm* of a linear functional $\bf$ belonging to $\VV^*$,
+denoted by $\| \cdot \|_* : \VV^* \to \RR$, is defined as:
 
 $$
-\| \bf \|_* \triangleq \sup \{ |\bf(\bx)| \ST \| \bx \| \leq 1 \}.
+\| \bf \|_* \triangleq \underset{\| \bx \| \leq 1}{\sup} \{ |\bf(\bx)| \}.
+$$
+```
+
+
+```{prf:theorem} Dual norm is a norm
+The dual norm $\| \cdot \|_* : \VV^* \to \RR$ 
+as defined in {prf:ref}`def-la-dual-norm` is
+indeed a {prf:ref}`norm <def-la-norm>`.
+```
+
+```{prf:proof}
+[Positive definiteness]
+
+For the zero functional, $\bzero (\bx) = 0 \Forall \bx \in \VV$.
+Thus, $\| \bzero \|_* = 0$.
+
+For the converse, we proceed as follows:
+
+1. For any other functional $\bf$, there exists a nonzero 
+   $\bu \in \VV$ such that $\bf(\bu) \neq 0$. 
+1. Let $\bx = \frac{\bu}{ \| \bu \|}$. 
+1. Then $\| \bx \| = 1$.
+1. Also, $\bf(\bx) = \frac{\bf(\bu)}{\| \bu \|} \neq 0$.
+1. Thus, 
+
+   $$
+   \| \bf \|_* = \underset{\| \by \| \leq 1}{\sup} \{ |\bf(\by)| \} \geq |\bf(\bx)| > 0.
+   $$
+1. Thus, $\| \bf \|_* > 0$ if $\bf \neq \bzero$.
+
+
+[Positive homogeneity]
+
+$$
+\| \alpha \bf \|_* 
+&= \underset{\| \bx \| \leq 1}{\sup} \{ |(\alpha \bf)(\bx)| \}\\
+&= \underset{\| \bx \| \leq 1}{\sup} \{ |\alpha \bf(\bx)| \}\\
+&= \underset{\| \bx \| \leq 1}{\sup} \{ |\alpha| |\bf(\bx)| \}\\
+&= |\alpha| \underset{\| \bx \| \leq 1}{\sup} \{ |\bf(\bx)| \}\\
+&= |\alpha| \| \bf \|_*.
+$$
+
+
+[Triangle inequality]
+
+Let $\bf, \bg \in \VV^*$ be two linear functionals.
+
+$$
+\| \bf + \bg \|_* 
+&= \underset{\| \bx \| \leq 1}{\sup} \{ |(\bf + \bg)(\bx) |\}\\
+&= \underset{\| \bx \| \leq 1}{\sup} \{ |\bf(\bx) + \bg(\bx)| \}\\
+&\leq \underset{\| \bx \| \leq 1}{\sup} \{ |\bf(\bx)| + |\bg(\bx)|\}\\
+&\leq \underset{\| \bx \| \leq 1}{\sup} \{ |\bf(\bx)|\} 
++ \underset{\| \bx \| \leq 1}{\sup} \{ |\bg(\bx)| \}\\
+&= \| \bf \|_* + \| \bg \|_*.
 $$
 ```
 
@@ -687,7 +744,7 @@ $$
 T (\bv) \triangleq \langle \cdot, \bv \rangle = T_{\bv};
 $$
 i.e., $T_{\bv}$ is a linear functional on $\VV$ whose value
-on $\bx \in \VV$ is $\langle \bx, \bw \rangle$.
+on $\bx \in \VV$ is $\langle \bx, \bv \rangle$.
 
 Then, $T$ is an isomorphism.
 ```
@@ -698,4 +755,96 @@ To show that $T$ is an isomorphism, we need to show that:
 * $T$ is injective.
 * $T$ is surjective.
 * $T$ preserves the vector space algebraic structure.
+```
+
+
+```{prf:theorem} Dual norm in an inner product space
+:label: res-la-ip-dual-norm
+
+Let $\VV$ be an inner product space endowed with a norm
+$\| \cdot \| : \VV \to \RR$.
+
+Let $\bv \in \VV$ correspond to a linear functional $T_{\bv} \in \VV^*$.
+Then, its dual norm is given by:
+
+$$
+\| \bv \|_* = \underset{\| \bx \| \leq 1}{\sup} \{ |\langle \bx, \bv \rangle | \}.
+$$
+```
+Note that in this identity, $\| \cdot \|$ is any
+arbitrary norm on $\VV$. It need not be the
+norm induced by the inner product.
+
+```{prf:proof}
+This version of dual norm comes from the fact that:
+
+$$
+T_{\bv}(\bx) = \langle \bx, \bv \rangle \Forall \bx \in \VV.
+$$
+Plugging it into the equation in {prf:ref}`def-la-dual-norm`,
+we get the desired identity.
+```
+
+
+```{prf:theorem} Generalized Cauchy Schwartz inequality
+:label: res-la-ip-gen-cs-ineq
+
+Let $\VV$ be an inner product space endowed with a norm
+$\| \cdot \| : \VV \to \RR$.
+
+For any $\bu \in \VV$, $\bv \in \VV^*$:
+
+$$
+| \langle \bu, \bv \rangle | \leq \| \bu \| \| \bv \|_*.
+$$
+```
+
+```{prf:proof}
+If $\bu = \bzero$, the inequality holds. Assume $\bu \neq \bzero$.
+
+1. Let $\bx = \frac{\bu}{\| \bu \|} $.
+1. Then, $\| \bx \| = 1$.
+1. By {prf:ref}`res-la-ip-dual-norm`
+   
+   $$
+   \| \bv \|_* \geq |\langle \bx, \bv \rangle |
+   = \left| \left \langle \frac{\bu}{\| \bu \|}, \bv \right \rangle \right |
+   = \frac{|\langle \bu, \bv \rangle |}{\| \bu \|}.
+   $$
+1. Multiplying both sides by $\| \bu \|$, we get:
+
+   $$
+   \| \bu \| \| \bv \|_* \geq | \langle \bu, \bv \rangle |.
+   $$
+```
+
+## Real Inner Product Spaces
+
+In this section, we assume that $\VV$ is a vector space
+over $\RR$. Some of the expressions simplify further
+for real vector spaces.
+
+```{prf:theorem} Dual norm in a real inner product space
+:label: res-la-rip-dual-norm
+
+Let $\VV$ be a real inner product space endowed with a norm
+$\| \cdot \| : \VV \to \RR$.
+
+Let $\bv \in \VV$ correspond to a linear functional $T_{\bv}$.
+Then, its dual norm is given by:
+
+$$
+\| \bv \|_* = \underset{\| \bx \| \leq 1}{\sup} \{ \langle \bx, \bv \rangle \}.
+$$
+```
+
+```{prf:proof}
+Assuming $\VV$ to be a real vector space, we note that 
+
+1. $\| \bx \| = \| - \bx \|$. 
+1. Thus, $\| \bx \| \leq 1 \iff \| - \bx \| \leq 1$.
+1. Also $\langle \bx, \bv \rangle = -\langle -\bx, \bv \rangle$.
+1. Either $\langle \bx, \bv \rangle$
+   or $\langle -\bx, \bv \rangle$ is nonnegative.
+1. Thus, the identity in {prf:ref}`res-la-ip-dual-norm` simplifies to this version.
 ```
