@@ -1,3 +1,4 @@
+(sec:cvxf:convex-functions)=
 # Convex Functions
 
 Throughout this section, we assume that $\VV, \WW$ are 
@@ -643,10 +644,10 @@ being treated as their extended value extensions.
 
 ## Proper Functions
 
-```{prf:definition} Proper convex function
+```{prf:definition} Proper function
 :label: def-cvxf-proper-function
 
-An extended real-valued convex function 
+An extended real-valued function 
 $f : \VV \to \ERL$ is called *proper*
 if its domain is nonempty, it never
 takes the value $-\infty$ and is
@@ -661,25 +662,30 @@ $$
 In other words, $\epi f$ is nonempty 
 and contains no vertical lines. 
 ``` 
-Putting another way, a proper convex function
-is obtained by taking a finite convex function $f$
+Putting another way, a proper function
+is obtained by taking a real valued function $f$
 defined on a nonempty set $C \subseteq \VV$
 and then extending it to all of $\VV$ by 
 setting $f(\bx) = +\infty$ for all $\bx \notin C$.
 
 It is easy to see that the codomain for a proper
-convex function can be changed from $\ERL$
+function can be changed from $\ERL$
 to $\RERL$ to clarify that it never takes
 the value $-\infty$.
 
 
-```{prf:definition} Improper convex function
+```{prf:definition} Improper function
 :label: def-cvxf-improper-function
 
-An extended real-valued convex function 
+An extended real-valued function 
 $f : \VV \to \ERL$ is called *improper*
 if it is not proper.
 ```
+
+For an improper function $f$:
+
+* $\dom f$ may be empty. 
+* $f$ might take a value of $-\infty$ at some $\bx \in \VV$.
 
 Most of our study is focused on proper functions.
 However, improper functions sometimes do arise
@@ -1790,3 +1796,34 @@ $$
 1. But then, $f$ is convex
    again due to {prf:ref}`res-cvxf-convexity-epigraph`.
 ```
+
+
+```{prf:definition} Piecewise linear function
+:label: def-cvxf-piecewise-linear-func
+
+Let $\ba_1, \dots, \ba_n \in \VV$.
+Let $b_1, \dots, b_n \in \RR$.
+
+A function $f: \VV \to \RR$ given by:
+
+$$
+f(\bx) = \max \{\langle \bx, \ba_i \rangle + b_i  \}_{i \in 1, \dots, n}
+$$
+is called a *piecewise linear* or *piecewise affine* function.
+```
+
+
+```{prf:theorem}
+:label: res-cvxf-piecewise-linear-convex
+
+Piecewise linear functions are convex.
+```
+
+```{prf:proof}
+Each of the functions $f_i (\bx) = \langle \bx, \ba_i \rangle + b_i$
+is affine functionals. 
+Thus, $f_i$ are convex ({prf:ref}`res-cvxf-affine-functional-convex`).
+$f$ is a pointwise maximum of $n$ convex functions.
+Hence, $f$ is convex ({prf:ref}`res-cvx-ptws-max-n`).
+```
+
