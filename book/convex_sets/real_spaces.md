@@ -23,6 +23,20 @@ Examples of inner product spaces:
 - Space of matrices $\RR^{m \times n}$
 - Space of symmetric matrices $\SS^n$.
 
+```{div}
+$\VV^*$ shall denote the
+{prf:ref}`dual space <def-la-dual-space>` of a 
+vector space $\VV$.
+As discussed in {prf:ref}`res-la-ip-dual-space-isomorphism`,
+the vector spaces $\VV$ and $\VV^*$ are isomorphic.
+Therefore, we follow the convention that both 
+$\VV$ and $\VV^*$ have exactly the same elements.
+The primary difference between $\VV$ and $\VV^*$ comes from the
+computation of norm. If $\VV$ is endowed with a norm $\| \cdot \|$
+then $\VV^*$ is endowed with a {prf:ref}`dual norm <def-la-dual-norm>`
+$\| \cdot \|_*$.
+```
+
 ## Affine Sets
 
 Affine sets for a general vector space $\VV$ over field $\FF$
@@ -76,6 +90,59 @@ A set of vectors $\bv_0, \bv_1, \dots, \bv_k \in \VV$ is called *affine independ
 if the vectors $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ are linearly independent.
 
 
+## Linear Functionals
+
+```{div}
+Recall that a linear functional in a real inner product space
+, denoted by $f: \VV \to \RR$, 
+corresponding to a vector $\ba \in \VV^*$
+is given by
+
+$$
+f(\bx) = \langle \bx, \ba \rangle. 
+$$
+```
+
+```{prf:theorem} Linear functionals are continuous
+:label: res-rvs-lin-func-uni-cont
+
+Let $f: \VV \to \RR$ be a linear functional
+corresponding to a nonzero vector $\ba \in \VV^*$
+given by
+
+$$
+f(\bx) = \langle \bx, \ba \rangle. 
+$$
+
+The linear functional is 
+{prf:ref}`uniformly continuous <def-ms-uniform-cont-real-valued>`.
+```
+
+```{prf:proof}
+Let $\bx, \by \in \VV$. 
+
+$$
+|f(\bx) - f(\by) |
+&= |\langle \bx, \ba \rangle - \langle \by, \ba \rangle| \\
+&= |\langle \bx - \by, \ba \rangle|\\
+&\leq \| \bx - \by \| \| \ba \|_*
+$$
+due to {prf:ref}`generalized Cauchy Schwartz inequality <res-la-ip-gen-cs-ineq>`.
+
+1. Let $\epsilon > 0$.
+1. Let $\delta = \frac{\epsilon}{\| \ba \|_*}$. Clearly, $\delta > 0$.
+1. Assume $d(\bx, \by) = \| \bx - \by \| < \delta$.
+1. Then
+
+   $$
+   |f(\bx) - f(\by) | \leq \| \bx - \by \| \| \ba \|_*
+   < \delta \| \ba \|_* = \epsilon.
+   $$
+1. Thus, for any $\bx, \by \in \VV$, 
+   $\| \bx - \by \| < \delta \implies |f(\bx) - f(\by) | < \epsilon$.
+1. Thus, $f$ is uniformly continuous.
+```
+
 (sec:convex:hyperplane)=
 ## Hyper Planes
 
@@ -90,9 +157,9 @@ specifically on hyperplanes in a real inner product space.
 A *hyperplane*  is a set of the form
 
 $$
-       H_{\ba, b} =  \{ x : \langle \ba, \bx \rangle = b \}
+H_{\ba, b} \triangleq  \{ x \ST \langle \bx, \ba \rangle = b \}
 $$
-where $\ba \in \VV, \ba \neq \bzero$ and $b \in \RR$.
+where $\ba \in \VV^*, \ba \neq \bzero$ and $b \in \RR$.
 The vector $\ba$ is called the *normal vector* to the hyperplane.
 ````
 
@@ -113,11 +180,41 @@ The vector $\ba$ is called the *normal vector* to the hyperplane.
 * Thus, we can think of $H_{\ba, b}$ having two sides,
   one along the normal $\ba$ and one opposite to the normal.
 
+```{prf:theorem}
+:label: res-hyperplane-affine
+
+A hyperplane is affine.
+```
+
+```{prf:proof}
+Let $H$ be a hyperplane given by
+
+$$
+H =  \{ x \ST \langle \bx, \ba \rangle = b \}
+$$
+where $\ba \in \VV^*, \ba \neq \bzero$ and $b \in \RR$.
+
+1. Let $\bx, \by \in H$ and $t \in \RR$.
+1. Let $\bz = t \bx + (1-t) \by$.
+1. Then, 
+
+   $$
+   \langle t \bx + (1-t) \by, \ba \rangle 
+   = t \langle \bx, \ba \rangle + (1-t)\langle \by, \ba \rangle
+   = t b + (1-t) b = b.
+   $$
+1. Thus, $\bz \in H$.
+1. Thus, $H$ is affine.
+```
+
+
 ```{prf:theorem} Hyperplane second form
+:label: res-hyperplane-form-2
+
 Let $\bx_0$ be an arbitrary element in $H_{\ba, b}$. Then
 
 $$
-H_{\ba, b} = \{ \bx \ST \langle a, \bx-\bx_0 \rangle = 0\}.
+H_{\ba, b} = \{ \bx \ST \langle \bx-\bx_0, \ba \rangle = 0\}.
 $$ 
 ```
 
@@ -125,10 +222,10 @@ $$
 Given $\bx_0 \in H$,
 
 $$
-             &\langle \ba, \bx_0 \rangle = b\\
-    \implies &\langle \ba, \bx \rangle = \langle \ba, \bx_0 \rangle \Forall \bx \in H\\
-    \implies &\langle \ba, \bx - \bx_0 \rangle = 0 \Forall \bx \in H\\
-    \implies &H = \{ \bx \ST \langle a, \bx-\bx_0 \rangle = 0\}.
+&\langle \bx_0, \ba \rangle = b\\
+\implies &\langle \bx, \ba \rangle = \langle \bx_0, \ba \rangle \Forall \bx \in H\\
+\implies &\langle \bx - \bx_0, \ba \rangle = 0 \Forall \bx \in H\\
+\implies &H = \{ \bx \ST \langle \bx-\bx_0, \ba \rangle = 0\}.
 $$
 ```
 
@@ -137,11 +234,13 @@ Recall that
 of $\ba$ is defined as
 
 $$
-a^{\perp} = \{ \bv \in \VV \ST  \ba \perp \bv \};
+\ba^{\perp} = \{ \bv \in \VV \ST  \ba \perp \bv \};
 $$
 i.e., the set of all vectors that are orthogonal to $\ba$.
 
 ```{prf:theorem} Hyperplane third form
+:label: res-hyperplane-form-3
+
 Let $\bx_0$ be an arbitrary element in $H_{\ba, b}$. Then
 
 $$
@@ -170,7 +269,7 @@ Thus, $S \subseteq H$.
 For any $\bx \in H$:
 
 $$
-\langle \ba, \bx - \bx_0 \rangle = b - b = 0. 
+\langle \bx - \bx_0, \ba \rangle = b - b = 0. 
 $$
 Thus, $\bx - \bx_0 \in \ba^{\perp}$. 
 Thus, $\bx \in \bx_0 + \ba^{\perp} = S$.
@@ -182,7 +281,7 @@ $$
 H = S = \bx_0 + \ba^{\perp}. 
 $$
 ```
-Thus, the hyperplane consists of an offset $\bx_0$ plus 
+In other words, the hyperplane consists of an offset $\bx_0$ plus 
 all vectors orthogonal to the (normal) vector $\ba$.
 
 ```{prf:observation}
@@ -200,13 +299,13 @@ A hyperplane divides $\VV$ into two *halfspaces*.
 The two (closed) halfspaces are given by
 
 $$
-    H_+ = \{ \bx : \langle \ba, \bx \rangle \geq b \}
+H_+ = \{ \bx : \langle \bx, \ba \rangle \geq b \}
 $$
 
 and
 
 $$
-    H_- = \{ \bx : \langle \ba, \bx \rangle \leq b \}
+H_- = \{ \bx : \langle \bx, \ba \rangle \leq b \}
 $$
 
 The halfspace $H_+$ extends in the direction of $\ba$ while
@@ -218,8 +317,8 @@ $H_-$ extends in the direction of $-\ba$.
 *  The halfspace can be written alternatively as 
 
 $$
-    H_+  = \{ \bx \ST \langle \ba, \bx - \bx_0 \rangle \geq 0\}\\
-    H_-  = \{ \bx \ST \langle \ba, \bx - \bx_0 \rangle \leq 0\}
+H_+  = \{ \bx \ST \langle \bx - \bx_0, \ba \rangle \geq 0\}\\
+H_-  = \{ \bx \ST \langle \bx - \bx_0, \ba \rangle \leq 0\}
 $$
 
 
@@ -233,13 +332,99 @@ where $\bx_0$ is any point in the associated hyperplane $H$.
 The sets given by
 
 $$
-    \Interior{H_+} = \{ \bx | \langle \ba, \bx \rangle > b\}\\
-    \Interior{H_-} = \{ \bx | \langle \ba, \bx \rangle < b\}
+\Interior{H_+} = \{ \bx | \langle \bx, \ba \rangle > b\}\\
+\Interior{H_-} = \{ \bx | \langle \bx, \ba \rangle < b\}
 $$
 
 are called *open halfspaces*. They are the interior
 of corresponding closed halfspaces.
 ````
+
+```{prf:theorem} 
+:label: res-closed-halfspace-closed-set
+
+A closed half space is a closed set.
+```
+```{prf:proof}
+Consider the halfspace
+
+$$
+H_+ = \{ \bx : \langle \bx, \ba \rangle \geq b \}.
+$$
+
+Consider the linear functional $f : \bx \mapsto \langle \bx, \ba \rangle$.
+We can see that
+
+$$
+H_+ = f^{-1}([b, \infty)).
+$$
+
+1. The interval $[b, \infty)$ is a closed interval in $\RR$.
+1. Recall from {prf:ref}`res-rvs-lin-func-uni-cont` that 
+   $f$ is uniformly continuous.
+1. Since $f$ is continuous hence 
+   $f^{-1}([b, \infty))$ is also closed
+   due to {prf:ref}`res-ms-continuous-function-characterization`.
+
+Similarly, for the half-space
+
+$$
+H_- = \{ \bx : \langle \bx, \ba \rangle \leq b \}
+$$
+We can see that
+
+$$
+H_- = f^{-1}((-\infty, b]).
+$$
+
+1. The interval $(-\infty, b]$ is a closed interval in $\RR$.
+1. Since $f$ is continuous hence 
+   $f^{-1}((-\infty, b])$ is also closed
+   due to {prf:ref}`res-ms-continuous-function-characterization`.
+```
+
+```{prf:theorem} 
+:label: res-open-halfspace-open-set
+
+An open half space is an open set.
+```
+
+```{prf:proof}
+Consider the halfspace
+
+$$
+H_{++} = \{ \bx : \langle \bx, \ba \rangle > b \}.
+$$
+
+Consider the linear functional $f : \bx \mapsto \langle \bx, \ba \rangle$.
+We can see that
+
+$$
+H_{++} = f^{-1}((b, \infty)).
+$$
+
+1. The interval $(b, \infty)$ is an open interval in $\RR$.
+1. Since $f$ is continuous hence 
+   $f^{-1}((b, \infty))$ is also open
+   due to {prf:ref}`res-ms-continuous-function-characterization`.
+
+Similarly, for the half-space
+
+$$
+H_{--} = \{ \bx : \langle \bx, \ba \rangle < b \}
+$$
+We can see that
+
+$$
+H_{--} = f^{-1}((-\infty, b)).
+$$
+
+1. The interval $(-\infty, b)$ is an open interval in $\RR$.
+1. Since $f$ is continuous hence 
+   $f^{-1}((-\infty, b))$ is also open
+   due to {prf:ref}`res-ms-continuous-function-characterization`.
+```
+
 
 ## Relative Interior
 
