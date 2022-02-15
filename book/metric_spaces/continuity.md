@@ -82,9 +82,11 @@ where $(A,d)$ is a metric subspace of $(X, d)$.
 Then $f'$ is a total function.
 ```
 
-```{prf:example} Distance to a set
+```{prf:example} Distance from a set
+:label: ex-ms-cont-set-distance
 
-The distance to a set $A \subseteq X$ from any point $x\in X$ 
+Recall from {prf:ref}`def-ms-point-set-distance`
+that the distance from a nonempty set $A \subseteq X$ of any point $x\in X$ 
 is defined as:
 
 $$
@@ -396,6 +398,25 @@ $$
 ```{prf:remark}
 If $f$ is uniformly continuous on $A \subseteq \dom f$, then $f$ is continuous on $A$.
 ```
+
+For real valued functions, the standard metric on $\RR$ is
+$d(x,y) = |x - y|$. The uniform continuity definition
+simplifies accordingly as:
+
+```{prf:remark} Uniform continuity for real valued functions
+:label: def-ms-uniform-cont-real-valued
+
+A real valued function $f: (X, d) \to \RR$ is called 
+*uniformly continuous* on $A \subseteq \dom f$
+if for every $\epsilon > 0$, there exists some $\delta > 0$
+(depending on $\epsilon$) such that
+
+$$
+|f(x) - f(y)| < \epsilon 
+\text{ whenever } d(x, y) < \delta \text{ and } x, y \in A.
+$$
+```
+
 
 ## Isometry
 
