@@ -59,6 +59,7 @@ A ball centered at origin $\bzero \in \VV$ is
 called a *unit ball* if its radius is $1$. 
 $B[\bzero, 1]$ denotes a *closed unit ball*
 and $B(\bzero, 1)$ denotes an *open unit ball*.
+The open unit ball is often written simply as $B$.
 ```
 
 ```{prf:observation}
@@ -75,6 +76,72 @@ the open unit ball as:
 $$
 B(\bx, r) = \bx + r B(\bzero, 1).
 $$
+```
+
+In the following, $B$ means the open unit ball $B(\bzero, 1)$.
+
+```{prf:theorem} 
+:label: res-la-interior-point-ball
+
+Let $A$ be a subset of a normed linear space $\VV$.
+Then, $\bx \in \interior A$ if and only if there 
+exists $r > 0$ such that 
+
+$$
+\bx + r B \subseteq A.
+$$ 
+```
+```{prf:proof}
+From {prf:ref}`def-ms-interior-point`,
+$\bx$ is an interior point of $A$ if
+there exists an $r > 0$ such that the open ball
+$B(\bx, r) \subseteq A$.
+But, as per algebraic notation $B(\bx, r) = \bx + r B$.
+```
+
+```{prf:theorem} 
+:label: res-la-closure-point-ball
+
+Let $A$ be a subset of a normed linear space $\VV$.
+Then, $\bx \in \closure A$ if and only if
+
+$$
+\bx \in A + r B \Forall r > 0.
+$$ 
+```
+
+```{prf:proof}
+
+Recall that 
+
+$$
+A + r B = \bigcup_{\ba \in A} \ba + rB.
+$$
+Thus, $\bx \in A + r B$ if and only if 
+there exists $\ba \in A$ such that $\bx \in \ba + r B$.
+
+Assume that $\bx \in A + r B \Forall r > 0$.
+
+1. Thus, for every $r > 0$, there exists $\ba \in A$ (depending on $r$)
+   such that $\bx \in \ba + r B = B(\ba, r)$.
+1. Thus, for every $r > 0$, there exists $\ba \in A$ (depending on $r$)
+   such that $d(\bx, \ba) < r$.
+1. Thus, for every $r > 0$, there exists $\ba \in A$ (depending on $r$) 
+   such that $\ba \in B(\bx, r)$.
+1. Thus, $A \cap B(\bx, r) \neq \EmptySet$ for every $r > 0$.
+1. Thus, $\bx$ is a closure point of $A$.
+
+For the converse, assume that $\bx$ is a closure point of $A$.
+
+1. Then, $A \cap B(\bx, r) \neq \EmptySet$ for every $r > 0$.
+1. Thus, for every $r > 0$, there exists $\ba \in A$ (depending on $r$)
+   such that $\ba \in B(\bx, r)$.
+1. Thus, for every $r > 0$, there exists $\ba \in A$ (depending on $r$)
+   such that $d(\bx, \ba) < r$.
+1. Thus, for every $r > 0$, there exists $\ba \in A$ (depending on $r$)
+   such that $\bx \in B(\ba, r) = \ba + r B$.
+1. Thus, for every $r > 0$, 
+   $\bx \in A + r B$.
 ```
 
 ## Open Sets
