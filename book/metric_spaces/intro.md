@@ -70,6 +70,8 @@ and doesn't need to be stated explicitly.
 ## Properties of Metrics
 
 ```{prf:proposition} Triangle inequality alternate form
+:label: res-ms-triangle-ineq-2nd-form
+
 Let $(X, d)$ be a metric space. Let $x,y,z \in X$.
 
 $$
@@ -282,7 +284,7 @@ See {prf:ref}`res-ms-set-accumulation-point-distance`.
 
 ## Distance between Sets
 
-```{prf:definition} Distance sets
+```{prf:definition} Distance between sets
 :label: def-ms-set-set-distance
 
 The distance between two nonempty sets $A,B \subseteq X$ 
