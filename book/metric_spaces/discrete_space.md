@@ -31,6 +31,8 @@ space with the distance function defined above.
 ## Open and Closed Sets
 
 ```{prf:proposition}
+:label: res-ms-discrete-singleton-open
+
 Every singleton in a discrete metric space is open.
 ```
 
@@ -51,6 +53,8 @@ Thus, every singleton is an open ball. Hence it is an open set.
 ```
 
 ```{prf:proposition}
+:label: res-ms-discrete-subset-open
+
 Every subset of a discrete space is open.
 ```
 ```{prf:proof}
@@ -68,6 +72,8 @@ hence $A$ is open.
 
 
 ```{prf:proposition}
+:label: res-ms-discrete-subset-closed
+
 Every subset of a discrete set is closed.
 ```
 ```{prf:proof}
@@ -118,6 +124,8 @@ Let $x, y \in X$.
 ## Rare Sets
 
 ```{prf:proposition}
+:label: res-ms-discrete-rare-empty
+
 The only rare (nowhere dense) subset of $X$ is $\EmptySet$.
 ```
 
@@ -130,6 +138,8 @@ Thus, $A$ is rare if and only if $A = \EmptySet$.
 ## Cauchy Sequences
 
 ```{prf:proposition}
+:label: res-ms-discrete-cauchy-constant
+
 In a discrete metric space, a Cauchy sequence is eventually
 constant.
 ```
@@ -149,6 +159,8 @@ $\{ x_n \}$ must be eventually constant.
 ## Completeness
 
 ```{prf:proposition}
+:label: res-ms-discrete-complete
+
 A discrete metric space is complete.
 ```
 
@@ -160,6 +172,8 @@ it converges. Thus the discrete metric space is complete.
 ## Meager Sets
 
 ```{prf:proposition}
+:label: res-ms-discrete-meager-empty
+
 The only meager set in $X$ is $\EmptySet$.
 ```
 
@@ -176,6 +190,8 @@ Thus, the only meager set is $\EmptySet$.
 ## Baire Category Theorem
 
 ```{prf:observation}
+:label: res-ms-discrete-baire
+
 Let $X$ be a countable set with a discrete metric.
 
 $X$ is complete and it satisfies the Baire category theorem.
