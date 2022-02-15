@@ -364,6 +364,9 @@ Although every compact set is closed and bounded, the converse need
 not be true. See {prf:ref}`ex-discrete-space-closed-bounded-not-compact`
 for an example of closed and bounded set (in discrete space)
 which is not compact.
+In fact, discrete space is a
+{prf:ref}`complete <res-ms-discrete-complete>` metric space.
+Yet, it has closed and bounded sets which are not compact.
 
 In the specific case of Euclidean spaces, all closed and
 bounded sets are compact too. 
@@ -563,7 +566,9 @@ implies convergence in $\RR^m$* is due to the specific choice
 of Euclidean metric.
 
 
-```{prf:theorem}
+```{prf:theorem} Attainment of minimum and maximum values
+:label: res-ms-compact-real-valued-min-max-attain
+
 Let $f : (X, d) \to \RR$ be a real valued function.
 If $f$ is continuous then $f$ attains a maximum and minimum value on 
 every compact subset of $\dom f$.
