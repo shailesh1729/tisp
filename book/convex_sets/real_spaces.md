@@ -450,10 +450,28 @@ contained inside $C$.
 The *relative interior* of a set $C$, denoted by $\relint C$
 is the set of 
 all its relative interior points.
+
+$$
+\relint C \triangleq \{\bx \in C \ST \exists r > 0, 
+B(x, r) \cap \affine C \subseteq C \}.
+$$
 ```
 
 $C$ may have an empty interior
 and yet may have a nonempty relative interior.
+
+
+```{prf:definition}
+:label: def-cvx-relatively-open
+
+We say that a set $C$ is *relatively open* if $C$
+is open relative to its affine hull $\affine C$.
+In other words, $C$ is *relatively open* if
+
+$$
+\relint C = C.
+$$
+```
 
 ```{prf:definition} Relative boundary
 :label: def-cvx-relative-boundary
