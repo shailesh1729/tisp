@@ -686,18 +686,48 @@ Let $C$ be a nonempty convex set. Let $\bx \in \relint C$
 and $\by \in \closure C$. Then, 
 
 $$
-t \bx + (1-t) \by \in \relint C \Forall t \in (0,1].
+(1-t) \bx + t \by \in \relint C \Forall t \in [0,1).
 $$
 ```
 
 ```{prf:proof}
-Let $C$ be a convex set. Fix some $t \in [0,1]$. 
-We need to show that $\bz = t \bx + (1-t)\by \in \relint C$.
-Recall that $\affine C$ denotes the affine hull of $C$.
+Let $C$ be a convex set. Fix some $t \in [0,1)$.
+For simplicity, we shall assume that $\relint C = \interior C$.
+Let $B$ denote the unit open ball $B(\bzero, 1)$.
 
-1. Since $\by \in \closure C$, hence for all $\epsilon > 0$, 
-   we have 
+1. Let $\bz = (1-t) \bx + t \by$. 
+   It suffices to show that there is an open ball
+   $B(\bz, r) \subseteq C$.
+1. Since $\by \in \closure C$, hence for every $r > 0$, 
+   we have $\by \in C + r B$.
+1. Then,
 
+   $$
+   \bz + r B &= (1-t)\bx + t \by + r B \\
+   &\subseteq (1-t)\bx + t (C + r B) + r B \\
+   &= (1-t)\bx + (1 + t) rB + t C\\
+   & = (1 -t)(\bx + r (1+t)(1-t)^{-1} B) + t C.
+   $$
+1. Since $\bx \in \interior C$, hence we can take $r$ to be so small 
+   such that
+
+   $$
+   \bx + r (1+t)(1-t)^{-1} B \subseteq C.
+   $$
+1. But then
+
+   $$
+   (1 -t)(\bx + r (1+t)(1-t)^{-1} B) + t C 
+   &\subseteq (1 -t) C + t C\\ 
+   &\subseteq C
+   $$
+   since $C$ is convex and $t \in [0,1)$.
+1. Thus, we established that there exists an $r > 0$ 
+   such that $\bz + r B \subseteq C$.
+1. Hence, $\bz \in \int C = \relint C$.
+
+This argument can be extended for the case where
+$\relint C \neq \interior C$.
 ```
 
 ## Infinite Convex Combinations
