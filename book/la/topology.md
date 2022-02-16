@@ -80,7 +80,9 @@ $$
 
 In the following, $B$ means the open unit ball $B(\bzero, 1)$.
 
-```{prf:theorem} 
+## Interior
+
+```{prf:theorem} Interior points in a normed space
 :label: res-la-interior-point-ball
 
 Let $A$ be a subset of a normed linear space $\VV$.
@@ -99,7 +101,25 @@ $B(\bx, r) \subseteq A$.
 But, as per algebraic notation $B(\bx, r) = \bx + r B$.
 ```
 
-```{prf:theorem} 
+```{prf:theorem} Interior in a normed space
+:label: res-la-interior
+
+Let $A$ be a subset of a normed linear space $\VV$.
+The interior of $A$ is given by
+
+$$
+\interior A = \{ \bx \ST \exists r > 0, \bx + r B \subseteq A \}.
+$$ 
+```
+
+```{prf:proof}
+This follows from the fact that the interior is a collection
+of all the interior points of $A$.
+```
+
+## Closure
+
+```{prf:theorem} Closure points in a normed space
 :label: res-la-closure-point-ball
 
 Let $A$ be a subset of a normed linear space $\VV$.
@@ -144,9 +164,34 @@ For the converse, assume that $\bx$ is a closure point of $A$.
    $\bx \in A + r B$.
 ```
 
+```{prf:theorem} Closure in a normed space
+:label: res-la-closure
+
+Let $A$ be a subset of a normed linear space $\VV$.
+Then, the closure of $A$ is given by
+
+$$
+\closure A = \bigcap_{r > 0} (A + r B).
+$$ 
+```
+
+```{prf:proof}
+From previous result, a point $\bx$ is a closure point of $A$ 
+if and only if 
+
+$$
+\bx \in \bigcap_{r > 0} (A + r B).
+$$
+The result follows from the fact that the closure of $A$
+is the collection of all its closure points.
+```
+
+
 ## Open Sets
 
 ```{prf:theorem}
+:label: res-la-sum-open-sets
+
 If $A$ and $B$ are open, then their sum $A+B$ is open.
 ```
 ```{prf:proof}
@@ -163,6 +208,8 @@ is a union of open sets. Hence, it is open.
 ## Closed Sets
 
 ```{prf:theorem}
+:label: res-la-sum-closed-compact
+
 If $A$ is closed and $B$ is compact, then their sum $A+B$ is closed.
 ```
 ```{prf:proof}
@@ -191,3 +238,21 @@ where $a_n \in A$ and $b_n \in B$.
 1. Thus, $A+B$ is closed. ({prf:ref}`res-ms-closure-convergence`).
 
 ```
+
+
+## Linear Subspaces
+
+```{prf:theorem}
+:label: res-la-subspace-closed
+
+Every subspace of a normed linear space $\VV$ is a closed set.
+```
+
+```{prf:theorem}
+:label: res-la-proper-subspace-empty-interior
+
+Every proper subspace of a normed linear space $\VV$
+has an empty interior.
+```
+
+
