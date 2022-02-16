@@ -426,64 +426,6 @@ $$
 ```
 
 
-## Relative Interior
-
-```{prf:definition} Relative interior point
-:label: def-cvx-relative-interior-point
-
-Let $C \subseteq \VV$. We say that $\bx \in C$ 
-is a *relative interior point* of $C$ if
-there exists an open ball $B(x, r)$ for some $r > 0$
-such that 
-
-$$
-B(x, r) \cap \affine C \subseteq C.
-$$
-```
-
-Note that, the open ball $B(x, r)$ itself need not be
-contained inside $C$.
-
-```{prf:definition} Relative interior
-:label: def-cvx-relative-interior
-
-The *relative interior* of a set $C$, denoted by $\relint C$
-is the set of 
-all its relative interior points.
-
-$$
-\relint C \triangleq \{\bx \in C \ST \exists r > 0, 
-B(x, r) \cap \affine C \subseteq C \}.
-$$
-```
-
-$C$ may have an empty interior
-and yet may have a nonempty relative interior.
-
-
-```{prf:definition}
-:label: def-cvx-relatively-open
-
-We say that a set $C$ is *relatively open* if $C$
-is open relative to its affine hull $\affine C$.
-In other words, $C$ is *relatively open* if
-
-$$
-\relint C = C.
-$$
-```
-
-```{prf:definition} Relative boundary
-:label: def-cvx-relative-boundary
-
-The *relative boundary* of a set $C$, denoted by $\relbd C$
-is given by
-
-$$
-\relbd C \triangleq \closure C \setminus \relint C.
-$$
-```
-
 
 ## The $\VV \oplus \RR$ Vector Space
 
