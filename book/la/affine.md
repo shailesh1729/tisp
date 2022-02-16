@@ -811,3 +811,34 @@ T \left ( \sum_{i=0}^k t_i \bx_i \right )
 &= \sum_{i=0}^k t_i T( \bx_i).
 $$
 ```
+
+
+## Topology
+
+We next consider the special case of a vector space $\VV$
+endowed with a 
+{prf:ref}`norm <def-la-norm>` $\| \cdot \| : \VV \to \RR$, 
+which induces a {prf:ref}`metric <def-ms-distance-function>` 
+$d: \VV \times \VV \to \RR$ given by:
+
+$$
+d (x, y) = \| x - y \|.
+$$
+$\VV$ equipped with this metric becomes a 
+{prf:ref}`metric space <def-ms-metric-space>`
+and is endowed with a metric topology.
+Useful topological properties of affine sets 
+are discussed below.
+
+```{prf:theorem}
+:label: res-la-affine-closed
+
+Every affine subset of a normed linear space $\VV$ is a closed set.
+```
+
+```{prf:theorem}
+:label: res-la-affine-subspace-empty-interior
+
+Every proper affine subspace of a normed linear space $\VV$
+has an empty interior.
+```
