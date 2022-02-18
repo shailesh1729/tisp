@@ -932,6 +932,7 @@ $$
 
 
 ```{prf:theorem} Hyperplanes in inner product spaces
+:label: res-aff-ip-hyperplane
 
 If $\VV$ is an inner product space over $\FF$, then
 a set of the form
@@ -940,7 +941,7 @@ $$
 H = \{\bx \ST \langle \bx, \ba \rangle = b \}
 $$
 where $\ba \in \VV$ is a nonzero vector 
-and $b \in \FF$ is a hyperplane.
+and $b \in \FF$; is a hyperplane.
 
 Moreover, every hyperplane of $\VV$ can be represented
 in this form, with $\ba$ and $b$ unique up to a
@@ -979,12 +980,16 @@ is identical to $H$ for any $t \in \FF$ such that $t \neq 0$.
 :label: res-aff-proper-sub-hyper-intersect
 
 Let $\VV$ be a finite dimensional vector space.
-Then, every proper affine subspace of $\VV$
-is an intersection of hyperplanes.
+Then, every proper affine subset of $\VV$
+is a finite intersection of hyperplanes.
 ```
 
 
 ```{prf:proof}
+If $C = \EmptySet$, we can choose any
+two non-intersecting parallel hyperplanes and $C$ is
+their intersection.
+
 Let $C$ be a proper affine subspace of $\VV$
 such that $1 \leq \dim C < \dim \VV$.
 
@@ -1089,6 +1094,54 @@ associated linear subspace is $\{ \bzero \}$.
 1. Now, it is straightforward to show that
    $H = \{\ba \}  = C$.
 ```
+
+```{prf:corollary} Affine sets in inner product space
+:label: res-aff-finite-ip-proper-sub-hyper-intersect
+
+Let $\VV$ be a finite dimensional inner product space over field $\FF$.
+Let $A$ be a proper affine subset of $\VV$. 
+
+Then, there exist $r$ (where $r < \dim \VV$) nonzero vectors
+$\ba_i \in \VV$ and scalars $b_i \in \FF$ such
+that $A$ is the intersection of the
+hyperplanes given by
+
+$$
+H_i = \{\bx \in \VV \ST \langle \bx, \ba_i \rangle = b_i \}.
+$$
+
+Specifically,
+
+$$
+A = \bigcap_{i=1}^m H_i = \{\bx \in \VV \ST 
+   \langle \bx, \ba_i \rangle = b_i, i=1,\dots,m \}.
+$$
+```
+
+```{prf:proof}
+It follows from {prf:ref}`res-aff-proper-sub-hyper-intersect`
+that $A$ is a finite intersection of hyperplanes
+with $r < n$ where $n = \dim \VV$.
+
+Since $\VV$ is an inner product space, hence,
+due to {prf:ref}`res-aff-ip-hyperplane`,
+each hyperplane can be represented as
+
+$$
+H_i = \{\bx \in \VV \ST \langle \bx, \ba_i \rangle = b_i \}
+$$
+where $\ba_i \in \VV$ and $b_i \in \FF$.
+```
+
+Procedure to select the hyperplane parameters.
+
+1. Pick a vector $\ba \in A$.
+1. Identify the linear subspace $L = A - \ba$.
+1. Pick an orthonormal basis for $L$: $\{\bv_1, \dots, \bv_m \}$.
+1. Extend the orthonormal basis to $\VV$.
+1. Pick the basis vectors for $L^{\perp}$: $\{\ba_1, \dots, \ba_r \}$
+   with $m + r = n$.
+1. Compute $b_i = \langle \ba, \ba_i \rangle$.
 
 ## Linear Equations
 
