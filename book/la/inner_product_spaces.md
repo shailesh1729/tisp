@@ -933,21 +933,33 @@ $$
 $$
 ```
 
-```{prf:observation}
+```{prf:theorem} Orthogonal complement and basis
+:label: res-la-ip-orth-comp-perp-basis
+
 If $S$ is a subspace of $\VV$, then to show that some vector 
 $\bu \in S^{\perp}$, it is sufficient to show that $\bu$ is
 orthogonal to all the vectors in some basis of $S$.
+
+Specifically, if $S$ is a finite dimensional subspace of $\VV$ and
+$\BBB = \{ \bv_1, \dots, \bv_m \}$ is a basis 
+for $S$, then
+
+$$
+S^{\perp} = \{\bx \ST \bx \perp \bv_i, i=1,\dots,m \}.
+$$
 ```
+
 ```{prf:proof}
-Let $\be_1, \dots, \be_p$ be a basis for $S$. 
+Let $\BBB$ be a basis for $S$ (finite or infinite). 
 
 Then, for any $\bs \in S$:
 
 $$
-\bs = \sum_{i=1}^p \alpha_p \be_p.
+\bs = \sum_{i=1}^p \alpha_p \be_p
 $$
+where $\alpha_p \in \FF$ and $\be_p \in \BBB$.
 
-Now, if $\bu$ is orthogonal to every vector in $\be_1, \dots, \be_p$,
+Now, if $\bu$ is orthogonal to every vector in $\BBB$,
 then
 
 $$
@@ -956,6 +968,44 @@ $$
 
 Thus, $\bu \perp \bs$. 
 Since $\bs$ was arbitrarily chosen from $S$, hence $\bu \in S^{\perp}$.
+
+Now, assume $S$ to be finite dimensional and
+$\BBB = \{ \bv_1, \dots, \bv_m \}$ to be a basis of $S$.
+Let
+
+$$
+T = \{\bx \ST \bx \perp \bv_i, i=1,\dots,m \}.
+$$
+
+We first show that $S^{\perp} \subseteq T$.
+
+1. Let $\bv \in S^{\perp}$.
+1. Then, $\bv \perp \bs$ for every $\bs \in S$.
+1. In particular, $\bv \perp \bv_i$ for $i=1,\dots,m$ since $\BBB \subset S$.
+1. Thus, $\bv \in T$.
+1. Thus, $S^{\perp} \subseteq T$.
+
+We next show that $T \subseteq S^{\perp}$.
+
+1. Let $\bx \in T$.
+1. Then, $\bx \perp \bv_i$ for $i=1,\dots, m$.
+1. But then, for any $\bs \in S$
+
+   $$
+   \langle \bs, \bx \rangle 
+   = \left \langle \sum_{i=1}^m t_i \bv_i, \bx \right \rangle 
+   = \sum_{i=1}^m t_i \langle \bv_i, \bx \rangle  0 
+   $$
+   since $\bs = \sum_{i=1}^m t_i \bv_i$ is a linear combination of $\BBB$.
+1. Thus, $\bx \perp \bs$ for every $\bs \in S$.
+1. Thus, $\bx \in S^{\perp}$.
+1. Thus, $T \subseteq S^{\perp}$.
+
+Combining:
+
+$$
+S^{\perp} = T = \{\bx \ST \bx \perp \bv_i, i=1,\dots,m \}.
+$$
 ```
 
 
