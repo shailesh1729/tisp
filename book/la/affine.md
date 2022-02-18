@@ -565,19 +565,97 @@ Let $C$ be an arbitrary affine subspace such that $S \subseteq C$.
 The affine hull of a set is the intersection of all affine subspaces containing it.
 ```
 
+```{prf:theorem} Affine hull of a finite set
+:label: res-aff-finite-set-hull-ass-space
+
+Let $S = \{ \bv_0, \bv_1, \dots, \bv_k \}$
+be a finite set of vectors from a vector space $\VV$.
+Let $A = \affine S$ be their affine hull.
+Then, the linear subspace associated with $A$ is given by
+
+$$
+L = \span \{\bv_1 - \bv_0, \dots, \bv_k - \bv_0\}.
+$$
+
+Consequently, the dimension of $\affine S$ is at most $k$.
+```
+
+```{prf:proof}
+Since $L = A - \bv_0$, hence 
+$\bv_1 - \bv_0, \dots, \bv_k - \bv_0 \in L$. 
+Thus, $\span \{ \bv_1 - \bv_0, \dots, \bv_k - \bv_0\} \subseteq L$.
+
+Now, let $\bv \in L$. Then, there exist $t_0, \dots, t_k$ 
+with $t_0 + \dots + t_k =1$ such that
+
+$$
+\bv = t_0 \bv_0 + \dots + t_k \bv_k - \bv_0.
+$$
+
+But then
+
+$$
+\bv &= (1 - t_1 - \dots - t_k) \bv_0 + t_1 \bv_1 + \dots + t_k \bv_k - \bv_0\\
+&= t_1 (\bv_1 - \bv_0) + \dots + t_k (\bv_k - \bv_0).
+$$
+
+Thus, $\bv \in \span \{\bv_1 - \bv_0, \dots, \bv_k - \bv_0\}$.
+Thus, $L \subseteq \span \{\bv_1 - \bv_0, \dots, \bv_k - \bv_0\}$.
+
+Combining:
+
+$$
+L = \span \{\bv_1 - \bv_0, \dots, \bv_k - \bv_0\}.
+$$
+
+Since $L$ is a span of $k$ vectors, hence
+$\dim L \leq k$. Thus, $\dim A \leq k$.
+```
+
+## Affine Independence
 
 ```{prf:definition} Affine independence
 :label: def-affine-independence
 
 A set of vectors $\bv_0, \bv_1, \dots, \bv_k \in \VV$ is called *affine independent*,
 if the vectors $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ are linearly independent.
-
-In other words, the difference vectors $\bv_k - \bv_0$ 
-belong to the associated linear subspace. 
 ```
 If the associated subspace has dimension $l$ then a maximum of $l$ vectors can 
 be linearly independent in it. Hence a maximum of $l+1$ vectors can be affine
 independent for the affine set.
+
+```{prf:theorem} Affine independence and dimension
+:label: res-aff-independence-hull-dim
+
+A set of vectors $\bv_0, \bv_1, \dots, \bv_k \in \VV$ is 
+affine independent if and only if their affine hull
+$\affine \{\bv_0, \bv_1, \dots, \bv_k\}$ is $k$ dimensional.
+```
+
+```{prf:proof}
+Assume $\bv_0, \bv_1, \dots, \bv_k$ to be affine independent.
+
+1. Then,  by {prf:ref}`def-affine-independence`,
+   $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ are linearly independent.
+1. Let $L = \span \{ \bv_1 - \bv_0, \dots, \bv_k - \bv_0 \}$.
+1. By {prf:ref}`res-aff-finite-set-hull-ass-space` 
+   
+   $$
+   \dim \affine \{\bv_0, \bv_1, \dots, \bv_k\} = \dim L = k
+   $$
+   since $L$ is a span of $k$ linearly independent vectors.
+
+Now, assume $A = \affine \{\bv_0, \bv_1, \dots, \bv_k\}$ is $k$ dimensional.
+
+1. By {prf:ref}`res-aff-finite-set-hull-ass-space`, the linear subspace
+   associated with $A$ is given by 
+   $L = \span \{ \bv_1 - \bv_0, \dots, \bv_k - \bv_0 \}$.
+1. Thus, $L$ is $k$ dimensional since $\dim L = \dim A = k$.
+1. But, $L$ is a span of $k$ vectors. 
+1. Hence, the $k$ vectors 
+   $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$
+   must be linearly independent.
+```
 
 
 ## Translations
