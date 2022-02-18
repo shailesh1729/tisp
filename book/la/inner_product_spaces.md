@@ -1044,7 +1044,9 @@ $$
 is a unique decomposition.
 ````
 
-```{prf:corollary}
+```{prf:corollary} Intersection between a subspace and its complement
+:label: res-la-intersect-subspace-complement
+
 If $S$ is a finite dimensional subspace of an inner product space $\VV$, then
 
 $$
@@ -1053,6 +1055,185 @@ $$
 
 In other words, the only vector common between $S$ and its orthogonal complement
 is the zero vector.
+```
+
+
+```{prf:theorem} Vector space as direct sum
+:label: res-la-vs-direct-sum-orth-comp
+
+If $S$ is a finite dimensional subspace of an inner product space $\VV$, then
+
+$$
+\VV = S \oplus S^{\perp}.
+$$
+
+In other words, $\VV$ is a direct sum of $S$ and its
+orthogonal complement.
+```
+
+```{prf:proof}
+From {prf:ref}`res-la-intersect-subspace-complement`, the
+intersection between $S$ and $S^{\perp}$ is the zero vector.
+Thus, by {prf:ref}`def-vs-direct-sum-subspaces`,
+the direct sum between the two spaces
+$S \oplus S^{\perp}$ is well defined.
+
+By {prf:ref}`res-la-orthogonal-decomposition`,
+every vector $\bv \in \VV$ can be uniquely
+decomposed as
+
+$$
+\bv = \bv_{\parallel}  + \bv_{\perp}
+$$
+where $\bv_{\parallel} \in S$ and $\bv_{\perp} \in S^{\perp}$.
+
+Thus, $\VV \subseteq S \oplus S^{\perp}$.
+
+However, since both $S$ and $S^{\perp}$ are
+subspaces of $\VV$, hence
+
+$$
+\VV = S \oplus S^{\perp}.
+$$
+```
+
+```{prf:theorem} Dimension of vector space as direct sum
+:label: res-la-vs-dim-dir-sum-orth-comp
+
+Let $\VV$ be a finite dimensional inner product space.
+If $S$ is a subspace of $\VV$, then
+
+$$
+\dim \VV = \dim S + \dim S^{\perp}.
+$$
+```
+
+```{prf:proof}
+Since $\VV$ is finite dimensional, hence
+both $S$ and $S^{\perp}$ are finite dimensional
+subspaces of $\VV$.
+
+By {prf:ref}`res-la-vs-direct-sum-orth-comp`
+
+
+$$
+\VV = S \oplus S^{\perp}.
+$$
+
+Then, due to {prf:ref}`res-la-dim-direct-sum-subspaces`
+
+$$
+\dim \VV = \dim S + \dim S^{\perp}.
+$$
+```
+
+```{prf:theorem} Orthogonal complement of orthogonal complement
+:label: res-la-orth-comp-orth-comp
+
+Let $\VV$ be a finite dimensional inner product space.
+Let $S$ be a subspace of $\VV$ and let $S^{\perp}$
+be its orthogonal complement. Then
+
+$$
+\left (S^{\perp} \right )^{\perp} = S.
+$$
+In other words, in a finite dimensional space,
+the orthogonal complement of orthogonal complement
+is the original subspace itself.
+```
+Note that this result is valid only for finite dimensional
+spaces since in that case both $S$ and $S^{\perp}$ are
+finite dimensional.
+
+```{prf:proof}
+Since $\VV$ is finite dimensional, hence
+both $S$ and $S^{\perp}$ are finite dimensional.
+
+$$
+\left (S^{\perp} \right )^{\perp} = \{\bv \in \VV \ST 
+   \bu \perp \bv \Forall \bu \in S^{\perp} \}.
+$$
+
+We shall first show that $S \subseteq \left (S^{\perp} \right )^{\perp}$.
+
+1. Let $\bs \in S$. 
+1. Then, by definition, $\bs \perp \bu \Forall \bu \in S^{\perp}$.
+1. Thus, $\bs \in \left (S^{\perp} \right )^{\perp}$.
+1. Thus, $S \subseteq \left (S^{\perp} \right )^{\perp}$.
+
+We now show that $\left (S^{\perp} \right )^{\perp} \subseteq S$.
+
+1. Let $\bu \in \left (S^{\perp} \right )^{\perp}$.
+1. By {prf:ref}`res-la-vs-direct-sum-orth-comp`, $\VV = S \oplus S^{\perp}$
+   since $S$ is a finite dimensional subspace of $\VV$.
+1. Thus, $\bu = \bv + \bw$ such that $\bv \in S$ and $\bw \in S^{\perp}$.
+1. Since $\bu - \bv = \bw$, hence $\bu - \bv \in S^{\perp}$.
+1. We have already shown above that $S \subseteq \left (S^{\perp} \right )^{\perp}$.
+   Hence $\bv \in \left (S^{\perp} \right )^{\perp}$.
+1. Thus, $\bu - \bv = \bw \in \left (S^{\perp} \right )^{\perp}$
+   since both $\bu$ and $\bv$ belong to $\left (S^{\perp} \right )^{\perp}$.
+1. Thus, $\bu - \bv \in \left (S^{\perp} \right )^{\perp} \cap S^{\perp}$
+   as $\bw \in S^{\perp}$ by orthogonal decomposition above.
+1. But, by {prf:ref}`res-la-intersect-subspace-complement`
+   $S^{\perp} \cap \left (S^{\perp} \right )^{\perp} = \{ \bzero \}$
+   since $\left (S^{\perp} \right )^{\perp}$ is the
+   orthogonal complement of $S^{\perp}$ and $S^{\perp}$ is 
+   finite dimensional.
+1. Thus, $\bu - \bv = \bzero$.
+1. Thus, $\bu = \bv$.
+1. Thus, $\bu \in S$.
+1. Since $\bu$ was an arbitrary element of 
+   $\left (S^{\perp} \right )^{\perp}$, 
+   hence $\left (S^{\perp} \right )^{\perp} \subseteq S$.
+
+
+Combining the two:
+
+$$
+\left (S^{\perp} \right )^{\perp} = S.
+$$
+```
+
+```{prf:theorem} n-1 dimensional subspaces
+:label: res-la-vs-hyper-subspace-expression
+
+Let $\VV$ be a finite dimensional inner product space
+with $\dim \VV = n$.
+Let $S$ be an $n-1$ dimensional subspace of $\VV$. 
+Then, there exists a nonzero vector $\bb \in \VV$ such that 
+
+$$
+S = \{ \bx \in \VV \ST \bx \perp \bb \}.
+$$
+
+In other words, the $n-1$ dimensional subspaces
+are the sets of the form $\{ \bx \ST \bx \perp \bb \}$
+where $\bb \neq \bzero$.
+```
+
+```{prf:proof}
+Let $S$ be $n-1$ dimensional. 
+Then, from {prf:ref}`res-la-vs-dim-dir-sum-orth-comp` 
+
+$$
+\dim \VV = \dim S + \dim S^{\perp}.
+$$
+This gives us $\dim S^{\perp} = n - (n-1) = 1$.
+
+Since $S^{\perp}$ is one dimensional, we can choose
+a non-zero vector $\bb \in S^{\perp}$ as its basis.
+Since $\VV$ is finite dimensional, hence
+
+$$
+S = \left (S^{\perp} \right )^{\perp}.
+$$
+
+Thus, $S$ consists of vectors which are orthogonal to
+a basis of $S^{\perp}$. Thus,
+
+$$
+S =  \{ \bx \in \VV \ST \bx \perp \bb \}.
+$$
 ```
 
 ## Orthogonal Projection
