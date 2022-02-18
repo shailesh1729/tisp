@@ -404,12 +404,22 @@ C \neq \EmptySet \text{ and } \Forall \theta \in \FF, \quad C = \theta C + (1 - 
 $$
 ```
 
+```{prf:definition} Affine proper subspace
+:label: def-affine-proper-subspace
+
+An affine subspace $A$ in a vector space $\VV$
+is called a proper subspace 
+if the linear subspace associated with $A$ 
+is a {prf:ref}`proper subspace <def-la-proper-subspace>` of $\VV$.
+```
+
 
 ```{prf:definition} Affine dimension
 :label: def-affine-dimension
 
 We define the *affine dimension* of an affine subspace $C$ as the dimension
-of the associated linear subspace $V = C - \bx_0$ for some $\bx_0 \in C$. 
+of the associated linear subspace $V = C - \bx_0$ for some $\bx_0 \in C$
+if the subspace $V$ is finite dimensional. 
 
 The dimension of $\EmptySet$ (empty affine set) is $-1$ by convention.
 ```
@@ -729,6 +739,73 @@ Thus, the unique linear subspace parallel to $A$ is given by
 $W = A - A$.
 ```
 
+## Affinity Preserving Operations
+
+We discuss some operations which preserve the affine character
+of its inputs
+
+
+### Intersection
+
+````{prf:theorem} Intersection of affine sets
+:label: res-aff-intersection
+
+If $S_1$ and $S_2$ are affine sets then $S_1 \cap S_2$ is affine.
+````
+
+````{prf:proof}
+Let $\bx_1, \bx_2 \in S_1 \cap S_2$. We have to show that
+
+$$
+t \bx_1 + (1 - t) \bx_2 \in S_1 \cap S_2, \Forall t \in \FF.
+$$
+
+Since $S_1$ is affine and $\bx_1, \bx_2 \in S_1$, hence
+
+$$
+t \bx_1 + (1 - t) \bx_2 \in S_1, \Forall t \in \FF.
+$$
+
+Similarly
+
+$$
+t \bx_1 + (1 - t) \bx_2 \in S_2, \Forall t \in \FF.
+$$
+
+Thus
+
+$$
+t \bx_1 + (1 - t) \bx_2 \in S_1 \cap S_2, \Forall t \in \FF.
+$$
+
+Thus, $S_1 \cap S_2$ is affine.
+````
+
+We can generalize it further.
+
+````{prf:theorem} Intersection of arbitrary collection of affine sets
+:label: res-aff-arbitrary-intersection
+
+Let $\{ A_i\}_{i \in I}$ be a family of sets such that $A_i$ is affine
+for all $i \in I$.  Then $\cap_{i \in I} A_i$ is affine.
+````
+
+````{prf:proof}
+Let $\bx_1, \bx_2$ be any two arbitrary elements in $\cap_{i \in I} A_i$.
+
+$$
+&\bx_1, \bx_2 \in \cap_{i \in I} A_i\\
+\implies & \bx_1, \bx_2 \in A_i \Forall i \in I\\
+\implies &t \bx_1 + (1 - t) \bx_2 \in A_i \Forall t \in \FF \Forall i \in I
+\text{ since $A_i$ is affine }\\
+\implies &t \bx_1 + (1 - t) \bx_2 \in \cap_{i \in I} A_i.
+$$
+
+Hence $\cap_{i \in I} A_i$ is affine.
+````
+
+
+
 ## Hyper Planes
 
 Recall from {prf:ref}`def-la-hyperplane-functional` that
@@ -895,6 +972,122 @@ $$
 \{\bx \ST \langle \bx, \overline{t} \ba \rangle = t b \}
 $$
 is identical to $H$ for any $t \in \FF$ such that $t \neq 0$.
+```
+
+
+```{prf:theorem} Affine = Intersection of hyperplanes
+:label: res-aff-proper-sub-hyper-intersect
+
+Let $\VV$ be a finite dimensional vector space.
+Then, every proper affine subspace of $\VV$
+is an intersection of hyperplanes.
+```
+
+
+```{prf:proof}
+Let $C$ be a proper affine subspace of $\VV$
+such that $1 \leq \dim C < \dim \VV$.
+
+1. Let $L$ be the linear subspace parallel to $C$.
+1. Then $C = L + \ba$ for some fixed $\ba \in C$.
+1. Let $n = \dim \VV$ and $m = \dim L$.
+1. Since $L$ is a proper subspace of $\VV$ hence $m < n$.
+1. Let $\{\bx_1, \dots, \bx_m \}$ be a basis for $L$.
+1. Then, every $\bv \in C$ can be written as:
+
+   $$
+   \bv = \sum_{i=1}^m t_i \bx_i + \ba.
+   $$
+1. We can extend this basis to construct a basis
+   $\{\bx_1, \dots, \bx_n \}$ for $\VV$.
+1. We can construct a {prf:ref}`dual basis <res-la-finite-dual-space-basis>`
+   for the dual space $\VV^*$.
+   For each $i=1,\dots,n$, define a linear functional
+   $\bf_i : \VV \to \FF$ by setting:
+
+   $$
+   \bf_i(\bx_j) = \begin{cases}
+   1 && \text{ if } && i = j\\
+   0 && \text{ if } && i \neq j
+   \end{cases}.
+   $$
+1. Let $a_i = \bf_i (\ba)$. 
+1. Consider a family of hyperplanes defined as:
+
+   $$
+   H_i = \{ \bx \in \VV \ST \bf_i(\bx) = a_i \}
+   $$
+   where $i=m+1, \dots, n$.
+1. Consider their intersection
+
+   $$
+   H = \bigcap_{i=m+1}^n H_i = \{ \bx \in \VV \ST \bf_i(\bx) = a_i, i=m+1,\dots, n \}.
+   $$
+1. We claim that $C = H$.
+
+
+We shall first show that $C \subseteq H$.
+
+1. Let $\bv \in C$.
+1. Then, $\bv = \sum_{j=1}^m t_j \bx_j + \ba$.
+1. Then, $\bf_i (\bv) = \sum_{j=1}^m t_j \bf_i(\bx_j) + \bf_i(\ba) = a_i$ for $i=m+1, \dots, n$.
+1. Thus, $\bv \in H_i$ for every $i=m+1, \dots, n$.
+1. Thus, $\bv \in H$.
+1. Thus, $C \subseteq H$.
+
+
+We now show that $H \subseteq C$. Note that this is same as
+showing $H - \ba \subseteq L = C - \ba$.
+
+1. Let $\bv \in H - \ba$.
+1. Hence, $\bv = \bx - \ba$ such that $\bx \in H$.
+1. We can write $\bv$ in terms of the 
+   basis $\{\bx_1, \dots, \bx_n\}$ as
+   
+   $$
+   \bv = \sum_{j=1}^n t_j \bx_j.
+   $$
+1. Then $\bf_i(\bv) = t_i$ (by definition of $\bf_i$).
+1. But, for any $i \in [m+1, \dots, n]$
+
+   $$
+   \bf_i(\bv) = \bf_i(\bx - \ba) = \bf_i (\bx) - \bf_i(\ba) = a_i - a_i = 0
+   $$
+   since $\bx \in H \subseteq H_i$.
+1. Thus, $t_i = 0$ for every $i=m+1, \dots, n$.
+1. Thus, 
+
+   $$
+   \bv = \sum_{j=1}^m t_j \bx_j.
+   $$
+1. Thus, $\bv \in L$ since $\{\bx_1, \dots, \bx_m\}$ is a basis for $L$. 
+1. Thus, $H - \ba \subseteq L$.
+1. Thus, $H \subseteq L + \ba = C$.
+
+Combining these observations, we have $H = C$.
+
+We are now left with the case of singleton sets 
+$C = \{ \ba \}$ where $\dim C = 0$ since the
+associated linear subspace is $\{ \bzero \}$.
+
+1. Choose any basis $\BBB = \{\bx_1, \dots, \bx_n\}$ for $\VV$.
+1. Construct a 
+   {prf:ref}`dual basis <res-la-finite-dual-space-basis>`
+   $\FFF = \{\bf_1, \dots, \bf_n \}$ for $\VV^*$ as before.
+1. Let $a_i = \bf_i(\ba)$ for $i=1,\dots, n$.
+1. Consider a family of hyperplanes defined as:
+
+   $$
+   H_i = \{ \bx \in \VV \ST \bf_i(\bx) = a_i \}
+   $$
+   where $i=1, \dots, n$.
+1. Consider their intersection
+
+   $$
+   H = \bigcap_{i=1}^n H_i = \{ \bx \in \VV \ST \bf_i(\bx) = a_i, i=1,\dots, n \}.
+   $$
+1. Now, it is straightforward to show that
+   $H = \{\ba \}  = C$.
 ```
 
 ## Linear Equations
