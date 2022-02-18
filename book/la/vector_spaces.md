@@ -1148,7 +1148,13 @@ A subset $\WW \subseteq \VV$ is a subspace of $\VV$ if and only if
 *  $\bzero \in\WW $.
 *  $\bx + \by \in\WW $ whenever $\bx, \by \in\WW$.
 *  $\alpha \bx \in\WW $ whenever $\alpha \in \FF$ and $\bx \in\WW $.
+
+In other words, a subset of $\VV$ is a subspace
+if and only if it contains the zero vector
+and is closed under vector addition and scalar multiplication.
 ````
+
+
 
 ````{prf:example} Symmetric matrices
 :label: ex-la-symmetric-matrix-subspace
@@ -1168,6 +1174,16 @@ A matrix $M$ is called a *diagonal* if $M_{ij} = 0$ whenever $i \neq j$.
 
 The set of diagonal matrices is a subspace of $\FF^{M \times N}$.
 ````
+
+```{prf:definition} Proper subspace
+:label: def-la-proper-subspace
+
+A subspace $\WW$ of $\VV$ is called a *proper subspace*
+if $\VV \setminus \WW \neq \EmptySet$. 
+
+In other words, there are vectors in $\VV$ which 
+are not included in $\WW$.
+```
 
 ````{prf:theorem} Intersection of subspaces
 :label: res-la-subspace-intersection
