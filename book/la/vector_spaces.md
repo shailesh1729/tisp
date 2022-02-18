@@ -957,6 +957,34 @@ This theorem states that a basis $\BBB$ provides a unique representation
 to each vector $v \in \VV$ where the representation is defined as the $n$-tuple
 $(a_1, a_2, \dots, a_n)$.
 
+```{prf:proof}
+Assume that each $\bv \in \VV$ can be expressed uniquely as a linear
+combination of vectors of $\BBB$.
+
+1. Then $\bzero$ is a unique linear combination of $\BBB$.
+1. But $\bzero = 0 \bv_1 + \dots + 0 \bv_n$.
+1. Thus, $\BBB$ is linearly independent.
+1. Also, $\BBB$ spans $\VV$ since every vector can be expressed as a linear combination.
+1. Thus, $\BBB$ is a basis.
+
+Assume that $\BBB$ is a basis for $\VV$. 
+
+1. Then, $\BBB$ is linearly independent and $\BBB$ spans $\VV$.
+1. Let $\bv \in \VV$.
+1. Let $\bv = \sum_{i=1}^n a_i \bv_i$ and $\bv = \sum_{i=1}^n b_i \bv_i$ 
+   be two different representations of $\bv$ in $\BBB$.
+1. Then,
+
+   $$
+   &\sum_{i=1}^n a_i \bv_i = \sum_{i=1}^n b_i \bv_i\\
+   &\iff \sum_{i=1}^n (a_i - b_i) \bv_i = 0.
+   $$
+1. But $\BBB$ is linearly independent.
+1. Hence, $a_i - b_i = 0$ for $i = 1, \dots, n$.
+1. Thus, $a_i = b_i$ for $i=1,\dots,n$.
+1. Hence, every $\bv \in \VV$ has a unique representation as a linear combination of $\BBB$.
+```
+
 
 If the basis is infinite, then the above theorem needs to be modified as follows:
 ````{prf:theorem} Unique representation for infinite basis
@@ -1000,6 +1028,8 @@ Then, every basis for $\VV$ contains
 the same number of vectors.
 ````
 
+## Dimension
+
 ````{prf:definition} Dimension of vector space
 :label: def-la-dimension
 
@@ -1036,6 +1066,7 @@ Let $\VV$ be a vector space with dimension $n$.
 1. Every linearly independent subset of $\VV$ can be extended to a basis for $\VV$.
 ````
 
+## Ordered Basis
 
 ````{prf:definition} Ordered basis
 :label: def-la-ordered-basis
@@ -1144,13 +1175,91 @@ The set of diagonal matrices is a subspace of $\FF^{M \times N}$.
 Any intersection of subspaces of a vector space $\VV$ is a subspace of $\VV$.
 ````
 
+```{prf:proof}
+Let $\{W_i \}_{i \in I}$ be a family of subspaces of a vector space
+$\VV$ indexed by $I$.
+
+Let the intersection of the subspaces be:
+
+$$
+W = \bigcap_{i \in I} W_i.
+$$
+
+[Zero vector]
+1. Since $\bzero \in W_i$ for every $i \in I$, hence $\bzero \in W$.
+
+[Vector addition]
+1. Let $\bx, \by \in W_i$ for every $i \in I$.
+1. Then, $\bx + \by \in W_i$ for every $i \in I$ since $W_i$ are closed under vector addition.
+1. Then, $\bx + \by \in W$.
+1. Thus, $W$ is closed under vector addition.
+
+[Scalar multiplication]
+1. Let $\bx \in W_i$ for every $i \in I$ and let $t \in \FF$.
+1. Then, $t \bx \in W_i$ for ever $i \in I$ since $W_i$ are closed under scalar multiplication.
+1. Thus, $t \bx \in W$.
+1. Thus, $W$ is closed under scalar multiplication.
+
+Thus, $W$ is a subspace of $\VV$.
+```
+
 We note that a union of subspaces is not necessarily a subspace, since its
 not closed under addition. 
 
 ````{prf:theorem} Span is a subspace
-The span of a set $S \subset \VV$ given by $\langle S \rangle$ is a subspace of $\VV$.
-Moreover any subspace of $\VV$ that contains $S$ must also contain the span of $S$.
+:label: res-la-span-as-subspace
+
+Let $\VV$ be a vector space.
+The span of a set $S \subset \VV$ given by $\span S$ is a subspace of $\VV$.
+Moreover, any subspace of $\VV$ that contains $S$ must also contain the span of $S$.
 ````
+
+```{prf:proof}
+If $S = \EmptySet$, then by convention, $\span S = \{ \bzero \}$. This happens
+to be the trivial subspace.
+
+We now consider $S$ to be nonempty (possibly infinite).
+
+[Zero vector]
+1. Since $S$ is nonempty, hence there exists some $\bv \in S$.
+1. Then, $0 \bv = \bzero \in \span S$ as it is a linear combination of elements of $S$.
+
+[Scalar multiplication]
+1. Let $\bv \in \span S$.
+1. Then, $\bv = \sum_{i=1}^p t_i \bv_i$ where $\bv_i \in S$, $t_i \in \FF$, $p \in \Nat$.
+1. But then for any $t \in \FF$:
+
+   $$
+   t \bv = t \left ( \sum_{i=1}^p t_i \bv_i \right ) = \sum_{i=1}^p (t t_i) \bv_i.
+   $$
+1. Thus, $t\bv$ is also a linear combination of elements of $S$.
+1. Thus, $\span S$ is closed under scalar multiplication.
+
+
+[Vector addition]
+1. Let $\bx, \by \in \span S$.
+1. Let  $\bx = \sum_{i=1}^p r_i \bx_i$ and  $\by = \sum_{i=1}^q t_i \by_i$ 
+   be linear combinations of elements of $S$.
+1. Then, 
+
+   $$
+   \bx + \by = \sum_{i=1}^p r_i \bx_i + \sum_{i=1}^q t_i \by_i
+   $$
+   is also a linear combination of (up to $p+q$) elements of $S$.
+1. Thus, $\bx + \by \in \span S$.
+1. Thus, $\span S$ is closed under vector addition.
+
+Combining, $\span S$ is a linear subspace.
+
+
+Let $W$ be a subspace such that $S \subseteq W$. 
+
+1. Let $\bv \in \span S$. 
+1. Then, $\bv = \sum_{i=1}^p t_i \bv_i$ is a linear combination of elements of $S$.
+1. But $W$ is closed under linear combinations and $S \subseteq W$.
+1. Thus, $\bv \in W$.
+1. Thus, $\span S \subseteq W$.
+```
 
 This theorem is quite useful. It allows us to construct subspaces from a given basis.
 
@@ -1164,23 +1273,57 @@ Choosing some other basis lets us construct another set of subspaces.
 An $n$-dimensional vector space has infinite number of bases. 
 Correspondingly, there are infinite possible subspaces. 
 
-If $\WW_1$ and $\WW_2$ are two subspaces of $\VV$ 
-then we say that $\WW_1$ is smaller than $\WW_2$ 
-if $\WW_1 \subset \WW_2$.
+```{prf:definition} Partial order on subspaces
+:label: def-la-subspace-partial-order
 
-````{prf:theorem}
-Let $W$ be the smallest subspace containing vectors 
-$\{ \bv_1, \dots, \bv_p \}$.
+Let $\VV$ be a vector space.
+If $\WW_1$ and $\WW_2$ are two subspaces of $\VV$ 
+then we say that $\WW_1$ is *smaller than* $\WW_2$ 
+if $\WW_1 \subset \WW_2$;
+i.e., $\WW_1$ is a proper subset of $\WW_2$. 
+We denote this partial order by $\WW_1 \prec \WW_2$.
+
+If $\WW_1 \subseteq \WW_2$, we denote this is $\WW_1 \preceq \WW_2$.
+```
+
+````{prf:theorem} Span as the smallest subspace
+:label: res-la-span-is-smallest
+
+Let $\VV$ be a vector space. 
+Let $\bv_1, \dots, \bv_p$ be some arbitrary vectors in $\VV$.
+Let $S = \{ \bv_1, \dots, \bv_p \}$.
+Let the span of $S$ be denoted as
+
+$$
+U = \span S = \langle \bv_1, \dots, \bv_p \rangle.
+$$
+
+Let $W$ be the smallest subspace containing the vectors in $S$. 
 Then
 
 $$
-\WW = \langle \bv_1, \dots, \bv_p \rangle.
+\WW = U.
 $$
 
 i.e. $\WW$ is same as the span of $\{ \bv_1, \dots, \bv_p \}$.
+In other words, $\span S$ is the smallest subspace containing $S$.
 ````
 
-````{prf:theorem} Subspace dimension
+```{prf:proof}
+Since $\WW$ contains $S$, hence $\span S \subseteq W$ due to {prf:ref}`res-la-span-as-subspace`.
+$\span S$ is also a linear subspace. So $\WW = \span S$ must hold.
+```
+
+If the vector space $\VV$ is not finite dimensional, then
+its subspaces may or may not be finite dimensional. 
+E.g., if $W$ is a span of a fixed $p$ number of vectors from 
+$\VV$, then it is finite dimensional with $\dim W \leq p$
+irrespective of whether $\VV$ is finite dimensional or not.
+
+However, if $\VV$ is finite dimensional, 
+then its subspaces must be finite dimensional. 
+
+````{prf:theorem} Subspaces of a finite dimensional vector space
 :label: res-la-subspace-dimension
 
 Let $\WW$ be a subspace of a finite-dimensional vector space $\VV$. 
@@ -1197,6 +1340,28 @@ $$
 $$
 then $\WW = \VV$.
 ````
+
+```{prf:proof}
+If $\VV$ is finite dimensional, then it has a finite basis 
+of say $n$ basis vectors. Since $\WW \subseteq \VV$ hence
+the basis spans $\WW$ too. Thus, dimension of $\WW$ cannot
+be greater than $n$.
+
+
+Now, assume that
+
+$$
+n = \dim \WW = \dim \VV.
+$$
+
+1. Let $\BBB$ be a basis for $\WW$. 
+1. Then $\BBB$ spans $\WW$ and contains $n$ linearly independent vectors.
+1. Since $\WW \subseteq \VV$, hence $\BBB \subseteq \VV$.
+1. But $n = \dim \VV$.
+1. Hence, any set of $n$ linearly independent vectors must be a basis for $\VV$ too.
+1. Thus, $\BBB$ is a basis for $\VV$.
+1. Thus, $\VV = \WW = \span \BBB$. 
+```
 
 ````{prf:corollary}
 If $\WW$ is a subspace for a finite-dimensional vector space $\VV$ 
@@ -1464,6 +1629,9 @@ in common, then any vector in their sum can
 be decomposed uniquely between the two subspaces.
 
 
+## Sums of Subspaces
+
+
 ```{prf:definition} (Internal) direct sum of subspaces
 :label: def-vs-direct-sum-subspaces
 
@@ -1492,6 +1660,37 @@ $$
 \VV = \bigoplus_{i=1}^n \span \{ \bv_i \}.
 $$
 ```
+
+
+```{prf:theorem} Dimension of sum of subspaces
+:label: res-la-dim-sum-subspaces
+
+Let $W_1$ and $W_2$ be finite dimensional subspaces of
+a vector space $\VV$. Then
+
+$$
+\dim (W_1 + W_2) = \dim W_1 + \dim W_2 - \dim (W_1 \cap W_2).
+$$
+```
+
+```{prf:theorem} Dimension of direct sum of subspaces
+:label: res-la-dim-direct-sum-subspaces
+
+Let $W_1$ and $W_2$ be finite dimensional subspaces of
+a vector space $\VV$ such that $W_1 \cap W_2 = \{\bzero \}$. 
+Then
+
+$$
+\dim (W_1 \oplus W_2) = \dim W_1 + \dim W_2.
+$$
+```
+
+```{prf:proof}
+We note that  $W_1 \cap W_2 = \{\bzero \}$ implies that
+$\dim (W_1 \cap W_2) = 0$.
+Rest follows from the previous result {prf:ref}`res-la-dim-sum-subspaces`.
+```
+
 
 ## Real Vector Spaces
 
