@@ -2,8 +2,16 @@
 # Affine Sets and Transformations
 
 In this section $\VV$ denotes a vector space on some field $\FF$
-which can be either $\FF$ or $\CC$.
+which can be either $\RR$ (real numbers) or $\CC$ (complex numbers).
+Much of the section will not require any other structure on 
+the vector space. 
 
+Some results in this section are applicable for
+normed linear spaces or inner product spaces.
+We shall assume that $\VV$ is endowed with
+an appropriate norm $\| \cdot \| : \VV \to \RR$ 
+or an inner product $\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF$
+wherever applicable.
 
 ```{note}
 The notion of lines in a complex vector space may sound 
@@ -80,14 +88,22 @@ $$
 \Forall \theta \in \FF, \quad C = \theta C + (1 - \theta) C.
 $$
 ```
+Different authors use other names for affine sets
+like "affine manifold", "affine variety", "linear variety"
+or "flat".
+
 
 ```{prf:example}
+:label: ex-affine-empty-set
+
 The empty set $\EmptySet$ is affine vacuously as it contains
 no points. Hence, every line passing through the points in $\EmptySet$ 
 is inside it vacuously.
 ```
 
 ```{prf:example}
+:label: ex-affine-singleton-set
+
 For any $\bx \in \VV$, the singleton set $\{ \bx \}$ is affine vacuously.
 It contains only one point. 
 Hence, every line passing through two distinct points in $\{ \bx \}$
@@ -101,8 +117,59 @@ $$
 ```
 
 ```{prf:example}
+:label: ex-aff-line-is-affine
+
 Any line in $\VV$ is an affine set.
 ```
+
+```{prf:example}
+:label: ex-aff-vector-space-affine
+
+Any vector space $\VV$ is affine. It is so since a vector space
+is closed under vector addition and scalar multiplication. 
+Hence, for any two points in the vector space, the line passing
+through it is contained inside the space.
+```
+
+```{prf:theorem} Linear subspaces are affine
+The linear subspaces of a vector space $\VV$ 
+are affine sets containing the zero vector.
+```
+
+```{prf:proof}
+Let $\WW$ be a linear subspace of $\VV$.
+
+1. Then $\WW$ contains $\bzero$.
+1. Let $\bx, \by \in \WW$. 
+1. Then, by linearity, any
+   $\alpha \bx + \beta \by \in \WW$. 
+1. In particular, for some $\theta \in \FF$,
+   $\theta \bx  + (1 - \theta)\bw \in \WW$ holds too.
+1. Thus, $\WW$ is affine.
+
+For the converse, let $A$ be an affine set containing
+$\bzero$.
+
+1. For any $\bx \in A$ and $t \in \FF$,
+
+   $$
+   t \bx = (1 - t) \bzero + t \bx \in A
+   $$
+   since $A$ is affine. Thus, $A$ is closed under scalar multiplication.
+1. Let $\bx, \by \in A$. Since $A$ is affine, hence
+   
+   $$
+   \frac{1}{2} (\bx + \by) = \frac{1}{2} \bx + \left (1 - \frac{1}{2} \right) \by \in A.
+   $$
+1. But then, $\bx + \by \in A$ holds too since $A$ is closed under scalar 
+   multiplication.
+1. Thus, $A$ is closed under vector addition.
+1. Since $A$ is closed under scalar multiplication and vector addition,
+   hence $A$ must be a subspace. 
+```
+
+
+
 
 ## Affine Combinations
 
@@ -219,18 +286,6 @@ affine combinations of affine combinations are affine combinations.
 
 ## Connection with Linear Subspaces
 
-```{prf:theorem} Linear subspaces are affine
-A linear subspace $\WW$ of $\VV$ is affine.
-```
-
-```{prf:proof}
-Let $\bx, \by \in \WW$. Then, by linearity, any
-$\alpha \bx + \beta \by \in \WW$. In particular,
-for some $\theta \in \FF$,
-$\theta \bx  + (1 - \theta)\bw \in \WW$ holds too.
-Thus, $\WW$ is affine.
-```
-
 ```{prf:theorem} affine - point = linear
 :label: res-aff-offset-plus-linear-subspace
 
@@ -271,6 +326,8 @@ Hence, $V$ is a linear subspace of $\VV$.
 ```
 
 ```{prf:observation}
+:label: res-aff-subspace-lin-space-offset
+
 With the previous result, we can use the following notation:
 
 $$
@@ -283,12 +340,15 @@ We need to justify this notation by establishing that there
 is one and only linear subspace associated with an affine set.
 This is done in the next result.
 
-```{prf:theorem}
+```{prf:theorem} Uniqueness of associated subspace
+:label: res-aff-unique-lin-sub
+
 Let $C$ be a nonempty affine set and
 let $\bx_1$ and $\bx_2$ be two distinct elements in $C$.
 Let $V_1 = C - \bx_1$ and $V_2 = C - \bx_2$, then the 
 linear subspaces $V_1$ and $V_2$ are identical.
 ```
+
 ```{prf:proof}
 
 We show that $V_1 \subseteq V_2$ and $V_2 \subseteq V_1$.
@@ -357,7 +417,9 @@ The definition is consistent since $V$ is independent of the choice of
 $\bx_0 \in C$.
 
 
-```{prf:example}
+```{prf:example} Singletons as affine subspaces
+:label: ex-aff-singleton-subspace
+
 For any $\bx \in \VV$, the singleton set $\{ \bx\}$ can be expressed as
 
 $$
@@ -368,7 +430,9 @@ Its corresponding linear subspace is $\{ \bzero \}$ of zero dimension.
 Thus, the singleton set has an affine dimension of 0.
 ```
 
-```{prf:remark}
+```{prf:remark} Points, lines, planes, flats
+:label: res-aff-simple-geom-examples
+
 The affine sets of dimension 0, 1 and 2 are called
 points, lines and planes respectively.
 
@@ -376,87 +440,9 @@ An affine set of dimension $k$ is often called a
 $k$-*flat*.
 ```
 
-### Hyper Planes
-
-Recall from {prf:ref}`def-la-hyperplane-functional` that
-a set of the form:
-
-$$
-H_{\bf, a} \triangleq \{ \bx \in \VV \ST \bf(\bx) = a \}
-$$
-where $\bf$ is a {prf:ref}`linear functional <def-la-linear-functional>`
-on $\VV$ and $a \in \FF$ 
-is called a hyperplane.
-
-```{prf:theorem}
-:label: res-la-aff-hyperplane-affine
-
-Every hyperplane is affine.
-```
-
-```{prf:proof}
-We proceed as follows:
-
-1. Let $\bx, \by \in H_{\bf, a}$.
-1. Then, $\bf(\bx) = a$ and $\bf(\by) = a$.
-1. Consider any $t \in \FF$ and let $\bz = t \bx + (1-t) \by$.
-1. Then, due to linearity of $\bf$,
-
-   $$
-   \bf(\bz)
-   &= \bf(t \bx + (1-t) \by)\\
-   &= t \bf(\bx) + (1-t) \bf(\by)\\
-   &= t a + (1-t) a = a.
-   $$
-1. Thus, $\bz \in H_{\bf, a}$.
-1. Thus, $H_{\bf, a}$ is an affine set.
-```
-
-
-### Linear Equations
-
-```{prf:example} Solution set of linear equations
-We show that the solution set of linear equations forms an affine set.
-
-Let $C = \{ \bx \ST \bA \bx = \bb\}$ where $\bA \in \FF^{m \times n}$ and $\bb \in \FF^m$.
-
-Let $C$ be the set of all vectors $\bx \in \FF^n$ which satisfy the system of linear
-equations given by $\bA \bx = \bb$. 
-Then $C$ is an affine set.
-
-Let $\bx_1$ and $\bx_2$ belong to $C$.  Then we have
-
-$$
-\bA \bx_1 = \bb
-\text{ and }
-\bA \bx_2 = \bb
-$$
-
-Thus 
-
-$$
-&\theta \bA \bx_1 + ( 1 - \theta ) \bA \bx_2 = \theta \bb + (1 - \theta ) \bb\\
-&\implies \bA (\theta \bx_1 + (1  - \theta) \bx_2) = \bb\\
-&\implies (\theta \bx_1 + (1  - \theta) \bx_2) \in C
-$$
-
-Thus, $C$ is an affine set.
-
-The subspace associated with $C$ is nothing but the
-null space of $\bA$ denoted as $\NullSpace(\bA)$.
-```
-
-```{prf:remark}
-Every affine set of $\FF^n$ can be expressed as the solution set of a 
-system of linear equations.
-If the system of equations is infeasible, then its solution set is
-$\EmptySet$. Otherwise, its solution set is an affine subspace.
-If the system of equations has a unique solution, then the solution
-set is a singleton set which is an affine subspace of dimension 0.
-```
-
-
 ```{prf:example} More affine sets
+:label: ex-aff-more-affine-examples
+
 * The euclidean space $\RR^n$ is affine.
 * Any line is affine. The associated linear subspace is a line 
   parallel to it which passes through origin.
@@ -476,7 +462,9 @@ This is from the definition of affine sets
 and {prf:ref}`res-aff-set-contains-aff-combs`.
 ```
 
-```{prf:observation}
+```{prf:observation} Affine - affine = Linear
+:label: res-aff-affine-minus-affine
+
 Let $C$ be an affine subspace. 
 Let $V$ be the linear subspace associated with $C$ given by $V = C - \bx$.
 Then every vector $\bv \in V$ can be written as $\bv = \by - \bx$ where $\by \in C$.
@@ -540,7 +528,9 @@ Since $T$ is nonempty, hence $T$ is an affine subspace.
 ```
 
 
-```{prf:theorem}
+```{prf:theorem} Smallest containing affine subspace
+:label: res-aff-affine-hull-smallest
+
 The affine hull of a nonempty set $S$ is the smallest affine subspace containing $S$. 
 More specifically, let $C$ be any affine subspace
 with $S \subseteq C$. Then $\affine S \subseteq C$.
@@ -559,7 +549,9 @@ Let $C$ be an arbitrary affine subspace such that $S \subseteq C$.
 1. Thus, it is the smallest affine subspace containing $S$.
 ```
 
-```{prf:corollary}
+```{prf:corollary} Affine hull as intersection
+:label: res-aff-affine-hull-intersection-all
+
 The affine hull of a set is the intersection of all affine subspaces containing it.
 ```
 
@@ -602,7 +594,9 @@ It can be easily seen that $T_{\ba}(C) = \ba + C = C + \ba$.
 Let $C \subseteq \VV$. The *translate* of $C$ by
 some $\ba \in \VV$ is defined to be the set $C + \ba$.
 ```
-```{prf:observation}
+```{prf:observation} Translating the vector space
+:label: res-aff-space-translate
+
 $$
 \VV + \ba = \VV \Forall \ba \in \VV.
 $$
@@ -620,6 +614,8 @@ The translate of the trivial subspace is a singleton set.
 ```
 
 ```{prf:theorem} Affine translate
+:label: res-aff-affine-translate
+
 A translate of an affine set is affine.
 ```
 
@@ -690,6 +686,354 @@ The relation $C \parallel D$ is an equivalence relation.
 1. Thus, $C \parallel E$.
 ```
 
+
+```{prf:theorem} Existence and uniqueness of a parallel linear subspace
+:label: res-aff-subspace-parallel-linear
+
+Every affine subspace (nonempty affine set) $A$ is parallel
+to a unique subspace. The subspace is given by:
+
+$$
+W = A - A.
+$$
+```
+This result is a restatement of {prf:ref}`res-aff-affine-minus-affine`.
+
+```{prf:proof}
+From {prf:ref}`res-aff-unique-lin-sub`, there
+is a unique linear subspace $L$ associated with 
+$A$ given by  $L = A - \ba$ for some $\ba \in A$.
+
+Since $A = L + \ba$ hence, $A$ and $L$ are parallel
+to each other.
+
+Two linear subspaces are parallel to each other
+only if they are identical. Thus, $L$ is the
+unique linear subspace parallel to $A$.
+
+Now, notice that:
+
+$$
+W = A - A = \bigcup_{\ba \in A} A - \ba.
+$$
+But $L = A - \ba$ for any $\ba \in A$ as $L$
+is independent of the choice of $\ba \in A$.
+
+Thus, 
+
+$$
+W = \bigcup_{\ba \in A} A - \ba = \bigcup_{\ba \in A} L = L.
+$$
+
+Thus, the unique linear subspace parallel to $A$ is given by
+$W = A - A$.
+```
+
+## Hyper Planes
+
+Recall from {prf:ref}`def-la-hyperplane-functional` that
+a set of the form:
+
+$$
+H_{\bf, a} \triangleq \{ \bx \in \VV \ST \bf(\bx) = a \}
+$$
+where $\bf$ is a nonzero {prf:ref}`linear functional <def-la-linear-functional>`
+on $\VV$ and $a \in \FF$ 
+is called a hyperplane.
+
+```{prf:theorem}
+:label: res-la-aff-hyperplane-affine
+
+Every hyperplane is affine.
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. Let $\bx, \by \in H_{\bf, a}$.
+1. Then, $\bf(\bx) = a$ and $\bf(\by) = a$.
+1. Consider any $t \in \FF$ and let $\bz = t \bx + (1-t) \by$.
+1. Then, due to linearity of $\bf$,
+
+   $$
+   \bf(\bz)
+   &= \bf(t \bx + (1-t) \by)\\
+   &= t \bf(\bx) + (1-t) \bf(\by)\\
+   &= t a + (1-t) a = a.
+   $$
+1. Thus, $\bz \in H_{\bf, a}$.
+1. Thus, $H_{\bf, a}$ is an affine set.
+```
+
+
+```{prf:theorem} Linear subspace parallel to a hyperplane
+:label: res-aff-hyperplane-parallel-space
+
+Let $H$ be a hyperplane given by
+
+$$
+H = \{ \bx \in \VV \ST \bf(\bx) = a \}
+$$
+where $\bf$ is a nonzero {prf:ref}`linear functional <def-la-linear-functional>`
+on $\VV$ and $a \in \FF$.
+
+Then, the linear subspace parallel to $H$ is given by the
+{prf:ref}`kernel <res-la-linear-functional-kernel>`
+of the linear functional $\bf$:
+
+$$
+L = \bf^{-1}(0) = \{ \bx \in \VV \ST \bf(\bx) = 0 \}.
+$$ 
+```
+
+```{prf:proof}
+Let $V$ be the linear subspace parallel to $H$.
+
+1. Then, any $\bv \in V$ can be written as 
+   $\bv = \bx - \by$ for some $\bx, \by \in H$.
+1. But then,
+
+   $$
+   \bf(\bv) = \bf (\bx - \by) = \bf (\bx) - \bf(\by) = a - a = 0.
+   $$
+1. Thus, $\bv \in L$ and hence $V \subseteq L$.
+
+For the converse, we proceed as follows.
+
+1. Let $\bv \in L$ and $\bx \in H$.
+1. Let $\by = \bx - \bv$.
+1. Then, $\bf(\by) = \bf (\bx) - \bf (\bv) = a - 0 = a$.
+1. Thus, $\by \in H$.
+1. Thus, $\bv = \bx - \by$ where $\bx, \by \in H$.
+1. Thus, $\bv \in H - H = V$.
+1. Thus, $L \subseteq V$.
+
+Combining, $L = H$.
+```
+
+```{prf:theorem} Dimension of a hyperplane
+:label: res-aff-dim-hyperplane
+
+Let $H$ be a hyperplane given by
+
+$$
+H = \{ \bx \in \VV \ST \bf(\bx) = a \}
+$$
+where $\bf$ is a nonzero {prf:ref}`linear functional <def-la-linear-functional>`
+on $\VV$ and $a \in \FF$.
+
+If $\VV$ is finite dimensional, then 
+
+$$
+\dim H = \dim \VV - 1.
+$$
+```
+
+```{prf:proof}
+From {prf:ref}`res-aff-hyperplane-parallel-space`,
+the linear subspace parallel to $H$ is given by
+
+
+$$
+L = \bf^{-1}(0) = \{ \bx \in \VV \ST \bf(\bx) = 0 \}.
+$$
+
+From {prf:ref}`res-la-linear-functional-kernel-dim`,
+the dimension of the kernel of a linear functional
+in a finite dimensional vector space is given by:
+
+$$
+\dim L = \dim \VV - 1.
+$$
+
+From {prf:ref}`def-affine-dimension`,
+
+$$
+\dim H = \dim L = \dim \VV - 1.
+$$ 
+```
+
+
+```{prf:theorem} Hyperplanes in inner product spaces
+
+If $\VV$ is an inner product space over $\FF$, then
+a set of the form
+
+$$
+H = \{\bx \ST \langle \bx, \ba \rangle = b \}
+$$
+where $\ba \in \VV$ is a nonzero vector 
+and $b \in \FF$ is a hyperplane.
+
+Moreover, every hyperplane of $\VV$ can be represented
+in this form, with $\ba$ and $b$ unique up to a
+common non-zero multiple.
+```
+
+```{prf:proof}
+By {prf:ref}`res-la-inner-product-linear-functional`,
+the mapping  $T_{\ba} : \VV \to \FF$ defined by:
+
+$$
+T_{\ba} (\bx) \triangleq \langle \bx , \ba \rangle  \Forall \bx \in \VV
+$$
+is a linear functional.
+Thus, $H$ is a {prf:ref}`hyperplane <def-la-hyperplane-functional>`.
+
+By {prf:ref}`res-la-linear-functional-inner-product`,
+every linear functional can be identified as an
+inner product with a vector $\ba \in \VV$. 
+Thus, every hyperplane can be written as 
+
+$$
+H = \{\bx \ST \langle \bx, \ba \rangle = b \}.
+$$
+
+This representation is not unique since the set
+
+$$
+\{\bx \ST \langle \bx, \overline{t} \ba \rangle = t b \}
+$$
+is identical to $H$ for any $t \in \FF$ such that $t \neq 0$.
+```
+
+## Linear Equations
+
+```{prf:example} Solution set of linear equations
+We show that the solution set of linear equations forms an affine set.
+
+Let $C = \{ \bx \ST \bA \bx = \bb\}$ where $\bA \in \FF^{m \times n}$ and $\bb \in \FF^m$.
+
+Let $C$ be the set of all vectors $\bx \in \FF^n$ which satisfy the system of linear
+equations given by $\bA \bx = \bb$. 
+Then $C$ is an affine set.
+
+Let $\bx_1$ and $\bx_2$ belong to $C$.  Then we have
+
+$$
+\bA \bx_1 = \bb
+\text{ and }
+\bA \bx_2 = \bb
+$$
+
+Thus 
+
+$$
+&\theta \bA \bx_1 + ( 1 - \theta ) \bA \bx_2 = \theta \bb + (1 - \theta ) \bb\\
+&\implies \bA (\theta \bx_1 + (1  - \theta) \bx_2) = \bb\\
+&\implies (\theta \bx_1 + (1  - \theta) \bx_2) \in C
+$$
+
+Thus, $C$ is an affine set.
+
+The subspace associated with $C$ is nothing but the
+null space of $\bA$ denoted as $\NullSpace(\bA)$.
+```
+
+Every affine set of $\FF^n$ can be expressed as the solution set of a 
+system of linear equations.
+If the system of equations is infeasible, then its solution set is
+$\EmptySet$. Otherwise, its solution set is an affine subspace.
+If the system of equations has a unique solution, then the solution
+set is a singleton set which is an affine subspace of dimension 0.
+
+```{prf:theorem} Affine set = system of linear equations in $\FF^n$
+:label: res-aff-sol-lin-eq
+
+Let $\bb \in \FF^m$. Let $\bA$ be an $m \times n$ 
+matrix in $\FF^{m \times n}$. Consider the solution set
+of the system of linear equations $\bA \bx = \bb$:
+
+$$
+C = \{\bx \in \FF^n \ST \bA \bx = \bb \}.
+$$
+Then, $C$ is an affine set.
+
+Moreover, every affine set in $\FF^n$ can be represented 
+as a system of linear equations.
+```
+
+```{prf:proof}
+If $C = \EmptySet$ (i.e., the system of equations is infeasible),
+then $C$ is affine (since empty sets are affine by definition).
+
+If the system of equations has a unique solution, then
+$C = \{ \bv \}$ where $\bv$ is the unique solution of
+the system of equations, 
+then $C$ is affine since singleton sets are affine.
+
+We now consider the case that the system of equations
+has more than one solutions.
+
+Let $\bx_1, \bx_2 \in C$ be distinct solutions of the
+system of linear equations
+and let $t \in \FF$.
+Then,
+
+$$
+\bA \bx_1 = \bb
+\text{ and }
+\bA \bx_2 = \bb
+$$
+
+Consider $\bx = t \bx_1 + (1-t) \bx_2$. 
+Then,
+
+$$
+\bA \bx &= \bA (t \bx_1 + (1-t) \bx_2) \\
+&= t \bA \bx_1 + (1-t) \bA \bx_2 \\
+&= t \bb + (1-t) \bb = \bb.
+$$
+This means that $\bx \in C$.
+Thus, $C$ contains all its affine combinations.
+Hence, $C$ is affine.
+
+We next show that every affine set of $\FF^n$ can be represented
+as a system of linear equations. 
+Note that $\FF^n$ is an inner product space with the
+standard inner product given by $\langle \bx, \by \rangle = \overline{\by} \bx$.
+
+Let $C$ be an arbitrary affine set in $\FF^n$. 
+
+1. If $C = \EmptySet$, we can pick any
+   infeasible system of linear equations as a representation of $C$.
+1. If $C = \{ \bv \}$ is a singleton, we can pick the system
+   $\bI \bx = \bv$ where $I$ is an identity matrix in $\FF^{n \times n}$.
+1. If $C = \FF^n$, we can choose $\bA$ to be any $m \times n$
+   zero matrix and $\bb = \bzero \in \FF^m$.
+   Then, the solution set of $\ZERO \bx = \bzero$ is all of $\FF^n$.
+1. We shall now consider the case of affine $C$ with more than
+   one elements and $C \subset \FF^n$ (proper subset). 
+1. Let $L$ be the subspace parallel to $C$ ({prf:ref}`res-aff-subspace-parallel-linear`).
+1. Let $L^{\perp}$ be the 
+   {prf:ref}`orthogonal complement <def-la-orthogonal-complement>` of $L$.
+1. Let $\BBB = \{\bv_1, \dots, \bv_m \}$ be a
+   basis for $L^{\perp}$ (where $m < n$).
+1. Since $\FF^n$ is finite dimensional, hence
+   $L = \left (L^{\perp} \right )^{\perp}$ ({prf:ref}`res-la-orth-comp-orth-comp`).
+1. Thus, due to {prf:ref}`res-la-ip-orth-comp-perp-basis`, 
+
+   $$
+   L = \{ \bx \ST \bx \perp \bv_1, \dots, \bx \perp \bv_m \}.
+   $$
+1. Thus,
+
+   $$
+   L = \{\bx \ST \langle \bx, \bv_i \rangle = 0, i=1,\dots, m \}
+   = \{ \bx \ST \bA \bx = \bzero \}
+   $$
+   where $\bA$ is the $m \times n$ matrix whose rows are
+   $\bv_1, \dots, \bv_m$. 
+1. Since $C$ is parallel to $L$, there exists an $\ba \in \FF^n$
+   such that
+
+   $$
+   C = L + \ba 
+   =  \{ \bx \ST \bA (\bx - \ba) = \bzero \}
+   =  \{ \bx \ST \bA \bx = \bb \}
+   $$ 
+   where $\bb = \bA \ba$.
+```
 
 ## Affine Transformations
 
@@ -813,7 +1157,7 @@ $$
 ```
 
 
-## Topology
+## Topology in Normed Spaces
 
 We next consider the special case of a vector space $\VV$
 endowed with a 
