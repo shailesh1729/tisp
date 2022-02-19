@@ -1997,6 +1997,15 @@ If $m=n$, then $T$ is unique.
 ```
 
 ```{prf:proof}
+If $m=0$; i.e., we need to find a mapping between $\{ \ba_0\}$
+and $\{ \bb_0 \}$, then we can choose any affine map
+
+$$
+T(\bx) = A(\bx) + \bb_0 - A(\ba_0)
+$$
+where $A: \VV \to \VV$ is a linear map.
+Now consider the case where $1 \leq m \leq n$.
+
 By {prf:ref}`res-aff-extn-affine-ind-set`, we can 
 extend $\{\ba_0, \dots, \ba_m\}$ to an affine independent
 set $\{\ba_0, \dots, \ba_n\}$
@@ -2038,6 +2047,98 @@ determined by the bases $\BBB_a$ and $\BBB_b$ which are
 given. Thus, $T$ is unique too.
 ```
 
+```{prf:corollary} Affine mapping between affine sets
+:label: res-aff-mapping-affine-sets-same-dim
+
+Let $\VV$ be a finite dimensional vector space with $n = \dim \VV$.
+Let $A$ and $B$ be two affine subspaces of $\VV$ of the same
+dimension; i.e., $\dim A = \dim B = m$ where $m \leq n$.
+Then, there exists a bijective affine transformation 
+$T : \VV \to \VV$ such that $T (A) = B$.
+```
+
+```{prf:proof}
+If both $A$ and $B$ are singletons given by $A = \{ \ba \}$ 
+and $B = \{ \bb \}$, then any affine transformation given by
+
+$$
+T(\bx) = A(\bx) + \bb - A(\ba)
+$$
+where $A: \VV \to \VV$ is a linear transformation will do.
+
+For $1 \leq m \leq n$, by {prf:ref}`res-aff-aff-ind-points-in-aff-subspace`
+we can choose $m+1$ affine independent points
+$\{\ba_0, \dots, \ba_m\}$ and $\{\bb_0, \dots, \bb_m \}$ 
+in $A$ and $B$ respectively such that
+
+$$
+A = \affine \{\ba_0, \dots, \ba_m\}
+\text{ and }
+B = \affine \{\bb_0, \dots, \bb_m \}
+$$
+as per {prf:ref}`res-aff-set-aff-hull`.
+
+Then, by {prf:ref}`res-aff-mapping-independent-sets`,
+an affine mapping $T: \VV \to \VV$ exists which maps $\ba_i$ to $\bb_i$.
+Since affine mappings preserve affine hulls ({prf:ref}`res-la-aff-func-aff-hull`),
+hence 
+
+$$
+T (A) = B.
+$$
+```
+
+
+```{prf:theorem} Graph of an affine map is affine
+:label: res-aff-graph-affine-map-affine
+
+Let $\XX$ and $\YY$ be vector spaces on a field $\FF$.
+Let $T : \XX \to \YY$ be an affine map.
+Let $\XX \oplus \YY$ be the 
+{prf:ref}`direct sum <def-vs-direct-sum-vector-spaces>` of $\XX$ and $\YY$.
+
+Let $G \subseteq \XX \oplus \YY$ be the 
+{prf:ref}`graph <def-st-function-graph>` of $T$ given by
+
+$$
+\graph T = \{ (\bx, T(\bx)) \ST \bx \in \XX \}.
+$$
+Then, $G$ is an affine subset of $\XX \oplus \YY$.
+
+In other words, graph of an affine map is affine.
+```
+
+```{prf:proof}
+If $\by = T(\bx)$ then $\bz = (\bx, \by) \in G$.
+
+Now, let $\bz_1, \bz_2 \in G$ and $t \in \FF$.
+
+1. $\bz_1 = (\bx_1, \by_1)$ such that $\by_1 = T(\bx_1)$. 
+1. $\bz_2 = (\bx_2, \by_2)$ such that $\by_2 = T(\bx_2)$. 
+1. Let $\bz = t \bz_1 + (1-t) \bz_2$.
+1. Then, 
+
+   $$
+   \bz &= t (\bx_1, \by_1) + (1-t) (\bx_2, \by_2)\\ 
+   &= (t \bx_1 + (1-t) \bx_2, t \by_1 + (1-t)\by_2).
+   $$
+1. Since $T$ is affine, hence
+
+   $$
+   T(t \bx_1 + (1-t) \bx_2) 
+   &= t T(\bx_1) + (1-t) T(\bx_2)\\
+   &= t \by_1 + (1-t)\by_2.
+   $$
+1. Thus, $\bz = (t \bx_1 + (1-t) \bx_2, t \by_1 + (1-t)\by_2) \in G$.
+1. Thus, $G$ is closed under affine combinations.
+1. Thus, $G$ is affine.
+```
+As an implication, we can see that the graph of a linear
+map must be an affine set too since every linear map
+is an affine map. But a linear map maps $\bzero_x$ to $\bzero_y$.
+Thus, its graph contains the origin $(\bzero_x, \bzero_y)$
+of $\XX \oplus \YY$. Thus, the graph of a linear map
+must be a subspace of $\XX \oplus \YY$.
 
 ## Topology in Normed Spaces
 
