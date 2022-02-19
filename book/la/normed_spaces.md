@@ -209,7 +209,9 @@ $$
 
 ### Continuity
 
-```{prf:theorem}
+```{prf:theorem} Norms are continuous 
+:label: res-la-ns-norm-is-continuous
+
 A function $\| \cdot \| : \VV \to \RR$ satisfying
 all the properties of a {prf:ref}`norm <def-la-norm>`
 is {prf:ref}`uniformly continuous <def-ms-uniform-continuity>`
