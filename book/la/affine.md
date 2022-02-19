@@ -135,6 +135,8 @@ through it is contained inside the space.
 ```
 
 ```{prf:theorem} Linear subspaces are affine
+:label: res-aff-linear-subspace-is-affine
+
 The linear subspaces of a vector space $\VV$ 
 are affine sets containing the zero vector.
 ```
@@ -328,7 +330,7 @@ Thus, any linear combination of elements in $V$ belongs to $V$.
 Hence, $V$ is a linear subspace of $\VV$.
 ```
 
-```{prf:observation}
+```{prf:observation} affine = linear + point
 :label: res-aff-subspace-lin-space-offset
 
 With the previous result, we can use the following notation:
@@ -378,6 +380,8 @@ the choice of offset $\bx_0$ in $C$.
 
 If an affine set contains $\bzero$ then it is a linear subspace.
 ```
+We have already shown this in {prf:ref}`res-aff-linear-subspace-is-affine`.
+This is an alternative proof.
 
 ```{prf:proof}
 The linear subspace associated with an affine set $C$ is given by
@@ -414,6 +418,8 @@ An affine subspace $A$ in a vector space $\VV$
 is called a proper subspace 
 if the linear subspace associated with $A$ 
 is a {prf:ref}`proper subspace <def-la-proper-subspace>` of $\VV$.
+
+In other words, $A$ is affine, $A \neq \EmptySet$, and $A \neq \VV$.
 ```
 
 
@@ -628,6 +634,14 @@ be linearly independent in it. Hence a maximum of $l+1$ vectors can be affine
 independent for the affine set.
 
 
+```{prf:definition} Affine dependence
+:label: def-affine-dependence
+
+A set of vectors $\bv_0, \bv_1, \dots, \bv_k \in \VV$ is called *affine dependent*,
+if it is not affine independent.
+In other words, the vectors $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ are linearly dependent.
+```
+
 ```{prf:theorem} Basis for the linear subspace associated with affine independent set
 :label: res-aff-basis-aff-ind-set
 
@@ -695,6 +709,86 @@ Now, assume $A = \affine \{\bv_0, \bv_1, \dots, \bv_k\}$ is $k$ dimensional.
 as affine independent if their hull is $k$ dimensional.
 As we can see above, our definition is equivalent.
 
+```{prf:theorem} Affine independent points in an affine subspace
+:label: res-aff-aff-ind-points-in-aff-subspace
+
+Let $A$ be an affine subspace of a vector space $\VV$ 
+such that $\dim A = k$. Then, it is possible to choose
+a set of up to $k+1$ points in $A$ which are affine independent.
+Any set of $k+2$ points in $A$ is not affine independent.
+```
+
+```{prf:proof}
+Let $L$ be the subspace associated with $A$ and let $\bv_0 \in A$
+be some fixed point of $A$.
+
+1. We have $\dim L = \dim A = k$.
+1. Choose a basis $\BBB = \{\bx_1, \dots, \bx_k\}$ of $L$.
+1. Let $\bv_1 = \bx_1 + \bv_0, \dots, \bv_k = \bx_k + \bv_0$.
+1. Then, the set of $k+1$ points $\bv_0, \bv_1, \dots, \bv_k$ 
+   are affine independent since $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$
+   are linearly independent.
+1. For less than $k+1$ points, we can choose less than $k$ vectors 
+   from the basis $\BBB$ and construct accordingly.
+
+
+We now show that any set of $k+2$ points cannot be affine independent.
+
+1. Let $\bv_0, \bv_1, \dots, \bv_k, \bv_{k+1}$ be
+   an arbitrary set of $k+2$ points in $A$.
+1. Then, $\bv_1 - \bv_0, \dots, \bv_k - \bv_0, \bv_{k+1} - \bv_0 \in L$
+   is a set of $k+1$ points in $L$.
+1. Since $\dim L = k$, hence any set of $k+1$ points in $L$ is linearly
+   dependent.
+1. Thus, $\bv_0, \bv_1, \dots, \bv_k, \bv_{k+1}$  cannot be affine independent.
+```
+
+```{prf:theorem} Affine set as an affine hull
+:label: res-aff-set-aff-hull
+
+Let $A$ be an affine subspace of a vector space $\VV$ 
+such that $\dim A = k$.
+Let $\{ \bv_0, \dots, \bv_k \}$ be a set of $k+1$ affine
+independent points of $A$. Then,
+
+$$
+A = \affine \{ \bv_0, \dots, \bv_k \}.
+$$
+```
+
+```{prf:proof}
+
+Let $L$ be the linear subspace associated with $A$ 
+and let
+
+$$
+H = \affine \{ \bv_0, \dots, \bv_k \}.
+$$
+
+Since $A$ being affine is closed under affine combinations, hence $H \subseteq A$.
+
+We now show that $A \subseteq H$.
+
+1. Let $\bv \in A$.
+1. Then, $\bv - \bv_0 \in L$.
+1. By {prf:ref}`res-aff-basis-aff-ind-set`, 
+   $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ form a basis for $L$.
+1. Thus, 
+
+   $$
+   \bv - \bv_0 = t_1 (\bv_1 - \bv_0) + \dots + t_k (\bv_k - \bv_0).
+   $$
+1. But then,
+
+   $$
+   \bv = (1 - t_1 - \dots - t_k) \bv_0 + t_1 \bv_1 + \dots + t_k \bv_k
+   $$
+   which is an affine combination of $\{ \bv_0, \dots, \bv_k \}$.
+1. Thus, $\bv \in H$.
+1. Thus, $A \subseteq H$. 
+```
+
+
 
 ```{prf:theorem} Extending an affine independent set of points
 :label: res-aff-extn-affine-ind-set
@@ -717,6 +811,124 @@ $m$ affine independent points.
 1. Then, the set of points $\{ \bv_0, \dots, \bv_n \}$ is an 
    affine independent set since the $\{\bx_1, \dots, \bx_n \}$ are linearly
    independent.
+```
+
+## Barycentric Coordinate System
+
+```{prf:theorem} Unique representation from affine independent points
+:label: res-aff-aff-ind-unique-rep
+
+Let $\VV$ be a vector space and 
+$\bv_0, \bv_1, \dots, \bv_k$ be a set of $k+1$ affine
+independent points in $\VV$.   
+Let $S = \{ \bv_0, \bv_1, \dots, \bv_k \}$.
+Let $A = \affine S$.
+
+Then, every point in $A$ can be represented uniquely as
+
+$$
+\bv = t_0 \bv_0 + \dots + t_k \bv_k
+$$
+such that $t_0 + \dots + t_k = 1$.
+```
+
+
+```{prf:proof}
+By definition of affine hull, any point in the hull $A$
+is an affine combination of the points in $S$.
+We shall first find a suitable representation as an affine combination of $S$.
+Then, we shall prove the uniqueness of such a representation
+by showing that if the representation is not unique then 
+the points in $S$ cannot be affine independent.
+
+Let $L$ be the linear subspace associated with $A$.
+Let $\bx_1 = \bv_1 - \bv_0, \dots, \bx_k = \bv_k - \bv_0$.
+Then, by {prf:ref}`res-aff-basis-aff-ind-set`,
+the set $\BBB = \{ \bx_1, \dots, \bx_k\}$
+forms a basis for $L$.
+
+Let $\bv \in A$. Then, $\bx = \bv - \bv_0 \in L$.
+
+Then, there is a unique representation of $\bx$ in the basis $\BBB$:
+
+$$
+\bx  = s_1 \bx_1 + \dots s_k \bx_k.
+$$
+
+Then,
+
+$$
+\bv &= \bx + \bv_0\\
+&= s_1 \bx_1 + \dots s_k \bx_k + \bv_0\\
+&= s_1 (\bv_1 - \bv_0) + \dots s_k (\bv_k - \bv_0) + \bv_0\\
+&= (1 - s_1 - \dots - s_k) \bv_0 + s_1 \bv_1 + \dots s_k \bv_k.
+$$
+Letting $t_0 = 1 - s_1 - \dots - s_k$ and $t_i = s_i$ for $i=1,\dots,k$
+we arrive at a representation of $\bv$ in terms of points in $S$
+such that $t_0 + \dots + t_k = 1$ and
+
+$$
+\bv = t_0 \bv_0 + t_1 \bv_1 + \dots + t_k \bv_k.
+$$
+
+We now claim that this representation is unique.
+Suppose, there was another representation
+
+$$
+\bv = r_0 \bv_0 + r_1 \bv_1 + \dots + r_k \bv_k
+$$
+such that $r_0 + \dots + r_k = 1$.
+
+Then, we would have:
+
+$$
+& r_0 \bv_0 + r_1 \bv_1 + \dots + r_k \bv_k = t_0 \bv_0 + t_1 \bv_1 + \dots + t_k \bv_k\\
+& \iff (1 - r_1 - \dots - r_k) \bv_0 + r_1 \bv_1 + \dots + r_k \bv_k 
+  = (1 - t_1 - \dots - t_k) \bv_0 + t_1 \bv_1 + \dots + t_k \bv_k\\
+& \iff r_1 (\bv_1 - \bv_0) + \dots + r_k (\bv_k - \bv_0) + \bv_0 
+  = t_1 (\bv_1 - \bv_0) + \dots + t_k (\bv_k - \bv_0) + \bv_0\\
+& \iff r_1 \bx_1 + \dots + r_k \bx_k = t_1 \bx_1 + \dots + t_k \bx_k\\
+& \iff (r_1 - t_1) \bx_1 + \dots  + (r_k - t_k) \bx_k = \bzero.
+$$
+
+But, the set $\{ \bx_1, \dots, \bx_k \}$ is linearly independent
+since $\bv_0, \bv_1, \dots, \bv_k$ are affine independent.
+
+Hence, $r_1 = t_1, \dots, r_k = t_k$ must be true.
+
+Thus, $r_0 = t_0$ must be true since $r_0 = 1 - r_1 - \dots - r_k$
+and $t_0 = 1 - t_1 - \dots - t_k$.
+
+Thus, $\bv$ has a unique representation in $S$.
+```
+
+This unique representation can be used to define a coordinate system
+in an affine set.
+
+```{prf:definition} Barycentric coordinate system
+:label: def-aff-barycentric-coordinate-system
+
+Let $\VV$ be a vector space and 
+$\bv_0, \bv_1, \dots, \bv_k$ be a set of $k+1$ affine
+independent points in $\VV$.   
+Let $S = \{ \bv_0, \bv_1, \dots, \bv_k \}$.
+Let $A = \affine S$.
+
+Then, every point in $A$ can be represented uniquely as
+
+$$
+\bv = t_0 \bv_0 + \dots + t_k \bv_k
+$$
+such that $t_0 + \dots + t_k = 1$.
+This representation is known as the *barycentric coordinate system*.
+
+If $A$ is an arbitrary finite dimensional affine subspace of $\VV$
+with $\dim A = k$,
+then we can select $k+1$ affine independent points 
+$\bv_0, \bv_1, \dots, \bv_k \in A$
+(thanks to {prf:ref}`res-aff-aff-ind-points-in-aff-subspace`). 
+Any such set of $k+1$ affine independent points of $A$
+affords $A$ with a barycentric coordinate system.
 ```
 
 ## Translations
@@ -1422,13 +1634,11 @@ Let $C$ be an arbitrary affine set in $\FF^n$.
 
 ## Affine Transformations
 
-
-
 ```{prf:definition} Affine transformation
 :label: def-la-affine-operator
 
-Let $\XX$ and $\YY$ be vector spaces. 
-A (total) function $T : \XX \to \YY$ (on some field $\FF$)
+Let $\XX$ and $\YY$ be vector spaces (on some field $\FF$). 
+A (total) function $T : \XX \to \YY$
 is called an *affine transformation* if
 for every $\bx,\by \in \XX$ and for every $t \in \FF$
 
@@ -1439,6 +1649,9 @@ $$
 An affine transformation is also known as an *affine function*
 or an *affine operator*.
 ```
+An affine transformation preserves affine combinations.
+An affine combination in input leads to an identical
+affine combination in output.
 
 
 ```{prf:theorem} Affine = Linear + Translation
