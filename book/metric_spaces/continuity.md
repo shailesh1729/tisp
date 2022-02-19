@@ -16,6 +16,8 @@ Recall that for a function $f: (X,d) \to (Y, \rho)$:
 We will primarily focus on total functions while
 some definition and results are valid for partial functions too.
 
+## Open and Closed Mappings
+
 ```{prf:definition} Open mapping
 :label: def-ms-open-mapping
 
@@ -33,6 +35,24 @@ a *closed mapping* if $f(A)$ is closed whenever $A$ is closed.
 
 In other words, $f$ maps closed sets to closed sets.
 ```
+
+## Bounded Functions
+
+```{prf:definition} Bounded functions
+:label: def-ms-bounded-function
+
+A (total) function $f : (X, d) \to (Y, \rho)$ is called 
+a *bounded* if its image $f(X)$ is 
+{prf:ref}`bounded <def-ms-boundedness-set>` (in the metric space sense).
+
+In other words, there exists a number $M > 0$ such that
+
+$$
+\rho(f(x), f(y)) \leq M \Forall x, y \in X.
+$$
+```
+Compare this definition with the definition for
+bounded real valued functions in {prf:ref}`def-bra-bounded-function`.
 
 ## Continuous Functions
 
@@ -283,6 +303,32 @@ Assume that $\lim x_n = x$. Let $y = f(x)$ and $z = g(y)$.
 1. Since this is valid for any convergent sequence of $X$, 
    $g \circ f$ is continuous;
    again due to {prf:ref}`res-ms-continuous-function-characterization`.
+```
+
+```{prf:theorem} Level sets of continuous functions
+:label: res-ms-level-set-cont-func
+
+Let $f: X \to Y$ be a continuous function between two metric spaces.
+Then, the level sets of $f$ given by
+
+$$
+A_y = \{x \in X \ST f(x) = y \}
+$$
+are closed.
+```
+
+```{prf:proof}
+By definition:
+
+$$
+A_y = f^{-1}(\{ y \}).
+$$
+
+Now, $\{ y \}$ is a singleton set in $Y$, hence closed in $Y$
+due to {prf:ref}`res-ms-singleton-closed`.
+
+Then, by {prf:ref}`res-ms-continuous-function-characterization` (5), 
+$f^{-1}(\{ y \})$ is closed. 
 ```
 
 ## Discontinuity
