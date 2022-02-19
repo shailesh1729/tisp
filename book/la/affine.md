@@ -1,6 +1,9 @@
 (sec:la:affine_sets)=
 # Affine Sets and Transformations
 
+Primary references for this section are 
+{cite}`bertsekas2003convex,boyd2004convex,rockafellar2015convex`.
+
 In this section $\VV$ denotes a vector space on some field $\FF$
 which can be either $\RR$ (real numbers) or $\CC$ (complex numbers).
 Much of the section will not require any other structure on 
@@ -624,6 +627,37 @@ If the associated subspace has dimension $l$ then a maximum of $l$ vectors can
 be linearly independent in it. Hence a maximum of $l+1$ vectors can be affine
 independent for the affine set.
 
+
+```{prf:theorem} Basis for the linear subspace associated with affine independent set
+:label: res-aff-basis-aff-ind-set
+
+Let $\bv_0, \bv_1, \dots, \bv_k \in \VV$ be a set of affine independent,
+points in $\VV$.
+
+Let $S = \{ \bv_0, \bv_1, \dots, \bv_k \}$.
+Let $A = \affine S$.
+Let $L$ be the linear subspace associated with $A$.
+
+Then, $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ form a basis for
+$L$.
+```
+
+```{prf:proof}
+
+By definition of affine independence,
+$\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ are linearly independent.
+
+By {prf:ref}`res-aff-finite-set-hull-ass-space`
+
+$$
+L = \span \{ \bv_1 - \bv_0, \dots, \bv_k - \bv_0\}.
+$$
+
+Since, they are linearly independent and span $L$, hence they
+form a basis for $L$. 
+```
+
+
 ```{prf:theorem} Affine independence and dimension
 :label: res-aff-independence-hull-dim
 
@@ -638,7 +672,7 @@ Assume $\bv_0, \bv_1, \dots, \bv_k$ to be affine independent.
 1. Then,  by {prf:ref}`def-affine-independence`,
    $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ are linearly independent.
 1. Let $L = \span \{ \bv_1 - \bv_0, \dots, \bv_k - \bv_0 \}$.
-1. By {prf:ref}`res-aff-finite-set-hull-ass-space` 
+1. By {prf:ref}`res-aff-finite-set-hull-ass-space`
    
    $$
    \dim \affine \{\bv_0, \bv_1, \dots, \bv_k\} = \dim L = k
@@ -657,6 +691,33 @@ Now, assume $A = \affine \{\bv_0, \bv_1, \dots, \bv_k\}$ is $k$ dimensional.
    must be linearly independent.
 ```
 
+{cite}`rockafellar2015convex` defines $\bv_0, \bv_1, \dots, \bv_k \in \VV$ 
+as affine independent if their hull is $k$ dimensional.
+As we can see above, our definition is equivalent.
+
+
+```{prf:theorem} Extending an affine independent set of points
+:label: res-aff-extn-affine-ind-set
+
+Let $\VV$ be a finite dimensional vector space with $n = \dim \VV$.
+Any set of $m+1$ affine independent points in $\VV$ (where $m < n$)
+can be extended to a set of $n+1$ affine independent points.
+```
+```{prf:proof}
+Let $S = \{\bv_0, \bv_1, \dots, \bv_m \}$ be a set of
+$m$ affine independent points.
+
+1. Let $A = \affine S$.
+1. Let $L$ be the linear subspace associated with $A$.
+1. Let $\bx_1 = \bv_1 - \bv_0, \dots, \bx_m = \bv_m - \bv_0$.
+1. The set $\{\bx_1, \dots, \bx_m \}$ forms a basis for $L$.
+1. Extend $\{\bx_1, \dots, \bx_m \}$ to $\{\bx_1, \dots, \bx_n \}$
+   to form a basis for $\VV$.
+1. Compute the points $\bv_i = \bx_i + \bv_0$ for $i=m+1, \dots, n$.
+1. Then, the set of points $\{ \bv_0, \dots, \bv_n \}$ is an 
+   affine independent set since the $\{\bx_1, \dots, \bx_n \}$ are linearly
+   independent.
+```
 
 ## Translations
 
