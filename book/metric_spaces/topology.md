@@ -124,7 +124,9 @@ A subset $S$ of $X$ is said to be *closed* in $X$
 if $X \setminus S$ is open in $X$.
 ```
 
-```{prf:theorem}
+```{prf:theorem} Trivially closed and open sets
+:label: res-ms-empty-whole-clopen
+
 $\EmptySet$ and $X$ are both open and closed subsets of $X$.
 ```
 
@@ -137,17 +139,23 @@ $X$ is open since for every point $x \in X$, every open ball at $x$
 lies entirely in $X$ (by definition). Thus, $\EmptySet$ is closed.
 ```
 
-```{prf:theorem}
+```{prf:theorem} Singletons are closed
+:label: res-ms-singleton-closed
+
 Every singleton is a closed set.
 ```
 
 ```{prf:proof}
-Let $x \in X$ and consider the singleton set $A = \{x\}$. 
+Let $x \in X$ and consider the singleton set $A = \{x\}$.
+
 Let $B = X \setminus A$. We show that $B$ is open. Then $A$ is closed.
 
-Let $y \in B$ and let $r = d(x, y)$. Then, the open ball
-$B(y, r)$ doesn't contain $x$. Thus, $B(y, r) \subseteq B$. Thus, 
-$B$ is open.
+1. Let $y \in B$
+1. Let $r = d(x, y)$. 
+1. Then, the open ball
+   $B(y, r)$ doesn't contain $x$. 
+1. Thus, $B(y, r) \subseteq B$. 
+1. Thus, $B$ is open.
 ```
 
 ```{prf:example}
@@ -157,6 +165,8 @@ $B$ is open.
 ```
 
 ```{prf:proposition}
+:label: res-ms-nat-is-closed
+
 The set of natural numbers $\Nat$ is closed in $\RR$.
 ```
 
@@ -172,7 +182,7 @@ $$
 1. Each open interval is an open set.
 1. The arbitrary union of open sets is open.
 1. Thus, $\RR \setminus \Nat$ is open.
-5. Thus, $\Nat$ is closed. 
+1. Thus, $\Nat$ is closed. 
 
 ```
 
