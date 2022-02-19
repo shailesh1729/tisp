@@ -1654,26 +1654,78 @@ An affine combination in input leads to an identical
 affine combination in output.
 
 
-```{prf:theorem} Affine = Linear + Translation
-:label: res-la-op-affine-linear-p-offset
+We next show that a linear transformation followed
+by a translation is affine.
 
-$T$ is affine if and only if the mapping $\bx \mapsto T(\bx) - T(\bzero)$
-is linear.
+```{prf:theorem} Linear + Translation $\implies$ Affine
+:label: res-aff-linear-trans-affine
 
-In other words, an affine transformation can be written as a linear
-transformation followed by a translation.
+Let $\XX$ and $\YY$ be vector spaces (on some field $\FF$). 
+Let $L : \XX \to \YY$ be a linear transformation and
+let $\ba \in \YY$. Define 
+$T : \XX \to \YY$ as 
+
+$$
+T (\bx) = L (\bx) + \ba.
+$$
+Then, $T$ is an affine transformation.
 ```
 
 ```{prf:proof}
-Let $T : \XX \to \YY$ be some mapping. Define:
+Let $\bx, \by \in \XX$ and $t \in \FF$. Then
+
+$$
+T (t \bx + (1 - t) \by) 
+&= L (t \bx + (1 - t) \by) + \ba  \\
+&= t L(\bx) + (1 -t) L (\by) + \ba \\
+&= t L(\bx) + t \ba + (1 -t) L (\by) + (1-t)\ba \\
+&= t (L (\bx) + \ba) + (1 -t) (L (\by) + \ba)\\
+&= tT (\bx) + (1- t) T(\by).
+$$
+Thus, $T$ is affine.
+```
+
+We now prove a stronger result that every
+affine function is a linear transformation
+followed by a translation.
+
+```{prf:theorem} Affine = Linear + Translation
+:label: res-la-op-affine-linear-p-offset
+Let $\XX$ and $\YY$ be vector spaces (on some field $\FF$). 
+Let $T : \XX \to \YY$ be some mapping. 
+Then, $T$ is affine if and only if the mapping $\bx \mapsto T(\bx) - T(\bzero)$
+is linear.
+
+In other words, an affine transformation can be written as a linear
+transformation followed by a translation and vice-versa.
+```
+
+```{prf:proof}
+Define:
 
 $$
 L (\bx) = T (\bx)  - T(\bzero).
 $$
+Notice that $L(\bzero) = T(\bzero) - T(\bzero) = \bzero$. Thus,
+$L$ maps zero vector from $\XX$ to the zero vector of $\YY$.
+
+We need to show that
+
+$$
+L \text{ linear } \iff  T \text{ affine}.
+$$
+
+We shall show it in two steps.
+
+1. Show that if $T$ is affine, then $L$ must be linear.
+1. Show that if $L$ is linear, then $T$ must be affine.
 
 Assume $T$ to be affine. We shall show that $L$ is linear.
 
-Let $\bx, \by \in \XX$ and $t \in \FF$. Then
+Let $\bx, \by \in \XX$ and $t \in \FF$.
+
+[Scalar multiplication]
+
 
 $$
 L(t\bx) &= T (t\bx) - T(\bzero)\\
@@ -1681,6 +1733,8 @@ L(t\bx) &= T (t\bx) - T(\bzero)\\
 &= t T(\bx) + (1-t)T(\bzero) - T(\bzero)\\
 &= t (T(\bx) - T(\bzero)) = t L(\bx).
 $$
+
+[Vector addition]
 
 $$
 L (\bx + \by) &= T (\bx + \by)  - T(\bzero)\\
@@ -1753,6 +1807,83 @@ T \left ( \sum_{i=0}^k t_i \bx_i \right )
 &= \sum_{i=0}^k t_i T( \bx_i).
 $$
 ```
+
+
+```{prf:theorem} Preservation of affine hulls
+:label: res-la-aff-func-aff-hull
+
+Let $\XX$ and $\YY$ be vector spaces on a field $\FF$.
+Let $T : \XX \to \YY$ be affine. Let $S \subseteq \XX$.
+Then,
+
+$$
+\affine T (S) = T (\affine S);
+$$
+i.e., the affine hull of $T(S)$ is same as $T(A)$
+where $A$ is the affine hull of $S$.
+```
+
+```{prf:proof}
+
+We first show that $\affine T (S) \subseteq T (\affine S)$
+
+1. Let $\by \in \affine T (S)$. 
+1. Then, there exist $\by_0, \dots, \by_k \in T(S)$ and $t_0, \dots, t_k \in \FF$ 
+   such that $\sum_{i=0}^k t_i = 1$ and
+   
+   $$
+   \by = \sum_{i=0}^k t_i \by_i.
+   $$
+1. But then, $\by_i = T(\bx_i)$ for some $\bx_i \in S$ for every $i=0,\dots, k$
+   since $\by_i \in T(S)$.
+1. Then, due to {prf:ref}`res-la-aff-func-aff-comb`
+
+   $$
+   \by = \sum_{i=0}^k t_i \by_i = \sum_{i=0}^k t_i T (\bx_i)
+   = T \left (\sum_{i=0}^k t_i \bx_i \right )
+   $$
+   since $T$ preserves affine combinations.
+1. But, $\bx = \sum_{i=0}^k t_i \bx_i \in \affine S$ since $\bx_i \in S$ and
+   $\bx$ is their affine combination.
+1. Thus, $\by = T(\bx)$ where $\bx \in \affine S$.
+1. Thus, $\by \in T(\affine S)$.
+1. Thus, $\affine T (S) \subseteq T (\affine S)$.
+
+We now show that $T (\affine S) \subseteq \affine T (S)$.
+
+1. Let $\by \in T (\affine S)$.
+1. Then, there exists $\bx \in \affine S$ such that $\by = T(\bx)$.
+1. Then, there exist $\bx_0, \dots, \bx_k \in S$ and $t_0, \dots, t_k \in \FF$ 
+   such that $\sum_{i=0}^k t_i = 1$ and
+   
+   $$
+   \bx = \sum_{i=0}^k t_i \bx_i.
+   $$
+1. Then, due to {prf:ref}`res-la-aff-func-aff-comb`
+
+   $$
+   \by = T(\bx) = T \left ( \sum_{i=0}^k t_i \bx_i \right )
+   = \sum_{i=0}^k t_i T (\bx_i)
+   $$
+   since $T$ preserves affine combinations.
+1. Let $\by_i = T(\bx_i)$ for $i=0,\dots,m$.
+1. Since $\bx_i \in S$, hence $\by_i \in T(S)$.
+1. Then, 
+
+   $$
+   \by = \sum_{i=0}^k t_i \by_i.
+   $$
+1. But then, $\by$ is an affine combination of points in $T(S)$.
+1. Thus, $\by \in \affine T(S)$.
+1. Thus, $T (\affine S) \subseteq \affine T (S)$.
+
+Combining these results:
+
+$$
+T (\affine S) = \affine T (S).
+$$
+```
+
 
 
 ## Topology in Normed Spaces
