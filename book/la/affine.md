@@ -1884,6 +1884,55 @@ T (\affine S) = \affine T (S).
 $$
 ```
 
+```{prf:theorem}  Affine invertible = linear invertible
+:label: res-aff-map-invertible-lin-map
+
+An affine map is invertible if and only if its corresponding
+linear map as described in {prf:ref}`res-la-op-affine-linear-p-offset`
+is invertible.
+```
+
+The translation map is invertible. Composition of invertible maps
+is invertible. Since affine is composition of linear with translation
+hence affine is invertible if linear is invertible.
+Similarly, linear is also a composition of affine with translation.
+Hence, linear is invertible if affine is invertible.
+
+```{prf:proof}
+Formally, let $\XX$ and $\YY$ be vector spaces on a field $\FF$.
+Let $T : \XX \to \YY$ be an affine map.
+Let $L : \XX \to \YY$ be the linear map given by:
+
+$$
+L(\bx) = T(\bx) - T(\bzero).
+$$
+
+Let $T(\bzero) = \ba$ and write
+
+$$
+T(\bx) = L(\bx) + \ba \text{ and }  L(\bx) = T(\bx) - \ba.
+$$
+
+Define a parameterized translation map $G_{\bv} : \YY \to \YY$ as:
+
+$$
+G_{\bv} (\by) = \by + \bv \Forall \by \in \YY.
+$$
+Note that the inverse of the translation operator is given by:
+
+$$
+G^{-1}_{\bv} (\by) = \by - \bv = G_{-\bv} (\by)
+$$
+which is another translation operator. Thus, all translation operators are invertible.
+
+Then,
+
+$$
+L = G_{-\ba} \circ T  \text{ and } T = G_{\ba} \circ  L.
+$$
+Clearly, if $T$ is invertible then so is $L$ and if $L$ is invertible then so is $T$.
+```
+
 
 ```{prf:theorem} Inverse of affine map is affine
 :label: res-aff-map-inverse
