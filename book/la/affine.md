@@ -1885,6 +1885,57 @@ $$
 ```
 
 
+```{prf:theorem} Inverse of affine map is affine
+:label: res-aff-map-inverse
+
+Let $\XX$ and $\YY$ be vector spaces on a field $\FF$.
+Let $T : \XX \to \YY$ be an affine map.
+If $T$ is invertible, then its inverse is also an affine map.
+```
+
+```{prf:proof}
+We are given that $T$ is affine and its inverse exists.
+Let $S : \YY \to \XX$ be the inverse of $T$. We need to show that
+$S$ is affine.
+
+Since $T$ is invertible, it is bijective. 
+
+1. Let $\by_1, \by_2 \in \YY$ and $t \in \FF$.
+1. Then, there exist $\bx_1, \bx_2 \in \XX$ such that
+   
+   $$
+   \by_1 = T(\bx_1), \by_2 = T(\bx_2)
+   $$
+   and $\bx_1 \neq \bx_2$.
+1. Since $S = T^{-1}$, hence $S(\by_1) = \bx_1$ and $S(\by_2) = \bx_2$.
+1. Let $\by = t \by_1 + (1-t) \by_2$ and $\bx = t \bx_1 + (1-t) \bx_2$.
+1. Then
+
+   $$
+   T (\bx ) &= T(t \bx_1 + (1-t) \bx_2)\\ 
+   &= t T(\bx_1) + (1-t) T (\bx_2)\\ 
+   &= t \by_1 + (1-t) \by_2 = \by 
+   $$
+   since $T$ is affine.
+1. Thus, $T(\bx) = \by$.
+1. Consequently, $S(\by) = \bx$.
+1. But then, 
+
+   $$
+   S( t \by_1 + (1-t) \by_2) &= S(\by) = \bx\\ 
+   &= t \bx_1 + (1-t) \bx_2\\
+   &= t S(\by_1) + (1-t) S(\by_2).
+   $$
+
+We have shown that for any $\by_1, \by_2 \in \YY$ and $t \in \FF$,
+
+$$
+S( t \by_1 + (1-t) \by_2)  = t S(\by_1) + (1-t) S(\by_2).
+$$
+Therefore, $S$ is affine.
+```
+
+
 
 ## Topology in Normed Spaces
 
