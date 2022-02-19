@@ -1936,6 +1936,59 @@ Therefore, $S$ is affine.
 ```
 
 
+```{prf:theorem} Affine mapping between affine independent sets
+:label: res-aff-mapping-independent-sets
+
+Let $\VV$ be a finite dimensional vector space with $n = \dim \VV$.
+Let $\{\ba_0, \dots, \ba_m\}$ and $\{\bb_0, \dots, \bb_m \}$ 
+be two affine independent sets in $\VV$ where $m \leq n$.
+Then, there exists an invertible affine map, $T: \VV \to \VV$ 
+such that $T \ba_i = \bb_i$ for $i=0,\dots,m$. 
+If $m=n$, then $T$ is unique.
+```
+
+```{prf:proof}
+By {prf:ref}`res-aff-extn-affine-ind-set`, we can 
+extend $\{\ba_0, \dots, \ba_m\}$ to an affine independent
+set $\{\ba_0, \dots, \ba_n\}$
+and similarly $\{\bb_0, \dots, \bb_m \}$ to
+$\{\bb_0, \dots, \bb_n \}$.
+
+Both of these sets span the entire $\VV$ (as affine hull).
+
+The sets $\BBB_a = \{\ba_1 - \ba_0, \dots, \ba_n - \ba_0\}$
+and $\BBB_b = \{\bb_1 - \bb_0, \dots, \bb_n - \bb_0\}$
+are two different bases for $\VV$.
+
+Then, there exists a unique linear transformation $A : \VV \to \VV$
+which carries $\BBB_a$ to $\BBB_b$; i.e.
+
+$$
+A (\ba_i - \ba_0) = \bb_i - \bb_0, \Forall i=1,\dots,n.
+$$
+
+Now, consider the affine map given by
+
+$$
+T(\bx) = A (\bx) + \bb_0 - A (\ba_0)
+$$
+where $\bb_0 - A (\ba_0)$ is a fixed translation.
+
+Then,
+
+$$
+T(\ba_i) = A (\ba_i) + \bb_0 - A (\ba_0) 
+= A(\ba_i  - \ba_0) + \bb_0 
+= \bb_i  - \bb_0 + \bb_0 = \bb_i.
+$$
+Thus, $T$ is the desired affine transformation.
+
+
+If $m=n$, then the linear transformation $A$ is uniquely 
+determined by the bases $\BBB_a$ and $\BBB_b$ which are
+given. Thus, $T$ is unique too.
+```
+
 
 ## Topology in Normed Spaces
 
