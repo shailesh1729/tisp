@@ -757,3 +757,44 @@ every infinite subset of $X$ has an accumulation point in $X$
 1. Thus, every infinite subset of $X$ has an accumulation point in $X$.
 1. Thus, $X$ is compact.
 ```
+
+
+
+## Equivalent Metrics
+
+
+```{prf:theorem} Metric equivalence and compactness
+:label: res-ms-eq-metric-compactness
+
+Let $d_a$ and $d_b$ be two different metrics on the same set $X$
+that are equivalent. 
+
+Then, a set $A \subseteq X$ is compact in $(X, d_a)$ 
+if and only if $A$ is compact in $(X, d_b)$.
+
+In other words, the compact sets in the two metric spaces
+are identical.
+```
+
+
+```{prf:proof}
+
+Assume $A$ to be compact in $(X, d_a)$.
+
+1. Let $A \subseteq \bigcup_{i \in I} \OOO_i$ be an open cover of $A$
+   in $(X, d_b)$; i.e. $\OOO_i$ are open in $(X, d_b)$.
+1. Since $d_a$ and $d_b$ are equivalent, hence $\OOO_i$ are open in $(X, d_a)$ too.
+1. Thus, $\bigcup_{i \in I} \OOO_i$ is an open cover for $A$ in $(X, d_a)$ too.
+1. Since $A$ is compact in $(X, d_a)$, hence, there exist finite indices 
+   $i_1, \dots, i_n$ such that
+   $A \subseteq \OOO_{i_1} \cup \dots \cup \OOO_{i_n}$.
+1. But then, $\OOO_{i_1}, \dots, \OOO_{i_n}$ are open in $(X, d_b)$ too.
+1. Thus,  $A \subseteq \OOO_{i_1} \cup \dots \cup \OOO_{i_n}$ is a finite
+   open subcover of $A$ in $(X, d_b)$.
+1. Thus, every open cover of $A$ in $(X, d_b)$ can be reduced to
+   a finite subcover.
+1. Thus, $A$ is compact in $(X, d_b)$.
+
+A similar reasoning establishes that if $A$ is compact in  $(X, d_b)$
+then $A$ is compact in $(X, d_a)$ too.
+```
