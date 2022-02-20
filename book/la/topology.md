@@ -665,6 +665,100 @@ The following statements are equivalent.
 1. Thus, the two norms are equivalent.
 ```
 
+```{prf:theorem}
+:label: res-la-ns-norm-equivalence-rel
+
+Equivalence of norms is an equivalence relation 
+on the set of norms for a given vector space.
+```
+
+```{prf:proof}
+Let $\VV$ be a given vector space.
+Let $\| \cdot \|_a : \VV \to \RR$, 
+$\| \cdot \|_b : \VV \to \RR$,
+$\| \cdot \|_c : \VV \to \RR$,
+be norms defined on $\VV$.
+
+We shall say that $\| \cdot \|_a \sim \| \cdot \|_b$
+if the norms $\| \cdot \|_a$ and $\| \cdot \|_b$ 
+are equivalent; i.e.,
+there exist constants $c_1, c_2 > 0$
+such that for every $\bv \in \VV$, we have
+
+$$
+\| \bv \|_a \leq c_1 \| \bv \|_b
+\text{ and } 
+\| \bv \|_b \leq c_2 \| \bv \|_a.
+$$
+
+[Reflexivity]
+1. Choose $c_1 = c_2 = 1$. Then,
+
+   $$
+   \| \bv \|_a \leq \| \bv \|_a
+   $$
+   for every $\bv \in \VV$.
+1. Hence, $\| \cdot \|_a \sim \| \cdot \|_a$.
+
+[Symmetry]
+
+1. Let $\| \cdot \|_a \sim \| \cdot \|_b$.
+1. Then, there exist constants $c_1, c_2 > 0$
+   such that for every $\bv \in \VV$, we have
+
+   $$
+   \| \bv \|_a \leq c_1 \| \bv \|_b
+   \text{ and } 
+   \| \bv \|_b \leq c_2 \| \bv \|_a.
+   $$
+1. Choose $d_1 = c_2$ and $d_2 = c_1$.
+1. Then, for every $\bv \in \VV$, we have
+
+   $$
+   \| \bv \|_b \leq d_1 \| \bv \|_a
+   \text{ and } 
+   \| \bv \|_a \leq d_2 \| \bv \|_b.
+   $$
+1. Thus, $\| \cdot \|_b \sim \| \cdot \|_a$.
+
+[Transitivity]
+1. Let $\| \cdot \|_a \sim \| \cdot \|_b$ and 
+   $\| \cdot \|_b \sim \| \cdot \|_c$.
+1. Then, there exist constants $c_1, c_2 > 0$
+   such that for every $\bv \in \VV$, we have
+
+   $$
+   \| \bv \|_a \leq c_1 \| \bv \|_b
+   \text{ and } 
+   \| \bv \|_b \leq c_2 \| \bv \|_a.
+   $$
+1. And, there exist constants $d_1, d_2 > 0$
+   such that for every $\bv \in \VV$, we have
+
+   $$
+   \| \bv \|_b \leq d_1 \| \bv \|_c
+   \text{ and } 
+   \| \bv \|_c \leq d_2 \| \bv \|_b.
+   $$
+1. Let $e_1 = c_1 d_1 > 0$ and $e_2 = c_2 d_2 > 0$.
+1. Then, for every $\bv \in \VV$:
+
+   $$
+   \| \bv \|_a \leq c_1 \| \bv \|_b 
+   \leq c_1 (d_1 \| \bv \|_c) 
+   = (c_1 d_1)\| \bv \|_c = e_1 \| \bv \|_c.
+   $$
+1. Similarly, for every $\bv \in \VV$:
+
+   $$
+   \| \bv \|_c \leq d_2 \| \bv \|_b
+   \leq d_2 (c_2 \| \bv \|_a)
+   = (d_2 c_2) \| \bv \|_a
+   = e_2 \| \bv \|_a.
+   $$
+1. Thus, $\| \cdot \|_a \sim \| \cdot \|_c$.
+```
+
 ## Linear Subspaces
 
 ```{prf:theorem}
