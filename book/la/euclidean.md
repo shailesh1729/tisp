@@ -422,9 +422,28 @@ $$
 $$
 ```
 
-### Equivalence of norms
+### Equivalence of Norms
 
-```{prf:theorem}
+$\RR^n$ is a finite dimensional vector space
+and all norms on $\RR^n$ are equivalent. 
+However, reaching this conclusion requires
+some hoofs to go through. Here is the roadmap.
+
+```{div}
+1. We first establish that $\ell_1$ and $\ell_2$ norms are equivalent.
+1. We then establish that $\ell_2$ and $\ell_{\infty}$ norms are equivalent.
+1. We recall the Heine-Borel theorem for Euclidean metric and show that
+   closed and bounded sets of $(\RR^n, \| \cdot \|_2)$ are compact.
+1. We then take advantage of the fact that equivalent norms
+   lead to same topologies (open, closed and compact sets) as well
+   as bounded sets and show that closed and bounded sets
+   of $(\RR^n, \| \cdot \|_1)$ are also compact.
+1. We are then in a position to demonstrate that all norms on $\RR^n$
+   are indeed equivalent.
+```
+
+
+```{prf:theorem} Equivalence of $\ell_1$ and $\ell_2$ norms
 :label: res-la-euclidean-l1-l2-eq 
 
 The $\ell_1$ and $\ell_2$ norms on $\RR^n$ are
@@ -477,7 +496,7 @@ Thus, the two norms are equivalent.
 
 
 
-```{prf:theorem}
+```{prf:theorem} Equivalence of $\ell_2$ and $\ell_{\infty}$ norms
 :label: res-la-euclidean-l2-linf-eq 
 
 The $\ell_2$ and $\ell_{\infty}$ norms on $\RR^n$ are
@@ -513,6 +532,193 @@ $$
 Thus, $\| \bx \|_{\infty} \leq \| \bx \|_2$.
 Thus, the two norms are equivalent.
 ```
+
+
+```{prf:theorem} Equivalence of $\ell_1$, $\ell_2$, and $\ell_{|infty}$ norms
+:label: res-la-euclidean-l1-l2-linf-eq 
+
+The $\ell_1$, $\ell_2$ and $\ell_{\infty}$ norms on $\RR^n$ are
+equivalent.
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. By {prf:ref}`res-la-euclidean-l1-l2-eq`, $\ell_1$ and $\ell_2$ 
+   norms are equivalent.
+1. By {prf:ref}`res-la-euclidean-l2-linf-eq`, $\ell_2$ and $\ell_{\infty}$
+   norms are equivalent.
+1. By {prf:ref}`res-la-ns-norm-equivalence-rel`, equivalence
+   of norms is an equivalence relation.
+1. Hence, by transitivity, $\ell_1$ and $\ell_{\infty}$
+   norms are equivalent.
+```
+
+```{prf:theorem} Heine Borel theorem
+:label: res-la-euclidean-l2-norm-closed-bounded-compact
+
+A subset of the normed linear space
+$(\RR^n, \| \cdot \|_2)$ is compact
+if and only if it is a closed and bounded set.
+```
+
+```{prf:proof} 
+The distance metric induced by  $\| \cdot \|_2$
+is the Euclidean distance.
+
+This result is follows directly from 
+{prf:ref}`res-ms-heine-borel-euclidean`.
+```
+
+
+```{prf:theorem} Closed and bounded sets under $\ell_1$ norm
+:label: res-la-euclidean-l1-norm-closed-bounded-compact
+
+A subset of the normed linear space
+$(\RR^n, \| \cdot \|_1)$ is compact
+if and only if it is a closed and bounded set.
+```
+
+```{prf:proof}
+We just need to show that if a set is closed
+and bounded in $(\RR^n, \| \cdot \|_1)$, 
+then it is compact in $(\RR^n, \| \cdot \|_1)$.
+
+1. The norms $\| \cdot \|_1$ and $\| \cdot \|_2$ are equivalent
+   ({prf:ref}`res-la-euclidean-l1-l2-linf-eq`).
+1. Hence, the metrics induced by them are (strongly) equivalent
+   ({prf:ref}`res-la-ns-norm-eq-metric-eq`).
+1. Thus, the open sets and closed sets in
+    $(\RR^n, \| \cdot \|_1)$
+   and $(\RR^n, \| \cdot \|_2)$ are identical.
+1. Hence, the compact sets in $(\RR^n, \| \cdot \|_1)$
+   and $(\RR^n, \| \cdot \|_2)$ are identical
+   ({prf:ref}`res-ms-eq-metric-compactness`).
+1. Also the bounded sets in  $(\RR^n, \| \cdot \|_1)$
+   and $(\RR^n, \| \cdot \|_2)$ are identical
+   due to {prf:ref}`res-la-ns-norm-eq-same-bounded`.
+1. Now, let $A$ be a closed and bounded set in $(\RR^n, \| \cdot \|_1)$.
+1. Then, $A$ is closed and bounded in $(\RR^n, \| \cdot \|_2)$.
+1. But then by {prf:ref}`Heine Borel theorem <res-la-euclidean-l2-norm-closed-bounded-compact>`,
+   $A$ is compact in $(\RR^n, \| \cdot \|_2)$.
+1. But then, $A$ is compact in $(\RR^n, \| \cdot \|_1)$ also.
+```
+
+
+```{prf:theorem} Equivalence of norms on the Euclidean space
+:label: res-la-ns-norms-euclidean-eq
+
+Let $n \in \Nat$. 
+All norms on $\RR^n$ are equivalent.
+```
+
+```{prf:proof}
+The $\ell_1$ norm $\| \cdot \|_1 : \RR^n \to \RR$ is given by:
+
+$$
+\| \bx \|_1 = \sum_{i=1}^n | x_i |.
+$$
+
+We shall show that any norm $\| \cdot \| : \RR^n \to \RR$
+is equivalent to $\| \cdot \|_1 : \RR^n \to \RR$.
+Then, since norm equivalence is an equivalence relation
+({prf:ref}`res-la-ns-norm-eq-metric-eq`), hence
+all norms are equivalent. 
+
+In particular, if $\| \cdot \|_a$ and $\| \cdot \|_b$
+are two different norms on $\RR^n$, then
+$\| \cdot \|_a \sim \| \cdot \|_1$ and $\| \cdot \|_b \sim \| \cdot \|_1$
+implies that $\| \cdot \|_a \sim \| \cdot \|_b$ due to
+{prf:ref}`res-la-ns-norm-eq-metric-eq`.
+
+Towards this end, let's show that 
+any norm $\| \cdot \|$ is indeed equivalent to  $\| \cdot \|_1$.
+
+We first show that there exists a constant $c_1 > 0$ such that
+
+$$
+\| \bx \| \leq c_1 \| \bx \|_1 \Forall \bx \in \RR^n.
+$$
+
+1. Let $\{ \be_i \}$ be the standard basis for $\RR^n$.
+1. Let $c = \max \{ \| \be_i \|, i=1,\dots, n\}$.
+1. Then, for any $\bx \in \RR^n$, we have
+
+   $$
+   \| \bx \| &= \left \| \sum_{i=1}^n x_i \be_i \right \|\\
+   &\leq \sum_{i=1}^n \| x_i \be_i \| \\
+   &= \sum_{i=1}^n | x_i| \| \be_i \| \\
+   &\leq \sum_{i=1}^n | x_i| c \\
+   &= c \| \bx \|_1.
+   $$
+
+
+We now show that there exists a constant $c_2 > 0$ such that
+
+$$
+\| \bx \|_1 \leq c_2 \| \bx \| \Forall \bx \in \RR^n.
+$$
+
+1. Define a function $g : (\RR^n, \| \cdot \|_1) \to \RR$ as
+
+   $$
+   g(\bx) = \| \bx \| \Forall \bx \in \RR^n.
+   $$
+1. Then, for any $\bx, \by \in \RR^n$,
+
+   $$
+   | g(\bx) - g(\by)| = | \| \bx \| - \| \by \| | \leq \| \bx - \by \|
+   \leq c \| \bx - \by \|_1. 
+   $$
+1. Thus, $g$ is Lipschitz continuous on the 
+   normed linear space $(\RR^n, \| \cdot \|_1)$.
+1. Therefore, $g$ is continuous.
+1. Now, let $S = \{\by \in \RR^n \ST \| \by \|_1  = 1 \}$.
+1. $S$ is a closed set in $(\RR^n, \| \cdot \|_1)$ since it is the
+   boundary of the unit ball.
+1. $S$ is also bounded since $\| \by \|_1 \leq 1$ for every $\by \in S$.
+1. Then, by {prf:ref}`res-la-euclidean-l1-norm-closed-bounded-compact`
+   $S$ is compact in $(\RR^n, \| \cdot \|_1)$.
+1. Hence, due to {prf:ref}`res-ms-compact-real-valued-min-max-attain`
+   $g$ attains a minimum value at some $\by \in S$
+   over the compact set $S$.
+1. Let the minimum value of $g$ over $S$ be say $m$ at some $\by_0 \in S$.
+1. Note that $\bzero \notin S$ by definition since $\| \bzero \| \neq 1$.
+1. Thus,
+   
+   $$
+   m = g(\by_0) = \| \by_0 \| > 0.
+   $$
+1. Thus, for all $\by \in S$, we have $\| \by \| \geq m > 0$.
+1. Now, for any nonzero $\bx \in \RR^n$, the $\ell_1$ normalized vector,
+   $\by = \frac{\bx }{\| \bx \|_1} \in S$.
+1. But then
+
+   $$
+   & \| \by \| \geq m\\ 
+   &\implies \left \| \frac{\bx }{\| \bx \|_1}  \right \| \geq m\\
+   &\implies \| \bx \| \geq m \| \bx \|_1 \\
+   &\implies \| \bx \|_1 \leq \frac{1}{m} \| \bx \|
+   $$
+   holds for every nonzero $\bx \in \RR^n$.
+1. Also, the inequality $\| \bx \|_1 \leq \frac{1}{m} \| \bx \|$
+   is satisfied trivially by $\bzero$.
+
+
+We have shown that for $c_1 = c > 0$ and $c_2 = \frac{1}{m} > 0$   
+
+$$
+\| \bv \| \leq c_1 \| \bv \|_1
+\text{ and } 
+\| \bv \|_1 \leq c_2 \| \bv \|
+$$
+holds true for every $\bv \in \RR^n$.
+
+Thus, the two norms
+$\| \cdot \|$ and  $\| \cdot \|_1$ 
+are indeed equivalent.
+```
+
 
 ## Distances
 ```{prf:definition} Euclidean distance
