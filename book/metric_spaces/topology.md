@@ -1300,3 +1300,29 @@ be two metrics on $X$ which are equivalent.
 1. Thus, both metric spaces determine the same topology of open sets.
 1. Thus, they are equivalent.
 ```
+
+
+## Connectedness
+
+```{prf:definition} Connectedness
+:label: def-ms-connected-space
+
+A metric space $(X, d)$ is called *connected*
+if it cannot be expressed as a union of 
+two non-empty disjoint open sets. 
+```
+
+```{prf:example} Connected vs non-connected spaces
+:label: ex-ms-connected-space-1
+
+1. $\RR$ is connected.
+1. $(0,1) \cup (1,2)$ is not connected.
+```
+
+```{prf:definition} Connected subsets
+:label: def-ms-connected-subset
+
+Let $(X, d)$ be a metric space.
+A subset $A \subseteq X$ is called *connected* 
+if the metric subspace $(A, d)$ is connected.
+```
