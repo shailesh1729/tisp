@@ -1216,3 +1216,39 @@ $B_b (x, r'') \subseteq B_a(x, r)$.
 Thus, both metric spaces induce same topology. Hence,
 they are equivalent.
 ```
+
+
+```{prf:theorem} Equivalent metrics as equivalence relation
+:label: res-ms-eq-metrics-eq-rel
+
+Let $X$ be an arbitrary set.
+Consider the set of metrics on $X$ denoted as $D$:
+
+$$
+D \triangleq \{ d : X \times X \to \RR \ST d \text{ is a metric } \}.
+$$
+Let $d_a, d_b$ by any two metrics in $D$.
+Let $d_a \sim d_b$ if the two metrics are equivalent.
+Then, $\sim$ is an equivalence relation on the set of metrics $D$.
+```
+
+```{prf:proof}
+[Reflexivity]
+
+1. Let $d$ be an arbitrary metric on $X$.
+1. Then, $d \sim d$ since it induces same topology.
+
+
+[Symmetry]
+
+1. Let $d_a$ and $d_b$ be two metrics on $X$.
+1. If they are equivalent, then they introduce same topology.
+1. Thus, $d_a \sim d_b$ implies $d_b \sim d_a$.
+
+[Transitivity]
+
+1. Let $d_a \sim d_b$ and $d_b \sim d_c$.
+1. Then, all three $d_a, d_b, d_c$ induce the same topology
+   on $X$.
+1. Thus, $d_a \sim d_c$ holds too.
+```
