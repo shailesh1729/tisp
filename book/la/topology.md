@@ -759,6 +759,63 @@ $$
 1. Thus, $\| \cdot \|_a \sim \| \cdot \|_c$.
 ```
 
+```{prf:theorem} Norm equivance $\implies$ metric strong equivalence
+:label: res-la-ns-norm-eq-metric-eq
+
+If two norms are equivalent, then there associated
+metrics are
+{prf:ref}`strongly equivalent <def-ms-strong-equivalent-metric>`.
+```
+
+```{prf:proof}
+Let $\VV$ be a given vector space.
+Let $\| \cdot \|_a : \VV \to \RR$, 
+and $\| \cdot \|_b : \VV \to \RR$
+be norms defined on $\VV$ which are equivalent.
+
+Then, there exist constants $c_1, c_2 > 0$
+such that for every $\bv \in \VV$, we have
+
+$$
+\| \bv \|_a \leq c_1 \| \bv \|_b
+\text{ and } 
+\| \bv \|_b \leq c_2 \| \bv \|_a.
+$$
+
+The associated metrics are given by
+
+$$
+d_a(\bx, \by) = \| \bx  - \by \|_a 
+\text{ and }
+d_b(\bx, \by) = \| \bx  - \by \|_b.
+$$
+
+Clearly, for every $\bx, \by \in \VV$:
+
+$$
+d_a(\bx, \by) = \| \bx  - \by \|_a  \leq c_1 \| \bx  - \by \|_b
+= c_1 d_b(\bx, \by).
+$$
+
+Similarly,
+
+$$
+d_b(\bx, \by) = \| \bx  - \by \|_b  \leq c_2 \| \bx  - \by \|_a
+= c_2 d_a(\bx, \by).
+$$
+
+Thus, there exist $c_1, c_2 > 0$ such that
+
+$$
+d_a(\bx, \by) \leq  c_1 d_b(\bx, \by)
+\text{ and }
+d_b(\bx, \by) \leq  c_2 d_a(\bx, \by) 
+\Forall \bx, \by \in \bx, \by \in \VV.
+$$
+Thus, the two associated metrics are
+{prf:ref}`strongly equivalent <def-ms-strong-equivalent-metric>`.
+```
+
 ## Linear Subspaces
 
 ```{prf:theorem}
