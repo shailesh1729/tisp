@@ -364,6 +364,7 @@ is unbounded.
 Consequently, $T$ is an unbounded linear transformation. 
 ```
 
+
 ### Continuity
 
 ```{prf:theorem} Characterization of continuity for linear transformations
@@ -543,6 +544,8 @@ A uniformly continuous function is trivially continuous.
 A continuous function is trivially continuous at a point.
 ```
 
+
+
 ## Equivalent Norms
 
 ```{prf:definition} Equivalent norms
@@ -664,6 +667,85 @@ The following statements are equivalent.
    $$
 1. Thus, the two norms are equivalent.
 ```
+
+```{prf:theorem} Norm equivalence = Identical bounded sets
+:label: res-la-ns-norm-eq-same-bounded
+
+Let $\VV$ be a vector space.
+Let $\| \cdot \|_a : \VV \to \RR$ and $\| \cdot \|_b : \VV \to \RR$
+be two different norms defined on $\VV$.
+
+The following statements are equivalent.
+
+1. The norms  $\| \cdot \|_a$ and $\| \cdot \|_b$ are equivalent.
+1. Every set $A \subseteq \VV$ is bounded in 
+   $(\VV, \| \cdot \|_a)$ if and only if
+   it is bounded in $(\VV, \| \cdot \|_b)$.
+```
+
+```{prf:proof}
+
+(1) $\implies$ (2)
+
+1. By hypothesis, the norms
+   $\| \cdot \|_a$ and $\| \cdot \|_b$ are equivalent.
+1. Thus, there exist $c_1, c_2 > 0$ such that for every $\bv \in \VV$
+
+   $$
+   \| \bv \|_a \leq c_1 \| \bv \|_b
+   \text{ and } 
+   \| \bv \|_b \leq c_2 \| \bv \|_a.
+   $$
+1. Let $A$ be bounded in $(\VV, \| \cdot \|_a)$. 
+1. Then, there exists a constant $M > 0$ such that
+   
+   $$
+   \| \bx \|_a \leq M \Forall \bx \in A.
+   $$
+1. But then,
+
+   $$
+   \| \bx \|_b \leq c_2 \| \bx \|_a \leq M c_2
+   \Forall \bx \in A.
+   $$
+1. Thus, $A$ is bounded in $(\VV, \| \cdot \|_b)$.
+1. A similar reasoning shows that 
+   if $A$ is bounded in $(\VV, \| \cdot \|_b)$,
+   then $A$ must be bounded in 
+   $(\VV, \| \cdot \|_a)$ also.
+
+
+
+(2) $\implies$ (1)
+
+1. By hypothesis, every set $A \subseteq \VV$ is bounded in 
+   $(\VV, \| \cdot \|_a)$ if and only if
+   it is bounded in $(\VV, \| \cdot \|_b)$.
+1. For contradiction, assume that the norms are not equivalent
+   and there is no constant $c_1 > 0$ such that
+   $\| \bv \|_a \leq c_1 \| \bv \|_b$ for every $\bv \in \VV$.
+1. Then, for each $n \in \Nat$, there exists $\bx_n \in \VV$
+   such that $\| \bx_n \|_a > n \| \bx_n \|_b$.
+1. In particular, $\bx_n \neq \bzero$.
+1. The set $S = \{ \frac{\bx_n}{\| \bx_n \|_b} | n \in \Nat \}$
+   is bounded in $(\VV, \| \cdot \|_b)$
+   since each point is unit norm.
+1. Then, $S$ is bounded in $(\VV, \| \cdot \|_a)$ also
+   by hypothesis.
+1. Thus, $\left \| \frac{\bx_n}{\| \bx_n \|_b} \right \|_a \leq C$
+   for some $C > 0$ and every $n \in \Nat$.
+1. It implies $\| \bx_n \|_a \leq C \| \bx_n \|_b$ for every
+   $n \in \Nat$.
+1. But, this contradictions with our choice above
+   as $\| \bx_n \|_a > n \| \bx_n \|_b$.
+1. Thus, there must exist a constant $c_1 > 0$ such that
+   $\| \bv \|_a \leq c_1 \| \bv \|_b$ for every $\bv \in \VV$.
+1. A similar reasoning shows that there must exist a constant $c_2 > 0$
+   such that
+   $\| \bv \|_b \leq c_2 \| \bv \|_a$ for every $\bv \in \VV$.
+1. Thus, the two norms must be equivalent.
+```
+
 
 ```{prf:theorem}
 :label: res-la-ns-norm-equivalence-rel
@@ -862,6 +944,179 @@ Combining, $f : (X, d) \to (\VV, d_a)$ is continuous
 if and only if $f : (X, d) \to (\VV, d_b)$ 
 is continuous.
 ```
+
+## Norms on Finite Dimensional Spaces 
+
+```{prf:theorem} Equivalence of norms on a finite dimensional vector space
+:label: res-la-ns-finite-all-norms-eq
+
+Let $\VV$ be a finite dimensional vector space
+over the scalar field $\FF$ where $\FF$ is $\RR$ or $\CC$.
+Then, all norms on $\VV$ are equivalent.
+```
+
+Reaching this conclusion requires significant amount
+of work on the norms on Euclidean spaces
+which are discussed in detail in
+{ref}`sec:la:real-euclidean-space`. 
+Readers are advised to read the material on
+norms on $\RR^n$ and the fact that
+all norms on $\RR^n$ are equivalent
+before proceeding further.
+
+```{prf:proof}
+If $0 = \dim \VV$, then there is only one norm
+and there is nothing to prove.
+So assume that $\dim \VV > 0$.
+Then, $\VV$ is isomorphic to $\RR^n$ for some $n$.
+
+1. Let $L : \RR^n \to \VV$ be an isomorphism.
+1. Now, if $\| \cdot \|$ is a norm on $\VV$, then
+   the function $\| \cdot \|_L : \RR^n \to \RR$ 
+   defined by
+
+   $$
+   \| \bx \|_L = \| L (\bx)\| 
+   $$
+   is a norm on $\RR^n$.
+1. Let $\| \cdot \|_a$ and $\| \cdot \|_b$ be
+   two different norms on $\VV$.
+1. Let $\| \cdot \|_{L,a}$ and $\| \cdot \|_{L,b}$
+   be the corresponding induced norms on $\RR^n$.
+1. By {prf:ref}`res-la-ns-norms-euclidean-eq`,
+   all norms on $\RR^n$ are equivalent.
+1. Hence, $\| \cdot \|_{L,a}$ and $\| \cdot \|_{L,b}$
+   are equivalent.
+1. Hence, there exist constants $c_1, c_2 > 0$ such that
+
+   $$
+   \| \bx \|_{L, a} \leq c_1 \| \bx \|_{L, b}
+   \text{ and } 
+   \| \bx \|_{L, b} \leq c_2 \| \bx \|_{L, a}
+   $$
+   holds true for every $\bx \in \RR^n$.
+1. Then, for every $\bv \in \VV$
+
+   $$
+   \| \bv \|_a &= \| L (L^{-1} (\bv))  \|_a\\ 
+   &= \| L^{-1} (\bv) \|_{L, a} \\
+   &\leq c_1 \| L^{-1} (\bv) \|_{L, b}\\
+   &= c_1 \| L (L^{-1} (\bv))  \|_b \\
+   &= c_1 \| \bv \|_b.
+   $$
+1. Similarly, for every $\bv \in \VV$
+
+   $$
+   \| \bv \|_b \leq c_2 \| \bv \|_a
+   $$
+   holds true.
+1. Thus, the two norms are equivalent.
+
+Since, the two norms chosen were arbitrary,
+hence all norms on $\VV$ are equivalent.
+```
+
+
+```{prf:definition} Norm topology
+:label: def-la-ns-finite-norm-topology
+
+Let $\VV$ be a finite dimensional space.
+Since all norms on $\VV$ are equivalent,
+hence, they induce the same topology
+(family of open sets, closed sets, compact sets).
+The topology induced by a norm (the collection of open sets)
+on a finite dimensional space
+is called its *norm topology*.
+```
+
+
+## Linear Transformations in Finite Dimensional Spaces 
+
+```{prf:theorem} Linear transformations in finite dimensional spaces are bounded
+:label: res-la-ns-finite-bounded-transformation
+
+Let $(\VV, \| \cdot \|_v)$ and $(\WW, \| \cdot \|_w)$ be
+normed linear spaces. Let 
+$T : \VV \to \WW$ be a linear transformation. 
+
+If $\VV$ is finite dimensional, then $T$ is 
+{prf:ref}`bounded <def-la-bounded-lin-map>`.
+```
+
+```{prf:proof}
+If $\dim \VV = 0$, then $\VV = \{ \bzero \}$
+and any linear transformation is bounded.
+Hence, let $\dim \VV > 0$.
+
+Since $\VV$ is finite dimensional, we can choose a basis
+$\BBB = \{\be_1, \dots, \be_n \}$ for $\VV$.
+
+1. Let $c_i = \| T (\be_i) \|_w$ for $i=1,\dots,n$ 
+   and $c = \max \{ c_1, \dots, c_n \}$.
+1. Let $\bx \in \VV$.
+1. It can be uniquely written as
+   
+   $$
+   \bx = t_1 \be_1 + \dots + t_n \be_n.
+   $$
+1. Then,
+
+   $$
+   \| T (\bx) \|_w 
+   &= \| T (t_1 \be_1 + \dots + t_n \be_n) \|\\
+   &= \| t_1 T(\be_1) + \dots + t_n T(\be_n) \| \\
+   &\leq |t_1| \| T (\be_1) \|_w + \dots + |t_n | \| T (\be_n) \|_w \\
+   &\leq c (|t_1 | + \dots + |t_n |).
+   $$
+
+1. Note that the function $ \| \cdot \|_* : \VV \to \RR$ 
+   given by 
+
+   $$
+   \| \bx\|_* = |t_1 | + \dots + |t_n |
+   $$
+   is a norm on $\VV$.
+1. By {prf:ref}`res-la-ns-finite-all-norms-eq`,
+   all norms on $\VV$ are equivalent since $\VV$
+   is finite dimensional.
+1. Thus, there exists $c_1 > 0$ such that
+
+   $$
+    \| \bx\|_* \leq  c_1 \| \bx\|_v
+   $$
+   for every $\bx \in \VV$.
+1. Thus, $\| T (\bx) \|_w  \leq c c_1 \| \bx\|_v$
+   for every $\bx \in \VV$.
+1. Thus, for every nonzero $\bx \in \VV$,
+
+   $$
+   \frac{\| T (\bx) \|_w}{\| \bx\|_v} \leq c c_1.
+   $$
+1. Thus, the set $S$ in {eq}`eq-la-ns-bounded-func`
+   is bounded.
+1. Thus, $T$ is bounded.
+```
+
+```{prf:theorem} Linear transformations in finite dimensional spaces are continuous
+:label: res-la-ns-finite-continuous-transformation
+
+Let $(\VV, \| \cdot \|_v)$ and $(\WW, \| \cdot \|_w)$ be
+normed linear spaces. Let 
+$T : \VV \to \WW$ be a linear transformation. 
+
+If $\VV$ is finite dimensional, then $T$ is 
+continuous as well as uniformly continuous
+as well as Lipschitz continuous.
+```
+
+```{prf:proof}
+By {prf:ref}`res-la-ns-finite-bounded-transformation`,
+$T$ is bounded.
+The rest follows from the characterization of
+continuous linear transformations on vector spaces
+in {prf:ref}`res-la-ns-continuity-lin-map`.
+```
+
 
 ## Linear Subspaces
 
