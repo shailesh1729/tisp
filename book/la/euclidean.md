@@ -371,6 +371,7 @@ $$
 ```
 
 
+
 ### Quasi-norms
 
 In some cases it is useful to extend the notion of $\ell_p$ norms to the case
@@ -421,6 +422,97 @@ $$
 $$
 ```
 
+### Equivalence of norms
+
+```{prf:theorem}
+:label: res-la-euclidean-l1-l2-eq 
+
+The $\ell_1$ and $\ell_2$ norms on $\RR^n$ are
+{prf:ref}`equivalent <def-la-ns-equivalent-norms>`.
+In particular, for any $\bx \in \RR^n$
+
+$$
+\frac{1}{\sqrt{n}} \| \bx \|_1 \leq \| \bx \|_2 \leq \| \bx \|_1. 
+$$
+
+Alternatively,
+
+$$
+\| \bx \|_2 \leq \| \bx \|_1 \leq \sqrt{n} \| \bx \|_2. 
+$$
+```
+
+```{prf:proof}
+
+By Cauchy-Schwarz inequality
+
+$$
+\| \bx \|_1 = \sum_{i=1}^n | x_i | 
+= \sum_{i=1}^n | x_i | . 1 
+\leq \| \bx \|_2 \| \bone \|_2 = \sqrt{n} \| \bx \|_2
+$$
+where $\bone$ is the vector of all ones.
+Thus,
+
+$$
+\frac{1}{\sqrt{n}} \| \bx \|_1 \leq \| \bx_2 \|.
+$$
+
+Also,
+
+$$
+\| \bx \|_2^2 = \sum_{i=1}^n | x_i|^2 
+\leq \left (\sum_{i=1}^n |x_i| \right )^2
+= \| \bx \|_1^2.
+$$
+
+Thus,
+
+$$
+\| \bx \|_2 \leq \| \bx \|_1.
+$$
+
+Thus, the two norms are equivalent.
+```
+
+
+
+```{prf:theorem}
+:label: res-la-euclidean-l2-linf-eq 
+
+The $\ell_2$ and $\ell_{\infty}$ norms on $\RR^n$ are
+{prf:ref}`equivalent <def-la-ns-equivalent-norms>`.
+In particular, for any $\bx \in \RR^n$
+
+$$
+\frac{1}{\sqrt{n}} \| \bx \|_2 \leq \| \bx \|_{\infty} \leq \| \bx \|_2. 
+$$
+
+Alternatively,
+
+$$
+\| \bx \|_{\infty} \leq \| \bx \|_2 \leq \sqrt{n} \| \bx \|_{\infty}. 
+$$
+```
+
+```{prf:proof}
+Let $\| \bx \|_{\infty} = \sup \{ |x_i|\}$.
+
+1. Then, $|x_i| \leq \| \bx \|_{\infty}$.
+1. Thus, $|x_i|^2 \leq \| \bx \|_{\infty}^2$.
+1. Taking the sum $\| \bx \|_2^2 \leq  n \| \bx \|_{\infty}^2$.
+1. Taking the square root $\| \bx \|_2 \leq \sqrt{n}\| \bx \|_{\infty}$.
+
+For the other side, we note that 
+
+$$
+\| \bx \|_{\infty}^2 = \left (\sup \{ |x_i|\} \right )^2
+\leq \sum_{i=1}^n |x_i|^2 = \| \bx \|_2^2.
+$$
+
+Thus, $\| \bx \|_{\infty} \leq \| \bx \|_2$.
+Thus, the two norms are equivalent.
+```
 
 ## Distances
 ```{prf:definition} Euclidean distance
