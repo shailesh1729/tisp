@@ -1,12 +1,53 @@
 (sec:ms:metric-topology)=
 # Metric Topology
 
-Let $(X,d)$ be a metric space. 
+In this section, we shall assume $(X,d)$ to be a metric space;
+i.e., $X$ is a set endowed with a metric $d : X \times X \to \RR$.
+
+
+## Topology
+
+```{prf:definition} Topology
+:label: def-ms-topology
+
+For a given set $X$, let $T$ be a family of
+subsets of $X$. The family $T$ is called
+a topology if
+
+1. Both the empty set $\EmptySet$ and $X$ are elements of $T$.
+1. Any union of elements of $T$ is an element of $T$.
+1. Any intersection of a finitely many elements of $T$ 
+   is an element of $T$. 
+
+In other words, $T$ contains $\EmptySet$ and $X$,
+is closed under arbitrary union and is closed under
+finite intersection. 
+```
+The elements of a topology $T$ are called open sets
+of the topology. Their complements are called closed
+sets. It is possible to introduce different topologies
+to the same set $X$.
+A set equipped with a topology is called a topological
+space. A topological structure enables us to define
+all kinds of continuity. 
+
+There are several properties of geometrical objects
+which don't depend on the exact shape of an object and
+are preserved under continuous deformations like
+stretching, twisting, crumpling and bending. 
+Some of these properties include the dimension, 
+compactness, connectedness, etc.. 
+
+A metric $d$ imposes a topological structure on a set $X$.
+This section develops the topological structure of
+metric spaces. 
+
 
 ## Balls
 
 ```{prf:definition} Open ball
 :label: def-ms-open-ball
+
 Given a point $x \in X$ and $r > 0$, the set
 
 $$
@@ -22,6 +63,7 @@ This definition is a generalization of the concept of
 
 ```{prf:definition} Closed ball
 :label: def-ms-closed-ball
+
 Given a point $x \in X$ and $r > 0$, the set
 
 $$
@@ -45,6 +87,8 @@ $B(x, r) \subseteq S$.
 ```
 
 ```{prf:theorem}
+:label: res-ms-open-ball-open-set
+
 Every open ball is an open set.
 ```
 
@@ -76,6 +120,8 @@ an open ball around $p$ which is entirely contained in $A$.
 ```
 
 ```{prf:theorem}
+:label: res-ms-union-open-sets
+
 Arbitrary unions of open sets are open sets.
 ```
 
@@ -94,6 +140,8 @@ it entirely contained inside the union.
 ```
 
 ```{prf:theorem}
+:label: res-ms-finite-intersect-open-sets
+
 Finite intersections of open sets are open sets.
 ```
 
@@ -113,6 +161,45 @@ it entirely contained inside the intersection.
 1. Thus, $B(x, r) \subseteq A$.
 1. Thus, for every $x \in A$, there exists an open ball at $x$ entirely contained in $A$.
 1. Thus, $A$ is open.
+```
+
+```{prf:remark}
+:label: res-ms-empty-whole-open
+
+The empty set $\EmptySet$ and $X$ are both open. 
+
+$\EmptySet$ is vacuously open since it contains
+no elements. Consequently, the requirement that an open 
+ball surrounding every element of $\EmptySet$
+be contained within $\EmptySet$ is vacuously true.
+
+$X$ is open since for every $x \in X$, any open ball $B(x,r)$
+is entirely contained within $X$ by definition.
+```
+
+```{prf:theorem} Metric topology
+:label: res-ms-metric-topology
+
+Let $(X, d)$ be a metric space. Then, the family of 
+{prf:ref}`open sets <def-ms-open-set>` induced by
+the metric $d$ satisfies all the requirements of
+a {prf:ref}`topology <def-ms-topology>`.
+This topology is known as the *metric topology* 
+induced by the metric $d$ on the set $X$.
+```
+```{prf:proof}
+By {prf:ref}`res-ms-empty-whole-open`, $\EmptySet$ and $X$ are open.
+
+By {prf:ref}`res-ms-union-open-sets`, arbitrary union of
+open sets is also an open set.
+
+By {prf:ref}`res-ms-finite-intersect-open-sets`, a finite
+intersection of open sets is also an open set.
+
+Thus, the family of open sets induced by a metric $d$ is
+closed under arbitrary union and finite intersection.
+
+Hence, it is a topology.
 ```
 
 ## Closed Sets
@@ -159,6 +246,8 @@ Let $B = X \setminus A$. We show that $B$ is open. Then $A$ is closed.
 ```
 
 ```{prf:example}
+:label: ex-clopen-examples-1
+
 * $(0, 1)$ is open in $\RR$.
 * $[0, 1]$ is closed in $\RR$.
 * $(0, 1]$ is neither open nor closed in $\RR$.
@@ -262,6 +351,8 @@ $\interior A = O \cup \interior A$. Thus, $O \subseteq \interior A$.
 
 
 ```{prf:theorem} Interior is set of interior points
+:label: res-ms-interior-as-set-points
+
 The interior of a set $A$ is the collection of all the interior points 
 of $A$.
 ```
@@ -295,6 +386,8 @@ proved that it is the largest open set contained in $A$.
 
 
 ```{prf:proposition}
+:label: res-ms-open-set-interior
+
 $A$ is open if and only if $A = \interior A$. 
 ```
 
@@ -308,6 +401,8 @@ Then, since $\interior A$ is open, hence $A$ is open.
 ```
 
 ```{prf:theorem}
+:label: res-ms-interior-inclusion
+
 If $A \subseteq B$ then $\interior A \subseteq \interior B$.
 ```
 ```{prf:proof}
@@ -348,6 +443,8 @@ $$
 ```
 
 ```{prf:proposition}
+:label: res-ms-members-closure-points
+
 Every point in $A$ is a closure point of $A$.
 ```
 
@@ -388,6 +485,8 @@ But $D \subseteq C$. Hence $\closure A \subseteq C$.
 ```
 
 ```{prf:theorem} Closure is set of closure points
+:label: res-closure-set-closure-points
+
 The closure of a set $A$ is the collection of all the closure points 
 of $A$.
 ```
@@ -445,6 +544,8 @@ that the closure is the set of all closure points and then
 proved that it is the smallest closed set containing $A$.
 
 ```{prf:proposition}
+:label: res-ms-closed-set-closure
+
 $A$ is closed if and only if $A = \closure A$. 
 ```
 
@@ -458,6 +559,8 @@ Then, since $\closure A$ is closed, hence $A$ is closed.
 ```
 
 ```{prf:theorem}
+:label: res-ms-closed-ball-closed-set
+
 A closed ball is a closed set.
 ```
 
@@ -523,6 +626,8 @@ Together, the equality is established.
 ```
 
 ```{prf:theorem}
+:label: res-ms-closure-inclusion
+
 If $A \subseteq B$ then $\closure A \subseteq \closure B$.
 ```
 ```{prf:proof}
@@ -642,6 +747,8 @@ the set of all boundary points of $A$.
 ```
 
 ```{prf:theorem}
+:label: res-ms-bd-cl-int-relation
+
 $$
 \boundary A = \closure A \setminus \interior A.
 $$
@@ -670,6 +777,8 @@ Let $x \in \closure A \setminus \interior A$.
 ```
 
 ```{prf:proposition}
+:label: res-ms-bd-is-closed
+
 Boundary of a set is closed.
 ```
 
@@ -714,6 +823,8 @@ and frontier points.
 ```
 
 ```{prf:proposition}
+:label: res-ms-front-int-bd-rel
+
 $$
 \frontier A = A \setminus \interior A = \boundary A \cap A.
 $$
@@ -731,6 +842,8 @@ $$
 ```
 
 ```{prf:proposition}
+:label: res-ms-closed-front-bd
+
 For a closed set, the frontier and boundary are same.
 ```
 ```{prf:proof}
@@ -738,6 +851,8 @@ Every boundary point belongs to the closed set.
 ```
 
 ```{prf:proposition}
+:label: res-ms-closed-front
+
 The frontier of a closed set is closed.
 ```
 
@@ -763,6 +878,8 @@ $$
 Note that an accumulation point need not belong to the set $A$.
 
 ```{prf:remark} 
+:label: res-ms-acc-closure-pnt
+
 Every accumulation point is a closure point.
 ```
 
@@ -790,6 +907,8 @@ $$
 ```
 
 ```{prf:proposition} 
+:label: res-ms-closure-pt-acc-isolated
+
 A closure point is either an accumulation point or an isolated point.
 ```
 
@@ -810,6 +929,8 @@ We need to show that $x \in A$ and $x$ is isolated.
 
 
 ```{prf:proposition} 
+:label: res-ms-closure-set-derived-rel
+
 $$
 \closure A = A \cup A'.
 $$
@@ -857,6 +978,8 @@ Let $x$ be an accumulation point of $A$.
 ## Interior II
 
 ```{prf:theorem}
+:label: res-ms-int-intersect-int
+
 Interior of a finite intersection is the intersection of interiors.
 
 $$

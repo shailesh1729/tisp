@@ -543,6 +543,9 @@ A uniformly continuous function is trivially continuous.
 A continuous function is trivially continuous at a point.
 ```
 
+## Equivalent Norms
+
+
 
 ## Linear Subspaces
 
