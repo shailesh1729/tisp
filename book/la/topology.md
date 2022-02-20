@@ -816,6 +816,53 @@ Thus, the two associated metrics are
 {prf:ref}`strongly equivalent <def-ms-strong-equivalent-metric>`.
 ```
 
+```{prf:theorem} Continuity with equivalent norms
+:label: res-la-ns-cont-eq-norms
+
+Let $\VV$ be a given vector space.
+Let $\| \cdot \|_a : \VV \to \RR$, 
+and $\| \cdot \|_b : \VV \to \RR$
+be norms defined on $\VV$ which are equivalent.
+Let $d_a$ and $d_b$ be corresponding metrics.
+Let $(X, d)$ be a metric space.
+Let $f : X \to \VV$ be a (total) function.
+
+Then, $f : (X, d) \to (\VV, d_a)$ is continuous
+if and only if $f : (X, d) \to (\VV, d_b)$ 
+is continuous.
+```
+
+```{prf:proof}
+By {prf:ref}`res-la-ns-norm-eq-metric-eq`, 
+the metrics $d_a$ and $d_b$ are strongly equivalent.
+By {prf:ref}`res-ms-strong-eq-metric-eq`, they are
+equivalent.
+Thus, they determine the same topology on $\VV$. 
+Thus, a subset $A \subseteq \VV$ is open 
+in $(\VV, d_a)$ if and only if it is open in $(\VV, d_b)$.
+
+Now, assume $f : (X, d) \to (\VV, d_a)$ to be continuous.
+
+1. Let $A$ be an open set of $(\VV, d_a)$.
+1. Then, $f^{-1}(A)$ is an open set of $(X, d)$
+   since $f : (X, d) \to (\VV, d_a)$ is continuous
+   ({prf:ref}`res-ms-continuous-function-characterization`).
+1. But $A$ is also an open set of $(\VV, d_b)$
+   since both metrics determine same open sets.
+1. Thus, whenever $A$ is an open set of $(\VV, d_b)$,
+   $f^{-1}(A)$ is an open set of $(X,d)$.
+1. Thus, $f : (X, d) \to (\VV, d_b)$ is continuous
+   due to {prf:ref}`res-ms-continuous-function-characterization`.
+
+A similar reasoning shows that
+if $f : (X, d) \to (\VV, d_b)$ is continuous
+then $f : (X, d) \to (\VV, d_a)$ must be continuous too.
+
+Combining, $f : (X, d) \to (\VV, d_a)$ is continuous
+if and only if $f : (X, d) \to (\VV, d_b)$ 
+is continuous.
+```
+
 ## Linear Subspaces
 
 ```{prf:theorem}
