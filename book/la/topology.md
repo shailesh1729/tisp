@@ -545,7 +545,125 @@ A continuous function is trivially continuous at a point.
 
 ## Equivalent Norms
 
+```{prf:definition} Equivalent norms
+:label: def-la-ns-equivalent-norms
 
+Let $\VV$ be a vector space.
+Let $\| \cdot \|_a : \VV \to \RR$ and $\| \cdot \|_b : \VV \to \RR$
+be two different norms defined on $\VV$.
+
+We say that the two norms are *equivalent* if 
+there exist constants $c_1, c_2 > 0$ such that
+for every $\bv \in \VV$, we have
+
+$$
+\| \bv \|_a \leq c_1 \| \bv \|_b
+\text{ and } 
+\| \bv \|_b \leq c_2 \| \bv \|_a.
+$$
+```
+
+Note that the zero-dimensional vector space $\{\bzero \}$
+has only one norm which is identically zero. Thus,
+the concept of equivalent norms is not interesting for it.
+Thus, we shall concern ourselves only with vector spaces
+of dimension greater than zero for the purposes of
+norm equivalence.
+
+There are several ways to express the equivalent norm
+inequalities.
+
+```{prf:theorem} Characterization of equivalent norms
+:label: res-la-ns-equivalent-norms-charact
+
+
+Let $\VV$ be a vector space.
+Let $\| \cdot \|_a : \VV \to \RR$ and $\| \cdot \|_b : \VV \to \RR$
+be two different norms defined on $\VV$.
+
+The following statements are equivalent.
+
+1. The norms  $\| \cdot \|_a$ and $\| \cdot \|_b$ are equivalent.
+1. There exist constants $c_1, c_2 > 0$ such that for every $\bv \in \VV$
+
+   $$
+   c_1 \| \bv \|_b \leq \| \bv \|_a \leq c_2 \| \bv \|_b.
+   $$
+1. There exists $c > 0$ such that for all $\bv \in \VV$ 
+
+   $$
+   \frac{1}{c} \| \bv \|_b \leq \| \bv \|_a \leq c \| \bv \|_b.
+   $$
+```
+
+```{prf:proof}
+(1) $\implies$ (2)
+
+1. By hypothesis, the norms
+   $\| \cdot \|_a$ and $\| \cdot \|_b$ are equivalent.
+1. Thus, there exist $d_1, d_2 > 0$ such that for every $\bv \in \VV$
+
+   $$
+   \| \bv \|_a \leq d_1 \| \bv \|_b
+   \text{ and } 
+   \| \bv \|_b \leq d_2 \| \bv \|_a.
+   $$
+1. Let $c_1 = \frac{1}{d_2} > 0$ and $c_2 = d_1 > 0$.
+1. The inequalities become:
+
+   $$
+   \| \bv \|_a \leq c_2 \| \bv \|_b
+   \text{ and } 
+   c_1 \| \bv \|_b \leq \| \bv \|_a.
+   $$
+1. Combining, we get:
+
+   $$
+   c_1 \| \bv \|_b \leq \| \bv \|_a \leq c_2 \| \bv \|_b.
+   $$
+
+(2) $\implies$ (3)
+
+1. By hypothesis, there exist constants $c_1, c_2 > 0$ 
+   such that for every $\bv \in \VV$
+
+   $$
+   c_1 \| \bv \|_b \leq \| \bv \|_a \leq c_2 \| \bv \|_b.
+   $$
+1. Let $c = \max \left \{ \frac{1}{c_1}, c_2 \right \}$.
+   Note that $c > 0$ since $c_1, c_2 > 0$.
+1. Then, $c \geq c_2$. 
+1. Thus, $\| \bv \|_a \leq c_2 \| \bv \|_b \leq c \| \bv \|_b$ for every $\bv \in \VV$.
+1. Also, $c \geq \frac{1}{c_1} \implies \frac{1}{c} \leq c_1$.
+1. Thus, $\frac{1}{c} \| \bv \|_b \leq c_1 \| \bv \|_b \leq \| \bv \|_a$
+   for every $\bv \in \VV$. 
+1. Combining, we get:
+
+   $$
+   \frac{1}{c} \| \bv \|_b \leq \| \bv \|_a \leq c \| \bv \|_b.
+   $$
+
+(3) $\implies$ (1)
+
+1. By hypothesis, there exists $c > 0$ such that for all $\bv \in \VV$ 
+
+   $$
+   \frac{1}{c} \| \bv \|_b \leq \| \bv \|_a \leq c \| \bv \|_b.
+   $$
+1. Let $c_1 = c$ and $c_2 = c$.
+1. Thus, $\| \bv \|_a \leq c_1 \| \bv \|_b$ for all $\bv \in \VV$.
+1. And $\frac{1}{c_2} \| \bv \|_b \leq \| \bv \|_a$
+   implies $\| \bv \|_b \leq c_2 \| \bv \|_a$ for all $\bv \in \VV$.
+1. Thus, there exist constants $c_1, c_2 > 0$ given by $c_1 = c_2 = c$
+   such that for every $\bv \in \VV$, we have
+
+   $$
+   \| \bv \|_a \leq c_1 \| \bv \|_b
+   \text{ and } 
+   \| \bv \|_b \leq c_2 \| \bv \|_a.
+   $$
+1. Thus, the two norms are equivalent.
+```
 
 ## Linear Subspaces
 
