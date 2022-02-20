@@ -1252,3 +1252,51 @@ Then, $\sim$ is an equivalence relation on the set of metrics $D$.
    on $X$.
 1. Thus, $d_a \sim d_c$ holds too.
 ```
+
+
+```{prf:definition} Strongly equivalent metrics
+:label: def-ms-strong-equivalent-metric
+
+Let $d_a : X \times X \to \RR$ and $d_b: X \times X \to \RR$ 
+be two different metrics on $X$. 
+Then, the metrics are said to be *strongly equivalent* 
+if there exist constants $M,M' > 0$ such that
+
+$$
+d_a(x, y) \leq  M d_b(x, y)
+\text{ and }
+d_b(x, y) \leq  M' d_a(x, y) \Forall x, y \in X.
+$$
+```
+
+```{prf:theorem}
+:label: res-ms-strong-eq-metric-eq
+
+Two strongly equivalent metrics are equivalent.
+```
+
+```{prf:proof}
+Let $d_a : X \times X \to \RR$ and $d_b: X \times X \to \RR$ 
+be two metrics on $X$ which are equivalent. 
+
+
+1. Let $O$ be an open set of $(X, d_a)$.
+1. Let $x \in O$ be an interior point.
+1. Then, there exists an open ball $B_a(x, r) \subseteq O$.
+1. Consider the open ball $B_b(x, \frac{r}{M})$.
+1. For any point $y \in B_b(x, \frac{r}{M})$
+
+   $$
+   & d_b(x, y) < \frac{r}{M}\\
+   & \implies M d_b(x, y) < r\\
+   & \implies d_a(x, y) \leq  M d_b(x, y) < r.
+   $$
+1. Thus, $y \in B_a(x, r)$.
+1. Thus, $B_b(x, \frac{r}{M}) \subseteq B_a(x, r) \subseteq O$.
+1. Thus, $x$ is an interior point of $O$ in $(X, d_b)$.
+1. Thus, $O$ is an open set in $(X, d_b)$.
+1. Similarly, if $O$ is an open set in $(X, d_b)$
+   then it is an open set in $(X, d_a)$.
+1. Thus, both metric spaces determine the same topology of open sets.
+1. Thus, they are equivalent.
+```
