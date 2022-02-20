@@ -1093,3 +1093,126 @@ Thus, $A$ has an empty interior.
 Dense sets can be characterized in terms
 of convergent sequences. This is
 discussed in {prf:ref}`res-ms-dense-sequence-limit`.
+
+## Equivalent Metrics
+
+```{prf:definition} Equivalent metrics
+:label: def-ms-equivalent-metric
+
+Let $d_a : X \times X \to \RR$ and $d_b: X \times X \to \RR$ 
+be two different metrics on $X$. 
+Then, the metrics are said to be *equivalent* if they induce the
+same {prf:ref}`topology <def-ms-topology>` on $X$. 
+In other words, the family of open sets in $(X, d_a)$
+is identical to the family of open sets in $(X, d_b)$;
+i.e., $\OOO$ is an open set in $(X, d_a)$ if and only if 
+$\OOO$ is an open set in $(X, d_b)$. 
+```
+
+```{prf:theorem} Balls inside balls
+:label: res-ms-eq-metric-ball-in-ball
+
+Let $d_a : X \times X \to \RR$ and $d_b: X \times X \to \RR$ 
+be two different metrics on $X$ which are equivalent.
+Let $B_a(x, r)$ and $B_b(x, r)$ denote the open 
+balls at $x \in X$ of radius $r$ 
+in metric spaces $(X, d_a)$ and $(X, d_b)$ respectively. 
+
+Then, for every $x \in X$ and for every $r > 0$, 
+there exists $r' > 0$ such that
+
+$$
+B_a (x, r') \subseteq B_b(x, r).
+$$
+Similarly, for every $x \in X$ and for every $r > 0$, 
+there exists $r'' > 0$ such that
+
+$$
+B_b (x, r'') \subseteq B_a(x, r).
+$$
+```
+
+```{prf:proof}
+Let $x \in X$ and for every $r > 0$.
+
+1. Consider the open ball $O = B_b(x, r)$.
+1. Then, $O$ is an open set of $(X, d_b)$.
+1. Since both metrics induce same topology,
+   hence $O$ is also an open set of $(X, d_a)$.
+1. Since $x \in O$, hence $x$ is an interior point
+   of $O$ in $(X, d_a)$.
+1. Thus, there exists $r' > 0$ such that
+   
+   $$
+   B_a(x, r') \subseteq O = B_b(x, r).
+   $$
+
+We proceed similarly for the other way round.
+
+1. Consider the open ball $O = B_a(x, r)$.
+1. Then, $O$ is an open set of $(X, d_a)$.
+1. Since both metrics induce same topology,
+   hence $O$ is also an open set of $(X, d_b)$.
+1. Since $x \in O$, hence $x$ is an interior point
+   of $O$ in $(X, d_b)$.
+1. Thus, there exists $r'' > 0$ such that
+   
+   $$
+   B_b(x, r'') \subseteq O = B_a(x, r).
+   $$
+```
+
+We can actually prove a stronger result.
+
+```{prf:theorem} Metric equivalence characterization as balls inside balls
+:label: res-ms-eq-metric-balls-in-balls
+Let $d_a : X \times X \to \RR$ and $d_b: X \times X \to \RR$ 
+be two different metrics on $X$.
+Let $B_a(x, r)$ and $B_b(x, r)$ denote the open 
+balls at $x \in X$ of radius $r$ 
+in metric spaces $(X, d_a)$ and $(X, d_b)$ respectively. 
+
+
+The two metrics $d_a$ and $d_b$ are equivalent if and
+only if 
+
+
+for every $x \in X$ and for every $r > 0$, 
+there exists $r' > 0$ such that
+$B_a (x, r') \subseteq B_b(x, r)$
+
+and 
+
+for every $x \in X$ and for every $r > 0$, 
+there exists $r'' > 0$ such that
+$B_b (x, r'') \subseteq B_a(x, r)$. 
+```
+
+```{prf:proof}
+One part of this result was proved in 
+{prf:ref}`res-ms-eq-metric-ball-in-ball`.
+
+We now assume that
+for every $x \in X$ and for every $r > 0$, 
+there exists $r' > 0$ such that
+$B_a (x, r') \subseteq B_b(x, r)$
+and 
+for every $x \in X$ and for every $r > 0$, 
+there exists $r'' > 0$ such that
+$B_b (x, r'') \subseteq B_a(x, r)$. 
+
+
+1. Let $O$ be an open set of $(X, d_a)$.
+1. Let $x \in O$. 
+1. Then, $x$ is an interior point of $O$ in $(X, d_a)$.
+1. There exists an open ball $B_a(x, r) \subseteq O$.
+1. Then, there exists an open ball 
+   $B_b (x, r'') \subseteq B_a(x, r) \subseteq O$.
+1. Thus, $x$ is an interior point of $O$ in $(X, d_b)$ too.
+1. Thus, $O$ is an open set in $(X, d_b)$ too.
+1. Similarly, we can show that if $O$ is an open set in
+   $(X, d_b)$ then it is an open set in $(X, d_a)$ too.
+
+Thus, both metric spaces induce same topology. Hence,
+they are equivalent.
+```

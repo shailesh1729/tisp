@@ -362,29 +362,6 @@ Procedure to show that two metric spaces are homeomorphic:
 1. Show that $f$ is continuous.
 1. Show that $f^{-1}$ is continuous.
 
-## Equivalent Metrics
-
-```{prf:definition} Metric equivalence
-:label: def-ms-equivalent-metric
-
-Let $d_1$ and $d_2$ be two different metrics on $X$. 
-We say that $d_1$ and $d_2$ are equivalent if 
-a sequence $\{ x_n \}$ of $X$ satisfies 
-$\lim d_1(x_n, x) = 0$ if and only if $\lim d_2(x_n, x) = 0$.
-
-In other words, two metrics are equivalent if they
-lead to same convergent sequences with identical limits.
-```
-
-Procedure to show that two metrics are equivalent.
-
-* Choose an arbitrary sequence $\{x_n\}$ which converges
-  in $(X, d_1)$ to a limit  (say $x$). 
-* Show that $\lim d_2(x_n, x) = 0$.
-* Now, choose an arbitrary sequence $\{x_n\}$ which converges
-  in $(X, d_2)$ to a limit  (say $x$). 
-* Show that $\lim d_1(x_n, x) = 0$.
-
 
 ```{prf:theorem}
 :label: res-ms-equivalent-metric-homeomorphic-identity
@@ -425,6 +402,7 @@ Assume that $I$ is a homeomorphism.
    $\lim d_1(I^{-1}(x_n), I^{-1}(x)) = d_1(x_n, x) = 0$.
 1. Hence, the metrics $d_1$ and $d_2$ are equivalent.
 ```
+
 
 ## Uniform Continuity
 

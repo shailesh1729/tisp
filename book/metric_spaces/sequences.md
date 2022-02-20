@@ -247,3 +247,73 @@ $\lim x_n = x$.
 ```
 
 This is a direct application of {prf:ref}`res-ms-closure-point-as-limit`.
+
+
+## Equivalent Metrics
+
+
+```{prf:theorem} Metric equivalence and convergent sequences
+:label: res-ms-eq-metric-conv-sequences
+
+Let $d_a$ and $d_b$ be two different metrics on the same set $X$. 
+Then, $d_a$ and $d_b$ are equivalent if and only if
+they lead to identical set of convergent sequences;
+i.e., a sequence is convergent in $(X, d_a)$ if and only
+if it is also convergent in $(X, d_b)$ and it has same
+limit in both metric spaces.
+
+In other words, a sequence $\{ x_n \}$ of $X$ satisfies 
+$\lim d_a(x_n, x) = 0$ if and only if $\lim d_b(x_n, x) = 0$.
+```
+
+```{prf:proof}
+Assume that the two metric spaces $(X, d_a)$ and $(X, d_b)$ 
+have same topology. Thus, they have same open sets.
+
+
+1. Let $\{x_n \}$ be a convergent sequence of $(X, d_a)$ converging to $x$.
+1. Now, let $\epsilon > 0$ be arbitrary and 
+   consider the open ball $B_b(x, \epsilon)$.
+1. By {prf:ref}`res-ms-eq-metric-balls-in-balls`, there exists
+   an $r > 0$ such that $B_a(x, r) \subseteq B_b(x, \epsilon)$.
+1. Since $\{ x_n \}$ is convergent in $(X, d_a)$, hence
+   there exists $n_0 \in \Nat$ such that
+   $x_n \in B_a(x, r) \subseteq B_b(x, \epsilon)$ for all $n > n_0$.
+1. Thus, for every $\epsilon > 0$, there exists $n_0 \in \Nat$
+   such that $x_n \in B_b(x, \epsilon)$ for all $n > n_0$.
+1. Thus, $\{x_n \}$ is convergent in $(X, d_b)$ with limit $x$.
+1. Similar reasoning shows that if a sequence is convergent in $(X, d_b)$
+   then it is convergent in $(X, d_a)$ too.
+1. Thus, the convergent sequences in both metric spaces are identical
+   and have same limits.
+
+Now, assume that the convergent sequences in both metric spaces 
+$(X, d_a)$ and $(X, d_b)$
+are identical and have same limits.
+
+1. Let $C$ be a closed set of $(X, d_a)$. 
+1. Let $x \in C$. Then, $x$ is a closure point of $C$ in $(X, d_a)$.
+1. Then, there exists a sequence $\{ x_n \}$ of $C$ such that
+   $\lim x_n = x$ in $(X, d_a)$.
+1. But by our hypothesis, convergent sequences are identical in both 
+   metric spaces.
+1. Hence $\lim x_n = x$ in $(X, d_b)$ also.
+1. Hence, $x$ is a closure point of $C$ in $(X, d_b)$ too.
+1. Thus, every element of $C$ is a closure point of $C$ in $(X, d_b)$.
+1. Thus, $C$ is closed in $(X, d_b)$.
+1. A similar argument shows that if $C$ is closed in $(X, d_b)$ then it is 
+   closed in $(X, d_a)$ too.
+1. Thus, both metrics induce the same set of closed sets on $X$.
+1. Thus, both metrics induce the same set of open sets on $X$.
+1. Thus, they induce the same topology.
+1. Thus, the two metrics are equivalent.
+```
+
+Procedure to show that two metrics are equivalent.
+
+* Choose an arbitrary sequence $\{x_n\}$ which converges
+  in $(X, d_a)$ to a limit  (say $x$). 
+* Show that $\lim d_b(x_n, x) = 0$.
+* Now, choose an arbitrary sequence $\{x_n\}$ which converges
+  in $(X, d_b)$ to a limit  (say $x$). 
+* Show that $\lim d_a(x_n, x) = 0$.
