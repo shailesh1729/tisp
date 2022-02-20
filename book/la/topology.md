@@ -1123,7 +1123,41 @@ in {prf:ref}`res-la-ns-continuity-lin-map`.
 ```{prf:theorem}
 :label: res-la-subspace-closed
 
-Every subspace of a normed linear space $\VV$ is a closed set.
+Every subspace of a finite dimensional normed linear space 
+$\VV$ is a closed set.
+```
+
+```{prf:proof}
+Let $\VV$ be a finite dimensional subspace
+equipped with a norm $\| \cdot \|$.
+
+The trivial subspace $\{\bzero \}$ is closed
+since it is a singleton. The space $\VV$ 
+is closed by definition.
+
+Let $W$ be a proper nontrivial subspace of $\VV$.
+Then, there exists a linear transformation $T$
+such that
+
+$$
+T (\bx) = \bzero \Forall \bx \in W;
+$$
+i.e., $W$ is the kernel of $T$.
+
+Then,
+
+$$
+W = T^{-1}(\{ \bzero \}).
+$$
+
+By {prf:ref}`res-la-ns-finite-continuous-transformation`,
+$T$ is continuous. 
+
+And the set $\{ \bzero \}$ is a singleton, hence
+closed.
+
+Then, by {prf:ref}`res-ms-continuous-function-characterization`
+(5), $W = T^{-1}(\{ \bzero \})$ is a closed set.
 ```
 
 ```{prf:theorem}
