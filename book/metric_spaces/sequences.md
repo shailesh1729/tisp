@@ -303,9 +303,9 @@ are identical and have same limits.
 1. Thus, $C$ is closed in $(X, d_b)$.
 1. A similar argument shows that if $C$ is closed in $(X, d_b)$ then it is 
    closed in $(X, d_a)$ too.
-1. Thus, both metrics induce the same set of closed sets on $X$.
-1. Thus, both metrics induce the same set of open sets on $X$.
-1. Thus, they induce the same topology.
+1. Thus, both metrics determine the same set of closed sets on $X$.
+1. Thus, both metrics determine the same set of open sets on $X$.
+1. Thus, they determine the same topology.
 1. Thus, the two metrics are equivalent.
 ```
 

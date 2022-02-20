@@ -181,11 +181,11 @@ is entirely contained within $X$ by definition.
 :label: res-ms-metric-topology
 
 Let $(X, d)$ be a metric space. Then, the family of 
-{prf:ref}`open sets <def-ms-open-set>` induced by
+{prf:ref}`open sets <def-ms-open-set>` determined by
 the metric $d$ satisfies all the requirements of
 a {prf:ref}`topology <def-ms-topology>`.
 This topology is known as the *metric topology* 
-induced by the metric $d$ on the set $X$.
+determined by the metric $d$ on the set $X$.
 ```
 ```{prf:proof}
 By {prf:ref}`res-ms-empty-whole-open`, $\EmptySet$ and $X$ are open.
@@ -196,7 +196,7 @@ open sets is also an open set.
 By {prf:ref}`res-ms-finite-intersect-open-sets`, a finite
 intersection of open sets is also an open set.
 
-Thus, the family of open sets induced by a metric $d$ is
+Thus, the family of open sets determined by a metric $d$ is
 closed under arbitrary union and finite intersection.
 
 Hence, it is a topology.
@@ -1101,7 +1101,7 @@ discussed in {prf:ref}`res-ms-dense-sequence-limit`.
 
 Let $d_a : X \times X \to \RR$ and $d_b: X \times X \to \RR$ 
 be two different metrics on $X$. 
-Then, the metrics are said to be *equivalent* if they induce the
+Then, the metrics are said to be *equivalent* if they determine the
 same {prf:ref}`topology <def-ms-topology>` on $X$. 
 In other words, the family of open sets in $(X, d_a)$
 is identical to the family of open sets in $(X, d_b)$;
@@ -1137,7 +1137,7 @@ Let $x \in X$ and for every $r > 0$.
 
 1. Consider the open ball $O = B_b(x, r)$.
 1. Then, $O$ is an open set of $(X, d_b)$.
-1. Since both metrics induce same topology,
+1. Since both metrics determine same topology,
    hence $O$ is also an open set of $(X, d_a)$.
 1. Since $x \in O$, hence $x$ is an interior point
    of $O$ in $(X, d_a)$.
@@ -1151,7 +1151,7 @@ We proceed similarly for the other way round.
 
 1. Consider the open ball $O = B_a(x, r)$.
 1. Then, $O$ is an open set of $(X, d_a)$.
-1. Since both metrics induce same topology,
+1. Since both metrics determine same topology,
    hence $O$ is also an open set of $(X, d_b)$.
 1. Since $x \in O$, hence $x$ is an interior point
    of $O$ in $(X, d_b)$.
@@ -1213,7 +1213,7 @@ $B_b (x, r'') \subseteq B_a(x, r)$.
 1. Similarly, we can show that if $O$ is an open set in
    $(X, d_b)$ then it is an open set in $(X, d_a)$ too.
 
-Thus, both metric spaces induce same topology. Hence,
+Thus, both metric spaces determine same topology. Hence,
 they are equivalent.
 ```
 
@@ -1236,7 +1236,7 @@ Then, $\sim$ is an equivalence relation on the set of metrics $D$.
 [Reflexivity]
 
 1. Let $d$ be an arbitrary metric on $X$.
-1. Then, $d \sim d$ since it induces same topology.
+1. Then, $d \sim d$ since it determines same topology.
 
 
 [Symmetry]
@@ -1248,7 +1248,7 @@ Then, $\sim$ is an equivalence relation on the set of metrics $D$.
 [Transitivity]
 
 1. Let $d_a \sim d_b$ and $d_b \sim d_c$.
-1. Then, all three $d_a, d_b, d_c$ induce the same topology
+1. Then, all three $d_a, d_b, d_c$ determine the same topology
    on $X$.
 1. Thus, $d_a \sim d_c$ holds too.
 ```
