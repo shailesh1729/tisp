@@ -614,6 +614,8 @@ Further observations:
 Thus, homeomorphisms do not preserve boundedness or completeness.
 ```
 
+### An Equivalence Relation
+
 ```{prf:theorem} Homeomorphism is an equivalence relation
 :label: res-ms-homeomorphism-equivalence
 
@@ -664,6 +666,8 @@ Then, $\sim$ is an equivalence relation.
 1. Thus, $A \sim C$.
 ```
 
+### Open and Closed Mappings
+
 ```{prf:theorem} Homeomorphisms are both open and closed
 :label: res-ms-homeomorphism-clopen-map
 
@@ -697,6 +701,8 @@ We next show that $f$ is an open mapping.
 1. Thus, $f$ maps closed sets to closed sets.
 1. Thus, $f$ is a closed mapping.
 ```
+
+### Metric Equivalence as homeomorphism
 
 ```{prf:theorem} Metric equivalence and identity homeomorphism
 :label: res-ms-equivalent-metric-homeomorphic-identity
@@ -784,8 +790,10 @@ Assume that $I$ is a homeomorphism.
 1. Hence, the metrics $d_1$ and $d_2$ are equivalent.
 ```
 
+### Closures
 
-```{prf:theorem} Homeomorphisms preserve closure
+
+```{prf:theorem} Homeomorphisms preserve closures
 :label: res-ms-homeomorphism-closure
 
 Let $f: (X,d) \to (Y, \rho)$ be a homeomorphism.
@@ -830,6 +838,65 @@ $$
 $$
 ```
 
+
+### Interiors
+
+```{prf:theorem} Homeomorphisms preserve interiors
+:label: res-ms-homeomorphism-interior
+
+Let $f: (X,d) \to (Y, \rho)$ be a homeomorphism.
+Let $A \subseteq X$. Then,
+
+$$
+f(\interior A) = \interior f(A).
+$$
+In other words, a homeomorphism preserves interiors.
+```
+
+```{prf:proof}
+Since $f$ is a homeomorphism, it is bijective
+and both $f$ and $g = f^{-1}$ are continuous.
+
+We first show that $f(\interior A) \subseteq \interior f(A)$.
+
+1. Let $A \subseteq X$ be arbitrary.
+1. Due to {prf:ref}`res-ms-cont-func-interior`,
+
+   $$
+   f(\interior A) \subseteq \interior f(A)
+   $$
+   since $g$ is continuous and $f=g^{-1}$.
+
+We next show that $\interior f(A) \subseteq f(\interior A)$.
+
+1. Let $y \in \interior f(A)$.
+1. Then, there exists an open ball in $Y$ around $y$ such that
+   
+   $$
+   y \in U = B(y, r) \subseteq f(A).
+   $$
+1. Therefore, 
+
+   $$
+   f^{-1}(y) \in f^{-1}(U) \subseteq f^{-1} (f(A)) = A
+   $$
+   since $f$ is bijective.
+1. Now, since $f$ is a homeomorphism, hence $f^{-1}$ is an open mapping
+   ({prf:ref}`res-ms-homeomorphism-clopen-map`).
+1. Thus, since $U$ is open, hence $f^{-1}(U)$ is open.
+1. Thus, $f^{-1}(U)$ is an open neighborhood of $f^{-1}(y)$ contained in $A$.
+1. Thus, $f^{-1}(y)$ is an interior point of $A$.
+1. Thus, $f^{-1}(y) \in \interior A$.
+1. Thus, $y \in f(\interior A)$.
+1. We have shown that $y \in \interior f(A) \implies y \in f(\interior A)$.
+1. Thus, $\interior f(A) \subseteq f(\interior A)$.
+
+Combining the two inclusions:
+
+$$
+\interior f(A) = f(\interior A).
+$$
+```
 
 ## Isometry
 
