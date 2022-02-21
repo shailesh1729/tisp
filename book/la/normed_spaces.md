@@ -1575,54 +1575,8 @@ Thus, the two associated metrics are
 {prf:ref}`strongly equivalent <def-ms-strong-equivalent-metric>`.
 ```
 
-```{prf:theorem} Continuity with equivalent norms
-:label: res-la-ns-cont-eq-norms
 
-Let $\VV$ be a given vector space.
-Let $\| \cdot \|_a : \VV \to \RR$, 
-and $\| \cdot \|_b : \VV \to \RR$
-be norms defined on $\VV$ which are equivalent.
-Let $d_a$ and $d_b$ be corresponding metrics.
-Let $(X, d)$ be a metric space.
-Let $f : X \to \VV$ be a (total) function.
-
-Then, $f : (X, d) \to (\VV, d_a)$ is continuous
-if and only if $f : (X, d) \to (\VV, d_b)$ 
-is continuous.
-```
-
-```{prf:proof}
-By {prf:ref}`res-la-ns-norm-eq-metric-eq`, 
-the metrics $d_a$ and $d_b$ are strongly equivalent.
-By {prf:ref}`res-ms-strong-eq-metric-eq`, they are
-equivalent.
-Thus, they determine the same topology on $\VV$. 
-Thus, a subset $A \subseteq \VV$ is open 
-in $(\VV, d_a)$ if and only if it is open in $(\VV, d_b)$.
-
-Now, assume $f : (X, d) \to (\VV, d_a)$ to be continuous.
-
-1. Let $A$ be an open set of $(\VV, d_a)$.
-1. Then, $f^{-1}(A)$ is an open set of $(X, d)$
-   since $f : (X, d) \to (\VV, d_a)$ is continuous
-   ({prf:ref}`res-ms-continuous-function-characterization`).
-1. But $A$ is also an open set of $(\VV, d_b)$
-   since both metrics determine same open sets.
-1. Thus, whenever $A$ is an open set of $(\VV, d_b)$,
-   $f^{-1}(A)$ is an open set of $(X,d)$.
-1. Thus, $f : (X, d) \to (\VV, d_b)$ is continuous
-   due to {prf:ref}`res-ms-continuous-function-characterization`.
-
-A similar reasoning shows that
-if $f : (X, d) \to (\VV, d_b)$ is continuous
-then $f : (X, d) \to (\VV, d_a)$ must be continuous too.
-
-Combining, $f : (X, d) \to (\VV, d_a)$ is continuous
-if and only if $f : (X, d) \to (\VV, d_b)$ 
-is continuous.
-```
-
-## Norms on Finite Dimensional Spaces 
+### Norms on Finite Dimensional Spaces 
 
 ```{prf:theorem} Equivalence of norms on a finite dimensional vector space
 :label: res-la-ns-finite-all-norms-eq
@@ -1706,6 +1660,100 @@ on a finite dimensional space
 is called its *norm topology*.
 ```
 
+### Continuity
+
+Continuity of a function doesn't depend
+on the choice of a norm within the class
+of all equivalent norms.
+In other words, if a function $f$ is 
+continuous for a given norm, then it
+is continuous for all norms equivalent to it.
+
+```{prf:theorem} Continuity with equivalent norms
+:label: res-la-ns-cont-eq-norms
+
+Let $\VV$ be a given vector space.
+Let $\| \cdot \|_a : \VV \to \RR$, 
+and $\| \cdot \|_b : \VV \to \RR$
+be norms defined on $\VV$ which are equivalent.
+Let $d_a$ and $d_b$ be corresponding metrics.
+Let $(X, d)$ be a metric space.
+
+Let $f : X \to \VV$ be a (total) function.
+
+Then, $f : (X, d) \to (\VV, d_a)$ is continuous
+if and only if $f : (X, d) \to (\VV, d_b)$ 
+is continuous.
+
+Similarly, let $g : \VV \to X$ be a (total) function.
+
+Then, $g : (\VV, d_a) \to (X, d)$ is continuous
+if and only if $g : (\VV, d_b) \to (X, d)$ 
+is continuous.
+```
+
+```{prf:proof}
+By {prf:ref}`res-la-ns-norm-eq-metric-eq`, 
+the metrics $d_a$ and $d_b$ are strongly equivalent.
+By {prf:ref}`res-ms-strong-eq-metric-eq`, they are
+equivalent.
+Thus, they determine the same topology on $\VV$. 
+Thus, a subset $A \subseteq \VV$ is open 
+in $(\VV, d_a)$ if and only if it is open in $(\VV, d_b)$.
+
+Now, assume $f : (X, d) \to (\VV, d_a)$ to be continuous.
+
+1. Let $A$ be an open set of $(\VV, d_a)$.
+1. Then, $f^{-1}(A)$ is an open set of $(X, d)$
+   since $f : (X, d) \to (\VV, d_a)$ is continuous
+   ({prf:ref}`res-ms-continuous-function-characterization`).
+1. But $A$ is also an open set of $(\VV, d_b)$
+   since both metrics determine same open sets.
+1. Thus, whenever $A$ is an open set of $(\VV, d_b)$,
+   $f^{-1}(A)$ is an open set of $(X,d)$.
+1. Thus, $f : (X, d) \to (\VV, d_b)$ is continuous
+   due to {prf:ref}`res-ms-continuous-function-characterization`.
+
+A similar reasoning shows that
+if $f : (X, d) \to (\VV, d_b)$ is continuous
+then $f : (X, d) \to (\VV, d_a)$ must be continuous too.
+
+Combining, $f : (X, d) \to (\VV, d_a)$ is continuous
+if and only if $f : (X, d) \to (\VV, d_b)$ 
+is continuous.
+
+
+Now, assume $g : (\VV, d_a) \to (X, d)$ to be continuous.
+
+1. Let $A$ be an open set of $(X, d)$.
+1. Then, $g^{-1}(A)$ is an open set of $(\VV, d_a)$
+   since $g : (\VV, d_a) \to (X, d)$ is continuous
+   ({prf:ref}`res-ms-continuous-function-characterization`).
+1. But $g^{-1}(A)$ is also an open set of $(\VV, d_b)$
+   since both metrics determine same open sets.
+1. Thus, whenever $A$ is an open set of $(X, d)$,
+   $g^{-1}(A)$ is an open set of $(\VV, d_b)$.
+1. Thus, $g : (\VV, d_b) \to (X, d)$ is continuous
+   due to {prf:ref}`res-ms-continuous-function-characterization`.
+
+A similar reasoning shows that
+if $g : (\VV, d_b) \to (X, d)$ is continuous
+then $g : (\VV, d_a) \to (X, d)$ must be continuous too.
+
+Combining,
+$g : (\VV, d_a) \to (X, d)$ is continuous
+if and only if $g : (\VV, d_b) \to (X, d)$ 
+is continuous.
+```
+
+```{prf:remark} Continuity in finite dimensional spaces
+:label: rem-la-ns-cont-finite-space
+
+In the special case where $\VV$ 
+is finite dimensional, the continuity of $f$
+or $g$ is independent of the choice of norm
+chosen on $\VV$ since all norms are equivalent.
+```
 
 ## Linear Transformations in Finite Dimensional Spaces 
 
