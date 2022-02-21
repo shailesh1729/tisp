@@ -277,6 +277,51 @@ at any $x \in X$.
 1. Since $a$ is arbitrary, hence $f$ is continuous on $X$.
 ```
 
+```{prf:theorem}
+:label: res-ms-cont-func-cl-f-cl-a-eq-cl-f-a
+
+Let $f: X \to Y$ be a continuous function between two metric spaces.
+Let $A \subseteq X$. Then,
+
+$$
+\closure f(\closure A) = \closure f(A).
+$$
+```
+
+```{prf:proof}
+Since $f$ is continuous, hence by {prf:ref}`res-ms-continuous-function-characterization` (4)
+
+$$
+f(\closure A) \subseteq \closure f(A).
+$$
+
+Now, $\closure f(A)$ is a closed set. Hence,
+due to {prf:ref}`res-ms-closed-superset-closure-superset`
+
+$$
+\closure f(\closure A) \subseteq \closure f(A).
+$$
+
+Now, note that:
+
+$$
+f(A) \subseteq f(\closure A)
+$$
+since $A \subseteq \closure A$.
+
+But then, taking closure on both sides, we get:
+
+$$
+\closure f(A) \subseteq \closure f(\closure A).
+$$
+
+Combining the inclusions, we obtain:
+
+$$
+\closure f(\closure A) = \closure f(A).
+$$
+```
+
 ```{prf:theorem} Continuity and composition
 :label: res-ms-cont-func-composition
 
