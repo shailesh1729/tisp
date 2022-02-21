@@ -1,13 +1,16 @@
 # Relative Interiors
-
+This section focuses on some topological properties
+of convex sets.
 Throughout this section, we assume that $\VV$ is a 
-real vector space. Wherever necessary, 
-it is equipped with a
-{prf:ref}`norm <def-la-norm>` $\| \cdot \| : \VV \to \RR$
-or a {prf:ref}`real inner product <def-la-real-inner-product>`
-$\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$. 
+real normed linear space equipped with a
+{prf:ref}`norm <def-la-norm>` $\| \cdot \| : \VV \to \RR$.
 It is also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$.
+Wherever necessary,
+it is also equppied with an 
+{prf:ref}`real inner product <def-la-real-inner-product>`
+$\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$. 
 
+Following the discussion in {ref}`sec:la:normed-spaces`,
 $B$ shall denote the open unit ball $B(\bzero, 1)$.
 $\bar{B}$ shall denote the closed unit ball $B[\bzero, 1]$.
 The open ball $B(\bx, r)$ (for some $r > 0$) can be written as
@@ -42,7 +45,7 @@ $$
 
 ```{prf:definition} Relative interior point
 :label: def-cvx-relative-interior-point
-
+Let $\VV$ be a normed linear space.
 Let $C \subseteq \VV$. We say that $\bx \in C$ 
 is a *relative interior point* of $C$ if
 there exists an open ball $B(\bx, r)$ for some $r > 0$
@@ -81,7 +84,7 @@ We develop some fundamental results on the relative
 interior of a convex set.
 
 
-```{prf:proposition}
+```{prf:theorem} Relative interiors are subset
 :label: res-cvx-relint-subset
 
 For any set $C$
@@ -108,14 +111,16 @@ $$
 $$
 ```
 
-```{prf:proposition} Affine $\implies$ relatively open
+### Affine Sets
+
+```{prf:theorem} Affine sets are relatively open
 :label: res-cvx-affine-relative-open
 
 An affine set is relatively open.
 ```
 
 ```{prf:proof}
-Let $A$ be an affine set. Thus, $\affine A = A$.
+Let $A$ be an affine set. Then, $\affine A = A$.
 Thus, for any $\bx \in A$
 
 $$
@@ -129,19 +134,86 @@ $$
 $$ 
 ```
 
-An affine set is also closed since it is an
+```{prf:corollary} Hyperplanes are relatively open
+:label: res-cvx-hyperplane-relative-open
+
+The relative interior of a hyperplane is the hyperplane itself. 
+A hyperplane is relatively open.
+```
+This is a consequence of the fact that every hyperplane
+is affine.
+
+
+An affine set in a finite dimensional vector space 
+is also closed since it is an
 intersection of hyperplanes and every hyperplane
-is a closed set.
+is a closed set. See {prf:ref}`res-la-affine-closed`
 
 ```{prf:remark}
+:label: res-cvx-relint-non-inclusive
+
 An inclusion $A \subseteq B$ does not imply 
 $\relint A \subseteq \relint B$.
 
-Consider $B$ to be a cube in $\RR^3$ and
+Consider $C$ to be a cube in $\RR^3$ and
 $A$ to be one of its faces.
-The relative interiors of both $A$ and $B$ are nonempty
+The relative interiors of both $A$ and $C$ are nonempty
 but disjoint.
 ```
+
+```{prf:theorem} Relative interior is relatively open
+:label: res-cvx-relint-relint
+
+For any set $C$, 
+
+$$
+\relint (\relint C) = \relint C.
+$$
+Thus, $\relint C$ is relatively open.
+```
+TODO this proof is not solid.
+
+```{prf:proof}
+By definition $\relint (\relint C) \subseteq \relint C$.
+
+Thus, we need to show that $\relint C \subseteq \relint (\relint C)$.
+
+1. Let $\bx \in \relint C$.
+1. Then, there exists $r > 0$ such that 
+   
+   $$
+   (\bx + r B) \cap \affine C \subseteq C.
+   $$
+1. We can write $\bx + rB$ as 
+
+   $$
+   \bx + r B = \left (\bx + \frac{r}{2} B \right ) + \frac{r}{2} B.
+   $$
+1. Thus, the previous inclusion can be written as 
+   
+   $$
+   \left ( \left (\bx + \frac{r}{2} B \right ) + \frac{r}{2} B \right ) 
+   \cap \affine C \subseteq C.
+   $$
+1. Let $U = \left (\bx + \frac{r}{2} B \right ) \cap C$.
+1. Let $\by \in U$.
+1. Then, $\by \in C$ and $\by \in \left (\bx + \frac{r}{2} B \right )$.
+1. From previous inclusion, we can say that for every $\by \in U$
+
+   $$
+   \left (\by + \frac{r}{2} B \right ) \cap \affine C \subseteq C.
+   $$
+1. Thus, $\by \in \relint C$ for every $\by \in U$.
+1. Thus, $U \subseteq \relint C$.
+1. Thus, 
+
+   $$
+   \left (\bx + \frac{r}{2} B \right ) \cap C \subseteq \relint C.
+   $$
+1. By definition of relative interior, $\bx \in \relint (\relint C)$.
+```
+
+### Relative Boundary
 
 ```{prf:definition} Relative boundary
 :label: def-cvx-relative-boundary
@@ -160,7 +232,10 @@ $$
 ```{prf:theorem} Line segment property of relative interior
 :label: res-cvx-convex-relint-segment
 
-Let $C$ be a nonempty convex set. Let $\bx \in \relint C$
+Let $\VV$ be a finite dimensional normed linear space.
+
+Let $C$ be a nonempty convex subset of $\VV$. 
+Let $\bx \in \relint C$
 and $\by \in \closure C$. Then, 
 
 $$
@@ -216,7 +291,7 @@ lies inside the relative interior of $C$.
 
 Several topological properties follow.
 
-```{prf:theorem}
+```{prf:theorem} Closure of relative interior
 :label: res-cvx-relint-closure
 
 For any convex set $C$, 
@@ -247,5 +322,76 @@ Combining the two inclusions, we get:
 $$
 \closure \relint C = \closure C.
 $$ 
+```
+
+
+## Translations
+
+```{prf:theorem}
+:label: res-cvx-relint-translation-pres
+
+Let $\VV$ be a normed linear space.
+Let $\ba \in \VV$ be some fixed vector.
+Let a translation map $g_a : \VV \to \VV$ be defined as
+
+$$
+g_a = \bx + \ba \Forall \bx \in \VV.
+$$
+
+Then, for any set $A \subseteq \VV$,
+
+$$
+g_a (\relint A) = \relint (g_a (A)).
+$$
+
+In other words,
+
+$$
+\relint (A + \ba) = (\relint A)  + \ba.
+$$
+```
+
+```{prf:proof}
+
+Let $\bx \in \relint (A + \ba)$.
+Then, there exists $r > 0$ such that
+
+$$
+(\bx + r B ) \cap \affine (A + \ba) \subseteq A + \ba.
+$$
+
+Now,
+
+$$
+& (\bx + r B ) \cap \affine (A + \ba) \subseteq A + \ba \\
+& \iff ((\bx + r B ) \cap \affine (A + \ba)) - \ba \subseteq A \\
+& \iff (\bx + r B - \ba) \cap (\affine (A + \ba) - \ba) \subseteq A \\
+& \iff ((\bx - \ba) + r B) \cap \affine A \subseteq A.
+$$
+We used the fact that set addition (and subtraction) distributes over
+intersection.
+We also used the fact that translation which is an affine transformation
+preserves affine hulls ({prf:ref}`res-la-aff-func-aff-hull`).
+
+Thus, $\bx \in \relint (A + \ba)$ if and only if $\bx - \ba \in \relint A$. 
+
+Thus, $\bx \in \relint (A + \ba)$ if and only if $\bx \in \relint A + \ba$. 
+
+We are done.
+```
+
+
+## Affine Transformations
+
+```{prf:theorem}
+:label: res-cvx-relint-aff-map-pres
+
+Let $\VV$ be a finite dimensional normed linear space.
+A bijective affine transformation $T : \VV \to \VV$ 
+preserves relative interiors.
+
+$$
+T (\relint A) = \relint (T (A)).
+$$
 ```
 
