@@ -1654,6 +1654,8 @@ An affine combination in input leads to an identical
 affine combination in output.
 
 
+### Relation with Linear Transformations
+
 We next show that a linear transformation followed
 by a translation is affine.
 
@@ -1766,6 +1768,8 @@ T (t \bx + (1 - t) \by)
 $$
 Thus, $T$ is affine.
 ```
+
+### Affine Combinations and Hulls
 
 We show that affine functions distribute over
 arbitrary affine combinations.
@@ -1884,6 +1888,9 @@ T (\affine S) = \affine T (S).
 $$
 ```
 
+### Invertible Affine Transformations
+
+
 ```{prf:theorem}  Affine invertible = linear invertible
 :label: res-aff-map-invertible-lin-map
 
@@ -1932,7 +1939,6 @@ L = G_{-\ba} \circ T  \text{ and } T = G_{\ba} \circ  L.
 $$
 Clearly, if $T$ is invertible then so is $L$ and if $L$ is invertible then so is $T$.
 ```
-
 
 ```{prf:theorem} Inverse of affine map is affine
 :label: res-aff-map-inverse
@@ -1984,6 +1990,7 @@ $$
 Therefore, $S$ is affine.
 ```
 
+### Affine Mapping between Affine Sets
 
 ```{prf:theorem} Affine mapping between affine independent sets
 :label: res-aff-mapping-independent-sets
@@ -2087,6 +2094,8 @@ $$
 T (A) = B.
 $$
 ```
+
+### Graph
 
 
 ```{prf:theorem} Graph of an affine map is affine
@@ -2225,3 +2234,83 @@ followed by a translation.
    composition of continuous functions is continuous.
 1. Hence, $T$ is continuous.
 ```
+
+### Affine Homeomorphisms
+
+```{prf:theorem}
+:label: res-la-aff-map-pres-homeomorphism
+
+Let $\VV$ be a finite dimensional normed linear space.
+A bijective affine transformation $T : \VV \to \VV$ 
+is a {prf:ref}`homeomorphism <def-ms-homeomorphism>`.
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. By {prf:ref}`res-la-affine-finite-continuous-transformation`, 
+   $T$ is continuous.
+1. Since $T$ is bijective, hence, $T^{-1}$ exists.
+1. By {prf:ref}`res-aff-map-inverse`, $T^{-1}$ is affine.
+1. Again, by {prf:ref}`res-la-affine-finite-continuous-transformation`, 
+   $T^{-1}$ is continuous.
+1. Thus, $T$ is a {prf:ref}`homeomorphism <def-ms-homeomorphism>`.
+```
+
+```{prf:theorem}
+:label: res-la-aff-map-pres-closure
+
+Let $\VV$ be a finite dimensional normed linear space.
+A bijective affine transformation $T : \VV \to \VV$ 
+preserves closures.
+
+In other words, for any $A \subseteq \VV$:
+
+$$
+T (\closure A) = \closure (T (A)).
+$$
+```
+
+```{prf:proof}
+By {prf:ref}`res-la-aff-map-pres-homeomorphism`, 
+$T$ is a homeomorphism.
+
+By {prf:ref}`res-ms-homeomorphism-closure`,
+homeomorphisms preserve closures.
+
+Thus, for any $A \subseteq \VV$
+
+$$
+T (\closure A) = \closure (T (A)).
+$$
+```
+
+
+```{prf:theorem}
+:label: res-la-aff-map-pres-interior
+
+Let $\VV$ be a finite dimensional normed linear space.
+A bijective affine transformation $T : \VV \to \VV$ 
+preserves interiors.
+
+In other words, for any $A \subseteq \VV$:
+
+$$
+T (\interior A) = \interior (T (A)).
+$$
+```
+
+```{prf:proof}
+By {prf:ref}`res-la-aff-map-pres-homeomorphism`, 
+$T$ is a homeomorphism.
+
+By {prf:ref}`res-ms-homeomorphism-interior`,
+homeomorphisms preserve interiors.
+
+Thus, for any $A \subseteq \VV$
+
+$$
+T (\interior A) = \interior (T (A)).
+$$
+```
+
