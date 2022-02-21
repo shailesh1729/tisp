@@ -36,6 +36,58 @@ a *closed mapping* if $f(A)$ is closed whenever $A$ is closed.
 In other words, $f$ maps closed sets to closed sets.
 ```
 
+
+```{prf:example} A closed map need not be open
+:label: ex-ms-closed-map-1
+
+Let $f: X \to Y$ be defined as $f(x) = y_0$ for every $x \in X$
+where $y_0 \in Y$ is some fixed point.
+
+Then, for every $A \subseteq X$, $f(A) = \{ y_0\}$.
+Since $\{ y_0\}$ is a singleton, hence
+
+1. $f$ maps every closed set in $X$ to a (fixed) closed set in $Y$.
+1. But $f$ doesn't map open sets in $X$ to open sets in $Y$.
+```
+
+```{prf:example} An open map need not be closed
+:label: ex-ms-open-map-1
+
+Consider the function $f : \RR^2 \to \RR$ given by
+
+$$
+f((x, y)) = x.
+$$
+Thus, $f$ is a projection function which projects a point in $\RR^2$
+to its first coordinate.
+
+We first show that $f$ is an open mapping.
+
+1. Now, let $A$ be an open set in $\RR^2$.
+1. Let $x \in f(A)$.
+1. Let $y \in \RR$ such that $(x,y) \in A$. Thus, $f ((x,y)) = x$.
+1. Since $A$ is open, hence $(x,y)$ is an interior point of $A$.
+1. Thus, there exists $r > 0$ such that $B((x,y), r) \subseteq A$.
+1. But then, $f(B((x,y), r)) \subseteq f(A)$.
+1. Note that $f(B((x,y), r)) = (x-r, x+r)$.
+1. Thus, $(x-r, x+r) \subseteq f(A)$.
+1. Thus, $x$ is an interior point of $f(A)$.
+1. Thus, every point in $f(A)$ is its interior point.
+1. Thus, $f(A)$ is open.
+1. Thus, $f$ is an open mapping.
+
+We now show that $f$ is not a closed mapping.
+
+1. Consider the set $L = \{ (x, y) \in \RR^2 | x> 0 \text{ and } xy = 1}.
+1. This is a curve in $\RR^2$ (visualize).
+1. It is thus a closed set.
+1. $f(L) = (0, \infty)$. 
+1. $f(L)$ is not a closed set in $\RR$. It is rather an open interval.
+1. Thus, $f$ doesn't map every closed set to a closed set. 
+   Although, it does map some closed sets to closed sets.
+1. Thus, $f$ is not a closed mapping.
+```
+
 ## Bounded Functions
 
 ```{prf:definition} Bounded functions
@@ -392,65 +444,6 @@ with $d(x, a) < \delta$ and $\rho (f(x), f(a)) \geq \epsilon$.
 ```
 
 
-## Homeomorphism
-
-```{prf:definition} Homeomorphism
-:label: def-ms-homeomorphism
-
-Two metric spaces $(X,d)$ and $(Y, \rho)$ are called *homeomorphic*
-if there exists a bijective function $f : X \to Y$ such that
-$f$ and $f^{-1}$ are both continuous.
-Such a mapping $f$ is called a *homeomorphism*.
-```
-
-Procedure to show that two metric spaces are homeomorphic:
-
-1. Pick a suitable bijective function $f : X \to Y$.
-1. Show that $f$ is continuous.
-1. Show that $f^{-1}$ is continuous.
-
-
-```{prf:theorem}
-:label: res-ms-equivalent-metric-homeomorphic-identity
-
-Two metrics $d_1$ and $d_2$ on $X$ are equivalent if 
-and only if the identity mapping 
-$I : (X, d_1) \to (X, d_2)$ given by 
-
-$$
-I (x) = x \Forall x \in X
-$$
-
-is a homeomorphism.
-```
-
-```{prf:proof}
-Identity function is the inverse of itself.
-
-Let $\{x_n \}$ be a sequence of $X$.
-
-Assume that the two metrics are equivalent. 
-
-1. Then, $\lim d_1(x_n, x) = 0 \iff \lim d_2(x_n, x) = 0$.
-1. Thus, if $\lim d_1(x_n, x) = 0$ then 
-   $\lim d_2(x_n, x) = \lim d_2(I(x_n), I(x)) = 0$ means that 
-   $I$ is continuous.
-1. Similarly, if $\lim d_2(x_n, x) = 0$ then 
-   $\lim d_1(x_n, x) = \lim d_1(I^{-1}(x_n), I^{-1}(x)) = 0$
-   means that $I^{-1}$ is continuous.
-1. Thus, $I$ is a homeomorphism.
-
-
-Assume that $I$ is a homeomorphism.
-
-1. $I$ is continuous. Hence $\lim d_1(x_n, x) = 0$ implies 
-   $\lim d_2(I(x_n), I(x)) = d_2(x_n, x) = 0$.
-1. $I^{-1}$ is continuous. Hence $\lim d_2(x_n, x) = 0$ implies 
-   $\lim d_1(I^{-1}(x_n), I^{-1}(x)) = d_1(x_n, x) = 0$.
-1. Hence, the metrics $d_1$ and $d_2$ are equivalent.
-```
-
-
 ## Uniform Continuity
 
 ```{prf:definition} Uniform continuity
@@ -485,6 +478,289 @@ if for every $\epsilon > 0$, there exists some $\delta > 0$
 $$
 |f(x) - f(y)| < \epsilon 
 \text{ whenever } d(x, y) < \delta \text{ and } x, y \in A.
+$$
+```
+
+## Homeomorphism
+
+Homeomorphism is the fusion of the ideas of continuity
+and bijection. We are interested in bijective mappings
+where the function and its inverse are both continuous.
+
+Homeomorphisms characterize what are known as topological
+properties. Properties of sets in metric spaces which
+are preserved by homeomorphisms are known as topological
+properties. For example, homeomorphisms preserve 
+openness, closedness, compactness. But they don't preserve
+boundedness or completeness.
+
+Homeomorphisms can be thought of as *continuous deformations*
+which are reversible. 
+
+If two spaces are connected through a homeomorphism, 
+they are called homeomorphic. Once we prove that
+two spaces are homeomorphic, we need to study only
+one of them for their topological properties.
+
+```{prf:definition} Homeomorphism
+:label: def-ms-homeomorphism
+
+Let $(X,d)$ and $(Y, \rho)$ be two metric spaces.
+A function $f : X \to Y$ is called a *homeomorphism* if
+
+1. $f$ is bijective (thus the inverse $f^{-1}$ exists).
+1. $f$ is continuous.
+1. $f^{-1}$ is continuous.
+
+If a homeomorphism exists between two metric spaces
+$(X,d)$ and $(Y, \rho)$, then the
+metric spaces  are called *homeomorphic*.
+```
+
+Procedure to show that two metric spaces are homeomorphic:
+
+1. Pick a suitable bijective function $f : X \to Y$.
+1. Show that $f$ is continuous.
+1. Show that $f^{-1}$ is continuous.
+
+
+```{prf:example} 1/x
+:label: ex-ms-inverse-homeomorphism
+
+Let $X = (0,1]$ and $Y = [1, \infty)$. 
+Let $f : X \to Y$ be given by
+
+$$
+f(x) = \frac{1}{x}.
+$$
+
+1. $f$ is continuous.
+1. $f$ is bijective.
+1. $f^{-1}$ exists.
+1. $f^{-1} = f$. It is self inverse (involution).
+1. Thus, $f$ is a homeomorphism between $X$ and $Y$.
+
+Further observations:
+
+1. $(0, 1]$ is bounded but $[1, \infty)$ is not.
+1. $[1, \infty)$ is complete but $(0, 1]$ is not.
+
+Thus, homeomorphisms do not preserve boundedness or completeness.
+```
+
+```{prf:theorem} Homeomorphism is an equivalence relation
+:label: res-ms-homeomorphism-equivalence
+
+Consider the family of all metric spaces denoted by $M$.
+Consider the relation where we say that $A \sim B$
+for any $A, B \in M$ if $A$ and $B$ are homeomorphic
+(i.e., there exists a homeomorphism between them).
+
+Then, $\sim$ is an equivalence relation.
+````
+
+```{prf:proof}
+[Reflexivity]
+
+1. Let $A \in M$. 
+1. Consider the identity mapping $ I : A \to A$ given 
+   by $I(x) = x$ for every $x \in A$.
+1. Then, $I$ is a homeomorphism.
+1. Thus, $A \sim A$.
+
+[Symmetry]
+
+1. Let $A, B \in M$ such that $A \sim B$.
+1. Thus, there exists a homeomorphism $f : A \to B$ 
+   where $f$ is bijective, $f$ is continuous and $f^{-1}$ is continuous.
+1. Let $g = f^{-1}$. 
+1. Then, $g$ is a bijective mapping from $B$ to $A$,
+   $g$ is continuous and $g^{-1} = f$ is also continuous.
+1. Thus, $g$ is a homeomorphism from $B$ to $A$.
+1. Thus, $A \sim B$ implies $B \sim A$.
+
+
+[Transitivity]
+
+1. Let $A,B,C \in M$ so that $A \sim B$ and $B \sim C$.
+1. Thus, there exists a homeomorphism $f : A \to B$ and
+   another homeomorphism $g : B \to C$.
+1. Consider the function $h = g \circ f$ which is a mapping 
+   from $A$ to $C$.
+1. Since $f$ and $g$ are bijective, hence $h$ is also bijective.
+1. In fact, $h^{-1} = (g \circ f)^{-1} =  f^{-1} \circ g^{-1}$.
+1. Since $f$ and $g$ are both continuous, hence $h$ is also continuous.
+1. Since $g^{-1}$ and $f^{-1}$ are both continuous, hence $h^{-1}$ 
+   is also continuous.
+1. Thus, $h: A \to C$ is bijective and both $h$ and $h^{-1}$ are continuous.
+1. Thus, $h$ is a homeomorphism from $A$ to $C$.
+1. Thus, $A$ and $C$ are homeomorphic.
+1. Thus, $A \sim C$.
+```
+
+```{prf:theorem} Homeomorphisms are both open and closed
+:label: res-ms-homeomorphism-clopen-map
+
+Let $f: (X,d) \to (Y, \rho)$ be a homeomorphism.
+Then $f$ is both an
+{prf:ref}`open mapping <def-ms-open-mapping>` as well as a
+{prf:ref}`closed mapping <def-ms-closed-mapping>`.
+```
+
+```{prf:proof}
+Let $f$ be homeomorphism and $g = f^{-1}$. Then, $g^{-1} = f$.
+
+We first show that $f$ is an open mapping.
+
+1. Let $A \subseteq X$ be open.
+1. Since $g$ is continuous, hence $g^{-1}(A)$ is open
+   due to by {prf:ref}`res-ms-continuous-function-characterization` (2).
+1. But $g^{-1}(A) = f(A)$.
+1. Thus, $f(A)$ is open whenever $A$ is open.
+1. Thus, $f$ maps open sets to open sets.
+1. Thus, $f$ is an open mapping.
+
+
+We next show that $f$ is an open mapping.
+
+1. Let $A \subseteq X$ be closed.
+1. Since $g$ is continuous, hence $g^{-1}(A)$ is closed
+   due to by {prf:ref}`res-ms-continuous-function-characterization` (5).
+1. But $g^{-1}(A) = f(A)$.
+1. Thus, $f(A)$ is closed whenever $A$ is closed.
+1. Thus, $f$ maps closed sets to closed sets.
+1. Thus, $f$ is a closed mapping.
+```
+
+```{prf:theorem} Metric equivalence and identity homeomorphism
+:label: res-ms-equivalent-metric-homeomorphic-identity
+
+Two metrics $d_1$ and $d_2$ on $X$ are equivalent if 
+and only if the identity mapping 
+$I : (X, d_1) \to (X, d_2)$ given by 
+
+$$
+I (x) = x \Forall x \in X
+$$
+
+is a homeomorphism.
+```
+
+```{prf:proof}
+Identity function is a bijection and is the inverse of itself.
+Thus, $I^{-1} = I$.
+
+Recall from {prf:ref}`def-ms-equivalent-metric`
+that two metrics are equivalent if they generate the same
+topology. 
+
+Assume $d_1, d_2$ to be equivalent.
+
+1. Let $A \in (X, d_2)$ be open. 
+1. Then, $I^{-1}(A) = A$.
+1. But $A$ is open in $(X, d_1)$ also since the metrics are equivalent.
+1. Thus, for every open set $A$ in $(X, d_2)$
+   $I^{-1}(A)$ is open in $(X, d_1)$.
+1. Therefore, $I$ is continuous due to
+   {prf:ref}`res-ms-continuous-function-characterization`.
+1. Similarly, by starting with an open set in $(X, d_1)$, 
+   we can show that $I^{-1}$ is also continuous.
+1. Thus, $I$ is bijective, and both $I$ and $I^{-1}$ are continuous.
+1. Thus, $I$ is a homeomorphism.
+
+Now, assume $I$ to be a homeomorphism.
+
+1. We first show that if $A$ is an open set in
+   $(X, d_1)$ then $A$ is an open set in $(X, d_2)$ also.
+1. By {prf:ref}`res-ms-homeomorphism-clopen-map`,
+   $I$ is both an open mapping and a closed mapping.
+1. Thus, if $A$ is an open set in $(X, d_1)$,
+   then $I(A)= A$ is an open set in $(X, d_2)$ also.
+1. We now show that if $A$ is an open set in
+   $(X, d_2)$ then $A$ is an open set in $(X, d_1)$ also.
+1. Since $I^{-1} = I$, and $I$ is an open mapping, hence, 
+   if $A$ is an open set in $(X, d_2)$,
+   then $I^{-1}(A)= I(A) = A$ is an open set in $(X, d_1)$ also.
+1. Thus, every set in $(X, d_1)$ is open if and only if 
+   it is open in $(X, d_2)$.
+1. Thus, both metric spaces have same topology.
+1. Thus, the metrics $d_1$ and $d_2$ are equivalent.
+```
+
+We can construct another proof by using an
+equivalent definition of equivalent metrics.
+In {prf:ref}`res-ms-eq-metric-conv-sequences`,
+we showed that two metrics are equivalent if and only if 
+their convergent sequences are identical.
+This proof is from {cite}`aliprantis1998principles`.
+
+```{prf:proof}
+Let $\{x_n \}$ be a sequence of $X$.
+
+Assume that the two metrics are equivalent. 
+
+1. Then, $\lim d_1(x_n, x) = 0 \iff \lim d_2(x_n, x) = 0$.
+1. Thus, if $\lim d_1(x_n, x) = 0$ then 
+   $\lim d_2(x_n, x) = \lim d_2(I(x_n), I(x)) = 0$ means that 
+   $I$ is continuous.
+1. Similarly, if $\lim d_2(x_n, x) = 0$ then 
+   $\lim d_1(x_n, x) = \lim d_1(I^{-1}(x_n), I^{-1}(x)) = 0$
+   means that $I^{-1}$ is continuous.
+1. Thus, $I$ is a homeomorphism.
+
+
+Assume that $I$ is a homeomorphism.
+
+1. $I$ is continuous. Hence $\lim d_1(x_n, x) = 0$ implies 
+   $\lim d_2(I(x_n), I(x)) = d_2(x_n, x) = 0$.
+1. $I^{-1}$ is continuous. Hence $\lim d_2(x_n, x) = 0$ implies 
+   $\lim d_1(I^{-1}(x_n), I^{-1}(x)) = d_1(x_n, x) = 0$.
+1. Hence, the metrics $d_1$ and $d_2$ are equivalent.
+```
+
+
+```{prf:theorem} Homeomorphisms preserve closure
+:label: res-ms-homeomorphism-closure
+
+Let $f: (X,d) \to (Y, \rho)$ be a homeomorphism.
+Let $A \subseteq X$. Then,
+
+$$
+f(\closure A) = \closure f(A).
+$$
+In other words, a homeomorphism preserves closures.
+```
+
+Compare this with the result in
+{prf:ref}`res-ms-cont-func-cl-f-cl-a-eq-cl-f-a`.
+We no longer have to take another closure on the L.H.S..
+
+```{prf:proof}
+Since $f$ is a homeomorphism, hence $f$ is bijective,
+$f^{-1}$ exists and both $f$ and $f^{-1}$ are continuous.
+
+Since $f$ is continuous, hence by {prf:ref}`res-ms-continuous-function-characterization` (4)
+
+$$
+f(\closure A) \subseteq \closure f(A).
+$$
+We showed in {prf:ref}`res-ms-cont-func-cl-f-cl-a-eq-cl-f-a`
+that
+
+$$
+\closure f(\closure A) = \closure f(A).
+$$
+Thus, if we can show that $f(\closure A)$ is closed, then
+we are done.
+
+By {prf:ref}`res-ms-homeomorphism-clopen-map`, 
+$f$ is a closed mapping. 
+
+Hence, $f(\closure A)$ is a closed set.
+Thus, 
+
+$$
+\closure f(\closure A) = f(\closure A) = \closure f(A).
 $$
 ```
 
