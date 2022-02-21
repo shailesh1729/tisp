@@ -247,7 +247,9 @@ $$
 
 We are now ready to prove that $\ell_p$ norm is indeed a norm.
 
-```{prf:theorem}
+```{prf:theorem} $\ell_p$ norms are norms
+:label: res-la-euclid-lp-norm-just
+
 For any $n \in \Nat$ and any $p \in [1, \infty]$, the function
 $\| \cdot \|_p$ as defined in {prf:ref}`def-la-euclidean-lp_norm`
 is a {prf:ref}`norm <def-la-norm>`.
