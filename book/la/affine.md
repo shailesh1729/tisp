@@ -2154,8 +2154,11 @@ $$
 $\VV$ equipped with this metric becomes a 
 {prf:ref}`metric space <def-ms-metric-space>`
 and is endowed with a metric topology.
-Useful topological properties of affine sets 
+Useful topological properties of affine sets and transformations
 are discussed below.
+
+
+### Affine Sets
 
 ```{prf:theorem}
 :label: res-la-affine-closed
@@ -2192,4 +2195,33 @@ We proceed as follows:
 1. A proper affine subspace is a translate of a proper linear subspace.
 1. By {prf:ref}`res-la-ns-translation-preserve-topology`,
    if a set has an empty interior, then so does its translate.
+```
+
+### Affine Transformations
+
+
+```{prf:theorem} Affine transformations from finite dimensional spaces are continuous
+:label: res-la-affine-finite-continuous-transformation
+
+Let $(\VV, \| \cdot \|_v)$ and $(\WW, \| \cdot \|_w)$ be
+normed linear spaces. Let 
+$T : \VV \to \WW$ be an affine transformation. 
+
+If $\VV$ is finite dimensional, then $T$ is 
+continuous.
+```
+
+
+```{prf:proof}
+We can write $T$ as the composition of a linear transformation
+followed by a translation.
+
+1. By {prf:ref}`res-la-ns-finite-continuous-transformation`,
+   the linear transformation is continuous 
+   since $\VV$ is finite dimensional.
+1. By {prf:ref}`res-la-ns-translation-is-continuous`, 
+   translations are continuous.
+1. By {prf:ref}`res-ms-cont-func-composition`,
+   composition of continuous functions is continuous.
+1. Hence, $T$ is continuous.
 ```

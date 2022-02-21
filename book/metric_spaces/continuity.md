@@ -277,7 +277,9 @@ at any $x \in X$.
 1. Since $a$ is arbitrary, hence $f$ is continuous on $X$.
 ```
 
-```{prf:theorem}
+```{prf:theorem} Continuity and composition
+:label: res-ms-cont-func-composition
+
 {prf:ref}`Composition <def-st-total-function-composition>` 
 of continuous (total) functions is continuous. 
 ```
