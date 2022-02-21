@@ -99,6 +99,28 @@ This follows directly from the definition of
 relative interior.
 ```
 
+```{prf:theorem} Relative interior and interior
+:label: res-cvx-relint-interior
+
+
+For any set $C$
+
+$$
+\interior C \subseteq \relint C.
+$$
+```
+
+```{prf:proof}
+Let $\bx \in \interior C$.
+
+1. Then, there exists $r > 0$ such that $B(\bx, r) \subseteq C$.
+1. But $B(\bx, r) \subseteq C$ implies that 
+   $B(\bx, r) \cap \affine C \subseteq C$.
+1. Thus, $\bx \in \relint C$ also holds.
+
+Thus, $\interior C \subseteq \relint C$.
+```
+
 ```{prf:definition} Relatively open set
 :label: def-cvx-relatively-open
 
