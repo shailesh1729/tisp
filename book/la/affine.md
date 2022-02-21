@@ -2169,10 +2169,11 @@ are discussed below.
 
 ### Affine Sets
 
-```{prf:theorem}
+```{prf:theorem} Affine sets are closed
 :label: res-la-affine-closed
 
-Every affine subset of a normed linear space $\VV$ is a closed set.
+Every affine subset of a finite dimensional
+normed linear space $\VV$ is a closed set.
 ```
 
 ```{prf:proof}
@@ -2181,7 +2182,8 @@ Singletons $\{\bx \}$ are closed due to {prf:ref}`res-ms-singleton-closed`.
 
 All other affine sets are translations of a linear subspace.
 
-1. By {prf:ref}`res-la-subspace-closed`, linear subspaces are closed.
+1. By {prf:ref}`res-la-subspace-closed`, linear subspaces are closed
+   in a finite dimensional normed linear space.
 1. By {prf:ref}`res-la-ns-translation-preserve-topology`, 
    translations preserve closed sets.
 1. Hence, affine sets of dimension greater than zero
