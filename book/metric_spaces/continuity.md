@@ -223,7 +223,7 @@ $$
 Hence, $d_A$ is continuous on $X$.
 ```
 
-## Continuity Characterization
+### Continuity Characterization
 
 ```{prf:theorem} Characterization of continuous functions
 :label: res-ms-continuous-function-characterization
@@ -329,7 +329,9 @@ at any $x \in X$.
 1. Since $a$ is arbitrary, hence $f$ is continuous on $X$.
 ```
 
-```{prf:theorem}
+### Closures
+
+```{prf:theorem} Continuity and closure
 :label: res-ms-cont-func-cl-f-cl-a-eq-cl-f-a
 
 Let $f: X \to Y$ be a continuous function between two metric spaces.
@@ -374,6 +376,68 @@ $$
 $$
 ```
 
+### Interiors
+
+```{prf:theorem} Continuity characterization with interiors
+:label: res-ms-cont-func-interior
+
+Let $f: X \to Y$ be a function between two metric spaces.
+$f$ is continuous if and only if for every $A \subseteq Y$
+
+$$
+f^{-1}(\interior A) \subseteq \interior f^{-1}(A).
+$$
+```
+
+```{prf:proof}
+Assume $f$ is continuous. Let $A \subseteq Y$ be arbitrary.
+
+1. Let $x \in f^{-1}(\interior A)$.
+1. Then, $f(x) \in \interior A$.
+1. Thus, there is an open ball $U = B(f(x), r) \subseteq A$.
+1. Now, $x \in f^{-1}(U)$ since $f(x) \in U$.
+1. But $U \subseteq A$.
+1. Thus, $x \in f^{-1}(A)$.
+1. Since $f$ is continuous and $U$ is open, hence $f^{-1}(U)$
+   is an open set due to {prf:ref}`res-ms-continuous-function-characterization`.
+1. But since $U \subseteq A$, hence $f^{-1}(U) \subseteq f^{-1}(A)$.
+1. Thus, we have $x \in f^{-1}(U) \subseteq f^{-1}(A)$.
+1. Since $f^{-1}(U)$ is open, hence $x$ is an interior point of $f^{-1}(U)$.
+1. Thus, $x$ is an interior point of $f^{-1}(A)$ also.
+1. Thus, $x \in \interior f^{-1}(A)$.
+1. Thus, we have 
+
+   $$
+   f^{-1}(\interior A) \subseteq \interior f^{-1}(A)
+   $$
+   for every $A \subseteq Y$.
+
+
+Now assume that for every $A \subseteq Y$
+
+$$
+f^{-1}(\interior A) \subseteq \interior (f^{-1}(A))
+$$
+holds true.
+
+1. Let $U \subseteq Y$ be an arbitrary open set.
+1. We have that  
+
+   $$
+   f^{-1}(\interior U) = f^{-1}(U) \subseteq \interior f^{-1}(U) 
+   \subseteq f^{-1}(U).
+   $$
+1. Therefore $f^{-1}(U) = \interior f^{-1}(U)$ must hold
+   ($P \subseteq Q \subseteq P$ means $P=Q$).
+1. Therefore, $f^{-1}(U)$ is open.
+1. We have shown that for every open set $U \subseteq Y$, 
+   its pre-image $f^{-1}(U)$ is open.
+1. Thus, by {prf:ref}`res-ms-continuous-function-characterization`,
+   $f$ is continuous.
+```
+
+### Function Compositions
+
 ```{prf:theorem} Continuity and composition
 :label: res-ms-cont-func-composition
 
@@ -403,6 +467,8 @@ Assume that $\lim x_n = x$. Let $y = f(x)$ and $z = g(y)$.
    $g \circ f$ is continuous;
    again due to {prf:ref}`res-ms-continuous-function-characterization`.
 ```
+
+### Level Sets
 
 ```{prf:theorem} Level sets of continuous functions
 :label: res-ms-level-set-cont-func
