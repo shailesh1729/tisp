@@ -2163,9 +2163,33 @@ are discussed below.
 Every affine subset of a normed linear space $\VV$ is a closed set.
 ```
 
+```{prf:proof}
+$\EmptySet$ and $\VV$ are closed by definition. 
+Singletons $\{\bx \}$ are closed due to {prf:ref}`res-ms-singleton-closed`.
+
+All other affine sets are translations of a linear subspace.
+
+1. By {prf:ref}`res-la-subspace-closed`, linear subspaces are closed.
+1. By {prf:ref}`res-la-ns-translation-preserve-topology`, 
+   translations preserve closed sets.
+1. Hence, affine sets of dimension greater than zero
+   which are translates of the linear subspaces are also closed.
+```
+
+
 ```{prf:theorem}
 :label: res-la-affine-subspace-empty-interior
 
 Every proper affine subspace of a normed linear space $\VV$
 has an empty interior.
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. By {prf:ref}`res-la-proper-subspace-empty-interior`, 
+   every proper linear subspace of $\VV$ has an empty interior.
+1. A proper affine subspace is a translate of a proper linear subspace.
+1. By {prf:ref}`res-la-ns-translation-preserve-topology`,
+   if a set has an empty interior, then so does its translate.
 ```
