@@ -644,6 +644,8 @@ These definitions are just adapted from the
 corresponding definitions for metric spaces
 for convenience. 
 
+### Norms
+
 ```{prf:theorem} Norms are uniformly continuous 
 :label: res-la-ns-norm-is-continuous
 
@@ -671,6 +673,8 @@ $$
 
 Thus, $\| \cdot \|$ is uniformly continuous.
 ```
+
+### Translations
 
 ```{prf:theorem} Translations are uniformly continuous 
 :label: res-la-ns-translation-is-continuous
@@ -721,6 +725,7 @@ Then,
 1. $A$ is open if and only if $g_a(A)$ is open.
 1. $A$ is closed if and only if $g_a(A)$ is closed.
 1. $A$ is compact if and only if $g_a(A)$ is compact.
+1. $A$ has an empty interior if and only if $g_a(A)$ has an empty interior.
 ```
 
 ```{prf:proof}
@@ -729,11 +734,25 @@ $g_{-a}$ which is also a translation.
 Consequently, both $g_a$ and $g_{-a}$ are
 uniformly continuous.
 
-These results are simple applications of
+
+
+Preservation of open and closed sets are simple applications of
 {prf:ref}`res-ms-continuous-function-characterization`
-(characterization of continuous functions)
-and {prf:ref}`res-ms-compact-continuous-map`
+(characterization of continuous functions).
+
+Preservation of compactness is
+an application of {prf:ref}`res-ms-compact-continuous-map`
 (continuous images of compact sets are compact).
+
+Assume that $A$ has an interior point $\bx \in A$.
+
+1. Then, there exists a ball $B(\bx, r) \subseteq A$.
+1. Then, the ball $B(\bx, r) + \ba = B(\bx + \ba, r) \subseteq A + \ba$.
+1. Thus, $\bx + ba$ is an interior point of $A + \ba = g_a(A)$.
+
+Thus, if $g_a(A)$ has an empty interior then $A$ must
+have an empty interior. The converse can be proved
+by using the inverse translation $g_{-a}$.
 ```
 
 ## Boundedness
@@ -1778,7 +1797,7 @@ in {prf:ref}`res-la-ns-continuity-lin-map`.
 
 ## Linear Subspaces
 
-```{prf:theorem}
+```{prf:theorem} Linear subspaces are closed
 :label: res-la-subspace-closed
 
 Every subspace of a finite dimensional normed linear space 
