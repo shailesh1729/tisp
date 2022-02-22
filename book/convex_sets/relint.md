@@ -159,6 +159,87 @@ Let $\bx \in \interior C$.
 Thus, $\interior C \subseteq \relint C$.
 ```
 
+### Containment Relationship
+
+In general $A \subseteq B$ implies that
+$\interior A \subseteq \interior B$ and 
+$\closure A \subseteq \closure B$. 
+However, this is not the case with relative interiors.
+
+```{prf:remark}
+:label: res-cvx-relint-non-inclusive
+
+An inclusion $A \subseteq B$ does not imply 
+$\relint A \subseteq \relint B$.
+
+Consider $C$ to be a cube in $\RR^3$ and
+$A$ to be one of its faces.
+The relative interiors of both $A$ and $C$ are nonempty
+but disjoint.
+```
+
+However, if the affine hulls of $A$ and $B$ are same,
+then $A \subseteq B$ does imply that $\relint A \subseteq \relint B$.
+
+```{prf:theorem} Relative interior and containment
+:label: res-cvx-relint-subset-rel
+
+
+Let $A, B \subseteq \VV$.
+If $A \subseteq B \subseteq \affine A$, 
+then $\relint A \subseteq \relint B$.
+```
+
+```{prf:proof}
+By {prf:ref}`res-affine-hull-tight-containment`,
+$\affine A = \affine B$.
+
+Now, let us focus on the relative interiors.
+
+1. Let $\bx \in \relint A$.
+1. Then, there exists $r > 0$ such that
+
+   $$
+   B(\bx, r) \cap \affine A \subseteq A.
+   $$
+1. Replace $\affine A$ by $\affine B$ and use the fact that $A \subseteq B$.
+   Thus,
+
+   $$
+   B(\bx, r) \cap \affine B \subseteq B.
+   $$
+1. Thus, $\bx \in \relint B$.
+
+Thus, $\relint A \subseteq \relint B$.
+```
+
+
+```{prf:theorem} Relative interior of closure
+:label: res-cvx-closure-relint
+
+Let $\VV$ be a real finite dimensional normed linear space.
+For any set $C \subseteq \VV$ 
+
+$$
+\relint C \subseteq \relint \closure C.
+$$
+```
+
+```{prf:proof}
+The statement is trivial for $C = \EmptySet$. We shall
+assume that $C$ is nonempty.
+
+1. $C \subseteq \closure C$
+1. Since $\VV$ is finite dimensional, 
+   hence by {prf:ref}`res-la-affine-hull-closure`, 
+   $\affine (\closure C) = \affine C$.
+1. Thus, $C \subseteq \closure C \subseteq \affine C$.
+1. Thus, by {prf:ref}`res-cvx-relint-subset-rel`,
+   we have $\relint C \subseteq \relint \closure C$.
+```
+
+### Relatively Open Sets
+
 ```{prf:definition} Relatively open set
 :label: def-cvx-relatively-open
 
@@ -209,17 +290,7 @@ is also closed since it is an
 intersection of hyperplanes and every hyperplane
 is a closed set. See {prf:ref}`res-la-affine-closed`
 
-```{prf:remark}
-:label: res-cvx-relint-non-inclusive
-
-An inclusion $A \subseteq B$ does not imply 
-$\relint A \subseteq \relint B$.
-
-Consider $C$ to be a cube in $\RR^3$ and
-$A$ to be one of its faces.
-The relative interiors of both $A$ and $C$ are nonempty
-but disjoint.
-```
+### Relative Interior of Relative Interior
 
 ```{prf:theorem} Relative interior is relatively open
 :label: res-cvx-relint-relint
@@ -394,7 +465,10 @@ Relative interiors play the role of interiors for convex sets.
 Much of the following discussion is focused on the relative
 interiors of convex sets (in finite dimensional real normed linear spaces).
 
-```{prf:theorem}
+
+### Nonempty Relative Interiors
+
+```{prf:theorem} Nonempty relative interiors
 :label: res-cvx-nonempty-relint
 
 If $C$ is a nonempty convex set, then its relative interior
@@ -492,6 +566,8 @@ lies inside the relative interior of $C$.
 Several topological properties follow.
 
 
+### Closure of Relative Interior
+
 ```{prf:theorem} Closure of relative interior
 :label: res-cvx-relint-closure
 
@@ -525,8 +601,10 @@ $$
 $$ 
 ```
 
+### Relative Interior of Closure
+
 ```{prf:theorem} Relative interior of closure
-:label: res-cvx-closure-relint
+:label: res-cvx-convex-closure-relint
 
 For any convex set $C$, 
 
@@ -536,10 +614,80 @@ $$
 ```
 
 ```{prf:proof}
+The statement is trivial for $C = \EmptySet$. We shall
+assume that $C$ is nonempty.
 
-Since $C \subseteq \closure C$, hence $\relint C \subseteq \relint \closure C$.
+By {prf:ref}`res-cvx-closure-relint`
+$\relint C \subseteq \relint \closure C$
+holds true for any set $C$.
 
-For the other direction
+
+For the converse, assume that $\bx \in \relint \closure C$.
+Our goal is to show that $\bx \in \relint C$. 
+Towards this, we have to find points $\by \in \relint C$
+and $\bz \in \closure C$ such that $\bx$ lies
+on the line segment between $\by$ and $\bz$. 
+Since, $C$ is nonempty and convex, it is easy
+to pick a point $\by \in \relint C$. Then,
+on the path from $\by$ to $\bx$, the point
+$\bz$ must be behind $\bx$ and yet not too far 
+behind $\bx$ so that we can ensure that $\bz$
+is indeed in $\closure C$. That is where
+we use the fact that there is a ball 
+around $\bx$ whose intersection with $\affine C$
+is totally inside $\closure C$.
+
+1. We have, $\bx \in \closure C$ and there exists $r > 0$ such that
+
+   $$
+   (\bx + r B) \cap \affine (\closure C) \subseteq \closure C.
+   $$
+1. Recall from {prf:ref}`res-la-affine-hull-closure` that 
+   $\affine (\closure C) = \affine C$.
+1. Thus, there exists $r > 0$ such that
+
+   $$
+   (\bx + r B) \cap \affine C \subseteq \closure C.
+   $$
+1. By {prf:ref}`res-cvx-nonempty-relint`, the relative
+   interior of $C$ is nonempty.
+1. Choose a point $\by \in \relint C$.
+1. Let $t = \frac{r}{2\| \bx - \by \|}$.
+1. Define
+   
+   $$
+   \bz = (1 + t) \bx - t \by.
+   $$
+1. $\bz$ is an affine combination of $\bx$ and $\by$.
+   Since $\bx \in \closure C$ and $\by \in \relint C \subseteq \closure C$,
+   hence $\bz \in \affine (\closure C) = \affine C$.
+1. Also note that
+
+   $$
+   d(\bz, \bx) &= \| \bz - \bx \|\\
+   &= \|(1 + t) \bx - t \by - \bx \|\\
+   &= t \| \bx - \by \| = \frac{r}{2}.
+   $$
+1. Hence, $\bz \in B(x, r)$.
+1. Thus, $\bz \in B(x, r) \cap \affine C \subseteq \closure C$.
+1. Thus, $\bz \in \closure C$.
+1. We have found the points $\by \in \relint C$ and $\bz \in \closure C$.
+1. Now note that, 
+
+   $$
+   \bx = \frac{t}{1+t} \by + \frac{1}{1+t} \bz.
+   $$
+1. Thus, $\bx$ is a convex combination of $\by$ and $\bz$.
+1. Since $t > 0$,  hence $\bx$ lies in the line segment 
+   between $\bz$ and $\by$.
+1. By the 
+   {prf:ref}`line segment property <res-cvx-convex-relint-segment>`, 
+   the line segment between $\bz$ and $\by$
+   (excluding $\bz$) lies in $\relint C$.
+1. Hence, $\bx \in \relint C$.
+
+Thus, we have shown that $\relint \closure C \subseteq \relint C$
+as desired.
 ```
 
 ## Affine Transformations
