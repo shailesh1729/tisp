@@ -621,6 +621,39 @@ Since $L$ is a span of $k$ vectors, hence
 $\dim L \leq k$. Thus, $\dim A \leq k$.
 ```
 
+```{prf:theorem} Containment
+:label: res-affine-hull-containment
+
+If $A \subseteq B$, then $\affine A \subseteq \affine B$.
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. By definition, $\affine B$ contains all affine combinations
+   of points in $B$. 
+1. Thus, it contains all affine combinations
+   of points in $A$ since $A \subseteq B$. 
+1. But that is $\affine A$.
+1. Thus, $\affine A \subseteq \affine B$.
+```
+
+```{prf:theorem} Tight containment
+:label: res-affine-hull-tight-containment
+
+If $A \subseteq B \subseteq \affine A$, then $\affine A = \affine B$.
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. Note that $\affine A$ is an affine set containing $B$.
+1. But $\affine B$ is the smallest affine set containing $B$,
+   hence $\affine B \subseteq \affine A$.
+1. But $A \subseteq B$ implies that $\affine A \subseteq \affine B$.
+1. Thus, $\affine A = \affine B$.
+```
+
 ## Affine Independence
 
 ```{prf:definition} Affine independence
