@@ -506,7 +506,7 @@ Let $A = \affine C$ and let $\dim A = k$.
 ```{prf:theorem} Line segment property of relative interior
 :label: res-cvx-convex-relint-segment
 
-Let $\VV$ be a finite dimensional normed linear space.
+Let $\VV$ be a real finite dimensional normed linear space.
 
 Let $C$ be a nonempty convex subset of $\VV$. 
 Let $\bx \in \relint C$
@@ -569,9 +569,10 @@ Several topological properties follow.
 ### Closure of Relative Interior
 
 ```{prf:theorem} Closure of relative interior
-:label: res-cvx-relint-closure
+:label: res-cvx-convex-relint-closure
 
-For any convex set $C$, 
+Let $\VV$ be a real finite dimensional normed linear space.
+For any convex set $C \subseteq \VV$, 
 
 $$
 \closure \relint C = \closure C.
@@ -606,7 +607,8 @@ $$
 ```{prf:theorem} Relative interior of closure
 :label: res-cvx-convex-closure-relint
 
-For any convex set $C$, 
+Let $\VV$ be a real finite dimensional normed linear space.
+For any convex set $C \subseteq \VV$, 
 
 $$
 \relint \closure C = \relint C.
@@ -688,6 +690,49 @@ is totally inside $\closure C$.
 
 Thus, we have shown that $\relint \closure C \subseteq \relint C$
 as desired.
+```
+
+### Identical Closures and Relative Interiors
+
+```{prf:theorem} Same closure means same relative interior
+:label: res-cvx-convex-same-cl-same-relint
+
+Let $\VV$ be a real finite dimensional normed linear space.
+
+Let $C_1$ and $C_2$ be convex subsets of $\VV$.
+Then,
+
+$$
+\closure C_1 = \closure C_2 \iff \relint C_1 = \relint C_2.
+$$
+
+In other words, if closures are same, then relative interiors
+must be same too and vice versa.
+```
+
+```{prf:proof}
+From {prf:ref}`res-cvx-convex-relint-closure`, 
+$\closure \relint C = \closure C$
+and from {prf:ref}`res-cvx-convex-closure-relint`,
+$\relint \closure C = \relint C$ 
+for any convex set $C$.
+
+Assume $\closure C_1 = \closure C_2$.
+Then, 
+
+$$
+\relint C_1 = \relint \closure C_1 = \relint \closure C_2
+= \relint C_2.
+$$
+
+Now, assume $\relint C_1 = \relint C_2$.
+Then,
+
+$$
+\closure C_1 = \closure \relint C_1
+= \closure \relint C_2 = \closure C_2.
+$$
+We are done.
 ```
 
 ## Affine Transformations
