@@ -1485,6 +1485,7 @@ $$
 $$
 ```
 
+(sec:la:set-arithmetic)=
 ## Sets in Vector Spaces
 
 ### Set Arithmetic
@@ -1560,6 +1561,57 @@ $\bzero$ since $-\bzero = \bzero$.
 
 
 ### Set Arithmetic Properties
+
+```{prf:theorem} Set vector arithmetic identities
+:label: res-vs-set-vec-arithmetic
+
+Let $C$, $D$ be subsets of an $\FF$ vector space
+$\VV$. Let $\bz \in \VV$. 
+Let $\lambda \in \FF$.
+Let $\Lambda \subseteq \FF$.
+
+$$
+C = (C + \bz) - \bz.
+$$
+
+
+$$
+C \subseteq D \iff C + \bz \subseteq D + \bz.
+$$
+```
+```{prf:proof}
+
+We show that  $C = (C + \bz) - \bz$.
+
+1. Let $\bx \in C$. 
+1. Then, $\bx = (\bx + \bz) - \bz$.
+1. Then, $\bx + \bz \in C+\bz$.
+1. Then, $(\bx + \bz) - \bz \in (C + \bz) - \bz$.
+1. Thus, $C \subseteq (C + \bz) - \bz$.
+1. Conversely, let $\bx \in (C + \bz) - \bz$.
+1. Then, $\bx + \bz \in C+\bz$.
+1. But then, $\bx \in C$.
+1. Thus, $(C + \bz) - \bz \substeq C$.
+1. Combining $C = (C + \bz) - \bz$.
+
+We show that $C \subseteq D \iff C + \bz \subseteq D + \bz$.
+
+Assume $C \subseteq D$.
+1. Let $\bx \in C + \bz$. 
+1. Then, $\bx - \bz \in C$.
+1. Then, $\bx - \bz \in D$ since $C \subseteq D$.
+1. Then, $\bx \in D + \bz$.
+1. Thus, $C + \bz \in D + \bz$.
+
+Now, assume $C + \bz \subseteq D + \bz$.
+
+1. Let $\bx \in C$.
+1. Then, $\bx + \bz \in C + \bz$.
+1. Then, $\bx + \bz \in D + \bz$ since $C + \bz \subseteq D + \bz$.
+1. Then, $\bx \in D$.
+1. Thus, $C \subseteq D$.
+
+```
 
 ```{prf:theorem} Properties of set arithmetic
 :label: res-vs-set-arithmetic-props
