@@ -2166,6 +2166,18 @@ and is endowed with a metric topology.
 Useful topological properties of affine sets and transformations
 are discussed below.
 
+Readers are encouraged to review the material in
+{ref}`sec:la:normed-spaces` before proceeding further
+as the results presented here develop on the material 
+presented in that section.
+
+Our discussions are restricted to finite dimensional 
+normed linear spaces as linear subspaces are closed
+({prf:ref}`res-la-subspace-closed`)
+and linear transformations are continuous 
+({prf:ref}`res-la-ns-finite-continuous-transformation`)
+in the finite dimensional spaces. 
+
 
 ### Affine Sets
 
@@ -2206,6 +2218,43 @@ We proceed as follows:
 1. A proper affine subspace is a translate of a proper linear subspace.
 1. By {prf:ref}`res-la-ns-translation-preserve-topology`,
    if a set has an empty interior, then so does its translate.
+```
+
+
+```{prf:theorem} Affine hull and closure
+:label: res-la-affine-hull-closure
+
+Let $\VV$ be a finite dimensional normed linear space.
+Let $C \subseteq \VV$.  Then,
+
+$$
+\affine (\closure C) = \affine C.
+$$
+```
+
+```{prf:proof}
+
+Since $C \subseteq \closure C$, hence
+$\affine C \subseteq \affine (\closure C)$. 
+
+
+1. Let $A = \affine C$.
+1. By {prf:ref}`res-la-affine-closed`, $A$ is closed.
+1. By definition $\closure C$ is the smallest closed set
+   that contains $C$.
+1. By {prf:ref}`res-ms-closed-superset-closure-superset`,
+   any closed set that contains $C$ also contains $\closure C$.
+1. Thus, $\closure C \subseteq \affine C$.
+1. Now, $\affine C$ is an affine set.
+1. By definition, the affine hull is the smallest affine set
+   that contains a set.
+1. Hence, $\affine (\closure C) \subseteq \affine C$.
+
+Together, we have:
+
+$$
+\affine (\closure C) = \affine C.
+$$
 ```
 
 ### Affine Transformations
