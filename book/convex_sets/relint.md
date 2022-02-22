@@ -1,4 +1,5 @@
-# Relative Interiors
+# Topological Properties
+
 This section focuses on some topological properties
 of convex sets.
 Throughout this section, we assume that $\VV$ is a 
@@ -845,6 +846,48 @@ $$
 $$
 ```
 
+```{prf:theorem}
+Let $\VV$ be a real finite dimensional normed linear space.
+Let $C_1$ and $C_2$ be convex sets of $\VV$ such that
+$C_2 \subseteq \closure C_1$ but
+$C_2 \not\subseteq \closure C_1 \setminus \relint C_1$.
+Then,
+
+$$
+\relint C_2 \subseteq \relint C_1.
+$$
+In other words, if $C_2$ is a subset of the closure of
+$C_1$ but $C_2$ is not contained totally inside the
+relative boundary of $C_1$, then 
+relative interior of $C_2$ is a subset of the relative
+interior of $C_1$.
+```
+
+### Sum of Sets
+
+```{prf:theorem} Relative interior of sum of two sets
+:label: res-cvx-convex-sum-relint
+
+Let $\VV$ be a real finite dimensional normed linear space.
+Let $C_1$ and $C_2$ be convex sets of $\VV$.
+Then,
+
+$$
+\relint (C_1 + C_2) = \relint C_1 + \relint C_2.
+$$
+```
+
+```{prf:theorem} Closure of sum of two sets
+:label: res-cvx-convex-sum-closure
+
+Let $\VV$ be a real finite dimensional normed linear space.
+Let $C_1$ and $C_2$ be convex sets of $\VV$.
+Then,
+
+$$
+\closure (C_1 + C_2) \supseteq \closure C_1 + \closure C_2.
+$$
+```
 
 ## Affine Transformations
 
