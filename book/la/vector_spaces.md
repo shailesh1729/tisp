@@ -1563,6 +1563,7 @@ $\bzero$ since $-\bzero = \bzero$.
 
 ```{prf:theorem} Properties of set arithmetic
 :label: res-vs-set-arithmetic-props
+Let $\VV$ be a vector space over a field $\FF$.
 
 Let $C, D, E \subseteq \VV$ and $\alpha, \beta \in \FF$.
 
@@ -1597,6 +1598,43 @@ Let $C, D, E \subseteq \VV$ and $\alpha, \beta \in \FF$.
 
 Additive inverses don't exist for sets containing more than
 one element.
+
+```{prf:theorem} Distributive law for set sum over intersection
+:label: res-vs-set-intersect-sum-dist
+
+Let $\VV$ be a vector space over a field $\FF$.
+
+Let $C, D, E \subseteq \VV$. Then
+
+$$
+(C \cap D) + E \subseteq (C + E) \cap (D + E).
+$$
+```
+
+```{prf:proof}
+
+We show that $(C \cap D) + E \subseteq (C + E) \cap (D + E)$.
+
+1. Let $\bv \in (C \cap D) + E$.
+1. Then, $\bv = \bx + \by$ such that $\bx \in (C \cap D)$ and $\by \in E$.
+1. Then, $\bx \in C$, $\bx \in D$ and $\by \in E$.
+1. Thus, $\bx + \by \in C + E$ and $\by + \by \in D + E$.
+1. Thus, $\bv = \bx + \by \in  (C + E) \cap (D + E)$.
+1. Thus, $(C \cap D) + E \subseteq (C + E) \cap (D + E)$.
+
+We mention that $ (C + E) \cap (D + E) \not\subseteq (C \cap D) + E$
+in general. Here is an example.
+
+1. Consider $\VV = \RR^2$.
+1. Let $C$ to be the $x$-axis.
+1. Let $D$ to be the $y$-axis.
+1. Let $E$ to be the line $\{ (x, y) \ST x = y \}$.
+1. Both $C+E$ and $D+E$ are the whole plane $\RR^2$. 
+1. Thus, $(C + E) \cap (D + E) = \RR^2$.
+1. But $C \cap D = \{ \bzero \}$.
+1. Thus, $(C \cap D) + E = E$.
+1. Clearly, $(C + E) \cap (D + E) \not\subseteq (C \cap D) + E$.  
+```
 
 ### Direct Sums
 
