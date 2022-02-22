@@ -2,13 +2,24 @@
 This section focuses on some topological properties
 of convex sets.
 Throughout this section, we assume that $\VV$ is a 
-real normed linear space equipped with a
+finite dimensional real normed linear space equipped with a
 {prf:ref}`norm <def-la-norm>` $\| \cdot \| : \VV \to \RR$.
 It is also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$.
 Wherever necessary,
 it is also equppied with an 
 {prf:ref}`real inner product <def-la-real-inner-product>`
 $\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$. 
+
+In a finite dimensional real normed linear space:
+
+- Linear subspaces are closed.
+- Hyperplanes are closed.
+- Affine subspaces are closed.
+- Interiors of proper linear/affine subspaces are empty.
+- Linear/affine transformations are continuous.
+- Bijective linear/affine transformations are homeomorphisms.
+- Bijective linear/affine transformations preserve interiors and closures.
+
 
 Following the discussion in {ref}`sec:la:normed-spaces`,
 $B$ shall denote the open unit ball $B(\bzero, 1)$.
@@ -17,6 +28,33 @@ The open ball $B(\bx, r)$ (for some $r > 0$) can be written as
 $\bx + r B$. 
 Similarly, the closed ball $B[\bx, r]$ can be written as
 $\bx + r \bar{B}$.
+
+
+We shall use several set and vector arithmetic identities
+and inequalities in the discussion below. We list them here 
+for quick reference. See {ref}`sec:la:set-arithmetic`
+for detailed discussion.
+
+Let $C,D,E$ be subsets of $\VV$.
+Let $\bx, \bv, \bz \in \VV$ be arbitrary vectors.
+
+From {prf:ref}`res-vs-set-vec-arithmetic`
+
+$$
+C = (C + \bz) - \bz.
+$$
+
+
+$$
+C \subseteq D \iff C + \bz \subseteq D + \bz.
+$$
+
+
+From {prf:ref}`res-vs-set-intersect-sum-dist`,
+
+$$
+(C \cap D) + E \subseteq (C + E) \cap (D + E).
+$$
 
 For any set $A \subseteq \VV$, the set of points $\bx$
 whose distance from $A$ is less than $r$ for some $r > 0$
@@ -248,8 +286,148 @@ $$
 $$
 ```
 
+## Translations
 
-## Line Segment Property
+```{prf:theorem} Translations preserve relative interiors
+:label: res-cvx-relint-translation-pres
+
+Let $\VV$ be a normed linear space.
+Let $\ba \in \VV$ be some fixed vector.
+Let a translation map $g_a : \VV \to \VV$ be defined as
+
+$$
+g_a = \bx + \ba \Forall \bx \in \VV.
+$$
+
+Then, for any set $A \subseteq \VV$,
+
+$$
+g_a (\relint A) = \relint (g_a (A)).
+$$
+
+In other words,
+
+$$
+\relint (A + \ba) = (\relint A)  + \ba.
+$$
+```
+
+
+
+```{prf:proof}
+
+Let $\bx \in \relint (A + \ba)$.
+
+1. Then, there exists $r > 0$ such that
+
+   $$
+   (\bx + r B ) \cap \affine (A + \ba) \subseteq A + \ba.
+   $$
+1. Let $\by = \bx - \ba$. 
+1. Since $\bx \in A + \ba$ hence $\by \in A$.
+1. Consider the set:
+
+   $$
+   R = (\by + r B) \cap \affine A.
+   $$
+1. We have
+
+   $$
+   R + \ba &= ((\by + r B) \cap \affine A) + \ba\\
+   &\subseteq ((\by + r B) + \ba) \cap ((\affine A) + \ba)\\
+   &= (\bx + r B) \cap (\affine (A + \ba))\\
+   &\subseteq A + \ba.
+   $$
+   1. Recall that $(C \cap D) + E \subseteq (C + E) \cap (D + E)$.
+   1. $(\affine A) + \ba = \affine (A + \ba)$ since
+      translation which is an affine transformation
+      preserves affine hulls ({prf:ref}`res-la-aff-func-aff-hull`).
+1. Thus, $R + \ba \subseteq A + \ba$.
+1. Thus, $R \subseteq A$.
+1. Thus, $\by \in \relint A$.
+1. Thus, $\bx - \ba \in \relint A$.
+1. Thus, $\bx \in \relint A + \ba$.
+
+Thus, $\relint (A + \ba) \subseteq \relint A + \ba$.
+
+For the converse, assume that
+$\bx \in \relint A + \ba$.
+
+1. Then, $\bx - \ba \in \relint A$.
+1. Let $\by = \bx - \ba$.
+1. Then, there exists $r > 0$ such that
+
+   $$
+   (\by + r B ) \cap \affine A \subseteq A.
+   $$
+1. Consider the set
+
+   $$
+   R = (\bx + r B) \cap \affine (A + \ba).
+   $$
+
+1. We have
+
+   $$
+   R - \ba &= ((\bx + r B) \cap \affine (A + \ba)) - \ba\\
+   &\subseteq ((\bx + r B) - \ba) \cap ((\affine (A + \ba)) - \ba)\\
+   &= (\by + r B) \cap (\affine (A + \ba) - \ba)\\
+   &= (\by + r B) \cap \affine A\\
+   &\subseteq A.
+   $$
+1. Thus, $R - \ba \subseteq A$.
+1. Thus, $R \subseteq A + \ba$.
+1. Thus, $\bx \in \relint (A + \ba)$.
+
+Thus, $\relint A + \ba \subseteq \relint (A + \ba)$.
+
+Together, we have
+
+$$
+\relint A + \ba = \relint (A + \ba)
+$$
+```
+
+## Convex Sets
+
+Relative interiors play the role of interiors for convex sets.
+Much of the following discussion is focused on the relative
+interiors of convex sets (in finite dimensional real normed linear spaces).
+
+```{prf:theorem}
+:label: res-cvx-nonempty-relint
+
+If $C$ is a nonempty convex set, then its relative interior
+is nonempty.
+```
+
+```{prf:proof}
+
+Let $A = \affine C$ and let $\dim A = k$.
+
+1. Choose $k+1$ affine independent points of $C$:
+   $\bv_0, \dots, \bv_k$.
+1. Let $H = \ConvexHull \{\bv_0, \dots, \bv_k \}$ be their convex hull.
+1. Since $C$ is convex, it contains the convex hull $H$;
+   i.e., $H \subseteq C$.
+1. $H$ contains all convex combinations of  $\{\bv_0, \dots, \bv_k \}$.
+1. In particular, it contains the point:
+
+   $$
+   \bv = \frac{1}{k+1} (\bv_0 + \dots + \bv_k).
+   $$
+1. Note that $\bv \in H \subseteq C$.
+1. Note that $A = \affine C = \affine \{\bv_0, \dots, \bv_k \} = \affine H$.
+1. Thus, we can select a sufficiently small $r > 0$ 
+   such that all points in $B(\bv, r) \cap A$ are contained in $H$.
+1. But then, $B(\bv, r) \subseteq H \subseteq C$.
+1. Thus, $\bv \in C$ and $B(\bv, r) \cap A \subseteq C$. 
+1. Thus, $\bv \in \relint C$.
+1. Thus, the relative interior of $C$ is nonempty.
+```
+
+
+### Line Segment Property
 
 ```{prf:theorem} Line segment property of relative interior
 :label: res-cvx-convex-relint-segment
@@ -313,6 +491,7 @@ lies inside the relative interior of $C$.
 
 Several topological properties follow.
 
+
 ```{prf:theorem} Closure of relative interior
 :label: res-cvx-relint-closure
 
@@ -346,62 +525,22 @@ $$
 $$ 
 ```
 
+```{prf:theorem} Relative interior of closure
+:label: res-cvx-closure-relint
 
-## Translations
-
-```{prf:theorem}
-:label: res-cvx-relint-translation-pres
-
-Let $\VV$ be a normed linear space.
-Let $\ba \in \VV$ be some fixed vector.
-Let a translation map $g_a : \VV \to \VV$ be defined as
+For any convex set $C$, 
 
 $$
-g_a = \bx + \ba \Forall \bx \in \VV.
-$$
-
-Then, for any set $A \subseteq \VV$,
-
-$$
-g_a (\relint A) = \relint (g_a (A)).
-$$
-
-In other words,
-
-$$
-\relint (A + \ba) = (\relint A)  + \ba.
+\relint \closure C = \relint C.
 $$
 ```
 
 ```{prf:proof}
 
-Let $\bx \in \relint (A + \ba)$.
-Then, there exists $r > 0$ such that
+Since $C \subseteq \closure C$, hence $\relint C \subseteq \relint \closure C$.
 
-$$
-(\bx + r B ) \cap \affine (A + \ba) \subseteq A + \ba.
-$$
-
-Now,
-
-$$
-& (\bx + r B ) \cap \affine (A + \ba) \subseteq A + \ba \\
-& \iff ((\bx + r B ) \cap \affine (A + \ba)) - \ba \subseteq A \\
-& \iff (\bx + r B - \ba) \cap (\affine (A + \ba) - \ba) \subseteq A \\
-& \iff ((\bx - \ba) + r B) \cap \affine A \subseteq A.
-$$
-We used the fact that set addition (and subtraction) distributes over
-intersection.
-We also used the fact that translation which is an affine transformation
-preserves affine hulls ({prf:ref}`res-la-aff-func-aff-hull`).
-
-Thus, $\bx \in \relint (A + \ba)$ if and only if $\bx - \ba \in \relint A$. 
-
-Thus, $\bx \in \relint (A + \ba)$ if and only if $\bx \in \relint A + \ba$. 
-
-We are done.
+For the other direction
 ```
-
 
 ## Affine Transformations
 
