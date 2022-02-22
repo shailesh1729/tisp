@@ -80,6 +80,36 @@ $$
 
 
 ## Relative Interior
+One way to think about relative interiors is 
+to think in terms of subspace topology.
+If $\VV$ is a normed linear space, then
+it is a metric space. For any set $C \subseteq \VV$
+let $A = \affine C$. Then, we can consider the
+subspace topology by restricting the norm
+$\| \cdot \| : \VV \to \RR$ to the affine hull $A$.
+In terms of subspace topology,
+if some set $X$ is open in $\VV$, then
+$X \cap A$ is relatively open in $A$.
+
+A set $C$ may have an empty interior
+and yet may have a nonempty relative interior.
+For example, consider a face of a cube in
+$\RR^3$. While the cube has a nonempty interior,
+the face has an empty interior as no open ball
+is contained inside the face.
+But, in terms of the subspace topology of the
+affine hull of the face, the face indeed
+as a nonempty relative interior.
+
+Often, a convex set lies in a low dimensional
+(affine or linear) subspace of the ambient vector space.
+Thus, the interior of the convex set is empty.
+At the same time, the relative interior of the set
+(w.r.t. its affine hull) need not be empty.
+It plays a similar topological role as the interior of a set.
+We develop some fundamental results on the relative
+interiors of convex sets in the sequel.
+
 
 ```{prf:definition} Relative interior point
 :label: def-cvx-relative-interior-point
@@ -97,6 +127,7 @@ $$
 Note that, the open ball $B(\bx, r)$ itself need not be
 contained inside $C$.
 
+
 ```{prf:definition} Relative interior
 :label: def-cvx-relative-interior
 
@@ -109,17 +140,11 @@ $$
 B(\bx, r) \cap \affine C \subseteq C \}.
 $$
 ```
-
-$C$ may have an empty interior
-and yet may have a nonempty relative interior.
-Often, a convex set lies in a low dimensional
-(affine or linear) subspace of the ambient vector space.
-Thus, the interior of the convex set is empty.
-At the same time, the relative interior of the set
-(w.r.t. its affine hull) need not be empty.
-It plays a similar topological role as the interior of a set.
-We develop some fundamental results on the relative
-interior of a convex set.
+The basic definition of relative interior doesn't require
+$\VV$ to be finite dimensional. 
+However, several results in the sequel do depend
+on $\VV$ being finite dimensional. We will 
+clearly state this as and when required.
 
 
 ```{prf:theorem} Relative interiors are subset
@@ -257,8 +282,17 @@ $$
 ```{prf:theorem} Affine sets are relatively open
 :label: res-cvx-affine-relative-open
 
-An affine set is relatively open.
+Let $\VV$ be a real finite dimensional normed linear space.
+
+Any affine set in $\VV$ is relatively open.
+In other words, if $A$ is affine, then
+
+$$
+\relint A = A.
+$$
 ```
+Note that this result doesn't require $\VV$ to be
+finite dimensional.
 
 ```{prf:proof}
 Let $A$ be an affine set. Then, $\affine A = A$.
@@ -734,6 +768,83 @@ $$
 $$
 We are done.
 ```
+
+### Finite Intersections
+
+```{prf:theorem} Finite intersections preserve closure
+:label: res-cvx-convex-intersect-finite-closure
+
+Let $\VV$ be a real finite dimensional normed linear space.
+
+Let $C_1, \dots, C_n$ be convex subsets of $\VV$
+such that $\cap_i \relint C_i \neq \EmptySet$.
+Then,
+
+$$
+\closure \left( \bigcap_{i=1}^n C_i \right)
+= \bigcap_{i=1}^n \closure C_i.
+$$ 
+```
+
+
+```{prf:theorem} Finite intersections preserve relative interior
+:label: res-cvx-convex-intersect-finite-interior
+
+Let $\VV$ be a real finite dimensional normed linear space.
+
+Let $C_1, \dots, C_n$ be convex subsets of $\VV$
+such that $\cap_i \relint C_i \neq \EmptySet$.
+Then,
+
+$$
+\relint \left( \bigcap_{i=1}^n C_i \right)
+= \bigcap_{i=1}^n \relint C_i.
+$$ 
+```
+
+
+```{prf:theorem}
+
+Let $\VV$ be a real finite dimensional normed linear space.
+Let $C$ be a convex set of $\VV$ and $M$ be an affine set
+of $\VV$ such that $M$ has a nonempty intersection with
+$\relint C$. Then,
+
+$$
+\relint (M \cap C) = M \cap \relint C.
+$$
+
+Also,
+
+$$
+\closure (M \cap C) = M \cap \closure C.
+$$
+```
+
+```{prf:proof}
+Since $\VV$ is finite dimensional, hence
+
+$$
+\relint M = \closure M = M
+$$
+due to {prf:ref}`res-la-affine-closed` 
+and {prf:ref}`res-cvx-affine-relative-open`.
+
+Now, by {prf:ref}`res-cvx-convex-intersect-finite-interior`:
+
+$$
+\relint (M \cap C)  = (\relint M) \cap (\relint C) 
+= M \cap \relint C.
+$$
+
+Similarly, by {prf:ref}`res-cvx-convex-intersect-finite-closure`,
+
+$$
+\closure (M \cap C)  = (\closure M) \cap (\closure C) 
+= M \cap \closure C.
+$$
+```
+
 
 ## Affine Transformations
 
