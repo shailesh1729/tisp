@@ -136,7 +136,8 @@ Let $D = \interior C$. Assume that $C$ is convex.
 1. Fix some $t \in (0, 1)$.
 1. Since $C$ is convex, hence $tC + (1-t)C \subseteq C$.
 1. Hence, $tD + (1-t)D \subseteq C$.
-1. Since $D$ is open, hence $tD$ is open.
+1. Since $D$ is open, hence $tD$ is open
+   ({prf:ref}`res-la-ns-scaling-homeomorphism`).
 1. Then, $tD + (1-t)D$ is also open
    as sum of an open set with any set is open
    ({prf:ref}`res-la-sum-open-sets`).
@@ -300,6 +301,89 @@ $$
 ```{prf:proof}
 This follows directly from the definition of
 relative interior.
+```
+
+
+Basic arithmetic of balls relative to the affine hull
+will be useful later on.
+```{prf:theorem} Relative ball arithmetic
+:label: res-cvx-rel-ball-arithmetic
+Let $\VV$ be a real normed linear space.
+Let $A$ be an affine set and $\bx \in A$.
+Let $L$ be the linear subspace parallel to $A$ given by
+$L = A - A = A - \bx$. Let $r > 0$.
+Then,
+
+$$
+(B(\bx, r) \cap A) - \bx = B(\bzero, r) \cap L.
+$$
+Alternatively,
+
+$$
+B(\bx, r) \cap A  = (B(\bzero, r) \cap L) + \bx.
+$$
+
+For any $\bx, \by \in A$,
+
+$$
+(B(\bx, r) \cap A) - \bx = (B(\by, r) \cap A) - \by. 
+$$
+```
+In the simplified notation,
+
+$$
+((\bx + r B) \cap A) - \bx = r B \cap L.
+$$
+
+Alternatively,
+
+$$
+(\bx + r B) \cap A = (r B \cap L) + \bx.
+$$
+
+And for any $\bx, \by \in A$
+
+$$
+((\bx + r B) \cap A) - \bx = ((\by + r B) \cap A) - \by.
+$$
+
+
+```{prf:proof}
+We first show that $(B(\bx, r) \cap A) - \bx \subseteq B(\bzero, r) \cap L
+$.
+
+1. Let $\bv \in (B(\bx, r) \cap A) - \bx$.
+1. Then, $\bv + \bx \in B(\bx, r) \cap A$.
+1. Thus, $\bv + \bx \in B(\bx, r)$ and $\bv + \bx \in A$.
+1. Thus, $\bv \in B(\bzero, r)$ and $\bv \in A - \bx = L$.
+1. Thus, $\bv \in B(\bzero, r) \cap L$.
+
+We now show the converse.
+
+1. Let $\bv \in B(\bzero, r) \cap L$.
+1. Then, $\bv \in B(\bzero, r)$ and $\bv \in L$.
+1. Then, $\bv + \bx \in B(\bx, r)$ and $\bv + \bx \in L + \bx = A$.
+1. Then, $\bv + \bx \in B(\bx, r) \cap A$.
+1. Thus, $\bv \in (B(\bx, r) \cap A) - \bx$.
+1. Thus, $B(\bzero, r) \cap L \subseteq (B(\bx, r) \cap A) - \bx$.
+
+We have shown that
+
+$$
+(B(\bx, r) \cap A) - \bx = B(\bzero, r) \cap L.
+$$
+
+Similarly, for any other $\by \in A$
+
+$$
+(B(\by, r) \cap A) - \by = B(\bzero, r) \cap L.
+$$
+
+Thus, 
+
+$$
+(B(\bx, r) \cap A) - \bx = (B(\by, r) \cap A) - \by. 
+$$
 ```
 
 ```{prf:theorem} Relative interior and interior
@@ -633,11 +717,79 @@ $$
 $$
 ```
 
-## Convex Sets
+## Relative Interiors of Convex Sets
 
 Relative interiors play the role of interiors for convex sets.
 Much of the following discussion is focused on the relative
 interiors of convex sets (in finite dimensional real normed linear spaces).
+
+
+```{prf:theorem} Relative interior of a convex set is convex
+:label: res-cvx-convex-relint-is-convex
+
+Let $\VV$ be a real normed linear space.
+If $C$ is a convex set of $\VV$, then its relative interior
+is a convex set.
+```
+```{prf:proof}
+If $C = \EmptySet$, then, $\relint C = \EmptySet$ is convex.
+So, assume that $C$ is nonempty.
+
+1. Let $A = \affine C$ be the affine hull of $C$. 
+1. Let $U = \relint C$ be the relative interior of $C$.
+1. Let $L = A - A$ be the linear subspace parallel to $A$.
+1. Choose $\bx, \by \in U$. Then, $\bx, \by \in U \subseteq C \subseteq A$.
+1. Then, there exist open balls $B(\bx, r_x)$ and $B(\by, r_y)$
+   such that
+
+   $$
+   B(\bx, r_x) \cap A \subseteq C
+   \text{ and }
+   B(\by, r_y) \cap A \subseteq C
+   $$
+1. Let $t \in (0,1)$.
+1. Let $\bz = t \bx + (1-t)\by$. Note that $\bz \in C \subseteq A$
+   since $\bx, \by \in C$ and $\bz$ is their convex combination.
+1. Choose $r = \min(r_x, r_y)$.
+   We shall show that
+
+   $$
+   B(\bz, r) \cap A \subseteq C.
+   $$
+   Thus, we shall show that $\bz \in \relint C$.
+1. Towards this, pick any $\bw \in  B(\bz, r) \cap A$.
+1. Let $\bw = \bz + \ba$.
+1. $\bw = \bz + \ba \in B(\bz, r) \implies \ba \in B(\bzero, r)$.
+1. $\bw = \bz + \ba \in A \implies \ba \in A - \bz = L$.
+1. Thus, $\| \ba \| < r$ and $\ba \in L$.
+1. Let $\bu = \bx + \ba$.
+1. Then, $\bu \in L + \bx = A$ and $\bu \in B(\bx, r) \subseteq B(\bx, r_x)$.
+1. Thus, $\bu \in B(\bx, r_x) \cap A \subseteq C$. 
+1. Let $\bv = \by + \ba$.
+1. Then, $\bv \in L + \by = A$ and $\bv \in B(\by, r) \subseteq B(\by, r_y)$.
+1. Thus, $\bv \in B(\by, r_y) \cap A \subseteq C$. 
+1. Now,
+
+   $$
+   \bw = \bz + \ba = t \bx + (1-t)\by + \ba 
+   = t (\bx + \ba) + (1-t) (\by + \ba)
+   = t \bu + (1-t) \bv.
+   $$
+1. Thus, $\bw$ is a convex combination of $\bu$ and $\bv$.
+1. Since both $\bu$ and $\bv$ are in $C$,
+   hence $\bw \in C$ as $C$ is convex.
+1. We have shown that for every $\bw \in B(\bz, r) \cap A$, 
+   $\bw \in C$.
+1. Consequently, 
+
+   $$
+   B(\bz, r) \cap A \subseteq C.
+   $$
+1. Thus, $\bz \in \relint C = U$.
+1. Thus, for every $\bx, \by \in U$ and $t \in (0,1)$,
+   $\bz = t \bx  + (1-t) \by \in U$.
+1. Thus, $U$ is convex.
+```
 
 
 ### Nonempty Relative Interiors
@@ -645,6 +797,7 @@ interiors of convex sets (in finite dimensional real normed linear spaces).
 ```{prf:theorem} Nonempty relative interiors
 :label: res-cvx-nonempty-relint
 
+Let $\VV$ be a real normed linear space.
 If $C$ is a nonempty convex set, then its relative interior
 is nonempty.
 ```
