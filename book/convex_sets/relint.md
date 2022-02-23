@@ -1314,7 +1314,7 @@ $$
 $$
 ```
 
-## Affine Transformations
+### Affine Transformations
 
 ```{prf:theorem}
 :label: res-cvx-relint-aff-map-pres
@@ -1328,3 +1328,96 @@ T (\relint A) = \relint (T (A)).
 $$
 ```
 
+
+
+## Separation Theorems
+
+
+```{prf:definition} Separating hyperplane
+:label: def-cvx-separating-hyperplane
+
+Let $\VV$ be a real $n$-dimensional inner product space.
+For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
+$H$ is said to *separate* $C$ and $D$ if
+$C$ is contained in one of the closed halfspaces
+corresponding to $H$ and $D$ is contained in the other 
+closed halfspace.
+```
+This definition allows for some degenerate possibilities where
+both $C \subseteq H$ and $D \subseteq H$ since the closed
+halfspaces contain $H$ (as their boundary).
+
+```{prf:definition} Proper separation
+:label: def-cvx-proper-separation
+
+Let $\VV$ be a real $n$-dimensional inner product space.
+For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
+$H$ is said to *properly separate* $C$ and $D$ if
+$H$ separates them and both are not entirely contained
+in $H$; i.e., $C \not\subseteq H$ and $D \not\subseteq H$.
+```
+Proper separation still allows for the possibility that
+part of $C$ or $D$ lies inside $H$.
+
+```{prf:definition} Strong separation
+:label: def-cvx-strong-separation
+
+Let $\VV$ be a real $n$-dimensional inner product space.
+For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
+$H$ is said to *strongly separate* $C$ and $D$ if
+there exists an $r > 0$ such that 
+$C + r B$ is contained in one of the open halfspaces
+corresponding to $H$ and $D + rB$ is contained in the other 
+open halfspace.
+```
+```{div}
+Under these assumptions, one set lies in the interior of $H_{++}$
+and the other set lies in the interior of $H_{--}$.
+```
+
+
+```{prf:theorem} Separating hyperplane theorem
+:label: res-cvx-separating-hyperplane
+
+Let $C$ and $D$ be two convex sets in a real vector space $\VV$ that do not intersect;
+i.e., $C \cap D = \EmptySet$. 
+Then, there exists $\ba \in \VV^*$, $\ba \neq \bzero$ and $b \in \RR$ such that 
+
+$$
+\langle \bx, \ba \rangle \leq b \Forall \bx \in C
+$$ 
+and
+
+$$
+\langle \bx, \ba \rangle \geq b \Forall \bx \in D.
+$$
+
+The hyperplane given by $\{ \bx \ST \langle \bx, \ba \rangle = b \}$ is called
+a *separating hyperplane* between $C$ and $D$.
+```
+Note that the theorem implies the existence of a separating hyperplane. It doesn't preclude
+existence of a multitude of such separating hyperplanes.
+
+
+```{prf:proof}
+
+Consider the distance between $C$ and $D$ given by:
+
+$$
+\dist (C, D) = \inf \{ \| \bu - \bv \| \ST \bu \in C, \bv \in D \}.
+$$
+
+
+Assume that $\dist (C, D) > 0$ and there exist $\bc \in C$ and $\bd \in D$ such that
+$\dist (C, D) = \| \bc - \bd \|$.
+
+1. Define $\ba = \bd - \bc$.
+1. Define $b = \frac{1}{2}(\| \bd \|^2 - \| \bc \|^2)$.
+1. Consider the affine function $f(\bx) = \langle \bx, \ba \rangle - b$.
+1. Note that 
+
+   $$
+   f(\bx) = \langle \bx, \bd - \bc \rangle - \frac{1}{2}\langle \bd + \bc, \bd - \bc \rangle
+   = \left \langle \bx - \frac{1}{2}(\bd + \bc), \bd - \bc \right \rangle.
+   $$
+```
