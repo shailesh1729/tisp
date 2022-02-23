@@ -1326,3 +1326,21 @@ Let $(X, d)$ be a metric space.
 A subset $A \subseteq X$ is called *connected* 
 if the metric subspace $(A, d)$ is connected.
 ```
+
+
+## Counter Examples
+
+This subsection is a collection of some examples
+which illustrate some salient aspects of topology.
+
+
+```{prf:example} Empty Interior
+:label: ex-empty-int-closure-nonempty
+
+Consider the set $\RR$ with the usual metric.
+The subset $\QQ$ of rational numbers has 
+an empty interior. 
+But $\closure \QQ = \RR$. Thus, the closure of $\QQ$ 
+doesn't have an empty interior.
+```
+
