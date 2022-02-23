@@ -80,7 +80,7 @@ $$
 $$
 
 
-## Interiors
+## Interior
 
 ```{prf:theorem} Interior of convex sets
 :label: res-cvx-interior-convex-set-convex
@@ -148,9 +148,7 @@ Let $D = \interior C$. Assume that $C$ is convex.
 ```
 
 
-
-
-```{prf:theorem} Convex sets with empty interior
+```{prf:theorem} Affine hull of convex sets with empty interior
 :label: res-cvx-convex-set-empty-interior
 
 Let $\VV$ be an $n$-dimensional real normed linear space.
@@ -182,6 +180,14 @@ $\dim \affine C < n$.
    a nonempty interior.
 1. Thus, the interior of $C$ must be nonempty.
 1. This is a contradiction, hence $\dim A < n$ must be true.
+
+Now, assume that $\dim \affine C < n$.
+
+1. $A$ is a proper subspace of $\VV$.
+1. Then $A$ has an empty interior
+   as per {prf:ref}`res-la-affine-subspace-empty-interior`.
+1. $\interior C \subseteq \interior A$ since $C \subseteq A$.
+1. Thus, $\interior C = \EmptySet$.
 ```
 
 ```{prf:example} Convex sets with empty interiors
@@ -198,7 +204,150 @@ $\dim \affine C < n$.
    has an empty interior.
 ```
 
+```{prf:corollary} Convex sets, empty interior, interior of closure
+:label: res-cvx-convex-empty-int-cl-int
+
+Let $\VV$ be an $n$-dimensional real normed linear space.
+Let $C$ be a nonempty convex set of $\VV$. 
+If $C$ has an empty interior then so does its closure.
+
+$$
+\interior C = \EmptySet \implies \interior \closure C = \EmptySet.
+$$
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. Let $A = \affine C$.
+1. Since $\interior C = \EmptySet$ hence $\dim A = d < n$
+   due to {prf:ref}`res-cvx-convex-set-empty-interior` above.
+1. Now $\closure C \subseteq A$ since $A$ is closed
+   ({prf:ref}`res-la-affine-closed`).
+1. Thus, $\interior \closure C \subseteq \interior A$.
+1. But then $A$ has an empty interior
+   as per {prf:ref}`res-la-affine-subspace-empty-interior`.
+1. Thus, $\interior \closure C = \EmptySet$.
+```
+
+
+```{prf:theorem} General line segment property for convex sets
+:label: res-cvx-convex-interior-segment
+
+Let $\VV$ be a real $n$-dimensional normed linear space.
+Let $C$ be a nonempty convex subset of $\VV$. 
+Let $\bx \in \interior C$
+and $\by \in \closure C$. Then, 
+
+$$
+(1-t) \bx + t \by \in \interior C \Forall t \in [0,1).
+$$
+```
+
+```{prf:proof}
+Let $C$ be a convex set. Fix some $t \in [0,1)$.
+
+1. Let $\bz = (1-t) \bx + t \by$. 
+   It suffices to show that there is an open ball
+   $\bz + rB \subseteq C$.
+1. Since $\by \in \closure C$, hence for every $r > 0$, 
+   we have $\by \in C + r B$.
+1. Then,
+
+   $$
+   \bz + r B &= (1-t)\bx + t \by + r B \\
+   &\subseteq (1-t)\bx + t (C + r B) + r B \\
+   &= (1-t)\bx + (1 + t) rB + t C\\
+   & = (1 -t)(\bx + r (1+t)(1-t)^{-1} B) + t C.
+   $$
+1. Since $\bx \in \interior C$, hence we can take $r$ to be so small 
+   such that
+
+   $$
+   \bx + r (1+t)(1-t)^{-1} B \subseteq C.
+   $$
+1. But then
+
+   $$
+   (1 -t)(\bx + r (1+t)(1-t)^{-1} B) + t C 
+   &\subseteq (1 -t) C + t C\\ 
+   &\subseteq C
+   $$
+   since $C$ is convex and $t \in [0,1)$.
+1. Thus, we established that there exists an $r > 0$ 
+   such that $\bz + r B \subseteq C$.
+1. Hence, $\bz \in \interior C$.
+```
+
+
+
+```{prf:theorem} Interior of closure
+:label: res-cvx-convex-closure-interior
+
+Let $\VV$ be an $n$-dimensional real normed linear space.
+For any convex set $C \subseteq \VV$ 
+
+$$
+\interior C = \interior \closure C.
+$$
+```
+
+
+```{prf:proof}
+The statement is trivial for $C = \EmptySet$. We shall
+assume that $C$ is nonempty. Further,
+if $\interior C = \EmptySet$, then $\interior \closure C = \EmptySet$
+due to {prf:ref}`res-cvx-convex-empty-int-cl-int` above.
+We shall assume that $\interior C$ is nonempty.
+
+Since $C \subseteq \closure C$, hence 
+$\interior C \subseteq \interior \closure C$.
+
+
+For the converse, assume that $\bx \in \interior \closure C$.
+Our goal is to show that $\bx \in \interior C$. 
+
+1. We have, $\bx \in \closure C$ and there exists $r > 0$ such that
+
+   $$
+   (\bx + r B) \subseteq \closure C.
+   $$
+1. Choose a point $\by \in \interior C$.
+1. Let $t = \frac{r}{2\| \bx - \by \|}$.
+1. Define
+   
+   $$
+   \bz = (1 + t) \bx - t \by.
+   $$
+1. Note that
+
+   $$
+   d(\bz, \bx) &= \| \bz - \bx \|\\
+   &= \|(1 + t) \bx - t \by - \bx \|\\
+   &= t \| \bx - \by \| = \frac{r}{2}.
+   $$
+1. Hence, $\bz \in B(\bx, r) \subseteq \closure C$.
+1. We have found the points $\by \in \interior C$ and $\bz \in \closure C$.
+1. Now note that, 
+
+   $$
+   \bx = \frac{t}{1+t} \by + \frac{1}{1+t} \bz.
+   $$
+1. Thus, $\bx$ is a convex combination of $\by$ and $\bz$.
+1. Since $t > 0$,  hence $\bx$ lies in the line segment 
+   between $\bz$ and $\by$.
+1. Hence, $\bx \in \interior C$ 
+   due to {prf:ref}`res-cvx-convex-interior-segment`
+   (line segment property for interior of convex sets).
+
+Thus, we have shown that $\interior \closure C \subseteq \interior C$
+as desired.
+```
+
+
+
 ## Relative Interior
+
 One way to think about relative interiors is 
 to think in terms of subspace topology.
 If $\VV$ is a normed linear space, then
@@ -845,44 +994,18 @@ $$
 ```
 
 ```{prf:proof}
-Let $C$ be a convex set. Fix some $t \in [0,1)$.
+This is a restatement of the line segment property 
+for interior of a convex set as described in 
+{prf:ref}`res-cvx-convex-interior-segment`.
+
 For simplicity, we shall assume that $\relint C = \interior C$.
-Let $B$ denote the unit open ball $B(\bzero, 1)$.
-
-1. Let $\bz = (1-t) \bx + t \by$. 
-   It suffices to show that there is an open ball
-   $B(\bz, r) \subseteq C$.
-1. Since $\by \in \closure C$, hence for every $r > 0$, 
-   we have $\by \in C + r B$.
-1. Then,
-
-   $$
-   \bz + r B &= (1-t)\bx + t \by + r B \\
-   &\subseteq (1-t)\bx + t (C + r B) + r B \\
-   &= (1-t)\bx + (1 + t) rB + t C\\
-   & = (1 -t)(\bx + r (1+t)(1-t)^{-1} B) + t C.
-   $$
-1. Since $\bx \in \interior C$, hence we can take $r$ to be so small 
-   such that
-
-   $$
-   \bx + r (1+t)(1-t)^{-1} B \subseteq C.
-   $$
-1. But then
-
-   $$
-   (1 -t)(\bx + r (1+t)(1-t)^{-1} B) + t C 
-   &\subseteq (1 -t) C + t C\\ 
-   &\subseteq C
-   $$
-   since $C$ is convex and $t \in [0,1)$.
-1. Thus, we established that there exists an $r > 0$ 
-   such that $\bz + r B \subseteq C$.
-1. Hence, $\bz \in \interior C = \relint C$.
+Then, the proof of {prf:ref}`res-cvx-convex-interior-segment`
+applies directly.
 
 This argument can be extended for the case where
 $\relint C \neq \interior C$.
 ```
+
 One way to interpret this result is as follows.
 If we draw a line segment between a point
 in the relative interior of a convex set $C$
