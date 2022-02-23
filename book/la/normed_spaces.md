@@ -552,58 +552,6 @@ is the collection of all its closure points.
 ```
 
 
-## Open Sets
-
-```{prf:theorem}
-:label: res-la-sum-open-sets
-
-If $A$ and $B$ are open, then their sum $A+B$ is open.
-```
-```{prf:proof}
-
-Let $x \in B$. Then the set $x + A$ is open since $A$ is open.
-Then,
-
-$$
-A + B = \bigcup_{x \in B} x + A
-$$
-is a union of open sets. Hence, it is open.
-```
-
-## Closed Sets
-
-```{prf:theorem}
-:label: res-la-sum-closed-compact
-
-If $A$ is closed and $B$ is compact, then their sum $A+B$ is closed.
-```
-```{prf:proof}
-Let $\{z_n\}$ with $z_n = a_n + b_n \in A + B$ be a convergent sequence of $A+B$
-where $a_n \in A$ and $b_n \in B$.
-
-1. $\{a_n \}$ is a sequence of $A$.
-1. $\{b_n \}$ is a sequence of $B$.
-1. Let $\lim z_n = z$.
-1. Since $B$ is compact, $\{b_n\}$ has a convergent subsequence, 
-   say $\{b_{k_n}\}$ ({prf:ref}`def-ms-compact-characterization`).
-1. Let $\lim b_{k_n} = l \in B$.
-1. Now consider the sequence $\{a_{k_n}\}$ given by $a_{k_n} = z_{k_n} - b_{k_n}$.
-1. $\{z_{k_n}\}$ is convergent since it is a subsequence of a convergent sequence
-   ({prf:ref}`res-ms-subsequence-convergence`).
-1. Since $\{z_{k_n}\}$ and $\{b_{k_n}\}$ are both convergent, 
-   hence $\{a_{k_n}\}$ is also convergent.
-1. Let $\lim a_{k_n} = m$. 
-1. Since $A$ is closed. Hence $m \in A$
-   ({prf:ref}`res-ms-closure-convergence`).
-1. Now, $\lim a_{k_n} = \lim z_{k_n} - \lim b_{k_n}$ gives us $m = z - l$.
-1. Thus, $z = m + l$.
-1. But $m \in A$ and $l \in B$.
-1. Hence, $z \in A + B$.
-1. Thus, every convergent sequence of $A + B$ converges in $A+B$.
-1. Thus, $A+B$ is closed. ({prf:ref}`res-ms-closure-convergence`).
-
-```
-
 
 ## Continuity
 
@@ -753,6 +701,63 @@ Assume that $A$ has an interior point $\bx \in A$.
 Thus, if $g_a(A)$ has an empty interior then $A$ must
 have an empty interior. The converse can be proved
 by using the inverse translation $g_{-a}$.
+```
+
+## Open Sets
+
+```{prf:theorem} Sum of an open set with any set is open
+:label: res-la-sum-open-sets
+Let $\VV$ be a normed linear space. Let $A, B \subseteq \VV$.
+If $A$ is open, then the sum $A+B$ is open.
+```
+```{prf:proof}
+
+We proceed as follows:
+
+1. Let $x \in B$. 
+1. Then the set $x + A$ is open since $A$ is open
+   and translations preserve open sets 
+   ({prf:ref}`res-la-ns-translation-preserve-topology`).
+1. Then,
+
+   $$
+   A + B = \bigcup_{x \in B} x + A
+   $$
+   is a union of open sets. Hence, it is open.
+```
+
+## Closed Sets
+
+```{prf:theorem}
+:label: res-la-sum-closed-compact
+
+If $A$ is closed and $B$ is compact, then their sum $A+B$ is closed.
+```
+```{prf:proof}
+Let $\{z_n\}$ with $z_n = a_n + b_n \in A + B$ be a convergent sequence of $A+B$
+where $a_n \in A$ and $b_n \in B$.
+
+1. $\{a_n \}$ is a sequence of $A$.
+1. $\{b_n \}$ is a sequence of $B$.
+1. Let $\lim z_n = z$.
+1. Since $B$ is compact, $\{b_n\}$ has a convergent subsequence, 
+   say $\{b_{k_n}\}$ ({prf:ref}`def-ms-compact-characterization`).
+1. Let $\lim b_{k_n} = l \in B$.
+1. Now consider the sequence $\{a_{k_n}\}$ given by $a_{k_n} = z_{k_n} - b_{k_n}$.
+1. $\{z_{k_n}\}$ is convergent since it is a subsequence of a convergent sequence
+   ({prf:ref}`res-ms-subsequence-convergence`).
+1. Since $\{z_{k_n}\}$ and $\{b_{k_n}\}$ are both convergent, 
+   hence $\{a_{k_n}\}$ is also convergent.
+1. Let $\lim a_{k_n} = m$. 
+1. Since $A$ is closed. Hence $m \in A$
+   ({prf:ref}`res-ms-closure-convergence`).
+1. Now, $\lim a_{k_n} = \lim z_{k_n} - \lim b_{k_n}$ gives us $m = z - l$.
+1. Thus, $z = m + l$.
+1. But $m \in A$ and $l \in B$.
+1. Hence, $z \in A + B$.
+1. Thus, every convergent sequence of $A + B$ converges in $A+B$.
+1. Thus, $A+B$ is closed. ({prf:ref}`res-ms-closure-convergence`).
+
 ```
 
 ## Boundedness
