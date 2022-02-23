@@ -703,6 +703,103 @@ have an empty interior. The converse can be proved
 by using the inverse translation $g_{-a}$.
 ```
 
+### Scalar Multiplication
+
+```{prf:theorem} Scalar multiplication is uniformly continuous 
+:label: res-la-ns-scaling-is-continuous
+
+Let $(\VV, \| \cdot \|)$ be a normed linear space.
+Let $t \in \FF$.
+Let a scalar multiplication map $g_t : \VV \to \VV$ be defined as
+
+$$
+g_t = t \bx \Forall \bx \in \VV.
+$$
+Then, $g_t$ is uniformly continuous.
+```
+
+```{prf:proof}
+If $t=0$, then $g_t(\bx) = \bzero$ for all $\bx \in \VV$ 
+so it is trivially uniformly continuous.
+
+Assume $t \neq 0$.
+
+1. Let $\epsilon > 0$. 
+1. Choose $ \delta = \frac{\epsilon}{|t|}$.
+1. Now, for any $\bx, \by \in \VV$
+
+   $$
+   \| g_t(\bx) - g_t(\by)\|
+   = \| t \bx - t \by \|
+   = \| t (\bx - \by)\|
+   = |t | \| \bx - \by \|.
+   $$
+1. Thus, $\| \bx - \by \| < \delta$ implies
+
+   $$
+   \| g_t(\bx) - g_t(\by)\| < | t | \delta = \epsilon.
+   $$
+1. Thus, $g_t$ is uniformly continuous.
+```
+
+```{prf:theorem} Scalar multiplication preserves topology 
+:label: res-la-ns-scaling-homeomorphism
+
+Let $(\VV, \| \cdot \|)$ be a normed linear space.
+Let $t \in \FF$ be nonzero (i.e., $t \neq 0$).
+Let a scalar multiplication map $g_t : \VV \to \VV$ be defined as
+
+$$
+g_t = t \bx \Forall \bx \in \VV.
+$$
+Then, $g_t$ is a
+{prf:ref}`homeomorphism <def-ms-homeomorphism>`.
+Consequently,
+
+1. $A$ is open if and only if $g_t(A)$ is open.
+1. $A$ is closed if and only if $g_t(A)$ is closed.
+1. $A$ is compact if and only if $g_t(A)$ is compact.
+1. $A$ has an empty interior if and only if $g_t(A)$ has an empty interior.
+```
+
+```{prf:proof}
+We first show that $g_t$ is a homeomorphism.
+Since $t \neq 0$, let $r = \frac{1}{t}$. 
+
+1. $g_t$ is uniformly continuous 
+   by {prf:ref}`res-la-ns-scaling-is-continuous`.
+1. Then, $g_r$ is also uniformly continuous 
+   by {prf:ref}`res-la-ns-scaling-is-continuous`.
+1. Note that 
+
+   $$
+   g_r(g_t)(\bx) = g_t(g_r(\bx)) = \bx \Forall \bx \in \VV.
+   $$
+1. Thus, $g_t$ is bijective and $g_r$ is its inverse.
+1. Since $g_t$ is bijective, $g_t$ is continuous,
+   and its inverse $g_r$ is continuous,
+   hence $g_t$ is a {prf:ref}`homeomorphism <def-ms-homeomorphism>`. 
+1. Morever, $g_r$ is also a homeomorphism.
+
+By {prf:ref}`res-ms-homeomorphism-clopen-map`,
+$g_t$ and $g_r$ are both a
+closed mapping (mapping closed sets to closed sets)
+and an open mapping (mapping open sets to open sets).
+Consequently,
+
+1. $A$ is open if and only if $g_t(A)$ is open.
+1. $A$ is closed if and only if $g_t(A)$ is closed.
+
+Due to {prf:ref}`res-ms-compact-homeomorphism-pres`
+(homeomorphisms preserve compact sets)
+$A$ is compact if and only if $g_t(A)$ is compact.
+
+Due to {prf:ref}`res-ms-homeomorphism-interior`,
+homeomorphisms preserve interiors.
+Hence, $A$ has an empty interior 
+if and only if $g_t(A)$ has an empty interior.
+```
+
 ## Open Sets
 
 ```{prf:theorem} Sum of an open set with any set is open
