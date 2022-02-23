@@ -80,6 +80,123 @@ $$
 $$
 
 
+## Interiors
+
+```{prf:theorem} Interior of convex sets
+:label: res-cvx-interior-convex-set-convex
+
+Let $\VV$ be a real normed linear space.
+Let $C$ be a nonempty convex set of $\VV$.
+Then, its interior is convex.
+```
+
+```{prf:proof}
+Let $D = \interior C$. Assume that $C$ is convex.
+
+1. Let $\bx, \by \in D$ and $t \in (0,1)$.
+   We need to show that $\bz = t \bx + (1-t)\by \in D$.
+1. Since $\bx \in D$, there exists an 
+   open ball $B(\bx, r) \subseteq C$.
+1. Let Consider the open ball $B(\bz, t r)$ radius $tr$ around $\bz$.
+1. Let $\bv \in B(\bz, t r)$.
+1. Let
+   
+   $$
+   \bu = \frac{1}{t} \bv - \frac{1-t}{t} \by.
+   $$
+   We can choose such a point $\bu \in \VV$ since $t$ is nonzero.
+1. Then,
+   $\bv = t \bu + (1-t) \by$.
+1. Note that
+
+   $$
+   \| t (\bu - \bx) \| 
+   &= \| t\bu - t \bx \| \\
+   &= \| \bv - (1-t)\by - (\bz - (1-t)\by) \|\\
+   &= \| \bv - \bz \| \\
+   & < t r
+   $$
+   since $\bv \in B(\bz, tr)$.
+1. Thus, $\| \bu - \bx \| < r$.
+1. Thus, $\bu \in B(\bx, r)$.
+1. Thus, $\bv \in C$ as it is a convex combination of $\bu$ and $\by$.
+1. Since this holds true for every $\bv \in B(\bz, tr)$,
+   hence $B(\bz, t r) \subseteq C$.
+1. Thus, there is an open ball of radius $tr$ around $\bz$ contained in $C$.
+1. Thus, $\bz \in \interior C = D$.
+1. We have shown that for any $\bx, \by \in D$ and $t \in (0,1)$,
+   $\bz = t \bx + (1-t)\by \in D$.
+1. Thus, $D$ is convex.
+```
+We provide a shorter but more technical proof.
+
+```{prf:proof}
+Let $D = \interior C$. Assume that $C$ is convex.
+
+1. Fix some $t \in (0, 1)$.
+1. Since $C$ is convex, hence $tC + (1-t)C \subseteq C$.
+1. Hence, $tD + (1-t)D \subseteq C$.
+1. Since $D$ is open, hence $tD$ is open.
+1. Then, $tD + (1-t)D$ is also open
+   as sum of an open set with any set is open
+   ({prf:ref}`res-la-sum-open-sets`).
+1. But $D$ is the largest open set contained in $C$.
+1. Thus, $tD + (1-t)D \subseteq D$.
+1. Thus, $D$ contains all its convex combinations.
+1. Thus, $D$ is convex.
+```
+
+
+
+
+```{prf:theorem} Convex sets with empty interior
+:label: res-cvx-convex-set-empty-interior
+
+Let $\VV$ be an $n$-dimensional real normed linear space.
+Let $C$ be a nonempty convex set of $\VV$. 
+If $C$ has an empty interior, then it must
+lie in an affine subspace of dimension less than $n$.
+
+Conversely, if $\dim \affine C < n$, then, $C$
+has an empty interior. 
+```
+
+```{prf:proof}
+We first show that if $C$ has an empty interior, then
+$\dim \affine C < n$.
+
+1. Let $A = \affine C$.
+1. Let $\dim A = d$.
+1. If $d < n$, there is nothing to prove.
+1. For contradiction, assume $d=n$.
+1. Then, it is possible to pick $n+1$ affine independent
+   points from $C$.
+1. Let $\bv_0, \dots, \bv_n$ be one such set of affine
+   independent points of $C$.
+1. Since $C$ is convex, it contains the convex hull
+   $H = \ConvexHull \{\bv_0, \dots, \bv_n \}$;
+   i.e., $H \subseteq C$.
+1. In an $n$ dimensional space, the convex hull
+   of a $n+1$ affine independent points has
+   a nonempty interior.
+1. Thus, the interior of $C$ must be nonempty.
+1. This is a contradiction, hence $\dim A < n$ must be true.
+```
+
+```{prf:example} Convex sets with empty interiors
+:label: ex-cvx-convex-sets-empty-int-1
+
+1. Let $\VV = \RR^2$. Let $A = [0,1] \times \{0\}$.
+   It is the line segment from $x=0$ to $x=1$ with $y=0$
+   on $x$-axis.
+   No open ball of $\RR^2$ is contained inside $A$. 
+   Hence, $\interior A = \EmptySet$.
+1. Let $C$ be any singleton (a point). It is nonempty
+   and its interior is empty.
+1. Let $\VV = \RR^3$. Any polygon lying within the $x-y$ plane
+   has an empty interior.
+```
+
 ## Relative Interior
 One way to think about relative interiors is 
 to think in terms of subspace topology.
@@ -114,7 +231,8 @@ interiors of convex sets in the sequel.
 
 ```{prf:definition} Relative interior point
 :label: def-cvx-relative-interior-point
-Let $\VV$ be a normed linear space.
+
+Let $\VV$ be a real normed linear space.
 Let $C \subseteq \VV$. We say that $\bx \in C$ 
 is a *relative interior point* of $C$ if
 there exists an open ball $B(\bx, r)$ for some $r > 0$
@@ -146,6 +264,27 @@ $\VV$ to be finite dimensional.
 However, several results in the sequel do depend
 on $\VV$ being finite dimensional. We will 
 clearly state this as and when required.
+
+```{prf:example} Relative interior of an arc
+:label: ex-cvx-relint-arc
+
+Consider the set of points given by 
+
+$$
+S = \left \{ (\cos(t), \sin (t)) \ST 0 \leq t \leq \frac{\pi}{2} \right \}.
+$$
+in the ambient space $\RR^2$.
+The affine hull of $S$ is the entire plane $\RR^2$.
+
+Now, for any $\bx \in S$, $r > 0$, 
+
+$$
+B(\bx, r) \cap \affine (S) = B(\bx, r) \cap \RR^2 = B(\bx, r).
+$$
+It is an open ball in $\RR^2$ and hence never a subset of $S$.
+
+Thus, $\relint S = \EmptySet$.
+```
 
 
 ```{prf:theorem} Relative interiors are subset
@@ -847,6 +986,8 @@ $$
 ```
 
 ```{prf:theorem}
+:label: res-cvx-nonbd-cl-subset-interior
+
 Let $\VV$ be a real finite dimensional normed linear space.
 Let $C_1$ and $C_2$ be convex sets of $\VV$ such that
 $C_2 \subseteq \closure C_1$ but
@@ -861,6 +1002,14 @@ $C_1$ but $C_2$ is not contained totally inside the
 relative boundary of $C_1$, then 
 relative interior of $C_2$ is a subset of the relative
 interior of $C_1$.
+```
+
+```{prf:proof}
+Due to {prf:ref}`res-cvx-convex-closure-relint`
+
+$$
+\relint \closure C_1 = \relint C_1.
+$$
 ```
 
 ### Sum of Sets
