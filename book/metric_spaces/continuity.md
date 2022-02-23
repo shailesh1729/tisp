@@ -675,6 +675,9 @@ Let $f: (X,d) \to (Y, \rho)$ be a homeomorphism.
 Then $f$ is both an
 {prf:ref}`open mapping <def-ms-open-mapping>` as well as a
 {prf:ref}`closed mapping <def-ms-closed-mapping>`.
+
+$f^{-1}$ is also both an open mapping and a closed
+mapping.
 ```
 
 ```{prf:proof}
@@ -700,6 +703,9 @@ We next show that $f$ is an open mapping.
 1. Thus, $f(A)$ is closed whenever $A$ is closed.
 1. Thus, $f$ maps closed sets to closed sets.
 1. Thus, $f$ is a closed mapping.
+
+A similar reasoning establishes that $g = f^{-1}$ is also
+both a closed and an open mapping.
 ```
 
 ### Metric Equivalence as homeomorphism
