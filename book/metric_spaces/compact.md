@@ -323,7 +323,7 @@ to a point in $A$.
 A compact set has the Bolzano-Weierstrass property.
 ```
 
-## Implications of Compactness
+## Closedness and Boundedness
 
 ```{prf:theorem} Compact sets are closed and bounded
 :label: res-ms-compact-is-closed-bounded
@@ -373,6 +373,8 @@ bounded sets are compact too.
 See {prf:ref}`Heine-Borel theorem <res-ms-heine-borel-euclidean>` below.
 
 
+## Continuity
+
 ```{prf:theorem} Continuous images of compact sets are compact
 :label: res-ms-compact-continuous-map
 
@@ -401,6 +403,32 @@ can be reduced to a finite subcover.
 1. Thus, $A$ is compact.
 ```
 
+## Homeomorphism
+
+```{prf:theorem} Homeomorphism preserves compactness
+:label: res-ms-compact-homeomorphism-pres
+
+Let $f: (X, d) \to (Y, \rho)$ be a homeomorphism.
+Then, $A$ is a compact subset of $(X,d)$ is and only if 
+$f(A)$ is a compact subset of $(Y, \rho)$. 
+```
+
+```{prf:proof}
+
+Let $A \subseteq X$ be compact.
+Then, $f(A)$ is compact since $f$ is continuous
+due to {prf:ref}`res-ms-compact-continuous-map`.
+
+Let $f(A)$ be compact.
+Since $f$ is a homeomorphism, hence $f^{-1}$ is continuous
+and bijective.
+Hence, $f^{-1}(f(A)) = A$ is compact 
+due to {prf:ref}`res-ms-compact-continuous-map`.
+```
+
+
+## Compact Spaces
+
 ```{prf:theorem}
 :label: res-ms-compact-closed-subset
 
@@ -424,8 +452,9 @@ Let $(X, d)$ be a compact metric space and let $A$ be a closed subset of $X$.
 1. Thus, $A$ is compact.   
 ```
 
+```{prf:theorem} Continuous maps are closed
+:label: res-ms-compact-continuous-closed-map
 
-```{prf:theorem}
 Let $(X, d)$ be a compact metric space and suppose that 
 $f : (X, d) \to (Y, \rho)$ is a (total) continuous function.
 Then $f$ is a {prf:ref}`closed mapping <def-ms-closed-mapping>`.
