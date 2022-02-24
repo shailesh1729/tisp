@@ -650,13 +650,10 @@ $$
 $$
 ```
 
-### Affine Sets
-
 ```{prf:theorem} Affine sets are relatively open
 :label: res-cvx-affine-relative-open
 
-Let $\VV$ be a real finite dimensional normed linear space.
-
+Let $\VV$ be a real normed linear space.
 Any affine set in $\VV$ is relatively open.
 In other words, if $A$ is affine, then
 
@@ -697,6 +694,7 @@ is also closed since it is an
 intersection of hyperplanes and every hyperplane
 is a closed set. See {prf:ref}`res-la-affine-closed`
 
+
 ### Relative Interior of Relative Interior
 
 ```{prf:theorem} Relative interior is relatively open
@@ -709,46 +707,48 @@ $$
 $$
 Thus, $\relint C$ is relatively open.
 ```
-TODO this proof is not solid.
 
 ```{prf:proof}
 By definition $\relint (\relint C) \subseteq \relint C$.
-
 Thus, we need to show that $\relint C \subseteq \relint (\relint C)$.
 
+1. Let $A = \affine C$.
 1. Let $\bx \in \relint C$.
-1. Then, there exists $r > 0$ such that 
+1. Then, there exists $\epsilon = 2 r > 0$ such that 
    
    $$
-   (\bx + r B) \cap \affine C \subseteq C.
+   (\bx + 2 r B) \cap A \subseteq C.
    $$
-1. We can write $\bx + rB$ as 
+1. We can write $\bx + 2 rB$ as 
 
    $$
-   \bx + r B = \left (\bx + \frac{r}{2} B \right ) + \frac{r}{2} B.
+   \bx + 2 r B = (\bx + r B ) + r B.
    $$
 1. Thus, the previous inclusion can be written as 
    
    $$
-   \left ( \left (\bx + \frac{r}{2} B \right ) + \frac{r}{2} B \right ) 
-   \cap \affine C \subseteq C.
+   ( (\bx + r B) + r B) 
+   \cap A \subseteq C.
    $$
-1. Let $U = \left (\bx + \frac{r}{2} B \right ) \cap C$.
+1. Let $U = (\bx + r B) \cap A$.
+1. Note that $U \subseteq C$.
 1. Let $\by \in U$.
-1. Then, $\by \in C$ and $\by \in \left (\bx + \frac{r}{2} B \right )$.
+1. Then, $\by \in A$ and $\by \in (\bx + r B)$.
 1. From previous inclusion, we can say that for every $\by \in U$
 
    $$
-   \left (\by + \frac{r}{2} B \right ) \cap \affine C \subseteq C.
+   (\by + r B) \cap A \subseteq C.
    $$
 1. Thus, $\by \in \relint C$ for every $\by \in U$.
 1. Thus, $U \subseteq \relint C$.
 1. Thus, 
 
    $$
-   \left (\bx + \frac{r}{2} B \right ) \cap C \subseteq \relint C.
+   U = (\bx + r B) \cap A \subseteq \relint C.
    $$
 1. By definition of relative interior, $\bx \in \relint (\relint C)$.
+
+We have shown that $\relint C \subseteq \relint (\relint C)$.
 ```
 
 ### Relative Boundary
