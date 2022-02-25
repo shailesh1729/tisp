@@ -1,0 +1,1582 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.6. Dual Spaces &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.7. The Euclidean Space" href="euclidean.html" />
+    <link rel="prev" title="4.5. Inner Product Spaces" href="inner_product_spaces.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.9. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   4. Linear Algebra
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="important_spaces.html">
+     4.8. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequence_spaces.html">
+     4.9. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="affine.html">
+     4.10. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     6.9. Subgradients
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   7. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   8. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   9. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   10. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     11.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     11.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   12. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   13. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   14. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     14.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/la/dual_spaces.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fla/dual_spaces.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-functionals">
+   4.6.1. Linear Functionals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   4.6.2. Dual Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basis-for-dual-space">
+   4.6.3. Basis for Dual Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#null-space-of-linear-functionals">
+   4.6.4. Null Space of Linear Functionals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyper-planes">
+   4.6.5. Hyper Planes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dual-space-of-dual-space">
+   4.6.6. Dual Space of Dual Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#normed-vector-spaces">
+   4.6.7. Normed Vector Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-product-spaces">
+   4.6.8. Inner Product Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-inner-product-spaces">
+   4.6.9. Real Inner Product Spaces
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Dual Spaces</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-functionals">
+   4.6.1. Linear Functionals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   4.6.2. Dual Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basis-for-dual-space">
+   4.6.3. Basis for Dual Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#null-space-of-linear-functionals">
+   4.6.4. Null Space of Linear Functionals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyper-planes">
+   4.6.5. Hyper Planes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dual-space-of-dual-space">
+   4.6.6. Dual Space of Dual Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#normed-vector-spaces">
+   4.6.7. Normed Vector Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-product-spaces">
+   4.6.8. Inner Product Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-inner-product-spaces">
+   4.6.9. Real Inner Product Spaces
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="dual-spaces">
+<span id="sec-la-dual-spaces"></span><h1><span class="section-number">4.6. </span>Dual Spaces<a class="headerlink" href="#dual-spaces" title="Permalink to this headline">¶</a></h1>
+<p>Recall from <a class="reference internal" href="transformations.html#def-la-lt-vector-space">Definition 4.53</a>
+that <span class="math notranslate nohighlight">\(\LinTSpace(\VV, \WW)\)</span> denotes the
+vector space of linear transformations
+from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span> where both
+<span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> are vector spaces.
+In <a class="reference internal" href="vector_spaces.html#ex-field-is-vector-space">Example 4.3</a>, we showed
+that <span class="math notranslate nohighlight">\(\FF\)</span> is a vector space in its own right.</p>
+<p>In this section, we explore the vector space
+of linear maps(transformations, functions, operators)
+from a vector space <span class="math notranslate nohighlight">\(\VV\)</span> to its field of scalars <span class="math notranslate nohighlight">\(\FF\)</span>;
+i.e., <span class="math notranslate nohighlight">\(\WW = \FF\)</span>.</p>
+<div class="section" id="linear-functionals">
+<h2><span class="section-number">4.6.1. </span>Linear Functionals<a class="headerlink" href="#linear-functionals" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-linear-functional">
+<p class="admonition-title"><span class="caption-number">Definition 4.79 </span> (Linear functional)</p>
+<div class="definition-content section" id="proof-content">
+<p>A <em>linear functional</em> on <span class="math notranslate nohighlight">\(\VV\)</span> is a linear map
+<span class="math notranslate nohighlight">\(\bf : \VV \to \FF\)</span> from a vector space <span class="math notranslate nohighlight">\(\VV\)</span> to
+its field of scalars <span class="math notranslate nohighlight">\(\FF\)</span>.
+A linear functional is a member of the
+vector space <span class="math notranslate nohighlight">\(\LinTSpace(\VV, \FF)\)</span>.</p>
+</div>
+</div><p>A linear functional is both <em>homogeneous</em> and <em>additive</em>.
+If <span class="math notranslate nohighlight">\(\bf\)</span> is a linear functional, then</p>
+<div class="math notranslate nohighlight">
+\[
+\bf(t \bx + \by)  = t \bf(\bx) + \bf(\by)
+\]</div>
+<p>holds true for all <span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span>.</p>
+<p>Recall that two functions are considered equal
+if they have identical domain and they produce
+same output for every value in the domain.</p>
+<div class="proof definition admonition" id="def-la-linear-functional-equality">
+<p class="admonition-title"><span class="caption-number">Definition 4.80 </span> (Equality of linear functionals)</p>
+<div class="definition-content section" id="proof-content">
+<p>Two linear functionals <span class="math notranslate nohighlight">\(\bf\)</span> and <span class="math notranslate nohighlight">\(\bg\)</span> in <span class="math notranslate nohighlight">\(\VV^*\)</span>
+are considered equal if</p>
+<div class="math notranslate nohighlight">
+\[
+\bf(\bv) = \bg(\bv) \Forall \bv \in \VV
+\]</div>
+</div>
+</div><div class="proof lemma admonition" id="res-la-linear-functional-equality-basis">
+<p class="admonition-title"><span class="caption-number">Lemma 4.1 </span> (Equality of linear functionals on a basis)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional vector space and
+<span class="math notranslate nohighlight">\(\BBB = \{ \bv_1, \dots, \bv_n \}\)</span> be a basis of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>If two linear functionals agree on the basis vectors,
+then they are equal.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bf, \bg \in \VV^*\)</span>.
+Any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> can be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = \sum_{i=1}^n c_i \bv_i.
+\]</div>
+<p>Due to linearity,</p>
+<div class="math notranslate nohighlight">
+\[
+\bf (\bv) = \sum_{i=1}^n c_i \bf (\bv_i)
+\text{ and }
+\bg (\bv) = \sum_{i=1}^n c_i \bg (\bv_i).
+\]</div>
+<p>Thus, if <span class="math notranslate nohighlight">\(\bf (\bv_i) = \bg (\bv_i)\)</span> for <span class="math notranslate nohighlight">\(i=1, \dots, n\)</span>, then
+<span class="math notranslate nohighlight">\(\bf\)</span> and <span class="math notranslate nohighlight">\(\bg\)</span> equal on every <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">4.6.2. </span>Dual Spaces<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-dual-space">
+<p class="admonition-title"><span class="caption-number">Definition 4.81 </span> (Dual space)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>dual space</em> of a vector space <span class="math notranslate nohighlight">\(\VV\)</span>,
+denoted by <span class="math notranslate nohighlight">\(\VV^*\)</span>,
+is the set of all of the linear functionals
+on <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>In other words: <span class="math notranslate nohighlight">\(\VV^* = \LinTSpace(\VV, \FF)\)</span>.</p>
+</div>
+</div><div class="proof observation admonition" id="res-la-dual-space-is-vector-space">
+<p class="admonition-title"><span class="caption-number">Observation 4.4 </span></p>
+<div class="observation-content section" id="proof-content">
+<p>Since the space of linear transformations from <span class="math notranslate nohighlight">\(\VV\)</span>
+to <span class="math notranslate nohighlight">\(\FF\)</span> (as a vector space) is a vector space, hence
+<span class="math notranslate nohighlight">\(\VV^*\)</span> is a vector space.
+The elements of the dual space are the linear functionals.</p>
+</div>
+</div><p>Every vector space has a zero vector. The
+dual space must have one too.</p>
+<div class="proof definition admonition" id="def-la-zero-functional">
+<p class="admonition-title"><span class="caption-number">Definition 4.82 </span> (Zero functional)</p>
+<div class="definition-content section" id="proof-content">
+<p>A zero functional <span class="math notranslate nohighlight">\(\bzero : \VV \to \FF\)</span> is a
+linear functional which maps every vector <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>
+to <span class="math notranslate nohighlight">\(0 \in \FF\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\bzero (\bv ) = 0 \Forall \bv \in \VV.
+\]</div>
+</div>
+</div><div class="docutils">
+<p>It is easy to see that the zero functional is linear
+and indeed a member of <span class="math notranslate nohighlight">\(\LinTSpace(\VV, \FF)\)</span>.</p>
+<p>We will be using the same symbol <span class="math notranslate nohighlight">\(\bzero\)</span> to denote both the
+zero functional in <span class="math notranslate nohighlight">\(\VV^*\)</span> and the zero vector in <span class="math notranslate nohighlight">\(\VV\)</span>.
+It should be clear from the context which one is being referred to.</p>
+<p>If <span class="math notranslate nohighlight">\(\bf \neq \bzero\)</span>, then there exists at least one <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>
+such that <span class="math notranslate nohighlight">\(\bf (\bx) \neq 0\)</span>.</p>
+</div>
+<p>When we have a vector space, it is natural to ask for
+its dimension and provide a way to build a basis for
+the space.</p>
+</div>
+<div class="section" id="basis-for-dual-space">
+<h2><span class="section-number">4.6.3. </span>Basis for Dual Space<a class="headerlink" href="#basis-for-dual-space" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-la-finite-dual-space-basis">
+<p class="admonition-title"><span class="caption-number">Theorem 4.88 </span> (Basis for dual space)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional vector space.
+Let <span class="math notranslate nohighlight">\(\BBB = \{\bv_1, \dots, \bv_n\}\)</span> be a basis
+of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>For each <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>, define a linear functional
+<span class="math notranslate nohighlight">\(\bf_i : \VV \to \FF\)</span> by setting:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bf_i(\bv_j) = \begin{cases}
+1 &amp;&amp; \text{ if } &amp;&amp; i = j\\
+0 &amp;&amp; \text{ if } &amp;&amp; i \neq j
+\end{cases}
+\end{split}\]</div>
+<p>and then extending <span class="math notranslate nohighlight">\(\bf_i\)</span> linearly to all of <span class="math notranslate nohighlight">\(\VV\)</span>,
+meaning, for any <span class="math notranslate nohighlight">\(\bv = \sum_{j=1}^n \alpha_j \bv_j\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\bf_i (\bv) = \bf_i (\sum_{j=1}^n \alpha_j \bv_j) 
+= \sum_{j=1}^n \alpha_j \bf_i(\bv_j) = \alpha_i.
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(\FFF = \{ \bf_1, \dots, \bf_n \}\)</span> form a basis for <span class="math notranslate nohighlight">\(\VV^*\)</span>.
+The basis <span class="math notranslate nohighlight">\(\FFF\)</span> is called the <em>dual basis</em> of <span class="math notranslate nohighlight">\(\BBB\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that <span class="math notranslate nohighlight">\(\bf_1, \dots, \bf_n\)</span> are
+linearly independent.</p>
+<p>Let <span class="math notranslate nohighlight">\(c_1, \dots, c_n \in \FF\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+c_1 \bf_1 + \dots + c_n \bf_n  = \bzero.
+\]</div>
+<p>Note that the <span class="math notranslate nohighlight">\(\bzero\)</span> in the R.H.S. denotes the zero functional.
+This means that <span class="math notranslate nohighlight">\(c_1 \bf_1 + \dots + c_n \bf_n\)</span> maps every
+vector to 0; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+(c_1 \bf_1 + \dots + c_n \bf_n) (\bv) = 0 \Forall \bv \in \VV.
+\]</div>
+<p>This is valid in particular for the basis vectors in <span class="math notranslate nohighlight">\(\BBB\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+(c_1 \bf_1 + \dots + c_n \bf_n) (\bv_j) = 0 \Forall 1 \leq j \leq n.
+\]</div>
+<p>But,</p>
+<div class="math notranslate nohighlight">
+\[
+(c_1 \bf_1 + \dots + c_n \bf_n) (\bv_j) = \sum_{i=1}^n c_i \bf_i (\bv_j) = c_j
+\]</div>
+<p>from the definition of <span class="math notranslate nohighlight">\(\bf_i\)</span>. Thus, <span class="math notranslate nohighlight">\(c_j = 0\)</span> for <span class="math notranslate nohighlight">\(j=1,\dots, n\)</span>.
+Hence, there is only a trivial linear combination of <span class="math notranslate nohighlight">\(\bf_i\)</span> which equals the
+zero functional. Thus, <span class="math notranslate nohighlight">\(\FFF\)</span> is a set of linearly independent vectors.</p>
+<p>Next, we show that <span class="math notranslate nohighlight">\(\FFF\)</span> spans <span class="math notranslate nohighlight">\(\VV^*\)</span>. Let <span class="math notranslate nohighlight">\(\bf \in \VV^*\)</span>.
+Let</p>
+<div class="math notranslate nohighlight">
+\[
+b_i = \bf (\bv_i) \Forall i=1,\dots, n
+\]</div>
+<p>be the value of the linear functional <span class="math notranslate nohighlight">\(\bf\)</span> on the basis vectors in <span class="math notranslate nohighlight">\(\BBB\)</span>.
+We claim that:</p>
+<div class="math notranslate nohighlight">
+\[
+\bf = b_1 \bf_1 + \dots + b_n \bf_n = \sum_{i=1}^n b_i \bf_i.
+\]</div>
+<p>As shown in <a class="reference internal" href="#res-la-linear-functional-equality-basis">Lemma 4.1</a>,
+if both functionals agree on the basis vectors in <span class="math notranslate nohighlight">\(\BBB\)</span>, then
+they are equal.
+Now,</p>
+<div class="math notranslate nohighlight">
+\[
+(b_1 \bf_1 + \dots + b_n \bf_n) (\bv_i) = \sum_{j=1}^n b_j \bf_j (\bv_i) = b_i = \bf(\bv_i)
+\]</div>
+<p>from the definitions of <span class="math notranslate nohighlight">\(\bf_i\)</span> and <span class="math notranslate nohighlight">\(b_i\)</span>.
+Thus, the functionals <span class="math notranslate nohighlight">\(\bf\)</span> and <span class="math notranslate nohighlight">\(b_1 \bf_1 + \dots + b_n \bf_n\)</span> agree on the basis.
+Thus, they are equal as elements of <span class="math notranslate nohighlight">\(\VV^*\)</span>.
+Since <span class="math notranslate nohighlight">\(\bf \in \VV^*\)</span> was arbitrary, hence, <span class="math notranslate nohighlight">\(\FFF\)</span> spans <span class="math notranslate nohighlight">\(\VV^*\)</span>.</p>
+<p>Since functionals in <span class="math notranslate nohighlight">\(\FFF\)</span> are linearly independent and they span <span class="math notranslate nohighlight">\(\VV^*\)</span>,
+they form a basis of <span class="math notranslate nohighlight">\(\VV^*\)</span>.</p>
+</div>
+<div class="proof corollary admonition" id="res-la-finite-dual-space-dimension">
+<p class="admonition-title"><span class="caption-number">Corollary 4.10 </span> (Dimension of the dual space)</p>
+<div class="corollary-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional,
+then its dual space <span class="math notranslate nohighlight">\(\VV^*\)</span> is also finite dimensional and</p>
+<div class="math notranslate nohighlight">
+\[
+\dim \VV = \dim \VV^*.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="theorem-8">
+<p class="admonition-title"><span class="caption-number">Theorem 4.89 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be finite dimensional.
+Let <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> such that <span class="math notranslate nohighlight">\(\bf(\bv) = 0\)</span> for every <span class="math notranslate nohighlight">\(\bf \in \VV^*\)</span>.
+Then <span class="math notranslate nohighlight">\(\bv = \bzero\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\BBB  = \{ \bv_1, \dots, \bv_n\}\)</span> be a basis of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\FFF = \{ \bf_1, \dots, \bf_n\}\)</span> be the dual basis of <span class="math notranslate nohighlight">\(\VV^*\)</span>
+with <span class="math notranslate nohighlight">\(\bf_i(\bv_j) = \delta(i, j)\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\bv\)</span> can be written as as the linear combination of the basis vectors:</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = a_1 \bv_1 + \dots + a_n \bv_n.
+\]</div>
+<p>By hypothesis <span class="math notranslate nohighlight">\(\bf_i(\bv) = 0\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\bf_i(\bv) = \sum_{j=1}^n a_i \bf_i (\bv_j) = a_i = 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(a_i = 0\)</span> for all <span class="math notranslate nohighlight">\(i=1,\dots, n\)</span>. Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = \sum_{i=1}^n a_i \bv_i = \bzero.
+\]</div>
+</div>
+</div>
+<div class="section" id="null-space-of-linear-functionals">
+<h2><span class="section-number">4.6.4. </span>Null Space of Linear Functionals<a class="headerlink" href="#null-space-of-linear-functionals" title="Permalink to this headline">¶</a></h2>
+<p>We shall describe the null space of a linear functional
+and show that for finite dimensional vector spaces,
+its codimension is 1.</p>
+<div class="proof theorem admonition" id="res-la-linear-functional-kernel">
+<p class="admonition-title"><span class="caption-number">Theorem 4.90 </span> (Null space/kernel of a linear functional)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\bf\)</span> is a linear functional on <span class="math notranslate nohighlight">\(\VV\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+\bf^{-1}(0) = \{ \bx \in \VV \ST \bf (\bv) = 0 \}
+\]</div>
+<p>is a linear subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We know that <span class="math notranslate nohighlight">\(0\)</span> is the zero vector of the vector space <span class="math notranslate nohighlight">\(\FF\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\bf^{-1}(0)\)</span> is nothing but the null space of <span class="math notranslate nohighlight">\(\bf\)</span>
+and hence it is a linear subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>Another proof from first principles:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bu, \bv \in \bf^{-1}(0)\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bf (\alpha \bu + \bv) = \alpha \bf (\bu) + \bf (\bv) = 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\alpha \bu + \bv \in \bf^{-1}(0)\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bf^{-1}(0)\)</span> is a subspace.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-la-linear-functional-kernel-rep">
+<p class="admonition-title"><span class="caption-number">Theorem 4.91 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bf\)</span> be a nonzero linear functional on <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> be such that <span class="math notranslate nohighlight">\(\bf(\ba)\neq 0\)</span>.
+Then, any point <span class="math notranslate nohighlight">\(\bp \in \VV\)</span> can be written
+uniquely as:</p>
+<div class="math notranslate nohighlight">
+\[
+\bp = \lambda \ba + \bx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda \in \FF\)</span> and <span class="math notranslate nohighlight">\(\bx \in \bf^{-1}(0)\)</span>.</p>
+</div>
+</div><p>In this representation, <span class="math notranslate nohighlight">\(\bf\)</span> and <span class="math notranslate nohighlight">\(\ba\)</span> are fixed
+while <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(\bx\)</span> are allowed to vary.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bp \in \VV\)</span> be arbitrary. We wish to
+construct a representation:</p>
+<div class="math notranslate nohighlight">
+\[
+\bp = \lambda \ba + \bx
+\]</div>
+<p>such that <span class="math notranslate nohighlight">\(\bx \in \bf^{-1}(0)\)</span> and <span class="math notranslate nohighlight">\(\lambda \in \FF\)</span>.</p>
+<p>Applying <span class="math notranslate nohighlight">\(\bf\)</span> on both sides, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\bf(\bp) = \lambda \bf(\ba) + \bf(\bx) = \lambda \bf(\ba) 
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bx \in \bf^{-1}(0)\)</span>.</p>
+<p>This gives us:</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda = \frac{\bf(\bp)}{\bf(\ba)}
+\]</div>
+<p>since we know that <span class="math notranslate nohighlight">\(\bf(\ba)\neq 0\)</span>.</p>
+<p>Putting this particular value of <span class="math notranslate nohighlight">\(\lambda\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \bp  - \frac{\bf(\bp)}{\bf(\ba)} \ba.
+\]</div>
+<p>Thus, for every <span class="math notranslate nohighlight">\(\bp \in \VV\)</span>, we can find
+<span class="math notranslate nohighlight">\(\lambda = \frac{\bf(\bp)}{\bf(\ba)}\)</span> and
+<span class="math notranslate nohighlight">\(\bx =  \bp  - \frac{\bf(\bp)}{\bf(\ba)} \ba\)</span>
+such that <span class="math notranslate nohighlight">\(\bf(\bx) = 0\)</span>  and:</p>
+<div class="math notranslate nohighlight">
+\[
+\bp = \lambda \ba + \bx.
+\]</div>
+<p>We have established existence of this representation.
+Next, we establish that this representation is unique.</p>
+<p>Suppose their was another representation:</p>
+<div class="math notranslate nohighlight">
+\[
+\bp = \mu \ba + \by
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\bf(\by) = 0\)</span> and <span class="math notranslate nohighlight">\(\mu \in \FF\)</span>.</p>
+<p>Then, we would have:</p>
+<div class="math notranslate nohighlight">
+\[
+\bf(\mu \ba + \by) = \mu \bf(\ba) = \bf (\lambda \ba + \bx) = \lambda \bf (\ba).
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\bf (\ba) \neq 0\)</span>, hence <span class="math notranslate nohighlight">\(\lambda = \mu\)</span> must hold.
+Therefore, <span class="math notranslate nohighlight">\(\bx = \by\)</span> must hold true too.
+Hence, the representation is unique.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-linear-functional-kernel-dim">
+<p class="admonition-title"><span class="caption-number">Theorem 4.92 </span> (Dimension of the kernel of a linear functional)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional vector space
+of dimension <span class="math notranslate nohighlight">\(n\)</span>. Then, the dimension of
+the null space of any nonzero linear functional on <span class="math notranslate nohighlight">\(\VV\)</span> is <span class="math notranslate nohighlight">\(n-1\)</span>.
+In other words, the codimension of the kernel of a nonzero
+linear functional is 1.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\BBB = \{\bv_1, \dots, \bv_k \}\)</span> the any basis
+for the space <span class="math notranslate nohighlight">\(\bf^{-1}(0)\)</span>.</p>
+<p>Choose any <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> such that <span class="math notranslate nohighlight">\(\bf(\ba) \neq 0\)</span>.</p>
+<p>Then, the set:</p>
+<div class="math notranslate nohighlight">
+\[
+\CCC = \{\ba, \bv_1, \dots, \bv_k \}
+\]</div>
+<p>is linearly independent since <span class="math notranslate nohighlight">\(\ba \notin \bf^{-1}(0)\)</span>.</p>
+<p>At the same time, since any vector <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> can be
+represented using <span class="math notranslate nohighlight">\(\ba\)</span> and the null space spanned
+by <span class="math notranslate nohighlight">\(\BBB\)</span>, hence <span class="math notranslate nohighlight">\(\CCC\)</span> spans <span class="math notranslate nohighlight">\(\VV\)</span>
+(while <span class="math notranslate nohighlight">\(\BBB\)</span> doesn’t).
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+n = k + 1.
+\]</div>
+<p>Alternatively:</p>
+<div class="math notranslate nohighlight">
+\[
+\dim \bf^{-1}(0) = k = n - 1
+\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[
+\codim \bf^{-1}(0) = n - \dim \bf^{-1}(0) = 1.
+\]</div>
+</div>
+</div>
+<div class="section" id="hyper-planes">
+<h2><span class="section-number">4.6.5. </span>Hyper Planes<a class="headerlink" href="#hyper-planes" title="Permalink to this headline">¶</a></h2>
+<p>We present a general definition of hyperplanes in this
+section. For a definition specific to real vector spaces,
+see <a class="reference internal" href="../convex_sets/real_spaces.html#def-hyperplane">Definition 6.1</a>.</p>
+<div class="proof definition admonition" id="def-la-hyperplane-functional">
+<p class="admonition-title"><span class="caption-number">Definition 4.83 </span> (Hyperplane)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bf\)</span> be a nonzero linear functional on <span class="math notranslate nohighlight">\(\VV\)</span>. Let <span class="math notranslate nohighlight">\(a \in \FF\)</span>.
+A set of the form:</p>
+<div class="math notranslate nohighlight">
+\[
+H_{\bf, a} \triangleq \{ \bx \in \VV \ST \bf(\bx) = a \}
+\]</div>
+<p>is called a hyperplane. In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+H_{\bf, a} = \bf^{-1}(a).
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-la-lf-hyperplane-span">
+<p class="admonition-title"><span class="caption-number">Theorem 4.93 </span> (A span as a hyperplane)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional space with <span class="math notranslate nohighlight">\(\dim \VV = n\)</span>.
+Let <span class="math notranslate nohighlight">\(S = \{\bv_1, \dots, \bv_{n-1} \}\)</span> be any set of
+<span class="math notranslate nohighlight">\(n-1\)</span> linearly independent vectors of <span class="math notranslate nohighlight">\(\VV\)</span>. Then,
+<span class="math notranslate nohighlight">\(\span S\)</span> is a hyperplane.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\dim \VV = n\)</span>, it is possible to select
+a vector <span class="math notranslate nohighlight">\(\bv_n\)</span> such that <span class="math notranslate nohighlight">\(\BBB = S \cup \{ \bv_n \}\)</span>
+is linearly independent and forms a basis for <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>Following <a class="reference internal" href="#res-la-finite-dual-space-basis">Theorem 4.88</a>,
+it is possible to construct a linear functional <span class="math notranslate nohighlight">\(\bf\)</span>
+such that:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bf(\bv_i) = \begin{cases}
+1 &amp;&amp; \text{ if } &amp;&amp; i = n\\
+0 &amp;&amp; \text{ if } &amp;&amp; 1 \leq i &lt; n
+\end{cases} . 
+\end{split}\]</div>
+<p>Now, consider the null space of <span class="math notranslate nohighlight">\(\bf\)</span>
+given by  <span class="math notranslate nohighlight">\(\bf^{-1}(0)\)</span>. It is clear by definition
+that <span class="math notranslate nohighlight">\(\bv_i \in \bf^{-1}(0)\)</span> for <span class="math notranslate nohighlight">\(i=1,\dots, n-1\)</span>.</p>
+<p>From <a class="reference internal" href="#res-la-linear-functional-kernel-dim">Theorem 4.92</a>,
+<span class="math notranslate nohighlight">\(\dim \bf^{-1}(0) = n -1\)</span>. Thus, <span class="math notranslate nohighlight">\(S\)</span> forms a basis
+for <span class="math notranslate nohighlight">\(\bf^{-1}(0)\)</span> and:</p>
+<div class="math notranslate nohighlight">
+\[
+\span S = \bf^{-1}(0).
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\span S\)</span> is a hyperplane.</p>
+</div>
+</div>
+<div class="section" id="dual-space-of-dual-space">
+<h2><span class="section-number">4.6.6. </span>Dual Space of Dual Space<a class="headerlink" href="#dual-space-of-dual-space" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>Since <span class="math notranslate nohighlight">\(\VV^*\)</span> (the dual of <span class="math notranslate nohighlight">\(\VV\)</span>) is a vector space, we can
+think of the dual space of <span class="math notranslate nohighlight">\(\VV^*\)</span> too.
+The dual of the dual is denoted by <span class="math notranslate nohighlight">\(\VV^{**}\)</span>.
+Consider the case where <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\VV^*\)</span> have the same dimension.</p></li>
+<li><p>Thus, \VV<span class="math notranslate nohighlight">\( and \)</span>\VV^*$ are isomorphic.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\VV^*\)</span> is finite dimensional, hence <span class="math notranslate nohighlight">\(\VV^{**}\)</span> is finite dimensional too.</p></li>
+<li><p>In fact, <span class="math notranslate nohighlight">\(\dim \VV^* = \dim \VV^{**}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\VV^*\)</span> and <span class="math notranslate nohighlight">\(\VV^{**}\)</span> are isomorphic.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\VV^{**}\)</span> are isomorphic too.</p></li>
+</ol>
+<p>It is possible to write an isomorphism between <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\VV^{**}\)</span>
+without the choice of a basis. Such an isomorphism is said to be <em>natural</em>.</p>
+</div>
+</div>
+<div class="section" id="normed-vector-spaces">
+<h2><span class="section-number">4.6.7. </span>Normed Vector Spaces<a class="headerlink" href="#normed-vector-spaces" title="Permalink to this headline">¶</a></h2>
+<p>If <span class="math notranslate nohighlight">\(\VV\)</span> is endowed with a norm <span class="math notranslate nohighlight">\(\| \cdot \|\)</span>, it makes sense
+to come up with the notion of a norm on the dual space too.
+The <em>dual norm</em> is a measure of size of the linear functional.
+By size of a functional, we mean how big is the number <span class="math notranslate nohighlight">\(|f(\bx)|\)</span>
+with respect to the size of <span class="math notranslate nohighlight">\(\bx\)</span> given by <span class="math notranslate nohighlight">\(\| \bx \|\)</span>.</p>
+<div class="proof definition admonition" id="def-la-dual-norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.84 </span> (Dual norm)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a normed linear space
+endowed with a norm <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>
+and <span class="math notranslate nohighlight">\(\VV^*\)</span> be its dual space
+of linear functionals.
+The <em>dual norm</em> of a linear functional <span class="math notranslate nohighlight">\(\bf\)</span> belonging to <span class="math notranslate nohighlight">\(\VV^*\)</span>,
+denoted by <span class="math notranslate nohighlight">\(\| \cdot \|_* : \VV^* \to \RR\)</span>, is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bf \|_* \triangleq \underset{\| \bx \| \leq 1}{\sup} \{ |\bf(\bx)| \}.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="theorem-15">
+<p class="admonition-title"><span class="caption-number">Theorem 4.94 </span> (Dual norm is a norm)</p>
+<div class="theorem-content section" id="proof-content">
+<p>The dual norm <span class="math notranslate nohighlight">\(\| \cdot \|_* : \VV^* \to \RR\)</span>
+as defined in <a class="reference internal" href="#def-la-dual-norm">Definition 4.84</a> is
+indeed a <a class="reference internal" href="normed_spaces.html#def-la-norm">norm</a>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. [Positive definiteness]</p>
+<p>For the zero functional, <span class="math notranslate nohighlight">\(\bzero (\bx) = 0 \Forall \bx \in \VV\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\| \bzero \|_* = 0\)</span>.</p>
+<p>For the converse, we proceed as follows:</p>
+<ol>
+<li><p>For any other functional <span class="math notranslate nohighlight">\(\bf\)</span>, there exists a nonzero
+<span class="math notranslate nohighlight">\(\bu \in \VV\)</span> such that <span class="math notranslate nohighlight">\(\bf(\bu) \neq 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx = \frac{\bu}{ \| \bu \|}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\| \bx \| = 1\)</span>.</p></li>
+<li><p>Also, <span class="math notranslate nohighlight">\(\bf(\bx) = \frac{\bf(\bu)}{\| \bu \|} \neq 0\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bf \|_* = \underset{\| \by \| \leq 1}{\sup} \{ |\bf(\by)| \} \geq |\bf(\bx)| &gt; 0.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \bf \|_* &gt; 0\)</span> if <span class="math notranslate nohighlight">\(\bf \neq \bzero\)</span>.</p></li>
+</ol>
+<p>[Positive homogeneity]</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\| \alpha \bf \|_* 
+&amp;= \underset{\| \bx \| \leq 1}{\sup} \{ |(\alpha \bf)(\bx)| \}\\
+&amp;= \underset{\| \bx \| \leq 1}{\sup} \{ |\alpha \bf(\bx)| \}\\
+&amp;= \underset{\| \bx \| \leq 1}{\sup} \{ |\alpha| |\bf(\bx)| \}\\
+&amp;= |\alpha| \underset{\| \bx \| \leq 1}{\sup} \{ |\bf(\bx)| \}\\
+&amp;= |\alpha| \| \bf \|_*.
+\end{split}\]</div>
+<p>[Triangle inequality]</p>
+<p>Let <span class="math notranslate nohighlight">\(\bf, \bg \in \VV^*\)</span> be two linear functionals.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\| \bf + \bg \|_* 
+&amp;= \underset{\| \bx \| \leq 1}{\sup} \{ |(\bf + \bg)(\bx) |\}\\
+&amp;= \underset{\| \bx \| \leq 1}{\sup} \{ |\bf(\bx) + \bg(\bx)| \}\\
+&amp;\leq \underset{\| \bx \| \leq 1}{\sup} \{ |\bf(\bx)| + |\bg(\bx)|\}\\
+&amp;\leq \underset{\| \bx \| \leq 1}{\sup} \{ |\bf(\bx)|\} 
++ \underset{\| \bx \| \leq 1}{\sup} \{ |\bg(\bx)| \}\\
+&amp;= \| \bf \|_* + \| \bg \|_*.
+\end{split}\]</div>
+</div>
+</div>
+<div class="section" id="inner-product-spaces">
+<h2><span class="section-number">4.6.8. </span>Inner Product Spaces<a class="headerlink" href="#inner-product-spaces" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="inner_product_spaces.html#def-la-inner-product">inner product</a>
+is a binary operator from <span class="math notranslate nohighlight">\(\VV \times \VV\)</span> to <span class="math notranslate nohighlight">\(\FF\)</span>.
+If the second argument is fixed, then it becomes a linear functional.</p>
+<div class="proof theorem admonition" id="res-la-inner-product-linear-functional">
+<p class="admonition-title"><span class="caption-number">Theorem 4.95 </span> (Inner product as linear functional)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an inner product space.
+For any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>, the
+mapping <span class="math notranslate nohighlight">\(T_{\bv} : \VV \to \FF\)</span> defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+T_{\bv} (\bx) \triangleq \langle \bx , \bv \rangle  \Forall \bx \in \VV
+\]</div>
+<p>is a linear functional. Consequently, <span class="math notranslate nohighlight">\(T_{\bv} \in \VV^*\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since an inner product is linear in the first argument, hence:</p>
+<div class="math notranslate nohighlight">
+\[
+T_{\bv} (\alpha \bx + \by) = \langle \alpha \bx + \by , \bv \rangle
+= \alpha \langle \bx , \bv \rangle + \langle \by , \bv \rangle
+=  \alpha T_{\bv} (\bx) + T_{\bv} (\by).
+\]</div>
+<p>Thus, the functional <span class="math notranslate nohighlight">\(T_{\bv}\)</span> is linear.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-linear-functional-arithmetic">
+<p class="admonition-title"><span class="caption-number">Theorem 4.96 </span> (Arithmetic on linear functionals)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Addition of inner product based linear functionals:</p>
+<div class="math notranslate nohighlight">
+\[
+T_{\bx} + T_{\by} = T_{\bx + \by}.
+\]</div>
+<p>Scalar multiplication on inner product based linear functions:</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha T_{\bx} = T_{ \overline{\alpha} \bx}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Recall that sum of functions is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+(T_{\bx} + T_{\by}) (\bv) = T_{\bx}(\bv) + T_{\by}(\bv).
+\]</div>
+<p>Now,</p>
+<div class="math notranslate nohighlight">
+\[
+T_{\bx + \by}(\bv) = \langle \bv, \bx + \by \rangle 
+= \langle \bv, \bx \rangle + \langle \bv, \by \rangle
+=  T_{\bx}(\bv) + T_{\by}(\bv)
+= (T_{\bx} + T_{\by}) (\bv)
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(T_{\bx + \by} = T_{\bx + \by}\)</span>.</p>
+<p>Recall that scaling of a function is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+(\alpha T_{\bx}) (\bv) = \alpha (T_{\bx}(\bv)).
+\]</div>
+<p>Now,</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha (T_{\bx}(\bv))
+= \alpha \langle \bv, \bx \rangle
+= \langle \bv, \overline{\alpha} \bx \rangle
+= T_{ \overline{\alpha} \bx} (\bv).
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\alpha T_{\bx} = T_{ \overline{\alpha} \bx}\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-linear-functional-inner-product">
+<p class="admonition-title"><span class="caption-number">Theorem 4.97 </span> (Linear functional as inner product)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional inner product space and let
+<span class="math notranslate nohighlight">\(\bf\)</span> be a linear functional in <span class="math notranslate nohighlight">\(\VV^*\)</span>.
+Then, there exists a vector <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>
+such that <span class="math notranslate nohighlight">\(\bf = T_{\bv}\)</span>.</p>
+<p>In other words, every linear functional is an inner product.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Recall from <a class="reference internal" href="inner_product_spaces.html#res-la-ip-finite-onb-existence">Theorem 4.75</a>
+that every finite dimensional inner product space
+has an orthonormal basis.</p>
+<p>Let <span class="math notranslate nohighlight">\(\BBB = \{\be_1, \dots, \be_n \}\)</span>
+be an orthonormal basis of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>Now, consider the corresponding linear functionals <span class="math notranslate nohighlight">\(T_{\be_j}\)</span>
+for <span class="math notranslate nohighlight">\(j = 1, \dots, n\)</span>.</p>
+<p>Note that:</p>
+<div class="math notranslate nohighlight">
+\[
+T_{\be_j} (\be_i) = \langle \be_i , \be_j \rangle = \delta(i, j)
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\BBB\)</span> is an orthonormal basis.</p>
+<p>Then, following <a class="reference internal" href="#res-la-finite-dual-space-basis">Theorem 4.88</a>,
+the set <span class="math notranslate nohighlight">\(\FFF = \{T_{\be_1}, \dots, T_{\be_n} \}\)</span>
+forms a basis <span class="math notranslate nohighlight">\(\VV^*\)</span>.</p>
+<p>Thus, any <span class="math notranslate nohighlight">\(\bf \in \VV^*\)</span> can be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+\bf = \sum_{j=1}^n c_j T_{\be_j} 
+= \sum_{j=1}^n  T_{\overline{c_j}\be_j} 
+= T_{\sum_{j=1}^n \overline{c_j}\be_j}
+\]</div>
+<p>using <a class="reference internal" href="#res-la-ip-linear-functional-arithmetic">Theorem 4.96</a> above.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(\bf\)</span> is equal to an inner product by the vector
+<span class="math notranslate nohighlight">\(\sum_{j=1}^n \overline{c_j}\be_j\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-zero-functional">
+<p class="admonition-title"><span class="caption-number">Theorem 4.98 </span> (Zero functional in inner product space)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an inner product space. Then,
+<span class="math notranslate nohighlight">\(\bzero \in \VV^*\)</span> is same as <span class="math notranslate nohighlight">\(T_{\bzero} = \langle \cdot, \bzero \rangle\)</span>.</p>
+<p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+T_{\bzero} = \bzero \in \VV^*
+\]</div>
+<p>and there is no other <span class="math notranslate nohighlight">\(\bv \in V\)</span> such that <span class="math notranslate nohighlight">\(T_{\bv} = \bzero\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For <span class="math notranslate nohighlight">\(\bzero \in \VV\)</span>, it is straight-forward to see that</p>
+<div class="math notranslate nohighlight">
+\[
+T_{\bzero}(\bv) = \langle \bv, \bzero \rangle = 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(T_{\bzero}\)</span> is the zero functional.
+To show that there is no other <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> such that
+<span class="math notranslate nohighlight">\(T_{\bv}\)</span> is a zero functional, we note that,</p>
+<div class="math notranslate nohighlight">
+\[
+\bv \neq 0 \implies \langle \bv, \bv \rangle &gt; 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(T_{\bv} (\bv) &gt; 0\)</span> if <span class="math notranslate nohighlight">\(\bv \neq \bzero\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-dual-space-isomorphism">
+<p class="admonition-title"><span class="caption-number">Theorem 4.99 </span> (Isomorphism between <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\VV^*\)</span>)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an inner product space. Define a map <span class="math notranslate nohighlight">\(T : \VV \to \VV^*\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[
+T (\bv) \triangleq \langle \cdot, \bv \rangle = T_{\bv};
+\]</div>
+<p>i.e., <span class="math notranslate nohighlight">\(T_{\bv}\)</span> is a linear functional on <span class="math notranslate nohighlight">\(\VV\)</span> whose value
+on <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> is <span class="math notranslate nohighlight">\(\langle \bx, \bv \rangle\)</span>.</p>
+<p>Then, <span class="math notranslate nohighlight">\(T\)</span> is an isomorphism.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To show that <span class="math notranslate nohighlight">\(T\)</span> is an isomorphism, we need to show that:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T\)</span> is injective.</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> is surjective.</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> preserves the vector space algebraic structure.</p></li>
+</ul>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-dual-norm">
+<p class="admonition-title"><span class="caption-number">Theorem 4.100 </span> (Dual norm in an inner product space)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an inner product space endowed with a norm
+<span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> correspond to a linear functional <span class="math notranslate nohighlight">\(T_{\bv} \in \VV^*\)</span>.
+Then, its dual norm is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_* = \underset{\| \bx \| \leq 1}{\sup} \{ |\langle \bx, \bv \rangle | \}.
+\]</div>
+</div>
+</div><p>Note that in this identity, <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> is any
+arbitrary norm on <span class="math notranslate nohighlight">\(\VV\)</span>. It need not be the
+norm induced by the inner product.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. This version of dual norm comes from the fact that:</p>
+<div class="math notranslate nohighlight">
+\[
+T_{\bv}(\bx) = \langle \bx, \bv \rangle \Forall \bx \in \VV.
+\]</div>
+<p>Plugging it into the equation in <a class="reference internal" href="#def-la-dual-norm">Definition 4.84</a>,
+we get the desired identity.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-gen-cs-ineq">
+<p class="admonition-title"><span class="caption-number">Theorem 4.101 </span> (Generalized Cauchy Schwartz inequality)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an inner product space endowed with a norm
+<span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>.</p>
+<p>For any <span class="math notranslate nohighlight">\(\bu \in \VV\)</span>, <span class="math notranslate nohighlight">\(\bv \in \VV^*\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+| \langle \bu, \bv \rangle | \leq \| \bu \| \| \bv \|_*.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(\bu = \bzero\)</span>, the inequality holds. Assume <span class="math notranslate nohighlight">\(\bu \neq \bzero\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx = \frac{\bu}{\| \bu \|} \)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\| \bx \| = 1\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-la-ip-dual-norm">Theorem 4.100</a></p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bv \|_* \geq |\langle \bx, \bv \rangle |
+   = \left| \left \langle \frac{\bu}{\| \bu \|}, \bv \right \rangle \right |
+   = \frac{|\langle \bu, \bv \rangle |}{\| \bu \|}.
+   \]</div>
+</li>
+<li><p>Multiplying both sides by <span class="math notranslate nohighlight">\(\| \bu \|\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bu \| \| \bv \|_* \geq | \langle \bu, \bv \rangle |.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="real-inner-product-spaces">
+<h2><span class="section-number">4.6.9. </span>Real Inner Product Spaces<a class="headerlink" href="#real-inner-product-spaces" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we assume that <span class="math notranslate nohighlight">\(\VV\)</span> is a vector space
+over <span class="math notranslate nohighlight">\(\RR\)</span>. Some of the expressions simplify further
+for real vector spaces.</p>
+<div class="proof theorem admonition" id="res-la-rip-dual-norm">
+<p class="admonition-title"><span class="caption-number">Theorem 4.102 </span> (Dual norm in a real inner product space)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real inner product space endowed with a norm
+<span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> correspond to a linear functional <span class="math notranslate nohighlight">\(T_{\bv}\)</span>.
+Then, its dual norm is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_* = \underset{\| \bx \| \leq 1}{\sup} \{ \langle \bx, \bv \rangle \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assuming <span class="math notranslate nohighlight">\(\VV\)</span> to be a real vector space, we note that</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\| \bx \| = \| - \bx \|\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \bx \| \leq 1 \iff \| - \bx \| \leq 1\)</span>.</p></li>
+<li><p>Also <span class="math notranslate nohighlight">\(\langle \bx, \bv \rangle = -\langle -\bx, \bv \rangle\)</span>.</p></li>
+<li><p>Either <span class="math notranslate nohighlight">\(\langle \bx, \bv \rangle\)</span>
+or <span class="math notranslate nohighlight">\(\langle -\bx, \bv \rangle\)</span> is nonnegative.</p></li>
+<li><p>Thus, the identity in <a class="reference internal" href="#res-la-ip-dual-norm">Theorem 4.100</a> simplifies to this version.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./la"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="inner_product_spaces.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4.5. </span>Inner Product Spaces</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="euclidean.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.7. </span>The Euclidean Space</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

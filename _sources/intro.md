@@ -1,10 +1,16 @@
 # Welcome
 
 
-## What's New
+## What is New
 
-* [Subgradients and subdifferentials summary](sec:subgradients:summary)
-* [Conjugate functions summary](sec:conjugate-functions:summary)
+* {ref}`sec:ms:metric-topology`
+* Linear Algebra and Analysis
+  * {ref}`sec:la:normed-spaces`
+  * {ref}`sec:la:affine_sets`
+* Convex Sets and Functions
+  * {ref}`sec:cvxf:convex-functions`
+  * {ref}`sec:cvx:relint`
+
 
 ## Mathematical Optimization Problems
 

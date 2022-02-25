@@ -8,46 +8,65 @@ Numbers
 ------------
 
 .. list-table:: 
-    :widths: 20 80
+    :widths: 20 60 20
     :header-rows: 1
 
     * - Notation 
       - Meaning
+      - Reference
     * - :math:`\Nat`
       - The set of natural numbers
+      -
     * - :math:`\ZZ`
       - The set of integers
+      -
     * - :math:`\QQ`
       - The set of rational numbers
+      -
     * - :math:`\RR`
       - The set of real numbers
+      - :prf:ref:`def-real-numbers`
     * - :math:`\ERL`
       - The extended real line :math:`[-\infty, \infty]`
+      - :prf:ref:`def-bra-extended-real-line`
     * - :math:`\CC`
       - The set of complex numbers
+      -
     * - :math:`\Re(x)`
       - The real part of a complex number
+      -
     * - :math:`\Im(x)`
       - The imaginary part of a complex number
+      -
 
 
 Sets and Functions
 ---------------------
 
 .. list-table:: 
-    :widths: 20 80
+    :widths: 20 60 20
     :header-rows: 1
 
     * - Notation 
       - Meaning
+      - Reference
     * - :math:`\dom f`
-      - Domain of a function :math:`f`
+      - Domain of a function :math:`f` 
+      - :prf:ref:`def-st-function-domain`
     * - :math:`\range f`
       - Range of a function :math:`f`
+      - :prf:ref:`def-st-function-range`
     * - :math:`\epi f`
       - Epigraph of a function :math:`f`
+      - 
     * - :math:`\supp f`
       - Support of a function :math:`f`
+      - 
+    * - :math:`g \circ f`
+      - Composition of functions :math:`g` and :math:`f` with 
+        :math:`(g \circ f)(x) = g(f(x))`
+      - :prf:ref:`def-st-function-composition`
+
 
 
 Linear Algebra
@@ -111,6 +130,53 @@ Topology / Metric Spaces
     * - :math:`\relint A`
       - The relative interior of a set :math:`A`
 
+
+Calculus
+----------------------------
+
+.. list-table:: 
+    :widths: 20 60 20
+    :header-rows: 1
+
+    * - Notation 
+      - Meaning
+      - Reference
+    * - :math:`\lim_{x \to a} f(x)`
+      - Limit of :math:`f` as :math:`x` approaches :math:`a`
+      - :prf:ref:`def-bra-real-function-limit`
+    * - :math:`x \to a^-`
+      - :math:`x` approaches :math:`a` from the left
+      - :prf:ref:`def-bra-rf-one-sided-limit`
+    * - :math:`x \to a^+`
+      - :math:`x` approaches :math:`a` from the right
+      - :prf:ref:`def-bra-rf-one-sided-limit`
+    * - :math:`f(a^-)`
+      - Left hand limit of :math:`f` at :math:`x=a`
+      - :prf:ref:`def-bra-rf-one-sided-limit`
+    * - :math:`f(a^+)`
+      - Right hand limit of :math:`f` at :math:`x=a`
+      - :prf:ref:`def-bra-rf-one-sided-limit`
+    * - :math:`f'`
+      - First derivative of :math:`f`
+      - :prf:ref:`def-bra-rf-differentiable-function`
+    * - :math:`f^{(1)}`
+      - 1st derivative of :math:`f`
+      - :prf:ref:`def-bra-rf-nth-derivative`
+    * - :math:`f^{(n)}`
+      - n-th derivative of :math:`f`
+      - :prf:ref:`def-bra-rf-nth-derivative`
+    * - :math:`f^{(0)}`
+      - 0-th derivative of :math:`f` (:math:`f^{(0)}=f`)
+      - :prf:ref:`def-bra-rf-nth-derivative`
+    * - :math:`f'_-(a)`
+      - Left hand derivative of :math:`f` at :math:`x=a`
+      - :prf:ref:`def-bra-df-one-sided-derivative`
+    * - :math:`f'_+(a)`
+      - Right hand derivative of :math:`f` at :math:`x=a`
+      - :prf:ref:`def-bra-df-one-sided-derivative`
+    * - :math:`\nabla f`
+      - Gradient of :math:`f`
+      -
 
 Convex Analysis
 -------------------------

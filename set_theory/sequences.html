@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1.5. Sequences &#8212; Optimization for Sparse Signal Processing</title>
+    <title>1.5. Sequences &#8212; Optimization for Signal Processing</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,9 +42,9 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -82,14 +82,19 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
       
-      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -197,6 +202,11 @@
      2.7. Differentiable Functions
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -220,18 +230,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/sequences.html">
-     3.3. Sequences
+     3.4. Sequences
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/continuity.html">
-     3.4. Continuity
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../metric_spaces/boundedness.html">
-     3.5. Boundedness
+     3.5. Functions and Continuity
     </a>
    </li>
    <li class="toctree-l2">
@@ -245,27 +255,30 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/subspaces.html">
-     3.8. Subspace Topology
+     3.9. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../la/chapter.html">
    4. Linear Algebra
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Convex Analysis
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../convex_sets/intro.html">
-   5. Convex Sets
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -274,70 +287,60 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/affine.html">
-     5.2. Affine Sets
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/convex.html">
-     5.3. Convex Sets
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/cone.html">
-     5.4. Cones
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/hyperplane.html">
-     5.5. Hyperplanes and Half spaces
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/ball.html">
-     5.6. Euclidean Balls and Ellipsoids
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/norm_ball.html">
-     5.7. Norm Balls
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/norm_cone.html">
-     5.8. Norm Cones
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/polyhedron.html">
-     5.9. Polyhedra
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.8. Important Vector Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/psd_cone.html">
-     5.10. Symmetric Matrices
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.9. Sequence Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/convexity_ops.html">
-     5.11. Convexity Preserving Operations
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/dual_cones.html">
-     5.12. Dual Cones
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
-     5.13. Generalized Inequalities
+    <a class="reference internal" href="../la/affine.html">
+     4.10. Affine Sets and Transformations
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../convex_functions/intro.html">
-   6. Functions
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
@@ -346,25 +349,22 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/functions.html">
-     6.1. Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/convex_functions.html">
-     6.2. Convex Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
-     6.3. Extensions for Convex Functions
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
     </a>
    </li>
   </ul>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../subgradients/chapter.html">
-   7. Subgradients
+  <a class="reference internal" href="../convex_sets/intro.html">
+   6. Convex Sets and Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -373,15 +373,58 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../subgradients/summary.html">
-     7.1. Chapter Summary
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     6.9. Subgradients
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../conjugate_functions/chapter.html">
-   8. Conjugate Functions
+   7. Conjugate Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -391,14 +434,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../conjugate_functions/summary.html">
-     8.1. Chapter Summary
+     7.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../smoothness/chapter.html">
-   9. Smoothness
+   8. Smoothness
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -408,14 +451,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../smoothness/summary.html">
-     9.1. Chapter Summary
+     8.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../strong_convexity/chapter.html">
-   10. Strong Convexity
+   9. Strong Convexity
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -425,14 +468,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../strong_convexity/summary.html">
-     10.1. Chapter Summary
+     9.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
-   11. Projection onto Convex Sets
+   10. Projection onto Convex Sets
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -442,14 +485,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
-     11.1. Chapter Summary
+     10.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../proximal_operator/chapter.html">
-   12. Proximal Operator
+   11. Proximal Operator
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
   <label for="toctree-checkbox-11">
@@ -459,36 +502,29 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../proximal_operator/intro.html">
-     12.3. Introduction
+     11.3. Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../proximal_operator/summary.html">
-     12.4. Chapter Summary
+     11.4. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Convex Optimization
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../gradient_methods/chapter.html">
-   13. Gradient Descent Methods
+   12. Gradient Descent Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../subgradient_methods/chapter.html">
-   14. Subgradient Methods
+   13. Subgradient Methods
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../selected/chapter.html">
-   15. Selected Functions
+   14. Selected Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
   <label for="toctree-checkbox-12">
@@ -498,7 +534,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../selected/projection.html">
-     15.1. Projection onto Convex Set
+     14.1. Projection onto Convex Set
     </a>
    </li>
   </ul>
@@ -536,22 +572,22 @@
 
 
           
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
     <div class="topbar container-xl fixed-top">
     <div class="topbar-contents row">
         <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
         <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
             
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
@@ -566,7 +602,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -600,20 +636,30 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Sequences</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="sequences">
 <h1><span class="section-number">1.5. </span>Sequences<a class="headerlink" href="#sequences" title="Permalink to this headline">¶</a></h1>
 <div class="proof definition admonition" id="def-st-sequence">
-<p class="admonition-title"><span class="caption-number">Definition 1.70 </span> (Sequence)</p>
+<p class="admonition-title"><span class="caption-number">Definition 1.85 </span> (Sequence)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be a set.
 Any function <span class="math notranslate nohighlight">\(x : \Nat \to A\)</span>, where <span class="math notranslate nohighlight">\(\Nat = \{1,2,3,\dots\}\)</span> is the set of natural numbers,
@@ -637,7 +683,7 @@ Tuples (like <span class="math notranslate nohighlight">\((a,b,c,d)\)</span>) ar
 Sequences are ordered and of infinite
 (but countable) length.</p>
 <div class="proof remark admonition" id="remark-1">
-<p class="admonition-title"><span class="caption-number">Remark 1.14 </span></p>
+<p class="admonition-title"><span class="caption-number">Remark 1.19 </span></p>
 <div class="remark-content section" id="proof-content">
 <p>We shall abuse the notation and use <span class="math notranslate nohighlight">\(X\)</span> to denote
 both the sequence <span class="math notranslate nohighlight">\(\{x_n \}\)</span> and the set of
@@ -647,21 +693,21 @@ mean that there exists a <span class="math notranslate nohighlight">\(k \in \Nat
 <span class="math notranslate nohighlight">\(x\)</span> is the k-th element of the sequence <span class="math notranslate nohighlight">\(X = \{ x_n \}\)</span>.</p>
 </div>
 </div><div class="proof definition admonition" id="def-st-sequence-eventual-satisfaction">
-<p class="admonition-title"><span class="caption-number">Definition 1.71 </span> (Eventually)</p>
+<p class="admonition-title"><span class="caption-number">Definition 1.86 </span> (Eventually)</p>
 <div class="definition-content section" id="proof-content">
 <p>We say that a sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> of a set <span class="math notranslate nohighlight">\(A\)</span> satisfies a property <span class="math notranslate nohighlight">\((P)\)</span>
 <em>eventually</em> if there exists some natural number <span class="math notranslate nohighlight">\(n_0\)</span> such that <span class="math notranslate nohighlight">\(x_n\)</span> satisfies
 the property <span class="math notranslate nohighlight">\((P)\)</span> for all <span class="math notranslate nohighlight">\(n &gt; n_0\)</span>.</p>
 </div>
 </div><div class="proof example admonition" id="example-3">
-<p class="admonition-title"><span class="caption-number">Example 1.16 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 1.18 </span></p>
 <div class="example-content section" id="proof-content">
 <p>Consider the sequence <span class="math notranslate nohighlight">\(\{ x_n = \frac{1000}{n} \}\)</span>.
 For all <span class="math notranslate nohighlight">\(n &gt; 1000\)</span>, it satisfies the property that
 <span class="math notranslate nohighlight">\(x_n &lt; 1\)</span>.</p>
 </div>
 </div><div class="proof definition admonition" id="def-st-sub-sequence">
-<p class="admonition-title"><span class="caption-number">Definition 1.72 </span> (Subsequence)</p>
+<p class="admonition-title"><span class="caption-number">Definition 1.87 </span> (Subsequence)</p>
 <div class="definition-content section" id="proof-content">
 <p>A <em>subsequence</em> of a sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> is a sequence
 <span class="math notranslate nohighlight">\(\{ y_n \}\)</span> for which there exists a strictly increasing sequence
@@ -692,8 +738,8 @@ such that <span class="math notranslate nohighlight">\(y_n = x_{k_n}\)</span> ho
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="cardinality.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -710,19 +756,17 @@ such that <span class="math notranslate nohighlight">\(y_n = x_{k_n}\)</span> ho
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Shailesh Kumar<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

@@ -1,4 +1,0 @@
-# Extensions for Convex Functions
-
-
-

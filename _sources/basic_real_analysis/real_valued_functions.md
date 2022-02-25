@@ -1,3 +1,4 @@
+(sec:bra:real-valued-functions)=
 # Real Valued Functions
 
 
@@ -13,7 +14,9 @@ from $X$ to $\RR$.
 ```
 
 
-```{prf:definition}
+```{prf:definition} The set of real valued total functions
+:label: def-bra-rvf-set
+
 The set $\FFF (X, \RR)$ denotes the set of all real valued (total) functions
 from $X$ to $\RR$.
 ```
@@ -52,8 +55,10 @@ f g: x \mapsto f(x) g(x) \Forall x \in X.
 $$
 ```
 
-```{prf:definition}
-The algebraic structure can be extended to partial functions too.
+```{prf:definition} An algebra for partial functions
+:label: def-bra-rvpf-algebra
+
+An algebraic structure can be provided to partial functions too.
 
 Let $f,g$ be (partial) real valued functions  from $X$ to $\RR$.
 
@@ -82,6 +87,17 @@ $$
 f g: x \mapsto f(x) g(x) \text{ with } \dom f g = \dom f \cap \dom g.
 $$
 ```
+However, there are certain limitations/odd behaviors with the structure.
+
+* If $f$ and $g$ are such that $\dom f \cap \dom g = \EmptySet$.
+  Then $f + g$ is an empty function.
+* The function $f + (-f)$ is 0 over $\dom f$ but not defined
+  over $X \setminus \dom f$. 
+  Thus, it is not equal to the $\bzero$ function.
+  Thus, an additive inverse doesn't exist.
+* Scalar multiplication with $0$ leads to a function which 
+  is $0$ only over $\dom f$. It is not defined over $X \setminus \dom f$.
+
 
 
 
@@ -149,6 +165,77 @@ it is bounded from above as well as below.
    a metric space. 
    See {prf:ref}`ex-ms-bounded-functions-metric-space`. 
 
+## Graph
+
+* For a function $f : \RR^n \to \RR$,
+  its graph is a subset of $\RR^{n+1}$.
+* We say that a point $(x, f(x))$ in the graph of $f$
+  is above (resp. below) of another point $(y, f(y))$
+  if $f(x) \geq f(y)$ (resp. $f(x) \leq f(y)$).
+* A line segment connecting the two points 
+  $(x_1, f(x_1))$ and $(x_2, f(x_2))$ is called a
+  *chord* of the graph of the function.
+
+
+## Epigraph
+
+```{prf:definition} Epigraph
+:label: def-bra-epigraph
+
+The *epigraph* of a real valued function $f: X \to \RR$ is
+defined as:
+
+$$
+\epi f \triangleq \{ (x,t) \in X \times \RR \, | \, x \in \dom f, f(x) \leq t \}.
+$$ 
+```
+The epigraph lies above (and includes) the graph of a function.
+
+## Sub-level Sets
+
+```{prf:definition} Sub-level set
+:label: def-bra-sub-level-set
+
+For a real valued function $f: X \to \RR$, the sublevel set
+for some $\alpha \in \RR$,
+denoted by $C_{\alpha}$,
+is defined as 
+
+$$
+C_{\alpha} \triangleq \{ x \in \dom f \,|\, f(x) \leq \alpha \}.
+$$
+```
+
+## Hypograph
+
+```{prf:definition} Hypograph
+:label: def-bra-hypograph
+
+The *hypograph* of a real valued function $f: X \to \RR$ is
+defined as:
+
+$$
+\hypo f \triangleq \{ (x,t) \in X \times \RR \, | \, x \in \dom f, t \leq f(x) \}.
+$$ 
+```
+The epigraph lies above (and includes) the graph of a function.
+
+
+## Super-level Sets
+
+```{prf:definition} Super-level set
+:label: def-bra-super-level-set
+
+For a real valued function $f: X \to \RR$, the super-level set
+for some $\alpha \in \RR$,
+denoted by $D_{\alpha}$,
+is defined as 
+
+$$
+D_{\alpha} \triangleq \{ x \in \dom f \,|\, f(x) \geq \alpha \}.
+$$
+```
+
 
 ## Extended Real Valued Functions
 
@@ -188,7 +275,7 @@ as it extends the domain to the whole of $X$.
 :label: def-bra-extension-domain
 
 For an extended valued function $\tilde{f} : X \to \ERL$, its 
-domain is defined as:
+*effective domain* is defined as:
 
 $$
 \dom \tilde{f} \triangleq \{ x \in X \ST \tilde{f}(x) < \infty \}.
@@ -218,3 +305,4 @@ $$
 \end{cases}
 $$
 ```
+

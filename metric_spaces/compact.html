@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.7. Compactness &#8212; Optimization for Sparse Signal Processing</title>
+    <title>3.7. Compactness &#8212; Optimization for Signal Processing</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +42,9 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -52,7 +54,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.8. Subspace Topology" href="subspaces.html" />
+    <link rel="next" title="3.8. Real Valued Functions" href="real_valued_functions.html" />
     <link rel="prev" title="3.6. Completeness" href="complete.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -80,14 +82,19 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
       
-      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -195,6 +202,11 @@
      2.7. Differentiable Functions
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -218,18 +230,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="sequences.html">
-     3.3. Sequences
+     3.4. Sequences
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="continuity.html">
-     3.4. Continuity
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="boundedness.html">
-     3.5. Boundedness
+     3.5. Functions and Continuity
     </a>
    </li>
    <li class="toctree-l2">
@@ -243,27 +255,30 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="subspaces.html">
-     3.8. Subspace Topology
+     3.9. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="topics.html">
+     3.11. Special Topics
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../la/chapter.html">
    4. Linear Algebra
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Convex Analysis
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../convex_sets/intro.html">
-   5. Convex Sets
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -272,70 +287,60 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/affine.html">
-     5.2. Affine Sets
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/convex.html">
-     5.3. Convex Sets
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/cone.html">
-     5.4. Cones
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/hyperplane.html">
-     5.5. Hyperplanes and Half spaces
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/ball.html">
-     5.6. Euclidean Balls and Ellipsoids
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/norm_ball.html">
-     5.7. Norm Balls
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/norm_cone.html">
-     5.8. Norm Cones
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/polyhedron.html">
-     5.9. Polyhedra
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.8. Important Vector Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/psd_cone.html">
-     5.10. Symmetric Matrices
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.9. Sequence Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/convexity_ops.html">
-     5.11. Convexity Preserving Operations
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/dual_cones.html">
-     5.12. Dual Cones
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
-     5.13. Generalized Inequalities
+    <a class="reference internal" href="../la/affine.html">
+     4.10. Affine Sets and Transformations
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../convex_functions/intro.html">
-   6. Functions
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
@@ -344,25 +349,22 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/functions.html">
-     6.1. Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/convex_functions.html">
-     6.2. Convex Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
-     6.3. Extensions for Convex Functions
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
     </a>
    </li>
   </ul>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../subgradients/chapter.html">
-   7. Subgradients
+  <a class="reference internal" href="../convex_sets/intro.html">
+   6. Convex Sets and Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -371,15 +373,58 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../subgradients/summary.html">
-     7.1. Chapter Summary
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     6.9. Subgradients
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../conjugate_functions/chapter.html">
-   8. Conjugate Functions
+   7. Conjugate Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -389,14 +434,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../conjugate_functions/summary.html">
-     8.1. Chapter Summary
+     7.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../smoothness/chapter.html">
-   9. Smoothness
+   8. Smoothness
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -406,14 +451,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../smoothness/summary.html">
-     9.1. Chapter Summary
+     8.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../strong_convexity/chapter.html">
-   10. Strong Convexity
+   9. Strong Convexity
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -423,14 +468,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../strong_convexity/summary.html">
-     10.1. Chapter Summary
+     9.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
-   11. Projection onto Convex Sets
+   10. Projection onto Convex Sets
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -440,14 +485,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
-     11.1. Chapter Summary
+     10.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../proximal_operator/chapter.html">
-   12. Proximal Operator
+   11. Proximal Operator
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
   <label for="toctree-checkbox-11">
@@ -457,36 +502,29 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../proximal_operator/intro.html">
-     12.3. Introduction
+     11.3. Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../proximal_operator/summary.html">
-     12.4. Chapter Summary
+     11.4. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Convex Optimization
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../gradient_methods/chapter.html">
-   13. Gradient Descent Methods
+   12. Gradient Descent Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../subgradient_methods/chapter.html">
-   14. Subgradient Methods
+   13. Subgradient Methods
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../selected/chapter.html">
-   15. Selected Functions
+   14. Selected Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
   <label for="toctree-checkbox-12">
@@ -496,7 +534,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../selected/projection.html">
-     15.1. Projection onto Convex Set
+     14.1. Projection onto Convex Set
     </a>
    </li>
   </ul>
@@ -534,22 +572,22 @@
 
 
           
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
     <div class="topbar container-xl fixed-top">
     <div class="topbar-contents row">
         <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
         <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
             
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
@@ -564,7 +602,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -598,18 +636,967 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#open-covers">
+   3.7.1. Open Covers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compact-sets">
+   3.7.2. Compact Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#characterization-of-compactness">
+   3.7.3. Characterization of Compactness
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closedness-and-boundedness">
+   3.7.4. Closedness and Boundedness
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continuity">
+   3.7.5. Continuity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#homeomorphism">
+   3.7.6. Homeomorphism
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compact-spaces">
+   3.7.7. Compact Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#euclidean-spaces">
+   3.7.8. Euclidean Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#totally-bounded-metric-spaces">
+   3.7.9. Totally Bounded Metric Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equivalent-metrics">
+   3.7.10. Equivalent Metrics
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Compactness</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#open-covers">
+   3.7.1. Open Covers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compact-sets">
+   3.7.2. Compact Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#characterization-of-compactness">
+   3.7.3. Characterization of Compactness
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closedness-and-boundedness">
+   3.7.4. Closedness and Boundedness
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continuity">
+   3.7.5. Continuity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#homeomorphism">
+   3.7.6. Homeomorphism
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compact-spaces">
+   3.7.7. Compact Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#euclidean-spaces">
+   3.7.8. Euclidean Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#totally-bounded-metric-spaces">
+   3.7.9. Totally Bounded Metric Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equivalent-metrics">
+   3.7.10. Equivalent Metrics
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="compactness">
-<h1><span class="section-number">3.7. </span>Compactness<a class="headerlink" href="#compactness" title="Permalink to this headline">¶</a></h1>
+<span id="sec-ms-compactness"></span><h1><span class="section-number">3.7. </span>Compactness<a class="headerlink" href="#compactness" title="Permalink to this headline">¶</a></h1>
+<p>The material in this section is primarily based on
+<span id="id1">[<a class="reference internal" href="../bib.html#id2">1</a>, <a class="reference internal" href="../bib.html#id8">7</a>]</span>.</p>
+<div class="docutils">
+<p>Recall from <a class="reference internal" href="../set_theory/sets.html#def-st-cover">Definition 1.21</a> that for a subset <span class="math notranslate nohighlight">\(A \subseteq X\)</span>,
+a cover is a family <span class="math notranslate nohighlight">\(\{ A_i \}_{i \in I}\)</span> of subsets of <span class="math notranslate nohighlight">\(X\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+A \subseteq \bigcup_{i \in I} A_i.
+\]</div>
+</div>
+<div class="section" id="open-covers">
+<h2><span class="section-number">3.7.1. </span>Open Covers<a class="headerlink" href="#open-covers" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ms-open-cover">
+<p class="admonition-title"><span class="caption-number">Definition 3.51 </span> (Open cover)</p>
+<div class="definition-content section" id="proof-content">
+<p>A family of open subsets <span class="math notranslate nohighlight">\(\{ A_i \}_{i \in I}\)</span> of subsets of <span class="math notranslate nohighlight">\((X,d)\)</span>
+is an <em>open cover</em> of <span class="math notranslate nohighlight">\(A\)</span> if it covers <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="theorem-1">
+<p class="admonition-title"><span class="caption-number">Theorem 3.66 </span> (Lindelöf)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every open cover of a subset of <span class="math notranslate nohighlight">\(\RR^m\)</span> can be reduced to
+an at-most countable subcover.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We call a point <span class="math notranslate nohighlight">\(a = (a_1, \dots, a_m) \in \RR^m\)</span> a rational point
+if every component of <span class="math notranslate nohighlight">\(a\)</span> is a rational number.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(A\)</span> be a subset of <span class="math notranslate nohighlight">\(\RR^m\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\{ \OOO_i \}_{i \in I}\)</span> be an open cover of <span class="math notranslate nohighlight">\(A\)</span> (possibly uncountable).</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(A \subseteq \bigcup_{i \in I} \OOO_i\)</span>.</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(x \in A\)</span>,</p>
+<ol class="simple">
+<li><p>Choose an index <span class="math notranslate nohighlight">\(i_x \in I\)</span> such that <span class="math notranslate nohighlight">\(x \in \OOO_{i_x}\)</span>.</p></li>
+<li><p>Pick a rational point <span class="math notranslate nohighlight">\(a_x \in \RR^m\)</span> and a rational positive number <span class="math notranslate nohighlight">\(r_x\)</span>
+such that <span class="math notranslate nohighlight">\(x \in B(a_x, r_x) \subseteq \OOO_{i_x}\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Consider the collection <span class="math notranslate nohighlight">\(C = \{ B(a_x, r_x) \ST x \in A \}\)</span>.</p></li>
+<li><p>Since the set of rational points is countable and the set of rational numbers is countable,
+hence the set of all open balls centered at rational points with rational radii is countable.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(C\)</span> which is a subset of open balls with rational points as centers and
+rational radii, is at most countable.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is an at most countable open cover of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Since each <span class="math notranslate nohighlight">\(B(a_x, r_x)\)</span> is a subset of an <span class="math notranslate nohighlight">\(\OOO_{i_x}\)</span>, hence
+there exists an at most countable subcover of <span class="math notranslate nohighlight">\(\{ \OOO_i\}_{i \in I}\)</span> for <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="compact-sets">
+<h2><span class="section-number">3.7.2. </span>Compact Sets<a class="headerlink" href="#compact-sets" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ms-compact-set">
+<p class="admonition-title"><span class="caption-number">Definition 3.52 </span> (Compact set)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a metric space. A subset <span class="math notranslate nohighlight">\(A\)</span> of <span class="math notranslate nohighlight">\(X\)</span> is called
+<em>compact</em> if every open cover of <span class="math notranslate nohighlight">\(A\)</span> can be reduced to a
+finite subcover.</p>
+</div>
+</div><div class="proof definition admonition" id="def-ms-compact-metric-space">
+<p class="admonition-title"><span class="caption-number">Definition 3.53 </span> (Compact metric space)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X,d)\)</span> be a metric space. If <span class="math notranslate nohighlight">\(X\)</span> is itself a
+compact set, then <span class="math notranslate nohighlight">\((X,d)\)</span> is called a <em>compact metric space</em>.</p>
+</div>
+</div><div class="proof example admonition" id="ex-0-1-not-compact">
+<p class="admonition-title"><span class="caption-number">Example 3.21 </span> (<span class="math notranslate nohighlight">\((0,1)\)</span> is not compact)</p>
+<div class="example-content section" id="proof-content">
+<p>The set <span class="math notranslate nohighlight">\((0,1)\)</span> is not compact in <span class="math notranslate nohighlight">\(\RR\)</span>.
+We first show this the hard way by picking an
+open cover for <span class="math notranslate nohighlight">\((0,1)\)</span> which cannot be
+reduced to a finite subcover.
+Later, we discuss how to verify compactness
+through easy checks.</p>
+<ol>
+<li><p>Consider the family of open intervals:</p>
+<div class="math notranslate nohighlight">
+\[
+   C = \left \{ \left(\frac{1}{n}, 1 \right ) \ST n \geq 2 \right \}.
+   \]</div>
+</li>
+<li><p>For every <span class="math notranslate nohighlight">\(x \in (0,1)\)</span>, there is a natural number <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(x &gt; \frac{1}{n}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(x \in  \left(\frac{1}{n}, 1 \right )\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   (0, 1) \subseteq \bigcup_{n=2}^{\infty} \left(\frac{1}{n}, 1 \right )
+   \]</div>
+<p>implying that <span class="math notranslate nohighlight">\(C\)</span> is an open cover of <span class="math notranslate nohighlight">\((0,1)\)</span>.</p>
+</li>
+<li><p>At the same time for every <span class="math notranslate nohighlight">\(n \geq 2\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+   \left(\frac{1}{n}, 1 \right ) \subseteq (0, 1)
+   \]</div>
+<p>since <span class="math notranslate nohighlight">\(\frac{1}{n} &gt; 0\)</span>.</p>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   (0, 1) = \bigcup_{n=2}^{\infty} \left(\frac{1}{n}, 1 \right ).
+   \]</div>
+</li>
+<li><p>But there is no finite subcover of <span class="math notranslate nohighlight">\((0,1)\)</span> in <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>If there was a finite subcover, we could pick a maximum <span class="math notranslate nohighlight">\(n\)</span> among those intervals.</p></li>
+<li><p>But then <span class="math notranslate nohighlight">\(x = \frac{1}{n}\)</span> won’t belong to any of those intervals in the finite subcover.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\((0,1)\)</span> is not compact.</p></li>
+</ol>
+<p>We later show in <a class="reference internal" href="#res-ms-compact-is-closed-bounded">Theorem 3.68</a>
+that every compact set is closed and bounded.
+Hence, an easy way to say that <span class="math notranslate nohighlight">\((0,1)\)</span> is not
+compact is by noticing that it is not closed.</p>
+</div>
+</div></div>
+<div class="section" id="characterization-of-compactness">
+<h2><span class="section-number">3.7.3. </span>Characterization of Compactness<a class="headerlink" href="#characterization-of-compactness" title="Permalink to this headline">¶</a></h2>
+<p>We have defined compactness as a property where every open
+cover can be reduced to a finite subcover.
+The characterization of a property involves identifying
+other properties which are equivalent in the sense that
+property A <span class="math notranslate nohighlight">\(\iff\)</span> property B. If one is true then
+the other must be true and vice versa.</p>
+<p>We will see later that compactness of a set <span class="math notranslate nohighlight">\(A\)</span> is equivalent
+to the property that every sequence of <span class="math notranslate nohighlight">\(A\)</span> has a subsequence
+that converges to a point in <span class="math notranslate nohighlight">\(A\)</span>. However, before we go there,
+let us examine some implications of this
+property that every sequence of a set <span class="math notranslate nohighlight">\(A\)</span> has a subsequence that
+converges within the set <span class="math notranslate nohighlight">\(A\)</span>. These results will be
+useful later in the characterization of compact sets.</p>
+<div class="proof lemma admonition" id="res-ms-open-cover-lebesgue-number">
+<p class="admonition-title"><span class="caption-number">Lemma 3.1 </span> (Lebesgue number)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq \bigcup_{i \in I} \OOO_i\)</span> be an open cover of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>If every sequence in <span class="math notranslate nohighlight">\(A\)</span> has a subsequence which converges to a point of <span class="math notranslate nohighlight">\(A\)</span>,
+then, there exists a number <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that for each <span class="math notranslate nohighlight">\(x \in A\)</span>, we have
+<span class="math notranslate nohighlight">\(B(x, \delta) \subseteq \OOO_i\)</span> for at least one <span class="math notranslate nohighlight">\(i \in I\)</span>.</p>
+<p>Any such number <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> is called a <em>Lebesgue number</em> of <span class="math notranslate nohighlight">\(A\)</span>
+for the open cover <span class="math notranslate nohighlight">\(\{\OOO_i \}_{i \in I}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume the claim is false.</p>
+<ol class="simple">
+<li><p>Then, for each <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>, there exists some <span class="math notranslate nohighlight">\(x \in A\)</span> such that
+<span class="math notranslate nohighlight">\(B (x, \delta)\)</span> is not a subset of any <span class="math notranslate nohighlight">\(\OOO_i\)</span>.</p></li>
+<li><p>In particular, for each <span class="math notranslate nohighlight">\(n\)</span>, there exists some <span class="math notranslate nohighlight">\(x_n \in A\)</span> such that
+<span class="math notranslate nohighlight">\(B (x_n, \frac{1}{n}) \cap (X \setminus \OOO_i) \neq \EmptySet\)</span> holds
+for each <span class="math notranslate nohighlight">\(i \in I\)</span>.</p></li>
+<li><p>Consider the sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span>.</p></li>
+<li><p>By the hypothesis, every
+sequence has a subsequence that converges to a point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(x \in A\)</span> be the limit of such a subsequence of <span class="math notranslate nohighlight">\(\{ x_n \}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(x \in A\)</span>, <span class="math notranslate nohighlight">\(x \in \OOO_i\)</span> for at least one <span class="math notranslate nohighlight">\(i \in I\)</span>.</p></li>
+<li><p>Pick some <span class="math notranslate nohighlight">\(i \in I\)</span> such that <span class="math notranslate nohighlight">\(x \in \OOO_i\)</span>.</p></li>
+<li><p>Choose some <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(x \in B(x, r) \subseteq \OOO_i\)</span>.</p>
+<ol class="simple">
+<li><p>Recall that <span class="math notranslate nohighlight">\(\OOO_i\)</span> is open and <span class="math notranslate nohighlight">\(x\)</span> is its interior point. So such an <span class="math notranslate nohighlight">\(r &gt; 0\)</span>
+can be chosen.</p></li>
+</ol>
+</li>
+<li><p>Now, select some <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(\frac{1}{n} &lt; \frac{r}{2}\)</span> and <span class="math notranslate nohighlight">\(d(x, x_n) &lt; \frac{r}{2}\)</span>.</p></li>
+<li><p>It follows that <span class="math notranslate nohighlight">\(B(x_n, \frac{1}{n}) \subseteq B(x, r) \subseteq \OOO_i\)</span>.</p></li>
+<li><p>But this contradicts with the selection of <span class="math notranslate nohighlight">\(x_n\)</span> such that <span class="math notranslate nohighlight">\(B (x_n, \frac{1}{n})\)</span> is
+not contained in any <span class="math notranslate nohighlight">\(\OOO_i\)</span>.</p></li>
+<li><p>Thus, a <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> must exist satisfying the condition that for each <span class="math notranslate nohighlight">\(x \in A\)</span>,
+<span class="math notranslate nohighlight">\(B(x, \delta) \subseteq \OOO_i\)</span> for at least one <span class="math notranslate nohighlight">\(i \in I\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof lemma admonition" id="res-ms-compact-set-existence-of-finite-cover">
+<p class="admonition-title"><span class="caption-number">Lemma 3.2 </span> (Existence of finite cover of open balls)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> of a metric space <span class="math notranslate nohighlight">\((X,d)\)</span>.
+If every sequence in <span class="math notranslate nohighlight">\(A\)</span> has a subsequence which converges to a point of <span class="math notranslate nohighlight">\(A\)</span>,
+then,
+for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span> there exist <span class="math notranslate nohighlight">\(x_1, \dots, x_n \in A\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+A \subseteq \bigcup_{j=1}^n B(x_j, r).
+\]</div>
+</div>
+</div><p>This lemma simply claims that we can construct a finite open cover
+of open balls for <span class="math notranslate nohighlight">\(A\)</span> for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Assume the claim to be false. Choose <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that it is not possible to
+select a finite number of points from <span class="math notranslate nohighlight">\(A\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+A \subseteq \bigcup_{j=1}^n B(x_j, r).
+\]</div>
+<ol class="simple">
+<li><p>Pick some <span class="math notranslate nohighlight">\(x_1 \in A\)</span>.</p></li>
+<li><p>Choose some <span class="math notranslate nohighlight">\(x_2 \in A \setminus B(x_1, r)\)</span>. We can choose <span class="math notranslate nohighlight">\(x_2\)</span> since
+<span class="math notranslate nohighlight">\(A\)</span> doesn’t have a finite open ball cover.</p></li>
+<li><p>Assuming that <span class="math notranslate nohighlight">\(x_1, x_2, \dots,  x_n\)</span> have been chosen inductively,
+choose <span class="math notranslate nohighlight">\(x_{n+1}\)</span> from the set <span class="math notranslate nohighlight">\(A \setminus \bigcup_{i=1}^n B(x_i, r)\)</span>.</p></li>
+<li><p>By design, <span class="math notranslate nohighlight">\(d(x_n, x_m) \geq r\)</span> holds for every <span class="math notranslate nohighlight">\(n \neq m\)</span>.</p></li>
+<li><p>Then, no subsequence of <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> can converge.</p></li>
+<li><p>This contradicts with the hypothesis that every sequence has a subsequence
+that converges in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Hence, the claim must be true.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="def-ms-compact-characterization">
+<p class="admonition-title"><span class="caption-number">Theorem 3.67 </span> (Characterization of compactness)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a subset of a metric space <span class="math notranslate nohighlight">\((X,d)\)</span>.
+The following statements are equivalent.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is compact.</p></li>
+<li><p>Every infinite subset of <span class="math notranslate nohighlight">\(A\)</span> has an accumulation point in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Every sequence in <span class="math notranslate nohighlight">\(A\)</span> has a subsequence which converges to a point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. (1) <span class="math notranslate nohighlight">\(\implies\)</span> (2)</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(S\)</span> be an infinite subset of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Assume, by way of contradiction, that <span class="math notranslate nohighlight">\(S\)</span> has no accumulation point in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(x \in A\)</span>, there exists a deleted neighborhood of <span class="math notranslate nohighlight">\(x\)</span>
+that is disjoint with <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>That is, <span class="math notranslate nohighlight">\(\forall x \in A, \exists r_x &gt; 0 \ST B (x, r_x) \cap ( S \setminus \{ x \}) = \EmptySet\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(B(x, r_x) \cap S\)</span> can either be empty or it can at most contain <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(B(x, r_x) \cap S \subseteq \{ x\}\)</span>.</p></li>
+<li><p>Consider the open cover <span class="math notranslate nohighlight">\(C = \bigcup_{x \in A} B(x, r_x)\)</span>.</p></li>
+<li><p>It is easy to see that <span class="math notranslate nohighlight">\(A \subseteq C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is compact (by hypothesis), there exists a finite set
+<span class="math notranslate nohighlight">\(\{ x_1, \dots, x_n \} \subseteq A\)</span> such that
+<span class="math notranslate nohighlight">\(A \subseteq \bigcup_{i=1}^n B(x_i, r_{x_i})\)</span>.</p></li>
+<li><p>But then</p>
+<div class="math notranslate nohighlight">
+\[
+   S = A \cap S = \bigcup_{i=1}^n [B(x_i, r_{x_i}) \cap S] \subseteq \{ x_1, \dots, x_n \}.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(S\)</span> must be a finite set containing at most <span class="math notranslate nohighlight">\(n\)</span> elements.</p></li>
+<li><p>We arrive at a contradiction as <span class="math notranslate nohighlight">\(S\)</span> is infinite.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(S\)</span> has an accumulation point in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+<p>(2) <span class="math notranslate nohighlight">\(\implies\)</span> (3)</p>
+<ol>
+<li><p>We assume that every infinite subset of <span class="math notranslate nohighlight">\(A\)</span> has an accumulation point in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\{x_n \}\)</span> be an arbitrary sequence of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\{x_n \}\)</span> is constant, then every subsequence is constant and convergent.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\{x_n \}\)</span> takes a finite number of distinct values, then there is at least
+one value which must occur infinite times. Thus, at least one subsequence is
+a constant sequence and hence convergent.</p></li>
+<li><p>We are left with the case where <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> contains infinite distinct values.</p></li>
+<li><p>Then, we can choose a subsequence <span class="math notranslate nohighlight">\(\{ y_n \}\)</span> of <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> which consists of
+all distinct values; i.e., <span class="math notranslate nohighlight">\(y_n \neq y_m\)</span> whenever <span class="math notranslate nohighlight">\(n \neq m\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(k_1 = 1\)</span>.</p></li>
+<li><p>Assuming <span class="math notranslate nohighlight">\(k_1, \dots, k_n\)</span> have been selected,
+choose <span class="math notranslate nohighlight">\(k_{n+1} &gt; k_n\)</span> such that <span class="math notranslate nohighlight">\(x_{k_{n+1}} \neq x_{k_i}\)</span> for <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span>.</p></li>
+<li><p>This is possible since <span class="math notranslate nohighlight">\(\{x_n \}\)</span> has infinite distinct values and
+so far only <span class="math notranslate nohighlight">\(n\)</span> distinct values have been chosen.</p></li>
+<li><p>Now, let <span class="math notranslate nohighlight">\(y_n = x_{k_n}\)</span>.</p></li>
+<li><p>It is clear that <span class="math notranslate nohighlight">\(\{y_n\}\)</span> is a subsequence of <span class="math notranslate nohighlight">\(\{x_n\}\)</span> consisting of
+all distinct values.</p></li>
+</ol>
+</li>
+<li><p>Consider the set <span class="math notranslate nohighlight">\(Y = \{ y_1, y_2, \dots \}\)</span> (not the sequence but the set).</p></li>
+<li><p>By our hypothesis (2), since <span class="math notranslate nohighlight">\(Y\)</span> is an infinite subset of <span class="math notranslate nohighlight">\(A\)</span>, hence it must
+have an accumulation point in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(x\)</span> be an accumulation point of <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+<li><p>Assume that <span class="math notranslate nohighlight">\(x \neq y_n\)</span> for each <span class="math notranslate nohighlight">\(n\)</span>. If <span class="math notranslate nohighlight">\(x = y_k\)</span> for some <span class="math notranslate nohighlight">\(k\)</span>, then drop the
+first <span class="math notranslate nohighlight">\(k\)</span> elements of <span class="math notranslate nohighlight">\(\{ y_n \}\)</span>.</p></li>
+<li><p>This ensures that <span class="math notranslate nohighlight">\(d(x, y_n) &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>We will now select a subsequence of <span class="math notranslate nohighlight">\(\{ y_n \}\)</span> that converges to <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p>Towards this, choose <span class="math notranslate nohighlight">\(m_1\)</span> such that <span class="math notranslate nohighlight">\(d(y_{m_1}, x) &lt; 1\)</span>.</p></li>
+<li><p>Now, inductively, assuming that <span class="math notranslate nohighlight">\(m_1 &lt; m_2, \dots &lt; m_n\)</span> have been chosen,
+choose <span class="math notranslate nohighlight">\(m_{n+1}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   d(y_{m_{n+1}}, x) &lt; r_{n+1} = \min \{\frac{1}{n+1}, d(y_1, x), d(y_2, x), \dots, d(y_{m_n}, x) \}.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(d(x, y_n) &gt; 0\)</span>, hence <span class="math notranslate nohighlight">\(r_{n+1} &gt; 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(x\)</span> is an accumulation point of <span class="math notranslate nohighlight">\(Y\)</span>, hence for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>, there exists a
+point <span class="math notranslate nohighlight">\(y \in Y\)</span> such that <span class="math notranslate nohighlight">\(d(x, y) &lt; r\)</span>.</p></li>
+<li><p>Thus, it is possible to pick a suitable <span class="math notranslate nohighlight">\(m_{n+1}\)</span> such that <span class="math notranslate nohighlight">\(d(y_{m_{n+1}}, x) &lt; r_{n+1}\)</span>.</p></li>
+<li><p>Also, by design, <span class="math notranslate nohighlight">\(m_{n+1}\)</span> must be greater than <span class="math notranslate nohighlight">\(m_n\)</span>
+as <span class="math notranslate nohighlight">\(r_{n+1} &lt; d(y_i, x) \Forall 1 \leq i \leq m_n\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\{ y_{m_n} \}\)</span> is a subsequence of <span class="math notranslate nohighlight">\(\{ y_n \}\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\{y_{m_n}\}\)</span> is a subsequence of <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> too.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(d(x, y_{m_n}) &lt; \frac{1}{n}\)</span>, it follows that <span class="math notranslate nohighlight">\(\lim y_{m_n} = x\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> has a convergent subsequence which converges to a point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+<p>(3) <span class="math notranslate nohighlight">\(\implies\)</span> (1)</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(A \subseteq \bigcup_{i \in I} \OOO_i\)</span> be an arbitrary open cover of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>We can pick a Lebesgue number <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that for each <span class="math notranslate nohighlight">\(x \in A\)</span>,
+we have <span class="math notranslate nohighlight">\(B(x, \delta) \subseteq \OOO_i\)</span> for at least one <span class="math notranslate nohighlight">\(i \in I\)</span>
+thanks to <a class="reference internal" href="#res-ms-open-cover-lebesgue-number">Lemma 3.1</a>.</p></li>
+<li><p>Now, thanks to <a class="reference internal" href="#res-ms-compact-set-existence-of-finite-cover">Lemma 3.2</a>, we
+can pick <span class="math notranslate nohighlight">\(x_1, \dots, x_n \in A\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+   A \subseteq \bigcup_{j=1}^n B(x_j, \delta).
+   \]</div>
+</li>
+<li><p>Now, for each <span class="math notranslate nohighlight">\(j\)</span> pick some <span class="math notranslate nohighlight">\(i_j \in I\)</span> such that <span class="math notranslate nohighlight">\(B(x_j, \delta) \subseteq \OOO_{i_j}\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   A \subseteq \bigcup_{j=1}^n B(x_j, \delta) \subseteq \bigcup_{j=1}^n \OOO_{i_j}.
+   \]</div>
+</li>
+<li><p>Thus, the open cover of <span class="math notranslate nohighlight">\(A\)</span> has a finite subcover.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(A\)</span> is compact.</p></li>
+</ol>
+</div>
+<div class="proof definition admonition" id="definition-8">
+<p class="admonition-title"><span class="caption-number">Definition 3.54 </span> (Bolzano-Weierstrass property)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(A\)</span> in a metric space has the <em>Bolzano-Weierstrass property</em> if
+every sequence in <span class="math notranslate nohighlight">\(A\)</span> has a convergent subsequence that converges
+to a point in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div><div class="proof observation admonition" id="observation-9">
+<p class="admonition-title"><span class="caption-number">Observation 3.1 </span></p>
+<div class="observation-content section" id="proof-content">
+<p>A compact set has the Bolzano-Weierstrass property.</p>
+</div>
+</div></div>
+<div class="section" id="closedness-and-boundedness">
+<h2><span class="section-number">3.7.4. </span>Closedness and Boundedness<a class="headerlink" href="#closedness-and-boundedness" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-ms-compact-is-closed-bounded">
+<p class="admonition-title"><span class="caption-number">Theorem 3.68 </span> (Compact sets are closed and bounded)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A compact set is closed and bounded.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(A\)</span> to be compact. We shall show that <span class="math notranslate nohighlight">\(A\)</span> must be bounded.</p>
+<ol>
+<li><p>Choose an open cover for <span class="math notranslate nohighlight">\(A\)</span> as <span class="math notranslate nohighlight">\(A \subseteq \bigcup_{x \in A}B(x, 1)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is compact, hence there exist finite set of points <span class="math notranslate nohighlight">\(\{ x_1, \dots x_n \} \subseteq A\)</span>
+such that <span class="math notranslate nohighlight">\(A \subseteq \bigcup_{i=1}^n B(x_i, 1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(M = \max \{ d(x_i, x_j) \ST 1 \leq i, j \leq n\}\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(x, y \in A\)</span>, choose <span class="math notranslate nohighlight">\(i, j\)</span> such that <span class="math notranslate nohighlight">\(x \in B(x_i, 1)\)</span> and <span class="math notranslate nohighlight">\(y \in B(x_j, 1)\)</span>.</p></li>
+<li><p>Then, by triangle inequality, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+   d(x, y) \leq d(x, x_i) + d(x_i, x_j) + d(x_j, y) &lt; M + 2 &lt; \infty.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\diam A = \sup d(x,y)\)</span> is finite and <span class="math notranslate nohighlight">\(A\)</span> is bounded.</p></li>
+</ol>
+<p>We now show that if <span class="math notranslate nohighlight">\(A\)</span> is compact then <span class="math notranslate nohighlight">\(A\)</span> must be closed too.
+Towards this, we show that <span class="math notranslate nohighlight">\(A\)</span> contains all its closure points.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(x \in \closure A\)</span>.</p></li>
+<li><p>Due to <a class="reference internal" href="sequences.html#res-ms-closure-point-as-limit">Theorem 3.30</a>, there exists
+a sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> of <span class="math notranslate nohighlight">\(A\)</span> with <span class="math notranslate nohighlight">\(\lim x_n = x\)</span>.</p></li>
+<li><p>Due to <a class="reference internal" href="#def-ms-compact-characterization">Theorem 3.67</a>, <span class="math notranslate nohighlight">\(\{x_n\}\)</span> has
+a subsequence that converges to a point of <span class="math notranslate nohighlight">\(A\)</span> (since <span class="math notranslate nohighlight">\(A\)</span> is compact by hypothesis).</p></li>
+<li><p>As per <a class="reference internal" href="sequences.html#res-ms-subsequence-convergence">Theorem 3.34</a>, subsequences of
+a convergent sequence converge to the same limit.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(x\)</span> must be in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\closure A \subseteq A\)</span>. Thus, <span class="math notranslate nohighlight">\(\closure A = A\)</span>. Thus, <span class="math notranslate nohighlight">\(A\)</span> is closed.</p></li>
+</ol>
+</div>
+<p>Although every compact set is closed and bounded, the converse need
+not be true. See <a class="reference internal" href="discrete_space.html#ex-discrete-space-closed-bounded-not-compact">Example 3.25</a>
+for an example of closed and bounded set (in discrete space)
+which is not compact.
+In fact, discrete space is a
+<a class="reference internal" href="discrete_space.html#res-ms-discrete-complete">complete</a> metric space.
+Yet, it has closed and bounded sets which are not compact.</p>
+<p>In the specific case of Euclidean spaces, all closed and
+bounded sets are compact too.
+See <a class="reference internal" href="#res-ms-heine-borel-euclidean">Heine-Borel theorem</a> below.</p>
+</div>
+<div class="section" id="continuity">
+<h2><span class="section-number">3.7.5. </span>Continuity<a class="headerlink" href="#continuity" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-ms-compact-continuous-map">
+<p class="admonition-title"><span class="caption-number">Theorem 3.69 </span> (Continuous images of compact sets are compact)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: (X, d) \to (Y, \rho)\)</span> be a continuous function.
+Let <span class="math notranslate nohighlight">\(A\)</span> be a compact subset of <span class="math notranslate nohighlight">\(X\)</span> with <span class="math notranslate nohighlight">\(A \subseteq \dom f\)</span>.
+Then <span class="math notranslate nohighlight">\(f(A)\)</span> is a compact subset of <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We prove this by showing that any open cover of <span class="math notranslate nohighlight">\(f(A)\)</span>
+can be reduced to a finite subcover.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(f(A) \subseteq \bigcup_{i \in I} \OOO_i\)</span> be an open cover for <span class="math notranslate nohighlight">\(f(A)\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(A \subset \bigcup_{i \in I} f^{-1} (\OOO_i)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is continuous,
+hence <span class="math notranslate nohighlight">\(f^{-1} (\OOO_i)\)</span> is an open subset of <span class="math notranslate nohighlight">\(X\)</span> for every <span class="math notranslate nohighlight">\(i \in I\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is compact, there exist indices <span class="math notranslate nohighlight">\(i_1, \dots, i_n\)</span> such that
+<span class="math notranslate nohighlight">\(A \subseteq \bigcup_{j=1}^n f^{-1}(\OOO_{i_j})\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   f(A) \subseteq f\left ( \bigcup_{j=1}^n f^{-1}(\OOO_{i_j}) \right ) 
+   = \bigcup_{j=1}^n f(f^{-1}(\OOO_{i_j}))
+   \subseteq  \bigcup_{j=1}^n \OOO_{i_j}.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(A\)</span> is compact.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="homeomorphism">
+<h2><span class="section-number">3.7.6. </span>Homeomorphism<a class="headerlink" href="#homeomorphism" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-ms-compact-homeomorphism-pres">
+<p class="admonition-title"><span class="caption-number">Theorem 3.70 </span> (Homeomorphism preserves compactness)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: (X, d) \to (Y, \rho)\)</span> be a homeomorphism.
+Then, <span class="math notranslate nohighlight">\(A\)</span> is a compact subset of <span class="math notranslate nohighlight">\((X,d)\)</span> is and only if
+<span class="math notranslate nohighlight">\(f(A)\)</span> is a compact subset of <span class="math notranslate nohighlight">\((Y, \rho)\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be compact.
+Then, <span class="math notranslate nohighlight">\(f(A)\)</span> is compact since <span class="math notranslate nohighlight">\(f\)</span> is continuous
+due to <a class="reference internal" href="#res-ms-compact-continuous-map">Theorem 3.69</a>.</p>
+<p>Let <span class="math notranslate nohighlight">\(f(A)\)</span> be compact.
+Since <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism, hence <span class="math notranslate nohighlight">\(f^{-1}\)</span> is continuous
+and bijective.
+Hence, <span class="math notranslate nohighlight">\(f^{-1}(f(A)) = A\)</span> is compact
+due to <a class="reference internal" href="#res-ms-compact-continuous-map">Theorem 3.69</a>.</p>
+</div>
+</div>
+<div class="section" id="compact-spaces">
+<h2><span class="section-number">3.7.7. </span>Compact Spaces<a class="headerlink" href="#compact-spaces" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-ms-compact-closed-subset">
+<p class="admonition-title"><span class="caption-number">Theorem 3.71 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Every closed subset of a compact space is compact.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a compact metric space and let <span class="math notranslate nohighlight">\(A\)</span> be a closed subset of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\{\OOO_i\}_{i \in I}\)</span> be an open cover of <span class="math notranslate nohighlight">\(A\)</span>.
+We have, <span class="math notranslate nohighlight">\(A \subseteq \bigcup_{i \in I}\OOO_i\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X = A \cup (X \setminus A)\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(X \subseteq (X \setminus A) \cup \bigcup_{i \in I} \OOO_i\)</span>.</p></li>
+<li><p>Since all <span class="math notranslate nohighlight">\(\OOO_i\)</span> are subsets of <span class="math notranslate nohighlight">\(X\)</span>, hence we can write it as:
+<span class="math notranslate nohighlight">\(X = (X \setminus A) \cup \bigcup_{i \in I} \OOO_i\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is closed, hence <span class="math notranslate nohighlight">\(X \setminus A\)</span> is open.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((X \setminus A) \cup \bigcup_{i \in I} \OOO_i\)</span> is an open cover of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(X\)</span> is compact. Hence, there exist finite indices <span class="math notranslate nohighlight">\(i_1, \dots, i_n\)</span> such that
+<span class="math notranslate nohighlight">\(X = (X \setminus A) \cup \OOO_{i_1} \cup \dots \cup \OOO_{i_n}\)</span>.</p></li>
+<li><p>But then <span class="math notranslate nohighlight">\(A \subseteq X\)</span>  and <span class="math notranslate nohighlight">\(A \cap (X \setminus A) = \EmptySet\)</span> imply that:
+<span class="math notranslate nohighlight">\(A \subseteq \OOO_{i_1} \cup \dots \cup \OOO_{i_n}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(A\)</span> is compact.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-ms-compact-continuous-closed-map">
+<p class="admonition-title"><span class="caption-number">Theorem 3.72 </span> (Continuous maps are closed)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a compact metric space and suppose that
+<span class="math notranslate nohighlight">\(f : (X, d) \to (Y, \rho)\)</span> is a (total) continuous function.
+Then <span class="math notranslate nohighlight">\(f\)</span> is a <a class="reference internal" href="continuity.html#def-ms-closed-mapping">closed mapping</a>.
+If <span class="math notranslate nohighlight">\(f\)</span> is bijective, then <span class="math notranslate nohighlight">\(f\)</span> is a
+<a class="reference internal" href="continuity.html#def-ms-homeomorphism">homeomorphism</a>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C\)</span> be a closed subset of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<ol class="simple">
+<li><p>Due to <a class="reference internal" href="#res-ms-compact-closed-subset">Theorem 3.71</a>, <span class="math notranslate nohighlight">\(C\)</span> is compact.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is continuous, hence, due to <a class="reference internal" href="#res-ms-compact-continuous-map">Theorem 3.69</a>,
+<span class="math notranslate nohighlight">\(f(A)\)</span> is compact.</p></li>
+<li><p>As per <a class="reference internal" href="#res-ms-compact-is-closed-bounded">Theorem 3.68</a>,
+since <span class="math notranslate nohighlight">\(f(A)\)</span> is compact, hence <span class="math notranslate nohighlight">\(f(A)\)</span> is closed.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> maps every closed set to a closed set.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is a closed mapping.</p></li>
+</ol>
+<p>Now, assume that <span class="math notranslate nohighlight">\(f\)</span> is bijective too.</p>
+<ol class="simple">
+<li><p>Thus, <span class="math notranslate nohighlight">\(f^{-1}\)</span> exists. Let <span class="math notranslate nohighlight">\(g = f^{-1}\)</span>.</p></li>
+<li><p>Then, due to bijection property <span class="math notranslate nohighlight">\(g^{-1}(A) = f(A)\)</span> holds for every subset <span class="math notranslate nohighlight">\(A\)</span> of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g^{-1}(A) = f(A)\)</span> is a closed subset of <span class="math notranslate nohighlight">\(Y\)</span> whenever <span class="math notranslate nohighlight">\(A\)</span> is a closed subset of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Thus, as per <a class="reference internal" href="continuity.html#res-ms-continuous-function-characterization">Theorem 3.37</a> <span class="math notranslate nohighlight">\([(5) \implies (1)]\)</span>, <span class="math notranslate nohighlight">\(g\)</span> is continuous.</p></li>
+<li><p>Thus, both <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f^{-1} = g\)</span> are continuous.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="theorem-15">
+<p class="admonition-title"><span class="caption-number">Theorem 3.73 </span> (Compact domain + Continuity = Uniform continuity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: (X, d) \to (Y, \rho)\)</span> be <a class="reference internal" href="continuity.html#def-ms-continuous-function">continuous</a> on <span class="math notranslate nohighlight">\(X\)</span>.
+If <span class="math notranslate nohighlight">\(X\)</span> is compact, then <span class="math notranslate nohighlight">\(f\)</span> is
+<a class="reference internal" href="continuity.html#def-ms-uniform-continuity">uniformly continuous</a>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is continuous on <span class="math notranslate nohighlight">\(X\)</span>, hence for every <span class="math notranslate nohighlight">\(x \in X\)</span>,
+there exists <span class="math notranslate nohighlight">\(r_x &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(\rho(f(y), f(x)) &lt; \epsilon\)</span> holds whenever <span class="math notranslate nohighlight">\(d(x, y) &lt; 2 r_x\)</span>.</p></li>
+<li><p>The collection of open balls <span class="math notranslate nohighlight">\(B(x, r_x)\)</span> covers <span class="math notranslate nohighlight">\(X\)</span>;
+i.e., <span class="math notranslate nohighlight">\(X = \bigcup_{x \in X}B(x, r_x)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(X\)</span> is compact, there exists a set of finite number of points <span class="math notranslate nohighlight">\(x_1, \dots, x_n\)</span>
+such that <span class="math notranslate nohighlight">\(X = \bigcup_{i=1}^n B(x_i, r_{x_i})\)</span>.</p></li>
+<li><p>Now, let <span class="math notranslate nohighlight">\(\delta = \min \{r_{x_1}, \dots, r_{x_n} \}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\delta\)</span> is the minimum of a finite number of positive numbers, hence <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>.</p></li>
+<li><p>Now, pick any <span class="math notranslate nohighlight">\(x, y \in X\)</span> that satisfy <span class="math notranslate nohighlight">\(d(x, y) &lt; \delta\)</span>.</p></li>
+<li><p>There exists an integer <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(d(x, x_i) &lt; r_{x_i}\)</span>
+(due to the finite open cover).</p></li>
+<li><p>Therefore, <span class="math notranslate nohighlight">\(\rho(f(x), f(x_i)) &lt; \epsilon\)</span>.</p></li>
+<li><p>Now, by triangle inequality:</p>
+<div class="math notranslate nohighlight">
+\[
+   d(y, x_i) \leq d(y, x) + d(x, x_i) &lt; \delta + r_{x_i} \leq 2 r_{x_i}
+   \]</div>
+<p>holds true.</p>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\rho(f(x_i), f(y)) &lt; \epsilon\)</span>, since <span class="math notranslate nohighlight">\(d(y, x_i) &lt; 2 r_{x_i}\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \rho(f(x), f(y)) \leq \rho(f(x), f(x_i)) + \rho(f(x_i), f(y)) &lt; \epsilon + \epsilon = 2\epsilon.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is uniformly continuous.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="euclidean-spaces">
+<h2><span class="section-number">3.7.8. </span>Euclidean Spaces<a class="headerlink" href="#euclidean-spaces" title="Permalink to this headline">¶</a></h2>
+<p>Recall that <span class="math notranslate nohighlight">\(\RR^m\)</span> are called Euclidean spaces with the standard metric:</p>
+<div class="math notranslate nohighlight">
+\[
+d (x, y) \triangleq \left ( \sum_{i=1}^m |x_i - y_i|^2 \right )^{\frac{1}{2}}.
+\]</div>
+<p>By <span class="math notranslate nohighlight">\(0 \in \RR^m\)</span> we shall mean the vector <span class="math notranslate nohighlight">\((0, \dots, 0)\)</span>.</p>
+<p>The compact subsets of a Euclidean space are precisely those
+sets which are closed and bounded.</p>
+<div class="proof theorem admonition" id="res-ms-heine-borel-euclidean">
+<p class="admonition-title"><span class="caption-number">Theorem 3.74 </span> (Heine-Borel theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A subset of a Euclidean space is compact if and
+only if it is closed and bounded.</p>
+</div>
+</div><p>Compare this to <a class="reference internal" href="../basic_real_analysis/topology.html#res-rl-heine-borel">Heine-Borel theorem</a> for the real line.
+We established there that for a closed and bounded subset of <span class="math notranslate nohighlight">\(\RR\)</span>,
+any open cover can be reduced to a finite subcover. There, we defined
+closed and bounded sets as compact sets. Our treatment of compactness
+in this section is more general.</p>
+<p>We start here with the definition that a compact set is one for which
+any open cover can be reduced to a finite subcover.
+We then show in this theorem that in the special case of
+Euclidean spaces <span class="math notranslate nohighlight">\(\RR^m\)</span>, the compact subsets are identical to the
+closed and bounded subsets of <span class="math notranslate nohighlight">\(\RR^m\)</span>.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. We have shown in <a class="reference internal" href="#res-ms-compact-is-closed-bounded">Theorem 3.68</a> that
+every compact set is closed and bounded.</p>
+<p>For the converse, we assume <span class="math notranslate nohighlight">\(A\)</span> is a closed and bounded subset of <span class="math notranslate nohighlight">\(\RR^m\)</span>.
+We will show that every sequence of <span class="math notranslate nohighlight">\(A\)</span> has a subsequence converging in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is bounded, we can pick <span class="math notranslate nohighlight">\(M &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(d(x, y) \leq M\)</span> for all <span class="math notranslate nohighlight">\(x, y \in A\)</span>.</p></li>
+<li><p>Fix an element <span class="math notranslate nohighlight">\(y \in A\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(a = (a_1, \dots, a_m) \in A\)</span> be some arbitrary point of <span class="math notranslate nohighlight">\(A\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+   |a_i | \leq d(a, 0) \leq d(a, y) + d(y, 0) \leq M + d(y, 0)
+   \]</div>
+<p>holds for every <span class="math notranslate nohighlight">\(1 \leq i \leq m\)</span>.</p>
+</li>
+<li><p>Thus, the set of real numbers consisting of the <span class="math notranslate nohighlight">\(i\)</span>-th coordinates
+of the elements of <span class="math notranslate nohighlight">\(A\)</span> is a bounded set.</p></li>
+<li><p>Choose an arbitrary sequence <span class="math notranslate nohighlight">\(\{ x_n \}\)</span> of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Recall from <a class="reference internal" href="../basic_real_analysis/sequences.html#res-bolzano-weierstrass-theorem">Bolzano Weierstrass theorem</a> for real numbers
+that every bounded sequence of real numbers has a convergent subsequence.</p></li>
+<li><p>Note that if we form the sequence of real numbers from
+any particular coordinate of <span class="math notranslate nohighlight">\(\{x_n\}\)</span>, (say first coordinates or second coordinates)
+then the sequence is bounded by <span class="math notranslate nohighlight">\(M + d(y, 0)\)</span>.</p></li>
+<li><p>Every such sequence of real numbers (from a fixed coordinate of <span class="math notranslate nohighlight">\(\{x_n\}\)</span>) will
+have a convergent subsequence.</p></li>
+<li><p>Thus, there is a subsequence <span class="math notranslate nohighlight">\(\{x^1_n\}\)</span> of <span class="math notranslate nohighlight">\(\{x_n\}\)</span> whose first coordinates
+form a sequence in <span class="math notranslate nohighlight">\(\RR\)</span> that converges in <span class="math notranslate nohighlight">\(\RR\)</span>.</p></li>
+<li><p>Now, we choose <span class="math notranslate nohighlight">\(\{x^2_n\}\)</span> as a subsequence of <span class="math notranslate nohighlight">\(\{x^1_n\}\)</span> so that the
+corresponding sequence of second coordinates of <span class="math notranslate nohighlight">\(\{x^2_n\}\)</span> converge in <span class="math notranslate nohighlight">\(\RR\)</span>.</p></li>
+<li><p>Proceeding in this manner, after <span class="math notranslate nohighlight">\(m\)</span> steps, we have a subsequence
+<span class="math notranslate nohighlight">\(\{x^m_n\}\)</span> of <span class="math notranslate nohighlight">\(\{x_n\}\)</span> with the property that for each <span class="math notranslate nohighlight">\(1 \leq i \leq m\)</span>,
+the sequence of its <span class="math notranslate nohighlight">\(i\)</span>-th coordinates forms a convergent subsequence in <span class="math notranslate nohighlight">\(\RR\)</span>.</p></li>
+<li><p>Since each of the coordinates of <span class="math notranslate nohighlight">\(\{x^m_n\}\)</span> converges in <span class="math notranslate nohighlight">\(\RR\)</span>,
+hence, <span class="math notranslate nohighlight">\(\{x^m_n\}\)</span> converges in <span class="math notranslate nohighlight">\(\RR^m\)</span>.</p></li>
+<li><p>But since <span class="math notranslate nohighlight">\(A\)</span> is closed, hence <span class="math notranslate nohighlight">\(\{x^m_n\}\)</span> converges to a point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Thus, every sequence of <span class="math notranslate nohighlight">\(A\)</span> has a convergent subsequence in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Thus, by <a class="reference internal" href="#def-ms-compact-characterization">Theorem 3.67</a>, <span class="math notranslate nohighlight">\(A\)</span> is compact.</p></li>
+</ol>
+</div>
+<p>Note that the property <em>convergence in individual coordinates
+implies convergence in <span class="math notranslate nohighlight">\(\RR^m\)</span></em> is due to the specific choice
+of Euclidean metric.</p>
+<div class="proof theorem admonition" id="res-ms-compact-real-valued-min-max-attain">
+<p class="admonition-title"><span class="caption-number">Theorem 3.75 </span> (Attainment of minimum and maximum values)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : (X, d) \to \RR\)</span> be a real valued function.
+If <span class="math notranslate nohighlight">\(f\)</span> is continuous then <span class="math notranslate nohighlight">\(f\)</span> attains a maximum and minimum value on
+every compact subset of <span class="math notranslate nohighlight">\(\dom f\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A\)</span> be a compact subset of <span class="math notranslate nohighlight">\(\dom f\)</span>.</p>
+<ol class="simple">
+<li><p>Then, <span class="math notranslate nohighlight">\(f(A)\)</span> is compact in <span class="math notranslate nohighlight">\(\RR\)</span> due to <a class="reference internal" href="#res-ms-compact-continuous-map">Theorem 3.69</a>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(f(A)\)</span> is closed and bounded due to <a class="reference internal" href="#res-ms-heine-borel-euclidean">Heine-Borel theorem</a>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f(A)\)</span> is bounded, hence it has an infimum and supremum.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f(A)\)</span> is closed, hence its infimum and supremum lie inside <span class="math notranslate nohighlight">\(f(A)\)</span> itself.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> attains a maximum and minimum value in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-ms-bw-theorem-rn-closed-bounded-set">
+<p class="admonition-title"><span class="caption-number">Theorem 3.76 </span> (Bolzano Weierstrass theorem for bounded subsets of <span class="math notranslate nohighlight">\(\RR^m\)</span>)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every sequence in a closed and bounded set in <span class="math notranslate nohighlight">\(\RR^m\)</span>
+has a convergent subsequence.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A\)</span> be a closed and bounded subset of <span class="math notranslate nohighlight">\(\RR^n\)</span>.</p>
+<ol class="simple">
+<li><p>By <a class="reference internal" href="#res-ms-heine-borel-euclidean">Theorem 3.74</a>,  <span class="math notranslate nohighlight">\(A\)</span> is compact.</p></li>
+<li><p>By <a class="reference internal" href="#def-ms-compact-characterization">Theorem 3.67</a>,
+every sequence in <span class="math notranslate nohighlight">\(A\)</span> has a subsequence which converges to a point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-ms-bw-theorem-rn-bounded-sequence">
+<p class="admonition-title"><span class="caption-number">Theorem 3.77 </span> (Bolzano Weierstrass theorem for bounded sequences of <span class="math notranslate nohighlight">\(\RR^m\)</span>)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every bounded sequence in <span class="math notranslate nohighlight">\(\RR^m\)</span> has a convergent subsequence.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\{ x_m \}\)</span> be a bounded sequence of <span class="math notranslate nohighlight">\(\RR^m\)</span>.
+Then there exists a closed ball <span class="math notranslate nohighlight">\(B[0, M]\)</span> such that
+<span class="math notranslate nohighlight">\(\{ x_m \} \subset B[0, M]\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(B[0, M]\)</span> is closed and bounded.
+From <a class="reference internal" href="#res-ms-bw-theorem-rn-closed-bounded-set">Theorem 3.76</a>,
+every sequence in a closed and bounded subset of <span class="math notranslate nohighlight">\(\RR^n\)</span>
+has a convergent subsequence.</p>
+</div>
+</div>
+<div class="section" id="totally-bounded-metric-spaces">
+<h2><span class="section-number">3.7.9. </span>Totally Bounded Metric Spaces<a class="headerlink" href="#totally-bounded-metric-spaces" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="definition-20">
+<p class="admonition-title"><span class="caption-number">Definition 3.55 </span> (Totally bounded space)</p>
+<div class="definition-content section" id="proof-content">
+<p>A metric space <span class="math notranslate nohighlight">\((X,d)\)</span> is called <em>totally bounded</em> if for each
+<span class="math notranslate nohighlight">\(r &gt; 0\)</span>, there exists a finite number of points
+<span class="math notranslate nohighlight">\(x_1, \dots, x_n \in X\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+X = \bigcup_{i=1}^n B(x_i, r).
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-ms-compact-is-totally-bounded">
+<p class="admonition-title"><span class="caption-number">Theorem 3.78 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>A compact metric space is totally bounded.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\((X,d)\)</span> be a compact metric space.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.</p></li>
+<li><p>Consider the family of open balls <span class="math notranslate nohighlight">\(\{ B(x, r) \}_{x \in X}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(X = \bigcup_{x \in X} B(x, r)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(X\)</span> is compact, there is a finite subcover of open balls.</p></li>
+<li><p>Thus, for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>, there <span class="math notranslate nohighlight">\(X\)</span> is a union of finite open balls.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(X\)</span> is totally bounded.</p></li>
+</ol>
+</div>
+<div class="proof example admonition" id="example-22">
+<p class="admonition-title"><span class="caption-number">Example 3.22 </span></p>
+<div class="example-content section" id="proof-content">
+<p>We showed earlier in <a class="reference internal" href="#ex-0-1-not-compact">Example 3.21</a>
+that <span class="math notranslate nohighlight">\((0,1)\)</span> is not compact.</p>
+<p>However <span class="math notranslate nohighlight">\((0,1)\)</span> is totally bounded.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.</p></li>
+<li><p>Pick any <span class="math notranslate nohighlight">\(n&gt; \frac{1}{r}\)</span>. Thus, <span class="math notranslate nohighlight">\(r &gt; \frac{1}{n}\)</span>.</p></li>
+<li><p>Consider the points <span class="math notranslate nohighlight">\(\frac{1}{n}, \frac{2}{n}, \dots, \frac{n-1}{n}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{k}{n} + r &gt; \frac{k}{n} + \frac{1}{n} = \frac{k+1}{n}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{k}{n} - r &lt; \frac{k}{n} - \frac{1}{n} = \frac{k-1}{n}\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \left (\frac{k-1}{n}, \frac{k+1}{n}\right ) \subseteq B\left (\frac{k}{n}, r \right )
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   (0, 1) = \bigcup_{k=1}^{n-1}B\left (\frac{k}{n}, r \right ).
+   \]</div>
+<p>with the caveat that the first and last balls are restricted within the set <span class="math notranslate nohighlight">\((0,1)\)</span>.</p>
+</li>
+<li><p>Thus, we have a finite union of open balls.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((0,1)\)</span> is totally bounded.</p></li>
+</ol>
+</div>
+</div><div class="proof theorem admonition" id="res-ms-complete-totally-bounded-compact">
+<p class="admonition-title"><span class="caption-number">Theorem 3.79 </span> (Completeness and Compactness)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A metric space is compact if and only if it is complete and totally bounded.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\((X,d)\)</span> be a metric space. Assume that <span class="math notranslate nohighlight">\((X,d)\)</span> is
+compact.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\((X,d)\)</span> is totally bounded (<a class="reference internal" href="#res-ms-compact-is-totally-bounded">Theorem 3.78</a>).</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\((X,d)\)</span> is compact, hence every sequence has a convergent
+subsequence that converges to a point in <span class="math notranslate nohighlight">\(X\)</span> (<a class="reference internal" href="#def-ms-compact-characterization">Theorem 3.67</a> (3)).</p></li>
+<li><p>Thus, if <span class="math notranslate nohighlight">\(\{x_n\}\)</span> is a Cauchy subsequence of <span class="math notranslate nohighlight">\(X\)</span>, then it has
+a subsequence with limit <span class="math notranslate nohighlight">\(x \in X\)</span> leading to <span class="math notranslate nohighlight">\(\lim x_n = x\)</span>.</p></li>
+<li><p>Thus, every Cauchy sequence of <span class="math notranslate nohighlight">\(X\)</span> converges in <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((X,d)\)</span> is complete.</p></li>
+</ol>
+<p>For the converse, assume that <span class="math notranslate nohighlight">\((X,d)\)</span> is complete and totally bounded.
+To show that <span class="math notranslate nohighlight">\((X,d)\)</span> is compact, we will show that
+every infinite subset of <span class="math notranslate nohighlight">\(X\)</span> has an accumulation point in <span class="math notranslate nohighlight">\(X\)</span>
+(<a class="reference internal" href="#def-ms-compact-characterization">Theorem 3.67</a> (2)).</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(A\)</span> be an infinite subset of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(X\)</span> is totally bounded,
+there exists a finite subset <span class="math notranslate nohighlight">\(F_1 \subset X\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   X = \bigcup_{x \in F_1} B(x, 1).
+   \]</div>
+</li>
+<li><p>We can extend the open balls with closed balls without problem:</p>
+<div class="math notranslate nohighlight">
+\[
+   X = \bigcup_{x \in F_1} B[x, 1].
+   \]</div>
+</li>
+<li><p>Thus:</p>
+<div class="math notranslate nohighlight">
+\[
+   A = A \cap X  = \bigcup_{x \in F_1}( A \cap B[x, 1]).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is infinite, there is some <span class="math notranslate nohighlight">\(x_1 \in F_1\)</span> such that <span class="math notranslate nohighlight">\(A_1 = A \cap B[x_1, 1]\)</span>
+is an infinite set.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(A \cap B[x, 1]\)</span> were finite for each <span class="math notranslate nohighlight">\(x \in F\)</span>, then <span class="math notranslate nohighlight">\(A\)</span> would be finite
+as a finite union of finite sets.</p></li>
+</ol>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(X\)</span> is totally bounded, we can again find a finite subset <span class="math notranslate nohighlight">\(F_2 \subset X\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   X = \bigcup_{x \in F_2} B\left [x, \frac{1}{2}\right].
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(A_1\)</span> is infinite, there is some <span class="math notranslate nohighlight">\(x_2 \in F_2\)</span> such that <span class="math notranslate nohighlight">\(A_2 = A_1 \cap B\left[x_2, \frac{1}{2} \right]\)</span>
+is an infinite set.</p></li>
+<li><p>Proceeding inductively, if <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> have been chosen, we can
+choose <span class="math notranslate nohighlight">\(x_{n+1}\)</span> such that the set</p>
+<div class="math notranslate nohighlight">
+\[
+   A \cap B[x_1, 1] \cap B\left [x_2, \frac{1}{2} \right] 
+   \cap \dots \cap B\left [x_n, \frac{1}{n}\right] 
+   \cap B\left [x_{n+1}, \frac{1}{n+1} \right]
+   \]</div>
+<p>is infinite.</p>
+</li>
+<li><p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+   E_n  = B[x_1, 1] \cap B\left [x_2, \frac{1}{2} \right] 
+   \cap \dots \cap B\left [x_n, \frac{1}{n}\right]
+   \]</div>
+<p>for each <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</li>
+<li><p>Then for each <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(E_n\)</span> is nonempty and closed.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A \cap E_n\)</span> is infinite.</p></li>
+<li><p><span class="math notranslate nohighlight">\(E_{n+1} \subseteq E_{n}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\diam E_n \leq \frac{2}{n}\)</span>. <span class="math notranslate nohighlight">\(\lim \diam E_n = 0\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Due to <a class="reference internal" href="complete.html#res-ms-complete-nested-closed-nonempty">Theorem 3.52</a>,
+there exists <span class="math notranslate nohighlight">\(a \in X\)</span>, such that <span class="math notranslate nohighlight">\(a \in E_n\)</span> for each <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>Now, if <span class="math notranslate nohighlight">\(y \in A \cap E_n\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+   d(a, y) \leq d(a, x_n) + d(x_n, y) &lt; \frac{1}{n} + \frac{1}{n} = \frac{2}{n}.
+   \]</div>
+</li>
+<li><p>Thus, for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>, we can pick <span class="math notranslate nohighlight">\(n &gt; \frac{2}{r}\)</span> such that
+for every <span class="math notranslate nohighlight">\(y \in A \cap E_n\)</span>, <span class="math notranslate nohighlight">\(y \in B(a, r)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(a\)</span> is an accumulation point of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Thus, every infinite subset of <span class="math notranslate nohighlight">\(X\)</span> has an accumulation point in <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(X\)</span> is compact.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="equivalent-metrics">
+<h2><span class="section-number">3.7.10. </span>Equivalent Metrics<a class="headerlink" href="#equivalent-metrics" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-ms-eq-metric-compactness">
+<p class="admonition-title"><span class="caption-number">Theorem 3.80 </span> (Metric equivalence and compactness)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(d_a\)</span> and <span class="math notranslate nohighlight">\(d_b\)</span> be two different metrics on the same set <span class="math notranslate nohighlight">\(X\)</span>
+that are equivalent.</p>
+<p>Then, a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> is compact in <span class="math notranslate nohighlight">\((X, d_a)\)</span>
+if and only if <span class="math notranslate nohighlight">\(A\)</span> is compact in <span class="math notranslate nohighlight">\((X, d_b)\)</span>.</p>
+<p>In other words, the compact sets in the two metric spaces
+are identical.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(A\)</span> to be compact in <span class="math notranslate nohighlight">\((X, d_a)\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(A \subseteq \bigcup_{i \in I} \OOO_i\)</span> be an open cover of <span class="math notranslate nohighlight">\(A\)</span>
+in <span class="math notranslate nohighlight">\((X, d_b)\)</span>; i.e. <span class="math notranslate nohighlight">\(\OOO_i\)</span> are open in <span class="math notranslate nohighlight">\((X, d_b)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(d_a\)</span> and <span class="math notranslate nohighlight">\(d_b\)</span> are equivalent, hence <span class="math notranslate nohighlight">\(\OOO_i\)</span> are open in <span class="math notranslate nohighlight">\((X, d_a)\)</span> too.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bigcup_{i \in I} \OOO_i\)</span> is an open cover for <span class="math notranslate nohighlight">\(A\)</span> in <span class="math notranslate nohighlight">\((X, d_a)\)</span> too.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is compact in <span class="math notranslate nohighlight">\((X, d_a)\)</span>, hence, there exist finite indices
+<span class="math notranslate nohighlight">\(i_1, \dots, i_n\)</span> such that
+<span class="math notranslate nohighlight">\(A \subseteq \OOO_{i_1} \cup \dots \cup \OOO_{i_n}\)</span>.</p></li>
+<li><p>But then, <span class="math notranslate nohighlight">\(\OOO_{i_1}, \dots, \OOO_{i_n}\)</span> are open in <span class="math notranslate nohighlight">\((X, d_b)\)</span> too.</p></li>
+<li><p>Thus,  <span class="math notranslate nohighlight">\(A \subseteq \OOO_{i_1} \cup \dots \cup \OOO_{i_n}\)</span> is a finite
+open subcover of <span class="math notranslate nohighlight">\(A\)</span> in <span class="math notranslate nohighlight">\((X, d_b)\)</span>.</p></li>
+<li><p>Thus, every open cover of <span class="math notranslate nohighlight">\(A\)</span> in <span class="math notranslate nohighlight">\((X, d_b)\)</span> can be reduced to
+a finite subcover.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(A\)</span> is compact in <span class="math notranslate nohighlight">\((X, d_b)\)</span>.</p></li>
+</ol>
+<p>A similar reasoning establishes that if <span class="math notranslate nohighlight">\(A\)</span> is compact in  <span class="math notranslate nohighlight">\((X, d_b)\)</span>
+then <span class="math notranslate nohighlight">\(A\)</span> is compact in <span class="math notranslate nohighlight">\((X, d_a)\)</span> too.</p>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -634,8 +1621,8 @@
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="complete.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -644,27 +1631,25 @@
             <p class="prev-next-title"><span class="section-number">3.6. </span>Completeness</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="subspaces.html" title="next page">
+    <a class='right-next' id="next-link" href="real_valued_functions.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.8. </span>Subspace Topology</p>
+        <p class="prev-next-title"><span class="section-number">3.8. </span>Real Valued Functions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Shailesh Kumar<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

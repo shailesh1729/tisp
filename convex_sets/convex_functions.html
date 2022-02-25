@@ -1,0 +1,2537 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.7. Convex Functions &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.8. Topological Properties" href="relint.html" />
+    <link rel="prev" title="6.6. Generalized Inequalities" href="generalized_inequality.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.9. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.8. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.9. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.10. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="relint.html">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="subgradients.html">
+     6.9. Subgradients
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   7. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   8. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   9. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   10. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     11.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     11.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   12. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   13. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   14. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     14.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/convex_sets/convex_functions.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fconvex_sets/convex_functions.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convexity-of-a-function">
+   6.7.1. Convexity of a Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convexity-on-lines-in-domain">
+   6.7.2. Convexity on Lines in Domain
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#epigraph">
+   6.7.3. Epigraph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extended-value-extensions">
+   6.7.4. Extended Value Extensions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proper-functions">
+   6.7.5. Proper Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#indicator-functions">
+   6.7.6. Indicator Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-order-conditions">
+   6.7.7. First Order Conditions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-order-conditions">
+   6.7.8. Second Order Conditions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scaling-and-addition-of-convex-functions">
+   6.7.9. Scaling and Addition of Convex Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sublevel-sets">
+   6.7.10. Sublevel Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hypograph">
+   6.7.11. Hypograph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#super-level-sets">
+   6.7.12. Super-level Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composition-with-affine-mapping">
+   6.7.13. Composition with Affine Mapping
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pointwise-supremum">
+   6.7.14. Pointwise Supremum
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Convex Functions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convexity-of-a-function">
+   6.7.1. Convexity of a Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convexity-on-lines-in-domain">
+   6.7.2. Convexity on Lines in Domain
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#epigraph">
+   6.7.3. Epigraph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extended-value-extensions">
+   6.7.4. Extended Value Extensions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proper-functions">
+   6.7.5. Proper Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#indicator-functions">
+   6.7.6. Indicator Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-order-conditions">
+   6.7.7. First Order Conditions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-order-conditions">
+   6.7.8. Second Order Conditions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scaling-and-addition-of-convex-functions">
+   6.7.9. Scaling and Addition of Convex Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sublevel-sets">
+   6.7.10. Sublevel Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hypograph">
+   6.7.11. Hypograph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#super-level-sets">
+   6.7.12. Super-level Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composition-with-affine-mapping">
+   6.7.13. Composition with Affine Mapping
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pointwise-supremum">
+   6.7.14. Pointwise Supremum
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="convex-functions">
+<span id="sec-cvxf-convex-functions"></span><h1><span class="section-number">6.7. </span>Convex Functions<a class="headerlink" href="#convex-functions" title="Permalink to this headline">¶</a></h1>
+<p>Throughout this section, we assume that <span class="math notranslate nohighlight">\(\VV, \WW\)</span> are
+real vector spaces. Wherever necessary,
+they are equipped with a
+<a class="reference internal" href="../la/normed_spaces.html#def-la-norm">norm</a> <span class="math notranslate nohighlight">\(\| \cdot \|\)</span>
+or an <a class="reference internal" href="../la/inner_product_spaces.html#def-la-real-inner-product">real inner product</a>
+<span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle\)</span>.
+They are also equipped with a metric <span class="math notranslate nohighlight">\(d(\bx, \by) = \| \bx - \by \|\)</span>
+as needed.</p>
+<div class="section" id="convexity-of-a-function">
+<h2><span class="section-number">6.7.1. </span>Convexity of a Function<a class="headerlink" href="#convexity-of-a-function" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-convex-function">
+<p class="admonition-title"><span class="caption-number">Definition 6.43 </span> (Convex function)</p>
+<div class="definition-content section" id="proof-content">
+<p>A real valued function <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span> is <em>convex</em> if
+<span class="math notranslate nohighlight">\(\dom f\)</span> is a convex set and for all <span class="math notranslate nohighlight">\(\bx_1,\bx_2 \in \dom f\)</span>,
+and <span class="math notranslate nohighlight">\(t \in [0, 1]\)</span>, we have:</p>
+<div class="math notranslate nohighlight" id="equation-eq-convexity-inequality">
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-eq-convexity-inequality" title="Permalink to this equation">¶</a></span>\[f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).\]</div>
+</div>
+</div><div class="figure align-default" id="convex-function">
+<img alt="../_images/convex_function.png" src="../_images/convex_function.png" />
+<p class="caption"><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Graph of a convex function. The line segment
+between any two points on the graph lies
+above the graph.</span><a class="headerlink" href="#convex-function" title="Permalink to this image">¶</a></p>
+</div>
+<p>For a convex function, every chord lies above the graph of the function.</p>
+<div class="proof definition admonition" id="def-strictly-convex-function">
+<p class="admonition-title"><span class="caption-number">Definition 6.44 </span> (Strictly convex function)</p>
+<div class="definition-content section" id="proof-content">
+<p>A convex function <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span> is <em>strictly convex</em>
+if for all <span class="math notranslate nohighlight">\(\bx_1,\bx_2 \in \dom f\)</span>,
+where <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> are distinct,
+and <span class="math notranslate nohighlight">\(t \in (0, 1)\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+f(t \bx_1 + (1-t) \bx_2) &lt; t f(\bx_1) + (1-t) f(\bx_2).
+\]</div>
+<p>In other words, the inequality is a strict inequality
+whenever the point <span class="math notranslate nohighlight">\(\bx = t \bx_1 + (1-t) \bx_2\)</span> is
+distinct from <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> both.</p>
+</div>
+</div><div class="proof definition admonition" id="def-concave-function">
+<p class="admonition-title"><span class="caption-number">Definition 6.45 </span> (Concave function)</p>
+<div class="definition-content section" id="proof-content">
+<p>We say that a function <span class="math notranslate nohighlight">\(f\)</span> is <em>concave</em> if <span class="math notranslate nohighlight">\(-f\)</span> is convex.
+A function <span class="math notranslate nohighlight">\(f\)</span> is <em>strictly concave</em> if <span class="math notranslate nohighlight">\(-f\)</span> is
+strictly convex.</p>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-linear-functional">
+<p class="admonition-title"><span class="caption-number">Example 6.22 </span> (Linear functional)</p>
+<div class="example-content section" id="proof-content">
+<p>A <em>linear functional</em> on <span class="math notranslate nohighlight">\(\VV\)</span> in an inner product space
+has the form of an inner product parameterized by
+a vector <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\ba} (\bx) \triangleq \langle \bx, \ba \rangle \Forall \bx \in \VV.
+\]</div>
+<p>i.e. the inner product of <span class="math notranslate nohighlight">\(\bx\)</span> with <span class="math notranslate nohighlight">\(\ba\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvxf-linear-functional-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.57 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>All linear functionals on a real vector space are convex as well as concave.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For any <span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span> and <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f_{\ba} (t \bx + (1-t) \by)
+&amp;= \langle t \bx + (1-t) \by, \ba \rangle \\
+&amp;= t \langle \bx, \ba \rangle +   (1-t)\langle \bx, \ba \rangle
+\quad \text{inner products are linear}\\
+&amp;= t f_{\ba} (\bx) + (1-t) f_{\ba} (\by).
+\end{split}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(f_{\ba}\)</span> is convex. We can also see that <span class="math notranslate nohighlight">\(-f_{\ba}\)</span> is
+convex too. Hence, <span class="math notranslate nohighlight">\(f_{\ba}\)</span> is concave too.</p>
+</div>
+<div class="proof example admonition" id="ex-cvxf-arithmetic-mean">
+<p class="admonition-title"><span class="caption-number">Example 6.23 </span> (Arithmetic mean is convex and concave)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \frac{x_1 + \dots + x_n}{n}.
+\]</div>
+<p>Arithmetic mean is a linear function. In fact</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(\alpha \bx + \beta \by) 
+&amp;= \frac{1}{n} \left (\sum_{i=1}^n (\alpha x_i + \beta y_i) \right )\\
+&amp;= \alpha \frac{x_1 + \dots + x_n}{n} + \beta \frac{y_1 + \dots + y_n}{n}\\
+&amp;= \alpha f(\bx) + \beta f(\by)
+\end{split}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(\alpha,\beta \in \RR\)</span>.</p>
+<p>Thus, for <span class="math notranslate nohighlight">\(t \in [0,1]\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+f(t \bx + (1-t) \by) = t f(\bx) + (1-t) f(\by).
+\]</div>
+<p>Thus, arithmetic mean is both convex and concave.</p>
+</div>
+</div><div class="proof example admonition" id="example-6">
+<p class="admonition-title"><span class="caption-number">Example 6.24 </span> (Affine functional)</p>
+<div class="example-content section" id="proof-content">
+<p>An <em>affine functional</em> is a special type of
+<a class="reference internal" href="../la/affine.html#def-la-affine-operator">affine function</a>
+which maps a vector from <span class="math notranslate nohighlight">\(\VV\)</span> to a scalar in
+the associate field <span class="math notranslate nohighlight">\(\FF\)</span>.</p>
+<p>On real vector spaces, an <em>affine functional</em> on <span class="math notranslate nohighlight">\(\VV\)</span>
+is defined in terms of
+a vector <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> and a scalar <span class="math notranslate nohighlight">\(b \in \RR\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\ba, b} (\bx) \triangleq \langle \bx, \ba \rangle + b \Forall \bx \in \VV
+\]</div>
+<p>i.e. the inner product of <span class="math notranslate nohighlight">\(\bx\)</span> with <span class="math notranslate nohighlight">\(\ba\)</span> followed by a translation
+by the amount of <span class="math notranslate nohighlight">\(b\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvxf-affine-functional-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.58 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>All affine functionals on a real vector space are convex as well as concave.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. A simple way to show this is to recall that for any
+<a class="reference internal" href="../la/affine.html#def-la-affine-operator">affine function</a> <span class="math notranslate nohighlight">\(T\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+T (t \bx + (1 - t) \by) = t T(\bx) + (1 - t) T(\by)
+\]</div>
+<p>holds true for any <span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span> and <span class="math notranslate nohighlight">\(t \in \FF\)</span>.</p>
+<p>In the particular case of real affine functionals,
+for any <span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span> and <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>, the
+previous identity reduces to:</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\ba, b} (t \bx + (1 - t) \by) = t f_{\ba, b}(\bx) + (1 - t) f_{\ba, b}(\by).
+\]</div>
+<p>This establishes that <span class="math notranslate nohighlight">\(f_{\ba, b}\)</span> is both convex and concave.</p>
+<p>Another way to prove this is by following the definition
+of <span class="math notranslate nohighlight">\(f_{\ba, b}\)</span> above:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f_{\ba, b} (t \bx + (1 - t) \by) 
+&amp;= \langle t \bx + (1 - t) \by, \ba \rangle + b\\
+&amp;= t \langle \bx, \ba \rangle +   (1-t)\langle \bx, \ba \rangle + b\\
+&amp;= t \langle \bx, \ba \rangle +   (1-t)\langle \bx, \ba \rangle + tb + (1-t)b\\
+&amp;= (t \langle \bx, \ba \rangle +  + tb) +  ((1-t)\langle \bx, \ba \rangle + (1-t)b)\\
+&amp;= t (\langle \bx, \ba \rangle + b) +  (1-t)(\langle \bx, \ba \rangle + b)\\
+&amp;= t f_{\ba, b}(\bx) + (1-t) f_{\ba, b} (\by).
+\end{split}\]</div>
+</div>
+<div class="proof example admonition" id="ex-cvxf-real-abs">
+<p class="admonition-title"><span class="caption-number">Example 6.25 </span> (Absolute value is convex)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = |x|.
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR\)</span>.</p>
+<p>Recall that <span class="math notranslate nohighlight">\(|x|\)</span> is a norm on the real line <span class="math notranslate nohighlight">\(\RR\)</span>.
+Thus, it satisfies the triangle inequality:</p>
+<div class="math notranslate nohighlight">
+\[
+|x + y | \leq |x | + |y| \Forall x, y \in \RR.
+\]</div>
+<p>In particular, for any <span class="math notranslate nohighlight">\(t \in [0,1]\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+|t x + (1-t)y | \leq |t x | + | (1- t) y| 
+= |t| | x| + |1 - t| | y |
+= t |x| + (1-t) | y |.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(f\)</span> satisfies the convexity defining inequality
+<a class="reference internal" href="#equation-eq-convexity-inequality">(6.1)</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+f(t x + (1-t) y) \leq t f(x) + (1- t) f(y) \Forall x, y \in \RR.
+\]</div>
+<p>Hence, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvxf-norms-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.59 </span> (All norms are convex)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\| \cdot \| \to \RR\)</span> be a
+<a class="reference internal" href="../la/normed_spaces.html#def-la-norm">norm</a> on a vector space <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then, it satisfies the triangle inequality:</p>
+<div class="math notranslate nohighlight">
+\[
+\|\bx + \by \| \leq \|\bx \| + \|\by\| \Forall \bx, \by \in \VV.
+\]</div>
+<p>In particular, for any <span class="math notranslate nohighlight">\(t \in [0,1]\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\|t \bx + (1-t)\by \| \leq \|t \bx \| + \| (1- t) \by\| 
+= |t| \| \bx \| + |1 - t| \| \by \|
+= t \|\bx \| + (1-t) \| \by \|.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(f\)</span> satisfies the convexity defining inequality
+<a class="reference internal" href="#equation-eq-convexity-inequality">(6.1)</a>.
+Hence, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-euclidean-n-max">
+<p class="admonition-title"><span class="caption-number">Example 6.26 </span> (Max function is convex)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \max \{x_1, \dots, x_n \}.
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR^n\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(x = f(\bx) = \max \{ x_1, \dots, x_n \}\)</span> and <span class="math notranslate nohighlight">\(y =  f(\by) = \max \{ y_1, \dots, y_n\}\)</span>.</p></li>
+<li><p>Then, for every <span class="math notranslate nohighlight">\(k=1,\dots,n\)</span>, we have: <span class="math notranslate nohighlight">\(x_k \leq x\)</span> and <span class="math notranslate nohighlight">\(y_k \leq y\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(t x_k + (1-t) y_k \leq t x + (1-t) y\)</span>.</p></li>
+<li><p>Taking maximum on the left hand side, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+   \max_{k=1}^n (t x_k + (1-t) y_k) \leq t x  + (1-t) y.
+   \]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(f(t \bx + (1-t) \by ) = \max_{k=1}^n (t x_k + (1-t) y_k)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> satisfies the convexity defining
+inequality <a class="reference internal" href="#equation-eq-convexity-inequality">(6.1)</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(t \bx + (1-t) \by ) \leq t f(\bx) + (1-t) f(\by).
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p></li>
+</ol>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-geom-mean">
+<p class="admonition-title"><span class="caption-number">Example 6.27 </span> (Geometric mean is concave)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) =  \left ( \prod_{i=1}^n x_i \right )^{\frac{1}{n}}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR^n_{++}\)</span>.</p>
+<p>Recall from
+<a class="reference internal" href="../basic_real_analysis/inequalities.html#res-bra-unweighted-am-gm-inequality">AM-GM inequality</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+\left (\prod_{i=1}^n a_i \right )^{\frac{1}{n}} \leq 
+\frac{1}{n} \left ( \sum_{i=1}^n a_i \right ).
+\]</div>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \RR^n_{++}\)</span> and <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz = t \bx + (1-t) \by\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\bz \in \RR^n_{++}\)</span> too, hence every component
+of <span class="math notranslate nohighlight">\(\bz\)</span> is positive.</p></li>
+<li><p>With <span class="math notranslate nohighlight">\(a_i  = \frac{x_i}{z_i}\)</span>, and applying
+AM-GM inequality:</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{f(\bx)}{f(\bz)} = \left ( \prod_{i=1}^n \frac{x_i}{z_i} \right )^{\frac{1}{n}}
+   \leq \frac{1}{n} \left ( \sum_{i=1}^n \frac{x_i}{z_i} \right ).
+   \]</div>
+</li>
+<li><p>With <span class="math notranslate nohighlight">\(a_i  = \frac{y_i}{z_i}\)</span>, and applying
+AM-GM inequality:</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{f(\by)}{f(\bz)} = \left ( \prod_{i=1}^n \frac{y_i}{z_i} \right )^{\frac{1}{n}}
+   \leq \frac{1}{n} \left ( \sum_{i=1}^n \frac{y_i}{z_i} \right ).
+   \]</div>
+</li>
+<li><p>Multiplying the first inequality by <span class="math notranslate nohighlight">\(t\)</span> and the second by <span class="math notranslate nohighlight">\((1-t)\)</span> and
+adding them, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{t f(\bx) + (1-t) f(\by)}{f(\bz)} \leq
+   \frac{1}{n} \left ( \sum_{i=1}^n\frac{t x_i}{z_i} +  \frac{(1-t) y_i}{z_i} \right ).
+   \]</div>
+</li>
+<li><p>Recall that <span class="math notranslate nohighlight">\(z_i = t x_i + (1-t) y_i\)</span>. Thus, the inequality above simplifies to:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp;\frac{t f(\bx) + (1-t) f(\by)}{f(\bz)} \leq 1 \\
+   &amp;\iff t f(\bx) + (1-t) f(\by) \leq f(\bz) = f(t \bx + (1-t) \by).
+   \end{split}\]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is concave.</p></li>
+</ol>
+</div>
+</div><div class="proof observation admonition" id="res-cvxf-empty-func-convex">
+<p class="admonition-title"><span class="caption-number">Observation 6.4 </span> (Empty function is convex)</p>
+<div class="observation-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span> be such that <span class="math notranslate nohighlight">\(\dom f = \EmptySet\)</span>.
+Then <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The empty set <span class="math notranslate nohighlight">\(\dom f\)</span> is vacuously convex.
+The defining inequality <a class="reference internal" href="#equation-eq-convexity-inequality">(6.1)</a>
+is vacuously true for <span class="math notranslate nohighlight">\(f\)</span> since its domain is empty.</p>
+</div>
+<p>This observation may sound uninteresting however
+it is important in the algebra of convex functions.
+<a class="reference internal" href="../basic_real_analysis/real_valued_functions.html#def-bra-rvpf-algebra">Definition 2.47</a> provides
+definitions for sum of two partial functions
+and scalar multiplication with a partial
+function. If two convex functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>
+are such that <span class="math notranslate nohighlight">\(\dom f \cap \dom g = \EmptySet\)</span>,
+then their sum <span class="math notranslate nohighlight">\(f+g\)</span> is empty function.
+The observation above says that <span class="math notranslate nohighlight">\(f+g\)</span> is still
+a convex function.</p>
+</div>
+<div class="section" id="convexity-on-lines-in-domain">
+<h2><span class="section-number">6.7.2. </span>Convexity on Lines in Domain<a class="headerlink" href="#convexity-on-lines-in-domain" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvxf-convx-on-lines">
+<p class="admonition-title"><span class="caption-number">Theorem 6.60 </span> (<span class="math notranslate nohighlight">\(f\)</span> is convex = <span class="math notranslate nohighlight">\(f\)</span> is convex on lines in domain)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is convex if and only if for any
+<span class="math notranslate nohighlight">\(\bx \in \dom f\)</span> and any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>, the function
+<span class="math notranslate nohighlight">\(g(t) = f(\bx + t\bv)\)</span> is convex (on its domain
+, <span class="math notranslate nohighlight">\(\{ t \in \RR \ST \bx + t\bv \in \dom f\}\)</span>).</p>
+<p>In other words, <span class="math notranslate nohighlight">\(f\)</span> is convex if and only if
+it is convex when restricted to any line that
+intersects its domain.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For any arbitrary <span class="math notranslate nohighlight">\(f\)</span>, and for any
+<span class="math notranslate nohighlight">\(\bx \in \dom f, \bv \in \VV\)</span><br />
+we have defined <span class="math notranslate nohighlight">\(g : \RR \to \RR\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+g(t)  \triangleq f(\bx + t\bv)
+\]</div>
+<p>with the domain:</p>
+<div class="math notranslate nohighlight">
+\[
+\dom g = \{t \ST \bx + t \bv \in \dom f\}.
+\]</div>
+<p>Assume <span class="math notranslate nohighlight">\(f\)</span> to be convex. To show that <span class="math notranslate nohighlight">\(g\)</span> is convex,
+we need to show that <span class="math notranslate nohighlight">\(\dom g\)</span> is convex and <span class="math notranslate nohighlight">\(g\)</span>
+satisfies the convexity inequality.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(t_1, t_2 \in \dom g\)</span>.</p></li>
+<li><p>It means that there are <span class="math notranslate nohighlight">\(\by = \bx + t_1 \bv \in \dom f\)</span>
+and <span class="math notranslate nohighlight">\(\bz = \bx + t_2 \bv \in \dom f\)</span>,</p></li>
+<li><p>and <span class="math notranslate nohighlight">\(g(t_1) = f(\by)\)</span> and <span class="math notranslate nohighlight">\(g(t_2) = f(\bz)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r \in [0,1]\)</span> and <span class="math notranslate nohighlight">\(t = rt_1 + (1-r)t_2\)</span>.</p></li>
+<li><p>Note that:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \bx + t \bv 
+   &amp;= \bx + (rt_1 + (1-r)t_2) \bv\\
+   &amp;= r\bx + (1-r)\bx + rt_1 \bv + (1-r)t_2 \bv\\
+   &amp;= r (\bx + t_1 \bv) + (1-r)(\bx + t_2 \bv)\\
+   &amp;= r \by + (1-r) \bz.
+   \end{split}\]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\dom f\)</span> is convex, hence <span class="math notranslate nohighlight">\(r \by + (1-r) \bz \in \dom f\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g\)</span> is defined at <span class="math notranslate nohighlight">\(t = rt_1 + (1-r)t_2\)</span> for all <span class="math notranslate nohighlight">\(r \in [0,1]\)</span>.</p></li>
+<li><p>We have shown that if <span class="math notranslate nohighlight">\(t_1, t_2 \in \dom g\)</span>,
+then <span class="math notranslate nohighlight">\(t = rt_1 + (1-r)t_2 \in \dom g\)</span> for all <span class="math notranslate nohighlight">\(r \in [0,1]\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\dom g\)</span> is convex.</p></li>
+<li><p>Now,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   g(t) 
+   &amp;= g(r t_1 + (1-r)t_2)\\
+   &amp;= f(r \by + (1-r) \bz)\\
+   &amp;\leq r f(\by) + (1-r) f(\bz)\\
+   &amp;= r g(t_1) + (1-r) g(t_2).
+   \end{split}\]</div>
+</li>
+<li><p>We showed that for any <span class="math notranslate nohighlight">\(t_1, t_2 \in \dom g\)</span> and <span class="math notranslate nohighlight">\(r \in [0,1]\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   g (r t_1 + (1-r) t_2 )\leq r g(t_1) + (1-r) g(t_2).
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g\)</span> is convex.</p></li>
+</ol>
+<p>For the converse, we need to show that
+if for any <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span> and any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>,
+<span class="math notranslate nohighlight">\(g\)</span> is convex, then <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+<p>Assume for contradiction that <span class="math notranslate nohighlight">\(f\)</span> is not convex.
+Then, either <span class="math notranslate nohighlight">\(\dom f\)</span> is not convex or
+there exists some <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> and <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>
+such that:</p>
+<div class="math notranslate nohighlight">
+\[
+f((1-t)\bx + t\by) &gt; (1 - t) f(\bx) + t f(\by).
+\]</div>
+<p>We show that both of these conditions lead to contradictions.</p>
+<ol>
+<li><p>Assume <span class="math notranslate nohighlight">\(\dom f\)</span> is not convex.</p></li>
+<li><p>Then, there exists <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> such that for some <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   (1 - t)\bx + t \by \notin \dom f.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv = \by - \bx\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\((1 - t)\bx + t \by = \bx + t \bv\)</span>.</p></li>
+<li><p>Picking <span class="math notranslate nohighlight">\(g\)</span> for this particular choice of <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span>, we note that
+<span class="math notranslate nohighlight">\(g\)</span> is defined at <span class="math notranslate nohighlight">\(t=0\)</span> and <span class="math notranslate nohighlight">\(t=1\)</span> since they corresponding to the points
+<span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span> respectively in <span class="math notranslate nohighlight">\(\dom f\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(g\)</span> is convex by hypothesis, hence, <span class="math notranslate nohighlight">\(g\)</span> is defined at every
+<span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p></li>
+<li><p>This contradicts the fact that <span class="math notranslate nohighlight">\(g\)</span> is not defined at some <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\dom f\)</span> must be convex.</p></li>
+</ol>
+<p>We now accept that <span class="math notranslate nohighlight">\(\dom f\)</span> is convex, but
+there exists some <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> and <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>
+such that:</p>
+<div class="math notranslate nohighlight">
+\[
+f((1-t)\bx + t\by) &gt; (1 - t) f(\bx) + t f(\by).
+\]</div>
+<ol>
+<li><p>Again, let <span class="math notranslate nohighlight">\(\bv = \by - \bx\)</span> and note that
+<span class="math notranslate nohighlight">\((1 - t)\bx + t \by = \bx + t \bv\)</span>.</p></li>
+<li><p>Pick <span class="math notranslate nohighlight">\(g\)</span> for this choice of <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span>.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(g(t) = f(\bx + t \bv)\)</span>.</p></li>
+<li><p>In particular, <span class="math notranslate nohighlight">\(g(0) = f(\bx)\)</span> and <span class="math notranslate nohighlight">\(g(1) = f(\by)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(g\)</span> is convex, hence for every <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   f((1-t)\bx + t\by) 
+   &amp;= f(\bx + t \bv)\\
+   &amp;= g(t)\\
+   &amp;= g ((1-t)0 + t 1)\\
+   &amp;\leq (1-t)g(0) + t g(1)\\
+   &amp;= (1-t)f(\bx) + t f(\by).
+   \end{split}\]</div>
+</li>
+<li><p>We have a contradiction.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> must be convex.</p></li>
+</ol>
+</div>
+<p>A good application of this result is in showing the
+concavity of the log determinant function in
+<a class="reference internal" href="#ex-cvxf-log-det">Example 6.38</a> below.</p>
+</div>
+<div class="section" id="epigraph">
+<h2><span class="section-number">6.7.3. </span>Epigraph<a class="headerlink" href="#epigraph" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html#def-bra-epigraph">epigraph</a>
+of a function <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\epi f = \{ (\bx,t) \in \VV \oplus \RR \ST \bx \in \dom f, f(\bx) \leq t \}.
+\]</div>
+<p><span class="math notranslate nohighlight">\(\VV \oplus \RR\)</span> is the
+<a class="reference internal" href="real_spaces.html#def-cvx-real-vector-space-r-prod">direct sum</a>
+of <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\RR\)</span> having appropriate vector space
+structure.</p>
+<div class="proof theorem admonition" id="res-cvxf-convexity-epigraph">
+<p class="admonition-title"><span class="caption-number">Theorem 6.61 </span> (Function convexity = Epigraph convexity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is convex if and only if its epigraph
+<span class="math notranslate nohighlight">\(\epi f\)</span> is a convex set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C = \epi f\)</span>.</p>
+<p>Assume <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\((\bx_1, t_1), (\bx_2, t_2) \in \epi f\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(f(\bx_1) \leq t_1\)</span> and <span class="math notranslate nohighlight">\(f(\bx_2) \leq t_2\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r \in [0,1]\)</span>.</p></li>
+<li><p>Consider the point <span class="math notranslate nohighlight">\((\bx, t) = r(\bx_1, t_1) + (1-r)(\bx_2, t_2)\)</span>.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(\bx = r \bx_1 + (1 -r)(\bx_2)\)</span>.</p></li>
+<li><p>And <span class="math notranslate nohighlight">\(t = r t_1 + (1-r)t_2\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\( r f(\bx_1) + (1-r) f(\bx_2) \leq r t_1 + (1-r)t_2 = t\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is convex,
+hence <span class="math notranslate nohighlight">\(f(\bx) = f(r \bx_1 + (1 -r)(\bx_2)) \leq r f(\bx_1) + (1-r)f(\bx_2)\)</span>.</p></li>
+<li><p>But then, <span class="math notranslate nohighlight">\(f(\bx) \leq t\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((\bx, t) \in \epi f\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((\bx_1, t_1), (\bx_2, t_2) \in \epi f\)</span>
+implies <span class="math notranslate nohighlight">\(r(\bx_1, t_1) + (1-r)(\bx_2, t_2) \in \epi f\)</span> for all <span class="math notranslate nohighlight">\(r \in [0,1]\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\epi f\)</span> is convex.</p></li>
+</ol>
+<p>Assume <span class="math notranslate nohighlight">\(\epi f\)</span> is convex.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx_1, \bx_2 \in \dom f\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t_1 = f(\bx_1)\)</span> and <span class="math notranslate nohighlight">\(t_2 = f(\bx_2)\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\((\bx_1, t_1), (\bx_2, t_2) \in \epi f\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r \in [0,1]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx = r \bx_1 + (1-r)\bx_2\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\epi f\)</span> is convex, hence <span class="math notranslate nohighlight">\(r(\bx_1, t_1) + (1-r)(\bx_2, t_2) \in \epi f\)</span>.</p></li>
+<li><p>i.e., <span class="math notranslate nohighlight">\((r \bx_1 + (1-r)\bx_2, r t_1 + (1-r)t_2) \in \epi f\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx = r \bx_1 + (1-r)\bx_2 \in \dom f\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\dom f\)</span> is convex.</p></li>
+<li><p>And, <span class="math notranslate nohighlight">\(f(\bx) \leq r t_1 + (1-r)t_2\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(r t_1 + (1-r)t_2 = r f(\bx_1) + (1-r)f(\bx_2)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(r \bx_1 + (1-r)\bx_2) \leq r f(\bx_1) + (1-r)f(\bx_2)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is convex as <span class="math notranslate nohighlight">\(\bx_1, \bx_2 \in \dom f\)</span> and <span class="math notranslate nohighlight">\(r \in [0,1]\)</span>
+were arbitrary.</p></li>
+</ol>
+</div>
+<p>Note that <span class="math notranslate nohighlight">\(\dom f\)</span> is the projection of <span class="math notranslate nohighlight">\(\epi f\)</span>
+from <span class="math notranslate nohighlight">\(\VV \oplus \RR\)</span> to <span class="math notranslate nohighlight">\(\VV\)</span>.
+Due to <a class="reference internal" href="convex.html#res-cvx-convex-set-affine-image">Theorem 6.29</a>,
+<span class="math notranslate nohighlight">\(\epi f\)</span> convex implies <span class="math notranslate nohighlight">\(\dom f\)</span> convex
+as the projection is a linear operation.</p>
+</div>
+<div class="section" id="extended-value-extensions">
+<h2><span class="section-number">6.7.4. </span>Extended Value Extensions<a class="headerlink" href="#extended-value-extensions" title="Permalink to this headline">¶</a></h2>
+<p>Tracking domains of convex functions is difficult.
+It is often convenient to extend a convex function
+<span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> with a domain <span class="math notranslate nohighlight">\(\dom f \subset \VV\)</span>
+to all of <span class="math notranslate nohighlight">\(\VV\)</span> by defining it to be <span class="math notranslate nohighlight">\(\infty\)</span>
+outside its domain.</p>
+<div class="proof definition admonition" id="def-cvxf-extended-value-extension">
+<p class="admonition-title"><span class="caption-number">Definition 6.46 </span> (Extended value extension)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html#def-bra-extended-value-extension">extended value extension</a>
+of a convex function <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span> is defined as
+<span class="math notranslate nohighlight">\(\tilde{f} : \VV \to \ERL\)</span> given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\tilde{f}(\bx) \triangleq \begin{cases} 
+f(\bx) &amp; \text{for} &amp; \bx \in \dom f \\
+\infty &amp; \text{for} &amp; \bx \notin \dom f.
+\end{cases}
+\end{split}\]</div>
+</div>
+</div><p>We mention that the defining inequality <a class="reference internal" href="#equation-eq-convexity-inequality">(6.1)</a>
+for a convex function <span class="math notranslate nohighlight">\(f\)</span>
+remains valid (rather gets extended) for its extended value extension too.
+If <span class="math notranslate nohighlight">\(f\)</span> is convex over <span class="math notranslate nohighlight">\(\dom f\)</span>, then
+for any <span class="math notranslate nohighlight">\(\bx_1, \bx_2 \in \VV\)</span>, and <span class="math notranslate nohighlight">\(0 &lt; t &lt; 1\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde{f}(t \bx_1 + (1-t) \bx_2) \leq t \tilde{f}(\bx_1) + (1-t) \tilde{f}(\bx_2).
+\]</div>
+<ol class="simple">
+<li><p>At <span class="math notranslate nohighlight">\(t=0\)</span> and <span class="math notranslate nohighlight">\(t=1\)</span>, this is always an equality.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\dom f\)</span> is convex, hence if both <span class="math notranslate nohighlight">\(\bx_1, \bx_2 \in \dom f\)</span>,
+then <span class="math notranslate nohighlight">\(t \bx_1 + (1-t) \bx_2 \in \dom f\)</span> too.</p></li>
+<li><p>The inequality then reduces to <a class="reference internal" href="#equation-eq-convexity-inequality">(6.1)</a>.</p></li>
+<li><p>If either <span class="math notranslate nohighlight">\(\bx_1\)</span> or <span class="math notranslate nohighlight">\(\bx_2\)</span> is not in <span class="math notranslate nohighlight">\(\dom f\)</span>, then the R.H.S.
+becomes <span class="math notranslate nohighlight">\(\infty\)</span> and the inequality stays valid.</p></li>
+</ol>
+<div class="proof definition admonition" id="def-cvxf-effective-domain">
+<p class="admonition-title"><span class="caption-number">Definition 6.47 </span> (Effective domain)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html#def-bra-extension-domain">effective domain</a>
+of an extended valued function <span class="math notranslate nohighlight">\(\tilde{f} : \VV \to \ERL\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\dom \tilde{f} = \{ \bx \in \VV \ST \tilde{f}(\bx) &lt; \infty \}.
+\]</div>
+</div>
+</div><p>An equivalent way to define the effective domain is:</p>
+<div class="math notranslate nohighlight">
+\[
+\dom \tilde{f} = \{\bx \in \VV \ST 
+\exists t \in \RR \text{ with } (\bx, t) \in \epi f \}.
+\]</div>
+<div class="proof theorem admonition" id="res-cvx-evf-sum-domain">
+<p class="admonition-title"><span class="caption-number">Theorem 6.62 </span> (Effective domain and sum of functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are two extended valued functions,
+then <span class="math notranslate nohighlight">\(\dom (f + g) = \dom f \cap \dom g\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol class="simple">
+<li><p>At any <span class="math notranslate nohighlight">\(\bx \in \dom f \cap \dom g\)</span>, both
+<span class="math notranslate nohighlight">\(f(\bx)\)</span> and <span class="math notranslate nohighlight">\(g(\bx)\)</span> are finite.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(\bx) + g(\bx)\)</span> is finite.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bx \in \dom (f + g)\)</span>.</p></li>
+<li><p>At any <span class="math notranslate nohighlight">\(\bx \in \VV \setminus (\dom f \cap \dom g)\)</span>,
+either <span class="math notranslate nohighlight">\(f(\bx) = \infty\)</span> or <span class="math notranslate nohighlight">\(g(\bx) = \infty\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((f + g)(\bx) = f(\bx) + g(\bx) = \infty\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \notin \dom (f + g)\)</span>.</p></li>
+</ol>
+</div>
+<p>Several commonly used convex functions have vastly different
+domains. If we work with these functions directly, then
+we have to constantly worry about identifying the domain
+and manipulating the domain as per the requirements
+of the operations we are considering.
+This quickly becomes tedious.</p>
+<p>An alternative approach is to work with the
+extended value extensions of all functions.
+We don’t have to worry about tracking the function
+domain. The domain can be identified whenever needed
+by removing the parts from <span class="math notranslate nohighlight">\(\VV\)</span> where the function
+goes to <span class="math notranslate nohighlight">\(\infty\)</span>.</p>
+<p>In this book, unless otherwise specified,
+we shall assume that the functions are
+being treated as their extended value extensions.</p>
+</div>
+<div class="section" id="proper-functions">
+<h2><span class="section-number">6.7.5. </span>Proper Functions<a class="headerlink" href="#proper-functions" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvxf-proper-function">
+<p class="admonition-title"><span class="caption-number">Definition 6.48 </span> (Proper function)</p>
+<div class="definition-content section" id="proof-content">
+<p>An extended real-valued function
+<span class="math notranslate nohighlight">\(f : \VV \to \ERL\)</span> is called <em>proper</em>
+if its domain is nonempty, it never
+takes the value <span class="math notranslate nohighlight">\(-\infty\)</span> and is
+not identically equal to <span class="math notranslate nohighlight">\(\infty\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\exists \bx \in \VV \text{ such that } f(\bx) &lt; \infty
+\text{ and }
+f(\bx) &gt; -\infty \Forall \bx \in \VV.
+\]</div>
+<p>In other words, <span class="math notranslate nohighlight">\(\epi f\)</span> is nonempty
+and contains no vertical lines.</p>
+</div>
+</div><p>Putting another way, a proper function
+is obtained by taking a real valued function <span class="math notranslate nohighlight">\(f\)</span>
+defined on a nonempty set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>
+and then extending it to all of <span class="math notranslate nohighlight">\(\VV\)</span> by
+setting <span class="math notranslate nohighlight">\(f(\bx) = +\infty\)</span> for all <span class="math notranslate nohighlight">\(\bx \notin C\)</span>.</p>
+<p>It is easy to see that the codomain for a proper
+function can be changed from <span class="math notranslate nohighlight">\(\ERL\)</span>
+to <span class="math notranslate nohighlight">\(\RERL\)</span> to clarify that it never takes
+the value <span class="math notranslate nohighlight">\(-\infty\)</span>.</p>
+<div class="proof definition admonition" id="def-cvxf-improper-function">
+<p class="admonition-title"><span class="caption-number">Definition 6.49 </span> (Improper function)</p>
+<div class="definition-content section" id="proof-content">
+<p>An extended real-valued function
+<span class="math notranslate nohighlight">\(f : \VV \to \ERL\)</span> is called <em>improper</em>
+if it is not proper.</p>
+</div>
+</div><p>For an improper function <span class="math notranslate nohighlight">\(f\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\dom f\)</span> may be empty.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> might take a value of <span class="math notranslate nohighlight">\(-\infty\)</span> at some <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>.</p></li>
+</ul>
+<p>Most of our study is focused on proper functions.
+However, improper functions sometimes do arise
+naturally.</p>
+</div>
+<div class="section" id="indicator-functions">
+<h2><span class="section-number">6.7.6. </span>Indicator Functions<a class="headerlink" href="#indicator-functions" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvxf-indicator-function">
+<p class="admonition-title"><span class="caption-number">Definition 6.50 </span> (Indicator function)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>. Then, its
+<em>indicator function</em> is given by
+<span class="math notranslate nohighlight">\(I_C(\bx) = 0 \Forall \bx \in C\)</span>.
+Here, <span class="math notranslate nohighlight">\(\dom I_C = C\)</span>.</p>
+<p>The extended value extension of an indicator
+function is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\tilde{I_C}(\bx) \triangleq \begin{cases} 
+0 &amp; \text{for} &amp; \bx \in C \\
+\infty &amp; \text{for} &amp; \bx \notin C.
+\end{cases}
+\end{split}\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-cvxf-indicator-func-convex-set">
+<p class="admonition-title"><span class="caption-number">Theorem 6.63 </span> (Indicator functions and convexity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>An indicator function is convex if and only if its domain is a convex set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C\)</span> be convex. Let <span class="math notranslate nohighlight">\(I_C\)</span> be its indicator function.
+Let <span class="math notranslate nohighlight">\(\bx, \by \in C\)</span>. Then, for any <span class="math notranslate nohighlight">\(t \in [0,1]\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+I_C(t \bx + (1-t) \by) = 0 \leq t I_C(\bx) + (1-t) I_C(\bx) = 0.
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(t \bx + (1-t) \by \in C\)</span> as <span class="math notranslate nohighlight">\(C\)</span> is convex.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(I_C\)</span> is convex.</p>
+<p>If <span class="math notranslate nohighlight">\(C\)</span> is not convex, then <span class="math notranslate nohighlight">\(\dom I_C\)</span> is not convex.
+Hence, <span class="math notranslate nohighlight">\(I_C\)</span> is not convex.</p>
+</div>
+<div class="proof theorem admonition" id="theorem-22">
+<p class="admonition-title"><span class="caption-number">Theorem 6.64 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be a proper function. Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\dom (f + I_C)  =  \dom f \cap C.
+\]</div>
+<p>Also,</p>
+<div class="math notranslate nohighlight">
+\[
+(f + I_C )(\bx) = f(\bx) \Forall \bx \in \dom f \cap C. 
+\]</div>
+</div>
+</div><p>The statement is obvious. And quite powerful.</p>
+<ul class="simple">
+<li><p>The problem of minimizing a function <span class="math notranslate nohighlight">\(f\)</span> over a set <span class="math notranslate nohighlight">\(C\)</span>
+is same as minimizing <span class="math notranslate nohighlight">\(f + I_C\)</span> over <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="first-order-conditions">
+<h2><span class="section-number">6.7.7. </span>First Order Conditions<a class="headerlink" href="#first-order-conditions" title="Permalink to this headline">¶</a></h2>
+<p>Let us look at the special case of
+real valued functions over <span class="math notranslate nohighlight">\(\RR^n\)</span>
+which are differentiable.</p>
+<div class="proof theorem admonition" id="res-cvxf-gradient-convexity-relation">
+<p class="admonition-title"><span class="caption-number">Theorem 6.65 </span> (First order characterization of convexity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a real valued function
+which is <a class="reference internal" href="../mv_calculus/differentiation.html#def-mvc-differentiable-function">differentiable</a>
+at each point in <span class="math notranslate nohighlight">\(\dom f\)</span> which is open.</p>
+<p>Then <span class="math notranslate nohighlight">\(f\)</span> is convex if and only if <span class="math notranslate nohighlight">\(\dom f\)</span> is convex
+and</p>
+<div class="math notranslate nohighlight" id="equation-eq-cvxf-first-order-convexity-condition">
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-eq-cvxf-first-order-convexity-condition" title="Permalink to this equation">¶</a></span>\[f(\by) \geq f(\bx) + \nabla f(\bx)^T (\by - \bx)\]</div>
+<p>holds true for all <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To prove <a class="reference internal" href="#equation-eq-cvxf-first-order-convexity-condition">(6.2)</a>,
+we first show that a differentiable real function <span class="math notranslate nohighlight">\(f: \RR \to \RR\)</span>
+is convex if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+f(y) \geq f(x) + f'(x)(y - x)
+\]</div>
+<p>holds true for all <span class="math notranslate nohighlight">\(x, y \in \dom f\)</span>.</p>
+<p>Assume that <span class="math notranslate nohighlight">\(f\)</span> is convex. Hence, <span class="math notranslate nohighlight">\(\dom f\)</span> is convex too.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(x,y \in \dom f\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\dom f\)</span> is convex, hence
+<span class="math notranslate nohighlight">\( (1-t) x + t y = x + t(y-x) \in \dom f\)</span> for all <span class="math notranslate nohighlight">\(t \in [0, 1]\)</span>.</p></li>
+<li><p>By convexity of <span class="math notranslate nohighlight">\(f\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(x + t(y-x)) \leq (1-t) f(x) + t f(y).
+   \]</div>
+</li>
+<li><p>If we divide by <span class="math notranslate nohighlight">\(t\)</span> on both sides, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(y) \geq f(x) + \frac{f(x + t(y-x)) - f(x)}{t}.
+   \]</div>
+</li>
+<li><p>Taking the limit as <span class="math notranslate nohighlight">\(t \to 0^+\)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(y) \geq f(x) + f'(x)(y-x).
+   \]</div>
+</li>
+</ol>
+<p>For the converse, assume that <span class="math notranslate nohighlight">\(\dom f\)</span> is convex and</p>
+<div class="math notranslate nohighlight">
+\[
+f(y) \geq f(x) + f'(x)(y - x)
+\]</div>
+<p>holds true for all <span class="math notranslate nohighlight">\(x, y \in \dom f\)</span>.</p>
+<ol>
+<li><p>Recall that in <span class="math notranslate nohighlight">\(\RR\)</span> the only convex sets are
+intervals. Thus, <span class="math notranslate nohighlight">\(\dom f\)</span> is an open interval.</p></li>
+<li><p>Choose any <span class="math notranslate nohighlight">\(x, y \in \dom f\)</span> such that <span class="math notranslate nohighlight">\(x \neq y\)</span>.</p></li>
+<li><p>Choose <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(z = t x + (1-t)y\)</span>.</p></li>
+<li><p>By hypothesis, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(x) \geq f(z) + f'(z) (x - z)
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+   f(y) \geq f(z) + f'(z) (y - z).
+   \]</div>
+</li>
+<li><p>Multiplying the first inequality with <span class="math notranslate nohighlight">\(t\)</span> and second
+with <span class="math notranslate nohighlight">\((1-t)\)</span> and adding them yields:</p>
+<div class="math notranslate nohighlight">
+\[
+   t f(x) + (1-t) f(y) \geq f(z) = f(tx + (1-t)y).
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p></li>
+</ol>
+<p>We now prove for the general case with <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span>.
+Recall from <a class="reference internal" href="#res-cvxf-convx-on-lines">Theorem 6.60</a>
+that for any <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span>
+the restriction of <span class="math notranslate nohighlight">\(f\)</span> on the line passing through <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span>
+is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+g(t) = f(t\by + (1-t) \bx) = f(\bx + t(\by - \bx)).
+\]</div>
+<p>Note that, by chain rule (<a class="reference internal" href="../mv_calculus/differentiation.html#ex-f-rest-line-chain-rule">Example 5.9</a>):</p>
+<div class="math notranslate nohighlight">
+\[
+g'(t) = \nabla f(t\by + (1-t) \bx)^T (\by - \bx)
+\]</div>
+<p>Assume <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> such that <span class="math notranslate nohighlight">\(\bx \neq \by\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(g\)</span> be the restriction of <span class="math notranslate nohighlight">\(f\)</span> on the line passing through
+<span class="math notranslate nohighlight">\(\bx, \by\)</span> as described above.</p></li>
+<li><p>Due to <a class="reference internal" href="#res-cvxf-convx-on-lines">Theorem 6.60</a>, <span class="math notranslate nohighlight">\(g\)</span> is convex.</p></li>
+<li><p>By the argument for real functions above:</p>
+<div class="math notranslate nohighlight">
+\[
+   g(t') \geq g(t) + g'(t)(t' - t)
+   \]</div>
+<p>holds true for all <span class="math notranslate nohighlight">\(t, t' \in \dom g\)</span>.</p>
+</li>
+<li><p>In particular, with <span class="math notranslate nohighlight">\(t'=1\)</span> and <span class="math notranslate nohighlight">\(t=0\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+   g(1) \geq g(0) + g'(0).
+   \]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(g'(0) = \nabla f(\bx)^T (\by - \bx)\)</span>.</p></li>
+<li><p>Also, <span class="math notranslate nohighlight">\(g(1) = f(\by)\)</span> and <span class="math notranslate nohighlight">\(g(0) = f(\bx)\)</span>.</p></li>
+<li><p>Thus, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) \geq f(\bx) + \nabla f(\bx)^T (\by - \bx)
+   \]</div>
+<p>as desired.</p>
+</li>
+</ol>
+<p>For the converse, assume that this inequality holds
+for all <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> and <span class="math notranslate nohighlight">\(\dom f\)</span> is convex.</p>
+<ol>
+<li><p>Pick some <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> with <span class="math notranslate nohighlight">\(\bx \neq \by\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(g\)</span> be the restriction of <span class="math notranslate nohighlight">\(f\)</span> on the line passing through
+<span class="math notranslate nohighlight">\(\bx, \by\)</span> as described above.</p></li>
+<li><p>Pick <span class="math notranslate nohighlight">\(t_1, t_2 \in \dom g\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bz_1 = t_1\by + (1-t_1) \bx\)</span> and
+<span class="math notranslate nohighlight">\(\bz_2 = t_2\by + (1-t_2) \bx\)</span>
+are in <span class="math notranslate nohighlight">\(\dom f\)</span>.</p></li>
+<li><p>Consider <span class="math notranslate nohighlight">\(g(t_1) = f(t_1\by + (1-t_1) \bx) = f(\bz_1)\)</span>
+and <span class="math notranslate nohighlight">\(g(t_2) = f(t_2\by + (1-2_1) \bx) = f(\bz_2)\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(g'(t_2) =  \nabla f(t_2\by + (1-t_2) \bx)^T (\by - \bx) = \nabla f(\bz_2)^T (\by - \bx)\)</span>.</p></li>
+<li><p>By hypothesis, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bz_1) \geq f(\bz_2) + \nabla f(\bz_2)^T (\bz_1 - \bz_2).
+   \]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(\bz_1  - \bz_2 = (t_1 - t_2) (\by - \bx)\)</span>.</p></li>
+<li><p>Thus, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+   g'(t_1) \geq g'(t_2) + g'(t_2)(t_1 - t_2).
+   \]</div>
+</li>
+<li><p>This holds for every <span class="math notranslate nohighlight">\(t_1, t_2 \in \dom g\)</span>.</p></li>
+<li><p>But then, <span class="math notranslate nohighlight">\(g\)</span> is convex by previous argument for
+real functions.</p></li>
+<li><p>Since this is valid for every restriction of <span class="math notranslate nohighlight">\(f\)</span>
+to a line passing through its domain, hence
+by <a class="reference internal" href="#res-cvxf-convx-on-lines">Theorem 6.60</a> <span class="math notranslate nohighlight">\(f\)</span> is convex.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="second-order-conditions">
+<h2><span class="section-number">6.7.8. </span>Second Order Conditions<a class="headerlink" href="#second-order-conditions" title="Permalink to this headline">¶</a></h2>
+<p>We continue further with
+real valued functions over <span class="math notranslate nohighlight">\(\RR^n\)</span>
+which are twice differentiable.</p>
+<div class="proof theorem admonition" id="res-cvxf-hessian-convexity-relation">
+<p class="admonition-title"><span class="caption-number">Theorem 6.66 </span> (Second order characterization of convexity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be twice differentiable;
+i.e., its <a class="reference internal" href="../mv_calculus/differentiation.html#def-mvp-hessian">Hessian</a>
+or second derivative <span class="math notranslate nohighlight">\(\nabla^2 f\)</span> exists
+at every point in <span class="math notranslate nohighlight">\(\dom f\)</span> which is open.</p>
+<p>Then, <span class="math notranslate nohighlight">\(f\)</span> is convex if and only if
+<span class="math notranslate nohighlight">\(\dom f\)</span> is convex and its Hessian is positive semidefinite
+for every <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f(\bx) \succeq \ZERO \quad \Forall \bx \in \dom f.
+\]</div>
+</div>
+</div><p>For real functions, the Hessian is simply the
+second derivative <span class="math notranslate nohighlight">\(f''\)</span>.</p>
+<div class="proof corollary admonition" id="res-cvxf-2nd-derivative-convexity-relation">
+<p class="admonition-title"><span class="caption-number">Corollary 6.5 </span> (Convexity characterization for twice differentiable real functions)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be twice differentiable;
+i.e., second derivative <span class="math notranslate nohighlight">\(f''\)</span> exists
+at every point in <span class="math notranslate nohighlight">\(\dom f\)</span> which is open.</p>
+<p>Then, <span class="math notranslate nohighlight">\(f\)</span> is convex if and only if
+<span class="math notranslate nohighlight">\(\dom f\)</span> is an interval and its second derivative is non-negative
+for every <span class="math notranslate nohighlight">\(x \in \dom f\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+f''(x) \geq 0 \quad \Forall x \in \dom f.
+\]</div>
+</div>
+</div><div class="proof corollary admonition" id="res-cvxf-hessian-concavity-relation">
+<p class="admonition-title"><span class="caption-number">Corollary 6.6 </span> (Second order characterization of concavity)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be twice differentiable;</p>
+<p>Then, <span class="math notranslate nohighlight">\(f\)</span> is concave if and only if
+<span class="math notranslate nohighlight">\(\dom f\)</span> is convex and its Hessian is negative semidefinite
+for every <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f(\bx) \preceq \ZERO \quad \Forall \bx \in \dom f.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-quadratic-func-convexity">
+<p class="admonition-title"><span class="caption-number">Example 6.28 </span> (Convexity of a quadratic function)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bP \in \SS^n\)</span> be a symmetric matrix.
+Let <span class="math notranslate nohighlight">\(\bq \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(r \in \RR\)</span>.
+Consider the quadratic functional <span class="math notranslate nohighlight">\(f: \RR^n \to \RR\)</span> given as:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \frac{1}{2} \bx^T \bP \bx + \bq^T \bx + r.
+\]</div>
+<p>As shown in <a class="reference internal" href="../mv_calculus/differentiation.html#ex-mvc-hessian-quadratic-form">Example 5.11</a>,
+the Hessian of <span class="math notranslate nohighlight">\(f\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f (\bx) = \bP \quad \Forall \bx \in \RR^n.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is convex if and only if <span class="math notranslate nohighlight">\(\bP \succeq \ZERO\)</span>
+(i.e., it is positive semidefinite).</p>
+<p>In fact <span class="math notranslate nohighlight">\(f\)</span> is strictly convex if and only if <span class="math notranslate nohighlight">\(P \succ \ZERO\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-real-identity">
+<p class="admonition-title"><span class="caption-number">Example 6.29 </span> (Identity is convex and concave)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = x.
+\]</div>
+<p>We have <span class="math notranslate nohighlight">\(f'(x) = 1\)</span> and <span class="math notranslate nohighlight">\(f''(x) = 0\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(f\)</span> is both convex and concave.</p>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-real-exponential">
+<p class="admonition-title"><span class="caption-number">Example 6.30 </span> (Exponential is convex)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = e^{ax}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR\)</span>.</p>
+<p>We have <span class="math notranslate nohighlight">\(f'(x) = a e^{ax}\)</span> and <span class="math notranslate nohighlight">\(f''(x) = a^2 e^{ax}\)</span>.</p>
+<p>For any <span class="math notranslate nohighlight">\(a,x \in \RR\)</span>, <span class="math notranslate nohighlight">\(a^2 e^{ax} &gt; 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(f\)</span> is strictly convex.</p>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-real-power-x-a">
+<p class="admonition-title"><span class="caption-number">Example 6.31 </span> (Powers)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = x^a
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR_{++}\)</span>.</p>
+<p>Now, <span class="math notranslate nohighlight">\(f'(x) = a x^{a-1}\)</span> and <span class="math notranslate nohighlight">\(f''(x) = a (a - 1) x^{a-2}\)</span>.</p>
+<ol class="simple">
+<li><p>We have <span class="math notranslate nohighlight">\(x &gt; 0\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(a \geq 1\)</span>, <span class="math notranslate nohighlight">\(f''(x) \geq 0\)</span>.
+<span class="math notranslate nohighlight">\(f\)</span> is convex for <span class="math notranslate nohighlight">\(a \geq 1\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(a \leq 0\)</span>, <span class="math notranslate nohighlight">\(a (a -1) \geq 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(f''(x) \geq 0\)</span>. <span class="math notranslate nohighlight">\(f\)</span> is convex for <span class="math notranslate nohighlight">\(a \leq 0\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(0 \leq a \leq 1\)</span>, <span class="math notranslate nohighlight">\(a (a-1) \leq 0\)</span>. Thus, <span class="math notranslate nohighlight">\(f''(x) \leq 0\)</span>.
+<span class="math notranslate nohighlight">\(f\)</span> is concave on <span class="math notranslate nohighlight">\(0 \leq a \leq 1\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-real-power-absolute-x-a">
+<p class="admonition-title"><span class="caption-number">Example 6.32 </span> (Powers of absolute value)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = |x|^a
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR_{++}\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-real-reciprocal-power-x-r">
+<p class="admonition-title"><span class="caption-number">Example 6.33 </span> (Reciprocal powers)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{x^r} = x^{-r}.
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR_{++}\)</span>.</p>
+<p>Now, <span class="math notranslate nohighlight">\(f'(x) = (-r) x^{-r-1}\)</span> and <span class="math notranslate nohighlight">\(f''(x) = (-r)(-r - 1) x^{-r-2} = r(r+1) x^{-(r+2)}\)</span>.</p>
+<ol class="simple">
+<li><p>We have <span class="math notranslate nohighlight">\(x &gt; 0\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(r \geq 0\)</span>, <span class="math notranslate nohighlight">\(f''(x) \geq 0\)</span>.
+<span class="math notranslate nohighlight">\(f\)</span> is convex for <span class="math notranslate nohighlight">\(r \geq 0\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-real-logarithm">
+<p class="admonition-title"><span class="caption-number">Example 6.34 </span> (Logarithm is concave)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \ln x.
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR_{++}\)</span>.</p>
+<p>Now, <span class="math notranslate nohighlight">\(f'(x) = \frac{1}{x}\)</span> and <span class="math notranslate nohighlight">\(f''(x) = \frac{-1}{x^2}\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f''(x) &lt; 0\)</span> for all <span class="math notranslate nohighlight">\(x &gt; 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is concave for all <span class="math notranslate nohighlight">\(x &gt; 0\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-real-negative-entropy">
+<p class="admonition-title"><span class="caption-number">Example 6.35 </span> (Negative entropy is convex)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = x \ln x.
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR_{++}\)</span>.</p>
+<p>Now, <span class="math notranslate nohighlight">\(f'(x) = \ln x + 1\)</span> and <span class="math notranslate nohighlight">\(f''(x) = \frac{1}{x}\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f''(x) &gt; 0\)</span> for all <span class="math notranslate nohighlight">\(x &gt; 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is convex for all <span class="math notranslate nohighlight">\(x &gt; 0\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-r-r-quad-lin">
+<p class="admonition-title"><span class="caption-number">Example 6.36 </span> (Quadratic over linear form is convex)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \times \RR \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x, y) = \frac{x^2}{y}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \{ (x, y) \ST y &gt; 0\}\)</span>.</p>
+<p>From <a class="reference internal" href="../mv_calculus/differentiation.html#ex-mvc-derivatives-quad-lin-func">Example 5.14</a>,
+the Hessian is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\nabla^2 f(x, y) = 
+\frac{2}{y^3} \begin{bmatrix}
+y^2 &amp; - x y\\
+- x y &amp; x^2
+\end{bmatrix}
+= \frac{2}{y^3} 
+\begin{bmatrix} y\\ - x \end{bmatrix}
+\begin{bmatrix} y\\ - x \end{bmatrix}^T .
+\end{split}\]</div>
+<p>Recall that for any <span class="math notranslate nohighlight">\(\bx \in \RR^n\)</span>, the matrix <span class="math notranslate nohighlight">\(\bx \bx^T\)</span>
+is positive semi-definite.
+Hence,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} y\\ - x \end{bmatrix}
+\begin{bmatrix} y\\ - x \end{bmatrix}^T
+\end{split}\]</div>
+<p>is positive semi-definite.</p>
+<p>For <span class="math notranslate nohighlight">\(y &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\frac{2}{y^3} &gt; 0\)</span>. Combining:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f(x, y) \succeq \ZERO.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-log-sum-exp">
+<p class="admonition-title"><span class="caption-number">Example 6.37 </span> (Log sum exponential is convex)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \ln \left ( \sum_{i=1}^n e^{x_i} \right )
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR^n\)</span>.</p>
+<p>From <a class="reference internal" href="../mv_calculus/differentiation.html#ex-mvc-hessian-log-sum-exp">Example 5.12</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f(\bx) = \frac{1}{(\bone^T \bz)^2} \left ((\bone^T \bz) \Diag (\bz) - \bz \bz^T \right )
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bz = \begin{bmatrix}
+e^{x_1} \\ 
+\vdots \\
+e^{x_n}
+\end{bmatrix}.
+\end{split}\]</div>
+<p>To show that <span class="math notranslate nohighlight">\(\nabla^2 f(\bx)\)</span> is p.s.d., it suffices to
+show that <span class="math notranslate nohighlight">\((\bone^T \bz) \Diag (\bz) - \bz \bz^T\)</span> is p.s.d..</p>
+<p>Now for any <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp;\bv^T \left ( (\bone^T \bz) \Diag (\bz) - \bz \bz^T \right ) \bv\\
+&amp;= (\bone^T \bz) (\bv^T \Diag (\bz) \bv) - \bv^T  \bz \bz^T \bv \\
+&amp;= (\bone^T \bz) (\bv^T \Diag (\bz) \bv) - (\bv^T  \bz)^2 \\
+&amp;= \left (\sum_{i=1}^n z_i \right ) 
+\left (\sum_{i=1}^n v_i^2 z_i \right)
+- \left (\sum_{i=1}^n v_i z_i \right )^2.
+\end{split}\]</div>
+<p>If we define vectors <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(\bb\)</span> with
+<span class="math notranslate nohighlight">\(a_i  = v_i \sqrt{z_i}\)</span> and <span class="math notranslate nohighlight">\(b_i = \sqrt{z_i}\)</span>,
+then by
+<a class="reference internal" href="../la/inner_product_spaces.html#res-la-ip-cauchy-chwartz-inequality">Cauchy-Schwartz inequality</a>
+, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+(\ba^T \ba)(\bb^T \bb) \geq (\ba^T \bb)^2
+\iff (\ba^T \ba)(\bb^T \bb) - (\ba^T \bb)^2 \geq 0.
+\]</div>
+<p>But this is exactly the expression above.
+Thus, <span class="math notranslate nohighlight">\(\nabla^2 f(\bx) \succeq \ZERO\)</span>.</p>
+<p>Hence, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+</div><div class="proof example admonition" id="ex-cvxf-log-det">
+<p class="admonition-title"><span class="caption-number">Example 6.38 </span> (Log determinant function is concave)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \SS^n \to \RR\)</span> be:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bX) = \log \det X.
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \SS^n_{++}\)</span> (the set of symmetric positive definite matrices).</p>
+<p>Let any line in <span class="math notranslate nohighlight">\(\SS^n\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\bX = \bZ + t \bV 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bZ, \bV \in \SS^n\)</span>.</p>
+<p>Consider the restriction of <span class="math notranslate nohighlight">\(f\)</span> on a line:</p>
+<div class="math notranslate nohighlight">
+\[
+g(t) = \log \det (\bZ + t \bV) 
+\]</div>
+<p>to the interval of values where <span class="math notranslate nohighlight">\(\bZ + t \bV \succ \ZERO\)</span>
+(since <span class="math notranslate nohighlight">\(\dom f = \SS^n_{++}\)</span> ).
+In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+\dom g = \{t \in \RR \ST \bZ + t \bV \succ \ZERO \}.
+\]</div>
+<p>Without any loss of generality, we can assume that <span class="math notranslate nohighlight">\(t=0 \in \dom g\)</span>;
+i.e. <span class="math notranslate nohighlight">\(\bZ \succ \ZERO\)</span>.</p>
+<p>Recall that:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\det (AB) = \det(A) \det(B)\)</span> for square matrices.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \det (A) = \prod_{i=1}^n \lambda_i \)</span> for symmetric matrices with <span class="math notranslate nohighlight">\(\lambda_i\)</span>
+being their eigen values.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\lambda_i\)</span> are eigen values of <span class="math notranslate nohighlight">\(A\)</span>, then the eigen values of <span class="math notranslate nohighlight">\(I + t A\)</span> are
+<span class="math notranslate nohighlight">\(1 + t \lambda_i\)</span>.</p></li>
+</ol>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g(t) &amp;= \log \det (\bZ + t \bV) \\
+&amp;= \log \det (\bZ^{\frac{1}{2}} (\bZ^{\frac{1}{2}} + t \bZ^{-\frac{1}{2}} \bV) )\\
+&amp;= \log \det (\bZ^{\frac{1}{2}} (I + t \bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}) \bZ^{\frac{1}{2}})\\
+&amp;= \log \det(\bZ^{\frac{1}{2}}) + \log \det (I + t \bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}})
+  + \log \det(\bZ^{\frac{1}{2}})\\
+&amp;= \log \det(\bZ) + \log \det (I + t \bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}).
+\end{split}\]</div>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\lambda_i\)</span> be the eigen values of <span class="math notranslate nohighlight">\(\bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(1 + t \lambda_i\)</span> are eigen values of <span class="math notranslate nohighlight">\(I + t\bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\log \det (I + t\bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}) = \sum_{i=1}^n \log \det (1 + t\lambda_i)\)</span>.</p></li>
+</ol>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+g(t) = \sum_{i=1}^n \log \det (1 + t\lambda_i) + \log \det(\bZ).
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\log \det(\bZ)\)</span> doesn’t depend on <span class="math notranslate nohighlight">\(t\)</span>.
+Similarly, <span class="math notranslate nohighlight">\(\lambda_i\)</span> only depend on <span class="math notranslate nohighlight">\(\bZ\)</span> and <span class="math notranslate nohighlight">\(\bV\)</span>, hence they don’t depend on <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>Differentiating <span class="math notranslate nohighlight">\(g\)</span> w.r.t. <span class="math notranslate nohighlight">\(t\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+g'(t) = \sum_{i=1}^n \frac{\lambda_i}{1 + t \lambda_i}.
+\]</div>
+<p>Differentiating again, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+g''(t) = -\sum_{i=1}^n \frac{\lambda_i^2}{(1 + t \lambda_i)^2}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(g''(t) \leq 0\)</span>, hence <span class="math notranslate nohighlight">\(f\)</span> is concave.</p>
+</div>
+</div></div>
+<div class="section" id="scaling-and-addition-of-convex-functions">
+<h2><span class="section-number">6.7.9. </span>Scaling and Addition of Convex Functions<a class="headerlink" href="#scaling-and-addition-of-convex-functions" title="Permalink to this headline">¶</a></h2>
+<p>Here we show some basic results about operations
+that preserve convexity</p>
+<div class="proof theorem admonition" id="res-cvxf-nonnegative-mult-cvx">
+<p class="admonition-title"><span class="caption-number">Theorem 6.67 </span> (Nonnegative multiplication)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is convex, then so is <span class="math notranslate nohighlight">\(\alpha f\)</span> for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(f\)</span> is convex.
+Note that <span class="math notranslate nohighlight">\(\dom f = \dom \alpha f\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\dom \alpha f\)</span> is convex since <span class="math notranslate nohighlight">\(\dom f\)</span> is convex.</p>
+<p>Now, let <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> and <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; f(t\bx + (1-t) \by) \leq t f(\bx) + (1-t)f(\by)\\
+&amp; \implies  \alpha f(t\bx + (1-t) \by) \leq \alpha (t f(\bx) + (1-t)f(\by)) \Forall \alpha \geq 0\\
+&amp; \implies (\alpha f)(t\bx + (1-t) \by) \leq  t (\alpha f)(\bx) + (1-t) (\alpha f)(\by) \Forall \alpha \geq 0.
+\end{split}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\alpha f\)</span> is convex for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-func-sum">
+<p class="admonition-title"><span class="caption-number">Theorem 6.68 </span> (Convex function sum)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are convex, then so is <span class="math notranslate nohighlight">\(f + g\)</span>
+with <span class="math notranslate nohighlight">\(\dom (f + g) = \dom f \cap \dom g\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We discussed earlier that <span class="math notranslate nohighlight">\(\dom (f + g) = \dom f \cap \dom g\)</span>
+as <span class="math notranslate nohighlight">\(f + g\)</span> is defined only for the points where both <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>
+are defined.</p>
+<p>Recall from <a class="reference internal" href="convex.html#res-cvx-intersection">Theorem 6.23</a>
+that intersection of convex sets is convex.
+Thus, <span class="math notranslate nohighlight">\(\dom (f + g)\)</span> is convex since <span class="math notranslate nohighlight">\(\dom f\)</span> and <span class="math notranslate nohighlight">\(\dom g\)</span>
+are both convex.</p>
+<p>Now let <span class="math notranslate nohighlight">\(\bx, \by \in \dom (f + g)\)</span> and <span class="math notranslate nohighlight">\(t \in [0, 1]\)</span>.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is convex, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   f(t\bx + (1-t) \by) \leq t f(\bx) + (1-t) f(\by).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(g\)</span> is convex, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   g(t\bx + (1-t) \by) \leq t g(\bx) + (1-t) g(\by).
+   \]</div>
+</li>
+<li><p>Adding the two inequalities, we get:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; f(t\bx + (1-t) \by) + g(t\bx + (1-t) \by) \leq 
+   t f(\bx) + (1-t) f(\by) + t g(\bx) + (1-t) g(\by)\\
+   &amp; \implies 
+   (f + g)(t\bx + (1-t) \by) \leq t (f + g)(\bx) + (1-t) (f + g)(\by).
+   \end{split}\]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f+g\)</span> is convex.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-func-conic-combs">
+<p class="admonition-title"><span class="caption-number">Theorem 6.69 </span> (Conic combinations of convex functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f_1, \dots, f_n\)</span> are convex, then for any
+<span class="math notranslate nohighlight">\(t_1, \dots, t_n \geq 0\)</span>, the
+<a class="reference internal" href="cone.html#def-conic-combination">conic combination</a>
+of functions given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f = t_1 f_1 + \dots + t_n f_n
+\]</div>
+<p>is also convex.</p>
+</div>
+</div><p>The conic combinations are also called nonnegative weighted
+sums.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Due to <a class="reference internal" href="#res-cvxf-nonnegative-mult-cvx">Theorem 6.67</a>,
+<span class="math notranslate nohighlight">\(t_i f_i\)</span> are convex since <span class="math notranslate nohighlight">\(f_i\)</span> are convex and <span class="math notranslate nohighlight">\(t_i \geq 0\)</span>.</p>
+<p>Due to <a class="reference internal" href="#res-cvxf-func-sum">Theorem 6.68</a>, sum
+of two convex functions is convex.</p>
+<p>It can be easily shown by mathematical induction
+that sum of <span class="math notranslate nohighlight">\(n\)</span> convex functions is convex too.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-total-funcs-cvx-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 6.70 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The set of convex functions
+in the <a class="reference internal" href="../la/important_spaces.html#def-la-is-real-valued-functions-space">vector space of real valued functions</a>
+form a convex cone.</p>
+</div>
+</div><p>Note that the set of real valued functions forms a vector
+space over <span class="math notranslate nohighlight">\(\RR\)</span> with the standard definitions of
+function scalar multiplication and function addition.
+We are examining the convexity of the set of functions
+under this vector space.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Since every conic combination of convex functions
+is convex, hence the set of convex functions is
+a convex cone.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-concave-func-sum">
+<p class="admonition-title"><span class="caption-number">Theorem 6.71 </span> (Concave function sum)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are concave, then so is <span class="math notranslate nohighlight">\(f + g\)</span>
+with <span class="math notranslate nohighlight">\(\dom (f + g) = \dom f \cap \dom g\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> be concave.</p></li>
+<li><p><span class="math notranslate nohighlight">\(-f\)</span> and <span class="math notranslate nohighlight">\(-g\)</span> are convex.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvxf-func-sum">Theorem 6.68</a>, <span class="math notranslate nohighlight">\((-f) + (-g) = -(f + g)\)</span>
+is convex.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f+g\)</span> is concave.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-concave-func-conic-combs">
+<p class="admonition-title"><span class="caption-number">Theorem 6.72 </span> (Conic combinations of cave functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f_1, \dots, f_n\)</span> are concave, then for any
+<span class="math notranslate nohighlight">\(t_1, \dots, t_n \geq 0\)</span>, the
+<a class="reference internal" href="cone.html#def-conic-combination">conic combination</a>
+of functions given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f = t_1 f_1 + \dots + t_n f_n
+\]</div>
+<p>is also concave.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(f_1, \dots, f_n\)</span> are concave then <span class="math notranslate nohighlight">\(-f_1, \dots, -f_n\)</span> are convex.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvxf-func-conic-combs">Theorem 6.69</a>,
+<span class="math notranslate nohighlight">\((-t_1 f_1) + \dots + (-t_n f_n)\)</span> is convex.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(-(t_1 f_1 + \dots + t_n f_n)\)</span> is convex.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(t_1 f_1 + \dots + t_n f_n\)</span> is concave.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="sublevel-sets">
+<h2><span class="section-number">6.7.10. </span>Sublevel Sets<a class="headerlink" href="#sublevel-sets" title="Permalink to this headline">¶</a></h2>
+<p>Recall from <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html#def-bra-sub-level-set">Definition 2.51</a>
+that the <span class="math notranslate nohighlight">\(\alpha\)</span>-sublevel set for a
+real valued function <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}.
+\]</div>
+<div class="proof theorem admonition" id="res-cvxf-convexity-sublevel-sets">
+<p class="admonition-title"><span class="caption-number">Theorem 6.73 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> is convex,
+then its sublevel sets are convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in C_{\alpha}\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(f(\bx) \leq \alpha\)</span> and <span class="math notranslate nohighlight">\(f(\by) \leq \alpha\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz = t \bx + (1-t)\by\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is convex, hence:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bz) \leq t f(\bx) + (1-t) f(\by) \leq t \alpha + (1-t) \alpha = \alpha.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(\bz) \leq \alpha\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bz \in C_{\alpha}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C_{\alpha}\)</span> is convex.</p></li>
+</ol>
+</div>
+<p>The converse is not true.
+A function need not be convex even if all its
+sublevel sets are convex.</p>
+<div class="proof example admonition" id="ex-cvxf-log-concave-sublevel-convex">
+<p class="admonition-title"><span class="caption-number">Example 6.39 </span></p>
+<div class="example-content section" id="proof-content">
+<p>Consider the function <span class="math notranslate nohighlight">\(f(x) = \ln x\)</span>.
+It is concave (<a class="reference internal" href="#ex-cvxf-real-logarithm">Example 6.34</a>).</p>
+<p>Its sublevel sets are convex as they are intervals.</p>
+</div>
+</div></div>
+<div class="section" id="hypograph">
+<h2><span class="section-number">6.7.11. </span>Hypograph<a class="headerlink" href="#hypograph" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html#def-bra-hypograph">hypograph</a>
+of a function <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\hypo f = \{ (\bx,t) \in \VV \oplus \RR \ST \bx \in \dom f, f(\bx) \geq t \}.
+\]</div>
+<p>Just like function convexity is connected to epigraph convexity,
+similarly function concavity is connected to hypograph convexity.</p>
+<div class="proof theorem admonition" id="res-cvxf-concavity-hypograph">
+<p class="admonition-title"><span class="caption-number">Theorem 6.74 </span> (Function concavity = Epigraph convexity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is concave if and only if its hypograph
+<span class="math notranslate nohighlight">\(\hypo f\)</span> is a convex set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(f\)</span> is concave if and only if <span class="math notranslate nohighlight">\(-f\)</span> is convex
+if and only if the epigraph of <span class="math notranslate nohighlight">\(-f\)</span> is convex
+if and only if the hypograph of <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+</div>
+<div class="section" id="super-level-sets">
+<h2><span class="section-number">6.7.12. </span>Super-level Sets<a class="headerlink" href="#super-level-sets" title="Permalink to this headline">¶</a></h2>
+<p>Recall from <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html#def-bra-super-level-set">Definition 2.53</a>
+that the <span class="math notranslate nohighlight">\(\alpha\)</span>-sublevel set for a
+real valued function <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+D_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \geq \alpha \}.
+\]</div>
+<div class="proof theorem admonition" id="res-cvxf-concavity-super-level-sets">
+<p class="admonition-title"><span class="caption-number">Theorem 6.75 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> is concave,
+then its super-level sets are convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(f\)</span> is concave.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in D_{\alpha}\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(f(\bx) \geq \alpha\)</span> and <span class="math notranslate nohighlight">\(f(\by) \geq \alpha\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz = t \bx + (1-t)\by\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is concave, hence:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bz) \geq t f(\bx) + (1-t) f(\by) \geq t \alpha + (1-t) \alpha = \alpha.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(\bz) \geq \alpha\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bz \in D_{\alpha}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(D_{\alpha}\)</span> is convex.</p></li>
+</ol>
+</div>
+<p>The converse is not true.
+A function need not be concave even if all its
+super-level sets are convex.</p>
+<div class="proof example admonition" id="example-48">
+<p class="admonition-title"><span class="caption-number">Example 6.40 </span></p>
+<div class="example-content section" id="proof-content">
+<p>Let geometric mean be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+g(\bx) =  \left ( \prod_{i=1}^n x_i \right )^{\frac{1}{n}}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom g = \RR^n_{+}\)</span>
+(with the interpretation that <span class="math notranslate nohighlight">\(0^{\frac{1}{n}} = 0\)</span>).</p>
+<p>Let arithmetic mean be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+a(\bx) = \frac{1}{n}\sum_{i=1}^n x_i.
+\]</div>
+<p>Consider the set:</p>
+<div class="math notranslate nohighlight">
+\[
+A = \{ \bx \in \RR^n_+ \ST g(\bx) \geq \alpha a(\bx) \}.
+\]</div>
+<p><span class="math notranslate nohighlight">\(A\)</span> is the set of nonnegative vectors where the geometric
+mean of the components is at least <span class="math notranslate nohighlight">\(\alpha\)</span> times larger
+than the arithmetic mean.</p>
+<ol>
+<li><p>In <a class="reference internal" href="#ex-cvxf-geom-mean">Example 6.27</a> we establish that
+<span class="math notranslate nohighlight">\(g\)</span> is concave.</p></li>
+<li><p>In <a class="reference internal" href="#ex-cvxf-arithmetic-mean">Example 6.23</a> we established that
+<span class="math notranslate nohighlight">\(a\)</span> is convex as well as concave.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(-\alpha a\)</span> is concave.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g - \alpha a\)</span> is concave (with <span class="math notranslate nohighlight">\(\dom g - \alpha a = \RR^n_+\)</span>).</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(A\)</span> can be redefined as:</p>
+<div class="math notranslate nohighlight">
+\[
+   A = \{ \bx \in \RR^n_+ \ST g(\bx) - \alpha a(\bx) \geq 0 \}.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(0\)</span>-super-level set of <span class="math notranslate nohighlight">\(g - \alpha a\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(g - \alpha a\)</span> is concave, hence <span class="math notranslate nohighlight">\(A\)</span> is convex.</p></li>
+</ol>
+</div>
+</div></div>
+<div class="section" id="composition-with-affine-mapping">
+<h2><span class="section-number">6.7.13. </span>Composition with Affine Mapping<a class="headerlink" href="#composition-with-affine-mapping" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvx-affine-composition">
+<p class="admonition-title"><span class="caption-number">Theorem 6.76 </span> (Affine transformations preserve convexity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be real vector spaces.
+Let <span class="math notranslate nohighlight">\(T : \VV \to \WW\)</span> be a linear transformation.
+Let <span class="math notranslate nohighlight">\(\bb \in \WW\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \WW \to \RR\)</span> be a function.
+Define <span class="math notranslate nohighlight">\(g : \VV \to \RR\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+g(\bx) = f(T(\bx) + \bb)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom g = \{\bx \in \VV \ST T(\bx) + \bb \in \dom f \}\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is convex, then so is <span class="math notranslate nohighlight">\(g\)</span>.
+If <span class="math notranslate nohighlight">\(f\)</span> is concave, then so is <span class="math notranslate nohighlight">\(g\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+<ol>
+<li><p>If we define <span class="math notranslate nohighlight">\(A : \VV \to \WW\)</span> as <span class="math notranslate nohighlight">\(A(\bx) = T(\bx) + \bb \)</span>
+then <span class="math notranslate nohighlight">\(\dom g = A^{-1}(\dom f)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span>, so defined, is an affine transformation.</p></li>
+<li><p>By <a class="reference internal" href="convex.html#res-cvx-convex-set-inverse-affine-image">Theorem 6.30</a>,
+<span class="math notranslate nohighlight">\(\dom g\)</span> is convex since <span class="math notranslate nohighlight">\(\dom f\)</span> is convex.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \dom g\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(g(\bx) = f(T(\bx) + \bb)\)</span>. Define <span class="math notranslate nohighlight">\(\bu = T(\bx) + \bb\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(g(\by) = f(T(\by) + \bb)\)</span>. Define <span class="math notranslate nohighlight">\(\bv = T(\by) + \bb\)</span>.</p></li>
+<li><p>By definition, <span class="math notranslate nohighlight">\(\bu, \bv \in \dom f\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is convex, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   f(t\bu + (1-t) \bv) \leq t f(\bu) + (1-t)f(\bv).
+   \]</div>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   g(t\bx + (1-t) \by)
+   &amp;= f(T(t\bx + (1-t) \by) + \bb)\\
+   &amp;= f(tT(\bx) + (1-t) T(\by) + (t + (1-t))\bb)\\
+   &amp;= f(t(T(\bx) + \bb) + (1-t) (T(\by) + \bb))\\
+   &amp;= f(t\bu + (1-t) \bv )\\
+   &amp;\leq t f(\bu) + (1-t) f(\bv)\\
+   &amp;= t g(\bx) + (1-t) g(\by).
+   \end{split}\]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g\)</span> satisfies the
+convexity defining inequality <a class="reference internal" href="#equation-eq-convexity-inequality">(6.1)</a>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g\)</span> is convex.</p></li>
+</ol>
+<p>A similar argument shows that if <span class="math notranslate nohighlight">\(f\)</span> is concave
+then so is <span class="math notranslate nohighlight">\(g\)</span>.</p>
+</div>
+</div>
+<div class="section" id="pointwise-supremum">
+<h2><span class="section-number">6.7.14. </span>Pointwise Supremum<a class="headerlink" href="#pointwise-supremum" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvx-ptws-max-2">
+<p class="admonition-title"><span class="caption-number">Theorem 6.77 </span> (Pointwise maximum of two convex functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f_1\)</span> and <span class="math notranslate nohighlight">\(f_2\)</span> be convex functions. Define
+their pointwise maximum as</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \max \{f_1(\bx), f_2(\bx) \}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \dom f_1 \cap \dom f_2\)</span>.
+Then, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(\dom f\)</span> is an intersection of convex sets. Hence, it is convex.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> and <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(t \bx + (1-t) \by)
+&amp;= \max \{f_1(t \bx + (1-t) \by), f_2(t \bx + (1-t) \by) \}\\
+&amp;\leq \max \{t f_1(\bx) + (1-t) f_1(\by), t f_2(\bx) + (1-t) f_2(\by) \}\\
+&amp;\leq t \max \{f_1(\bx), f_2(\bx) \} + (1-t)\max \{f_1(\by), f_2(\by) \}\\
+&amp;= t f(\bx) + (1-t) f(\by).
+\end{split}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvx-ptws-max-n">
+<p class="admonition-title"><span class="caption-number">Theorem 6.78 </span> (Pointwise maximum of multiple convex functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f_1, f_2, \dots, f_n\)</span> be convex functions. Define
+their pointwise maximum as</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \max \{f_1(\bx), \dots, f_n(\bx) \}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \dom f_1 \cap \dots \cap \dom f_n\)</span>.
+Then, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The result has been proved for the base case of 2 functions
+in <a class="reference internal" href="#res-cvx-ptws-max-2">Theorem 6.77</a>.</p>
+<p>Assume that it is true for <span class="math notranslate nohighlight">\(n\)</span> functions. We
+can easily show it true for <span class="math notranslate nohighlight">\(n+1\)</span> functions since</p>
+<div class="math notranslate nohighlight">
+\[
+\max \{f_1(\bx), \dots, f_{n+1}(\bx) \}
+= \max \{\max \{f_1(\bx), \dots, f_n(\bx) \}, f_{n+1}(\bx) \}.
+\]</div>
+<p>Thus, by principle of mathematical induction, the result
+is true for all <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvx-ptws-supremum">
+<p class="admonition-title"><span class="caption-number">Theorem 6.79 </span> (Pointwise supremum of a family of convex functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(I\)</span> be an index set.
+Let <span class="math notranslate nohighlight">\(\{ f_i : \VV \to \RR \}_{i \in I}\)</span> be a family of convex functions.
+Define their pointwise supremum as</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \sup \{f_i(\bx)\}_{i \in I}
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+\dom f = \bigcap_{i \in I} \dom f_i.
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(f\)</span> is convex.
+Moreover,</p>
+<div class="math notranslate nohighlight">
+\[
+\epi f = \bigcap_{i \in I} \epi f_i.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We  shall first verify the epigraph equality.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\((\bx, t) \in \epi f\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(f(\bx) \leq t\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f_i(\bx) \leq t\)</span> for all <span class="math notranslate nohighlight">\(i \in I\)</span>
+since <span class="math notranslate nohighlight">\(f(\bx) = \sup \{f_i(\bx)\}_{i \in I}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((\bx, t) \in \epi f_i\)</span> for all <span class="math notranslate nohighlight">\(i \in I\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\epi f \subseteq \bigcap_{i \in I} \epi f_i\)</span>.</p></li>
+</ol>
+<p>Now, for the converse:</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\((\bx, t) \in \bigcap_{i \in I} \epi f_i\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((\bx, t) \in \epi f_i\)</span> for all <span class="math notranslate nohighlight">\(i \in I\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f_i(\bx) \leq t\)</span> for all <span class="math notranslate nohighlight">\(i \in I\)</span>.</p></li>
+<li><p>Taking the supremum over <span class="math notranslate nohighlight">\(i \in I\)</span> on the L.H.S., we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+   \sup \{f_i(\bx)\}_{i \in I} = f(\bx) \leq t.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((\bx, t) \in \epi f\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bigcap_{i \in I} \epi f_i \subseteq \epi f\)</span>.</p></li>
+</ol>
+<p>Combining the two, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\epi f = \bigcap_{i \in I} \epi f_i.
+\]</div>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(f_i\)</span> are convex functions, hence <span class="math notranslate nohighlight">\(\epi f_i\)</span> are convex sets
+due to <a class="reference internal" href="#res-cvxf-convexity-epigraph">Theorem 6.61</a>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\epi f\)</span> is a convex set due to <a class="reference internal" href="convex.html#res-cvx-arbitrary-intersection">Theorem 6.24</a>.</p></li>
+<li><p>But then, <span class="math notranslate nohighlight">\(f\)</span> is convex
+again due to <a class="reference internal" href="#res-cvxf-convexity-epigraph">Theorem 6.61</a>.</p></li>
+</ol>
+</div>
+<div class="proof definition admonition" id="def-cvxf-piecewise-linear-func">
+<p class="admonition-title"><span class="caption-number">Definition 6.51 </span> (Piecewise linear function)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\ba_1, \dots, \ba_n \in \VV\)</span>.
+Let <span class="math notranslate nohighlight">\(b_1, \dots, b_n \in \RR\)</span>.</p>
+<p>A function <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span> given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \max \{\langle \bx, \ba_i \rangle + b_i  \}_{i \in 1, \dots, n}
+\]</div>
+<p>is called a <em>piecewise linear</em> or <em>piecewise affine</em> function.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvxf-piecewise-linear-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.80 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Piecewise linear functions are convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Each of the functions <span class="math notranslate nohighlight">\(f_i (\bx) = \langle \bx, \ba_i \rangle + b_i\)</span>
+is affine functionals.
+Thus, <span class="math notranslate nohighlight">\(f_i\)</span> are convex (<a class="reference internal" href="#res-cvxf-affine-functional-convex">Theorem 6.58</a>).
+<span class="math notranslate nohighlight">\(f\)</span> is a pointwise maximum of <span class="math notranslate nohighlight">\(n\)</span> convex functions.
+Hence, <span class="math notranslate nohighlight">\(f\)</span> is convex (<a class="reference internal" href="#res-cvx-ptws-max-n">Theorem 6.78</a>).</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./convex_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="generalized_inequality.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.6. </span>Generalized Inequalities</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="relint.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.8. </span>Topological Properties</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

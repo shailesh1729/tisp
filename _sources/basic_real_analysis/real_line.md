@@ -1,3 +1,4 @@
+(sec:bra:real-line)=
 # Real Line
 
 The set of real numbers is also known as *real line*.
@@ -772,6 +773,8 @@ Let $A$ denote the set of algebraic numbers and $B$ denote the set of transcende
 Then $\RR = A \cup B$. Since $A$ is countable and $\RR$ is uncountable, hence $B$ is non-empty
 and is uncountable.
 ````
+
+## Intervals are Uncountable
 
 ````{prf:proposition}
 :label: res-rl-unit-open-interval-uncountable

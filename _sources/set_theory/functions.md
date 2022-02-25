@@ -197,6 +197,22 @@ The domain is $\RR$ and the range is $\RR_+ = [0, \infty)$.
 $f$ is total. It is not injective. It is not surjective. 
 ````
 
+```{prf:example}  Logarithm of the determinant
+The set of $n \times n$ real symmetric matrices is denoted by $\SS^n$. 
+The set of positive semidefinite symmetric matrices is denoted by $\SS^n_+$. 
+The set of positive definite symmetric matrices is denoted by $\SS^n_{++}$.
+
+Consider the function $f : \SS^n \to \RR$ given by
+
+$$
+f (X) = \log \det (X).
+$$
+
+The domain of the function is $\dom f = \SS^n_{++}$. The function
+is not defined for matrices which are not positive definite.
+```
+
+
 In summary, for a function $f : A \to B$:
 
 * If $\dom f = A$ then, the function is total.
@@ -515,7 +531,189 @@ and $g$ can serve as a bijection.
 ````
 
 
+## Restriction and Extension
 
 
+```{prf:definition} Restriction of a function
+:label: def-st-function-restriction
+
+Let $f : A \to B$ be a function. Let $C$ be a subset of $A$.
+Then, the *restriction* of $f$ to $C$ is the function
+$f|_C : A \to B$ given by
+
+$$
+f|_C (x) = f(x) \Forall x \in C \cap \dom f.
+$$
+
+```
+
+```{div}
+In other words, the domain of $f$ gets restricted to 
+$C \cap \dom f$ and $f$ is no longer defined for 
+any $x \in \dom f \setminus C$.
+```
+
+```{prf:remark}
+For total functions, the convention is to change the
+signature from $f : A \to B$ to $f|_C : C \to B$.
+This way, the restriction $f|_C$ is also a total function.
+```
+
+
+```{prf:definition} Extension of a function
+:label: def-st-function-extension
+
+An *extension* of a function $f$ is any function $g$ such that
+$f$ is a restriction of $g$.
+```
+
+If $g$ is an extension of $f$ then $\dom f \subset \dom g$.
+
+## Graph
+
+```{prf:definition} Graph of a function
+:label: def-st-function-graph
+
+Given a function $f : X \to Y$, 
+the set of ordered pairs $(x, y)$ where
+$x \in \dom f$ and $y = f(x)$,
+is known as the *graph* of a function.
+
+$$
+\graph f \triangleq \{ (x, f(x)) \ST x \in X \}
+$$
+
+The graph of a function is the subset of the
+Cartesian product  $X \times Y$. 
+```
+
+
+
+## Set Valued Functions
+
+For a set $X$, the notation $2^X$ denotes the
+power set of $X$.
+
+```{prf:definition} Set valued function/operator
+:label: def-st-set-valued-function
+
+The notation $A : X \to 2^Y$ means that
+$A$ maps every element of $X$ to a subset of $Y$.
+In other words, $A(x) \subseteq Y$.
+$A$ is a mapping from $X$ to the power set of $Y$.
+Such a mapping $A$ is called a *set valued function* or 
+*set valued operator*.
+```
+
+```{prf:observation}
+If $A$ is not defined on some values of $X$, we can
+simply say that $A$ maps those values to 
+$\EmptySet$ which is a subset of $Y$.
+
+If $f : X \to Y$ is a partial function
+with $\dom f \subseteq X$, then, the
+corresponding set valued function 
+$A: X \to 2^Y$ is:
+
+$$
+A(x) = \begin{cases}
+\{ f(x) \} & \text{ if } x \in \dom f \\
+\EmptySet &  \text{ if } x \notin \dom f
+\end{cases}.
+$$
+```
+
+```{prf:remark}
+Let $A : X \to 2^Y$ be a set valued function.
+Then, $A$ is characterized by its graph
+
+$$
+\graph A  = \{ (x,y) \in X \times Y \ST y \in A(x) \}.
+$$
+```
+
+```{prf:definition} Image of a subset under a set valued function
+Let $A : X \to 2^Y$ be a set valued function 
+and let $C \subseteq X$.
+Then:
+
+$$
+A(C) \triangleq \bigcup_{x \in C} A(x).
+$$
+``` 
+
+```{prf:definition} Composition of set valued functions
+Let $A : X \to 2^Y$ and $ B : Y \to 2^Z$ be set valued
+functions. 
+
+Then the composition $B \circ A : X \to 2^Z$ is defined
+as:
+
+$$
+(B \circ A) (x) \triangleq B (A (x)) = \bigcup_{y \in A(x) } B(y).
+$$
+```
+
+```{prf:definition} Domain of a set valued function
+The *domain* of a set valued function $A: X \to 2^Y$ is defined as:
+
+$$
+\dom A \triangleq \{ x \in X \ST A(x) \neq \EmptySet \}.
+$$
+```
+
+```{prf:definition} Range of a set valued function
+The *range* of a set valued function $A: X \to 2^Y$ is defined as:
+
+$$
+\range A \triangleq A(X) = \bigcup_{x \in X} A(x).
+$$
+
+Note that $A(X) \subseteq Y$.
+```
+
+```{prf:remark}
+A set valued function $A: X \to 2^Y$ is:
+
+1. *partial* if $\dom A \neq X$.
+1. *total* if $\dom A = X$.
+1. *onto* if $\range A = Y$.
+```
+
+
+```{prf:definition} Inverse of a set valued function
+The *inverse* of a set valued function $A: X \to 2^Y$ is defined 
+using its graph as:
+
+$$
+\graph A^{-1}  = \{ (y, x) \in Y \times X \ST (x,y) \in \graph A \}.
+$$
+
+For every $(x,y) \in X \times Y$, 
+$y \in A(x) \iff x \in A^{-1} (y)$.
+```
+
+The inverse of a set valued function is a set valued 
+function and it always exists.
+
+```{prf:definition} Single valued function
+Let $A : X \to 2^Y$ be a set valued function.
+If for every $x \in \dom A$, $A(x)$ is a singleton,
+then $A$ is called an *at most single valued* function
+from $X$ to $Y$. 
+
+This can be identified with a partial function.
+```
+
+
+```{prf:definition} Selection of a set valued function
+Let $A : X \to 2^Y$ be a set valued function.
+A function $f : X \to Y$ is called a *selection* of $A$
+if $f(x) \in A(x)$ for every $x \in \dom A$.
+
+In other words, for every $x \in \dom A$, 
+we select one value from the set $A(x)$.
+Domain of a selection $f$ is same as the domain of $A$.
+```
 
 

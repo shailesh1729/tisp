@@ -1,0 +1,2415 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.5. Inner Product Spaces &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.6. Dual Spaces" href="dual_spaces.html" />
+    <link rel="prev" title="4.4. Normed Linear Spaces" href="normed_spaces.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.9. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   4. Linear Algebra
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="important_spaces.html">
+     4.8. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequence_spaces.html">
+     4.9. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="affine.html">
+     4.10. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     6.9. Subgradients
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   7. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   8. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   9. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   10. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     11.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     11.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   12. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   13. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   14. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     14.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/la/inner_product_spaces.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fla/inner_product_spaces.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-product">
+   4.5.1. Inner Product
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-inner-product">
+   4.5.2. Real Inner Product
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-product-space">
+   4.5.3. Inner Product Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthogonality">
+   4.5.4. Orthogonality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#norm-induced-by-inner-product">
+   4.5.5. Norm Induced by Inner Product
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hilbert-spaces">
+   4.5.6. Hilbert Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthonormality">
+   4.5.7. Orthonormality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-gram-schmidt-algorithm">
+   4.5.8. The Gram-Schmidt Algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthogonal-complements">
+   4.5.9. Orthogonal Complements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthogonal-projection">
+   4.5.10. Orthogonal Projection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallelogram-identity">
+   4.5.11. Parallelogram Identity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polarization-identity">
+   4.5.12. Polarization identity
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Inner Product Spaces</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-product">
+   4.5.1. Inner Product
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-inner-product">
+   4.5.2. Real Inner Product
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-product-space">
+   4.5.3. Inner Product Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthogonality">
+   4.5.4. Orthogonality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#norm-induced-by-inner-product">
+   4.5.5. Norm Induced by Inner Product
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hilbert-spaces">
+   4.5.6. Hilbert Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthonormality">
+   4.5.7. Orthonormality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-gram-schmidt-algorithm">
+   4.5.8. The Gram-Schmidt Algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthogonal-complements">
+   4.5.9. Orthogonal Complements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthogonal-projection">
+   4.5.10. Orthogonal Projection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallelogram-identity">
+   4.5.11. Parallelogram Identity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polarization-identity">
+   4.5.12. Polarization identity
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="inner-product-spaces">
+<span id="sec-la-inner-product-spaces"></span><h1><span class="section-number">4.5. </span>Inner Product Spaces<a class="headerlink" href="#inner-product-spaces" title="Permalink to this headline">¶</a></h1>
+<p>Inner products are a generalization of the notion of dot product.
+We restrict our attention to real vector spaces and complex vector spaces.
+Thus, the field <span class="math notranslate nohighlight">\(\FF\)</span> can be either <span class="math notranslate nohighlight">\(\RR\)</span> or <span class="math notranslate nohighlight">\(\CC\)</span>.</p>
+<div class="section" id="inner-product">
+<h2><span class="section-number">4.5.1. </span>Inner Product<a class="headerlink" href="#inner-product" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-inner-product">
+<p class="admonition-title"><span class="caption-number">Definition 4.67 </span> (Inner product)</p>
+<div class="definition-content section" id="proof-content">
+<p>An <em>inner product</em> over an <span class="math notranslate nohighlight">\(\FF\)</span>-vector space <span class="math notranslate nohighlight">\(\VV\)</span> is any map
+<span class="math notranslate nohighlight">\(\langle, \rangle : \VV \times \VV \to \FF\)</span>
+mapping <span class="math notranslate nohighlight">\((\bv_1, \bv_2) \mapsto \langle \bv_1, \bv_2 \rangle\)</span>
+satisfying following properties:</p>
+<ol>
+<li><p>[Positive definiteness]</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \bv, \bv \rangle \geq 0 \text{  and  } \langle \bv, \bv \rangle = 0 \iff \bv = 0.
+   \]</div>
+</li>
+<li><p>[Conjugate symmetry]</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \bv_1, \bv_2 \rangle = \overline{\langle \bv_2, \bv_1 \rangle} \quad \forall \bv_1, \bv_2 \in \VV.
+   \]</div>
+</li>
+</ol>
+<ul>
+<li><p>[Linearity in the first argument]</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+    &amp;\langle \alpha \bv, \bw \rangle = \alpha \langle \bv, \bw \rangle \quad \forall \bv, \bw \in \VV; \forall \alpha \in \FF\\
+    &amp;\langle \bv_1 + \bv_2, \bw \rangle = \langle \bv_1, \bw \rangle + \langle \bv_2, \bw \rangle \quad \forall \bv_1, \bv_2,\bw \in \VV
+    \end{aligned}
+   \end{split}\]</div>
+</li>
+</ul>
+</div>
+</div><div class="proof theorem admonition" id="res-la-ip-scaling-second">
+<p class="admonition-title"><span class="caption-number">Theorem 4.63 </span> (Scaling in second argument)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF\)</span> be an inner product.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bv, \alpha \bw \rangle =  \overline{\alpha} \langle \bv, \bw \rangle.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bv, \alpha \bw \rangle = \overline{\langle \alpha \bw, \bv \rangle}
+= \overline{\alpha \langle  \bw, \bv \rangle}
+= \overline{\alpha}\overline{\langle  \bw, \bv \rangle}
+= \overline{\alpha}\langle \bv, \bw \rangle.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-dist-second">
+<p class="admonition-title"><span class="caption-number">Theorem 4.64 </span> (Distribution in second argument)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF\)</span> be an inner product.
+Then for any <span class="math notranslate nohighlight">\(\bv, \bx, \by \in \VV\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bv, \bx + \by \rangle = \langle \bv, \bx \rangle + \langle \bv, \by \rangle.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bv, \bx + \by \rangle = \overline{\langle \bx + \by , \bv \rangle}
+= \overline{\langle \bx, \bv \rangle + \langle \by, \bv \rangle}
+= \overline{\langle \bx, \bv \rangle} + \overline{\langle \by, \bv \rangle}
+= \langle \bv, \bx \rangle + \langle \bv, \by \rangle.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-product-with-zero">
+<p class="admonition-title"><span class="caption-number">Theorem 4.65 </span> (Inner product with zero)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF\)</span> be an inner product.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bzero , \bv \rangle  = \langle \bv , \bzero \rangle = 0 \Forall \bv \in \VV.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bu , \bv \rangle = \langle \bu + \bzero , \bv \rangle
+= \langle \bu , \bv \rangle + \langle \bzero , \bv \rangle.
+\]</div>
+<p>By cancelling terms, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bzero , \bv \rangle = 0.
+\]</div>
+<p>Using the conjugate symmetry, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bv , \bzero \rangle = \overline{\langle \bzero , \bv \rangle}
+= \overline{0} = 0.
+\]</div>
+</div>
+<ul class="simple">
+<li><p>Linearity in first argument extends to any arbitrary linear combination:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\left \langle \sum \alpha_i \bv_i, \bw \right \rangle = \sum \alpha_i \langle \bv_i, w \rangle.
+\]</div>
+<ul class="simple">
+<li><p>Similarly we have conjugate linearity in second argument for any arbitrary linear combination:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\left \langle \bv, \sum \alpha_i \bw_i \right \rangle = \sum \overline{\alpha_i} \langle \bv, \bw_i \rangle.
+\]</div>
+<div class="proof example admonition" id="example-4">
+<p class="admonition-title"><span class="caption-number">Example 4.20 </span></p>
+<div class="example-content section" id="proof-content">
+<p>The standard inner product on <span class="math notranslate nohighlight">\(\RR^n\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle = \sum_{i=1}^n x_i y_i.
+\]</div>
+<p>This is often called the <em>dot product</em> or <em>scalar product</em>.</p>
+</div>
+</div><div class="proof example admonition" id="example-5">
+<p class="admonition-title"><span class="caption-number">Example 4.21 </span></p>
+<div class="example-content section" id="proof-content">
+<p>The standard inner product on <span class="math notranslate nohighlight">\(\CC^n\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle = \sum_{i=1}^n x_i \overline{y_i}.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="example-6">
+<p class="admonition-title"><span class="caption-number">Example 4.22 </span></p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \RR^2\)</span>. Define:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle = x_1 y_1 - x_2 y_1 - x_1 y_2  + 4 x_2 y_2.
+\]</div>
+<p>Now:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\langle \bx, \bx \rangle = (x_1 - x_2)^2 + 3 x_2^2\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\bx = \bzero \iff \langle \bx, \bx \rangle = 0\)</span>.
+Thus, it is positive definite.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle \by, \bx \rangle = y_1 x_1 - y_2 x_1 - y_1 x_2 + 4 y_2 x_2 = \langle \bx, \by \rangle\)</span>.
+It is symmetric.</p></li>
+<li><p>We can also verify that it is linear in the first argument.</p></li>
+</ol>
+<p>Thus, it satisfies all the properties of an inner product.</p>
+<p>Note that, in the matrix notation, we can write this
+inner product as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\langle \bx, \by \rangle = 
+\begin{bmatrix} x_1 &amp; x_2 \end{bmatrix}
+\begin{bmatrix} 1 &amp; -1 \\ -1 &amp; 4 \end{bmatrix}
+\begin{bmatrix} y_1 \\ y_2 \end{bmatrix}
+\end{split}\]</div>
+<p>The matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix} 1 &amp; -1 \\ -1 &amp; 4 \end{bmatrix}
+\end{split}\]</div>
+<p>is positive definite.
+Its trace is <span class="math notranslate nohighlight">\(5\)</span> and its determinant is <span class="math notranslate nohighlight">\(3\)</span>.
+Its eigen values are <span class="math notranslate nohighlight">\(4.303, 0.697\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="example-7">
+<p class="admonition-title"><span class="caption-number">Example 4.23 </span></p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\CC^{n \times n}\)</span> be the space of <span class="math notranslate nohighlight">\(n \times n\)</span> matrices.
+For any <span class="math notranslate nohighlight">\(\bA = (a_{ij})\)</span> and <span class="math notranslate nohighlight">\(\bB = (b_{ij})\)</span> in <span class="math notranslate nohighlight">\(\CC^{n \times n}\)</span>,
+we define the inner product as:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bA, \bB \rangle = \sum_{j, k} a_{j k} \overline{b_{j k}}.
+\]</div>
+<p>It can be easily seen that:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bA, \bB \rangle = \Trace (\bA \bB^H) = \Trace (\bB^H \bA)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bB^H\)</span> is the conjugate transpose of <span class="math notranslate nohighlight">\(\bB\)</span> and <span class="math notranslate nohighlight">\(\Trace\)</span> computes
+the trace of a matrix (sum of its diagonal values).</p>
+</div>
+</div><div class="proof example admonition" id="example-8">
+<p class="admonition-title"><span class="caption-number">Example 4.24 </span></p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\CC^{n \times 1}\)</span> be the space of column vectors.
+Let <span class="math notranslate nohighlight">\(\bQ\)</span> be an arbitrary <span class="math notranslate nohighlight">\(n \times n\)</span> invertible matrix over <span class="math notranslate nohighlight">\(\CC\)</span>.</p>
+<p>For any <span class="math notranslate nohighlight">\(\bx, \by \in \CC^{n \times 1}\)</span>, define</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle  = \by^H \bQ^H \bQ \bx.
+\]</div>
+<p>We identify the <span class="math notranslate nohighlight">\(1 \times 1\)</span> matrix in the R.H.S. with its
+single entry as a complex number <span class="math notranslate nohighlight">\(\CC\)</span>. This is a valid inner product.</p>
+<p>When <span class="math notranslate nohighlight">\(\bQ = \bI\)</span>, the identity matrix, the inner product reduces to:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle  = \by^H \bx.
+\]</div>
+<p>This is the <em>standard inner product</em> on the space of column vectors.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-ip-complex-real-part">
+<p class="admonition-title"><span class="caption-number">Theorem 4.66 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>For complex inner products, the inner product is determined identified
+by its real part.</p>
+</div>
+</div><p>This statement may be confusing. Let us unpack what it means.
+Let</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle = \Re\langle \bx, \by \rangle + i \Im\langle \bx, \by \rangle.
+\]</div>
+<p>Then, computing the inner product involves computing the
+real part as well as computing the complex part.
+What the statement means is that, if we know how to
+compute <span class="math notranslate nohighlight">\(\Re\langle \bx, \by \rangle\)</span> for any
+<span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span>, then, we can use the same
+method to compute  <span class="math notranslate nohighlight">\(\Im\langle \bx, \by \rangle\)</span>
+too; but using different inputs. See below.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Let</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle = \Re\langle \bx, \by \rangle + i \Im\langle \bx, \by \rangle.
+\]</div>
+<p>For any complex number <span class="math notranslate nohighlight">\(z = x + i y \in \CC\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\Re (- i z) = \Re ( -i (x + i y)) = \Re (y - i x) = y = \Im (z).
+\]</div>
+<p>Since, <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle\)</span> is a complex number, hence:</p>
+<div class="math notranslate nohighlight">
+\[
+\Im \langle \bx, \by \rangle = \Re (-i \langle \bx, \by \rangle) 
+= \Re \langle \bx, i \by \rangle.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle = \Re\langle \bx, \by \rangle + i \Re \langle \bx, i \by \rangle.
+\]</div>
+</div>
+</div>
+<div class="section" id="real-inner-product">
+<h2><span class="section-number">4.5.2. </span>Real Inner Product<a class="headerlink" href="#real-inner-product" title="Permalink to this headline">¶</a></h2>
+<p>From the perspective of convex analysis, the general inner product is not very useful.
+We prefer a special class of inner products whose value is always real.
+This is applicable on vector spaces where the field of scalars is
+<span class="math notranslate nohighlight">\(\RR\)</span>.</p>
+<div class="proof definition admonition" id="def-la-real-inner-product">
+<p class="admonition-title"><span class="caption-number">Definition 4.68 </span> (Real inner product)</p>
+<div class="definition-content section" id="proof-content">
+<p>A <em>real inner product</em> over an <span class="math notranslate nohighlight">\(\RR\)</span>-vector space <span class="math notranslate nohighlight">\(\VV\)</span> is any map
+<span class="math notranslate nohighlight">\(\langle, \rangle : \VV \times \VV \to \RR\)</span>
+mapping <span class="math notranslate nohighlight">\((\bv_1, \bv_2) \mapsto \langle \bv_1, \bv_2 \rangle\)</span>
+satisfying following properties:</p>
+<ol>
+<li><p>[Positive definiteness]</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \bv, \bv \rangle \geq 0 \text{  and  } \langle \bv, \bv \rangle = 0 \iff \bv = 0.
+   \]</div>
+</li>
+<li><p>[Symmetry]</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \bv_1, \bv_2 \rangle = \langle \bv_2, \bv_1 \rangle \quad \forall \bv_1, \bv_2 \in \VV.
+   \]</div>
+</li>
+</ol>
+<ul>
+<li><p>[Linearity in the first argument]</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+    &amp;\langle \alpha \bv, \bw \rangle = \alpha \langle \bv, \bw \rangle \quad \forall \bv, \bw \in \VV; \forall \alpha \in \RR\\
+    &amp;\langle \bv_1 + \bv_2, \bw \rangle = \langle \bv_1, \bw \rangle + \langle \bv_2, \bw \rangle \quad \forall \bv_1, \bv_2,\bw \in \VV
+    \end{aligned}
+   \end{split}\]</div>
+</li>
+</ul>
+</div>
+</div><ul class="simple">
+<li><p>Real inner product is always real valued no matter whether  the
+vectors are real or complex.</p></li>
+<li><p>Since the real inner product is symmetric, hence since it is linear in first argument,
+it is linear in second argument too.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\left \langle \bv, \sum \alpha_i \bw_i \right \rangle = \sum \alpha_i \langle \bv, \bw_i \rangle.
+\]</div>
+<div class="proof example admonition" id="example-11">
+<p class="admonition-title"><span class="caption-number">Example 4.25 </span> (A real inner product for <span class="math notranslate nohighlight">\(\CC^n\)</span> over <span class="math notranslate nohighlight">\(\RR\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>In this example, we are dealing with <span class="math notranslate nohighlight">\(n\)</span>-tuples of complex numbers
+in <span class="math notranslate nohighlight">\(\CC^n\)</span> with the field of scalars being <span class="math notranslate nohighlight">\(\RR\)</span>.
+It can be easily checked that <span class="math notranslate nohighlight">\(\CC^n\)</span> over <span class="math notranslate nohighlight">\(\RR\)</span> is a
+vector space.</p>
+<p>Let <span class="math notranslate nohighlight">\(z_1, z_2\)</span> be complex numbers:</p>
+<div class="math notranslate nohighlight">
+\[
+z_1 \overline{z_2} = (a_1 + i b_1) (a_2 - i b_2) = a_1 a_2 + b_1 b_2 + i (b_1 a_2 - a_1 b_2).
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+\Re (z_1 \overline{z_2}) = a_1 a_2 + b_1 b_2.
+\]</div>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Re (z \overline{z}) = x^2 + y^2\)</span> is positive definite;
+i.e., <span class="math notranslate nohighlight">\(\Re (z \overline{z}) = 0 \iff z = 0 + i 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Re (z_1 \overline{z_2}) = \Re (z_2 \overline{z_1})\)</span> is symmetric.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(\alpha \in \RR\)</span> <span class="math notranslate nohighlight">\(\Re (\alpha z_1 \overline{z_2}) = \alpha \Re (z_1 \overline{z_2})\)</span>.
+Thus, it is linear in first argument.</p></li>
+</ol>
+<p>Now, for any <span class="math notranslate nohighlight">\(\bx, \by \in \CC^n\)</span>, define:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle = \Re \left ( \sum_{i=1}^n x_i \overline{y_i} \right ).
+\]</div>
+<p>Following the argument above, it is a real inner product on <span class="math notranslate nohighlight">\(\CC^n\)</span>.</p>
+<p>Interestingly, if <span class="math notranslate nohighlight">\(\bu \in \CC^n\)</span> is identified with <span class="math notranslate nohighlight">\(\bv \in \RR^{2 n}\)</span> by
+stacking the real and imaginary parts, then the real inner product
+defined above for <span class="math notranslate nohighlight">\(\CC^n\)</span> is nothing but the standard inner product for
+<span class="math notranslate nohighlight">\(\RR^{2 n}\)</span>.</p>
+</div>
+</div><p>While the presentation in rest of the section will be based on the
+general conjugate symmetric inner product, it will be easy to
+extrapolate the results for the special case of real inner products.</p>
+</div>
+<div class="section" id="inner-product-space">
+<h2><span class="section-number">4.5.3. </span>Inner Product Space<a class="headerlink" href="#inner-product-space" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-pre-hilbert-space">
+<p class="admonition-title"><span class="caption-number">Definition 4.69 </span> (Inner product space / Pre-Hilbert space)</p>
+<div class="definition-content section" id="proof-content">
+<p>An <span class="math notranslate nohighlight">\(\FF\)</span>-vector space <span class="math notranslate nohighlight">\(\VV\)</span> equipped with an inner product
+<span class="math notranslate nohighlight">\(\langle, \rangle : \VV \times \VV \to \FF\)</span> is known
+as an <em>inner product space</em> or a <em>pre-Hilbert space</em>.</p>
+</div>
+</div></div>
+<div class="section" id="orthogonality">
+<h2><span class="section-number">4.5.4. </span>Orthogonality<a class="headerlink" href="#orthogonality" title="Permalink to this headline">¶</a></h2>
+<p>Orthogonality is the generalization of the notion of
+perpendicularity from elementary geometry.</p>
+<div class="proof definition admonition" id="def-la-orthogonal-pair">
+<p class="admonition-title"><span class="caption-number">Definition 4.70 </span> (Orthogonal vectors)</p>
+<div class="definition-content section" id="proof-content">
+<p>Any two vectors <span class="math notranslate nohighlight">\(\bu , \bv \in \VV\)</span> are called <em>orthogonal</em> to each other
+if  <span class="math notranslate nohighlight">\(\langle \bu, \bv \rangle = 0\)</span>.</p>
+<p>We write <span class="math notranslate nohighlight">\(\bu \perp \bv\)</span> if <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span> are orthogonal to each other.</p>
+</div>
+</div><div class="proof definition admonition" id="def-la-orthogonal-vectors">
+<p class="admonition-title"><span class="caption-number">Definition 4.71 </span> (Set of orthogonal vectors)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set of non-zero vectors <span class="math notranslate nohighlight">\(\{\bv_1, \dots, \bv_p\}\)</span> is called <em>orthogonal</em>
+or <em>pairwise orthogonal</em> if</p>
+<div class="math notranslate nohighlight">
+\[
+     \langle \bv_i, \bv_j  \rangle = 0  \text{ if } i \neq j \quad \forall 1 \leq i, j \leq p.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-la-ip-orthogonal-independent">
+<p class="admonition-title"><span class="caption-number">Theorem 4.67 </span> (Orthogonality implies independence)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A set of orthogonal vectors is linearly independent.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bv_1, \dots \bv_n\)</span> be a set of orthogonal vectors.
+Suppose there is a linear combination:</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha_1 \bv_1 + \dots + \alpha_n \bv_n = \bzero.
+\]</div>
+<p>Taking inner product on both sides with <span class="math notranslate nohighlight">\(\bv_j\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; \langle \alpha_1 \bv_1 + \dots + \alpha_n \bv_n, \bv_j \rangle = \langle \bzero , \bv_j \rangle\\
+&amp;\iff 0 + \dots + \alpha_j \langle \bv_j, \bv_j \rangle + \dots + 0 = 0\\
+&amp;\iff \alpha_j \langle \bv_j, \bv_j \rangle = 0\\
+&amp;\iff \alpha_j =  0.
+\end{aligned}
+\end{split}\]</div>
+<p>Thus, the only zero linear combination is the trivial combination.
+Thus, the vectors are linearly independent.</p>
+</div>
+</div>
+<div class="section" id="norm-induced-by-inner-product">
+<h2><span class="section-number">4.5.5. </span>Norm Induced by Inner Product<a class="headerlink" href="#norm-induced-by-inner-product" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-ip-induced-norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.72 </span> (Norm induced by inner product)</p>
+<div class="definition-content section" id="proof-content">
+<p>Every inner product <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF\)</span>
+on a vector space <span class="math notranslate nohighlight">\(\VV\)</span>
+induces a <a class="reference internal" href="normed_spaces.html#def-la-norm">norm</a>  <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>
+given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \| = \sqrt{\langle \bv , \bv \rangle} \Forall \bv \in \VV.
+\]</div>
+</div>
+</div><p>We shall justify that this function satisfies all the properties of a norm
+later. But before that, let us examine some implications of this definition
+which are useful in their own right.</p>
+<p>Note that it is easy to see that <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> is positive definite;
+i.e., <span class="math notranslate nohighlight">\(\| \bzero \| = 0\)</span> and <span class="math notranslate nohighlight">\(\| \bv \| &gt; 0\)</span> if <span class="math notranslate nohighlight">\(\bv \neq \bzero\)</span>.</p>
+<p>Also, it is positively homogeneous, since:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \alpha \bv \|  = \sqrt{\langle \alpha \bv , \alpha \bv \rangle}
+= \sqrt{\alpha \overline{\alpha} \langle \bv, \bv \rangle} 
+= |\alpha| \sqrt{\langle \bv, \bv \rangle} = |\alpha| \| \bv \|.
+\]</div>
+<div class="proof theorem admonition" id="res-la-ip-pythagoras">
+<p class="admonition-title"><span class="caption-number">Theorem 4.68 </span> (Pythagoras theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\bu \perp \bv\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bu + \bv \|^2 = \| \bu \|^2 + \| \bv \|^2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bu + \bv \|^2 = \langle \bu + \bv , \bu + \bv \rangle 
+= \langle \bu, \bu \rangle + \langle \bu, \bv \rangle + \langle \bv, \bu \rangle + \langle \bv, \bv \rangle
+= \| \bu \|^2 + \| \bv \|^2  
+\]</div>
+<p>where we used the fact that: <span class="math notranslate nohighlight">\(\langle \bu, \bv \rangle = \langle \bv, \bu \rangle = 0\)</span>
+since  <span class="math notranslate nohighlight">\(\bu \perp \bv\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-cauchy-chwartz-inequality">
+<p class="admonition-title"><span class="caption-number">Theorem 4.69 </span> (Cauchy Schwartz inequality)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For any <span class="math notranslate nohighlight">\(\bu, \bv \in \VV\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+| \langle \bu, \bv \rangle | \leq \| \bu \| \| \bv \|.
+\]</div>
+<p>The equality holds if and only if <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span> are linearly dependent.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If either <span class="math notranslate nohighlight">\(\bu = \bzero\)</span> or <span class="math notranslate nohighlight">\(\bv = \bzero\)</span> then the equality holds.
+So, suppose that neither of them are zero vectors.
+In particular <span class="math notranslate nohighlight">\(\bv \neq \bzero\)</span> means <span class="math notranslate nohighlight">\(\| \bv \| &gt; 0\)</span>.</p>
+<p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+\bw = \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv.
+\]</div>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\langle \bw, \bu - \bw \rangle &amp;= 
+\left \langle \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv, 
+\bu  - \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv \right \rangle\\
+&amp;= \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \left \langle \bv, 
+\bu  - \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv \right \rangle\\
+&amp;= \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \left ( 
+\langle \bv, \bu \rangle - 
+\left \langle \bv, \bv \right \rangle
+\right )\\
+&amp;= \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \left ( 
+\langle \bv, \bu \rangle - 
+\frac{\overline{\langle \bu, \bv \rangle}}{\| \bv \|^2}  \langle \bv, \bv \rangle \right )\\
+&amp;= \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \left ( 
+\langle \bv, \bu \rangle - 
+\frac{\langle \bv, \bu \rangle}{\| \bv \|^2}  \| \bv \|^2 \right )\\
+&amp;= 0.
+\end{aligned}
+\end{split}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bw \perp \bu - \bw\)</span>. Therefore, by Pythagorean theorem,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\| \bu \|^2 &amp;= \| \bu - \bw + \bw \|^2\\
+&amp;=  \| \bu - \bw \|^2 + \| \bw \|^2\\
+&amp;\geq \| \bw \|^2\\
+&amp;= \left \| \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv \right \|^2\\
+&amp;= \left | \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \right |^2 \| \bv \|^2\\
+&amp;= \frac{|\langle \bu, \bv \rangle|^2}{\| \bv \|^2}.
+\end{aligned}
+\end{split}\]</div>
+<p>Multiplying on both sides by <span class="math notranslate nohighlight">\(\| \bv \|^2\)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bu \|^2 \| \bv \|^2 \geq |\langle \bu, \bv \rangle|^2.
+\]</div>
+<p>Taking square roots on both sides,</p>
+<div class="math notranslate nohighlight">
+\[
+|\langle \bu, \bv \rangle| \leq \| \bu \| \| \bv \|.
+\]</div>
+<p>In the derivation above, the equality holds if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\bzero = \bu - \bw = \bu - \frac{\langle \bu, \bv \rangle}{\| \bv \|^2} \bv
+\]</div>
+<p>which means that <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span> are linearly dependent.</p>
+<p>Conversely, if <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span> are linearly dependent, then
+<span class="math notranslate nohighlight">\(\bu = \alpha \bv\)</span> for some <span class="math notranslate nohighlight">\(\alpha \in \FF\)</span>, and</p>
+<div class="math notranslate nohighlight">
+\[
+\bw = \frac{\langle \alpha \bv, \bv \rangle}{\| \bv \|^2}\bv
+=\frac{\alpha \langle \bv, \bv \rangle}{\| \bv \|^2}\bv
+= \alpha \bv = \bu
+\]</div>
+<p>giving us <span class="math notranslate nohighlight">\(\bu - \bw = \bzero\)</span>. Hence, the equality holds.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-induced-norm-valid">
+<p class="admonition-title"><span class="caption-number">Theorem 4.70 </span> (Inner product induced norm justification)</p>
+<div class="theorem-content section" id="proof-content">
+<p>The function <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span> induced by the inner product
+<span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF\)</span> as defined in
+<a class="reference internal" href="#def-la-ip-induced-norm">Definition 4.72</a> is indeed a norm.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We need to verify that <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> so defined is indeed a norm.
+We have already shown that it is positive definite and positive homogeneous.
+We now show the triangle inequality. We will take help of the
+Cauchy Schwartz inequality shown above:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\| \bu + \bv \|^2 
+&amp;= \langle \bu + \bv , \bu + \bv \rangle\\ 
+&amp;= \langle \bu, \bu \rangle + \langle \bu, \bv \rangle + \langle \bv, \bu \rangle + \langle \bv, \bv \rangle\\
+&amp;= \| \bu \|^2 + \langle \bu, \bv \rangle + \overline{\langle \bu, \bv \rangle} + \| \bv \|^2\\  
+&amp;= \| \bu \|^2 + 2\Re\langle \bu, \bv \rangle + \| \bv \|^2\\  
+&amp;\leq \| \bu \|^2 + 2|\langle \bu, \bv \rangle| + \| \bv \|^2\\
+&amp;\leq \| \bu \|^2 + 2\|\bu\|\|\bv\| + \| \bv \|^2\\
+&amp;=(\| \bu \| + \| \bv \|)^2.
+\end{aligned}
+\end{split}\]</div>
+<p>Taking square root on both sides, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bu + \bv \| \leq \| \bu \| + \| \bv \|.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> is indeed a norm.</p>
+</div>
+<p>We recap the sequence of results to emphasize the logical flow:</p>
+<ol class="simple">
+<li><p>We started with just the definition of <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> in <a class="reference internal" href="#def-la-ip-induced-norm">Definition 4.72</a>.</p></li>
+<li><p>We proved positive definiteness from the definition itself.</p></li>
+<li><p>We proved positive homogeneity also from the definition itself.</p></li>
+<li><p>We proved Pythagoras theorem utilizing previously established results for inner products.</p></li>
+<li><p>We proved Cauchy Schwartz inequality using positive definiteness,
+positive homogeneity and Pythagoras theorem.</p></li>
+<li><p>We proved triangle inequality using Cauchy Schwartz inequality.</p></li>
+</ol>
+<div class="proof theorem admonition" id="res-la-ip-implies-norm-metric">
+<p class="admonition-title"><span class="caption-number">Theorem 4.71 </span> (Inner product space to metric space)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every inner product space is a normed space. Hence it is also a metric space.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. An inner product induces a norm which makes the vector space a normed space.
+A norm induces a metric which makes the vector space a metric space.</p>
+</div>
+</div>
+<div class="section" id="hilbert-spaces">
+<h2><span class="section-number">4.5.6. </span>Hilbert Spaces<a class="headerlink" href="#hilbert-spaces" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-ip-hilbert-space">
+<p class="admonition-title"><span class="caption-number">Definition 4.73 </span> (Hilbert space)</p>
+<div class="definition-content section" id="proof-content">
+<p>An inner product space <span class="math notranslate nohighlight">\(\VV\)</span> that is
+<a class="reference internal" href="../metric_spaces/complete.html#def-ms-complete-metric-space">complete</a>
+with respect to the metric induced by the norm
+induced by its inner product
+is called a <em>Hilbert space</em>.</p>
+<p>In other words, <span class="math notranslate nohighlight">\(\VV\)</span> is a Hilbert space if
+every Cauchy sequence of <span class="math notranslate nohighlight">\(\VV\)</span> converges in <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="orthonormality">
+<h2><span class="section-number">4.5.7. </span>Orthonormality<a class="headerlink" href="#orthonormality" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-orthonormal-vectors">
+<p class="admonition-title"><span class="caption-number">Definition 4.74 </span> (Set of orthonormal vectors)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set of non-zero vectors <span class="math notranslate nohighlight">\(\{\be_1, \dots, \be_p\}\)</span> is called <em>orthonormal</em> if</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ &amp;\langle \be_i, \be_j  \rangle = 0  \text{ if } i \neq j \quad \forall 1 \leq i, j \leq p\\
+ &amp;\langle \be_i, \be_i  \rangle = 1  \quad \forall 1 \leq i \leq p
+\end{aligned} \, ;
+\end{split}\]</div>
+<p>i.e., <span class="math notranslate nohighlight">\(\langle \be_i, \be_j  \rangle = \delta(i, j)\)</span>.</p>
+<p>In other words, the vectors are unit norm (<span class="math notranslate nohighlight">\(\| \be_i \| = 1\)</span>) and are
+pairwise orthogonal (<span class="math notranslate nohighlight">\(\be_i \perp \be_j)\)</span> whenever <span class="math notranslate nohighlight">\(i \neq j\)</span>).</p>
+</div>
+</div><p>Since orthonormal vectors are orthogonal, hence they are linearly independent.</p>
+<div class="proof definition admonition" id="definition-23">
+<p class="admonition-title"><span class="caption-number">Definition 4.75 </span> (Orthonormal basis)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set of orthonormal vectors form an <em>orthonormal basis</em> for their span.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-ip-onb-expansion">
+<p class="admonition-title"><span class="caption-number">Theorem 4.72 </span> (Expansion of a vector in an orthonormal basis)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{\be_1, \dots, \be_n\}\)</span>  be an orthonormal basis for <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then, any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> can be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = \langle \bv, \be_1 \rangle \be_1 + \dots +  \langle \bv, \be_n \rangle \be_n.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\{\be_1, \dots, \be_n\}\)</span> forms a basis for <span class="math notranslate nohighlight">\(\VV\)</span>,
+hence every every <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> can be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = \alpha_1 \be_1 + \dots + \alpha_n \be_n
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_1, \dots, \alpha_n \in \FF\)</span>.</p>
+<p>Taking inner product with <span class="math notranslate nohighlight">\(\be_j\)</span> on both sides, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bv, \be_j \rangle = \alpha_1 \langle \be_1, \be_j \rangle + \dots + \alpha_n \langle \be_n, \be_j \rangle.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\langle \be_i, \be_j \rangle = \delta(i, j)\)</span>,
+hence the above reduces to:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bv, \be_j \rangle = \alpha_j.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-onb-norm">
+<p class="admonition-title"><span class="caption-number">Theorem 4.73 </span> (Norm of a vector in an orthonormal basis)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{\be_1, \dots, \be_n\}\)</span>  be an orthonormal basis for <span class="math notranslate nohighlight">\(\VV\)</span>.
+For any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>, let its expansion in the orthonormal basis be:</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = \alpha_1 \be_1 + \dots + \alpha_n \be_n.
+\]</div>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|^2 = | \alpha_1|^2 + \dots + | \alpha_n|^2 = \sum_{i=1}^n |\alpha_i|^2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding the expression for norm squared:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|^2 = \langle \bv , \bv \rangle 
+= \langle \alpha_1 \be_1 + \dots + \alpha_n \be_n, \alpha_1 \be_1 + \dots + \alpha_n \be_n \rangle
+= \sum_{i=1}^n \sum_{j = 1}^n \langle \alpha_i \be_i , \alpha_j \be_j \rangle
+= \sum_{i=1}^n | \alpha_i|^2.
+\]</div>
+</div>
+<p>Here are some interesting questions:</p>
+<ul class="simple">
+<li><p>Can a basis in an inner product space be converted into an orthonormal basis?</p></li>
+<li><p>Does a finite dimensional inner product space have an orthonormal basis?</p></li>
+<li><p>Does every finite dimensional subspace of an inner product space have an
+orthonormal basis?</p></li>
+</ul>
+<p>The answer to these questions is yes.
+We provide a constructive answer by the Gram-Schmidt algorithm described
+in the next section.</p>
+</div>
+<div class="section" id="the-gram-schmidt-algorithm">
+<h2><span class="section-number">4.5.8. </span>The Gram-Schmidt Algorithm<a class="headerlink" href="#the-gram-schmidt-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>The Gram-Schmidt algorithm (described below) can construct
+an orthonormal basis from an arbitrary basis for the
+span of the basis.</p>
+<div class="proof algorithm admonition" id="algorithm-26">
+<p class="admonition-title"><span class="caption-number">Algorithm 4.1 </span> (The Gram-Schmidt algorithm)</p>
+<div class="algorithm-content section" id="proof-content">
+<p><strong>Inputs</strong> <span class="math notranslate nohighlight">\(\bv_1, \bv_2, \dots, \bv_n\)</span>, a set of linearly independent vectors</p>
+<p><strong>Outputs</strong> <span class="math notranslate nohighlight">\(\be_1, \be_2, \dots, \be_n\)</span>, a set of orthonormal vectors</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bw_1 = \bv_1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\be_1 = \frac{\bw_1}{\| \bw_1 \|}\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(j=2, \dots, n\)</span>:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bw_j = \bv_j - \sum_{i=1}^{j-1} \langle \bv_j, \be_i \rangle \be_i\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\be_j = \frac{\bw_j}{\| \bw_j \|}\)</span>.</p></li>
+</ol>
+</li>
+</ol>
+</div>
+</div><div class="proof theorem admonition" id="res-la-gram-schmidt-correctness">
+<p class="admonition-title"><span class="caption-number">Theorem 4.74 </span> (Justification for Gram-Schmidt algorithm)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bv_1, \bv_2, \dots, \bv_n\)</span> be linearly independent.
+The Gram-Schmidt algorithm described above generates a set of orthonormal vectors.</p>
+<p>Moreover, for each <span class="math notranslate nohighlight">\(j = 1, \dots, n\)</span>, the set <span class="math notranslate nohighlight">\(\be_1, \dots, \be_j\)</span>
+is an orthonormal basis for the subspace: <span class="math notranslate nohighlight">\(\span \{\bv_1, \dots, \bv_j \}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We prove this by mathematical induction.
+Consider the base case for <span class="math notranslate nohighlight">\(j=1\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bw_1 = \bv_1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\be_1 = \frac{\bw_1}{\| \bw_1 \|} = \frac{\bv_1}{\| \bv_1 \|}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \be_1 \| = 1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\span \{ \be_1 \} = \span \{ \bv_1 \}\)</span> because <span class="math notranslate nohighlight">\(\be_1\)</span> is a nonzero scalar multiple of <span class="math notranslate nohighlight">\(\bv_1\)</span>.</p></li>
+</ol>
+<p>Now, assume that the set <span class="math notranslate nohighlight">\(\be_1, \dots, \be_{j-1}\)</span>
+is an orthonormal basis for <span class="math notranslate nohighlight">\(\span \{\bv_1, \dots, \bv_{j-1} \}\)</span>.</p>
+<ol>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\span \{\be_1, \dots, \be_{j-1} \} = \span \{\bv_1, \dots, \bv_{j-1} \}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bv_j\)</span> is linearly independent from <span class="math notranslate nohighlight">\(\bv_1, \dots, \bv_{j-1}\)</span>, hence
+<span class="math notranslate nohighlight">\(\bv_j \notin \span \{\bv_1, \dots, \bv_{j-1} \}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv_j \notin \span \{\be_1, \dots, \be_{j-1} \}\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bw_j = \bv_j - \sum_{i=1}^{j-1} \langle \bv_j, \be_i \rangle \be_i \neq \bzero\)</span>.
+If it was <span class="math notranslate nohighlight">\(\bzero\)</span>, then <span class="math notranslate nohighlight">\(\bv_j\)</span> would be linearly dependent on <span class="math notranslate nohighlight">\(\be_1, \dots, \be_{j-1}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \bw_j \| &gt; 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\be_j = \frac{\bw_j}{\| \bw_j \|}\)</span> is well-defined.</p></li>
+<li><p>Also, <span class="math notranslate nohighlight">\(\| \be_j \| = 1\)</span> by construction, thus, <span class="math notranslate nohighlight">\(\be_j\)</span> is unit-norm.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\bw_j\)</span> is orthogonal to <span class="math notranslate nohighlight">\(\be_1, \dots, \be_{j-1}\)</span>.
+For any <span class="math notranslate nohighlight">\(1 \leq k &lt; j\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{aligned}
+   \langle \bw_j, \be_k \rangle &amp;= \left \langle 
+   \bv_j - \sum_{i=1}^{j-1} \langle \bv_j, \be_i \rangle \be_i, 
+   \be_k \right \rangle\\
+   &amp;= \langle \bv_j \be_k \rangle - \sum_{i=1}^{j-1} 
+   \langle \bv_j, \be_i \rangle \langle \be_i, \be_k \rangle\\
+   &amp;= \langle \bv_j \be_k \rangle - \langle \bv_j, \be_k \rangle \langle \be_k, \be_k \rangle\\
+   &amp;= \langle \bv_j \be_k \rangle - \langle \bv_j, \be_k \rangle = 0.
+   \end{aligned}
+   \end{split}\]</div>
+<p>since <span class="math notranslate nohighlight">\(\be_1, \dots, \be_{j-1}\)</span> are orthonormal.</p>
+</li>
+<li><p>Thus, for any <span class="math notranslate nohighlight">\(1 \leq k &lt; j\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \be_j, \be_k \rangle 
+   = \left \langle \frac{\bw_j}{\| \bw_j \|}, \be_k \right \rangle
+   = \frac{\langle \bw_j, \be_k \rangle}{\| \bw_j \|}
+   = 0.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\be_j\)</span> is orthogonal to <span class="math notranslate nohighlight">\(\be_1, \dots, \be_{j-1}\)</span>.</p></li>
+<li><p>Since, all of them are unit norm, hence, <span class="math notranslate nohighlight">\(\be_1, \dots, \be_{j-1}, \be_j\)</span> are
+indeed orthonormal.</p></li>
+</ol>
+<p>We also need to show that <span class="math notranslate nohighlight">\(\span \{\be_1, \dots, \be_{j} \} = \span \{\bv_1, \dots, \bv_{j} \}\)</span>.</p>
+<ol class="simple">
+<li><p>Note that <span class="math notranslate nohighlight">\(\bw_j \in \span \{\bv_j, \be_1, \dots, \be_{j-1} \} = \span \{\bv_1, \dots, \bv_j \}\)</span>
+since <span class="math notranslate nohighlight">\(\span \{\be_1, \dots, \be_{j-1} \} = \span \{\bv_1, \dots, \bv_{j-1} \}\)</span>
+by inductive hypothesis.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\be_j \in \span \{\bv_1, \dots, \bv_j \}\)</span>
+since <span class="math notranslate nohighlight">\(\be_j\)</span> is just scaled <span class="math notranslate nohighlight">\(\bw_j\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\span \{\be_1, \dots, \be_{j} \} \subseteq \span \{\bv_1, \dots, \bv_{j} \}\)</span>.</p></li>
+<li><p>For the converse, by definition <span class="math notranslate nohighlight">\(\bv_j = \bw_j + \sum_{i=1}^{j-1} \langle \bv_j, \be_i \rangle \be_i\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bv_j \in \span \{\bw_j,  \be_1, \dots, \be_{j-1}\} = \span \{\be_1, \dots, \be_{j} \}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\span \{\bv_1, \dots, \bv_{j} \} \subseteq \span \{\be_1, \dots, \be_{j} \}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\span \{\be_1, \dots, \be_{j} \} = \span \{\bv_1, \dots, \bv_{j} \}\)</span> must be true.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-finite-onb-existence">
+<p class="admonition-title"><span class="caption-number">Theorem 4.75 </span> (Existence of orthonormal basis)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every finite dimensional inner product space has an orthonormal basis.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is a simple application of the Gram-Schmidt algorithm.</p>
+<ol class="simple">
+<li><p>Every finite dimensional vector space has a finite basis.</p></li>
+<li><p>Every finite basis can be turned into an orthonormal basis by
+the <a class="reference internal" href="#res-la-gram-schmidt-correctness">Gram-Schmidt algorithm</a>.</p></li>
+<li><p>Thus, we have an orthonormal basis.</p></li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="res-la-ip-finite-subspace-onb-existence">
+<p class="admonition-title"><span class="caption-number">Corollary 4.8 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Every finite dimensional subspace of an inner product space has an orthonormal basis.</p>
+</div>
+</div></div>
+<div class="section" id="orthogonal-complements">
+<h2><span class="section-number">4.5.9. </span>Orthogonal Complements<a class="headerlink" href="#orthogonal-complements" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-orthogonal-complement">
+<p class="admonition-title"><span class="caption-number">Definition 4.76 </span> (Orthogonal complement)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S\)</span> be a subset of an inner product space <span class="math notranslate nohighlight">\(\VV\)</span>.
+The <em>orthogonal complement</em> of <span class="math notranslate nohighlight">\(S\)</span> is the set of all vectors in <span class="math notranslate nohighlight">\(\VV\)</span> that are
+orthogonal to every element of <span class="math notranslate nohighlight">\(S\)</span>. It is denoted by <span class="math notranslate nohighlight">\(S^{\perp}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+S^{\perp} \triangleq \{\bv \in \VV \ST \bv \perp \bs \Forall \bs \in S \}.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-la-orthogonal-complement-vector">
+<p class="admonition-title"><span class="caption-number">Definition 4.77 </span> (Orthogonal complement of a vector)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>.
+The <em>orthogonal complement</em> of <span class="math notranslate nohighlight">\(\ba\)</span> is
+the set of all vectors in <span class="math notranslate nohighlight">\(\VV\)</span> that are
+orthogonal to <span class="math notranslate nohighlight">\(\ba\)</span>.
+It is denoted by <span class="math notranslate nohighlight">\(\ba^{\perp}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\ba^{\perp} \triangleq \{\bv \in \VV \ST \bv \perp \ba \}.
+\]</div>
+</div>
+</div><div class="proof observation admonition" id="res-la-ip-orth-comp-vec-set">
+<p class="admonition-title"><span class="caption-number">Observation 4.2 </span></p>
+<div class="observation-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\ba^{\perp}\)</span> is just a notational convenience.</p>
+<div class="math notranslate nohighlight">
+\[
+\ba^{\perp} = \{ \ba \}^{\perp} = (\span \{\ba \})^{\perp}.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-la-ip-orth-comp-subspace">
+<p class="admonition-title"><span class="caption-number">Theorem 4.76 </span> (Orthogonal complement is a linear subspace)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\VV\)</span> is an inner product space and <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span>, then
+<span class="math notranslate nohighlight">\(S^{\perp}\)</span> is a subspace.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To verify that <span class="math notranslate nohighlight">\(S^{\perp}\)</span> is a subspace, we need to check the following.</p>
+<ol class="simple">
+<li><p>It contains the zero vector.</p></li>
+<li><p>It is closed under vector addition.</p></li>
+<li><p>It is closed under scalar multiplication.</p></li>
+</ol>
+<p>We proceed as follows:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\langle \bzero , \bs \rangle = 0\)</span> holds for any <span class="math notranslate nohighlight">\(\bs \in S\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\bzero \in S^{\perp}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu, \bv \in S^{\perp}\)</span>. Then,</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\langle \bu, \bs \rangle = 0\)</span> and <span class="math notranslate nohighlight">\(\langle \bv, \bs \rangle = 0\)</span> for every <span class="math notranslate nohighlight">\(s \in S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\langle \bu + \bv, \bs \rangle = \langle \bu, \bs \rangle + \langle \bv, \bs \rangle = 0 + 0 = 0\)</span>
+for every <span class="math notranslate nohighlight">\(s \in S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bu + \bv \in S^{\perp}\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Similarly, if <span class="math notranslate nohighlight">\(\bv \in S^{\perp}\)</span>, then
+<span class="math notranslate nohighlight">\(\langle \alpha \bv, \bs \rangle = \alpha \langle \bv, \bs \rangle = 0\)</span>
+for every <span class="math notranslate nohighlight">\(\bs \in S\)</span>.</p></li>
+</ol>
+<p>Thus, <span class="math notranslate nohighlight">\(S^{\perp}\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+<div class="proof observation admonition" id="observation-34">
+<p class="admonition-title"><span class="caption-number">Observation 4.3 </span></p>
+<div class="observation-content section" id="proof-content">
+<p>The orthogonal complement of the inner product space <span class="math notranslate nohighlight">\(\VV\)</span> is its trivial subspace
+containing just the zero vector.</p>
+<div class="math notranslate nohighlight">
+\[
+\VV^{\perp} = \{ \bzero \}.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-la-ip-orth-comp-perp-basis">
+<p class="admonition-title"><span class="caption-number">Theorem 4.77 </span> (Orthogonal complement and basis)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(S\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>, then to show that some vector
+<span class="math notranslate nohighlight">\(\bu \in S^{\perp}\)</span>, it is sufficient to show that <span class="math notranslate nohighlight">\(\bu\)</span> is
+orthogonal to all the vectors in some basis of <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<p>Specifically, if <span class="math notranslate nohighlight">\(S\)</span> is a finite dimensional subspace of <span class="math notranslate nohighlight">\(\VV\)</span> and
+<span class="math notranslate nohighlight">\(\BBB = \{ \bv_1, \dots, \bv_m \}\)</span> is a basis
+for <span class="math notranslate nohighlight">\(S\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+S^{\perp} = \{\bx \ST \bx \perp \bv_i, i=1,\dots,m \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\BBB\)</span> be a basis for <span class="math notranslate nohighlight">\(S\)</span> (finite or infinite).</p>
+<p>Then, for any <span class="math notranslate nohighlight">\(\bs \in S\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\bs = \sum_{i=1}^p \alpha_p \be_p
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_p \in \FF\)</span> and <span class="math notranslate nohighlight">\(\be_p \in \BBB\)</span>.</p>
+<p>Now, if <span class="math notranslate nohighlight">\(\bu\)</span> is orthogonal to every vector in <span class="math notranslate nohighlight">\(\BBB\)</span>,
+then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bs, \bu \rangle = \sum_{i=1}^p \alpha_p \langle \be_p, \bu \rangle = 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bu \perp \bs\)</span>.
+Since <span class="math notranslate nohighlight">\(\bs\)</span> was arbitrarily chosen from <span class="math notranslate nohighlight">\(S\)</span>, hence <span class="math notranslate nohighlight">\(\bu \in S^{\perp}\)</span>.</p>
+<p>Now, assume <span class="math notranslate nohighlight">\(S\)</span> to be finite dimensional and
+<span class="math notranslate nohighlight">\(\BBB = \{ \bv_1, \dots, \bv_m \}\)</span> to be a basis of <span class="math notranslate nohighlight">\(S\)</span>.
+Let</p>
+<div class="math notranslate nohighlight">
+\[
+T = \{\bx \ST \bx \perp \bv_i, i=1,\dots,m \}.
+\]</div>
+<p>We first show that <span class="math notranslate nohighlight">\(S^{\perp} \subseteq T\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in S^{\perp}\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bv \perp \bs\)</span> for every <span class="math notranslate nohighlight">\(\bs \in S\)</span>.</p></li>
+<li><p>In particular, <span class="math notranslate nohighlight">\(\bv \perp \bv_i\)</span> for <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span> since <span class="math notranslate nohighlight">\(\BBB \subset S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in T\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(S^{\perp} \subseteq T\)</span>.</p></li>
+</ol>
+<p>We next show that <span class="math notranslate nohighlight">\(T \subseteq S^{\perp}\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in T\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx \perp \bv_i\)</span> for <span class="math notranslate nohighlight">\(i=1,\dots, m\)</span>.</p></li>
+<li><p>But then, for any <span class="math notranslate nohighlight">\(\bs \in S\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bs, \bx \rangle 
+   = \left \langle \sum_{i=1}^m t_i \bv_i, \bx \right \rangle 
+   = \sum_{i=1}^m t_i \langle \bv_i, \bx \rangle  0 
+   \]</div>
+<p>since <span class="math notranslate nohighlight">\(\bs = \sum_{i=1}^m t_i \bv_i\)</span> is a linear combination of <span class="math notranslate nohighlight">\(\BBB\)</span>.</p>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \perp \bs\)</span> for every <span class="math notranslate nohighlight">\(\bs \in S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in S^{\perp}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(T \subseteq S^{\perp}\)</span>.</p></li>
+</ol>
+<p>Combining:</p>
+<div class="math notranslate nohighlight">
+\[
+S^{\perp} = T = \{\bx \ST \bx \perp \bv_i, i=1,\dots,m \}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-la-orthogonal-decomposition">
+<p class="admonition-title"><span class="caption-number">Theorem 4.78 </span> (Orthogonal decomposition)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an inner product space and <span class="math notranslate nohighlight">\(S\)</span> be a finite dimensional subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then, every <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> can be written uniquely in the form:</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = \bv_{\parallel}  + \bv_{\perp}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bv_{\parallel} \in S\)</span> and <span class="math notranslate nohighlight">\(\bv_{\perp} \in S^{\perp}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\be_1, \dots, \be_p\)</span> be an orthonormal basis for <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<p>Define:</p>
+<div class="math notranslate nohighlight" id="equation-eq-la-orth-dec-parallel">
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-eq-la-orth-dec-parallel" title="Permalink to this equation">¶</a></span>\[\bv_{\parallel} \triangleq \sum_{i=1}^p \langle \bv, \be_i \rangle \be_i.\]</div>
+<p>And</p>
+<div class="math notranslate nohighlight">
+\[
+\bv_{\perp} = \bv - \bv_{\parallel}.
+\]</div>
+<p>By construction, <span class="math notranslate nohighlight">\(\bv_{\parallel}  \in \span \{ \be_1, \dots, \be_p\} = S\)</span>.</p>
+<p>Now, for every <span class="math notranslate nohighlight">\(0 \leq i \leq p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\langle \bv_{\perp}, \be_i \rangle 
+&amp;= \langle \bv - \bv_{\parallel}, \be_i \rangle\\
+&amp;= \langle \bv, \be_i \rangle - \langle \bv_{\parallel}, \be_i \rangle\\
+&amp;= \langle \bv, \be_i \rangle - \langle \bv, \be_i \rangle = 0.
+\end{aligned}
+\end{split}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bv_{\perp} \in S^{\perp}\)</span>.</p>
+<p>We have shown that the existence of the decomposition of an vector
+<span class="math notranslate nohighlight">\(\bv\)</span> in components which belong to <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(S^{\perp}\)</span>.
+Next, we need to show that the decomposition is unique.</p>
+<p>For contradiction, assume there was another decomposition:</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = \bu_{\parallel}  + \bu_{\perp}
+\]</div>
+<p>such that <span class="math notranslate nohighlight">\(\bu_{\parallel} \in S\)</span> and <span class="math notranslate nohighlight">\(\bu_{\perp} \in S^{\perp}\)</span>.</p>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\bv_{\parallel}  + \bv_{\perp} = \bv = \bu_{\parallel}  + \bu_{\perp}
+\]</div>
+<p>gives us:</p>
+<div class="math notranslate nohighlight">
+\[
+\bw = \bv_{\parallel} - \bu_{\parallel} = \bu_{\perp} - \bv_{\perp}.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bw \in S\)</span> as well as <span class="math notranslate nohighlight">\(\bw \in S^{\perp}\)</span>.
+But then, <span class="math notranslate nohighlight">\(\bw \perp \bw\)</span> giving us:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bw , \bw \rangle = 0 
+= \langle \bv_{\parallel} - \bu_{\parallel}, \bv_{\parallel} - \bu_{\parallel}\rangle 
+= \| \bv_{\parallel} - \bu_{\parallel} \|^2.
+\]</div>
+<p>This is possible only if  <span class="math notranslate nohighlight">\(\bv_{\parallel} - \bu_{\parallel} = \bzero\)</span>,
+thus, <span class="math notranslate nohighlight">\(\bv_{\parallel} = \bu_{\parallel}\)</span>.
+Consequently, <span class="math notranslate nohighlight">\(\bu_{\perp} = \bv_{\perp}\)</span> too.</p>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = \bv_{\parallel}  + \bv_{\perp}
+\]</div>
+<p>is a unique decomposition.</p>
+</div>
+<div class="proof corollary admonition" id="res-la-intersect-subspace-complement">
+<p class="admonition-title"><span class="caption-number">Corollary 4.9 </span> (Intersection between a subspace and its complement)</p>
+<div class="corollary-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(S\)</span> is a finite dimensional subspace of an inner product space <span class="math notranslate nohighlight">\(\VV\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+S \cap S^{\perp} = \{ \bzero \}.
+\]</div>
+<p>In other words, the only vector common between <span class="math notranslate nohighlight">\(S\)</span> and its orthogonal complement
+is the zero vector.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-vs-direct-sum-orth-comp">
+<p class="admonition-title"><span class="caption-number">Theorem 4.79 </span> (Vector space as direct sum)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(S\)</span> is a finite dimensional subspace of an inner product space <span class="math notranslate nohighlight">\(\VV\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+\VV = S \oplus S^{\perp}.
+\]</div>
+<p>In other words, <span class="math notranslate nohighlight">\(\VV\)</span> is a direct sum of <span class="math notranslate nohighlight">\(S\)</span> and its
+orthogonal complement.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From <a class="reference internal" href="#res-la-intersect-subspace-complement">Corollary 4.9</a>, the
+intersection between <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(S^{\perp}\)</span> is the zero vector.
+Thus, by <a class="reference internal" href="vector_spaces.html#def-vs-direct-sum-subspaces">Definition 4.38</a>,
+the direct sum between the two spaces
+<span class="math notranslate nohighlight">\(S \oplus S^{\perp}\)</span> is well defined.</p>
+<p>By <a class="reference internal" href="#res-la-orthogonal-decomposition">Theorem 4.78</a>,
+every vector <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> can be uniquely
+decomposed as</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = \bv_{\parallel}  + \bv_{\perp}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bv_{\parallel} \in S\)</span> and <span class="math notranslate nohighlight">\(\bv_{\perp} \in S^{\perp}\)</span>.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(\VV \subseteq S \oplus S^{\perp}\)</span>.</p>
+<p>However, since both <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(S^{\perp}\)</span> are
+subspaces of <span class="math notranslate nohighlight">\(\VV\)</span>, hence</p>
+<div class="math notranslate nohighlight">
+\[
+\VV = S \oplus S^{\perp}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-la-vs-dim-dir-sum-orth-comp">
+<p class="admonition-title"><span class="caption-number">Theorem 4.80 </span> (Dimension of vector space as direct sum)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional inner product space.
+If <span class="math notranslate nohighlight">\(S\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+\dim \VV = \dim S + \dim S^{\perp}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional, hence
+both <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(S^{\perp}\)</span> are finite dimensional
+subspaces of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>By <a class="reference internal" href="#res-la-vs-direct-sum-orth-comp">Theorem 4.79</a></p>
+<div class="math notranslate nohighlight">
+\[
+\VV = S \oplus S^{\perp}.
+\]</div>
+<p>Then, due to <a class="reference internal" href="vector_spaces.html#res-la-dim-direct-sum-subspaces">Theorem 4.22</a></p>
+<div class="math notranslate nohighlight">
+\[
+\dim \VV = \dim S + \dim S^{\perp}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-la-orth-comp-orth-comp">
+<p class="admonition-title"><span class="caption-number">Theorem 4.81 </span> (Orthogonal complement of orthogonal complement)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional inner product space.
+Let <span class="math notranslate nohighlight">\(S\)</span> be a subspace of <span class="math notranslate nohighlight">\(\VV\)</span> and let <span class="math notranslate nohighlight">\(S^{\perp}\)</span>
+be its orthogonal complement. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\left (S^{\perp} \right )^{\perp} = S.
+\]</div>
+<p>In other words, in a finite dimensional space,
+the orthogonal complement of orthogonal complement
+is the original subspace itself.</p>
+</div>
+</div><p>Note that this result is valid only for finite dimensional
+spaces since in that case both <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(S^{\perp}\)</span> are
+finite dimensional.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional, hence
+both <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(S^{\perp}\)</span> are finite dimensional.</p>
+<div class="math notranslate nohighlight">
+\[
+\left (S^{\perp} \right )^{\perp} = \{\bv \in \VV \ST 
+   \bu \perp \bv \Forall \bu \in S^{\perp} \}.
+\]</div>
+<p>We shall first show that <span class="math notranslate nohighlight">\(S \subseteq \left (S^{\perp} \right )^{\perp}\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bs \in S\)</span>.</p></li>
+<li><p>Then, by definition, <span class="math notranslate nohighlight">\(\bs \perp \bu \Forall \bu \in S^{\perp}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bs \in \left (S^{\perp} \right )^{\perp}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(S \subseteq \left (S^{\perp} \right )^{\perp}\)</span>.</p></li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(\left (S^{\perp} \right )^{\perp} \subseteq S\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bu \in \left (S^{\perp} \right )^{\perp}\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-la-vs-direct-sum-orth-comp">Theorem 4.79</a>, <span class="math notranslate nohighlight">\(\VV = S \oplus S^{\perp}\)</span>
+since <span class="math notranslate nohighlight">\(S\)</span> is a finite dimensional subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bu = \bv + \bw\)</span> such that <span class="math notranslate nohighlight">\(\bv \in S\)</span> and <span class="math notranslate nohighlight">\(\bw \in S^{\perp}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bu - \bv = \bw\)</span>, hence <span class="math notranslate nohighlight">\(\bu - \bv \in S^{\perp}\)</span>.</p></li>
+<li><p>We have already shown above that <span class="math notranslate nohighlight">\(S \subseteq \left (S^{\perp} \right )^{\perp}\)</span>.
+Hence <span class="math notranslate nohighlight">\(\bv \in \left (S^{\perp} \right )^{\perp}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bu - \bv = \bw \in \left (S^{\perp} \right )^{\perp}\)</span>
+since both <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span> belong to <span class="math notranslate nohighlight">\(\left (S^{\perp} \right )^{\perp}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bu - \bv \in \left (S^{\perp} \right )^{\perp} \cap S^{\perp}\)</span>
+as <span class="math notranslate nohighlight">\(\bw \in S^{\perp}\)</span> by orthogonal decomposition above.</p></li>
+<li><p>But, by <a class="reference internal" href="#res-la-intersect-subspace-complement">Corollary 4.9</a>
+<span class="math notranslate nohighlight">\(S^{\perp} \cap \left (S^{\perp} \right )^{\perp} = \{ \bzero \}\)</span>
+since <span class="math notranslate nohighlight">\(\left (S^{\perp} \right )^{\perp}\)</span> is the
+orthogonal complement of <span class="math notranslate nohighlight">\(S^{\perp}\)</span> and <span class="math notranslate nohighlight">\(S^{\perp}\)</span> is
+finite dimensional.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bu - \bv = \bzero\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bu = \bv\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bu \in S\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bu\)</span> was an arbitrary element of
+<span class="math notranslate nohighlight">\(\left (S^{\perp} \right )^{\perp}\)</span>,
+hence <span class="math notranslate nohighlight">\(\left (S^{\perp} \right )^{\perp} \subseteq S\)</span>.</p></li>
+</ol>
+<p>Combining the two:</p>
+<div class="math notranslate nohighlight">
+\[
+\left (S^{\perp} \right )^{\perp} = S.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-la-vs-hyper-subspace-expression">
+<p class="admonition-title"><span class="caption-number">Theorem 4.82 </span> (n-1 dimensional subspaces)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional inner product space
+with <span class="math notranslate nohighlight">\(\dim \VV = n\)</span>.
+Let <span class="math notranslate nohighlight">\(S\)</span> be an <span class="math notranslate nohighlight">\(n-1\)</span> dimensional subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then, there exists a nonzero vector <span class="math notranslate nohighlight">\(\bb \in \VV\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+S = \{ \bx \in \VV \ST \bx \perp \bb \}.
+\]</div>
+<p>In other words, the <span class="math notranslate nohighlight">\(n-1\)</span> dimensional subspaces
+are the sets of the form <span class="math notranslate nohighlight">\(\{ \bx \ST \bx \perp \bb \}\)</span>
+where <span class="math notranslate nohighlight">\(\bb \neq \bzero\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(S\)</span> be <span class="math notranslate nohighlight">\(n-1\)</span> dimensional.
+Then, from <a class="reference internal" href="#res-la-vs-dim-dir-sum-orth-comp">Theorem 4.80</a></p>
+<div class="math notranslate nohighlight">
+\[
+\dim \VV = \dim S + \dim S^{\perp}.
+\]</div>
+<p>This gives us <span class="math notranslate nohighlight">\(\dim S^{\perp} = n - (n-1) = 1\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(S^{\perp}\)</span> is one dimensional, we can choose
+a non-zero vector <span class="math notranslate nohighlight">\(\bb \in S^{\perp}\)</span> as its basis.
+Since <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional, hence</p>
+<div class="math notranslate nohighlight">
+\[
+S = \left (S^{\perp} \right )^{\perp}.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(S\)</span> consists of vectors which are orthogonal to
+a basis of <span class="math notranslate nohighlight">\(S^{\perp}\)</span>. Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+S =  \{ \bx \in \VV \ST \bx \perp \bb \}.
+\]</div>
+</div>
+</div>
+<div class="section" id="orthogonal-projection">
+<h2><span class="section-number">4.5.10. </span>Orthogonal Projection<a class="headerlink" href="#orthogonal-projection" title="Permalink to this headline">¶</a></h2>
+<p>Recall that a <a class="reference internal" href="transformations.html#def-la-projection">projection</a>
+operator <span class="math notranslate nohighlight">\(P : \VV \to \VV\)</span>
+is an operator which satisfies <span class="math notranslate nohighlight">\(P^2 = P\)</span>.</p>
+<p>The range of <span class="math notranslate nohighlight">\(P\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\Range(P) = \{\bv \in \VV \ST \bv =  P \bx \text{ for some } \bx \in \VV \}.
+\]</div>
+<p>The null space of <span class="math notranslate nohighlight">\(P\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\NullSpace(P) = \{ \bv \in \VV | P \bv = \bzero\}.
+\]</div>
+<div class="proof definition admonition" id="def-la-orthogonal-projector">
+<p class="admonition-title"><span class="caption-number">Definition 4.78 </span> (Orthogonal projection operator)</p>
+<div class="definition-content section" id="proof-content">
+<p>A projection operator <span class="math notranslate nohighlight">\(P : \VV \to \VV\)</span>
+over an inner product space <span class="math notranslate nohighlight">\(\VV\)</span>
+is called <em>orthogonal projection operator</em>
+if its range <span class="math notranslate nohighlight">\(\Range(P)\)</span> and the null space
+<span class="math notranslate nohighlight">\(\NullSpace(P)\)</span> as defined above are orthogonal to each other;
+i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\br \perp \bn \Forall \br \in \Range(P) , \Forall \bn \in \NullSpace(P).
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-la-ip-subspace-orth-proj">
+<p class="admonition-title"><span class="caption-number">Theorem 4.83 </span> (Orthogonal projection operator for a subspace)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S\)</span> be a finite dimensional subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\{\be_1, \dots, \be_p\}\)</span> be an orthonormal basis of <span class="math notranslate nohighlight">\(S\)</span>.
+Let the operator <span class="math notranslate nohighlight">\(P_S: \VV \to \VV\)</span> be defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+P_S \bv \triangleq \bv_{\parallel}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = \bv_{\parallel} + \bv_{\perp}
+\]</div>
+<p>is the unique orthogonal decomposition of <span class="math notranslate nohighlight">\(\bv\)</span> w.r.t. the subspace <span class="math notranslate nohighlight">\(S\)</span>
+as defined in <a class="reference internal" href="#res-la-orthogonal-decomposition">Theorem 4.78</a>.
+Then,</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(P_S \bv = \sum_{i=1}^p \langle \bv, \be_i \rangle \be_i\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>, <span class="math notranslate nohighlight">\(\bv - P_S \bv \perp S\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P_S\)</span> is a linear map.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P_S\)</span> is the identity map when restricted to <span class="math notranslate nohighlight">\(S\)</span>;
+i.e., <span class="math notranslate nohighlight">\(P_S \bs = \bs \Forall \bs \in S\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Range(P_S) = S\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\NullSpace(P_S) = S^{\perp}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P_S^2 = P_S\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>, <span class="math notranslate nohighlight">\(\| P_S \bv \| \leq \| \bv \|\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> and <span class="math notranslate nohighlight">\(\bs \in S\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bv - P_S \bv \| \leq \| \bv - \bs \|
+   \]</div>
+<p>with equality if and only if <span class="math notranslate nohighlight">\(\bs = P_S \bv\)</span>.</p>
+</li>
+</ol>
+<p><span class="math notranslate nohighlight">\(P_S\)</span> is indeed an <em>orthogonal projection</em> onto <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For the sake of brevity, we abbreviate <span class="math notranslate nohighlight">\(P = P_S\)</span>.</p>
+<p>Following <a class="reference internal" href="#equation-eq-la-orth-dec-parallel">(4.3)</a>, indeed:</p>
+<div class="math notranslate nohighlight">
+\[
+P = \sum_{i=1}^p \langle \bv, \be_i \rangle \be_i.
+\]</div>
+<p>For any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> (due to <a class="reference internal" href="#res-la-orthogonal-decomposition">Theorem 4.78</a>):</p>
+<div class="math notranslate nohighlight">
+\[
+\bv - P \bv = \bv - \bv_{\parallel} = \bv_{\perp}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\bv_{\perp} \in S^{\perp}\)</span> hence <span class="math notranslate nohighlight">\(\bv - P \bv \perp S\)</span>.</p>
+<p>[Linear map]</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bu, \bv \in \VV\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu = \bu_{\parallel} + \bu_{\perp}\)</span> and <span class="math notranslate nohighlight">\(\bv = \bv_{\parallel} + \bv_{\perp}\)</span>.</p></li>
+<li><p>Consider <span class="math notranslate nohighlight">\(\bu + \bv = (\bu_{\parallel} + \bv_{\parallel}) + (\bu_{\perp} + \bv_{\perp})\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bu_{\parallel} + \bv_{\parallel} \in S\)</span> and
+<span class="math notranslate nohighlight">\(\bu_{\perp} + \bv_{\perp} \in S^{\perp}\)</span>.</p></li>
+<li><p>Since, the orthogonal decomposition is unique, hence
+<span class="math notranslate nohighlight">\(P (\bu + \bv) = \bu_{\parallel} + \bv_{\parallel} = P \bu + P \bv\)</span>.</p></li>
+<li><p>Similarly, for <span class="math notranslate nohighlight">\(\alpha \in \FF\)</span>,
+<span class="math notranslate nohighlight">\(\alpha \bu = \alpha \bu_{\parallel} + \alpha\bu_{\perp}\)</span>.</p></li>
+<li><p>With <span class="math notranslate nohighlight">\(\alpha \bu_{\parallel} \in S\)</span> and <span class="math notranslate nohighlight">\(\alpha\bu_{\perp} \in S^{\perp}\)</span>,
+<span class="math notranslate nohighlight">\(P (\alpha \bu) = \alpha \bu_{\parallel} = \alpha P \bu\)</span>.</p></li>
+</ol>
+<p>Thus, <span class="math notranslate nohighlight">\(P\)</span> is a linear map.</p>
+<p>For any <span class="math notranslate nohighlight">\(\bs \in S\)</span>, we can write it as <span class="math notranslate nohighlight">\(\bs = \bs + \bzero\)</span>.
+With <span class="math notranslate nohighlight">\(\bs \in S\)</span> and <span class="math notranslate nohighlight">\(\bzero \in S^{\perp}\)</span>,
+we have: <span class="math notranslate nohighlight">\(P \bs = \bs\)</span>.</p>
+<p>[Range]</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(P\)</span> maps <span class="math notranslate nohighlight">\(\bv\)</span> to a component in <span class="math notranslate nohighlight">\(S\)</span>, hence <span class="math notranslate nohighlight">\(\Range(P) \subseteq S\)</span>.</p></li>
+<li><p>Since for every <span class="math notranslate nohighlight">\(\bs \in S\)</span>, there is <span class="math notranslate nohighlight">\(\bv \in S\)</span> such that <span class="math notranslate nohighlight">\(P \bv  = \bs\)</span>
+(specifically <span class="math notranslate nohighlight">\(\bv = \bs\)</span>),
+hence <span class="math notranslate nohighlight">\(S \subseteq \Range(P)\)</span>.</p></li>
+<li><p>Combining <span class="math notranslate nohighlight">\(\Range(P) = S\)</span>.</p></li>
+</ol>
+<p>[Null space]</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in \NullSpace(P)\)</span>. Write <span class="math notranslate nohighlight">\(\bv = \bv_{\parallel} + \bv_{\perp}\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(P \bv = \bv_{\parallel} = \bzero\)</span> as <span class="math notranslate nohighlight">\(\bv\)</span> is in the null space of <span class="math notranslate nohighlight">\(P\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bv = \bv_{\perp} \in S^{\perp}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\NullSpace(P) \subseteq S^{\perp}\)</span>.</p></li>
+<li><p>Now, let <span class="math notranslate nohighlight">\(\bv \in S^{\perp}\)</span>.</p></li>
+<li><p>We can write <span class="math notranslate nohighlight">\(\bv\)</span> as <span class="math notranslate nohighlight">\(\bv = \bzero + \bv\)</span>
+where <span class="math notranslate nohighlight">\(\bzero \in S\)</span> and <span class="math notranslate nohighlight">\(\bv \in S^{\perp}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(P \bv = \bzero\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(S^{\perp} \subseteq \NullSpace(P)\)</span>.</p></li>
+<li><p>Combining, <span class="math notranslate nohighlight">\(S^{\perp} = \NullSpace(P)\)</span>.</p></li>
+</ol>
+<p>[<span class="math notranslate nohighlight">\(P^2 = P\)</span>]</p>
+<ol class="simple">
+<li><p>For any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>, we have, <span class="math notranslate nohighlight">\(P \bv = \bv_{\parallel}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bv_{\parallel} \in S\)</span>, hence <span class="math notranslate nohighlight">\(P \bv_{\parallel} = \bv_{\parallel}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(P^2 \bv = P \bv_{\parallel} = \bv_{\parallel} = P v\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bv\)</span> was arbitrary, hence, <span class="math notranslate nohighlight">\(P^2 = P\)</span>.</p></li>
+</ol>
+<p>[<span class="math notranslate nohighlight">\(\| P \bv \| \leq \| \bv \|\)</span>]</p>
+<ol class="simple">
+<li><p>We have <span class="math notranslate nohighlight">\(\bv = \bv_{\parallel} + \bv_{\perp} = P \bv + \bv_{\perp}\)</span>.</p></li>
+<li><p>By Pythagoras theorem: <span class="math notranslate nohighlight">\( \| \bv \|^2 =  \| P \bv \|^2 + \| \bv_{\perp}\|^2\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\( \| \bv \|^2 \geq \| P \bv \|^2\)</span>.</p></li>
+<li><p>Taking square root on both sides: <span class="math notranslate nohighlight">\(\| P \bv \| \leq \| \bv \|\)</span>.</p></li>
+</ol>
+<p>[<span class="math notranslate nohighlight">\(\| \bv - P \bv \| \leq \| \bv - \bs \|\)</span>]</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> and <span class="math notranslate nohighlight">\(\bs \in S\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(P \bv \in S\)</span> hence <span class="math notranslate nohighlight">\(P \bv - \bs \in S\)</span>.</p></li>
+<li><p>By definition <span class="math notranslate nohighlight">\(\bv - P \bv \in S^{\perp}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv - P \bv \perp P \bv - \bs\)</span>.</p></li>
+<li><p>We have: <span class="math notranslate nohighlight">\(\bv - \bs = (\bv - P \bv) + (P \bv - \bs)\)</span>.</p></li>
+<li><p>Applying Pythagoras theorem:</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bv - \bs \|^2 = \| \bv - P \bv\|^2 + \| P \bv - \bs \|^2
+   \geq \| \bv - P \bv\|^2.
+   \]</div>
+</li>
+<li><p>Taking square root on both sides:</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bv - P \bv \| \leq \| \bv - \bs \|.
+   \]</div>
+</li>
+<li><p>Equality holds if and only if <span class="math notranslate nohighlight">\(\| P \bv - \bs \|^2 = 0\)</span>
+if and only if <span class="math notranslate nohighlight">\(P \bv = \bs\)</span>.</p></li>
+</ol>
+<p>In order to show that <span class="math notranslate nohighlight">\(P\)</span> is an orthogonal projection, we need to show
+that:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(P\)</span> is a projection operator.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\br \perp \bn \Forall \br \in \Range(P) , \Forall \bn \in \NullSpace(P)\)</span>.</p></li>
+</ol>
+<p>We have shown that:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(P^2 = P\)</span>. Hence <span class="math notranslate nohighlight">\(P\)</span> is a projection operator.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Range(P)  = S\)</span> and <span class="math notranslate nohighlight">\(\NullSpace(P) = S^{\perp}\)</span>.</p></li>
+<li><p>By definition, for any <span class="math notranslate nohighlight">\(\br \in S\)</span> and <span class="math notranslate nohighlight">\(\bn \in S^{\perp}\)</span>, <span class="math notranslate nohighlight">\(\br \perp \bn\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(P\)</span> is an orthogonal projection operator.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-la-ip-orth-proj-adjoint">
+<p class="admonition-title"><span class="caption-number">Theorem 4.84 </span> (Orthogonal projectors are adjoint)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A projection operator is orthogonal if and only if it is self adjoint.</p>
+</div>
+</div><div class="proof example admonition" id="example-45">
+<p class="admonition-title"><span class="caption-number">Example 4.26 </span> (Orthogonal projection on a line)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider a unit norm vector <span class="math notranslate nohighlight">\(\bu \in \RR^N\)</span>.<br />
+Thus <span class="math notranslate nohighlight">\(\bu^T \bu = 1\)</span>.</p>
+<p>Consider</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\bu} = \bu \bu^T.
+\]</div>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\bu}^2 = (\bu \bu^T) (\bu \bu^T) = \bu (\bu^T \bu) \bu^T = \bu \bu^T = P.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(P\)</span> is a projection operator.</p>
+<p>Now,</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\bu}^T = (\bu \bu^T)^T = \bu \bu^T = P_{\bu}.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(P_{\bu}\)</span> is self-adjoint.
+Hence, <span class="math notranslate nohighlight">\(P_{\bu}\)</span> is an orthogonal projection operator.</p>
+<p>Also,</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\bu} \bu = (\bu \bu^T) \bu = \bu (\bu^T \bu) = \bu.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(P_{\bu}\)</span> leaves <span class="math notranslate nohighlight">\(\bu\)</span> intact;
+i.e., Projection of <span class="math notranslate nohighlight">\(\bu\)</span> on to <span class="math notranslate nohighlight">\(\bu\)</span> is <span class="math notranslate nohighlight">\(\bu\)</span> itself.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bv \in \bu^{\perp}\)</span> i.e. <span class="math notranslate nohighlight">\(\langle \bu, \bv \rangle = 0\)</span>.</p>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\bu} \bv = (\bu \bu^T) \bv = \bu (\bu^T \bv) = \bu \langle \bu, \bv \rangle = 0.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(P_{\bu}\)</span> annihilates all vectors orthogonal to <span class="math notranslate nohighlight">\(\bu\)</span>.</p>
+<p>Any vector <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span> can be broken down into two components</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \bx_{\parallel} + \bx_{\perp}
+\]</div>
+<p>such that
+<span class="math notranslate nohighlight">\(\langle \bu , \bx_{\perp} \rangle =0\)</span>
+and <span class="math notranslate nohighlight">\(\bx_{\parallel}\)</span> is collinear with <span class="math notranslate nohighlight">\(\bu\)</span>.</p>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\bu} \bx = \bu \bu^T \bx_{\parallel} + \bu \bu^T \bx_{\perp} = \bx_{\parallel}.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(P_{\bu}\)</span> retains the projection of <span class="math notranslate nohighlight">\(\bx\)</span> on <span class="math notranslate nohighlight">\(\bu\)</span> given by <span class="math notranslate nohighlight">\(\bx_{\parallel}\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="example-46">
+<p class="admonition-title"><span class="caption-number">Example 4.27 </span> (Projections over the column space of a matrix)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \RR^{M \times N}\)</span>  with <span class="math notranslate nohighlight">\(N \leq M\)</span> be a matrix given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \begin{bmatrix}
+\ba_1 &amp; \ba_2 &amp; \dots &amp; \ba_N
+\end{bmatrix}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ba_i \in \RR^M \)</span> are its columns which are linearly independent.</p>
+<p>The column space of <span class="math notranslate nohighlight">\(\bA\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+C(\bA) = \{ \bA \bx \Forall \bx \in \RR^N \} \subseteq \RR^M.
+\]</div>
+<p>It can be shown that <span class="math notranslate nohighlight">\(\bA^T \bA\)</span> is invertible.</p>
+<p>Consider the operator</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\bA} = \bA (\bA^T \bA)^{-1} \bA^T.
+\]</div>
+<p>Now,</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\bA}^2 = \bA (\bA^T \bA)^{-1} \bA^T \bA (\bA^T \bA)^{-1} \bA^T = \bA (\bA^T \bA)^{-1} \bA^T = P_{\bA}.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(P_{\bA}\)</span> is a projection operator.</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\bA}^T = (\bA (\bA^T \bA)^{-1} \bA^T)^T = \bA ((\bA^T \bA)^{-1} )^T \bA^T = \bA (\bA^T \bA)^{-1} \bA^T = P_{\bA}.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(P_{\bA}\)</span> is self-adjoint.</p>
+<p>Hence <span class="math notranslate nohighlight">\(P_{\bA}\)</span> is an orthogonal projection operator on the column space of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="parallelogram-identity">
+<h2><span class="section-number">4.5.11. </span>Parallelogram Identity<a class="headerlink" href="#parallelogram-identity" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-la-parallelogram-identity">
+<p class="admonition-title"><span class="caption-number">Theorem 4.85 </span> (Parallelogram identity)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+2 \| \bx \|_2^2 + 2 \| \by \|_2^2 =  \|\bx + \by \|_2^2 + \| \bx - \by \|_2^2.  \Forall  \bx, \by \in \VV.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx + \by \|_2^2 = \langle \bx + \by, \bx + \by \rangle
+= \langle \bx, \bx \rangle + \langle \by , \by \rangle + \langle \bx , \by \rangle + \langle \by , \bx \rangle.
+\]</div>
+<p>Also:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \by \|_2^2 = \langle \bx - \by, \bx - \by \rangle
+= \langle \bx, \bx \rangle + \langle \by , \by \rangle - \langle \bx , \by \rangle - \langle \by , \bx \rangle.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\|\bx + \by \|_2^2 + \| \bx - \by \|_2^2 = 2 (  \langle \bx, \bx \rangle + \langle \by , \by\rangle)
+= 2 \| \bx \|_2^2 + 2 \| \by \|_2^2.
+\]</div>
+</div>
+<p>When inner product is a real number following identity is quite useful.</p>
+<div class="proof theorem admonition" id="res-la-parallelogram-identity-2">
+<p class="admonition-title"><span class="caption-number">Theorem 4.86 </span> (Parallelogram identity for real inner product)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle = \frac{1}{4} \left (
+\|\bx + \by \|_2^2 - \| \bx - \by \|_2^2
+\right ).  \Forall  \bx, \by \in \VV.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx + \by \|_2^2 = \langle \bx + \by, \bx + \by \rangle
+= \langle \bx, \bx \rangle + \langle \by , \by \rangle + \langle \bx , \by \rangle + \langle \by , \bx \rangle.
+\]</div>
+<p>Also,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \by \|_2^2 = \langle \bx - \by, \bx - \by \rangle
+= \langle \bx, \bx \rangle + \langle \by , \by \rangle - \langle \bx , \by \rangle - \langle \by , \bx \rangle.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\|\bx + \by \|_2^2 - \| \bx - \by \|_2^2 = 2 ( \langle \bx , \by \rangle + \langle \by , \bx \rangle)
+= 4 \langle \bx , \by \rangle
+\]</div>
+<p>since for real inner products</p>
+<div class="math notranslate nohighlight">
+\[
+ \langle \bx , \by \rangle = \langle \by , \bx \rangle.
+\]</div>
+</div>
+</div>
+<div class="section" id="polarization-identity">
+<h2><span class="section-number">4.5.12. </span>Polarization identity<a class="headerlink" href="#polarization-identity" title="Permalink to this headline">¶</a></h2>
+<p>When inner product is a complex number, polarization identity is quite useful.</p>
+<div class="proof theorem admonition" id="res-la-polarization-identity">
+<p class="admonition-title"><span class="caption-number">Theorem 4.87 </span> (Polarization identity for complex inner product)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle = \frac{1}{4} \left (
+\|\bx + \by \|_2^2 - \| \bx - \by \|_2^2 + i \| \bx + i \by \|_2^2 - i \| \bx -i \by \|_2^2
+\right )  \Forall  \bx, \by \in \VV.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx + \by \|_2^2 = \langle \bx + \by, \bx + \by \rangle
+= \langle \bx, \bx \rangle + \langle \by , \by \rangle + \langle \bx , \by \rangle + \langle \by , \bx \rangle.
+\]</div>
+<p>Also,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \by \|_2^2 = \langle \bx - \by, \bx - \by \rangle
+= \langle \bx, \bx \rangle + \langle \by , \by \rangle - \langle \bx , \by \rangle - \langle \by , \bx \rangle.
+\]</div>
+<p>And,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx + i \by \|_2^2 = \langle \bx + i \by, \bx + i \by \rangle
+= \langle \bx, \bx \rangle + \langle i \by , i \by \rangle + \langle \bx , i \by \rangle + \langle i \by , \bx \rangle.
+\]</div>
+<p>And,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - i \by \|_2^2 = \langle \bx - i \by, \bx - i \by \rangle
+= \langle \bx, \bx \rangle + \langle i \by , i \by \rangle - \langle \bx , i \by \rangle - \langle i \by , \bx \rangle.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ \|\bx + \by \|_2^2 - \| \bx - \by \|_2^2 + &amp; i \| \bx + i \by \|_2^2 - i \| \bx -i \by \|_2^2\\
+&amp;= 2 \langle \bx, \by \rangle + 2 \langle \by , \bx \rangle + 2 i  \langle \bx , i \by \rangle + 2 i  \langle i\bx , \by \rangle\\
+&amp;= 2 \langle \bx, \by \rangle + 2 \langle \by , \bx \rangle + 2 \langle \bx, \by \rangle - 2  \langle \by , \bx \rangle\\
+&amp; = 4  \langle \bx, \by \rangle.
+\end{split}\]</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./la"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="normed_spaces.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4.4. </span>Normed Linear Spaces</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="dual_spaces.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.6. </span>Dual Spaces</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

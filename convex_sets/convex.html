@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5.3. Convex Sets &#8212; Optimization for Sparse Signal Processing</title>
+    <title>6.2. Convex Sets &#8212; Optimization for Signal Processing</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,9 +42,9 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -54,8 +54,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5.4. Cones" href="cone.html" />
-    <link rel="prev" title="5.2. Affine Sets" href="affine.html" />
+    <link rel="next" title="6.3. Convex Subsets of \(\RR^n\)" href="rn_subsets.html" />
+    <link rel="prev" title="6.1. Real Vector Spaces" href="real_spaces.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -82,14 +82,19 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
       
-      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -197,6 +202,11 @@
      2.7. Differentiable Functions
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -220,18 +230,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/sequences.html">
-     3.3. Sequences
+     3.4. Sequences
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/continuity.html">
-     3.4. Continuity
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../metric_spaces/boundedness.html">
-     3.5. Boundedness
+     3.5. Functions and Continuity
     </a>
    </li>
    <li class="toctree-l2">
@@ -245,99 +255,92 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/subspaces.html">
-     3.8. Subspace Topology
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../la/chapter.html">
-   4. Linear Algebra
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Convex Analysis
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="intro.html">
-   5. Convex Sets
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="affine.html">
-     5.2. Affine Sets
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     5.3. Convex Sets
+     3.9. Subspace Topology
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="cone.html">
-     5.4. Cones
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="hyperplane.html">
-     5.5. Hyperplanes and Half spaces
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="ball.html">
-     5.6. Euclidean Balls and Ellipsoids
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="norm_ball.html">
-     5.7. Norm Balls
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="norm_cone.html">
-     5.8. Norm Cones
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="polyhedron.html">
-     5.9. Polyhedra
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="psd_cone.html">
-     5.10. Symmetric Matrices
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="convexity_ops.html">
-     5.11. Convexity Preserving Operations
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="dual_cones.html">
-     5.12. Dual Cones
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generalized_inequality.html">
-     5.13. Generalized Inequalities
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../convex_functions/intro.html">
-   6. Functions
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.8. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.9. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.10. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
@@ -346,42 +349,82 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/functions.html">
-     6.1. Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/convex_functions.html">
-     6.2. Convex Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
-     6.3. Extensions for Convex Functions
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../subgradients/chapter.html">
-   7. Subgradients
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   6. Convex Sets and Functions
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="../subgradients/summary.html">
-     7.1. Chapter Summary
+    <a class="reference internal" href="real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_functions.html">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="relint.html">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="subgradients.html">
+     6.9. Subgradients
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../conjugate_functions/chapter.html">
-   8. Conjugate Functions
+   7. Conjugate Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -391,14 +434,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../conjugate_functions/summary.html">
-     8.1. Chapter Summary
+     7.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../smoothness/chapter.html">
-   9. Smoothness
+   8. Smoothness
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -408,14 +451,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../smoothness/summary.html">
-     9.1. Chapter Summary
+     8.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../strong_convexity/chapter.html">
-   10. Strong Convexity
+   9. Strong Convexity
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -425,14 +468,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../strong_convexity/summary.html">
-     10.1. Chapter Summary
+     9.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
-   11. Projection onto Convex Sets
+   10. Projection onto Convex Sets
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -442,14 +485,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
-     11.1. Chapter Summary
+     10.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../proximal_operator/chapter.html">
-   12. Proximal Operator
+   11. Proximal Operator
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
   <label for="toctree-checkbox-11">
@@ -459,36 +502,29 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../proximal_operator/intro.html">
-     12.3. Introduction
+     11.3. Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../proximal_operator/summary.html">
-     12.4. Chapter Summary
+     11.4. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Convex Optimization
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../gradient_methods/chapter.html">
-   13. Gradient Descent Methods
+   12. Gradient Descent Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../subgradient_methods/chapter.html">
-   14. Subgradient Methods
+   13. Subgradient Methods
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../selected/chapter.html">
-   15. Selected Functions
+   14. Selected Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
   <label for="toctree-checkbox-12">
@@ -498,7 +534,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../selected/projection.html">
-     15.1. Projection onto Convex Set
+     14.1. Projection onto Convex Set
     </a>
    </li>
   </ul>
@@ -536,22 +572,22 @@
 
 
           
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
     <div class="topbar container-xl fixed-top">
     <div class="topbar-contents row">
         <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
         <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
             
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
@@ -566,7 +602,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -600,94 +636,837 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#line-segments">
+   6.2.1. Line Segments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   6.2.2. Convex Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rays">
+   6.2.3. Rays
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#balls">
+   6.2.4. Balls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convex-combinations">
+   6.2.5. Convex Combinations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convex-hull">
+   6.2.6. Convex Hull
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dimension">
+   6.2.7. Dimension
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simplices">
+   6.2.8. Simplices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#symmetric-reflections">
+   6.2.9. Symmetric Reflections
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#infinite-convex-combinations">
+   6.2.10. Infinite Convex Combinations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convexity-preserving-operations">
+   6.2.11. Convexity Preserving Operations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intersection-and-union">
+     6.2.11.1. Intersection and Union
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-functions">
+     6.2.11.2. Affine Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-addition">
+     6.2.11.3. Set Addition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partial-addition">
+     6.2.11.4. Partial Addition
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Convex Sets</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#line-segments">
+   6.2.1. Line Segments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   6.2.2. Convex Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rays">
+   6.2.3. Rays
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#balls">
+   6.2.4. Balls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convex-combinations">
+   6.2.5. Convex Combinations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convex-hull">
+   6.2.6. Convex Hull
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dimension">
+   6.2.7. Dimension
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simplices">
+   6.2.8. Simplices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#symmetric-reflections">
+   6.2.9. Symmetric Reflections
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#infinite-convex-combinations">
+   6.2.10. Infinite Convex Combinations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convexity-preserving-operations">
+   6.2.11. Convexity Preserving Operations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intersection-and-union">
+     6.2.11.1. Intersection and Union
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-functions">
+     6.2.11.2. Affine Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-addition">
+     6.2.11.3. Set Addition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partial-addition">
+     6.2.11.4. Partial Addition
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="convex-sets">
-<h1><span class="section-number">5.3. </span>Convex Sets<a class="headerlink" href="#convex-sets" title="Permalink to this headline">¶</a></h1>
-<div class="proof definition admonition" id="def-convex-set">
-<p class="admonition-title"><span class="caption-number">Definition 5.7 </span></p>
+<span id="sec-convex-sets"></span><h1><span class="section-number">6.2. </span>Convex Sets<a class="headerlink" href="#convex-sets" title="Permalink to this headline">¶</a></h1>
+<p>Throughout this section, we assume that <span class="math notranslate nohighlight">\(\VV\)</span> is a
+real vector space. Wherever necessary,
+it is equipped with a
+<a class="reference internal" href="../la/normed_spaces.html#def-la-norm">norm</a> <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>
+or a <a class="reference internal" href="../la/inner_product_spaces.html#def-la-real-inner-product">real inner product</a>
+<span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR\)</span>.
+It is also equipped with a metric <span class="math notranslate nohighlight">\(d(\bx, \by) = \| \bx - \by \|\)</span>.</p>
+<div class="section" id="line-segments">
+<h2><span class="section-number">6.2.1. </span>Line Segments<a class="headerlink" href="#line-segments" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-line-segment">
+<p class="admonition-title"><span class="caption-number">Definition 6.5 </span> (Line segment)</p>
 <div class="definition-content section" id="proof-content">
-<p>A set <span class="math notranslate nohighlight">\(C\)</span> is <em>convex</em> if the line segment between any two points in <span class="math notranslate nohighlight">\(C\)</span> lies in <span class="math notranslate nohighlight">\(C\)</span>. i.e.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> be two points in <span class="math notranslate nohighlight">\(\VV\)</span>. Points of the form</p>
 <div class="math notranslate nohighlight">
 \[
-    \theta x_1 + (1 - \theta) x_2 \in C \Forall x_1, x_2 \in C \text{ and } 0 \leq \theta \leq 1.
+\by = (1 - \theta) \bx_1 + \theta \bx_2 \text{ where } 0 \leq \theta \leq 1
+\]</div>
+<p>form a (closed) <em>line-segment</em> between <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span>.
+The closed line segment is denoted by <span class="math notranslate nohighlight">\([\bx_1, \bx_2]\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+[\bx_1, \bx_2] \triangleq \{ (1 - \theta) \bx_1 + \theta \bx_2 \ST 0 \leq \theta \leq 1 \}.
+\]</div>
+<p>Similarly, we define an <em>open line segment</em> as:</p>
+<div class="math notranslate nohighlight">
+\[
+(\bx_1, \bx_2) \triangleq \{ (1 - \theta) \bx_1 + \theta \bx_2 \ST 0 &lt; \theta &lt; 1 \}.
+\]</div>
+<p>The <em>half-open segment</em> <span class="math notranslate nohighlight">\((\bx_1, \bx_2]\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+(\bx_1, \bx_2] \triangleq \{ (1 - \theta) \bx_1 + \theta \bx_2 \ST 0 &lt; \theta \leq 1 \}.
+\]</div>
+<p>The <em>half-open segment</em> <span class="math notranslate nohighlight">\([\bx_1, \bx_2)\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+[\bx_1, \bx_2) \triangleq \{ (1 - \theta) \bx_1 + \theta \bx_2 \ST 0 \leq \theta &lt; 1 \}.
 \]</div>
 </div>
-</div><div class="proof definition admonition" id="def-convex-combination">
-<p class="admonition-title"><span class="caption-number">Definition 5.8 </span></p>
+</div></div>
+<div class="section" id="id1">
+<h2><span class="section-number">6.2.2. </span>Convex Sets<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-convex-set">
+<p class="admonition-title"><span class="caption-number">Definition 6.6 </span> (Convex set)</p>
 <div class="definition-content section" id="proof-content">
-<p>We call a point of the form <span class="math notranslate nohighlight">\(\theta_1 x_1  + \dots + \theta_k x_k\)</span>, where
-<span class="math notranslate nohighlight">\(\theta_1 + \dots + \theta_k  = 1\)</span> and <span class="math notranslate nohighlight">\(\theta_i \geq 0, i=1,\dots,k\)</span>,
-a <em>convex combination</em> of the points <span class="math notranslate nohighlight">\(x_1, \dots, x_k\)</span>.</p>
+<p>A set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> is <em>convex</em> if the line segment between
+any two points in <span class="math notranslate nohighlight">\(C\)</span> lies in <span class="math notranslate nohighlight">\(C\)</span>. i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\theta \bx_1 + (1 - \theta) \bx_2 \in C 
+\Forall \bx_1, \bx_2 \in C \text{ and } 0 \leq \theta \leq 1.
+\]</div>
 </div>
-</div><p>It is like a weighted average of the points <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
-<div class="proof remark admonition" id="remark-2">
-<p class="admonition-title"><span class="caption-number">Remark 5.5 </span></p>
-<div class="remark-content section" id="proof-content">
+</div><p>The empty set is vacuously convex.
+The entire vector space  <span class="math notranslate nohighlight">\(\VV\)</span> is convex
+since it contains all the line segments between
+any pair of points in the space.</p>
+<div class="proof observation admonition" id="observation-2">
+<p class="admonition-title"><span class="caption-number">Observation 6.2 </span></p>
+<div class="observation-content section" id="proof-content">
+<p>Since a convex set contains the line segment between any
+two points, any line segment is convex by definition.</p>
+</div>
+</div><p>Geometrically, a convex set has no holes, hollows, pits or dimples.
+A set is convex if from each point in the set, it is possible
+to see every other point without having the line of sight pass
+outside the set.</p>
+<div class="proof example admonition" id="example-3">
+<p class="admonition-title"><span class="caption-number">Example 6.1 </span> (Real line)</p>
+<div class="example-content section" id="proof-content">
+<p>On the real line <span class="math notranslate nohighlight">\(\RR\)</span>, the empty set, sing points,
+intervals (closed, open, half open), half lines,
+and the entire real line are convex sets.
+There are no other convex sets possible.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-convex-linear-subspace">
+<p class="admonition-title"><span class="caption-number">Theorem 6.7 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Any linear subspace is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\EE\)</span> be a linear subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then <span class="math notranslate nohighlight">\(\EE\)</span> is closed under addition
+and scalar multiplication.
+Thus, for any <span class="math notranslate nohighlight">\(\bx, \by \in \EE\)</span> and <span class="math notranslate nohighlight">\(0 \leq t \leq 1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+t \bx + (1-t)\by \in \EE.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\EE\)</span> is convex.</p>
+</div>
+<div class="proof theorem admonition" id="res-convex-affine-set">
+<p class="admonition-title"><span class="caption-number">Theorem 6.8 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Any <a class="reference internal" href="../la/affine.html#def-affine-set">affine set</a> is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be an affine set.
+By definition, for any <span class="math notranslate nohighlight">\(\bx, \by \in C\)</span>
+and any <span class="math notranslate nohighlight">\(t \in \RR\)</span>,
+<span class="math notranslate nohighlight">\(t \bx + (1-t)\by \in C\)</span>.
+It is valid in particular for <span class="math notranslate nohighlight">\(0 \leq t \leq 1\)</span>.
+Thus, <span class="math notranslate nohighlight">\(C\)</span> is convex.</p>
+</div>
+<div class="proof theorem admonition" id="res-convex-hyperplane">
+<p class="admonition-title"><span class="caption-number">Theorem 6.9 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Any <a class="reference internal" href="real_spaces.html#def-hyperplane">hyperplane</a> is convex
+since it is affine.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-convex-half-space">
+<p class="admonition-title"><span class="caption-number">Theorem 6.10 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p><a class="reference internal" href="real_spaces.html#def-halfspace">Half spaces</a> are convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider <span class="math notranslate nohighlight">\(H_+\)</span> defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+    H_+ = \{ x : \langle \ba, \bx \rangle \geq b \}
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bx, \by \in H_+\)</span>. Then:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \ba, \bx \rangle \geq b
+\text{ and }
+\langle \ba, \by \rangle \geq b.
+\]</div>
+<p>For some <span class="math notranslate nohighlight">\(0 \leq t \leq 1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \ba, t \bx + (1 - t) \by \rangle
+= t \langle \ba, \bx \rangle + (1 - t)\langle \ba, \by \rangle
+\geq t b + (1 -t )b  = b.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bx + (1 - t) \by \in H_+\)</span>.
+Analogous proofs apply for other types of half spaces.</p>
+</div>
+</div>
+<div class="section" id="rays">
+<h2><span class="section-number">6.2.3. </span>Rays<a class="headerlink" href="#rays" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-convex-ray">
+<p class="admonition-title"><span class="caption-number">Definition 6.7 </span> (Ray)</p>
+<div class="definition-content section" id="proof-content">
+<p>A <em>ray</em> <span class="math notranslate nohighlight">\(R\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+R \triangleq \{ \bx_0 + t \bv \ST t \geq 0 \}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bv \neq \bzero\)</span> indicates the direction of ray
+and <span class="math notranslate nohighlight">\(\bx_0\)</span> is the base or origin of ray.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-convex-ray">
+<p class="admonition-title"><span class="caption-number">Theorem 6.11 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>A ray is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let a ray be given as:</p>
+<div class="math notranslate nohighlight">
+\[
+R = \{ \bx_0 + t \bv \ST t \geq 0 \}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bu, \bv \in R\)</span>. Thus, there is <span class="math notranslate nohighlight">\(t_u, t_v \geq 0\)</span>
+such that:</p>
+<div class="math notranslate nohighlight">
+\[
+\bu = \bx_0 + t_u \bv \text{ and }
+\bv = \bx_0 + t_v \bv.
+\]</div>
+<p>Now, for some <span class="math notranslate nohighlight">\(0 \leq r \leq 1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+r \bu + (1 - r) \bv 
+&amp;= r (\bx_0 + t_u \bv) + (1 - r) (\bx_0 + t_v \bv)\\
+&amp;= \bx_0 + (r t_u + (1 - r) t_v) \bv.
+\end{split}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(r t_u + (1 - r) t_v \geq 0\)</span>, hence
+<span class="math notranslate nohighlight">\(r \bu + (1 - r) \bv  \in R\)</span>.</p>
+</div>
+</div>
+<div class="section" id="balls">
+<h2><span class="section-number">6.2.4. </span>Balls<a class="headerlink" href="#balls" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-convex-open-ball">
+<p class="admonition-title"><span class="caption-number">Theorem 6.12 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>An <a class="reference internal" href="../metric_spaces/topology.html#def-ms-open-ball">open ball</a> <span class="math notranslate nohighlight">\(B(\ba, r)\)</span> is convex
+for any <a class="reference internal" href="../la/normed_spaces.html#def-la-norm">norm</a> <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Recall that an open ball in a normed linear space
+is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+B(\ba,r) = \{ \bx \in \VV \ST \| \bx - \ba \| &lt; r \}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bx, \by \in B(\ba,r)\)</span> and let <span class="math notranslate nohighlight">\(0 \leq t \leq 1\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+t \bx + (1-t)\by  - \ba 
+= t (\bx - \ba) + (1-t) (\by - \ba).
+\]</div>
+<p>By triangle inequality:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\| t (\bx - \ba) + (1-t) (\by - \ba) \|
+&amp;\leq \| t (\bx - \ba) \| + \| (1-t) (\by - \ba) \|\\
+&amp;= t \| \bx - \ba \| + (1 -t) \| \by - \ba \|\\
+&amp;&lt; t r + (1 - t)r = r.
+\end{split}\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\| t \bx + (1-t)\by  - \ba \| &lt; r
+\implies t \bx + (1-t)\by \in B(\ba,r).
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-convex-closed-ball">
+<p class="admonition-title"><span class="caption-number">Theorem 6.13 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>A <a class="reference internal" href="../metric_spaces/topology.html#def-ms-closed-ball">closed ball</a> <span class="math notranslate nohighlight">\(B[\ba, r]\)</span> is convex
+for any <a class="reference internal" href="../la/normed_spaces.html#def-la-norm">norm</a> <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Recall that a closed ball in a normed linear space
+is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+B[\ba,r] = \{ \bx \in \VV \ST \| \bx - \ba \| \leq r \}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bx, \by \in B(\ba,r)\)</span> and let <span class="math notranslate nohighlight">\(0 \leq t \leq 1\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+t \bx + (1-t)\by  - \ba 
+= t (\bx - \ba) + (1-t) (\by - \ba).
+\]</div>
+<p>By triangle inequality:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\| t (\bx - \ba) + (1-t) (\by - \ba) \|
+&amp;\leq \| t (\bx - \ba) \| + \| (1-t) (\by - \ba) \|\\
+&amp;= t \| \bx - \ba \| + (1 -t) \| \by - \ba \|\\
+&amp;\leq t r + (1 - t)r = r.
+\end{split}\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\| t \bx + (1-t)\by  - \ba \| \leq r
+\implies t \bx + (1-t)\by \in B[\ba,r].
+\]</div>
+</div>
+</div>
+<div class="section" id="convex-combinations">
+<h2><span class="section-number">6.2.5. </span>Convex Combinations<a class="headerlink" href="#convex-combinations" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-convex-combination">
+<p class="admonition-title"><span class="caption-number">Definition 6.8 </span> (Convex combination)</p>
+<div class="definition-content section" id="proof-content">
+<p>We call a point of the form <span class="math notranslate nohighlight">\(\theta_1 \bx_1  + \dots + \theta_k \bx_k\)</span>, where
+<span class="math notranslate nohighlight">\(\theta_1 + \dots + \theta_k  = 1\)</span> and <span class="math notranslate nohighlight">\(\theta_i \geq 0, i=1,\dots,k\)</span>,
+a <em>convex combination</em> of the points <span class="math notranslate nohighlight">\(\bx_1, \dots, \bx_k\)</span>.</p>
+</div>
+</div><p>It is like a weighted average of the points <span class="math notranslate nohighlight">\(\bx_i\)</span>.
+A weights <span class="math notranslate nohighlight">\(\theta_i\)</span> in a convex combination can be
+interpreted as probabilities or proportions.</p>
+<div class="proof example admonition" id="ex-convex-combination-center-mass">
+<p class="admonition-title"><span class="caption-number">Example 6.2 </span> (Center of mass)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider a system of particles <span class="math notranslate nohighlight">\(p_i\)</span>, <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>
+each with mass <span class="math notranslate nohighlight">\(m_i\)</span> and location in space as <span class="math notranslate nohighlight">\(\bx_i\)</span>.
+The center of mass <span class="math notranslate nohighlight">\(\bx\)</span> satisfies the equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^n m_i (\bx_i - \bx) = 0.
+\]</div>
+<p>Solving this equation gives us:</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \sum_{i=1}^n \frac{m_i}{m} \bx_i
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(m = \sum_{i=1}^n m_i\)</span>.</p>
+<p>If we assign <span class="math notranslate nohighlight">\(\theta_i = \frac{m_i}{m}\)</span>, we notice that
+<span class="math notranslate nohighlight">\(\theta_i \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_{i=1}^n \theta_i = 1\)</span>.
+We can now write the center of mass as:</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \sum_{i=1}^n \theta_i \bx_i
+\]</div>
+<p>which is a convex combination of the locations <span class="math notranslate nohighlight">\(\bx_i\)</span>
+where <span class="math notranslate nohighlight">\(\theta_i\)</span> gives the proportion of contribution
+of each particle according to its mass.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-convex-set-convex-combinations">
+<p class="admonition-title"><span class="caption-number">Theorem 6.14 </span></p>
+<div class="theorem-content section" id="proof-content">
 <p>A set is convex if and only if it contains all convex combinations of its points.</p>
 </div>
-</div><div class="proof example admonition" id="def-ray">
-<p class="admonition-title"><span class="caption-number">Example 5.3 </span> (Convex sets)</p>
-<div class="example-content section" id="proof-content">
-<ul class="simple">
-<li><p>A line segment is convex.</p></li>
-<li><p>A circle [including its interior] is convex.</p></li>
-<li><p>A <em>ray</em> is defined as <span class="math notranslate nohighlight">\(\{ x_0 + \theta v | \theta \geq 0 \}\)</span> where
-<span class="math notranslate nohighlight">\(v \neq 0\)</span> indicates the direction of ray and <span class="math notranslate nohighlight">\(x_0\)</span> is the base or origin of ray. A ray
-is convex but not affine.</p></li>
-<li><p>Any affine set is convex.</p></li>
-</ul>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We know that a set <span class="math notranslate nohighlight">\(C\)</span> is convex is equivalent to
+saying that it contains all 2 point convex combinations;
+i.e, for any <span class="math notranslate nohighlight">\(\bx_1, \bx_2 \in C\)</span>, <span class="math notranslate nohighlight">\(t_1, t_2 \geq 0\)</span> and <span class="math notranslate nohighlight">\(t_1 + t_2 = 1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+t_1 \bx_1 + t_2 \bx_2 \in C. 
+\]</div>
+<p>We first show that if <span class="math notranslate nohighlight">\(C\)</span> is convex, it contains all its
+(finite) convex combination by induction.</p>
+<ol>
+<li><p>By definition <span class="math notranslate nohighlight">\(C\)</span> contains all its 2 point convex combinations.</p></li>
+<li><p>As induction hypothesis, assume that <span class="math notranslate nohighlight">\(C\)</span> contains all
+convex combinations of <span class="math notranslate nohighlight">\(m-1\)</span> or fewer points where <span class="math notranslate nohighlight">\(m &gt; 2\)</span>.</p></li>
+<li><p>Consider a convex combination of <span class="math notranslate nohighlight">\(m\)</span> points</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i=1}^m t_i \bx_i 
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bx_i \in C\)</span>, <span class="math notranslate nohighlight">\(t_i \geq 0\)</span>, <span class="math notranslate nohighlight">\(\sum t_i = 1\)</span>.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\sum t_1 = 1\)</span>, hence at least one of <span class="math notranslate nohighlight">\(t_i &lt; 1\)</span>.</p></li>
+<li><p>Without loss of generality, assume <span class="math notranslate nohighlight">\(t_m &lt; 1\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(t_m &lt; 1\)</span> means that <span class="math notranslate nohighlight">\(1 - t_m &gt; 0\)</span>.</p></li>
+<li><p>Define <span class="math notranslate nohighlight">\(\by = \sum_{i=1}^{m-1} t'_i \bx_i\)</span> where
+<span class="math notranslate nohighlight">\(t'_i = \frac{t_i}{1 - t_m}\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(t'_i \geq 0\)</span>. Also, <span class="math notranslate nohighlight">\(\sum_{i=1}^{m-1} t'_i = 1\)</span>
+since <span class="math notranslate nohighlight">\(\sum_{i=1}^{m-1} t_i = 1 - t_m\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\by\)</span> is an <span class="math notranslate nohighlight">\(m-1\)</span> point convex combination of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>By induction hypothesis, <span class="math notranslate nohighlight">\(\by \in C\)</span>.</p></li>
+<li><p>Now, <span class="math notranslate nohighlight">\((1-t_m) \by = \sum_{i=1}^{m-1} t_i \bx_i\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bx = (1 - t_m) \by + t_m \bx_m\)</span>.</p></li>
+<li><p>It is a 2 point convex combination of <span class="math notranslate nohighlight">\(\by\)</span> and <span class="math notranslate nohighlight">\(\bx_m\)</span>.</p></li>
+<li><p>Since both <span class="math notranslate nohighlight">\(\by, \bx_m \in C\)</span>, hence <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> contains all its <span class="math notranslate nohighlight">\(m\)</span> point convex combinations.</p></li>
+</ol>
+<p>For the converse, note that if <span class="math notranslate nohighlight">\(C\)</span> contains all its
+convex combinations, then it contains, in particular,
+all its two point convex combinations. Hence, <span class="math notranslate nohighlight">\(C\)</span>
+is convex.</p>
 </div>
-</div><div class="proof definition admonition" id="def-convex-hull">
-<p class="admonition-title"><span class="caption-number">Definition 5.9 </span></p>
+<div class="proof theorem admonition" id="res-cvx-convex-comb-convex-combs">
+<p class="admonition-title"><span class="caption-number">Theorem 6.15 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>A convex combination of convex combinations is a convex combination.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span>. Note that <span class="math notranslate nohighlight">\(S\)</span> is arbitrary (no convexity assumed).</p>
+<ol class="simple">
+<li><p>Consider <span class="math notranslate nohighlight">\(n\)</span> points <span class="math notranslate nohighlight">\(\by_i\)</span>, <span class="math notranslate nohighlight">\(i=1,\dots, n\)</span> described as below.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by_i = \sum_{j=1}^{m_j}t_{i,j} \bx_{i,j}\)</span> be convex combinations
+of <span class="math notranslate nohighlight">\(m_j\)</span> points:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bx_{i,1}, \dots, \bx_{i,m_j} \in S\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_{i,j} \geq 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum_{j=1}^{m_j} t_{i, j} = 1\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Consider the convex combination <span class="math notranslate nohighlight">\(\by = \sum_{i=1}^n r_i \by_i\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(r_i \geq 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum r_i = 1\)</span>.</p></li>
+</ul>
+</li>
+<li><p>We need to show that <span class="math notranslate nohighlight">\(\by\)</span> is a convex combination of points of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+</ol>
+<p>Towards this:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\by &amp;= \sum_{i=1}^n r_i \by_i\\
+&amp;= \sum_{i=1}^n r_i \sum_{j=1}^{m_j}t_{i,j} \bx_{i,j}\\
+&amp;= \sum_{i=1}^n \sum_{j=1}^{m_j} r_i t_{i,j} \bx_{i,j}.
+\end{split}\]</div>
+<p>Consider the terms:</p>
+<div class="math notranslate nohighlight">
+\[
+s_{i, j} =  r_i t_{i,j}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(r_i \geq 0\)</span> and <span class="math notranslate nohighlight">\(t_{i, j} \geq 0\)</span>, hence <span class="math notranslate nohighlight">\(s_{i, j } \geq 0\)</span>.</p>
+<p>Now, consider their sum:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\sum_{i=1}^n \sum_{j=1}^{m_j} s_{i, j} 
+&amp;= \sum_{i=1}^n \sum_{j=1}^{m_j} r_i t_{i,j} \\
+&amp;= \sum_{i=1}^n r_i \sum_{j=1}^{m_j} t_{i,j}\\
+&amp;= \sum_{i=1}^n r_i = 1\\
+\end{split}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\sum_{i,j} s_{i, j} = 1\)</span>.</p>
+<p>Hence,</p>
+<div class="math notranslate nohighlight">
+\[
+\by = \sum_{i,j} s_{i, j} x_{i, j}
+\]</div>
+<p>is a convex combination of points of <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</div>
+</div>
+<div class="section" id="convex-hull">
+<h2><span class="section-number">6.2.6. </span>Convex Hull<a class="headerlink" href="#convex-hull" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-convex-hull">
+<p class="admonition-title"><span class="caption-number">Definition 6.9 </span> (Convex hull)</p>
 <div class="definition-content section" id="proof-content">
 <p>The <em>convex hull</em> of an arbitrary set <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span> denoted as
 <span class="math notranslate nohighlight">\(\ConvexHull(S)\)</span>, is the set of all convex combinations of points in <span class="math notranslate nohighlight">\(S\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[
-    \ConvexHull(S) = \{ \theta_1 x_1 + \dots + \theta_k x_k | x_k \in S, \theta_i \geq 0, i = 1,\dots, k,
+    \ConvexHull(S) = \{ \theta_1 \bx_1 + \dots + \theta_k \bx_k | \bx_k \in S, \theta_i \geq 0, i = 1,\dots, k,
     \theta_1 + \dots + \theta_k = 1\}.
 \]</div>
 </div>
-</div><div class="proof remark admonition" id="remark-5">
-<p class="admonition-title"><span class="caption-number">Remark 5.6 </span></p>
-<div class="remark-content section" id="proof-content">
+</div><div class="proof theorem admonition" id="res-cvx-convex-hull-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.16 </span></p>
+<div class="theorem-content section" id="proof-content">
 <p>The convex hull <span class="math notranslate nohighlight">\(\ConvexHull(S)\)</span> of a set <span class="math notranslate nohighlight">\(S\)</span> is always convex.</p>
 </div>
-</div><div class="proof remark admonition" id="remark-6">
-<p class="admonition-title"><span class="caption-number">Remark 5.7 </span></p>
-<div class="remark-content section" id="proof-content">
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bx, \by \in \ConvexHull(S)\)</span>, <span class="math notranslate nohighlight">\(t \in [0,1]\)</span> and
+the point <span class="math notranslate nohighlight">\(\bz = t \bx + (1-t) \by\)</span>.
+We need to show that <span class="math notranslate nohighlight">\(\bz \in \ConvexHull(S)\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bx, \by\)</span> are convex combinations of points of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bz\)</span> is a convex combination of <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bz\)</span> is a convex combination of convex combinations of points in <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvx-convex-comb-convex-combs">Theorem 6.15</a>,
+a convex combination of convex combinations is a convex combination.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bz\)</span> is a convex combination of points of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(\ConvexHull(S)\)</span> contains all convex combinations of points of <span class="math notranslate nohighlight">\(S\)</span> by definition.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bz \in \ConvexHull(S)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\ConvexHull(S)\)</span> is convex.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvx-convex-hull-smallest">
+<p class="admonition-title"><span class="caption-number">Theorem 6.17 </span></p>
+<div class="theorem-content section" id="proof-content">
 <p>The convex hull of a set <span class="math notranslate nohighlight">\(S\)</span> is the smallest convex set containing it. In other words,
 let <span class="math notranslate nohighlight">\(C\)</span> be any convex set such that <span class="math notranslate nohighlight">\(S \subseteq C\)</span>. Then <span class="math notranslate nohighlight">\(\ConvexHull(S) \subseteq C\)</span>.</p>
 </div>
-</div><p>We can generalize convex combinations to include infinite sums.</p>
-<div class="proof lemma admonition" id="lemma-7">
-<p class="admonition-title"><span class="caption-number">Lemma 5.2 </span></p>
-<div class="lemma-content section" id="proof-content">
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C\)</span> be a convex set such that <span class="math notranslate nohighlight">\(S \subseteq C\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \ConvexHull(S)\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx\)</span> is a convex combination of points of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C\)</span> is convex and <span class="math notranslate nohighlight">\(S \subseteq C\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(C\)</span> contains every convex combination of points of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Thus, in particular <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in \ConvexHull(S)\)</span> was arbitrary, hence <span class="math notranslate nohighlight">\(\ConvexHull(S) \subseteq C\)</span>.</p></li>
+</ol>
+</div>
+<p>We could have started as defining the convex hull of <span class="math notranslate nohighlight">\(S\)</span> being
+the smallest convex set containing <span class="math notranslate nohighlight">\(S\)</span> and arrived at the conclusion
+that <span class="math notranslate nohighlight">\(\ConvexHull(S)\)</span> contains all convex combinations of <span class="math notranslate nohighlight">\(S\)</span>.
+Some authors prefer to define <span class="math notranslate nohighlight">\(\ConvexHull(S)\)</span> as the smallest convex
+set containing <span class="math notranslate nohighlight">\(S\)</span>. Both definitions are equivalent.</p>
+</div>
+<div class="section" id="dimension">
+<h2><span class="section-number">6.2.7. </span>Dimension<a class="headerlink" href="#dimension" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvx-convex-set-dim">
+<p class="admonition-title"><span class="caption-number">Definition 6.10 </span> (Dimension of a convex set)</p>
+<div class="definition-content section" id="proof-content">
+<p>The dimension of a convex set is defined to be
+the dimension of its
+<a class="reference internal" href="../la/affine.html#def-affine-hull">affine hull</a>.</p>
+<p>If <span class="math notranslate nohighlight">\(C\)</span> is a convex set, then:</p>
+<div class="math notranslate nohighlight">
+\[
+\dim C = \dim \affine C.
+\]</div>
+</div>
+</div><p>Recall that the dimension of an affine
+set is equal to the dimension of the
+linear subspace associated with it
+(<a class="reference internal" href="../la/affine.html#def-affine-dimension">Definition 4.112</a>).</p>
+<ol class="simple">
+<li><p>A circle will have a dimension of 2 even
+if it is in <span class="math notranslate nohighlight">\(\RR^3\)</span>.</p></li>
+<li><p>A sphere will have a dimension of three.</p></li>
+</ol>
+</div>
+<div class="section" id="simplices">
+<h2><span class="section-number">6.2.8. </span>Simplices<a class="headerlink" href="#simplices" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvx-convex-hull-finite-set">
+<p class="admonition-title"><span class="caption-number">Theorem 6.18 </span> (Convex hull of a finite set of points)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S = \{ \bx_0, \dots, \bx_m \}\)</span> be a finite set of
+points of <span class="math notranslate nohighlight">\(\VV\)</span>. Then, <span class="math notranslate nohighlight">\(\ConvexHull(S)\)</span> consists of
+all the points of the form</p>
+<div class="math notranslate nohighlight">
+\[
+t_0 \bx_0 + \dots t_m \bx_m, \quad 
+t_0 \geq 0, \dots, t_m \geq 0, \sum_{i=0}^m t_i = 1.
+\]</div>
+</div>
+</div><p>In <span class="math notranslate nohighlight">\(\RR^n\)</span>, this is known as a <a class="reference internal" href="rn_subsets.html#def-convex-polytope">polytope</a>.</p>
+<p>A Simplex is a convex hull of a finite set of
+affine independent points. The simplex provides
+a powerful coordinate system for the points
+within it in terms of barycentric coordinates.</p>
+<div class="proof definition admonition" id="def-convex-simplex">
+<p class="admonition-title"><span class="caption-number">Definition 6.11 </span> (<span class="math notranslate nohighlight">\(k\)</span>-simplex)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(k+1\)</span> points <span class="math notranslate nohighlight">\(\bv_0, \dots, \bv_k \in \VV\)</span> be
+<a class="reference internal" href="../la/affine.html#def-affine-independence">affine independent</a>.</p>
+<p>The <em>simplex</em> determined by them is given by</p>
+<div class="math notranslate nohighlight">
+\[
+C = \ConvexHull \{ \bv_0, \dots, \bv_k\}
+= \{ t_0 \bv_0 + \dots + t_k \bv_k \ST 
+    \bt \succeq 0, \bone^T \bt = 1\}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bt = [t_1, \dots, t_k]^T\)</span> and
+<span class="math notranslate nohighlight">\(\bone\)</span> denotes a vector of appropriate size <span class="math notranslate nohighlight">\((k)\)</span>
+with all entries one.</p>
+<p>In other words, <span class="math notranslate nohighlight">\(C\)</span> is the convex hull of the set
+<span class="math notranslate nohighlight">\(\{\bv_0, \dots, \bv_k\}\)</span>.</p>
+</div>
+</div><p>A simplex is a convex set since it is a convex hull of its vertices.
+<span class="math notranslate nohighlight">\(k\)</span> stands for the dimension of the simplex.
+<a class="reference internal" href="#def-cvx-convex-set-dim">Recall</a> that the
+dimension of a convex set is the dimension of its
+affine hull.</p>
+<div class="proof example admonition" id="ex-cvx-simplex-examples">
+<p class="admonition-title"><span class="caption-number">Example 6.3 </span> (Simplex examples)</p>
+<div class="example-content section" id="proof-content">
+<p>In <span class="math notranslate nohighlight">\(\RR^n\)</span>:</p>
+<ul class="simple">
+<li><p>A 0-simplex is a point.</p></li>
+<li><p>A 1-simplex is a line segment (2 points).</p></li>
+<li><p>A 2-simplex is a triangle (3 points).</p></li>
+<li><p>A 3-simplex is a tetrahedron (4 points).</p></li>
+<li><p>A 4-simplex is a 5-cell (5 points).</p></li>
+</ul>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-simplex-barycentric-rep">
+<p class="admonition-title"><span class="caption-number">Theorem 6.19 </span> (Barycentric coordinates)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Each point of a <span class="math notranslate nohighlight">\(k\)</span> simplex is <em>uniquely</em> expressible
+as a convex combination of the vertices.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C = \ConvexHull\{\bv_0, \bv_1, \dots, \bv_k \}\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in C\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bv = \sum_{i=0}^k t_i \bv_i\)</span> with <span class="math notranslate nohighlight">\(t_i \geq 0\)</span>
+and <span class="math notranslate nohighlight">\(\sum t_i = 1\)</span>.</p></li>
+<li><p>For contradiction, assume there was another representation:
+<span class="math notranslate nohighlight">\(\bv = \sum_{i=0}^k r_i \bv_i\)</span> with <span class="math notranslate nohighlight">\(r_i \geq 0\)</span>
+and <span class="math notranslate nohighlight">\(\sum r_i = 1\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i=0}^k t_i \bv_i = \sum_{i=0}^k r_i \bv_i
+   \implies \sum_{i=0}^k (t_i - r_i) \bv_i = \bzero.
+   \]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(\{\bv_0, \bv_1, \dots, \bv_k \}\)</span> are affine independent.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(t_i = r_i\)</span>.</p></li>
+<li><p>Thus, the representation is unique.</p></li>
+</ol>
+</div>
+<div class="proof definition admonition" id="def-convex-simplex-midpoint">
+<p class="admonition-title"><span class="caption-number">Definition 6.12 </span> (Simplex midpoint)</p>
+<div class="definition-content section" id="proof-content">
+<p>The point <span class="math notranslate nohighlight">\(\sum_{i=0}^k \frac{1}{k+1}{\bv_i}\)</span>
+in a simplex <span class="math notranslate nohighlight">\(C = \ConvexHull\{\bv_0, \dots, \bv_k \}\)</span>
+is known as its <em>midpoint</em> or <em>barycenter</em>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-convex-set-dimension-simplex-size">
+<p class="admonition-title"><span class="caption-number">Theorem 6.20 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The dimension of a convex set <span class="math notranslate nohighlight">\(C\)</span> is the maximum
+of the dimensions of the various simplices
+included in <span class="math notranslate nohighlight">\(C\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We need to show that there is a simplex
+<span class="math notranslate nohighlight">\(S \subset C\)</span> such that <span class="math notranslate nohighlight">\(\dim S = \dim C\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(A\)</span> be any finite affine independent subset of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is convex, hence
+<span class="math notranslate nohighlight">\(A \subseteq C \implies \ConvexHull(A) \subseteq C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> contains the simplices constructed from
+any set of finite affine independent points in <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Thus, if <span class="math notranslate nohighlight">\(A = \{\bv_0, \dots, \bv_k\}\)</span> is a set of
+<span class="math notranslate nohighlight">\(k+1\)</span> affine independent points of <span class="math notranslate nohighlight">\(C\)</span>, then
+<span class="math notranslate nohighlight">\(\ConvexHull(A) \subseteq C\)</span> implies that <span class="math notranslate nohighlight">\(k \leq \dim C\)</span>.</p></li>
+<li><p>Thus, if <span class="math notranslate nohighlight">\(S\)</span> is a <span class="math notranslate nohighlight">\(k\)</span>-simplex such that <span class="math notranslate nohighlight">\(S \subseteq C\)</span>,
+then <span class="math notranslate nohighlight">\(\dim S = k \leq \dim C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(m\)</span> be the maximum of the dimensions of the
+various simplices contained in <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Then, there exist affine independent points
+<span class="math notranslate nohighlight">\(\bv_0, \dots, \bv_m \in C\)</span> such that
+the simplex <span class="math notranslate nohighlight">\(S = \ConvexHull\{ \bv_0, \dots, \bv_m\} \subseteq C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(M\)</span> be the affine hull of <span class="math notranslate nohighlight">\(S\)</span>; i.e. <span class="math notranslate nohighlight">\(M = \affine S\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\dim M = m\)</span> and <span class="math notranslate nohighlight">\(M \subseteq \affine C\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(C \setminus M\)</span> were nonempty, then there would be
+an element <span class="math notranslate nohighlight">\(\bv \in C \setminus M\)</span> which would be
+affine independent of <span class="math notranslate nohighlight">\(\{ \bv_0, \dots, \bv_m\}\)</span>.</p></li>
+<li><p>That would lead to a set of <span class="math notranslate nohighlight">\(m+2\)</span> affine independent
+points in <span class="math notranslate nohighlight">\(C\)</span>.
+That would mean that <span class="math notranslate nohighlight">\(C\)</span> contains a simplex of
+dimension <span class="math notranslate nohighlight">\(m+1\)</span>.
+A contradiction.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(C \setminus M = \EmptySet\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C \subseteq M\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\affine C\)</span> is the smallest affine set
+that contains <span class="math notranslate nohighlight">\(C\)</span>, hence <span class="math notranslate nohighlight">\(\affine C = M\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\dim C = m\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="symmetric-reflections">
+<h2><span class="section-number">6.2.9. </span>Symmetric Reflections<a class="headerlink" href="#symmetric-reflections" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../la/vector_spaces.html#def-vs-symmetric-reflection">symmetric reflection</a>
+of a convex set is convex
+since convexity is preserved under scalar multiplication.
+See <a class="reference internal" href="#res-cvx-convexity-scalar-multiplication">Theorem 6.28</a> below.</p>
+<p>If a <a class="reference internal" href="../la/vector_spaces.html#def-vs-symmetric-set">symmetric</a> convex set
+contains a nonzero vector <span class="math notranslate nohighlight">\(\bx\)</span>, then it contains
+the entire line segment between <span class="math notranslate nohighlight">\(-\bx\)</span> and <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</div>
+<div class="section" id="infinite-convex-combinations">
+<h2><span class="section-number">6.2.10. </span>Infinite Convex Combinations<a class="headerlink" href="#infinite-convex-combinations" title="Permalink to this headline">¶</a></h2>
+<p>We can generalize convex combinations to include infinite sums.</p>
+<div class="proof theorem admonition" id="theorem-26">
+<p class="admonition-title"><span class="caption-number">Theorem 6.21 </span></p>
+<div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\theta_1, \theta_2, \dots\)</span> satisfy</p>
 <div class="math notranslate nohighlight">
 \[
     \theta_i \geq 0, i = 1,2,\dots, \quad \sum_{i=1}^{\infty} \theta_i = 1,
 \]</div>
-<p>and let <span class="math notranslate nohighlight">\(x_1, x_2, \dots \in C\)</span>, where <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> is convex. Then</p>
+<p>and let <span class="math notranslate nohighlight">\(\bx_1, \bx_2, \dots \in C\)</span>, where <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> is convex. Then</p>
 <div class="math notranslate nohighlight">
 \[
-    \sum_{i=1}^{\infty} \theta_i x_i \in C,
+    \sum_{i=1}^{\infty} \theta_i \bx_i \in C,
 \]</div>
 <p>if the series converges.</p>
 </div>
 </div><p>We can generalize it further to density functions.</p>
-<div class="proof lemma admonition" id="lemma-8">
-<p class="admonition-title"><span class="caption-number">Lemma 5.3 </span></p>
-<div class="lemma-content section" id="proof-content">
+<div class="proof theorem admonition" id="theorem-27">
+<p class="admonition-title"><span class="caption-number">Theorem 6.22 </span></p>
+<div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(p : \VV \to \RR\)</span> satisfy <span class="math notranslate nohighlight">\(p(x) \geq 0\)</span> for all  <span class="math notranslate nohighlight">\(x \in C\)</span>
 and</p>
 <div class="math notranslate nohighlight">
@@ -703,6 +1482,659 @@ and</p>
 </div>
 </div><p>Note that <span class="math notranslate nohighlight">\(p\)</span> above can be treated as a probability density function if
 we define <span class="math notranslate nohighlight">\(p(x) = 0 \Forall x \in \VV \setminus C\)</span>.</p>
+</div>
+<div class="section" id="convexity-preserving-operations">
+<h2><span class="section-number">6.2.11. </span>Convexity Preserving Operations<a class="headerlink" href="#convexity-preserving-operations" title="Permalink to this headline">¶</a></h2>
+<p>In the following, we will discuss several operations which
+transform a convex set into another convex set, and thus
+preserve convexity.</p>
+<p>Understanding these operations is useful for determining
+the convexity of a wide variety of sets.</p>
+<p>Usually, it is easier to prove that a set is convex by showing
+that it is obtained by a convexity preserving operation from
+a convex set compared to directly verifying the convexity property
+i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+t \bx_1 + (1 - t) \bx_2 \in C \Forall \bx_1, \bx_2 \in C, t \in [0,1].
+\]</div>
+<div class="section" id="intersection-and-union">
+<h3><span class="section-number">6.2.11.1. </span>Intersection and Union<a class="headerlink" href="#intersection-and-union" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-intersection">
+<p class="admonition-title"><span class="caption-number">Theorem 6.23 </span> (Intersection of convex sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> are convex sets then <span class="math notranslate nohighlight">\(S_1 \cap S_2\)</span> is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bx_1, \bx_2 \in S_1 \cap S_2\)</span>. We have to show that</p>
+<div class="math notranslate nohighlight">
+\[
+t \bx_1 + (1 - t) \bx_2 \in S_1 \cap S_2, \Forall t \in [0,1].
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(S_1\)</span> is convex and <span class="math notranslate nohighlight">\(\bx_1, \bx_2 \in S_1\)</span>, hence</p>
+<div class="math notranslate nohighlight">
+\[
+t \bx_1 + (1 - t) \bx_2 \in S_1, \Forall t \in [0,1].
+\]</div>
+<p>Similarly</p>
+<div class="math notranslate nohighlight">
+\[
+t \bx_1 + (1 - t) \bx_2 \in S_2, \Forall t \in [0,1].
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+t \bx_1 + (1 - t) \bx_2 \in S_1 \cap S_2, \Forall t \in [0,1].
+\]</div>
+<p>which completes the proof.</p>
+</div>
+<p>We can generalize it further.</p>
+<div class="proof theorem admonition" id="res-cvx-arbitrary-intersection">
+<p class="admonition-title"><span class="caption-number">Theorem 6.24 </span> (Intersection of arbitrary collection of convex sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{ A_i\}_{i \in I}\)</span> be a family of sets such that <span class="math notranslate nohighlight">\(A_i\)</span> is convex
+for all <span class="math notranslate nohighlight">\(i \in I\)</span>.  Then <span class="math notranslate nohighlight">\(\cap_{i \in I} A_i\)</span> is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bx_1, \bx_2\)</span> be any two arbitrary elements in <span class="math notranslate nohighlight">\(\cap_{i \in I} A_i\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp;\bx_1, \bx_2 \in \cap_{i \in I} A_i\\
+\implies &amp; \bx_1, \bx_2 \in A_i \Forall i \in I\\
+\implies &amp;t \bx_1 + (1 - t) \bx_2 \in A_i \Forall t \in [0,1] \Forall i \in I
+\text{ since $A_i$ is convex }\\
+\implies &amp;t \bx_1 + (1 - t) \bx_2 \in \cap_{i \in I} A_i.
+\end{split}\]</div>
+<p>Hence <span class="math notranslate nohighlight">\(\cap_{i \in I} A_i\)</span> is convex.</p>
+</div>
+<div class="proof corollary admonition" id="res-cvx-arbitrary-intersection-half-spaces">
+<p class="admonition-title"><span class="caption-number">Corollary 6.1 </span> (Arbitrary intersection of closed half spaces)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(I\)</span> be an index set. Let <span class="math notranslate nohighlight">\(\ba_i \in \VV\)</span> and <span class="math notranslate nohighlight">\(b_i \in \RR\)</span>
+for every <span class="math notranslate nohighlight">\(i \in I\)</span>. Then, the set:</p>
+<div class="math notranslate nohighlight">
+\[
+C = \{ \bx \in \VV \ST \langle \bx, \ba_i \rangle \leq b_i \Forall i \in I\}
+\]</div>
+<p>is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since each of the half spaces is convex, hence so is their
+intersection.</p>
+</div>
+<p>This result is applicable for open half spaces
+and hyperplanes too too. It also applies
+for a mixture of hyperplanes and half-spaces.</p>
+<div class="proof corollary admonition" id="res-cvx-linear-equalities-inequalities">
+<p class="admonition-title"><span class="caption-number">Corollary 6.2 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>The solution set of a system of linear equations and inequalities
+in <span class="math notranslate nohighlight">\(\RR^n\)</span> is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ul class="simple">
+<li><p>The solution set of each linear equation is a hyperplane.</p></li>
+<li><p>The solution set of each linear inequality is a half-space
+(closed or open).</p></li>
+<li><p>The solution set of a system of linear equations and
+inequalities is the intersection of these
+hyperplanes and half-spaces.</p></li>
+<li><p>Each hyperplane and each half-space is convex.</p></li>
+<li><p>Hence, their intersection is convex.</p></li>
+</ul>
+</div>
+<div class="proof theorem admonition" id="res-cvx-convex-pair-largest-smallest">
+<p class="admonition-title"><span class="caption-number">Theorem 6.25 </span> (Intersection and union of two sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be convex in <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then, the largest convex set contained in both is <span class="math notranslate nohighlight">\(C_1 \cap C_2\)</span>.
+And, the smallest convex set containing both is <span class="math notranslate nohighlight">\(\ConvexHull (C_1 \cup C_2)\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C\)</span> be a convex set contained in both <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span>. Then,
+<span class="math notranslate nohighlight">\(C \subseteq C_1 \cap C_2\)</span>.
+But <span class="math notranslate nohighlight">\(C_1 \cap C_2\)</span> is convex (<a class="reference internal" href="#res-cvx-intersection">Theorem 6.23</a>).
+Hence, <span class="math notranslate nohighlight">\(C_1 \cap C_2\)</span> is the largest convex set contained in both <span class="math notranslate nohighlight">\(C_1\)</span>
+and <span class="math notranslate nohighlight">\(C_2\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a convex set which contains both <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span>.
+Then, <span class="math notranslate nohighlight">\(C_1 \cup C_2 \subseteq C\)</span>.
+The smallest convex set containing <span class="math notranslate nohighlight">\(C_1 \cup C_2\)</span> is its
+convex hull given by <span class="math notranslate nohighlight">\(\ConvexHull(C_1 \cup C_2)\)</span>
+(<a class="reference internal" href="#res-cvx-convex-hull-smallest">Theorem 6.17</a>).</p>
+</div>
+<div class="proof theorem admonition" id="res-cvx-convex-collection-largest-smallest">
+<p class="admonition-title"><span class="caption-number">Theorem 6.26 </span> (Intersection and union of arbitrary sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(I\)</span> be an index set and <span class="math notranslate nohighlight">\(\FFF = \{ C_i \}_{i \in I}\)</span>
+be a family of convex sets in <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then, the largest convex set contained in every set of <span class="math notranslate nohighlight">\(\FFF\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\bigcap_{i \in I}C_i.
+\]</div>
+<p>And, the smallest convex set containing every set of <span class="math notranslate nohighlight">\(\FF\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\ConvexHull \left (\bigcup_{i \in I} C_i \right ).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C\)</span> be a convex set contained in every set of  <span class="math notranslate nohighlight">\(\FFF\)</span>. Then,
+<span class="math notranslate nohighlight">\(C \subseteq \bigcap_{i \in I}C_i\)</span>.
+But <span class="math notranslate nohighlight">\(\bigcap_{i \in I}C_i\)</span> is convex (<a class="reference internal" href="#res-cvx-arbitrary-intersection">Theorem 6.24</a>).
+Hence, <span class="math notranslate nohighlight">\(\bigcap_{i \in I}C_i\)</span> is the largest convex set contained in
+every set of <span class="math notranslate nohighlight">\(\FFF\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a convex set which contains every set of <span class="math notranslate nohighlight">\(\FF\)</span>.
+Then, <span class="math notranslate nohighlight">\(\bigcup_{i \in I} C_i \subseteq C\)</span>.
+The smallest convex set containing every set of <span class="math notranslate nohighlight">\(\FF\)</span> is its
+convex hull given by <span class="math notranslate nohighlight">\(\ConvexHull(\bigcup_{i \in I} C_i)\)</span>
+(<a class="reference internal" href="#res-cvx-convex-hull-smallest">Theorem 6.17</a>).</p>
+</div>
+</div>
+<div class="section" id="affine-functions">
+<h3><span class="section-number">6.2.11.2. </span>Affine Functions<a class="headerlink" href="#affine-functions" title="Permalink to this headline">¶</a></h3>
+<p>Let us start with some simple results.</p>
+<div class="proof theorem admonition" id="res-cvx-convexity-translation">
+<p class="admonition-title"><span class="caption-number">Theorem 6.27 </span> (Convexity and translation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Convexity is preserved under translation.</p>
+<p><span class="math notranslate nohighlight">\(C\)</span> (a subset of <span class="math notranslate nohighlight">\(\VV\)</span>) is convex
+if and only if <span class="math notranslate nohighlight">\(C + \ba\)</span> is convex for every <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>.</p>
+<ol>
+<li><p>Assume <span class="math notranslate nohighlight">\(C\)</span> is convex.</p></li>
+<li><p>Then, for every <span class="math notranslate nohighlight">\(\bx, \by \in C\)</span> and every <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>,
+<span class="math notranslate nohighlight">\(t \bx + (1-t) \by \in C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu, \bv \in C + \ba\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bu = \bx + \ba\)</span> and <span class="math notranslate nohighlight">\(\bv = \by + \ba\)</span> for some <span class="math notranslate nohighlight">\(\bx, \by \in C\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   t \bu + (1-t) \bv 
+   &amp;= t (\bx + \ba) + (1-t ) (\by + \ba)\\
+   &amp;= t \bx + (1-t) \by + \ba. 
+   \end{split}\]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(t \bx + (1-t) \by \in C\)</span> since <span class="math notranslate nohighlight">\(C\)</span> is convex.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(t \bx + (1-t) \by + \ba \in C + \ba\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(t \bu + (1-t) \bv \in C + \ba\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C + \ba\)</span> is convex.</p></li>
+</ol>
+<p>We can follow the same argument in the opposite direction
+to establish that <span class="math notranslate nohighlight">\(C + \ba\)</span> is convex implies <span class="math notranslate nohighlight">\(C\)</span> is convex.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvx-convexity-scalar-multiplication">
+<p class="admonition-title"><span class="caption-number">Theorem 6.28 </span> (Convexity and scalar multiplication)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Convexity is preserved under scalar multiplication.</p>
+<p><span class="math notranslate nohighlight">\(C\)</span> (a subset of <span class="math notranslate nohighlight">\(\VV\)</span>) is convex
+if and only if <span class="math notranslate nohighlight">\( \alpha C\)</span> is convex for every <span class="math notranslate nohighlight">\(\alpha \in \RR\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>.</p>
+<ol class="simple">
+<li><p>Assume <span class="math notranslate nohighlight">\(C\)</span> is convex.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\alpha \in \RR\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu, \by \in \alpha C\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bu = \alpha \bx\)</span> and <span class="math notranslate nohighlight">\(\bv = \alpha \by\)</span>
+for some <span class="math notranslate nohighlight">\(\bx, \by \in C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(t\bu + (1-t)\bv = \alpha (t \bx + (1-t)\by)\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(t \bx + (1-t)\by \in C\)</span> since <span class="math notranslate nohighlight">\(C\)</span> is convex.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\alpha (t \bx + (1-t)\by)\)</span> in <span class="math notranslate nohighlight">\(\alpha C\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(t\bu + (1-t)\bv \in \alpha C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\alpha C\)</span> is convex.</p></li>
+</ol>
+<p>Similar argument in opposite direction establishes
+that <span class="math notranslate nohighlight">\(\alpha C\)</span> is convex implies <span class="math notranslate nohighlight">\(C\)</span> is convex.</p>
+</div>
+<p>Recall that an
+<a class="reference internal" href="../la/affine.html#def-la-affine-operator">affine function</a>
+<span class="math notranslate nohighlight">\(f : \VV \to \EE\)</span> from a real vector space <span class="math notranslate nohighlight">\(\VV\)</span> to
+another real vector space <span class="math notranslate nohighlight">\(\EE\)</span> is a function which satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+f(t \bx + (1-t)\by) = tf(\bx) + (1 -t) f(\by)
+\]</div>
+<p>for every <span class="math notranslate nohighlight">\(t \in \RR\)</span>.</p>
+<p>Recall from <a class="reference internal" href="../la/affine.html#res-la-op-affine-linear-p-offset">Theorem 4.146</a>
+that an affine function can be written as
+a linear transformation followed by a translation:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = T (\bx) + \bb
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(T\)</span> is a <a class="reference internal" href="../la/transformations.html#def-la-linear-transformation">linear operator</a>.</p>
+<div class="proof example admonition" id="example-36">
+<p class="admonition-title"><span class="caption-number">Example 6.4 </span></p>
+<div class="example-content section" id="proof-content">
+<p>An affine function <span class="math notranslate nohighlight">\(f : \RR^n \to \RR^m\)</span> takes
+the form of a matrix multiplication plus a vector addition:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \bA \bx + \bb
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bA \in \RR^{m \times n}\)</span> and <span class="math notranslate nohighlight">\(\bb \in \RR^m\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-convex-set-affine-image">
+<p class="admonition-title"><span class="caption-number">Theorem 6.29 </span> (Image under affine function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span> be convex and
+<span class="math notranslate nohighlight">\(f : \VV \to \EE\)</span> be an affine function.
+Then the image of <span class="math notranslate nohighlight">\(S\)</span> under <span class="math notranslate nohighlight">\(f\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+    f(S) = \{ f(\bx) | \bx \in S\}
+\]</div>
+<p>is a convex set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu, \bv \in f(S)\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bu = f(\bx)\)</span> and <span class="math notranslate nohighlight">\(\bv = f(\by)\)</span>
+for some <span class="math notranslate nohighlight">\(\bx, \by \in S\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(0 \leq t \leq 1\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bz = t \bx + (1-t)\by \in S\)</span> since <span class="math notranslate nohighlight">\(S\)</span>
+is convex.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is affine, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bz) = f(t \bx + (1-t)\by )
+   = t f(\bx) + (1-t)f(\by)
+   = t \bu + (1-t)\bv.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bz \in S\)</span>,
+hence <span class="math notranslate nohighlight">\(f(\bz) = t \bu + (1-t)\bv \in f(S)\)</span>.</p></li>
+<li><p>We have shown that for any <span class="math notranslate nohighlight">\(\bu, \bv \in f(S)\)</span>
+and any <span class="math notranslate nohighlight">\(0 \leq t \leq 1\)</span>,
+<span class="math notranslate nohighlight">\(t \bu + (1-t)\bv \in f(S)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(S)\)</span> is convex.</p></li>
+</ol>
+</div>
+<p>It applies in the reverse direction also.</p>
+<div class="proof theorem admonition" id="res-cvx-convex-set-inverse-affine-image">
+<p class="admonition-title"><span class="caption-number">Theorem 6.30 </span> (Inverse image under affine function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \EE\)</span> be affine and
+<span class="math notranslate nohighlight">\(S \subseteq \EE\)</span> be convex.
+Then the inverse image of <span class="math notranslate nohighlight">\(S\)</span> under <span class="math notranslate nohighlight">\(f\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+f^{-1}(S) = \{ \bx \in \VV \ST f(\bx) \in S\}
+\]</div>
+<p>is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Denote <span class="math notranslate nohighlight">\(R = f^{-1}(S)\)</span>. We need to show that
+if <span class="math notranslate nohighlight">\(S\)</span> is convex then <span class="math notranslate nohighlight">\(R\)</span> is convex too.</p>
+<p>We proceed as follows:</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in R\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu = f(\bx)\)</span> and <span class="math notranslate nohighlight">\(\bv = f(\by)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bu, \bv \in S\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(0 \leq t \leq 1\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bw = t \bu + (1-t)\bv \in S\)</span> since <span class="math notranslate nohighlight">\(S\)</span>
+is convex.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz = t \bx + (1-t) \by\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is affine, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \bw = t \bu + (1-t)\bv
+   = t f(\bx) + (1-t) f(\by)
+   = f(t \bx + (1-t) \by)
+   = f(\bz).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bw \in S\)</span>, hence <span class="math notranslate nohighlight">\(\bz \in R\)</span>
+as <span class="math notranslate nohighlight">\(\bw = f(\bz)\)</span>.</p></li>
+<li><p>We have shown that for any <span class="math notranslate nohighlight">\(\bx, \by \in R\)</span>
+and any <span class="math notranslate nohighlight">\(0 \leq t \leq 1\)</span>,
+<span class="math notranslate nohighlight">\(t \bx + (1-t)\by \in R\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(R\)</span> is convex.</p></li>
+</ol>
+</div>
+<div class="proof example admonition" id="example-39">
+<p class="admonition-title"><span class="caption-number">Example 6.5 </span> (Affine functions preserving convexity)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S \in \RR^n\)</span> be convex.</p>
+<ul>
+<li><p>For some <span class="math notranslate nohighlight">\(\alpha \in \RR\)</span>,
+<span class="math notranslate nohighlight">\(\alpha S\)</span> is convex. This is the <em>scaling</em> operation.</p></li>
+<li><p>For some <span class="math notranslate nohighlight">\(\ba \in \RR^n\)</span>, <span class="math notranslate nohighlight">\(S + \ba\)</span>
+is convex. This is the <em>translation</em> operation.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(n = m + k\)</span>.
+Then, let <span class="math notranslate nohighlight">\(\RR^n = \RR^m \times \RR^k\)</span>.
+A vector <span class="math notranslate nohighlight">\(\bx \in S\)</span> can be written as <span class="math notranslate nohighlight">\(\bx = (\bx_1, \bx_2)\)</span>
+where <span class="math notranslate nohighlight">\(\bx_1 \in \RR^m\)</span> and <span class="math notranslate nohighlight">\(\bx_2 \in \RR^k\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+    T = \{ \bx_1 \in \RR^m \ST 
+        (\bx_1, \bx_2) \in S \text{ for some } \bx_2 \in \RR^k\}
+  \]</div>
+<p>is convex. This is the <em>projection</em> operation.
+It projects vectors from <span class="math notranslate nohighlight">\(\RR^n\)</span> to <span class="math notranslate nohighlight">\(\RR^m\)</span> by
+dropping last <span class="math notranslate nohighlight">\(k\)</span> entries.</p>
+</li>
+</ul>
+</div>
+</div><div class="proof example admonition" id="example-40">
+<p class="admonition-title"><span class="caption-number">Example 6.6 </span> (System of linear equations)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the system of linear equations <span class="math notranslate nohighlight">\(\bA \bx = \by\)</span>
+where <span class="math notranslate nohighlight">\(A \in \RR^{m \times n}\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(\by\)</span> ranges over a convex set, then the corresponding
+set of solutions also ranges over a convex set
+due to <a class="reference internal" href="#res-cvx-convex-set-inverse-affine-image">Theorem 6.30</a>.</p>
+<p>The <a class="reference internal" href="rn_subsets.html#def-convex-nonnegative-orthant">nonnegative orthant</a>
+<span class="math notranslate nohighlight">\(\RR^n_+\)</span> is a convex set.</p>
+<p>Let <span class="math notranslate nohighlight">\(Y = \RR^m_+ + \ba\)</span> for some <span class="math notranslate nohighlight">\(\ba \in \RR^m\)</span>; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+Y = \{ \by \ST \by \succeq \ba \}.
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(\bA^{-1} Y\)</span> is the set of vectors satisfying the inequality</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bx \succeq \ba.
+\]</div>
+<p>Thus, the solution set of a system of linear inequalities
+of the form <span class="math notranslate nohighlight">\(\bA \bx \succeq \ba\)</span> is convex.</p>
+<p>Now, if <span class="math notranslate nohighlight">\(X = \RR^n_+\)</span>, then <span class="math notranslate nohighlight">\(\bA X\)</span> is the set of vectors
+<span class="math notranslate nohighlight">\(\by \in \RR^m\)</span> such that the equation <span class="math notranslate nohighlight">\(\bA \bx = \by\)</span>
+has a nonnegative solution (<span class="math notranslate nohighlight">\(\bx \succeq \bzero\)</span>).
+Since <span class="math notranslate nohighlight">\(X\)</span> is convex,  so is <span class="math notranslate nohighlight">\(\bA X\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-convex-set-orthogonal-projection">
+<p class="admonition-title"><span class="caption-number">Theorem 6.31 </span> (Orthogonal projection of convex set)</p>
+<div class="theorem-content section" id="proof-content">
+<p>The <a class="reference internal" href="../la/inner_product_spaces.html#def-la-orthogonal-projector">orthogonal projection</a>
+of a convex set <span class="math notranslate nohighlight">\(C\)</span> on a
+subspace <span class="math notranslate nohighlight">\(V\)</span> is another convex set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We recall that orthogonal projection is a
+<a class="reference internal" href="../la/inner_product_spaces.html#res-la-ip-subspace-orth-proj">linear mapping</a>
+and thus an affine function.
+By <a class="reference internal" href="#res-cvx-convex-set-affine-image">Theorem 6.29</a>, image
+of a convex set under an affine function is convex.
+Hence proved.</p>
+</div>
+</div>
+<div class="section" id="set-addition">
+<h3><span class="section-number">6.2.11.3. </span>Set Addition<a class="headerlink" href="#set-addition" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-convexity-set-addition">
+<p class="admonition-title"><span class="caption-number">Theorem 6.32 </span> (Convexity and set addition)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be two convex subsets of <span class="math notranslate nohighlight">\(\VV\)</span>. Then
+<span class="math notranslate nohighlight">\(C_1 + C_2\)</span> is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in C_1 + C_2\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx = \bx_1 + \bx_2\)</span> for some <span class="math notranslate nohighlight">\(\bx_1 \in C_1\)</span>
+and some <span class="math notranslate nohighlight">\(\bx_2 \in C_2\)</span>.</p></li>
+<li><p>Similarly, <span class="math notranslate nohighlight">\(\by = \by_1 + \by_2\)</span> for some <span class="math notranslate nohighlight">\(\by_1 \in C_1\)</span>
+and some <span class="math notranslate nohighlight">\(\by_2 \in C_2\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(0 \leq t \leq 1\)</span>.</p></li>
+<li><p>Then:</p>
+<div class="math notranslate nohighlight">
+\[
+   t \bx + (1 - t) \by 
+   = t (\bx_1 + \bx_2) + (1-t)(\by_1 + \by_2)
+   = t \bx_1 + (1 - t) \by_1 + t \bx_2 + (1 - t) \by_2. 
+   \]</div>
+</li>
+<li><p>But, <span class="math notranslate nohighlight">\(\bz_1 = t \bx_1 + (1 - t) \by_1 \in C_1\)</span> since
+<span class="math notranslate nohighlight">\(C_1\)</span> is convex.</p></li>
+<li><p>Similarly, <span class="math notranslate nohighlight">\(\bz_2 = t \bx_2 + (1 - t) \by_2 \in C_2\)</span> since
+<span class="math notranslate nohighlight">\(C_2\)</span> is convex.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(t \bx + (1 - t) \by = \bz_1 + \bz_2 \in C_1 + C_2\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C_1 + C_2\)</span> is convex.</p></li>
+</ol>
+</div>
+<p>One way to think geometrically about set addition is as the
+union of all translates of <span class="math notranslate nohighlight">\(C_1\)</span> given by <span class="math notranslate nohighlight">\(C_1 + \bx\)</span>
+as <span class="math notranslate nohighlight">\(\bx\)</span> varies over <span class="math notranslate nohighlight">\(C_2\)</span>.</p>
+<div class="proof theorem admonition" id="res-cvx-convex-set-as-set-cvx-comb">
+<p class="admonition-title"><span class="caption-number">Theorem 6.33 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(C\)</span> is convex if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+(1-t) C + t C = C \Forall t \in [0,1].
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(C\)</span> is convex:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\((1-t) C + t C = \{ t \bx + (1-t) \by \ST \bx, \by \in C \}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((1-t) C + t C \subseteq C\)</span>.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(\bx \in C\)</span>, <span class="math notranslate nohighlight">\((1-t)\bx \in (1-t)C\)</span>
+and <span class="math notranslate nohighlight">\(t \bx \in t C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((1-t)\bx + t \bx = \bx \in (1-t) C + t C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C \subseteq (1-t) C + t C\)</span>.</p></li>
+<li><p>Combining, we get <span class="math notranslate nohighlight">\((1-t) C + t C = C\)</span>.</p></li>
+</ol>
+<p>Assume <span class="math notranslate nohighlight">\((1-t) C + t C = C\)</span> for every <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in C\)</span> and <span class="math notranslate nohighlight">\(t\in [0,1]\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\((1-t)\bx \in (1-t)C\)</span>
+and <span class="math notranslate nohighlight">\(t \by \in t C\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\((1-t)\bx + t \by \in (1-t) C + t C = C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is convex.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvx-convexity-linear-combination">
+<p class="admonition-title"><span class="caption-number">Theorem 6.34 </span> (Convexity and linear combination)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Convexity is preserved under linear combinations.</p>
+<p>Let <span class="math notranslate nohighlight">\(C_1, \dots, C_k\)</span> be convex.
+Let <span class="math notranslate nohighlight">\(t_1, \dots, t_k \in \RR\)</span>.
+Then, their linear combination:</p>
+<div class="math notranslate nohighlight">
+\[
+C = t_1 C_1 + \dots  + t_k C_k
+\]</div>
+<p>is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Due to <a class="reference internal" href="#res-cvx-convexity-scalar-multiplication">Theorem 6.28</a>,
+<span class="math notranslate nohighlight">\(t_i C_i\)</span> are convex for <span class="math notranslate nohighlight">\(i=1,\dots,k\)</span>.</p>
+<p>By (finite) repeated application of <a class="reference internal" href="#res-cvx-convexity-set-addition">Theorem 6.32</a>,
+their sum is also convex.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvx-convex-set-conic-dist">
+<p class="admonition-title"><span class="caption-number">Theorem 6.35 </span> (Nonnegative scalar multiplication distributive law)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be convex and <span class="math notranslate nohighlight">\(t_1, t_2 \geq 0\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+(t_1 + t_2)C = t_1 C + t_2 C.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From <a class="reference internal" href="../la/vector_spaces.html#res-vs-set-arithmetic-props">Theorem 4.18</a>, we know that:</p>
+<div class="math notranslate nohighlight">
+\[
+(t_1 + t_2)C \subseteq t_1 C + t_2 C.
+\]</div>
+<p>We now show that <span class="math notranslate nohighlight">\(t_1 C + t_2 C \subseteq (t_1 + t_2)C\)</span>.</p>
+<ol class="simple">
+<li><p>If both <span class="math notranslate nohighlight">\(t_1 = t_2 = 0\)</span>, then we have trivial equality.</p></li>
+<li><p>If either of <span class="math notranslate nohighlight">\(t_1\)</span> or <span class="math notranslate nohighlight">\(t_2\)</span> is 0, then also we have trivial equality.</p></li>
+<li><p>Now, consider the case <span class="math notranslate nohighlight">\(t_1, t_2 &gt; 0\)</span>.</p></li>
+<li><p>Define <span class="math notranslate nohighlight">\(t = t_1 + t_2 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(r = \frac{t_1}{t}\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(1-r = \frac{t_2}{t}\)</span>.</p></li>
+<li><p>Then, since <span class="math notranslate nohighlight">\(C\)</span> is convex, hence <span class="math notranslate nohighlight">\(r C + (1-r) C \subseteq C\)</span>.</p></li>
+<li><p>Multiplying by <span class="math notranslate nohighlight">\(t\)</span> on both sides, we get: <span class="math notranslate nohighlight">\( r C + (1-r)C \subseteq t C\)</span>.</p></li>
+</ol>
+</div>
+<p>For the special case of <span class="math notranslate nohighlight">\(t_1 = r\)</span> and <span class="math notranslate nohighlight">\(t_2 = 1 - r\)</span> with <span class="math notranslate nohighlight">\(r \in [0,1]\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+C = r C + (1- r)C.
+\]</div>
+<p>Some implications are <span class="math notranslate nohighlight">\(C + C = 2C\)</span>, <span class="math notranslate nohighlight">\(C+C+C=3C\)</span> and so forth
+if <span class="math notranslate nohighlight">\(C\)</span> is convex.</p>
+<div class="proof theorem admonition" id="res-cvx-arb-cvx-un-cvx-comb">
+<p class="admonition-title"><span class="caption-number">Theorem 6.36 </span> (Convex combinations over arbitrary unions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(I\)</span> be an index set and
+<span class="math notranslate nohighlight">\(\FFF = \{C_i \}_{i \in I}\)</span> be a family of convex
+sets in <span class="math notranslate nohighlight">\(\VV\)</span>. Let <span class="math notranslate nohighlight">\(C\)</span> be given as:</p>
+<div class="math notranslate nohighlight">
+\[
+C = \ConvexHull\left (\bigcup_{i \in I} C_i \right);
+\]</div>
+<p>i.e., <span class="math notranslate nohighlight">\(C\)</span> is the convex hull of the union of the
+family of sets <span class="math notranslate nohighlight">\(\FFF\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+C = \bigcup \left \{\sum_{i \in I} t_i C_i \right \} 
+\]</div>
+<p>where the union is taken over all finite convex combinations
+(i.e. over all nonnegative choices of <span class="math notranslate nohighlight">\(t_i\)</span> such that only
+finitely many <span class="math notranslate nohighlight">\(t_i\)</span> are nonzero and they add up to 1).</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx\)</span> is a convex combination of elements in <span class="math notranslate nohighlight">\(\bigcup_{i \in I} C_i\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx = \sum_{i=1}^m a_i \by_i\)</span> where
+<span class="math notranslate nohighlight">\(\by_i \in \bigcup_{i \in I} C_i\)</span>, <span class="math notranslate nohighlight">\(a_i \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum a_i = 1\)</span>.</p></li>
+<li><p>Drop all the terms from <span class="math notranslate nohighlight">\(\bx\)</span> where <span class="math notranslate nohighlight">\(a_i = 0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\by_i, \by_j\)</span> belong to some same <span class="math notranslate nohighlight">\(C_k\)</span>, then, we can replace
+<span class="math notranslate nohighlight">\(a_i \by_i + a_j \by_j\)</span> with some <span class="math notranslate nohighlight">\(a \by  = a_i \by_i + a_j \by_j\)</span>
+where <span class="math notranslate nohighlight">\(a = a_i + a_j\)</span>.
+Note that, with these assumptions,
+<span class="math notranslate nohighlight">\(\by = \frac{a_i}{a_i + a_j} \by_i + \frac{a_j}{a_i + a_j} \by_j\)</span>
+is a convex combination of <span class="math notranslate nohighlight">\(\by_i\)</span> and <span class="math notranslate nohighlight">\(\by_j\)</span>, hence <span class="math notranslate nohighlight">\(\by \in C_k\)</span>
+since <span class="math notranslate nohighlight">\(C_k\)</span> is convex.</p></li>
+<li><p>Thus, terms from a single <span class="math notranslate nohighlight">\(C_k\)</span> in <span class="math notranslate nohighlight">\(\bx\)</span> can be reduced by a single term.</p></li>
+<li><p>Thus, we can simplify <span class="math notranslate nohighlight">\(\bx\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \sum_{j=1}^p b_j \bx_j
+   \]</div>
+<p>such that each <span class="math notranslate nohighlight">\(\bx_j\)</span> belongs to a different <span class="math notranslate nohighlight">\(C_{i_j}\)</span> with <span class="math notranslate nohighlight">\(i_j \in I\)</span>,
+<span class="math notranslate nohighlight">\(b_j &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\sum b_j = 1\)</span>.</p>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is a union of finite convex combinations of the form</p>
+<div class="math notranslate nohighlight">
+\[
+   b_1 C_{i_1} + \dots + b_p C_{i_p}
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(i_1, \dots, i_p \in I\)</span> are different indices
+and <span class="math notranslate nohighlight">\(b_j &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\sum b_j = 1\)</span>.</p>
+</li>
+<li><p>This is the same set as <span class="math notranslate nohighlight">\(\bigcup \left \{\sum_{i \in I} t_i C_i \right \}\)</span>
+except for notational differences.</p></li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="res-cvx-hull-union-cvx-combs">
+<p class="admonition-title"><span class="caption-number">Corollary 6.3 </span> (Convex hull of union)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be convex sets.
+Let <span class="math notranslate nohighlight">\(C\)</span> be the convex hull of their union:</p>
+<div class="math notranslate nohighlight">
+\[
+C = \ConvexHull (C_1 \cup C_2).
+\]</div>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+C = \bigcup_{t \in [0,1]} \left [ (1 - t) C_1 + t C_2 \right ].
+\]</div>
+</div>
+</div></div>
+<div class="section" id="partial-addition">
+<h3><span class="section-number">6.2.11.4. </span>Partial Addition<a class="headerlink" href="#partial-addition" title="Permalink to this headline">¶</a></h3>
+<p>Recall the notion of
+<a class="reference internal" href="../la/vector_spaces.html#def-vs-direct-sum-vector-spaces">direct sum</a>
+of two vector spaces <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> over <span class="math notranslate nohighlight">\(\RR\)</span>
+given by <span class="math notranslate nohighlight">\(\VV \oplus \WW\)</span>.</p>
+<div class="proof theorem admonition" id="res-cvx-convex-set-partial-addition">
+<p class="admonition-title"><span class="caption-number">Theorem 6.37 </span> (Partial addition on convex sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be real vector spaces.
+Let <span class="math notranslate nohighlight">\(\VV \oplus \WW\)</span> be their direct sum.
+Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be convex sets in <span class="math notranslate nohighlight">\(\VV \oplus \WW\)</span>.
+Let <span class="math notranslate nohighlight">\(C\)</span> be the set of vectors <span class="math notranslate nohighlight">\(\bx = (\by, \bz)\)</span>
+such that there exist vectors <span class="math notranslate nohighlight">\(\bz_1, \bz_2 \in \WW\)</span>
+with <span class="math notranslate nohighlight">\((\by, \bz_1) \in C_1\)</span>, <span class="math notranslate nohighlight">\((\by, \bz_2) \in C_2\)</span>
+and <span class="math notranslate nohighlight">\(\bz_1 + \bz_2 = \bz\)</span>.
+Then, <span class="math notranslate nohighlight">\(C\)</span> is a convex set in <span class="math notranslate nohighlight">\(\VV \times \WW\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\((\by, \bz) \in C\)</span> such that there exist vectors <span class="math notranslate nohighlight">\(\bz_1, \bz_2 \in \WW\)</span>
+with <span class="math notranslate nohighlight">\((\by, \bz_1) \in C_1\)</span>, <span class="math notranslate nohighlight">\((\by, \bz_2) \in C_2\)</span> and <span class="math notranslate nohighlight">\(\bz_1 + \bz_2 = \bz\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\((\by', \bz') \in C\)</span> such that there exist vectors <span class="math notranslate nohighlight">\(\bz'_1, \bz'_2 \in \WW\)</span>
+with <span class="math notranslate nohighlight">\((\by', \bz'_1) \in C_1\)</span>, <span class="math notranslate nohighlight">\((\by', \bz'_2) \in C_2\)</span> and <span class="math notranslate nohighlight">\(\bz'_1 + \bz'_2 = \bz'\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>. Consider the vector
+<span class="math notranslate nohighlight">\((\by'', \bz'') = t(\by, \bz) + (1-t)(\by', \bz')\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\by'' = t \by + (1-t) \by'\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bz'' = t \bz + (1-t) \bz' = t(\bz_1 + \bz_2) + (1-t)(\bz'_1 + \bz'_2)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz_1'' = t \bz_1 + (1-t) \bz_1'\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz_2'' = t \bz_2 + (1-t) \bz_2'\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\((\by, \bz_1), (\by', \bz'_1) \in C_1\)</span> and <span class="math notranslate nohighlight">\(C_1\)</span> is convex,
+hence <span class="math notranslate nohighlight">\((\by'', \bz''_1) \in C_1\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\((\by, \bz_2), (\by', \bz'_2) \in C_2\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> is convex,
+hence <span class="math notranslate nohighlight">\((\by'', \bz''_2) \in C_2\)</span>.</p></li>
+<li><p>But then, we note that <span class="math notranslate nohighlight">\(\bz'' = \bz''_1 + \bz''_2\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((\by'', \bz''_1) \in C_1\)</span> and <span class="math notranslate nohighlight">\((\by'', \bz''_2) \in C_2\)</span>
+implies that <span class="math notranslate nohighlight">\((\by'', \bz'') \in C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is convex.</p></li>
+</ol>
+</div>
+<p>We can write a version of the theorem above for <span class="math notranslate nohighlight">\(\RR^n\)</span>.</p>
+<div class="proof corollary admonition" id="res-cvx-convex-set-partial-addition-rn">
+<p class="admonition-title"><span class="caption-number">Corollary 6.4 </span> (Partial addition on convex sets in Euclidean space)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be convex sets in <span class="math notranslate nohighlight">\(\RR^{n + m}\)</span>.
+Let <span class="math notranslate nohighlight">\(C\)</span> be the set of vectors <span class="math notranslate nohighlight">\(\bx = (\by, \bz)\)</span>
+such that there exist vectors <span class="math notranslate nohighlight">\(\bz_1, \bz_2 \in \RR^m\)</span>
+with <span class="math notranslate nohighlight">\((\by, \bz_1) \in C_1\)</span>, <span class="math notranslate nohighlight">\((\by, \bz_2) \in C_2\)</span>
+and <span class="math notranslate nohighlight">\(\bz_1 + \bz_2 = \bz\)</span>.
+Then, <span class="math notranslate nohighlight">\(C\)</span> is a convex set in <span class="math notranslate nohighlight">\(\RR^{n+m}\)</span>.</p>
+</div>
+</div><p>The relationship between <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(C_1,C_2\)</span> is known as
+<em>partial addition</em>.</p>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(\VV = \{ \bzero\}\)</span> we are left with the result that
+<span class="math notranslate nohighlight">\(C_1, C_2\)</span> convex implies <span class="math notranslate nohighlight">\(C_1 + C_2\)</span> is convex.</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(\WW  = \{\bzero\}\)</span>, we are left with the result that
+<span class="math notranslate nohighlight">\(C_1, C_2\)</span> convex implies <span class="math notranslate nohighlight">\(C_1 \cap C_2\)</span> is convex.</p></li>
+<li><p>In between, we have a spectrum of results where
+for a vector in <span class="math notranslate nohighlight">\(C\)</span>,
+part of the representation must be common between
+<span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> while the remaining part must be
+the sum of corresponding parts of vectors in <span class="math notranslate nohighlight">\(C_1\)</span>
+and <span class="math notranslate nohighlight">\(C_2\)</span>.</p></li>
+<li><p>In other words, if a vector space can be decomposed
+as a direct sum of two subspaces, then we have
+intersection or representation in one subspace while addition
+in the other.</p></li>
+<li><p>This partial addition (binary) operation is commutative
+as well as associative.</p></li>
+</ul>
+<p>Partial additions appear naturally
+in convex cones in <span class="math notranslate nohighlight">\(\VV \oplus \RR\)</span>
+generated by a convex set in <span class="math notranslate nohighlight">\(\VV\)</span>.
+See <a class="reference internal" href="cone.html#res-cvx-convex-cross-section-cone">Observation 6.3</a>
+and discussion thereafter.</p>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -727,37 +2159,35 @@ we define <span class="math notranslate nohighlight">\(p(x) = 0 \Forall x \in \V
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="affine.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="real_spaces.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">5.2. </span>Affine Sets</p>
+            <p class="prev-next-title"><span class="section-number">6.1. </span>Real Vector Spaces</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="cone.html" title="next page">
+    <a class='right-next' id="next-link" href="rn_subsets.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5.4. </span>Cones</p>
+        <p class="prev-next-title"><span class="section-number">6.3. </span>Convex Subsets of <span class="math notranslate nohighlight">\(\RR^n\)</span></p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Shailesh Kumar<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

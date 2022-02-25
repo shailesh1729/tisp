@@ -1,0 +1,1513 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.1. Differentiation &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. Convex Sets and Functions" href="../convex_sets/intro.html" />
+    <link rel="prev" title="5. Multivariate Calculus" href="chapter.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.9. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.8. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.9. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.10. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.1. Differentiation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     6.9. Subgradients
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   7. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   8. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   9. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   10. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     11.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     11.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   12. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   13. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   14. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     14.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/mv_calculus/differentiation.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fmv_calculus/differentiation.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differentiability-and-jacobian">
+   5.1.1. Differentiability and Jacobian
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient">
+   5.1.2. Gradient
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chain-rule">
+   5.1.3. Chain Rule
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hessian">
+   5.1.4. Hessian
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Differentiation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differentiability-and-jacobian">
+   5.1.1. Differentiability and Jacobian
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient">
+   5.1.2. Gradient
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chain-rule">
+   5.1.3. Chain Rule
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hessian">
+   5.1.4. Hessian
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="differentiation">
+<h1><span class="section-number">5.1. </span>Differentiation<a class="headerlink" href="#differentiation" title="Permalink to this headline">¶</a></h1>
+<p>We consider functions from <span class="math notranslate nohighlight">\(\RR^n\)</span> to <span class="math notranslate nohighlight">\(\RR^m\)</span>.</p>
+<div class="section" id="differentiability-and-jacobian">
+<h2><span class="section-number">5.1.1. </span>Differentiability and Jacobian<a class="headerlink" href="#differentiability-and-jacobian" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-mvc-point-differentiability">
+<p class="admonition-title"><span class="caption-number">Definition 5.1 </span> (Differentiability at a point)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR^m\)</span>. Let <span class="math notranslate nohighlight">\(\bx \in \interior \dom f\)</span>.
+The function <span class="math notranslate nohighlight">\(f\)</span> is differentiable at <span class="math notranslate nohighlight">\(\bx\)</span> if
+there exists a matrix <span class="math notranslate nohighlight">\(Df(\bx) \in \RR^{m \times n}\)</span>
+that satisfies</p>
+<div class="math notranslate nohighlight" id="equation-eq-mvc-f-m-n-jacobian-limit">
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-eq-mvc-f-m-n-jacobian-limit" title="Permalink to this equation">¶</a></span>\[\underset{\bz \in \dom f, \bz \neq \bx, \bz \to \bz}{\lim}
+\frac{\| f(\bz) - f(\bx) - Df(\bx) (\bz - \bx) \|_2}{\| \bz - \bx \|_2} = 0.\]</div>
+<p>Such a matrix <span class="math notranslate nohighlight">\(Df(\bx)\)</span> is called the <em>derivative</em> (or <em>Jacobian</em>) of <span class="math notranslate nohighlight">\(f\)</span>
+at <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</div>
+</div><p>There can be at most one <span class="math notranslate nohighlight">\(Df(\bx)\)</span> satisfying the limit in
+<a class="reference internal" href="#equation-eq-mvc-f-m-n-jacobian-limit">(5.1)</a>.</p>
+<div class="proof observation admonition" id="res-mvc-f-m-n-jacobian-limit-alt">
+<p class="admonition-title"><span class="caption-number">Observation 5.1 </span></p>
+<div class="observation-content section" id="proof-content">
+<p>If we write <span class="math notranslate nohighlight">\(\bz = \bx + \bh\)</span> then an alternative form for
+<a class="reference internal" href="#equation-eq-mvc-f-m-n-jacobian-limit">(5.1)</a> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\bx + \bh \in \dom f, \bh \neq \bzero, \bh \to \bzero}{\lim}
+\frac{\| f(\bx + \bh) - f(\bx) - Df(\bx) \bh \|_2}{\| \bh \|_2} = 0.
+\]</div>
+</div>
+</div><div class="docutils">
+<p>The matrix <span class="math notranslate nohighlight">\(Df(\bx)\)</span> can be obtained from the partial
+derivatives:</p>
+<div class="math notranslate nohighlight">
+\[
+Df(\bx)_{ij} = \frac{\partial f_i(\bx)}{\partial x_j}, \quad
+i=1,\dots,m, \quad j=1,\dots,n.
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Df(\bx) = \begin{bmatrix}
+ \frac{\partial f_1(\bx)}{\partial x_1} 
+ &amp;  \frac{\partial f_1(\bx)}{\partial x_2} 
+ &amp; \dots 
+ &amp;  \frac{\partial f_1(\bx)}{\partial x_n}\\
+ \frac{\partial f_2(\bx)}{\partial x_1} 
+ &amp;  \frac{\partial f_2(\bx)}{\partial x_2} 
+ &amp; \dots 
+ &amp;  \frac{\partial f_2(\bx)}{\partial x_n}\\
+ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+ \frac{\partial f_m(\bx)}{\partial x_1} 
+ &amp;  \frac{\partial f_m(\bx)}{\partial x_2} 
+ &amp; \dots 
+ &amp;  \frac{\partial f_m(\bx)}{\partial x_n}
+\end{bmatrix}.
+\end{split}\]</div>
+<ol class="simple">
+<li><p>The Jacobian <span class="math notranslate nohighlight">\(Df(\bx)\)</span> is an <span class="math notranslate nohighlight">\(m \times n\)</span> real matrix.</p></li>
+<li><p>Partial derivatives of each component of <span class="math notranslate nohighlight">\(f\)</span> (i.e., <span class="math notranslate nohighlight">\(f_i\)</span>)
+line up on the <span class="math notranslate nohighlight">\(i\)</span>-th row.</p></li>
+<li><p>Partial derivatives for one coordinate <span class="math notranslate nohighlight">\(x_j\)</span> line up
+on the <span class="math notranslate nohighlight">\(j\)</span>-th column.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f\)</span> is single valued, then the Jacobian <span class="math notranslate nohighlight">\(Df(\bx)\)</span> is a row vector.</p></li>
+</ol>
+</div>
+<div class="proof example admonition" id="ex-mvc-derivative-identity-map">
+<p class="admonition-title"><span class="caption-number">Example 5.1 </span> (Jacobian of identity function)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \RR^n \to \RR^n\)</span> be defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \bx.
+\]</div>
+<p>Then,  <span class="math notranslate nohighlight">\(f_i(\bx) = x_i\)</span>. Hence,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f_i(\bx)}{\partial x_j} = \delta(i, j).
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+D f(\bx) = \bI_n
+\]</div>
+<p>the <span class="math notranslate nohighlight">\(n\times n\)</span> identity matrix.</p>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-derivative-linear-map">
+<p class="admonition-title"><span class="caption-number">Example 5.2 </span> (Jacobian of linear transformation)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \RR^n \to \RR^m\)</span> be defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \bA \bx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bA = (a_{i j})\)</span> is an <span class="math notranslate nohighlight">\(m \times n\)</span> real matrix.</p>
+<p>Then,  <span class="math notranslate nohighlight">\(f_i(\bx) = \sum_{j=1}^n a_{i j} x_j\)</span>. Hence,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f_i(\bx)}{\partial x_j} = a_{i j}.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+D f(\bx) = \bA.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-derivative-affine-map">
+<p class="admonition-title"><span class="caption-number">Example 5.3 </span> (Jacobian of affine transformation)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \RR^n \to \RR^m\)</span> be defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \bA \bx + \bb
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bA = (a_{i j}) \in \RR^{m \times n}\)</span>
+and <span class="math notranslate nohighlight">\(\bb \in \RR^m\)</span>.</p>
+<p>Then,  <span class="math notranslate nohighlight">\(f_i(\bx) = \sum_{j=1}^n a_{i j} x_j + b_i\)</span>. Hence,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f_i(\bx)}{\partial x_j} = a_{i j}.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+D f(\bx) = \bA.
+\]</div>
+<p>The vector <span class="math notranslate nohighlight">\(\bb\)</span> is a constant offset. It has no impact
+on the derivative.</p>
+</div>
+</div><div class="proof definition admonition" id="def-mvc-differentiable-function">
+<p class="admonition-title"><span class="caption-number">Definition 5.2 </span> (Differentiable function)</p>
+<div class="definition-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> is called differentiable if its domain <span class="math notranslate nohighlight">\(\dom f\)</span>
+is open and it is differentiable at every point of <span class="math notranslate nohighlight">\(\dom f\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-mvc-first-order-approx">
+<p class="admonition-title"><span class="caption-number">Definition 5.3 </span> (First order approximation)</p>
+<div class="definition-content section" id="proof-content">
+<p>The affine function given by:</p>
+<div class="math notranslate nohighlight" id="equation-eq-mvc-first-order-approx">
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-eq-mvc-first-order-approx" title="Permalink to this equation">¶</a></span>\[\hat{f} (\bx) = f(\ba) + Df(\ba)(\bx - \ba)\]</div>
+<p>is called the <em>first order approximation</em> of <span class="math notranslate nohighlight">\(f\)</span>
+at <span class="math notranslate nohighlight">\(\bx=\ba \in \interior \dom f\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="gradient">
+<h2><span class="section-number">5.1.2. </span>Gradient<a class="headerlink" href="#gradient" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-mvc-gradient">
+<p class="admonition-title"><span class="caption-number">Definition 5.4 </span> (Gradient)</p>
+<div class="definition-content section" id="proof-content">
+<p>When <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> is a real valued function, then
+the derivative <span class="math notranslate nohighlight">\(Df(\bx)\)</span> is a <span class="math notranslate nohighlight">\(1 \times n\)</span> matrix.
+The <em>gradient</em> of a real valued function is
+defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(\bx) = Df (\bx)^T 
+\]</div>
+<p>at <span class="math notranslate nohighlight">\(\bx \in \interior \dom f\)</span> if <span class="math notranslate nohighlight">\(f\)</span> is differentiable
+at <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</div>
+</div><p>For real valued functions, the derivative is a row vector
+but the gradient is a column vector.</p>
+<div class="docutils">
+<p>The components of the gradient are given by the
+partial derivatives as:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(\bx)_i = \frac{\partial f(\bx)}{\partial x_i}, \quad
+i=1,\dots,n.
+\]</div>
+</div>
+<div class="proof example admonition" id="ex-mvc-gradient-linear-functional">
+<p class="admonition-title"><span class="caption-number">Example 5.4 </span> (Gradient of linear functional)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a linear functional given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \langle \bx, \ba \rangle = \ba^T \bx.
+\]</div>
+<p>We can expand it as:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \sum_{j=1}^n a_j x_j.
+\]</div>
+<p>Computing partial derivative with respect to <span class="math notranslate nohighlight">\(x_i\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f(\bx)}{\partial x_i} 
+= \frac{\partial }{\partial x_i}\left (\sum_{j=1}^n a_j x_j \right )
+= a_i.
+\]</div>
+<p>Putting the partial derivatives together, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(\bx) = \ba.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-gradient-affine-functional">
+<p class="admonition-title"><span class="caption-number">Example 5.5 </span> (Gradient of affine functional)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a affine functional given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \ba^T \bx + b
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ba \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(b \in \RR\)</span>.</p>
+<p>We can expand it as:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \sum_{j=1}^n a_j x_j + b.
+\]</div>
+<p>Computing partial derivative with respect to <span class="math notranslate nohighlight">\(x_i\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f(\bx)}{\partial x_i} 
+= \frac{\partial }{\partial x_i}\left (\sum_{j=1}^n a_j x_j  + b \right)
+= a_i.
+\]</div>
+<p>Putting the partial derivatives together, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(\bx) = \ba.
+\]</div>
+<p>The intercept <span class="math notranslate nohighlight">\(b\)</span> is a constant term which doesn’t affect the
+gradient.</p>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-gradient-quadratic-form">
+<p class="admonition-title"><span class="caption-number">Example 5.6 </span> (Gradient of quadratic form)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a quadratic form given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \bx^T \bA \bx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bA \in \RR^{n \times n}\)</span>.</p>
+<p>We can expand it as:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \sum_{i=1}^n \sum_{j=1}^n x_i a_{i j} x_j.
+\]</div>
+<p>Note that the diagonal elements <span class="math notranslate nohighlight">\(a_{ii}\)</span> give us terms of the
+form <span class="math notranslate nohighlight">\(a_{i i} x_i^2\)</span>. Let us split the expression into
+diagonal and non-diagonal terms:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(\bx) = \sum_{i=1}^n a_{i i }x_i^2 + \sum_{\substack{i, j\\i \neq j}} x_i a_{i j} x_j.
+\end{split}\]</div>
+<p>There are <span class="math notranslate nohighlight">\(n\)</span> terms in the first sum (the diagonal entries of <span class="math notranslate nohighlight">\(\bA\)</span>)
+and <span class="math notranslate nohighlight">\(n^2 - n\)</span> terms in the second sum (the non-diagonal entries of <span class="math notranslate nohighlight">\(\bA\)</span>).</p>
+<p>Taking partial derivative w.r.t. <span class="math notranslate nohighlight">\(x_k\)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{\partial f(\bx)}{\partial x_k}
+= 2 a_{k k} x_k 
++ \sum_{\substack{i\\i \neq k}} x_i a_{ i k} 
++ \sum_{\substack{j\\j \neq k}} a_{k j} x_j.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>The first term comes from <span class="math notranslate nohighlight">\(a_{k k}\)</span> term that is quadratic in <span class="math notranslate nohighlight">\(x_k\)</span>.</p></li>
+<li><p>The first sum comes from linear terms where <span class="math notranslate nohighlight">\(k=j\)</span> and <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span> except <span class="math notranslate nohighlight">\(i\neq k\)</span>.</p></li>
+<li><p>The second sum comes from linear terms where <span class="math notranslate nohighlight">\(k=i\)</span> and <span class="math notranslate nohighlight">\(j=1,\dots,n\)</span> except <span class="math notranslate nohighlight">\(j\neq k\)</span>.</p></li>
+<li><p>There are <span class="math notranslate nohighlight">\(2n -2\)</span> terms in the sums and <span class="math notranslate nohighlight">\(2\)</span> <span class="math notranslate nohighlight">\(a_{k k} x_k\)</span> terms.</p></li>
+<li><p>We can move one <span class="math notranslate nohighlight">\(a_{k k }x_k\)</span> into each sum to simplify the partial derivative
+as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f(\bx)}{\partial x_k}
+= \sum_{i=1}^n x_i a_{i k}  + \sum_{j = 1}^n a_{k j} x_j. 
+\]</div>
+<p>Note that the <span class="math notranslate nohighlight">\(k\)</span>-th component of the vector <span class="math notranslate nohighlight">\(\bu = \bA \bx\)</span> is
+<span class="math notranslate nohighlight">\(\sum_{j=1}^n a_{k j} x_j\)</span>.</p>
+<p>Similarly, the <span class="math notranslate nohighlight">\(k\)</span>-th component of the vector <span class="math notranslate nohighlight">\(\bv = \bA^T \bx\)</span> is
+<span class="math notranslate nohighlight">\(\sum_{i=1}^n a_{i k} x_i\)</span>.</p>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f(\bx)}{\partial x_k} = v_k + u_k.
+\]</div>
+<p>Putting together the partial derivatives, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(\bx) = \bv + \bu = \bA^T \bx + \bA \bx 
+= (\bA^T  + \bA) \bx
+= (\bA  + \bA^T) \bx.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\bA\)</span> is symmetric then,</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(\bx) =  2 \bA \bx.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-gradient-quadratic-functional">
+<p class="admonition-title"><span class="caption-number">Example 5.7 </span> (Gradient of quadratic functional)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bP \in \SS^n\)</span> be a symmetric matrix.
+Let <span class="math notranslate nohighlight">\(\bq \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(r \in \RR\)</span>.
+Consider the quadratic functional <span class="math notranslate nohighlight">\(f: \RR^n \to \RR\)</span> given as:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \frac{1}{2} \bx^T \bP \bx + \bq^T \bx + r.
+\]</div>
+<p>We can compute the gradient as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\nabla f(\bx) 
+&amp;= \nabla \left( \frac{1}{2} \bx^T \bP \bx + \bq^T \bx + r \right )\\
+&amp;= \frac{1}{2} \nabla (\bx^T \bP \bx) + \nabla (\bq^T \bx)  + \nabla r \\
+&amp;= \frac{1}{2} (\bP + \bP^T) \bx + \bq \\
+&amp;= \frac{1}{2} (\bP + \bP) \bx + \bq\\
+&amp;= \bP \bx + \bq.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>We took advantage of the fact that gradient operation commutes with
+scalar multiplication and distributes on vector addition.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(r\)</span> is a constant, it has no contribution to the derivative.</p></li>
+<li><p>We reused results from previous examples.</p></li>
+<li><p>We utilized the fact that <span class="math notranslate nohighlight">\(\bP = \bP^T\)</span> since <span class="math notranslate nohighlight">\(\bP\)</span> is symmetric.</p></li>
+</ul>
+<p>In summary:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(\bx) 
+= \bP \bx + \bq.
+\]</div>
+<p>The derivative of <span class="math notranslate nohighlight">\(f\)</span> is then obtained by taking the transpose of the gradient:</p>
+<div class="math notranslate nohighlight">
+\[
+Df (\bx) = \bx^T \bP + \bq^T.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-mvc-first-order-approx-real">
+<p class="admonition-title"><span class="caption-number">Definition 5.5 </span> (First order approximation of real valued functions)</p>
+<div class="definition-content section" id="proof-content">
+<p>The affine function given by:</p>
+<div class="math notranslate nohighlight" id="equation-eq-mvc-first-order-approx-real">
+<span class="eqno">(5.3)<a class="headerlink" href="#equation-eq-mvc-first-order-approx-real" title="Permalink to this equation">¶</a></span>\[\hat{f} (\bx) = f(\ba) + \nabla f(\ba)^T(\bx - \ba)\]</div>
+<p>is the <em>first order approximation</em> of
+a real valued function <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(\bx=\ba \in \interior \dom f\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="definition-13">
+<p class="admonition-title"><span class="caption-number">Definition 5.6 </span> (Gradient mapping)</p>
+<div class="definition-content section" id="proof-content">
+<p>If a real valued function <span class="math notranslate nohighlight">\(f: \RR^n \to \RR\)</span>
+is differentiable, the <em>gradient mapping</em>
+of <span class="math notranslate nohighlight">\(f\)</span> is the function <span class="math notranslate nohighlight">\(\nabla f : \RR^n \to \RR^n\)</span>
+with <span class="math notranslate nohighlight">\(\dom \nabla f = \dom f\)</span>, with the value <span class="math notranslate nohighlight">\(\nabla f(\bx)\)</span>
+at every <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="chain-rule">
+<h2><span class="section-number">5.1.3. </span>Chain Rule<a class="headerlink" href="#chain-rule" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-mvc-chain-rule">
+<p class="admonition-title"><span class="caption-number">Theorem 5.1 </span> (Chain rule)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f : \RR^n \to \RR^m\)</span> is differentiable
+at <span class="math notranslate nohighlight">\(\bx \in \interior \dom f\)</span> and <span class="math notranslate nohighlight">\(g : \RR^m \to \RR^p\)</span>
+is differentiable at <span class="math notranslate nohighlight">\(f(\bx) \in \interior \dom g\)</span>.
+Define the composition <span class="math notranslate nohighlight">\(h: \RR^n \to \RR^p\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+h(\bx) = g(f(\bx)).
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(h\)</span> is differentiable at <span class="math notranslate nohighlight">\(\bx\)</span> with the derivative
+given by:</p>
+<div class="math notranslate nohighlight">
+\[
+Dh(\bx) = Dg(f(\bx)) Df(\bx).
+\]</div>
+</div>
+</div><p>Notice how the derivative lines up as a simple
+matrix multiplication.</p>
+<div class="proof corollary admonition" id="res-mvc-chain-rule-real">
+<p class="admonition-title"><span class="caption-number">Corollary 5.1 </span> (Chain rule for real valued functions)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> is differentiable
+at <span class="math notranslate nohighlight">\(\bx \in \interior \dom f\)</span> and <span class="math notranslate nohighlight">\(g : \RR \to \RR\)</span>
+is differentiable at <span class="math notranslate nohighlight">\(f(\bx) \in \interior \dom g\)</span>.
+Define the composition <span class="math notranslate nohighlight">\(h: \RR^n \to \RR\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+h(\bx) = g(f(\bx)).
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(h\)</span> is differentiable at <span class="math notranslate nohighlight">\(\bx\)</span> with the gradient
+given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla h(\bx) = g'(f(\bx)) \nabla f(\bx).
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-gradient-log-sum-exp">
+<p class="admonition-title"><span class="caption-number">Example 5.8 </span> (Gradient of log-sum-exp)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(h : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+h(\bx) = \ln \left ( \sum_{i=1}^n \exp x_i \right )
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom h = \RR^n\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(g(y) = \ln y\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \sum_{i=1}^n \exp x_i
+\]</div>
+<p>Then, we can see that <span class="math notranslate nohighlight">\(h(\bx) = g (f (\bx))\)</span>.
+Now <span class="math notranslate nohighlight">\(g'(y) = \frac{1}{y}\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\nabla f(\bx) = \begin{bmatrix}
+\exp x_1 \\ 
+\vdots \\
+\exp x_n
+\end{bmatrix}.
+\end{split}\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\nabla h(\bx) = \frac{1}{\sum_{i=1}^n \exp x_i} 
+\begin{bmatrix}
+\exp x_1 \\ 
+\vdots \\
+\exp x_n
+\end{bmatrix}.
+\end{split}\]</div>
+<p>Now, if we define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bz = \begin{bmatrix}
+\exp x_1 \\ 
+\vdots \\
+\exp x_n
+\end{bmatrix}
+\end{split}\]</div>
+<p>then, we see that:</p>
+<div class="math notranslate nohighlight">
+\[
+\bone^T \bz = \sum_{i=1}^n \exp x_i.
+\]</div>
+<p>Using this notation:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla h(\bx) = \frac{1}{\bone^T \bz} \bz.
+\]</div>
+</div>
+</div><div class="proof corollary admonition" id="res-mvc-chain-rule-affine-composition">
+<p class="admonition-title"><span class="caption-number">Corollary 5.2 </span> (Chain rule for composition with affine function)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f : \RR^n \to \RR^m\)</span> is differentiable.
+Let <span class="math notranslate nohighlight">\(\bA \in \RR^{n \times p}\)</span> and <span class="math notranslate nohighlight">\(\bb \in \RR^n\)</span>.
+Define <span class="math notranslate nohighlight">\(g : \RR^p \to \RR^m\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+g(\bx) = f(\bA \bx + \bb)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom g = \{ \bx \ST \bA \bx + \bb \in \dom f \}\)</span>.</p>
+<p>The derivative of <span class="math notranslate nohighlight">\(g\)</span> at <span class="math notranslate nohighlight">\(\bx \in \interior \dom g\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+Dg(\bx) = Df(\bA \bx + \bb) A.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is real valued (i.e. <span class="math notranslate nohighlight">\(m=1\)</span>), then
+the gradient of a composition of a function
+with an affine function is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla g(\bx) = \bA^T \nabla f(\bA \bx + \bb).
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-f-rest-line-chain-rule">
+<p class="admonition-title"><span class="caption-number">Example 5.9 </span> (Chain rule for restriction on a line)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a real valued differentiable
+function. Consider the restriction of <span class="math notranslate nohighlight">\(f\)</span> on a line
+in its domain</p>
+<div class="math notranslate nohighlight">
+\[
+g(t) = f(\bx + t \bv)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span> and <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>
+with the domain</p>
+<div class="math notranslate nohighlight">
+\[
+\dom g = \{t \ST \bx + t \bv \in \dom f\}.
+\]</div>
+<p>If we define <span class="math notranslate nohighlight">\(h : \RR \to \RR^n\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+h(t) = \bx + t \bv;
+\]</div>
+<p>we can see that:</p>
+<div class="math notranslate nohighlight">
+\[
+g(t) = f(h(t))
+\]</div>
+<p>By chain rule:</p>
+<div class="math notranslate nohighlight">
+\[
+g'(t) = Df(h(t)) Dh(t) = \nabla f(h(t))^T \bv 
+= \nabla f(\bx + t \bv)^T \bv.
+\]</div>
+<p>In particular, if <span class="math notranslate nohighlight">\(\bv = \by - \bx\)</span>, with <span class="math notranslate nohighlight">\(\by \in \dom f\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+g'(t) = \nabla f(\bx + t (\by -\bx) )^T (\by - \bx)
+= \nabla f(t \by + (1-t) \bx)^T (\by - \bx).
+\]</div>
+</div>
+</div></div>
+<div class="section" id="hessian">
+<h2><span class="section-number">5.1.4. </span>Hessian<a class="headerlink" href="#hessian" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we review the second derivative
+of a real valued function <span class="math notranslate nohighlight">\(f: \RR^n \to \RR\)</span>.</p>
+<div class="proof definition admonition" id="def-mvp-hessian">
+<p class="admonition-title"><span class="caption-number">Definition 5.7 </span> (Hessian)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>second derivative</em> or <em>Hessian matrix</em>
+of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(\bx \in \interior \dom f\)</span>, denoted by
+<span class="math notranslate nohighlight">\(\nabla^2 f\)</span>, is given by:</p>
+<div class="math notranslate nohighlight">
+\[\nabla^2 f(\bx)_{i j} = \frac{\partial^2 f(\bx)}{\partial x_i \partial x_j}, i=1,\dots,n \quad j=1,\dots,n\]</div>
+<p>provided <span class="math notranslate nohighlight">\(f\)</span> is twice differentiable at <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-hessian-linear-functional">
+<p class="admonition-title"><span class="caption-number">Example 5.10 </span> (Hessian of linear functional)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a linear functional given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \langle \bx, \ba \rangle = \ba^T \bx.
+\]</div>
+<p>We can expand it as:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \sum_{j=1}^n a_j x_j.
+\]</div>
+<p>Computing partial derivative with respect to <span class="math notranslate nohighlight">\(x_i\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f(\bx)}{\partial x_i} 
+= \frac{\partial }{\partial x_i}\left (\sum_{j=1}^n a_j x_j \right )
+= a_i.
+\]</div>
+<p>If we further compute the partial derivative w.r.t. <span class="math notranslate nohighlight">\(x_j\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial^2 f(\bx)}{\partial x_i \partial x_j} 
+= \frac{\partial a_i}{\partial x_j}
+= 0.
+\]</div>
+<p>Thus, the Hessian is an <span class="math notranslate nohighlight">\(n \times n\)</span> 0 matrix:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f(\bx) = \ZERO_n.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-mvc-hessian-derivative-gradient">
+<p class="admonition-title"><span class="caption-number">Theorem 5.2 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Hessian is the derivative of the gradient mapping.</p>
+<div class="math notranslate nohighlight">
+\[
+D \nabla f(\bx) = \nabla^2 f(\bx).
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-hessian-quadratic-form">
+<p class="admonition-title"><span class="caption-number">Example 5.11 </span> (Hessian of quadratic form)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a quadratic form given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \bx^T \bA \bx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bA \in \RR^{n \times n}\)</span>.</p>
+<p>Recall from <a class="reference internal" href="#ex-mvc-gradient-quadratic-form">Example 5.6</a>
+that:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(\bx)  = (\bA^T  + \bA) \bx.
+\]</div>
+<p>Also recall from <a class="reference internal" href="#ex-mvc-derivative-linear-map">Example 5.2</a>
+that</p>
+<div class="math notranslate nohighlight">
+\[
+D (\bC \bx) = \bC 
+\]</div>
+<p>for all <span class="math notranslate nohighlight">\(\bC \in \RR^{m \times n}\)</span>.</p>
+<p>Thus, using <a class="reference internal" href="#res-mvc-hessian-derivative-gradient">Theorem 5.2</a></p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f(\bx)  
+= D \nabla f(\bx) 
+= D ((\bA^T  + \bA) \bx)
+= \bA^T  + \bA.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\bA\)</span> is symmetric then</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f(\bx) = 2 \bA.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-hessian-log-sum-exp">
+<p class="admonition-title"><span class="caption-number">Example 5.12 </span> (Hessian of log-sum-exp)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \ln \left ( \sum_{i=1}^n e^{x_i} \right )
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \RR^n\)</span>.</p>
+<p>Define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bz = \begin{bmatrix}
+e^{x_1} \\ 
+\vdots \\
+e^{x_n}
+\end{bmatrix}
+\end{split}\]</div>
+<p>then, we see that:</p>
+<div class="math notranslate nohighlight">
+\[
+\bone^T \bz = \sum_{i=1}^n e^{x_i}.
+\]</div>
+<p>Using this notation:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \ln \left (\bone^T \bz \right).
+\]</div>
+<p>We have:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial z_i}{\partial x_i} 
+= \frac{\partial}{\partial x_i} e^{x_i}
+= e^{x_i} = z_i.
+\]</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial z_j}{\partial x_i} = 0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span>.
+Now,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{\partial }{\partial x_i} f(\bx)
+&amp;= \frac{\partial}{\partial z_i} \ln \left (\bone^T \bz \right) \cdot \frac{\partial z_i}{\partial x_i} \\
+&amp;= \frac{1}{\bone^T \bz}\frac{\partial}{\partial z_i} \bone^T \bz \cdot z_i \\
+&amp;= \frac{1}{\bone^T \bz} z_i.
+\end{split}\]</div>
+<p>Proceeding to compute the second derivatives:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{\partial^2 }{\partial x_i \partial x_j} f(\bx)
+&amp;= \frac{\partial }{\partial x_i} \left (\frac{1}{\bone^T \bz} z_j \right )\\
+&amp;= \frac{\partial }{\partial z_i} \left (\frac{1}{\bone^T \bz} z_j \right ) \cdot \frac{\partial z_i}{\partial x_i} \\
+&amp;= \frac{\bone^T \bz \delta_{i j} - z_j}{(\bone^T \bz)^2} \cdot z_i\\
+&amp;= \frac{\bone^T \bz \delta_{i j} z_i - z_i z_j}{(\bone^T \bz)^2}\\
+&amp;=\frac{\delta_{i j} z_i}{\bone^T \bz} - \frac{z_i z_j}{(\bone^T \bz)^2}.
+\end{split}\]</div>
+<p>Now, note that <span class="math notranslate nohighlight">\((\bz \bz^T)_{i j} = z_i z_j\)</span>.
+And, <span class="math notranslate nohighlight">\((\Diag (\bz))_{i j} = \delta_{ i j} z_i \)</span>.</p>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f(\bx) = \frac{1}{\bone^T \bz} \Diag (\bz) - \frac{1}{(\bone^T \bz)^2} \bz \bz^T.
+\]</div>
+<p>Alternatively,</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f(\bx) = \frac{1}{(\bone^T \bz)^2} \left ((\bone^T \bz) \Diag (\bz) - \bz \bz^T \right ).
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-derivatives-ls-cost-func">
+<p class="admonition-title"><span class="caption-number">Example 5.13 </span> (Derivatives for least squares cost function)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \RR^{m \times n}\)</span>. Let <span class="math notranslate nohighlight">\(\bb \in \RR^n\)</span>.
+Consider the least squares cost function:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \frac{1}{2} \| \bA \bx - \bb \|_2^2.  
+\]</div>
+<p>Expanding it, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \frac{1}{2} \bx^T \bA^T \bA \bx - \bb^T \bA \bx + \frac{1}{2} \bb^T \bb. 
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\bA^T \bA\)</span> is symmetric. Using previous results,
+we obtain the gradient:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(\bx) = \bA^T \bA \bx - \bA^T \bb.
+\]</div>
+<p>And the Hessian is:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 f(\bx) = D \nabla f (\bx) = \bA^T \bA.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-mvc-derivatives-quad-lin-func">
+<p class="admonition-title"><span class="caption-number">Example 5.14 </span> (Derivatives for quadratic over linear function)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \times \RR \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x, y) = \frac{x^2}{y}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\dom f = \{ (x, y) \ST y &gt; 0\}\)</span>.</p>
+<p>The gradient is obtained by computing the partial derivatives
+w.r.t. <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\nabla f(x,y) = \begin{bmatrix}
+\frac{2x}{y}\\
+\frac{-x^2}{y^2}
+\end{bmatrix}.
+\end{split}\]</div>
+<p>The Hessian is obtained by computing second order partial
+derivatives:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\nabla^2 f(x, y) = \begin{bmatrix}
+\frac{2}{y} &amp; \frac{-2 x}{y^2}\\
+\frac{-2 x}{y^2} &amp; \frac{2 x^2}{y^3} 
+\end{bmatrix}
+= \frac{2}{y^3} \begin{bmatrix}
+y^2 &amp; - x y\\
+- x y &amp; x^2
+\end{bmatrix}.
+\end{split}\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-mvp-snd-ord-approx">
+<p class="admonition-title"><span class="caption-number">Definition 5.8 </span> (Second order approximation)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>second order approximation</em> of <span class="math notranslate nohighlight">\(f\)</span> at or near <span class="math notranslate nohighlight">\(\bx=\ba\)</span>
+is the quadratic function defined by:</p>
+<div class="math notranslate nohighlight">
+\[\hat{f} (\bx) = f(\ba) + \nabla f(\ba)^T (\bx - \ba)
++ \frac{1}{2} (\bx - \ba)^T \nabla^2 f(\ba) (\bx - \ba).\]</div>
+</div>
+</div></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./mv_calculus"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chapter.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">5. </span>Multivariate Calculus</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../convex_sets/intro.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Convex Sets and Functions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

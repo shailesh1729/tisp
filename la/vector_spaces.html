@@ -1,0 +1,2727 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.2. Vector Spaces &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.3. Linear Transformations" href="transformations.html" />
+    <link rel="prev" title="4.1. Matrices" href="matrices.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.9. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   4. Linear Algebra
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="important_spaces.html">
+     4.8. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequence_spaces.html">
+     4.9. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="affine.html">
+     4.10. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     6.9. Subgradients
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   7. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   8. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   9. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   10. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     11.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     11.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   12. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   13. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   14. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     14.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/la/vector_spaces.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fla/vector_spaces.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algebraic-structures">
+   4.2.1. Algebraic Structures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#groups">
+     4.2.1.1. Groups
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#commutative-groups">
+     4.2.1.2. Commutative groups
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rings">
+     4.2.1.3. Rings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fields">
+     4.2.1.4. Fields
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   4.2.2. Vector Spaces
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#n-tuples">
+     4.2.2.1. N-Tuples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrices">
+     4.2.2.2. Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polynomials">
+     4.2.2.3. Polynomials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vector-space-identities">
+     4.2.2.4. Vector Space Identities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-independence">
+   4.2.3. Linear Independence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#span">
+   4.2.4. Span
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basis">
+   4.2.5. Basis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dimension">
+   4.2.6. Dimension
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ordered-basis">
+   4.2.7. Ordered Basis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subspaces">
+   4.2.8. Subspaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#direct-sum-of-vector-spaces">
+   4.2.9. Direct Sum of Vector Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sets-in-vector-spaces">
+   4.2.10. Sets in Vector Spaces
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-arithmetic">
+     4.2.10.1. Set Arithmetic
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#symmetry">
+     4.2.10.2. Symmetry
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-arithmetic-properties">
+     4.2.10.3. Set Arithmetic Properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#direct-sums">
+     4.2.10.4. Direct Sums
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sums-of-subspaces">
+   4.2.11. Sums of Subspaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-vector-spaces">
+   4.2.12. Real Vector Spaces
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Vector Spaces</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algebraic-structures">
+   4.2.1. Algebraic Structures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#groups">
+     4.2.1.1. Groups
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#commutative-groups">
+     4.2.1.2. Commutative groups
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rings">
+     4.2.1.3. Rings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fields">
+     4.2.1.4. Fields
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   4.2.2. Vector Spaces
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#n-tuples">
+     4.2.2.1. N-Tuples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrices">
+     4.2.2.2. Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polynomials">
+     4.2.2.3. Polynomials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vector-space-identities">
+     4.2.2.4. Vector Space Identities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-independence">
+   4.2.3. Linear Independence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#span">
+   4.2.4. Span
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basis">
+   4.2.5. Basis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dimension">
+   4.2.6. Dimension
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ordered-basis">
+   4.2.7. Ordered Basis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subspaces">
+   4.2.8. Subspaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#direct-sum-of-vector-spaces">
+   4.2.9. Direct Sum of Vector Spaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sets-in-vector-spaces">
+   4.2.10. Sets in Vector Spaces
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-arithmetic">
+     4.2.10.1. Set Arithmetic
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#symmetry">
+     4.2.10.2. Symmetry
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-arithmetic-properties">
+     4.2.10.3. Set Arithmetic Properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#direct-sums">
+     4.2.10.4. Direct Sums
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sums-of-subspaces">
+   4.2.11. Sums of Subspaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-vector-spaces">
+   4.2.12. Real Vector Spaces
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="vector-spaces">
+<span id="sec-la-vector-spaces"></span><h1><span class="section-number">4.2. </span>Vector Spaces<a class="headerlink" href="#vector-spaces" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="algebraic-structures">
+<span id="sec-la-algebraic-structure"></span><h2><span class="section-number">4.2.1. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Permalink to this headline">¶</a></h2>
+<p>In mathematics, the term <em>algebraic structure</em> refers to an arbitrary set
+with one or more operations defined on it.</p>
+<ul class="simple">
+<li><p>Simpler algebraic structures include groups, rings, and fields.</p></li>
+<li><p>More complex algebraic structures like vector spaces are built
+on top of the simpler structures.</p></li>
+</ul>
+<p>We will develop the notion of vector spaces as a progression
+of these algebraic structures.</p>
+<div class="section" id="groups">
+<h3><span class="section-number">4.2.1.1. </span>Groups<a class="headerlink" href="#groups" title="Permalink to this headline">¶</a></h3>
+<p>A group is a set with a single binary operation. It is one of the simplest
+algebraic structures.</p>
+<div class="proof definition admonition" id="def-la-group">
+<p class="admonition-title"><span class="caption-number">Definition 4.9 </span> (Group)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(G\)</span> be a set.
+Let <span class="math notranslate nohighlight">\(* : G \times G \to G\)</span> be a binary operation
+defined on <span class="math notranslate nohighlight">\(G\)</span> mapping <span class="math notranslate nohighlight">\((g_1, g_2) \to * (g_1, g_2)\)</span> and denoted as</p>
+<div class="math notranslate nohighlight">
+\[
+* (g_1, g_2)\triangleq g_1 * g_2.
+\]</div>
+<p>If the binary operation <span class="math notranslate nohighlight">\(*\)</span> satisfies the following properties:</p>
+<ol>
+<li><p>[Closure] The set <span class="math notranslate nohighlight">\(G\)</span> is closed under the binary operation <span class="math notranslate nohighlight">\(*\)</span>. i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+   \forall g_1, g_2 \in G, g_1 * g_2 \in G.
+   \]</div>
+</li>
+<li><p>[Associativity] For every <span class="math notranslate nohighlight">\(g_1, g_2, g_3 \in G\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   g_1 * (g_2 * g_3) = (g_1 * g_2) * g_3
+   \]</div>
+</li>
+<li><p>[Identity element] There exists an element <span class="math notranslate nohighlight">\(e \in G\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   g * e = e * g = g \quad \forall g \in G
+   \]</div>
+</li>
+<li><p>[Inverse element] For every <span class="math notranslate nohighlight">\(g \in G\)</span> there exists an
+element <span class="math notranslate nohighlight">\(g^{-1} \in G\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   g * g^{-1} = g^{-1} * g = e
+   \]</div>
+</li>
+</ol>
+<p>then the set <span class="math notranslate nohighlight">\(G\)</span> together with the operator <span class="math notranslate nohighlight">\(*\)</span> denoted
+as <span class="math notranslate nohighlight">\((G, *)\)</span> is known as a <em>group</em>.</p>
+</div>
+</div><p>Above properties are known as <em>group axioms</em>.
+Note that commutativity is not a requirement of a group.</p>
+<div class="proof remark admonition" id="remark-1">
+<p class="admonition-title"><span class="caption-number">Remark 4.1 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Frequently, the group operation is the regular mathematical
+addition. In those cases, we write <span class="math notranslate nohighlight">\(g_1 * g_2\)</span> as <span class="math notranslate nohighlight">\(g_1 + g_2\)</span>.
+Otherwise, we will write <span class="math notranslate nohighlight">\(g_1 * g_2\)</span> as <span class="math notranslate nohighlight">\(g_1 g_2\)</span>.</p>
+<p>Often, we may simply write a group <span class="math notranslate nohighlight">\((G, *)\)</span> as <span class="math notranslate nohighlight">\(G\)</span>
+when the underlying operation <span class="math notranslate nohighlight">\(*\)</span> is
+clear from the context.</p>
+</div>
+</div></div>
+<div class="section" id="commutative-groups">
+<h3><span class="section-number">4.2.1.2. </span>Commutative groups<a class="headerlink" href="#commutative-groups" title="Permalink to this headline">¶</a></h3>
+<p>A commutative group is a richer structure than a group. Its
+elements also satisfy the commutativity property.</p>
+<div class="proof definition admonition" id="def-la-commutative-group">
+<p class="admonition-title"><span class="caption-number">Definition 4.10 </span> (Commutative group)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((G, *)\)</span> be a group such that its binary operation <span class="math notranslate nohighlight">\(*\)</span>
+satisfies an additional property:</p>
+<ol>
+<li><p>[Commutativity] For every <span class="math notranslate nohighlight">\(g_1, g_2 \in G\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   g_1 g_2 = g_2 g_1 
+   \]</div>
+</li>
+</ol>
+<p>Then <span class="math notranslate nohighlight">\((G,*)\)</span> is known as a <em>commutative group</em>
+or an <em>Abelian group</em>.</p>
+</div>
+</div></div>
+<div class="section" id="rings">
+<h3><span class="section-number">4.2.1.3. </span>Rings<a class="headerlink" href="#rings" title="Permalink to this headline">¶</a></h3>
+<p>A ring is a set with two binary operations defined over it
+with some properties as described below.</p>
+<div class="proof definition admonition" id="def-la-associative-ring">
+<span id="def-alg-associative-ring"></span><p class="admonition-title"><span class="caption-number">Definition 4.11 </span> (Associative ring)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(R\)</span> be a set with two binary operations
+<span class="math notranslate nohighlight">\(+ : R \times R \to R\)</span> (addition) mapping <span class="math notranslate nohighlight">\((r_1, r_2) \mapsto  r_1 + r_2\)</span>
+and
+<span class="math notranslate nohighlight">\(\cdot : R \times R \to R\)</span> (multiplication) mapping <span class="math notranslate nohighlight">\((r_1, r_2) \mapsto  r_1 \cdot r_2\)</span>
+such that <span class="math notranslate nohighlight">\((R, +, \cdot)\)</span> satisfies following properties:</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\((R, +)\)</span> is a commutative group.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R\)</span> is closed under multiplication.</p>
+<div class="math notranslate nohighlight">
+\[
+   r_1 \cdot r_2 \in R \quad \forall r_1, r_2 \in R
+   \]</div>
+</li>
+<li><p>Multiplication is associative.</p>
+<div class="math notranslate nohighlight">
+\[
+   r_1 \cdot (r_2 \cdot r_3) = (r_1 \cdot r_2) \cdot r_3 \quad \forall r_1, r_2, r_3 \in R
+   \]</div>
+</li>
+<li><p>Multiplication distributes over addition.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+        &amp;r_1 \cdot (r_2 + r_3) = (r_1 \cdot r_2) + (r_1 \cdot r_3) \quad \forall r_1, r_2, r_3 \in R\\
+        &amp;(r_1 + r_2) \cdot r_3 = (r_1 \cdot r_3) + (r_2 \cdot r_3) \quad \forall r_1, r_2, r_3 \in R
+    \end{aligned}
+   \end{split}\]</div>
+</li>
+</ol>
+<p>Then, <span class="math notranslate nohighlight">\((R, +, \cdot)\)</span> is known as an <em>associative ring</em>.
+We denote the identity element for <span class="math notranslate nohighlight">\(+\)</span> as <span class="math notranslate nohighlight">\(0\)</span> and call it additive identity.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-4">
+<p class="admonition-title"><span class="caption-number">Remark 4.2 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>In the sequel we will write <span class="math notranslate nohighlight">\(r_1 \cdot r_2\)</span> as <span class="math notranslate nohighlight">\(r_1 r_2\)</span>.
+We may simply write a ring <span class="math notranslate nohighlight">\((R, +, \cdot)\)</span> as <span class="math notranslate nohighlight">\(R\)</span> when
+the underlying operations <span class="math notranslate nohighlight">\(+,\cdot\)</span> are
+clear from the context.</p>
+</div>
+</div><p>There is a hierarchy of ring like structures. In particular we mention:</p>
+<ol class="simple">
+<li><p>Associative ring with identity</p></li>
+<li><p>Field</p></li>
+</ol>
+<div class="proof definition admonition" id="def-la-associative-ring-identity">
+<p class="admonition-title"><span class="caption-number">Definition 4.12 </span> (Associative ring with identity)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((R, +, \cdot)\)</span> be an associate ring with the property that
+there exists an element <span class="math notranslate nohighlight">\(1 \in R\)</span> (known as multiplicative identity) such that</p>
+<div class="math notranslate nohighlight">
+\[
+1 \cdot r = r \cdot 1 = r \quad \forall r \in R.
+\]</div>
+<p>Then <span class="math notranslate nohighlight">\((R, +, \cdot)\)</span> is known as an <em>associative ring with identity</em>.</p>
+</div>
+</div></div>
+<div class="section" id="fields">
+<h3><span class="section-number">4.2.1.4. </span>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h3>
+<p>Field is the richest algebraic structure on one set with two operations.</p>
+<div class="proof definition admonition" id="def-la-field">
+<p class="admonition-title"><span class="caption-number">Definition 4.13 </span> (Field)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(F\)</span> be a set with two binary operations
+<span class="math notranslate nohighlight">\(+: F \times F \to F\)</span> (addition) mapping <span class="math notranslate nohighlight">\((x_1, x_2) \mapsto  x_1 + x_2\)</span>
+and <span class="math notranslate nohighlight">\(\cdot: F \times F \to F\)</span> (multiplication) mapping <span class="math notranslate nohighlight">\((x_1, x_2) \mapsto  x_1 \cdot x_2\)</span>
+such that <span class="math notranslate nohighlight">\((F, +, \cdot)\)</span> satisfies following properties:</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\((F, +)\)</span> is a commutative group (with additive identity as <span class="math notranslate nohighlight">\(0 \in F\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\((F \setminus \{0\}, \cdot)\)</span> is a commutative group (with multiplicative identity as <span class="math notranslate nohighlight">\(1 \in F\)</span>).</p></li>
+<li><p>Multiplication distributes over addition:</p>
+<div class="math notranslate nohighlight">
+\[
+    \alpha \cdot (\beta + \gamma) = (\alpha \cdot \beta) + (\alpha \cdot \gamma) \quad \forall \alpha, \beta, \gamma \in F
+   \]</div>
+</li>
+</ol>
+<p>Then <span class="math notranslate nohighlight">\((F, +, \cdot)\)</span> is known as a <em>field</em>.</p>
+</div>
+</div><p>The definition above implies a number of properties. For any <span class="math notranslate nohighlight">\(a,b,c \in F\)</span>, we have:</p>
+<ul class="simple">
+<li><p>Closure: <span class="math notranslate nohighlight">\(a + b \in F\)</span>, <span class="math notranslate nohighlight">\(a b \in F\)</span>.</p></li>
+<li><p>Associativity of addition and multiplication: <span class="math notranslate nohighlight">\(a + (b + c) = (a + b) + c\)</span> and <span class="math notranslate nohighlight">\(a (b c) = (a b) c\)</span>.</p></li>
+<li><p>Commutativity of addition and multiplication: <span class="math notranslate nohighlight">\(a + b = b + a\)</span> and <span class="math notranslate nohighlight">\(a b = b a \)</span>.</p></li>
+<li><p>Additive identity: <span class="math notranslate nohighlight">\(0 + a = a + 0 = a\)</span>.</p></li>
+<li><p>Multiplicative identity: <span class="math notranslate nohighlight">\(1 a = a 1 = a\)</span>.</p></li>
+<li><p>Additive inverses: <span class="math notranslate nohighlight">\(a + (-a) = (-a) + a = 0\)</span>.</p></li>
+<li><p>Multiplicative inverses for every <span class="math notranslate nohighlight">\(a \neq 0\)</span>: <span class="math notranslate nohighlight">\( a a^{-1} = a^{-1} a  = 1\)</span>.</p></li>
+<li><p>Distributivity: <span class="math notranslate nohighlight">\(a ( b + c) = (a b) + (a c)\)</span>.</p></li>
+</ul>
+<div class="proof example admonition" id="example-7">
+<p class="admonition-title"><span class="caption-number">Example 4.1 </span> (Examples of fields)</p>
+<div class="example-content section" id="proof-content">
+<ul class="simple">
+<li><p>The set of real numbers <span class="math notranslate nohighlight">\(\RR\)</span> is a field.</p></li>
+<li><p>The set of complex numbers <span class="math notranslate nohighlight">\(\CC\)</span> is a field.</p></li>
+<li><p>The Galois field GF-2 is the the set <span class="math notranslate nohighlight">\(\{ 0, 1 \}\)</span> with modulo-2 additions and multiplications.</p></li>
+</ul>
+</div>
+</div></div>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">4.2.2. </span>Vector Spaces<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>We are now ready to define a vector space.
+A vector space involves two sets.
+One set <span class="math notranslate nohighlight">\(\VV\)</span> contains the vectors.
+The other set <span class="math notranslate nohighlight">\(\FF\)</span> (a field) contains scalars
+which are used to scale the vectors.</p>
+<div class="proof definition admonition" id="def-la-vector-space">
+<p class="admonition-title"><span class="caption-number">Definition 4.14 </span> (Vector space)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(\VV\)</span> is called a <em>vector space</em> over the field <span class="math notranslate nohighlight">\(\FF\)</span>
+(or a <span class="math notranslate nohighlight">\(\FF\)</span>-vector space) if there exist two mappings:</p>
+<ul class="simple">
+<li><p>Vector addition: <span class="math notranslate nohighlight">\(+ : \VV \times \VV \to \VV\)</span> mapping <span class="math notranslate nohighlight">\((\bv_1, \bv_2) \to  \bv_1 + \bv_2\)</span>
+for any <span class="math notranslate nohighlight">\(\bv_1, \bv_2 \in \VV\)</span> to another vector in <span class="math notranslate nohighlight">\(\VV\)</span> denoted by <span class="math notranslate nohighlight">\(\bv_1 + \bv_2\)</span></p></li>
+<li><p>Scalar multiplication: <span class="math notranslate nohighlight">\(\cdot : \FF \times \VV \to \VV\)</span> mapping
+<span class="math notranslate nohighlight">\((\alpha, \bv) \to  \alpha \cdot \bv\)</span> with <span class="math notranslate nohighlight">\(\alpha \in \FF\)</span> and <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>
+to another vector in <span class="math notranslate nohighlight">\(\VV\)</span> denoted by <span class="math notranslate nohighlight">\(\alpha \cdot \bv\)</span> or just <span class="math notranslate nohighlight">\(\alpha \bv\)</span></p></li>
+</ul>
+<p>which satisfy following requirements:</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\((\VV, +)\)</span> is a commutative group.</p></li>
+<li><p>Scalar multiplication <span class="math notranslate nohighlight">\(\cdot\)</span> distributes over vector addition <span class="math notranslate nohighlight">\(+\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \alpha (\bv_1 + \bv_2) = \alpha \bv_1 + \alpha \bv_2 \quad \forall \alpha \in \FF; \forall \bv_1, \bv_2 \in \VV.
+   \]</div>
+</li>
+<li><p>Addition in <span class="math notranslate nohighlight">\(\FF\)</span> distributes over scalar multiplication <span class="math notranslate nohighlight">\(\cdot\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   ( \alpha + \beta) \bv = (\alpha \bv) + (\beta \bv) \quad \forall \alpha, \beta \in \FF; \forall \bv \in \VV.
+   \]</div>
+</li>
+<li><p>Multiplication in <span class="math notranslate nohighlight">\(\FF\)</span> commutes over scalar multiplication:</p>
+<div class="math notranslate nohighlight">
+\[
+    (\alpha \beta)  \cdot \bv = \alpha \cdot (\beta \cdot \bv) = \beta  \cdot (\alpha \cdot \bv) = (\beta \alpha) \cdot \bv
+        \quad \forall \alpha, \beta \in \FF; \forall \bv \in \VV.
+   \]</div>
+</li>
+<li><p>Scalar multiplication from multiplicative identity <span class="math notranslate nohighlight">\(1 \in \FF\)</span> satisfies the following:</p>
+<div class="math notranslate nohighlight">
+\[
+    1 \bv = \bv \quad \forall \bv \in \VV.
+   \]</div>
+</li>
+</ol>
+</div>
+</div><p>Some remarks are in order:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\VV\)</span> as defined above is also known as a <span class="math notranslate nohighlight">\(\FF\)</span> vector space.</p></li>
+<li><p>Elements of <span class="math notranslate nohighlight">\(\VV\)</span> are known as vectors.</p></li>
+<li><p>Elements of <span class="math notranslate nohighlight">\(\FF\)</span> are known as scalars.</p></li>
+<li><p>There are two <span class="math notranslate nohighlight">\(0\)</span>s involved: <span class="math notranslate nohighlight">\(0 \in \FF\)</span> and <span class="math notranslate nohighlight">\(\bzero \in \VV\)</span>.
+It should be clear from context which <span class="math notranslate nohighlight">\(0\)</span> is being referred to.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bzero \in \VV\)</span> is known as the zero vector.</p></li>
+<li><p>All vectors in <span class="math notranslate nohighlight">\(\VV \setminus \{\bzero\}\)</span> are non-zero vectors.</p></li>
+<li><p>We will typically denote elements of <span class="math notranslate nohighlight">\(\FF\)</span> by <span class="math notranslate nohighlight">\(\alpha, \beta, \dots\)</span>.</p></li>
+<li><p>We will typically denote elements of <span class="math notranslate nohighlight">\(\VV\)</span> by <span class="math notranslate nohighlight">\(\bv_1, \bv_2, \dots\)</span>.</p></li>
+</ul>
+<p>We quickly look at some vector spaces which will appear again and again in our discussions.</p>
+<div class="section" id="n-tuples">
+<h3><span class="section-number">4.2.2.1. </span>N-Tuples<a class="headerlink" href="#n-tuples" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="def-la-n-tuple-vector-space">
+<p class="admonition-title"><span class="caption-number">Example 4.2 </span> (<span class="math notranslate nohighlight">\(n\)</span>-tuples as a vector space)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\FF\)</span> be some field.
+The set of all <span class="math notranslate nohighlight">\(n\)</span>-tuples <span class="math notranslate nohighlight">\((a_1, a_2, \dots, a_n)\)</span>
+with <span class="math notranslate nohighlight">\(a_1, a_2, \dots, a_n \in \FF\)</span>
+is denoted as <span class="math notranslate nohighlight">\(\FF^n\)</span>.
+This is a vector space over <span class="math notranslate nohighlight">\(\FF\)</span>
+with the operations of coordinate-wise
+addition and scalar multiplication.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bu, \bv \in \FF^n\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[
+    \bu = (u_1, \dots, u_n)
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \bv = (v_1, \dots, v_n).
+\]</div>
+<p>Vector addition is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\bu + \bv \triangleq (u_1 + v_1,  \dots, u_n + v_n).
+\]</div>
+<p>The zero vector is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\bzero = (0, \dots, 0).
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(c \in \FF\)</span>. Scalar multiplication is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+    c \bu \triangleq (c u_1, \dots, c u_n).
+\]</div>
+<p><span class="math notranslate nohighlight">\(\bu, \bv\)</span> are called equal if <span class="math notranslate nohighlight">\(u_1 = v_1, \dots, u_n = v_n\)</span>.</p>
+<p>In matrix notation, vectors in <span class="math notranslate nohighlight">\(\FF^n\)</span> can also be
+written as row vectors:</p>
+<div class="math notranslate nohighlight">
+\[
+\bu = \begin{bmatrix} u_1 &amp; \dots &amp; u_n \end{bmatrix}
+\]</div>
+<p>or column vectors:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bu = \begin{bmatrix} u_1 \\ \vdots \\ u_n \end{bmatrix}.
+\end{split}\]</div>
+<p>We next verify that <span class="math notranslate nohighlight">\(\FF^n\)</span> equipped with the
+vector addition and scalar multiplication defined
+above satisfies all the properties of a vector space.
+Let us assume <span class="math notranslate nohighlight">\(\bx, \by, \bz \in \FF^n\)</span> and
+<span class="math notranslate nohighlight">\(\alpha, \beta, \gamma \in \FF\)</span>.</p>
+<p>We can now verify all the properties of the vector space:</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\FF^n\)</span> is closed under vector addition.</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \by = (x_1 + y_1, \dots, x_n + y_n).
+   \]</div>
+<p>Since <span class="math notranslate nohighlight">\(x_i + y_i \in \FF\)</span>, hence <span class="math notranslate nohighlight">\(\bx + \by \in \FF^n\)</span>.</p>
+</li>
+<li><p>Vector addition is associative.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \bx + (\by + \bz) 
+   &amp;= (x_1, \dots, x_n) + ((y_1, \dots, y_n) + (z_1, \dots, z_n))\\ 
+   &amp;= (x_1, \dots, x_n) + (y_1 + z_1, \dots, y_n + z_n)\\
+   &amp;= (x_1 + (y_1 + z_1), \dots, x_n + (y_n + z_n))\\
+   &amp;= ((x_1 + y_1) + z_1, \dots, (x_n + y_n) + z_n)\\
+   &amp;= (x_1+y_1, \dots, x_n + y_n) + (z_1, \dots, z_n)\\
+   &amp;= ((x_1, \dots, x_n) + (y_1, \dots, y_n)) + (z_1, \dots, z_n)\\
+   &amp;= (\bx + \by) + \bz.
+   \end{split}\]</div>
+</li>
+<li><p>Vector addition is commutative.</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \by = (x_1 + y_1, \dots, x_n + y_n)
+   = (y_1 + x_1, \dots, y_n + x_n)
+   = \by + \bx .
+   \]</div>
+</li>
+<li><p>Additive identity:</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \bzero =  (x_1, \dots, x_n) + (0, \dots, 0) = (x_1, \dots, x_n) = \bx.
+   \]</div>
+<p>Since commutativity is already established, hence:</p>
+<div class="math notranslate nohighlight">
+\[
+   \bzero + \bx = \bx + \bzero = \bx.
+   \]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bzero\)</span> is the additive identity element.</p>
+</li>
+<li><p>Additive inverse: Let</p>
+<div class="math notranslate nohighlight">
+\[
+   \bu = (-x_1, \dots, -x_n).
+   \]</div>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \bu = (x_1, \dots, x_n) + (-x_1, \dots, -x_n)
+   = (x_1 + (-x_1), \dots, x_n + (-x_n)) 
+   = (0, \dots, 0) = \bzero.
+   \]</div>
+<p>By commutativity <span class="math notranslate nohighlight">\(\bu + \bx = \bx + \bu = \bzero\)</span>.
+Thus, every vector has an additive inverse.
+We can write <span class="math notranslate nohighlight">\(\bu = -\bx\)</span>.</p>
+</li>
+<li><p>Scalar multiplication distributes over vector addition.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \alpha (\bx + \by) 
+   &amp;= \alpha (x_1 + y_1, \dots, x_n + y_n) \\
+   &amp;= (\alpha (x_1 + y_1), \dots, \alpha (x_n + y_n))\\
+   &amp;= (\alpha x_1 + \alpha y_1, \dots, \alpha x_n + \alpha y_n)\\
+   &amp;= (\alpha x_1, \dots, \alpha x_n) + (\alpha y_1, \dots, \alpha y_n)\\
+   &amp;= \alpha (x_1, \dots, x_n) + \alpha (y_1, \dots, y_n)\\
+   &amp;= \alpha \bx + \alpha \by.
+   \end{split}\]</div>
+</li>
+<li><p>Addition in <span class="math notranslate nohighlight">\(\FF\)</span> distributes over scalar multiplication.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   (\alpha + \beta) \bx 
+   &amp;= (\alpha + \beta) (x_1, \dots, x_n)\\
+   &amp;=  ((\alpha + \beta) x_1, \dots, (\alpha + \beta)x_n)\\
+   &amp;=  (\alpha x_1 + \beta x_1, \dots, \alpha x_n + \beta x_n)\\
+   &amp;=  (\alpha x_1, \dots, \alpha x_n) + (\beta x_1, \dots, \beta x_n)\\
+   &amp;= \alpha \bx + \beta \bx.
+   \end{split}\]</div>
+</li>
+<li><p>Multiplication commutes over scalar multiplication:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   (\alpha \beta) \bx 
+   &amp;= (\alpha \beta) (x_1, \dots, x_n)\\  
+   &amp;= ((\alpha \beta)x_1, \dots, (\alpha \beta)x_n)\\
+   &amp;= (\alpha (\beta x_1), \dots, \alpha (\beta x_n))\\
+   &amp;= \alpha (\beta x_1, \dots, \beta x_n)\\
+   &amp;= \alpha (\beta (x_1, \dots, x_n))\\
+   &amp;= \alpha (\beta \bx).
+   \end{split}\]</div>
+<p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[
+   (\alpha \beta) \bx = (\beta \alpha) \bx = \beta (\alpha \bx).
+   \]</div>
+</li>
+<li><p>Scalar multiplication from multiplicative identity of <span class="math notranslate nohighlight">\(\FF\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+   1 \bx = 1 (x_1, \dots, x_n) = (x_1, \dots, x_n) = \bx.
+   \]</div>
+</li>
+</ol>
+<p>Thus, <span class="math notranslate nohighlight">\(\FF^n\)</span> supports all the properties of a vector space.
+It is indeed a vector space.</p>
+</div>
+</div><div class="proof example admonition" id="ex-field-is-vector-space">
+<p class="admonition-title"><span class="caption-number">Example 4.3 </span> (A field is a vector space)</p>
+<div class="example-content section" id="proof-content">
+<p>A field of scalars <span class="math notranslate nohighlight">\(\FF\)</span> is a vector space over <span class="math notranslate nohighlight">\(\FF\)</span>
+in its own right. One way to see this is by
+treating the scalar as a tuple with one value
+(i.e., 1-tuple). So, we can write it as <span class="math notranslate nohighlight">\(\FF^1\)</span>.</p>
+<p>The real line <span class="math notranslate nohighlight">\(\RR\)</span> is a vector space in its own
+right as <span class="math notranslate nohighlight">\(\RR^1\)</span>.
+Similarly, the complex plane <span class="math notranslate nohighlight">\(\CC\)</span> is a vector space.</p>
+<p>More formally, let <span class="math notranslate nohighlight">\(\VV = \FF\)</span>. We will call
+the element of <span class="math notranslate nohighlight">\(\VV\)</span> as vectors and elements
+of <span class="math notranslate nohighlight">\(\FF\)</span> as scalars.</p>
+<ol>
+<li><p>For every <span class="math notranslate nohighlight">\(x \in \FF\)</span>, let <span class="math notranslate nohighlight">\(\bx\)</span> be corresponding
+vector in <span class="math notranslate nohighlight">\(\VV\)</span> with <span class="math notranslate nohighlight">\(\bx = x\)</span>.</p></li>
+<li><p>Define vector addition on <span class="math notranslate nohighlight">\(\VV\)</span> as as the corresponding
+addition in the field <span class="math notranslate nohighlight">\(\FF\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \by = x + y \Forall \bx, \by \in \VV.
+   \]</div>
+</li>
+<li><p>Define scalar multiplication on <span class="math notranslate nohighlight">\(\VV\)</span> as the corresponding
+multiplication in the field <span class="math notranslate nohighlight">\(\FF\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \alpha \bx = \alpha x \Forall \alpha \in \FF and \bx \in \VV.
+   \]</div>
+</li>
+<li><p>Define zero vector as <span class="math notranslate nohighlight">\(0 \in \FF\)</span>: <span class="math notranslate nohighlight">\(\bzero = 0\)</span>.</p></li>
+</ol>
+<p>We can now verify all the properties of the vector space:</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\VV\)</span> is closed under vector addition. Let <span class="math notranslate nohighlight">\(\bx + \by \in \VV\)</span>.
+Then, <span class="math notranslate nohighlight">\(\bx + \by = x + y\)</span>. Since <span class="math notranslate nohighlight">\(x + y \in \FF\)</span>, hence
+<span class="math notranslate nohighlight">\(\bx + \by \in \VV\)</span>.</p></li>
+<li><p>Vector addition is associative.
+For every <span class="math notranslate nohighlight">\(\bx, \by, \bz \in \VV\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + (\by + \bz) = x + (y + z) = (x + y) + z 
+   = (\bx + \by) + \bz.
+   \]</div>
+</li>
+<li><p>Vector addition is commutative.</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \by = x + y = y + x = \by + \bx.
+   \]</div>
+</li>
+<li><p>For every <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>,</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+  \bx + \bzero =  x + 0 = x = \bx = x = 0 + x = \bzero + \bx.
+  \]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bzero\)</span> is the additive identity element.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>. Define <span class="math notranslate nohighlight">\(\by = -x\)</span>.
+Since <span class="math notranslate nohighlight">\(-x \in \FF\)</span>, hence <span class="math notranslate nohighlight">\(\by \in \VV\)</span>.
+Now,</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \by = x + (-x) = 0 = \bzero.
+   \]</div>
+<p>Thus, every vector has an additive inverse.</p>
+</li>
+<li><p>Scalar multiplication distributes over vector addition.
+Let <span class="math notranslate nohighlight">\(\alpha \in \FF\)</span> and <span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+   \alpha (\bx + \by) = \alpha (x + y) = \alpha x + \alpha y
+   = \alpha \bx + \alpha \by.
+   \]</div>
+</li>
+<li><p>Addition in <span class="math notranslate nohighlight">\(\FF\)</span> distributes over scalar multiplication.
+Let <span class="math notranslate nohighlight">\(\alpha, \beta \in \FF\)</span> and <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+   (\alpha + \beta) \bx = (\alpha + \beta) x 
+   = \alpha x + \beta x = \alpha \bx + \beta \bx.
+   \]</div>
+</li>
+<li><p>Multiplication commutes over scalar multiplication:</p>
+<div class="math notranslate nohighlight">
+\[
+   (\alpha \beta) \bx = (\alpha \beta) x  
+   = \alpha (\beta x) = \alpha (\beta \bx).
+   \]</div>
+</li>
+<li><p>Scalar multiplication from multiplicative identity of <span class="math notranslate nohighlight">\(\FF\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+   1 \bx = 1 x = x = \bx.
+   \]</div>
+</li>
+</ol>
+<p>Thus, <span class="math notranslate nohighlight">\(\VV=\FF\)</span> satisfies all requirements of being
+a vector space. It is indeed a vector space in its
+own right.</p>
+</div>
+</div></div>
+<div class="section" id="matrices">
+<h3><span class="section-number">4.2.2.2. </span>Matrices<a class="headerlink" href="#matrices" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="def-la-matrix-vector-space">
+<p class="admonition-title"><span class="caption-number">Example 4.4 </span> (Matrices)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\FF\)</span> be some field. A matrix is an array of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{bmatrix}
+    a_{11} &amp; a_{12} &amp; \dots &amp; a_{1N} \\
+    a_{21} &amp; a_{22} &amp; \dots &amp; a_{2N} \\
+    \vdots &amp; \vdots &amp; \ddots &amp;  \vdots \\
+    a_{M 1} &amp; a_{M 2} &amp; \dots &amp; a_{MN} \\
+    \end{bmatrix}
+\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(M\)</span> rows and <span class="math notranslate nohighlight">\(N\)</span> columns where <span class="math notranslate nohighlight">\(a_{ij} \in \FF\)</span>.</p>
+<p>The set of these matrices is denoted as <span class="math notranslate nohighlight">\(\FF^{M \times N}\)</span> which is a vector space with
+operations of matrix addition and scalar multiplication.</p>
+<p>Let <span class="math notranslate nohighlight">\(A, B \in \FF^{M \times N}\)</span>. Matrix addition is defined by</p>
+<div class="math notranslate nohighlight">
+\[
+    (A + B)_{ij} \triangleq A_{ij} + B_{ij}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(c \in \FF\)</span>. Scalar multiplication is defined by</p>
+<div class="math notranslate nohighlight">
+\[
+    (cA)_{ij} \triangleq c A_{ij}.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="polynomials">
+<h3><span class="section-number">4.2.2.3. </span>Polynomials<a class="headerlink" href="#polynomials" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="def-la-polynomial-vector-space">
+<p class="admonition-title"><span class="caption-number">Example 4.5 </span> (Polynomials)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\FF[x]\)</span> denote the set of all polynomials with coefficients drawn from
+field <span class="math notranslate nohighlight">\(\FF\)</span>. i.e. if <span class="math notranslate nohighlight">\(f(x) \in \FF[x]\)</span>, then it can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+    f(x) = a_n x^n + a_{n-1}x^{n -1} + \dots + a_1 x + a_0
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_i \in \FF\)</span>.</p>
+<p>The set <span class="math notranslate nohighlight">\(\FF[x]\)</span> is a vector space with usual operations of addition and scalar multiplication</p>
+<div class="math notranslate nohighlight">
+\[
+    f(x) + g(x) = (a_n + b_n)x^n + \dots + (a_1 + b_1 ) x + (a_0 + b_0).
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    c f(x) = c a_n x^n + \dots + c a_1 x + c a_0.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="vector-space-identities">
+<h3><span class="section-number">4.2.2.4. </span>Vector Space Identities<a class="headerlink" href="#vector-space-identities" title="Permalink to this headline">¶</a></h3>
+<p>Some useful identities are presented here.</p>
+<div class="proof theorem admonition" id="theorem-13">
+<p class="admonition-title"><span class="caption-number">Theorem 4.3 </span> (Uniqueness of additive identity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>The <span class="math notranslate nohighlight">\(\bzero\)</span> vector in a vector space <span class="math notranslate nohighlight">\(\VV\)</span> is unique.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume that there is another vector <span class="math notranslate nohighlight">\(\bo\)</span> satisfying</p>
+<div class="math notranslate nohighlight">
+\[
+\bv + \bo = \bo + \bv = \bv \Forall \bv \in \VV.
+\]</div>
+<p>Then, in particular, it satisfies: <span class="math notranslate nohighlight">\(\bzero + \bo = \bzero\)</span>.
+At the same time, we have <span class="math notranslate nohighlight">\(\bo = \bo + \bzero\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\bzero = \bzero + \bo = \bo + \bzero = \bo.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bzero\)</span> is unique.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-vs-cancellation-law">
+<p class="admonition-title"><span class="caption-number">Theorem 4.4 </span> (Cancellation law)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(\FF\)</span> vector space.
+Let <span class="math notranslate nohighlight">\(\bx, \by, \bz\)</span> be some vectors in <span class="math notranslate nohighlight">\(\VV\)</span> such that
+<span class="math notranslate nohighlight">\(\bx + \bz = \by + \bz\)</span>.
+Then <span class="math notranslate nohighlight">\(\bx = \by\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\bz \in \VV\)</span>, there exists an additive inverse <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> such that
+<span class="math notranslate nohighlight">\(\bz + \bv = \bzero\)</span>.</p>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \bx + \bzero = \bx + (\bz + \bv) = (\bx + \bz) + \bv = (\by + \bz) + \bv 
+= \by + (\bz + \bv)  = \by + \bzero = \by.
+\]</div>
+</div>
+<div class="proof corollary admonition" id="corollary-15">
+<p class="admonition-title"><span class="caption-number">Corollary 4.1 </span> (Uniqueness of additive inverse)</p>
+<div class="corollary-content section" id="proof-content">
+<p>The additive inverse of a vector <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\VV\)</span> is unique.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\by\)</span> and <span class="math notranslate nohighlight">\(\bz\)</span> be additive inverses of <span class="math notranslate nohighlight">\(\bx\)</span>. Then,
+we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\bx + \by = \bzero = \bx + \bz.
+\]</div>
+<p>By cancellation law, <span class="math notranslate nohighlight">\(\by = \bz\)</span>.</p>
+<p>Thus, the additive inverse of a vector is unique.</p>
+</div>
+<div class="proof theorem admonition" id="theorem-16">
+<p class="admonition-title"><span class="caption-number">Theorem 4.5 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>In a vector space <span class="math notranslate nohighlight">\(\VV\)</span> the following statements are true</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(0 \bx = \bzero \Forall \bx \in \VV\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(a \bzero = \bzero \Forall a \in \FF\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((-a)\bx = - (a \bx) = a(- \bx) \Forall a \in \FF \text{ and } \bx \in \VV\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. (1) <span class="math notranslate nohighlight">\(0 \bx = \bzero \Forall \bx \in \VV\)</span>.</p>
+<p>By distributive law:</p>
+<div class="math notranslate nohighlight">
+\[
+0 \bx =  (0 + 0) \bx = 0 \bx + 0 \bx.
+\]</div>
+<p>By existence of zero vector:</p>
+<div class="math notranslate nohighlight">
+\[
+0 \bx = \bzero + 0 \bx.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+0 \bx = 0 \bx + 0 \bx = \bzero + 0 \bx.
+\]</div>
+<p>Now, by cancellation law:</p>
+<div class="math notranslate nohighlight">
+\[
+0 \bx = \bzero.
+\]</div>
+<p>(2) <span class="math notranslate nohighlight">\(a \bzero = \bzero \Forall a \in \FF\)</span>.</p>
+<p>Due to additive identity and distribution law:</p>
+<div class="math notranslate nohighlight">
+\[
+a \bzero = a (\bzero + \bzero) = a \bzero + a \bzero.
+\]</div>
+<p>Due to additive identity:</p>
+<div class="math notranslate nohighlight">
+\[
+a \bzero = \bzero + a \bzero.
+\]</div>
+<p>Combining</p>
+<div class="math notranslate nohighlight">
+\[
+a \bzero + a \bzero = \bzero + a \bzero. 
+\]</div>
+<p>Now applying the cancellation law, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+a \bzero = \bzero. 
+\]</div>
+<p>(3) <span class="math notranslate nohighlight">\((-a)\bx = - (a \bx) = a(- \bx) \Forall a \in \FF \text{ and } \bx \in \VV\)</span>.</p>
+<p>We start with</p>
+<div class="math notranslate nohighlight">
+\[
+\bzero = 0 \bx = (a + (-a)) \bx = a \bx + (-a)\bx.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\((-a)\bx\)</span> is the additive inverse of <span class="math notranslate nohighlight">\(a \bx\)</span>. Thus, <span class="math notranslate nohighlight">\( (-a)\bx =  -(a\bx)\)</span>.</p>
+<p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[
+\bzero = a \bzero = a (\bx + (-\bx)) = a \bx + a (-\bx).
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(a (-\bx)\)</span> is also additive inverse of <span class="math notranslate nohighlight">\(a \bx\)</span>. Thus, <span class="math notranslate nohighlight">\(a (-\bx) = - (a \bx)\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="linear-independence">
+<h2><span class="section-number">4.2.3. </span>Linear Independence<a class="headerlink" href="#linear-independence" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-linear-combination">
+<p class="admonition-title"><span class="caption-number">Definition 4.15 </span> (Linear combination)</p>
+<div class="definition-content section" id="proof-content">
+<p>A <em>linear combination</em> of two vectors <span class="math notranslate nohighlight">\(\bv_1, \bv_2 \in \VV\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+      \alpha \bv_1 + \beta \bv_2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha, \beta \in \FF\)</span>.</p>
+<p>A <em>linear combination</em> of <span class="math notranslate nohighlight">\(p\)</span> vectors <span class="math notranslate nohighlight">\(\bv_1,\dots, \bv_p \in \VV\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+      \sum_{i=1}^{p} \alpha_i \bv_i
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_i \in \FF\)</span>.</p>
+</div>
+</div><p>Note that a linear combination <em>always</em> consists of a <em>finite</em> number of vectors.</p>
+<div class="proof definition admonition" id="def-la-linear-combination-2">
+<p class="admonition-title"><span class="caption-number">Definition 4.16 </span> (Linear combination vector)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space and let <span class="math notranslate nohighlight">\(S\)</span> be a nonempty subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+A vector <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> is called
+a <em>linear combination</em> of vectors of <span class="math notranslate nohighlight">\(S\)</span>
+if there exist a finite number of vectors
+<span class="math notranslate nohighlight">\(\bs_1, \bs_2, \dots, \bs_n \in S\)</span> and scalars
+<span class="math notranslate nohighlight">\(a_1, \dots, a_N\)</span> in <span class="math notranslate nohighlight">\(\FF\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    \bv = a_1 \bs_1 + a_2 \bs_2 + \dots a_n \bs_n.
+\]</div>
+<p>We also say that <span class="math notranslate nohighlight">\(v\)</span> is a linear combination of
+<span class="math notranslate nohighlight">\(\bs_1, \bs_2, \dots, \bs_n\)</span> and <span class="math notranslate nohighlight">\(a_1, a_2, \dots, a_n\)</span>
+are the coefficients of linear combination.</p>
+</div>
+</div><div class="proof definition admonition" id="definition-19">
+<p class="admonition-title"><span class="caption-number">Definition 4.17 </span> (Trivial linear combination)</p>
+<div class="definition-content section" id="proof-content">
+<p>A linear combination <span class="math notranslate nohighlight">\(a_1 \bs_1 + a_2 \bs_2 + \dots a_n \bs_n\)</span>
+is called <em>trivial</em> if <span class="math notranslate nohighlight">\(a_1 = a_2 = \dots = a_n = 0\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\bzero\)</span> is a trivial linear combination of any subset of <span class="math notranslate nohighlight">\(\VV\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+    \bzero = 0 \bs_1 + 0 \bs_2 + \dots 0 \bs_n.
+\]</div>
+</div>
+</div><p>A linear combination may refer to the expression itself or its value.
+e.g. two different linear combinations may have same value.</p>
+<div class="proof definition admonition" id="def-la-linearly-dependent">
+<p class="admonition-title"><span class="caption-number">Definition 4.18 </span> (Linear dependence)</p>
+<div class="definition-content section" id="proof-content">
+<p>A finite set of non-zero vectors
+<span class="math notranslate nohighlight">\(\{\bv_1, \cdots, \bv_p\} \subset \VV\)</span> is called <em>linearly dependent</em> if
+there exist <span class="math notranslate nohighlight">\(\alpha_1,\dots,\alpha_p \in \FF\)</span> not all <span class="math notranslate nohighlight">\(0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^{p} \alpha_i \bv_i = \bzero.
+\]</div>
+</div>
+</div><p>Since <span class="math notranslate nohighlight">\(\alpha_i\)</span> are not all zero, hence, it is a non-trivial combination.</p>
+<div class="proof definition admonition" id="def-la-linearly-dependent-set">
+<p class="admonition-title"><span class="caption-number">Definition 4.19 </span> (Linearly dependent set)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span> is called <em>linearly dependent</em> if
+there exist a finite number of distinct
+vectors <span class="math notranslate nohighlight">\(\bu_1, \bu_2, \dots, \bu_n \in S\)</span>
+and scalars <span class="math notranslate nohighlight">\(a_1, a_2, \dots, a_n \in \FF\)</span> not all zero,
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+    a_1 \bu_1 + a_2 \bu_2 + \dots + a_n \bu_n = \bzero.
+\]</div>
+</div>
+</div><p>In other words, there exists a non-trivial linear
+combination which equals <span class="math notranslate nohighlight">\(\bzero\)</span>.</p>
+<div class="proof definition admonition" id="def-la-linearly-independent-set">
+<p class="admonition-title"><span class="caption-number">Definition 4.20 </span> (Linearly independent set)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span> is called
+<em>linearly independent</em> if it is not linearly dependent.</p>
+</div>
+</div><div class="proof definition admonition" id="def-la-linearly-independent-vectors">
+<p class="admonition-title"><span class="caption-number">Definition 4.21 </span> (Linearly independent vectors)</p>
+<div class="definition-content section" id="proof-content">
+<p>More specifically a finite set of non-zero vectors
+<span class="math notranslate nohighlight">\(\{\bv_1, \dots, \bv_n\} \subset \VV\)</span> is called
+<em>linearly independent</em> if</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^{n} \alpha_i \bv_i = 0 \implies \alpha_i  = \bzero \Forall 1 \leq i \leq n.
+\]</div>
+</div>
+</div><p>In other words, the only linear combination giving us <span class="math notranslate nohighlight">\(\bzero\)</span> vector
+is the trivial linear combination.</p>
+<div class="proof example admonition" id="example-24">
+<p class="admonition-title"><span class="caption-number">Example 4.6 </span> (Examples of linearly dependent and independent sets)</p>
+<div class="example-content section" id="proof-content">
+<ul class="simple">
+<li><p>The empty set is linearly independent.</p></li>
+<li><p>A set of a single non-zero vector <span class="math notranslate nohighlight">\(\{\bv\}\)</span> is always linearly independent. Prove!</p></li>
+<li><p>If two vectors are linearly dependent, we say that they are <em>collinear</em>.</p></li>
+<li><p>Alternatively if two vectors are linearly independent, we say that they are not <em>collinear</em>.</p></li>
+<li><p>If a set <span class="math notranslate nohighlight">\(\{\bv_1, \dots, \bv_p\}\)</span> is linearly independent,
+then any subset of it will be linearly independent. Prove!</p></li>
+<li><p>Adding another vector <span class="math notranslate nohighlight">\(\bv\)</span> to the set may make it linearly dependent. When?</p></li>
+<li><p>It is possible to have an infinite set to be linearly independent.
+Consider the set of polynomials <span class="math notranslate nohighlight">\(\{1, x, x^2, x^3, \dots\}\)</span>.
+This set is infinite, yet linearly independent.</p></li>
+</ul>
+</div>
+</div><div class="proof theorem admonition" id="theorem-25">
+<p class="admonition-title"><span class="caption-number">Theorem 4.6 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space. Let <span class="math notranslate nohighlight">\(S_1 \subseteq S_2 \subseteq \VV\)</span>.
+If <span class="math notranslate nohighlight">\(S_1\)</span> is linearly dependent,
+then <span class="math notranslate nohighlight">\(S_2\)</span> is linearly dependent.</p>
+</div>
+</div><div class="proof corollary admonition" id="corollary-26">
+<p class="admonition-title"><span class="caption-number">Corollary 4.2 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space.
+Let <span class="math notranslate nohighlight">\(S_1 \subseteq S_2 \subseteq \VV\)</span>.
+If <span class="math notranslate nohighlight">\(S_2\)</span> is linearly independent,
+then <span class="math notranslate nohighlight">\(S_1\)</span> is linearly independent.</p>
+</div>
+</div></div>
+<div class="section" id="span">
+<h2><span class="section-number">4.2.4. </span>Span<a class="headerlink" href="#span" title="Permalink to this headline">¶</a></h2>
+<p>Vectors can be combined to form other vectors.
+It makes sense to consider the set of all vectors which
+can be created by combining a given set of vectors.</p>
+<div class="proof definition admonition" id="def-la-span">
+<p class="admonition-title"><span class="caption-number">Definition 4.22 </span> (Span)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S \subset \VV\)</span> be a subset of vectors.
+The <em>span</em> of <span class="math notranslate nohighlight">\(S\)</span> denoted as <span class="math notranslate nohighlight">\(\langle S \rangle\)</span> or <span class="math notranslate nohighlight">\(\span S\)</span>
+is the
+set of all possible linear combinations of vectors belonging to <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\span S = \langle S \rangle \triangleq
+\{ \bv \in \VV \ST \bv = \sum_{i=1}^{p} \alpha_i \bv_i
+\quad \text{for some} \quad \bv_i \in S;\; \alpha_i \in \FF; \; p \in \mathbb{N}\}
+\]</div>
+<p>For convenience we define <span class="math notranslate nohighlight">\(\span \EmptySet = \{ \bzero\}\)</span>.</p>
+</div>
+</div><p>Span of a finite set of vectors
+<span class="math notranslate nohighlight">\(\{\bv_1, \cdots, \bv_p\}\)</span> is denoted by
+<span class="math notranslate nohighlight">\(\langle \bv_1, \cdots, \bv_p \rangle\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bv_1, \cdots, \bv_p \rangle = \left \{\sum_{i=1}^{p} \alpha_i \bv_i \ST \alpha_i \in \FF \right \}.
+\]</div>
+<p>We say that a set of vectors <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span>
+spans <span class="math notranslate nohighlight">\(\VV\)</span> if <span class="math notranslate nohighlight">\(\langle S \rangle = \VV\)</span>.</p>
+<div class="proof proposition admonition" id="proposition-28">
+<p class="admonition-title"><span class="caption-number">Proposition 4.1 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span>, then <span class="math notranslate nohighlight">\(\Span (S) \subseteq \VV\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="definition-29">
+<p class="admonition-title"><span class="caption-number">Definition 4.23 </span> (Spanning a vector space)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S \subset \VV\)</span>. We say that <span class="math notranslate nohighlight">\(S\)</span> <em>spans (or generates)</em> <span class="math notranslate nohighlight">\(\VV\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[
+\langle S \rangle = \VV.
+\]</div>
+<p>In this case we also say that vectors of <span class="math notranslate nohighlight">\(S\)</span> span (or generate) <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="theorem-30">
+<p class="admonition-title"><span class="caption-number">Theorem 4.7 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S\)</span> be a linearly independent subset of a vector space <span class="math notranslate nohighlight">\(\VV\)</span>
+and let <span class="math notranslate nohighlight">\(\bv \in \VV \setminus S\)</span>.
+Then <span class="math notranslate nohighlight">\(S \cup \{ v \}\)</span> is linearly dependent
+if and only if <span class="math notranslate nohighlight">\( v \in \Span(S)\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="basis">
+<h2><span class="section-number">4.2.5. </span>Basis<a class="headerlink" href="#basis" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-basis">
+<p class="admonition-title"><span class="caption-number">Definition 4.24 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A set of linearly independent vectors <span class="math notranslate nohighlight">\(\BBB\)</span> is called a
+<em>basis</em> of <span class="math notranslate nohighlight">\(\VV\)</span> if <span class="math notranslate nohighlight">\(\langle \BBB \rangle = \VV\)</span>;
+i.e., <span class="math notranslate nohighlight">\(\BBB\)</span> spans <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="def-la-standard-basis">
+<p class="admonition-title"><span class="caption-number">Example 4.7 </span> (Basis examples)</p>
+<div class="example-content section" id="proof-content">
+<ul class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(\Span(\EmptySet) = \{ \bzero \}\)</span>
+and <span class="math notranslate nohighlight">\(\EmptySet\)</span> is linearly independent,
+<span class="math notranslate nohighlight">\(\EmptySet\)</span> is a basis for the zero vector space <span class="math notranslate nohighlight">\(\{ 0 \}\)</span>.</p></li>
+<li><p>The basis <span class="math notranslate nohighlight">\(\{ \be_1, \dots, \be_N\}\)</span> with <span class="math notranslate nohighlight">\(\be_1 = (1, 0, \dots, 0)\)</span>,
+<span class="math notranslate nohighlight">\(\be_2 = (0, 1, \dots, 0)\)</span>, <span class="math notranslate nohighlight">\(\dots\)</span>, <span class="math notranslate nohighlight">\(\be_N = (0, 0, \dots, 1)\)</span>,
+is called the <em>standard basis</em> for <span class="math notranslate nohighlight">\(\FF^N\)</span>.</p></li>
+<li><p>The set <span class="math notranslate nohighlight">\(\{1, x, x^2, x^3, \dots\}\)</span> is the
+<em>standard basis</em> for <span class="math notranslate nohighlight">\(\FF[x]\)</span>.
+Indeed, an infinite basis.
+Note that though the basis itself is infinite,
+yet every polynomial <span class="math notranslate nohighlight">\(p \in \FF[x]\)</span>
+is a linear combination of finite number of elements from the basis.</p></li>
+</ul>
+</div>
+</div><p>We review some properties of bases.</p>
+<div class="proof theorem admonition" id="res-la-basis-characterization-unique-rep">
+<p class="admonition-title"><span class="caption-number">Theorem 4.8 </span> (Unique representation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space and
+<span class="math notranslate nohighlight">\(\BBB = \{ \bv_1, \bv_2, \dots, \bv_n\}\)</span> be a subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then <span class="math notranslate nohighlight">\(\BBB\)</span> is a basis for <span class="math notranslate nohighlight">\(\VV\)</span> if and only if
+each <span class="math notranslate nohighlight">\(v \in \VV\)</span> can be uniquely
+expressed as a linear combination of vectors of <span class="math notranslate nohighlight">\(\BBB\)</span>.
+In other words:</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = a_1 \bv_1 + a_2 \bv_2  + \dots + a_n \bv_n
+\]</div>
+<p>for unique scalars <span class="math notranslate nohighlight">\(a_1, \dots, a_n\)</span>.</p>
+</div>
+</div><p>This theorem states that a basis <span class="math notranslate nohighlight">\(\BBB\)</span> provides a unique representation
+to each vector <span class="math notranslate nohighlight">\(v \in \VV\)</span> where the representation is defined as the <span class="math notranslate nohighlight">\(n\)</span>-tuple
+<span class="math notranslate nohighlight">\((a_1, a_2, \dots, a_n)\)</span>.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Assume that each <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> can be expressed uniquely as a linear
+combination of vectors of <span class="math notranslate nohighlight">\(\BBB\)</span>.</p>
+<ol class="simple">
+<li><p>Then <span class="math notranslate nohighlight">\(\bzero\)</span> is a unique linear combination of <span class="math notranslate nohighlight">\(\BBB\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(\bzero = 0 \bv_1 + \dots + 0 \bv_n\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\BBB\)</span> is linearly independent.</p></li>
+<li><p>Also, <span class="math notranslate nohighlight">\(\BBB\)</span> spans <span class="math notranslate nohighlight">\(\VV\)</span> since every vector can be expressed as a linear combination.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\BBB\)</span> is a basis.</p></li>
+</ol>
+<p>Assume that <span class="math notranslate nohighlight">\(\BBB\)</span> is a basis for <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<ol>
+<li><p>Then, <span class="math notranslate nohighlight">\(\BBB\)</span> is linearly independent and <span class="math notranslate nohighlight">\(\BBB\)</span> spans <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv = \sum_{i=1}^n a_i \bv_i\)</span> and <span class="math notranslate nohighlight">\(\bv = \sum_{i=1}^n b_i \bv_i\)</span>
+be two different representations of <span class="math notranslate nohighlight">\(\bv\)</span> in <span class="math notranslate nohighlight">\(\BBB\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp;\sum_{i=1}^n a_i \bv_i = \sum_{i=1}^n b_i \bv_i\\
+   &amp;\iff \sum_{i=1}^n (a_i - b_i) \bv_i = 0.
+   \end{split}\]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(\BBB\)</span> is linearly independent.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(a_i - b_i = 0\)</span> for <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(a_i = b_i\)</span> for <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>.</p></li>
+<li><p>Hence, every <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> has a unique representation as a linear combination of <span class="math notranslate nohighlight">\(\BBB\)</span>.</p></li>
+</ol>
+</div>
+<p>If the basis is infinite, then the above theorem needs to be modified as follows:</p>
+<div class="proof theorem admonition" id="res-la-infinite-basis-characterization-unique-rep">
+<p class="admonition-title"><span class="caption-number">Theorem 4.9 </span> (Unique representation for infinite basis)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space and <span class="math notranslate nohighlight">\(\BBB\)</span> be a subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then <span class="math notranslate nohighlight">\(\BBB\)</span> is a basis for <span class="math notranslate nohighlight">\(\VV\)</span>
+if and only if each <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> can be uniquely
+expressed as a linear combination of vectors of <span class="math notranslate nohighlight">\(\BBB\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \bv = a_1 \bv_1 + a_2 \bv_2  + \dots + a_n \bv_n
+\]</div>
+<p>for unique scalars <span class="math notranslate nohighlight">\(a_1, \dots, a_n\)</span>
+and unique vectors <span class="math notranslate nohighlight">\(\bv_1, \bv_2, \dots \bv_n \in \BBB\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-finite-basis">
+<p class="admonition-title"><span class="caption-number">Theorem 4.10 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>If a vector space <span class="math notranslate nohighlight">\(\VV\)</span> is spanned by a finite set <span class="math notranslate nohighlight">\(S\)</span>,
+then some subset of <span class="math notranslate nohighlight">\(S\)</span> is a basis
+for <span class="math notranslate nohighlight">\(\VV\)</span>. Hence <span class="math notranslate nohighlight">\(\VV\)</span> has a finite basis.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-replacement-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 4.11 </span> (Replacement theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space that is spanned by a set <span class="math notranslate nohighlight">\(G\)</span>
+containing exactly <span class="math notranslate nohighlight">\(n\)</span> vectors.
+Let <span class="math notranslate nohighlight">\(L\)</span> be a linearly independent subset of <span class="math notranslate nohighlight">\(\VV\)</span>
+containing exactly <span class="math notranslate nohighlight">\(m\)</span> vectors.</p>
+<p>Then <span class="math notranslate nohighlight">\(m \leq n\)</span> and there exists a subset <span class="math notranslate nohighlight">\(H\)</span> of <span class="math notranslate nohighlight">\(G\)</span>
+containing exactly <span class="math notranslate nohighlight">\(n-m\)</span> vectors
+such that <span class="math notranslate nohighlight">\(L \cup H\)</span> spans <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+</div><div class="proof corollary admonition" id="corollary-37">
+<p class="admonition-title"><span class="caption-number">Corollary 4.3 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space having a finite basis.
+Then, every basis for <span class="math notranslate nohighlight">\(\VV\)</span> contains
+the same number of vectors.</p>
+</div>
+</div></div>
+<div class="section" id="dimension">
+<h2><span class="section-number">4.2.6. </span>Dimension<a class="headerlink" href="#dimension" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-dimension">
+<p class="admonition-title"><span class="caption-number">Definition 4.25 </span> (Dimension of vector space)</p>
+<div class="definition-content section" id="proof-content">
+<p>A vector space <span class="math notranslate nohighlight">\(\VV\)</span> is called <em>finite-dimensional</em>
+if it has a basis
+consisting of a finite number of vectors.
+This unique number of vectors in any basis
+<span class="math notranslate nohighlight">\(\BBB\)</span> of the vector space <span class="math notranslate nohighlight">\(\VV\)</span>
+is called the <em>dimension</em> or <em>dimensionality</em> of the vector space.
+It is denoted as <span class="math notranslate nohighlight">\(\dim \VV\)</span>. We say:</p>
+<div class="math notranslate nohighlight">
+\[
+\dim \VV \triangleq |\BBB|
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\VV\)</span> is not finite-dimensional,
+then we say that <span class="math notranslate nohighlight">\(\VV\)</span> is <em>infinite-dimensional</em>.</p>
+</div>
+</div><div class="proof example admonition" id="example-39">
+<p class="admonition-title"><span class="caption-number">Example 4.8 </span> (Vector space dimensions)</p>
+<div class="example-content section" id="proof-content">
+<ul class="simple">
+<li><p>Dimension of <span class="math notranslate nohighlight">\(\FF^N\)</span> is <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+<li><p>Dimension of <span class="math notranslate nohighlight">\(\FF^{M \times N}\)</span> is <span class="math notranslate nohighlight">\(MN\)</span>.</p></li>
+<li><p>The vector space of polynomials <span class="math notranslate nohighlight">\(\FF[x]\)</span> is infinite dimensional.</p></li>
+</ul>
+</div>
+</div><div class="proof proposition admonition" id="proposition-40">
+<p class="admonition-title"><span class="caption-number">Proposition 4.2 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space with dimension <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<ol class="simple">
+<li><p>Any finite spanning set for <span class="math notranslate nohighlight">\(\VV\)</span> contains at least <span class="math notranslate nohighlight">\(n\)</span> vectors,
+and a spanning set that contains exactly <span class="math notranslate nohighlight">\(n\)</span> vectors is a basis for <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>Any linearly independent subset of <span class="math notranslate nohighlight">\(\VV\)</span> that contains exactly <span class="math notranslate nohighlight">\(n\)</span> vectors
+is a basis for <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>Every linearly independent subset of <span class="math notranslate nohighlight">\(\VV\)</span> can be extended to a basis for <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+</ol>
+</div>
+</div></div>
+<div class="section" id="ordered-basis">
+<h2><span class="section-number">4.2.7. </span>Ordered Basis<a class="headerlink" href="#ordered-basis" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-ordered-basis">
+<p class="admonition-title"><span class="caption-number">Definition 4.26 </span> (Ordered basis)</p>
+<div class="definition-content section" id="proof-content">
+<p>For a finite dimensional vector space <span class="math notranslate nohighlight">\(\VV\)</span>, an <em>ordered basis</em>
+is a basis for <span class="math notranslate nohighlight">\(\VV\)</span> with a specific order. In other words,
+it is a finite <em>sequence</em> (or tuple) of linearly independent vectors in
+<span class="math notranslate nohighlight">\(\VV\)</span> that spans <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+</div><p>Typically, we will write an ordered basis as
+<span class="math notranslate nohighlight">\(\BBB  = \{ \bv_1, \bv_2, \dots, \bv_n\}\)</span>
+and assume that the basis vectors are ordered
+in the order they appear.</p>
+<p>With the help of an ordered basis,
+we can define a coordinate vector.</p>
+<div class="proof definition admonition" id="def-la-coordinate-vector">
+<p class="admonition-title"><span class="caption-number">Definition 4.27 </span> (Coordinate vector)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\BBB  = \{ \bv_1, \dots, \bv_n\}\)</span> be an ordered basis for <span class="math notranslate nohighlight">\(\VV\)</span>.
+For any <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>,
+let <span class="math notranslate nohighlight">\(\alpha_1, \dots, \alpha_n\)</span> be unique scalars such that</p>
+<div class="math notranslate nohighlight">
+\[
+    x = \sum_{i=1}^n \alpha_i \bv_i.
+\]</div>
+<p>The <em>coordinate vector</em> of <span class="math notranslate nohighlight">\(\bx\)</span> relative to <span class="math notranslate nohighlight">\(\BBB\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    [\bx]_{\BBB} = \begin{bmatrix}
+    \alpha_1\\
+    \vdots\\
+    \alpha_n
+    \end{bmatrix}.
+\end{split}\]</div>
+</div>
+</div></div>
+<div class="section" id="subspaces">
+<h2><span class="section-number">4.2.8. </span>Subspaces<a class="headerlink" href="#subspaces" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-subspace">
+<p class="admonition-title"><span class="caption-number">Definition 4.28 </span> (Subspace)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\WW\)</span> be a subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then <span class="math notranslate nohighlight">\(\WW\)</span> is called a <em>subspace</em> if <span class="math notranslate nohighlight">\(\WW\)</span> is a vector space
+in its own right under the same vector addition <span class="math notranslate nohighlight">\(+\)</span>
+and scalar multiplication <span class="math notranslate nohighlight">\(\cdot\)</span> operations. i.e.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+  + : &amp;\WW \times \WW \to \WW\\
+      &amp;(\bw_1, \bw_2) \to  \bw_1 + \bw_2 \quad \bw_1, \bw_2 \in \WW
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+  \cdot : &amp;\FF \times \WW \to \WW\\
+      &amp;(\alpha, \bw) \to  \alpha \cdot \bw  \triangleq \alpha \bw \quad \alpha \in \FF; \bw \in \WW
+\end{aligned}
+\end{split}\]</div>
+<p>are defined by restricting <span class="math notranslate nohighlight">\(+ : \VV \times \VV \to \VV\)</span>
+and <span class="math notranslate nohighlight">\(\cdot : \VV \times \VV \to \VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span> and
+<span class="math notranslate nohighlight">\(\WW\)</span> is closed under these operations.</p>
+</div>
+</div><div class="proof example admonition" id="example-44">
+<p class="admonition-title"><span class="caption-number">Example 4.9 </span> (Trivial subspaces)</p>
+<div class="example-content section" id="proof-content">
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\VV\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{\bzero\}\)</span> is a subspace of any <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+</ul>
+</div>
+</div><div class="proof theorem admonition" id="res-subspace-verification-condition">
+<p class="admonition-title"><span class="caption-number">Theorem 4.12 </span> (Subspace characterization)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A subset <span class="math notranslate nohighlight">\(\WW \subseteq \VV\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span> if and only if</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bzero \in\WW \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx + \by \in\WW \)</span> whenever <span class="math notranslate nohighlight">\(\bx, \by \in\WW\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha \bx \in\WW \)</span> whenever <span class="math notranslate nohighlight">\(\alpha \in \FF\)</span> and <span class="math notranslate nohighlight">\(\bx \in\WW \)</span>.</p></li>
+</ul>
+<p>In other words, a subset of <span class="math notranslate nohighlight">\(\VV\)</span> is a subspace
+if and only if it contains the zero vector
+and is closed under vector addition and scalar multiplication.</p>
+</div>
+</div><div class="proof example admonition" id="ex-la-symmetric-matrix-subspace">
+<p class="admonition-title"><span class="caption-number">Example 4.10 </span> (Symmetric matrices)</p>
+<div class="example-content section" id="proof-content">
+<p>A matrix <span class="math notranslate nohighlight">\(M \in \FF^{M \times N}\)</span> is <em>symmetric</em> if</p>
+<div class="math notranslate nohighlight">
+\[
+    M^T = M.
+\]</div>
+<p>The set of symmetric matrices forms a subspace of set of all <span class="math notranslate nohighlight">\(M\times N\)</span> matrices.</p>
+</div>
+</div><div class="proof example admonition" id="ex-la-diagonal-matrix-subspace">
+<p class="admonition-title"><span class="caption-number">Example 4.11 </span> (Diagonal matrices)</p>
+<div class="example-content section" id="proof-content">
+<p>A matrix <span class="math notranslate nohighlight">\(M\)</span> is called a <em>diagonal</em> if <span class="math notranslate nohighlight">\(M_{ij} = 0\)</span> whenever <span class="math notranslate nohighlight">\(i \neq j\)</span>.</p>
+<p>The set of diagonal matrices is a subspace of <span class="math notranslate nohighlight">\(\FF^{M \times N}\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-la-proper-subspace">
+<p class="admonition-title"><span class="caption-number">Definition 4.29 </span> (Proper subspace)</p>
+<div class="definition-content section" id="proof-content">
+<p>A subspace <span class="math notranslate nohighlight">\(\WW\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span> is called a <em>proper subspace</em>
+if <span class="math notranslate nohighlight">\(\VV \setminus \WW \neq \EmptySet\)</span>.</p>
+<p>In other words, there are vectors in <span class="math notranslate nohighlight">\(\VV\)</span> which
+are not included in <span class="math notranslate nohighlight">\(\WW\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-subspace-intersection">
+<p class="admonition-title"><span class="caption-number">Theorem 4.13 </span> (Intersection of subspaces)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Any intersection of subspaces of a vector space <span class="math notranslate nohighlight">\(\VV\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\{W_i \}_{i \in I}\)</span> be a family of subspaces of a vector space
+<span class="math notranslate nohighlight">\(\VV\)</span> indexed by <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p>Let the intersection of the subspaces be:</p>
+<div class="math notranslate nohighlight">
+\[
+W = \bigcap_{i \in I} W_i.
+\]</div>
+<p>[Zero vector]</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(\bzero \in W_i\)</span> for every <span class="math notranslate nohighlight">\(i \in I\)</span>, hence <span class="math notranslate nohighlight">\(\bzero \in W\)</span>.</p></li>
+</ol>
+<p>[Vector addition]</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in W_i\)</span> for every <span class="math notranslate nohighlight">\(i \in I\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx + \by \in W_i\)</span> for every <span class="math notranslate nohighlight">\(i \in I\)</span> since <span class="math notranslate nohighlight">\(W_i\)</span> are closed under vector addition.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx + \by \in W\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(W\)</span> is closed under vector addition.</p></li>
+</ol>
+<p>[Scalar multiplication]</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in W_i\)</span> for every <span class="math notranslate nohighlight">\(i \in I\)</span> and let <span class="math notranslate nohighlight">\(t \in \FF\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(t \bx \in W_i\)</span> for ever <span class="math notranslate nohighlight">\(i \in I\)</span> since <span class="math notranslate nohighlight">\(W_i\)</span> are closed under scalar multiplication.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(t \bx \in W\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(W\)</span> is closed under scalar multiplication.</p></li>
+</ol>
+<p>Thus, <span class="math notranslate nohighlight">\(W\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+<p>We note that a union of subspaces is not necessarily a subspace, since its
+not closed under addition.</p>
+<div class="proof theorem admonition" id="res-la-span-as-subspace">
+<p class="admonition-title"><span class="caption-number">Theorem 4.14 </span> (Span is a subspace)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space.
+The span of a set <span class="math notranslate nohighlight">\(S \subset \VV\)</span> given by <span class="math notranslate nohighlight">\(\span S\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Moreover, any subspace of <span class="math notranslate nohighlight">\(\VV\)</span> that contains <span class="math notranslate nohighlight">\(S\)</span> must also contain the span of <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(S = \EmptySet\)</span>, then by convention, <span class="math notranslate nohighlight">\(\span S = \{ \bzero \}\)</span>. This happens
+to be the trivial subspace.</p>
+<p>We now consider <span class="math notranslate nohighlight">\(S\)</span> to be nonempty (possibly infinite).</p>
+<p>[Zero vector]</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(S\)</span> is nonempty, hence there exists some <span class="math notranslate nohighlight">\(\bv \in S\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(0 \bv = \bzero \in \span S\)</span> as it is a linear combination of elements of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+</ol>
+<p>[Scalar multiplication]</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in \span S\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bv = \sum_{i=1}^p t_i \bv_i\)</span> where <span class="math notranslate nohighlight">\(\bv_i \in S\)</span>, <span class="math notranslate nohighlight">\(t_i \in \FF\)</span>, <span class="math notranslate nohighlight">\(p \in \Nat\)</span>.</p></li>
+<li><p>But then for any <span class="math notranslate nohighlight">\(t \in \FF\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   t \bv = t \left ( \sum_{i=1}^p t_i \bv_i \right ) = \sum_{i=1}^p (t t_i) \bv_i.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(t\bv\)</span> is also a linear combination of elements of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\span S\)</span> is closed under scalar multiplication.</p></li>
+</ol>
+<p>[Vector addition]</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \span S\)</span>.</p></li>
+<li><p>Let  <span class="math notranslate nohighlight">\(\bx = \sum_{i=1}^p r_i \bx_i\)</span> and  <span class="math notranslate nohighlight">\(\by = \sum_{i=1}^q t_i \by_i\)</span>
+be linear combinations of elements of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \by = \sum_{i=1}^p r_i \bx_i + \sum_{i=1}^q t_i \by_i
+   \]</div>
+<p>is also a linear combination of (up to <span class="math notranslate nohighlight">\(p+q\)</span>) elements of <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx + \by \in \span S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\span S\)</span> is closed under vector addition.</p></li>
+</ol>
+<p>Combining, <span class="math notranslate nohighlight">\(\span S\)</span> is a linear subspace.</p>
+<p>Let <span class="math notranslate nohighlight">\(W\)</span> be a subspace such that <span class="math notranslate nohighlight">\(S \subseteq W\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in \span S\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bv = \sum_{i=1}^p t_i \bv_i\)</span> is a linear combination of elements of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(W\)</span> is closed under linear combinations and <span class="math notranslate nohighlight">\(S \subseteq W\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in W\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\span S \subseteq W\)</span>.</p></li>
+</ol>
+</div>
+<p>This theorem is quite useful. It allows us to construct subspaces from a given basis.</p>
+<p>Let <span class="math notranslate nohighlight">\(\BBB\)</span> be a basis of an <span class="math notranslate nohighlight">\(n\)</span> dimensional space <span class="math notranslate nohighlight">\(\VV\)</span>.
+There are <span class="math notranslate nohighlight">\(n\)</span> vectors in <span class="math notranslate nohighlight">\(\BBB\)</span>.
+We can create <span class="math notranslate nohighlight">\(2^n\)</span> distinct subsets of <span class="math notranslate nohighlight">\(\BBB\)</span>.
+Thus we can easily construct <span class="math notranslate nohighlight">\(2^n\)</span> distinct subspaces of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>Choosing some other basis lets us construct another set of subspaces.</p>
+<p>An <span class="math notranslate nohighlight">\(n\)</span>-dimensional vector space has infinite number of bases.
+Correspondingly, there are infinite possible subspaces.</p>
+<div class="proof definition admonition" id="def-la-subspace-partial-order">
+<p class="admonition-title"><span class="caption-number">Definition 4.30 </span> (Partial order on subspaces)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space.
+If <span class="math notranslate nohighlight">\(\WW_1\)</span> and <span class="math notranslate nohighlight">\(\WW_2\)</span> are two subspaces of <span class="math notranslate nohighlight">\(\VV\)</span>
+then we say that <span class="math notranslate nohighlight">\(\WW_1\)</span> is <em>smaller than</em> <span class="math notranslate nohighlight">\(\WW_2\)</span>
+if <span class="math notranslate nohighlight">\(\WW_1 \subset \WW_2\)</span>;
+i.e., <span class="math notranslate nohighlight">\(\WW_1\)</span> is a proper subset of <span class="math notranslate nohighlight">\(\WW_2\)</span>.
+We denote this partial order by <span class="math notranslate nohighlight">\(\WW_1 \prec \WW_2\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(\WW_1 \subseteq \WW_2\)</span>, we denote this is <span class="math notranslate nohighlight">\(\WW_1 \preceq \WW_2\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-span-is-smallest">
+<p class="admonition-title"><span class="caption-number">Theorem 4.15 </span> (Span as the smallest subspace)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space.
+Let <span class="math notranslate nohighlight">\(\bv_1, \dots, \bv_p\)</span> be some arbitrary vectors in <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(S = \{ \bv_1, \dots, \bv_p \}\)</span>.
+Let the span of <span class="math notranslate nohighlight">\(S\)</span> be denoted as</p>
+<div class="math notranslate nohighlight">
+\[
+U = \span S = \langle \bv_1, \dots, \bv_p \rangle.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(W\)</span> be the smallest subspace containing the vectors in <span class="math notranslate nohighlight">\(S\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\WW = U.
+\]</div>
+<p>i.e. <span class="math notranslate nohighlight">\(\WW\)</span> is same as the span of <span class="math notranslate nohighlight">\(\{ \bv_1, \dots, \bv_p \}\)</span>.
+In other words, <span class="math notranslate nohighlight">\(\span S\)</span> is the smallest subspace containing <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\WW\)</span> contains <span class="math notranslate nohighlight">\(S\)</span>, hence <span class="math notranslate nohighlight">\(\span S \subseteq W\)</span> due to <a class="reference internal" href="#res-la-span-as-subspace">Theorem 4.14</a>.
+<span class="math notranslate nohighlight">\(\span S\)</span> is also a linear subspace. So <span class="math notranslate nohighlight">\(\WW = \span S\)</span> must hold.</p>
+</div>
+<p>If the vector space <span class="math notranslate nohighlight">\(\VV\)</span> is not finite dimensional, then
+its subspaces may or may not be finite dimensional.
+E.g., if <span class="math notranslate nohighlight">\(W\)</span> is a span of a fixed <span class="math notranslate nohighlight">\(p\)</span> number of vectors from
+<span class="math notranslate nohighlight">\(\VV\)</span>, then it is finite dimensional with <span class="math notranslate nohighlight">\(\dim W \leq p\)</span>
+irrespective of whether <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional or not.</p>
+<p>However, if <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional,
+then its subspaces must be finite dimensional.</p>
+<div class="proof theorem admonition" id="res-la-subspace-dimension">
+<p class="admonition-title"><span class="caption-number">Theorem 4.16 </span> (Subspaces of a finite dimensional vector space)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\WW\)</span> be a subspace of a finite-dimensional vector space <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then <span class="math notranslate nohighlight">\(\WW\)</span> is finite dimensional and</p>
+<div class="math notranslate nohighlight">
+\[
+\dim \WW \leq \dim \VV.
+\]</div>
+<p>Moreover, if</p>
+<div class="math notranslate nohighlight">
+\[
+\dim \WW  = \dim \VV,
+\]</div>
+<p>then <span class="math notranslate nohighlight">\(\WW = \VV\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional, then it has a finite basis
+of say <span class="math notranslate nohighlight">\(n\)</span> basis vectors. Since <span class="math notranslate nohighlight">\(\WW \subseteq \VV\)</span> hence
+the basis spans <span class="math notranslate nohighlight">\(\WW\)</span> too. Thus, dimension of <span class="math notranslate nohighlight">\(\WW\)</span> cannot
+be greater than <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Now, assume that</p>
+<div class="math notranslate nohighlight">
+\[
+n = \dim \WW = \dim \VV.
+\]</div>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\BBB\)</span> be a basis for <span class="math notranslate nohighlight">\(\WW\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\BBB\)</span> spans <span class="math notranslate nohighlight">\(\WW\)</span> and contains <span class="math notranslate nohighlight">\(n\)</span> linearly independent vectors.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\WW \subseteq \VV\)</span>, hence <span class="math notranslate nohighlight">\(\BBB \subseteq \VV\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(n = \dim \VV\)</span>.</p></li>
+<li><p>Hence, any set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent vectors must be a basis for <span class="math notranslate nohighlight">\(\VV\)</span> too.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\BBB\)</span> is a basis for <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\VV = \WW = \span \BBB\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="corollary-54">
+<p class="admonition-title"><span class="caption-number">Corollary 4.4 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\WW\)</span> is a subspace for a finite-dimensional vector space <span class="math notranslate nohighlight">\(\VV\)</span>
+then any basis for <span class="math notranslate nohighlight">\(\WW\)</span> can be extended to a basis for <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-subspace-codimension">
+<p class="admonition-title"><span class="caption-number">Definition 4.31 </span> (Subspace codimension)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional vector space and
+<span class="math notranslate nohighlight">\(\WW\)</span> be a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>. The <em>codimension</em>
+of <span class="math notranslate nohighlight">\(\WW\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\text{codim} \WW = \dim \VV - \dim \WW.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="direct-sum-of-vector-spaces">
+<h2><span class="section-number">4.2.9. </span>Direct Sum of Vector Spaces<a class="headerlink" href="#direct-sum-of-vector-spaces" title="Permalink to this headline">¶</a></h2>
+<p>Consider two vector spaces <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> over
+same scalar field <span class="math notranslate nohighlight">\(\FF\)</span>. Often, it is
+useful to consider the Cartesian product set <span class="math notranslate nohighlight">\(\VV \times \WW\)</span>
+and add a vector space structure to it.
+One common example is <span class="math notranslate nohighlight">\(\VV=\RR^n\)</span>, <span class="math notranslate nohighlight">\(\WW=\RR^m\)</span>
+and <span class="math notranslate nohighlight">\(\VV \times \WW = \RR^{n+m}\)</span>.</p>
+<div class="proof definition admonition" id="def-vs-direct-sum-vector-spaces">
+<p class="admonition-title"><span class="caption-number">Definition 4.32 </span> (Direct sum of vector spaces)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be two different vector spaces over some
+field <span class="math notranslate nohighlight">\(\FF\)</span>.
+A vector space structure over the field <span class="math notranslate nohighlight">\(\FF\)</span>
+can be introduced to the set <span class="math notranslate nohighlight">\(\VV \times \WW\)</span>
+as per the following definitions.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bzero_v \in \VV\)</span> and <span class="math notranslate nohighlight">\(\bzero_w \in \WW\)</span> be the
+additive identities of <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> respectively.
+The additive identity of <span class="math notranslate nohighlight">\(\VV \times \WW\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \bzero = (\bzero_v, \bzero_w).
+   \]</div>
+</li>
+<li><p>[Vector addition] Let <span class="math notranslate nohighlight">\((\bx, \bu)\)</span> and <span class="math notranslate nohighlight">\((\by, \bv)\)</span> be
+in <span class="math notranslate nohighlight">\(\VV \times \WW\)</span>.
+Then, their sum is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+   (\bx, \bu) + (\by, \bv) \triangleq (\bx + \by, \bu + \bv).
+   \]</div>
+</li>
+<li><p>[Scalar multiplication] Let <span class="math notranslate nohighlight">\((\bx, \bu) \in \VV \times \WW\)</span> and
+<span class="math notranslate nohighlight">\(\alpha \in \FF\)</span>.
+Then, the scalar multiplication is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+   \alpha (\bx, \bu) \triangleq (\alpha \bx, \alpha \bu).
+   \]</div>
+</li>
+</ol>
+<p><span class="math notranslate nohighlight">\(\VV \times \WW\)</span> equipped with these definitions
+is a vector space over <span class="math notranslate nohighlight">\(\FF\)</span> in its own right
+and is called the <em>direct sum</em>
+of <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> denoted by <span class="math notranslate nohighlight">\(\VV \oplus \WW\)</span>.</p>
+</div>
+</div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some authors prefer to call <span class="math notranslate nohighlight">\(\VV \oplus \WW\)</span> as
+<em>direct product</em> (Cartesian product with vector space structure)
+and reserve the term <em>direct sum</em> for the sums within the same
+vector space (<a class="reference internal" href="#def-vs-direct-sum-same-space">Definition 4.37</a> below).</p>
+<p>For them, external direct sum is a direct product and
+internal direct sum is a direct sum.</p>
+</div>
+<div class="proof example admonition" id="example-57">
+<p class="admonition-title"><span class="caption-number">Example 4.12 </span></p>
+<div class="example-content section" id="proof-content">
+<p>With the definition of direct sum given above,
+we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\FF^2 = \FF \oplus \FF
+\]</div>
+<p>or more generally,</p>
+<div class="math notranslate nohighlight">
+\[
+\FF^{n} = \FF \oplus \FF \oplus \dots \oplus \FF = \bigoplus_{i=1}^n \FF.
+\]</div>
+<p>Specifically,</p>
+<div class="math notranslate nohighlight">
+\[
+\RR^n = \bigoplus_{i=1}^n \RR.
+\]</div>
+<p>Also,</p>
+<div class="math notranslate nohighlight">
+\[
+\RR^{n + m} = \RR^n \times \RR^m.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="sets-in-vector-spaces">
+<span id="sec-la-set-arithmetic"></span><h2><span class="section-number">4.2.10. </span>Sets in Vector Spaces<a class="headerlink" href="#sets-in-vector-spaces" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="set-arithmetic">
+<h3><span class="section-number">4.2.10.1. </span>Set Arithmetic<a class="headerlink" href="#set-arithmetic" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-vs-set-arithmetic">
+<p class="admonition-title"><span class="caption-number">Definition 4.33 </span> (Arithmetic on sets)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span>, <span class="math notranslate nohighlight">\(D\)</span> be subsets of an <span class="math notranslate nohighlight">\(\FF\)</span> vector space
+<span class="math notranslate nohighlight">\(\VV\)</span>. Let <span class="math notranslate nohighlight">\(\bz \in \VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\lambda \in \FF\)</span>.
+Let <span class="math notranslate nohighlight">\(\Lambda \subseteq \FF\)</span>.</p>
+<p>The addition of sets is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+C + D \triangleq \{ \bx + \by \ST \bx \in C, \by \in D \}.
+\]</div>
+<p>The subtraction of sets is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+C - D \triangleq \{ \bx - \by \ST \bx \in C, \by \in D \}.
+\]</div>
+<p>Addition of a set with a vector is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\bz + C \triangleq \{ \bz + \bx \ST \bx \in C\} = \{ \bz \} + C.
+\]</div>
+<p>Subtraction of set with a vector is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+C - \bz \triangleq \{ \bx - \bz \ST \bx \in C\} = C - \{ \bz \}.
+\]</div>
+<p>Scalar multiplication of a set with a scalar is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda C \triangleq \{ \lambda \bx \ST \bx \in C \}.
+\]</div>
+<p>Multiplication of a set of scalars with a set of vectors is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\Lambda C \triangleq \bigcup_{\lambda \in \Lambda} \lambda C.
+\]</div>
+<p>Multiplication of a set of scalars with a vector is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\Lambda \bz \triangleq \Lambda \{ \bz \} = \{ \lambda \bz \ST \lambda \in \Lambda\}.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="symmetry">
+<h3><span class="section-number">4.2.10.2. </span>Symmetry<a class="headerlink" href="#symmetry" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-vs-symmetric-reflection">
+<p class="admonition-title"><span class="caption-number">Definition 4.34 </span> (Symmetric reflection)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>symmetric reflection</em> of a set <span class="math notranslate nohighlight">\(C\)</span>
+across the origin is given by
+<span class="math notranslate nohighlight">\(-C = (-1) C\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-vs-symmetric-set">
+<p class="admonition-title"><span class="caption-number">Definition 4.35 </span> (Symmetric set)</p>
+<div class="definition-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(C\)</span> is said to be <em>symmetric</em> if
+<span class="math notranslate nohighlight">\(-C = C\)</span> holds true.</p>
+</div>
+</div><p>If a nonempty set is symmetric, it must contain
+<span class="math notranslate nohighlight">\(\bzero\)</span> since <span class="math notranslate nohighlight">\(-\bzero = \bzero\)</span>.</p>
+</div>
+<div class="section" id="set-arithmetic-properties">
+<h3><span class="section-number">4.2.10.3. </span>Set Arithmetic Properties<a class="headerlink" href="#set-arithmetic-properties" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-vs-set-vec-arithmetic">
+<p class="admonition-title"><span class="caption-number">Theorem 4.17 </span> (Set vector arithmetic identities)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span>, <span class="math notranslate nohighlight">\(D\)</span> be subsets of an <span class="math notranslate nohighlight">\(\FF\)</span> vector space
+<span class="math notranslate nohighlight">\(\VV\)</span>. Let <span class="math notranslate nohighlight">\(\bz \in \VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\lambda \in \FF\)</span>.
+Let <span class="math notranslate nohighlight">\(\Lambda \subseteq \FF\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+C = (C + \bz) - \bz.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+C \subseteq D \iff C + \bz \subseteq D + \bz.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We show that  <span class="math notranslate nohighlight">\(C = (C + \bz) - \bz\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx = (\bx + \bz) - \bz\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx + \bz \in C+\bz\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\((\bx + \bz) - \bz \in (C + \bz) - \bz\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C \subseteq (C + \bz) - \bz\)</span>.</p></li>
+<li><p>Conversely, let <span class="math notranslate nohighlight">\(\bx \in (C + \bz) - \bz\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx + \bz \in C+\bz\)</span>.</p></li>
+<li><p>But then, <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((C + \bz) - \bz \substeq C\)</span>.</p></li>
+<li><p>Combining <span class="math notranslate nohighlight">\(C = (C + \bz) - \bz\)</span>.</p></li>
+</ol>
+<p>We show that <span class="math notranslate nohighlight">\(C \subseteq D \iff C + \bz \subseteq D + \bz\)</span>.</p>
+<p>Assume <span class="math notranslate nohighlight">\(C \subseteq D\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in C + \bz\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx - \bz \in C\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx - \bz \in D\)</span> since <span class="math notranslate nohighlight">\(C \subseteq D\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx \in D + \bz\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C + \bz \in D + \bz\)</span>.</p></li>
+</ol>
+<p>Now, assume <span class="math notranslate nohighlight">\(C + \bz \subseteq D + \bz\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx + \bz \in C + \bz\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx + \bz \in D + \bz\)</span> since <span class="math notranslate nohighlight">\(C + \bz \subseteq D + \bz\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx \in D\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C \subseteq D\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-vs-set-arithmetic-props">
+<p class="admonition-title"><span class="caption-number">Theorem 4.18 </span> (Properties of set arithmetic)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space over a field <span class="math notranslate nohighlight">\(\FF\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(C, D, E \subseteq \VV\)</span> and <span class="math notranslate nohighlight">\(\alpha, \beta \in \FF\)</span>.</p>
+<ol>
+<li><p>Set addition is commutative:</p>
+<div class="math notranslate nohighlight">
+\[
+   C + D = D + C.
+   \]</div>
+</li>
+<li><p>Set addition is associative:</p>
+<div class="math notranslate nohighlight">
+\[
+   C + (D + E) = (C + D) + E.
+   \]</div>
+</li>
+<li><p>Scalar multiplication with a set commutes with multiplication in <span class="math notranslate nohighlight">\(\FF\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \alpha (\beta C) = (\alpha \beta) C = (\beta \alpha )C = \beta (\alpha C).
+   \]</div>
+</li>
+<li><p>Scalar multiplication distributes over set addition:</p>
+<div class="math notranslate nohighlight">
+\[
+   \alpha (C + D) = (\alpha C) + (\alpha D).
+   \]</div>
+</li>
+<li><p>The set <span class="math notranslate nohighlight">\(\{ \bzero \}\)</span> is the identity element for set addition:</p>
+<div class="math notranslate nohighlight">
+\[
+   C + \{ \bzero \} = \{ \bzero \} + C = C.
+   \]</div>
+</li>
+<li><p>The set <span class="math notranslate nohighlight">\(F = C + (-C)\)</span> is symmetric and <span class="math notranslate nohighlight">\(\bzero \in F\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( (\alpha + \beta) C \subseteq \alpha C + \beta C\)</span>.</p></li>
+</ol>
+</div>
+</div><p>Additive inverses don’t exist for sets containing more than
+one element.</p>
+<div class="proof theorem admonition" id="res-vs-set-intersect-sum-dist">
+<p class="admonition-title"><span class="caption-number">Theorem 4.19 </span> (Distributive law for set sum over intersection)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space over a field <span class="math notranslate nohighlight">\(\FF\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(C, D, E \subseteq \VV\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+(C \cap D) + E \subseteq (C + E) \cap (D + E).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We show that <span class="math notranslate nohighlight">\((C \cap D) + E \subseteq (C + E) \cap (D + E)\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in (C \cap D) + E\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bv = \bx + \by\)</span> such that <span class="math notranslate nohighlight">\(\bx \in (C \cap D)\)</span> and <span class="math notranslate nohighlight">\(\by \in E\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx \in C\)</span>, <span class="math notranslate nohighlight">\(\bx \in D\)</span> and <span class="math notranslate nohighlight">\(\by \in E\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx + \by \in C + E\)</span> and <span class="math notranslate nohighlight">\(\by + \by \in D + E\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv = \bx + \by \in  (C + E) \cap (D + E)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((C \cap D) + E \subseteq (C + E) \cap (D + E)\)</span>.</p></li>
+</ol>
+<p>We mention that <span class="math notranslate nohighlight">\( (C + E) \cap (D + E) \not\subseteq (C \cap D) + E\)</span>
+in general. Here is an example.</p>
+<ol class="simple">
+<li><p>Consider <span class="math notranslate nohighlight">\(\VV = \RR^2\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(C\)</span> to be the <span class="math notranslate nohighlight">\(x\)</span>-axis.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(D\)</span> to be the <span class="math notranslate nohighlight">\(y\)</span>-axis.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(E\)</span> to be the line <span class="math notranslate nohighlight">\(\{ (x, y) \ST x = y \}\)</span>.</p></li>
+<li><p>Both <span class="math notranslate nohighlight">\(C+E\)</span> and <span class="math notranslate nohighlight">\(D+E\)</span> are the whole plane <span class="math notranslate nohighlight">\(\RR^2\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((C + E) \cap (D + E) = \RR^2\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(C \cap D = \{ \bzero \}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((C \cap D) + E = E\)</span>.</p></li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\((C + E) \cap (D + E) \not\subseteq (C \cap D) + E\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="direct-sums">
+<h3><span class="section-number">4.2.10.4. </span>Direct Sums<a class="headerlink" href="#direct-sums" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-vs-direct-sum-two-spaces">
+<p class="admonition-title"><span class="caption-number">Definition 4.36 </span> ((External) direct sum over two different vector spaces)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be vector spaces over <span class="math notranslate nohighlight">\(\FF\)</span>.
+Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> and <span class="math notranslate nohighlight">\(D \subseteq \WW\)</span>.
+Then, the <em>direct sum</em> of <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+C \oplus D \triangleq \{ \bx = (\by, \bz) \ST \by \in C, \bz \in D \}.
+\]</div>
+<p><span class="math notranslate nohighlight">\(C \oplus D\)</span> is a subset of the
+<a class="reference internal" href="#def-vs-direct-sum-vector-spaces">(direct sum) vector space</a>
+<span class="math notranslate nohighlight">\(\VV \oplus \WW\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-vs-direct-sum-same-space">
+<p class="admonition-title"><span class="caption-number">Definition 4.37 </span> ((Internal) direct sum of sets in same vector space)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C,D\)</span> be subsets of <span class="math notranslate nohighlight">\(\VV\)</span>.
+If each vector <span class="math notranslate nohighlight">\(\bx \in C+D\)</span> can be expressed <em>uniquely</em>
+in the form</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \by + \bz, \by \in C, \bz \in D;
+\]</div>
+<p>then the sum <span class="math notranslate nohighlight">\(C + D\)</span> is called a <em>direct sum</em>
+of <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> and is denoted by <span class="math notranslate nohighlight">\(C \oplus D\)</span>.</p>
+</div>
+</div><p>The key idea behind a direct sum is that
+it enables a unique decomposition of a vector
+into its components belonging to individual sets.</p>
+<div class="proof theorem admonition" id="theorem-66">
+<p class="admonition-title"><span class="caption-number">Theorem 4.20 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Two subsets <span class="math notranslate nohighlight">\(C, D\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span> are eligible for
+a direct sum if and only if
+the symmetric sets <span class="math notranslate nohighlight">\(C - C\)</span> and <span class="math notranslate nohighlight">\(D - D\)</span>
+have only the zero vector <span class="math notranslate nohighlight">\(\bzero\)</span> in common.</p>
+</div>
+</div><p>If two subspaces of <span class="math notranslate nohighlight">\(\VV\)</span> have only <span class="math notranslate nohighlight">\(\bzero\)</span>
+in common, then any vector in their sum can
+be decomposed uniquely between the two subspaces.</p>
+</div>
+</div>
+<div class="section" id="sums-of-subspaces">
+<h2><span class="section-number">4.2.11. </span>Sums of Subspaces<a class="headerlink" href="#sums-of-subspaces" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-vs-direct-sum-subspaces">
+<p class="admonition-title"><span class="caption-number">Definition 4.38 </span> ((Internal) direct sum of subspaces)</p>
+<div class="definition-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\WW_1\)</span> and <span class="math notranslate nohighlight">\(\WW_2\)</span> are two subspaces of <span class="math notranslate nohighlight">\(\VV\)</span>
+such that <span class="math notranslate nohighlight">\(\WW_1 \cap \WW_2 = \{ \bzero \}\)</span>,
+then the <em>direct sum</em> of <span class="math notranslate nohighlight">\(\WW_1\)</span> and <span class="math notranslate nohighlight">\(\WW_2\)</span>
+is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\WW_1 \oplus \WW_2 \triangleq \WW_1 + \WW_2 
+= \{ \bx_1 + \bx_2 \ST \bx_1 \in \WW_1, \bx_2 \in \WW_2 \}.
+\]</div>
+<p>If, in particular, <span class="math notranslate nohighlight">\(\VV = \WW_1 + \WW_2\)</span>, we say that
+<span class="math notranslate nohighlight">\(\VV\)</span> is a <em>direct sum</em> of its subspaces <span class="math notranslate nohighlight">\(\WW_1\)</span> and <span class="math notranslate nohighlight">\(\WW_2\)</span>
+and write as <span class="math notranslate nohighlight">\(\VV = \WW_1 \oplus \WW_2\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="example-68">
+<p class="admonition-title"><span class="caption-number">Example 4.13 </span> (Vector space as direct sum of spans of basis vectors)</p>
+<div class="example-content section" id="proof-content">
+<p>The spans of basis vectors have only <span class="math notranslate nohighlight">\(\bzero\)</span>
+in common. They indeed offer a unique
+decomposition of any vector in the space.
+Thus, for a finite dimensional space <span class="math notranslate nohighlight">\(\VV\)</span>
+with a basis <span class="math notranslate nohighlight">\(\BBB = \{\bv_1, \dots \bv_n \}\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\VV = \bigoplus_{i=1}^n \span \{ \bv_i \}.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-la-dim-sum-subspaces">
+<p class="admonition-title"><span class="caption-number">Theorem 4.21 </span> (Dimension of sum of subspaces)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(W_1\)</span> and <span class="math notranslate nohighlight">\(W_2\)</span> be finite dimensional subspaces of
+a vector space <span class="math notranslate nohighlight">\(\VV\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\dim (W_1 + W_2) = \dim W_1 + \dim W_2 - \dim (W_1 \cap W_2).
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-la-dim-direct-sum-subspaces">
+<p class="admonition-title"><span class="caption-number">Theorem 4.22 </span> (Dimension of direct sum of subspaces)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(W_1\)</span> and <span class="math notranslate nohighlight">\(W_2\)</span> be finite dimensional subspaces of
+a vector space <span class="math notranslate nohighlight">\(\VV\)</span> such that <span class="math notranslate nohighlight">\(W_1 \cap W_2 = \{\bzero \}\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\dim (W_1 \oplus W_2) = \dim W_1 + \dim W_2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that  <span class="math notranslate nohighlight">\(W_1 \cap W_2 = \{\bzero \}\)</span> implies that
+<span class="math notranslate nohighlight">\(\dim (W_1 \cap W_2) = 0\)</span>.
+Rest follows from the previous result <a class="reference internal" href="#res-la-dim-sum-subspaces">Theorem 4.21</a>.</p>
+</div>
+</div>
+<div class="section" id="real-vector-spaces">
+<h2><span class="section-number">4.2.12. </span>Real Vector Spaces<a class="headerlink" href="#real-vector-spaces" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-real-vector-space">
+<p class="admonition-title"><span class="caption-number">Definition 4.39 </span> (Real vector space)</p>
+<div class="definition-content section" id="proof-content">
+<p>A <em>real vector space</em> <span class="math notranslate nohighlight">\(\VV\)</span> is a vector space
+defined over the real field <span class="math notranslate nohighlight">\(\RR\)</span>.</p>
+<p>In other words, the scalars come from the field of
+real numbers.</p>
+</div>
+</div><p>There are several features associated with the real field.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\RR\)</span> is <a class="reference internal" href="../set_theory/relations.html#def-st-totally-ordered-set">totally ordered</a>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\RR\)</span> is <a class="reference internal" href="../metric_spaces/complete.html#def-ms-complete-metric-space">complete</a>.</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./la"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="matrices.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4.1. </span>Matrices</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="transformations.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.3. </span>Linear Transformations</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

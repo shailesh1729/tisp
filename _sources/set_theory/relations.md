@@ -307,7 +307,7 @@ A subset $Y$ of a partially ordered set $X$
 is called a *chain* if for every $x, y \in Y$
 either $x \leq y$ or $y \leq x$ holds.
 
-A chain is also known as a *totally ordered set*.
+A chain is also known as *totally ordered*.
 ````
 
 *  In a partially ordered set $X$, we don't require that 
@@ -329,6 +329,25 @@ Clearly, for every $x, y \in Y$, either $x \subseteq y$ or $y \subseteq x$ holds
 
 Hence $Y$ is a chain or a totally ordered set within $X$.
 ````
+
+
+```{prf:definition} Total order
+:label: def-st-total-order
+
+A relation, denoted by $\leq$, on a set $X$ is said to be a
+*total order* for $X$ (or that $X$ is totally ordered by $\leq$)
+if it satisfies the following properties:
+
+*  $x \leq x$ holds for every $x \in X$ (reflexivity).
+*  If $x \leq y$ and $y \leq x$, then $x = y$ (antisymmetry).
+*  If $x \leq y$ and $y \leq z$, then $x \leq z$ (transitivity).
+*  $x \leq y$ or $y \leq x$ holds for every $x, y \in X$ (strongly connected).
+```
+```{prf:definition} Totally ordered set
+:label: def-st-totally-ordered-set
+
+A set equipped with a total order is known as a *totally ordered set*.
+```
 
 
 ````{prf:example} More ordered sets

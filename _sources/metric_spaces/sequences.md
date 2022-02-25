@@ -1,3 +1,4 @@
+(sec:ms:sequences)=
 # Sequences
 
 Let $(X, d)$ be a metric space.
@@ -44,7 +45,7 @@ Thus, $\{ x_n \}$ converges if $\lim d(x_n, x) = 0$.
 ````
 
 
-````{prf:proposition} Sequence Limit Uniqueness
+````{prf:theorem} Sequence Limit Uniqueness
 :label: res-ms-sequence-limit-uniqueness
 
 A sequence of points can have utmost one limit.
@@ -73,7 +74,7 @@ This result and proof is adapted from
 {prf:ref}`res-bra-sequence-limit-uniqueness`.
 
 
-```{prf:proposition} Characterization of closure points as limits
+```{prf:theorem} Characterization of closure points as limits
 :label: res-ms-closure-point-as-limit
 
 A point $x \in X$ is a closure point of $A \subseteq X$ if and
@@ -104,7 +105,9 @@ Assume a sequence $\{x_n\}$ of $A$ converges to $x$.
 If $x \in A$, we can simply pick the constant sequence $\{ x_n = x \}$.
 It's more challenging only when $x \in \closure A \setminus A$.
 
-```{prf:proposition} 
+```{prf:theorem}
+:label: res-ms-accum-point-distinct-sequence
+ 
 Let $x$ be an accumulation point of $A$. 
 Then, there exists a sequence $\{x_n \}$ of $A$ with
 distinct terms, that converges to $x$.
@@ -126,7 +129,7 @@ We assume that $x$ is an accumulation point of $A$.
 1. Thus, the sequence converges to $x$.
 ```
 
-```{prf:proposition}
+```{prf:theorem}
 :label: res-ms-closure-convergence
 
 Let $A$ be a subset of $X$. $A$ is closed if and only if 
@@ -154,44 +157,163 @@ Assume that every convergent sequence of $A$ converges in $A$.
 1. Hence, $A$ is closed.
 ```
 
-## Dense Sets
+```{prf:theorem}
+:label: res-ms-sequence-distance-limit
 
-```{prf:definition} Dense subsets
-:label: def-ms-dense-set
+If $\lim x_n = x $ and $\lim y_n = y$, then
 
-A subset $A$ of $X$ is called *dense* in $X$ if 
-$\closure A = X$.
+$$
+\lim_{n \to \infty} d(x_n, y_n) = d(x, y).
+$$
 ```
 
-```{prf:proposition}
-A subset $A$ is dense in $X$ if and only if for every $x \in X$, 
+```{prf:proof}
+
+Recall from the triangle inequality:
+
+$$
+| d(x,z) - d(z, y) | \leq d(x,y).
+$$
+
+Now
+
+$$
+\begin{aligned}
+| d(x_n, y_n) - d(x, y) | &\leq | d(x_n, y_n) - d(x, y_n) | + | d(x, y_n) - d (x, y) |\\
+&\leq d (x_n, x) +  d(y_n, y).
+\end{aligned}
+$$
+
+Choose $n_0$ such that for all $n > n_0$,  
+
+$$
+d(x_n, x) < \frac{\epsilon}{2} \text { and } d(y_n, y) <  \frac{\epsilon}{2}.
+$$ 
+
+Then  $| d(x_n, y_n) - d(x, y) | <  \epsilon$.  
+
+Thus, for every $\epsilon > 0$, there exists $n_0$ such that for all $n > n_0$,
+$| d(x_n, y_n) - d(x, y) | <  \epsilon$ holds. Thus,
+
+$$
+\lim_{n \to \infty} d(x_n, y_n) = d(x, y).
+$$
+```
+
+## Subsequences
+
+````{prf:theorem} Subsequence convergence
+:label: res-ms-subsequence-convergence
+
+Subsequences of a convergent sequence converge to the same limit 
+as the original sequence.
+If $\lim_{n \to \infty} x_n = x$, then $\lim_{n \to \infty} y_n = x$ for every
+{prf:ref}`subsequence <def-st-sub-sequence>` $\{ y_n \}$ of $\{ x_n \}$.
+
+Conversely, if two different subsequences of $\{ x_n \}$ converge to different limits,
+then the sequence  $\{ x_n \}$  does not converge.
+````
+This result is a generalization of {prf:ref}`res-subsequence-convergence`
+for metric spaces.
+
+````{prf:proof}
+
+Let $\{x_n\}$ be a convergent sequence of $X$ and
+Let $\{ y_n\}$ be a subsequence of $\{ x_n\}$. 
+
+1. Since $\lim_{n \to \infty} x_n = x$, for every $\epsilon > 0$, 
+   there exists $n_0 \in \Nat$ such that
+   $d (x, x_n) < \epsilon \Forall n > n_0$.
+1. Since $\{ y_n \}$ is a subsequence, there exists 
+   a strictly increasing sequence
+   $\{ k_n \}$ of natural numbers (i.e. $1 \leq k_1 < k_2  < k_3 < \ldots)$
+   such that $y_n = x_{k_n}$ holds for each $n$. 
+1. Thus, there exists a $k_0 > 0$ such that
+   $k_n \geq n_0 \Forall n > k_0$. Then,
+1. $d(x,y_n) < \epsilon \Forall n > k_0$.
+1. Thus, $\{ y_n \}$ converges to $x$ too.
+````
+
+
+## Dense Sets
+
+```{prf:theorem}
+:label: res-ms-dense-sequence-limit
+
+A subset $A$ is {prf:ref}`dense <def-ms-dense-set>` 
+in $X$ if and only if for every $x \in X$, 
 there exists a sequence $\{ x_n \}$ of $A$ such that 
 $\lim x_n = x$.
 ```
 
 This is a direct application of {prf:ref}`res-ms-closure-point-as-limit`.
 
-```{prf:proposition}
-A set $A$ is dense if and only if $O \cap A \neq \EmptySet$ holds
-for every nonempty open set $O$ in $X$. 
+
+## Equivalent Metrics
+
+
+```{prf:theorem} Metric equivalence and convergent sequences
+:label: res-ms-eq-metric-conv-sequences
+
+Let $d_a$ and $d_b$ be two different metrics on the same set $X$. 
+Then, $d_a$ and $d_b$ are equivalent if and only if
+they lead to identical set of convergent sequences;
+i.e., a sequence is convergent in $(X, d_a)$ if and only
+if it is also convergent in $(X, d_b)$ and it has same
+limit in both metric spaces.
+
+In other words, a sequence $\{ x_n \}$ of $X$ satisfies 
+$\lim d_a(x_n, x) = 0$ if and only if $\lim d_b(x_n, x) = 0$.
 ```
 
 ```{prf:proof}
+Assume that the two metric spaces $(X, d_a)$ and $(X, d_b)$ 
+have same topology. Thus, they have same open sets.
 
-Assume $A$ is dense and $O$ is open and non-empty.
 
-1. Let $x \in O$.
-1. There exists $r > 0$ such that $B(x, r) \subseteq O$.
-1. Since $x \in \closure A$, $B(x, r) \cap A \neq \EmptySet$.
-1. Thus, $O \cap A$ is not empty. 
+1. Let $\{x_n \}$ be a convergent sequence of $(X, d_a)$ converging to $x$.
+1. Now, let $\epsilon > 0$ be arbitrary and 
+   consider the open ball $B_b(x, \epsilon)$.
+1. By {prf:ref}`res-ms-eq-metric-balls-in-balls`, there exists
+   an $r > 0$ such that $B_a(x, r) \subseteq B_b(x, \epsilon)$.
+1. Since $\{ x_n \}$ is convergent in $(X, d_a)$, hence
+   there exists $n_0 \in \Nat$ such that
+   $x_n \in B_a(x, r) \subseteq B_b(x, \epsilon)$ for all $n > n_0$.
+1. Thus, for every $\epsilon > 0$, there exists $n_0 \in \Nat$
+   such that $x_n \in B_b(x, \epsilon)$ for all $n > n_0$.
+1. Thus, $\{x_n \}$ is convergent in $(X, d_b)$ with limit $x$.
+1. Similar reasoning shows that if a sequence is convergent in $(X, d_b)$
+   then it is convergent in $(X, d_a)$ too.
+1. Thus, the convergent sequences in both metric spaces are identical
+   and have same limits.
 
-Assume $A \cap O \neq \EmptySet$ for every open and nonempty $O$.
+Now, assume that the convergent sequences in both metric spaces 
+$(X, d_a)$ and $(X, d_b)$
+are identical and have same limits.
 
-1. Let $x \in X$. If $x \in A$ then $x$ is a closure point of $A$.
-   So assume $x \in X \setminus A$.
-1. Let $r> 0$ and consider the open ball $B(x,r)$.
-1. Since $B(x,r)$ is nonempty and open, hence $B(x, r) \cap A \neq \EmptySet$.
-1. Thus, $x$ is a closure point of $A$.
-1. Thus, $A$ is dense in $X$.
+1. Let $C$ be a closed set of $(X, d_a)$. 
+1. Let $x \in C$. Then, $x$ is a closure point of $C$ in $(X, d_a)$.
+1. Then, there exists a sequence $\{ x_n \}$ of $C$ such that
+   $\lim x_n = x$ in $(X, d_a)$.
+1. But by our hypothesis, convergent sequences are identical in both 
+   metric spaces.
+1. Hence $\lim x_n = x$ in $(X, d_b)$ also.
+1. Hence, $x$ is a closure point of $C$ in $(X, d_b)$ too.
+1. Thus, every element of $C$ is a closure point of $C$ in $(X, d_b)$.
+1. Thus, $C$ is closed in $(X, d_b)$.
+1. A similar argument shows that if $C$ is closed in $(X, d_b)$ then it is 
+   closed in $(X, d_a)$ too.
+1. Thus, both metrics determine the same set of closed sets on $X$.
+1. Thus, both metrics determine the same set of open sets on $X$.
+1. Thus, they determine the same topology.
+1. Thus, the two metrics are equivalent.
 ```
 
+Procedure to show that two metrics are equivalent.
+
+* Choose an arbitrary sequence $\{x_n\}$ which converges
+  in $(X, d_a)$ to a limit  (say $x$). 
+* Show that $\lim d_b(x_n, x) = 0$.
+* Now, choose an arbitrary sequence $\{x_n\}$ which converges
+  in $(X, d_b)$ to a limit  (say $x$). 
+* Show that $\lim d_a(x_n, x) = 0$.

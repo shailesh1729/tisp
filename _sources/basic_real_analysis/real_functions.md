@@ -1,3 +1,4 @@
+(sec:bra:real-functions)=
 # Real Functions
 In this section, we will deal with functions of type $f : \RR \to \RR$. 
 Main references are 
@@ -258,6 +259,8 @@ $$
 
 
 ```{prf:theorem}
+:label: res-bra-rf-equal-one-sided-limits
+
 A function $f$ has a limit at $x=a$ if and only if it has left and
 right hand limits at $x=a$ and they are equal.
 
@@ -724,6 +727,8 @@ Next, we look at continuity w.r.t.
 
 
 ```{prf:theorem}
+:label: res-bra-rf-composition-continuity
+
 Suppose $f$ is continuous at $x=a$; $f(a)$ is an
 {prf:ref}`interior point <def-rl-interior-point>` 
 of $\dom g$ and $g$ is continuous
@@ -890,6 +895,8 @@ $V$ has an infimum as well as a supremum.
 ```
 
 ```{prf:theorem}
+:label: res-bra-rf-continuous-closed-max-min
+
 Let $f$ be continuous on a finite closed interval $[a,b]$.
 Let
 

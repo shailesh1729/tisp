@@ -1,0 +1,2682 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.8. Topological Properties &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.9. Subgradients" href="subgradients.html" />
+    <link rel="prev" title="6.7. Convex Functions" href="convex_functions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.9. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.8. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.9. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.10. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_functions.html">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="subgradients.html">
+     6.9. Subgradients
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   7. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   8. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   9. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   10. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     11.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     11.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   12. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   13. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   14. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     14.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/convex_sets/relint.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fconvex_sets/relint.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interior">
+   6.8.1. Interior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relative-interior">
+   6.8.2. Relative Interior
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#containment-relationship">
+     6.8.2.1. Containment Relationship
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relatively-open-sets">
+     6.8.2.2. Relatively Open Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relative-interior-of-relative-interior">
+     6.8.2.3. Relative Interior of Relative Interior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relative-boundary">
+     6.8.2.4. Relative Boundary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#translations">
+   6.8.3. Translations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relative-interiors-of-convex-sets">
+   6.8.4. Relative Interiors of Convex Sets
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nonempty-relative-interiors">
+     6.8.4.1. Nonempty Relative Interiors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#line-segment-property">
+     6.8.4.2. Line Segment Property
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#closure-of-relative-interior">
+     6.8.4.3. Closure of Relative Interior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relative-interior-of-closure">
+     6.8.4.4. Relative Interior of Closure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#identical-closures-and-relative-interiors">
+     6.8.4.5. Identical Closures and Relative Interiors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finite-intersections">
+     6.8.4.6. Finite Intersections
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sum-of-sets">
+     6.8.4.7. Sum of Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-transformations">
+     6.8.4.8. Affine Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#separation-theorems">
+   6.8.5. Separation Theorems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-separating-hyperplanes">
+     6.8.5.1. Types of Separating Hyperplanes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#disjoint-affine-and-convex-sets">
+     6.8.5.2. Disjoint Affine and Convex Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#characterization-of-proper-separation">
+     6.8.5.3. Characterization of Proper Separation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#separating-hyperplane-theorems">
+     6.8.5.4. Separating Hyperplane Theorems
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Topological Properties</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interior">
+   6.8.1. Interior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relative-interior">
+   6.8.2. Relative Interior
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#containment-relationship">
+     6.8.2.1. Containment Relationship
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relatively-open-sets">
+     6.8.2.2. Relatively Open Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relative-interior-of-relative-interior">
+     6.8.2.3. Relative Interior of Relative Interior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relative-boundary">
+     6.8.2.4. Relative Boundary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#translations">
+   6.8.3. Translations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relative-interiors-of-convex-sets">
+   6.8.4. Relative Interiors of Convex Sets
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nonempty-relative-interiors">
+     6.8.4.1. Nonempty Relative Interiors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#line-segment-property">
+     6.8.4.2. Line Segment Property
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#closure-of-relative-interior">
+     6.8.4.3. Closure of Relative Interior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relative-interior-of-closure">
+     6.8.4.4. Relative Interior of Closure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#identical-closures-and-relative-interiors">
+     6.8.4.5. Identical Closures and Relative Interiors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finite-intersections">
+     6.8.4.6. Finite Intersections
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sum-of-sets">
+     6.8.4.7. Sum of Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-transformations">
+     6.8.4.8. Affine Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#separation-theorems">
+   6.8.5. Separation Theorems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-separating-hyperplanes">
+     6.8.5.1. Types of Separating Hyperplanes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#disjoint-affine-and-convex-sets">
+     6.8.5.2. Disjoint Affine and Convex Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#characterization-of-proper-separation">
+     6.8.5.3. Characterization of Proper Separation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#separating-hyperplane-theorems">
+     6.8.5.4. Separating Hyperplane Theorems
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="topological-properties">
+<span id="sec-cvx-relint"></span><h1><span class="section-number">6.8. </span>Topological Properties<a class="headerlink" href="#topological-properties" title="Permalink to this headline">¶</a></h1>
+<p>This section focuses on some topological properties
+of convex sets.
+Throughout this section, we assume that <span class="math notranslate nohighlight">\(\VV\)</span> is a
+finite dimensional real normed linear space equipped with a
+<a class="reference internal" href="../la/normed_spaces.html#def-la-norm">norm</a> <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>.
+It is also equipped with a metric <span class="math notranslate nohighlight">\(d(\bx, \by) = \| \bx - \by \|\)</span>.
+Wherever necessary,
+it is also equppied with an
+<a class="reference internal" href="../la/inner_product_spaces.html#def-la-real-inner-product">real inner product</a>
+<span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR\)</span>.</p>
+<p>In a finite dimensional real normed linear space:</p>
+<ul class="simple">
+<li><p>Linear subspaces are closed.</p></li>
+<li><p>Hyperplanes are closed.</p></li>
+<li><p>Affine subspaces are closed.</p></li>
+<li><p>Interiors of proper linear/affine subspaces are empty.</p></li>
+<li><p>Linear/affine transformations are continuous.</p></li>
+<li><p>Bijective linear/affine transformations are homeomorphisms.</p></li>
+<li><p>Bijective linear/affine transformations preserve interiors and closures.</p></li>
+</ul>
+<p>Following the discussion in <a class="reference internal" href="../la/normed_spaces.html#sec-la-normed-spaces"><span class="std std-ref">Normed Linear Spaces</span></a>,
+<span class="math notranslate nohighlight">\(B\)</span> shall denote the open unit ball <span class="math notranslate nohighlight">\(B(\bzero, 1)\)</span>.
+<span class="math notranslate nohighlight">\(\bar{B}\)</span> shall denote the closed unit ball <span class="math notranslate nohighlight">\(B[\bzero, 1]\)</span>.
+The open ball <span class="math notranslate nohighlight">\(B(\bx, r)\)</span> (for some <span class="math notranslate nohighlight">\(r &gt; 0\)</span>) can be written as
+<span class="math notranslate nohighlight">\(\bx + r B\)</span>.
+Similarly, the closed ball <span class="math notranslate nohighlight">\(B[\bx, r]\)</span> can be written as
+<span class="math notranslate nohighlight">\(\bx + r \bar{B}\)</span>.</p>
+<p>We shall use several set and vector arithmetic identities
+and inequalities in the discussion below. We list them here
+for quick reference. See <a class="reference internal" href="../la/vector_spaces.html#sec-la-set-arithmetic"><span class="std std-ref">Sets in Vector Spaces</span></a>
+for detailed discussion.</p>
+<p>Let <span class="math notranslate nohighlight">\(C,D,E\)</span> be subsets of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx, \bv, \bz \in \VV\)</span> be arbitrary vectors.</p>
+<p>From <a class="reference internal" href="../la/vector_spaces.html#res-vs-set-vec-arithmetic">Theorem 4.17</a></p>
+<div class="math notranslate nohighlight">
+\[
+C = (C + \bz) - \bz.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+C \subseteq D \iff C + \bz \subseteq D + \bz.
+\]</div>
+<p>From <a class="reference internal" href="../la/vector_spaces.html#res-vs-set-intersect-sum-dist">Theorem 4.19</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+(C \cap D) + E \subseteq (C + E) \cap (D + E).
+\]</div>
+<p>For any set <span class="math notranslate nohighlight">\(A \subseteq \VV\)</span>, the set of points <span class="math notranslate nohighlight">\(\bx\)</span>
+whose distance from <span class="math notranslate nohighlight">\(A\)</span> is less than <span class="math notranslate nohighlight">\(r\)</span> for some <span class="math notranslate nohighlight">\(r &gt; 0\)</span>
+is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+A + r B = \bigcup_{\ba \in A} \ba + r B 
+= \{\bx \ST \exists \ba \in A, d(\ba, \bx) &lt; r \}.
+\]</div>
+<p>Recall from <a class="reference internal" href="../la/normed_spaces.html#res-la-closure-point-ball">Theorem 4.41</a> that
+<span class="math notranslate nohighlight">\(\bx \in \closure A\)</span> if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\bx \in A + r B \Forall r &gt; 0.
+\]</div>
+<p>Similarly, recall from <a class="reference internal" href="../la/normed_spaces.html#res-la-interior-point-ball">Theorem 4.38</a>
+that <span class="math notranslate nohighlight">\(\bx \in \interior A\)</span> if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\exists r &gt; 0 \text{ such that } \bx + r B \subseteq A.
+\]</div>
+<div class="section" id="interior">
+<h2><span class="section-number">6.8.1. </span>Interior<a class="headerlink" href="#interior" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvx-interior-convex-set-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.81 </span> (Interior of convex sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real normed linear space.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex set of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then, its interior is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(D = \interior C\)</span>. Assume that <span class="math notranslate nohighlight">\(C\)</span> is convex.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in D\)</span> and <span class="math notranslate nohighlight">\(t \in (0,1)\)</span>.
+We need to show that <span class="math notranslate nohighlight">\(\bz = t \bx + (1-t)\by \in D\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in D\)</span>, there exists an
+open ball <span class="math notranslate nohighlight">\(B(\bx, r) \subseteq C\)</span>.</p></li>
+<li><p>Let Consider the open ball <span class="math notranslate nohighlight">\(B(\bz, t r)\)</span> radius <span class="math notranslate nohighlight">\(tr\)</span> around <span class="math notranslate nohighlight">\(\bz\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in B(\bz, t r)\)</span>.</p></li>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+   \bu = \frac{1}{t} \bv - \frac{1-t}{t} \by.
+   \]</div>
+<p>We can choose such a point <span class="math notranslate nohighlight">\(\bu \in \VV\)</span> since <span class="math notranslate nohighlight">\(t\)</span> is nonzero.</p>
+</li>
+<li><p>Then,
+<span class="math notranslate nohighlight">\(\bv = t \bu + (1-t) \by\)</span>.</p></li>
+<li><p>Note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \| t (\bu - \bx) \| 
+   &amp;= \| t\bu - t \bx \| \\
+   &amp;= \| \bv - (1-t)\by - (\bz - (1-t)\by) \|\\
+   &amp;= \| \bv - \bz \| \\
+   &amp; &lt; t r
+   \end{split}\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bv \in B(\bz, tr)\)</span>.</p>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \bu - \bx \| &lt; r\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bu \in B(\bx, r)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in C\)</span> as it is a convex combination of <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+<li><p>Since this holds true for every <span class="math notranslate nohighlight">\(\bv \in B(\bz, tr)\)</span>,
+hence <span class="math notranslate nohighlight">\(B(\bz, t r) \subseteq C\)</span>.</p></li>
+<li><p>Thus, there is an open ball of radius <span class="math notranslate nohighlight">\(tr\)</span> around <span class="math notranslate nohighlight">\(\bz\)</span> contained in <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bz \in \interior C = D\)</span>.</p></li>
+<li><p>We have shown that for any <span class="math notranslate nohighlight">\(\bx, \by \in D\)</span> and <span class="math notranslate nohighlight">\(t \in (0,1)\)</span>,
+<span class="math notranslate nohighlight">\(\bz = t \bx + (1-t)\by \in D\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(D\)</span> is convex.</p></li>
+</ol>
+</div>
+<p>We provide a shorter but more technical proof.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(D = \interior C\)</span>. Assume that <span class="math notranslate nohighlight">\(C\)</span> is convex.</p>
+<ol class="simple">
+<li><p>Fix some <span class="math notranslate nohighlight">\(t \in (0, 1)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is convex, hence <span class="math notranslate nohighlight">\(tC + (1-t)C \subseteq C\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(tD + (1-t)D \subseteq C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(D\)</span> is open, hence <span class="math notranslate nohighlight">\(tD\)</span> is open
+(<a class="reference internal" href="../la/normed_spaces.html#res-la-ns-scaling-homeomorphism">Theorem 4.47</a>).</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(tD + (1-t)D\)</span> is also open
+as sum of an open set with any set is open
+(<a class="reference internal" href="../la/normed_spaces.html#res-la-sum-open-sets">Theorem 4.48</a>).</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(D\)</span> is the largest open set contained in <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(tD + (1-t)D \subseteq D\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(D\)</span> contains all its convex combinations.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(D\)</span> is convex.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvx-convex-set-empty-interior">
+<p class="admonition-title"><span class="caption-number">Theorem 6.82 </span> (Affine hull of convex sets with empty interior)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real normed linear space.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex set of <span class="math notranslate nohighlight">\(\VV\)</span>.
+If <span class="math notranslate nohighlight">\(C\)</span> has an empty interior, then it must
+lie in an affine subspace of dimension less than <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Conversely, if <span class="math notranslate nohighlight">\(\dim \affine C &lt; n\)</span>, then, <span class="math notranslate nohighlight">\(C\)</span>
+has an empty interior.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that if <span class="math notranslate nohighlight">\(C\)</span> has an empty interior, then
+<span class="math notranslate nohighlight">\(\dim \affine C &lt; n\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(A = \affine C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\dim A = d\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(d &lt; n\)</span>, there is nothing to prove.</p></li>
+<li><p>For contradiction, assume <span class="math notranslate nohighlight">\(d=n\)</span>.</p></li>
+<li><p>Then, it is possible to pick <span class="math notranslate nohighlight">\(n+1\)</span> affine independent
+points from <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv_0, \dots, \bv_n\)</span> be one such set of affine
+independent points of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is convex, it contains the convex hull
+<span class="math notranslate nohighlight">\(H = \ConvexHull \{\bv_0, \dots, \bv_n \}\)</span>;
+i.e., <span class="math notranslate nohighlight">\(H \subseteq C\)</span>.</p></li>
+<li><p>In an <span class="math notranslate nohighlight">\(n\)</span> dimensional space, the convex hull
+of a <span class="math notranslate nohighlight">\(n+1\)</span> affine independent points has
+a nonempty interior.</p></li>
+<li><p>Thus, the interior of <span class="math notranslate nohighlight">\(C\)</span> must be nonempty.</p></li>
+<li><p>This is a contradiction, hence <span class="math notranslate nohighlight">\(\dim A &lt; n\)</span> must be true.</p></li>
+</ol>
+<p>Now, assume that <span class="math notranslate nohighlight">\(\dim \affine C &lt; n\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is a proper subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(A\)</span> has an empty interior
+as per <a class="reference internal" href="../la/affine.html#res-la-affine-subspace-empty-interior">Theorem 4.154</a>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\interior C \subseteq \interior A\)</span> since <span class="math notranslate nohighlight">\(C \subseteq A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\interior C = \EmptySet\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof example admonition" id="ex-cvx-convex-sets-empty-int-1">
+<p class="admonition-title"><span class="caption-number">Example 6.41 </span> (Convex sets with empty interiors)</p>
+<div class="example-content section" id="proof-content">
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\VV = \RR^2\)</span>. Let <span class="math notranslate nohighlight">\(A = [0,1] \times \{0\}\)</span>.
+It is the line segment from <span class="math notranslate nohighlight">\(x=0\)</span> to <span class="math notranslate nohighlight">\(x=1\)</span> with <span class="math notranslate nohighlight">\(y=0\)</span>
+on <span class="math notranslate nohighlight">\(x\)</span>-axis.
+No open ball of <span class="math notranslate nohighlight">\(\RR^2\)</span> is contained inside <span class="math notranslate nohighlight">\(A\)</span>.
+Hence, <span class="math notranslate nohighlight">\(\interior A = \EmptySet\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(C\)</span> be any singleton (a point). It is nonempty
+and its interior is empty.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\VV = \RR^3\)</span>. Any polygon lying within the <span class="math notranslate nohighlight">\(x-y\)</span> plane
+has an empty interior.</p></li>
+</ol>
+</div>
+</div><div class="proof corollary admonition" id="res-cvx-convex-empty-int-cl-int">
+<p class="admonition-title"><span class="caption-number">Corollary 6.7 </span> (Convex sets, empty interior, interior of closure)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real normed linear space.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex set of <span class="math notranslate nohighlight">\(\VV\)</span>.
+If <span class="math notranslate nohighlight">\(C\)</span> has an empty interior then so does its closure.</p>
+<div class="math notranslate nohighlight">
+\[
+\interior C = \EmptySet \implies \interior \closure C = \EmptySet.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(A = \affine C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\interior C = \EmptySet\)</span> hence <span class="math notranslate nohighlight">\(\dim A = d &lt; n\)</span>
+due to <a class="reference internal" href="#res-cvx-convex-set-empty-interior">Theorem 6.82</a> above.</p></li>
+<li><p>Now <span class="math notranslate nohighlight">\(\closure C \subseteq A\)</span> since <span class="math notranslate nohighlight">\(A\)</span> is closed
+(<a class="reference internal" href="../la/affine.html#res-la-affine-closed">Theorem 4.153</a>).</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\interior \closure C \subseteq \interior A\)</span>.</p></li>
+<li><p>But then <span class="math notranslate nohighlight">\(A\)</span> has an empty interior
+as per <a class="reference internal" href="../la/affine.html#res-la-affine-subspace-empty-interior">Theorem 4.154</a>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\interior \closure C = \EmptySet\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvx-convex-interior-segment">
+<p class="admonition-title"><span class="caption-number">Theorem 6.83 </span> (General line segment property for convex sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional normed linear space.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in \interior C\)</span>
+and <span class="math notranslate nohighlight">\(\by \in \closure C\)</span>. Then,</p>
+<div class="math notranslate nohighlight">
+\[
+(1-t) \bx + t \by \in \interior C \Forall t \in [0,1).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C\)</span> be a convex set. Fix some <span class="math notranslate nohighlight">\(t \in [0,1)\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz = (1-t) \bx + t \by\)</span>.
+It suffices to show that there is an open ball
+<span class="math notranslate nohighlight">\(\bz + rB \subseteq C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\by \in \closure C\)</span>, hence for every <span class="math notranslate nohighlight">\(r &gt; 0\)</span>,
+we have <span class="math notranslate nohighlight">\(\by \in C + r B\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \bz + r B &amp;= (1-t)\bx + t \by + r B \\
+   &amp;\subseteq (1-t)\bx + t (C + r B) + r B \\
+   &amp;= (1-t)\bx + (1 + t) rB + t C\\
+   &amp; = (1 -t)(\bx + r (1+t)(1-t)^{-1} B) + t C.
+   \end{split}\]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in \interior C\)</span>, hence we can take <span class="math notranslate nohighlight">\(r\)</span> to be so small
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + r (1+t)(1-t)^{-1} B \subseteq C.
+   \]</div>
+</li>
+<li><p>But then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   (1 -t)(\bx + r (1+t)(1-t)^{-1} B) + t C 
+   &amp;\subseteq (1 -t) C + t C\\ 
+   &amp;\subseteq C
+   \end{split}\]</div>
+<p>since <span class="math notranslate nohighlight">\(C\)</span> is convex and <span class="math notranslate nohighlight">\(t \in [0,1)\)</span>.</p>
+</li>
+<li><p>Thus, we established that there exists an <span class="math notranslate nohighlight">\(r &gt; 0\)</span>
+such that <span class="math notranslate nohighlight">\(\bz + r B \subseteq C\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bz \in \interior C\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvx-convex-closure-interior">
+<p class="admonition-title"><span class="caption-number">Theorem 6.84 </span> (Interior of closure)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real normed linear space.
+For any convex set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\interior C = \interior \closure C.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The statement is trivial for <span class="math notranslate nohighlight">\(C = \EmptySet\)</span>. We shall
+assume that <span class="math notranslate nohighlight">\(C\)</span> is nonempty. Further,
+if <span class="math notranslate nohighlight">\(\interior C = \EmptySet\)</span>, then <span class="math notranslate nohighlight">\(\interior \closure C = \EmptySet\)</span>
+due to <a class="reference internal" href="#res-cvx-convex-empty-int-cl-int">Corollary 6.7</a> above.
+We shall assume that <span class="math notranslate nohighlight">\(\interior C\)</span> is nonempty.</p>
+<p>Since <span class="math notranslate nohighlight">\(C \subseteq \closure C\)</span>, hence
+<span class="math notranslate nohighlight">\(\interior C \subseteq \interior \closure C\)</span>.</p>
+<p>For the converse, assume that <span class="math notranslate nohighlight">\(\bx \in \interior \closure C\)</span>.
+Our goal is to show that <span class="math notranslate nohighlight">\(\bx \in \interior C\)</span>.</p>
+<ol>
+<li><p>We have, <span class="math notranslate nohighlight">\(\bx \in \closure C\)</span> and there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   (\bx + r B) \subseteq \closure C.
+   \]</div>
+</li>
+<li><p>Choose a point <span class="math notranslate nohighlight">\(\by \in \interior C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t = \frac{r}{2\| \bx - \by \|}\)</span>.</p></li>
+<li><p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+   \bz = (1 + t) \bx - t \by.
+   \]</div>
+</li>
+<li><p>Note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   d(\bz, \bx) &amp;= \| \bz - \bx \|\\
+   &amp;= \|(1 + t) \bx - t \by - \bx \|\\
+   &amp;= t \| \bx - \by \| = \frac{r}{2}.
+   \end{split}\]</div>
+</li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bz \in B(\bx, r) \subseteq \closure C\)</span>.</p></li>
+<li><p>We have found the points <span class="math notranslate nohighlight">\(\by \in \interior C\)</span> and <span class="math notranslate nohighlight">\(\bz \in \closure C\)</span>.</p></li>
+<li><p>Now note that,</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \frac{t}{1+t} \by + \frac{1}{1+t} \bz.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx\)</span> is a convex combination of <span class="math notranslate nohighlight">\(\by\)</span> and <span class="math notranslate nohighlight">\(\bz\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(t &gt; 0\)</span>,  hence <span class="math notranslate nohighlight">\(\bx\)</span> lies in the line segment
+between <span class="math notranslate nohighlight">\(\bz\)</span> and <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bx \in \interior C\)</span>
+due to <a class="reference internal" href="#res-cvx-convex-interior-segment">Theorem 6.83</a>
+(line segment property for interior of convex sets).</p></li>
+</ol>
+<p>Thus, we have shown that <span class="math notranslate nohighlight">\(\interior \closure C \subseteq \interior C\)</span>
+as desired.</p>
+</div>
+</div>
+<div class="section" id="relative-interior">
+<h2><span class="section-number">6.8.2. </span>Relative Interior<a class="headerlink" href="#relative-interior" title="Permalink to this headline">¶</a></h2>
+<p>One way to think about relative interiors is
+to think in terms of subspace topology.
+If <span class="math notranslate nohighlight">\(\VV\)</span> is a normed linear space, then
+it is a metric space. For any set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>
+let <span class="math notranslate nohighlight">\(A = \affine C\)</span>. Then, we can consider the
+subspace topology by restricting the norm
+<span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span> to the affine hull <span class="math notranslate nohighlight">\(A\)</span>.
+In terms of subspace topology,
+if some set <span class="math notranslate nohighlight">\(X\)</span> is open in <span class="math notranslate nohighlight">\(\VV\)</span>, then
+<span class="math notranslate nohighlight">\(X \cap A\)</span> is relatively open in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>A set <span class="math notranslate nohighlight">\(C\)</span> may have an empty interior
+and yet may have a nonempty relative interior.
+For example, consider a face of a cube in
+<span class="math notranslate nohighlight">\(\RR^3\)</span>. While the cube has a nonempty interior,
+the face has an empty interior as no open ball
+is contained inside the face.
+But, in terms of the subspace topology of the
+affine hull of the face, the face indeed
+as a nonempty relative interior.</p>
+<p>Often, a convex set lies in a low dimensional
+(affine or linear) subspace of the ambient vector space.
+Thus, the interior of the convex set is empty.
+At the same time, the relative interior of the set
+(w.r.t. its affine hull) need not be empty.
+It plays a similar topological role as the interior of a set.
+We develop some fundamental results on the relative
+interiors of convex sets in the sequel.</p>
+<div class="proof definition admonition" id="def-cvx-relative-interior-point">
+<p class="admonition-title"><span class="caption-number">Definition 6.52 </span> (Relative interior point)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real normed linear space.
+Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>. We say that <span class="math notranslate nohighlight">\(\bx \in C\)</span>
+is a <em>relative interior point</em> of <span class="math notranslate nohighlight">\(C\)</span> if
+there exists an open ball <span class="math notranslate nohighlight">\(B(\bx, r)\)</span> for some <span class="math notranslate nohighlight">\(r &gt; 0\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+B(\bx, r) \cap \affine C \subseteq C.
+\]</div>
+</div>
+</div><p>Note that, the open ball <span class="math notranslate nohighlight">\(B(\bx, r)\)</span> itself need not be
+contained inside <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<div class="proof definition admonition" id="def-cvx-relative-interior">
+<p class="admonition-title"><span class="caption-number">Definition 6.53 </span> (Relative interior)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>relative interior</em> of a set <span class="math notranslate nohighlight">\(C\)</span>, denoted by <span class="math notranslate nohighlight">\(\relint C\)</span>
+is the set of
+all its relative interior points.</p>
+<div class="math notranslate nohighlight">
+\[
+\relint C \triangleq \{\bx \in C \ST \exists r &gt; 0, 
+B(\bx, r) \cap \affine C \subseteq C \}.
+\]</div>
+</div>
+</div><p>The basic definition of relative interior doesn’t require
+<span class="math notranslate nohighlight">\(\VV\)</span> to be finite dimensional.
+However, several results in the sequel do depend
+on <span class="math notranslate nohighlight">\(\VV\)</span> being finite dimensional. We will
+clearly state this as and when required.</p>
+<div class="proof example admonition" id="ex-cvx-relint-arc">
+<p class="admonition-title"><span class="caption-number">Example 6.42 </span> (Relative interior of an arc)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the set of points given by</p>
+<div class="math notranslate nohighlight">
+\[
+S = \left \{ (\cos(t), \sin (t)) \ST 0 \leq t \leq \frac{\pi}{2} \right \}.
+\]</div>
+<p>in the ambient space <span class="math notranslate nohighlight">\(\RR^2\)</span>.
+The affine hull of <span class="math notranslate nohighlight">\(S\)</span> is the entire plane <span class="math notranslate nohighlight">\(\RR^2\)</span>.</p>
+<p>Now, for any <span class="math notranslate nohighlight">\(\bx \in S\)</span>, <span class="math notranslate nohighlight">\(r &gt; 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+B(\bx, r) \cap \affine (S) = B(\bx, r) \cap \RR^2 = B(\bx, r).
+\]</div>
+<p>It is an open ball in <span class="math notranslate nohighlight">\(\RR^2\)</span> and hence never a subset of <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(\relint S = \EmptySet\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-relint-subset">
+<p class="admonition-title"><span class="caption-number">Theorem 6.85 </span> (Relative interiors are subset)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For any set <span class="math notranslate nohighlight">\(C\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\relint C \subseteq C.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This follows directly from the definition of
+relative interior.</p>
+</div>
+<p>Basic arithmetic of balls relative to the affine hull
+will be useful later on.</p>
+<div class="proof theorem admonition" id="res-cvx-rel-ball-arithmetic">
+<p class="admonition-title"><span class="caption-number">Theorem 6.86 </span> (Relative ball arithmetic)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real normed linear space.
+Let <span class="math notranslate nohighlight">\(A\)</span> be an affine set and <span class="math notranslate nohighlight">\(\bx \in A\)</span>.
+Let <span class="math notranslate nohighlight">\(L\)</span> be the linear subspace parallel to <span class="math notranslate nohighlight">\(A\)</span> given by
+<span class="math notranslate nohighlight">\(L = A - A = A - \bx\)</span>. Let <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+(B(\bx, r) \cap A) - \bx = B(\bzero, r) \cap L.
+\]</div>
+<p>Alternatively,</p>
+<div class="math notranslate nohighlight">
+\[
+B(\bx, r) \cap A  = (B(\bzero, r) \cap L) + \bx.
+\]</div>
+<p>For any <span class="math notranslate nohighlight">\(\bx, \by \in A\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+(B(\bx, r) \cap A) - \bx = (B(\by, r) \cap A) - \by. 
+\]</div>
+</div>
+</div><p>In the simplified notation,</p>
+<div class="math notranslate nohighlight">
+\[
+((\bx + r B) \cap A) - \bx = r B \cap L.
+\]</div>
+<p>Alternatively,</p>
+<div class="math notranslate nohighlight">
+\[
+(\bx + r B) \cap A = (r B \cap L) + \bx.
+\]</div>
+<p>And for any <span class="math notranslate nohighlight">\(\bx, \by \in A\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+((\bx + r B) \cap A) - \bx = ((\by + r B) \cap A) - \by.
+\]</div>
+<div class="proof admonition" id="proof">
+<p>Proof. We first show that <span class="math notranslate nohighlight">\((B(\bx, r) \cap A) - \bx \subseteq B(\bzero, r) \cap L
+\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in (B(\bx, r) \cap A) - \bx\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bv + \bx \in B(\bx, r) \cap A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv + \bx \in B(\bx, r)\)</span> and <span class="math notranslate nohighlight">\(\bv + \bx \in A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in B(\bzero, r)\)</span> and <span class="math notranslate nohighlight">\(\bv \in A - \bx = L\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in B(\bzero, r) \cap L\)</span>.</p></li>
+</ol>
+<p>We now show the converse.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in B(\bzero, r) \cap L\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bv \in B(\bzero, r)\)</span> and <span class="math notranslate nohighlight">\(\bv \in L\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bv + \bx \in B(\bx, r)\)</span> and <span class="math notranslate nohighlight">\(\bv + \bx \in L + \bx = A\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bv + \bx \in B(\bx, r) \cap A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in (B(\bx, r) \cap A) - \bx\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(B(\bzero, r) \cap L \subseteq (B(\bx, r) \cap A) - \bx\)</span>.</p></li>
+</ol>
+<p>We have shown that</p>
+<div class="math notranslate nohighlight">
+\[
+(B(\bx, r) \cap A) - \bx = B(\bzero, r) \cap L.
+\]</div>
+<p>Similarly, for any other <span class="math notranslate nohighlight">\(\by \in A\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+(B(\by, r) \cap A) - \by = B(\bzero, r) \cap L.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+(B(\bx, r) \cap A) - \bx = (B(\by, r) \cap A) - \by. 
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-cvx-relint-interior">
+<p class="admonition-title"><span class="caption-number">Theorem 6.87 </span> (Relative interior and interior)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For any set <span class="math notranslate nohighlight">\(C\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\interior C \subseteq \relint C.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bx \in \interior C\)</span>.</p>
+<ol class="simple">
+<li><p>Then, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B(\bx, r) \subseteq C\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(B(\bx, r) \subseteq C\)</span> implies that
+<span class="math notranslate nohighlight">\(B(\bx, r) \cap \affine C \subseteq C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span> also holds.</p></li>
+</ol>
+<p>Thus, <span class="math notranslate nohighlight">\(\interior C \subseteq \relint C\)</span>.</p>
+</div>
+<div class="section" id="containment-relationship">
+<h3><span class="section-number">6.8.2.1. </span>Containment Relationship<a class="headerlink" href="#containment-relationship" title="Permalink to this headline">¶</a></h3>
+<p>In general <span class="math notranslate nohighlight">\(A \subseteq B\)</span> implies that
+<span class="math notranslate nohighlight">\(\interior A \subseteq \interior B\)</span> and
+<span class="math notranslate nohighlight">\(\closure A \subseteq \closure B\)</span>.
+However, this is not the case with relative interiors.</p>
+<div class="proof remark admonition" id="res-cvx-relint-non-inclusive">
+<p class="admonition-title"><span class="caption-number">Remark 6.4 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>An inclusion <span class="math notranslate nohighlight">\(A \subseteq B\)</span> does not imply
+<span class="math notranslate nohighlight">\(\relint A \subseteq \relint B\)</span>.</p>
+<p>Consider <span class="math notranslate nohighlight">\(C\)</span> to be a cube in <span class="math notranslate nohighlight">\(\RR^3\)</span> and
+<span class="math notranslate nohighlight">\(A\)</span> to be one of its faces.
+The relative interiors of both <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are nonempty
+but disjoint.</p>
+</div>
+</div><p>However, if the affine hulls of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are same,
+then <span class="math notranslate nohighlight">\(A \subseteq B\)</span> does imply that <span class="math notranslate nohighlight">\(\relint A \subseteq \relint B\)</span>.</p>
+<div class="proof theorem admonition" id="res-cvx-relint-subset-rel">
+<p class="admonition-title"><span class="caption-number">Theorem 6.88 </span> (Relative interior and containment)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A, B \subseteq \VV\)</span>.
+If <span class="math notranslate nohighlight">\(A \subseteq B \subseteq \affine A\)</span>,
+then <span class="math notranslate nohighlight">\(\relint A \subseteq \relint B\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. By <a class="reference internal" href="../la/affine.html#res-affine-hull-tight-containment">Theorem 4.127</a>,
+<span class="math notranslate nohighlight">\(\affine A = \affine B\)</span>.</p>
+<p>Now, let us focus on the relative interiors.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \relint A\)</span>.</p></li>
+<li><p>Then, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   B(\bx, r) \cap \affine A \subseteq A.
+   \]</div>
+</li>
+<li><p>Replace <span class="math notranslate nohighlight">\(\affine A\)</span> by <span class="math notranslate nohighlight">\(\affine B\)</span> and use the fact that <span class="math notranslate nohighlight">\(A \subseteq B\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   B(\bx, r) \cap \affine B \subseteq B.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in \relint B\)</span>.</p></li>
+</ol>
+<p>Thus, <span class="math notranslate nohighlight">\(\relint A \subseteq \relint B\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvx-closure-relint">
+<p class="admonition-title"><span class="caption-number">Theorem 6.89 </span> (Relative interior of closure)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.
+For any set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\relint C \subseteq \relint \closure C.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The statement is trivial for <span class="math notranslate nohighlight">\(C = \EmptySet\)</span>. We shall
+assume that <span class="math notranslate nohighlight">\(C\)</span> is nonempty.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(C \subseteq \closure C\)</span></p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional,
+hence by <a class="reference internal" href="../la/affine.html#res-la-affine-hull-closure">Theorem 4.155</a>,
+<span class="math notranslate nohighlight">\(\affine (\closure C) = \affine C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C \subseteq \closure C \subseteq \affine C\)</span>.</p></li>
+<li><p>Thus, by <a class="reference internal" href="#res-cvx-relint-subset-rel">Theorem 6.88</a>,
+we have <span class="math notranslate nohighlight">\(\relint C \subseteq \relint \closure C\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="relatively-open-sets">
+<h3><span class="section-number">6.8.2.2. </span>Relatively Open Sets<a class="headerlink" href="#relatively-open-sets" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-cvx-relatively-open">
+<p class="admonition-title"><span class="caption-number">Definition 6.54 </span> (Relatively open set)</p>
+<div class="definition-content section" id="proof-content">
+<p>We say that a set <span class="math notranslate nohighlight">\(C\)</span> is <em>relatively open</em> if <span class="math notranslate nohighlight">\(C\)</span>
+is open relative to its affine hull <span class="math notranslate nohighlight">\(\affine C\)</span>.
+In other words, <span class="math notranslate nohighlight">\(C\)</span> is <em>relatively open</em> if</p>
+<div class="math notranslate nohighlight">
+\[
+\relint C = C.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-affine-relative-open">
+<p class="admonition-title"><span class="caption-number">Theorem 6.90 </span> (Affine sets are relatively open)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real normed linear space.
+Any affine set in <span class="math notranslate nohighlight">\(\VV\)</span> is relatively open.
+In other words, if <span class="math notranslate nohighlight">\(A\)</span> is affine, then</p>
+<div class="math notranslate nohighlight">
+\[
+\relint A = A.
+\]</div>
+</div>
+</div><p>Note that this result doesn’t require <span class="math notranslate nohighlight">\(\VV\)</span> to be
+finite dimensional.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A\)</span> be an affine set. Then, <span class="math notranslate nohighlight">\(\affine A = A\)</span>.
+Thus, for any <span class="math notranslate nohighlight">\(\bx \in A\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+B(\bx, r) \cap \affine A = B(\bx, r) \cap A \subseteq A.
+\]</div>
+<p>Thus, every <span class="math notranslate nohighlight">\(\bx \in A\)</span> is a relative interior point of <span class="math notranslate nohighlight">\(A\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\relint A = A.
+\]</div>
+</div>
+<div class="proof corollary admonition" id="res-cvx-hyperplane-relative-open">
+<p class="admonition-title"><span class="caption-number">Corollary 6.8 </span> (Hyperplanes are relatively open)</p>
+<div class="corollary-content section" id="proof-content">
+<p>The relative interior of a hyperplane is the hyperplane itself.
+A hyperplane is relatively open.</p>
+</div>
+</div><p>This is a consequence of the fact that every hyperplane
+is affine.</p>
+<p>An affine set in a finite dimensional vector space
+is also closed since it is an
+intersection of hyperplanes and every hyperplane
+is a closed set. See <a class="reference internal" href="../la/affine.html#res-la-affine-closed">Theorem 4.153</a></p>
+</div>
+<div class="section" id="relative-interior-of-relative-interior">
+<h3><span class="section-number">6.8.2.3. </span>Relative Interior of Relative Interior<a class="headerlink" href="#relative-interior-of-relative-interior" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-relint-relint">
+<p class="admonition-title"><span class="caption-number">Theorem 6.91 </span> (Relative interior is relatively open)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For any set <span class="math notranslate nohighlight">\(C\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\relint (\relint C) = \relint C.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\relint C\)</span> is relatively open.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. By definition <span class="math notranslate nohighlight">\(\relint (\relint C) \subseteq \relint C\)</span>.
+Thus, we need to show that <span class="math notranslate nohighlight">\(\relint C \subseteq \relint (\relint C)\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(A = \affine C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span>.</p></li>
+<li><p>Then, there exists <span class="math notranslate nohighlight">\(\epsilon = 2 r &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   (\bx + 2 r B) \cap A \subseteq C.
+   \]</div>
+</li>
+<li><p>We can write <span class="math notranslate nohighlight">\(\bx + 2 rB\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + 2 r B = (\bx + r B ) + r B.
+   \]</div>
+</li>
+<li><p>Thus, the previous inclusion can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+   ( (\bx + r B) + r B) 
+   \cap A \subseteq C.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(U = (\bx + r B) \cap A\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(U \subseteq C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in U\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\by \in A\)</span> and <span class="math notranslate nohighlight">\(\by \in (\bx + r B)\)</span>.</p></li>
+<li><p>From previous inclusion, we can say that for every <span class="math notranslate nohighlight">\(\by \in U\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   (\by + r B) \cap A \subseteq C.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\by \in \relint C\)</span> for every <span class="math notranslate nohighlight">\(\by \in U\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(U \subseteq \relint C\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   U = (\bx + r B) \cap A \subseteq \relint C.
+   \]</div>
+</li>
+<li><p>By definition of relative interior, <span class="math notranslate nohighlight">\(\bx \in \relint (\relint C)\)</span>.</p></li>
+</ol>
+<p>We have shown that <span class="math notranslate nohighlight">\(\relint C \subseteq \relint (\relint C)\)</span>.</p>
+</div>
+</div>
+<div class="section" id="relative-boundary">
+<h3><span class="section-number">6.8.2.4. </span>Relative Boundary<a class="headerlink" href="#relative-boundary" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-cvx-relative-boundary">
+<p class="admonition-title"><span class="caption-number">Definition 6.55 </span> (Relative boundary)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>relative boundary</em> of a set <span class="math notranslate nohighlight">\(C\)</span>, denoted by <span class="math notranslate nohighlight">\(\relbd C\)</span>
+is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\relbd C \triangleq \closure C \setminus \relint C.
+\]</div>
+</div>
+</div></div>
+</div>
+<div class="section" id="translations">
+<h2><span class="section-number">6.8.3. </span>Translations<a class="headerlink" href="#translations" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvx-relint-translation-pres">
+<p class="admonition-title"><span class="caption-number">Theorem 6.92 </span> (Translations preserve relative interiors)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a normed linear space.
+Let <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> be some fixed vector.
+Let a translation map <span class="math notranslate nohighlight">\(g_a : \VV \to \VV\)</span> be defined as</p>
+<div class="math notranslate nohighlight">
+\[
+g_a = \bx + \ba \Forall \bx \in \VV.
+\]</div>
+<p>Then, for any set <span class="math notranslate nohighlight">\(A \subseteq \VV\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+g_a (\relint A) = \relint (g_a (A)).
+\]</div>
+<p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+\relint (A + \ba) = (\relint A)  + \ba.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bx \in \relint (A + \ba)\)</span>.</p>
+<ol>
+<li><p>Then, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   (\bx + r B ) \cap \affine (A + \ba) \subseteq A + \ba.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by = \bx - \ba\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in A + \ba\)</span> hence <span class="math notranslate nohighlight">\(\by \in A\)</span>.</p></li>
+<li><p>Consider the set:</p>
+<div class="math notranslate nohighlight">
+\[
+   R = (\by + r B) \cap \affine A.
+   \]</div>
+</li>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   R + \ba &amp;= ((\by + r B) \cap \affine A) + \ba\\
+   &amp;\subseteq ((\by + r B) + \ba) \cap ((\affine A) + \ba)\\
+   &amp;= (\bx + r B) \cap (\affine (A + \ba))\\
+   &amp;\subseteq A + \ba.
+   \end{split}\]</div>
+<ol class="simple">
+<li><p>Recall that <span class="math notranslate nohighlight">\((C \cap D) + E \subseteq (C + E) \cap (D + E)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((\affine A) + \ba = \affine (A + \ba)\)</span> since
+translation which is an affine transformation
+preserves affine hulls (<a class="reference internal" href="../la/affine.html#res-la-aff-func-aff-hull">Theorem 4.148</a>).</p></li>
+</ol>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(R + \ba \subseteq A + \ba\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(R \subseteq A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\by \in \relint A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx - \ba \in \relint A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in \relint A + \ba\)</span>.</p></li>
+</ol>
+<p>Thus, <span class="math notranslate nohighlight">\(\relint (A + \ba) \subseteq \relint A + \ba\)</span>.</p>
+<p>For the converse, assume that
+<span class="math notranslate nohighlight">\(\bx \in \relint A + \ba\)</span>.</p>
+<ol>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx - \ba \in \relint A\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by = \bx - \ba\)</span>.</p></li>
+<li><p>Then, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   (\by + r B ) \cap \affine A \subseteq A.
+   \]</div>
+</li>
+<li><p>Consider the set</p>
+<div class="math notranslate nohighlight">
+\[
+   R = (\bx + r B) \cap \affine (A + \ba).
+   \]</div>
+</li>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   R - \ba &amp;= ((\bx + r B) \cap \affine (A + \ba)) - \ba\\
+   &amp;\subseteq ((\bx + r B) - \ba) \cap ((\affine (A + \ba)) - \ba)\\
+   &amp;= (\by + r B) \cap (\affine (A + \ba) - \ba)\\
+   &amp;= (\by + r B) \cap \affine A\\
+   &amp;\subseteq A.
+   \end{split}\]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(R - \ba \subseteq A\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(R \subseteq A + \ba\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in \relint (A + \ba)\)</span>.</p></li>
+</ol>
+<p>Thus, <span class="math notranslate nohighlight">\(\relint A + \ba \subseteq \relint (A + \ba)\)</span>.</p>
+<p>Together, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\relint A + \ba = \relint (A + \ba)
+\]</div>
+</div>
+</div>
+<div class="section" id="relative-interiors-of-convex-sets">
+<h2><span class="section-number">6.8.4. </span>Relative Interiors of Convex Sets<a class="headerlink" href="#relative-interiors-of-convex-sets" title="Permalink to this headline">¶</a></h2>
+<p>Relative interiors play the role of interiors for convex sets.
+Much of the following discussion is focused on the relative
+interiors of convex sets (in finite dimensional real normed linear spaces).</p>
+<div class="proof theorem admonition" id="res-cvx-convex-relint-is-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.93 </span> (Relative interior of a convex set is convex)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real normed linear space.
+If <span class="math notranslate nohighlight">\(C\)</span> is a convex set of <span class="math notranslate nohighlight">\(\VV\)</span>, then its relative interior
+is a convex set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(C = \EmptySet\)</span>, then, <span class="math notranslate nohighlight">\(\relint C = \EmptySet\)</span> is convex.
+So, assume that <span class="math notranslate nohighlight">\(C\)</span> is nonempty.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(A = \affine C\)</span> be the affine hull of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(U = \relint C\)</span> be the relative interior of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(L = A - A\)</span> be the linear subspace parallel to <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Choose <span class="math notranslate nohighlight">\(\bx, \by \in U\)</span>. Then, <span class="math notranslate nohighlight">\(\bx, \by \in U \subseteq C \subseteq A\)</span>.</p></li>
+<li><p>Then, there exist open balls <span class="math notranslate nohighlight">\(B(\bx, r_x)\)</span> and <span class="math notranslate nohighlight">\(B(\by, r_y)\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   B(\bx, r_x) \cap A \subseteq C
+   \text{ and }
+   B(\by, r_y) \cap A \subseteq C
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(t \in (0,1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz = t \bx + (1-t)\by\)</span>. Note that <span class="math notranslate nohighlight">\(\bz \in C \subseteq A\)</span>
+since <span class="math notranslate nohighlight">\(\bx, \by \in C\)</span> and <span class="math notranslate nohighlight">\(\bz\)</span> is their convex combination.</p></li>
+<li><p>Choose <span class="math notranslate nohighlight">\(r = \min(r_x, r_y)\)</span>.
+We shall show that</p>
+<div class="math notranslate nohighlight">
+\[
+   B(\bz, r) \cap A \subseteq C.
+   \]</div>
+<p>Thus, we shall show that <span class="math notranslate nohighlight">\(\bz \in \relint C\)</span>.</p>
+</li>
+<li><p>Towards this, pick any <span class="math notranslate nohighlight">\(\bw \in  B(\bz, r) \cap A\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bw = \bz + \ba\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bw = \bz + \ba \in B(\bz, r) \implies \ba \in B(\bzero, r)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bw = \bz + \ba \in A \implies \ba \in A - \bz = L\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \ba \| &lt; r\)</span> and <span class="math notranslate nohighlight">\(\ba \in L\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu = \bx + \ba\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bu \in L + \bx = A\)</span> and <span class="math notranslate nohighlight">\(\bu \in B(\bx, r) \subseteq B(\bx, r_x)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bu \in B(\bx, r_x) \cap A \subseteq C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv = \by + \ba\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bv \in L + \by = A\)</span> and <span class="math notranslate nohighlight">\(\bv \in B(\by, r) \subseteq B(\by, r_y)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in B(\by, r_y) \cap A \subseteq C\)</span>.</p></li>
+<li><p>Now,</p>
+<div class="math notranslate nohighlight">
+\[
+   \bw = \bz + \ba = t \bx + (1-t)\by + \ba 
+   = t (\bx + \ba) + (1-t) (\by + \ba)
+   = t \bu + (1-t) \bv.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bw\)</span> is a convex combination of <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span>.</p></li>
+<li><p>Since both <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span> are in <span class="math notranslate nohighlight">\(C\)</span>,
+hence <span class="math notranslate nohighlight">\(\bw \in C\)</span> as <span class="math notranslate nohighlight">\(C\)</span> is convex.</p></li>
+<li><p>We have shown that for every <span class="math notranslate nohighlight">\(\bw \in B(\bz, r) \cap A\)</span>,
+<span class="math notranslate nohighlight">\(\bw \in C\)</span>.</p></li>
+<li><p>Consequently,</p>
+<div class="math notranslate nohighlight">
+\[
+   B(\bz, r) \cap A \subseteq C.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bz \in \relint C = U\)</span>.</p></li>
+<li><p>Thus, for every <span class="math notranslate nohighlight">\(\bx, \by \in U\)</span> and <span class="math notranslate nohighlight">\(t \in (0,1)\)</span>,
+<span class="math notranslate nohighlight">\(\bz = t \bx  + (1-t) \by \in U\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(U\)</span> is convex.</p></li>
+</ol>
+</div>
+<div class="section" id="nonempty-relative-interiors">
+<h3><span class="section-number">6.8.4.1. </span>Nonempty Relative Interiors<a class="headerlink" href="#nonempty-relative-interiors" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-nonempty-relint">
+<p class="admonition-title"><span class="caption-number">Theorem 6.94 </span> (Nonempty relative interiors)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real normed linear space.
+If <span class="math notranslate nohighlight">\(C\)</span> is a nonempty convex set, then its relative interior
+is nonempty.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A = \affine C\)</span> and let <span class="math notranslate nohighlight">\(\dim A = k\)</span>.</p>
+<ol>
+<li><p>Choose <span class="math notranslate nohighlight">\(k+1\)</span> affine independent points of <span class="math notranslate nohighlight">\(C\)</span>:
+<span class="math notranslate nohighlight">\(\bv_0, \dots, \bv_k\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(H = \ConvexHull \{\bv_0, \dots, \bv_k \}\)</span> be their convex hull.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is convex, it contains the convex hull <span class="math notranslate nohighlight">\(H\)</span>;
+i.e., <span class="math notranslate nohighlight">\(H \subseteq C\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(H\)</span> contains all convex combinations of  <span class="math notranslate nohighlight">\(\{\bv_0, \dots, \bv_k \}\)</span>.</p></li>
+<li><p>In particular, it contains the point:</p>
+<div class="math notranslate nohighlight">
+\[
+   \bv = \frac{1}{k+1} (\bv_0 + \dots + \bv_k).
+   \]</div>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\bv \in H \subseteq C\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(A = \affine C = \affine \{\bv_0, \dots, \bv_k \} = \affine H\)</span>.</p></li>
+<li><p>Thus, we can select a sufficiently small <span class="math notranslate nohighlight">\(r &gt; 0\)</span>
+such that all points in <span class="math notranslate nohighlight">\(B(\bv, r) \cap A\)</span> are contained in <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+<li><p>But then, <span class="math notranslate nohighlight">\(B(\bv, r) \subseteq H \subseteq C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in C\)</span> and <span class="math notranslate nohighlight">\(B(\bv, r) \cap A \subseteq C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in \relint C\)</span>.</p></li>
+<li><p>Thus, the relative interior of <span class="math notranslate nohighlight">\(C\)</span> is nonempty.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="line-segment-property">
+<h3><span class="section-number">6.8.4.2. </span>Line Segment Property<a class="headerlink" href="#line-segment-property" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-convex-relint-segment">
+<p class="admonition-title"><span class="caption-number">Theorem 6.95 </span> (Line segment property of relative interior)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.</p>
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span>
+and <span class="math notranslate nohighlight">\(\by \in \closure C\)</span>. Then,</p>
+<div class="math notranslate nohighlight">
+\[
+(1-t) \bx + t \by \in \relint C \Forall t \in [0,1).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is a restatement of the line segment property
+for interior of a convex set as described in
+<a class="reference internal" href="#res-cvx-convex-interior-segment">Theorem 6.83</a>.</p>
+<p>For simplicity, we shall assume that <span class="math notranslate nohighlight">\(\relint C = \interior C\)</span>.
+Then, the proof of <a class="reference internal" href="#res-cvx-convex-interior-segment">Theorem 6.83</a>
+applies directly.</p>
+<p>This argument can be extended for the case where
+<span class="math notranslate nohighlight">\(\relint C \neq \interior C\)</span>.</p>
+</div>
+<p>One way to interpret this result is as follows.
+If we draw a line segment between a point
+in the relative interior of a convex set <span class="math notranslate nohighlight">\(C\)</span>
+and a point on the boundary of <span class="math notranslate nohighlight">\(C\)</span>, then
+every point on the segment (except the boundary point)
+lies inside the relative interior of <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>Several topological properties follow.</p>
+</div>
+<div class="section" id="closure-of-relative-interior">
+<h3><span class="section-number">6.8.4.3. </span>Closure of Relative Interior<a class="headerlink" href="#closure-of-relative-interior" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-convex-relint-closure">
+<p class="admonition-title"><span class="caption-number">Theorem 6.96 </span> (Closure of relative interior)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.
+For any convex set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\closure \relint C = \closure C.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\relint C \subseteq C\)</span>, hence
+<span class="math notranslate nohighlight">\(\closure \relint C \subseteq \closure C\)</span>.</p>
+<p>For the other direction, we proceed as follows:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in \closure C\)</span>.</p></li>
+<li><p>Choose some <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvx-convex-relint-segment">Theorem 6.95</a>,
+the line segment between <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span>
+(excluding <span class="math notranslate nohighlight">\(\by\)</span>) lies in <span class="math notranslate nohighlight">\(\relint C\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\by\)</span> is a limit point of <span class="math notranslate nohighlight">\(\relint C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\by \in \closure \relint C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\closure C \subseteq \closure \relint C\)</span>.</p></li>
+</ol>
+<p>Combining the two inclusions, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\closure \relint C = \closure C.
+\]</div>
+</div>
+</div>
+<div class="section" id="relative-interior-of-closure">
+<h3><span class="section-number">6.8.4.4. </span>Relative Interior of Closure<a class="headerlink" href="#relative-interior-of-closure" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-convex-closure-relint">
+<p class="admonition-title"><span class="caption-number">Theorem 6.97 </span> (Relative interior of closure)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.
+For any convex set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\relint \closure C = \relint C.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The statement is trivial for <span class="math notranslate nohighlight">\(C = \EmptySet\)</span>. We shall
+assume that <span class="math notranslate nohighlight">\(C\)</span> is nonempty.</p>
+<p>By <a class="reference internal" href="#res-cvx-closure-relint">Theorem 6.89</a>
+<span class="math notranslate nohighlight">\(\relint C \subseteq \relint \closure C\)</span>
+holds true for any set <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>For the converse, assume that <span class="math notranslate nohighlight">\(\bx \in \relint \closure C\)</span>.
+Our goal is to show that <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span>.
+Towards this, we have to find points <span class="math notranslate nohighlight">\(\by \in \relint C\)</span>
+and <span class="math notranslate nohighlight">\(\bz \in \closure C\)</span> such that <span class="math notranslate nohighlight">\(\bx\)</span> lies
+on the line segment between <span class="math notranslate nohighlight">\(\by\)</span> and <span class="math notranslate nohighlight">\(\bz\)</span>.
+Since, <span class="math notranslate nohighlight">\(C\)</span> is nonempty and convex, it is easy
+to pick a point <span class="math notranslate nohighlight">\(\by \in \relint C\)</span>. Then,
+on the path from <span class="math notranslate nohighlight">\(\by\)</span> to <span class="math notranslate nohighlight">\(\bx\)</span>, the point
+<span class="math notranslate nohighlight">\(\bz\)</span> must be behind <span class="math notranslate nohighlight">\(\bx\)</span> and yet not too far
+behind <span class="math notranslate nohighlight">\(\bx\)</span> so that we can ensure that <span class="math notranslate nohighlight">\(\bz\)</span>
+is indeed in <span class="math notranslate nohighlight">\(\closure C\)</span>. That is where
+we use the fact that there is a ball
+around <span class="math notranslate nohighlight">\(\bx\)</span> whose intersection with <span class="math notranslate nohighlight">\(\affine C\)</span>
+is totally inside <span class="math notranslate nohighlight">\(\closure C\)</span>.</p>
+<ol>
+<li><p>We have, <span class="math notranslate nohighlight">\(\bx \in \closure C\)</span> and there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   (\bx + r B) \cap \affine (\closure C) \subseteq \closure C.
+   \]</div>
+</li>
+<li><p>Recall from <a class="reference internal" href="../la/affine.html#res-la-affine-hull-closure">Theorem 4.155</a> that
+<span class="math notranslate nohighlight">\(\affine (\closure C) = \affine C\)</span>.</p></li>
+<li><p>Thus, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   (\bx + r B) \cap \affine C \subseteq \closure C.
+   \]</div>
+</li>
+<li><p>By <a class="reference internal" href="#res-cvx-nonempty-relint">Theorem 6.94</a>, the relative
+interior of <span class="math notranslate nohighlight">\(C\)</span> is nonempty.</p></li>
+<li><p>Choose a point <span class="math notranslate nohighlight">\(\by \in \relint C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t = \frac{r}{2\| \bx - \by \|}\)</span>.</p></li>
+<li><p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+   \bz = (1 + t) \bx - t \by.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\bz\)</span> is an affine combination of <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span>.
+Since <span class="math notranslate nohighlight">\(\bx \in \closure C\)</span> and <span class="math notranslate nohighlight">\(\by \in \relint C \subseteq \closure C\)</span>,
+hence <span class="math notranslate nohighlight">\(\bz \in \affine (\closure C) = \affine C\)</span>.</p></li>
+<li><p>Also note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   d(\bz, \bx) &amp;= \| \bz - \bx \|\\
+   &amp;= \|(1 + t) \bx - t \by - \bx \|\\
+   &amp;= t \| \bx - \by \| = \frac{r}{2}.
+   \end{split}\]</div>
+</li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bz \in B(x, r)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bz \in B(x, r) \cap \affine C \subseteq \closure C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bz \in \closure C\)</span>.</p></li>
+<li><p>We have found the points <span class="math notranslate nohighlight">\(\by \in \relint C\)</span> and <span class="math notranslate nohighlight">\(\bz \in \closure C\)</span>.</p></li>
+<li><p>Now note that,</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \frac{t}{1+t} \by + \frac{1}{1+t} \bz.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx\)</span> is a convex combination of <span class="math notranslate nohighlight">\(\by\)</span> and <span class="math notranslate nohighlight">\(\bz\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(t &gt; 0\)</span>,  hence <span class="math notranslate nohighlight">\(\bx\)</span> lies in the line segment
+between <span class="math notranslate nohighlight">\(\bz\)</span> and <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+<li><p>By the
+<a class="reference internal" href="#res-cvx-convex-relint-segment">line segment property</a>,
+the line segment between <span class="math notranslate nohighlight">\(\bz\)</span> and <span class="math notranslate nohighlight">\(\by\)</span>
+(excluding <span class="math notranslate nohighlight">\(\bz\)</span>) lies in <span class="math notranslate nohighlight">\(\relint C\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span>.</p></li>
+</ol>
+<p>Thus, we have shown that <span class="math notranslate nohighlight">\(\relint \closure C \subseteq \relint C\)</span>
+as desired.</p>
+</div>
+</div>
+<div class="section" id="identical-closures-and-relative-interiors">
+<h3><span class="section-number">6.8.4.5. </span>Identical Closures and Relative Interiors<a class="headerlink" href="#identical-closures-and-relative-interiors" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-convex-same-cl-same-relint">
+<p class="admonition-title"><span class="caption-number">Theorem 6.98 </span> (Same closure means same relative interior)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.</p>
+<p>Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be convex subsets of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\closure C_1 = \closure C_2 \iff \relint C_1 = \relint C_2.
+\]</div>
+<p>In other words, if closures are same, then relative interiors
+must be same too and vice versa.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From <a class="reference internal" href="#res-cvx-convex-relint-closure">Theorem 6.96</a>,
+<span class="math notranslate nohighlight">\(\closure \relint C = \closure C\)</span>
+and from <a class="reference internal" href="#res-cvx-convex-closure-relint">Theorem 6.97</a>,
+<span class="math notranslate nohighlight">\(\relint \closure C = \relint C\)</span>
+for any convex set <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>Assume <span class="math notranslate nohighlight">\(\closure C_1 = \closure C_2\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\relint C_1 = \relint \closure C_1 = \relint \closure C_2
+= \relint C_2.
+\]</div>
+<p>Now, assume <span class="math notranslate nohighlight">\(\relint C_1 = \relint C_2\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\closure C_1 = \closure \relint C_1
+= \closure \relint C_2 = \closure C_2.
+\]</div>
+<p>We are done.</p>
+</div>
+</div>
+<div class="section" id="finite-intersections">
+<h3><span class="section-number">6.8.4.6. </span>Finite Intersections<a class="headerlink" href="#finite-intersections" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-convex-intersect-finite-closure">
+<p class="admonition-title"><span class="caption-number">Theorem 6.99 </span> (Finite intersections preserve closure)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.</p>
+<p>Let <span class="math notranslate nohighlight">\(C_1, \dots, C_n\)</span> be convex subsets of <span class="math notranslate nohighlight">\(\VV\)</span>
+such that <span class="math notranslate nohighlight">\(\cap_i \relint C_i \neq \EmptySet\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\closure \left( \bigcap_{i=1}^n C_i \right)
+= \bigcap_{i=1}^n \closure C_i.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-convex-intersect-finite-interior">
+<p class="admonition-title"><span class="caption-number">Theorem 6.100 </span> (Finite intersections preserve relative interior)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.</p>
+<p>Let <span class="math notranslate nohighlight">\(C_1, \dots, C_n\)</span> be convex subsets of <span class="math notranslate nohighlight">\(\VV\)</span>
+such that <span class="math notranslate nohighlight">\(\cap_i \relint C_i \neq \EmptySet\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\relint \left( \bigcap_{i=1}^n C_i \right)
+= \bigcap_{i=1}^n \relint C_i.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-convex-affine-intersect-pres-relint-cl">
+<p class="admonition-title"><span class="caption-number">Theorem 6.101 </span> (Intersection with affine set preserves relative interior and closure)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a convex set of <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(M\)</span> be an affine set
+of <span class="math notranslate nohighlight">\(\VV\)</span> such that <span class="math notranslate nohighlight">\(M\)</span> has a nonempty intersection with
+<span class="math notranslate nohighlight">\(\relint C\)</span>. Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\relint (M \cap C) = M \cap \relint C.
+\]</div>
+<p>Also,</p>
+<div class="math notranslate nohighlight">
+\[
+\closure (M \cap C) = M \cap \closure C.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional, hence</p>
+<div class="math notranslate nohighlight">
+\[
+\relint M = \closure M = M
+\]</div>
+<p>due to <a class="reference internal" href="../la/affine.html#res-la-affine-closed">Theorem 4.153</a>
+and <a class="reference internal" href="#res-cvx-affine-relative-open">Theorem 6.90</a>.</p>
+<p>Now, by <a class="reference internal" href="#res-cvx-convex-intersect-finite-interior">Theorem 6.100</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+\relint (M \cap C)  = (\relint M) \cap (\relint C) 
+= M \cap \relint C.
+\]</div>
+<p>Similarly, by <a class="reference internal" href="#res-cvx-convex-intersect-finite-closure">Theorem 6.99</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+\closure (M \cap C)  = (\closure M) \cap (\closure C) 
+= M \cap \closure C.
+\]</div>
+</div>
+<p>Here is another possible condition under which the
+containment of relative interior holds.</p>
+<div class="proof theorem admonition" id="res-cvx-nonbd-cl-subset-interior">
+<p class="admonition-title"><span class="caption-number">Theorem 6.102 </span> (Containment of relative interior)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.
+Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be convex sets of <span class="math notranslate nohighlight">\(\VV\)</span> such that
+<span class="math notranslate nohighlight">\(C_2 \subseteq \closure C_1\)</span> but
+<span class="math notranslate nohighlight">\(C_2 \not\subseteq \closure C_1 \setminus \relint C_1\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\relint C_2 \subseteq \relint C_1.
+\]</div>
+<p>In other words, if <span class="math notranslate nohighlight">\(C_2\)</span> is a subset of the closure of
+<span class="math notranslate nohighlight">\(C_1\)</span> but <span class="math notranslate nohighlight">\(C_2\)</span> is not contained totally inside the
+relative boundary of <span class="math notranslate nohighlight">\(C_1\)</span>, then
+relative interior of <span class="math notranslate nohighlight">\(C_2\)</span> is a subset of the relative
+interior of <span class="math notranslate nohighlight">\(C_1\)</span>.</p>
+</div>
+</div><div class="docutils">
+<p>Here is an example situation.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(H\)</span> be a hyperplane.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(H_+\)</span> be a corresponding nonnegative closed halfspace.</p></li>
+<li><p>Then, the boundary (also relative boundary)
+of <span class="math notranslate nohighlight">\(H_+\)</span> is <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+<li><p>The interior (also relative interior)
+of <span class="math notranslate nohighlight">\(H_+\)</span> is the positive open halfspace <span class="math notranslate nohighlight">\(H_{++}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(C\)</span> be contained inside <span class="math notranslate nohighlight">\(H_+\)</span> such that
+<span class="math notranslate nohighlight">\(C \not\subseteq H\)</span>. In other words, <span class="math notranslate nohighlight">\(C\)</span> is
+not totally contained inside the boundary of <span class="math notranslate nohighlight">\(H_+\)</span>
+which is <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\relint C \subseteq H_{++}\)</span>.</p></li>
+<li><p>Here <span class="math notranslate nohighlight">\(C_1 = H_{++}\)</span> and <span class="math notranslate nohighlight">\(C_2 = C\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(C \not\subseteq H_{++}\)</span> but
+<span class="math notranslate nohighlight">\(C \subseteq \closure H_{++} = H_+\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\closure C_1 \setminus \relint C_1 = \closure H_{++} \setminus \relint H_{++} = H_+ \setminus H_{++} = H\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof admonition" id="proof">
+<p>Proof. Due to <a class="reference internal" href="#res-cvx-convex-closure-relint">Theorem 6.97</a></p>
+<div class="math notranslate nohighlight">
+\[
+\relint \closure C_1 = \relint C_1.
+\]</div>
+</div>
+</div>
+<div class="section" id="sum-of-sets">
+<h3><span class="section-number">6.8.4.7. </span>Sum of Sets<a class="headerlink" href="#sum-of-sets" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-convex-sum-relint">
+<p class="admonition-title"><span class="caption-number">Theorem 6.103 </span> (Relative interior of sum of two sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.
+Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be convex sets of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\relint (C_1 + C_2) = \relint C_1 + \relint C_2.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-convex-sum-closure">
+<p class="admonition-title"><span class="caption-number">Theorem 6.104 </span> (Closure of sum of two sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real finite dimensional normed linear space.
+Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be convex sets of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\closure (C_1 + C_2) \supseteq \closure C_1 + \closure C_2.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="affine-transformations">
+<h3><span class="section-number">6.8.4.8. </span>Affine Transformations<a class="headerlink" href="#affine-transformations" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-relint-aff-map-pres">
+<p class="admonition-title"><span class="caption-number">Theorem 6.105 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional normed linear space.
+A bijective affine transformation <span class="math notranslate nohighlight">\(T : \VV \to \VV\)</span>
+preserves relative interiors.</p>
+<div class="math notranslate nohighlight">
+\[
+T (\relint A) = \relint (T (A)).
+\]</div>
+</div>
+</div></div>
+</div>
+<div class="section" id="separation-theorems">
+<h2><span class="section-number">6.8.5. </span>Separation Theorems<a class="headerlink" href="#separation-theorems" title="Permalink to this headline">¶</a></h2>
+<p>Separation theorems provide us ways to find a separating hyperplane
+between two disjoint convex sets. Hyperplanes
+require the notion of an inner product.
+This subsection focuses on vector spaces
+which are real, finite dimensional and equipped
+with a real inner product <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle \to \RR\)</span>.</p>
+<div class="section" id="types-of-separating-hyperplanes">
+<h3><span class="section-number">6.8.5.1. </span>Types of Separating Hyperplanes<a class="headerlink" href="#types-of-separating-hyperplanes" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-cvx-separating-hyperplane">
+<p class="admonition-title"><span class="caption-number">Definition 6.56 </span> (Separating hyperplane)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+For any two convex subsets <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span>, a hyperplane
+<span class="math notranslate nohighlight">\(H\)</span> is said to <em>separate</em> <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> if
+<span class="math notranslate nohighlight">\(C\)</span> is contained in one of the closed halfspaces
+corresponding to <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(D\)</span> is contained in the other
+closed halfspace.</p>
+</div>
+</div><p>This definition allows for some degenerate possibilities where
+both <span class="math notranslate nohighlight">\(C \subseteq H\)</span> and <span class="math notranslate nohighlight">\(D \subseteq H\)</span> since the closed
+halfspaces contain <span class="math notranslate nohighlight">\(H\)</span> (as their boundary).</p>
+<div class="proof definition admonition" id="def-cvx-proper-separation">
+<p class="admonition-title"><span class="caption-number">Definition 6.57 </span> (Proper separation)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+For any two convex subsets <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span>, a hyperplane
+<span class="math notranslate nohighlight">\(H\)</span> is said to <em>properly separate</em> <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> if
+<span class="math notranslate nohighlight">\(H\)</span> separates them and both are not entirely contained
+in <span class="math notranslate nohighlight">\(H\)</span>; i.e., either <span class="math notranslate nohighlight">\(C \not\subseteq H\)</span> or <span class="math notranslate nohighlight">\(D \not\subseteq H\)</span>
+or both.</p>
+</div>
+</div><p>Proper separation still allows for the possibility that
+parts of <span class="math notranslate nohighlight">\(C\)</span> or <span class="math notranslate nohighlight">\(D\)</span> lies inside <span class="math notranslate nohighlight">\(H\)</span>. But it ensures that
+<span class="math notranslate nohighlight">\(C \triangle D \neq \EmptySet\)</span>.
+<span class="math notranslate nohighlight">\(C \cap D \subseteq H\)</span> is the common part.</p>
+<div class="proof definition admonition" id="def-cvx-strong-separation">
+<p class="admonition-title"><span class="caption-number">Definition 6.58 </span> (Strong separation)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+For any two convex subsets <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span>, a hyperplane
+<span class="math notranslate nohighlight">\(H\)</span> is said to <em>strongly separate</em> <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> if
+there exists an <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(C + r B\)</span> is contained in one of the open halfspaces
+corresponding to <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(D + rB\)</span> is contained in the other
+open halfspace.</p>
+</div>
+</div><div class="docutils">
+<p>Under these assumptions, one set lies in the interior of <span class="math notranslate nohighlight">\(H_{++}\)</span>
+and the other set lies in the interior of <span class="math notranslate nohighlight">\(H_{--}\)</span>.
+Under strong separation, <span class="math notranslate nohighlight">\(C \cap D = \EmptySet\)</span> is guaranteed
+since <span class="math notranslate nohighlight">\(H_{++} \cap H_{--} = \EmptySet\)</span>.</p>
+</div>
+<div class="proof remark admonition" id="rem-cvx-separation-translation-invariance">
+<p class="admonition-title"><span class="caption-number">Remark 6.5 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Separation is translation invariant.
+For any <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> and convex sets <span class="math notranslate nohighlight">\(C, D \subseteq \VV\)</span>,</p>
+<p><span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> are separated by a hyperplane <span class="math notranslate nohighlight">\(H\)</span> if and
+only if <span class="math notranslate nohighlight">\(C - \ba\)</span>, <span class="math notranslate nohighlight">\(D -\ba\)</span> are separated by the hyperplane <span class="math notranslate nohighlight">\(H - \ba\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="disjoint-affine-and-convex-sets">
+<h3><span class="section-number">6.8.5.2. </span>Disjoint Affine and Convex Sets<a class="headerlink" href="#disjoint-affine-and-convex-sets" title="Permalink to this headline">¶</a></h3>
+<p>Separation between sets can be discussed at several levels.
+We start with a simple case where an affine set
+and a relatively open convex set are disjoint.</p>
+<div class="proof theorem admonition" id="res-cvx-sep-affine-rel-open-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.106 </span> (Disjoint affine and relatively open convex sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty relatively open convex set of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(M \subseteq \VV\)</span> be an affine subspace such that
+<span class="math notranslate nohighlight">\(M \cap C = \EmptySet\)</span>.
+Then, there exists a hyperplane <span class="math notranslate nohighlight">\(H\)</span> such that <span class="math notranslate nohighlight">\(M \subseteq H\)</span>
+and one of the two open halfspaces associated with <span class="math notranslate nohighlight">\(H\)</span> contains
+<span class="math notranslate nohighlight">\(C\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider the case where <span class="math notranslate nohighlight">\(M\)</span> is a hyperplane. Then, <span class="math notranslate nohighlight">\(H = M\)</span>
+and the result is immediate.</p>
+<ol class="simple">
+<li><p>If for contradiction, <span class="math notranslate nohighlight">\(C\)</span> is not contained in one of the
+open halfspaces of <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(C \cap H \neq \EmptySet\)</span>  since <span class="math notranslate nohighlight">\(H\)</span> is the
+boundary of the halfspaces.</p></li>
+<li><p>It will contradict
+our hypothesis that <span class="math notranslate nohighlight">\(C \cap M = \EmptySet\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> must be in one of the open halfspaces of <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+</ol>
+<p>Now, assume that <span class="math notranslate nohighlight">\(M\)</span> is not a hyperplane.</p>
+<p>Without loss of generality, assume that <span class="math notranslate nohighlight">\(\bzero \in M\)</span>.
+We can do this by picking any element <span class="math notranslate nohighlight">\(\bm\)</span> of <span class="math notranslate nohighlight">\(M\)</span>
+and replacing <span class="math notranslate nohighlight">\(M\)</span> by <span class="math notranslate nohighlight">\(M - \bm\)</span> and <span class="math notranslate nohighlight">\(C\)</span> by <span class="math notranslate nohighlight">\(C - \bm\)</span>.
+Thus, <span class="math notranslate nohighlight">\(M\)</span> is a subspace.</p>
+<p>The proof is constructive. We iteratively construct
+subspaces of increasing dimension which contain <span class="math notranslate nohighlight">\(M\)</span>
+but don’t contain <span class="math notranslate nohighlight">\(C\)</span> till we reach a hyperplane.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\dim M = d\)</span> where <span class="math notranslate nohighlight">\(d  &lt; n\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(S = M\)</span> be the initial subspace.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r=n-1-d\)</span> be the number of iterations
+(if <span class="math notranslate nohighlight">\(M\)</span> is a hyperplane, no iterations are needed).</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(i=1,\dots,r\)</span>:</p>
+<ol class="simple">
+<li><p>Replace <span class="math notranslate nohighlight">\(S\)</span> by a subspace <span class="math notranslate nohighlight">\(S'\)</span> such that <span class="math notranslate nohighlight">\(\dim S' = \dim S + 1\)</span>
+and <span class="math notranslate nohighlight">\(S' \cap C = \EmptySet\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(S = S'\)</span></p></li>
+</ol>
+</li>
+<li><p>We have arrived with a hyperplane <span class="math notranslate nohighlight">\(S\)</span> such that <span class="math notranslate nohighlight">\(S \cap C = \EmptySet\)</span>.</p></li>
+</ol>
+<p>Towards this, let us look at the procedure to
+construct <span class="math notranslate nohighlight">\(S'\)</span> from <span class="math notranslate nohighlight">\(S\)</span> such that <span class="math notranslate nohighlight">\(\dim S' = \dim S + 1\)</span>
+and <span class="math notranslate nohighlight">\(S \cap C = \EmptySet\)</span>. Here is the outline</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(S^{\perp}\)</span> be the orthogonal complement of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Pick any 2D subspace <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\(S^{\perp}\)</span>.</p></li>
+<li><p>Pick a line <span class="math notranslate nohighlight">\(L\)</span> in <span class="math notranslate nohighlight">\(P\)</span> which passes through origin
+but doesn’t intersect with <span class="math notranslate nohighlight">\(C\)</span>; i.e. <span class="math notranslate nohighlight">\(L \cap C = \EmptySet\)</span>.</p></li>
+<li><p>Construct the subspace <span class="math notranslate nohighlight">\(S' = S \oplus L\)</span>.
+The direct sum is valid since <span class="math notranslate nohighlight">\(S \cap L = \{ \bzero \}\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\dim S' = \dim S + 1\)</span> and <span class="math notranslate nohighlight">\(S' \cap C = \EmptySet\)</span>
+since <span class="math notranslate nohighlight">\(S \cap C = \EmptySet\)</span> as well as <span class="math notranslate nohighlight">\(L \cap C = \EmptySet\)</span>.</p></li>
+</ol>
+<p>We now elaborate the procedure for finding the line <span class="math notranslate nohighlight">\(L\)</span>:</p>
+<ol>
+<li><p>We have <span class="math notranslate nohighlight">\(S\)</span> as a linear subspace with <span class="math notranslate nohighlight">\(\dim S &lt; n -1\)</span>
+and <span class="math notranslate nohighlight">\(S \cap C = \EmptySet\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\dim S^{\perp} = n  - \dim S &gt; n - (n - 1) = 1\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\dim S^{\perp} &gt; 1\)</span>, it contains a two dimensional subspace <span class="math notranslate nohighlight">\(P\)</span>.</p></li>
+<li><p>Consider the set <span class="math notranslate nohighlight">\(C' = P \cap (C - S)\)</span>.</p></li>
+<li><p>The set <span class="math notranslate nohighlight">\(C-S\)</span> has some properties.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(C-S\)</span> is convex since it is the sum of two convex sets.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bzero \in S\)</span>, hence <span class="math notranslate nohighlight">\(C = C - \bzero \subseteq C - S\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C \cap S = \EmptySet\)</span>, hence <span class="math notranslate nohighlight">\(\bzero \notin C - S\)</span>.</p></li>
+<li><p>Note that due to <a class="reference internal" href="#res-cvx-convex-sum-relint">Theorem 6.103</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+      \relint (C - S) = \relint C - \relint S = C - S
+      \]</div>
+<p>since <span class="math notranslate nohighlight">\(C\)</span> is relatively open and <span class="math notranslate nohighlight">\(S\)</span> is affine, hence relatively open.</p>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C - S\)</span> is relatively open.</p></li>
+</ol>
+</li>
+<li><p>Consequently, the set <span class="math notranslate nohighlight">\(C'\)</span> also has some properties.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(C'\)</span> is convex since it is the intersection of two convex sets.</p></li>
+<li><p>Since  <span class="math notranslate nohighlight">\(\bzero \notin C - S\)</span>,
+hence, <span class="math notranslate nohighlight">\(\bzero \not\in C' = P \cap (C - S)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C'\)</span> is relatively open.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(C'\)</span> is empty, then <span class="math notranslate nohighlight">\(C'\)</span> is relatively open vacuously.</p></li>
+<li><p>Otherwise, by
+<a class="reference internal" href="#res-cvx-convex-affine-intersect-pres-relint-cl">Theorem 6.101</a>:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+      \relint C' = \relint (P \cap (C - S)) = P \cap \relint (C - S) = P \cap (C- S).
+      \]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\relint C' = C'\)</span> implies that <span class="math notranslate nohighlight">\(C'\)</span> is relatively open.</p>
+</li>
+</ol>
+</li>
+<li><p>We now seek a line <span class="math notranslate nohighlight">\(L \subseteq P\)</span> passing through the origin <span class="math notranslate nohighlight">\(\bzero\)</span>
+that doesn’t intersect <span class="math notranslate nohighlight">\(C'\)</span>.</p></li>
+<li><p>We note that <span class="math notranslate nohighlight">\(L \cap C' = \EmptySet \implies L \cap C = \EmptySet\)</span>.</p>
+<ol class="simple">
+<li><p>Suppose for contradiction that
+<span class="math notranslate nohighlight">\(L \cap C' = \EmptySet\)</span> but <span class="math notranslate nohighlight">\(L \cap C \neq \EmptySet\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in L \cap C\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx \in L \subseteq P\)</span>.</p></li>
+<li><p>Also, <span class="math notranslate nohighlight">\(\bx \in C \subseteq C - S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in C' = P \cap (C - S)\)</span>.</p></li>
+<li><p>This means that <span class="math notranslate nohighlight">\(\bx \in L \cap C'\)</span>.</p></li>
+<li><p>In other words, <span class="math notranslate nohighlight">\(L \cap C' \neq \EmptySet\)</span> which
+contradicts our assumption.</p></li>
+</ol>
+</li>
+<li><p>How to choose <span class="math notranslate nohighlight">\(L\)</span>? There are three possibilities:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(C'\)</span> is empty.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C'\)</span> is contained in a line; i.e., <span class="math notranslate nohighlight">\(\dim \affine C' = 1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\affine C' = P\)</span> and <span class="math notranslate nohighlight">\(\dim \affine C' = 2\)</span>.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(\affine C'\)</span> cannot be larger than <span class="math notranslate nohighlight">\(P\)</span> since <span class="math notranslate nohighlight">\(C' \subseteq P\)</span>
+and <span class="math notranslate nohighlight">\(P\)</span> is affine.</p>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(C'\)</span> is empty, then any line in <span class="math notranslate nohighlight">\(P\)</span> passing through origin will do.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\affine C\)</span> is a line.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\affine C'\)</span> passes through the origin, we can take a line
+perpendicular to <span class="math notranslate nohighlight">\(\affine C'\)</span> passing through origin.
+In this case, <span class="math notranslate nohighlight">\(L \cap \affine C' = \{\bzero \}\)</span>.
+Since <span class="math notranslate nohighlight">\(\bzero \notin C'\)</span>, hence <span class="math notranslate nohighlight">\(L \cap C' = \EmptySet\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\affine C'\)</span> is a line that doesn’t pass through <span class="math notranslate nohighlight">\(\bzero\)</span>, we
+can simply take a line that is parallel to <span class="math notranslate nohighlight">\(\affine C'\)</span> and passes
+through <span class="math notranslate nohighlight">\(\bzero\)</span>. In this case <span class="math notranslate nohighlight">\(L \cap \affine C' = \EmptySet\)</span>.
+Consequently, <span class="math notranslate nohighlight">\(L \cap C' = \EmptySet\)</span>.</p></li>
+</ol>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(\affine C'\)</span> is the entire 2D subspace <span class="math notranslate nohighlight">\(P\)</span>.</p>
+<ol class="simple">
+<li><p>Consider the set <span class="math notranslate nohighlight">\(K = \bigcup \{t C' \ST t &gt; 0 \}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C' \subseteq K\)</span> (specifically, for <span class="math notranslate nohighlight">\(t = 0\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is a convex cone containing <span class="math notranslate nohighlight">\(C'\)</span> but not containing <span class="math notranslate nohighlight">\(\bzero\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is relatively open since <span class="math notranslate nohighlight">\(C'\)</span> is relatively open.</p></li>
+<li><p>A boundary ray of <span class="math notranslate nohighlight">\(K\)</span> doesn’t intersect with <span class="math notranslate nohighlight">\(C'\)</span> since
+<span class="math notranslate nohighlight">\(K\)</span> is relatively open.</p></li>
+<li><p>Take <span class="math notranslate nohighlight">\(L\)</span> to be any of the two boundary rays of <span class="math notranslate nohighlight">\(K\)</span> and extend
+it to a line passing through <span class="math notranslate nohighlight">\(\bzero\)</span>.</p></li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="characterization-of-proper-separation">
+<h3><span class="section-number">6.8.5.3. </span>Characterization of Proper Separation<a class="headerlink" href="#characterization-of-proper-separation" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-proper-sep-charac">
+<p class="admonition-title"><span class="caption-number">Theorem 6.107 </span> (Characterization of proper separation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real inner product space.
+Let <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> be nonempty subsets of <span class="math notranslate nohighlight">\(\VV\)</span>. There exists
+a hyperplane <span class="math notranslate nohighlight">\(H\)</span> that separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> <em>properly</em>
+if and only if there exists a vector <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+\geq \sup \{ \langle \bx, \ba \rangle \ST \bx \in T \}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+&gt;  \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume that there is some vector <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>
+satisfying the conditions above.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(\ba\)</span> satisfies the second strict inequality,
+hence <span class="math notranslate nohighlight">\(\ba \neq \bzero\)</span>. Otherwise, the second
+inequality cannot hold.</p></li>
+<li><p>Choose any <span class="math notranslate nohighlight">\(b \in \RR\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \underset{\bx \in S}{\inf}\{ \langle \bx, \ba \rangle \}
+   \geq b \geq 
+   \underset{\bx \in S}{\sup}\{ \langle \bx, \ba \rangle \}.
+   \]</div>
+</li>
+<li><p>Then, the set <span class="math notranslate nohighlight">\(H = \{ \bx \ST \langle \bx, \ba \rangle = b \}\)</span>
+is a hyperplane.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(H_+ = \{ \bx \ST \langle \bx, \ba \rangle \geq b \}\)</span>
+and <span class="math notranslate nohighlight">\(H_- = \{ \bx \ST \langle \bx, \ba \rangle \leq b \}\)</span>.</p></li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\(S \subseteq H_+\)</span> and <span class="math notranslate nohighlight">\(T \subseteq H_-\)</span>.</p></li>
+<li><p>The second strict inequality ensures that both <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> cannot
+be contained in <span class="math notranslate nohighlight">\(H\)</span>.</p>
+<ol class="simple">
+<li><p>For contradiction, assume <span class="math notranslate nohighlight">\(S \subseteq H\)</span> and <span class="math notranslate nohighlight">\(T \subseteq H\)</span></p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} = b\)</span>
+and <span class="math notranslate nohighlight">\(\inf \{ \langle \bx, \ba \rangle \ST \bx \in T \} = b\)</span>.</p></li>
+<li><p>Thus, the second inequality will not hold.</p></li>
+</ol>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are properly separated.</p></li>
+</ol>
+<p>Now, assume that <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are properly separated by
+some hyperplane <span class="math notranslate nohighlight">\(H\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(H = \{ \bx \ST \langle \bx, \ba \rangle = b \}\)</span> be
+the specification of the said hyperplane.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(H_+ = \{ \bx \ST \langle \bx, \ba \rangle \geq b \}\)</span>
+and <span class="math notranslate nohighlight">\(H_- = \{ \bx \ST \langle \bx, \ba \rangle \leq b \}\)</span>.</p></li>
+<li><p>Without loss of generality, assume that <span class="math notranslate nohighlight">\(S \subseteq H_+\)</span>
+and <span class="math notranslate nohighlight">\(T \subseteq H_+\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle \geq b\)</span> for every <span class="math notranslate nohighlight">\(\bx \in S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} \geq b\)</span>.</p></li>
+<li><p>Similarly, <span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle \leq b\)</span> for every <span class="math notranslate nohighlight">\(\bx \in T\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle \ST \bx \in T \} \leq b\)</span>.</p></li>
+<li><p>Thus, the first inequality is satisfied.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(H\)</span> properly separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span>, hence
+either <span class="math notranslate nohighlight">\(S \not\subseteq H\)</span> or <span class="math notranslate nohighlight">\(T \not\subseteq H\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(S \not\subseteq H\)</span>,
+then there exists <span class="math notranslate nohighlight">\(\bx \in S\)</span> such that <span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle &gt; b\)</span>.</p></li>
+<li><p>Consequently, <span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} &gt; b\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(T \not\subseteq H\)</span>,
+then there exists <span class="math notranslate nohighlight">\(\bx \in T\)</span> such that
+<span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle &lt; b\)</span>.</p></li>
+<li><p>Consequently, <span class="math notranslate nohighlight">\(\inf \{ \langle \bx, \ba \rangle \ST \bx \in T \} &lt; b\)</span>.</p></li>
+<li><p>Combining,</p>
+<div class="math notranslate nohighlight">
+\[
+   \sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+   &gt;  \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \}
+   \]</div>
+<p>must be true.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="separating-hyperplane-theorems">
+<h3><span class="section-number">6.8.5.4. </span>Separating Hyperplane Theorems<a class="headerlink" href="#separating-hyperplane-theorems" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-sep-plan-1">
+<p class="admonition-title"><span class="caption-number">Theorem 6.108 </span> (Separating hyperplane theorem I)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real inner product space.
+Let <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> be nonempty convex subsets of <span class="math notranslate nohighlight">\(\VV\)</span>. There exists
+a hyperplane <span class="math notranslate nohighlight">\(H\)</span> that separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> <em>properly</em>
+if and only if <span class="math notranslate nohighlight">\(\relint S \cap \relint T = \EmptySet\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C = S - T\)</span>.</p>
+<ol class="simple">
+<li><p>By <a class="reference internal" href="#res-cvx-nonempty-relint">Theorem 6.94</a>,
+<span class="math notranslate nohighlight">\(\relint S\)</span> and <span class="math notranslate nohighlight">\(\relint T\)</span> are nonempty
+since <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are nonempty convex sets.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvx-convex-sum-relint">Theorem 6.103</a>,
+<span class="math notranslate nohighlight">\(\relint C = \relint S - \relint T\)</span>
+and it is nonempty.</p></li>
+<li><p>Note that, <span class="math notranslate nohighlight">\(\bzero \notin \relint C\)</span> if and only if
+<span class="math notranslate nohighlight">\(\relint S \cap \relint T = \EmptySet\)</span>.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\bzero \in \relint C\)</span> then there exists
+<span class="math notranslate nohighlight">\(\bx \in \relint S \cap \relint T\)</span> such that
+<span class="math notranslate nohighlight">\(\bx - \bx = \bzero\)</span>.</p></li>
+</ol>
+</li>
+</ol>
+<p>Now assume that <span class="math notranslate nohighlight">\(\relint S \cap \relint T = \EmptySet\)</span>.</p>
+<ol>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bzero \notin \relint C\)</span>.</p></li>
+<li><p>Consider the affine set <span class="math notranslate nohighlight">\(M = \{ \bzero \}\)</span>.</p></li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\(M \cap \relint C = \EmptySet\)</span> and <span class="math notranslate nohighlight">\(\relint C\)</span>
+is relatively open.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvx-sep-affine-rel-open-convex">Theorem 6.106</a>,
+there exists a hyperplane containing <span class="math notranslate nohighlight">\(M\)</span> such that
+<span class="math notranslate nohighlight">\(\relint C\)</span> is a subset of one of its associated open halfspaces.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(H\)</span> be this hyperplane given by
+<span class="math notranslate nohighlight">\(H = \{\bx \ST \langle \bx, \ba \rangle = 0\}\)</span>.
+Since the hyperplane contains <span class="math notranslate nohighlight">\(M\)</span>, hence it is a subspace.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvx-convex-relint-closure">Theorem 6.96</a>,
+<span class="math notranslate nohighlight">\( C \subseteq \closure C \subseteq \closure \relint C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is contained in the corresponding closed halfspace.</p></li>
+<li><p>Without loss of generality, assume that <span class="math notranslate nohighlight">\(C\)</span> is contained
+in the nonnegative halfspace <span class="math notranslate nohighlight">\(H_+\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\inf \{ \langle \bx, \ba \rangle  \ST \bx \in C\} \geq 0\)</span>.</p></li>
+<li><p>This means that</p>
+<div class="math notranslate nohighlight">
+\[
+   \inf \{ \langle \bx, \ba \rangle  \ST \bx \in C\}
+   = \inf \{ \langle \bx, \ba \rangle  \ST \bx \in S\}
+     - \sup \{ \langle \bx, \ba \rangle  \ST \bx \in T\} \geq 0.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \inf \{ \langle \bx, \ba \rangle  \ST \bx \in S\} \geq
+   \sup \{ \langle \bx, \ba \rangle  \ST \bx \in T\}.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\relint C \in H_{++}\)</span>, there exists <span class="math notranslate nohighlight">\(\bx \in C\)</span>,
+such that <span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle &gt; 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} &gt; 0\)</span>.</p></li>
+<li><p>But then,</p>
+<div class="math notranslate nohighlight">
+\[
+   \sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} 
+   = \sup \{ \langle \bx, \ba \rangle  \ST \bx \in S\}
+   - \inf \{ \langle \bx, \ba \rangle  \ST \bx \in T\} &gt; 0. 
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \sup \{ \langle \bx, \ba \rangle  \ST \bx \in S\} &gt; 
+   \inf \{ \langle \bx, \ba \rangle  \ST \bx \in T\}.
+   \]</div>
+</li>
+<li><p>Then, by <a class="reference internal" href="#res-cvx-proper-sep-charac">Theorem 6.107</a>,
+<span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are properly separated.</p></li>
+</ol>
+<p>Now, for the converse, assume that <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are
+properly separated. Thus,
+there exists a vector <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+\geq \sup \{ \langle \bx, \ba \rangle \ST \bx \in T \}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+&gt;  \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \}.
+\]</div>
+<ol>
+<li><p>From the first inequality, we get that
+<span class="math notranslate nohighlight">\(\inf \{ \langle \bx, \ba \rangle  \ST \bx \in C\} \geq 0\)</span>.</p></li>
+<li><p>From the second inequality, we get that
+<span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} &gt; 0\)</span>.</p></li>
+<li><p>Thus, there exists a hyperplane <span class="math notranslate nohighlight">\(H\)</span> given by
+<span class="math notranslate nohighlight">\(H = \{\bx \ST \langle \bx, \ba \rangle = 0\}\)</span>
+such that the corresponding nonnegative closed halfspace
+<span class="math notranslate nohighlight">\(H_+ =  \{\bx \ST \langle \bx, \ba \rangle \geq 0\}\)</span>
+contains <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Note that</p>
+<div class="math notranslate nohighlight">
+\[
+   \interior H_+ = \relint H_+ = 
+   H_{++} = \{\bx \ST \langle \bx, \ba \rangle &gt; 0\}.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} &gt; 0\)</span>,
+hence <span class="math notranslate nohighlight">\(H_{++} \cap C \neq \EmptySet\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C \subseteq \closure H_{++} = H_+\)</span>
+but <span class="math notranslate nohighlight">\(C \not\subseteq \closure H_{++} \setminus \relint H_{++}
+= H_+ \setminus H_{++} = H\)</span>.</p></li>
+<li><p>Thus, by <a class="reference internal" href="#res-cvx-nonbd-cl-subset-interior">Theorem 6.102</a>,
+<span class="math notranslate nohighlight">\(\relint C \subseteq \relint H_{++} = H_{++}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bzero \notin \relint C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\relint S \cap \relint T = \EmptySet\)</span>.</p></li>
+</ol>
+<p>We are done.</p>
+</div>
+<div class="proof corollary admonition" id="res-cvx-separating-hyperplane">
+<p class="admonition-title"><span class="caption-number">Corollary 6.9 </span> (Separating hyperplane theorem II)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real inner product space.
+Let <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> be nonempty disjoint convex subsets of <span class="math notranslate nohighlight">\(\VV\)</span>;
+i.e., <span class="math notranslate nohighlight">\(S \cap T = \EmptySet\)</span>.</p>
+<p>Then, there exists a hyperplane that properly separates them.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(S \cap T = \EmptySet\)</span>, hence <span class="math notranslate nohighlight">\(\relint S \cap \relint T = \EmptySet\)</span>.
+Then, applying <a class="reference internal" href="#res-cvx-sep-plan-1">Theorem 6.108</a>, there exists
+a hyperplane that properly separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span>.</p>
+</div>
+<p>Disjointness of convex sets is not enough for
+strong separation as their closures might meet.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./convex_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="convex_functions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.7. </span>Convex Functions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="subgradients.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.9. </span>Subgradients</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

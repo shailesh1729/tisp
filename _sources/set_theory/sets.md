@@ -334,8 +334,6 @@ If $A_1 = A_2 = \dots = A_n = A$, then it is standard to write
 $A_1 \times \dots \times A_n$ as $A^n$.
 ```
 
-## Examples
-
 ```{prf:example} $A^n$
 
 Let $A = \{ 0, +1, -1\}$.
@@ -366,3 +364,34 @@ $$
     &\}.
 $$
 ```
+
+## Covers
+
+```{prf:definition} Cover
+:label: def-st-cover
+
+A family $\{ A_i \}_{i \in I}$ of subsets of $X$ is said to *cover* a set
+$A$ if
+
+$$
+A \subseteq \bigcup_{i \in I} A_i.
+$$
+Here $I$ is an index set indexing the sets in the family. $I$ 
+could be finite, countable or uncountable.
+```
+
+```{prf:example}
+1. The family $\{[n, n+1]\}_{n \in \ZZ}$ covers $\RR$.
+1. The family $\{[n-1, n]\}_{n \in \Nat}$ covers $\RR_{+}$.
+1. The family $\{(n-1, n+1)\}_{n \in \Nat}$ covers $\RR_{++}$.
+```
+
+```{prf:definition} Subcover
+:label: def-st-subcover
+
+If a subfamily of a cover $\{ A_i \}_{i \in I}$  of $A$ also covers
+$A$, then the subfamily is called a *subcover*.
+```
+
+* Covers play an important role in the theory of
+  metric spaces. See {prf:ref}` open covers <def-ms-open-cover>`.

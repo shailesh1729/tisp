@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.5. Boundedness &#8212; Optimization for Sparse Signal Processing</title>
+    <title>3.3. Boundedness &#8212; Optimization for Signal Processing</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,9 +42,9 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "ZZ": "\\mathbb{Z}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "epi": "\\mathrm{epi}\\,", "supp": "\\mathrm{supp}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{relint}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -54,8 +54,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.6. Completeness" href="complete.html" />
-    <link rel="prev" title="3.4. Continuity" href="continuity.html" />
+    <link rel="next" title="3.4. Sequences" href="sequences.html" />
+    <link rel="prev" title="3.2. Metric Topology" href="topology.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -82,14 +82,19 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
       
-      <h1 class="site-logo" id="site-title">Optimization for Sparse Signal Processing</h1>
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -197,6 +202,11 @@
      2.7. Differentiable Functions
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -219,19 +229,19 @@
      3.2. Metric Topology
     </a>
    </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.3. Boundedness
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="sequences.html">
-     3.3. Sequences
+     3.4. Sequences
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="continuity.html">
-     3.4. Continuity
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     3.5. Boundedness
+     3.5. Functions and Continuity
     </a>
    </li>
    <li class="toctree-l2">
@@ -245,27 +255,30 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="subspaces.html">
-     3.8. Subspace Topology
+     3.9. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="topics.html">
+     3.11. Special Topics
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../la/chapter.html">
    4. Linear Algebra
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Convex Analysis
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../convex_sets/intro.html">
-   5. Convex Sets
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -274,70 +287,60 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/affine.html">
-     5.2. Affine Sets
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/convex.html">
-     5.3. Convex Sets
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/cone.html">
-     5.4. Cones
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/hyperplane.html">
-     5.5. Hyperplanes and Half spaces
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/ball.html">
-     5.6. Euclidean Balls and Ellipsoids
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/norm_ball.html">
-     5.7. Norm Balls
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/norm_cone.html">
-     5.8. Norm Cones
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/polyhedron.html">
-     5.9. Polyhedra
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.8. Important Vector Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/psd_cone.html">
-     5.10. Symmetric Matrices
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.9. Sequence Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/convexity_ops.html">
-     5.11. Convexity Preserving Operations
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/dual_cones.html">
-     5.12. Dual Cones
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
-     5.13. Generalized Inequalities
+    <a class="reference internal" href="../la/affine.html">
+     4.10. Affine Sets and Transformations
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../convex_functions/intro.html">
-   6. Functions
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
@@ -346,25 +349,22 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/functions.html">
-     6.1. Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/convex_functions.html">
-     6.2. Convex Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_functions/extended_valued_functions.html">
-     6.3. Extensions for Convex Functions
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
     </a>
    </li>
   </ul>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../subgradients/chapter.html">
-   7. Subgradients
+  <a class="reference internal" href="../convex_sets/intro.html">
+   6. Convex Sets and Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -373,15 +373,58 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../subgradients/summary.html">
-     7.1. Chapter Summary
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     6.9. Subgradients
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../conjugate_functions/chapter.html">
-   8. Conjugate Functions
+   7. Conjugate Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -391,14 +434,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../conjugate_functions/summary.html">
-     8.1. Chapter Summary
+     7.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../smoothness/chapter.html">
-   9. Smoothness
+   8. Smoothness
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -408,14 +451,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../smoothness/summary.html">
-     9.1. Chapter Summary
+     8.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../strong_convexity/chapter.html">
-   10. Strong Convexity
+   9. Strong Convexity
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -425,14 +468,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../strong_convexity/summary.html">
-     10.1. Chapter Summary
+     9.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
-   11. Projection onto Convex Sets
+   10. Projection onto Convex Sets
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -442,14 +485,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
-     11.1. Chapter Summary
+     10.1. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../proximal_operator/chapter.html">
-   12. Proximal Operator
+   11. Proximal Operator
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
   <label for="toctree-checkbox-11">
@@ -459,36 +502,29 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../proximal_operator/intro.html">
-     12.3. Introduction
+     11.3. Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../proximal_operator/summary.html">
-     12.4. Chapter Summary
+     11.4. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Convex Optimization
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../gradient_methods/chapter.html">
-   13. Gradient Descent Methods
+   12. Gradient Descent Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../subgradient_methods/chapter.html">
-   14. Subgradient Methods
+   13. Subgradient Methods
   </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../selected/chapter.html">
-   15. Selected Functions
+   14. Selected Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
   <label for="toctree-checkbox-12">
@@ -498,7 +534,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../selected/projection.html">
-     15.1. Projection onto Convex Set
+     14.1. Projection onto Convex Set
     </a>
    </li>
   </ul>
@@ -536,22 +572,22 @@
 
 
           
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
     <div class="topbar container-xl fixed-top">
     <div class="topbar-contents row">
         <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
         <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
             
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
@@ -566,7 +602,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -600,20 +636,77 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diameter">
+   3.3.1. Diameter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#characterization-of-boundedness">
+   3.3.2. Characterization of Boundedness
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Boundedness</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diameter">
+   3.3.1. Diameter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#characterization-of-boundedness">
+   3.3.2. Characterization of Boundedness
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="boundedness">
-<h1><span class="section-number">3.5. </span>Boundedness<a class="headerlink" href="#boundedness" title="Permalink to this headline">¶</a></h1>
-<div class="proof definition admonition" id="def-ms-boundedness">
-<p class="admonition-title"><span class="caption-number">Definition 3.23 </span> (Boundedness)</p>
+<span id="sec-ms-boundedness"></span><h1><span class="section-number">3.3. </span>Boundedness<a class="headerlink" href="#boundedness" title="Permalink to this headline">¶</a></h1>
+<p>Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a metric space.</p>
+<div class="proof definition admonition" id="def-ms-boundedness-set">
+<p class="admonition-title"><span class="caption-number">Definition 3.28 </span> (Boundedness of a set)</p>
+<div class="definition-content section" id="proof-content">
+<p>A subset <span class="math notranslate nohighlight">\(A \subseteq X\)</span> is called <em>bounded</em> if there exists
+a number <span class="math notranslate nohighlight">\(M &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+d(x, y) \leq M \Forall x, y \in A.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-ms-boundedness-space">
+<p class="admonition-title"><span class="caption-number">Definition 3.29 </span> (Boundedness of the metric space)</p>
 <div class="definition-content section" id="proof-content">
 <p>A metric space <span class="math notranslate nohighlight">\((X,d)\)</span> is called <em>bounded</em> if there exists
 a number <span class="math notranslate nohighlight">\(M &gt; 0\)</span> such that</p>
@@ -622,126 +715,171 @@ a number <span class="math notranslate nohighlight">\(M &gt; 0\)</span> such tha
 d(x, y) \leq M \Forall x, y \in X.
 \]</div>
 </div>
-</div><div class="proof definition admonition" id="def-ms-diameter">
-<p class="admonition-title"><span class="caption-number">Definition 3.24 </span> (Diameter)</p>
+</div><p>Even if a metric space <span class="math notranslate nohighlight">\((X,d)\)</span> is unbounded,
+it is possible to introduce a metric <span class="math notranslate nohighlight">\(\rho\)</span> for it
+which makes the metric space <span class="math notranslate nohighlight">\((X, \rho)\)</span> bounded.
+See <a class="reference internal" href="continuity.html#res-ms-bounded-metric">Theorem 3.50</a> for details.</p>
+<div class="section" id="diameter">
+<h2><span class="section-number">3.3.1. </span>Diameter<a class="headerlink" href="#diameter" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ms-diameter">
+<p class="admonition-title"><span class="caption-number">Definition 3.30 </span> (Diameter)</p>
 <div class="definition-content section" id="proof-content">
-<p>The <em>diameter</em> of a subset <span class="math notranslate nohighlight">\(A\)</span> of <span class="math notranslate nohighlight">\((X, d)\)</span> is defined as:</p>
+<p>The <em>diameter</em> of a nonempty subset <span class="math notranslate nohighlight">\(A\)</span> of <span class="math notranslate nohighlight">\((X, d)\)</span> is defined as:</p>
 <div class="math notranslate nohighlight">
 \[
 \diam A \triangleq \sup \{ d(x,y) \ST x, y \in A \}.
 \]</div>
+<p><span class="math notranslate nohighlight">\(A\)</span> is bounded if its diameter is finite
+(i.e. the supremum on the R.H.S. exists).
+Otherwise, it is <em>unbounded</em>.</p>
 </div>
-</div><div class="proof remark admonition" id="remark-2">
+</div><div class="proof remark admonition" id="remark-3">
 <p class="admonition-title"><span class="caption-number">Remark 3.3 </span></p>
 <div class="remark-content section" id="proof-content">
-<p><span class="math notranslate nohighlight">\((X, d)\)</span> is bounded if and only if <span class="math notranslate nohighlight">\(\dim X\)</span> is finite.</p>
+<p><span class="math notranslate nohighlight">\((X, d)\)</span> is bounded if and only if <span class="math notranslate nohighlight">\(\diam X\)</span> is finite.</p>
 </div>
-</div><div class="proof example admonition" id="example-3">
-<p class="admonition-title"><span class="caption-number">Example 3.9 </span></p>
-<div class="example-content section" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(d\)</span> is a metric on a set <span class="math notranslate nohighlight">\(X\)</span>, then the function
-<span class="math notranslate nohighlight">\(\rho\)</span> given by</p>
+</div><div class="proof proposition admonition" id="proposition-4">
+<p class="admonition-title"><span class="caption-number">Proposition 3.14 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>The diameter of an open ball <span class="math notranslate nohighlight">\(B(x, r)\)</span> is bounded by <span class="math notranslate nohighlight">\(2 r\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(y,z \in B(x,r)\)</span>. Then by triangle inequality:</p>
 <div class="math notranslate nohighlight">
 \[
-\rho(x, y) = \frac{d(x,y)}{1 + d(x,y)}
+d(y,z) \leq d(x,y) + d(x,z) &lt; r + r = 2 r.
 \]</div>
-<p>is also a metric on <span class="math notranslate nohighlight">\(X\)</span>. Besides, <span class="math notranslate nohighlight">\((X, \rho)\)</span> is bounded and
-<span class="math notranslate nohighlight">\(\rho\)</span> is equivalent of <span class="math notranslate nohighlight">\(d\)</span>.</p>
+<p>Taking supremum on the L.H.S., we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\diam B(x,r) = \sup d(y, z) \leq 2 r.
+\]</div>
 </div>
-</div><p>We structure the proof into three parts:</p>
+<p>For an example where <span class="math notranslate nohighlight">\(B(x,r ) &lt; 2 r\)</span>, see
+<a class="reference internal" href="discrete_space.html#def-ms-ds-ball-diam">Proposition 3.30</a>.</p>
+<div class="proof proposition admonition" id="proposition-5">
+<p class="admonition-title"><span class="caption-number">Proposition 3.15 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\diam A = 0\)</span> if and only if <span class="math notranslate nohighlight">\(A\)</span> is a singleton set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A\)</span> be singleton. Then, <span class="math notranslate nohighlight">\(A = \{ x \}\)</span>.
+Then <span class="math notranslate nohighlight">\(\diam A = d(x, x ) = 0\)</span>.</p>
+<p>For the converse, we proceed as follows:</p>
 <ol class="simple">
-<li><p>Show that <span class="math notranslate nohighlight">\(\rho\)</span> is a metric.</p></li>
-<li><p>Show that <span class="math notranslate nohighlight">\((X, \rho)\)</span> is bounded.</p></li>
-<li><p>Show that <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(d\)</span> are equivalent.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\diam A = 0\)</span>.</p></li>
+<li><p>Assume <span class="math notranslate nohighlight">\(A\)</span> is not a singleton.</p></li>
+<li><p>Then there exist distinct <span class="math notranslate nohighlight">\(x, y \in A\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(x \neq y\)</span>, hence <span class="math notranslate nohighlight">\(d(x, y) &gt; 0\)</span>.</p></li>
+<li><p>But then, <span class="math notranslate nohighlight">\(\diam A  \geq d(x,y) &gt; 0\)</span>.</p></li>
+<li><p>A contradiction.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(A\)</span> must be a singleton.</p></li>
 </ol>
-<div class="proof admonition" id="proof">
-<p>Proof. <span class="math notranslate nohighlight">\(\rho\)</span> is a<br />
-<a class="reference internal" href="intro.html#def-ms-distance-function">metric</a>.</p>
-<p>(1) Non-negativity: Since <span class="math notranslate nohighlight">\(d(x,y) \geq 0\)</span>, hence <span class="math notranslate nohighlight">\(\rho(x, y) \geq 0\)</span>
-as it is a ratio of a non-negative number with a positive number.</p>
-<p>(2) Identity of indiscernibles:</p>
+</div>
+<div class="proof proposition admonition" id="proposition-6">
+<p class="admonition-title"><span class="caption-number">Proposition 3.16 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A \subseteq B\)</span>, then <span class="math notranslate nohighlight">\(\diam A \leq \diam B\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
 <ol class="simple">
-<li><p>Assume <span class="math notranslate nohighlight">\(\rho(x, y) = 0\)</span>.</p></li>
-<li><p>Then <span class="math notranslate nohighlight">\(d(x,y)=0\)</span>.</p></li>
-<li><p>Thus <span class="math notranslate nohighlight">\(x=y\)</span> since <span class="math notranslate nohighlight">\(d\)</span> is a metric.</p></li>
-<li><p>Now, assume <span class="math notranslate nohighlight">\(x=y\)</span>.</p></li>
-<li><p>Then <span class="math notranslate nohighlight">\(d(x,y)=0\)</span>.</p></li>
-<li><p>Thus, <span class="math notranslate nohighlight">\(\rho(x,y)=0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(x, y \in A\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(x, y \in B\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(d(x,y) \leq \diam B\)</span> (by definition).</p></li>
+<li><p>Taking supremum over all pairs of <span class="math notranslate nohighlight">\(x, y \in A\)</span> in the L.H.S., we get:
+<span class="math notranslate nohighlight">\(\diam A \leq \diam B\)</span>.</p></li>
 </ol>
-<p>(3) Symmetry:</p>
-<div class="math notranslate nohighlight">
-\[
-\rho(y, x) = \frac{d(y,x)}{1 + d(y,x)} = \frac{d(x,y)}{1 + d(x,y)} = \rho(x, y).
-\]</div>
-<p>(4) Triangle inequality. This will require some work.</p>
-<p>Consider the function <span class="math notranslate nohighlight">\(f: \RR \to \RR\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-f(t) = \frac{t}{1+t}
-\]</div>
-<p>with <span class="math notranslate nohighlight">\(\dom f = \RR_+\)</span>.</p>
-<p>Its derivative is</p>
-<div class="math notranslate nohighlight">
-\[
-f'(t) = \frac{1}{(1+t)^2}.
-\]</div>
-<p><span class="math notranslate nohighlight">\(f'(t) \geq 0\)</span> for <span class="math notranslate nohighlight">\(t \in \RR_+\)</span>. Thus, <span class="math notranslate nohighlight">\(f\)</span> is an increasing function
-on <span class="math notranslate nohighlight">\(t \geq 0\)</span>. In particular:</p>
-<div class="math notranslate nohighlight">
-\[
-d(x, y)\leq d(x, z) + d(z, y) \implies f(d(x,y)) \leq f(d(x, z) + d(z, y)).
-\]</div>
-<p>Now, we proceed as follows:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{aligned}
-\rho(x, y) &amp;= f(d(x,y)) \\
-&amp;\leq f(d(x, z) + d(z, y))\\
-&amp;= \frac{d(x, z) + d(z, y)}{1 + d(x, z) + d(z, y)}\\
-&amp;= \frac{d(x, z)}{1 + d(x, z) + d(z, y)} + \frac{d(z, y)}{1 + d(x, z) + d(z, y)}\\
-&amp;\leq \frac{d(x, z)}{1 + d(x, z)} + \frac{d(z, y)}{1 + d(z, y)}\\
-&amp;= \rho(x,z) + \rho(z,y).
-\end{aligned}
-\end{split}\]</div>
 </div>
-<div class="proof admonition" id="proof">
-<p>Proof. <span class="math notranslate nohighlight">\(\rho\)</span> is a bounded</p>
-<p>It is easy to see that</p>
+<div class="proof proposition admonition" id="proposition-7">
+<p class="admonition-title"><span class="caption-number">Proposition 3.17 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(x \in A\)</span> and <span class="math notranslate nohighlight">\(y \in B\)</span>. Then <span class="math notranslate nohighlight">\(d(x,y) \leq \diam (A \cup B)\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> both belong to <span class="math notranslate nohighlight">\(A \cup B\)</span>, hence,
+by <a class="reference internal" href="#def-ms-diameter">definition</a>:</p>
 <div class="math notranslate nohighlight">
 \[
-\sup \rho(x, y) = 1.
+d(x,y) \leq \diam (A \cup B).
 \]</div>
-<p>Thus, <span class="math notranslate nohighlight">\((X, \rho)\)</span> is bounded.</p>
 </div>
-<div class="proof admonition" id="proof">
-<p>Proof. <span class="math notranslate nohighlight">\(\rho\)</span> is equivalent to <span class="math notranslate nohighlight">\(d\)</span></p>
-<p>We first show that the identity mapping <span class="math notranslate nohighlight">\(I : (X, d) \to (X, \rho)\)</span> is continuous.</p>
-<p>Let <span class="math notranslate nohighlight">\(a \in X\)</span> and choose <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>.
-Recall that <span class="math notranslate nohighlight">\(\rho\)</span> is bounded with <span class="math notranslate nohighlight">\(\rho(x,y) &lt; 1\)</span>.</p>
-<p>Thus, if <span class="math notranslate nohighlight">\(\epsilon \geq 1\)</span>, we can choose any <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> leading
-to <span class="math notranslate nohighlight">\(\rho(x,y) &lt; \epsilon\)</span>  whenever <span class="math notranslate nohighlight">\(d(x,y) &lt; \delta\)</span>.</p>
-<p>Now, consider the case <span class="math notranslate nohighlight">\(\epsilon &lt; 1\)</span>.</p>
+<div class="proof proposition admonition" id="proposition-8">
+<p class="admonition-title"><span class="caption-number">Proposition 3.18 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A \cap B \neq \EmptySet\)</span>, then</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{aligned}
-&amp;\rho(x, a) &lt; \epsilon\\
-&amp;\iff \frac{d(x,a)}{1 + d(x,a)} &lt; \epsilon\\
-&amp;\iff 1 - \frac{d(x,a)}{1 + d(x,a)} &gt; 1 - \epsilon\\
-&amp;\iff \frac{1}{1 + d(x,a)} &gt; 1 - \epsilon\\
-&amp;\iff 1 + d(x, a) &lt; \frac{1}{1 - \epsilon}\\
-&amp;\iff  d(x,a) &lt; \frac{\epsilon}{1 - \epsilon}. 
-\end{aligned}
-\end{split}\]</div>
-<p>Now, choosing <span class="math notranslate nohighlight">\(\delta = \frac{\epsilon}{1 - \epsilon}\)</span>, we note that
-<span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> for <span class="math notranslate nohighlight">\(0 &lt; \epsilon &lt; 1\)</span>.</p>
-<p>Thus, for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>
-such that <span class="math notranslate nohighlight">\(\rho(x, a) &lt; \epsilon\)</span> whenever <span class="math notranslate nohighlight">\(d(x, a) &lt; \delta\)</span>.</p>
-<p>Hence, <span class="math notranslate nohighlight">\(I\)</span> is continuous. A similar argument also shows that
-<span class="math notranslate nohighlight">\(I^{-1}\)</span> is continuous.</p>
-<p>Thus, <span class="math notranslate nohighlight">\(I\)</span> is homeomorphism and the metric spaces
-<span class="math notranslate nohighlight">\((X, d)\)</span> and <span class="math notranslate nohighlight">\((X, \rho)\)</span> are homeomorphic.</p>
-<p>Hence, due to <a class="reference internal" href="continuity.html#res-ms-equivalent-metric-homeomorphic-identity">Proposition 3.29</a>,
-the two metrics are equivalent.</p>
+\[
+\diam (A \cup B) \leq \diam A + \diam B.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(x, y \in A\cup B\)</span>.</p>
+<ol>
+<li><p>If both <span class="math notranslate nohighlight">\(x,y \in A\)</span>, then <span class="math notranslate nohighlight">\(d(x,y) \leq \diam A\)</span>.</p></li>
+<li><p>If both <span class="math notranslate nohighlight">\(x,y \in B\)</span>, then <span class="math notranslate nohighlight">\(d(x,y) \leq \diam B\)</span>.</p></li>
+<li><p>Now, consider the case when <span class="math notranslate nohighlight">\(x \in A\)</span> and <span class="math notranslate nohighlight">\(y \in B\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(A \cap B \neq \EmptySet\)</span>, we can pick <span class="math notranslate nohighlight">\(z \in A \cap B\)</span>.</p></li>
+<li><p>Then, by triangle inequality:</p>
+<div class="math notranslate nohighlight">
+\[
+   d(x, y) \leq d(x, z) + d(y, z).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(x, z \in A\)</span>, hence <span class="math notranslate nohighlight">\(d(x, z) \leq \diam A\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(y, z \in B\)</span>, hence <span class="math notranslate nohighlight">\(d(y, z) \leq \diam B\)</span>.</p></li>
+<li><p>Combining <span class="math notranslate nohighlight">\(d(x, y) \leq \diam A + \diam B\)</span>.</p></li>
+<li><p>Taking the supremum over all pairs <span class="math notranslate nohighlight">\(x, y \in A \cup B\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \diam (A \cup B) \leq \diam A + \diam B.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="characterization-of-boundedness">
+<h2><span class="section-number">3.3.2. </span>Characterization of Boundedness<a class="headerlink" href="#characterization-of-boundedness" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="def-ms-bounded-set-in-open-ball">
+<p class="admonition-title"><span class="caption-number">Theorem 3.28 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> is bounded if and only if
+there exists <span class="math notranslate nohighlight">\(a \in X\)</span>  and <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+A \subseteq B(a, r).
+\]</div>
+<p>In other words, <span class="math notranslate nohighlight">\(A\)</span> is bounded if and only if
+<span class="math notranslate nohighlight">\(A\)</span> is contained in an open ball.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(A\)</span> is bounded.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(r = \diam A\)</span>.</p></li>
+<li><p>Fix some <span class="math notranslate nohighlight">\(a \in A\)</span>.</p></li>
+<li><p>Consider an open ball <span class="math notranslate nohighlight">\(B(a, r + 1)\)</span>.</p></li>
+<li><p>Consider any <span class="math notranslate nohighlight">\(x \in A\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(r\)</span> is diameter of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(a, x \in A\)</span>, hence
+<span class="math notranslate nohighlight">\(d(a,x) \leq r\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(d (x, a) \leq r &lt; r + 1\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(x \in B(a, r+1)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(x\)</span> was arbitrary, hence <span class="math notranslate nohighlight">\(A \subseteq B(a, r+1)\)</span>.</p></li>
+</ol>
+<p>Now assume that there is some <span class="math notranslate nohighlight">\(a \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such
+that <span class="math notranslate nohighlight">\(A \subseteq B(a, r)\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(x,y \in A\)</span>. Then, <span class="math notranslate nohighlight">\(x,y \in B(a, r)\)</span>.</p></li>
+<li><p>By triangle inequality</p>
+<div class="math notranslate nohighlight">
+\[
+   d(x, y) \leq d(a, x) + d(a, y) &lt; r + r = 2 r.
+   \]</div>
+</li>
+<li><p>Taking supremum on the L.H.S. over all <span class="math notranslate nohighlight">\(x,y \in A\)</span>, we get
+<span class="math notranslate nohighlight">\(\diam A \leq 2 r\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(A\)</span> is bounded.</p></li>
+</ol>
+</div>
 </div>
 </div>
 
@@ -767,37 +905,35 @@ the two metrics are equivalent.</p>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="continuity.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="topology.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3.4. </span>Continuity</p>
+            <p class="prev-next-title"><span class="section-number">3.2. </span>Metric Topology</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="complete.html" title="next page">
+    <a class='right-next' id="next-link" href="sequences.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.6. </span>Completeness</p>
+        <p class="prev-next-title"><span class="section-number">3.4. </span>Sequences</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Shailesh Kumar<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

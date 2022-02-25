@@ -1,0 +1,1565 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.3. Linear Transformations &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.4. Normed Linear Spaces" href="normed_spaces.html" />
+    <link rel="prev" title="4.2. Vector Spaces" href="vector_spaces.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.8. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.9. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   4. Linear Algebra
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="important_spaces.html">
+     4.8. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequence_spaces.html">
+     4.9. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="affine.html">
+     4.10. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/psd_cone.html">
+     6.5. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     6.6. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     6.7. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     6.8. Topological Properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     6.9. Subgradients
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conjugate_functions/chapter.html">
+   7. Conjugate Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conjugate_functions/summary.html">
+     7.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../smoothness/chapter.html">
+   8. Smoothness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../smoothness/summary.html">
+     8.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../strong_convexity/chapter.html">
+   9. Strong Convexity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../strong_convexity/summary.html">
+     9.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
+   10. Projection onto Convex Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
+     10.1. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     11.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     11.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   12. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   13. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../selected/chapter.html">
+   14. Selected Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../selected/projection.html">
+     14.1. Projection onto Convex Set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/la/transformations.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fla/transformations.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operators">
+   4.3.1. Operators
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   4.3.2. Linear Transformations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties">
+   4.3.3. Properties
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#null-space-and-range">
+   4.3.4. Null Space and Range
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bracket-operator">
+   4.3.5. Bracket Operator
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrix-representations">
+   4.3.6. Matrix Representations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vector-space-of-linear-transformations">
+   4.3.7. Vector Space of Linear Transformations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#projections">
+   4.3.8. Projections
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Linear Transformations</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operators">
+   4.3.1. Operators
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   4.3.2. Linear Transformations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties">
+   4.3.3. Properties
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#null-space-and-range">
+   4.3.4. Null Space and Range
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bracket-operator">
+   4.3.5. Bracket Operator
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrix-representations">
+   4.3.6. Matrix Representations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vector-space-of-linear-transformations">
+   4.3.7. Vector Space of Linear Transformations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#projections">
+   4.3.8. Projections
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-transformations">
+<span id="sec-la-linear-transformations"></span><h1><span class="section-number">4.3. </span>Linear Transformations<a class="headerlink" href="#linear-transformations" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we will be using symbols <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span>
+to represent arbitrary vector spaces over a field <span class="math notranslate nohighlight">\(\FF\)</span>.
+Unless otherwise specified, the two vector spaces won’t be related in any way.
+Following results can be restated for more general situations where
+<span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> are defined over
+different fields, but we will assume that they are defined over the same field <span class="math notranslate nohighlight">\(\FF\)</span>
+for simplicity of discourse.</p>
+<div class="section" id="operators">
+<h2><span class="section-number">4.3.1. </span>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>Operators are mappings from one vector space to another space.
+Normally, they are <a class="reference internal" href="../set_theory/functions.html#def-st-total-function">total functions</a>.</p>
+<p>In this section, we introduce different types of operators
+between vector spaces. Some operators are relevant
+only for <a class="reference internal" href="vector_spaces.html#def-la-real-vector-space">real vector spaces</a>.</p>
+<div class="proof definition admonition" id="def-la-homogeneous-operator">
+<p class="admonition-title"><span class="caption-number">Definition 4.40 </span> (Homogeneous operator)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be vector spaces (over some field <span class="math notranslate nohighlight">\(\FF\)</span>).
+An operator <span class="math notranslate nohighlight">\(T : \VV \to \WW\)</span> is called <em>homogeneous</em> if
+for every <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> and for every <span class="math notranslate nohighlight">\(\lambda \in \FF\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+T(\lambda \bx) = \lambda T (\bx).
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-la-positive-homogeneous-operator">
+<p class="admonition-title"><span class="caption-number">Definition 4.41 </span> (Positively homogeneous operator)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be <em>real</em> vector spaces (on field <span class="math notranslate nohighlight">\(\RR\)</span>).
+An operator <span class="math notranslate nohighlight">\(T : \VV \to \WW\)</span> is called <em>positively homogeneous</em> if
+for every <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> and for every <span class="math notranslate nohighlight">\(\lambda \in \RR_{++}\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+T(\lambda \bx) = \lambda T (\bx).
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-la-additive-operator">
+<p class="admonition-title"><span class="caption-number">Definition 4.42 </span> (Additive operator)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be vector spaces.
+An operator <span class="math notranslate nohighlight">\(T : \VV \to \WW\)</span> is called <em>additive</em> if
+for every <span class="math notranslate nohighlight">\(\bx,\by \in \VV\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+T (\bx + \by) = T(\bx) + T(\by).
+\]</div>
+</div>
+</div></div>
+<div class="section" id="id1">
+<h2><span class="section-number">4.3.2. </span>Linear Transformations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>A linear operator is additive and homogeneous.</p>
+<div class="proof definition admonition" id="def-la-linear-transformation">
+<p class="admonition-title"><span class="caption-number">Definition 4.43 </span> (Linear transformation)</p>
+<div class="definition-content section" id="proof-content">
+<p>We call a map <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span> a <em>linear transformation</em>
+from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span>
+if for all <span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span> and <span class="math notranslate nohighlight">\(\alpha \in \FF\)</span>, we  have</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\TT(\bx + \by) = \TT(\bx) + \TT(\by)\)</span> and</p></li>
+<li><p><span class="math notranslate nohighlight">\(\TT(\alpha \bx) = \alpha \TT(\bx)\)</span></p></li>
+</ol>
+<p>A linear transformation is also known as a <em>linear map</em>
+or a <em>linear operator</em>.</p>
+</div>
+</div></div>
+<div class="section" id="properties">
+<h2><span class="section-number">4.3.3. </span>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<div class="proof proposition admonition" id="proposition-4">
+<p class="admonition-title"><span class="caption-number">Proposition 4.3 </span> (Zero maps to zero)</p>
+<div class="proposition-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\TT\)</span> is linear then <span class="math notranslate nohighlight">\(\TT(\bzero) = \bzero\)</span>.</p>
+</div>
+</div><p>This is straightforward since</p>
+<div class="math notranslate nohighlight">
+\[
+    \TT(\bzero + \bzero) = \TT(\bzero) + \TT(\bzero) \implies \TT(\bzero) = \TT(\bzero) + \TT(\bzero) \implies \TT(\bzero) = \bzero.
+\]</div>
+<div class="proof proposition admonition" id="proposition-5">
+<p class="admonition-title"><span class="caption-number">Proposition 4.4 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\TT\)</span> is linear <span class="math notranslate nohighlight">\(\iff \TT(\alpha \bx + \by) = \alpha \TT(\bx) + \TT(\by)  \Forall \bx, \by \in \VV, \alpha \in \FF\)</span></p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assuming <span class="math notranslate nohighlight">\(\TT\)</span> to be linear we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \TT(\alpha \bx + \by) = \TT(\alpha \bx) + \TT(\by) = \alpha \TT(\bx) + \TT(\by).
+\]</div>
+<p>Now for the converse, assume</p>
+<div class="math notranslate nohighlight">
+\[
+    \TT(\alpha \bx + \by) = \alpha \TT(\bx) + \TT(\by)  \Forall \bx, \by \in \VV, \alpha \in \FF.
+\]</div>
+<p>Choosing both <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span> to be  \bzero and <span class="math notranslate nohighlight">\(\alpha=1\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \TT(\bzero + \bzero) = \TT(\bzero) + \TT(\bzero) \implies \TT(\bzero) = \bzero.
+\]</div>
+<p>Choosing <span class="math notranslate nohighlight">\(\by=\bzero\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \TT(\alpha \bx + \bzero) = \alpha \TT(\bx) + \TT(\bzero) = \alpha \TT(\bx).
+\]</div>
+<p>Choosing <span class="math notranslate nohighlight">\(\alpha = 1\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \TT(\bx + \by) = \TT(\bx) + \TT(\by).
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\TT\)</span> is a linear transformation.</p>
+</div>
+<div class="proof proposition admonition" id="proposition-6">
+<p class="admonition-title"><span class="caption-number">Proposition 4.5 </span></p>
+<div class="proposition-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\TT\)</span> is linear then <span class="math notranslate nohighlight">\(\TT(\bx - \by) = \TT(\bx) - \TT(\by)\)</span>.</p>
+</div>
+</div><div class="math notranslate nohighlight">
+\[
+    \TT(\bx - \by) = \TT(\bx + (-1)\by) = \TT(\bx) + \TT((-1)\by) = \TT(\bx) +(-1)\TT(\by) = \TT(\bx) - \TT(\by).
+\]</div>
+<div class="proof proposition admonition" id="proposition-7">
+<p class="admonition-title"><span class="caption-number">Proposition 4.6 </span> (Linear transformation preserves linear combinations)</p>
+<div class="proposition-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\TT\)</span> is linear <span class="math notranslate nohighlight">\(\iff\)</span> for <span class="math notranslate nohighlight">\(\bx_1, \dots, \bx_n \in \VV\)</span> and <span class="math notranslate nohighlight">\(\alpha_1, \dots, \alpha_n \in \FF\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+    \TT\left (\sum_{i=1}^{n} \alpha_i \bx_i \right ) =  \sum_{i=1}^{n} \alpha_i  \TT(\bx_i).
+\]</div>
+</div>
+</div><p>We can use mathematical induction to prove this.</p>
+<p>Some special linear transformations need mention.</p>
+<div class="proof definition admonition" id="def-la-identity-transformation">
+<p class="admonition-title"><span class="caption-number">Definition 4.44 </span> (Identity transformation)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>identity transformation</em> <span class="math notranslate nohighlight">\(\mathrm{I}_{\VV} : \VV \to \VV\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathrm{I}_{\VV}(x) = x, \Forall x \in \VV.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-la-zero-transformation">
+<p class="admonition-title"><span class="caption-number">Definition 4.45 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>zero transformation</em> <span class="math notranslate nohighlight">\(\ZERO : \VV \to \WW\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+    \ZERO(x) = \bzero, \Forall x \in \VV.
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\bzero\)</span> on the R.H.S. is the zero vector or <span class="math notranslate nohighlight">\(\WW\)</span>.</p>
+</div>
+</div><p>In this definition <span class="math notranslate nohighlight">\(0\)</span> is taking up multiple meanings: a linear transformation from
+<span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span> which maps every vector in <span class="math notranslate nohighlight">\(\VV\)</span> to the <span class="math notranslate nohighlight">\(\bzero\)</span> vector in <span class="math notranslate nohighlight">\(\WW\)</span>.</p>
+<p>From the context usually it should be obvious whether we are talking about
+<span class="math notranslate nohighlight">\(0 \in \FF\)</span> or <span class="math notranslate nohighlight">\(\bzero \in \VV\)</span> or <span class="math notranslate nohighlight">\(\bzero \in \WW\)</span> or
+<span class="math notranslate nohighlight">\(\ZERO\)</span> as a linear transformation from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span>.</p>
+</div>
+<div class="section" id="null-space-and-range">
+<h2><span class="section-number">4.3.4. </span>Null Space and Range<a class="headerlink" href="#null-space-and-range" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-null-space">
+<p class="admonition-title"><span class="caption-number">Definition 4.46 </span> (Null space / Kernel)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>null space</em> or <em>kernel</em> of a linear transformation <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span>
+denoted by <span class="math notranslate nohighlight">\(\NullSpace(\TT)\)</span> or <span class="math notranslate nohighlight">\(\Kernel(\TT)\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\Kernel(\TT) = \NullSpace(\TT) \triangleq \{ \bx \in \VV \ST \TT(\bx) = \bzero\}.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-la-null-space-is-subspace">
+<p class="admonition-title"><span class="caption-number">Theorem 4.23 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The null space of a linear transformation <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span>
+is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bv_1, \bv_2 \in \Kernel(\TT)\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \TT(\alpha \bv_1 + \bv_2) = \alpha \TT(\bv_1) + \TT(\bv_2) = \alpha \bzero + \bzero = \bzero.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\alpha \bv_1 + \bv_2 \in \Kernel(\TT)\)</span>.
+Thus <span class="math notranslate nohighlight">\(\Kernel(\TT)\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+<div class="proof definition admonition" id="def-la-kernel-image">
+<p class="admonition-title"><span class="caption-number">Definition 4.47 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>range</em> or <em>image</em> of a linear transformation <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span>
+denoted by <span class="math notranslate nohighlight">\(\Range(\TT)\)</span> or <span class="math notranslate nohighlight">\(\Image(\TT)\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\Range(\TT) = \Image(\TT) \triangleq \{\TT(\bx) \Forall \bx \in \VV \}.
+\]</div>
+<p>We note that <span class="math notranslate nohighlight">\(\Image(\TT) \subseteq \WW\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-range-is-subspace">
+<p class="admonition-title"><span class="caption-number">Theorem 4.24 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The image of a linear transformation <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span>
+is a subspace of <span class="math notranslate nohighlight">\(\WW\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bw_1, \bw_2 \in \Image(\TT)\)</span>.
+Then there exist <span class="math notranslate nohighlight">\(\bv_1, \bv_2 \in \VV\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    \bw_1 = \TT(\bv_1); \bw_2 = \TT(\bv_2).
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \alpha \bw_1 + \bw_2 = \alpha \TT(\bv_1) + \TT(\bv_2) = \TT(\alpha \bv_1 + \bv_2).
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\alpha \bw_1 + \bw_2 \in \Image(\TT)\)</span>.
+Hence <span class="math notranslate nohighlight">\(\Image(\TT)\)</span> is a subspace of <span class="math notranslate nohighlight">\(\WW\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-range-span-basis">
+<p class="admonition-title"><span class="caption-number">Theorem 4.25 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span> be a linear transformation.
+Assume <span class="math notranslate nohighlight">\(\VV\)</span> to be finite dimensional.
+Let <span class="math notranslate nohighlight">\(\BBB = \{\bv_1, \bv_2, \dots, \bv_n\}\)</span> be some basis of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \Image(\TT) = \span \TT(\BBB) =
+    \span \{\TT(\bv_1), \TT(\bv_2), \dots, \TT(\bv_n) \}.
+\]</div>
+<p>i.e., the image of a basis of <span class="math notranslate nohighlight">\(\VV\)</span> under a linear transformation <span class="math notranslate nohighlight">\(\TT\)</span>
+spans the range of the transformation.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bw\)</span> be some arbitrary vector in <span class="math notranslate nohighlight">\(\Image(\TT)\)</span>.
+Then there exists <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> such that <span class="math notranslate nohighlight">\(\bw = \TT(\bv)\)</span>.
+Now</p>
+<div class="math notranslate nohighlight">
+\[
+    \bv = \sum_{i=1}^n c_i \bv_i
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\BBB\)</span> forms a basis for <span class="math notranslate nohighlight">\(\VV\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    \bw = \TT(\bv) = \TT(\sum_{i=1}^n c_i \bv_i)  = \sum_{i=1}^n c_i (\TT(\bv_i)).
+\]</div>
+<p>This means that <span class="math notranslate nohighlight">\(\bw \in \span \TT(\BBB)\)</span>.</p>
+</div>
+<div class="proof definition admonition" id="def-la-transformation-nullity">
+<p class="admonition-title"><span class="caption-number">Definition 4.48 </span> (Nullity)</p>
+<div class="definition-content section" id="proof-content">
+<p>For vector spaces <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> and linear transformation <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span>
+if <span class="math notranslate nohighlight">\(\kernel \TT\)</span> is finite dimensional then
+<em>nullity</em> of <span class="math notranslate nohighlight">\(\TT\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\nullity \TT \triangleq \dim \kernel \TT;
+\]</div>
+<p>i.e., the dimension of the null space or kernel of <span class="math notranslate nohighlight">\(\TT\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-la-transformation-rank">
+<span id="def-alg-rank"></span><p class="admonition-title"><span class="caption-number">Definition 4.49 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>For vector spaces <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> and linear <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span>,
+if <span class="math notranslate nohighlight">\(\range \TT\)</span> is finite dimensional then <em>rank</em> of <span class="math notranslate nohighlight">\(\TT\)</span> is
+defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\rank \TT \triangleq \dim \range \TT;
+\]</div>
+<p>i.e., the dimension of the range or image of <span class="math notranslate nohighlight">\(\TT\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-lt-dimension-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 4.26 </span> (Dimension theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For vector spaces <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> and linear <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span>
+if <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional, then</p>
+<div class="math notranslate nohighlight">
+\[
+\dim \VV = \nullity \TT  + \rank \TT.
+\]</div>
+<p>This is known as <em>dimension theorem</em>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-lt-injective-nullspace">
+<p class="admonition-title"><span class="caption-number">Theorem 4.27 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>For vector spaces <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> and linear <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span>,
+<span class="math notranslate nohighlight">\(\TT\)</span> is injective if and only if <span class="math notranslate nohighlight">\(\Kernel(\TT) = \{ \bzero\}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(\TT\)</span> is injective, then</p>
+<div class="math notranslate nohighlight">
+\[
+\bv_1 \neq \bv_2 \implies T(\bv_1) \neq T(\bv_2)
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bv \neq \bzero\)</span>. Now <span class="math notranslate nohighlight">\(\TT(\bzero) = \bzero \implies \TT(v) \neq \bzero \)</span> since <span class="math notranslate nohighlight">\(\TT\)</span> is one-one.
+Thus <span class="math notranslate nohighlight">\(\kernel \TT = \{ \bzero\}\)</span>.</p>
+<p>For the converse,
+let us assume that <span class="math notranslate nohighlight">\(\kernel \TT = \{ \bzero\}\)</span>.
+Let <span class="math notranslate nohighlight">\(\bv_1, \bv_2 \in \VV\)</span> be
+two vectors such that they have the same image.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;\TT(\bv_1) = \TT(\bv_2) \\
+    \implies &amp;\TT(\bv_1 - \bv_2)   = \bzero \\
+    \implies &amp;\bv_1 - \bv_2 \in \kernel \TT\\
+    \implies &amp;\bv_1 - \bv_2 = \bzero \\
+    \implies &amp;\bv_1 = \bv_2.
+\end{split}\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\TT\)</span> is injective.</p>
+</div>
+<div class="proof theorem admonition" id="res-la-lt-bijective">
+<p class="admonition-title"><span class="caption-number">Theorem 4.28 </span> (Bijective transformation characterization)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For vector spaces <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> of equal finite
+dimensions and linear <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span>, the following are equivalent.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\TT\)</span> is injective.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\TT\)</span> is surjective.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rank \TT  = \dim  \VV\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From (1) to (2)</p>
+<p>Let <span class="math notranslate nohighlight">\(\BBB = \{\bv_1, \bv_2, \dots \bv_n \}\)</span> be some basis of <span class="math notranslate nohighlight">\(\VV\)</span>
+with <span class="math notranslate nohighlight">\(\dim \VV = n\)</span>.</p>
+<p>Let us assume that <span class="math notranslate nohighlight">\(\TT(\BBB)\)</span> are linearly dependent.
+Thus, there exists a linear relationship</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{i=1}^{n}\alpha_i \TT(\bv_i) = \bzero
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_i\)</span> are not all 0.
+Now</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;\sum_{i=1}^{n}\alpha_i \TT(\bv_i) = \bzero \\
+    \implies &amp;\TT\left(\sum_{i=1}^{n}\alpha_i \bv_i\right) = \bzero\\
+    \implies &amp;\sum_{i=1}^{n}\alpha_i \bv_i \in \kernel \TT\\
+    \implies &amp;\sum_{i=1}^{n}\alpha_i \bv_i = \bzero
+\end{split}\]</div>
+<p>since <span class="math notranslate nohighlight">\(\TT\)</span> is injective (see <a class="reference internal" href="#res-la-lt-injective-nullspace">Theorem 4.27</a>).
+This means that <span class="math notranslate nohighlight">\(\bv_i\)</span> are linearly dependent.
+This contradicts our assumption that <span class="math notranslate nohighlight">\(\BBB\)</span> is a basis for <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>Thus <span class="math notranslate nohighlight">\(\TT(\BBB)\)</span> are linearly independent.</p>
+<p>Since <span class="math notranslate nohighlight">\(\TT\)</span> is injective, hence all vectors in <span class="math notranslate nohighlight">\(\TT(\BBB)\)</span>
+are distinct, hence</p>
+<div class="math notranslate nohighlight">
+\[
+    | \TT(\BBB) | = n.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\TT(\BBB)\)</span> span <span class="math notranslate nohighlight">\(\image \TT\)</span> and are linearly independent,
+hence they form a basis of <span class="math notranslate nohighlight">\(\image \TT\)</span>.</p>
+<p>But</p>
+<div class="math notranslate nohighlight">
+\[
+    \dim \VV = \dim \WW = n
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(\TT(\BBB)\)</span> are a set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent vectors in <span class="math notranslate nohighlight">\(\WW\)</span>.</p>
+<p>Hence, <span class="math notranslate nohighlight">\(\TT(\BBB)\)</span> form a basis of <span class="math notranslate nohighlight">\(\WW\)</span>. Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \image \TT   = \span \TT(\BBB) = \WW.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\TT\)</span> is surjective.</p>
+<p>From (2) to (3)</p>
+<p><span class="math notranslate nohighlight">\(\TT\)</span> is surjective means <span class="math notranslate nohighlight">\(\image \TT = \WW\)</span>.
+Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \rank \TT  = \dim \WW = \dim \VV.
+\]</div>
+<p>From (3) to (1)</p>
+<p>We know that</p>
+<div class="math notranslate nohighlight">
+\[
+    \dim \VV = \rank \TT  + \nullity \TT.
+\]</div>
+<p>But, it is given that <span class="math notranslate nohighlight">\(\rank \TT  = \dim \VV\)</span>.
+Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \nullity \TT  = 0.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\TT\)</span> is injective (due to <a class="reference internal" href="#res-la-lt-injective-nullspace">Theorem 4.27</a>).</p>
+</div>
+</div>
+<div class="section" id="bracket-operator">
+<h2><span class="section-number">4.3.5. </span>Bracket Operator<a class="headerlink" href="#bracket-operator" title="Permalink to this headline">¶</a></h2>
+<p>Recall the definition of coordinate vector from <a class="reference internal" href="vector_spaces.html#def-la-coordinate-vector">Definition 4.27</a>.
+Conversion of a given vector to its coordinate vector representation can be shown
+to be a linear transformation.</p>
+<div class="proof definition admonition" id="def-la-bracket-operator">
+<p class="admonition-title"><span class="caption-number">Definition 4.50 </span> (Bracket operator)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional vector space over a field <span class="math notranslate nohighlight">\(\FF\)</span> where
+<span class="math notranslate nohighlight">\(\dim \VV = n\)</span>.
+Let <span class="math notranslate nohighlight">\(\BBB  = \{ \bv_1, \dots, \bv_n\}\)</span> be an ordered basis in <span class="math notranslate nohighlight">\(\VV\)</span>.
+We define a bracket operator from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\FF^n\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+    \Bracket_{\BBB} : &amp;\VV \to \FF^n\\
+    &amp; \bx \to [\bx]_{\BBB}\\
+    &amp; \triangleq \begin{bmatrix}
+    \alpha_1\\
+    \vdots\\
+    \alpha_n
+    \end{bmatrix}
+    \end{aligned}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx = \sum_{i=1}^n \alpha_i \bv_i
+\]</div>
+<p>is the unique representation of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\BBB\)</span>.</p>
+</div>
+</div><p>In other words, the bracket operator takes a vector <span class="math notranslate nohighlight">\(\bx\)</span>
+from a finite dimensional space <span class="math notranslate nohighlight">\(\VV\)</span> to its
+representation in <span class="math notranslate nohighlight">\(\FF^n\)</span> for a given basis <span class="math notranslate nohighlight">\(\BBB\)</span>.</p>
+<p>We now show that the bracket operator is linear.</p>
+<div class="proof theorem admonition" id="res-la-bracket-operator-linear">
+<p class="admonition-title"><span class="caption-number">Theorem 4.29 </span> (Bracket operator is linear and bijective)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional vector space over a field <span class="math notranslate nohighlight">\(\FF\)</span> where
+<span class="math notranslate nohighlight">\(\dim \VV = n\)</span>.
+Let <span class="math notranslate nohighlight">\(\BBB  = \{ \bv_1, \dots, \bv_n\}\)</span> be an ordered basis in <span class="math notranslate nohighlight">\(\VV\)</span>.
+The bracket operator <span class="math notranslate nohighlight">\(\Bracket_{\BBB} : \VV \to \FF^n\)</span>
+as defined in <a class="reference internal" href="#def-la-bracket-operator">Definition 4.50</a> is a
+linear operator.</p>
+<p>Moreover <span class="math notranslate nohighlight">\(\Bracket_{\BBB}\)</span> is a bijective mapping.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx = \sum_{i=1}^n \alpha_i \bv_i
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \by = \sum_{i=1}^n \beta_i \bv_i.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    c \bx + \by = c \sum_{i=1}^n \alpha_i \bv_i + \sum_{i=1}^n \beta_i \bv_i
+    = \sum_{i=1}^n (c \alpha_i + \beta_i ) \bv_i.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    [c \bx + \by]_{\BBB} =
+    \begin{bmatrix}
+    c \alpha_1 + \beta_1 \\
+    \vdots\\
+    c \alpha_n + \beta_n
+    \end{bmatrix}
+    = c
+    \begin{bmatrix}
+    \alpha_1 \\
+    \vdots\\
+    \alpha_n
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    \beta_1 \\
+    \vdots\\
+    \beta_n
+    \end{bmatrix}
+    = c [\bx]_{\BBB} + [\by]_{\BBB}.
+\end{split}\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\Bracket_{\BBB}\)</span> is linear.</p>
+<p>We can see that by definition <span class="math notranslate nohighlight">\(\Bracket_{\BBB}\)</span> is injective.
+Now since <span class="math notranslate nohighlight">\(\dim \VV = n = \dim \FF^n\)</span>
+hence <span class="math notranslate nohighlight">\(\Bracket_{\BBB}\)</span> is surjective
+due to <a class="reference internal" href="#res-la-lt-bijective">Theorem 4.28</a>.</p>
+</div>
+</div>
+<div class="section" id="matrix-representations">
+<h2><span class="section-number">4.3.6. </span>Matrix Representations<a class="headerlink" href="#matrix-representations" title="Permalink to this headline">¶</a></h2>
+<p>It is much easier to work with a matrix representation of
+a linear transformation. In this section we describe
+how matrix representations of a linear transformation are
+developed.</p>
+<p>In order to develop a representation for the map
+<span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span> we first need to choose
+a representation for vectors in <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span>.
+This can be easily done by choosing a basis in <span class="math notranslate nohighlight">\(\VV\)</span> and
+another in <span class="math notranslate nohighlight">\(\WW\)</span>. Once the bases are chosen, then we
+can represent vectors as coordinate vectors.</p>
+<div class="proof definition admonition" id="def-la-lt-matrix-rep">
+<p class="admonition-title"><span class="caption-number">Definition 4.51 </span> (Matrix representation of a linear transformation)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be finite dimensional vector spaces
+with ordered bases <span class="math notranslate nohighlight">\(\BBB = \{\bv_1, \dots, \bv_n\}\)</span>
+and <span class="math notranslate nohighlight">\(\Gamma = \{\bw_1, \dots,\bw_m\}\)</span> respectively.
+Let <span class="math notranslate nohighlight">\(\TT : \VV \to \WW\)</span> be a linear transformation.
+For each <span class="math notranslate nohighlight">\(\bv_j \in \BBB\)</span> we can find a unique representation
+for <span class="math notranslate nohighlight">\(\TT(\bv_j)\)</span> in <span class="math notranslate nohighlight">\(\Gamma\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \TT(\bv_j) = \sum_{i=1}^{m} a_{ij} \bw_i \Forall 1 \leq j \leq n.
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(m\times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> defined by <span class="math notranslate nohighlight">\(A_{ij} = a_{ij}\)</span> is the
+<em>matrix representation</em> of <span class="math notranslate nohighlight">\(\TT\)</span> in the ordered bases
+<span class="math notranslate nohighlight">\(\BBB\)</span> and <span class="math notranslate nohighlight">\(\Gamma\)</span>, denoted as</p>
+<div class="math notranslate nohighlight">
+\[
+    A = [\TT]_{\BBB}^{\Gamma}.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\VV = \WW\)</span> and <span class="math notranslate nohighlight">\(\BBB = \Gamma\)</span> then we write</p>
+<div class="math notranslate nohighlight">
+\[
+    A = [\TT]_{\BBB}.
+\]</div>
+</div>
+</div><p>The <span class="math notranslate nohighlight">\(j\)</span>-th column of <span class="math notranslate nohighlight">\(A\)</span> is the representation of <span class="math notranslate nohighlight">\(\TT(v_j)\)</span> in
+<span class="math notranslate nohighlight">\(\Gamma\)</span>.</p>
+<p>In order to justify the matrix representation of <span class="math notranslate nohighlight">\(\TT\)</span> we
+need to show that application of <span class="math notranslate nohighlight">\(\TT\)</span> is same as multiplication
+by <span class="math notranslate nohighlight">\(A\)</span>. This is stated formally below.</p>
+<div class="proof theorem admonition" id="res-la-lt-matrix-rep-just">
+<p class="admonition-title"><span class="caption-number">Theorem 4.30 </span> (Justification of matrix representation)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+    [\TT (\bv)]_{\Gamma} = [\TT]_{\BBB}^{\Gamma} [\bv]_{\BBB} \Forall \bv \in \VV.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let</p>
+<div class="math notranslate nohighlight">
+\[
+    \bv = \sum_{j=1}^{n} c_j \bv_j.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    [\bv]_{\BBB}  =
+    \begin{bmatrix}
+    c_1\\
+    \vdots\\
+    c_n
+    \end{bmatrix}
+\end{split}\]</div>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \TT(\bv) &amp;= \TT\left( \sum_{j=1}^{n} c_j \bv_j \right)\\
+    &amp;= \sum_{j=1}^{n} c_j \TT(\bv_j)\\
+    &amp;= \sum_{j=1}^{n} c_j \sum_{i=1}^{m} a_{ij} \bw_i\\
+    &amp;= \sum_{i=1}^{m} \left (  \sum_{j=1}^{n} a_{ij} c_j \right ) \bw_i\\
+\end{split}\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    [\TT (\bv)]_{\Gamma} = \begin{bmatrix}
+    \sum_{j=1}^{n} a_{1 j} c_j\\
+    \vdots\\
+    \sum_{j=1}^{n} a_{m j} c_j
+    \end{bmatrix}
+    = A \begin{bmatrix}
+    c_1\\
+    \vdots\\
+    c_n
+    \end{bmatrix}
+    = [\TT]_{\BBB}^{\Gamma} [\bv]_{\BBB}.
+\end{split}\]</div>
+</div>
+</div>
+<div class="section" id="vector-space-of-linear-transformations">
+<h2><span class="section-number">4.3.7. </span>Vector Space of Linear Transformations<a class="headerlink" href="#vector-space-of-linear-transformations" title="Permalink to this headline">¶</a></h2>
+<p>If we consider the set of linear transformations from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span>
+we can impose some structure on it and take its advantages.</p>
+<p>First of all we will define basic operations like addition and scalar
+multiplication on the general set of mappings from a vector
+space <span class="math notranslate nohighlight">\(\VV\)</span> to another vector space <span class="math notranslate nohighlight">\(\WW\)</span>.</p>
+<div class="proof definition admonition" id="def-la-lt-operator-addition">
+<p class="admonition-title"><span class="caption-number">Definition 4.52 </span> (Addition and scalar multiplication on mappings)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\TT\)</span> and <span class="math notranslate nohighlight">\(\UU\)</span> be arbitrary mappings from vector space <span class="math notranslate nohighlight">\(\VV\)</span>
+to vector space <span class="math notranslate nohighlight">\(\WW\)</span> over the field <span class="math notranslate nohighlight">\(\FF\)</span>.
+Then <em>addition</em> of mappings is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+    (\TT + \UU)(\bv) = \TT(\bv) + \UU(\bv)  \Forall \bv \in \VV.
+\]</div>
+<p><em>Scalar multiplication</em> on a mapping is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+    (\alpha \TT)(\bv) = \alpha (\TT (\bv)) \Forall \alpha \in \FF, \bv \in \VV.
+\]</div>
+</div>
+</div><p>With these definitions we have</p>
+<div class="math notranslate nohighlight">
+\[
+    (\alpha \TT + \UU)(\bv) = (\alpha \TT)(\bv) + \UU(\bv) = \alpha (\TT (\bv)) + \UU(\bv).
+\]</div>
+<p>We are now ready to show that with the addition and scalar multiplication
+as defined above, the set of linear transformations from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span>
+actually forms a vector space.</p>
+<div class="proof theorem admonition" id="res-la-lt-as-vector-space">
+<p class="admonition-title"><span class="caption-number">Theorem 4.31 </span> (Linear transformations form a vector space)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be vector spaces over field <span class="math notranslate nohighlight">\(\FF\)</span>.
+Let <span class="math notranslate nohighlight">\(\TT\)</span> and <span class="math notranslate nohighlight">\(\UU\)</span> be some linear transformations from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span>.
+Let addition and scalar multiplication of linear transformations
+be defined as in <a class="reference internal" href="#def-la-lt-operator-addition">Definition 4.52</a>.
+Then <span class="math notranslate nohighlight">\(\alpha \TT + \UU\)</span> where <span class="math notranslate nohighlight">\(\alpha \in \FF\)</span> is a linear transformation.</p>
+<p>Moreover, the set of linear transformations from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span> forms
+a vector space.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that <span class="math notranslate nohighlight">\(\alpha \TT + \UU\)</span> is linear.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bx,\by \in \VV\)</span> and <span class="math notranslate nohighlight">\(\beta \in \FF\)</span>.
+Then we need to show that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    (\alpha \TT + \UU) (\bx + \by) = (\alpha \TT + \UU) (\bx) + (\alpha \TT + \UU) (\by)\\
+    (\alpha \TT + \UU) (\beta \bx) = \beta ((\alpha \TT + \UU) (\bx)).
+\end{split}\]</div>
+<p>Starting with the first one:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    (\alpha \TT + \UU)(\bx + \by)
+    &amp;= (\alpha \TT)(\bx + \by) + \UU(\bx + \by)\\
+    &amp;= \alpha ( \TT (\bx + \by) ) + \UU(\bx) + \UU(\by)\\
+    &amp;= \alpha \TT (\bx) + \alpha \TT(\by) + \UU(\bx) + \UU(\by)\\
+    &amp;= (\alpha \TT) (\bx) + \UU (\bx) + (\alpha \TT)(\by) + \UU(\by)\\
+    &amp;= (\alpha \TT + \UU)(\bx) + (\alpha \TT + \UU)(\by).
+\end{split}\]</div>
+<p>Now the next one</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    (\alpha \TT + \UU) (\beta \bx)
+    &amp;= (\alpha \TT ) (\beta \bx) + \UU (\beta \bx)\\
+    &amp;= \alpha (\TT(\beta \bx)) + \beta (\UU (\bx))\\
+    &amp;= \alpha (\beta (\TT (\bx))) +  \beta (\UU (\bx))\\
+    &amp;= \beta (\alpha (\TT (\bx))) + \beta (\UU(\bx))\\
+    &amp;= \beta ((\alpha \TT)(\bx) + \UU(\bx))\\
+    &amp;= \beta((\alpha \TT + \UU)(\bx)).
+\end{split}\]</div>
+<p>We can now easily verify that the set of linear transformations
+from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span> satisfies all the requirements of a vector space.
+Hence it is a vector space (of linear transformations from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span>).</p>
+</div>
+<div class="proof definition admonition" id="def-la-lt-vector-space">
+<p class="admonition-title"><span class="caption-number">Definition 4.53 </span> (The vector space of linear transformations)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be vector spaces over field <span class="math notranslate nohighlight">\(\FF\)</span>. Then
+the <em>vector space of linear transformations</em> from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\WW\)</span>
+is denoted by <span class="math notranslate nohighlight">\(\LinTSpace(\VV, \WW)\)</span>.</p>
+<p>When <span class="math notranslate nohighlight">\(\VV = \WW\)</span> then it is simply denoted by <span class="math notranslate nohighlight">\(\LinTSpace(\VV)\)</span>.</p>
+</div>
+</div><p>The addition and scalar multiplication as defined in
+<a class="reference internal" href="#def-la-lt-operator-addition">Definition 4.52</a> carries forward
+to matrix representations of linear transformations also.</p>
+<div class="proof theorem admonition" id="theorem-27">
+<span id="thm-alg-lin-trans-matrix-rep-add-scale"></span><p class="admonition-title"><span class="caption-number">Theorem 4.32 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be finite dimensional vector spaces over field <span class="math notranslate nohighlight">\(\FF\)</span>
+with <span class="math notranslate nohighlight">\(\BBB\)</span> and <span class="math notranslate nohighlight">\(\Gamma\)</span> being their respective bases.
+Let <span class="math notranslate nohighlight">\(\TT\)</span> and <span class="math notranslate nohighlight">\(\UU\)</span> be some linear transformations from <span class="math notranslate nohighlight">\(\VV\)</span> to
+<span class="math notranslate nohighlight">\(\WW\)</span>.</p>
+<p>Then, the following hold</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\([\TT + \UU]_{\BBB}^{\Gamma} = [\TT]_{\BBB}^{\Gamma} + [\UU]_{\BBB}^{\Gamma}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\([\alpha \TT]_{\BBB}^{\Gamma} = \alpha [\TT]_{\BBB}^{\Gamma} \Forall \alpha \in \FF\)</span>.</p></li>
+</ol>
+</div>
+</div></div>
+<div class="section" id="projections">
+<h2><span class="section-number">4.3.8. </span>Projections<a class="headerlink" href="#projections" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-projection">
+<p class="admonition-title"><span class="caption-number">Definition 4.54 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A <em>projection</em> is a linear transformation <span class="math notranslate nohighlight">\(P\)</span> from a
+vector space <span class="math notranslate nohighlight">\(\VV\)</span> to itself such that <span class="math notranslate nohighlight">\(P^2=P\)</span>;
+i.e., if <span class="math notranslate nohighlight">\( P \bv = \bx\)</span>, then <span class="math notranslate nohighlight">\(P \bx = \bx\)</span>.</p>
+</div>
+</div><div class="proof remark admonition" id="remark-29">
+<p class="admonition-title"><span class="caption-number">Remark 4.3 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Whenever <span class="math notranslate nohighlight">\(P\)</span> is applied twice (or more) to any vector,
+it gives the same result as if it was applied once.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(P\)</span> is an <em>idempotent</em> operator.</p>
+</div>
+</div><div class="proof example admonition" id="example-30">
+<p class="admonition-title"><span class="caption-number">Example 4.14 </span> (Projection operators)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the operator <span class="math notranslate nohighlight">\(P : \RR^3 \to \RR^3\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P = \begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0
+\end{bmatrix}.
+\end{split}\]</div>
+<p>Then application of <span class="math notranslate nohighlight">\(P\)</span> on any arbitrary vector is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P
+\begin{bmatrix}
+x \\ y \\z
+\end{bmatrix}
+=
+\begin{bmatrix}
+x \\ y \\ 0
+\end{bmatrix}
+\end{split}\]</div>
+<p>A second application doesn’t change it</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P
+\begin{bmatrix}
+x \\ y \\0
+\end{bmatrix}
+=
+\begin{bmatrix}
+x \\ y \\ 0
+\end{bmatrix}
+\end{split}\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(P\)</span> is a projection operator.</p>
+<p>Often, we can directly verify the property by computing <span class="math notranslate nohighlight">\(P^2\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P^2 = \begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0
+\end{bmatrix}
+= \begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0
+\end{bmatrix}
+= P.
+\end{split}\]</div>
+</div>
+</div></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./la"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="vector_spaces.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4.2. </span>Vector Spaces</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="normed_spaces.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>Normed Linear Spaces</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
