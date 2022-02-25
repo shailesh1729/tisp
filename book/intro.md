@@ -4,9 +4,13 @@
 ## What is New
 
 * {ref}`sec:ms:metric-topology`
-* {ref}`sec:la:normed-spaces`
-* {ref}`sec:la:affine_sets`
-* {ref}`sec:cvxf:convex-functions`
+* Linear Algebra and Analysis
+  * {ref}`sec:la:normed-spaces`
+  * {ref}`sec:la:affine_sets`
+* Convex Sets and Functions
+  * {ref}`sec:cvxf:convex-functions`
+  * {ref}`sec:cvx:relint`
+
 
 ## Mathematical Optimization Problems
 
