@@ -374,6 +374,45 @@ B(\bx, r) = \bx + r B(\bzero, 1).
 $$
 ```
 
+```{prf:theorem} Ball addition and subtraction
+:label: res-la-unit-ball-sum
+
+Let $\VV$ be a normed linear space and $B$ be the unit open ball.
+Then,
+
+$$
+B + B = B - B = 2B.
+$$
+```
+
+```{prf:proof}
+Due to {prf:ref}`res-vs-set-arithmetic-props`, 
+$2 B \subseteq B + B$. 
+
+We now show that $B + B \subseteq 2 B$.
+
+1. Let $\ba \in B + B$.
+1. Then, $\ba = \bb + \bc$ such that $\bb \in B$ and $\bc \in B$.
+1. Now, 
+ 
+   $
+   \| \ba \| = \| \bb + \bc \| \leq \| \bb \| + \| \bc \| < 1 + 1  = 2.
+   $
+1. Thus, $\ba \in 2 B$. 
+
+Thus, $B + B = 2B$.
+
+Next, note that $B$ is {prf:ref}`symmetric <def-vs-symmetric-set>`;
+i.e. $B = -B$.
+
+Thus, 
+
+$$
+B - B = B + (-B) = B + B = 2 B.
+$$
+```
+
+
 ```{prf:theorem} Moving a point into a ball
 :label: res-la-ns-move-vec-to-ball
 
