@@ -859,9 +859,16 @@ where $a_n \in A$ and $b_n \in B$.
 
 ## Boundedness
 
+By definition $\| \bx \| \geq 0$. Thus, for any
+subset $A \subseteq \VV$, $0$ is a lower
+bound for the set $\{ \| \bx \| \ST \bx \in A \}$.
+If there is an upper bound also for the set of norms,
+then the set $A$ is called bounded.
+
 ```{prf:definition} Bounded set
 :label: def-la-ns-bounded-set
 
+Let $\VV$ be a normed linear space.
 A subset $A$ of $\VV$ is called *norm bounded* or simply *bounded*
 if there exist $M > 0$ such that:
 
@@ -871,6 +878,44 @@ $$
 ```
 Compare the definition with the definition of
 {prf:ref}`bounded sets <def-ms-boundedness-set>` in metric spaces.
+
+
+We can characterize the case where $0$ is indeed
+the infimum or greatest lower bound for the set
+$\{ \| \bx \| \ST \bx \in A \}$.
+
+```{prf:theorem} Zero as the greatest lower bound
+:label: res-la-set-zero-infimum
+
+Let $\VV$ be a normed linear space.
+Let $A \subseteq \VV$.
+Then, $\inf \{ \| \bx \| \ST \bx \in A \} = 0$ 
+if and only if $\bzero \in \closure A$.
+```
+
+```{prf:proof}
+
+Note that $B(\bzero, r)$ is an open ball of radius
+$r$ around $\bzero$ given by:
+
+$$
+B(\bzero, r) = \{ \bx \in \VV \ST \| \bx \| < r \}.
+$$
+
+Suppose $\inf \{ \| \bx \| \ST \bx \in A \} = 0$.
+
+1. Then, for every $r > 0$, there exists $\bx \in A$
+   such that $\| \bx \| < r$.
+1. Thus, for every $r > 0$, $\bx \in B(\bzero, r) \cap A$.
+1. Thus, for every $r > 0$, $B(\bzero, r) \cap A \neq \EmptySet$.
+1. Thus, $\bzero \in \closure A$.
+
+Now suppose that $\bzero \in \closure A$.
+1. Then, for every $r> 0$,  $B(\bzero, r) \cap A \neq \EmptySet$.
+1. Thus, for every $r > 0$, there exists $\bx \in A$ 
+   such that $\| \bx \| < r$.
+1. Thus,  $\inf \{ \| \bx \| \ST \bx \in A \} = 0$.
+```
 
 ## Sequences
 
@@ -892,6 +937,39 @@ $$
 \lim_{n \to \infty} \bx_n = \bx.
 $$
 ```
+
+
+Following is an alternative proof for
+{prf:ref}`res-la-set-zero-infimum` in terms
+of convergent sequences.
+
+```{prf:proof}
+
+Assume that $\bzero \in \closure A$.
+
+1. Then, there exists a sequence $\{ \bx_n \}$ such that
+   $\lim \| \bx_n - \bzero \| = 0$.
+1. Thus, $\lim \| \bx_n \| = 0$.
+1. Thus, for every $r > 0$, there exists $n_0 \in \Nat$
+   such that $\| \bx_n \| < r$ for all $n > n_0$.
+1. Thus, for every $r > 0$, there exists $\bx \in A$
+   such that $\| \bx \| < r$.
+1. Thus, $\inf \{ \| \bx \| \ST \bx \in A \} = 0$.
+
+Assume that $\inf \{ \| \bx \| \ST \bx \in A \} = 0$.
+
+1. Thus, for every $r > 0$, there exists $\bx \in A$
+   such that $\| \bx \| < r$.
+1. For every $n \in \Nat$, pick a $\bx_n \in A$
+   such that $\| \bx_n \| < \frac{1}{n}$.
+1. Form the sequence $\{ \bx_n \}$.
+1. Then, for every $r > 0$, there exists $n_0 \in \Nat$
+   such that for all $n > n_0$,
+   $\| \bx_n \| = \| \bx_n - \bzero \| < r$.
+1. Thus, $\lim \bx_n = \bzero$.
+1. Thus, $\bzero \in \closure A$. 
+```
+
 
 
 ## The Calculus of Limits
