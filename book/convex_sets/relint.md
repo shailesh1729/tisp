@@ -1892,3 +1892,48 @@ $\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} > 0$.
    the opposite open halfspaces.
 1. Thus, $S$ and $T$ are strongly separated.
 ```
+
+
+
+### Closed Convex Sets
+
+```{prf:theorem} Closed Convex = Intersection of Halfspaces
+:label: res-cvx-closed-convex-halfspace-intersection
+
+Let $\VV$ be an $n$-dimensional inner product space.
+A closed convex set $C$ of $\VV$ is the intersection of
+all the closed halfspaces that contain it.
+```
+
+```{prf:proof}
+
+The set $\VV$ is closed and convex but no halfspace contains
+it. So the statement is vacuously true.
+
+The empty set is closed and convex and every halfspace
+contains it. The intersection of all halfspaces  
+is the empty set. Thus, the statement is vacuously true.
+
+Let us assume that $C$ is nonempty and not equal to $\VV$.
+
+1. Let $\ba \in \VV$ such that $\ba \notin C$.
+1. Since $C$ is closed, hence $\ba$ is not a closure point of $C$.
+1. Thus, there exists $r > 0$ such that $B(\ba, r) \cap C = \EmptySet$.
+1. Thus, $\| \ba - \bx \| > 0 \Forall \bx \in C$.
+   Specifically, $\inf \{ \| \ba - \bx \|  \ST \bx \in C \} \geq r$.
+1. Thus, by {prf:ref}`res-cvx-strong-sep-charac`, $\{ \ba \}$
+   and $C$ are strongly separated by some hyperplane $H$. 
+1. Thus, one of the corresponding closed halfspaces contains $C$ but not $\ba$.
+1. In other words, for every $\ba \notin C$, there exists a 
+   closed halfspace that doesn't contain $\ba$ but contains $C$.
+1. Thus, the intersection of all halfspaces containing $C$ cannot 
+   contain any element from $\VV \setminus C$.
+   1. If the intersection contained an element $\ba \notin C$, 
+      then there would be a closed halfspace containing $C$ but not $\ba$
+      which would mean that the intersection of all halfspaces
+      containing $C$ cannot contain $\ba$.
+1. Hence, the intersection of all closed halfspaces containing $C$
+   is exactly equal to $C$.
+```
+
+
