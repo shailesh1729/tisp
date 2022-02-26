@@ -2040,3 +2040,12 @@ Now, assume that $\interior C \neq \EmptySet$.
 1. Consequently $H$ lies entirely in one of the closed halfspaces
    of $H$.
 ```
+
+```{prf:corollary}
+:label: res-cvx-closed-convex-intersect-supporting
+
+Let $\VV$ be a real $n$-dimensional inner product space.
+A closed convex set $C$ of $\VV$ is the intersection of
+all the supporting halfspaces that contain it.
+```
+
