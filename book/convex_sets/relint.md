@@ -441,7 +441,9 @@ Thus, $\relint S = \EmptySet$.
 ```{prf:theorem} Relative interiors are subset
 :label: res-cvx-relint-subset
 
-For any set $C$
+Let $\VV$ be a normed linear space.
+
+For any set $C$ of $\VV$
 
 $$
 \relint C \subseteq C.
@@ -451,6 +453,32 @@ $$
 ```{prf:proof}
 This follows directly from the definition of
 relative interior.
+```
+
+```{prf:theorem} Relative interior of singleton
+:label: res-cvx-relint-singleton
+
+Let $\VV$ be a normed linear space.
+Let $C = \{ \bx \}$ be a singleton subset of $\VV$. 
+Then,
+
+$$
+\relint C = \relint \{ \bx \} = \{ \bx \}.
+$$
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. The singleton sets are affine. 
+1. Thus,  $\affine C = C$. 
+1. Now, for any $r > 0$, 
+   
+   $$
+   B(\bx, r) \cap C = \{ \bx \} = C \subseteq C.
+   $$
+1. Thus, $\bx \in \relint C$. 
+1. Since $\relint C \subseteq C$, hence $\relint C = \{ \bx \}$.
 ```
 
 
@@ -538,12 +566,17 @@ $$
 
 ```{prf:theorem} Relative interior and interior
 :label: res-cvx-relint-interior
-
-
-For any set $C$
+Let $\VV$ be a normed linear space.
+For any subset $C$ of $\VV$
 
 $$
 \interior C \subseteq \relint C.
+$$
+
+If $\affine C = \VV$, then 
+
+$$
+\interior C = \relint C.
 $$
 ```
 
@@ -554,8 +587,15 @@ Let $\bx \in \interior C$.
 1. But $B(\bx, r) \subseteq C$ implies that 
    $B(\bx, r) \cap \affine C \subseteq C$.
 1. Thus, $\bx \in \relint C$ also holds.
+1. Thus, $\interior C \subseteq \relint C$.
 
-Thus, $\interior C \subseteq \relint C$.
+Now consider the case where $\affine C = \VV$.
+1. Then $B(\bx, r) \cap \affine C = B(\bx, r)$
+   since $B(\bx, r) \subseteq \VV$.
+1. Then, $\bx$ is a relative interior point of $C$ if 
+   $B(\bx, r) \subseteq C$ for some $r > 0$.
+1. But then, $\bx$ is an interior point of $C$.
+1. Thus, $\relint C = \interior C$.
 ```
 
 ### Containment Relationship
@@ -1900,7 +1940,7 @@ $\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} > 0$.
 ```{prf:theorem} Closed Convex = Intersection of Halfspaces
 :label: res-cvx-closed-convex-halfspace-intersection
 
-Let $\VV$ be an $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional inner product space.
 A closed convex set $C$ of $\VV$ is the intersection of
 all the closed halfspaces that contain it.
 ```
@@ -1936,4 +1976,67 @@ Let us assume that $C$ is nonempty and not equal to $\VV$.
    is exactly equal to $C$.
 ```
 
+## Supporting Hyperplanes
 
+
+```{prf:definition} Supporting hyperplane and halfspaces
+:label: def-cvx-supporting-hyperplane
+
+Let $\VV$ be a real $n$-dimensional inner product space.
+Let $S \subseteq \VV$. Let $\bx_0 \in \boundary S$ be a point
+on its boundary.
+
+If there exists a nonzero vector $\ba \in \VV$ such that
+$\langle \bx, \ba \rangle \leq \langle \bx_0, \ba \rangle$
+for every $\bx \in S$,
+then the hyperplane $H$ given by
+
+$$
+H = \{ \bx \ST \langle \bx, \ba \rangle = \langle \bx_0, \ba \rangle \}
+$$
+is called a *supporting hyperplane* of $S$ at $\bx_0$.
+
+$H$ separates $\{ \bx_0 \}$ and $S$ and $H$ contains $\bx_0$.
+The halfspace
+$ \{ \bx \ST \langle (\bx - \bx_0), \ba \rangle \leq 0 \}$
+corresponding to $H$ is called a *supporting halfspace*
+of $S$ at $\bx_0$.
+```
+
+Convex sets have this beautiful property that there exists
+a supporting hyperplane at every point in the boundary of the
+set.
+
+```{prf:theorem} Supporting hyperplane theorem
+:label: res-cvx-supporting-hyperplane-theorem
+
+Let $\VV$ be a real $n$-dimensional inner product space.
+Let $C$ be a nonempty convex subset of $\VV$. 
+Let $\bx \in \boundary C$ be any point in the boundary of $C$.
+Then, there exists a supporting hyperplane to $C$ at $\bx$.
+```
+
+
+```{prf:proof}
+
+Consider the case where $\interior C = \EmptySet$.
+
+1. Then, due to {prf:ref}`res-cvx-convex-set-empty-interior`,
+   $\dim \affine C < n$.
+1. Thus, there exists a hyperplane $H$ such that $\affine C \subseteq H$.
+1. This $H$ trivially separates $\{ \bx \}$ and $C$ as both are 
+   contained in $H$.
+
+Now, assume that $\interior C \neq \EmptySet$.
+
+1. $\dim \affine C = n$.
+1. $\relint C = \interior C$.
+1. Since $\bx \in \boundary C$, hence the sets
+   $\{ \bx \}$ and $\interior C$ are disjoint.
+1. $\relint \{ \bx \} = \{ \bx \}$.
+1. We have $\relint \{ \bx \} \cap \relint C = \EmptySet$.
+1. By {prf:ref}`res-cvx-sep-plan-1`, there exists
+   a hyperplane $H$ that separates $\{\bx \}$ and $C$ properly.
+1. Consequently $H$ lies entirely in one of the closed halfspaces
+   of $H$.
+```
