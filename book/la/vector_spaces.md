@@ -1591,7 +1591,7 @@ We show that  $C = (C + \bz) - \bz$.
 1. Conversely, let $\bx \in (C + \bz) - \bz$.
 1. Then, $\bx + \bz \in C+\bz$.
 1. But then, $\bx \in C$.
-1. Thus, $(C + \bz) - \bz \substeq C$.
+1. Thus, $(C + \bz) - \bz \subseteq C$.
 1. Combining $C = (C + \bz) - \bz$.
 
 We show that $C \subseteq D \iff C + \bz \subseteq D + \bz$.
@@ -1646,6 +1646,43 @@ Let $C, D, E \subseteq \VV$ and $\alpha, \beta \in \FF$.
    $$
 1. The set $F = C + (-C)$ is symmetric and $\bzero \in F$.
 1. $ (\alpha + \beta) C \subseteq \alpha C + \beta C$.
+```
+
+```{prf:proof}
+We shall prove some of the properties.
+
+[Commutativity]
+
+1. Let $\bu \in C + D$. 
+1. Then, there exists, $\bx \in C$ and $\by \in D$ 
+   such that $\bu = \bx + \by$.
+1. But then, $\bu = \by + \bx$ since vector addition is commutative.
+1. Thus, $\bu \in D + C$.
+1. Thus, $C + D \subseteq D + C$.
+1. Similarly, $D + C \subseteq C + D$.
+
+[Associativity]
+
+1. Let $\ba \in C + (D + E)$.
+1. Then, there exists $\bc \in C$ and $\bb \in D + E$ such that $\ba = \bc + \bb$.
+1. Then, there exists $\bd \in D$ and $\be \in E$ such that $\bb = \bd + \be$.
+1. Thus, $\ba = \bc + (\bd + \be)$.
+1. But vector addition is associative.
+1. Thus, $\ba = (\bc + \bd) + \be$.
+1. Then, $\bc + \bd \in C + D$.
+1. Thus, $\ba \in (C + D) + E$.
+1. Thus, $C + (D + E) \subseteq (C + D) + E$.
+1. Similarly reasoning shows that $(C + D) + E \subseteq C + (D + E)$.
+
+
+$ (\alpha + \beta) C \subseteq \alpha C + \beta C$
+
+1. Let $\bx \in (\alpha + \beta) C$.
+1. Then, there exists $\by \in C$ such that $\bx = (\alpha + \beta) \by$.
+1. Then, $\bx = \alpha \by + \beta \by$.
+1. Then, $\alpha \by \in \alpha C$ and $\beta \by \in \beta C$.
+1. Thus, $\bx \in \alpha C + \beta C$.
+1. Thus, $(\alpha + \beta) C \subseteq \alpha C + \beta C$.
 ```
 
 Additive inverses don't exist for sets containing more than
