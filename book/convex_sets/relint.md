@@ -1564,7 +1564,7 @@ We now elaborate the procedure for finding the line $L$:
 ```
 
 
-### Characterization of Proper Separation
+### Proper Separation Characterization
 
 
 ```{prf:theorem} Characterization of proper separation
@@ -1792,3 +1792,103 @@ a hyperplane that properly separates $S$ and $T$.
 Disjointness of convex sets is not enough for
 strong separation as their closures might meet.
 
+
+
+### Strong Separation Characterization
+
+```{prf:theorem} Characterization of strong separation
+:label: res-cvx-strong-sep-charac
+
+Let $\VV$ be an $n$-dimensional real inner product space.
+Let $S$ and $T$ be nonempty convex subsets of $\VV$. There exists
+a hyperplane $H$ that separates $S$ and $T$ *strongly*
+if and only if 
+
+$$
+\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} > 0.
+$$
+In other words, $H$ strongly separates $S$ and $T$
+if and only if $\bzero \notin \closure (S - T)$.
+```
+
+```{prf:proof}
+Let $C = S-T$.
+Then 
+
+$$
+\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \}
+= \inf \{ \| \bv \| \ST \bv \in C \}.
+$$
+By {prf:ref}`res-la-set-zero-infimum`, 
+$\inf \{ \| \bv \| \ST \bv \in C \} = 0$
+if and only if $\bzero \in \closure C$.
+
+Thus, $\inf \{ \| \bv \| \ST \bv \in C \} > 0$
+if and only if $\bzero \notin \closure C$.
+
+
+Assume that $S$ and $T$ are strongly separated.
+Let $H$ be the hyperplane that separates $S$ and $T$.
+Let $H_{++}$ be the positive open halfspace.
+Let $H_{--}$ be the negative open halfspace.
+
+1. Then, there exists an $r > 0$ such that 
+   $S + r B \subseteq H_{++}$ 
+   and $T + rB \subseteq H_{--}$.
+1. Since $H_{++} \cap H_{--} = \EmptySet$, 
+   hence $(S + r B) \cap (T + r B) = \EmptySet$.
+1. Then, for any $\bx \in S$ and $\by \in T$ and  every $\bu, \bv \in B$,
+   
+   $$
+   \| \bx + r \bu - (\by + r\bv ) \| > 0
+   $$
+   as $\bx + r \bu = \by + r \bv$ would mean that
+   $(S + r B) \cap (T + r B) \neq \EmptySet$
+1. Note that,
+   $\| \bx + r \bu - (\by + r\bv ) \| = \| (\bx - \by) - r (\bv - \bu) \|$.
+1. Then, $\| \bx - \by \| \geq 2 r$ must be true for every $\bx \in S$ and $\by \in T$.
+   1. For contradiction, assume that $\| \bx - \by \| < 2 r$
+      for some $\bx \in S$ and $\by \in T$.
+   1. Let $\bu = \frac{1}{2r} (\by - \bx)$.
+   1. Let $\bv = \frac{1}{2r} (\bx - \by)$.
+   1. Note that $\| \bu \| < 1$ and $\| \bv \| < 1$.
+   1. Thus, $\bu, \bv \in B$.
+   1. Then, $r (\bv - \bu) = \bx - \by$.
+   1. Then, $\| (\bx - \by) - r (\bv - \bu) \| = \| \bzero \| = 0$.
+   1. This contradicts the condition that 
+      $\| \bx + r \bu - (\by + r\bv ) \| > 0$
+      for every $\bx \in S$, $\by \in T$ and $\bu, \bv \in B$.
+1. Thus, $\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} > 0$.
+
+Conversely, assume that
+$\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} > 0$.
+
+1. Let $\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} = 2 r$ where $r > 0$.
+1. Then, $\| \bx - \by \| \geq 2 r \Forall \bx \in S, \by \in T$.
+1. Then, $(S + rB) \cap (T + rB) = \EmptySet$. 
+
+   1. For contradiction, assume that $(S + rB) \cap (T + rB) \neq \EmptySet$.
+   1. Let $\ba \in (S + rB) \cap (T + rB)$.
+   1. Then, there exists $\bx \in S$ and $\bu \in B$ such that $\ba = \bx + r \bu$.
+   1. And, there exists $\by \in T$ and $\bv \in B$ such that $\ba = \by + r \bv$.
+   1. Then, $\bx + r \bu = \by + r \bv$.
+   1. Thus, $\bx - \by = r (\bv - \bu)$.
+   1. Thus, 
+
+      $$
+      \| \bx - \by \| = r \| \bv - \bu \|
+      \leq r (\| \bv \| + \| \bu \|) < r (1 + 1) = 2 r.
+      $$
+   1. This contradictions our hypothesis that 
+      $\| \bx - \by \| \geq 2 r \Forall \bx \in S, \by \in T$.
+1. Note that $S +rB$ and $T + rB$ are convex and disjoint.
+1. Then, due to {prf:ref}`res-cvx-separating-hyperplane`, 
+   there exists a hyperplane $H$ which separates $S + rB$ and $T + rB$ 
+   properly.
+1. We can choose $H$ so that $S + rB \subseteq H_+$ and 
+   $T + rB \subseteq H_-$.
+1. But then, $S + \frac{r}{2} B \in H_{++}$ and 
+   $T + \frac{r}{2} B \in H_{--}$ lie in
+   the opposite open halfspaces.
+1. Thus, $S$ and $T$ are strongly separated.
+```
