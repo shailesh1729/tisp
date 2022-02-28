@@ -126,6 +126,8 @@ Thus, arithmetic mean is both convex and concave.
 
 
 ```{prf:example} Affine functional
+:label: ex-cvxf-affine-func-1
+
 An *affine functional* is a special type of 
 {prf:ref}`affine function <def-la-affine-operator>`
 which maps a vector from $\VV$ to a scalar in 
@@ -689,7 +691,22 @@ For an improper function $f$:
 
 Most of our study is focused on proper functions.
 However, improper functions sometimes do arise
-naturally. 
+naturally in convex analysis. 
+
+```{prf:example} An improper function
+:label: ex-cvxf-improper-f
+
+Consider a function $f: \RR \to \ERL$ as described below:
+
+$$
+f(x) = \begin{cases}
+-\infty & \text{ if } & | x | < 1 \\
+0 & \text{ if } & |x| = 1 \\
+\infty & \text{ if } & | x | > 1 .
+\end{cases}
+$$
+Then, $f$ is an improper function.
+```
 
 
 ## Indicator Functions
@@ -751,6 +768,82 @@ The statement is obvious. And quite powerful.
 
 * The problem of minimizing a function $f$ over a set $C$
   is same as minimizing $f + I_C$ over $\VV$.
+
+## Jensen's Inequality
+
+Jensen's inequality stated below is another formulation for 
+convex functions. 
+
+````{prf:theorem} Jensen's inequality
+:label: res-cvxf-jensen-inequality
+
+A proper function $f: \VV \to \RERL$ is convex if and only if 
+
+```{math}
+:label: eq-cvxf-jensen-inequality
+f(t_1 \bx_1 + \dots + t_k \bx_k) \leq t_1 f(\bx_1) + \dots + t_k f(\bx_k)
+```
+holds true for every $\bx_1, \dots, \bx_k \in \VV$
+whenever $t_1, \dots, t_k \geq 0$ and $t_1 + \dots + t_k = 1$.
+This inequality is known as the *Jensen's inequality*.
+````
+
+```{prf:proof}
+The Jensen's inequality reduces to {eq}`eq-convexity-inequality`
+for $k=2$. Thus, the statement is true by definition for $k=2$.
+For $k > 2$, we shall present an inductive proof. 
+
+Assume $f$ is convex. Then $\dom f$ is convex and
+for all $\bx_1,\bx_2 \in \dom f$, 
+and $t \in [0, 1]$, we have:
+
+$$
+f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).
+$$
+
+
+1. Let $\bx_1, \dots, \bx_k \in \VV$.
+1. If any of $\bx_i \notin \dom f$ for some $i \in 1,\dots,k$, then
+   $f(\bx_i) = \infty$ and the Jensen's inequality holds vacuously.
+1. Thus, we shall assume that $\bx_1, \dots, \bx_k \in \dom f$.
+1. Since $\dom f$ is convex, hence their convex combination
+   $t_1 \bx_1 + \dots + t_k \bx_k \in \dom f$.
+1. Inductively, assume that the Jensen's inequality holds for $k-1$; i.e.,
+   
+   $$
+   f(r_1 \bx_1 + \dots + r_{k-1} \bx_{k-1}) \leq r_1 f(\bx_1) + \dots + r_{k-1} f(\bx_{k-1})
+   $$ 
+   holds true whenever $r_1, \dots, r_{k-1} \geq 0$ and $r_1 + \dots + r_{k-1} = 1$.
+1. WLOG, assume that $t_k < 1$. Thus, $1 - t_k > 0$.
+1. Define $\by = \sum_{i=1}^{k-1} t'_i \bx_i$ where
+   $t'_i = \frac{t_i}{1 - t_k}$.
+1. Note that $t'_i \geq 0$. Also, $\sum_{i=1}^{k-1} t'_i = 1$
+   since $\sum_{i=1}^{k-1} t_i = 1 - t_k$.
+1. We can now write:
+   
+   $$
+   f(t_1 \bx_1 + \dots + t_k \bx_k) 
+   &= f((1 - t_k) \by +  t_k \bx_k )\\
+   &\leq (1 - t_k)f (\by) + t_k f(\bx_k)\\
+   &= (1 - t_k)  f(t'_1 \bx_1 + \dots t'_{k-1} \bx_{k-1}) + t_k f(\bx_k)\\
+   &\leq (1 - t_k) ( t'_1 f(\bx_1)  + \dots + t'_{k-1} f(\bx_{k-1})) + t_k f(\bx_k)\\
+   &= t_1 f(\bx_1) + \dots + t_{k-1} f(\bx_{k-1}) + t_k f(\bx_k).
+   $$
+1. Thus, $f$ satisfies Jensen's inequality.
+
+
+For the converse, assume that $f$ satisfies Jensen's inequality.
+Let $\bx_1, \bx_2 \in \dom f$ and $t \in [0,1]$. Then, 
+by Jensen's inequality for $k=2$,
+
+$$
+f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2) < \infty.
+$$
+Thus, $t \bx_1 + (1-t) \bx_2 \in \dom f$. Thus, $\dom f$ is convex.
+Also, $f$ satisfies {eq}`eq-convexity-inequality`. Hence, $f$ is convex.
+```
+
+
 
 ## First Order Conditions
 
@@ -1573,7 +1666,8 @@ A function need not be concave even if all its
 super-level sets are convex.
 
 
-```{prf:example} 
+```{prf:example}
+:label: ex-cvxf-am-gm-large-alpha
 
 Let geometric mean be given by:
 
