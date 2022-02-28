@@ -1009,9 +1009,80 @@ for all $\bx, \by \in \dom f$ and $\dom f$ is convex.
 
 ## Second Order Conditions
 
+For functions which are twice differentiable,
+convexity can be expressed in terms of the positive-semidefiniteness of
+their Hessian matrices.
+
+We start with a result on convexity of real functions on open intervals.
+
+```{prf:theorem} Convexity characterization for twice differentiable real functions on open intervals
+:label: res-cvxf-2nd-derivative-convexity-interval
+
+Let $f : \RR \to \RR$ be twice continuously differentiable on an open interval
+$(\alpha, \beta)$;
+i.e., second derivative $f''$ exists and is continuous
+at every point the open interval $(\alpha, \beta)$.
+
+Then, $f$ is convex if and only if
+its second derivative $f''$ is non-negative
+for every $x \in (\alpha, \beta)$:
+
+$$
+f''(x) \geq 0 \quad \Forall x \in (\alpha, \beta).
+$$ 
+```
+
+```{prf:proof}
+Assume that $f''$ is nonnegative on $(\alpha, \beta)$.
+
+1. Then, $f'$ is nondecreasing on $(\alpha, \beta)$.
+1. For any $x, y \in (\alpha, \beta)$ with $x < y$ 
+   and $r \in (0,1)$,
+   let $z = (1-r)x  + r y$.
+1. We have $z \in (x,y)$; i.e. $x < z < y$. Consequently,
+
+   $$
+   & f(z) - f(x) = \int_x^z f'(t) dt \leq f'(z) (z - x);\\
+   &f(y) - f(z) = \int_z^y f'(t) dt \geq f'(z) (y - z).
+   $$
+1. Since $z-x = r(y - x)$ and $y -z = (1-r)(y - x)$, we have
+
+   $$
+   f(z) \leq f(x) + r f'(z) (y -x);\\
+   f(z) \leq f(y) - (1-r) f'(z) (y -x ).
+   $$
+   We wish to eliminate $f'(z)$ from these inequalities.
+1. Multiplying the two inequalities by $(1-r)$ and $r$ respectively,
+   and adding them together, we obtain:
+
+   $$
+   (1-r)f(z) + r f(z) \leq (1-r)f(x) + r f(y).
+   $$
+1. But $(1-r)f(z) + r f(z) = f(z) = f((1-r)x + r y)$.
+1. Thus, $f((1-r)x + r y) \leq (1-r)f(x) + r f(y)$.
+1. This inequality is valid for the case where $x > y$ also.
+1. Thus, $f$ is convex over $(\alpha, \beta)$.
+
+
+For the converse, assume that $f''$ is not non-negative on $(\alpha, \beta)$.
+1. Then, since $f''$ is continuous in $(\alpha, \beta)$, 
+   hence $f''$ is negative in some subinterval
+   $(\alpha', \beta')$.
+1. Choose $x, y$ such that $\alpha' < x < y < \beta'$. Choose some $r \in (0,1)$.
+1. Following an argument parallel to above, we have
+
+   $$
+   f((1-r)x  + r y) > (1-r) f(x) + r f(y).
+   $$
+1. Thus, there exist $x, y \in (\alpha, \beta)$ where the inequality 
+   {eq}`eq-convexity-inequality` is not valid.
+1. Consequently, $f$ is non-convex.
+```
+
 We continue further with 
 real valued functions over $\RR^n$ 
 which are twice differentiable.
+
 
 ```{prf:theorem} Second order characterization of convexity
 :label: res-cvxf-hessian-convexity-relation
@@ -1033,21 +1104,6 @@ $$
 For real functions, the Hessian is simply the
 second derivative $f''$.
 
-```{prf:corollary} Convexity characterization for twice differentiable real functions
-:label: res-cvxf-2nd-derivative-convexity-relation
-
-Let $f : \RR \to \RR$ be twice differentiable;
-i.e., second derivative $f''$ exists 
-at every point in $\dom f$ which is open.
-
-Then, $f$ is convex if and only if
-$\dom f$ is an interval and its second derivative is non-negative
-for every $x \in \dom f$:
-
-$$
-f''(x) \geq 0 \quad \Forall x \in \dom f.
-$$ 
-```
 
 
 
