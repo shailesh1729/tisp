@@ -16,6 +16,7 @@ as needed.
 ````{prf:definition} Convex function
 :label: def-convex-function
 
+Let $\VV$ be a real vector space.
 A real valued function $f: \VV \to \RR$ is *convex* if 
 $\dom f$ is a convex set and for all $\bx_1,\bx_2 \in \dom f$, 
 and $t \in [0, 1]$, we have:
@@ -43,6 +44,7 @@ For a convex function, every chord lies above the graph of the function.
 ```{prf:definition} Strictly convex function
 :label: def-strictly-convex-function
 
+Let $\VV$ be a real vector space.
 A convex function $f: \VV \to \RR$ is *strictly convex* 
 if for all $\bx_1,\bx_2 \in \dom f$, 
 where $\bx_1$ and $\bx_2$ are distinct, 
@@ -221,7 +223,7 @@ Hence, $f$ is convex.
 :label: res-cvxf-norms-convex
 
 Let $\| \cdot \| \to \RR$ be a 
-{prf:ref}`norm <def-la-norm>` on a vector space $\VV$.
+{prf:ref}`norm <def-la-norm>` on a real vector space $\VV$.
 Then, it satisfies the triangle inequality:
 
 $$
@@ -355,7 +357,8 @@ a convex function.
 ```{prf:theorem} $f$ is convex = $f$ is convex on lines in domain
 :label: res-cvxf-convx-on-lines
 
-A function $f$ is convex if and only if for any
+Let $\VV$ be a real vector space.
+A function $f : \VV \to \RR$ is convex if and only if for any
 $\bx \in \dom f$ and any $\bv \in \VV$, the function 
 $g(t) = f(\bx + t\bv)$ is convex (on its domain
     , $\{ t \in \RR \ST \bx + t\bv \in \dom f\}$).
@@ -496,7 +499,8 @@ structure.
 ```{prf:theorem} Function convexity = Epigraph convexity
 :label: res-cvxf-convexity-epigraph
 
-A function $f$ is convex if and only if its epigraph
+Let $\VV$ be a real vector space.
+A function $f: \VV \to \RR$ is convex if and only if its epigraph
 $\epi f$ is a convex set.
 ```
 
@@ -1084,10 +1088,10 @@ real valued functions over $\RR^n$
 which are twice differentiable.
 
 
-```{prf:theorem} Second order characterization of convexity
+```{prf:theorem} Second order characterization of convexity in Euclidean spaces
 :label: res-cvxf-hessian-convexity-relation
 
-Let $f : \RR^n \to \RR$ be twice differentiable;
+Let $f : \RR^n \to \RR$ be twice continuously differentiable;
 i.e., its {prf:ref}`Hessian <def-mvp-hessian>`
 or second derivative $\nabla^2 f$ exists 
 at every point in $\dom f$ which is open.
@@ -1099,6 +1103,45 @@ for every $\bx \in \dom f$:
 $$
 \nabla^2 f(\bx) \succeq \ZERO \quad \Forall \bx \in \dom f.
 $$ 
+```
+
+```{prf:proof}
+The convexity of $f$ on its domain $C = \dom f$ is equivalent
+to the convexity of the restriction of $f$ to each line segment
+in $C$ due to {prf:ref}`res-cvxf-convx-on-lines`.
+
+We first note that if $f$ is convex then $C$ is convex
+and if $C$ is not convex, then $f$ is not convex. So, 
+for the rest of the argument, we shall assume that $C$ is convex.
+
+Consequently, for any $\by \in C$ and a nonzero $\bz \in \RR^n$
+the intersection of the line $\{ \bx = \by + t \bz \ST t \in \RR\}$
+and $C$ is an open line segment as $C$ is open and convex.
+
+1. Let $\by \in C$.
+1. Let $\bz \in \RR^n$ be an arbitrary (nonzero) direction.
+1. Let $L = \{ \bx = \by + t \bz \ST t \in \RR\}$ be a line passing
+   through $\by$ in the direction $\bz$. 
+1. Consider the open real interval $S = \{t \ST \by + t \bz \in C\}$.
+   Since $L \cap C$ is an open line segment in $\RR^n$, hence
+   $S$ is indeed an open interval in $\RR$.
+1. Consider the parameterized restriction of $f$ on the open interval $S$ as:
+
+   $$
+   g(t) = f(\by + t \bz), \Forall t \in S.
+   $$
+1. A simple calculation shows that
+
+   $$
+   g''(t) = \langle \bz, \nabla^2 f(\bx) \bz \rangle
+   $$
+   where $\bx = \by + t \bz$.
+1. By {prf:ref}`res-cvxf-2nd-derivative-convexity-interval`,
+   $g$ is convex for each $\by \in C$ and nonzero $\bz \in \RR^n$ if and only if
+   $\langle \bz, \nabla^2 f(\bx) \bz \rangle \geq 0$ for every $\bz \in \RR^n$
+   and $\bx \in C$.
+1. Thus, $f$ is convex if and only if 
+   $\nabla^2 f(\bx) \succeq \ZERO \quad \Forall \bx \in C$.
 ```
 
 For real functions, the Hessian is simply the
