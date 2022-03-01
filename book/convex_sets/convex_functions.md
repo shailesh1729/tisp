@@ -2029,7 +2029,7 @@ Hence, $f$ is convex ({prf:ref}`res-cvx-ptws-max-n`).
 :label: def-cvxf-support-function
 
 Let $\VV$ be a real inner product space. Let $C$ be a subset of $\VV$.
-The support function $\sigma_C : \VV \to \RERL$ is defined as
+The *support function* $\sigma_C : \VV \to \RERL$ is defined as
 
 $$
 \sigma_C (\bx) =  \sup \{\langle \bx, \by \rangle \ST \by \in C \}.
@@ -2040,7 +2040,7 @@ $$
 ```{prf:theorem} Convexity of support function
 :label: res-cvxf-support-fun-convex
 
-Let $\VV$ be a real inner product space. Let $C$ be a subset of $\VV$.
+Let $\VV$ be a real inner product space. Let $C$ be a nonempty subset of $\VV$.
 Then, the support function $\sigma_C : \VV \to \RERL$ is convex.
 ```
 
@@ -2065,3 +2065,105 @@ By {prf:ref}`res-cvx-ptws-supremum`, $\sigma_C$ is convex.
 We note that the convexity of the support function $\sigma_C$
 has nothing to do with the convexity of the underlying set $C$.
 
+
+## Gauge Functions
+
+
+```{prf:definition} Gauge function for a set
+:label: def-cvxf-gauge-function
+
+Let $\VV$ be a real vector space. Let $C$ be a nonempty subset of $\VV$.
+The *gauge function* $\gamma_C : \VV \to \RERL$ is defined as
+
+$$
+\gamma_C (\bx) =  \inf \{r \geq 0 \ST \bx \in r C \}.
+$$
+If $\bx \notin r C$ for any $r \geq 0$, then $\gamma_C(\bx) = \infty$.
+This is consistent with the convention that $\inf \EmptySet = \infty$.
+
+The gauge function is also known as *Minkowski functional*.
+```
+
+```{prf:property} Nonnegativity
+The Gauge function is always nonnegative.
+
+```
+
+```{prf:property} Value at origin
+
+$$
+\gamma_C (\bzero) = 0.
+$$
+```
+
+```{prf:property} Subadditive 
+If $C$ is convex, then the gauge function is subadditive.
+
+$$
+\gamma_C (\bx + \by) \leq  \gamma_C (\bx) + \gamma_C(\by).
+$$
+```
+```{prf:proof}
+
+We proceed as follows.
+
+1. If $\gamma_C (\bx) = \infty$ or $\gamma_C(\by) = \infty$, then
+   the inequality is satisfied trivially. So assume that both are finite.
+1. Then, the sets $X = \{r \geq 0 \ST \bx \in r C \}$ and $Y = \{r \geq 0 \ST \by \in r C \}$
+   are not empty.
+1. Thus, we can choose some $s \geq \gamma_C (\bx)$ from $X$ 
+   and $t \geq \gamma_C(\by)$ from $Y$.
+1. If $s=0$ or $t=0$, then $\bzero \in C$. Consequently, 
+   
+   $$
+   \gamma_C (\bx + \by) = \gamma_C (\bx) = \gamma_C (\by) = 0 
+   \leq \gamma_C (\bx) + \gamma_C(\by) \leq s + t.
+   $$
+   and the inequality is satisfied.
+1. Now, consider the case where $s > 0$ and $t > 0$.
+1. Then, $\frac{\bx}{s} \in C$ and $\frac{\by}{t} \in C$.
+1. Now,
+
+   $$
+   \frac{\bx + \by}{s + t} = \frac{s}{s + t} \frac{\bx}{s} + \frac{t}{s + t}\frac{\by}{t}.
+   $$
+1. Thus, $\frac{\bx + \by}{s + t}$ is a convex combination of  $\frac{\bx}{s}$
+   and $\frac{\by}{t}$.
+1. Since $C$ is convex, hence $\frac{\bx + \by}{s + t} \in C$. 
+1. Thus, $s + t \in \{ r \geq 0 \ST (\bx + \by) \in rC  \}$.
+1. Thus, $\gamma_C (\bx + \by) \leq s + t$.
+1. Thus, for every $s \geq \gamma_C (\bx)$ and every $t \geq \gamma_C(\by)$,
+   $\gamma_C (\bx + \by) \leq s + t$.
+1. Taking infimum on the R.H.S. over $s \in X$ and $t \in Y$, we obtain,
+   $\gamma_C (\bx + \by) \leq  \gamma_C (\bx) + \gamma_C(\by)$.
+```
+
+
+```{prf:property} Homogeneous 
+The Gauge function is homogeneous.
+
+$$
+\gamma_C (s \bx) =  |s| \gamma_C (\bx) \Forall s \in \RR.
+$$
+```
+
+
+
+```{prf:property} Seminorm 
+The Gauge function is a seminorm.
+```
+
+
+
+```{prf:example} Norm as a gauge function
+Let $\VV$ be a normed linear space with the norm $\| \cdot \| : \VV \to \RR$.
+
+Let $\overline{B} = \{\bx \in \VV \ST \| \bx \| \leq 1 \}$ be the unit closed ball.
+
+Then, 
+
+$$
+\gamma_{\overline{B}} (\bx) = \inf \{r \geq 0 \ST \bx \in r \overline{B} \} = \| \bx \|.
+$$
+The gauge function for the closed unit ball is simply the norm itself.
+```
