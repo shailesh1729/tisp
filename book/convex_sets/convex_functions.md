@@ -1153,7 +1153,10 @@ second derivative $f''$.
 ```{prf:corollary} Second order characterization of concavity
 :label: res-cvxf-hessian-concavity-relation
 
-Let $f : \RR^n \to \RR$ be twice differentiable;
+Let $f : \RR^n \to \RR$ be twice continuously differentiable;
+i.e., its Hessian
+or second derivative $\nabla^2 f$ exists 
+at every point in $\dom f$ which is open.
 
 Then, $f$ is concave if and only if
 $\dom f$ is convex and its Hessian is negative semidefinite
@@ -2019,4 +2022,46 @@ Thus, $f_i$ are convex ({prf:ref}`res-cvxf-affine-functional-convex`).
 $f$ is a pointwise maximum of $n$ convex functions.
 Hence, $f$ is convex ({prf:ref}`res-cvx-ptws-max-n`).
 ```
+
+## Support Functions
+
+```{prf:definition} Support function for a set
+:label: def-cvxf-support-function
+
+Let $\VV$ be a real inner product space. Let $C$ be a subset of $\VV$.
+The support function $\sigma_C : \VV \to \RERL$ is defined as
+
+$$
+\sigma_C (\bx) =  \sup \{\langle \bx, \by \rangle \ST \by \in C \}.
+$$
+```
+
+
+```{prf:theorem} Convexity of support function
+:label: res-cvxf-support-fun-convex
+
+Let $\VV$ be a real inner product space. Let $C$ be a subset of $\VV$.
+Then, the support function $\sigma_C : \VV \to \RERL$ is convex.
+```
+
+```{prf:proof}
+$\dom \sigma_C = \VV$. Thus, the domain of $\sigma_C$ is convex.
+
+Fix a $\by \in C$ and consider the function $\sigma_{\by} : \VV \to \RR$ given by
+
+$$
+\sigma_{\by} (\bx) = \langle \bx, \by \rangle.
+$$ 
+
+$\sigma_{\by}$ is linear and accordingly convex. Then,
+
+$$
+\sigma_C (\bx) = \sup_{\by \in C} \sigma_{\by} (\bx)
+$$
+is a pointwise supremum of convex functions.
+By {prf:ref}`res-cvx-ptws-supremum`, $\sigma_C$ is convex.
+```
+
+We note that the convexity of the support function $\sigma_C$
+has nothing to do with the convexity of the underlying set $C$.
 
