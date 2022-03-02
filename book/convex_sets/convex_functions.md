@@ -1659,12 +1659,79 @@ $$
 C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}.
 $$
 
+The open sublevel sets for a real valued function $f: \VV \to \RR$
+can be defined as
 
-```{prf:theorem}
+$$
+O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}.
+$$
+
+
+The closed sublevel sets can be shown to be intersection
+of a set of open sublevel sets.
+
+```{prf:theorem} Sublevel set as intersection
+:label: res-cvxf-sublevel-set-as-intersection
+
+Let $\VV$ be a real vector space. Let $f : \VV \to \RR$ be 
+a real valued function.
+Let
+
+$$
+O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}
+$$
+denote the open sublevel set of $f$ for $\alpha$.
+
+
+Let
+
+$$
+C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}
+$$
+denote the closed sublevel set of $f$ for $\alpha$.
+Then,
+
+$$
+C_{\alpha} = \bigcap_{\mu > \alpha} O_{\mu}.
+$$
+```
+
+```{prf:proof}
+
+We show that $C_{\alpha} \subseteq \bigcap_{\mu > \alpha} O_{\mu}$.
+
+1. Let $\bx \in C_{\alpha}$.
+1. Then, $f(\bx) \leq \alpha$.
+1. Thus, $f(\bx) < \mu$ for every $\mu > \alpha$.
+1. Thus, $\bx \in O_{\mu}$ for every $\mu > \alpha$.
+1. Thus, $C_{\alpha} \subseteq \bigcap_{\mu > \alpha} O_{\mu}$.
+
+
+We now show that $C_{\alpha} \supseteq \bigcap_{\mu > \alpha} O_{\mu}$.
+
+1. Let $\bx \in \bigcap_{\mu > \alpha} O_{\mu}$.
+1. Then, $f(\bx) < \mu$ for every $\mu > \alpha$.
+1. Taking the infimum on the R.H.S. over the set $\{ \mu \in \RR \ST \mu > \alpha \}$,
+   we obtain 
+
+   $$
+   f(\bx) \leq \inf \{ \mu \in \RR \ST \mu > \alpha \} = \alpha. 
+   $$
+1. Thus, $\bx \in C_{\alpha}$.
+1. Thus, $\bigcap_{\mu > \alpha} O_{\mu} \subseteq C_{\alpha}$.
+```
+
+
+```{prf:theorem} Convexity of sublevel sets
 :label: res-cvxf-convexity-sublevel-sets
 
 If $f : \VV \to \RR$ is convex, 
-then its sublevel sets are convex.
+then its sublevel sets given by
+
+$$
+C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}
+$$
+are convex.
 ```
 
 ```{prf:proof}
@@ -1696,7 +1763,70 @@ Consider the function $f(x) = \ln x$.
 It is concave ({prf:ref}`ex-cvxf-real-logarithm`).
 
 Its sublevel sets are convex as they are intervals.
+```
 
+
+```{prf:theorem} Convexity of open sublevel sets
+:label: res-cvxf-convexity-open-sublevel-sets
+
+If $f : \VV \to \RR$ is convex, 
+then its open sublevel sets given by
+
+$$
+O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}
+$$
+are convex.
+```
+
+```{prf:proof}
+Assume $f$ is convex.
+
+1. Let $\bx, \by \in O_{\alpha}$.
+1. Then, $f(\bx) < \alpha$ and $f(\by) < \alpha$.
+1. Let $t \in (0,1)$.
+1. Let $\bz = t \bx + (1-t)\by$.
+1. Since $f$ is convex, hence:
+
+   $$
+   f(\bz) \leq t f(\bx) + (1-t) f(\by) < t \alpha + (1-t) \alpha = \alpha.
+   $$
+1. Thus, $f(\bz) < \alpha$.
+1. Thus, $\bz \in O_{\alpha}$.
+1. Thus, $O_{\alpha}$ is convex.
+```
+
+An alternate proof for showing the convexity of the closed
+sublevel sets is to show it as an intersection of open sublevel sets.
+
+
+```{prf:theorem} Intersection of sublevel sets of convex functions
+:label: res-cvxf-convexity-intersect-sublevel-sets
+
+Let $\VV$ be a real vector space.
+Let $I$ be an arbitrary index set.
+Let $f_i : \VV \to \RERL$ be convex functions for every $i \in I$.
+Let $\alpha_i \in \RR$ for every $i \in I$.
+Then,
+
+$$
+C = \{ \bx  \ST f_i(\bx) \leq \alpha_i, \Forall i \in I \}
+$$
+is a convex set.
+```
+
+```{prf:proof}
+For each $i \in I$, consider the set
+
+$$
+C_i = \{ \bx  \ST f_i(\bx) \leq \alpha_i\}.
+$$
+Then, $C_i$ is a sublevel set of $f_i$ which is convex. Hence, $C_i$ is convex.
+Now, we can see that 
+
+$$
+C = \bigcap_{i \in I}C_i
+$$
+Thus, $C$ is an intersection of convex sets. Hence, $C$ is convex.
 ```
 
 
