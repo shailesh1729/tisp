@@ -352,6 +352,11 @@ The observation above says that $f+g$ is still
 a convex function.
 
 
+{prf:ref}`Jensen's inequality <res-cvxf-jensen-inequality>`,
+discussed later in the section, generalizes the notion of
+convexity of a function to arbitrary convex combinations
+of points in its domain.
+
 ## Convexity on Lines in Domain
 
 ```{prf:theorem} $f$ is convex = $f$ is convex on lines in domain
@@ -772,81 +777,6 @@ The statement is obvious. And quite powerful.
 
 * The problem of minimizing a function $f$ over a set $C$
   is same as minimizing $f + I_C$ over $\VV$.
-
-## Jensen's Inequality
-
-Jensen's inequality stated below is another formulation for 
-convex functions. 
-
-````{prf:theorem} Jensen's inequality
-:label: res-cvxf-jensen-inequality
-
-A proper function $f: \VV \to \RERL$ is convex if and only if 
-
-```{math}
-:label: eq-cvxf-jensen-inequality
-f(t_1 \bx_1 + \dots + t_k \bx_k) \leq t_1 f(\bx_1) + \dots + t_k f(\bx_k)
-```
-holds true for every $\bx_1, \dots, \bx_k \in \VV$
-whenever $t_1, \dots, t_k \geq 0$ and $t_1 + \dots + t_k = 1$.
-This inequality is known as the *Jensen's inequality*.
-````
-
-```{prf:proof}
-The Jensen's inequality reduces to {eq}`eq-convexity-inequality`
-for $k=2$. Thus, the statement is true by definition for $k=2$.
-For $k > 2$, we shall present an inductive proof. 
-
-Assume $f$ is convex. Then $\dom f$ is convex and
-for all $\bx_1,\bx_2 \in \dom f$, 
-and $t \in [0, 1]$, we have:
-
-$$
-f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).
-$$
-
-
-1. Let $\bx_1, \dots, \bx_k \in \VV$.
-1. If any of $\bx_i \notin \dom f$ for some $i \in 1,\dots,k$, then
-   $f(\bx_i) = \infty$ and the Jensen's inequality holds vacuously.
-1. Thus, we shall assume that $\bx_1, \dots, \bx_k \in \dom f$.
-1. Since $\dom f$ is convex, hence their convex combination
-   $t_1 \bx_1 + \dots + t_k \bx_k \in \dom f$.
-1. Inductively, assume that the Jensen's inequality holds for $k-1$; i.e.,
-   
-   $$
-   f(r_1 \bx_1 + \dots + r_{k-1} \bx_{k-1}) \leq r_1 f(\bx_1) + \dots + r_{k-1} f(\bx_{k-1})
-   $$ 
-   holds true whenever $r_1, \dots, r_{k-1} \geq 0$ and $r_1 + \dots + r_{k-1} = 1$.
-1. WLOG, assume that $t_k < 1$. Thus, $1 - t_k > 0$.
-1. Define $\by = \sum_{i=1}^{k-1} t'_i \bx_i$ where
-   $t'_i = \frac{t_i}{1 - t_k}$.
-1. Note that $t'_i \geq 0$. Also, $\sum_{i=1}^{k-1} t'_i = 1$
-   since $\sum_{i=1}^{k-1} t_i = 1 - t_k$.
-1. We can now write:
-   
-   $$
-   f(t_1 \bx_1 + \dots + t_k \bx_k) 
-   &= f((1 - t_k) \by +  t_k \bx_k )\\
-   &\leq (1 - t_k)f (\by) + t_k f(\bx_k)\\
-   &= (1 - t_k)  f(t'_1 \bx_1 + \dots t'_{k-1} \bx_{k-1}) + t_k f(\bx_k)\\
-   &\leq (1 - t_k) ( t'_1 f(\bx_1)  + \dots + t'_{k-1} f(\bx_{k-1})) + t_k f(\bx_k)\\
-   &= t_1 f(\bx_1) + \dots + t_{k-1} f(\bx_{k-1}) + t_k f(\bx_k).
-   $$
-1. Thus, $f$ satisfies Jensen's inequality.
-
-
-For the converse, assume that $f$ satisfies Jensen's inequality.
-Let $\bx_1, \bx_2 \in \dom f$ and $t \in [0,1]$. Then, 
-by Jensen's inequality for $k=2$,
-
-$$
-f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2) < \infty.
-$$
-Thus, $t \bx_1 + (1-t) \bx_2 \in \dom f$. Thus, $\dom f$ is convex.
-Also, $f$ satisfies {eq}`eq-convexity-inequality`. Hence, $f$ is convex.
-```
-
 
 
 ## First Order Conditions
@@ -1829,6 +1759,29 @@ $$
 Thus, $C$ is an intersection of convex sets. Hence, $C$ is convex.
 ```
 
+```{prf:example} Convexity of sublevel sets of the quadratic
+:label: ex-cvxf-quadratic-sublevel
+
+Let $\bQ \in \SS^n$ be a positive semidefinite matrix. Let $\ba \in \RR^n$ and $c \in \RR$.
+
+Consider the sets of the form
+
+$$
+\{\bx \in \RR^n \ST \frac{1}{2} \langle \bx, \bQ \bx \rangle + \langle \bx, \ba \rangle + c \leq 0 \}.
+$$
+
+This is a sublevel set of the quadratic function 
+$f(\bx) = \frac{1}{2} \langle \bx, \bQ \bx \rangle + \langle \bx, \ba \rangle + c$. 
+
+Since $f$ is convex, hence the set is convex.
+
+Sets of this form include the solid ellipsoids, paraboloids as well as spherical balls.
+Here is an example of the spherical ball of the norm induced by the inner product.
+
+$$
+\{\bx \ST \| \bx \| \leq 1 \}  = \{ \bx \ST \langle \bx, \bx \rangle - 1 \leq 0 \}.
+$$
+```
 
 ## Hypograph
 
@@ -2296,4 +2249,111 @@ $$
 \gamma_{\overline{B}} (\bx) = \inf \{r \geq 0 \ST \bx \in r \overline{B} \} = \| \bx \|.
 $$
 The gauge function for the closed unit ball is simply the norm itself.
+```
+
+
+## Jensen's Inequality
+
+Jensen's inequality stated below is another formulation for 
+convex functions. 
+
+````{prf:theorem} Jensen's inequality
+:label: res-cvxf-jensen-inequality
+
+A proper function $f: \VV \to \RERL$ is convex if and only if 
+
+```{math}
+:label: eq-cvxf-jensen-inequality
+f(t_1 \bx_1 + \dots + t_k \bx_k) \leq t_1 f(\bx_1) + \dots + t_k f(\bx_k)
+```
+holds true for every $\bx_1, \dots, \bx_k \in \VV$
+whenever $t_1, \dots, t_k \geq 0$ and $t_1 + \dots + t_k = 1$.
+This inequality is known as the *Jensen's inequality*.
+````
+
+```{prf:proof}
+The Jensen's inequality reduces to {eq}`eq-convexity-inequality`
+for $k=2$. Thus, the statement is true by definition for $k=2$.
+For $k > 2$, we shall present an inductive proof. 
+
+Assume $f$ is convex. Then $\dom f$ is convex and
+for all $\bx_1,\bx_2 \in \dom f$, 
+and $t \in [0, 1]$, we have:
+
+$$
+f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).
+$$
+
+
+1. Let $\bx_1, \dots, \bx_k \in \VV$.
+1. If any of $\bx_i \notin \dom f$ for some $i \in 1,\dots,k$, then
+   $f(\bx_i) = \infty$ and the Jensen's inequality holds vacuously.
+1. Thus, we shall assume that $\bx_1, \dots, \bx_k \in \dom f$.
+1. Since $\dom f$ is convex, hence their convex combination
+   $t_1 \bx_1 + \dots + t_k \bx_k \in \dom f$.
+1. Inductively, assume that the Jensen's inequality holds for $k-1$; i.e.,
+   
+   $$
+   f(r_1 \bx_1 + \dots + r_{k-1} \bx_{k-1}) \leq r_1 f(\bx_1) + \dots + r_{k-1} f(\bx_{k-1})
+   $$ 
+   holds true whenever $r_1, \dots, r_{k-1} \geq 0$ and $r_1 + \dots + r_{k-1} = 1$.
+1. WLOG, assume that $t_k < 1$. Thus, $1 - t_k > 0$.
+1. Define $\by = \sum_{i=1}^{k-1} t'_i \bx_i$ where
+   $t'_i = \frac{t_i}{1 - t_k}$.
+1. Note that $t'_i \geq 0$. Also, $\sum_{i=1}^{k-1} t'_i = 1$
+   since $\sum_{i=1}^{k-1} t_i = 1 - t_k$.
+1. We can now write:
+   
+   $$
+   f(t_1 \bx_1 + \dots + t_k \bx_k) 
+   &= f((1 - t_k) \by +  t_k \bx_k )\\
+   &\leq (1 - t_k)f (\by) + t_k f(\bx_k)\\
+   &= (1 - t_k)  f(t'_1 \bx_1 + \dots t'_{k-1} \bx_{k-1}) + t_k f(\bx_k)\\
+   &\leq (1 - t_k) ( t'_1 f(\bx_1)  + \dots + t'_{k-1} f(\bx_{k-1})) + t_k f(\bx_k)\\
+   &= t_1 f(\bx_1) + \dots + t_{k-1} f(\bx_{k-1}) + t_k f(\bx_k).
+   $$
+1. Thus, $f$ satisfies Jensen's inequality.
+
+
+For the converse, assume that $f$ satisfies Jensen's inequality.
+Let $\bx_1, \bx_2 \in \dom f$ and $t \in [0,1]$. Then, 
+by Jensen's inequality for $k=2$,
+
+$$
+f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2) < \infty.
+$$
+Thus, $t \bx_1 + (1-t) \bx_2 \in \dom f$. Thus, $\dom f$ is convex.
+Also, $f$ satisfies {eq}`eq-convexity-inequality`. Hence, $f$ is convex.
+```
+
+Jensen's inequality is quite powerful in proving 
+a number of traditional inequalities. 
+
+```{prf:example}  Logarithm and Jensen's inequality
+:label: res-cvxf-log-jensen
+
+In {prf:ref}`ex-cvxf-real-logarithm`, we showed that
+$\ln(x)$ is concave. Consequently, $-\ln(x)$ is convex.
+
+Now, let $x_1, \dots, x_n \in \RR_{++}$ be positive 
+real numbers and let $t_1, \dots, t_n \geq 0$ such that
+$t_1 + \dots + t_n = 1$. Then, by Jensen's inequality
+
+$$
+-\ln (t_1 x_1 + \dots + t_n x_n) \leq - t_1 \ln x_1 - \dots - t_n \ln x_n.
+$$
+
+Multiplying by $-1$ and taking exponential on both sides, we obtain
+
+$$
+t_1 x_1 + \dots + t_n x_n \geq x_1^{t_1} \dots x_n^{t_n}.
+$$
+
+For a particular choice of $t_1 = \dots = t_n = \frac{1}{n}$, we obtain
+
+$$
+\frac{1}{n}(x_1 + \dots + x_n) \geq \sqrt[n]{x_1 \dots x_n}
+$$
+which is the AM-GM inequality suggesting that arithmetic mean is greater
+than or equal to the geometric mean for a group of positive real numbers.
 ```
