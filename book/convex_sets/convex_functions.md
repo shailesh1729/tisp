@@ -2391,7 +2391,7 @@ $$
 
 1. Let $\bx_1, \dots, \bx_k \in \VV$.
 1. If any of $\bx_i \notin \dom f$ for some $i \in 1,\dots,k$, then
-   $f(\bx_i) = \infty$ and the Jensen's inequality holds vacuously.
+   $f(\bx_i) = \infty$ and the Jensen's inequality holds trivially.
 1. Thus, we shall assume that $\bx_1, \dots, \bx_k \in \dom f$.
 1. Since $\dom f$ is convex, hence their convex combination
    $t_1 \bx_1 + \dots + t_k \bx_k \in \dom f$.
@@ -2460,4 +2460,42 @@ $$
 $$
 which is the AM-GM inequality suggesting that arithmetic mean is greater
 than or equal to the geometric mean for a group of positive real numbers.
+```
+
+
+````{prf:theorem} Jensen's inequality for nonnegative homogeneous convex functions
+:label: res-cvxf-jensen-inequality-nonneg-hom
+
+If $f: \VV \to \RERL$ is a nonnegative homogeneous proper convex function,
+then 
+
+```{math}
+:label: eq-cvxf-jensen-nonneg-hom
+f(t_1 \bx_1 + \dots + t_k \bx_k) \leq t_1 f(\bx_1) + \dots + t_k f(\bx_k)
+```
+holds true for every $\bx_1, \dots, \bx_k \in \VV$
+whenever $t_1, \dots, t_k \geq 0$.
+````
+
+```{prf:proof}
+
+Let $\bx_1, \dots, \bx_k \in \VV$.
+If any of $\bx_i \notin \dom f$ for some $i \in 1,\dots,k$, then
+$f(\bx_i) = \infty$ and the inequality holds trivially.
+Thus, we shall assume that $\bx_1, \dots, \bx_k \in \dom f$.
+
+By {prf:ref}`res-cvxf-nonneg-hom-convex-subadditive`, $f$ is subadditive.
+Thus,
+
+$$
+f(t_1 \bx_1 + \dots + t_k \bx_k) \leq f(t_1 \bx_1) + \dots + f(t_k \bx_k).
+$$
+
+The nonnegative homogeneity gives us
+
+$$
+f(t_1 \bx_1) + \dots + f(t_k \bx_k) = t_1 f(\bx_1) + \dots + t_k f(\bx_k).
+$$
+
+We are done.
 ```
