@@ -501,6 +501,8 @@ $\VV \oplus \RR$ is the
 of $\VV$ and $\RR$ having appropriate vector space 
 structure.
 
+### Convex Functions
+
 ```{prf:theorem} Function convexity = Epigraph convexity
 :label: res-cvxf-convexity-epigraph
 
@@ -553,6 +555,7 @@ Due to {prf:ref}`res-cvx-convex-set-affine-image`,
 $\epi f$ convex implies $\dom f$ convex
 as the projection is a linear operation.
 
+### Nonnegative Homogeneous Functions
 
 Recall that a real valued function $f : \VV \to \RR$ is 
 nonnegative homogeneous if 
@@ -593,6 +596,8 @@ Assume $\epi f$ is a cone.
 1. But then, $f(\bx) \leq \frac{s}{t} f(\bx) < f(\bx)$ which is a contradiction.
 1. Hence, $f(t \bx) = t f(\bx)$ must hold true.
 ```
+
+### Nonnegative Homogeneous Convex Functions
 
 ```{prf:theorem} Nonnegative homogeneous convex function epigraph characterization
 :label: res-cvxf-nonneg-hom-cvx-cone-epi
@@ -659,6 +664,123 @@ Now for the converse, assume that $f$ is nonnegative homogeneous and subadditive
 1. But then, by {prf:ref}`res-cvxf-nonneg-hom-cvx-cone-epi`, $f$ is convex.
 ```
 
+```{prf:corollary}
+:label: res-cvxf-nonneg-hom-convex-negation
+
+Let $\VV$ be a real vector space.
+Let $f: \VV \to \RR$ be a nonnegative homogeneous convex function.
+Then,
+
+$$
+f(-\bx) \geq -f(\bx) \Forall \bx \in \dom f.
+$$
+```
+```{prf:proof}
+Since $f$ is nonnegative homogeneous convex, hence $f$ is
+subadditive. 
+
+Thus,
+
+$$
+f(\bx - \bx) \leq f(\bx) + f(-\bx).
+$$
+
+But,
+
+$$
+f(\bx - \bx) = f(\bzero) = f(0 \bzero) = 0 f(\bzero) = 0.
+$$
+
+Thus,
+
+$$
+f(\bx) + f(-\bx) \geq 0.
+$$
+
+Thus,
+
+$$
+f(-\bx) \geq -f(\bx).
+$$
+```
+
+
+```{prf:theorem} Linearity of nonnegative homogeneous functions
+:label: res-cvxf-nonneg-hom-convex-linear
+
+Let $\VV$ be a real vector space.
+Let $f: \VV \to \RR$ be a nonnegative homogeneous convex function.
+Then, $f$ is linear on a subspace $L$ of $\VV$
+if and only if $f(-\bx) = -f(\bx)$ for every $\bx \in L$.
+
+If $L$ is finite dimensional, then
+this is true if merely $f(-\bb_i) = -f(\bb_i)$ for all the
+vectors in some basis $\bb_1, \dots, \bb_n$ for $L$. 
+```
+
+
+```{prf:proof}
+We are given that $f$ is nonnegative homogeneous convex.
+
+
+Assume that $f$ is linear over $L$. 
+Then by definition of linearity, $f(-\bx) = -f(\bx)$ for every $\bx \in L$.
+
+
+Now, for the converse, assume that $f(-\bx) = -f(\bx) \Forall \bx \in L$.
+
+1. Let $\bx, \by \in L$.
+1. Then, $f(\bx + \by) \leq f(\bx) + f(\by)$ since $f$ is subadditive.
+1. Also, 
+
+   $$
+   f(\bx + \by) = -f(-(\bx + \by)) = -f(-\bx + (-\by)).   
+   $$
+1. But 
+
+   $$
+   f(-\bx + (-\by)) \leq f(-\bx) + f(-\by) = -f(\bx) - f(\by) = - (f(\bx) + f(\by)).
+   $$
+1. Thus,
+
+   $$
+   f(\bx + \by) = -f(-\bx + (-\by)) \geq f(\bx) + f(\by).
+   $$
+1. Combining, we get $f(\bx + \by) = f(\bx) + f(\by)$. 
+   Thus, $f$ is additive over $L$.
+1. For any $t < 0$, 
+
+   $$
+   f(t \bx) = - f(-t \bx) = - (-t) f(\bx) = t f(\bx).
+   $$
+1. Thus, for any $t \in \RR$, $f(t \bx) = t f(\bx)$.
+1. Thus, $f$ is homogeneous over $L$.
+1. Since $f$ is additive and homogeneous over $L$, hence $f$ is linear.
+
+
+Finally, assume that $L$ is finite dimensional and has a basis
+$\bb_1, \dots, \bb_n$.
+
+1. By previous argument $f$ is homogeneous on the basis vectors; i.e.,
+   $f(t \bb_i) = t f(\bb_i)$ for any $t \in \RR$ and any basis vector.
+1. Let $\bx \in L$.
+1. Then, $\bx = \sum_{i=1}^n a_i \bb_i$.
+1. Since $f$ is subadditive, hence
+
+   $$
+   f(a_1 \bb_1) + \dots + f(a_n \bb_n) 
+   & \geq f(a_1 \bb_1 + \dots + a_n \bb_n)\\
+   &= f(\bx) \\
+   &\geq - f(-\bx)\\
+   &= - f(-a_1 \bb_1 - \dots - a_n \bb_n)\\
+   &\geq - f(-a_1 \bb_1) - \dots - f(-a_n \bb_n)\\
+   &=f(a_1 \bb_1) + \dots + f(a_n \bb_n).
+   $$
+1. This can hold only if all the inequalities are equalities in the previous
+   derivation. 
+1. Thus, $f(\bx) = - f(-\bx)$ or $-f(\bx) = f(-\bx)$ for every $\bx \in L$.
+1. Then, following the previous argument, $f$ is linear over $L$.
+```
 
 ## Extended Value Extensions
 Tracking domains of convex functions is difficult.
