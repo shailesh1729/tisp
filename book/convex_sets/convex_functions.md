@@ -616,6 +616,50 @@ its epigraph $\epi f$ is a convex cone.
 ```
 
 
+```{prf:theorem} Nonnegative homogeneous convex function is subadditive
+:label: res-cvxf-nonneg-hom-convex-subadditive
+
+Let $\VV$ be a real vector space.
+A nonnegative homogeneous function $f: \VV \to \RR$ is convex
+if and only if it is subadditive:
+
+$$
+f(\bx + \by) \leq f(\bx) + f(\by) \Forall \bx, \by \in \dom f.
+$$
+```
+
+```{prf:proof}
+
+Assume that $f$ is nonnegative homogeneous and convex.
+
+1. By {prf:ref}`res-cvxf-nonneg-hom-cvx-cone-epi`, $\epi f$ is a convex cone.
+1. Then, by {prf:ref}`res-convex-cone-characterization` $\epi f$ is closed under
+   addition and nonnegative scalar multiplication.
+1. Pick any $\bx, \by \in \dom f$. 
+1. Then $(\bx, f(\bx)), (\by, f(\by)) \in \epi f$.
+1. Then, their sum $(\bx + \by, f(\bx) + f(\by)) \in \epi f$.
+1. This means that $f(\bx + \by) \leq f(\bx) + f(\by)$ by definition of epigraph.
+
+
+Now for the converse, assume that $f$ is nonnegative homogeneous and subadditive.
+
+1. By {prf:ref}`res-cvxf-pose-hom-cone`, $\epi f$ is a cone. 
+1. Consequently, it is closed under nonnegative scalar multiplication.
+1. Pick any $\bx, \by \in \dom f$.
+1. Let $(\bx, \alpha), (\by, \beta) \in \epi f$.
+1. Then, $f(\bx) \leq \alpha$ and $f(\by) \leq \beta$.
+1. Now, $(\bx + \by, f(\bx + \by)) \in \epi f$.
+1. Since $f$ is subadditive, hence $f(\bx + \by) \leq f(\bx) + f(\by) \leq \alpha + \beta$.
+1. Thus, $(\bx + \by, \alpha + \beta) \in \epi f$.
+1. We have shown that for any  $(\bx, \alpha), (\by, \beta) \in \epi f$,
+   $(\bx + \by, \alpha + \beta) \in \epi f$.
+1. Thus, $\epi f$ is closed under vector addition.
+1. Since $\epi f$ is closed under vector addition and nonnegative scalar multiplication,
+   hence $\epi f$ is a convex cone.
+1. But then, by {prf:ref}`res-cvxf-nonneg-hom-cvx-cone-epi`, $f$ is convex.
+```
+
+
 ## Extended Value Extensions
 Tracking domains of convex functions is difficult.
 It is often convenient to extend a convex function
