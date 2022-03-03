@@ -554,6 +554,66 @@ $\epi f$ convex implies $\dom f$ convex
 as the projection is a linear operation.
 
 
+Recall that a real valued function $f : \VV \to \RR$ is 
+nonnegative homogeneous if 
+for every $t \in \RR_+$, $f(t \bx) = t f(\bx)$.
+
+```{prf:theorem} Nonnegative homogeneity = Epigraph is cone
+:label: res-cvxf-pose-hom-cone
+
+A function $f : \VV \to \RR$ is nonnegative homogeneous if and
+only if its epigraph $\epi f$ is a cone in $\VV \oplus \RR$.
+```
+
+```{prf:proof}
+Let $f$ be nonnegative homogeneous.
+
+1. Let $(\bx, f(\bx)) \in \epi f$.
+1. Let $t \geq 0$.
+1. Then, $t(\bx, f(\bx)) = (t\bx, t f(\bx)) = (t\bx, f(t\bx))$.
+1. But $(t\bx, f(t\bx)) \in \epi f$ since $f$ is nonnegative homogeneous.
+1. Thus, $\VV \oplus \RR$ is closed under nonnegative scalar multiplication.
+1. Thus, $\epi f$ is a cone.
+
+Assume $\epi f$ is a cone.
+
+1. Let $\bx \in \dom f$.
+1. Then, $(\bx, f(\bx)) \in \epi f$.
+1. Since $(\bzero, 0) \in \epi f$ as $\epi f$ is a cone, hence
+   $f(0 \bx) = 0 f(\bx) = 0$.
+1. Now, let $t > 0$.
+1. Since $\epi f$ is a cone then, $t(\bx, f(\bx)) \in \epi f$.
+1. Then, $t(\bx, f(\bx)) = (t\bx, t f(\bx)) \in \epi f$.
+1. By definition of epigraph, $f(t\bx) \leq t f(\bx)$.
+1. We claim that $f(t \bx) = t f(\bx)$ must hold true.
+1. Assume for contradiction that $f(t \bx) = s f(\bx)$ where $s < t$.
+1. Then, $(t\bx, s f(\bx)) \in \epi f$.
+1. Since $\epi f$ is a cone, hence dividing by $t$, we get,
+   $(\bx, \frac{s}{t} f(\bx)) \in \epi f$.
+1. But then, $f(\bx) \leq \frac{s}{t} f(\bx) < f(\bx)$ which is a contradiction.
+1. Hence, $f(t \bx) = t f(\bx)$ must hold true.
+```
+
+```{prf:theorem} Nonnegative homogeneous convex function epigraph characterization
+:label: res-cvxf-nonneg-hom-cvx-cone-epi
+
+Let $\VV$ be a real vector space.
+A real valued function $f: \VV \to \RR$ is nonnegative homogeneous and convex
+if and only if its epigraph
+$\epi f$ is a convex cone.
+```
+
+```{prf:proof}
+
+By {prf:ref}`res-cvxf-pose-hom-cone`, $f$ is nonnegative homogeneous if and
+only if $\epi f$ is a cone.
+
+By {prf:ref}`res-cvxf-convexity-epigraph`, $f$ is convex if and only if
+$\epi f$ is convex.
+
+Thus, $f$ is nonnegative homogeneous and convex if and only if
+its epigraph $\epi f$ is a convex cone.
+```
 
 
 ## Extended Value Extensions
@@ -2326,8 +2386,8 @@ Thus, $t \bx_1 + (1-t) \bx_2 \in \dom f$. Thus, $\dom f$ is convex.
 Also, $f$ satisfies {eq}`eq-convexity-inequality`. Hence, $f$ is convex.
 ```
 
-Jensen's inequality is quite powerful in proving 
-a number of traditional inequalities. 
+Jensen's inequality is essential in proving 
+a number of famous inequalities. 
 
 ```{prf:example}  Logarithm and Jensen's inequality
 :label: res-cvxf-log-jensen
