@@ -2231,12 +2231,33 @@ Choose any $\bx, \by \in \VV$ and $t \in (0, 1)$.
 ```
 
 ```{prf:example} Exponential of a convex function
+:label: ex-cvxf-exp-cvx-func
+
 Recall from {prf:ref}`ex-cvxf-real-exponential` that the exponential function $e^x$
 is convex. 
 
 Then, for any convex $f$,  $h(x) = e^{f(x)}$ is convex
 due to {prf:ref}`res-cvx-convex-nondec-composition`.
 ```
+
+```{prf:example} Power of a nonnegative convex function
+:label: ex-cvxf-pow-cvx-func-non-neg
+
+Let $f: \VV \to \RR$ be a proper convex and nonnegative function.
+
+Then, $f(x) = | f(x) |$. 
+
+Let $p \geq 1$ and consider the function $g(x) = |x|^p$.
+By {prf:ref}`ex-cvxf-real-power-absolute-x-p`, $g$ is convex.
+
+Then, $ h = g \circ f$ given by
+
+$$
+h(\bx) = g(f(\bx)) = | f(\bx) |^p  = f(\bx)^p
+$$
+is also convex.
+```
+
 
 ### Composition with Affine Mapping
 
