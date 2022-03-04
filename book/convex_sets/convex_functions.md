@@ -2389,8 +2389,12 @@ then so is $g$.
 Let $\VV$ be a real vector space.
 Let $f_1 : \VV \to \RERL$ and $f_2 : \VV \to \RERL$
 be proper convex functions. Then, the function
-$f = f_1 + f_2$ is convex.
+$f = f_1 + f_2$ is a proper convex function.
 ```
+
+We note that since both $f_1$ and $f_2$ are proper,
+hence neither attains a value of $-\infty$, thus
+undesired sums like $\infty - \infty$ are avoided.
 
 ```{prf:proof}
 
@@ -2404,6 +2408,10 @@ Convexity of the domain
 
 We note that $f(\bx) < \infty$ if and only if $f_1(\bx) < \infty$
 and $f_1(\bx) < \infty$.
+
+If $\dom f = \EmptySet$, then 
+by {prf:ref}`res-cvxf-empty-func-convex`, $f$ is convex.
+We are left with the case where $\dom f$ is not empty.
 
 
 Convexity inequality
@@ -2433,9 +2441,9 @@ Convexity inequality
 :label: res-cvx-function-sum-convex-n
 
 Let $\VV$ be a real vector space.
-Let $f_1, \dot, f_k \VV \to \RERL$
+Let $f_1, \dots, f_k : \VV \to \RERL$
 be proper convex functions. Then, the function
-$f = f_1 + \dots + f_k$ is convex.
+$f = f_1 + \dots + f_k$ is a proper convex function.
 ```
 
 ```{prf:proof}
@@ -2444,6 +2452,34 @@ $\dom f$ is convex since it is an intersection of
 convex sets.
 The proof of convexity is a simple application of
 mathematical induction.
+
+1. Let $g_r = f_1 + \dots + f_r$ for $r \in 2,\dots, k$.
+1. By {prf:ref}`res-cvx-function-sum-convex`, $g_2 = f_1 + f_2$
+   is a proper convex function.
+1. Assume that $g_r$ is a  proper convex function for some $r$.
+1. Then, $g_{r+1} = g_r + f_{r+1}$.
+1. Since both $g_r$ and $f_{r+1}$ are proper convex, hence
+   $g_{r+1}$ is also a proper convex function.
+```
+
+```{prf:theorem} Conic combination of convex functions
+
+Let $\VV$ be a real vector space.
+Let $f_1, \dots, f_k : \VV \to \RERL$
+be proper convex functions. 
+Let $r_1, \dots, r_k \geq 0$.
+
+Then, the function
+$f = r_1 f_1 + \dots + r_k f_k$ is a proper convex function.
+$f$ is a conic combination of $f_1, \dots, f_k$.
+```
+
+```{prf:proof}
+By {prf:ref}`ex-cvxf-convex-func-scale-translate`,
+$r_i f_i$ are proper convex functions.
+
+By {prf:ref}`res-cvx-function-sum-convex-n`, 
+their sum is a proper convex function.
 ```
 
 
