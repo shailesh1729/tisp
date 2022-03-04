@@ -2381,6 +2381,71 @@ A similar argument shows that if $f$ is concave
 then so is $g$.
 ```
 
+### Sum of Functions
+
+```{prf:theorem} Sum of convex functions
+:label: res-cvx-function-sum-convex
+
+Let $\VV$ be a real vector space.
+Let $f_1 : \VV \to \RERL$ and $f_2 : \VV \to \RERL$
+be proper convex functions. Then, the function
+$f = f_1 + f_2$ is convex.
+```
+
+```{prf:proof}
+
+Convexity of the domain
+
+1. Since $f_1$ is convex, hence $\dom f_1$ is a convex set.
+1. Since $f_2$ is convex, hence $\dom f_2$ is a convex set.
+1. By definition of function sum $\dom f = \dom f_1 \cap \dom f_2$.
+1. Intersection of convex sets is convex.
+1. Hence, $\dom f$ is convex.
+
+We note that $f(\bx) < \infty$ if and only if $f_1(\bx) < \infty$
+and $f_1(\bx) < \infty$.
+
+
+Convexity inequality
+
+1. Let $\bx, \by \in \dom f$. Let $t \in (0, 1)$.
+1. Then, $\bx, \by \in \dom f_1$
+   as well as $\bx, \by \in \dom f_2$.
+1. By convexity of $f_1$
+
+   $$
+   f_1(t \bx + (1-t) \by) \leq t f_1(\bx) + (1-t)f_1(\by).
+   $$
+1. By convexity of $f_2$
+
+   $$
+   f_2(t \bx + (1-t) \by) \leq t f_2(\bx) + (1-t)f_2(\by).
+   $$
+1. Summing these inequalities, we get:
+
+   $$
+   f(t \bx + (1-t) \by) \leq t f(\bx) + (1-t)f(\by).
+   $$
+```
+
+
+```{prf:corollary} Sum of multiple convex functions
+:label: res-cvx-function-sum-convex-n
+
+Let $\VV$ be a real vector space.
+Let $f_1, \dot, f_k \VV \to \RERL$
+be proper convex functions. Then, the function
+$f = f_1 + \dots + f_k$ is convex.
+```
+
+```{prf:proof}
+We note that $\dom f = \bigcap_{i=1}^k \dom f_k$.
+$\dom f$ is convex since it is an intersection of
+convex sets.
+The proof of convexity is a simple application of
+mathematical induction.
+```
+
 
 ### Pointwise Supremum
 
