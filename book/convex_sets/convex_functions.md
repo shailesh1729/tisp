@@ -2258,6 +2258,24 @@ $$
 is also convex.
 ```
 
+```{prf:example} Power of a norm
+:label: ex-cvxf-pow-norm
+
+Let $\| \cdot \| : \VV \to \RR$ be a norm on the
+real vector space $\VV$. Let $p \geq 1$.
+
+Then, the $p$-th power of the norm given by
+
+$$
+h(\bx) = \| \bx \|^p \Forall \bx \in \VV 
+$$
+is convex.
+
+1. The norm is a convex and nonnegative function.
+1. $g(x) = |x|^p$ is convex.
+1. By {prf:ref}`res-cvx-convex-nondec-composition`,
+   $\| \cdot \|^p$ is convex.
+```
 
 ### Composition with Affine Mapping
 
