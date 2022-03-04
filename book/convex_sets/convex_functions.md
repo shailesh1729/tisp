@@ -2482,6 +2482,40 @@ By {prf:ref}`res-cvx-function-sum-convex-n`,
 their sum is a proper convex function.
 ```
 
+```{prf:example} Restricting the domain of a convex function
+:label: ex-cvxf-restrict-domain-ind-sum
+
+
+Let $f : \VV \to \RR$ be a convex function with
+$\dom f = \VV$.
+
+Let $C \subseteq \VV$ be a convex set.
+Let $I_C$ be the indicator function for the set $C$ given by
+
+$$
+I_C(\bx) =  \begin{cases}
+0 & \text{ if } & \bx \in C\\
+\infty & \text{ if } & \bx \notin C.
+\end{cases}
+$$
+
+
+Consider the proper function $h = f + I_C$ given by
+
+
+$$
+h(\bx) = f(\bx) + I_C(\bx) =  \begin{cases}
+f(\bx) & \text{ if } & \bx \in C\\
+\infty & \text{ if } & \bx \notin C.
+\end{cases}
+$$
+
+By {prf:ref}`res-cvx-function-sum-convex`,
+$h$ is a proper convex function.
+$\dom h = \dom f \cap \dom I_C = \VV \cap C = C$.
+
+Thus, $h$ restricts the effective domain of $f$ to $C$.
+```
 
 ### Pointwise Supremum
 
