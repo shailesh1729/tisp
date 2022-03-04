@@ -2121,7 +2121,71 @@ than the arithmetic mean.
 1. Since $g - \alpha a$ is concave, hence $A$ is convex.
 ```
 
-## Composition with Affine Mapping
+## Function Convexity Preserving Operations
+
+
+### Composition with Nondecreasing Functions
+
+```{prf:theorem} Composition with a convex nondecreasing function preserves convexity
+:label: res-cvx-convex-nondec-composition
+
+Let $\VV$ be a real vector space. 
+Let $f : \VV \to \RERL$ be a proper convex function. 
+Let $g : \RR \to \RERL$ be a convex function which is nondecreasing. 
+
+Then, their composition $h = g \circ f$ given by:
+
+$$
+h (\bx) = g ( f (\bx)) \Forall \bx \in \VV
+$$
+with $g(\infty) = \infty$, is convex on $\VV$. 
+```
+
+```{prf:proof}
+We note that $\dom h = \dom f \cap \dom g$.
+Since both $f$ and $g$ are convex, hence
+$\dom f$ and $\dom g$ are convex and hence
+$\dom h$ is convex.
+
+Choose any $\bx, \by \in \VV$ and $t \in (0, 1)$.
+
+1. We need to show that 
+   
+   $$
+   h((1-t) \bx + t \by) \leq (1-t) h(\bx) + t h(\by).
+   $$
+1. If $\bx \notin \dom f$, then $h(\bx) = g(f(\bx)) = \infty$.
+   Similarly, if $\by \notin \dom f$, then $h(\by) = g(f(\by)) = \infty$.
+1. In either case, the convexity inequality will be satisfied trivially.
+1. Let us now consider the case where $\bx, \by \in \dom f$.
+1. By convexity of $f$, we have:
+
+   $$
+   f((1-t) \bx + t \by) \leq (1-t) f(\bx) + t f(\by).
+   $$
+1. Note that $(1-t) f(\bx) + t f(\by)$ is a convex combination of $f(\bx)$ and $f(\by)$.
+1. Since $g$ is nondecreasing, hence if $r \leq s$ then $g(r) \leq g(s)$.
+1. By applying $g$ on both sides of the previous inequality, we obtain
+
+   $$
+   h ((1-t) \bx + t \by) 
+   &= g (f ((1-t) \bx + t \by)) \\ 
+   &\leq g((1-t) f(\bx) + t f(\by)) \\
+   &\leq (1-t) g(f(\bx)) + t g(f(\by)) \\
+   &= (1-t) h(\bx) + t h(\by).
+   $$
+1. Thus, $h$ is convex.
+```
+
+```{prf:example} Exponential of a convex function
+Recall from {prf:ref}`ex-cvxf-real-exponential` that the exponential function $e^x$
+is convex. 
+
+Then, for any convex $f$,  $h(x) = e^{f(x)}$ is convex
+due to {prf:ref}`res-cvx-convex-nondec-composition`.
+```
+
+### Composition with Affine Mapping
 
 
 ```{prf:theorem} Affine transformations preserve convexity
@@ -2182,7 +2246,7 @@ then so is $g$.
 ```
 
 
-## Pointwise Supremum
+### Pointwise Supremum
 
 ```{prf:theorem} Pointwise maximum of two convex functions
 :label: res-cvx-ptws-max-2
