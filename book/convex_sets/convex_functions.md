@@ -327,6 +327,69 @@ $$
 1. Thus, $f$ is concave.
 ```
 
+```{prf:example} Powers of absolute value
+:label: ex-cvxf-real-power-absolute-x-p
+
+
+Let $f : \RR \to \RR$ be:
+
+$$
+f(x) = |x|^p
+$$
+with $\dom f = \RR$.
+
+For $p=1$, the absolute value function $f(x) = |x|$ is convex.
+
+Consider the case where $p > 1$. Let $q$ be its conjugate
+exponent given by $\frac{1}{p} + \frac{1}{q} = 1$.
+
+Let $x, y \in \RR$ and $s, t \in (0, 1)$ with $s + t= 1$.
+
+1. By triangle inequality:
+   
+   $$
+   | s x + t y | \leq  s | x| + t |y|.
+   $$
+1. We can write this as:
+
+   $$
+   s | x| + t |y|
+   = \left ( s^{\frac{1}{p}} |x| \right ) s^{\frac{1}{q}} 
+   + \left ( t^{\frac{1}{p}} |y| \right ) t^{\frac{1}{q}}.
+   $$
+
+1. By {prf:ref}`Hölder's inequality <res-bra-holder-inequality>`,
+   for some $a_1, a_2, b_1, b_2 \geq 0$
+
+   $$
+   a_1 b_1 + a_2 b_2 \leq (a_1^p + a_2^p)^{\frac{1}{p}} 
+   + (b_1^q + b_2^q)^{\frac{1}{q}}. 
+   $$
+
+1. Let $a_1 = s^{\frac{1}{p}} |x|$, $a_2 =  t^{\frac{1}{p}} |y|$,
+   $b_1 = s^{\frac{1}{q}}$ and $b_2 = t^{\frac{1}{q}}$.
+1. Applying Hölder's inequality,
+
+   $$
+   | s x + t y | 
+   \leq s | x| + t |y| 
+   \leq (s |x|^p + t |y|^p)^{\frac{1}{p}} (s + t)^{\frac{1}{q}}
+   = (s |x|^p + t |y|^p)^{\frac{1}{p}}.
+   $$
+1. Taking power of $p$ on both sides, we get:
+
+   $$
+   | s x + t y |^p \leq s |x|^p + t |y|^p.
+   $$
+1. Which is the same as
+   
+   $$
+   f(s x + t y) \leq s f(x) + t f(y).
+   $$
+1. Thus, $f$ is convex.
+```
+
+
 ```{prf:observation} Empty function is convex
 :label: res-cvxf-empty-func-convex
 
@@ -1402,17 +1465,7 @@ Now, $f'(x) = a x^{a-1}$ and $f''(x) = a (a - 1) x^{a-2}$.
 ```
 
 
-```{prf:example} Powers of absolute value
-:label: ex-cvxf-real-power-absolute-x-a
 
-
-Let $f : \RR \to \RR$ be:
-
-$$
-f(x) = |x|^a
-$$
-with $\dom f = \RR_{++}$.
-```
 
 ```{prf:example} Reciprocal powers
 :label: ex-cvxf-real-reciprocal-power-x-r
