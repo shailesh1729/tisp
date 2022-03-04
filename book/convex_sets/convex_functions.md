@@ -2174,7 +2174,7 @@ than the arithmetic mean.
 1. Since $g - \alpha a$ is concave, hence $A$ is convex.
 ```
 
-## Function Convexity Preserving Operations
+## More Function Convexity Preserving Operations
 
 
 ### Composition with Nondecreasing Functions
@@ -2516,6 +2516,90 @@ $\dom h = \dom f \cap \dom I_C = \VV \cap C = C$.
 
 Thus, $h$ restricts the effective domain of $f$ to $C$.
 ```
+
+### Construction from $\VV \oplus \RR$
+
+One way to construct convex functions on $\VV$ 
+is from convex sets in $\VV \oplus \RR$.
+
+```{prf:theorem} Construction from convex sets of $\VV \oplus \RR$
+:label: res-cvxf-construct-convex-sets-dirsum
+
+
+Let $\VV$ be a real vector space.
+Let $F \subseteq \VV \oplus \RR$ be a convex
+subset of $\VV \oplus \RR$. 
+Let $f : \VV \to \RERL$ be defined as
+
+$$
+f(\bx) \triangleq \inf \{t \in \RR \ST (\bx, t) \in F \}.
+$$
+
+Then, $f$ is a proper convex function on $\VV$.
+```
+
+We note that $f(\bx) = \infty$ if there is
+no $t \in \RR$ such that $(\bx, t) \in F$.
+This is consistent since $\inf \EmptySet = \infty$.
+
+
+```{prf:proof}
+
+Convexity of domain of $f$
+
+1. We note that for some $\bv \in \VV$, if there
+   is no $t \in \RR$ such that $(\bv, t) \in F$,
+   then $f(\bv) = \infty$ and $\bv \notin \dom f$.
+1. Thus, if $\bv \in \dom f$, then there exists
+   $t \in \RR$ such that $(\bv, t) \in F$.
+1. Let $\bx, \by \in \dom f$ and $t \in (0, 1)$.
+1. Then, there exists $(\bx, p) \in F$ 
+   and $(\by, q) \in F$ for some $p,q \in \RR$.
+1. Since $F$ is convex, hence
+   
+   $$
+   t(\bx, p) + (1-t)(\by, q) 
+   = (t \bx + (1-t) \by, t p + (1-t)q ) \in F.
+   $$
+1. But then, $f(t \bx + (1-t) \by) \leq  t p + (1-t)q \in \RR$.
+1. Thus,  $t \bx + (1-t) \by \in \dom f$.
+1. Thus, $\dom f$ is convex.
+
+
+Convexity inequality in the domain
+
+1. Let $\bx, \by \in \dom f$ and $t \in (0, 1)$.
+1. Let $X = \{v \in \RR \ST (\bx, v) \in F \}$.
+1. Let $Y = \{v \in \RR \ST (\by, v) \in F \}$.
+1. By definition of $f$, $f(\bx) = \inf X$ and $f(\by) = \inf Y$.
+1. Let $\bz = t \bx + (1-t) \by$.
+1. Let $Z = \{v \in \RR \ST (\bz, v) \in F \}$. 
+1. We have $f(\bz) = \inf Z$.
+1. Since $F$ is convex, hence 
+   for every $p \in X$ and every $q \in Y$,
+   the point $(t\bx + (1-t)\by, t p + (1-t) q) = (\bz, t p + (1-t) q) \in F$.
+1. Thus, for every $p \in X$ and every $q \in Y$,
+   $t p + (1-t) q \in Z$.
+1. But then, $\inf Z \leq t p + (1-t) q$ for every $p \in X$ 
+   and every $q \in Y$.
+1. Thus, taking infimum on the R.H.S. over $X$ and $Y$, 
+   
+   $$
+   \inf Z \leq \inf_{p \in X} \inf_{q \in Y} (t p + (1-t) q ) 
+   = t \inf X + (1-t) \inf Y.
+   $$
+1. In other words
+
+   $$
+   f(t \bx + (1-t) \by) = f(\bz) \leq t f(\bx) + (1-t) f(\by).
+   $$
+1. Thus, $f$ is convex.
+```
+
+We note that $F \neq \epi f$. Although, $F \subseteq \epi f$ 
+and can be easily
+extended to become $\epi f$.
+
 
 ### Pointwise Supremum
 
