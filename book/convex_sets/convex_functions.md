@@ -2277,6 +2277,50 @@ is convex.
    $\| \cdot \|^p$ is convex.
 ```
 
+```{prf:example} Reciprocal of a concave function
+:label: ex-cvxf-concave-reciprocal-convex
+
+Let $g$ be a concave function. 
+Then, $h(\bx) = \frac{1}{g(\bx)}$ is convex
+on the set $C = \{\bx \ST g(\bx) > 0 \}$.
+
+1. Since $g$ is concave, hence $f = -g$ is convex.
+1. For all $\bx \in C$, $f(\bx) < 0$.
+1. Consider the function
+
+   $$
+   \phi(x) = \begin{cases} 
+   \frac{1}{x} & \text{ if } & x < 0\\
+   \infty & \text{ if } & x \geq 0.
+   \end{cases}
+   $$
+1. It is easy to see that $\phi$ is convex with
+   the domain $\RR_{++}$
+   ({prf:ref}`ex-cvxf-real-reciprocal-power-x-r`).
+1. We can see that, $h = \phi \circ f$.
+1. Since $f$ is convex and negative, 
+   $h$ is also convex with $\dom h = C \cap \RR_{++}$.
+```
+
+```{prf:example} Scaling and translation of a convex function
+:label: ex-cvxf-convex-func-scale-translate
+
+Let $f : \VV \to \RR$ be a proper convex function.
+Let $m \geq 0$ and $c \in \RR$.  
+Let $g : \RR \to \RR$ be given by
+
+$$
+g(x) = m x + c.
+$$
+Then, $g$ is convex (in fact affine) and nondecreasing.
+
+Thus, $h = g \circ f = m f + c$ is also a
+proper convex function due to
+{prf:ref}`res-cvx-convex-nondec-composition`.
+```
+
+
+
 ### Composition with Affine Mapping
 
 
