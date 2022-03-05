@@ -863,6 +863,18 @@ boundary of any set is closed.
 
 ## Accumulation
 
+```{prf:definition} Deleted neighborhood
+:label: def-ms-del-neighborhood
+
+Let $x \in X$. The *deleted neighborhood* of radius $r$
+around $x$ is defined as the open ball of radius $r$ around $x$ 
+excluding $x$ itself.
+
+$$
+B_d(x, r) = B(x, r) \setminus x.
+$$
+```
+
 
 ```{prf:definition} Accumulation point
 :label: def-ms-accumulation-point
@@ -872,6 +884,13 @@ if every open ball $B(x,r)$ contains a point in $A$ distinct from $x$.
 
 $$
 B(x, r) \cap A \setminus \{ x \} \neq \EmptySet \Forall r > 0.
+$$
+
+In other words, every deleted neighborhood of $x$ contains
+a point from $A$.
+
+$$
+B_d(x, r) \cap A \neq \EmptySet \Forall r > 0.
 $$
 ```
 
