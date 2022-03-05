@@ -894,8 +894,54 @@ We will fix $n$ and vary $n$ to compute the limit inequalities.
 1. Taking the limit on the sequence $x_m$ (in L.H.S.), we get: $x - \epsilon \leq x_n$.
 1. Consider the strict inequality: $x_n < x_m + \epsilon$ for all $m > n_0$.
 1. Taking the limit on the sequence $x_m$ (in R.H.S.), we get: $x_n \leq x + \epsilon$.
-1. Together, we get: $$x - \epsilon \leq x_n \leq x + \epsilon$.
+1. Together, we get: $x - \epsilon \leq x_n \leq x + \epsilon$.
 1. Combining, we get $|x_n -x| \leq \epsilon$ for all $n > n_0$.
 
 See also {prf:ref}`ex-bra-order-limit-strict-inequality`.
+```
+
+
+## Limit Inferior and Limit Superior
+
+
+```{prf:theorem} 
+:label: res-bra-bounded-seq-sup-inf-subseq-converg
+
+Let $\{ x_n \}$ be a bounded sequence of $\RR$. 
+Define
+
+$$
+s_n = \sup \{ x_k \ST k \geq n\}
+$$
+and
+
+$$
+t_n = \inf \{ x_k \ST k \geq n\}.
+$$
+
+Then, the sequences $\{ s_n \}$ and $\{ t_n \}$ are convergent.
+```
+
+```{prf:proof}
+We note that $\{ s_n \}$ is a nonincreasing sequence
+and $\{ t_n \}$ is a nondecreasing sequence.
+
+1. Let $m < n$. Then,
+   $\{ x_k \ST k \geq n\} \subseteq \{ x_k \ST k \geq m\}$.
+1. Thus, $\sup \{ x_k \ST k \geq n\} \leq \sup \{ x_k \ST k \geq m\}$.
+1. Or $s_n \leq s_m$.
+1. Also $\inf \{ x_k \ST k \geq n\} \geq \inf \{ x_k \ST k \geq m\}$.
+1. Or $t_n \geq t_m$.
+1. Thus, $m < n$ implies that $s_m \geq s_n$ and $t_m \leq t_n$.
+1. Thus, $\{ s_n \}$ is a nonincreasing sequence
+   and $\{ t_n \}$ is a nondecreasing sequence.
+
+
+Finally, from {prf:ref}`res-bra-sequence-monotone-bounded-convergence`,
+a monotone bounded sequence is convergent.
+
+1. Since $\{ x_n \}$ is bounded, hence $\{ s_n \}$ is bounded too.
+1. Since $\{ x_n \}$ is bounded, hence $\{ t_n \}$ is bounded too.
+1. Thus, both $\{ s_n \}$ and $\{ t_n \}$ are bounded and monotone.
+1. Thus, both of them are convergent sequences.
 ```
