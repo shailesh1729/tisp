@@ -870,7 +870,71 @@ if $\lim x_n = a$, then $\liminf_{n \to \infty} f(x_n) \geq f(a)$.
 A similar argument can be used for limit superior.
 ```
 
-## Semicontinuity and Compact Subsets
+### Epigraphs
+
+```{prf:theorem} Lower semicontinuity = closed epigraph
+:label: res-ms-func-lsc-closed-epi
+
+Let $f : X \to \RR$ with $S = \dom f$.
+$f$ is lower semicontinuous if and only if $\epi f$ is closed.
+```
+
+```{prf:proof}
+Recall that $\epi f$ is a subset of $X \times \RR$ given by
+
+$$
+\epi f = \{(x, y) \ST f(x) \leq y \}.
+$$
+
+Suppose that $\epi f$ is closed.
+
+1. Let $a \in S$ and let $\epsilon > 0$. 
+1. Let $b = f(a) - \epsilon$. 
+1. Then, $(a, b) \notin \epi f$.
+1. Since $\epi f$ is closed, hence, there is an open ball $B(a, \delta)$
+   around $a$ and an $r > 0$ such that
+
+   $$
+   B(a, \delta) \times (b - r, b + r) \cap \epi f = \EmptySet.
+   $$
+1. By structure of epigraph, $(a, c) \notin \epi f$ for any $c \leq b$.
+   Thus,
+
+   $$
+   B(a, \delta) \times (-\infty, b + r) \cap \epi f = \EmptySet.
+   $$
+1. Thus, $f(x) \geq b + r$ for all $x \in B(a, \delta) \cap S$.
+1. Thus, $f(x) > b = f(a) - \epsilon$ for all $x \in B(a, \delta) \cap S$.
+1. Thus, for every $\epsilon > 0$, there exists $\delta > 0$ such that
+   for every $x \in B(a, \delta) \cap S$, $f(x) > f(a) - \epsilon$.
+1. Thus, $f$ is l.s.c. at $a$.
+1. Since $a$ was arbitrary, hence $f$ is l.s.c.
+
+
+For the converse, assume that $f$ is l.s.c.
+
+1. Let $\{p_n \}$ be a convergent sequence of $\epi f$.
+1. Let $p_n = (a_n, b_n)$.
+1. Let $\lim p_n = p = (a, b)$.
+1. Then, $\lim a_n = a$ and $\lim b_n = b$.
+1. Also, $f(a_n) \leq b_n$.
+1. Since $f$ is l.s.c. at $a$, hence
+   by {prf:ref}`res-ms-semicont-seq-converge`
+   
+   $$
+   \liminf_{n \to \infty} f(a_n) \geq f(a).
+   $$
+1. But then, $b_n \geq f(a_n)$ implies that
+
+   $$
+   b = \lim b_n \geq \liminf_{n \to \infty} f(a_n) \geq f(a).
+   $$
+1. But then, $f(a) \leq b$ implies that $(a, b) \in \epi f$.
+1. Thus, every convergent sequence of $\epi f$ converges in $\epi f$.
+1. Thus, by {prf:ref}`res-ms-closure-convergence`, $\epi f$ is closed.
+```
+
+## Compact Subsets
 
 
 
