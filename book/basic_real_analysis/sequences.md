@@ -1278,7 +1278,7 @@ By {prf:ref}`res-bra-lim-sup-charac`, there exists $u \in A$
 such that
 
 $$
-\limsup x_n = a.
+\limsup x_n = u.
 $$
 
 By {prf:ref}`res-bra-lim-inf-charac`, there exists $l \in A$
