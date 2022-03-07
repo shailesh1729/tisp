@@ -1056,6 +1056,75 @@ $$
 $$
 ```
 
+```{prf:theorem} Limit superior $\geq$ limit inferior
+:label: res-bra-limsup-geq-liminf
+
+Let $\{ x_n \}$ be a sequence of $\RR$.
+Then,
+
+$$
+\liminf_{n \to \infty} x_n \leq
+\limsup_{n \to \infty} x_n.
+$$
+```
+
+```{prf:proof}
+
+If we define
+
+$$
+s_n = \sup \{ x_k \ST k \geq n\}
+\text{ and }
+t_n = \inf \{ x_k \ST k \geq n\}
+$$
+then, $t_n \leq s_n$ for every $n$. 
+
+Then, by {prf:ref}`res-bra-order-limit`,
+
+$$
+\lim_{n \to \infty} t_n \leq \lim_{n \to \infty} s_n.
+$$
+
+Thus,
+
+$$
+\liminf_{n \to \infty} x_n  = \lim_{n \to \infty} t_n
+\leq \lim_{n \to \infty} s_n = \limsup_{n \to \infty} x_n.
+$$
+```
+
+
+```{prf:theorem} Relationship between limit superior and inferior
+:label: res-bra-limsup-liminf-rel
+
+Let $\{ x_n \}$ be a sequence of $\RR$. Then,
+
+$$
+\limsup_{n \to \infty} (-x_n) = - \liminf_{n \to \infty} x_n. 
+$$
+```
+
+```{prf:proof}
+We recall that
+
+$$
+\inf(-1 \cdot A) = -1 \cdot \sup (A)
+\text{ and }
+\sup(-1 \cdot A) = -1 \cdot \inf \sup (A)
+$$
+
+Thus,
+
+$$
+\limsup_{n \to \infty} (-x_n)
+&= \lim_{n \to \infty} \sup \{-x_k \ST k \geq n \}\\
+&= \lim_{n \to \infty} -\inf \{x_k \ST k \geq n \}\\
+&= - \lim_{n \to \infty} \inf \{x_k \ST k \geq n \}\\
+&= - \liminf_{n \to \infty} x_n.
+$$
+```
+
+
 ```{prf:theorem} Characterization of limit superior
 :label: res-bra-lim-sup-charac
 
@@ -1102,6 +1171,8 @@ This leads us to the fact that the limit of a sequence
 exists if and only if its limit inferior and limit superior
 are identical.
 
+### Existence of Limit
+
 ```{prf:theorem} Limit = limit superior = limit inferior
 :label: res-bra-lim-eq-liminf-limsup
 
@@ -1123,6 +1194,8 @@ and inferior.
 ```{prf:proof}
 TBD
 ```
+
+### Subsequences
 
 ```{prf:theorem} Convergent subsequences and limit superior/inferior
 :label: res-bra-subseq-lim-liminf-limsup
@@ -1174,7 +1247,6 @@ Assume that $\limsup x_n = u$.
 The proof for limit inferior is similar.
 ```
 
-
 ```{prf:remark} The set of subsequential limits for bounded sequences
 :label: res-bra-set-subseq-limits-limsup-liminf
 
@@ -1225,6 +1297,107 @@ $$
 $$
 ```
 
+### Arithmetic
+
+```{prf:theorem} Arithmetic of limit superior and inferior
+:label: res-bra-arithmetic-limsup-liminf
+
+Let $\{ a_n \}$ and $\{ b_n \}$ be sequences of $\RR$.
+
+The limit superior satisfies subadditivity.
+
+$$
+\limsup_{n \to \infty} (a_n + b_n) \leq 
+\limsup_{n \to \infty} a_n + \limsup_{n \to \infty} b_n.
+$$
+
+The limit inferior satisfies superadditivity.
+
+$$
+\liminf_{n \to \infty} (a_n + b_n) \geq
+\liminf_{n \to \infty} a_n + \liminf_{n \to \infty} b_n.
+$$
+
+If both $\{ a_n \}$ and $\{ b_n \}$ are nonnegative, 
+then
+
+$$
+\limsup_{n \to \infty} (a_n b_n) \leq
+\left (\limsup_{n \to \infty} a_n \right)
+\left ( \limsup_{n \to \infty} b_n \right)
+$$
+and
+
+$$
+\liminf_{n \to \infty} (a_n b_n) \geq
+\left (\liminf_{n \to \infty} a_n \right)
+\left ( \liminf_{n \to \infty} b_n \right).
+$$
+```
+
+
+### Order
+
+```{prf:theorem} Order properties of limit superior and inferior
+:label: res-bra-order-limsup-liminf
+
+Let $\{ x_n \}$ and $\{ y_n \}$ be sequences of $\RR$.
+
+
+1. If $x_n \geq 0$ for all $n \in \Nat$, 
+   then $\liminf_{n \to \infty} x \geq 0$.   
+1. If $x_n \leq 0$ for all $n \in \Nat$, 
+   then $\limsup_{n \to \infty} x \leq 0$.
+1. If $x_n \leq y_n$ for all $n \in \Nat$, 
+   then $\limsup x_n \leq \limsup y_n$.
+1. If $x_n \geq y_n$ for all $n \in \Nat$, 
+   then $\liminf x_n \geq \liminf y_n$.
+```
+
+```{prf:proof}
+
+Assume that $x_n \geq 0$.
+
+1. Then, $\inf \{x_k \ST k \geq n \} \geq 0$.
+1. Thus, 
+
+   $$
+    \liminf_{n \to \infty} x_n 
+    = \lim_{n \to \infty} \inf \{x_k \ST k \geq n \}
+    \geq \lim_{n \to \infty} 0 = 0.
+   $$
+
+
+Assume that $x_n \leq 0$.
+
+1. Then, $\sup \{x_k \ST k \geq n \} \leq 0$.
+1. Thus, 
+
+   $$
+    \limsup_{n \to \infty} x_n 
+    = \lim_{n \to \infty} \sup \{x_k \ST k \geq n \}
+    \leq \lim_{n \to \infty} 0 = 0.
+   $$
+
+
+Assume that $x_n \leq y_n$ for all $n \in \Nat$.
+
+1. Choose any $k \in \Nat$.
+1. Let $M_n = \sup \{y_k \ST k \geq n \}$.
+1. Then, $y_k \leq M_n$ for every $k \geq n$.
+1. Then, $x_k \leq y_k \leq M_n$ for every $k \geq n$.
+1. Taking supremum over $k \geq n$, 
+   $m_n = \sup \{x_k \ST k \geq n \} \leq M_n$.
+1. Thus, $m_n \leq M_n$ for every $n$.
+1. Thus, by {prf:ref}`res-bra-order-limit`,
+   $\lim m_n \leq \lim M_n$.
+1. Thus,  $\limsup x_n \leq \limsup y_n$.
+
+A similar argument can be used for $x_n \geq y_n$ also.
+```
+
+
+### Damping and Growing Sequences
 
 ```{prf:theorem} Damping sequences
 :label: res-bra-damping-sequence
@@ -1299,3 +1472,4 @@ We proceed as follows.
 1. Hence, $\lim x_n \geq \lim q^{n - n_0} x = \infty$.
 1. Thus, $\lim x_n = \infty$.
 ```
+
