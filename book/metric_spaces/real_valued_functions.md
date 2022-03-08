@@ -10,6 +10,27 @@ Unless otherwise specified, $f : X \to \RR$ is a partial real
 valued function from $X$ to $\RR$
 with $\dom f \subseteq X$.
 
+We shall be discussing closedness of the sublevel sets
+and epigraphs of a function. The closedness is with
+respect to the subspace topology of $(S, d)$ 
+where $S = \dom f$.
+
+Recall from {ref}`sec:ms:subspaces` that
+for a metric space $(S, d)$
+
+1. $S$ is open as well as closed in the subspace topology
+   $(S, d)$.
+1. A set $A$ is open in $(S, d)$ if and only if
+   $A = S \cap B$ for some set $B$ which is open
+   in $(X, d)$.
+1. A set $A$ is closed in $(S, d)$ if and only if
+   $A = S \cap B$ for some set $B$ which is closed
+   in $(X, d)$.
+1. If a sequence $\{x_n \}$ of $S$ is convergent
+   w.r.t. the subspace topology $(S,d)$,
+   then its limit $x = \lim x_n \in S$.
+
+
 ## Extreme Values
 
 
@@ -133,18 +154,21 @@ a configuration which maximizes the volume.
 
 A real valued function $f : X \to \RR$ with $S = \dom f$ 
 is *closed* if for each $\alpha \in \RR$,
-the corresponding sublevel set is closed. 
+the corresponding sublevel set is closed
+with respect to the subspace topology $(S,d)$. 
 
 In other words, the sublevel set
 $\{ x \in S \ST f(x) \leq \alpha \}$
-is closed for every $\alpha \in \RR$.
+is closed for every $\alpha \in \RR$
+in the subspace topology $(S,d)$.
 ```
 
 ```{prf:theorem} Closed function = closed epigraph
 :label: res-ms-closed-func-closed-epi
 
-The {prf:ref}`epigraph <def-bra-epigraph>` of a function is closed
-if and only if the function is closed.
+The {prf:ref}`epigraph <def-bra-epigraph>` of a function
+$f : X \to \RR$ with $S = \dom f$ is closed
+if and only if $f$ is closed.
 ```
 
 ```{prf:proof}
@@ -1262,6 +1286,76 @@ For the converse, assume that $f$ is l.s.c.
 1. But then, $f(a) \leq b$ implies that $(a, b) \in \epi f$.
 1. Thus, every convergent sequence of $\epi f$ converges in $\epi f$.
 1. Thus, by {prf:ref}`res-ms-closure-convergence`, $\epi f$ is closed.
+```
+
+### Closed Functions
+
+
+```{prf:theorem} Lower semicontinuity = closed function
+:label: res-ms-func-lsc-closed-func
+
+Let $f : X \to \RR$ with $S = \dom f$.
+$f$ is lower semicontinuous if and only if $f$ is 
+{prf:ref}`closed <def-ms-closed-function>`.
+```
+
+```{prf:proof}
+We shall denote the sublevel sets for $\alpha \in \RR$ by
+
+$$
+T_{\alpha} = \{ x \in S \ST f(x) \leq \alpha \}.
+$$
+
+Also, define
+
+$$
+U_{\alpha} = \{ x \in S \ST f(x) > \alpha \}.
+$$
+
+Note that $U_{\alpha} = S \setminus T_{\alpha}$.
+Thus, $T_{\alpha}$ is closed if and only if $U_{\alpha}$ is open
+with respect to the subspace topology $(S, d)$.
+
+Assume that $f$ is closed. 
+
+1. Let $a \in S$ and $\epsilon > 0$.
+1. Let $r = f(a) - \epsilon$.
+1. Consider the set $U_r = \{ x \in S \ST f(x) > r \}$.
+1. Since sublevel sets of $f$ are closed, hence $U_r$ is open.
+1. We note that $f(a) = r + \epsilon > r$.
+1. Thus, $a \in U_r$.
+1. Since $U_r$ is open, hence $a$ is an interior point of $U_r$.
+1. Thus, there exists an open ball $B(a, \delta) \cap S \subseteq U_r$
+   around $a$. 
+1. Thus, for every $x \in B(a, \delta) \cap S$, 
+   $f(x) > r = f(a) - \epsilon$.
+1. Thus, for every $\epsilon > 0$, there exists $\delta > 0$
+   such that $f(x) > f(a) - \epsilon$ for every 
+   $x \in  B(a, \delta) \cap S$.
+1. Thus, $f$ is l.s.c. at $a$.
+1. Since $a \in S$ was arbitrary, hence $f$ is l.s.c. 
+
+
+
+For the converse, assume that $f$ is l.s.c. 
+
+1. Let $r \in \RR$.
+1. Let $T_r = \{ x \in S \ST f(x) \leq r \}$
+   be the corresponding sublevel set.
+1. Let $\{x_n \}$ be a convergent sequence of $T_r$.
+1. Let $x = \lim x_n$ with $x \in S$ (subspace topology).
+1. Then, $f(x_n) \leq r$ for every $n$.
+1. We need to show that $f(x) \leq r$.
+1. Since $f$ is l.s.c. at $x$, hence
+   
+   $$
+   f(x) \leq \liminf_{n \to \infty} f(x_n).
+   $$
+1. But $f(x_n) \leq r$.
+1. Hence, $\liminf_{n \to \infty} f(x_n) \leq r$.
+1. Thus, $f(x) \leq r$.
+1. Thus, $x \in T_r$.
+1. Since the sequence $\{x_n \}$ was arbitrary, hence $T_r$ is closed.
 ```
 
 ## Compact Subsets
