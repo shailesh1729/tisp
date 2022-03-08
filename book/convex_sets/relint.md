@@ -81,6 +81,46 @@ $$
 $$
 
 
+## Closure
+
+
+```{prf:theorem} Closure of a convex set
+:label: res-cvx-closure-convex-set-convex
+
+Let $\VV$ be a real normed linear space.
+Let $C$ be a convex set of $\VV$.
+Then, its closure is convex.
+```
+
+```{prf:proof}
+If $C$ is empty, then its closure is empty and is
+therefore convex. Now, assume $C$ to be nonempty.
+
+1. Let $\bx, \by \in \closure C$.
+1. Let $t \in (0, 1)$.
+1. Let $\bz = t \bx + (1-t) \by$.
+1. We need to show that $\bz \in \closure C$.
+1. Since both $\bx, \by$ are closure points of $C$,
+   hence there exist sequences 
+   $\{ \bx_n \}$ and $\{ \by_n \}$ of $C$ such that
+   $\lim \bx_n = \bx$ and $\lim \by_n = \by$.
+1. Then, $\bz_n = t \bx_n + (1-t) \by_n \in C$ 
+   since $\bx_n, \by_n \in C$ and $C$ is convex.
+1. By limit arithmetic 
+
+   $$
+   \lim \bz_n = \lim (t \bx_n + (1-t) \by_n)
+   = t \lim \bx_n + (1-t) \lim \by_n
+   = t \bx + (1-t)\by = \bz.
+   $$
+1. Thus, $\bz = \lim \bz_n$.
+1. Since $\{ \bz_n \}$ is also a sequence of $C$,
+   hence $\bz \in \closure C$.
+1. Thus, for any $\bx, \by \in \closure C$ 
+   and $t \in (0, 1)$, $ t \bx + (1-t) \by \in \closure C$.
+1. Thus, $\closure C$ is convex.
+```
+
 ## Interior
 
 ```{prf:theorem} Interior of convex sets
