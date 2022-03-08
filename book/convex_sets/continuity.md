@@ -1,4 +1,4 @@
-# Semicontinuity
+# Continuity
 
 This section focuses on closure and semicontinuity of convex functions
 in normed linear spaces.
@@ -157,4 +157,78 @@ Let $g$ be its closure.
    the closure of a convex set is convex.
 1. Hence, $\epi g$ is convex.
 1. Hence, $g$ is convex.
+```
+
+
+```{prf:definition} Closed convex function
+:label: def-cvx-closed-convex-func
+
+A convex function $f: \VV \to \ERL$ is called
+*closed* if 
+
+$$
+\closure f = f.
+$$
+```
+
+For a proper convex function, closedness
+is same as lower semicontinuity.
+
+The only closed improper convex functions are
+
+1. $f(\bx) = \infty \Forall \bx \in \VV$. Here $\epi f = \EmptySet$.
+1. $f(\bx) = -\infty \Forall \bx \in \VV$. Here $\epi f = \VV \times \RR$.
+
+
+```{prf:example} Closed convex function with open domain
+:label: ex-cvxf-closed-convex-function-open-domain
+
+Let $f: \RR \to \RERL$ be given as
+
+$$
+f(x) = \begin{cases}
+\frac{1}{x}, & x > 0\\
+\infty, & x \leq 0.
+\end{cases} 
+$$
+Then, $\dom f = (0, \infty)$. 
+
+1. $\dom f$ is an open interval in $\RR$.
+1. $f$ is continuous at every $x > 0$.
+1. Thus, $f$ is l.s.c. at every $x > 0$.
+1. Thus, $f$ is l.s.c.
+1. Let the sublevel set for $r \in \RR$ 
+   be given by 
+
+   $$
+   T_r = \{ x \in (0, \infty) \ST f(x) \leq r \}.
+   $$
+1. We can see that $T_r = \EmptySet$ for $r \leq 0$.
+1. For $r > 0$,  
+
+   $$
+   f(x) = \frac{1}{x} \leq r \iff x \geq \frac{1}{r}.
+   $$
+1. Thus, $T_r = [\frac{1}{r}, \infty)$.
+1. $T_r$ is indeed closed in the topology $(\dom f, | \cdot |)$.
+1. Since $f$ is l.s.c., hence $\epi f$ is closed.
+1. Thus, $\closure f = f$.
+1. Thus, $f$ is a closed convex function.
+```
+
+```{prf:remark} Closure of proper convex functions and epigraph
+:label: rem-cvxf-epi-cl-cl-epi
+
+Let $f: \VV \to \RERL$ be a proper convex function. Then, 
+
+$$
+\epi \closure f = \closure \epi f.
+$$
+
+This follows from the definition, since $g = \closure f$ is
+defined by the fact that
+
+$$
+\epi g = \closure \epi f.
+$$
 ```
