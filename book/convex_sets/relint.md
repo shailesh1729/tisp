@@ -1,5 +1,5 @@
 (sec:cvx:relint)=
-# Convex Topology
+# Topology of Convex Sets
 
 This section focuses on some topological properties
 of convex sets.
@@ -439,6 +439,104 @@ Thus, we have shown that $\interior \closure C \subseteq \interior C$
 as desired.
 ```
 
+
+## Compact Sets
+
+
+```{prf:theorem} Convex hull of compact sets
+:label: res-cvxf-convex-hull-compact
+
+Let $\VV$ be an $n$-dimensional real normed linear space. Let $S \subseteq \VV$
+be a compact subset of $\VV$.
+Then, $\ConvexHull(S)$ is compact.
+
+In other words, convex hull of a compact set is compact.
+```
+Note that this property doesn't hold in infinite dimensional spaces.
+
+```{prf:proof}
+
+Let $H = \ConvexHull(S)$.
+
+We first show that $H$ is bounded.
+
+1. Since $S$ is compact, hence there exists $M > 0$
+   such that $\| \bx \| \leq M$ for all $\bx \in S$.
+1. Let $\by \in H$.
+1. Then, by {prf:ref}`res-cvx-conv-hull-caratheodory`, 
+   there exist $\bx_0, \dots, \bx_n \in S$ and
+   $t \in \Delta_{n+1}$ such that
+   
+   $$
+   \by = t_0 \bx_0 + \dots + t_n \bx_n.
+   $$
+1. Therefore,
+
+   $$
+   \| \by \| &= \|t_0 \bx_0 + \dots + t_n \bx_n \| \\
+   &\leq t_0 \| \bx_0 \| + \dots + t_n \| \bx_n \| \\
+   &\leq (t_0 + \dots + t_n) M = M.
+   $$
+1. Thus, $H$ is bounded.
+
+We now show that $H$ is closed.
+
+1. Let $\{ \bv_k \}$ be a convergent sequence of $H$.
+1. Let $\bv = \lim_{k \to \infty} \bv_k$ be the limit of this
+   sequence with $\bv \in \VV$.
+1. We need to show that $\bv \in H$.
+1. For every $k \in \Nat$, by {prf:ref}`res-cvx-conv-hull-caratheodory`, 
+   there exist $\bx_0^k, \dots, \bx_n^k \in S$ and
+   $\bt^k \in \Delta_{n+1}$ such that
+   
+   $$
+   \bv_k = t_0^k \bx_0^k + \dots + t_n^k \bx_n^k.
+   $$
+1. Consider the vector space $\WW = \RR^{n+1} \oplus \VV \oplus \dots \oplus \VV$
+   ($\VV$ repeated $n+1$ times).
+1. Then, $R = \Delta_{n+1} \oplus S \oplus \dots \oplus S \subseteq \WW$.
+1. Since $\Delta_{n+1}$ is compact in $\RR^{n+1}$ and
+   $S$ is compact in $\VV$, hence
+   $R$ is compact in the product topology of $\WW$.
+1. Now, let $\by_k = (\bt^k, \bx_0^k, \dots, \bx_n^k) \in R$ for every $k$.
+1. Thus, $\{ \by_k \}$ is a sequence of the compact set $R$.
+1. By {prf:ref}`def-ms-compact-characterization`,
+   every sequence of a compact set $R$ has a convergent
+   subsequence that converges in $R$.
+1. Let $\{ \by_{k_j} \}$ with $k_1 < k_2 < \dots$ be such
+   a convergent subsequence of $\{ \by_k \}$.
+1. Let the limit of this sequence be
+
+   $$
+   \by = \lim_{j \to \infty} \by_{k_j}
+   = (\bt, \bx_0, \dots, \bx_n)
+   $$
+   with $\bt \in \Delta_{n +1}$ and $\bx_0, \dots, \bx_n \in S$
+   since $\by \in R$.
+1. This further implies that
+   $\bt = \lim_{j \to \infty} \bt^{k_j}$
+   and $\bx_i = \lim_{j \to \infty} \bx_i^{k_j}$ 
+   for every $i \in 0,\dots,n$.
+1. In turn, $t_i = \lim_{j \to \infty} t_i^{k_j}$ 
+   for every $i=0, \dots, n$.
+1. Since $\{ \bv_k \}$ is convergent, hence
+   every subsequence of $\{ \bv_k \}$ has the same limit.
+1. In particular, $\bv =  \lim_{j \to \infty} \bv_{k_j}$.
+1. Then,
+
+   $$
+   \bv =  \lim_{j \to \infty} \bv_{k_j}
+    = \lim_{j \to \infty} \sum_{i=0}^n t_i^{k_j} \bx_i^{k_j}
+    = \sum_{i=0}^n t_i \bx_i.
+   $$
+1. But then, $\bv$ is a convex combination of points in $S$.
+1. Thus, $\bv \in H$.
+1. Thus, $H$ is closed.
+
+Finally, by {prf:ref}`res-la-ndim-compact-closed-bounded`,
+every closed and bounded set of a real $n$-dim normed
+space is compact. Hence, $H$ is compact.
+```
 
 
 ## Relative Interior
