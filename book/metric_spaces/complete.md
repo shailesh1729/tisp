@@ -1307,3 +1307,34 @@ We have already established in
 any two completions of $X$ are isometric to each other.
 Thus, the completion is unique up to an isometry.
 ```
+
+## Isometries
+
+```{prf:theorem} Isometries preserve closed sets
+Let $(X, d)$ and $(Y, \rho)$ be complete metric spaces.
+Let $f : (X, d) \to (Y, \rho)$ be an isometry.
+Let $C \subset X$ be a closed set in $X$.
+Then, $f(C)$ is closed.
+```
+
+```{prf:proof}
+1. Let $\{ y_n \}$ be a convergent sequence of $f(C)$.
+1. Let $y = \lim y_n$. 
+1. Recall that an isometric is injective.
+1. Thus, $y_n = f(x_n)$ for some $x_n \in C$ for every $n$.
+1. Since $\{ y_n \}$ is convergent, hence $\{ y_n \}$ is Cauchy.
+1. Now, for any $m,n \in \Nat$
+
+   $$
+   d(x_m, x_n) = \rho(y_m, y_n)
+   $$
+   as $f$ is isometric.
+1. Thus, $\{ x_n \}$ is a Cauchy sequence of $C$.
+1. Since $X$ is complete, hence every Cauchy sequence converges.
+1. Let $x = \lim x_n$.
+1. Since $C$ is closed, hence $x \in C$.
+1. By continuity of $f$, we have $f(x) = y$.
+1. Thus, $y = f(x) \in f(C)$.
+1. Thus, every convergent sequence of $C$ converges in $C$.
+1. Thus, $f(C)$ is closed.
+```
