@@ -906,7 +906,7 @@ $$
 
 ## Isometry
 
-```{prf:definition}
+```{prf:definition} Isometry
 :label: def-ms-isometry
 
 A function $f : (X, d) \to (Y, \rho)$ is an isometry if 
@@ -917,15 +917,15 @@ $$
 $$
 ```
 
-```{prf:theorem}
+```{prf:theorem} Isometries are injective
 :label: res-ms-isometry-one-one
-Any isometry is injective.
+
+Let $f : (X, d) \to (Y, \rho)$ be an isometry.
+Then, $f$ is injective.
 ```
 ```{prf:proof}
-
 We proceed as follows:
 
-1. Let $f$ to be an isometry from $(X, d)$ to $(Y, \rho)$.
 1. Let $x_1, x_2 \in \dom f$ with $x_1 \neq x_2$.
 1. Then, $d(x_1, x_2) > 0$ since $d$ is a metric. 
 1. Since $f$ is an isometry, hence
@@ -935,14 +935,15 @@ We proceed as follows:
 1. Thus, $f$ is injective.
 ```
 
-```{prf:theorem}
+```{prf:theorem} Isometries are uniformly continuous
 :label: res-ms-isometry-continuous
 
-Any isometry between two metric spaces is uniformly continuous.
+Let $f : (X, d) \to (Y, \rho)$ be an isometry.
+Then, $f$ is uniformly continuous.
 ```
 
 ```{prf:proof}
-Let $f$ be an isometry. Let $\epsilon > 0$. 
+Let $\epsilon > 0$. 
 Choose $\delta = \epsilon$. Then, for any $x,y \in \dom f$,
 
 $$
@@ -952,7 +953,7 @@ since $f$ is an isometry.
 Thus, $f$ is uniformly continuous on $\dom f$.
 ```
 
-```{prf:definition}
+```{prf:definition} Isometric spaces
 :label: def-ms-isometric-spaces
 
 Two metric spaces $(X, d)$ and $(Y, \rho)$ are called
