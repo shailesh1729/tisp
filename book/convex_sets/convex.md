@@ -330,11 +330,29 @@ where $\theta_i$ gives the proportion of contribution
 of each particle according to its mass.
 ```
 
+```{prf:remark} Convex combinations and unit simplex
+:label: rem-cvx-conv-comb-coef-unit-simplex
 
-````{prf:theorem}
+We recall that the unit simplex in $\RR^n$ is given by
+
+$$
+\Delta_n = \{ \bt \in \RR^n \ST  
+   \langle \bt, \bone \rangle = 1, \bt \succeq \bzero \}
+= \{\bt \in \RR^n \ST  t_1 + \dots + t_n = 1, t_1, \dots, t_n \geq 0 \}.
+$$
+Thus, the coefficients for convex combinations of $n$ points
+are drawn from $\Delta_n$.
+```
+
+````{prf:theorem} Closure under convex combinations
 :label: res-cvx-convex-set-convex-combinations
 
 A set is convex if and only if it contains all convex combinations of its points.
+
+Let $\VV$ be a real vector space and $C$ be a subset of $\VV$.
+Then, $C$ is convex if and only if for any $m \in \Nat$,
+for any $\bx_1, \dots, \bx_m \in C$, and for every $\bt \in \Delta_m$,
+$t_1 \bx_1 + \dots + t_m \bx_m \in C$. 
 ````
 
 ```{prf:proof}
@@ -1258,7 +1276,8 @@ We now show that $t_1 C + t_2 C \subseteq (t_1 + t_2)C$.
 1. Define $t = t_1 + t_2 > 0$ and $r = \frac{t_1}{t}$.
 1. Then, $1-r = \frac{t_2}{t}$.
 1. Then, since $C$ is convex, hence $r C + (1-r) C \subseteq C$.
-1. Multiplying by $t$ on both sides, we get: $ r C + (1-r)C \subseteq t C$. 
+1. Multiplying by $t$ on both sides, we get: 
+   $t_1 C + t_2C \subseteq (t_1 + t_2) C$. 
 ```
 
 For the special case of $t_1 = r$ and $t_2 = 1 - r$ with $r \in [0,1]$, we get:
@@ -1430,3 +1449,47 @@ See {prf:ref}`res-cvx-convex-cross-section-cone`
 and discussion thereafter.
 
 
+### Cartesian Product/Direct Sum
+
+```{prf:theorem} Direct sum of convex sets
+:label: res-cvx-convex-set-direct-sum
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $C \subseteq \VV$ and $D \subseteq \WW$ be convex
+subsets of $\VV$ and $\WW$ respectively.
+Then, $C \oplus D$ is a convex subset of $\VV \oplus \WW$.
+
+More generally, if $\VV_1, \dots, \VV_k$ are real vector spaces
+and $C_i \subseteq \VV_i$ are convex subsets for $i=1,\dots,k$, then
+$C = C_1 \oplus \dots \oplus C_k$ is convex in
+the direct sum of vector spaces
+$\VV_1 \oplus \dots \oplus \VV_k$.
+```
+
+```{prf:proof}
+If either $C$ or $D$ is empty, then $C \oplus D$ is empty,
+hence convex. We shall thus assume that both $C$ and $D$ are
+nonempty.
+
+1. Let $\bz_1, \bz_2 \in C \oplus D$ and $t \in (0, 1)$.
+1. Then, $\bz_1 = (\bx_1, \by_1)$ and $\bz_2 = (\bx_2, \by_2)$ 
+   such that $\bx_1, \bx_2 \in C$ and $\by_1, \by_2 \in D$.
+1. Since $C$ and $D$ are convex, hence
+   $\bx = t \bx_1 + (1-t) \bx_2 \in C$ 
+   and $\by = t \by_1 + (1- t) \by_2 \in D$.
+1. Now, 
+   
+   $$
+   \bz &= t \bz_1 + (1 - t) \bz_2\\ 
+   &= t(\bx_1, \by_1) + (1-t)(\bx_2, \by_2)\\
+   &= (t \bx_1 + (1-t) \bx_2, t \by_1 + (1- t) \by_2)\\
+   &= (\bx, \by).
+   $$
+1. Since $\bx \in C$ and $\by \in D$, 
+   hence $\bz = (\bx, \by)\in C \oplus D$.
+1. Thus, $C \oplus D$ is closed under convex combination.
+1. Thus, $C \oplus D$ is convex.
+
+The generalization for multiple real vector spaces is
+easily verifiable through induction.
+```
