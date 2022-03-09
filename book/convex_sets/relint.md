@@ -1,5 +1,5 @@
 (sec:cvx:relint)=
-# Relative Interior
+# Convex Topology
 
 This section focuses on some topological properties
 of convex sets.
@@ -188,6 +188,17 @@ Let $D = \interior C$. Assume that $C$ is convex.
 1. Thus, $D$ is convex.
 ```
 
+```{prf:proof}
+Another proof can be built based on the
+general line segment property proved in
+{prf:ref}`res-cvx-convex-interior-segment` below.
+
+1. Let $\bx, \by \in \interior C$. 
+1. Let $t \in (0, 1)$.
+1. Then, by line segment property $t \bx  + (1 -t) \by \in \interior C$.
+1. Thus, $\interior C$ is closed under convex combination.
+1. Thus, $\interior C$ is convex.
+```
 
 ```{prf:theorem} Affine hull of convex sets with empty interior
 :label: res-cvx-convex-set-empty-interior
@@ -275,7 +286,7 @@ We proceed as follows:
 ```{prf:theorem} General line segment property for convex sets
 :label: res-cvx-convex-interior-segment
 
-Let $\VV$ be a real $n$-dimensional normed linear space.
+Let $\VV$ be a real normed linear space.
 Let $C$ be a nonempty convex subset of $\VV$. 
 Let $\bx \in \interior C$
 and $\by \in \closure C$. Then, 
@@ -320,6 +331,49 @@ Let $C$ be a convex set. Fix some $t \in [0,1)$.
 1. Hence, $\bz \in \interior C$.
 ```
 
+
+```{prf:theorem} Closure of interior
+:label: res-cvx-convex-interior-closure
+
+Let $\VV$ be a real normed linear space.
+For any convex set $C \subseteq \VV$, 
+
+$$
+\closure \interior C = \closure C.
+$$
+```
+
+```{prf:proof}
+Since $\interior C \subseteq C$, hence
+$\closure \interior C \subseteq \closure C$.
+
+
+For the other direction, we proceed as follows:
+
+1. Let $\by \in \closure C$.
+   We need to show that $\by \in \closure \interior C$.
+1. Choose some $\bx \in \interior C$.
+1. By {prf:ref}`res-cvx-convex-interior-segment`, 
+   the line segment between $\bx$ and $\by$
+   (excluding $\by$) lies in $\interior C$.
+1. For every $n \in \Nat$, let
+
+   $$
+   \by_n = \frac{1}{n} \bx + \left (1 - \frac{1}{n} \right ) \by.
+   $$
+1. Then, $\by_n \in \interior C$ by line segment property.
+1. Thus, $\{ \by_n \}$ is a sequence of $\interior C$.
+1. But then, $\lim_{n \to \infty} \by_n = \by$.
+1. Hence, $\by$ is an accumulation point of $\interior C$.
+1. Thus, $\by \in \closure \interior C$.
+1. Thus, $\closure C \subseteq \closure \interior C$.
+
+Combining the two inclusions, we get:
+
+$$
+\closure \interior C = \closure C.
+$$ 
+```
 
 
 ```{prf:theorem} Interior of closure
