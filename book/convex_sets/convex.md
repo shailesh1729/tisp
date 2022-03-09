@@ -516,6 +516,85 @@ Some authors prefer to define $\ConvexHull(S)$ as the smallest convex
 set containing $S$. Both definitions are equivalent.
 
 
+```{prf:theorem} Carathéodory theorem
+:label: res-cvx-conv-hull-caratheodory
+
+Let $\VV$ be an $n$-dimensional real vector space. 
+Let $S \subseteq \VV$. Let $\bx \in \ConvexHull(S)$.
+
+Then, there exists a set of $n+1$ points $\bx_0, \dots, \bx_n \in S$
+such that 
+
+$$
+\bx \in \ConvexHull (\{ \bx_0, \dots, \bx_n\});
+$$
+i.e., there exists a $\bt \in \Delta_{n+1}$ such that 
+
+$$
+\bx = \sum_{i=0}^n t_i \bx_i.
+$$
+```
+
+```{prf:proof}
+We note that $\bx \in \ConvexHull(S)$.
+
+1. Thus, there exists a set of $k+1$ points in $S$
+   and $\bt \in \Delta_{k+1}$
+   such that
+
+   $$
+   \bx = \sum_{i=0}^k t_i \bx_i.
+   $$
+1. We can assume $t_i > 0$ for all $i=0, \dots, k$ 
+   since otherwise, we can drop the vectors corresponding
+   to the zero coefficients from the convex combination.
+1. If $k \leq n$, there is nothing to prove.
+1. Hence, consider the case where $k > n$.
+1. We now describe a process which can reduce the number
+   of points in the convex combination by one.
+1. The $k$ vectors $\bx_1 - \bx_0, \dots, \bx_k - \bx_0$ are 
+   linearly dependent as $k > n$ and $\VV$ is $n$-dimensional.
+1. Thus, there is a nontrivial linear combination of these 
+   vectors 
+
+   $$
+   r_1 (\bx_1 - \bx_0) + \dots + r_k (\bx_k - \bx_0) = \bzero.
+   $$
+1. Let $r_0 = -r_1 - \dots - r_k$. Then, we have a
+   nontrivial combination
+
+   $$
+   \sum_{i=0}^k r_i \bx_i = \bzero
+   $$
+   with $\sum r_i = 0$.
+1. In particular, there exists at least one index $j$ for which $r_j < 0$.
+1. Let $\alpha \geq 0$.
+1. Then,
+
+   $$
+   \bx = \sum_{i=0}^k t_i \bx_i + \alpha \sum_{i=0}^k r_i \bx_i
+   = \sum_{i=0}^k (t_i + \alpha r_i) \bx_i
+   $$
+   with $\sum (t_i + \alpha r_i) = \sum t_i + \alpha \sum r_i = 1$.
+1. Thus, it is a convex combination for $\bx$ if 
+   $t_i + \alpha r_i \geq 0$ for every $i=0, \dots, k$.
+1. Let 
+
+   $$
+   \alpha = \underset{i \ST r_i < 0}{\min}\left \{ - \frac{t_i}{r_i} \right \}.
+   $$
+1. $\alpha$ is well defined since there is at least one $r_j < 0$.
+   Let $j$ be the index for which $\alpha$ was obtained.
+1. Then, $t_j + \alpha r_j = 0$.
+1. Also, we can see that $t_i + \alpha r_i \geq 0$ for all $i=0,\dots,k$.
+1. Thus, we have found a convex combination for $\bx$ where
+   the coefficient for $\bx_j$ is 0.
+1. Thus, we have obtained a convex combination for $\bx$ with
+   $k-1$ points.
+1. Repeating this process up to $k-n$ times, we can obtain a convex combination
+   of $\bx$ consisting of $n+1$ or less points.
+```
+
 ## Dimension
 
 ```{prf:definition} Dimension of a convex set
