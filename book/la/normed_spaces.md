@@ -2109,6 +2109,8 @@ Then, by {prf:ref}`res-ms-continuous-function-characterization`
 ## Completeness and Banach Spaces
 
 ```{prf:definition} Banach space
+:label: def-la-banach-space
+
 A normed space $\VV$ that is
 {prf:ref}`complete <def-ms-complete-metric-space>`
 with respect to the metric induced by its norm
@@ -2135,3 +2137,146 @@ in detail elsewhere. Follow the links.
    is {prf:ref}`complete <res-la-is-bx-complete>`.
 ```
 
+
+```{prf:theorem} $n$-dim normed linear spaces are complete
+:label: res-la-ndim-complete
+
+Let $\VV$ be an $n$-dimensional vector space over $\FF$
+where $\FF$ is either $\RR$ or $\CC$. 
+Let $\VV$ be equipped with a norm $\| \cdot \| : \VV \to \RR$
+making it a normed linear space.
+Then $\VV$ is
+{prf:ref}`complete <def-ms-complete-metric-space>`.
+
+In other words, every finite dimensional
+normed linear space is complete.
+```
+
+```{prf:proof}
+$\VV$ is a normed linear space with $n = \dim \VV$.
+
+1. Let $\BBB = \{\be_1, \dots, \be_n \}$ be a basis for $\VV$.
+1. For any $\bv \in \VV$, we can represent it in the basis
+   $\BBB$ as
+
+   $$
+   \bv = v_1 \be_1 + \dots + v_n \be_n.
+   $$
+1. We can define the $\| \cdot \|_1$ norm as
+
+   $$
+   \| \bv \|_1 = |v_1| + \dots + | v_n |.
+   $$
+1. By {prf:ref}`res-la-ns-finite-all-norms-eq`, all 
+   norms on $\VV$ are equivalent.
+1. Thus, $\| \cdot \|_1$ and $\| \cdot \|$ are equivalent.
+1. Thus, there are $c_1, c_2 > 0$ such that for every
+   $\bv \in \VV$,
+
+   $$
+   c_1 \| \bv \|_1 \leq \| \bv \| \leq c_2 \| \bv \|_1.
+   $$
+1. Let $\{ \bv_k \}$ be a Cauchy sequence of $\VV$.
+1. Let $\epsilon > 0$.
+1. Since $\{ \bv_k \}$ is a Cauchy sequence of $\VV$,
+   hence there exists $N$ such that for every 
+   $k, l > N$, 
+
+   $$
+   \| \bv_k - \bv_l \| < \epsilon.
+   $$
+1. Then, 
+
+   $$
+   \epsilon &> \| \bv_k - \bv_l \| \\
+   &\geq c_1 \| \bv_k - \bv_l \|_1 \\
+   &= c_1 \sum_{i=1}^n | v_{k i} - v_{l i} |\\
+   &\geq c_1 | v_{k i} - v_{l i} |
+   $$
+   for every $i \in 1,\dots,n$.
+1. Hence $\{ v_{k i} \}$ is a Cauchy sequence of $\FF$ for every $i \in 1,\dots,n$.
+1. Since both $\RR$ and $\CC$ are complete, hence
+   $\{ v_{k i} \}$ is a convergent sequence of $\FF$ for every $i \in 1,\dots,n$.
+1. Thus, there exists $u_i = \lim_{n \to \infty} v_{k i}$
+   for every $i \in 1,\dots,n$.
+1. Now, let $\bu  = (u_1, \dots, u_n)$.
+1. Then,
+
+   $$
+   \| \bv_k - \bu \| &\leq c_2 \| \bv_k - \bu \|_1 \\
+   &= c_2 \sum_{i=1}^n | v_{k i} - u_i |.
+   $$
+1. Thus,
+
+   $$
+   \lim_{k \to \infty} \| \bv_k - \bu \|
+   &= \lim_{k \to \infty} c_2 \sum_{i=1}^n | v_{k i} - u_i | \\
+   &= c_2 \sum_{i=1}^n \lim_{k \to \infty} | v_{k i} - u_i | = 0.
+   $$
+1. Thus, $\lim_{k \to \infty} \bv_k = \bu$.
+1. Thus,  $\{ \bv_k \}$ is convergent.
+1. Thus, every Cauchy sequence of $\VV$ is convergent.
+1. Thus, $\VV$ is complete.
+```
+
+## Compact Sets
+
+```{prf:theorem} Compact = Closed and Bounded in $n$-dim
+:label: res-la-ndim-compact-closed-bounded
+
+Let $\VV$ be a real $n$-dimensional normed linear space.
+Let $S$ be a subset of $\VV$.
+
+Then, $S$ is compact if and only if $S$ is closed and bounded.
+```
+
+```{prf:proof}
+
+By {prf:ref}`res-ms-compact-is-closed-bounded`, 
+every compact set is closed and bounded.
+Thus, if $S$ is compact then $S$ is closed and bounded.
+
+For the converse, assume that $S$ is closed and bounded.
+
+1. By {prf:ref}`res-la-ndim-complete`, both $\RR^n$ and $\VV$
+   are complete. 
+1. Let $T: \RR^n \to \VV$ be an isomorphism.
+1. Then, for any $\bv \in \RR^n$, 
+   a function $\| \cdot \|_T : \RR^n \to \RR$ given by
+
+   $$
+   \| \bv \|_T = \| T (\bv)\|
+   $$ 
+   defines a norm on $\RR^n$.
+1. The norm $\| \cdot \|_T$ is equivalent to the 
+   Euclidean norm on $\RR^n$ 
+   due to {prf:ref}`res-la-ns-finite-all-norms-eq`.
+1. Also, $T : (\RR^n, \| \cdot \|_T) \to (\VV, \| \cdot \|)$
+   is an {prf:ref}`isometry <def-ms-isometry>`
+1. Accordingly $T$ is uniformly continuous by
+   {prf:ref}`res-ms-isometry-continuous`.
+1. Since $T$ is an isomorphism, it is bijective.
+1. Thus, $T$ is a homeomorphism by
+   {prf:ref}`res-ms-isometric-homeomorphic`.
+1. Then, $T^{-1}$ is also an isometry.
+1. Then, $T^{-1}(S)$ is bounded in $(\RR^n, \| \cdot \|_T)$ 
+   since $S$ is bounded in $(\VV, \| \cdot \|)$
+   and $T^{-1}$ is an isometry.
+1. By {prf:ref}`res-la-ns-norm-eq-same-bounded`,
+   $T^{-1}(S)$ is also bounded in $(\RR^n, \| \cdot \|_2)$.
+1. Also, $T^{-1}(S)$ is closed in $(\RR^n, \| \cdot \|_T)$.
+   since $S$ is closed in $(\VV, \| \cdot \|)$ and $T$ is continuous
+   (see {prf:ref}`res-ms-continuous-function-characterization`).
+1. Since equivalent norms (metrics) determine same topology,
+   hence $T^{-1}(S)$ is closed in $(\RR^n, \| \cdot \|_2)$ also.
+1. Thus, $T^{-1}(S)$ is closed and bounded in $(\RR^n, \| \cdot \|_2)$.
+1. By {prf:ref}`Heine-Borel theorem <res-ms-heine-borel-euclidean>`,
+   $T^{-1}(S)$ is a compact set in $(\RR^n, \| \cdot \|_2)$.
+1. By {prf:ref}`res-ms-eq-metric-compactness`,
+   $T^{-1}(S)$ is a compact set in $(\RR^n, \| \cdot \|_T)$
+   also. 
+1. Then, $S = T (T^{-1}(S))$ is also compact 
+   in $(\VV, \| \cdot \|)$
+   since a homeomorphism preserves compactness
+   (see {prf:ref}`res-ms-compact-homeomorphism-pres`).
+```
