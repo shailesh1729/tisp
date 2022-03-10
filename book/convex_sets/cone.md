@@ -306,6 +306,20 @@ using the idea of conic combinations.
 1. Hence, it is a convex cone.
 
 
+```{prf:remark} Conic combinations and nonnegative orthant
+:label: rem-cvx-conic-comb-coef-nng
+
+We recall that the nonnegative orthant of $\RR^k$ is given by
+
+$$
+\RR_+^k = \{ \bt \in \RR^k \ST  \bt \succeq \bzero \}
+= \{\bt \in \RR^k \ST  t_1, \dots, t_k \geq 0 \}.
+$$
+Thus, the coefficients for conic combinations of $k$ points
+are drawn from $\RR_+^k$.
+```
+
+
 ```{prf:theorem}
 :label: res-cvx-conic-comb-conic-comb
 
@@ -362,7 +376,9 @@ The *conic hull* of a set $S$ is the set of all conic combinations
 of points in $S$. i.e.
 
 $$
-    \{t_1 \bx_1 + \dots t_k \bx_k \ST \bx_i \in S, t_i \geq 0, i = 1, \dots, k \}.
+    \ConicHull(S) \triangleq 
+    \{t_1 \bx_1 + \dots t_k \bx_k \ST \bx_i \in S, \bt \in \RR^k_+, 
+      i = 1, \dots, k, k \in \Nat\}.
 $$
 ````
 
@@ -440,6 +456,93 @@ $H \subseteq K$
 1. Then, $bx = t \bz \in S$ since $t > 0$ and $\bz \in C$.
 1. Thus, $K$ contains all conic combinations of $C$.
 1. Thus, $H \subseteq K$.
+```
+
+Recall from 
+{prf:ref}`Carathéodory theorem <res-cvx-conv-hull-caratheodory>`
+that in an $n$ dimensional vector space,
+every point in the convex hull of a set
+can be represented as a convex combination
+of $n+1$ points belonging to the set.
+
+Similar representation is possible in conic hulls too.
+
+```{prf:theorem} Conic representation theorem
+:label: res-cvx-conic-rep-unique
+
+Let $\VV$ be an $n$-dimensional real vector space.
+Let $S \subseteq \VV$. 
+Let $\bx \in \ConicHull(S)$. 
+Then, there exist $k$ linearly independent vectors
+$\bx_1, \dots, \bx_k \in S$ such that
+$\bx \in \ConicHull(\{ \bx_1, \dots, \bx_k\})$;
+i.e., there exists $\bt \in \RR^k_+$ such that 
+
+$$
+\bx = \sum_{i=1}^k t_i \bx_i.
+$$
+Since the $k$ vectors are linearly independent,
+hence $k \leq n$.
+```
+
+
+```{prf:proof}
+The proof is similar to Carathéodory theorem.
+
+1. Let $\bx \in \ConicHull(S)$.
+1. Then, there exist $m$ points 
+   $\bx_1, \dots, \bx_m \in S$ and
+   $\bt \in \RR^m_+$ such that
+
+   $$
+   \bx = \sum_{i=1}^m t_i \bx_i.
+   $$
+1. We can assume that $t_i > 0$ for every $i \in 1,\dots,m$.
+   Otherwise, we can simply drop the corresponding points
+   from the conic combination.
+1. If $\bx_1, \dots, \bx_m$ are linearly independent,
+   then $k=m$, $m \leq n$ and we are done.
+1. Let us consider the case when they are linearly dependent.
+1. Then, there exists a nontrivial linear combination
+   equally zero vector:
+
+   $$
+   r_1 \bx_1 + \dots + r_m \bx_m = \bzero.
+   $$
+1. Then, for any $\alpha \in \RR$
+   
+   $$
+   \bx = \sum_{i=1}^m t_i \bx_i + \alpha \sum_{i=1}^m r_i \bx_i
+   = \sum_{i=1}^m (t_i + \alpha r_i) \bx_i.
+   $$
+1. This representation is a conic combination if
+   $t_i + \alpha r_i \geq 0$ for every $i=1,\dots,m$.
+1. Since $t_i > 0$ for every $i$, hence, this set 
+   of inequalities is satisfied for all $\alpha \in A$
+   where $A$ is a closed interval with a nonempty interior.
+   1. Let $A_i$ be the solution set for $i$-th inequality.
+   1. We have $A = \bigcap_i A_i$.
+   1. $\alpha = 0$ satisfies every inequality. Thus, $0 \in A_i$.
+      Thus, $A \neq \EmptySet$.
+   1. If $r_i = 0$, then $A_i = \RR$.
+   1. If $r_i > 0$, then $A_i = [-\frac{t_i}{r_i}, \infty)$.
+   1. If $r_i < 0$, then $A_i = (-\infty, \frac{t_i}{r_i}]$.
+   1. Since not all $r_i = 0$, hence there are several 
+      $A_i$ with finite endpoints (either left or right).
+   1. Thus, there are three possibilities for $A$:
+      $[a,b]$, or $[a, \infty)$ or $(-\infty, b]$.
+   1. Both $a$ and $b$ correspond to an endpoint of one of the
+      $A_i$.
+1. If we pick $\alpha$ as one of the endpoints of $A$,
+   then, $t_i + \alpha r_i \geq 0$ for every $i$ 
+   and $t_j + \alpha r_j = 0$ for some $j \in 1,\dots,m$.
+1. Thus, we obtain a conic representation of $\bx$ of
+   at most $m-1$ vectors.
+1. This process can be carried out repeatedly until
+   we obtain a conic representation of $\bx$ of
+   $k$ linearly independent vectors.
+1. Since the $k$ vectors $\bx_1, \dots, \bx_k$ so obtained
+   are linearly independent, hence $k \leq n$.
 ```
 
 ## Pointed Cones
