@@ -538,6 +538,71 @@ every closed and bounded set of a real $n$-dim normed
 space is compact. Hence, $H$ is compact.
 ```
 
+## Cones
+
+```{prf:theorem} Conic hulls of a finite set of points are closed
+:label: res-cvx-closed-conic-hull
+
+Let $\VV$ be an $n$-dimensional real normed linear space.
+Let $\ba_1, \dots, \ba_k \in \VV$. Then, their
+conic hull given by
+
+$$
+H = \ConicHull ( \{ \ba_1, \dots, \ba_k \})
+$$
+is closed.
+```
+
+```{prf:proof}
+Let $S = \{ \ba_1, \dots, \ba_k \}$.
+
+1. By the {prf:ref}`conic representation theorem <res-cvx-conic-rep-unique>`,
+   each point of $H$ can be represented as a conic combination
+   of a linearly independent subset of $S$.
+1. Since the number of points in $S$ is finite, hence
+   the number of linearly independent subsets of $S$ is
+   finite.
+1. Let there be $N$ linearly independent subsets of $S$.
+   Denote them by $S_1, \dots, S_N$.
+1. Then,
+
+   $$
+   H = \bigcup_{i=1}^N \ConicHull (S_i).
+   $$
+1. If $\ConicHull (S_i)$ are closed, then 
+   $H$ is closed as it is a finite union of closed sets.
+1. Thus, it suffices to show that $H_i = \ConicHull (S_i)$
+   are closed for every $i \in 1,\dots,N$.
+
+Accordingly, let us assume that $S = \{ \ba_1, \dots, \ba_k \}$
+is a linearly independent set of vectors (with $k \leq n$)
+and $H = \ConicHull(S)$.
+
+1. Let $\WW = \span S = \span \{ \ba_1, \dots, \ba_k \}$.
+1. Then, $S$ is a basis for $\WW$.
+1. Let $T : \WW \to \RR^k$ be a coordinate mapping given by
+   
+   $$
+   T (\bx) = \bt \in \RR^m \text{ such that } 
+   \bx = t_1 \ba_1 + \dots + t_k \ba_k
+   $$
+   for every $\bx \in \WW$.
+   The mapping is well defined since $S$ is a basis for $\WW$.
+   Thus, every $\bx \in \WW$ is a unique linear combination 
+   of elements in the basis $S$.
+1. It is easy to see that $T$ is a linear mapping.
+   Moreover, $T$ is an isomorphism.
+1. Thus, $T : (\WW , \| \cdot \|) \to (\RR^k, \| \cdot \|_2)$ is continuous
+   due to {prf:ref}`res-la-ns-finite-continuous-transformation`.
+1. Also, we can see that
+
+   $$
+   H = T^{-1} (\RR^k_+).
+   $$
+1. But $\RR^k_+$ is a closed set of $\RR^k$.
+1. Thus, $H = T^{-1} (\RR^k_+)$ is closed since $T$ is continuous.
+```
+
 
 ## Relative Interior
 
