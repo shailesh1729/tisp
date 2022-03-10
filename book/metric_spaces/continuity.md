@@ -526,6 +526,8 @@ $$
 ```
 
 ```{prf:remark}
+:label: rem-ms-uni-cont-means-cont
+
 If $f$ is uniformly continuous on $A \subseteq \dom f$, then $f$ is continuous on $A$.
 ```
 
@@ -1121,4 +1123,120 @@ Hence, due to {prf:ref}`res-ms-equivalent-metric-homeomorphic-identity`,
 the two metrics are equivalent.
 ```
 
+
+## Lipschitz Continuity
+
+```{prf:definition} Local Lipschitz continuity at a point
+:label: def-ms-local-lipschitz-continuity
+
+Let $f : (X,d) \to (Y, \rho)$ be a (partial) function with
+$S = \dom f$.
+
+We say that $f$ is *locally Lipschitz continuous* at some $a \in S$
+if there is a constant $L$ (depending on $a$) and $\delta > 0$
+(depending on $a$)
+such that
+
+$$
+\rho(f(x),f(a)) \leq L d(x, a)
+$$
+for every $x \in B(a, \delta) \cap S$.
+
+In other words, for every $x \in S$
+
+$$
+d(x, x) < \delta \implies \rho(f(x), f(a)) \leq L d(x, a).
+$$
+```
+
+```{prf:definition} Lipschitz function
+:label: def-ms-lipschitz-func
+
+Let $f : (X,d) \to (Y, \rho)$ be a (partial) function with
+$S = \dom f$.
+
+We say that $f$ is a *Lipschitz function* if there is a
+constant $L > 0$ such that
+
+$$
+\rho(f(x),f(y)) \leq L d(x, y)
+$$
+for every $x, y \in S$.
+
+Sometimes, we also say that $f$ is *Lipschitz continuous* 
+on its domain.
+```
+
+
+```{prf:example}
+:label: ex-ms-lipschitz-inverse-func
+
+Let $f(x) = \frac{1}{x}$ with $\dom f = (0, \infty)$.
+
+Choose some $a > 0$.  Then, for any $x > 0$,
+
+$$
+|f(x) - f(a) | = \left |\frac{1}{x} - \frac{1}{a}  \right |
+= \frac{|a - x|}{x a} = \frac{1}{x a} |a - x|.
+$$
+There is no single value of $L$ such that $L \geq \frac{1}{x a}$
+for every $x, a > 0$. Thus, $f$ is not a  *Lipschitz function*.
+
+However, if we consider $\delta = \frac{a}{2}$, 
+and consider the neighborhood $(a-\delta, a + \delta)$
+then
+
+1. $x > a - \delta = \frac{a}{2}$.
+1. Thus, $\frac{1}{x a} < \frac{2}{a^2}$.
+1. Thus, $|f(x) - f(a) | < \frac{2}{a^2} |a - x|$
+   for every $x \in (a-\delta, a + \delta)$.
+1. Thus, $f$ is locally *Lipschitz continuous* at $a$
+   with $L = \frac{2}{a^2}$.
+1. We can see that both $L$ and $\delta$ depend on $a$.
+
+Now, restrict the domain of $f$ to $(c, \infty)$ for some $c > 0$.
+
+1. Let $x, y \in (c, \infty)$.
+1. Then, $xy > c^2$.
+1. Thus, $\frac{1}{xy} < \frac{1}{c^2}$.
+1. Thus, $|f(x) - f(y)| < \frac{1}{c^2} |x - y|$.
+1. Choosing $L =   \frac{1}{c^2}$, we see that $f$ is a
+   Lipschitz function.
+```
+
+
+```{prf:theorem} Lipschitz $\implies$ uniform continuity
+:label: res-ms-lipschitz-to-uniform-cont
+
+Every Lipschitz function is
+{prf:ref}`uniformly continuous <def-ms-uniform-continuity>`.
+```
+
+```{prf:proof}
+Let $f : (X,d) \to (Y, \rho)$ be a function with $S = \dom f$.
+Assume that $f$ is Lipschitz.
+Thus, there exists $L > 0$ such that
+
+$$
+\rho(f(x),f(y)) \leq L d(x, y)
+$$
+for every $x, y \in S$.
+
+1. Let $\epsilon > 0$.
+1. Let $\delta = \frac{\epsilon}{L}$.
+1. Let $x, y \in S$ such that $d(x, y) < \delta$.
+1. Then, 
+
+   $$
+   \rho(f(x),f(y)) \leq L d(x, y) < L \frac{\epsilon}{L} = \epsilon.
+   $$
+1. Thus, for every $\epsilon > 0$, there exists $\delta > 0$
+   given by $\delta = \frac{\epsilon}{L}$ such that 
+   for every $x, y \in S$
+
+   $$
+   d(x, y) < \delta \implies \rho(f(x),f(y)) < \epsilon.
+   $$
+1. Thus, $f$ is uniformly continuous.
+```
 
