@@ -1,5 +1,9 @@
 # Cones
 
+Main references for this section are 
+{cite}`beck2014introduction,boyd2004convex,rockafellar2015convex`. 
+
+
 Throughout this section, $\VV$ is a real vector space. 
 Some material is specific to $\RR^n$. Rest of the
 material is applicable for any real vector space.
@@ -458,6 +462,8 @@ $H \subseteq K$
 1. Thus, $H \subseteq K$.
 ```
 
+### Unique Conic Representations
+
 Recall from 
 {prf:ref}`Carathéodory theorem <res-cvx-conv-hull-caratheodory>`
 that in an $n$ dimensional vector space,
@@ -543,6 +549,96 @@ The proof is similar to Carathéodory theorem.
    $k$ linearly independent vectors.
 1. Since the $k$ vectors $\bx_1, \dots, \bx_k$ so obtained
    are linearly independent, hence $k \leq n$.
+```
+
+### Linear System with Nonnegativity Constraints
+
+Consider the system
+
+$$
+P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}
+$$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$.
+Without loss of generality, we shall assume that the rows
+of $\bA$ are linearly independent.
+This is a linear system $\bA \bx = \bb$ with the nonnegativity
+constraint $\bx \succeq \bzero$.
+If we write $\bA$ in the form of column vectors as 
+
+$$
+\bA = \begin{bmatrix}
+\ba_1 & \dots & \ba_n
+\end{bmatrix}
+$$
+Then, the set $Q = \{ \bA \bx \ST \bx \in \RR^n_+ \}$
+can be written as
+
+$$
+Q = \cone \{\ba_1, \dots \ba_n\}.
+$$
+In other words, $Q$ is the conic hull of the column vectors
+of $\bA$. We can think of $\bA$ as a linear mapping of the
+nonnegative orthant (a convex cone) $\RR^n_+$ from $\RR^n$
+to another convex cone in $\RR^n$ given as a conic hull
+of the columns of $\bA$.
+
+We can now see that $P$ is nonempty if $\bb \in Q$. 
+
+```{prf:definition} Basic feasible solution
+:label: def-cvx-basic-feasible-solution
+
+Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
+Assume that the rows of $\bA$ are linearly independent. 
+Then, $\bv \in \RR^n$ is a *basic feasible solution* (in short "bfs")
+of $P$ if the columns of $\bA$ corresponding to the positive
+entries of $\bv$ are linearly independent.
+
+Consequently, $\bv$ has at most $m$ has positive entries.
+All other entries of $\bv$ are $0$.
+```
+
+```{prf:theorem} Existence of basic feasible solution
+:label: res-cvx-cone-bfs-existence
+
+Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
+Assume that the rows of $A$ are linearly independent. 
+
+If $P$ is nonempty; i.e. $P \neq \EmptySet$, then 
+it contains at least one basic feasible solution.
+```
+
+```{prf:proof}
+Recall that
+
+$$
+Q = \{ \bA \bx \ST \bx \in \RR^n_+ \} = \cone \{\ba_1, \dots \ba_n\}
+$$
+where $\ba_1, \dots, \ba_n$ are columns of the matrix $\bA$.
+
+1. If $P \neq \EmptySet$, then $\bb \in Q$.
+1. In other words, $\bb$ is a conic combination of columns of $\bA$.
+1. By the {prf:ref}`conic representation theorem <res-cvx-conic-rep-unique>`,
+   there exists a subset of $k$ linearly independent vectors among
+   $\{\ba_1, \dots, \ba_n \}$ such that $\bb$ is their conic 
+   combination.
+1. In other words, there exist $k$ indices $1 \leq i_1 < \dots < i_k \leq n$
+   and $k$ numbers $v_{i_1}, \dots, v_{i_k} > 0$ such that
+
+   $$
+   \bb = \sum_{j=1}^k v_{i_j} \ba_{i_j}
+   $$
+   and $\{\ba_{i_1}, \dots, \ba_{i_k}\}$ are linearly independent.
+1. Consequently $k \leq m$ since columns of $\bA$ belong to $\RR^m$.
+1. Let 
+   
+   $$
+   \bv = \sum_{j=1}^k v_{i_j} \be_{i_j}
+   $$
+   where $\be_{i_j}$ are unit vectors of $\RR^n$.
+1. Clearly, $\bv \succeq \bzero$ and $\bA \bv = \bb$.
+1. Therefore, $\bv \in P$ and $\bv$ is a basic feasible solution.
 ```
 
 ## Pointed Cones
