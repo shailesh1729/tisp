@@ -538,6 +538,21 @@ every closed and bounded set of a real $n$-dim normed
 space is compact. Hence, $H$ is compact.
 ```
 
+
+```{prf:theorem} Krein Milman theorem
+:label: res-cvx-krein-milman
+
+Let $\VV$ be an $n$-dimensional real normed linear space. 
+Let $S \subseteq \VV$ be a compact convex subset of $\VV$.
+Then,
+
+$$
+S = \ConvexHull(\aextreme(S)).
+$$
+In other words, a compact convex set is the convex hull of its
+extreme points.
+```
+
 ## Cones
 
 ```{prf:theorem} Conic hulls of a finite set of points are closed
