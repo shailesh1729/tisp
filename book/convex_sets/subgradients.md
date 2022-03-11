@@ -39,7 +39,13 @@ $\VV$ and $\VV^*$ have exactly the same elements.
 The primary difference between $\VV$ and $\VV^*$ comes from the
 computation of norm. If $\VV$ is endowed with a norm $\| \cdot \|$
 then $\VV^*$ is endowed with a {prf:ref}`dual norm <def-la-dual-norm>`
-$\| \cdot \|_*$. 
+$\| \cdot \|_*$.
+
+In the arguments below $B[\ba, r]$ or $B_{\| \cdot \|}[\ba, r]$ denotes the
+closed ball of radius $r$ in the normed space $(\VV, \| \cdot \|)$.
+The closed ball of radius $r$ in the dual space $(\VV, \| \cdot \|_*)$
+shall be denoted by $B_*[\ba, r]$ or $B_{\| \cdot \|_*}[\ba, r]$.
+Open balls shall be denoted similarly.
 ```
 
 
@@ -254,17 +260,203 @@ is not open.
 
 
 
+```{prf:theorem} Multiplication by a positive scalar
+:label: res-cvxf-subdiff-scaling
 
-
-Multiplication by a positive scalar: Let $\bx \in \dom f$.
+Let $f: \VV \to \RERL$ be a proper function.
+Let $\bx \in \dom f$.
 For any $\alpha > 0$, 
 
 $$
 \partial (\alpha f)(\bx) = \alpha \partial f(\bx).
 $$
+```
 
+```{prf:proof}
+Let $\bg \in \partial f(\bx)$.
+
+1. By subgradient inequality {eq}`eq-cvxf-subgradient-inequality-2`
+   
+   $$
+   f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle \Forall \by \in \dom f.
+   $$
+1. Multiplying by $\alpha$, we get:
+
+   $$
+   (\alpha f)(\by) \geq (\alpha f)(\bx) + 
+   \langle \by - \bx, \alpha \bg \rangle \Forall \by \in \dom (\alpha f).
+   $$
+1. Thus, $\alpha \bg \in \partial (\alpha f)(\bx)$.
+1. Thus, $\alpha \partial f(\bx) \subseteq \partial (\alpha f)(\bx)$.
+1. It is easy to see the same argument backwards to show that
+
+   $$
+   \partial (\alpha f)(\bx) = \alpha \partial f(\bx).
+   $$
+```
 
 ### Proper Convex Functions
+
+In this section, we discuss the properties of the
+subdifferential sets for convex functions.
+
+
+```{prf:theorem} Nonemptiness and boundedness of the subdifferential at interior points
+:label: res-cvxf-subdiff-scaling-nonempty-bounded
+
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $\ba \in \interior S$.
+Then, $\partial f (\ba)$ is nonempty and bounded. 
+
+In other words, for a proper convex function, the subdifferential
+at the interior points of its domain is nonempty and bounded.
+```
+
+```{prf:proof}
+
+Outline of the proof
+
+1. Identify a supporting hyperplane for the epigraph of $f$ at $(\ba, f(\ba)$.
+1. Make use of the local Lipschitz continuity of the convex function at its interior points.
+1. Show that the normal to the supporting hyperplane leads to a subgradient at $\ba$.
+1. Show that the subgradients are bounded by using the
+   local Lipschitz continuity inequality and the subgradient inequality.
+
+Consider the {prf:ref}`direct sum <def-cvx-real-vector-space-r-prod>`
+vector space $\VV \oplus \RR$.
+
+1. $\epi f \subseteq \VV \oplus \RR$. 
+1. Since $f$ is convex, hence $\epi f$ is convex.
+1. For some $\ba \in \interior S$, consider the point
+   $(\ba, f(\ba)) \in \VV \oplus \RR$.
+1. Since $f$ is convex, hence $(\ba, f(\ba)) \in \boundary \epi f$.
+1. By {prf:ref}`supporting hyperplane theorem <res-cvx-supporting-hyperplane-theorem>`,
+   there exists a vector $(\bp, -\alpha) \in \VV^* \oplus \RR$ such that
+
+   $$
+   \langle \bx, \bp \rangle - t \alpha 
+   \leq \langle \ba, \bp \rangle - f(\ba) \alpha
+   \Forall (\bx, t) \in \epi f.
+   $$
+1. We shall show that $\alpha > 0$ must hold true and $\bg = \frac{\bp}{\alpha}$
+   is indeed a subgradient at $\ba$.
+1. We note that, $(\ba, f(\ba) + 1) \in \epi f$. Putting it in,
+
+   $$
+   & \langle \ba, \bp \rangle -  (f(\ba) + 1) \alpha  
+   \leq \langle \ba, \bp \rangle - \alpha f(\ba)\\
+   &\iff -\alpha \leq 0 \\
+   &\iff \alpha \geq 0.
+   $$
+   Thus, $\alpha \geq 0$.
+1. Recall from {prf:ref}`res-cvxf-convex-local-lipschitz-continuous` that
+   $f$ is locally Lipschitz continuous at $\ba \in \interior \dom f$.
+1. Thus, there exists $r > 0$ and $L > 0$ such that
+   $B[\ba, r] \subseteq S$ and 
+
+   $$
+   |f(\bx) - f(\ba)| \leq L \| \bx - \ba \| \Forall \bx \in B[\ba, r].
+   $$
+1. Since $B[\ba, r] \subseteq S$, hence $(\bx, f(\bx)) \in \epi f$
+   for every $\bx \in B[\ba, r]$.
+1. Plugging $t = f(\bx)$ in the supporting hyperplane inequality, 
+   we get
+
+   $$
+   \langle \bx, \bp \rangle - f(\bx) \alpha 
+   \leq \langle \ba, \bp \rangle - f(\ba) \alpha
+   \Forall \bx \in B[\ba, r].
+   $$
+1. Rearranging the terms, 
+
+   $$
+   \langle \bx - \ba, \bp \rangle \leq \alpha (f(\bx) - f(\ba))
+   \Forall \bx \in B[\ba, r].
+   $$
+1. Using the local Lipschitz property,
+
+   $$
+   \langle \bx - \ba, \bp \rangle \leq  \alpha L \| \bx - \ba \| 
+   \Forall \bx \in B[\ba, r]. 
+   $$
+1. Recall that the {prf:ref}`dual norm <res-la-ip-dual-norm>` 
+   for $\bp \in \VV^*$ is given by
+
+   $$
+   \| \bp \|_* = \sup \{ |\langle \bx, \bp \rangle | \ST \bx \in \VV, \bx \| \leq 1 \}.
+   $$
+1. Let $\bp^{\dag} \in \VV$ with $\| \bp^{\dag} \| = 1$ be the vector at which
+   the supremum is attained.
+1. Then, $\| \bp \|_* = \langle \bp^{\dag}, \bp \rangle$ (since $\VV$ is real).
+1. Since $\bp^{\dag}$ is a unit vector, hence $\ba + r \bp^{\dag} \in B[\ba, r]$.
+1. Plugging $\bx = \ba + r \bp^{\dag}$ in the inequality above, we get
+
+   $$
+   r \langle \bp^{\dag}, \bp \rangle \leq  \alpha L \|  r \bp^{\dag} \| 
+   \Forall \bx \in B[\ba, r]. 
+   $$
+1. Simplifying
+
+   $$
+   r \| \bp \|_* \leq \alpha L r \Forall \bx \in B[\ba, r].
+   $$
+1. This means that $\alpha > 0$ must be true.
+   1. If $\alpha = 0$, then this inequality would require $\bp = \bzero$.
+   1. But $(\bp, -\alpha)$ is a nonzero vector describing the supporting hyperplane.
+1. Going back to the supporting hyperplane inequality and putting $t=f(\bx)$, 
+   we have
+
+   $$
+   \langle \bx, \bp \rangle - f(\bx) \alpha 
+   \leq \langle \ba, \bp \rangle - f(\ba) \alpha
+   \Forall \bx \in S.
+   $$
+1. Rearranging the terms, we get
+
+   $$
+   \alpha (f(\bx) - f(\ba)) \geq \langle \bx - \ba, \bp \rangle \Forall \bx \in S.
+   $$
+1. Letting $\bg = \frac{1}{\alpha} \bp$ and dividing on both sides by 
+   $\alpha$ (which is positive), we obtain
+
+   $$
+   f(\bx) - f(\ba) \geq \langle \bx - \ba, \bg \rangle \Forall \bx \in S.
+   $$
+1. Rearranging again
+
+   $$
+   f(\bx) \geq f(\ba) +  \langle \bx - \ba, \bg \rangle \Forall \bx \in S
+   $$
+   which is the subgradient inequality.
+1. Thus, $\bg \in \partial f(\ba)$. 
+1. Thus, $\partial f(\ba)$ is nonempty. 
+
+
+We next show the boundedness of $\partial f(\ba)$.
+
+1. Let $\bg \in \partial f(\ba)$.
+1. Let $\bg^{\dag} \in \VV$ such that $\| \bg^{\dag} \| = 1$ and
+
+   $$
+   \| \bg \|_* = \langle \bg^{\dag}, \bg \rangle.
+   $$
+1. Let $\bx = \ba + r \bg^{\dag}$.
+1. Applying the subgradient inequality on $\bx$, we get:
+
+   $$
+   f(\bx) \geq f(\ba) +  \langle r \bg^{\dag}, \bg \rangle
+   = f(\ba) + r \| \bg \|_*.
+   $$
+1. Thus, 
+
+   $$
+   r \| \bg \|_* \leq f(\bx) - f(\ba) \leq L \| \bx - \ba \| = L \| r \bg^{\dag} \| = L r.
+   $$
+1. Thus, $\| \bg \|_* \leq L$ for every $\bg \in \partial f(\ba)$.
+1. Thus, $\partial f(\ba)$ is bounded.
+```
+
 
 Let $f : \VV \to (-\infty, \infty]$ be a proper convex function.
 
