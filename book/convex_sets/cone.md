@@ -641,6 +641,96 @@ where $\ba_1, \dots, \ba_n$ are columns of the matrix $\bA$.
 1. Therefore, $\bv \in P$ and $\bv$ is a basic feasible solution.
 ```
 
+The basic feasible solutions of $P$ are the
+{prf:ref}`extreme points <def-cvx-extreme-point>` 
+of $P$. Recall that a point is an extreme point
+if it cannot be expressed as a nontrivial convex
+combination of two distinct points of a set.
+
+```{prf:theorem} Equivalence between basic feasible solutions and extreme points
+:label: res-cvx-cone-bfs-extreme
+
+Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
+Assume that the rows of $A$ are linearly independent. 
+
+Then $\bv$ is a basic feasible solution of $P$ if and only if 
+$\bv$ is an extreme point of $P$.
+```
+
+```{prf:proof}
+
+Let $\bv$ be a basic feasible solution of $P$.
+
+1. Then $\bb = \bA \bv$ and $\bv$ has $k$ positive entries
+   with $k \leq m$.
+1. Without loss of generality, assume that first $k$ entries
+   of $\bv$ are positive. This can be easily achieved by 
+   shuffling the columns of $\bA$ in the linear system $\bA \bx = \bb$.
+1. Therefore, $v_1, \dots, v_k > 0$ and $v_{k+1}, \dots, v_n = 0$.
+1. Also, the first $k$ columns $\ba_1, \dots, \ba_k$ of the matrix
+   $\bA$ are linearly independent since $\bv$ is a basic feasible solution.
+1. For contradiction, assume that $\bv$ is not an extreme point of $P$;
+   i.e.,  $\bv \notin \extreme P$.
+1. Then, there exist $\by, \bz \in P$ with $\by \neq \bz$ 
+   and $t \in (0,1)$ such that
+   $\bv = t \by + (1-t)\bz$.
+1. Since $\by, \bz \in P$, hence $\by \succeq \bzero$ and $\bz \succeq \bzero$.
+1. Since the last $n-k$ entries of $\bv$ are zero, hence
+   the last $n-k$ entries of $\by$ and $\bz$ also must be zero
+   as they have to be nonnegative.
+1. Since $\by, \bz \in P$, hence $\bA \by = \bb$ and $\bA \bz = \bb$.
+1. Therefore, 
+
+   $$
+   \bb = \sum_{i=1}^k y_i \ba_i = \sum_{i=1}^k z_i \ba_i. 
+   $$
+1. This implies that
+
+   $$
+   \sum_{i=1}^k (y_i -z_i) \ba_i = \bzero.
+   $$
+1. But, $\ba_1, \dots, \ba_k$ are linearly independent by hypothesis.
+1. Thus, $y_i = z_i$ for $i=1,\dots,k$ must hold.
+1. Then, $\by = \bz$.
+1. We arrive at a contradiction.
+1. Thus, $\bv$ must be an extreme point of $P$.
+
+For the converse, assume that $\bv$ is an extreme point of $P$.
+
+1. Again, by contradiction, assume that $\bv$ is not a basic 
+   feasible solution. 
+1. Thus, the columns of $\bA$ corresponding to the positive
+   entries of $\bv$ are linearly dependent.
+1. Assume that there are $k$ positive entries in $\bv$
+   and WLOG, assume that they correspond to first $k$ 
+   columns of $\bA$.
+1. Then, since the corresponding columns are linearly 
+   dependent, hence there exists a nonzero vector $\bt \in \RR^k$
+   such that
+
+   $$
+   \sum_{i=1}^k t_i \ba_i = \bzero.
+   $$
+1. We can extend $\bt$ to $\RR^n$ by appending $n-k$ zeros such that
+   $\bA \bt = \bzero$.
+1. Since the first $k$ entries of $\bv$ are positive, we can
+   choose a sufficiently small $r > 0$ such that
+   $\by = \bv - r \bt \succeq \bzero$
+   and $\bz = \bv + r \bt \succeq \bzero$.
+1. Note that $\bA \by = \bA \bz = \bb$.
+1. Therefore, $\by, \bz \in P$.
+1. At the same time, it is easy to see that
+
+   $$
+   \bv = \frac{1}{2} \by + \frac{1}{2} \bz.
+   $$
+1. Thus, $\bv$ is a convex combination of two distinct points of $P$.
+1. This contradicts our hypothesis that $\bv$ is an extreme point of $P$.
+1. Thus, $\bv$ must be a basic feasible solution.
+```
+
+
 ## Pointed Cones
 
 ```{prf:definition} Pointed cone

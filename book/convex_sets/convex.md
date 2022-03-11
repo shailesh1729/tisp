@@ -1572,3 +1572,44 @@ nonempty.
 The generalization for multiple real vector spaces is
 easily verifiable through induction.
 ```
+
+
+## Extreme Points
+
+```{prf:definition} Extreme points of convex sets
+:label: def-cvx-extreme-point
+
+Let $VV$ be a real vector space and let $C$ 
+be a subset of $\VV$.
+
+A point $\bx \in S$ is called an *extreme point* 
+of $S$ if there do not exist $\bx_1, \bx_2 \in S$
+with $\bx_1 \neq \bx_2$ and $t \in (0, 1)$ such that
+
+$$
+\bx = t \bx_1 + (1-t) \bx_2.
+$$
+In other words, $\bx$ cannot be expressed as a nontrivial convex
+combination of two different points in $S$.
+
+The set of extreme points of a set $S$ is denoted by
+$\extreme S$.
+```
+
+
+
+```{prf:example} Extreme points
+:label: ex-cvx-extreme-point
+
+1. Let $C = [0,1] \subseteq \RR$.
+   Then, $0$ and $1$ are extreme points of $C$.
+1. Let $C = (0, 1) \subseteq \RR$.
+   $C$ doesn't have any extreme point.
+1. In a triangle, the three vertices are extreme points.
+1. In a convex polytope, all the vertices are extreme points.
+```
+
+A more intricate example of the set
+of extreme points for the set
+$P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+is discussed in {prf:ref}`res-cvx-cone-bfs-extreme`.
