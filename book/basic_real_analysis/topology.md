@@ -6,7 +6,7 @@ Topology of metric spaces is fully developed in
 {ref}`ch:metric-spaces`. In this section, we quickly 
 describe the topology of the real line $\RR$ as it 
 will be needed for the development of the material
-related to {pref:ref}`real functions <def-bra-real-function>`. 
+related to {prf:ref}`real functions <def-bra-real-function>`. 
 We state a number of results without proving. All of these
 results can be proven in the more general context of
 metric spaces. Please see {ref}`sec:ms:metric-topology`
