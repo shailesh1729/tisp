@@ -1,7 +1,13 @@
 # Continuity
 
-This section focuses on closure and semicontinuity of convex functions
-in normed linear spaces.
+This section focuses on topological properties of 
+convex functions in normed linear spaces.
+In particular, we discuss 
+closure of convex functions,
+continuity of convex functions at interior points.
+
+Main references for this section are 
+{cite}`beck2014introduction,boyd2004convex,rockafellar2015convex`. 
 
 Throughout this section, we assume that $\VV$ is a 
 finite dimensional real normed linear space equipped with a
@@ -232,3 +238,298 @@ $$
 \epi g = \closure \epi f.
 $$
 ```
+
+
+## Continuity
+
+Convex functions are not necessarily continuous on non-open sets.
+
+```{prf:example} A convex function which is not continuous
+:label: ex-cvxf-convex-non-continuous
+
+Let $f : \RR \to \RR$ be given by
+
+$$
+f(x) = \begin{cases}
+1, & x = 0,\\
+x^2 & 0 < x \leq 1.
+\end{cases}
+$$
+We can see that $\dom f = [0, 1]$. $f$ is continuous on $(0,1)$
+but $f$ is not continuous (from the right) at $x=0$. It is
+continuous (from the left) at $x=1$.
+```
+
+Convex functions are continuous at points in the
+interior of their domain.
+
+
+```{prf:theorem} Local Lipschitz continuity of convex functions
+:label: res-cvxf-convex-local-lipschitz-continuous
+
+Let $\VV$ be an $n$-dimensional real normed linear space.
+Let $f: \VV \to \RR$ be a convex function with $S = \dom f$.
+Let $\ba \in \interior S$. Then, there exists $r > 0$ 
+and $L > 0$ such that $B(\ba, r) \subseteq S$ and
+
+$$
+|f (\bx) - f(\ba)| \leq L \| \bx - \ba \|
+$$
+for every $\bx \in B[\ba, r]$.
+```
+
+We recall from {prf:ref}`res-cvx-convex-set-empty-interior`
+that if $\dim \affine S < n$ then $S$ has an empty interior.
+Thus, if $\interior S$ is nonempty, then, $\affine S = \VV$.
+
+```{prf:proof}
+
+We shall structure the proof as follows. For any $\ba \in \interior S$:
+
+1. We show that $f$ is bounded on a closed ball $B[\ba, r] \subseteq S$.
+1. Then, we show that $f$ satisfies the Lipschitz inequality
+   $|f (\bx) - f(\ba)| \leq L \| \bx - \ba \|$ on the 
+   closed ball $B[\ba, r]$
+   for a specific choice of $L$ depending on $\ba$ and $r$.
+
+We first introduce $\| \cdot \|_{\infty}$
+norm on $\VV$ and describe its implications.
+
+1. Choose a basis $\BBB = \{\be_1, \dots, \be_n \}$ for $\VV$.
+1. For every $\bx \in \VV$, we have a unique representation
+   
+   $$
+   \bx = \sum_{i=1}^n x_i \be_i.
+   $$
+1. Let $T : \VV \to \RR^n$ be a coordinate mapping 
+   which maps every vector $\bx \in \VV$ to its
+   coordinate vector $(x_1, \dots, x_n) \in \RR^n$.
+1. $T$ is an isomorphism.
+1. Define $\| \cdot \|_{\infty} : \VV \to \RR$ as
+
+   $$
+   \| \bx \|_{\infty} = \| T(\bx) \|_{\infty} = \max_{i=1,\dots,n}|x_i|.
+   $$
+1. It is easy to show that $\| \cdot \|_{\infty}$ is a norm on $\VV$.
+1. By {prf:ref}`res-la-ns-finite-all-norms-eq`, 
+   all norms are equivalent.
+1. Thus, $\| \cdot \|$ and $\| \cdot \|_{\infty}$ are
+   equivalent norms for $\VV$.
+1. By {prf:ref}`def-la-ns-finite-norm-topology`, 
+   the norm topology is identical for all norms
+   in a finite dimensional space.
+1. Thus, a point is an interior point of $S$ 
+   irrespective of the norm chosen.
+1. We introduce the closed and open balls in 
+   $(\VV, \| \cdot \|_{\infty})$
+   as
+
+   $$
+   B_{\infty}[\ba, \delta] = \{\bx \in \VV  \ST 
+      \| \bx - \ba \|_{\infty} \leq \delta \}
+   \text{ and }
+   B_{\infty}(\ba, \delta) = \{\bx \in \VV  \ST 
+      \| \bx - \ba \|_{\infty} < \delta \}.
+   $$
+1. Let $\ba \in \interior S$.
+1. Then, there exists $r_1 > 0$ such that
+   $B_{\infty}[\ba, r_1] \subseteq S$.
+   due to {prf:ref}`res-ms-interior-point-closed`.
+1. Then, $B_{\infty}(\ba, r_1) \subseteq B_{\infty}[\ba, r_1]$.
+1. By {prf:ref}`res-ms-eq-metric-ball-in-ball`, there
+   is an $r_2 > 0$ such that
+   $B(\ba, r_2) \subseteq  B_{\infty}(\ba, r_1)$.
+1. By {prf:ref}`res-open-closed-ball-contain`, 
+   we can pick an $0 < r < r_2$ such that
+
+   $$
+   B[\ba, r] \subseteq B(\ba, r_2)
+   \subseteq  B_{\infty}(\ba, r_1)
+   \subseteq B_{\infty}[\ba, r_1]
+   \subseteq S.
+   $$
+
+We now show that $f$ is bounded on $B[\ba, r]$.
+
+1. $B_{\infty}[\ba, r_1]$ is closed and bounded.
+1. Hence $B_{\infty}[\ba, r_1]$ is compact
+   due to {prf:ref}`res-la-ndim-compact-closed-bounded`.
+1. By {prf:ref}`Krein Milman theorem <res-cvx-krein-milman>`,
+   a compact convex set is convex hull of its extreme points.
+   Thus,
+
+   $$
+   B_{\infty}[\ba, r_1] = \convex \extreme B_{\infty}[\ba, r_1].
+   $$
+1. Let $\bv_1, \dots, \bv_N$ be the $N=2^n$ 
+   extreme points of $B_{\infty}[\ba, r_1]$.
+   1. These extreme points are given by
+    
+      $$
+      \bv_i = \ba + r_1 \bw_i
+      $$
+      where $\bw_i$ are the vectors with coordinates
+      $\{-1, 1\}^n$.
+   1. In other words,
+
+      $$
+      \bw_i = \sum_{j=1}^n w^i_j \be_j
+      $$
+      where $w^i_j \in \{ -1, 1 \}$.
+   1. Note that
+
+      $$
+      \| \bv_i - \ba \| = r \| \bw_i \| 
+      = r_1 \max \{ |w^i_j| \} = r_1.
+      $$
+   1. Thus, $\bv_i \in \boundary B_{\infty}[\ba, r_1]$.
+   1. Readers can verify that these are indeed the
+      extreme points of $B_{\infty}[\ba, r_1]$ and 
+      there are no other extreme points.
+1. Then, by Krein Milman theorem,
+ 
+   $$
+   B_{\infty}[\ba, r_1] = \convex \{\bv_1, \dots, \bv_N \}.
+   $$
+1. Thus, every $\bx \in B_{\infty}[\ba, r_1]$ is a convex
+   combination of the extreme points. Specially, 
+   there exists $t \in \Delta_N$ (unit simplex of $\RR^N$) such that
+
+   $$
+   \bx = \sum_{i=1}^N t_i \bv_i.
+   $$
+1. Now, by {prf:ref}`Jensen's inequality <res-cvxf-jensen-inequality>`,
+
+   $$
+   f(\bx) \leq \sum_{i=1}^N t_i f(\bv_i).
+   $$
+1. Let $M = \max \{f(\bv_1), \dots, f(\bv_N) \}$.
+1. Then,
+
+   $$
+   f(\bx) \leq \sum_{i=1}^N t_i f(\bv_i)
+   \leq \sum_{i=1}^N t_i  M = M \sum_{i=1}^N t_i = M.
+   $$
+1. Since $B[\ba, r] \subseteq B_{\infty}[\ba, r_1]$, 
+   hence $f(\bx) \leq M$ for every $\bx \in B[\ba, r]$.
+
+We have shown that $f(\bx) \leq M$ for every $\bx \in B[\ba, r]$.
+We next find an $L$ such that
+
+$$
+f (\bx) - f(\ba) \leq L \| \bx - \ba \|
+$$
+for every $\bx \in B[\ba, r]$.
+
+
+1. Let $\bx \in B_d[\ba, r]$ (the deleted neighborhood).
+1. Then, $\| \bx - \ba \| \leq r$ and $f(\bx) \leq M$. 
+1. Let $\alpha = \frac{1}{r} \| \bx - \ba \|$. 
+   Note that by definition $\alpha \leq 1$.
+1. Define
+   
+   $$
+   \by = \ba + \frac{1}{\alpha}(\bx - \ba).
+   $$
+1. Note that
+
+   $$
+   \| \by - \ba \| = r \frac{\| \bx - \ba \| }{\| \bx - \ba \|} = r.
+   $$
+1. Thus, $\by \in B[\ba, r]$. 
+1. Hence $f(\by)\leq M$.
+1. We can rewrite the above equation (defining $\by$) as
+
+   $$
+   \bx = \alpha \by + (1- \alpha) \ba.
+   $$
+1. Thus, $\bx$ is a convex combination of $\by, \ba$.
+1. Then, by convexity,
+
+   $$
+   f(\bx) &\leq \alpha f(\by) + (1- \alpha) f(\ba)\\
+   &= f(\ba) + \alpha (f(\bx) - f(\ba))\\
+   &\leq  f(\ba) + \alpha (M - f(\ba))\\
+   &= f(\ba) + \frac{1}{r} \| \bx - \ba \| (M - f(\ba)).
+   $$
+1. Consequently, 
+
+   $$
+   f(\bx) - f(\ba) \leq \frac{M - f(\ba)}{r} \| \bx - \ba \|.
+   $$
+1. Let $L = \frac{M - f(\ba)}{r}$.
+1. Then, for every $\bx \in B[\ba, r]$, we have
+
+   $$
+   f(\bx) - f(\ba) \leq L \| \bx - \ba \|.
+   $$
+
+
+We next show that for this choice of $L$
+
+$$
+f (\ba) - f(\bx) \leq L \| \bx - \ba \|
+$$
+for every $\bx \in B[\ba, r]$.
+
+1. Define
+
+   $$
+   \bz = \ba + \frac{1}{\alpha} (\ba - \bx).
+   $$
+1. It is easy to see that $\| \ba - \bz \| = r$.
+1. Hence, $\bz \in B[\ba, r]$ and $f(\bz) \leq M$.
+1. Rearranging, we have
+
+   $$
+   \bx = \ba + \alpha (\ba - \bz).
+   $$
+1. Now, note that:
+
+   $$
+   \ba = \frac{1}{1 + \alpha}(\ba + \alpha(\ba - \bz))
+   + \frac{\alpha}{1 + \alpha} \bz.
+   $$
+1. Thus, $\ba$ is a convex combination of 
+   $\bx = \ba + \alpha (\ba - \bz)$
+   and $\bz$.
+1. Also, both $\bx, \bz \in B[\ba, r]$.
+1. Applying convexity,
+
+   $$
+   f(\ba) \leq \frac{1}{1 + \alpha} f(\bx) 
+   + \frac{\alpha}{1 + \alpha} f(\bz).
+   $$
+1. Thus,
+
+   $$
+   (1 + \alpha)f(\ba) \leq f(\bx) + \alpha f(\bz).
+   $$
+1. Thus, 
+
+   $$
+   f(\bx) \geq (1 + \alpha)f(\ba) - \alpha f(\bz)
+   = f(\ba) + \alpha (f(\ba) - f(\bz)).
+   $$
+1. Continuing from here
+
+   $$
+   f(\bx) &\geq f(\ba) + \alpha (f(\ba) - f(\bz))\\
+   &\geq f(\ba) - \alpha (M - f(\ba))\\
+   &= f(\ba) - \frac{M - f(\ba)}{r} \| \bx - \ba \|\\
+   =  f(\ba) - L \| \bx - \ba \|.
+   $$
+1. Thus, $f(\ba) - f(\bx) \leq L \| \bx - \ba \|$.
+
+
+Combining, we see that with $L = \frac{M - f(\ba)}{r}$,
+
+$$
+|f (\bx) - f(\ba)| \leq L \| \bx - \ba \|
+$$
+for every $\bx \in B[\ba, r]$.
+
+Thus, $f$ is locally Lipschitz at every interior
+point of $S = \dom f$.
+```
+
