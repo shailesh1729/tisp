@@ -302,7 +302,7 @@ subdifferential sets for convex functions.
 
 
 ```{prf:theorem} Nonemptiness and boundedness of the subdifferential at interior points
-:label: res-cvxf-subdiff-scaling-nonempty-bounded
+:label: res-cvxf-proper-interior-subdiff-nonempty-bounded
 
 Let $f: \VV \to \RERL$ be a proper convex function
 with $S = \dom f$.
@@ -311,6 +311,11 @@ Then, $\partial f (\ba)$ is nonempty and bounded.
 
 In other words, for a proper convex function, the subdifferential
 at the interior points of its domain is nonempty and bounded.
+We have
+
+$$
+\interior \dom f \subseteq \dom (\partial f).
+$$
 ```
 
 ```{prf:proof}
@@ -455,6 +460,29 @@ We next show the boundedness of $\partial f(\ba)$.
    $$
 1. Thus, $\| \bg \|_* \leq L$ for every $\bg \in \partial f(\ba)$.
 1. Thus, $\partial f(\ba)$ is bounded.
+```
+
+```{prf:corollary} Subdifferentiability of real valued convex functions
+:label: res-cvxf-convex-subdiff-everywhere
+
+Let $f: \VV \to \RR$ be a convex function. Then, $f$ is subdifferentiable 
+over $\VV$.
+
+$$
+\dom (\partial f) = \VV.
+$$
+```
+
+```{prf:proof}
+We have $\dom f = \VV$.
+
+1. Let $\bx \in \VV$.
+1. $\VV$ is open in $(\VV, \| \cdot \|)$.
+1. Thus, $\bx \in \interior \VV = \dom f$.
+1. By {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`, 
+   $\partial f(\bx)$ is nonempty and bounded as $\bx \in \interior \dom f$.
+1. Hence, $f$ is subdifferentiable at $\bx$.
+1. Since this is valid for every $\bx \in \VV$, hence $\dom (\partial f) = \VV$.
 ```
 
 
