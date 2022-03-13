@@ -486,6 +486,101 @@ We have $\dom f = \VV$.
 ```
 
 
+```{prf:theorem} Subgradients over a compact set are nonempty and bounded
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $A \subseteq \interior S$ be a nonempty and compact
+subset of the interior of the domain of $f$. Then, the 
+set of subgradients over $A$ given by
+
+$$
+Y = \bigcup_{\bx \in A} \partial f(\bx)
+$$
+is nonempty and bounded.
+```
+
+```{prf:proof}
+We are given that $A$ is nonempty and compact subset of interior of domain of $f$.
+
+1. For any $\bx \in A$, 
+   by {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`,
+   $\partial f(\bx)$ is nonempty and bounded.
+1. Thus, $Y$ is nonempty.
+
+We next prove that $Y$ must be bounded also.
+
+1. Let $T = \VV \setminus (\interior S)$.
+1. $T$ is closed and $A$ is closed. $A \subseteq \interior S$. 
+   Hence, $A \cap T = \EmptySet$.
+1. Since $A$ is compact and $T$ is closed and $A \cap T = \EmptySet$, 
+   hence distance between $A$ and $T$ is nonzero
+   due to {prf:ref}`res-ms-dist-disjoint-compact-closed`.
+
+   $$
+   r = d(A, T) > 0. 
+   $$
+1. Thus, 
+
+   $$
+   \| \bx - \by \| \geq r \Forall \bx \in A, \by \notin \interior S.
+   $$
+1. Let $s = \frac{r}{2}$.
+1. Let $D = B[\bzero, s]$. $D$ is a closed and bounded
+   set. Hence, it is compact 
+   due to {prf:ref}`res-la-ndim-compact-closed-bounded`.
+1. Let $E = A + D$. Then $E \subseteq \interior S$.
+   1. Let $\by \in E$.
+   1. Then, there is $\bx \in A$ and $\bv \in D$ such that
+      $\by = \bx + \bv$.
+   1. Thus, $\by - \bx = \bv$. 
+   1. Hence $\| \by - \bx \| \leq s < r$.
+1. Since both $A$ and $D$ are compact, hence $E$ is compact
+   due to {prf:ref}`res-la-ndim-sum-compact`.
+1. By {prf:ref}`res-cvxf-convex-local-lipschitz-continuous`, $f$
+   is local Lipschitz continuous at every $\bx \in E$
+   since $\bx \in E \subseteq \interior S$.
+1. Then, by {prf:ref}`res-ms-compact-llc-lipschitz`,
+   $f$ is Lipschitz continuous on $E$.
+1. Thus, there exists $L > 0$ such that 
+
+   $$
+   |f(\bx) - f(\by)| \leq L \| \bx - \by \| \Forall \bx, \by \in E.
+   $$
+1. Let $\bg \in Y$. Then, there is $\bx \in A$ such that
+   $\bg \in \partial f(\bx)$.
+1. we can choose $\bg^{\perp} \in \VV$ such that
+
+   $$
+   \| \bg \|_* = \langle \bg^{\perp}, \bg \rangle
+   \text{ and }
+   \| \bg^{\perp} \| = 1.
+   $$
+1. Now, let $\by = \bx + s \bg^{\perp}$. Then, $\by \in E$.
+   1. $ \| \by - \bx \| = \| s \bg^{\perp}\| = s$.
+   1. Thus, $s \bg^{\perp} \in D$.
+   1. Thus, $\by \in E$ since $\bx \in A$.
+1. Also, $\bx \in E$ since $\bx = \bx + \bzero$ and $\bzero \in D$.
+1. Consequently, by Lipschitz continuity
+
+   $$
+   |f(\by) - f(\bx)| \leq L \| \by - \bx \| = L s.
+   $$
+1. By subgradient inequality at $\bx$
+ 
+   $$
+   f(\by) - f(\bx) \geq \langle \by - \bx, \bg \rangle
+   = s \langle \bg^{\perp}, \bg \rangle
+   = s \| \bg \|_*.
+   $$
+1. Using the Lipschitz bound above, we get
+
+   $$
+   s \| \bg \|_* \leq L s.
+   $$
+1. Thus, $\| \bg \|_* \leq L$.
+1. Since $\bg$ was chosen arbitrarily, hence $Y$ is bounded.
+```
+
 Let $f : \VV \to (-\infty, \infty]$ be a proper convex function.
 
 * $f$ need not be subdifferentiable at every point in $\dom f$.
@@ -508,11 +603,6 @@ Let $f : \VV \to (-\infty, \infty]$ be a proper convex function.
 * If $\Dim(\dom f) < \Dim(\VV)$ and $\partial f(\bx)$ is nonempty for some
   $\bx \in \dom f$, then $\partial f(\bx)$ is unbounded. 
 
-### Convex Functions
-
-Let $f : \VV \to \RR$ be convex. 
-
-* $f$ is subdifferentiable over $\VV$.
 
 
 ## Directional Derivatives
