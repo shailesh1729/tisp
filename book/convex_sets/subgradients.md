@@ -298,7 +298,13 @@ Let $\bg \in \partial f(\bx)$.
 ### Proper Convex Functions
 
 In this section, we discuss the properties of the
-subdifferential sets for convex functions.
+subdifferential sets for proper convex functions.
+
+A proper convex function may not be subdifferentiable
+at every point in its domain. 
+However, it is indeed subdifferentiable at 
+the interior points and relative interior points
+of its domain.
 
 
 ```{prf:theorem} Nonemptiness and boundedness of the subdifferential at interior points
@@ -580,6 +586,55 @@ We next prove that $Y$ must be bounded also.
 1. Thus, $\| \bg \|_* \leq L$.
 1. Since $\bg$ was chosen arbitrarily, hence $Y$ is bounded.
 ```
+
+We recall from {prf:ref}`def-cvx-relative-interior`
+that the relative interior of a convex set is given by
+
+$$
+\relint C = \{\bx \in C \ST \exists r > 0, 
+B(\bx, r) \cap \affine C \subseteq C \}.
+$$
+It is interior of the convex set w.r.t. the 
+subspace topology of its affine hull.
+
+
+```{prf:theorem} Nonemptiness of the subdifferential at relative interior points
+:label: res-cvxf-relint-subdiff-nonempty
+
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $\ba \in \relint S$.
+Then, $\partial f (\ba)$ is nonempty. 
+
+In other words, for a proper convex function, the subdifferential
+at the relative interior points of its domain is nonempty.
+We have
+
+$$
+\relint \dom f \subseteq \dom (\partial f).
+$$
+```
+
+```{prf:corollary} Existence of points with nonempty subdifferential
+:label: res-cvxf-subdiff-exist-relint
+
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Then, there exists $\bx \in S$ such that $\partial f(\bx)$
+is nonempty.
+```
+
+```{prf:proof}
+The effective domain of a proper convex function
+is convex and nonempty.
+
+1. By {prf:ref}`res-cvx-nonempty-relint`, the relative
+   interior of $S = \dom f$ is nonempty.
+1. Thus, there exists $\bx \in S$.
+1. By {prf:ref}`res-cvxf-relint-subdiff-nonempty`, 
+   $\partial f(\bx)$ is nonempty.
+```
+
 
 Let $f : \VV \to (-\infty, \infty]$ be a proper convex function.
 
