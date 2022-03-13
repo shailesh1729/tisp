@@ -403,6 +403,68 @@ can be reduced to a finite subcover.
 1. Thus, $A$ is compact.
 ```
 
+## Lipschitz Continuity
+
+```{prf:theorem}
+:label: res-ms-compact-llc-lipschitz
+
+Let $f : (X,d) \to (Y, \rho)$ be a (partial) function with
+$S = \dom f$.
+Assume that $f$ is locally Lipschitz continuous
+at every $x \in S$.
+Let $A \subseteq S$ be a compact subset of $S$.
+Then, $f$ is Lipschitz function on $A$.
+In other words, there exists a constant $L > 0$
+such that
+
+$$
+\rho(f(x),f(y)) \leq L d(x, y)
+$$
+for every $x, y \in A$.
+```
+
+```{prf:proof}
+
+We proceed as follows.
+
+1. Since $f$ is locally Lipschitz continuous
+   on $S$ hence $f$ is continuous
+   by {prf:ref}`res-ms-lipschitz-to-uniform-cont`.
+1. Thus, by {prf:ref}`res-ms-compact-continuous-map`,
+   $f(A)$ is compact. 
+1. Hence, $f(A)$ is closed and bounded.
+1. Thus, there exists $M > 0$ such that
+   for any $x, y \in A$, 
+   $\rho(f(x), f(y)) \leq M$.
+1. For contradiction, assume that $f$ is
+   not Lipschitz on $A$.
+1. Then, there is no $L > 0$ such that
+   
+   $$
+   \rho(f(x), f(y)) \leq L d(x,y) \Forall x, y \in A.
+   $$
+1. Then, there exist two sequences $\{ x_n \}$
+   and $\{ y_n \}$ of $A$ such that
+
+   $$
+   \lim_{n \to \infty} \frac{\rho(f(x_n), f(y_n)) }{d(x_n,y_n)} = \infty.
+   $$
+1. But $\rho(f(x_n), f(y_n)) \leq M$. 
+1. Thus, 
+
+   $$
+   \lim d(x_n,y_n) = 0.
+   $$
+1. Since $A$ is compact, hence $\{ x_n \}$
+   has a convergent subsequence.
+1. Let $\{x_{n_k} \}$ be a convergent subsequence
+   with $x = \lim_{k \to \infty} x_{n_k}$.
+1. By compactness of $A$, $x \in A$.
+1. Then, $f$ cannot be not locally Lipschitz continuous at $x$.
+1. This contradicts our hypothesis.
+1. Thus, $f$ must be Lipschitz continuous on $A$.
+```
+
 ## Homeomorphism
 
 ```{prf:theorem} Homeomorphism preserves compactness
