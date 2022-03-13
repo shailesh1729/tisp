@@ -2280,3 +2280,35 @@ For the converse, assume that $S$ is closed and bounded.
    since a homeomorphism preserves compactness
    (see {prf:ref}`res-ms-compact-homeomorphism-pres`).
 ```
+
+```{prf:theorem} Sum of compact sets is compact
+:label: res-la-ndim-sum-compact
+
+Let $\VV$ be a real $n$-dimensional normed linear space. 
+Let $A, B \subseteq \VV$ be compact subsets of $\VV$.
+Then, their sum $A+B$ is compact.
+```
+
+```{prf:proof}
+
+We proceed as follows
+
+1. Both $A$ and $B$ are compact. Hence, they are closed and bounded.
+1. By {prf:ref}`res-la-sum-closed-compact`, $A+B$ is closed.
+1. Let $\| \ba \| \leq M_a$ for every $\ba \in A$.
+1. Let $\| \bb \| \leq M_b$ for every $\bb \in B$.
+1. Let $\bx \in A + B$.
+1. Then, there exists $\ba \in A$ and $\bb \in B$ such that
+   $\bx = \ba + \bb$.
+1. Then,
+   
+   $$
+   \| \bx \| = \| \ba + \bb \| \leq \| \ba \| + \| \bb \| \leq M_a + M_b.
+   $$
+1. Thus, $\| \bx \| \leq M_a + M_b$ for every $\bx \in A + B$.
+1. Thus, $A+B$ is bounded.
+1. Since $A+B$ is closed and bounded, hence $A+B$ is compact
+   due to {prf:ref}`res-la-ndim-compact-closed-bounded`.
+```
+
+
