@@ -468,6 +468,13 @@ We next show the boundedness of $\partial f(\ba)$.
 1. Thus, $\partial f(\ba)$ is bounded.
 ```
 
+If $f$ is a  proper convex function, then the only points
+at which $f$ may not be subdifferentiable (i.e. the
+subdifferential set is empty) are the points at the
+frontier of $\dom f$ (i.e., $\dom f \setminus \interior \dom f$).
+$f$ may be subdifferentiable on the frontier points too.
+
+
 ```{prf:corollary} Subdifferentiability of real valued convex functions
 :label: res-cvxf-convex-subdiff-everywhere
 
@@ -636,28 +643,50 @@ is convex and nonempty.
 ```
 
 
-Let $f : \VV \to (-\infty, \infty]$ be a proper convex function.
+```{prf:theorem} Unboundedness condition for subdifferential
+:label: res-cvx-subdiff-relint-unbounded
 
-* $f$ need not be subdifferentiable at every point in $\dom f$.
-* For a point $\bx \in \interior \dom f$, $\partial f (x)$ is non-empty and bounded.
-* $f$ is subdifferentiable at every point in the interior of its domain.
-* In other words, the subdifferential set may be empty only on the boundary of 
-  $\dom f$ for a proper convex function.
-* If $X \subseteq \interior \dom f$ is nonempty and compact, then 
-  $Y = \cup_{\bx \in X} \partial f (\bx)$ is nonempty and bounded. i.e., the
-  subdifferentiables over a compact set in the domain are nonempty 
-  and bounded.
-* $f$ is subdifferentiable at a point in its relative interior.
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
 
-  $$
-  \relint \dom f \subseteq \dom \partial f.
-  $$ 
-* There exists $\bx \in \dom f$ where $\partial f(\bx)$ is nonempty. In other
-  words, $\dom \partial f$ is not empty since $\relint \dom f$ is always
-  nonempty.
-* If $\Dim(\dom f) < \Dim(\VV)$ and $\partial f(\bx)$ is nonempty for some
-  $\bx \in \dom f$, then $\partial f(\bx)$ is unbounded. 
+Assume that $\dim S < \dim \VV$.
+Let $\bx \in S$. 
+If $\partial f(\bx) \neq \EmptySet$, then 
+$\partial f(\bx)$ is unbounded.
+```
 
+```{prf:proof}
+
+We proceed as follows.
+
+1. Let $n = \dim \VV$.
+1. Let $A = \affine S$. $A$ is an affine set.
+1. We have $\bx \in S \subseteq A$.
+1. Then, $\WW = A - \bx$ is the subspace parallel to $A$.
+1. Accordingly, $m = \dim \WW < \dim \VV = n$.
+1. Then, the orthogonal complement of $\WW$ is a nontrivial subspace with dimension $n -m$.
+1. Let $\bv \in \WW^{\perp}$ be a nonzero vector.
+1. Then, $\langle \bw, \bv \rangle = 0$ for every $\bw \in \WW$.
+1. Now let $\bg \in \partial f(\bx)$ be an arbitrary subgradient at $\bx$.
+1. By subgradient inequality
+
+   $$
+   f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle  \Forall \by \in S.
+   $$
+1. Note that both $\bx \in S$ and $\by \in S$. 
+1. Hence, $\by - \bx \in \WW$.
+1. Thus, $\langle \by - \bx, \bv \rangle = 0$.
+1. But then, for any $\alpha \in \RR$,
+
+   $$
+   \langle \by - \bx, (\bg + \alpha \bv) \rangle
+   &= \langle \by - \bx, \bg \rangle + \alpha \langle \by - \bx, \bv \rangle\\
+   &= \langle \by - \bx, \bg \rangle.
+   $$
+1. Thus, if $\bg \in \partial f(\bx)$, then $\bg + \alpha \bv \in \partial f(\bx)$
+   for every $\alpha \in \RR$.
+1. Thus, $\partial f(\bx)$ is unbounded.
+```
 
 
 ## Directional Derivatives
