@@ -867,7 +867,7 @@ We can now compute the directional derivative.
 
 
 ```{prf:theorem} Existence of directional derivatives for convex functions.
-:label: res-cvxf-subdiff-relint-unbounded
+:label: res-cvxf-dir-der-exist-convex
 
 Let $f: \VV \to \RERL$ be a proper convex function
 with $S = \dom f$.
@@ -981,6 +981,40 @@ $$
 ```
 
 
+```{prf:theorem} Directional derivative of pointwise maximum of convex functions
+:label: res-cvxf-dir-der-max-convex-funcs
+
+Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be proper functions.
+Let $f : \VV \to \RERL$ be defined as
+
+$$
+f(\bx) = \max\{f_1(\bx), \dots, f_m(\bx) \}
+$$
+with $\dom f = \bigcap_{i=1}^m \dom f_i$.
+
+Let $\bx \in \interior \dom f$ and $\bd \in \VV$.
+Then,
+
+$$
+f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'(\bx; \bd).
+$$
+where $I(\bx) = \{i \in 1,\dots,m \ST f_i(\bx) = f(\bx) \}$.
+```
+
+```{prf:proof}
+Since $f_i$ are proper convex, hence their pointwise maximum $f$ is proper convex.
+
+By {prf:ref}`res-cvxf-dir-der-exist-convex`,
+the directional derivatives $f'(\bx; \bd)$ and
+$f'_i(\bx; \bd)$ for $i=1,\dots,m$ exist.
+
+By {prf:ref}`res-cvxf-dir-der-max-funcs`,
+
+$$
+f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'(\bx; \bd).
+$$
+where $I(\bx) = \{i \in 1,\dots,m \ST f_i(\bx) = f(\bx) \}$.
+```
 
 ### Proper Convex Functions
 
