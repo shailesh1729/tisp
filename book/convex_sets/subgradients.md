@@ -1016,33 +1016,153 @@ $$
 where $I(\bx) = \{i \in 1,\dots,m \ST f_i(\bx) = f(\bx) \}$.
 ```
 
-### Proper Convex Functions
+### Max Formula
 
-Let $f : \VV \to (-\infty, \infty]$ be a proper convex function.
-Let $\bx \in \interior \dom f$. 
+The max formula is one of the key results in this section.
+It connects subgradients with directional derivatives.
 
-* For any $\bd \in \VV$, the directional derivative $f'(\bx; \bd)$ exists.
-* $f(\by) \geq f(\bx) + f'(\bx; \by -\bx) \Forall \by \in \dom f$.
-* Max formula: For any $\bd \in \VV$, 
+```{prf:theorem} Max formula
+:label: res-cvxf-subg-dir-der-max-formula
 
-  $$
-  f'(\bx;\bd) = \max \{ \langle \bg, \bd \rangle \ST \bg \in \partial f(\bx) \}.
-  $$
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Then for any $\bx \in \interior S$ and $\bd \in \VV$,
 
-* Max formula alternative formulation using the support function notation:
+$$
+f'(\bx;\bd) = \sup \{ \langle \bd, \bg \rangle \ST \bg \in \partial f(\bx) \}.
+$$
+In words, the directional derivative is the supremum of the
+inner product of the subgradients with the direction.
+```
 
-  $$
-  f'(\bx;\bd) = \sigma_{\partial f(\bx)}(\bd).
-  $$
+```{prf:proof}
 
-For a proper convex function, at a point $\bx \in \interior \dom f$, we define 
-a mapping $g : \VV \to \RR$ given by $ g(\bd) \triangleq f'(\bx;\bd)$.
-In other words, $g$ performs $\bd \mapsto f'(\bx;\bd)$ mapping at $\bx$.
+Let $\bx \in \interior S$ and $\bd \in \VV$.
 
-* $g$ is convex.
-* $g$ is homogeneous. i.e. $g(\lambda \bd) = \lambda g(\bd)$ for some $\lambda \geq 0$.
+1. Let $t > 0$. Then, by subgradient inequality
+
+   $$
+   f(\bx + t \bd) - f(\bx) \geq \langle t \bd , \bg \rangle 
+   \Forall \bg \in \partial f(\bx).
+   $$
+1. Thus,
+
+   $$
+   \frac{f(\bx + t \bd) - f(\bx)}{t} \geq \langle \bd , \bg \rangle 
+   \Forall \bg \in \partial f(\bx).
+   $$
+1. Taking the limit 
+
+   $$
+   f'(\bx; \bd) = \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t} 
+   \geq \lim_{t \to 0^+} \langle \bd , \bg \rangle 
+   = \langle \bd , \bg \rangle  
+   $$
+   for every $\bg \in \partial f(\bx)$.
+1. Taking the supremum over $\partial f(\bx)$ on the R.H.S., we obtain
+
+   $$
+   f'(\bx;\bd) \geq\sup \{ \langle \bd, \bg \rangle \ST \bg \in \partial f(\bx) \}.
+   $$
+
+We now show that the inequality is indeed an equality.
+
+1. Let $h : \VV \to \RR$ be given by
+
+   $$
+   h(\bv) = f'(\bx; \bv).
+   $$
+1. By {prf:ref}`res-cvxf-dir-der-convex-homo`, $h$ is a real valued convex
+   function and nonnegative homogeneous.
+1. By {prf:ref}`res-cvxf-convex-subdiff-everywhere`, $h$ is 
+   subdifferentiable everywhere in $\VV$.
+1. In particular, $h$ is subdifferentiable at $\bd$.
+1. Let $\bg \in \partial h(\bd)$.
+1. For any $\bv \in \VV$ and $t \geq 0$, 
+
+   $$
+   t f'(\bx; \bv) = t h(\bv) = h (t \bv)
+   $$
+   since $h$ is nonnegative homogeneous.
+1. By subdifferential inequality
+   
+   $$
+   t f'(\bx; \bv) &= h(t \bv)\\ 
+   &\geq h(\bd) + \langle t \bv - \bd , \bg \rangle\\
+   &=f'(\bx; \bd) + \langle t \bv - \bd , \bg \rangle.
+   $$
+1. Rearranging the terms,
+
+   $$
+   t (f'(\bx; \bv) - \langle \bv, \bg \rangle) \geq
+   f'(\bx; \bd) - \langle \bd, \bg \rangle.
+   $$
+1. Since this inequality is valid for every $t \geq 0$, 
+   hence the term $f'(\bx; \bv) - \langle \bv, \bg \rangle$ 
+   must be nonnegative. 
+   Otherwise, the inequality will be invalided for large enough $t$.
+   Thus,
+
+   $$
+   f'(\bx; \bv) \geq \langle \bv, \bg \rangle.
+   $$
+1. By {prf:ref}`res-cvxf-dir-der-underestimator`, for any $\by \in S$,
+
+   $$
+   f(\by) \geq f(\bx) + f'(\bx; \by - \bx).
+   $$
+1. From previous inequality, 
+
+   $$
+   f'(\bx; \by - \bx) \geq \langle \by - \bx, \bg \rangle.
+   $$
+1. Thus, for any $\by \in S$,
+
+   $$
+    f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle.
+   $$
+1. But this is a subgradient inequality. 
+   Hence, $\bg \in \partial f(\bx)$.
+1. Taking $t=0$, in the subgradient inequality for $h$, 
+
+   $$
+   0 \geq f'(\bx; \bd) - \langle \bd, \bg \rangle. 
+   $$
+1. Thus, there exists $\bg \in \partial f(\bx)$ such that
+
+   $$
+   f'(\bx; \bd) \leq \langle \bd, \bg \rangle.
+   $$
+1. Consequently,
+
+   $$
+   f'(\bx;\bd) \leq\sup \{ \langle \bd, \bg \rangle \ST \bg \in \partial f(\bx) \}.
+   $$
+
+Combining the two inequalities, we obtain the max formula:
+
+ $$
+ f'(\bx;\bd) = \sup \{ \langle \bd, \bg \rangle \ST \bg \in \partial f(\bx) \}.
+ $$
+```
+
+Recall from {prf:ref}`def-cvxf-support-function` that 
+support function for a set $C$ is given by
+
+$$
+\sigma_C (\bx) =  \sup \{\langle \bx, \by \rangle \ST \by \in C \}.
+$$
 
 
+```{prf:corollary} Max formula as a support function
+:label: res-cvxf-dir-der-subg-support
+
+The max formula can be written as
+
+$$
+f'(\bx;\bd) =  \sigma_{\partial f(\bx)} (\bd).
+$$
+```
 
 ## Differentiability
 
@@ -1651,7 +1771,9 @@ $$
 $$
 ```
 
-```{prf:example} Subdifferential of the indicator function of the unit ball 
+```{prf:example} Subdifferential of the indicator function of the unit ball
+:label: ex-cvxf-subg-ind-unit-ball
+
 The unit ball at origin is given by:
 
 $$
