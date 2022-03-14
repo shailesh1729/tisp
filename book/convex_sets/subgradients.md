@@ -691,19 +691,48 @@ We proceed as follows.
 
 ## Directional Derivatives
 
+### Proper Functions
 
 ```{prf:definition} Directional derivative
 :label: def-cvxf-directional-derivative
 
-Let $f : \VV \to (-\infty, \infty]$ be a proper function.
-Let $\bx \in \interior \dom f$. 
+Let $f : \VV \to (-\infty, \infty]$ be a proper function
+with $S = \dom f$.
+Let $\bx \in \interior S$. 
 The *directional derivative* at $\bx$ in the direction $\bd \in \VV$ is defined by 
 
 $$
 f'(\bx;\bd) \triangleq \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd) - f(\bx)}{\alpha}.
 $$
 ```
+
+```{div}
 The directional derivative is a scalar quantity ($\in \RR$).
+When we say that 
+
+$$
+f'(\bx;\bd) = \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t},
+$$
+
+we mean that $f$ is defined over a set
+$\{ \bv \ST \bv = \bx + t \bd, 0 < t < t_{\max} \}$
+and for every $\epsilon > 0$, there exists
+$\delta > 0$ such that
+
+$$
+\left | \frac{f(\bx + t \bd) - f(\bx)}{t} - f'(\bx;\bd) \right | < \epsilon
+\text{ whenever }
+0 < t < \delta.
+$$
+
+Since $\bx \in \interior S$, hence there exists $r > 0$
+such that $B(\bx, r) \subseteq S$.
+
+With $\bv \in B(\bx, r)$, we need $\| t \bd \| < r$.
+Thus, a $t_{\max} = \frac{r}{\| \bd \|}$ is a suitable
+range of allowed values for $t$.
+Accordingly, $0 < \delta < t_{\max}$ can be chosen.
+```
 
 ```{prf:remark} Directional derivative for zero vector
 :label: rem-cvxf-dir-der-zero
@@ -715,8 +744,126 @@ We can see this from the fact that
 $$
 f'(\bx;\bzero) = \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bzero) - f(\bx)}{\alpha} = 0.
 $$
-
 ```
+
+A useful result is for computing the directional derivative of a function
+which is the pointwise maximum of a finite number of proper functions.
+
+We recall from {prf:ref}`res-ms-int-intersect-int` that
+the interior of a finite intersection of sets is the 
+intersection of their interiors. This is useful in
+identifying the interior of the domain for a pointwise
+maximum of a finite set of functions. 
+
+```{prf:theorem} Directional derivative of a maximum of functions
+:label: res-cvxf-dir-der-max-funcs
+
+Let $f_1, f_2, \dots, f_m : \VV \to (-\infty, \infty]$ be proper functions.
+Let $f : \VV \to \RERL$ be defined as
+
+$$
+f(\bx) = \max\{f_1(\bx), \dots, f_m(\bx) \}
+$$
+with $\dom f = \bigcap_{i=1}^m \dom f_i$.
+
+Let $\bx \in \interior \dom f = \bigcap_{i=1}^m \interior \dom f_i$
+and $\bd \in \VV$.
+Assume that $f'(\bx; \bd)$ exists for every $i \in 1,\dots,m$.
+
+Let $I(\bx) = \{i \in 1,\dots,m \ST f_i(\bx) = f(\bx) \}$ be the set
+of indices of functions whose value at $\bx$ equals $f(\bx)$.
+Then,
+
+$$
+f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'(\bx; \bd).
+$$
+
+In other words, the directional derivative of a pointwise maximum
+of functions equals the maximum of directional directives of functions
+which attain the pointwise maximum at a specific point.
+```
+
+```{prf:proof}
+The key idea here is that for computing the
+directional derivative $f'(\bx; \bd)$, 
+only those functions are relevant for which
+$f_i(\bx) = f(\bx)$. We need to show this first.
+
+1. Since $\bx \in \interior \dom f$, there
+   exists $B(\bx, r)$ such that
+   $f$ and $f_i$ are all defined over this open ball.
+1. Let $s = \frac{r}{\| \bd \|}$.
+1. For every $i \in 1,\dots,m$, 
+   let $g_i : \RR \to \RR$ be defined as 
+
+   $$
+   g_i(t) = f_i(\bx + t \bd)
+   $$
+   with $\dom g_i = [0, s)$.
+   $\| s \bd \| = r$. Thus, $\bx + t \bd \in B(\bx, r)$.
+   Hence, $g_i$ are well defined.
+1. Then,
+
+   $$
+   \lim_{t \to 0+} g_i(t) 
+   &= \lim_{t \to 0+} f_i(\bx + t \bd) \\
+   &= \lim_{t \to 0+} [(f_i(\bx + t \bd) - f_i(\bx)) + f_i(\bx)]\\
+   &= \lim_{t \to 0+}\left [
+   t \frac{f_i(\bx + t \bd) - f_i(\bx)}{t} + f_i(\bx) 
+   \right] \\
+   &= 0 \cdot f'_i(\bx; \bd) + f_i(\bx)\\
+   &= f_i(\bx) = g_i(0).
+   $$
+   We used the fact that $f'_i(\bx; \bd)$ exists
+   for every $f_i$.
+1. Thus, $g_i$ is continuous from the right at $t=0$
+   for every $i \in 1,\dots, m$.
+1. Let $i \in I(\bx)$ and $j \notin I(\bx)$.
+1. Then, $f_i(\bx) > f_j (\bx)$. Alternatively $g_i(0) > g_j(0)$.
+1. Since $g_i, g_j$ are continuous from the right, hence
+   there exists $\epsilon_{i j} > 0$ such that
+   $g_i(t) > g_j(t)$ for every $t \in [0, \epsilon_{i j}]$.
+1. Minimizing $\epsilon_{ij}$ over all pairs of 
+   $i \in I(\bx)$ and $j \notin I(\bx)$,
+   there exists $\epsilon > 0$ such that
+   for any $i \in I(\bx)$ and $j \notin I(\bx)$,
+
+   $$
+   f_i(\bx + t \bd) = g_i(t) > g_j(t) = f_j(\bx + t \bd) 
+   \Forall t \in [0, \epsilon].
+   $$
+
+We can now compute the directional derivative.
+
+1. For every $t \in [0, \epsilon]$, 
+
+   $$
+   f(\bx + t \bd) = \underset{i=1,\dots,m}{\max} f_i(\bx + t \bd)
+   = \underset{i \in I(\bx)}{\max} f_i(\bx + t \bd).
+   $$
+1. Consequently, for any $t \in (0, \epsilon]$
+
+   $$
+   \frac{f(\bx + t \bd) - f(\bx)}{t}
+   &= \frac{\underset{i \in I(\bx)}{\max} f_i(\bx + t \bd) - f(\bx)}{t}\\
+   &= \frac{\underset{i \in I(\bx)}{\max} (f_i(\bx + t \bd) - f_i(\bx))}{t}\\
+   &= \underset{i \in I(\bx)}{\max} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}.
+   $$
+   We used the fact that $f_i(\bx) = f(\bx)$ for every $i \in I(\bx)$.
+1. Taking the limit $t \to 0^+$,
+
+   $$
+   f'(\bx; \bd) 
+   &= \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t}\\
+   &= \lim_{t \to 0^+} \underset{i \in I(\bx)}{\max} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}\\
+   &= \underset{i \in I(\bx)}{\max} \lim_{t \to 0^+} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}\\
+   &= \underset{i \in I(\bx)}{\max} f'_i(\bx; \bd).
+   $$
+```
+
+
+
+### Proper Convex Functions
 
 
 ```{prf:theorem} Existence of directional derivatives for convex functions.
@@ -797,6 +944,43 @@ Nonnegative homogeneity
    $$
 1. Thus, $f'(\bx; \bd)$ is nonnegative homogeneous.
 ```
+
+Directional derivatives are a linear underestimator for convex functions.
+
+
+```{prf:theorem} Directional derivative as linear underestimator
+:label: res-cvxf-dir-der-underestimator
+
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $\bx \in \interior S$.
+Then, for every $\by \in S$
+
+$$
+f(\by) \geq f(\bx) + f'(\bx; \by - \bx).
+$$
+```
+
+```{prf:proof}
+Note that
+
+$$
+f'(\bx; \by - \bx) 
+&= \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha (\by - \bx)) - f(\bx)}{\alpha}\\
+&= \lim_{\alpha \to 0^+} \frac{f((1-\alpha) \bx + \alpha \by) - f(\bx)}{\alpha}\\
+&\leq \lim_{\alpha \to 0^+} \frac{(1-\alpha)f(\bx) + \alpha f(\by) - f(\bx)}{\alpha}\\
+&= \lim_{\alpha \to 0^+} \frac{\alpha (f(\by) - f(\bx))}{\alpha}\\
+&= \lim_{\alpha \to 0^+}(f(\by) - f(\bx)) = f(\by) - f(\bx).
+$$
+
+Thus,
+
+$$
+f(\by) \geq f(\bx) + f'(\bx; \by - \bx).
+$$
+```
+
+
 
 ### Proper Convex Functions
 
