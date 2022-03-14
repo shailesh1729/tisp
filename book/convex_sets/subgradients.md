@@ -644,7 +644,7 @@ is convex and nonempty.
 
 
 ```{prf:theorem} Unboundedness condition for subdifferential
-:label: res-cvx-subdiff-relint-unbounded
+:label: res-cvxf-subdiff-relint-unbounded
 
 Let $f: \VV \to \RERL$ be a proper convex function
 with $S = \dom f$.
@@ -692,7 +692,9 @@ We proceed as follows.
 ## Directional Derivatives
 
 
-```{div}
+```{prf:definition} Directional derivative
+:label: def-cvxf-directional-derivative
+
 Let $f : \VV \to (-\infty, \infty]$ be a proper function.
 Let $\bx \in \interior \dom f$. 
 The *directional derivative* at $\bx$ in the direction $\bd \in \VV$ is defined by 
@@ -702,6 +704,99 @@ f'(\bx;\bd) \triangleq \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd) - f(\bx)}
 $$
 ```
 The directional derivative is a scalar quantity ($\in \RR$).
+
+```{prf:remark} Directional derivative for zero vector
+:label: rem-cvxf-dir-der-zero
+
+If $\bd = \bzero$ then, $f'(\bx; \bd) = 0$.
+
+We can see this from the fact that
+
+$$
+f'(\bx;\bzero) = \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bzero) - f(\bx)}{\alpha} = 0.
+$$
+
+```
+
+
+```{prf:theorem} Existence of directional derivatives for convex functions.
+:label: res-cvxf-subdiff-relint-unbounded
+
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $\bx \in \interior S$. 
+Then, for any $\bd \in \VV$, 
+the directional derivative $f'(\bx; \bd)$ exists.
+```
+
+This allows us to consider a mapping from a direction $\bd \in \VV$
+to the directional derivative of $f$ in this direction at $\bx$.
+We can define a directional derivative map
+parameterized by $\bx \in S$ as:
+
+$$
+\bg_x(\bd) \triangleq f'(\bx; \bd) = 
+\lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd) - f(\bx)}{\alpha}.
+$$
+We shall refer to such maps by $\bd \mapsto f'(\bx; \bd)$.
+
+```{prf:theorem} Convexity and homogeneity of $\bd \mapsto f'(\bx; \bd)$
+:label: res-cvxf-dir-der-convex-homo
+
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $\bx \in \interior S$.
+Then, the function $\bd \mapsto f'(\bx; \bd)$ is convex and nonnegative
+homogeneous. 
+
+Nonnegative homogeneity: For any $t \geq 0$ and $\bd \in \VV$,
+
+$$
+f'(\bx; t \bd) = t f'(\bx; \bd).
+$$
+```
+
+```{prf:proof}
+Convexity
+
+1. Let $\bd_1, \bd_2 \in \VV$ and $t \in (0, 1)$.
+1. Let $\bd = t \bd_1 + (1-t) \bd_2$.
+1. Then,
+   
+   $$
+   f'(\bx; \bd) &= f'(\bx; t \bd_1 + (1-t) \bd_2)\\
+   &= \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha [t \bd_1 + (1-t) \bd_2]) - f(\bx)}{\alpha}\\
+   &= \lim_{\alpha \to 0^+} 
+   \frac{f(t \bx + \alpha t \bd_1 + (1-t) \bx + \alpha (1-t) \bd_2) - f(\bx)}{\alpha}\\
+   &= \lim_{\alpha \to 0^+} 
+   \frac{f(t (\bx + \alpha \bd_1) + (1-t) (\bx + \alpha \bd_2)) - f(\bx)}{\alpha}\\
+   &\leq \lim_{\alpha \to 0^+} 
+   \frac{t f(\bx + \alpha \bd_1) + (1-t) f(\bx + \alpha \bd_2) - t f(\bx) - (1-t)f(\bx)}{\alpha}\\
+   &= t \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd_1) - f(\bx)}{\alpha} +
+   (1-t) \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd_2) - f(\bx)}{\alpha}\\
+   &= t f'(\bx; \bd_1) + (1-t) f'(\bx; \bd_2).
+   $$
+   We used the convexity property of $f$ in this derivation.
+1. Thus, $f'(\bx; \bd)$ is convex.
+
+Nonnegative homogeneity
+
+1. For $t=0$,
+
+   $$
+   f'(\bx, 0 \bd) = f'(\bx, \bzero) = 0 = 0 f'(\bx; \bd).
+   $$
+   Thus, the homogeneity property is trivial for $t=0$.
+1. Now consider $t > 0$.
+1. Then, 
+
+   $$
+   f'(\bx; t \bd) &= \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha t \bd) - f(\bx)}{\alpha}\\
+   &= t \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha t \bd) - f(\bx)}{\alpha t}\\
+   &= t f'(\bx; \bd).
+   $$
+1. Thus, $f'(\bx; \bd)$ is nonnegative homogeneous.
+```
 
 ### Proper Convex Functions
 
