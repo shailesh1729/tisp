@@ -696,7 +696,7 @@ We proceed as follows.
 ```{prf:definition} Directional derivative
 :label: def-cvxf-directional-derivative
 
-Let $f : \VV \to (-\infty, \infty]$ be a proper function
+Let $f : \VV \to \RERL$ be a proper function
 with $S = \dom f$.
 Let $\bx \in \interior S$. 
 The *directional derivative* at $\bx$ in the direction $\bd \in \VV$ is defined by 
@@ -758,7 +758,7 @@ maximum of a finite set of functions.
 ```{prf:theorem} Directional derivative of a maximum of functions
 :label: res-cvxf-dir-der-max-funcs
 
-Let $f_1, f_2, \dots, f_m : \VV \to (-\infty, \infty]$ be proper functions.
+Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be proper functions.
 Let $f : \VV \to \RERL$ be defined as
 
 $$
@@ -1166,23 +1166,93 @@ $$
 
 ## Differentiability
 
-```{div}
-Let $f : \VV \to (-\infty, \infty]$ be a proper function.
-Let $\bx \in \interior \dom f$. 
-$f$ is said to be *differentiable* at $\bx \in \interior \dom f$
+```{prf:definition} Differentiability of proper functions
+:label: def-cvxf-differentiability-proper
+
+Let $f : \VV \to \RERL$ be a proper function with $S = \dom f$.
+Let $\bx \in \interior S$. 
+$f$ is said to be *differentiable* at $\bx$
 if there exists $\bg \in \VV^*$ such that:
 
 $$
-\underset{\bh \to 0}{\lim} 
-\frac{f(\bx + \bh) - f(\bx) - \langle \bg, \bh \rangle}{\| \bh \|} = 0.
+\underset{\bh \to \bzero}{\lim}
+\frac{f(\bx + \bh) - f(\bx) - \langle \bh, \bg \rangle}{\| \bh \|} = 0.
 $$
 The unique vector $\bg$ satisfying this condition is called
 the *gradient* of $f$ at $\bx$ and is denoted by $\nabla f(\bx)$.
 ```
 
+Compare this definition to {prf:ref}`def-mvc-point-differentiability`
+(differentiability of functions from $\RR^n$ to $\RR^m$).
+Also compare with the definition of the gradient in
+{prf:ref}`def-mvc-gradient`. 
+We can see that the notion of gradient coincide.
+
+If $f$ is differentiable at some $\bx \in \interior S$,
+then there is a simple formula to connect the gradient
+and the directional derivatives.
+
+```{prf:theorem} Gradient and directional derivatives
+:label: res-cvxf-grad-dir-der
+
+Let $f : \VV \to \RERL$ be a proper function with $S = \dom f$.
+Let $\bx \in \interior S$. 
+Assume that $f$ is differentiable at $\bx$.
+Then, for any $\bd \in \VV$,
+
+$$
+f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle.
+$$
+In other words, the directional derivative is the projection
+of the gradient in the specified direction.
+```
+
+```{prf:proof}
+For $\bd = \bzero$, the equality is obvious. 
+We shall consider the case where $\bd \neq \bzero$.
+
+1. Since $f$ is differentiable at $\bx$, hence
+
+  $$
+  \underset{\bh \to \bzero}{\lim}
+  \frac{f(\bx + \bh) - f(\bx) - \langle \bh, \nabla f(\bx) \rangle}{\| \bh \|} = 0.
+  $$
+1. In particular, if we take the limit of $\bh$ along the
+   direction of $\bd$ as $t \bd$ where $t > 0$ and $t \to 0^+$, 
+   then
+
+   $$
+   \underset{t \to 0^+}{\lim}
+   \frac{f(\bx + t \bd) - f(\bx) - \langle t \bd, \nabla f(\bx) \rangle}{\| t \bd \|} = 0.
+   $$
+1. Splitting the terms, we get
+
+   $$
+   \underset{t \to 0^+}{\lim}
+   \frac{f(\bx + t \bd) - f(\bx)}{\| t \bd \|} -
+   \underset{t \to 0^+}{\lim}
+   \frac{\langle \bd, \nabla f(\bx) \rangle}{\| \bd \|}
+   = 0.
+   $$
+1. Multiplying with $\| \bd \|$ and simplifying, we get:
+
+   $$
+   \underset{t \to 0^+}{\lim}
+   \frac{f(\bx + t \bd) - f(\bx)}{t} -
+   \underset{t \to 0^+}{\lim} \langle \bd, \nabla f(\bx) \rangle
+   = 0.
+   $$
+1. Thus,
+
+   $$
+   f'(\bx; \bd ) =  \underset{t \to 0^+}{\lim}
+   \frac{f(\bx + t \bd) - f(\bx)}{t} 
+   = \langle \bd, \nabla f(\bx) \rangle.
+   $$
+```
 
 ```{div}
-Let $f : \VV \to (-\infty, \infty]$ be a proper function.
+Let $f : \VV \to \RERL$ be a proper function.
 Let $\bx \in \interior \dom f$. Assume $f$ to be 
 differentiable at $\bx$. 
 
@@ -1244,7 +1314,7 @@ differentiable at $\bx$.
 
 
 ```{div}
-Let $f : \VV \to (-\infty, \infty]$ be a proper convex function.
+Let $f : \VV \to \RERL$ be a proper convex function.
 Let $\bx \in \interior \dom f$. 
 Assume $f$ to be differentiable at $\bx$. 
 
@@ -1255,7 +1325,7 @@ Assume $f$ to be differentiable at $\bx$.
   $$
 
 
-Let $f : \VV \to (-\infty, \infty]$ be a proper convex function.
+Let $f : \VV \to \RERL$ be a proper convex function.
 Let $x \in \interior \dom f$. 
 
 * If $f$ has a unique subdifferential at $\bx$, then it is 
@@ -1271,7 +1341,7 @@ Let $x \in \interior \dom f$.
 
 ### Sums of Functions
 
-Let $f_1, f_2 : \VV \to (-\infty, \infty]$ be proper convex functions.
+Let $f_1, f_2 : \VV \to \RERL$ be proper convex functions.
 
 Let $x \in \dom f_1 \cap \dom f_2$.
 Let $y \in \interior \dom f_1 \cap \interior \dom f_2$.
@@ -1280,7 +1350,7 @@ Let $y \in \interior \dom f_1 \cap \interior \dom f_2$.
 * $\partial(f_1 + f_2)(y) = \partial f_1 (y) + \partial f_2(y)$.
 
 
-Let $f_1, f_2, \dots, f_m : \VV \to (-\infty, \infty]$ be proper convex functions.
+Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be proper convex functions.
 
 Let $x \in \bigcap_{i=1}^m \dom f_i$.
 Let $y \in \bigcap_{i=1}^m \interior \dom f_i$.
@@ -1309,7 +1379,7 @@ $$
 
 ### Affine Transformations
 
-Let $f: \VV \to (-\infty, \infty]$ be a proper convex function.
+Let $f: \VV \to \RERL$ be a proper convex function.
 Let $\AAA : \VV \to \VV$ be a linear transformation.
 Let 
 
@@ -1452,7 +1522,7 @@ an arbitrary set of functions.
 
 ```{div}
 Let $I$ be an arbitrary index set indexing a set of proper 
-convex functions $f_i : \VV \to (-\infty, \infty]$ where $i \in I$.
+convex functions $f_i : \VV \to \RERL$ where $i \in I$.
 
 Then for any  $x \in \dom f$, 
 
@@ -1921,38 +1991,145 @@ $$
 
 ## Distance from a Convex Set
 
+Let $\VV$ be an $n$-dimensional real vector space
+equipped with an inner product
+$\langle \cdot, \cdot \rangle$
+and a norm $\| \cdot \|$ induced by the inner product.
 
 Let $C \subseteq \VV$ be a nonempty closed and convex set.
 The *orthogonal projection* mapping under a norm $\| \cdot \|$
 is defined by:
 
 $$
-P_C(x) \triangleq \underset{y \in C}{\argmin} \| y - x \| \Forall x \in \VV. 
+P_C(\bx) \triangleq \underset{\by \in C}{\argmin} 
+\| \by - \bx \| \Forall \bx \in \VV. 
 $$
 The mapping $P_C$ is well defined (exists and unique) when
 the underlying set $C$ is nonempty, closed and convex.
 
-
-The distance of a point $x \in \VV$ to $C$ is defined as
-
-$$
-d_C(x) = \| x - P_C(x) \|.
-$$
-
-
-Let $\phi_C : \VV \to \RR$ be defined as:
+The distance of a point $\bx \in \VV$ to $C$ is defined as
 
 $$
-\phi_C(x) \triangleq \frac{1}{2} d_C^2(x) 
-= \frac{1}{2}\| x - P_C(x) \|^2.
+d_C(\bx) = \| \bx - P_C(\bx) \|.
 $$
 
 
-The gradient of $\phi_C(x)$ is given by:
+Let $\phi_C : \VV \to \RR$ (squared distance function) be defined as:
 
 $$
-\nabla \phi_C(x) = x - P_C(x)  \Forall x \in \VV.
+\phi_C(\bx) \triangleq \frac{1}{2} d_C^2(\bx) 
+= \frac{1}{2}\| \bx - P_C(\bx) \|^2.
 $$
+
+
+```{prf:theorem} Gradient of the squared distance function
+:label: res-cvxf-grad-sq-dist-convex
+
+The gradient of $\phi_C$ at $\bx$ is given by:
+
+$$
+\nabla \phi_C(\bx) = x - P_C(\bx)  \Forall \bx \in \VV.
+$$
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Let $\bx \in \VV$.
+1. Let $\bz_x = \bx - P_C(\bx)$.
+1. Consider the function 
+
+   $$
+   g_x(\bd) = \phi_C(\bx + \bd) - \phi_C(\bx) - \langle \bd, \bz_x \rangle.
+   $$
+1. If 
+
+   $$
+   \lim_{\bd \to \bzero} \frac{g_x(\bd)}{ \| \bd \|} = 0
+   $$
+   then $\bz_x$ is indeed the gradient of $\phi_C$ at $\bx$.
+1. By definition of orthogonal projection, for any $\bd \in \VV$,
+
+   $$
+   \| \bx + \bd - P_C(\bx + \bd) \|^2 
+   \leq \| \bx + \bd - P_C(\bx) \|^2
+   $$
+   as $P_C(\bx + \bd)$ is the nearest point to $\bx + \bd$ 
+   in $C$. $P_C(\bx)$ is just another point in $C$.
+
+1. Thus, for any $\bd \in \VV$
+
+   $$
+   g_x(\bd) 
+   &= \phi_C(\bx + \bd) - \phi_C(\bx) - \langle \bd, \bz_x \rangle \\
+   &= \frac{1}{2} \| \bx + \bd - P_C(\bx + \bd) \|^2
+   - \frac{1}{2} \| \bx - P_C(\bx) \|^2
+   - \langle \bd, \bz_x \rangle \\
+   &\leq \frac{1}{2} \| \bx + \bd - P_C(\bx) \|^2
+   - \frac{1}{2} \| \bx - P_C(\bx) \|^2
+   - \langle \bd, \bz_x \rangle.
+   $$
+1. Recall that for a norm induced by the inner product
+
+   $$
+   \| \ba + \bb \|^2 = \langle \ba + \bb, \ba + \bb \rangle
+   = \| \ba \|^2 + 2 \langle \ba, \bb \rangle + \| \bb \|^2.
+   $$
+1. Thus, 
+
+   $$
+   \| \bx + \bd - P_C(\bx)\|^2 
+   &= \| \bd + (\bx - P_C(\bx)) \|^2\\
+   &= \| \bd \|^2 + \| \bx - P_C(\bx)\|^2 + 
+   2 \langle \bd, \bx - P_C(\bx) \rangle.
+   $$
+1. Putting it back and simplifying, we obtain
+
+   $$
+   g_x(\bd) \leq \frac{1}{2}\| \bd \|^2 + \langle \bd, \bx - P_C(\bx)\rangle
+   - \langle \bd, \bz_x \rangle
+   = \frac{1}{2}\| \bd \|^2.
+   $$
+1. Proceeding similarly, we also have
+
+   $$
+   g_x(-\bd) \leq \frac{1}{2}\| \bd \|^2.
+   $$
+1. Since $\phi_C$ is convex, hence $g_x$ is also convex.
+1. Thus,
+
+   $$
+   0 = g_x(\bzero) =  g_x \left (\frac{1}{2} \bd + \frac{1}{2} (-\bd)  \right )
+   \leq \frac{1}{2} g_x(\bd) + \frac{1}{2} g_x(-\bd).
+   $$
+1. Thus,
+
+   $$
+   g_x(\bd) \geq - g_x(-\bd) \geq - \frac{1}{2}\| \bd \|^2.
+   $$
+1. Combining, we have
+
+   $$
+   - \frac{1}{2}\| \bd \|^2 \leq g_x(\bd) \leq \frac{1}{2}\| \bd \|^2.
+   $$
+1. Or, in terms of absolute values.
+
+   $$
+   |g_x(\bd)| \leq \frac{1}{2}\| \bd \|^2.
+   $$
+1. Then, 
+
+   $$
+   \frac{|g_x(\bd)|}{\| \bd \|} \leq \frac{1}{2}\| \bd \|.
+   $$
+1. Thus, 
+
+   $$
+   \lim_{\bd \to \bzero} \frac{g_x(\bd)}{ \| \bd \|} = 0
+   $$
+1. Thus, $\bz_x = \bx - P_C(\bx)$ is indeed the gradient
+   of $\Phi_C$ at $\bx$.
+```
 
 ```{div}
 We note that $\phi_C = g \circ d_C$ where 
@@ -1997,7 +2174,7 @@ Let $\VV = \RR^{m \times n}$. Let the standard
 inner product for $x, y, \in \VV$ be 
 $\langle x, y \rangle = \Trace(x^T y)$. 
 
-Let $f : \VV \to (-\infty, \infty]$ be a proper function.
+Let $f : \VV \to \RERL$ be a proper function.
 Let $x \in \interior \dom f$.
 
 The gradient at $x$, if it exists, is given by:
