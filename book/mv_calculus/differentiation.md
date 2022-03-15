@@ -15,7 +15,7 @@ that satisfies
 
 ```{math}
 :label: eq-mvc-f-m-n-jacobian-limit
-\underset{\bz \in \dom f, \bz \neq \bx, \bz \to \bz}{\lim}
+\underset{\bz \in \dom f, \bz \neq \bx, \bz \to \bx}{\lim}
 \frac{\| f(\bz) - f(\bx) - Df(\bx) (\bz - \bx) \|_2}{\| \bz - \bx \|_2} = 0.
 ``` 
 Such a matrix $Df(\bx)$ is called the *derivative* (or *Jacobian*) of $f$
