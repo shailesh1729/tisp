@@ -1248,6 +1248,8 @@ We shall consider the case where $\bd \neq \bzero$.
 ```
 
 ```{prf:remark} Gradient in $\RR^n$
+:label: res-cvxf-gradient-r-n
+
 It is imperative to compare the definition of gradients in this section
 with {prf:ref}`def-mvc-point-differentiability`
 (differentiability of functions from $\RR^n$ to $\RR^m$)
@@ -1260,6 +1262,7 @@ examine the gradient in the Euclidean space $\RR^n$.
 The standard basis is given by $\BBB = \{\be_1, \dots, \be_n \}$
 which are the coordinate unit vectors.
 The standard inner product is given by the dot product
+
 $$
 \langle \bx, \by \rangle = \by^T \bx  = \bx^T \by.
 $$
@@ -1424,6 +1427,73 @@ scaled version of the standard gradient
 where the scaling factor is $\bH^{-1}$.
 ```
 
+```{prf:remark} Gradient in $\RR^{m \times n}$
+:label: res-cvxf-gradient-r-m-n
+
+We next look at the vector space of real matrices.
+The standard basis is a family of unit matrices
+$\{ \bE_{i j} \}_{1 \leq i \leq m, 1 \leq j \leq n}$
+where $\bE_{i j}$ has the $(i,j)$-th entry as 1 and other
+entries as 0.
+
+The standard inner product is given by
+
+$$
+\langle \bX , \bY \rangle =  \Trace(\bY^T \bX )
+\Forall \bX, \bY \in \RR^{m \times n}.
+$$
+
+Let $f : \RR^{m \times n} \to \RR$ be a proper function.
+Let $S = \dom f$.
+Let $\bX \in \interior S$.
+Assume that $f$ is differentiable at $\bX$.
+
+The gradient is given by
+
+$$
+\partial f(\bX) = \left ( 
+  \frac{\partial f(\bX)}{\partial x_{i j}} \right )_{i j }.
+$$
+
+The directional derivative for some direction $\bD \in \RR^{m \times n}$
+is given by
+
+$$
+f(\bX ; \bD) = \langle \bD, \partial f(\bX) \rangle
+= \Trace(\partial f(\bX)^T \bD).
+$$
+
+
+Consider the inner product given by
+
+$$
+\langle \bX, \bY \rangle_H = \Trace(\bX^T \bH \bY)
+$$
+where $\bH \in \RR^{m \times m}$ is a symmetric
+positive definite matrix.
+
+Then,
+
+$$
+(\nabla_H f(\bX))_{i j} &= \Trace(\nabla_H f(\bX)^T \bE_{i j}) 
+& \text{coordinate in standard basis}\\
+&= \Trace(\nabla_H f(\bX)^T (\bH \bH^{-1}) \bE_{i j}) & \text{$\bH$ is invertible}\\
+&= \Trace(\nabla_H f(\bX)^T \bH (\bH^{-1}\bE_{i j}) ) & \\
+&= \langle \bH^{-1}\bE_{i j}, \nabla_H f(\bX) \rangle_H  
+& \text{by definition of this inner product} \\
+&= f'(\bX; \bH^{-1}\bE_{i j})
+& \text{directional derivative w.r.t. this inner product} \\
+&= \Trace(\nabla f(\bX)^T \bH^{-1}\bE_{i j}) 
+& \text{directional derivative w.r.t. standard inner product}\\
+&= (\bH^{-1} \nabla f(\bX))^T \bE_{i j}
+& \text{$\bH$ is symmetric}.
+$$
+Thus,
+
+$$
+\nabla_H f(\bX) = \bH^{-1} \nabla f(\bX).
+$$
+```
 
 ```{div}
 Let $f : \VV \to \RERL$ be a proper function.
