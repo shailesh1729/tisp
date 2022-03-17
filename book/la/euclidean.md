@@ -181,6 +181,7 @@ Before that, we state the Hölder's inequality for the Euclidean space.
 ```
 
 ````{prf:theorem} Hölder's inequality
+:label: res-la-euclidean-holder-inequality
 
 Let $\bu, \bv \in \RR^n$. 
 Let $p \in [1, \infty]$ and let $q$ be its 
@@ -729,7 +730,7 @@ are indeed equivalent.
 Distance between two vectors is defined as:
 
 $$
-d(\bx,\by) = \| \bx  - \by \| = \sqrt{\sum_{i=1}^{n} (\bx_i - \by_i)^2}.
+d(\bx,\by) = \| \bx  - \by \| = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}.
 $$
 
 This distance function is known as *Euclidean metric*. 
