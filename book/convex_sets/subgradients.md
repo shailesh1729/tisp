@@ -500,6 +500,8 @@ We have $\dom f = \VV$.
 
 
 ```{prf:theorem} Subgradients over a compact set are nonempty and bounded
+:label: res-cvxf-subg-compact-nonempty-bounded
+
 Let $f: \VV \to \RERL$ be a proper convex function
 with $S = \dom f$.
 Let $A \subseteq \interior S$ be a nonempty and compact
@@ -1495,89 +1497,225 @@ $$
 $$
 ```
 
-```{div}
-Let $f : \VV \to \RERL$ be a proper function.
-Let $\bx \in \interior \dom f$. Assume $f$ to be 
-differentiable at $\bx$. 
+### Subdifferential and gradient
 
-* Directional derivative in terms of gradient: 
+```{prf:theorem} Subdifferential at points of differentiability
+:label: res-cvxf-subdiff-grad
 
-  $$
-  f'(\bx; \bd) = \langle \nabla f(\bx) , \bd \rangle \Forall \bd \in \VV.
-  $$
+Let $f : \VV \to \RERL$ be a proper convex function with $S = \dom f$.
+Let $\bx \in \interior S$. 
 
-* The i-th component of the gradient:
+Then $f$ is differentiable at $\bx$ if and only if
 
-  $$
-  (\nabla f(\bx))_i = \langle \nabla f(\bx), \be_i \rangle = f'(\bx; \be_i).
-  $$
+$$
+\partial f(\bx) = \{ \nabla f (\bx) \}.
+$$
 
-  $$
-  \frac{\partial f}{\partial \bx_i} (x) = (\nabla f(\bx))_i = f'(\bx; \be_i).
-  $$
-
-* The gradient in terms of partial derivatives:
-
-  $$
-  \nabla f(\bx) = D_f(\bx) \triangleq
-    \begin{pmatrix}
-    \frac{\partial f}{\partial x_1} (\bx)\\
-    \frac{\partial f}{\partial x_2} (\bx)\\
-    \vdots \\
-    \frac{\partial f}{\partial x_n} (\bx)
-    \end{pmatrix}
-  $$
-  This holds if $\VV$ is endowed with the standard dot product 
-  as the inner product.
-* Directional derivative in terms of partial derivatives:
-
-  $$
-  f'(\bx; \bd) = D_f(\bx)^T \bd = \sum_{i=1}^n \frac{\partial f}{\partial x_i} (\bx) d_i.
-  $$
-
-* For a general inner product $\langle \bx, \by \rangle_{\bH} = \bx^T \bH \by$
-  where $\bH$ is is a positive definite matrix:
-
-  $$
-  \begin{aligned}
-  (\nabla f(\bx))_i
-  &= \nabla f(\bx)^T \be_i \\ 
-  &= \langle \nabla f(\bx), \bH^{-1} \be_i \rangle_{\bH}\\ 
-  &= f'(\bx; \bH^{-1} \be_i)\\
-  &= D_f(\bx)^T \bH^{-1} \be_i.
-  \end{aligned}
-  $$
-
-* The gradient in terms of partial derivatives for a 
-  general inner product:
-
-  $$
-  \nabla f(\bx) = \bH^{-1} D_f(\bx).
-  $$
+In other words, if $f$ is differentiable at $\bx$ then
+its subdifferential is a singleton set consisting of the
+gradient and if the subdifferential at $\bx$ is a singleton, then
+$f$ is differentiable at $\bx$.
 ```
 
+```{prf:proof}
 
-```{div}
-Let $f : \VV \to \RERL$ be a proper convex function.
-Let $\bx \in \interior \dom f$. 
-Assume $f$ to be differentiable at $\bx$. 
+Assume that $f$ is differentiable at $\bx$.
 
-* The subdifferential set at $\bx$ is a singleton.
+1. Let $\bd \in \VV$ be some direction.
+1. By {prf:ref}`res-cvxf-grad-dir-der`, 
+   
+   $$
+   f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle.
+   $$
+1. By {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`,
+   $f$ is subdifferentiable at $\bx$ since $f$ is convex
+   and $\bx \in \interior S$.
+1. Let $\bg \in \partial f(\bx)$.
+1. By the max formula ({prf:ref}`res-cvxf-subg-dir-der-max-formula`):
 
-  $$
-  \partial f(\bx) = \{\nabla f(\bx) \}.
-  $$
+   $$
+   f'(\bx;\bd) \geq \langle \bd, \bg \rangle
+   $$
+   as the directional derivative is the supremum of the
+   inner product of the subgradients with the direction.
+1. Thus, 
 
+   $$
+   \langle \bd, \nabla f(\bx) \rangle \geq \langle \bd, \bg \rangle.
+   $$
+1. In turn,
 
-Let $f : \VV \to \RERL$ be a proper convex function.
-Let $x \in \interior \dom f$. 
+   $$
+   \langle \bd, \bg - \nabla f(\bx) \rangle \leq 0.
+   $$
+   This holds for every $\bd \in \VV$.
+1. By the definition of {prf:ref}`dual norm  <res-la-rip-dual-norm>`
 
-* If $f$ has a unique subdifferential at $\bx$, then it is 
-  differentiable at $\bx$ with:
+   $$
+   \| \bg - \nabla f(\bx) \|_* = \underset{\| \bd \| \leq 1}{\sup} 
+    \{ \langle \bd, \bg - \nabla f(\bx) \rangle \}.
+   $$
+1. Using the previous inequality
 
-  $$
-  \partial f(\bx) = \{\nabla f(\bx) \}.
-  $$
+   $$
+   \| \bg - \nabla f(\bx) \|_* \leq 0.
+   $$
+1. Since, dual norm is a norm, hence it cannot be negative. Thus,
+
+   $$
+   \| \bg - \nabla f(\bx) \|_* = 0
+   $$
+1. Moreover, due to positive definiteness of a norm
+
+   $$
+   \bg - \nabla f(\bx) = \bzero
+   $$
+   must hold true.
+1. Thus, $\bg = \nabla f(\bx)$.
+1. In other words, if $\bg$ is a subgradient to $f$ at $\bx$,
+   then it must equal $\nabla f(\bx)$.
+1. Thus, the only subgradient for $f$ at $\bx$ is $\nabla f(\bx)$.
+1. Thus,
+
+   $$
+   \partial f(\bx) = \{ \nabla f(\bx) \}.
+   $$
+
+For the converse, assume that $f$ is subdifferentiable at $\bx$
+with $\partial f(\bx) = \{ \bg \}$.
+
+1. By the subgradient inequality
+
+   $$
+   f(\bx + \bu) \geq f(\bx) + \langle \bu, \bg \rangle \Forall \bu \in \VV.
+   $$
+1. Thus,
+
+   $$
+   f(\bx + \bu) - f(\bx) - \langle \bu, \bg \rangle \geq 0 \Forall \bu \in \VV.
+   $$   
+1. Define a function $h : \VV \to \RERL$ as 
+
+   $$
+   h(\bu) \triangleq f(\bx + \bu) - f(\bx) - \langle \bu, \bg \rangle.
+   $$
+1. We list some properties of $h$.
+   1. By definition $h(\bu) \geq 0$ for every $\bu \in \VV$.
+   1. $h$ is a convex function since $f(\bx + \bu)$ is convex, 
+      $\langle \bu, \bg \rangle$ is linear and
+      $f(\bx)$ is a constant (w.r.t. the variable $\bu$).
+   1. $\dom h = \dom f - \bx = S - \bx$.
+   1. Thus, since $\bx \in \interior S$,
+      hence $\bzero = \bx - \bx \in \interior \dom h$.
+   1. $h(\bzero) = f(\bx) - f(\bx) - \langle \bzero, \bg \rangle = 0$.
+1. If we are able to show that
+
+   $$
+   \lim_{\bu \to \bzero}\frac{h(\bu)}{\| \bu \|} = 0
+   $$
+   then, by the definition of gradient
+   ({prf:ref}`def-cvxf-differentiability-proper`),
+
+   $$
+   \bg = \nabla f(\bx).
+   $$
+1. We can easily show that $\partial h(\bzero) = \{ \bzero \}$.
+   1. If $\tilde{\bg}$ is a subgradient of $h$ at $\bzero$, 
+      then by subgradient inequality
+
+      $$
+      h(\bu) \geq h(\bzero) + \langle \bu, \tilde{\bg} \rangle
+      = \langle \bu, \tilde{\bg} \rangle
+      \Forall \bu \in \VV.
+      $$
+   1. Then, $\tilde{\bg} = \bzero$ satisfies this inequality
+      since $h(\bu) \geq 0$ by definition.
+   1. For contradiction, assume a nonzero $\tilde{\bg}$ can satisfy this inequality.
+   1. Then,
+
+      $$
+       & h(\bu) \geq  \langle \bu, \tilde{\bg} \rangle \\
+       & \iff f(\bx + \bu) - f(\bx) - \langle \bu, \bg \rangle \geq \langle \bu, \tilde{\bg} \rangle \\
+       & \iff f(\bx + \bu) \geq f(\bx) + \langle \bu, \tilde{\bg} + \bg \rangle \\
+       & \iff \tilde{\bg} + \bg \in \partial f(\bx).
+      $$
+   1. This contradicts the hypothesis that the subgradient of $f$ at $\bx$ is $\{ \bg \}$.
+   1. Thus, $\partial h(\bzero) = \{ \bzero \}$.
+1. Then, max formula ({prf:ref}`res-cvxf-subg-dir-der-max-formula`):
+
+   $$
+   h'(\bzero; \bd) = \sigma_{\partial h (\bzero)} (\bd)
+   = \langle \bd, \bzero \rangle = 0.
+   $$
+1. Thus, from the definition of
+   {prf:ref}`directional derivatives <def-cvxf-directional-derivative>`
+
+   $$
+   0 = h'(\bzero; \bd) 
+   = \lim_{\alpha \to 0^+} \frac{h(\alpha \bd) - h(\bzero)}{\alpha}
+   = \lim_{\alpha \to 0^+} \frac{h(\alpha \bd)}{\alpha}.
+   $$
+1. Let us now introduce an orthonormal basis for $\VV$ as
+   $\{\be_1, \dots, \be_n \}$.
+1. Assume that $\VV$ has been equipped with various
+   $\ell_p$ norms as described in {prf:ref}`rem-cvx-nd-space-norms`.
+1. Since $\bzero \in \interior \dom h$, there exists
+   $r \in (0, 1)$ such that
+
+   $$
+   B_1[\bzero, r] \subseteq \dom h.
+   $$
+1. It is a cross polytope of radius $r$ with $2n$ vertices given by
+   $\{\pm r \be_i \}_{i=1}^n$.
+
+   $$
+   B_1[\bzero, r] = \convex \{\pm r \be_i \}_{i=1}^n.
+   $$
+1. Let us denote these $2n$ vectors as 
+   $\bw_1, \dots, \bw_{2n}$.
+1. By {prf:ref}`rem-cvx-nd-space-norms`
+
+   $$
+   B[\bzero, s] = B_2[\bzero, s] \subseteq B_1[\bzero, r]
+   $$
+   where $s = \frac{r}{\sqrt{n}}$.
+1. Let $\bu \in B[\bzero, s^2]$ be a nonzero vector.
+1. Since $r < 1$, hence $s < 1$, hence $s^2 < s$.
+1. Let $\bv = s \frac{\bu}{\| \bu \|}$.
+1. Then, $\bv \in B[\bzero, s] \subseteq B_1[\bzero, r]$.
+1. Thus, $\bv \in \convex \{\bw_i \}_{i=1}^n$. 
+1. Thus, there exists $\bt \in \Delta_{2 n}$ such that
+
+   $$
+   s \frac{\bu}{\| \bu \|} = \bv  = \sum_{i=1}^{2n} t_i \bw_i.
+   $$
+1. Then,
+
+   $$
+   \frac{h(\bu)}{\| \bu \|}
+   &= \frac{h\left ( \frac{\| \bu \|}{s}  s \frac{\bu}{\| \bu \|} \right ) }{\| \bu \|} & \\
+   &= \frac{h \left ( \sum_{i=1}^{2n} t_i \frac{\| \bu \|}{s} \bw_i  \right ) }{\| \bu \|} &  \text{convex combination} \\
+   &\leq \sum_{i=1}^{2n} t_i \frac{h \left ( \| \bu \| \frac{\bw_i}{s}   \right ) }{\| \bu \|} & h \text{ is convex and } \bt \in \Delta_{2 n}\\
+   &\leq \underset{i=1,\dots, 2n}{\max} \left \{
+    \frac{h \left ( \| \bu \| \frac{\bw_i}{s}   \right ) }{\| \bu \|}
+  \right \} & \text{since } \sum t_i = 1.
+   $$
+   Note that $\| \bu \| \frac{\bw_i}{s} \in B[\bzero, s] \subseteq B_1[\bzero, r] \subseteq \dom h$.
+1. Now,
+
+   $$
+   \lim_{\bu \to \bzero} \frac{h \left ( \| \bu \| \frac{\bw_i}{s}   \right ) }{\| \bu \|}
+   = \lim_{ \| \bu \| \to 0} \frac{h \left ( \| \bu \| \frac{\bw_i}{s}   \right ) }{\| \bu \|}
+   =  \lim_{ \alpha \to 0^+} \frac{h \left ( \alpha \frac{\bw_i}{s}   \right ) }{\alpha}
+   = 0.  
+   $$
+1. Thus, 
+   
+   $$
+   \lim_{\bu \to \bzero} \frac{h(\bu)}{\| \bu \|} = 0.
+   $$
+1. Thus, $\bg = \nabla f(\bx)$ as desired.
+
 ```
 
 
