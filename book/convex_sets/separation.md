@@ -540,6 +540,52 @@ $\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} > 0$.
 
 ## Closed Convex Sets
 
+```{prf:theorem} Strict separation theorem
+:label: res-cvxf-cl-convex-set-strict-separation
+
+Let $\VV$ be a real $n$-dimensional inner product space.
+Let $C \subseteq \VV$ be a nonempty closed convex set.
+Let $\by \notin C$. Then, there exists $\bp \in \VV^*$ 
+and $\alpha \in \RR$ such that 
+
+$$
+\langle \by , \bp \rangle > \alpha
+\text{ and }
+\langle \bx, \bp \rangle \leq \alpha \Forall \bx \in C.
+$$
+In other words, there exists a separating hyperplane
+such that $C$ is contained in one of its (closed) halfspaces
+and $\by$ is not in that halfspace (i.e., it is in the opposite open halfspace). 
+```
+
+```{prf:proof}
+This is an application of strong separation.
+
+1. Define a set $D = \{ \by \}$.
+1. Since $C$ is closed and $\by \notin C$, hence
+   $\by$ is not a closure point of $C$.
+1. Thus, there exists $r > 0$ such that 
+   $B(\by, r) \cap C = \EmptySet$.
+1. Thus, $d(C, D) \geq r$.
+1. Then, by {prf:ref}`res-cvx-strong-sep-charac`, 
+   $C$ and $D$ are strongly separated.
+1. Let $H$ be a hyperplane which strongly separates them.
+1. Then one of the closed halfspaces of $H$ contains $C$ 
+   but not $\by$.
+1. Let $H$ be described by 
+
+   $$
+   H = \{ \bx \in \VV \ST \langle \bx, \bp \rangle = \alpha \}.
+   $$
+1. We can negate $\bp, \alpha$ if necessary so that
+
+   $$
+   C \subseteq H_- = \{ \bx \in \VV \ST \langle \bx, \bp \rangle \leq \alpha \}.
+   $$
+1. Accordingly, $\langle \by, \bp \rangle > \alpha$.
+```
+
+
 ```{prf:theorem} Closed Convex = Intersection of Halfspaces
 :label: res-cvx-closed-convex-halfspace-intersection
 
@@ -627,6 +673,10 @@ Consider the case where $\interior C = \EmptySet$.
 1. Then, due to {prf:ref}`res-cvx-convex-set-empty-interior`,
    $\dim \affine C < n$.
 1. Thus, there exists a hyperplane $H$ such that $\affine C \subseteq H$.
+1. Since $\VV$ is finite dimensional, hence $H$ is closed
+   ({prf:ref}`res-la-affine-closed`).
+1. Thus, $\closure C \subseteq H$.
+1. Thus, $\bx \in H$. 
 1. This $H$ trivially separates $\{ \bx \}$ and $C$ as both are 
    contained in $H$.
 
@@ -636,11 +686,11 @@ Now, assume that $\interior C \neq \EmptySet$.
 1. $\relint C = \interior C$.
 1. Since $\bx \in \boundary C$, hence the sets
    $\{ \bx \}$ and $\interior C$ are disjoint.
-1. $\relint \{ \bx \} = \{ \bx \}$.
+1. $\relint \{ \bx \} = \{ \bx \}$ ({prf:ref}`res-cvx-relint-singleton`).
 1. We have $\relint \{ \bx \} \cap \relint C = \EmptySet$.
 1. By {prf:ref}`res-cvx-sep-plan-1`, there exists
    a hyperplane $H$ that separates $\{\bx \}$ and $C$ properly.
-1. Consequently $H$ lies entirely in one of the closed halfspaces
+1. Consequently $C$ lies entirely in one of the closed halfspaces
    of $H$.
 ```
 
