@@ -1475,6 +1475,90 @@ Now, assume that $\sigma_A = \sigma_B$.
 1. Thus, $A = B$ must hold.
 ```
 
+The next result shows that support function
+for a set and its closure or its convex hull
+are identical. This is why, we required
+$A,B$ to be closed and convex in the previous result.
+
+
+```{prf:theorem} Support functions and closure or convex hull of underlying set
+:label: res-cvxf-supp-closure-hull
+
+Let $A \subseteq \VV$. Then,
+
+1. $\sigma_A = \sigma_{\closure A}$.
+1. $\sigma_A = \sigma_{\convex A}$.
+```
+
+```{prf:proof}
+We first consider the case of closure.
+
+1. $A \subseteq \closure A$.
+1. Thus, $\sigma_A (\by) \leq \sigma_{\closure A}(\by) \Forall \by \in \VV^*$.
+1. Let us now show the reverse inequality.
+1. Let $\by \in \VV^*$.
+1. Then, there exists a sequence $\{ \bx_k \}$ of $\closure A$ such that
+
+   $$
+   \lim_{k \to \infty} \langle \bx_k, \by \rangle = \sigma_{\closure A} (\by).
+   $$
+1. Now for every $\bx_k \in \closure A$, there exists a 
+   point $\bz_k \in A$ such that $d(\bx_k, \bz_k) \leq \frac{1}{k}$.
+1. Thus, $\lim_{k \to \infty} (\bz_k - \bx_k) = \bzero$.
+1. Since $\bz_k \in A$, hence
+
+   $$
+   \sigma_A(\by) \geq \langle \bz_k, \by \rangle 
+   = \langle \bx_k, \by \rangle + \langle \bz_k - \bx_k, \by \rangle.
+   $$
+1. Taking the limit $k \to \infty$ on the R.H.S., we obtain
+
+   $$
+   \sigma_A(\by) \geq \sigma_{\closure A}(\by) + 0 = \sigma_{\closure A}(\by).
+   $$
+1. Thus, $\sigma_A(\by) = \sigma_{\closure A}(\by)$ must hold true.
+1. Since this is true for every $\by \in \VV^*$, hence
+   $\sigma_A = \sigma_{\closure A}$.
+
+
+Now, consider the case of convex hull.
+
+1. By definition, $A \subseteq \convex A$.
+1. Thus, $\sigma_A (\by) \leq \sigma_{\convex A}(\by) \Forall \by \in \VV^*$.
+1. Let $\by \in \VV^*$.
+1. Then, there exists a sequence $\{ \bx_k \}$ of $\convex A$ such that
+
+   $$
+   \lim_{k \to \infty} \langle \bx_k, \by \rangle = \sigma_{\convex A} (\by).
+   $$
+1. Since $\bx_k \in \convex A$, hence, there exists
+   $\bz_1^k, \dots, \bz_{n_k}^k \in A$ and $\bt^k \in \Delta_{n_k}$ such that
+
+   $$
+   \bx_k = \sum_{i=1}^{n_k} t_i^k \bz_i^k.
+   $$
+1. By linearity of the inner product
+
+   $$
+   \langle \bx_k, \by \rangle 
+   &= \left \langle \sum_{i=1}^{n_k} t_i^k \bz_i^k, \by \right \rangle\\
+   &= \sum_{i=1}^{n_k}  t_i^k \langle \bz_i^k, \by \rangle\\
+   &\leq \sum_{i=1}^{n_k}  t_i^k \sigma_A(\by)\\
+   &= \sigma_A(\by).
+   $$
+1. Taking the limit $k \to \infty$ on the L.H.S., we obtain
+
+   $$
+   \sigma_{\convex A} (\by) = \lim_{k \to \infty} \langle \bx_k, \by \rangle
+   \leq \sigma_A(\by).
+   $$
+1. Thus, $\sigma_A(\by) = \sigma_{\convex A}(\by)$ must hold true.
+1. Since this is true for every $\by \in \VV^*$, hence
+   $\sigma_A = \sigma_{\convex A}$.
+```
+
+
+
 ## Gauge Functions
 
 
