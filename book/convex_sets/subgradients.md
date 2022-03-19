@@ -1721,6 +1721,120 @@ with $\partial f(\bx) = \{ \bg \}$.
 
 ## Subdifferential Calculus
 
+```{prf:theorem} Subdifferential subadditivity with sum of functions
+:label: res-cvxf-subdiff-function-sum
+
+Let $f_1, f_2 : \VV \to \RERL$ be proper functions
+with $S_1 = \dom f_1$ and $S_2 = \dom f_2$.
+For any $\bx \in S_1 \cap S_2$
+
+$$
+\partial f_1(\bx) + \partial f_2(\bx) \subseteq \partial (f_1 + f_2)(\bx).
+$$
+```
+
+```{prf:proof}
+Let $f = f_1 + f_2$.
+We note that $\dom f = \dom (f_1 + f_2) = \dom f_1 \cap \dom f_2 = S_1 \cap S_2$.
+
+1. Let $\bx \in S_1 \cap S_2$.
+1. Let $\bg \in \partial f_1(\bx) + \partial f_2(\bx)$.
+1. Then, there exist $\bg_1 \in \partial f_1(\bx)$ and $\bg_2 \in \partial f_2(\bx)$ 
+   such that $\bg = \bg_1 + \bg_2$.
+1. Then, by subgradient inequality, for any $\by \in S_1 \cap S_2$
+
+   $$
+   &f_1(\by) \geq f_1(\bx) + \langle \by - \bx , \bg_1 \rangle, \\
+   &f_2(\by) \geq f_2(\bx) + \langle \by - \bx , \bg_2 \rangle.
+   $$
+1. Summing the two inequalities, we get 
+
+   $$
+   f_1(\by) + f_2(\by) \geq f_1(\bx) + f_2(\bx) + \langle \by - \bx , \bg_1 + \bg_2 \rangle.
+   $$
+1. Rewriting, for every $\by \in \dom f$
+
+   $$
+   (f_1 + f_2)(\by) \geq (f_1 + f_2)(\bx) + \langle \by - \bx , \bg \rangle.
+   $$
+1. Thus, $\bg = \bg_1 + \bg_2 \in \partial (f_1 + f_2)(\bx)$ = \partial f (\bx).
+1. Thus, $\partial f_1(\bx) + \partial f_2(\bx) \subseteq \partial f(\bx)$.
+```
+
+```{prf:theorem} Subdifferential additivity with sum of convex functions
+:label: res-cvxf-subdiff-function-sum-convex
+
+Let $f_1, f_2 : \VV \to \RERL$ be proper convex functions
+with $S_1 = \dom f_1$ and $S_2 = \dom f_2$.
+For any $\bx \in \interior S_1 \cap \interior S_2$
+
+$$
+\partial (f_1 + f_2) (\bx) = \partial f_1(\bx) + \partial f_2(\bx).
+$$
+```
+
+```{prf:proof}
+With $f = f_1 + f_2$,
+by {prf:ref}`res-ms-int-intersect-int`, 
+
+$$
+\interior \dom f = \interior (S_1 \cap S_2) = \interior S_1 \cap \interior S_2.
+$$
+
+1. Let $\bx \in \interior S_1 \cap \interior S_2$. 
+1. Thus, $\bx \in \interior \dom f$.
+1. By {prf:ref}`max formula <res-cvxf-subg-dir-der-max-formula>`,
+   for any $\bd \in \VV$,
+
+   $$
+   f'(\bx;\bd) = \sup \{ \langle \bd, \bg \rangle \ST \bg \in \partial f(\bx) \}
+   = \sigma_{\partial f(\bx)}(\bd).
+   $$
+1. Since directional derivative is additive, hence
+
+   $$
+   f'(\bx;\bd) = f'_1(\bx;\bd) + f'_2(\bx;\bd).
+   $$
+1. Expanding on this
+
+   $$
+   \sigma_{\partial f(\bx)} (\bd) &= f'(\bx;\bd)\\
+   &= f'_1(\bx;\bd) + f'_2(\bx;\bd)\\
+   &= \sup \{ \langle \bd, \bg_1 \rangle \ST \bg_1 \in \partial f_1(\bx) \}
+   + \sup \{ \langle \bd, \bg_1 \rangle \ST \bg_2 \in \partial f_2(\bx) \}\\
+   &= \sup \{ \langle \bd, \bg_1 + \bg_2 \rangle \ST \bg_1 \in \partial f_1(\bx) 
+      , \bg_2 \in \partial f_2(\bx) \}\\
+   &= \sup \{ \langle \bd, \bg \rangle \ST \bg \in \partial f_1(\bx) 
+      + \partial f_2(\bx) \}\\
+   &= \sigma_{\partial f_1(\bx) + \partial f_2(\bx)} (\bd).
+   $$
+1. In summary, for every $\bd \in \VV$, 
+
+   $$
+   \sigma_{\partial f(\bx)} (\bd) = 
+   \sigma_{\partial f_1(\bx) + \partial f_2(\bx)} (\bd).
+   $$
+
+1. By {prf:ref}`res-cvxf-subdifferential-closed-convex`,
+   $\partial f(\bx)$, $\partial f_1(\bx)$ and $\partial f_2(\bx)$
+   are closed and convex.
+1. By {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`,
+   $\partial f(\bx)$, $\partial f_1(\bx)$ and $\partial f_2(\bx)$
+   are nonempty and bounded.
+1. Since $\partial f_1(\bx)$ and $\partial f_2(\bx)$ are
+   closed and bounded, hence they are compact ($\VV$ is finite dimensional).
+1. Thus, $\partial f_1(\bx) + \partial f_2(\bx)$ is also
+   closed, bounded, convex and nonempty.
+1. Thus, both $\partial f(\bx)$ and $\partial f_1(\bx) + \partial f_2(\bx)$
+   are nonempty, convex and closed.
+1. Then, due to {prf:ref}`res-cvxf-support-func-equality-convex`,
+
+   $$
+   \partial f(\bx) = \partial f_1(\bx) + \partial f_2(\bx).
+   $$
+```
+
+
 ### Sums of Functions
 
 Let $f_1, f_2 : \VV \to \RERL$ be proper convex functions.
