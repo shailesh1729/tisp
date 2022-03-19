@@ -1395,6 +1395,14 @@ The *support function* $\sigma_C : \VV \to \RERL$ is defined as
 $$
 \sigma_C (\bx) =  \sup \{\langle \bx, \by \rangle \ST \by \in C \}.
 $$
+
+Since $\VV$ and $\VV^*$ are isomorphic, support function
+$\sigma_C : \VV^* \to \RERL$
+for a set $C \subseteq \VV^*$ is similarly defined as
+
+$$
+\sigma_C (\bx) =  \sup \{\langle \bx, \by \rangle \ST \by \in C \}.
+$$
 ```
 
 
@@ -1426,6 +1434,46 @@ By {prf:ref}`res-cvx-ptws-supremum`, $\sigma_C$ is convex.
 We note that the convexity of the support function $\sigma_C$
 has nothing to do with the convexity of the underlying set $C$.
 
+
+```{prf:theorem} Equality of underlying sets for support functions
+:label: res-cvxf-support-func-equality-convex
+
+Let $A, B \subseteq \VV$ be nonempty, closed and convex sets.
+Then, $A = B$ if and only if $\sigma_A = \sigma_B$.
+```
+
+```{prf:proof}
+If $A = B$ then obviously $\sigma_A = \sigma_B$.
+Now, assume that $\sigma_A = \sigma_B$.
+
+1. For contradiction, assume that $A \neq B$.
+1. Without loss of generality, assume that there exists $\by \in A$
+   such that $\by \notin B$.
+1. Since $\by \notin B$ and $B$ is a closed convex set, hence,
+   by {prf:ref}`res-cvxf-cl-convex-set-strict-separation`,
+   there exists a hyperplane $H$ strongly separating $\by$ from
+   $B$.
+1. Thus, there exists $\bp \in \VV^*$ and $\alpha \in \RR$ such that
+
+   $$
+   \langle \bx , \bp \rangle \leq \alpha < \langle \by, \bp \rangle
+   \Forall \bx \in B.
+   $$
+1. Taking supremum over $B$ on the L.H.S., we obtain
+
+   $$
+   \sigma_B(\bp) \leq \alpha < \langle \by, \bp \rangle 
+   \leq \sigma_A(\bp).
+   $$
+1. Thus, there exists $\bp \in \VV^*$ such that
+
+   $$
+   \sigma_B(\bp) < \sigma_A(\bp).
+   $$
+1. This contradicts our hypothesis that $\sigma_A$ and $\sigma_B$ 
+   are identical.
+1. Thus, $A = B$ must hold.
+```
 
 ## Gauge Functions
 
