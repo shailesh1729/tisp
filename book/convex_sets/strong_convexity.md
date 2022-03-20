@@ -1,6 +1,4 @@
-# Chapter Summary
-
-## Strong Convexity
+# Strong Convexity
 
 ```{div}
 A function $f : \EE \to \RERL$ is called 

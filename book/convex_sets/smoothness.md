@@ -1,4 +1,4 @@
-# Chapter Summary
+# Smoothness
 
 ## L-Smooth Functions
 

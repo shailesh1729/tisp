@@ -3,7 +3,7 @@
 Primary references for this section are {cite}`beck2017first`.
 
 Throughout this section, we assume that $\VV, \WW$ are 
-real vector spaces. Wherever necessary, 
+finite dimensional real vector spaces. Wherever necessary, 
 they are equipped with a
 {prf:ref}`norm <def-la-norm>` $\| \cdot \|$
 or an {prf:ref}`real inner product <def-la-real-inner-product>`

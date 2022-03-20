@@ -1,7 +1,5 @@
-(sec:conjugate-functions:summary)=
-# Chapter Summary
-
-## Conjugate Function
+(sec:conjugate-functions)=
+# Conjugate Functions
 
 ```{div}
 Let $f : \EE \to \ERL$ be an extended real valued function. 
