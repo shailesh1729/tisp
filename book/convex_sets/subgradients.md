@@ -1983,25 +1983,85 @@ $$
 ```
 
 
+```{prf:theorem} Affine transformation rule of subdifferential calculus
+:label: res-cvxf-subdiff-strong-rule-affine
 
 
-
-
-Weak affine transformation rule. For any $x \in \dom h$: 
-
-$$
-\AAA^T (\partial f (\AAA(x) + b)) \subseteq \partial h(x).
-$$
-
-Strong affine transformation rule. 
-For any $x \in \interior \dom h$ such that $\AAA (x) + b \in \interior \dom f$:
+Let $f: \WW \to \RERL$ be a proper convex function.
+Let $\bAAA : \VV \to \WW$ be a linear transformation.
+Let $\bb \in \WW$.
+Define $h : \VV \to \RERL$ as 
 
 $$
-\AAA^T (\partial f (\AAA(x) + b)) = \partial h(x).
+h (\bx) = f (\bAAA(\bx) + \bb).
 $$
 
-If we know the subdifferential set of $f$, then we can compute
-the subdifferential set of $h$.
+Assume that $h$ is proper, i.e. $\dom h$ is not empty: 
+
+$$
+\dom h = \{ \bx \in \VV \ST \bAAA(\bx) + \bb \in \dom f\} \neq \EmptySet.
+$$
+
+Then, for any $\bx \in \interior \dom h$ such that
+$\bAAA(\bx) + \bb \in \interior \dom f$, we have:
+
+$$
+\bAAA^T (\partial f (\bAAA(\bx) + \bb)) = \partial h(\bx).
+$$
+```
+
+```{prf:proof}
+We note that $h$ is a proper convex function since it is a composition
+of an affine transformation with a proper convex function.
+
+
+1. Let $\bx \in \interior \dom h$ such that $\bx' = \bAAA(\bx) + \bb \in \interior \dom f$.
+1. Then, for any direction $\bd \in \VV$, by the 
+   {prf:ref}`max formula <res-cvxf-dir-der-subg-support>`, 
+
+   $$
+   h'(\bx; \bd) = \sigma_{\partial h(\bx)} (\bd).
+   $$
+1. By the definition of the directional derivative, we have
+
+   $$
+   h'(\bx; \bd) &= \lim_{\alpha \to 0^+} \frac{h(\bx + \alpha \bd ) - h(\bx)}{\alpha}\\
+   &= \lim_{\alpha \to 0^+} \frac{f(\bAAA(\bx) + \bb + \alpha \bAAA(\bd) ) 
+      - f(\bAAA(\bx) + \bb}{\alpha}\\
+   &= f'(\bAAA(\bx) + \bb; \bAAA(\bd)).
+   $$
+1. Thus,
+
+   $$
+   \sigma_{\partial h(\bx)} (\bd) = f'(\bAAA(\bx) + \bb; \bAAA(\bd)).
+   $$
+1. Using the max formula on the R.H.S., we get
+
+   $$
+   \sigma_{\partial h(\bx)} (\bd) &= f'(\bAAA(\bx) + \bb; \bAAA(\bd))\\
+   &= \sup_{\bg \in \partial f(\bAAA(\bx) + \bb)} \langle \bAAA(\bd), \bg \rangle \\
+   &= \sup_{\bg \in \partial f(\bAAA(\bx) + \bb)} \langle \bd, \bAAA^T (\bg) \rangle \\
+   &= \sup_{\bg' \in \bAAA^T(\partial f(\bAAA(\bx) + \bb))} \langle \bd, \bg' \rangle \\
+   &= \sigma_{\bAAA^T(\partial f(\bAAA(\bx) + \bb))}(\bd).
+   $$
+1. Since $\bx \in \interior \dom h$, hence
+   by {prf:ref}`res-cvxf-subdifferential-closed-convex` and
+   {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`
+   $\partial h(\bx)$ is nonempty, closed and convex.
+1. Since $\bAAA(\bx) + \bb \in \interior \dom f$, hence
+   by {prf:ref}`res-cvxf-subdifferential-closed-convex` and
+   {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`
+   $\partial f(\bAAA(\bx) + \bb)$ is nonempty, closed and convex.
+1. It follows that
+   $\bAAA^T(\partial f(\bAAA(\bx) + \bb))$ is nonempty, closed and convex
+   since $\bAAA^T$ is a linear operator and both $\VV$ and $\WW$ are 
+   finite dimensional.
+1. Then, due to {prf:ref}`res-cvxf-support-func-equality-convex`,
+
+   $$
+   \bAAA^T (\partial f (\bAAA(\bx) + \bb)) = \partial h(\bx).
+   $$
+```
 
 ### Composition
 
