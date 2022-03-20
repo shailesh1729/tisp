@@ -1904,19 +1904,88 @@ $$
 
 ### Affine Transformations
 
-Let $f: \VV \to \RERL$ be a proper convex function.
-Let $\AAA : \VV \to \VV$ be a linear transformation.
-Let 
+
+```{prf:theorem} Weak affine transformation rule of subdifferential calculus
+:label: res-cvxf-subdiff-weak-rule-affine
+
+
+Let $f: \WW \to \RERL$ be a proper function.
+Let $\bAAA : \VV \to \WW$ be a linear transformation.
+Let $\bb \in \WW$.
+Define $h : \VV \to \RERL$ as 
 
 $$
-h (x) = f (\AAA(x) + b)\; \text{ with } b \in \VV.
+h (\bx) = f (\bAAA(\bx) + \bb).
 $$
 
-Assume that $h$ is proper, i.e. $\dom h$ is not empty where: 
+Assume that $h$ is proper, i.e. $\dom h$ is not empty: 
 
 $$
-\dom h = \{ x \in \VV \ST \AAA(x) + b \in \dom f\}.
+\dom h = \{ \bx \in \VV \ST \bAAA(\bx) + \bb \in \dom f\} \neq \EmptySet.
 $$
+
+Then, for any $\bx \in \dom h$
+
+$$
+\bAAA^T (\partial f (\bAAA(\bx) + \bb)) \subseteq \partial h(\bx).
+$$
+```
+
+
+```{prf:proof}
+Note that $\bAAA^T : \WW^* \to \VV^*$ is a mapping from 
+$\WW^*$ to $\VV^*$ and satisfies the relationship:
+
+$$
+\langle \bAAA (\bx), \by \rangle = \langle \bx, \bAAA^T (\by) \rangle.
+$$
+
+1. Let $\bx \in \dom h$. 
+1. Then, $\bx' = \bAAA(\bx) + \bb \in \dom f$ such that $h(\bx) = f(\bx')$.
+1. Let $\bg \in \bAAA^T (\partial f (\bx'))$.
+1. Then, there is $\bd \in \WW^*$ such that $\bg = \bAAA^T (\bb)$ with
+   $\bd \in \partial f(\bx')$.
+1. Let $\by \in \dom h$.
+1. Then, $\by' = \bAAA(\by) + \bb \in \dom f$ such that $h(\by)= f(\by')$.
+1. Applying subgradient inequality for $f$ at $\bx'$ 
+   with the subgradient being $\bd$, we get
+
+   $$
+   f(\by') \geq
+   f(\bx') + \langle \by' - \bx', \bd \rangle.
+   $$
+1. We have $h(\by) = f(\by')$, $h(\bx) = f(\bx')$ and 
+   $\by' - \bx' = \bAAA(\by - \bx)$.
+1. Thus, the subgradient inequality simplifies to 
+
+   $$
+   h(\by) \geq h(\bx) + \langle \bAAA(\by - \bx), \bd \rangle.
+   $$
+1. We note that 
+
+   $$
+   \langle \bAAA(\by - \bx), \bd \rangle 
+   = \langle \by - \bx, \bAAA^T(\bd) \rangle.
+   $$
+1. Thus, for any $\by \in \dom h$, we have
+
+   $$
+   h(\by) \geq h(\bx) + \langle \by - \bx, \bAAA^T(\bd) \rangle.
+   $$
+1. Thus, $\bg = \bAAA^T(\bd) \in \partial h (\bx)$.
+
+Since this is valid for any $\bx \in \dom h$ and for every
+$\bg \in \bAAA^T (\partial f (\bAAA(\bx) + \bb))$, hence
+
+$$
+\bAAA^T (\partial f (\bAAA(\bx) + \bb)) \subseteq h(\bx).
+$$ 
+```
+
+
+
+
+
 
 Weak affine transformation rule. For any $x \in \dom h$: 
 
