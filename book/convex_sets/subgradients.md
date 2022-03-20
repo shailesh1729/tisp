@@ -1721,6 +1721,8 @@ with $\partial f(\bx) = \{ \bg \}$.
 
 ## Subdifferential Calculus
 
+### Function Sums
+
 ```{prf:theorem} Subdifferential subadditivity with sum of functions
 :label: res-cvxf-subdiff-function-sum
 
@@ -1760,6 +1762,22 @@ We note that $\dom f = \dom (f_1 + f_2) = \dom f_1 \cap \dom f_2 = S_1 \cap S_2$
 1. Thus, $\bg = \bg_1 + \bg_2 \in \partial (f_1 + f_2)(\bx)$ = \partial f (\bx).
 1. Thus, $\partial f_1(\bx) + \partial f_2(\bx) \subseteq \partial f(\bx)$.
 ```
+
+We can generalize this result for a finite sum of functions
+using simple mathematical induction.
+
+```{prf:corollary} Weak sum rule of subdifferential calculus
+:label: res-cvxf-subdiff-weak-sum-rule
+
+Let $f_1, \dots, f_m : \VV \to \RERL$ be proper functions.
+For any $\bx \in \cap_{i=1}^m \dom f_i$
+
+$$
+\sum_{i=1}^m \partial f_i(\bx) \subseteq 
+\partial \left ( \sum_{i=1}^m f_i \right )(\bx).
+$$
+```
+
 
 ```{prf:theorem} Subdifferential additivity with sum of convex functions
 :label: res-cvxf-subdiff-function-sum-convex
@@ -1835,43 +1853,54 @@ $$
 ```
 
 
-### Sums of Functions
+We can generalize this result for a finite sum of proper convex functions
+using simple mathematical induction.
 
-Let $f_1, f_2 : \VV \to \RERL$ be proper convex functions.
+```{prf:corollary} Sum rule of subdifferential calculus for proper convex functions at interior points
+:label: res-cvxf-subdiff-sum-rule-proper-convex
 
-Let $x \in \dom f_1 \cap \dom f_2$.
-Let $y \in \interior \dom f_1 \cap \interior \dom f_2$.
-
-* $\partial f_1(x) + \partial f_2(x) \subseteq \partial (f_1 + f_2)(x)$.
-* $\partial(f_1 + f_2)(y) = \partial f_1 (y) + \partial f_2(y)$.
-
-
-Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be proper convex functions.
-
-Let $x \in \bigcap_{i=1}^m \dom f_i$.
-Let $y \in \bigcap_{i=1}^m \interior \dom f_i$.
-
-* Weak sum rule 
-
-  $$
-  \sum_{i=1}^m \partial f_i (x) \subseteq \partial \left ( \sum_{i=1}^m f_i \right )(x).
-  $$
-
-* Strong sum rule
-
-  $$
-  \sum_{i=1}^m \partial f_i (y) = \partial \left ( \sum_{i=1}^m f_i \right )(y).
-  $$
-
-If $f_i$ are real-valued then, the strong sum rule holds for the 
-entire $\VV$.
-
-If $\bigcap_{i=1}^m \relint \dom f_i \neq \EmptySet$, then for any $x \in \VV$,
-the strong sum rule holds:
+Let $f_1, \dots, f_m : \VV \to \RERL$ be proper convex functions.
+For any $\bx \in \cap_{i=1}^m \interior \dom f_i$
 
 $$
-\sum_{i=1}^m \partial f_i (x) = \partial \left ( \sum_{i=1}^m f_i \right )(x).
+\sum_{i=1}^m \partial f_i(\bx) = 
+\partial \left ( \sum_{i=1}^m f_i \right )(\bx).
 $$
+```
+
+For real valued convex functions, the domain is the entire $\VV$
+and interior of $\VV$ is $\VV$ itself.
+
+```{prf:corollary} Sum rule of subdifferential calculus for real valued convex functions
+:label: res-cvxf-subdiff-sum-rule-rv-convex
+
+Let $f_1, \dots, f_m : \VV \to \RR$ be real valued convex functions.
+For any $\bx \in \VV$
+
+$$
+\sum_{i=1}^m \partial f_i(\bx) = 
+\partial \left ( \sum_{i=1}^m f_i \right )(\bx).
+$$
+```
+
+A more powerful result with less restrictive assumptions than
+{prf:ref}`res-cvxf-subdiff-sum-rule-proper-convex` is possible
+if the intersection of the relative interiors of the domains
+of the individual functions is nonempty.
+
+
+```{prf:theorem} Sum rule of subdifferential calculus for proper convex functions
+:label: res-cvxf-subdiff-sum-rule-relint
+
+Let $f_1, \dots, f_m : \VV \to \RERL$ be proper convex functions.
+Assume that $\bigcap_{i=1}^m \relint \dom f_i \neq \EmptySet$.
+Then for any $\bx \in \VV$
+
+$$
+\sum_{i=1}^m \partial f_i(\bx) = 
+\partial \left ( \sum_{i=1}^m f_i \right )(\bx).
+$$
+```
 
 ### Affine Transformations
 
