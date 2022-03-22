@@ -87,6 +87,19 @@ is known as an *optimization problem* in its *standard form*.
    that the $i$-th inequality constraint is *inactive*.
 1. We say that a constraint is *redundant* if removing it does not change
    the feasible set.
+1. If we choose an orthonormal basis $\BBB = \{\be_1, \dots, \be_n \}$ for $\VV$,
+   then $\VV$ is
+   isomorphic to $\RR^n$ under the bracket operator $[\cdot]_{\BBB}$.
+   The optimization variable $\bx$ has a representation
+   $(x_1, \dots, x_n)$ in $\RR^n$ given by
+
+   $$
+   \bx = \sum_{i=1}^n x_i \be_i.
+   $$
+1. Thus, determining $\bx$ is same as determining its components 
+   $(x_1, \dots, x_n)$.
+1. Since there are $n$ scalar components in the representation of $\bx$,
+   hence we can say that the optimization problem has $n$ (scalar) variables.
 ````
 
 In the sequel, we will be presenting a variety of optimization problems. 
@@ -399,6 +412,7 @@ $\bs = (s_1, \dots, s_m)$ is a vector that collects all the slack variables.
 
 ```{div}
 This form has $m$ inequality constraints and $m+p$ equality constraints.
+It has $n+m$ optimization variables $x_1, \dots, x_n$ and $s_1, \dots, s_m$.
 
 If $(\bx, \bs)$ is a feasible point for {eq}`eq-opt-prob-slack-vars`,
 then $\bx$ is a feasible point for {eq}`eq-opt-prob-standard-form`.
