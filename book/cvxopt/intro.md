@@ -1,6 +1,8 @@
 # Introduction
 
 
+Main references for this section are {cite}`boyd2004convex`.
+
 ## Optimization Problems
 
 ````{prf:definition} Optimization problem standard form
@@ -198,45 +200,14 @@ $$
 
 ## Equivalent Problems
 
+```{prf:definition} Equivalent optimization problems
+:label: def-opt-eq-problem
+We provide an informal definition of equivalent optimization problems.
+
 Two optimization problems are called *equivalent* if it is possible
 to find the solution of one problem from the other problem and 
 the vice versa.
-
-
-```{prf:example} Equivalent problems by scaling of objective or constraint functions
-:label: ex-opt-eq-problem-scaling
-
-Consider the problem given by
-
-$$
-& \text{minimize }   & & f'_0(\bx) = \alpha_0 f_0(\bx) \\
-& \text{subject to } & & f'_i(\bx) = \alpha_i f_i(\bx) \leq 0, & \quad i=1,\dots,m\\
-&                    & & h'_j(\bx) = \beta_j h_j(\bx) = 0,    & \quad j=1,\dots,p
-$$
-where $\alpha_i > 0$ for $i=0,\dots,m$ and $\beta_j \neq 0$ for $j=1,\dots,p$.
-
-This problem is obtained from the optimization problem in standard from in
-{eq}`eq-opt-prob-standard-form` by scaling the objective function and
-the inequality constraint functions by positive constants and the
-equality constraints by nonzero constants.
-
-1. $\alpha_0$ cannot be negative otherwise it will convert a minimization
-   problem to a maximization problem.
-1. $\alpha_0$ cannot be zero as that will convert the optimization problem
-   into a feasibility problem.
-1. $\alpha_i$ for $i=1,\dots,m$ cannot be negative as it will turn
-   the inequality sign from $f_i(\bx) \leq 0$ to $f'(\bx) \geq 0$.
-1. $\alpha_i$ for $i=1,\dots,m$ cannot be zero as it will remove the
-   corresponding constraint altogether.
-1. $\beta_j$ cannot be zero. A zero value will discard the corresponding
-   equality constraint. 
-1. The feasible sets for both problems are identical.
-1. The optimal sets for both problems are identical.
-1. The optimal values for both problems are not identical however
-   (unless $\alpha_0 = 1$). 
-   Since $f'_0$ is a scaled version of $f_0$, hence the
-   optimal value is also scaled accordingly.
-```
+````
 
 The primary reason for transforming an optimization problem to an
 equivalent one is that it may be easier to solve an equivalent problem.
@@ -256,12 +227,49 @@ cannot be greater than the complexity of solving the equivalent problem plus
 the complexity of transforming the solution of the equivalent problem to the solution 
 of the original problem.
 
-
 There are several ways to obtain an equivalent optimization problem
 from an existing optimization problem. 
 
-````{prf:example} Change of variables
-:label: ex-opt-eq-form-change-variables
+```{prf:proposition} Equivalent problems by scaling of objective or constraint functions
+:label: res-opt-eq-problem-scaling
+
+Consider the problem given by
+
+$$
+& \text{minimize }   & & f'_0(\bx) = \alpha_0 f_0(\bx) \\
+& \text{subject to } & & f'_i(\bx) = \alpha_i f_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h'_j(\bx) = \beta_j h_j(\bx) = 0,    & \quad j=1,\dots,p
+$$
+where $\alpha_i > 0$ for $i=0,\dots,m$ and $\beta_j \neq 0$ for $j=1,\dots,p$.
+
+This problem is obtained from the optimization problem in standard from in
+{eq}`eq-opt-prob-standard-form` by *scaling* the objective function and
+the inequality constraint functions by positive constants and the
+equality constraints by nonzero constants.
+```
+
+```{div}
+1. $\alpha_0$ cannot be negative otherwise it will convert a minimization
+   problem to a maximization problem.
+1. $\alpha_0$ cannot be zero as that will convert the optimization problem
+   into a feasibility problem.
+1. $\alpha_i$ for $i=1,\dots,m$ cannot be negative as it will turn
+   the inequality sign from $f_i(\bx) \leq 0$ to $f'(\bx) \geq 0$.
+1. $\alpha_i$ for $i=1,\dots,m$ cannot be zero as it will remove the
+   corresponding constraint altogether.
+1. $\beta_j$ cannot be zero. A zero value will discard the corresponding
+   equality constraint. 
+1. The feasible sets for both problems are identical.
+1. The optimal sets for both problems are identical.
+1. The optimal values for both problems are not identical however
+   (unless $\alpha_0 = 1$). 
+   Since $f'_0$ is a scaled version of $f_0$, hence the
+   optimal value is also scaled accordingly.
+```
+
+
+````{prf:proposition} Change of variables
+:label: res-opt-eq-form-change-variables
 
 Let $\phi : \VV \to \VV$ be an injective function with
 $\DDD \subseteq \range \phi$. 
@@ -286,11 +294,79 @@ with the variable $\bz \in \VV$.
 
 We say that the two problems are related by the *change of variable*
 or *substitution* of the variable $\bx = \phi (\bz)$.
+````
 
+```{div}
 Suppose $\bz^*$ is the solution to {eq}`eq-opt-prob-var-change`, then
 $\bx^* = \phi(\bz^*)$ is a solution to {eq}`eq-opt-prob-standard-form`.
 
 
 Similarly, if $\bx^*$ is a solution to {eq}`eq-opt-prob-standard-form`,
 then $\bz^* = \phi^{-1}(\bx^*)$ is a solution to {eq}`eq-opt-prob-var-change`.
+```
+
+
+````{prf:proposition} Transformation of objective and constraint functions
+:label: def-opt-eq-form-monotone-transform
+
+For the problem {eq}`eq-opt-prob-standard-form`, we introduce the following:
+
+1. Let $\psi_0: \RR \to \RR$ be a strictly increasing function over $\range f_0$.
+1. Let $\psi_i : \RR \to \RR$ for $i=1,\dots,m$ be strictly increasing
+   functions  over $\range f_i$ with $\psi_i(u) \leq 0 \iff u \leq 0$.
+1. Let $\eta_j : \RR \to \RR$ for $j=1,\dots,p$ be real functions that satisfy 
+   $\eta_j(u) = 0 \iff u = 0$.
+1. Let $\tilde{f}_i (\bx) = \psi_i (f_i(\bx))$ for $i=0,\dots,m$.
+1. Let $\tilde{h}_j (\bx) = \eta_j (h_j(\bx))$ for $j=1,\dots,p$. 
+
+Now, consider the problem
+
+```{math}
+:label: eq-opt-prob-monotone-trans
+& \text{minimize }   & & \tilde{f}_0(\bx) \\
+& \text{subject to } & & \tilde{f}_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & \tilde{h}_j(\bx) = 0,    & \quad j=1,\dots,p
+```
+with the variable $\bx \in \VV$.
+
+The problem {eq}`eq-opt-prob-monotone-trans` is equivalent to
+{eq}`eq-opt-prob-standard-form`.
 ````
+
+
+```{prf:example} Least norms and least norms squared
+:label: ex-opt-eq-norm-norm-squared 
+
+Consider the unconstrained least norm problem
+
+$$
+\text{minimize} \| \bA \bx - \bb \|_2
+$$
+with $\bx \in \RR^n$, $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$.
+We have $f_0(\bx) = \| \bA \bx - \bb \|_2$. Then, $\range f_0 = \RR_+$.
+Consider $\psi_0 : \RR \to \RR$ as
+
+$$
+\psi_0 (x) = x^2.
+$$
+Then, $\psi_0$ is strictly increasing over $\RR_+$. Let 
+
+$$
+\tilde{f}_0 (\bx) = \psi_0 (f_0(\bx)) = \| \bA \bx - \bb \|_2^2
+= (\bA \bx - \bb)^T (\bA \bx - \bb).
+$$
+
+Then, the least norm minimization problem is equivalent to the
+problem
+
+$$
+\text{minimize} (\bA \bx - \bb)^T (\bA \bx - \bb)
+$$
+which is the least norm squared problem.
+
+We note that while $\tilde{f}_0$ is differentiable, 
+$f_0$ is not. It is a key difference between the
+two problems. Solving the least norm squared problem 
+can be done using gradient methods since the objective
+function is differentiable.
+```
