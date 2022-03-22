@@ -370,3 +370,49 @@ two problems. Solving the least norm squared problem
 can be done using gradient methods since the objective
 function is differentiable.
 ```
+
+
+````{prf:proposition} Slack variables
+:label: def-opt-eq-form-slack-variables
+
+For the inequality constraints in the problem {eq}`eq-opt-prob-standard-form`, 
+we can introduce the variables $s_i \geq 0$ so that
+$f_i(\bx) + s_i = 0$. This way, we can convert an inequality constraint
+to an equality constraint and introduce simpler inequality constraints
+for the variables $s_i \geq 0$.
+The resultant problem:
+
+
+```{math}
+:label: eq-opt-prob-slack-vars
+& \text{minimize }   & & f_0(\bx) \\
+& \text{subject to } & & s_i\geq 0, & \quad i=1,\dots,m\\
+&                    & & f_i(\bx) + s_i =  0, & \quad i=1,\dots,m\\
+&                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
+```
+where the optimization variables are $\bx \in \VV$ and $\bs \in \RR^m$
+is equivalent to {eq}`eq-opt-prob-standard-form`. 
+
+The variables $s_i$ are known as *slack variables*. 
+$\bs = (s_1, \dots, s_m)$ is a vector that collects all the slack variables.
+````
+
+```{div}
+This form has $m$ inequality constraints and $m+p$ equality constraints.
+
+If $(\bx, \bs)$ is a feasible point for {eq}`eq-opt-prob-slack-vars`,
+then $\bx$ is a feasible point for {eq}`eq-opt-prob-standard-form`.
+
+If $\bx$ is a feasible point for {eq}`eq-opt-prob-standard-form`,
+then we can pick $s_i = -f_i(\bx)$ to form $\bs$ making $(\bx, \bs)$
+a feasible point for {eq}`eq-opt-prob-slack-vars`.
+
+$\bx$ is an optimal point for {eq}`eq-opt-prob-standard-form`
+if and only if $(\bx, \bs)$ is an optimal point for
+{eq}`eq-opt-prob-slack-vars` where $s_i = - f_i(\bx)$.
+
+The slack variables
+measure how much slack does an inequality constraint function have
+at a feasible point. If $s_i = 0$ then, $f_i$ is active and it has no slack.
+If $s_i > 0$, then $f_i$ inactive and it has some slack.
+```
