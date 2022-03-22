@@ -134,9 +134,29 @@ inequality constraints and 0 equality constraints.
 ```
 
 
-## Feasibility Problems
+```{prf:example} Maximization problem in standard form
+:label: ex-opt-maximization-problem-form
 
-````{prf:definition} Optimization problem standard form
+Consider the problem 
+
+$$
+& \text{maximize }   & & f_0(\bx) \\
+& \text{subject to } & & f_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
+$$
+
+If we replace $f_0$ by $-f_0$, then maximizing $f_0$
+is same as minimizing $-f_0$. Thus, this problem has an equivalent form
+
+
+$$
+& \text{minimize }   & & -f_0(\bx) \\
+& \text{subject to } & & f_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
+$$
+```
+
+````{prf:definition} Feasibility problem
 :label: def-opt-feasibility-problem
 
 Let $\VV$ be an $n$-dimensional real vector space.
@@ -175,3 +195,102 @@ $$
    In other words, whether there are some points which satisfy
    all the inequality and equality constraints.
 ```
+
+## Equivalent Problems
+
+Two optimization problems are called *equivalent* if it is possible
+to find the solution of one problem from the other problem and 
+the vice versa.
+
+
+```{prf:example} Equivalent problems by scaling of objective or constraint functions
+:label: ex-opt-eq-problem-scaling
+
+Consider the problem given by
+
+$$
+& \text{minimize }   & & f'_0(\bx) = \alpha_0 f_0(\bx) \\
+& \text{subject to } & & f'_i(\bx) = \alpha_i f_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h'_j(\bx) = \beta_j h_j(\bx) = 0,    & \quad j=1,\dots,p
+$$
+where $\alpha_i > 0$ for $i=0,\dots,m$ and $\beta_j \neq 0$ for $j=1,\dots,p$.
+
+This problem is obtained from the optimization problem in standard from in
+{eq}`eq-opt-prob-standard-form` by scaling the objective function and
+the inequality constraint functions by positive constants and the
+equality constraints by nonzero constants.
+
+1. $\alpha_0$ cannot be negative otherwise it will convert a minimization
+   problem to a maximization problem.
+1. $\alpha_0$ cannot be zero as that will convert the optimization problem
+   into a feasibility problem.
+1. $\alpha_i$ for $i=1,\dots,m$ cannot be negative as it will turn
+   the inequality sign from $f_i(\bx) \leq 0$ to $f'(\bx) \geq 0$.
+1. $\alpha_i$ for $i=1,\dots,m$ cannot be zero as it will remove the
+   corresponding constraint altogether.
+1. $\beta_j$ cannot be zero. A zero value will discard the corresponding
+   equality constraint. 
+1. The feasible sets for both problems are identical.
+1. The optimal sets for both problems are identical.
+1. The optimal values for both problems are not identical however
+   (unless $\alpha_0 = 1$). 
+   Since $f'_0$ is a scaled version of $f_0$, hence the
+   optimal value is also scaled accordingly.
+```
+
+The primary reason for transforming an optimization problem to an
+equivalent one is that it may be easier to solve an equivalent problem.
+If we can transform a problem into a form which has a well known
+closed form solution or has a well known algorithm to solve the problem,
+then we can solve the original problem by first solving the equivalent
+problem and then transforming the solution of the equivalent problem
+to the solution of the original problem.
+
+1. Transform the problem to an equivalent problem with a known algorithm for solution.
+1. Solve the equivalent problem.
+1. Transform the solution of the equivalent problem to the solution of the original
+   problem.
+
+In this sense, the computational complexity of solving an optimization problem
+cannot be greater than the complexity of solving the equivalent problem plus
+the complexity of transforming the solution of the equivalent problem to the solution 
+of the original problem.
+
+
+There are several ways to obtain an equivalent optimization problem
+from an existing optimization problem. 
+
+````{prf:example} Change of variables
+:label: ex-opt-eq-form-change-variables
+
+Let $\phi : \VV \to \VV$ be an injective function with
+$\DDD \subseteq \range \phi$. 
+
+For the problem {eq}`eq-opt-prob-standard-form`, introduce the following functions
+
+$$
+\tilde{f}_i(\bz) = f_i(\phi(\bz)), \; i=0,\dots,m
+\quad \text{ and } \quad
+\tilde{h}_j(\bz) = h_j(\phi(\bz)), \; j=1,\dots,p.
+$$
+
+Now, consider the problem
+
+```{math}
+:label: eq-opt-prob-var-change
+& \text{minimize }   & & \tilde{f}_0(\bz) \\
+& \text{subject to } & & \tilde{f}_i(\bz) \leq 0, & \quad i=1,\dots,m\\
+&                    & & \tilde{h}_j(\bz) = 0,    & \quad j=1,\dots,p
+```
+with the variable $\bz \in \VV$.
+
+We say that the two problems are related by the *change of variable*
+or *substitution* of the variable $\bx = \phi (\bz)$.
+
+Suppose $\bz^*$ is the solution to {eq}`eq-opt-prob-var-change`, then
+$\bx^* = \phi(\bz^*)$ is a solution to {eq}`eq-opt-prob-standard-form`.
+
+
+Similarly, if $\bx^*$ is a solution to {eq}`eq-opt-prob-standard-form`,
+then $\bz^* = \phi^{-1}(\bx^*)$ is a solution to {eq}`eq-opt-prob-var-change`.
+````
