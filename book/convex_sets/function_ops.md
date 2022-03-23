@@ -443,6 +443,7 @@ mathematical induction.
 ```
 
 ```{prf:theorem} Conic combination of convex functions
+:label: res-cvxf-conic-comb-funcs
 
 Let $\VV$ be a real vector space.
 Let $f_1, \dots, f_k : \VV \to \RERL$
@@ -737,6 +738,8 @@ TO BE COMPLETED.
 
 ## Pointwise Supremum
 
+### Two Functions
+
 ```{prf:theorem} Pointwise maximum of two convex functions
 :label: res-cvx-ptws-max-2
 
@@ -764,6 +767,8 @@ f(t \bx + (1-t) \by)
 $$
 Thus, $f$ is convex.
 ```
+
+### Multiple Functions
 
 
 ```{prf:theorem} Pointwise maximum of multiple convex functions
@@ -794,6 +799,8 @@ $$
 Thus, by principle of mathematical induction, the result
 is true for all $n$.
 ```
+
+### Family of Functions
 
 ```{prf:theorem} Pointwise supremum of a family of convex functions
 :label: res-cvx-ptws-supremum
@@ -855,6 +862,98 @@ $$
    again due to {prf:ref}`res-cvxf-convexity-epigraph`.
 ```
 
+### Largest Entry
+
+```{prf:example} Convexity of the largest entry in a vector
+:label: ex-cvxf-largest-entry-convex
+
+Let $h : \RR^n \to \RR$ be defined as
+
+$$
+h (\bx) = \max \{ x_1, \dots, x_n \}.
+$$
+
+If we introduce coordinate functions $f_i : \RR^n \to \RR$ as 
+
+$$
+f_i(\bx) =  x_i
+$$
+
+then, we can write $h$ as
+
+$$
+h(\bx) = \max \{ f_1(\bx), \dots, f_n(\bx) \}.
+$$
+
+Each of the coordinate functions is linear hence convex.
+Thus, $h$ is a maximum of convex functions. Hence $h$ is convex.
+
+```
+
+
+### Sum of $k$ Largest Entries
+
+
+```{prf:example} Sum of $k$ largest entries in a vector
+:label: ex-cvxf-sum-k-largest-entries
+
+
+Consider a vector $\bx \in \RR^n$ with $\bx = (x_1, \dots, x_n)$.
+
+1. Let $x_{[i]}$ denote the $i$-th largest entry of $\bx$.
+1. In particular, $x_{[1]} = \max \{ x_1, \dots, x_n \}$ is the largest entry of $\bx$.
+1. Then, 
+
+   $$
+   x_{[2]} = \max \left (\{ x_1, \dots, x_n \} \setminus \{ x_{[1]}\} \right )
+   $$
+   is the second largest entry of $\bx$.
+1. Similarly, 
+
+   $$
+   x_{[k]} = \max \left (\{ 
+      x_1, \dots, x_n \} \setminus \{ x_{[1]}, \dots, x_{[k-1]}\} \right )
+   $$
+   is the $k$-th largest entry of $\bx$.
+1. In other words, if we sort the entries of $\bx$ in descending order, we can
+   pick the largest entries one by one.
+
+We can introduce functions $g_i : \RR^n \to \RR$ as
+
+$$
+g_i (\bx) = x_{[i]}.
+$$ 
+As shown in {prf:ref}`ex-cvxf-largest-entry-convex`, $g_1$ is convex.
+However, $g_2,\dots, g_n$ are not convex.
+
+We now introduce a function which computes the sum of $k$ largest entries.
+Let $h_k : \RR^n \to \RR$ be given by
+
+$$
+h_k (\bx) = \sum_{i=1}^k x_{[i]}.
+$$
+Then, $h$ is convex. To see this, we proceed as follows:
+
+1. There are $N = {n \choose k}$ ways of choose $k$ indices from the set $1,\dots,n$.
+1. Let $I_l = \{i_1^l, \dots, i_k^l \}$ be one of the $N$ ways to choose $k$ indices
+   for $l=1,\dots,N$.
+1. Let $F_l : \RR^n \to \RR$ be given by
+
+   $$
+   F_l (\bx) = x_{i_1^l} + \dots + x_{i_k^l}
+   $$
+   for $l=1,\dots,N$.
+1. Then, $F_l$ is a linear (hence convex) function for every $l=1,\dots,N$.
+1. We can now see that
+
+   $$
+   h_k(\bx) = \max \{ F_1(\bx), \dots, F_N(\bx) \}.
+   $$
+1. Thus, $h_k$ is a maximum of $N$ convex functions.
+1. Hence $h$ is convex.
+```
+
+### Piecewise Linear Function
 
 ```{prf:definition} Piecewise linear function
 :label: def-cvxf-piecewise-linear-func
@@ -885,3 +984,87 @@ $f$ is a pointwise maximum of $n$ convex functions.
 Hence, $f$ is convex ({prf:ref}`res-cvx-ptws-max-n`).
 ```
 
+
+## Partial Minimization
+
+
+```{prf:theorem} Partial minimization
+:label: res-cvxf-partial-minimization
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $f : \VV \oplus \WW \to \RR$ be a convex function
+with $C \oplus D = \dom f$.
+Define a function $g : \VV \to \RR$ as
+
+$$
+g(\bx) \triangleq \underset{\by \in D}{\inf} f(\bx, \by), \Forall \bx \in C.
+$$
+Assume that the infimum is finite for every $\bx \in C$.
+Then, $g$ is convex with $C = \dom g$.
+```
+
+Note that it is possible that $g(\bx)$ is finite for some
+$\bx \in C$ and yet there is no $\by \in D$ such that $(\bx, \by) \in C \oplus D$.
+In other words, we only assume that the infimum is finite at every $\bx \in C$.
+We don't require that the infimum is attained at some point $(\bx, \by) \in C \oplus D$.
+
+```{prf:proof}
+Since $f$ is convex, hence $\dom f$ is convex. 
+Thus, $C \oplus D$ is convex. 
+By {prf:ref}`res-cvx-convex-set-direct-sum-projection`, $C$ and $D$ are convex.
+
+1. Since the infimum is finite for every $\bx \in C$, hence $\dom g = C$.
+1. Thus, $\dom g$ is a convex subset of $\VV$.
+1. Let $\bx_1, \bx_2 \in C$ and $t \in (0, 1)$.
+1. Take any $r > 0$. 
+1. By definition of the infimum, there exist some $\by_1, \by_2 \in D$ such that
+
+   $$
+   & f(\bx_1, \by_1) \leq g(\bx_1) + r, \\
+   & f(\bx_2, \by_2) \leq g(\bx_2) + r.
+   $$
+1. Let $(\bx, \by) = t (\bx_1, \by_1) + (1-t) (\bx_2, \by_2)$.
+1. Since $f$ is convex, hence 
+
+   $$
+   f(\bx, \by) 
+   &\leq t f(\bx_1, \by_1) + (1-t) f(\bx_2, \by_2) \\
+   &\leq t (g(\bx_1) + r) + (1- t) (g (\bx_2) + r) \\
+   = t g(\bx_1) + (1-t) g(\bx_2) + r.
+   $$
+1. By definition of $g$ 
+
+   $$
+   g(\bx) \leq f(\bx, \by) \leq t g(\bx_1) + (1-t) g(\bx_2) + r.
+   $$
+1. Since this inequality is valid for every $r > 0$, hence
+
+   $$
+   g(\bx) \leq t g(\bx_1) + (1-t) g(\bx_2)
+   $$
+   holds true for every $\bx_1,\bx_2 \in C$ and $t \in (0,1)$.
+1. Thus, $g$ is convex.
+```
+
+
+```{prf:example} Convexity of the distance from a convex set function
+:label: res-cvxf-set-distance-convex-min
+
+Let $C \subseteq \VV$ be a convex set. The set distance function
+$d_C : \VV \to \RR$ is defined by
+
+$$
+d_C(\bx) = \inf \{ \| \bx - \by \| \ST \by \in C \}.
+$$
+
+
+We define a function $f : \VV \oplus \VV \to \RR$ as
+
+$$
+f(\bx, \by) =  \| \bx - \by \|.
+$$
+Since the norm is convex, hence $f$ is convex over $\VV \oplus \VV$.
+In particular $f$ is convex over the subset $\VV \oplus C$.
+
+Then, by {prf:ref}`res-cvxf-partial-minimization`, $d_C$ is convex.
+```
