@@ -31,7 +31,7 @@ f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).
 
 ```{figure} ../images/convex_function.png
 ---
-name: convex_function
+name: convex_function_2
 ---
 Graph of a convex function. The line segment
 between any two points on the graph lies 
@@ -1969,3 +1969,23 @@ We proceed as follows.
 1. Thus, $f$ is continuous at $x$.
 1. Since $x$ was arbitrary, hence $f$ is continuous on $(a,b)$.
 ```
+
+
+## Quasi-Convex Functions
+
+
+```{prf:definition} Quasi convex function
+:label: def-cvxf-quasi-convex-function
+
+Let $\VV$ be a real vector space.
+Let  $f : \VV \to \RR$ be a real valued function.
+Let the sublevel sets of $f$ be given by
+
+$$
+C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}.
+$$
+
+If the sublevel sets $C_{\alpha}$ of $f$ are convex for every $\alpha \in \RR$,
+then $f$ is called a *quasi-convex* function.
+```
+
