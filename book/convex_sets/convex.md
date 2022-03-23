@@ -778,6 +778,8 @@ the entire line segment between $-\bx$ and $\bx$.
 
 We can generalize convex combinations to include infinite sums.
 ````{prf:theorem}
+:label: res-cvx-infinite-convex-combination
+
 Let $\theta_1, \theta_2, \dots$ satisfy
 
 $$
@@ -795,6 +797,8 @@ if the series converges.
 
 We can generalize it further to density functions.
 ````{prf:theorem}
+:label: res-cvx-convex-density
+
 Let $p : \VV \to \RR$ satisfy $p(x) \geq 0$ for all  $x \in C$
 and
 
@@ -1573,6 +1577,42 @@ The generalization for multiple real vector spaces is
 easily verifiable through induction.
 ```
 
+
+```{prf:theorem} Projection of a direct sum
+:label: res-cvx-convex-set-direct-sum-projection
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $C \subseteq \VV$ and $D \subseteq \WW$.
+Assume that $C \oplus D$ is a convex subset of $\VV \oplus \WW$.
+Then, $C$ and $D$ are convex subsets of $\VV$ and $\WW$ respectively.
+
+More generally, if $\VV_1, \dots, \VV_k$ are real vector spaces
+and $C_i \subseteq \VV_i$ are subsets for $i=1,\dots,k$, such that
+$C = C_1 \oplus \dots \oplus C_k$ is convex in
+the direct sum of vector spaces
+$\VV_1 \oplus \dots \oplus \VV_k$;
+then $C_i$ are convex subsets of $\VV_i$ for $i=1,\dots,k$.
+```
+
+```{prf:proof}
+Consider the case of two vector spaces $\VV$ and $\WW$.
+
+1. Let $\bx_1, \bx_2 \in C$ and $t \in (0,1)$.
+1. Pick any $\by \in D$.
+1. Then, $(\bx_1, \by), (\bx_2, \by) \in C \oplus D$.
+1. Since $C \oplus D$ is convex, hence 
+   
+   $$
+   t (\bx_1, \by) + (1-t) (\bx_2, \by)
+   = (t \bx_1 + (1-t) \bx_2, \by) \in C \oplus D.
+   $$
+1. Thus, $t \bx_1 + (1-t) \bx_2 \in C$.
+1. Thus, $C$ is convex.
+1. Similarly $D$ is also convex.
+
+The argument can be extended by mathematical induction for
+multiple vector spaces.
+```
 
 ## Extreme Points
 
