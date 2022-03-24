@@ -2398,3 +2398,43 @@ T (\interior A) = \interior (T (A)).
 $$
 ```
 
+
+## Real Valued Affine Functions
+
+In this subsection, we look at affine functions from
+a vector space $\VV$ to the real line $\RR$.
+
+
+
+```{prf:theorem} Level sets of real valued affine functions
+:label: res-la-aff-rv-level-set
+
+Let $\VV$ be a vector space. Let $h : \VV \to \RR$ be an
+affine function. Then, for any $c \in \RR$, the set
+$h^{-1}(c)$ is an affine set where
+
+$$
+h^{-1}(c) = \{ \bx \in \VV \ST h(\bx) = c \}.
+$$
+```
+
+```{prf:proof}
+We are given that $h : \VV \to \RR$ is affine.
+
+1. Let $c \in \RR$.
+1. If $h^{-1}(c)$ is empty, then it is affine and there is nothing to prove.
+   So assume that it is nonempty.
+1. Let $\bx, \by \in h^{-1}(c)$.
+1. Thus, $h(\bx) = h(\by) = c$.
+1. Let $t \in \FF$.
+1. Let $\bz = t \bx + (1-t) \by$.
+1. Then, by affine nature of $h$
+
+   $$
+   h(\bz) = h (t \bx + (1-t) \by) = t h(\bx) + (1-t) h(\by) = t c + (1 -t) c = c.
+   $$
+1. Thus, $\bz \in h^{-1}(c)$.
+1. Thus, for any $\bx, \by \in h^{-1}(c)$ and $t \in \FF$, 
+   $\bz = t \bx + (1-t) \by \in h^{-1}(c)$.
+1. Thus, $h^{-1}(c)$ is an affine set.
+```
