@@ -137,6 +137,10 @@ We have seen two forms of describing convex optimization problems.
    Almost all real life convex optimization problems can be
    reduced to this form. It is easier to describe algorithms
    to solve convex optimization problems in terms of this form.
+1. Several theoretical results don't require the closedness property
+   of the feasible set $C$. These results are proved in a more
+   general setting of minimizing a convex function over a
+   convex set.
 
 In the sequel, we will liberally use either form for proving
 theoretical results and developing algorithms.
@@ -151,6 +155,12 @@ theoretical results and developing algorithms.
 Let $f : \VV \to \RR$ be a convex function. Let $C \subseteq \dom f$
 be a convex set. Let $\bx^*$ be locally optimal for $f$ over $C$.
 Then, $\bx^*$ is globally optimal for $f$ over $C$.
+
+In other words,
+
+$$
+f(\by) \geq f(\bx^*) \Forall \by \in C.
+$$
 ```
 
 This result doesn't require the feasible set $C$ to be closed.
@@ -184,3 +194,141 @@ In other words, $f(\bx) \geq f(\bx^*)$ for every $\bx \in B[\bx, r] \cap C$.
 1. Since $t > 0$, hence it reduces to $f(\bx^*) \leq f(\by)$.
 1. Thus, $\bx^*$ is indeed globally optimal.
 ```
+
+The argument can be modified to show that if $f$ is strictly convex, 
+then a locally optimal point for $f$ is strictly globally optimal point.
+
+
+```{prf:theorem} Local minimum is strict global minimum for strictly convex functions
+:label: res-cvxopt-strict-local-global-minimum
+
+Let $f : \VV \to \RR$ be a strictly convex function. Let $C \subseteq \dom f$
+be a convex set. Let $\bx^*$ be locally optimal for $f$ over $C$.
+Then, $\bx^*$ is strictly globally optimal for $f$ over $C$.
+
+In other words,
+
+$$
+f(\by) > f(\bx^*) \Forall \by \in C.
+$$
+```
+
+```{prf:proof}
+
+
+There exists $r > 0$ such that $f(\bx) \geq f(\bx^*)$ for every $\bx \in B[\bx, r] \cap C$.
+
+1. Let $\by \in C$ be any point such that $\by \neq \bx^*$.
+1. Let $t \in (0,1)$ be such that $\bz = \bx^* + t(\by - \bx^*) \in B[\bx, r]$.
+1. Since $C$ is convex, hence $\bz \in C$ as $\bx^*, \by \in C$ and $\bz$
+   is their convex combination.
+1. Thus, $\bz \in B[\bx, r] \cap C$.
+1. Note that $\bz = (1-t) \bx^* + t \by$. Thus, $\bz$ is distinct from
+   $\bx^*$ and $\by$ and lies in the line segment between them.
+1. By the local optimality condition
+
+   $$
+   f(\bx^*) &\leq f(\bz)  \\
+   &= f( (1 - t) \bx^*  + t \by) \\
+   &< (1 -t )f(\bx^*) + t f(\by).
+   $$
+   We used the fact that $f$ is strictly convex.
+1. Cancelling and rearranging the terms, we get $t f(\bx^*) < t f(\by)$.
+1. Since $t > 0$, hence it reduces to $f(\bx^*) < f(\by)$.
+1. Thus, $\bx^*$ is indeed strictly globally optimal.
+```
+
+### Optimal Sets
+
+The optimal sets of a convex optimization problem are also convex.
+
+
+```{prf:theorem} Optimal set is convex for a convex optimization problem
+:label: res-cvxopt-convex-optimal-set
+
+Let $f : \VV \to \RR$ be a convex function. Let $C \subseteq \dom f$
+be a convex set.
+Let the optimal value for the minimization of $f$ over $C$ be given by
+
+$$
+p^* = \inf \{ f(\bx) \ST \bx \in C \}.
+$$
+Let the optimal set (the set of optimal points) be given by
+
+$$
+X_{\text{opt}}  = \{ \bx \in C \ST f(\bx) = p^* \}.
+$$
+Then, $X_{\text{opt}}$ is a convex set.
+```
+
+```{prf:proof}
+If $X_{\text{opt}}$  is empty, then it is convex trivially.
+Now consider the case where $X_{\text{opt}}$ is nonempty.
+
+1. Let $\bx, \by \in X_{\text{opt}}$.
+1. Then, $\bx, \by \in C$.
+1. Let $t \in [0, 1]$.
+1. Let $\bz = t \bx + (1- t) \by$.
+1. Since $C$ is convex, hence $\bz \in C$. Thus, $\bz \in \dom f$.
+1. Since $f$ is convex, hence
+
+   $$
+   f(\bz) \leq t f(\bx) + (1-t)f(\by) = t p^* + (1-t)p^* = p^*.
+   $$
+1. But $p^* = \inf \{ f(\bx) \ST \bx \in C \}$.
+1. Thus, $f(\bz) \geq p^*$.
+1. Combining, the two inequalities, we get $p^* = f(\bz)$.
+1. Thus, $\bz \in  X_{\text{opt}}$.
+1. Thus, for every $\bx, \by \in  X_{\text{opt}}$ and every $t \in [0,1]$,
+   $\bz = t \bx + (1-t) \by \in  X_{\text{opt}}$.
+1. Thus, $ X_{\text{opt}}$ is indeed convex.
+```
+
+
+```{prf:theorem} Optimal points for minimization of strictly convex functions
+:label: res-cvxopt-strict-convex-singleton
+
+Let $f : \VV \to \RR$ be a strictly convex function. Let $C \subseteq \dom f$
+be a convex set. Then, the minimization problem
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C
+$$
+has at most one optimal point.
+```
+
+
+```{prf:proof}
+Let the optimal value for the minimization of $f$ over $C$ be given by
+
+$$
+p^* = \inf \{ f(\bx) \ST \bx \in C \}.
+$$
+Let the optimal set (the set of optimal points) be given by
+
+$$
+X_{\text{opt}}  = \{ \bx \in C \ST f(\bx) = p^* \}.
+$$
+
+1. By {prf:ref}`res-cvxopt-local-global-minimum`,
+   $X_{\text{opt}}$ is a convex set.
+1. If $X_{\text{opt}}$ is empty or a singleton, there is nothing more to prove.
+1. For contradiction, assume that there are two distinct points
+   $\bx, \by \in X_{\text{opt}}$.
+1. We have $p^* = f(\bx) = f(\by)$.
+1. Let $\bz = \frac{1}{2} \bx + \frac{1}{2} \by$.
+1. Thus, it is a convex combination of $\bx$ and $\by$.
+1. By convexity of $X_{\text{opt}}$, $\bz \in X_{\text{opt}}$.
+   Thus, $f(\bz) = p^*$.
+1. By strict convexity of $f$
+
+   $$
+   f(\bz) < \frac{1}{2} f(\bx) + \frac{1}{2} f(\by) = p^*.
+   $$
+1. This contradicts the fact that $p^*$ is the optimal value for the
+   minimization problem.
+1. Thus, $X_{\text{opt}}$ must be either empty or a singleton.
+1. Thus, the minimization problem has at most one optimal point.
+```
+
