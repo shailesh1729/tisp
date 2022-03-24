@@ -60,7 +60,7 @@ a *convex optimization problem in standard form* if
 
 1. The objective function $f_0: \VV \to \RR$ is a convex function.
 1. The inequality constraint functions $f_i: \VV \to \RR$ are convex functions for $i=1,\dots,m$.
-1. The equality constraint functions $h_j: \VV \to \RR$ are affine functions for $j=1,\dots,m$.
+1. The equality constraint functions $h_j: \VV \to \RR$ are affine functions for $j=1,\dots,p$.
 1. The function $f_i$ for $i=0,\dots,m$ are {prf:ref}`closed <def-ms-closed-function>`.
 ````
 
@@ -145,6 +145,47 @@ We have seen two forms of describing convex optimization problems.
 In the sequel, we will liberally use either form for proving
 theoretical results and developing algorithms.
 ```
+
+
+````{prf:definition} Concave function maximization problem
+:label: def-cvx-opt-concave-maximization
+
+Let $\VV$ be an $n$-dimensional real vector space.
+A mathematical optimization problem of the form
+
+```{math}
+:label: eq-cvx-opt-concave-maximization
+& \text{maximize }   & & f_0(\bx) \\
+& \text{subject to } & & f_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
+```
+with optimization variable $\bx \in \VV$ is called
+a *concave maximization problem* if
+
+1. The objective function $f_0: \VV \to \RR$ is a concave function.
+1. The inequality constraint functions $f_i: \VV \to \RR$ are convex functions for $i=1,\dots,m$.
+1. The equality constraint functions $h_j: \VV \to \RR$ are affine functions for $j=1,\dots,p$.
+1. The function $f_i$ for $i=0,\dots,m$ are {prf:ref}`closed <def-ms-closed-function>`.
+````
+
+```{prf:remark} Concave maximization as a convex optimization problem
+:label: rem-concave-max-cvxopt-problem
+
+We note that maximizing $f_0$ is same as minimizing $-f_0$.
+Further, if $f_0$ is concave then $-f_0$ is convex.
+Thus, {eq}`eq-cvx-opt-concave-maximization` is equivalent
+to the problem
+
+$$
+& \text{minimize }   & & -f_0(\bx) \\
+& \text{subject to } & & f_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
+$$
+which is a convex optimization problem in standard form.
+With an abuse of notation, we shall call a concave function maximization
+program also a convex optimization program.
+```
+
 
 ### Local and Global Optima
 
