@@ -84,7 +84,7 @@ is known as an *optimization problem* in its *standard form*.
    In other words,
 
    $$
-   X_{\text{opt}}  = \{ \bx \in C \ST f(\bx) = p^* \}.
+   X_{\text{opt}}  = \{ \bx \in C \ST f_0(\bx) = p^* \}.
    $$
 1. If an optimal point exists in $C$, then we say that the optimal value is
    *attained* or *achieved*.
