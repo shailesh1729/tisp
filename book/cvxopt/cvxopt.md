@@ -118,3 +118,69 @@ a *convex optimization problem in standard form* if
    to a closed convex function. This way, be can bring such problems
    to the standard form for convex optimization. 
 ```
+
+```{prf:remark}
+:label: rem-cvx-opt-std-form-vs-convex-set-form
+
+We have seen two forms of describing convex optimization problems.
+
+1. {prf:ref}`def-opt-convex-opt-problem` describes it as minimizing
+   a convex function over a closed convex set.
+1. {prf:ref}`def-cvx-opt-problem-standard-form` describes it in the
+   form of minimizing a convex objective function with convex
+   inequality constraints and affine equality constraints.
+1. As seen in comments above, the second form can be converted
+   into the first form.
+1. The first form is more general. It is very useful in establishing
+   the theoretical properties of convex optimization problems.
+1. The second form is more useful from practical perspective. 
+   Almost all real life convex optimization problems can be
+   reduced to this form. It is easier to describe algorithms
+   to solve convex optimization problems in terms of this form.
+
+In the sequel, we will liberally use either form for proving
+theoretical results and developing algorithms.
+```
+
+### Local and Global Optima
+
+
+```{prf:theorem} Local minimum is a global minimum in convex optimization
+:label: res-cvxopt-local-global-minimum
+
+Let $f : \VV \to \RR$ be a convex function. Let $C \subseteq \dom f$
+be a convex set. Let $\bx^*$ be locally optimal for $f$ over $C$.
+Then, $\bx^*$ is globally optimal for $f$ over $C$.
+```
+
+This result doesn't require the feasible set $C$ to be closed.
+
+```{prf:proof}
+Since $\bx^*$ is a local minimum of $f$ over $C$, hence there exists $r > 0$
+such that
+
+$$
+f(\bx^*) = \inf \{f(\bz) \ST \bz \in B[\bx, r] \cap C \}.
+$$
+
+In other words, $f(\bx) \geq f(\bx^*)$ for every $\bx \in B[\bx, r] \cap C$.
+
+1. Let $\by \in C$ be any point such that $\by \neq \bx^*$.
+1. We need to show that $f(\by) \geq f(\bx^*)$.
+1. Let $t \in (0,1]$ be such that $\bz = \bx^* + t(\by - \bx^*) \in B[\bx, r]$.
+1. Since $C$ is convex, hence $\bz \in C$ as $\bx^*, \by \in C$ and $\bz$
+   is their convex combination.
+1. Thus, $\bz \in B[\bx, r] \cap C$.
+1. By the local optimality condition
+
+   $$
+   f(\bx^*) &\leq f(\bz)  \\
+   &= f(\bx^* + t(\by - \bx^*)) \\
+   &= f( (1 - t) \bx^*  + t \by) \\
+   &\leq (1 -t )f(\bx^*) + t f(\by).
+   $$
+   We used the fact that $f$ is convex.
+1. Cancelling and rearranging the terms, we get $t f(\bx^*) \leq t f(\by)$.
+1. Since $t > 0$, hence it reduces to $f(\bx^*) \leq f(\by)$.
+1. Thus, $\bx^*$ is indeed globally optimal.
+```
