@@ -243,6 +243,8 @@ of the original problem.
 There are several ways to obtain an equivalent optimization problem
 from an existing optimization problem. 
 
+### Scaling
+
 ```{prf:proposition} Equivalent problems by scaling of objective or constraint functions
 :label: res-opt-eq-problem-scaling
 
@@ -280,6 +282,7 @@ equality constraints by nonzero constants.
    optimal value is also scaled accordingly.
 ```
 
+### Change of Variables
 
 ````{prf:proposition} Change of variables
 :label: res-opt-eq-form-change-variables
@@ -318,6 +321,7 @@ Similarly, if $\bx^*$ is a solution to {eq}`eq-opt-prob-standard-form`,
 then $\bz^* = \phi^{-1}(\bx^*)$ is a solution to {eq}`eq-opt-prob-var-change`.
 ```
 
+### Transformation with Monotone Functions
 
 ````{prf:proposition} Transformation of objective and constraint functions
 :label: def-opt-eq-form-monotone-transform
@@ -384,9 +388,10 @@ can be done using gradient methods since the objective
 function is differentiable.
 ```
 
+### Slack Variables
 
 ````{prf:proposition} Slack variables
-:label: def-opt-eq-form-slack-variables
+:label: res-opt-eq-form-slack-variables
 
 For the inequality constraints in the problem {eq}`eq-opt-prob-standard-form`, 
 we can introduce the variables $s_i \geq 0$ so that
@@ -411,22 +416,57 @@ $\bs = (s_1, \dots, s_m)$ is a vector that collects all the slack variables.
 ````
 
 ```{div}
-This form has $m$ inequality constraints and $m+p$ equality constraints.
-It has $n+m$ optimization variables $x_1, \dots, x_n$ and $s_1, \dots, s_m$.
-
-If $(\bx, \bs)$ is a feasible point for {eq}`eq-opt-prob-slack-vars`,
-then $\bx$ is a feasible point for {eq}`eq-opt-prob-standard-form`.
-
-If $\bx$ is a feasible point for {eq}`eq-opt-prob-standard-form`,
-then we can pick $s_i = -f_i(\bx)$ to form $\bs$ making $(\bx, \bs)$
-a feasible point for {eq}`eq-opt-prob-slack-vars`.
-
-$\bx$ is an optimal point for {eq}`eq-opt-prob-standard-form`
-if and only if $(\bx, \bs)$ is an optimal point for
-{eq}`eq-opt-prob-slack-vars` where $s_i = - f_i(\bx)$.
-
-The slack variables
-measure how much slack does an inequality constraint function have
-at a feasible point. If $s_i = 0$ then, $f_i$ is active and it has no slack.
-If $s_i > 0$, then $f_i$ inactive and it has some slack.
+1. This form has $m$ inequality constraints and $m+p$ equality constraints.
+1. It has $n+m$ optimization variables $x_1, \dots, x_n$ and $s_1, \dots, s_m$.
+1. If $(\bx, \bs)$ is a feasible point for {eq}`eq-opt-prob-slack-vars`,
+   then $\bx$ is a feasible point for {eq}`eq-opt-prob-standard-form`.
+1. If $\bx$ is a feasible point for {eq}`eq-opt-prob-standard-form`,
+   then we can pick $s_i = -f_i(\bx)$ to form $\bs$ making $(\bx, \bs)$
+   a feasible point for {eq}`eq-opt-prob-slack-vars`.
+1. $\bx$ is an optimal point for {eq}`eq-opt-prob-standard-form`
+   if and only if $(\bx, \bs)$ is an optimal point for
+   {eq}`eq-opt-prob-slack-vars` where $s_i = - f_i(\bx)$.
+1. The slack variables
+   measure how much slack does an inequality constraint function have
+   at a feasible point. 
+1. If $s_i = 0$ then, $f_i$ is active and it has no slack.
+1. If $s_i > 0$, then $f_i$ inactive and it has some slack.
 ```
+
+
+### Epigraph Polar Form
+
+
+````{prf:proposition} Epigraph polar form
+:label: res-opt-eq-epigraph-polar-form
+
+The problem {eq}`eq-opt-prob-standard-form` is equivalent to the
+optimization problem below:
+
+```{math}
+:label: eq-opt-prob-epigraph-polar-form
+& \text{minimize }   & & t \\
+& \text{subject to } & & f_0(\bx) - t\leq 0, & \\
+&                    & & f_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
+```
+with the optimization variable $(\bx, t) \in \VV \oplus \RR$.
+````
+
+
+```{div}
+
+1. Note that $t$ appears only in a single inequality in {eq}`eq-opt-prob-epigraph-polar-form`.
+1. At the optimal point, $f_0(\bx) = t$ must hold true.
+   If $f(\bx) < t$, then we can always choose a lower value of $t$ as the solution.
+1. If $\bx$ is an optimal point for {eq}`eq-opt-prob-standard-form`, 
+   then $(\bx, f(\bx))$ must be
+   an optimal point for {eq}`eq-opt-prob-epigraph-polar-form`.
+1. Similarly, if $(\bx, t)$ is an optimal point for {eq}`eq-opt-prob-epigraph-polar-form`,
+   then $\bx$ must be an optimal point for {eq}`eq-opt-prob-standard-form`
+   and $t=f_0(\bx)$ must hold true.
+1. The two problems are indeed equivalent.
+1. This problem has $m+1$ inequality constraints and $p$ equality constraints.
+1. The objective function for the epigraph form is a linear function of $(\bx, t)$.
+```
+
