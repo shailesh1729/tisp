@@ -47,41 +47,68 @@ is known as an *optimization problem* in its *standard form*.
    the optimization problem is called *infeasible*.
    Naturally, if $\DDD = \EmptySet$, then the problem is infeasible.
 1. The set of feasible points for an optimization problem is called
-   the *feasible set* or the *constraint set*.
+   the *feasible set* or the *constraint set*. We shall denote
+   the feasible set by $C$.
+
+   $$
+   C = \dom f_0 \cap \bigcap_{i=1}^m f_i^{-1}(-\infty, 0] \cap \bigcap_{j=1}^p h_j^{-1}(0).
+   $$
+   It is the intersection of the domain of $f_0$,
+   the 0-sublevel sets of $f_i$ for $i=1,\dots,m$,
+   and the $0$-level sets of $h_j$ for $j=1,\dots,p$.
+1. Thus, if the problem is infeasible, then $C = \EmptySet$.
 1. The *optimum value* $p^* \in \ERL$ of the optimization problem is defined as
 
    $$
    p^* = \inf \{ f_0(\bx) \ST f_i(\bx) \leq 0, i=1,\dots,m, \;
     h_j(\bx) =  0, j= 1, \dots, p\}.
    $$
+   In other words,
+
+   $$
+   p^* = \inf \{ f_0(\bx) \ST \bx \in C \}.
+   $$
    We allow $p^*$ to take the extended values $\infty$ and $-\infty$.
-1. If the problem is infeasible, then $p^* = \infty$.
+1. If the problem is infeasible, then $p^* = \infty$
+   It is consistent with the convention that the infimum of an empty set is $\infty$.
 1. If $p^* = -\infty$, then the problem is called *unbounded below*. In this case,
-   there exists a sequence $\{ \bx_k \}$ of $\DDD$ such that $\lim f_0(\bx_k) = -\infty$.
+   there exists a sequence $\{ \bx_k \}$ of $C$ such that $\lim f_0(\bx_k) = -\infty$.
 1. We say that $\bx^*$ is an *optimal point* if it solves {eq}`eq-opt-prob-standard-form`.
-   In other words, $\bx^* \in \DDD$ and $f(\bx^*) = p^*$.
+   In other words, $\bx^* \in C$ and $f(\bx^*) = p^*$.
 1. The set of all optimal points is known as the *optimal set* denoted by $X_{\text{opt}}$.
 
    $$
    X_{\text{opt}} \triangleq \{ \bx \ST f_i(\bx) \leq 0, i=1,\dots,m, \;
       h_j(\bx) = 0, j=1,\dots,p, \; f_0(\bx) = p^* \}.
    $$
-1. If an optimal point exists in $\DDD$, then we say that the optimal value is
+   In other words,
+
+   $$
+   X_{\text{opt}}  = \{ \bx \in C \ST f(\bx) = p^* \}.
+   $$
+1. If an optimal point exists in $C$, then we say that the optimal value is
    *attained* or *achieved*.
 1. If $X_{\text{opt}}$ is empty, then we say that the optimal value is not
    attained or not achieved.
 1. In particular, if the problem is unbounded below, then $X_{\text{opt}}$ is
    indeed empty.
-1. A feasible point $\bx$ with $f_0(\bx) \leq p^* + \epsilon$ is called 
-   an *$\epsilon-suboptimal point*.
+1. If the feasible set $C$ is not closed, then it is quite possible that
+   The optimum value $p^*$ is finite and yet it is not attained at any
+   feasible point. Then, there exists a sequence $\{ \bx_k \}$
+   of feasible points such that $\lim f(\bx_k) = p^*$.
+   However, there is no $\bx \in C$ such that $f(\bx) = p^*$.
+1. A feasible point $\bx \in C$ with $f_0(\bx) \leq p^* + \epsilon$ is called 
+   an *$\epsilon$-suboptimal point*.
 1. The set of all $\epsilon$-suboptimal points is called the 
    *$\epsilon$-suboptimal set* for the problem {eq}`eq-opt-prob-standard-form`.
 1. We say that a feasible point $\bx$ is *locally optimal* if there exists
    $r > 0$ such that 
 
    $$
-   f_0(\bx) = \inf \{f_0(\bz) \ST \bz \in B[\bx, r] \cap \DDD \}.
+   f_0(\bx) = \inf \{f_0(\bz) \ST \bz \in B[\bx, r] \cap C \}.
    $$
+   In other words, $\bx$ minimizes $f$ over a local neighborhood 
+   of feasible points.
 1. If $\bx$ is feasible and $f_i(\bx) = 0$, we say that $i$-th inequality
    constraint is *active* at $\bx$. Otherwise, $f_i(\bx) < 0$  and we say
    that the $i$-th inequality constraint is *inactive*.
