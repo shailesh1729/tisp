@@ -1,5 +1,8 @@
 # Convex Optimization
 
+Main references for this section are {cite}`beck2014introduction,boyd2004convex,bertsekas2003convex`.
+
+
 ## Convex Optimization Problems
 
 
@@ -373,3 +376,72 @@ $$
 1. Thus, the minimization problem has at most one optimal point.
 ```
 
+## Differentiable Objective Functions
+
+In this subsection, we focus on objective functions of type
+$f : \RR^n \to \RR$ which are convex and differentiable.
+
+````{prf:theorem} Optimality criterion for differentiable objective functions
+:label: res-cvxopt-diff-convex-optimal-criterion
+
+Let $f : \RR^n \to \RR$ be a differentiable convex function. 
+Let $C \subseteq \dom f$ be a convex set. 
+Consider the minimization problem
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C.
+$$
+Then, $\bx \in C$ is an optimal point if and only if 
+
+```{math}
+:label: eq-cvx-opt-diff-opt-criterion
+\nabla f(\bx)^T (\by - \bx) \geq 0 \Forall \by \in C.
+```
+
+````
+
+```{prf:proof}
+By {prf:ref}`res-cvxf-gradient-convexity-relation`
+
+$$
+f(\by) \geq f(\bx) + \nabla f(\bx)^T (\by - \bx)
+$$
+for every $\bx, \by \in \dom f$.
+
+Assume that some $\bx \in C$ satisfies the optimality criterion
+in {eq}`eq-cvx-opt-diff-opt-criterion`.
+
+1. Let $\by \in C$.
+1. Then, by differentiability
+
+   $$
+   f(\by) \geq f(\bx) + \nabla f(\bx)^T (\by - \bx).
+   $$
+1. By hypothesis $\nabla f(\bx)^T (\by - \bx) \geq 0$.
+1. Thus, $f(\by) \geq f(\bx)$.
+1. Since this is true for every $\by \in C$, hence
+   $\bx$ is an optimal point for the minimization problem.
+
+Now for the converse, assume that $\bx \in C$ is an optimal point.
+
+1. For contradiction, assume that {eq}`eq-cvx-opt-diff-opt-criterion`
+   doesn't hold.
+1. Then, there exists $\by \in C$ such that
+
+   $$
+   \nabla f(\bx)^T (\by - \bx) < 0.
+   $$
+1. Let $t \in [0, 1]$ be a parameter.
+1. Let $\bz(t) = t \by + (1-t) \bx$.
+1. Since $C$ is convex, hence $\bz(t) \in C$.
+1. Differentiating $f(\bz(t))$ w.r.t. $t$ at $t=0$, we obtain
+
+   $$
+   \left . \frac{d}{d t} f(\bz(t)) \right |_{t=0} = \nabla f(\bx)^T (\by - \bx) < 0.
+   $$
+1. Thus, for small enough $t$, $f(\bz(t)) < f(\bx)$. 
+1. Thus, $\bx$ cannot be an optimal point for the minimization problem.
+1. This contradicts our hypothesis that $\bx$ is an optimal point.
+1. Hence, {eq}`eq-cvx-opt-diff-opt-criterion` must hold for every $\by \in C$.
+```
