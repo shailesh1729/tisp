@@ -381,7 +381,7 @@ $$
 In this subsection, we focus on objective functions of type
 $f : \RR^n \to \RR$ which are convex and differentiable.
 
-````{prf:theorem} Optimality criterion for differentiable objective functions
+````{prf:theorem} Optimality criterion for differentiable objective function
 :label: res-cvxopt-diff-convex-optimal-criterion
 
 Let $f : \RR^n \to \RR$ be a differentiable convex function. 
@@ -444,4 +444,31 @@ Now for the converse, assume that $\bx \in C$ is an optimal point.
 1. Thus, $\bx$ cannot be an optimal point for the minimization problem.
 1. This contradicts our hypothesis that $\bx$ is an optimal point.
 1. Hence, {eq}`eq-cvx-opt-diff-opt-criterion` must hold for every $\by \in C$.
+```
+
+
+````{prf:theorem} Optimality criterion for unconstrained problem with differentiable objective function
+:label: res-cvxopt-diff-convex-optimal-unconstrained
+
+Let $f : \RR^n \to \RR$ be a differentiable convex function
+with $\dom f = \RR^n$. 
+Consider the unconstrained minimization problem
+
+$$
+\text{minimize } f(\bx)
+$$
+Then, $\bx \in \RR^n$ is an optimal point if and only if 
+$\nabla f(\bx) = \bzero$.
+````
+
+```{prf:proof}
+In this case, the set of feasible points is $\RR^n$. 
+
+1. By {prf:ref}`res-cvxopt-diff-convex-optimal-criterion`,
+   $\bx$ is an optimal point if and only if
+
+   $$
+   \nabla f(\bx)^T (\by - \bx) \geq 0 \Forall \by \in \RR^n.
+   $$
+1. But this is true if and only if $\nabla f(\bx) = \bzero$. 
 ```
