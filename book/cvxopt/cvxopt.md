@@ -598,3 +598,25 @@ Assume that $\bx \in \relint C \cap X_{\text{opt}}$.
 1. Thus, $f$ must be constant over $C$.
 ```
 
+
+```{prf:corollary} Linear functions attain minimum only at boundary points
+:label: res-cvxopt-linear-min-relbd
+
+Let $\VV$ be an $n$-dimensional real normed linear space.
+Let $f : \VV \to \RR$ be a nonzero linear functional.
+Let $C \subseteq \VV$ be a convex set.
+Then, $f$ cannot attain a minimum at any relative interior point of $C$.
+
+In other words, $f$ can attain a minimum only at the relative boundary
+of $C$ (if it does attain a minimum over $C$).
+```
+
+```{prf:proof}
+We note that every linear functional is also concave.
+
+1. Let $\bx \in \relint C$.
+1. Then, there exists $r > 0$ such that $B(\bx, r) \cap \affine C \subseteq C$.
+1. Since $f$ is linear, hence $f$ cannot be constant over $B(\bx, r) \cap \affine C$.
+1. Thus, by {prf:ref}`res-cvxopt-concave-min-relint-const`, it cannot
+   attain a minimum at $\bx$.
+```
