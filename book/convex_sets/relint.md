@@ -2112,17 +2112,105 @@ $$
 
 ### Affine Transformations
 
-```{prf:theorem}
+```{prf:theorem} Affine transformations preserve relative interiors
 :label: res-cvx-relint-aff-map-pres
 
-Let $\VV$ be a finite dimensional normed linear space.
-A bijective affine transformation $T : \VV \to \VV$ 
-preserves relative interiors.
+Let $\VV$ and $\WW$ be finite dimensional normed linear spaces.
+An affine transformation $T : \VV \to \WW$ 
+preserves relative interiors of convex sets.
 
 $$
-T (\relint A) = \relint (T (A)).
+T (\relint C) = \relint (T (C))
 $$
+for any convex subset $C$ of $\VV$.
 ```
 
+```{prf:proof}
+By {prf:ref}`res-la-affine-finite-continuous-transformation`,
+$T$ is continuous.
+
+Assume $C$ is a convex subset of $\VV$.
+We shall first show that $\relint T(C)  \subseteq T (\relint C)$.
+
+1. We recall that $\relint C \subseteq C \subseteq \closure C$.
+1. Thus, $T (\relint C) \subseteq T (C) \subseteq T (\closure C)$.
+1. By {prf:ref}`res-cvx-convex-relint-closure`,
+   $\closure \relint C = \closure C$.
+1. Thus, $T (\closure C) = T (\closure \relint C)$.
+1. By {prf:ref}`res-la-affine-finite-transformation-closure`,
+   $T (\closure \relint C) \subseteq \closure T(\relint C)$.
+1. Thus,
+
+   $$
+   T (\relint C) \subseteq T (C) \subseteq \closure T(\relint C).
+   $$
+1. Letting $C_1 = T (\relint C)$ and $C_2 = T(C)$, we see that
+
+   $$
+   \relint C_1 \subseteq C_1 \subseteq C_2 \subseteq \closure C_2.
+   $$ 
+1. Thus, by {prf:ref}`res-cvx-convex-same-cl-same-relint-charac` (3),
+   $\relint C_1 = \relint C_2$. Thus,
+
+   $$
+   \relint T(C) = \relint T (\relint C) \subseteq  T (\relint C).
+   $$
+
+
+To show the reverse inclusion, we proceed as follows.
+
+1. Let $\bx \in T (\relint C)$. 
+1. Then, there exists $\bu \in \relint C$ such that
+   $\bx = T (\bu)$.
+1. Also, it implies that $\bx \in T(C)$.
+1. Take any other $\by \in T (C)$. 
+1. Then, there is $\bv \in C$ such that $\by = T(\bv)$.
+1. By {prf:ref}`res-cvx-relint-line-segment-characterization`,
+   there exists $s > 1$ such that
+
+   $$
+   \bw = \bu + (s -1)(\bu - \bv) \in C
+   $$
+   since $\bu \in \relint C$ and $\by \in C$.
+1. Then, $\bz = T (\bw) \in T(C)$.
+1. Note that with $t = \frac{1}{s}$, 
+
+   $$
+   \bu = t \bw + (1- t) \bv.
+   $$
+1. Thus, $\bu$ is a convex combination (and hence affine combination)
+   of $\bw$ and $\bv$.
+1. Since $T$ is affine, hence
+
+   $$
+   T (\bu) = t T(\bw) + (1-t) T(\bv).
+   $$
+1. This is same as:
+
+   $$
+   \bx = t \bz + (1-t) \by.
+   $$
+1. This can be rewritten as
+
+   $$
+   \bz = \bx + (s-1)(\bx - \by)
+   $$
+   with $\bz \in C$.
+1. Thus, for every $\by \in T(C)$, there exists $s > 1$ such that
+
+   $$
+   \bz = \bx + (s -1) (\bx - \by) \in C.
+   $$
+1. Thus, by {prf:ref}`res-cvx-relint-line-segment-characterization`,
+   $\bx \in \relint T(C)$.
+1. Thus, $T (\relint C) \subseteq \relint T(C)$.
+
+
+Combining the two inclusions, we get the equality
+
+$$
+T (\relint C) = \relint T(C).
+$$
+```
 
 
