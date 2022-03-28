@@ -12,6 +12,10 @@ it is also equppied with an
 {prf:ref}`real inner product <def-la-real-inner-product>`
 $\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$. 
 
+
+Primary references for this section are
+{cite}`beck2014introduction,bertsekas2003convex,boyd2004convex,rockafellar2015convex`.
+
 In a finite dimensional real normed linear space:
 
 - Linear subspaces are closed.
@@ -688,6 +692,35 @@ However, several results in the sequel do depend
 on $\VV$ being finite dimensional. We will 
 clearly state this as and when required.
 
+
+```{prf:example} Relative interior of a line segment
+:label: ex-cvx-relint-line-segment
+
+
+Let $\bx, \by \in \VV$ be distinct points. The line segment between
+$\bx$ and $\by$ is given by
+
+$$
+S = \{ t \bx + (1-t) \by \ST t \in  [0, 1] \}.
+$$
+
+The relative interior of $S$ is given by
+
+$$
+\relint S = \{ t \bx + (1-t) \by \ST t \in  (0, 1) \}.
+$$
+
+To see this, we note that the affine hull of $S$ is the line
+
+$$
+L = \{ t \bx + (1-t) \by \ST t \in  \RR \}.
+$$
+
+Then, for every point $\bz = t \bx + (1-t) \by$ with $t \in (0, 1)$,
+there exists $r > 0$ such that $B(\bz, r) \cap L \subseteq S$.
+```
+
+
 ```{prf:example} Relative interior of an arc
 :label: ex-cvx-relint-arc
 
@@ -1295,8 +1328,7 @@ Let $A = \affine C$ and let $\dim A = k$.
 ```{prf:theorem} Line segment property of relative interior
 :label: res-cvx-convex-relint-segment
 
-Let $\VV$ be a real finite dimensional normed linear space.
-
+Let $\VV$ be a real $n$-dimensional normed linear space.
 Let $C$ be a nonempty convex subset of $\VV$. 
 Let $\bx \in \relint C$
 and $\by \in \closure C$. Then, 
@@ -1310,13 +1342,86 @@ $$
 This is a restatement of the line segment property 
 for interior of a convex set as described in 
 {prf:ref}`res-cvx-convex-interior-segment`.
-
-For simplicity, we shall assume that $\relint C = \interior C$.
-Then, the proof of {prf:ref}`res-cvx-convex-interior-segment`
+If $\relint C = \interior C$,
+then the proof of {prf:ref}`res-cvx-convex-interior-segment`
 applies directly.
 
 This argument can be extended for the case where
-$\relint C \neq \interior C$.
+$\relint C \neq \interior C$ by considering the
+subspace topology w.r.t. $\affine C$.
+```
+
+The proof below is based on {cite}`bertsekas2003convex`.
+
+```{prf:proof}
+Let $A = \affine C$.
+Let $L$ be the linear subspace parallel to $A$.
+Note that for $t=0$, $(1-t)\bx + t \by = \bx$
+which belongs to $\relint C$ by hypothesis.
+Thus, we shall only consider $t \in (0,1)$ in the argument below.
+
+Assume first that $\by \in C$. 
+
+1. Since $\bx \in \relint C$, there exists $r > 0$ such that
+   $B(\bx, r) \cap A \subseteq C$.
+1. Pick any $t \in (0, 1)$.
+1. Let $\bz = (1-t) \bx + t \by$.
+1. Let $s = (1 - t) r$. Clearly, $s > 0$.
+1. Consider the open ball $B(\bz, s)$.
+   We shall show that $B(\bz, s) \cap A \subseteq C$.
+1. Let $\bu \in B(\bz, s) \cap A$.
+1. If $\bu = \bz$, then $\bu \in C$ since $C$ is convex.
+1. Otherwise, we can write $\bu = \bz + p \bv$ 
+   where $\bv$ is a unit norm vector and $0 < p < s$.
+1. Then, $\bv \in L$ since $\bz + p \bv \in A$ and $\bz \in C \subseteq A$.
+1. We can write 
+
+   $$
+   \bu = \bz + p \bv = (1-t) \bx + t \by + p \bv
+   = (1-t) \left (\bx + \frac{p}{1-t} \bv \right ) + t \by.
+   $$
+1. Let $\bw = \bx + \frac{p}{1-t} \bv$.
+1. Since $p < s$, hence $\frac{p}{1 - t} < \frac{s}{1-t} = r$.
+1. Thus, $\bw \in B(\bx, r)$.
+1. Also, $\bx \in C$ and $\bv \in L$ implies that $\bw \in A$.
+1. Thus, $\bw \in B(\bx, r) \cap A \subseteq C$.
+1. Now $\bu = (1-t) \bw + t \by$ is a convex combination of $\bw, \by \in C$.
+1. Hence $\bu \in C$.
+1. Thus, for every $\bu \in B(\bz, s) \cap A$, $\bu \in C$.
+1. Thus, $\bz \in \relint C$.
+1. Thus, $(1-t) \bx + t \by \in \relint C \Forall t \in [0,1)$.
+
+We now consider the case where $\by \notin C$ but $\by \in \closure C$.
+
+1. There exists a sequence $\{ \by_k \}$ of $C$ such that 
+   $\by = \lim \by_k$.
+1. Since $\bx \in \relint C$, there exists $r > 0$ such that
+   $B(\bx, r) \cap A \subseteq C$.
+1. Pick any $t \in (0, 1)$.
+1. Let $\bz = (1-t) \bx + t \by$.
+1. Let $\bz_k = (1-t)\bx + t \by_k$.
+1. Then, by the earlier argument $\bz_k \in \relint C$
+   since $\bx \in \relint C$, $\by_k \in C$ and $t \in (0,1)$.
+1. Specifically, for every $k$, $B(\bz_k, (1-t) r) \cap A \subseteq C$.
+1. By limit arithmetic
+
+   $$
+   \lim \bz_k = (1-t)\bx + t \lim \by_k = (1-t)\bx + t \by = \bz.
+   $$
+1. Let $s = \frac{1}{2} (1-t)r$.
+1. Then, there exists $n_0 \in \Nat$ such that for all $k > n_0$,
+   $\| \bz - \bz_k \| < s$.
+1. Consider the set $B(\bz, s) \cap A$.
+1. Let $\bu \in B(\bz, s) \cap A$.
+1. Then for every $k > n_0$, 
+
+   $$
+   \| \bu - \bz_k \| \leq \| \bu - \bz \| + \| \bz - \bz_k \| 
+   < s + s = (1-t)r.
+   $$
+1. Thus, $\bu \in B(\bz_k, (1-t) r) \cap A \subseteq C$ for every $k > n_0$.
+1. Thus, $B(\bz, s) \cap A \subseteq C$.
+1. Thus, $\bz \in \relint C$.
 ```
 
 One way to interpret this result is as follows.
@@ -1326,7 +1431,304 @@ and a point on the boundary of $C$, then
 every point on the segment (except the boundary point)
 lies inside the relative interior of $C$.
 
+```{prf:theorem} Characterization of relative interior in terms of line segments
+:label: res-cvx-relint-line-segment-characterization
+
+Let $\VV$ be a real $n$-dimensional normed linear space.
+Let $C$ be a nonempty convex subset of $\VV$.
+Then, $\bx \in \relint C$ if and only if every line segment in $C$ having
+$\bx$ as one endpoint can be prolonged beyond $\bx$ without leaving $C$;
+i.e., for every $\by \in C$ there exists $s > 1$ such that
+
+$$
+\bx + (s -1) (\bx - \by) \in C.
+$$
+```
+At $s=0$, we get the point $\by$. At $s=1$, we get the point $\bx$.
+At $s=\frac{1}{2}$, we get the point $\frac{1}{2} (\bx + \by)$. Thus,
+the formula represents a line starting from $\by$ going in the direction
+$\bx - \by$ towards $\bx$. For $s > 1$, it further extends beyond
+$\bx$. This is sensible since $\bx \in \relint C$ hence the line
+can be extended beyond $\bx$. It is definitely not possible to extend
+the line beyond $\by$ if $\by \in C \setminus \relint C$.
+
+
+```{prf:proof}
+
+Let $A = \affine C$. Let $L$ be the linear subspace parallel to $A$.
+
+1. Assume that $\bx \in \relint C$.
+1. Then, there exists $r > 0$ such that $B(\bx, r) \cap A \subseteq C$.
+1. Let $\by \in C$. 
+1. Then $\bv = \bx - \by \in L$.
+1. Let $\bu = \frac{r}{2 \| \bv \|} \bv$.
+1. Since $\bx \in C \subseteq A$ and $\bu \in L$, hence $\bx + \bu \in A$.
+1. $\| \bu \| = \frac{r}{2} < r$. Hence, $\bx + \bu \in B(\bx, r)$.
+1. Thus, $\bx + \bu \in B(\bx, r) \cap A \subseteq C$.
+1. Clearly,
+
+   $$
+   \bx + \bu = \bx + \frac{r}{2 \| \bx - \by \|} (\bx - \by).
+   $$
+1. Let $s = 1 + \frac{r}{2 \| \bx - \by \|}$.
+1. Then, $\bx + (s - 1) (\bx - \by)  = \bx + \bu \in C$.
+
+
+For the converse, assume that the said condition holds for some $\bx \in C$.
+
+1. By {prf:ref}`res-cvx-nonempty-relint`, $\relint C$ is nonempty.
+1. Let $\by \in \relint C$.
+1. If $\by = \bx$ then $\bx \in \relint C$ and there is nothing to prove.
+1. Now consider the case where $\by \neq \bx$.
+1. By hypothesis, since $\by \in C$, hence there exists $s > 1$ such that
+
+   $$
+   \bz = \bx + (s - 1) (\bx - \by) \in C.
+   $$
+   Going from $\by$ to $\bx$, the point $\bz$ is behind $\bx$. 
+   Thus, $\bx$ is between $\bz$ and $\by$.
+1. Let $t = \frac{1}{s}$. Then, $t \in (0, 1)$.
+1. Now,
+
+   $$
+   \bz = \bx + \left (\frac{1}{t} - 1 \right ) (\bx - \by) \\
+   & \iff t \bz = t \bx + (1 - t) (\bx - \by) \\
+   & \iff t \bz = \bx  - (1-t) \by \\
+   & \iff \bx  = t \bz + (1-t) \by.
+   $$
+   We have shown that $\bx$ is a convex combination of $\by$ and $\bz$.
+1. Thus, $\by \in \relint C$, $\bz \in C$ and $t \in (0, 1)$.
+1. By {prf:ref}`line segment property <res-cvx-convex-relint-segment>`,
+   $\bx \in \relint C$.
+```
+
 Several topological properties follow.
+
+### Affine Hull of Relative Interior
+
+```{prf:theorem} Affine hull of relative interior
+:label: res-cvx-convex-relint-aff-hull
+
+Let $\VV$ be a real $n$-dimensional normed linear space.
+For any nonempty convex set $C \subseteq \VV$, 
+
+$$
+\affine \relint C = \affine C.
+$$
+In other words, the affine hull of the relative interior of a convex set is
+same as the affine hull of the set.
+```
+
+
+```{prf:proof}
+Let $A = \affine C$. Let $R = \relint C$.
+
+1. From {prf:ref}`res-cvx-convex-relint-is-convex`, $R$ is convex.
+1. From {prf:ref}`res-cvx-nonempty-relint`, $R$ is nonempty.
+1. Let $m = \dim A$.
+1. If $m=0$ then $C = A = \{ \bx \}$ is a singleton.
+   Also, by {prf:ref}`res-cvx-relint-singleton`, $R = C = A$. 
+   Thus, $\affine R = \affine C$.
+1. We now consider the case where $m > 0$.
+1. Then, there exist $m+1$ affine independent vectors $\bx_0, \dots, \bx_m \in C$
+   such that 
+
+   $$
+   A = \affine C = \span \{ \bx_0, \dots, \bx_m \}.
+   $$
+1. Pick some $\bx \in R$. Since $R$ is nonempty, hence we can pick such $\bx$.
+1. Consider the points $\by_i = \frac{1}{2} \bx + \frac{1}{2} \bx_i$ for $i=0, \dots, m$.
+1. By {prf:ref}`line segment property <res-cvx-convex-relint-segment>`,
+   $\by_i \in R$ since $\bx \in R$ and $\bx_i \in C$.
+1. We now claim that $\{ \by_0, \dots, \by_m \}$ are affine independent.
+   1. For contradiction, assume that they are affine dependent.
+   1. Then, $\bu_i = \by_i - \by_0$ for $i=1,\dots, m$ are linearly dependent.
+   1. Thus, there exists a nontrivial linear combination
+
+      $$
+      \sum_{i=1}^m t_i \bu_i  = \bzero.
+      $$
+   1. But
+
+      $$
+      \sum_{i=1}^m t_i \bu_i & = \sum_{i=1}^m t_i (\by_i - \by_0)\\
+      & = \sum_{i=1}^m t_i \left (
+         \frac{1}{2} \bx + \frac{1}{2} \bx_i - \frac{1}{2} \bx - \frac{1}{2} \bx_0
+         \right )\\
+      & = \frac{1}{2}\sum_{i=1}^m t_i (\bx_i - \bx_0) = \bzero.
+      $$
+   1. Thus, $\bx_i - \bx_0$ for $i=1,\dots,m$ are linearly dependent.
+   1. Thus, $bx_i$ for $i=0,\dots,m$ are affine dependent
+      which contradicts our hypothesis.
+1. Thus $R$ has $m+1$ affine independent points given by $\{ \by_0, \dots, \by_m \}$.
+1. Thus, $\affine R = A$.
+```
+
+
+### Simplex
+
+```{prf:theorem} Relative interior of a simplex
+:label: res-cvx-simplex-relint
+
+Let $k+1$ points $\bv_0, \dots, \bv_k \in \VV$ be 
+{prf:ref}`affine independent <def-affine-independence>`.
+Let the *simplex* determined by them be given by
+
+$$
+C = \convex \{ \bv_0, \dots, \bv_k\}
+= \{ t_0 \bv_0 + \dots + t_k \bv_k \ST 
+    \bt \succeq \bzero, \bone^T \bt = 1\}.
+$$
+
+Then, the relative interior of $C$ is given by
+
+$$
+\relint C
+= \{ t_0 \bv_0 + \dots + t_k \bv_k \ST 
+    \bt \succ \bzero, \bone^T \bt = 1\}
+$$
+
+The relative boundary of $C$ is given by
+
+
+$$
+\relbd C
+= \{ t_0 \bv_0 + \dots + t_k \bv_k \ST 
+   \bt \succeq \bzero, \bone^T \bt = 1, t_i = 0 \text{ for some } i \}.
+$$
+```
+
+```{prf:proof}
+TBD
+```
+
+
+```{prf:theorem} Barycenter of a simplex is a relative interior point
+:label: res-cvx-simplex-barycenter-relint
+
+Let $k+1$ points $\bv_0, \dots, \bv_k \in \VV$ be 
+{prf:ref}`affine independent <def-affine-independence>`.
+Let the *simplex* determined by them be given by
+
+$$
+C = \convex \{ \bv_0, \dots, \bv_k\}
+= \{ t_0 \bv_0 + \dots + t_k \bv_k \ST 
+    \bt \succeq 0, \bone^T \bt = 1\}
+$$
+
+Let the barycenter of the simplex by given by
+$\bv = \sum_{i=0}^k \frac{1}{k+1}{\bv_i}$.
+Then, $\bv \in \relint C$.
+
+In other words, the barycenter of a simplex lies in the relative interior.
+```
+```{prf:proof}
+We first claim that the distance of the barycenter from each of the
+vertices of the simplex is positive.
+
+1. Let $d_i = \| \bv_i - \bv \|$ for $i=0,\dots,k$.
+1. For contradiction, assume that $d_i = 0$ for some $i$.
+1. Without loss of generality, assume that it holds for $i=0$.
+   We can shuffle the vertices for this.
+1. Then,
+
+   $$
+   \bv_0 = \sum_{j=0}^k \frac{1}{k+1}{\bv_j} \\
+   &\iff (k+1) \bv_0 = \sum_{j=0}^k \bv_j \\
+   &\iff \sum_{j=0}^k \bv_j - (k+1) \bv_0 = \bzero \\
+   &\iff \sum_{j=1}^k \bv_j - k \bv_0 = \bzero \\
+   &\iff \sum_{j=1}^k (\bv_j - \bv_0) = \bzero.
+   $$
+1. Thus, the vectors $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ are linearly dependent.
+1. That means $\bv_0, \dots, \bv_k$ are affine dependent. A contradiction.
+1. Hence, $d_i > 0$ for every $i=0,\dots,k$.
+
+Let $A = \affine C$.
+We now let $r = \min \{ d_0, \dots, d_m \}$. 
+We claim that $B(\bv, r) \cap A \subseteq C$.
+
+1. Let $\bu \in B(\bv, r) \cap A$.
+1. Since $\bu \in A$ and $ \{ \bv_0, \dots, \bv_k\}$ provide an affine
+   basis for $A$, hence, there is a unique affine representation for $\bu$
+   given by
+
+   $$
+   \bu = \sum_{i=0}^k u_i \bv_i, \sum_{i=0}^k u_i = 1.
+   $$
+
+TBD
+```
+
+
+```{prf:theorem} Relative interior of convex hull of linearly independent points
+:label: res-cvx-convex-hull-relint-rel-open
+
+Let $\VV$ be a real normed linear space.
+Let $S = \{\bv_1, \dots, \bv_m \}$ be a set of $m$ linearly independent
+vectors. 
+
+$$
+X = \left \{ \bx \ST \bx = \sum_{i=1}^m t_i \bv_i, \sum_{i=1}^m t_i < 1, 
+t_i > 0, i=1,\dots,m 
+   \right \}.
+$$
+Let $A = \span S$. Then, $X$ is open relative to $A$.
+```
+
+```{prf:proof}
+It is clear that $X \subseteq A$.
+By $X$ being open relative to $A$ we mean that
+for every $\bx \in X$, there exists $r > 0$ such that
+$B(\bx, r) \cap A \subseteq X$.
+
+We first establish that $X$ is convex.
+
+1. Let $\bx, \by \in X$ and $t \in (0, 1)$.
+1. Then, 
+
+   $$
+   \bx = \sum_{i=1} x_i \bv_i 
+   \text{ and }
+   \by = \sum_{i=1} y_i \bv_i 
+   $$
+   such that $x_i , y_i > 0$, $\sum_{i=1} x_i < 1$, $\sum_{i=1} y_i < 1$.
+1. Let $\bz = t \bx + (1-t) \by$.
+1. Then,
+
+   $$
+   \bz = \sum_{i=1}^m (t x_i + (1-t) y_i) \bv_i.
+   $$
+1. Then $t x_i + (1-t) y_i > 0$ since $t > 0, 1-t > 0, x_i > 0, y_i > 0$.
+1. Also
+
+   $$
+   \sum_{i=1}^m (t x_i + (1-t) y_i) = t \sum_{i=1}^m x_i + (1-t) \sum_{i=1}^m y_i
+   < t + 1 - t = 1.
+   $$
+1. Thus, $\bx \in X$. 
+1. Thus, $X$ is convex.
+
+We next show that $\bc = \frac{1}{m} (\bx_1 + \dots + \bx_m) \in \relint X$.
+
+We now show that $X$ is relatively open.
+
+1. Let $\bx \in X$. Then
+
+   $$
+   \bx = \sum_{i=1}^m t_i \bv_i \ST \sum_{i=1}^m t_i < 1, t_i > 0, i=1,\dots,m.
+   $$
+1. Let $t = \sum_{i=1}^m t_i$ and $s = 1 - t$. Then, $s > 0$.
+1. Let $r = \frac{s}{2 m}$.
+1. Let $p_i = t_i + r$. Then, $p_i > 0$ and
+
+   $$
+   \sum_{i=1}^m p_i = \sum_{i=1}^m t_i + \sum_{i=1}^m r
+   = t + \frac{s}{2} = t + \frac{1 - t}{2} < 1. 
+   $$
+
+TBD.
+```
+
 
 
 ### Closure of Relative Interior
