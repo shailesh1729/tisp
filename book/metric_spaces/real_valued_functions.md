@@ -1485,6 +1485,71 @@ w.r.t. $(S, d)$ where $S$ is the effective domain.
 All the definitions and results can be presented
 w.r.t. the topology of $(X, d)$ itself.
 
+### Proper Functions
+
+```{prf:definition} Proper function
+:label: def-ms-proper-function
+
+Let $(X, d)$ be a metric space.
+An extended real-valued function 
+$f : X \to \ERL$ is called *proper*
+if its domain is nonempty, it never
+takes the value $-\infty$ and is
+not identically equal to $\infty$.
+
+$$
+\exists x \in X \text{ such that } f(x) < \infty
+\text{ and }
+f(x) > -\infty \Forall x \in X.
+$$
+``` 
+Putting another way, a proper function
+is obtained by taking a real valued function $f$
+defined on a nonempty set $C \subseteq X$
+and then extending it to all of $X$ by 
+setting $f(x) = +\infty$ for all $x \notin C$.
+
+It is easy to see that the codomain for a proper
+function can be changed from $\ERL$
+to $\RERL$ to clarify that it never takes
+the value $-\infty$.
+
+```{prf:definition} Improper function
+:label: def-ms-improper-function
+
+Let $(X, d)$ be a metric space.
+An extended real-valued function 
+$f : X \to \ERL$ is called *improper*
+if it is not proper.
+```
+
+For an improper function $f$:
+
+* $\dom f$ may be empty. 
+* $f$ might take a value of $-\infty$ at some $x \in X$.
+
+
+```{prf:definition} Indicator function
+:label: def-ms-indicator-function
+
+Let $(X, d)$ be a metric space.
+Let $C \subseteq X$. Then, its 
+*indicator function* is given by
+$I_C(x) = 0 \Forall x \in C$. 
+Here, $\dom I_C = C$.
+
+The extended value extension of an indicator
+function is given by:
+
+$$
+\tilde{I_C}(x) \triangleq \begin{cases} 
+0 & \text{for} & x \in C \\
+\infty & \text{for} & x \notin C.
+\end{cases}
+$$
+```
+
+
 
 ### Extreme Values
 
