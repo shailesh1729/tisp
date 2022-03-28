@@ -533,3 +533,68 @@ In this case, the set of feasible points is $C = \dom f$.
    $$
 1. Thus $\nabla f(\bx) = \bzero$ must be true.
 ```
+
+
+## Concave Objective Functions
+
+
+```{prf:theorem} Minimization of concave function and relative interior
+:label: res-cvxopt-concave-min-relint-const
+
+Let $\VV$ be an $n$-dimensional real normed linear space.
+Let $f : \VV \to \RR$ be a concave function with $S = \dom f$.
+Let $C \subseteq S$ be a convex set.
+Consider the problem of minimizing $f$ over $C$.
+Let the optimal value be given by
+
+$$
+p^* = \inf \{ f(\bx) \ST \bx \in C \}.
+$$
+Let the set of optimal points for the minimization problem be given by
+
+$$
+X_{\text{opt}}  = \{ \bx \in C \ST f(\bx) = p^* \}.
+$$
+If $X_{\text{opt}}$ contains a
+{prf:ref}`relative interior point <def-cvx-relative-interior-point>` of $C$,
+then $f$ must be constant over $C$; i.e.,
+
+$$
+X_{\text{opt}} = C.
+$$
+```
+
+```{prf:proof}
+Assume that $\bx \in \relint C \cap X_{\text{opt}}$.
+
+1. Let $\by \in C$ be any vector distinct from $\bx$.
+1. Since $\bx \in \relint C$, hence
+   due to {prf:ref}`res-cvx-relint-line-segment-characterization`,
+   there exists $s > 1$ such that
+   $\bz = \bx + (s -1) (\bx - \by) \in C$.
+   $\bz$ is a point behind $\bx$ on the line from $\by$ to $\bx$ 
+   which belongs to $C$.
+1. Letting $t = \frac{1}{s}$ we can rewrite it as 
+
+   $$
+   \bx =  t \bz + (1-t) \by.
+   $$
+1. Thus, $\bx$ is a convex combination of $\bz$ and $\by$.
+1. By concavity of $f$, we have
+
+   $$
+   f(\bx) \geq t f(\bz) + (1-t) f(\by).
+   $$
+1. Since $\bx$ is an optimal point over $C$ and $\bz, \by \in C$, hence
+   $f(\bx) \leq f(\bz)$ and $f(\bx) \leq f(\by)$.
+1. Thus,
+
+   $$
+   f(\bx) \geq t f(\bz) + (1-t) f(\by)
+   \geq t f(\bx) + (1-t) f(\bx) = f(\bx).
+   $$
+1. This can be true only if $f(\bx) = t f(\bz) + (1-t) f(\by)$
+   which in turn implies that $f(\bx) = f(\bz) = f(\by)$.
+1. Thus, $f$ must be constant over $C$.
+```
+
