@@ -2319,6 +2319,34 @@ followed by a translation.
 1. Hence, $T$ is continuous.
 ```
 
+```{prf:theorem} Affine transformation and closure
+:label: res-la-affine-finite-transformation-closure
+
+Let $(\VV, \| \cdot \|_v)$ and $(\WW, \| \cdot \|_w)$ be
+normed linear spaces. Let 
+$T : \VV \to \WW$ be an affine transformation. 
+
+Assume that $\VV$ is finite dimensional. 
+Let $A \subseteq \VV$. Then,
+
+$$
+T (\closure A) \subseteq \closure T(A).
+$$
+```
+
+```{prf:proof}
+By {prf:ref}`res-la-affine-finite-continuous-transformation`,
+$T$ is continuous.
+
+By {prf:ref}`res-ms-continuous-function-characterization` (4)
+
+$$
+T (\closure A) \subseteq \closure T(A)
+$$
+holds true for every subset $A$ of $\VV$.
+```
+
+
 ### Affine Homeomorphisms
 
 ```{prf:theorem}
