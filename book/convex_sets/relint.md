@@ -1745,6 +1745,9 @@ $$
 ```
 
 ```{prf:proof}
+If $C$ is empty, then this equality holds trivially.
+We shall now consider the case where $C$ is nonempty.
+
 Since $\relint C \subseteq C$, hence
 $\closure \relint C \subseteq \closure C$.
 
@@ -1752,11 +1755,22 @@ $\closure \relint C \subseteq \closure C$.
 For the other direction, we proceed as follows:
 
 1. Let $\by \in \closure C$.
+1. By {prf:ref}`res-cvx-nonempty-relint`, the relative
+   interior of $C$ is nonempty.
 1. Choose some $\bx \in \relint C$.
+1. Assume that $\bx \neq \by$ (otherwise we are done).
 1. By {prf:ref}`res-cvx-convex-relint-segment`, 
    the line segment between $\bx$ and $\by$
    (excluding $\by$) lies in $\relint C$.
-1. Hence, $\by$ is a limit point of $\relint C$.
+1. Hence, $\by$ is a closure point of $\relint C$.
+   1. Let $\bz_k = \frac{1}{k} \bx + \left (1- \frac{1}{k} \right ) \by$
+      for every $k \in \Nat$.
+   1. Since $\bx \in \relint C$, $\by \in \closure C$, $\frac{1}{k} \in (0,1]$,
+      hence $\bz_k \in \relint C$ for every $k$.
+   1. Thus, $\{ \bz_k \}$ is a sequence of $\relint C$.
+   1. We can see that $\lim \bz_k = \by$.
+   1. Thus, by {prf:ref}`res-ms-closure-point-as-limit`, $\by$ is a closure
+      point of $\relint C$.
 1. Thus, $\by \in \closure \relint C$.
 1. Thus, $\closure C \subseteq \closure \relint C$.
 
@@ -1898,6 +1912,49 @@ $$
 = \closure \relint C_2 = \closure C_2.
 $$
 We are done.
+```
+
+```{prf:theorem} Characterization of identical closures and relative interiors
+:label: res-cvx-convex-same-cl-same-relint-charac
+
+
+Let $\VV$ be a real $n$-dimensional normed linear space.
+Let $C_1$ and $C_2$ be convex subsets of $\VV$.
+Then, the following statements are equivalent.
+
+1. Both sets have same relative interior.
+1. Both sets have same closure.
+1. $ \relint C_1 \subseteq C_2 \subseteq \closure C_1$.
+```
+
+```{prf:proof}
+By {prf:ref}`res-cvx-convex-same-cl-same-relint`, statements (1) and (2)
+are equivalent.
+
+Assume (3) to be true.
+
+1. Taking closure on all sides, we get
+
+   $$
+   \closure \relint C_1 \subseteq \closure C_2 \subseteq \closure \closure C_1.
+   $$
+1. By {prf:ref}`res-cvx-convex-relint-closure`, $\closure \relint C_1  = \closure C_1$.
+1. Since closed sets are their own closures, hence
+   $\closure \closure C_1 = \closure C_1$.
+1. Thus, it reduces to
+
+   $$
+   \closure C_1 \subseteq \closure C_2 \subseteq \closure C_1.
+   $$
+1. Thus, $\closure C_1 = \closure C_2$ must hold true which is (2).
+
+Now, assume (1) and (2) to be true.
+
+1. Then, $\relint C_2 \subseteq C_2$. 
+1. Also, $\relint C_1 = \relint C_2$ from (1).
+1. Hence, $\relint C_1 \subseteq C_2$.
+1. Further, $C_2 \subseteq \closure C_2 = \closure C_1$ from (2).
+1. Combining, we get $\relint C_1 \subseteq C_2 \subseteq \closure C_1$ which is (3).
 ```
 
 ### Finite Intersections
