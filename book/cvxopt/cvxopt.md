@@ -595,6 +595,73 @@ $\nabla f(\bx)^T (\by - \bx) \geq 0 \Forall \by \in C$.
    $$
 ```
 
+This result is a Lagrange multiplier optimality condition to be
+discussed in more detail in later sections.
+
+
+```{prf:remark} Differentiable objective minimization over nonnegative orthant
+:label: rem-cvxopt-diff-obj-nng-orthant
+
+
+Let $f : \RR^n \to \RR$ be a differentiable convex function
+with $\dom f = \RR^n$.
+Consider the minimization problem: 
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \succeq \bzero.
+$$
+
+1. The feasible set is the nonnegative orthant $\RR^n_+$.
+1. $\bx$ is optimal if and only if
+   $\bx \succeq \bzero$ and
+   $\nabla f (\bx)^T (\by - \bx) \geq 0$ for every $\by \succeq \bzero$.
+1. The term $\nabla f (\bx)^T \by$ is unbounded below on $\by \in \RR^n_+$
+   unless $\nabla f (\bx) \in \RR^n_+$.
+1. Thus, $\nabla f (\bx)$ must be nonnegative. 
+1. Then, the minimum value for $\nabla f (\bx)^T \by$ is 0.
+1. Consequently, the optimality condition reduces to
+   $-\nabla f (\bx)^T \bx \geq 0$
+   or $\nabla f (\bx)^T \bx \leq 0$.
+1. But $\bx \succeq \bzero$ and $\nabla f (\bx) \succeq \bzero$.
+1. Thus, we must have $\nabla f (\bx)^T \bx = 0$.`
+1. We note that 
+
+   $$
+   \nabla f (\bx)^T \bx = \sum_{i=1}^n (\nabla f (\bx))_i x_i.
+   $$
+1. Thus, it is a sum of products of nonnegative numbers.
+1. So each term in the sum must be 0.
+1. Thus, $(\nabla f (\bx))_i x_i = 0$ must hold true for every
+   $i=1,\dots,n$.
+1. Thus, the optimality condition can be rephrased as
+
+   $$
+   \bx \succeq \bzero
+   \text{ and }
+   \nabla f (\bx) \succeq \bzero
+   \text{ and }
+   (\nabla f (\bx))_i x_i = 0 \Forall i=1,\dots,n.
+   $$
+
+The condition $(\nabla f (\bx))_i x_i = 0$ for every $i$ is known
+as *complementarity*. It means that for every $i$ either
+$x_i$ or $(\nabla f (\bx))_i$ or both must be 0.
+In other words, both $x_i$ and $(\nabla f (\bx))_i$ cannot be
+nonzero at the same time.
+
+Thus, the sparsity patterns of $\bx$ and $\nabla f (\bx)$ are
+*complementary*. In other words,
+
+$$
+\supp (\bx) \cap \supp (\nabla f (\bx)) = \EmptySet
+$$
+where $\supp (\bx)$ denotes the index set of nonzero entries of $\bx$.
+```
+
+
+
+
 ## Concave Objective Functions
 
 
