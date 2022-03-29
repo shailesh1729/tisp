@@ -529,11 +529,71 @@ In this case, the set of feasible points is $C = \dom f$.
 
    $$
    \nabla f(\bx)^T (\by - \bx)  = \nabla f(\bx)^T (-t  \nabla f(\bx))
-   = -t \|  \nabla f(\bx) \|_2^2 \geq 0. 
+   = -t \|  \nabla f(\bx) \|_2^2 \geq 0
    $$
+   must hold true for $t > 0$.
+1. This means that $\|  \nabla f(\bx) \|_2 \leq 0$ must be true.
 1. Thus $\nabla f(\bx) = \bzero$ must be true.
 ```
 
+
+```{prf:theorem} Differentiable objective minimization with equality constraints
+:label: res-cvxopt-diff-obj-linear-constraints
+
+Let $f : \RR^n \to \RR$ be a differentiable convex function
+with $\dom f = \RR^n$.
+Consider the minimization problem: 
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bA \bx = \bb
+$$
+where $\bA \in \RR^{p \times n}$ and $\bb \in \RR^p$ represent
+$p$ linear equality constraints.
+Assume that the problem is feasible.
+
+Then, $\bx$ is an optimal point for the minimization problem
+if and only if there exists a vector $\bv \in \RR^p$ such that
+
+$$
+\nabla f (\bx) + \bA^T \bv = \bzero.
+$$
+```
+
+```{prf:proof}
+The feasible set is given by $C = \{ \bx \ST \bA \bx = \bb \}$.
+We recall from {prf:ref}`res-cvxopt-diff-convex-optimal-criterion`, that
+$\bx$ is an optimal point if and only if
+$\nabla f(\bx)^T (\by - \bx) \geq 0 \Forall \by \in C$.
+
+1. Thus, $\bx$ is feasible if and only if
+   $\nabla f(\bx)^T (\by - \bx) \geq 0$ for every $\by$ satisfying
+   $\bA \by = \bb$.
+1. Since both $\bx$ and $\by$ are feasible, hence $\bA (\by - \bx) = \bzero$.
+1. Thus, $\bz = \by - \bx \in \NullSpace(\bA)$.
+1. In fact, $\by \in C$ if and only if $\by = \bx + \bz$ for some
+   $\bz \in \NullSpace(\bA)$. 
+1. Thus, the optimality criteria reduces to
+   $\nabla f(\bx)^T \bz \geq 0$ for every $\bz \in \NullSpace(\bA)$.
+1. Note that $\nabla f(\bx)^T \bz$ is a linear function of $\bz$
+   as $\nabla f(\bx)$ is a fixed vector.
+1. If a linear function is nonnegative on a subspace, then it must
+   be identically zero on the subspace.
+1. Thus, $\nabla f(\bx)^T \bz = 0$ for every $\bz \in \NullSpace(\bA)$. 
+1. In other words, $\bx$ is optimal if and only if
+   $\nabla f(\bx) \perp \NullSpace(\bA)$.
+1. Recall that $\NullSpace(\bA)^{\perp} = \ColSpace(\bA^T)$;
+   i.e., the null space of $\bA$ is orthogonal complement of the
+   column space (range) of $\bA^T$.
+1. Thus, $\bx$ is optimal if and only if 
+   $\nabla f(\bx) \in \ColSpace(\bA^T)$.
+1. In other words, $\bx$ is optimal if and only if there exists
+   a vector $\bv \in \RR^p$ such that
+
+   $$
+   \nabla f (\bx) + \bA^T \bv = \bzero.
+   $$
+```
 
 ## Concave Objective Functions
 
