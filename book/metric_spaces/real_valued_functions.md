@@ -115,6 +115,8 @@ or not. Although, the theorem doesn't help
 in identifying the solution as such.
 
 ```{prf:example}
+:label: ex-ms-max-vol-whd-constraint
+
 Consider the optimization problem of maximizing
 the volume of a box with the constraints:
 
