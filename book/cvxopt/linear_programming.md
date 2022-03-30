@@ -24,7 +24,7 @@ where
 1. $\bx \in \RR^n$ is the optimization variable.
 1. $f(\bx) = \bc^T \bx + d$ is an affine objective function.
 1. $\bG \in \RR^{m \times n}$ and $\bh \in \RR^m$
-  describe the $m$ affine inequality constraints.
+   describe the $m$ affine inequality constraints.
 1. $\bA \in \RR^{p \times n}$ and $\bb \in \RR^p$
    describe the $p$ affine equality constraints.
 ````
