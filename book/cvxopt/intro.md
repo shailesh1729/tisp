@@ -497,3 +497,84 @@ with the optimization variable $(\bx, t) \in \VV \oplus \RR$.
 1. The objective function for the epigraph form is a linear function of $(\bx, t)$.
 ```
 
+
+## Minimization of Proper Functions
+```{div}
+Let $\VV$ be a real $n$-dimensional normed linear space.
+Let $f : \VV \to \RERL$ be a proper function with $S = \dom f$.
+We consider the problem of minimizing $f$ over a set $A \subseteq S$.
+
+1. $f$ is the objective function or cost function (being minimized).
+1. The set $A$ is the feasible set or constraint set.
+1. Any $\bx \in A$ is a feasible solution or feasible point.
+1. If there is at least one feasible point (i.e., $A$ is nonempty),
+   the problem is feasible.
+1. Otherwise, the problem is infeasible.
+1. Let $p^* = \inf_{\bx \in A} f(\bx)$ be the optimal value of the minimization problem.
+1. We allow $p^*$ to take values over the extended real line $\ERL$.
+1. If the minimization problem is infeasible, then $p^* = \infty$.
+1. If $p^* = -\infty$, then the problem is unbounded below.
+1. If there is some $\bx^* \in A$ such that $f(\bx^*) = p^*$, then
+   $\bx^*$ is an optimal solution or optimal point or minimizing point
+   or minimizer or global minimum over $A$.
+1. Alternatively, $f$ attains a minimum over $A$ at $\bx^*$.
+   We write this as 
+
+   $$
+   \bx^* \in \underset{\bx \in A}{\argmin} f(\bx).
+   $$ 
+1. If $\bx^*$ is a unique minimizer of $f$ over $A$, then we abuse the notation and write
+
+   $$
+   \bx^* = \underset{\bx \in A}{\argmin} f(\bx).
+   $$
+1. It is possible that $p^*$ is finite and yet there is no optimal point
+   in $A$. 
+1. In other words, the set $\underset{\bx \in A}{\argmin} f(\bx)$ may be empty.
+```
+
+A basic question of optimization is whether an optimal solution exists.
+
+```{prf:remark} The set of optimal points
+:label: res-opt-min-f-optimal-set
+
+The set of optimal points for the problem of minimization of a proper function
+$f$ over a feasible set $A$ is given by
+
+$$
+\argmin_{\bx \in A} f(\bx) = A \cap f^{-1}(p^*)
+$$
+where $p^* = \inf_{\bx \in A} f(\bx)$
+and $f^{-1}(y)$ denotes the level set of $f$ given by $\{\bx \in S \ST f(\bx) = y \}$.
+
+This comes directly from the fact that
+
+1. $\bx^*$ must be feasible. Hence $\bx^* \in A$.
+1. $f$ must attain the optimal value at $\bx^*$. Thus, $p^* = f(\bx^*)$.
+   Hence, $\bx^* \in f^{-1}(p^*)$.
+
+
+In other words, the optimal set is the intersection of the feasible set
+$A$ with the level set $f^{-1}(p^*)$.
+
+
+Thus, for an optimal solution to exist
+
+1. $p^*$ must be finite. 
+1. The level set $f^{-1}(p^*)$ must be nonempty.
+1. The feasible set $A$ must be nonempty.
+1. The intersection of $A$ with $f^{-1}(p^*)$ must be nonempty.
+```
+
+```{prf:definition} Coercive function
+:label: def-opt-coercive-function
+
+A proper function $f: \VV \to \RERL$ with $S = \dom f$ is called *coercive* over
+a set $A \subseteq S$ if for every sequence $\{ \bx_n \}$ of $A$ such that
+$ \lim_{k \to \infty} \| \bx_k \| = \infty$, we have $\lim_{k \to \infty} f(\bx_k) = \infty$.
+```
+
+
+
+
+
