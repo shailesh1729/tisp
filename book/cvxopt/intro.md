@@ -1,7 +1,29 @@
-# Introduction
+# Mathematical Optimization
 
+Main references for this section are {cite}`boyd2004convex,bertsekas2003convex`.
 
-Main references for this section are {cite}`boyd2004convex`.
+This section provides a general overview of optimization problems.
+The notion of objective or cost functions and constraint functions
+is introduced. Standard form for optimization problems is introduced.
+Several examples are discussed for equivalent forms of optimization problems.
+The standard form focuses on minimizing the objective function
+over a set of equality and inequality constraints. Maximization
+problems can also be converted into minimization problems by
+changing the sign of the objective function.
+
+We introduce the notion of the domain of an optimization problem,
+feasible points or solutions, feasible set of solutions, the optimal
+value of the minimization problem, optimal points or solutions,
+optimal set etc.. We discuss when the problem may be infeasible
+or feasible but unbounded. We discuss situations where the problem
+may be feasible and have a global minimum/optimal value and yet
+a feasible solution may not exist. 
+
+We then discuss general requirements for the feasibility
+of the optimization problem and existence of an optimal 
+solution. We introduce the notion of coercive functions
+which provide the Weierstrass type result for the existence
+of optimal solutions.
 
 ## Optimization Problems
 
@@ -499,6 +521,7 @@ with the optimization variable $(\bx, t) \in \VV \oplus \RR$.
 
 
 ## Minimization of Proper Functions
+
 ```{div}
 Let $\VV$ be a real $n$-dimensional normed linear space.
 Let $f : \VV \to \RERL$ be a proper function with $S = \dom f$.
@@ -566,6 +589,9 @@ Thus, for an optimal solution to exist
 1. The intersection of $A$ with $f^{-1}(p^*)$ must be nonempty.
 ```
 
+### Coercive Functions
+
+
 ```{prf:definition} Coercive function
 :label: def-opt-coercive-function
 
@@ -600,5 +626,280 @@ is unbounded.
 ```
 
 
+Recall from {prf:ref}`def-ms-closed-function` that a function
+is called closed if all its sublevel sets are closed.
 
+
+### Weierstrass' Theorem
+
+In this subsection, we examine the problem of unconstrained
+minimization of a proper closed function.
+
+
+```{prf:theorem} Unconstrained minimization of a proper closed function
+:label: res-opt-proper-closed-unconstrained-min
+
+Let $\VV$ be a real $n$-dim normed linear space.
+Let $f : \VV \to \RERL$ be a proper closed function with $S = \dom f$.
+
+Let $p^* = \inf_{\bx \in \VV} f(\bx)$.
+Let $X = f^{-1}(p^*)$ be the set of minimizers of $f$ (over all of $\VV$).
+For every $p \in \RR$, let $S_p$ denote the sublevel set $\{ \bx \ST f(\bx) \leq p \}$.
+Then,
+
+1. $p^* < \infty$.
+1. $X = \bigcap_{p > p^*} S_p$.
+1. $X$ is closed.
+```
+
+```{prf:proof}
+
+We show that $p^* < \infty$.
+
+1. Since $f$ is proper, hence $S$ is nonempty. 
+1. Thus, there exists $\bx \in S$ such that $f(\bx) < \infty$.
+1. Hence, $p^* = \inf_{\bx \in \VV} f(\bx) < \infty$.
+
+Let $Y = \bigcap_{p > p^*} S_p$.
+We have to show that $X = Y$.
+
+We first show that $X \subseteq Y$.
+
+1. let $\bx \in X$.
+1. Then, $f(\bx) = p^*$.
+1. Then, $f(\bx) < p$ for every $p > p^*$.
+1. Hence, $\bx \in S_p$ for every $p > p^*$.
+1. Thus, $\bx \in Y$.
+1. Thus, $X \subseteq Y$.
+
+We now show that $Y \subseteq X$.
+
+1. Let $\bx \in Y$.
+1. Then, $f(\bx) = p^*$ must hold true.
+1. $f(\bx)$ cannot be smaller than $p^*$ since by definition 
+   $p^* = \inf f(\bx)$.
+1. Thus, $f(\bx) \geq p^*$ must hold true.
+1. Now, for contradiction, assume that $f(\bx) > p^*$.
+   1. Let $q = f(\bx)$.
+   1. Let $p = \frac{p^* + q}{2}$.
+   1. Then, $p^* < p < q$.
+   1. Hence, $\bx \notin S_p$.
+   1. But then, $\bx \notin Y$ since $Y \subseteq S_p$ as $p > p^*$. 
+   1. A contradiction.
+1. Thus, the only allowed value for $f(\bx)$ is $p^*$.
+1. Thus, $\bx \in X$.
+1. Thus, $Y \subseteq X$.
+1. Thus, 
+
+   $$
+   X = f^{-1}(p^*) = Y = \bigcap_{p > p^*} S_p.
+   $$
+
+We show that $X$ is closed.
+
+1. If $X$ is empty, then it is closed by definition.
+1. Otherwise, $X$ is an intersection of sublevel sets.
+1. Since $f$ is closed, its sublevel sets are closed.
+1. Hence $S_p$ is closed for every $p$.
+1. Thus, $X$ is an intersection of closed sets.
+1. Thus, $X$ is closed.
+```
+
+
+
+```{prf:theorem} Weierstrass' theorem
+:label: res-opt-weierstrass-theorem
+
+Let $\VV$ be a real $n$-dim normed linear space.
+Let $f : \VV \to \RERL$ be a proper closed function with $S = \dom f$.
+
+Let $p^* = \inf_{\bx \in \VV} f(\bx)$.
+Let $X = f^{-1}(p^*)$ be the set of minimizers of $f$ (over all of $\VV$).
+For every $p \in \RR$, let $S_p$ denote the sublevel set $\{ \bx \ST f(\bx) \leq p \}$.
+
+Assume that one of the following conditions are true.
+
+
+1. $S = \dom f$ is closed and bounded.
+1. There exists a scalar $r \in \RR$ such that the sublevel set
+   $ S_r = \{ \bx \ST f(\bx) \leq r \}$ is nonempty and bounded.
+1. $f$ is coercive.
+
+Then, $X$ (the set of minimizers of $f$) is nonempty and compact.
+```
+
+```{prf:proof}
+
+If there exists $\bx \in S$ such that $f(\bx) = p^*$,
+then $X$ is nonempty.
+To show that $X$ is compact, we just need to show
+that it is closed and bounded.
+By {prf:ref}`res-la-ndim-compact-closed-bounded`,
+every closed and bounded subset of $\VV$ which is a real
+$n$-dimensional normed linear space is compact.
+By {prf:ref}`res-opt-proper-closed-unconstrained-min`, $X$ is also closed.
+Thus, we just need to show that $X$ is bounded.
+
+
+Assume that condition (1) holds.
+
+1. Since $f$ is proper, hence $S$ is nonempty.
+1. Consider a sequence $\{ \bx_k \}$ of $S$ such that
+   $\lim_{k \to \infty} f(\bx_k) = p^*$.
+1. Since $S$ is bounded, hence $\{ \bx_k \}$ has a convergent subsequence
+   by Bolzano-Weierstrass theorem
+   ({prf:ref}`res-la-bounded-seq-bolzano-weierstrass`).
+1. Let $\{ \bx_l \}$ be the convergent subsequence of $\{ \bx_k \}$ with
+   $\lim \bx_l = \bx^*$.
+1. Since $S$ is closed, hence $\bx^* \in S$.
+1. Since $\{ f(\bx_k) \}$ is  convergent and $\{ f(\bx_l) \}$ is
+   a subsequence of $\{ f(\bx_k) \}$, hence
+   
+   $$
+   \lim_{l \to \infty} f(\bx_l) = \lim_{k \to \infty} f(\bx_k) = p^*.
+   $$
+1. Since $f$ is closed, hence it is lower semicontinuous (l.s.c.) at $\bx^* \in S$
+   (see {prf:ref}`res-ms-func-lsc-closed-func`).
+1. Also, note that since $\{ f(\bx_k) \}$ is convergent, hence
+   
+   $$
+   \liminf_{l \to \infty} f(\bx_l) =  \lim_{l \to \infty} f(\bx_l).
+   $$
+1. Since $f$ is l.s.c. at $\bx^* \in S$, hence by {prf:ref}`res-ms-semicont-seq-converge`,
+   
+   $$
+   f(\bx^*) \leq \liminf_{l \to \infty} f(\bx_l)
+   = \lim_{l \to \infty} f(\bx_l) 
+   = \liminf_{k \to \infty} f(\bx_k) = p^*.
+   $$
+1. Since $p^*$ is the infimum value of $f$, hence $f(\bx^*)$ cannot be smaller than $p^*$.
+1. Thus, $f(\bx^*) = p^*$ must be true.
+1. Thus, $f(\bx^*) = p^*$ means that $\bx^*$ is an optimal solution for the
+   minimization of $f$.
+1. Thus, the set $X = f^{-1}(p^*)$ is nonempty.
+1. $X$ is bounded since $S$ is bounded by hypothesis.
+1. Since $X$ is closed and bounded. Hence, $X$ is compact.
+
+Assume that condition (2) holds.
+
+1. The sublevel set $S_r$ is nonempty and bounded.
+1. Since $f$ is closed, hence $S_r$ is also closed.
+1. Consider the restriction of $f$ on $S_r$ given by
+
+   $$
+   \tilde{f} = \begin{cases} 
+   f(\bx), & f(\bx) \leq r \\
+   \infty, & \text{ otherwise }.
+   \end{cases}
+   $$
+1. Then, $\dom \tilde{f} = S_r$. Thus, $\dom \tilde{f}$ is nonempty, closed and bounded.
+1. Then, $\tilde{f}$ never takes the value $-\infty$ and is not identically $\infty$.
+   Hence, $\tilde{f}$ is a proper function.
+1. Since $f$ is closed, hence sublevel sets of $\tilde{f}$ are also closed.
+   1. For any $p > r$, the sublevel set of $\tilde{f}$ is identical to $S_r$.
+   1. For any $p \leq r$, the sublevel set of $\tilde{f}$ is identical to $S_p$,
+      the corresponding sublevel set of $f$.
+1. Thus, $\tilde{f}$ is closed too.
+1. Applying condition (1) on $\tilde{f}$, the set of minimizers of $\tilde{f}$ is
+   nonempty and compact.
+1. We also note that the minimizers of $f$ are identical to the minimizers of $\tilde{f}$.
+1. Thus, the set of minimizers of $f$ is nonempty and closed.
+
+Assume that condition (3) holds.
+
+1. Since $f$ is proper, hence it has some nonempty sublevel sets.
+1. Let $r \in \RR$ be one such scalar such that the sublevel set
+   $S_r = \{ \bx \in S \ST f(\bx) \leq r \}$ is nonempty.
+1. By {prf:ref}`res-opt-coercive-level-sets`, the nonempty level sets
+   of $f$ are bounded. Hence, $S_r$ is bounded.
+1. Then, by applying condition (2), the set of minimizers of $f$ is
+   nonempty and compact.
+```
+
+
+```{prf:corollary} Minimizing a proper function over a closed set
+:label: res-opt-min-proper-func-closed-set
+
+Let $f : \VV \to \RERL$ be a proper function with $S = \dom f$.
+Let $A \subseteq S$ be a nonempty set. 
+Consider the problem of minimizing $f$ over $A$.
+
+Further, assume that one of the following conditions are true.
+
+
+1. $A$ is closed and bounded.
+1. There exists a scalar $r \in \RR$ such that the set
+   $\{ \bx \in A \ST f(\bx) \leq r \}$ is nonempty and bounded.
+1. $f$ is coercive over $A$.
+
+Then, the set of minimizers of $f$ over $A$ is nonempty and compact.
+```
+
+```{prf:proof}
+We define a restriction $g : \VV \to \RERL$ of $f$ over the set $A$ as follows
+
+$$
+g(\bx) = \begin{cases}
+f(\bx), & \bx \in A \\
+\infty, & \text{ otherwise }.
+\end{cases}
+$$
+
+1. $\dom g = A$.
+1. Since $f$ never takes the value $-\infty$, hence $g$ also never takes the value $-\infty$.
+1. Since $A$ is nonempty, hence there exists $\bx \in \VV$ such that $g(\bx) < \infty$.
+1. Hence, $g$ is a proper function.
+1. Also, note that the set $\{ \bx \in A \ST f(\bx) \leq r \}$ is
+   nothing but the sublevel set of $g$ for the scalar $r$.
+1. The set of minimizers of $f$ over $A$ is nothing but the set of minimizers
+   of $g$.
+1. Since $f$ is coercive over $A$, hence $g$ is coercive (over its entire domain). 
+
+Thus, applying {prf:ref}`res-opt-weierstrass-theorem`,
+the set of minimizers of $g$ is nonempty and compact.
+So is the set of minimizers of $f$ over $A$.
+```
+
+```{prf:corollary} Minimizing a real valued function over a closed set
+:label: res-opt-min-rv-func-closed-set
+
+Let $f : \VV \to \RR$ be a real valued function with $\dom f = \VV$.
+Let $A \subseteq \VV$ be a nonempty set. 
+Consider the problem of minimizing $f$ over $A$.
+
+Further, assume that one of the following conditions are true.
+
+
+1. $A$ is closed and bounded.
+1. There exists a scalar $r \in \RR$ such that the set
+   $\{ \bx \in A \ST f(\bx) \leq r \}$ is nonempty and bounded.
+1. $f$ is coercive over $A$.
+
+Then, the set of minimizers of $f$ over $A$ is nonempty and compact.
+```
+
+```{prf:proof}
+We define a restriction $g : \VV \to \RERL$ of $f$ over the set $A$ as follows
+
+$$
+g(\bx) = \begin{cases}
+f(\bx), & \bx \in A \\
+\infty, & \text{ otherwise }.
+\end{cases}
+$$
+
+1. $\dom g = A$.
+1. Since $f$ is hence $g$ also never takes the value $-\infty$.
+1. Since $A$ is nonempty, hence there exists $\bx \in \VV$ such that $g(\bx) < \infty$.
+1. Hence, $g$ is a proper function.
+1. Also, note that the set $\{ \bx \in A \ST f(\bx) \leq r \}$ is
+   nothing but the sublevel set of $g$ for the scalar $r$.
+1. The set of minimizers of $f$ over $A$ is nothing but the set of minimizers
+   of $g$.
+1. Since $f$ is coercive over $A$, hence $g$ is coercive (over its entire domain). 
+
+Thus, applying {prf:ref}`res-opt-weierstrass-theorem`,
+the set of minimizers of $g$ is nonempty and compact.
+So is the set of minimizers of $f$ over $A$.
+```
 
