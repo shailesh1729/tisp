@@ -315,6 +315,8 @@ The following statements are equivalent.
 ```
 
 ```{prf:definition} Bolzano-Weierstrass property
+:label: def-ms-bolzano-weierstrass-property
+
 A set $A$ in a metric space has the *Bolzano-Weierstrass property* if
 every sequence in $A$ has a convergent subsequence that converges
 to a point in $A$.
@@ -709,6 +711,8 @@ has a convergent subsequence.
 
 ## Totally Bounded Metric Spaces
 ```{prf:definition} Totally bounded space
+:label: def-ms-totally-bounded-metric-space
+
 A metric space $(X,d)$ is called *totally bounded* if for each
 $r > 0$, there exists a finite number of points 
 $x_1, \dots, x_n \in X$ such that 
@@ -736,6 +740,8 @@ Let $(X,d)$ be a compact metric space.
 ```
 
 ```{prf:example}
+:label: ex-ms-totally-bounded-but-not-compact-space
+
 We showed earlier in {prf:ref}`ex-0-1-not-compact`
 that $(0,1)$ is not compact.
 
