@@ -569,11 +569,35 @@ Thus, for an optimal solution to exist
 ```{prf:definition} Coercive function
 :label: def-opt-coercive-function
 
-A proper function $f: \VV \to \RERL$ with $S = \dom f$ is called *coercive* over
-a set $A \subseteq S$ if for every sequence $\{ \bx_n \}$ of $A$ such that
+A proper function $f: \VV \to \RERL$ is called *coercive* over
+a set $A$ if for every sequence $\{ \bx_n \}$ of $A$ such that
 $ \lim_{k \to \infty} \| \bx_k \| = \infty$, we have $\lim_{k \to \infty} f(\bx_k) = \infty$.
+
+If $f$ is coercive over the entire vector space $\VV$, we say that $f$ is *coercive*.
 ```
 
+
+```{prf:remark} Level sets of coercive functions
+:label: res-opt-coercive-level-sets
+
+Let $f : \VV \to \RERL$ be a coercive proper function. Let $a \in \RR$.
+If the level set $f^{-1}(a)$ is nonempty, then it is bounded. 
+
+In other words, all nonempty level sets of a coercive function are bounded.
+```
+
+```{prf:proof}
+For contradiction, assume that there exists $a \in \RR$ such that $A = f^{-1}(a)$
+is unbounded.
+
+1. Then, there exists a sequence $\{ \bx_k \}$ of $A$ such that
+   $ \lim_{k \to \infty} \| \bx_k \| = \infty$.
+1. Since $f$ is coercive, hence $\lim_{k \to \infty} f(\bx_k) = \infty$. 
+1. But, by definition, $f(\bx_k) = a$. 
+1. Hence $\lim_{k \to \infty} f(\bx_k) = a$.
+1. We have a contradiction.
+1. Hence, $f^{-1}(a)$ must be bounded.
+```
 
 
 
