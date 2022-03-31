@@ -602,6 +602,9 @@ $ \lim_{k \to \infty} \| \bx_k \| = \infty$, we have $\lim_{k \to \infty} f(\bx_
 If $f$ is coercive over the entire vector space $\VV$, we say that $f$ is *coercive*.
 ```
 
+One way to think about coercive functions is that they grow rapidly
+at the extremes of the domain on which they are defined.
+
 
 ```{prf:remark} Level sets of coercive functions
 :label: res-opt-coercive-level-sets
@@ -625,15 +628,37 @@ is unbounded.
 1. Hence, $f^{-1}(a)$ must be bounded.
 ```
 
+```{prf:remark} Sublevel sets of coercive functions
+:label: res-opt-coercive-sublevel-sets
 
-Recall from {prf:ref}`def-ms-closed-function` that a function
-is called closed if all its sublevel sets are closed.
+Let $f : \VV \to \RERL$ be a coercive proper function with $S = \dom f$.
+For every $r \in \RR$, define the sublevel set
+$S_r$ as $\{ \bx \in S \ST  f(\bx) \leq r \}$.
+If $S_r$ is nonempty, then it is bounded. 
+
+In other words, all nonempty sublevel sets of a coercive function are bounded.
+```
+
+```{prf:proof}
+For contradiction, assume that there exists $r \in \RR$ such that $S_r$
+is unbounded.
+
+1. Then, there exists a sequence $\{ \bx_k \}$ of $S_r$ such that
+   $ \lim_{k \to \infty} \| \bx_k \| = \infty$.
+1. Since $f$ is coercive, hence $\lim_{k \to \infty} f(\bx_k) = \infty$. 
+1. But, by definition, $f(\bx_k) \leq r$. 
+1. Hence $\lim_{k \to \infty} f(\bx_k) \leq r$.
+1. We have a contradiction.
+1. Hence, $S_r$ must be bounded.
+```
 
 
 ### Weierstrass' Theorem
 
 In this subsection, we examine the problem of unconstrained
 minimization of a proper closed function.
+Recall from {prf:ref}`def-ms-closed-function` that a function
+is called closed if all its sublevel sets are closed.
 
 
 ```{prf:theorem} Unconstrained minimization of a proper closed function
@@ -810,7 +835,7 @@ Assume that condition (3) holds.
 1. Since $f$ is proper, hence it has some nonempty sublevel sets.
 1. Let $r \in \RR$ be one such scalar such that the sublevel set
    $S_r = \{ \bx \in S \ST f(\bx) \leq r \}$ is nonempty.
-1. By {prf:ref}`res-opt-coercive-level-sets`, the nonempty level sets
+1. By {prf:ref}`res-opt-coercive-sublevel-sets`, the nonempty sublevel sets
    of $f$ are bounded. Hence, $S_r$ is bounded.
 1. Then, by applying condition (2), the set of minimizers of $f$ is
    nonempty and compact.
