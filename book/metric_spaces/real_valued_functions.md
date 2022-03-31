@@ -166,6 +166,30 @@ is closed for every $\alpha \in \RR$
 in the subspace topology $(S,d)$.
 ```
 
+
+```{prf:example} A closed function need not have closed domain
+:label: ex-ms-closed-func-not-closed-domain
+
+Let $f: \RR \to \RR$ be defined as $f(x) = \frac{1}{x}$
+with $S = \dom f = (0, \infty)$.
+
+1. The domain of $f$ is an open set.
+1. Let $S_{\alpha} = \{ x \in S \ST f(x) \leq \alpha \}$ denote the sublevel set for $\alpha$.
+1. Then, $S_{\alpha} = [\frac{1}{\alpha}, \infty)$ for every $\alpha > 0$.
+   Thus, it is closed.
+1. $S_{\alpha} = \EmptySet$ for every $\alpha \leq 0$ since $f(x)$ is always positive.
+   Thus, it is closed.
+1. Thus, $S_{\alpha}$ is closed for every $\alpha \in \RR$.
+1. Thus, $f$ is a closed function.
+
+We have shown a counter example where the function is closed but
+its domain is not closed.
+```
+
+While the domain of a closed function may not be closed, its epigraph
+indeed is closed.
+
+
 ```{prf:theorem} Closed function = closed epigraph
 :label: res-ms-closed-func-closed-epi
 
@@ -837,6 +861,7 @@ is u.s.c. at every point of $S$.
 ```
 
 ```{prf:example} Semicontinuous functions
+:label: ex-ms-semicontinuous-functions-1
 
 Consider the function $f : \RR \to \RR$ defined as
 
@@ -1161,6 +1186,7 @@ we study the implications of lower semicontinuity under
 the subspace topology.
 
 ```{prf:theorem} Lower semicontinuity and convergent dominating sequence
+:label: res-ms-lsc-converge-dominating-seq
 
 Let $f : X \to \RR$ with $S = \dom f$.
 Let $a \in S$. Let $\{ a_n \}$ be a sequence of $S$.
