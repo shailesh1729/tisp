@@ -166,6 +166,7 @@ is closed for every $\alpha \in \RR$
 in the subspace topology $(S,d)$.
 ```
 
+### Closed Functions on Non-Open Domains
 
 ```{prf:example} A closed function need not have closed domain
 :label: ex-ms-closed-func-not-closed-domain
@@ -189,6 +190,7 @@ its domain is not closed.
 While the domain of a closed function may not be closed, its epigraph
 indeed is closed.
 
+### Epigraphs
 
 ```{prf:theorem} Closed function = closed epigraph
 :label: res-ms-closed-func-closed-epi
@@ -296,6 +298,8 @@ Assume that $f$ is closed.
 1. Thus, $\epi f$ is closed.
 ```
 
+
+### Continuous Functions
 
 ```{prf:proposition}
 If $f: X \to \RR$ is continuous and $\dom f$ is closed, then 
