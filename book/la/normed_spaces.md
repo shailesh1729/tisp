@@ -2357,7 +2357,7 @@ We are given that $A$ is bounded.
 1. If $A$ is closed, then $\closure A = A$ and we are done.
 ```
 
-```{prf:theorem} Bolzano Weierstrass theorem for bounded sequences of $\RR^m$
+```{prf:theorem} Bolzano Weierstrass theorem for bounded sequences
 :label: res-la-bounded-seq-bolzano-weierstrass
 
 Let $\VV$ be a real $n$-dimensional normed linear space. 
