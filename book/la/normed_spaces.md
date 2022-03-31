@@ -2221,6 +2221,19 @@ $\VV$ is a normed linear space with $n = \dim \VV$.
 
 ## Compact Sets
 
+In this subsection, we pay special attention to the
+compact subsets of $n$-dimensional real normed linear
+spaces. We show that in such spaces, closed and bounded
+sets are compact. 
+We provides some results related to set arithmetic for
+compact sets.
+We further establish the
+Bolzano Weierstrass theorems for such spaces.
+Recall from {prf:ref}`def-ms-bolzano-weierstrass-property`
+that a set has Bolzano-Weierstrass property
+if every sequence of the set has a convergent subsequence
+that converges to a point in the set.
+
 ```{prf:theorem} Compact = Closed and Bounded in $n$-dim
 :label: res-la-ndim-compact-closed-bounded
 
@@ -2312,3 +2325,52 @@ We proceed as follows
 ```
 
 
+```{prf:theorem} Bolzano Weierstrass theorem for bounded subsets
+:label: res-la-ndim-bounded-bolzano-weierstrass
+
+Let $\VV$ be a real $n$-dimensional normed linear space. 
+Let $A$ be a bounded subset of $\VV$. Then,
+every sequence of $A$ has a convergent subsequence.
+
+If $A$ is closed, then the subsequence converges in $A$ itself.
+Otherwise, the subsequence converges in $\closure A$.
+```
+
+```{prf:proof}
+We are given that $A$ is bounded.
+
+1. Then, there exist $M > 0$ such that:
+
+   $$
+   \| \bx \| \leq M \Forall \bx \in A.
+   $$
+1. Thus, $A \subseteq B[\bzero, M]$.
+1. $B[\bzero, M]$ is a closed and bounded subset of $\VV$.
+1. $\closure A \subseteq B[\bzero, M]$ since $\closure A$ is the
+   smallest closed set containing $A$.
+1. Thus, $\closure A$ is closed and bounded.
+1. By {prf:ref}`res-la-ndim-compact-closed-bounded`, 
+   $\closure A$ is compact.
+1. Let $\{ \bx_k \}$ be a sequence of $A$. Then, it is also a sequence of $\closure A$.
+1. By {prf:ref}`def-ms-compact-characterization`, $\{ \bx_k \}$ has 
+   a subsequence that converges in $\closure A$.
+1. If $A$ is closed, then $\closure A = A$ and we are done.
+```
+
+```{prf:theorem} Bolzano Weierstrass theorem for bounded sequences of $\RR^m$
+:label: res-la-bounded-seq-bolzano-weierstrass
+
+Let $\VV$ be a real $n$-dimensional normed linear space. 
+Every bounded sequence of $\VV$ has a convergent subsequence.
+```
+```{prf:proof}
+Let $\{ \bx_k \}$ be a bounded sequence of $\VV$.
+
+1. Then there exists a closed ball $B[\bzero, M]$ such that 
+   $\{ \bx_k \} \subset B[\bzero, M]$.
+1. $B[\bzero, M]$ is closed and bounded.
+1. By {prf:ref}`res-la-ndim-compact-closed-bounded`, 
+   $B[\bzero, M]$ is compact.
+1. By {prf:ref}`def-ms-compact-characterization`, $\{ \bx_k \}$ has 
+   a subsequence that converges in $B[\bzero, M]$.
+```
