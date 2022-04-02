@@ -240,6 +240,74 @@ program also a convex optimization program.
 ```
 
 
+### Proper Convex Functions
+
+It is useful to extend these definitions to proper convex functions
+as objective functions and/or inequality constraint functions.
+
+```{prf:definition} Optimization problem general form for proper convex functions
+:label: def-opt-proper-convex-opt-problem
+
+Let $\VV$ be an $n$-dimensional real vector space.
+Let $f : \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $X \subseteq \VV$ be a convex set.
+
+A mathematical optimization problem of the form
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in X
+$$
+is known as a *convex optimization problem*
+for proper convex functions.
+
+In other words, this problem minimizes
+a proper convex function over a convex set.
+We can write the optimal value of the minimization problem
+as
+
+$$
+p^* = \inf \{ f(\bx) \ST \bx \in X \}.
+$$
+
+The set of feasible points is given by $C = X \cap \dom f$
+which is a convex set.
+
+The set of optimal points for the minimization problem is
+
+$$
+X_{\text{opt}}  = \{ \bx \in C \ST f(\bx) = p^* \}.
+$$
+```
+
+````{prf:definition} Convex optimization problem standard form for proper convex functions
+:label: def-cvx-opt-proper-problem-standard-form
+
+Let $\VV$ be an $n$-dimensional real vector space.
+A mathematical optimization problem of the form
+
+```{math}
+:label: eq-cvx-opt-proper-prob-standard-form
+& \text{minimize }   & & f_0(\bx) \\
+& \text{subject to } & & f_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
+```
+with optimization variable $\bx \in \VV$ is called
+a *convex optimization problem in standard form* for proper convex functions if
+
+1. The objective function $f_0: \VV \to \RERL$ is a proper convex function.
+1. The inequality constraint functions $f_i: \VV \to \RERL$ are 
+   proper convex functions for $i=1,\dots,m$.
+1. The equality constraint functions $h_j: \VV \to \RR$ are affine functions for $j=1,\dots,p$.
+````
+
+The reader can check that the definitions of
+problem domain, feasible set, optimal value,
+optimal solutions/points, etc. can be easily 
+extended by using the effective domains of $f_0, \dots, f_m$.
+
+
 ### Local and Global Optima
 
 
@@ -247,7 +315,9 @@ program also a convex optimization program.
 :label: res-cvxopt-local-global-minimum
 
 Let $f : \VV \to \RR$ be a convex function. Let $C \subseteq \dom f$
-be a convex set. Let $\bx^*$ be locally optimal for $f$ over $C$.
+be a convex set. 
+Consider the problem of minimizing $f$ over $C$.
+Let $\bx^*$ be locally optimal for $f$ over $C$.
 Then, $\bx^*$ is globally optimal for $f$ over $C$.
 
 In other words,
@@ -287,8 +357,39 @@ In other words, $f(\bx) \geq f(\bx^*)$ for every $\bx \in B[\bx, r] \cap C$.
 1. Thus, $\bx^*$ is indeed globally optimal.
 ```
 
+```{prf:corollary} Local minimum is a global minimum in for proper convex functions
+:label: res-cvxopt-local-global-minimum-proper-convex
+
+Let $f : \VV \to \RERL$ be a proper convex function. 
+Let $X$ be a convex subset of $\VV$. 
+Consider the problem of minimizing $f$ over $X$.
+Let $\bx^*$ be locally optimal for $f$ over $X$.
+Then, $\bx^*$ is globally optimal for $f$ over $X$.
+
+In other words,
+
+$$
+f(\by) \geq f(\bx^*) \Forall \by \in X.
+$$
+```
+
+```{prf:proof}
+We note that the feasible set is $C = X \cap \dom f$.
+Since both $X$ and $\dom f$ are convex, hence $C$ is convex.
+
+1. If $C = \EmptySet$,
+   then there are no feasible points. Hence, no local/global optima.
+1. We now consider the case where $C \neq \EmptySet$.
+1. Following the argument in {prf:ref}`res-cvxopt-local-global-minimum`,
+   if $\bx^*$ is locally optimal for $f$ over $C$, then it is globally
+   optimal for $f$ over $C$. 
+1. Consequently, it is globally optimal for $f$ over $X$ 
+   as $f(\bx) = \infty > f(\bx^*)$ for every $\bx \in X \setminus \dom f$.
+```
+
 The argument can be modified to show that if $f$ is strictly convex, 
 then a locally optimal point for $f$ is strictly globally optimal point.
+
 
 
 ```{prf:theorem} Local minimum is strict global minimum for strictly convex functions
