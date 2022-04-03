@@ -431,6 +431,23 @@ There exists $r > 0$ such that $f(\bx) \geq f(\bx^*)$ for every $\bx \in B[\bx, 
 1. Thus, $\bx^*$ is indeed strictly globally optimal.
 ```
 
+
+```{prf:corollary} Local minimum is strict global minimum for proper strictly convex functions
+:label: res-cvxopt-proper-strict-local-global-minimum
+
+Let $f : \VV \to \RERL$ be a proper strictly convex function.
+Let $X$ be a convex subset of $\VV$.
+Let $\bx^*$ be locally optimal for $f$ over $X$.
+Then, $\bx^*$ is strictly globally optimal for $f$ over $X$.
+
+In other words,
+
+$$
+f(\by) > f(\bx^*) \Forall \by \in X.
+$$
+```
+
+
 ### Optimal Sets
 
 The optimal sets of a convex optimization problem are also convex.
