@@ -842,17 +842,17 @@ Assume that condition (3) holds.
 ```
 
 
-```{prf:corollary} Minimizing a proper function over a closed set
+```{prf:corollary} Minimizing a proper closed function over a closed set
 :label: res-opt-min-proper-func-closed-set
 
-Let $f : \VV \to \RERL$ be a proper function with $S = \dom f$.
-Let $A \subseteq S$ be a nonempty set. 
+Let $f : \VV \to \RERL$ be a proper closed function with $S = \dom f$.
+Let $A \subseteq S$ be a nonempty closed set. 
 Consider the problem of minimizing $f$ over $A$.
 
 Further, assume that one of the following conditions are true.
 
 
-1. $A$ is closed and bounded.
+1. $A$ is bounded.
 1. There exists a scalar $r \in \RR$ such that the set
    $\{ \bx \in A \ST f(\bx) \leq r \}$ is nonempty and bounded.
 1. $f$ is coercive over $A$.
@@ -870,32 +870,40 @@ f(\bx), & \bx \in A \\
 \end{cases}
 $$
 
-1. $\dom g = A$.
+1. $\dom g = A$. Thus, $\dom g$ is closed.
 1. Since $f$ never takes the value $-\infty$, hence $g$ also never takes the value $-\infty$.
 1. Since $A$ is nonempty, hence there exists $\bx \in \VV$ such that $g(\bx) < \infty$.
 1. Hence, $g$ is a proper function.
 1. Also, note that the set $\{ \bx \in A \ST f(\bx) \leq r \}$ is
    nothing but the sublevel set of $g$ for the scalar $r$.
+
+   $$
+   \{ \bx  \ST g(\bx) \leq r \} = A \cap \{ \bx \ST f(\bx) \leq r \}.
+   $$
+1. Since $f$ is closed, all its sublevel sets are closed. 
+1. $A$ is closed, hence $ A \cap \{ \bx \ST f(\bx) \leq r \}$ is also closed.
+1. Hence, all the sublevel sets of $g$ are also closed. Hence, $g$ is also closed.
 1. The set of minimizers of $f$ over $A$ is nothing but the set of minimizers
    of $g$.
-1. Since $f$ is coercive over $A$, hence $g$ is coercive (over its entire domain). 
+1. If $f$ is coercive over $A$, then $g$ is coercive (over its entire domain). 
 
 Thus, applying {prf:ref}`res-opt-weierstrass-theorem`,
 the set of minimizers of $g$ is nonempty and compact.
 So is the set of minimizers of $f$ over $A$.
 ```
 
-```{prf:corollary} Minimizing a real valued function over a closed set
+```{prf:corollary} Minimizing a real valued l.s.c. function over a closed set
 :label: res-opt-min-rv-func-closed-set
 
 Let $f : \VV \to \RR$ be a real valued function with $\dom f = \VV$.
-Let $A \subseteq \VV$ be a nonempty set. 
+Let $A \subseteq \VV$ be a nonempty closed set. 
+Assume that $f$ is lower semicontinuous over $A$.
 Consider the problem of minimizing $f$ over $A$.
 
 Further, assume that one of the following conditions are true.
 
 
-1. $A$ is closed and bounded.
+1. $A$ is bounded.
 1. There exists a scalar $r \in \RR$ such that the set
    $\{ \bx \in A \ST f(\bx) \leq r \}$ is nonempty and bounded.
 1. $f$ is coercive over $A$.
@@ -913,15 +921,16 @@ f(\bx), & \bx \in A \\
 \end{cases}
 $$
 
-1. $\dom g = A$.
-1. Since $f$ is hence $g$ also never takes the value $-\infty$.
+1. $\dom g = A$. Thus, $\dom g$ is closed.
+1. Since $f$ is real valued hence $g$ also never takes the value $-\infty$.
 1. Since $A$ is nonempty, hence there exists $\bx \in \VV$ such that $g(\bx) < \infty$.
 1. Hence, $g$ is a proper function.
+1. Since $f$ is l.s.c. on $A$, hence $g$ is closed.
 1. Also, note that the set $\{ \bx \in A \ST f(\bx) \leq r \}$ is
    nothing but the sublevel set of $g$ for the scalar $r$.
 1. The set of minimizers of $f$ over $A$ is nothing but the set of minimizers
    of $g$.
-1. Since $f$ is coercive over $A$, hence $g$ is coercive (over its entire domain). 
+1. If $f$ is coercive over $A$, then $g$ is coercive (over its entire domain). 
 
 Thus, applying {prf:ref}`res-opt-weierstrass-theorem`,
 the set of minimizers of $g$ is nonempty and compact.
