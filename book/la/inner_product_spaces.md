@@ -128,6 +128,8 @@ $$
 $$
 
 ```{prf:example}
+:label: ex-la-standard-inner-product-rn-1
+
 The standard inner product on $\RR^n$ is defined as:
 
 $$
@@ -138,6 +140,8 @@ This is often called the *dot product* or *scalar product*.
 ```
 
 ```{prf:example}
+:label: ex-la-standard-inner-product-cn-1
+
 The standard inner product on $\CC^n$ is defined as:
 
 $$
@@ -146,6 +150,8 @@ $$
 ```
 
 ```{prf:example}
+:label: ex-la-inner-product-r2-2
+
 Let $\bx, \by \in \RR^2$. Define:
 
 $$
@@ -185,6 +191,8 @@ Its eigen values are $4.303, 0.697$.
 ```
 
 ```{prf:example}
+:label: ex-la-sq-complex-matrix-inner-product-1
+
 Let $\CC^{n \times n}$ be the space of $n \times n$ matrices.
 For any $\bA = (a_{ij})$ and $\bB = (b_{ij})$ in $\CC^{n \times n}$,
 we define the inner product as:
@@ -203,6 +211,8 @@ the trace of a matrix (sum of its diagonal values).
 ```
 
 ```{prf:example}
+:label: ex-la-cn-invertible-mat-ip-1
+
 Let $\CC^{n \times 1}$ be the space of column vectors. 
 Let $\bQ$ be an arbitrary $n \times n$ invertible matrix over $\CC$. 
 
@@ -319,6 +329,8 @@ $$
 
 
 ```{prf:example} A real inner product for $\CC^n$ over $\RR$
+:label: ex-la-real-ip-cn-over-r
+
 In this example, we are dealing with $n$-tuples of complex numbers
 in $\CC^n$ with the field of scalars being $\RR$.
 It can be easily checked that $\CC^n$ over $\RR$ is a 
@@ -661,6 +673,8 @@ pairwise orthogonal ($\be_i \perp \be_j)$ whenever $i \neq j$).
 Since orthonormal vectors are orthogonal, hence they are linearly independent.
 
 ```{prf:definition} Orthonormal basis
+:label: def-la-orthonormal-basis
+
 A set of orthonormal vectors form an *orthonormal basis* for their span.
 ```
 
@@ -748,6 +762,7 @@ an orthonormal basis from an arbitrary basis for the
 span of the basis.
 
 ```{prf:algorithm} The Gram-Schmidt algorithm
+:label: alg-la-gram-schmidt
 
 **Inputs** $\bv_1, \bv_2, \dots, \bv_n$, a set of linearly independent vectors
 
@@ -925,6 +940,8 @@ Thus, $S^{\perp}$ is a subspace of $\VV$.
 ```
 
 ```{prf:observation}
+:label: res-la-vv-orth-complement
+
 The orthogonal complement of the inner product space $\VV$ is its trivial subspace
 containing just the zero vector.
 
@@ -1471,6 +1488,8 @@ A projection operator is orthogonal if and only if it is self adjoint.
 
 
 ````{prf:example} Orthogonal projection on a line
+:label: ex-la-orth-proj-line
+
 Consider a unit norm vector $\bu \in \RR^N$.  
 Thus $\bu^T \bu = 1$.
 
@@ -1535,6 +1554,7 @@ Thus $P_{\bu}$ retains the projection of $\bx$ on $\bu$ given by $\bx_{\parallel
 ````
 
 ````{prf:example} Projections over the column space of a matrix
+:label: ex-la-orth-proj-column-space-matrix
 
 Let $\bA \in \RR^{M \times N}$  with $N \leq M$ be a matrix given by
 
