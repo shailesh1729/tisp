@@ -1690,3 +1690,35 @@ based on the type of partial sum in $\VV \oplus \RR$.
 
 [TODO] Clarify this further. It is not obvious.
 
+
+## Positive semi-definite cone
+
+````{prf:theorem} The convex cone of positive semidefinite matrices
+:label: res-cvx-psd-cone
+
+The set of positive semidefinite matrices $\SS_+^n$ is a convex cone.
+````
+
+````{prf:proof}
+Let $\bA, \bB \in \SS_+^n$ and $\theta_1, \theta_2 \geq 0$. We have to show that
+$\theta_1 \bA + \theta_2 \bB \in \SS_+^n$.
+
+$$
+\bA \in \SS_+^n \implies \bv^T \bA \bv \geq 0 \Forall \bv \in \RR^n.
+$$
+
+$$
+\bB \in \SS_+^n \implies \bv^T \bB \bv \geq 0 \Forall \bv \in \RR^n.
+$$
+
+Now
+
+$$
+\bv^T (\theta_1 \bA + \theta_2 \bB) \bv 
+= \theta_1 \bv^T \bA \bv + \theta_2 \bv^T \bB \bv \geq 0 
+\Forall \bv \in \RR^n.
+$$
+
+Hence $\theta_1 \bA + \theta_2 \bB \in \SS_+^n$.
+````
+

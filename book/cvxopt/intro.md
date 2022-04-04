@@ -710,6 +710,11 @@ $\nabla f(\bx^*) = \bzero$.
 Thus, the locally optimal points are necessarily
 stationary points.
 
+
+## Second Order Conditions
+
+
+
 ## Minimization of Proper Functions
 
 ```{div}
