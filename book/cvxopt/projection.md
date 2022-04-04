@@ -1,3 +1,4 @@
+(sec:opt:pocs)=
 # Projection on Convex Sets
 
 ```{div}
@@ -23,7 +24,7 @@ Main references for this section are
 ## Projection Theorem
 
 ```{prf:theorem} Projection theorem
-:label: res-cvx-projection-theorem
+:label: res-pocs-projection-theorem
 
 Let $C$ be a nonempty, closed and convex subset of $\VV$.
 For every $\bx \in \VV$, there exists a unique vector
@@ -73,7 +74,7 @@ P_C(\bx) \triangleq \underset{\by \in C}{\argmin} \| \by - \bx \|
 $$
 This mapping is well defined since the projection is unique
 for a nonempty, closed and convex set $C$
-due to {prf:ref}`res-cvx-projection-theorem`.
+due to {prf:ref}`res-pocs-projection-theorem`.
 
 The vector $P_C(\bx)$ is called the *projection* of $\bx$ on
 the set $C$.
@@ -149,6 +150,48 @@ Conversely, assume that $\bz$ is the projection of $\bx$ on $C$.
    must hold true for every $\by \in C$.
 ```
 
+
+```{prf:theorem} Orthogonal projection on an affine subspace
+:label: res-cvx-projection-affine-subspace
+
+Let $C$ be an affine subspace of $\VV$.
+Let $S$ be the linear subspace parallel to $C$.
+For every vector $\bx \in \VV$, a vector $\bz \in C$ is
+its projection if and only if
+
+$$
+\bx - \bz \in S^{\perp}.
+$$
+```
+
+```{prf:proof}
+Since $C$ is an affine subspace of $\VV$, hence
+$C$ is nonempty, convex and closed (as $\VV$ is
+finite dimensional).
+
+1. By {prf:ref}`res-cvx-projection-characterization`, 
+   $\bz$ is the projection of $\bx$ on $C$ if and only if
+   for every $\by \in C$, we have
+
+   $$
+   \langle \by - \bz, \bx - \bz \rangle \leq 0.
+   $$
+1. But $\by \in C$ if and only if $\by - \bz \in S$.
+1. Hence the condition is equivalent to
+
+   $$
+   \langle \bw, \bx - \bz \rangle \leq 0  \Forall \bw \in S.
+   $$
+1. But then, it must be an equality since $\bw$ and $-\bw$ both
+   belong to $S$. Thus, we have
+
+   $$
+   \langle \bw, \bx - \bz \rangle = 0  \Forall \bw \in S.
+   $$
+1. In other words, $\bx - \bz \in S^{\perp}$.
+```
+
+
 ## Distance Function
 
 Recall that the distance of a point $\bx \in \VV$
@@ -172,7 +215,7 @@ $$
 ```
 
 ```{prf:proof}
-By {prf:ref}`res-cvx-projection-theorem`, there exists
+By {prf:ref}`res-pocs-projection-theorem`, there exists
 a unique point $P_C(\bx)$ which minimizes the distance
 between $\bx$ and $C$. Hence
 
@@ -402,7 +445,7 @@ We also define $\psi_C : \VV  \to \RR$ as:
 
 $$
 \psi_C(\bx) \triangleq \frac{1}{2} \left (\| \bx \|^2 - d_C^2(\bx) \right) 
-= \underset{\by \in C}{\max}\left [ \langle y, x \rangle - \frac{1}{2} \| y \|^2 \right ]. 
+= \underset{\by \in C}{\sup}\left [ \langle y, x \rangle - \frac{1}{2} \| y \|^2 \right ]. 
 $$
 ```
 
@@ -469,3 +512,79 @@ $$
 The function $\varphi_C = \frac{1}{2} d_C^2$ is 1-smooth.
 
 The function $\psi_C$ is also 1-smooth.
+
+
+
+## POCS Problems
+
+In this section, we present some example optimization
+problems which can be converted into an equivalent
+projection on a convex set problem.
+
+### Equality Constrained Quadratic Programming
+
+Quadratic programming problems are discussed extensively
+in {ref}`sec:opt:quadratic-programming`. 
+Here we discuss a specific form of minimizing a quadratic
+function subject to linear equality constraints.
+
+```{prf:example} Equality constrained quadratic programming
+
+We consider the quadratic programming problem 
+
+$$
+& \text{minimize }   & & \frac{1}{2} \| \bx \|^2 + \bc^T \bx \\
+& \text{subject to } & & \bA \bx = \bzero.
+$$
+
+where
+1. $\bx \in \RR^n$ is the optimization variable.
+1. $\bc \in \RR^n$ is a given vector.
+1. $\bA \in \RR^{m \times n}$ is an $m \times n$ matrix of rank $m$.
+   Assume that $m < n$.
+
+We proceed towards converting this problem into a
+projection on a convex set problem as follows.
+
+1. By adding a constant term $\frac{1}{2} \| \bc \|^2$ to the
+   objective function, we obtain an equivalent problem.
+
+   $$
+   & \text{minimize }   & & \frac{1}{2} \| \bc + \bx \|^2 \\
+   & \text{subject to } & & \bA \bx = \bzero.
+   $$
+1. The set $C = \{ \bx \ST \bA \bx = \bzero \}$ is the
+   null space of the matrix $\bA$ which is linear subspace,
+   hence a nonempty, closed and convex set.
+1. Minimizing $\frac{1}{2} \| \bc + \bx \|^2$ is
+   equivalent to minimizing $\| (-\bc) - \bx \|$ subject to
+   $\bx \in C$.
+1. $\| (-\bc) - \bx \|$ is $d(-\bc, \bx)$, the distance
+   between $-\bc$ and a point $\bx$.
+1. Thus, we are minimizing the distance of the point $-\bc$
+   among $\bx \in C$.
+1. This is nothing but the distance of $-\bc$ from the set $C$.
+1. Since, $C$ is nonempty, close and convex, hence, there is
+   a unique $\bx^*$ which minimizes the distance due to
+   the {prf:ref}`projection theorem <res-pocs-projection-theorem>`.
+1. Thus, the solution is the projection of the vector $-\bc$
+   on the subspace $C$.
+1. By {prf:ref}`res-cvx-projection-affine-subspace`, $\bx^*$
+   is the unique projection of $-\bc$ on $C$ if and only if
+   $-\bc - \bx^* \in C^{\perp}$. 
+1. In other words,
+   $$
+   \langle \bc + \bx^*, \bx \rangle  = 0 \Forall \bx \in C. 
+   $$
+1. A closed form solution to this problem does exist
+   given by
+
+   $$
+   \bx^* = - (\bI - \bA^T (\bA \bA^T)^{-1} bA) \bc.
+   $$
+1. It is indeed the unique solution to this quadratic programming
+   problem.
+```
+
+
+
