@@ -16,6 +16,7 @@ for detailed proofs.
 
 ```{prf:definition} Distance function
 :label: def-bra-rl-distance
+
 The *distance function* between two real numbers is defined as 
 
 $$
@@ -23,7 +24,9 @@ d(x, y) = | x - y | \Forall x, y \in \RR.
 $$
 ```
 
-```{prf:remark} 
+```{prf:remark}
+:label: rem-bra-dist-func-props
+
 The distance function satisfies following properties:
 
 1. $d(x,y) \geq 0$.
@@ -194,6 +197,8 @@ We claim without proving:
 
 
 ```{prf:example}
+:label: ex-rl-rational-closure
+
 Consider $\QQ$, the set of rational numbers.
 
 1. Recall that every interval of real numbers contains a rational number
