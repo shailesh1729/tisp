@@ -56,7 +56,9 @@ $$
 $$
 ```
 
-```{prf:example}
+```{prf:example} Function sum, product, powers
+:label: ex-bra-rf-function-sum-prod-pow
+
 Let $f_1, f_2, \dots, f_n$ be real functions.
 
 Then, their sum is defined by:
@@ -110,7 +112,9 @@ $$
 * If $f$ is defined at $x=x_0$, then $f(x_0)$ doesn't need to be equal to $a$.
 
 
-```{prf:example}
+```{prf:example} Limit outside domain points
+:label: ex-bra-rf-limit-at-zero-sinc
+
 Let 
 
 $$
@@ -376,6 +380,7 @@ is equal to $f(a^+)$ or $f(a^-)$.
 ```
 
 ```{prf:remark}
+:label: rem-bra-rf-oslimit-uniqueness-arithmetic
 
 {prf:ref}`def-bra-rf-limit-uniqueness` can be extended for 
 the following too:
@@ -488,6 +493,7 @@ point, then the function is continuous at that point.
 ```
 
 ```{prf:theorem} Characterization of continuity
+:label: res-bra-rf-continuity-charac
 
 A function $f$ is continuous at $x=c$ if and only if $f$ is defined
 on an interval $(a,b)$ containing $c$ and for each $\epsilon > 0$,
@@ -631,6 +637,8 @@ $$
 ```
 
 ```{prf:theorem} Continuity and arithmetic
+:label: res-bra-rf-continuity-arithmetic
+
 If $f$ and $g$ are continuous on a set $S$, then so are
 $f+g$, $f-g$, and $f g$. 
 $\frac{f}{g}$ is continuous at each $x \in S$ such that 
@@ -692,6 +700,7 @@ In other words:
 
 
 ```{prf:definition} Removable discontinuity
+:label: def-bra-rf-removable-discontinuity
 
 Let $f$ be discontinuous at some $x=a$. If 
 $\lim_{x \to a} f(x)$ exists, then we say that
@@ -878,6 +887,8 @@ $$
 ```
 
 ```{prf:corollary}
+:label: res-bra-rf-continuity-interval-inf-sum-existence
+
 If $f$ is continuous on a finite closed interval $[a,b]$, then
 $f$ has an infimum and a supremum.
 ```
@@ -1094,6 +1105,8 @@ Few observations on this definition:
 
 
 ```{prf:remark}
+:label: rem-bra-rf-non-uniform-continuous
+
 If $f$ is not uniformly continuous on a set $A$, then
 there is an $\epsilon_0 > 0$ such that for any $\delta > 0$,
 there are points $x,y$ in $A$ such that:
