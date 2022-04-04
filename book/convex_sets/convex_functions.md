@@ -1050,7 +1050,9 @@ Hence, $I_C$ is not convex.
 ```
 
 
-```{prf:theorem}
+```{prf:theorem} Restricting the domain of a function
+:label: res-cvxf-func-sum-indicator
+
 Let $f$ be a proper function. Then,
 
 $$
