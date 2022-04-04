@@ -28,6 +28,82 @@ of optimal solutions.
 
 ## Optimization Problems
 
+Let $\VV$ be a real $n$-dimensional inner product space.
+
+In the most general form, an optimization problem can
+be considered as minimizing or maximizing the value
+of a real valued function $f : \VV \to \RR$ over
+its domain $S = \dom f$.
+
+
+```{div}
+1. We call $f$ as the objective function which is being
+   minimized or maximized.
+1. The variable $\bx \in \VV$ is called the optimization
+   variable.
+1. $S = \dom f$ is called the feasible set of solutions
+   for the optimization problem.
+1. A point $\bx \in S$ is called a feasible point or feasible solution.
+1. Our goal is to find an $\bx^* \in S$ which maximizes
+   or minimizes the objective function $f$.
+1. The maximum value of $f$ is given by
+   
+   $$
+   \sup \{ f(\bx) \ST \bx \in S \}.
+   $$
+1. The minimum value of $f$ is given by
+   
+   $$
+   \inf \{ f(\bx) \ST \bx \in S \}.
+   $$
+1. We allow the maximum and minimum values to take $\infty$ and $-\infty$
+   values.
+1. The function $f$ may or may not attain its maximum / minimum 
+   value at some point in its domain $S$.
+1. $\bx^* \in S$ is called a *global minimum point* if
+   $f(\bx) \geq f(\bx^*)$ for every $\bx \in S$.
+1. $\bx^* \in S$ is called a *global maximum point* if
+   $f(\bx) \leq f(\bx^*)$ for every $\bx \in S$.
+1. $\bx^* \in S$ is called a *strict global minimum point* if
+   $f(\bx) > f(\bx^*)$ for every $\bx \in S$ with $\bx \neq \bx^*$.
+1. $\bx^* \in S$ is called a *strict global minimum point* if
+   $f(\bx) < f(\bx^*)$ for every $\bx \in S$ with $\bx \neq \bx^*$.
+1. A point $\bx^* \in S$ is called a *global optimal point* if
+   it is either a global maximum or minimum point.
+1. The maximum and minimum values of $f$ are always unique
+   as opposed to global optimal points which may not be unique.
+1. The set of global minimizers is given by
+
+   $$
+   \argmin \{ f(\bx) \ST \bx \in S \}.
+   $$
+1. The set of global maximizers is given by
+
+   $$
+   \argmax \{ f(\bx) \ST \bx \in S \}.
+   $$
+```
+
+In a more restricted setting, an optimization problem can
+be considered as minimizing or maximizing the value
+of a real valued function $f : \VV \to \RR$ with $S = \dom f$
+over a set $A$ such that $A \subseteq S$.
+
+```{div}
+1. In this case, the feasible set is restricted to $A$.
+1. Minimizers and maximizers are searched within this subset $A$.
+1. This problem can be converted into the earlier general form
+   by considering the restriction $\tilde{f} : \VV \to \RR$ of
+   $f$ such that $A = \dom \tilde{f}$ and
+
+   $$
+   \tilde{f}(\bx) = f(\bx) \Forall \bx \in A.
+   $$
+```
+
+
+### Standard Form for Mathematical Optimization Problems
+
 ````{prf:definition} Optimization problem standard form
 :label: def-opt-problem-standard-form
 
