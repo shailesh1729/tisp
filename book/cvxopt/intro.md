@@ -46,6 +46,14 @@ its domain $S = \dom f$.
 1. A point $\bx \in S$ is called a feasible point or feasible solution.
 1. Our goal is to find an $\bx^* \in S$ which maximizes
    or minimizes the objective function $f$.
+```
+
+```{prf:definition} Globally optimal value and points
+:label: def-opt-global-optimal-point
+
+Let $f : \VV \to \RR$ be a real valued function with
+$S = \dom f$.
+
 1. The maximum value of $f$ is given by
    
    $$
@@ -99,6 +107,58 @@ over a set $A$ such that $A \subseteq S$.
    $$
    \tilde{f}(\bx) = f(\bx) \Forall \bx \in A.
    $$
+```
+
+In several problems, it may not be possible to
+establish whether a point is globally optimal.
+However, it is easier to establish if a point
+is optimal in a neighborhood around it. Such
+points are called locally optimal points
+or extreme values.
+
+```{prf:definition} Local optimal points
+:label: def-opt-local-optimal-point
+
+Let $f : \VV \to \RR$ be a real valued function with
+$S = \dom f$.
+We say that $f(\ba)$ is a *local extreme value*
+or *local optimal value*
+of $f$ at $\ba \in \dom f$ 
+if there exists
+$\delta > 0$ such that $f(\bx) - f(\ba)$ doesn't change sign on
+$B(\ba, \delta) \cap S.
+
+More specifically,
+
+1. $f(\ba)$ is a *local maximum value* of $f$ if for some $\delta > 0$:
+
+   $$
+   f(\bx) \leq f(\ba) \Forall \bx \in B(\ba, \delta) \cap S.
+   $$ 
+1. $f(\ba)$ is a *local minimum value* of $f$ if for some $\delta > 0$:
+
+   $$
+   f(\bx) \geq f(\ba) \Forall \bx \in B(\ba, \delta) \cap S.
+   $$ 
+
+The point $\bx=\ba$ is called a *local extreme point*
+or *local optimal point* of $f$ or more 
+specifically, a *local maximum* or a *local minimum* point of $f$.
+
+
+1. $\ba$ is a *strict local maximum point* if for some $\delta > 0$:
+
+   $$
+   f(\bx) > f(\ba) \Forall \bx \in B_d(\ba, \delta) \cap S.
+   $$ 
+1. $\ba$ is a *strict local minimum point* of $f$ if for some $\delta > 0$:
+
+   $$
+   f(\bx) > f(\ba) \Forall \bx \in B_d(\ba, \delta) \cap S.
+   $$ 
+
+Here $B_d(\ba, \delta)$ denotes the deleted neighborhood
+(an open ball of radius $\delta$ excluding $\ba$ itself).
 ```
 
 
