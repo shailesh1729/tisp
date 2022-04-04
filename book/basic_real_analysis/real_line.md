@@ -132,6 +132,8 @@ the two numbers.
 ````
 
 ````{prf:remark}
+:label: rem-rl-absolute-value-max-val
+
 Thus $| a | = a \vee (-a) \Forall a \in \RR$. Further $| a | = |-a |$.
 ````
 
@@ -287,10 +289,14 @@ The greatest lower bound is denoted by $\inf(A)$.
 ````
 
 ````{prf:remark}
+:label: rem-rl-lub-glb-at-most-one
+
 A set $A$ can have at most one least upper bound and at most one greatest lower bound.
 ````
 
 ````{prf:remark}
+:label: rem-rl-set-inf-sup-outside
+
 The infimum or supremum of a set $A$ need not belong to the set itself.
 ````
 The set $S = \{ x \ST 0 < x < 1\}$ has an infimum $0$ and a supremum $1$.
@@ -306,7 +312,9 @@ Every nonempty set of real numbers that is bounded from above has a least upper 
 ````
 
 
-````{prf:example} Least upper and lower bounds
+````{prf:example} Least upper and greatest lower bounds
+:label: ex-rl-lub-glb-1
+
 Let
 
 $$
@@ -322,10 +330,10 @@ the closed interval $[0, 2] = \{x \in \RR : 0 \leq x \leq 2 \}$.
 But $(0,2)$ has no maximum or minimum element. $[0,2]$ has both.
 Further, $(0,2]$ has maximum element but not minimum, and $[0,2)$ has
 minimum element but not maximum.
-
 ````
 
 ````{prf:example} Distinction with rational numbers
+:label: ex-rl-lub-choice-vs-rational
 
 The set $S = \{ x \in \QQ : x^2 \leq 2\}$ doesn't have a least upper bound
 in the set of rational numbers.
@@ -368,6 +376,8 @@ have easily started with the existence of greatest lower bound as an axiom and d
 the existence of least upper bound from it.
 
 ````{prf:remark}
+:label: rem-rl-max-sup-min-inf
+
 If a set $A$ has a maximum (resp. minimum) element, then $\max(A) = \sup (A)$
 (resp. $\min(A) = \inf (A)$ ).
 
@@ -482,6 +492,8 @@ This also tells us that for any real number $x > 0$, there exists an $n \in \Nat
 $\frac{1}{n} < x$. By choosing $y = 1$ in above, we get $n x > 1 \implies x > \frac{1}{n}$.
 
 ````{prf:example}
+:label: ex-rl-inf-outside-set-1
+
 Let $A = \{\frac{1}{n} : n \in \Nat \}$. We show that $\inf (A)  = 0$. Clearly 0 is a lower bound.
 Now if $x > 0$ then we can find $n_0 \in \Nat$ such that $1/n_0 < x$. Thus $x > 0$ cannot be a lower bound of
 $A$. Hence $0$ is the greatest lower bound of $A$.
@@ -594,7 +606,7 @@ or $\alpha^2 = 2$ has to be true, hence $\alpha^2 = 2$.
 ## Irrational Numbers
 
 ````{prf:definition} Irrational number
-:label: def-irrational-number
+:label: def-rl-irrational-number
 
 A real number which is not rational is known as *irrational number*. The
 set of irrational numbers is denoted by $\II$.
@@ -685,7 +697,7 @@ This contradicts our assumption that $\RR$ is countable.
 ````{prf:corollary}
 :label: res-rl-irrationals-uncountable
 
-The set of {ref}`irrational numbers <def-rl-irrational-number>` is uncountable.
+The set of {prf:ref}`irrational numbers <def-rl-irrational-number>` is uncountable.
 ````
 
 ````{prf:proof}
@@ -708,6 +720,7 @@ $$
 ````
 
 ````{prf:example} Algebraic real numbers
+:label: ex-rl-algebraic-numbers-1
 
 *  $\sqrt{2}$ is algebraic since it is the root of the equation $x^2 - 2 = 0$.
 *  $\sqrt[3]{2}$ is algebraic since it is the root of the equation $x^3 - 2 = 0$.
