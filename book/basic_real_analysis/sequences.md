@@ -31,6 +31,8 @@ $\{ x_n \}$ converges to some real number $x$
 if and only if for each $\epsilon > 0$, the terms $x_n$ are eventually $\epsilon$-close to $x$.
 
 ````{prf:example} Sequence convergence
+:label: ex-bra-seq-converge-1
+
 Consider the sequence $\{ x_n \}$, where $x_n = \frac{1}{\sqrt{n}}$.
 For a given $\epsilon > 0$, choose $n_0 > \frac{1}{\epsilon^2}$. 
 Then, for every $n > n_0$, we have 
@@ -102,6 +104,8 @@ Let $X = \{ x_n \}$ be a sequence of $\RR$.
 ```
 
 ```{prf:remark}
+:label: rem-bra-seq-ub-lub-gb-glb
+
 Due to the {prf:ref}`completeness axiom <axm-rl-completeness-axiom>`,
 if a sequence $\{x_n\}$ has an upper bound, it has a least upper bound
 denoted by $\sup\{ x_n \}$ and if it has a lower bound, it has a 
@@ -185,6 +189,7 @@ A decreasing sequence is bounded from above. Its least
 upper bound is $x_1$.
 
 ```{prf:remark} Unbounded increasing sequences
+:label: rem-bra-seq-unbounded-increasing
 
 Let $\{x_n\}$ be an increasing and unbounded sequence. 
 Then for every $M > 0$, there exists $n_0 \in \Nat$ such that
@@ -192,6 +197,7 @@ for every $n > n_0$, $x_n > M$.
 ```
 
 ```{prf:remark} Unbounded decreasing sequences
+:label: rem-bra-seq-unbounded-decreasing
 
 Let $\{x_n\}$ be an decreasing and unbounded sequence. 
 Then for every $M < 0$, there exists $n_0 \in \Nat$ such that
@@ -577,6 +583,7 @@ $$
 ````
 
 ````{prf:example} Convergent series
+:label: ex-bra-seq-convergent-series-1
 
 Consider
 
@@ -601,6 +608,7 @@ $$
 ````
 
 ````{prf:example} Harmonic series
+:label: ex-bra-seq-harmonic-series-1
 
 Consider
 
@@ -793,6 +801,8 @@ for every $\epsilon > 0$, there exists $n_0 \in \Nat$ (depending on $\epsilon$)
 such that whenever $m, n > n_0$ it follows that $| x_m - x_n | < \epsilon$.
 ````
 ````{prf:remark}
+:label: rem-bra-seq-cauchy-m-n
+
 A little thought would show that  saying $m, n > n_0$ or $m, n \geq n_1$ doesn't make much difference
 in the definition. The two thresholds can be related by : $n_1 = n_0 + 1$.
 ````
