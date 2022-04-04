@@ -657,6 +657,59 @@ with the optimization variable $(\bx, t) \in \VV \oplus \RR$.
 ```
 
 
+## First Order Conditions
+
+In this subsection, we focus on objective functions of type
+$f : \RR^n \to \RR$ which are differentiable.
+
+````{prf:theorem} First order optimality criterion for local optimal points
+:label: res-opt-first-order-optimality-local
+
+Let $f : \RR^n \to \RR$ be a real valued function with $S = \dom f$.
+Suppose that $\bx^* \in \interior S$ is a local optimal point.
+Assume that all the partial derivatives of $f$ exist at $\bx^*$.  
+Then, $\nabla f(\bx^*) = \bzero$.
+
+
+1. Let $i=1,\dots,n$.
+1. Consider the one-dimensional function $g_i : \RR \to \RR$ given by
+
+   $$
+   g_i (t) = f(\bx^* + t \be_i)
+   $$
+   where $\be_i$ is the $i$-th unit vector of $\RR^n$.
+1. We note that $g_i$ is differentiable at $t=0$ and
+
+   $$
+   g_i'(0) = \frac{\partial f}{\partial x_i} (\bx^*).
+   $$
+1. Since $\bx^*$ is a local optimal point of $f$, hence
+   $t=0$ is a local optimal point of $g_i$.
+1. Thus, $g_i'(0) = 0$.
+1. Thus, $\frac{\partial f}{\partial x_i} (\bx^*) = 0$.
+1. Since, this is true for every $i=1,\dots,n$, hence
+   $\nabla f(\bx^*) = \bzero$.
+````
+
+We mention that gradient being zero is a necessary condition;
+i.e., if a point is an optimal point then the gradient of $f$
+at that point must be zero. It is not a sufficient condition.
+The gradient may be zero and yet the point may not be an
+optimal point.
+
+```{prf:definition} Stationary point
+:label: def-opt-stationary-point
+
+Let $f : \RR^n \to \RR$ be a real valued function with $S = \dom f$.
+Let $\bx^* \in \interior S$ and assume that $f$ is differentiable
+in some neighborhood of $\bx^*$.
+Then, $\bx^*$ is called a *stationary point* if
+$\nabla f(\bx^*) = \bzero$.
+```
+
+Thus, the locally optimal points are necessarily
+stationary points.
+
 ## Minimization of Proper Functions
 
 ```{div}
