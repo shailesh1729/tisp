@@ -1,3 +1,4 @@
+(sec:opt:linear-programming)=
 # Linear Programming
 
 

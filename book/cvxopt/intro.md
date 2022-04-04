@@ -1,3 +1,4 @@
+(sec:opt:optimization-intro)=
 # Mathematical Optimization
 
 Main references for this section are {cite}`boyd2004convex,bertsekas2003convex`.

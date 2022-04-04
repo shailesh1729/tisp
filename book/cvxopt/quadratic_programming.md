@@ -1,3 +1,4 @@
+(sec:opt:quadratic-programming)=
 # Quadratic Programming
 
 

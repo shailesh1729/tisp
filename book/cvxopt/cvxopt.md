@@ -1,3 +1,4 @@
+(sec:opt:convex-optimization)=
 # Convex Optimization
 
 Main references for this section are {cite}`beck2014introduction,boyd2004convex,bertsekas2003convex`.
