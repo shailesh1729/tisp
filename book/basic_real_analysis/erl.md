@@ -23,6 +23,7 @@ themselves.
 ## Order
 
 ```{prf:definition} Extended valued comparison rules
+:label: def-bra-erl-comparison
 
 We define the following rules of comparison between real numbers
 and infinities:
@@ -43,6 +44,8 @@ Following notations are useful:
 
 
 ```{prf:definition} Infimum and supremum in extended real line
+:label: def-bra-erl-infimum-supremum
+
 Let $A$ be a subset of $\RR$.
 
 * If $A$ is bounded from below, then $\inf A$ denotes its greatest lower bound.
@@ -56,6 +59,7 @@ Let $A$ be a subset of $\RR$.
 ## Arithmetic
 
 ```{prf:definition} Extended valued arithmetic
+:label: def-bra-erl-arithmetic
 
 The arithmetic between real numbers and the infinite values
 is defined as below:
@@ -150,7 +154,9 @@ Thus, every monotone sequence either converges to a real number or it
 converges to one of the infinities.
 ```
 
-```{prf:remark}
+```{prf:remark} Infinite sums
+:label: res-bra-erl-infinite-sums
+
 Consider a {prf:ref}`series <def-bra-infinite-series>`
 $\sum x_n$. If the sequence of partial sums converges
 to $\infty$, we say that $\sum x_n = \infty$ i.e. the sum of the series is
@@ -159,6 +165,8 @@ $-\infty$, we say that $\sum x_n = -\infty$.
 ```
 
 ```{prf:remark}
+:label: res-bra-erl-series-nng-convergence
+
 Every series of non-negative real numbers converges in $\ERL$.
 ```
 
