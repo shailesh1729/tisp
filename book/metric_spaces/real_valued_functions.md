@@ -36,6 +36,8 @@ for a metric space $(S, d)$
 
 
 ```{prf:definition} Local extreme value
+:label: res-ms-rv-local-extreme-value
+
 We say that $f(a)$ is a *local extreme value* of $f$ at $a \in \dom f$ 
 if there exists
 $\delta > 0$ such that $f(x) - f(a)$ doesn't change sign on
@@ -59,6 +61,8 @@ specifically, a *local maximum* or a *local minimum* point of $f$.
 ```
 
 ```{prf:definition} Global maximum
+:label: res-ms-rv-global-maximum
+
 We say that $f : X \to \RR$ attains a *global maximum*
 at some $a \in \dom f$, if:
 
@@ -68,6 +72,8 @@ $$
 ```
 
 ```{prf:definition} Global minimum
+:label: res-ms-rv-global-minimum
+
 We say that $f : X \to \RR$ attains a *global minimum*
 at some $a \in \dom f$, if:
 
@@ -76,16 +82,41 @@ f(x) \geq f(a) \Forall x \in \dom f.
 $$
 ```
 
-```{prf:theorem} Extreme value theorem
-Let $f : X \to \RR$ be continuous. 
-Let $K$ be a nonempty compact subset of $\dom f$. 
-Then, the set $f(K)$ is closed and bounded.
-Also, there exists $a$ and $b$ in $K$ such that
+```{prf:definition} Strict global maximum
+:label: res-ms-rv-strict-global-maximum
+
+We say that $f : X \to \RR$ attains a *strict global maximum*
+at some $a \in \dom f$, if:
 
 $$
-f(a) = \inf f(K) \text{ and } f(b) = \sup f(K);
+f(x) < f(a) \Forall x \in \dom f, x \neq a.
 $$
-i.e., $f$ attains its supremum and infimum over the values in $f(K)$.
+```
+
+```{prf:definition} Strict global minimum
+:label: res-ms-rv-strict-global-minimum
+
+We say that $f : X \to \RR$ attains a *strict global minimum*
+at some $a \in \dom f$, if:
+
+$$
+f(x) > f(a) \Forall x \in \dom f, x \neq a.
+$$
+```
+
+
+```{prf:theorem} Extreme value theorem
+:label: res-ms-rv-extreme-value-theorem
+
+Let $f : X \to \RR$ be continuous. 
+Let $A$ be a nonempty compact subset of $\dom f$. 
+Then, the set $f(A)$ is closed and bounded.
+Also, there exists $a$ and $b$ in $A$ such that
+
+$$
+f(a) = \inf f(A) \text{ and } f(b) = \sup f(A);
+$$
+i.e., $f$ attains its supremum and infimum over the values in $f(A)$.
 ```
 
 ```{prf:proof}
@@ -1585,36 +1616,45 @@ $$
 
 ### Extreme Values
 
-1. $f(a)$ is a *local maximum value* of $f$ if for some $\delta > 0$:
+Let $f : X \to \ERL$ be an extended real valued function
+with $S = \dom f$.
+
+1. For some $a \in \dom f$, 
+   $f(a)$ is a *local maximum value* of $f$ if for some $\delta > 0$:
 
    $$
    f(x) \leq f(a) \Forall x \in B(a, \delta).
    $$ 
-1. $f(a)$ is a *local minimum value* of $f$ if for some $\delta > 0$:
+1. For some $a \in \dom f$,
+   $f(a)$ is a *local minimum value* of $f$ if for some $\delta > 0$:
 
    $$
    f(x) \geq f(a) \Forall x \in B(a, \delta).
    $$ 
-1. We say that $f : X \to \ERL$ attains a *global maximum*
-   at some $a \in X$, if:
+1. We say that $f$ attains a *global maximum*
+   at some $a \in \dom f$, if:
 
    $$
    f(x) \leq f(a) \Forall x \in X.
    $$
-1. We say that $f : X \to \ERL$ attains a *global minimum*
-   at some $a \in X$, if:
+1. We say that $f$ attains a *global minimum*
+   at some $a \in \dom f$, if:
 
    $$
    f(x) \geq f(a) \Forall x \in X.
    $$
+1. We say that $f$ attains a *strict global maximum*
+   at some $a \in \dom f$, if:
 
-Evidently, a point outside $\dom f$ is either a 
-global maximum or a global minimum.
+   $$
+   f(x) < f(a) \Forall x \in X, x \neq a.
+   $$
+1. We say that $f$ attains a *strict global minimum*
+   at some $a \in \dom f$, if:
 
-If $f$ is proper, then $f$ never takes the value of $-\infty$.
-In that case, if a global minimum is attained, then the
-attained value is a finite real value.
-
+   $$
+   f(x) > f(a) \Forall x \in X, x \neq a.
+   $$
 
 Let $f : X \to \ERL$ be continuous. 
 Let $K$ be a nonempty compact subset of $X$. 
