@@ -270,3 +270,25 @@ We prove (1).
 
 Similar arguments apply for other statements.
 ```
+
+
+```{prf:corollary} Trace and determinant of positive definite matrices
+:label: res-la-pd-trace-det
+
+Let $\bA$ be a symmetric positive definite matrix. Then, $\Trace (\bA)$ and $\det (\bA)$
+are positive.
+```
+
+```{prf:proof}
+Trace is the sum of eigenvalues. Determinant is the product of eigenvalues.
+If $\bA$ is symmetric positive definite, then its eigenvalues are positive.
+Hence, trace and determinant are positive.
+```
+
+```{prf:corollary} Trace and determinant of positive semidefinite matrices
+:label: res-la-psd-trace-det
+
+Let $\bA$ be a symmetric positive definite matrix. Then, $\Trace (\bA)$ and $\det (\bA)$
+are nonnegative.
+```
+
