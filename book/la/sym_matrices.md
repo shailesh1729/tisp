@@ -216,4 +216,19 @@ $\bx^T \bA \bx < 0$ and $\by^T \bA \by > 0$.
 
 Indefinite matrices are neither positive semidefinite nor negative semidefinite.
 
+```{prf:theorem} Diagonal elements and indefiniteness
+:label: res-la-diag-indefinite
+
+Let $\bA \in \SS^n$. If the diagonal elements of $\bA$ are both
+positive and negative, then $\bA$ is indefinite.
+```
+
+```{prf:proof}
+Each diagonal element corresponds to $\be_i^T \bA \be_i$ for a
+unit vector $\be_i$.
+If the diagonal elements are both positive and negative, then
+there exist unit vectors $\be_i$ and $\be_j$ such that
+$\be_i^T \bA \be_i < 0$ and $\be_j^T \bA \be_j > 0$. 
+Thus, $\bA$ is indefinite.
+```
 
