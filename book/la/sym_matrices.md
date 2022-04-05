@@ -1,3 +1,4 @@
+(sec:la:symmetric-matrices)=
 # Symmetric Matrices
 
 ````{prf:definition} Symmetric matrix

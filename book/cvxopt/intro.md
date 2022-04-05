@@ -760,6 +760,24 @@ stationary points.
 
 ## Second Order Conditions
 
+Recall the discussion on semidefinite and definite matrices
+in {ref}`sec:la:symmetric-matrices`.
+
+For a twice continuously differentiable function $f$, the Hessian
+is symmetric. The semidefiniteness or definiteness of the Hessian
+provides necessary and sufficient conditions for local optimality
+at stationary points of $f$; i.e., the points $\ba \in \dom f$
+where $\nabla f(\ba) = \bzero$.
+
+We have following necessary conditions for local optimality. 
+
+1. If $\ba$ is a local minimum point then $\nabla^2 f(\ba)$ must be positive semidefinite.
+1. If $\ba$ is a local maximum point then $\nabla^2 f(\ba)$ must be negative semidefinite.
+
+We have following sufficient conditions for local optimality.
+
+1. If $\nabla^2 f(\ba)$ is positive definite, then $\ba$ is a strict local minimum.
+1. If $\nabla^2 f(\ba)$ is negative definite, then $\ba$ is a strict local maximum.
 
 ```{prf:theorem} Necessary second order optimality conditions
 :label: res-opt-2nd-order-optimality-local-nec
