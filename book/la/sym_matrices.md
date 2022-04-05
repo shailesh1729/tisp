@@ -255,7 +255,7 @@ $$
 ````{prf:definition} Indefinite matrix
 :label: def-la-indefinite-matrix
 
-A symmetric matrix $\bA \in \SS^n$ is called *negative definite* if
+A symmetric matrix $\bA \in \SS^n$ is called *indefinite* if
 there exist $\bx, \by \in \RR^n$ such that
 $\bx^T \bA \bx < 0$ and $\by^T \bA \by > 0$.
 ````

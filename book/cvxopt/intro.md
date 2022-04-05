@@ -882,6 +882,75 @@ The proof for the second statement is similar.
 ```
 
 
+### Saddle Points
+
+
+```{prf:definition} Saddle point
+:label: def-opt-saddle-point
+
+Let $f : \RR^n \to \RR$ be a real valued function with $S = \dom f$.
+Assume that $S$ is open.
+
+A stationary point $\ba \in S$ is called a *saddle point* of $f$
+over $U$ if it is neither a local minimum point nor a local maximum
+point of $f$ over $S$.
+```
+
+```{prf:theorem} Sufficient condition for saddle points
+:label: res-opt-saddle-point-suf-cond-2nd-order
+
+Let $f : \RR^n \to \RR$ be a real valued function with $S = \dom f$.
+Assume that $S$ is open.
+Further, assume that $f$ is twice continuously differentiable over $S$
+and that $\ba \in S$ is a stationary point.
+
+If $\nabla^2 f(\ba)$ is an indefinite matrix, then $\ba$ is a saddle point
+of $f$ over $S$.
+```
+
+```{prf:proof}
+
+We are given that $\ba$ is a stationary point and $\nabla^2 f(\ba)$ is indefinite.
+
+1. Then, $\nabla f(\ba) = \bzero$.
+1. Recall from {prf:ref}`res-la-evd-definiteness-charac` that
+   a matrix is indefinite if and only if at least one eigenvalue is positive and
+   at least one eigenvalue is negative.
+1. Let $\lambda > 0$ be a positive eigenvalue of $\nabla^2 f(\ba)$
+   and $\bv$ be the corresponding normalized eigenvector.
+1. Since $S$ is open, hence there exists $r > 0$ such that $B(\ba, r) \subseteq S$.
+1. Accordingly, $\ba + t \bv \in B(\ba, r) \subseteq S$ for every $t \in [0, r)$.
+1. By quadratic approximation theorem ({prf:ref}`res-mvc-quadratic-approx-theorem`),
+
+   $$
+   f(\ba + t \bv) = f(\ba)
+   + \frac{t^2}{2} \bv^T \nabla^2 f(\ba) \bv
+   + o(t^2 \| \bv \|^2).
+   $$
+1. Putting $\nabla^2 f(\ba) \bv = \lambda \bv$ and using $\| \bv \| = 1$,
+   
+   $$
+   f(\ba + t \bv) = f(\ba) + \frac{\lambda t^2}{2} + o(t^2).
+   $$
+1. Here $o: \RR_{++} \to \RR$ is a function satisfying
+   $\frac{o(x)}{x} \to 0$ as $x \to 0^+$.
+1. Thus, $\frac{o(t^2)}{t^2} \to 0$ as $t \to 0^+$.
+1. For every $\epsilon > 0$, there exists $\delta > 0$ such that
+   
+   $$
+   \left | \frac{o(t^2)}{t^2} \right | < \epsilon, \text{ whenever } t < \delta.
+   $$
+1. Choose $\epsilon = \lambda$.
+1. Then, $- \frac{\lambda t^2}{2} < o(t^2) < \frac{\lambda t^2}{2}$
+   for every $t < \delta$.
+1. Thus, $\frac{\lambda t^2}{2} + o(t^2) > 0$ for every $t < \delta$.
+1. Thus, there exists $r_1 = \min(\delta, r)$ such that for every $0 \leq t  < r_1$,
+   $f(\ba + t \bv) > f(\ba)$.
+1. Thus, $\ba$ is not a local maximum point.
+1. A similar argument with a negative eigenvalue and corresponding normalized
+   eigenvector shows that $\ba$ cannot be a local minimum point.
+1. Thus, $\ba$ must be a saddle point.
+```
 
 ## Minimization of Proper Functions
 
