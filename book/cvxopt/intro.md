@@ -882,6 +882,41 @@ The proof for the second statement is similar.
 ```
 
 
+```{prf:theorem} Hessian based sufficient global optimality condition
+:label: res-opt-hessian-global-minimum-suf
+
+Let $f : \RR^n \to \RR$ be a real valued function with $\dom f = \RR^n$.
+Further, assume that $f$ is twice continuously differentiable over $\RR^n$.
+Suppose that $\nabla^2 f(\bx) \succeq \ZERO$ for every $\bx \in \RR^n$.
+Let $\ba \in \RR^n$ be a stationary point of $f$. 
+Then, $\ba$ is a global minimum point of $f$.
+
+In other words, if the Hessian of a function is continuous and
+always positive semidefinite, then all its stationary points
+are also global minimum points.
+```
+
+```{prf:proof}
+We are given that $\ba$ is a stationary point.
+
+1. $\nabla f(\ba) = \bzero$.
+1. Let $\bx \in \RR^n$.
+1. By linear approximation theorem ({prf:ref}`res-mvc-linear-approx-theorem`),
+   there exists a vector $\bz \in [\ba, \bx]$
+   such that
+
+   $$
+   f(\bx) - f(\ba) = \frac{1}{2} (\bx - \ba)^T \nabla^2 f(\bz) (\bx - \ba).
+   $$
+1. By hypothesis, $\nabla^2 f(\bz) \succeq \ZERO$.
+1. Thus, $f(\bx) - f(\ba) \geq 0$ for every $\bx \in \RR^n$.
+1. Thus, $\ba$ is a global minimum point of $f$. 
+```
+
+This result is a special case for the global optimality of convex optimization
+problems. If a convex function is twice differentiable, then its
+Hessian is positive semidefinite {prf:ref}`res-cvxf-hessian-convexity-relation`.
+
 ### Saddle Points
 
 
