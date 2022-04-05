@@ -51,7 +51,15 @@ finite dimensional real inner product space.
 ```
 
 
-## Positive Semidefinite Matrices
+## Eigenvalue Decomposition
+
+In this subsection, we discuss the eigenvalue decomposition of
+real symmetric matrices.
+
+
+## Semidefinite, Definite and Indefinite Matrices
+
+### Positive Semidefinite Matrices
 
 ````{prf:definition} Positive semidefinite matrix
 :label: def-la-psd-matrix
@@ -123,7 +131,7 @@ Let $\bA \in \SS_+^n$.
 
 
 
-## Positive Definite Matrices
+### Positive Definite Matrices
 
 ````{prf:definition} Positive definite matrix
 :label: def-la-pd-matrix
@@ -162,7 +170,7 @@ Let $\bA \in \SS_{++}^n$.
 ```
 
 
-## Negative Semidefinite Matrices
+### Negative Semidefinite Matrices
 
 ````{prf:definition} Negative semidefinite matrix
 :label: def-la-nsd-matrix
@@ -183,7 +191,7 @@ $$
 ````
 
 
-## Negative Definite Matrices
+### Negative Definite Matrices
 
 ````{prf:definition} Negative definite matrix
 :label: def-la-nd-matrix
@@ -204,7 +212,7 @@ $$
 ````
 
 
-## Indefinite Matrices
+### Indefinite Matrices
 
 ````{prf:definition} Indefinite matrix
 :label: def-la-indefinite-matrix
@@ -232,7 +240,7 @@ $\be_i^T \bA \be_i < 0$ and $\be_j^T \bA \be_j > 0$.
 Thus, $\bA$ is indefinite.
 ```
 
-## Eigenvalue Decomposition
+### Eigenvalue Decomposition
 
 ```{prf:theorem} Eigenvalue characterization theorem
 :label: res-la-evd-definiteness-charac
@@ -271,6 +279,7 @@ We prove (1).
 Similar arguments apply for other statements.
 ```
 
+### Trace and Determinant
 
 ```{prf:corollary} Trace and determinant of positive definite matrices
 :label: res-la-pd-trace-det
