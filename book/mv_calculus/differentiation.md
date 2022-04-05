@@ -906,7 +906,21 @@ f(\by) - f(\bx) = \nabla f(\bx)^T (\by - \bx)
 $$
 ```
 
+```{prf:theorem} Quadratic approximation theorem
+:label: res-mvc-quadratic-approx-theorem
 
+Let $f : \RR^n \to \RR$ with $S = \dom f$ be
+twice continuously differentiable over an open set $U \subseteq S$.
+Let $\bx \in U$.
+Let $r > 0$ be such that $B(\bx, r) \subseteq U$.
+Then, for any $\by \in B(\bx, r)$,
+
+$$
+f(\by) = f(\bx) + \nabla f(\bx)^T (\by - \bx)
++ \frac{1}{2} (\by - \bx)^T \nabla^2 f(\bx) (\by - \bx)
++ o(\| \by - \bx \|^2).
+$$
+```
 
 ````{prf:definition} Second order approximation
 :label: def-mvp-snd-ord-approx
