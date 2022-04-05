@@ -762,7 +762,7 @@ stationary points.
 
 
 ```{prf:theorem} Necessary second order optimality conditions
-:label: res-opt-2nd-order-optimality-local
+:label: res-opt-2nd-order-optimality-local-nec
 
 Let $f : \RR^n \to \RR$ be a real valued function with $S = \dom f$.
 Assume that $S$ is open.
@@ -823,6 +823,44 @@ Assume $\ba$ to be a local minimum point.
 The argument for second statement is similar. We can apply the
 same argument on $-f$ and recognize that if $\ba$ is a local maximum
 for $f$ then it is a local minimum for $-f$.
+```
+
+```{prf:theorem} Sufficient second order optimality conditions
+:label: res-opt-2nd-order-optimality-local-suf
+
+Let $f : \RR^n \to \RR$ be a real valued function with $S = \dom f$.
+Assume that $S$ is open.
+Further, assume that $f$ is twice continuously differentiable over $S$
+and that $\ba \in S$ is a stationary point.
+
+Then, the following hold.
+
+1. If $\nabla^2 f(\ba) \succ \ZERO$,
+   then $\ba$ is a strict local minimum point of $f$ over $S$.
+1. If $\nabla^2 f(\ba) \prec \ZERO$,
+   then $\ba$ is a strict local maximum point of $f$ over $S$.
+```
+
+
+```{prf:proof}
+Let $\ba \in S$ is a stationary point satisfying $\nabla^2 f(\ba) \succ \ZERO$.
+
+1. Since the Hessian is continuous ($f$ is twice continuously differentiable),
+   hence there exists an open ball $B(\ba, r)$ such that
+   $\nabla^2 f(\bx) \succ \ZERO$ for every $\bx \in B(\ba, r)$.
+1. By linear approximation theorem ({prf:ref}`res-mvc-linear-approx-theorem`),
+   for any $\bx \in B(\ba, r)$, there exists a vector $\bz \in [\ba, \bx]$
+   such that
+
+   $$
+   f(\bx) - f(\ba) = \frac{1}{2} (\bx - \ba)^T \nabla^2 f(\bz) (\bx - \ba).
+   $$
+1. We note that $\bz \in B(\ba, r)$. Hence, $\nabla^2 f(\bz) \succ \ZERO$.
+1. Thus, $\frac{1}{2} (\bx - \ba)^T \nabla^2 f(\bz) (\bx - \ba) > 0$.
+1. Thus, $f(\bx) - f(\ba) > 0$ holds true for every $\bx \in B(\ba, r)$.
+1. Thus, $\ba$ is a strict local minimum point for $f$ over $S$.
+
+The proof for the second statement is similar.
 ```
 
 
