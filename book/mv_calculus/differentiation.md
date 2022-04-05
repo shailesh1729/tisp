@@ -170,9 +170,17 @@ is called the *first order approximation* of $f$
 at $\bx=\ba \in \interior \dom f$.
 ````
 
+## Real Valued Functions
+
+Rest of this section focuses mostly on real valued functions of type
+$f : \RR^n \to \RR$.
+
+1. First order derivative of a real valued function is called a *gradient*.
+1. Second order derivative of a real valued function is called a *Hessian*.
+1. We consider first order and second order approximations of a real valued function.
+
 
 ## Gradient
-
 
 ```{prf:definition} Gradient
 :label: def-mvc-gradient
@@ -200,6 +208,7 @@ $$
 i=1,\dots,n.
 $$ 
 ```
+
 
 ```{prf:example} Gradient of linear functional
 :label: ex-mvc-gradient-linear-functional
@@ -379,6 +388,37 @@ Df (\bx) = \bx^T \bP + \bq^T.
 $$
 ```
 
+
+```{prf:definition} Gradient mapping
+:label: def-mvc-gradient-mapping
+
+If a real valued function $f: \RR^n \to \RR$ 
+is differentiable, the *gradient mapping* 
+of $f$ is the function $\nabla f : \RR^n \to \RR^n$
+with $\dom \nabla f = \dom f$, with the value $\nabla f(\bx)$
+at every $\bx \in \dom f$. 
+```
+
+## Continuous Differentiability
+
+```{prf:definition} Continuously differentiable real valued function
+:label: def-mvc-cont-diff-rv-func
+
+Let $f: \RR^n \to \RR$ be a real valued function with $S = \dom f$.
+Let $U \subseteq S$ be an open set.
+If all the partial derivatives of $f$ exist and are 
+continuous at every $\bx \in U$,
+then $f$ is called *continuously differentiable* over $U$.
+
+If $f$ is continuously differentiable over an open set $U \subseteq S$,
+then it is continuously differentiable over every subset $C \subseteq U$.
+
+If $S$ is open itself and $f$ is continuously differentiable over $S$,
+then $f$ is called *continuously differentiable*.
+```
+
+## First Order Approximation
+
 ````{prf:definition} First order approximation of real valued functions
 :label: def-mvc-first-order-approx-real
 
@@ -392,15 +432,6 @@ is the *first order approximation* of
 a real valued function $f$ at $\bx=\ba \in \interior \dom f$.
 ````
 
-
-
-```{prf:definition} Gradient mapping
-If a real valued function $f: \RR^n \to \RR$ 
-is differentiable, the *gradient mapping* 
-of $f$ is the function $\nabla f : \RR^n \to \RR^n$
-with $\dom \nabla f = \dom f$, with the value $\nabla f(\bx)$
-at every $\bx \in \dom f$. 
-```
 
 ## Chain Rule
 
@@ -826,6 +857,52 @@ $$
 y^2 & - x y\\
 - x y & x^2
 \end{bmatrix}.
+$$
+```
+
+## Twice Continuous Differentiability 
+
+```{prf:definition} Twice continuously differentiable real valued function
+:label: def-mvc-twice-cont-diff-rv-func
+
+Let $f: \RR^n \to \RR$ be a real valued function with $S = \dom f$.
+Let $U \subseteq S$ be an open set.
+If all the second order partial derivatives of $f$ exist and are 
+continuous at every $\bx \in U$,
+then $f$ is called *twice continuously differentiable* over $U$.
+
+If $f$ is twice continuously differentiable over an open set $U \subseteq S$,
+then it is twice continuously differentiable over every subset $C \subseteq U$.
+
+If $S$ is open itself and $f$ is twice continuously differentiable over $S$,
+then $f$ is called *twice continuously differentiable*.
+```
+
+```{prf:theorem} Symmetry of Hessian
+:label: res-mvc-f-twice-cont-diff-sym-hessian
+
+If $f : \RR^n \to \RR$ with $S = \dom f$
+is twice continuously differentiable over
+a set $U \subseteq S$, then
+its Hessian matrix $\nabla^2 f(\bx)$ is symmetric at every $\bx \in U$
+```
+
+
+## Second Order Approximation
+
+```{prf:theorem} Linear approximation theorem
+:label: res-mvc-linear-approx-theorem
+
+Let $f : \RR^n \to \RR$ with $S = \dom f$ be
+twice continuously differentiable over an open set $U \subseteq S$.
+Let $\bx \in U$.
+Let $r > 0$ be such that $B(\bx, r) \subseteq U$.
+Then, for any $\by \in B(\bx, r)$, there exist $\bz \in [\bx, \by]$
+such that
+
+$$
+f(\by) - f(\bx) = \nabla f(\bx)^T (\by - \bx)
++ \frac{1}{2} (\by - \bx)^T \nabla^2 f(\bz) (\by - \bx).
 $$
 ```
 
