@@ -112,7 +112,7 @@ We shall just prove this for $\bA^T \bA$.
 ```
 
 ```{prf:theorem} Non-negativity of the diagonal elements of p.s.d. matrices
-:label: res-la-pd-diag-nng
+:label: res-la-psd-diag-nng
 
 Let $\bA \in \RR^{n \times n}$ be positive semidefinite.
 Then, its diagonal elements are non-negative.
@@ -129,6 +129,32 @@ Let $\bA \in \SS_+^n$.
 ```
 
 
+
+```{prf:definition} Square root of a positive semidefinite matrix
+:label: def-la-psd-square-root
+
+Let $\bA \in \SS^n$ be a positive semidefinite matrix. The
+*square root* of $\bA$, denoted by $\bA^{\frac{1}{2}}$ is defined
+as follows. 
+
+Let $\bA = \bU \bD \bU^T$ be the eigenvalue decomposition of $\bA$.
+Let $d_1,\dots,d_n$ be the diagonal elements of $\bD$.
+Let $\bE = \Diag(\sqrt{d_1}, \dots, \sqrt{d_n})$. Then, 
+
+$$
+\bA^{\frac{1}{2}} \triangleq \bU \bE \bU^T.
+$$
+The matrix $\bU \bE \bU^T$ is known as the *positive semidefinite square root*.
+```
+The definition of $\bE$ is justified since $d_i \geq 0$ for a p.s.d. matrix.
+
+We can see that
+
+$$
+ç \bA^{\frac{1}{2}} = 
+\bU \bE \bU^T \bU \bE \bU^T
+= \bU \bE \bE \bU^T = \bU \bD \bU^T = \bA.
+$$
 
 
 ### Positive Definite Matrices
@@ -169,6 +195,17 @@ Let $\bA \in \SS_{++}^n$.
 1. Hence, $A_{i,i} > 0$ must be true.
 ```
 
+
+```{prf:theorem} Principal minors criterion
+:label: res-la-pd-principal-minors-criterion
+
+A matrix $\bA \in \SS^n$ is positive definite if and only if
+the determinants of all the principal minors are positive.
+
+In other words, $D_1(\bA) > 0, D_2(\bA) > 0, \dots, D_n(\bA) > 0$
+where $D_i(\bA)$ denotes the determinant of the upper left $i \times i$
+submatrix (the $i$-th principal minor). 
+```
 
 ### Negative Semidefinite Matrices
 
@@ -299,5 +336,84 @@ Hence, trace and determinant are positive.
 
 Let $\bA$ be a symmetric positive definite matrix. Then, $\Trace (\bA)$ and $\det (\bA)$
 are nonnegative.
+```
+
+## Diagonally Dominant Matrices
+
+
+```{prf:definition} Diagonally dominant matrix
+:label: def-la-sym-diagonally-dominant-matrix
+
+Let $\bA \in \SS^n$. 
+
+1. $\bA$ is called *diagonally dominant* if
+
+   $$
+   | A_{i i} | \geq \sum_{j \neq i} | A_{i j} | 
+   $$
+   for every $i=1,\dots,n$.
+   In other words, the absolute value of the diagonal entry in a row
+   is greater than or equal to the sum of absolute values of non diagonal entries in the row.
+1. $\bA$ is called *strictly diagonally dominant* if
+
+   $$
+   | A_{i i} | > \sum_{j \neq i} | A_{i j} | 
+   $$
+   for every $i=1,\dots,n$.
+```
+
+```{prf:theorem} Positive semidefiniteness of diagonally dominant matrices
+:label: res-la-sym-ddm-psd
+
+Let $\bA \in \SS^n$ be a real symmetric matrix. 
+
+1. If $\bA$ is diagonally dominant whose diagonal entries are nonnegative then
+   $\bA$ is positive semidefinite.
+1. If $\bA$ is strictly diagonally dominant whose diagonal entries are positive
+   then $\bA$ is positive definite.
+```
+
+```{prf:proof}
+
+Assume that $\bA$ is diagonally dominant with nonnegative diagonal entries.
+
+1. For contradiction, assume that $\bA$ is not positive semidefinite.
+1. Then, there is an eigen value $\lambda < 0$ and corresponding eigenvector $\bu$.
+1. Consider the absolute values of entries of $\bu$ given by $(|u_1|, \dots, |u_n|)$.
+1. Let $i \in 1,\dots,n$ denote the index of the largest absolute value entry of $\bu$.
+1. We also have $\bA \bu = \lambda \bu$.
+1. For the $i$-th row, we get the equality
+
+   $$
+   & \sum_{j = 1}^n A_{i j} u_j = \lambda u_i \\
+   & \iff \sum_{j \neq i} A_{i j} u_j = \lambda u_i - A_{i i} u_i \\
+   & \iff \left | \sum_{j \neq i} A_{i j} u_j \right | = | \lambda - A_{i i} | |u_i | \\
+   & \implies  | \lambda - A_{i i} | |u_i | 
+   \leq \left ( \sum_{j \neq i} | A_{i j} | \right ) | u_i |
+   \leq |A_{ i i} | |u_i |.
+   $$
+1. Thus,  $| \lambda - A_{i i} |  = |A_{ i i} - \lambda | \leq |A_{ i i} |$.
+1. But $A_{i i}$ is nonnegative and $\lambda$ is negative, hence this reduces to
+   $A_{ i i} - \lambda \leq A_{i i}$ or $\lambda \geq 0$.
+1. We have arrived at a contradiction.
+1. Thus, $\bA$ must be positive semidefinite.
+
+
+Now, assume that $\bA$ is strictly diagonally dominant with positive diagonal entries.
+
+1. By first part, it is clear that $\bA$ is p.s.d..
+1. We just need to show that all eigenvalues are positive. There are no zero eigenvalues.
+1. For contradiction, assume that $0$ is indeed an eigenvalue of $\bA$.
+1. Let $\bu \neq \bzero$ be corresponding eigenvector satisfying
+   $\bA \bu = \bzero$.
+1. Let $i \in 1,\dots,n$ denote the index of the largest absolute value entry of $\bu$.
+1. Following the earlier argument
+
+   $$
+   | A_{i i}| |u_i | &= \left | \sum_{j \neq i} A_{i j} u_j  \right | \\
+   &\leq \left ( \sum_{j \neq i} | A_{i j} | \right ) |u_i| \\
+   &< | A_{i i} | |u_i|.
+   $$
+1. This is impossible. Hence, $\bA$ must be positive definite.
 ```
 
