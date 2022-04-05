@@ -232,3 +232,41 @@ $\be_i^T \bA \be_i < 0$ and $\be_j^T \bA \be_j > 0$.
 Thus, $\bA$ is indefinite.
 ```
 
+## Eigenvalue Decomposition
+
+```{prf:theorem} Eigenvalue characterization theorem
+:label: res-la-evd-definiteness-charac
+
+Let $\bA \in \SS^n$ be an $n\times n$ symmetric matrix.
+
+1. $\bA$ is positive definite if and only if all its eigenvalues are positive.
+1. $\bA$ is positive semidefinite if and only if all its eigenvalues are nonnegative.
+1. $\bA$ is negative definite if and only if all its eigenvalues are negative.
+1. $\bA$ is negative semidefinite if and only if all its eigenvalues are nonpositive.
+1. $\bA$ is indefinite if and only if at least one eigenvalue is positive and
+   at least one eigenvalue is negative.
+```
+
+```{prf:proof}
+Let the eigenvalue decomposition of $\bA$ be given by
+$\bA = \bU \bD \bU^T$.
+
+We prove (1).
+
+1. Let $\bv \in \RR^n$.
+1. Then
+
+   $$
+   \bv^T \bA \bv = \bv^T \bU \bD \bU^T \bv
+   = \bw^T \bD \bw = \sum_{i=1}^n d_i w_i^2.
+   $$
+   where $\bw = \bU^T \bv$.
+1. Since $\bU$ is nonsingular, hence $\bv^T \bA \bv > 0$ for every $\bv \neq \bzero$
+   if and only if $\sum_{i=1}^n d_i w_i^2 > 0$ for every $\bw \neq \bzero$.
+1. Plugging $\be_i$ for $\bw$, we see that $d_i > 0$ is a necessary condition.
+1. Also, if $d_i > 0$ for every $i$, then, the sum is positive for every nonzero $\bw$
+   since at least one $w_i \neq 0$.
+   Hence, it is a sufficient condition. 
+
+Similar arguments apply for other statements.
+```
