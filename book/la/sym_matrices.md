@@ -65,7 +65,7 @@ or the matrix $\bX$ is positive semi-definite.
 We define the *set of symmetric positive semidefinite matrices* as
 
 $$
-    \SS_+^n = \{\bX \in \SS^n | \bX \succeq \ZERO \}.
+\SS_+^n = \{\bX \in \SS^n \ST \bX \succeq \ZERO \}.
 $$
 
 "positive semidefinite" is often abbreviated as "p.s.d.".
@@ -137,7 +137,7 @@ or the matrix $\bX$ is positive definite.
 We define the *set of symmetric positive definite matrices* as
 
 $$
-\SS_{++}^n = \{\bX \in \SS^n | \bX \succ 0 \}.
+\SS_{++}^n = \{\bX \in \SS^n \ST \bX \succ 0 \}.
 $$
 
 "positive definite" is often abbreviated as "p.d.".
@@ -160,4 +160,60 @@ Let $\bA \in \SS_{++}^n$.
 1. But $\be_i^T \bA \be_i = A_{i,i}$.
 1. Hence, $A_{i,i} > 0$ must be true.
 ```
+
+
+## Negative Semidefinite Matrices
+
+````{prf:definition} Negative semidefinite matrix
+:label: def-la-nsd-matrix
+
+A symmetric matrix $\bX \in \SS^n$ is called *negative semi-definite* if
+$\bv^T \bX \bv \leq 0$ for all $\bv \in \RR^n$.
+
+The notation $\bX \preceq \ZERO$ means $\bv^T \bX \bv \leq 0 \Forall \bv \in \RR^n$
+or the matrix $\bX$ is negative semi-definite.
+
+We define the *set of symmetric negative semidefinite matrices* as
+
+$$
+    \SS_-^n = \{\bX \in \SS^n \ST \bX \preceq \ZERO \}.
+$$
+
+"negative semidefinite" is sometimes abbreviated as "n.s.d.".
+````
+
+
+## Negative Definite Matrices
+
+````{prf:definition} Negative definite matrix
+:label: def-la-nd-matrix
+
+A symmetric matrix $\bX \in \SS^n$ is called *negative definite* if
+$\bv^T \bX \bv < 0$ for all non-zero $\bv \in \RR^n$.
+
+The notation $\bX \prec \ZERO$ means $\bv^T \bX \bv  < 0 \Forall \bv \in \RR^n, \bv \neq 0$
+or the matrix $\bX$ is negative definite.
+
+We define the *set of symmetric negative definite matrices* as
+
+$$
+\SS_{--}^n = \{\bX \in \SS^n \ST \bX \prec 0 \}.
+$$
+
+"negative definite" is sometimes abbreviated as "n.d.".
+````
+
+
+## Indefinite Matrices
+
+````{prf:definition} Indefinite matrix
+:label: def-la-indefinite-matrix
+
+A symmetric matrix $\bA \in \SS^n$ is called *negative definite* if
+there exist $\bx, \by \in \RR^n$ such that
+$\bx^T \bA \bx < 0$ and $\by^T \bA \by > 0$.
+````
+
+Indefinite matrices are neither positive semidefinite nor negative semidefinite.
+
 
