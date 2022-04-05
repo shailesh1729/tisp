@@ -103,6 +103,25 @@ We shall just prove this for $\bA^T \bA$.
 1. Thus, $\bA^T \bA$ is p.s.d..
 ```
 
+```{prf:theorem} Non-negativity of the diagonal elements of p.s.d. matrices
+:label: res-la-pd-diag-nng
+
+Let $\bA \in \RR^{n \times n}$ be positive semidefinite.
+Then, its diagonal elements are non-negative.
+```
+
+```{prf:proof}
+
+Let $\bA \in \SS_+^n$.
+
+1. Then, for every nonzero $\bv \in \RR^n$, $\bv^T \bA \bv \geq 0$.
+1. In particular, this is true for standard unit vectors.
+1. But $\be_i^T \bA \be_i = A_{i,i}$.
+1. Hence, $A_{i,i} \geq 0$ must be true.
+```
+
+
+
 
 ## Positive Definite Matrices
 
@@ -118,7 +137,7 @@ or the matrix $\bX$ is positive definite.
 We define the *set of symmetric positive definite matrices* as
 
 $$
-    ç = \{\bX \in \SS^n | \bX \succ 0 \}.
+\SS_{++}^n = \{\bX \in \SS^n | \bX \succ 0 \}.
 $$
 
 "positive definite" is often abbreviated as "p.d.".
@@ -134,9 +153,9 @@ Then, its diagonal elements are positive.
 
 ```{prf:proof}
 
-Let $\bA \in \bA^T \bA$.
+Let $\bA \in \SS_{++}^n$.
 
-1. Then, for every nonzero \bv \in \RR^n$, $\bv^T \bA \bv > 0$.
+1. Then, for every nonzero $\bv \in \RR^n$, $\bv^T \bA \bv > 0$.
 1. In particular, this is true for standard unit vectors.
 1. But $\be_i^T \bA \be_i = A_{i,i}$.
 1. Hence, $A_{i,i} > 0$ must be true.
