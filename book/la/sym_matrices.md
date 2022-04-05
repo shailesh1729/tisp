@@ -13,6 +13,8 @@ $$
 $$
 ````
 
+## The Vector Space of Symmetric Matrices
+
 ````{prf:theorem} The vector space of symmetric matrices
 :label: res-la-symmetric-matrix-space
 
@@ -40,6 +42,15 @@ $$
 This is known as the *Frobenius inner product*.
 ```
 
+```{prf:remark}
+:label: res-la-sn-as-ip-space
+
+Equipped with this inner product as 
+defined in {prf:ref}`def-la-matrix-inner-product`, $\SS^n$ is a
+finite dimensional real inner product space.
+```
+
+
 ## Positive Semidefinite Matrices
 
 ````{prf:definition} Positive semidefinite matrix
@@ -56,7 +67,43 @@ We define the *set of symmetric positive semidefinite matrices* as
 $$
     \SS_+^n = \{\bX \in \SS^n | \bX \succeq \ZERO \}.
 $$
+
+"positive semidefinite" is often abbreviated as "p.s.d.".
 ````
+
+
+```{prf:theorem} 
+:label: res-la-ata-as-psd-matrix
+
+Let $\bA \in \RR^{m \times n}$ be an arbitrary matrix. 
+Then, $\bA^T \bA$ is a p.s.d. matrix in $\SS^n$ and
+$\bA \bA^T$ is a p.s.d. matrix in $\SS^m$.
+```
+
+```{prf:proof}
+
+We shall just prove this for $\bA^T \bA$.
+
+1. We note that
+
+   $$
+   (\bA^T \bA)^T = \bA^T \bA.
+   $$
+   Thus,  $\bA^T \bA$ is symmetric.
+1. $\bA^T \bA \in \RR^{n \times n}$. Since it is symmetric, hence $\bA^T \bA \in \SS^n$.
+1. Let $\bv \in \RR^n$.
+1. Then,
+
+   $$
+   \bv^T \bA^T \bA \bv  = (\bA \bv)^T (\bA \bv) 
+   = \| \bA \bv \|^2 \geq 0
+   $$
+   where $\| \cdot \|$ is the norm induced by the dot product on
+   $\RR^n$.
+1. Thus, $\bA^T \bA$ is p.s.d..
+```
+
+
 ## Positive Definite Matrices
 
 ````{prf:definition} Positive definite matrix
@@ -71,6 +118,27 @@ or the matrix $\bX$ is positive definite.
 We define the *set of symmetric positive definite matrices* as
 
 $$
-    \SS_{++}^n = \{\bX \in \SS^n | \bX \succ 0 \}.
+    ç = \{\bX \in \SS^n | \bX \succ 0 \}.
 $$
+
+"positive definite" is often abbreviated as "p.d.".
 ````
+
+
+```{prf:theorem} Positivity of the diagonal elements of p.d. matrices
+:label: res-la-pd-diag-positive
+
+Let $\bA \in \RR^{n \times n}$ be positive definite.
+Then, its diagonal elements are positive.
+```
+
+```{prf:proof}
+
+Let $\bA \in \bA^T \bA$.
+
+1. Then, for every nonzero \bv \in \RR^n$, $\bv^T \bA \bv > 0$.
+1. In particular, this is true for standard unit vectors.
+1. But $\be_i^T \bA \be_i = A_{i,i}$.
+1. Hence, $A_{i,i} > 0$ must be true.
+```
+
