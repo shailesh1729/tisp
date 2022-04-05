@@ -791,7 +791,8 @@ Assume $\ba$ to be a local minimum point.
    By definition, $\ba_t \in B(\ba, r)$.
 1. Hence, for any $t \in (0, \frac{r}{\| \bd \|})$, 
    $f(\ba_t) \geq f(\ba)$.
-1. By linear approximation theorem, there exists a vector $\bz_t \in [\ba, \ba_t]$
+1. By linear approximation theorem ({prf:ref}`res-mvc-linear-approx-theorem`),
+   there exists a vector $\bz_t \in [\ba, \ba_t]$
    such that
 
    $$
