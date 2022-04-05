@@ -126,7 +126,7 @@ or *local optimal value*
 of $f$ at $\ba \in \dom f$ 
 if there exists
 $\delta > 0$ such that $f(\bx) - f(\ba)$ doesn't change sign on
-$B(\ba, \delta) \cap S.
+$B(\ba, \delta) \cap S$.
 
 More specifically,
 
@@ -161,6 +161,53 @@ Here $B_d(\ba, \delta)$ denotes the deleted neighborhood
 (an open ball of radius $\delta$ excluding $\ba$ itself).
 ```
 
+```{prf:remark} Local optimal points for open domain
+:label: rem-opt-local-optimal-point-open-dom
+
+
+Let $f : \VV \to \RR$ be a real valued function with
+$S = \dom f$.
+Assume that $S$ is open.
+
+1. If $\ba \in S$ is a local maximum point, then there exists $r_1 > 0$
+   such that
+
+   $$
+   f(\bx) \leq f(\ba) \Forall \bx \in B(\ba, r_1) \cap S.
+   $$
+1. But since $S$ is open, hence $\ba \in \interior S$. Thus,
+   there exists an open ball $B(\ba, r_2) \subseteq S$.
+1. Let $r = \min(r_1, r_2)$. 
+1. Then, $B(\ba, r) \subseteq S$ and $B(\ba, r) \subseteq B(\ba, r_1)$.
+1. Thus, $B(\ba, r) \subseteq B(\ba, r_1) \cap S$.
+1. Thus, $f(\bx) \leq f(\ba) \Forall \bx \in B(\ba, r) \subseteq S$.
+1. Thus, the local optimality condition simplifies to looking for 
+   an open ball of radius $r$ totally contained inside the open domain $S$.
+
+Based on this discussion, we can adjust the conditions for local
+optimality.
+
+1. $\ba$ is a *local maximum point* of $f$ if for some $r > 0$:
+
+   $$
+   f(\bx) \leq f(\ba) \Forall \bx \in B(\ba, r) \subseteq S.
+   $$
+1. $\ba$ is a *local minimum point* of $f$ if for some $r > 0$:
+
+   $$
+   f(\bx) \geq f(\ba) \Forall \bx \in B(\ba, r) \subseteq S.
+   $$
+1. $\ba$ is a *strict local maximum point* if for some $r > 0$:
+
+   $$
+   f(\bx) > f(\ba) \Forall \bx \in B_d(\ba, r) \subseteq S.
+   $$ 
+1. $\ba$ is a *strict local minimum point* of $f$ if for some $r > 0$:
+
+   $$
+   f(\bx) > f(\ba) \Forall \bx \in B_d(\ba, r) \subseteq S.
+   $$
+```
 
 ### Standard Form for Mathematical Optimization Problems
 
@@ -712,6 +759,70 @@ stationary points.
 
 
 ## Second Order Conditions
+
+
+```{prf:theorem} Necessary second order optimality conditions
+:label: res-opt-2nd-order-optimality-local
+
+Let $f : \RR^n \to \RR$ be a real valued function with $S = \dom f$.
+Assume that $S$ is open.
+Further, assume that $f$ is twice continuously differentiable over $S$
+and that $\ba \in S$ is a stationary point.
+
+Then, the following hold.
+
+1. If $\ba$ is a local minimum point of $f$ over $S$, then
+   $\nabla^2 f(\ba) \succeq \ZERO$.
+1. If $\ba$ is a local maximum point of $f$ over $S$, then
+   $\nabla^2 f(\ba) \preceq \ZERO$.   
+```
+
+```{prf:proof}
+Assume $\ba$ to be a local minimum point.
+
+1. Then, there exists an open ball $B(\ba, r) \subseteq S$
+   such that $f(\bx) \geq f(\ba)$ for all $\bx \in B(\ba, r)$.
+1. Let $\bd \in \RR^n$ be a nonzero vector.
+1. For $0 < t < \frac{r}{\| \bd \|}$, we define
+
+   $$
+   \ba_t = \ba + t \bd.
+   $$
+   By definition, $\ba_t \in B(\ba, r)$.
+1. Hence, for any $t \in (0, \frac{r}{\| \bd \|})$, 
+   $f(\ba_t) \geq f(\ba)$.
+1. By linear approximation theorem, there exists a vector $\bz_t \in [\ba, \ba_t]$
+   such that
+
+   $$
+   f(\ba_t) - f(\ba) = \nabla f(\ba)^T (\ba_t - \ba) 
+   + \frac{1}{2} (\ba_t - \ba)^T \nabla^2 f(\bz_t) (\ba_t - \ba).
+   $$
+1. Since $\ba$ is a stationary point, hence $\nabla f(\ba) = \bzero$.
+1. Also, by definition of $\ba_t$, $\ba_t - \ba = t \bd$.
+1. Thus,
+
+   $$
+   f(\ba_t) - f(\ba) = \frac{t^2}{2} \bd^T \nabla^2 f(\bz_t) \bd.
+   $$
+1. Since $f(\ba)$ is local minimum. Hence, $f(\ba_t) - f(\ba) \geq 0$.
+1. Thus, for any $\bd \in \RR^n$ and any $0 < t < \frac{r}{\| \bd \|}$, we have
+
+   $$
+   \frac{t^2}{2} \bd^T \nabla^2 f(\bz_t) \bd \geq 0.
+   $$
+1. By the continuity of the Hessian, and the fact that $\bz_t \to \ba$
+   as $t \to 0^+$, we obtain that
+
+   $$
+   \frac{t^2}{2} \bd^T \nabla^2 f(\ba) \bd \geq 0 \Forall \bd \in \RR^n.
+   $$
+1. Thus, $\nabla^2 f(\ba) \succeq \ZERO$.
+
+The argument for second statement is similar. We can apply the
+same argument on $-f$ and recognize that if $\ba$ is a local maximum
+for $f$ then it is a local minimum for $-f$.
+```
 
 
 
