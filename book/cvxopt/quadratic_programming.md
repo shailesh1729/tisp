@@ -1,6 +1,84 @@
 (sec:opt:quadratic-programming)=
 # Quadratic Programming
 
+## Quadratic Functions
+
+```{prf:definition} Quadratic function
+:label: def-opt-quadratic-function
+
+A function $f : \RR^n \to \RR$ of the form
+
+$$
+f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c
+$$
+where $\bA \in \SS^n$, $\bb \in \RR^n$ and $c \in \RR$,
+is known as a *quadratic function*.
+
+The matrix $\bA$ is known as the *matrix associated with the quadratic function*.
+```
+
+```{prf:remark} Gradient and Hessian of a quadratic function
+:label: res-opt-quadratic-gradient-hessian
+
+
+Let 
+
+$$
+f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c
+$$
+be a quadratic function. 
+Then, the gradient is given by:
+
+$$
+\nabla f(\bx)  = \bA \bx + \bb.
+$$
+
+And, the Hessian is given by:
+
+$$
+\nabla^2 f(\bx) = \bA.
+$$
+```
+See  {prf:ref}`ex-mvc-gradient-quadratic-functional`
+and  {prf:ref}`ex-mvc-hessian-quadratic-form` for reference.
+
+```{prf:theorem} Stationary points of quadratic functions
+:label: res-opt-quadratic-func-stationary
+
+Let a quadratic function $f : \RR^n \to \RR$ be given by
+
+$$
+f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c
+$$
+where $\bA \in \SS^n$, $\bb \in \RR^n$ and $c \in \RR$.
+
+1. $\bx \in \RR^n$ is a stationary point if and only if $\bA \bx = - \bb$.
+1. If $\bA \succeq \ZERO$, then $\bx$ is a global minimum point of $f$ if and only if
+   $\bA \bx = -\bb$.
+1. If $\bA \succ \ZERO$, then $\bx = - \bA^{-1} \bb$
+   is a strict global minimum point of $f$.
+```
+
+
+```{prf:proof}
+(1) is a direct implication of the fact that $\nabla f(\bx) = \bzero$
+if and only if $\bA \bx + \bb = \bzero$.
+
+(2) We are given that $\nabla^2 f(\bx) = \bA \succeq \ZERO$.
+
+1. Thus, $\nabla^2 f(\bx) \succeq \ZERO$ for every $\bx \in \RR^n$.
+1. By {prf:ref}`res-opt-hessian-global-minimum-suf`, if $\bx$ is a
+   stationary point of $f$, then it is a global minimum point.
+1. By first part, $\bx$ is a stationary point if and only if $\bA \bx = - \bb$.
+
+(3) We are given that $\bA \succ \ZERO$.
+
+1. Then, $\bA$ is invertible.
+1. Hence, $\bx = - \bA^{-1} \bb$ is the unique solution to the equation
+   $\bA \bx = - \bb$.
+1. By parts (1) and (2), it is the unique (hence strict) global minimizer of $f$.
+```
+
 
 ## Quadratic Optimization Problems
 
