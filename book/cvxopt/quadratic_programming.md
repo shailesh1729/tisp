@@ -159,6 +159,115 @@ Now, assume that $f$ is coercive.
 1. Hence, $\bA$ must be positive definite.
 ```
 
+### Nonnegative Quadratics
+
+It is useful to work with quadratic functions which are nonnegative
+on the entire $\RR^n$.
+
+The basic quadratic form $f(\bx) = \frac{1}{2} \bx^T \bA \bx$
+is nonnegative on entire $\RR^n$ if $\bA$ is positive semidefinite.
+
+For the general quadratic function, we need to incorporate the
+contribution from $\bb$ and $c$ terms also.
+
+```{prf:theorem} Nonnegativity of quadratic function
+:label: res-opt-quadratic-func-nng
+
+Let a quadratic function $f : \RR^n \to \RR$ be given by
+
+$$
+f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c
+$$
+where $\bA \in \SS^n$, $\bb \in \RR^n$ and $c \in \RR$.
+
+The following statements are equivalent.
+
+1. $f(\bx) \geq 0$ for every $\bx \in \RR^n$.
+1. $\begin{bmatrix} \bA & \bb \\ \bb^T & 2 c \end{bmatrix} \succeq \ZERO$;
+   i.e., this $n+1 \times n+1$ symmetric matrix is positive semidefinite.
+```
+
+```{prf:proof}
+
+Assume that (2) is true.
+
+1. Then, for every $\bx \in \RR^n$
+
+   $$
+   \begin{bmatrix} \bx \\ 1 \end{bmatrix}^T
+   \begin{bmatrix} \bA & \bb \\ \bb^T & 2 c \end{bmatrix}
+   \begin{bmatrix} \bx \\ 1 \end{bmatrix}
+   \geq 0
+   $$
+   due to positive semidefiniteness.
+1. But 
+
+   $$
+   \begin{bmatrix} \bx \\ 1 \end{bmatrix}^T
+   \begin{bmatrix} \bA & \bb \\ \bb^T & 2 c \end{bmatrix}
+   \begin{bmatrix} \bx \\ 1 \end{bmatrix}
+   &= \begin{bmatrix} \bx^T & 1 \end{bmatrix}
+   \begin{bmatrix} \bA \bx + \bb \\ \bb^T \bx + 2c \end{bmatrix} \\
+   & = \bx^T \bA \bx + 2 \bx^T \bb + 2 c \\
+   &= 2 \left ( \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c \right ) \\
+   = 2 f(\bx).
+   $$
+1. Thus, $f(\bx) \geq 0$ for every $\bx \in \RR^n$.
+
+For the converse, assume (1) is true.
+
+1. We need to show that $\begin{bmatrix} \bA & \bb \\ \bb^T & 2 c \end{bmatrix}$
+   is positive semidefinite.
+1. We shall first show that $\bA$ is positive semidefinite.
+1. For contradiction, assume that $\bA$ is not positive semidefinite.
+1. Then, there exists a negative eigenvalue $\lambda < 0$ and corresponding
+   normalized eigenvector $\bv$ for $\bA$
+   such that $\bA \bv = \lambda \bv$.
+1. Then, for any $t \in \RR$
+   
+   $$
+   f(t \bv) = \frac{\lambda t^2}{2} + t \bb^T \bv + c. 
+   $$
+1. Then, $f(t \bv) \to -\infty$ as $t \to -\infty$.
+1. This contradicts the hypothesis that $f$ is nonnegative everywhere.
+1. Thus, $\bA$ must be positive semidefinite.
+1. We now need to show that for any $\by \in \RR^n$ and any $t \in \RR$,
+   
+   $$
+   \begin{bmatrix} \by \\ t \end{bmatrix}^T
+   \begin{bmatrix} \bA & \bb \\ \bb^T & 2 c \end{bmatrix}
+   \begin{bmatrix} \by \\ t \end{bmatrix} \geq 0.
+   $$
+1. This condition is equivalent to
+
+   $$
+   \frac{1}{2} \by^T \bA \by + t \bb^T \by + c t^2 \geq 0
+   $$
+   for every $\by \in \RR^n$ and $t \in \RR$.
+1. If $t = 0$, then this condition reduces to 
+
+   $$
+   \by^T \bA \by \geq 0 \Forall \by \in \RR^n.
+   $$
+1. This is valid for every $\by \in \RR^n$ since $\bA$ is p.s.d..
+   as established earlier.
+1. For $t \neq 0$, we have
+
+   $$
+   t^2 f \left ( \frac{\by}{ t} \right ) 
+   = t^2 \left ( \frac{1}{2 t^2} \by^T \bA \by + \frac{1}{t} \bb^T \by + c \right )
+   = \frac{1}{2 } \by^T \bA \by + t \bb^T \by + c t^2.
+   $$
+1. By hypothesis, $t^2 f \left ( \frac{\by}{ t} \right ) \geq 0$ 
+   for every $\by \in \RR^n$ and $t \neq 0$.
+1. Thus, $\frac{1}{2 } \by^T \bA \by + t \bb^T \by + c t^2 \geq 0$ for every $\by \in \RR^n$
+   and $t \in \RR$.
+1. Thus, $\begin{bmatrix} \bA & \bb \\ \bb^T & 2 c \end{bmatrix}$ is indeed p.s.d..
+```
+
+
+
+
 
 
 ## Quadratic Optimization Problems
