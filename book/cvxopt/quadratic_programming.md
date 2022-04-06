@@ -42,6 +42,8 @@ $$
 See  {prf:ref}`ex-mvc-gradient-quadratic-functional`
 and  {prf:ref}`ex-mvc-hessian-quadratic-form` for reference.
 
+### Stationary Points
+
 ```{prf:theorem} Stationary points of quadratic functions
 :label: res-opt-quadratic-func-stationary
 
@@ -91,6 +93,72 @@ f(\ba) &=  \frac{1}{2} \ba^T \bA \ba + \bb^T \ba + c \\
 &= c - \frac{1}{2} \bb^T \bA^{-1} \bb.
 $$
 ```
+
+### Coerciveness
+
+```{prf:theorem} Coerciveness of quadratic functions
+:label: res-opt-quadratic-func-coercive
+
+Let a quadratic function $f : \RR^n \to \RR$ be given by
+
+$$
+f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c
+$$
+where $\bA \in \SS^n$, $\bb \in \RR^n$ and $c \in \RR$.
+
+$f$ is coercive if and only if $\bA \succ \ZERO$; i.e.,
+$\bA$ is positive definite.
+```
+
+```{prf:proof}
+
+Assume that $\bA$ is positive definite. 
+
+1. Then, all eigenvalues of $\bA$ are positive.
+1. Let $\lambda$ be the smallest eigenvalue of $\bA$.
+1. Then, $\bx^T \bA \bx \geq \lambda \| \bx \|^2$ for every $\bx \in \RR^n$.
+1. Thus,
+
+   $$
+   f(\bx) &\geq \frac{ \lambda}{2}  \| \bx \|^2 + \bb^T \bx + c \\
+   &\geq \frac{ \lambda}{2}  \| \bx \|^2 - \|\bb \| \| \bx \| + c 
+   & \text{ Cauchy Schwartz inequality }\\
+   &= \frac{ \lambda}{2} \| \bx \| \left (\| \bx \| - \frac{2}{\lambda} \| \bb \| \right ) + c.
+   $$
+1. We can see that $f(\bx) \to \infty$ as $\| \bx \| \to \infty$.
+1. Thus, $f$ is coercive.
+
+Now, assume that $f$ is coercive.
+
+1. We need to show that $\bA$ must be positive definite.
+1. Thus, all eigenvalues of $\bA$ must be positive.
+1. For contradiction, assume that an eigenvalue of $\bA$ is negative.
+1. Let $\lambda < 0$ be such an eigenvalue with the corresponding
+   normalized eigenvector $\bv$ such that $\bA \bv = \lambda \bv$.
+1. Then, for any $t \in \RR$,
+
+   $$
+   f(t \bv) &= \frac{t^2}{2} \bv^T \bA \bv + t \bb^T \bv + c \\
+   &= \frac{\lambda t^2}{2} + t \bb^T \bv + c.
+   $$
+1. Clearly, $f(t \bv) \to -\infty$ as $t \to \infty$ since $\lambda$ is negative.
+1. Thus, it contradicts the hypothesis that $f$ is coercive.
+1. We now consider the possibility where there is a 0 eigenvalue.
+1. Then, there exists a normalized eigenvector $\bv$ such that $\bA \bv = \bzero$.
+1. Then, for any $t \in \RR$,
+
+   $$
+   f(t \bv) = t \bb^T \bv + c.
+   $$
+1. If $\bb^T \bv = 0$, then $f(t\bv) = c$ for every $t \in \RR$.
+1. If $\bb^T \bv > 0$, then $f(t \bv) \to -\infty$ as $t \to -\infty$.
+1. If $\bb^T \bv < 0$, then $f(t \bv) \to -\infty$ as $t \to \infty$.
+1. In all the three cases, $f(t \bv)$ does not go to $\infty$ as $\| t \bv \| \to \infty$.
+1. Thus, $f$ is not coercive. A contradiction to the hypothesis.
+1. Hence, the eigenvalues of $\bA$ must be positive.
+1. Hence, $\bA$ must be positive definite.
+```
+
 
 
 ## Quadratic Optimization Problems
