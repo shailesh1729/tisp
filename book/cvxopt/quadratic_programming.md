@@ -57,6 +57,8 @@ where $\bA \in \SS^n$, $\bb \in \RR^n$ and $c \in \RR$.
    $\bA \bx = -\bb$.
 1. If $\bA \succ \ZERO$, then $\bx = - \bA^{-1} \bb$
    is a strict global minimum point of $f$.
+1. If $\bA \succ \ZERO$, then the minimum value of $f$ is
+   $c - \frac{1}{2} \bb^T \bA^{-1} \bb$.
 ```
 
 
@@ -77,6 +79,17 @@ if and only if $\bA \bx + \bb = \bzero$.
 1. Hence, $\bx = - \bA^{-1} \bb$ is the unique solution to the equation
    $\bA \bx = - \bb$.
 1. By parts (1) and (2), it is the unique (hence strict) global minimizer of $f$.
+
+(4) We know that strict global minimum point of $f$ is given by $\ba = - \bA^{-1} \bb$
+with $\bA \ba = - \bb$.
+Therefore,
+
+$$
+f(\ba) &=  \frac{1}{2} \ba^T \bA \ba + \bb^T \ba + c \\
+&= - \frac{1}{2} \ba^T \bb + \bb^T \ba + c \\
+&= c + \frac{1}{2} \bb^T \ba  \\
+&= c - \frac{1}{2} \bb^T \bA^{-1} \bb.
+$$
 ```
 
 
