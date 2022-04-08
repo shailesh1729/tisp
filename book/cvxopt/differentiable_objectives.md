@@ -1,14 +1,122 @@
-# Convex Differentiable Objective Functions
+# Differentiable Objective Functions
 
 In this section, we focus on objective functions of type
 $f : \RR^n \to \RR$ which are convex and differentiable.
 Our goal is to minimize $f$ over a convex set $C \subseteq \dom f$.
 
-ain references for this section are
+Main references for this section are
 {cite}`beck2014introduction,boyd2004convex`.
 
 
+## Stationary Points
+
+We first look at functions which are differentiable over a
+convex set. Here, we don't require that the function itself
+be convex. Thus, we may not characterize the global 
+optimality of a point. However, we can still
+characterize the local optimality of a point.
+
+
+In {prf:ref}`def-opt-stationary-point`, we defined
+stationary points for a real valued function as
+points where the gradient vanishes; i.e. $\nabla f(\bx) = \bzero$.
+
+In this section, we wish to restrict the domain of feasible
+points to a convex set $C$ and consider the problem
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C
+$$
+where $f$ is differentiable over the convex set $C$.
+
+We now introduce the notion of stationary points for
+the given optimization problem of minimizing $f$ over $C$.
+
+```{prf:definition} Stationary point for an optimization problem
+:label: def-opt-over-c-stationary-point
+
+Let $f : \RR^n \to \RR$ be a real valued function which
+is differentiable over a convex set $C$.
+
+Then, $\ba \in C$ is called a *stationary point* of the
+problem of minimizing $f$ over $C$ if 
+
+$$
+\nabla f(\ba)^T (\bx - \ba) \geq 0 \Forall \bx \in C.
+$$
+```
+If $C = \RR^n$, then the condition will reduce to
+$\nabla f(\ba) = \bzero$.
+
+
+```{prf:theorem} Local minimum points are stationary points
+:label: res-opt-over-c-local-min-stationary
+
+Let $f : \RR^n \to \RR$ be a real valued function which
+is differentiable over a convex set $C$.
+Consider the optimization problem
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C.
+$$
+If $\ba \in C$ is a local minimum, then $\ba$ must be
+a stationary point. 
+```
+
+```{prf:proof}
+Let $\ba$ be a local minimum and for contradiction assume
+that it is not a stationary point.
+
+1. Then, there exists $\bx \in C$ such that
+   $\nabla f(\ba)^T (\bx - \ba) < 0$.
+1. Let $t \in [0,1]$ be a parameter.
+1. Let $\bz_t = t \bx + (1-t) \ba$.
+1. Since $C$ is convex, hence $\bz_t \in C$.
+1. Differentiating $f(\bz_t)$ w.r.t. $t$ at $t=0$, we obtain
+
+   $$
+   \left . \frac{d}{d t} f(\bz_t) \right |_{t=0} = \nabla f(\ba)^T (\bx - \ba) < 0.
+   $$
+1. Thus, for small enough $t$, $f(\bz_t) < f(\ba)$.
+1. This contradicts the hypothesis that $\ba$ is a local minimum.
+1. Thus, all local minimum points must be stationary points.
+```
+
+
+```{prf:example} Unconstrained minimization
+:label: ex-opt-diff-obj-unconstrained-minimization
+
+Let $f : \RR^n \to \RR$ be a real valued function which
+is differentiable.
+Consider the unconstrained optimization problem
+
+$$
+\text{minimize }  f(\bx).
+$$
+
+In this case, the feasible set is $C = \RR^n$.
+
+1. If $\ba$ is a stationary point for this problem, then
+   
+   $$
+   \nabla f(\ba)^T (\bx - \ba) \geq 0 \Forall \bx \in \RR^n.
+   $$
+1. In particular, if we choose $\bx = \ba - \nabla f(\ba)$, we get
+
+   $$
+   \nabla f(\ba)^T (\bx - \ba) = \nabla f(\ba)^T (- \nabla f(\ba))
+   = - \|  \nabla f(\ba) \|^2 \geq 0.
+   $$
+1. This is true only if $\nabla f(\ba) = \bzero$.
+1. Thus, for unconstrained minimization, the gradient vanishes at stationary points.
+```
+
 ## First Order Optimality Criteria
+
+We now pay our attention to the case where $f$ is convex
+as well as differentiable.
 
 ````{prf:theorem} Optimality criterion for differentiable objective function
 :label: res-cvxopt-diff-convex-optimal-criterion
@@ -381,7 +489,8 @@ $$
    $$
    \underset{\| \bx \| \leq 1}{\inf} (\nabla f(\ba)^T \bx - \nabla f(\ba)^T \ba ) \geq 0.
    $$
-1. Recall that for any $\bv \in \RR^n$, the optimal value of the problem
+1. Recall from {prf:ref}`res-opt-min-linear-func-unit-ball`
+   that for any $\bv \in \RR^n$, the optimal value of the problem
 
    $$
    \inf \{ \bv^T \bx  \ST  \| \bx \| \leq 1 \}
@@ -404,8 +513,38 @@ $$
    \leq \| \nabla f(\ba) \|
    $$
    since $\ba \in B[\bzero, 1]$.
-1. Thus, the inequality must be an equality, giving us
+1. Thus, the inequality must be an equality, giving us,
+   $\ba$ is an optimal point 
 
    $$
    - \nabla f(\ba)^T \ba =  \| \nabla f(\ba) \|.
    $$
+
+We now have following possibilities for this condition.
+
+1. If $\nabla f(\ba) = \bzero$, then the condition holds
+   and $\ba$ is indeed an optimal point. 
+1. Otherwise, if $\nabla f(\ba) \neq \bzero$, then $\| \ba \| = 1$ must be true.
+   1. For contradiction, if we assume that $ \| \ba \| < 1$.
+   1. Then, by Cauchy Schwartz inequality
+
+      $$
+      - \nabla f(\ba)^T \ba \leq  \| \nabla f(\ba) \| \| \ba \|
+      < \| \nabla f(\ba) \|,
+      $$
+      a contradiction.
+1. Thus, if $\nabla f(\ba) \neq \bzero$, then $\ba$ is an optimal point
+   if and only if $ \| \ba \| = 1$ and
+
+   $$
+   - \nabla f(\ba)^T \ba =  \| \nabla f(\ba) \| = \| \nabla f(\ba) \| \| \ba \|.
+   $$
+1. But this is possible only when there exists $t \leq 0$ such that
+
+   $$
+   \nabla f(\ba) = t \ba.
+   $$
+1. Thus, if $\nabla f(\ba) \neq \bzero$, then $\ba$ is an optimal point
+   if and only if $ \| \ba \| = 1$ and there exists $t \leq 0$ such that
+   $\nabla f(\ba) = t \ba$.
+```
