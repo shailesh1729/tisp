@@ -1404,3 +1404,47 @@ the set of minimizers of $g$ is nonempty and compact.
 So is the set of minimizers of $f$ over $A$.
 ```
 
+
+## Some Simple Problems
+
+In this subsection, we provide results on some simple optimization problems.
+These results are useful building blocks for bigger problems.
+
+
+
+
+```{prf:theorem} Minimization of linear functional over unit ball
+:label: res-opt-min-linear-func-unit-ball
+
+For any $\ba \in \RR^n$, the optimal value of the problem
+
+$$
+\underset{ \| \bx \| \leq 1 }{\inf} \ba^T \bx 
+$$
+is $- \| \ba\|$.
+```
+
+```{prf:proof}
+If $\ba = \bzero$, then $\ba^T \bx = 0$. The minimum value is 0 which 
+is equal to $-\| \ba \|$.
+
+Now consider the case where $\ba \neq \bzero$.
+
+1. By Cauchy Schwartz inequality
+
+   $$
+   \ba^T \bx  \geq - \| \ba \| \| \bx \| \geq - \| \ba \|
+   $$
+   for any $\| \bx \| \leq 1$.
+1. Thus, we have established a lower bound:
+
+   $$
+   \underset{ \| \bx \| \leq 1 }{\inf} \ba^T \bx  \geq - \| \ba \|.
+   $$
+1. We now show that the lower bound is indeed attained.
+1. Let $\bx = \frac{-\ba}{ \| \ba \|}$. 
+1. Then $\| \bx \| = 1$. Thus, $\bx$ belongs to the unit ball.
+1. Now $\ba^T \bx = - \| \ba \|$. Thus, the lower bound is attained.
+```
+
+
