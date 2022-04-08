@@ -1,3 +1,4 @@
+(sec:opt:convex-differentiable-objective)=
 # Differentiable Objective Functions
 
 In this section, we focus on objective functions of type
@@ -113,10 +114,51 @@ In this case, the feasible set is $C = \RR^n$.
 1. Thus, for unconstrained minimization, the gradient vanishes at stationary points.
 ```
 
+```{prf:theorem} Stationary point as an orthogonal projection
+:label: res-opt-over-c-stationary-orth-proj
+
+Let $f : \RR^n \to \RR$ be a real valued function which
+is differentiable over a convex set $C$.
+Consider the optimization problem
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C.
+$$
+Let $s > 0$.
+Then $\ba \in C$ is a stationary point of the optimization
+problem if and only if
+
+$$
+\ba = P_C (\ba - s \nabla f(\ba)).
+$$
+```
+
+```{prf:proof}
+
+Recall from {prf:ref}`res-cvx-projection-characterization` that
+$\bz \in C$ is the projection of $\bx$ if and only if
+
+$$
+\langle \by - \bz, \bx - \bz \rangle \leq 0 \Forall \by \in C.
+$$
+
+1. Replace $\bz = \ba$ and $\bx  = \ba - s \nabla f(\ba)$. We get
+
+   $$
+   & \langle \by - \ba, \ba - s \nabla f(\ba) - \ba \rangle \leq 0 \Forall \by \in C\\
+   & \iff  s\langle \by - \ba, \nabla f(\ba) \rangle \geq 0 \Forall \by \in C\\
+   & \iff \nabla f(\ba)^T (\by - \ba) \geq 0 \Forall \by \in C.
+   $$
+1. But this is the same condition as the definition for a stationary point.
+```
+
+
 ## First Order Optimality Criteria
 
 We now pay our attention to the case where $f$ is convex
-as well as differentiable.
+as well as differentiable. In this case, a point is a global
+optimal point if and only if it is a stationary point.
 
 ````{prf:theorem} Optimality criterion for differentiable objective function
 :label: res-cvxopt-diff-convex-optimal-criterion
@@ -136,6 +178,7 @@ Then, $\bx \in C$ is an optimal point if and only if
 \nabla f(\bx)^T (\by - \bx) \geq 0 \Forall \by \in C.
 ```
 
+In other words, $\bx$ is optimal if and only if it is a stationary point.
 ````
 
 ```{prf:proof}
