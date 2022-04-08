@@ -463,7 +463,8 @@ Let $\bx, \by \in \VV$.
 
 Let $C$ be a nonempty, closed and convex subset of $\VV$.
 Let $P_C : \VV \to \VV$ be the orthogonal projection operator
-as defined in {prf:ref}`def-pocs-projection-mapping` is firmly nonexpansive.
+as defined in {prf:ref}`def-pocs-projection-mapping`.
+Then $P_C$ is a firmly nonexpansive operator.
 
 In other words,
 
@@ -474,6 +475,33 @@ $$
 holds true for every $\bx, \by \in \VV$.
 ```
 
+```{prf:proof}
+Recall from {prf:ref}`res-cvx-projection-characterization` that
+for any $\bu \in \VV$ and $\bv \in C$
+
+$$
+\langle \bv - P_C(\bu), \bu - P_C(\bu) \rangle \leq 0.
+$$
+
+1. Substituting $\bu = \bx$ and $\bv = P_C(\by)$, we obtain
+
+   $$
+   \langle P_C(\by) - P_C(\bx), \bx - P_C(\bx) \rangle \leq 0.
+   $$
+1. Substituting $\bu = \by$ and $\bv = P_C(\bx)$, we obtain
+
+   $$
+   \langle P_C(\bx) - P_C(\by), \by - P_C(\by) \rangle \leq 0.
+   $$
+1. Adding the two inequalities gives us
+
+   $$
+   & \langle P_C(\bx) - P_C(\by), \by - P_C(\by) - \bx + P_C(\bx) \rangle \leq 0 \\
+   & \iff \langle P_C(\bx) - P_C(\by), (\by  - \bx) + (P_C(\bx) - P_C(\by)) \rangle \leq 0\\
+   &\iff \| P_C(\bx) - P_C(\by) \|^2 \leq \langle P_C(\bx) - P_C(\by), \bx - \by \rangle
+   $$
+   as desired.
+```
 
 ## Squared Distance Function
 
