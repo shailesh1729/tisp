@@ -94,6 +94,9 @@ $$
 $$
 ```
 
+This result is also known as the second projection theorem
+{cite}`beck2014introduction`.
+
 ```{prf:proof}
 Assume that for some $\bz \in C$,
 $\langle \by - \bz, \bx - \bz \rangle \leq 0 \Forall \by \in C$ holds true.
@@ -150,6 +153,51 @@ Conversely, assume that $\bz$ is the projection of $\bx$ on $C$.
    must hold true for every $\by \in C$.
 ```
 
+Following is an alternative proof based on results
+from {ref}`sec:opt:convex-differentiable-objective`.
+This proof is specific to the case where $\VV = \RR^n$.
+
+```{prf:proof}
+
+Define a function $f: \RR^n \to \RR$ as
+
+$$
+f(\by) = \| \by - \bx \|^2.
+$$
+
+Then, the projection problem can be cast as an optimization problem
+
+$$
+& \text{minimize }  &  & f(\by) \\
+& \text{subject to } & & \by \in C.
+$$
+
+Note that the gradient of $f$ is given by
+
+$$
+\nabla f (\by) = \nabla \langle \by - \bx, \by - \bx \rangle
+= \nabla (\langle \by, \by \rangle - 2 \langle \by, \bx \rangle  + \langle \bx, \bx \rangle)
+= 2 (\by - \bx).
+$$
+
+By {prf:ref}`res-cvxopt-diff-convex-optimal-criterion`, $\bz$ is an optimal solution
+if and only if
+
+$$
+f(\bz)^T (\by - \bz) \geq 0 \Forall \by \in C.
+$$
+
+In other words
+
+$$
+2 (\bz - \bx)^T (\by - \bz) \geq 0 \Forall \by \in C.
+$$
+We can simplify this as
+
+$$
+\langle \bx - \bz, \by - \bz \rangle \leq 0 \Forall \by \in C.
+$$
+```
 
 ```{prf:theorem} Orthogonal projection on an affine subspace
 :label: res-cvx-projection-affine-subspace
