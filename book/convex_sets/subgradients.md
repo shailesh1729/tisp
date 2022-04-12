@@ -2065,14 +2065,22 @@ of an affine transformation with a proper convex function.
 
 ### Composition
 
-```{rubric} Chain rule
-```
+Chain rule is a key principle in computing derivatives of composition of functions.
+A chain rule is available for subgradient calculus also.
 
-```{div} 
-Let $f : \RR \to \RR$ be continuous on $[a,b]$ with $a < b$. Let 
-$f'_+(a)$ exist. Let $g : \RR \to \RR$ be defined on an open interval 
-$I$ such that $\range f \subseteq I$. Assume $g$ is differentiable
-at $f(a)$. Then the composite function
+We first recall a result on the derivative of composition of real functions.
+
+```{prf:theorem} Chain rule for real functions
+:label: res-cvxf-subdiff-chain-rule-rf
+
+Let $f : \RR \to \RR$ be a real function which is
+continuous on $[a,b]$ with $a < b$. 
+Assume that $f'_+(a)$ exists.
+Let $g : \RR \to \RR$ be another real function defined on an open interval 
+$I$ such that $\range f \subseteq I$.
+Assume $g$ is differentiable at $f(a)$.
+Then the composite real function $h : \RR \to \RR$
+given by
 
 $$
 h(t) \triangleq g (f (t)) \quad (a \leq t \leq b)
@@ -2081,6 +2089,18 @@ is right differentiable at $t=a$. In particular,
 
 $$
 h'_+(a) = g'(f(a)) f'_+(a).
+$$
+```
+
+```{prf:proof}
+We show this by working with the definition of right hand derivative as a limit
+
+$$
+h'_+(a) &= \lim_{t \to a^+} \frac{h(t) - h(a)}{t - a} \\
+&= \lim_{t \to a^+} \frac{g(f(t)) - g(f(a))}{t - a} \\
+&= \lim_{t \to a^+} \frac{g(f(t)) - g(f(a))}{f(t) - f(a)} \frac{f(t) - f(a)}{t - a} \\
+&= \lim_{z \to f(a)} \frac{g(z) - g(f(a))}{z - f(a)} \lim_{t \to a^+} \frac{f(t) - f(a)}{t - a} \\
+&= g'(f(a)) f'_+(a).
 $$
 ```
 
