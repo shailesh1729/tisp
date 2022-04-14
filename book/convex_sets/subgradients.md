@@ -2065,14 +2065,22 @@ of an affine transformation with a proper convex function.
 
 ### Composition
 
-```{rubric} Chain rule
-```
+Chain rule is a key principle in computing derivatives of composition of functions.
+A chain rule is available for subgradient calculus also.
 
-```{div} 
-Let $f : \RR \to \RR$ be continuous on $[a,b]$ with $a < b$. Let 
-$f'_+(a)$ exist. Let $g : \RR \to \RR$ be defined on an open interval 
-$I$ such that $\range f \subseteq I$. Assume $g$ is differentiable
-at $f(a)$. Then the composite function
+We first recall a result on the derivative of composition of real functions.
+
+```{prf:theorem} Chain rule for real functions
+:label: res-cvxf-subdiff-chain-rule-rf
+
+Let $f : \RR \to \RR$ be a real function which is
+continuous on $[a,b]$ with $a < b$. 
+Assume that $f'_+(a)$ exists.
+Let $g : \RR \to \RR$ be another real function defined on an open interval 
+$I$ such that $\range f \subseteq I$.
+Assume $g$ is differentiable at $f(a)$.
+Then the composite real function $h : \RR \to \RR$
+given by
 
 $$
 h(t) \triangleq g (f (t)) \quad (a \leq t \leq b)
@@ -2084,18 +2092,99 @@ h'_+(a) = g'(f(a)) f'_+(a).
 $$
 ```
 
-```{rubric} Subdifferential chain rule
+```{prf:proof}
+We show this by working with the definition of right hand derivative as a limit
+
+$$
+h'_+(a) &= \lim_{t \to a^+} \frac{h(t) - h(a)}{t - a} \\
+&= \lim_{t \to a^+} \frac{g(f(t)) - g(f(a))}{t - a} \\
+&= \lim_{t \to a^+} \frac{g(f(t)) - g(f(a))}{f(t) - f(a)} \frac{f(t) - f(a)}{t - a} \\
+&= \lim_{z \to f(a)} \frac{g(z) - g(f(a))}{z - f(a)} \lim_{t \to a^+} \frac{f(t) - f(a)}{t - a} \\
+&= g'(f(a)) f'_+(a).
+$$
 ```
 
-```{div} 
+
+We can now develop a chain rule for subdifferentials
+of multidimensional functions with the help of max formula. 
+
+```{prf:theorem} Subdifferential chain rule
+:label: res-cvxf-subdiff-chain-rule
+
 Let $f : \VV \to \RR$ be convex and let $g : \RR \to \RR$ be a 
-nondecreasing convex function. Let $x \in \VV$ and assume that
-$g$ is differentiable at $f(x)$. Let $h = g \circ f$. Then
+nondecreasing convex function.
+Let $\bx \in \VV$.
+Assume that $g$ is differentiable at $f(\bx)$.
+Let $h = g \circ f$. Then
 
 $$
-\partial h (x) = g'(f(x)) \partial f(x).
+\partial h (\bx) = g'(f(\bx)) \partial f(\bx).
 $$
 ```
+
+```{prf:proof}
+We are given $\bx \in \VV$ at which $g$ is differentiable and $f$ is convex.
+
+1. Since $f$ is convex and $g$ is nondecreasing convex function, hence $h$ is also convex.
+1. We now introduce two real functions parametrized on $\bx$ and
+   an arbitrary direction $\bd \in \VV$
+   
+   $$
+   & f_{\bx, \bd} (t) = f(\bx + t \bd), t \in \RR \\
+   & h_{\bx, \bd} (t) = h(\bx + t \bd), t \in \RR
+   $$
+1. It is now easy to see that
+
+   $$
+   h_{\bx, \bd} (t) = h(\bx + t \bd) = g ( f (\bx + t\bd))  = g (f_{\bx, \bd} (t)).
+   $$
+1. Thus, $h_{\bx, \bd} = g \circ f_{\bx, \bd}$.
+1. Since $f_{\bx, \bd}$ and $ h_{\bx, \bd}$ are restrictions of $f$ and $h$
+   along a line, they are also convex.
+1. Due to {prf:ref}`res-cvxf-dir-der-exist-convex`, the directional derivatives of $f$
+   and $h$ exist in every direction.
+1. By the definition of directional derivative {prf:ref}`def-cvxf-directional-derivative`,
+   
+   $$
+   & (f_{\bx, \bd})'_+ (0) = f'(\bx; \bd), \\
+   & (h_{\bx, \bd})'_+ (0) = h'(\bx; \bd).
+   $$
+1. Also note that $f_{\bx, \bd} (0) = f(\bx)$ and $h_{\bx, \bd} (0) = h(\bx)$.
+1. $f_{\bx, \bd}$ is right differentiable at $t=0$, 
+   and $g$ is differentiable at $f(\bx)$.
+1. Hence, by the chain rule in {prf:ref}`res-cvxf-subdiff-chain-rule-rf`, 
+   
+   $$
+   h'(\bx; \bd) = g'(f(\bx)) f'(\bx; \bd).
+   $$
+1. By the max formula in {prf:ref}`res-cvxf-dir-der-subg-support`, 
+ 
+   $$
+   & h'(\bx; \bd) = \sigma_{\partial h (\bx)} (\bd) \\
+   & f'(\bx; \bd) = \sigma_{\partial f (\bx)} (\bd).   
+   $$
+1. Thus,
+
+   $$
+   \sigma_{\partial h (\bx)} (\bd) &= h'(\bx; \bd) \\
+   &= g'(f(\bx)) f'(\bx; \bd) \\
+   &= g'(f(\bx)) \sigma_{\partial f (\bx)} (\bd) \\
+   &= \sigma_{g'(f(\bx)) \partial f (\bx)} (\bd).
+   $$
+1. By {prf:ref}`res-cvxf-subdifferential-closed-convex` and
+   {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`, 
+   the sets $\partial f(\bx)$ and $\partial h(\bx)$ are nonempty,
+   closed and convex.
+1. Then, the set $g'(f(\bx)) \partial f (\bx)$ is also nonempty,
+   closed and convex.
+1. Thus, by {prf:ref}`res-cvxf-support-func-equality-convex`,
+    
+   $$
+   \partial h (\bx) = g'(f(\bx)) \partial f (\bx).
+   $$
+
+````
+
 
 ## Maximum over a Set of Functions
 

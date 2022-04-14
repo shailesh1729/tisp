@@ -1416,8 +1416,6 @@ Then, the support function $\sigma_C : \VV \to \RERL$ is convex.
 ```
 
 ```{prf:proof}
-$\dom \sigma_C = \VV$. Thus, the domain of $\sigma_C$ is convex.
-
 Fix a $\by \in C$ and consider the function $\sigma_{\by} : \VV \to \RR$ given by
 
 $$
@@ -1435,6 +1433,45 @@ By {prf:ref}`res-cvx-ptws-supremum`, $\sigma_C$ is convex.
 
 We note that the convexity of the support function $\sigma_C$
 has nothing to do with the convexity of the underlying set $C$.
+
+```{prf:theorem} Closedness of support function
+:label: res-cvxf-support-fun-closed
+
+Let $\VV$ be a real inner product space. Let $C$ be a nonempty subset of $\VV$.
+Then, the support function $\sigma_C : \VV \to \RERL$ is closed.
+```
+
+```{prf:proof}
+Recall that a function is closed if all its sublevel sets are closed.
+
+1. Let $a \in \RR$.
+1. Consider the sublevel set $S_a = \{ \bx \in \VV \ST \sigma_C(\bx) \leq a \}$.
+1. Then,
+
+   $$
+   S_a = \{ \bx \in \VV \ST \sup_{\by \in C} \langle \bx, \by \rangle \leq a \} 
+   $$
+1. Thus,
+
+   $$
+   S_a = \{ \bx \in \VV \ST \langle \bx, \by \rangle \leq a  \Forall \by \in C \} 
+   $$
+1. Define $A_y$ as 
+    
+   $$
+   A_y = \{ \bx \in \VV \ST \langle \bx, \by \rangle \leq a \}.
+   $$
+1. Then,
+
+   $$
+   S_a = \bigcap_{\by \in C} A_y.
+   $$
+1. Now, $A_y$ is a closed set since  $\langle \bx, \by \rangle$ is a continuous function.
+1. Thus, $S_a$ is an intersection of closed sets.
+1. Thus, $S_a$ is closed.
+1. Thus, all sublevel sets of $\sigma_C$ are closed.
+1. Thus, $\sigma_C$ is closed.
+```
 
 
 ```{prf:theorem} Equality of underlying sets for support functions
@@ -1559,6 +1596,83 @@ Now, consider the case of convex hull.
    $\sigma_A = \sigma_{\convex A}$.
 ```
 
+Following properties of support functions are useful in
+several applications.
+
+```{prf:theorem} Arithmetic properties of support functions
+:label: res-cvxf-support-func-Homogeneity
+
+1. (Nonnegative homogeneity) For any nonempty set $C \subseteq \VV$ and
+   a vector $\bx \in \VV$ and $t \geq 0$,
+
+   $$
+   \sigma_C (t \bx) = t \sigma_C (\bx).
+   $$
+
+1. (Subadditivity) For any nonempty set $C \subseteq \VV$ and
+   a vector $\bu, \bv \in \VV$,
+
+   $$
+   \sigma_C(\bu + \bv) \leq \sigma_C (\bu) + \sigma_C (\bv).
+   $$
+1. (Nonnegative scaling of the underlying set)
+   For any nonempty set $C \subseteq \VV$ and
+   a vector $\bx \in \VV$ and $t \geq 0$
+
+   $$
+   \sigma_{t C} (\by) = t \sigma_C(\by).
+   $$
+
+1. (Additivity over Minkowski sum of sets)
+   For any two nonempty subsets $A, B \subseteq \VV$
+   and $\bx \in \VV$
+
+   $$
+   \sigma_{A + B} (\bx) = \sigma_A(\bx) + \sigma_B(\bx).
+   $$
+```
+
+```{prf:proof}
+
+(1) Nonnegative homogeneity
+ 
+$$
+\sigma_C (t \bx) &= \sup_{\by \in C} \langle t \bx, \by \rangle \\
+&= \sup_{\by \in C} t \langle  \bx, \by \rangle \\
+&= t \sup_{\by \in C} \langle  \bx, \by \rangle \\
+&= t \sigma_C(\bx).
+$$
+Here, we used the fact that $\sup$ commutes with nonnegative scalars.
+
+(2) Subadditivity
+
+$$
+\sigma_C (\bu + \bv) &= \sup_{\by \in C} \langle \bu + \bv, \by \rangle \\
+&= \sup_{\by \in C} (\langle \bu, \by \rangle + \langle \bu, \by \rangle) \\
+&\leq \sup_{\by \in C} \langle \bu, \by \rangle + \sup_{\by \in C} \langle \bv, \by \rangle \\
+&= \sigma_C (\bu) + \sigma_C(\bv).
+$$
+
+(3) Nonnegative scaling of the underlying set
+
+$$
+\sigma_{ t C} (\bx) &= \sup_{\by \in t C} \langle \bx, \by \rangle \\
+&= \sup_{\by \in C} \langle  \bx, t \by \rangle \\
+&= \sup_{\by \in C} t \langle  \bx, \by \rangle \\
+&= t \sup_{\by \in C} \langle  \bx, \by \rangle \\
+&= t \sigma_C(\bx).
+$$
+
+(4) Minkowski sum
+
+$$
+\sigma_{ A + B} (\bx) &= \sup_{\by \in A + B} \langle \bx, \by \rangle \\
+&= \sup_{\bu \in A, \bv \in B} \langle \bx , \bu + \bv \rangle \\
+&= \sup_{\bu \in A, \bv \in B} (\langle \bx , \bu \rangle + \langle \bx , \bv \rangle ) \\
+&= \sup_{\bu \in A} \langle \bx , \bu \rangle + \sup_{\bv \in B} \langle \bx , \bv \rangle\\
+&= \sigma_A (\bx) + \sigma_B(\bx).
+$$
+```
 
 
 ## Gauge Functions
