@@ -591,3 +591,67 @@ We now have following possibilities for this condition.
    if and only if $ \| \ba \| = 1$ and there exists $t \leq 0$ such that
    $\nabla f(\ba) = t \ba$.
 ```
+
+
+## Gradient Projection Method
+
+In this subsection, we present a method to solve the
+optimization problem
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C
+$$
+where $C$ is a convex set and $f$ is differentiable over $C$.
+
+Recall from {prf:ref}`res-opt-over-c-stationary-orth-proj`, that
+$\ba$ is a stationary point for the problem of minimizing 
+$f$ over a convex set $C$ if and only if
+
+$$
+\ba = P_C (\ba - s \nabla f(\ba)).
+$$
+
+This stationarity condition is the basis for the gradient projection method
+presented below.
+
+
+```{prf:algorithm} The gradient projection method
+:label: alg-opt-diff-obj-gradient-projection
+
+Inputs
+
+1. $\epsilon > 0$ - tolerance parameter
+
+Initialization
+
+1. Pick $\bx_0 \in C$ arbitrarily.
+
+General iteration: for $k=0,1,2,\dots$, execute the following steps
+
+1. Pick a step size $t_k$ by a line search procedure.
+1. Update: $\bx_{k+1} \leftarrow P_C (\bx_k - t_k \nabla f(\bx_k))$.
+1. Check for convergence: If $\| \bx_{k+1} - \bx_k \| \leq \epsilon$, then
+   STOP.
+
+Return $\bx_{k+1}$ as the output.
+```
+
+```{div}
+
+In the case of unconstrained minimization:
+
+1. $C = \RR^n$
+1. $P_C (\bx_k - t_k \nabla f(\bx_k)) = \bx_k - t_k \nabla f(\bx_k)$.
+1. $\bx_{k+1} = \bx_k - t_k \nabla f(\bx_k)$.
+1. We see that gradient projection reduces to gradient descent.
+
+
+Another way to look at the algorithm is:
+
+1. $\by_{k+1} = \bx_k - t_k \nabla f(\bx_k)$ computes the
+   next candidate solution assuming no constraints.
+1. $\bx_{k+1} = P_C(\by_{k+1})$ step projects the next candidate
+   solution back to the feasible set $C$.
+1. Thus, we have a gradient step followed by a projection step.
+```
