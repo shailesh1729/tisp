@@ -592,6 +592,84 @@ We now have following possibilities for this condition.
    $\nabla f(\ba) = t \ba$.
 ```
 
+## Gradient Method
+
+We first consider the problem of unconstrained minimization of
+a continuously differentiable function $f$.
+
+Typical iterative algorithms which aim to find
+the solution $\bx$ for the minimization problem
+start with an initial guess $\bx_0$ and perform
+a step of the form
+
+$$
+\bx_{k+1} = \bx_k + t_k \bd_k
+$$
+where $\bx_k$ is the current guess (starting from $\bx_0$),
+$\bd_k$ is a direction in which we move to make the next
+guess and $t_k$ is a step size in that direction. 
+$\bx_{k+1}$ is the next guess obtained from current
+guess. 
+We say that an algorithm has made progress if
+$f(\bx_{k+1}) < f(\bx_k)$.
+
+This brings us to the notion of a descent direction.
+
+```{prf:definition} Descent direction
+:label: def-opt-descent-direction
+
+Let $f : \VV \to \RR$ be a continuously differentiable
+function over $\VV$. A nonzero vector $\bd$ is called
+a descent direction of $f$ at $\bx$ if the
+directional derivative $f'(\bx; \bd)$ is negative.
+
+In other words,
+
+$$
+f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle < 0.
+$$
+```
+If the directional derivative is negative, then it
+is clear that for a small enough step in this direction,
+the value of $f$ will decrease.
+
+```{prf:lemma} Descent property of descent direction
+:label: res-opt-descent-dir-property
+
+Let $f : \VV \to \RR$ be a continuously differentiable
+function over $\VV$.
+Let $\bx \in \VV$.
+Assume that $\bd$ is a descent direction for $f$. 
+Then, there exists $\epsilon > 0$  such that
+
+$$
+f(\bx + t \bd) < f(\bx)
+$$
+for any $t \in (0, \epsilon]$.
+```
+
+```{prf:proof}
+This follows from the negativity of the directional derivative.
+
+1. Recall from {prf:ref}`def-cvxf-directional-derivative` that
+
+   $$
+   f'(\bx; \bd) = \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t}.
+   $$
+1. Since $\bd$ is a descent direction, hence $f'(\bx; \bd) < 0$.
+1. Thus, 
+
+   $$
+   \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t} < 0.
+   $$
+1. Thus, there exists $\epsilon > 0$ such that
+ 
+   $$
+   \frac{f(\bx + t \bd) - f(\bx)}{t} < 0
+   $$
+   for every $t \in (0, \epsilon]$.
+```
+
 
 ## Gradient Projection Method
 
@@ -654,4 +732,39 @@ Another way to look at the algorithm is:
 1. $\bx_{k+1} = P_C(\by_{k+1})$ step projects the next candidate
    solution back to the feasible set $C$.
 1. Thus, we have a gradient step followed by a projection step.
+```
+
+### Convergence
+
+If we can establish conditions under which each iteration of
+the gradient projection algorithm leads to sufficient decrease
+in the value of the objective function, then we can guarantee
+that the algorithm will converge in a finite number of steps.
+
+```{prf:lemma} Sufficient decrease lemma for constrained problems
+:label: res-opt-grad-proj-suff-dec
+
+Consider the optimization problem:
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C.
+$$
+
+Assume that $C$ is a nonempty closed convex set,
+$f$ is continuously differentiable over $C$, and $\nabla f$ 
+is Lipschitz continuous with a constant $L$ over $C$,
+Then, for any $\bx \in C$, and $t \in (0, \frac{2}{L})$, 
+the following inequality holds.
+
+$$
+f(\bx) - f(\by) \geq t \left ( 1  - \frac{L t}{2} \right )
+\left \| \frac{1}{t}(\bx - \by)  \right \|^2.
+$$
+where $\by = P_C(\bx - t \nabla f(\bx))$.
+```
+
+```{prf:proof}
+
+
 ```
