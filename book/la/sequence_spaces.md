@@ -48,6 +48,8 @@ $$
 ```
 
 ```{prf:theorem}
+:label: res-la-ss-closure-vec-add-scal-mult
+
 The set of sequences $\FF^{\infty}$ is closed under
 vector addition and scalar multiplication defined above.
 ```
