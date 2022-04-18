@@ -433,6 +433,28 @@ a real valued function $f$ at $\bx=\ba \in \interior \dom f$.
 ````
 
 
+```{prf:theorem} First order approximation accuracy
+:label: res-mvc-first-order-approx
+
+Let $f : \RR^n \to \RR$ be defined on
+an open set $S = \dom f$. 
+Assume that $f$ is continuously differentiable on $S$.
+Then,
+
+$$
+\lim_{\bd \to \bzero} \frac{f(\bx + \bd) - f(\bx) - \nabla f(\bx)^T \bd}{\| \bd \|} = 0 \Forall \bx \in S.
+$$
+
+Another way to write this result is:
+
+$$
+f(\bx) = f(\ba) + \nabla f(\ba)^T (\bx - \ba) + o (\| \bx - \ba \|)
+$$
+where $\ba \in S$ and $o(\cdot) : \RR_+ \to \RR$ is a one dimensional function
+satisfying $\frac{o(t)}{t} \to 0$ as $t \to 0^+$.
+```
+
+
 ## Chain Rule
 
 ```{prf:theorem} Chain rule
