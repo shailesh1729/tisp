@@ -75,6 +75,8 @@ is known as a *sequence space*.
 ## The Space of Absolutely Summable Sequences
 
 ```{prf:definition} Absolutely summable sequence
+:label: def-la-abs-summable-seq
+
 A sequence $\{x_n\}$ of $\FF$ is called absolute summable if
 
 $$
@@ -143,6 +145,9 @@ Hence $\{ \alpha x_n \}$  is absolutely summable.
 ```
 
 ```{prf:definition} $\ell^1$ The space of absolutely summable sequences
+:label: def-la-ss-abs-sum-seq-space
+
+
 Let $\ell^1$ denote the set of all absolutely summable sequences of $\FF$.
 Then $\ell^1$ equipped with the vector addition and scalar multiplication
 defined above is a vector space. 
@@ -170,6 +175,8 @@ is a normed linear space.
 ```
 
 ```{prf:theorem}
+:label: res-la-ss-seq-l1-norm-just
+
 The norm defined for $\ell^1$  space in {prf:ref}`def-la-ss-l1-norm` is
 indeed a norm.
 ```
@@ -203,6 +210,8 @@ $$
 ```
 
 ```{prf:theorem}
+:label: res-la-ss-l1-space-complete
+
 $\ell^1$ is complete. 
 In other words, every Cauchy sequence of sequences in $\ell^1$
 converges to a sequence of $\ell^1$.
