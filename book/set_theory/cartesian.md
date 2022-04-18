@@ -32,6 +32,8 @@ often denoted by $(x_i)_{i \in I}$ or simply by $(x_i)$.
 ```
 
 ```{prf:remark}
+:label: rem-st-empty-input-empty-product
+
 For a family $\{A_i\}_{i \in I}$,  if any of the $A_i$ is empty, then
 the Cartesian product $\prod A_i$ is empty.
 ```
@@ -41,6 +43,8 @@ If an $A_i$ is empty, a choice function cannot choose any element
 from it, hence the choice function cannot exist.
 
 ```{prf:remark}
+:label: rem-st-cart-prod-same-input-notation
+
 If the family of sets $\{A_i\}_{i \in I}$ satisfies $A_i = A \Forall i \in I$,
 then $\prod_{i \in I} A_i$ is written as $A^I$.
 
@@ -54,21 +58,27 @@ i.e. $A^I$ is the set of all functions from $I$ to $A$.
 ## Examples
 
 ```{prf:example} Binary functions on the real line
+:label: ex-st-cart-prod-binary-function-r
 
 Let $A = \{0, 1\}$. $A^{\RR}$ is a set of all functions on $\RR$
 which can take only one of the two values $0$ or $1$.
 ```
 
 ```{prf:example} Binary sequences
+:label: ex-st-binary-seq-as-cart-prod
+
 Let $A = \{0, 1\}$. $A^{\Nat}$ is a set of all sequences of $0$s and $1$s.
 ```
 
 ```{prf:example} Real sequences
+:label: ex-st-real-seq-as-cart-prod
+
 $\RR^{\Nat}$ is a set of all real sequences. 
 It is also denoted as $\RR^{\infty}$.
 ```
 
 ```{prf:example} Real valued functions on the real line 
+:label: ex-st-real-func-as-cart-prod
 
 $\RR^\RR$ is a set of all functions from $\RR$ to $\RR$.
 ```
