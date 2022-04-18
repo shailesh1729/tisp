@@ -592,7 +592,7 @@ We now have following possibilities for this condition.
    $\nabla f(\ba) = t \ba$.
 ```
 
-## Gradient Method
+## Descent Directions Method
 
 We first consider the problem of unconstrained minimization of
 a continuously differentiable function $f$.
@@ -669,6 +669,96 @@ This follows from the negativity of the directional derivative.
    $$
    for every $t \in (0, \epsilon]$.
 ```
+
+### Descent Directions Method
+
+```{prf:algorithm} The descent directions method
+:label: alg-opt-diff-obj-descent-directions
+
+Initialization
+
+1. Pick $\bx_0 \in \VV$ arbitrarily as initial solution.
+
+General iteration: for $k=0,1,2,\dots$, execute the following steps
+
+1. Pick a descent direction $\bd_k$.
+1. Pick a step size $t_k$ satisfying $f(\bx + t_k \bd_k) < f(\bx_k)$.
+1. Update: $\bx_{k+1} \leftarrow \bx_k + t_k \bd_k$.
+1. Check for convergence: If converged, then STOP.
+
+Return $\bx_{k+1}$ as the output.
+```
+
+This method is not really an actual algorithm.
+It can be considered as a template for an actual
+algorithm. Several aspects of the method need
+to be carefully chosen to come up with a viable
+algorithm.
+
+1. How to select the initial point $\bx_0$?
+1. How to choose the descent direction?
+1. How to select the step size?
+1. How to decide when to stop the iterations (stopping criterion)? 
+
+
+The key result that we establish here is to show that
+if the step size $t_k$ is sufficient small
+in the descent direction $\bd_k$, then there is sufficient
+decrease in the value of $f$ going from $\bx_k$ to $\bx_{k+1}$.
+
+
+```{prf:theorem} Sufficient decrease condition for descent direction method
+:label: res-opt-diff-obj-descent-dir-suff-dec
+
+Let $f$ be a continuously differentiable function over $\RR^n$.
+Let $\bx \in \RR^n$.
+Assume that a nonzero $\bd$ is a descent direction for $f$
+at $\bx$. 
+Let $\alpha \in (0, 1)$.
+Then, there exists $\epsilon > 0$ such that the inequality
+
+$$
+f(\bx) - f(\bx + t \bd) \geq - \alpha t \langle \bd, \nabla f(\bx) \rangle
+$$
+holds for every $t \in [0, \epsilon]$.
+```
+
+```{prf:proof}
+We proceed as follows. 
+
+1. Since $f$ is continuously differentiable,
+   hence due to {prf:ref}`res-mvc-first-order-approx`,
+
+   $$
+   f(\bx + t \bd) = f(\bx) + t \nabla f(\bx)^T \bd  + o(t \| \bd \|).
+   $$
+1. Rearranging the terms and introducing an $\alpha \in (0, 1)$, we obtain
+
+   $$
+   f(\bx) - f(\bx + t \bd) = - \alpha t \nabla f(\bx)^T \bd 
+   - (1- \alpha) \nabla f(\bx)^T \bd - o(t \| \bd \|).
+   $$
+1. Since $\bd$ is a descent direction of $f$, hence $f(\bx; \bd) = \nabla f(\bx)^T \bd < 0$.
+1. Thus,
+
+   $$
+   \lim_{t \to 0^+} \frac{(1- \alpha) \nabla f(\bx)^T \bd + o(t \| \bd \|)}{t}
+   = (1- \alpha) \nabla f(\bx)^T \bd  < 0.
+   $$
+1. Hence, there exists $\epsilon > 0$ such that for every $t \in [0, \epsilon]$,
+
+   $$
+   (1- \alpha) \nabla f(\bx)^T \bd + o(t \| \bd \| < 0.
+   $$
+1. Thus, from the previous equation:
+
+   $$
+   f(\bx) - f(\bx + t \bd) \geq - \alpha t \nabla f(\bx)^T \bd
+   $$
+   for every $t \in [0, \epsilon]$.
+```
+
+## Gradient Method
 
 
 ## Gradient Projection Method
