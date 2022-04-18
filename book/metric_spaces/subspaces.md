@@ -31,6 +31,8 @@ abc
 ```
 
 ```{prf:example}
+:label: ex-ms-semiclosed-set-as-open-in-subspace
+
 * $[0, 1)$ is open in the metric space $\RR_+$.
 ```
 
