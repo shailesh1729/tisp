@@ -21,6 +21,7 @@ When two sets are equivalent, we say that they have *same cardinality*.
 Note that two sets may be equivalent yet not equal to each other. 
 
 ````{prf:example} Equivalent sets
+:label: ex-st-equivalent-sets-1
 
 *  The set of natural numbers $\Nat$ is equivalent to the set of integers $\ZZ$.
    Consider the function $f : \Nat \to \ZZ$ given by
@@ -85,6 +86,8 @@ $n$ is called the *number of elements* in the segment or its *cardinality*.
 ````
 
 ```{prf:remark}
+:label: rem-st-equivalence-segments
+
 Two segments $\{1,\dots,m\}$ and $\{1,\dots,n\}$ are equivalent
 only if $m= n$.
 ```
@@ -102,10 +105,14 @@ number of elements in the segment.
 ````
 
 ````{prf:remark}
+:label: rem-st-empty-set-finite
+
 The empty set $\EmptySet$ is also considered to be finite with zero elements.
 ````
 
 ````{prf:definition}
+:label: def-st-infinite-set
+
 A set that is not finite is called an *infinite set*.
 ````
 
@@ -176,6 +183,8 @@ satisfies the property $P$.
 ## Infinite Sets
 
 ````{prf:theorem}
+:label: res-st-infinite-contains-countable
+
 Every infinite set contains a countable subset.
 ````
 
@@ -292,8 +301,8 @@ Clearly, $f$ is well-defined and onto.
 Thus, using {prf:ref}`res-countable-set-characterization`, $A$ is countable.
 ````
 
-(res:set:finite_cartesian_product_of_countable_sets)=
 ````{prf:theorem}
+:label: res-st-finite-cartesian-product-countable-sets
 
 Let $\{A_1, A_2, \dots, A_n \}$ be a finite collection of sets such that each $A_i$ is countable.
 Then their Cartesian product $A = A_1 \times A_2 \times \dots \times A_n$ is countable.
@@ -355,6 +364,8 @@ The set of all finite subsets of a countable set is countable.
 ## Partial Order for Cardinality
 
 ````{prf:definition} Equivalence with subset
+:label: def-st-equivalence-with-subset-partial-order
+
 We say that $A \preceq B$ whenever there exists 
 a (total) one-one function $f : A \to B$.
 In other words, $A$ is equivalent to a subset of $B$.
@@ -362,6 +373,8 @@ In other words, $A$ is equivalent to a subset of $B$.
 In this sense, $B$ has at least as many elements as $A$.
 
 ````{prf:theorem}
+:label: res-set-subset-eq-is-partial-order
+
 The relation $\preceq$ satisfies following properties
 
 1.  Reflexivity: $A \preceq A$ for all sets $A$.
@@ -534,11 +547,15 @@ The function $g$ is bijective. Thus $2^X \sim \Power(X)$.
 ````
 
 ```{prf:remark}
+:label: rem-st-power-set-cardinal-num
+
 We denote the cardinal number of $\Power(X)$ by $2^{\card{X}}$. 
 Thus, $\mathfrak{c} = 2^{\aleph_0}$.
 ```
 
 ```{prf:remark} An ordering of cardinal numbers
+:label: rem-st-cardinal-numbers-ordering
+
 The following inequalities of cardinal numbers hold:
 
 $$
