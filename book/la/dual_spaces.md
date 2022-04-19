@@ -487,7 +487,7 @@ The dual of the dual is denoted by $\VV^{**}$.
 Consider the case where $\VV$ is finite dimensional.
 
 1. $\VV$ and $\VV^*$ have the same dimension. 
-1. Thus, \VV$ and $\VV^*$ are isomorphic.
+1. Thus, $\VV$ and $\VV^*$ are isomorphic.
 1. Since $\VV^*$ is finite dimensional, hence $\VV^{**}$ is finite dimensional too.
 1. In fact, $\dim \VV^* = \dim \VV^{**}$.
 1. Thus, $\VV^*$ and $\VV^{**}$ are isomorphic.
