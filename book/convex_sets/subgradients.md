@@ -2171,6 +2171,8 @@ We are given $\bx \in \VV$ at which $g$ is differentiable and $f$ is convex.
    &= g'(f(\bx)) \sigma_{\partial f (\bx)} (\bd) \\
    &= \sigma_{g'(f(\bx)) \partial f (\bx)} (\bd).
    $$
+   The last step is due to {prf:ref}`res-cvxf-support-func-Homogeneity`.
+   Since $g$ is nondecresaing, hence $g'(f(\bx)) \geq 0$.
 1. By {prf:ref}`res-cvxf-subdifferential-closed-convex` and
    {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`, 
    the sets $\partial f(\bx)$ and $\partial h(\bx)$ are nonempty,
@@ -2765,114 +2767,6 @@ $$
 $$
 
 
-```{prf:theorem} Gradient of the squared distance function
-:label: res-cvxf-grad-sq-dist-convex
-
-The gradient of $\phi_C$ at $\bx$ is given by:
-
-$$
-\nabla \phi_C(\bx) = x - P_C(\bx)  \Forall \bx \in \VV.
-$$
-```
-
-```{prf:proof}
-We proceed as follows.
-
-1. Let $\bx \in \VV$.
-1. Let $\bz_x = \bx - P_C(\bx)$.
-1. Consider the function 
-
-   $$
-   g_x(\bd) = \phi_C(\bx + \bd) - \phi_C(\bx) - \langle \bd, \bz_x \rangle.
-   $$
-1. If 
-
-   $$
-   \lim_{\bd \to \bzero} \frac{g_x(\bd)}{ \| \bd \|} = 0
-   $$
-   then $\bz_x$ is indeed the gradient of $\phi_C$ at $\bx$.
-1. By definition of orthogonal projection, for any $\bd \in \VV$,
-
-   $$
-   \| \bx + \bd - P_C(\bx + \bd) \|^2 
-   \leq \| \bx + \bd - P_C(\bx) \|^2
-   $$
-   as $P_C(\bx + \bd)$ is the nearest point to $\bx + \bd$ 
-   in $C$. $P_C(\bx)$ is just another point in $C$.
-
-1. Thus, for any $\bd \in \VV$
-
-   $$
-   g_x(\bd) 
-   &= \phi_C(\bx + \bd) - \phi_C(\bx) - \langle \bd, \bz_x \rangle \\
-   &= \frac{1}{2} \| \bx + \bd - P_C(\bx + \bd) \|^2
-   - \frac{1}{2} \| \bx - P_C(\bx) \|^2
-   - \langle \bd, \bz_x \rangle \\
-   &\leq \frac{1}{2} \| \bx + \bd - P_C(\bx) \|^2
-   - \frac{1}{2} \| \bx - P_C(\bx) \|^2
-   - \langle \bd, \bz_x \rangle.
-   $$
-1. Recall that for a norm induced by the inner product
-
-   $$
-   \| \ba + \bb \|^2 = \langle \ba + \bb, \ba + \bb \rangle
-   = \| \ba \|^2 + 2 \langle \ba, \bb \rangle + \| \bb \|^2.
-   $$
-1. Thus, 
-
-   $$
-   \| \bx + \bd - P_C(\bx)\|^2 
-   &= \| \bd + (\bx - P_C(\bx)) \|^2\\
-   &= \| \bd \|^2 + \| \bx - P_C(\bx)\|^2 + 
-   2 \langle \bd, \bx - P_C(\bx) \rangle.
-   $$
-1. Putting it back and simplifying, we obtain
-
-   $$
-   g_x(\bd) \leq \frac{1}{2}\| \bd \|^2 + \langle \bd, \bx - P_C(\bx)\rangle
-   - \langle \bd, \bz_x \rangle
-   = \frac{1}{2}\| \bd \|^2.
-   $$
-1. Proceeding similarly, we also have
-
-   $$
-   g_x(-\bd) \leq \frac{1}{2}\| \bd \|^2.
-   $$
-1. Since $\phi_C$ is convex, hence $g_x$ is also convex.
-1. Thus,
-
-   $$
-   0 = g_x(\bzero) =  g_x \left (\frac{1}{2} \bd + \frac{1}{2} (-\bd)  \right )
-   \leq \frac{1}{2} g_x(\bd) + \frac{1}{2} g_x(-\bd).
-   $$
-1. Thus,
-
-   $$
-   g_x(\bd) \geq - g_x(-\bd) \geq - \frac{1}{2}\| \bd \|^2.
-   $$
-1. Combining, we have
-
-   $$
-   - \frac{1}{2}\| \bd \|^2 \leq g_x(\bd) \leq \frac{1}{2}\| \bd \|^2.
-   $$
-1. Or, in terms of absolute values.
-
-   $$
-   |g_x(\bd)| \leq \frac{1}{2}\| \bd \|^2.
-   $$
-1. Then, 
-
-   $$
-   \frac{|g_x(\bd)|}{\| \bd \|} \leq \frac{1}{2}\| \bd \|.
-   $$
-1. Thus, 
-
-   $$
-   \lim_{\bd \to \bzero} \frac{g_x(\bd)}{ \| \bd \|} = 0
-   $$
-1. Thus, $\bz_x = \bx - P_C(\bx)$ is indeed the gradient
-   of $\Phi_C$ at $\bx$.
-```
 
 ```{div}
 We note that $\phi_C = g \circ d_C$ where 
