@@ -2,38 +2,87 @@
 # Conjugate Functions
 
 ```{div}
-Let $f : \EE \to \ERL$ be an extended real valued function. 
-Its *conjugate function* $f^*: \EE^* \to \ERL$ is given by
+
+Throughout this section, we assume that $\VV, \WW$ are 
+real vector spaces. Wherever necessary, 
+they are equipped with a
+{prf:ref}`norm <def-la-norm>` $\| \cdot \|$
+or an {prf:ref}`real inner product <def-la-real-inner-product>`
+$\langle \cdot, \cdot \rangle$. 
+They are also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$
+as needed.
+$\VV^*$ denotes the dual vector space (to $\VV$).
+```
+
+## Definition and Properties
+
+```{prf:definition} Conjugate function
+:label: def-cvxf-conjugate-function
+
+Let $f : \VV \to \ERL$ be an extended real valued function. 
+Its *conjugate function* $f^*: \VV^* \to \ERL$ is given by
 
 $$
-f^*(\by) = \underset{\bx \in \EE}{\sup} \{ \langle \by, \bx \rangle - f(\bx)\}, 
-\quad \by \in \EE^*.
+f^*(\by) = \underset{\bx \in \VV}{\sup} \{ \langle \bx, \by \rangle - f(\bx)\}
+\Forall \by \in \VV^*.
 $$ 
+```
 
 Note that the conjugate function is a mapping from the *dual* vector space
 to extended real line.
+
+### Indicator Functions
+
+Recall from {prf:ref}`def-cvxf-support-function` that
+the support function of a set $C$ is given by
+
+$$
+\sigma_C (\bx) =  \sup_{\bz \in C} \langle \bz, \bx \rangle.
+$$
+
+```{prf:theorem} Conjugate of an indicator function
+:label: res-cvxf-conjugate-indicator-func
+
+Let $C \subseteq \VV$ be a nonempty set. 
+Let $\delta_C : \VV \to \RERL$ be the indicator function for the set $C$.
+Then,
+
+$$
+\delta_C^*(\by) = \sigma_C (\by) = \underset{\bx \in C}{\sup} \langle \bx, \by \rangle. 
+$$
+
+In other words, the conjugate of the indicator function of a set
+is the support function of the same set.
 ```
 
-```{rubric} Indicator functions
+```{prf:proof}
+
+Let $\by \in \VV*$ be arbitrary.
+
+1. At any $\bx \in C$, we have
+   
+   $$
+   \langle \bx, \by \rangle - \delta_C(\bx) = \langle \bx, \by \rangle. 
+   $$
+1. At any $\bx \notin C$, we have
+
+   $$
+   \langle \bx, \by \rangle - \delta_C(\bx) = -\infty. 
+   $$
+1. Since $C$ is nonempty, hence
+
+   $$
+   \underset{\bx \in \VV}{\sup} \{ \langle \bx, \by \rangle - f(\bx)\}
+   = \underset{\bx \in C}{\sup} \langle \bx, \by \rangle.
+   $$
+   The result follows.
 ```
-The conjugate of the indicator function is the support function of the same set.
 
-```{div}
-Let $C \subseteq \EE$. Let $\delta_C$ be the indicator function for $C$.
-
-$$
-f^*(\by) = \sigma_C (\by) = \underset{\bx \in C}{\sup} \langle \by, \bx \rangle. 
-$$
-
-$$
-\delta^*_C  = \sigma_C.
-$$
-```
 
 ```{rubric} Extended real valued functions
 ```
 ```{div}
-Let $f : \EE \to (-\infty, \infty]$ be an extended real valued function. 
+Let $f : \VV \to (-\infty, \infty]$ be an extended real valued function. 
 Then, the conjugate function $f^*$ is closed and convex.    
 ```
 
@@ -41,9 +90,9 @@ Then, the conjugate function $f^*$ is closed and convex.
 ```{rubric} Proper functions
 ```
 ```{div}
-Let $f : \EE \to (-\infty, \infty]$ be a proper function. 
+Let $f : \VV \to (-\infty, \infty]$ be a proper function. 
 
-Fenchel's inequality holds for any $\bx \in \EE$ and $\by \in \EE^*$:
+Fenchel's inequality holds for any $\bx \in \VV$ and $\by \in \VV^*$:
 
 $$
 f(x) + f^*(y) \geq \langle y, x \rangle.
@@ -53,7 +102,7 @@ $$
 ```{rubric} Proper convex functions
 ```
 ```{div}
-Let $f : \EE \to (-\infty, \infty]$ be a proper convex function. 
+Let $f : \VV \to (-\infty, \infty]$ be a proper convex function. 
 Then, the conjugate function $f^*$ is proper.    
 ```
 
@@ -63,25 +112,25 @@ Then, the conjugate function $f^*$ is proper.
 The conjugate of the conjugate is called the *biconjugate*. 
 
 ```{div}
-Let $f : \EE \to [-\infty, \infty]$ be an extended real valued function. 
-Its *biconjugate function* $f^{**}: \EE \to [-\infty, \infty]$ is given by
+Let $f : \VV \to [-\infty, \infty]$ be an extended real valued function. 
+Its *biconjugate function* $f^{**}: \VV \to [-\infty, \infty]$ is given by
 
 $$
-f^{**} (\bx) = \underset{\by \in \EE^*}{\sup} 
-\{ \langle \bx, \by \rangle - f^*(\by)  \}, \quad \bx \in \EE.
+f^{**} (\bx) = \underset{\by \in \VV^*}{\sup} 
+\{ \langle \bx, \by \rangle - f^*(\by)  \}, \quad \bx \in \VV.
 $$
 
 The biconjugate is an underestimator of the original function.
 
 $$
-f(\bx) \geq f^{**} (\bx) \Forall x \in \EE. 
+f(\bx) \geq f^{**} (\bx) \Forall x \in \VV. 
 $$
 
-Let $f : \EE \to [-\infty, \infty]$ be a proper, closed and convex function. 
+Let $f : \VV \to [-\infty, \infty]$ be a proper, closed and convex function. 
 Then,
 
 $$
-f(\bx) = f^{**} (\bx) \Forall x \in \EE. 
+f(\bx) = f^{**} (\bx) \Forall x \in \VV. 
 $$
 ```
 
@@ -89,13 +138,13 @@ $$
 ```
 
 ```{div}
-For a nonempty, closed and convex set $C \subseteq \EE$, 
+For a nonempty, closed and convex set $C \subseteq \VV$, 
 
 $$
 \sigma^*_C = \delta_C.
 $$
 
-For an arbitrary nonempty set $C \subseteq \EE$, 
+For an arbitrary nonempty set $C \subseteq \VV$, 
 
 $$
 \sigma^*_C = \delta_{\closure \ConvexHull C}.
@@ -132,25 +181,25 @@ $$
 ```{rubric} Separable functions
 ```
 ```{div}
-Let $g: \EE_1 \times \EE_2 \times \dots \times \EE_p \to (-\infty, \infty]$ be given by 
+Let $g: \VV_1 \times \VV_2 \times \dots \times \VV_p \to (-\infty, \infty]$ be given by 
 
 $$
 g(\bx_1, \bx_2, \dots, \bx_p) = \sum_{i=1}^p f_i (\bx_i)
 $$
-where $f_i : \EE_i \to (-\infty, \infty]$ are proper functions.
+where $f_i : \VV_i \to (-\infty, \infty]$ are proper functions.
 Then: 
 
 $$
 g^*(\by_1, \by_2, \dots, \by_p) = 
-\sum_{i=1}^p f_i^*(\by_i) \Forall \by_i \in \EE_i^*, 1 \leq i \leq p.
+\sum_{i=1}^p f_i^*(\by_i) \Forall \by_i \in \VV_i^*, 1 \leq i \leq p.
 $$
 ```
 
 ```{rubric} Invertible affine transformation
 ```
 ```{div}
-Let $f : \EE \to (-\infty, \infty]$ be an extended real valued function.
-Let $\bAAA : \VV \to \EE$ be an invertible linear transformation.
+Let $f : \VV \to (-\infty, \infty]$ be an extended real valued function.
+Let $\bAAA : \VV \to \VV$ be an invertible linear transformation.
 Let $\ba \in \VV$, $\bb \in \VV^*$ and $c \in \RR$. 
 Consider the function $g: \VV \to  (-\infty, \infty]$ given by:
 
@@ -172,19 +221,19 @@ $$
 ```{rubric} Scaling
 ```
 ```{div}
-Let $f : \EE \to (-\infty, \infty]$ be an extended real valued function.
+Let $f : \VV \to (-\infty, \infty]$ be an extended real valued function.
 Let $\alpha > 0$.
 
 For $g(\bx) = \alpha f(\bx)$:
 
 $$
-g^*(\by) = \alpha f^*\left (\frac{\by}{\alpha} \right ) \Forall \by \in \EE^*.
+g^*(\by) = \alpha f^*\left (\frac{\by}{\alpha} \right ) \Forall \by \in \VV^*.
 $$
 
 For $h(\bx) = \alpha f(\frac{\bx}{\alpha})$:
 
 $$
-h^*(\by) = \alpha f^*(\by) \Forall \by \in \EE^*.
+h^*(\by) = \alpha f^*(\by) \Forall \by \in \VV^*.
 $$ 
 ```
 
@@ -194,12 +243,12 @@ $$
 ```
 
 ```{div}
-Let $f,g : \EE \to (-\infty, \infty]$ be proper convex function.
+Let $f,g : \VV \to (-\infty, \infty]$ be proper convex function.
 If $\relint \dom f \cap \relint \dom g \neq \EmptySet$, then 
 
 $$
-\underset{\bx \in \EE}{\sup} \{f(\bx) + g(\bx) \}
-= \underset{\by \in \EE^*}{\sup} \{ - f^*(\by) - g^*(-\by) \}.
+\underset{\bx \in \VV}{\sup} \{f(\bx) + g(\bx) \}
+= \underset{\by \in \VV^*}{\sup} \{ - f^*(\by) - g^*(-\by) \}.
 $$
 The supremum of R.H.S. is attained whenever it is finite.
 ```
@@ -209,38 +258,38 @@ The supremum of R.H.S. is attained whenever it is finite.
 
 ```{div}
 Recall that the *infimal convolution* of two functions
-$f,g : \EE \to \ERL$ is defined as:
+$f,g : \VV \to \ERL$ is defined as:
 
 $$
 (f \square g)(\bx) \triangleq 
-\underset{\by \in \EE}{\inf} (f(\bx - \by) + g(\by)). 
+\underset{\by \in \VV}{\inf} (f(\bx - \by) + g(\by)). 
 $$
 
 For two proper functions 
-$h_1, h_2: \EE \to \RERL$, it holds that:
+$h_1, h_2: \VV \to \RERL$, it holds that:
 
 $$
 (h_1 \square h_2)^*  = h_1^*  + h_2^*.
 $$
 
-Let $h_1 : \EE \to \RERL$ be a proper convex
-function and $h_2 : \EE \to \RR$ be a real valued
+Let $h_1 : \VV \to \RERL$ be a proper convex
+function and $h_2 : \VV \to \RR$ be a real valued
 convex function. Then
 
 $$
 (h_1 + h_2)^* = h_1^* \square h_2^*.
 $$
 
-Let $h_1 : \EE \to \RERL$ be a proper closed convex
-function and $h_2 : \EE \to \RR$ be a real valued
+Let $h_1 : \VV \to \RERL$ be a proper closed convex
+function and $h_2 : \VV \to \RR$ be a real valued
 convex function. Then
 
 $$
 h_1 + h_2 = (h_1^* \square h_2^*)^*.
 $$
 
-Let $h_1 : \EE \to \RERL$ be a proper convex
-function and $h_2 : \EE \to \RR$ be a real valued
+Let $h_1 : \VV \to \RERL$ be a proper convex
+function and $h_2 : \VV \to \RR$ be a real valued
 convex function. Suppose $h_1 \square h_2$ is 
 a real valued function. Then
 
@@ -254,9 +303,9 @@ $$
 ```
 
 ```{div}
-Let $f : \EE \to \RERL$ be proper and convex. 
-The following claims are equivalent for any $\bx \in \EE$
-and $\by \in \EE^*$:
+Let $f : \VV \to \RERL$ be proper and convex. 
+The following claims are equivalent for any $\bx \in \VV$
+and $\by \in \VV^*$:
 
 1. $\langle \by, \bx \rangle = f(\bx) + f^*(\by)$.
 2. $\by \in \partial f(\bx)$.
@@ -520,13 +569,13 @@ of each other.
 ```
 
 ```{div}
-Let $f : \EE \to \RR$ be given by
+Let $f : \VV \to \RR$ be given by
 
 $$
 f(\bx) = \| \bx \|
 $$
 
-Then, the conjugate $f^* : \EE^* \to \ERL$ for any $\by \in \EE^*$
+Then, the conjugate $f^* : \VV^* \to \ERL$ for any $\by \in \VV^*$
 is given by:
 
 $$
@@ -544,7 +593,7 @@ w.r.t. the dual norm $\| \cdot \|_*$.
 ```
 
 ```{div}
-Let $f : \EE \to (-\infty, \infty]$ be given by
+Let $f : \VV \to (-\infty, \infty]$ be given by
 
 $$
 f(\bx) \triangleq \begin{cases}
@@ -553,7 +602,7 @@ f(\bx) \triangleq \begin{cases}
 \end{cases}.
 $$
 
-Then, the conjugate $f^* : \EE^* \to \ERL$ for any $\by \in \EE^*$
+Then, the conjugate $f^* : \VV^* \to \ERL$ for any $\by \in \VV^*$
 is given by:
 
 $$
@@ -576,7 +625,7 @@ f_{\alpha}^*(\by) = \alpha \sqrt{\| y \|_*^2 + 1}.
 $$
 
 
-In the reverse direction, let $g_{\alpha} : \EE \to \RR$ 
+In the reverse direction, let $g_{\alpha} : \VV \to \RR$ 
 for some $\alpha > 0$ be given by:
 
 $$
@@ -598,13 +647,13 @@ $$
 ```
 
 ```{div}
-Let $f : \EE \to \RR$ be given by
+Let $f : \VV \to \RR$ be given by
 
 $$
 f(\bx) = \frac{1}{2}\| \bx \|^2
 $$
 
-Then, the conjugate $f^* : \EE^* \to \ERL$ for any $\by \in \EE^*$
+Then, the conjugate $f^* : \VV^* \to \ERL$ for any $\by \in \VV^*$
 is given by:
 
 $$
