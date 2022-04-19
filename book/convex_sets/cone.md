@@ -741,7 +741,9 @@ $\bx \in C$ and $-\bx \in C$ implies $\bx = \bzero$.
 ```
 In other words, a pointed cone, doesn't contain a line.
 
-```{prf:example} The nonnegative orthant is a pointed convex cone.
+```{prf:example} The nonnegative orthant is a pointed convex cone
+:label: ex-cone-nng-orthant-pointed
+
 Recall from {prf:ref}`def-convex-nonnegative-orthant`
 that the nonnegative orthant is defined as:
 
@@ -780,6 +782,7 @@ A cone $K \in \VV$ is called a *proper cone* if it satisfies the following:
 ````
 
 ```{prf:example} Non-empty interior
+:label: ex-cone-non-empty-interior-proper
 
 Consider the following sets in $\RR^2$:
 
@@ -1188,6 +1191,7 @@ $$
 ```
 
 ```{prf:example} Normal vector
+:label: ex-cone-normal-vec-1
 
 Let $C$ be a half space given by:
 
