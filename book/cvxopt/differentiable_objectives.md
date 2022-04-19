@@ -812,6 +812,34 @@ till $f$ shows sufficient decrease as stipulated by
 
 ## Gradient Method
 
+The gradient method is a descent direction method in which
+the descent direction is always chosen to be the negative
+of the gradient at the current point (solution).
+
+$$
+\bd_k  = - \nabla f(\bx_k).
+$$
+
+
+```{prf:lemma} Negative of gradient is a descent direction
+:label: res-opt-neg-grad-decent-dir
+
+Let $f$ be a continuously differentiable function over an open set $S$.
+At any point $\bx \in S$, the negative of the gradient $\bd = - \nabla f(\bx)$
+is a descent direction whenever $\nabla f(\bx) \neq \bzero$.
+```
+
+```{prf:proof}
+We just need to compute the directional derivative.
+
+$$
+f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle
+= \langle -\nabla f(\bx), \nabla f(\bx) \rangle
+= - \| \nabla f(\bx) \|^2 < 0.
+$$
+The last strict inequality is valid since $\nabla f(\bx) \neq \bzero$.
+```
+
 
 ## Gradient Projection Method
 
