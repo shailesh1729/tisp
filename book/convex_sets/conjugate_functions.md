@@ -76,7 +76,51 @@ Let $\by \in \VV*$ be arbitrary.
    The result follows.
 ```
 
+```{prf:theorem} Fenchel's inequality
+:label: res-cvxf-conjugate-fenchel
 
+Let $f: \VV \to \RERL$ be a proper function
+and let $f^*$ be its conjugate function.
+Then, for any $\bx \in \VV$ and $\by \in \VV^*$:
+
+$$
+f(\bx) + f^*(\by) \geq \langle \bx, \by \rangle.
+$$
+```
+```{prf:proof}
+We proceed as follows.
+
+1. By definition
+
+   $$
+   f^*(\by) = \underset{\bx \in \VV}{\sup} 
+   \{ \langle \bx, \by \rangle - f(\bx)\}.
+   $$
+1. Thus, for any $\bx \in \VV$ and any $\by \in \VV^*$,
+
+   $$
+   f^*(\by) \geq \langle \bx, \by \rangle - f(\bx).
+   $$
+1. Since $f$ is proper, hence $f(\bx) > -\infty$ for ever $\bx$.
+1. Since $f$ is proper, hence there exists $\ba \in \VV$
+   such that $f(\ba) < \infty$.
+1. Then,
+    
+   $$
+   f^*(\by) \geq \langle \ba, \by \rangle - f(\ba). 
+   $$
+1. The R.H.S. is a finite quantity.
+1. Thus, $f^*(\by) > -\infty$ for every $\by$.
+1. If either $f(\bx)$ or $f^*(\by)$ are $\infty$,
+   then the Fenchel inequality is valid trivially.
+1. When, both of them are finite, then the
+   inequality $f^*(\by) \geq \langle \bx, \by \rangle - f(\bx)$
+   simplifies to
+
+   $$
+   f(\bx) + f^*(\by) \geq \langle \bx, \by \rangle .
+   $$
+```
 
 ```{prf:theorem} Convexity and closedness
 :label: res-cvxf-conjugate-convex-closed
@@ -108,6 +152,8 @@ The beauty of this result is the fact that
 The conjugate function is always closed and
 convex even if the original function is not
 convex or not closed.
+
+
 
 
 ```{prf:theorem} Properness of conjugates of proper convex functions
@@ -163,14 +209,6 @@ We shall then show that $f^*$ is not $\infty$ everywhere.
 1. Thus, $f^*$ is a proper function.
 ```
 
-```{div}
-Fenchel's inequality holds for any $\bx \in \VV$ and $\by \in \VV^*$:
-
-$$
-f(x) + f^*(y) \geq \langle y, x \rangle.
-$$
-
-```
 
 ## Biconjugate
 
