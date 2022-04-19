@@ -330,6 +330,42 @@ Assume that $f$ is closed.
 ```
 
 
+A nice application of this result is the fact that pointwise
+supremum of closed functions is closed.
+
+
+```{prf:theorem} Pointwise supremum of closed functions
+:label: res-ms-ptws-sup-closed-functions-closed
+
+Let $f_i : X \to \RR$ for $i \in I$ with $S_i = \dom f_i$
+be a family of closed functions
+where $I$ is an index set.
+
+The function
+
+$$
+f(x) = \sup_{i \in I} f_i(x)
+$$
+with $\dom f = \bigcap_{i \in I} S_i$
+is closed.
+```
+
+```{prf:proof}
+Recall that the epigraph of maximum of two functions is the intersection
+of epigraphs.
+
+1. Since $f_i$ are closed, hence $\epi f_i$ are closed for every $i \in I$.
+1. The epigraph of $f$ is given by
+
+   $$
+   \epi f = \bigcap_{i \in I} \epi f_i.
+   $$
+1. Since $\epi f_i$ are closed, hence $\epi f$ is closed.
+1. Since $\epi f$ is closed, hence $f$ is closed
+   due to {prf:ref}`res-ms-closed-func-closed-epi`.
+```
+
+
 ### Continuous Functions
 
 ```{prf:proposition}
