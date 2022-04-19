@@ -1403,7 +1403,7 @@ $\sigma_C : \VV^* \to \RERL$
 for a set $C \subseteq \VV^*$ is similarly defined as
 
 $$
-\sigma_C (\bx) =  \sup \{\langle \bx, \by \rangle \ST \by \in C \}.
+\sigma_C (\bx) =  \sup \{\langle \by, \bx \rangle \ST \by \in C \}.
 $$
 ```
 
