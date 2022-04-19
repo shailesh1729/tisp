@@ -94,6 +94,9 @@ $$
 $$
 ```
 
+This result is also known as the second projection theorem
+{cite}`beck2014introduction`.
+
 ```{prf:proof}
 Assume that for some $\bz \in C$,
 $\langle \by - \bz, \bx - \bz \rangle \leq 0 \Forall \by \in C$ holds true.
@@ -150,6 +153,51 @@ Conversely, assume that $\bz$ is the projection of $\bx$ on $C$.
    must hold true for every $\by \in C$.
 ```
 
+Following is an alternative proof based on results
+from {ref}`sec:opt:convex-differentiable-objective`.
+This proof is specific to the case where $\VV = \RR^n$.
+
+```{prf:proof}
+
+Define a function $f: \RR^n \to \RR$ as
+
+$$
+f(\by) = \| \by - \bx \|^2.
+$$
+
+Then, the projection problem can be cast as an optimization problem
+
+$$
+& \text{minimize }  &  & f(\by) \\
+& \text{subject to } & & \by \in C.
+$$
+
+Note that the gradient of $f$ is given by
+
+$$
+\nabla f (\by) = \nabla \langle \by - \bx, \by - \bx \rangle
+= \nabla (\langle \by, \by \rangle - 2 \langle \by, \bx \rangle  + \langle \bx, \bx \rangle)
+= 2 (\by - \bx).
+$$
+
+By {prf:ref}`res-cvxopt-diff-convex-optimal-criterion`, $\bz$ is an optimal solution
+if and only if
+
+$$
+f(\bz)^T (\by - \bz) \geq 0 \Forall \by \in C.
+$$
+
+In other words
+
+$$
+2 (\bz - \bx)^T (\by - \bz) \geq 0 \Forall \by \in C.
+$$
+We can simplify this as
+
+$$
+\langle \bx - \bz, \by - \bz \rangle \leq 0 \Forall \by \in C.
+$$
+```
 
 ```{prf:theorem} Orthogonal projection on an affine subspace
 :label: res-cvx-projection-affine-subspace
@@ -415,7 +463,8 @@ Let $\bx, \by \in \VV$.
 
 Let $C$ be a nonempty, closed and convex subset of $\VV$.
 Let $P_C : \VV \to \VV$ be the orthogonal projection operator
-as defined in {prf:ref}`def-pocs-projection-mapping` is firmly nonexpansive.
+as defined in {prf:ref}`def-pocs-projection-mapping`.
+Then $P_C$ is a firmly nonexpansive operator.
 
 In other words,
 
@@ -426,6 +475,33 @@ $$
 holds true for every $\bx, \by \in \VV$.
 ```
 
+```{prf:proof}
+Recall from {prf:ref}`res-cvx-projection-characterization` that
+for any $\bu \in \VV$ and $\bv \in C$
+
+$$
+\langle \bv - P_C(\bu), \bu - P_C(\bu) \rangle \leq 0.
+$$
+
+1. Substituting $\bu = \bx$ and $\bv = P_C(\by)$, we obtain
+
+   $$
+   \langle P_C(\by) - P_C(\bx), \bx - P_C(\bx) \rangle \leq 0.
+   $$
+1. Substituting $\bu = \by$ and $\bv = P_C(\bx)$, we obtain
+
+   $$
+   \langle P_C(\bx) - P_C(\by), \by - P_C(\by) \rangle \leq 0.
+   $$
+1. Adding the two inequalities gives us
+
+   $$
+   & \langle P_C(\bx) - P_C(\by), \by - P_C(\by) - \bx + P_C(\bx) \rangle \leq 0 \\
+   & \iff \langle P_C(\bx) - P_C(\by), (\by  - \bx) + (P_C(\bx) - P_C(\by)) \rangle \leq 0\\
+   &\iff \| P_C(\bx) - P_C(\by) \|^2 \leq \langle P_C(\bx) - P_C(\by), \bx - \by \rangle
+   $$
+   as desired.
+```
 
 ## Squared Distance Function
 

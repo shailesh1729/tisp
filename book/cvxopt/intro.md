@@ -1405,10 +1405,45 @@ So is the set of minimizers of $f$ over $A$.
 ```
 
 
-## Some Simple Problems
+## Some Simple Problems and Technical Results
 
-In this subsection, we provide results on some simple optimization problems.
+In this subsection, we provide some technical results on
+some simple optimization problems.
 These results are useful building blocks for bigger problems.
+
+```{prf:theorem} Nonnegativity of affine functional on nonnegative orthant
+:label: res-opt-nng-affine-nng-orthant
+
+Consider the affine function $f: \RR^n \to \RR$ given by
+
+$$
+f(\bx) = \ba^T \bx + b.
+$$
+
+Then, $f(\bx) \geq 0$ for every $\bx \succeq \bzero$ if
+and only if $\ba \succeq \bzero$ and $b \geq 0$.
+```
+
+```{prf:proof}
+
+Assume that $\ba \succeq \bzero$ and $b \geq 0$.
+Then $f(\bx)$ is product and sum of nonnegative terms.
+Hence, $f(\bx) \geq 0$.
+
+For the converse, assume that $f(\bx) \geq 0$ for every $\bx \succeq \bzero$.
+
+1. If $b < 0$, then for $\bx = \bzero$, $f(\bx) = b < 0$. 
+   Hence, $b$ cannot be smaller than 0.
+1. Consider some $\ba \prec \bzero$. 
+1. Assume that $a_i < 0$ for some $i \in [1,\dots,n]$.
+1. Let $\bx$ be such that $x_j = 0$ for all $j \neq i$
+   and $x_i = t$ for some $t > 0$.
+1. Then, $f(\bx) = t a_i + b$.
+1. By increasing $t$ suitably, we can get $f(\bx) < 0$.
+1. Thus, $\ba \succeq \bzero$ is also necessary to 
+   ensure that $f(\bx) \geq 0$ for all $\bx \succeq \bzero$.
+```
+
 
 
 

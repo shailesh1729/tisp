@@ -48,6 +48,7 @@ the property $(P)$ for all $n > n_0$.
 ````
 
 ```{prf:example}
+:label: ex-st-seq-property-eventually-1
 
 Consider the sequence $\{ x_n = \frac{1000}{n} \}$.
 For all $n > 1000$, it satisfies the property that

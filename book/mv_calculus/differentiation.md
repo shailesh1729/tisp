@@ -433,6 +433,28 @@ a real valued function $f$ at $\bx=\ba \in \interior \dom f$.
 ````
 
 
+```{prf:theorem} First order approximation accuracy
+:label: res-mvc-first-order-approx
+
+Let $f : \RR^n \to \RR$ be defined on
+an open set $S = \dom f$. 
+Assume that $f$ is continuously differentiable on $S$.
+Then,
+
+$$
+\lim_{\bd \to \bzero} \frac{f(\bx + \bd) - f(\bx) - \nabla f(\bx)^T \bd}{\| \bd \|} = 0 \Forall \bx \in S.
+$$
+
+Another way to write this result is:
+
+$$
+f(\bx) = f(\ba) + \nabla f(\ba)^T (\bx - \ba) + o (\| \bx - \ba \|)
+$$
+where $\ba \in S$ and $o(\cdot) : \RR_+ \to \RR$ is a one dimensional function
+satisfying $\frac{o(t)}{t} \to 0$ as $t \to 0^+$.
+```
+
+
 ## Chain Rule
 
 ```{prf:theorem} Chain rule
@@ -935,3 +957,68 @@ is the quadratic function defined by:
 
 ````
 
+## Smoothness
+
+### Real Functions
+
+```{prf:definition} Class of continuous functions
+:label: def-mvc-rf-continuous-functions-class
+
+The class of continuous real functions,
+denoted by $C$, is the set of functions
+of type $f: \RR \to \RR$ which are
+continuous over their domain $\dom f$.
+```
+
+```{prf:definition} Differentiability class $C^k$
+:label: def-mvc-rf-diff-class-k
+
+Let $f: \RR \to \RR$ be a real function
+with $S = \dom f$.
+
+Then, we say that $f$ belongs to the differentiability
+class $C^k$ on $S$ if and only if
+
+$$
+\frac{d^k}{d x^k} f(x) \in C.
+$$
+In other words, the $k$-th derivative of $f$
+exists and is continuous.
+```
+
+```{div}
+
+1. $C^0$ consists of class of continuous real functions.
+1. $C^1$ consists of class of continuously differentiable
+   functions.
+1. $C^{\infty}$ consists of class of smooth functions
+   which are infinitely differentiable.
+```
+
+
+### Real Valued Functions on Euclidean Space
+
+```{prf:definition} Differentiability class $C^k$
+:label: def-mvc-smooth-k-th-order
+
+A function $f: \RR^n \to \RR$ with $S = \dom f$
+where $S$ is an open subset of $\RR^n$ is said to be
+of class $C^k$ on $S$, for a positive integer $k$,
+if all the partial derivatives of $f$ 
+
+$$
+\frac{\partial^m f}{\partial x_1^{m_1} \partial x_2^{m_2} \dots \partial x_n^{m_n}} (\bx) 
+$$
+exist and are continuous for every $m_1,m_2,\dots,m_n \geq 0$
+and $m = m_1 + m_2 + \dots m_n \leq k$.
+```
+
+```{div}
+1. If $f$ is continuous, it is said to belong to $C$ or $C^0$.
+1. If $f$ is continuously differentiable, it is said to
+   belong to $C^1$.
+1. If $f$ is twice continuously differentiable, it is said
+   to belong to $C^2$.
+1. If $f$ is infinitely differentiable, it is said to
+   belong to $C^{\infty}$.
+```

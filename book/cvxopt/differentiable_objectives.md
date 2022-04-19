@@ -1,14 +1,164 @@
-# Convex Differentiable Objective Functions
+(sec:opt:convex-differentiable-objective)=
+# Differentiable Objective Functions
 
 In this section, we focus on objective functions of type
 $f : \RR^n \to \RR$ which are convex and differentiable.
 Our goal is to minimize $f$ over a convex set $C \subseteq \dom f$.
 
-ain references for this section are
+Main references for this section are
 {cite}`beck2014introduction,boyd2004convex`.
 
 
+## Stationary Points
+
+We first look at functions which are differentiable over a
+convex set. Here, we don't require that the function itself
+be convex. Thus, we may not characterize the global 
+optimality of a point. However, we can still
+characterize the local optimality of a point.
+
+
+In {prf:ref}`def-opt-stationary-point`, we defined
+stationary points for a real valued function as
+points where the gradient vanishes; i.e. $\nabla f(\bx) = \bzero$.
+
+In this section, we wish to restrict the domain of feasible
+points to a convex set $C$ and consider the problem
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C
+$$
+where $f$ is differentiable over the convex set $C$.
+
+We now introduce the notion of stationary points for
+the given optimization problem of minimizing $f$ over $C$.
+
+```{prf:definition} Stationary point for an optimization problem
+:label: def-opt-over-c-stationary-point
+
+Let $f : \RR^n \to \RR$ be a real valued function which
+is differentiable over a convex set $C$.
+
+Then, $\ba \in C$ is called a *stationary point* of the
+problem of minimizing $f$ over $C$ if 
+
+$$
+\nabla f(\ba)^T (\bx - \ba) \geq 0 \Forall \bx \in C.
+$$
+```
+If $C = \RR^n$, then the condition will reduce to
+$\nabla f(\ba) = \bzero$.
+
+
+```{prf:theorem} Local minimum points are stationary points
+:label: res-opt-over-c-local-min-stationary
+
+Let $f : \RR^n \to \RR$ be a real valued function which
+is differentiable over a convex set $C$.
+Consider the optimization problem
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C.
+$$
+If $\ba \in C$ is a local minimum, then $\ba$ must be
+a stationary point. 
+```
+
+```{prf:proof}
+Let $\ba$ be a local minimum and for contradiction assume
+that it is not a stationary point.
+
+1. Then, there exists $\bx \in C$ such that
+   $\nabla f(\ba)^T (\bx - \ba) < 0$.
+1. Let $t \in [0,1]$ be a parameter.
+1. Let $\bz_t = t \bx + (1-t) \ba$.
+1. Since $C$ is convex, hence $\bz_t \in C$.
+1. Differentiating $f(\bz_t)$ w.r.t. $t$ at $t=0$, we obtain
+
+   $$
+   \left . \frac{d}{d t} f(\bz_t) \right |_{t=0} = \nabla f(\ba)^T (\bx - \ba) < 0.
+   $$
+1. Thus, for small enough $t$, $f(\bz_t) < f(\ba)$.
+1. This contradicts the hypothesis that $\ba$ is a local minimum.
+1. Thus, all local minimum points must be stationary points.
+```
+
+
+```{prf:example} Unconstrained minimization
+:label: ex-opt-diff-obj-unconstrained-minimization
+
+Let $f : \RR^n \to \RR$ be a real valued function which
+is differentiable.
+Consider the unconstrained optimization problem
+
+$$
+\text{minimize }  f(\bx).
+$$
+
+In this case, the feasible set is $C = \RR^n$.
+
+1. If $\ba$ is a stationary point for this problem, then
+   
+   $$
+   \nabla f(\ba)^T (\bx - \ba) \geq 0 \Forall \bx \in \RR^n.
+   $$
+1. In particular, if we choose $\bx = \ba - \nabla f(\ba)$, we get
+
+   $$
+   \nabla f(\ba)^T (\bx - \ba) = \nabla f(\ba)^T (- \nabla f(\ba))
+   = - \|  \nabla f(\ba) \|^2 \geq 0.
+   $$
+1. This is true only if $\nabla f(\ba) = \bzero$.
+1. Thus, for unconstrained minimization, the gradient vanishes at stationary points.
+```
+
+```{prf:theorem} Stationary point as an orthogonal projection
+:label: res-opt-over-c-stationary-orth-proj
+
+Let $f : \RR^n \to \RR$ be a real valued function which
+is differentiable over a convex set $C$.
+Consider the optimization problem
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C.
+$$
+Let $s > 0$.
+Then $\ba \in C$ is a stationary point of the optimization
+problem if and only if
+
+$$
+\ba = P_C (\ba - s \nabla f(\ba)).
+$$
+```
+
+```{prf:proof}
+
+Recall from {prf:ref}`res-cvx-projection-characterization` that
+$\bz \in C$ is the projection of $\bx$ if and only if
+
+$$
+\langle \by - \bz, \bx - \bz \rangle \leq 0 \Forall \by \in C.
+$$
+
+1. Replace $\bz = \ba$ and $\bx  = \ba - s \nabla f(\ba)$. We get
+
+   $$
+   & \langle \by - \ba, \ba - s \nabla f(\ba) - \ba \rangle \leq 0 \Forall \by \in C\\
+   & \iff  s\langle \by - \ba, \nabla f(\ba) \rangle \geq 0 \Forall \by \in C\\
+   & \iff \nabla f(\ba)^T (\by - \ba) \geq 0 \Forall \by \in C.
+   $$
+1. But this is the same condition as the definition for a stationary point.
+```
+
+
 ## First Order Optimality Criteria
+
+We now pay our attention to the case where $f$ is convex
+as well as differentiable. In this case, a point is a global
+optimal point if and only if it is a stationary point.
 
 ````{prf:theorem} Optimality criterion for differentiable objective function
 :label: res-cvxopt-diff-convex-optimal-criterion
@@ -28,6 +178,7 @@ Then, $\bx \in C$ is an optimal point if and only if
 \nabla f(\bx)^T (\by - \bx) \geq 0 \Forall \by \in C.
 ```
 
+In other words, $\bx$ is optimal if and only if it is a stationary point.
 ````
 
 ```{prf:proof}
@@ -381,7 +532,8 @@ $$
    $$
    \underset{\| \bx \| \leq 1}{\inf} (\nabla f(\ba)^T \bx - \nabla f(\ba)^T \ba ) \geq 0.
    $$
-1. Recall that for any $\bv \in \RR^n$, the optimal value of the problem
+1. Recall from {prf:ref}`res-opt-min-linear-func-unit-ball`
+   that for any $\bv \in \RR^n$, the optimal value of the problem
 
    $$
    \inf \{ \bv^T \bx  \ST  \| \bx \| \leq 1 \}
@@ -404,8 +556,305 @@ $$
    \leq \| \nabla f(\ba) \|
    $$
    since $\ba \in B[\bzero, 1]$.
-1. Thus, the inequality must be an equality, giving us
+1. Thus, the inequality must be an equality, giving us,
+   $\ba$ is an optimal point 
 
    $$
    - \nabla f(\ba)^T \ba =  \| \nabla f(\ba) \|.
    $$
+
+We now have following possibilities for this condition.
+
+1. If $\nabla f(\ba) = \bzero$, then the condition holds
+   and $\ba$ is indeed an optimal point. 
+1. Otherwise, if $\nabla f(\ba) \neq \bzero$, then $\| \ba \| = 1$ must be true.
+   1. For contradiction, if we assume that $ \| \ba \| < 1$.
+   1. Then, by Cauchy Schwartz inequality
+
+      $$
+      - \nabla f(\ba)^T \ba \leq  \| \nabla f(\ba) \| \| \ba \|
+      < \| \nabla f(\ba) \|,
+      $$
+      a contradiction.
+1. Thus, if $\nabla f(\ba) \neq \bzero$, then $\ba$ is an optimal point
+   if and only if $ \| \ba \| = 1$ and
+
+   $$
+   - \nabla f(\ba)^T \ba =  \| \nabla f(\ba) \| = \| \nabla f(\ba) \| \| \ba \|.
+   $$
+1. But this is possible only when there exists $t \leq 0$ such that
+
+   $$
+   \nabla f(\ba) = t \ba.
+   $$
+1. Thus, if $\nabla f(\ba) \neq \bzero$, then $\ba$ is an optimal point
+   if and only if $ \| \ba \| = 1$ and there exists $t \leq 0$ such that
+   $\nabla f(\ba) = t \ba$.
+```
+
+## Descent Directions Method
+
+We first consider the problem of unconstrained minimization of
+a continuously differentiable function $f$.
+
+Typical iterative algorithms which aim to find
+the solution $\bx$ for the minimization problem
+start with an initial guess $\bx_0$ and perform
+a step of the form
+
+$$
+\bx_{k+1} = \bx_k + t_k \bd_k
+$$
+where $\bx_k$ is the current guess (starting from $\bx_0$),
+$\bd_k$ is a direction in which we move to make the next
+guess and $t_k$ is a step size in that direction. 
+$\bx_{k+1}$ is the next guess obtained from current
+guess. 
+We say that an algorithm has made progress if
+$f(\bx_{k+1}) < f(\bx_k)$.
+
+This brings us to the notion of a descent direction.
+
+```{prf:definition} Descent direction
+:label: def-opt-descent-direction
+
+Let $f : \VV \to \RR$ be a continuously differentiable
+function over $\VV$. A nonzero vector $\bd$ is called
+a descent direction of $f$ at $\bx$ if the
+directional derivative $f'(\bx; \bd)$ is negative.
+
+In other words,
+
+$$
+f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle < 0.
+$$
+```
+If the directional derivative is negative, then it
+is clear that for a small enough step in this direction,
+the value of $f$ will decrease.
+
+```{prf:lemma} Descent property of descent direction
+:label: res-opt-descent-dir-property
+
+Let $f : \VV \to \RR$ be a continuously differentiable
+function over $\VV$.
+Let $\bx \in \VV$.
+Assume that $\bd$ is a descent direction for $f$. 
+Then, there exists $\epsilon > 0$  such that
+
+$$
+f(\bx + t \bd) < f(\bx)
+$$
+for any $t \in (0, \epsilon]$.
+```
+
+```{prf:proof}
+This follows from the negativity of the directional derivative.
+
+1. Recall from {prf:ref}`def-cvxf-directional-derivative` that
+
+   $$
+   f'(\bx; \bd) = \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t}.
+   $$
+1. Since $\bd$ is a descent direction, hence $f'(\bx; \bd) < 0$.
+1. Thus, 
+
+   $$
+   \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t} < 0.
+   $$
+1. Thus, there exists $\epsilon > 0$ such that
+ 
+   $$
+   \frac{f(\bx + t \bd) - f(\bx)}{t} < 0
+   $$
+   for every $t \in (0, \epsilon]$.
+```
+
+### Descent Directions Method
+
+```{prf:algorithm} The descent directions method
+:label: alg-opt-diff-obj-descent-directions
+
+Initialization
+
+1. Pick $\bx_0 \in \VV$ arbitrarily as initial solution.
+
+General iteration: for $k=0,1,2,\dots$, execute the following steps
+
+1. Pick a descent direction $\bd_k$.
+1. Pick a step size $t_k$ satisfying $f(\bx + t_k \bd_k) < f(\bx_k)$.
+1. Update: $\bx_{k+1} \leftarrow \bx_k + t_k \bd_k$.
+1. Check for convergence: If converged, then STOP.
+
+Return $\bx_{k+1}$ as the output.
+```
+
+This method is not really an actual algorithm.
+It can be considered as a template for an actual
+algorithm. Several aspects of the method need
+to be carefully chosen to come up with a viable
+algorithm.
+
+1. How to select the initial point $\bx_0$?
+1. How to choose the descent direction?
+1. How to select the step size?
+1. How to decide when to stop the iterations (stopping criterion)? 
+
+
+The key result that we establish here is to show that
+if the step size $t_k$ is sufficient small
+in the descent direction $\bd_k$, then there is sufficient
+decrease in the value of $f$ going from $\bx_k$ to $\bx_{k+1}$.
+
+
+```{prf:theorem} Sufficient decrease condition for descent direction method
+:label: res-opt-diff-obj-descent-dir-suff-dec
+
+Let $f$ be a continuously differentiable function over $\RR^n$.
+Let $\bx \in \RR^n$.
+Assume that a nonzero $\bd$ is a descent direction for $f$
+at $\bx$. 
+Let $\alpha \in (0, 1)$.
+Then, there exists $\epsilon > 0$ such that the inequality
+
+$$
+f(\bx) - f(\bx + t \bd) \geq - \alpha t \langle \bd, \nabla f(\bx) \rangle
+$$
+holds for every $t \in [0, \epsilon]$.
+```
+
+```{prf:proof}
+We proceed as follows. 
+
+1. Since $f$ is continuously differentiable,
+   hence due to {prf:ref}`res-mvc-first-order-approx`,
+
+   $$
+   f(\bx + t \bd) = f(\bx) + t \nabla f(\bx)^T \bd  + o(t \| \bd \|).
+   $$
+1. Rearranging the terms and introducing an $\alpha \in (0, 1)$, we obtain
+
+   $$
+   f(\bx) - f(\bx + t \bd) = - \alpha t \nabla f(\bx)^T \bd 
+   - (1- \alpha) \nabla f(\bx)^T \bd - o(t \| \bd \|).
+   $$
+1. Since $\bd$ is a descent direction of $f$, hence $f(\bx; \bd) = \nabla f(\bx)^T \bd < 0$.
+1. Thus,
+
+   $$
+   \lim_{t \to 0^+} \frac{(1- \alpha) \nabla f(\bx)^T \bd + o(t \| \bd \|)}{t}
+   = (1- \alpha) \nabla f(\bx)^T \bd  < 0.
+   $$
+1. Hence, there exists $\epsilon > 0$ such that for every $t \in [0, \epsilon]$,
+
+   $$
+   (1- \alpha) \nabla f(\bx)^T \bd + o(t \| \bd \| < 0.
+   $$
+1. Thus, from the previous equation:
+
+   $$
+   f(\bx) - f(\bx + t \bd) \geq - \alpha t \nabla f(\bx)^T \bd
+   $$
+   for every $t \in [0, \epsilon]$.
+```
+
+## Gradient Method
+
+
+## Gradient Projection Method
+
+In this subsection, we present a method to solve the
+optimization problem
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C
+$$
+where $C$ is a convex set and $f$ is differentiable over $C$.
+
+Recall from {prf:ref}`res-opt-over-c-stationary-orth-proj`, that
+$\ba$ is a stationary point for the problem of minimizing 
+$f$ over a convex set $C$ if and only if
+
+$$
+\ba = P_C (\ba - s \nabla f(\ba)).
+$$
+
+This stationarity condition is the basis for the gradient projection method
+presented below.
+
+
+```{prf:algorithm} The gradient projection method
+:label: alg-opt-diff-obj-gradient-projection
+
+Inputs
+
+1. $\epsilon > 0$ - tolerance parameter
+
+Initialization
+
+1. Pick $\bx_0 \in C$ arbitrarily.
+
+General iteration: for $k=0,1,2,\dots$, execute the following steps
+
+1. Pick a step size $t_k$ by a line search procedure.
+1. Update: $\bx_{k+1} \leftarrow P_C (\bx_k - t_k \nabla f(\bx_k))$.
+1. Check for convergence: If $\| \bx_{k+1} - \bx_k \| \leq \epsilon$, then
+   STOP.
+
+Return $\bx_{k+1}$ as the output.
+```
+
+```{div}
+
+In the case of unconstrained minimization:
+
+1. $C = \RR^n$
+1. $P_C (\bx_k - t_k \nabla f(\bx_k)) = \bx_k - t_k \nabla f(\bx_k)$.
+1. $\bx_{k+1} = \bx_k - t_k \nabla f(\bx_k)$.
+1. We see that gradient projection reduces to gradient descent.
+
+
+Another way to look at the algorithm is:
+
+1. $\by_{k+1} = \bx_k - t_k \nabla f(\bx_k)$ computes the
+   next candidate solution assuming no constraints.
+1. $\bx_{k+1} = P_C(\by_{k+1})$ step projects the next candidate
+   solution back to the feasible set $C$.
+1. Thus, we have a gradient step followed by a projection step.
+```
+
+### Convergence
+
+If we can establish conditions under which each iteration of
+the gradient projection algorithm leads to sufficient decrease
+in the value of the objective function, then we can guarantee
+that the algorithm will converge in a finite number of steps.
+
+```{prf:lemma} Sufficient decrease lemma for constrained problems
+:label: res-opt-grad-proj-suff-dec
+
+Consider the optimization problem:
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in C.
+$$
+
+Assume that $C$ is a nonempty closed convex set,
+$f$ is continuously differentiable over $C$, and $\nabla f$ 
+is Lipschitz continuous with a constant $L$ over $C$,
+Then, for any $\bx \in C$, and $t \in (0, \frac{2}{L})$, 
+the following inequality holds.
+
+$$
+f(\bx) - f(\by) \geq t \left ( 1  - \frac{L t}{2} \right )
+\left \| \frac{1}{t}(\bx - \by)  \right \|^2.
+$$
+where $\by = P_C(\bx - t \nabla f(\bx))$.
+```
+
+```{prf:proof}
+
+
+```

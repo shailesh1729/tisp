@@ -69,6 +69,8 @@ In this definition:
 * As $\theta$ goes from $0$ to $1$, $\by$ moves from $\bx_2$ to $\bx_1$.
 
 ```{prf:remark}
+:label: rem-aff-line-alt-not
+
 An alternative notation for the line as a set is $\bx_2 + \FF (\bx_1 - \bx_2)$
 following the notation in {prf:ref}`def-vs-set-arithmetic`.
 ```
