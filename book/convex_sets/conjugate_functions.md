@@ -212,9 +212,16 @@ We shall then show that $f^*$ is not $\infty$ everywhere.
 
 ## Biconjugate
 
-The conjugate of the conjugate is called the *biconjugate*. 
-
 ```{div}
+The conjugate of the conjugate is called the *biconjugate*. 
+We recall that when $\VV$ is finite dimensional,
+then the dual of the dual $\VV^**$
+is isomorphic to $\VV$.
+```
+
+```{prf:definition} Biconjugate
+:label: def-cvxf-biconjugate-func
+
 Let $f : \VV \to \ERL$ be an extended real valued function. 
 Its *biconjugate function* $f^{**}: \VV \to \ERL$ is given by
 
@@ -222,19 +229,181 @@ $$
 f^{**} (\bx) = \underset{\by \in \VV^*}{\sup} 
 \{ \langle \bx, \by \rangle - f^*(\by)  \}, \quad \bx \in \VV.
 $$
+```
+
+```{prf:theorem} Biconjugate is an underestimator
+:label: res-cvxf-biconjugate-underestimator
 
 The biconjugate is an underestimator of the original function.
 
 $$
-f(\bx) \geq f^{**} (\bx) \Forall x \in \VV. 
+f(\bx) \geq f^{**} (\bx) \Forall \bx \in \VV. 
 $$
+```
 
-Let $f : \VV \to \ERL$ be a proper, closed and convex function. 
+```{prf:proof}
+We proceed as follows.
+
+1. From the definition of the conjugate
+
+   $$
+   f^*(\by) \geq \langle \bx, \by \rangle - f(\bx)
+   $$
+   holds true for any $\bx \in \VV$ and $\by \in \VV^*$.
+1. Rewriting, we get
+
+   $$
+   f(\bx) \geq \langle \bx, \by \rangle - f^*(\by).
+   $$
+1. Taking supremum over $\by \in \VV^*$ on the R.H.S.,
+
+   $$
+   f(\bx) \geq \sup_{\by \in \VV^*}
+   (\langle \bx, \by \rangle - f^*(\by))
+   = f^{**}(\bx).
+   $$
+```
+Thus, the biconjugate of $f$ is always a lower bound for $f$.
+Naturally, one is interested in conditions under which
+biconjugate of $f$ equals $f$.
+
+```{prf:theorem} Biconjugate for proper closed and convex functions
+:label: res-cvxf-biconjugate-proper-closed-convex
+
+Let $f : \VV \to \RERL$ be a proper, closed and convex function. 
 Then,
 
 $$
 f(\bx) = f^{**} (\bx) \Forall x \in \VV. 
 $$
+```
+
+```{prf:proof}
+In {prf:ref}`res-cvxf-biconjugate-underestimator`,
+we have already shown that $f^{**} \preceq f$.
+We shall now show that $f \preceq f^{**}$ also
+holds true when $f$ is proper, closed and convex. 
+
+
+1. For contradiction, assume that there exists
+   $\bx \in \VV$ such that
+   $f^{**}(\bx) < f(\bx)$.
+1. Thus, $(\bx, f^{**}(\bx)) \notin \epi f$.
+1. Recall the definition of inner product for the
+   direct sum space $\VV \oplus \RR$ from
+   {prf:ref}`def-cvx-real-vector-space-r-prod`
+   given by
+
+   $$
+   \langle (\bx, s), (\by, t) \rangle
+   \triangleq \langle \bx, \by \rangle + st.
+   $$
+1. Since $f$ is proper, hence $\epi f$ is nonempty.
+1. Since $f$ is closed, hence $\epi f$ is closed.
+1. Since $f$ is convex, hence $\epi f$ is convex.
+1. Thus, $\epi f$ is nonempty, closed and convex.
+1. By strict separation theorem
+   ({prf:ref}`res-cvxf-cl-convex-set-strict-separation`),
+   the set $\epi f$ and the point $(\bx, f^{**}(\bx))$
+   can be strictly separated.
+1. There exists a point $(\ba, b)$ with $\ba \in \VV^*$, $b \in \RR$
+   and a scalar $\alpha \in \RR$ such that
+
+   $$
+   \langle \bx, \ba \rangle + f^{**}(\bx) b > \alpha
+   \text{ and }
+   \langle \bz, \ba \rangle + s b \leq \alpha
+   \Forall (\bz, s) \in \epi f. 
+   $$
+1. It is then easy to identify constants $c_1, c_2 \in \RR$
+   such that
+
+   $$
+   \langle \bz, \ba \rangle + s b \leq c_1
+   < c_2 \leq  \langle \bx, \ba \rangle + f^{**}(\bx) b
+   \Forall (\bz, s) \in \epi f. 
+   $$
+   Pick $c_1 = \alpha$ and $c_2 = \langle \bx, \ba \rangle + f^{**}(\bx) b$
+   for example. 
+1. By simple arithmetic, we can conclude that
+
+   $$
+   \langle \bz - \bx, \ba \rangle + (s - f^{**}(\bx)) b
+   \leq c_1 - c_2 \triangleq c < 0
+   \Forall (\bz, s) \in \epi f. 
+   $$
+1. The scalar $b$ must be nonpositive.
+   If for contradiction, $b > 0$, then fixing a $\bz$
+   and increasing $s$ sufficiently, the inequality can be violated.
+1. We now consider different cases for $b \leq 0$.
+1. Consider the case where $b < 0$.
+   1. Dividing the inequality by $-b$ and letting $\by = \frac{\ba}{-b}$,
+      we obtain
+
+      $$
+      \langle \bz - \bx, \by \rangle - s + f^{**}(\bx) \leq \frac{c}{-b} < 0
+      \Forall (\bz, s) \in \epi f.
+      $$
+   1. In particular, for $s = f(\bz)$, we have
+
+      $$
+      \langle \bz, \by \rangle - \langle \bx, \by \rangle 
+      - f(\bz) + f^{**}(\bx) \leq \frac{c}{-b} < 0
+      \Forall \bz \in \VV.
+      $$
+      This is valid for $\bz \notin \dom f$ also as in that case
+      $s = f(\bz) = \infty$.
+   1. Taking the supremum over $\bz$ on the L.H.S., we obtain
+
+      $$
+      f^*(\by) - \langle \bx, \by \rangle + f^{**}(\bx) 
+      \leq \frac{c}{-b} < 0.
+      $$
+   1. This implies $f^*(\by) + f^{**}(\bx) < \langle \bx, \by \rangle$.
+   1. This contradicts the Fenchel inequality.
+   1. Thus, $b < 0$ is not possible.
+1. Now consider the case where $b=0$.
+   1. Since $f^*$ is proper, hence $\dom f^* \neq \EmptySet$.
+   1. Take any $\widehat{\by} \in \dom f^*$.
+   1. Pick some $\epsilon > 0$.
+   1. Let $\widehat{\ba} = \ba + \epsilon \widehat{\by}$.
+   1. Let $\widehat{b} = - \epsilon$.
+   1. Then, for any $\bz \in \dom f$ with $s=f(\bz)$,
+
+      $$
+      \langle \bz - \bx, \widehat{\ba} \rangle + (f(\bz) - f^{**}(\bx)) \widehat{b}
+      &= \langle \bz - \bx, \ba \rangle 
+         + \langle \bz - \bx, \epsilon \widehat{\by} \rangle 
+         - \epsilon (f(\bz) - f^{**}(\bx)) \\
+      &= \langle \bz - \bx, \ba \rangle
+         + \epsilon [\langle \bz - \bx, \widehat{\by} \rangle -f(\bz) + f^{**}(\bx)] \\
+      &\leq c + \epsilon[\langle \bz, \widehat{\by} \rangle  - f(\bz) + f^{**}(\bx) - \langle \bx, \widehat{\by} \rangle]\\
+      &\leq c + \epsilon [f^*(\widehat{\by}) + f^{**}(\bx) - \langle \bx, \widehat{\by} \rangle].
+      $$
+   1. Let $\widehat{c} = c + \epsilon [f^*(\widehat{\by}) + f^{**}(\bx) - \langle \bx, \widehat{\by} \rangle]$.
+   1. Since $c < 0$, we can pick $\epsilon > 0$ small enough such that $\widehat{c} < 0$.
+   1. Then, we have the inequality
+
+      $$
+      \langle \bz - \bx, \widehat{\ba} \rangle + (f(\bz) - f^{**}(\bx)) \widehat{b} \leq \widehat{c} < 0.
+      $$
+   1. We now have a situation similar to the case of $b < 0$. Here we have $\widehat{b} < 0$.
+   1. Dividing both sides by $-\widehat{b}$ and letting $\tilde{\by} = \frac{\widehat{\ba}}{-\widehat{b}}$,
+      we obtain
+
+      $$
+      \langle \bz, \tilde{\by} \rangle - f(\bz) 
+      - \langle \bx, \tilde{\by} \rangle + f^{**}(\bx) 
+      \leq - \frac{\widehat{c}}{\widehat{b}} < 0
+      \Forall \bz \in \VV.
+      $$
+   1. Taking the supremum over $\bz$ on the L.H.S., we get
+
+      $$
+      f^*(\tilde{\by}) + f^{**}(\bx) < \langle \bx, \tilde{\by} \rangle.
+      $$
+   1. This again is a contradiction of Fenchel inequality.
+1. Thus, $f^{**}(\bx) \geq f(\bx)$ must be true for every $\bx \in \dom f$.
 ```
 
 ```{rubric} Indicator and support functions
