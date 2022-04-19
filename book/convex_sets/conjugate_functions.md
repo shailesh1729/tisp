@@ -42,11 +42,11 @@ $$
 :label: res-cvxf-conjugate-indicator-func
 
 Let $C \subseteq \VV$ be a nonempty set. 
-Let $\delta_C : \VV \to \RERL$ be the indicator function for the set $C$.
+Let $I_C : \VV \to \RERL$ be the indicator function for the set $C$.
 Then,
 
 $$
-\delta_C^*(\by) = \sigma_C (\by) = \underset{\bx \in C}{\sup} \langle \bx, \by \rangle. 
+I_C^*(\by) = \sigma_C (\by) = \underset{\bx \in C}{\sup} \langle \bx, \by \rangle. 
 $$
 
 In other words, the conjugate of the indicator function of a set
@@ -60,12 +60,12 @@ Let $\by \in \VV*$ be arbitrary.
 1. At any $\bx \in C$, we have
    
    $$
-   \langle \bx, \by \rangle - \delta_C(\bx) = \langle \bx, \by \rangle. 
+   \langle \bx, \by \rangle - I_C(\bx) = \langle \bx, \by \rangle. 
    $$
 1. At any $\bx \notin C$, we have
 
    $$
-   \langle \bx, \by \rangle - \delta_C(\bx) = -\infty. 
+   \langle \bx, \by \rangle - I_C(\bx) = -\infty. 
    $$
 1. Since $C$ is nonempty, hence
 
@@ -406,20 +406,73 @@ holds true when $f$ is proper, closed and convex.
 1. Thus, $f^{**}(\bx) \geq f(\bx)$ must be true for every $\bx \in \dom f$.
 ```
 
-```{rubric} Indicator and support functions
-```
+```{prf:example} Indicator and support functions
+:label: ex-cvxf-biconjucate-indicator-support
 
-```{div}
+Let $C$ be a nonempty set.
+
+1. By {prf:ref}`res-cvxf-conjugate-indicator-func`,
+
+   $$
+   I^*_C = \sigma_C.
+   $$
+1. The set $\closure \ConvexHull C$ is nonempty, closed and convex. 
+1. We note that since $\closure \convex C$ is a nonempty, closed and convex set,
+   hence $I_{\closure \convex C}$ is a closed and convex function.
+1. By {prf:ref}`res-cvxf-conjugate-indicator-func`, we have
+
+   $$
+   I^*_{\closure \convex C} = \sigma_{\closure \convex C}
+   $$
+1. Then, by {prf:ref}`res-cvxf-biconjugate-proper-closed-convex`,
+
+   $$
+   \sigma^*_{\closure \convex C}
+   = (I^*_{\closure \convex C})^*
+   = I^{**}_{\closure \convex C}
+   = I_{\closure \convex C}.
+   $$
+1. By {prf:ref}`res-cvxf-supp-closure-hull`,
+  
+   $$
+   \sigma_C = \sigma_{\closure C}
+   \text{ and }
+   \sigma_C = \sigma_{\convex C}.
+   $$
+1. Combining
+   
+   $$
+   \sigma_C = \sigma_{\closure \convex C}.
+   $$
+1. Thus, we have
+   
+   $$
+   \sigma^*_C = \sigma^*_{\closure \convex C}
+   = I_{\closure \convex C}.
+   $$
+1. If $C$ is nonempty, closed and convex, then
+   
+   $$
+   \closure \convex C = C.
+   $$
+1. In this case,
+
+   $$
+   \sigma^*_C =  I_C.
+   $$
+
+Summary:
+
 For a nonempty, closed and convex set $C \subseteq \VV$, 
 
 $$
-\sigma^*_C = \delta_C.
+\sigma^*_C = I_C.
 $$
 
 For an arbitrary nonempty set $C \subseteq \VV$, 
 
 $$
-\sigma^*_C = \delta_{\closure \ConvexHull C}.
+\sigma^*_C = I_{\closure \ConvexHull C}.
 $$
 ```
 
