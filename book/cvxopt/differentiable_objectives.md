@@ -758,6 +758,58 @@ We proceed as follows.
    for every $t \in [0, \epsilon]$.
 ```
 
+### Step Size Selection
+
+Following are common methods for step size selection.
+Each method has has advantages as well as drawbacks.
+
+1. Constant step size
+1. Exact line search
+1. Backtracking
+
+
+
+Constant step size uses $t_k = \bar{t}$ for every iteration.
+
+* A large step size might cause algorithm to take non-decreasing steps.
+* The algorithm may never converge with a large step size.
+* A small constant step size may lead to very slow convergence.
+
+
+Exact line search solves the minimization problem
+
+$$
+\text{ minimize } f \text{ along the ray } \bx_k + t \bd_k.
+$$
+The optimization variable is the step size parameter $t \in \RR_+$.
+The solution is the value $t_k \geq 0$. 
+
+* Minimizing $f$ along the ray may not be straight-forward.
+* Any closed form or algorithmic solution for the exact line search may not be available.
+
+
+Backtracking is a compromise between these two approaches.
+
+1. Input parameters $s > 0$, $\alpha \in (0,1)$, $\beta \in (0, 1)$.
+1. Initialize $t_k = s$.
+1. While 
+
+   $$
+   f(\bx_k) - f(\bx_k + t_k \bd_k) < - \alpha t_k \nabla f(\bx_k)^T \bd
+   $$
+   1. Set $t_k \leftarrow \beta t_k$.
+   1. Continue.
+1. Return step size $t_k$.
+
+Essentially, we are reducing the step  size by a factor $\beta$ iteratively
+till $f$ shows sufficient decrease as stipulated by
+{prf:ref}`res-opt-diff-obj-descent-dir-suff-dec`.
+
+* There is no exact line search.
+* Does find a good enough step size satisfying the sufficient decrease condition.
+* Involves multiple evaluations of $f$.
+* $s$ should be chosen carefully.
+
 ## Gradient Method
 
 
