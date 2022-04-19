@@ -806,20 +806,44 @@ We can get the subdifferentials for $d_C$ by applying the chain rule.
 
 ## Conjugates
 
-```{div}
+```{prf:theorem} Conjugate of norm squared plus indicator
+:label: res-pocs-conjugate-norm-sq-ind
 
-Let $f : \VV \to \RERL$ be:
+Let $C$ be a nonempty subset of $\VV$.
+Let $f : \VV \to \RERL$ be given by:
 
 $$
 f(\bx) = \frac{1}{2} \| \bx \|^2 + \delta_C(\bx).
 $$
 
-Then, its conjugate is:
+Then, its conjugate is given by:
 
 $$
 f^*(\by) = \frac{1}{2}\| \by \|^2 - \frac{1}{2} d_C^2 (\by) = \psi_C(\by).
 $$
 ```
+
+```{prf:proof}
+Recall from {prf:ref}`def-cvxf-conjugate-function` that
+
+$$
+f^*(\by) = \underset{\bx \in \VV}{\sup} \{ \langle \bx, \by \rangle - f(\bx)\}
+\Forall \by \in \VV^*.
+$$
+
+Expanding, we obtain
+
+$$
+\underset{\bx \in \VV}{\sup} \{ \langle \bx, \by \rangle - f(\bx)\}
+&= \underset{\bx \in \VV}{\sup} \{ \langle \bx, \by \rangle - 
+   \frac{1}{2} \| \bx \|^2 - \delta_C(\bx)\} \\
+&= \underset{\bx \in C}{\sup} \{ \langle \bx, \by \rangle - 
+   \frac{1}{2} \| \bx \|^2 \} \\
+&= \psi_C(\by).
+$$
+The last result is due to {prf:ref}`res-pocs-sq-psi-c-expression`.
+```
+
 
 ## Smoothness 
 
@@ -843,6 +867,7 @@ Here we discuss a specific form of minimizing a quadratic
 function subject to linear equality constraints.
 
 ```{prf:example} Equality constrained quadratic programming
+:label: ex-pocs-eq-cons-qp
 
 We consider the quadratic programming problem 
 
