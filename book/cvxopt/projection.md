@@ -505,35 +505,108 @@ $$
 
 ## Squared Distance Function
 
-```{prf:definition} Squared distance function to a nonempty, closed and convex set
-:label: def-pocs-sq-dist-closed-convex-set
+```{prf:definition} Squared distance function to a nonempty set
+:label: def-pocs-sq-dist-set
 
-Let $C$ be a nonempty, closed and convex subset of $\VV$.
+Let $C$ be a nonempty subset of $\VV$.
 The squared distance to set $C$ function
 denoted as $\varphi_C : \VV \to \RR$ is defined as:
 
 $$
-\varphi_C(\bx) \triangleq \frac{1}{2} d_C^2(\bx) 
-= \frac{1}{2}\| \bx - P_C(\bx) \|^2.
+\varphi_C(\bx) \triangleq \frac{1}{2} d_C^2(\bx). 
 $$
 
 We also define $\psi_C : \VV  \to \RR$ as:
 
 $$
-\psi_C(\bx) \triangleq \frac{1}{2} \left (\| \bx \|^2 - d_C^2(\bx) \right) 
-= \underset{\by \in C}{\sup}\left [ \langle y, x \rangle - \frac{1}{2} \| y \|^2 \right ]. 
+\psi_C(\bx) \triangleq \frac{1}{2} \left (\| \bx \|^2 - d_C^2(\bx) \right). 
 $$
 ```
 
-```{prf:theorem}
-:label: res-pocs-sq-proj-is-convex
+```{prf:theorem} Expression for $\psi_C$
+:label: res-pocs-sq-psi-c-expression
 
-Let $C$ be a nonempty, closed and convex subset of $\VV$.
-Then, the function $\psi_C$ as defined in {prf:ref}`def-pocs-sq-dist-closed-convex-set`
-is convex.
+Let $C$ be a nonempty subset of $\VV$.
+Then, the function $\psi_C$ as defined in {prf:ref}`def-pocs-sq-dist-set`
+is given by
+
+$$
+\psi_C(\bx) 
+= \underset{\by \in C}{\sup}
+\left [ \langle \by, \bx \rangle - \frac{1}{2} \| \by \|^2 \right ].
+$$
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Expanding on the definition of $d_C^2$
+
+   $$
+   d_C^2(\bx) &= \inf_{\by \in C} \| \bx - \by \|^2 \\
+   &= \inf_{\by \in C} \langle \bx - \by, \bx - \by \rangle \\
+   &= \inf_{\by \in C} (\| \bx \|^2 - 2 \langle \bx, \by \rangle + \| \by \|^2) \\
+   &= \inf_{\by \in C} (\| \bx \|^2 - (2 \langle \bx, \by \rangle - \| \by \|^2)) \\
+   &= \| \bx \|^2 -  \sup_{\by \in C} (2 \langle \bx, \by \rangle - \| \by \|^2).
+   $$
+1. Thus,
+
+   $$
+   \| \bx \|^2 - d_C^2 (\bx) = 
+   \sup_{\by \in C} ( 2 \langle \bx, \by \rangle - \| \by \|^2 ).
+   $$
+1. Thus,
+
+   $$
+   \psi_C(\bx) = \frac{1}{2} \left (\| \bx \|^2 - d_C^2(\bx) \right)
+   = \sup_{\by \in C} \left [\langle \bx, \by \rangle - \frac{1}{2} \| \by \|^2 \right ].
+   $$
 ```
 
 
+```{prf:theorem} $\psi_C$ is convex
+:label: res-pocs-sq-psi-c-is-convex
+
+Let $C$ be a nonempty subset of $\VV$.
+Then, the function $\psi_C$ as defined in {prf:ref}`def-pocs-sq-dist-set`
+is convex.
+```
+Beauty of this result is the fact that $\psi_C$ is convex
+irrespective of whether $C$ is convex or not.
+
+```{prf:proof}
+We proceed as follows.
+
+1. For every $\by \in C$, the function $g_y : \VV \to \RR$,
+   given by
+
+   $$
+   g_y (\bx) = \langle \by, \bx \rangle - \frac{1}{2} \| \by \|^2
+   $$
+   is an affine function.
+1. $g_y$ is convex for every $\by \in C$
+   due to {prf:ref}`res-cvxf-affine-functional-convex`.
+1. Now, 
+
+   $$
+   \psi_C (\by) = \sup{\by \in C} g_y.
+   $$
+1. Thus, $\psi_C$ is a pointwise supremum of convex functions.
+1. Thus, by {prf:ref}`res-cvx-ptws-supremum`, $\psi_C$ is convex.
+```
+
+```{prf:theorem} Squared distance function for nonempty, closed and convex sets
+:label: res-pocs-sq-dist-closed-convex
+
+Let $C$ be a nonempty, closed and convex subset of $\VV$.
+Then, the squared distance function $\varphi_C$ is given by
+
+$$
+\varphi_C(\bx) = \frac{1}{2}\| \bx - P_C(\bx) \|^2.
+$$
+```
+
+This follows directly from {prf:ref}`res-pocs-distance-func-convex`.
 
 ## Gradients and Subgradients
 
@@ -542,7 +615,7 @@ is convex.
 
 Let $C$ be a nonempty, closed and convex subset of $\VV$.
 The gradient of the squared distance function $\varphi_C$
-as defined in {prf:ref}`def-pocs-sq-dist-closed-convex-set`
+as defined in {prf:ref}`def-pocs-sq-dist-set`
 at $\bx \in \VV$ is given by:
 
 $$
