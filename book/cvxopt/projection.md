@@ -461,11 +461,121 @@ is convex.
 
 ## Gradients and Subgradients
 
-The gradient of $\varphi_C$ is given by:
+```{prf:theorem} Gradient of the squared distance function
+:label: res-pocs-grad-sq-dist-func
+
+Let $C$ be a nonempty, closed and convex subset of $\VV$.
+The gradient of the squared distance function $\varphi_C$
+as defined in {prf:ref}`def-pocs-sq-dist-closed-convex-set`
+at $\bx \in \VV$ is given by:
 
 $$
-\nabla \varphi_C(\bx) = \bx - P_C(\bx)  \Forall \bx \in \VV.
+\nabla \varphi_C(\bx) = x - P_C(\bx)  \Forall \bx \in \VV.
 $$
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Let $\bx \in \VV$.
+1. Let $\bz_x = \bx - P_C(\bx)$.
+1. Consider the function 
+
+   $$
+   g_x(\bd) = \varphi_C(\bx + \bd) - \varphi_C(\bx) - \langle \bd, \bz_x \rangle.
+   $$
+1. If 
+
+   $$
+   \lim_{\bd \to \bzero} \frac{g_x(\bd)}{ \| \bd \|} = 0
+   $$
+   then $\bz_x$ is indeed the gradient of $\varphi_C$ at $\bx$.
+1. By definition of orthogonal projection, for any $\bd \in \VV$,
+
+   $$
+   \| \bx + \bd - P_C(\bx + \bd) \|^2 
+   \leq \| \bx + \bd - P_C(\bx) \|^2
+   $$
+   as $P_C(\bx + \bd)$ is the nearest point to $\bx + \bd$ 
+   in $C$. $P_C(\bx)$ is just another point in $C$.
+
+1. Thus, for any $\bd \in \VV$
+
+   $$
+   g_x(\bd) 
+   &= \varphi_C(\bx + \bd) - \varphi_C(\bx) - \langle \bd, \bz_x \rangle \\
+   &= \frac{1}{2} \| \bx + \bd - P_C(\bx + \bd) \|^2
+   - \frac{1}{2} \| \bx - P_C(\bx) \|^2
+   - \langle \bd, \bz_x \rangle \\
+   &\leq \frac{1}{2} \| \bx + \bd - P_C(\bx) \|^2
+   - \frac{1}{2} \| \bx - P_C(\bx) \|^2
+   - \langle \bd, \bz_x \rangle.
+   $$
+1. Recall that for a norm induced by the inner product
+
+   $$
+   \| \ba + \bb \|^2 = \langle \ba + \bb, \ba + \bb \rangle
+   = \| \ba \|^2 + 2 \langle \ba, \bb \rangle + \| \bb \|^2.
+   $$
+1. Thus, 
+
+   $$
+   \| \bx + \bd - P_C(\bx)\|^2 
+   &= \| \bd + (\bx - P_C(\bx)) \|^2\\
+   &= \| \bd \|^2 + \| \bx - P_C(\bx)\|^2 + 
+   2 \langle \bd, \bx - P_C(\bx) \rangle.
+   $$
+1. Putting it back and simplifying, we obtain
+
+   $$
+   g_x(\bd) \leq \frac{1}{2}\| \bd \|^2 + \langle \bd, \bx - P_C(\bx)\rangle
+   - \langle \bd, \bz_x \rangle
+   = \frac{1}{2}\| \bd \|^2.
+   $$
+1. Proceeding similarly, we also have
+
+   $$
+   g_x(-\bd) \leq \frac{1}{2}\| \bd \|^2.
+   $$
+1. Since $\varphi_C$ is convex, hence $g_x$ is also convex.
+1. Thus,
+
+   $$
+   0 = g_x(\bzero) =  g_x \left (\frac{1}{2} \bd + \frac{1}{2} (-\bd)  \right )
+   \leq \frac{1}{2} g_x(\bd) + \frac{1}{2} g_x(-\bd).
+   $$
+1. Thus,
+
+   $$
+   g_x(\bd) \geq - g_x(-\bd) \geq - \frac{1}{2}\| \bd \|^2.
+   $$
+1. Combining, we have
+
+   $$
+   - \frac{1}{2}\| \bd \|^2 \leq g_x(\bd) \leq \frac{1}{2}\| \bd \|^2.
+   $$
+1. Or, in terms of absolute values.
+
+   $$
+   |g_x(\bd)| \leq \frac{1}{2}\| \bd \|^2.
+   $$
+1. Then, 
+
+   $$
+   \frac{|g_x(\bd)|}{\| \bd \|} \leq \frac{1}{2}\| \bd \|.
+   $$
+1. Thus, 
+
+   $$
+   \lim_{\bd \to \bzero} \frac{g_x(\bd)}{ \| \bd \|} = 0
+   $$
+1. Thus, $\bz_x = \bx - P_C(\bx)$ is indeed the gradient
+   of $\varphi_C$ at $\bx$.
+```
+
+
+
+
 
 The gradient of $\psi_C$ is given by:
 
@@ -474,13 +584,26 @@ $$
 $$
 
 
-```{div}
+```{prf:remark} Distance function and square distance function relation
+:label: rem-pocs-dist-sq-dist-relation
+
 We note that $\varphi_C = g \circ d_C$ where 
 $g(t) = \frac{1}{2}[t]_+^2$.
 
-We can get the subdifferentials for $d_C$ by applying the chain rule.
+$g$ is a nonincreasing real-valued convex differentiable function.
+We also note that 
 
-$d_C$ is differentiable at $\bx \notin C$.
+$$
+g'(t) = 2 [t]_+.
+$$
+```
+
+```{prf:theorem} Subdifferential of the distance function
+:label: res-pocs-subdiff-dist-func
+
+Let $C$ be a nonempty, closed and convex subset of $\VV$.
+The subdifferential of the distance function $d_C$ is given
+by
 
 $$
 \partial d_C (\bx) = \begin{cases} 
@@ -488,6 +611,48 @@ $$
 N_C(\bx) \cap B[\bzero, 1], & \bx \in C
 \end{cases}.
 $$
+$N_C(\bx)$ denotes the {prf:ref}`normal cone <def-cvx-normal-cone>`
+of all vectors normal to the set $C$ at a point $\bx \in C$.
+
+Since $\partial d_C$ is a singleton for $\bx \notin C$,
+hence $d_C$ is differentiable at $\bx \notin C$.
+```
+
+```{prf:proof}
+We can get the subdifferentials for $d_C$ by applying the chain rule.
+
+1. Recall that $\varphi_C = g \circ d_C$ where $g(t) = \frac{1}{2}[t]_+^2$.
+1. Thus, by subdifferential chain rule  ({prf:ref}`res-cvxf-subdiff-chain-rule`):
+
+   $$
+   \partial \varphi_C (\bx) = g'(d_C(\bx)) \partial d_C(\bx)
+   = [d_C(\bx)]_+ \partial d_C(\bx)
+   = d_C(\bx) \partial d_C(\bx).
+   $$
+   We used the fact that $d_C$ is nonnegative.
+1. Since $\varphi_C$ is differentiable, hence $\partial \varphi_C(\bx) = \{\bx - P_C(\bx) \}$.
+1. If $\bx \notin C$, then, $d_C(\bx) > 0$. 
+1. Thus, for $\bx \notin C$
+
+   $$
+   \partial d_C(\bx) = \left \{ \frac{\bx - P_C(\bx)}{d_C(\bx)} \right \}.
+   $$
+1. For $\bx \in C$, $d_C(\bx) = 0$.
+1. We need to show that $\partial d_C(\bx) = N_C(\bx) \cap B[\bzero, 1]$ in this case.
+1. Consider any $\bd \in \partial d_C(\bx)$.
+1. Then, by subgradient inequality
+
+   $$
+   d_C(\by) \geq d_C(\bx) + \langle \by - \bx, \bd \rangle
+   = \langle \by - \bx, \bd \rangle  \Forall \by \in \VV
+   $$
+   since $d_C(\bx) = 0$.
+1. Then, in particular, for any $\by \in C$
+   
+   $$
+   d_C(\by) = 0  \geq \langle \by - \bx, \bd \rangle.
+   $$
+1. Thus, $\bd \in N_C(\bx)$.
 ```
 
 ## Conjugates
