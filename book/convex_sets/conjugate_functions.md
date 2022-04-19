@@ -110,25 +110,67 @@ convex even if the original function is not
 convex or not closed.
 
 
-```{rubric} Proper functions
-```
-```{div}
-Let $f : \VV \to \RERL$ be a proper function. 
+```{prf:theorem} Properness of conjugates of proper convex functions
+:label: res-cvxf-proper-func-conjuate-proper
 
+Let $f : \VV \to \RERL$ be a proper convex function.
+Then, its conjugate $f^*$ is proper. 
+```
+
+```{prf:proof}
+We are given that $f$ is a proper convex function.
+We shall first show that $f*$ never attains $-\infty$.
+We shall then show that $f^*$ is not $\infty$ everywhere. 
+
+1. Since $f$ is proper, there exists $\ba \in \VV$ 
+   such that $f(\ba) < \infty$.
+1. By definition, for any $\by \in \VV^*$
+
+   $$
+   f^*(\by) \geq \langle \ba, \by \rangle - f(\ba).
+   $$
+1. The R.H.S. in this inequality is finite for every $\by \in \VV^*$.
+1. Thus, $f^*(\by) > -\infty$ for every $\by$.
+1. We also need to show that there exists $\by \in \VV^*$
+   such that $f^*(\by) < \infty$.
+1. Since $f$ is a proper convex function,
+   hence by {prf:ref}`res-cvxf-subdiff-exist-relint`,
+   there exists $\bx \in \dom f$ at which
+   the subdifferential $\partial f(\bx)$ is nonempty.
+1. Consider any $\by \in \partial f(\bx)$.
+1. By subgradient inequality {eq}`eq-cvxf-subgradient-inequality`,
+
+   $$
+   f(\bz) \geq f(\bx) + \langle \bz - \bx, \by \rangle
+   $$
+   for every $\bz \in \VV$.
+1. Thus,
+
+   $$
+   \langle \bz, \by \rangle - f(\bz)
+   \leq \langle \bx, \by \rangle - f(\bx)
+   \Forall \bz \in \VV.
+   $$
+1. The quantity $\langle \bx, \by \rangle - f(\bx)$ 
+   on the R.H.S. is finite and fixed.
+1. Taking supremum on the L.H.S., we obtain
+
+   $$
+   f^*(\by) = \sup_{\bz \in \VV} (\langle \bz, \by \rangle - f(\bz))
+   \leq \langle \bx, \by \rangle - f(\bx).
+   $$
+1. Thus, $f^*(\by) < \infty$.
+1. Thus, $f^*$ is a proper function.
+```
+
+```{div}
 Fenchel's inequality holds for any $\bx \in \VV$ and $\by \in \VV^*$:
 
 $$
 f(x) + f^*(y) \geq \langle y, x \rangle.
 $$
-```
 
-```{rubric} Proper convex functions
 ```
-```{div}
-Let $f : \VV \to \RERL$ be a proper convex function. 
-Then, the conjugate function $f^*$ is proper.    
-```
-
 
 ## Biconjugate
 
