@@ -2349,6 +2349,33 @@ holds true for every subset $A$ of $\VV$.
 ```
 
 
+Recall from {prf:ref}`def-ms-closed-function`
+that a real valued function is closed if
+every sublevel set is closed.
+
+```{prf:theorem} Real valued affine functions are closed
+:label: res-la-affine-finite-closed-func
+
+Let $(\VV, \| \cdot \|)$ be an $n$-dimensional
+normed linear space. 
+Let $T : \VV \to \RR$ be an affine function.
+Then, $T$ is closed.
+```
+
+```{prf:proof}
+
+1. By {prf:ref}`res-la-affine-finite-continuous-transformation`, 
+   $f$ is continuous.
+1. Let $a \in \RR$.
+1. The sublevel set for $a$ is given by
+   $S_a = \{ \bx \in \VV \ST T(\bx) \leq a \}$.
+1. This is nothing but $T^{-1} (-\infty, a]$.
+1. The set $(-\infty, a]$ is a closed set.
+1. Since $T$ is continuous, hence $T^{-1}(-\infty, a]$ is also closed.
+1. Thus, $S_a$ is closed for every $a \in \RR$.
+1. Thus, $T$ is closed.
+```
+
 ### Affine Homeomorphisms
 
 ```{prf:theorem}
