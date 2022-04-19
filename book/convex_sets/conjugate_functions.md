@@ -31,8 +31,6 @@ $$
 Note that the conjugate function is a mapping from the *dual* vector space
 to extended real line.
 
-### Indicator Functions
-
 Recall from {prf:ref}`def-cvxf-support-function` that
 the support function of a set $C$ is given by
 
@@ -79,18 +77,43 @@ Let $\by \in \VV*$ be arbitrary.
 ```
 
 
-```{rubric} Extended real valued functions
-```
-```{div}
-Let $f : \VV \to (-\infty, \infty]$ be an extended real valued function. 
+
+```{prf:theorem} Convexity and closedness
+:label: res-cvxf-conjugate-convex-closed
+
+Let $f : \VV \to \RERL$ be an extended real valued function. 
 Then, the conjugate function $f^*$ is closed and convex.    
 ```
+
+```{prf:proof}
+We note that for a fixed $\bx$, the function
+
+$$
+g_x(\by) =  \langle \bx, \by \rangle - f(\bx)
+$$
+is an affine function. 
+
+1. Due to {prf:ref}`res-la-affine-finite-closed-func`,
+   affine functions are closed.
+1. Due to {prf:ref}`res-cvxf-affine-functional-convex`,
+   affine functions are convex.
+1. Thus, $g_x$ is indeed convex and closed for every $\bx$.
+1. Thus, $f$ is a pointwise supremum of convex and closed functions.
+1. By {prf:ref}`res-ms-ptws-sup-closed-functions-closed`, $f$ is closed.
+1. By {prf:ref}`res-cvx-ptws-supremum`, $f$ is convex.
+1. Thus, $f$ is closed and convex.
+```
+
+The beauty of this result is the fact that
+The conjugate function is always closed and
+convex even if the original function is not
+convex or not closed.
 
 
 ```{rubric} Proper functions
 ```
 ```{div}
-Let $f : \VV \to (-\infty, \infty]$ be a proper function. 
+Let $f : \VV \to \RERL$ be a proper function. 
 
 Fenchel's inequality holds for any $\bx \in \VV$ and $\by \in \VV^*$:
 
@@ -102,7 +125,7 @@ $$
 ```{rubric} Proper convex functions
 ```
 ```{div}
-Let $f : \VV \to (-\infty, \infty]$ be a proper convex function. 
+Let $f : \VV \to \RERL$ be a proper convex function. 
 Then, the conjugate function $f^*$ is proper.    
 ```
 
@@ -112,8 +135,8 @@ Then, the conjugate function $f^*$ is proper.
 The conjugate of the conjugate is called the *biconjugate*. 
 
 ```{div}
-Let $f : \VV \to [-\infty, \infty]$ be an extended real valued function. 
-Its *biconjugate function* $f^{**}: \VV \to [-\infty, \infty]$ is given by
+Let $f : \VV \to \ERL$ be an extended real valued function. 
+Its *biconjugate function* $f^{**}: \VV \to \ERL$ is given by
 
 $$
 f^{**} (\bx) = \underset{\by \in \VV^*}{\sup} 
@@ -126,7 +149,7 @@ $$
 f(\bx) \geq f^{**} (\bx) \Forall x \in \VV. 
 $$
 
-Let $f : \VV \to [-\infty, \infty]$ be a proper, closed and convex function. 
+Let $f : \VV \to \ERL$ be a proper, closed and convex function. 
 Then,
 
 $$
@@ -181,12 +204,12 @@ $$
 ```{rubric} Separable functions
 ```
 ```{div}
-Let $g: \VV_1 \times \VV_2 \times \dots \times \VV_p \to (-\infty, \infty]$ be given by 
+Let $g: \VV_1 \times \VV_2 \times \dots \times \VV_p \to \RERL$ be given by 
 
 $$
 g(\bx_1, \bx_2, \dots, \bx_p) = \sum_{i=1}^p f_i (\bx_i)
 $$
-where $f_i : \VV_i \to (-\infty, \infty]$ are proper functions.
+where $f_i : \VV_i \to \RERL$ are proper functions.
 Then: 
 
 $$
@@ -198,10 +221,10 @@ $$
 ```{rubric} Invertible affine transformation
 ```
 ```{div}
-Let $f : \VV \to (-\infty, \infty]$ be an extended real valued function.
+Let $f : \VV \to \RERL$ be an extended real valued function.
 Let $\bAAA : \VV \to \VV$ be an invertible linear transformation.
 Let $\ba \in \VV$, $\bb \in \VV^*$ and $c \in \RR$. 
-Consider the function $g: \VV \to  (-\infty, \infty]$ given by:
+Consider the function $g: \VV \to  \RERL$ given by:
 
 $$
 g(\bx) \triangleq f\left (\bAAA (\bx - \ba) \right ) + \langle \bb, \bx \rangle + c
@@ -221,7 +244,7 @@ $$
 ```{rubric} Scaling
 ```
 ```{div}
-Let $f : \VV \to (-\infty, \infty]$ be an extended real valued function.
+Let $f : \VV \to \RERL$ be an extended real valued function.
 Let $\alpha > 0$.
 
 For $g(\bx) = \alpha f(\bx)$:
@@ -243,7 +266,7 @@ $$
 ```
 
 ```{div}
-Let $f,g : \VV \to (-\infty, \infty]$ be proper convex function.
+Let $f,g : \VV \to \RERL$ be proper convex function.
 If $\relint \dom f \cap \relint \dom g \neq \EmptySet$, then 
 
 $$
@@ -593,7 +616,7 @@ w.r.t. the dual norm $\| \cdot \|_*$.
 ```
 
 ```{div}
-Let $f : \VV \to (-\infty, \infty]$ be given by
+Let $f : \VV \to \RERL$ be given by
 
 $$
 f(\bx) \triangleq \begin{cases}
