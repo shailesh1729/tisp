@@ -821,6 +821,10 @@ Then, its conjugate is given by:
 $$
 f^*(\by) = \frac{1}{2}\| \by \|^2 - \frac{1}{2} d_C^2 (\by) = \psi_C(\by).
 $$
+
+Further, if $C$ is nonempty, closed and convex,
+then $f^{**} = f$.
+In other words, $\psi_C^* = f$.
 ```
 
 ```{prf:proof}
@@ -842,6 +846,12 @@ $$
 &= \psi_C(\by).
 $$
 The last result is due to {prf:ref}`res-pocs-sq-psi-c-expression`.
+
+
+If $C$ is nonempty, closed and convex, then,
+$f$ is proper closed and convex.
+Then, due to {prf:ref}`res-cvxf-biconjugate-proper-closed-convex`,
+the biconjugate of $f$ is $f$ itself.
 ```
 
 
