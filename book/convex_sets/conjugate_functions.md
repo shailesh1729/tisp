@@ -524,10 +524,12 @@ $$
 ## Conjugate Calculus
 
 
-```{rubric} Separable functions
-```
-```{div}
-Let $g: \VV_1 \times \VV_2 \times \dots \times \VV_p \to \RERL$ be given by 
+### Separable functions
+
+```{prf:theorem} Conjugate for separable functions
+:label: res-cvxf-conjugate-separable
+
+Let $g: \VV_1 \oplus \VV_2 \oplus \dots \oplus \VV_p \to \RERL$ be given by 
 
 $$
 g(\bx_1, \bx_2, \dots, \bx_p) = \sum_{i=1}^p f_i (\bx_i)
@@ -541,46 +543,125 @@ g^*(\by_1, \by_2, \dots, \by_p) =
 $$
 ```
 
-```{rubric} Invertible affine transformation
-```
-```{div}
-Let $f : \VV \to \RERL$ be an extended real valued function.
-Let $\bAAA : \VV \to \VV$ be an invertible linear transformation.
-Let $\ba \in \VV$, $\bb \in \VV^*$ and $c \in \RR$. 
-Consider the function $g: \VV \to  \RERL$ given by:
+```{prf:proof}
+Let $\by = (\by_1, \dots, \by_p) \in \VV^*_1 \oplus \dots \oplus \VV^*_p$.
+
+Then,
 
 $$
-g(\bx) \triangleq f\left (\bAAA (\bx - \ba) \right ) + \langle \bb, \bx \rangle + c
-\Forall \bx \in \VV.
+g^*(\by)
+&= g^*(\by_1, \dots, \by_p) \\
+&= \sup_{\bx_1, \dots, \bx_p} \{ 
+    \langle (\bx_1, \dots, \bx_p), (\by_1, \dots, \by_p) \rangle
+    - g(\bx_1, \dots, \bx_p)\} \\
+&= \sup_{\bx_1, \dots, \bx_p} \left \{
+    \sum_{i=1}^p \langle \bx_i, \by_i \rangle
+    - \sum_{i=1}^p f_i(\bx_i) \right \} \\
+&= \sum_{i=1}^p \sup_{\bx_i} \{ \langle \bx_i, \by_i \rangle - f_i(\bx_i) \} \\
+&= \sum_{i=1}^p f^*_i(\bx_i).
+$$
+```
+
+### Affine Transformations
+
+```{prf:theorem} Invertible affine transformation
+:label: res-cvxf-conjugate-affine-trans-inv
+
+Let $f : \VV \to \RERL$ be an extended real valued function.
+Let $\bAAA : \WW \to \VV$ be an invertible linear transformation.
+Let $\ba \in \WW$, $\bb \in \WW^*$ and $c \in \RR$. 
+Consider the function $g: \WW \to  \RERL$ given by:
+
+$$
+g(\bx) \triangleq f\left (\bAAA (\bx - \ba) \right ) + \langle \bx, \bb \rangle + c
+\Forall \bx \in \WW.
 $$
 
 Then the convex conjugate of $g$ is given by:
 
 $$
 g^*(\by) = f^*\left ((\bAAA^T)^{-1} (\by - \bb) \right ) 
-+ \langle \ba, \by \rangle 
-- c - \langle \ba, \bb \rangle
-\Forall \by \in \VV^*.
++ \langle \by, \ba \rangle 
+- \langle \bb, \ba \rangle - c
+\Forall \by \in \WW^*.
 $$
 ```
 
-```{rubric} Scaling
+```{prf:proof}
+We introduce a variable $\bz = \bAAA (\bx - \ba)$.
+1. We can see that $\bz  = \bAAA \bx - \bAAA \ba$.
+1. Thus, $\bx \mapsto \bz$ is an affine transformation.
+1. Since $\bAAA$ is invertible, hence this affine transformation is also invertible.
+1. Also, by invertibility of $\bAAA$, $\bx = \bAAA^{-1}(\bz) + \ba$.
+
+Now, for any $\by \in \WW^*$, 
+
+$$
+g^*(\by) &= \sup_{\bx \in \WW} \{ \langle \bx, \by \rangle - g(\bx) \} \\
+&=  \sup_{\bx } \{ \langle \bx, \by \rangle - 
+f\left (\bAAA (\bx - \ba) \right ) - \langle \bx, \bb \rangle - c \} \\
+&=  \sup_{\bz} \{ \langle \bAAA^{-1}(\bz) + \ba, \by \rangle - 
+f (\bz) - \langle \bAAA^{-1}(\bz) + \ba, \bb \rangle - c \} \\
+&=  \sup_{\bz} \{ \langle \bAAA^{-1}(\bz), \by - \bb \rangle - 
+f (\bz) + \langle \ba, \by \rangle - \langle \ba, \bb \rangle - c \} \\
+&=  \sup_{\bz} \{ \langle \bz, (\bAAA^{-1})^T(\by - \bb) \rangle - 
+f (\bz) + \langle \ba, \by \rangle - \langle \ba, \bb \rangle - c \} \\
+&= f^* \left ( (\bAAA^{-1})^T(\by - \bb) \right )
++ \langle \ba, \by \rangle - \langle \ba, \bb \rangle - c\\
+&= f^* \left ( (\bAAA^T)^{-1}(\by - \bb) \right )
++ \langle \by, \ba \rangle - \langle \bb, \ba \rangle - c\\
+$$
+
+In this derivation, we have used following facts
+
+1. $(\bAAA^T)^{-1} = (\bAAA^{-1})^T$.
+1. $\langle \bx, \by \rangle = \langle \by, \bx \rangle$.
+1. $\langle \bA (\bx), \by \rangle = \langle \bx, \bA^T (\by) \rangle$.
 ```
-```{div}
+
+
+### Scaling
+
+```{prf:theorem} Scaling
+:label: res-cvxf-conjugate-scaling
+
 Let $f : \VV \to \RERL$ be an extended real valued function.
 Let $\alpha > 0$.
 
-For $g(\bx) = \alpha f(\bx)$:
+1. The conjugate of the function $g(\bx) = \alpha f(\bx)$ is given by:
+
+   $$
+   g^*(\by) = \alpha f^*\left (\frac{\by}{\alpha} \right ) \Forall \by \in \VV^*.
+   $$
+1. The conjugate of the function $h(\bx) = \alpha f(\frac{\bx}{\alpha})$ is given by:
+
+   $$
+   h^*(\by) = \alpha f^*(\by) \Forall \by \in \VV^*.
+   $$ 
+```
+
+```{prf:proof}
+(1) For any $\by \in \VV^*$
 
 $$
-g^*(\by) = \alpha f^*\left (\frac{\by}{\alpha} \right ) \Forall \by \in \VV^*.
+g^*(\by) &= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - g(\bx) \} \\
+&= \sup_{\bx} \{ \langle \bx, \by \rangle - \alpha f(\bx) \} \\
+&= \alpha \sup_{\bx} \{ \langle \bx, \frac{\by}{\alpha} \rangle - \alpha f(\bx) \} \\
+&= \alpha f^*\left ( \frac{\by}{\alpha} \right ).
 $$
 
-For $h(\bx) = \alpha f(\frac{\bx}{\alpha})$:
+(2) Similarly, for any $\by \in \VV^*$
 
 $$
-h^*(\by) = \alpha f^*(\by) \Forall \by \in \VV^*.
-$$ 
+h^*(\by) &= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - h(\bx) \} & \\
+&= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - \alpha f(\frac{\bx}{\alpha}) \} & s\\
+&= \alpha \sup_{\bx \in \VV} 
+\left \{ \left \langle \frac{\bx}{\alpha}, \by \right \rangle 
+- f\left (\frac{\bx}{\alpha} \right ) \right \} & \\
+&= \alpha \sup_{\bz \in \VV} \{ \langle \bz, \by \rangle - f(\bz) \} 
+    & \bz \triangleq \frac{\bx}{\alpha} \\
+&= \alpha f^*(\by).
+$$
 ```
 
 ## Useful Results
