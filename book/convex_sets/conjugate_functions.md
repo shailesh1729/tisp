@@ -406,6 +406,8 @@ holds true when $f$ is proper, closed and convex.
 1. Thus, $f^{**}(\bx) \geq f(\bx)$ must be true for every $\bx \in \dom f$.
 ```
 
+### Indicator and Support Functions
+
 ```{prf:example} Indicator and support functions
 :label: ex-cvxf-biconjucate-indicator-support
 
@@ -476,9 +478,11 @@ $$
 $$
 ```
 
-```{rubric} Max function
-```
-```{div}
+### Max Function
+
+```{prf:example} Conjugate for max function
+:label: ex-cvxf-conjugate-max-function
+
 Let $f : \RR^n \to \RR$ be given by
 
 $$
@@ -492,8 +496,25 @@ f(\bx) = \underset{\by \in \Delta_n}{\sup} \langle \by, \bx \rangle
 = \sigma_{\Delta_n} (x)
 $$
 where $\Delta_n$ is the unit simplex in $\RR^n$.
+1. Recall from {prf:ref}`def-convex-unit-simplex` that
+   
+   $$
+    \Delta_n \triangleq \{\bx \in \RR^n 
+        \ST \langle \bx, \bone \rangle = 1, \bx \succeq \bzero \}.
+   $$
+1. In other words, for every $\by \in \Delta_n$,
+   $y_i \geq 0$ and $\sum y_i = 1$.
+1. $\langle \by, \bx \rangle = \sum_{i=1}^n y_i x_i$.
+1. For $\by \in \Delta_n$, this represents the weighted average
+   of the components of $\bx$.
+1. The supremum value of the weighted average occurs when 
+   $y_i$ corresponding to the largest component of $\bx$ is 1
+   and all remaining $y_j$ are 0.
+1. This provides the justification of the formula above.
 
-The conjugate of max function $f$ is 
+We recall that $\Delta_n$ is a nonempty, closed and convex set.
+Then, following {prf:ref}`ex-cvxf-biconjucate-indicator-support`,
+the conjugate of max function $f$ is 
 
 $$
 f^* = \delta_{\Delta_n}.
