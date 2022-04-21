@@ -747,18 +747,38 @@ If $f$ is closed, then 1 and 2 are equivalent to:
 ## 1-dim Functions
 
 
-```{rubric} Exponent
-```
+```{prf:example} Exponent
+:label: ex-cvxf-conjugate-exponent
 
-```{div}
-$ f : \RR \to \RR$, $f(x) = e^x$.
+Let $f : \RR \to \RR$, be given by $f(x) = e^x$.
+Then, the conjugate is given by:
 
 $$
-f^*(x) = \begin{cases}
-y \log y - y & y \geq 0 \\
-\infty & \text{ otherwise }
+f^*(y) = \begin{cases}
+y \ln y - y, & y \geq 0, \\
+\infty, & \text{ otherwise }.
 \end{cases}
 $$
+
+To see this, we proceed as follows:
+
+$$
+f^*(y) &= \sup_{x \in \RR} \{ x y - f(x) \} \\
+&= \sup_{x \in \RR} \{ x y - e^x \}.
+$$
+
+1. If $y < 0$, then the supremum value is $\infty$
+   as $x \to -\infty$.
+1. If $y = 0$, then the supremum value is $0$ 
+   as $x \to -\infty$.
+1. If $y > 0$, then the unique maximizer is obtained
+   by differentiating $x y - e^x$ w.r.t. $x$
+   giving us $y = e^{\tilde{x}}$ or $\tilde{x} = \ln y$.
+1. Then, the supremum value for $y > 0$ is $y \ln y - y$.
+1. Under the convention that $y \ln y = 0$ when $y = 0$,
+   we see that $y \ln y - y = 0$ for $y = 0$.
+1. Thus, $f^*(y) = y \ln y - y$ for $y \geq 0$.
+1. $f^*(y) = \infty$ otherwise. 
 ```
 
 ```{prf:example} Negative log
