@@ -800,10 +800,8 @@ $$
 1. The supremum value is thus $-1 - \ln(-y)$.
 ```
 
-```{rubric} Hinge loss
-```
-
-```{div}
+```{prf:example} Hinge loss
+:label: ex-cvxf-conjugate-hinge-loss
 
 Let $f : \RR \to \RR$ be given by:
 
@@ -814,8 +812,53 @@ $$
 Then, the conjugate is:
 
 $$
-f^*(y) = y + \delta_{[-1,0]} (y) \Forall y \in \RR.
+f^*(y) = y + I_{[-1,0]} (y) \Forall y \in \RR
 $$
+where $I$ is the indicator function.
+
+To see this, note that
+
+$$
+f^*(y) &= \sup_{x} \{ xy - f(x) \} \\
+&= \sup_{x} [ xy - \max \{1 - x, 0 \} ] \\
+&= \sup_{x} [ \min \{xy - (1-x), xy \} ] \\
+&= \sup_{x} [ \min \{(1+y)x - 1, yx \} ].
+$$
+
+1. The terms $(1+y)x - 1$ and $yx$ are affine in $x$
+   representing straight lines.
+1. The two lines intersect at 
+
+   $$
+   & (1+y)x - 1 = y x \\
+   & \implies x - 1 = 0 \\
+   & \implies x = 1.
+   $$
+1. For $x < 1$,  $(1+y)x - 1 < y x$.
+1. For $x > 1$, $(1+y)x - 1 > y x$.
+1. Thus, the function $ \min \{(1+y)x - 1, y x \}$ is a piece-wise linear function
+   of $x$.
+
+   $$
+   \min \{(1+y)x - 1, y x \} = \begin{cases}
+   (1+y)x - 1, & x < 1 \\
+   y x, & x \geq 1.
+   \end{cases}
+   $$
+1. The first piece is a line $(1+y)x - 1$ with slope $1+y$ over $x \in (-\infty, 1]$.
+1. The second piece is a line $y x$ with slope $y$ over $x \in [1, \infty)$.
+1. A finite supremum of this piecewise linear function exists if
+   the slope of the left piece is nonnegative and the slope
+   of the right piece is nonpositive. 
+1. In other words, $1 + y \geq 0$  and $y \leq 0$. 
+1. Thus, a finite supremum exists only for $y \in [-1, 0]$.
+1. The supremum value for this range of $y$ values is attained at $x=1$
+   (where the two pieces intersect) and the supremum value equals $y$. 
+1. For all $y \notin [-1, 0]$ the supremum is infinite.
+1. Thus, $\dom f^* = [-1,0]$ and $f^*(y) = y \Forall y \in \dom f^*$.
+1. $f^*(y) = \infty \Forall y \notin [-1,0]$.
+1. This is succinctly represented in the expression for $f^*$ with the
+   help of an indicator function above.
 ```
 
 ```{rubric} Power by p
