@@ -761,15 +761,14 @@ y \log y - y & y \geq 0 \\
 $$
 ```
 
-```{rubric} Negative log
-```
+```{prf:example} Negative log
+:label: ex-cvxf-conjugate-negative-log
 
-```{div}
-$ f : \RR \to (-\infty,\infty]$ be given by: 
+Let $f : \RR \to (-\infty,\infty]$ be given by: 
 
 $$
 f(x) = \begin{cases}
-- \log(x) & x > 0 \\
+- \ln (x) & x > 0 \\
 \infty &  x \leq 0
 \end{cases}.
 $$
@@ -778,10 +777,27 @@ Then, the conjugate is:
 
 $$
 f^*(y) = \begin{cases}
--1 - \log (-y) & y < 0 \\
+-1 - \ln (-y) & y < 0 \\
 \infty & y \geq 0
 \end{cases}.
 $$
+
+To show this, we proceed as follows:
+
+$$
+f^*(y) &= \sup_{x > 0} \{ xy - f(x) \} \\
+&= \sup_{x > 0} \{ xy + \ln (x) \}. 
+$$
+
+1. If $y \geq 0$, then the supremum value is $\infty$.
+1. If $y < 0$, then we can differentiate the expression
+   $xy + \ln (x)$ and set it to 0 to obtain the optimal solution.
+
+   $$
+   \frac{d}{d x} (x y + \ln(x)) = y + \frac{1}{x}.
+   $$
+1. Setting it to zero, we get $\tilde{x} = - \frac{1}{y}$.
+1. The supremum value is thus $-1 - \ln(-y)$.
 ```
 
 ```{rubric} Hinge loss
