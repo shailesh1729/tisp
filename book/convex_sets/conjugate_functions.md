@@ -881,32 +881,74 @@ $$
    help of an indicator function above.
 ```
 
-```{rubric} Power by p
-```
 
-```{div}
+```{prf:example} p-th power of absolute value for $p > 1$.
+:label: ex-cvxf-conjugate-abs-pth-power
 
-Let for some $p > 1$, $f : \RR \to \RR$ be given by:
+Let for some $p > 1$, the function $f : \RR \to \RR$ be given by:
 
 $$
 f(x) = \frac{1}{p} | x |^p
 $$
 
-Then, the conjugate is:
+Then, its conjugate is:
 
 $$
-f^*(y) = \frac{1}{q} | y |^q \Forall y \in \RR
+f^*(y) = \frac{1}{q} | y |^q \quad \Forall y \in \RR
 $$
 
-where $q > 1$ satisfying: 
+where $q > 1$ is the conjugate exponent satisfying: 
 
 $$
 \frac{1}{p} + \frac{1}{q} = 1.
 $$
+
+To see this, we proceed as follows:
+
+1. The conjugate is given by
+
+   $$
+   f^*(y) = \sup_{x} \{ x y - f (x) \}
+   = \sup_x \{x y -  \frac{1}{p} | x |^p \}.
+   $$
+1. The concave function $xy - \frac{1}{p} | x |^p$ is differentiable.
+
+   $$
+   \frac{d}{d x} (xy - \frac{1}{p} | x |^p) = y - \sgn (x) | x |^{p - 1}.
+   $$
+1. Setting the derivative to $0$, the points at which the derivative
+   vanishes are given by
+
+   $$
+   y - \sgn (\tilde{x}) | \tilde{x} |^{p - 1} = 0.
+   $$
+1. We can rewrite this as 
+
+   $$
+   y = \sgn(y) | y | = \sgn (\tilde{x}) | \tilde{x} |^{p - 1}.
+   $$
+1. Therefore, $\sgn (y) = \sgn (\tilde{x})$ and
+   $| \tilde{x} |^{p - 1} = | y|$.
+1. Thus, 
+
+   $$
+   \tilde{x} = \sgn (\tilde{x}) |\tilde{x} | = \sgn (y)| y|^{\frac{1}{p - 1}}.
+   $$
+1. Accordingly, the supremum value at $\tilde{x}$ is
+
+   $$
+   f^*(y) &= \tilde{x} y - \frac{1}{p} | \tilde{x} |^p \\
+   &= |y|^{1 + \frac{1}{p - 1}} - \frac{1}{p}| y|^{\frac{p}{p - 1}} \\
+   &= |y|^{\frac{p}{p - 1}} - \frac{1}{p}| y|^{\frac{p}{p - 1}} \\
+   &= \left (1 - \frac{1}{p} \right ) | y|^{\frac{p}{p - 1}} \\
+   &= \frac{1}{q} | y|^q
+   $$
+   where $q = \frac{p}{p -1}$ is the conjugate exponent of $p$.
 ```
 
 
-```{div}
+```{prf:example} p-th power of absolute value for $0 < p < 1$
+:label: ex-cvxf-conjugate-abs-pth-power-lt-1
 
 Let for some $0 < p < 1$, $f : \RR \to \RR$ be given by:
 
@@ -917,7 +959,7 @@ f(x) = \begin{cases}
 \end{cases}.
 $$
 
-Then, the conjugate is:
+Then, its conjugate is:
 
 $$
 f^*(y) = \begin{cases}
@@ -926,11 +968,41 @@ f^*(y) = \begin{cases}
 \end{cases}
 $$
 
-where $q < 0$ satisfying: 
+where $q < 0$ is a negative number satisfying: 
 
 $$
 \frac{1}{p} + \frac{1}{q} = 1.
 $$
+
+To see this, we proceed as follows:
+
+1. The conjugate is given by
+
+   $$
+   f^*(y) = \sup_{x} \{ x y - f (x) \}
+   = \sup_{x \geq 0} \{x y +  \frac{1}{p} x^p \}.
+   $$
+1. Define $ g : \RR \to \RR$ with $\dom g = \RR_+$
+
+   $$
+   g(x) \triangleq x y +  \frac{1}{p} x ^p.
+   $$
+1. When $y \geq 0$,  then $g(x) \to \infty$ as $x \to \infty$.
+1. When $y < 0$, then $g'(x) = 0$ at $x = \tilde{x} = (-y)^{\frac{1}{p -1}}$.
+1. We note that $g$ is a concave function for $y < 0$.
+1. Thus, $g$ achieves its supremum at $\tilde{x}$.
+1. The supremum value is given by
+
+   $$
+   f^*(y) &= g(\tilde{x}) \\
+   &= \tilde{x} y +  \frac{1}{p} \tilde{x}^p \\
+   &= (-y)^{\frac{1}{p -1}} y + \frac{1}{p} (-y)^{\frac{p}{p -1}} \\
+   &= - (-y)^{\frac{p}{p -1}} + \frac{1}{p} (-y)^{\frac{p}{p -1}} \\
+   &= - \left (1 - \frac{1}{p} \right ) (-y)^{\frac{p}{p -1}} \\
+   &= - \frac{1}{q} (-y)^{q}
+   $$
+   where $q = \frac{p}{p -1}$.
+1. The domain of $f^*$ is $y < 0$.
 ```
 
 ## n-dim functions
