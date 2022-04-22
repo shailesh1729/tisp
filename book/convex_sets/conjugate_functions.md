@@ -297,7 +297,7 @@ holds true when $f$ is proper, closed and convex.
    $$
    \langle (\bx, s), (\by, t) \rangle
    \triangleq \langle \bx, \by \rangle + st.
-   $$
+   $$ s
 1. Since $f$ is proper, hence $\epi f$ is nonempty.
 1. Since $f$ is closed, hence $\epi f$ is closed.
 1. Since $f$ is convex, hence $\epi f$ is convex.
@@ -747,8 +747,8 @@ If $f$ is closed, then 1 and 2 are equivalent to:
 ## 1-dim Functions
 
 
-```{prf:example} Exponent
-:label: ex-cvxf-conjugate-exponent
+```{prf:theorem} Exponent
+:label: res-cvxf-conjugate-exponent
 
 Let $f : \RR \to \RR$, be given by $f(x) = e^x$.
 Then, the conjugate is given by:
@@ -760,6 +760,10 @@ y \ln y - y, & y \geq 0, \\
 \end{cases}
 $$
 
+```
+
+
+```{prf:proof}
 To see this, we proceed as follows:
 
 $$
@@ -781,8 +785,8 @@ $$
 1. $f^*(y) = \infty$ otherwise. 
 ```
 
-```{prf:example} Negative log
-:label: ex-cvxf-conjugate-negative-log
+```{prf:theorem} Negative log
+:label: res-cvxf-conjugate-negative-log
 
 Let $f : \RR \to (-\infty,\infty]$ be given by: 
 
@@ -801,7 +805,10 @@ f^*(y) = \begin{cases}
 \infty & y \geq 0
 \end{cases}.
 $$
+```
 
+
+```{prf:proof}
 To show this, we proceed as follows:
 
 $$
@@ -820,8 +827,8 @@ $$
 1. The supremum value is thus $-1 - \ln(-y)$.
 ```
 
-```{prf:example} Hinge loss
-:label: ex-cvxf-conjugate-hinge-loss
+```{prf:theorem} Hinge loss
+:label: res-cvxf-conjugate-hinge-loss
 
 Let $f : \RR \to \RR$ be given by:
 
@@ -835,7 +842,10 @@ $$
 f^*(y) = y + I_{[-1,0]} (y) \Forall y \in \RR
 $$
 where $I$ is the indicator function.
+```
 
+
+```{prf:proof}
 To see this, note that
 
 $$
@@ -882,8 +892,8 @@ $$
 ```
 
 
-```{prf:example} p-th power of absolute value for $p > 1$.
-:label: ex-cvxf-conjugate-abs-pth-power
+```{prf:theorem} p-th power of absolute value for $p > 1$.
+:label: res-cvxf-conjugate-abs-pth-power
 
 Let for some $p > 1$, the function $f : \RR \to \RR$ be given by:
 
@@ -902,7 +912,10 @@ where $q > 1$ is the conjugate exponent satisfying:
 $$
 \frac{1}{p} + \frac{1}{q} = 1.
 $$
+```
 
+
+```{prf:proof}
 To see this, we proceed as follows:
 
 1. The conjugate is given by
@@ -947,8 +960,8 @@ To see this, we proceed as follows:
 ```
 
 
-```{prf:example} p-th power of absolute value for $0 < p < 1$
-:label: ex-cvxf-conjugate-abs-pth-power-lt-1
+```{prf:theorem} p-th power of absolute value for $0 < p < 1$
+:label: res-cvxf-conjugate-abs-pth-power-lt-1
 
 Let for some $0 < p < 1$, $f : \RR \to \RR$ be given by:
 
@@ -973,7 +986,10 @@ where $q < 0$ is a negative number satisfying:
 $$
 \frac{1}{p} + \frac{1}{q} = 1.
 $$
+```
 
+
+```{prf:proof}
 To see this, we proceed as follows:
 
 1. The conjugate is given by
@@ -1009,10 +1025,9 @@ To see this, we proceed as follows:
 
 
 
-```{rubric} Strictly convex quadratic
-```
+```{prf:theorem} Strictly convex quadratic
+:label: res-cvxf-conjugate-strictly-convex-quadratic
 
-```{div}
 Let $f : \RR^n \to \RR$ be given by:
 
 $$
@@ -1029,10 +1044,22 @@ $$
 ```
 
 
-```{rubric} Convex quadratic
+```{prf:proof}
+We proceed as follows. For any $\by \in \RR^n$,
+
+$$
+f^*(\by) &= \sup_{\bx} \{ \langle \bx, \by \rangle - f(\bx) \} \\
+&= \sup_{\bx} \{ \by^T \bx - \frac{1}{2} \bx^T \bA \bx - \bb^T \bx - c \} \\
+&= \sup_{\bx} \{ - \frac{1}{2} \bx^T \bA \bx - (\bb - \by)^T \bx - c \}.
+$$
+1. The supremum of the quadratic above is achieved at $\bx = \bA^{-1}(\by - \bb)$.
+1. The supremum value is $\frac{1}{2}(\by - \bb)^T \bA^{-1}(\by -\bb) - c$.
 ```
 
-```{div}
+
+```{prf:theorem} Convex quadratic
+:label: res-cvxf-conjugate-convex-quadratic
+
 Let $f : \RR^n \to \RR$ be given by:
 
 $$
@@ -1045,11 +1072,69 @@ Then, the conjugate is:
 
 $$
 f^*(\by) = \begin{cases}
-\frac{1}{2}(\by - \bb)^T \bA^{\dag}(\by -\bb) - c & \by \in \bb + \range (\bA)\\
-\infty & \text{ otherwise }
-\end{cases}.
+\frac{1}{2}(\by - \bb)^T \bA^{\dag}(\by -\bb) - c & \by \in \bb + \range \bA,\\
+\infty & \text{ otherwise }.
+\end{cases}
 $$
 ```
+
+```{prf:proof}
+In this case, $\bA$ is not positive definite but only semidefinite.
+
+For any $\by \in \RR^n$,
+
+$$
+f^*(\by) &= \sup_{\bx} \{ \langle \bx, \by \rangle - f(\bx) \} \\
+&= \sup_{\bx} \{ \by^T \bx - \frac{1}{2} \bx^T \bA \bx - \bb^T \bx - c \} \\
+&= \sup_{\bx} \{ - \frac{1}{2} \bx^T \bA \bx + (\by - \bb)^T \bx - c \}.
+$$
+
+1. Define $g : \RR^n \to \RR$ as
+
+   $$
+   g(\bx) = - \frac{1}{2} \bx^T \bA \bx + (\by - \bb)^T \bx - c.
+   $$
+1. Then,
+
+   $$
+   f^*(\by) = \sup_{\bx} g(\bx).
+   $$
+1. The gradient of $g$ is given by $\nabla g(\bx) = - \bA \bx + (\by - \bb)$.
+1. The maximizers of $g$ are at points where the gradient vanishes, given by
+   $\bA \bx = \by - \bb$.
+1. This system has a solution if and only if $\by \in \range \bA + \bb$.
+1. If $\by \in \range \bA + \bb$, we can choose one of the solutions
+   to the zero gradient equation above. 
+1. One possible solution is given by the Moore-Penrose pseudo inverse of $\bA$,
+   namely $\tilde{\bx} = \bA^{\dag} (\by - \bb)$.
+1. For this solution,
+ 
+   $$
+   f^*(\by) &= - \frac{1}{2} \tilde{\bx}^T \bA \tilde{\bx} + (\by - \bb)^T \tilde{\bx} - c \\
+   &= - \frac{1}{2} (\by - \bb)^T \bA^{\dag} \bA \bA^{\dag} (\by - \bb) + (\by - \bb)^T \bA^{\dag} (\by - \bb) - c\\
+   &=  \frac{1}{2} (\by - \bb)^T \bA^{\dag} (\by - \bb) - c.
+   $$
+   We used the fact that $(\bA^{\dag})^T = \bA^{\dag}$ since $\bA$ is symmetric.
+   Also, $\bA^{\dag} \bA \bA^{\dag} = \bA^{\dag}$.
+1. We now consider the case where $\by \notin \range \bA + \bb$.
+1. This is same as $\by - \bb \notin \range \bA$.
+1. Recall that $\range \bA = (\nullspace \bA)^{\perp}$.
+1. Thus, $\by - \bb \notin (\nullspace \bA)^{\perp}$.
+1. Thus, there exists a vector $\bv \in \nullspace \bA$ such that
+   $(\by - \bb)^T \bv > 0$.
+1. Now, for any $t \in \RR$, 
+
+   $$
+   g(t \bv) &= - \frac{1}{2} \bx^T \bA \bx + (\by - \bb)^T \bx - c \\
+   &= - \frac{t^2}{2} \bv^T \bA \bv + t (\by - \bb)^T \bv - c \\
+   &= t (\by - \bb)^T \bv - c
+   $$
+   since $\bA \bv = \bzero$.
+1. Since $(\by - \bb)^T \bv > 0$, hence $g(t \bv) \to \infty$ as $t \to \infty$.
+1. Thus,  $f^*(\by) = \sup_{\bx} g(\bx) = \infty$ if $\by \notin \range \bA + \bb$.
+1. Thus, $\dom f^* = \range \bA + \bb$.
+```
+
 
 ```{rubric} Negative entropy
 ```
