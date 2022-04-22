@@ -1136,17 +1136,16 @@ $$
 ```
 
 
-```{rubric} Negative entropy
-```
+```{prf:theorem} Negative entropy
+:label: res-cvxf-conjugate-negative-entropy
 
-```{div}
 Let $f : \RR^n \to \RR$ be given by:
 
 $$
 f(\bx) \triangleq \begin{cases}
-\sum_{i=1}^n x_i \log (x_i) & \bx \succeq \bzero\\
-\infty & \text{ otherwise }
-\end{cases}.
+\sum_{i=1}^n x_i \ln (x_i) & \bx \succeq \bzero,\\
+\infty & \text{ otherwise }.
+\end{cases}
 $$
 
 Then, the conjugate is:
@@ -1155,6 +1154,48 @@ $$
 f^*(\by) = \sum_{i=1}^n e^{y_i - 1}.
 $$
 ```
+```{prf:proof}
+We note that the function $f(\bx)$ is separable over
+the components of $\bx$. Thus, it is enough to
+compute the conjugate of the scalar function
+$g : \RR \to \RR$ defined as
+
+$$
+g(t) = \begin{cases} 
+t \ln t & \Forall t \geq 0, \\
+\infty & \text{ otherwise }.
+\end{cases}
+$$
+We can then apply {prf:ref}`res-cvxf-conjugate-separable`
+to compute the conjugate of $f$.
+
+Now,
+
+$$
+g^*(s) &= \sup_{t} \{ st - g(t) \} \\
+&= \sup_{t \geq 0} \{ st - t \ln t \}.
+$$
+
+It is easy to see that the supremum of the expression
+$st - t \ln t$ is achieved at $t = e^{s - 1}$.
+Thus,
+
+$$
+g^*(s) = s e^{s - 1} - (s - 1) e^{s - 1} = e^{s - 1}.
+$$
+
+Finally,
+
+$$
+f(\bx) = \sum_{i=1}^n g(x_i).
+$$
+Thus, due to {prf:ref}`res-cvxf-conjugate-separable`,
+
+$$
+f^*(\by) = \sum_{i=1}^n g^* (y_i) = \sum_{i=1}^n e^{y_i - 1}.
+$$
+```
+
 
 ```{rubric} Negative sum of logs
 ```
