@@ -1197,27 +1197,67 @@ $$
 ```
 
 
-```{rubric} Negative sum of logs
-```
+```{prf:theorem} Negative sum of logs
+:label: res-cvx-conjugate-neg-sum-logs
 
-```{div}
 Let $f : \RR^n \to \RR$ be given by:
 
 $$
 f(\bx) \triangleq \begin{cases}
-- \sum_{i=1}^n \log (x_i) & \bx \succ \bzero\\
-\infty & \text{ otherwise }
-\end{cases}.
+- \sum_{i=1}^n \ln (x_i) & \bx \succ \bzero,\\
+\infty & \text{ otherwise }.
+\end{cases}
 $$
 
 Then, the conjugate is:
 
 $$
 f^*(\by) =  \begin{cases}
-- n - \sum_{i=1}^n \log(-y_i) & \by \prec \bzero \\
-\infty & \text{ otherwise}
+- n - \sum_{i=1}^n \ln(-y_i) & \by \prec \bzero, \\
+\infty & \text{ otherwise}.
+\end{cases}
+$$
+```
+
+```{prf:proof}
+$f$ is separable. Define $g : \RR \to \RR$ as
+
+$$
+g(t) = \begin{cases}
+- \ln t & t > 0, \\
+\infty & t \leq 0.
+\end{cases}
+$$
+
+Then,
+
+$$
+f(\bx)  = \sum_{i=1}^n g(x_i).
+$$
+
+By {prf:ref}`res-cvxf-conjugate-negative-log`,
+
+$$
+g^*(y) = \begin{cases}
+-1 - \ln (-y) & y < 0 \\
+\infty & y \geq 0
 \end{cases}.
 $$
+
+Due to {prf:ref}`res-cvxf-conjugate-separable`,
+
+$$
+f^*(\by) = \sum_{i=1}^n g^*(y_i).
+$$
+
+For $\by \prec \bzero$
+
+$$
+f^*(\by) = \sum_{i=1}^n  (- 1 - \ln (-y_i))
+= -n - \sum_{i=1}^n \ln (-y_i).
+$$
+
+For $\by \succeq \bzero$, one of the $g^*(y_i) = \infty$. Hence, $f^*(\by) = \infty$.
 ```
 
 
@@ -1229,7 +1269,7 @@ Let $f : \RR^n \to \RR$ be given by:
 
 $$
 f(\bx) \triangleq \begin{cases}
-\sum_{i=1}^n x_i \log (x_i) & \bx \in \Delta_n\\
+\sum_{i=1}^n x_i \ln (x_i) & \bx \in \Delta_n\\
 \infty & \text{ otherwise }
 \end{cases}.
 $$
@@ -1238,7 +1278,7 @@ $$
 The conjugate is:
 
 $$
-f^*(\by) =  \log \left ( \sum_{j=1}^n e^{y_j}
+f^*(\by) =  \ln \left ( \sum_{j=1}^n e^{y_j}
     \right )
 $$
 ```
@@ -1250,7 +1290,7 @@ $$
 Let $f : \RR^n \to \RR$ be given by:
 
 $$
-f(\bx) \triangleq \log \left ( \sum_{j=1}^n e^{x_j}
+f(\bx) \triangleq \ln \left ( \sum_{j=1}^n e^{x_j}
     \right ).
 $$
 
@@ -1258,7 +1298,7 @@ The conjugate is:
 
 $$
 f^*(\by) =  \begin{cases}
-\sum_{i=1}^n y_i \log (y_i) & \by \in \Delta_n\\
+\sum_{i=1}^n y_i \ln (y_i) & \by \in \Delta_n\\
 \infty & \text{ otherwise }
 \end{cases}.
 $$
