@@ -2441,7 +2441,11 @@ For a complete specification of the subdifferential of $g$,
 see {prf:ref}`ex-cvxf-subdiff-abs-func-l2` below.
 ```
 
-```{div}
+
+```{prf:example} Subdifferential of $\ell_1$ norm 
+:label: ex-cvxf-subdiff-l1-norm
+
+Let $f : \RR^n \to \RR$ be given by $f(\bx) = \| \bx \|_1$.
 We can write $f$ as a sum of $n$ functions
 
 $$
@@ -2451,57 +2455,90 @@ $$
 where 
 
 $$
-f_i (x) = | x_i |.
+f_i (\bx) = | x_i |.
 $$
 
-The subdifferential set of $f_i$ is given by:
+
+Let $g (x) = | x |$. Then 
 
 $$
-\partial f_i (x) = \begin{cases} 
-\{ \sgn (x_i) e_i \} & \text{for} & x_i \neq 0 \\
-[-e_i, e_i] & \text{for} & x_i  = 0
+f_i (\bx) = | x_i | = | \be_i^T  \bx | = g(\be_i^T  \bx).
+$$
+
+Due to affine transformation rule ({prf:ref}`res-cvxf-subdiff-strong-rule-affine`),
+
+$$
+\partial f_i (\bx) = (\partial g(\be_i^T  \bx)) \be_i 
+= (\partial g(x_i)) \be_i.
+$$
+The subdifferential of the absolute value function $g$
+is described in {prf:ref}`ex-cvxf-subdiff-abs-func-l2` below.
+
+
+Thus, the subdifferential set of $f_i$ is given by:
+
+$$
+\partial f_i (\bx) = \begin{cases} 
+\{ \sgn (x_i) \be_i \} & \text{for} & x_i \neq 0 \\
+[-\be_i, \be_i] & \text{for} & x_i  = 0
 \end{cases}.
 $$
 
+
+Using the sum rule {prf:ref}`res-cvxf-subdiff-sum-rule-rv-convex`, we have:
+
+$$
+\sum_{i=1}^n \partial f_i(\bx) = 
+\partial \left ( \sum_{i=1}^n f_i \right )(\bx).
+$$
 We define the index set:
 
 $$
-I_0(x) = \{ i \ST x_i = 0\}.
+I_0(\bx) = \{ i \ST x_i = 0\}.
 $$
 
 
-Using the strong sum rule, we have:
+Expanding the sum of subdifferentials,
 
 $$
-\partial f (x) = \sum_{i \in I_0(x)} [-e_i, e_i] + \sum_{i \notin I_0(x)} \sgn (x_i) e_i.
+\partial f (\bx) = \sum_{i \in I_0(\bx)} [-\be_i, \be_i] 
++ \sum_{i \notin I_0(\bx)} \sgn (x_i) \be_i.
 $$
 
 We can rewrite this as:
 
 $$
-\partial f (x) = \{ z \in \RR^n \ST z_i = \sgn (x_i) 
+\partial f (\bx) = \{ \bz \in \RR^n \ST z_i = \sgn (x_i) 
   \text{ whenever } x_i \neq 0, |z_i | \leq 1, \text{ otherwise } \}.
 $$
 
 We also have a weak result from this:
 
 $$
-\sgn (x) \in \partial f (x) = \partial \| x \|_1.
+\sgn (\bx) \in \partial f (\bx) = \partial \| \bx \|_1.
 $$
+```
+
+```{prf:example} Subdifferential of $\ell_1$ norm squared
+:label: ex-cvxf-subdiff-l1-norm-squared
+
+Let $f : \RR^n \to \RR$ be given by $f(\bx) = \| \bx \|_1$.
 
 Now let $g(t) = [t]_+^2$. And consider the function $h = g \circ f$ given by
 
 $$
-h (x) = \| x \|_1^2.
+h (\bx) = \| \bx \|_1^2.
 $$
 
-By subdifferential chain rule:
+By subdifferential chain rule ({prf:ref}`res-cvxf-subdiff-chain-rule`):
 
 $$
-\partial h (x) = 2 \| x \|_1 \partial f (x)
-= 2 \| x \|_1 \{ z \in \RR^n \ST z_i = \sgn (x_i) 
+\partial h (\bx) &= 2 \| \bx \|_1 \partial f (\bx) \\
+&= 2 \| \bx \|_1 \{ \bz \in \RR^n \ST z_i = \sgn (x_i) 
   \text{ whenever } x_i \neq 0, |z_i | \leq 1, \text{ otherwise } \}.
 $$
+
+We have used the subdifferential of $f$ from {prf:ref}`ex-cvxf-subdiff-l1-norm`.
 ```
 
 
