@@ -105,7 +105,9 @@ $$
 For all $\bx \notin \dom f$, we define $\partial f(\bx) = \EmptySet$.
 ```
 
-```{prf:theorem} Subdifferential of norm at $\bx = \bzero$
+```{prf:theorem} Subdifferential of norm at origin
+:label: res-cvxf-subdiff-norm-origin
+
 Let $f : \VV \to \RR$ by given by:
 
 $$
@@ -986,7 +988,7 @@ $$
 ```{prf:theorem} Directional derivative of pointwise maximum of convex functions
 :label: res-cvxf-dir-der-max-convex-funcs
 
-Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be proper functions.
+Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be proper convex functions.
 Let $f : \VV \to \RERL$ be defined as
 
 $$
@@ -2187,66 +2189,172 @@ We are given $\bx \in \VV$ at which $g$ is differentiable and $f$ is convex.
 
 ````
 
+### Max Rule
+
+```{prf:theorem} Max rule of subdifferential calculus
+:label: res-cvxf-subdiff-calculus-max-rule
+
+
+Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be a set of
+proper convex functions. Let $f : \VV \to \RERL$ be given by:
+
+$$
+f(\bx) = \max \{ f_1(\bx), f_2(\bx), \dots, f_m(\bx)\}.
+$$
+
+Let $\bx \in \bigcap_{i=1}^m \interior \dom f_i$ be a point common to the
+interiors of domains of all the functions.
+
+The subdifferential set of $f$ at $\bx$ can be obtained from
+the subdifferentials of $f_i$ as follows:
+
+$$
+\partial f(\bx) = \convex \left ( \bigcup_{i\in I(\bx)} \partial f_i (\bx) \right )
+$$
+where $I(\bx) = \{ i \ST f_i(\bx) = f(\bx)\}$.
+```
+```{prf:proof}
+Since $f_i$ are proper convex, hence their pointwise maximum $f$ is proper convex.
+
+1. Let $I(\bx) = \{ i \in 1,\dots,m \ST f_i(\bx) = f(\bx)\}$.
+1. For any (nonzero) direction, $\bd \in \VV$,
+   by {prf:ref}`res-cvxf-dir-der-max-convex-funcs`:
+
+   $$
+   f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'_i(\bx;\bd).
+   $$
+1. Without loss of generality, let us assume that $I(\bx) = 1,\dots,k$ 
+   for some $k \in 1,\dots,m$. This can be achieved by reordering $f_i$.
+1. By max formula ({prf:ref}`res-cvxf-subg-dir-der-max-formula`), 
+   
+   $$
+   f_i'(\bx;\bd) = \sup \{ \langle \bd, \bg \rangle \ST \bg \in \partial f_i(\bx) \}.
+   $$
+1. Thus,
+
+   $$
+   f'(\bx; \bd) = \underset{i \in 1,\dots,k}{\max} 
+   \underset{\bg_i \in \partial f_i(\bx)}{\sup} \langle \bd, \bg_i \rangle.
+   $$
+1. Recall that for any $a_1, \dots, a_k \in \RR$, the identity below holds:
+
+   $$
+   \max \{ a_1, \dots, a_k \} = \underset{\bt \in \Delta_k }{\sup} \sum_{i=1}^k t_i a_i.
+   $$
+1. Thus, we can expand $f'(\bx; \bd)$ as:
+
+   $$
+   f'(\bx; \bd)
+   &= \underset{i \in 1,\dots,k}{\max} 
+   \underset{\bg_i \in \partial f_i(\bx)}{\sup} \langle \bd, \bg_i \rangle\\
+   &= \underset{\bt \in \Delta_k }{\sup} \left \{ \sum_{i=1}^k t_i 
+   \underset{\bg_i \in \partial f_i(\bx)}{\sup} \langle \bd, \bg_i \rangle
+   \right \} \\
+   &= \underset{\bt \in \Delta_k }{\sup} \left \{
+   \sum_{i=1}^k  
+   \sup 
+   \left \langle \bd, t_i \bg_i \right \rangle
+   \ST \bg_i \in \partial f_i(\bx) \right \} \\
+   &= \sup \left \{ 
+   \left \langle \bd, \sum_{i=1}^k t_i \bg_i \right \rangle
+   \ST \bg_i \in \partial f_i(\bx), \bt \in \Delta_k \right \} \\
+   &= \sup \left \{ 
+   \left \langle \bd, \bg \right \rangle
+   \ST \bg \in \convex \left (\bigcup_{i=1}^k \partial f_i(\bx) \right) \right \} \\
+   &= \sigma_A (\bd)
+   $$
+   where $A = \convex \left (\bigcup_{i=1}^k \partial f_i(\bx) \right )$
+   and $\sigma$ denotes the support function.
+1. Since $\bx \in \interior \dom f$, hence, by the
+   max formula ({prf:ref}`res-cvxf-dir-der-subg-support`)
+
+   $$
+   f'(\bx;\bd) =  \sigma_{\partial f(\bx)} (\bd).
+   $$
+1. Thus, we have
+
+   $$
+   \sigma_{\partial f(\bx)} (\bd) = \sigma_A {\bd}.
+   $$
+1. By {prf:ref}`res-cvxf-subdifferential-closed-convex`, $\partial f(\bx)$
+   is closed and convex.
+1. By {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`,
+   $\partial f(\bx)$ is nonempty and bounded.
+1. Thus, $\partial f(\bx)$ is nonempty, closed and convex.
+1. Similarly, $\partial f_i(\bx)$ are nonempty, closed, convex and
+   bounded.
+1. Thus, $\bigcup_{i=1}^k \partial f_i(\bx)$
+   is a finite union of nonempty, closed, convex and bounded sets.
+1. Thus, $\bigcup_{i=1}^k \partial f_i(\bx)$ 
+   is also nonempty and compact.
+   1. A finite union of nonempty sets is nonempty.
+   1. A finite union of bounded sets is bounded.
+   1. A finite union of closed sets is closed.
+   1. Thus, $\bigcup_{i=1}^k \partial f_i(\bx)$ is closed and bounded.
+   1. Since $\VV$ is finite dimensional, hence closed and bounded
+      sets are compact.
+1. Since $A$ is a convex hull of $\bigcup_{i=1}^k \partial f_i(\bx)$,
+   hence $A$ is nonempty, closed and convex.
+   1. Recall from {prf:ref}`res-cvxf-convex-hull-compact` that
+   convex hull of a compact set is compact.
+   1. Also, recall that compact sets are closed and bounded.
+1. Since $\sigma_{\partial f(\bx)} (\bd) = \sigma_A (\bd)$
+   is true for any $\bd \in \VV$,
+   the support functions for the underlying nonempty, closed and convex
+   set are equal.
+   Hence by {prf:ref}`res-cvxf-support-func-equality-convex`,
+
+   $$
+   \partial f(\bx) = A = \convex \left ( \bigcup_{i=1}^k \partial f_i(\bx) \right ).
+   $$
+```
+
 
 ## Maximum over a Set of Functions
 
-```{rubric} Proper functions
-```
-
 ```{div}
-Let $f_1, f_2, \dots, f_m : \VV \to (-\infty,\infty]$ be a set of
+Here, we summarize the main results for subdifferentials
+and directional derivatives for a function which
+is the pointwise maximum of a set of functions.
+
+Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be a set of
 proper functions. Let
 
 $$
-f(x) = \max \{ f_1(x), f_2(x), \dots, f_m(x)\}.
+f(\bx) = \max \{ f_1(\bx), f_2(\bx), \dots, f_m(\bx)\}.
 $$
 
-Let $x \in \bigcap_{i=1}^m \interior \dom f_i$ be a point common to the
-domains of all the functions.
-Let $d \in \VV$ be a direction. 
+Let $\bx \in \bigcap_{i=1}^m \interior \dom f_i$ be a point common to the
+interiors of the domains of all the functions.
+Let $\bd \in \VV$ be a (nonzero) direction. 
 
-If $f'_i(x;d)$ exist for all $i$, we have,
+We recall from {prf:ref}`res-cvxf-dir-der-max-funcs`
+that if $f'_i(\bx;\bd)$ exist for all $i$, we have,
 
 $$
-f'(x; d) = \underset{i \in I(x)}{\max} f'_i(x;d)
+f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'_i(\bx;\bd)
 $$
-where $I(x) = \{ i \ST f_i(x) = f(x)\}$.
+where $I(\bx) = \{ i \ST f_i(\bx) = f(\bx)\}$.
+
 
 In other words, we identify the functions $f_i$ which achieve the maximum
-$f(x)$ at $x$, compute the directional derivatives of these functions at $x$
-for the direction $d$ and then compute the maximum of the directional derivatives.
-```
-
-```{rubric} Proper convex functions
-```
-
-```{div}
+$f(\bx)$ at $\bx$, compute the directional derivatives of these functions at $\bx$
+for the direction $\bd$ and then compute the maximum of the directional derivatives.
 
 
-Let $f_1, f_2, \dots, f_m : \VV \to (-\infty,\infty]$ be a set of
-proper convex functions. Let
+If $f_i$ are all proper and convex, then
+by {prf:ref}`res-cvxf-dir-der-exist-convex`,
+the directional derivatives $f'(\bx; \bd)$ and
+$f'_i(\bx; \bd)$ for $i=1,\dots,m$ exist.
+Thus, {prf:ref}`res-cvxf-dir-der-max-convex-funcs` applies.
+We have:
 
 $$
-f(x) = \max \{ f_1(x), f_2(x), \dots, f_m(x)\}.
-$$
-
-Let $x \in \bigcap_{i=1}^m \interior \dom f_i$ be a point common to the
-domains of all the functions.
-Let $d \in \VV$ be a direction. 
-For proper convex functions $f_i$, the directional derivatives exist 
-always. We have:
-
-$$
-f'(x; d) = \underset{i \in I(x)}{\max} f'_i(x;d)
+f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'_i(\bx;\bd)
 $$
 where $I(x) = \{ i \ST f_i(x) = f(x)\}$.
-
-Subgradient set of $f$ from subgradients of $f_i$:
-
-$$
-\partial f(x) = \text{conv } \left ( \bigcup_{i\in I(x)} \partial f_i (x) \right ).
-$$
 ```
+
 
 ```{rubric} Differentiable functions
 ```
@@ -2282,10 +2390,14 @@ where $I (x) = \{i \in I \ST f(x) = f_i (x) \}$.
 ## Norm Functions
 
 ```{div}
-Subdifferential of a norm $\| \cdot \|: \VV \to \RR$ at $x = \ZeroVec$:
+We recall from {prf:ref}`res-cvxf-subdiff-norm-origin` that
+the subdifferential of a norm $\| \cdot \|: \VV \to \RR$ at $x = \ZeroVec$
+is given by:
 
 $$
-\partial f(\ZeroVec) = B_{\| \cdot \|_*} [\ZeroVec, 1] = \{ g \in \VV^* \ST \|g\|_* \leq 1 \}. 
+\partial f(\ZeroVec) 
+= B_{\| \cdot \|_*} [\ZeroVec, 1] 
+= \{ g \in \VV^* \ST \|g\|_* \leq 1 \}. 
 $$
 ```
 
