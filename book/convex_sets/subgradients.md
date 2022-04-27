@@ -2309,6 +2309,72 @@ Since $f_i$ are proper convex, hence their pointwise maximum $f$ is proper conve
    $$
 ```
 
+Some applications of this rule are presented later in
+{prf:ref}`ex-cvxf-subdiff-linf-norm`,
+{prf:ref}`ex-cvxf-subdiff-ax-b-inf-norm`,
+{prf:ref}`ex-cvxf-subdiff-max-func`,
+{prf:ref}`ex-cvxf-subdiff-piecewise-linear-function`.
+
+
+We now present a weaker version of the max rule which is applicable
+for pointwise supremum over an arbitrary set of functions.
+
+```{prf:theorem} Weak max rule of subdifferential calculus
+:label: res-cvxf-subdiff-calculus-weak-max-rule
+
+Let $I$ be an arbitrary index set and suppose that
+for every $i \in I$, there exists a proper convex
+function $f_i : \VV \to \RERL$.
+Let $f : \VV \to \RERL$ be given by:
+
+$$
+f(\bx) = \sup_{i \in I} \{ f_i(\bx)\}.
+$$
+
+Then for any $\bx \in \dom f$,
+
+$$
+\convex \left ( \bigcup_{i\in I(\bx)} \partial f_i (\bx) \right ) 
+\subseteq \partial f(\bx)
+$$
+where $I(\bx) = \{ i \in I \ST f_i(\bx) = f(\bx)\}$.
+```
+
+```{prf:proof}
+Pick some $\bx \in \dom f$.
+
+1. Let $\bz \in \dom f$ be arbitrary.
+1. Let $I(\bx) =  \{ i \in I \ST f_i(\bx) = f(\bx)\}$.
+1. Let $i \in I(\bx)$ be arbitrary.
+1. Let $\bg \in \partial f_i(\bx)$ be a subgradient of $f_i$ at $\bx$.
+1. Then, by definition of $f$ and subgradient inequality:
+
+   $$
+   f(\bz) \geq f_i(\bz) \geq f_i(\bx) + \langle \bz - \bx, \bg \rangle
+   = f(\bx) + \langle \bz - \bx, \bg \rangle. 
+   $$
+   We used the fact that $f_i(\bx) = f(\bx)$ for $i \in I(\bx)$.
+1. Thus, $\bg \in \partial f(\bx)$. $\bg$ is a subgradient of $f$
+   at $\bx$.
+1. Since this is valid for every subgradient of $f_i$ at $\bx$, 
+   hence $\partial f_i(\bx) \subseteq \partial f(\bx)$.
+1. Since this is valid for every $i \in I(\bx)$, hence
+
+   $$
+    \bigcup_{i\in I(\bx)} \partial f_i (\bx) \subseteq \partial f(\bx).
+   $$
+
+1. Recall from {prf:ref}`res-cvxf-subdifferential-closed-convex`
+   that $\partial f(\bx)$ is convex.
+1. Thus, it contains the convex hull of any of its subsets.
+   Hence,
+   
+   $$
+   \convex \left ( \bigcup_{i\in I(\bx)} \partial f_i (\bx) \right ) 
+   \subseteq \partial f(\bx).
+   $$
+```
+
 
 ## Maximum over a Set of Functions
 
