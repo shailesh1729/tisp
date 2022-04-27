@@ -1260,11 +1260,9 @@ $$
 For $\by \succeq \bzero$, one of the $g^*(y_i) = \infty$. Hence, $f^*(\by) = \infty$.
 ```
 
+```{prf:theorem} Negative entropy over unit simplex
+:label: res-cvxf-conjugate-neg-entropy-unit-simplex
 
-```{rubric} Negative entropy over unit simplex
-```
-
-```{div}
 Let $f : \RR^n \to \RR$ be given by:
 
 $$
@@ -1282,6 +1280,29 @@ f^*(\by) =  \ln \left ( \sum_{j=1}^n e^{y_j}
     \right )
 $$
 ```
+Recall from {prf:ref}`def-convex-unit-simplex` that a
+unit simplex in $\RR^n$ is the set of
+nonnegative vectors with elements
+summing up to $1$. 
+
+$$
+\Delta_n = \{\bx \in \RR^n 
+    \ST \langle \bx, \bone \rangle = 1, \bx \succeq \bzero \}.
+$$
+
+
+```{prf:proof}
+
+For any $\by \in \RR^n$, 
+
+$$
+f^*(\by) &= \sup_{\bx}  \{ \langle \bx, \by \rangle - f(\bx)\}\\
+&= \sup_{\bx} \left \{ \sum_{i=1}^n y_i x_i - \sum_{i=1}^n x_i \ln x_i \ST
+\sum_{i=1}^n x_i = 1, x_1, \dots, x_n \geq 0 \right \}.
+$$
+```
+
+
 
 ```{rubric} Log sum exp
 ```
