@@ -2839,31 +2839,29 @@ We have the following cases.
    \partial f(\bA \bx + \bb)
    &= \left \{\sum_{i \in I(\by)} \lambda_i \sgn(y_i) \be_i 
    \ST \sum_{i \in I(\by)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\by) \right \} \\
-   &= \left \{\sum_{i \in I(\bx)} \lambda_i \sgn(\ba_i^T \bx + b_i) \be_i 
-   \ST \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\bx) \right \}
+   &= \left \{\sum_{i \in I_x} \lambda_i \sgn(\ba_i^T \bx + b_i) \be_i 
+   \ST \sum_{i \in I_x} \lambda_i = 1, \lambda_j \geq 0, j \in I_x \right \}
    $$
    where 
 
    $$
-   I(\bx) = \{i \in [1,\dots,m] \ST 
-      f_i(\bx) = |y_i | 
-      = |\bA \bx + \bb |_i = f(\bx) = \| \bA \bx + \bb \|_{\infty} \}.
+   I_x = I(\by) = I(\bA \bx + \bb).
    $$
 1. Note that $\bA^T \be_i = \ba_i$.
 1. Then,
 
    $$
    \partial h(\bx) &= \bA^T \partial f (\bA \bx + \bb) \\
-   &= \left \{\sum_{i \in I(\bx)} \lambda_i \sgn(\ba_i^T \bx + b_i) \ba_i \ST 
- \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\bx) \right \}.
+   &= \left \{\sum_{i \in I_x} \lambda_i \sgn(\ba_i^T \bx + b_i) \ba_i \ST 
+ \sum_{i \in I_x} \lambda_i = 1, \lambda_j \geq 0, j \in I_x \right \}.
    $$
 
 Combining the two cases, we get:
 
 $$
 \partial h (\bx) = \begin{cases} 
-\left \{\sum_{i \in I(\bx)} \lambda_i \sgn(\ba_i^T \bx + b_i) \ba_i \ST 
- \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\bx) \right \},
+\left \{\sum_{i \in I_x} \lambda_i \sgn(\ba_i^T \bx + b_i) \ba_i \ST 
+ \sum_{i \in I_x} \lambda_i = 1, \lambda_j \geq 0, j \in I_x \right \},
 & \bA \bx + \bb \neq \bzero \\
 \bA^T B_{\| \cdot \|_1} [\bzero, 1], & \bA \bx + \bb = \bzero
 \end{cases}
