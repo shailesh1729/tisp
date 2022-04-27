@@ -3030,33 +3030,54 @@ $$
 $$
 
 
-## Convex Piecewise Linear Function
+## Convex Piecewise Linear Functions
 
 
-```{div}
+```{prf:example} Subdifferential of convex piecewise linear functions
+:label: ex-cvxf-subdiff-piecewise-linear-function
+
+
 Let a convex piecewise linear function $f : \RR^n \to \RR$ be given by:
 
 $$
-f(x) = \underset{1 \leq i \leq m}{\max} \{a_i^T x + b_i \}.
+f(\bx) = \underset{1 \leq i \leq m}{\max} \{\ba_i^T \bx + b_i \}
 $$
+where $\ba_i \in \RR^n, b_i \in \RR$ for $i=1,\dots,m$.
 
-We define $f_i(x) = a_i^T x + b_i$. Then 
-
-$$
-f(x) = \underset{1 \leq i \leq m}{\max} \{ f_i(x)\}.
-$$
-
-We set:
+We define a set of functions $f_i : \RR^n \to \RR$
+for $i=1,\dots,m$ as 
 
 $$
-I(x) = \{i \ST f(x) = a_i^T x + b_i \}.
+f_i(\bx) = \ba_i^T \bx + b_i
+$$  
+
+We can see that $f$ is a pointwise maximum of these functions.
+
+$$
+f(\bx) = \underset{1 \leq i \leq m}{\max} \{ f_i(\bx)\}.
 $$
 
-Then we have:
+Clearly,
 
 $$
-\partial f(x) = \left \{  \sum_{i \in I(x)} \lambda_i a_i \ST 
-  \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0 \Forall j \in I(x)
-  \right \}
+\partial f_i(\bx) = \{ \nabla f_i(\bx) \}
+= \{ \ba_i \}.
+$$
+
+We define:
+
+$$
+I(\bx) = \{i \in [1,\dots,m] \ST f(\bx) = f_i(\bx) = \ba_i^T \bx + b_i \}.
+$$
+
+Then, using the max rule for proper convex functions
+({prf:ref}`res-cvxf-subdiff-calculus-max-rule`):
+
+$$
+\partial f(\bx) 
+&= \convex \left ( \bigcup_{i\in I(\bx)} \partial f_i (\bx) \right ) \\
+&= \left \{  \sum_{i \in I(\bx)} \lambda_i \ba_i \ST 
+  \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0 \Forall j \in I(\bx)
+  \right \}.
 $$
 ```
