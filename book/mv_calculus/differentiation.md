@@ -347,6 +347,29 @@ $$
 $$
 ```
 
+```{prf:example} Gradient of squared $\ell_2$ norm
+:label: ex-mvc-gradient-squared-l2_norm
+
+Let $f : \RR^n \to \RR$ be a quadratic form given by:
+
+$$
+f(\bx) = \| \bx \|_2^2 =  \bx^T \bx.
+$$
+
+We can write this as
+
+$$
+f(\bx) =  \bx^T \bI \bx
+$$
+where $\bI$ is the identity matrix.
+
+Following, {prf:ref}`ex-mvc-gradient-quadratic-form`,
+
+$$
+\nabla f(\bx) =  2 \bI \bx = 2 \bx.
+$$
+```
+
 ```{prf:example} Gradient of quadratic functional
 :label: ex-mvc-gradient-quadratic-functional
 
@@ -558,6 +581,57 @@ $$
 \nabla h(\bx) = \frac{1}{\bone^T \bz} \bz.
 $$
 ```
+
+```{prf:example} Gradient of $\ell_2$ norm at nonzero vectors
+:label: ex-mvc-gradient-l2-norm
+
+Let $h : \RR^n \to \RR$ be given by:
+
+$$
+h(\bx) = \| \bx \|_2 = \sqrt{ \langle \bx, \bx \rangle}
+$$
+with $\dom h = \RR^n$.
+
+Let $g : \RR \to \RR$  with $\dom g = \RR_+$
+be given by $g(y) = \sqrt{y}$. 
+
+Let $f : \RR^n \to \RR$ with $\dom f = \RR^n$ be given by
+
+$$
+f(\bx) = \langle \bx, \bx \rangle = \sum_{i=1}^n x_i^2
+= \| \bx \|_2^2.
+$$
+
+Then, we can see that $h(\bx) = g (f (\bx))$
+or $h = g \circ f$.
+
+$g$ is differentiable on the open set $\RR_{++}$.
+For every $y \in \RR_{++}$, 
+
+$$
+g'(y) = \frac{1}{2 \sqrt{y}}
+$$
+and (from {prf:ref}`ex-mvc-gradient-squared-l2_norm`)
+
+$$
+\nabla f(\bx) = 2 \bx.
+$$
+
+Thus, for every $\bx \neq \bzero$,
+following {prf:ref}`res-mvc-chain-rule-real`,
+
+$$
+\nabla h(\bx) = g'(f(\bx)) \nabla f(\bx)
+= \frac{1}{2 \sqrt{\| \bx \|_2^2}} 2 \bx
+= \frac{\bx}{\| \bx \|_2}.
+$$
+The gradient of $\ell_2$ norm at $\bzero$ doesn't
+exist. However, subgradients can be computed.
+See {prf:ref}`ex-cvxf-subdiff-l2-norm-origin`
+and {prf:ref}`ex-cvxf-subdiff-l2-norm`.
+```
+
+
 
 ```{prf:corollary} Chain rule for composition with affine function
 :label: res-mvc-chain-rule-affine-composition
