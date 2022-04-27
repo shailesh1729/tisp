@@ -2403,29 +2403,49 @@ $$
 
 ### $\ell_1$-Norm
 
-```{div}
-Let $f : \RR^n \to \RR$ be given by $f(x) = \| x \|_1$.
+```{prf:example} Subdifferential of $\ell_1$ norm at origin
+:label: ex-cvxf-subdiff-l1-norm-origin
 
-Subdifferential of $f$ at $x = \ZeroVec$:
+Let $f : \RR^n \to \RR$ be given by $f(\bx) = \| \bx \|_1$.
+We recall that the dual norm of $\ell_1$ is $\ell_{\infty}$.
+The unit ball of $\ell_{\infty}$-norm at origin is given by
+
+$$
+B_{\| \cdot \|_{\infty}} [\ZeroVec, 1] = [-1, 1]^n.
+$$
+
+Following {prf:ref}`res-cvxf-subdiff-norm-origin`,
+the subdifferential of $f$ at $\bx = \ZeroVec$ is given by:
 
 $$
 \partial f(\ZeroVec) = B_{\| \cdot \|_{\infty}} [\ZeroVec, 1] = [-1, 1]^n. 
 $$
 ```
 
-```{div}
-Subdifferential of $g : \RR \to \RR$ with $g(x) = |x|$ at $x = 0$:
+```{prf:example} Subdifferential of absolute value function at origin
+:label: ex-cvxf-subdiff-abs-func-origin
+
+Let $g : \RR \to \RR$ be the absolute value function given by
+
+$$
+g(x) = | x |.
+$$
+This is a special case of $\ell_1$ norm for $\RR^1$.
+Thus, following {prf:ref}`ex-cvxf-subdiff-l1-norm-origin`,
+the subdifferential of $g$ at $x = 0$ is given by:
 
 $$
 \partial g (0) = [-1, 1].
 $$
+For a complete specification of the subdifferential of $g$,
+see {prf:ref}`ex-cvxf-subdiff-abs-func-l2` below.
 ```
 
 ```{div}
 We can write $f$ as a sum of $n$ functions
 
 $$
-f(x) = \| x \|_1 =  \sum_{i=1}^n |x_i| = \sum_{i=1}^n f_i(x)
+f(\bx) = \| \bx \|_1 =  \sum_{i=1}^n |x_i| = \sum_{i=1}^n f_i(\bx)
 $$
 
 where 
@@ -2488,31 +2508,79 @@ $$
 
 ### $\ell_2$-Norm
 
-```{div}
-Let $f : \RR^n \to \RR$ be given by $f(x) = \| x \|_2$.
 
-Subdifferential of $f$ at $x = \ZeroVec$:
+```{prf:example} Subdifferential of $\ell_2$ norm at origin
+:label: ex-cvxf-subdiff-l2-norm-origin
 
-$$
-\partial f(\ZeroVec) = B_{\| \cdot \|_2} [\ZeroVec, 1] 
-= \{ g \in \RR^n \ST \|g\|_2 \leq 1 \}. 
-$$
+Let $f : \RR^n \to \RR$ be given by $f(\bx) = \| \bx \|_2$.
+We recall that the dual norm of $\ell_1$ is also $\ell_2$
+as this norm is self dual.
 
-At $x \neq \ZeroVec$, $f$ is differentiable with the gradient:
-
-$$
-\nabla f (x) = \frac{x}{ \| x \|_2}.
-$$
-
-Combining the two, we get:
+Following {prf:ref}`res-cvxf-subdiff-norm-origin`,
+the subdifferential of $f$ at $\bx = \bzero$ is given by:
 
 $$
-\partial f (x) = \begin{cases} 
-\left \{ \frac{x}{ \| x \|_2} \right \} & \text{for} & x \neq \ZeroVec \\
-B_{\| \cdot \|_2} [\ZeroVec, 1] & \text{for} & x  = \ZeroVec
-\end{cases}.
+\partial f(\bzero) = B_{\| \cdot \|_2} [\bzero, 1]
+= \{ \bg \in \RR^n \ST \| \bg \|_2 \leq 1 \}.
 $$
 ```
+
+```{prf:example} Subdifferential of $\ell_2$ norm
+:label: ex-cvxf-subdiff-l2-norm
+
+Let $f : \RR^n \to \RR$ be given by $f(\bx) = \| \bx \|_2$.
+At $\bx \neq \bzero$, $f$ is differentiable with the gradient
+(see {prf:ref}`ex-mvc-gradient-l2-norm`):
+
+$$
+\nabla f (\bx) = \frac{\bx}{ \| \bx \|_2}.
+$$
+
+Since $f$ is convex and differentiable at $\bx \neq \bzero$,
+hence due to {prf:ref}`res-cvxf-subdiff-grad`,
+
+$$
+\partial f(\bx) = \{ \nabla f (\bx) \} =
+\left \{ \frac{\bx}{ \| \bx \|_2} \right \}.
+$$
+
+
+
+Combining this with the subdifferential of $f$
+at origin from {prf:ref}`ex-cvxf-subdiff-l2-norm-origin`,
+we obtain:
+
+$$
+\partial f (\bx) = \begin{cases} 
+\left \{ \frac{\bx}{ \| \bx \|_2} \right \} & \text{for} & \bx \neq \bzero \\
+B_{\| \cdot \|_2} [\bzero, 1] & \text{for} & \bx  = \bzero .
+\end{cases}
+$$
+```
+
+```{prf:example} Subdifferential of absolute value function
+:label: ex-cvxf-subdiff-abs-func-l2
+
+Let $g : \RR \to \RR$ be the absolute value function given by
+
+$$
+g(x) = | x |.
+$$
+This is a special case of $\ell_2$ norm for $\RR^1$.
+Following {prf:ref}`ex-cvxf-subdiff-l2-norm`,
+
+
+$$
+\partial g(x) = \begin{cases} 
+\left \{ \sgn (x) \right \} & \text{for} & x \neq 0 \\
+[-1,1] & \text{for} & x  = 0 .
+\end{cases}
+$$
+c.f. {prf:ref}`ex-cvxf-subdiff-abs-func-origin`.
+```
+
+
+
 
 ### $\ell_{\infty}$-Norm
 
