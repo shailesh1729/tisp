@@ -2174,7 +2174,7 @@ We are given $\bx \in \VV$ at which $g$ is differentiable and $f$ is convex.
    &= \sigma_{g'(f(\bx)) \partial f (\bx)} (\bd).
    $$
    The last step is due to {prf:ref}`res-cvxf-support-func-Homogeneity`.
-   Since $g$ is nondecresaing, hence $g'(f(\bx)) \geq 0$.
+   Since $g$ is nondecreasing, hence $g'(f(\bx)) \geq 0$.
 1. By {prf:ref}`res-cvxf-subdifferential-closed-convex` and
    {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`, 
    the sets $\partial f(\bx)$ and $\partial h(\bx)$ are nonempty,
@@ -2913,42 +2913,67 @@ would characterize the entire subdifferential.
 
 ## The Max Function
 
-```{div}
+```{prf:example} Subdifferential of the max function
+:label: ex-cvxf-subdiff-max-func
+
 Let $f : \RR^n \to \RR$ be given by:
 
 $$
-f(x) = \max \{ x_1, x_2, \dots, x_n\}.
+f(\bx) = \max \{ x_1, x_2, \dots, x_n\}.
 $$
 
-Let $f_i(x) = x_i$. Then
+Let $f_i(\bx) = x_i = \be_i^T \bx$. Then
 
 $$
-f_(x) = \max \{ f_1(x), f_2(x), \dots, f_n(x)\}.
+f_(\bx) = \max \{ f_1(\bx), f_2(\bx), \dots, f_n(\bx)\}.
 $$
 
-$$
-\partial f_i(x) = \{ e_i\}.
-$$
-
-We denote:
+We note that $f_i$ are differentiable and their
+gradient is given by
+(see {prf:ref}`ex-mvc-gradient-linear-functional`):
 
 $$
-I (x) = \{ i \ST f(x) = x_i\}.
+\nabla f_i(\bx) = \be_i.
+$$
+Also, $f_i$ are linear, hence convex.
+Thus, due to {prf:ref}`res-cvxf-subdiff-grad`:
+
+$$
+\partial f_i(\bx) = \{ \be_i\}.
 $$
 
-Using the max rule for functions:
+We denote the index set of functions which
+equal the value of $f(\bx$ at $\bx$ by:
 
 $$
-\partial f (x) = \text{conv } \left ( \bigcup_{i \in I(x)} \partial f_i(x) \right )
-  = \text{conv } \left ( \bigcup_{i \in I(x)} \{ e_i\} \right ).
+I (\bx) = \{ i \ST f(\bx) = x_i\}.
 $$
+
+Then, using the max rule for proper convex functions
+({prf:ref}`res-cvxf-subdiff-calculus-max-rule`):
+
+$$
+\partial f (\bx) = \convex \left ( 
+   \bigcup_{i \in I(\bx)} \partial f_i(\bx) \right )
+  = \convex \left ( \bigcup_{i \in I(\bx)} \{ \be_i\} \right ).
+$$
+
+As and example, consider the case where $\bx = \alpha \bone$
+for some $\alpha \in \RR$.
+
+1. In other words, $\bx = (\alpha, \dots, \alpha)$.
+1. Then, $f(\bx) = \alpha$.
+1. $f_i(\bx) = \alpha = f(\bx)$ for ever $i \in [1,\dots, n]$.
+1. $I(\bx) =  \{1, \dots, n \}$.
+1. $\nabla f_i(\bx) = \be_i$.
+1. $\convex ( \bigcup_{i \in I(\bx)} \{ \be_i\} ) = \convex \{ \be_1, \dots, \be_n \}$.
+1. But $\convex \{ \be_1, \dots, \be_n \} = \Delta_n$.
+1. Thus,
+
+   $$
+   \partial f (\alpha \bone) = \Delta_n \Forall \alpha \in \RR.
+   $$
 ```
-
-For the vector of all ones:
-
-$$
-\partial f (\alpha \OneVec) = \Delta_n \Forall \alpha \in \RR.
-$$
 
 
 ## Distance from a Convex Set
