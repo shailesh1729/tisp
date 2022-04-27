@@ -2391,12 +2391,12 @@ where $I (x) = \{i \in I \ST f(x) = f_i (x) \}$.
 
 ```{div}
 We recall from {prf:ref}`res-cvxf-subdiff-norm-origin` that
-the subdifferential of a norm $\| \cdot \|: \VV \to \RR$ at $x = \ZeroVec$
+the subdifferential of a norm $\| \cdot \|: \VV \to \RR$ at $x = \bzero$
 is given by:
 
 $$
-\partial f(\ZeroVec) 
-= B_{\| \cdot \|_*} [\ZeroVec, 1] 
+\partial f(\bzero) 
+= B_{\| \cdot \|_*} [\bzero, 1] 
 = \{ g \in \VV^* \ST \|g\|_* \leq 1 \}. 
 $$
 ```
@@ -2411,14 +2411,14 @@ We recall that the dual norm of $\ell_1$ is $\ell_{\infty}$.
 The unit ball of $\ell_{\infty}$-norm at origin is given by
 
 $$
-B_{\| \cdot \|_{\infty}} [\ZeroVec, 1] = [-1, 1]^n.
+B_{\| \cdot \|_{\infty}} [\bzero, 1] = [-1, 1]^n.
 $$
 
 Following {prf:ref}`res-cvxf-subdiff-norm-origin`,
-the subdifferential of $f$ at $\bx = \ZeroVec$ is given by:
+the subdifferential of $f$ at $\bx = \bzero$ is given by:
 
 $$
-\partial f(\ZeroVec) = B_{\| \cdot \|_{\infty}} [\ZeroVec, 1] = [-1, 1]^n. 
+\partial f(\bzero) = B_{\| \cdot \|_{\infty}} [\bzero, 1] = [-1, 1]^n. 
 $$
 ```
 
@@ -2621,58 +2621,79 @@ c.f. {prf:ref}`ex-cvxf-subdiff-abs-func-origin`.
 
 ### $\ell_{\infty}$-Norm
 
-```{div}
-Let $f : \RR^n \to \RR$ be given by $f(x) = \| x \|_{\infty}$.
+```{prf:example} Subdifferential of $\ell_{\infty}$ norm at origin
+:label: ex-cvxf-subdiff-linf-norm-origin
+
+Let $f : \RR^n \to \RR$ be given by $f(\bx) = \| \bx \|_{\infty}$.
+We recall that the dual norm of $\ell_{\infty}$ is $\ell_{1}$.
+The unit ball of $\ell_{1}$-norm at origin is given by
+
+$$
+B_{\| \cdot \|_1} [\bzero, 1] = \{ \bx \in \RR^n \ST \| \bx \|_1 \leq 1\}.
+$$
+
+Following {prf:ref}`res-cvxf-subdiff-norm-origin`,
+the subdifferential of $f$ at $\bx = \bzero$ is given by:
+
+$$
+\partial f(\bzero) = B_{\| \cdot \|_1 [\bzero, 1]}
+= \{ \bx \in \RR^n \ST \| \bx \|_1 \leq 1\}. 
+$$
 ```
 
-```{div}
-Subdifferential of $f$ at $x = \ZeroVec$:
+```{prf:example} Subdifferential of $\ell_{\infty}$ norm
+:label: ex-cvxf-subdiff-linf-norm
 
-$$
-\partial f(\ZeroVec) = B_{\| \cdot \|_1} [\ZeroVec, 1] 
-= \{ x \in \RR^n \ST \|x\|_1 \leq 1 \}. 
-$$
-
-Subdifferential of $f$ at $x \neq \ZeroVec$.
+Let $f : \RR^n \to \RR$ be given by $f(\bx) = \| \bx \|_{\infty}$.
+Let us compute the subdifferential of $f$ at $\bx \neq \bzero$.
 
 We have:
 
 $$
-f(x) = \max \{f_1(x), f_2(x), \dots, f_n(x)\}
+f(\bx) = \max \{f_1(\bx), f_2(\bx), \dots, f_n(\bx)\}
 $$
-where $f_i(x) = |x_i|$. We set:
+where $f_i(\bx) = |x_i|$. 
+We define:
 
 $$
-I(x) = \{i \ST |x_i | = f(x) = \| x \|_{\infty} \}.
+I(\bx) = \{i  \in [1,\dots,n] \ST |x_i | = f(\bx) = \| \bx \|_{\infty} \}.
 $$
 
-We have
+Then, following {prf:ref}`ex-cvxf-subdiff-l1-norm`
 
 $$
-\partial f_i(x) = \{\sgn (x_i)  e_i \} \Forall i \in I(x).
+\partial f_i(\bx) = \{\sgn (x_i)  \be_i \} \Forall i \in I(\bx).
 $$
+This is valid since $\bx \neq \bzero$ implies that $f(\bx) \neq 0$
+which in turn implies that $x_i \neq 0$ for every $i \in I(\bx)$.
+
+Then, using the max rule for proper convex functions
+({prf:ref}`res-cvxf-subdiff-calculus-max-rule`):
 
 $$
-\partial f(x) = \text{conv } \left (\bigcup_{i \in I(x)} \{\sgn (x_i)  e_i \} \right ).
+\partial f(\bx) = 
+\convex \left (\bigcup_{i \in I(\bx)} \{\sgn (x_i)  \be_i \} \right ).
 $$
 
 We can rewrite this as:
 
 $$
-\partial f(x) = \left \{\sum_{i \in I(x)} \lambda_i \sgn(x_i) e_i \ST 
- \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0, j \in I(x) \right \}.
+\partial f(\bx) = \left \{\sum_{i \in I(\bx)} \lambda_i \sgn(x_i) \be_i \ST 
+ \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\bx) \right \}.
 $$
 
 
-Combining the two cases, we get:
+Combining this with the subdifferential of $f$
+at origin from {prf:ref}`ex-cvxf-subdiff-linf-norm-origin`,
+we obtain:
 
 $$
-\partial f (x) = \begin{cases} 
-\left \{\sum_{i \in I(x)} \lambda_i \sgn(x_i) e_i \ST 
- \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0, j \in I(x) \right \},
-& x \neq \ZeroVec \\
-B_{\| \cdot \|_1} [\ZeroVec, 1], & x  = \ZeroVec
-\end{cases}.
+\partial f (\bx) = \begin{cases} 
+\left \{\sum_{i \in I(\bx)} \lambda_i \sgn(x_i) \be_i \ST 
+ \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\bx) \right \},
+& \bx \neq \bzero \\
+B_{\| \cdot \|_1} [\bzero, 1], & \bx  = \bzero .
+\end{cases}
 $$
 ```
 
@@ -2726,8 +2747,8 @@ We have:
 
 $$
 \partial f (Ax + b) = \begin{cases} 
-\left \{ \frac{A x + b}{ \| A x + b \|_2} \right \} & \text{for} & Ax + b \neq \ZeroVec \\
-B_{\| \cdot \|_2} [\ZeroVec, 1] & \text{for} & A x + b  = 0
+\left \{ \frac{A x + b}{ \| A x + b \|_2} \right \} & \text{for} & Ax + b \neq \bzero \\
+B_{\| \cdot \|_2} [\bzero, 1] & \text{for} & A x + b  = 0
 \end{cases}.
 $$
 
@@ -2737,15 +2758,15 @@ Applying the affine transformation rule, we get:
 $$
 \partial h (x) = A^T \partial f (Ax + b) 
 = \begin{cases} 
-\left \{ \frac{A^T (A x + b)}{ \| A x + b \|_2} \right \} & \text{for} & Ax + b \neq \ZeroVec \\
-A^T B_{\| \cdot \|_2} [\ZeroVec, 1] & \text{for} & A x + b  = 0
+\left \{ \frac{A^T (A x + b)}{ \| A x + b \|_2} \right \} & \text{for} & Ax + b \neq \bzero \\
+A^T B_{\| \cdot \|_2} [\bzero, 1] & \text{for} & A x + b  = 0
 \end{cases}.
 $$
 
 For $x \ST A x + b = 0$, we can write this as 
 
 $$
-\partial h (x) = A^T B_{\| \cdot \|_2} [\ZeroVec, 1] = \{A^T y \ST \| y \|_2 \leq 1 \}.
+\partial h (x) = A^T B_{\| \cdot \|_2} [\bzero, 1] = \{A^T y \ST \| y \|_2 \leq 1 \}.
 $$
 ```
 
@@ -2764,8 +2785,8 @@ $$
 \partial h (x) = \begin{cases} 
 \left \{\sum_{i \in I(x)} \lambda_i \sgn(a_i^T x + b_i) a_i \ST 
  \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0, j \in I(x) \right \},
-& A x + b \neq \ZeroVec \\
-A^T B_{\| \cdot \|_1} [\ZeroVec, 1], & A x + b = \ZeroVec
+& A x + b \neq \bzero \\
+A^T B_{\| \cdot \|_1} [\bzero, 1], & A x + b = \bzero
 \end{cases}
 $$
 where $a_1^T, \dots, a_m^T$ are the rows of $A$ and 
@@ -2823,7 +2844,7 @@ For any $\bx \notin S$, $N_S(\bx) = \EmptySet$. Combining:
 
 
 $$
-\partial \delta_{B[\ZeroVec, 1]} (x) = \begin{cases} 
+\partial \delta_{B[\bzero, 1]} (x) = \begin{cases} 
  \{ \by \in \VV^* \ST \| \by \|_* \leq \langle \bx, \by \rangle \} 
  & \text{for} & \| \bx \| \leq 1 \\
 \EmptySet & \text{for} & \| \bx \| > 1.
@@ -2976,74 +2997,6 @@ for some $\alpha \in \RR$.
 ```
 
 
-## Distance from a Convex Set
-
-Let $\VV$ be an $n$-dimensional real vector space
-equipped with an inner product
-$\langle \cdot, \cdot \rangle$
-and a norm $\| \cdot \|$ induced by the inner product.
-
-Let $C \subseteq \VV$ be a nonempty closed and convex set.
-The *orthogonal projection* mapping under a norm $\| \cdot \|$
-is defined by:
-
-$$
-P_C(\bx) \triangleq \underset{\by \in C}{\argmin} 
-\| \by - \bx \| \Forall \bx \in \VV. 
-$$
-The mapping $P_C$ is well defined (exists and unique) when
-the underlying set $C$ is nonempty, closed and convex.
-
-The distance of a point $\bx \in \VV$ to $C$ is defined as
-
-$$
-d_C(\bx) = \| \bx - P_C(\bx) \|.
-$$
-
-
-Let $\phi_C : \VV \to \RR$ (squared distance function) be defined as:
-
-$$
-\phi_C(\bx) \triangleq \frac{1}{2} d_C^2(\bx) 
-= \frac{1}{2}\| \bx - P_C(\bx) \|^2.
-$$
-
-
-
-```{div}
-We note that $\phi_C = g \circ d_C$ where 
-$g(t) = \frac{1}{2}[t]_+^2$.
-
-Applying chain rule:
-
-$$
-\partial \phi_C (x) = [d_C(x)]_+ \partial d_C(x) = d_C(x) \partial d_C(x).
-$$
-
-For any $x \notin C$, $d_C(x) \neq 0$, and we have:
-
-$$
-d_C(x) = \left \{ \frac{x - P_C(x)}{d_C(x)}\right \} \Forall x \notin C.
-$$
-
-$d_C$ is differentiable at $x \notin C$.
-
-
-For $x \in C$:
-
-$$
-\partial d_C (x) = N_C(x) \cap B[\ZeroVec, 1].
-$$
-
-Combining cases:
-
-$$
-\partial d_C (x) = \begin{cases} 
- \left \{ \frac{x - P_C(x)}{d_C(x)}\right \}, & x \notin C\\
-N_C(x) \cap B[\ZeroVec, 1], & x \in C
-\end{cases}.
-$$
-```
 
 
 ## Space of Matrices
