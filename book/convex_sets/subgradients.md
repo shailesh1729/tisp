@@ -2772,29 +2772,104 @@ $$
 
 ### $\ell_{\infty}$ Norm over Affine Transformation  
 
-```{div}
-Let $A \in \RR^{m \times n}$. Let $b \in \RR^m$. 
-Let $f : \RR^m \to \RR$ be given by $f(y) = \| y \|_{\infty}$.
+```{prf:example} Subdifferential of $\|\bA \bx + \bb \|_{\infty}$
+:label: ex-cvxf-subdiff-ax-b-inf-norm
+
+Let $\bA \in \RR^{m \times n}$. Let $\bb \in \RR^m$. 
+Let $f : \RR^m \to \RR$ be given by 
+
+$$
+f(\by) = \| \by \|_{\infty}.
+$$
 
 Let $h : \RR^n \to \RR$ be the function 
-$h(x) = \| A x + b \|_{\infty} = f(A x + b)$.
-
-We use the affine transformation rule on the subdifferential of $f$ to obtain:
 
 $$
-\partial h (x) = \begin{cases} 
-\left \{\sum_{i \in I(x)} \lambda_i \sgn(a_i^T x + b_i) a_i \ST 
- \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0, j \in I(x) \right \},
-& A x + b \neq \bzero \\
-A^T B_{\| \cdot \|_1} [\bzero, 1], & A x + b = \bzero
+h(\bx) = \| \bA \bx + \bb \|_{\infty} = f(\bA \bx + \bb).
+$$
+
+With $\by = \bA \bx + \bb$, we have $y_i = \ba_i^T \bx + b_i$
+where $\ba_i^T$ is the $i$-th row vector of $\bA$.
+
+Following {prf:ref}`ex-cvxf-subdiff-linf-norm`
+
+$$
+\partial f (\by) = \begin{cases} 
+\left \{\sum_{i \in I(\by)} \lambda_i \sgn(y_i) \be_i \ST 
+ \sum_{i \in I(\by)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\by) \right \},
+& \by \neq \bzero \\
+B_{\| \cdot \|_1} [\bzero, 1], & \by  = \bzero
 \end{cases}
 $$
-where $a_1^T, \dots, a_m^T$ are the rows of $A$ and 
+where $I(\by) = \{i  \in [1,\dots,n] \ST |y_i | = f(\by) = \| \by \|_{\infty} \}$.
+
+
+
+Due to affine transformation rule ({prf:ref}`res-cvxf-subdiff-strong-rule-affine`),
 
 $$
-I(x) = \{i \ST: |A x + b |_i = \| A x + b \|_{\infty} \}.
+\partial h(\bx) = \bA^T \partial f (\bA \bx + \bb).
+$$
+
+We have the following cases.
+
+(a) $\by = \bzero$.
+
+1. In terms of $\bx$, the condition $\by = \bzero$ is equivalent to
+   $\bA \bx + \bb = \bzero$.
+1. Then, 
+
+   $$
+   \partial f (\bA \bx + \bb) = \partial f(\bzero)
+   = B_{\| \cdot \|_1} [\bzero, 1].
+   $$
+1. Thus,
+
+   $$
+   \partial h(\bx) = \bA^T B_{\| \cdot \|_1} [\bzero, 1].
+   $$
+
+(b)  $\by \neq \bzero$.
+
+1. In terms of $\bx$, the condition $\by \neq \bzero$ is equivalent to
+   $\bA \bx + \bb \neq \bzero$.
+1. Then,
+
+   $$
+   \partial f(\bA \bx + \bb)
+   &= \left \{\sum_{i \in I(\by)} \lambda_i \sgn(y_i) \be_i 
+   \ST \sum_{i \in I(\by)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\by) \right \} \\
+   &= \left \{\sum_{i \in I(\bx)} \lambda_i \sgn(\ba_i^T \bx + b_i) \be_i 
+   \ST \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\bx) \right \}
+   $$
+   where 
+
+   $$
+   I(\bx) = \{i \in [1,\dots,m] \ST 
+      f_i(\bx) = |y_i | 
+      = |\bA \bx + \bb |_i = f(\bx) = \| \bA \bx + \bb \|_{\infty} \}.
+   $$
+1. Note that $\bA^T \be_i = \ba_i$.
+1. Then,
+
+   $$
+   \partial h(\bx) &= \bA^T \partial f (\bA \bx + \bb) \\
+   &= \left \{\sum_{i \in I(\bx)} \lambda_i \sgn(\ba_i^T \bx + b_i) \ba_i \ST 
+ \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\bx) \right \}.
+   $$
+
+Combining the two cases, we get:
+
+$$
+\partial h (\bx) = \begin{cases} 
+\left \{\sum_{i \in I(\bx)} \lambda_i \sgn(\ba_i^T \bx + b_i) \ba_i \ST 
+ \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\bx) \right \},
+& \bA \bx + \bb \neq \bzero \\
+\bA^T B_{\| \cdot \|_1} [\bzero, 1], & \bA \bx + \bb = \bzero
+\end{cases}
 $$
 ```
+
 ## Indicator Functions
 
 
@@ -2852,29 +2927,7 @@ $$
 $$
 ```
 
-## Minimization Problems
 
-```{div}
-Minimization problem:
-
-$$
-\min \{f(x) \ST g(x) \leq 0, x \in X \}.
-$$
-
-Dual function:
-
-$$
-q(\lambda) \min_{x \in X} \{L(x, \lambda) \triangleq f(x) + \lambda^T g(x)\}
-$$
-
-Assume that for $\lambda = \lambda_0$ the minimization in R.H.S. is obtained at $x = x_0$.
-
-Subgradient of the (negative of the) dual function $-q$:
-
-$$
-- g (x_0) \in \partial (-q) (\lambda_0).
-$$
-```
 
 ## Maximum Eigen Value Function
 
@@ -3079,5 +3132,30 @@ $$
 &= \left \{  \sum_{i \in I(\bx)} \lambda_i \ba_i \ST 
   \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0 \Forall j \in I(\bx)
   \right \}.
+$$
+```
+
+
+## Minimization Problems
+
+```{div}
+Minimization problem:
+
+$$
+\min \{f(x) \ST g(x) \leq 0, x \in X \}.
+$$
+
+Dual function:
+
+$$
+q(\lambda) \min_{x \in X} \{L(x, \lambda) \triangleq f(x) + \lambda^T g(x)\}
+$$
+
+Assume that for $\lambda = \lambda_0$ the minimization in R.H.S. is obtained at $x = x_0$.
+
+Subgradient of the (negative of the) dual function $-q$:
+
+$$
+- g (x_0) \in \partial (-q) (\lambda_0).
 $$
 ```
