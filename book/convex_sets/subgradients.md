@@ -2338,6 +2338,12 @@ $$
 \subseteq \partial f(\bx)
 $$
 where $I(\bx) = \{ i \in I \ST f_i(\bx) = f(\bx)\}$.
+
+In words, if $f_i(\bx) = f(\bx)$, then a subgradient of $f_i$
+at $\bx$ is also a subgradient of $f$ at $\bx$.
+Also, for all $i \in I$ such that $f_i(\bx) = f(\bx)$,
+any convex combination of their subgradients at $\bx$ is also a subgradient
+of $f$ at $\bx$.
 ```
 
 ```{prf:proof}
@@ -2374,6 +2380,90 @@ Pick some $\bx \in \dom f$.
    \subseteq \partial f(\bx).
    $$
 ```
+
+Next is an example application of the weak max rule.
+
+```{prf:example} Subgradient of $\lambda_{\max}(\bA_0 + \sum_{i=1}^m x_i \bA_i$
+:label: ex-cvxf-subdiff-max-eigen-val-m-sym-mat-sum
+
+
+Let $\bA_0, \bA_1, \dots, \bA_m \in \SS^n$ be $m+1$ given symmetric
+matrices. Define an affine transformation $\bAAA : \RR^m \to \SS^n$
+as
+
+$$
+\bAAA(\bx) \triangleq \bA_0 + \sum_{i=1}^m x_i \bA_i.
+$$
+For every vector $\bx \in \RR^m$, this mapping
+defines a symmetric matrix $\bAAA(\bx)$.
+We can compute the largest eigen value of $\bAAA(\bx)$.
+We introduce a function $f: \RR^m \to \RR$ as
+
+$$
+f(\bx) \triangleq \lambda_{\max} (\bAAA(\bx)) 
+=  \lambda_{\max} (\bA_0 + \sum_{i=1}^m x_i \bA_i). 
+$$
+Our task is to find a subgradient of $f$ at $\bx$.
+
+1. Recall from the definition of largest eigen values,
+
+   $$
+   f(\bx) = \underset{\by \in \RR^n;  \| \by \|_2 = 1 }{\sup} \by^T \bAAA(\bx) \by.
+   $$
+
+1. For every $\by \in \RR^n$ such that $\| \by \|_2 = 1$,
+   we can define a function:
+
+   $$
+   f_{\by}(\bx) \triangleq \by^T \bAAA(\bx) \by.
+   $$
+
+1. Then,
+
+   $$
+   f(\bx) = \underset{\by \in \RR^n;  \| \by \|_2 = 1 }{\sup} f_{\by}(\bx).
+   $$
+1. The function $f_{\by}(\bx)$ is affine (in $\bx$) for every $\by$.
+1. Thus, $f_{\by}$ is convex for every $\by$.
+1. Thus, $f$ is a pointwise supremum of a family of 
+   functions $f_{\by}$.
+1. Thus, $f$ is also convex (see {prf:ref}`res-cvx-ptws-supremum`).
+1. Consequently, we can use the weak max rule
+   {prf:ref}`res-cvxf-subdiff-calculus-weak-max-rule`
+   to identify a subgradient of $f$ at $\bx$.
+1. Let $\tilde{\by}$ be a normalized eigenvector of $\bAAA(\bx)$
+   corresponding to its largest eigenvalue. Then
+
+   $$
+   f(\bx) = \tilde{\by}^T \bAAA(\bx) \tilde{\by}.
+   $$
+1. This means that $f(\bx) = f_{\tilde{\by}}(\bx)$.
+1. By the weak max rule, a subgradient of $f_{\tilde{\by}}$ at $\bx$
+   is also a subgradient of $f$ at $\bx$.
+1. Expanding $f_{\tilde{\by}}(\bx)$:
+
+   $$
+   f_{\tilde{\by}}(\bx) = \tilde{\by}^T \bAAA(\bx) \tilde{\by}
+   = \tilde{\by}^T \bA_0\tilde{\by} 
+   + \sum_{i=1}^m \tilde{\by}^T \bA_i \tilde{\by} x_i.
+   $$
+1. Then, the gradient of $f_{\tilde{\by}}$ at $\bx$
+   (computed by taking partial derivatives w.r.t. $x_i$) is
+
+   $$
+   \nabla f_{\tilde{\by}}(\bx) = 
+   (\tilde{\by}^T \bA_1 \tilde{\by}, \dots, \tilde{\by}^T \bA_m \tilde{\by}). 
+   $$
+1. Since $f_{\by}$ is affine (thus convex), hence its gradient
+   is also a subgradient.
+1. Thus, 
+
+   $$
+   (\tilde{\by}^T \bA_1 \tilde{\by}, \dots, \tilde{\by}^T \bA_m \tilde{\by})
+   \in \partial f(\bx).
+   $$
+```
+
 
 
 ## Maximum over a Set of Functions
