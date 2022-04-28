@@ -2465,83 +2465,8 @@ Our task is to find a subgradient of $f$ at $\bx$.
 ```
 
 
-
-## Maximum over a Set of Functions
-
-```{div}
-Here, we summarize the main results for subdifferentials
-and directional derivatives for a function which
-is the pointwise maximum of a set of functions.
-
-Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be a set of
-proper functions. Let
-
-$$
-f(\bx) = \max \{ f_1(\bx), f_2(\bx), \dots, f_m(\bx)\}.
-$$
-
-Let $\bx \in \bigcap_{i=1}^m \interior \dom f_i$ be a point common to the
-interiors of the domains of all the functions.
-Let $\bd \in \VV$ be a (nonzero) direction. 
-
-We recall from {prf:ref}`res-cvxf-dir-der-max-funcs`
-that if $f'_i(\bx;\bd)$ exist for all $i$, we have,
-
-$$
-f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'_i(\bx;\bd)
-$$
-where $I(\bx) = \{ i \ST f_i(\bx) = f(\bx)\}$.
-
-
-In other words, we identify the functions $f_i$ which achieve the maximum
-$f(\bx)$ at $\bx$, compute the directional derivatives of these functions at $\bx$
-for the direction $\bd$ and then compute the maximum of the directional derivatives.
-
-
-If $f_i$ are all proper and convex, then
-by {prf:ref}`res-cvxf-dir-der-exist-convex`,
-the directional derivatives $f'(\bx; \bd)$ and
-$f'_i(\bx; \bd)$ for $i=1,\dots,m$ exist.
-Thus, {prf:ref}`res-cvxf-dir-der-max-convex-funcs` applies.
-We have:
-
-$$
-f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'_i(\bx;\bd)
-$$
-where $I(x) = \{ i \ST f_i(x) = f(x)\}$.
-```
-
-
-```{rubric} Differentiable functions
-```
-
-```{div}
-If $f_i$ are differentiable at $x$, then
-
-$$
-f'(x; d) = \underset{i \in I(x)}{\max} f'_i(x;d) 
-= \underset{i \in I(x)}{\max} \langle \nabla f_i(x) , d \rangle.
-$$
-```
-
-```{rubric} Infinite set of functions
-```
-We have a weak rule for the subdifferential of the supremum of 
-an arbitrary set of functions.
-
-```{div}
-Let $I$ be an arbitrary index set indexing a set of proper 
-convex functions $f_i : \VV \to \RERL$ where $i \in I$.
-
-Then for any  $x \in \dom f$, 
-
-$$
-\text{conv } \left ( \bigcup_{i \in I(x)} \partial f_i(x)
-  \right ) \subseteq \partial f(x)
-$$
-
-where $I (x) = \{i \in I \ST f(x) = f_i (x) \}$.
-```
+In the reminder of this section, we compute the subgradients
+and subdifferential sets for a variety of standard functions.
 
 ## Norm Functions
 
