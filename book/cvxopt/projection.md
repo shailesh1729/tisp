@@ -414,7 +414,7 @@ as defined in {prf:ref}`def-pocs-projection-mapping` is nonexpansive
 In other words,
 
 $$
-\| P_C (\bx)  - P_C (\by) \| \leq \| \by - \bx \| \Forall \bx, \by \in \VV.
+\| P_C (\bx)  - P_C (\by) \| \leq \| \bx - \by \| \Forall \bx, \by \in \VV.
 $$
 ```
 
@@ -724,14 +724,34 @@ We proceed as follows.
 
 
 
+```{prf:theorem} Gradient of $\psi_C$.
+:label: res-pocs-grad-psi-c
 
-
-The gradient of $\psi_C$ is given by:
+Let $C$ be a nonempty, closed and convex subset of $\VV$.
+The gradient of the function $\psi_C$
+as defined in {prf:ref}`def-pocs-sq-dist-set`
+at $\bx \in \VV$ is given by:
 
 $$
-\nabla \psi_C(\bx) = P_C(\bx).
+\nabla \psi_C(\bx) = P_C(\bx)  \Forall \bx \in \VV.
+$$
+```
+
+```{prf:proof}
+We have
+
+$$
+\psi_C(\bx) = \frac{1}{2} \left (\| \bx \|^2 - d_C^2(\bx) \right)
+=  \frac{1}{2} (\| \bx \|^2 - \varphi_C(\bx).
 $$
 
+Hence,
+
+$$
+\nabla \psi_C(\bx)  = \bx - \nabla \varphi_C(\bx)
+= \bx - (\bx - P_C(\bx)) = P_C(\bx).
+$$
+```
 
 ```{prf:remark} Distance function and square distance function relation
 :label: rem-pocs-dist-sq-dist-relation
@@ -913,7 +933,26 @@ Recall the definition of $\varphi_C$ from {prf:ref}`def-pocs-sq-dist-set`.
 1. Thus, $\varphi_C$ is 1-smooth.
 ```
 
-The function $\psi_C$ is also 1-smooth.
+```{prf:theorem} Smoothness of the $\psi_C$ function
+:label: res-pocs-psi-c-smoothness
+
+The function $\psi_C$ is 1-smooth.
+```
+
+```{prf:proof}
+We recall from {prf:ref}`res-pocs-grad-psi-c` that
+$\nabla \psi_C(\bx) = P_C(\bx)$.
+
+Hence,
+
+$$
+\| \nabla \psi_C(\bx)  - \nabla \psi_C(\by)  \|
+= \| P_C(\bx) - P_C(\by) \|
+\leq \| \bx - \by \|
+$$
+due to the nonexpansiveness property ({prf:ref}`res-opt-pocs-nonexpansiveness`).
+```
+
 
 
 
