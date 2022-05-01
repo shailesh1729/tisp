@@ -619,7 +619,7 @@ as defined in {prf:ref}`def-pocs-sq-dist-set`
 at $\bx \in \VV$ is given by:
 
 $$
-\nabla \varphi_C(\bx) = x - P_C(\bx)  \Forall \bx \in \VV.
+\nabla \varphi_C(\bx) = \bx - P_C(\bx)  \Forall \bx \in \VV.
 $$
 ```
 
@@ -857,7 +857,61 @@ the biconjugate of $f$ is $f$ itself.
 
 ## Smoothness 
 
-The function $\varphi_C = \frac{1}{2} d_C^2$ is 1-smooth.
+```{div}
+Recall from {prf:ref}`def-cvxf-l-smooth-func` that
+a  function $f : \VV \to \RR$ is $L$-smooth if
+
+$$
+\| \nabla f(\bx) - \nabla f(\by)\|_* \leq L \| \bx - \by \|
+\Forall \bx, \by \in \VV.
+$$
+
+Since the norm in this section is induced by the inner product,
+hence it is self dual. 
+
+Thus, the smoothness criteria becomes:
+
+$$
+\| \nabla f(\bx) - \nabla f(\by)\|_* \leq L \| \bx - \by \|
+\Forall \bx, \by \in \VV.
+$$
+```
+
+```{prf:theorem} Smoothness of the squared distance function
+:label: res-pocs-sq-dist-smoothness
+
+The squared distance function $\varphi_C$ is 1-smooth.
+```
+
+```{prf:proof}
+Recall the definition of $\varphi_C$ from {prf:ref}`def-pocs-sq-dist-set`.
+
+1. By {prf:ref}`res-pocs-grad-sq-dist-func`,
+
+   $$
+   \nabla \varphi_C(\bx) = \bx - P_C(\bx).
+   $$
+1. Hence,
+
+   $$
+   & \| \nabla \varphi_C(\bx) - \nabla \varphi_C(\by) \|^2 \\
+   &= \|  \bx - P_C(\bx) - \by + P_C(\by) \|^2 \\
+   &= \| (\bx - \by) - (P_C(\bx) - P_C(\by)) \|^2 \\
+   &= \| \bx - \by \|^2 - 2 \langle P_C(\bx) - P_C(\by), \bx - \by \rangle
+    + \| P_C(\bx) - P_C(\by) \|^2\\
+    &\leq \| \bx - \by \|^2 - 2 \| P_C(\bx) - P_C(\by) \|^2 
+    + \| P_C(\bx) - P_C(\by) \|^2 & \text{ firm nonexpansiveness } \\
+    &= \| \bx - \by \|^2 - \| P_C(\bx) - P_C(\by) \|^2 \\
+    &\leq \| \bx - \by \|^2.
+   $$
+1. Thus,
+  
+    $$
+    \| \nabla \varphi_C(\bx) - \nabla \varphi_C(\by) \|
+    \leq \| \bx - \by \|.
+    $$
+1. Thus, $\varphi_C$ is 1-smooth.
+```
 
 The function $\psi_C$ is also 1-smooth.
 
