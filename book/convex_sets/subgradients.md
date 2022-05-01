@@ -2174,7 +2174,7 @@ We are given $\bx \in \VV$ at which $g$ is differentiable and $f$ is convex.
    &= \sigma_{g'(f(\bx)) \partial f (\bx)} (\bd).
    $$
    The last step is due to {prf:ref}`res-cvxf-support-func-Homogeneity`.
-   Since $g$ is nondecresaing, hence $g'(f(\bx)) \geq 0$.
+   Since $g$ is nondecreasing, hence $g'(f(\bx)) \geq 0$.
 1. By {prf:ref}`res-cvxf-subdifferential-closed-convex` and
    {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`, 
    the sets $\partial f(\bx)$ and $\partial h(\bx)$ are nonempty,
@@ -2309,6 +2309,72 @@ Since $f_i$ are proper convex, hence their pointwise maximum $f$ is proper conve
    $$
 ```
 
+Some applications of this rule are presented later in
+{prf:ref}`ex-cvxf-subdiff-linf-norm`,
+{prf:ref}`ex-cvxf-subdiff-ax-b-inf-norm`,
+{prf:ref}`ex-cvxf-subdiff-max-func`,
+{prf:ref}`ex-cvxf-subdiff-piecewise-linear-function`.
+
+
+We now present a weaker version of the max rule which is applicable
+for pointwise supremum over an arbitrary set of functions.
+
+```{prf:theorem} Weak max rule of subdifferential calculus
+:label: res-cvxf-subdiff-calculus-weak-max-rule
+
+Let $I$ be an arbitrary index set and suppose that
+for every $i \in I$, there exists a proper convex
+function $f_i : \VV \to \RERL$.
+Let $f : \VV \to \RERL$ be given by:
+
+$$
+f(\bx) = \sup_{i \in I} \{ f_i(\bx)\}.
+$$
+
+Then for any $\bx \in \dom f$,
+
+$$
+\convex \left ( \bigcup_{i\in I(\bx)} \partial f_i (\bx) \right ) 
+\subseteq \partial f(\bx)
+$$
+where $I(\bx) = \{ i \in I \ST f_i(\bx) = f(\bx)\}$.
+```
+
+```{prf:proof}
+Pick some $\bx \in \dom f$.
+
+1. Let $\bz \in \dom f$ be arbitrary.
+1. Let $I(\bx) =  \{ i \in I \ST f_i(\bx) = f(\bx)\}$.
+1. Let $i \in I(\bx)$ be arbitrary.
+1. Let $\bg \in \partial f_i(\bx)$ be a subgradient of $f_i$ at $\bx$.
+1. Then, by definition of $f$ and subgradient inequality:
+
+   $$
+   f(\bz) \geq f_i(\bz) \geq f_i(\bx) + \langle \bz - \bx, \bg \rangle
+   = f(\bx) + \langle \bz - \bx, \bg \rangle. 
+   $$
+   We used the fact that $f_i(\bx) = f(\bx)$ for $i \in I(\bx)$.
+1. Thus, $\bg \in \partial f(\bx)$. $\bg$ is a subgradient of $f$
+   at $\bx$.
+1. Since this is valid for every subgradient of $f_i$ at $\bx$, 
+   hence $\partial f_i(\bx) \subseteq \partial f(\bx)$.
+1. Since this is valid for every $i \in I(\bx)$, hence
+
+   $$
+    \bigcup_{i\in I(\bx)} \partial f_i (\bx) \subseteq \partial f(\bx).
+   $$
+
+1. Recall from {prf:ref}`res-cvxf-subdifferential-closed-convex`
+   that $\partial f(\bx)$ is convex.
+1. Thus, it contains the convex hull of any of its subsets.
+   Hence,
+   
+   $$
+   \convex \left ( \bigcup_{i\in I(\bx)} \partial f_i (\bx) \right ) 
+   \subseteq \partial f(\bx).
+   $$
+```
+
 
 ## Maximum over a Set of Functions
 
@@ -2391,12 +2457,12 @@ where $I (x) = \{i \in I \ST f(x) = f_i (x) \}$.
 
 ```{div}
 We recall from {prf:ref}`res-cvxf-subdiff-norm-origin` that
-the subdifferential of a norm $\| \cdot \|: \VV \to \RR$ at $x = \ZeroVec$
+the subdifferential of a norm $\| \cdot \|: \VV \to \RR$ at $x = \bzero$
 is given by:
 
 $$
-\partial f(\ZeroVec) 
-= B_{\| \cdot \|_*} [\ZeroVec, 1] 
+\partial f(\bzero) 
+= B_{\| \cdot \|_*} [\bzero, 1] 
 = \{ g \in \VV^* \ST \|g\|_* \leq 1 \}. 
 $$
 ```
@@ -2411,14 +2477,14 @@ We recall that the dual norm of $\ell_1$ is $\ell_{\infty}$.
 The unit ball of $\ell_{\infty}$-norm at origin is given by
 
 $$
-B_{\| \cdot \|_{\infty}} [\ZeroVec, 1] = [-1, 1]^n.
+B_{\| \cdot \|_{\infty}} [\bzero, 1] = [-1, 1]^n.
 $$
 
 Following {prf:ref}`res-cvxf-subdiff-norm-origin`,
-the subdifferential of $f$ at $\bx = \ZeroVec$ is given by:
+the subdifferential of $f$ at $\bx = \bzero$ is given by:
 
 $$
-\partial f(\ZeroVec) = B_{\| \cdot \|_{\infty}} [\ZeroVec, 1] = [-1, 1]^n. 
+\partial f(\bzero) = B_{\| \cdot \|_{\infty}} [\bzero, 1] = [-1, 1]^n. 
 $$
 ```
 
@@ -2621,58 +2687,79 @@ c.f. {prf:ref}`ex-cvxf-subdiff-abs-func-origin`.
 
 ### $\ell_{\infty}$-Norm
 
-```{div}
-Let $f : \RR^n \to \RR$ be given by $f(x) = \| x \|_{\infty}$.
+```{prf:example} Subdifferential of $\ell_{\infty}$ norm at origin
+:label: ex-cvxf-subdiff-linf-norm-origin
+
+Let $f : \RR^n \to \RR$ be given by $f(\bx) = \| \bx \|_{\infty}$.
+We recall that the dual norm of $\ell_{\infty}$ is $\ell_{1}$.
+The unit ball of $\ell_{1}$-norm at origin is given by
+
+$$
+B_{\| \cdot \|_1} [\bzero, 1] = \{ \bx \in \RR^n \ST \| \bx \|_1 \leq 1\}.
+$$
+
+Following {prf:ref}`res-cvxf-subdiff-norm-origin`,
+the subdifferential of $f$ at $\bx = \bzero$ is given by:
+
+$$
+\partial f(\bzero) = B_{\| \cdot \|_1 [\bzero, 1]}
+= \{ \bx \in \RR^n \ST \| \bx \|_1 \leq 1\}. 
+$$
 ```
 
-```{div}
-Subdifferential of $f$ at $x = \ZeroVec$:
+```{prf:example} Subdifferential of $\ell_{\infty}$ norm
+:label: ex-cvxf-subdiff-linf-norm
 
-$$
-\partial f(\ZeroVec) = B_{\| \cdot \|_1} [\ZeroVec, 1] 
-= \{ x \in \RR^n \ST \|x\|_1 \leq 1 \}. 
-$$
-
-Subdifferential of $f$ at $x \neq \ZeroVec$.
+Let $f : \RR^n \to \RR$ be given by $f(\bx) = \| \bx \|_{\infty}$.
+Let us compute the subdifferential of $f$ at $\bx \neq \bzero$.
 
 We have:
 
 $$
-f(x) = \max \{f_1(x), f_2(x), \dots, f_n(x)\}
+f(\bx) = \max \{f_1(\bx), f_2(\bx), \dots, f_n(\bx)\}
 $$
-where $f_i(x) = |x_i|$. We set:
+where $f_i(\bx) = |x_i|$. 
+We define:
 
 $$
-I(x) = \{i \ST |x_i | = f(x) = \| x \|_{\infty} \}.
+I(\bx) = \{i  \in [1,\dots,n] \ST |x_i | = f(\bx) = \| \bx \|_{\infty} \}.
 $$
 
-We have
+Then, following {prf:ref}`ex-cvxf-subdiff-l1-norm`
 
 $$
-\partial f_i(x) = \{\sgn (x_i)  e_i \} \Forall i \in I(x).
+\partial f_i(\bx) = \{\sgn (x_i)  \be_i \} \Forall i \in I(\bx).
 $$
+This is valid since $\bx \neq \bzero$ implies that $f(\bx) \neq 0$
+which in turn implies that $x_i \neq 0$ for every $i \in I(\bx)$.
+
+Then, using the max rule for proper convex functions
+({prf:ref}`res-cvxf-subdiff-calculus-max-rule`):
 
 $$
-\partial f(x) = \text{conv } \left (\bigcup_{i \in I(x)} \{\sgn (x_i)  e_i \} \right ).
+\partial f(\bx) = 
+\convex \left (\bigcup_{i \in I(\bx)} \{\sgn (x_i)  \be_i \} \right ).
 $$
 
 We can rewrite this as:
 
 $$
-\partial f(x) = \left \{\sum_{i \in I(x)} \lambda_i \sgn(x_i) e_i \ST 
- \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0, j \in I(x) \right \}.
+\partial f(\bx) = \left \{\sum_{i \in I(\bx)} \lambda_i \sgn(x_i) \be_i \ST 
+ \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\bx) \right \}.
 $$
 
 
-Combining the two cases, we get:
+Combining this with the subdifferential of $f$
+at origin from {prf:ref}`ex-cvxf-subdiff-linf-norm-origin`,
+we obtain:
 
 $$
-\partial f (x) = \begin{cases} 
-\left \{\sum_{i \in I(x)} \lambda_i \sgn(x_i) e_i \ST 
- \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0, j \in I(x) \right \},
-& x \neq \ZeroVec \\
-B_{\| \cdot \|_1} [\ZeroVec, 1], & x  = \ZeroVec
-\end{cases}.
+\partial f (\bx) = \begin{cases} 
+\left \{\sum_{i \in I(\bx)} \lambda_i \sgn(x_i) \be_i \ST 
+ \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\bx) \right \},
+& \bx \neq \bzero \\
+B_{\| \cdot \|_1} [\bzero, 1], & \bx  = \bzero .
+\end{cases}
 $$
 ```
 
@@ -2726,8 +2813,8 @@ We have:
 
 $$
 \partial f (Ax + b) = \begin{cases} 
-\left \{ \frac{A x + b}{ \| A x + b \|_2} \right \} & \text{for} & Ax + b \neq \ZeroVec \\
-B_{\| \cdot \|_2} [\ZeroVec, 1] & \text{for} & A x + b  = 0
+\left \{ \frac{A x + b}{ \| A x + b \|_2} \right \} & \text{for} & Ax + b \neq \bzero \\
+B_{\| \cdot \|_2} [\bzero, 1] & \text{for} & A x + b  = 0
 \end{cases}.
 $$
 
@@ -2737,43 +2824,116 @@ Applying the affine transformation rule, we get:
 $$
 \partial h (x) = A^T \partial f (Ax + b) 
 = \begin{cases} 
-\left \{ \frac{A^T (A x + b)}{ \| A x + b \|_2} \right \} & \text{for} & Ax + b \neq \ZeroVec \\
-A^T B_{\| \cdot \|_2} [\ZeroVec, 1] & \text{for} & A x + b  = 0
+\left \{ \frac{A^T (A x + b)}{ \| A x + b \|_2} \right \} & \text{for} & Ax + b \neq \bzero \\
+A^T B_{\| \cdot \|_2} [\bzero, 1] & \text{for} & A x + b  = 0
 \end{cases}.
 $$
 
 For $x \ST A x + b = 0$, we can write this as 
 
 $$
-\partial h (x) = A^T B_{\| \cdot \|_2} [\ZeroVec, 1] = \{A^T y \ST \| y \|_2 \leq 1 \}.
+\partial h (x) = A^T B_{\| \cdot \|_2} [\bzero, 1] = \{A^T y \ST \| y \|_2 \leq 1 \}.
 $$
 ```
 
 ### $\ell_{\infty}$ Norm over Affine Transformation  
 
-```{div}
-Let $A \in \RR^{m \times n}$. Let $b \in \RR^m$. 
-Let $f : \RR^m \to \RR$ be given by $f(y) = \| y \|_{\infty}$.
+```{prf:example} Subdifferential of $\|\bA \bx + \bb \|_{\infty}$
+:label: ex-cvxf-subdiff-ax-b-inf-norm
+
+Let $\bA \in \RR^{m \times n}$. Let $\bb \in \RR^m$. 
+Let $f : \RR^m \to \RR$ be given by 
+
+$$
+f(\by) = \| \by \|_{\infty}.
+$$
 
 Let $h : \RR^n \to \RR$ be the function 
-$h(x) = \| A x + b \|_{\infty} = f(A x + b)$.
-
-We use the affine transformation rule on the subdifferential of $f$ to obtain:
 
 $$
-\partial h (x) = \begin{cases} 
-\left \{\sum_{i \in I(x)} \lambda_i \sgn(a_i^T x + b_i) a_i \ST 
- \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0, j \in I(x) \right \},
-& A x + b \neq \ZeroVec \\
-A^T B_{\| \cdot \|_1} [\ZeroVec, 1], & A x + b = \ZeroVec
+h(\bx) = \| \bA \bx + \bb \|_{\infty} = f(\bA \bx + \bb).
+$$
+
+With $\by = \bA \bx + \bb$, we have $y_i = \ba_i^T \bx + b_i$
+where $\ba_i^T$ is the $i$-th row vector of $\bA$.
+
+Following {prf:ref}`ex-cvxf-subdiff-linf-norm`
+
+$$
+\partial f (\by) = \begin{cases} 
+\left \{\sum_{i \in I(\by)} \lambda_i \sgn(y_i) \be_i \ST 
+ \sum_{i \in I(\by)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\by) \right \},
+& \by \neq \bzero \\
+B_{\| \cdot \|_1} [\bzero, 1], & \by  = \bzero
 \end{cases}
 $$
-where $a_1^T, \dots, a_m^T$ are the rows of $A$ and 
+where $I(\by) = \{i  \in [1,\dots,n] \ST |y_i | = f(\by) = \| \by \|_{\infty} \}$.
+
+
+
+Due to affine transformation rule ({prf:ref}`res-cvxf-subdiff-strong-rule-affine`),
 
 $$
-I(x) = \{i \ST: |A x + b |_i = \| A x + b \|_{\infty} \}.
+\partial h(\bx) = \bA^T \partial f (\bA \bx + \bb).
+$$
+
+We have the following cases.
+
+(a) $\by = \bzero$.
+
+1. In terms of $\bx$, the condition $\by = \bzero$ is equivalent to
+   $\bA \bx + \bb = \bzero$.
+1. Then, 
+
+   $$
+   \partial f (\bA \bx + \bb) = \partial f(\bzero)
+   = B_{\| \cdot \|_1} [\bzero, 1].
+   $$
+1. Thus,
+
+   $$
+   \partial h(\bx) = \bA^T B_{\| \cdot \|_1} [\bzero, 1].
+   $$
+
+(b)  $\by \neq \bzero$.
+
+1. In terms of $\bx$, the condition $\by \neq \bzero$ is equivalent to
+   $\bA \bx + \bb \neq \bzero$.
+1. Then,
+
+   $$
+   \partial f(\bA \bx + \bb)
+   &= \left \{\sum_{i \in I(\by)} \lambda_i \sgn(y_i) \be_i 
+   \ST \sum_{i \in I(\by)} \lambda_i = 1, \lambda_j \geq 0, j \in I(\by) \right \} \\
+   &= \left \{\sum_{i \in I_x} \lambda_i \sgn(\ba_i^T \bx + b_i) \be_i 
+   \ST \sum_{i \in I_x} \lambda_i = 1, \lambda_j \geq 0, j \in I_x \right \}
+   $$
+   where 
+
+   $$
+   I_x = I(\by) = I(\bA \bx + \bb).
+   $$
+1. Note that $\bA^T \be_i = \ba_i$.
+1. Then,
+
+   $$
+   \partial h(\bx) &= \bA^T \partial f (\bA \bx + \bb) \\
+   &= \left \{\sum_{i \in I_x} \lambda_i \sgn(\ba_i^T \bx + b_i) \ba_i \ST 
+ \sum_{i \in I_x} \lambda_i = 1, \lambda_j \geq 0, j \in I_x \right \}.
+   $$
+
+Combining the two cases, we get:
+
+$$
+\partial h (\bx) = \begin{cases} 
+\left \{\sum_{i \in I_x} \lambda_i \sgn(\ba_i^T \bx + b_i) \ba_i \ST 
+ \sum_{i \in I_x} \lambda_i = 1, \lambda_j \geq 0, j \in I_x \right \},
+& \bA \bx + \bb \neq \bzero \\
+\bA^T B_{\| \cdot \|_1} [\bzero, 1], & \bA \bx + \bb = \bzero
+\end{cases}
 $$
 ```
+
 ## Indicator Functions
 
 
@@ -2823,7 +2983,7 @@ For any $\bx \notin S$, $N_S(\bx) = \EmptySet$. Combining:
 
 
 $$
-\partial \delta_{B[\ZeroVec, 1]} (x) = \begin{cases} 
+\partial \delta_{B[\bzero, 1]} (x) = \begin{cases} 
  \{ \by \in \VV^* \ST \| \by \|_* \leq \langle \bx, \by \rangle \} 
  & \text{for} & \| \bx \| \leq 1 \\
 \EmptySet & \text{for} & \| \bx \| > 1.
@@ -2831,29 +2991,7 @@ $$
 $$
 ```
 
-## Minimization Problems
 
-```{div}
-Minimization problem:
-
-$$
-\min \{f(x) \ST g(x) \leq 0, x \in X \}.
-$$
-
-Dual function:
-
-$$
-q(\lambda) \min_{x \in X} \{L(x, \lambda) \triangleq f(x) + \lambda^T g(x)\}
-$$
-
-Assume that for $\lambda = \lambda_0$ the minimization in R.H.S. is obtained at $x = x_0$.
-
-Subgradient of the (negative of the) dual function $-q$:
-
-$$
-- g (x_0) \in \partial (-q) (\lambda_0).
-$$
-```
 
 ## Maximum Eigen Value Function
 
@@ -2913,112 +3051,69 @@ would characterize the entire subdifferential.
 
 ## The Max Function
 
-```{div}
+```{prf:example} Subdifferential of the max function
+:label: ex-cvxf-subdiff-max-func
+
 Let $f : \RR^n \to \RR$ be given by:
 
 $$
-f(x) = \max \{ x_1, x_2, \dots, x_n\}.
+f(\bx) = \max \{ x_1, x_2, \dots, x_n\}.
 $$
 
-Let $f_i(x) = x_i$. Then
+Let $f_i(\bx) = x_i = \be_i^T \bx$. Then
 
 $$
-f_(x) = \max \{ f_1(x), f_2(x), \dots, f_n(x)\}.
+f_(\bx) = \max \{ f_1(\bx), f_2(\bx), \dots, f_n(\bx)\}.
 $$
 
-$$
-\partial f_i(x) = \{ e_i\}.
-$$
-
-We denote:
+We note that $f_i$ are differentiable and their
+gradient is given by
+(see {prf:ref}`ex-mvc-gradient-linear-functional`):
 
 $$
-I (x) = \{ i \ST f(x) = x_i\}.
+\nabla f_i(\bx) = \be_i.
+$$
+Also, $f_i$ are linear, hence convex.
+Thus, due to {prf:ref}`res-cvxf-subdiff-grad`:
+
+$$
+\partial f_i(\bx) = \{ \be_i\}.
 $$
 
-Using the max rule for functions:
+We denote the index set of functions which
+equal the value of $f(\bx$ at $\bx$ by:
 
 $$
-\partial f (x) = \text{conv } \left ( \bigcup_{i \in I(x)} \partial f_i(x) \right )
-  = \text{conv } \left ( \bigcup_{i \in I(x)} \{ e_i\} \right ).
+I (\bx) = \{ i \ST f(\bx) = x_i\}.
 $$
+
+Then, using the max rule for proper convex functions
+({prf:ref}`res-cvxf-subdiff-calculus-max-rule`):
+
+$$
+\partial f (\bx) = \convex \left ( 
+   \bigcup_{i \in I(\bx)} \partial f_i(\bx) \right )
+  = \convex \left ( \bigcup_{i \in I(\bx)} \{ \be_i\} \right ).
+$$
+
+As and example, consider the case where $\bx = \alpha \bone$
+for some $\alpha \in \RR$.
+
+1. In other words, $\bx = (\alpha, \dots, \alpha)$.
+1. Then, $f(\bx) = \alpha$.
+1. $f_i(\bx) = \alpha = f(\bx)$ for ever $i \in [1,\dots, n]$.
+1. $I(\bx) =  \{1, \dots, n \}$.
+1. $\nabla f_i(\bx) = \be_i$.
+1. $\convex ( \bigcup_{i \in I(\bx)} \{ \be_i\} ) = \convex \{ \be_1, \dots, \be_n \}$.
+1. But $\convex \{ \be_1, \dots, \be_n \} = \Delta_n$.
+1. Thus,
+
+   $$
+   \partial f (\alpha \bone) = \Delta_n \Forall \alpha \in \RR.
+   $$
 ```
 
-For the vector of all ones:
 
-$$
-\partial f (\alpha \OneVec) = \Delta_n \Forall \alpha \in \RR.
-$$
-
-
-## Distance from a Convex Set
-
-Let $\VV$ be an $n$-dimensional real vector space
-equipped with an inner product
-$\langle \cdot, \cdot \rangle$
-and a norm $\| \cdot \|$ induced by the inner product.
-
-Let $C \subseteq \VV$ be a nonempty closed and convex set.
-The *orthogonal projection* mapping under a norm $\| \cdot \|$
-is defined by:
-
-$$
-P_C(\bx) \triangleq \underset{\by \in C}{\argmin} 
-\| \by - \bx \| \Forall \bx \in \VV. 
-$$
-The mapping $P_C$ is well defined (exists and unique) when
-the underlying set $C$ is nonempty, closed and convex.
-
-The distance of a point $\bx \in \VV$ to $C$ is defined as
-
-$$
-d_C(\bx) = \| \bx - P_C(\bx) \|.
-$$
-
-
-Let $\phi_C : \VV \to \RR$ (squared distance function) be defined as:
-
-$$
-\phi_C(\bx) \triangleq \frac{1}{2} d_C^2(\bx) 
-= \frac{1}{2}\| \bx - P_C(\bx) \|^2.
-$$
-
-
-
-```{div}
-We note that $\phi_C = g \circ d_C$ where 
-$g(t) = \frac{1}{2}[t]_+^2$.
-
-Applying chain rule:
-
-$$
-\partial \phi_C (x) = [d_C(x)]_+ \partial d_C(x) = d_C(x) \partial d_C(x).
-$$
-
-For any $x \notin C$, $d_C(x) \neq 0$, and we have:
-
-$$
-d_C(x) = \left \{ \frac{x - P_C(x)}{d_C(x)}\right \} \Forall x \notin C.
-$$
-
-$d_C$ is differentiable at $x \notin C$.
-
-
-For $x \in C$:
-
-$$
-\partial d_C (x) = N_C(x) \cap B[\ZeroVec, 1].
-$$
-
-Combining cases:
-
-$$
-\partial d_C (x) = \begin{cases} 
- \left \{ \frac{x - P_C(x)}{d_C(x)}\right \}, & x \notin C\\
-N_C(x) \cap B[\ZeroVec, 1], & x \in C
-\end{cases}.
-$$
-```
 
 
 ## Space of Matrices
@@ -3052,33 +3147,79 @@ $$
 $$
 
 
-## Convex Piecewise Linear Function
+## Convex Piecewise Linear Functions
 
 
-```{div}
+```{prf:example} Subdifferential of convex piecewise linear functions
+:label: ex-cvxf-subdiff-piecewise-linear-function
+
+
 Let a convex piecewise linear function $f : \RR^n \to \RR$ be given by:
 
 $$
-f(x) = \underset{1 \leq i \leq m}{\max} \{a_i^T x + b_i \}.
+f(\bx) = \underset{1 \leq i \leq m}{\max} \{\ba_i^T \bx + b_i \}
 $$
+where $\ba_i \in \RR^n, b_i \in \RR$ for $i=1,\dots,m$.
 
-We define $f_i(x) = a_i^T x + b_i$. Then 
-
-$$
-f(x) = \underset{1 \leq i \leq m}{\max} \{ f_i(x)\}.
-$$
-
-We set:
+We define a set of functions $f_i : \RR^n \to \RR$
+for $i=1,\dots,m$ as 
 
 $$
-I(x) = \{i \ST f(x) = a_i^T x + b_i \}.
+f_i(\bx) = \ba_i^T \bx + b_i
+$$  
+
+We can see that $f$ is a pointwise maximum of these functions.
+
+$$
+f(\bx) = \underset{1 \leq i \leq m}{\max} \{ f_i(\bx)\}.
 $$
 
-Then we have:
+Clearly,
 
 $$
-\partial f(x) = \left \{  \sum_{i \in I(x)} \lambda_i a_i \ST 
-  \sum_{i \in I(x)} \lambda_i = 1, \lambda_j \geq 0 \Forall j \in I(x)
-  \right \}
+\partial f_i(\bx) = \{ \nabla f_i(\bx) \}
+= \{ \ba_i \}.
+$$
+
+We define:
+
+$$
+I(\bx) = \{i \in [1,\dots,m] \ST f(\bx) = f_i(\bx) = \ba_i^T \bx + b_i \}.
+$$
+
+Then, using the max rule for proper convex functions
+({prf:ref}`res-cvxf-subdiff-calculus-max-rule`):
+
+$$
+\partial f(\bx) 
+&= \convex \left ( \bigcup_{i\in I(\bx)} \partial f_i (\bx) \right ) \\
+&= \left \{  \sum_{i \in I(\bx)} \lambda_i \ba_i \ST 
+  \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0 \Forall j \in I(\bx)
+  \right \}.
+$$
+```
+
+
+## Minimization Problems
+
+```{div}
+Minimization problem:
+
+$$
+\min \{f(x) \ST g(x) \leq 0, x \in X \}.
+$$
+
+Dual function:
+
+$$
+q(\lambda) \min_{x \in X} \{L(x, \lambda) \triangleq f(x) + \lambda^T g(x)\}
+$$
+
+Assume that for $\lambda = \lambda_0$ the minimization in R.H.S. is obtained at $x = x_0$.
+
+Subgradient of the (negative of the) dual function $-q$:
+
+$$
+- g (x_0) \in \partial (-q) (\lambda_0).
 $$
 ```
