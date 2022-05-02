@@ -736,4 +736,47 @@ $$
 This distance function is known as *Euclidean metric*. 
 
 This makes  $\RR^n$  a *metric space*.
+```
 
+
+## General Euclidean Space
+
+We can generalize the definition of a Euclidean space
+to a more abstract case.
+
+```{prf:definition} General Euclidean space
+:label: def-la-gen-euclidean-space
+
+A finite dimensional real vector space $\VV$
+equipped with an inner product $\langle \cdot, \cdot \rangle$
+is called a *Euclidean space* if it is endowed
+with the norm $\| \cdot \| : \VV \to \RR$ given by
+
+$$
+\| \bx \| = \sqrt{ \langle \bx, \bx \rangle}.
+$$
+The norm induced by the inner product is known as
+the *Euclidean norm*.
+```
+
+
+```{div}
+There are several properties emerging from this definition.
+
+1. Let $\VV$ be a Euclidean space.
+1. The field of scalars is $\RR$.
+1. Assume that $n = \dim \VV$.
+1. The inner product is a real inner product.
+1. $\VV$ is isomorphic to $\RR^n$.
+1. If we choose a basis $\BBB = \{ \be_1, \dots, \be_n \}$
+   for $\VV$, then the coordinates for each
+   vector $\bv \in \VV$ form an element of $\RR^n$.
+1. This forms a direct bijective mapping between $\VV$ and $\RR^n$.
+1. $\| \bx \|^2 = \langle \bx, \bx \rangle$.
+1. The Euclidean norm makes it a normed linear space.
+1. Recall from {prf:ref}`res-la-ndim-complete` that
+  a finite dimensional normed linear space is complete.
+1. Thus, $\VV$ is a {prf:ref}`Banach space <def-la-banach-space>`.
+1. $\VV$ is an inner product space which is complete.
+1. Hence $\VV$ is also a {prf:ref}`Hilbert space <def-la-ip-hilbert-space>`.
+```
