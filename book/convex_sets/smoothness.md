@@ -576,21 +576,40 @@ if and only if $g$ is convex.
    which is nothing but the $\sigma$-strong convexity condition of $f$.
 ```
 
-```{rubric} Quadratic functions
-```
 
-```{div}
+```{prf:theorem} Strong convexity of quadratic functions
+:label: res-cvxf-quadratic-strong-convex
+
 Let $\bA \in \SS^n$, $\bb \in \RR^n$ and $c \in \RR$.
-Assume that $\RR^n$ is endowed with $p$-norm. Let
-$f : \RR^n \to \RR$ be given by:
+Let $f : \RR^n \to \RR$ be given by:
 
 $$
 f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c.
 $$
 
 Then $f$ is strongly convex if and only if $\bA$ is positive definite
-and $\sigma \leq t_{\min}(\bA)$.
+and $\sigma \leq \lambda_{\min}(\bA)$.
 ```
+
+```{prf:proof}
+
+Due to {prf:ref}`res-cvx-strong-convexity-convexity`,
+$f$ is strongly convex with $\sigma > 0$ 
+if and only if 
+$g(\bx) = f(\bx) - \frac{\sigma}{2} \| \bx \|^2$
+is convex.
+
+1. We note that
+
+   $$
+   g(\bx) &= \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c - \frac{\sigma}{2} \| \bx \|^2\\
+   &= \frac{1}{2} \bx^T (\bA - \sigma \bI) \bx + \bb^T \bx + c.
+   $$
+1. As shown in {prf:ref}`ex-cvxf-quadratic-func-convexity`,
+   $g$ is convex if and only if $\bA - \sigma \bI \succeq \ZERO$.
+1. This is equivalent to $\sigma \leq \lambda_{\min}(\bA)$.
+```
+
 
 ### Properties
 
