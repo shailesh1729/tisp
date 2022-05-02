@@ -183,19 +183,226 @@ we proceed as follows:
 ```
 
 
-## Characterization of $L$-smooth functions
+## Characterization of $L$-Smooth Functions
 
 
-```{div}
+```{prf:theorem} Characterization of $L$-smooth functions
+:label: res-cvxf-smoothness-charac
+
 Let $f : \VV \to \RR$ be convex and differentiable over $\VV$.
 Let $L > 0$. The following claims are equivalent:
 
 1. $f$ is $L$-smooth.
-1. $f(\by) \leq f(\bx) + \langle \nabla f(\bx), \by - \bx \rangle + \frac{L}{2} \| \bx - \by \|^2 \Forall \bx, \by \in \VV$. 
-1. $f(\by) \geq f(\bx) + \langle \nabla f(\bx), \by - \bx \rangle + \frac{1}{2L} \| \nabla f (\bx) - \nabla f(\by) \|_*^2 \Forall \bx, \by \in \VV$.
-1. $\langle \nabla f (\bx) - \nabla f(\by), \bx - \by \rangle  \geq \frac{1}{L} \| \nabla f (\bx) - \nabla f(\by) \|_*^2 \Forall \bx, \by \in \VV$.
-1. $f(\lambda \bx + (1-\lambda) \by) \geq \lambda f(\bx) + (1-\lambda) f(\by) - \frac{L}{2} \lambda (1 - \lambda) \| \bx - \by \|^2  \Forall \bx, \by \in \VV, \lambda \in [0, 1]$.
+1. $f(\by) \leq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{L}{2} \| \bx - \by \|^2 \Forall \bx, \by \in \VV$. 
+1. $f(\by) \geq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{1}{2L} \| \nabla f (\bx) - \nabla f(\by) \|_*^2 \Forall \bx, \by \in \VV$.
+1. $\langle \bx - \by, \nabla f (\bx) - \nabla f(\by) \rangle  \geq \frac{1}{L} \| \nabla f (\bx) - \nabla f(\by) \|_*^2 \Forall \bx, \by \in \VV$.
+1. $f(t \bx + (1-t) \by) \geq t f(\bx) + (1-t) f(\by) - \frac{L}{2} \lambda (1 - t) \| \bx - \by \|^2  \Forall \bx, \by \in \VV, t \in [0, 1]$.
+```
 
+```{prf:proof}
+(1) $\implies$ (2). This is a direct implication of the descent lemma
+({prf:ref}`res-cvxf-smooth-descent-lemma`).
+
+
+(2) $\implies$ (3)
+
+1. We are given that (2) is satisfied.
+1. If $\nabla f(\bx) = \nabla f(\by)$, then the inequality is trivial
+   due to the convexity of $f$.
+   Hence, we consider the case where $\nabla f(\bx) \neq \nabla f(\by)$.
+1. Fix a $\bx \in \VV$.
+1. Consider a function $g_{\bx} : \VV \to \RR$ given by
+
+   $$
+   g_{\bx}(\by) = f(\by) - f(\bx)  - \langle \by - \bx, \nabla f(\bx) \rangle.
+   $$
+1. Then,
+
+   $$
+   \nabla g_{\bx}(\by)  = \nabla f(\by) - \nabla f(\bx).
+   $$
+1. By hypothesis in property (2), for any $\bz \in \VV$
+
+   $$
+   f(\bz) \leq f(\by) + \langle \bz - \by, \nabla f(\by) \rangle + \frac{L}{2} \| \bz - \by \|^2.
+   $$
+1. Now,
+
+   $$
+   & g_{\bx}(\bz) \\
+   &= f(\bz) - f(\bx)  - \langle \bz - \bx, \nabla f(\bx) \rangle \\
+   &\leq f(\by) + \langle \bz - \by, \nabla f(\by) \rangle + \frac{L}{2} \| \bz - \by \|^2
+   - f(\bx)  - \langle \bz - \bx, \nabla f(\bx) \rangle\\
+   &= f(\by) - f(\bx)  - \langle \bz - \bx, \nabla f(\bx) \rangle
+   + \langle \bz - \by, \nabla f(\bx) \rangle - \langle \bz - \by, \nabla f(\bx) \rangle\\
+   &+ \langle \bz - \by, \nabla f(\by) \rangle + \frac{L}{2} \| \bz - \by \|^2\\
+   &= f(\by) - f(\bx)  - \langle \by - \bx, \nabla f(\bx) \rangle
+   + \langle \bz - \by, \nabla f(\by) - \nabla f(\bx) \rangle + \frac{L}{2} \| \bz - \by \|^2\\
+   &= g_{\bx}(\by) + \langle \bz - \by, \nabla g_{\bx}(\by) \rangle + \frac{L}{2} \| \bz - \by \|^2.
+   $$
+1. Thus, $g_{\bx}$ also satisfies the inequality in property (2).
+1. We note in particular that $\nabla g_{\bx} (\bx) = \nabla f(\bx) - \nabla f(\bx) = \bzero$.
+1. Since $g_{\bx}$ is convex, hence $\bx$ is the global minimizer of $g_{\bx}$.
+1. In other words,
+
+   $$
+   g_{\bx}(\bx) \leq g_{\bx}(\bz) \Forall \bz \in \VV.
+   $$
+1. We can also see that $g_{\bx}(\bx) = f(\bx) - f(\bx)  - \langle \bx - \bx, \nabla f(\bx) \rangle = 0$.
+1. Let $\by \in \VV$
+1. Let $\bv \in \VV$ be the unit norm vector satisfying 
+   $\| \nabla g_{\bx}(\by) \|_* = \langle \bv , \nabla g_{\bx}(\by) \rangle$.
+1. Choose
+
+   $$
+   \bz = \by - \frac{\| \nabla g_{\bx}(\by) \|_*}{L} \bv.
+   $$
+1. Then,
+
+   $$
+   0 = g_{\bx}(\bx) \leq g_{\bx}(\bz) = g_{\bx}\left (\by - \frac{\| \nabla g_{\bx}(\by) \|_*}{L} \bv \right ).
+   $$
+1. Using property (2) on $g_{\bx}(\bz)$, we get
+
+   $$
+   0 &\leq g_{\bx}(\bz) \\
+   &\leq g_{\bx}(\by) + \langle \bz - \by, \nabla g_{\bx}(\by) \rangle + \frac{L}{2} \| \bz - \by \|^2 \\
+   &= g_{\bx}(\by) - \frac{\| \nabla g_{\bx}(\by) \|_*}{L} \langle \bv, \nabla g_{\bx}(\by) \rangle 
+   + \frac{L}{2} \left \| \frac{\| \nabla g_{\bx}(\by) \|_*}{L} \bv \right \|^2 \\
+   &= g_{\bx}(\by) - \frac{\| \nabla g_{\bx}(\by) \|_*}{L} \| \nabla g_{\bx}(\by) \|_* 
+   + \frac{1}{2 L}  \| \nabla g_{\bx}(\by) \|_*^2 \\
+   &= g_{\bx}(\by)
+   - \frac{1}{2 L}  \| \nabla g_{\bx}(\by) \|_*^2 \\
+   &= f(\by) - f(\bx)  - \langle \by - \bx, \nabla f(\bx) \rangle
+   - \frac{1}{2 L}  \| \nabla f(\by) - \nabla f(\bx) \|_*^2.
+   $$
+1. Simplifying this, we get
+
+   $$
+   f(\by) \geq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{1}{2 L}  \| \nabla f(\by) - \nabla f(\bx) \|_*^2
+   $$
+   as desired.
+
+(3) $\implies$ (4) 
+
+1. For $\bx, \by$, the property (3) gives us:
+ 
+   $$
+   f(\by) \geq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{1}{2 L}  \| \nabla f(\by) - \nabla f(\bx) \|_*^2.
+   $$
+1. For $\by, \bx$, the property (3) gives us:
+ 
+   $$
+   f(\bx) \geq f(\by) + \langle \bx - \by, \nabla f(\by) \rangle + \frac{1}{2 L}  \| \nabla f(\bx) - \nabla f(\by) \|_*^2.
+   $$
+1. Adding the two inequalities and canceling the term $f(\bx) + f(\by)$ gives us
+
+   $$
+   0 \geq \langle \bx - \by, \nabla f(\by) - f(\bx) \rangle + \frac{1}{L}  \| \nabla f(\bx) - \nabla f(\by) \|_*^2.
+   $$
+1. Rearranging, we get
+
+   $$
+   \langle \bx - \by, \nabla f(\bx) - f(\by) \rangle \geq \frac{1}{L}  \| \nabla f(\bx) - \nabla f(\by) \|_*^2
+   $$
+   as desired.
+
+
+(4) $\implies$ (1)
+
+1. When $\nabla f(\bx) = \nabla f(\by)$, then the Lipschitz condition in (1) is trivial.
+   Hence, we consider the case where $\nabla f(\bx) \neq \nabla f(\by)$.
+1. By generalized Cauchy Schwartz inequality ({prf:ref}`res-la-ip-gen-cs-ineq`)
+
+   $$
+   \langle \bx - \by, \nabla f(\bx) - f(\by) \rangle \leq \| \bx - \by \| \| f(\bx) - f(\by) \|_*.
+   $$
+1. Thus, combining with hypothesis (4), we obtain
+
+   $$
+   \frac{1}{L}  \| \nabla f(\bx) - \nabla f(\by) \|_*^2 \leq \| \bx - \by \| \| f(\bx) - f(\by) \|_*.
+   $$
+1. Since $\nabla f(\bx) \neq \nabla f(\by)$, hence $\| f(\bx) - f(\by) \|_* > 0$.
+1. Canceling it from both sides, we get
+
+   $$
+   \| \nabla f(\bx) - \nabla f(\by) \|_* \leq L \| \bx - \by \|
+   $$
+   as desired.
+
+We have shown so far that (1), (2), (3) and (4) are equivalent statements.
+We are left with showing that (5) is equivalent to the other statements.
+
+(2) $\implies$ (5)
+
+1. Pick $\bx, \by \in \VV$ and $t \in [0,1]$.
+1. Let $\bz = t \bx + (1-t) \by$.
+1. By hypothesis (2),
+
+   $$
+   & f(\bx) \leq f(\bz) + \langle \bx - \bz, \nabla f(\bz) \rangle + \frac{L}{2} \| \bx - \bz \|^2;\\
+   & f(\by) \leq f(\bz) + \langle \by - \bz, \nabla f(\bz) \rangle + \frac{L}{2} \| \by - \bz \|^2.
+   $$
+1. Note that $\bx - \bz = (1-t) (\bx - \by)$ and $\by - \bz = t (\by - \bx)$.
+1. Thus, the previous two inequalities are same as
+
+   $$
+   & f(\bx) \leq f(\bz) + (1-t)\langle \bx - \by, \nabla f(\bz) \rangle + \frac{L (1-t)^2}{2} \| \bx - \by \|^2;\\
+   & f(\by) \leq f(\bz) + t\langle \by - \bx, \nabla f(\bz) \rangle + \frac{L t^2}{2} \| \bx - \by \|^2.
+   $$
+1. Multiplying the first inequality by $t$, the second by $(1-t)$ and adding, we get
+
+   $$
+   t f(\bx) + (1-t) f(\by) \leq f(\bz) + \frac{L t(1-t)}{2} \| \bx - \by \|^2.
+   $$
+1. Rearranging, we get
+
+   $$
+   f(t \bx + (1-t) \by) = f(\bz) \geq t f(\bx) + (1-t) f(\by)  -  \frac{L }{2} t(1-t) \| \bx - \by \|^2.
+   $$
+
+(5) $\implies$ (2)
+
+1. Pick $\bx, \by \in \VV$ and $t \in (0,1)$.
+1. By hypothesis in inequality (5)
+
+   $$
+   f(t \bx + (1-t) \by) \geq t f(\bx) + (1-t) f(\by)  -  \frac{L }{2} t(1-t) \| \bx - \by \|^2.
+   $$
+1. Rearranging the terms, we obtain
+
+   $$
+   & (1-t) f(\by) \leq f(t \bx + (1-t) \by) - t f(\bx) + \frac{L }{2} t(1-t) \| \bx - \by \|^2 \\
+   &\iff (1-t) f(\by) \leq f(t \bx + (1-t) \by) - f(\bx) + (1 - t) f(\bx) + \frac{L }{2} t(1-t) \| \bx - \by \|^2 \\
+   &\iff f(\by) \leq f(\bx) + \frac{f(t \bx + (1-t) \by) - f(\bx)}{1-t} + \frac{L }{2} t \| \bx - \by \|^2.
+   $$
+   Division by $(1-t)$ is fine since $(1-t) \in (0, 1)$.
+1. Recalling the definition of directional derivative ({prf:ref}`def-cvxf-directional-derivative`):
+
+   $$
+   &\lim_{t \to 1^-}  \frac{f(t \bx + (1-t) \by) - f(\bx)}{1-t} \\
+   &= \lim_{s \to 0^+} \frac{f( (1-s) \bx + s \by) - f(\bx)}{s} \\
+   &= \lim_{s \to 0^+} \frac{f( \bx + s (\by - \bx) ) - f(\bx)}{s}\\
+   &= f'(\bx; \by - \bx).
+   $$
+1. Since the previous inequality is valid for every $t \in (0,1)$, 
+   taking the limit to $t \to 1^-$ on the R.H.S., we obtain
+
+   $$
+   f(\by) \leq f(\bx) + f'(\bx; \by - \bx) +  \frac{L }{2} \| \bx - \by \|^2.
+   $$
+
+1. Recall from {prf:ref}`res-cvxf-grad-dir-der` that 
+   $f'(\bx; \by - \bx) = \langle \by - \bx, \nabla f(\bx) \rangle$.
+1. Thus, we get:
+
+   $$
+   f(\by) \leq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle +  \frac{L }{2} \| \bx - \by \|^2.
+   $$
+   as desired.
+```
+
+```{div}
 Let $f : \RR^n \to \RR$ be a twice continuously differentiable function over $\RR^n$. 
 Then, for any $L \geq 0$, the following claims are equivalent:
 
