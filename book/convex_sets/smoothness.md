@@ -522,8 +522,8 @@ we have a stronger result available.
 ```{prf:theorem} Strong convexity and convexity
 :label: res-cvx-strong-convexity-convexity
 
-Assume that the norm $\| \cdot \| : \VV \to \RR$
-is Euclidean( i.e., nduced by the inner product).
+Assume that the ambient space $\VV$ is
+{prf:ref}`Euclidean <def-la-gen-euclidean-space>`.
 
 A function $f : \VV \to \RERL$ is $\sigma$-strongly convex
 if and only if the function $f(\cdot) - \frac{\sigma}{2} \| \cdot \|^2$

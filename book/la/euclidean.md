@@ -779,4 +779,6 @@ There are several properties emerging from this definition.
 1. Thus, $\VV$ is a {prf:ref}`Banach space <def-la-banach-space>`.
 1. $\VV$ is an inner product space which is complete.
 1. Hence $\VV$ is also a {prf:ref}`Hilbert space <def-la-ip-hilbert-space>`.
+1. $\RR^n$ provides additional features like $\ell_p$ norms.
+   Corresponding norms can be induced on $\VV$ by a coordinate mapping.
 ```
