@@ -124,17 +124,64 @@ Thus, $\| \bA \|_{p, q}$ is indeed the smallest smoothness parameter for $L$.
 ```
 
 
-```{rubric} Descent lemma
-```
+## Descent Lemma
 
-```{div}
+```{prf:theorem} Descent lemma
+:label: res-cvxf-smooth-descent-lemma
+
 Let $f : \VV \to \RERL$ be $L$-smooth for some $L \geq 0$ over 
 some convex set $D$. Then for any $\bx, \by \in D$, 
 
 $$
-f(\by) \leq f(\bx) + \langle \nabla f(\bx), \by - \bx \rangle + \frac{L}{2} \| \bx - \by \|^2. 
+f(\by) \leq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{L}{2} \| \bx - \by \|^2. 
 $$ 
 ```
+
+```{prf:proof}
+
+we proceed as follows:
+
+1. By the fundamental theorem of calculus
+
+   $$
+   f(\by) - f(\bx) = \int_0^1 \langle \by - \bx, \nabla f(\bx + t(\by - \bx)) \rangle dt.
+   $$
+1. By adding and subtracting $\langle \by - \bx, \nabla f(\bx) \rangle$, we get:
+
+   $$
+   f(\by) - f(\bx) = \langle \by - \bx, \nabla f(\bx) \rangle + 
+    \int_0^1 \langle \by - \bx, \nabla f(\bx + t(\by - \bx))  - \nabla f(\bx) \rangle dt.
+   $$
+1. This gives us
+
+   $$
+   & | f(\by) - f(\bx) -  \langle \by - \bx, \nabla f(\bx) \rangle | \\
+   &= \left | 
+   \int_0^1 \langle \by - \bx, \nabla f(\bx + t(\by - \bx))  - \nabla f(\bx) \rangle dt 
+   \right | \\
+   &\leq  \int_0^1 | \langle \by - \bx, \nabla f(\bx + t(\by - \bx))  - \nabla f(\bx) \rangle | dt \\
+   &\leq \int_0^1 \| \by - \bx \|  \| \nabla f(\bx + t(\by - \bx))  - \nabla f(\bx) \|_* dt
+   & \text{ (a) } \\
+   &\leq \int_0^1 \| \by - \bx \|  tL \| \by - \bx \| dt 
+   & \text { (b) } \\
+   &= \int_0^1 tL  \| \by - \bx \|^2  dt \\
+   &= L  \| \by - \bx \|^2 \int_0^1  t dt \\
+   &= \frac{L}{2} \| \by - \bx \|^2.
+   $$
+   * (a) is an application of Generalized Cauchy Schwartz inequality ({prf:ref}`res-la-ip-gen-cs-ineq`}).
+   * (b) is the application of $L$-smoothness of $f$ ({prf:ref}`def-cvxf-l-smooth-func`).
+1. Thus,
+
+   $$
+   & | f(\by) - f(\bx) -  \langle \by - \bx, \nabla f(\bx) \rangle |  
+   \leq \frac{L}{2} \| \by - \bx \|^2 \\
+   & \implies f(\by) - f(\bx) -  \langle \by - \bx, \nabla f(\bx) \rangle  
+   \leq \frac{L}{2} \| \by - \bx \|^2 \\
+   & \implies f(\by) \leq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle 
+   + \frac{L}{2} \| \by - \bx \|^2.
+   $$
+```
+
 
 ## Characterization of $L$-smooth functions
 
