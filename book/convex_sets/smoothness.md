@@ -124,7 +124,7 @@ Thus, $\| \bA \|_{p, q}$ is indeed the smallest smoothness parameter for $L$.
 ```
 
 
-## Descent Lemma
+### Descent Lemma
 
 ```{prf:theorem} Descent lemma
 :label: res-cvxf-smooth-descent-lemma
@@ -183,7 +183,7 @@ we proceed as follows:
 ```
 
 
-## Characterization of $L$-Smooth Functions
+### Characterization of $L$-Smooth Functions
 
 
 ```{prf:theorem} Characterization of $L$-smooth functions
@@ -402,19 +402,99 @@ We are left with showing that (5) is equivalent to the other statements.
    as desired.
 ```
 
-```{div}
+### Second Order Characterization
+
+We now restrict our attention to the vector space $\RR^n$ equipped with
+an $\ell_p$ norm with $p \geq 1$.
+
+```{prf:theorem} $L$-smoothness and the boundedness of the Hessian
+:label: res-cvxf-smoothness-twice-diff
+
 Let $f : \RR^n \to \RR$ be a twice continuously differentiable function over $\RR^n$. 
 Then, for any $L \geq 0$, the following claims are equivalent:
 
 1. $f$ is $L$-smooth w.r.t. the $\ell_p$-norm ($p \in [1, \infty]$).
 1. $\| \nabla^2 f(\bx)\|_{p, q} \leq L$ for any $\bx \in \RR^n$ where $q \geq 1$ satisfies
    $\frac{1}{p} + \frac{1}{q} = 1$.
+```
 
+```{prf:proof}
+(2) $\implies$ (1)
+
+1. We are given that $\| \nabla^2 f(\bx)\|_{p, q} \leq L$ for any $\bx \in \RR^n$.
+1. By the fundamental theorem of calculus
+
+   $$
+   \nabla f(\by) - \nabla f(\bx) &= \int_0^1 \nabla^2 f(\bx + t(\by - \bx)) (\by - \bx) dt \\
+   &=  \left (\int_0^1 \nabla^2 f(\bx + t(\by - \bx)) dt \right )  (\by - \bx).
+   $$
+1. Taking the (dual)-norm on both sides
+
+   $$
+   \| \nabla f(\by) - \nabla f(\bx)  \|_q
+   &= \left \| \left (
+      \int_0^1 \nabla^2 f(\bx + t(\by - \bx)) dt \right )  (\by - \bx) 
+      \right \|_q \\
+    &\leq \left \| \int_0^1 \nabla^2 f(\bx + t(\by - \bx)) dt \right \|_{p, q}
+    \| \by - \bx \|_p \\
+    &\leq \left ( \int_0^1  \|  \nabla^2 f(\bx + t(\by - \bx)) \|_{p, q} dt \right ) 
+    \| \by - \bx \|_p \\
+    &\leq \left ( \int_0^1 L dt \right ) \| \by - \bx \|_p \\
+    &= L \| \by - \bx \|_p.
+   $$
+1. Thus, $\| \nabla f(\by) - \nabla f(\bx)  \|_q  \leq L \| \by - \bx \|_p$ as desired.
+
+
+(1) $\implies$ (2)
+
+1. We are given that $f$ is $L$ smooth with $\ell_p$ norm.
+1. By fundamental theorem of calculus, for any $\bd \in \RR^n$ and $s > 0$,
+
+   $$
+   \nabla f(\bx + s \bd) - \nabla f(\bx) = \int_0^s \nabla^2 f(\bx + t \bd) \bd dt.
+   $$
+1. Taking $q$ norm on both sides
+
+   $$
+   \left \| \left ( \int_0^s \nabla^2 f(\bx + t \bd)  dt \right ) \bd \right \|_q 
+   = \| \nabla f(\bx + s \bd) - \nabla f(\bx) \|_q
+   \leq L \|\bx + s \bd - \bx \|_p = s L \| \bd \|_p.
+   $$
+1. Dividing by $s$ on both sides and taking the limit $s \to 0^+$, we get
+
+   $$
+   \| \nabla^2 f(\bx) \bd \|_q \leq L \| \bd \|_p. 
+   $$
+1. Since this is valid for every $\bd \in \RR^n$, hence
+
+   $$
+   \| \nabla^2 f(\bx) \|_{p,q} \leq L.
+   $$
+```
+
+```{prf:corollary} $L$-smoothness and largest eigenvalue of Hessian
+:label: res-cvxf-l-smoothness-twice-diff-max-eigen-hessian
 
 Let $f : \RR^n \to \RR$ be a twice continuously differentiable convex function over $\RR^n$. 
 Then $f$ is $L$-smooth w.r.t. $\ell_2$-norm if and only if 
 
 $$
 \lambda_{\max}( \nabla^2 f(\bx)) \leq L \Forall \bx \in \RR^n.
+$$
+```
+
+```{prf:proof}
+Since $f$ is convex, hence it follows that $\nabla^2 f(\bx) \succeq \ZERO$ for every $\bx$.
+Thus,
+
+$$
+\|\nabla^2 f(\bx) \|_{2,2} =    \sqrt{\lambda_{\max}( \nabla^2 f(\bx)^2 )}  = \lambda_{\max}( \nabla^2 f(\bx)).
+$$
+
+From {prf:ref}`res-cvxf-smoothness-twice-diff`, $f$ is $L$-smooth
+is equivalent to the condition that 
+
+$$
+\lambda_{\max}( \nabla^2 f(\bx)) = \|\nabla^2 f(\bx) \|_{2,2} \leq L.
 $$
 ```
