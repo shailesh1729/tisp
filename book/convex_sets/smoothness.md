@@ -196,7 +196,7 @@ Let $L > 0$. The following claims are equivalent:
 1. $f(\by) \leq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{L}{2} \| \bx - \by \|^2 \Forall \bx, \by \in \VV$. 
 1. $f(\by) \geq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{1}{2L} \| \nabla f (\bx) - \nabla f(\by) \|_*^2 \Forall \bx, \by \in \VV$.
 1. $\langle \bx - \by, \nabla f (\bx) - \nabla f(\by) \rangle  \geq \frac{1}{L} \| \nabla f (\bx) - \nabla f(\by) \|_*^2 \Forall \bx, \by \in \VV$.
-1. $f(t \bx + (1-t) \by) \geq t f(\bx) + (1-t) f(\by) - \frac{L}{2} \lambda (1 - t) \| \bx - \by \|^2  \Forall \bx, \by \in \VV, t \in [0, 1]$.
+1. $f(t \bx + (1-t) \by) \geq t f(\bx) + (1-t) f(\by) - \frac{L}{2} t (1 - t) \| \bx - \by \|^2  \Forall \bx, \by \in \VV, t \in [0, 1]$.
 ```
 
 ```{prf:proof}
@@ -501,23 +501,79 @@ $$
 
 ## Strong Convexity
 
-```{div}
-A function $f : \EE \to \RERL$ is called 
+```{prf:definition} Strong convexity
+:label: def-cvxf-strong-convexity
+
+A function $f : \VV \to \RERL$ is called 
 $\sigma$-*strongly convex* for $\sigma > 0$ if 
 $\dom f$ is convex and the following holds for any 
-$\bx, \by \in \dom f$ and $\lambda \in [0,1]$:
+$\bx, \by \in \dom f$ and $t \in [0,1]$:
 
 $$
-f(\lambda \bx + (1 - \lambda)\by) \leq \lambda f(\bx) 
-+ (1-\lambda)f(\by) 
-- \frac{\sigma}{2} \lambda (1 - \lambda) \| \bx - \by \|^2. 
+f(t \bx + (1 - t)\by) \leq t f(\bx) 
++ (1-t)f(\by) 
+- \frac{\sigma}{2} t (1 - t) \| \bx - \by \|^2. 
 $$
+```
 
-Strongly convex functions are convex.
+Strongly convex functions are convex. In fact,
+we have a stronger result available.
 
-If $\EE$ is Euclidean then $f$ is $\sigma$-strongly convex
+```{prf:theorem} Strong convexity and convexity
+:label: res-cvx-strong-convexity-convexity
+
+Assume that the norm $\| \cdot \| : \VV \to \RR$
+is Euclidean( i.e., nduced by the inner product).
+
+A function $f : \VV \to \RERL$ is $\sigma$-strongly convex
 if and only if the function $f(\cdot) - \frac{\sigma}{2} \| \cdot \|^2$
 is convex.
+```
+
+```{prf:proof}
+Let us define a function $g : \VV \to \RERL$ as 
+
+$$
+g(\bx) = f(\bx) = \frac{\sigma}{2} \| \bx \|^2.
+$$
+We need to show that $f$ is $\sigma$-strongly convex
+if and only if $g$ is convex.
+
+1. We first note that $\dom g = \dom f$. 
+1. Thus, $\dom g$ is convex if and only if $\dom f$ is convex.
+1. Now, $g$ is convex if and only if $\dom g = \dom f$ is convex 
+   and for any $\bx, \by \in \dom f$ and $t \in (0, 1)$
+
+   $$
+   g(t \bx + (1-t) \by) \leq t g(\bx) + (1-t) g(\by).
+   $$
+1. Now,
+
+   $$
+   & g(t \bx + (1-t) \by) \leq t g(\bx) + (1-t) g(\by) \\
+   \iff & f(t \bx + (1-t) \by) -  \frac{\sigma}{2} \| t \bx + (1-t) \by \|^2 \\ 
+   & \leq t f(\bx) + (1-t) f(\by) -  \frac{\sigma}{2} [t \| \bx \|^2 + (1-t) \| \by \|^2] \\
+   \iff & f(t \bx + (1-t) \by) \leq t f(\bx) + (1-t) f(\by) \\
+   & + \frac{\sigma}{2} [  \| t \bx + (1-t) \by \|^2  - t \| \bx \|^2 - (1-t) \| \by \|^2].
+   $$
+1. Since the norm is Euclidean, hence
+
+   $$
+   & \| t \bx + (1-t) \by \|^2  - t \| \bx \|^2 - (1-t) \| \by \|^2  \\
+   &=  \langle t \bx + (1-t) \by, t \bx + (1-t) \by \rangle 
+   - t \| \bx \|^2 - (1-t) \| \by \|^2 \\
+   &= t^2 \| \bx \|^2 + (1-t)^2 \| \by \|^2 + 2 t (1-t)\langle \bx, \by \rangle
+   - t \| \bx \|^2 - (1-t) \| \by \|^2  \\
+   &= - t(1-t) \| \bx \|^2 - t(1-t) \| \by \|^2 + 2 t (1-t)\langle \bx, \by \rangle \\
+   &= - t(1-t) \left ( \| \bx \|^2 +  \| \by \|^2 - 2 \langle \bx, \by \rangle \right ) \\
+   &= - t(1-t) \| \bx - \by \|^2.
+   $$
+1. Thus, the convexity inequality for $g$ is equivalent to
+
+   $$
+   f(t \bx + (1-t) \by) \leq t f(\bx) + (1-t) f(\by) - \frac{\sigma}{2}t(1-t) \| \bx - \by \|^2
+   $$
+   which is nothing but the $\sigma$-strong convexity condition of $f$.
 ```
 
 ```{rubric} Quadratic functions
@@ -533,7 +589,7 @@ f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c.
 $$
 
 Then $f$ is strongly convex if and only if $\bA$ is positive definite
-and $\sigma \leq \lambda_{\min}(\bA)$.
+and $\sigma \leq t_{\min}(\bA)$.
 ```
 
 ### Properties
