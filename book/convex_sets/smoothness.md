@@ -972,3 +972,160 @@ $(2) \implies (1)$, $(1) \implies (3)$, $(3) \implies (2)$.
    which is the desired result.
 ```
 
+### Minimization
+
+```{prf:theorem} Existence and uniqueness of a a minimizer of closed strongly convex function
+:label: res-cvxf-strong-convex-minimizer
+
+Let $f: \VV \to \RERL$ be a proper, closed and $\sigma$-strongly convex
+function with $\sigma > 0$. Then,
+
+1. $f$ has a unique minimizer $\ba \in \dom f$ such that
+   $f(\bx) > f(\ba)$ for every $\bx \in \dom f$ and $\bx \neq \ba$.
+1. The increase in the value of $f$ w.r.t. its minimum satisfies
+
+   $$
+   f(\bx) - f(\ba) \geq \frac{\sigma}{2} \| \bx - \ba \|^2
+   $$
+   where $\ba \in \dom f$ is the unique minimizer of $f$.
+```
+
+
+```{prf:proof}
+
+(1) Existence of the minimizer
+
+1. Since $f$ is proper and convex, hence $\dom f$ is nonempty and convex.
+1. Since $\dom f$ is nonempty and convex, hence its relative interior
+   is nonempty ({prf:ref}`res-cvx-nonempty-relint`).
+1. Pick $\by \in \relint \dom f$.
+1. By {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`, $\partial f(\by)$
+   is nonempty.
+1. Pick some $\bg \in \partial f(\by)$.
+1. Then, by property 2 of {prf:ref}`res-cvxf-strong-convexity-charac-first-order`,
+   
+   $$
+   f(\bx) \geq f(\by) + \langle \bx - \by, \bg \rangle + \frac{\sigma}{2} \| \bx - \by \|^2
+   $$
+   holds true for every $\bx \in \VV$.
+1. Let $\| \cdot \|_2 \triangleq \sqrt{\langle \cdot, \cdot \rangle}$
+   denote the Euclidean norm associated with the inner product of the
+   space $\VV$. This might be different from the endowed norm $\| \cdot \|$.
+1. Since all norms in a finite dimensional space are equivalent, 
+   hence, there exists a constant $C > 0$ such that 
+
+   $$
+   \| \bz \| \geq \sqrt{C} \| \bz \|_2
+   $$
+   for every $\bz \in \VV$.
+1. Therefore,
+
+   $$
+   f(\bx) \geq f(\by) + \langle \bx - \by, \bg \rangle + \frac{\sigma C}{2} \| \bx - \by \|_2^2
+   \Forall \bx \in \VV.
+   $$
+1. This in turn is same as
+
+   $$
+   f(\bx) \geq f(\by) - \frac{1}{2 C \sigma} \| \bg \|_2^2 
+   + \frac{C \sigma}{2} 
+   \left \| \bx - \left (\by - \frac{1}{C \sigma} \bg \right )
+   \right \|_2^2
+   \Forall \bx \in \VV.
+   $$
+1. Let $S_t$ denote the sublevel set $\{ \bx \ST f(\bx) \leq t \}$.
+1. Consider the sublevel set $S_{f(\by)}$.
+1. Let $\bx \in S_{f(\by)}$. 
+1. Then, $f(\bx) = f(\by) - r$ for some $r \geq 0$.
+1. But then
+
+   $$
+   f(\by) - r \geq f(\by) - \frac{1}{2 C \sigma} \| \bg \|_2^2 
+   + \frac{C \sigma}{2} 
+   \left \| \bx - \left (\by - \frac{1}{C \sigma} \bg \right )
+   \right \|_2^2.
+   $$
+1. This simplifies to
+
+   $$
+   r \leq \frac{1}{2 C \sigma} \| \bg \|_2^2 
+   - \frac{C \sigma}{2} 
+   \left \| \bx - \left (\by - \frac{1}{C \sigma} \bg \right )
+   \right \|_2^2.
+   $$
+1. Since $r$ must be nonnegative, hence the R.H.S. must be nonnegative
+   also. 
+1. Thus, we require that
+
+   $$
+   \frac{1}{2 C \sigma} \| \bg \|_2^2 
+   \geq \frac{C \sigma}{2} 
+   \left \| \bx - \left (\by - \frac{1}{C \sigma} \bg \right )
+   \right \|_2^2.
+   $$
+1. This simplifies to
+
+   $$
+   \left \| \bx - \left (\by - \frac{1}{C \sigma} \bg \right )
+   \right \|_2 \leq \frac{1}{C \sigma} \| \bg \|_2.
+   $$
+1. In other words, $\bx$ must belong to an $\ell_2$ closed ball given by
+
+   $$
+   B_{\| \cdot \|_2}\left [ \by - \frac{1}{C \sigma} \bg, 
+      \frac{1}{C \sigma} \| \bg \|_2 \right ].
+   $$
+1. Since this is valid for every $\bx \in S_{f(\by)}$, hence
+
+   $$
+   S_{f(\by)} \subseteq B_{\| \cdot \|_2}\left [ \by - \frac{1}{C \sigma} \bg, 
+      \frac{1}{C \sigma} \| \bg \|_2 \right ].
+   $$
+1. Since $f$ is closed, hence all its sublevel sets are closed.
+1. since $S_{f(\by)}$ is contained in a ball, hence $S_{f(\by)}$ is bounded.
+1. Thus, $S_{f(\by)}$ is closed and bounded. 
+1. Since $\VV$ is finite dimensional, hence $S_{f(\by)}$ is compact.
+1. $S_{f(\by)}$ is also nonempty since $\by \in S_{f(\by)}$.
+1. Thus, the problem of minimizing $f$ over $\dom f$ reduces
+   to the problem of minimizing $f$ over the nonempty compact set $S_{f(\by)}$.
+1. Since $f$ is closed, it is also lower semicontinuous.
+1. By {prf:ref}`res-ms-func-lsc-min-compact`, $f$ attains a minimum
+   on $S_{f(\by)}$ at some point $\ba \in S_{f(\by)}$.
+1. Thus, we have established the existence of a minimizer of $f$
+   at some $\ba \in S_{f(\by)} \subseteq \dom f$.
+
+(1) Uniqueness of the minimizer
+
+1. To show the uniqueness, for contradiction, assume that
+   $\bu$ and $\bv$ are two different minimizers of $f$
+   with $f(\bu) = f(\bv) = p^*$, the optimal value.
+1. Let $\bw = \frac{1}{2} \bu + \frac{1}{2} \bv$.
+1. We must have $f(\bw) \geq p^*$.
+1. By strong convexity of $f$,
+
+   $$
+   f(\bw) \leq \frac{1}{2} f(\bu) + \frac{1}{2} f(\bv) - 
+   \frac{\sigma}{2}\frac{1}{2}\frac{1}{2} \| \bu - \bv \|^2
+   = p^* - \frac{\sigma}{8}\| \bu - \bv \|^2.
+   $$
+1. If $\bu \neq \bv$, then $f(\bw) < p^*$; a contradiction.
+1. Hence, the minimizer must be unique.
+
+
+(2) Increase in value of $f$
+
+1. Let $\ba$ be the unique minimizer of $f$.
+1. By Fermat's optimality condition $\bzero \in \partial f(\ba)$.
+1. Since $f$ is $\sigma$-strongly convex,
+   hence by property (2) in the {prf:ref}`res-cvxf-strong-convexity-charac-first-order`,
+
+   $$
+   f(\bx) - f(\ba) \geq \langle \bx - \ba, \bzero \rangle 
+   + \frac{\sigma}{2} \| \bx - \ba \|^2
+   = \frac{\sigma}{2} \| \bx - \ba \|^2
+   $$
+   holds true for any $\bx \in \dom f$.
+```
+
+
+
