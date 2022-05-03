@@ -612,7 +612,7 @@ is convex.
 ```
 
 
-### Properties
+### Sum Rule
 
 ```{prf:theorem} Sum of strongly convex and convex functions
 :label: res-cvxf-sum-strong-convex-convex
@@ -669,3 +669,306 @@ Let $\VV$ be a {prf:ref}`Euclidean <def-la-gen-euclidean-space>` space.
    $$
    is also 1-strongly convex.
 ```
+
+
+### First Order Characterization
+
+Recall that $\dom (\partial f)$ denotes the set of points at which
+$f$ is subdifferentiable.
+
+
+```{prf:theorem} First order characterization of strong convexity
+:label: res-cvxf-strong-convexity-charac-first-order
+
+Let $f: \VV \to \RERL$ be a proper closed and convex function.
+For a given $\sigma > 0$, the following statements are equivalent.
+
+
+1. $f$ is $\sigma$-strongly convex.
+1. For every $\bx \in \dom (\partial f)$, $\by \in \dom f$ and $\bg \in \partial f(\bx)$,
+   the following holds true
+
+   $$
+   f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle 
+   + \frac{\sigma}{2} \| \by - \bx \|^2.
+   $$
+1. For any $\bx, \by \in \dom (\partial f)$ and $\bg_{\bx} \in \partial f(\bx)$,
+   $\bg_{\by} \in \partial f(\bx)$, the following holds true:
+
+   $$
+   \langle \bx - \by, \bg_{\bx}  - \bg_{\by} \rangle \geq \sigma \| \bx - \by \|^2.
+   $$
+```
+
+
+```{prf:proof}
+We shall prove the equivalence of these statements in the following order.
+$(2) \implies (1)$, $(1) \implies (3)$, $(3) \implies (2)$.
+
+(2) $\implies$ (1)
+
+1. We assume that (2) is true.
+1. Let $\bx, \by \in \dom f$ and $t \in (0,1)$. 
+1. We need to show that {eq}`eq-cvxf-strong-convexity-cond` holds for $f$.
+1. Since $\dom f$ is convex, its relative interior is not empty
+   (see {prf:ref}`res-cvx-nonempty-relint`).
+1. Let $\bz \in \relint \dom f$.
+1. Choose some $\alpha \in (0, 1]$.
+1. Let $\tilde{\bx} = (1-\alpha) \bx + \alpha \bz$.
+1. By the line segment property ({prf:ref}`res-cvx-convex-relint-segment`),
+   $\tilde{\bx} \in \relint \dom f$.
+1. Let $\bx_t = t \tilde{\bx} + (1-t)\by$.
+1. Again, by the line segment property,
+   $\bx_t \in \relint \dom f$.
+1. Since $f$ is a proper convex function, hence the subdifferential
+   of $f$ at relative interior points is nonempty
+   ({prf:ref}`res-cvxf-relint-subdiff-nonempty`).
+1. Thus, $\partial f(\bx_t) \neq \EmptySet$
+   and $\bx_t \in \dom (\partial f)$.
+1. Take some $\bg \in \partial f(\bx_t)$.
+1. By hypothesis (2)
+
+   $$
+   f(\tilde{\bx}) \geq f(\bx_t) + \langle \tilde{\bx} - \bx_t, \bg \rangle 
+   + \frac{\sigma}{2} \| \tilde{\bx} - \bx_t \|^2.
+   $$
+1. Substituting $\bx_t  = t \tilde{\bx} + (1-t)\by$, we have
+   $\tilde{\bx} - \bx_t = (1-t) (\tilde{\bx} - \by)$. Thus,
+
+   $$
+   f(\tilde{\bx}) \geq f(\bx_t) + (1-t)\langle \tilde{\bx} - \by, \bg \rangle 
+   + \frac{\sigma (1-t)^2}{2} \| \tilde{\bx} - \by \|^2.
+   $$
+1. Similarly, by hypothesis (2)
+
+   $$
+   f(\by) \geq f(\bx_t) + \langle \by - \bx_t, \bg \rangle 
+   + \frac{\sigma}{2} \| \by - \bx_t \|^2.
+   $$
+1. $\by - \bx_t = \by - t \tilde{\bx} - (1-t)\by = t (\by - \tilde{\bx})$.
+1. This gives us,
+
+   $$
+   f(\by) \geq f(\bx_t) + t \langle \by - \tilde{\bx}, \bg \rangle 
+   + \frac{\sigma t^2}{2} \| \by - \tilde{\bx} \|^2.
+   $$
+1. Multiplying the first inequality by $t$ and the second one by $(1-t)$
+   and adding them together, we get
+
+   $$
+   t f(\tilde{\bx}) + (1-t)f(\by) \geq
+   f(\bx_t) + \frac{\sigma t(1-t)}{2} \| \tilde{\bx} - \by \|^2.
+   $$
+1. Thus,
+
+   $$
+   f(t \tilde{\bx} + (1-t)\by) = f(\bx_t)
+   \leq t f(\tilde{\bx}) + (1-t)f(\by) - \frac{\sigma t(1-t)}{2} \|\tilde{\bx} - \by \|^2.
+   $$
+1. Expanding $\tilde{\bx}$,
+
+   $$
+   t \tilde{\bx} + (1-t)\by 
+   &= t ((1-\alpha) \bx + \alpha \bz) + (1-t)\by\\
+   &= t(1-\alpha) \bx + (1-t) \by + t \alpha \bz.
+   $$
+1. Define $g_1(\alpha) = f(t \tilde{\bx} + (1-t)\by) = f(t(1-\alpha) \bx + (1-t) \by + t \alpha \bz)$.
+1. Define $g_2(\alpha) = f(\tilde{\bx}) = f((1-\alpha) \bx + \alpha \bz)$.
+1. Substituting these into the previous inequality, we obtain
+
+   $$
+   g_1(\alpha) \leq t g_2(\alpha)+ (1-t)f(\by) 
+   - \frac{\sigma t(1-t)}{2} \|(1-\alpha) \bx + \alpha \bz - \by \|^2.
+   $$
+1. The functions $g_1$ and $g_2$ are one dimensional, proper, closed and convex
+   functions.
+1. By {prf:ref}`res-cvxf-convex-closed-univariate`, both $g_1$ and $g_2$
+   are continuous on their domain.
+1. Therefore, taking the limit $\alpha \to 0^+$, it follows that
+
+   $$
+   g_1(0) \leq t g_2(0) + (1-t)f(\by) 
+   - \frac{\sigma t(1-t)}{2} \|\bx - \by \|^2.
+   $$
+1. Now $g_1(0) = f(t\bx + (1-t) \by)$
+   and $g_2(0) = f(\bx)$.
+1. Thus, 
+
+   $$
+   f(t\bx + (1-t) \by) \leq t f(\bx) + (1-t)f(\by) 
+   - \frac{\sigma t(1-t)}{2} \|\bx - \by \|^2.
+   $$
+1. This establishes that $f$ is indeed $\sigma$-strongly convex.
+
+
+(1) $\implies$ (3)
+
+1. We are given that $f$ is $\sigma$-strongly convex.
+1. Let $\bx, \by \in \dom (\partial f)$. 
+1. Pick any $\bg_{\bx} \in \partial f(\bx)$ 
+   and $\bg_{\by} \in \partial f(\by)$.
+1. Let $t \in [0, 1)$ and
+   denote $\bx_t = t \bx + (1-t) \by$.
+1. By the hypothesis
+
+   $$
+   f(\bx_t) \leq t f(\bx) + (1-t) f(\by) - \frac{\sigma t (1-t) }{2} \| \bx - \by \|^2.
+   $$
+1. This is same as
+
+   $$
+   f(\bx_t) - f(\bx) \leq (1-t) [f(\by) - f(\bx)] 
+   - \frac{\sigma t (1-t) }{2} \| \bx - \by \|^2.
+   $$
+
+1. We can see that $(1-t) \in (0, 1]$. 
+1. Dividing both sides of inequality by $(1-t)$, we obtain
+
+   $$
+   \frac{f(\bx_t) - f(\bx)}{1-t} \leq f(\by) - f(\bx) 
+   - \frac{\sigma t }{2} \| \bx - \by \|^2.
+   $$
+1. Since $\bg_{\bx} \in \partial f(\bx)$, hence by subgradient inequality
+
+   $$
+   f(\bx_t) \geq f(\bx) + \langle \bx_t - \bx, \bg_{\bx} \rangle.
+   $$
+1. We can rewrite this as
+
+   $$
+   \frac{f(\bx_t) - f(\bx)}{1-t} \geq \frac{\langle \bx_t - \bx, \bg_{\bx} \rangle}{1-t}.
+   $$
+1. Note that $\bx_t - \bx = (1-t)(\by - \bx)$.
+1. Thus,
+
+   $$
+   \frac{f(\bx_t) - f(\bx)}{1-t} \geq  \langle \by - \bx, \bg_{\bx} \rangle.
+   $$
+1. Thus, 
+
+   $$
+   \langle \by - \bx, \bg_{\bx} \rangle \leq f(\by) - f(\bx) 
+   - \frac{\sigma t }{2} \| \bx - \by \|^2.
+   $$
+1. This inequality holds for every $t \in [0, 1)$.
+1. Taking the limit $t \to 1^-$, we obtain
+
+   $$
+   \langle \by - \bx, \bg_{\bx} \rangle \leq f(\by) - f(\bx) 
+   - \frac{\sigma}{2} \| \bx - \by \|^2.
+   $$
+1. An identical reasoning by switching the roles of $\bx$ and $\by$, gives us
+
+   $$
+   \langle \bx - \by, \bg_{\by} \rangle \leq f(\bx) - f(\by) 
+   - \frac{\sigma}{2} \| \by - \bx \|^2.
+   $$
+1. Adding these two inequalities gives us
+
+   $$
+   \langle \bx - \by, \bg_{\by} - \bg_{\bx} \rangle \leq
+    - \sigma \| \bx - \by \|^2.
+   $$
+1. Multiplying both sides by $-1$ (and switching the inequality accordingly), we get
+
+   $$
+   \langle \bx - \by, \bg_{\bx} - \bg_{\by} \rangle \geq
+   \sigma \| \bx - \by \|^2
+   $$
+   as desired.
+
+(3) $\implies$ (2)
+
+1. We are given that (3) is satisfied.
+1. Let $\bx \in \dom (\partial f)$, $\by \in \dom f$ and $\bg \in \partial f(\bx)$.
+1. Pick any $\bz \in \relint \dom f$.
+1. Pick some $\alpha \in (0, 1)$.
+1. Define $\tilde{\by} = (1 - \alpha) \by + \alpha \bz$.
+1. By line segment property $\tilde{\by} \in \relint \dom f$.
+1. Define $\bx_t = (1-t) \bx + t \tilde{\by}$.
+1. Consider the 1D function
+   
+   $$
+   \varphi(t) = f(\bx_t), \Forall t \in [0, 1]. 
+   $$
+1. Pick any $t \in (0, 1)$.
+1. Then, by line segment principle $\bx_t \in \relint \dom f$.
+1. Due to ({prf:ref}`res-cvxf-relint-subdiff-nonempty`),
+   $\partial f(\bx_t) \neq \EmptySet$
+   and $\bx_t \in \dom (\partial f)$.
+1. Take some $\bg_t \in \partial f(\bx_t)$.
+1. By subgradient inequality
+
+   $$
+   f(\bz) \geq f(\bx_t) + \langle \bz - \bx_t, \bg_t \rangle \Forall \bz \in \VV.
+   $$
+1. In particular, for $\bx_s = (1-s) \bx + s \tilde{\by}$, we have
+
+   $$
+   & f(\bx_s) \geq f(\bx_t) + 
+   \langle (1-s) \bx + s \tilde{\by} - (1-t) \bx - t \tilde{\by}, \bg_t \rangle \\
+   & \implies \varphi(s) \geq \varphi(t) + \langle (s-t) (\tilde{\by} - \bx), \bg_t \rangle \\
+   &\implies \varphi(s) \geq \varphi(t) + (s-t) \langle \tilde{\by} - \bx, \bg_t \rangle.
+   $$
+1. Since this is valid for every $s$,
+   hence $\langle \tilde{\by} - \bx, \bg_t \rangle \in \partial \varphi(t)$.
+1. Applying the mean value theorem ({prf:ref}`res-cvxf-convex-subdiff-mvt`)
+
+   $$
+   f(\tilde{\by}) - f(\bx) = \varphi(1) - \varphi(0) 
+   = \int_0^1 \langle \tilde{\by} - \bx, \bg_t \rangle dt.
+   $$
+1. Since $\bg \in \partial f(\bx)$ and $\bg_t \in \partial f(\bx_t)$,
+   hence applying the hypothesis (3), we get
+
+   $$
+   \langle \bx_t - \bx, \bg_t - \bg \rangle \geq
+   \sigma \| \bx_t - \bx \|^2.
+   $$
+1. But $\bx_t - \bx = t (\tilde{\by} - \bx)$.
+1. Hence
+
+   $$
+   t \langle \tilde{\by} - \bx, \bg_t - \bg \rangle \geq
+   \sigma t^2 \| \tilde{\by} - \bx \|^2.
+   $$
+1. This simplifies to
+
+   $$
+   \langle \tilde{\by} - \bx, \bg_t \rangle \geq
+   \langle \tilde{\by} - \bx, \bg \rangle
+   + \sigma t \| \tilde{\by} - \bx \|^2.
+   $$
+   Canceling $t$ on both sides doesn't change the sign of inequality since $t > 0$.
+1. Applying the inequality to the integral above
+
+   $$
+   f(\tilde{\by}) - f(\bx) \geq \int_0^1
+   \left [ \langle \tilde{\by} - \bx, \bg \rangle
+   + \sigma t \| \tilde{\by} - \bx \|^2 \right ] d t.
+   $$
+1. Integrating, we get
+
+   $$
+   f(\tilde{\by}) - f(\bx) \geq  \langle \tilde{\by} - \bx, \bg \rangle
+   + \frac{\sigma}{2}\| \tilde{\by} - \bx \|^2.
+   $$
+1. Expanding for $\tilde{\by}$ for any $\alpha \in (0,1)$, we have
+
+   $$
+   f((1 - \alpha) \by + \alpha \bz) \geq f(\bx) +  
+   \langle (1 - \alpha) \by + \alpha \bz - \bx, \bg \rangle
+   + \frac{\sigma}{2}\| (1 - \alpha) \by + \alpha \bz - \bx \|^2.
+   $$
+1. The 1D function $g(\alpha) = f((1 - \alpha) \by + \alpha \bz)$ is
+   continuous again due to {prf:ref}`res-cvxf-convex-closed-univariate`.
+1. Taking the limit $\alpha \to 0^+$ on both sides, we obtain
+
+   $$
+   f(\by) \geq f(\bx) +  
+   \langle \by - \bx, \bg \rangle
+   + \frac{\sigma}{2}\| \by - \bx \|^2
+   $$
+   which is the desired result.
+```
+
