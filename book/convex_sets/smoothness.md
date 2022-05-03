@@ -501,7 +501,7 @@ $$
 
 ## Strong Convexity
 
-```{prf:definition} Strong convexity
+````{prf:definition} Strong convexity
 :label: def-cvxf-strong-convexity
 
 A function $f : \VV \to \RERL$ is called 
@@ -509,12 +509,13 @@ $\sigma$-*strongly convex* for $\sigma > 0$ if
 $\dom f$ is convex and the following holds for any 
 $\bx, \by \in \dom f$ and $t \in [0,1]$:
 
-$$
+```{math}
+:label: eq-cvxf-strong-convexity-cond
 f(t \bx + (1 - t)\by) \leq t f(\bx) 
 + (1-t)f(\by) 
 - \frac{\sigma}{2} t (1 - t) \| \bx - \by \|^2. 
-$$
 ```
+````
 
 Strongly convex functions are convex. In fact,
 we have a stronger result available.
@@ -587,7 +588,7 @@ $$
 f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c.
 $$
 
-Then $f$ is strongly convex if and only if $\bA$ is positive definite
+Then $f$ is $\sigma$-strongly convex if and only if $\bA$ is positive definite
 and $\sigma \leq \lambda_{\min}(\bA)$.
 ```
 
@@ -613,8 +614,58 @@ is convex.
 
 ### Properties
 
-```{div}
-Let $f$ be strongly convex and $g$ be convex. Then 
+```{prf:theorem} Sum of strongly convex and convex functions
+:label: res-cvxf-sum-strong-convex-convex
+
+Let $f$ be $\sigma$-strongly convex and $g$ be convex. Then 
 $f+g$ is strongly convex.
 ```
 
+```{prf:proof}
+Since both $f$ and $g$ are convex, hence their domains are convex.
+Hence, $\dom (f + g) = \dom f \cap \dom g$ is also convex.
+
+We further need to show that $f+g$ satisfies {eq}`eq-cvxf-strong-convexity-cond`.
+
+1. Let $\bx, \by \in \VV$ and $t \in (0,1)$.
+1. Since $f$ is $\sigma$-strongly convex, hence
+
+   $$
+   f(t \bx + (1 - t)\by) \leq t f(\bx)  + (1-t)f(\by) 
+   - \frac{\sigma}{2} t (1 - t) \| \bx - \by \|^2.
+   $$
+1. Since $g$ is convex, hence
+
+   $$
+   g(t \bx + (1 - t)\by) \leq t g(\bx)  + (1-t)g(\by).
+   $$
+1. Then, 
+
+   $$
+   & (f + g)(t \bx + (1 - t)\by) \\
+   &= f(t \bx + (1 - t)\by) + g((t \bx + (1 - t)\by)) \\
+   &\leq f(t \bx + (1 - t)\by) \leq t f(\bx)  + (1-t)f(\by) 
+   - \frac{\sigma}{2} t (1 - t) \| \bx - \by \|^2 
+   + t g(\bx)  + (1-t)g(\by)\\
+   &= t (f + g) (\bx) + (1-t) (f + g)(\by) - \frac{\sigma}{2} t (1 - t) \| \bx - \by \|^2.
+   $$
+1. Thus, $f+g$ is also $\sigma$-strongly convex.
+```
+
+
+```{prf:example} Strong convexity of $\frac{1}{2}\| \cdot \|^2 + I_C$
+:label: ex-cvxf-strong-convex-norm-sqr-indicator
+
+Let $\VV$ be a {prf:ref}`Euclidean <def-la-gen-euclidean-space>` space.
+
+1. The function $\frac{1}{2}\| \bx \|^2$ is 1-strongly convex
+   due to {prf:ref}`res-cvxf-quadratic-strong-convex`.
+1. Let $C$ be a convex set.
+1. Then, the indicator function $I_C$ is convex.
+1. Due to {prf:ref}`res-cvxf-sum-strong-convex-convex`, the function 
+
+   $$
+   g(\bx) = \frac{1}{2}\| \bx \|^2 + I_C(\bx)
+   $$
+   is also 1-strongly convex.
+```
