@@ -533,3 +533,126 @@ Thus, $f$ is locally Lipschitz at every interior
 point of $S = \dom f$.
 ```
 
+
+### Continuity of Univariate Closed Convex Functions
+
+
+```{prf:theorem} Continuity of closed convex univariate functions
+:label: res-cvxf-convex-closed-univariate
+
+Let $f: \RR \to \RERL$ be a proper closed and convex function.
+Then, $f$ is continuous over $\dom f$.
+```
+
+```{prf:proof}
+Since $f$ is convex, hence its domain is convex. Hence
+$\dom f$ must be an interval $I$. 
+
+1. If $\interior I = \EmptySet$, then $I$ must be a singleton.
+1. In that case $f$ is continuous obviously.
+1. Now consider the case where $\interior I \neq \EmptySet$.
+1. Then, due to {prf:ref}`res-cvxf-convex-local-lipschitz-continuous`,
+   $f$ is continuous at every $x \in \interior I$.
+1. If $I$ is open (i.e., it has no endpoints), then there is
+   nothing more to prove.
+1. We are left with showing the (one sided) continuity of $f$
+   at one of the endpoints of $I$ if it has any.
+1. Since, the argument will be identical for either of the
+   endpoints, without loss of generality, let us assume
+   that $I$ has a left endpoint $a$ and we show the continuity
+   from the right at $a$; i.e. $\lim_{x \to a^+} f(x) = f(a)$.
+1. Pick any $c \in I$ such that $c > a$.
+1. Define a function
+
+   $$
+   g(t) = \frac{f(c -t) - f(c)}{t}.
+   $$
+1. Clearly, $g$ is defined over $(0, c-a]$.
+1. We shall show that $g$ is nondecreasing and upper bounded
+   over $(0, c-a]$.
+1. Pick any $t,s$ satisfying $0 < t \leq s \leq c-a$.
+1. Then,
+
+   $$
+   c - t = \left (1 - \frac{t}{s} \right ) c + \frac{t}{s} (c - s).
+   $$
+1. $\frac{t}{s}$ is well defined and $\frac{t}{s} \in (0, 1]$.
+1. Thus, $c-t$ is a convex combination of $c$ and $c-s$.
+1. Since $f$ is convex, hence
+
+   $$
+   & f(c - t) \leq \left (1 - \frac{t}{s} \right ) f(c) + \frac{t}{s} f(c - s)\\
+   & \iff f(c - t) - f(c) \leq \frac{t}{s} (f(c -s) - f(c)) \\
+   &\iff \frac{f(c - t) - f(c)}{t} \leq \frac{f(c -s) - f(c)}{s}.
+   $$
+1. Thus,
+   
+   $$
+   g(t) \leq g(s) \Forall 0 < t \leq s \leq c-a.
+   $$
+1. Thus, $g$ is nondecreasing over $(0, c-a]$.
+1. Finally $g(c-a) = \frac{f(a) - f(c)}{c - a}$ is finite since both $c,a \in \dom f$.
+1. Since $g$ is nondecreasing, hence
+
+   $$
+   g(t) \leq g(c -a) \Forall t \in (0, c-a].
+   $$
+1. Thus, $g$ is upper bounded.
+1. Since $g$ is nondecreasing and upper bounded,
+   hence due to {prf:ref}`res-bra-rf-monotonic-func-limits`,
+   the left hand limit of $g(t)$ at $c-a$ exists and 
+   is equal to some real number, say, 
+
+   $$
+   \lim_{t \to (c-a)^-} g(t) = \ell.
+   $$
+   Note that we haven't said that $g$ is continuous from the left at $c-a$.
+1. Recall from the definition of $g$ that
+   
+   $$
+   f(c-t) = f(c) + t g(t).
+   $$
+1. Hence
+
+   $$
+   \lim_{t \to (c-a)^-} f(c -t) = f(c) + (c-a) \ell.
+   $$
+1. Replacing $c-t$ by $r$, we get
+
+   $$
+   \lim_{r \to a^+} f(r) = f(c) + (c - a) \ell.
+   $$
+1. We have shown so far that the limit from the right at $a$ exists
+   for $f$ and is equal to $f(c) + (c - a) \ell$.
+1. Using the upper bound on $g$, we can say that
+   
+   $$
+   f(c -t) 
+   &= f(c) + t g(t) \\
+   &\leq f(c) + (c-a) g(c-a) \\
+   &= f(c) + f(a) - f(c) = f(a)
+   $$
+   holds true for every $t \in (0, c-a]$.
+1. Thus,
+
+   $$
+   \lim_{r \to a^+} f(r) = \lim_{t \to (c-a)^-} f(c -t)  \leq f(a).
+   $$
+1. On the other hand, since $f$ is closed, hence it is also
+   lower semicontinuous. This means that
+
+   $$
+   \lim_{r \to a^+} f(r)  \geq f(a).
+   $$
+1. Combining these two inequalities, we get
+
+   $$
+   \lim_{r \to a^+} f(r)  = f(a).
+   $$
+1. Thus, $f$ is indeed continuous from the right at $a$.
+1. Similarly, if $I$ has a right endpoint $b$,
+   then $f$ is continuous from the left at $b$.
+1. Thus, $f$ is continuous at every point in its domain.
+```
+
+
