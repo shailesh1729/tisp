@@ -3170,7 +3170,7 @@ The subdifferential of indicator function for a nonempty set $S \subset \VV$
 at any point $\bx \in S$ is given by
 
 $$
-\partial \delta_S (\bx) = N_S (\bx).
+\partial I_S (\bx) = N_S (\bx).
 $$
 
 where $N_S (\bx)$ is the 
