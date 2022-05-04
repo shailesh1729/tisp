@@ -2464,7 +2464,7 @@ Our task is to find a subgradient of $f$ at $\bx$.
    $$
 ```
 
-## Lipschitz Continuity and Boundedness of Subgradients
+## Lipschitz Continuity
 
 ```{prf:theorem} Lipschitz continuity and boundedness of the subdifferential sets
 :label: res-cvxf-subdiff-bounded-lipschitz-continuous
@@ -2481,6 +2481,11 @@ Then,
 * (2) implies (1). In other words, if subgradients are bounded
   then, the function is Lipschitz continuous.
 * If $X$ is open, then (1) holds if and only if (2) holds. 
+
+In other words, if the subgradients over a set $X$
+are bounded then $f$ is Lipschitz continuous over $X$.
+If $X$ is open then $f$ is Lipschitz continuous over $X$
+if and only if the subgradients over $X$ are bounded.
 ```
 
 ```{prf:proof}
@@ -2556,6 +2561,39 @@ Then,
    holds true for every $\bg \in \partial f(\bx)$ where $\bx \in X$ as desired.
 ```
 
+
+```{prf:corollary} Lipschitz continuity of convex functions over compact domains
+:label: res-cvxf-convex-func-compact-dom-lipschitz-cont
+
+Let $f: \VV \to \RERL$ be a proper and convex function. Suppose that
+$X \subseteq \interior \dom f$ is compact. 
+Then, there exists $L > 0$ such that
+
+$$
+| f(\bx) -f(\by) | \leq L \| \bx - \by \| \quad \Forall \bx, \by \in X.
+$$  
+```
+
+```{prf:proof}
+Recall from {prf:ref}`res-cvxf-subg-compact-nonempty-bounded`
+that the subgradients of a proper convex function over
+a compact set are nonempty and bounded.
+
+1. In other words, the set
+
+   $$
+   Y = \bigcup_{\bx \in X} \partial f(\bx)
+   $$
+   is nonempty and bounded.
+1. Thus, for every $\bg \in Y$, there exists $L > 0$
+   such that $\| \bg \|_* \leq L$.
+1. Then by {prf:ref}`res-cvxf-subdiff-bounded-lipschitz-continuous`,
+   
+   $$
+   | f(\bx) - f(\bx)| \leq L \| \bx - \by \| \Forall \bx, \by \in X.
+   $$
+1. Thus, $f$ is indeed Lipschitz continuous over $X$.
+```
 
 
 In the reminder of this section, we compute the subgradients
