@@ -489,3 +489,129 @@ of $\VV$ and $\RR$ denoted by $\VV \oplus \RR$.
 Readers can verify that these definitions satisfy
 all the properties of real vector spaces, 
 normed linear spaces and inner product spaces.
+
+
+## Norms
+
+```{prf:remark} Norms in $n$-dim real space
+:label: rem-cvx-nd-space-norms
+
+Let $\VV$ be an $n$-dimensional real inner product space
+endowed with an inner product
+$\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$.
+
+We have $n = \dim \VV$.
+
+$\VV$ is isomorphic to the Euclidean space $\RR^n$.
+
+We can develop popular norms following the treatment in
+{ref}`sec:la:real-euclidean-space`.
+
+Let us introduce an orthonormal basis for $\VV$ as
+$\{\be_1, \dots, \be_n \}$.
+
+For any $\bx \in \VV$, we shall write its decomposition as
+
+$$
+\bx = \sum_{i=1}^n x_i \be_i.
+$$
+The inner product expands to
+
+$$
+\langle \bx, \by \rangle = \sum_{i=1}^n x_i y_i \Forall \bx, \by \in \VV.
+$$
+Introduce the norm induced by the inner product as
+
+$$
+\| \bx \| = \sqrt{\langle \bx, \bx \rangle} = \sqrt{\sum_{i=1}^n x_i^2}.
+$$
+We shall also call it as $\ell_2$ norm on $\VV$.
+
+Introduce the  $\ell_1$ norm as
+
+$$
+\| \bx \|_1 = \sum_{i=1}^n | x_i|.
+$$
+
+Introduce the $\ell_{\infty}$ norm as
+
+$$
+\| \bx \|_{\infty} = \max_{i=1,\dots,n} |x_i|.
+$$
+
+We can generalize to $\ell_p$ norms as
+
+$$
+\| \bx \|_p = \begin{cases}
+\left ( \sum_{i=1}^{n} | x_i |^p  \right ) ^ {\frac{1}{p}} & \text{ if } & p \in [1, \infty)\\
+\underset{1 \leq i \leq n}{\max} |x_i| & \text{ if } &  p = \infty
+\end{cases}\, .
+$$
+
+The {prf:ref}`Hölder's inequality <res-la-euclidean-holder-inequality>`
+follows.
+Let $\bu, \bv \in \VV$. 
+Let $p \in [1, \infty]$ and let $q$ be its 
+{prf:ref}`conjugate exponent <def-bra-conjugate-exponent>`.
+Then
+
+$$
+\| \bu \bv \|_1 \leq \| \bu \|_p \| \bv \|_q
+$$
+
+where $\bu \bv$ denotes the element-wise multiplication given by:
+
+$$
+\bu \bv = (u_1 v_1, \dots, u_n v_n).
+$$
+
+All norms are equivalent. The bounds between norms are given below.
+
+$$
+\frac{1}{\sqrt{n}} \| \bx \|_1 \leq \| \bx \|_2 \leq \| \bx \|_1. 
+$$
+$$
+\| \bx \|_2 \leq \| \bx \|_1 \leq \sqrt{n} \| \bx \|_2. 
+$$
+$$
+\frac{1}{\sqrt{n}} \| \bx \|_2 \leq \| \bx \|_{\infty} \leq \| \bx \|_2. 
+$$
+$$
+\| \bx \|_{\infty} \leq \| \bx \|_2 \leq \sqrt{n} \| \bx \|_{\infty}. 
+$$
+
+The Euclidean distance between two vectors is defined as:
+
+$$
+d(\bx,\by) = \| \bx  - \by \| = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}.
+$$
+
+
+Open and closed balls
+
+* Let $B(\bx, r)$ and $B[\bx, r]$ represent the open and closed balls for the
+  inner product induced norm.
+* Let $B_p(\bx, r)$ and $B_p[\bx, r]$ represent the open and closed balls for the
+  $\ell_p$ norm.
+* Let $B_1(\bx, r)$ and $B_1[\bx, r]$ represent the open and closed balls for the
+  $\ell_1$ norm.
+* Let $B_2(\bx, r)$ and $B_2[\bx, r]$ represent 
+  the open and closed balls for the $\ell_2$ norm which is same as
+  the inner product induced norm.
+* Let $B_{\infty}(\bx, r)$ and $B_{\infty}[\bx, r]$ represent the open and closed balls 
+  for the $\ell_{\infty}$ norm.
+
+We have the following containment relationships for the closed balls
+for different norms.
+
+$$
+B_1[\bx, r] \subseteq B_2[\bx, r] \subseteq B_{\infty}[\bx, r].
+$$
+
+$$
+B_{\infty}[\bx, r] \subseteq B_2[\bx, r \sqrt{n}] \subseteq B_1[\bx, r n].
+$$
+
+These relationships are derived from the norm inequalities above.
+Similar relationships are applicable for open balls too.
+```

@@ -32,8 +32,9 @@ This is also known as a *strict generalized inequality*.
 When $K = \RR_+$, then $\preceq_K$ is same as usual $\leq$
 and $\prec_K$ is same as usual $<$ operators on $\RR_+$.
 
-(def:component_wise_inequality)=
 ````{prf:example} Nonnegative orthant and component-wise inequality
+:label: ex-cvx-nng-orth-component-wise-inequality
+
 The nonnegative orthant $K=\RR_+^n$ is a proper cone. Then the
 associated generalized inequality $\preceq_{K}$ means that
 
@@ -48,6 +49,8 @@ usually denoted as $x \preceq y$.
 ````
 
 ````{prf:example} Positive semidefinite cone and matrix inequality
+:label: ex-cvx-psd-cone-matrix-inequality
+
 The positive semidefinite cone $S_+^n \subseteq S^n$ is a proper
 cone in the vector space $S^n$.
 
@@ -79,6 +82,8 @@ But since they may not enforce a total ordering on $S$,  not every
 pair of elements $x, y\in S$ may be related by $\preceq_K$ or $\prec_K$.
 
 ````{prf:example} Partial ordering with nonnegative orthant cone
+:label: ex-cvx-nng-orthant-partial-ordering
+
 Let $K = \RR^2_+ \subset \RR^2$.
 Let $x_1 = (2,3), x_2 = (4, 5), x_3=(-3, 5)$. Then we have
 
@@ -91,8 +96,9 @@ no ordering holds.
 
 ````
 
-(def:generalized_inequality_minimum_element)=
 ````{prf:definition}
+:label: def-cvx-generalized-inequality-minimum-element
+
 We say that $x \in S \subseteq \RR^n$ is *the minimum element* of $S$
 w.r.t. the generalized inequality $\preceq_K$ if for every $ y \in S$ we have
 $x \preceq y$.
@@ -105,8 +111,9 @@ $x \preceq y$.
 *  If a set $S$ has a minimum element, then by definition it is unique (Prove it!).
 
 
-(def:generalized_inequality_maximum_element)=
 ````{prf:definition}
+:label: def-cvx-generalized-inequality-maximum-element
+
 We say that $x \in S \subseteq \RR^n$ is *the maximum element* of $S$
 w.r.t. the generalized inequality $\preceq_K$ if for every $ y \in S$ we have
 $y \preceq x$.
@@ -120,12 +127,16 @@ $y \preceq x$.
 
 
 ````{prf:example} Minimum element
+:label: ex-cvx-gen-inequality-minimum-element
+
 Consider $K = \RR^n_+$ and $S = \RR^n_+$. Then $0 \in S$ is the minimum element
 since $0 \preceq x \Forall x \in \RR^n_+$.
 ````
 
 
 ````{prf:example} Maximum element
+:label: ex-cvx-gen-inequality-maximum-element
+
 Consider $K = \RR^n_+$ and $S = \{x | x_i \leq 0 \Forall i=1,\dots,n\}$.
 Then $0 \in S$ is the maximum element
 since $x \preceq 0 \Forall x \in S$.
@@ -137,8 +148,9 @@ since $x \preceq 0 \Forall x \in S$.
 There are many sets for which no minimum element exists. In this context
 we can define a slightly weaker concept known as minimal element.
 
-(def:generalized_inequality_minimal_element)=
 ````{prf:definition}
+:label: def-cvx-gen-inequality-minimal-element
+
 An element $x\in S$ is called a *minimal element* of $S$
 w.r.t. the generalized inequality $\preceq_K$ if there is no
 element $y \in S$ distinct from $x$ such that $y \preceq_K x$.
@@ -146,8 +158,9 @@ In other words $y \preceq_K x \implies y = x$.
 
 ````
 
-(def:generalized_inequality_maximal_element)=
 ````{prf:definition}
+:label: def-cvx-gen-inequality-maximal-element
+
 An element $x\in S$ is called a *maximal element* of $S$
 w.r.t. the generalized inequality $\preceq_K$ if there is no
 element $y \in S$ distinct from $x$ such that $x \preceq_K y$.
@@ -162,10 +175,12 @@ In other words $x \preceq_K y \implies y = x$.
 
 
 ````{prf:lemma}
+:label: res-cvx-gen-inequality-minimum-element-charac
+
 A point $x \in S$ is the minimum element of $S$ if and only if
 
 $$
-    S \subseteq x + K
+S \subseteq x + K
 $$
 
 ````
@@ -202,6 +217,8 @@ $x + K $ denotes all the points that are comparable to $x$ and greater than
 or equal to $x$ according to $\preceq_K$.
 
 ````{prf:lemma}
+:label: res-cvx-gen-inequality-minimal-point-charac
+
 A point $x \in S$ is a minimal point if and only if
 
 $$

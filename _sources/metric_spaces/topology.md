@@ -73,6 +73,34 @@ $$
 is called a *closed ball* at $x$ with radius $r$ in $X$. 
 ```
 
+```{prf:theorem} Open ball closed ball containment
+:label: res-open-closed-ball-contain
+
+In a metric space $(X, d)$, every open ball contains
+a closed ball. Similarly, every closed ball contains an open ball.
+```
+We note that while this property is valid for metric spaces,
+it is not in general valid for arbitrary topological spaces.
+
+```{prf:proof}
+
+Open ball contains closed ball.
+
+1. Let $x \in X$ and $r > 0$.
+1. Let $B(x,r)$ be an open ball with radius $r$.
+1. Let $t$ be any number such that $0 < t < r$. E.g., we can pick $t = \frac{r}{2}$. 
+1. Consider the closed ball $B[x, t]$.
+1. For every $y \in B[x, t]$, $d(x, y) \leq t < r$.
+1. Thus, $B[x, t] \subseteq B(x, r)$.
+
+Closed ball contains open ball.
+
+1. Let $B[x,r]$ be a closed ball.
+1. Consider the open ball $B(x, r)$.
+1. For every $y \in B(x, r)$, $d(x,y) < r$. Thus, $d(x,y) \leq r$.
+1. Thus, $B(x, r) \subseteq B[x,r]$.
+```
+
 ## Open Sets
 
 ```{prf:definition} Open sets
@@ -315,12 +343,46 @@ We proceed as follows:
 ```{prf:definition} Interior point
 :label: def-ms-interior-point
 
+Let $(X, d)$ be a metric space.
 A point $x$ is called an interior point of a set $A \subseteq X$ if there
 exists an open ball $B(x, r)$ such that $B(x, r) \subseteq A$. 
 ```
 
+
 By definition an interior point of a set belongs to the set too.
 $x \in B(x, r) \subseteq A$. 
+
+```{prf:remark} Interior point in terms of closed balls
+:label: res-ms-interior-point-closed
+
+Let $(X, d)$ be a metric space.
+Let $A \subseteq X$.
+
+Then, $x \in A$ is an interior point of $A$ if and only if
+there exists a closed ball $B[x, r] \subseteq A$.
+```
+This result shows that interior points of a set $A$ can be identified
+either through open balls or closed balls around them
+totally contained in the set $A$.
+
+We emphasize that this interpretation of interior points
+is not applicable for all topological spaces but is 
+perfectly valid for metric spaces.
+
+```{prf:proof}
+Let $x$ be an interior point of $A$.
+
+1. Then, there exists an open ball $B(x, s) \subseteq A$.
+1. By {prf:ref}`res-open-closed-ball-contain`, there is a closed
+   ball $B[x, r] \subseteq B(x, s)$ with some $r < s$.
+1. Thus, $x \subseteq B[x, r] \subseteq B(x, s) \subseteq A$.
+
+For the converse, let there be a closed ball $B[x, r] \subseteq A$.
+
+1. Then, $B(x,r) \subseteq B[x,r] \subseteq A$.
+1. Thus, $x \subseteq B(x, r) \subseteq A$.
+1. Thus, $x$ is an interior point of $A$.
+```
 
 ```{prf:definition} Interior
 :label: def-ms-interior
@@ -863,6 +925,18 @@ boundary of any set is closed.
 
 ## Accumulation
 
+```{prf:definition} Deleted neighborhood
+:label: def-ms-del-neighborhood
+
+Let $x \in X$. The *deleted neighborhood* of radius $r$
+around $x$ is defined as the open ball of radius $r$ around $x$ 
+excluding $x$ itself.
+
+$$
+B_d(x, r) = B(x, r) \setminus x.
+$$
+```
+
 
 ```{prf:definition} Accumulation point
 :label: def-ms-accumulation-point
@@ -872,6 +946,13 @@ if every open ball $B(x,r)$ contains a point in $A$ distinct from $x$.
 
 $$
 B(x, r) \cap A \setminus \{ x \} \neq \EmptySet \Forall r > 0.
+$$
+
+In other words, every deleted neighborhood of $x$ contains
+a point from $A$.
+
+$$
+B_d(x, r) \cap A \neq \EmptySet \Forall r > 0.
 $$
 ```
 

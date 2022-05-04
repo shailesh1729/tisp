@@ -6,7 +6,7 @@ Topology of metric spaces is fully developed in
 {ref}`ch:metric-spaces`. In this section, we quickly 
 describe the topology of the real line $\RR$ as it 
 will be needed for the development of the material
-related to {pref:ref}`real functions <def-bra-real-function>`. 
+related to {prf:ref}`real functions <def-bra-real-function>`. 
 We state a number of results without proving. All of these
 results can be proven in the more general context of
 metric spaces. Please see {ref}`sec:ms:metric-topology`
@@ -16,6 +16,7 @@ for detailed proofs.
 
 ```{prf:definition} Distance function
 :label: def-bra-rl-distance
+
 The *distance function* between two real numbers is defined as 
 
 $$
@@ -23,7 +24,9 @@ d(x, y) = | x - y | \Forall x, y \in \RR.
 $$
 ```
 
-```{prf:remark} 
+```{prf:remark}
+:label: rem-bra-dist-func-props
+
 The distance function satisfies following properties:
 
 1. $d(x,y) \geq 0$.
@@ -194,6 +197,8 @@ We claim without proving:
 
 
 ```{prf:example}
+:label: ex-rl-rational-closure
+
 Consider $\QQ$, the set of rational numbers.
 
 1. Recall that every interval of real numbers contains a rational number

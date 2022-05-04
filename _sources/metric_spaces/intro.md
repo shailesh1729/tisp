@@ -102,6 +102,8 @@ $$
 ## Metric Subspaces
 
 ```{prf:definition} Metric subspace
+:label: def-ms-metric-subspace
+
 Let $(X, d)$ be a metric space. Let $Y \subset X$ be a nonempty
 subset of $X$. Then, $Y$ can be viewed as a metric space
 in its own right with the distance function $d$
@@ -116,6 +118,8 @@ $(Y, d)$.
 ```
 
 ```{prf:example}
+:label: ex-ms-metric-subspace-1
+
 $[0,1]$ is a metric subspace of $\RR$ with the standard
 metric $d(x, y) = |x -y|$ restricted to $[0,1]$. 
 In other words, the distance between any two points
@@ -128,6 +132,8 @@ points in $\RR$ and using the standard metric for $\RR$.
 ## Examples
 
 ```{prf:example} $\RR^n$ p-distance
+:label: ex-ms-rn-p-distance-as-metric
+
 For some $1 \leq p \lt \infty$, the function $d_p : \RR^n \times \RR^n \to \RR$:
 
 $$
@@ -139,6 +145,8 @@ is a metric and $(\RR^n, d_p)$ is a metric space.
 
 
 ```{prf:example} $\RR^n$ Euclidean space
+:label: ex-ms-rn-as-euclidean-space
+
 The $d_2$ metric over $\RR^n$:
 
 $$
@@ -153,6 +161,8 @@ The standard metric for $\RR^n$ is the Euclidean metric.
 
 
 ```{prf:example} Discrete metric
+:label: ex-ms-discrete-metric-1
+
 Let $X$ be a nonempty set:
 
 Define:
@@ -169,10 +179,11 @@ and the metric space is called a *discrete metric space*.
 ```
 
 Discrete metric spaces are discussed in depth in 
-{ref}`discrete-metric-space`. They help clarify 
+{ref}`sec:ms:discrete-metric-space`. They help clarify 
 many subtle issues in the theory of metric spaces.
 
 ```{prf:example} $\ERL$ A metric space for the extended real line
+:label: ex-ms-erl-as-metric-space
 
 Consider the mapping $\varphi : \ERL \to [-1, 1]$ given by:
 
@@ -201,6 +212,8 @@ It is the standard metric on $\ERL$.
 ``` 
 
 ```{prf:example} $\ell^p$ Real sequences
+:label: ex-ms-l1-real-seq-metric-space
+
 For any $1 \leq p < \infty$, we define:
 
 $$
@@ -225,6 +238,7 @@ with $d_p$ as the standard metric.
 ## Products of Metric Spaces
 
 ```{prf:definition} Finite products of metric spaces
+:label: def-ms-finite-product-spaces
 
 Let $(X_1, d_1), (X_2, d_2), \dots, (X_n, d_n)$ be $n$ metric spaces.
 
@@ -267,10 +281,14 @@ $$
 * If $x \in A$, then $d(x, A) = 0$.
 
 ```{prf:theorem}
+:label: res-ms-set-distance-member-zero
+
 If $x \in A$, then $d(x, A) = 0$.
 ```
 
 ```{prf:example}
+:label: res-ms-set-distance-zero-1
+
 1. Let $X = \RR$ and $A  = (0, 1)$.
 1. Let $x = 0$.
 1. Then $d(x, A) = 0$.

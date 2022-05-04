@@ -1,0 +1,1422 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.11. Continuity &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.12. Subgradients" href="subgradients.html" />
+    <link rel="prev" title="6.10. Separation Theorems" href="separation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sym_matrices.html">
+     4.8. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.9. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.10. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.11. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     6.5. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_functions.html">
+     6.6. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable.html">
+     6.7. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="function_ops.html">
+     6.8. Convexity Preserving Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="relint.html">
+     6.9. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="separation.html">
+     6.10. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.11. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="subgradients.html">
+     6.12. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="conjugate_functions.html">
+     6.13. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="smoothness.html">
+     6.14. Smoothness
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   7. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     7.2. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     7.3. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     7.4. Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     7.5. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     7.6. Quadratic Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     7.7. Differentiable Objective Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   8. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     8.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     8.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   9. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../selected/chapter.html">
+   11. Selected Functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/convex_sets/continuity.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fconvex_sets/continuity.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closure">
+   6.11.1. Closure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   6.11.2. Continuity
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuity-of-univariate-closed-convex-functions">
+     6.11.2.1. Continuity of Univariate Closed Convex Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Continuity</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closure">
+   6.11.1. Closure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   6.11.2. Continuity
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuity-of-univariate-closed-convex-functions">
+     6.11.2.1. Continuity of Univariate Closed Convex Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="continuity">
+<h1><span class="section-number">6.11. </span>Continuity<a class="headerlink" href="#continuity" title="Permalink to this headline">¶</a></h1>
+<p>This section focuses on topological properties of
+convex functions in normed linear spaces.
+In particular, we discuss
+closure of convex functions,
+continuity of convex functions at interior points.</p>
+<p>Main references for this section are
+<span id="id1">[<a class="reference internal" href="../bib.html#id10" title="Amir Beck. Introduction to nonlinear optimization: Theory, algorithms, and applications with MATLAB. SIAM, 2014.">3</a>, <a class="reference internal" href="../bib.html#id13" title="Stephen P Boyd and Lieven Vandenberghe. Convex optimization. Cambridge university press, 2004.">7</a>, <a class="reference internal" href="../bib.html#id20" title="Ralph Tyrell Rockafellar. Convex analysis. Princeton university press, 2015.">14</a>]</span>.</p>
+<p>Throughout this section, we assume that <span class="math notranslate nohighlight">\(\VV\)</span> is a
+finite dimensional real normed linear space equipped with a
+<a class="reference internal" href="../la/normed_spaces.html#def-la-norm">norm</a> <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>.
+It is also equipped with a metric <span class="math notranslate nohighlight">\(d(\bx, \by) = \| \bx - \by \|\)</span>.
+Wherever necessary,
+it is also equppied with an
+<a class="reference internal" href="../la/inner_product_spaces.html#def-la-real-inner-product">real inner product</a>
+<span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR\)</span>.</p>
+<p>We recall that a function <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> is
+<span class="math notranslate nohighlight">\(L\)</span>-Lipschitz if</p>
+<div class="math notranslate nohighlight">
+\[
+| f(\bx) - f(\by) | \leq L \| \bx - \by \| \Forall \bx, \by \in \VV.
+\]</div>
+<p>The concept of semicontinuity, inferior and superior limits
+and closedness of real valued functions in metric spaces
+is discussed in detail in <a class="reference internal" href="../metric_spaces/real_valued_functions.html#sec-ms-real-valued-functions"><span class="std std-ref">Real Valued Functions</span></a>.</p>
+<p>We recall some results.</p>
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> with <span class="math notranslate nohighlight">\(S = \dom f\)</span> be a function.</p>
+<p>Let <span class="math notranslate nohighlight">\(\ba\)</span> be an accumulation point of <span class="math notranslate nohighlight">\(S\)</span>.
+The limit superior of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(\ba\)</span> is defined by</p>
+<div class="math notranslate nohighlight">
+\[
+\limsup_{\bx \to \ba } f(\bx)
+= \inf_{\delta &gt; 0} \sup_{\bx \in B_d(\ba,r) \cap S} f(\bx).
+\]</div>
+<p>The limit inferior of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(\ba\)</span> is defined by</p>
+<div class="math notranslate nohighlight">
+\[
+\liminf_{\bx \to \ba } f(\bx)
+= \sup_{\delta &gt; 0} \inf_{\bx \in B_d(\ba,r) \cap S} f(\bx).
+\]</div>
+<p><span class="math notranslate nohighlight">\(f\)</span> is lower-semicontinuous
+at <span class="math notranslate nohighlight">\(\ba \in S\)</span> if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+f(\ba) - \epsilon &lt; f(\bx) 
+\text{ for every } \bx \in B(\ba, \delta) \cap S.
+\]</div>
+<p><span class="math notranslate nohighlight">\(f\)</span> is upper-semicontinuous
+at <span class="math notranslate nohighlight">\(\ba \in S\)</span> if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx)  &lt; f(\ba) + \epsilon 
+\text{ for every } \bx \in B(\ba, \delta) \cap S.
+\]</div>
+<p>We say that <span class="math notranslate nohighlight">\(f\)</span> is lower semicontinuous (l.s.c.) if <span class="math notranslate nohighlight">\(f\)</span>
+is l.s.c. at every point of <span class="math notranslate nohighlight">\(S\)</span>.
+Similarly, we say that <span class="math notranslate nohighlight">\(f\)</span> is upper semicontinuous (u.s.c.) if <span class="math notranslate nohighlight">\(f\)</span>
+is u.s.c. at every point of <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(\ba \in S\)</span> if and only if
+<span class="math notranslate nohighlight">\(f\)</span> is l.s.c. as well as u.s.c. at <span class="math notranslate nohighlight">\(\ba\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\ba \in S\)</span> be an accumulation point of <span class="math notranslate nohighlight">\(S\)</span>.
+Then, <span class="math notranslate nohighlight">\(f\)</span> is lower semicontinuous at <span class="math notranslate nohighlight">\(\ba\)</span>
+if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\liminf_{\bx \to \ba} f(\bx) \geq f(\ba).
+\]</div>
+<p>Similarly, <span class="math notranslate nohighlight">\(f\)</span> is upper semicontinuous at <span class="math notranslate nohighlight">\(\ba\)</span>
+if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\limsup_{\bx \to \ba}f(\bx) \leq f(\ba).
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\ba \in S\)</span>.
+Then, <span class="math notranslate nohighlight">\(f\)</span> is l.s.c. at <span class="math notranslate nohighlight">\(\ba\)</span>
+if and only if for every sequence <span class="math notranslate nohighlight">\(\{\bx_n \}\)</span> of <span class="math notranslate nohighlight">\(S\)</span>
+that converges to <span class="math notranslate nohighlight">\(\ba\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\liminf_{n \to \infty} f(\bx_n) \geq f(\ba).
+\]</div>
+<p>Similarly, <span class="math notranslate nohighlight">\(f\)</span> is upper semicontinuous at <span class="math notranslate nohighlight">\(\ba\)</span>
+if and only if every sequence <span class="math notranslate nohighlight">\(\{\bx_k \}\)</span> of <span class="math notranslate nohighlight">\(S\)</span>
+that converges to <span class="math notranslate nohighlight">\(\ba\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\limsup_{n \to \infty}f(\bx_n) \leq f(\ba).
+\]</div>
+<p>The following conditions are equivalent.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is l.s.c.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is closed; i.e., every sublevel set of <span class="math notranslate nohighlight">\(f\)</span> is closed
+with respect to the subspace topology <span class="math notranslate nohighlight">\((S, \| \cdot \|)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epi f\)</span> is closed in  <span class="math notranslate nohighlight">\(\VV \oplus \RR\)</span>.</p></li>
+</ol>
+<div class="section" id="closure">
+<h2><span class="section-number">6.11.1. </span>Closure<a class="headerlink" href="#closure" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvxf-convex-func-closure">
+<p class="admonition-title"><span class="caption-number">Definition 6.61 </span> (Closure of a convex function)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a convex function.
+Then, its <em>closure</em> is defined to be the
+<a class="reference internal" href="../metric_spaces/real_valued_functions.html#def-lsc-hull-func">lower semicontinuous hull</a>  of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(g\)</span> is the closure of <span class="math notranslate nohighlight">\(f\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+\epi g = \closure \epi f.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> is a proper convex function,
+then also, its closure is defined to be the
+lower semicontinuous hull.</p>
+<p>If <span class="math notranslate nohighlight">\(f: \VV \to \ERL\)</span> is an improper convex function
+which attains a value <span class="math notranslate nohighlight">\(f(\bx) = -\infty\)</span> at some
+<span class="math notranslate nohighlight">\(\bx \in \VV\)</span>, then its closure is defined to be
+the constant function <span class="math notranslate nohighlight">\(g(\bx) = -\infty\)</span> for all <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>.</p>
+<p>The closure of a convex function is denoted by <span class="math notranslate nohighlight">\(\closure f\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvxf-convex-func-closure-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.156 </span> (Closure of a convex function is convex)</p>
+<div class="theorem-content section" id="proof-content">
+<p>The closure of a convex function is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(f\)</span> be a convex function. Then, <span class="math notranslate nohighlight">\(\epi f\)</span> is convex.
+Let <span class="math notranslate nohighlight">\(g\)</span> be its closure.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(f\)</span> is improper, then <span class="math notranslate nohighlight">\(g\)</span> is a constant function, hence convex.</p></li>
+<li><p>Otherwise, <span class="math notranslate nohighlight">\(\epi g = \closure \epi f\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is convex, hence <span class="math notranslate nohighlight">\(\epi f\)</span> is convex.</p></li>
+<li><p>Due to <a class="reference internal" href="relint.html#res-cvx-closure-convex-set-convex">Theorem 6.112</a>,
+the closure of a convex set is convex.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\epi g\)</span> is convex.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(g\)</span> is convex.</p></li>
+</ol>
+</div>
+<div class="proof definition admonition" id="def-cvx-closed-convex-func">
+<p class="admonition-title"><span class="caption-number">Definition 6.62 </span> (Closed convex function)</p>
+<div class="definition-content section" id="proof-content">
+<p>A convex function <span class="math notranslate nohighlight">\(f: \VV \to \ERL\)</span> is called
+<em>closed</em> if</p>
+<div class="math notranslate nohighlight">
+\[
+\closure f = f.
+\]</div>
+</div>
+</div><p>For a proper convex function, closedness
+is same as lower semicontinuity.</p>
+<p>The only closed improper convex functions are</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(\bx) = \infty \Forall \bx \in \VV\)</span>. Here <span class="math notranslate nohighlight">\(\epi f = \EmptySet\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(\bx) = -\infty \Forall \bx \in \VV\)</span>. Here <span class="math notranslate nohighlight">\(\epi f = \VV \times \RR\)</span>.</p></li>
+</ol>
+<div class="proof example admonition" id="ex-cvxf-closed-convex-function-open-domain">
+<p class="admonition-title"><span class="caption-number">Example 6.58 </span> (Closed convex function with open domain)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \RR \to \RERL\)</span> be given as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+\frac{1}{x}, &amp; x &gt; 0\\
+\infty, &amp; x \leq 0.
+\end{cases} 
+\end{split}\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(\dom f = (0, \infty)\)</span>.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\dom f\)</span> is an open interval in <span class="math notranslate nohighlight">\(\RR\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is continuous at every <span class="math notranslate nohighlight">\(x &gt; 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is l.s.c. at every <span class="math notranslate nohighlight">\(x &gt; 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is l.s.c.</p></li>
+<li><p>Let the sublevel set for <span class="math notranslate nohighlight">\(r \in \RR\)</span>
+be given by</p>
+<div class="math notranslate nohighlight">
+\[
+   T_r = \{ x \in (0, \infty) \ST f(x) \leq r \}.
+   \]</div>
+</li>
+<li><p>We can see that <span class="math notranslate nohighlight">\(T_r = \EmptySet\)</span> for <span class="math notranslate nohighlight">\(r \leq 0\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(r &gt; 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(x) = \frac{1}{x} \leq r \iff x \geq \frac{1}{r}.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(T_r = [\frac{1}{r}, \infty)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(T_r\)</span> is indeed closed in the topology <span class="math notranslate nohighlight">\((\dom f, | \cdot |)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is l.s.c., hence <span class="math notranslate nohighlight">\(\epi f\)</span> is closed.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\closure f = f\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is a closed convex function.</p></li>
+</ol>
+</div>
+</div><div class="proof remark admonition" id="rem-cvxf-epi-cl-cl-epi">
+<p class="admonition-title"><span class="caption-number">Remark 6.9 </span> (Closure of proper convex functions and epigraph)</p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be a proper convex function. Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\epi \closure f = \closure \epi f.
+\]</div>
+<p>This follows from the definition, since <span class="math notranslate nohighlight">\(g = \closure f\)</span> is
+defined by the fact that</p>
+<div class="math notranslate nohighlight">
+\[
+\epi g = \closure \epi f.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="id2">
+<h2><span class="section-number">6.11.2. </span>Continuity<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Convex functions are not necessarily continuous on non-open sets.</p>
+<div class="proof example admonition" id="ex-cvxf-convex-non-continuous">
+<p class="admonition-title"><span class="caption-number">Example 6.59 </span> (A convex function which is not continuous)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+1, &amp; x = 0,\\
+x^2 &amp; 0 &lt; x \leq 1.
+\end{cases}
+\end{split}\]</div>
+<p>We can see that <span class="math notranslate nohighlight">\(\dom f = [0, 1]\)</span>. <span class="math notranslate nohighlight">\(f\)</span> is continuous on <span class="math notranslate nohighlight">\((0,1)\)</span>
+but <span class="math notranslate nohighlight">\(f\)</span> is not continuous (from the right) at <span class="math notranslate nohighlight">\(x=0\)</span>. It is
+continuous (from the left) at <span class="math notranslate nohighlight">\(x=1\)</span>.</p>
+</div>
+</div><p>Convex functions are continuous at points in the
+interior of their domain.</p>
+<div class="proof theorem admonition" id="res-cvxf-convex-local-lipschitz-continuous">
+<p class="admonition-title"><span class="caption-number">Theorem 6.157 </span> (Local Lipschitz continuity of convex functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real normed linear space.
+Let <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span> be a convex function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Let <span class="math notranslate nohighlight">\(\ba \in \interior S\)</span>. Then, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span>
+and <span class="math notranslate nohighlight">\(L &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B(\ba, r) \subseteq S\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+|f (\bx) - f(\ba)| \leq L \| \bx - \ba \|
+\]</div>
+<p>for every <span class="math notranslate nohighlight">\(\bx \in B[\ba, r]\)</span>.</p>
+</div>
+</div><p>We recall from <a class="reference internal" href="relint.html#res-cvx-convex-set-empty-interior">Theorem 6.114</a>
+that if <span class="math notranslate nohighlight">\(\dim \affine S &lt; n\)</span> then <span class="math notranslate nohighlight">\(S\)</span> has an empty interior.
+Thus, if <span class="math notranslate nohighlight">\(\interior S\)</span> is nonempty, then, <span class="math notranslate nohighlight">\(\affine S = \VV\)</span>.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. We shall structure the proof as follows. For any <span class="math notranslate nohighlight">\(\ba \in \interior S\)</span>:</p>
+<ol class="simple">
+<li><p>We show that <span class="math notranslate nohighlight">\(f\)</span> is bounded on a closed ball <span class="math notranslate nohighlight">\(B[\ba, r] \subseteq S\)</span>.</p></li>
+<li><p>Then, we show that <span class="math notranslate nohighlight">\(f\)</span> satisfies the Lipschitz inequality
+<span class="math notranslate nohighlight">\(|f (\bx) - f(\ba)| \leq L \| \bx - \ba \|\)</span> on the
+closed ball <span class="math notranslate nohighlight">\(B[\ba, r]\)</span>
+for a specific choice of <span class="math notranslate nohighlight">\(L\)</span> depending on <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
+</ol>
+<p>We first introduce <span class="math notranslate nohighlight">\(\| \cdot \|_{\infty}\)</span>
+norm on <span class="math notranslate nohighlight">\(\VV\)</span> and describe its implications.</p>
+<ol>
+<li><p>Choose a basis <span class="math notranslate nohighlight">\(\BBB = \{\be_1, \dots, \be_n \}\)</span> for <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>, we have a unique representation</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \sum_{i=1}^n x_i \be_i.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(T : \VV \to \RR^n\)</span> be a coordinate mapping
+which maps every vector <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> to its
+coordinate vector <span class="math notranslate nohighlight">\((x_1, \dots, x_n) \in \RR^n\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> is an isomorphism.</p></li>
+<li><p>Define <span class="math notranslate nohighlight">\(\| \cdot \|_{\infty} : \VV \to \RR\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bx \|_{\infty} = \| T(\bx) \|_{\infty} = \max_{i=1,\dots,n}|x_i|.
+   \]</div>
+</li>
+<li><p>It is easy to show that <span class="math notranslate nohighlight">\(\| \cdot \|_{\infty}\)</span> is a norm on <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="../la/normed_spaces.html#res-la-ns-finite-all-norms-eq">Theorem 4.60</a>,
+all norms are equivalent.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> and <span class="math notranslate nohighlight">\(\| \cdot \|_{\infty}\)</span> are
+equivalent norms for <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="../la/normed_spaces.html#def-la-ns-finite-norm-topology">Definition 4.65</a>,
+the norm topology is identical for all norms
+in a finite dimensional space.</p></li>
+<li><p>Thus, a point is an interior point of <span class="math notranslate nohighlight">\(S\)</span>
+irrespective of the norm chosen.</p></li>
+<li><p>We introduce the closed and open balls in
+<span class="math notranslate nohighlight">\((\VV, \| \cdot \|_{\infty})\)</span>
+as</p>
+<div class="math notranslate nohighlight">
+\[
+   B_{\infty}[\ba, \delta] = \{\bx \in \VV  \ST 
+      \| \bx - \ba \|_{\infty} \leq \delta \}
+   \text{ and }
+   B_{\infty}(\ba, \delta) = \{\bx \in \VV  \ST 
+      \| \bx - \ba \|_{\infty} &lt; \delta \}.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\ba \in \interior S\)</span>.</p></li>
+<li><p>Then, there exists <span class="math notranslate nohighlight">\(r_1 &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(B_{\infty}[\ba, r_1] \subseteq S\)</span>.
+due to <a class="reference internal" href="../metric_spaces/topology.html#res-ms-interior-point-closed">Remark 3.2</a>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(B_{\infty}(\ba, r_1) \subseteq B_{\infty}[\ba, r_1]\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="../metric_spaces/topology.html#res-ms-eq-metric-ball-in-ball">Theorem 3.25</a>, there
+is an <span class="math notranslate nohighlight">\(r_2 &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(B(\ba, r_2) \subseteq  B_{\infty}(\ba, r_1)\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="../metric_spaces/topology.html#res-open-closed-ball-contain">Theorem 3.2</a>,
+we can pick an <span class="math notranslate nohighlight">\(0 &lt; r &lt; r_2\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   B[\ba, r] \subseteq B(\ba, r_2)
+   \subseteq  B_{\infty}(\ba, r_1)
+   \subseteq B_{\infty}[\ba, r_1]
+   \subseteq S.
+   \]</div>
+</li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(f\)</span> is bounded on <span class="math notranslate nohighlight">\(B[\ba, r]\)</span>.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(B_{\infty}[\ba, r_1]\)</span> is closed and bounded.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(B_{\infty}[\ba, r_1]\)</span> is compact
+due to <a class="reference internal" href="../la/normed_spaces.html#res-la-ndim-compact-closed-bounded">Theorem 4.66</a>.</p></li>
+<li><p>By <a class="reference internal" href="relint.html#res-cvx-krein-milman">Krein Milman theorem</a>,
+a compact convex set is convex hull of its extreme points.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   B_{\infty}[\ba, r_1] = \convex \extreme B_{\infty}[\ba, r_1].
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv_1, \dots, \bv_N\)</span> be the <span class="math notranslate nohighlight">\(N=2^n\)</span>
+extreme points of <span class="math notranslate nohighlight">\(B_{\infty}[\ba, r_1]\)</span>.</p>
+<ol>
+<li><p>These extreme points are given by</p>
+<div class="math notranslate nohighlight">
+\[
+      \bv_i = \ba + r_1 \bw_i
+      \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bw_i\)</span> are the vectors with coordinates
+<span class="math notranslate nohighlight">\(\{-1, 1\}^n\)</span>.</p>
+</li>
+<li><p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+      \bw_i = \sum_{j=1}^n w^i_j \be_j
+      \]</div>
+<p>where <span class="math notranslate nohighlight">\(w^i_j \in \{ -1, 1 \}\)</span>.</p>
+</li>
+<li><p>Note that</p>
+<div class="math notranslate nohighlight">
+\[
+      \| \bv_i - \ba \| = r \| \bw_i \| 
+      = r_1 \max \{ |w^i_j| \} = r_1.
+      \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv_i \in \boundary B_{\infty}[\ba, r_1]\)</span>.</p></li>
+<li><p>Readers can verify that these are indeed the
+extreme points of <span class="math notranslate nohighlight">\(B_{\infty}[\ba, r_1]\)</span> and
+there are no other extreme points.</p></li>
+</ol>
+</li>
+<li><p>Then, by Krein Milman theorem,</p>
+<div class="math notranslate nohighlight">
+\[
+   B_{\infty}[\ba, r_1] = \convex \{\bv_1, \dots, \bv_N \}.
+   \]</div>
+</li>
+<li><p>Thus, every <span class="math notranslate nohighlight">\(\bx \in B_{\infty}[\ba, r_1]\)</span> is a convex
+combination of the extreme points. Specially,
+there exists <span class="math notranslate nohighlight">\(t \in \Delta_N\)</span> (unit simplex of <span class="math notranslate nohighlight">\(\RR^N\)</span>) such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \sum_{i=1}^N t_i \bv_i.
+   \]</div>
+</li>
+<li><p>Now, by <a class="reference internal" href="convex_functions.html#res-cvxf-jensen-inequality">Jensen's inequality</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \leq \sum_{i=1}^N t_i f(\bv_i).
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(M = \max \{f(\bv_1), \dots, f(\bv_N) \}\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \leq \sum_{i=1}^N t_i f(\bv_i)
+   \leq \sum_{i=1}^N t_i  M = M \sum_{i=1}^N t_i = M.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(B[\ba, r] \subseteq B_{\infty}[\ba, r_1]\)</span>,
+hence <span class="math notranslate nohighlight">\(f(\bx) \leq M\)</span> for every <span class="math notranslate nohighlight">\(\bx \in B[\ba, r]\)</span>.</p></li>
+</ol>
+<p>We have shown that <span class="math notranslate nohighlight">\(f(\bx) \leq M\)</span> for every <span class="math notranslate nohighlight">\(\bx \in B[\ba, r]\)</span>.
+We next find an <span class="math notranslate nohighlight">\(L\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+f (\bx) - f(\ba) \leq L \| \bx - \ba \|
+\]</div>
+<p>for every <span class="math notranslate nohighlight">\(\bx \in B[\ba, r]\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in B_d[\ba, r]\)</span> (the deleted neighborhood).</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\| \bx - \ba \| \leq r\)</span> and <span class="math notranslate nohighlight">\(f(\bx) \leq M\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\alpha = \frac{1}{r} \| \bx - \ba \|\)</span>.
+Note that by definition <span class="math notranslate nohighlight">\(\alpha \leq 1\)</span>.</p></li>
+<li><p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+   \by = \ba + \frac{1}{\alpha}(\bx - \ba).
+   \]</div>
+</li>
+<li><p>Note that</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \by - \ba \| = r \frac{\| \bx - \ba \| }{\| \bx - \ba \|} = r.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\by \in B[\ba, r]\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(f(\by)\leq M\)</span>.</p></li>
+<li><p>We can rewrite the above equation (defining <span class="math notranslate nohighlight">\(\by\)</span>) as</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \alpha \by + (1- \alpha) \ba.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx\)</span> is a convex combination of <span class="math notranslate nohighlight">\(\by, \ba\)</span>.</p></li>
+<li><p>Then, by convexity,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   f(\bx) &amp;\leq \alpha f(\by) + (1- \alpha) f(\ba)\\
+   &amp;= f(\ba) + \alpha (f(\bx) - f(\ba))\\
+   &amp;\leq  f(\ba) + \alpha (M - f(\ba))\\
+   &amp;= f(\ba) + \frac{1}{r} \| \bx - \ba \| (M - f(\ba)).
+   \end{split}\]</div>
+</li>
+<li><p>Consequently,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) - f(\ba) \leq \frac{M - f(\ba)}{r} \| \bx - \ba \|.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(L = \frac{M - f(\ba)}{r}\)</span>.</p></li>
+<li><p>Then, for every <span class="math notranslate nohighlight">\(\bx \in B[\ba, r]\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) - f(\ba) \leq L \| \bx - \ba \|.
+   \]</div>
+</li>
+</ol>
+<p>We next show that for this choice of <span class="math notranslate nohighlight">\(L\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+f (\ba) - f(\bx) \leq L \| \bx - \ba \|
+\]</div>
+<p>for every <span class="math notranslate nohighlight">\(\bx \in B[\ba, r]\)</span>.</p>
+<ol>
+<li><p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+   \bz = \ba + \frac{1}{\alpha} (\ba - \bx).
+   \]</div>
+</li>
+<li><p>It is easy to see that <span class="math notranslate nohighlight">\(\| \ba - \bz \| = r\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bz \in B[\ba, r]\)</span> and <span class="math notranslate nohighlight">\(f(\bz) \leq M\)</span>.</p></li>
+<li><p>Rearranging, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \ba + \alpha (\ba - \bz).
+   \]</div>
+</li>
+<li><p>Now, note that:</p>
+<div class="math notranslate nohighlight">
+\[
+   \ba = \frac{1}{1 + \alpha}(\ba + \alpha(\ba - \bz))
+   + \frac{\alpha}{1 + \alpha} \bz.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\ba\)</span> is a convex combination of
+<span class="math notranslate nohighlight">\(\bx = \ba + \alpha (\ba - \bz)\)</span>
+and <span class="math notranslate nohighlight">\(\bz\)</span>.</p></li>
+<li><p>Also, both <span class="math notranslate nohighlight">\(\bx, \bz \in B[\ba, r]\)</span>.</p></li>
+<li><p>Applying convexity,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\ba) \leq \frac{1}{1 + \alpha} f(\bx) 
+   + \frac{\alpha}{1 + \alpha} f(\bz).
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   (1 + \alpha)f(\ba) \leq f(\bx) + \alpha f(\bz).
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \geq (1 + \alpha)f(\ba) - \alpha f(\bz)
+   = f(\ba) + \alpha (f(\ba) - f(\bz)).
+   \]</div>
+</li>
+<li><p>Continuing from here</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   f(\bx) &amp;\geq f(\ba) + \alpha (f(\ba) - f(\bz))\\
+   &amp;\geq f(\ba) - \alpha (M - f(\ba))\\
+   &amp;= f(\ba) - \frac{M - f(\ba)}{r} \| \bx - \ba \|\\
+   =  f(\ba) - L \| \bx - \ba \|.
+   \end{split}\]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(\ba) - f(\bx) \leq L \| \bx - \ba \|\)</span>.</p></li>
+</ol>
+<p>Combining, we see that with <span class="math notranslate nohighlight">\(L = \frac{M - f(\ba)}{r}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+|f (\bx) - f(\ba)| \leq L \| \bx - \ba \|
+\]</div>
+<p>for every <span class="math notranslate nohighlight">\(\bx \in B[\ba, r]\)</span>.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is locally Lipschitz at every interior
+point of <span class="math notranslate nohighlight">\(S = \dom f\)</span>.</p>
+</div>
+<div class="section" id="continuity-of-univariate-closed-convex-functions">
+<h3><span class="section-number">6.11.2.1. </span>Continuity of Univariate Closed Convex Functions<a class="headerlink" href="#continuity-of-univariate-closed-convex-functions" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvxf-convex-closed-univariate">
+<p class="admonition-title"><span class="caption-number">Theorem 6.158 </span> (Continuity of closed convex univariate functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \RR \to \RERL\)</span> be a proper closed and convex function.
+Then, <span class="math notranslate nohighlight">\(f\)</span> is continuous over <span class="math notranslate nohighlight">\(\dom f\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(f\)</span> is convex, hence its domain is convex. Hence
+<span class="math notranslate nohighlight">\(\dom f\)</span> must be an interval <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(\interior I = \EmptySet\)</span>, then <span class="math notranslate nohighlight">\(I\)</span> must be a singleton.</p></li>
+<li><p>In that case <span class="math notranslate nohighlight">\(f\)</span> is continuous obviously.</p></li>
+<li><p>Now consider the case where <span class="math notranslate nohighlight">\(\interior I \neq \EmptySet\)</span>.</p></li>
+<li><p>Then, due to <a class="reference internal" href="#res-cvxf-convex-local-lipschitz-continuous">Theorem 6.157</a>,
+<span class="math notranslate nohighlight">\(f\)</span> is continuous at every <span class="math notranslate nohighlight">\(x \in \interior I\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(I\)</span> is open (i.e., it has no endpoints), then there is
+nothing more to prove.</p></li>
+<li><p>We are left with showing the (one sided) continuity of <span class="math notranslate nohighlight">\(f\)</span>
+at one of the endpoints of <span class="math notranslate nohighlight">\(I\)</span> if it has any.</p></li>
+<li><p>Since, the argument will be identical for either of the
+endpoints, without loss of generality, let us assume
+that <span class="math notranslate nohighlight">\(I\)</span> has a left endpoint <span class="math notranslate nohighlight">\(a\)</span> and we show the continuity
+from the right at <span class="math notranslate nohighlight">\(a\)</span>; i.e. <span class="math notranslate nohighlight">\(\lim_{x \to a^+} f(x) = f(a)\)</span>.</p></li>
+<li><p>Pick any <span class="math notranslate nohighlight">\(c \in I\)</span> such that <span class="math notranslate nohighlight">\(c &gt; a\)</span>.</p></li>
+<li><p>Define a function</p>
+<div class="math notranslate nohighlight">
+\[
+   g(t) = \frac{f(c -t) - f(c)}{t}.
+   \]</div>
+</li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\(g\)</span> is defined over <span class="math notranslate nohighlight">\((0, c-a]\)</span>.</p></li>
+<li><p>We shall show that <span class="math notranslate nohighlight">\(g\)</span> is nondecreasing and upper bounded
+over <span class="math notranslate nohighlight">\((0, c-a]\)</span>.</p></li>
+<li><p>Pick any <span class="math notranslate nohighlight">\(t,s\)</span> satisfying <span class="math notranslate nohighlight">\(0 &lt; t \leq s \leq c-a\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   c - t = \left (1 - \frac{t}{s} \right ) c + \frac{t}{s} (c - s).
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\frac{t}{s}\)</span> is well defined and <span class="math notranslate nohighlight">\(\frac{t}{s} \in (0, 1]\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(c-t\)</span> is a convex combination of <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(c-s\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is convex, hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; f(c - t) \leq \left (1 - \frac{t}{s} \right ) f(c) + \frac{t}{s} f(c - s)\\
+   &amp; \iff f(c - t) - f(c) \leq \frac{t}{s} (f(c -s) - f(c)) \\
+   &amp;\iff \frac{f(c - t) - f(c)}{t} \leq \frac{f(c -s) - f(c)}{s}.
+   \end{split}\]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   g(t) \leq g(s) \Forall 0 &lt; t \leq s \leq c-a.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g\)</span> is nondecreasing over <span class="math notranslate nohighlight">\((0, c-a]\)</span>.</p></li>
+<li><p>Finally <span class="math notranslate nohighlight">\(g(c-a) = \frac{f(a) - f(c)}{c - a}\)</span> is finite since both <span class="math notranslate nohighlight">\(c,a \in \dom f\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(g\)</span> is nondecreasing, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   g(t) \leq g(c -a) \Forall t \in (0, c-a].
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g\)</span> is upper bounded.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(g\)</span> is nondecreasing and upper bounded,
+hence due to <a class="reference internal" href="../basic_real_analysis/real_functions.html#res-bra-rf-monotonic-func-limits">Theorem 2.35</a>,
+the left hand limit of <span class="math notranslate nohighlight">\(g(t)\)</span> at <span class="math notranslate nohighlight">\(c-a\)</span> exists and
+is equal to some real number, say,</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{t \to (c-a)^-} g(t) = \ell.
+   \]</div>
+<p>Note that we haven’t said that <span class="math notranslate nohighlight">\(g\)</span> is continuous from the left at <span class="math notranslate nohighlight">\(c-a\)</span>.</p>
+</li>
+<li><p>Recall from the definition of <span class="math notranslate nohighlight">\(g\)</span> that</p>
+<div class="math notranslate nohighlight">
+\[
+   f(c-t) = f(c) + t g(t).
+   \]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{t \to (c-a)^-} f(c -t) = f(c) + (c-a) \ell.
+   \]</div>
+</li>
+<li><p>Replacing <span class="math notranslate nohighlight">\(c-t\)</span> by <span class="math notranslate nohighlight">\(r\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{r \to a^+} f(r) = f(c) + (c - a) \ell.
+   \]</div>
+</li>
+<li><p>We have shown so far that the limit from the right at <span class="math notranslate nohighlight">\(a\)</span> exists
+for <span class="math notranslate nohighlight">\(f\)</span> and is equal to <span class="math notranslate nohighlight">\(f(c) + (c - a) \ell\)</span>.</p></li>
+<li><p>Using the upper bound on <span class="math notranslate nohighlight">\(g\)</span>, we can say that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   f(c -t) 
+   &amp;= f(c) + t g(t) \\
+   &amp;\leq f(c) + (c-a) g(c-a) \\
+   &amp;= f(c) + f(a) - f(c) = f(a)
+   \end{split}\]</div>
+<p>holds true for every <span class="math notranslate nohighlight">\(t \in (0, c-a]\)</span>.</p>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{r \to a^+} f(r) = \lim_{t \to (c-a)^-} f(c -t)  \leq f(a).
+   \]</div>
+</li>
+<li><p>On the other hand, since <span class="math notranslate nohighlight">\(f\)</span> is closed, hence it is also
+lower semicontinuous. This means that</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{r \to a^+} f(r)  \geq f(a).
+   \]</div>
+</li>
+<li><p>Combining these two inequalities, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{r \to a^+} f(r)  = f(a).
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is indeed continuous from the right at <span class="math notranslate nohighlight">\(a\)</span>.</p></li>
+<li><p>Similarly, if <span class="math notranslate nohighlight">\(I\)</span> has a right endpoint <span class="math notranslate nohighlight">\(b\)</span>,
+then <span class="math notranslate nohighlight">\(f\)</span> is continuous from the left at <span class="math notranslate nohighlight">\(b\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is continuous at every point in its domain.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./convex_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="separation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.10. </span>Separation Theorems</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="subgradients.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.12. </span>Subgradients</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

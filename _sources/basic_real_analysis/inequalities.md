@@ -73,6 +73,7 @@ exponents in $\ERL$.
 ```
 
 ```{prf:example} Conjugate exponents
+:label: ex-bra-conjugate-exponents-1
 
 1. $p=1$ and $q=\infty$.
 1. $p=2/3$ and $q=3$.
@@ -82,6 +83,8 @@ exponents in $\ERL$.
 ```
 
 ```{prf:theorem} Characterization of conjugate exponents
+:label: res-bra-conjugate-exponent-charac
+
 Let $p,q$ be extended real numbers with 
 $p,q \in [1,\infty]$. 
 
@@ -135,6 +138,8 @@ $$
 ## Interpolation Inequality for $e^x$.
 
 ```{prf:theorem}
+:label: res-bra-interpolation-inequality-exp
+
 If $t \in [0,1]$ then:
 
 $$

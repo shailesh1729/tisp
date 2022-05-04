@@ -1,5 +1,5 @@
 (sec:cvx:relint)=
-# Topological Properties
+# Topology of Convex Sets
 
 This section focuses on some topological properties
 of convex sets.
@@ -11,6 +11,10 @@ Wherever necessary,
 it is also equppied with an 
 {prf:ref}`real inner product <def-la-real-inner-product>`
 $\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$. 
+
+
+Primary references for this section are
+{cite}`beck2014introduction,bertsekas2003convex,boyd2004convex,rockafellar2015convex`.
 
 In a finite dimensional real normed linear space:
 
@@ -81,6 +85,46 @@ $$
 $$
 
 
+## Closure
+
+
+```{prf:theorem} Closure of a convex set
+:label: res-cvx-closure-convex-set-convex
+
+Let $\VV$ be a real normed linear space.
+Let $C$ be a convex set of $\VV$.
+Then, its closure is convex.
+```
+
+```{prf:proof}
+If $C$ is empty, then its closure is empty and is
+therefore convex. Now, assume $C$ to be nonempty.
+
+1. Let $\bx, \by \in \closure C$.
+1. Let $t \in (0, 1)$.
+1. Let $\bz = t \bx + (1-t) \by$.
+1. We need to show that $\bz \in \closure C$.
+1. Since both $\bx, \by$ are closure points of $C$,
+   hence there exist sequences 
+   $\{ \bx_n \}$ and $\{ \by_n \}$ of $C$ such that
+   $\lim \bx_n = \bx$ and $\lim \by_n = \by$.
+1. Then, $\bz_n = t \bx_n + (1-t) \by_n \in C$ 
+   since $\bx_n, \by_n \in C$ and $C$ is convex.
+1. By limit arithmetic 
+
+   $$
+   \lim \bz_n = \lim (t \bx_n + (1-t) \by_n)
+   = t \lim \bx_n + (1-t) \lim \by_n
+   = t \bx + (1-t)\by = \bz.
+   $$
+1. Thus, $\bz = \lim \bz_n$.
+1. Since $\{ \bz_n \}$ is also a sequence of $C$,
+   hence $\bz \in \closure C$.
+1. Thus, for any $\bx, \by \in \closure C$ 
+   and $t \in (0, 1)$, $ t \bx + (1-t) \by \in \closure C$.
+1. Thus, $\closure C$ is convex.
+```
+
 ## Interior
 
 ```{prf:theorem} Interior of convex sets
@@ -148,6 +192,17 @@ Let $D = \interior C$. Assume that $C$ is convex.
 1. Thus, $D$ is convex.
 ```
 
+```{prf:proof}
+Another proof can be built based on the
+general line segment property proved in
+{prf:ref}`res-cvx-convex-interior-segment` below.
+
+1. Let $\bx, \by \in \interior C$. 
+1. Let $t \in (0, 1)$.
+1. Then, by line segment property $t \bx  + (1 -t) \by \in \interior C$.
+1. Thus, $\interior C$ is closed under convex combination.
+1. Thus, $\interior C$ is convex.
+```
 
 ```{prf:theorem} Affine hull of convex sets with empty interior
 :label: res-cvx-convex-set-empty-interior
@@ -235,7 +290,7 @@ We proceed as follows:
 ```{prf:theorem} General line segment property for convex sets
 :label: res-cvx-convex-interior-segment
 
-Let $\VV$ be a real $n$-dimensional normed linear space.
+Let $\VV$ be a real normed linear space.
 Let $C$ be a nonempty convex subset of $\VV$. 
 Let $\bx \in \interior C$
 and $\by \in \closure C$. Then, 
@@ -280,6 +335,49 @@ Let $C$ be a convex set. Fix some $t \in [0,1)$.
 1. Hence, $\bz \in \interior C$.
 ```
 
+
+```{prf:theorem} Closure of interior
+:label: res-cvx-convex-interior-closure
+
+Let $\VV$ be a real normed linear space.
+For any convex set $C \subseteq \VV$, 
+
+$$
+\closure \interior C = \closure C.
+$$
+```
+
+```{prf:proof}
+Since $\interior C \subseteq C$, hence
+$\closure \interior C \subseteq \closure C$.
+
+
+For the other direction, we proceed as follows:
+
+1. Let $\by \in \closure C$.
+   We need to show that $\by \in \closure \interior C$.
+1. Choose some $\bx \in \interior C$.
+1. By {prf:ref}`res-cvx-convex-interior-segment`, 
+   the line segment between $\bx$ and $\by$
+   (excluding $\by$) lies in $\interior C$.
+1. For every $n \in \Nat$, let
+
+   $$
+   \by_n = \frac{1}{n} \bx + \left (1 - \frac{1}{n} \right ) \by.
+   $$
+1. Then, $\by_n \in \interior C$ by line segment property.
+1. Thus, $\{ \by_n \}$ is a sequence of $\interior C$.
+1. But then, $\lim_{n \to \infty} \by_n = \by$.
+1. Hence, $\by$ is an accumulation point of $\interior C$.
+1. Thus, $\by \in \closure \interior C$.
+1. Thus, $\closure C \subseteq \closure \interior C$.
+
+Combining the two inclusions, we get:
+
+$$
+\closure \interior C = \closure C.
+$$ 
+```
 
 
 ```{prf:theorem} Interior of closure
@@ -345,6 +443,184 @@ Thus, we have shown that $\interior \closure C \subseteq \interior C$
 as desired.
 ```
 
+
+## Compact Sets
+
+
+```{prf:theorem} Convex hull of compact sets
+:label: res-cvxf-convex-hull-compact
+
+Let $\VV$ be an $n$-dimensional real normed linear space. Let $S \subseteq \VV$
+be a compact subset of $\VV$.
+Then, $\ConvexHull(S)$ is compact.
+
+In other words, convex hull of a compact set is compact.
+```
+Note that this property doesn't hold in infinite dimensional spaces.
+
+```{prf:proof}
+
+Let $H = \ConvexHull(S)$.
+
+We first show that $H$ is bounded.
+
+1. Since $S$ is compact, hence there exists $M > 0$
+   such that $\| \bx \| \leq M$ for all $\bx \in S$.
+1. Let $\by \in H$.
+1. Then, by {prf:ref}`res-cvx-conv-hull-caratheodory`, 
+   there exist $\bx_0, \dots, \bx_n \in S$ and
+   $t \in \Delta_{n+1}$ such that
+   
+   $$
+   \by = t_0 \bx_0 + \dots + t_n \bx_n.
+   $$
+1. Therefore,
+
+   $$
+   \| \by \| &= \|t_0 \bx_0 + \dots + t_n \bx_n \| \\
+   &\leq t_0 \| \bx_0 \| + \dots + t_n \| \bx_n \| \\
+   &\leq (t_0 + \dots + t_n) M = M.
+   $$
+1. Thus, $H$ is bounded.
+
+We now show that $H$ is closed.
+
+1. Let $\{ \bv_k \}$ be a convergent sequence of $H$.
+1. Let $\bv = \lim_{k \to \infty} \bv_k$ be the limit of this
+   sequence with $\bv \in \VV$.
+1. We need to show that $\bv \in H$.
+1. For every $k \in \Nat$, by {prf:ref}`res-cvx-conv-hull-caratheodory`, 
+   there exist $\bx_0^k, \dots, \bx_n^k \in S$ and
+   $\bt^k \in \Delta_{n+1}$ such that
+   
+   $$
+   \bv_k = t_0^k \bx_0^k + \dots + t_n^k \bx_n^k.
+   $$
+1. Consider the vector space $\WW = \RR^{n+1} \oplus \VV \oplus \dots \oplus \VV$
+   ($\VV$ repeated $n+1$ times).
+1. Then, $R = \Delta_{n+1} \oplus S \oplus \dots \oplus S \subseteq \WW$.
+1. Since $\Delta_{n+1}$ is compact in $\RR^{n+1}$ and
+   $S$ is compact in $\VV$, hence
+   $R$ is compact in the product topology of $\WW$.
+1. Now, let $\by_k = (\bt^k, \bx_0^k, \dots, \bx_n^k) \in R$ for every $k$.
+1. Thus, $\{ \by_k \}$ is a sequence of the compact set $R$.
+1. By {prf:ref}`def-ms-compact-characterization`,
+   every sequence of a compact set $R$ has a convergent
+   subsequence that converges in $R$.
+1. Let $\{ \by_{k_j} \}$ with $k_1 < k_2 < \dots$ be such
+   a convergent subsequence of $\{ \by_k \}$.
+1. Let the limit of this sequence be
+
+   $$
+   \by = \lim_{j \to \infty} \by_{k_j}
+   = (\bt, \bx_0, \dots, \bx_n)
+   $$
+   with $\bt \in \Delta_{n +1}$ and $\bx_0, \dots, \bx_n \in S$
+   since $\by \in R$.
+1. This further implies that
+   $\bt = \lim_{j \to \infty} \bt^{k_j}$
+   and $\bx_i = \lim_{j \to \infty} \bx_i^{k_j}$ 
+   for every $i \in 0,\dots,n$.
+1. In turn, $t_i = \lim_{j \to \infty} t_i^{k_j}$ 
+   for every $i=0, \dots, n$.
+1. Since $\{ \bv_k \}$ is convergent, hence
+   every subsequence of $\{ \bv_k \}$ has the same limit.
+1. In particular, $\bv =  \lim_{j \to \infty} \bv_{k_j}$.
+1. Then,
+
+   $$
+   \bv =  \lim_{j \to \infty} \bv_{k_j}
+    = \lim_{j \to \infty} \sum_{i=0}^n t_i^{k_j} \bx_i^{k_j}
+    = \sum_{i=0}^n t_i \bx_i.
+   $$
+1. But then, $\bv$ is a convex combination of points in $S$.
+1. Thus, $\bv \in H$.
+1. Thus, $H$ is closed.
+
+Finally, by {prf:ref}`res-la-ndim-compact-closed-bounded`,
+every closed and bounded set of a real $n$-dim normed
+space is compact. Hence, $H$ is compact.
+```
+
+
+```{prf:theorem} Krein Milman theorem
+:label: res-cvx-krein-milman
+
+Let $\VV$ be an $n$-dimensional real normed linear space. 
+Let $S \subseteq \VV$ be a compact convex subset of $\VV$.
+Then,
+
+$$
+S = \ConvexHull(\aextreme(S)).
+$$
+In other words, a compact convex set is the convex hull of its
+extreme points.
+```
+
+## Cones
+
+```{prf:theorem} Conic hulls of a finite set of points are closed
+:label: res-cvx-closed-conic-hull
+
+Let $\VV$ be an $n$-dimensional real normed linear space.
+Let $\ba_1, \dots, \ba_k \in \VV$. Then, their
+conic hull given by
+
+$$
+H = \ConicHull ( \{ \ba_1, \dots, \ba_k \})
+$$
+is closed.
+```
+
+```{prf:proof}
+Let $S = \{ \ba_1, \dots, \ba_k \}$.
+
+1. By the {prf:ref}`conic representation theorem <res-cvx-conic-rep-unique>`,
+   each point of $H$ can be represented as a conic combination
+   of a linearly independent subset of $S$.
+1. Since the number of points in $S$ is finite, hence
+   the number of linearly independent subsets of $S$ is
+   finite.
+1. Let there be $N$ linearly independent subsets of $S$.
+   Denote them by $S_1, \dots, S_N$.
+1. Then,
+
+   $$
+   H = \bigcup_{i=1}^N \ConicHull (S_i).
+   $$
+1. If $\ConicHull (S_i)$ are closed, then 
+   $H$ is closed as it is a finite union of closed sets.
+1. Thus, it suffices to show that $H_i = \ConicHull (S_i)$
+   are closed for every $i \in 1,\dots,N$.
+
+Accordingly, let us assume that $S = \{ \ba_1, \dots, \ba_k \}$
+is a linearly independent set of vectors (with $k \leq n$)
+and $H = \ConicHull(S)$.
+
+1. Let $\WW = \span S = \span \{ \ba_1, \dots, \ba_k \}$.
+1. Then, $S$ is a basis for $\WW$.
+1. Let $T : \WW \to \RR^k$ be a coordinate mapping given by
+   
+   $$
+   T (\bx) = \bt \in \RR^m \text{ such that } 
+   \bx = t_1 \ba_1 + \dots + t_k \ba_k
+   $$
+   for every $\bx \in \WW$.
+   The mapping is well defined since $S$ is a basis for $\WW$.
+   Thus, every $\bx \in \WW$ is a unique linear combination 
+   of elements in the basis $S$.
+1. It is easy to see that $T$ is a linear mapping.
+   Moreover, $T$ is an isomorphism.
+1. Thus, $T : (\WW , \| \cdot \|) \to (\RR^k, \| \cdot \|_2)$ is continuous
+   due to {prf:ref}`res-la-ns-finite-continuous-transformation`.
+1. Also, we can see that
+
+   $$
+   H = T^{-1} (\RR^k_+).
+   $$
+1. But $\RR^k_+$ is a closed set of $\RR^k$.
+1. Thus, $H = T^{-1} (\RR^k_+)$ is closed since $T$ is continuous.
+```
 
 
 ## Relative Interior
@@ -416,6 +692,35 @@ However, several results in the sequel do depend
 on $\VV$ being finite dimensional. We will 
 clearly state this as and when required.
 
+
+```{prf:example} Relative interior of a line segment
+:label: ex-cvx-relint-line-segment
+
+
+Let $\bx, \by \in \VV$ be distinct points. The line segment between
+$\bx$ and $\by$ is given by
+
+$$
+S = \{ t \bx + (1-t) \by \ST t \in  [0, 1] \}.
+$$
+
+The relative interior of $S$ is given by
+
+$$
+\relint S = \{ t \bx + (1-t) \by \ST t \in  (0, 1) \}.
+$$
+
+To see this, we note that the affine hull of $S$ is the line
+
+$$
+L = \{ t \bx + (1-t) \by \ST t \in  \RR \}.
+$$
+
+Then, for every point $\bz = t \bx + (1-t) \by$ with $t \in (0, 1)$,
+there exists $r > 0$ such that $B(\bz, r) \cap L \subseteq S$.
+```
+
+
 ```{prf:example} Relative interior of an arc
 :label: ex-cvx-relint-arc
 
@@ -441,7 +746,9 @@ Thus, $\relint S = \EmptySet$.
 ```{prf:theorem} Relative interiors are subset
 :label: res-cvx-relint-subset
 
-For any set $C$
+Let $\VV$ be a normed linear space.
+
+For any set $C$ of $\VV$
 
 $$
 \relint C \subseteq C.
@@ -451,6 +758,32 @@ $$
 ```{prf:proof}
 This follows directly from the definition of
 relative interior.
+```
+
+```{prf:theorem} Relative interior of singleton
+:label: res-cvx-relint-singleton
+
+Let $\VV$ be a normed linear space.
+Let $C = \{ \bx \}$ be a singleton subset of $\VV$. 
+Then,
+
+$$
+\relint C = \relint \{ \bx \} = \{ \bx \}.
+$$
+```
+
+```{prf:proof}
+We proceed as follows:
+
+1. The singleton sets are affine. 
+1. Thus,  $\affine C = C$. 
+1. Now, for any $r > 0$, 
+   
+   $$
+   B(\bx, r) \cap C = \{ \bx \} = C \subseteq C.
+   $$
+1. Thus, $\bx \in \relint C$. 
+1. Since $\relint C \subseteq C$, hence $\relint C = \{ \bx \}$.
 ```
 
 
@@ -538,12 +871,17 @@ $$
 
 ```{prf:theorem} Relative interior and interior
 :label: res-cvx-relint-interior
-
-
-For any set $C$
+Let $\VV$ be a normed linear space.
+For any subset $C$ of $\VV$
 
 $$
 \interior C \subseteq \relint C.
+$$
+
+If $\affine C = \VV$, then 
+
+$$
+\interior C = \relint C.
 $$
 ```
 
@@ -554,8 +892,15 @@ Let $\bx \in \interior C$.
 1. But $B(\bx, r) \subseteq C$ implies that 
    $B(\bx, r) \cap \affine C \subseteq C$.
 1. Thus, $\bx \in \relint C$ also holds.
+1. Thus, $\interior C \subseteq \relint C$.
 
-Thus, $\interior C \subseteq \relint C$.
+Now consider the case where $\affine C = \VV$.
+1. Then $B(\bx, r) \cap \affine C = B(\bx, r)$
+   since $B(\bx, r) \subseteq \VV$.
+1. Then, $\bx$ is a relative interior point of $C$ if 
+   $B(\bx, r) \subseteq C$ for some $r > 0$.
+1. But then, $\bx$ is an interior point of $C$.
+1. Thus, $\relint C = \interior C$.
 ```
 
 ### Containment Relationship
@@ -983,8 +1328,7 @@ Let $A = \affine C$ and let $\dim A = k$.
 ```{prf:theorem} Line segment property of relative interior
 :label: res-cvx-convex-relint-segment
 
-Let $\VV$ be a real finite dimensional normed linear space.
-
+Let $\VV$ be a real $n$-dimensional normed linear space.
 Let $C$ be a nonempty convex subset of $\VV$. 
 Let $\bx \in \relint C$
 and $\by \in \closure C$. Then, 
@@ -998,13 +1342,86 @@ $$
 This is a restatement of the line segment property 
 for interior of a convex set as described in 
 {prf:ref}`res-cvx-convex-interior-segment`.
-
-For simplicity, we shall assume that $\relint C = \interior C$.
-Then, the proof of {prf:ref}`res-cvx-convex-interior-segment`
+If $\relint C = \interior C$,
+then the proof of {prf:ref}`res-cvx-convex-interior-segment`
 applies directly.
 
 This argument can be extended for the case where
-$\relint C \neq \interior C$.
+$\relint C \neq \interior C$ by considering the
+subspace topology w.r.t. $\affine C$.
+```
+
+The proof below is based on {cite}`bertsekas2003convex`.
+
+```{prf:proof}
+Let $A = \affine C$.
+Let $L$ be the linear subspace parallel to $A$.
+Note that for $t=0$, $(1-t)\bx + t \by = \bx$
+which belongs to $\relint C$ by hypothesis.
+Thus, we shall only consider $t \in (0,1)$ in the argument below.
+
+Assume first that $\by \in C$. 
+
+1. Since $\bx \in \relint C$, there exists $r > 0$ such that
+   $B(\bx, r) \cap A \subseteq C$.
+1. Pick any $t \in (0, 1)$.
+1. Let $\bz = (1-t) \bx + t \by$.
+1. Let $s = (1 - t) r$. Clearly, $s > 0$.
+1. Consider the open ball $B(\bz, s)$.
+   We shall show that $B(\bz, s) \cap A \subseteq C$.
+1. Let $\bu \in B(\bz, s) \cap A$.
+1. If $\bu = \bz$, then $\bu \in C$ since $C$ is convex.
+1. Otherwise, we can write $\bu = \bz + p \bv$ 
+   where $\bv$ is a unit norm vector and $0 < p < s$.
+1. Then, $\bv \in L$ since $\bz + p \bv \in A$ and $\bz \in C \subseteq A$.
+1. We can write 
+
+   $$
+   \bu = \bz + p \bv = (1-t) \bx + t \by + p \bv
+   = (1-t) \left (\bx + \frac{p}{1-t} \bv \right ) + t \by.
+   $$
+1. Let $\bw = \bx + \frac{p}{1-t} \bv$.
+1. Since $p < s$, hence $\frac{p}{1 - t} < \frac{s}{1-t} = r$.
+1. Thus, $\bw \in B(\bx, r)$.
+1. Also, $\bx \in C$ and $\bv \in L$ implies that $\bw \in A$.
+1. Thus, $\bw \in B(\bx, r) \cap A \subseteq C$.
+1. Now $\bu = (1-t) \bw + t \by$ is a convex combination of $\bw, \by \in C$.
+1. Hence $\bu \in C$.
+1. Thus, for every $\bu \in B(\bz, s) \cap A$, $\bu \in C$.
+1. Thus, $\bz \in \relint C$.
+1. Thus, $(1-t) \bx + t \by \in \relint C \Forall t \in [0,1)$.
+
+We now consider the case where $\by \notin C$ but $\by \in \closure C$.
+
+1. There exists a sequence $\{ \by_k \}$ of $C$ such that 
+   $\by = \lim \by_k$.
+1. Since $\bx \in \relint C$, there exists $r > 0$ such that
+   $B(\bx, r) \cap A \subseteq C$.
+1. Pick any $t \in (0, 1)$.
+1. Let $\bz = (1-t) \bx + t \by$.
+1. Let $\bz_k = (1-t)\bx + t \by_k$.
+1. Then, by the earlier argument $\bz_k \in \relint C$
+   since $\bx \in \relint C$, $\by_k \in C$ and $t \in (0,1)$.
+1. Specifically, for every $k$, $B(\bz_k, (1-t) r) \cap A \subseteq C$.
+1. By limit arithmetic
+
+   $$
+   \lim \bz_k = (1-t)\bx + t \lim \by_k = (1-t)\bx + t \by = \bz.
+   $$
+1. Let $s = \frac{1}{2} (1-t)r$.
+1. Then, there exists $n_0 \in \Nat$ such that for all $k > n_0$,
+   $\| \bz - \bz_k \| < s$.
+1. Consider the set $B(\bz, s) \cap A$.
+1. Let $\bu \in B(\bz, s) \cap A$.
+1. Then for every $k > n_0$, 
+
+   $$
+   \| \bu - \bz_k \| \leq \| \bu - \bz \| + \| \bz - \bz_k \| 
+   < s + s = (1-t)r.
+   $$
+1. Thus, $\bu \in B(\bz_k, (1-t) r) \cap A \subseteq C$ for every $k > n_0$.
+1. Thus, $B(\bz, s) \cap A \subseteq C$.
+1. Thus, $\bz \in \relint C$.
 ```
 
 One way to interpret this result is as follows.
@@ -1014,7 +1431,304 @@ and a point on the boundary of $C$, then
 every point on the segment (except the boundary point)
 lies inside the relative interior of $C$.
 
+```{prf:theorem} Characterization of relative interior in terms of line segments
+:label: res-cvx-relint-line-segment-characterization
+
+Let $\VV$ be a real $n$-dimensional normed linear space.
+Let $C$ be a nonempty convex subset of $\VV$.
+Then, $\bx \in \relint C$ if and only if every line segment in $C$ having
+$\bx$ as one endpoint can be prolonged beyond $\bx$ without leaving $C$;
+i.e., for every $\by \in C$ there exists $s > 1$ such that
+
+$$
+\bx + (s -1) (\bx - \by) \in C.
+$$
+```
+At $s=0$, we get the point $\by$. At $s=1$, we get the point $\bx$.
+At $s=\frac{1}{2}$, we get the point $\frac{1}{2} (\bx + \by)$. Thus,
+the formula represents a line starting from $\by$ going in the direction
+$\bx - \by$ towards $\bx$. For $s > 1$, it further extends beyond
+$\bx$. This is sensible since $\bx \in \relint C$ hence the line
+can be extended beyond $\bx$. It is definitely not possible to extend
+the line beyond $\by$ if $\by \in C \setminus \relint C$.
+
+
+```{prf:proof}
+
+Let $A = \affine C$. Let $L$ be the linear subspace parallel to $A$.
+
+1. Assume that $\bx \in \relint C$.
+1. Then, there exists $r > 0$ such that $B(\bx, r) \cap A \subseteq C$.
+1. Let $\by \in C$. 
+1. Then $\bv = \bx - \by \in L$.
+1. Let $\bu = \frac{r}{2 \| \bv \|} \bv$.
+1. Since $\bx \in C \subseteq A$ and $\bu \in L$, hence $\bx + \bu \in A$.
+1. $\| \bu \| = \frac{r}{2} < r$. Hence, $\bx + \bu \in B(\bx, r)$.
+1. Thus, $\bx + \bu \in B(\bx, r) \cap A \subseteq C$.
+1. Clearly,
+
+   $$
+   \bx + \bu = \bx + \frac{r}{2 \| \bx - \by \|} (\bx - \by).
+   $$
+1. Let $s = 1 + \frac{r}{2 \| \bx - \by \|}$.
+1. Then, $\bx + (s - 1) (\bx - \by)  = \bx + \bu \in C$.
+
+
+For the converse, assume that the said condition holds for some $\bx \in C$.
+
+1. By {prf:ref}`res-cvx-nonempty-relint`, $\relint C$ is nonempty.
+1. Let $\by \in \relint C$.
+1. If $\by = \bx$ then $\bx \in \relint C$ and there is nothing to prove.
+1. Now consider the case where $\by \neq \bx$.
+1. By hypothesis, since $\by \in C$, hence there exists $s > 1$ such that
+
+   $$
+   \bz = \bx + (s - 1) (\bx - \by) \in C.
+   $$
+   Going from $\by$ to $\bx$, the point $\bz$ is behind $\bx$. 
+   Thus, $\bx$ is between $\bz$ and $\by$.
+1. Let $t = \frac{1}{s}$. Then, $t \in (0, 1)$.
+1. Now,
+
+   $$
+   \bz = \bx + \left (\frac{1}{t} - 1 \right ) (\bx - \by) \\
+   & \iff t \bz = t \bx + (1 - t) (\bx - \by) \\
+   & \iff t \bz = \bx  - (1-t) \by \\
+   & \iff \bx  = t \bz + (1-t) \by.
+   $$
+   We have shown that $\bx$ is a convex combination of $\by$ and $\bz$.
+1. Thus, $\by \in \relint C$, $\bz \in C$ and $t \in (0, 1)$.
+1. By {prf:ref}`line segment property <res-cvx-convex-relint-segment>`,
+   $\bx \in \relint C$.
+```
+
 Several topological properties follow.
+
+### Affine Hull of Relative Interior
+
+```{prf:theorem} Affine hull of relative interior
+:label: res-cvx-convex-relint-aff-hull
+
+Let $\VV$ be a real $n$-dimensional normed linear space.
+For any nonempty convex set $C \subseteq \VV$, 
+
+$$
+\affine \relint C = \affine C.
+$$
+In other words, the affine hull of the relative interior of a convex set is
+same as the affine hull of the set.
+```
+
+
+```{prf:proof}
+Let $A = \affine C$. Let $R = \relint C$.
+
+1. From {prf:ref}`res-cvx-convex-relint-is-convex`, $R$ is convex.
+1. From {prf:ref}`res-cvx-nonempty-relint`, $R$ is nonempty.
+1. Let $m = \dim A$.
+1. If $m=0$ then $C = A = \{ \bx \}$ is a singleton.
+   Also, by {prf:ref}`res-cvx-relint-singleton`, $R = C = A$. 
+   Thus, $\affine R = \affine C$.
+1. We now consider the case where $m > 0$.
+1. Then, there exist $m+1$ affine independent vectors $\bx_0, \dots, \bx_m \in C$
+   such that 
+
+   $$
+   A = \affine C = \span \{ \bx_0, \dots, \bx_m \}.
+   $$
+1. Pick some $\bx \in R$. Since $R$ is nonempty, hence we can pick such $\bx$.
+1. Consider the points $\by_i = \frac{1}{2} \bx + \frac{1}{2} \bx_i$ for $i=0, \dots, m$.
+1. By {prf:ref}`line segment property <res-cvx-convex-relint-segment>`,
+   $\by_i \in R$ since $\bx \in R$ and $\bx_i \in C$.
+1. We now claim that $\{ \by_0, \dots, \by_m \}$ are affine independent.
+   1. For contradiction, assume that they are affine dependent.
+   1. Then, $\bu_i = \by_i - \by_0$ for $i=1,\dots, m$ are linearly dependent.
+   1. Thus, there exists a nontrivial linear combination
+
+      $$
+      \sum_{i=1}^m t_i \bu_i  = \bzero.
+      $$
+   1. But
+
+      $$
+      \sum_{i=1}^m t_i \bu_i & = \sum_{i=1}^m t_i (\by_i - \by_0)\\
+      & = \sum_{i=1}^m t_i \left (
+         \frac{1}{2} \bx + \frac{1}{2} \bx_i - \frac{1}{2} \bx - \frac{1}{2} \bx_0
+         \right )\\
+      & = \frac{1}{2}\sum_{i=1}^m t_i (\bx_i - \bx_0) = \bzero.
+      $$
+   1. Thus, $\bx_i - \bx_0$ for $i=1,\dots,m$ are linearly dependent.
+   1. Thus, $bx_i$ for $i=0,\dots,m$ are affine dependent
+      which contradicts our hypothesis.
+1. Thus $R$ has $m+1$ affine independent points given by $\{ \by_0, \dots, \by_m \}$.
+1. Thus, $\affine R = A$.
+```
+
+
+### Simplex
+
+```{prf:theorem} Relative interior of a simplex
+:label: res-cvx-simplex-relint
+
+Let $k+1$ points $\bv_0, \dots, \bv_k \in \VV$ be 
+{prf:ref}`affine independent <def-affine-independence>`.
+Let the *simplex* determined by them be given by
+
+$$
+C = \convex \{ \bv_0, \dots, \bv_k\}
+= \{ t_0 \bv_0 + \dots + t_k \bv_k \ST 
+    \bt \succeq \bzero, \bone^T \bt = 1\}.
+$$
+
+Then, the relative interior of $C$ is given by
+
+$$
+\relint C
+= \{ t_0 \bv_0 + \dots + t_k \bv_k \ST 
+    \bt \succ \bzero, \bone^T \bt = 1\}
+$$
+
+The relative boundary of $C$ is given by
+
+
+$$
+\relbd C
+= \{ t_0 \bv_0 + \dots + t_k \bv_k \ST 
+   \bt \succeq \bzero, \bone^T \bt = 1, t_i = 0 \text{ for some } i \}.
+$$
+```
+
+```{prf:proof}
+TBD
+```
+
+
+```{prf:theorem} Barycenter of a simplex is a relative interior point
+:label: res-cvx-simplex-barycenter-relint
+
+Let $k+1$ points $\bv_0, \dots, \bv_k \in \VV$ be 
+{prf:ref}`affine independent <def-affine-independence>`.
+Let the *simplex* determined by them be given by
+
+$$
+C = \convex \{ \bv_0, \dots, \bv_k\}
+= \{ t_0 \bv_0 + \dots + t_k \bv_k \ST 
+    \bt \succeq 0, \bone^T \bt = 1\}
+$$
+
+Let the barycenter of the simplex by given by
+$\bv = \sum_{i=0}^k \frac{1}{k+1}{\bv_i}$.
+Then, $\bv \in \relint C$.
+
+In other words, the barycenter of a simplex lies in the relative interior.
+```
+```{prf:proof}
+We first claim that the distance of the barycenter from each of the
+vertices of the simplex is positive.
+
+1. Let $d_i = \| \bv_i - \bv \|$ for $i=0,\dots,k$.
+1. For contradiction, assume that $d_i = 0$ for some $i$.
+1. Without loss of generality, assume that it holds for $i=0$.
+   We can shuffle the vertices for this.
+1. Then,
+
+   $$
+   \bv_0 = \sum_{j=0}^k \frac{1}{k+1}{\bv_j} \\
+   &\iff (k+1) \bv_0 = \sum_{j=0}^k \bv_j \\
+   &\iff \sum_{j=0}^k \bv_j - (k+1) \bv_0 = \bzero \\
+   &\iff \sum_{j=1}^k \bv_j - k \bv_0 = \bzero \\
+   &\iff \sum_{j=1}^k (\bv_j - \bv_0) = \bzero.
+   $$
+1. Thus, the vectors $\bv_1 - \bv_0, \dots, \bv_k - \bv_0$ are linearly dependent.
+1. That means $\bv_0, \dots, \bv_k$ are affine dependent. A contradiction.
+1. Hence, $d_i > 0$ for every $i=0,\dots,k$.
+
+Let $A = \affine C$.
+We now let $r = \min \{ d_0, \dots, d_m \}$. 
+We claim that $B(\bv, r) \cap A \subseteq C$.
+
+1. Let $\bu \in B(\bv, r) \cap A$.
+1. Since $\bu \in A$ and $ \{ \bv_0, \dots, \bv_k\}$ provide an affine
+   basis for $A$, hence, there is a unique affine representation for $\bu$
+   given by
+
+   $$
+   \bu = \sum_{i=0}^k u_i \bv_i, \sum_{i=0}^k u_i = 1.
+   $$
+
+TBD
+```
+
+
+```{prf:theorem} Relative interior of convex hull of linearly independent points
+:label: res-cvx-convex-hull-relint-rel-open
+
+Let $\VV$ be a real normed linear space.
+Let $S = \{\bv_1, \dots, \bv_m \}$ be a set of $m$ linearly independent
+vectors. 
+
+$$
+X = \left \{ \bx \ST \bx = \sum_{i=1}^m t_i \bv_i, \sum_{i=1}^m t_i < 1, 
+t_i > 0, i=1,\dots,m 
+   \right \}.
+$$
+Let $A = \span S$. Then, $X$ is open relative to $A$.
+```
+
+```{prf:proof}
+It is clear that $X \subseteq A$.
+By $X$ being open relative to $A$ we mean that
+for every $\bx \in X$, there exists $r > 0$ such that
+$B(\bx, r) \cap A \subseteq X$.
+
+We first establish that $X$ is convex.
+
+1. Let $\bx, \by \in X$ and $t \in (0, 1)$.
+1. Then, 
+
+   $$
+   \bx = \sum_{i=1} x_i \bv_i 
+   \text{ and }
+   \by = \sum_{i=1} y_i \bv_i 
+   $$
+   such that $x_i , y_i > 0$, $\sum_{i=1} x_i < 1$, $\sum_{i=1} y_i < 1$.
+1. Let $\bz = t \bx + (1-t) \by$.
+1. Then,
+
+   $$
+   \bz = \sum_{i=1}^m (t x_i + (1-t) y_i) \bv_i.
+   $$
+1. Then $t x_i + (1-t) y_i > 0$ since $t > 0, 1-t > 0, x_i > 0, y_i > 0$.
+1. Also
+
+   $$
+   \sum_{i=1}^m (t x_i + (1-t) y_i) = t \sum_{i=1}^m x_i + (1-t) \sum_{i=1}^m y_i
+   < t + 1 - t = 1.
+   $$
+1. Thus, $\bx \in X$. 
+1. Thus, $X$ is convex.
+
+We next show that $\bc = \frac{1}{m} (\bx_1 + \dots + \bx_m) \in \relint X$.
+
+We now show that $X$ is relatively open.
+
+1. Let $\bx \in X$. Then
+
+   $$
+   \bx = \sum_{i=1}^m t_i \bv_i \ST \sum_{i=1}^m t_i < 1, t_i > 0, i=1,\dots,m.
+   $$
+1. Let $t = \sum_{i=1}^m t_i$ and $s = 1 - t$. Then, $s > 0$.
+1. Let $r = \frac{s}{2 m}$.
+1. Let $p_i = t_i + r$. Then, $p_i > 0$ and
+
+   $$
+   \sum_{i=1}^m p_i = \sum_{i=1}^m t_i + \sum_{i=1}^m r
+   = t + \frac{s}{2} = t + \frac{1 - t}{2} < 1. 
+   $$
+
+TBD.
+```
+
 
 
 ### Closure of Relative Interior
@@ -1031,6 +1745,9 @@ $$
 ```
 
 ```{prf:proof}
+If $C$ is empty, then this equality holds trivially.
+We shall now consider the case where $C$ is nonempty.
+
 Since $\relint C \subseteq C$, hence
 $\closure \relint C \subseteq \closure C$.
 
@@ -1038,11 +1755,22 @@ $\closure \relint C \subseteq \closure C$.
 For the other direction, we proceed as follows:
 
 1. Let $\by \in \closure C$.
+1. By {prf:ref}`res-cvx-nonempty-relint`, the relative
+   interior of $C$ is nonempty.
 1. Choose some $\bx \in \relint C$.
+1. Assume that $\bx \neq \by$ (otherwise we are done).
 1. By {prf:ref}`res-cvx-convex-relint-segment`, 
    the line segment between $\bx$ and $\by$
    (excluding $\by$) lies in $\relint C$.
-1. Hence, $\by$ is a limit point of $\relint C$.
+1. Hence, $\by$ is a closure point of $\relint C$.
+   1. Let $\bz_k = \frac{1}{k} \bx + \left (1- \frac{1}{k} \right ) \by$
+      for every $k \in \Nat$.
+   1. Since $\bx \in \relint C$, $\by \in \closure C$, $\frac{1}{k} \in (0,1]$,
+      hence $\bz_k \in \relint C$ for every $k$.
+   1. Thus, $\{ \bz_k \}$ is a sequence of $\relint C$.
+   1. We can see that $\lim \bz_k = \by$.
+   1. Thus, by {prf:ref}`res-ms-closure-point-as-limit`, $\by$ is a closure
+      point of $\relint C$.
 1. Thus, $\by \in \closure \relint C$.
 1. Thus, $\closure C \subseteq \closure \relint C$.
 
@@ -1184,6 +1912,49 @@ $$
 = \closure \relint C_2 = \closure C_2.
 $$
 We are done.
+```
+
+```{prf:theorem} Characterization of identical closures and relative interiors
+:label: res-cvx-convex-same-cl-same-relint-charac
+
+
+Let $\VV$ be a real $n$-dimensional normed linear space.
+Let $C_1$ and $C_2$ be convex subsets of $\VV$.
+Then, the following statements are equivalent.
+
+1. Both sets have same relative interior.
+1. Both sets have same closure.
+1. $ \relint C_1 \subseteq C_2 \subseteq \closure C_1$.
+```
+
+```{prf:proof}
+By {prf:ref}`res-cvx-convex-same-cl-same-relint`, statements (1) and (2)
+are equivalent.
+
+Assume (3) to be true.
+
+1. Taking closure on all sides, we get
+
+   $$
+   \closure \relint C_1 \subseteq \closure C_2 \subseteq \closure \closure C_1.
+   $$
+1. By {prf:ref}`res-cvx-convex-relint-closure`, $\closure \relint C_1  = \closure C_1$.
+1. Since closed sets are their own closures, hence
+   $\closure \closure C_1 = \closure C_1$.
+1. Thus, it reduces to
+
+   $$
+   \closure C_1 \subseteq \closure C_2 \subseteq \closure C_1.
+   $$
+1. Thus, $\closure C_1 = \closure C_2$ must hold true which is (2).
+
+Now, assume (1) and (2) to be true.
+
+1. Then, $\relint C_2 \subseteq C_2$. 
+1. Also, $\relint C_1 = \relint C_2$ from (1).
+1. Hence, $\relint C_1 \subseteq C_2$.
+1. Further, $C_2 \subseteq \closure C_2 = \closure C_1$ from (2).
+1. Combining, we get $\relint C_1 \subseteq C_2 \subseteq \closure C_1$ which is (3).
 ```
 
 ### Finite Intersections
@@ -1341,454 +2112,105 @@ $$
 
 ### Affine Transformations
 
-```{prf:theorem}
+```{prf:theorem} Affine transformations preserve relative interiors
 :label: res-cvx-relint-aff-map-pres
 
-Let $\VV$ be a finite dimensional normed linear space.
-A bijective affine transformation $T : \VV \to \VV$ 
-preserves relative interiors.
+Let $\VV$ and $\WW$ be finite dimensional normed linear spaces.
+An affine transformation $T : \VV \to \WW$ 
+preserves relative interiors of convex sets.
 
 $$
-T (\relint A) = \relint (T (A)).
+T (\relint C) = \relint (T (C))
 $$
-```
-
-
-
-## Separation Theorems
-
-Separation theorems provide us ways to find a separating hyperplane
-between two disjoint convex sets. Hyperplanes
-require the notion of an inner product. 
-This subsection focuses on vector spaces
-which are real, finite dimensional and equipped
-with a real inner product $\langle \cdot, \cdot \rangle \to \RR$.
-
-
-### Types of Separating Hyperplanes
-
-```{prf:definition} Separating hyperplane
-:label: def-cvx-separating-hyperplane
-
-Let $\VV$ be a real $n$-dimensional inner product space.
-For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
-$H$ is said to *separate* $C$ and $D$ if
-$C$ is contained in one of the closed halfspaces
-corresponding to $H$ and $D$ is contained in the other 
-closed halfspace.
-```
-This definition allows for some degenerate possibilities where
-both $C \subseteq H$ and $D \subseteq H$ since the closed
-halfspaces contain $H$ (as their boundary).
-
-```{prf:definition} Proper separation
-:label: def-cvx-proper-separation
-
-Let $\VV$ be a real $n$-dimensional inner product space.
-For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
-$H$ is said to *properly separate* $C$ and $D$ if
-$H$ separates them and both are not entirely contained
-in $H$; i.e., either $C \not\subseteq H$ or $D \not\subseteq H$
-or both.
-```
-Proper separation still allows for the possibility that
-parts of $C$ or $D$ lies inside $H$. But it ensures that
-$C \triangle D \neq \EmptySet$.
-$C \cap D \subseteq H$ is the common part.
-
-```{prf:definition} Strong separation
-:label: def-cvx-strong-separation
-
-Let $\VV$ be a real $n$-dimensional inner product space.
-For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
-$H$ is said to *strongly separate* $C$ and $D$ if
-there exists an $r > 0$ such that 
-$C + r B$ is contained in one of the open halfspaces
-corresponding to $H$ and $D + rB$ is contained in the other 
-open halfspace.
-```
-```{div}
-Under these assumptions, one set lies in the interior of $H_{++}$
-and the other set lies in the interior of $H_{--}$.
-Under strong separation, $C \cap D = \EmptySet$ is guaranteed
-since $H_{++} \cap H_{--} = \EmptySet$.
-```
-
-```{prf:remark}
-:label: rem-cvx-separation-translation-invariance
-
-Separation is translation invariant.
-For any $\ba \in \VV$ and convex sets $C, D \subseteq \VV$,
-
-$C$ and $D$ are separated by a hyperplane $H$ if and 
-only if $C - \ba$, $D -\ba$ are separated by the hyperplane $H - \ba$.
-```
-
-### Disjoint Affine and Convex Sets
-
-Separation between sets can be discussed at several levels.
-We start with a simple case where an affine set
-and a relatively open convex set are disjoint.
-
-```{prf:theorem} Disjoint affine and relatively open convex sets
-:label: res-cvx-sep-affine-rel-open-convex
-
-Let $\VV$ be a real $n$-dimensional inner product space.
-Let $C$ be a nonempty relatively open convex set of $\VV$.
-Let $M \subseteq \VV$ be an affine subspace such that
-$M \cap C = \EmptySet$. 
-Then, there exists a hyperplane $H$ such that $M \subseteq H$
-and one of the two open halfspaces associated with $H$ contains
-$C$. 
+for any convex subset $C$ of $\VV$.
 ```
 
 ```{prf:proof}
+By {prf:ref}`res-la-affine-finite-continuous-transformation`,
+$T$ is continuous.
 
-Consider the case where $M$ is a hyperplane. Then, $H = M$ 
-and the result is immediate.
+Assume $C$ is a convex subset of $\VV$.
+We shall first show that $\relint T(C)  \subseteq T (\relint C)$.
 
-1. If for contradiction, $C$ is not contained in one of the
-   open halfspaces of $M$.
-1. Then, $C \cap H \neq \EmptySet$  since $H$ is the 
-   boundary of the halfspaces.
-1. It will contradict 
-   our hypothesis that $C \cap M = \EmptySet$.
-1. Thus, $C$ must be in one of the open halfspaces of $H$.
-
-
-Now, assume that $M$ is not a hyperplane. 
-
-Without loss of generality, assume that $\bzero \in M$.
-We can do this by picking any element $\bm$ of $M$ 
-and replacing $M$ by $M - \bm$ and $C$ by $C - \bm$.
-Thus, $M$ is a subspace.
-
-The proof is constructive. We iteratively construct
-subspaces of increasing dimension which contain $M$
-but don't contain $C$ till we reach a hyperplane.
-
-1. Let $\dim M = d$ where $d  < n$. 
-1. Let $S = M$ be the initial subspace.
-1. Let $r=n-1-d$ be the number of iterations
-   (if $M$ is a hyperplane, no iterations are needed).
-1. For $i=1,\dots,r$:
-   1. Replace $S$ by a subspace $S'$ such that $\dim S' = \dim S + 1$ 
-      and $S' \cap C = \EmptySet$.
-   1. Let $S = S'$
-1. We have arrived with a hyperplane $S$ such that $S \cap C = \EmptySet$.
-
- 
-Towards this, let us look at the procedure to
-construct $S'$ from $S$ such that $\dim S' = \dim S + 1$
-and $S \cap C = \EmptySet$. Here is the outline
-
-1. Let $S^{\perp}$ be the orthogonal complement of $S$.
-1. Pick any 2D subspace $P$ of $S^{\perp}$.
-1. Pick a line $L$ in $P$ which passes through origin 
-   but doesn't intersect with $C$; i.e. $L \cap C = \EmptySet$.
-1. Construct the subspace $S' = S \oplus L$. 
-   The direct sum is valid since $S \cap L = \{ \bzero \}$.
-1. Note that $\dim S' = \dim S + 1$ and $S' \cap C = \EmptySet$
-   since $S \cap C = \EmptySet$ as well as $L \cap C = \EmptySet$.
-
-We now elaborate the procedure for finding the line $L$:
-
-1. We have $S$ as a linear subspace with $\dim S < n -1$
-   and $S \cap C = \EmptySet$.
-1. $\dim S^{\perp} = n  - \dim S > n - (n - 1) = 1$.
-1. Since $\dim S^{\perp} > 1$, it contains a two dimensional subspace $P$.
-1. Consider the set $C' = P \cap (C - S)$.
-1. The set $C-S$ has some properties.
-   1. $C-S$ is convex since it is the sum of two convex sets.
-   1. Since $\bzero \in S$, hence $C = C - \bzero \subseteq C - S$.
-   1. Since $C \cap S = \EmptySet$, hence $\bzero \notin C - S$.
-   1. Note that due to {prf:ref}`res-cvx-convex-sum-relint`:
-
-      $$
-      \relint (C - S) = \relint C - \relint S = C - S
-      $$
-      since $C$ is relatively open and $S$ is affine, hence relatively open.
-   1. Thus, $C - S$ is relatively open.
-1. Consequently, the set $C'$ also has some properties.
-   1. $C'$ is convex since it is the intersection of two convex sets.
-   1. Since  $\bzero \notin C - S$, 
-      hence, $\bzero \not\in C' = P \cap (C - S)$.
-   1. $C'$ is relatively open.
-      1. If $C'$ is empty, then $C'$ is relatively open vacuously.
-      1. Otherwise, by
-      {prf:ref}`res-cvx-convex-affine-intersect-pres-relint-cl`:
-
-      $$
-      \relint C' = \relint (P \cap (C - S)) = P \cap \relint (C - S) = P \cap (C- S).
-      $$
-      Thus, $\relint C' = C'$ implies that $C'$ is relatively open.
-1. We now seek a line $L \subseteq P$ passing through the origin $\bzero$ 
-   that doesn't intersect $C'$.
-1. We note that $L \cap C' = \EmptySet \implies L \cap C = \EmptySet$.
-   1. Suppose for contradiction that
-      $L \cap C' = \EmptySet$ but $L \cap C \neq \EmptySet$.
-   1. Let $\bx \in L \cap C$.
-   1. Then, $\bx \in L \subseteq P$.
-   1. Also, $\bx \in C \subseteq C - S$.
-   1. Thus, $\bx \in C' = P \cap (C - S)$.
-   1. This means that $\bx \in L \cap C'$.
-   1. In other words, $L \cap C' \neq \EmptySet$ which
-      contradicts our assumption.
-1. How to choose $L$? There are three possibilities:
-
-   1. $C'$ is empty.
-   1. $C'$ is contained in a line; i.e., $\dim \affine C' = 1$.
-   1. $\affine C' = P$ and $\dim \affine C' = 2$.
-
-   $\affine C'$ cannot be larger than $P$ since $C' \subseteq P$
-   and $P$ is affine.
-1. If $C'$ is empty, then any line in $P$ passing through origin will do.
-1. If $\affine C$ is a line.
-   1. If $\affine C'$ passes through the origin, we can take a line
-      perpendicular to $\affine C'$ passing through origin.
-      In this case, $L \cap \affine C' = \{\bzero \}$.
-      Since $\bzero \notin C'$, hence $L \cap C' = \EmptySet$. 
-   1. If $\affine C'$ is a line that doesn't pass through $\bzero$, we
-      can simply take a line that is parallel to $\affine C'$ and passes
-      through $\bzero$. In this case $L \cap \affine C' = \EmptySet$.
-      Consequently, $L \cap C' = \EmptySet$.
-1. If $\affine C'$ is the entire 2D subspace $P$.
-   1. Consider the set $K = \bigcup \{t C' \ST t > 0 \}$.
-   1. $C' \subseteq K$ (specifically, for $t = 0$).
-   1. $K$ is a convex cone containing $C'$ but not containing $\bzero$. 
-   1. $K$ is relatively open since $C'$ is relatively open.
-   1. A boundary ray of $K$ doesn't intersect with $C'$ since
-      $K$ is relatively open. 
-   1. Take $L$ to be any of the two boundary rays of $K$ and extend
-      it to a line passing through $\bzero$.
-```
-
-
-### Characterization of Proper Separation
-
-
-```{prf:theorem} Characterization of proper separation
-:label: res-cvx-proper-sep-charac
-
-Let $\VV$ be an $n$-dimensional real inner product space.
-Let $S$ and $T$ be nonempty subsets of $\VV$. There exists
-a hyperplane $H$ that separates $S$ and $T$ *properly*
-if and only if there exists a vector $\ba \in \VV$
-such that
-
-$$
-\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
-\geq \sup \{ \langle \bx, \ba \rangle \ST \bx \in T \}
-$$
-and
-
-$$
-\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
->  \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \}.
-$$
-```
-
-```{prf:proof}
-Assume that there is some vector $\ba \in \VV$
-satisfying the conditions above.
-
-1. Since $\ba$ satisfies the second strict inequality,
-   hence $\ba \neq \bzero$. Otherwise, the second
-   inequality cannot hold.
-1. Choose any $b \in \RR$ such that
-
-   $$
-   \underset{\bx \in S}{\inf}\{ \langle \bx, \ba \rangle \}
-   \geq b \geq 
-   \underset{\bx \in S}{\sup}\{ \langle \bx, \ba \rangle \}.
-   $$
-1. Then, the set $H = \{ \bx \ST \langle \bx, \ba \rangle = b \}$
-   is a hyperplane.
-1. Let $H_+ = \{ \bx \ST \langle \bx, \ba \rangle \geq b \}$
-   and $H_- = \{ \bx \ST \langle \bx, \ba \rangle \leq b \}$.
-1. Clearly, $S \subseteq H_+$ and $T \subseteq H_-$.
-1. The second strict inequality ensures that both $S$ and $T$ cannot
-   be contained in $H$. 
-   1. For contradiction, assume $S \subseteq H$ and $T \subseteq H$ 
-   1. Then $\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} = b$
-      and $\inf \{ \langle \bx, \ba \rangle \ST \bx \in T \} = b$.
-   1. Thus, the second inequality will not hold.
-1. Thus, $S$ and $T$ are properly separated.
-
-Now, assume that $S$ and $T$ are properly separated by 
-some hyperplane $H$.
-
-1. Let $H = \{ \bx \ST \langle \bx, \ba \rangle = b \}$ be
-   the specification of the said hyperplane.
-1. Let $H_+ = \{ \bx \ST \langle \bx, \ba \rangle \geq b \}$
-   and $H_- = \{ \bx \ST \langle \bx, \ba \rangle \leq b \}$.
-1. Without loss of generality, assume that $S \subseteq H_+$
-   and $T \subseteq H_+$.
-1. Then, $\langle \bx, \ba \rangle \geq b$ for every $\bx \in S$.
-1. Thus, $\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} \geq b$.
-1. Similarly, $\langle \bx, \ba \rangle \leq b$ for every $\bx \in T$.
-1. Thus, $\sup \{ \langle \bx, \ba \rangle \ST \bx \in T \} \leq b$.
-1. Thus, the first inequality is satisfied.
-1. Since $H$ properly separates $S$ and $T$, hence
-   either $S \not\subseteq H$ or $T \not\subseteq H$. 
-1. If $S \not\subseteq H$, 
-   then there exists $\bx \in S$ such that $\langle \bx, \ba \rangle > b$.
-1. Consequently, $\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} > b$.
-1. If $T \not\subseteq H$,
-   then there exists $\bx \in T$ such that 
-   $\langle \bx, \ba \rangle < b$.
-1. Consequently, $\inf \{ \langle \bx, \ba \rangle \ST \bx \in T \} < b$.
-1. Combining, 
-   
-   $$
-   \sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
-   >  \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \}
-   $$
-   must be true.
-```
-
-### Separating Hyperplane Theorems
-
-```{prf:theorem} Separating hyperplane theorem I
-:label: res-cvx-sep-plan-1
-
-
-Let $\VV$ be an $n$-dimensional real inner product space.
-Let $S$ and $T$ be nonempty convex subsets of $\VV$. There exists
-a hyperplane $H$ that separates $S$ and $T$ *properly*
-if and only if $\relint S \cap \relint T = \EmptySet$.
-```
-
-```{prf:proof}
-
-Let $C = S - T$.
-
-1. By {prf:ref}`res-cvx-nonempty-relint`, 
-   $\relint S$ and $\relint T$ are nonempty
-   since $S$ and $T$ are nonempty convex sets.
-1. By {prf:ref}`res-cvx-convex-sum-relint`,
-   $\relint C = \relint S - \relint T$
-   and it is nonempty.
-1. Note that, $\bzero \notin \relint C$ if and only if 
-   $\relint S \cap \relint T = \EmptySet$.
-   1. If $\bzero \in \relint C$ then there exists
-      $\bx \in \relint S \cap \relint T$ such that
-      $\bx - \bx = \bzero$.
-
-
-Now assume that $\relint S \cap \relint T = \EmptySet$.
-
-1. Thus, $\bzero \notin \relint C$.
-1. Consider the affine set $M = \{ \bzero \}$.
-1. Clearly, $M \cap \relint C = \EmptySet$ and $\relint C$ 
-   is relatively open.
-1. By {prf:ref}`res-cvx-sep-affine-rel-open-convex`, 
-   there exists a hyperplane containing $M$ such that
-   $\relint C$ is a subset of one of its associated open halfspaces.
-1. Let $H$ be this hyperplane given by 
-   $H = \{\bx \ST \langle \bx, \ba \rangle = 0\}$. 
-   Since the hyperplane contains $M$, hence it is a subspace. 
+1. We recall that $\relint C \subseteq C \subseteq \closure C$.
+1. Thus, $T (\relint C) \subseteq T (C) \subseteq T (\closure C)$.
 1. By {prf:ref}`res-cvx-convex-relint-closure`,
-   $ C \subseteq \closure C \subseteq \closure \relint C$.
-1. Thus, $C$ is contained in the corresponding closed halfspace.
-1. Without loss of generality, assume that $C$ is contained
-   in the nonnegative halfspace $H_+$.
-1. Thus, $\inf \{ \langle \bx, \ba \rangle  \ST \bx \in C\} \geq 0$.
-1. This means that 
-    
-   $$
-   \inf \{ \langle \bx, \ba \rangle  \ST \bx \in C\}
-   = \inf \{ \langle \bx, \ba \rangle  \ST \bx \in S\}
-     - \sup \{ \langle \bx, \ba \rangle  \ST \bx \in T\} \geq 0.
-   $$
-1. Thus, 
+   $\closure \relint C = \closure C$.
+1. Thus, $T (\closure C) = T (\closure \relint C)$.
+1. By {prf:ref}`res-la-affine-finite-transformation-closure`,
+   $T (\closure \relint C) \subseteq \closure T(\relint C)$.
+1. Thus,
 
    $$
-   \inf \{ \langle \bx, \ba \rangle  \ST \bx \in S\} \geq
-   \sup \{ \langle \bx, \ba \rangle  \ST \bx \in T\}.
+   T (\relint C) \subseteq T (C) \subseteq \closure T(\relint C).
    $$
-1. Since $\relint C \in H_{++}$, there exists $\bx \in C$,
-   such that $\langle \bx, \ba \rangle > 0$.
-1. Thus, $\sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} > 0$.
-1. But then,
+1. Letting $C_1 = T (\relint C)$ and $C_2 = T(C)$, we see that
 
    $$
-   \sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} 
-   = \sup \{ \langle \bx, \ba \rangle  \ST \bx \in S\}
-   - \inf \{ \langle \bx, \ba \rangle  \ST \bx \in T\} > 0. 
-   $$
-1. Thus, 
+   \relint C_1 \subseteq C_1 \subseteq C_2 \subseteq \closure C_2.
+   $$ 
+1. Thus, by {prf:ref}`res-cvx-convex-same-cl-same-relint-charac` (3),
+   $\relint C_1 = \relint C_2$. Thus,
 
    $$
-   \sup \{ \langle \bx, \ba \rangle  \ST \bx \in S\} > 
-   \inf \{ \langle \bx, \ba \rangle  \ST \bx \in T\}.
+   \relint T(C) = \relint T (\relint C) \subseteq  T (\relint C).
    $$
-1. Then, by {prf:ref}`res-cvx-proper-sep-charac`, 
-   $S$ and $T$ are properly separated.
 
 
-Now, for the converse, assume that $S$ and $T$ are
-properly separated. Thus,
-there exists a vector $\ba \in \VV$
-such that
+To show the reverse inclusion, we proceed as follows.
+
+1. Let $\bx \in T (\relint C)$. 
+1. Then, there exists $\bu \in \relint C$ such that
+   $\bx = T (\bu)$.
+1. Also, it implies that $\bx \in T(C)$.
+1. Take any other $\by \in T (C)$. 
+1. Then, there is $\bv \in C$ such that $\by = T(\bv)$.
+1. By {prf:ref}`res-cvx-relint-line-segment-characterization`,
+   there exists $s > 1$ such that
+
+   $$
+   \bw = \bu + (s -1)(\bu - \bv) \in C
+   $$
+   since $\bu \in \relint C$ and $\by \in C$.
+1. Then, $\bz = T (\bw) \in T(C)$.
+1. Note that with $t = \frac{1}{s}$, 
+
+   $$
+   \bu = t \bw + (1- t) \bv.
+   $$
+1. Thus, $\bu$ is a convex combination (and hence affine combination)
+   of $\bw$ and $\bv$.
+1. Since $T$ is affine, hence
+
+   $$
+   T (\bu) = t T(\bw) + (1-t) T(\bv).
+   $$
+1. This is same as:
+
+   $$
+   \bx = t \bz + (1-t) \by.
+   $$
+1. This can be rewritten as
+
+   $$
+   \bz = \bx + (s-1)(\bx - \by)
+   $$
+   with $\bz \in C$.
+1. Thus, for every $\by \in T(C)$, there exists $s > 1$ such that
+
+   $$
+   \bz = \bx + (s -1) (\bx - \by) \in C.
+   $$
+1. Thus, by {prf:ref}`res-cvx-relint-line-segment-characterization`,
+   $\bx \in \relint T(C)$.
+1. Thus, $T (\relint C) \subseteq \relint T(C)$.
+
+
+Combining the two inclusions, we get the equality
 
 $$
-\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
-\geq \sup \{ \langle \bx, \ba \rangle \ST \bx \in T \}
+T (\relint C) = \relint T(C).
 $$
-and
-
-$$
-\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
->  \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \}.
-$$
-
-1. From the first inequality, we get that 
-   $\inf \{ \langle \bx, \ba \rangle  \ST \bx \in C\} \geq 0$.
-1. From the second inequality, we get that
-   $\sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} > 0$.
-1. Thus, there exists a hyperplane $H$ given by
-   $H = \{\bx \ST \langle \bx, \ba \rangle = 0\}$
-   such that the corresponding nonnegative closed halfspace
-   $H_+ =  \{\bx \ST \langle \bx, \ba \rangle \geq 0\}$
-   contains $C$.
-1. Note that 
-   
-   $$
-   \interior H_+ = \relint H_+ = 
-   H_{++} = \{\bx \ST \langle \bx, \ba \rangle > 0\}.
-   $$
-1. Since $\sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} > 0$,
-   hence $H_{++} \cap C \neq \EmptySet$.
-1. $C \subseteq \closure H_{++} = H_+$ 
-   but $C \not\subseteq \closure H_{++} \setminus \relint H_{++}
-   = H_+ \setminus H_{++} = H$.
-1. Thus, by {prf:ref}`res-cvx-nonbd-cl-subset-interior`,
-   $\relint C \subseteq \relint H_{++} = H_{++}$.
-1. Thus, $\bzero \notin \relint C$.
-1. Thus, $\relint S \cap \relint T = \EmptySet$.
-
-We are done.
 ```
 
-
-
-```{prf:corollary} Separating hyperplane theorem II
-:label: res-cvx-separating-hyperplane
-
-Let $\VV$ be an $n$-dimensional real inner product space.
-Let $S$ and $T$ be nonempty disjoint convex subsets of $\VV$;
-i.e., $S \cap T = \EmptySet$.
-
-Then, there exists a hyperplane that properly separates them.
-```
-
-```{prf:proof}
-Since $S \cap T = \EmptySet$, hence $\relint S \cap \relint T = \EmptySet$.
-Then, applying {prf:ref}`res-cvx-sep-plan-1`, there exists
-a hyperplane that properly separates $S$ and $T$.
-```
-
-Disjointness of convex sets is not enough for
-strong separation as their closures might meet.
 

@@ -1,0 +1,2313 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7.1. Mathematical Optimization &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7.2. Convex Optimization" href="cvxopt.html" />
+    <link rel="prev" title="7. Convex Optimization" href="chapter.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sym_matrices.html">
+     4.8. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.9. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.10. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.11. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     6.5. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     6.6. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     6.7. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     6.8. Convexity Preserving Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     6.9. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     6.10. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     6.11. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     6.12. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     6.13. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     6.14. Smoothness
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   7. Convex Optimization
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cvxopt.html">
+     7.2. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="projection.html">
+     7.3. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="duality.html">
+     7.4. Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linear_programming.html">
+     7.5. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="quadratic_programming.html">
+     7.6. Quadratic Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable_objectives.html">
+     7.7. Differentiable Objective Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   8. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     8.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     8.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   9. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../selected/chapter.html">
+   11. Selected Functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/cvxopt/intro.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fcvxopt/intro.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization-problems">
+   7.1.1. Optimization Problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#standard-form-for-mathematical-optimization-problems">
+     7.1.1.1. Standard Form for Mathematical Optimization Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equivalent-problems">
+   7.1.2. Equivalent Problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling">
+     7.1.2.1. Scaling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#change-of-variables">
+     7.1.2.2. Change of Variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transformation-with-monotone-functions">
+     7.1.2.3. Transformation with Monotone Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slack-variables">
+     7.1.2.4. Slack Variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#epigraph-polar-form">
+     7.1.2.5. Epigraph Polar Form
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-order-conditions">
+   7.1.3. First Order Conditions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-order-conditions">
+   7.1.4. Second Order Conditions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saddle-points">
+     7.1.4.1. Saddle Points
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#minimization-of-proper-functions">
+   7.1.5. Minimization of Proper Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#coercive-functions">
+     7.1.5.1. Coercive Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#weierstrass-theorem">
+     7.1.5.2. Weierstrass’ Theorem
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-simple-problems-and-technical-results">
+   7.1.6. Some Simple Problems and Technical Results
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Mathematical Optimization</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization-problems">
+   7.1.1. Optimization Problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#standard-form-for-mathematical-optimization-problems">
+     7.1.1.1. Standard Form for Mathematical Optimization Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equivalent-problems">
+   7.1.2. Equivalent Problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling">
+     7.1.2.1. Scaling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#change-of-variables">
+     7.1.2.2. Change of Variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transformation-with-monotone-functions">
+     7.1.2.3. Transformation with Monotone Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slack-variables">
+     7.1.2.4. Slack Variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#epigraph-polar-form">
+     7.1.2.5. Epigraph Polar Form
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-order-conditions">
+   7.1.3. First Order Conditions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-order-conditions">
+   7.1.4. Second Order Conditions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saddle-points">
+     7.1.4.1. Saddle Points
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#minimization-of-proper-functions">
+   7.1.5. Minimization of Proper Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#coercive-functions">
+     7.1.5.1. Coercive Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#weierstrass-theorem">
+     7.1.5.2. Weierstrass’ Theorem
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-simple-problems-and-technical-results">
+   7.1.6. Some Simple Problems and Technical Results
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="mathematical-optimization">
+<span id="sec-opt-optimization-intro"></span><h1><span class="section-number">7.1. </span>Mathematical Optimization<a class="headerlink" href="#mathematical-optimization" title="Permalink to this headline">¶</a></h1>
+<p>Main references for this section are <span id="id1">[<a class="reference internal" href="../bib.html#id12" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">5</a>, <a class="reference internal" href="../bib.html#id13" title="Stephen P Boyd and Lieven Vandenberghe. Convex optimization. Cambridge university press, 2004.">7</a>]</span>.</p>
+<p>This section provides a general overview of optimization problems.
+The notion of objective or cost functions and constraint functions
+is introduced. Standard form for optimization problems is introduced.
+Several examples are discussed for equivalent forms of optimization problems.
+The standard form focuses on minimizing the objective function
+over a set of equality and inequality constraints. Maximization
+problems can also be converted into minimization problems by
+changing the sign of the objective function.</p>
+<p>We introduce the notion of the domain of an optimization problem,
+feasible points or solutions, feasible set of solutions, the optimal
+value of the minimization problem, optimal points or solutions,
+optimal set etc.. We discuss when the problem may be infeasible
+or feasible but unbounded. We discuss situations where the problem
+may be feasible and have a global minimum/optimal value and yet
+a feasible solution may not exist.</p>
+<p>We then discuss general requirements for the feasibility
+of the optimization problem and existence of an optimal
+solution. We introduce the notion of coercive functions
+which provide the Weierstrass type result for the existence
+of optimal solutions.</p>
+<div class="section" id="optimization-problems">
+<h2><span class="section-number">7.1.1. </span>Optimization Problems<a class="headerlink" href="#optimization-problems" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.</p>
+<p>In the most general form, an optimization problem can
+be considered as minimizing or maximizing the value
+of a real valued function <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> over
+its domain <span class="math notranslate nohighlight">\(S = \dom f\)</span>.</p>
+<div class="docutils">
+<ol class="simple">
+<li><p>We call <span class="math notranslate nohighlight">\(f\)</span> as the objective function which is being
+minimized or maximized.</p></li>
+<li><p>The variable <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> is called the optimization
+variable.</p></li>
+<li><p><span class="math notranslate nohighlight">\(S = \dom f\)</span> is called the feasible set of solutions
+for the optimization problem.</p></li>
+<li><p>A point <span class="math notranslate nohighlight">\(\bx \in S\)</span> is called a feasible point or feasible solution.</p></li>
+<li><p>Our goal is to find an <span class="math notranslate nohighlight">\(\bx^* \in S\)</span> which maximizes
+or minimizes the objective function <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof definition admonition" id="def-opt-global-optimal-point">
+<p class="admonition-title"><span class="caption-number">Definition 7.1 </span> (Globally optimal value and points)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a real valued function with
+<span class="math notranslate nohighlight">\(S = \dom f\)</span>.</p>
+<ol>
+<li><p>The maximum value of <span class="math notranslate nohighlight">\(f\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \sup \{ f(\bx) \ST \bx \in S \}.
+   \]</div>
+</li>
+<li><p>The minimum value of <span class="math notranslate nohighlight">\(f\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \inf \{ f(\bx) \ST \bx \in S \}.
+   \]</div>
+</li>
+<li><p>We allow the maximum and minimum values to take <span class="math notranslate nohighlight">\(\infty\)</span> and <span class="math notranslate nohighlight">\(-\infty\)</span>
+values.</p></li>
+<li><p>The function <span class="math notranslate nohighlight">\(f\)</span> may or may not attain its maximum / minimum
+value at some point in its domain <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx^* \in S\)</span> is called a <em>global minimum point</em> if
+<span class="math notranslate nohighlight">\(f(\bx) \geq f(\bx^*)\)</span> for every <span class="math notranslate nohighlight">\(\bx \in S\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx^* \in S\)</span> is called a <em>global maximum point</em> if
+<span class="math notranslate nohighlight">\(f(\bx) \leq f(\bx^*)\)</span> for every <span class="math notranslate nohighlight">\(\bx \in S\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx^* \in S\)</span> is called a <em>strict global minimum point</em> if
+<span class="math notranslate nohighlight">\(f(\bx) &gt; f(\bx^*)\)</span> for every <span class="math notranslate nohighlight">\(\bx \in S\)</span> with <span class="math notranslate nohighlight">\(\bx \neq \bx^*\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx^* \in S\)</span> is called a <em>strict global minimum point</em> if
+<span class="math notranslate nohighlight">\(f(\bx) &lt; f(\bx^*)\)</span> for every <span class="math notranslate nohighlight">\(\bx \in S\)</span> with <span class="math notranslate nohighlight">\(\bx \neq \bx^*\)</span>.</p></li>
+<li><p>A point <span class="math notranslate nohighlight">\(\bx^* \in S\)</span> is called a <em>global optimal point</em> if
+it is either a global maximum or minimum point.</p></li>
+<li><p>The maximum and minimum values of <span class="math notranslate nohighlight">\(f\)</span> are always unique
+as opposed to global optimal points which may not be unique.</p></li>
+<li><p>The set of global minimizers is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \argmin \{ f(\bx) \ST \bx \in S \}.
+   \]</div>
+</li>
+<li><p>The set of global maximizers is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \argmax \{ f(\bx) \ST \bx \in S \}.
+   \]</div>
+</li>
+</ol>
+</div>
+</div><p>In a more restricted setting, an optimization problem can
+be considered as minimizing or maximizing the value
+of a real valued function <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> with <span class="math notranslate nohighlight">\(S = \dom f\)</span>
+over a set <span class="math notranslate nohighlight">\(A\)</span> such that <span class="math notranslate nohighlight">\(A \subseteq S\)</span>.</p>
+<div class="docutils">
+<ol>
+<li><p>In this case, the feasible set is restricted to <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Minimizers and maximizers are searched within this subset <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>This problem can be converted into the earlier general form
+by considering the restriction <span class="math notranslate nohighlight">\(\tilde{f} : \VV \to \RR\)</span> of
+<span class="math notranslate nohighlight">\(f\)</span> such that <span class="math notranslate nohighlight">\(A = \dom \tilde{f}\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+   \tilde{f}(\bx) = f(\bx) \Forall \bx \in A.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>In several problems, it may not be possible to
+establish whether a point is globally optimal.
+However, it is easier to establish if a point
+is optimal in a neighborhood around it. Such
+points are called locally optimal points
+or extreme values.</p>
+<div class="proof definition admonition" id="def-opt-local-optimal-point">
+<p class="admonition-title"><span class="caption-number">Definition 7.2 </span> (Local optimal points)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a real valued function with
+<span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+We say that <span class="math notranslate nohighlight">\(f(\ba)\)</span> is a <em>local extreme value</em>
+or <em>local optimal value</em>
+of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(\ba \in \dom f\)</span>
+if there exists
+<span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(f(\bx) - f(\ba)\)</span> doesn’t change sign on
+<span class="math notranslate nohighlight">\(B(\ba, \delta) \cap S\)</span>.</p>
+<p>More specifically,</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(f(\ba)\)</span> is a <em>local maximum value</em> of <span class="math notranslate nohighlight">\(f\)</span> if for some <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \leq f(\ba) \Forall \bx \in B(\ba, \delta) \cap S.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(f(\ba)\)</span> is a <em>local minimum value</em> of <span class="math notranslate nohighlight">\(f\)</span> if for some <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \geq f(\ba) \Forall \bx \in B(\ba, \delta) \cap S.
+   \]</div>
+</li>
+</ol>
+<p>The point <span class="math notranslate nohighlight">\(\bx=\ba\)</span> is called a <em>local extreme point</em>
+or <em>local optimal point</em> of <span class="math notranslate nohighlight">\(f\)</span> or more
+specifically, a <em>local maximum</em> or a <em>local minimum</em> point of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\ba\)</span> is a <em>strict local maximum point</em> if for some <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) &gt; f(\ba) \Forall \bx \in B_d(\ba, \delta) \cap S.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\ba\)</span> is a <em>strict local minimum point</em> of <span class="math notranslate nohighlight">\(f\)</span> if for some <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) &gt; f(\ba) \Forall \bx \in B_d(\ba, \delta) \cap S.
+   \]</div>
+</li>
+</ol>
+<p>Here <span class="math notranslate nohighlight">\(B_d(\ba, \delta)\)</span> denotes the deleted neighborhood
+(an open ball of radius <span class="math notranslate nohighlight">\(\delta\)</span> excluding <span class="math notranslate nohighlight">\(\ba\)</span> itself).</p>
+</div>
+</div><div class="proof remark admonition" id="rem-opt-local-optimal-point-open-dom">
+<p class="admonition-title"><span class="caption-number">Remark 7.1 </span> (Local optimal points for open domain)</p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a real valued function with
+<span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Assume that <span class="math notranslate nohighlight">\(S\)</span> is open.</p>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(\ba \in S\)</span> is a local maximum point, then there exists <span class="math notranslate nohighlight">\(r_1 &gt; 0\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \leq f(\ba) \Forall \bx \in B(\ba, r_1) \cap S.
+   \]</div>
+</li>
+<li><p>But since <span class="math notranslate nohighlight">\(S\)</span> is open, hence <span class="math notranslate nohighlight">\(\ba \in \interior S\)</span>. Thus,
+there exists an open ball <span class="math notranslate nohighlight">\(B(\ba, r_2) \subseteq S\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r = \min(r_1, r_2)\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(B(\ba, r) \subseteq S\)</span> and <span class="math notranslate nohighlight">\(B(\ba, r) \subseteq B(\ba, r_1)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(B(\ba, r) \subseteq B(\ba, r_1) \cap S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(\bx) \leq f(\ba) \Forall \bx \in B(\ba, r) \subseteq S\)</span>.</p></li>
+<li><p>Thus, the local optimality condition simplifies to looking for
+an open ball of radius <span class="math notranslate nohighlight">\(r\)</span> totally contained inside the open domain <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+</ol>
+<p>Based on this discussion, we can adjust the conditions for local
+optimality.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\ba\)</span> is a <em>local maximum point</em> of <span class="math notranslate nohighlight">\(f\)</span> if for some <span class="math notranslate nohighlight">\(r &gt; 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \leq f(\ba) \Forall \bx \in B(\ba, r) \subseteq S.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\ba\)</span> is a <em>local minimum point</em> of <span class="math notranslate nohighlight">\(f\)</span> if for some <span class="math notranslate nohighlight">\(r &gt; 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \geq f(\ba) \Forall \bx \in B(\ba, r) \subseteq S.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\ba\)</span> is a <em>strict local maximum point</em> if for some <span class="math notranslate nohighlight">\(r &gt; 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) &gt; f(\ba) \Forall \bx \in B_d(\ba, r) \subseteq S.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\ba\)</span> is a <em>strict local minimum point</em> of <span class="math notranslate nohighlight">\(f\)</span> if for some <span class="math notranslate nohighlight">\(r &gt; 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) &gt; f(\ba) \Forall \bx \in B_d(\ba, r) \subseteq S.
+   \]</div>
+</li>
+</ol>
+</div>
+</div><div class="section" id="standard-form-for-mathematical-optimization-problems">
+<h3><span class="section-number">7.1.1.1. </span>Standard Form for Mathematical Optimization Problems<a class="headerlink" href="#standard-form-for-mathematical-optimization-problems" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-opt-problem-standard-form">
+<p class="admonition-title"><span class="caption-number">Definition 7.3 </span> (Optimization problem standard form)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real vector space.
+A mathematical optimization problem of the form</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-prob-standard-form">
+<span class="eqno">(7.1)<a class="headerlink" href="#equation-eq-opt-prob-standard-form" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }   &amp; &amp; f_0(\bx) \\
+&amp; \text{subject to } &amp; &amp; f_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p\end{split}\]</div>
+<p>is known as an <em>optimization problem</em> in its <em>standard form</em>.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\bx \in \VV\)</span> is called the <em>optimization variable</em>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_0 : \VV \to \RR\)</span> is called the <em>objective function</em> or
+<em>cost function</em>.</p></li>
+<li><p>The functions <span class="math notranslate nohighlight">\(f_i : \VV \to \RR\)</span> are called the
+<em>inequality constraint functions</em>.</p></li>
+<li><p>The corresponding inequalities <span class="math notranslate nohighlight">\(f_i(\bx) \leq 0\)</span> are called
+the <em>inequality constraints</em>.</p></li>
+<li><p>The functions <span class="math notranslate nohighlight">\(h_j : \VV \to \RR\)</span> are called the
+<em>equality constraint functions</em>.</p></li>
+<li><p>The corresponding equations <span class="math notranslate nohighlight">\(h_j(\bx) = 0\)</span> are called the
+<em>equality constraints</em>.</p></li>
+<li><p>If there are no constraints (<span class="math notranslate nohighlight">\(m=0, p=0\)</span>), the problem is
+called <em>unconstrained</em>.</p></li>
+<li><p>The set</p>
+<div class="math notranslate nohighlight">
+\[
+   \DDD \triangleq \dom f_0 \cap \bigcap_{i=1}^m \dom f_i \cap \bigcap_{j=1}^p \dom h_j
+   \]</div>
+<p>is called the <em>domain</em> of the optimization problem.</p>
+</li>
+<li><p>A point <span class="math notranslate nohighlight">\(\bx \in \DDD\)</span> is called <em>feasible</em> if it satisfies
+all the inequality constraints <span class="math notranslate nohighlight">\(f_i(\bx) \leq 0\)</span> and
+all the equality constraints <span class="math notranslate nohighlight">\(h_i(\bx) = 0\)</span>.</p></li>
+<li><p>The optimization problem is called <em>feasible</em> if there exists
+at least one feasible point.</p></li>
+<li><p>If there are no feasible points in the domain <span class="math notranslate nohighlight">\(\DDD\)</span>, then
+the optimization problem is called <em>infeasible</em>.
+Naturally, if <span class="math notranslate nohighlight">\(\DDD = \EmptySet\)</span>, then the problem is infeasible.</p></li>
+<li><p>The set of feasible points for an optimization problem is called
+the <em>feasible set</em> or the <em>constraint set</em>. We shall denote
+the feasible set by <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+   C = \dom f_0 \cap \bigcap_{i=1}^m f_i^{-1}(-\infty, 0] \cap \bigcap_{j=1}^p h_j^{-1}(0).
+   \]</div>
+<p>It is the intersection of the domain of <span class="math notranslate nohighlight">\(f_0\)</span>,
+the 0-sublevel sets of <span class="math notranslate nohighlight">\(f_i\)</span> for <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>,
+and the <span class="math notranslate nohighlight">\(0\)</span>-level sets of <span class="math notranslate nohighlight">\(h_j\)</span> for <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span>.</p>
+</li>
+<li><p>Thus, if the problem is infeasible, then <span class="math notranslate nohighlight">\(C = \EmptySet\)</span>.</p></li>
+<li><p>The <em>optimum value</em> <span class="math notranslate nohighlight">\(p^* \in \ERL\)</span> of the optimization problem is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+   p^* = \inf \{ f_0(\bx) \ST f_i(\bx) \leq 0, i=1,\dots,m, \;
+    h_j(\bx) =  0, j= 1, \dots, p\}.
+   \]</div>
+<p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+   p^* = \inf \{ f_0(\bx) \ST \bx \in C \}.
+   \]</div>
+<p>We allow <span class="math notranslate nohighlight">\(p^*\)</span> to take the extended values <span class="math notranslate nohighlight">\(\infty\)</span> and <span class="math notranslate nohighlight">\(-\infty\)</span>.</p>
+</li>
+<li><p>If the problem is infeasible, then <span class="math notranslate nohighlight">\(p^* = \infty\)</span>
+It is consistent with the convention that the infimum of an empty set is <span class="math notranslate nohighlight">\(\infty\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(p^* = -\infty\)</span>, then the problem is called <em>unbounded below</em>. In this case,
+there exists a sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span> such that <span class="math notranslate nohighlight">\(\lim f_0(\bx_k) = -\infty\)</span>.</p></li>
+<li><p>We say that <span class="math notranslate nohighlight">\(\bx^*\)</span> is an <em>optimal point</em> if it solves <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>.
+In other words, <span class="math notranslate nohighlight">\(\bx^* \in C\)</span> and <span class="math notranslate nohighlight">\(f(\bx^*) = p^*\)</span>.</p></li>
+<li><p>The set of all optimal points is known as the <em>optimal set</em> denoted by <span class="math notranslate nohighlight">\(X_{\text{opt}}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+   X_{\text{opt}} \triangleq \{ \bx \ST f_i(\bx) \leq 0, i=1,\dots,m, \;
+      h_j(\bx) = 0, j=1,\dots,p, \; f_0(\bx) = p^* \}.
+   \]</div>
+<p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+   X_{\text{opt}}  = \{ \bx \in C \ST f_0(\bx) = p^* \}.
+   \]</div>
+</li>
+<li><p>If an optimal point exists in <span class="math notranslate nohighlight">\(C\)</span>, then we say that the optimal value is
+<em>attained</em> or <em>achieved</em>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X_{\text{opt}}\)</span> is empty, then we say that the optimal value is not
+attained or not achieved.</p></li>
+<li><p>In particular, if the problem is unbounded below, then <span class="math notranslate nohighlight">\(X_{\text{opt}}\)</span> is
+indeed empty.</p></li>
+<li><p>If the feasible set <span class="math notranslate nohighlight">\(C\)</span> is not closed, then it is quite possible that
+The optimum value <span class="math notranslate nohighlight">\(p^*\)</span> is finite and yet it is not attained at any
+feasible point. Then, there exists a sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span>
+of feasible points such that <span class="math notranslate nohighlight">\(\lim f(\bx_k) = p^*\)</span>.
+However, there is no <span class="math notranslate nohighlight">\(\bx \in C\)</span> such that <span class="math notranslate nohighlight">\(f(\bx) = p^*\)</span>.</p></li>
+<li><p>A feasible point <span class="math notranslate nohighlight">\(\bx \in C\)</span> with <span class="math notranslate nohighlight">\(f_0(\bx) \leq p^* + \epsilon\)</span> is called
+an <em><span class="math notranslate nohighlight">\(\epsilon\)</span>-suboptimal point</em>.</p></li>
+<li><p>The set of all <span class="math notranslate nohighlight">\(\epsilon\)</span>-suboptimal points is called the
+<em><span class="math notranslate nohighlight">\(\epsilon\)</span>-suboptimal set</em> for the problem <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>.</p></li>
+<li><p>We say that a feasible point <span class="math notranslate nohighlight">\(\bx\)</span> is <em>locally optimal</em> if there exists
+<span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   f_0(\bx) = \inf \{f_0(\bz) \ST \bz \in B[\bx, r] \cap C \}.
+   \]</div>
+<p>In other words, <span class="math notranslate nohighlight">\(\bx\)</span> minimizes <span class="math notranslate nohighlight">\(f\)</span> over a local neighborhood
+of feasible points.</p>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(\bx\)</span> is feasible and <span class="math notranslate nohighlight">\(f_i(\bx) = 0\)</span>, we say that <span class="math notranslate nohighlight">\(i\)</span>-th inequality
+constraint is <em>active</em> at <span class="math notranslate nohighlight">\(\bx\)</span>. Otherwise, <span class="math notranslate nohighlight">\(f_i(\bx) &lt; 0\)</span>  and we say
+that the <span class="math notranslate nohighlight">\(i\)</span>-th inequality constraint is <em>inactive</em>.</p></li>
+<li><p>We say that a constraint is <em>redundant</em> if removing it does not change
+the feasible set.</p></li>
+<li><p>If we choose an orthonormal basis <span class="math notranslate nohighlight">\(\BBB = \{\be_1, \dots, \be_n \}\)</span> for <span class="math notranslate nohighlight">\(\VV\)</span>,
+then <span class="math notranslate nohighlight">\(\VV\)</span> is
+isomorphic to <span class="math notranslate nohighlight">\(\RR^n\)</span> under the bracket operator <span class="math notranslate nohighlight">\([\cdot]_{\BBB}\)</span>.
+The optimization variable <span class="math notranslate nohighlight">\(\bx\)</span> has a representation
+<span class="math notranslate nohighlight">\((x_1, \dots, x_n)\)</span> in <span class="math notranslate nohighlight">\(\RR^n\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \sum_{i=1}^n x_i \be_i.
+   \]</div>
+</li>
+<li><p>Thus, determining <span class="math notranslate nohighlight">\(\bx\)</span> is same as determining its components
+<span class="math notranslate nohighlight">\((x_1, \dots, x_n)\)</span>.</p></li>
+<li><p>Since there are <span class="math notranslate nohighlight">\(n\)</span> scalar components in the representation of <span class="math notranslate nohighlight">\(\bx\)</span>,
+hence we can say that the optimization problem has <span class="math notranslate nohighlight">\(n\)</span> (scalar) variables.</p></li>
+</ol>
+</div>
+</div><p>In the sequel, we will be presenting a variety of optimization problems.
+We shall show how those problems can be converted to the standard form
+described above.</p>
+<div class="proof example admonition" id="ex-opt-box-constraints-standard-form">
+<p class="admonition-title"><span class="caption-number">Example 7.1 </span> (Box constraints standard form)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f_0 : \RR^n \to \RR\)</span> be a real valued function.
+Consider the optimization problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }   &amp; &amp; f_0(\bx)\\
+&amp; \text{subject to } &amp; &amp; l_i \leq x_i \leq u_i, &amp; \quad i=1,\dots,n
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bx \in \RR^n\)</span> is the optimization variable.
+There are <span class="math notranslate nohighlight">\(n\)</span> constraints, one on each component of <span class="math notranslate nohighlight">\(\bx\)</span>.
+Each constraint gives a lower and upper bound on one component.
+Such constraints are known as <em>variable bounds</em> or <em>box constraints</em>.</p>
+<p>This problem can be transformed into an equivalent problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }   &amp; &amp; f_0(\bx)\\
+&amp; \text{subject to } &amp; &amp; l_i - x_i \leq 0, &amp; \quad i=1,\dots,n\\
+&amp; \text{subject to } &amp; &amp; x_i - u_i \leq 0, &amp; \quad i=1,\dots,n.
+\end{split}\]</div>
+<p>This form has <span class="math notranslate nohighlight">\(2n\)</span> inequality constraints. We introduce the
+functions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; f_i(\bx) = l_i - x_i, \quad i=1,\dots,n \\
+&amp; \text{ and } \\
+&amp; f_i(\bx) = x_{i-n} - u_{i-n}, \quad i=n+1,\dots,2 n.
+\end{split}\]</div>
+<p>Then, the problem becomes</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }   &amp; &amp; f_0(\bx)\\
+&amp; \text{subject to } &amp; &amp; f_i(\bx) \leq 0, &amp; \quad i=1,\dots,2 n.
+\end{split}\]</div>
+<p>This is the optimization problem in standard form with <span class="math notranslate nohighlight">\(2 n\)</span>
+inequality constraints and 0 equality constraints.</p>
+</div>
+</div><div class="proof example admonition" id="ex-opt-maximization-problem-form">
+<p class="admonition-title"><span class="caption-number">Example 7.2 </span> (Maximization problem in standard form)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{maximize }   &amp; &amp; f_0(\bx) \\
+&amp; \text{subject to } &amp; &amp; f_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p
+\end{split}\]</div>
+<p>If we replace <span class="math notranslate nohighlight">\(f_0\)</span> by <span class="math notranslate nohighlight">\(-f_0\)</span>, then maximizing <span class="math notranslate nohighlight">\(f_0\)</span>
+is same as minimizing <span class="math notranslate nohighlight">\(-f_0\)</span>. Thus, this problem has an equivalent form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }   &amp; &amp; -f_0(\bx) \\
+&amp; \text{subject to } &amp; &amp; f_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p
+\end{split}\]</div>
+</div>
+</div><div class="proof definition admonition" id="def-opt-feasibility-problem">
+<p class="admonition-title"><span class="caption-number">Definition 7.4 </span> (Feasibility problem)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real vector space.
+A mathematical optimization problem of the form</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-prob-feasibility">
+<span class="eqno">(7.2)<a class="headerlink" href="#equation-eq-opt-prob-feasibility" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{find }   &amp; &amp; \bx \in \VV \\
+&amp; \text{subject to } &amp; &amp; f_i(\bx) \leq 0, &amp; i=1,\dots,m\\
+&amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; j=1,\dots,p\end{split}\]</div>
+<p>is called a feasibility problem.</p>
+</div>
+</div><p>We can convert this problem into the standard problem
+by introducing a cost function which is identically 0:</p>
+<div class="math notranslate nohighlight">
+\[
+f_0(\bx) = 0 \Forall \bx \in \VV.
+\]</div>
+<div class="docutils">
+<ol>
+<li><p>The domain reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+   \DDD = \bigcap_{i=1}^m \dom f_i \cap \bigcap_{j=1}^p \dom h_j.
+   \]</div>
+</li>
+<li><p>The optimal value <span class="math notranslate nohighlight">\(p^*=\infty\)</span> if the problem is not feasible.</p></li>
+<li><p>Otherwise, the optimal value is <span class="math notranslate nohighlight">\(p^* = 0\)</span>.</p></li>
+<li><p>Every feasible point is also an optimal point.</p></li>
+<li><p>Every optimization problem in standard form can be converted
+into a feasibility problem by replacing the objective function
+with the function which is identically 0 everywhere.</p></li>
+<li><p>In that case, the problem reduces to checking whether the
+inequality and equality constraints are consistent or not.
+In other words, whether there are some points which satisfy
+all the inequality and equality constraints.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="equivalent-problems">
+<h2><span class="section-number">7.1.2. </span>Equivalent Problems<a class="headerlink" href="#equivalent-problems" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-opt-eq-problem">
+<p class="admonition-title"><span class="caption-number">Definition 7.5 </span> (Equivalent optimization problems)</p>
+<div class="definition-content section" id="proof-content">
+<p>We provide an informal definition of equivalent optimization problems.</p>
+<p>Two optimization problems are called <em>equivalent</em> if it is possible
+to find the solution of one problem from the other problem and
+the vice versa.</p>
+</div>
+</div><p>The primary reason for transforming an optimization problem to an
+equivalent one is that it may be easier to solve an equivalent problem.
+If we can transform a problem into a form which has a well known
+closed form solution or has a well known algorithm to solve the problem,
+then we can solve the original problem by first solving the equivalent
+problem and then transforming the solution of the equivalent problem
+to the solution of the original problem.</p>
+<ol class="simple">
+<li><p>Transform the problem to an equivalent problem with a known algorithm for solution.</p></li>
+<li><p>Solve the equivalent problem.</p></li>
+<li><p>Transform the solution of the equivalent problem to the solution of the original
+problem.</p></li>
+</ol>
+<p>In this sense, the computational complexity of solving an optimization problem
+cannot be greater than the complexity of solving the equivalent problem plus
+the complexity of transforming the solution of the equivalent problem to the solution
+of the original problem.</p>
+<p>There are several ways to obtain an equivalent optimization problem
+from an existing optimization problem.</p>
+<div class="section" id="scaling">
+<h3><span class="section-number">7.1.2.1. </span>Scaling<a class="headerlink" href="#scaling" title="Permalink to this headline">¶</a></h3>
+<div class="proof proposition admonition" id="res-opt-eq-problem-scaling">
+<p class="admonition-title"><span class="caption-number">Proposition 7.1 </span> (Equivalent problems by scaling of objective or constraint functions)</p>
+<div class="proposition-content section" id="proof-content">
+<p>Consider the problem given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }   &amp; &amp; f'_0(\bx) = \alpha_0 f_0(\bx) \\
+&amp; \text{subject to } &amp; &amp; f'_i(\bx) = \alpha_i f_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; h'_j(\bx) = \beta_j h_j(\bx) = 0,    &amp; \quad j=1,\dots,p
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_i &gt; 0\)</span> for <span class="math notranslate nohighlight">\(i=0,\dots,m\)</span> and <span class="math notranslate nohighlight">\(\beta_j \neq 0\)</span> for <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span>.</p>
+<p>This problem is obtained from the optimization problem in standard from in
+<a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a> by <em>scaling</em> the objective function and
+the inequality constraint functions by positive constants and the
+equality constraints by nonzero constants.</p>
+</div>
+</div><div class="docutils">
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha_0\)</span> cannot be negative otherwise it will convert a minimization
+problem to a maximization problem.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_0\)</span> cannot be zero as that will convert the optimization problem
+into a feasibility problem.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_i\)</span> for <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span> cannot be negative as it will turn
+the inequality sign from <span class="math notranslate nohighlight">\(f_i(\bx) \leq 0\)</span> to <span class="math notranslate nohighlight">\(f'(\bx) \geq 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_i\)</span> for <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span> cannot be zero as it will remove the
+corresponding constraint altogether.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_j\)</span> cannot be zero. A zero value will discard the corresponding
+equality constraint.</p></li>
+<li><p>The feasible sets for both problems are identical.</p></li>
+<li><p>The optimal sets for both problems are identical.</p></li>
+<li><p>The optimal values for both problems are not identical however
+(unless <span class="math notranslate nohighlight">\(\alpha_0 = 1\)</span>).
+Since <span class="math notranslate nohighlight">\(f'_0\)</span> is a scaled version of <span class="math notranslate nohighlight">\(f_0\)</span>, hence the
+optimal value is also scaled accordingly.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="change-of-variables">
+<h3><span class="section-number">7.1.2.2. </span>Change of Variables<a class="headerlink" href="#change-of-variables" title="Permalink to this headline">¶</a></h3>
+<div class="proof proposition admonition" id="res-opt-eq-form-change-variables">
+<p class="admonition-title"><span class="caption-number">Proposition 7.2 </span> (Change of variables)</p>
+<div class="proposition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\phi : \VV \to \VV\)</span> be an injective function with
+<span class="math notranslate nohighlight">\(\DDD \subseteq \range \phi\)</span>.</p>
+<p>For the problem <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>, introduce the following functions</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde{f}_i(\bz) = f_i(\phi(\bz)), \; i=0,\dots,m
+\quad \text{ and } \quad
+\tilde{h}_j(\bz) = h_j(\phi(\bz)), \; j=1,\dots,p.
+\]</div>
+<p>Now, consider the problem</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-prob-var-change">
+<span class="eqno">(7.3)<a class="headerlink" href="#equation-eq-opt-prob-var-change" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }   &amp; &amp; \tilde{f}_0(\bz) \\
+&amp; \text{subject to } &amp; &amp; \tilde{f}_i(\bz) \leq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; \tilde{h}_j(\bz) = 0,    &amp; \quad j=1,\dots,p\end{split}\]</div>
+<p>with the variable <span class="math notranslate nohighlight">\(\bz \in \VV\)</span>.</p>
+<p>We say that the two problems are related by the <em>change of variable</em>
+or <em>substitution</em> of the variable <span class="math notranslate nohighlight">\(\bx = \phi (\bz)\)</span>.</p>
+</div>
+</div><div class="docutils">
+<p>Suppose <span class="math notranslate nohighlight">\(\bz^*\)</span> is the solution to <a class="reference internal" href="#equation-eq-opt-prob-var-change">(7.3)</a>, then
+<span class="math notranslate nohighlight">\(\bx^* = \phi(\bz^*)\)</span> is a solution to <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>.</p>
+<p>Similarly, if <span class="math notranslate nohighlight">\(\bx^*\)</span> is a solution to <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>,
+then <span class="math notranslate nohighlight">\(\bz^* = \phi^{-1}(\bx^*)\)</span> is a solution to <a class="reference internal" href="#equation-eq-opt-prob-var-change">(7.3)</a>.</p>
+</div>
+</div>
+<div class="section" id="transformation-with-monotone-functions">
+<h3><span class="section-number">7.1.2.3. </span>Transformation with Monotone Functions<a class="headerlink" href="#transformation-with-monotone-functions" title="Permalink to this headline">¶</a></h3>
+<div class="proof proposition admonition" id="def-opt-eq-form-monotone-transform">
+<p class="admonition-title"><span class="caption-number">Proposition 7.3 </span> (Transformation of objective and constraint functions)</p>
+<div class="proposition-content section" id="proof-content">
+<p>For the problem <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>, we introduce the following:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\psi_0: \RR \to \RR\)</span> be a strictly increasing function over <span class="math notranslate nohighlight">\(\range f_0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\psi_i : \RR \to \RR\)</span> for <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span> be strictly increasing
+functions  over <span class="math notranslate nohighlight">\(\range f_i\)</span> with <span class="math notranslate nohighlight">\(\psi_i(u) \leq 0 \iff u \leq 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\eta_j : \RR \to \RR\)</span> for <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span> be real functions that satisfy
+<span class="math notranslate nohighlight">\(\eta_j(u) = 0 \iff u = 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\tilde{f}_i (\bx) = \psi_i (f_i(\bx))\)</span> for <span class="math notranslate nohighlight">\(i=0,\dots,m\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\tilde{h}_j (\bx) = \eta_j (h_j(\bx))\)</span> for <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span>.</p></li>
+</ol>
+<p>Now, consider the problem</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-prob-monotone-trans">
+<span class="eqno">(7.4)<a class="headerlink" href="#equation-eq-opt-prob-monotone-trans" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }   &amp; &amp; \tilde{f}_0(\bx) \\
+&amp; \text{subject to } &amp; &amp; \tilde{f}_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; \tilde{h}_j(\bx) = 0,    &amp; \quad j=1,\dots,p\end{split}\]</div>
+<p>with the variable <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>.</p>
+<p>The problem <a class="reference internal" href="#equation-eq-opt-prob-monotone-trans">(7.4)</a> is equivalent to
+<a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>.</p>
+</div>
+</div><div class="proof example admonition" id="ex-opt-eq-norm-norm-squared">
+<p class="admonition-title"><span class="caption-number">Example 7.3 </span> (Least norms and least norms squared)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the unconstrained least norm problem</p>
+<div class="math notranslate nohighlight">
+\[
+\text{minimize} \| \bA \bx - \bb \|_2
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\bx \in \RR^n\)</span>, <span class="math notranslate nohighlight">\(\bA \in \RR^{m \times n}\)</span> and <span class="math notranslate nohighlight">\(\bb \in \RR^m\)</span>.
+We have <span class="math notranslate nohighlight">\(f_0(\bx) = \| \bA \bx - \bb \|_2\)</span>. Then, <span class="math notranslate nohighlight">\(\range f_0 = \RR_+\)</span>.
+Consider <span class="math notranslate nohighlight">\(\psi_0 : \RR \to \RR\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_0 (x) = x^2.
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(\psi_0\)</span> is strictly increasing over <span class="math notranslate nohighlight">\(\RR_+\)</span>. Let</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde{f}_0 (\bx) = \psi_0 (f_0(\bx)) = \| \bA \bx - \bb \|_2^2
+= (\bA \bx - \bb)^T (\bA \bx - \bb).
+\]</div>
+<p>Then, the least norm minimization problem is equivalent to the
+problem</p>
+<div class="math notranslate nohighlight">
+\[
+\text{minimize} (\bA \bx - \bb)^T (\bA \bx - \bb)
+\]</div>
+<p>which is the least norm squared problem.</p>
+<p>We note that while <span class="math notranslate nohighlight">\(\tilde{f}_0\)</span> is differentiable,
+<span class="math notranslate nohighlight">\(f_0\)</span> is not. It is a key difference between the
+two problems. Solving the least norm squared problem
+can be done using gradient methods since the objective
+function is differentiable.</p>
+</div>
+</div></div>
+<div class="section" id="slack-variables">
+<h3><span class="section-number">7.1.2.4. </span>Slack Variables<a class="headerlink" href="#slack-variables" title="Permalink to this headline">¶</a></h3>
+<div class="proof proposition admonition" id="res-opt-eq-form-slack-variables">
+<p class="admonition-title"><span class="caption-number">Proposition 7.4 </span> (Slack variables)</p>
+<div class="proposition-content section" id="proof-content">
+<p>For the inequality constraints in the problem <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>,
+we can introduce the variables <span class="math notranslate nohighlight">\(s_i \geq 0\)</span> so that
+<span class="math notranslate nohighlight">\(f_i(\bx) + s_i = 0\)</span>. This way, we can convert an inequality constraint
+to an equality constraint and introduce simpler inequality constraints
+for the variables <span class="math notranslate nohighlight">\(s_i \geq 0\)</span>.
+The resultant problem:</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-prob-slack-vars">
+<span class="eqno">(7.5)<a class="headerlink" href="#equation-eq-opt-prob-slack-vars" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }   &amp; &amp; f_0(\bx) \\
+&amp; \text{subject to } &amp; &amp; s_i\geq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; f_i(\bx) + s_i =  0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p\end{split}\]</div>
+<p>where the optimization variables are <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> and <span class="math notranslate nohighlight">\(\bs \in \RR^m\)</span>
+is equivalent to <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>.</p>
+<p>The variables <span class="math notranslate nohighlight">\(s_i\)</span> are known as <em>slack variables</em>.
+<span class="math notranslate nohighlight">\(\bs = (s_1, \dots, s_m)\)</span> is a vector that collects all the slack variables.</p>
+</div>
+</div><div class="docutils">
+<ol class="simple">
+<li><p>This form has <span class="math notranslate nohighlight">\(m\)</span> inequality constraints and <span class="math notranslate nohighlight">\(m+p\)</span> equality constraints.</p></li>
+<li><p>It has <span class="math notranslate nohighlight">\(n+m\)</span> optimization variables <span class="math notranslate nohighlight">\(x_1, \dots, x_n\)</span> and <span class="math notranslate nohighlight">\(s_1, \dots, s_m\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\((\bx, \bs)\)</span> is a feasible point for <a class="reference internal" href="#equation-eq-opt-prob-slack-vars">(7.5)</a>,
+then <span class="math notranslate nohighlight">\(\bx\)</span> is a feasible point for <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\bx\)</span> is a feasible point for <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>,
+then we can pick <span class="math notranslate nohighlight">\(s_i = -f_i(\bx)\)</span> to form <span class="math notranslate nohighlight">\(\bs\)</span> making <span class="math notranslate nohighlight">\((\bx, \bs)\)</span>
+a feasible point for <a class="reference internal" href="#equation-eq-opt-prob-slack-vars">(7.5)</a>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx\)</span> is an optimal point for <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>
+if and only if <span class="math notranslate nohighlight">\((\bx, \bs)\)</span> is an optimal point for
+<a class="reference internal" href="#equation-eq-opt-prob-slack-vars">(7.5)</a> where <span class="math notranslate nohighlight">\(s_i = - f_i(\bx)\)</span>.</p></li>
+<li><p>The slack variables
+measure how much slack does an inequality constraint function have
+at a feasible point.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(s_i = 0\)</span> then, <span class="math notranslate nohighlight">\(f_i\)</span> is active and it has no slack.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(s_i &gt; 0\)</span>, then <span class="math notranslate nohighlight">\(f_i\)</span> inactive and it has some slack.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="epigraph-polar-form">
+<h3><span class="section-number">7.1.2.5. </span>Epigraph Polar Form<a class="headerlink" href="#epigraph-polar-form" title="Permalink to this headline">¶</a></h3>
+<div class="proof proposition admonition" id="res-opt-eq-epigraph-polar-form">
+<p class="admonition-title"><span class="caption-number">Proposition 7.5 </span> (Epigraph polar form)</p>
+<div class="proposition-content section" id="proof-content">
+<p>The problem <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a> is equivalent to the
+optimization problem below:</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-prob-epigraph-polar-form">
+<span class="eqno">(7.6)<a class="headerlink" href="#equation-eq-opt-prob-epigraph-polar-form" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }   &amp; &amp; t \\
+&amp; \text{subject to } &amp; &amp; f_0(\bx) - t\leq 0, &amp; \\
+&amp;                    &amp; &amp; f_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p\end{split}\]</div>
+<p>with the optimization variable <span class="math notranslate nohighlight">\((\bx, t) \in \VV \oplus \RR\)</span>.</p>
+</div>
+</div><div class="docutils">
+<ol class="simple">
+<li><p>Note that <span class="math notranslate nohighlight">\(t\)</span> appears only in a single inequality in <a class="reference internal" href="#equation-eq-opt-prob-epigraph-polar-form">(7.6)</a>.</p></li>
+<li><p>At the optimal point, <span class="math notranslate nohighlight">\(f_0(\bx) = t\)</span> must hold true.
+If <span class="math notranslate nohighlight">\(f(\bx) &lt; t\)</span>, then we can always choose a lower value of <span class="math notranslate nohighlight">\(t\)</span> as the solution.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\bx\)</span> is an optimal point for <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>,
+then <span class="math notranslate nohighlight">\((\bx, f(\bx))\)</span> must be
+an optimal point for <a class="reference internal" href="#equation-eq-opt-prob-epigraph-polar-form">(7.6)</a>.</p></li>
+<li><p>Similarly, if <span class="math notranslate nohighlight">\((\bx, t)\)</span> is an optimal point for <a class="reference internal" href="#equation-eq-opt-prob-epigraph-polar-form">(7.6)</a>,
+then <span class="math notranslate nohighlight">\(\bx\)</span> must be an optimal point for <a class="reference internal" href="#equation-eq-opt-prob-standard-form">(7.1)</a>
+and <span class="math notranslate nohighlight">\(t=f_0(\bx)\)</span> must hold true.</p></li>
+<li><p>The two problems are indeed equivalent.</p></li>
+<li><p>This problem has <span class="math notranslate nohighlight">\(m+1\)</span> inequality constraints and <span class="math notranslate nohighlight">\(p\)</span> equality constraints.</p></li>
+<li><p>The objective function for the epigraph form is a linear function of <span class="math notranslate nohighlight">\((\bx, t)\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="first-order-conditions">
+<h2><span class="section-number">7.1.3. </span>First Order Conditions<a class="headerlink" href="#first-order-conditions" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection, we focus on objective functions of type
+<span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> which are differentiable.</p>
+<div class="proof theorem admonition" id="res-opt-first-order-optimality-local">
+<p class="admonition-title"><span class="caption-number">Theorem 7.1 </span> (First order optimality criterion for local optimal points)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a real valued function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Suppose that <span class="math notranslate nohighlight">\(\bx^* \in \interior S\)</span> is a local optimal point.
+Assume that all the partial derivatives of <span class="math notranslate nohighlight">\(f\)</span> exist at <span class="math notranslate nohighlight">\(\bx^*\)</span>.<br />
+Then, <span class="math notranslate nohighlight">\(\nabla f(\bx^*) = \bzero\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>.</p></li>
+<li><p>Consider the one-dimensional function <span class="math notranslate nohighlight">\(g_i : \RR \to \RR\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+   g_i (t) = f(\bx^* + t \be_i)
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\be_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>-th unit vector of <span class="math notranslate nohighlight">\(\RR^n\)</span>.</p>
+</li>
+<li><p>We note that <span class="math notranslate nohighlight">\(g_i\)</span> is differentiable at <span class="math notranslate nohighlight">\(t=0\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+   g_i'(0) = \frac{\partial f}{\partial x_i} (\bx^*).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx^*\)</span> is a local optimal point of <span class="math notranslate nohighlight">\(f\)</span>, hence
+<span class="math notranslate nohighlight">\(t=0\)</span> is a local optimal point of <span class="math notranslate nohighlight">\(g_i\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g_i'(0) = 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x_i} (\bx^*) = 0\)</span>.</p></li>
+<li><p>Since, this is true for every <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>, hence
+<span class="math notranslate nohighlight">\(\nabla f(\bx^*) = \bzero\)</span>.</p></li>
+</ol>
+</div>
+</div><p>We mention that gradient being zero is a necessary condition;
+i.e., if a point is an optimal point then the gradient of <span class="math notranslate nohighlight">\(f\)</span>
+at that point must be zero. It is not a sufficient condition.
+The gradient may be zero and yet the point may not be an
+optimal point.</p>
+<div class="proof definition admonition" id="def-opt-stationary-point">
+<p class="admonition-title"><span class="caption-number">Definition 7.6 </span> (Stationary point)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a real valued function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx^* \in \interior S\)</span> and assume that <span class="math notranslate nohighlight">\(f\)</span> is differentiable
+in some neighborhood of <span class="math notranslate nohighlight">\(\bx^*\)</span>.
+Then, <span class="math notranslate nohighlight">\(\bx^*\)</span> is called a <em>stationary point</em> if
+<span class="math notranslate nohighlight">\(\nabla f(\bx^*) = \bzero\)</span>.</p>
+</div>
+</div><p>Thus, the locally optimal points are necessarily
+stationary points.</p>
+</div>
+<div class="section" id="second-order-conditions">
+<h2><span class="section-number">7.1.4. </span>Second Order Conditions<a class="headerlink" href="#second-order-conditions" title="Permalink to this headline">¶</a></h2>
+<p>Recall the discussion on semidefinite and definite matrices
+in <a class="reference internal" href="../la/sym_matrices.html#sec-la-symmetric-matrices"><span class="std std-ref">Symmetric Matrices</span></a>.</p>
+<p>For a twice continuously differentiable function <span class="math notranslate nohighlight">\(f\)</span>, the Hessian
+is symmetric. The semidefiniteness or definiteness of the Hessian
+provides necessary and sufficient conditions for local optimality
+at stationary points of <span class="math notranslate nohighlight">\(f\)</span>; i.e., the points <span class="math notranslate nohighlight">\(\ba \in \dom f\)</span>
+where <span class="math notranslate nohighlight">\(\nabla f(\ba) = \bzero\)</span>.</p>
+<p>We have following necessary conditions for local optimality.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\ba\)</span> is a local minimum point then <span class="math notranslate nohighlight">\(\nabla^2 f(\ba)\)</span> must be positive semidefinite.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\ba\)</span> is a local maximum point then <span class="math notranslate nohighlight">\(\nabla^2 f(\ba)\)</span> must be negative semidefinite.</p></li>
+</ol>
+<p>We have following sufficient conditions for local optimality.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\nabla^2 f(\ba)\)</span> is positive definite, then <span class="math notranslate nohighlight">\(\ba\)</span> is a strict local minimum.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\nabla^2 f(\ba)\)</span> is negative definite, then <span class="math notranslate nohighlight">\(\ba\)</span> is a strict local maximum.</p></li>
+</ol>
+<div class="proof theorem admonition" id="res-opt-2nd-order-optimality-local-nec">
+<p class="admonition-title"><span class="caption-number">Theorem 7.2 </span> (Necessary second order optimality conditions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a real valued function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Assume that <span class="math notranslate nohighlight">\(S\)</span> is open.
+Further, assume that <span class="math notranslate nohighlight">\(f\)</span> is twice continuously differentiable over <span class="math notranslate nohighlight">\(S\)</span>
+and that <span class="math notranslate nohighlight">\(\ba \in S\)</span> is a stationary point.</p>
+<p>Then, the following hold.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\ba\)</span> is a local minimum point of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(S\)</span>, then
+<span class="math notranslate nohighlight">\(\nabla^2 f(\ba) \succeq \ZERO\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\ba\)</span> is a local maximum point of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(S\)</span>, then
+<span class="math notranslate nohighlight">\(\nabla^2 f(\ba) \preceq \ZERO\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(\ba\)</span> to be a local minimum point.</p>
+<ol>
+<li><p>Then, there exists an open ball <span class="math notranslate nohighlight">\(B(\ba, r) \subseteq S\)</span>
+such that <span class="math notranslate nohighlight">\(f(\bx) \geq f(\ba)\)</span> for all <span class="math notranslate nohighlight">\(\bx \in B(\ba, r)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bd \in \RR^n\)</span> be a nonzero vector.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(0 &lt; t &lt; \frac{r}{\| \bd \|}\)</span>, we define</p>
+<div class="math notranslate nohighlight">
+\[
+   \ba_t = \ba + t \bd.
+   \]</div>
+<p>By definition, <span class="math notranslate nohighlight">\(\ba_t \in B(\ba, r)\)</span>.</p>
+</li>
+<li><p>Hence, for any <span class="math notranslate nohighlight">\(t \in (0, \frac{r}{\| \bd \|})\)</span>,
+<span class="math notranslate nohighlight">\(f(\ba_t) \geq f(\ba)\)</span>.</p></li>
+<li><p>By linear approximation theorem (<a class="reference internal" href="../mv_calculus/differentiation.html#res-mvc-linear-approx-theorem">Theorem 5.5</a>),
+there exists a vector <span class="math notranslate nohighlight">\(\bz_t \in [\ba, \ba_t]\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\ba_t) - f(\ba) = \nabla f(\ba)^T (\ba_t - \ba) 
+   + \frac{1}{2} (\ba_t - \ba)^T \nabla^2 f(\bz_t) (\ba_t - \ba).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\ba\)</span> is a stationary point, hence <span class="math notranslate nohighlight">\(\nabla f(\ba) = \bzero\)</span>.</p></li>
+<li><p>Also, by definition of <span class="math notranslate nohighlight">\(\ba_t\)</span>, <span class="math notranslate nohighlight">\(\ba_t - \ba = t \bd\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\ba_t) - f(\ba) = \frac{t^2}{2} \bd^T \nabla^2 f(\bz_t) \bd.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(f(\ba)\)</span> is local minimum. Hence, <span class="math notranslate nohighlight">\(f(\ba_t) - f(\ba) \geq 0\)</span>.</p></li>
+<li><p>Thus, for any <span class="math notranslate nohighlight">\(\bd \in \RR^n\)</span> and any <span class="math notranslate nohighlight">\(0 &lt; t &lt; \frac{r}{\| \bd \|}\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{t^2}{2} \bd^T \nabla^2 f(\bz_t) \bd \geq 0.
+   \]</div>
+</li>
+<li><p>By the continuity of the Hessian, and the fact that <span class="math notranslate nohighlight">\(\bz_t \to \ba\)</span>
+as <span class="math notranslate nohighlight">\(t \to 0^+\)</span>, we obtain that</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{t^2}{2} \bd^T \nabla^2 f(\ba) \bd \geq 0 \Forall \bd \in \RR^n.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\nabla^2 f(\ba) \succeq \ZERO\)</span>.</p></li>
+</ol>
+<p>The argument for second statement is similar. We can apply the
+same argument on <span class="math notranslate nohighlight">\(-f\)</span> and recognize that if <span class="math notranslate nohighlight">\(\ba\)</span> is a local maximum
+for <span class="math notranslate nohighlight">\(f\)</span> then it is a local minimum for <span class="math notranslate nohighlight">\(-f\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-opt-2nd-order-optimality-local-suf">
+<p class="admonition-title"><span class="caption-number">Theorem 7.3 </span> (Sufficient second order optimality conditions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a real valued function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Assume that <span class="math notranslate nohighlight">\(S\)</span> is open.
+Further, assume that <span class="math notranslate nohighlight">\(f\)</span> is twice continuously differentiable over <span class="math notranslate nohighlight">\(S\)</span>
+and that <span class="math notranslate nohighlight">\(\ba \in S\)</span> is a stationary point.</p>
+<p>Then, the following hold.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\nabla^2 f(\ba) \succ \ZERO\)</span>,
+then <span class="math notranslate nohighlight">\(\ba\)</span> is a strict local minimum point of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\nabla^2 f(\ba) \prec \ZERO\)</span>,
+then <span class="math notranslate nohighlight">\(\ba\)</span> is a strict local maximum point of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\ba \in S\)</span> is a stationary point satisfying <span class="math notranslate nohighlight">\(\nabla^2 f(\ba) \succ \ZERO\)</span>.</p>
+<ol>
+<li><p>Since the Hessian is continuous (<span class="math notranslate nohighlight">\(f\)</span> is twice continuously differentiable),
+hence there exists an open ball <span class="math notranslate nohighlight">\(B(\ba, r)\)</span> such that
+<span class="math notranslate nohighlight">\(\nabla^2 f(\bx) \succ \ZERO\)</span> for every <span class="math notranslate nohighlight">\(\bx \in B(\ba, r)\)</span>.</p></li>
+<li><p>By linear approximation theorem (<a class="reference internal" href="../mv_calculus/differentiation.html#res-mvc-linear-approx-theorem">Theorem 5.5</a>),
+for any <span class="math notranslate nohighlight">\(\bx \in B(\ba, r)\)</span>, there exists a vector <span class="math notranslate nohighlight">\(\bz \in [\ba, \bx]\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) - f(\ba) = \frac{1}{2} (\bx - \ba)^T \nabla^2 f(\bz) (\bx - \ba).
+   \]</div>
+</li>
+<li><p>We note that <span class="math notranslate nohighlight">\(\bz \in B(\ba, r)\)</span>. Hence, <span class="math notranslate nohighlight">\(\nabla^2 f(\bz) \succ \ZERO\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\frac{1}{2} (\bx - \ba)^T \nabla^2 f(\bz) (\bx - \ba) &gt; 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(\bx) - f(\ba) &gt; 0\)</span> holds true for every <span class="math notranslate nohighlight">\(\bx \in B(\ba, r)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\ba\)</span> is a strict local minimum point for <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+</ol>
+<p>The proof for the second statement is similar.</p>
+</div>
+<div class="proof theorem admonition" id="res-opt-hessian-global-minimum-suf">
+<p class="admonition-title"><span class="caption-number">Theorem 7.4 </span> (Hessian based sufficient global optimality condition)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a real valued function with <span class="math notranslate nohighlight">\(\dom f = \RR^n\)</span>.
+Further, assume that <span class="math notranslate nohighlight">\(f\)</span> is twice continuously differentiable over <span class="math notranslate nohighlight">\(\RR^n\)</span>.
+Suppose that <span class="math notranslate nohighlight">\(\nabla^2 f(\bx) \succeq \ZERO\)</span> for every <span class="math notranslate nohighlight">\(\bx \in \RR^n\)</span>.
+Let <span class="math notranslate nohighlight">\(\ba \in \RR^n\)</span> be a stationary point of <span class="math notranslate nohighlight">\(f\)</span>.
+Then, <span class="math notranslate nohighlight">\(\ba\)</span> is a global minimum point of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>In other words, if the Hessian of a function is continuous and
+always positive semidefinite, then all its stationary points
+are also global minimum points.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We are given that <span class="math notranslate nohighlight">\(\ba\)</span> is a stationary point.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\nabla f(\ba) = \bzero\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \RR^n\)</span>.</p></li>
+<li><p>By linear approximation theorem (<a class="reference internal" href="../mv_calculus/differentiation.html#res-mvc-linear-approx-theorem">Theorem 5.5</a>),
+there exists a vector <span class="math notranslate nohighlight">\(\bz \in [\ba, \bx]\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) - f(\ba) = \frac{1}{2} (\bx - \ba)^T \nabla^2 f(\bz) (\bx - \ba).
+   \]</div>
+</li>
+<li><p>By hypothesis, <span class="math notranslate nohighlight">\(\nabla^2 f(\bz) \succeq \ZERO\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(\bx) - f(\ba) \geq 0\)</span> for every <span class="math notranslate nohighlight">\(\bx \in \RR^n\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\ba\)</span> is a global minimum point of <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+</ol>
+</div>
+<p>This result is a special case for the global optimality of convex optimization
+problems. If a convex function is twice differentiable, then its
+Hessian is positive semidefinite <a class="reference internal" href="../convex_sets/differentiable.html#res-cvxf-hessian-convexity-relation">Theorem 6.94</a>.</p>
+<div class="section" id="saddle-points">
+<h3><span class="section-number">7.1.4.1. </span>Saddle Points<a class="headerlink" href="#saddle-points" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-opt-saddle-point">
+<p class="admonition-title"><span class="caption-number">Definition 7.7 </span> (Saddle point)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a real valued function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Assume that <span class="math notranslate nohighlight">\(S\)</span> is open.</p>
+<p>A stationary point <span class="math notranslate nohighlight">\(\ba \in S\)</span> is called a <em>saddle point</em> of <span class="math notranslate nohighlight">\(f\)</span>
+over <span class="math notranslate nohighlight">\(U\)</span> if it is neither a local minimum point nor a local maximum
+point of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-opt-saddle-point-suf-cond-2nd-order">
+<p class="admonition-title"><span class="caption-number">Theorem 7.5 </span> (Sufficient condition for saddle points)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a real valued function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Assume that <span class="math notranslate nohighlight">\(S\)</span> is open.
+Further, assume that <span class="math notranslate nohighlight">\(f\)</span> is twice continuously differentiable over <span class="math notranslate nohighlight">\(S\)</span>
+and that <span class="math notranslate nohighlight">\(\ba \in S\)</span> is a stationary point.</p>
+<p>If <span class="math notranslate nohighlight">\(\nabla^2 f(\ba)\)</span> is an indefinite matrix, then <span class="math notranslate nohighlight">\(\ba\)</span> is a saddle point
+of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We are given that <span class="math notranslate nohighlight">\(\ba\)</span> is a stationary point and <span class="math notranslate nohighlight">\(\nabla^2 f(\ba)\)</span> is indefinite.</p>
+<ol>
+<li><p>Then, <span class="math notranslate nohighlight">\(\nabla f(\ba) = \bzero\)</span>.</p></li>
+<li><p>Recall from <a class="reference internal" href="../la/sym_matrices.html#res-la-evd-definiteness-charac">Theorem 4.124</a> that
+a matrix is indefinite if and only if at least one eigenvalue is positive and
+at least one eigenvalue is negative.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> be a positive eigenvalue of <span class="math notranslate nohighlight">\(\nabla^2 f(\ba)\)</span>
+and <span class="math notranslate nohighlight">\(\bv\)</span> be the corresponding normalized eigenvector.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(S\)</span> is open, hence there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B(\ba, r) \subseteq S\)</span>.</p></li>
+<li><p>Accordingly, <span class="math notranslate nohighlight">\(\ba + t \bv \in B(\ba, r) \subseteq S\)</span> for every <span class="math notranslate nohighlight">\(t \in [0, r)\)</span>.</p></li>
+<li><p>By quadratic approximation theorem (<a class="reference internal" href="../mv_calculus/differentiation.html#res-mvc-quadratic-approx-theorem">Theorem 5.6</a>),</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\ba + t \bv) = f(\ba)
+   + \frac{t^2}{2} \bv^T \nabla^2 f(\ba) \bv
+   + o(t^2 \| \bv \|^2).
+   \]</div>
+</li>
+<li><p>Putting <span class="math notranslate nohighlight">\(\nabla^2 f(\ba) \bv = \lambda \bv\)</span> and using <span class="math notranslate nohighlight">\(\| \bv \| = 1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\ba + t \bv) = f(\ba) + \frac{\lambda t^2}{2} + o(t^2).
+   \]</div>
+</li>
+<li><p>Here <span class="math notranslate nohighlight">\(o: \RR_{++} \to \RR\)</span> is a function satisfying
+<span class="math notranslate nohighlight">\(\frac{o(x)}{x} \to 0\)</span> as <span class="math notranslate nohighlight">\(x \to 0^+\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\frac{o(t^2)}{t^2} \to 0\)</span> as <span class="math notranslate nohighlight">\(t \to 0^+\)</span>.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \left | \frac{o(t^2)}{t^2} \right | &lt; \epsilon, \text{ whenever } t &lt; \delta.
+   \]</div>
+</li>
+<li><p>Choose <span class="math notranslate nohighlight">\(\epsilon = \lambda\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(- \frac{\lambda t^2}{2} &lt; o(t^2) &lt; \frac{\lambda t^2}{2}\)</span>
+for every <span class="math notranslate nohighlight">\(t &lt; \delta\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\frac{\lambda t^2}{2} + o(t^2) &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(t &lt; \delta\)</span>.</p></li>
+<li><p>Thus, there exists <span class="math notranslate nohighlight">\(r_1 = \min(\delta, r)\)</span> such that for every <span class="math notranslate nohighlight">\(0 \leq t  &lt; r_1\)</span>,
+<span class="math notranslate nohighlight">\(f(\ba + t \bv) &gt; f(\ba)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\ba\)</span> is not a local maximum point.</p></li>
+<li><p>A similar argument with a negative eigenvalue and corresponding normalized
+eigenvector shows that <span class="math notranslate nohighlight">\(\ba\)</span> cannot be a local minimum point.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\ba\)</span> must be a saddle point.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="minimization-of-proper-functions">
+<h2><span class="section-number">7.1.5. </span>Minimization of Proper Functions<a class="headerlink" href="#minimization-of-proper-functions" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional normed linear space.
+Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+We consider the problem of minimizing <span class="math notranslate nohighlight">\(f\)</span> over a set <span class="math notranslate nohighlight">\(A \subseteq S\)</span>.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is the objective function or cost function (being minimized).</p></li>
+<li><p>The set <span class="math notranslate nohighlight">\(A\)</span> is the feasible set or constraint set.</p></li>
+<li><p>Any <span class="math notranslate nohighlight">\(\bx \in A\)</span> is a feasible solution or feasible point.</p></li>
+<li><p>If there is at least one feasible point (i.e., <span class="math notranslate nohighlight">\(A\)</span> is nonempty),
+the problem is feasible.</p></li>
+<li><p>Otherwise, the problem is infeasible.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(p^* = \inf_{\bx \in A} f(\bx)\)</span> be the optimal value of the minimization problem.</p></li>
+<li><p>We allow <span class="math notranslate nohighlight">\(p^*\)</span> to take values over the extended real line <span class="math notranslate nohighlight">\(\ERL\)</span>.</p></li>
+<li><p>If the minimization problem is infeasible, then <span class="math notranslate nohighlight">\(p^* = \infty\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(p^* = -\infty\)</span>, then the problem is unbounded below.</p></li>
+<li><p>If there is some <span class="math notranslate nohighlight">\(\bx^* \in A\)</span> such that <span class="math notranslate nohighlight">\(f(\bx^*) = p^*\)</span>, then
+<span class="math notranslate nohighlight">\(\bx^*\)</span> is an optimal solution or optimal point or minimizing point
+or minimizer or global minimum over <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Alternatively, <span class="math notranslate nohighlight">\(f\)</span> attains a minimum over <span class="math notranslate nohighlight">\(A\)</span> at <span class="math notranslate nohighlight">\(\bx^*\)</span>.
+We write this as</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx^* \in \underset{\bx \in A}{\argmin} f(\bx).
+   \]</div>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(\bx^*\)</span> is a unique minimizer of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(A\)</span>, then we abuse the notation and write</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx^* = \underset{\bx \in A}{\argmin} f(\bx).
+   \]</div>
+</li>
+<li><p>It is possible that <span class="math notranslate nohighlight">\(p^*\)</span> is finite and yet there is no optimal point
+in <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>In other words, the set <span class="math notranslate nohighlight">\(\underset{\bx \in A}{\argmin} f(\bx)\)</span> may be empty.</p></li>
+</ol>
+</div>
+<p>A basic question of optimization is whether an optimal solution exists.</p>
+<div class="proof remark admonition" id="res-opt-min-f-optimal-set">
+<p class="admonition-title"><span class="caption-number">Remark 7.2 </span> (The set of optimal points)</p>
+<div class="remark-content section" id="proof-content">
+<p>The set of optimal points for the problem of minimization of a proper function
+<span class="math notranslate nohighlight">\(f\)</span> over a feasible set <span class="math notranslate nohighlight">\(A\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\argmin_{\bx \in A} f(\bx) = A \cap f^{-1}(p^*)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p^* = \inf_{\bx \in A} f(\bx)\)</span>
+and <span class="math notranslate nohighlight">\(f^{-1}(y)\)</span> denotes the level set of <span class="math notranslate nohighlight">\(f\)</span> given by <span class="math notranslate nohighlight">\(\{\bx \in S \ST f(\bx) = y \}\)</span>.</p>
+<p>This comes directly from the fact that</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bx^*\)</span> must be feasible. Hence <span class="math notranslate nohighlight">\(\bx^* \in A\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> must attain the optimal value at <span class="math notranslate nohighlight">\(\bx^*\)</span>. Thus, <span class="math notranslate nohighlight">\(p^* = f(\bx^*)\)</span>.
+Hence, <span class="math notranslate nohighlight">\(\bx^* \in f^{-1}(p^*)\)</span>.</p></li>
+</ol>
+<p>In other words, the optimal set is the intersection of the feasible set
+<span class="math notranslate nohighlight">\(A\)</span> with the level set <span class="math notranslate nohighlight">\(f^{-1}(p^*)\)</span>.</p>
+<p>Thus, for an optimal solution to exist</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(p^*\)</span> must be finite.</p></li>
+<li><p>The level set <span class="math notranslate nohighlight">\(f^{-1}(p^*)\)</span> must be nonempty.</p></li>
+<li><p>The feasible set <span class="math notranslate nohighlight">\(A\)</span> must be nonempty.</p></li>
+<li><p>The intersection of <span class="math notranslate nohighlight">\(A\)</span> with <span class="math notranslate nohighlight">\(f^{-1}(p^*)\)</span> must be nonempty.</p></li>
+</ol>
+</div>
+</div><div class="section" id="coercive-functions">
+<h3><span class="section-number">7.1.5.1. </span>Coercive Functions<a class="headerlink" href="#coercive-functions" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-opt-coercive-function">
+<p class="admonition-title"><span class="caption-number">Definition 7.8 </span> (Coercive function)</p>
+<div class="definition-content section" id="proof-content">
+<p>A proper function <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> is called <em>coercive</em> over
+a set <span class="math notranslate nohighlight">\(A\)</span> if for every sequence <span class="math notranslate nohighlight">\(\{ \bx_n \}\)</span> of <span class="math notranslate nohighlight">\(A\)</span> such that
+<span class="math notranslate nohighlight">\( \lim_{k \to \infty} \| \bx_k \| = \infty\)</span>, we have <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f(\bx_k) = \infty\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is coercive over the entire vector space <span class="math notranslate nohighlight">\(\VV\)</span>, we say that <span class="math notranslate nohighlight">\(f\)</span> is <em>coercive</em>.</p>
+</div>
+</div><p>One way to think about coercive functions is that they grow rapidly
+at the extremes of the domain on which they are defined.</p>
+<div class="proof remark admonition" id="res-opt-coercive-level-sets">
+<p class="admonition-title"><span class="caption-number">Remark 7.3 </span> (Level sets of coercive functions)</p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a coercive proper function. Let <span class="math notranslate nohighlight">\(a \in \RR\)</span>.
+If the level set <span class="math notranslate nohighlight">\(f^{-1}(a)\)</span> is nonempty, then it is bounded.</p>
+<p>In other words, all nonempty level sets of a coercive function are bounded.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For contradiction, assume that there exists <span class="math notranslate nohighlight">\(a \in \RR\)</span> such that <span class="math notranslate nohighlight">\(A = f^{-1}(a)\)</span>
+is unbounded.</p>
+<ol class="simple">
+<li><p>Then, there exists a sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(A\)</span> such that
+<span class="math notranslate nohighlight">\( \lim_{k \to \infty} \| \bx_k \| = \infty\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is coercive, hence <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f(\bx_k) = \infty\)</span>.</p></li>
+<li><p>But, by definition, <span class="math notranslate nohighlight">\(f(\bx_k) = a\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f(\bx_k) = a\)</span>.</p></li>
+<li><p>We have a contradiction.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(f^{-1}(a)\)</span> must be bounded.</p></li>
+</ol>
+</div>
+<div class="proof remark admonition" id="res-opt-coercive-sublevel-sets">
+<p class="admonition-title"><span class="caption-number">Remark 7.4 </span> (Sublevel sets of coercive functions)</p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a coercive proper function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+For every <span class="math notranslate nohighlight">\(r \in \RR\)</span>, define the sublevel set
+<span class="math notranslate nohighlight">\(S_r\)</span> as <span class="math notranslate nohighlight">\(\{ \bx \in S \ST  f(\bx) \leq r \}\)</span>.
+If <span class="math notranslate nohighlight">\(S_r\)</span> is nonempty, then it is bounded.</p>
+<p>In other words, all nonempty sublevel sets of a coercive function are bounded.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For contradiction, assume that there exists <span class="math notranslate nohighlight">\(r \in \RR\)</span> such that <span class="math notranslate nohighlight">\(S_r\)</span>
+is unbounded.</p>
+<ol class="simple">
+<li><p>Then, there exists a sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(S_r\)</span> such that
+<span class="math notranslate nohighlight">\( \lim_{k \to \infty} \| \bx_k \| = \infty\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is coercive, hence <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f(\bx_k) = \infty\)</span>.</p></li>
+<li><p>But, by definition, <span class="math notranslate nohighlight">\(f(\bx_k) \leq r\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f(\bx_k) \leq r\)</span>.</p></li>
+<li><p>We have a contradiction.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(S_r\)</span> must be bounded.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="weierstrass-theorem">
+<h3><span class="section-number">7.1.5.2. </span>Weierstrass’ Theorem<a class="headerlink" href="#weierstrass-theorem" title="Permalink to this headline">¶</a></h3>
+<p>In this subsection, we examine the problem of unconstrained
+minimization of a proper closed function.
+Recall from <a class="reference internal" href="../metric_spaces/real_valued_functions.html#def-ms-closed-function">Definition 3.64</a> that a function
+is called closed if all its sublevel sets are closed.</p>
+<div class="proof theorem admonition" id="res-opt-proper-closed-unconstrained-min">
+<p class="admonition-title"><span class="caption-number">Theorem 7.6 </span> (Unconstrained minimization of a proper closed function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dim normed linear space.
+Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper closed function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(p^* = \inf_{\bx \in \VV} f(\bx)\)</span>.
+Let <span class="math notranslate nohighlight">\(X = f^{-1}(p^*)\)</span> be the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> (over all of <span class="math notranslate nohighlight">\(\VV\)</span>).
+For every <span class="math notranslate nohighlight">\(p \in \RR\)</span>, let <span class="math notranslate nohighlight">\(S_p\)</span> denote the sublevel set <span class="math notranslate nohighlight">\(\{ \bx \ST f(\bx) \leq p \}\)</span>.
+Then,</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(p^* &lt; \infty\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X = \bigcap_{p &gt; p^*} S_p\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is closed.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We show that <span class="math notranslate nohighlight">\(p^* &lt; \infty\)</span>.</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is proper, hence <span class="math notranslate nohighlight">\(S\)</span> is nonempty.</p></li>
+<li><p>Thus, there exists <span class="math notranslate nohighlight">\(\bx \in S\)</span> such that <span class="math notranslate nohighlight">\(f(\bx) &lt; \infty\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(p^* = \inf_{\bx \in \VV} f(\bx) &lt; \infty\)</span>.</p></li>
+</ol>
+<p>Let <span class="math notranslate nohighlight">\(Y = \bigcap_{p &gt; p^*} S_p\)</span>.
+We have to show that <span class="math notranslate nohighlight">\(X = Y\)</span>.</p>
+<p>We first show that <span class="math notranslate nohighlight">\(X \subseteq Y\)</span>.</p>
+<ol class="simple">
+<li><p>let <span class="math notranslate nohighlight">\(\bx \in X\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(f(\bx) = p^*\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(f(\bx) &lt; p\)</span> for every <span class="math notranslate nohighlight">\(p &gt; p^*\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bx \in S_p\)</span> for every <span class="math notranslate nohighlight">\(p &gt; p^*\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in Y\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(X \subseteq Y\)</span>.</p></li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(Y \subseteq X\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in Y\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(f(\bx) = p^*\)</span> must hold true.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(\bx)\)</span> cannot be smaller than <span class="math notranslate nohighlight">\(p^*\)</span> since by definition
+<span class="math notranslate nohighlight">\(p^* = \inf f(\bx)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(\bx) \geq p^*\)</span> must hold true.</p></li>
+<li><p>Now, for contradiction, assume that <span class="math notranslate nohighlight">\(f(\bx) &gt; p^*\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(q = f(\bx)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(p = \frac{p^* + q}{2}\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(p^* &lt; p &lt; q\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bx \notin S_p\)</span>.</p></li>
+<li><p>But then, <span class="math notranslate nohighlight">\(\bx \notin Y\)</span> since <span class="math notranslate nohighlight">\(Y \subseteq S_p\)</span> as <span class="math notranslate nohighlight">\(p &gt; p^*\)</span>.</p></li>
+<li><p>A contradiction.</p></li>
+</ol>
+</li>
+<li><p>Thus, the only allowed value for <span class="math notranslate nohighlight">\(f(\bx)\)</span> is <span class="math notranslate nohighlight">\(p^*\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in X\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(Y \subseteq X\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   X = f^{-1}(p^*) = Y = \bigcap_{p &gt; p^*} S_p.
+   \]</div>
+</li>
+</ol>
+<p>We show that <span class="math notranslate nohighlight">\(X\)</span> is closed.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> is empty, then it is closed by definition.</p></li>
+<li><p>Otherwise, <span class="math notranslate nohighlight">\(X\)</span> is an intersection of sublevel sets.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is closed, its sublevel sets are closed.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(S_p\)</span> is closed for every <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(X\)</span> is an intersection of closed sets.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(X\)</span> is closed.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-opt-weierstrass-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 7.7 </span> (Weierstrass’ theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dim normed linear space.
+Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper closed function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(p^* = \inf_{\bx \in \VV} f(\bx)\)</span>.
+Let <span class="math notranslate nohighlight">\(X = f^{-1}(p^*)\)</span> be the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> (over all of <span class="math notranslate nohighlight">\(\VV\)</span>).
+For every <span class="math notranslate nohighlight">\(p \in \RR\)</span>, let <span class="math notranslate nohighlight">\(S_p\)</span> denote the sublevel set <span class="math notranslate nohighlight">\(\{ \bx \ST f(\bx) \leq p \}\)</span>.</p>
+<p>Assume that one of the following conditions are true.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(S = \dom f\)</span> is closed and bounded.</p></li>
+<li><p>There exists a scalar <span class="math notranslate nohighlight">\(r \in \RR\)</span> such that the sublevel set
+<span class="math notranslate nohighlight">\( S_r = \{ \bx \ST f(\bx) \leq r \}\)</span> is nonempty and bounded.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is coercive.</p></li>
+</ol>
+<p>Then, <span class="math notranslate nohighlight">\(X\)</span> (the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span>) is nonempty and compact.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If there exists <span class="math notranslate nohighlight">\(\bx \in S\)</span> such that <span class="math notranslate nohighlight">\(f(\bx) = p^*\)</span>,
+then <span class="math notranslate nohighlight">\(X\)</span> is nonempty.
+To show that <span class="math notranslate nohighlight">\(X\)</span> is compact, we just need to show
+that it is closed and bounded.
+By <a class="reference internal" href="../la/normed_spaces.html#res-la-ndim-compact-closed-bounded">Theorem 4.66</a>,
+every closed and bounded subset of <span class="math notranslate nohighlight">\(\VV\)</span> which is a real
+<span class="math notranslate nohighlight">\(n\)</span>-dimensional normed linear space is compact.
+By <a class="reference internal" href="#res-opt-proper-closed-unconstrained-min">Theorem 7.6</a>, <span class="math notranslate nohighlight">\(X\)</span> is also closed.
+Thus, we just need to show that <span class="math notranslate nohighlight">\(X\)</span> is bounded.</p>
+<p>Assume that condition (1) holds.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is proper, hence <span class="math notranslate nohighlight">\(S\)</span> is nonempty.</p></li>
+<li><p>Consider a sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(S\)</span> such that
+<span class="math notranslate nohighlight">\(\lim_{k \to \infty} f(\bx_k) = p^*\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(S\)</span> is bounded, hence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> has a convergent subsequence
+by Bolzano-Weierstrass theorem
+(<a class="reference internal" href="../la/normed_spaces.html#res-la-bounded-seq-bolzano-weierstrass">Theorem 4.69</a>).</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\{ \bx_l \}\)</span> be the convergent subsequence of <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> with
+<span class="math notranslate nohighlight">\(\lim \bx_l = \bx^*\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(S\)</span> is closed, hence <span class="math notranslate nohighlight">\(\bx^* \in S\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\{ f(\bx_k) \}\)</span> is  convergent and <span class="math notranslate nohighlight">\(\{ f(\bx_l) \}\)</span> is
+a subsequence of <span class="math notranslate nohighlight">\(\{ f(\bx_k) \}\)</span>, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{l \to \infty} f(\bx_l) = \lim_{k \to \infty} f(\bx_k) = p^*.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is closed, hence it is lower semicontinuous (l.s.c.) at <span class="math notranslate nohighlight">\(\bx^* \in S\)</span>
+(see <a class="reference internal" href="../metric_spaces/real_valued_functions.html#res-ms-func-lsc-closed-func">Theorem 3.103</a>).</p></li>
+<li><p>Also, note that since <span class="math notranslate nohighlight">\(\{ f(\bx_k) \}\)</span> is convergent, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \liminf_{l \to \infty} f(\bx_l) =  \lim_{l \to \infty} f(\bx_l).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is l.s.c. at <span class="math notranslate nohighlight">\(\bx^* \in S\)</span>, hence by <a class="reference internal" href="../metric_spaces/real_valued_functions.html#res-ms-semicont-seq-converge">Theorem 3.100</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx^*) \leq \liminf_{l \to \infty} f(\bx_l)
+   = \lim_{l \to \infty} f(\bx_l) 
+   = \liminf_{k \to \infty} f(\bx_k) = p^*.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(p^*\)</span> is the infimum value of <span class="math notranslate nohighlight">\(f\)</span>, hence <span class="math notranslate nohighlight">\(f(\bx^*)\)</span> cannot be smaller than <span class="math notranslate nohighlight">\(p^*\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(\bx^*) = p^*\)</span> must be true.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f(\bx^*) = p^*\)</span> means that <span class="math notranslate nohighlight">\(\bx^*\)</span> is an optimal solution for the
+minimization of <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+<li><p>Thus, the set <span class="math notranslate nohighlight">\(X = f^{-1}(p^*)\)</span> is nonempty.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is bounded since <span class="math notranslate nohighlight">\(S\)</span> is bounded by hypothesis.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(X\)</span> is closed and bounded. Hence, <span class="math notranslate nohighlight">\(X\)</span> is compact.</p></li>
+</ol>
+<p>Assume that condition (2) holds.</p>
+<ol>
+<li><p>The sublevel set <span class="math notranslate nohighlight">\(S_r\)</span> is nonempty and bounded.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is closed, hence <span class="math notranslate nohighlight">\(S_r\)</span> is also closed.</p></li>
+<li><p>Consider the restriction of <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\(S_r\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \tilde{f} = \begin{cases} 
+   f(\bx), &amp; f(\bx) \leq r \\
+   \infty, &amp; \text{ otherwise }.
+   \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\dom \tilde{f} = S_r\)</span>. Thus, <span class="math notranslate nohighlight">\(\dom \tilde{f}\)</span> is nonempty, closed and bounded.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\tilde{f}\)</span> never takes the value <span class="math notranslate nohighlight">\(-\infty\)</span> and is not identically <span class="math notranslate nohighlight">\(\infty\)</span>.
+Hence, <span class="math notranslate nohighlight">\(\tilde{f}\)</span> is a proper function.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is closed, hence sublevel sets of <span class="math notranslate nohighlight">\(\tilde{f}\)</span> are also closed.</p>
+<ol class="simple">
+<li><p>For any <span class="math notranslate nohighlight">\(p &gt; r\)</span>, the sublevel set of <span class="math notranslate nohighlight">\(\tilde{f}\)</span> is identical to <span class="math notranslate nohighlight">\(S_r\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(p \leq r\)</span>, the sublevel set of <span class="math notranslate nohighlight">\(\tilde{f}\)</span> is identical to <span class="math notranslate nohighlight">\(S_p\)</span>,
+the corresponding sublevel set of <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\tilde{f}\)</span> is closed too.</p></li>
+<li><p>Applying condition (1) on <span class="math notranslate nohighlight">\(\tilde{f}\)</span>, the set of minimizers of <span class="math notranslate nohighlight">\(\tilde{f}\)</span> is
+nonempty and compact.</p></li>
+<li><p>We also note that the minimizers of <span class="math notranslate nohighlight">\(f\)</span> are identical to the minimizers of <span class="math notranslate nohighlight">\(\tilde{f}\)</span>.</p></li>
+<li><p>Thus, the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> is nonempty and closed.</p></li>
+</ol>
+<p>Assume that condition (3) holds.</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is proper, hence it has some nonempty sublevel sets.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r \in \RR\)</span> be one such scalar such that the sublevel set
+<span class="math notranslate nohighlight">\(S_r = \{ \bx \in S \ST f(\bx) \leq r \}\)</span> is nonempty.</p></li>
+<li><p>By <a class="reference internal" href="#res-opt-coercive-sublevel-sets">Remark 7.4</a>, the nonempty sublevel sets
+of <span class="math notranslate nohighlight">\(f\)</span> are bounded. Hence, <span class="math notranslate nohighlight">\(S_r\)</span> is bounded.</p></li>
+<li><p>Then, by applying condition (2), the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> is
+nonempty and compact.</p></li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="res-opt-min-proper-func-closed-set">
+<p class="admonition-title"><span class="caption-number">Corollary 7.1 </span> (Minimizing a proper closed function over a closed set)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper closed function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Let <span class="math notranslate nohighlight">\(A \subseteq S\)</span> be a nonempty closed set.
+Consider the problem of minimizing <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Further, assume that one of the following conditions are true.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is bounded.</p></li>
+<li><p>There exists a scalar <span class="math notranslate nohighlight">\(r \in \RR\)</span> such that the set
+<span class="math notranslate nohighlight">\(\{ \bx \in A \ST f(\bx) \leq r \}\)</span> is nonempty and bounded.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is coercive over <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+<p>Then, the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(A\)</span> is nonempty and compact.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We define a restriction <span class="math notranslate nohighlight">\(g : \VV \to \RERL\)</span> of <span class="math notranslate nohighlight">\(f\)</span> over the set <span class="math notranslate nohighlight">\(A\)</span> as follows</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g(\bx) = \begin{cases}
+f(\bx), &amp; \bx \in A \\
+\infty, &amp; \text{ otherwise }.
+\end{cases}
+\end{split}\]</div>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\dom g = A\)</span>. Thus, <span class="math notranslate nohighlight">\(\dom g\)</span> is closed.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> never takes the value <span class="math notranslate nohighlight">\(-\infty\)</span>, hence <span class="math notranslate nohighlight">\(g\)</span> also never takes the value <span class="math notranslate nohighlight">\(-\infty\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is nonempty, hence there exists <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> such that <span class="math notranslate nohighlight">\(g(\bx) &lt; \infty\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(g\)</span> is a proper function.</p></li>
+<li><p>Also, note that the set <span class="math notranslate nohighlight">\(\{ \bx \in A \ST f(\bx) \leq r \}\)</span> is
+nothing but the sublevel set of <span class="math notranslate nohighlight">\(g\)</span> for the scalar <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+   \{ \bx  \ST g(\bx) \leq r \} = A \cap \{ \bx \ST f(\bx) \leq r \}.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is closed, all its sublevel sets are closed.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is closed, hence <span class="math notranslate nohighlight">\( A \cap \{ \bx \ST f(\bx) \leq r \}\)</span> is also closed.</p></li>
+<li><p>Hence, all the sublevel sets of <span class="math notranslate nohighlight">\(g\)</span> are also closed. Hence, <span class="math notranslate nohighlight">\(g\)</span> is also closed.</p></li>
+<li><p>The set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(A\)</span> is nothing but the set of minimizers
+of <span class="math notranslate nohighlight">\(g\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f\)</span> is coercive over <span class="math notranslate nohighlight">\(A\)</span>, then <span class="math notranslate nohighlight">\(g\)</span> is coercive (over its entire domain).</p></li>
+</ol>
+<p>Thus, applying <a class="reference internal" href="#res-opt-weierstrass-theorem">Theorem 7.7</a>,
+the set of minimizers of <span class="math notranslate nohighlight">\(g\)</span> is nonempty and compact.
+So is the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+<div class="proof corollary admonition" id="res-opt-min-rv-func-closed-set">
+<p class="admonition-title"><span class="caption-number">Corollary 7.2 </span> (Minimizing a real valued l.s.c. function over a closed set)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a real valued function with <span class="math notranslate nohighlight">\(\dom f = \VV\)</span>.
+Let <span class="math notranslate nohighlight">\(A \subseteq \VV\)</span> be a nonempty closed set.
+Assume that <span class="math notranslate nohighlight">\(f\)</span> is lower semicontinuous over <span class="math notranslate nohighlight">\(A\)</span>.
+Consider the problem of minimizing <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Further, assume that one of the following conditions are true.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is bounded.</p></li>
+<li><p>There exists a scalar <span class="math notranslate nohighlight">\(r \in \RR\)</span> such that the set
+<span class="math notranslate nohighlight">\(\{ \bx \in A \ST f(\bx) \leq r \}\)</span> is nonempty and bounded.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is coercive over <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+<p>Then, the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(A\)</span> is nonempty and compact.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We define a restriction <span class="math notranslate nohighlight">\(g : \VV \to \RERL\)</span> of <span class="math notranslate nohighlight">\(f\)</span> over the set <span class="math notranslate nohighlight">\(A\)</span> as follows</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g(\bx) = \begin{cases}
+f(\bx), &amp; \bx \in A \\
+\infty, &amp; \text{ otherwise }.
+\end{cases}
+\end{split}\]</div>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\dom g = A\)</span>. Thus, <span class="math notranslate nohighlight">\(\dom g\)</span> is closed.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is real valued hence <span class="math notranslate nohighlight">\(g\)</span> also never takes the value <span class="math notranslate nohighlight">\(-\infty\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is nonempty, hence there exists <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> such that <span class="math notranslate nohighlight">\(g(\bx) &lt; \infty\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(g\)</span> is a proper function.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is l.s.c. on <span class="math notranslate nohighlight">\(A\)</span>, hence <span class="math notranslate nohighlight">\(g\)</span> is closed.</p></li>
+<li><p>Also, note that the set <span class="math notranslate nohighlight">\(\{ \bx \in A \ST f(\bx) \leq r \}\)</span> is
+nothing but the sublevel set of <span class="math notranslate nohighlight">\(g\)</span> for the scalar <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
+<li><p>The set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(A\)</span> is nothing but the set of minimizers
+of <span class="math notranslate nohighlight">\(g\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f\)</span> is coercive over <span class="math notranslate nohighlight">\(A\)</span>, then <span class="math notranslate nohighlight">\(g\)</span> is coercive (over its entire domain).</p></li>
+</ol>
+<p>Thus, applying <a class="reference internal" href="#res-opt-weierstrass-theorem">Theorem 7.7</a>,
+the set of minimizers of <span class="math notranslate nohighlight">\(g\)</span> is nonempty and compact.
+So is the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="some-simple-problems-and-technical-results">
+<h2><span class="section-number">7.1.6. </span>Some Simple Problems and Technical Results<a class="headerlink" href="#some-simple-problems-and-technical-results" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection, we provide some technical results on
+some simple optimization problems.
+These results are useful building blocks for bigger problems.</p>
+<div class="proof theorem admonition" id="res-opt-nng-affine-nng-orthant">
+<p class="admonition-title"><span class="caption-number">Theorem 7.8 </span> (Nonnegativity of affine functional on nonnegative orthant)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Consider the affine function <span class="math notranslate nohighlight">\(f: \RR^n \to \RR\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \ba^T \bx + b.
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(f(\bx) \geq 0\)</span> for every <span class="math notranslate nohighlight">\(\bx \succeq \bzero\)</span> if
+and only if <span class="math notranslate nohighlight">\(\ba \succeq \bzero\)</span> and <span class="math notranslate nohighlight">\(b \geq 0\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume that <span class="math notranslate nohighlight">\(\ba \succeq \bzero\)</span> and <span class="math notranslate nohighlight">\(b \geq 0\)</span>.
+Then <span class="math notranslate nohighlight">\(f(\bx)\)</span> is product and sum of nonnegative terms.
+Hence, <span class="math notranslate nohighlight">\(f(\bx) \geq 0\)</span>.</p>
+<p>For the converse, assume that <span class="math notranslate nohighlight">\(f(\bx) \geq 0\)</span> for every <span class="math notranslate nohighlight">\(\bx \succeq \bzero\)</span>.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(b &lt; 0\)</span>, then for <span class="math notranslate nohighlight">\(\bx = \bzero\)</span>, <span class="math notranslate nohighlight">\(f(\bx) = b &lt; 0\)</span>.
+Hence, <span class="math notranslate nohighlight">\(b\)</span> cannot be smaller than 0.</p></li>
+<li><p>Consider some <span class="math notranslate nohighlight">\(\ba \prec \bzero\)</span>.</p></li>
+<li><p>Assume that <span class="math notranslate nohighlight">\(a_i &lt; 0\)</span> for some <span class="math notranslate nohighlight">\(i \in [1,\dots,n]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx\)</span> be such that <span class="math notranslate nohighlight">\(x_j = 0\)</span> for all <span class="math notranslate nohighlight">\(j \neq i\)</span>
+and <span class="math notranslate nohighlight">\(x_i = t\)</span> for some <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(f(\bx) = t a_i + b\)</span>.</p></li>
+<li><p>By increasing <span class="math notranslate nohighlight">\(t\)</span> suitably, we can get <span class="math notranslate nohighlight">\(f(\bx) &lt; 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\ba \succeq \bzero\)</span> is also necessary to
+ensure that <span class="math notranslate nohighlight">\(f(\bx) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(\bx \succeq \bzero\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-opt-min-linear-func-unit-ball">
+<p class="admonition-title"><span class="caption-number">Theorem 7.9 </span> (Minimization of linear functional over unit ball)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For any <span class="math notranslate nohighlight">\(\ba \in \RR^n\)</span>, the optimal value of the problem</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{ \| \bx \| \leq 1 }{\inf} \ba^T \bx 
+\]</div>
+<p>is <span class="math notranslate nohighlight">\(- \| \ba\|\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(\ba = \bzero\)</span>, then <span class="math notranslate nohighlight">\(\ba^T \bx = 0\)</span>. The minimum value is 0 which
+is equal to <span class="math notranslate nohighlight">\(-\| \ba \|\)</span>.</p>
+<p>Now consider the case where <span class="math notranslate nohighlight">\(\ba \neq \bzero\)</span>.</p>
+<ol>
+<li><p>By Cauchy Schwartz inequality</p>
+<div class="math notranslate nohighlight">
+\[
+   \ba^T \bx  \geq - \| \ba \| \| \bx \| \geq - \| \ba \|
+   \]</div>
+<p>for any <span class="math notranslate nohighlight">\(\| \bx \| \leq 1\)</span>.</p>
+</li>
+<li><p>Thus, we have established a lower bound:</p>
+<div class="math notranslate nohighlight">
+\[
+   \underset{ \| \bx \| \leq 1 }{\inf} \ba^T \bx  \geq - \| \ba \|.
+   \]</div>
+</li>
+<li><p>We now show that the lower bound is indeed attained.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx = \frac{-\ba}{ \| \ba \|}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\| \bx \| = 1\)</span>. Thus, <span class="math notranslate nohighlight">\(\bx\)</span> belongs to the unit ball.</p></li>
+<li><p>Now <span class="math notranslate nohighlight">\(\ba^T \bx = - \| \ba \|\)</span>. Thus, the lower bound is attained.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./cvxopt"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chapter.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">7. </span>Convex Optimization</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="cvxopt.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7.2. </span>Convex Optimization</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

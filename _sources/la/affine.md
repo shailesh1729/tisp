@@ -69,6 +69,8 @@ In this definition:
 * As $\theta$ goes from $0$ to $1$, $\by$ moves from $\bx_2$ to $\bx_1$.
 
 ```{prf:remark}
+:label: rem-aff-line-alt-not
+
 An alternative notation for the line as a set is $\bx_2 + \FF (\bx_1 - \bx_2)$
 following the notation in {prf:ref}`def-vs-set-arithmetic`.
 ```
@@ -2319,6 +2321,61 @@ followed by a translation.
 1. Hence, $T$ is continuous.
 ```
 
+```{prf:theorem} Affine transformation and closure
+:label: res-la-affine-finite-transformation-closure
+
+Let $(\VV, \| \cdot \|_v)$ and $(\WW, \| \cdot \|_w)$ be
+normed linear spaces. Let 
+$T : \VV \to \WW$ be an affine transformation. 
+
+Assume that $\VV$ is finite dimensional. 
+Let $A \subseteq \VV$. Then,
+
+$$
+T (\closure A) \subseteq \closure T(A).
+$$
+```
+
+```{prf:proof}
+By {prf:ref}`res-la-affine-finite-continuous-transformation`,
+$T$ is continuous.
+
+By {prf:ref}`res-ms-continuous-function-characterization` (4)
+
+$$
+T (\closure A) \subseteq \closure T(A)
+$$
+holds true for every subset $A$ of $\VV$.
+```
+
+
+Recall from {prf:ref}`def-ms-closed-function`
+that a real valued function is closed if
+every sublevel set is closed.
+
+```{prf:theorem} Real valued affine functions are closed
+:label: res-la-affine-finite-closed-func
+
+Let $(\VV, \| \cdot \|)$ be an $n$-dimensional
+normed linear space. 
+Let $T : \VV \to \RR$ be an affine function.
+Then, $T$ is closed.
+```
+
+```{prf:proof}
+
+1. By {prf:ref}`res-la-affine-finite-continuous-transformation`, 
+   $f$ is continuous.
+1. Let $a \in \RR$.
+1. The sublevel set for $a$ is given by
+   $S_a = \{ \bx \in \VV \ST T(\bx) \leq a \}$.
+1. This is nothing but $T^{-1} (-\infty, a]$.
+1. The set $(-\infty, a]$ is a closed set.
+1. Since $T$ is continuous, hence $T^{-1}(-\infty, a]$ is also closed.
+1. Thus, $S_a$ is closed for every $a \in \RR$.
+1. Thus, $T$ is closed.
+```
+
 ### Affine Homeomorphisms
 
 ```{prf:theorem}
@@ -2398,3 +2455,43 @@ T (\interior A) = \interior (T (A)).
 $$
 ```
 
+
+## Real Valued Affine Functions
+
+In this subsection, we look at affine functions from
+a vector space $\VV$ to the real line $\RR$.
+
+
+
+```{prf:theorem} Level sets of real valued affine functions
+:label: res-la-aff-rv-level-set
+
+Let $\VV$ be a vector space. Let $h : \VV \to \RR$ be an
+affine function. Then, for any $c \in \RR$, the set
+$h^{-1}(c)$ is an affine set where
+
+$$
+h^{-1}(c) = \{ \bx \in \VV \ST h(\bx) = c \}.
+$$
+```
+
+```{prf:proof}
+We are given that $h : \VV \to \RR$ is affine.
+
+1. Let $c \in \RR$.
+1. If $h^{-1}(c)$ is empty, then it is affine and there is nothing to prove.
+   So assume that it is nonempty.
+1. Let $\bx, \by \in h^{-1}(c)$.
+1. Thus, $h(\bx) = h(\by) = c$.
+1. Let $t \in \FF$.
+1. Let $\bz = t \bx + (1-t) \by$.
+1. Then, by affine nature of $h$
+
+   $$
+   h(\bz) = h (t \bx + (1-t) \by) = t h(\bx) + (1-t) h(\by) = t c + (1 -t) c = c.
+   $$
+1. Thus, $\bz \in h^{-1}(c)$.
+1. Thus, for any $\bx, \by \in h^{-1}(c)$ and $t \in \FF$, 
+   $\bz = t \bx + (1-t) \by \in h^{-1}(c)$.
+1. Thus, $h^{-1}(c)$ is an affine set.
+```

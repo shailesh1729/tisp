@@ -330,11 +330,29 @@ where $\theta_i$ gives the proportion of contribution
 of each particle according to its mass.
 ```
 
+```{prf:remark} Convex combinations and unit simplex
+:label: rem-cvx-conv-comb-coef-unit-simplex
 
-````{prf:theorem}
+We recall that the unit simplex in $\RR^n$ is given by
+
+$$
+\Delta_n = \{ \bt \in \RR^n \ST  
+   \langle \bt, \bone \rangle = 1, \bt \succeq \bzero \}
+= \{\bt \in \RR^n \ST  t_1 + \dots + t_n = 1, t_1, \dots, t_n \geq 0 \}.
+$$
+Thus, the coefficients for convex combinations of $n$ points
+are drawn from $\Delta_n$.
+```
+
+````{prf:theorem} Closure under convex combinations
 :label: res-cvx-convex-set-convex-combinations
 
 A set is convex if and only if it contains all convex combinations of its points.
+
+Let $\VV$ be a real vector space and $C$ be a subset of $\VV$.
+Then, $C$ is convex if and only if for any $m \in \Nat$,
+for any $\bx_1, \dots, \bx_m \in C$, and for every $\bt \in \Delta_m$,
+$t_1 \bx_1 + \dots + t_m \bx_m \in C$. 
 ````
 
 ```{prf:proof}
@@ -497,6 +515,85 @@ that $\ConvexHull(S)$ contains all convex combinations of $S$.
 Some authors prefer to define $\ConvexHull(S)$ as the smallest convex
 set containing $S$. Both definitions are equivalent.
 
+
+```{prf:theorem} Carathéodory theorem
+:label: res-cvx-conv-hull-caratheodory
+
+Let $\VV$ be an $n$-dimensional real vector space. 
+Let $S \subseteq \VV$. Let $\bx \in \ConvexHull(S)$.
+
+Then, there exists a set of $n+1$ points $\bx_0, \dots, \bx_n \in S$
+such that 
+
+$$
+\bx \in \ConvexHull (\{ \bx_0, \dots, \bx_n\});
+$$
+i.e., there exists a $\bt \in \Delta_{n+1}$ such that 
+
+$$
+\bx = \sum_{i=0}^n t_i \bx_i.
+$$
+```
+
+```{prf:proof}
+We note that $\bx \in \ConvexHull(S)$.
+
+1. Thus, there exists a set of $k+1$ points in $S$
+   and $\bt \in \Delta_{k+1}$
+   such that
+
+   $$
+   \bx = \sum_{i=0}^k t_i \bx_i.
+   $$
+1. We can assume $t_i > 0$ for all $i=0, \dots, k$ 
+   since otherwise, we can drop the vectors corresponding
+   to the zero coefficients from the convex combination.
+1. If $k \leq n$, there is nothing to prove.
+1. Hence, consider the case where $k > n$.
+1. We now describe a process which can reduce the number
+   of points in the convex combination by one.
+1. The $k$ vectors $\bx_1 - \bx_0, \dots, \bx_k - \bx_0$ are 
+   linearly dependent as $k > n$ and $\VV$ is $n$-dimensional.
+1. Thus, there is a nontrivial linear combination of these 
+   vectors 
+
+   $$
+   r_1 (\bx_1 - \bx_0) + \dots + r_k (\bx_k - \bx_0) = \bzero.
+   $$
+1. Let $r_0 = -r_1 - \dots - r_k$. Then, we have a
+   nontrivial combination
+
+   $$
+   \sum_{i=0}^k r_i \bx_i = \bzero
+   $$
+   with $\sum r_i = 0$.
+1. In particular, there exists at least one index $j$ for which $r_j < 0$.
+1. Let $\alpha \geq 0$.
+1. Then,
+
+   $$
+   \bx = \sum_{i=0}^k t_i \bx_i + \alpha \sum_{i=0}^k r_i \bx_i
+   = \sum_{i=0}^k (t_i + \alpha r_i) \bx_i
+   $$
+   with $\sum (t_i + \alpha r_i) = \sum t_i + \alpha \sum r_i = 1$.
+1. Thus, it is a convex combination for $\bx$ if 
+   $t_i + \alpha r_i \geq 0$ for every $i=0, \dots, k$.
+1. Let 
+
+   $$
+   \alpha = \underset{i \ST r_i < 0}{\min}\left \{ - \frac{t_i}{r_i} \right \}.
+   $$
+1. $\alpha$ is well defined since there is at least one $r_j < 0$.
+   Let $j$ be the index for which $\alpha$ was obtained.
+1. Then, $t_j + \alpha r_j = 0$.
+1. Also, we can see that $t_i + \alpha r_i \geq 0$ for all $i=0,\dots,k$.
+1. Thus, we have found a convex combination for $\bx$ where
+   the coefficient for $\bx_j$ is 0.
+1. Thus, we have obtained a convex combination for $\bx$ with
+   $k-1$ points.
+1. Repeating this process up to $k-n$ times, we can obtain a convex combination
+   of $\bx$ consisting of $n+1$ or less points.
+```
 
 ## Dimension
 
@@ -681,6 +778,8 @@ the entire line segment between $-\bx$ and $\bx$.
 
 We can generalize convex combinations to include infinite sums.
 ````{prf:theorem}
+:label: res-cvx-infinite-convex-combination
+
 Let $\theta_1, \theta_2, \dots$ satisfy
 
 $$
@@ -698,6 +797,8 @@ if the series converges.
 
 We can generalize it further to density functions.
 ````{prf:theorem}
+:label: res-cvx-convex-density
+
 Let $p : \VV \to \RR$ satisfy $p(x) \geq 0$ for all  $x \in C$
 and
 
@@ -1258,7 +1359,8 @@ We now show that $t_1 C + t_2 C \subseteq (t_1 + t_2)C$.
 1. Define $t = t_1 + t_2 > 0$ and $r = \frac{t_1}{t}$.
 1. Then, $1-r = \frac{t_2}{t}$.
 1. Then, since $C$ is convex, hence $r C + (1-r) C \subseteq C$.
-1. Multiplying by $t$ on both sides, we get: $ r C + (1-r)C \subseteq t C$. 
+1. Multiplying by $t$ on both sides, we get: 
+   $t_1 C + t_2C \subseteq (t_1 + t_2) C$. 
 ```
 
 For the special case of $t_1 = r$ and $t_2 = 1 - r$ with $r \in [0,1]$, we get:
@@ -1430,3 +1532,124 @@ See {prf:ref}`res-cvx-convex-cross-section-cone`
 and discussion thereafter.
 
 
+### Cartesian Product/Direct Sum
+
+```{prf:theorem} Direct sum of convex sets
+:label: res-cvx-convex-set-direct-sum
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $C \subseteq \VV$ and $D \subseteq \WW$ be convex
+subsets of $\VV$ and $\WW$ respectively.
+Then, $C \oplus D$ is a convex subset of $\VV \oplus \WW$.
+
+More generally, if $\VV_1, \dots, \VV_k$ are real vector spaces
+and $C_i \subseteq \VV_i$ are convex subsets for $i=1,\dots,k$, then
+$C = C_1 \oplus \dots \oplus C_k$ is convex in
+the direct sum of vector spaces
+$\VV_1 \oplus \dots \oplus \VV_k$.
+```
+
+```{prf:proof}
+If either $C$ or $D$ is empty, then $C \oplus D$ is empty,
+hence convex. We shall thus assume that both $C$ and $D$ are
+nonempty.
+
+1. Let $\bz_1, \bz_2 \in C \oplus D$ and $t \in (0, 1)$.
+1. Then, $\bz_1 = (\bx_1, \by_1)$ and $\bz_2 = (\bx_2, \by_2)$ 
+   such that $\bx_1, \bx_2 \in C$ and $\by_1, \by_2 \in D$.
+1. Since $C$ and $D$ are convex, hence
+   $\bx = t \bx_1 + (1-t) \bx_2 \in C$ 
+   and $\by = t \by_1 + (1- t) \by_2 \in D$.
+1. Now, 
+   
+   $$
+   \bz &= t \bz_1 + (1 - t) \bz_2\\ 
+   &= t(\bx_1, \by_1) + (1-t)(\bx_2, \by_2)\\
+   &= (t \bx_1 + (1-t) \bx_2, t \by_1 + (1- t) \by_2)\\
+   &= (\bx, \by).
+   $$
+1. Since $\bx \in C$ and $\by \in D$, 
+   hence $\bz = (\bx, \by)\in C \oplus D$.
+1. Thus, $C \oplus D$ is closed under convex combination.
+1. Thus, $C \oplus D$ is convex.
+
+The generalization for multiple real vector spaces is
+easily verifiable through induction.
+```
+
+
+```{prf:theorem} Projection of a direct sum
+:label: res-cvx-convex-set-direct-sum-projection
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $C \subseteq \VV$ and $D \subseteq \WW$.
+Assume that $C \oplus D$ is a convex subset of $\VV \oplus \WW$.
+Then, $C$ and $D$ are convex subsets of $\VV$ and $\WW$ respectively.
+
+More generally, if $\VV_1, \dots, \VV_k$ are real vector spaces
+and $C_i \subseteq \VV_i$ are subsets for $i=1,\dots,k$, such that
+$C = C_1 \oplus \dots \oplus C_k$ is convex in
+the direct sum of vector spaces
+$\VV_1 \oplus \dots \oplus \VV_k$;
+then $C_i$ are convex subsets of $\VV_i$ for $i=1,\dots,k$.
+```
+
+```{prf:proof}
+Consider the case of two vector spaces $\VV$ and $\WW$.
+
+1. Let $\bx_1, \bx_2 \in C$ and $t \in (0,1)$.
+1. Pick any $\by \in D$.
+1. Then, $(\bx_1, \by), (\bx_2, \by) \in C \oplus D$.
+1. Since $C \oplus D$ is convex, hence 
+   
+   $$
+   t (\bx_1, \by) + (1-t) (\bx_2, \by)
+   = (t \bx_1 + (1-t) \bx_2, \by) \in C \oplus D.
+   $$
+1. Thus, $t \bx_1 + (1-t) \bx_2 \in C$.
+1. Thus, $C$ is convex.
+1. Similarly $D$ is also convex.
+
+The argument can be extended by mathematical induction for
+multiple vector spaces.
+```
+
+## Extreme Points
+
+```{prf:definition} Extreme points of convex sets
+:label: def-cvx-extreme-point
+
+Let $VV$ be a real vector space and let $C$ 
+be a subset of $\VV$.
+
+A point $\bx \in S$ is called an *extreme point* 
+of $S$ if there do not exist $\bx_1, \bx_2 \in S$
+with $\bx_1 \neq \bx_2$ and $t \in (0, 1)$ such that
+
+$$
+\bx = t \bx_1 + (1-t) \bx_2.
+$$
+In other words, $\bx$ cannot be expressed as a nontrivial convex
+combination of two different points in $S$.
+
+The set of extreme points of a set $S$ is denoted by
+$\extreme S$.
+```
+
+
+
+```{prf:example} Extreme points
+:label: ex-cvx-extreme-point
+
+1. Let $C = [0,1] \subseteq \RR$.
+   Then, $0$ and $1$ are extreme points of $C$.
+1. Let $C = (0, 1) \subseteq \RR$.
+   $C$ doesn't have any extreme point.
+1. In a triangle, the three vertices are extreme points.
+1. In a convex polytope, all the vertices are extreme points.
+```
+
+A more intricate example of the set
+of extreme points for the set
+$P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+is discussed in {prf:ref}`res-cvx-cone-bfs-extreme`.

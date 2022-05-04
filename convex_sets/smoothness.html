@@ -1,0 +1,1834 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.14. Smoothness &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Convex Optimization" href="../cvxopt/chapter.html" />
+    <link rel="prev" title="6.13. Conjugate Functions" href="conjugate_functions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sym_matrices.html">
+     4.8. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.9. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.10. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.11. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     6.5. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_functions.html">
+     6.6. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable.html">
+     6.7. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="function_ops.html">
+     6.8. Convexity Preserving Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="relint.html">
+     6.9. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="separation.html">
+     6.10. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="continuity.html">
+     6.11. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="subgradients.html">
+     6.12. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="conjugate_functions.html">
+     6.13. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.14. Smoothness
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   7. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     7.2. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     7.3. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     7.4. Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     7.5. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     7.6. Quadratic Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     7.7. Differentiable Objective Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   8. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     8.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     8.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   9. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../selected/chapter.html">
+   11. Selected Functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/convex_sets/smoothness.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fconvex_sets/smoothness.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#l-smooth-functions">
+   6.14.1. L-Smooth Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#descent-lemma">
+     6.14.1.1. Descent Lemma
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#characterization-of-l-smooth-functions">
+     6.14.1.2. Characterization of
+     <span class="math notranslate nohighlight">
+      \(L\)
+     </span>
+     -Smooth Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#second-order-characterization">
+     6.14.1.3. Second Order Characterization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strong-convexity">
+   6.14.2. Strong Convexity
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sum-rule">
+     6.14.2.1. Sum Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-order-characterization">
+     6.14.2.2. First Order Characterization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Smoothness</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#l-smooth-functions">
+   6.14.1. L-Smooth Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#descent-lemma">
+     6.14.1.1. Descent Lemma
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#characterization-of-l-smooth-functions">
+     6.14.1.2. Characterization of
+     <span class="math notranslate nohighlight">
+      \(L\)
+     </span>
+     -Smooth Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#second-order-characterization">
+     6.14.1.3. Second Order Characterization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strong-convexity">
+   6.14.2. Strong Convexity
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sum-rule">
+     6.14.2.1. Sum Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-order-characterization">
+     6.14.2.2. First Order Characterization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="smoothness">
+<h1><span class="section-number">6.14. </span>Smoothness<a class="headerlink" href="#smoothness" title="Permalink to this headline">¶</a></h1>
+<p>Primary references for this section are
+<span id="id1">[<a class="reference internal" href="../bib.html#id11" title="Amir Beck. First-order methods in optimization. SIAM, 2017.">4</a>]</span>.</p>
+<div class="section" id="l-smooth-functions">
+<h2><span class="section-number">6.14.1. </span>L-Smooth Functions<a class="headerlink" href="#l-smooth-functions" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvxf-l-smooth-func">
+<p class="admonition-title"><span class="caption-number">Definition 6.71 </span> (L-smooth functions)</p>
+<div class="definition-content section" id="proof-content">
+<p>For some <span class="math notranslate nohighlight">\(L \geq 0\)</span>, a function
+<span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> is called <span class="math notranslate nohighlight">\(L\)</span>-<em>smooth</em> over a set
+<span class="math notranslate nohighlight">\(D \subseteq \VV\)</span> if it is differentiable over <span class="math notranslate nohighlight">\(D\)</span>
+and satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\| \nabla f(\bx) - \nabla f(\by)\|_* \leq L \| \bx - \by \| \Forall
+\bx, \by \in D.
+\]</div>
+<p>The constant <span class="math notranslate nohighlight">\(L\)</span> is called the <em>smoothness parameter</em>.</p>
+</div>
+</div><div class="docutils">
+<ul class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is differentiable over <span class="math notranslate nohighlight">\(D\)</span>, hence <span class="math notranslate nohighlight">\(D \subseteq \interior \dom f\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(L\)</span>-smooth over the entire <span class="math notranslate nohighlight">\(\VV\)</span>, we simply say that <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(L\)</span>-smooth.</p></li>
+<li><p><span class="math notranslate nohighlight">\(L\)</span>-smooth functions are also known as <em>functions with Lipschitz gradient with constant</em> <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+<li><p>The class of functions which are <span class="math notranslate nohighlight">\(L\)</span>-smooth over a set <span class="math notranslate nohighlight">\(D\)</span> is denoted by <span class="math notranslate nohighlight">\(C_L^{1,1}(D)\)</span>.</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(D = \VV\)</span>, then the class is simply denoted as <span class="math notranslate nohighlight">\(C_L^{1,1}\)</span>.</p></li>
+<li><p>The class of functions which are <span class="math notranslate nohighlight">\(L\)</span>-smooth for some <span class="math notranslate nohighlight">\(L \geq 0\)</span> (but <span class="math notranslate nohighlight">\(L\)</span> may not be known),
+is denoted by <span class="math notranslate nohighlight">\(C^{1,1}\)</span>.</p></li>
+<li><p>By definition, if a function is <span class="math notranslate nohighlight">\(L_1\)</span>-smooth, then it is <span class="math notranslate nohighlight">\(L_2\)</span>-smooth for
+every <span class="math notranslate nohighlight">\(L_2 \geq L_1\)</span>.</p></li>
+<li><p>Thus, it is often useful to identify the smallest possible value of <span class="math notranslate nohighlight">\(L\)</span>
+for which a function is <span class="math notranslate nohighlight">\(L\)</span>-smooth.</p></li>
+</ul>
+</div>
+<div class="proof example admonition" id="ex-cvxf-affine-func-zero-smooth">
+<p class="admonition-title"><span class="caption-number">Example 6.76 </span> (Zero smoothness of affine functions)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bb \in \VV^*\)</span> and <span class="math notranslate nohighlight">\(c \in \RR\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \langle \bx, \bb \rangle + c.
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(0\)</span>-smooth.</p>
+<p>To see this, we note that <span class="math notranslate nohighlight">\(\nabla f(\bx) = \bb\)</span>.
+Consequently,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \nabla f(\bx) - \nabla f(\by) \|_*  = \| \bb - \bb \|_* = \| \bzero \|_* = 0
+\leq 0 \| \bx - \by \|.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-cvxf-quadratic-smoothness">
+<p class="admonition-title"><span class="caption-number">Theorem 6.208 </span> (Smoothness of quadratic functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \SS^n\)</span>, <span class="math notranslate nohighlight">\(\bb \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(c \in \RR\)</span>.
+Assume that <span class="math notranslate nohighlight">\(\RR^n\)</span> is endowed with <span class="math notranslate nohighlight">\(\ell_p\)</span>-norm
+for some <span class="math notranslate nohighlight">\(1 \leq p \leq \infty\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c.
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(L\)</span>-smooth with <span class="math notranslate nohighlight">\(L = \| \bA \|_{p, q}\)</span>
+where <span class="math notranslate nohighlight">\(q \in [1,\infty]\)</span> is the <a class="reference internal" href="../basic_real_analysis/inequalities.html#def-bra-conjugate-exponent">conjugate exponent</a>
+satisfying</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{p} + \frac{1}{q} = 1
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(\| \bA \|_{p, q}\)</span> is the induced norm given by</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{p, q} = \sup \{ \| \bA \bx \|_q \ST \| \bx \|_p \leq 1 \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that the dual norm of <span class="math notranslate nohighlight">\(\ell_p\)</span> norm is the <span class="math notranslate nohighlight">\(\ell_q\)</span> norm.
+Now,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \| \nabla f(\bx) - \nabla f(\by)\|_* \\
+&amp;= \| \nabla f(\bx) - \nabla f(\by)\|_q \\
+&amp;= \| \bA \bx + \bb - \bA \by - \bb \|_q \\
+&amp;= \| \bA \bx - \bA \by \|_q \\
+&amp;\leq  \| \bA \|_{p, q} \| \bx - \by \|_p.
+\end{split}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is  <span class="math notranslate nohighlight">\(\| \bA \|_{p, q}\)</span> smooth.</p>
+<p>We next show that <span class="math notranslate nohighlight">\(\| \bA \|_{p, q}\)</span> is the smallest smoothness
+parameter for <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<ol>
+<li><p>Assume that <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(L\)</span> smooth for some <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+<li><p>By definition of <span class="math notranslate nohighlight">\(\| \bA \|_{p, q}\)</span>, there exists a vector
+<span class="math notranslate nohighlight">\(\tilde{\bx}\)</span> such that <span class="math notranslate nohighlight">\(\| \tilde{\bx} \|_p = 1\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bA \tilde{\bx} \|_q = \| \bA \|_{p, q} \| \tilde{\bx} \|_p
+   = \| \bA \|_{p, q}.
+   \]</div>
+</li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \| \bA \|_{p, q} &amp;= \| \bA \tilde{\bx} \|_q\\
+   &amp;=  \| \bA \tilde{\bx} + \bb - \bA \bzero - \bb \|_q\\
+   &amp;= \| \nabla f(\tilde{\bx}) - \nabla f(\bzero) \|_q \\
+   &amp;\leq L \| \tilde{\bx} - \bzero \|_p = L.
+   \end{split}\]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \bA \|_{p, q} \leq L\)</span>.</p></li>
+</ol>
+<p>Thus, <span class="math notranslate nohighlight">\(\| \bA \|_{p, q}\)</span> is indeed the smallest smoothness parameter for <span class="math notranslate nohighlight">\(L\)</span>.</p>
+</div>
+<div class="section" id="descent-lemma">
+<h3><span class="section-number">6.14.1.1. </span>Descent Lemma<a class="headerlink" href="#descent-lemma" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvxf-smooth-descent-lemma">
+<p class="admonition-title"><span class="caption-number">Theorem 6.209 </span> (Descent lemma)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be <span class="math notranslate nohighlight">\(L\)</span>-smooth for some <span class="math notranslate nohighlight">\(L \geq 0\)</span> over
+some convex set <span class="math notranslate nohighlight">\(D\)</span>. Then for any <span class="math notranslate nohighlight">\(\bx, \by \in D\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+f(\by) \leq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{L}{2} \| \bx - \by \|^2. 
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. we proceed as follows:</p>
+<ol>
+<li><p>By the fundamental theorem of calculus</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) - f(\bx) = \int_0^1 \langle \by - \bx, \nabla f(\bx + t(\by - \bx)) \rangle dt.
+   \]</div>
+</li>
+<li><p>By adding and subtracting <span class="math notranslate nohighlight">\(\langle \by - \bx, \nabla f(\bx) \rangle\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) - f(\bx) = \langle \by - \bx, \nabla f(\bx) \rangle + 
+    \int_0^1 \langle \by - \bx, \nabla f(\bx + t(\by - \bx))  - \nabla f(\bx) \rangle dt.
+   \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; | f(\by) - f(\bx) -  \langle \by - \bx, \nabla f(\bx) \rangle | \\
+   &amp;= \left | 
+   \int_0^1 \langle \by - \bx, \nabla f(\bx + t(\by - \bx))  - \nabla f(\bx) \rangle dt 
+   \right | \\
+   &amp;\leq  \int_0^1 | \langle \by - \bx, \nabla f(\bx + t(\by - \bx))  - \nabla f(\bx) \rangle | dt \\
+   &amp;\leq \int_0^1 \| \by - \bx \|  \| \nabla f(\bx + t(\by - \bx))  - \nabla f(\bx) \|_* dt
+   &amp; \text{ (a) } \\
+   &amp;\leq \int_0^1 \| \by - \bx \|  tL \| \by - \bx \| dt 
+   &amp; \text { (b) } \\
+   &amp;= \int_0^1 tL  \| \by - \bx \|^2  dt \\
+   &amp;= L  \| \by - \bx \|^2 \int_0^1  t dt \\
+   &amp;= \frac{L}{2} \| \by - \bx \|^2.
+   \end{split}\]</div>
+<ul class="simple">
+<li><p>(a) is an application of Generalized Cauchy Schwartz inequality (<a class="reference internal" href="../la/dual_spaces.html#res-la-ip-gen-cs-ineq">Theorem 4.108</a>}).</p></li>
+<li><p>(b) is the application of <span class="math notranslate nohighlight">\(L\)</span>-smoothness of <span class="math notranslate nohighlight">\(f\)</span> (<a class="reference internal" href="#def-cvxf-l-smooth-func">Definition 6.71</a>).</p></li>
+</ul>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; | f(\by) - f(\bx) -  \langle \by - \bx, \nabla f(\bx) \rangle |  
+   \leq \frac{L}{2} \| \by - \bx \|^2 \\
+   &amp; \implies f(\by) - f(\bx) -  \langle \by - \bx, \nabla f(\bx) \rangle  
+   \leq \frac{L}{2} \| \by - \bx \|^2 \\
+   &amp; \implies f(\by) \leq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle 
+   + \frac{L}{2} \| \by - \bx \|^2.
+   \end{split}\]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="characterization-of-l-smooth-functions">
+<h3><span class="section-number">6.14.1.2. </span>Characterization of <span class="math notranslate nohighlight">\(L\)</span>-Smooth Functions<a class="headerlink" href="#characterization-of-l-smooth-functions" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvxf-smoothness-charac">
+<p class="admonition-title"><span class="caption-number">Theorem 6.210 </span> (Characterization of <span class="math notranslate nohighlight">\(L\)</span>-smooth functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be convex and differentiable over <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(L &gt; 0\)</span>. The following claims are equivalent:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(L\)</span>-smooth.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(\by) \leq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{L}{2} \| \bx - \by \|^2 \Forall \bx, \by \in \VV\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(\by) \geq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{1}{2L} \| \nabla f (\bx) - \nabla f(\by) \|_*^2 \Forall \bx, \by \in \VV\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle \bx - \by, \nabla f (\bx) - \nabla f(\by) \rangle  \geq \frac{1}{L} \| \nabla f (\bx) - \nabla f(\by) \|_*^2 \Forall \bx, \by \in \VV\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(t \bx + (1-t) \by) \geq t f(\bx) + (1-t) f(\by) - \frac{L}{2} t (1 - t) \| \bx - \by \|^2  \Forall \bx, \by \in \VV, t \in [0, 1]\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. (1) <span class="math notranslate nohighlight">\(\implies\)</span> (2). This is a direct implication of the descent lemma
+(<a class="reference internal" href="#res-cvxf-smooth-descent-lemma">Theorem 6.209</a>).</p>
+<p>(2) <span class="math notranslate nohighlight">\(\implies\)</span> (3)</p>
+<ol>
+<li><p>We are given that (2) is satisfied.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\nabla f(\bx) = \nabla f(\by)\)</span>, then the inequality is trivial
+due to the convexity of <span class="math notranslate nohighlight">\(f\)</span>.
+Hence, we consider the case where <span class="math notranslate nohighlight">\(\nabla f(\bx) \neq \nabla f(\by)\)</span>.</p></li>
+<li><p>Fix a <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>.</p></li>
+<li><p>Consider a function <span class="math notranslate nohighlight">\(g_{\bx} : \VV \to \RR\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+   g_{\bx}(\by) = f(\by) - f(\bx)  - \langle \by - \bx, \nabla f(\bx) \rangle.
+   \]</div>
+</li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla g_{\bx}(\by)  = \nabla f(\by) - \nabla f(\bx).
+   \]</div>
+</li>
+<li><p>By hypothesis in property (2), for any <span class="math notranslate nohighlight">\(\bz \in \VV\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bz) \leq f(\by) + \langle \bz - \by, \nabla f(\by) \rangle + \frac{L}{2} \| \bz - \by \|^2.
+   \]</div>
+</li>
+<li><p>Now,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; g_{\bx}(\bz) \\
+   &amp;= f(\bz) - f(\bx)  - \langle \bz - \bx, \nabla f(\bx) \rangle \\
+   &amp;\leq f(\by) + \langle \bz - \by, \nabla f(\by) \rangle + \frac{L}{2} \| \bz - \by \|^2
+   - f(\bx)  - \langle \bz - \bx, \nabla f(\bx) \rangle\\
+   &amp;= f(\by) - f(\bx)  - \langle \bz - \bx, \nabla f(\bx) \rangle
+   + \langle \bz - \by, \nabla f(\bx) \rangle - \langle \bz - \by, \nabla f(\bx) \rangle\\
+   &amp;+ \langle \bz - \by, \nabla f(\by) \rangle + \frac{L}{2} \| \bz - \by \|^2\\
+   &amp;= f(\by) - f(\bx)  - \langle \by - \bx, \nabla f(\bx) \rangle
+   + \langle \bz - \by, \nabla f(\by) - \nabla f(\bx) \rangle + \frac{L}{2} \| \bz - \by \|^2\\
+   &amp;= g_{\bx}(\by) + \langle \bz - \by, \nabla g_{\bx}(\by) \rangle + \frac{L}{2} \| \bz - \by \|^2.
+   \end{split}\]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g_{\bx}\)</span> also satisfies the inequality in property (2).</p></li>
+<li><p>We note in particular that <span class="math notranslate nohighlight">\(\nabla g_{\bx} (\bx) = \nabla f(\bx) - \nabla f(\bx) = \bzero\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(g_{\bx}\)</span> is convex, hence <span class="math notranslate nohighlight">\(\bx\)</span> is the global minimizer of <span class="math notranslate nohighlight">\(g_{\bx}\)</span>.</p></li>
+<li><p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+   g_{\bx}(\bx) \leq g_{\bx}(\bz) \Forall \bz \in \VV.
+   \]</div>
+</li>
+<li><p>We can also see that <span class="math notranslate nohighlight">\(g_{\bx}(\bx) = f(\bx) - f(\bx)  - \langle \bx - \bx, \nabla f(\bx) \rangle = 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in \VV\)</span></p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> be the unit norm vector satisfying
+<span class="math notranslate nohighlight">\(\| \nabla g_{\bx}(\by) \|_* = \langle \bv , \nabla g_{\bx}(\by) \rangle\)</span>.</p></li>
+<li><p>Choose</p>
+<div class="math notranslate nohighlight">
+\[
+   \bz = \by - \frac{\| \nabla g_{\bx}(\by) \|_*}{L} \bv.
+   \]</div>
+</li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   0 = g_{\bx}(\bx) \leq g_{\bx}(\bz) = g_{\bx}\left (\by - \frac{\| \nabla g_{\bx}(\by) \|_*}{L} \bv \right ).
+   \]</div>
+</li>
+<li><p>Using property (2) on <span class="math notranslate nohighlight">\(g_{\bx}(\bz)\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   0 &amp;\leq g_{\bx}(\bz) \\
+   &amp;\leq g_{\bx}(\by) + \langle \bz - \by, \nabla g_{\bx}(\by) \rangle + \frac{L}{2} \| \bz - \by \|^2 \\
+   &amp;= g_{\bx}(\by) - \frac{\| \nabla g_{\bx}(\by) \|_*}{L} \langle \bv, \nabla g_{\bx}(\by) \rangle 
+   + \frac{L}{2} \left \| \frac{\| \nabla g_{\bx}(\by) \|_*}{L} \bv \right \|^2 \\
+   &amp;= g_{\bx}(\by) - \frac{\| \nabla g_{\bx}(\by) \|_*}{L} \| \nabla g_{\bx}(\by) \|_* 
+   + \frac{1}{2 L}  \| \nabla g_{\bx}(\by) \|_*^2 \\
+   &amp;= g_{\bx}(\by)
+   - \frac{1}{2 L}  \| \nabla g_{\bx}(\by) \|_*^2 \\
+   &amp;= f(\by) - f(\bx)  - \langle \by - \bx, \nabla f(\bx) \rangle
+   - \frac{1}{2 L}  \| \nabla f(\by) - \nabla f(\bx) \|_*^2.
+   \end{split}\]</div>
+</li>
+<li><p>Simplifying this, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) \geq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{1}{2 L}  \| \nabla f(\by) - \nabla f(\bx) \|_*^2
+   \]</div>
+<p>as desired.</p>
+</li>
+</ol>
+<p>(3) <span class="math notranslate nohighlight">\(\implies\)</span> (4)</p>
+<ol>
+<li><p>For <span class="math notranslate nohighlight">\(\bx, \by\)</span>, the property (3) gives us:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) \geq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle + \frac{1}{2 L}  \| \nabla f(\by) - \nabla f(\bx) \|_*^2.
+   \]</div>
+</li>
+<li><p>For <span class="math notranslate nohighlight">\(\by, \bx\)</span>, the property (3) gives us:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \geq f(\by) + \langle \bx - \by, \nabla f(\by) \rangle + \frac{1}{2 L}  \| \nabla f(\bx) - \nabla f(\by) \|_*^2.
+   \]</div>
+</li>
+<li><p>Adding the two inequalities and canceling the term <span class="math notranslate nohighlight">\(f(\bx) + f(\by)\)</span> gives us</p>
+<div class="math notranslate nohighlight">
+\[
+   0 \geq \langle \bx - \by, \nabla f(\by) - f(\bx) \rangle + \frac{1}{L}  \| \nabla f(\bx) - \nabla f(\by) \|_*^2.
+   \]</div>
+</li>
+<li><p>Rearranging, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx - \by, \nabla f(\bx) - f(\by) \rangle \geq \frac{1}{L}  \| \nabla f(\bx) - \nabla f(\by) \|_*^2
+   \]</div>
+<p>as desired.</p>
+</li>
+</ol>
+<p>(4) <span class="math notranslate nohighlight">\(\implies\)</span> (1)</p>
+<ol>
+<li><p>When <span class="math notranslate nohighlight">\(\nabla f(\bx) = \nabla f(\by)\)</span>, then the Lipschitz condition in (1) is trivial.
+Hence, we consider the case where <span class="math notranslate nohighlight">\(\nabla f(\bx) \neq \nabla f(\by)\)</span>.</p></li>
+<li><p>By generalized Cauchy Schwartz inequality (<a class="reference internal" href="../la/dual_spaces.html#res-la-ip-gen-cs-ineq">Theorem 4.108</a>)</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx - \by, \nabla f(\bx) - f(\by) \rangle \leq \| \bx - \by \| \| f(\bx) - f(\by) \|_*.
+   \]</div>
+</li>
+<li><p>Thus, combining with hypothesis (4), we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{1}{L}  \| \nabla f(\bx) - \nabla f(\by) \|_*^2 \leq \| \bx - \by \| \| f(\bx) - f(\by) \|_*.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\nabla f(\bx) \neq \nabla f(\by)\)</span>, hence <span class="math notranslate nohighlight">\(\| f(\bx) - f(\by) \|_* &gt; 0\)</span>.</p></li>
+<li><p>Canceling it from both sides, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \nabla f(\bx) - \nabla f(\by) \|_* \leq L \| \bx - \by \|
+   \]</div>
+<p>as desired.</p>
+</li>
+</ol>
+<p>We have shown so far that (1), (2), (3) and (4) are equivalent statements.
+We are left with showing that (5) is equivalent to the other statements.</p>
+<p>(2) <span class="math notranslate nohighlight">\(\implies\)</span> (5)</p>
+<ol>
+<li><p>Pick <span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span> and <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz = t \bx + (1-t) \by\)</span>.</p></li>
+<li><p>By hypothesis (2),</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; f(\bx) \leq f(\bz) + \langle \bx - \bz, \nabla f(\bz) \rangle + \frac{L}{2} \| \bx - \bz \|^2;\\
+   &amp; f(\by) \leq f(\bz) + \langle \by - \bz, \nabla f(\bz) \rangle + \frac{L}{2} \| \by - \bz \|^2.
+   \end{split}\]</div>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\bx - \bz = (1-t) (\bx - \by)\)</span> and <span class="math notranslate nohighlight">\(\by - \bz = t (\by - \bx)\)</span>.</p></li>
+<li><p>Thus, the previous two inequalities are same as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; f(\bx) \leq f(\bz) + (1-t)\langle \bx - \by, \nabla f(\bz) \rangle + \frac{L (1-t)^2}{2} \| \bx - \by \|^2;\\
+   &amp; f(\by) \leq f(\bz) + t\langle \by - \bx, \nabla f(\bz) \rangle + \frac{L t^2}{2} \| \bx - \by \|^2.
+   \end{split}\]</div>
+</li>
+<li><p>Multiplying the first inequality by <span class="math notranslate nohighlight">\(t\)</span>, the second by <span class="math notranslate nohighlight">\((1-t)\)</span> and adding, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   t f(\bx) + (1-t) f(\by) \leq f(\bz) + \frac{L t(1-t)}{2} \| \bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>Rearranging, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   f(t \bx + (1-t) \by) = f(\bz) \geq t f(\bx) + (1-t) f(\by)  -  \frac{L }{2} t(1-t) \| \bx - \by \|^2.
+   \]</div>
+</li>
+</ol>
+<p>(5) <span class="math notranslate nohighlight">\(\implies\)</span> (2)</p>
+<ol>
+<li><p>Pick <span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span> and <span class="math notranslate nohighlight">\(t \in (0,1)\)</span>.</p></li>
+<li><p>By hypothesis in inequality (5)</p>
+<div class="math notranslate nohighlight">
+\[
+   f(t \bx + (1-t) \by) \geq t f(\bx) + (1-t) f(\by)  -  \frac{L }{2} t(1-t) \| \bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>Rearranging the terms, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; (1-t) f(\by) \leq f(t \bx + (1-t) \by) - t f(\bx) + \frac{L }{2} t(1-t) \| \bx - \by \|^2 \\
+   &amp;\iff (1-t) f(\by) \leq f(t \bx + (1-t) \by) - f(\bx) + (1 - t) f(\bx) + \frac{L }{2} t(1-t) \| \bx - \by \|^2 \\
+   &amp;\iff f(\by) \leq f(\bx) + \frac{f(t \bx + (1-t) \by) - f(\bx)}{1-t} + \frac{L }{2} t \| \bx - \by \|^2.
+   \end{split}\]</div>
+<p>Division by <span class="math notranslate nohighlight">\((1-t)\)</span> is fine since <span class="math notranslate nohighlight">\((1-t) \in (0, 1)\)</span>.</p>
+</li>
+<li><p>Recalling the definition of directional derivative (<a class="reference internal" href="subgradients.html#def-cvxf-directional-derivative">Definition 6.67</a>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp;\lim_{t \to 1^-}  \frac{f(t \bx + (1-t) \by) - f(\bx)}{1-t} \\
+   &amp;= \lim_{s \to 0^+} \frac{f( (1-s) \bx + s \by) - f(\bx)}{s} \\
+   &amp;= \lim_{s \to 0^+} \frac{f( \bx + s (\by - \bx) ) - f(\bx)}{s}\\
+   &amp;= f'(\bx; \by - \bx).
+   \end{split}\]</div>
+</li>
+<li><p>Since the previous inequality is valid for every <span class="math notranslate nohighlight">\(t \in (0,1)\)</span>,
+taking the limit to <span class="math notranslate nohighlight">\(t \to 1^-\)</span> on the R.H.S., we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) \leq f(\bx) + f'(\bx; \by - \bx) +  \frac{L }{2} \| \bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>Recall from <a class="reference internal" href="subgradients.html#res-cvxf-grad-dir-der">Theorem 6.173</a> that
+<span class="math notranslate nohighlight">\(f'(\bx; \by - \bx) = \langle \by - \bx, \nabla f(\bx) \rangle\)</span>.</p></li>
+<li><p>Thus, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) \leq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle +  \frac{L }{2} \| \bx - \by \|^2.
+   \]</div>
+<p>as desired.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="second-order-characterization">
+<h3><span class="section-number">6.14.1.3. </span>Second Order Characterization<a class="headerlink" href="#second-order-characterization" title="Permalink to this headline">¶</a></h3>
+<p>We now restrict our attention to the vector space <span class="math notranslate nohighlight">\(\RR^n\)</span> equipped with
+an <span class="math notranslate nohighlight">\(\ell_p\)</span> norm with <span class="math notranslate nohighlight">\(p \geq 1\)</span>.</p>
+<div class="proof theorem admonition" id="res-cvxf-smoothness-twice-diff">
+<p class="admonition-title"><span class="caption-number">Theorem 6.211 </span> (<span class="math notranslate nohighlight">\(L\)</span>-smoothness and the boundedness of the Hessian)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a twice continuously differentiable function over <span class="math notranslate nohighlight">\(\RR^n\)</span>.
+Then, for any <span class="math notranslate nohighlight">\(L \geq 0\)</span>, the following claims are equivalent:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(L\)</span>-smooth w.r.t. the <span class="math notranslate nohighlight">\(\ell_p\)</span>-norm (<span class="math notranslate nohighlight">\(p \in [1, \infty]\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\| \nabla^2 f(\bx)\|_{p, q} \leq L\)</span> for any <span class="math notranslate nohighlight">\(\bx \in \RR^n\)</span> where <span class="math notranslate nohighlight">\(q \geq 1\)</span> satisfies
+<span class="math notranslate nohighlight">\(\frac{1}{p} + \frac{1}{q} = 1\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. (2) <span class="math notranslate nohighlight">\(\implies\)</span> (1)</p>
+<ol>
+<li><p>We are given that <span class="math notranslate nohighlight">\(\| \nabla^2 f(\bx)\|_{p, q} \leq L\)</span> for any <span class="math notranslate nohighlight">\(\bx \in \RR^n\)</span>.</p></li>
+<li><p>By the fundamental theorem of calculus</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \nabla f(\by) - \nabla f(\bx) &amp;= \int_0^1 \nabla^2 f(\bx + t(\by - \bx)) (\by - \bx) dt \\
+   &amp;=  \left (\int_0^1 \nabla^2 f(\bx + t(\by - \bx)) dt \right )  (\by - \bx).
+   \end{split}\]</div>
+</li>
+<li><p>Taking the (dual)-norm on both sides</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \| \nabla f(\by) - \nabla f(\bx)  \|_q
+   &amp;= \left \| \left (
+      \int_0^1 \nabla^2 f(\bx + t(\by - \bx)) dt \right )  (\by - \bx) 
+      \right \|_q \\
+    &amp;\leq \left \| \int_0^1 \nabla^2 f(\bx + t(\by - \bx)) dt \right \|_{p, q}
+    \| \by - \bx \|_p \\
+    &amp;\leq \left ( \int_0^1  \|  \nabla^2 f(\bx + t(\by - \bx)) \|_{p, q} dt \right ) 
+    \| \by - \bx \|_p \\
+    &amp;\leq \left ( \int_0^1 L dt \right ) \| \by - \bx \|_p \\
+    &amp;= L \| \by - \bx \|_p.
+   \end{split}\]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \nabla f(\by) - \nabla f(\bx)  \|_q  \leq L \| \by - \bx \|_p\)</span> as desired.</p></li>
+</ol>
+<p>(1) <span class="math notranslate nohighlight">\(\implies\)</span> (2)</p>
+<ol>
+<li><p>We are given that <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(L\)</span> smooth with <span class="math notranslate nohighlight">\(\ell_p\)</span> norm.</p></li>
+<li><p>By fundamental theorem of calculus, for any <span class="math notranslate nohighlight">\(\bd \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(s &gt; 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla f(\bx + s \bd) - \nabla f(\bx) = \int_0^s \nabla^2 f(\bx + t \bd) \bd dt.
+   \]</div>
+</li>
+<li><p>Taking <span class="math notranslate nohighlight">\(q\)</span> norm on both sides</p>
+<div class="math notranslate nohighlight">
+\[
+   \left \| \left ( \int_0^s \nabla^2 f(\bx + t \bd)  dt \right ) \bd \right \|_q 
+   = \| \nabla f(\bx + s \bd) - \nabla f(\bx) \|_q
+   \leq L \|\bx + s \bd - \bx \|_p = s L \| \bd \|_p.
+   \]</div>
+</li>
+<li><p>Dividing by <span class="math notranslate nohighlight">\(s\)</span> on both sides and taking the limit <span class="math notranslate nohighlight">\(s \to 0^+\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \nabla^2 f(\bx) \bd \|_q \leq L \| \bd \|_p. 
+   \]</div>
+</li>
+<li><p>Since this is valid for every <span class="math notranslate nohighlight">\(\bd \in \RR^n\)</span>, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \nabla^2 f(\bx) \|_{p,q} \leq L.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="res-cvxf-l-smoothness-twice-diff-max-eigen-hessian">
+<p class="admonition-title"><span class="caption-number">Corollary 6.19 </span> (<span class="math notranslate nohighlight">\(L\)</span>-smoothness and largest eigenvalue of Hessian)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be a twice continuously differentiable convex function over <span class="math notranslate nohighlight">\(\RR^n\)</span>.
+Then <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(L\)</span>-smooth w.r.t. <span class="math notranslate nohighlight">\(\ell_2\)</span>-norm if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_{\max}( \nabla^2 f(\bx)) \leq L \Forall \bx \in \RR^n.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(f\)</span> is convex, hence it follows that <span class="math notranslate nohighlight">\(\nabla^2 f(\bx) \succeq \ZERO\)</span> for every <span class="math notranslate nohighlight">\(\bx\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\|\nabla^2 f(\bx) \|_{2,2} =    \sqrt{\lambda_{\max}( \nabla^2 f(\bx)^2 )}  = \lambda_{\max}( \nabla^2 f(\bx)).
+\]</div>
+<p>From <a class="reference internal" href="#res-cvxf-smoothness-twice-diff">Theorem 6.211</a>, <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(L\)</span>-smooth
+is equivalent to the condition that</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_{\max}( \nabla^2 f(\bx)) = \|\nabla^2 f(\bx) \|_{2,2} \leq L.
+\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="strong-convexity">
+<h2><span class="section-number">6.14.2. </span>Strong Convexity<a class="headerlink" href="#strong-convexity" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvxf-strong-convexity">
+<p class="admonition-title"><span class="caption-number">Definition 6.72 </span> (Strong convexity)</p>
+<div class="definition-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> is called
+<span class="math notranslate nohighlight">\(\sigma\)</span>-<em>strongly convex</em> for <span class="math notranslate nohighlight">\(\sigma &gt; 0\)</span> if
+<span class="math notranslate nohighlight">\(\dom f\)</span> is convex and the following holds for any
+<span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> and <span class="math notranslate nohighlight">\(t \in [0,1]\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-cvxf-strong-convexity-cond">
+<span class="eqno">(6.8)<a class="headerlink" href="#equation-eq-cvxf-strong-convexity-cond" title="Permalink to this equation">¶</a></span>\[f(t \bx + (1 - t)\by) \leq t f(\bx) 
++ (1-t)f(\by) 
+- \frac{\sigma}{2} t (1 - t) \| \bx - \by \|^2. \]</div>
+</div>
+</div><p>Strongly convex functions are convex. In fact,
+we have a stronger result available.</p>
+<div class="proof theorem admonition" id="res-cvx-strong-convexity-convexity">
+<p class="admonition-title"><span class="caption-number">Theorem 6.212 </span> (Strong convexity and convexity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Assume that the ambient space <span class="math notranslate nohighlight">\(\VV\)</span> is
+<a class="reference internal" href="../la/euclidean.html#def-la-gen-euclidean-space">Euclidean</a>.</p>
+<p>A function <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> is <span class="math notranslate nohighlight">\(\sigma\)</span>-strongly convex
+if and only if the function <span class="math notranslate nohighlight">\(f(\cdot) - \frac{\sigma}{2} \| \cdot \|^2\)</span>
+is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let us define a function <span class="math notranslate nohighlight">\(g : \VV \to \RERL\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+g(\bx) = f(\bx) = \frac{\sigma}{2} \| \bx \|^2.
+\]</div>
+<p>We need to show that <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(\sigma\)</span>-strongly convex
+if and only if <span class="math notranslate nohighlight">\(g\)</span> is convex.</p>
+<ol>
+<li><p>We first note that <span class="math notranslate nohighlight">\(\dom g = \dom f\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\dom g\)</span> is convex if and only if <span class="math notranslate nohighlight">\(\dom f\)</span> is convex.</p></li>
+<li><p>Now, <span class="math notranslate nohighlight">\(g\)</span> is convex if and only if <span class="math notranslate nohighlight">\(\dom g = \dom f\)</span> is convex
+and for any <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> and <span class="math notranslate nohighlight">\(t \in (0, 1)\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   g(t \bx + (1-t) \by) \leq t g(\bx) + (1-t) g(\by).
+   \]</div>
+</li>
+<li><p>Now,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; g(t \bx + (1-t) \by) \leq t g(\bx) + (1-t) g(\by) \\
+   \iff &amp; f(t \bx + (1-t) \by) -  \frac{\sigma}{2} \| t \bx + (1-t) \by \|^2 \\ 
+   &amp; \leq t f(\bx) + (1-t) f(\by) -  \frac{\sigma}{2} [t \| \bx \|^2 + (1-t) \| \by \|^2] \\
+   \iff &amp; f(t \bx + (1-t) \by) \leq t f(\bx) + (1-t) f(\by) \\
+   &amp; + \frac{\sigma}{2} [  \| t \bx + (1-t) \by \|^2  - t \| \bx \|^2 - (1-t) \| \by \|^2].
+   \end{split}\]</div>
+</li>
+<li><p>Since the norm is Euclidean, hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \| t \bx + (1-t) \by \|^2  - t \| \bx \|^2 - (1-t) \| \by \|^2  \\
+   &amp;=  \langle t \bx + (1-t) \by, t \bx + (1-t) \by \rangle 
+   - t \| \bx \|^2 - (1-t) \| \by \|^2 \\
+   &amp;= t^2 \| \bx \|^2 + (1-t)^2 \| \by \|^2 + 2 t (1-t)\langle \bx, \by \rangle
+   - t \| \bx \|^2 - (1-t) \| \by \|^2  \\
+   &amp;= - t(1-t) \| \bx \|^2 - t(1-t) \| \by \|^2 + 2 t (1-t)\langle \bx, \by \rangle \\
+   &amp;= - t(1-t) \left ( \| \bx \|^2 +  \| \by \|^2 - 2 \langle \bx, \by \rangle \right ) \\
+   &amp;= - t(1-t) \| \bx - \by \|^2.
+   \end{split}\]</div>
+</li>
+<li><p>Thus, the convexity inequality for <span class="math notranslate nohighlight">\(g\)</span> is equivalent to</p>
+<div class="math notranslate nohighlight">
+\[
+   f(t \bx + (1-t) \by) \leq t f(\bx) + (1-t) f(\by) - \frac{\sigma}{2}t(1-t) \| \bx - \by \|^2
+   \]</div>
+<p>which is nothing but the <span class="math notranslate nohighlight">\(\sigma\)</span>-strong convexity condition of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-quadratic-strong-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.213 </span> (Strong convexity of quadratic functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \SS^n\)</span>, <span class="math notranslate nohighlight">\(\bb \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(c \in \RR\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c.
+\]</div>
+<p>Then <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(\sigma\)</span>-strongly convex if and only if <span class="math notranslate nohighlight">\(\bA\)</span> is positive definite
+and <span class="math notranslate nohighlight">\(\sigma \leq \lambda_{\min}(\bA)\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Due to <a class="reference internal" href="#res-cvx-strong-convexity-convexity">Theorem 6.212</a>,
+<span class="math notranslate nohighlight">\(f\)</span> is strongly convex with <span class="math notranslate nohighlight">\(\sigma &gt; 0\)</span>
+if and only if
+<span class="math notranslate nohighlight">\(g(\bx) = f(\bx) - \frac{\sigma}{2} \| \bx \|^2\)</span>
+is convex.</p>
+<ol>
+<li><p>We note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   g(\bx) &amp;= \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c - \frac{\sigma}{2} \| \bx \|^2\\
+   &amp;= \frac{1}{2} \bx^T (\bA - \sigma \bI) \bx + \bb^T \bx + c.
+   \end{split}\]</div>
+</li>
+<li><p>As shown in <a class="reference internal" href="differentiable.html#ex-cvxf-quadratic-func-convexity">Example 6.36</a>,
+<span class="math notranslate nohighlight">\(g\)</span> is convex if and only if <span class="math notranslate nohighlight">\(\bA - \sigma \bI \succeq \ZERO\)</span>.</p></li>
+<li><p>This is equivalent to <span class="math notranslate nohighlight">\(\sigma \leq \lambda_{\min}(\bA)\)</span>.</p></li>
+</ol>
+</div>
+<div class="section" id="sum-rule">
+<h3><span class="section-number">6.14.2.1. </span>Sum Rule<a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvxf-sum-strong-convex-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.214 </span> (Sum of strongly convex and convex functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be <span class="math notranslate nohighlight">\(\sigma\)</span>-strongly convex and <span class="math notranslate nohighlight">\(g\)</span> be convex. Then
+<span class="math notranslate nohighlight">\(f+g\)</span> is strongly convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since both <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are convex, hence their domains are convex.
+Hence, <span class="math notranslate nohighlight">\(\dom (f + g) = \dom f \cap \dom g\)</span> is also convex.</p>
+<p>We further need to show that <span class="math notranslate nohighlight">\(f+g\)</span> satisfies <a class="reference internal" href="#equation-eq-cvxf-strong-convexity-cond">(6.8)</a>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \VV\)</span> and <span class="math notranslate nohighlight">\(t \in (0,1)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(\sigma\)</span>-strongly convex, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   f(t \bx + (1 - t)\by) \leq t f(\bx)  + (1-t)f(\by) 
+   - \frac{\sigma}{2} t (1 - t) \| \bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(g\)</span> is convex, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   g(t \bx + (1 - t)\by) \leq t g(\bx)  + (1-t)g(\by).
+   \]</div>
+</li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; (f + g)(t \bx + (1 - t)\by) \\
+   &amp;= f(t \bx + (1 - t)\by) + g((t \bx + (1 - t)\by)) \\
+   &amp;\leq f(t \bx + (1 - t)\by) \leq t f(\bx)  + (1-t)f(\by) 
+   - \frac{\sigma}{2} t (1 - t) \| \bx - \by \|^2 
+   + t g(\bx)  + (1-t)g(\by)\\
+   &amp;= t (f + g) (\bx) + (1-t) (f + g)(\by) - \frac{\sigma}{2} t (1 - t) \| \bx - \by \|^2.
+   \end{split}\]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f+g\)</span> is also <span class="math notranslate nohighlight">\(\sigma\)</span>-strongly convex.</p></li>
+</ol>
+</div>
+<div class="proof example admonition" id="ex-cvxf-strong-convex-norm-sqr-indicator">
+<p class="admonition-title"><span class="caption-number">Example 6.77 </span> (Strong convexity of <span class="math notranslate nohighlight">\(\frac{1}{2}| \cdot |^2 + I_C\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a <a class="reference internal" href="../la/euclidean.html#def-la-gen-euclidean-space">Euclidean</a> space.</p>
+<ol>
+<li><p>The function <span class="math notranslate nohighlight">\(\frac{1}{2}\| \bx \|^2\)</span> is 1-strongly convex
+due to <a class="reference internal" href="#res-cvxf-quadratic-strong-convex">Theorem 6.213</a>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(C\)</span> be a convex set.</p></li>
+<li><p>Then, the indicator function <span class="math notranslate nohighlight">\(I_C\)</span> is convex.</p></li>
+<li><p>Due to <a class="reference internal" href="#res-cvxf-sum-strong-convex-convex">Theorem 6.214</a>, the function</p>
+<div class="math notranslate nohighlight">
+\[
+   g(\bx) = \frac{1}{2}\| \bx \|^2 + I_C(\bx)
+   \]</div>
+<p>is also 1-strongly convex.</p>
+</li>
+</ol>
+</div>
+</div></div>
+<div class="section" id="first-order-characterization">
+<h3><span class="section-number">6.14.2.2. </span>First Order Characterization<a class="headerlink" href="#first-order-characterization" title="Permalink to this headline">¶</a></h3>
+<p>Recall that <span class="math notranslate nohighlight">\(\dom (\partial f)\)</span> denotes the set of points at which
+<span class="math notranslate nohighlight">\(f\)</span> is subdifferentiable.</p>
+<div class="proof theorem admonition" id="res-cvxf-strong-convexity-charac-first-order">
+<p class="admonition-title"><span class="caption-number">Theorem 6.215 </span> (First order characterization of strong convexity)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be a proper closed and convex function.
+For a given <span class="math notranslate nohighlight">\(\sigma &gt; 0\)</span>, the following statements are equivalent.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(\sigma\)</span>-strongly convex.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(\bx \in \dom (\partial f)\)</span>, <span class="math notranslate nohighlight">\(\by \in \dom f\)</span> and <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx)\)</span>,
+the following holds true</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle 
+   + \frac{\sigma}{2} \| \by - \bx \|^2.
+   \]</div>
+</li>
+<li><p>For any <span class="math notranslate nohighlight">\(\bx, \by \in \dom (\partial f)\)</span> and <span class="math notranslate nohighlight">\(\bg_{\bx} \in \partial f(\bx)\)</span>,
+<span class="math notranslate nohighlight">\(\bg_{\by} \in \partial f(\bx)\)</span>, the following holds true:</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx - \by, \bg_{\bx}  - \bg_{\by} \rangle \geq \sigma \| \bx - \by \|^2.
+   \]</div>
+</li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We shall prove the equivalence of these statements in the following order.
+<span class="math notranslate nohighlight">\((2) \implies (1)\)</span>, <span class="math notranslate nohighlight">\((1) \implies (3)\)</span>, <span class="math notranslate nohighlight">\((3) \implies (2)\)</span>.</p>
+<p>(2) <span class="math notranslate nohighlight">\(\implies\)</span> (1)</p>
+<ol>
+<li><p>We assume that (2) is true.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \dom f\)</span> and <span class="math notranslate nohighlight">\(t \in (0,1)\)</span>.</p></li>
+<li><p>We need to show that <a class="reference internal" href="#equation-eq-cvxf-strong-convexity-cond">(6.8)</a> holds for <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\dom f\)</span> is convex, its relative interior is not empty
+(see <a class="reference internal" href="relint.html#res-cvx-nonempty-relint">Theorem 6.131</a>).</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz \in \relint \dom f\)</span>.</p></li>
+<li><p>Choose some <span class="math notranslate nohighlight">\(\alpha \in (0, 1]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\tilde{\bx} = (1-\alpha) \bx + \alpha \bz\)</span>.</p></li>
+<li><p>By the line segment property (<a class="reference internal" href="relint.html#res-cvx-convex-relint-segment">Theorem 6.132</a>),
+<span class="math notranslate nohighlight">\(\tilde{\bx} \in \relint \dom f\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx_t = t \tilde{\bx} + (1-t)\by\)</span>.</p></li>
+<li><p>Again, by the line segment property,
+<span class="math notranslate nohighlight">\(\bx_t \in \relint \dom f\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is a proper convex function, hence the subdifferential
+of <span class="math notranslate nohighlight">\(f\)</span> at relative interior points is nonempty
+(<a class="reference internal" href="subgradients.html#res-cvxf-relint-subdiff-nonempty">Theorem 6.165</a>).</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\partial f(\bx_t) \neq \EmptySet\)</span>
+and <span class="math notranslate nohighlight">\(\bx_t \in \dom (\partial f)\)</span>.</p></li>
+<li><p>Take some <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx_t)\)</span>.</p></li>
+<li><p>By hypothesis (2)</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\tilde{\bx}) \geq f(\bx_t) + \langle \tilde{\bx} - \bx_t, \bg \rangle 
+   + \frac{\sigma}{2} \| \tilde{\bx} - \bx_t \|^2.
+   \]</div>
+</li>
+<li><p>Substituting <span class="math notranslate nohighlight">\(\bx_t  = t \tilde{\bx} + (1-t)\by\)</span>, we have
+<span class="math notranslate nohighlight">\(\tilde{\bx} - \bx_t = (1-t) (\tilde{\bx} - \by)\)</span>. Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\tilde{\bx}) \geq f(\bx_t) + (1-t)\langle \tilde{\bx} - \by, \bg \rangle 
+   + \frac{\sigma (1-t)^2}{2} \| \tilde{\bx} - \by \|^2.
+   \]</div>
+</li>
+<li><p>Similarly, by hypothesis (2)</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) \geq f(\bx_t) + \langle \by - \bx_t, \bg \rangle 
+   + \frac{\sigma}{2} \| \by - \bx_t \|^2.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\by - \bx_t = \by - t \tilde{\bx} - (1-t)\by = t (\by - \tilde{\bx})\)</span>.</p></li>
+<li><p>This gives us,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) \geq f(\bx_t) + t \langle \by - \tilde{\bx}, \bg \rangle 
+   + \frac{\sigma t^2}{2} \| \by - \tilde{\bx} \|^2.
+   \]</div>
+</li>
+<li><p>Multiplying the first inequality by <span class="math notranslate nohighlight">\(t\)</span> and the second one by <span class="math notranslate nohighlight">\((1-t)\)</span>
+and adding them together, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   t f(\tilde{\bx}) + (1-t)f(\by) \geq
+   f(\bx_t) + \frac{\sigma t(1-t)}{2} \| \tilde{\bx} - \by \|^2.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(t \tilde{\bx} + (1-t)\by) = f(\bx_t)
+   \leq t f(\tilde{\bx}) + (1-t)f(\by) - \frac{\sigma t(1-t)}{2} \|\tilde{\bx} - \by \|^2.
+   \]</div>
+</li>
+<li><p>Expanding <span class="math notranslate nohighlight">\(\tilde{\bx}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   t \tilde{\bx} + (1-t)\by 
+   &amp;= t ((1-\alpha) \bx + \alpha \bz) + (1-t)\by\\
+   &amp;= t(1-\alpha) \bx + (1-t) \by + t \alpha \bz.
+   \end{split}\]</div>
+</li>
+<li><p>Define <span class="math notranslate nohighlight">\(g_1(\alpha) = f(t \tilde{\bx} + (1-t)\by) = f(t(1-\alpha) \bx + (1-t) \by + t \alpha \bz)\)</span>.</p></li>
+<li><p>Define <span class="math notranslate nohighlight">\(g_2(\alpha) = f(\tilde{\bx}) = f((1-\alpha) \bx + \alpha \bz)\)</span>.</p></li>
+<li><p>Substituting these into the previous inequality, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+   g_1(\alpha) \leq t g_2(\alpha)+ (1-t)f(\by) 
+   - \frac{\sigma t(1-t)}{2} \|(1-\alpha) \bx + \alpha \bz - \by \|^2.
+   \]</div>
+</li>
+<li><p>The functions <span class="math notranslate nohighlight">\(g_1\)</span> and <span class="math notranslate nohighlight">\(g_2\)</span> are one dimensional, proper, closed and convex
+functions.</p></li>
+<li><p>By <a class="reference internal" href="continuity.html#res-cvxf-convex-closed-univariate">Theorem 6.158</a>, both <span class="math notranslate nohighlight">\(g_1\)</span> and <span class="math notranslate nohighlight">\(g_2\)</span>
+are continuous on their domain.</p></li>
+<li><p>Therefore, taking the limit <span class="math notranslate nohighlight">\(\alpha \to 0^+\)</span>, it follows that</p>
+<div class="math notranslate nohighlight">
+\[
+   g_1(0) \leq t g_2(0) + (1-t)f(\by) 
+   - \frac{\sigma t(1-t)}{2} \|\bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>Now <span class="math notranslate nohighlight">\(g_1(0) = f(t\bx + (1-t) \by)\)</span>
+and <span class="math notranslate nohighlight">\(g_2(0) = f(\bx)\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(t\bx + (1-t) \by) \leq t f(\bx) + (1-t)f(\by) 
+   - \frac{\sigma t(1-t)}{2} \|\bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>This establishes that <span class="math notranslate nohighlight">\(f\)</span> is indeed <span class="math notranslate nohighlight">\(\sigma\)</span>-strongly convex.</p></li>
+</ol>
+<p>(1) <span class="math notranslate nohighlight">\(\implies\)</span> (3)</p>
+<ol>
+<li><p>We are given that <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(\sigma\)</span>-strongly convex.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \dom (\partial f)\)</span>.</p></li>
+<li><p>Pick any <span class="math notranslate nohighlight">\(\bg_{\bx} \in \partial f(\bx)\)</span>
+and <span class="math notranslate nohighlight">\(\bg_{\by} \in \partial f(\by)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t \in [0, 1)\)</span> and
+denote <span class="math notranslate nohighlight">\(\bx_t = t \bx + (1-t) \by\)</span>.</p></li>
+<li><p>By the hypothesis</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx_t) \leq t f(\bx) + (1-t) f(\by) - \frac{\sigma t (1-t) }{2} \| \bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>This is same as</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx_t) - f(\bx) \leq (1-t) [f(\by) - f(\bx)] 
+   - \frac{\sigma t (1-t) }{2} \| \bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>We can see that <span class="math notranslate nohighlight">\((1-t) \in (0, 1]\)</span>.</p></li>
+<li><p>Dividing both sides of inequality by <span class="math notranslate nohighlight">\((1-t)\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{f(\bx_t) - f(\bx)}{1-t} \leq f(\by) - f(\bx) 
+   - \frac{\sigma t }{2} \| \bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bg_{\bx} \in \partial f(\bx)\)</span>, hence by subgradient inequality</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx_t) \geq f(\bx) + \langle \bx_t - \bx, \bg_{\bx} \rangle.
+   \]</div>
+</li>
+<li><p>We can rewrite this as</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{f(\bx_t) - f(\bx)}{1-t} \geq \frac{\langle \bx_t - \bx, \bg_{\bx} \rangle}{1-t}.
+   \]</div>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\bx_t - \bx = (1-t)(\by - \bx)\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{f(\bx_t) - f(\bx)}{1-t} \geq  \langle \by - \bx, \bg_{\bx} \rangle.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \by - \bx, \bg_{\bx} \rangle \leq f(\by) - f(\bx) 
+   - \frac{\sigma t }{2} \| \bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>This inequality holds for every <span class="math notranslate nohighlight">\(t \in [0, 1)\)</span>.</p></li>
+<li><p>Taking the limit <span class="math notranslate nohighlight">\(t \to 1^-\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \by - \bx, \bg_{\bx} \rangle \leq f(\by) - f(\bx) 
+   - \frac{\sigma}{2} \| \bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>An identical reasoning by switching the roles of <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span>, gives us</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx - \by, \bg_{\by} \rangle \leq f(\bx) - f(\by) 
+   - \frac{\sigma}{2} \| \by - \bx \|^2.
+   \]</div>
+</li>
+<li><p>Adding these two inequalities gives us</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx - \by, \bg_{\by} - \bg_{\bx} \rangle \leq
+    - \sigma \| \bx - \by \|^2.
+   \]</div>
+</li>
+<li><p>Multiplying both sides by <span class="math notranslate nohighlight">\(-1\)</span> (and switching the inequality accordingly), we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx - \by, \bg_{\bx} - \bg_{\by} \rangle \geq
+   \sigma \| \bx - \by \|^2
+   \]</div>
+<p>as desired.</p>
+</li>
+</ol>
+<p>(3) <span class="math notranslate nohighlight">\(\implies\)</span> (2)</p>
+<ol>
+<li><p>We are given that (3) is satisfied.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \dom (\partial f)\)</span>, <span class="math notranslate nohighlight">\(\by \in \dom f\)</span> and <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx)\)</span>.</p></li>
+<li><p>Pick any <span class="math notranslate nohighlight">\(\bz \in \relint \dom f\)</span>.</p></li>
+<li><p>Pick some <span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span>.</p></li>
+<li><p>Define <span class="math notranslate nohighlight">\(\tilde{\by} = (1 - \alpha) \by + \alpha \bz\)</span>.</p></li>
+<li><p>By line segment property <span class="math notranslate nohighlight">\(\tilde{\by} \in \relint \dom f\)</span>.</p></li>
+<li><p>Define <span class="math notranslate nohighlight">\(\bx_t = (1-t) \bx + t \tilde{\by}\)</span>.</p></li>
+<li><p>Consider the 1D function</p>
+<div class="math notranslate nohighlight">
+\[
+   \varphi(t) = f(\bx_t), \Forall t \in [0, 1]. 
+   \]</div>
+</li>
+<li><p>Pick any <span class="math notranslate nohighlight">\(t \in (0, 1)\)</span>.</p></li>
+<li><p>Then, by line segment principle <span class="math notranslate nohighlight">\(\bx_t \in \relint \dom f\)</span>.</p></li>
+<li><p>Due to (<a class="reference internal" href="subgradients.html#res-cvxf-relint-subdiff-nonempty">Theorem 6.165</a>),
+<span class="math notranslate nohighlight">\(\partial f(\bx_t) \neq \EmptySet\)</span>
+and <span class="math notranslate nohighlight">\(\bx_t \in \dom (\partial f)\)</span>.</p></li>
+<li><p>Take some <span class="math notranslate nohighlight">\(\bg_t \in \partial f(\bx_t)\)</span>.</p></li>
+<li><p>By subgradient inequality</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bz) \geq f(\bx_t) + \langle \bz - \bx_t, \bg_t \rangle \Forall \bz \in \VV.
+   \]</div>
+</li>
+<li><p>In particular, for <span class="math notranslate nohighlight">\(\bx_s = (1-s) \bx + s \tilde{\by}\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; f(\bx_s) \geq f(\bx_t) + 
+   \langle (1-s) \bx + s \tilde{\by} - (1-t) \bx - t \tilde{\by}, \bg_t \rangle \\
+   &amp; \implies \varphi(s) \geq \varphi(t) + \langle (s-t) (\tilde{\by} - \bx), \bg_t \rangle \\
+   &amp;\implies \varphi(s) \geq \varphi(t) + (s-t) \langle \tilde{\by} - \bx, \bg_t \rangle.
+   \end{split}\]</div>
+</li>
+<li><p>Since this is valid for every <span class="math notranslate nohighlight">\(s\)</span>,
+hence <span class="math notranslate nohighlight">\(\langle \tilde{\by} - \bx, \bg_t \rangle \in \partial \varphi(t)\)</span>.</p></li>
+<li><p>Applying the mean value theorem (<a class="reference internal" href="subgradients.html#res-cvxf-convex-subdiff-mvt">Theorem 6.188</a>)</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\tilde{\by}) - f(\bx) = \varphi(1) - \varphi(0) 
+   = \int_0^1 \langle \tilde{\by} - \bx, \bg_t \rangle dt.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx)\)</span> and <span class="math notranslate nohighlight">\(\bg_t \in \partial f(\bx_t)\)</span>,
+hence applying the hypothesis (3), we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx_t - \bx, \bg_t - \bg \rangle \geq
+   \sigma \| \bx_t - \bx \|^2.
+   \]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(\bx_t - \bx = t (\tilde{\by} - \bx)\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   t \langle \tilde{\by} - \bx, \bg_t - \bg \rangle \geq
+   \sigma t^2 \| \tilde{\by} - \bx \|^2.
+   \]</div>
+</li>
+<li><p>This simplifies to</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \tilde{\by} - \bx, \bg_t \rangle \geq
+   \langle \tilde{\by} - \bx, \bg \rangle
+   + \sigma t \| \tilde{\by} - \bx \|^2.
+   \]</div>
+<p>Canceling <span class="math notranslate nohighlight">\(t\)</span> on both sides doesn’t change the sign of inequality since <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
+</li>
+<li><p>Applying the inequality to the integral above</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\tilde{\by}) - f(\bx) \geq \int_0^1
+   \left [ \langle \tilde{\by} - \bx, \bg \rangle
+   + \sigma t \| \tilde{\by} - \bx \|^2 \right ] d t.
+   \]</div>
+</li>
+<li><p>Integrating, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\tilde{\by}) - f(\bx) \geq  \langle \tilde{\by} - \bx, \bg \rangle
+   + \frac{\sigma}{2}\| \tilde{\by} - \bx \|^2.
+   \]</div>
+</li>
+<li><p>Expanding for <span class="math notranslate nohighlight">\(\tilde{\by}\)</span> for any <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   f((1 - \alpha) \by + \alpha \bz) \geq f(\bx) +  
+   \langle (1 - \alpha) \by + \alpha \bz - \bx, \bg \rangle
+   + \frac{\sigma}{2}\| (1 - \alpha) \by + \alpha \bz - \bx \|^2.
+   \]</div>
+</li>
+<li><p>The 1D function <span class="math notranslate nohighlight">\(g(\alpha) = f((1 - \alpha) \by + \alpha \bz)\)</span> is
+continuous again due to <a class="reference internal" href="continuity.html#res-cvxf-convex-closed-univariate">Theorem 6.158</a>.</p></li>
+<li><p>Taking the limit <span class="math notranslate nohighlight">\(\alpha \to 0^+\)</span> on both sides, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\by) \geq f(\bx) +  
+   \langle \by - \bx, \bg \rangle
+   + \frac{\sigma}{2}\| \by - \bx \|^2
+   \]</div>
+<p>which is the desired result.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./convex_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="conjugate_functions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.13. </span>Conjugate Functions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../cvxopt/chapter.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Convex Optimization</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

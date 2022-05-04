@@ -22,6 +22,8 @@ $$
 ```
 
 ```{prf:example} Zero function
+:label: ex-prox-zero-function
+
 Consider $f : \RR \to \RR$ defined as $f(x) = 0$.
 
 $$
@@ -31,6 +33,8 @@ $$
 ```
 
 ```{prf:example} Constant value function
+:label: ex-prox-constant-function
+
 Let $f : \RR \to \RR$ defined as $f(x) = c$ where $c \in \RR$.
 
 $$
@@ -40,6 +44,8 @@ $$
 ```
 
 ```{prf:example} 1D Linear function I
+:label: ex-prox-1d-linear-function-1
+
 Let $f : \RR \to \RR$ be given as $f(x) = x$.
 
 Define: 
@@ -70,6 +76,8 @@ $$
 ```
 
 ```{prf:example} 1D Linear function II
+:label: ex-prox-1d-linear-function-2
+
 Let $f : \RR \to \RR$ be given as $f(x) = \lambda x$ with $\lambda \in \RR$.
 
 Define: 
@@ -100,6 +108,8 @@ $$
 ```
 
 ```{prf:example} 1D Affine function
+:label: ex-prox-1d-affine-function
+
 Let $f : \RR \to \RR$ be given as $f(x) = \alpha x + \beta$ with $\alpha, \beta \in \RR$.
 
 Define: 
@@ -130,6 +140,7 @@ $$
 ```
 
 ```{prf:theorem} Nonemptiness under closedness and coerciveness
+:label: res-prox-nonemptiness-under-closedness-coerciveness
 
 Let $f : \EE \to \RERL$ be a proper closed function. Assume that 
 the function
@@ -162,6 +173,7 @@ $$
 ## Proximal Operator
 
 ```{prf:theorem} First prox theorem
+:label: res-prox-first-prox-theorem
 
 Let $f : \EE \to \RERL$ be a proper, closed and function. Then, $\prox_f(\bx)$ is
 a singleton for any $\bx \in \EE$.  

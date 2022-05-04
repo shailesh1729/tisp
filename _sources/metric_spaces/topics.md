@@ -380,3 +380,66 @@ Then, $f$ is continuous.
 1. Hence, $f(C)$ attains a minimum value at some $a \in C$.
    See {prf:ref}`res-ms-compact-real-valued-min-max-attain`.
 ```
+
+## Distance Between Sets
+
+Recall from {prf:ref}`def-ms-set-set-distance` that the
+distance between two subsets of a metric space is given by
+
+$$
+d(A, B) = \inf \{ d(a,b) \ST a \in A, b \in B \}.
+$$
+
+
+```{prf:theorem} Distance between disjoint compact and closed sets
+:label: res-ms-dist-disjoint-compact-closed
+
+Let $(X, d)$ be a metric space. Let $A, B \subseteq X$ 
+be disjoint (i.e., $A \cap B = \EmptySet$). 
+Assume that $A$ is compact and $B$ is closed.
+
+Then, there is $\delta > 0$ such that 
+
+$$
+|x - y | \geq \delta  \Forall x \in A, y \in B.
+$$
+
+In other words, the distance between $A$ and $B$ is nonzero; i.e.,
+$d(A, B) > 0$.
+```
+
+```{prf:proof}
+We prove this by contradiction.
+
+1. Assume that there is no such $\delta > 0$.
+1. Then there exist sequences $\{x_n \}$ of $A$ 
+   and $\{ y_n \}$ of $B$ such that
+
+   $$
+   \lim_{n \to \infty} | x_n - y_n | = 0.
+   $$
+1. Since $A$ is compact, hence $\{x_n \}$ has a convergent
+   subsequence, say $\{ x_{n_k} \}$ which converges to 
+   some $x \in A$.
+1. Now, 
+
+   $$
+   |x - y_{n_k}| \leq | x - x_{n_k} | + |x_{n_k} - y_{n_k} |.
+   $$
+1. Since $\{ x_n - y_n \}$ is a convergent sequence,
+   hence $\{ x_{n_k} - y_{n_k} \}$ also converges to $0$.
+1. Thus, 
+
+   $$
+   \lim_{n \to \infty} |x - y_{n_k}| \leq 
+   \lim_{n \to \infty}  | x - x_{n_k} | 
+   + \lim_{n \to \infty} |x_{n_k} - y_{n_k} |
+   = 0 + 0 = 0.
+   $$
+1. Thus, $\{ y_{n_k} \}$ is a convergent sequence of $B$ 
+   converging to $x$.
+1. Since $B$ is closed, hence $x \in B$.
+1. But then, $x \in A \cap B$.
+1. Thus, $A \cap B \neq \EmptySet$ which is a contradiction.
+```
+

@@ -48,11 +48,15 @@ Otherwise, it is *unbounded*.
 ```
 
 ```{prf:remark}
+:label: rem-ms-bounded-diam-finite
+
 $(X, d)$ is bounded if and only if $\diam X$ is finite. 
 ```
 
 
 ```{prf:proposition}
+:label: res-ms-diam-open-ball-bound
+
 The diameter of an open ball $B(x, r)$ is bounded by $2 r$.
 ```
 
@@ -74,6 +78,8 @@ For an example where $B(x,r ) < 2 r$, see
 
 
 ```{prf:proposition}
+:label: res-ms-zero-diam-singleton
+
 $\diam A = 0$ if and only if $A$ is a singleton set.
 ```
 
@@ -93,6 +99,8 @@ For the converse, we proceed as follows:
 ```
 
 ```{prf:proposition}
+:label: res-ms-subset-sub-diam
+
 If $A \subseteq B$, then $\diam A \leq \diam B$.
 ```
 
@@ -108,6 +116,8 @@ We proceed as follows:
 ```
 
 ```{prf:proposition}
+:label: res-ms-point-dist-leq-union-diam
+
 Let $x \in A$ and $y \in B$. Then $d(x,y) \leq \diam (A \cup B)$.
 ```
 ```{prf:proof}
@@ -120,6 +130,8 @@ $$
 ```
 
 ```{prf:proposition}
+:label: res-ms-diam-union-leq-sum-diam
+
 If $A \cap B \neq \EmptySet$, then
 
 $$

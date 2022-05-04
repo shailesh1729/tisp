@@ -374,6 +374,45 @@ B(\bx, r) = \bx + r B(\bzero, 1).
 $$
 ```
 
+```{prf:theorem} Ball addition and subtraction
+:label: res-la-unit-ball-sum
+
+Let $\VV$ be a normed linear space and $B$ be the unit open ball.
+Then,
+
+$$
+B + B = B - B = 2B.
+$$
+```
+
+```{prf:proof}
+Due to {prf:ref}`res-vs-set-arithmetic-props`, 
+$2 B \subseteq B + B$. 
+
+We now show that $B + B \subseteq 2 B$.
+
+1. Let $\ba \in B + B$.
+1. Then, $\ba = \bb + \bc$ such that $\bb \in B$ and $\bc \in B$.
+1. Now, 
+ 
+   $
+   \| \ba \| = \| \bb + \bc \| \leq \| \bb \| + \| \bc \| < 1 + 1  = 2.
+   $
+1. Thus, $\ba \in 2 B$. 
+
+Thus, $B + B = 2B$.
+
+Next, note that $B$ is {prf:ref}`symmetric <def-vs-symmetric-set>`;
+i.e. $B = -B$.
+
+Thus, 
+
+$$
+B - B = B + (-B) = B + B = 2 B.
+$$
+```
+
+
 ```{prf:theorem} Moving a point into a ball
 :label: res-la-ns-move-vec-to-ball
 
@@ -859,9 +898,16 @@ where $a_n \in A$ and $b_n \in B$.
 
 ## Boundedness
 
+By definition $\| \bx \| \geq 0$. Thus, for any
+subset $A \subseteq \VV$, $0$ is a lower
+bound for the set $\{ \| \bx \| \ST \bx \in A \}$.
+If there is an upper bound also for the set of norms,
+then the set $A$ is called bounded.
+
 ```{prf:definition} Bounded set
 :label: def-la-ns-bounded-set
 
+Let $\VV$ be a normed linear space.
 A subset $A$ of $\VV$ is called *norm bounded* or simply *bounded*
 if there exist $M > 0$ such that:
 
@@ -871,6 +917,44 @@ $$
 ```
 Compare the definition with the definition of
 {prf:ref}`bounded sets <def-ms-boundedness-set>` in metric spaces.
+
+
+We can characterize the case where $0$ is indeed
+the infimum or greatest lower bound for the set
+$\{ \| \bx \| \ST \bx \in A \}$.
+
+```{prf:theorem} Zero as the greatest lower bound
+:label: res-la-set-zero-infimum
+
+Let $\VV$ be a normed linear space.
+Let $A \subseteq \VV$.
+Then, $\inf \{ \| \bx \| \ST \bx \in A \} = 0$ 
+if and only if $\bzero \in \closure A$.
+```
+
+```{prf:proof}
+
+Note that $B(\bzero, r)$ is an open ball of radius
+$r$ around $\bzero$ given by:
+
+$$
+B(\bzero, r) = \{ \bx \in \VV \ST \| \bx \| < r \}.
+$$
+
+Suppose $\inf \{ \| \bx \| \ST \bx \in A \} = 0$.
+
+1. Then, for every $r > 0$, there exists $\bx \in A$
+   such that $\| \bx \| < r$.
+1. Thus, for every $r > 0$, $\bx \in B(\bzero, r) \cap A$.
+1. Thus, for every $r > 0$, $B(\bzero, r) \cap A \neq \EmptySet$.
+1. Thus, $\bzero \in \closure A$.
+
+Now suppose that $\bzero \in \closure A$.
+1. Then, for every $r> 0$,  $B(\bzero, r) \cap A \neq \EmptySet$.
+1. Thus, for every $r > 0$, there exists $\bx \in A$ 
+   such that $\| \bx \| < r$.
+1. Thus,  $\inf \{ \| \bx \| \ST \bx \in A \} = 0$.
+```
 
 ## Sequences
 
@@ -892,6 +976,39 @@ $$
 \lim_{n \to \infty} \bx_n = \bx.
 $$
 ```
+
+
+Following is an alternative proof for
+{prf:ref}`res-la-set-zero-infimum` in terms
+of convergent sequences.
+
+```{prf:proof}
+
+Assume that $\bzero \in \closure A$.
+
+1. Then, there exists a sequence $\{ \bx_n \}$ such that
+   $\lim \| \bx_n - \bzero \| = 0$.
+1. Thus, $\lim \| \bx_n \| = 0$.
+1. Thus, for every $r > 0$, there exists $n_0 \in \Nat$
+   such that $\| \bx_n \| < r$ for all $n > n_0$.
+1. Thus, for every $r > 0$, there exists $\bx \in A$
+   such that $\| \bx \| < r$.
+1. Thus, $\inf \{ \| \bx \| \ST \bx \in A \} = 0$.
+
+Assume that $\inf \{ \| \bx \| \ST \bx \in A \} = 0$.
+
+1. Thus, for every $r > 0$, there exists $\bx \in A$
+   such that $\| \bx \| < r$.
+1. For every $n \in \Nat$, pick a $\bx_n \in A$
+   such that $\| \bx_n \| < \frac{1}{n}$.
+1. Form the sequence $\{ \bx_n \}$.
+1. Then, for every $r > 0$, there exists $n_0 \in \Nat$
+   such that for all $n > n_0$,
+   $\| \bx_n \| = \| \bx_n - \bzero \| < r$.
+1. Thus, $\lim \bx_n = \bzero$.
+1. Thus, $\bzero \in \closure A$. 
+```
+
 
 
 ## The Calculus of Limits
@@ -1992,6 +2109,8 @@ Then, by {prf:ref}`res-ms-continuous-function-characterization`
 ## Completeness and Banach Spaces
 
 ```{prf:definition} Banach space
+:label: def-la-banach-space
+
 A normed space $\VV$ that is
 {prf:ref}`complete <def-ms-complete-metric-space>`
 with respect to the metric induced by its norm
@@ -2018,3 +2137,240 @@ in detail elsewhere. Follow the links.
    is {prf:ref}`complete <res-la-is-bx-complete>`.
 ```
 
+
+```{prf:theorem} $n$-dim normed linear spaces are complete
+:label: res-la-ndim-complete
+
+Let $\VV$ be an $n$-dimensional vector space over $\FF$
+where $\FF$ is either $\RR$ or $\CC$. 
+Let $\VV$ be equipped with a norm $\| \cdot \| : \VV \to \RR$
+making it a normed linear space.
+Then $\VV$ is
+{prf:ref}`complete <def-ms-complete-metric-space>`.
+
+In other words, every finite dimensional
+normed linear space is complete.
+```
+
+```{prf:proof}
+$\VV$ is a normed linear space with $n = \dim \VV$.
+
+1. Let $\BBB = \{\be_1, \dots, \be_n \}$ be a basis for $\VV$.
+1. For any $\bv \in \VV$, we can represent it in the basis
+   $\BBB$ as
+
+   $$
+   \bv = v_1 \be_1 + \dots + v_n \be_n.
+   $$
+1. We can define the $\| \cdot \|_1$ norm as
+
+   $$
+   \| \bv \|_1 = |v_1| + \dots + | v_n |.
+   $$
+1. By {prf:ref}`res-la-ns-finite-all-norms-eq`, all 
+   norms on $\VV$ are equivalent.
+1. Thus, $\| \cdot \|_1$ and $\| \cdot \|$ are equivalent.
+1. Thus, there are $c_1, c_2 > 0$ such that for every
+   $\bv \in \VV$,
+
+   $$
+   c_1 \| \bv \|_1 \leq \| \bv \| \leq c_2 \| \bv \|_1.
+   $$
+1. Let $\{ \bv_k \}$ be a Cauchy sequence of $\VV$.
+1. Let $\epsilon > 0$.
+1. Since $\{ \bv_k \}$ is a Cauchy sequence of $\VV$,
+   hence there exists $N$ such that for every 
+   $k, l > N$, 
+
+   $$
+   \| \bv_k - \bv_l \| < \epsilon.
+   $$
+1. Then, 
+
+   $$
+   \epsilon &> \| \bv_k - \bv_l \| \\
+   &\geq c_1 \| \bv_k - \bv_l \|_1 \\
+   &= c_1 \sum_{i=1}^n | v_{k i} - v_{l i} |\\
+   &\geq c_1 | v_{k i} - v_{l i} |
+   $$
+   for every $i \in 1,\dots,n$.
+1. Hence $\{ v_{k i} \}$ is a Cauchy sequence of $\FF$ for every $i \in 1,\dots,n$.
+1. Since both $\RR$ and $\CC$ are complete, hence
+   $\{ v_{k i} \}$ is a convergent sequence of $\FF$ for every $i \in 1,\dots,n$.
+1. Thus, there exists $u_i = \lim_{n \to \infty} v_{k i}$
+   for every $i \in 1,\dots,n$.
+1. Now, let $\bu  = (u_1, \dots, u_n)$.
+1. Then,
+
+   $$
+   \| \bv_k - \bu \| &\leq c_2 \| \bv_k - \bu \|_1 \\
+   &= c_2 \sum_{i=1}^n | v_{k i} - u_i |.
+   $$
+1. Thus,
+
+   $$
+   \lim_{k \to \infty} \| \bv_k - \bu \|
+   &= \lim_{k \to \infty} c_2 \sum_{i=1}^n | v_{k i} - u_i | \\
+   &= c_2 \sum_{i=1}^n \lim_{k \to \infty} | v_{k i} - u_i | = 0.
+   $$
+1. Thus, $\lim_{k \to \infty} \bv_k = \bu$.
+1. Thus,  $\{ \bv_k \}$ is convergent.
+1. Thus, every Cauchy sequence of $\VV$ is convergent.
+1. Thus, $\VV$ is complete.
+```
+
+## Compact Sets
+
+In this subsection, we pay special attention to the
+compact subsets of $n$-dimensional real normed linear
+spaces. We show that in such spaces, closed and bounded
+sets are compact. 
+We provides some results related to set arithmetic for
+compact sets.
+We further establish the
+Bolzano Weierstrass theorems for such spaces.
+Recall from {prf:ref}`def-ms-bolzano-weierstrass-property`
+that a set has Bolzano-Weierstrass property
+if every sequence of the set has a convergent subsequence
+that converges to a point in the set.
+
+```{prf:theorem} Compact = Closed and Bounded in $n$-dim
+:label: res-la-ndim-compact-closed-bounded
+
+Let $\VV$ be a real $n$-dimensional normed linear space.
+Let $S$ be a subset of $\VV$.
+
+Then, $S$ is compact if and only if $S$ is closed and bounded.
+```
+
+```{prf:proof}
+
+By {prf:ref}`res-ms-compact-is-closed-bounded`, 
+every compact set is closed and bounded.
+Thus, if $S$ is compact then $S$ is closed and bounded.
+
+For the converse, assume that $S$ is closed and bounded.
+
+1. By {prf:ref}`res-la-ndim-complete`, both $\RR^n$ and $\VV$
+   are complete. 
+1. Let $T: \RR^n \to \VV$ be an isomorphism.
+1. Then, for any $\bv \in \RR^n$, 
+   a function $\| \cdot \|_T : \RR^n \to \RR$ given by
+
+   $$
+   \| \bv \|_T = \| T (\bv)\|
+   $$ 
+   defines a norm on $\RR^n$.
+1. The norm $\| \cdot \|_T$ is equivalent to the 
+   Euclidean norm on $\RR^n$ 
+   due to {prf:ref}`res-la-ns-finite-all-norms-eq`.
+1. Also, $T : (\RR^n, \| \cdot \|_T) \to (\VV, \| \cdot \|)$
+   is an {prf:ref}`isometry <def-ms-isometry>`
+1. Accordingly $T$ is uniformly continuous by
+   {prf:ref}`res-ms-isometry-continuous`.
+1. Since $T$ is an isomorphism, it is bijective.
+1. Thus, $T$ is a homeomorphism by
+   {prf:ref}`res-ms-isometric-homeomorphic`.
+1. Then, $T^{-1}$ is also an isometry.
+1. Then, $T^{-1}(S)$ is bounded in $(\RR^n, \| \cdot \|_T)$ 
+   since $S$ is bounded in $(\VV, \| \cdot \|)$
+   and $T^{-1}$ is an isometry.
+1. By {prf:ref}`res-la-ns-norm-eq-same-bounded`,
+   $T^{-1}(S)$ is also bounded in $(\RR^n, \| \cdot \|_2)$.
+1. Also, $T^{-1}(S)$ is closed in $(\RR^n, \| \cdot \|_T)$.
+   since $S$ is closed in $(\VV, \| \cdot \|)$ and $T$ is continuous
+   (see {prf:ref}`res-ms-continuous-function-characterization`).
+1. Since equivalent norms (metrics) determine same topology,
+   hence $T^{-1}(S)$ is closed in $(\RR^n, \| \cdot \|_2)$ also.
+1. Thus, $T^{-1}(S)$ is closed and bounded in $(\RR^n, \| \cdot \|_2)$.
+1. By {prf:ref}`Heine-Borel theorem <res-ms-heine-borel-euclidean>`,
+   $T^{-1}(S)$ is a compact set in $(\RR^n, \| \cdot \|_2)$.
+1. By {prf:ref}`res-ms-eq-metric-compactness`,
+   $T^{-1}(S)$ is a compact set in $(\RR^n, \| \cdot \|_T)$
+   also. 
+1. Then, $S = T (T^{-1}(S))$ is also compact 
+   in $(\VV, \| \cdot \|)$
+   since a homeomorphism preserves compactness
+   (see {prf:ref}`res-ms-compact-homeomorphism-pres`).
+```
+
+```{prf:theorem} Sum of compact sets is compact
+:label: res-la-ndim-sum-compact
+
+Let $\VV$ be a real $n$-dimensional normed linear space. 
+Let $A, B \subseteq \VV$ be compact subsets of $\VV$.
+Then, their sum $A+B$ is compact.
+```
+
+```{prf:proof}
+
+We proceed as follows
+
+1. Both $A$ and $B$ are compact. Hence, they are closed and bounded.
+1. By {prf:ref}`res-la-sum-closed-compact`, $A+B$ is closed.
+1. Let $\| \ba \| \leq M_a$ for every $\ba \in A$.
+1. Let $\| \bb \| \leq M_b$ for every $\bb \in B$.
+1. Let $\bx \in A + B$.
+1. Then, there exists $\ba \in A$ and $\bb \in B$ such that
+   $\bx = \ba + \bb$.
+1. Then,
+   
+   $$
+   \| \bx \| = \| \ba + \bb \| \leq \| \ba \| + \| \bb \| \leq M_a + M_b.
+   $$
+1. Thus, $\| \bx \| \leq M_a + M_b$ for every $\bx \in A + B$.
+1. Thus, $A+B$ is bounded.
+1. Since $A+B$ is closed and bounded, hence $A+B$ is compact
+   due to {prf:ref}`res-la-ndim-compact-closed-bounded`.
+```
+
+
+```{prf:theorem} Bolzano Weierstrass theorem for bounded subsets
+:label: res-la-ndim-bounded-bolzano-weierstrass
+
+Let $\VV$ be a real $n$-dimensional normed linear space. 
+Let $A$ be a bounded subset of $\VV$. Then,
+every sequence of $A$ has a convergent subsequence.
+
+If $A$ is closed, then the subsequence converges in $A$ itself.
+Otherwise, the subsequence converges in $\closure A$.
+```
+
+```{prf:proof}
+We are given that $A$ is bounded.
+
+1. Then, there exist $M > 0$ such that:
+
+   $$
+   \| \bx \| \leq M \Forall \bx \in A.
+   $$
+1. Thus, $A \subseteq B[\bzero, M]$.
+1. $B[\bzero, M]$ is a closed and bounded subset of $\VV$.
+1. $\closure A \subseteq B[\bzero, M]$ since $\closure A$ is the
+   smallest closed set containing $A$.
+1. Thus, $\closure A$ is closed and bounded.
+1. By {prf:ref}`res-la-ndim-compact-closed-bounded`, 
+   $\closure A$ is compact.
+1. Let $\{ \bx_k \}$ be a sequence of $A$. Then, it is also a sequence of $\closure A$.
+1. By {prf:ref}`def-ms-compact-characterization`, $\{ \bx_k \}$ has 
+   a subsequence that converges in $\closure A$.
+1. If $A$ is closed, then $\closure A = A$ and we are done.
+```
+
+```{prf:theorem} Bolzano Weierstrass theorem for bounded sequences
+:label: res-la-bounded-seq-bolzano-weierstrass
+
+Let $\VV$ be a real $n$-dimensional normed linear space. 
+Every bounded sequence of $\VV$ has a convergent subsequence.
+```
+```{prf:proof}
+Let $\{ \bx_k \}$ be a bounded sequence of $\VV$.
+
+1. Then there exists a closed ball $B[\bzero, M]$ such that 
+   $\{ \bx_k \} \subset B[\bzero, M]$.
+1. $B[\bzero, M]$ is closed and bounded.
+1. By {prf:ref}`res-la-ndim-compact-closed-bounded`, 
+   $B[\bzero, M]$ is compact.
+1. By {prf:ref}`def-ms-compact-characterization`, $\{ \bx_k \}$ has 
+   a subsequence that converges in $B[\bzero, M]$.
+```

@@ -41,6 +41,8 @@ Thus, $\{ x_n\}$ is a Cauchy sequence.
 ```
 
 ```{prf:example} Not every Cauchy sequence is convergent
+:label: ex-ms-cauchy-non-convergent-1
+
 
 Consider $X = \RR_{++}$ with metric $d(x,y) = |x-y|$. 
 Consider the sequence $x_n = \frac{1}{n}$.
@@ -77,6 +79,7 @@ $\{ x_n \}$ of $X$ converges to a point $x \in X$.
 ```
 
 ```{prf:example} Complete metric spaces
+:label: ex-ms-complete-1
 
 1. $\RR^n$ with the standard metric $d(x,y) = | x-y|$ is complete.
 1. The Euclidean space $\RR^n$, with the standard Euclidean metric 
@@ -284,6 +287,8 @@ $$
 ```
 
 ```{prf:example}
+:label: ex-ms-nowhere-dense-z
+
 The set of integers $\ZZ$ is nowhere dense in $\RR$.
 ```
 
@@ -615,6 +620,7 @@ or of *second category*.
 
 
 ```{prf:example}
+:label: ex-ms-r-subsets-rare-non-rare-co-meager-non-meager
 
 Consider the metric space $\RR$.
 
@@ -630,6 +636,8 @@ Consider the metric space $\RR$.
 
 
 ```{prf:theorem}
+:label: res-ms-meager-subset-meager
+
 The subset of a meager set is meager.
 ```
 ```{prf:proof}
@@ -658,6 +666,8 @@ is meager (as it is a countable union of nowhere dense sets).
 ```
 
 ```{prf:theorem}
+:label: res-ms-meager-countable-union-meager
+
 The union of countably many meager sets is meager.
 ```
 ```{prf:proof}
@@ -766,6 +776,8 @@ that a dense set has a nonempty intersection with every nonempty open set.
 ```
 
 ```{prf:theorem}
+:label: res-ms-complete-as-union-non-rare
+
 If $(X, d)$ is complete and $X = \bigcup_{n=1}^{\infty} A_n$,
 then at least one $A_n$ is non-rare; i.e.,
 $\interior \closure A_n \neq \EmptySet$ for some $n$.
@@ -861,6 +873,7 @@ is not meager.
 ```
 
 ```{prf:example}
+:label: ex-ms-rational-meager-closure-complete
 
 $\QQ$ in $\RR$
 
@@ -884,6 +897,8 @@ $\QQ$ in $\QQ$
 ```
 
 ```{prf:theorem}
+:label: res-ms-0-1-interval-uncountable
+
 The set $[0,1]$ is uncountable.
 ```
 ```{prf:proof}
@@ -910,6 +925,8 @@ open set is not a meager set.
 ```
 
 ```{prf:theorem}
+:label: res-ms-complete-is-baire
+
 Every complete metric space is a Baire space.
 ```
 ```{prf:proof}
@@ -1237,6 +1254,8 @@ Thus, $Z$ is a completion of $X$.
 ```
 
 ```{prf:theorem}
+:label: res-ms-metric-space-has-completion
+
 Every metric space has a unique (up to an isometry) completion.
 ```
 
@@ -1306,4 +1325,37 @@ We have already established in
 {prf:ref}`res-ms-completions-isometric` that 
 any two completions of $X$ are isometric to each other.
 Thus, the completion is unique up to an isometry.
+```
+
+## Isometries
+
+```{prf:theorem} Isometries preserve closed sets
+:label: res-ms-isometries-preserve-closed-sets
+
+Let $(X, d)$ and $(Y, \rho)$ be complete metric spaces.
+Let $f : (X, d) \to (Y, \rho)$ be an isometry.
+Let $C \subset X$ be a closed set in $X$.
+Then, $f(C)$ is closed.
+```
+
+```{prf:proof}
+1. Let $\{ y_n \}$ be a convergent sequence of $f(C)$.
+1. Let $y = \lim y_n$. 
+1. Recall that an isometric is injective.
+1. Thus, $y_n = f(x_n)$ for some $x_n \in C$ for every $n$.
+1. Since $\{ y_n \}$ is convergent, hence $\{ y_n \}$ is Cauchy.
+1. Now, for any $m,n \in \Nat$
+
+   $$
+   d(x_m, x_n) = \rho(y_m, y_n)
+   $$
+   as $f$ is isometric.
+1. Thus, $\{ x_n \}$ is a Cauchy sequence of $C$.
+1. Since $X$ is complete, hence every Cauchy sequence converges.
+1. Let $x = \lim x_n$.
+1. Since $C$ is closed, hence $x \in C$.
+1. By continuity of $f$, we have $f(x) = y$.
+1. Thus, $y = f(x) \in f(C)$.
+1. Thus, every convergent sequence of $C$ converges in $C$.
+1. Thus, $f(C)$ is closed.
 ```

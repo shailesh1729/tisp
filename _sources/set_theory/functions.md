@@ -252,6 +252,8 @@ $$
 ````
 
 ```{prf:remark}
+:label: rem-st-range-empty-sub-empty-inverse
+
 If $B \cap \range f = \EmptySet$ then $f^{-1}(B) = \EmptySet$.
 ```
 
@@ -312,6 +314,7 @@ $$
 ````
 
 ```{prf:remark}
+:label: rem-st-func-comp-domain-subset
 
 $$
 \dom g \circ f \subseteq \dom f \subseteq X.
@@ -418,6 +421,8 @@ definition of a function allows $\dom f^{-1}$ to be a
 subset of $Y$ (which happens to be $\range f$).
 
 ````{prf:remark}
+:label: rem-st-f-comp-f-inv-identity
+
 We can see that $(f \circ f^{-1})(y) = y$ for all $ y \in \range f$.
 Also $ (f^{-1} \circ f) (x) = x$ for all $ x \in \dom f$.
 
@@ -431,6 +436,8 @@ $$
 ````
 
 ```{prf:remark}
+:label: rem-st-func-injective-inverse-injective
+
 The inverse of an injective (partial) function is injective.
 ```
 
@@ -454,6 +461,8 @@ The total function $f^{-1}$ is called the *inverse* of $f$.
 ````
 
 ```{prf:remark}
+:label: rem-st-func-bijective-inverse-bijective
+
 The inverse of a bijective function is bijective.
 ```
 
@@ -469,11 +478,15 @@ $$
 ````
 
 ````{prf:remark}
+:label: rem-st-identity-func-bijective
+
 Identify function is one-one and onto. It is a total function
 and is bijective.
 ````
 
 ```{prf:remark} Composition of a total function with its inverse
+:label: rem-st-total-bijective-func-inverse-comp
+
 For a total function $f: X \to Y$:
 
 $$
@@ -554,6 +567,8 @@ any $x \in \dom f \setminus C$.
 ```
 
 ```{prf:remark}
+:label: rem-st-total-func-restriction-subset
+
 For total functions, the convention is to change the
 signature from $f : A \to B$ to $f|_C : C \to B$.
 This way, the restriction $f|_C$ is also a total function.
@@ -624,6 +639,8 @@ $$
 ```
 
 ```{prf:remark}
+:label: rem-st-set-valued-function-as-graph
+
 Let $A : X \to 2^Y$ be a set valued function.
 Then, $A$ is characterized by its graph
 
@@ -633,6 +650,8 @@ $$
 ```
 
 ```{prf:definition} Image of a subset under a set valued function
+:label: def-st-image-subset-under-set-valued-func
+
 Let $A : X \to 2^Y$ be a set valued function 
 and let $C \subseteq X$.
 Then:
@@ -643,6 +662,8 @@ $$
 ``` 
 
 ```{prf:definition} Composition of set valued functions
+:label: def-st-set-valued-functions-composition
+
 Let $A : X \to 2^Y$ and $ B : Y \to 2^Z$ be set valued
 functions. 
 
@@ -673,6 +694,8 @@ Note that $A(X) \subseteq Y$.
 ```
 
 ```{prf:remark}
+:label: rem-st-set-valued-function-partial-total-onto-conditions
+
 A set valued function $A: X \to 2^Y$ is:
 
 1. *partial* if $\dom A \neq X$.

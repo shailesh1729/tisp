@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4.10. Affine Sets and Transformations &#8212; Optimization for Signal Processing</title>
+    <title>4.11. Affine Sets and Transformations &#8212; Optimization for Signal Processing</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -38,24 +38,26 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="5. Multivariate Calculus" href="../mv_calculus/chapter.html" />
-    <link rel="prev" title="4.9. Sequence Spaces" href="sequence_spaces.html" />
+    <link rel="prev" title="4.10. Sequence Spaces" href="sequence_spaces.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -82,12 +84,7 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
@@ -255,13 +252,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
-     3.8. Real Valued Functions
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../metric_spaces/subspaces.html">
-     3.9. Subspace Topology
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
     </a>
    </li>
    <li class="toctree-l2">
@@ -322,18 +319,23 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="sym_matrices.html">
+     4.8. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="important_spaces.html">
-     4.8. Important Vector Spaces
+     4.9. Important Vector Spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="sequence_spaces.html">
-     4.9. Sequence Spaces
+     4.10. Sequence Spaces
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     4.10. Affine Sets and Transformations
+     4.11. Affine Sets and Transformations
     </a>
    </li>
   </ul>
@@ -351,6 +353,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../mv_calculus/differentiation.html">
      5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
     </a>
    </li>
   </ul>
@@ -396,35 +403,60 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/psd_cone.html">
-     6.5. Symmetric Matrices
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../convex_sets/generalized_inequality.html">
-     6.6. Generalized Inequalities
+     6.5. Generalized Inequalities
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../convex_sets/convex_functions.html">
-     6.7. Convex Functions
+     6.6. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     6.7. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     6.8. Convexity Preserving Function Operations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../convex_sets/relint.html">
-     6.8. Topological Properties
+     6.9. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     6.10. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     6.11. Continuity
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../convex_sets/subgradients.html">
-     6.9. Subgradients
+     6.12. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     6.13. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     6.14. Smoothness
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../conjugate_functions/chapter.html">
-   7. Conjugate Functions
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   7. Convex Optimization
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -433,15 +465,45 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../conjugate_functions/summary.html">
-     7.1. Chapter Summary
+    <a class="reference internal" href="../cvxopt/intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     7.2. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     7.3. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     7.4. Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     7.5. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     7.6. Quadratic Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     7.7. Differentiable Objective Functions
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../smoothness/chapter.html">
-   8. Smoothness
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   8. Proximal Operator
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -450,94 +512,31 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../smoothness/summary.html">
-     8.1. Chapter Summary
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../strong_convexity/chapter.html">
-   9. Strong Convexity
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
-  <label for="toctree-checkbox-9">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../strong_convexity/summary.html">
-     9.1. Chapter Summary
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../projection_onto_convex_sets/chapter.html">
-   10. Projection onto Convex Sets
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
-  <label for="toctree-checkbox-10">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../projection_onto_convex_sets/summary.html">
-     10.1. Chapter Summary
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../proximal_operator/chapter.html">
-   11. Proximal Operator
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
-  <label for="toctree-checkbox-11">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
     <a class="reference internal" href="../proximal_operator/intro.html">
-     11.3. Introduction
+     8.3. Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../proximal_operator/summary.html">
-     11.4. Chapter Summary
+     8.4. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../gradient_methods/chapter.html">
-   12. Gradient Descent Methods
+   9. Gradient Descent Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../subgradient_methods/chapter.html">
-   13. Subgradient Methods
+   10. Subgradient Methods
   </a>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1">
   <a class="reference internal" href="../selected/chapter.html">
-   14. Selected Functions
+   11. Selected Functions
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
-  <label for="toctree-checkbox-12">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../selected/projection.html">
-     14.1. Projection onto Convex Set
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -553,7 +552,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../bib.html">
-   Bibliography
+   Bibliographic Notes
   </a>
  </li>
 </ul>
@@ -572,22 +571,22 @@
 
 
           
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
-<div class="sbt-scroll-pixel-helper"></div>
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
     <div class="topbar container-xl fixed-top">
     <div class="topbar-contents row">
         <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
         <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
             
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
@@ -645,124 +644,129 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#lines">
-   4.10.1. Lines
+   4.11.1. Lines
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-sets">
-   4.10.2. Affine Sets
+   4.11.2. Affine Sets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-combinations">
-   4.10.3. Affine Combinations
+   4.11.3. Affine Combinations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#connection-with-linear-subspaces">
-   4.10.4. Connection with Linear Subspaces
+   4.11.4. Connection with Linear Subspaces
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-subspaces-and-dimension">
-   4.10.5. Affine Subspaces and Dimension
+   4.11.5. Affine Subspaces and Dimension
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-hull">
-   4.10.6. Affine Hull
+   4.11.6. Affine Hull
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-independence">
-   4.10.7. Affine Independence
+   4.11.7. Affine Independence
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#barycentric-coordinate-system">
-   4.10.8. Barycentric Coordinate System
+   4.11.8. Barycentric Coordinate System
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#translations">
-   4.10.9. Translations
+   4.11.9. Translations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affinity-preserving-operations">
-   4.10.10. Affinity Preserving Operations
+   4.11.10. Affinity Preserving Operations
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#intersection">
-     4.10.10.1. Intersection
+     4.11.10.1. Intersection
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hyper-planes">
-   4.10.11. Hyper Planes
+   4.11.11. Hyper Planes
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linear-equations">
-   4.10.12. Linear Equations
+   4.11.12. Linear Equations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-transformations">
-   4.10.13. Affine Transformations
+   4.11.13. Affine Transformations
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#relation-with-linear-transformations">
-     4.10.13.1. Relation with Linear Transformations
+     4.11.13.1. Relation with Linear Transformations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#affine-combinations-and-hulls">
-     4.10.13.2. Affine Combinations and Hulls
+     4.11.13.2. Affine Combinations and Hulls
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#invertible-affine-transformations">
-     4.10.13.3. Invertible Affine Transformations
+     4.11.13.3. Invertible Affine Transformations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#affine-mapping-between-affine-sets">
-     4.10.13.4. Affine Mapping between Affine Sets
+     4.11.13.4. Affine Mapping between Affine Sets
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#graph">
-     4.10.13.5. Graph
+     4.11.13.5. Graph
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#topology-in-normed-spaces">
-   4.10.14. Topology in Normed Spaces
+   4.11.14. Topology in Normed Spaces
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id3">
-     4.10.14.1. Affine Sets
+     4.11.14.1. Affine Sets
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     4.10.14.2. Affine Transformations
+     4.11.14.2. Affine Transformations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#affine-homeomorphisms">
-     4.10.14.3. Affine Homeomorphisms
+     4.11.14.3. Affine Homeomorphisms
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-valued-affine-functions">
+   4.11.15. Real Valued Affine Functions
+  </a>
  </li>
 </ul>
 
@@ -786,124 +790,129 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#lines">
-   4.10.1. Lines
+   4.11.1. Lines
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-sets">
-   4.10.2. Affine Sets
+   4.11.2. Affine Sets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-combinations">
-   4.10.3. Affine Combinations
+   4.11.3. Affine Combinations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#connection-with-linear-subspaces">
-   4.10.4. Connection with Linear Subspaces
+   4.11.4. Connection with Linear Subspaces
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-subspaces-and-dimension">
-   4.10.5. Affine Subspaces and Dimension
+   4.11.5. Affine Subspaces and Dimension
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-hull">
-   4.10.6. Affine Hull
+   4.11.6. Affine Hull
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-independence">
-   4.10.7. Affine Independence
+   4.11.7. Affine Independence
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#barycentric-coordinate-system">
-   4.10.8. Barycentric Coordinate System
+   4.11.8. Barycentric Coordinate System
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#translations">
-   4.10.9. Translations
+   4.11.9. Translations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affinity-preserving-operations">
-   4.10.10. Affinity Preserving Operations
+   4.11.10. Affinity Preserving Operations
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#intersection">
-     4.10.10.1. Intersection
+     4.11.10.1. Intersection
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hyper-planes">
-   4.10.11. Hyper Planes
+   4.11.11. Hyper Planes
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linear-equations">
-   4.10.12. Linear Equations
+   4.11.12. Linear Equations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#affine-transformations">
-   4.10.13. Affine Transformations
+   4.11.13. Affine Transformations
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#relation-with-linear-transformations">
-     4.10.13.1. Relation with Linear Transformations
+     4.11.13.1. Relation with Linear Transformations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#affine-combinations-and-hulls">
-     4.10.13.2. Affine Combinations and Hulls
+     4.11.13.2. Affine Combinations and Hulls
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#invertible-affine-transformations">
-     4.10.13.3. Invertible Affine Transformations
+     4.11.13.3. Invertible Affine Transformations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#affine-mapping-between-affine-sets">
-     4.10.13.4. Affine Mapping between Affine Sets
+     4.11.13.4. Affine Mapping between Affine Sets
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#graph">
-     4.10.13.5. Graph
+     4.11.13.5. Graph
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#topology-in-normed-spaces">
-   4.10.14. Topology in Normed Spaces
+   4.11.14. Topology in Normed Spaces
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id3">
-     4.10.14.1. Affine Sets
+     4.11.14.1. Affine Sets
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     4.10.14.2. Affine Transformations
+     4.11.14.2. Affine Transformations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#affine-homeomorphisms">
-     4.10.14.3. Affine Homeomorphisms
+     4.11.14.3. Affine Homeomorphisms
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-valued-affine-functions">
+   4.11.15. Real Valued Affine Functions
+  </a>
  </li>
 </ul>
 
@@ -915,9 +924,9 @@
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="affine-sets-and-transformations">
-<span id="sec-la-affine-sets"></span><h1><span class="section-number">4.10. </span>Affine Sets and Transformations<a class="headerlink" href="#affine-sets-and-transformations" title="Permalink to this headline">¶</a></h1>
+<span id="sec-la-affine-sets"></span><h1><span class="section-number">4.11. </span>Affine Sets and Transformations<a class="headerlink" href="#affine-sets-and-transformations" title="Permalink to this headline">¶</a></h1>
 <p>Primary references for this section are
-<span id="id1">[<a class="reference internal" href="../bib.html#id5">4</a>, <a class="reference internal" href="../bib.html#id6">6</a>, <a class="reference internal" href="../bib.html#id12">12</a>]</span>.</p>
+<span id="id1">[<a class="reference internal" href="../bib.html#id12" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">5</a>, <a class="reference internal" href="../bib.html#id13" title="Stephen P Boyd and Lieven Vandenberghe. Convex optimization. Cambridge university press, 2004.">7</a>, <a class="reference internal" href="../bib.html#id20" title="Ralph Tyrell Rockafellar. Convex analysis. Princeton university press, 2015.">14</a>]</span>.</p>
 <p>In this section <span class="math notranslate nohighlight">\(\VV\)</span> denotes a vector space on some field <span class="math notranslate nohighlight">\(\FF\)</span>
 which can be either <span class="math notranslate nohighlight">\(\RR\)</span> (real numbers) or <span class="math notranslate nohighlight">\(\CC\)</span> (complex numbers).
 Much of the section will not require any other structure on
@@ -949,9 +958,9 @@ of affine sets, subspaces and transformations in this
 section.</p>
 </div>
 <div class="section" id="lines">
-<h2><span class="section-number">4.10.1. </span>Lines<a class="headerlink" href="#lines" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.1. </span>Lines<a class="headerlink" href="#lines" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-aff-line">
-<p class="admonition-title"><span class="caption-number">Definition 4.107 </span> (Line)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.117 </span> (Line)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> be two points in <span class="math notranslate nohighlight">\(\VV\)</span>. Points of the form</p>
 <div class="math notranslate nohighlight">
@@ -976,17 +985,17 @@ section.</p>
 <li><p><span class="math notranslate nohighlight">\(\by\)</span> is the sum of the base point and the direction scaled by the parameter <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
 <li><p>As <span class="math notranslate nohighlight">\(\theta\)</span> goes from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(\by\)</span> moves from <span class="math notranslate nohighlight">\(\bx_2\)</span> to <span class="math notranslate nohighlight">\(\bx_1\)</span>.</p></li>
 </ul>
-<div class="proof remark admonition" id="remark-1">
-<p class="admonition-title"><span class="caption-number">Remark 4.10 </span></p>
+<div class="proof remark admonition" id="rem-aff-line-alt-not">
+<p class="admonition-title"><span class="caption-number">Remark 4.11 </span></p>
 <div class="remark-content section" id="proof-content">
 <p>An alternative notation for the line as a set is <span class="math notranslate nohighlight">\(\bx_2 + \FF (\bx_1 - \bx_2)\)</span>
 following the notation in <a class="reference internal" href="vector_spaces.html#def-vs-set-arithmetic">Definition 4.33</a>.</p>
 </div>
 </div></div>
 <div class="section" id="affine-sets">
-<h2><span class="section-number">4.10.2. </span>Affine Sets<a class="headerlink" href="#affine-sets" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.2. </span>Affine Sets<a class="headerlink" href="#affine-sets" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-affine-set">
-<p class="admonition-title"><span class="caption-number">Definition 4.108 </span> (Affine set)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.118 </span> (Affine set)</p>
 <div class="definition-content section" id="proof-content">
 <p>A set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> is <em>affine</em> if the line through
 any two distinct points in <span class="math notranslate nohighlight">\(C\)</span> lies in <span class="math notranslate nohighlight">\(C\)</span>.</p>
@@ -1036,7 +1045,7 @@ Hence, for any two points in the vector space, the line passing
 through it is contained inside the space.</p>
 </div>
 </div><div class="proof theorem admonition" id="res-aff-linear-subspace-is-affine">
-<p class="admonition-title"><span class="caption-number">Theorem 4.117 </span> (Linear subspaces are affine)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.132 </span> (Linear subspaces are affine)</p>
 <div class="theorem-content section" id="proof-content">
 <p>The linear subspaces of a vector space <span class="math notranslate nohighlight">\(\VV\)</span>
 are affine sets containing the zero vector.</p>
@@ -1077,13 +1086,13 @@ hence <span class="math notranslate nohighlight">\(A\)</span> must be a subspace
 </div>
 </div>
 <div class="section" id="affine-combinations">
-<h2><span class="section-number">4.10.3. </span>Affine Combinations<a class="headerlink" href="#affine-combinations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.3. </span>Affine Combinations<a class="headerlink" href="#affine-combinations" title="Permalink to this headline">¶</a></h2>
 <p>If we denote <span class="math notranslate nohighlight">\(\alpha = \theta\)</span> and <span class="math notranslate nohighlight">\(\beta = (1 - \theta)\)</span> we see that
 <span class="math notranslate nohighlight">\(\alpha \bx_1 + \beta \bx_2\)</span> represents a linear combination of points in <span class="math notranslate nohighlight">\(C\)</span>
 such that <span class="math notranslate nohighlight">\(\alpha + \beta = 1\)</span>.
 The idea can be generalized in following way.</p>
 <div class="proof definition admonition" id="def-affine-combination">
-<p class="admonition-title"><span class="caption-number">Definition 4.109 </span> (Affine combination)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.119 </span> (Affine combination)</p>
 <div class="definition-content section" id="proof-content">
 <p>A point of the form <span class="math notranslate nohighlight">\(\bx = \theta_1 \bx_1 + \dots + \theta_k \bx_k\)</span> where
 <span class="math notranslate nohighlight">\(\theta_1 + \dots + \theta_k = 1\)</span> with <span class="math notranslate nohighlight">\(\theta_i \in \FF\)</span> and <span class="math notranslate nohighlight">\(\bx_i \in \VV\)</span>,
@@ -1094,7 +1103,7 @@ affine combination.</p>
 <p>It can be shown easily that an affine set <span class="math notranslate nohighlight">\(C\)</span>
 contains all affine combinations of its points.</p>
 <div class="proof theorem admonition" id="res-aff-set-contains-aff-combs">
-<p class="admonition-title"><span class="caption-number">Theorem 4.118 </span> (Affine set contains affine combinations)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.133 </span> (Affine set contains affine combinations)</p>
 <div class="theorem-content section" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(C\)</span> is an affine set,
 <span class="math notranslate nohighlight">\(\bx_1, \dots, \bx_k \in C\)</span>,
@@ -1149,7 +1158,7 @@ it contains its <span class="math notranslate nohighlight">\(k\)</span> term aff
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-aff-comb-aff-comb-aff-comb">
-<p class="admonition-title"><span class="caption-number">Theorem 4.119 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.134 </span></p>
 <div class="theorem-content section" id="proof-content">
 <p>An affine combination of affine combinations is an affine combination.</p>
 </div>
@@ -1180,9 +1189,9 @@ affine combinations of affine combinations are affine combinations.</p>
 </div>
 </div>
 <div class="section" id="connection-with-linear-subspaces">
-<h2><span class="section-number">4.10.4. </span>Connection with Linear Subspaces<a class="headerlink" href="#connection-with-linear-subspaces" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.4. </span>Connection with Linear Subspaces<a class="headerlink" href="#connection-with-linear-subspaces" title="Permalink to this headline">¶</a></h2>
 <div class="proof theorem admonition" id="res-aff-offset-plus-linear-subspace">
-<p class="admonition-title"><span class="caption-number">Theorem 4.120 </span> (affine - point = linear)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.135 </span> (affine - point = linear)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty affine set and <span class="math notranslate nohighlight">\(\bx_0\)</span> be any element in <span class="math notranslate nohighlight">\(C\)</span>. Then the set</p>
 <div class="math notranslate nohighlight">
@@ -1228,7 +1237,7 @@ In other words, a nonempty affine set is a linear subspace with an offset.</p>
 is one and only linear subspace associated with an affine set.
 This is done in the next result.</p>
 <div class="proof theorem admonition" id="res-aff-unique-lin-sub">
-<p class="admonition-title"><span class="caption-number">Theorem 4.121 </span> (Uniqueness of associated subspace)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.136 </span> (Uniqueness of associated subspace)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty affine set and
 let <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> be two distinct elements in <span class="math notranslate nohighlight">\(C\)</span>.
@@ -1254,11 +1263,11 @@ linear subspaces <span class="math notranslate nohighlight">\(V_1\)</span> and <
 <p>Thus the subspace <span class="math notranslate nohighlight">\(V\)</span> associated with a nonempty affine set <span class="math notranslate nohighlight">\(C\)</span> doesn’t depend upon
 the choice of offset <span class="math notranslate nohighlight">\(\bx_0\)</span> in <span class="math notranslate nohighlight">\(C\)</span>.</p>
 <div class="proof corollary admonition" id="res-aff-with-zero-is-linear">
-<p class="admonition-title"><span class="caption-number">Corollary 4.11 </span></p>
+<p class="admonition-title"><span class="caption-number">Corollary 4.13 </span></p>
 <div class="corollary-content section" id="proof-content">
 <p>If an affine set contains <span class="math notranslate nohighlight">\(\bzero\)</span> then it is a linear subspace.</p>
 </div>
-</div><p>We have already shown this in <a class="reference internal" href="#res-aff-linear-subspace-is-affine">Theorem 4.117</a>.
+</div><p>We have already shown this in <a class="reference internal" href="#res-aff-linear-subspace-is-affine">Theorem 4.132</a>.
 This is an alternative proof.</p>
 <div class="proof admonition" id="proof">
 <p>Proof. The linear subspace associated with an affine set <span class="math notranslate nohighlight">\(C\)</span> is given by
@@ -1272,9 +1281,9 @@ V = C - \bzero = C.
 </div>
 </div>
 <div class="section" id="affine-subspaces-and-dimension">
-<h2><span class="section-number">4.10.5. </span>Affine Subspaces and Dimension<a class="headerlink" href="#affine-subspaces-and-dimension" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.5. </span>Affine Subspaces and Dimension<a class="headerlink" href="#affine-subspaces-and-dimension" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-affine-subspace">
-<p class="admonition-title"><span class="caption-number">Definition 4.110 </span> (Affine subspace)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.120 </span> (Affine subspace)</p>
 <div class="definition-content section" id="proof-content">
 <p>A nonempty affine set is called an <em>affine subspace</em>.
 An affine subspace is a linear subspace with an offset.</p>
@@ -1286,7 +1295,7 @@ C \neq \EmptySet \text{ and } \Forall \theta \in \FF, \quad C = \theta C + (1 - 
 \]</div>
 </div>
 </div><div class="proof definition admonition" id="def-affine-proper-subspace">
-<p class="admonition-title"><span class="caption-number">Definition 4.111 </span> (Affine proper subspace)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.121 </span> (Affine proper subspace)</p>
 <div class="definition-content section" id="proof-content">
 <p>An affine subspace <span class="math notranslate nohighlight">\(A\)</span> in a vector space <span class="math notranslate nohighlight">\(\VV\)</span>
 is called a proper subspace
@@ -1295,7 +1304,7 @@ is a <a class="reference internal" href="vector_spaces.html#def-la-proper-subspa
 <p>In other words, <span class="math notranslate nohighlight">\(A\)</span> is affine, <span class="math notranslate nohighlight">\(A \neq \EmptySet\)</span>, and <span class="math notranslate nohighlight">\(A \neq \VV\)</span>.</p>
 </div>
 </div><div class="proof definition admonition" id="def-affine-dimension">
-<p class="admonition-title"><span class="caption-number">Definition 4.112 </span> (Affine dimension)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.122 </span> (Affine dimension)</p>
 <div class="definition-content section" id="proof-content">
 <p>We define the <em>affine dimension</em> of an affine subspace <span class="math notranslate nohighlight">\(C\)</span> as the dimension
 of the associated linear subspace <span class="math notranslate nohighlight">\(V = C - \bx_0\)</span> for some <span class="math notranslate nohighlight">\(\bx_0 \in C\)</span>
@@ -1316,7 +1325,7 @@ if the subspace <span class="math notranslate nohighlight">\(V\)</span> is finit
 <p>Thus, the singleton set has an affine dimension of 0.</p>
 </div>
 </div><div class="proof remark admonition" id="res-aff-simple-geom-examples">
-<p class="admonition-title"><span class="caption-number">Remark 4.11 </span> (Points, lines, planes, flats)</p>
+<p class="admonition-title"><span class="caption-number">Remark 4.12 </span> (Points, lines, planes, flats)</p>
 <div class="remark-content section" id="proof-content">
 <p>The affine sets of dimension 0, 1 and 2 are called
 points, lines and planes respectively.</p>
@@ -1337,13 +1346,13 @@ which passes through origin.</p></li>
 </ul>
 </div>
 </div><div class="proof theorem admonition" id="res-aff-space-closed-aff-comb">
-<p class="admonition-title"><span class="caption-number">Theorem 4.122 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.137 </span></p>
 <div class="theorem-content section" id="proof-content">
 <p>An affine subspace is closed under affine combinations.</p>
 </div>
 </div><div class="proof admonition" id="proof">
 <p>Proof. This is from the definition of affine sets
-and <a class="reference internal" href="#res-aff-set-contains-aff-combs">Theorem 4.118</a>.</p>
+and <a class="reference internal" href="#res-aff-set-contains-aff-combs">Theorem 4.133</a>.</p>
 </div>
 <div class="proof observation admonition" id="res-aff-affine-minus-affine">
 <p class="admonition-title"><span class="caption-number">Observation 4.6 </span> (Affine - affine = Linear)</p>
@@ -1370,9 +1379,9 @@ the collection of difference vectors between points.</p>
 \]</div>
 </div>
 <div class="section" id="affine-hull">
-<h2><span class="section-number">4.10.6. </span>Affine Hull<a class="headerlink" href="#affine-hull" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.6. </span>Affine Hull<a class="headerlink" href="#affine-hull" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-affine-hull">
-<p class="admonition-title"><span class="caption-number">Definition 4.113 </span> (Affine hull)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.123 </span> (Affine hull)</p>
 <div class="definition-content section" id="proof-content">
 <p>The set of all affine combinations of points in some arbitrary nonempty set
 <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span>
@@ -1384,7 +1393,7 @@ is called the <em>affine hull</em> of <span class="math notranslate nohighlight"
 \]</div>
 </div>
 </div><div class="proof theorem admonition" id="res-aff-hull-subspace">
-<p class="admonition-title"><span class="caption-number">Theorem 4.123 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.138 </span></p>
 <div class="theorem-content section" id="proof-content">
 <p>An affine hull is an affine subspace.</p>
 </div>
@@ -1396,7 +1405,7 @@ Let <span class="math notranslate nohighlight">\(\bu, \bv \in T\)</span>. Then</
 \bu = \sum_{i=1}^{k} \theta_i \bx_i \text {and } v = \sum_{j=1}^{l} \lambda_j \by_j
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\bx_i, \by_j \in S\)</span>, <span class="math notranslate nohighlight">\(\sum \theta_i  = 1\)</span> and <span class="math notranslate nohighlight">\(\sum \lambda_j = 1\)</span>.</p>
-<p>Then, as shown in <a class="reference internal" href="#res-aff-comb-aff-comb-aff-comb">Theorem 4.119</a>,</p>
+<p>Then, as shown in <a class="reference internal" href="#res-aff-comb-aff-comb-aff-comb">Theorem 4.134</a>,</p>
 <div class="math notranslate nohighlight">
 \[
 \bw = \gamma \bu + (1 - \gamma) \bv
@@ -1407,7 +1416,7 @@ Hence, <span class="math notranslate nohighlight">\(T\)</span> is an affine set.
 Since <span class="math notranslate nohighlight">\(T\)</span> is nonempty, hence <span class="math notranslate nohighlight">\(T\)</span> is an affine subspace.</p>
 </div>
 <div class="proof theorem admonition" id="res-aff-affine-hull-smallest">
-<p class="admonition-title"><span class="caption-number">Theorem 4.124 </span> (Smallest containing affine subspace)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.139 </span> (Smallest containing affine subspace)</p>
 <div class="theorem-content section" id="proof-content">
 <p>The affine hull of a nonempty set <span class="math notranslate nohighlight">\(S\)</span> is the smallest affine subspace containing <span class="math notranslate nohighlight">\(S\)</span>.
 More specifically, let <span class="math notranslate nohighlight">\(C\)</span> be any affine subspace
@@ -1416,23 +1425,23 @@ with <span class="math notranslate nohighlight">\(S \subseteq C\)</span>. Then <
 </div><div class="proof admonition" id="proof">
 <p>Proof. Let <span class="math notranslate nohighlight">\(C\)</span> be an arbitrary affine subspace such that <span class="math notranslate nohighlight">\(S \subseteq C\)</span>.</p>
 <ol class="simple">
-<li><p>From <a class="reference internal" href="#res-aff-space-closed-aff-comb">Theorem 4.122</a>, <span class="math notranslate nohighlight">\(C\)</span> is closed under
+<li><p>From <a class="reference internal" href="#res-aff-space-closed-aff-comb">Theorem 4.137</a>, <span class="math notranslate nohighlight">\(C\)</span> is closed under
 affine combinations.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> contains all affine combinations of
 points of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(\affine S \subseteq C\)</span>.</p></li>
-<li><p>We established in <a class="reference internal" href="#res-aff-hull-subspace">Theorem 4.123</a> that
+<li><p>We established in <a class="reference internal" href="#res-aff-hull-subspace">Theorem 4.138</a> that
 <span class="math notranslate nohighlight">\(\affine S\)</span> is an affine subspace.</p></li>
 <li><p>Thus, it is the smallest affine subspace containing <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
 </ol>
 </div>
 <div class="proof corollary admonition" id="res-aff-affine-hull-intersection-all">
-<p class="admonition-title"><span class="caption-number">Corollary 4.12 </span> (Affine hull as intersection)</p>
+<p class="admonition-title"><span class="caption-number">Corollary 4.14 </span> (Affine hull as intersection)</p>
 <div class="corollary-content section" id="proof-content">
 <p>The affine hull of a set is the intersection of all affine subspaces containing it.</p>
 </div>
 </div><div class="proof theorem admonition" id="res-aff-finite-set-hull-ass-space">
-<p class="admonition-title"><span class="caption-number">Theorem 4.125 </span> (Affine hull of a finite set)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.140 </span> (Affine hull of a finite set)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S = \{ \bv_0, \bv_1, \dots, \bv_k \}\)</span>
 be a finite set of vectors from a vector space <span class="math notranslate nohighlight">\(\VV\)</span>.
@@ -1471,7 +1480,7 @@ L = \span \{\bv_1 - \bv_0, \dots, \bv_k - \bv_0\}.
 <span class="math notranslate nohighlight">\(\dim L \leq k\)</span>. Thus, <span class="math notranslate nohighlight">\(\dim A \leq k\)</span>.</p>
 </div>
 <div class="proof theorem admonition" id="res-affine-hull-containment">
-<p class="admonition-title"><span class="caption-number">Theorem 4.126 </span> (Containment)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.141 </span> (Containment)</p>
 <div class="theorem-content section" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(A \subseteq B\)</span>, then <span class="math notranslate nohighlight">\(\affine A \subseteq \affine B\)</span>.</p>
 </div>
@@ -1487,7 +1496,7 @@ of points in <span class="math notranslate nohighlight">\(A\)</span> since <span
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-affine-hull-tight-containment">
-<p class="admonition-title"><span class="caption-number">Theorem 4.127 </span> (Tight containment)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.142 </span> (Tight containment)</p>
 <div class="theorem-content section" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(A \subseteq B \subseteq \affine A\)</span>, then <span class="math notranslate nohighlight">\(\affine A = \affine B\)</span>.</p>
 </div>
@@ -1503,9 +1512,9 @@ hence <span class="math notranslate nohighlight">\(\affine B \subseteq \affine A
 </div>
 </div>
 <div class="section" id="affine-independence">
-<h2><span class="section-number">4.10.7. </span>Affine Independence<a class="headerlink" href="#affine-independence" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.7. </span>Affine Independence<a class="headerlink" href="#affine-independence" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-affine-independence">
-<p class="admonition-title"><span class="caption-number">Definition 4.114 </span> (Affine independence)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.124 </span> (Affine independence)</p>
 <div class="definition-content section" id="proof-content">
 <p>A set of vectors <span class="math notranslate nohighlight">\(\bv_0, \bv_1, \dots, \bv_k \in \VV\)</span> is called <em>affine independent</em>,
 if the vectors <span class="math notranslate nohighlight">\(\bv_1 - \bv_0, \dots, \bv_k - \bv_0\)</span> are linearly independent.</p>
@@ -1514,14 +1523,14 @@ if the vectors <span class="math notranslate nohighlight">\(\bv_1 - \bv_0, \dots
 be linearly independent in it. Hence a maximum of <span class="math notranslate nohighlight">\(l+1\)</span> vectors can be affine
 independent for the affine set.</p>
 <div class="proof definition admonition" id="def-affine-dependence">
-<p class="admonition-title"><span class="caption-number">Definition 4.115 </span> (Affine dependence)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.125 </span> (Affine dependence)</p>
 <div class="definition-content section" id="proof-content">
 <p>A set of vectors <span class="math notranslate nohighlight">\(\bv_0, \bv_1, \dots, \bv_k \in \VV\)</span> is called <em>affine dependent</em>,
 if it is not affine independent.
 In other words, the vectors <span class="math notranslate nohighlight">\(\bv_1 - \bv_0, \dots, \bv_k - \bv_0\)</span> are linearly dependent.</p>
 </div>
 </div><div class="proof theorem admonition" id="res-aff-basis-aff-ind-set">
-<p class="admonition-title"><span class="caption-number">Theorem 4.128 </span> (Basis for the linear subspace associated with affine independent set)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.143 </span> (Basis for the linear subspace associated with affine independent set)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\bv_0, \bv_1, \dots, \bv_k \in \VV\)</span> be a set of affine independent,
 points in <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
@@ -1534,7 +1543,7 @@ Let <span class="math notranslate nohighlight">\(L\)</span> be the linear subspa
 </div><div class="proof admonition" id="proof">
 <p>Proof. By definition of affine independence,
 <span class="math notranslate nohighlight">\(\bv_1 - \bv_0, \dots, \bv_k - \bv_0\)</span> are linearly independent.</p>
-<p>By <a class="reference internal" href="#res-aff-finite-set-hull-ass-space">Theorem 4.125</a></p>
+<p>By <a class="reference internal" href="#res-aff-finite-set-hull-ass-space">Theorem 4.140</a></p>
 <div class="math notranslate nohighlight">
 \[
 L = \span \{ \bv_1 - \bv_0, \dots, \bv_k - \bv_0\}.
@@ -1543,7 +1552,7 @@ L = \span \{ \bv_1 - \bv_0, \dots, \bv_k - \bv_0\}.
 form a basis for <span class="math notranslate nohighlight">\(L\)</span>.</p>
 </div>
 <div class="proof theorem admonition" id="res-aff-independence-hull-dim">
-<p class="admonition-title"><span class="caption-number">Theorem 4.129 </span> (Affine independence and dimension)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.144 </span> (Affine independence and dimension)</p>
 <div class="theorem-content section" id="proof-content">
 <p>A set of vectors <span class="math notranslate nohighlight">\(\bv_0, \bv_1, \dots, \bv_k \in \VV\)</span> is
 affine independent if and only if their affine hull
@@ -1552,10 +1561,10 @@ affine independent if and only if their affine hull
 </div><div class="proof admonition" id="proof">
 <p>Proof. Assume <span class="math notranslate nohighlight">\(\bv_0, \bv_1, \dots, \bv_k\)</span> to be affine independent.</p>
 <ol>
-<li><p>Then,  by <a class="reference internal" href="#def-affine-independence">Definition 4.114</a>,
+<li><p>Then,  by <a class="reference internal" href="#def-affine-independence">Definition 4.124</a>,
 <span class="math notranslate nohighlight">\(\bv_1 - \bv_0, \dots, \bv_k - \bv_0\)</span> are linearly independent.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(L = \span \{ \bv_1 - \bv_0, \dots, \bv_k - \bv_0 \}\)</span>.</p></li>
-<li><p>By <a class="reference internal" href="#res-aff-finite-set-hull-ass-space">Theorem 4.125</a></p>
+<li><p>By <a class="reference internal" href="#res-aff-finite-set-hull-ass-space">Theorem 4.140</a></p>
 <div class="math notranslate nohighlight">
 \[
    \dim \affine \{\bv_0, \bv_1, \dots, \bv_k\} = \dim L = k
@@ -1565,7 +1574,7 @@ affine independent if and only if their affine hull
 </ol>
 <p>Now, assume <span class="math notranslate nohighlight">\(A = \affine \{\bv_0, \bv_1, \dots, \bv_k\}\)</span> is <span class="math notranslate nohighlight">\(k\)</span> dimensional.</p>
 <ol class="simple">
-<li><p>By <a class="reference internal" href="#res-aff-finite-set-hull-ass-space">Theorem 4.125</a>, the linear subspace
+<li><p>By <a class="reference internal" href="#res-aff-finite-set-hull-ass-space">Theorem 4.140</a>, the linear subspace
 associated with <span class="math notranslate nohighlight">\(A\)</span> is given by
 <span class="math notranslate nohighlight">\(L = \span \{ \bv_1 - \bv_0, \dots, \bv_k - \bv_0 \}\)</span>.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(L\)</span> is <span class="math notranslate nohighlight">\(k\)</span> dimensional since <span class="math notranslate nohighlight">\(\dim L = \dim A = k\)</span>.</p></li>
@@ -1575,11 +1584,11 @@ associated with <span class="math notranslate nohighlight">\(A\)</span> is given
 must be linearly independent.</p></li>
 </ol>
 </div>
-<p><span id="id2">[<a class="reference internal" href="../bib.html#id12">12</a>]</span> defines <span class="math notranslate nohighlight">\(\bv_0, \bv_1, \dots, \bv_k \in \VV\)</span>
+<p><span id="id2">[<a class="reference internal" href="../bib.html#id20" title="Ralph Tyrell Rockafellar. Convex analysis. Princeton university press, 2015.">14</a>]</span> defines <span class="math notranslate nohighlight">\(\bv_0, \bv_1, \dots, \bv_k \in \VV\)</span>
 as affine independent if their hull is <span class="math notranslate nohighlight">\(k\)</span> dimensional.
 As we can see above, our definition is equivalent.</p>
 <div class="proof theorem admonition" id="res-aff-aff-ind-points-in-aff-subspace">
-<p class="admonition-title"><span class="caption-number">Theorem 4.130 </span> (Affine independent points in an affine subspace)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.145 </span> (Affine independent points in an affine subspace)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be an affine subspace of a vector space <span class="math notranslate nohighlight">\(\VV\)</span>
 such that <span class="math notranslate nohighlight">\(\dim A = k\)</span>. Then, it is possible to choose
@@ -1611,7 +1620,7 @@ dependent.</p></li>
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-aff-set-aff-hull">
-<p class="admonition-title"><span class="caption-number">Theorem 4.131 </span> (Affine set as an affine hull)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.146 </span> (Affine set as an affine hull)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be an affine subspace of a vector space <span class="math notranslate nohighlight">\(\VV\)</span>
 such that <span class="math notranslate nohighlight">\(\dim A = k\)</span>.
@@ -1634,7 +1643,7 @@ H = \affine \{ \bv_0, \dots, \bv_k \}.
 <ol>
 <li><p>Let <span class="math notranslate nohighlight">\(\bv \in A\)</span>.</p></li>
 <li><p>Then, <span class="math notranslate nohighlight">\(\bv - \bv_0 \in L\)</span>.</p></li>
-<li><p>By <a class="reference internal" href="#res-aff-basis-aff-ind-set">Theorem 4.128</a>,
+<li><p>By <a class="reference internal" href="#res-aff-basis-aff-ind-set">Theorem 4.143</a>,
 <span class="math notranslate nohighlight">\(\bv_1 - \bv_0, \dots, \bv_k - \bv_0\)</span> form a basis for <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
 <li><p>Thus,</p>
 <div class="math notranslate nohighlight">
@@ -1654,7 +1663,7 @@ H = \affine \{ \bv_0, \dots, \bv_k \}.
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-aff-extn-affine-ind-set">
-<p class="admonition-title"><span class="caption-number">Theorem 4.132 </span> (Extending an affine independent set of points)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.147 </span> (Extending an affine independent set of points)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional vector space with <span class="math notranslate nohighlight">\(n = \dim \VV\)</span>.
 Any set of <span class="math notranslate nohighlight">\(m+1\)</span> affine independent points in <span class="math notranslate nohighlight">\(\VV\)</span> (where <span class="math notranslate nohighlight">\(m &lt; n\)</span>)
@@ -1678,9 +1687,9 @@ independent.</p></li>
 </div>
 </div>
 <div class="section" id="barycentric-coordinate-system">
-<h2><span class="section-number">4.10.8. </span>Barycentric Coordinate System<a class="headerlink" href="#barycentric-coordinate-system" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.8. </span>Barycentric Coordinate System<a class="headerlink" href="#barycentric-coordinate-system" title="Permalink to this headline">¶</a></h2>
 <div class="proof theorem admonition" id="res-aff-aff-ind-unique-rep">
-<p class="admonition-title"><span class="caption-number">Theorem 4.133 </span> (Unique representation from affine independent points)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.148 </span> (Unique representation from affine independent points)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space and
 <span class="math notranslate nohighlight">\(\bv_0, \bv_1, \dots, \bv_k\)</span> be a set of <span class="math notranslate nohighlight">\(k+1\)</span> affine
@@ -1703,7 +1712,7 @@ by showing that if the representation is not unique then
 the points in <span class="math notranslate nohighlight">\(S\)</span> cannot be affine independent.</p>
 <p>Let <span class="math notranslate nohighlight">\(L\)</span> be the linear subspace associated with <span class="math notranslate nohighlight">\(A\)</span>.
 Let <span class="math notranslate nohighlight">\(\bx_1 = \bv_1 - \bv_0, \dots, \bx_k = \bv_k - \bv_0\)</span>.
-Then, by <a class="reference internal" href="#res-aff-basis-aff-ind-set">Theorem 4.128</a>,
+Then, by <a class="reference internal" href="#res-aff-basis-aff-ind-set">Theorem 4.143</a>,
 the set <span class="math notranslate nohighlight">\(\BBB = \{ \bx_1, \dots, \bx_k\}\)</span>
 forms a basis for <span class="math notranslate nohighlight">\(L\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\bv \in A\)</span>. Then, <span class="math notranslate nohighlight">\(\bx = \bv - \bv_0 \in L\)</span>.</p>
@@ -1755,7 +1764,7 @@ and <span class="math notranslate nohighlight">\(t_0 = 1 - t_1 - \dots - t_k\)</
 <p>This unique representation can be used to define a coordinate system
 in an affine set.</p>
 <div class="proof definition admonition" id="def-aff-barycentric-coordinate-system">
-<p class="admonition-title"><span class="caption-number">Definition 4.116 </span> (Barycentric coordinate system)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.126 </span> (Barycentric coordinate system)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space and
 <span class="math notranslate nohighlight">\(\bv_0, \bv_1, \dots, \bv_k\)</span> be a set of <span class="math notranslate nohighlight">\(k+1\)</span> affine
@@ -1773,15 +1782,15 @@ This representation is known as the <em>barycentric coordinate system</em>.</p>
 with <span class="math notranslate nohighlight">\(\dim A = k\)</span>,
 then we can select <span class="math notranslate nohighlight">\(k+1\)</span> affine independent points
 <span class="math notranslate nohighlight">\(\bv_0, \bv_1, \dots, \bv_k \in A\)</span>
-(thanks to <a class="reference internal" href="#res-aff-aff-ind-points-in-aff-subspace">Theorem 4.130</a>).
+(thanks to <a class="reference internal" href="#res-aff-aff-ind-points-in-aff-subspace">Theorem 4.145</a>).
 Any such set of <span class="math notranslate nohighlight">\(k+1\)</span> affine independent points of <span class="math notranslate nohighlight">\(A\)</span>
 affords <span class="math notranslate nohighlight">\(A\)</span> with a barycentric coordinate system.</p>
 </div>
 </div></div>
 <div class="section" id="translations">
-<h2><span class="section-number">4.10.9. </span>Translations<a class="headerlink" href="#translations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.9. </span>Translations<a class="headerlink" href="#translations" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-la-translation-operator">
-<p class="admonition-title"><span class="caption-number">Definition 4.117 </span> (Translation operator)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.127 </span> (Translation operator)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space.
 An operator
@@ -1795,7 +1804,7 @@ T_{\ba}(\bx) = \bx + \ba \Forall \bx \in \XX
 </div>
 </div><p>It can be easily seen that <span class="math notranslate nohighlight">\(T_{\ba}(C) = \ba + C = C + \ba\)</span>.</p>
 <div class="proof definition admonition" id="def-la-translate">
-<p class="admonition-title"><span class="caption-number">Definition 4.118 </span> (Translate)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.128 </span> (Translate)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>. The <em>translate</em> of <span class="math notranslate nohighlight">\(C\)</span> by
 some <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> is defined to be the set <span class="math notranslate nohighlight">\(C + \ba\)</span>.</p>
@@ -1820,7 +1829,7 @@ some <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> is define
 <p>The translate of the trivial subspace is a singleton set.</p>
 </div>
 </div><div class="proof theorem admonition" id="res-aff-affine-translate">
-<p class="admonition-title"><span class="caption-number">Theorem 4.134 </span> (Affine translate)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.149 </span> (Affine translate)</p>
 <div class="theorem-content section" id="proof-content">
 <p>A translate of an affine set is affine.</p>
 </div>
@@ -1844,7 +1853,7 @@ some <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> is define
 </ol>
 </div>
 <div class="proof definition admonition" id="def-la-affine-parallel-set">
-<p class="admonition-title"><span class="caption-number">Definition 4.119 </span> (Parallel affine sets)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.129 </span> (Parallel affine sets)</p>
 <div class="definition-content section" id="proof-content">
 <p>Two affine sets <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> are called <em>parallel</em> to each other if</p>
 <div class="math notranslate nohighlight">
@@ -1861,7 +1870,7 @@ which have the same dimension.
 Thus, we cannot compare a line with a plane.</p>
 <p>Every point is parallel to every other point.</p>
 <div class="proof theorem admonition" id="res-la-affine-parallel-equivalence-relation">
-<p class="admonition-title"><span class="caption-number">Theorem 4.135 </span> (Parallelism equivalence relation)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.150 </span> (Parallelism equivalence relation)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Consider the class of all affine subsets of a vector space <span class="math notranslate nohighlight">\(\VV\)</span>.
 The relation <span class="math notranslate nohighlight">\(C \parallel D\)</span> is an equivalence relation.</p>
@@ -1889,7 +1898,7 @@ The relation <span class="math notranslate nohighlight">\(C \parallel D\)</span>
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-aff-subspace-parallel-linear">
-<p class="admonition-title"><span class="caption-number">Theorem 4.136 </span> (Existence and uniqueness of a parallel linear subspace)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.151 </span> (Existence and uniqueness of a parallel linear subspace)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Every affine subspace (nonempty affine set) <span class="math notranslate nohighlight">\(A\)</span> is parallel
 to a unique subspace. The subspace is given by:</p>
@@ -1900,7 +1909,7 @@ W = A - A.
 </div>
 </div><p>This result is a restatement of <a class="reference internal" href="#res-aff-affine-minus-affine">Observation 4.6</a>.</p>
 <div class="proof admonition" id="proof">
-<p>Proof. From <a class="reference internal" href="#res-aff-unique-lin-sub">Theorem 4.121</a>, there
+<p>Proof. From <a class="reference internal" href="#res-aff-unique-lin-sub">Theorem 4.136</a>, there
 is a unique linear subspace <span class="math notranslate nohighlight">\(L\)</span> associated with
 <span class="math notranslate nohighlight">\(A\)</span> given by  <span class="math notranslate nohighlight">\(L = A - \ba\)</span> for some <span class="math notranslate nohighlight">\(\ba \in A\)</span>.</p>
 <p>Since <span class="math notranslate nohighlight">\(A = L + \ba\)</span> hence, <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(L\)</span> are parallel
@@ -1925,13 +1934,13 @@ W = \bigcup_{\ba \in A} A - \ba = \bigcup_{\ba \in A} L = L.
 </div>
 </div>
 <div class="section" id="affinity-preserving-operations">
-<h2><span class="section-number">4.10.10. </span>Affinity Preserving Operations<a class="headerlink" href="#affinity-preserving-operations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.10. </span>Affinity Preserving Operations<a class="headerlink" href="#affinity-preserving-operations" title="Permalink to this headline">¶</a></h2>
 <p>We discuss some operations which preserve the affine character
 of its inputs</p>
 <div class="section" id="intersection">
-<h3><span class="section-number">4.10.10.1. </span>Intersection<a class="headerlink" href="#intersection" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.10.1. </span>Intersection<a class="headerlink" href="#intersection" title="Permalink to this headline">¶</a></h3>
 <div class="proof theorem admonition" id="res-aff-intersection">
-<p class="admonition-title"><span class="caption-number">Theorem 4.137 </span> (Intersection of affine sets)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.152 </span> (Intersection of affine sets)</p>
 <div class="theorem-content section" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> are affine sets then <span class="math notranslate nohighlight">\(S_1 \cap S_2\)</span> is affine.</p>
 </div>
@@ -1960,7 +1969,7 @@ t \bx_1 + (1 - t) \bx_2 \in S_1 \cap S_2, \Forall t \in \FF.
 </div>
 <p>We can generalize it further.</p>
 <div class="proof theorem admonition" id="res-aff-arbitrary-intersection">
-<p class="admonition-title"><span class="caption-number">Theorem 4.138 </span> (Intersection of arbitrary collection of affine sets)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.153 </span> (Intersection of arbitrary collection of affine sets)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\{ A_i\}_{i \in I}\)</span> be a family of sets such that <span class="math notranslate nohighlight">\(A_i\)</span> is affine
 for all <span class="math notranslate nohighlight">\(i \in I\)</span>.  Then <span class="math notranslate nohighlight">\(\cap_{i \in I} A_i\)</span> is affine.</p>
@@ -1980,7 +1989,7 @@ for all <span class="math notranslate nohighlight">\(i \in I\)</span>.  Then <sp
 </div>
 </div>
 <div class="section" id="hyper-planes">
-<h2><span class="section-number">4.10.11. </span>Hyper Planes<a class="headerlink" href="#hyper-planes" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.11. </span>Hyper Planes<a class="headerlink" href="#hyper-planes" title="Permalink to this headline">¶</a></h2>
 <p>Recall from <a class="reference internal" href="dual_spaces.html#def-la-hyperplane-functional">Definition 4.83</a> that
 a set of the form:</p>
 <div class="math notranslate nohighlight">
@@ -1991,7 +2000,7 @@ H_{\bf, a} \triangleq \{ \bx \in \VV \ST \bf(\bx) = a \}
 on <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(a \in \FF\)</span>
 is called a hyperplane.</p>
 <div class="proof theorem admonition" id="res-la-aff-hyperplane-affine">
-<p class="admonition-title"><span class="caption-number">Theorem 4.139 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.154 </span></p>
 <div class="theorem-content section" id="proof-content">
 <p>Every hyperplane is affine.</p>
 </div>
@@ -2015,7 +2024,7 @@ is called a hyperplane.</p>
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-aff-hyperplane-parallel-space">
-<p class="admonition-title"><span class="caption-number">Theorem 4.140 </span> (Linear subspace parallel to a hyperplane)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.155 </span> (Linear subspace parallel to a hyperplane)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(H\)</span> be a hyperplane given by</p>
 <div class="math notranslate nohighlight">
@@ -2058,7 +2067,7 @@ L = \bf^{-1}(0) = \{ \bx \in \VV \ST \bf(\bx) = 0 \}.
 <p>Combining, <span class="math notranslate nohighlight">\(L = H\)</span>.</p>
 </div>
 <div class="proof theorem admonition" id="res-aff-dim-hyperplane">
-<p class="admonition-title"><span class="caption-number">Theorem 4.141 </span> (Dimension of a hyperplane)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.156 </span> (Dimension of a hyperplane)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(H\)</span> be a hyperplane given by</p>
 <div class="math notranslate nohighlight">
@@ -2074,27 +2083,27 @@ on <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="ma
 \]</div>
 </div>
 </div><div class="proof admonition" id="proof">
-<p>Proof. From <a class="reference internal" href="#res-aff-hyperplane-parallel-space">Theorem 4.140</a>,
+<p>Proof. From <a class="reference internal" href="#res-aff-hyperplane-parallel-space">Theorem 4.155</a>,
 the linear subspace parallel to <span class="math notranslate nohighlight">\(H\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[
 L = \bf^{-1}(0) = \{ \bx \in \VV \ST \bf(\bx) = 0 \}.
 \]</div>
-<p>From <a class="reference internal" href="dual_spaces.html#res-la-linear-functional-kernel-dim">Theorem 4.92</a>,
+<p>From <a class="reference internal" href="dual_spaces.html#res-la-linear-functional-kernel-dim">Theorem 4.99</a>,
 the dimension of the kernel of a linear functional
 in a finite dimensional vector space is given by:</p>
 <div class="math notranslate nohighlight">
 \[
 \dim L = \dim \VV - 1.
 \]</div>
-<p>From <a class="reference internal" href="#def-affine-dimension">Definition 4.112</a>,</p>
+<p>From <a class="reference internal" href="#def-affine-dimension">Definition 4.122</a>,</p>
 <div class="math notranslate nohighlight">
 \[
 \dim H = \dim L = \dim \VV - 1.
 \]</div>
 </div>
 <div class="proof theorem admonition" id="res-aff-ip-hyperplane">
-<p class="admonition-title"><span class="caption-number">Theorem 4.142 </span> (Hyperplanes in inner product spaces)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.157 </span> (Hyperplanes in inner product spaces)</p>
 <div class="theorem-content section" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(\VV\)</span> is an inner product space over <span class="math notranslate nohighlight">\(\FF\)</span>, then
 a set of the form</p>
@@ -2109,7 +2118,7 @@ in this form, with <span class="math notranslate nohighlight">\(\ba\)</span> and
 common non-zero multiple.</p>
 </div>
 </div><div class="proof admonition" id="proof">
-<p>Proof. By <a class="reference internal" href="dual_spaces.html#res-la-inner-product-linear-functional">Theorem 4.95</a>,
+<p>Proof. By <a class="reference internal" href="dual_spaces.html#res-la-inner-product-linear-functional">Theorem 4.102</a>,
 the mapping  <span class="math notranslate nohighlight">\(T_{\ba} : \VV \to \FF\)</span> defined by:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -2117,7 +2126,7 @@ T_{\ba} (\bx) \triangleq \langle \bx , \ba \rangle  \Forall \bx \in \VV
 \]</div>
 <p>is a linear functional.
 Thus, <span class="math notranslate nohighlight">\(H\)</span> is a <a class="reference internal" href="dual_spaces.html#def-la-hyperplane-functional">hyperplane</a>.</p>
-<p>By <a class="reference internal" href="dual_spaces.html#res-la-linear-functional-inner-product">Theorem 4.97</a>,
+<p>By <a class="reference internal" href="dual_spaces.html#res-la-linear-functional-inner-product">Theorem 4.104</a>,
 every linear functional can be identified as an
 inner product with a vector <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>.
 Thus, every hyperplane can be written as</p>
@@ -2133,7 +2142,7 @@ H = \{\bx \ST \langle \bx, \ba \rangle = b \}.
 <p>is identical to <span class="math notranslate nohighlight">\(H\)</span> for any <span class="math notranslate nohighlight">\(t \in \FF\)</span> such that <span class="math notranslate nohighlight">\(t \neq 0\)</span>.</p>
 </div>
 <div class="proof theorem admonition" id="res-aff-proper-sub-hyper-intersect">
-<p class="admonition-title"><span class="caption-number">Theorem 4.143 </span> (Affine = Intersection of hyperplanes)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.158 </span> (Affine = Intersection of hyperplanes)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional vector space.
 Then, every proper affine subset of <span class="math notranslate nohighlight">\(\VV\)</span>
@@ -2255,7 +2264,7 @@ associated linear subspace is <span class="math notranslate nohighlight">\(\{ \b
 </ol>
 </div>
 <div class="proof corollary admonition" id="res-aff-finite-ip-proper-sub-hyper-intersect">
-<p class="admonition-title"><span class="caption-number">Corollary 4.13 </span> (Affine sets in inner product space)</p>
+<p class="admonition-title"><span class="caption-number">Corollary 4.15 </span> (Affine sets in inner product space)</p>
 <div class="corollary-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional inner product space over field <span class="math notranslate nohighlight">\(\FF\)</span>.
 Let <span class="math notranslate nohighlight">\(A\)</span> be a proper affine subset of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
@@ -2275,11 +2284,11 @@ A = \bigcap_{i=1}^m H_i = \{\bx \in \VV \ST
 \]</div>
 </div>
 </div><div class="proof admonition" id="proof">
-<p>Proof. It follows from <a class="reference internal" href="#res-aff-proper-sub-hyper-intersect">Theorem 4.143</a>
+<p>Proof. It follows from <a class="reference internal" href="#res-aff-proper-sub-hyper-intersect">Theorem 4.158</a>
 that <span class="math notranslate nohighlight">\(A\)</span> is a finite intersection of hyperplanes
 with <span class="math notranslate nohighlight">\(r &lt; n\)</span> where <span class="math notranslate nohighlight">\(n = \dim \VV\)</span>.</p>
 <p>Since <span class="math notranslate nohighlight">\(\VV\)</span> is an inner product space, hence,
-due to <a class="reference internal" href="#res-aff-ip-hyperplane">Theorem 4.142</a>,
+due to <a class="reference internal" href="#res-aff-ip-hyperplane">Theorem 4.157</a>,
 each hyperplane can be represented as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -2299,7 +2308,7 @@ with <span class="math notranslate nohighlight">\(m + r = n\)</span>.</p></li>
 </ol>
 </div>
 <div class="section" id="linear-equations">
-<h2><span class="section-number">4.10.12. </span>Linear Equations<a class="headerlink" href="#linear-equations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.12. </span>Linear Equations<a class="headerlink" href="#linear-equations" title="Permalink to this headline">¶</a></h2>
 <div class="proof example admonition" id="example-54">
 <p class="admonition-title"><span class="caption-number">Example 4.34 </span> (Solution set of linear equations)</p>
 <div class="example-content section" id="proof-content">
@@ -2333,7 +2342,7 @@ If the system of equations is infeasible, then its solution set is
 If the system of equations has a unique solution, then the solution
 set is a singleton set which is an affine subspace of dimension 0.</p>
 <div class="proof theorem admonition" id="res-aff-sol-lin-eq">
-<p class="admonition-title"><span class="caption-number">Theorem 4.144 </span> (Affine set = system of linear equations in <span class="math notranslate nohighlight">\(\FF^n\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.159 </span> (Affine set = system of linear equations in <span class="math notranslate nohighlight">\(\FF^n\)</span>)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\bb \in \FF^m\)</span>. Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(m \times n\)</span>
 matrix in <span class="math notranslate nohighlight">\(\FF^{m \times n}\)</span>. Consider the solution set
@@ -2391,14 +2400,14 @@ zero matrix and <span class="math notranslate nohighlight">\(\bb = \bzero \in \F
 Then, the solution set of <span class="math notranslate nohighlight">\(\ZERO \bx = \bzero\)</span> is all of <span class="math notranslate nohighlight">\(\FF^n\)</span>.</p></li>
 <li><p>We shall now consider the case of affine <span class="math notranslate nohighlight">\(C\)</span> with more than
 one elements and <span class="math notranslate nohighlight">\(C \subset \FF^n\)</span> (proper subset).</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(L\)</span> be the subspace parallel to <span class="math notranslate nohighlight">\(C\)</span> (<a class="reference internal" href="#res-aff-subspace-parallel-linear">Theorem 4.136</a>).</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(L\)</span> be the subspace parallel to <span class="math notranslate nohighlight">\(C\)</span> (<a class="reference internal" href="#res-aff-subspace-parallel-linear">Theorem 4.151</a>).</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(L^{\perp}\)</span> be the
 <a class="reference internal" href="inner_product_spaces.html#def-la-orthogonal-complement">orthogonal complement</a> of <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(\BBB = \{\bv_1, \dots, \bv_m \}\)</span> be a
 basis for <span class="math notranslate nohighlight">\(L^{\perp}\)</span> (where <span class="math notranslate nohighlight">\(m &lt; n\)</span>).</p></li>
 <li><p>Since <span class="math notranslate nohighlight">\(\FF^n\)</span> is finite dimensional, hence
-<span class="math notranslate nohighlight">\(L = \left (L^{\perp} \right )^{\perp}\)</span> (<a class="reference internal" href="inner_product_spaces.html#res-la-orth-comp-orth-comp">Theorem 4.81</a>).</p></li>
-<li><p>Thus, due to <a class="reference internal" href="inner_product_spaces.html#res-la-ip-orth-comp-perp-basis">Theorem 4.77</a>,</p>
+<span class="math notranslate nohighlight">\(L = \left (L^{\perp} \right )^{\perp}\)</span> (<a class="reference internal" href="inner_product_spaces.html#res-la-orth-comp-orth-comp">Theorem 4.88</a>).</p></li>
+<li><p>Thus, due to <a class="reference internal" href="inner_product_spaces.html#res-la-ip-orth-comp-perp-basis">Theorem 4.84</a>,</p>
 <div class="math notranslate nohighlight">
 \[
    L = \{ \bx \ST \bx \perp \bv_1, \dots, \bx \perp \bv_m \}.
@@ -2427,9 +2436,9 @@ such that</p>
 </div>
 </div>
 <div class="section" id="affine-transformations">
-<h2><span class="section-number">4.10.13. </span>Affine Transformations<a class="headerlink" href="#affine-transformations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.13. </span>Affine Transformations<a class="headerlink" href="#affine-transformations" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-la-affine-operator">
-<p class="admonition-title"><span class="caption-number">Definition 4.120 </span> (Affine transformation)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.130 </span> (Affine transformation)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\XX\)</span> and <span class="math notranslate nohighlight">\(\YY\)</span> be vector spaces (on some field <span class="math notranslate nohighlight">\(\FF\)</span>).
 A (total) function <span class="math notranslate nohighlight">\(T : \XX \to \YY\)</span>
@@ -2446,11 +2455,11 @@ or an <em>affine operator</em>.</p>
 An affine combination in input leads to an identical
 affine combination in output.</p>
 <div class="section" id="relation-with-linear-transformations">
-<h3><span class="section-number">4.10.13.1. </span>Relation with Linear Transformations<a class="headerlink" href="#relation-with-linear-transformations" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.13.1. </span>Relation with Linear Transformations<a class="headerlink" href="#relation-with-linear-transformations" title="Permalink to this headline">¶</a></h3>
 <p>We next show that a linear transformation followed
 by a translation is affine.</p>
 <div class="proof theorem admonition" id="res-aff-linear-trans-affine">
-<p class="admonition-title"><span class="caption-number">Theorem 4.145 </span> (Linear + Translation <span class="math notranslate nohighlight">\(\implies\)</span> Affine)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.160 </span> (Linear + Translation <span class="math notranslate nohighlight">\(\implies\)</span> Affine)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\XX\)</span> and <span class="math notranslate nohighlight">\(\YY\)</span> be vector spaces (on some field <span class="math notranslate nohighlight">\(\FF\)</span>).
 Let <span class="math notranslate nohighlight">\(L : \XX \to \YY\)</span> be a linear transformation and
@@ -2479,7 +2488,7 @@ T (t \bx + (1 - t) \by)
 affine function is a linear transformation
 followed by a translation.</p>
 <div class="proof theorem admonition" id="res-la-op-affine-linear-p-offset">
-<p class="admonition-title"><span class="caption-number">Theorem 4.146 </span> (Affine = Linear + Translation)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.161 </span> (Affine = Linear + Translation)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\XX\)</span> and <span class="math notranslate nohighlight">\(\YY\)</span> be vector spaces (on some field <span class="math notranslate nohighlight">\(\FF\)</span>).
 Let <span class="math notranslate nohighlight">\(T : \XX \to \YY\)</span> be some mapping.
@@ -2546,11 +2555,11 @@ T (t \bx + (1 - t) \by)
 </div>
 </div>
 <div class="section" id="affine-combinations-and-hulls">
-<h3><span class="section-number">4.10.13.2. </span>Affine Combinations and Hulls<a class="headerlink" href="#affine-combinations-and-hulls" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.13.2. </span>Affine Combinations and Hulls<a class="headerlink" href="#affine-combinations-and-hulls" title="Permalink to this headline">¶</a></h3>
 <p>We show that affine functions distribute over
 arbitrary affine combinations.</p>
 <div class="proof theorem admonition" id="res-la-aff-func-aff-comb">
-<p class="admonition-title"><span class="caption-number">Theorem 4.147 </span> (Affine functions on affine combinations)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.162 </span> (Affine functions on affine combinations)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\XX\)</span> and <span class="math notranslate nohighlight">\(\YY\)</span> be vector spaces on a field <span class="math notranslate nohighlight">\(\FF\)</span>.
 Let <span class="math notranslate nohighlight">\(T : \XX \to \YY\)</span> be affine.</p>
@@ -2582,7 +2591,7 @@ T \left ( \sum_{i=0}^k t_i \bx_i \right )
 \end{split}\]</div>
 </div>
 <div class="proof theorem admonition" id="res-la-aff-func-aff-hull">
-<p class="admonition-title"><span class="caption-number">Theorem 4.148 </span> (Preservation of affine hulls)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.163 </span> (Preservation of affine hulls)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\XX\)</span> and <span class="math notranslate nohighlight">\(\YY\)</span> be vector spaces on a field <span class="math notranslate nohighlight">\(\FF\)</span>.
 Let <span class="math notranslate nohighlight">\(T : \XX \to \YY\)</span> be affine. Let <span class="math notranslate nohighlight">\(S \subseteq \XX\)</span>.
@@ -2607,7 +2616,7 @@ such that <span class="math notranslate nohighlight">\(\sum_{i=0}^k t_i = 1\)</s
 </li>
 <li><p>But then, <span class="math notranslate nohighlight">\(\by_i = T(\bx_i)\)</span> for some <span class="math notranslate nohighlight">\(\bx_i \in S\)</span> for every <span class="math notranslate nohighlight">\(i=0,\dots, k\)</span>
 since <span class="math notranslate nohighlight">\(\by_i \in T(S)\)</span>.</p></li>
-<li><p>Then, due to <a class="reference internal" href="#res-la-aff-func-aff-comb">Theorem 4.147</a></p>
+<li><p>Then, due to <a class="reference internal" href="#res-la-aff-func-aff-comb">Theorem 4.162</a></p>
 <div class="math notranslate nohighlight">
 \[
    \by = \sum_{i=0}^k t_i \by_i = \sum_{i=0}^k t_i T (\bx_i)
@@ -2632,7 +2641,7 @@ such that <span class="math notranslate nohighlight">\(\sum_{i=0}^k t_i = 1\)</s
    \bx = \sum_{i=0}^k t_i \bx_i.
    \]</div>
 </li>
-<li><p>Then, due to <a class="reference internal" href="#res-la-aff-func-aff-comb">Theorem 4.147</a></p>
+<li><p>Then, due to <a class="reference internal" href="#res-la-aff-func-aff-comb">Theorem 4.162</a></p>
 <div class="math notranslate nohighlight">
 \[
    \by = T(\bx) = T \left ( \sum_{i=0}^k t_i \bx_i \right )
@@ -2660,12 +2669,12 @@ T (\affine S) = \affine T (S).
 </div>
 </div>
 <div class="section" id="invertible-affine-transformations">
-<h3><span class="section-number">4.10.13.3. </span>Invertible Affine Transformations<a class="headerlink" href="#invertible-affine-transformations" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.13.3. </span>Invertible Affine Transformations<a class="headerlink" href="#invertible-affine-transformations" title="Permalink to this headline">¶</a></h3>
 <div class="proof theorem admonition" id="res-aff-map-invertible-lin-map">
-<p class="admonition-title"><span class="caption-number">Theorem 4.149 </span> (Affine invertible = linear invertible)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.164 </span> (Affine invertible = linear invertible)</p>
 <div class="theorem-content section" id="proof-content">
 <p>An affine map is invertible if and only if its corresponding
-linear map as described in <a class="reference internal" href="#res-la-op-affine-linear-p-offset">Theorem 4.146</a>
+linear map as described in <a class="reference internal" href="#res-la-op-affine-linear-p-offset">Theorem 4.161</a>
 is invertible.</p>
 </div>
 </div><p>The translation map is invertible. Composition of invertible maps
@@ -2705,7 +2714,7 @@ L = G_{-\ba} \circ T  \text{ and } T = G_{\ba} \circ  L.
 <p>Clearly, if <span class="math notranslate nohighlight">\(T\)</span> is invertible then so is <span class="math notranslate nohighlight">\(L\)</span> and if <span class="math notranslate nohighlight">\(L\)</span> is invertible then so is <span class="math notranslate nohighlight">\(T\)</span>.</p>
 </div>
 <div class="proof theorem admonition" id="res-aff-map-inverse">
-<p class="admonition-title"><span class="caption-number">Theorem 4.150 </span> (Inverse of affine map is affine)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.165 </span> (Inverse of affine map is affine)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\XX\)</span> and <span class="math notranslate nohighlight">\(\YY\)</span> be vector spaces on a field <span class="math notranslate nohighlight">\(\FF\)</span>.
 Let <span class="math notranslate nohighlight">\(T : \XX \to \YY\)</span> be an affine map.
@@ -2756,9 +2765,9 @@ S( t \by_1 + (1-t) \by_2)  = t S(\by_1) + (1-t) S(\by_2).
 </div>
 </div>
 <div class="section" id="affine-mapping-between-affine-sets">
-<h3><span class="section-number">4.10.13.4. </span>Affine Mapping between Affine Sets<a class="headerlink" href="#affine-mapping-between-affine-sets" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.13.4. </span>Affine Mapping between Affine Sets<a class="headerlink" href="#affine-mapping-between-affine-sets" title="Permalink to this headline">¶</a></h3>
 <div class="proof theorem admonition" id="res-aff-mapping-independent-sets">
-<p class="admonition-title"><span class="caption-number">Theorem 4.151 </span> (Affine mapping between affine independent sets)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.166 </span> (Affine mapping between affine independent sets)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional vector space with <span class="math notranslate nohighlight">\(n = \dim \VV\)</span>.
 Let <span class="math notranslate nohighlight">\(\{\ba_0, \dots, \ba_m\}\)</span> and <span class="math notranslate nohighlight">\(\{\bb_0, \dots, \bb_m \}\)</span>
@@ -2776,7 +2785,7 @@ T(\bx) = A(\bx) + \bb_0 - A(\ba_0)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(A: \VV \to \VV\)</span> is a linear map.
 Now consider the case where <span class="math notranslate nohighlight">\(1 \leq m \leq n\)</span>.</p>
-<p>By <a class="reference internal" href="#res-aff-extn-affine-ind-set">Theorem 4.132</a>, we can
+<p>By <a class="reference internal" href="#res-aff-extn-affine-ind-set">Theorem 4.147</a>, we can
 extend <span class="math notranslate nohighlight">\(\{\ba_0, \dots, \ba_m\}\)</span> to an affine independent
 set <span class="math notranslate nohighlight">\(\{\ba_0, \dots, \ba_n\}\)</span>
 and similarly <span class="math notranslate nohighlight">\(\{\bb_0, \dots, \bb_m \}\)</span> to
@@ -2810,7 +2819,7 @@ determined by the bases <span class="math notranslate nohighlight">\(\BBB_a\)</s
 given. Thus, <span class="math notranslate nohighlight">\(T\)</span> is unique too.</p>
 </div>
 <div class="proof corollary admonition" id="res-aff-mapping-affine-sets-same-dim">
-<p class="admonition-title"><span class="caption-number">Corollary 4.14 </span> (Affine mapping between affine sets)</p>
+<p class="admonition-title"><span class="caption-number">Corollary 4.16 </span> (Affine mapping between affine sets)</p>
 <div class="corollary-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional vector space with <span class="math notranslate nohighlight">\(n = \dim \VV\)</span>.
 Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be two affine subspaces of <span class="math notranslate nohighlight">\(\VV\)</span> of the same
@@ -2826,7 +2835,7 @@ and <span class="math notranslate nohighlight">\(B = \{ \bb \}\)</span>, then an
 T(\bx) = A(\bx) + \bb - A(\ba)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(A: \VV \to \VV\)</span> is a linear transformation will do.</p>
-<p>For <span class="math notranslate nohighlight">\(1 \leq m \leq n\)</span>, by <a class="reference internal" href="#res-aff-aff-ind-points-in-aff-subspace">Theorem 4.130</a>
+<p>For <span class="math notranslate nohighlight">\(1 \leq m \leq n\)</span>, by <a class="reference internal" href="#res-aff-aff-ind-points-in-aff-subspace">Theorem 4.145</a>
 we can choose <span class="math notranslate nohighlight">\(m+1\)</span> affine independent points
 <span class="math notranslate nohighlight">\(\{\ba_0, \dots, \ba_m\}\)</span> and <span class="math notranslate nohighlight">\(\{\bb_0, \dots, \bb_m \}\)</span>
 in <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> respectively such that</p>
@@ -2836,10 +2845,10 @@ A = \affine \{\ba_0, \dots, \ba_m\}
 \text{ and }
 B = \affine \{\bb_0, \dots, \bb_m \}
 \]</div>
-<p>as per <a class="reference internal" href="#res-aff-set-aff-hull">Theorem 4.131</a>.</p>
-<p>Then, by <a class="reference internal" href="#res-aff-mapping-independent-sets">Theorem 4.151</a>,
+<p>as per <a class="reference internal" href="#res-aff-set-aff-hull">Theorem 4.146</a>.</p>
+<p>Then, by <a class="reference internal" href="#res-aff-mapping-independent-sets">Theorem 4.166</a>,
 an affine mapping <span class="math notranslate nohighlight">\(T: \VV \to \VV\)</span> exists which maps <span class="math notranslate nohighlight">\(\ba_i\)</span> to <span class="math notranslate nohighlight">\(\bb_i\)</span>.
-Since affine mappings preserve affine hulls (<a class="reference internal" href="#res-la-aff-func-aff-hull">Theorem 4.148</a>),
+Since affine mappings preserve affine hulls (<a class="reference internal" href="#res-la-aff-func-aff-hull">Theorem 4.163</a>),
 hence</p>
 <div class="math notranslate nohighlight">
 \[
@@ -2848,9 +2857,9 @@ T (A) = B.
 </div>
 </div>
 <div class="section" id="graph">
-<h3><span class="section-number">4.10.13.5. </span>Graph<a class="headerlink" href="#graph" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.13.5. </span>Graph<a class="headerlink" href="#graph" title="Permalink to this headline">¶</a></h3>
 <div class="proof theorem admonition" id="res-aff-graph-affine-map-affine">
-<p class="admonition-title"><span class="caption-number">Theorem 4.152 </span> (Graph of an affine map is affine)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.167 </span> (Graph of an affine map is affine)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\XX\)</span> and <span class="math notranslate nohighlight">\(\YY\)</span> be vector spaces on a field <span class="math notranslate nohighlight">\(\FF\)</span>.
 Let <span class="math notranslate nohighlight">\(T : \XX \to \YY\)</span> be an affine map.
@@ -2901,7 +2910,7 @@ must be a subspace of <span class="math notranslate nohighlight">\(\XX \oplus \Y
 </div>
 </div>
 <div class="section" id="topology-in-normed-spaces">
-<h2><span class="section-number">4.10.14. </span>Topology in Normed Spaces<a class="headerlink" href="#topology-in-normed-spaces" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.14. </span>Topology in Normed Spaces<a class="headerlink" href="#topology-in-normed-spaces" title="Permalink to this headline">¶</a></h2>
 <p>We next consider the special case of a vector space <span class="math notranslate nohighlight">\(\VV\)</span>
 endowed with a
 <a class="reference internal" href="normed_spaces.html#def-la-norm">norm</a> <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>,
@@ -2922,33 +2931,33 @@ as the results presented here develop on the material
 presented in that section.</p>
 <p>Our discussions are restricted to finite dimensional
 normed linear spaces as linear subspaces are closed
-(<a class="reference internal" href="normed_spaces.html#res-la-subspace-closed">Theorem 4.62</a>)
+(<a class="reference internal" href="normed_spaces.html#res-la-subspace-closed">Theorem 4.64</a>)
 and linear transformations are continuous
-(<a class="reference internal" href="normed_spaces.html#res-la-ns-finite-continuous-transformation">Theorem 4.61</a>)
+(<a class="reference internal" href="normed_spaces.html#res-la-ns-finite-continuous-transformation">Theorem 4.63</a>)
 in the finite dimensional spaces.</p>
 <div class="section" id="id3">
-<h3><span class="section-number">4.10.14.1. </span>Affine Sets<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.14.1. </span>Affine Sets<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="proof theorem admonition" id="res-la-affine-closed">
-<p class="admonition-title"><span class="caption-number">Theorem 4.153 </span> (Affine sets are closed)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.168 </span> (Affine sets are closed)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Every affine subset of a finite dimensional
 normed linear space <span class="math notranslate nohighlight">\(\VV\)</span> is a closed set.</p>
 </div>
 </div><div class="proof admonition" id="proof">
 <p>Proof. <span class="math notranslate nohighlight">\(\EmptySet\)</span> and <span class="math notranslate nohighlight">\(\VV\)</span> are closed by definition.
-Singletons <span class="math notranslate nohighlight">\(\{\bx \}\)</span> are closed due to <a class="reference internal" href="../metric_spaces/topology.html#res-ms-singleton-closed">Theorem 3.7</a>.</p>
+Singletons <span class="math notranslate nohighlight">\(\{\bx \}\)</span> are closed due to <a class="reference internal" href="../metric_spaces/topology.html#res-ms-singleton-closed">Theorem 3.8</a>.</p>
 <p>All other affine sets are translations of a linear subspace.</p>
 <ol class="simple">
-<li><p>By <a class="reference internal" href="normed_spaces.html#res-la-subspace-closed">Theorem 4.62</a>, linear subspaces are closed
+<li><p>By <a class="reference internal" href="normed_spaces.html#res-la-subspace-closed">Theorem 4.64</a>, linear subspaces are closed
 in a finite dimensional normed linear space.</p></li>
-<li><p>By <a class="reference internal" href="normed_spaces.html#res-la-ns-translation-preserve-topology">Theorem 4.45</a>,
+<li><p>By <a class="reference internal" href="normed_spaces.html#res-la-ns-translation-preserve-topology">Theorem 4.46</a>,
 translations preserve closed sets.</p></li>
 <li><p>Hence, affine sets of dimension greater than zero
 which are translates of the linear subspaces are also closed.</p></li>
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-la-affine-subspace-empty-interior">
-<p class="admonition-title"><span class="caption-number">Theorem 4.154 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.169 </span></p>
 <div class="theorem-content section" id="proof-content">
 <p>Every proper affine subspace of a normed linear space <span class="math notranslate nohighlight">\(\VV\)</span>
 has an empty interior.</p>
@@ -2959,12 +2968,12 @@ has an empty interior.</p>
 <li><p>By <a class="reference internal" href="normed_spaces.html#res-la-proper-subspace-empty-interior">Corollary 4.5</a>,
 every proper linear subspace of <span class="math notranslate nohighlight">\(\VV\)</span> has an empty interior.</p></li>
 <li><p>A proper affine subspace is a translate of a proper linear subspace.</p></li>
-<li><p>By <a class="reference internal" href="normed_spaces.html#res-la-ns-translation-preserve-topology">Theorem 4.45</a>,
+<li><p>By <a class="reference internal" href="normed_spaces.html#res-la-ns-translation-preserve-topology">Theorem 4.46</a>,
 if a set has an empty interior, then so does its translate.</p></li>
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-la-affine-hull-closure">
-<p class="admonition-title"><span class="caption-number">Theorem 4.155 </span> (Affine hull and closure)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.170 </span> (Affine hull and closure)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional normed linear space.
 Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>.  Then,</p>
@@ -2978,7 +2987,7 @@ Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>.  Then
 <span class="math notranslate nohighlight">\(\affine C \subseteq \affine (\closure C)\)</span>.</p>
 <ol class="simple">
 <li><p>Let <span class="math notranslate nohighlight">\(A = \affine C\)</span>.</p></li>
-<li><p>By <a class="reference internal" href="#res-la-affine-closed">Theorem 4.153</a>, <span class="math notranslate nohighlight">\(A\)</span> is closed.</p></li>
+<li><p>By <a class="reference internal" href="#res-la-affine-closed">Theorem 4.168</a>, <span class="math notranslate nohighlight">\(A\)</span> is closed.</p></li>
 <li><p>By definition <span class="math notranslate nohighlight">\(\closure C\)</span> is the smallest closed set
 that contains <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
 <li><p>By <a class="reference internal" href="../metric_spaces/topology.html#res-ms-closed-superset-closure-superset">Proposition 3.6</a>,
@@ -2997,9 +3006,9 @@ that contains a set.</p></li>
 </div>
 </div>
 <div class="section" id="id4">
-<h3><span class="section-number">4.10.14.2. </span>Affine Transformations<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.14.2. </span>Affine Transformations<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="proof theorem admonition" id="res-la-affine-finite-continuous-transformation">
-<p class="admonition-title"><span class="caption-number">Theorem 4.156 </span> (Affine transformations from finite dimensional spaces are continuous)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.171 </span> (Affine transformations from finite dimensional spaces are continuous)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((\VV, \| \cdot \|_v)\)</span> and <span class="math notranslate nohighlight">\((\WW, \| \cdot \|_w)\)</span> be
 normed linear spaces. Let
@@ -3011,21 +3020,69 @@ continuous.</p>
 <p>Proof. We can write <span class="math notranslate nohighlight">\(T\)</span> as the composition of a linear transformation
 followed by a translation.</p>
 <ol class="simple">
-<li><p>By <a class="reference internal" href="normed_spaces.html#res-la-ns-finite-continuous-transformation">Theorem 4.61</a>,
+<li><p>By <a class="reference internal" href="normed_spaces.html#res-la-ns-finite-continuous-transformation">Theorem 4.63</a>,
 the linear transformation is continuous
 since <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional.</p></li>
-<li><p>By <a class="reference internal" href="normed_spaces.html#res-la-ns-translation-is-continuous">Theorem 4.44</a>,
+<li><p>By <a class="reference internal" href="normed_spaces.html#res-la-ns-translation-is-continuous">Theorem 4.45</a>,
 translations are continuous.</p></li>
-<li><p>By <a class="reference internal" href="../metric_spaces/continuity.html#res-ms-cont-func-composition">Theorem 3.40</a>,
+<li><p>By <a class="reference internal" href="../metric_spaces/continuity.html#res-ms-cont-func-composition">Theorem 3.41</a>,
 composition of continuous functions is continuous.</p></li>
 <li><p>Hence, <span class="math notranslate nohighlight">\(T\)</span> is continuous.</p></li>
 </ol>
 </div>
+<div class="proof theorem admonition" id="res-la-affine-finite-transformation-closure">
+<p class="admonition-title"><span class="caption-number">Theorem 4.172 </span> (Affine transformation and closure)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((\VV, \| \cdot \|_v)\)</span> and <span class="math notranslate nohighlight">\((\WW, \| \cdot \|_w)\)</span> be
+normed linear spaces. Let
+<span class="math notranslate nohighlight">\(T : \VV \to \WW\)</span> be an affine transformation.</p>
+<p>Assume that <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional.
+Let <span class="math notranslate nohighlight">\(A \subseteq \VV\)</span>. Then,</p>
+<div class="math notranslate nohighlight">
+\[
+T (\closure A) \subseteq \closure T(A).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. By <a class="reference internal" href="#res-la-affine-finite-continuous-transformation">Theorem 4.171</a>,
+<span class="math notranslate nohighlight">\(T\)</span> is continuous.</p>
+<p>By <a class="reference internal" href="../metric_spaces/continuity.html#res-ms-continuous-function-characterization">Theorem 3.38</a> (4)</p>
+<div class="math notranslate nohighlight">
+\[
+T (\closure A) \subseteq \closure T(A)
+\]</div>
+<p>holds true for every subset <span class="math notranslate nohighlight">\(A\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+<p>Recall from <a class="reference internal" href="../metric_spaces/real_valued_functions.html#def-ms-closed-function">Definition 3.64</a>
+that a real valued function is closed if
+every sublevel set is closed.</p>
+<div class="proof theorem admonition" id="res-la-affine-finite-closed-func">
+<p class="admonition-title"><span class="caption-number">Theorem 4.173 </span> (Real valued affine functions are closed)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((\VV, \| \cdot \|)\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional
+normed linear space.
+Let <span class="math notranslate nohighlight">\(T : \VV \to \RR\)</span> be an affine function.
+Then, <span class="math notranslate nohighlight">\(T\)</span> is closed.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. 1. By <a class="reference internal" href="#res-la-affine-finite-continuous-transformation">Theorem 4.171</a>,
+<span class="math notranslate nohighlight">\(f\)</span> is continuous.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(a \in \RR\)</span>.</p></li>
+<li><p>The sublevel set for <span class="math notranslate nohighlight">\(a\)</span> is given by
+<span class="math notranslate nohighlight">\(S_a = \{ \bx \in \VV \ST T(\bx) \leq a \}\)</span>.</p></li>
+<li><p>This is nothing but <span class="math notranslate nohighlight">\(T^{-1} (-\infty, a]\)</span>.</p></li>
+<li><p>The set <span class="math notranslate nohighlight">\((-\infty, a]\)</span> is a closed set.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(T\)</span> is continuous, hence <span class="math notranslate nohighlight">\(T^{-1}(-\infty, a]\)</span> is also closed.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(S_a\)</span> is closed for every <span class="math notranslate nohighlight">\(a \in \RR\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(T\)</span> is closed.</p></li>
+</ol>
+</div>
 </div>
 <div class="section" id="affine-homeomorphisms">
-<h3><span class="section-number">4.10.14.3. </span>Affine Homeomorphisms<a class="headerlink" href="#affine-homeomorphisms" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.14.3. </span>Affine Homeomorphisms<a class="headerlink" href="#affine-homeomorphisms" title="Permalink to this headline">¶</a></h3>
 <div class="proof theorem admonition" id="res-la-aff-map-pres-homeomorphism">
-<p class="admonition-title"><span class="caption-number">Theorem 4.157 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.174 </span></p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional normed linear space.
 A bijective affine transformation <span class="math notranslate nohighlight">\(T : \VV \to \VV\)</span>
@@ -3034,17 +3091,17 @@ is a <a class="reference internal" href="../metric_spaces/continuity.html#def-ms
 </div><div class="proof admonition" id="proof">
 <p>Proof. We proceed as follows:</p>
 <ol class="simple">
-<li><p>By <a class="reference internal" href="#res-la-affine-finite-continuous-transformation">Theorem 4.156</a>,
+<li><p>By <a class="reference internal" href="#res-la-affine-finite-continuous-transformation">Theorem 4.171</a>,
 <span class="math notranslate nohighlight">\(T\)</span> is continuous.</p></li>
 <li><p>Since <span class="math notranslate nohighlight">\(T\)</span> is bijective, hence, <span class="math notranslate nohighlight">\(T^{-1}\)</span> exists.</p></li>
-<li><p>By <a class="reference internal" href="#res-aff-map-inverse">Theorem 4.150</a>, <span class="math notranslate nohighlight">\(T^{-1}\)</span> is affine.</p></li>
-<li><p>Again, by <a class="reference internal" href="#res-la-affine-finite-continuous-transformation">Theorem 4.156</a>,
+<li><p>By <a class="reference internal" href="#res-aff-map-inverse">Theorem 4.165</a>, <span class="math notranslate nohighlight">\(T^{-1}\)</span> is affine.</p></li>
+<li><p>Again, by <a class="reference internal" href="#res-la-affine-finite-continuous-transformation">Theorem 4.171</a>,
 <span class="math notranslate nohighlight">\(T^{-1}\)</span> is continuous.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(T\)</span> is a <a class="reference internal" href="../metric_spaces/continuity.html#def-ms-homeomorphism">homeomorphism</a>.</p></li>
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-la-aff-map-pres-closure">
-<p class="admonition-title"><span class="caption-number">Theorem 4.158 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.175 </span></p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional normed linear space.
 A bijective affine transformation <span class="math notranslate nohighlight">\(T : \VV \to \VV\)</span>
@@ -3056,9 +3113,9 @@ T (\closure A) = \closure (T (A)).
 \]</div>
 </div>
 </div><div class="proof admonition" id="proof">
-<p>Proof. By <a class="reference internal" href="#res-la-aff-map-pres-homeomorphism">Theorem 4.157</a>,
+<p>Proof. By <a class="reference internal" href="#res-la-aff-map-pres-homeomorphism">Theorem 4.174</a>,
 <span class="math notranslate nohighlight">\(T\)</span> is a homeomorphism.</p>
-<p>By <a class="reference internal" href="../metric_spaces/continuity.html#res-ms-homeomorphism-closure">Theorem 3.45</a>,
+<p>By <a class="reference internal" href="../metric_spaces/continuity.html#res-ms-homeomorphism-closure">Theorem 3.46</a>,
 homeomorphisms preserve closures.</p>
 <p>Thus, for any <span class="math notranslate nohighlight">\(A \subseteq \VV\)</span></p>
 <div class="math notranslate nohighlight">
@@ -3067,7 +3124,7 @@ T (\closure A) = \closure (T (A)).
 \]</div>
 </div>
 <div class="proof theorem admonition" id="res-la-aff-map-pres-interior">
-<p class="admonition-title"><span class="caption-number">Theorem 4.159 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.176 </span></p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional normed linear space.
 A bijective affine transformation <span class="math notranslate nohighlight">\(T : \VV \to \VV\)</span>
@@ -3079,9 +3136,9 @@ T (\interior A) = \interior (T (A)).
 \]</div>
 </div>
 </div><div class="proof admonition" id="proof">
-<p>Proof. By <a class="reference internal" href="#res-la-aff-map-pres-homeomorphism">Theorem 4.157</a>,
+<p>Proof. By <a class="reference internal" href="#res-la-aff-map-pres-homeomorphism">Theorem 4.174</a>,
 <span class="math notranslate nohighlight">\(T\)</span> is a homeomorphism.</p>
-<p>By <a class="reference internal" href="../metric_spaces/continuity.html#res-ms-homeomorphism-interior">Theorem 3.46</a>,
+<p>By <a class="reference internal" href="../metric_spaces/continuity.html#res-ms-homeomorphism-interior">Theorem 3.47</a>,
 homeomorphisms preserve interiors.</p>
 <p>Thus, for any <span class="math notranslate nohighlight">\(A \subseteq \VV\)</span></p>
 <div class="math notranslate nohighlight">
@@ -3089,6 +3146,44 @@ homeomorphisms preserve interiors.</p>
 T (\interior A) = \interior (T (A)).
 \]</div>
 </div>
+</div>
+</div>
+<div class="section" id="real-valued-affine-functions">
+<h2><span class="section-number">4.11.15. </span>Real Valued Affine Functions<a class="headerlink" href="#real-valued-affine-functions" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection, we look at affine functions from
+a vector space <span class="math notranslate nohighlight">\(\VV\)</span> to the real line <span class="math notranslate nohighlight">\(\RR\)</span>.</p>
+<div class="proof theorem admonition" id="res-la-aff-rv-level-set">
+<p class="admonition-title"><span class="caption-number">Theorem 4.177 </span> (Level sets of real valued affine functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a vector space. Let <span class="math notranslate nohighlight">\(h : \VV \to \RR\)</span> be an
+affine function. Then, for any <span class="math notranslate nohighlight">\(c \in \RR\)</span>, the set
+<span class="math notranslate nohighlight">\(h^{-1}(c)\)</span> is an affine set where</p>
+<div class="math notranslate nohighlight">
+\[
+h^{-1}(c) = \{ \bx \in \VV \ST h(\bx) = c \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We are given that <span class="math notranslate nohighlight">\(h : \VV \to \RR\)</span> is affine.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(c \in \RR\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(h^{-1}(c)\)</span> is empty, then it is affine and there is nothing to prove.
+So assume that it is nonempty.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in h^{-1}(c)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(h(\bx) = h(\by) = c\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t \in \FF\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz = t \bx + (1-t) \by\)</span>.</p></li>
+<li><p>Then, by affine nature of <span class="math notranslate nohighlight">\(h\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   h(\bz) = h (t \bx + (1-t) \by) = t h(\bx) + (1-t) h(\by) = t c + (1 -t) c = c.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bz \in h^{-1}(c)\)</span>.</p></li>
+<li><p>Thus, for any <span class="math notranslate nohighlight">\(\bx, \by \in h^{-1}(c)\)</span> and <span class="math notranslate nohighlight">\(t \in \FF\)</span>,
+<span class="math notranslate nohighlight">\(\bz = t \bx + (1-t) \by \in h^{-1}(c)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(h^{-1}(c)\)</span> is an affine set.</p></li>
+</ol>
 </div>
 </div>
 </div>
@@ -3122,7 +3217,7 @@ T (\interior A) = \interior (T (A)).
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">4.9. </span>Sequence Spaces</p>
+            <p class="prev-next-title"><span class="section-number">4.10. </span>Sequence Spaces</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../mv_calculus/chapter.html" title="next page">

@@ -15,7 +15,7 @@ that satisfies
 
 ```{math}
 :label: eq-mvc-f-m-n-jacobian-limit
-\underset{\bz \in \dom f, \bz \neq \bx, \bz \to \bz}{\lim}
+\underset{\bz \in \dom f, \bz \neq \bx, \bz \to \bx}{\lim}
 \frac{\| f(\bz) - f(\bx) - Df(\bx) (\bz - \bx) \|_2}{\| \bz - \bx \|_2} = 0.
 ``` 
 Such a matrix $Df(\bx)$ is called the *derivative* (or *Jacobian*) of $f$
@@ -170,9 +170,17 @@ is called the *first order approximation* of $f$
 at $\bx=\ba \in \interior \dom f$.
 ````
 
+## Real Valued Functions
+
+Rest of this section focuses mostly on real valued functions of type
+$f : \RR^n \to \RR$.
+
+1. First order derivative of a real valued function is called a *gradient*.
+1. Second order derivative of a real valued function is called a *Hessian*.
+1. We consider first order and second order approximations of a real valued function.
+
 
 ## Gradient
-
 
 ```{prf:definition} Gradient
 :label: def-mvc-gradient
@@ -200,6 +208,7 @@ $$
 i=1,\dots,n.
 $$ 
 ```
+
 
 ```{prf:example} Gradient of linear functional
 :label: ex-mvc-gradient-linear-functional
@@ -338,6 +347,29 @@ $$
 $$
 ```
 
+```{prf:example} Gradient of squared $\ell_2$ norm
+:label: ex-mvc-gradient-squared-l2_norm
+
+Let $f : \RR^n \to \RR$ be a quadratic form given by:
+
+$$
+f(\bx) = \| \bx \|_2^2 =  \bx^T \bx.
+$$
+
+We can write this as
+
+$$
+f(\bx) =  \bx^T \bI \bx
+$$
+where $\bI$ is the identity matrix.
+
+Following, {prf:ref}`ex-mvc-gradient-quadratic-form`,
+
+$$
+\nabla f(\bx) =  2 \bI \bx = 2 \bx.
+$$
+```
+
 ```{prf:example} Gradient of quadratic functional
 :label: ex-mvc-gradient-quadratic-functional
 
@@ -379,6 +411,37 @@ Df (\bx) = \bx^T \bP + \bq^T.
 $$
 ```
 
+
+```{prf:definition} Gradient mapping
+:label: def-mvc-gradient-mapping
+
+If a real valued function $f: \RR^n \to \RR$ 
+is differentiable, the *gradient mapping* 
+of $f$ is the function $\nabla f : \RR^n \to \RR^n$
+with $\dom \nabla f = \dom f$, with the value $\nabla f(\bx)$
+at every $\bx \in \dom f$. 
+```
+
+## Continuous Differentiability
+
+```{prf:definition} Continuously differentiable real valued function
+:label: def-mvc-cont-diff-rv-func
+
+Let $f: \RR^n \to \RR$ be a real valued function with $S = \dom f$.
+Let $U \subseteq S$ be an open set.
+If all the partial derivatives of $f$ exist and are 
+continuous at every $\bx \in U$,
+then $f$ is called *continuously differentiable* over $U$.
+
+If $f$ is continuously differentiable over an open set $U \subseteq S$,
+then it is continuously differentiable over every subset $C \subseteq U$.
+
+If $S$ is open itself and $f$ is continuously differentiable over $S$,
+then $f$ is called *continuously differentiable*.
+```
+
+## First Order Approximation
+
 ````{prf:definition} First order approximation of real valued functions
 :label: def-mvc-first-order-approx-real
 
@@ -393,14 +456,27 @@ a real valued function $f$ at $\bx=\ba \in \interior \dom f$.
 ````
 
 
+```{prf:theorem} First order approximation accuracy
+:label: res-mvc-first-order-approx
 
-```{prf:definition} Gradient mapping
-If a real valued function $f: \RR^n \to \RR$ 
-is differentiable, the *gradient mapping* 
-of $f$ is the function $\nabla f : \RR^n \to \RR^n$
-with $\dom \nabla f = \dom f$, with the value $\nabla f(\bx)$
-at every $\bx \in \dom f$. 
+Let $f : \RR^n \to \RR$ be defined on
+an open set $S = \dom f$. 
+Assume that $f$ is continuously differentiable on $S$.
+Then,
+
+$$
+\lim_{\bd \to \bzero} \frac{f(\bx + \bd) - f(\bx) - \nabla f(\bx)^T \bd}{\| \bd \|} = 0 \Forall \bx \in S.
+$$
+
+Another way to write this result is:
+
+$$
+f(\bx) = f(\ba) + \nabla f(\ba)^T (\bx - \ba) + o (\| \bx - \ba \|)
+$$
+where $\ba \in S$ and $o(\cdot) : \RR_+ \to \RR$ is a one dimensional function
+satisfying $\frac{o(t)}{t} \to 0$ as $t \to 0^+$.
 ```
+
 
 ## Chain Rule
 
@@ -505,6 +581,57 @@ $$
 \nabla h(\bx) = \frac{1}{\bone^T \bz} \bz.
 $$
 ```
+
+```{prf:example} Gradient of $\ell_2$ norm at nonzero vectors
+:label: ex-mvc-gradient-l2-norm
+
+Let $h : \RR^n \to \RR$ be given by:
+
+$$
+h(\bx) = \| \bx \|_2 = \sqrt{ \langle \bx, \bx \rangle}
+$$
+with $\dom h = \RR^n$.
+
+Let $g : \RR \to \RR$  with $\dom g = \RR_+$
+be given by $g(y) = \sqrt{y}$. 
+
+Let $f : \RR^n \to \RR$ with $\dom f = \RR^n$ be given by
+
+$$
+f(\bx) = \langle \bx, \bx \rangle = \sum_{i=1}^n x_i^2
+= \| \bx \|_2^2.
+$$
+
+Then, we can see that $h(\bx) = g (f (\bx))$
+or $h = g \circ f$.
+
+$g$ is differentiable on the open set $\RR_{++}$.
+For every $y \in \RR_{++}$, 
+
+$$
+g'(y) = \frac{1}{2 \sqrt{y}}
+$$
+and (from {prf:ref}`ex-mvc-gradient-squared-l2_norm`)
+
+$$
+\nabla f(\bx) = 2 \bx.
+$$
+
+Thus, for every $\bx \neq \bzero$,
+following {prf:ref}`res-mvc-chain-rule-real`,
+
+$$
+\nabla h(\bx) = g'(f(\bx)) \nabla f(\bx)
+= \frac{1}{2 \sqrt{\| \bx \|_2^2}} 2 \bx
+= \frac{\bx}{\| \bx \|_2}.
+$$
+The gradient of $\ell_2$ norm at $\bzero$ doesn't
+exist. However, subgradients can be computed.
+See {prf:ref}`ex-cvxf-subdiff-l2-norm-origin`
+and {prf:ref}`ex-cvxf-subdiff-l2-norm`.
+```
+
+
 
 ```{prf:corollary} Chain rule for composition with affine function
 :label: res-mvc-chain-rule-affine-composition
@@ -829,7 +956,67 @@ y^2 & - x y\\
 $$
 ```
 
+## Twice Continuous Differentiability 
 
+```{prf:definition} Twice continuously differentiable real valued function
+:label: def-mvc-twice-cont-diff-rv-func
+
+Let $f: \RR^n \to \RR$ be a real valued function with $S = \dom f$.
+Let $U \subseteq S$ be an open set.
+If all the second order partial derivatives of $f$ exist and are 
+continuous at every $\bx \in U$,
+then $f$ is called *twice continuously differentiable* over $U$.
+
+If $f$ is twice continuously differentiable over an open set $U \subseteq S$,
+then it is twice continuously differentiable over every subset $C \subseteq U$.
+
+If $S$ is open itself and $f$ is twice continuously differentiable over $S$,
+then $f$ is called *twice continuously differentiable*.
+```
+
+```{prf:theorem} Symmetry of Hessian
+:label: res-mvc-f-twice-cont-diff-sym-hessian
+
+If $f : \RR^n \to \RR$ with $S = \dom f$
+is twice continuously differentiable over
+a set $U \subseteq S$, then
+its Hessian matrix $\nabla^2 f(\bx)$ is symmetric at every $\bx \in U$
+```
+
+
+## Second Order Approximation
+
+```{prf:theorem} Linear approximation theorem
+:label: res-mvc-linear-approx-theorem
+
+Let $f : \RR^n \to \RR$ with $S = \dom f$ be
+twice continuously differentiable over an open set $U \subseteq S$.
+Let $\bx \in U$.
+Let $r > 0$ be such that $B(\bx, r) \subseteq U$.
+Then, for any $\by \in B(\bx, r)$, there exist $\bz \in [\bx, \by]$
+such that
+
+$$
+f(\by) - f(\bx) = \nabla f(\bx)^T (\by - \bx)
++ \frac{1}{2} (\by - \bx)^T \nabla^2 f(\bz) (\by - \bx).
+$$
+```
+
+```{prf:theorem} Quadratic approximation theorem
+:label: res-mvc-quadratic-approx-theorem
+
+Let $f : \RR^n \to \RR$ with $S = \dom f$ be
+twice continuously differentiable over an open set $U \subseteq S$.
+Let $\bx \in U$.
+Let $r > 0$ be such that $B(\bx, r) \subseteq U$.
+Then, for any $\by \in B(\bx, r)$,
+
+$$
+f(\by) = f(\bx) + \nabla f(\bx)^T (\by - \bx)
++ \frac{1}{2} (\by - \bx)^T \nabla^2 f(\bx) (\by - \bx)
++ o(\| \by - \bx \|^2).
+$$
+```
 
 ````{prf:definition} Second order approximation
 :label: def-mvp-snd-ord-approx
@@ -844,3 +1031,68 @@ is the quadratic function defined by:
 
 ````
 
+## Smoothness
+
+### Real Functions
+
+```{prf:definition} Class of continuous functions
+:label: def-mvc-rf-continuous-functions-class
+
+The class of continuous real functions,
+denoted by $C$, is the set of functions
+of type $f: \RR \to \RR$ which are
+continuous over their domain $\dom f$.
+```
+
+```{prf:definition} Differentiability class $C^k$
+:label: def-mvc-rf-diff-class-k
+
+Let $f: \RR \to \RR$ be a real function
+with $S = \dom f$.
+
+Then, we say that $f$ belongs to the differentiability
+class $C^k$ on $S$ if and only if
+
+$$
+\frac{d^k}{d x^k} f(x) \in C.
+$$
+In other words, the $k$-th derivative of $f$
+exists and is continuous.
+```
+
+```{div}
+
+1. $C^0$ consists of class of continuous real functions.
+1. $C^1$ consists of class of continuously differentiable
+   functions.
+1. $C^{\infty}$ consists of class of smooth functions
+   which are infinitely differentiable.
+```
+
+
+### Real Valued Functions on Euclidean Space
+
+```{prf:definition} Differentiability class $C^k$
+:label: def-mvc-smooth-k-th-order
+
+A function $f: \RR^n \to \RR$ with $S = \dom f$
+where $S$ is an open subset of $\RR^n$ is said to be
+of class $C^k$ on $S$, for a positive integer $k$,
+if all the partial derivatives of $f$ 
+
+$$
+\frac{\partial^m f}{\partial x_1^{m_1} \partial x_2^{m_2} \dots \partial x_n^{m_n}} (\bx) 
+$$
+exist and are continuous for every $m_1,m_2,\dots,m_n \geq 0$
+and $m = m_1 + m_2 + \dots m_n \leq k$.
+```
+
+```{div}
+1. If $f$ is continuous, it is said to belong to $C$ or $C^0$.
+1. If $f$ is continuously differentiable, it is said to
+   belong to $C^1$.
+1. If $f$ is twice continuously differentiable, it is said
+   to belong to $C^2$.
+1. If $f$ is infinitely differentiable, it is said to
+   belong to $C^{\infty}$.
+```

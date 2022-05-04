@@ -3,6 +3,8 @@
 
 
 ```{prf:definition} Matrix
+:label: def-la-mat-matrix
+
 An $m \times n$ *matrix* $\bA$ is a rectangular array 
 of numbers.
 
@@ -30,6 +32,8 @@ A matrix is often written in short as $\bA = (a_{ij})$.
 ```
 
 ```{prf:definition} The set of matrices
+:label: def-la-mat-matrix-set
+
 The set of all real matrices of shape $m \times n$ is
 denoted by $\RR^{m \times n}$.
 
@@ -38,6 +42,8 @@ denoted by $\CC^{m \times n}$.
 ```
 
 ```{prf:definition} Vector
+:label: def-la-mat-vector
+
 A *vector* is an $n$-tuple of numbers written as:
 
 $$
@@ -53,10 +59,14 @@ The numbers in a vector are called its *components*.
 ```
 
 ```{prf:definition} Column vector
+:label: def-la-mat-col-vec
+
 A matrix with shape $m \times 1$ is called a *column vector*.
 ```
 
 ```{prf:definition} Row vector
+:label: def-la-mat-row-vec
+
 A matrix with shape $1 \times n$ is called a *row vector*.
 ```
 
@@ -70,6 +80,7 @@ A row or column vector can easily be written as an $n$-tuple.
 
 
 ```{prf:definition} Matrix addition
+:label: def-la-mat-matrix-addition
 
 Let $\bA$ and $\bB$ be two matrices with same shape $m \times n$.
 Then, their addition is defined as:
@@ -81,6 +92,8 @@ $$
 
 
 ```{prf:definition} Scalar multiplication
+:label: def-la-mat-matrix-scalar-mult
+
 Let $\bA$ be a matrix of shape $m \times n$ and $\lambda$ be
 a scalar. The product of the matrix $\bA$ with the scalar $\lambda$
 is defined as:
@@ -91,6 +104,7 @@ $$
 ```
 
 ```{prf:theorem} Properties of matrix addition and scalar multiplication
+:label: res-la-mat-matrix-add-mult-props
 
 Let $\bA, \bB, \bC$ be matrices of shape $m \times n$.
 Let $\lambda, \mu$ be scalars. 
@@ -112,6 +126,8 @@ Then:
 
 
 ```{prf:definition} Matrix multiplication
+:label: def-la-mat-matrix-mult
+
 
 If $\bA$ is an $m \times n$ matrix and $\bB$ is an $n \times p$
 matrix (thus, $\bA$ has same number of columns as $\bB$ has rows),
@@ -129,6 +145,8 @@ of $B$ element by element and then summing over them.
 
 
 ```{prf:theorem} Properties of matrix multiplication
+:label: res-la-mat-matrix-mult-props
+
 Let $\bA, \bB, \bC$ be matrices of appropriate shape.
 
 1. Matrix multiplication is associative: 

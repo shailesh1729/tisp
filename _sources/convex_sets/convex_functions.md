@@ -16,6 +16,7 @@ as needed.
 ````{prf:definition} Convex function
 :label: def-convex-function
 
+Let $\VV$ be a real vector space.
 A real valued function $f: \VV \to \RR$ is *convex* if 
 $\dom f$ is a convex set and for all $\bx_1,\bx_2 \in \dom f$, 
 and $t \in [0, 1]$, we have:
@@ -30,7 +31,7 @@ f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).
 
 ```{figure} ../images/convex_function.png
 ---
-name: convex_function
+name: convex_function_2
 ---
 Graph of a convex function. The line segment
 between any two points on the graph lies 
@@ -43,6 +44,7 @@ For a convex function, every chord lies above the graph of the function.
 ```{prf:definition} Strictly convex function
 :label: def-strictly-convex-function
 
+Let $\VV$ be a real vector space.
 A convex function $f: \VV \to \RR$ is *strictly convex* 
 if for all $\bx_1,\bx_2 \in \dom f$, 
 where $\bx_1$ and $\bx_2$ are distinct, 
@@ -126,6 +128,8 @@ Thus, arithmetic mean is both convex and concave.
 
 
 ```{prf:example} Affine functional
+:label: ex-cvxf-affine-func-1
+
 An *affine functional* is a special type of 
 {prf:ref}`affine function <def-la-affine-operator>`
 which maps a vector from $\VV$ to a scalar in 
@@ -219,7 +223,7 @@ Hence, $f$ is convex.
 :label: res-cvxf-norms-convex
 
 Let $\| \cdot \| \to \RR$ be a 
-{prf:ref}`norm <def-la-norm>` on a vector space $\VV$.
+{prf:ref}`norm <def-la-norm>` on a real vector space $\VV$.
 Then, it satisfies the triangle inequality:
 
 $$
@@ -323,6 +327,69 @@ $$
 1. Thus, $f$ is concave.
 ```
 
+```{prf:example} Powers of absolute value
+:label: ex-cvxf-real-power-absolute-x-p
+
+
+Let $f : \RR \to \RR$ be:
+
+$$
+f(x) = |x|^p
+$$
+with $\dom f = \RR$.
+
+For $p=1$, the absolute value function $f(x) = |x|$ is convex.
+
+Consider the case where $p > 1$. Let $q$ be its conjugate
+exponent given by $\frac{1}{p} + \frac{1}{q} = 1$.
+
+Let $x, y \in \RR$ and $s, t \in (0, 1)$ with $s + t= 1$.
+
+1. By triangle inequality:
+   
+   $$
+   | s x + t y | \leq  s | x| + t |y|.
+   $$
+1. We can write this as:
+
+   $$
+   s | x| + t |y|
+   = \left ( s^{\frac{1}{p}} |x| \right ) s^{\frac{1}{q}} 
+   + \left ( t^{\frac{1}{p}} |y| \right ) t^{\frac{1}{q}}.
+   $$
+
+1. By {prf:ref}`Hölder's inequality <res-bra-holder-inequality>`,
+   for some $a_1, a_2, b_1, b_2 \geq 0$
+
+   $$
+   a_1 b_1 + a_2 b_2 \leq (a_1^p + a_2^p)^{\frac{1}{p}} 
+   + (b_1^q + b_2^q)^{\frac{1}{q}}. 
+   $$
+
+1. Let $a_1 = s^{\frac{1}{p}} |x|$, $a_2 =  t^{\frac{1}{p}} |y|$,
+   $b_1 = s^{\frac{1}{q}}$ and $b_2 = t^{\frac{1}{q}}$.
+1. Applying Hölder's inequality,
+
+   $$
+   | s x + t y | 
+   \leq s | x| + t |y| 
+   \leq (s |x|^p + t |y|^p)^{\frac{1}{p}} (s + t)^{\frac{1}{q}}
+   = (s |x|^p + t |y|^p)^{\frac{1}{p}}.
+   $$
+1. Taking power of $p$ on both sides, we get:
+
+   $$
+   | s x + t y |^p \leq s |x|^p + t |y|^p.
+   $$
+1. Which is the same as
+   
+   $$
+   f(s x + t y) \leq s f(x) + t f(y).
+   $$
+1. Thus, $f$ is convex.
+```
+
+
 ```{prf:observation} Empty function is convex
 :label: res-cvxf-empty-func-convex
 
@@ -348,12 +415,18 @@ The observation above says that $f+g$ is still
 a convex function.
 
 
+{prf:ref}`Jensen's inequality <res-cvxf-jensen-inequality>`,
+discussed later in the section, generalizes the notion of
+convexity of a function to arbitrary convex combinations
+of points in its domain.
+
 ## Convexity on Lines in Domain
 
 ```{prf:theorem} $f$ is convex = $f$ is convex on lines in domain
 :label: res-cvxf-convx-on-lines
 
-A function $f$ is convex if and only if for any
+Let $\VV$ be a real vector space.
+A function $f : \VV \to \RR$ is convex if and only if for any
 $\bx \in \dom f$ and any $\bv \in \VV$, the function 
 $g(t) = f(\bx + t\bv)$ is convex (on its domain
     , $\{ t \in \RR \ST \bx + t\bv \in \dom f\}$).
@@ -491,10 +564,13 @@ $\VV \oplus \RR$ is the
 of $\VV$ and $\RR$ having appropriate vector space 
 structure.
 
+### Convex Functions
+
 ```{prf:theorem} Function convexity = Epigraph convexity
 :label: res-cvxf-convexity-epigraph
 
-A function $f$ is convex if and only if its epigraph
+Let $\VV$ be a real vector space.
+A function $f: \VV \to \RR$ is convex if and only if its epigraph
 $\epi f$ is a convex set.
 ```
 
@@ -542,8 +618,232 @@ Due to {prf:ref}`res-cvx-convex-set-affine-image`,
 $\epi f$ convex implies $\dom f$ convex
 as the projection is a linear operation.
 
+### Nonnegative Homogeneous Functions
+
+Recall that a real valued function $f : \VV \to \RR$ is 
+nonnegative homogeneous if 
+for every $t \in \RR_+$, $f(t \bx) = t f(\bx)$.
+
+```{prf:theorem} Nonnegative homogeneity = Epigraph is cone
+:label: res-cvxf-pose-hom-cone
+
+A function $f : \VV \to \RR$ is nonnegative homogeneous if and
+only if its epigraph $\epi f$ is a cone in $\VV \oplus \RR$.
+```
+
+```{prf:proof}
+Let $f$ be nonnegative homogeneous.
+
+1. Let $(\bx, f(\bx)) \in \epi f$.
+1. Let $t \geq 0$.
+1. Then, $t(\bx, f(\bx)) = (t\bx, t f(\bx)) = (t\bx, f(t\bx))$.
+1. But $(t\bx, f(t\bx)) \in \epi f$ since $f$ is nonnegative homogeneous.
+1. Thus, $\VV \oplus \RR$ is closed under nonnegative scalar multiplication.
+1. Thus, $\epi f$ is a cone.
+
+Assume $\epi f$ is a cone.
+
+1. Let $\bx \in \dom f$.
+1. Then, $(\bx, f(\bx)) \in \epi f$.
+1. Since $(\bzero, 0) \in \epi f$ as $\epi f$ is a cone, hence
+   $f(0 \bx) = 0 f(\bx) = 0$.
+1. Now, let $t > 0$.
+1. Since $\epi f$ is a cone then, $t(\bx, f(\bx)) \in \epi f$.
+1. Then, $t(\bx, f(\bx)) = (t\bx, t f(\bx)) \in \epi f$.
+1. By definition of epigraph, $f(t\bx) \leq t f(\bx)$.
+1. We claim that $f(t \bx) = t f(\bx)$ must hold true.
+1. Assume for contradiction that $f(t \bx) = s f(\bx)$ where $s < t$.
+1. Then, $(t\bx, s f(\bx)) \in \epi f$.
+1. Since $\epi f$ is a cone, hence dividing by $t$, we get,
+   $(\bx, \frac{s}{t} f(\bx)) \in \epi f$.
+1. But then, $f(\bx) \leq \frac{s}{t} f(\bx) < f(\bx)$ which is a contradiction.
+1. Hence, $f(t \bx) = t f(\bx)$ must hold true.
+```
+
+### Nonnegative Homogeneous Convex Functions
+
+```{prf:theorem} Nonnegative homogeneous convex function epigraph characterization
+:label: res-cvxf-nonneg-hom-cvx-cone-epi
+
+Let $\VV$ be a real vector space.
+A real valued function $f: \VV \to \RR$ is nonnegative homogeneous and convex
+if and only if its epigraph
+$\epi f$ is a convex cone.
+```
+
+```{prf:proof}
+
+By {prf:ref}`res-cvxf-pose-hom-cone`, $f$ is nonnegative homogeneous if and
+only if $\epi f$ is a cone.
+
+By {prf:ref}`res-cvxf-convexity-epigraph`, $f$ is convex if and only if
+$\epi f$ is convex.
+
+Thus, $f$ is nonnegative homogeneous and convex if and only if
+its epigraph $\epi f$ is a convex cone.
+```
 
 
+```{prf:theorem} Nonnegative homogeneous convex function is subadditive
+:label: res-cvxf-nonneg-hom-convex-subadditive
+
+Let $\VV$ be a real vector space.
+A nonnegative homogeneous function $f: \VV \to \RR$ is convex
+if and only if it is subadditive:
+
+$$
+f(\bx + \by) \leq f(\bx) + f(\by) \Forall \bx, \by \in \dom f.
+$$
+```
+
+```{prf:proof}
+
+Assume that $f$ is nonnegative homogeneous and convex.
+
+1. By {prf:ref}`res-cvxf-nonneg-hom-cvx-cone-epi`, $\epi f$ is a convex cone.
+1. Then, by {prf:ref}`res-convex-cone-characterization` $\epi f$ is closed under
+   addition and nonnegative scalar multiplication.
+1. Pick any $\bx, \by \in \dom f$. 
+1. Then $(\bx, f(\bx)), (\by, f(\by)) \in \epi f$.
+1. Then, their sum $(\bx + \by, f(\bx) + f(\by)) \in \epi f$.
+1. This means that $f(\bx + \by) \leq f(\bx) + f(\by)$ by definition of epigraph.
+
+
+Now for the converse, assume that $f$ is nonnegative homogeneous and subadditive.
+
+1. By {prf:ref}`res-cvxf-pose-hom-cone`, $\epi f$ is a cone. 
+1. Consequently, it is closed under nonnegative scalar multiplication.
+1. Pick any $\bx, \by \in \dom f$.
+1. Let $(\bx, \alpha), (\by, \beta) \in \epi f$.
+1. Then, $f(\bx) \leq \alpha$ and $f(\by) \leq \beta$.
+1. Now, $(\bx + \by, f(\bx + \by)) \in \epi f$.
+1. Since $f$ is subadditive, hence $f(\bx + \by) \leq f(\bx) + f(\by) \leq \alpha + \beta$.
+1. Thus, $(\bx + \by, \alpha + \beta) \in \epi f$.
+1. We have shown that for any  $(\bx, \alpha), (\by, \beta) \in \epi f$,
+   $(\bx + \by, \alpha + \beta) \in \epi f$.
+1. Thus, $\epi f$ is closed under vector addition.
+1. Since $\epi f$ is closed under vector addition and nonnegative scalar multiplication,
+   hence $\epi f$ is a convex cone.
+1. But then, by {prf:ref}`res-cvxf-nonneg-hom-cvx-cone-epi`, $f$ is convex.
+```
+
+```{prf:corollary}
+:label: res-cvxf-nonneg-hom-convex-negation
+
+Let $\VV$ be a real vector space.
+Let $f: \VV \to \RR$ be a nonnegative homogeneous convex function.
+Then,
+
+$$
+f(-\bx) \geq -f(\bx) \Forall \bx \in \dom f.
+$$
+```
+```{prf:proof}
+Since $f$ is nonnegative homogeneous convex, hence $f$ is
+subadditive. 
+
+Thus,
+
+$$
+f(\bx - \bx) \leq f(\bx) + f(-\bx).
+$$
+
+But,
+
+$$
+f(\bx - \bx) = f(\bzero) = f(0 \bzero) = 0 f(\bzero) = 0.
+$$
+
+Thus,
+
+$$
+f(\bx) + f(-\bx) \geq 0.
+$$
+
+Thus,
+
+$$
+f(-\bx) \geq -f(\bx).
+$$
+```
+
+
+```{prf:theorem} Linearity of nonnegative homogeneous functions
+:label: res-cvxf-nonneg-hom-convex-linear
+
+Let $\VV$ be a real vector space.
+Let $f: \VV \to \RR$ be a nonnegative homogeneous convex function.
+Then, $f$ is linear on a subspace $L$ of $\VV$
+if and only if $f(-\bx) = -f(\bx)$ for every $\bx \in L$.
+
+If $L$ is finite dimensional, then
+this is true if merely $f(-\bb_i) = -f(\bb_i)$ for all the
+vectors in some basis $\bb_1, \dots, \bb_n$ for $L$. 
+```
+
+
+```{prf:proof}
+We are given that $f$ is nonnegative homogeneous convex.
+
+
+Assume that $f$ is linear over $L$. 
+Then by definition of linearity, $f(-\bx) = -f(\bx)$ for every $\bx \in L$.
+
+
+Now, for the converse, assume that $f(-\bx) = -f(\bx) \Forall \bx \in L$.
+
+1. Let $\bx, \by \in L$.
+1. Then, $f(\bx + \by) \leq f(\bx) + f(\by)$ since $f$ is subadditive.
+1. Also, 
+
+   $$
+   f(\bx + \by) = -f(-(\bx + \by)) = -f(-\bx + (-\by)).   
+   $$
+1. But 
+
+   $$
+   f(-\bx + (-\by)) \leq f(-\bx) + f(-\by) = -f(\bx) - f(\by) = - (f(\bx) + f(\by)).
+   $$
+1. Thus,
+
+   $$
+   f(\bx + \by) = -f(-\bx + (-\by)) \geq f(\bx) + f(\by).
+   $$
+1. Combining, we get $f(\bx + \by) = f(\bx) + f(\by)$. 
+   Thus, $f$ is additive over $L$.
+1. For any $t < 0$, 
+
+   $$
+   f(t \bx) = - f(-t \bx) = - (-t) f(\bx) = t f(\bx).
+   $$
+1. Thus, for any $t \in \RR$, $f(t \bx) = t f(\bx)$.
+1. Thus, $f$ is homogeneous over $L$.
+1. Since $f$ is additive and homogeneous over $L$, hence $f$ is linear.
+
+
+Finally, assume that $L$ is finite dimensional and has a basis
+$\bb_1, \dots, \bb_n$.
+
+1. By previous argument $f$ is homogeneous on the basis vectors; i.e.,
+   $f(t \bb_i) = t f(\bb_i)$ for any $t \in \RR$ and any basis vector.
+1. Let $\bx \in L$.
+1. Then, $\bx = \sum_{i=1}^n a_i \bb_i$.
+1. Since $f$ is subadditive, hence
+
+   $$
+   f(a_1 \bb_1) + \dots + f(a_n \bb_n) 
+   & \geq f(a_1 \bb_1 + \dots + a_n \bb_n)\\
+   &= f(\bx) \\
+   &\geq - f(-\bx)\\
+   &= - f(-a_1 \bb_1 - \dots - a_n \bb_n)\\
+   &\geq - f(-a_1 \bb_1) - \dots - f(-a_n \bb_n)\\
+   &=f(a_1 \bb_1) + \dots + f(a_n \bb_n).
+   $$
+1. This can hold only if all the inequalities are equalities in the previous
+   derivation. 
+1. Thus, $f(\bx) = - f(-\bx)$ or $-f(\bx) = f(-\bx)$ for every $\bx \in L$.
+1. Then, following the previous argument, $f$ is linear over $L$.
+```
 
 ## Extended Value Extensions
 Tracking domains of convex functions is difficult.
@@ -689,7 +989,22 @@ For an improper function $f$:
 
 Most of our study is focused on proper functions.
 However, improper functions sometimes do arise
-naturally. 
+naturally in convex analysis. 
+
+```{prf:example} An improper function
+:label: ex-cvxf-improper-f
+
+Consider a function $f: \RR \to \ERL$ as described below:
+
+$$
+f(x) = \begin{cases}
+-\infty & \text{ if } & | x | < 1 \\
+0 & \text{ if } & |x| = 1 \\
+\infty & \text{ if } & | x | > 1 .
+\end{cases}
+$$
+Then, $f$ is an improper function.
+```
 
 
 ## Indicator Functions
@@ -735,7 +1050,9 @@ Hence, $I_C$ is not convex.
 ```
 
 
-```{prf:theorem}
+```{prf:theorem} Restricting the domain of a function
+:label: res-cvxf-func-sum-indicator
+
 Let $f$ be a proper function. Then,
 
 $$
@@ -752,707 +1069,6 @@ The statement is obvious. And quite powerful.
 * The problem of minimizing a function $f$ over a set $C$
   is same as minimizing $f + I_C$ over $\VV$.
 
-## First Order Conditions
-
-Let us look at the special case of 
-real valued functions over $\RR^n$ 
-which are differentiable.
-
-````{prf:theorem} First order characterization of convexity
-:label: res-cvxf-gradient-convexity-relation
-
-Let $f : \RR^n \to \RR$ be a real valued function
-which is {prf:ref}`differentiable <def-mvc-differentiable-function>`
-at each point in $\dom f$ which is open.
-
-Then $f$ is convex if and only if $\dom f$ is convex
-and 
-
-```{math}
-:label: eq-cvxf-first-order-convexity-condition
-f(\by) \geq f(\bx) + \nabla f(\bx)^T (\by - \bx)
-```
-holds true for all $\bx, \by \in \dom f$.
-````
-
-
-```{prf:proof}
-To prove {eq}`eq-cvxf-first-order-convexity-condition`,
-we first show that a differentiable real function $f: \RR \to \RR$
-is convex if and only if  
-
-$$
-f(y) \geq f(x) + f'(x)(y - x)
-$$
-holds true for all $x, y \in \dom f$.
-
-
-Assume that $f$ is convex. Hence, $\dom f$ is convex too.
-
-1. Let $x,y \in \dom f$.
-1. Since $\dom f$ is convex, hence 
-   $ (1-t) x + t y = x + t(y-x) \in \dom f$ for all $t \in [0, 1]$.
-1. By convexity of $f$, we have:
-
-   $$
-   f(x + t(y-x)) \leq (1-t) f(x) + t f(y).
-   $$
-1. If we divide by $t$ on both sides, we obtain:
-
-   $$
-   f(y) \geq f(x) + \frac{f(x + t(y-x)) - f(x)}{t}.
-   $$
-1. Taking the limit as $t \to 0^+$, we obtain:
-
-   $$
-   f(y) \geq f(x) + f'(x)(y-x).
-   $$
-
-For the converse, assume that $\dom f$ is convex and
-
-$$
-f(y) \geq f(x) + f'(x)(y - x)
-$$
-holds true for all $x, y \in \dom f$.
-
-1. Recall that in $\RR$ the only convex sets are 
-   intervals. Thus, $\dom f$ is an open interval.
-1. Choose any $x, y \in \dom f$ such that $x \neq y$.
-1. Choose $t \in [0,1]$.
-1. Let $z = t x + (1-t)y$.
-1. By hypothesis, we have:
-   
-   $$
-   f(x) \geq f(z) + f'(z) (x - z)
-   $$
-   and
-
-   $$
-   f(y) \geq f(z) + f'(z) (y - z).
-   $$
-1. Multiplying the first inequality with $t$ and second
-   with $(1-t)$ and adding them yields:
-   
-   $$
-   t f(x) + (1-t) f(y) \geq f(z) = f(tx + (1-t)y).
-   $$
-1. Thus, $f$ is convex.
-
-
-We now prove for the general case with $f : \RR^n \to \RR$.
-Recall from {prf:ref}`res-cvxf-convx-on-lines`
-that for any $\bx, \by \in \dom f$ 
-the restriction of $f$ on the line passing through $\bx$ and $\by$
-is given by:
-
-$$
-g(t) = f(t\by + (1-t) \bx) = f(\bx + t(\by - \bx)).
-$$
-
-Note that, by chain rule ({prf:ref}`ex-f-rest-line-chain-rule`):
-
-$$
-g'(t) = \nabla f(t\by + (1-t) \bx)^T (\by - \bx)
-$$
-
-Assume $f$ is convex.
-1. Let $\bx, \by \in \dom f$ such that $\bx \neq \by$.
-1. Let $g$ be the restriction of $f$ on the line passing through
-   $\bx, \by$ as described above.
-1. Due to {prf:ref}`res-cvxf-convx-on-lines`, $g$ is convex.
-1. By the argument for real functions above:
-
-   $$
-   g(t') \geq g(t) + g'(t)(t' - t)
-   $$
-   holds true for all $t, t' \in \dom g$.
-1. In particular, with $t'=1$ and $t=0$, we have:
-
-   $$
-   g(1) \geq g(0) + g'(0).
-   $$
-1. But $g'(0) = \nabla f(\bx)^T (\by - \bx)$.
-1. Also, $g(1) = f(\by)$ and $g(0) = f(\bx)$.
-1. Thus, we get:
-
-   $$
-   f(\by) \geq f(\bx) + \nabla f(\bx)^T (\by - \bx)
-   $$
-   as desired.
-
-
-For the converse, assume that this inequality holds
-for all $\bx, \by \in \dom f$ and $\dom f$ is convex.
-
-1. Pick some $\bx, \by \in \dom f$ with $\bx \neq \by$.
-1. Let $g$ be the restriction of $f$ on the line passing through
-   $\bx, \by$ as described above.
-1. Pick $t_1, t_2 \in \dom g$.
-1. Then, $\bz_1 = t_1\by + (1-t_1) \bx$ and 
-   $\bz_2 = t_2\by + (1-t_2) \bx$
-   are in $\dom f$.
-1. Consider $g(t_1) = f(t_1\by + (1-t_1) \bx) = f(\bz_1)$
-   and $g(t_2) = f(t_2\by + (1-2_1) \bx) = f(\bz_2)$.
-1. Note that $g'(t_2) =  \nabla f(t_2\by + (1-t_2) \bx)^T (\by - \bx) = \nabla f(\bz_2)^T (\by - \bx)$.
-1. By hypothesis, we have:
-
-   $$
-   f(\bz_1) \geq f(\bz_2) + \nabla f(\bz_2)^T (\bz_1 - \bz_2).
-   $$
-1. But $\bz_1  - \bz_2 = (t_1 - t_2) (\by - \bx)$.
-1. Thus, we get:
-
-   $$
-   g'(t_1) \geq g'(t_2) + g'(t_2)(t_1 - t_2).
-   $$
-1. This holds for every $t_1, t_2 \in \dom g$.
-1. But then, $g$ is convex by previous argument for
-   real functions.
-1. Since this is valid for every restriction of $f$ 
-   to a line passing through its domain, hence
-   by {prf:ref}`res-cvxf-convx-on-lines` $f$ is convex.
-```
-
-
-## Second Order Conditions
-
-We continue further with 
-real valued functions over $\RR^n$ 
-which are twice differentiable.
-
-```{prf:theorem} Second order characterization of convexity
-:label: res-cvxf-hessian-convexity-relation
-
-Let $f : \RR^n \to \RR$ be twice differentiable;
-i.e., its {prf:ref}`Hessian <def-mvp-hessian>`
-or second derivative $\nabla^2 f$ exists 
-at every point in $\dom f$ which is open.
-
-Then, $f$ is convex if and only if
-$\dom f$ is convex and its Hessian is positive semidefinite
-for every $\bx \in \dom f$:
-
-$$
-\nabla^2 f(\bx) \succeq \ZERO \quad \Forall \bx \in \dom f.
-$$ 
-```
-
-For real functions, the Hessian is simply the
-second derivative $f''$.
-
-```{prf:corollary} Convexity characterization for twice differentiable real functions
-:label: res-cvxf-2nd-derivative-convexity-relation
-
-Let $f : \RR \to \RR$ be twice differentiable;
-i.e., second derivative $f''$ exists 
-at every point in $\dom f$ which is open.
-
-Then, $f$ is convex if and only if
-$\dom f$ is an interval and its second derivative is non-negative
-for every $x \in \dom f$:
-
-$$
-f''(x) \geq 0 \quad \Forall x \in \dom f.
-$$ 
-```
-
-
-
-```{prf:corollary} Second order characterization of concavity
-:label: res-cvxf-hessian-concavity-relation
-
-Let $f : \RR^n \to \RR$ be twice differentiable;
-
-Then, $f$ is concave if and only if
-$\dom f$ is convex and its Hessian is negative semidefinite
-for every $\bx \in \dom f$:
-
-$$
-\nabla^2 f(\bx) \preceq \ZERO \quad \Forall \bx \in \dom f.
-$$ 
-```
-
-
-```{prf:example} Convexity of a quadratic function
-:label: ex-cvxf-quadratic-func-convexity
-
-Let $\bP \in \SS^n$ be a symmetric matrix. 
-Let $\bq \in \RR^n$ and $r \in \RR$. 
-Consider the quadratic functional $f: \RR^n \to \RR$ given as:
-
-$$
-f(\bx) = \frac{1}{2} \bx^T \bP \bx + \bq^T \bx + r.
-$$
-
-As shown in {prf:ref}`ex-mvc-hessian-quadratic-form`, 
-the Hessian of $f$ is:
-
-$$
-\nabla^2 f (\bx) = \bP \quad \Forall \bx \in \RR^n.
-$$
-Thus, $f$ is convex if and only if $\bP \succeq \ZERO$ 
-(i.e., it is positive semidefinite).
-
-In fact $f$ is strictly convex if and only if $P \succ \ZERO$.
-```
-
-```{prf:example} Identity is convex and concave
-:label: ex-cvxf-real-identity
-
-Let $f : \RR \to \RR$ be:
-
-$$
-f(x) = x.
-$$
-
-We have $f'(x) = 1$ and $f''(x) = 0$.
-
-$f$ is both convex and concave. 
-```
-
-```{prf:example} Exponential is convex
-:label: ex-cvxf-real-exponential
-
-Let $f : \RR \to \RR$ be:
-
-$$
-f(x) = e^{ax}
-$$
-with $\dom f = \RR$.
-
-We have $f'(x) = a e^{ax}$ and $f''(x) = a^2 e^{ax}$. 
-
-For any $a,x \in \RR$, $a^2 e^{ax} > 0$. 
-Thus, $f$ is strictly convex.
-```
-
-
-
-```{prf:example} Powers
-:label: ex-cvxf-real-power-x-a
-
-
-Let $f : \RR \to \RR$ be:
-
-$$
-f(x) = x^a
-$$
-with $\dom f = \RR_{++}$.
-
-Now, $f'(x) = a x^{a-1}$ and $f''(x) = a (a - 1) x^{a-2}$.
-
-1. We have $x > 0$.
-1. For $a \geq 1$, $f''(x) \geq 0$. 
-   $f$ is convex for $a \geq 1$.
-1. For $a \leq 0$, $a (a -1) \geq 0$. 
-   Thus, $f''(x) \geq 0$. $f$ is convex for $a \leq 0$.
-1. For $0 \leq a \leq 1$, $a (a-1) \leq 0$. Thus, $f''(x) \leq 0$. 
-   $f$ is concave on $0 \leq a \leq 1$.
-```
-
-
-```{prf:example} Powers of absolute value
-:label: ex-cvxf-real-power-absolute-x-a
-
-
-Let $f : \RR \to \RR$ be:
-
-$$
-f(x) = |x|^a
-$$
-with $\dom f = \RR_{++}$.
-```
-
-```{prf:example} Reciprocal powers
-:label: ex-cvxf-real-reciprocal-power-x-r
-
-Let $f : \RR \to \RR$ be:
-
-$$
-f(x) = \frac{1}{x^r} = x^{-r}.
-$$
-with $\dom f = \RR_{++}$.
-
-Now, $f'(x) = (-r) x^{-r-1}$ and $f''(x) = (-r)(-r - 1) x^{-r-2} = r(r+1) x^{-(r+2)}$.
-
-1. We have $x > 0$.
-1. For $r \geq 0$, $f''(x) \geq 0$. 
-   $f$ is convex for $r \geq 0$.
-```
-
-
-```{prf:example} Logarithm is concave
-:label: ex-cvxf-real-logarithm
-
-Let $f : \RR \to \RR$ be:
-
-$$
-f(x) = \ln x.
-$$
-with $\dom f = \RR_{++}$.
-
-Now, $f'(x) = \frac{1}{x}$ and $f''(x) = \frac{-1}{x^2}$.
-
-1. $f''(x) < 0$ for all $x > 0$.
-1. Thus, $f$ is concave for all $x > 0$.
-```
-
-
-```{prf:example} Negative entropy is convex
-:label: ex-cvxf-real-negative-entropy
-
-Let $f : \RR \to \RR$ be:
-
-$$
-f(x) = x \ln x.
-$$
-with $\dom f = \RR_{++}$.
-
-Now, $f'(x) = \ln x + 1$ and $f''(x) = \frac{1}{x}$.
-
-1. $f''(x) > 0$ for all $x > 0$.
-1. Thus, $f$ is convex for all $x > 0$.
-```
-
-```{prf:example} Quadratic over linear form is convex
-:label: ex-cvxf-r-r-quad-lin
-
-Let $f : \RR \times \RR \to \RR$ be given by:
-
-$$
-f(x, y) = \frac{x^2}{y}
-$$
-with $\dom f = \{ (x, y) \ST y > 0\}$.
-
-From {prf:ref}`ex-mvc-derivatives-quad-lin-func`, 
-the Hessian is:
-
-
-$$
-\nabla^2 f(x, y) = 
-\frac{2}{y^3} \begin{bmatrix}
-y^2 & - x y\\
-- x y & x^2
-\end{bmatrix}
-= \frac{2}{y^3} 
-\begin{bmatrix} y\\ - x \end{bmatrix}
-\begin{bmatrix} y\\ - x \end{bmatrix}^T .
-$$
-
-Recall that for any $\bx \in \RR^n$, the matrix $\bx \bx^T$
-is positive semi-definite. 
-Hence,
-
-$$
-\begin{bmatrix} y\\ - x \end{bmatrix}
-\begin{bmatrix} y\\ - x \end{bmatrix}^T
-$$
-is positive semi-definite.
-
-For $y > 0$, $\frac{2}{y^3} > 0$. Combining:
-
-$$
-\nabla^2 f(x, y) \succeq \ZERO.
-$$
-
-Thus, $f$ is convex.
-```
-
-
-```{prf:example} Log sum exponential is convex
-:label: ex-cvxf-log-sum-exp
-
-Let $f : \RR^n \to \RR$ be given by:
-
-$$
-f(\bx) = \ln \left ( \sum_{i=1}^n e^{x_i} \right )
-$$
-with $\dom f = \RR^n$.
-
-From {prf:ref}`ex-mvc-hessian-log-sum-exp`, we have
-
-$$
-\nabla^2 f(\bx) = \frac{1}{(\bone^T \bz)^2} \left ((\bone^T \bz) \Diag (\bz) - \bz \bz^T \right )
-$$
-
-where 
-
-$$
-\bz = \begin{bmatrix}
-e^{x_1} \\ 
-\vdots \\
-e^{x_n}
-\end{bmatrix}.
-$$
-
-To show that $\nabla^2 f(\bx)$ is p.s.d., it suffices to
-show that $(\bone^T \bz) \Diag (\bz) - \bz \bz^T$ is p.s.d..
-
-Now for any $\bv \in \RR^n$. 
-
-$$
-&\bv^T \left ( (\bone^T \bz) \Diag (\bz) - \bz \bz^T \right ) \bv\\
-&= (\bone^T \bz) (\bv^T \Diag (\bz) \bv) - \bv^T  \bz \bz^T \bv \\
-&= (\bone^T \bz) (\bv^T \Diag (\bz) \bv) - (\bv^T  \bz)^2 \\
-&= \left (\sum_{i=1}^n z_i \right ) 
-\left (\sum_{i=1}^n v_i^2 z_i \right)
-- \left (\sum_{i=1}^n v_i z_i \right )^2.
-$$
-
-If we define vectors $\ba$ and $\bb$ with
-$a_i  = v_i \sqrt{z_i}$ and $b_i = \sqrt{z_i}$,
-then by 
-{prf:ref}`Cauchy-Schwartz inequality <res-la-ip-cauchy-chwartz-inequality>`
-, we have:
-
-$$
-(\ba^T \ba)(\bb^T \bb) \geq (\ba^T \bb)^2
-\iff (\ba^T \ba)(\bb^T \bb) - (\ba^T \bb)^2 \geq 0.
-$$
-
-But this is exactly the expression above.
-Thus, $\nabla^2 f(\bx) \succeq \ZERO$.
-
-Hence, $f$ is convex.
-```
-
-
-```{prf:example} Log determinant function is concave
-:label: ex-cvxf-log-det
-
-Let $f : \SS^n \to \RR$ be:
-
-$$
-f(\bX) = \log \det X.
-$$
-with $\dom f = \SS^n_{++}$ (the set of symmetric positive definite matrices).
-
-Let any line in $\SS^n$ be given by:
-
-$$
-\bX = \bZ + t \bV 
-$$
-where $\bZ, \bV \in \SS^n$.
-
-Consider the restriction of $f$ on a line:
-
-$$
-g(t) = \log \det (\bZ + t \bV) 
-$$
-to the interval of values where $\bZ + t \bV \succ \ZERO$ 
-(since $\dom f = \SS^n_{++}$ ).
-In other words, 
-
-$$
-\dom g = \{t \in \RR \ST \bZ + t \bV \succ \ZERO \}.
-$$
-
-Without any loss of generality, we can assume that $t=0 \in \dom g$;
-i.e. $\bZ \succ \ZERO$.
-
-Recall that:
-1. $\det (AB) = \det(A) \det(B)$ for square matrices.
-1. $ \det (A) = \prod_{i=1}^n \lambda_i $ for symmetric matrices with $\lambda_i$ 
-   being their eigen values.
-1. If $\lambda_i$ are eigen values of $A$, then the eigen values of $I + t A$ are
-   $1 + t \lambda_i$.
-
-
-Now
-
-$$
-g(t) &= \log \det (\bZ + t \bV) \\
-&= \log \det (\bZ^{\frac{1}{2}} (\bZ^{\frac{1}{2}} + t \bZ^{-\frac{1}{2}} \bV) )\\
-&= \log \det (\bZ^{\frac{1}{2}} (I + t \bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}) \bZ^{\frac{1}{2}})\\
-&= \log \det(\bZ^{\frac{1}{2}}) + \log \det (I + t \bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}})
-  + \log \det(\bZ^{\frac{1}{2}})\\
-&= \log \det(\bZ) + \log \det (I + t \bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}).
-$$
-
-1. Let $\lambda_i$ be the eigen values of $\bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}$. 
-1. Then, $1 + t \lambda_i$ are eigen values of $I + t\bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}$.
-1. Thus, $\log \det (I + t\bZ^{-\frac{1}{2}} \bV \bZ^{-\frac{1}{2}}) = \sum_{i=1}^n \log \det (1 + t\lambda_i)$.
-
-
-Thus,
-
-$$
-g(t) = \sum_{i=1}^n \log \det (1 + t\lambda_i) + \log \det(\bZ).
-$$
-Note that $\log \det(\bZ)$ doesn't depend on $t$.
-Similarly, $\lambda_i$ only depend on $\bZ$ and $\bV$, hence they don't depend on $t$.
-
-Differentiating $g$ w.r.t. $t$, we get:
-
-$$
-g'(t) = \sum_{i=1}^n \frac{\lambda_i}{1 + t \lambda_i}.
-$$
-
-Differentiating again, we get:
-
-$$
-g''(t) = -\sum_{i=1}^n \frac{\lambda_i^2}{(1 + t \lambda_i)^2}.
-$$
-
-Since $g''(t) \leq 0$, hence $f$ is concave.
-```
-
-## Scaling and Addition of Convex Functions
-
-Here we show some basic results about operations
-that preserve convexity
-
-```{prf:theorem} Nonnegative multiplication
-:label: res-cvxf-nonnegative-mult-cvx
-
-If $f$ is convex, then so is $\alpha f$ for all $\alpha \geq 0$.
-```
-```{prf:proof}
-
-Assume $f$ is convex.
-Note that $\dom f = \dom \alpha f$. 
-Thus, $\dom \alpha f$ is convex since $\dom f$ is convex.
-
-Now, let $\bx, \by \in \dom f$ and $t \in [0,1]$. Then
-
-$$
-& f(t\bx + (1-t) \by) \leq t f(\bx) + (1-t)f(\by)\\
-& \implies  \alpha f(t\bx + (1-t) \by) \leq \alpha (t f(\bx) + (1-t)f(\by)) \Forall \alpha \geq 0\\
-& \implies (\alpha f)(t\bx + (1-t) \by) \leq  t (\alpha f)(\bx) + (1-t) (\alpha f)(\by) \Forall \alpha \geq 0.
-$$
-Thus, $\alpha f$ is convex for every $\alpha \geq 0$.
-```
-
-
-```{prf:theorem} Convex function sum
-:label: res-cvxf-func-sum
-
-If $f$ and $g$ are convex, then so is $f + g$
-with $\dom (f + g) = \dom f \cap \dom g$.
-```
-```{prf:proof}
-We discussed earlier that $\dom (f + g) = \dom f \cap \dom g$
-as $f + g$ is defined only for the points where both $f$ and $g$
-are defined.
-
-Recall from {prf:ref}`res-cvx-intersection`
-that intersection of convex sets is convex.
-Thus, $\dom (f + g)$ is convex since $\dom f$ and $\dom g$
-are both convex.
-
-Now let $\bx, \by \in \dom (f + g)$ and $t \in [0, 1]$.
-
-1. Since $f$ is convex, hence
-   
-   $$
-   f(t\bx + (1-t) \by) \leq t f(\bx) + (1-t) f(\by).
-   $$
-1. Since $g$ is convex, hence
-   
-   $$
-   g(t\bx + (1-t) \by) \leq t g(\bx) + (1-t) g(\by).
-   $$
-1. Adding the two inequalities, we get:
-
-   $$
-   & f(t\bx + (1-t) \by) + g(t\bx + (1-t) \by) \leq 
-   t f(\bx) + (1-t) f(\by) + t g(\bx) + (1-t) g(\by)\\
-   & \implies 
-   (f + g)(t\bx + (1-t) \by) \leq t (f + g)(\bx) + (1-t) (f + g)(\by).
-   $$
-1. Thus, $f+g$ is convex.
-```
-
-```{prf:theorem} Conic combinations of convex functions
-:label: res-cvxf-func-conic-combs
-
-If $f_1, \dots, f_n$ are convex, then for any
-$t_1, \dots, t_n \geq 0$, the 
-{prf:ref}`conic combination <def-conic-combination>`
-of functions given by:
-
-$$
-f = t_1 f_1 + \dots + t_n f_n
-$$
-is also convex.
-```
-
-The conic combinations are also called nonnegative weighted
-sums.
-
-```{prf:proof}
-Due to {prf:ref}`res-cvxf-nonnegative-mult-cvx`,
-$t_i f_i$ are convex since $f_i$ are convex and $t_i \geq 0$.
-
-Due to {prf:ref}`res-cvxf-func-sum`, sum
-of two convex functions is convex.
-
-It can be easily shown by mathematical induction
-that sum of $n$ convex functions is convex too.
-
-Thus, $f$ is convex.
-```
-
-```{prf:theorem}
-:label: res-cvxf-total-funcs-cvx-cone
-
-The set of convex functions 
-in the {prf:ref}`vector space of real valued functions <def-la-is-real-valued-functions-space>`
-form a convex cone.
-```
-
-Note that the set of real valued functions forms a vector
-space over $\RR$ with the standard definitions of
-function scalar multiplication and function addition.
-We are examining the convexity of the set of functions
-under this vector space.
-
-
-```{prf:proof}
-Since every conic combination of convex functions
-is convex, hence the set of convex functions is
-a convex cone.
-```
-
-```{prf:theorem} Concave function sum
-:label: res-cvxf-concave-func-sum
-
-If $f$ and $g$ are concave, then so is $f + g$
-with $\dom (f + g) = \dom f \cap \dom g$.
-```
-```{prf:proof}
-We proceed as follows:
-
-1. Let $f$ and $g$ be concave.
-1. $-f$ and $-g$ are convex.
-1. By {prf:ref}`res-cvxf-func-sum`, $(-f) + (-g) = -(f + g)$
-   is convex.
-1. Thus, $f+g$ is concave.
-```
-
-```{prf:theorem} Conic combinations of cave functions
-:label: res-cvxf-concave-func-conic-combs
-
-If $f_1, \dots, f_n$ are concave, then for any
-$t_1, \dots, t_n \geq 0$, the 
-{prf:ref}`conic combination <def-conic-combination>`
-of functions given by:
-
-$$
-f = t_1 f_1 + \dots + t_n f_n
-$$
-is also concave.
-```
-
-```{prf:proof}
-We proceed as follows:
-
-1. If $f_1, \dots, f_n$ are concave then $-f_1, \dots, -f_n$ are convex.
-1. By {prf:ref}`res-cvxf-func-conic-combs`, 
-   $(-t_1 f_1) + \dots + (-t_n f_n)$ is convex.
-1. Thus, $-(t_1 f_1 + \dots + t_n f_n)$ is convex.
-1. Thus, $t_1 f_1 + \dots + t_n f_n$ is concave. 
-```
 
 ## Sublevel Sets
 
@@ -1464,12 +1080,79 @@ $$
 C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}.
 $$
 
+The open sublevel sets for a real valued function $f: \VV \to \RR$
+can be defined as
 
-```{prf:theorem}
+$$
+O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}.
+$$
+
+
+The closed sublevel sets can be shown to be intersection
+of a set of open sublevel sets.
+
+```{prf:theorem} Sublevel set as intersection
+:label: res-cvxf-sublevel-set-as-intersection
+
+Let $\VV$ be a real vector space. Let $f : \VV \to \RR$ be 
+a real valued function.
+Let
+
+$$
+O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}
+$$
+denote the open sublevel set of $f$ for $\alpha$.
+
+
+Let
+
+$$
+C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}
+$$
+denote the closed sublevel set of $f$ for $\alpha$.
+Then,
+
+$$
+C_{\alpha} = \bigcap_{\mu > \alpha} O_{\mu}.
+$$
+```
+
+```{prf:proof}
+
+We show that $C_{\alpha} \subseteq \bigcap_{\mu > \alpha} O_{\mu}$.
+
+1. Let $\bx \in C_{\alpha}$.
+1. Then, $f(\bx) \leq \alpha$.
+1. Thus, $f(\bx) < \mu$ for every $\mu > \alpha$.
+1. Thus, $\bx \in O_{\mu}$ for every $\mu > \alpha$.
+1. Thus, $C_{\alpha} \subseteq \bigcap_{\mu > \alpha} O_{\mu}$.
+
+
+We now show that $C_{\alpha} \supseteq \bigcap_{\mu > \alpha} O_{\mu}$.
+
+1. Let $\bx \in \bigcap_{\mu > \alpha} O_{\mu}$.
+1. Then, $f(\bx) < \mu$ for every $\mu > \alpha$.
+1. Taking the infimum on the R.H.S. over the set $\{ \mu \in \RR \ST \mu > \alpha \}$,
+   we obtain 
+
+   $$
+   f(\bx) \leq \inf \{ \mu \in \RR \ST \mu > \alpha \} = \alpha. 
+   $$
+1. Thus, $\bx \in C_{\alpha}$.
+1. Thus, $\bigcap_{\mu > \alpha} O_{\mu} \subseteq C_{\alpha}$.
+```
+
+
+```{prf:theorem} Convexity of sublevel sets
 :label: res-cvxf-convexity-sublevel-sets
 
 If $f : \VV \to \RR$ is convex, 
-then its sublevel sets are convex.
+then its sublevel sets given by
+
+$$
+C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}
+$$
+are convex.
 ```
 
 ```{prf:proof}
@@ -1501,9 +1184,95 @@ Consider the function $f(x) = \ln x$.
 It is concave ({prf:ref}`ex-cvxf-real-logarithm`).
 
 Its sublevel sets are convex as they are intervals.
-
 ```
 
+
+```{prf:theorem} Convexity of open sublevel sets
+:label: res-cvxf-convexity-open-sublevel-sets
+
+If $f : \VV \to \RR$ is convex, 
+then its open sublevel sets given by
+
+$$
+O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}
+$$
+are convex.
+```
+
+```{prf:proof}
+Assume $f$ is convex.
+
+1. Let $\bx, \by \in O_{\alpha}$.
+1. Then, $f(\bx) < \alpha$ and $f(\by) < \alpha$.
+1. Let $t \in (0,1)$.
+1. Let $\bz = t \bx + (1-t)\by$.
+1. Since $f$ is convex, hence:
+
+   $$
+   f(\bz) \leq t f(\bx) + (1-t) f(\by) < t \alpha + (1-t) \alpha = \alpha.
+   $$
+1. Thus, $f(\bz) < \alpha$.
+1. Thus, $\bz \in O_{\alpha}$.
+1. Thus, $O_{\alpha}$ is convex.
+```
+
+An alternate proof for showing the convexity of the closed
+sublevel sets is to show it as an intersection of open sublevel sets.
+
+
+```{prf:theorem} Intersection of sublevel sets of convex functions
+:label: res-cvxf-convexity-intersect-sublevel-sets
+
+Let $\VV$ be a real vector space.
+Let $I$ be an arbitrary index set.
+Let $f_i : \VV \to \RERL$ be convex functions for every $i \in I$.
+Let $\alpha_i \in \RR$ for every $i \in I$.
+Then,
+
+$$
+C = \{ \bx  \ST f_i(\bx) \leq \alpha_i, \Forall i \in I \}
+$$
+is a convex set.
+```
+
+```{prf:proof}
+For each $i \in I$, consider the set
+
+$$
+C_i = \{ \bx  \ST f_i(\bx) \leq \alpha_i\}.
+$$
+Then, $C_i$ is a sublevel set of $f_i$ which is convex. Hence, $C_i$ is convex.
+Now, we can see that 
+
+$$
+C = \bigcap_{i \in I}C_i
+$$
+Thus, $C$ is an intersection of convex sets. Hence, $C$ is convex.
+```
+
+```{prf:example} Convexity of sublevel sets of the quadratic
+:label: ex-cvxf-quadratic-sublevel
+
+Let $\bQ \in \SS^n$ be a positive semidefinite matrix. Let $\ba \in \RR^n$ and $c \in \RR$.
+
+Consider the sets of the form
+
+$$
+\{\bx \in \RR^n \ST \frac{1}{2} \langle \bx, \bQ \bx \rangle + \langle \bx, \ba \rangle + c \leq 0 \}.
+$$
+
+This is a sublevel set of the quadratic function 
+$f(\bx) = \frac{1}{2} \langle \bx, \bQ \bx \rangle + \langle \bx, \ba \rangle + c$. 
+
+Since $f$ is convex, hence the set is convex.
+
+Sets of this form include the solid ellipsoids, paraboloids as well as spherical balls.
+Here is an example of the spherical ball of the norm induced by the inner product.
+
+$$
+\{\bx \ST \| \bx \| \leq 1 \}  = \{ \bx \ST \langle \bx, \bx \rangle - 1 \leq 0 \}.
+$$
+```
 
 ## Hypograph
 
@@ -1573,7 +1342,8 @@ A function need not be concave even if all its
 super-level sets are convex.
 
 
-```{prf:example} 
+```{prf:example}
+:label: ex-cvxf-am-gm-large-alpha
 
 Let geometric mean be given by:
 
@@ -1616,214 +1386,722 @@ than the arithmetic mean.
 1. Since $g - \alpha a$ is concave, hence $A$ is convex.
 ```
 
-## Composition with Affine Mapping
+## Support Functions
 
+```{prf:definition} Support function for a set
+:label: def-cvxf-support-function
 
-```{prf:theorem} Affine transformations preserve convexity
-:label: res-cvx-affine-composition
-
-Let $\VV$ and $\WW$ be real vector spaces.
-Let $T : \VV \to \WW$ be a linear transformation.
-Let $\bb \in \WW$.
-Let $f : \WW \to \RR$ be a function.
-Define $g : \VV \to \RR$ as:
+Let $\VV$ be a real inner product space. Let $C$ be a subset of $\VV$.
+The *support function* $\sigma_C : \VV \to \RERL$ is defined as
 
 $$
-g(\bx) = f(T(\bx) + \bb)
+\sigma_C (\bx) =  \sup \{\langle \bx, \by \rangle \ST \by \in C \}.
 $$
-with $\dom g = \{\bx \in \VV \ST T(\bx) + \bb \in \dom f \}$.
 
-If $f$ is convex, then so is $g$.
-If $f$ is concave, then so is $g$.
+Since $\VV$ and $\VV^*$ are isomorphic, support function
+$\sigma_C : \VV^* \to \RERL$
+for a set $C \subseteq \VV^*$ is similarly defined as
+
+$$
+\sigma_C (\bx) =  \sup \{\langle \by, \bx \rangle \ST \by \in C \}.
+$$
+```
+
+
+```{prf:theorem} Convexity of support function
+:label: res-cvxf-support-fun-convex
+
+Let $\VV$ be a real inner product space. Let $C$ be a nonempty subset of $\VV$.
+Then, the support function $\sigma_C : \VV \to \RERL$ is convex.
+```
+
+```{prf:proof}
+Fix a $\by \in C$ and consider the function $\sigma_{\by} : \VV \to \RR$ given by
+
+$$
+\sigma_{\by} (\bx) = \langle \bx, \by \rangle.
+$$ 
+
+$\sigma_{\by}$ is linear and accordingly convex. Then,
+
+$$
+\sigma_C (\bx) = \sup_{\by \in C} \sigma_{\by} (\bx)
+$$
+is a pointwise supremum of convex functions.
+By {prf:ref}`res-cvx-ptws-supremum`, $\sigma_C$ is convex.
+```
+
+We note that the convexity of the support function $\sigma_C$
+has nothing to do with the convexity of the underlying set $C$.
+
+```{prf:theorem} Closedness of support function
+:label: res-cvxf-support-fun-closed
+
+Let $\VV$ be a real inner product space. Let $C$ be a nonempty subset of $\VV$.
+Then, the support function $\sigma_C : \VV \to \RERL$ is closed.
+```
+
+```{prf:proof}
+Recall that a function is closed if all its sublevel sets are closed.
+
+1. Let $a \in \RR$.
+1. Consider the sublevel set $S_a = \{ \bx \in \VV \ST \sigma_C(\bx) \leq a \}$.
+1. Then,
+
+   $$
+   S_a = \{ \bx \in \VV \ST \sup_{\by \in C} \langle \bx, \by \rangle \leq a \} 
+   $$
+1. Thus,
+
+   $$
+   S_a = \{ \bx \in \VV \ST \langle \bx, \by \rangle \leq a  \Forall \by \in C \} 
+   $$
+1. Define $A_y$ as 
+    
+   $$
+   A_y = \{ \bx \in \VV \ST \langle \bx, \by \rangle \leq a \}.
+   $$
+1. Then,
+
+   $$
+   S_a = \bigcap_{\by \in C} A_y.
+   $$
+1. Now, $A_y$ is a closed set since  $\langle \bx, \by \rangle$ is a continuous function.
+1. Thus, $S_a$ is an intersection of closed sets.
+1. Thus, $S_a$ is closed.
+1. Thus, all sublevel sets of $\sigma_C$ are closed.
+1. Thus, $\sigma_C$ is closed.
+```
+
+
+```{prf:theorem} Equality of underlying sets for support functions
+:label: res-cvxf-support-func-equality-convex
+
+Let $A, B \subseteq \VV$ be nonempty, closed and convex sets.
+Then, $A = B$ if and only if $\sigma_A = \sigma_B$.
+```
+
+```{prf:proof}
+If $A = B$ then obviously $\sigma_A = \sigma_B$.
+Now, assume that $\sigma_A = \sigma_B$.
+
+1. For contradiction, assume that $A \neq B$.
+1. Without loss of generality, assume that there exists $\by \in A$
+   such that $\by \notin B$.
+1. Since $\by \notin B$ and $B$ is a closed convex set, hence,
+   by {prf:ref}`res-cvxf-cl-convex-set-strict-separation`,
+   there exists a hyperplane $H$ strongly separating $\by$ from
+   $B$.
+1. Thus, there exists $\bp \in \VV^*$ and $\alpha \in \RR$ such that
+
+   $$
+   \langle \bx , \bp \rangle \leq \alpha < \langle \by, \bp \rangle
+   \Forall \bx \in B.
+   $$
+1. Taking supremum over $B$ on the L.H.S., we obtain
+
+   $$
+   \sigma_B(\bp) \leq \alpha < \langle \by, \bp \rangle 
+   \leq \sigma_A(\bp).
+   $$
+1. Thus, there exists $\bp \in \VV^*$ such that
+
+   $$
+   \sigma_B(\bp) < \sigma_A(\bp).
+   $$
+1. This contradicts our hypothesis that $\sigma_A$ and $\sigma_B$ 
+   are identical.
+1. Thus, $A = B$ must hold.
+```
+
+The next result shows that support function
+for a set and its closure or its convex hull
+are identical. This is why, we required
+$A,B$ to be closed and convex in the previous result.
+
+
+```{prf:theorem} Support functions and closure or convex hull of underlying set
+:label: res-cvxf-supp-closure-hull
+
+Let $A \subseteq \VV$. Then,
+
+1. $\sigma_A = \sigma_{\closure A}$.
+1. $\sigma_A = \sigma_{\convex A}$.
+```
+
+```{prf:proof}
+We first consider the case of closure.
+
+1. $A \subseteq \closure A$.
+1. Thus, $\sigma_A (\by) \leq \sigma_{\closure A}(\by) \Forall \by \in \VV^*$.
+1. Let us now show the reverse inequality.
+1. Let $\by \in \VV^*$.
+1. Then, there exists a sequence $\{ \bx_k \}$ of $\closure A$ such that
+
+   $$
+   \lim_{k \to \infty} \langle \bx_k, \by \rangle = \sigma_{\closure A} (\by).
+   $$
+1. Now for every $\bx_k \in \closure A$, there exists a 
+   point $\bz_k \in A$ such that $d(\bx_k, \bz_k) \leq \frac{1}{k}$.
+1. Thus, $\lim_{k \to \infty} (\bz_k - \bx_k) = \bzero$.
+1. Since $\bz_k \in A$, hence
+
+   $$
+   \sigma_A(\by) \geq \langle \bz_k, \by \rangle 
+   = \langle \bx_k, \by \rangle + \langle \bz_k - \bx_k, \by \rangle.
+   $$
+1. Taking the limit $k \to \infty$ on the R.H.S., we obtain
+
+   $$
+   \sigma_A(\by) \geq \sigma_{\closure A}(\by) + 0 = \sigma_{\closure A}(\by).
+   $$
+1. Thus, $\sigma_A(\by) = \sigma_{\closure A}(\by)$ must hold true.
+1. Since this is true for every $\by \in \VV^*$, hence
+   $\sigma_A = \sigma_{\closure A}$.
+
+
+Now, consider the case of convex hull.
+
+1. By definition, $A \subseteq \convex A$.
+1. Thus, $\sigma_A (\by) \leq \sigma_{\convex A}(\by) \Forall \by \in \VV^*$.
+1. Let $\by \in \VV^*$.
+1. Then, there exists a sequence $\{ \bx_k \}$ of $\convex A$ such that
+
+   $$
+   \lim_{k \to \infty} \langle \bx_k, \by \rangle = \sigma_{\convex A} (\by).
+   $$
+1. Since $\bx_k \in \convex A$, hence, there exists
+   $\bz_1^k, \dots, \bz_{n_k}^k \in A$ and $\bt^k \in \Delta_{n_k}$ such that
+
+   $$
+   \bx_k = \sum_{i=1}^{n_k} t_i^k \bz_i^k.
+   $$
+1. By linearity of the inner product
+
+   $$
+   \langle \bx_k, \by \rangle 
+   &= \left \langle \sum_{i=1}^{n_k} t_i^k \bz_i^k, \by \right \rangle\\
+   &= \sum_{i=1}^{n_k}  t_i^k \langle \bz_i^k, \by \rangle\\
+   &\leq \sum_{i=1}^{n_k}  t_i^k \sigma_A(\by)\\
+   &= \sigma_A(\by).
+   $$
+1. Taking the limit $k \to \infty$ on the L.H.S., we obtain
+
+   $$
+   \sigma_{\convex A} (\by) = \lim_{k \to \infty} \langle \bx_k, \by \rangle
+   \leq \sigma_A(\by).
+   $$
+1. Thus, $\sigma_A(\by) = \sigma_{\convex A}(\by)$ must hold true.
+1. Since this is true for every $\by \in \VV^*$, hence
+   $\sigma_A = \sigma_{\convex A}$.
+```
+
+Following properties of support functions are useful in
+several applications.
+
+```{prf:theorem} Arithmetic properties of support functions
+:label: res-cvxf-support-func-Homogeneity
+
+1. (Nonnegative homogeneity) For any nonempty set $C \subseteq \VV$ and
+   a vector $\bx \in \VV$ and $t \geq 0$,
+
+   $$
+   \sigma_C (t \bx) = t \sigma_C (\bx).
+   $$
+
+1. (Subadditivity) For any nonempty set $C \subseteq \VV$ and
+   a vector $\bu, \bv \in \VV$,
+
+   $$
+   \sigma_C(\bu + \bv) \leq \sigma_C (\bu) + \sigma_C (\bv).
+   $$
+1. (Nonnegative scaling of the underlying set)
+   For any nonempty set $C \subseteq \VV$ and
+   a vector $\bx \in \VV$ and $t \geq 0$
+
+   $$
+   \sigma_{t C} (\by) = t \sigma_C(\by).
+   $$
+
+1. (Additivity over Minkowski sum of sets)
+   For any two nonempty subsets $A, B \subseteq \VV$
+   and $\bx \in \VV$
+
+   $$
+   \sigma_{A + B} (\bx) = \sigma_A(\bx) + \sigma_B(\bx).
+   $$
+```
+
+```{prf:proof}
+
+(1) Nonnegative homogeneity
+ 
+$$
+\sigma_C (t \bx) &= \sup_{\by \in C} \langle t \bx, \by \rangle \\
+&= \sup_{\by \in C} t \langle  \bx, \by \rangle \\
+&= t \sup_{\by \in C} \langle  \bx, \by \rangle \\
+&= t \sigma_C(\bx).
+$$
+Here, we used the fact that $\sup$ commutes with nonnegative scalars.
+
+(2) Subadditivity
+
+$$
+\sigma_C (\bu + \bv) &= \sup_{\by \in C} \langle \bu + \bv, \by \rangle \\
+&= \sup_{\by \in C} (\langle \bu, \by \rangle + \langle \bu, \by \rangle) \\
+&\leq \sup_{\by \in C} \langle \bu, \by \rangle + \sup_{\by \in C} \langle \bv, \by \rangle \\
+&= \sigma_C (\bu) + \sigma_C(\bv).
+$$
+
+(3) Nonnegative scaling of the underlying set
+
+$$
+\sigma_{ t C} (\bx) &= \sup_{\by \in t C} \langle \bx, \by \rangle \\
+&= \sup_{\by \in C} \langle  \bx, t \by \rangle \\
+&= \sup_{\by \in C} t \langle  \bx, \by \rangle \\
+&= t \sup_{\by \in C} \langle  \bx, \by \rangle \\
+&= t \sigma_C(\bx).
+$$
+
+(4) Minkowski sum
+
+$$
+\sigma_{ A + B} (\bx) &= \sup_{\by \in A + B} \langle \bx, \by \rangle \\
+&= \sup_{\bu \in A, \bv \in B} \langle \bx , \bu + \bv \rangle \\
+&= \sup_{\bu \in A, \bv \in B} (\langle \bx , \bu \rangle + \langle \bx , \bv \rangle ) \\
+&= \sup_{\bu \in A} \langle \bx , \bu \rangle + \sup_{\bv \in B} \langle \bx , \bv \rangle\\
+&= \sigma_A (\bx) + \sigma_B(\bx).
+$$
+```
+
+
+## Gauge Functions
+
+
+```{prf:definition} Gauge function for a set
+:label: def-cvxf-gauge-function
+
+Let $\VV$ be a real vector space. Let $C$ be a nonempty subset of $\VV$.
+The *gauge function* $\gamma_C : \VV \to \RERL$ is defined as
+
+$$
+\gamma_C (\bx) =  \inf \{r \geq 0 \ST \bx \in r C \}.
+$$
+If $\bx \notin r C$ for any $r \geq 0$, then $\gamma_C(\bx) = \infty$.
+This is consistent with the convention that $\inf \EmptySet = \infty$.
+
+The gauge function is also known as *Minkowski functional*.
+```
+
+```{prf:property} Nonnegativity
+The Gauge function is always nonnegative.
+
+```
+
+```{prf:property} Value at origin
+
+$$
+\gamma_C (\bzero) = 0.
+$$
+```
+
+```{prf:property} Subadditive 
+If $C$ is convex, then the gauge function is subadditive.
+
+$$
+\gamma_C (\bx + \by) \leq  \gamma_C (\bx) + \gamma_C(\by).
+$$
+```
+```{prf:proof}
+
+We proceed as follows.
+
+1. If $\gamma_C (\bx) = \infty$ or $\gamma_C(\by) = \infty$, then
+   the inequality is satisfied trivially. So assume that both are finite.
+1. Then, the sets $X = \{r \geq 0 \ST \bx \in r C \}$ and $Y = \{r \geq 0 \ST \by \in r C \}$
+   are not empty.
+1. Thus, we can choose some $s \geq \gamma_C (\bx)$ from $X$ 
+   and $t \geq \gamma_C(\by)$ from $Y$.
+1. If $s=0$ or $t=0$, then $\bzero \in C$. Consequently, 
+   
+   $$
+   \gamma_C (\bx + \by) = \gamma_C (\bx) = \gamma_C (\by) = 0 
+   \leq \gamma_C (\bx) + \gamma_C(\by) \leq s + t.
+   $$
+   and the inequality is satisfied.
+1. Now, consider the case where $s > 0$ and $t > 0$.
+1. Then, $\frac{\bx}{s} \in C$ and $\frac{\by}{t} \in C$.
+1. Now,
+
+   $$
+   \frac{\bx + \by}{s + t} = \frac{s}{s + t} \frac{\bx}{s} + \frac{t}{s + t}\frac{\by}{t}.
+   $$
+1. Thus, $\frac{\bx + \by}{s + t}$ is a convex combination of  $\frac{\bx}{s}$
+   and $\frac{\by}{t}$.
+1. Since $C$ is convex, hence $\frac{\bx + \by}{s + t} \in C$. 
+1. Thus, $s + t \in \{ r \geq 0 \ST (\bx + \by) \in rC  \}$.
+1. Thus, $\gamma_C (\bx + \by) \leq s + t$.
+1. Thus, for every $s \geq \gamma_C (\bx)$ and every $t \geq \gamma_C(\by)$,
+   $\gamma_C (\bx + \by) \leq s + t$.
+1. Taking infimum on the R.H.S. over $s \in X$ and $t \in Y$, we obtain,
+   $\gamma_C (\bx + \by) \leq  \gamma_C (\bx) + \gamma_C(\by)$.
+```
+
+
+```{prf:property} Homogeneous 
+The Gauge function is homogeneous.
+
+$$
+\gamma_C (s \bx) =  |s| \gamma_C (\bx) \Forall s \in \RR.
+$$
+```
+
+
+
+```{prf:property} Seminorm 
+The Gauge function is a seminorm.
+```
+
+
+
+```{prf:example} Norm as a gauge function
+Let $\VV$ be a normed linear space with the norm $\| \cdot \| : \VV \to \RR$.
+
+Let $\overline{B} = \{\bx \in \VV \ST \| \bx \| \leq 1 \}$ be the unit closed ball.
+
+Then, 
+
+$$
+\gamma_{\overline{B}} (\bx) = \inf \{r \geq 0 \ST \bx \in r \overline{B} \} = \| \bx \|.
+$$
+The gauge function for the closed unit ball is simply the norm itself.
+```
+
+
+## Jensen's Inequality
+
+Jensen's inequality stated below is another formulation for 
+convex functions. 
+
+````{prf:theorem} Jensen's inequality
+:label: res-cvxf-jensen-inequality
+
+A proper function $f: \VV \to \RERL$ is convex if and only if 
+
+```{math}
+:label: eq-cvxf-jensen-inequality
+f(t_1 \bx_1 + \dots + t_k \bx_k) \leq t_1 f(\bx_1) + \dots + t_k f(\bx_k)
+```
+holds true for every $\bx_1, \dots, \bx_k \in \VV$
+whenever $t_1, \dots, t_k \geq 0$ and $t_1 + \dots + t_k = 1$.
+This inequality is known as the *Jensen's inequality*.
+````
+
+```{prf:proof}
+The Jensen's inequality reduces to {eq}`eq-convexity-inequality`
+for $k=2$. Thus, the statement is true by definition for $k=2$.
+For $k > 2$, we shall present an inductive proof. 
+
+Assume $f$ is convex. Then $\dom f$ is convex and
+for all $\bx_1,\bx_2 \in \dom f$, 
+and $t \in [0, 1]$, we have:
+
+$$
+f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).
+$$
+
+
+1. Let $\bx_1, \dots, \bx_k \in \VV$.
+1. If any of $\bx_i \notin \dom f$ for some $i \in 1,\dots,k$, then
+   $f(\bx_i) = \infty$ and the Jensen's inequality holds trivially.
+1. Thus, we shall assume that $\bx_1, \dots, \bx_k \in \dom f$.
+1. Since $\dom f$ is convex, hence their convex combination
+   $t_1 \bx_1 + \dots + t_k \bx_k \in \dom f$.
+1. Inductively, assume that the Jensen's inequality holds for $k-1$; i.e.,
+   
+   $$
+   f(r_1 \bx_1 + \dots + r_{k-1} \bx_{k-1}) \leq r_1 f(\bx_1) + \dots + r_{k-1} f(\bx_{k-1})
+   $$ 
+   holds true whenever $r_1, \dots, r_{k-1} \geq 0$ and $r_1 + \dots + r_{k-1} = 1$.
+1. WLOG, assume that $t_k < 1$. Thus, $1 - t_k > 0$.
+1. Define $\by = \sum_{i=1}^{k-1} t'_i \bx_i$ where
+   $t'_i = \frac{t_i}{1 - t_k}$.
+1. Note that $t'_i \geq 0$. Also, $\sum_{i=1}^{k-1} t'_i = 1$
+   since $\sum_{i=1}^{k-1} t_i = 1 - t_k$.
+1. We can now write:
+   
+   $$
+   f(t_1 \bx_1 + \dots + t_k \bx_k) 
+   &= f((1 - t_k) \by +  t_k \bx_k )\\
+   &\leq (1 - t_k)f (\by) + t_k f(\bx_k)\\
+   &= (1 - t_k)  f(t'_1 \bx_1 + \dots t'_{k-1} \bx_{k-1}) + t_k f(\bx_k)\\
+   &\leq (1 - t_k) ( t'_1 f(\bx_1)  + \dots + t'_{k-1} f(\bx_{k-1})) + t_k f(\bx_k)\\
+   &= t_1 f(\bx_1) + \dots + t_{k-1} f(\bx_{k-1}) + t_k f(\bx_k).
+   $$
+1. Thus, $f$ satisfies Jensen's inequality.
+
+
+For the converse, assume that $f$ satisfies Jensen's inequality.
+Let $\bx_1, \bx_2 \in \dom f$ and $t \in [0,1]$. Then, 
+by Jensen's inequality for $k=2$,
+
+$$
+f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2) < \infty.
+$$
+Thus, $t \bx_1 + (1-t) \bx_2 \in \dom f$. Thus, $\dom f$ is convex.
+Also, $f$ satisfies {eq}`eq-convexity-inequality`. Hence, $f$ is convex.
+```
+
+Jensen's inequality is essential in proving 
+a number of famous inequalities. 
+
+```{prf:example}  Logarithm and Jensen's inequality
+:label: res-cvxf-log-jensen
+
+In {prf:ref}`ex-cvxf-real-logarithm`, we show that
+$\ln(x)$ is concave. Consequently, $-\ln(x)$ is convex.
+
+Now, let $x_1, \dots, x_n \in \RR_{++}$ be positive 
+real numbers and let $t_1, \dots, t_n \geq 0$ such that
+$t_1 + \dots + t_n = 1$. Then, by Jensen's inequality
+
+$$
+-\ln (t_1 x_1 + \dots + t_n x_n) \leq - t_1 \ln x_1 - \dots - t_n \ln x_n.
+$$
+
+Multiplying by $-1$ and taking exponential on both sides, we obtain
+
+$$
+t_1 x_1 + \dots + t_n x_n \geq x_1^{t_1} \dots x_n^{t_n}.
+$$
+
+For a particular choice of $t_1 = \dots = t_n = \frac{1}{n}$, we obtain
+
+$$
+\frac{1}{n}(x_1 + \dots + x_n) \geq \sqrt[n]{x_1 \dots x_n}
+$$
+which is the AM-GM inequality suggesting that arithmetic mean is greater
+than or equal to the geometric mean for a group of positive real numbers.
+```
+
+
+````{prf:theorem} Jensen's inequality for nonnegative homogeneous convex functions
+:label: res-cvxf-jensen-inequality-nonneg-hom
+
+If $f: \VV \to \RERL$ is a nonnegative homogeneous proper convex function,
+then 
+
+```{math}
+:label: eq-cvxf-jensen-nonneg-hom
+f(t_1 \bx_1 + \dots + t_k \bx_k) \leq t_1 f(\bx_1) + \dots + t_k f(\bx_k)
+```
+holds true for every $\bx_1, \dots, \bx_k \in \VV$
+whenever $t_1, \dots, t_k \geq 0$.
+````
+
+```{prf:proof}
+
+Let $\bx_1, \dots, \bx_k \in \VV$.
+If any of $\bx_i \notin \dom f$ for some $i \in 1,\dots,k$, then
+$f(\bx_i) = \infty$ and the inequality holds trivially.
+Thus, we shall assume that $\bx_1, \dots, \bx_k \in \dom f$.
+
+By {prf:ref}`res-cvxf-nonneg-hom-convex-subadditive`, $f$ is subadditive.
+Thus,
+
+$$
+f(t_1 \bx_1 + \dots + t_k \bx_k) \leq f(t_1 \bx_1) + \dots + f(t_k \bx_k).
+$$
+
+The nonnegative homogeneity gives us
+
+$$
+f(t_1 \bx_1) + \dots + f(t_k \bx_k) = t_1 f(\bx_1) + \dots + t_k f(\bx_k).
+$$
+
+We are done.
+```
+
+
+
+## Convex Real Functions
+
+For real functions $f : \RR \to \RR$, several useful
+results are available.
+
+
+```{prf:theorem} Characterization of real convex functions
+:label: res-cvxf-rf-convex-charac
+
+Let $f: \RR \to \RR$ be a real function with $\dom f = (a,b)$
+which is an open interval.
+The following are equivalent.
+
+1. $f$ is convex.
+1. For every $x_1, x_2, x_3 \in (a, b)$ with $x_1 < x_2 < x_3$,
+
+   $$
+   \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}.
+   $$
+1. For every $x_1, x_2, x_3 \in (a, b)$ with $x_1 < x_2 < x_3$,
+
+   $$
+   \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_2)}{x_3 - x_2}.
+   $$
 ```
 
 
 ```{prf:proof}
 
-Assume $f$ is convex.
+(1) $\implies$ (2) 
+Assume that $f$ is convex.
 
-1. If we define $A : \VV \to \WW$ as $A(\bx) = T(\bx) + \bb $
-   then $\dom g = A^{-1}(\dom f)$.
-1. $A$, so defined, is an affine transformation.
-1. By {prf:ref}`res-cvx-convex-set-inverse-affine-image`,
-   $\dom g$ is convex since $\dom f$ is convex. 
-1. Let $\bx, \by \in \dom g$.
-1. $g(\bx) = f(T(\bx) + \bb)$. Define $\bu = T(\bx) + \bb$.
-1. $g(\by) = f(T(\by) + \bb)$. Define $\bv = T(\by) + \bb$.
-1. By definition, $\bu, \bv \in \dom f$.
-1. Let $t \in [0,1]$.
-1. Since $f$ is convex, hence
+1. Let 
 
    $$
-   f(t\bu + (1-t) \bv) \leq t f(\bu) + (1-t)f(\bv).
+   \alpha = \frac{x_3 - x_2}{x_3 - x_1}, 
+   \beta = \frac{x_2 - x_1}{x_3 - x_1}.
    $$
-1. Now 
+1. Then, $\alpha + \beta = 1$ and $\alpha , \beta \in (0,1)$.
+1. Also, verify that
 
    $$
-   g(t\bx + (1-t) \by)
-   &= f(T(t\bx + (1-t) \by) + \bb)\\
-   &= f(tT(\bx) + (1-t) T(\by) + (t + (1-t))\bb)\\
-   &= f(t(T(\bx) + \bb) + (1-t) (T(\by) + \bb))\\
-   &= f(t\bu + (1-t) \bv )\\
-   &\leq t f(\bu) + (1-t) f(\bv)\\
-   &= t g(\bx) + (1-t) g(\by).
+   x_2 = \alpha x_1 + \beta x_3.
    $$
-1. Thus, $g$ satisfies the 
-   convexity defining inequality {eq}`eq-convexity-inequality`.
-1. Thus, $g$ is convex.
+1. Thus,
 
-A similar argument shows that if $f$ is concave
-then so is $g$.
+   $$
+   & f(x_2) \leq \alpha f(x_1) + \beta f(x_3) \\
+   & \iff f(x_2) \leq \frac{x_3 - x_2}{x_3 - x_1} f(x_1)
+   + \frac{x_2 - x_1}{x_3 - x_1} f(x_3)\\
+   & \iff (x_3 - x_1) f(x_2) \leq (x_3 - x_2) f(x_1)
+      + (x_2 - x_1) f(x_3)\\
+   & \iff (x_3 - x_1) f(x_2) \leq ((x_3 - x_1) - (x_2 - x_1)) f(x_1)
+      + (x_2 - x_1) f(x_3)\\
+   & \iff (x_3 - x_1) (f(x_2) - f(x_1)) \leq
+    (x_2 - x_1) (f(x_3) - f(x_1))\\
+   & \iff \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}. 
+   $$
+
+(2) $\implies$ (1)
+
+1. Let $x_1, x_3 \in (a, b)$ and $t \in (0, 1)$.
+1. WLOG, assume that $x_1 < x_3$.
+1. Let $\alpha = t$ and $\beta = (1-t)$.
+1. Let $x_2 =  \alpha x_1 + \beta x_3$.
+1. Then, $x_1 < x_2 < x_3$.
+1. From the hypothesis, we have
+
+   $$
+   \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}.
+   $$
+1. Using the previous argument backwards, this implies
+
+   $$
+   f(x_2) \leq \alpha f(x_1) + \beta f(x_3) = t f(x_1) + (1-t) f(x_3).
+   $$
+1. Thus, $f$ is convex.
+
+
+We can prove the rest similarly.
 ```
 
 
-## Pointwise Supremum
 
-```{prf:theorem} Pointwise maximum of two convex functions
-:label: res-cvx-ptws-max-2
+```{prf:theorem} Real convex functions and one sided derivatives
+:label: res-cvxf-rf-convex-osd
 
-Let $f_1$ and $f_2$ be convex functions. Define
-their pointwise maximum as
+Let $f: \RR \to \RR$ with $\dom f = (a,b)$ be convex.
+Then, for every $x \in (a,b)$, the left hand derivative
+$f'_-(x)$ and the right hand derivative $f'_+(x)$ exist.
+``` 
 
-$$
-f(\bx) = \max \{f_1(\bx), f_2(\bx) \}
-$$
-with $\dom f = \dom f_1 \cap \dom f_2$.
-Then, $f$ is convex.
+
+```{prf:proof}
+We are given that $f$ is convex over $(a,b)$.
+
+1. Let $x \in (a,b)$.
+1. For $h > 0$, define
+
+   $$
+   F(h) = \frac{f(x + h) - f(x)}{h}.
+   $$
+1. Let $0 < h_1 < h_2$ such that $x + h_2 < b$.
+1. Let $x_1 = x$, $x_2 = x + h_1$, $x_3 = x + h_2$.
+1. Since $f$ is convex, hence by {prf:ref}`res-cvxf-rf-convex-charac`
+
+   $$
+   \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}.
+   $$
+1. But that means 
+
+  $$
+  \frac{f(x + h_1) - f(x)}{h_1} \leq \frac{f(x + h_2) - f(x)}{h_2}.
+  $$
+1. Thus, whenever $h_1 < h_2$ (up to $h_2 < b - x$),
+   $F(h_1) \leq F(h_2)$.
+1. Thus, $F$ is a nondecreasing (monotone) function of $h$
+   in some interval $(0, \delta)$ where $\delta < b - x$.
+1. Then, $f'_+(x) = \lim_{h \to 0^+} F(h)$ exists.
+
+A similar argument shows that $f'_-(x)$ also exists.
+```
+
+```{prf:theorem} Convex real function is continuous
+:label: res-cvxf-rf-open-domain-continuous
+
+
+Let $f: \RR \to \RR$ with $\dom f = (a,b)$ be convex.
+Then, for every $x \in (a,b)$, 
+Then, $f$ is continuous on $(a,b)$.
 ```
 
 ```{prf:proof}
-$\dom f$ is an intersection of convex sets. Hence, it is convex.
+We proceed as follows.
 
-Let $\bx, \by \in \dom f$ and $t \in [0,1]$.
-
-$$
-f(t \bx + (1-t) \by)
-&= \max \{f_1(t \bx + (1-t) \by), f_2(t \bx + (1-t) \by) \}\\
-&\leq \max \{t f_1(\bx) + (1-t) f_1(\by), t f_2(\bx) + (1-t) f_2(\by) \}\\
-&\leq t \max \{f_1(\bx), f_2(\bx) \} + (1-t)\max \{f_1(\by), f_2(\by) \}\\
-&= t f(\bx) + (1-t) f(\by).
-$$
-Thus, $f$ is convex.
-```
-
-
-```{prf:theorem} Pointwise maximum of multiple convex functions
-:label: res-cvx-ptws-max-n
-
-Let $f_1, f_2, \dots, f_n$ be convex functions. Define
-their pointwise maximum as
-
-$$
-f(\bx) = \max \{f_1(\bx), \dots, f_n(\bx) \}
-$$
-with $\dom f = \dom f_1 \cap \dots \cap \dom f_n$.
-Then, $f$ is convex.
-```
-
-```{prf:proof}
-The result has been proved for the base case of 2 functions
-in {prf:ref}`res-cvx-ptws-max-2`.
-
-Assume that it is true for $n$ functions. We
-can easily show it true for $n+1$ functions since
-
-$$
-\max \{f_1(\bx), \dots, f_{n+1}(\bx) \}
-= \max \{\max \{f_1(\bx), \dots, f_n(\bx) \}, f_{n+1}(\bx) \}.
-$$
-
-Thus, by principle of mathematical induction, the result
-is true for all $n$.
-```
-
-```{prf:theorem} Pointwise supremum of a family of convex functions
-:label: res-cvx-ptws-supremum
-
-Let $I$ be an index set.
-Let $\{ f_i : \VV \to \RR \}_{i \in I}$ be a family of convex functions. 
-Define their pointwise supremum as
-
-$$
-f(\bx) = \sup \{f_i(\bx)\}_{i \in I}
-$$
-with 
-
-$$
-\dom f = \bigcap_{i \in I} \dom f_i.
-$$
-Then, $f$ is convex.
-Moreover,
-
-$$
-\epi f = \bigcap_{i \in I} \epi f_i.
-$$
-```
-
-```{prf:proof}
-We  shall first verify the epigraph equality.
-
-1. Let $(\bx, t) \in \epi f$.
-1. Then, $f(\bx) \leq t$.
-1. Thus, $f_i(\bx) \leq t$ for all $i \in I$ 
-   since $f(\bx) = \sup \{f_i(\bx)\}_{i \in I}$.
-1. Thus, $(\bx, t) \in \epi f_i$ for all $i \in I$.
-1. Thus, $\epi f \subseteq \bigcap_{i \in I} \epi f_i$.
-
-
-Now, for the converse:
-
-1. Let $(\bx, t) \in \bigcap_{i \in I} \epi f_i$.
-1. Thus, $(\bx, t) \in \epi f_i$ for all $i \in I$.
-1. Thus, $f_i(\bx) \leq t$ for all $i \in I$.
-1. Taking the supremum over $i \in I$ on the L.H.S., we obtain:
+1. Let $x \in (a,b)$.
+1. By {prf:ref}`res-cvxf-rf-convex-osd`, 
+   the one sided derivatives $f'_+(x)$ and $f'_-(x)$ exist.
+1. Then, by limit arithmetic
 
    $$
-   \sup \{f_i(\bx)\}_{i \in I} = f(\bx) \leq t.
+   \lim_{h \to 0^-} (f(x + h) - f(x)) 
+   = \left ( \lim_{h \to 0^-} \frac{f(x + h) - f(x)}{h} \right )
+   \left ( \lim_{h \to 0^-} h \right) = 0.
    $$
-1. Thus, $(\bx, t) \in \epi f$.
-1. Thus, $\bigcap_{i \in I} \epi f_i \subseteq \epi f$.
+1. Similarly, 
 
-Combining the two, we get:
+   $$
+   \lim_{h \to 0^+} (f(x + h) - f(x)) 
+   = \left ( \lim_{h \to 0^+} \frac{f(x + h) - f(x)}{h} \right )
+   \left ( \lim_{h \to 0^+} h \right) = 0.
+   $$
+1. Thus, 
 
-$$
-\epi f = \bigcap_{i \in I} \epi f_i.
-$$
-
-1. Since $f_i$ are convex functions, hence $\epi f_i$ are convex sets
-   due to {prf:ref}`res-cvxf-convexity-epigraph`.
-1. Thus, $\epi f$ is a convex set due to {prf:ref}`res-cvx-arbitrary-intersection`.
-1. But then, $f$ is convex
-   again due to {prf:ref}`res-cvxf-convexity-epigraph`.
+   $$
+   \lim_{h \to 0^-} (f(x + h) - f(x)) 
+   = \lim_{h \to 0^+} (f(x + h) - f(x)) = 0.
+   $$
+1. Thus, $f$ is continuous at $x$.
+1. Since $x$ was arbitrary, hence $f$ is continuous on $(a,b)$.
 ```
 
 
-```{prf:definition} Piecewise linear function
-:label: def-cvxf-piecewise-linear-func
+## Quasi-Convex Functions
 
-Let $\ba_1, \dots, \ba_n \in \VV$.
-Let $b_1, \dots, b_n \in \RR$.
 
-A function $f: \VV \to \RR$ given by:
+```{prf:definition} Quasi convex function
+:label: def-cvxf-quasi-convex-function
+
+Let $\VV$ be a real vector space.
+Let  $f : \VV \to \RR$ be a real valued function.
+Let the sublevel sets of $f$ be given by
 
 $$
-f(\bx) = \max \{\langle \bx, \ba_i \rangle + b_i  \}_{i \in 1, \dots, n}
+C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}.
 $$
-is called a *piecewise linear* or *piecewise affine* function.
-```
 
-
-```{prf:theorem}
-:label: res-cvxf-piecewise-linear-convex
-
-Piecewise linear functions are convex.
-```
-
-```{prf:proof}
-Each of the functions $f_i (\bx) = \langle \bx, \ba_i \rangle + b_i$
-is affine functionals. 
-Thus, $f_i$ are convex ({prf:ref}`res-cvxf-affine-functional-convex`).
-$f$ is a pointwise maximum of $n$ convex functions.
-Hence, $f$ is convex ({prf:ref}`res-cvx-ptws-max-n`).
+If the sublevel sets $C_{\alpha}$ of $f$ are convex for every $\alpha \in \RR$,
+then $f$ is called a *quasi-convex* function.
 ```
 

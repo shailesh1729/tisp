@@ -102,6 +102,7 @@ However, there are certain limitations/odd behaviors with the structure.
 
 
 ```{prf:definition} Partial order on real valued (total) functions
+:label: def-bra-rv-func-partial-order
 
 Since $\RR$ is ordered, hence a partial order can be defined
 on $\FFF (X, \RR)$.
@@ -154,6 +155,8 @@ In other words, partial functions are treated as unbounded outside
 their domain.
 
 ```{prf:proposition}
+:label: res-bra-rv-func-bounded-charac
+
 A real valued function is bounded if and only if
 it is bounded from above as well as below.
 ```

@@ -12,7 +12,7 @@ at an interior point $x=a$ of its domain $\dom f$
 if the difference quotient
 
 $$
-\frac{f(x) - f(a)}{x - a}, \quad x \neq 0
+\frac{f(x) - f(a)}{x - a}, \quad x \neq a
 $$
 approaches a {prf:ref}`limit <def-bra-real-function-limit>`
 as $x$ approaches $a$. 
@@ -49,32 +49,43 @@ Notes
   of points at which $f$ is differentiable.
 
 
-```{prf:remark}
+```{prf:remark} Domain of the derivative function
+:label: rem-bra-rf-derivative-domain
+
+The domain of the derivative of a function $f$;
+i.e., the set of points at which the derivative exists
+(or is defined) is a subset of the interior of the domain
+of the function $f$ itself.
+
 $$
 \dom f' \subseteq \interior \dom f.
 $$
 ```
 
 
-```{prf:definition}
+```{prf:definition} Differentiable function
+:label: def-bra-rf-differentiable-func
+
 Let $f$ be defined on an open set $A$. 
 We say that $f$ 
 is *differentiable on $A$* if $f$ is differentiable 
 at every point in $A$.
 ```
 
-1. If $f$ is differentiable on (open) $A$, 
-   then $f'$ is defined on $A$. 
-   In other words: $\dom f' = A$.
+If $f$ is differentiable on (open) $A$, 
+then $f'$ is defined on $A$. 
+In other words: $\dom f' = A$.
 
 
-```{prf:definition}
+```{prf:definition} Continuously differentiable function
+:label: def-bra-rf-continuously-differentiable-func
+
 We say that $f$ is *continuously differentiable* on an open set $A$
 if $f$ is differentiable on $A$ and $f'$ is continuous on $A$.
 ```
 
 
-```{prf:definition}
+```{prf:definition} Second and $n$-th derivatives
 :label: def-bra-rf-nth-derivative
 
 If $f$ is differentiable on a neighborhood of $x=a$ 
@@ -118,7 +129,7 @@ $$
 It is useful to remove the contribution of the tangent in $f$
 and study the remaining part of $f$.
 
-````{prf:lemma}
+````{prf:lemma} Removal of tangent line from function
 :label: res-bra-df-f-t-e
 
 If $f$ is differentiable at $x=a$, then we can write
@@ -163,15 +174,23 @@ f(x) = T(x) + E(x) (x - a).
 $$
 ```
 
-```{prf:remark}
+```{prf:remark} Difference quotient and derivative
+:label: rem-bra-df-tangent-form-2
+
 At $x \neq a$, {eq}`eq-bra-df-f-minus-tangent` can also be written as:
 
 $$
 \frac{f(x) - f(a)}{x -a}  = f'(a) + E(x).
 $$
+
+In other words, the difference quotient $\frac{f(x) - f(a)}{x -a}$ 
+is the sum of the
+derivative $f'(a)$ and $E(x)$.
 ```
 
-```{prf:theorem}
+```{prf:theorem} Differentiability implies continuity
+:label: res-bra-rf-diff-implies-cont
+
 If $f$ is differentiable at $x=a$, then $f$ is continuous at $x=a$.
 ```
 
@@ -192,7 +211,9 @@ Notes:
 1. Continuity is a necessary condition but not sufficient condition for
    differentiability.
 
-```{prf:remark}
+```{prf:remark} Derivative sign and monotonicity in the neighborhood
+:label: res-bra-rf-derivative-sign-monotonicity
+
 If $f$ is differentiable at $x=a$, and $f'(a) \neq 0$, 
 then there is $\delta > 0$ such that if $f'(a) > 0$, then
 
@@ -250,6 +271,7 @@ $$
 ## Arithmetic
 
 ```{prf:theorem} Differentiation and arithmetic 
+:label: res-bra-rf-differentiation-arithmetic
 
 If $f$ and $g$ are differentiable at $x=a$, then so are
 $f+g$, $f-g$, $fg$.
@@ -267,6 +289,8 @@ The derivatives are:
 ## The Chain Rule
 
 ```{prf:theorem} The chain rule
+:label: res-bra-rf-diff-chain-rule
+
 Let $f$ be differentiable at $x=a$. Assume that $g$ is differentiable 
 at $f(a)$. Then the composite function given by $h = g \circ f$ is
 differentiable at $f(a)$ with
@@ -332,6 +356,7 @@ $$
 ```
 
 ```{prf:example}
+:label: ex-bra-rf-chain-rule-1
 Let 
 
 $$
@@ -366,7 +391,7 @@ $$
 One sided limits of the difference quotient
 
 $$
-\frac{f(x) - f(a)}{x - a}, \quad x \neq 0
+\frac{f(x) - f(a)}{x - a}, \quad x \neq a
 $$
 are called *one-sided derivatives* if they exist.
 
@@ -388,10 +413,11 @@ $$
 if the limit exists.
 ```
 
-```{prf:remark}
+```{prf:remark} Differentiability and one-sided derivatives
+:label: rem-bra-rf-diff-one-sided-derivatives
+
 A function $f$ is differentiable at $x=a$ if and only if
 its left and right hand derivatives exist and are equal.
-
 In that case:
 
 $$
@@ -402,6 +428,8 @@ $$
 This is a direct implication of {prf:ref}`res-bra-rf-equal-one-sided-limits`.
 
 ```{prf:remark}
+:label: rem-bra-rf-one-sided-derivative-limit-diff
+
 One sided derivative is not the same thing as
 one sided limit of a derivative.
 
@@ -447,6 +475,8 @@ if
 
 
 ```{prf:definition} Local extreme value
+:label: res-bra-rf-local-extreme-value
+
 We say that $f(a)$ is a *local extreme value* of $f$ if there exists
 $\delta > 0$ such that $f(x) - f(a)$ doesn't change sign on
 
@@ -521,15 +551,36 @@ doesn't change sign. Hence, $a$ is not a local extreme point of $f$.
 
 
 ```{prf:definition} Critical point
-If $f$ is differentiable at $x=a$ and $f'(a) = 0$, then we say that
+:label: def-bra-rf-critical-point
+
+Let $f : \RR \to \RR$ be a real function. Let $a \in \interior \dom f$.
+If $f$ is not differentiable at $a$ or
+if $f$ is differentiable at $x=a$ and $f'(a) = 0$, then we say that
 $a$ is a *critical point* of $f$.
 ```
 
+```{prf:definition} Stationary point
+:label: def-bra-rf-stationary-point
+
+If $f$ is differentiable at $x=a$ and $f'(a) = 0$, then we say that
+$a$ is a *stationary point* of $f$.
+```
+
+All stationary points are critical points while all critical points
+need not be stationary points. If the derivative doesn't exist
+at some point $a \in \interior \dom f$, it could indicate a
+potential maximum or minimum.
+
+
 ```{prf:remark}
+:label: rem-bra-rf-extreme-critical-points
+
 All local extreme points are critical points.
 ```
 
-```{prf:example}
+```{prf:example} A non-extreme critical point
+:label: ex-bra-rf-non-extreme-critical-point
+
 A critical point need not be a local extreme point. 
 For the function $f(x) = x^3$, $f'(0) = 0$. Thus, $x=0$ is a
 critical point. But it is not a local extreme point since $f$ 
@@ -578,6 +629,7 @@ due to {prf:ref}`res-bra-df-extremum-zero-derivative`.
 ## Intermediate Values
 
 ```{prf:theorem} Intermediate value theorem for derivatives
+:label: res-bra-rf-iv-theorem-derivatives
 
 Suppose that:
 
@@ -716,6 +768,8 @@ Assume $x_1, x_2 \in (a,b)$. We haven't specified whether $x_1 < x_2$ or $x_1 > 
 
 
 ```{prf:theorem}
+:label: res-bra-rf-zero-der-interval-constant-val
+
 If $f'(x)=0$ for all $x \in (a,b)$, then $f$ is constant on $(a,b)$. 
 ```
 
@@ -727,7 +781,9 @@ f(x_2)  - f(x_1) = 0.
 $$
 ```
 
-```{prf:theorem}
+```{prf:theorem} No change in derivative sign implies monotonicity
+:label: res-bra-rf-derivative-sign-change-monotonicity
+
 If $f'$ exists and does not change sign on $(a,b)$, then $f$ is monotonic
 on $(a,b)$. In particular:
 
@@ -754,7 +810,9 @@ Now,
 1. If $f'(x) < 0 \Forall x \in (a,b)$, then $f(x_2) - f(x_1) < 0$.
 ```
 
-```{prf:theorem}
+```{prf:theorem} Bounded derivative implies Lipschitz continuity
+:label: res-bra-rf-bounded-derivative-bounded-range
+
 If 
 
 $$

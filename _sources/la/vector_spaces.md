@@ -61,6 +61,8 @@ Above properties are known as *group axioms*.
 Note that commutativity is not a requirement of a group.
 
 ```{prf:remark}
+:label: rem-la-group-operation-add-mult
+
 Frequently, the group operation is the regular mathematical
 addition. In those cases, we write $g_1 * g_2$ as $g_1 + g_2$. 
 Otherwise, we will write $g_1 * g_2$ as $g_1 g_2$. 
@@ -131,6 +133,8 @@ We denote the identity element for $+$ as $0$ and call it additive identity.
 ````
 
 ```{prf:remark}
+:label: rem-la-ring-dot-as-ab
+
 In the sequel we will write $r_1 \cdot r_2$ as $r_1 r_2$. 
 We may simply write a ring $(R, +, \cdot)$ as $R$ when 
 the underlying operations $+,\cdot$ are
@@ -195,6 +199,8 @@ The definition above implies a number of properties. For any $a,b,c \in F$, we h
 
 
 ````{prf:example} Examples of fields
+:label: ex-la-field-1
+
 *  The set of real numbers $\RR$ is a field.
 *  The set of complex numbers $\CC$ is a field.
 *  The Galois field GF-2 is the the set $\{ 0, 1 \}$ with modulo-2 additions and multiplications.
@@ -590,6 +596,8 @@ $$
 
 Some useful identities are presented here.
 ````{prf:theorem} Uniqueness of additive identity
+:label: res-la-vec-space-zero-unique
+
 The $\bzero$ vector in a vector space $\VV$ is unique.
 ````
 ```{prf:proof}
@@ -630,6 +638,8 @@ $$
 ```
 
 ````{prf:corollary} Uniqueness of additive inverse
+:label: res-la-vec-space-add-inv-unique
+
 The additive inverse of a vector $\bx$ in $\VV$ is unique.
 ````
 ```{prf:proof}
@@ -645,6 +655,8 @@ Thus, the additive inverse of a vector is unique.
 ```
 
 ````{prf:theorem}
+:label: res-la-vec-space-props-zero-vec
+
 In a vector space $\VV$ the following statements are true
 
 1. $0 \bx = \bzero \Forall \bx \in \VV$.
@@ -766,6 +778,8 @@ are the coefficients of linear combination.
 ````
 
 ```{prf:definition} Trivial linear combination
+:label: def-la-trivial-linear-comb
+
 A linear combination $a_1 \bs_1 + a_2 \bs_2 + \dots a_n \bs_n$
 is called *trivial* if $a_1 = a_2 = \dots = a_n = 0$.
 
@@ -830,6 +844,7 @@ In other words, the only linear combination giving us $\bzero$ vector
 is the trivial linear combination.
 
 ````{prf:example} Examples of linearly dependent and independent sets
+:label: ex-la-lin-dep-ind-sets-1
 
 * The empty set is linearly independent.
 * A set of a single non-zero vector $\{\bv\}$ is always linearly independent. Prove!
@@ -844,12 +859,16 @@ is the trivial linear combination.
 ````
 
 ````{prf:theorem}
+:label: res-la-set-lin-dep-super-set-lin-dep
+
 Let $\VV$ be a vector space. Let $S_1 \subseteq S_2 \subseteq \VV$. 
 If $S_1$ is linearly dependent,
 then $S_2$ is linearly dependent.
 ````
 
 ````{prf:corollary}
+:label: res-la-set-lin-ind-subset-lin-ind
+
 Let $\VV$ be a vector space. 
 Let $S_1 \subseteq S_2 \subseteq \VV$. 
 If $S_2$ is linearly independent,
@@ -890,10 +909,14 @@ We say that a set of vectors $S \subseteq \VV$
 spans $\VV$ if $\langle S \rangle = \VV$.
 
 ````{prf:proposition}
+:label: res-la-span-subset-of-vec-space
+
 Let $S \subseteq \VV$, then $\Span (S) \subseteq \VV$.
 ````
 
 ````{prf:definition} Spanning a vector space
+:label: def-la-spans-generates-vec-space
+
 Let $S \subset \VV$. We say that $S$ *spans (or generates)* $\VV$ if
 
 $$
@@ -904,6 +927,8 @@ In this case we also say that vectors of $S$ span (or generate) $\VV$.
 ````
 
 ````{prf:theorem}
+:label: res-la-ind-set-span-plus-vec-dependent
+
 Let $S$ be a linearly independent subset of a vector space $\VV$ 
 and let $\bv \in \VV \setminus S$.
 Then $S \cup \{ v \}$ is linearly dependent 
@@ -1012,6 +1037,7 @@ for $\VV$. Hence $\VV$ has a finite basis.
 
 ````{prf:theorem} Replacement theorem
 :label: res-la-replacement-theorem
+
 Let $\VV$ be a vector space that is spanned by a set $G$
 containing exactly $n$ vectors.
 Let $L$ be a linearly independent subset of $\VV$ 
@@ -1023,6 +1049,8 @@ such that $L \cup H$ spans $\VV$.
 ````
 
 ````{prf:corollary}
+:label: res-la-basis-finite-same-cardinality
+
 Let $\VV$ be a vector space having a finite basis. 
 Then, every basis for $\VV$ contains
 the same number of vectors.
@@ -1050,6 +1078,7 @@ then we say that $\VV$ is *infinite-dimensional*.
 ````
 
 ````{prf:example} Vector space dimensions
+:label: ex-la-vec-space-dimensions-1
 
 *  Dimension of $\FF^N$ is $N$.
 *  Dimension of $\FF^{M \times N}$ is $MN$.
@@ -1057,6 +1086,8 @@ then we say that $\VV$ is *infinite-dimensional*.
 ````
 
 ````{prf:proposition}
+:label: res-la-n-dim-vec-space-set-span-basis-lin-ind
+
 Let $\VV$ be a vector space with dimension $n$.
 
 1. Any finite spanning set for $\VV$ contains at least $n$ vectors, 
@@ -1135,6 +1166,7 @@ $\WW$ is closed under these operations.
 ````
 
 ````{prf:example} Trivial subspaces
+:label: ex-la-trivial-subspaces-1
 
 *  $\VV$ is a subspace of $\VV$.
 *  $\{\bzero\}$ is a subspace of any $\VV$.
@@ -1380,6 +1412,8 @@ $$
 ```
 
 ````{prf:corollary}
+:label: res-la-subspace-basis-extend-full-basis
+
 If $\WW$ is a subspace for a finite-dimensional vector space $\VV$ 
 then any basis for $\WW$ can be extended to a basis for $\VV$.
 ````
@@ -1460,6 +1494,8 @@ internal direct sum is a direct sum.
 
 
 ```{prf:example}
+:label: ex-la-direct-sum-1
+
 With the definition of direct sum given above, 
 we have:
 
@@ -1553,6 +1589,7 @@ $-C = (-1) C$.
 
 ```{prf:definition} Symmetric set
 :label: def-vs-symmetric-set
+
 A set $C$ is said to be *symmetric* if 
 $-C = C$ holds true.
 ```
@@ -1591,7 +1628,7 @@ We show that  $C = (C + \bz) - \bz$.
 1. Conversely, let $\bx \in (C + \bz) - \bz$.
 1. Then, $\bx + \bz \in C+\bz$.
 1. But then, $\bx \in C$.
-1. Thus, $(C + \bz) - \bz \substeq C$.
+1. Thus, $(C + \bz) - \bz \subseteq C$.
 1. Combining $C = (C + \bz) - \bz$.
 
 We show that $C \subseteq D \iff C + \bz \subseteq D + \bz$.
@@ -1615,6 +1652,7 @@ Now, assume $C + \bz \subseteq D + \bz$.
 
 ```{prf:theorem} Properties of set arithmetic
 :label: res-vs-set-arithmetic-props
+
 Let $\VV$ be a vector space over a field $\FF$.
 
 Let $C, D, E \subseteq \VV$ and $\alpha, \beta \in \FF$.
@@ -1646,6 +1684,43 @@ Let $C, D, E \subseteq \VV$ and $\alpha, \beta \in \FF$.
    $$
 1. The set $F = C + (-C)$ is symmetric and $\bzero \in F$.
 1. $ (\alpha + \beta) C \subseteq \alpha C + \beta C$.
+```
+
+```{prf:proof}
+We shall prove some of the properties.
+
+[Commutativity]
+
+1. Let $\bu \in C + D$. 
+1. Then, there exists, $\bx \in C$ and $\by \in D$ 
+   such that $\bu = \bx + \by$.
+1. But then, $\bu = \by + \bx$ since vector addition is commutative.
+1. Thus, $\bu \in D + C$.
+1. Thus, $C + D \subseteq D + C$.
+1. Similarly, $D + C \subseteq C + D$.
+
+[Associativity]
+
+1. Let $\ba \in C + (D + E)$.
+1. Then, there exists $\bc \in C$ and $\bb \in D + E$ such that $\ba = \bc + \bb$.
+1. Then, there exists $\bd \in D$ and $\be \in E$ such that $\bb = \bd + \be$.
+1. Thus, $\ba = \bc + (\bd + \be)$.
+1. But vector addition is associative.
+1. Thus, $\ba = (\bc + \bd) + \be$.
+1. Then, $\bc + \bd \in C + D$.
+1. Thus, $\ba \in (C + D) + E$.
+1. Thus, $C + (D + E) \subseteq (C + D) + E$.
+1. Similarly reasoning shows that $(C + D) + E \subseteq C + (D + E)$.
+
+
+$ (\alpha + \beta) C \subseteq \alpha C + \beta C$
+
+1. Let $\bx \in (\alpha + \beta) C$.
+1. Then, there exists $\by \in C$ such that $\bx = (\alpha + \beta) \by$.
+1. Then, $\bx = \alpha \by + \beta \by$.
+1. Then, $\alpha \by \in \alpha C$ and $\beta \by \in \beta C$.
+1. Thus, $\bx \in \alpha C + \beta C$.
+1. Thus, $(\alpha + \beta) C \subseteq \alpha C + \beta C$.
 ```
 
 Additive inverses don't exist for sets containing more than
@@ -1708,6 +1783,7 @@ $\VV \oplus \WW$.
 
 ```{prf:definition} (Internal) direct sum of sets in same vector space
 :label: def-vs-direct-sum-same-space
+
 Let $C,D$ be subsets of $\VV$.
 If each vector $\bx \in C+D$ can be expressed *uniquely*
 in the form
@@ -1724,6 +1800,8 @@ it enables a unique decomposition of a vector
 into its components belonging to individual sets.
 
 ```{prf:theorem}
+:label: res-la-valid-direct-sum-on-subsets
+
 Two subsets $C, D$ of $\VV$ are eligible for 
 a direct sum if and only if 
 the symmetric sets $C - C$ and $D - D$ 
@@ -1756,6 +1834,8 @@ and write as $\VV = \WW_1 \oplus \WW_2$.
 ```
 
 ```{prf:example} Vector space as direct sum of spans of basis vectors
+:label: ex-la-vec-space-dir-sum-basis-vec-spans
+
 The spans of basis vectors have only $\bzero$
 in common. They indeed offer a unique
 decomposition of any vector in the space.

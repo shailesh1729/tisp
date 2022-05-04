@@ -1,0 +1,2220 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.13. Conjugate Functions &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.14. Smoothness" href="smoothness.html" />
+    <link rel="prev" title="6.12. Subgradients" href="subgradients.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sym_matrices.html">
+     4.8. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.9. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.10. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.11. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     6.5. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_functions.html">
+     6.6. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable.html">
+     6.7. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="function_ops.html">
+     6.8. Convexity Preserving Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="relint.html">
+     6.9. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="separation.html">
+     6.10. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="continuity.html">
+     6.11. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="subgradients.html">
+     6.12. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.13. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="smoothness.html">
+     6.14. Smoothness
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   7. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     7.2. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     7.3. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     7.4. Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     7.5. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     7.6. Quadratic Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     7.7. Differentiable Objective Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   8. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     8.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     8.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   9. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../selected/chapter.html">
+   11. Selected Functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/convex_sets/conjugate_functions.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fconvex_sets/conjugate_functions.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition-and-properties">
+   6.13.1. Definition and Properties
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#biconjugate">
+   6.13.2. Biconjugate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indicator-and-support-functions">
+     6.13.2.1. Indicator and Support Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#max-function">
+     6.13.2.2. Max Function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conjugate-calculus">
+   6.13.3. Conjugate Calculus
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#separable-functions">
+     6.13.3.1. Separable functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-transformations">
+     6.13.3.2. Affine Transformations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling">
+     6.13.3.3. Scaling
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-results">
+   6.13.4. Useful Results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dim-functions">
+   6.13.5. 1-dim Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#n-dim-functions">
+   6.13.6. n-dim functions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Conjugate Functions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition-and-properties">
+   6.13.1. Definition and Properties
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#biconjugate">
+   6.13.2. Biconjugate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indicator-and-support-functions">
+     6.13.2.1. Indicator and Support Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#max-function">
+     6.13.2.2. Max Function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conjugate-calculus">
+   6.13.3. Conjugate Calculus
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#separable-functions">
+     6.13.3.1. Separable functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-transformations">
+     6.13.3.2. Affine Transformations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling">
+     6.13.3.3. Scaling
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-results">
+   6.13.4. Useful Results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dim-functions">
+   6.13.5. 1-dim Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#n-dim-functions">
+   6.13.6. n-dim functions
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="conjugate-functions">
+<span id="sec-conjugate-functions"></span><h1><span class="section-number">6.13. </span>Conjugate Functions<a class="headerlink" href="#conjugate-functions" title="Permalink to this headline">¶</a></h1>
+<div class="docutils">
+<p>Throughout this section, we assume that <span class="math notranslate nohighlight">\(\VV, \WW\)</span> are
+real vector spaces. Wherever necessary,
+they are equipped with a
+<a class="reference internal" href="../la/normed_spaces.html#def-la-norm">norm</a> <span class="math notranslate nohighlight">\(\| \cdot \|\)</span>
+or an <a class="reference internal" href="../la/inner_product_spaces.html#def-la-real-inner-product">real inner product</a>
+<span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle\)</span>.
+They are also equipped with a metric <span class="math notranslate nohighlight">\(d(\bx, \by) = \| \bx - \by \|\)</span>
+as needed.
+<span class="math notranslate nohighlight">\(\VV^*\)</span> denotes the dual vector space (to <span class="math notranslate nohighlight">\(\VV\)</span>).</p>
+</div>
+<div class="section" id="definition-and-properties">
+<h2><span class="section-number">6.13.1. </span>Definition and Properties<a class="headerlink" href="#definition-and-properties" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvxf-conjugate-function">
+<p class="admonition-title"><span class="caption-number">Definition 6.69 </span> (Conjugate function)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \ERL\)</span> be an extended real valued function.
+Its <em>conjugate function</em> <span class="math notranslate nohighlight">\(f^*: \VV^* \to \ERL\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+f^*(\by) = \underset{\bx \in \VV}{\sup} \{ \langle \bx, \by \rangle - f(\bx)\}
+\Forall \by \in \VV^*.
+\]</div>
+</div>
+</div><p>Note that the conjugate function is a mapping from the <em>dual</em> vector space
+to extended real line.</p>
+<p>Recall from <a class="reference internal" href="convex_functions.html#def-cvxf-support-function">Definition 6.49</a> that
+the support function of a set <span class="math notranslate nohighlight">\(C\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_C (\bx) =  \sup_{\bz \in C} \langle \bz, \bx \rangle.
+\]</div>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-indicator-func">
+<p class="admonition-title"><span class="caption-number">Theorem 6.189 </span> (Conjugate of an indicator function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a nonempty set.
+Let <span class="math notranslate nohighlight">\(I_C : \VV \to \RERL\)</span> be the indicator function for the set <span class="math notranslate nohighlight">\(C\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+I_C^*(\by) = \sigma_C (\by) = \underset{\bx \in C}{\sup} \langle \bx, \by \rangle. 
+\]</div>
+<p>In other words, the conjugate of the indicator function of a set
+is the support function of the same set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\by \in \VV*\)</span> be arbitrary.</p>
+<ol>
+<li><p>At any <span class="math notranslate nohighlight">\(\bx \in C\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx, \by \rangle - I_C(\bx) = \langle \bx, \by \rangle. 
+   \]</div>
+</li>
+<li><p>At any <span class="math notranslate nohighlight">\(\bx \notin C\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx, \by \rangle - I_C(\bx) = -\infty. 
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is nonempty, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \underset{\bx \in \VV}{\sup} \{ \langle \bx, \by \rangle - f(\bx)\}
+   = \underset{\bx \in C}{\sup} \langle \bx, \by \rangle.
+   \]</div>
+<p>The result follows.</p>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-fenchel">
+<p class="admonition-title"><span class="caption-number">Theorem 6.190 </span> (Fenchel’s inequality)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be a proper function
+and let <span class="math notranslate nohighlight">\(f^*\)</span> be its conjugate function.
+Then, for any <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> and <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) + f^*(\by) \geq \langle \bx, \by \rangle.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows.</p>
+<ol>
+<li><p>By definition</p>
+<div class="math notranslate nohighlight">
+\[
+   f^*(\by) = \underset{\bx \in \VV}{\sup} 
+   \{ \langle \bx, \by \rangle - f(\bx)\}.
+   \]</div>
+</li>
+<li><p>Thus, for any <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> and any <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   f^*(\by) \geq \langle \bx, \by \rangle - f(\bx).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is proper, hence <span class="math notranslate nohighlight">\(f(\bx) &gt; -\infty\)</span> for ever <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is proper, hence there exists <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>
+such that <span class="math notranslate nohighlight">\(f(\ba) &lt; \infty\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   f^*(\by) \geq \langle \ba, \by \rangle - f(\ba). 
+   \]</div>
+</li>
+<li><p>The R.H.S. is a finite quantity.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f^*(\by) &gt; -\infty\)</span> for every <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+<li><p>If either <span class="math notranslate nohighlight">\(f(\bx)\)</span> or <span class="math notranslate nohighlight">\(f^*(\by)\)</span> are <span class="math notranslate nohighlight">\(\infty\)</span>,
+then the Fenchel inequality is valid trivially.</p></li>
+<li><p>When, both of them are finite, then the
+inequality <span class="math notranslate nohighlight">\(f^*(\by) \geq \langle \bx, \by \rangle - f(\bx)\)</span>
+simplifies to</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) + f^*(\by) \geq \langle \bx, \by \rangle .
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-convex-closed">
+<p class="admonition-title"><span class="caption-number">Theorem 6.191 </span> (Convexity and closedness)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be an extended real valued function.
+Then, the conjugate function <span class="math notranslate nohighlight">\(f^*\)</span> is closed and convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that for a fixed <span class="math notranslate nohighlight">\(\bx\)</span>, the function</p>
+<div class="math notranslate nohighlight">
+\[
+g_x(\by) =  \langle \bx, \by \rangle - f(\bx)
+\]</div>
+<p>is an affine function.</p>
+<ol class="simple">
+<li><p>Due to <a class="reference internal" href="../la/affine.html#res-la-affine-finite-closed-func">Theorem 4.173</a>,
+affine functions are closed.</p></li>
+<li><p>Due to <a class="reference internal" href="convex_functions.html#res-cvxf-affine-functional-convex">Theorem 6.65</a>,
+affine functions are convex.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g_x\)</span> is indeed convex and closed for every <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is a pointwise supremum of convex and closed functions.</p></li>
+<li><p>By <a class="reference internal" href="../metric_spaces/real_valued_functions.html#res-ms-ptws-sup-closed-functions-closed">Theorem 3.89</a>, <span class="math notranslate nohighlight">\(f\)</span> is closed.</p></li>
+<li><p>By <a class="reference internal" href="function_ops.html#res-cvx-ptws-supremum">Theorem 6.109</a>, <span class="math notranslate nohighlight">\(f\)</span> is convex.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f\)</span> is closed and convex.</p></li>
+</ol>
+</div>
+<p>The beauty of this result is the fact that
+The conjugate function is always closed and
+convex even if the original function is not
+convex or not closed.</p>
+<div class="proof theorem admonition" id="res-cvxf-proper-func-conjuate-proper">
+<p class="admonition-title"><span class="caption-number">Theorem 6.192 </span> (Properness of conjugates of proper convex functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper convex function.
+Then, its conjugate <span class="math notranslate nohighlight">\(f^*\)</span> is proper.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We are given that <span class="math notranslate nohighlight">\(f\)</span> is a proper convex function.
+We shall first show that <span class="math notranslate nohighlight">\(f*\)</span> never attains <span class="math notranslate nohighlight">\(-\infty\)</span>.
+We shall then show that <span class="math notranslate nohighlight">\(f^*\)</span> is not <span class="math notranslate nohighlight">\(\infty\)</span> everywhere.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is proper, there exists <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>
+such that <span class="math notranslate nohighlight">\(f(\ba) &lt; \infty\)</span>.</p></li>
+<li><p>By definition, for any <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   f^*(\by) \geq \langle \ba, \by \rangle - f(\ba).
+   \]</div>
+</li>
+<li><p>The R.H.S. in this inequality is finite for every <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f^*(\by) &gt; -\infty\)</span> for every <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+<li><p>We also need to show that there exists <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span>
+such that <span class="math notranslate nohighlight">\(f^*(\by) &lt; \infty\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is a proper convex function,
+hence by <a class="reference internal" href="subgradients.html#res-cvxf-subdiff-exist-relint">Corollary 6.13</a>,
+there exists <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span> at which
+the subdifferential <span class="math notranslate nohighlight">\(\partial f(\bx)\)</span> is nonempty.</p></li>
+<li><p>Consider any <span class="math notranslate nohighlight">\(\by \in \partial f(\bx)\)</span>.</p></li>
+<li><p>By subgradient inequality <a class="reference internal" href="subgradients.html#equation-eq-cvxf-subgradient-inequality">(6.5)</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bz) \geq f(\bx) + \langle \bz - \bx, \by \rangle
+   \]</div>
+<p>for every <span class="math notranslate nohighlight">\(\bz \in \VV\)</span>.</p>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bz, \by \rangle - f(\bz)
+   \leq \langle \bx, \by \rangle - f(\bx)
+   \Forall \bz \in \VV.
+   \]</div>
+</li>
+<li><p>The quantity <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle - f(\bx)\)</span>
+on the R.H.S. is finite and fixed.</p></li>
+<li><p>Taking supremum on the L.H.S., we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+   f^*(\by) = \sup_{\bz \in \VV} (\langle \bz, \by \rangle - f(\bz))
+   \leq \langle \bx, \by \rangle - f(\bx).
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f^*(\by) &lt; \infty\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f^*\)</span> is a proper function.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="biconjugate">
+<h2><span class="section-number">6.13.2. </span>Biconjugate<a class="headerlink" href="#biconjugate" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>The conjugate of the conjugate is called the <em>biconjugate</em>.
+We recall that when <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional,
+then the dual of the dual <span class="math notranslate nohighlight">\(\VV^**\)</span>
+is isomorphic to <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+<div class="proof definition admonition" id="def-cvxf-biconjugate-func">
+<p class="admonition-title"><span class="caption-number">Definition 6.70 </span> (Biconjugate)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \ERL\)</span> be an extended real valued function.
+Its <em>biconjugate function</em> <span class="math notranslate nohighlight">\(f^{**}: \VV \to \ERL\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+f^{**} (\bx) = \underset{\by \in \VV^*}{\sup} 
+\{ \langle \bx, \by \rangle - f^*(\by)  \}, \quad \bx \in \VV.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-cvxf-biconjugate-underestimator">
+<p class="admonition-title"><span class="caption-number">Theorem 6.193 </span> (Biconjugate is an underestimator)</p>
+<div class="theorem-content section" id="proof-content">
+<p>The biconjugate is an underestimator of the original function.</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) \geq f^{**} (\bx) \Forall \bx \in \VV. 
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows.</p>
+<ol>
+<li><p>From the definition of the conjugate</p>
+<div class="math notranslate nohighlight">
+\[
+   f^*(\by) \geq \langle \bx, \by \rangle - f(\bx)
+   \]</div>
+<p>holds true for any <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> and <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span>.</p>
+</li>
+<li><p>Rewriting, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \geq \langle \bx, \by \rangle - f^*(\by).
+   \]</div>
+</li>
+<li><p>Taking supremum over <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span> on the R.H.S.,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \geq \sup_{\by \in \VV^*}
+   (\langle \bx, \by \rangle - f^*(\by))
+   = f^{**}(\bx).
+   \]</div>
+</li>
+</ol>
+</div>
+<p>Thus, the biconjugate of <span class="math notranslate nohighlight">\(f\)</span> is always a lower bound for <span class="math notranslate nohighlight">\(f\)</span>.
+Naturally, one is interested in conditions under which
+biconjugate of <span class="math notranslate nohighlight">\(f\)</span> equals <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<div class="proof theorem admonition" id="res-cvxf-biconjugate-proper-closed-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.194 </span> (Biconjugate for proper closed and convex functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper, closed and convex function.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = f^{**} (\bx) \Forall x \in \VV. 
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. In <a class="reference internal" href="#res-cvxf-biconjugate-underestimator">Theorem 6.193</a>,
+we have already shown that <span class="math notranslate nohighlight">\(f^{**} \preceq f\)</span>.
+We shall now show that <span class="math notranslate nohighlight">\(f \preceq f^{**}\)</span> also
+holds true when <span class="math notranslate nohighlight">\(f\)</span> is proper, closed and convex.</p>
+<ol>
+<li><p>For contradiction, assume that there exists
+<span class="math notranslate nohighlight">\(\bx \in \VV\)</span> such that
+<span class="math notranslate nohighlight">\(f^{**}(\bx) &lt; f(\bx)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\((\bx, f^{**}(\bx)) \notin \epi f\)</span>.</p></li>
+<li><p>Recall the definition of inner product for the
+direct sum space <span class="math notranslate nohighlight">\(\VV \oplus \RR\)</span> from
+<a class="reference internal" href="real_spaces.html#def-cvx-real-vector-space-r-prod">Definition 6.4</a>
+given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle (\bx, s), (\by, t) \rangle
+   \triangleq \langle \bx, \by \rangle + st.
+   $$ s
+1. Since $f$ is proper, hence $\epi f$ is nonempty.
+1. Since $f$ is closed, hence $\epi f$ is closed.
+1. Since $f$ is convex, hence $\epi f$ is convex.
+1. Thus, $\epi f$ is nonempty, closed and convex.
+1. By strict separation theorem
+   ({prf:ref}`res-cvxf-cl-convex-set-strict-separation`),
+   the set $\epi f$ and the point $(\bx, f^{**}(\bx))$
+   can be strictly separated.
+1. There exists a point $(\ba, b)$ with $\ba \in \VV^*$, $b \in \RR$
+   and a scalar $\alpha \in \RR$ such that\]</div>
+<p>\langle \bx, \ba \rangle + f^{**}(\bx) b &gt; \alpha
+\text{ and }
+\langle \bz, \ba \rangle + s b \leq \alpha
+\Forall (\bz, s) \in \epi f.
+$$</p>
+</li>
+<li><p>It is then easy to identify constants <span class="math notranslate nohighlight">\(c_1, c_2 \in \RR\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bz, \ba \rangle + s b \leq c_1
+   &lt; c_2 \leq  \langle \bx, \ba \rangle + f^{**}(\bx) b
+   \Forall (\bz, s) \in \epi f. 
+   \]</div>
+<p>Pick <span class="math notranslate nohighlight">\(c_1 = \alpha\)</span> and <span class="math notranslate nohighlight">\(c_2 = \langle \bx, \ba \rangle + f^{**}(\bx) b\)</span>
+for example.</p>
+</li>
+<li><p>By simple arithmetic, we can conclude that</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bz - \bx, \ba \rangle + (s - f^{**}(\bx)) b
+   \leq c_1 - c_2 \triangleq c &lt; 0
+   \Forall (\bz, s) \in \epi f. 
+   \]</div>
+</li>
+<li><p>The scalar <span class="math notranslate nohighlight">\(b\)</span> must be nonpositive.
+If for contradiction, <span class="math notranslate nohighlight">\(b &gt; 0\)</span>, then fixing a <span class="math notranslate nohighlight">\(\bz\)</span>
+and increasing <span class="math notranslate nohighlight">\(s\)</span> sufficiently, the inequality can be violated.</p></li>
+<li><p>We now consider different cases for <span class="math notranslate nohighlight">\(b \leq 0\)</span>.</p></li>
+<li><p>Consider the case where <span class="math notranslate nohighlight">\(b &lt; 0\)</span>.</p>
+<ol>
+<li><p>Dividing the inequality by <span class="math notranslate nohighlight">\(-b\)</span> and letting <span class="math notranslate nohighlight">\(\by = \frac{\ba}{-b}\)</span>,
+we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+      \langle \bz - \bx, \by \rangle - s + f^{**}(\bx) \leq \frac{c}{-b} &lt; 0
+      \Forall (\bz, s) \in \epi f.
+      \]</div>
+</li>
+<li><p>In particular, for <span class="math notranslate nohighlight">\(s = f(\bz)\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+      \langle \bz, \by \rangle - \langle \bx, \by \rangle 
+      - f(\bz) + f^{**}(\bx) \leq \frac{c}{-b} &lt; 0
+      \Forall \bz \in \VV.
+      \]</div>
+<p>This is valid for <span class="math notranslate nohighlight">\(\bz \notin \dom f\)</span> also as in that case
+<span class="math notranslate nohighlight">\(s = f(\bz) = \infty\)</span>.</p>
+</li>
+<li><p>Taking the supremum over <span class="math notranslate nohighlight">\(\bz\)</span> on the L.H.S., we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+      f^*(\by) - \langle \bx, \by \rangle + f^{**}(\bx) 
+      \leq \frac{c}{-b} &lt; 0.
+      \]</div>
+</li>
+<li><p>This implies <span class="math notranslate nohighlight">\(f^*(\by) + f^{**}(\bx) &lt; \langle \bx, \by \rangle\)</span>.</p></li>
+<li><p>This contradicts the Fenchel inequality.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(b &lt; 0\)</span> is not possible.</p></li>
+</ol>
+</li>
+<li><p>Now consider the case where <span class="math notranslate nohighlight">\(b=0\)</span>.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(f^*\)</span> is proper, hence <span class="math notranslate nohighlight">\(\dom f^* \neq \EmptySet\)</span>.</p></li>
+<li><p>Take any <span class="math notranslate nohighlight">\(\widehat{\by} \in \dom f^*\)</span>.</p></li>
+<li><p>Pick some <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\widehat{\ba} = \ba + \epsilon \widehat{\by}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\widehat{b} = - \epsilon\)</span>.</p></li>
+<li><p>Then, for any <span class="math notranslate nohighlight">\(\bz \in \dom f\)</span> with <span class="math notranslate nohighlight">\(s=f(\bz)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      \langle \bz - \bx, \widehat{\ba} \rangle + (f(\bz) - f^{**}(\bx)) \widehat{b}
+      &amp;= \langle \bz - \bx, \ba \rangle 
+         + \langle \bz - \bx, \epsilon \widehat{\by} \rangle 
+         - \epsilon (f(\bz) - f^{**}(\bx)) \\
+      &amp;= \langle \bz - \bx, \ba \rangle
+         + \epsilon [\langle \bz - \bx, \widehat{\by} \rangle -f(\bz) + f^{**}(\bx)] \\
+      &amp;\leq c + \epsilon[\langle \bz, \widehat{\by} \rangle  - f(\bz) + f^{**}(\bx) - \langle \bx, \widehat{\by} \rangle]\\
+      &amp;\leq c + \epsilon [f^*(\widehat{\by}) + f^{**}(\bx) - \langle \bx, \widehat{\by} \rangle].
+      \end{split}\]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\widehat{c} = c + \epsilon [f^*(\widehat{\by}) + f^{**}(\bx) - \langle \bx, \widehat{\by} \rangle]\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(c &lt; 0\)</span>, we can pick <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> small enough such that <span class="math notranslate nohighlight">\(\widehat{c} &lt; 0\)</span>.</p></li>
+<li><p>Then, we have the inequality</p>
+<div class="math notranslate nohighlight">
+\[
+      \langle \bz - \bx, \widehat{\ba} \rangle + (f(\bz) - f^{**}(\bx)) \widehat{b} \leq \widehat{c} &lt; 0.
+      \]</div>
+</li>
+<li><p>We now have a situation similar to the case of <span class="math notranslate nohighlight">\(b &lt; 0\)</span>. Here we have <span class="math notranslate nohighlight">\(\widehat{b} &lt; 0\)</span>.</p></li>
+<li><p>Dividing both sides by <span class="math notranslate nohighlight">\(-\widehat{b}\)</span> and letting <span class="math notranslate nohighlight">\(\tilde{\by} = \frac{\widehat{\ba}}{-\widehat{b}}\)</span>,
+we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+      \langle \bz, \tilde{\by} \rangle - f(\bz) 
+      - \langle \bx, \tilde{\by} \rangle + f^{**}(\bx) 
+      \leq - \frac{\widehat{c}}{\widehat{b}} &lt; 0
+      \Forall \bz \in \VV.
+      \]</div>
+</li>
+<li><p>Taking the supremum over <span class="math notranslate nohighlight">\(\bz\)</span> on the L.H.S., we get</p>
+<div class="math notranslate nohighlight">
+\[
+      f^*(\tilde{\by}) + f^{**}(\bx) &lt; \langle \bx, \tilde{\by} \rangle.
+      \]</div>
+</li>
+<li><p>This again is a contradiction of Fenchel inequality.</p></li>
+</ol>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f^{**}(\bx) \geq f(\bx)\)</span> must be true for every <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span>.</p></li>
+</ol>
+</div>
+<div class="section" id="indicator-and-support-functions">
+<h3><span class="section-number">6.13.2.1. </span>Indicator and Support Functions<a class="headerlink" href="#indicator-and-support-functions" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-cvxf-biconjucate-indicator-support">
+<p class="admonition-title"><span class="caption-number">Example 6.74 </span> (Indicator and support functions)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty set.</p>
+<ol>
+<li><p>By <a class="reference internal" href="#res-cvxf-conjugate-indicator-func">Theorem 6.189</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   I^*_C = \sigma_C.
+   \]</div>
+</li>
+<li><p>The set <span class="math notranslate nohighlight">\(\closure \ConvexHull C\)</span> is nonempty, closed and convex.</p></li>
+<li><p>We note that since <span class="math notranslate nohighlight">\(\closure \convex C\)</span> is a nonempty, closed and convex set,
+hence <span class="math notranslate nohighlight">\(I_{\closure \convex C}\)</span> is a closed and convex function.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvxf-conjugate-indicator-func">Theorem 6.189</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   I^*_{\closure \convex C} = \sigma_{\closure \convex C}
+   \]</div>
+</li>
+<li><p>Then, by <a class="reference internal" href="#res-cvxf-biconjugate-proper-closed-convex">Theorem 6.194</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \sigma^*_{\closure \convex C}
+   = (I^*_{\closure \convex C})^*
+   = I^{**}_{\closure \convex C}
+   = I_{\closure \convex C}.
+   \]</div>
+</li>
+<li><p>By <a class="reference internal" href="convex_functions.html#res-cvxf-supp-closure-hull">Theorem 6.85</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \sigma_C = \sigma_{\closure C}
+   \text{ and }
+   \sigma_C = \sigma_{\convex C}.
+   \]</div>
+</li>
+<li><p>Combining</p>
+<div class="math notranslate nohighlight">
+\[
+   \sigma_C = \sigma_{\closure \convex C}.
+   \]</div>
+</li>
+<li><p>Thus, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \sigma^*_C = \sigma^*_{\closure \convex C}
+   = I_{\closure \convex C}.
+   \]</div>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(C\)</span> is nonempty, closed and convex, then</p>
+<div class="math notranslate nohighlight">
+\[
+   \closure \convex C = C.
+   \]</div>
+</li>
+<li><p>In this case,</p>
+<div class="math notranslate nohighlight">
+\[
+   \sigma^*_C =  I_C.
+   \]</div>
+</li>
+</ol>
+<p>Summary:</p>
+<p>For a nonempty, closed and convex set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^*_C = I_C.
+\]</div>
+<p>For an arbitrary nonempty set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^*_C = I_{\closure \ConvexHull C}.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="max-function">
+<h3><span class="section-number">6.13.2.2. </span>Max Function<a class="headerlink" href="#max-function" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-cvxf-conjugate-max-function">
+<p class="admonition-title"><span class="caption-number">Example 6.75 </span> (Conjugate for max function)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) \triangleq \max \{x_1, x_2, \dots, x_n \}.
+\]</div>
+<p>We can rewrite it as</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \underset{\by \in \Delta_n}{\sup} \langle \by, \bx \rangle
+= \sigma_{\Delta_n} (x)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta_n\)</span> is the unit simplex in <span class="math notranslate nohighlight">\(\RR^n\)</span>.</p>
+<ol>
+<li><p>Recall from <a class="reference internal" href="rn_subsets.html#def-convex-unit-simplex">Definition 6.17</a> that</p>
+<div class="math notranslate nohighlight">
+\[
+    \Delta_n \triangleq \{\bx \in \RR^n 
+        \ST \langle \bx, \bone \rangle = 1, \bx \succeq \bzero \}.
+   \]</div>
+</li>
+<li><p>In other words, for every <span class="math notranslate nohighlight">\(\by \in \Delta_n\)</span>,
+<span class="math notranslate nohighlight">\(y_i \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum y_i = 1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle \by, \bx \rangle = \sum_{i=1}^n y_i x_i\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(\by \in \Delta_n\)</span>, this represents the weighted average
+of the components of <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>The supremum value of the weighted average occurs when
+<span class="math notranslate nohighlight">\(y_i\)</span> corresponding to the largest component of <span class="math notranslate nohighlight">\(\bx\)</span> is 1
+and all remaining <span class="math notranslate nohighlight">\(y_j\)</span> are 0.</p></li>
+<li><p>This provides the justification of the formula above.</p></li>
+</ol>
+<p>We recall that <span class="math notranslate nohighlight">\(\Delta_n\)</span> is a nonempty, closed and convex set.
+Then, following <a class="reference internal" href="#ex-cvxf-biconjucate-indicator-support">Example 6.74</a>,
+the conjugate of max function <span class="math notranslate nohighlight">\(f\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+f^* = \delta_{\Delta_n}.
+\]</div>
+</div>
+</div></div>
+</div>
+<div class="section" id="conjugate-calculus">
+<h2><span class="section-number">6.13.3. </span>Conjugate Calculus<a class="headerlink" href="#conjugate-calculus" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="separable-functions">
+<h3><span class="section-number">6.13.3.1. </span>Separable functions<a class="headerlink" href="#separable-functions" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-separable">
+<p class="admonition-title"><span class="caption-number">Theorem 6.195 </span> (Conjugate for separable functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(g: \VV_1 \oplus \VV_2 \oplus \dots \oplus \VV_p \to \RERL\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+g(\bx_1, \bx_2, \dots, \bx_p) = \sum_{i=1}^p f_i (\bx_i)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_i : \VV_i \to \RERL\)</span> are proper functions.
+Then:</p>
+<div class="math notranslate nohighlight">
+\[
+g^*(\by_1, \by_2, \dots, \by_p) = 
+\sum_{i=1}^p f_i^*(\by_i) \Forall \by_i \in \VV_i^*, 1 \leq i \leq p.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\by = (\by_1, \dots, \by_p) \in \VV^*_1 \oplus \dots \oplus \VV^*_p\)</span>.</p>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g^*(\by)
+&amp;= g^*(\by_1, \dots, \by_p) \\
+&amp;= \sup_{\bx_1, \dots, \bx_p} \{ 
+    \langle (\bx_1, \dots, \bx_p), (\by_1, \dots, \by_p) \rangle
+    - g(\bx_1, \dots, \bx_p)\} \\
+&amp;= \sup_{\bx_1, \dots, \bx_p} \left \{
+    \sum_{i=1}^p \langle \bx_i, \by_i \rangle
+    - \sum_{i=1}^p f_i(\bx_i) \right \} \\
+&amp;= \sum_{i=1}^p \sup_{\bx_i} \{ \langle \bx_i, \by_i \rangle - f_i(\bx_i) \} \\
+&amp;= \sum_{i=1}^p f^*_i(\bx_i).
+\end{split}\]</div>
+</div>
+</div>
+<div class="section" id="affine-transformations">
+<h3><span class="section-number">6.13.3.2. </span>Affine Transformations<a class="headerlink" href="#affine-transformations" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-affine-trans-inv">
+<p class="admonition-title"><span class="caption-number">Theorem 6.196 </span> (Invertible affine transformation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be an extended real valued function.
+Let <span class="math notranslate nohighlight">\(\bAAA : \WW \to \VV\)</span> be an invertible linear transformation.
+Let <span class="math notranslate nohighlight">\(\ba \in \WW\)</span>, <span class="math notranslate nohighlight">\(\bb \in \WW^*\)</span> and <span class="math notranslate nohighlight">\(c \in \RR\)</span>.
+Consider the function <span class="math notranslate nohighlight">\(g: \WW \to  \RERL\)</span> given by:</p>
+<div class="math notranslate nohighlight">
+\[
+g(\bx) \triangleq f\left (\bAAA (\bx - \ba) \right ) + \langle \bx, \bb \rangle + c
+\Forall \bx \in \WW.
+\]</div>
+<p>Then the convex conjugate of <span class="math notranslate nohighlight">\(g\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+g^*(\by) = f^*\left ((\bAAA^T)^{-1} (\by - \bb) \right ) 
++ \langle \by, \ba \rangle 
+- \langle \bb, \ba \rangle - c
+\Forall \by \in \WW^*.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We introduce a variable <span class="math notranslate nohighlight">\(\bz = \bAAA (\bx - \ba)\)</span>.</p>
+<ol class="simple">
+<li><p>We can see that <span class="math notranslate nohighlight">\(\bz  = \bAAA \bx - \bAAA \ba\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \mapsto \bz\)</span> is an affine transformation.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bAAA\)</span> is invertible, hence this affine transformation is also invertible.</p></li>
+<li><p>Also, by invertibility of <span class="math notranslate nohighlight">\(\bAAA\)</span>, <span class="math notranslate nohighlight">\(\bx = \bAAA^{-1}(\bz) + \ba\)</span>.</p></li>
+</ol>
+<p>Now, for any <span class="math notranslate nohighlight">\(\by \in \WW^*\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g^*(\by) &amp;= \sup_{\bx \in \WW} \{ \langle \bx, \by \rangle - g(\bx) \} \\
+&amp;=  \sup_{\bx } \{ \langle \bx, \by \rangle - 
+f\left (\bAAA (\bx - \ba) \right ) - \langle \bx, \bb \rangle - c \} \\
+&amp;=  \sup_{\bz} \{ \langle \bAAA^{-1}(\bz) + \ba, \by \rangle - 
+f (\bz) - \langle \bAAA^{-1}(\bz) + \ba, \bb \rangle - c \} \\
+&amp;=  \sup_{\bz} \{ \langle \bAAA^{-1}(\bz), \by - \bb \rangle - 
+f (\bz) + \langle \ba, \by \rangle - \langle \ba, \bb \rangle - c \} \\
+&amp;=  \sup_{\bz} \{ \langle \bz, (\bAAA^{-1})^T(\by - \bb) \rangle - 
+f (\bz) + \langle \ba, \by \rangle - \langle \ba, \bb \rangle - c \} \\
+&amp;= f^* \left ( (\bAAA^{-1})^T(\by - \bb) \right )
++ \langle \ba, \by \rangle - \langle \ba, \bb \rangle - c\\
+&amp;= f^* \left ( (\bAAA^T)^{-1}(\by - \bb) \right )
++ \langle \by, \ba \rangle - \langle \bb, \ba \rangle - c\\
+\end{split}\]</div>
+<p>In this derivation, we have used following facts</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\((\bAAA^T)^{-1} = (\bAAA^{-1})^T\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle \bx, \by \rangle = \langle \by, \bx \rangle\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle \bA (\bx), \by \rangle = \langle \bx, \bA^T (\by) \rangle\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="scaling">
+<h3><span class="section-number">6.13.3.3. </span>Scaling<a class="headerlink" href="#scaling" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-scaling">
+<p class="admonition-title"><span class="caption-number">Theorem 6.197 </span> (Scaling)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be an extended real valued function.
+Let <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>.</p>
+<ol>
+<li><p>The conjugate of the function <span class="math notranslate nohighlight">\(g(\bx) = \alpha f(\bx)\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+   g^*(\by) = \alpha f^*\left (\frac{\by}{\alpha} \right ) \Forall \by \in \VV^*.
+   \]</div>
+</li>
+<li><p>The conjugate of the function <span class="math notranslate nohighlight">\(h(\bx) = \alpha f(\frac{\bx}{\alpha})\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+   h^*(\by) = \alpha f^*(\by) \Forall \by \in \VV^*.
+   \]</div>
+</li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. (1) For any <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g^*(\by) &amp;= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - g(\bx) \} \\
+&amp;= \sup_{\bx} \{ \langle \bx, \by \rangle - \alpha f(\bx) \} \\
+&amp;= \alpha \sup_{\bx} \{ \langle \bx, \frac{\by}{\alpha} \rangle - \alpha f(\bx) \} \\
+&amp;= \alpha f^*\left ( \frac{\by}{\alpha} \right ).
+\end{split}\]</div>
+<p>(2) Similarly, for any <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+h^*(\by) &amp;= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - h(\bx) \} &amp; \\
+&amp;= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - \alpha f(\frac{\bx}{\alpha}) \} &amp; s\\
+&amp;= \alpha \sup_{\bx \in \VV} 
+\left \{ \left \langle \frac{\bx}{\alpha}, \by \right \rangle 
+- f\left (\frac{\bx}{\alpha} \right ) \right \} &amp; \\
+&amp;= \alpha \sup_{\bz \in \VV} \{ \langle \bz, \by \rangle - f(\bz) \} 
+    &amp; \bz \triangleq \frac{\bx}{\alpha} \\
+&amp;= \alpha f^*(\by).
+\end{split}\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="useful-results">
+<h2><span class="section-number">6.13.4. </span>Useful Results<a class="headerlink" href="#useful-results" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Fenchel’s duality theorem</p>
+<div class="docutils">
+<p>Let <span class="math notranslate nohighlight">\(f,g : \VV \to \RERL\)</span> be proper convex function.
+If <span class="math notranslate nohighlight">\(\relint \dom f \cap \relint \dom g \neq \EmptySet\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\bx \in \VV}{\sup} \{f(\bx) + g(\bx) \}
+= \underset{\by \in \VV^*}{\sup} \{ - f^*(\by) - g^*(-\by) \}.
+\]</div>
+<p>The supremum of R.H.S. is attained whenever it is finite.</p>
+</div>
+<p class="rubric">Infimal Convolution</p>
+<div class="docutils">
+<p>Recall that the <em>infimal convolution</em> of two functions
+<span class="math notranslate nohighlight">\(f,g : \VV \to \ERL\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+(f \square g)(\bx) \triangleq 
+\underset{\by \in \VV}{\inf} (f(\bx - \by) + g(\by)). 
+\]</div>
+<p>For two proper functions
+<span class="math notranslate nohighlight">\(h_1, h_2: \VV \to \RERL\)</span>, it holds that:</p>
+<div class="math notranslate nohighlight">
+\[
+(h_1 \square h_2)^*  = h_1^*  + h_2^*.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(h_1 : \VV \to \RERL\)</span> be a proper convex
+function and <span class="math notranslate nohighlight">\(h_2 : \VV \to \RR\)</span> be a real valued
+convex function. Then</p>
+<div class="math notranslate nohighlight">
+\[
+(h_1 + h_2)^* = h_1^* \square h_2^*.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(h_1 : \VV \to \RERL\)</span> be a proper closed convex
+function and <span class="math notranslate nohighlight">\(h_2 : \VV \to \RR\)</span> be a real valued
+convex function. Then</p>
+<div class="math notranslate nohighlight">
+\[
+h_1 + h_2 = (h_1^* \square h_2^*)^*.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(h_1 : \VV \to \RERL\)</span> be a proper convex
+function and <span class="math notranslate nohighlight">\(h_2 : \VV \to \RR\)</span> be a real valued
+convex function. Suppose <span class="math notranslate nohighlight">\(h_1 \square h_2\)</span> is
+a real valued function. Then</p>
+<div class="math notranslate nohighlight">
+\[
+h_1 \square h_2 = (h_1^* + h_2^*)^*.
+\]</div>
+</div>
+<p class="rubric">Conjugate subgradient theorem</p>
+<div class="docutils">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be proper and convex.
+The following claims are equivalent for any <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>
+and <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span>:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\langle \by, \bx \rangle = f(\bx) + f^*(\by)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\by \in \partial f(\bx)\)</span>.</p></li>
+</ol>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is closed, then 1 and 2 are equivalent to:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bx \in \partial f^*(\by)\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="dim-functions">
+<h2><span class="section-number">6.13.5. </span>1-dim Functions<a class="headerlink" href="#dim-functions" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-exponent">
+<p class="admonition-title"><span class="caption-number">Theorem 6.198 </span> (Exponent)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span>, be given by <span class="math notranslate nohighlight">\(f(x) = e^x\)</span>.
+Then, the conjugate is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(y) = \begin{cases}
+y \ln y - y, &amp; y \geq 0, \\
+\infty, &amp; \text{ otherwise }.
+\end{cases}
+\end{split}\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To see this, we proceed as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(y) &amp;= \sup_{x \in \RR} \{ x y - f(x) \} \\
+&amp;= \sup_{x \in \RR} \{ x y - e^x \}.
+\end{split}\]</div>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(y &lt; 0\)</span>, then the supremum value is <span class="math notranslate nohighlight">\(\infty\)</span>
+as <span class="math notranslate nohighlight">\(x \to -\infty\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(y = 0\)</span>, then the supremum value is <span class="math notranslate nohighlight">\(0\)</span>
+as <span class="math notranslate nohighlight">\(x \to -\infty\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(y &gt; 0\)</span>, then the unique maximizer is obtained
+by differentiating <span class="math notranslate nohighlight">\(x y - e^x\)</span> w.r.t. <span class="math notranslate nohighlight">\(x\)</span>
+giving us <span class="math notranslate nohighlight">\(y = e^{\tilde{x}}\)</span> or <span class="math notranslate nohighlight">\(\tilde{x} = \ln y\)</span>.</p></li>
+<li><p>Then, the supremum value for <span class="math notranslate nohighlight">\(y &gt; 0\)</span> is <span class="math notranslate nohighlight">\(y \ln y - y\)</span>.</p></li>
+<li><p>Under the convention that <span class="math notranslate nohighlight">\(y \ln y = 0\)</span> when <span class="math notranslate nohighlight">\(y = 0\)</span>,
+we see that <span class="math notranslate nohighlight">\(y \ln y - y = 0\)</span> for <span class="math notranslate nohighlight">\(y = 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(f^*(y) = y \ln y - y\)</span> for <span class="math notranslate nohighlight">\(y \geq 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f^*(y) = \infty\)</span> otherwise.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-negative-log">
+<p class="admonition-title"><span class="caption-number">Theorem 6.199 </span> (Negative log)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to (-\infty,\infty]\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+- \ln (x) &amp; x &gt; 0 \\
+\infty &amp;  x \leq 0
+\end{cases}.
+\end{split}\]</div>
+<p>Then, the conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(y) = \begin{cases}
+-1 - \ln (-y) &amp; y &lt; 0 \\
+\infty &amp; y \geq 0
+\end{cases}.
+\end{split}\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To show this, we proceed as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(y) &amp;= \sup_{x &gt; 0} \{ xy - f(x) \} \\
+&amp;= \sup_{x &gt; 0} \{ xy + \ln (x) \}. 
+\end{split}\]</div>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(y \geq 0\)</span>, then the supremum value is <span class="math notranslate nohighlight">\(\infty\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(y &lt; 0\)</span>, then we can differentiate the expression
+<span class="math notranslate nohighlight">\(xy + \ln (x)\)</span> and set it to 0 to obtain the optimal solution.</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{d}{d x} (x y + \ln(x)) = y + \frac{1}{x}.
+   \]</div>
+</li>
+<li><p>Setting it to zero, we get <span class="math notranslate nohighlight">\(\tilde{x} = - \frac{1}{y}\)</span>.</p></li>
+<li><p>The supremum value is thus <span class="math notranslate nohighlight">\(-1 - \ln(-y)\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-hinge-loss">
+<p class="admonition-title"><span class="caption-number">Theorem 6.200 </span> (Hinge loss)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \max \{1 - x, 0 \}
+\]</div>
+<p>Then, the conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[
+f^*(y) = y + I_{[-1,0]} (y) \Forall y \in \RR
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(I\)</span> is the indicator function.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To see this, note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(y) &amp;= \sup_{x} \{ xy - f(x) \} \\
+&amp;= \sup_{x} [ xy - \max \{1 - x, 0 \} ] \\
+&amp;= \sup_{x} [ \min \{xy - (1-x), xy \} ] \\
+&amp;= \sup_{x} [ \min \{(1+y)x - 1, yx \} ].
+\end{split}\]</div>
+<ol>
+<li><p>The terms <span class="math notranslate nohighlight">\((1+y)x - 1\)</span> and <span class="math notranslate nohighlight">\(yx\)</span> are affine in <span class="math notranslate nohighlight">\(x\)</span>
+representing straight lines.</p></li>
+<li><p>The two lines intersect at</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; (1+y)x - 1 = y x \\
+   &amp; \implies x - 1 = 0 \\
+   &amp; \implies x = 1.
+   \end{split}\]</div>
+</li>
+<li><p>For <span class="math notranslate nohighlight">\(x &lt; 1\)</span>,  <span class="math notranslate nohighlight">\((1+y)x - 1 &lt; y x\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(x &gt; 1\)</span>, <span class="math notranslate nohighlight">\((1+y)x - 1 &gt; y x\)</span>.</p></li>
+<li><p>Thus, the function <span class="math notranslate nohighlight">\( \min \{(1+y)x - 1, y x \}\)</span> is a piece-wise linear function
+of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \min \{(1+y)x - 1, y x \} = \begin{cases}
+   (1+y)x - 1, &amp; x &lt; 1 \\
+   y x, &amp; x \geq 1.
+   \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p>The first piece is a line <span class="math notranslate nohighlight">\((1+y)x - 1\)</span> with slope <span class="math notranslate nohighlight">\(1+y\)</span> over <span class="math notranslate nohighlight">\(x \in (-\infty, 1]\)</span>.</p></li>
+<li><p>The second piece is a line <span class="math notranslate nohighlight">\(y x\)</span> with slope <span class="math notranslate nohighlight">\(y\)</span> over <span class="math notranslate nohighlight">\(x \in [1, \infty)\)</span>.</p></li>
+<li><p>A finite supremum of this piecewise linear function exists if
+the slope of the left piece is nonnegative and the slope
+of the right piece is nonpositive.</p></li>
+<li><p>In other words, <span class="math notranslate nohighlight">\(1 + y \geq 0\)</span>  and <span class="math notranslate nohighlight">\(y \leq 0\)</span>.</p></li>
+<li><p>Thus, a finite supremum exists only for <span class="math notranslate nohighlight">\(y \in [-1, 0]\)</span>.</p></li>
+<li><p>The supremum value for this range of <span class="math notranslate nohighlight">\(y\)</span> values is attained at <span class="math notranslate nohighlight">\(x=1\)</span>
+(where the two pieces intersect) and the supremum value equals <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p>For all <span class="math notranslate nohighlight">\(y \notin [-1, 0]\)</span> the supremum is infinite.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\dom f^* = [-1,0]\)</span> and <span class="math notranslate nohighlight">\(f^*(y) = y \Forall y \in \dom f^*\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f^*(y) = \infty \Forall y \notin [-1,0]\)</span>.</p></li>
+<li><p>This is succinctly represented in the expression for <span class="math notranslate nohighlight">\(f^*\)</span> with the
+help of an indicator function above.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-abs-pth-power">
+<p class="admonition-title"><span class="caption-number">Theorem 6.201 </span> (p-th power of absolute value for <span class="math notranslate nohighlight">\(p &gt; 1\)</span>.)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let for some <span class="math notranslate nohighlight">\(p &gt; 1\)</span>, the function <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{p} | x |^p
+\]</div>
+<p>Then, its conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[
+f^*(y) = \frac{1}{q} | y |^q \quad \Forall y \in \RR
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(q &gt; 1\)</span> is the conjugate exponent satisfying:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{p} + \frac{1}{q} = 1.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To see this, we proceed as follows:</p>
+<ol>
+<li><p>The conjugate is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   f^*(y) = \sup_{x} \{ x y - f (x) \}
+   = \sup_x \{x y -  \frac{1}{p} | x |^p \}.
+   \]</div>
+</li>
+<li><p>The concave function <span class="math notranslate nohighlight">\(xy - \frac{1}{p} | x |^p\)</span> is differentiable.</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{d}{d x} (xy - \frac{1}{p} | x |^p) = y - \sgn (x) | x |^{p - 1}.
+   \]</div>
+</li>
+<li><p>Setting the derivative to <span class="math notranslate nohighlight">\(0\)</span>, the points at which the derivative
+vanishes are given by</p>
+<div class="math notranslate nohighlight">
+\[
+   y - \sgn (\tilde{x}) | \tilde{x} |^{p - 1} = 0.
+   \]</div>
+</li>
+<li><p>We can rewrite this as</p>
+<div class="math notranslate nohighlight">
+\[
+   y = \sgn(y) | y | = \sgn (\tilde{x}) | \tilde{x} |^{p - 1}.
+   \]</div>
+</li>
+<li><p>Therefore, <span class="math notranslate nohighlight">\(\sgn (y) = \sgn (\tilde{x})\)</span> and
+<span class="math notranslate nohighlight">\(| \tilde{x} |^{p - 1} = | y|\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \tilde{x} = \sgn (\tilde{x}) |\tilde{x} | = \sgn (y)| y|^{\frac{1}{p - 1}}.
+   \]</div>
+</li>
+<li><p>Accordingly, the supremum value at <span class="math notranslate nohighlight">\(\tilde{x}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   f^*(y) &amp;= \tilde{x} y - \frac{1}{p} | \tilde{x} |^p \\
+   &amp;= |y|^{1 + \frac{1}{p - 1}} - \frac{1}{p}| y|^{\frac{p}{p - 1}} \\
+   &amp;= |y|^{\frac{p}{p - 1}} - \frac{1}{p}| y|^{\frac{p}{p - 1}} \\
+   &amp;= \left (1 - \frac{1}{p} \right ) | y|^{\frac{p}{p - 1}} \\
+   &amp;= \frac{1}{q} | y|^q
+   \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q = \frac{p}{p -1}\)</span> is the conjugate exponent of <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-abs-pth-power-lt-1">
+<p class="admonition-title"><span class="caption-number">Theorem 6.202 </span> (p-th power of absolute value for <span class="math notranslate nohighlight">\(0 &lt; p &lt; 1\)</span>)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let for some <span class="math notranslate nohighlight">\(0 &lt; p &lt; 1\)</span>, <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+- \frac{1}{p} x^p &amp;  x \geq 0 \\
+\infty &amp; x &lt; 0
+\end{cases}.
+\end{split}\]</div>
+<p>Then, its conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(y) = \begin{cases}
+- \frac{(-y)^q}{q}  &amp;  y &lt; 0 \\
+\infty &amp; \text{ otherwise }
+\end{cases}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q &lt; 0\)</span> is a negative number satisfying:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{p} + \frac{1}{q} = 1.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To see this, we proceed as follows:</p>
+<ol>
+<li><p>The conjugate is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   f^*(y) = \sup_{x} \{ x y - f (x) \}
+   = \sup_{x \geq 0} \{x y +  \frac{1}{p} x^p \}.
+   \]</div>
+</li>
+<li><p>Define <span class="math notranslate nohighlight">\( g : \RR \to \RR\)</span> with <span class="math notranslate nohighlight">\(\dom g = \RR_+\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   g(x) \triangleq x y +  \frac{1}{p} x ^p.
+   \]</div>
+</li>
+<li><p>When <span class="math notranslate nohighlight">\(y \geq 0\)</span>,  then <span class="math notranslate nohighlight">\(g(x) \to \infty\)</span> as <span class="math notranslate nohighlight">\(x \to \infty\)</span>.</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(y &lt; 0\)</span>, then <span class="math notranslate nohighlight">\(g'(x) = 0\)</span> at <span class="math notranslate nohighlight">\(x = \tilde{x} = (-y)^{\frac{1}{p -1}}\)</span>.</p></li>
+<li><p>We note that <span class="math notranslate nohighlight">\(g\)</span> is a concave function for <span class="math notranslate nohighlight">\(y &lt; 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g\)</span> achieves its supremum at <span class="math notranslate nohighlight">\(\tilde{x}\)</span>.</p></li>
+<li><p>The supremum value is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   f^*(y) &amp;= g(\tilde{x}) \\
+   &amp;= \tilde{x} y +  \frac{1}{p} \tilde{x}^p \\
+   &amp;= (-y)^{\frac{1}{p -1}} y + \frac{1}{p} (-y)^{\frac{p}{p -1}} \\
+   &amp;= - (-y)^{\frac{p}{p -1}} + \frac{1}{p} (-y)^{\frac{p}{p -1}} \\
+   &amp;= - \left (1 - \frac{1}{p} \right ) (-y)^{\frac{p}{p -1}} \\
+   &amp;= - \frac{1}{q} (-y)^{q}
+   \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q = \frac{p}{p -1}\)</span>.</p>
+</li>
+<li><p>The domain of <span class="math notranslate nohighlight">\(f^*\)</span> is <span class="math notranslate nohighlight">\(y &lt; 0\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="n-dim-functions">
+<h2><span class="section-number">6.13.6. </span>n-dim functions<a class="headerlink" href="#n-dim-functions" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-strictly-convex-quadratic">
+<p class="admonition-title"><span class="caption-number">Theorem 6.203 </span> (Strictly convex quadratic)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) \triangleq \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(A \in \SS^n_{++}\)</span>, <span class="math notranslate nohighlight">\(\bb \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(c \in \RR\)</span>.</p>
+<p>Then, the conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[
+f^*(\by) = \frac{1}{2}(\by - \bb)^T \bA^{-1}(\by -\bb) - c.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows. For any <span class="math notranslate nohighlight">\(\by \in \RR^n\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(\by) &amp;= \sup_{\bx} \{ \langle \bx, \by \rangle - f(\bx) \} \\
+&amp;= \sup_{\bx} \{ \by^T \bx - \frac{1}{2} \bx^T \bA \bx - \bb^T \bx - c \} \\
+&amp;= \sup_{\bx} \{ - \frac{1}{2} \bx^T \bA \bx - (\bb - \by)^T \bx - c \}.
+\end{split}\]</div>
+<ol class="simple">
+<li><p>The supremum of the quadratic above is achieved at <span class="math notranslate nohighlight">\(\bx = \bA^{-1}(\by - \bb)\)</span>.</p></li>
+<li><p>The supremum value is <span class="math notranslate nohighlight">\(\frac{1}{2}(\by - \bb)^T \bA^{-1}(\by -\bb) - c\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-convex-quadratic">
+<p class="admonition-title"><span class="caption-number">Theorem 6.204 </span> (Convex quadratic)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) \triangleq \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(A \in \SS^n_{+}\)</span>, <span class="math notranslate nohighlight">\(\bb \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(c \in \RR\)</span>.</p>
+<p>Then, the conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(\by) = \begin{cases}
+\frac{1}{2}(\by - \bb)^T \bA^{\dag}(\by -\bb) - c &amp; \by \in \bb + \range \bA,\\
+\infty &amp; \text{ otherwise }.
+\end{cases}
+\end{split}\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. In this case, <span class="math notranslate nohighlight">\(\bA\)</span> is not positive definite but only semidefinite.</p>
+<p>For any <span class="math notranslate nohighlight">\(\by \in \RR^n\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(\by) &amp;= \sup_{\bx} \{ \langle \bx, \by \rangle - f(\bx) \} \\
+&amp;= \sup_{\bx} \{ \by^T \bx - \frac{1}{2} \bx^T \bA \bx - \bb^T \bx - c \} \\
+&amp;= \sup_{\bx} \{ - \frac{1}{2} \bx^T \bA \bx + (\by - \bb)^T \bx - c \}.
+\end{split}\]</div>
+<ol>
+<li><p>Define <span class="math notranslate nohighlight">\(g : \RR^n \to \RR\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+   g(\bx) = - \frac{1}{2} \bx^T \bA \bx + (\by - \bb)^T \bx - c.
+   \]</div>
+</li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   f^*(\by) = \sup_{\bx} g(\bx).
+   \]</div>
+</li>
+<li><p>The gradient of <span class="math notranslate nohighlight">\(g\)</span> is given by <span class="math notranslate nohighlight">\(\nabla g(\bx) = - \bA \bx + (\by - \bb)\)</span>.</p></li>
+<li><p>The maximizers of <span class="math notranslate nohighlight">\(g\)</span> are at points where the gradient vanishes, given by
+<span class="math notranslate nohighlight">\(\bA \bx = \by - \bb\)</span>.</p></li>
+<li><p>This system has a solution if and only if <span class="math notranslate nohighlight">\(\by \in \range \bA + \bb\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\by \in \range \bA + \bb\)</span>, we can choose one of the solutions
+to the zero gradient equation above.</p></li>
+<li><p>One possible solution is given by the Moore-Penrose pseudo inverse of <span class="math notranslate nohighlight">\(\bA\)</span>,
+namely <span class="math notranslate nohighlight">\(\tilde{\bx} = \bA^{\dag} (\by - \bb)\)</span>.</p></li>
+<li><p>For this solution,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   f^*(\by) &amp;= - \frac{1}{2} \tilde{\bx}^T \bA \tilde{\bx} + (\by - \bb)^T \tilde{\bx} - c \\
+   &amp;= - \frac{1}{2} (\by - \bb)^T \bA^{\dag} \bA \bA^{\dag} (\by - \bb) + (\by - \bb)^T \bA^{\dag} (\by - \bb) - c\\
+   &amp;=  \frac{1}{2} (\by - \bb)^T \bA^{\dag} (\by - \bb) - c.
+   \end{split}\]</div>
+<p>We used the fact that <span class="math notranslate nohighlight">\((\bA^{\dag})^T = \bA^{\dag}\)</span> since <span class="math notranslate nohighlight">\(\bA\)</span> is symmetric.
+Also, <span class="math notranslate nohighlight">\(\bA^{\dag} \bA \bA^{\dag} = \bA^{\dag}\)</span>.</p>
+</li>
+<li><p>We now consider the case where <span class="math notranslate nohighlight">\(\by \notin \range \bA + \bb\)</span>.</p></li>
+<li><p>This is same as <span class="math notranslate nohighlight">\(\by - \bb \notin \range \bA\)</span>.</p></li>
+<li><p>Recall that <span class="math notranslate nohighlight">\(\range \bA = (\nullspace \bA)^{\perp}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\by - \bb \notin (\nullspace \bA)^{\perp}\)</span>.</p></li>
+<li><p>Thus, there exists a vector <span class="math notranslate nohighlight">\(\bv \in \nullspace \bA\)</span> such that
+<span class="math notranslate nohighlight">\((\by - \bb)^T \bv &gt; 0\)</span>.</p></li>
+<li><p>Now, for any <span class="math notranslate nohighlight">\(t \in \RR\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   g(t \bv) &amp;= - \frac{1}{2} \bx^T \bA \bx + (\by - \bb)^T \bx - c \\
+   &amp;= - \frac{t^2}{2} \bv^T \bA \bv + t (\by - \bb)^T \bv - c \\
+   &amp;= t (\by - \bb)^T \bv - c
+   \end{split}\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bA \bv = \bzero\)</span>.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\((\by - \bb)^T \bv &gt; 0\)</span>, hence <span class="math notranslate nohighlight">\(g(t \bv) \to \infty\)</span> as <span class="math notranslate nohighlight">\(t \to \infty\)</span>.</p></li>
+<li><p>Thus,  <span class="math notranslate nohighlight">\(f^*(\by) = \sup_{\bx} g(\bx) = \infty\)</span> if <span class="math notranslate nohighlight">\(\by \notin \range \bA + \bb\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\dom f^* = \range \bA + \bb\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-negative-entropy">
+<p class="admonition-title"><span class="caption-number">Theorem 6.205 </span> (Negative entropy)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(\bx) \triangleq \begin{cases}
+\sum_{i=1}^n x_i \ln (x_i) &amp; \bx \succeq \bzero,\\
+\infty &amp; \text{ otherwise }.
+\end{cases}
+\end{split}\]</div>
+<p>Then, the conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[
+f^*(\by) = \sum_{i=1}^n e^{y_i - 1}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that the function <span class="math notranslate nohighlight">\(f(\bx)\)</span> is separable over
+the components of <span class="math notranslate nohighlight">\(\bx\)</span>. Thus, it is enough to
+compute the conjugate of the scalar function
+<span class="math notranslate nohighlight">\(g : \RR \to \RR\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g(t) = \begin{cases} 
+t \ln t &amp; \Forall t \geq 0, \\
+\infty &amp; \text{ otherwise }.
+\end{cases}
+\end{split}\]</div>
+<p>We can then apply <a class="reference internal" href="#res-cvxf-conjugate-separable">Theorem 6.195</a>
+to compute the conjugate of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>Now,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g^*(s) &amp;= \sup_{t} \{ st - g(t) \} \\
+&amp;= \sup_{t \geq 0} \{ st - t \ln t \}.
+\end{split}\]</div>
+<p>It is easy to see that the supremum of the expression
+<span class="math notranslate nohighlight">\(st - t \ln t\)</span> is achieved at <span class="math notranslate nohighlight">\(t = e^{s - 1}\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+g^*(s) = s e^{s - 1} - (s - 1) e^{s - 1} = e^{s - 1}.
+\]</div>
+<p>Finally,</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \sum_{i=1}^n g(x_i).
+\]</div>
+<p>Thus, due to <a class="reference internal" href="#res-cvxf-conjugate-separable">Theorem 6.195</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+f^*(\by) = \sum_{i=1}^n g^* (y_i) = \sum_{i=1}^n e^{y_i - 1}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-cvx-conjugate-neg-sum-logs">
+<p class="admonition-title"><span class="caption-number">Theorem 6.206 </span> (Negative sum of logs)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(\bx) \triangleq \begin{cases}
+- \sum_{i=1}^n \ln (x_i) &amp; \bx \succ \bzero,\\
+\infty &amp; \text{ otherwise }.
+\end{cases}
+\end{split}\]</div>
+<p>Then, the conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(\by) =  \begin{cases}
+- n - \sum_{i=1}^n \ln(-y_i) &amp; \by \prec \bzero, \\
+\infty &amp; \text{ otherwise}.
+\end{cases}
+\end{split}\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(f\)</span> is separable. Define <span class="math notranslate nohighlight">\(g : \RR \to \RR\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g(t) = \begin{cases}
+- \ln t &amp; t &gt; 0, \\
+\infty &amp; t \leq 0.
+\end{cases}
+\end{split}\]</div>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx)  = \sum_{i=1}^n g(x_i).
+\]</div>
+<p>By <a class="reference internal" href="#res-cvxf-conjugate-negative-log">Theorem 6.199</a>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g^*(y) = \begin{cases}
+-1 - \ln (-y) &amp; y &lt; 0 \\
+\infty &amp; y \geq 0
+\end{cases}.
+\end{split}\]</div>
+<p>Due to <a class="reference internal" href="#res-cvxf-conjugate-separable">Theorem 6.195</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+f^*(\by) = \sum_{i=1}^n g^*(y_i).
+\]</div>
+<p>For <span class="math notranslate nohighlight">\(\by \prec \bzero\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+f^*(\by) = \sum_{i=1}^n  (- 1 - \ln (-y_i))
+= -n - \sum_{i=1}^n \ln (-y_i).
+\]</div>
+<p>For <span class="math notranslate nohighlight">\(\by \succeq \bzero\)</span>, one of the <span class="math notranslate nohighlight">\(g^*(y_i) = \infty\)</span>. Hence, <span class="math notranslate nohighlight">\(f^*(\by) = \infty\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvxf-conjugate-neg-entropy-unit-simplex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.207 </span> (Negative entropy over unit simplex)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(\bx) \triangleq \begin{cases}
+\sum_{i=1}^n x_i \ln (x_i) &amp; \bx \in \Delta_n\\
+\infty &amp; \text{ otherwise }
+\end{cases}.
+\end{split}\]</div>
+<p>The conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[
+f^*(\by) =  \ln \left ( \sum_{j=1}^n e^{y_j}
+    \right )
+\]</div>
+</div>
+</div><p>Recall from <a class="reference internal" href="rn_subsets.html#def-convex-unit-simplex">Definition 6.17</a> that a
+unit simplex in <span class="math notranslate nohighlight">\(\RR^n\)</span> is the set of
+nonnegative vectors with elements
+summing up to <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta_n = \{\bx \in \RR^n 
+    \ST \langle \bx, \bone \rangle = 1, \bx \succeq \bzero \}.
+\]</div>
+<div class="proof admonition" id="proof">
+<p>Proof. For any <span class="math notranslate nohighlight">\(\by \in \RR^n\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(\by) &amp;= \sup_{\bx}  \{ \langle \bx, \by \rangle - f(\bx)\}\\
+&amp;= \sup_{\bx} \left \{ \sum_{i=1}^n y_i x_i - \sum_{i=1}^n x_i \ln x_i \ST
+\sum_{i=1}^n x_i = 1, x_1, \dots, x_n \geq 0 \right \}.
+\end{split}\]</div>
+</div>
+<p class="rubric">Log sum exp</p>
+<div class="docutils">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) \triangleq \ln \left ( \sum_{j=1}^n e^{x_j}
+    \right ).
+\]</div>
+<p>The conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(\by) =  \begin{cases}
+\sum_{i=1}^n y_i \ln (y_i) &amp; \by \in \Delta_n\\
+\infty &amp; \text{ otherwise }
+\end{cases}.
+\end{split}\]</div>
+</div>
+<p>Log-sum-exp and negative entropy over simplex and conjugate
+of each other.</p>
+<p class="rubric">Norm</p>
+<div class="docutils">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \| \bx \|
+\]</div>
+<p>Then, the conjugate <span class="math notranslate nohighlight">\(f^* : \VV^* \to \ERL\)</span> for any <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span>
+is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f^*(\by) = \begin{cases}
+0 &amp; \| \by \|_* \leq 1 \\
+\infty &amp; \text{ otherwise }
+\end{cases}
+\end{split}\]</div>
+<p>In other words, it is the indicator function for the unit ball
+w.r.t. the dual norm <span class="math notranslate nohighlight">\(\| \cdot \|_*\)</span>.</p>
+</div>
+<p class="rubric">Ball-Pen</p>
+<div class="docutils">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(\bx) \triangleq \begin{cases}
+- \sqrt{1 - \| x \|^2} &amp; \| x \| \leq 1\\
+\infty &amp; \text{ otherwise }
+\end{cases}.
+\end{split}\]</div>
+<p>Then, the conjugate <span class="math notranslate nohighlight">\(f^* : \VV^* \to \ERL\)</span> for any <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span>
+is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f^*(\by) = \sqrt{\| y \|_*^2 + 1}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(f_{\alpha}\)</span> for some <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> be defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f_{\alpha}(\bx) \triangleq \begin{cases}
+- \sqrt{\alpha^2 - \| x \|^2} &amp; \| x \| \leq \alpha\\
+\infty &amp; \text{ otherwise }
+\end{cases}.
+\end{split}\]</div>
+<p>The conjugate:</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\alpha}^*(\by) = \alpha \sqrt{\| y \|_*^2 + 1}.
+\]</div>
+<p>In the reverse direction, let <span class="math notranslate nohighlight">\(g_{\alpha} : \VV \to \RR\)</span>
+for some <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> be given by:</p>
+<div class="math notranslate nohighlight">
+\[
+g_{\alpha} (\bx) = \sqrt{\alpha^2 + \| x \|^2}.
+\]</div>
+<p>Then the conjugate is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g_{\alpha}^*(\by) = \begin{cases}
+-\alpha \sqrt{1 - \| y \|_*^2} &amp; \| y \|_* \leq 1\\
+\infty &amp; \text{ otherwise }
+\end{cases}.
+\end{split}\]</div>
+</div>
+<p class="rubric">Squared Norm</p>
+<div class="docutils">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \frac{1}{2}\| \bx \|^2
+\]</div>
+<p>Then, the conjugate <span class="math notranslate nohighlight">\(f^* : \VV^* \to \ERL\)</span> for any <span class="math notranslate nohighlight">\(\by \in \VV^*\)</span>
+is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f^*(\by) = \frac{1}{2} \| \by \|_*^2.
+\]</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./convex_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="subgradients.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.12. </span>Subgradients</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="smoothness.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.14. </span>Smoothness</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

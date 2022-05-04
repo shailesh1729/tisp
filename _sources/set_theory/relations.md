@@ -190,10 +190,14 @@ i.e. all elements in $X$ which are related to $x$.
 We can now look at some properties of equivalence classes and relations.
 
 ````{prf:proposition}
+:label: res-st-eq-class-identical-disjoint
+
 Any two equivalence classes are either disjoint or else they coincide.
 ````
 
 ````{prf:example} Equivalent classes
+:label: ex-st-eq-class-1
+
 Let $X$ bet the set of integers $\ZZ$. Let $\mathcal{R}$ be defined as
 
 $$
@@ -210,6 +214,8 @@ disjoint equivalent classes.
 
 
 ````{prf:proposition}
+:label: res-st-family-eq-classes-union-set
+
 Let $\mathcal{R}$ be an equivalence relation on a set $X$.
 Since $x \in [x]$ for each $x \in X$, there exists a family
 $\{A_i\}_{i \in I}$ of pairwise disjoint sets (a family of
@@ -236,6 +242,8 @@ A partition over a set $X$ also defines an equivalence relation on it.
 
 
 ````{prf:proposition}
+:label: res-st-partition-induces-eq-class-relation
+
 If there exists a family
 $\{A_i\}_{i \in I}$ of pairwise disjoint sets which partitions
 a set $X$, (i.e. $X = \cup_{i \in I} A_i $), then by letting
@@ -279,6 +287,8 @@ A set equipped with a partial order is known as a *partially ordered set*
 ````
 
 ````{prf:example} Partially ordered set
+:label: ex-st-poset-1
+
 Consider a set $A = \{1,2,3\}$.  Consider the power set of $A$ which is
 
 $$
@@ -319,6 +329,8 @@ require that either $x \leq y$ or $y \leq x$ holds.
 *  If a set is totally ordered, then it is partially ordered also.
 
 ````{prf:example} Chain
+:label: ex-st-poset-chain
+
 Continuing from previous example consider a subset $Y$ of $X$ defined by
 
 $$
@@ -351,6 +363,7 @@ A set equipped with a total order is known as a *totally ordered set*.
 
 
 ````{prf:example} More ordered sets
+:label: ex-st-ordered-sets-2
 
 *  The set of natural numbers $\Nat$ is totally ordered.
 *  The set of integers $\ZZ$ is totally ordered.
@@ -401,6 +414,8 @@ contain more than one maximal element.
 
 
 ````{prf:example} Maximal elements
+:label: ex-st-maximal-elements-1
+
 Consider the following set
 
 $$
@@ -414,6 +429,7 @@ There are three maximal elements in this set namely $\{1,2\} , \{2,3\} , \{1,3\}
 
 
 ````{prf:example} Ordered sets without a maximal element
+:label: ex-st-ordered-set-no-max-element
 
 *  The set of natural numbers $\Nat$ has no maximal element.
 
@@ -429,6 +445,8 @@ Zorn's lemma guarantees the existence of maximal elements in
 certain partially ordered sets.
 
 ````{prf:proposition}
+:label: res-st-chain-upper-bound-implies-max-element
+
 If a {prf:ref}`chain <def-st-chain>` in a partially
 ordered set $X$ has an upper bound in $X$, then $X$
 has a maximal element.

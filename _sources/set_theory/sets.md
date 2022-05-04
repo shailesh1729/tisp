@@ -152,6 +152,8 @@ countably infinite.
 ````
 
 ````{prf:remark}
+:label: rem-st-indexing-family-self
+
 If $\mathcal{F}$ is a family of sets, 
 then by letting $I=\mathcal{F}$ and 
 $A_i = i \quad \forall i \in I$,
@@ -194,6 +196,8 @@ union and intersection by $\bigcup_{i=1}^{\infty}A_i$ and $\bigcap_{i=1}^{\infty
 
 
 ````{prf:proposition} Generalized distributive laws
+:label: res-st-generalized-distributive-laws
+
 $$
         &\left ( \bigcup_{i\in I} A_i \right ) \cap B = \bigcup_{i\in I}  \left ( A_i \cap B \right )\\
         &\left ( \bigcap_{i\in I} A_i \right ) \cup B = \bigcap_{i\in I}  \left ( A_i \cup B \right )
@@ -219,7 +223,9 @@ $\Power (A)$.
 In the following $X$ is a big fixed set (sort of a frame of reference) and 
 we will be considering different subsets of it.
 
-````{prf:remark}
+````{prf:remark} The subset satisfying a property
+:label: res-st-property-predicate
+
 Let $X$ be a fixed set. If $P(x)$ is a property well defined for all $x \in X$, then
 the set of all $x$ for which $P(x)$ is true is denoted by $\{x \in X \ST P(x)\}$.
 ````
@@ -231,6 +237,8 @@ Let $A$ be a set. Its *complement* w.r.t. a fixed set $X$ is the set  $A^c = X \
 ````
 
 ```{prf:proposition}
+:label: res-st-complement-properties
+
 Let $X$ be a fixed set, $A, B$ be subsets of $X$ and $A^c$ denote the
 complement of some subset $A$ of $X$ w.r.t. $X$.
 
@@ -258,6 +266,8 @@ notation specifying the two objects a and b, in that order.
 ```
 
 ```{prf:property} Equality of ordered pairs
+:label: res-st-ordered-pair-equality
+
 $$
 (a_1, a_2) = (b_1, b_2) \iff a_1 = b_1 \text{ and } a_2 = b_2.
 $$
@@ -284,6 +294,8 @@ The 0-tuple $()$ is an tuple containing $0$ elements.
 ```
 
 ```{prf:property} Equality of n-tuples
+:label: res-st-n-tuple-equality
+
 $$
 (a_1, a_2, \dots, a_n) = (b_1, b_2, \dots, b_n) \iff a_1 = b_1, a_2 = b_2, \dots, \text{ and } a_n = b_n.
 $$
@@ -330,11 +342,15 @@ The sets $A_i$ may be same of different.
 ```
 
 ```{prf:remark}
+:label: res-st-n-th-power-of-set
+
 If $A_1 = A_2 = \dots = A_n = A$, then it is standard to write
 $A_1 \times \dots \times A_n$ as $A^n$.
 ```
 
 ```{prf:example} $A^n$
+:label: ex-st-a-n-1
+
 
 Let $A = \{ 0, +1, -1\}$.
 
@@ -381,6 +397,8 @@ could be finite, countable or uncountable.
 ```
 
 ```{prf:example}
+:label: ex-st-cover-1
+
 1. The family $\{[n, n+1]\}_{n \in \ZZ}$ covers $\RR$.
 1. The family $\{[n-1, n]\}_{n \in \Nat}$ covers $\RR_{+}$.
 1. The family $\{(n-1, n+1)\}_{n \in \Nat}$ covers $\RR_{++}$.

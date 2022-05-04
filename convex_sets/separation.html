@@ -1,0 +1,1513 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.10. Separation Theorems &#8212; Optimization for Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.11. Continuity" href="continuity.html" />
+    <link rel="prev" title="6.9. Topology of Convex Sets" href="relint.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.5. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.6. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.7. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.8. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.3. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.4. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.5. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.6. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.7. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sym_matrices.html">
+     4.8. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.9. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.10. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.11. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   6. Convex Sets and Functions
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_spaces.html">
+     6.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex.html">
+     6.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rn_subsets.html">
+     6.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     6.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     6.5. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_functions.html">
+     6.6. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable.html">
+     6.7. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="function_ops.html">
+     6.8. Convexity Preserving Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="relint.html">
+     6.9. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.10. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="continuity.html">
+     6.11. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="subgradients.html">
+     6.12. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="conjugate_functions.html">
+     6.13. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="smoothness.html">
+     6.14. Smoothness
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   7. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     7.2. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     7.3. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     7.4. Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     7.5. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     7.6. Quadratic Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     7.7. Differentiable Objective Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   8. Proximal Operator
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/intro.html">
+     8.3. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/summary.html">
+     8.4. Chapter Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradient_methods/chapter.html">
+   9. Gradient Descent Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../selected/chapter.html">
+   11. Selected Functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/convex_sets/separation.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fconvex_sets/separation.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#types-of-separating-hyperplanes">
+   6.10.1. Types of Separating Hyperplanes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#disjoint-affine-and-convex-sets">
+   6.10.2. Disjoint Affine and Convex Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proper-separation-characterization">
+   6.10.3. Proper Separation Characterization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#separating-hyperplane-theorems">
+   6.10.4. Separating Hyperplane Theorems
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strong-separation-characterization">
+   6.10.5. Strong Separation Characterization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closed-convex-sets">
+   6.10.6. Closed Convex Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#supporting-hyperplanes">
+   6.10.7. Supporting Hyperplanes
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Separation Theorems</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#types-of-separating-hyperplanes">
+   6.10.1. Types of Separating Hyperplanes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#disjoint-affine-and-convex-sets">
+   6.10.2. Disjoint Affine and Convex Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proper-separation-characterization">
+   6.10.3. Proper Separation Characterization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#separating-hyperplane-theorems">
+   6.10.4. Separating Hyperplane Theorems
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strong-separation-characterization">
+   6.10.5. Strong Separation Characterization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closed-convex-sets">
+   6.10.6. Closed Convex Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#supporting-hyperplanes">
+   6.10.7. Supporting Hyperplanes
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="separation-theorems">
+<h1><span class="section-number">6.10. </span>Separation Theorems<a class="headerlink" href="#separation-theorems" title="Permalink to this headline">¶</a></h1>
+<p>Separation theorems provide us ways to find a separating hyperplane
+between two disjoint convex sets. Hyperplanes
+require the notion of an inner product.
+This subsection focuses on vector spaces
+which are real, finite dimensional and equipped
+with a real inner product <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle \to \RR\)</span>.</p>
+<div class="section" id="types-of-separating-hyperplanes">
+<h2><span class="section-number">6.10.1. </span>Types of Separating Hyperplanes<a class="headerlink" href="#types-of-separating-hyperplanes" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvx-separating-hyperplane">
+<p class="admonition-title"><span class="caption-number">Definition 6.57 </span> (Separating hyperplane)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+For any two convex subsets <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span>, a hyperplane
+<span class="math notranslate nohighlight">\(H\)</span> is said to <em>separate</em> <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> if
+<span class="math notranslate nohighlight">\(C\)</span> is contained in one of the closed halfspaces
+corresponding to <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(D\)</span> is contained in the other
+closed halfspace.</p>
+</div>
+</div><p>This definition allows for some degenerate possibilities where
+both <span class="math notranslate nohighlight">\(C \subseteq H\)</span> and <span class="math notranslate nohighlight">\(D \subseteq H\)</span> since the closed
+halfspaces contain <span class="math notranslate nohighlight">\(H\)</span> (as their boundary).</p>
+<div class="proof definition admonition" id="def-cvx-proper-separation">
+<p class="admonition-title"><span class="caption-number">Definition 6.58 </span> (Proper separation)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+For any two convex subsets <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span>, a hyperplane
+<span class="math notranslate nohighlight">\(H\)</span> is said to <em>properly separate</em> <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> if
+<span class="math notranslate nohighlight">\(H\)</span> separates them and both are not entirely contained
+in <span class="math notranslate nohighlight">\(H\)</span>; i.e., either <span class="math notranslate nohighlight">\(C \not\subseteq H\)</span> or <span class="math notranslate nohighlight">\(D \not\subseteq H\)</span>
+or both.</p>
+</div>
+</div><p>Proper separation still allows for the possibility that
+parts of <span class="math notranslate nohighlight">\(C\)</span> or <span class="math notranslate nohighlight">\(D\)</span> lies inside <span class="math notranslate nohighlight">\(H\)</span>. But it ensures that
+<span class="math notranslate nohighlight">\(C \triangle D \neq \EmptySet\)</span>.
+<span class="math notranslate nohighlight">\(C \cap D \subseteq H\)</span> is the common part.</p>
+<div class="proof definition admonition" id="def-cvx-strong-separation">
+<p class="admonition-title"><span class="caption-number">Definition 6.59 </span> (Strong separation)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+For any two convex subsets <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span>, a hyperplane
+<span class="math notranslate nohighlight">\(H\)</span> is said to <em>strongly separate</em> <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> if
+there exists an <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(C + r B\)</span> is contained in one of the open halfspaces
+corresponding to <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(D + rB\)</span> is contained in the other
+open halfspace.</p>
+</div>
+</div><div class="docutils">
+<p>Under these assumptions, one set lies in the interior of <span class="math notranslate nohighlight">\(H_{++}\)</span>
+and the other set lies in the interior of <span class="math notranslate nohighlight">\(H_{--}\)</span>.
+Under strong separation, <span class="math notranslate nohighlight">\(C \cap D = \EmptySet\)</span> is guaranteed
+since <span class="math notranslate nohighlight">\(H_{++} \cap H_{--} = \EmptySet\)</span>.</p>
+</div>
+<div class="proof remark admonition" id="rem-cvx-separation-translation-invariance">
+<p class="admonition-title"><span class="caption-number">Remark 6.8 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Separation is translation invariant.
+For any <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> and convex sets <span class="math notranslate nohighlight">\(C, D \subseteq \VV\)</span>,</p>
+<p><span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> are separated by a hyperplane <span class="math notranslate nohighlight">\(H\)</span> if and
+only if <span class="math notranslate nohighlight">\(C - \ba\)</span>, <span class="math notranslate nohighlight">\(D -\ba\)</span> are separated by the hyperplane <span class="math notranslate nohighlight">\(H - \ba\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="disjoint-affine-and-convex-sets">
+<h2><span class="section-number">6.10.2. </span>Disjoint Affine and Convex Sets<a class="headerlink" href="#disjoint-affine-and-convex-sets" title="Permalink to this headline">¶</a></h2>
+<p>Separation between sets can be discussed at several levels.
+We start with a simple case where an affine set
+and a relatively open convex set are disjoint.</p>
+<div class="proof theorem admonition" id="res-cvx-sep-affine-rel-open-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 6.149 </span> (Disjoint affine and relatively open convex sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty relatively open convex set of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(M \subseteq \VV\)</span> be an affine subspace such that
+<span class="math notranslate nohighlight">\(M \cap C = \EmptySet\)</span>.
+Then, there exists a hyperplane <span class="math notranslate nohighlight">\(H\)</span> such that <span class="math notranslate nohighlight">\(M \subseteq H\)</span>
+and one of the two open halfspaces associated with <span class="math notranslate nohighlight">\(H\)</span> contains
+<span class="math notranslate nohighlight">\(C\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider the case where <span class="math notranslate nohighlight">\(M\)</span> is a hyperplane. Then, <span class="math notranslate nohighlight">\(H = M\)</span>
+and the result is immediate.</p>
+<ol class="simple">
+<li><p>If for contradiction, <span class="math notranslate nohighlight">\(C\)</span> is not contained in one of the
+open halfspaces of <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(C \cap H \neq \EmptySet\)</span>  since <span class="math notranslate nohighlight">\(H\)</span> is the
+boundary of the halfspaces.</p></li>
+<li><p>It will contradict
+our hypothesis that <span class="math notranslate nohighlight">\(C \cap M = \EmptySet\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> must be in one of the open halfspaces of <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+</ol>
+<p>Now, assume that <span class="math notranslate nohighlight">\(M\)</span> is not a hyperplane.</p>
+<p>Without loss of generality, assume that <span class="math notranslate nohighlight">\(\bzero \in M\)</span>.
+We can do this by picking any element <span class="math notranslate nohighlight">\(\bm\)</span> of <span class="math notranslate nohighlight">\(M\)</span>
+and replacing <span class="math notranslate nohighlight">\(M\)</span> by <span class="math notranslate nohighlight">\(M - \bm\)</span> and <span class="math notranslate nohighlight">\(C\)</span> by <span class="math notranslate nohighlight">\(C - \bm\)</span>.
+Thus, <span class="math notranslate nohighlight">\(M\)</span> is a subspace.</p>
+<p>The proof is constructive. We iteratively construct
+subspaces of increasing dimension which contain <span class="math notranslate nohighlight">\(M\)</span>
+but don’t contain <span class="math notranslate nohighlight">\(C\)</span> till we reach a hyperplane.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\dim M = d\)</span> where <span class="math notranslate nohighlight">\(d  &lt; n\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(S = M\)</span> be the initial subspace.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r=n-1-d\)</span> be the number of iterations
+(if <span class="math notranslate nohighlight">\(M\)</span> is a hyperplane, no iterations are needed).</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(i=1,\dots,r\)</span>:</p>
+<ol class="simple">
+<li><p>Replace <span class="math notranslate nohighlight">\(S\)</span> by a subspace <span class="math notranslate nohighlight">\(S'\)</span> such that <span class="math notranslate nohighlight">\(\dim S' = \dim S + 1\)</span>
+and <span class="math notranslate nohighlight">\(S' \cap C = \EmptySet\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(S = S'\)</span></p></li>
+</ol>
+</li>
+<li><p>We have arrived with a hyperplane <span class="math notranslate nohighlight">\(S\)</span> such that <span class="math notranslate nohighlight">\(S \cap C = \EmptySet\)</span>.</p></li>
+</ol>
+<p>Towards this, let us look at the procedure to
+construct <span class="math notranslate nohighlight">\(S'\)</span> from <span class="math notranslate nohighlight">\(S\)</span> such that <span class="math notranslate nohighlight">\(\dim S' = \dim S + 1\)</span>
+and <span class="math notranslate nohighlight">\(S \cap C = \EmptySet\)</span>. Here is the outline</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(S^{\perp}\)</span> be the orthogonal complement of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Pick any 2D subspace <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\(S^{\perp}\)</span>.</p></li>
+<li><p>Pick a line <span class="math notranslate nohighlight">\(L\)</span> in <span class="math notranslate nohighlight">\(P\)</span> which passes through origin
+but doesn’t intersect with <span class="math notranslate nohighlight">\(C\)</span>; i.e. <span class="math notranslate nohighlight">\(L \cap C = \EmptySet\)</span>.</p></li>
+<li><p>Construct the subspace <span class="math notranslate nohighlight">\(S' = S \oplus L\)</span>.
+The direct sum is valid since <span class="math notranslate nohighlight">\(S \cap L = \{ \bzero \}\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\dim S' = \dim S + 1\)</span> and <span class="math notranslate nohighlight">\(S' \cap C = \EmptySet\)</span>
+since <span class="math notranslate nohighlight">\(S \cap C = \EmptySet\)</span> as well as <span class="math notranslate nohighlight">\(L \cap C = \EmptySet\)</span>.</p></li>
+</ol>
+<p>We now elaborate the procedure for finding the line <span class="math notranslate nohighlight">\(L\)</span>:</p>
+<ol>
+<li><p>We have <span class="math notranslate nohighlight">\(S\)</span> as a linear subspace with <span class="math notranslate nohighlight">\(\dim S &lt; n -1\)</span>
+and <span class="math notranslate nohighlight">\(S \cap C = \EmptySet\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\dim S^{\perp} = n  - \dim S &gt; n - (n - 1) = 1\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\dim S^{\perp} &gt; 1\)</span>, it contains a two dimensional subspace <span class="math notranslate nohighlight">\(P\)</span>.</p></li>
+<li><p>Consider the set <span class="math notranslate nohighlight">\(C' = P \cap (C - S)\)</span>.</p></li>
+<li><p>The set <span class="math notranslate nohighlight">\(C-S\)</span> has some properties.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(C-S\)</span> is convex since it is the sum of two convex sets.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bzero \in S\)</span>, hence <span class="math notranslate nohighlight">\(C = C - \bzero \subseteq C - S\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C \cap S = \EmptySet\)</span>, hence <span class="math notranslate nohighlight">\(\bzero \notin C - S\)</span>.</p></li>
+<li><p>Note that due to <a class="reference internal" href="relint.html#res-cvx-convex-sum-relint">Theorem 6.146</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+      \relint (C - S) = \relint C - \relint S = C - S
+      \]</div>
+<p>since <span class="math notranslate nohighlight">\(C\)</span> is relatively open and <span class="math notranslate nohighlight">\(S\)</span> is affine, hence relatively open.</p>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C - S\)</span> is relatively open.</p></li>
+</ol>
+</li>
+<li><p>Consequently, the set <span class="math notranslate nohighlight">\(C'\)</span> also has some properties.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(C'\)</span> is convex since it is the intersection of two convex sets.</p></li>
+<li><p>Since  <span class="math notranslate nohighlight">\(\bzero \notin C - S\)</span>,
+hence, <span class="math notranslate nohighlight">\(\bzero \not\in C' = P \cap (C - S)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C'\)</span> is relatively open.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(C'\)</span> is empty, then <span class="math notranslate nohighlight">\(C'\)</span> is relatively open vacuously.</p></li>
+<li><p>Otherwise, by
+<a class="reference internal" href="relint.html#res-cvx-convex-affine-intersect-pres-relint-cl">Theorem 6.144</a>:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+      \relint C' = \relint (P \cap (C - S)) = P \cap \relint (C - S) = P \cap (C- S).
+      \]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\relint C' = C'\)</span> implies that <span class="math notranslate nohighlight">\(C'\)</span> is relatively open.</p>
+</li>
+</ol>
+</li>
+<li><p>We now seek a line <span class="math notranslate nohighlight">\(L \subseteq P\)</span> passing through the origin <span class="math notranslate nohighlight">\(\bzero\)</span>
+that doesn’t intersect <span class="math notranslate nohighlight">\(C'\)</span>.</p></li>
+<li><p>We note that <span class="math notranslate nohighlight">\(L \cap C' = \EmptySet \implies L \cap C = \EmptySet\)</span>.</p>
+<ol class="simple">
+<li><p>Suppose for contradiction that
+<span class="math notranslate nohighlight">\(L \cap C' = \EmptySet\)</span> but <span class="math notranslate nohighlight">\(L \cap C \neq \EmptySet\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in L \cap C\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx \in L \subseteq P\)</span>.</p></li>
+<li><p>Also, <span class="math notranslate nohighlight">\(\bx \in C \subseteq C - S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in C' = P \cap (C - S)\)</span>.</p></li>
+<li><p>This means that <span class="math notranslate nohighlight">\(\bx \in L \cap C'\)</span>.</p></li>
+<li><p>In other words, <span class="math notranslate nohighlight">\(L \cap C' \neq \EmptySet\)</span> which
+contradicts our assumption.</p></li>
+</ol>
+</li>
+<li><p>How to choose <span class="math notranslate nohighlight">\(L\)</span>? There are three possibilities:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(C'\)</span> is empty.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C'\)</span> is contained in a line; i.e., <span class="math notranslate nohighlight">\(\dim \affine C' = 1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\affine C' = P\)</span> and <span class="math notranslate nohighlight">\(\dim \affine C' = 2\)</span>.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(\affine C'\)</span> cannot be larger than <span class="math notranslate nohighlight">\(P\)</span> since <span class="math notranslate nohighlight">\(C' \subseteq P\)</span>
+and <span class="math notranslate nohighlight">\(P\)</span> is affine.</p>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(C'\)</span> is empty, then any line in <span class="math notranslate nohighlight">\(P\)</span> passing through origin will do.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\affine C\)</span> is a line.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\affine C'\)</span> passes through the origin, we can take a line
+perpendicular to <span class="math notranslate nohighlight">\(\affine C'\)</span> passing through origin.
+In this case, <span class="math notranslate nohighlight">\(L \cap \affine C' = \{\bzero \}\)</span>.
+Since <span class="math notranslate nohighlight">\(\bzero \notin C'\)</span>, hence <span class="math notranslate nohighlight">\(L \cap C' = \EmptySet\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\affine C'\)</span> is a line that doesn’t pass through <span class="math notranslate nohighlight">\(\bzero\)</span>, we
+can simply take a line that is parallel to <span class="math notranslate nohighlight">\(\affine C'\)</span> and passes
+through <span class="math notranslate nohighlight">\(\bzero\)</span>. In this case <span class="math notranslate nohighlight">\(L \cap \affine C' = \EmptySet\)</span>.
+Consequently, <span class="math notranslate nohighlight">\(L \cap C' = \EmptySet\)</span>.</p></li>
+</ol>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(\affine C'\)</span> is the entire 2D subspace <span class="math notranslate nohighlight">\(P\)</span>.</p>
+<ol class="simple">
+<li><p>Consider the set <span class="math notranslate nohighlight">\(K = \bigcup \{t C' \ST t &gt; 0 \}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C' \subseteq K\)</span> (specifically, for <span class="math notranslate nohighlight">\(t = 0\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is a convex cone containing <span class="math notranslate nohighlight">\(C'\)</span> but not containing <span class="math notranslate nohighlight">\(\bzero\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is relatively open since <span class="math notranslate nohighlight">\(C'\)</span> is relatively open.</p></li>
+<li><p>A boundary ray of <span class="math notranslate nohighlight">\(K\)</span> doesn’t intersect with <span class="math notranslate nohighlight">\(C'\)</span> since
+<span class="math notranslate nohighlight">\(K\)</span> is relatively open.</p></li>
+<li><p>Take <span class="math notranslate nohighlight">\(L\)</span> to be any of the two boundary rays of <span class="math notranslate nohighlight">\(K\)</span> and extend
+it to a line passing through <span class="math notranslate nohighlight">\(\bzero\)</span>.</p></li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="proper-separation-characterization">
+<h2><span class="section-number">6.10.3. </span>Proper Separation Characterization<a class="headerlink" href="#proper-separation-characterization" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvx-proper-sep-charac">
+<p class="admonition-title"><span class="caption-number">Theorem 6.150 </span> (Characterization of proper separation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real inner product space.
+Let <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> be nonempty subsets of <span class="math notranslate nohighlight">\(\VV\)</span>. There exists
+a hyperplane <span class="math notranslate nohighlight">\(H\)</span> that separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> <em>properly</em>
+if and only if there exists a vector <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+\geq \sup \{ \langle \bx, \ba \rangle \ST \bx \in T \}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+&gt;  \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume that there is some vector <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>
+satisfying the conditions above.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(\ba\)</span> satisfies the second strict inequality,
+hence <span class="math notranslate nohighlight">\(\ba \neq \bzero\)</span>. Otherwise, the second
+inequality cannot hold.</p></li>
+<li><p>Choose any <span class="math notranslate nohighlight">\(b \in \RR\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \underset{\bx \in S}{\inf}\{ \langle \bx, \ba \rangle \}
+   \geq b \geq 
+   \underset{\bx \in S}{\sup}\{ \langle \bx, \ba \rangle \}.
+   \]</div>
+</li>
+<li><p>Then, the set <span class="math notranslate nohighlight">\(H = \{ \bx \ST \langle \bx, \ba \rangle = b \}\)</span>
+is a hyperplane.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(H_+ = \{ \bx \ST \langle \bx, \ba \rangle \geq b \}\)</span>
+and <span class="math notranslate nohighlight">\(H_- = \{ \bx \ST \langle \bx, \ba \rangle \leq b \}\)</span>.</p></li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\(S \subseteq H_+\)</span> and <span class="math notranslate nohighlight">\(T \subseteq H_-\)</span>.</p></li>
+<li><p>The second strict inequality ensures that both <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> cannot
+be contained in <span class="math notranslate nohighlight">\(H\)</span>.</p>
+<ol class="simple">
+<li><p>For contradiction, assume <span class="math notranslate nohighlight">\(S \subseteq H\)</span> and <span class="math notranslate nohighlight">\(T \subseteq H\)</span></p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} = b\)</span>
+and <span class="math notranslate nohighlight">\(\inf \{ \langle \bx, \ba \rangle \ST \bx \in T \} = b\)</span>.</p></li>
+<li><p>Thus, the second inequality will not hold.</p></li>
+</ol>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are properly separated.</p></li>
+</ol>
+<p>Now, assume that <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are properly separated by
+some hyperplane <span class="math notranslate nohighlight">\(H\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(H = \{ \bx \ST \langle \bx, \ba \rangle = b \}\)</span> be
+the specification of the said hyperplane.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(H_+ = \{ \bx \ST \langle \bx, \ba \rangle \geq b \}\)</span>
+and <span class="math notranslate nohighlight">\(H_- = \{ \bx \ST \langle \bx, \ba \rangle \leq b \}\)</span>.</p></li>
+<li><p>Without loss of generality, assume that <span class="math notranslate nohighlight">\(S \subseteq H_+\)</span>
+and <span class="math notranslate nohighlight">\(T \subseteq H_+\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle \geq b\)</span> for every <span class="math notranslate nohighlight">\(\bx \in S\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} \geq b\)</span>.</p></li>
+<li><p>Similarly, <span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle \leq b\)</span> for every <span class="math notranslate nohighlight">\(\bx \in T\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle \ST \bx \in T \} \leq b\)</span>.</p></li>
+<li><p>Thus, the first inequality is satisfied.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(H\)</span> properly separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span>, hence
+either <span class="math notranslate nohighlight">\(S \not\subseteq H\)</span> or <span class="math notranslate nohighlight">\(T \not\subseteq H\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(S \not\subseteq H\)</span>,
+then there exists <span class="math notranslate nohighlight">\(\bx \in S\)</span> such that <span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle &gt; b\)</span>.</p></li>
+<li><p>Consequently, <span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} &gt; b\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(T \not\subseteq H\)</span>,
+then there exists <span class="math notranslate nohighlight">\(\bx \in T\)</span> such that
+<span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle &lt; b\)</span>.</p></li>
+<li><p>Consequently, <span class="math notranslate nohighlight">\(\inf \{ \langle \bx, \ba \rangle \ST \bx \in T \} &lt; b\)</span>.</p></li>
+<li><p>Combining,</p>
+<div class="math notranslate nohighlight">
+\[
+   \sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+   &gt;  \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \}
+   \]</div>
+<p>must be true.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="separating-hyperplane-theorems">
+<h2><span class="section-number">6.10.4. </span>Separating Hyperplane Theorems<a class="headerlink" href="#separating-hyperplane-theorems" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvx-sep-plan-1">
+<p class="admonition-title"><span class="caption-number">Theorem 6.151 </span> (Separating hyperplane theorem I)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real inner product space.
+Let <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> be nonempty convex subsets of <span class="math notranslate nohighlight">\(\VV\)</span>. There exists
+a hyperplane <span class="math notranslate nohighlight">\(H\)</span> that separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> <em>properly</em>
+if and only if <span class="math notranslate nohighlight">\(\relint S \cap \relint T = \EmptySet\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C = S - T\)</span>.</p>
+<ol class="simple">
+<li><p>By <a class="reference internal" href="relint.html#res-cvx-nonempty-relint">Theorem 6.131</a>,
+<span class="math notranslate nohighlight">\(\relint S\)</span> and <span class="math notranslate nohighlight">\(\relint T\)</span> are nonempty
+since <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are nonempty convex sets.</p></li>
+<li><p>By <a class="reference internal" href="relint.html#res-cvx-convex-sum-relint">Theorem 6.146</a>,
+<span class="math notranslate nohighlight">\(\relint C = \relint S - \relint T\)</span>
+and it is nonempty.</p></li>
+<li><p>Note that, <span class="math notranslate nohighlight">\(\bzero \notin \relint C\)</span> if and only if
+<span class="math notranslate nohighlight">\(\relint S \cap \relint T = \EmptySet\)</span>.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\bzero \in \relint C\)</span> then there exists
+<span class="math notranslate nohighlight">\(\bx \in \relint S \cap \relint T\)</span> such that
+<span class="math notranslate nohighlight">\(\bx - \bx = \bzero\)</span>.</p></li>
+</ol>
+</li>
+</ol>
+<p>Now assume that <span class="math notranslate nohighlight">\(\relint S \cap \relint T = \EmptySet\)</span>.</p>
+<ol>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bzero \notin \relint C\)</span>.</p></li>
+<li><p>Consider the affine set <span class="math notranslate nohighlight">\(M = \{ \bzero \}\)</span>.</p></li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\(M \cap \relint C = \EmptySet\)</span> and <span class="math notranslate nohighlight">\(\relint C\)</span>
+is relatively open.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvx-sep-affine-rel-open-convex">Theorem 6.149</a>,
+there exists a hyperplane containing <span class="math notranslate nohighlight">\(M\)</span> such that
+<span class="math notranslate nohighlight">\(\relint C\)</span> is a subset of one of its associated open halfspaces.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(H\)</span> be this hyperplane given by
+<span class="math notranslate nohighlight">\(H = \{\bx \ST \langle \bx, \ba \rangle = 0\}\)</span>.
+Since the hyperplane contains <span class="math notranslate nohighlight">\(M\)</span>, hence it is a subspace.</p></li>
+<li><p>By <a class="reference internal" href="relint.html#res-cvx-convex-relint-closure">Theorem 6.138</a>,
+<span class="math notranslate nohighlight">\( C \subseteq \closure C \subseteq \closure \relint C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is contained in the corresponding closed halfspace.</p></li>
+<li><p>Without loss of generality, assume that <span class="math notranslate nohighlight">\(C\)</span> is contained
+in the nonnegative halfspace <span class="math notranslate nohighlight">\(H_+\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\inf \{ \langle \bx, \ba \rangle  \ST \bx \in C\} \geq 0\)</span>.</p></li>
+<li><p>This means that</p>
+<div class="math notranslate nohighlight">
+\[
+   \inf \{ \langle \bx, \ba \rangle  \ST \bx \in C\}
+   = \inf \{ \langle \bx, \ba \rangle  \ST \bx \in S\}
+     - \sup \{ \langle \bx, \ba \rangle  \ST \bx \in T\} \geq 0.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \inf \{ \langle \bx, \ba \rangle  \ST \bx \in S\} \geq
+   \sup \{ \langle \bx, \ba \rangle  \ST \bx \in T\}.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\relint C \in H_{++}\)</span>, there exists <span class="math notranslate nohighlight">\(\bx \in C\)</span>,
+such that <span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle &gt; 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} &gt; 0\)</span>.</p></li>
+<li><p>But then,</p>
+<div class="math notranslate nohighlight">
+\[
+   \sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} 
+   = \sup \{ \langle \bx, \ba \rangle  \ST \bx \in S\}
+   - \inf \{ \langle \bx, \ba \rangle  \ST \bx \in T\} &gt; 0. 
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \sup \{ \langle \bx, \ba \rangle  \ST \bx \in S\} &gt; 
+   \inf \{ \langle \bx, \ba \rangle  \ST \bx \in T\}.
+   \]</div>
+</li>
+<li><p>Then, by <a class="reference internal" href="#res-cvx-proper-sep-charac">Theorem 6.150</a>,
+<span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are properly separated.</p></li>
+</ol>
+<p>Now, for the converse, assume that <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are
+properly separated. Thus,
+there exists a vector <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+\geq \sup \{ \langle \bx, \ba \rangle \ST \bx \in T \}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+&gt;  \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \}.
+\]</div>
+<ol>
+<li><p>From the first inequality, we get that
+<span class="math notranslate nohighlight">\(\inf \{ \langle \bx, \ba \rangle  \ST \bx \in C\} \geq 0\)</span>.</p></li>
+<li><p>From the second inequality, we get that
+<span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} &gt; 0\)</span>.</p></li>
+<li><p>Thus, there exists a hyperplane <span class="math notranslate nohighlight">\(H\)</span> given by
+<span class="math notranslate nohighlight">\(H = \{\bx \ST \langle \bx, \ba \rangle = 0\}\)</span>
+such that the corresponding nonnegative closed halfspace
+<span class="math notranslate nohighlight">\(H_+ =  \{\bx \ST \langle \bx, \ba \rangle \geq 0\}\)</span>
+contains <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Note that</p>
+<div class="math notranslate nohighlight">
+\[
+   \interior H_+ = \relint H_+ = 
+   H_{++} = \{\bx \ST \langle \bx, \ba \rangle &gt; 0\}.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\sup \{ \langle \bx, \ba \rangle  \ST \bx \in C\} &gt; 0\)</span>,
+hence <span class="math notranslate nohighlight">\(H_{++} \cap C \neq \EmptySet\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C \subseteq \closure H_{++} = H_+\)</span>
+but <span class="math notranslate nohighlight">\(C \not\subseteq \closure H_{++} \setminus \relint H_{++}
+= H_+ \setminus H_{++} = H\)</span>.</p></li>
+<li><p>Thus, by <a class="reference internal" href="relint.html#res-cvx-nonbd-cl-subset-interior">Theorem 6.145</a>,
+<span class="math notranslate nohighlight">\(\relint C \subseteq \relint H_{++} = H_{++}\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bzero \notin \relint C\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\relint S \cap \relint T = \EmptySet\)</span>.</p></li>
+</ol>
+<p>We are done.</p>
+</div>
+<div class="proof corollary admonition" id="res-cvx-separating-hyperplane">
+<p class="admonition-title"><span class="caption-number">Corollary 6.10 </span> (Separating hyperplane theorem II)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real inner product space.
+Let <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> be nonempty disjoint convex subsets of <span class="math notranslate nohighlight">\(\VV\)</span>;
+i.e., <span class="math notranslate nohighlight">\(S \cap T = \EmptySet\)</span>.</p>
+<p>Then, there exists a hyperplane that properly separates them.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(S \cap T = \EmptySet\)</span>, hence <span class="math notranslate nohighlight">\(\relint S \cap \relint T = \EmptySet\)</span>.
+Then, applying <a class="reference internal" href="#res-cvx-sep-plan-1">Theorem 6.151</a>, there exists
+a hyperplane that properly separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span>.</p>
+</div>
+<p>Disjointness of convex sets is not enough for
+strong separation as their closures might meet.</p>
+</div>
+<div class="section" id="strong-separation-characterization">
+<h2><span class="section-number">6.10.5. </span>Strong Separation Characterization<a class="headerlink" href="#strong-separation-characterization" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvx-strong-sep-charac">
+<p class="admonition-title"><span class="caption-number">Theorem 6.152 </span> (Characterization of strong separation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real inner product space.
+Let <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> be nonempty convex subsets of <span class="math notranslate nohighlight">\(\VV\)</span>. There exists
+a hyperplane <span class="math notranslate nohighlight">\(H\)</span> that separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> <em>strongly</em>
+if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} &gt; 0.
+\]</div>
+<p>In other words, <span class="math notranslate nohighlight">\(H\)</span> strongly separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span>
+if and only if <span class="math notranslate nohighlight">\(\bzero \notin \closure (S - T)\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C = S-T\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \}
+= \inf \{ \| \bv \| \ST \bv \in C \}.
+\]</div>
+<p>By <a class="reference internal" href="../la/normed_spaces.html#res-la-set-zero-infimum">Theorem 4.51</a>,
+<span class="math notranslate nohighlight">\(\inf \{ \| \bv \| \ST \bv \in C \} = 0\)</span>
+if and only if <span class="math notranslate nohighlight">\(\bzero \in \closure C\)</span>.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(\inf \{ \| \bv \| \ST \bv \in C \} &gt; 0\)</span>
+if and only if <span class="math notranslate nohighlight">\(\bzero \notin \closure C\)</span>.</p>
+<p>Assume that <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are strongly separated.
+Let <span class="math notranslate nohighlight">\(H\)</span> be the hyperplane that separates <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span>.
+Let <span class="math notranslate nohighlight">\(H_{++}\)</span> be the positive open halfspace.
+Let <span class="math notranslate nohighlight">\(H_{--}\)</span> be the negative open halfspace.</p>
+<ol>
+<li><p>Then, there exists an <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(S + r B \subseteq H_{++}\)</span>
+and <span class="math notranslate nohighlight">\(T + rB \subseteq H_{--}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(H_{++} \cap H_{--} = \EmptySet\)</span>,
+hence <span class="math notranslate nohighlight">\((S + r B) \cap (T + r B) = \EmptySet\)</span>.</p></li>
+<li><p>Then, for any <span class="math notranslate nohighlight">\(\bx \in S\)</span> and <span class="math notranslate nohighlight">\(\by \in T\)</span> and  every <span class="math notranslate nohighlight">\(\bu, \bv \in B\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bx + r \bu - (\by + r\bv ) \| &gt; 0
+   \]</div>
+<p>as <span class="math notranslate nohighlight">\(\bx + r \bu = \by + r \bv\)</span> would mean that
+<span class="math notranslate nohighlight">\((S + r B) \cap (T + r B) \neq \EmptySet\)</span></p>
+</li>
+<li><p>Note that,
+<span class="math notranslate nohighlight">\(\| \bx + r \bu - (\by + r\bv ) \| = \| (\bx - \by) - r (\bv - \bu) \|\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\| \bx - \by \| \geq 2 r\)</span> must be true for every <span class="math notranslate nohighlight">\(\bx \in S\)</span> and <span class="math notranslate nohighlight">\(\by \in T\)</span>.</p>
+<ol class="simple">
+<li><p>For contradiction, assume that <span class="math notranslate nohighlight">\(\| \bx - \by \| &lt; 2 r\)</span>
+for some <span class="math notranslate nohighlight">\(\bx \in S\)</span> and <span class="math notranslate nohighlight">\(\by \in T\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu = \frac{1}{2r} (\by - \bx)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv = \frac{1}{2r} (\bx - \by)\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\| \bu \| &lt; 1\)</span> and <span class="math notranslate nohighlight">\(\| \bv \| &lt; 1\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bu, \bv \in B\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(r (\bv - \bu) = \bx - \by\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\| (\bx - \by) - r (\bv - \bu) \| = \| \bzero \| = 0\)</span>.</p></li>
+<li><p>This contradicts the condition that
+<span class="math notranslate nohighlight">\(\| \bx + r \bu - (\by + r\bv ) \| &gt; 0\)</span>
+for every <span class="math notranslate nohighlight">\(\bx \in S\)</span>, <span class="math notranslate nohighlight">\(\by \in T\)</span> and <span class="math notranslate nohighlight">\(\bu, \bv \in B\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} &gt; 0\)</span>.</p></li>
+</ol>
+<p>Conversely, assume that
+<span class="math notranslate nohighlight">\(\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} &gt; 0\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} = 2 r\)</span> where <span class="math notranslate nohighlight">\(r &gt; 0\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\| \bx - \by \| \geq 2 r \Forall \bx \in S, \by \in T\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\((S + rB) \cap (T + rB) = \EmptySet\)</span>.</p>
+<ol>
+<li><p>For contradiction, assume that <span class="math notranslate nohighlight">\((S + rB) \cap (T + rB) \neq \EmptySet\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\ba \in (S + rB) \cap (T + rB)\)</span>.</p></li>
+<li><p>Then, there exists <span class="math notranslate nohighlight">\(\bx \in S\)</span> and <span class="math notranslate nohighlight">\(\bu \in B\)</span> such that <span class="math notranslate nohighlight">\(\ba = \bx + r \bu\)</span>.</p></li>
+<li><p>And, there exists <span class="math notranslate nohighlight">\(\by \in T\)</span> and <span class="math notranslate nohighlight">\(\bv \in B\)</span> such that <span class="math notranslate nohighlight">\(\ba = \by + r \bv\)</span>.</p></li>
+<li><p>Then, <span class="math notranslate nohighlight">\(\bx + r \bu = \by + r \bv\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx - \by = r (\bv - \bu)\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+      \| \bx - \by \| = r \| \bv - \bu \|
+      \leq r (\| \bv \| + \| \bu \|) &lt; r (1 + 1) = 2 r.
+      \]</div>
+</li>
+<li><p>This contradictions our hypothesis that
+<span class="math notranslate nohighlight">\(\| \bx - \by \| \geq 2 r \Forall \bx \in S, \by \in T\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(S +rB\)</span> and <span class="math notranslate nohighlight">\(T + rB\)</span> are convex and disjoint.</p></li>
+<li><p>Then, due to <a class="reference internal" href="#res-cvx-separating-hyperplane">Corollary 6.10</a>,
+there exists a hyperplane <span class="math notranslate nohighlight">\(H\)</span> which separates <span class="math notranslate nohighlight">\(S + rB\)</span> and <span class="math notranslate nohighlight">\(T + rB\)</span>
+properly.</p></li>
+<li><p>We can choose <span class="math notranslate nohighlight">\(H\)</span> so that <span class="math notranslate nohighlight">\(S + rB \subseteq H_+\)</span> and
+<span class="math notranslate nohighlight">\(T + rB \subseteq H_-\)</span>.</p></li>
+<li><p>But then, <span class="math notranslate nohighlight">\(S + \frac{r}{2} B \in H_{++}\)</span> and
+<span class="math notranslate nohighlight">\(T + \frac{r}{2} B \in H_{--}\)</span> lie in
+the opposite open halfspaces.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are strongly separated.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="closed-convex-sets">
+<h2><span class="section-number">6.10.6. </span>Closed Convex Sets<a class="headerlink" href="#closed-convex-sets" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvxf-cl-convex-set-strict-separation">
+<p class="admonition-title"><span class="caption-number">Theorem 6.153 </span> (Strict separation theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a nonempty closed convex set.
+Let <span class="math notranslate nohighlight">\(\by \notin C\)</span>. Then, there exists <span class="math notranslate nohighlight">\(\bp \in \VV^*\)</span>
+and <span class="math notranslate nohighlight">\(\alpha \in \RR\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \by , \bp \rangle &gt; \alpha
+\text{ and }
+\langle \bx, \bp \rangle \leq \alpha \Forall \bx \in C.
+\]</div>
+<p>In other words, there exists a separating hyperplane
+such that <span class="math notranslate nohighlight">\(C\)</span> is contained in one of its (closed) halfspaces
+and <span class="math notranslate nohighlight">\(\by\)</span> is not in that halfspace (i.e., it is in the opposite open halfspace).</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is an application of strong separation.</p>
+<ol>
+<li><p>Define a set <span class="math notranslate nohighlight">\(D = \{ \by \}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is closed and <span class="math notranslate nohighlight">\(\by \notin C\)</span>, hence
+<span class="math notranslate nohighlight">\(\by\)</span> is not a closure point of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Thus, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(B(\by, r) \cap C = \EmptySet\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(d(C, D) \geq r\)</span>.</p></li>
+<li><p>Then, by <a class="reference internal" href="#res-cvx-strong-sep-charac">Theorem 6.152</a>,
+<span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> are strongly separated.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(H\)</span> be a hyperplane which strongly separates them.</p></li>
+<li><p>Then one of the closed halfspaces of <span class="math notranslate nohighlight">\(H\)</span> contains <span class="math notranslate nohighlight">\(C\)</span>
+but not <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(H\)</span> be described by</p>
+<div class="math notranslate nohighlight">
+\[
+   H = \{ \bx \in \VV \ST \langle \bx, \bp \rangle = \alpha \}.
+   \]</div>
+</li>
+<li><p>We can negate <span class="math notranslate nohighlight">\(\bp, \alpha\)</span> if necessary so that</p>
+<div class="math notranslate nohighlight">
+\[
+   C \subseteq H_- = \{ \bx \in \VV \ST \langle \bx, \bp \rangle \leq \alpha \}.
+   \]</div>
+</li>
+<li><p>Accordingly, <span class="math notranslate nohighlight">\(\langle \by, \bp \rangle &gt; \alpha\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvx-closed-convex-halfspace-intersection">
+<p class="admonition-title"><span class="caption-number">Theorem 6.154 </span> (Closed Convex = Intersection of Halfspaces)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+A closed convex set <span class="math notranslate nohighlight">\(C\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span> is the intersection of
+all the closed halfspaces that contain it.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The set <span class="math notranslate nohighlight">\(\VV\)</span> is closed and convex but no halfspace contains
+it. So the statement is vacuously true.</p>
+<p>The empty set is closed and convex and every halfspace
+contains it. The intersection of all halfspaces<br />
+is the empty set. Thus, the statement is vacuously true.</p>
+<p>Let us assume that <span class="math notranslate nohighlight">\(C\)</span> is nonempty and not equal to <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> such that <span class="math notranslate nohighlight">\(\ba \notin C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is closed, hence <span class="math notranslate nohighlight">\(\ba\)</span> is not a closure point of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Thus, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B(\ba, r) \cap C = \EmptySet\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \ba - \bx \| &gt; 0 \Forall \bx \in C\)</span>.
+Specifically, <span class="math notranslate nohighlight">\(\inf \{ \| \ba - \bx \|  \ST \bx \in C \} \geq r\)</span>.</p></li>
+<li><p>Thus, by <a class="reference internal" href="#res-cvx-strong-sep-charac">Theorem 6.152</a>, <span class="math notranslate nohighlight">\(\{ \ba \}\)</span>
+and <span class="math notranslate nohighlight">\(C\)</span> are strongly separated by some hyperplane <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+<li><p>Thus, one of the corresponding closed halfspaces contains <span class="math notranslate nohighlight">\(C\)</span> but not <span class="math notranslate nohighlight">\(\ba\)</span>.</p></li>
+<li><p>In other words, for every <span class="math notranslate nohighlight">\(\ba \notin C\)</span>, there exists a
+closed halfspace that doesn’t contain <span class="math notranslate nohighlight">\(\ba\)</span> but contains <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Thus, the intersection of all halfspaces containing <span class="math notranslate nohighlight">\(C\)</span> cannot
+contain any element from <span class="math notranslate nohighlight">\(\VV \setminus C\)</span>.</p>
+<ol class="simple">
+<li><p>If the intersection contained an element <span class="math notranslate nohighlight">\(\ba \notin C\)</span>,
+then there would be a closed halfspace containing <span class="math notranslate nohighlight">\(C\)</span> but not <span class="math notranslate nohighlight">\(\ba\)</span>
+which would mean that the intersection of all halfspaces
+containing <span class="math notranslate nohighlight">\(C\)</span> cannot contain <span class="math notranslate nohighlight">\(\ba\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Hence, the intersection of all closed halfspaces containing <span class="math notranslate nohighlight">\(C\)</span>
+is exactly equal to <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="supporting-hyperplanes">
+<h2><span class="section-number">6.10.7. </span>Supporting Hyperplanes<a class="headerlink" href="#supporting-hyperplanes" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvx-supporting-hyperplane">
+<p class="admonition-title"><span class="caption-number">Definition 6.60 </span> (Supporting hyperplane and halfspaces)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+Let <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span>. Let <span class="math notranslate nohighlight">\(\bx_0 \in \boundary S\)</span> be a point
+on its boundary.</p>
+<p>If there exists a nonzero vector <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> such that
+<span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle \leq \langle \bx_0, \ba \rangle\)</span>
+for every <span class="math notranslate nohighlight">\(\bx \in S\)</span>,
+then the hyperplane <span class="math notranslate nohighlight">\(H\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+H = \{ \bx \ST \langle \bx, \ba \rangle = \langle \bx_0, \ba \rangle \}
+\]</div>
+<p>is called a <em>supporting hyperplane</em> of <span class="math notranslate nohighlight">\(S\)</span> at <span class="math notranslate nohighlight">\(\bx_0\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(H\)</span> separates <span class="math notranslate nohighlight">\(\{ \bx_0 \}\)</span> and <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(H\)</span> contains <span class="math notranslate nohighlight">\(\bx_0\)</span>.
+The halfspace
+<span class="math notranslate nohighlight">\( \{ \bx \ST \langle (\bx - \bx_0), \ba \rangle \leq 0 \}\)</span>
+corresponding to <span class="math notranslate nohighlight">\(H\)</span> is called a <em>supporting halfspace</em>
+of <span class="math notranslate nohighlight">\(S\)</span> at <span class="math notranslate nohighlight">\(\bx_0\)</span>.</p>
+</div>
+</div><p>Convex sets have this beautiful property that there exists
+a supporting hyperplane at every point in the boundary of the
+set.</p>
+<div class="proof theorem admonition" id="res-cvx-supporting-hyperplane-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 6.155 </span> (Supporting hyperplane theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in \boundary C\)</span> be any point in the boundary of <span class="math notranslate nohighlight">\(C\)</span>.
+Then, there exists a supporting hyperplane to <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider the case where <span class="math notranslate nohighlight">\(\interior C = \EmptySet\)</span>.</p>
+<ol class="simple">
+<li><p>Then, due to <a class="reference internal" href="relint.html#res-cvx-convex-set-empty-interior">Theorem 6.114</a>,
+<span class="math notranslate nohighlight">\(\dim \affine C &lt; n\)</span>.</p></li>
+<li><p>Thus, there exists a hyperplane <span class="math notranslate nohighlight">\(H\)</span> such that <span class="math notranslate nohighlight">\(\affine C \subseteq H\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional, hence <span class="math notranslate nohighlight">\(H\)</span> is closed
+(<a class="reference internal" href="../la/affine.html#res-la-affine-closed">Theorem 4.168</a>).</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\closure C \subseteq H\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in H\)</span>.</p></li>
+<li><p>This <span class="math notranslate nohighlight">\(H\)</span> trivially separates <span class="math notranslate nohighlight">\(\{ \bx \}\)</span> and <span class="math notranslate nohighlight">\(C\)</span> as both are
+contained in <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+</ol>
+<p>Now, assume that <span class="math notranslate nohighlight">\(\interior C \neq \EmptySet\)</span>.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\dim \affine C = n\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\relint C = \interior C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in \boundary C\)</span>, hence the sets
+<span class="math notranslate nohighlight">\(\{ \bx \}\)</span> and <span class="math notranslate nohighlight">\(\interior C\)</span> are disjoint.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\relint \{ \bx \} = \{ \bx \}\)</span> (<a class="reference internal" href="relint.html#res-cvx-relint-singleton">Theorem 6.122</a>).</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(\relint \{ \bx \} \cap \relint C = \EmptySet\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvx-sep-plan-1">Theorem 6.151</a>, there exists
+a hyperplane <span class="math notranslate nohighlight">\(H\)</span> that separates <span class="math notranslate nohighlight">\(\{\bx \}\)</span> and <span class="math notranslate nohighlight">\(C\)</span> properly.</p></li>
+<li><p>Consequently <span class="math notranslate nohighlight">\(C\)</span> lies entirely in one of the closed halfspaces
+of <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="res-cvx-closed-convex-intersect-supporting">
+<p class="admonition-title"><span class="caption-number">Corollary 6.11 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real <span class="math notranslate nohighlight">\(n\)</span>-dimensional inner product space.
+A closed convex set <span class="math notranslate nohighlight">\(C\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span> is the intersection of
+all the supporting halfspaces that contain it.</p>
+</div>
+</div></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./convex_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="relint.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.9. </span>Topology of Convex Sets</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="continuity.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.11. </span>Continuity</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -31,6 +31,8 @@ $\{ x_n \}$ converges to some real number $x$
 if and only if for each $\epsilon > 0$, the terms $x_n$ are eventually $\epsilon$-close to $x$.
 
 ````{prf:example} Sequence convergence
+:label: ex-bra-seq-converge-1
+
 Consider the sequence $\{ x_n \}$, where $x_n = \frac{1}{\sqrt{n}}$.
 For a given $\epsilon > 0$, choose $n_0 > \frac{1}{\epsilon^2}$. 
 Then, for every $n > n_0$, we have 
@@ -102,6 +104,8 @@ Let $X = \{ x_n \}$ be a sequence of $\RR$.
 ```
 
 ```{prf:remark}
+:label: rem-bra-seq-ub-lub-gb-glb
+
 Due to the {prf:ref}`completeness axiom <axm-rl-completeness-axiom>`,
 if a sequence $\{x_n\}$ has an upper bound, it has a least upper bound
 denoted by $\sup\{ x_n \}$ and if it has a lower bound, it has a 
@@ -185,6 +189,7 @@ A decreasing sequence is bounded from above. Its least
 upper bound is $x_1$.
 
 ```{prf:remark} Unbounded increasing sequences
+:label: rem-bra-seq-unbounded-increasing
 
 Let $\{x_n\}$ be an increasing and unbounded sequence. 
 Then for every $M > 0$, there exists $n_0 \in \Nat$ such that
@@ -192,6 +197,7 @@ for every $n > n_0$, $x_n > M$.
 ```
 
 ```{prf:remark} Unbounded decreasing sequences
+:label: rem-bra-seq-unbounded-decreasing
 
 Let $\{x_n\}$ be an decreasing and unbounded sequence. 
 Then for every $M < 0$, there exists $n_0 \in \Nat$ such that
@@ -577,6 +583,7 @@ $$
 ````
 
 ````{prf:example} Convergent series
+:label: ex-bra-seq-convergent-series-1
 
 Consider
 
@@ -601,6 +608,7 @@ $$
 ````
 
 ````{prf:example} Harmonic series
+:label: ex-bra-seq-harmonic-series-1
 
 Consider
 
@@ -793,6 +801,8 @@ for every $\epsilon > 0$, there exists $n_0 \in \Nat$ (depending on $\epsilon$)
 such that whenever $m, n > n_0$ it follows that $| x_m - x_n | < \epsilon$.
 ````
 ````{prf:remark}
+:label: rem-bra-seq-cauchy-m-n
+
 A little thought would show that  saying $m, n > n_0$ or $m, n \geq n_1$ doesn't make much difference
 in the definition. The two thresholds can be related by : $n_1 = n_0 + 1$.
 ````
@@ -894,8 +904,582 @@ We will fix $n$ and vary $n$ to compute the limit inequalities.
 1. Taking the limit on the sequence $x_m$ (in L.H.S.), we get: $x - \epsilon \leq x_n$.
 1. Consider the strict inequality: $x_n < x_m + \epsilon$ for all $m > n_0$.
 1. Taking the limit on the sequence $x_m$ (in R.H.S.), we get: $x_n \leq x + \epsilon$.
-1. Together, we get: $$x - \epsilon \leq x_n \leq x + \epsilon$.
+1. Together, we get: $x - \epsilon \leq x_n \leq x + \epsilon$.
 1. Combining, we get $|x_n -x| \leq \epsilon$ for all $n > n_0$.
 
 See also {prf:ref}`ex-bra-order-limit-strict-inequality`.
 ```
+
+
+## Limit Inferior and Limit Superior
+
+
+```{prf:theorem} Sequences of partial suprema and infima
+:label: res-bra-bounded-seq-sup-inf-subseq-converg
+
+Let $\{ x_n \}$ be a sequence of $\RR$. 
+Define
+
+$$
+s_n = \sup \{ x_k \ST k \geq n\}
+$$
+and
+
+$$
+t_n = \inf \{ x_k \ST k \geq n\}.
+$$
+
+If $\{ x_n \}$ is not bounded above, then
+
+$$
+\lim_{n \to \infty} s_n = \infty.
+$$
+
+If $\{ x_n \}$ is not bounded below, then
+
+$$
+\lim_{n \to \infty} t_n = -\infty.
+$$
+
+If $\{x_n\}$ is bounded from above, then
+$\{ s_n \}$ is a nonincreasing sequence.
+
+If $\{x_n\}$ is bounded from below, then
+$\{ t_n \}$ is a nondecreasing sequence.
+
+If $\{ x_n \}$ is bounded, then both the sequences
+$\{ s_n \}$ and $\{ t_n \}$ are convergent.
+```
+
+```{prf:proof}
+
+Let $\{x_n \}$ not be bounded from above. 
+
+1. Then, for any $n \in \Nat$, the set $\{ x_k \ST k \geq n \}$ is also
+   not bounded from above.
+1. Thus, $s_n = \sup \{ x_k \ST k \geq n\} = \infty$ for all $n \in \Nat$.
+1. Thus, $\lim_{n \to \infty} s_n = \infty$.
+
+
+Let $\{x_n \}$ not be bounded from below. 
+
+1. Then, for any $n \in \Nat$, the set $\{ x_k \ST k \geq n \}$ is also
+   not bounded from below.
+1. Thus, $t_n = \inf \{ x_k \ST k \geq n\} = -\infty$ for all $n \in \Nat$.
+1. Thus, $\lim_{n \to \infty} t_n = -\infty$.
+
+
+We note that for $m < n$,
+
+$$
+\{ x_k \ST k \geq n\} \subseteq \{ x_k \ST k \geq m\}.
+$$
+
+
+Now, assume that $\{x_n \}$ is bounded from above. 
+
+1. Then, $\sup \{ x_k \ST k \geq n\} \leq \sup \{ x_k \ST k \geq m\}$.
+1. Or $s_n \leq s_m$.
+1. Thus, $m < n$ implies that $s_m \geq s_n$.
+1. Thus, $\{ s_n \}$ is a nonincreasing sequence.
+
+Now, assume that $\{x_n \}$ is bounded from below. 
+
+1. Then, $\inf \{ x_k \ST k \geq n\} \geq \inf \{ x_k \ST k \geq m\}$.
+1. Or $t_n \geq t_m$.
+1. Thus, $m < n$ implies that $t_m \leq t_n$.
+1. Thus, $\{ t_n \}$ is a nondecreasing sequence.
+
+Now, assume that $\{x_n \}$ is bounded. 
+
+
+1. From {prf:ref}`res-bra-sequence-monotone-bounded-convergence`,
+   a monotone bounded sequence is convergent.
+1. Since $\{ x_n \}$ is bounded, hence $\{ s_n \}$ is bounded too.
+1. Since $\{ x_n \}$ is bounded, hence $\{ t_n \}$ is bounded too.
+1. Thus, both $\{ s_n \}$ and $\{ t_n \}$ are bounded and monotone.
+1. Thus, both of them are convergent sequences.
+```
+
+```{prf:definition} Limit superior and inferior
+:label: def-bra-lim-sup-inf
+
+Let $\{x_n \}$ be a sequence of $\RR$. 
+The *limit superior* of the sequence is defined as:
+
+$$
+\limsup_{n \to \infty} x_n 
+\triangleq \lim_{n \to \infty} \sup \{x_k \ST k \geq n \}.
+$$
+
+Similarly, the *limit inferior* of the sequence is defined as:
+
+$$
+\liminf_{n \to \infty} x_n 
+\triangleq \lim_{n \to \infty} \inf \{x_k \ST k \geq n \}.
+$$
+
+If we define
+
+$$
+s_n = \sup \{ x_k \ST k \geq n\}
+\text{ and }
+t_n = \inf \{ x_k \ST k \geq n\}
+$$
+then,
+
+$$
+\limsup_{n \to \infty} x_n = \lim_{n \to \infty} s_n
+$$
+and
+
+$$
+\liminf_{n \to \infty} x_n  = \lim_{n \to \infty} t_n.
+$$
+```
+
+It is imperative to establish that the definition of 
+limit inferior and limit superior is justified. 
+
+1. If $\{x_n \}$ is not bounded from above, then $s_n = \infty$.
+1. If $\{x_n \}$ is bounded from above then $\{ s_n \}$ is nondecreasing.
+1. In this case, if $\{x_n \}$ is bounded from below, then $\{ s_n \}$
+   converges, otherwise it diverges to $-\infty$.
+
+Similar justification applies for the limit inferior too. 
+
+```{prf:remark} Limit superior and inferior for unbounded sequences
+:label: ref-bra-lim-sup-inf-unbounded
+
+Let $\{ x_n \}$ be a sequence of $\RR$.
+
+If $\{ x_n \}$ is not bounded from above, then
+
+$$
+\limsup_{n \to \infty} x_n = \infty.
+$$
+
+If $\{ x_n \}$ is not bounded from below, then
+
+$$
+\liminf_{n \to \infty} x_n = -\infty.
+$$
+```
+
+```{prf:theorem} Limit superior $\geq$ limit inferior
+:label: res-bra-limsup-geq-liminf
+
+Let $\{ x_n \}$ be a sequence of $\RR$.
+Then,
+
+$$
+\liminf_{n \to \infty} x_n \leq
+\limsup_{n \to \infty} x_n.
+$$
+```
+
+```{prf:proof}
+
+If we define
+
+$$
+s_n = \sup \{ x_k \ST k \geq n\}
+\text{ and }
+t_n = \inf \{ x_k \ST k \geq n\}
+$$
+then, $t_n \leq s_n$ for every $n$. 
+
+Then, by {prf:ref}`res-bra-order-limit`,
+
+$$
+\lim_{n \to \infty} t_n \leq \lim_{n \to \infty} s_n.
+$$
+
+Thus,
+
+$$
+\liminf_{n \to \infty} x_n  = \lim_{n \to \infty} t_n
+\leq \lim_{n \to \infty} s_n = \limsup_{n \to \infty} x_n.
+$$
+```
+
+
+```{prf:theorem} Relationship between limit superior and inferior
+:label: res-bra-limsup-liminf-rel
+
+Let $\{ x_n \}$ be a sequence of $\RR$. Then,
+
+$$
+\limsup_{n \to \infty} (-x_n) = - \liminf_{n \to \infty} x_n. 
+$$
+```
+
+```{prf:proof}
+We recall that
+
+$$
+\inf(-1 \cdot A) = -1 \cdot \sup (A)
+\text{ and }
+\sup(-1 \cdot A) = -1 \cdot \inf \sup (A)
+$$
+
+Thus,
+
+$$
+\limsup_{n \to \infty} (-x_n)
+&= \lim_{n \to \infty} \sup \{-x_k \ST k \geq n \}\\
+&= \lim_{n \to \infty} -\inf \{x_k \ST k \geq n \}\\
+&= - \lim_{n \to \infty} \inf \{x_k \ST k \geq n \}\\
+&= - \liminf_{n \to \infty} x_n.
+$$
+```
+
+
+```{prf:theorem} Characterization of limit superior
+:label: res-bra-lim-sup-charac
+
+Let $\{ x_n \}$ be a sequence of $\RR$. Let $u \in \RR$.
+The following are equivalent.
+
+1. $\limsup_{n \to \infty} x_n = u$.
+1. For any $\epsilon > 0$, there exists $n_0 \in \Nat$ such that
+   
+   $$
+   x_n < u + \epsilon \Forall n \geq n_0.
+   $$
+   and there exists a subsequence $\{x_{k_n} \}$ of $\{ x_n \}$
+   such that $\lim_{n \to \infty} x_{k_n} = u$.
+```
+
+
+```{prf:proof}
+TBD
+```
+
+
+```{prf:theorem} Characterization of limit inferior
+:label: res-bra-lim-inf-charac
+
+Let $\{ x_n \}$ be a sequence of $\RR$. Let $l \in \RR$.
+The following are equivalent.
+
+1. $\liminf_{n \to \infty} x_n = l$.
+1. For any $\epsilon > 0$, there exists $n_0 \in \Nat$ such that
+   
+   $$
+   x_n > l - \epsilon \Forall n \geq n_0.
+   $$
+   and there exists a subsequence $\{x_{k_n} \}$ of $\{ x_n \}$
+   such that $\lim_{n \to \infty} x_{k_n} = l$.
+```
+
+```{prf:proof}
+TBD
+```
+
+This leads us to the fact that the limit of a sequence
+exists if and only if its limit inferior and limit superior
+are identical.
+
+### Existence of Limit
+
+```{prf:theorem} Limit = limit superior = limit inferior
+:label: res-bra-lim-eq-liminf-limsup
+
+Let $\{ x_n \}$ be a sequence of $\RR$.
+Then,
+
+$$
+\lim_{n \to \infty} x_n = l
+\text{ if and only if }
+\limsup_{n \to \infty} x_n = \liminf_{n \to \infty} x_n = l.
+$$
+
+In other words the limit of a sequence exists if and only
+if both limit superior and limit inferior are equal and in 
+this case, the limit of sequence equals the limit superior
+and inferior.
+```
+
+```{prf:proof}
+TBD
+```
+
+### Subsequences
+
+```{prf:theorem} Convergent subsequences and limit superior/inferior
+:label: res-bra-subseq-lim-liminf-limsup
+
+Let $\{ x_n \}$ be a sequence of $\RR$.
+Let $\{ x_{k_n} \}$ be an arbitrary subsequence of $\{ x_n \}$.
+
+Suppose $\limsup x_n = u$.
+If $\{ x_{k_n} \}$ converges then
+
+$$
+\lim_{n \to \infty} x_{k_n} \leq u.
+$$
+
+
+Suppose $\liminf x_n = l$.
+If $\{ x_{k_n} \}$ converges then
+
+$$
+\lim_{n \to \infty} x_{k_n} \geq l.
+$$
+```
+
+```{prf:proof}
+Assume that $\limsup x_n = u$.
+
+1. Let $\epsilon > 0$.
+1. By {prf:ref}`res-bra-lim-sup-charac`, there exists $n_0$ 
+   such that for all $n > n_0$
+
+   $$
+   x_n < u + \epsilon.
+   $$
+1. Let  $\lim_{n \to \infty} x_{k_n} = s$.
+1. Then, there exists $n_1$ such that for all $k_n > n_1$
+
+   $$
+   s - \epsilon < x_{k_n} < s + \epsilon.
+   $$
+1. Let $n_2 = \max(n_0, n_1)$.
+1. Then, for all $k_n > n_2$
+
+   $$
+   s - \epsilon < x_{k_n} < u + \epsilon.
+   $$
+1. Thus, $s < u + 2 \epsilon$ for every $\epsilon > 0$.
+1. Thus, $s \leq u$.
+
+The proof for limit inferior is similar.
+```
+
+```{prf:remark} The set of subsequential limits for bounded sequences
+:label: res-bra-set-subseq-limits-limsup-liminf
+
+Let $\{ x_n \}$ be a bounded sequence of $\RR$.
+Define
+
+$$
+A = \{ x \in \RR \ST \text{ there exists a subsequence } 
+\{ x_{k_n} \} \text{ with } 
+\lim x_{k_n} = x \}.
+$$
+This is the set of limits of convergent subsequences of $\{ x_n \}$.
+By {prf:ref}`res-bolzano-weierstrass-theorem`
+$\{ x_n \}$ has a convergent subsequence since it is bounded.
+Hence, $A$ is not empty.
+
+Each element of $A$ is called a *subsequential limit* of $\{x_n \}$.
+Due to {prf:ref}`res-bra-bounded-seq-sup-inf-subseq-converg`, 
+both $\limsup x_n$ and $\liminf x_n$ are finite since $\{ x_n \}$
+is bounded.
+
+Let $a \in A$. Then, by {prf:ref}`res-bra-subseq-lim-liminf-limsup`:
+
+$$
+\liminf x_n \leq a \leq \limsup x_n.
+$$
+
+By {prf:ref}`res-bra-lim-sup-charac`, there exists $u \in A$
+such that
+
+$$
+\limsup x_n = u.
+$$
+
+By {prf:ref}`res-bra-lim-inf-charac`, there exists $l \in A$
+such that
+
+$$
+\liminf x_n = l.
+$$
+
+Thus,
+
+$$
+\limsup x_n = \max A
+\text{ and }
+\liminf x_n = \min A.
+$$
+```
+
+### Arithmetic
+
+```{prf:theorem} Arithmetic of limit superior and inferior
+:label: res-bra-arithmetic-limsup-liminf
+
+Let $\{ a_n \}$ and $\{ b_n \}$ be sequences of $\RR$.
+
+The limit superior satisfies subadditivity.
+
+$$
+\limsup_{n \to \infty} (a_n + b_n) \leq 
+\limsup_{n \to \infty} a_n + \limsup_{n \to \infty} b_n.
+$$
+
+The limit inferior satisfies superadditivity.
+
+$$
+\liminf_{n \to \infty} (a_n + b_n) \geq
+\liminf_{n \to \infty} a_n + \liminf_{n \to \infty} b_n.
+$$
+
+If both $\{ a_n \}$ and $\{ b_n \}$ are nonnegative, 
+then
+
+$$
+\limsup_{n \to \infty} (a_n b_n) \leq
+\left (\limsup_{n \to \infty} a_n \right)
+\left ( \limsup_{n \to \infty} b_n \right)
+$$
+and
+
+$$
+\liminf_{n \to \infty} (a_n b_n) \geq
+\left (\liminf_{n \to \infty} a_n \right)
+\left ( \liminf_{n \to \infty} b_n \right).
+$$
+```
+
+
+### Order
+
+```{prf:theorem} Order properties of limit superior and inferior
+:label: res-bra-order-limsup-liminf
+
+Let $\{ x_n \}$ and $\{ y_n \}$ be sequences of $\RR$.
+
+
+1. If $x_n \geq 0$ for all $n \in \Nat$, 
+   then $\liminf_{n \to \infty} x \geq 0$.   
+1. If $x_n \leq 0$ for all $n \in \Nat$, 
+   then $\limsup_{n \to \infty} x \leq 0$.
+1. If $x_n \leq y_n$ for all $n \in \Nat$, 
+   then $\limsup x_n \leq \limsup y_n$.
+1. If $x_n \geq y_n$ for all $n \in \Nat$, 
+   then $\liminf x_n \geq \liminf y_n$.
+```
+
+```{prf:proof}
+
+Assume that $x_n \geq 0$.
+
+1. Then, $\inf \{x_k \ST k \geq n \} \geq 0$.
+1. Thus, 
+
+   $$
+    \liminf_{n \to \infty} x_n 
+    = \lim_{n \to \infty} \inf \{x_k \ST k \geq n \}
+    \geq \lim_{n \to \infty} 0 = 0.
+   $$
+
+
+Assume that $x_n \leq 0$.
+
+1. Then, $\sup \{x_k \ST k \geq n \} \leq 0$.
+1. Thus, 
+
+   $$
+    \limsup_{n \to \infty} x_n 
+    = \lim_{n \to \infty} \sup \{x_k \ST k \geq n \}
+    \leq \lim_{n \to \infty} 0 = 0.
+   $$
+
+
+Assume that $x_n \leq y_n$ for all $n \in \Nat$.
+
+1. Choose any $k \in \Nat$.
+1. Let $M_n = \sup \{y_k \ST k \geq n \}$.
+1. Then, $y_k \leq M_n$ for every $k \geq n$.
+1. Then, $x_k \leq y_k \leq M_n$ for every $k \geq n$.
+1. Taking supremum over $k \geq n$, 
+   $m_n = \sup \{x_k \ST k \geq n \} \leq M_n$.
+1. Thus, $m_n \leq M_n$ for every $n$.
+1. Thus, by {prf:ref}`res-bra-order-limit`,
+   $\lim m_n \leq \lim M_n$.
+1. Thus,  $\limsup x_n \leq \limsup y_n$.
+
+A similar argument can be used for $x_n \geq y_n$ also.
+```
+
+
+### Damping and Growing Sequences
+
+```{prf:theorem} Damping sequences
+:label: res-bra-damping-sequence
+
+Let $\{ x_n \}$ be a sequence of $\RR$ such that $x_n > 0$ for every $n$.
+
+Assume that the following holds:
+
+$$
+\limsup_{n \to \infty} \frac{x_{n+1}}{x_n} = u < 1.
+$$
+
+Then, $\lim_{n \to \infty} x_n = 0$.
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Since $\frac{x_{n+1}}{x_n} > 0$, hence $u \geq 0$.
+1. Since $u < 1$, we can choose an $\epsilon > 0$ such that
+   $u + \epsilon < 1$.
+1. Let $q = u + \epsilon$. Then, $0 < q < 1$.
+1. By {prf:ref}`res-bra-lim-sup-charac`, there exists $n_0 \in \Nat$
+   such that for all $n \geq n_0$
+
+   $$
+   \frac{x_{n+1}}{x_n} < u + \epsilon = q.
+   $$
+1. Thus, $x_{n+1} < q x_n$ for every $n \geq n_0$.
+1. Let $x = x_{n_0}$.
+1. Then, we have $x_n < q^{n - n_0} x$ for every $n > n_0$.
+1. Also, $\lim_{n \to \infty} q^{n - n_0} x = 0$ since $q < 1$.
+1. We have $0 < x_n < q^{n - n_0} x$ for all $n > n_0$.
+1. Hence, due to the
+   {prf:ref}`squeeze theorem <res-bra-sequence-squeeze-2>`,
+   $\lim_{n \to \infty} x_n = 0$. 
+```
+
+
+```{prf:theorem} Growing sequences
+:label: res-bra-growing-sequence
+
+Let $\{ x_n \}$ be a sequence of $\RR$ such that $x_n > 0$ for every $n$.
+
+Assume that the following holds:
+
+$$
+\liminf_{n \to \infty} \frac{x_{n+1}}{x_n} = l > 1.
+$$
+
+Then, $\lim_{n \to \infty} x_n = \infty$.
+```
+
+
+```{prf:proof}
+We proceed as follows.
+
+1. Since $l > 1$, we can choose an $\epsilon > 0$ such that
+   $l - \epsilon > 1$.
+1. Let $q = l - \epsilon$. Then, $q > 1$.
+1. By {prf:ref}`res-bra-lim-inf-charac`, there exists $n_0 \in \Nat$
+   such that for all $n \geq n_0$
+
+   $$
+   \frac{x_{n+1}}{x_n} > l - \epsilon = q.
+   $$
+1. Thus, $x_{n+1} > q x_n$ for every $n \geq n_0$.
+1. Let $x = x_{n_0}$.
+1. Then, we have $x_n > q^{n - n_0} x$ for every $n > n_0$.
+1. Also, $\lim_{n \to \infty} q^{n - n_0} x = \infty$ since $q > 1$.
+1. We have $x_n > q^{n - n_0} x$ for all $n > n_0$.
+1. Hence, $\lim x_n \geq \lim q^{n - n_0} x = \infty$.
+1. Thus, $\lim x_n = \infty$.
+```
+

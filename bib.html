@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bibliography &#8212; Optimization for Signal Processing</title>
+    <title>Bibliographic Notes &#8212; Optimization for Signal Processing</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -38,17 +38,19 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -79,12 +81,7 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
@@ -252,13 +249,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="metric_spaces/real_valued_functions.html">
-     3.8. Real Valued Functions
+    <a class="reference internal" href="metric_spaces/subspaces.html">
+     3.8. Subspace Topology
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="metric_spaces/subspaces.html">
-     3.9. Subspace Topology
+    <a class="reference internal" href="metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
     </a>
    </li>
    <li class="toctree-l2">
@@ -319,18 +316,23 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="la/sym_matrices.html">
+     4.8. Symmetric Matrices
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="la/important_spaces.html">
-     4.8. Important Vector Spaces
+     4.9. Important Vector Spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="la/sequence_spaces.html">
-     4.9. Sequence Spaces
+     4.10. Sequence Spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="la/affine.html">
-     4.10. Affine Sets and Transformations
+     4.11. Affine Sets and Transformations
     </a>
    </li>
   </ul>
@@ -348,6 +350,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="mv_calculus/differentiation.html">
      5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
     </a>
    </li>
   </ul>
@@ -393,35 +400,60 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="convex_sets/psd_cone.html">
-     6.5. Symmetric Matrices
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="convex_sets/generalized_inequality.html">
-     6.6. Generalized Inequalities
+     6.5. Generalized Inequalities
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="convex_sets/convex_functions.html">
-     6.7. Convex Functions
+     6.6. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_sets/differentiable.html">
+     6.7. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_sets/function_ops.html">
+     6.8. Convexity Preserving Function Operations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="convex_sets/relint.html">
-     6.8. Topological Properties
+     6.9. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_sets/separation.html">
+     6.10. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_sets/continuity.html">
+     6.11. Continuity
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="convex_sets/subgradients.html">
-     6.9. Subgradients
+     6.12. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_sets/conjugate_functions.html">
+     6.13. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_sets/smoothness.html">
+     6.14. Smoothness
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="conjugate_functions/chapter.html">
-   7. Conjugate Functions
+  <a class="reference internal" href="cvxopt/chapter.html">
+   7. Convex Optimization
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -430,15 +462,45 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="conjugate_functions/summary.html">
-     7.1. Chapter Summary
+    <a class="reference internal" href="cvxopt/intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cvxopt/cvxopt.html">
+     7.2. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cvxopt/projection.html">
+     7.3. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cvxopt/duality.html">
+     7.4. Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cvxopt/linear_programming.html">
+     7.5. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cvxopt/quadratic_programming.html">
+     7.6. Quadratic Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cvxopt/differentiable_objectives.html">
+     7.7. Differentiable Objective Functions
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="smoothness/chapter.html">
-   8. Smoothness
+  <a class="reference internal" href="proximal_operator/chapter.html">
+   8. Proximal Operator
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -447,94 +509,31 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="smoothness/summary.html">
-     8.1. Chapter Summary
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="strong_convexity/chapter.html">
-   9. Strong Convexity
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
-  <label for="toctree-checkbox-9">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="strong_convexity/summary.html">
-     9.1. Chapter Summary
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="projection_onto_convex_sets/chapter.html">
-   10. Projection onto Convex Sets
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
-  <label for="toctree-checkbox-10">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="projection_onto_convex_sets/summary.html">
-     10.1. Chapter Summary
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="proximal_operator/chapter.html">
-   11. Proximal Operator
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
-  <label for="toctree-checkbox-11">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
     <a class="reference internal" href="proximal_operator/intro.html">
-     11.3. Introduction
+     8.3. Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="proximal_operator/summary.html">
-     11.4. Chapter Summary
+     8.4. Chapter Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="gradient_methods/chapter.html">
-   12. Gradient Descent Methods
+   9. Gradient Descent Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="subgradient_methods/chapter.html">
-   13. Subgradient Methods
+   10. Subgradient Methods
   </a>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1">
   <a class="reference internal" href="selected/chapter.html">
-   14. Selected Functions
+   11. Selected Functions
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
-  <label for="toctree-checkbox-12">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="selected/projection.html">
-     14.1. Projection onto Convex Set
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -550,7 +549,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Bibliography
+   Bibliographic Notes
   </a>
  </li>
 </ul>
@@ -569,22 +568,22 @@
 
 
           
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
-<div class="sbt-scroll-pixel-helper"></div>
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
     <div class="topbar container-xl fixed-top">
     <div class="topbar-contents row">
         <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
         <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
             
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
@@ -635,6 +634,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bibliography">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -642,70 +654,110 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Bibliography</h1>
+                <h1>Bibliographic Notes</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bibliography">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="bibliography">
-<h1>Bibliography<a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h1>
-<p id="id1"><dl class="citation">
-<dt class="label" id="id2"><span class="brackets">1</span></dt>
+  <div class="tex2jax_ignore mathjax_ignore section" id="bibliographic-notes">
+<h1>Bibliographic Notes<a class="headerlink" href="#bibliographic-notes" title="Permalink to this headline">¶</a></h1>
+<p>Following is a partial list of books and articles which have
+been referenced heavily in this work.
+This list is by no means exhaustive.</p>
+<ul class="simple">
+<li><p>General introduction to optimization can be found in
+<span id="id1">[<a class="reference internal" href="#id19" title="Jorge Nocedal and Stephen Wright. Numerical optimization. Springer Science &amp; Business Media, 2006.">12</a>]</span>.</p></li>
+<li><p>Main references for convex analysis are
+<span id="id2">[<a class="reference internal" href="#id12" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">5</a>, <a class="reference internal" href="#id20" title="Ralph Tyrell Rockafellar. Convex analysis. Princeton university press, 2015.">14</a>]</span>.</p></li>
+<li><p><span id="id3">[<a class="reference internal" href="#id13" title="Stephen P Boyd and Lieven Vandenberghe. Convex optimization. Cambridge university press, 2004.">7</a>]</span> is a standard textbook for
+convex optimization theory, applications and algorithms.</p></li>
+<li><p><span id="id4">[<a class="reference internal" href="#id18" title="David G Luenberger, Yinyu Ye, and others. Linear and nonlinear programming. Volume 2. Springer, 1984.">11</a>]</span> is a good reference for linear
+programming.</p></li>
+<li><p><span id="id5">[<a class="reference internal" href="#id14" title="Stephen Boyd, Neal Parikh, and Eric Chu. Distributed optimization and statistical learning via the alternating direction method of multipliers. Now Publishers Inc, 2011.">6</a>]</span> covers alternating direction
+method of multipliers (ADMM) algorithms.</p></li>
+<li><p><span id="id6">[<a class="reference internal" href="#id21" title="Neal Parikh and Stephen Boyd. Proximal algorithms. Foundations and Trends in optimization, 1(3):127–239, 2014.">13</a>]</span> provides good coverage on
+proximal algorithms.</p></li>
+</ul>
+<div class="section" id="bibliography">
+<h2>Bibliography<a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h2>
+<div class="docutils container" id="id7">
+<dl class="citation">
+<dt class="label" id="id8"><span class="brackets">1</span></dt>
 <dd><p>Charalambos D Aliprantis and Owen Burkinshaw. <em>Principles of real analysis</em>. Gulf Professional Publishing, 1998.</p>
 </dd>
-<dt class="label" id="id3"><span class="brackets">2</span></dt>
+<dt class="label" id="id9"><span class="brackets">2</span></dt>
 <dd><p>M. Artin. <em>Algebra</em>. Pearson Modern Classics for Advanced Mathematics Series. Pearson, 2017. ISBN 9780134689609. URL: <a class="reference external" href="https://books.google.co.in/books?id=ZfIXMQAACAAJ">https://books.google.co.in/books?id=ZfIXMQAACAAJ</a>.</p>
 </dd>
-<dt class="label" id="id4"><span class="brackets">3</span></dt>
+<dt class="label" id="id10"><span class="brackets">3</span></dt>
+<dd><p>Amir Beck. <em>Introduction to nonlinear optimization: Theory, algorithms, and applications with MATLAB</em>. SIAM, 2014.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets">4</span></dt>
 <dd><p>Amir Beck. <em>First-order methods in optimization</em>. SIAM, 2017.</p>
 </dd>
-<dt class="label" id="id5"><span class="brackets">4</span></dt>
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id2">5</a></span></dt>
 <dd><p>Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. <em>Convex analysis and optimization</em>. Volume 1. Athena Scientific, 2003.</p>
 </dd>
-<dt class="label" id="id7"><span class="brackets">5</span></dt>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id5">6</a></span></dt>
 <dd><p>Stephen Boyd, Neal Parikh, and Eric Chu. <em>Distributed optimization and statistical learning via the alternating direction method of multipliers</em>. Now Publishers Inc, 2011.</p>
 </dd>
-<dt class="label" id="id6"><span class="brackets">6</span></dt>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id3">7</a></span></dt>
 <dd><p>Stephen P Boyd and Lieven Vandenberghe. <em>Convex optimization</em>. Cambridge university press, 2004.</p>
 </dd>
-<dt class="label" id="id8"><span class="brackets">7</span></dt>
+<dt class="label" id="id15"><span class="brackets">8</span></dt>
 <dd><p>D. Gopal, A. Deshmukh, A.S. Ranadive, and S. Yadav. <em>An Introduction to Metric Spaces</em>. CRC Press, 2020. ISBN 9781000087994. URL: <a class="reference external" href="https://books.google.co.in/books?id=13jtDwAAQBAJ">https://books.google.co.in/books?id=13jtDwAAQBAJ</a>.</p>
 </dd>
-<dt class="label" id="id9"><span class="brackets">8</span></dt>
+<dt class="label" id="id16"><span class="brackets">9</span></dt>
+<dd><p>Jean-Baptiste Hiriart-Urruty and Claude Lemaréchal. <em>Convex analysis and minimization algorithms I: Fundamentals</em>. Volume 305. Springer science &amp; business media, 2013.</p>
+</dd>
+<dt class="label" id="id17"><span class="brackets">10</span></dt>
 <dd><p>Kenneth Hoffman and Ray Kunze. Linear algebra, prentice-hall. <em>Inc., Englewood Cliffs, New Jersey</em>, pages 122–125, 1971.</p>
 </dd>
-<dt class="label" id="id10"><span class="brackets">9</span></dt>
+<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id4">11</a></span></dt>
 <dd><p>David G Luenberger, Yinyu Ye, and others. <em>Linear and nonlinear programming</em>. Volume 2. Springer, 1984.</p>
 </dd>
-<dt class="label" id="id11"><span class="brackets">10</span></dt>
+<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id1">12</a></span></dt>
 <dd><p>Jorge Nocedal and Stephen Wright. <em>Numerical optimization</em>. Springer Science &amp; Business Media, 2006.</p>
 </dd>
-<dt class="label" id="id13"><span class="brackets">11</span></dt>
+<dt class="label" id="id21"><span class="brackets"><a class="fn-backref" href="#id6">13</a></span></dt>
 <dd><p>Neal Parikh and Stephen Boyd. Proximal algorithms. <em>Foundations and Trends in optimization</em>, 1(3):127–239, 2014.</p>
 </dd>
-<dt class="label" id="id12"><span class="brackets">12</span></dt>
+<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id2">14</a></span></dt>
 <dd><p>Ralph Tyrell Rockafellar. <em>Convex analysis</em>. Princeton university press, 2015.</p>
 </dd>
-<dt class="label" id="id14"><span class="brackets">13</span></dt>
+<dt class="label" id="id22"><span class="brackets">15</span></dt>
 <dd><p>W.F. Trench. <em>Introduction to Real Analysis</em>. Open Textbook Library. Prentice Hall/Pearson Education, 2003. ISBN 9780130457868. URL: <a class="reference external" href="https://books.google.co.in/books?id=NkFkQgAACAAJ">https://books.google.co.in/books?id=NkFkQgAACAAJ</a>.</p>
 </dd>
-<dt class="label" id="id15"><span class="brackets">14</span></dt>
+<dt class="label" id="id23"><span class="brackets">16</span></dt>
 <dd><p>Wikipedia contributors. Ordered pair — Wikipedia, the free encyclopedia. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Ordered_pair">https://en.wikipedia.org/wiki/Ordered_pair</a>.</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets">15</span></dt>
+<dt class="label" id="id24"><span class="brackets">17</span></dt>
 <dd><p>Wikipedia contributors. Relation (mathematics) — Wikipedia, the free encyclopedia. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Relation_(mathematics)">https://en.wikipedia.org/wiki/Relation_(mathematics)</a>.</p>
 </dd>
-<dt class="label" id="id17"><span class="brackets">16</span></dt>
+<dt class="label" id="id25"><span class="brackets">18</span></dt>
 <dd><p>Wikipedia contributors. Tuple — Wikipedia, the free encyclopedia. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Tuple">https://en.wikipedia.org/wiki/Tuple</a>.</p>
 </dd>
 </dl>
-</p>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

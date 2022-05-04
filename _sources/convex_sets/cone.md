@@ -1,5 +1,9 @@
 # Cones
 
+Main references for this section are 
+{cite}`beck2014introduction,boyd2004convex,rockafellar2015convex`. 
+
+
 Throughout this section, $\VV$ is a real vector space. 
 Some material is specific to $\RR^n$. Rest of the
 material is applicable for any real vector space.
@@ -306,6 +310,20 @@ using the idea of conic combinations.
 1. Hence, it is a convex cone.
 
 
+```{prf:remark} Conic combinations and nonnegative orthant
+:label: rem-cvx-conic-comb-coef-nng
+
+We recall that the nonnegative orthant of $\RR^k$ is given by
+
+$$
+\RR_+^k = \{ \bt \in \RR^k \ST  \bt \succeq \bzero \}
+= \{\bt \in \RR^k \ST  t_1, \dots, t_k \geq 0 \}.
+$$
+Thus, the coefficients for conic combinations of $k$ points
+are drawn from $\RR_+^k$.
+```
+
+
 ```{prf:theorem}
 :label: res-cvx-conic-comb-conic-comb
 
@@ -362,7 +380,9 @@ The *conic hull* of a set $S$ is the set of all conic combinations
 of points in $S$. i.e.
 
 $$
-    \{t_1 \bx_1 + \dots t_k \bx_k \ST \bx_i \in S, t_i \geq 0, i = 1, \dots, k \}.
+    \ConicHull(S) \triangleq 
+    \{t_1 \bx_1 + \dots t_k \bx_k \ST \bx_i \in S, \bt \in \RR^k_+, 
+      i = 1, \dots, k, k \in \Nat\}.
 $$
 ````
 
@@ -442,6 +462,275 @@ $H \subseteq K$
 1. Thus, $H \subseteq K$.
 ```
 
+### Unique Conic Representations
+
+Recall from 
+{prf:ref}`Carathéodory theorem <res-cvx-conv-hull-caratheodory>`
+that in an $n$ dimensional vector space,
+every point in the convex hull of a set
+can be represented as a convex combination
+of $n+1$ points belonging to the set.
+
+Similar representation is possible in conic hulls too.
+
+```{prf:theorem} Conic representation theorem
+:label: res-cvx-conic-rep-unique
+
+Let $\VV$ be an $n$-dimensional real vector space.
+Let $S \subseteq \VV$. 
+Let $\bx \in \ConicHull(S)$. 
+Then, there exist $k$ linearly independent vectors
+$\bx_1, \dots, \bx_k \in S$ such that
+$\bx \in \ConicHull(\{ \bx_1, \dots, \bx_k\})$;
+i.e., there exists $\bt \in \RR^k_+$ such that 
+
+$$
+\bx = \sum_{i=1}^k t_i \bx_i.
+$$
+Since the $k$ vectors are linearly independent,
+hence $k \leq n$.
+```
+
+
+```{prf:proof}
+The proof is similar to Carathéodory theorem.
+
+1. Let $\bx \in \ConicHull(S)$.
+1. Then, there exist $m$ points 
+   $\bx_1, \dots, \bx_m \in S$ and
+   $\bt \in \RR^m_+$ such that
+
+   $$
+   \bx = \sum_{i=1}^m t_i \bx_i.
+   $$
+1. We can assume that $t_i > 0$ for every $i \in 1,\dots,m$.
+   Otherwise, we can simply drop the corresponding points
+   from the conic combination.
+1. If $\bx_1, \dots, \bx_m$ are linearly independent,
+   then $k=m$, $m \leq n$ and we are done.
+1. Let us consider the case when they are linearly dependent.
+1. Then, there exists a nontrivial linear combination
+   equally zero vector:
+
+   $$
+   r_1 \bx_1 + \dots + r_m \bx_m = \bzero.
+   $$
+1. Then, for any $\alpha \in \RR$
+   
+   $$
+   \bx = \sum_{i=1}^m t_i \bx_i + \alpha \sum_{i=1}^m r_i \bx_i
+   = \sum_{i=1}^m (t_i + \alpha r_i) \bx_i.
+   $$
+1. This representation is a conic combination if
+   $t_i + \alpha r_i \geq 0$ for every $i=1,\dots,m$.
+1. Since $t_i > 0$ for every $i$, hence, this set 
+   of inequalities is satisfied for all $\alpha \in A$
+   where $A$ is a closed interval with a nonempty interior.
+   1. Let $A_i$ be the solution set for $i$-th inequality.
+   1. We have $A = \bigcap_i A_i$.
+   1. $\alpha = 0$ satisfies every inequality. Thus, $0 \in A_i$.
+      Thus, $A \neq \EmptySet$.
+   1. If $r_i = 0$, then $A_i = \RR$.
+   1. If $r_i > 0$, then $A_i = [-\frac{t_i}{r_i}, \infty)$.
+   1. If $r_i < 0$, then $A_i = (-\infty, \frac{t_i}{r_i}]$.
+   1. Since not all $r_i = 0$, hence there are several 
+      $A_i$ with finite endpoints (either left or right).
+   1. Thus, there are three possibilities for $A$:
+      $[a,b]$, or $[a, \infty)$ or $(-\infty, b]$.
+   1. Both $a$ and $b$ correspond to an endpoint of one of the
+      $A_i$.
+1. If we pick $\alpha$ as one of the endpoints of $A$,
+   then, $t_i + \alpha r_i \geq 0$ for every $i$ 
+   and $t_j + \alpha r_j = 0$ for some $j \in 1,\dots,m$.
+1. Thus, we obtain a conic representation of $\bx$ of
+   at most $m-1$ vectors.
+1. This process can be carried out repeatedly until
+   we obtain a conic representation of $\bx$ of
+   $k$ linearly independent vectors.
+1. Since the $k$ vectors $\bx_1, \dots, \bx_k$ so obtained
+   are linearly independent, hence $k \leq n$.
+```
+
+### Linear System with Nonnegativity Constraints
+
+Consider the system
+
+$$
+P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}
+$$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$.
+Without loss of generality, we shall assume that the rows
+of $\bA$ are linearly independent.
+This is a linear system $\bA \bx = \bb$ with the nonnegativity
+constraint $\bx \succeq \bzero$.
+If we write $\bA$ in the form of column vectors as 
+
+$$
+\bA = \begin{bmatrix}
+\ba_1 & \dots & \ba_n
+\end{bmatrix}
+$$
+Then, the set $Q = \{ \bA \bx \ST \bx \in \RR^n_+ \}$
+can be written as
+
+$$
+Q = \cone \{\ba_1, \dots \ba_n\}.
+$$
+In other words, $Q$ is the conic hull of the column vectors
+of $\bA$. We can think of $\bA$ as a linear mapping of the
+nonnegative orthant (a convex cone) $\RR^n_+$ from $\RR^n$
+to another convex cone in $\RR^n$ given as a conic hull
+of the columns of $\bA$.
+
+We can now see that $P$ is nonempty if $\bb \in Q$. 
+
+```{prf:definition} Basic feasible solution
+:label: def-cvx-basic-feasible-solution
+
+Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
+Assume that the rows of $\bA$ are linearly independent. 
+Then, $\bv \in \RR^n$ is a *basic feasible solution* (in short "bfs")
+of $P$ if the columns of $\bA$ corresponding to the positive
+entries of $\bv$ are linearly independent.
+
+Consequently, $\bv$ has at most $m$ has positive entries.
+All other entries of $\bv$ are $0$.
+```
+
+```{prf:theorem} Existence of basic feasible solution
+:label: res-cvx-cone-bfs-existence
+
+Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
+Assume that the rows of $A$ are linearly independent. 
+
+If $P$ is nonempty; i.e. $P \neq \EmptySet$, then 
+it contains at least one basic feasible solution.
+```
+
+```{prf:proof}
+Recall that
+
+$$
+Q = \{ \bA \bx \ST \bx \in \RR^n_+ \} = \cone \{\ba_1, \dots \ba_n\}
+$$
+where $\ba_1, \dots, \ba_n$ are columns of the matrix $\bA$.
+
+1. If $P \neq \EmptySet$, then $\bb \in Q$.
+1. In other words, $\bb$ is a conic combination of columns of $\bA$.
+1. By the {prf:ref}`conic representation theorem <res-cvx-conic-rep-unique>`,
+   there exists a subset of $k$ linearly independent vectors among
+   $\{\ba_1, \dots, \ba_n \}$ such that $\bb$ is their conic 
+   combination.
+1. In other words, there exist $k$ indices $1 \leq i_1 < \dots < i_k \leq n$
+   and $k$ numbers $v_{i_1}, \dots, v_{i_k} > 0$ such that
+
+   $$
+   \bb = \sum_{j=1}^k v_{i_j} \ba_{i_j}
+   $$
+   and $\{\ba_{i_1}, \dots, \ba_{i_k}\}$ are linearly independent.
+1. Consequently $k \leq m$ since columns of $\bA$ belong to $\RR^m$.
+1. Let 
+   
+   $$
+   \bv = \sum_{j=1}^k v_{i_j} \be_{i_j}
+   $$
+   where $\be_{i_j}$ are unit vectors of $\RR^n$.
+1. Clearly, $\bv \succeq \bzero$ and $\bA \bv = \bb$.
+1. Therefore, $\bv \in P$ and $\bv$ is a basic feasible solution.
+```
+
+The basic feasible solutions of $P$ are the
+{prf:ref}`extreme points <def-cvx-extreme-point>` 
+of $P$. Recall that a point is an extreme point
+if it cannot be expressed as a nontrivial convex
+combination of two distinct points of a set.
+
+```{prf:theorem} Equivalence between basic feasible solutions and extreme points
+:label: res-cvx-cone-bfs-extreme
+
+Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
+Assume that the rows of $A$ are linearly independent. 
+
+Then $\bv$ is a basic feasible solution of $P$ if and only if 
+$\bv$ is an extreme point of $P$.
+```
+
+```{prf:proof}
+
+Let $\bv$ be a basic feasible solution of $P$.
+
+1. Then $\bb = \bA \bv$ and $\bv$ has $k$ positive entries
+   with $k \leq m$.
+1. Without loss of generality, assume that first $k$ entries
+   of $\bv$ are positive. This can be easily achieved by 
+   shuffling the columns of $\bA$ in the linear system $\bA \bx = \bb$.
+1. Therefore, $v_1, \dots, v_k > 0$ and $v_{k+1}, \dots, v_n = 0$.
+1. Also, the first $k$ columns $\ba_1, \dots, \ba_k$ of the matrix
+   $\bA$ are linearly independent since $\bv$ is a basic feasible solution.
+1. For contradiction, assume that $\bv$ is not an extreme point of $P$;
+   i.e.,  $\bv \notin \extreme P$.
+1. Then, there exist $\by, \bz \in P$ with $\by \neq \bz$ 
+   and $t \in (0,1)$ such that
+   $\bv = t \by + (1-t)\bz$.
+1. Since $\by, \bz \in P$, hence $\by \succeq \bzero$ and $\bz \succeq \bzero$.
+1. Since the last $n-k$ entries of $\bv$ are zero, hence
+   the last $n-k$ entries of $\by$ and $\bz$ also must be zero
+   as they have to be nonnegative.
+1. Since $\by, \bz \in P$, hence $\bA \by = \bb$ and $\bA \bz = \bb$.
+1. Therefore, 
+
+   $$
+   \bb = \sum_{i=1}^k y_i \ba_i = \sum_{i=1}^k z_i \ba_i. 
+   $$
+1. This implies that
+
+   $$
+   \sum_{i=1}^k (y_i -z_i) \ba_i = \bzero.
+   $$
+1. But, $\ba_1, \dots, \ba_k$ are linearly independent by hypothesis.
+1. Thus, $y_i = z_i$ for $i=1,\dots,k$ must hold.
+1. Then, $\by = \bz$.
+1. We arrive at a contradiction.
+1. Thus, $\bv$ must be an extreme point of $P$.
+
+For the converse, assume that $\bv$ is an extreme point of $P$.
+
+1. Again, by contradiction, assume that $\bv$ is not a basic 
+   feasible solution. 
+1. Thus, the columns of $\bA$ corresponding to the positive
+   entries of $\bv$ are linearly dependent.
+1. Assume that there are $k$ positive entries in $\bv$
+   and WLOG, assume that they correspond to first $k$ 
+   columns of $\bA$.
+1. Then, since the corresponding columns are linearly 
+   dependent, hence there exists a nonzero vector $\bt \in \RR^k$
+   such that
+
+   $$
+   \sum_{i=1}^k t_i \ba_i = \bzero.
+   $$
+1. We can extend $\bt$ to $\RR^n$ by appending $n-k$ zeros such that
+   $\bA \bt = \bzero$.
+1. Since the first $k$ entries of $\bv$ are positive, we can
+   choose a sufficiently small $r > 0$ such that
+   $\by = \bv - r \bt \succeq \bzero$
+   and $\bz = \bv + r \bt \succeq \bzero$.
+1. Note that $\bA \by = \bA \bz = \bb$.
+1. Therefore, $\by, \bz \in P$.
+1. At the same time, it is easy to see that
+
+   $$
+   \bv = \frac{1}{2} \by + \frac{1}{2} \bz.
+   $$
+1. Thus, $\bv$ is a convex combination of two distinct points of $P$.
+1. This contradicts our hypothesis that $\bv$ is an extreme point of $P$.
+1. Thus, $\bv$ must be a basic feasible solution.
+```
+
+
 ## Pointed Cones
 
 ```{prf:definition} Pointed cone
@@ -452,7 +741,9 @@ $\bx \in C$ and $-\bx \in C$ implies $\bx = \bzero$.
 ```
 In other words, a pointed cone, doesn't contain a line.
 
-```{prf:example} The nonnegative orthant is a pointed convex cone.
+```{prf:example} The nonnegative orthant is a pointed convex cone
+:label: ex-cone-nng-orthant-pointed
+
 Recall from {prf:ref}`def-convex-nonnegative-orthant`
 that the nonnegative orthant is defined as:
 
@@ -491,6 +782,7 @@ A cone $K \in \VV$ is called a *proper cone* if it satisfies the following:
 ````
 
 ```{prf:example} Non-empty interior
+:label: ex-cone-non-empty-interior-proper
 
 Consider the following sets in $\RR^2$:
 
@@ -899,6 +1191,7 @@ $$
 ```
 
 ```{prf:example} Normal vector
+:label: ex-cone-normal-vec-1
 
 Let $C$ be a half space given by:
 
@@ -1400,4 +1693,36 @@ based on the type of partial sum in $\VV \oplus \RR$.
    $$
 
 [TODO] Clarify this further. It is not obvious.
+
+
+## Positive semi-definite cone
+
+````{prf:theorem} The convex cone of positive semidefinite matrices
+:label: res-cvx-psd-cone
+
+The set of positive semidefinite matrices $\SS_+^n$ is a convex cone.
+````
+
+````{prf:proof}
+Let $\bA, \bB \in \SS_+^n$ and $\theta_1, \theta_2 \geq 0$. We have to show that
+$\theta_1 \bA + \theta_2 \bB \in \SS_+^n$.
+
+$$
+\bA \in \SS_+^n \implies \bv^T \bA \bv \geq 0 \Forall \bv \in \RR^n.
+$$
+
+$$
+\bB \in \SS_+^n \implies \bv^T \bB \bv \geq 0 \Forall \bv \in \RR^n.
+$$
+
+Now
+
+$$
+\bv^T (\theta_1 \bA + \theta_2 \bB) \bv 
+= \theta_1 \bv^T \bA \bv + \theta_2 \bv^T \bB \bv \geq 0 
+\Forall \bv \in \RR^n.
+$$
+
+Hence $\theta_1 \bA + \theta_2 \bB \in \SS_+^n$.
+````
 

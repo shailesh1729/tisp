@@ -45,7 +45,7 @@ A *regular simplex* is the set of nonnegative vectors with elements
 summing up to $a$. 
 
 $$
-\Delta_a \triangleq \{\bx \in \RR^n \ST 
+\Delta^a_n \triangleq \{\bx \in \RR^n \ST 
     \langle \bx, \bone \rangle = a, \bx \succeq \bzero \}.
 $$
 ```
@@ -57,7 +57,7 @@ A *unit simplex* is the set of nonnegative vectors with elements
 summing up to $1$. 
 
 $$
-\Delta \triangleq \{\bx \in \RR^n 
+\Delta_n \triangleq \{\bx \in \RR^n 
     \ST \langle \bx, \bone \rangle = 1, \bx \succeq \bzero \}.
 $$
 ```
