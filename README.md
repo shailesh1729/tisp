@@ -5,7 +5,7 @@ necessary mathematics needed for building
 numerical optimization based algorithms for signal
 processing.
 
-The book is hosted at [convex.indigits.com](https://convex.indigits.com).
+The notes are hosted at [convex.indigits.com](https://convex.indigits.com).
 
 The topics covered include:
 
@@ -87,4 +87,26 @@ jupyter-book build book
 
 Jupyter book will write the book's `HTML` content to `book/_build/html/`
 directory, so you can open `index.html` from there to view the local build.
+
+
+
+## Publishing on gh-pages
+
+`GitHub-Pages` is an alternative deployment of the book.
+The alternative deployment is hosted at
+[indigits.com/cvx-opt-book](https://www.indigits.com/cvx-opt-book).
+
+
+This section is relevant only for active contributors.
+
+Make sure you have `ghp-import` installed.
+```
+pip install ghp-import
+```
+
+Run the `ghp-import` command from the root directory as follows:
+
+```
+ghp-import -n -p -f book/_build/html
+```
 
