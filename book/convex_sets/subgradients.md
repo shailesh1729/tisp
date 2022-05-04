@@ -2595,6 +2595,69 @@ a compact set are nonempty and bounded.
 1. Thus, $f$ is indeed Lipschitz continuous over $X$.
 ```
 
+## Optimality Conditions
+
+A well known result for differentiable functions is that
+at the point of optimality $\nabla f(\bx) = \bzero$
+(see {prf:ref}`res-opt-first-order-optimality-local`).
+Subdifferentials are useful in characterizing the
+minima of a function. The idea of vanishing gradients
+can be generalized for subgradients also.
+
+```{prf:theorem} Fermat's optimality condition
+:label: res-cvxf-subdiff-fermat-optimality
+
+Let $f : \VV \to \RERL$ be a proper convex function.
+Then 
+
+$$
+\ba \in \argmin \{ f(\bx) \ST \bx \in \VV \}
+$$
+if and only if $\bzero \in \partial f(\ba)$.
+
+In other words, $\ba$ is a minimizer of $f$ if and only if
+$\bzero$ is a subgradient of $f$ at $\ba$.
+```
+
+```{prf:proof}
+Assume that $\bzero \in \partial f(\ba)$ where $\ba \in \dom f$.
+
+1. By subgradient inequality
+
+   $$
+   f(\bx) \geq f(\ba) + \langle \bx - \ba, \bzero \rangle \Forall \bx \in \VV.
+   $$
+1. This simplifies to
+   
+   $$
+   f(\bx) \geq f(\ba) \Forall \bx \in \VV.
+   $$
+1. Thus, $\ba \in \argmin \{ f(\bx) \ST \bx \in \VV \}$.
+
+
+For the converse, assume that $\ba \in \argmin \{ f(\bx) \ST \bx \in \VV \}$.
+
+1. Then, 
+   
+   $$
+   f(\bx) \geq f(\ba) \Forall \bx \in \VV.
+   $$
+1. But then
+
+   $$
+   & f(\bx) \geq f(\ba) \\
+   & \iff f(\bx) \geq f(\ba) + 0 \\
+   & \iff f(\bx) \geq f(\ba) + \langle \bx - \ba, \bzero \rangle
+   $$
+   holds true for every $\bx \in \VV$.
+1. This implies that $\bzero \in \partial f(\ba)$.
+```
+
+
+
+
+
+
 
 In the reminder of this section, we compute the subgradients
 and subdifferential sets for a variety of standard functions.
