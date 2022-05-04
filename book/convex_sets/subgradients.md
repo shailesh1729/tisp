@@ -3307,6 +3307,22 @@ $$
 $$
 ```
 
+## Mean Value Theorem
+
+The following result is from {cite}`hiriart2013convex`.
+
+```{prf:theorem} A subgradients based mean value theorem for 1D functions
+:label: res-cvxf-convex-subdiff-mvt
+
+Let $f : \RR \to \RERL$ be a proper closed convex function.
+Let $[a,b] \subseteq \dom f$ with $a < b$. Then,
+
+$$
+f(b) - f(a) = \int_a^b h(t) d t
+$$
+where $h : (a, b) \to \RR$ satisfies $h(t) \in \partial f(t)$
+for every $t \in (a, b)$.
+```
 
 ## Minimization Problems
 
@@ -3331,3 +3347,5 @@ $$
 - g (x_0) \in \partial (-q) (\lambda_0).
 $$
 ```
+
+

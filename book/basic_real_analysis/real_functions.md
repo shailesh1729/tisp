@@ -447,7 +447,7 @@ If $f$ is *strictly increasing* or
 $f$ is *strictly monotonic* on $I$.
 ```
 
-```{prf:theorem}
+```{prf:theorem} Monotonicity and one sided limits
 :label: res-bra-rf-monotonic-func-limits
 
 Let $f$ be monotonic of an interval $(a, b)$. Let
