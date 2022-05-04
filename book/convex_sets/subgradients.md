@@ -2464,6 +2464,99 @@ Our task is to find a subgradient of $f$ at $\bx$.
    $$
 ```
 
+## Lipschitz Continuity and Boundedness of Subgradients
+
+```{prf:theorem} Lipschitz continuity and boundedness of the subdifferential sets
+:label: res-cvxf-subdiff-bounded-lipschitz-continuous
+
+Let $f : \VV \to \RERL$ be a proper convex function.
+Suppose that $X \subseteq \interior \dom f$.
+Consider the following two claims:
+
+1. $| f(\bx) - f(\by) | \leq L \| \bx - \by \|$ for any $\bx, \by \in X$.
+1. $ \| \bg \|_* \leq L$ for any $\bg \in \partial f(\bx)$ where $\bx \in X$.
+
+Then,
+
+* (2) implies (1). In other words, if subgradients are bounded
+  then, the function is Lipschitz continuous.
+* If $X$ is open, then (1) holds if and only if (2) holds. 
+```
+
+```{prf:proof}
+(a) We first show that $(2) \implies (1)$.
+
+1. Assume that (2) is satisfied.
+1. Pick any $\bx, \by \in X$.
+1. Since $f$ is proper and convex and $\bx, \by \in \interior \dom f$,
+   hence due to {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`,
+   $\partial f(\bx)$ and $\partial f(\by)$ are nonempty.
+1. Let $\bg_x \in \partial f(\bx)$
+   and $\bg_y \in \partial f(\by)$.
+1. By subgradient inequality
+   
+   $$
+   & f(\by) \geq f(\bx) + \langle \by - \bx, \bg_x \rangle; \\
+   & f(\bx) \geq f(\by) + \langle \bx - \by, \bg_y \rangle.
+   $$
+1. We can rewrite this as
+
+   $$
+   & f(\bx) - f(\by) \leq \langle \bx - \by , \bg_x \rangle; \\
+   & f(\by) - f(\bx) \leq \langle \by - \bx , \bg_y \rangle.
+   $$
+1. By generalized Cauchy Schwartz inequality ({prf:ref}`res-la-ip-gen-cs-ineq`),
+   
+   $$
+   \langle \bx - \by , \bg_x \rangle \leq \| \bx - \by \| \| \bg_x \|_*
+   \leq L \| \bx - \by \|; \\
+   \langle \by - \bx , \bg_y \rangle \leq \| \by - \bx \| \| \bg_y \|_*
+   \leq L \| \bx - \by \|.
+   $$
+1. Combining the two inequalities, we get
+
+   $$
+   | f(\bx) - f(\by) | \leq L \| \bx - \by \|.
+   $$
+1. Thus, $(2) \implies (1)$.
+
+
+(b) If $X$ is open, then we need to show that $(1) \iff (2)$.
+
+1. We have already shown that $(2) \implies (1)$.
+1. Assume that $X$ is open and $(1)$ holds.
+1. Let $\bx \in X$. 
+1. Since $\bx$ is an interior point of $\dom f$, hence
+   the subdifferential is nonempty.
+1. Pick any $\bg \in \partial f(\bx)$.
+1. Let $\bg^{\dag} \in \VV$ be a vector with $\| \bg^{\dag} \|=1$
+   and $\langle \bg^{\dag}, \bg \rangle = \| \bg \|_*$.
+   Such a vector exists by definition of the dual norm.
+1. Since $X$ is open, we can choose $\epsilon > 0$ small enough
+   such that $\bx + \epsilon \bg^{\dag} \in X$.
+1. By the subgradient inequality, we have:
+
+   $$
+   f(\bx + \epsilon \bg^{\dag}) \geq f(\bx) + \langle \epsilon \bg^{\dag}, \bg \rangle.
+   $$
+1. Thus,
+
+   $$
+   \epsilon \| \bg \|_* 
+   &= \langle \epsilon \bg^{\dag}, \bg \rangle \\
+   &\leq f(\bx + \epsilon \bg^{\dag}) - f(\bx) \\
+   &\leq L \| (\bx + \epsilon \bg^{\dag} - \bx \|  & \text{ by hypothesis in (1)} \\
+   &= L \epsilon \| \bg^{\dag} \| = L \epsilon.
+   $$
+1. Canceling $\epsilon$, we get:
+
+   $$
+   \| \bg \|_*  \leq L
+   $$
+   holds true for every $\bg \in \partial f(\bx)$ where $\bx \in X$ as desired.
+```
+
+
 
 In the reminder of this section, we compute the subgradients
 and subdifferential sets for a variety of standard functions.
