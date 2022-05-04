@@ -3406,6 +3406,43 @@ $$
   \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0 \Forall j \in I(\bx)
   \right \}.
 $$
+
+By Fermat's optimality condition
+({prf:ref}`res-cvxf-subdiff-fermat-optimality`),
+$\bx^*$ is a minimizer of $f$ if and only if $\bzero \in f(\bx^*)$.
+
+Thus, $\bx^*$ is a minimizer if and only if
+there exists $\blambda \in \Delta_m$ such that
+
+$$
+\bzero = \sum_{i=1}^m \lambda_i \ba_i,\quad \lambda_j = 0 \Forall j \notin I(\bx^*).
+$$
+
+Note that at any $\bx$, for every $j \notin I(\bx)$, we have
+
+$$
+\ba_j^T \bx + b_j - f(\bx) < 0.
+$$
+
+Thus, the complimentary condition
+
+$$
+\lambda_j (\ba_j^T \bx + b_j - f(\bx)) = 0, j=1,\dots,m
+$$
+denotes the fact that whenever
+$\ba_j^T \bx + b_j - f(\bx) < 0$, then $\lambda_j$ must be zero
+and whenever $\ba_j^T \bx + b_j - f(\bx) = 0$ then $\lambda_j \geq 0$
+is allowed (since $\blambda \in \Delta_m$).
+
+If we put together a matrix $\bA \in \RR^{m \times n}$
+whose rows are $\ba_1^T, \dots, \ba_m^T$, then
+the optimality condition can be succinctly stated as
+
+$$
+\exists \blambda \in \Delta_m \text{ s.t. }
+\bA^T \blambda = \bzero \text{ and }
+\lambda_j (\ba_j^T \bx + b_j - f(\bx^*)) = 0, j=1,\dots,m.
+$$
 ```
 
 ## Mean Value Theorem
