@@ -214,7 +214,7 @@ For the converse, assume that $\bx^*$ is an optimal point.
    1. Since $\bx^* \in \Delta_n$ hence $\sum_{j=1}^n x_j^* = 1$ implies that
       $x_i^* = 1$.
    1. Let $\mu = g_i$.
-   1. Pick any $j \in 1,\dots,n$ such that $j \neq i$.
+   1. Pick any $j \in \{1,\dots,n \}$ such that $j \neq i$.
    1. Let $\bx = \be_j$; i.e., the unit vector whose $j$-th component is 1
       and other components are zero.
    1. Then,
@@ -257,8 +257,8 @@ For the converse, assume that $\bx^*$ is an optimal point.
       to the positive components of $\bx^*$ must have the same
       value.
    1. Let this common value be $\mu$. 
-   1. In other words, $g_i = \mu$ for all $i \in 1,\dots,n$ such that $x_i^* > 0$.
-   1. Now consider some $k \in 1,\dots,n$ such that $x_k = 0$.
+   1. In other words, $g_i = \mu$ for all $i=1,\dots,n$ such that $x_i^* > 0$.
+   1. Now consider some $k \in \{1,\dots,n\}$ such that $x_k = 0$.
    1. Let $\bx = \be_k$.
    1. Note that $\sum_{i=1}^n \bx_i^* = 1$ simplifies to $\sum_{i \ST x_i > 0} x_i^* = 1$.
    1. Then, 
@@ -271,6 +271,77 @@ For the converse, assume that $\bx^*$ is an optimal point.
       \implies & g_k - \mu \geq 0\\ 
       \implies & g_k \geq \mu.
       $$
-   1. Thus, $g_i \geq \mu$ for all $i \in 1,\dots,n$ such that $x^*_i = 0$.
+   1. Thus, $g_i \geq \mu$ for all $i=1,\dots,n$ such that $x^*_i = 0$.
    1. Thus, we have established that $\bg$ indeed satisfies {eq}`eq-opt-cvx-unit-simplex-cond`.
 ```
+
+```{prf:example} Optimization over the unit simplex
+:label: ex-opt-unit-simplex-1
+
+Consider the function $f : \RR^n \to \RERL$ given by
+
+$$
+f(\bx) = \begin{cases}
+\sum_{i=1}^n x_i \ln x_i - \sum_{i=1}^n y_i x_i, & \bx \succeq \bzero;\\
+\infty & \text{ otherwise}.
+\end{cases}
+$$
+The vector $\by = (y_1, \dots, y_n) \in \RR^n$ is fixed.
+Consider the optimization problem
+
+$$
+\min \{ f(\bx) \ST \bx \in \Delta_n \}.
+$$
+
+1. $f$ is a proper convex function.
+1. We can see that $\dom f = \RR^n_+$.
+1. $\interior \dom f = \relint \dom f = \RR^n_{++}$. 
+1. It is easy to see that $\relint \dom f \cap \relint \Delta_n \neq \EmptySet$.
+1. $f$ is differentiable at $\bx \in \interior \dom f$.
+1. The partial derivatives of $f$ are given by
+
+   $$
+   \frac{\partial f}{\partial x_i} (\bx) = 1 + \ln x_i - y_i.
+   $$
+1. Thus, $\partial f(\bx) = \{ \nabla f(\bx) \}$ at every $\bx \succ \bzero$.
+1. Assume that there is an optimal solution satisfying $\bx^* \succ \bzero$.
+1. By {prf:ref}`res-opt-cond-cvx-over-unit-simplex`, there exists $\bg \in \partial f(\bx^*)$
+   and $\mu \in \RR$
+   satisfying {eq}`eq-opt-cvx-unit-simplex-cond`.
+1. Since $\bx \succ \bzero$, {eq}`eq-opt-cvx-unit-simplex-cond`
+   simplifies to $g_i = \mu$ for all $i=1,\dots,n$.
+1. Since $f$ is differentiable, hence the only subgradient is $\nabla f(\bx^*)$.
+1. Thus, there exists $\mu \in \RR$ such that 
+ 
+   $$
+   \frac{\partial f}{\partial x_i} (\bx^*) = \mu.
+   $$
+1. This implies
+
+   $$
+   1 + \ln x_i^* - y_i = \mu.
+   $$
+1. Therefore, for every $i$
+
+   $$
+   x_i^* = e^{\mu - 1 + y_i} = \alpha e^{y_i}
+   $$
+   where $\alpha = e^{\mu - 1}$.
+1. Since $\bx^* \in \Delta_n$, hence $\sum_{i=1}^n x_i^* = 1$.
+1. Thus,
+
+   $$
+   & \sum_{i=1}^n \alpha e^{y_i} = 1 \\
+   \iff & \alpha = \frac{1}{\sum_{i=1}^n e^{y_i}}.
+   $$
+1. Therefore 
+
+   $$
+   x_i^* = \frac{e^{y_i}}{\sum_{j=1}^n e^{y_j}} \Forall i = 1,\dots,n.
+   $$
+1. We note that $\bx^*$ obtained above satisfies all the conditions 
+   in {prf:ref}`res-opt-cond-cvx-over-unit-simplex`.
+1. Since these conditions are also sufficient, hence $\bx^*$ is indeed
+   the optimal solution for this minimization problem.
+```
+
