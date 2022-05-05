@@ -2338,6 +2338,12 @@ $$
 \subseteq \partial f(\bx)
 $$
 where $I(\bx) = \{ i \in I \ST f_i(\bx) = f(\bx)\}$.
+
+In words, if $f_i(\bx) = f(\bx)$, then a subgradient of $f_i$
+at $\bx$ is also a subgradient of $f$ at $\bx$.
+Also, for all $i \in I$ such that $f_i(\bx) = f(\bx)$,
+any convex combination of their subgradients at $\bx$ is also a subgradient
+of $f$ at $\bx$.
 ```
 
 ```{prf:proof}
@@ -2375,83 +2381,303 @@ Pick some $\bx \in \dom f$.
    $$
 ```
 
+Next is an example application of the weak max rule.
 
-## Maximum over a Set of Functions
+```{prf:example} Subgradient of $\lambda_{\max}(\bA_0 + \sum_{i=1}^m x_i \bA_i$
+:label: ex-cvxf-subdiff-max-eigen-val-m-sym-mat-sum
 
-```{div}
-Here, we summarize the main results for subdifferentials
-and directional derivatives for a function which
-is the pointwise maximum of a set of functions.
 
-Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be a set of
-proper functions. Let
-
-$$
-f(\bx) = \max \{ f_1(\bx), f_2(\bx), \dots, f_m(\bx)\}.
-$$
-
-Let $\bx \in \bigcap_{i=1}^m \interior \dom f_i$ be a point common to the
-interiors of the domains of all the functions.
-Let $\bd \in \VV$ be a (nonzero) direction. 
-
-We recall from {prf:ref}`res-cvxf-dir-der-max-funcs`
-that if $f'_i(\bx;\bd)$ exist for all $i$, we have,
+Let $\bA_0, \bA_1, \dots, \bA_m \in \SS^n$ be $m+1$ given symmetric
+matrices. Define an affine transformation $\bAAA : \RR^m \to \SS^n$
+as
 
 $$
-f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'_i(\bx;\bd)
+\bAAA(\bx) \triangleq \bA_0 + \sum_{i=1}^m x_i \bA_i.
 $$
-where $I(\bx) = \{ i \ST f_i(\bx) = f(\bx)\}$.
-
-
-In other words, we identify the functions $f_i$ which achieve the maximum
-$f(\bx)$ at $\bx$, compute the directional derivatives of these functions at $\bx$
-for the direction $\bd$ and then compute the maximum of the directional derivatives.
-
-
-If $f_i$ are all proper and convex, then
-by {prf:ref}`res-cvxf-dir-der-exist-convex`,
-the directional derivatives $f'(\bx; \bd)$ and
-$f'_i(\bx; \bd)$ for $i=1,\dots,m$ exist.
-Thus, {prf:ref}`res-cvxf-dir-der-max-convex-funcs` applies.
-We have:
+For every vector $\bx \in \RR^m$, this mapping
+defines a symmetric matrix $\bAAA(\bx)$.
+We can compute the largest eigen value of $\bAAA(\bx)$.
+We introduce a function $f: \RR^m \to \RR$ as
 
 $$
-f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'_i(\bx;\bd)
+f(\bx) \triangleq \lambda_{\max} (\bAAA(\bx)) 
+=  \lambda_{\max} (\bA_0 + \sum_{i=1}^m x_i \bA_i). 
 $$
-where $I(x) = \{ i \ST f_i(x) = f(x)\}$.
+Our task is to find a subgradient of $f$ at $\bx$.
+
+1. Recall from the definition of largest eigen values,
+
+   $$
+   f(\bx) = \underset{\by \in \RR^n;  \| \by \|_2 = 1 }{\sup} \by^T \bAAA(\bx) \by.
+   $$
+
+1. For every $\by \in \RR^n$ such that $\| \by \|_2 = 1$,
+   we can define a function:
+
+   $$
+   f_{\by}(\bx) \triangleq \by^T \bAAA(\bx) \by.
+   $$
+
+1. Then,
+
+   $$
+   f(\bx) = \underset{\by \in \RR^n;  \| \by \|_2 = 1 }{\sup} f_{\by}(\bx).
+   $$
+1. The function $f_{\by}(\bx)$ is affine (in $\bx$) for every $\by$.
+1. Thus, $f_{\by}$ is convex for every $\by$.
+1. Thus, $f$ is a pointwise supremum of a family of 
+   functions $f_{\by}$.
+1. Thus, $f$ is also convex (see {prf:ref}`res-cvx-ptws-supremum`).
+1. Consequently, we can use the weak max rule
+   {prf:ref}`res-cvxf-subdiff-calculus-weak-max-rule`
+   to identify a subgradient of $f$ at $\bx$.
+1. Let $\tilde{\by}$ be a normalized eigenvector of $\bAAA(\bx)$
+   corresponding to its largest eigenvalue. Then
+
+   $$
+   f(\bx) = \tilde{\by}^T \bAAA(\bx) \tilde{\by}.
+   $$
+1. This means that $f(\bx) = f_{\tilde{\by}}(\bx)$.
+1. By the weak max rule, a subgradient of $f_{\tilde{\by}}$ at $\bx$
+   is also a subgradient of $f$ at $\bx$.
+1. Expanding $f_{\tilde{\by}}(\bx)$:
+
+   $$
+   f_{\tilde{\by}}(\bx) = \tilde{\by}^T \bAAA(\bx) \tilde{\by}
+   = \tilde{\by}^T \bA_0\tilde{\by} 
+   + \sum_{i=1}^m \tilde{\by}^T \bA_i \tilde{\by} x_i.
+   $$
+1. Then, the gradient of $f_{\tilde{\by}}$ at $\bx$
+   (computed by taking partial derivatives w.r.t. $x_i$) is
+
+   $$
+   \nabla f_{\tilde{\by}}(\bx) = 
+   (\tilde{\by}^T \bA_1 \tilde{\by}, \dots, \tilde{\by}^T \bA_m \tilde{\by}). 
+   $$
+1. Since $f_{\by}$ is affine (thus convex), hence its gradient
+   is also a subgradient.
+1. Thus, 
+
+   $$
+   (\tilde{\by}^T \bA_1 \tilde{\by}, \dots, \tilde{\by}^T \bA_m \tilde{\by})
+   \in \partial f(\bx).
+   $$
+```
+
+## Lipschitz Continuity
+
+```{prf:theorem} Lipschitz continuity and boundedness of the subdifferential sets
+:label: res-cvxf-subdiff-bounded-lipschitz-continuous
+
+Let $f : \VV \to \RERL$ be a proper convex function.
+Suppose that $X \subseteq \interior \dom f$.
+Consider the following two claims:
+
+1. $| f(\bx) - f(\by) | \leq L \| \bx - \by \|$ for any $\bx, \by \in X$.
+1. $ \| \bg \|_* \leq L$ for any $\bg \in \partial f(\bx)$ where $\bx \in X$.
+
+Then,
+
+* (2) implies (1). In other words, if subgradients are bounded
+  then, the function is Lipschitz continuous.
+* If $X$ is open, then (1) holds if and only if (2) holds. 
+
+In other words, if the subgradients over a set $X$
+are bounded then $f$ is Lipschitz continuous over $X$.
+If $X$ is open then $f$ is Lipschitz continuous over $X$
+if and only if the subgradients over $X$ are bounded.
+```
+
+```{prf:proof}
+(a) We first show that $(2) \implies (1)$.
+
+1. Assume that (2) is satisfied.
+1. Pick any $\bx, \by \in X$.
+1. Since $f$ is proper and convex and $\bx, \by \in \interior \dom f$,
+   hence due to {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`,
+   $\partial f(\bx)$ and $\partial f(\by)$ are nonempty.
+1. Let $\bg_x \in \partial f(\bx)$
+   and $\bg_y \in \partial f(\by)$.
+1. By subgradient inequality
+   
+   $$
+   & f(\by) \geq f(\bx) + \langle \by - \bx, \bg_x \rangle; \\
+   & f(\bx) \geq f(\by) + \langle \bx - \by, \bg_y \rangle.
+   $$
+1. We can rewrite this as
+
+   $$
+   & f(\bx) - f(\by) \leq \langle \bx - \by , \bg_x \rangle; \\
+   & f(\by) - f(\bx) \leq \langle \by - \bx , \bg_y \rangle.
+   $$
+1. By generalized Cauchy Schwartz inequality ({prf:ref}`res-la-ip-gen-cs-ineq`),
+   
+   $$
+   \langle \bx - \by , \bg_x \rangle \leq \| \bx - \by \| \| \bg_x \|_*
+   \leq L \| \bx - \by \|; \\
+   \langle \by - \bx , \bg_y \rangle \leq \| \by - \bx \| \| \bg_y \|_*
+   \leq L \| \bx - \by \|.
+   $$
+1. Combining the two inequalities, we get
+
+   $$
+   | f(\bx) - f(\by) | \leq L \| \bx - \by \|.
+   $$
+1. Thus, $(2) \implies (1)$.
+
+
+(b) If $X$ is open, then we need to show that $(1) \iff (2)$.
+
+1. We have already shown that $(2) \implies (1)$.
+1. Assume that $X$ is open and $(1)$ holds.
+1. Let $\bx \in X$. 
+1. Since $\bx$ is an interior point of $\dom f$, hence
+   the subdifferential is nonempty.
+1. Pick any $\bg \in \partial f(\bx)$.
+1. Let $\bg^{\dag} \in \VV$ be a vector with $\| \bg^{\dag} \|=1$
+   and $\langle \bg^{\dag}, \bg \rangle = \| \bg \|_*$.
+   Such a vector exists by definition of the dual norm.
+1. Since $X$ is open, we can choose $\epsilon > 0$ small enough
+   such that $\bx + \epsilon \bg^{\dag} \in X$.
+1. By the subgradient inequality, we have:
+
+   $$
+   f(\bx + \epsilon \bg^{\dag}) \geq f(\bx) + \langle \epsilon \bg^{\dag}, \bg \rangle.
+   $$
+1. Thus,
+
+   $$
+   \epsilon \| \bg \|_* 
+   &= \langle \epsilon \bg^{\dag}, \bg \rangle \\
+   &\leq f(\bx + \epsilon \bg^{\dag}) - f(\bx) \\
+   &\leq L \| (\bx + \epsilon \bg^{\dag} - \bx \|  & \text{ by hypothesis in (1)} \\
+   &= L \epsilon \| \bg^{\dag} \| = L \epsilon.
+   $$
+1. Canceling $\epsilon$, we get:
+
+   $$
+   \| \bg \|_*  \leq L
+   $$
+   holds true for every $\bg \in \partial f(\bx)$ where $\bx \in X$ as desired.
 ```
 
 
-```{rubric} Differentiable functions
-```
+```{prf:corollary} Lipschitz continuity of convex functions over compact domains
+:label: res-cvxf-convex-func-compact-dom-lipschitz-cont
 
-```{div}
-If $f_i$ are differentiable at $x$, then
-
-$$
-f'(x; d) = \underset{i \in I(x)}{\max} f'_i(x;d) 
-= \underset{i \in I(x)}{\max} \langle \nabla f_i(x) , d \rangle.
-$$
-```
-
-```{rubric} Infinite set of functions
-```
-We have a weak rule for the subdifferential of the supremum of 
-an arbitrary set of functions.
-
-```{div}
-Let $I$ be an arbitrary index set indexing a set of proper 
-convex functions $f_i : \VV \to \RERL$ where $i \in I$.
-
-Then for any  $x \in \dom f$, 
+Let $f: \VV \to \RERL$ be a proper and convex function. Suppose that
+$X \subseteq \interior \dom f$ is compact. 
+Then, there exists $L > 0$ such that
 
 $$
-\text{conv } \left ( \bigcup_{i \in I(x)} \partial f_i(x)
-  \right ) \subseteq \partial f(x)
-$$
-
-where $I (x) = \{i \in I \ST f(x) = f_i (x) \}$.
+| f(\bx) -f(\by) | \leq L \| \bx - \by \| \quad \Forall \bx, \by \in X.
+$$  
 ```
+
+```{prf:proof}
+Recall from {prf:ref}`res-cvxf-subg-compact-nonempty-bounded`
+that the subgradients of a proper convex function over
+a compact set are nonempty and bounded.
+
+1. In other words, the set
+
+   $$
+   Y = \bigcup_{\bx \in X} \partial f(\bx)
+   $$
+   is nonempty and bounded.
+1. Thus, for every $\bg \in Y$, there exists $L > 0$
+   such that $\| \bg \|_* \leq L$.
+1. Then by {prf:ref}`res-cvxf-subdiff-bounded-lipschitz-continuous`,
+   
+   $$
+   | f(\bx) - f(\bx)| \leq L \| \bx - \by \| \Forall \bx, \by \in X.
+   $$
+1. Thus, $f$ is indeed Lipschitz continuous over $X$.
+```
+
+## Optimality Conditions
+
+A well known result for differentiable functions is that
+at the point of optimality $\nabla f(\bx) = \bzero$
+(see {prf:ref}`res-opt-first-order-optimality-local`).
+Subdifferentials are useful in characterizing the
+minima of a function. The idea of vanishing gradients
+can be generalized for subgradients also.
+
+```{prf:theorem} Fermat's optimality condition
+:label: res-cvxf-subdiff-fermat-optimality
+
+Let $f : \VV \to \RERL$ be a proper convex function.
+Then 
+
+$$
+\ba \in \argmin \{ f(\bx) \ST \bx \in \VV \}
+$$
+if and only if $\bzero \in \partial f(\ba)$.
+
+In other words, $\ba$ is a minimizer of $f$ if and only if
+$\bzero$ is a subgradient of $f$ at $\ba$.
+```
+
+```{prf:proof}
+Assume that $\bzero \in \partial f(\ba)$ where $\ba \in \dom f$.
+
+1. By subgradient inequality
+
+   $$
+   f(\bx) \geq f(\ba) + \langle \bx - \ba, \bzero \rangle \Forall \bx \in \VV.
+   $$
+1. This simplifies to
+   
+   $$
+   f(\bx) \geq f(\ba) \Forall \bx \in \VV.
+   $$
+1. Thus, $\ba \in \argmin \{ f(\bx) \ST \bx \in \VV \}$.
+
+
+For the converse, assume that $\ba \in \argmin \{ f(\bx) \ST \bx \in \VV \}$.
+
+1. Then, 
+   
+   $$
+   f(\bx) \geq f(\ba) \Forall \bx \in \VV.
+   $$
+1. But then
+
+   $$
+   & f(\bx) \geq f(\ba) \\
+   & \iff f(\bx) \geq f(\ba) + 0 \\
+   & \iff f(\bx) \geq f(\ba) + \langle \bx - \ba, \bzero \rangle
+   $$
+   holds true for every $\bx \in \VV$.
+1. This implies that $\bzero \in \partial f(\ba)$.
+```
+
+## Mean Value Theorem
+
+The following result is from {cite}`hiriart2013convex`.
+
+```{prf:theorem} A subgradients based mean value theorem for 1D functions
+:label: res-cvxf-convex-subdiff-mvt
+
+Let $f : \RR \to \RERL$ be a proper closed convex function.
+Let $[a,b] \subseteq \dom f$ with $a < b$. Then,
+
+$$
+f(b) - f(a) = \int_a^b h(t) d t
+$$
+where $h : (a, b) \to \RR$ satisfies $h(t) \in \partial f(t)$
+for every $t \in (a, b)$.
+```
+
+
+
+
+
+
+
+In the reminder of this section, we compute the subgradients
+and subdifferential sets for a variety of standard functions.
 
 ## Norm Functions
 
@@ -2944,7 +3170,7 @@ The subdifferential of indicator function for a nonempty set $S \subset \VV$
 at any point $\bx \in S$ is given by
 
 $$
-\partial \delta_S (\bx) = N_S (\bx).
+\partial I_S (\bx) = N_S (\bx).
 $$
 
 where $N_S (\bx)$ is the 
@@ -3197,23 +3423,43 @@ $$
   \sum_{i \in I(\bx)} \lambda_i = 1, \lambda_j \geq 0 \Forall j \in I(\bx)
   \right \}.
 $$
-```
 
-## Mean Value Theorem
+By Fermat's optimality condition
+({prf:ref}`res-cvxf-subdiff-fermat-optimality`),
+$\bx^*$ is a minimizer of $f$ if and only if $\bzero \in f(\bx^*)$.
 
-The following result is from {cite}`hiriart2013convex`.
-
-```{prf:theorem} A subgradients based mean value theorem for 1D functions
-:label: res-cvxf-convex-subdiff-mvt
-
-Let $f : \RR \to \RERL$ be a proper closed convex function.
-Let $[a,b] \subseteq \dom f$ with $a < b$. Then,
+Thus, $\bx^*$ is a minimizer if and only if
+there exists $\blambda \in \Delta_m$ such that
 
 $$
-f(b) - f(a) = \int_a^b h(t) d t
+\bzero = \sum_{i=1}^m \lambda_i \ba_i,\quad \lambda_j = 0 \Forall j \notin I(\bx^*).
 $$
-where $h : (a, b) \to \RR$ satisfies $h(t) \in \partial f(t)$
-for every $t \in (a, b)$.
+
+Note that at any $\bx$, for every $j \notin I(\bx)$, we have
+
+$$
+\ba_j^T \bx + b_j - f(\bx) < 0.
+$$
+
+Thus, the complimentary condition
+
+$$
+\lambda_j (\ba_j^T \bx + b_j - f(\bx)) = 0, j=1,\dots,m
+$$
+denotes the fact that whenever
+$\ba_j^T \bx + b_j - f(\bx) < 0$, then $\lambda_j$ must be zero
+and whenever $\ba_j^T \bx + b_j - f(\bx) = 0$ then $\lambda_j \geq 0$
+is allowed (since $\blambda \in \Delta_m$).
+
+If we put together a matrix $\bA \in \RR^{m \times n}$
+whose rows are $\ba_1^T, \dots, \ba_m^T$, then
+the optimality condition can be succinctly stated as
+
+$$
+\exists \blambda \in \Delta_m \text{ s.t. }
+\bA^T \blambda = \bzero \text{ and }
+\lambda_j (\ba_j^T \bx + b_j - f(\bx^*)) = 0, j=1,\dots,m.
+$$
 ```
 
 ## Minimization Problems
