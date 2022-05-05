@@ -1128,4 +1128,37 @@ function with $\sigma > 0$. Then,
 ```
 
 
+## Smoothness and Strong Convexity
+
+### The Conjugate Correspondence Theorem
+
+The idea of smoothness and strong convexity is connected.
+Roughly speaking, a function is strongly convex 
+if and only if its conjugate is smooth.
+
+```{prf:theorem} Conjugate correspondence theorem
+:label: res-cvxf-conjugate-correspondence
+
+Let $\sigma > 0$. Then
+
+1. If $f : \VV \to \RR$ is a $\frac{1}{\sigma}$-smooth convex function, then
+   $f^*$ is $\sigma$-strongly convex w.r.t. the dual norm $\| \cdot \|_*$.
+1. If $f: \VV \to \RERL$ is a proper closed $\sigma$-strongly convex
+   function, then $f^* : \VV^* \to \RR$ is $\frac{1}{\sigma}$-smooth.  
+```
+
+```{prf:proof}
+(1) Smooth convex to strongly convex conjugate
+
+1. We are given that $f: \VV \to \RR$ is a $\frac{1}{\sigma}$-smooth convex function.
+1. Pick any $\by_1, \by_2 \in \dom (\partial f^*)$.
+1. Let $\v_1 \in \partial f^*(\by_1)$ and $\bv_2 \in \partial f^*(\by_2)$.
+1. Since $f$ is proper and convex, hence by conjugate subgradient theorem...
+
+
+(2) Strongly convex  to smooth conjugate
+
+```
+
+
 
