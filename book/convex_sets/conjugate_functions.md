@@ -276,6 +276,10 @@ Then,
 $$
 f(\bx) = f^{**} (\bx) \Forall x \in \VV. 
 $$
+
+In other words, $f^{**} = f$. Or the biconjugate
+of a proper closed and convex function is the function
+itself.
 ```
 
 ```{prf:proof}
@@ -297,7 +301,7 @@ holds true when $f$ is proper, closed and convex.
    $$
    \langle (\bx, s), (\by, t) \rangle
    \triangleq \langle \bx, \by \rangle + st.
-   $$ s
+   $$
 1. Since $f$ is proper, hence $\epi f$ is nonempty.
 1. Since $f$ is closed, hence $\epi f$ is closed.
 1. Since $f$ is convex, hence $\epi f$ is convex.
@@ -1321,10 +1325,9 @@ function is the log-sum-exp function.
 
 
 
-```{rubric} Log sum exp
-```
+```{prf:theorem} Log sum exp
+:label: res-cvxf-conjugate-log-sum-exp
 
-```{div}
 Let $f : \RR^n \to \RR$ be given by:
 
 $$
@@ -1336,11 +1339,24 @@ The conjugate is:
 
 $$
 f^*(\by) =  \begin{cases}
-\sum_{i=1}^n y_i \ln (y_i) & \by \in \Delta_n\\
+\sum_{i=1}^n y_i \ln y_i & \by \in \Delta_n\\
 \infty & \text{ otherwise }
 \end{cases}.
 $$
 ```
+
+```{prf:proof}
+Following {prf:ref}`res-cvxf-conjugate-neg-entropy-unit-simplex`,
+$f = g^*$ where $g$ is the negative entropy over the
+unit simplex function.
+Since $g$ is proper, closed and convex, hence
+due to {prf:ref}`res-cvxf-biconjugate-proper-closed-convex`,
+
+$$
+f^* = g^{**} = g.
+$$
+```
+
 
 Log-sum-exp and negative entropy over simplex and conjugate
 of each other.
