@@ -343,5 +343,32 @@ $$
    in {prf:ref}`res-opt-cond-cvx-over-unit-simplex`.
 1. Since these conditions are also sufficient, hence $\bx^*$ is indeed
    the optimal solution for this minimization problem.
+1. Let us compute the optimal value of the minimization problem.
+1. We note that
+    
+   $$
+   \ln x_i^* = \mu - 1 + y_i.
+   $$
+1. Hence 
+
+   $$
+   & f(\bx^*) = \sum_{i=1}^n x_i^* \ln x_i^* - \sum_{i=1}^n y_i x_i^* \\
+   &= \sum_{i=1}^n x_i^* ( \mu - 1 + y_i) - \sum_{i=1}^n y_i x_i^* \\
+   &= \sum_{i=1}^n x_i^* ( \mu - 1) \\
+   &= ( \mu - 1)  \sum_{i=1}^n x_i^* \\
+   & = \mu -1.
+   $$
+1. In terms of $\by$,
+
+   $$
+   f(\bx^*) = \mu -1 = \ln \alpha
+   = - \ln \left ( \sum_{i=1}^n e^{y_i} \right ).
+   $$
+1. The optimal value is the negative of the log-sum-exp of $\by$.
+
+This optimization problem is used in the
+computation of the conjugate function for the
+negative entropy function. 
+See {prf:ref}`res-cvxf-conjugate-neg-entropy-unit-simplex`.
 ```
 
