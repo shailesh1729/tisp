@@ -1267,7 +1267,7 @@ Let $f : \RR^n \to \RR$ be given by:
 
 $$
 f(\bx) \triangleq \begin{cases}
-\sum_{i=1}^n x_i \ln (x_i) & \bx \in \Delta_n\\
+\sum_{i=1}^n x_i \ln x_i & \bx \in \Delta_n\\
 \infty & \text{ otherwise }
 \end{cases}.
 $$
@@ -1300,6 +1300,23 @@ f^*(\by) &= \sup_{\bx}  \{ \langle \bx, \by \rangle - f(\bx)\}\\
 &= \sup_{\bx} \left \{ \sum_{i=1}^n y_i x_i - \sum_{i=1}^n x_i \ln x_i \ST
 \sum_{i=1}^n x_i = 1, x_1, \dots, x_n \geq 0 \right \}.
 $$
+
+This maximization problem is equivalent to the
+minimization problem discussed later in
+{prf:ref}`ex-opt-unit-simplex-1`.
+The optimal solution is given by
+
+$$
+x_i^* = \frac{e^{y_i}}{\sum_{j=1}^n e^{y_j}} \Forall i = 1,\dots,n.
+$$
+Accordingly, the optimal (supremum) value
+(following {prf:ref}`ex-opt-unit-simplex-1`) is
+
+$$
+f^*(\by) = \ln \left ( \sum_{i=1}^n e^{y_i} \right ).
+$$
+In other words, the conjugate of the negative entropy
+function is the log-sum-exp function.
 ```
 
 
