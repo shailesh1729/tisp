@@ -1751,6 +1751,90 @@ We proceed as follows
 1. Thus, $\sigma_C = I_{C^{\circ}}$.
 ```
 
+```{prf:example} Support function of nonnegative orthant
+:label: res-cvxf-support-nng-orthant
+
+Let $\VV = \RR^n$ and $C = \RR^n_+$. $C$ is the
+nonnegative orthant which is a closed convex cone.
+Its polar cone is given by
+
+$$
+C^{\circ} = \RR^n_-
+$$
+which is the nonpositive orthant $\{\bx \in \RR^n \ST \bx \preceq \bzero \}$.
+By {prf:ref}`res-cvxf-support-cone`,
+
+$$
+\sigma_{\RR^n_+} (\by) = I_{\RR^n_-} (\by).
+$$
+```
+
+### Affine Sets
+
+```{prf:theorem} Support function for an affine set
+:label: res-cvxf-support-affine-set
+
+Let $\BB \in \RR^{m \times n}$ and $\bb \in \RR^m$.
+Define the set $C \subseteq \RR^n$ as
+
+$$
+C = \{\bx \in \RR^n \ST \bB \bx = \bb \}.
+$$
+Assume that $C$ is nonempty and let $\bx_0 \in C$
+be one of the solutions of the system of equations $\bB \bx = \bb$.
+Then
+
+$$
+\sigma_C(\by) = \langle \bx_0, \by \rangle + I_{\range (\bB^T)} (\by).
+$$
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. By definition of support function
+
+   $$
+   \sigma_C(\by) = \sup \{  \langle \bx, \by \rangle \ST \bB \bx  = \bb \}.
+   $$
+1. Introduce a variable $\bz = \bx - \bx_0$.
+1. Then $\bx = \bz + \bx_0$.
+1. Accordingly
+
+   $$
+   \sigma_C(\by) &= \sup \{  \langle \bz + \bx_0, \by \rangle 
+      \ST \bB (\bz + \bx_0)  = \bb \} \\
+   &= \langle \bx_0, \by \rangle  
+   + \sup \{  \langle \bz, \by \rangle \ST \bB \bz = \bzero \} \\
+   &= \langle \bx_0, \by \rangle  + \sigma_D (\by)
+   $$
+   where $D = \{\bx \ST \bB \bx = \bzero \}$.
+1. We note that the statement $\bB \bx = \bzero$ is equivalent to
+   $\bB \bx \succeq \bzero$ and $\bB \bx \preceq \bzero$.
+1. In other words, $D = \{ \bx \in \RR^n \ST \bA \bx \preceq \bzero \}$
+   where $\bA = \begin{bmatrix}\bB \\ - \bB \end{bmatrix}$.
+1. The set $D$ is a convex polyhedral cone.
+1. By {prf:ref}`res-cvxf-support-cone`, the support function
+   of a cone is the indicator function of its polar cone.
+1. By {prf:ref}`res-cvxf-polar-convex-polyhedral-cone`, the 
+   polar cone is given by
+
+   $$
+   D^{\circ} = \{ \bB^T \bt_1 - \bB^T \bt_2 \ST \bt_1, \bt_2 \succeq \bzero \}.
+   $$
+1. It is easy to see that $D^{\circ}  = \range (\bB^T)$.
+   1. Every vector $\bt \in \RR^m$ can be split into two vectors 
+      $\bt_1, \bt_2 \in \RR^m_+$
+      such that $\bt = \bt_1 - \bt_2$.
+   1. Accordingly $\bB^T \bt = \bB^T \bt_1 - \bB^T \bt_2$.
+1. This gives us
+
+   $$
+   \sigma_C(\by) = \langle \bx_0, \by \rangle  + I_{D^{\circ}} (\by).
+   $$
+```
+
+
 ## Gauge Functions
 
 
