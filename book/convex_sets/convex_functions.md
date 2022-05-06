@@ -1407,6 +1407,20 @@ $$
 $$
 ```
 
+```{prf:example} Finite sets
+:label: ex-cvxf-support-finite-set
+
+Let $C = \{ \bb_1, \dots, \bb_m \}$ be a finite subset of $\VV$.
+Then,
+
+$$
+\sigma_C (\bx) = \max \{ \langle \bx, \bb_1\rangle, \dots, \langle \bx, \bb_m\rangle \}.
+$$
+This follows directly from the definition.
+```
+
+
+### Convexity
 
 ```{prf:theorem} Convexity of support function
 :label: res-cvxf-support-fun-convex
@@ -1433,6 +1447,8 @@ By {prf:ref}`res-cvx-ptws-supremum`, $\sigma_C$ is convex.
 
 We note that the convexity of the support function $\sigma_C$
 has nothing to do with the convexity of the underlying set $C$.
+
+### Closedness
 
 ```{prf:theorem} Closedness of support function
 :label: res-cvxf-support-fun-closed
@@ -1473,6 +1489,7 @@ Recall that a function is closed if all its sublevel sets are closed.
 1. Thus, $\sigma_C$ is closed.
 ```
 
+### Equality of Underlying Sets
 
 ```{prf:theorem} Equality of underlying sets for support functions
 :label: res-cvxf-support-func-equality-convex
@@ -1513,6 +1530,8 @@ Now, assume that $\sigma_A = \sigma_B$.
    are identical.
 1. Thus, $A = B$ must hold.
 ```
+
+### Closure and Convex Hull
 
 The next result shows that support function
 for a set and its closure or its convex hull
@@ -1596,6 +1615,8 @@ Now, consider the case of convex hull.
    $\sigma_A = \sigma_{\convex A}$.
 ```
 
+### Arithmetic Properties
+
 Following properties of support functions are useful in
 several applications.
 
@@ -1674,6 +1695,61 @@ $$
 $$
 ```
 
+### Cones
+
+Recall from {prf:ref}`def-cone` that a set $C$ is called a cone
+if for every $\bx \in C$ and every $t \geq 0$, $t \bx \in C$.
+Also, recall from {prf:ref}`def-cvx-polar-cone` that the polar
+cone of a set $C$ is given by
+
+$$
+C^{\circ} = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0
+\Forall \bx \in C \}.
+$$
+
+```{prf:theorem} Support function of a cone
+:label: res-cvxf-support-cone
+
+Let $C$ be a given cone.
+Then, 
+
+$$
+\sigma_C(\by) = I_{C^{\circ}} (\by) \Forall \by \in \VV^*.
+$$
+In words, the support function of a cone $C$ is the
+indicator function of the polar cone of $C$.
+```
+
+```{prf:proof}
+We proceed as follows
+
+1. Assume that $\by \in C^{\circ}$.
+1. Then, $\langle \bx, \by \rangle \leq 0 \Forall \bx \in C$.
+1. In particular, $\bzero \in C$ since $C$ is a cone.
+1. Accordingly, $\langle \bzero, \by \rangle = 0$.
+1. Thus,
+
+   $$
+   \sigma_C(\by) = \sup_{\bx \in C} \langle \bx, \by \rangle = 0.
+   $$
+1. Now consider $\by \notin C^{\circ}$.
+1. Then, there exists $\bu \in C$ such that $\langle \bu, \by \rangle > 0$.
+1. Since $C$ is a cone, hence $t \bu \in C$ for all $t \geq 0$.
+1. Accordingly,
+
+   $$
+   \sigma_C(\by) = \sup_{\bx \in C} \langle \bx, \by \rangle
+   \geq \langle t \bu, \by \rangle \Forall t \geq 0.
+   $$
+1. Taking the limit $t \to \infty$, we see that
+
+   $$
+   \sigma_C(\by)  = \infty.
+   $$
+1. Thus, $\sigma_C(\by) = 0$ for all $\by \in C^{\circ}$
+   and $\sigma_C(\by)  = \infty$ otherwise.
+1. Thus, $\sigma_C = I_{C^{\circ}}$.
+```
 
 ## Gauge Functions
 
