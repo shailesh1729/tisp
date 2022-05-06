@@ -38,6 +38,9 @@ $$
 \sigma_C (\bx) =  \sup_{\bz \in C} \langle \bz, \bx \rangle.
 $$
 
+
+### Indicator Functions
+
 ```{prf:theorem} Conjugate of an indicator function
 :label: res-cvxf-conjugate-indicator-func
 
@@ -75,6 +78,8 @@ Let $\by \in \VV*$ be arbitrary.
    $$
    The result follows.
 ```
+
+### Fenchel's Inequality
 
 ```{prf:theorem} Fenchel's inequality
 :label: res-cvxf-conjugate-fenchel
@@ -122,6 +127,8 @@ We proceed as follows.
    $$
 ```
 
+### Convexity and Closedness
+
 ```{prf:theorem} Convexity and closedness
 :label: res-cvxf-conjugate-convex-closed
 
@@ -154,10 +161,10 @@ convex even if the original function is not
 convex or not closed.
 
 
-
+### Properness
 
 ```{prf:theorem} Properness of conjugates of proper convex functions
-:label: res-cvxf-proper-func-conjuate-proper
+:label: res-cvxf-proper-func-conjugate-proper
 
 Let $f : \VV \to \RERL$ be a proper convex function.
 Then, its conjugate $f^*$ is proper. 
@@ -231,6 +238,8 @@ f^{**} (\bx) = \underset{\by \in \VV^*}{\sup}
 $$
 ```
 
+###  As Underestimators
+
 ```{prf:theorem} Biconjugate is an underestimator
 :label: res-cvxf-biconjugate-underestimator
 
@@ -266,6 +275,8 @@ We proceed as follows.
 Thus, the biconjugate of $f$ is always a lower bound for $f$.
 Naturally, one is interested in conditions under which
 biconjugate of $f$ equals $f$.
+
+### Proper Closed and Convex Functions
 
 ```{prf:theorem} Biconjugate for proper closed and convex functions
 :label: res-cvxf-biconjugate-proper-closed-convex
