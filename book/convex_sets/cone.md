@@ -991,8 +991,8 @@ Let $\by \in C_2^*$. Then
 
 $$
 
-\langle \bx , \by \rangle \Forall \bx \in C_2 \implies 
-\langle \bx , \by \rangle \Forall \bx \in C_1 \implies
+\langle \bx , \by \rangle \geq 0 \Forall \bx \in C_2 \implies 
+\langle \bx , \by \rangle \geq 0 \Forall \bx \in C_1 \implies
 \by \in C_1^*.
 $$ 
 
@@ -1006,7 +1006,7 @@ The interior of the dual cone $C^*$ is given by
 
 $$
 \interior C^* = \{ \by \in \VV^* \ST \langle \bx , \by \rangle > 0 
-    \Forall \bx \in C \}.
+    \Forall \bx \in C \setminus \{ \bzero \} \}.
 $$
 ```
 
@@ -1014,24 +1014,25 @@ $$
 Let 
 
 $$
-A = \{ \by \ST \langle \bx , \by \rangle > 0 \Forall \bx \in C \}.
+A = \{ \by \ST \langle \bx , \by \rangle > 0 \Forall \bx \in C \setminus \{ \bzero \} \}.
 $$
 
-Let $\by \in A$. By definition $\by \in C^*$. i.e., $A \subseteq C^*$.
+Let $\by \in A$. By definition $\by \in C^*$;
+i.e., $A \subseteq C^*$.
 
-Since $\langle \bx , \by \rangle > 0$ for every $\bx \in C$, 
-hence $\langle \bx, \by +\bu  \rangle > 0$ for every $\bx \in C$ 
+Since $\langle \bx , \by \rangle > 0$ for every nonzero $\bx \in C$, 
+hence $\langle \bx, \by +\bu  \rangle > 0$ for every nonzero $\bx \in C$ 
 and every sufficiently small $\bu$. Hence, $\by \in \interior C^*$.
 We have shown that $A \subseteq \interior C^*$.
 
 Now, let $\by \notin A$ but $\by \in C^*$.
-Then, $\langle \bx, \by \rangle = 0$ for some $\bx \in C$. But then
+Then, $\langle \bx, \by \rangle = 0$ for some nonzero $\bx \in C$. But then
 
 $$
 \langle \bx, \by - t\bx \rangle 
 = \langle \bx, \by \rangle - t \langle \bx, \bx \rangle < 0
 $$
-for all $t < 0$. Thus, $\by \notin \interior C^*$. 
+for all $t > 0$. Thus, $\by \notin \interior C^*$. 
 
 Hence, $A = \interior C^*$.
 ```
@@ -1170,6 +1171,166 @@ Thus, $\bY \notin C^*$.
 
 This completes the proof that $C^* = C = \SS^n_+$,
 i.e., the positive semi-definite cone is self dual.
+```
+
+## Polar Cones
+
+```{prf:definition} Polar cone
+:label: def-cvx-polar-cone
+
+Let $\VV$ be a finite dimensional inner product space and $\VV^*$
+be its dual space.
+
+Let $C \subseteq \VV$.
+Then, its polar cone $C^{\circ}$ is defined as
+
+$$
+C^{\circ} \triangleq \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0
+\Forall \bx \in C \}.
+$$
+```
+
+
+### Properties
+
+```{prf:property}
+:label: res-cvx-polar-cone-is-cone
+
+Polar cone is a cone.
+```
+
+```{prf:proof}
+
+Let $\by \in C^{\circ}$. Then, by definition, 
+
+$$
+\langle \bx, \by \rangle \leq 0 \Forall \bx \in C.
+$$
+
+Thus, for some $\alpha \geq 0$, 
+
+$$
+\langle \bx, \alpha \by \rangle 
+= \alpha \langle \bx, \by \rangle \leq 0 \Forall \bx \in C.
+$$
+
+Thus, for every $\by \in C^{\circ}$, 
+$\alpha \by \in C^{\circ}$ for all $\alpha \geq 0$.
+Thus, $C^{\circ}$ is a cone.
+```
+
+```{prf:property}
+:label: res-cvx-polar-cone-is-convex
+
+Polar cone is convex.
+```
+
+```{prf:proof}
+
+Let $\by_1, \by_2 \in C^{\circ}$. Let $t \in [0, 1]$ and
+
+$$
+\by = t \by_1 + (1 - t) \by_2.
+$$
+
+Then for an arbitrary $\bx \in C$,
+
+$$
+\langle \bx, \by \rangle 
+= \langle \bx, t \by_1 + (1-t) \by_2 \rangle
+= t \langle \bx, \by_1 \rangle + (1-t) \langle \bx, \by_2\rangle \leq 0.
+$$
+
+Thus, $\by \in C^{\circ}$.
+Thus, $C^{\circ}$ is convex. 
+```
+
+We note that polar cone is a convex cone even if the original set $C$
+is neither convex nor a cone.
+
+
+```{prf:property} Containment reversal in polar cone
+:label: res-cvx-polar-cone-containment
+
+Let $C_1$ and $C_2$ be two subsets of $\VV$ and let 
+$C_1^{\circ}$ and $C_2^{\circ}$ be their corresponding polar cones.
+Then,
+
+$$
+C_1 \subseteq C_2 \implies C_2^{\circ} \subseteq C_1^{\circ}.
+$$
+```
+The polar cone of the subset contains the polar cone of the superset. 
+
+```{prf:proof}
+Let $\by \in C_2^{\circ}$. Then 
+
+$$
+
+\langle \bx , \by \rangle \leq 0 \Forall \bx \in C_2 \implies 
+\langle \bx , \by \rangle \leq 0 \Forall \bx \in C_1 \implies
+\by \in C_1^{\circ}.
+$$ 
+
+Thus, $C_2^{\circ} \subseteq C_1^{\circ}$.
+```
+
+```{prf:property} Interior of polar cone
+:label: res-cvx-polar-cone-interior
+
+The interior of the polar cone $C^{\circ}$ is given by
+
+$$
+\interior C^{\circ} = \{ \by \in \VV^* \ST \langle \bx , \by \rangle < 0 
+    \Forall \bx \in C \setminus \{ \bzero \} \}.
+$$
+```
+
+```{prf:proof}
+Let 
+
+$$
+A = \{ \by \ST \langle \bx , \by \rangle < 0 
+   \Forall \bx \in C \setminus \{ \bzero \} \}.
+$$
+
+Let $\by \in A$. By definition $\by \in C^{\circ}$;
+i.e., $A \subseteq C^{\circ}$.
+
+Since $\langle \bx , \by \rangle < 0$ for every nonzero $\bx \in C$, 
+hence $\langle \bx, \by +\bu  \rangle < 0$ for every $\bx \in C$ 
+and every sufficiently small $\bu$. Hence, $\by \in \interior C^{\circ}$.
+We have shown that $A \subseteq \interior C^{\circ}$.
+
+Now, let $\by \notin A$ but $\by \in C^{\circ}$.
+Then, $\langle \bx, \by \rangle = 0$ for some nonzero $\bx \in C$. But then
+
+$$
+\langle \bx, \by - t\bx \rangle 
+= \langle \bx, \by \rangle - t \langle \bx, \bx \rangle > 0
+$$
+for all $t < 0$. Thus, $\by \notin \interior C^{\circ}$. 
+
+Hence, $A = \interior C^{\circ}$.
+```
+
+```{prf:property} Non-empty interior implies pointed polar cone
+:label: res-cvx-nonempty-pointed-polar-cone
+
+If $C$ has a non-empty interior, then its polar cone $C^{\circ}$ is pointed.
+```
+
+```{prf:proof}
+Let $C$ have a non-empty interior and assume that its polar cone $C^{\circ}$ 
+is not pointed. Then, there exists a non-zero $\by \in C^{\circ}$ such that
+$-\by \in C^{\circ}$ holds too.
+
+Thus, $\langle \bx, \by \rangle \leq 0$ as well as 
+$\langle \bx, -\by \rangle \leq 0$ for every $\bx \in C$,
+i.e, $\langle \bx, \by \rangle = 0$ for every $\bx \in C$.
+But this means that $C$ lies in a hyperplane $H_{\by, 0}$
+and hence has an empty interior. 
+A contradiction. 
 ```
 
 
@@ -1432,6 +1593,8 @@ from above by $\alpha + \beta$. Thus, $\bu + \bv \in B$.
 Thus, $B$ is closed under nonnegative scalar multiplication
 and vector addition. $B$ is a convex cone.
 ```
+
+
 
 ## Operations Preserving Conic Convexity
 
