@@ -1403,6 +1403,44 @@ and hence has an empty interior.
 A contradiction. 
 ```
 
+### Convex Polyhedral Cones
+
+```{prf:theorem} Polar cone of convex polyhedral cone
+:label: res-cvxf-polar-convex-polyhedral-cone
+
+Let the ambient space by $\RR^n$. Let $\bA \in \RR^{m \times n}$.
+Let 
+
+$$
+C = \{\bx \in \RR^n \ST \bA \bx \preceq \bzero \}.
+$$
+
+Then
+
+$$
+C^{\circ}  = \{ \bA^T \bt \ST \bt \in \RR^m_+ \}.
+$$
+```
+
+We note that the set $C$ is a convex cone. It is known
+as the convex polyhedral cone.
+
+```{prf:proof}
+We note that $\by \in C^{\circ}$ if and only if 
+$\bx^T \by \leq 0$ for every $\bx$ satisfying $\bA \bx \preceq \bzero$.
+
+1. Thus, for every $\bx \in \RR^n$, the statement
+   $\bA \bx \preceq \bzero \implies \bx^T \by \leq 0$ is true.
+1. By Farkas' lemma ({prf:ref}`res-cvx-farkas-lemma-v3`),
+   it is equivalent to the statement that
+   there exists $\bt \succeq \bzero$ such that $\bA^T \bt = \by$.
+1. Thus, 
+
+   $$
+   C^{\circ}  = \{ \bA^T \bt \ST \bt \in \RR^m_+ \}.
+   $$
+```
+
 
 ## Normal Cones
 
