@@ -796,3 +796,102 @@ then (1) must be true is straightforward.
 1. Hence, (1) must be true.
 ```
 
+
+```{prf:theorem} Farkas' lemma version 2
+:label: res-cvx-farkas-lemma-v2
+
+Let $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
+Then, exactly one of the following two statements is true.
+
+
+1. There exists $\bx \in \RR^n$ such that $\bA \bx \preceq \bb$.
+1. There exists $\by \in \RR^n$ such that $\bA^T \by = \bzero, \by^T \bb < 0, \by \succeq \bzero$.
+
+(2) is also equivalent to the following statement:
+
+3 There exists $\by \in \RR^m$ such that $\bA^T \by = \bzero, \by^T \bb = -1, \by \succeq \bzero$.
+```
+
+```{prf:proof}
+
+We first show that (2) and (3) are equivalent.
+
+1. Clearly (3) $\implies$ (2).
+1. Assume (2) is true.
+1. Let $\by^T \bb = s$. Let $r = \frac{-1}{s}$. Then, $r > 0$.
+1. Let $\tilde{\by} = \frac{\by}{r}$.
+1. Then, $\tilde{\by} \succeq \bzero$ since $\by \succeq \bzero$ and $r > 0$.
+1. Also $\tilde{\by}^ \bb = r \by^T \bb = \frac{-1}{s} s = -1$.
+1. Finally $\bA^T \tilde{\by} = r \bA^T \by = \bzero$.
+1. Thus, $\tilde{\by}$ satisfies (3).
+
+
+Next, we show that (1) and (2) cannot be both true simultaneously.
+
+1. For contradiction, assume that both (1) and (2) are true.
+1. Then 
+
+   $$
+   \by^T \bA \bx = \by^T (\bA \bx) \leq \by^T \bb < 0
+   $$
+   since $\bA \bx \preceq \bb$ from (1), $\by \succeq \bzero$ from (2)
+   and $\by^T \bb < 0$ from (2).
+1. Also
+
+   $$
+   \by^T \bA \bx  = (\by^T \bA) \bx = (\bA^T \by)^T \bx = \bzero^T \bx = 0 
+   $$
+   since  $\bA^T \by= \bzero$ from (2).
+1. We have a contradiction.
+1. Thus, both (1) and (2) cannot be true simultaneously.
+
+
+We next prove that if (2) is false then (1) must be true.
+
+1. Since (2) and (3) are equivalent hence (3) is false too.
+1. Combine the system of equations $\bA^T \by  = \bzero$ and $\by^T \bb = -1$ as
+   $\tilde{\bA} \by  = \tilde{\bb}$ where
+
+   $$
+   \tilde{\bA} = \begin{bmatrix}
+   \bA^T \\
+   \bb^T
+   \end{bmatrix}
+   \text{ and }
+   \tilde{\bb} = \begin{bmatrix}
+   0\\
+   \vdots\\
+   0\\
+   -1
+   \end{bmatrix}.
+   $$
+1. Since (3) if false, hence there doesn't exist $\by \in \RR^m$ such that
+   $\tilde{\bA} \by  = \tilde{\bb}$.
+1. This is identical to statement (1) of the original Farkas' lemma
+   in {prf:ref}`res-cvx-farkas-lemma`.
+1. Hence statement (2) of {prf:ref}`res-cvx-farkas-lemma` must hold true.
+1. Thus, there exists $\bv \in \RR^{n + 1}$ such that
+   $\tilde{\bA}^T \bv \succeq \bzero$ and $\tilde{\bb}^T \bv < 0$. 
+1. Set 
+
+   $$
+   \bv = \begin{bmatrix} \bx  \\ t \end{bmatrix}
+   $$
+   where $\bx \in \RR^n$ and $t \in \RR$.
+1. Then $\tilde{\bb}^T \bv < 0$ implies that $t > 0$.
+1. $\tilde{\bA}^T \bv \succeq \bzero$ simplifies to
+
+   $$
+   \bA \bx + t \bb \succeq \bzero.
+   $$
+1. This further simplifies to
+
+   $$
+   & \bA \bx + t \bb \succeq \bzero\\
+   \iff & \bA \bx \succeq -t \bb \\
+   \iff & \bA \left ( \frac{-1}{t} \bx \right ) \preceq \bb.
+   $$
+   The inequality sign changes since $t > 0$.
+1. Clearly, $\frac{-1}{t} \bx$ satisfies (1) as desired.
+   Thus, (1) is indeed true.
+```
