@@ -895,3 +895,39 @@ We next prove that if (2) is false then (1) must be true.
 1. Clearly, $\frac{-1}{t} \bx$ satisfies (1) as desired.
    Thus, (1) is indeed true.
 ```
+
+```{prf:theorem} Farkas' lemma version 3
+:label: res-cvx-farkas-lemma-v3
+
+Let $\bA \in \RR^{m \times n}$ and $\bc \in \RR^n$.
+
+Then the following statements are equivalent.
+
+1. The implication $\bA \bx \preceq \bzero \implies \bc^T \bx \leq 0$ holds true.
+1. There exists $\by \succeq \bzero$ such that $\bA^T \by = \bc$.  
+
+```
+
+```{prf:proof}
+(2) $\implies$ (1)
+
+1. (2) is same as statement (1) of {prf:ref}`res-cvx-farkas-lemma`.
+1. Thus, by {prf:ref}`res-cvx-farkas-lemma`,
+   there is no $\bx \in \RR^n$ such that
+   $\bA \bx \succeq \bzero$ and $\bx^T \bc < 0$.
+1. Hence for every $\bx \in \RR^n$,  
+   $\bA \bx \succeq \bzero \implies \bx^T \bc \geq 0$.
+1. Replacing $\bx$ by $-\bx$, we see that
+   for every $\bx \in \RR^n$,  
+   $\bA \bx \preceq \bzero \implies \bx^T \bc \leq 0$.
+
+(1) $\implies$ (2)
+
+1. For every $\bx$, $\bA \bx \preceq \bzero \implies \bc^T \bx \leq 0$.
+1. Thus, For every $\bx$, $\bA \bx \succeq \bzero \implies \bc^T \bx \geq 0$.
+1. Thus, there doesn't exist any $\bx$ with $\bA \bx \succeq \bzero$
+   and $\bc^T \bx < 0$.
+1. Thus, by {prf:ref}`res-cvx-farkas-lemma`, 
+   there exists $\by \succeq \bzero$ such that $\bA^T \by = \bc$. 
+```
+
