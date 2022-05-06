@@ -973,6 +973,7 @@ Thus, $C^*$ is convex.
 We note that dual cone is a convex cone even if the original set $C$
 is neither convex nor a cone.
 
+
 ```{prf:property} Containment reversal in dual cone
 :label: res-cvx-dual-cone-containment
 
@@ -998,6 +999,39 @@ $$
 
 Thus, $C_2^* \subseteq C_1^*$.
 ```
+
+```{prf:property} Closedness
+:label: res-cvx-dual-cone-closed
+
+A dual cone is a closed set.
+```
+
+```{prf:proof}
+The dual cone of a set $C$ is given by
+
+$$
+C^* = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \geq 0 
+    \Forall \bx \in C \}
+$$
+
+Fix a $\bx \in C$ and consider the set
+
+$$
+H_{\bx} = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \geq 0 \}.
+$$
+
+The set $H_{\bx}$ is a closed half space.
+
+We can now see that
+
+$$
+C^* =  \bigcap_{\bx \in C} H_{\bx}.
+$$
+Thus, $C^*$ is an intersection of closed half spaces.
+An arbitrary intersection of closed sets is closed.
+Hence $C^*$ is closed.
+```
+
 
 ```{prf:property} Interior of dual cone
 :label: res-cvx-dual-cone-interior
@@ -1190,6 +1224,9 @@ C^{\circ} \triangleq \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0
 $$
 ```
 
+We note that polar cones are just the negative of dual cones.
+Thus, they exhibit similar properties as dual cones.
+
 
 ### Properties
 
@@ -1274,6 +1311,39 @@ $$
 
 Thus, $C_2^{\circ} \subseteq C_1^{\circ}$.
 ```
+
+```{prf:property} Closedness
+:label: res-cvx-polar-cone-closed
+
+A polar cone is a closed set.
+```
+
+```{prf:proof}
+The polar cone of a set $C$ is given by
+
+$$
+C^{\circ} = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0 
+    \Forall \bx \in C \}
+$$
+
+Fix a $\bx \in C$ and consider the set
+
+$$
+H_{\bx} = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0 \}.
+$$
+
+The set $H_{\bx}$ is a closed half space.
+
+We can now see that
+
+$$
+C^{\circ} =  \bigcap_{\bx \in C} H_{\bx}.
+$$
+Thus, $C^{\circ}$ is an intersection of closed half spaces.
+An arbitrary intersection of closed sets is closed.
+Hence $C^{\circ}$ is closed.
+```
+
 
 ```{prf:property} Interior of polar cone
 :label: res-cvx-polar-cone-interior
