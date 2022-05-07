@@ -915,3 +915,118 @@ In particular $f$ is convex over the subset $\VV \oplus C$.
 
 Then, by {prf:ref}`res-cvxf-partial-minimization`, $d_C$ is convex.
 ```
+
+
+```{prf:theorem} Partial minimization for proper convex functions
+:label: res-cvxf-partial-minimization-proper
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $f : \VV \oplus \WW \to \RERL$ be a proper convex function
+satisfying the following property:
+
+For every $\bx \in \VV$, there exists $\by \in \WW$ for which
+$f(\bx, \by) < \infty$.
+
+
+Let $g : \VV \to \LERL$ be defined by
+
+$$
+g(\bx) \triangleq \inf_{\by \in \WW} f(\bx, \by).
+$$
+Then $g$ is convex.
+```
+
+```{prf:proof}
+We first mention that since for every $\bx \in \VV$,
+there exists at least one $\by$ such that $f(\bx, \by) < \infty$,
+hence $g(\bx) < \infty$ for every $\bx$.
+This is why, the range of $g$ is $\LERL$.
+Although it still leaves open the possibility that
+$g(\bx) = -\infty$ for some $\bx \in \VV$.
+
+We now show that $g$ satisfies the convexity inequality.
+
+1. Let $\bx_1, \bx_2 \in \VV$ and $t \in (0,1)$.
+1. We consider the two cases
+   1. Both $g(\bx_1), g(\bx_2) > -\infty$.
+   1. At least one of them equals $-\infty$. 
+      Without loss of generality, assume that $g(\bx_1) = -\infty$.
+
+
+Case 1: $g(\bx_1), g(\bx_2) > -\infty$
+
+1. Choose some $\epsilon > 0$.
+1. By the infimum property, there exist $\by_1, \by_2 \in \WW$
+   such that
+
+   $$
+   & f(\bx_1, \by_1) \leq g(\bx_1) + \epsilon; \\
+   & f(\bx_2, \by_2) \leq g(\bx_2) + \epsilon.
+   $$
+1. Since $f$ is convex, hence
+
+   $$
+   & f(t \bx_1 + (1-t) \bx_2, t \by_1 + (1-t) \by_2) \\
+   & \leq t f(\bx_1, \by_1) + (1-t) f(\bx_2, \by_2) \\
+   & \leq t (g(\bx_1) + \epsilon) + (1-t) (g(\bx_2) + \epsilon)\\
+   & = t g(\bx_1) + (1-t) g(\bx_2) + \epsilon.
+   $$
+1. By the definition of $g$, we have
+
+   $$
+   g(t \bx_1 + (1-t) \bx_2) \leq f(t \bx_1 + (1-t) \bx_2, t \by_1 + (1-t) \by_2).
+   $$
+1. Thus we have
+
+   $$
+   g(t \bx_1 + (1-t) \bx_2) \leq t g(\bx_1) + (1-t) g(\bx_2) + \epsilon.
+   $$
+1. Since this inequality is valid for every $\epsilon > 0$, hence
+ 
+   $$
+   g(t \bx_1 + (1-t) \bx_2) \leq t g(\bx_1) + (1-t) g(\bx_2).
+   $$
+1. Thus $g$ is convex for this case.
+
+
+Case 2: $g(\bx_1) = -\infty$.
+
+1. To show that $g$ is convex, we need to show that
+   $g(t \bx_1 +(1-t) \bx_2) = -\infty$.
+1. Choose any $M \in \RR$.
+1. Since $g(\bx_1) = -\infty$, there exists $\by_1 \in \WW$ such that
+
+   $$
+   f(\bx_1, \by_1) \leq M.
+   $$
+1. By hypothesis in the theorem, there exists $\by_2 \in \WW$ such that
+
+   $$
+   f(\bx_2, \by_2) < \infty.
+   $$
+   In other words, $f(\bx_2, \by_2)$ is finite.
+1. Using the convexity of $f$, we have
+
+   $$
+   & f(t \bx_1 + (1-t) \bx_2, t \by_1 + (1-t) \by_2) \\
+   & \leq t f(\bx_1, \by_1) + (1-t) f(\bx_2, \by_2) \\
+   & \leq t M  + (1-t) f(\bx_2, \by_2).
+   $$
+1. By definition of $g$, we have
+
+   $$
+   g(t \bx_1 + (1-t) \bx_2) \leq  t M  + (1-t) f(\bx_2, \by_2).
+   $$
+1. Since the inequality holds for any $M \in \RR$ and the quantity
+   $f(\bx_2, \by_2)$ is finite, hence taking the limit $M \to -\infty$
+   on the R.H.S., we get
+
+   $$
+   g(t \bx_1 + (1-t) \bx_2) = -\infty.
+   $$
+1. Thus $g$ is convex for this case too.
+
+Combining the two cases, $g$ is convex.
+```
+
+
