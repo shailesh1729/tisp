@@ -1387,7 +1387,7 @@ $$
 f(\bx) = \| \bx \|
 $$
 
-Then, the conjugate $f^* : \VV^* \to \ERL$ for any $\by \in \VV^*$
+Then, the conjugate $f^* : \VV^* \to \RERL$ for any $\by \in \VV^*$
 is given by:
 
 $$
@@ -1430,6 +1430,85 @@ We proceed as follows.
    = I_{B_{\| \cdot \|_*}[\bzero, 1]}.
    $$
 ```
+
+```{prf:theorem} Squared norm
+:label: res-cvxf-conjugate-squared-norm
+
+Let $f : \VV \to \RR$ be given by
+
+$$
+f(\bx) = \frac{1}{2}\| \bx \|^2
+$$
+
+Then, the conjugate $f^* : \VV^* \to \RERL$ for any $\by \in \VV^*$
+is given by:
+
+$$
+f^*(\by) = \frac{1}{2} \| \by \|_*^2.
+$$
+```
+
+```{prf:proof}
+We proceed as follows
+
+1. By definition of the conjugate
+
+   $$
+   f^*(\by) =  \sup_{\bx \in \VV}\left \{ 
+      \langle \bx, \by \rangle - \frac{1}{2}\| \bx \|^2 \right \}.
+   $$
+1. Consider the set $S_t = \{ \bx \in \RR \ST \| \bx \|  = t \}$.
+1. Then, we can write $\VV = \bigcup_{t \geq 0} S_t$.
+1. Define 
+  
+  $$
+  g_t(\by) = \sup_{\bx \in S_t}\left \{ 
+   \langle \bx, \by \rangle - \frac{1}{2}\| \bx \|^2 \right \}
+  = \sup_{\bx \ST \| \bx \|  = t} \left \{ 
+   \langle \bx, \by \rangle - \frac{1}{2}t^2 \right \}.
+  $$
+
+1. Then it is easy to see that
+
+   $$
+   f^*(\by) = \sup_{t \geq 0}g_t(\by).
+   $$
+1. In other words, we transform the maximization (for conjugate)
+   into a double maximization as
+
+   $$
+   f^*(\by) = \sup_{t \geq 0} \sup_{\bx \ST \| \bx \| = t}
+   \left \{ \langle \bx, \by \rangle - \frac{1}{2}t^2 \right \}.
+   $$
+1.  Now
+
+    $$
+    g_t(\by) &= \sup_{\bx \ST \| \bx \|  = t}
+    \left \{ \langle \bx, \by \rangle - \frac{1}{2}t^2 \right \}\\
+    &= \sup_{\bx \ST \| \bx \|  = t}
+    \{ \langle \bx, \by \rangle \} - \frac{1}{2}t^2 \\
+    &= t \| \by \|_* - \frac{1}{2}t^2.
+    $$
+1. Hence
+
+   $$
+   f^*(\by) = \sup_{t \geq 0}g_t(\by)
+   = \sup_{t \geq 0} \left ( t \| \by \|_* - \frac{1}{2}t^2 \right ).
+   $$
+1. Differentiating $g_t(\by)$ w.r.t. $t$ and setting it to zero,
+   we obtain
+
+   $$
+   \| \by \|_* - t^* = 0
+   $$
+1. Evaluating $g_t(\by)$ at $t^* = \| \by \|_*$, we get
+
+   $$
+   f^*(\by) = \| \by \|_*^2 -  \frac{1}{2} \| \by \|_*^2 
+   = \frac{1}{2} \| \by \|_*^2.
+   $$
+```
+
 
 
 ```{rubric} Ball-Pen
@@ -1486,20 +1565,3 @@ $$
 ```
 
 
-```{rubric} Squared Norm
-```
-
-```{div}
-Let $f : \VV \to \RR$ be given by
-
-$$
-f(\bx) = \frac{1}{2}\| \bx \|^2
-$$
-
-Then, the conjugate $f^* : \VV^* \to \ERL$ for any $\by \in \VV^*$
-is given by:
-
-$$
-f^*(\by) = \frac{1}{2} \| \by \|_*^2.
-$$
-```
