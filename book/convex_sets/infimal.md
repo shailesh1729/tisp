@@ -1,6 +1,14 @@
 # Infimal Convolution
 
 
+```{note}
+Several results in this section appear without complete proof at the moment.
+They have been collected from various
+sources. The proofs will be added later.
+```
+
+## Definition
+
 ````{prf:definition} Infimal convolution
 :label: def-cvx-infimal-convolution
 
@@ -48,7 +56,13 @@ name *infimal convolution*.
 
 Infimal convolution is also known as *epigraphical addition*
 because performing an infimal convolution of $f$ and $g$
-amounts to the adding of the epigraphs of $f$ and $g$. 
+amounts to the adding of the strict epigraphs of $f$ and $g$.
+Recall from {prf:ref}`def-bra-strict-epigraph` that
+the strict epigraph of a function $f : \VV \to \ERL$ is given by
+
+$$
+\epi_s f \triangleq \{ (\bx,t) \in \VV \oplus \RR \ST  f(\bx) < t \}.
+$$ 
 
 From the definition, it is clear that
 $f \infimal g$ is the largest of all the functions
@@ -92,10 +106,85 @@ from two different manufactures.
 ```
 
 
-## Properties
+## Basic Properties
 
-```{prf:theorem} Domain and epigraph
-:label: res-cvx-infimal-dom-epi
+```{prf:property} Domain of infimal convolution
+:label: res-cvx-infimal-dom
+
+Let $f, g : \VV \to \ERL$ be given extended valued functions. 
+Then
+
+$$
+\dom f \infimal g = \dom f + \dom g.
+$$
+```
+
+```{prf:proof}
+
+Let $\bz \in \dom f + \dom g$.
+
+1. Then there exist $\bx \in \dom f$ and $\by \in \dom g$
+   such that $\bz = \bx + \by$.
+1. Then $f(\bx) < \infty$ and $g(\by) < \infty$.
+1. By definition of infimal convolution
+
+   $$
+   (f \infimal g)(\bz) \leq f(\bx) + g(\by) < \infty.
+   $$
+1. Hence $\bz \in \dom f \infimal g$.
+1. Hence $\dom f + \dom g \subseteq \dom f \infimal g$.
+
+For the converse, let $\bz \in \dom f \infimal g$.
+
+1. Then $(f \infimal g)(\bz) < \infty$.
+1. First consider the case where $(f \infimal g)(\bz) = t \in \RR$.
+1. Then for any $\epsilon > 0$, there exist $\bx, \by$ with $\bx + \by = \bz$
+   such that
+
+   $$
+   t \leq f(\bx) + g(\by) \leq t + \epsilon.
+   $$
+1. Since $f(\bx) + g(\by)$ is finite, hence $f(\bx) < \infty$
+   and $g(\by) < \infty$.
+1. Hence $\bx < \dom f$ and $\by \in \dom g$.
+1. Thus $\bz = \bx + \by \in \dom f + \dom g$.
+1. Now consider the case where $(f \infimal g)(\bz) = -\infty$.
+1. Then for every $M \in \RR$, there exist $\bx, \by$ with $\bx + \by = \bz$
+   such that
+
+   $$
+   f(\bx) + g(\by) \leq M.
+   $$
+1. Thus $f(\bx) < \infty$ and $g(\by) < \infty$ for such pairs of $\bx, \by$.
+1. Consequently $\bz = \bx + \by \in \dom f + \dom g$.
+1. Combining the two cases $\dom f \infimal g \subseteq  \dom f + \dom g$.
+
+Finally
+
+1. We have already shown that $\dom f + \dom g \subseteq \dom f \infimal g$.
+1. Thus $\dom f + \dom g = \dom f \infimal g$.
+```
+
+
+```{prf:theorem} Connection with epigraph
+:label: res-cvx-infimal-epi-con
+
+$$
+(f \infimal g) (\bx) = \inf \{ r \in \RR \ST (\bx, r) \in \epi f + \epi g \}.
+$$
+```
+
+```{prf:proof}
+
+1. Let $(\bx, r) \in \epi f + \epi g$.
+1. Then, there exist $(\by, s) \in \epi f$ and $(\bz, t) \in \epi g$
+   such that $(\bx, r) = (\by + \bz, s + t)$.
+1. $(f \infimal g) (\bx) \leq f(\by) + g(\bz)$.
+```
+
+
+```{prf:property} Epigraph of infimal convolution
+:label: res-cvx-infimal-epi
 
 Let $f, g : \VV \to \ERL$ be given functions. 
 
@@ -108,25 +197,43 @@ Let $f, g : \VV \to \ERL$ be given functions.
 ```
 
 
-## Proper Functions
 
-```{prf:theorem} Infimal convolution of proper functions
-:label: res-cvx-infimal-proper
+## Convexity
 
-Let $f, g : \VV \to \RERL$ be proper functions. 
-Then their infimal convolution $f \infimal g$ is proper.
+```{prf:theorem} Infimal convolution of convex functions
+:label: res-cvx-infimal-convex-proper
+
+Let $f : \VV \to \RERL$ be a proper convex function
+and $g : \VV \to \RR$ be a real valued convex function.
+Then $f \infimal g$ is convex.
 ```
 
 ```{prf:proof}
-Recall that a function is called proper if its domain
-is nonempty, it never takes the value $-\infty$
-and it is not identically equal to $\infty$.
 
-1. Since $f$ and $g$ are proper, hence there exist $\by, \bz$ 
-   such that $f(\by) < \infty$ and $g(\bz) < \infty$.
-1. Thus, $(f \infimal g)(\by + \bz) \leq f(\by) + f(\bz) < \infty$.
-1. Hence $f \infimal g$ isn't identically equal to infinity.
+Define $h(\bx, \by) = f(\by) + g(\bx - \by)$.
+
+1. Since $f$ and $g$ are convex, hence $h$ is convex.
+1. We can easily show that for any $\bx \in \VV$,
+   there exists $\by \in \VV$ such that
+   $h(\bx, \by) < \infty$.
+   1. Pick any $\bx \in \VV$.
+   1. Choose any $\by \in \dom f$.
+   1. Then $f(\by) < \infty$.
+   1. Since $g$ is real valued, hence $g(\bx - \by) < \infty$.
+   1. Thus $h(\bx, \by) = f(\by) + g(\bx - \by) < \infty$.
+1. Then due to {prf:ref}`res-cvxf-partial-minimization-proper`
+
+   $$
+   (f \infimal g) (\bx) = \inf_{\by \in \VV} h(\bx, \by) 
+   = \inf_{\by \in \VV} [f(\by) + g(\bx - \by)]
+   $$
+   is convex as a partial minimization of the function $h(\bx, by)$
+   w.r.t. $\by$.
 ```
+
+It is still possible that $f \infimal g$ is not a proper function
+and may be equal to $-\infty$ at some $\bx$.
+
 
 
 ## Conjugates
