@@ -1835,6 +1835,40 @@ We proceed as follows.
 ```
 
 
+### Norm Balls
+
+```{prf:theorem} Support functions for unit balls
+:label: res-cvxf-support-unit-ball
+
+Let $\VV$ be a real vector space endowed with a norm
+$\| \cdot \|: \VV \to \RR$.
+Consider the (closed) unit ball given by
+
+$$
+C = B_{\| \cdot \|}[\bzero, 1] = \{\bx \in \VV \ST \| \bx\| \leq 1 \}.
+$$
+
+Then, the support function is given by
+
+$$
+\sigma_C (\by) = \| \by \|_*
+$$
+
+where $\| \cdot \|_*: \VV \to \RR$ represents the dual norm.
+```
+
+
+```{prf:proof}
+This flows directly from the definitions
+of support function and {prf:ref}`dual norm <res-la-rip-dual-norm>`.
+
+$$
+\sigma_C (\by) = \sup\{ \langle \bx, \by \rangle \ST \bx \in C \}
+= \sup\{ \langle \bx, \by \rangle \ST \| \bx \| \leq 1 \}
+= \| \by \|_*.
+$$
+```
+
 ## Gauge Functions
 
 
