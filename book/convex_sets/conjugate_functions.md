@@ -1038,6 +1038,7 @@ To see this, we proceed as follows:
 
 ## n-dim functions
 
+### Quadratics
 
 
 ```{prf:theorem} Strictly convex quadratic
@@ -1150,6 +1151,7 @@ $$
 1. Thus, $\dom f^* = \range \bA + \bb$.
 ```
 
+### Entropy
 
 ```{prf:theorem} Negative entropy
 :label: res-cvxf-conjugate-negative-entropy
@@ -1373,11 +1375,12 @@ Log-sum-exp and negative entropy over simplex and conjugate
 of each other.
 
 
+### Norms
 
-```{rubric} Norm
-```
 
-```{div}
+```{prf:theorem} Norm
+:label: res-cvxf-conjugate-norm
+
 Let $f : \VV \to \RR$ be given by
 
 $$
@@ -1388,7 +1391,8 @@ Then, the conjugate $f^* : \VV^* \to \ERL$ for any $\by \in \VV^*$
 is given by:
 
 $$
-f^*(\by) = \begin{cases}
+f^*(\by) = I_{B_{\| \cdot \|_*}[\bzero, 1]}
+= \begin{cases}
 0 & \| \by \|_* \leq 1 \\
 \infty & \text{ otherwise }
 \end{cases}
@@ -1397,6 +1401,36 @@ $$
 In other words, it is the indicator function for the unit ball
 w.r.t. the dual norm $\| \cdot \|_*$.
 ```
+
+```{prf:proof}
+We proceed as follows.
+
+1. By {prf:ref}`res-cvxf-support-unit-ball`, the support
+   function for a closed unit ball of a norm is its dual
+   norm.
+1. Thus,
+
+   $$
+   \sigma_{B_{\| \cdot \|_*}[\bzero, 1]} = \| \cdot \| = f.
+   $$
+   Here, we have used the fact that the dual norm of the dual norm
+   is the norm itself.
+1. By {prf:ref}`ex-cvxf-biconjucate-indicator-support`,
+   for a nonempty, closed and convex set $C \subseteq \VV$, 
+
+   $$
+   \sigma^*_C = I_C.
+   $$
+1. The set $B_{\| \cdot \|_*}[\bzero, 1]$ is nonempty,
+   closed and convex.
+1. Hence,
+ 
+   $$
+   f^* = \sigma^*_{B_{\| \cdot \|_*}[\bzero, 1]}
+   = I_{B_{\| \cdot \|_*}[\bzero, 1]}.
+   $$
+```
+
 
 ```{rubric} Ball-Pen
 ```
