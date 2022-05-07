@@ -682,51 +682,6 @@ $$
 ## Useful Results
 
 
-```{rubric} Infimal Convolution
-```
-
-```{div}
-Recall that the *infimal convolution* of two functions
-$f,g : \VV \to \ERL$ is defined as:
-
-$$
-(f \square g)(\bx) \triangleq 
-\underset{\by \in \VV}{\inf} (f(\bx - \by) + g(\by)). 
-$$
-
-For two proper functions 
-$h_1, h_2: \VV \to \RERL$, it holds that:
-
-$$
-(h_1 \square h_2)^*  = h_1^*  + h_2^*.
-$$
-
-Let $h_1 : \VV \to \RERL$ be a proper convex
-function and $h_2 : \VV \to \RR$ be a real valued
-convex function. Then
-
-$$
-(h_1 + h_2)^* = h_1^* \square h_2^*.
-$$
-
-Let $h_1 : \VV \to \RERL$ be a proper closed convex
-function and $h_2 : \VV \to \RR$ be a real valued
-convex function. Then
-
-$$
-h_1 + h_2 = (h_1^* \square h_2^*)^*.
-$$
-
-Let $h_1 : \VV \to \RERL$ be a proper convex
-function and $h_2 : \VV \to \RR$ be a real valued
-convex function. Suppose $h_1 \square h_2$ is 
-a real valued function. Then
-
-
-$$
-h_1 \square h_2 = (h_1^* + h_2^*)^*.
-$$
-```
 
 ```{rubric} Conjugate subgradient theorem
 ```
