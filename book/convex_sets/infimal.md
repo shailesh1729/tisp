@@ -108,6 +108,8 @@ from two different manufactures.
 
 ## Basic Properties
 
+### Domain 
+
 ```{prf:property} Domain of infimal convolution
 :label: res-cvx-infimal-dom
 
@@ -182,6 +184,7 @@ $$
 1. $(f \infimal g) (\bx) \leq f(\by) + g(\bz)$.
 ```
 
+### Epigraph
 
 ```{prf:property} Epigraph of infimal convolution
 :label: res-cvx-infimal-epi
@@ -198,7 +201,7 @@ Let $f, g : \VV \to \ERL$ be given functions.
 
 
 
-## Convexity
+### Convexity
 
 ```{prf:theorem} Infimal convolution of convex functions
 :label: res-cvx-infimal-convex-proper
@@ -234,6 +237,25 @@ Define $h(\bx, \by) = f(\by) + g(\bx - \by)$.
 It is still possible that $f \infimal g$ is not a proper function
 and may be equal to $-\infty$ at some $\bx$.
 
+
+```{prf:example} Set distance function as infimal convolution
+:label: ex-cvx-set-dist-infimal
+
+Let $C \subseteq \VV$ be a nonempty convex set.
+
+1. The indicator function $I_C$ is a proper convex function.
+1. The norm function $\| \cdot \|$ is a real valued convex function.
+1. By {prf:ref}`res-cvx-infimal-convex-proper`, $I_C \infimal \| \cdot \|$
+   is convex.
+1. But then
+
+   $$
+   (I_C \infimal \| \cdot \|) (\bx) = \inf_{\by \in \VV} (I_C(\by) + \| \bx - \by \|)
+   = \inf_{\by \in C} \| \bx - \by \|
+   = d_C(\bx).
+   $$
+1. Thus $d_C$ (the distance function to a convex set) is convex.
+```
 
 
 ## Conjugates
