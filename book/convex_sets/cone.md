@@ -551,185 +551,6 @@ The proof is similar to Carathéodory theorem.
    are linearly independent, hence $k \leq n$.
 ```
 
-### Linear System with Nonnegativity Constraints
-
-Consider the system
-
-$$
-P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}
-$$
-where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$.
-Without loss of generality, we shall assume that the rows
-of $\bA$ are linearly independent.
-This is a linear system $\bA \bx = \bb$ with the nonnegativity
-constraint $\bx \succeq \bzero$.
-If we write $\bA$ in the form of column vectors as 
-
-$$
-\bA = \begin{bmatrix}
-\ba_1 & \dots & \ba_n
-\end{bmatrix}
-$$
-Then, the set $Q = \{ \bA \bx \ST \bx \in \RR^n_+ \}$
-can be written as
-
-$$
-Q = \cone \{\ba_1, \dots \ba_n\}.
-$$
-In other words, $Q$ is the conic hull of the column vectors
-of $\bA$. We can think of $\bA$ as a linear mapping of the
-nonnegative orthant (a convex cone) $\RR^n_+$ from $\RR^n$
-to another convex cone in $\RR^n$ given as a conic hull
-of the columns of $\bA$.
-
-We can now see that $P$ is nonempty if $\bb \in Q$. 
-
-```{prf:definition} Basic feasible solution
-:label: def-cvx-basic-feasible-solution
-
-Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
-where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
-Assume that the rows of $\bA$ are linearly independent. 
-Then, $\bv \in \RR^n$ is a *basic feasible solution* (in short "bfs")
-of $P$ if the columns of $\bA$ corresponding to the positive
-entries of $\bv$ are linearly independent.
-
-Consequently, $\bv$ has at most $m$ has positive entries.
-All other entries of $\bv$ are $0$.
-```
-
-```{prf:theorem} Existence of basic feasible solution
-:label: res-cvx-cone-bfs-existence
-
-Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
-where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
-Assume that the rows of $A$ are linearly independent. 
-
-If $P$ is nonempty; i.e. $P \neq \EmptySet$, then 
-it contains at least one basic feasible solution.
-```
-
-```{prf:proof}
-Recall that
-
-$$
-Q = \{ \bA \bx \ST \bx \in \RR^n_+ \} = \cone \{\ba_1, \dots \ba_n\}
-$$
-where $\ba_1, \dots, \ba_n$ are columns of the matrix $\bA$.
-
-1. If $P \neq \EmptySet$, then $\bb \in Q$.
-1. In other words, $\bb$ is a conic combination of columns of $\bA$.
-1. By the {prf:ref}`conic representation theorem <res-cvx-conic-rep-unique>`,
-   there exists a subset of $k$ linearly independent vectors among
-   $\{\ba_1, \dots, \ba_n \}$ such that $\bb$ is their conic 
-   combination.
-1. In other words, there exist $k$ indices $1 \leq i_1 < \dots < i_k \leq n$
-   and $k$ numbers $v_{i_1}, \dots, v_{i_k} > 0$ such that
-
-   $$
-   \bb = \sum_{j=1}^k v_{i_j} \ba_{i_j}
-   $$
-   and $\{\ba_{i_1}, \dots, \ba_{i_k}\}$ are linearly independent.
-1. Consequently $k \leq m$ since columns of $\bA$ belong to $\RR^m$.
-1. Let 
-   
-   $$
-   \bv = \sum_{j=1}^k v_{i_j} \be_{i_j}
-   $$
-   where $\be_{i_j}$ are unit vectors of $\RR^n$.
-1. Clearly, $\bv \succeq \bzero$ and $\bA \bv = \bb$.
-1. Therefore, $\bv \in P$ and $\bv$ is a basic feasible solution.
-```
-
-The basic feasible solutions of $P$ are the
-{prf:ref}`extreme points <def-cvx-extreme-point>` 
-of $P$. Recall that a point is an extreme point
-if it cannot be expressed as a nontrivial convex
-combination of two distinct points of a set.
-
-```{prf:theorem} Equivalence between basic feasible solutions and extreme points
-:label: res-cvx-cone-bfs-extreme
-
-Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
-where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
-Assume that the rows of $A$ are linearly independent. 
-
-Then $\bv$ is a basic feasible solution of $P$ if and only if 
-$\bv$ is an extreme point of $P$.
-```
-
-```{prf:proof}
-
-Let $\bv$ be a basic feasible solution of $P$.
-
-1. Then $\bb = \bA \bv$ and $\bv$ has $k$ positive entries
-   with $k \leq m$.
-1. Without loss of generality, assume that first $k$ entries
-   of $\bv$ are positive. This can be easily achieved by 
-   shuffling the columns of $\bA$ in the linear system $\bA \bx = \bb$.
-1. Therefore, $v_1, \dots, v_k > 0$ and $v_{k+1}, \dots, v_n = 0$.
-1. Also, the first $k$ columns $\ba_1, \dots, \ba_k$ of the matrix
-   $\bA$ are linearly independent since $\bv$ is a basic feasible solution.
-1. For contradiction, assume that $\bv$ is not an extreme point of $P$;
-   i.e.,  $\bv \notin \extreme P$.
-1. Then, there exist $\by, \bz \in P$ with $\by \neq \bz$ 
-   and $t \in (0,1)$ such that
-   $\bv = t \by + (1-t)\bz$.
-1. Since $\by, \bz \in P$, hence $\by \succeq \bzero$ and $\bz \succeq \bzero$.
-1. Since the last $n-k$ entries of $\bv$ are zero, hence
-   the last $n-k$ entries of $\by$ and $\bz$ also must be zero
-   as they have to be nonnegative.
-1. Since $\by, \bz \in P$, hence $\bA \by = \bb$ and $\bA \bz = \bb$.
-1. Therefore, 
-
-   $$
-   \bb = \sum_{i=1}^k y_i \ba_i = \sum_{i=1}^k z_i \ba_i. 
-   $$
-1. This implies that
-
-   $$
-   \sum_{i=1}^k (y_i -z_i) \ba_i = \bzero.
-   $$
-1. But, $\ba_1, \dots, \ba_k$ are linearly independent by hypothesis.
-1. Thus, $y_i = z_i$ for $i=1,\dots,k$ must hold.
-1. Then, $\by = \bz$.
-1. We arrive at a contradiction.
-1. Thus, $\bv$ must be an extreme point of $P$.
-
-For the converse, assume that $\bv$ is an extreme point of $P$.
-
-1. Again, by contradiction, assume that $\bv$ is not a basic 
-   feasible solution. 
-1. Thus, the columns of $\bA$ corresponding to the positive
-   entries of $\bv$ are linearly dependent.
-1. Assume that there are $k$ positive entries in $\bv$
-   and WLOG, assume that they correspond to first $k$ 
-   columns of $\bA$.
-1. Then, since the corresponding columns are linearly 
-   dependent, hence there exists a nonzero vector $\bt \in \RR^k$
-   such that
-
-   $$
-   \sum_{i=1}^k t_i \ba_i = \bzero.
-   $$
-1. We can extend $\bt$ to $\RR^n$ by appending $n-k$ zeros such that
-   $\bA \bt = \bzero$.
-1. Since the first $k$ entries of $\bv$ are positive, we can
-   choose a sufficiently small $r > 0$ such that
-   $\by = \bv - r \bt \succeq \bzero$
-   and $\bz = \bv + r \bt \succeq \bzero$.
-1. Note that $\bA \by = \bA \bz = \bb$.
-1. Therefore, $\by, \bz \in P$.
-1. At the same time, it is easy to see that
-
-   $$
-   \bv = \frac{1}{2} \by + \frac{1}{2} \bz.
-   $$
-1. Thus, $\bv$ is a convex combination of two distinct points of $P$.
-1. This contradicts our hypothesis that $\bv$ is an extreme point of $P$.
-1. Thus, $\bv$ must be a basic feasible solution.
-```
-
 
 ## Pointed Cones
 
@@ -1403,44 +1224,6 @@ and hence has an empty interior.
 A contradiction. 
 ```
 
-### Convex Polyhedral Cones
-
-```{prf:theorem} Polar cone of convex polyhedral cone
-:label: res-cvxf-polar-convex-polyhedral-cone
-
-Let the ambient space by $\RR^n$. Let $\bA \in \RR^{m \times n}$.
-Let 
-
-$$
-C = \{\bx \in \RR^n \ST \bA \bx \preceq \bzero \}.
-$$
-
-Then
-
-$$
-C^{\circ}  = \{ \bA^T \bt \ST \bt \in \RR^m_+ \}.
-$$
-```
-
-We note that the set $C$ is a convex cone. It is known
-as the convex polyhedral cone.
-
-```{prf:proof}
-We note that $\by \in C^{\circ}$ if and only if 
-$\bx^T \by \leq 0$ for every $\bx$ satisfying $\bA \bx \preceq \bzero$.
-
-1. Thus, for every $\bx \in \RR^n$, the statement
-   $\bA \bx \preceq \bzero \implies \bx^T \by \leq 0$ is true.
-1. By Farkas' lemma ({prf:ref}`res-cvx-farkas-lemma-v3`),
-   it is equivalent to the statement that
-   there exists $\bt \succeq \bzero$ such that $\bA^T \bt = \by$.
-1. Thus, 
-
-   $$
-   C^{\circ}  = \{ \bA^T \bt \ST \bt \in \RR^m_+ \}.
-   $$
-```
-
 
 ## Normal Cones
 
@@ -1843,6 +1626,91 @@ $$
 $$
 ```
 
+## Polyhedral Cones
+
+```{prf:definition} Polyhedral cone
+:label: def-cvx-polyhedral-cone
+
+The conic hull of a finite set of points is known as
+a *polyhedral cone*.
+
+In other words, let $\{ \bx_1, \bx_2, \dots, \bx_m \}$
+be a finite set of points. Then
+
+$$
+C = \cone \{ \bx_1, \bx_2, \dots, \bx_m \} 
+$$ 
+is known as a polyhedral cone.
+```
+
+```{prf:theorem}
+:label: res-cvx-polyhedral-cone-closed-convex
+
+A polyhedral cone is nonempty, closed and convex.
+```
+
+```{prf:proof}
+Since it is the conic hull of a nonempty set, hence 
+it is nonempty and convex.
+
+{prf:ref}`res-cvx-closed-conic-hull` shows that
+the conic hulls of a finite set of points are
+closed.
+```
+
+```{prf:remark} Polyhedral cone alternative formulations
+:label: res-cvx-polyhedral-cone-definitions
+
+Following are some alternative definitions of a polyhedral cone.
+
+1. A cone is polyhedral if it is the intersection of a finite
+   number of half spaces which have $\bzero$ on their boundary.
+1. A cone $C$ is polyhedral if there is some matrix
+   $\bA$ such that $C = \{ \bx \in \RR^n \ST \bA \bx \succeq \bzero  \}$.
+1. A cone is polyhedral if it is the solution set of a system of 
+   homogeneous linear inequalities.
+```
+
+### Polar Cones
+
+```{prf:theorem} Polar cone of a polyhedral cone
+:label: res-cvx-polar-polyhedral-cone
+
+Let the ambient space by $\RR^n$. Let $\bA \in \RR^{m \times n}$.
+Let 
+
+$$
+C = \{\bx \in \RR^n \ST \bA \bx \preceq \bzero \}.
+$$
+
+Then
+
+$$
+C^{\circ}  = \{ \bA^T \bt \ST \bt \in \RR^m_+ \}.
+$$
+```
+
+We note that the set $C$ is a convex cone. It is known
+as the convex polyhedral cone.
+
+```{prf:proof}
+We note that $\by \in C^{\circ}$ if and only if 
+$\bx^T \by \leq 0$ for every $\bx$ satisfying $\bA \bx \preceq \bzero$.
+
+1. Thus, for every $\bx \in \RR^n$, the statement
+   $\bA \bx \preceq \bzero \implies \bx^T \by \leq 0$ is true.
+1. By Farkas' lemma ({prf:ref}`res-cvx-farkas-lemma-v3`),
+   it is equivalent to the statement that
+   there exists $\bt \succeq \bzero$ such that $\bA^T \bt = \by$.
+1. Thus, 
+
+   $$
+   C^{\circ}  = \{ \bA^T \bt \ST \bt \in \RR^m_+ \}.
+   $$
+```
+
+
+
 ## Cone Generated by a Convex Set
 
 The direct sum vector space $\VV \oplus \RR$ has
@@ -1966,7 +1834,7 @@ based on the type of partial sum in $\VV \oplus \RR$.
 [TODO] Clarify this further. It is not obvious.
 
 
-## Positive semi-definite cone
+## Positive Semidefinite Cone
 
 ````{prf:theorem} The convex cone of positive semidefinite matrices
 :label: res-cvx-psd-cone
@@ -1996,4 +1864,184 @@ $$
 
 Hence $\theta_1 \bA + \theta_2 \bB \in \SS_+^n$.
 ````
+
+## Linear System with Nonnegativity Constraints
+
+Consider the system
+
+$$
+P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}
+$$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$.
+Without loss of generality, we shall assume that the rows
+of $\bA$ are linearly independent.
+This is a linear system $\bA \bx = \bb$ with the nonnegativity
+constraint $\bx \succeq \bzero$.
+If we write $\bA$ in the form of column vectors as 
+
+$$
+\bA = \begin{bmatrix}
+\ba_1 & \dots & \ba_n
+\end{bmatrix}
+$$
+Then, the set $Q = \{ \bA \bx \ST \bx \in \RR^n_+ \}$
+can be written as
+
+$$
+Q = \cone \{\ba_1, \dots \ba_n\}.
+$$
+In other words, $Q$ is the conic hull of the column vectors
+of $\bA$. We can think of $\bA$ as a linear mapping of the
+nonnegative orthant (a convex cone) $\RR^n_+$ from $\RR^n$
+to another convex cone in $\RR^n$ given as a conic hull
+of the columns of $\bA$.
+
+We can now see that $P$ is nonempty if $\bb \in Q$. 
+
+```{prf:definition} Basic feasible solution
+:label: def-cvx-basic-feasible-solution
+
+Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
+Assume that the rows of $\bA$ are linearly independent. 
+Then, $\bv \in \RR^n$ is a *basic feasible solution* (in short "bfs")
+of $P$ if the columns of $\bA$ corresponding to the positive
+entries of $\bv$ are linearly independent.
+
+Consequently, $\bv$ has at most $m$ has positive entries.
+All other entries of $\bv$ are $0$.
+```
+
+```{prf:theorem} Existence of basic feasible solution
+:label: res-cvx-cone-bfs-existence
+
+Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
+Assume that the rows of $A$ are linearly independent. 
+
+If $P$ is nonempty; i.e. $P \neq \EmptySet$, then 
+it contains at least one basic feasible solution.
+```
+
+```{prf:proof}
+Recall that
+
+$$
+Q = \{ \bA \bx \ST \bx \in \RR^n_+ \} = \cone \{\ba_1, \dots \ba_n\}
+$$
+where $\ba_1, \dots, \ba_n$ are columns of the matrix $\bA$.
+
+1. If $P \neq \EmptySet$, then $\bb \in Q$.
+1. In other words, $\bb$ is a conic combination of columns of $\bA$.
+1. By the {prf:ref}`conic representation theorem <res-cvx-conic-rep-unique>`,
+   there exists a subset of $k$ linearly independent vectors among
+   $\{\ba_1, \dots, \ba_n \}$ such that $\bb$ is their conic 
+   combination.
+1. In other words, there exist $k$ indices $1 \leq i_1 < \dots < i_k \leq n$
+   and $k$ numbers $v_{i_1}, \dots, v_{i_k} > 0$ such that
+
+   $$
+   \bb = \sum_{j=1}^k v_{i_j} \ba_{i_j}
+   $$
+   and $\{\ba_{i_1}, \dots, \ba_{i_k}\}$ are linearly independent.
+1. Consequently $k \leq m$ since columns of $\bA$ belong to $\RR^m$.
+1. Let 
+   
+   $$
+   \bv = \sum_{j=1}^k v_{i_j} \be_{i_j}
+   $$
+   where $\be_{i_j}$ are unit vectors of $\RR^n$.
+1. Clearly, $\bv \succeq \bzero$ and $\bA \bv = \bb$.
+1. Therefore, $\bv \in P$ and $\bv$ is a basic feasible solution.
+```
+
+The basic feasible solutions of $P$ are the
+{prf:ref}`extreme points <def-cvx-extreme-point>` 
+of $P$. Recall that a point is an extreme point
+if it cannot be expressed as a nontrivial convex
+combination of two distinct points of a set.
+
+```{prf:theorem} Equivalence between basic feasible solutions and extreme points
+:label: res-cvx-cone-bfs-extreme
+
+Let $P = \{ \bx \in \RR^n \ST \bA \bx = \bb, \bx \succeq \bzero \}$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$. 
+Assume that the rows of $A$ are linearly independent. 
+
+Then $\bv$ is a basic feasible solution of $P$ if and only if 
+$\bv$ is an extreme point of $P$.
+```
+
+```{prf:proof}
+
+Let $\bv$ be a basic feasible solution of $P$.
+
+1. Then $\bb = \bA \bv$ and $\bv$ has $k$ positive entries
+   with $k \leq m$.
+1. Without loss of generality, assume that first $k$ entries
+   of $\bv$ are positive. This can be easily achieved by 
+   shuffling the columns of $\bA$ in the linear system $\bA \bx = \bb$.
+1. Therefore, $v_1, \dots, v_k > 0$ and $v_{k+1}, \dots, v_n = 0$.
+1. Also, the first $k$ columns $\ba_1, \dots, \ba_k$ of the matrix
+   $\bA$ are linearly independent since $\bv$ is a basic feasible solution.
+1. For contradiction, assume that $\bv$ is not an extreme point of $P$;
+   i.e.,  $\bv \notin \extreme P$.
+1. Then, there exist $\by, \bz \in P$ with $\by \neq \bz$ 
+   and $t \in (0,1)$ such that
+   $\bv = t \by + (1-t)\bz$.
+1. Since $\by, \bz \in P$, hence $\by \succeq \bzero$ and $\bz \succeq \bzero$.
+1. Since the last $n-k$ entries of $\bv$ are zero, hence
+   the last $n-k$ entries of $\by$ and $\bz$ also must be zero
+   as they have to be nonnegative.
+1. Since $\by, \bz \in P$, hence $\bA \by = \bb$ and $\bA \bz = \bb$.
+1. Therefore, 
+
+   $$
+   \bb = \sum_{i=1}^k y_i \ba_i = \sum_{i=1}^k z_i \ba_i. 
+   $$
+1. This implies that
+
+   $$
+   \sum_{i=1}^k (y_i -z_i) \ba_i = \bzero.
+   $$
+1. But, $\ba_1, \dots, \ba_k$ are linearly independent by hypothesis.
+1. Thus, $y_i = z_i$ for $i=1,\dots,k$ must hold.
+1. Then, $\by = \bz$.
+1. We arrive at a contradiction.
+1. Thus, $\bv$ must be an extreme point of $P$.
+
+For the converse, assume that $\bv$ is an extreme point of $P$.
+
+1. Again, by contradiction, assume that $\bv$ is not a basic 
+   feasible solution. 
+1. Thus, the columns of $\bA$ corresponding to the positive
+   entries of $\bv$ are linearly dependent.
+1. Assume that there are $k$ positive entries in $\bv$
+   and WLOG, assume that they correspond to first $k$ 
+   columns of $\bA$.
+1. Then, since the corresponding columns are linearly 
+   dependent, hence there exists a nonzero vector $\bt \in \RR^k$
+   such that
+
+   $$
+   \sum_{i=1}^k t_i \ba_i = \bzero.
+   $$
+1. We can extend $\bt$ to $\RR^n$ by appending $n-k$ zeros such that
+   $\bA \bt = \bzero$.
+1. Since the first $k$ entries of $\bv$ are positive, we can
+   choose a sufficiently small $r > 0$ such that
+   $\by = \bv - r \bt \succeq \bzero$
+   and $\bz = \bv + r \bt \succeq \bzero$.
+1. Note that $\bA \by = \bA \bz = \bb$.
+1. Therefore, $\by, \bz \in P$.
+1. At the same time, it is easy to see that
+
+   $$
+   \bv = \frac{1}{2} \by + \frac{1}{2} \bz.
+   $$
+1. Thus, $\bv$ is a convex combination of two distinct points of $P$.
+1. This contradicts our hypothesis that $\bv$ is an extreme point of $P$.
+1. Thus, $\bv$ must be a basic feasible solution.
+```
+
 

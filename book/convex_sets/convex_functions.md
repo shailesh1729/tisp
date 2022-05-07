@@ -1816,7 +1816,7 @@ We proceed as follows.
 1. The set $D$ is a convex polyhedral cone.
 1. By {prf:ref}`res-cvxf-support-cone`, the support function
    of a cone is the indicator function of its polar cone.
-1. By {prf:ref}`res-cvxf-polar-convex-polyhedral-cone`, the 
+1. By {prf:ref}`res-cvx-polar-polyhedral-cone`, the 
    polar cone is given by
 
    $$
