@@ -1394,7 +1394,7 @@ $$
 f^*(\by) = I_{B_{\| \cdot \|_*}[\bzero, 1]}
 = \begin{cases}
 0 & \| \by \|_* \leq 1 \\
-\infty & \text{ otherwise }
+\infty & \text{ otherwise }.
 \end{cases}
 $$
 
@@ -1511,57 +1511,159 @@ We proceed as follows
 
 
 
-```{rubric} Ball-Pen
-```
+```{prf:theorem} Ball-pen
+:label: res-cvxf-conjugate-ball-pen
 
-```{div}
 Let $f : \VV \to \RERL$ be given by
 
 $$
 f(\bx) \triangleq \begin{cases}
 - \sqrt{1 - \| x \|^2} & \| x \| \leq 1\\
-\infty & \text{ otherwise }
-\end{cases}.
+\infty & \text{ otherwise }.
+\end{cases}
 $$
 
-Then, the conjugate $f^* : \VV^* \to \ERL$ for any $\by \in \VV^*$
+Then, the conjugate $f^* : \VV^* \to \RERL$ for any $\by \in \VV^*$
 is given by:
 
 $$
 f^*(\by) = \sqrt{\| y \|_*^2 + 1}.
 $$
 
-Let $f_{\alpha}$ for some $\alpha > 0$ be defined as
+Generalizing further, let $f_{\alpha}$ for some $\alpha > 0$ be defined as
 
 $$
 f_{\alpha}(\bx) \triangleq \begin{cases}
 - \sqrt{\alpha^2 - \| x \|^2} & \| x \| \leq \alpha\\
-\infty & \text{ otherwise }
-\end{cases}.
+\infty & \text{ otherwise }.
+\end{cases}
 $$
 
-The conjugate:
+The conjugate is given by:
 
 $$
 f_{\alpha}^*(\by) = \alpha \sqrt{\| y \|_*^2 + 1}.
 $$
+```
 
+```{prf:proof}
+We shall use the double maximization approach here.
 
-In the reverse direction, let $g_{\alpha} : \VV \to \RR$ 
-for some $\alpha > 0$ be given by:
 
 $$
-g_{\alpha} (\bx) = \sqrt{\alpha^2 + \| x \|^2}.
+f^*(\by) &= \sup \left \{
+   \langle \bx, \by \rangle + \sqrt{1 - \| x \|^2} \ST \| \bx \| \leq 1 
+   \right \} \\
+&= \sup_{t \in [0,1]} \sup_{\bx \ST \| \bx \| = t}
+\left \{ \langle \bx, \by \rangle + \sqrt{1 - t^2} \right \} \\
+&= \sup_{t \in [0,1]} \left \{ 
+   t \| \by \|_* + \sqrt{1 - t^2}
+   \right \}.
 $$
 
-Then the conjugate is:
+Introduce
 
 $$
-g_{\alpha}^*(\by) = \begin{cases}
--\alpha \sqrt{1 - \| y \|_*^2} & \| y \|_* \leq 1\\
+g(t) = t \| \by \|_* + \sqrt{1 - t^2}.
+$$
+
+Differentiating w.r.t. $t$ and setting the derivative to 0, we get
+
+$$
+& \| \by \|_* - \frac{ t }{\sqrt{1-t^2}} = 0 \\
+\implies & \| \by \|_* = \frac{ t }{\sqrt{1-t^2}} \\
+\implies & \| \by \|_*^2 = \frac{ t^2 }{1-t^2} \\
+\implies & 1 + \| \by \|_*^2 = \frac{1 }{1-t^2} \\
+\implies & \frac{1}{1 + \| \by \|_*^2} = 1-t^2 \\
+\implies & 1 - \frac{1}{1 + \| \by \|_*^2} = t^2 \\
+\implies & \frac{\| \by \|_*^2}{1 + \| \by \|_*^2} = t^2 \\
+\implies & t^* = \frac{\| \by \|_*}{\sqrt{1 + \| \by \|_*^2}}.
+$$
+Since $t \in [0,1]$ hence only the positive square root is considered.
+It is easy to see that $t^* \in [0,1]$.
+
+Putting back the value of $t^*$ into $f^*(\by)$,
+
+$$
+f^*(\by) &=
+ \frac{\| \by \|_*^2}{\sqrt{1 + \| \by \|_*^2}}
+   + \sqrt{1 - \frac{\| \by \|_*^2}{1 + \| \by \|_*^2}} \\
+&=  \frac{\| \by \|_*^2}{\sqrt{1 + \| \by \|_*^2}} + 
+\frac{1}{\sqrt{1 + \| \by \|_*^2}} \\
+&= \frac{1 + \| \by \|_*^2}{\sqrt{1 + \| \by \|_*^2}} \\
+&= \sqrt{1 + \| \by \|_*^2}.
+$$
+
+Next, we note that
+
+$$
+f_{\alpha} (\bx) = \alpha f\left ( \frac{\bx}{\alpha} \right ).
+$$
+
+Applying {prf:ref}`res-cvxf-conjugate-scaling`,
+
+$$
+f^*_{\alpha} (\bx) = \alpha f^*(\by) = \alpha \sqrt{1 + \| \by \|_*^2}.
+$$
+```
+
+
+
+```{prf:theorem} $\sqrt{t^2 + \| \cdot \|^2}$
+:label: res-cvxf-conjugate-ball-pen-ext
+
+Let $g_t : \VV \to \RR$  for some $\alpha > 0$ be given by:
+
+$$
+g_t (\bx) = \sqrt{t^2 + \| x \|^2}.
+$$
+
+Then the conjugate is given by:
+
+$$
+g_{t}^*(\by) = \begin{cases}
+-t \sqrt{1 - \| y \|_*^2} & \| y \|_* \leq 1\\
 \infty & \text{ otherwise }
 \end{cases}.
 $$
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Define $g(\bx) = \sqrt{1 + \|\bx \|^2}$.
+1. We can see that $g_t(\bx) = t g \left ( \frac{\bx}{t} \right)$.
+1. By {prf:ref}`res-cvxf-conjugate-ball-pen`,
+   $g = f^*$ where $f$ is the ball-pen function given by
+
+   $$
+   f(\by) = \begin{cases}
+   - \sqrt{1 - \| \by \|_*^2} & \| \by \|_* \leq 1\\
+   \infty & \text{ otherwise }.
+   \end{cases}
+   $$
+1. We note that $f$ is proper, closed and convex function.
+1. By {prf:ref}`res-cvxf-biconjugate-proper-closed-convex`
+
+   $$
+   g^* = f^{**} = f.
+   $$
+1. Thus,
+
+   $$
+   g^* (\by) = \begin{cases}
+   - \sqrt{1 - \| \by \|_*^2} & \| \by \|_* \leq 1\\
+   \infty & \text{ otherwise }.
+   \end{cases}
+   $$
+1. Applying {prf:ref}`res-cvxf-conjugate-scaling`,
+
+   $$
+   g_t^*(\by) = t g^*(\by) = \begin{cases}
+   - t \sqrt{1 - \| \by \|_*^2} & \| \by \|_* \leq 1\\
+   \infty & \text{ otherwise }.
+   \end{cases}
+   $$
 ```
 
 
