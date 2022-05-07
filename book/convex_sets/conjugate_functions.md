@@ -681,19 +681,6 @@ $$
 
 ## Useful Results
 
-```{rubric} Fenchel's duality theorem
-```
-
-```{div}
-Let $f,g : \VV \to \RERL$ be proper convex function.
-If $\relint \dom f \cap \relint \dom g \neq \EmptySet$, then 
-
-$$
-\underset{\bx \in \VV}{\sup} \{f(\bx) + g(\bx) \}
-= \underset{\by \in \VV^*}{\sup} \{ - f^*(\by) - g^*(-\by) \}.
-$$
-The supremum of R.H.S. is attained whenever it is finite.
-```
 
 ```{rubric} Infimal Convolution
 ```
