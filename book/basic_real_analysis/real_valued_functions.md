@@ -194,6 +194,18 @@ $$
 ```
 The epigraph lies above (and includes) the graph of a function.
 
+```{prf:definition} Strict epigraph
+:label: def-bra-strict-epigraph
+
+The *strict epigraph* of a real valued function $f: X \to \RR$ is
+defined as:
+
+$$
+\epi_s f \triangleq \{ (x,t) \in X \times \RR \, | \, x \in \dom f, f(x) < t \}.
+$$ 
+```
+The strict epigraph lies above the graph of a function.
+
 ## Sub-level Sets
 
 ```{prf:definition} Sub-level set
