@@ -42,7 +42,6 @@ $$
 \inf \{ f(\by) + g(\bz) \ST \by, \bz \in \VV, \by + \bz = \bx, 
     f(\by) < \infty, g(\bz) < \infty \}. 
 $$
-This is consistent with the convention that $\inf \EmptySet = \infty$.
 
 Another formulation is
 
@@ -62,7 +61,9 @@ the strict epigraph of a function $f : \VV \to \ERL$ is given by
 
 $$
 \epi_s f \triangleq \{ (\bx,t) \in \VV \oplus \RR \ST  f(\bx) < t \}.
-$$ 
+$$
+We show in {prf:ref}`res-cvx-infimal-strict-epi` that
+$\epi_s f \infimal g = \epi_s f + \epi_s g$. 
 
 From the definition, it is clear that
 $f \infimal g$ is the largest of all the functions
@@ -400,18 +401,43 @@ Let $C \subseteq \VV$ be a nonempty convex set.
 1. Thus $d_C$ (the distance function to a convex set) is convex.
 ```
 
-
 ## Conjugates
 
+```{prf:theorem} Conjugate of infimal convolution of proper functions
+:label: res-cvx-infimal-proper-conjugate
 
-
-```{div}
-For two proper functions 
-$h_1, h_2: \VV \to \RERL$, it holds that:
+For two proper functions  $h_1, h_2: \VV \to \RERL$, it holds that:
 
 $$
 (h_1 \infimal h_2)^*  = h_1^*  + h_2^*.
 $$
+```
+
+```{prf:proof}
+Pick $\by \in \VV^*$. Then
+
+$$
+(h_1 \infimal h_2)^* (\by)
+&= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - (h_1 \infimal h_2)(\bx) \}\\
+&= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle 
+   - \inf_{\bu \in \VV}(h_1(\bu) + h_2(\bx - \bu) ) \}\\
+&= \sup_{\bx \in \VV} \sup_{\bu \in \VV} \{ \langle \bx, \by \rangle 
+   - h_1(\bu) - h_2(\bx - \bu) \}\\
+&= \sup_{\bu \in \VV} \sup_{\bx \in \VV} \{ \langle \bx - \bu, \by \rangle + \langle \bu, \by \rangle 
+   - h_1(\bu) - h_2(\bx - \bu) \}\\
+&= \sup_{\bu \in \VV} \{ 
+   \sup_{\bx \in \VV} \{ \langle \bx - \bu, \by \rangle - h_2(\bx - \bu) \}
+   + \langle \bu, \by \rangle  - h_1(\bu)  \}\\
+&= \sup_{\bu \in \VV} \{h_2^*(\by) + \langle \bu, \by \rangle  - h_1(\bu)  \}\\
+&= h_2^*(\by) + \sup_{\bu \in \VV} \{\langle \bu, \by \rangle  - h_1(\bu)  \}\\
+&= h_2^*(\by) + h_1^*(\by) \\
+&= (h_1^*  + h_2^*) (\by).
+$$
+```
+
+
+```{prf:theorem} Conjugate of sum of convex functions
+:label: res-cvx-sum-proper-conjugate
 
 Let $h_1 : \VV \to \RERL$ be a proper convex
 function and $h_2 : \VV \to \RR$ be a real valued
@@ -420,7 +446,9 @@ convex function. Then
 $$
 (h_1 + h_2)^* = h_1^* \infimal h_2^*.
 $$
+```
 
+```{div}
 Let $h_1 : \VV \to \RERL$ be a proper closed convex
 function and $h_2 : \VV \to \RR$ be a real valued
 convex function. Then
@@ -593,3 +621,5 @@ Now, for contradiction, assume that $f(\bx) < g(\bx)$.
 
 TO BE COMPLETED.
 ```
+
+
