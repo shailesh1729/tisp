@@ -224,7 +224,8 @@ We show the set inclusion from both sides.
 
 1. Let $(\bx, r) \in \epi_s f \infimal g$.
 1. Then  $(f \infimal g)(\bx) < r$.
-1. Then there exist $\by \in \dom f$ and $\bz \in \dom g$ such that
+1. Then there exist $\by \in \dom f$ and $\bz \in \dom g$
+   with $\bx = \by + \bz$ such that
 
    $$
    f(\by) + g(\bz) < r.
@@ -261,6 +262,7 @@ For the converse
 
 
 
+
 ```{prf:property} Epigraph of infimal convolution
 :label: res-cvx-infimal-epi
 
@@ -276,7 +278,71 @@ infimal convolution is exact at each $\bx \in \VV$
 where $(f \infimal g) (\bx) \in \RR$.
 ```
 
+```{prf:proof}
+We first show the inclusion.
 
+1. Let $(\bx, r) \in \epi f + \epi g$.
+1. Then there is $(\by, r_1) \in \epi f$ and $(\bz, r_2) \in \epi g$
+   so that 
+
+   $$
+   \bx = \by + \bz \text{ and } r = r_1 + r_2.
+   $$
+1. Thus $f(\by) \leq r_1$ and $g(\bz) \leq r_2$.
+1. Thus $f(\by) + g(\bz) \leq r_1 + r_2 = r$.
+1. Hence $(f \infimal g)(\bx) \leq f(\by) + g(\bz) \leq r$.
+1. Hence $(\bx, r) \in \epi f \infimal g$.
+1. Hence $\epi f + \epi g \subseteq \epi f \infimal g$.
+
+Next we show that the reverse inclusion holds 
+if infimal convolution is exact at each $\bx \in \VV$
+where $(f \infimal g) (\bx) \in \RR$.
+
+1. Let $(\bx, r) \in \epi f \infimal g$.
+1. Then  $(f \infimal g)(\bx) \leq r$.
+1. Consider first the case where $(f \infimal g)(\bx) = -\infty$.
+1. Then for any $M \in \RR$, 
+   there exist $\by \in \dom f$ and $\bz \in \dom g$ with $\bx = \by + \bz$
+   such that $f(\by) + f(\bz) < M$.
+1. In particular, there exist $\by, \bz$ so that $f(\by) + f(\bz) < r$.
+1. Hence $(\bx, r) \in \epi f + \epi g$.
+1. Now if $(f \infimal g)(\bx) \in \RR$ then the infimal convolution is exact.
+1. Since the infimal convolution is exact,
+   hence there exist $\by \in \dom f$ and $\bz \in \dom g$
+   with $\bx = \by + \bz$ such that
+
+   $$
+   f(\by) + g(\bz) = (f \infimal g)(\bx) \leq r.
+   $$
+   This is directly from the definition of infimal convolution.
+1. Consequently, we can split $r$ as $r = r_1 + r_2$ such that
+   $f(\by) \leq r_1$ and $g(\bz) \leq r_2$.
+1. Then $(\by, r_1) \in \epi f$ and $(\bz, r_2) \in \epi g$
+   by definition of epigraphs.
+1. Hence $(\by + \bz, r_1 + r_2)  = (\bx, r) \in \epi f + \epi g$.
+1. Thus $\epi_s f \infimal g \subseteq \epi f + \epi g$.
+
+
+Finally, to show that this condition is necessary, assume that
+there exists a point $\bx \in \VV$ where $(f \infimal g) (\bx) \in \RR$
+and the infimal convolution is not exact.
+
+1. Let $t  = (f \infimal g) (\bx)$.
+1. Then $(\bx, t) \in \epi f \infimal g$.
+1. Since the infimal convolution is not exact, hence
+   for any $\by \in \dom f$ and $\bz \in \dom g$ with $\bx = \by + \bz$
+
+   $$
+   t < f(\by) + g(\bz).
+   $$
+1. For contradiction, assume that $(\bx, t) \in \epi f + \epi g$.
+1. Then there exist $(\by, t_1) \in \epi f$ and $(\bz, t_2) \in \epi g$
+   so that $\bx = \by + \bz$ and $t = t_1 + t_2$.
+1. Thus $f(\by) \leq t_1$ and $g(\bz) \leq t_2$.
+1. Thus $f(\by) + g(\bz) \leq t_1 + t_2 = t$.
+1. We have arrived at a contradiction.
+1. Hence $(\bx, t) \notin \epi f + \epi g$.
+```
 
 ### Convexity
 
