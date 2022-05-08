@@ -207,17 +207,73 @@ We need to show that $t$ is the greatest lower bound of the set $S$.
 1. In other words, $t = \inf S$ as desired.
 ```
 
+```{prf:property} Strict epigraph of infimal convolution
+:label: res-cvx-infimal-strict-epi
+
+Let $f, g : \VV \to \ERL$ be given extended valued functions. 
+Then
+
+$$
+\epi_s f \infimal g = \epi_s f + \epi_s g.
+$$
+```
+
+```{prf:proof}
+
+We show the set inclusion from both sides.
+
+1. Let $(\bx, r) \in \epi_s f \infimal g$.
+1. Then  $(f \infimal g)(\bx) < r$.
+1. Then there exist $\by \in \dom f$ and $\bz \in \dom g$ such that
+
+   $$
+   f(\by) + g(\bz) < r.
+   $$
+   This is directly from the definition of infimal convolution.
+1. Consequently, we can split $r$ as $r = r_1 + r_2$ such that
+   $f(\by) < r_1$ and $g(\bz) < r_2$.
+   1. Let $s = f(\by)$, $t = g(\bz)$.
+   1. Let $d = r - (s + t) > 0$.
+   1. Let $e = \frac{d}{2} > 0$.
+   1. Let $r_1 = s + e$ and $r_2 = t + e$.
+   1. Then $r_1 + r_2 = s + t + 2e = s + t + d = r$.
+   1. Also $f(\by) = s < r_1$ and $g(\bz) = t < r_2$.
+1. Then $(\by, r_1) \in \epi_s f$ and $(\bz, r_2) \in \epi_s g$
+   by definition of strict epigraphs.
+1. Hence $(\by + \bz, r_1 + r_2)  = (\bx, r) \in \epi_s f + \epi_s g$.
+1. Thus $\epi_s f \infimal g \subseteq \epi_s f + \epi_s g$
+
+For the converse
+
+1. Let $(\bx, r) \in \epi_s f + \epi_s g$.
+1. Then there is $(\by, r_1) \in \epi_s f$ and $(\bz, r_2) \in \epi_s g$
+   so that 
+
+   $$
+   \bx = \by + \bz \text{ and } r = r_1 + r_2.
+   $$
+1. Thus $f(\by) < r_1$ and $g(\bz) < r_2$.
+1. Thus $f(\by) + g(\bz) < r_1 + r_2 = r$.
+1. Hence $(f \infimal g)(\bx) \leq f(\by) + g(\bz) < r$.
+1. Hence $(\bx, r) \in \epi_s f \infimal g$.
+1. Hence $\epi_s f + \epi_s g \subseteq \epi_s f \infimal g$.
+```
+
+
+
 ```{prf:property} Epigraph of infimal convolution
 :label: res-cvx-infimal-epi
 
-Let $f, g : \VV \to \ERL$ be given functions. 
+Let $f, g : \VV \to \ERL$ be given functions.
+Then
 
-1. $\dom f \infimal g = \dom f + \dom g$.
-1. $\epi_s f \infimal g = \epi_s f + \epi_s g$.
-1. $\epi f + \epi g \subseteq \epi f \infimal g$
-   and the equality holds if and only if the
-   infimal convolution is exact at each $\bx \in \VV$
-   where $(f \infimal g) (\bx) \in \RR$.
+$$
+\epi f + \epi g \subseteq \epi f \infimal g.
+$$
+
+The equality holds if and only if the
+infimal convolution is exact at each $\bx \in \VV$
+where $(f \infimal g) (\bx) \in \RR$.
 ```
 
 
