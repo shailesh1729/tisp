@@ -2,7 +2,7 @@
 
 
 ```{note}
-Several results in this section appear without complete proof at the moment.
+Some results in this section appear without complete proof at the moment.
 They have been collected from various
 sources. The proofs will be added later.
 ```
@@ -541,16 +541,45 @@ We proceed as follows.
    $$
 ```
 
-```{div}
+```{prf:theorem} Representation of the infimal convolution by conjugates
+:label: res-cvx-infimal-conjugate-rep
+
 Let $h_1 : \VV \to \RERL$ be a proper convex
 function and $h_2 : \VV \to \RR$ be a real valued
-convex function. Suppose $h_1 \infimal h_2$ is 
-a real valued function. Then
-
+convex function. 
+Suppose $h_1 \infimal h_2$ is a real valued function.
+Then
 
 $$
 h_1 \infimal h_2 = (h_1^* + h_2^*)^*.
 $$
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. By {prf:ref}`res-cvx-infimal-proper-conjugate`
+
+   $$
+   (h_1 \infimal h_2)^*  = h_1^*  + h_2^*.
+   $$
+1. Since $h_1$ is proper and convex and $h_2$ is real valued and convex,
+   hence by {prf:ref}`res-cvx-infimal-convex-proper`,
+   $h_1 \infimal h_2$ is convex.
+1. By hypothesis $h_1 \infimal h_2$  is also real valued.
+1. Thus $h_1 \infimal h_2$  is proper and closed.
+1. Since $h_1 \infimal h_2$ is proper, closed and convex; 
+   hence by {prf:ref}`res-cvxf-biconjugate-proper-closed-convex`
+
+   $$
+   (h_1 \infimal h_2)^{**} = h_1 \infimal h_2.
+   $$
+1. Hence
+ 
+   $$
+    h_1 \infimal h_2 = [(h_1 \infimal h_2)^*]^*
+    = [h_1^*  + h_2^*]^*.
+   $$
 ```
 
 ## Convexity
