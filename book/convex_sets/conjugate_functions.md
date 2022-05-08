@@ -756,6 +756,66 @@ $$
 ```
 
 
+```{prf:theorem} Conjugate subgradient theorem - second formulation
+:label: res-cvxf-conjugate-subgradient-2
+
+Let $f : \VV \to \RERL$ be a proper, closed and convex function. 
+Then for any $\bx \in \VV$ and $\by \in \VV^*$:
+
+$$
+\partial f(\bx) = \argmax_{\bu \in \VV^*} 
+\{ \langle \bx, \bu \rangle - f^*(\bu) \}
+$$
+
+and 
+
+$$
+\partial f^*(\by) = \argmax_{\bv \in \VV} 
+\{ \langle \bv, \by \rangle - f(\bv) \}.
+$$
+```
+
+```{prf:proof}
+
+We proceed as follows.
+
+1. Let $\by \in \dom \partial f^*$ and $\bx \in \partial f^*(\by)$.
+1. Then by {prf:ref}`res-cvxf-conjugate-subgradient`,
+   it is equivalent to
+   
+   $$
+   f^*(\by) = \langle \bx, \by \rangle - f(\bx).
+   $$
+1. By definition of the conjugate function
+
+   $$
+   f^*(\by) = \sup_{\bv \in \VV} \{ \langle \bv, \by \rangle  - f(\bv) \}.
+   $$
+1. since the supremum is attained at $\bx$, hence this is equivalent to
+
+   $$
+   \bx \in \argmax_{\bv \in \VV} \{ \langle \bv, \by \rangle  - f(\bv) \}.
+   $$
+1. Hence
+
+   $$
+   \partial f^*(\by) = \argmax_{\bv \in \VV} \{ \langle \bv, \by \rangle  - f(\bv) \}.
+   $$
+1. Similarly, let $\bx \in \partial f$ and $\by \in \partial f(\bx)$.
+1. Following similar argument, this is equivalent to
+
+   $$
+   \by \in \argmax_{\bu \in \VV^*} \{ \langle \bx, \bu \rangle  - f^*(\bu) \}.
+   $$
+1. Hence
+
+   $$
+   \partial f(\bx) = \argmax_{\bu \in \VV^*} \{ \langle \bx, \bu \rangle  - f^*(\bu) \}.
+   $$
+```
+
+
+
 
 
 ## 1-dim Functions
