@@ -448,6 +448,58 @@ $$
 $$
 ```
 
+```{prf:proof}
+The proof is more complicated and requires the application
+of Fenchel's duality theorem ({prf:ref}`res-opt-fenchel-duality-theorem`).
+
+1. Pick any $\by \in \VV^*$.
+1. Elaborating the conjugate function
+
+   $$
+   (h_1 + h_2)^* (\by)
+   &= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - (h_1 + h_2)(\bx) \}\\
+   &= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - h_1(\bx) - h_2(\bx) \}\\
+   &= -\inf_{\bx \in \VV} \{ h_1(\bx) + h_2(\bx) - \langle \bx, \by \rangle  \}\\
+   &= -\inf_{\bx \in \VV} \{ h_1(\bx) + g(\bx)  \}\\
+   $$
+   where $g(\bx) = h_2(\bx) - \langle \bx, \by \rangle$.
+1. We note that since $h_2$ is a real valued convex function, hence $g$ is also
+   a real valued convex function.
+1. We note that
+
+   $$
+   (\relint \dom h_1) \cap (\relint \dom g) = (\relint \dom h_1) \cap \VV
+   = \relint \dom h_1 \neq \EmptySet.
+   $$
+1. Applying the Fenchel's duality theorem ({prf:ref}`res-opt-fenchel-duality-theorem`),
+
+   $$
+   \inf_{\bx \in \VV} \{ h_1(\bx) + g(\bx)  \} = 
+   \sup_{\bz \in \VV} \{ -h_1^*(\bz) - g^*(-\bz)  \}.
+   $$
+1. Further 
+
+   $$
+   g^*(-\bz) 
+   &= \sup_{\bx \in \VV} \{ \langle \bx, - \bz \rangle - g(\bx) \}\\
+   &= \sup_{\bx \in \VV} \{ \langle \bx, - \bz \rangle - h_2(\bx) + \langle \bx, \by \rangle \}\\
+   &= \sup_{\bx \in \VV} \{ \langle \bx, \by - \bz \rangle - h_2(\bx) \}\\
+   &= h_2^*(\by - \bz ).
+   $$
+1. Consequently
+
+   $$
+   (h_1 + h_2)^* (\by) 
+   &=  -\inf_{\bx \in \VV} \{ h_1(\bx) + g(\bx)  \} \\
+   &= - \sup_{\bz \in \VV} \{ -h_1^*(\bz) - g^*(-\bz)  \}\\
+   &= \inf_{\bz \in \VV} \{h_1^*(\bz) + g^*(-\bz)  \}\\
+   &= \inf_{\bz \in \VV} \{h_1^*(\bz) + h_2^*(\by - \bz )\} \\
+   &= (h_1^* \infimal h_2^*) (\by).
+   $$
+
+This completes the proof.
+```
+
 ```{div}
 Let $h_1 : \VV \to \RERL$ be a proper closed convex
 function and $h_2 : \VV \to \RR$ be a real valued
