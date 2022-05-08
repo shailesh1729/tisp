@@ -500,7 +500,9 @@ of Fenchel's duality theorem ({prf:ref}`res-opt-fenchel-duality-theorem`).
 This completes the proof.
 ```
 
-```{div}
+```{prf:corollary} Function sum as conjugate of infimal convolution of conjugates
+:label: res-cvx-conj-inf-conj-eq-sum
+
 Let $h_1 : \VV \to \RERL$ be a proper closed convex
 function and $h_2 : \VV \to \RR$ be a real valued
 convex function. Then
@@ -508,7 +510,38 @@ convex function. Then
 $$
 h_1 + h_2 = (h_1^* \infimal h_2^*)^*.
 $$
+```
 
+```{prf:proof}
+
+We proceed as follows.
+
+1. Since $h_1$ is proper and $h_2$ is real valued,
+   hence $h_1 + h_2$ is proper.
+1. Since both $h_1$ and $h_2$ are closed functions,
+   hence $h_1 + h_2$ is closed.
+1. Since both $h_1$ and $h_2$ are convex functions,
+   hence $h_1 + h_2$ is convex.
+1. Thus $h_1 + h_2$ is a proper, closed convex function.
+1. By {prf:ref}`res-cvxf-biconjugate-proper-closed-convex`,
+
+   $$
+   (h_1 + h_2)^{**} = h_1 + h_2.
+   $$
+1. By {prf:ref}`res-cvx-sum-proper-conjugate`,
+
+   $$
+   (h_1 + h_2)^* = h_1^* \infimal h_2^*.
+   $$
+1. Hence
+
+   $$
+   h_1 + h_2 = (h_1 + h_2)^{**} = [(h_1 + h_2)^*]^*
+   = [h_1^* \infimal h_2^*]^*.
+   $$
+```
+
+```{div}
 Let $h_1 : \VV \to \RERL$ be a proper convex
 function and $h_2 : \VV \to \RR$ be a real valued
 convex function. Suppose $h_1 \infimal h_2$ is 
