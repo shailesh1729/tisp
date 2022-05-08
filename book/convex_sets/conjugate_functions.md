@@ -679,16 +679,15 @@ h^*(\by) &= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - h(\bx) \} & \\
 $$
 ```
 
-## Useful Results
+## Subgradients
 
 
 
-```{rubric} Conjugate subgradient theorem
-```
+```{prf:theorem} Conjugate subgradient theorem
+:label: res-cvxf-conjugate-subgradient
 
-```{div}
 Let $f : \VV \to \RERL$ be proper and convex. 
-The following claims are equivalent for any $\bx \in \VV$
+The following statements are equivalent for any $\bx \in \VV$
 and $\by \in \VV^*$:
 
 1. $\langle \by, \bx \rangle = f(\bx) + f^*(\by)$.
@@ -696,8 +695,66 @@ and $\by \in \VV^*$:
 
 If $f$ is closed, then 1 and 2 are equivalent to:
 
-3. $\bx \in \partial f^*(\by)$.
+3.. $\bx \in \partial f^*(\by)$.
 ```
+
+```{prf:proof}
+$\by \in \partial f(\bx)$ is true if and only if
+
+$$
+f(\bz) \geq f(\bx) + \langle \bz - \bx , \by \rangle 
+\Forall \bz \in \VV.
+$$
+This is equivalent to
+
+$$
+\langle \bx , \by \rangle  - f(\bx) \geq 
+\langle \bz , \by \rangle  - f(\bz)
+\Forall \bz \in \VV.
+$$
+Taking this supremum over $\bz$ on the R.H.S.,
+we see that this is equivalent to
+
+$$
+\langle \bx , \by \rangle  - f(\bx) \geq f^*(\by).
+$$
+By Fenchel's inequality {prf:ref}`res-cvxf-conjugate-fenchel`,
+
+$$
+f(\bx) + f^*(\by) \geq \langle \bx, \by \rangle.
+$$
+
+Thus, the previous inequality must be an equality, giving us
+
+$$
+f(\bx) + f^*(\by) = \langle \bx, \by \rangle.
+$$
+
+This establishes the equivalence between (1) and (2).
+
+We now assume that $f$ is closed. 
+Thus $f$ is proper, closed and convex.
+Due to {prf:ref}`res-cvxf-biconjugate-proper-closed-convex`
+
+$$
+f^{**} = f.
+$$
+
+Then (1) is equivalent to 
+
+$$
+g^*(\bx) + g(\by) = \langle \bx, \by \rangle.
+$$
+where $g = f^*$.
+
+Then applying the equivalence between (1)
+and (2) for the function $g$, we see that
+
+$$
+\bx \in \partial g(\by) = \partial f^*(\by).
+$$
+```
+
 
 
 
