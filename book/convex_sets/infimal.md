@@ -167,8 +167,9 @@ Finally
 1. Thus $\dom f + \dom g = \dom f \infimal g$.
 ```
 
+### Epigraph
 
-```{prf:theorem} Connection with epigraph
+```{prf:property} Connection with epigraph
 :label: res-cvx-infimal-epi-con
 
 $$
@@ -178,13 +179,33 @@ $$
 
 ```{prf:proof}
 
-1. Let $(\bx, r) \in \epi f + \epi g$.
-1. Then, there exist $(\by, s) \in \epi f$ and $(\bz, t) \in \epi g$
-   such that $(\bx, r) = (\by + \bz, s + t)$.
-1. $(f \infimal g) (\bx) \leq f(\by) + g(\bz)$.
-```
+Let $t = (f \infimal g) (\bx)$.
+Define $S = \{ r \in \RR \ST (\bx, r) \in \epi f + \epi g \}$.
+We need to show that $t$ is the greatest lower bound of the set $S$.
 
-### Epigraph
+1. Let $(\bx,r) \in  \epi f + \epi g$.
+1. Then there exists $(\by, r_1) \in \epi f$ and $(\bz, r_2) \in \epi g$
+   so that $\bx = \by + \bz$ and $r = r_1 + r_2$.
+1. Thus $f(\by) + g(\bz) \leq r_1 + r_2 = r$ (by epigraphs).
+1. By infimal convolution definition $t \leq f(\by) + g(\bz) \leq r$.
+1. Thus we have shown that $t \leq r$ if $(\bx, r) \in \epi f + \epi g$.
+1. Thus $t$ is a lower bound of the set $S$.
+1. Now choose any $\epsilon > 0$.
+1. Then there exists $\by \in \dom f$ and $\bz \in \dom g$
+   with $\bx = \by + \bz$ 
+   such that
+   
+   $$
+   f(\by) + g(\bz) \leq t + \epsilon.
+   $$
+1. Note that $(\by, f(\by)) \in \epi f$ and $(\bz, g(\bz)) \in \epi g$.
+1. Hence $(\by + \bz, f(\by) + f(\bz)) \in \epi f + \epi g$.
+1. Consequently $(\by + \bz, t + \epsilon) \in \epi f + \epi g$.
+1. Replacing $\bx = \by + \bz$, we have $(\bx, t + \epsilon) \in \epi f + \epi g$.
+1. Thus, for every $\epsilon > 0$, $t + \epsilon \in S$.
+1. Hence $t$ must be the greatest lower bound of the set $S$.
+1. In other words, $t = \inf S$ as desired.
+```
 
 ```{prf:property} Epigraph of infimal convolution
 :label: res-cvx-infimal-epi
