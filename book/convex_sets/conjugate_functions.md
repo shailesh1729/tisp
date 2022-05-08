@@ -756,7 +756,7 @@ $$
 ```
 
 
-```{prf:theorem} Conjugate subgradient theorem - second formulation
+```{prf:corollary} Conjugate subgradient theorem - second formulation
 :label: res-cvxf-conjugate-subgradient-2
 
 Let $f : \VV \to \RERL$ be a proper, closed and convex function. 
@@ -812,6 +812,93 @@ We proceed as follows.
    $$
    \partial f(\bx) = \argmax_{\bu \in \VV^*} \{ \langle \bx, \bu \rangle  - f^*(\bu) \}.
    $$
+```
+
+### Lipschitz Continuity
+
+Recall that {prf:ref}`res-cvxf-subdiff-bounded-lipschitz-continuous`
+shows the equivalence between the boundedness of the subgradients
+of a function $f$ over a set $X$ and the Lipschitz continuity
+of $f$ over $X$.
+A similar result is available in terms of the boundedness
+of the domain of the conjugate.
+
+```{prf:theorem} Lipschitz continuity and boundedness of the domain of the conjugate
+:label: res-cvxf-lipschitz-cont-bounded-conjugate
+
+Let $f: \VV \to \RR$ be convex. Then the following statements are equivalent
+for a constant $L > 0$.
+
+1. $| f(\bx) - f(\by) | \leq L \| \bx - \by \|$ for any $\bx, \by \in \VV$.
+1. $ \| \bg \|_* \leq L$ for any $\bg \in \partial f(\bx)$ where $\bx \in \VV$.
+1. $\dom f^* \subseteq B_{\| \cdot \|_*} [\bzero, L]$.
+```
+
+```{prf:proof}
+The equivalence between (1) and (2) follows from
+{prf:ref}`res-cvxf-subdiff-bounded-lipschitz-continuous`.
+
+We first show that (3) $\implies$ (2)
+
+1. Assume that (3) holds true.
+1. By conjugate subgradient theorem ({prf:ref}`res-cvxf-conjugate-subgradient-2`),
+   for any $\bx \in \VV$,
+
+   $$
+   \partial f(\bx) = \argmax_{\by \in \VV^*} 
+   \{ \langle \bx, \by \rangle - f^*(\by) \}.
+   $$
+1. The maximum on the R.H.S. can be attained only at points where $f^*(\by) < \infty$.
+1. Thus if $\by \in \partial f(\bx)$ then $f^*(\by) < \infty$ must hold true.
+1. Thus $\partial f(\bx) \subseteq \dom f^*$ for every $\bx \in \VV$.
+1. By hypothesis (3) $\partial f(\bx) \subseteq B_{\| \cdot \|_*} [\bzero, L]$
+   for every $\bx \in \VV$.
+1. Hence $\bg \in B_{\| \cdot \|_*} [\bzero, L]$ for every $\bg \in \partial f(\bx)$
+   for every $\bx \in \VV$.
+1. Hence $\| \bg \|_* \leq L$ for every $\bg \in \partial f(\bx)$
+   for every $\bx \in \VV$..
+
+In the reverse direction, we will show that (1) $\implies$ (3)
+
+1. Towards this, we shall show that if (1) is true then
+   for any $\bz \in \VV^*$, 
+   if $\| \bz \|_* > L$ then $\bz \notin \dom f^*$.
+1. By hypothesis (1), for every $\bx \in \VV$,
+
+   $$
+   f(\bx) - f(\bzero) \leq |f(\bx) - f(\bzero) | \leq L \| \bx \|.
+   $$
+1. Rearranging
+
+   $$
+   -f(\bx) \geq - f(\bzero) - L \| \bx \|
+   $$
+   holds true for every $\bx \in \VV$.
+1. Then for any $\by \in \VV^*$
+
+   $$
+   f^*(\by) &= \sup_{\bx \in \VV} \{\langle \bx, \by \rangle - f(\bx) \} \\
+   &\geq \sup_{\bx \in \VV} \{\langle \bx, \by \rangle - f(\bzero) - L \| \bx \| \}.
+   $$
+1. Pick any $\bz \in \VV^*$ satisfying $\| \bz \|_* > L$.
+1. Pick a vector $\bu \in \VV$ such that $\| \bu \| = 1$ and 
+   $\langle \bu, \bz \rangle = \| \bz \|_*$. 
+   Such a vector exists by definition of dual norm.
+1. Consider the ray $C = \{ t \bu \ST t \geq 0 \} \subseteq \VV$.
+1. Continuing with the inequality for $f^*$ for $\by = \bz$ 
+
+   $$
+   f^*(\bz) &\geq \sup_{\bx \in \VV} \{\langle \bx, \bz \rangle - f(\bzero) - L \| \bx \| \}\\
+   &\geq \sup_{\bx \in C} \{\langle \bx, \bz \rangle - f(\bzero) - L \| \bx \| \}\\
+   &= \sup_{t \geq 0} \{\langle t \bu, \bz \rangle - f(\bzero) - L t \| \bu \| \}\\
+   &= \sup_{t \geq 0} \{t \| \bz \|_* - f(\bzero) - L t \}\\
+   &= \sup_{t \geq 0} \{t (\| \bz \|_* - L)  - f(\bzero) \}\\
+   &= \infty
+   $$
+   since $\| \bz \|_* > L$.
+1. Hence $\bz \notin \dom f^*$.
+1. Hence for any $\by \in \dom f^*$ we have $\| \by \|_* \leq L$.
+1. Hence $\dom f^* \subseteq B_{\| \cdot \|_*} [\bzero, L]$ as desired.
 ```
 
 
