@@ -618,7 +618,7 @@ is convex.
 :label: res-cvxf-sum-strong-convex-convex
 
 Let $f$ be $\sigma$-strongly convex and $g$ be convex. Then 
-$f+g$ is strongly convex.
+$f+g$ is $\sigma$-strongly convex.
 ```
 
 ```{prf:proof}
@@ -1143,7 +1143,7 @@ Let $\sigma > 0$. Then
 
 1. If $f : \VV \to \RR$ is a $\frac{1}{\sigma}$-smooth convex function, then
    $f^*$ is $\sigma$-strongly convex w.r.t. the dual norm $\| \cdot \|_*$.
-1. If $f: \VV \to \RERL$ is a proper closed $\sigma$-strongly convex
+1. If $f: \VV \to \RERL$ is a proper, closed $\sigma$-strongly convex
    function, then $f^* : \VV^* \to \RR$ is $\frac{1}{\sigma}$-smooth.  
 ```
 
@@ -1151,13 +1151,109 @@ Let $\sigma > 0$. Then
 (1) Smooth convex to strongly convex conjugate
 
 1. We are given that $f: \VV \to \RR$ is a $\frac{1}{\sigma}$-smooth convex function.
+1. Due to {prf:ref}`res-cvxf-conjugate-convex-closed`, $f^*$ is closed and convex.
+1. Since $f$ is proper and convex, hence due to {prf:ref}`res-cvxf-proper-func-conjugate-proper`,
+   $f^*$ is proper.
+1. Thus $f^*$ is a proper, closed and convex function.
 1. Pick any $\by_1, \by_2 \in \dom (\partial f^*)$.
-1. Let $\v_1 \in \partial f^*(\by_1)$ and $\bv_2 \in \partial f^*(\by_2)$.
-1. Since $f$ is proper and convex, hence by conjugate subgradient theorem...
+1. Let $\bv_1 \in \partial f^*(\by_1)$ and $\bv_2 \in \partial f^*(\by_2)$.
+1. Since $f$ is proper and convex, hence by conjugate subgradient theorem
+   ({prf:ref}`res-cvxf-conjugate-subgradient`)
+
+   $$
+   \by_1 \in \partial f(\bv_1) \text{ and }
+   \by_2 \in \partial f(\bv_2).
+   $$
+1. Since $f$ is smooth, hence it is differentiable.
+   Hence due to {prf:ref}`res-cvxf-subdiff-grad`,
+
+   $$
+   \by_1 = \nabla f(\bv_1) \text{ and } 
+   \by_2 = \nabla f(\bv_2).
+   $$
+1. Following characterization of smoothness ({prf:ref}`res-cvxf-smoothness-charac`),
+   by its property 4,
+
+   $$
+   \langle \bv_1 - \bv_2, \by_1 - \by_2 \rangle \geq \sigma \| \by_1 - \by_2 \|^2_*.
+   $$
+1. Since the last inequality holds for any $\by_1, \by_2 \in \dom (\partial f^*)$
+   and any $\bv_1 \in \partial f^*(\by_1), \bv_2 \in \partial f^*(\bv_2)$,
+   hence following the first order characterization of strong convexity in
+   {prf:ref}`res-cvxf-strong-convexity-charac-first-order`, 
+   $f^*$ is a $\sigma$-strongly convex function.
 
 
 (2) Strongly convex  to smooth conjugate
 
+1. We are given that $f$ is proper, closed and $\sigma$-strongly convex.
+1. Pick any $\by \in \VV^*$.
+1. The conjugate is given by
+
+   $$
+   f^*(\by) = \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - f(\by) \}.
+   $$
+1. Define $g(\bx)  = f(\bx) - \langle \bx, \by \rangle$.
+1. We can see that 
+
+   $$
+   f^*(\by) = - \inf_{\bx \in \VV} g(\bx).
+   $$
+1. Due to the sum rule ({prf:ref}`res-cvxf-sum-strong-convex-convex`), $g$
+   is $\sigma$-strongly convex.
+1. Due to {prf:ref}`res-cvxf-strong-convex-minimizer`, $g$ has 
+   a unique minimizer.
+1. Hence $f^*(\by)$ is finite.
+1. Since this is valid for any $\by \in \VV^*$, hence $\dom f^* = \VV^*$.
+1. This justifies the signature for $f^*$ as $f^* : \VV^* \to \RR$ being
+   real valued.
+1. Let's continue with any $\by$.
+1. Since $\dom f^* = \VV^*$, hence $\by \in \interior \dom f^*$.
+1. Now, by the second formulation of conjugate subgradient theorem
+   ({prf:ref}`res-cvxf-conjugate-subgradient-2`), 
+
+   $$
+   \partial f^*(\by) = \argmax_{\bx \in \VV} 
+   \{ \langle \bx, \by \rangle - f(\bx) \}.
+   $$
+1. We can see that
+
+   $$
+   \partial f^*(\by) = - \argmin_{\bx \in \VV} g(\bx).
+   $$
+1. Since $g$ has a unique minimizer, hence $\partial f^*(\by)$ is a singleton.
+1. Due to {prf:ref}`res-cvxf-subdiff-grad`, $f^*$ is differentiable
+   at $\by$.
+1. Since $\by$ is arbitrary, hence $f^*$ is differentiable over entire $\VV^*$.
+1. We now pickup two points $\by_1, \by_2 \in \VV^*$ and denote
+   $\bv_1 = \nabla f^*(\by_1), \bv_2 = \nabla f^*(\by_2)$.
+1. By conjugate subgradient theorem ({prf:ref}`res-cvxf-conjugate-subgradient`),
+   this is equivalent to $\by_1 \in \partial f(\bv_1)$ and
+   $\by_2 \in \partial f(\bv_2)$.
+1. Following the first order characterization of strong convexity in
+   {prf:ref}`res-cvxf-strong-convexity-charac-first-order`, 
+
+   $$
+   \langle \bv_1 - \bv_2, \by_1  - \by_2 \rangle \geq \sigma \| \bv_1 - \bv_2 \|^2.
+   $$
+1. In other words
+
+   $$
+   \langle \nabla f^*(\by_1) - \nabla f^*(\by_2), \by_1  - \by_2 \rangle 
+   \geq \sigma \| \nabla f^*(\by_1) - \nabla f^*(\by_2) \|^2.
+   $$
+1. By generalized Cauchy Schwartz inequality ({prf:ref}`res-la-ip-gen-cs-ineq`)
+
+   $$
+    \langle \nabla f^*(\by_1) - \nabla f^*(\by_2), \by_1  - \by_2 \rangle  \leq
+    \| \nabla f^*(\by_1) - \nabla f^*(\by_2) \| \|  \by_1  - \by_2 \|_*.
+   $$
+1. Thus the previous inequality simplifies to
+
+   $$
+   \| \nabla f^*(\by_1) - \nabla f^*(\by_2) \| \leq \frac{1}{\sigma}\|  \by_1  - \by_2 \|_*.
+   $$
+1. This establishes that $f^*$ is $\frac{1}{\sigma}$-smooth.
 ```
 
 
