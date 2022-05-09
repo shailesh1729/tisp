@@ -1258,3 +1258,157 @@ Let $\sigma > 0$. Then
 
 
 
+## Examples
+
+
+```{prf:example} Smoothness of $\sqrt{1 + \| \cdot \|_2^2}$
+:label: ex-cvxf-smoothness-norm-sqr-plus-1-sqrt
+
+Let $f : \RR^n \to \RR$ be given by
+
+$$
+f(\bx) = \sqrt{1 + \| \bx \|_2^2}.
+$$
+$f$ is 1-smooth w.r.t. the $\ell_2$-norm.
+
+1. Note that for any $\bx \in \RR^n$, the gradient is given by
+
+   $$
+   \nabla f(\bx) = \frac{\bx}{ \sqrt{1 + \| \bx \|_2^2}}.
+   $$
+1. The Hessian is given by
+
+   $$
+   \nabla^f (\bx)= \frac{\bI}{ \sqrt{1 + \| \bx \|_2^2}}
+   - \frac{\bx \bx^T}{ (1 + \| \bx \|_2^2)^{\frac{3}{2}}}
+   \preceq \frac{\bI}{ \sqrt{1 + \| \bx \|_2^2}} \preceq \bI.
+   $$
+1. Therefore, $\lambda_{\max}( \nabla^2 f(\bx)) \leq 1$ for every $\bx \in \RR^n$.
+1. Hence, by {prf:ref}`res-cvxf-l-smoothness-twice-diff-max-eigen-hessian`,
+   $f$ is 1-smooth w.r.t. the $\ell_2$-norm.
+```
+
+### Log-Sum-Exp
+
+```{prf:example} Smoothness of log-sum-exp
+:label: ex-cvxf-smoothness-log-sum-exp
+
+Consider the log-sum-exp function $f : \RR^n \to \RR$ given by
+
+$$
+f(\bx) = \ln \left ( \sum_{i=1}^n e^{x_i}\right ).
+$$
+$f$ is 1-smooth w.r.t. $\ell_2$ and $\ell_{\infty}$ norms.
+
+Smoothness w.r.t. $\ell_2$ norm
+
+1. The partial derivatives of $f$ are
+
+   $$
+   \frac{\partial f}{\partial x_i} (\bx)
+   = \frac{e^{x_i}}{\sum_{k=1}^n e^{x_k} }.
+   $$
+1. The second order partial derivatives are
+
+   $$
+   \frac{\partial^2 f}{\partial x_i \partial x_j} (\bx) = \begin{cases}
+   - \frac{e^{x_i} e^{x_j}}{\left (\sum_{k=1}^n e^{x_k} \right )^2},
+   & i \neq j; \\
+   - \frac{e^{x_i} e^{x_i}}{\left (\sum_{k=1}^n e^{x_k} \right )^2}
+   +  \frac{e^{x_i}}{\sum_{k=1}^n e^{x_k}}, 
+   & i = j.  
+   \end{cases}
+   $$
+1. The Hessian can be written as
+
+   $$
+   \nabla^2 f(\bx) = \diag (\bw) - \bw \bw^T 
+   $$
+   where $w_i = \frac{e^{x_i}}{\sum_{k=1}^n e^{x_k}}$.
+1. We can now see that
+
+   $$
+   \nabla^2 f(\bx) = \diag (\bw) - \bw \bw^T  \preceq \diag (\bw) 
+   \preceq \bI.
+   $$
+1. Hence $\lambda_{\max}( \nabla^2 f(\bx)) \leq 1$ for every $\bx \in \RR^n$.
+1. Hence, by {prf:ref}`res-cvxf-l-smoothness-twice-diff-max-eigen-hessian`,
+   $f$ is 1-smooth w.r.t. the $\ell_2$-norm.
+
+
+Smoothness w.r.t. $\ell_{\infty}$ norm
+
+1. We first show that for any $\bv \in \VV$
+
+   $$
+   \bv^T \nabla^2 f(\bx) \bv \leq \| \bv \|_{\infty}^2.
+   $$
+1. To see this, we expand the L.H.S. as
+
+   $$
+   \bv^T \nabla^2 f(\bx) \bv 
+   &= \bv^T (\diag (\bw) - \bw \bw^T) \bv \\
+   &= \bv^T \diag (\bw) \bv  - (\bw^T \bv)^2 \\
+   &\leq  \bv^T \diag (\bw) \bv\\
+   &= \sum_{i=1}^n w_i v_i^2 \\
+   &\leq  \| \bv \|_{\infty}^2 \sum_{i=1}^n w_i \\
+   &=  \| \bv \|_{\infty}^2.
+   $$
+1. Since $f$ is twice differentiable over $\RR^n$, hence
+   by linear approximation theorem ({prf:ref}`res-mvc-linear-approx-theorem`),
+   for any $\bx, \by \in \RR^n$, there exists $\bz \in [\bx, \by]$
+   such that
+
+   $$
+   f(\by) - f(\bx) = \nabla f(\bx)^T (\by - \bx)
+   + \frac{1}{2} (\by - \bx)^T \nabla^2 f(\bz) (\by - \bx).
+   $$
+1. Let $\bv = \by - \bx$.
+1. Then from above,
+ 
+   $$
+   (\by - \bx)^T \nabla^2 f(\bz) (\by - \bx) \leq  \| \bv \|_{\infty}^2.
+   $$
+1. Putting this back in the approximation, we have
+
+   $$
+   f(\by) \leq  f (\bx) + \nabla f(\bx)^T (\by - \bx)
+   + \frac{1}{2}  \| \by - \bx \|_{\infty}^2.
+   $$
+1. Following characterization of smoothness ({prf:ref}`res-cvxf-smoothness-charac`),
+   $f$ is indeed 1-smooth w.r.t. the $\ell_{\infty}$-norm. 
+```
+
+
+
+
+
+### Negative Entropy 
+
+```{prf:example} Strong convexity of negative entropy over the unit simplex
+:label: ex-cvxf-neg-ent-unit-simplex-strong-convexity
+
+Let $f : \RR^n \to \RERL$ be given by:
+
+$$
+f(\bx) \triangleq \begin{cases}
+\sum_{i=1}^n x_i \ln x_i & \bx \in \Delta_n\\
+\infty & \text{ otherwise }
+\end{cases}.
+$$
+$f$ is 1-strongly convex for both $\ell_1$ and $\ell_2$ norms.
+
+1. By {prf:ref}`res-cvxf-conjugate-neg-entropy-unit-simplex`,
+   its conjugate is given by
+
+   $$
+   f^*(\by) =  \ln \left ( \sum_{j=1}^n e^{y_j}
+       \right )
+   $$
+   which is the log sum exp function.
+1. By {prf:ref}`ex-cvxf-smoothness-log-sum-exp`, the log-sum-exp
+   function is 1-smooth w.r.t. both $\ell_2$ and $\ell_{\infty}$ norms.
+1. Hence by conjugate correspondence theorem
+   {prf:ref}`res-cvxf-conjugate-correspondence`,
+   $f$ is 1-strongly convex for both $\ell_1$ and $\ell_2$ norms.
+```
