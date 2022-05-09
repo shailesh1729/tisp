@@ -1302,7 +1302,7 @@ $$
 ```{prf:theorem} Negative entropy
 :label: res-cvxf-conjugate-negative-entropy
 
-Let $f : \RR^n \to \RR$ be given by:
+Let $f : \RR^n \to \RERL$ be given by:
 
 $$
 f(\bx) \triangleq \begin{cases}
@@ -1363,7 +1363,7 @@ $$
 ```{prf:theorem} Negative sum of logs
 :label: res-cvx-conjugate-neg-sum-logs
 
-Let $f : \RR^n \to \RR$ be given by:
+Let $f : \RR^n \to \RERL$ be given by:
 
 $$
 f(\bx) \triangleq \begin{cases}
@@ -1426,7 +1426,7 @@ For $\by \succeq \bzero$, one of the $g^*(y_i) = \infty$. Hence, $f^*(\by) = \in
 ```{prf:theorem} Negative entropy over unit simplex
 :label: res-cvxf-conjugate-neg-entropy-unit-simplex
 
-Let $f : \RR^n \to \RR$ be given by:
+Let $f : \RR^n \to \RERL$ be given by:
 
 $$
 f(\bx) \triangleq \begin{cases}
