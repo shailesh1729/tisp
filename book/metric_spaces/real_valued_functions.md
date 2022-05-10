@@ -373,19 +373,183 @@ of epigraphs.
    due to {prf:ref}`res-ms-closed-func-closed-epi`.
 ```
 
+### Nonnegative Scaling
+
+```{prf:theorem} Nonnegative scaling of closed function
+
+Let $f: X \to \RR$ be a closed function. 
+Let $t \geq 0$.
+Then a function $g : X \to \RR$ given by 
+
+$$
+g(x) =  t f(x)
+$$
+is closed.
+```
+
+```{prf:proof}
+Note that $\dom g = \dom f$.
+Consider first the case of $t=0$.
+
+1. Then $g(x) = 0$ for every $x \in \dom f$.
+1. Thus for any $s  \geq 0$, $\sublevel(g, s) = \dom f$.
+1. And for $s < 0$, $\sublevel(g, s) = \EmptySet$.
+1. Both $\dom f$ and $\EmptySet$ are closed set 
+   w.r.t. the subspace topology of $\dom f$.
+1. Hence $g$ is closed.
+
+Now consider the case where $t > 0$.
+
+1. Pick any $s \in \RR$.
+1. Then
+
+   $$ 
+   \sublevel(g, s) &= \{ x \in \dom g \ST g(x) \leq s \}\\
+   &= \{ x \in \dom f \ST t f(x) \leq s \} \\
+   &= \{ x \in \dom f \ST f(x) \leq \frac{s}{t} \} \\
+   &= \sublevel(f, \frac{s}{t}).
+   $$
+1. Since $f$ is closed, hence $\sublevel(f, \frac{s}{t})$
+   is closed, hence $\sublevel(g, s)$ is closed.
+1. Since this is true for every $s \in \RR$, hence $g$ is closed.
+```
+
+### Sum Rule
+
+```{prf:theorem} Sum of closed functions
+:label: res-ms-sum-closed-functions
+
+Let $f, g: X \to \RR$ be closed functions.
+Then $h = f + g$ with $\dom h = \dom f \cap \dom g$
+is also a closed function.
+```
+
+
+```{prf:proof}
+We need to show that the sublevel sets of $h$ are closed.
+
+1. Let $F = \dom f$, $G = \dom g$ and $H = \dom h$.
+1. Then $H = F \cap G$.
+1. Let $t \in \RR$.
+1. Consider the set $S = \sublevel(h, t)$.
+1. Then
+
+   $$
+   S &= \{ x \in H \ST h(x) \leq t \} \\
+   &= \{ x \in F \cap G \ST f(x) + g(x) \leq t \}.
+   $$
+1. Fix some $u \in \RR$.
+1. Define $T_u = \{ x \in F \cap G \ST g(x) = u }
+```
+
 
 ### Continuous Functions
 
-```{prf:proposition}
+```{prf:theorem} Continuity + closed domain implies closedness
+:label: res-ms-continuity-closed-domain-closed-func
+
 If $f: X \to \RR$ is continuous and $\dom f$ is closed, then 
 $f$ is closed.
 ```
 
-```{prf:proposition}
+```{prf:proof}
+We shall prove this by showing that the sublevel sets are closed.
+
+1. Let $S = \dom f$.
+1. Pick $t \in \RR$.
+1. Let $T = \sublevel(f, t)$.
+1. By definition, $T \subseteq S$.
+1. Let $\{ x_n \}$ be a convergent sequence of $T$.
+1. Let $x = \lim x_n$.
+1. Since $S$ is closed, hence $\{ x_n \}$ converges in $S$.
+1. Hence $x \in S$ and $f(x)$ is well defined.
+1. Since $\lim x_n = x$ and $f$ is continuous, hence
+   due to {prf:ref}`res-ms-continuous-function-characterization` (3),
+   $\lim f(x_n) = f(x)$.
+1. By sublevel property of $T$, $f(x_n) \leq t$ for every every $n$.
+1. Consequently,
+
+   $$
+   f(x) = \lim_{n \to \infty} f(x_n)  \leq t.
+   $$
+1. Since $f(x) \leq t$, hence $x \in T$.
+1. Thus every convergent sequence of $T$ converges in $T$.
+1. Hence $T$ is closed.
+1. Since $t$ was arbitrarily chosen, hence every sublevel set of $f$ is closed.
+1. Hence $f$ is a closed function.
+```
+
+
+
+```{prf:theorem} Closedness conditions for continuity + open domain
+:label: res-ms-continuity-open-domain-closedness
+
 If $f: X \to \RR$ is continuous and $\dom f$ is open, then
 $f$ is closed if and only if $f$ converges to $\infty$ along
 every sequence converging to a boundary point of $\dom f$. 
 ```
+
+```{prf:proof}
+
+To show that a function is closed, we need to show that all its
+sublevel sets are closed. To show that a sublevel set is closed
+we need to show that every convergent sequence of a sublevel set
+converges in the set itself.
+
+1. Let $S = \dom f$.
+1. Let $C = \closure S$.
+1. It is given that $S$ is open. Hence $S = \interior C$.
+1. Let $B = \boundary S = C \setminus \interior C$.
+1. Then $B = C \setminus S$. In other words, $B \cap S = \EmptySet$.
+1. Let $\{ x_n \}$ be a convergent sequence of $S$.
+1. Then $x = \lim x_n \in C$.
+1. So either $x \in S$ or $x \in B$.
+1. If $x \in S$ then $f(x)$ is well defined.
+   If $x \in B$ then $f(x)$ is not defined.
+
+Assume that $f$ converges to infinity along
+any sequence converging to $B$.
+
+1. Pick $t \in \RR$.
+1. Let $T = \sublevel (f, t)$.
+1. Suppose $\{ x_n \}$ is a convergent sequence of $T$ with $x = \lim x_n$.
+1. Then $f(x_n) \leq t$ for every $n$.
+1. For contradiction, assume that $x \in B$.
+1. Then $\lim f(x_n) = \infty$.
+1. But then there exists $n_0$ such that for every $n > n_0$, $f(x_n) > t$.
+1. This contradicts the assumption that $f(x_n) \leq t$ for every $n$.
+1. Hence $x \in S$.
+1. But then $f(x)$ is well defined.
+1. By continuity of $f$, $f(x) = \lim f(x_n) \leq t$.
+1. Hence $x \in T$.
+1. Hence $T$ is closed.
+1. Since every sublevel set is closed, hence $f$ is closed.
+
+Now for the converse, assume that $f$ does not converge to
+infinity along some sequence converging to $B$.
+
+1. Let $\{ x_n \}$ be such a convergent sequence such that
+   $x = \lim x_n \in B$ and
+   $\lim f(x_n) = r \in \RR$.
+1. Pick some $\epsilon > 0$.
+1. Then there exists $n_0$ such that for all $n > n_0$,
+   $| r - f(x_n)| < \epsilon.
+1. Thus for all $n > n_0$, $f(x_n) < r + \epsilon$.
+1. Consider the sublevel set $R = \sublevel(f, r+\epsilon)$.
+1. By dropping the first $n_0$ points of $\{ x_n \}$, 
+   the remaining sequence $\{ y_n \}$ where $y_n = x_{n + n_0}$
+   belongs to $R$.
+1. Thus we have a convergent sequence of $R$ which doesn't converge
+   in $R$ since $R \subseteq S$, $x = \lim y_n \in B$
+   and $B \setminus R = \EmptySet$.
+1. Thus $R$ is not closed.
+1. Since there are sublevel sets of $f$ which are not closed, hence
+   $f$ is not closed.
+
+TODO, is it possible that for a convergent sequence $\{ x_n \}$,
+the corresponding sequence $f(x_n)$ doesn't converge to anything?
+```
+
 
 ## Limit Superiors and Inferiors
 
