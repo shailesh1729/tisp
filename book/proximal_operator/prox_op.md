@@ -1,20 +1,27 @@
-# Introduction
+# Proximal Mappings and Operators
+
+Throughout this section $\VV$ represents a
+{prf:ref}`Euclidean space <def-la-gen-euclidean-space>`;
+i.e., an $n$-dimensional space endowed with
+an inner product $\langle \cdot, \cdot \rangle$
+and the Euclidean norm $\| \cdot \| = \sqrt{\langle \cdot, \cdot \rangle}$.
+
 
 ## Proximal Mapping
 
 ```{prf:definition} Proximal mapping
 :label: def-prox-proximal-mapping
 
-For a function $f : \EE \to \RERL$, the *proximal mapping* of $f$ is given by
+For a function $f : \VV \to \RERL$, the *proximal mapping* of $f$ is given by
 
 $$
-\prox_f(\bx) \triangleq \underset{\bu \in \EE}{\argmin} \left \{
+\prox_f(\bx) \triangleq \underset{\bu \in \VV}{\argmin} \left \{
     f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
-    \right\} \Forall \bx \in \EE.
+    \right\} \Forall \bx \in \VV.
 $$
 
 * It is a point to set mapping.
-* It maps each point $\bx \in \EE$ to a subset of points in $\EE$ which
+* It maps each point $\bx \in \VV$ to a subset of points in $\VV$ which
   minimize the R.H.S..
 * The set of points which minimize the R.H.S. are known as *proximal points*
   for a given $\bx$ w.r.t. the function $f$.
@@ -139,20 +146,30 @@ $$
 $$
 ```
 
+### Nonemptiness Conditions
+
+It is imperative to identify conditions under which
+a proximal mapping is nonempty.
+
 ```{prf:theorem} Nonemptiness under closedness and coerciveness
 :label: res-prox-nonemptiness-under-closedness-coerciveness
 
-Let $f : \EE \to \RERL$ be a proper closed function. Assume that 
+Let $f : \VV \to \RERL$ be a proper closed function. Assume that 
 the function
 
 $$
 \bu \mapsto f(\bu) +  \frac{1}{2} \| \bu - \bx \|^2
 $$
 
-for any $\bx \in \EE$ is coercive. 
+for any $\bx \in \VV$ is coercive. 
 
-Then the set $\prox_f(\bx)$ is nonempty for any $\bx \in \EE$.
+Then the set $\prox_f(\bx)$ is nonempty and compact for any $\bx \in \VV$.
 ```
+
+Recall from {prf:ref}`def-opt-coercive-function` that
+a function $h$ is coercive if for every sequence $\{ \bx_n \}$
+such that $ \lim_{k \to \infty} \| \bx_k \| = \infty$,
+we have $\lim_{k \to \infty} h(\bx_k) = \infty$.
 
 ```{prf:proof}
 Define:
@@ -161,13 +178,16 @@ $$
 h(\bu) \triangleq f(\bu) +  \frac{1}{2} \| \bu - \bx \|^2.
 $$
 
-* $h$ is a sum of two closed functions. Hence $h$ is a closed function.
-* It is given that $h$ is coercive.
-* $h$ is proper since $f$ is proper.
-* A proper closed and coercive function $g$ attains a minimal value 
-  over any $S \subseteq \EE$ satisfying $S \cap \dom g$.
-* With $S = \EE$, we have that $h$ attains a minimal value over $\EE$.
-* Thus, the set of minimizers for $h$ is not empty. 
+1. Then $\prox_f(\bx) = \underset{\bu \in \VV}{\argmin} h(\bu)$.
+1. $h$ is a sum of two closed functions. Hence $h$ is a closed function
+   due to {prf:ref}`res-ms-sum-closed-functions`.
+1. It is given that $h$ is coercive.
+1. $h$ is proper since $f$ is proper and $\frac{1}{2} \| \bu - \bx \|^2$
+   is real valued.
+1. Thus, $h$ is proper, closed and coercive.
+1. Due to the Weierstrass' theorem ({prf:ref}`res-opt-weierstrass-theorem`),
+   a proper, closed and coercive function $g$ has a nonempty
+   and compact set of minimizers.
 ```
 
 ## Proximal Operator
@@ -175,8 +195,8 @@ $$
 ```{prf:theorem} First prox theorem
 :label: res-prox-first-prox-theorem
 
-Let $f : \EE \to \RERL$ be a proper, closed and function. Then, $\prox_f(\bx)$ is
-a singleton for any $\bx \in \EE$.  
+Let $f : \VV \to \RERL$ be a proper, closed and function. Then, $\prox_f(\bx)$ is
+a singleton for any $\bx \in \VV$.  
 ```
 
 ```{prf:proof}
@@ -189,7 +209,7 @@ $$
 Then 
 
 $$
-\prox_f(\bx) = \underset{\bu \in \EE}{\argmin} \tilde{f}(\bu, \bx).
+\prox_f(\bx) = \underset{\bu \in \VV}{\argmin} \tilde{f}(\bu, \bx).
 $$
 
 Consider $\tilde{f}(\cdot, \bx)$ for a fixed valued of $\bx$:
@@ -206,10 +226,10 @@ Consider $\tilde{f}(\cdot, \bx)$ for a fixed valued of $\bx$:
 ```{prf:definition} Proximal operator
 :label: def-prox-proximal-operator
 
-Let $f : \EE \to \RERL$ be a proper closed function. Since 
-the point to set mapping $\prox_f : \EE \to 2^{\EE}$ maps 
-every point in $\EE$ to a singleton subset of $\EE$, we abuse
-the notation and redefine $\prox_f: \EE \to \EE$ as a point to
+Let $f : \VV \to \RERL$ be a proper closed function. Since 
+the point to set mapping $\prox_f : \VV \to 2^{\VV}$ maps 
+every point in $\VV$ to a singleton subset of $\VV$, we abuse
+the notation and redefine $\prox_f: \VV \to \VV$ as a point to
 point mapping. We call this mapping as a *proximal operator* of $f$. 
 
 In other words, we write $\prox_f(\bx) = \by$ rather than $\prox_f(\bx) = \{\by\}$.
