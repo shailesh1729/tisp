@@ -517,6 +517,8 @@ f(t \bx + (1 - t)\by) \leq t f(\bx)
 ```
 ````
 
+### Strong Convexity $\implies$ Convexity
+
 Strongly convex functions are convex. In fact,
 we have a stronger result available.
 
@@ -577,6 +579,7 @@ if and only if $g$ is convex.
    which is nothing but the $\sigma$-strong convexity condition of $f$.
 ```
 
+### Quadratic Functions
 
 ```{prf:theorem} Strong convexity of quadratic functions
 :label: res-cvxf-quadratic-strong-convex
@@ -609,6 +612,69 @@ is convex.
 1. As shown in {prf:ref}`ex-cvxf-quadratic-func-convexity`,
    $g$ is convex if and only if $\bA - \sigma \bI \succeq \ZERO$.
 1. This is equivalent to $\sigma \leq \lambda_{\min}(\bA)$.
+```
+
+### Coerciveness
+
+```{prf:theorem} Strong convexity and coerciveness
+:label: res-cvx-strong-convexity-coerciveness
+
+Assume that the ambient space $\VV$ is
+{prf:ref}`Euclidean <def-la-gen-euclidean-space>`.
+Assume that $f: \VV \to \RERL$ is a Fréchet-differentiable function.
+If $f$ is $\sigma$-strongly convex,
+then it is coercive.
+```
+
+```{prf:proof}
+
+We proceed as follows.
+
+1. Define 
+
+   $$
+   g(\bx) = f(\bx) - \frac{\sigma}{2} \| \bx \|^2.
+   $$
+1. By {prf:ref}`res-cvx-strong-convexity-convexity`, $g$ is convex.
+1. Since $f$ is differentiable, hence $g$ is also differentiable.
+1. Specifically, $\nabla g(\bx) = \nabla f(\bx) - \sigma \bx$.
+1. Fix some $\bx \in \interior \dom f$.
+1. Then $\partial g(\bx) = \{ \nabla g(\bx) \}$.
+1. By subgradient inequality, for any $\by \in \VV$,
+
+   $$
+   g(\by) \geq g(\bx) + \langle \by - \bx, \nabla g(\bx) \rangle.
+   $$
+1. Expanding $g$ and $\nabla g$:
+
+   $$
+   f(\by) - \frac{\sigma}{2} \| \by \|^2 \geq 
+   f(\bx) - \frac{\sigma}{2} \| \bx \|^2 + 
+   \langle \by - \bx, \nabla f(\bx) - \sigma \bx \rangle.
+   $$
+1. Let $\bv = f(\bx) - \sigma \bx$.
+1. Rearranging terms
+
+   $$
+   f(\by) \geq  \frac{\sigma}{2} \| \by \|^2  + \langle \by, \bv \rangle
+   + K_{\bx}
+   $$
+   where $K_{\bx} = f(\bx) - \frac{\sigma}{2} \| \bx \|^2 - \langle \bx, \bv \rangle$.
+1. We note that the term $K_{\bx}$ depends solely on $\bx$ which is fixed.
+   Hence $K_{\bx}$ is a fixed quantity.
+1. By Cauchy-Schwarz inequality
+
+   $$
+    \langle \by, \bv \rangle \geq - \| \bv \| \| \by \|.
+   $$
+1. Hence
+
+   $$
+   f(\by) \geq  \frac{\sigma}{2} \| \by \|^2  - \| \bv \| \| \by \| + K_{\bx}.
+   $$
+1. It is easy to see that, the R.H.S. goes to $\infty$
+   as $\| \by \| \to \infty$.
+1. Hence $f$ is coercive.
 ```
 
 
