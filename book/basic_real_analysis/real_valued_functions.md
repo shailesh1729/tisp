@@ -373,9 +373,10 @@ $$
 The epigraph, hypograph, 
 sublevel, superlevel and contour sets of an extended valued
 function are defined in an identical manner.
+However, the graph is defined slightly differently.
 
 $$
-& \graph f \triangleq \{ (x,t) \in X \times \RR \ST x \in \dom f, f(x) = t \};\\
+& \graph f \triangleq \{ (x,t) \in X \times \ERL \ST x \in \dom f, f(x) = t \};\\
 & \epi f \triangleq \{ (x,t) \in X \times \RR \ST x \in \dom f, f(x) \leq t \};\\
 & \epi_s f \triangleq \{ (x,t) \in X \times \RR \ST x \in \dom f, f(x) < t \};\\
 & \sublevel(f, \alpha) \triangleq \{ x \in \dom f \,|\, f(x) \leq \alpha \}; \\
@@ -383,7 +384,18 @@ $$
 & \hypo f \triangleq \{ (x,t) \in X \times \RR \ST x \in \dom f, t \leq f(x) \};\\
 & \superlevel(f, \alpha) \triangleq \{ x \in \dom f \,|\, f(x) \geq \alpha \}.
 $$ 
+```
 
+```{div}
+For an extended valued function, it is not necessary
+that $\graph f \subseteq \epi f$.
+
+1. If $f(x) = \infty$, then $(x, \infty) \in \graph f$.
+   However, $(x, \infty) \notin \epi f$. 
+   At the same time $(x, t) \notin \epi f$ for every $\RR$.
+1. If $f(x) = -\infty$ then $(x, -\infty) \in \graph f$.
+   However $(x, -\infty) \notin \epi f$.
+   But $(x, t) \in \epi f$ for every $\RR$.
 ```
 
 
