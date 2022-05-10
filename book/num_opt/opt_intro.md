@@ -1073,7 +1073,7 @@ One way to think about coercive functions is that they grow rapidly
 at the extremes of the domain on which they are defined.
 
 
-```{prf:remark} Level sets of coercive functions
+```{prf:theorem} Level sets of coercive functions
 :label: res-opt-coercive-level-sets
 
 Let $f : \VV \to \RERL$ be a coercive proper function. Let $a \in \RR$.
@@ -1095,7 +1095,7 @@ is unbounded.
 1. Hence, $f^{-1}(a)$ must be bounded.
 ```
 
-```{prf:remark} Sublevel sets of coercive functions
+```{prf:theorem} Sublevel sets of coercive functions
 :label: res-opt-coercive-sublevel-sets
 
 Let $f : \VV \to \RERL$ be a coercive proper function with $S = \dom f$.
@@ -1142,7 +1142,13 @@ Then,
 1. $p^* < \infty$.
 1. $X = \bigcap_{p > p^*} S_p$.
 1. $X$ is closed.
+
+In words, the minimal value $p^*$ is either finite or $-\infty$.
+The set of minimizers is the intersection of all the (closed) sublevel sets
+for $p > p^*$.
+The set of minimizers is a closed set.
 ```
+
 
 ```{prf:proof}
 
@@ -1167,7 +1173,7 @@ We first show that $X \subseteq Y$.
 We now show that $Y \subseteq X$.
 
 1. Let $\bx \in Y$.
-1. Then, $f(\bx) = p^*$ must hold true.
+1. We claim that $f(\bx) = p^*$ must hold true.
 1. $f(\bx)$ cannot be smaller than $p^*$ since by definition 
    $p^* = \inf f(\bx)$.
 1. Thus, $f(\bx) \geq p^*$ must hold true.
@@ -1220,6 +1226,21 @@ Assume that one of the following conditions are true.
 Then, $X$ (the set of minimizers of $f$) is nonempty and compact.
 ```
 
+Here is this result in a simplified language. The theorem
+addresses the problem of unconstrained minimization of a function.
+
+1. If $f$ is proper and closed and its domain is closed and bounded, 
+   then its set of minimizers
+   is nonempty and compact.
+1. If $f$ is proper and closed and any sublevel set of $f$ is bounded,
+   then its set of minimizers is nonempty and compact.
+1. If $f$ is proper, closed and coercive, then its set of minimizers
+   is nonempty and compact.
+
+Since the set of minimizers is nonempty and compact, it is nonempty,
+closed and bounded.
+
+
 ```{prf:proof}
 
 If there exists $\bx \in S$ such that $f(\bx) = p^*$,
@@ -1229,8 +1250,10 @@ that it is closed and bounded.
 By {prf:ref}`res-la-ndim-compact-closed-bounded`,
 every closed and bounded subset of $\VV$ which is a real
 $n$-dimensional normed linear space is compact.
-By {prf:ref}`res-opt-proper-closed-unconstrained-min`, $X$ is also closed.
-Thus, we just need to show that $X$ is bounded.
+By {prf:ref}`res-opt-proper-closed-unconstrained-min`,
+the optimal value $p^* < \infty$ and
+$X$, the set of minimizers of a proper and closed function, is closed.
+Thus, we just need to show that $X$ is nonempty and bounded.
 
 
 Assume that condition (1) holds.
@@ -1243,6 +1266,9 @@ Assume that condition (1) holds.
    ({prf:ref}`res-la-bounded-seq-bolzano-weierstrass`).
 1. Let $\{ \bx_l \}$ be the convergent subsequence of $\{ \bx_k \}$ with
    $\lim \bx_l = \bx^*$.
+   1. Such a sequence exists since $p^* = \inf_{\bx \in \VV} f(\bx)$.
+   1. Thus, for every $k \in \Nat$, there exists $\bx_k \in S$
+      such that $f(\bx_k) - p^* < \frac{1}{k}$.
 1. Since $S$ is closed, hence $\bx^* \in S$.
 1. Since $\{ f(\bx_k) \}$ is  convergent and $\{ f(\bx_l) \}$ is
    a subsequence of $\{ f(\bx_k) \}$, hence
@@ -1266,6 +1292,8 @@ Assume that condition (1) holds.
    $$
 1. Since $p^*$ is the infimum value of $f$, hence $f(\bx^*)$ cannot be smaller than $p^*$.
 1. Thus, $f(\bx^*) = p^*$ must be true.
+1. Since $f$ is proper and $\bx^* \in S$, hence $p^* > -\infty$.
+   Thus the optimal value is finite.
 1. Thus, $f(\bx^*) = p^*$ means that $\bx^*$ is an optimal solution for the
    minimization of $f$.
 1. Thus, the set $X = f^{-1}(p^*)$ is nonempty.
@@ -1295,7 +1323,7 @@ Assume that condition (2) holds.
 1. Applying condition (1) on $\tilde{f}$, the set of minimizers of $\tilde{f}$ is
    nonempty and compact.
 1. We also note that the minimizers of $f$ are identical to the minimizers of $\tilde{f}$.
-1. Thus, the set of minimizers of $f$ is nonempty and closed.
+1. Thus, the set of minimizers of $f$ is nonempty and compact.
 
 Assume that condition (3) holds.
 
