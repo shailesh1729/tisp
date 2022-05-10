@@ -197,7 +197,13 @@ is closed for every $\alpha \in \RR$
 in the subspace topology $(S,d)$.
 ```
 
-### Closed Functions on Non-Open Domains
+### Closed Functions on Non-Closed Domains
+
+Although every sublevel set of a closed function is closed,
+it doesn't imply that the domain of the function itself is
+closed. We can very well have functions which are closed
+but their domain is open or semi-open or neither open nor
+closed.
 
 ```{prf:example} A closed function need not have closed domain
 :label: ex-ms-closed-func-not-closed-domain
@@ -206,12 +212,12 @@ Let $f: \RR \to \RR$ be defined as $f(x) = \frac{1}{x}$
 with $S = \dom f = (0, \infty)$.
 
 1. The domain of $f$ is an open set.
-1. Let $S_{\alpha} = \{ x \in S \ST f(x) \leq \alpha \}$ denote the sublevel set for $\alpha$.
-1. Then, $S_{\alpha} = [\frac{1}{\alpha}, \infty)$ for every $\alpha > 0$.
+1. Let $\sublevel(f, \alpha)= \{ x \in S \ST f(x) \leq \alpha \}$ denote the sublevel set for $\alpha$.
+1. Then, $\sublevel(f, \alpha) = [\frac{1}{\alpha}, \infty)$ for every $\alpha > 0$.
    Thus, it is closed.
-1. $S_{\alpha} = \EmptySet$ for every $\alpha \leq 0$ since $f(x)$ is always positive.
+1. $\sublevel(f, \alpha) = \EmptySet$ for every $\alpha \leq 0$ since $f(x)$ is always positive.
    Thus, it is closed.
-1. Thus, $S_{\alpha}$ is closed for every $\alpha \in \RR$.
+1. Thus, $\sublevel(f, \alpha)$ is closed for every $\alpha \in \RR$.
 1. Thus, $f$ is a closed function.
 
 We have shown a counter example where the function is closed but
@@ -351,7 +357,8 @@ is closed.
 ```
 
 ```{prf:proof}
-Recall that the epigraph of maximum of two functions is the intersection
+Recall from {prf:ref}`res-bra-epigraph-intersection-family`
+that the epigraph of maximum of two functions is the intersection
 of epigraphs.
 
 1. Since $f_i$ are closed, hence $\epi f_i$ are closed for every $i \in I$.
@@ -360,7 +367,8 @@ of epigraphs.
    $$
    \epi f = \bigcap_{i \in I} \epi f_i.
    $$
-1. Since $\epi f_i$ are closed, hence $\epi f$ is closed.
+1. Since $\epi f_i$ are closed, hence $\epi f$ is closed
+   due to {prf:ref}`res-ms-intersection-closed-sets`.
 1. Since $\epi f$ is closed, hence $f$ is closed
    due to {prf:ref}`res-ms-closed-func-closed-epi`.
 ```
