@@ -426,20 +426,17 @@ is also a closed function.
 
 
 ```{prf:proof}
-We need to show that the sublevel sets of $h$ are closed.
 
-1. Let $F = \dom f$, $G = \dom g$ and $H = \dom h$.
-1. Then $H = F \cap G$.
-1. Let $t \in \RR$.
-1. Consider the set $S = \sublevel(h, t)$.
-1. Then
+We make use of the fact that closed functions
+are lower semicontinuous. See later
+in {prf:ref}`res-ms-func-lsc-closed-func`.
 
-   $$
-   S &= \{ x \in H \ST h(x) \leq t \} \\
-   &= \{ x \in F \cap G \ST f(x) + g(x) \leq t \}.
-   $$
-1. Fix some $u \in \RR$.
-1. Define $T_u = \{ x \in F \cap G \ST g(x) = u }
+1. Since $f$ and $g$ are closed,
+   hence due to {prf:ref}`res-ms-func-lsc-closed-func`
+   they are l.s.c..
+1. By {prf:ref}`res-ms-lsc-sum`, 
+   $h = f + g$ is l.s.c..
+1. Again due to {prf:ref}`res-ms-func-lsc-closed-func`, $h$ is closed.
 ```
 
 
@@ -1428,6 +1425,47 @@ in terms of *lower semicontinuity*. In this subsection,
 we study the implications of lower semicontinuity under
 the subspace topology.
 
+
+### Sum Rule
+
+```{prf:theorem} Sum of lower semicontinuous functions
+:label: res-ms-lsc-sum
+
+Let $f: g : X \to \RR$ be lower semicontinuous functions.
+Then their sum $h = f + g$ with $\dom h = \dom f \cap \dom g$
+is lower semicontinuous.
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Let $F = \dom f$, $G = \dom g$ and $H = \dom h$.
+1. Then $H = F \cap G$.
+1. Let $a \in H$.
+1. Since $a \in F$ and $x \in G$ hence both $f$ and $g$
+   are l.s.c. at $a$.
+1. Choose $\epsilon > 0$.
+1. Since $f$ is l.s.c. at $a$, there exists $r_1 > 0$
+   such that for every $x \in B(a, r_1)$,
+   $f(a) - \epsilon < f(x)$.
+1. Since $g$ is l.s.c. at $a$, there exists $r_2 > 0$
+   such that for every $x \in B(a, r_2)$,
+   $g(a) - \epsilon < g(x)$.
+1. Let $r = \min(r_1, r_2)$. 
+1. Then for every $x \in B(a, r)$
+
+   $$
+   f(a) + g(a) - 2\epsilon < f(x) + g(x).
+   $$
+1. In other words, $h(a) - 2 \epsilon < h(x)$
+   for every $x \in B(a, r)$.
+1. Hence $h$ is l.s.c. at $a$.
+1. Since $a \in H$ is arbitrary, hence $h$ is l.s.c..
+```
+
+### Convergent Dominating Sequences
+
+
 ```{prf:theorem} Lower semicontinuity and convergent dominating sequence
 :label: res-ms-lsc-converge-dominating-seq
 
@@ -1441,7 +1479,7 @@ $\mu \geq f(a)$ whenever $\mu = \lim \mu_n$ and $a = \lim a_n$.
 
 ```{prf:proof}
 
-Assume that $f$ is l.s.c. and   $\mu = \lim \mu_n$ and $a = \lim a_n$.
+Assume that $f$ is l.s.c. at $a$ and   $\mu = \lim \mu_n$ and $a = \lim a_n$.
 
 1. Then, due to {prf:ref}`res-ms-semicont-seq-converge`,
 
@@ -1468,12 +1506,12 @@ for any sequence $\{ x_n \}$ converging to $a$,
 and any sequence $\{ \mu_n \}$ with $\mu_n \geq f(x_n)$
 converging to $\mu$, we have $\mu \geq f(a)$.
 
-1. Let $a \in S$.
 1. Pick a sequence $\{ a_n \}$ such that $\lim a_n = a$.
 1. Pick a convergent sequence $ \{ s_n \}$ such that $s_n \geq f(a_n)$.
 1. By hypothesis $s = \lim s_n \geq f(a)$.
 1. By way of contradiction, assume that $f$ is not l.s.c. at $a$.
-1. Thus, $\liminf_{n \to \infty} f(a_n) < f(a)$.
+1. Then $\liminf_{n \to \infty} f(a_n) < f(a)$
+   due to {prf:ref}`res-ms-semicont-func-limit`.
 1. Let $\liminf_{n \to \infty} f(a_n) = f(a) - r$ for some $r > 0$.
 1. Since $\{ s_n \}$ is convergent, hence it is bounded
    (see {prf:ref}`res-bra-convergent-bounded`).
@@ -1496,10 +1534,9 @@ converging to $\mu$, we have $\mu \geq f(a)$.
 1. Since $\{a_n \}$ converges to $a$, hence $\{b_n \}$ converges to $a$.
 1. Now, choose $t_n = f(b_n)$. This is by definition a convergent sequence
    satisfying $t_n \geq f(b_n)$.
-1. But then, $t = \lim t_n = f(b) - r < f(b)$.
+1. But then, $t = \lim t_n = f(a) - r < f(a)$.
 1. This contradicts the hypothesis that $t \geq f(a)$.
 1. Thus, $f$ must be l.s.c. at $a$.
-1. Since $a$ was arbitrary, hence $f$ is l.s.c. at every $a \in S$.
 ```
 
 
