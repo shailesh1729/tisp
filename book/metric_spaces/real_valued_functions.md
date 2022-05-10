@@ -11,8 +11,40 @@ Unless otherwise specified, $f : X \to \RR$ is a partial real
 valued function from $X$ to $\RR$
 with $\dom f \subseteq X$.
 
-We shall be discussing closedness of the sublevel sets
-and epigraphs of a function. The closedness is with
+When the codomain of a function is $\RR$, it provides
+an additional structure of total order on the range
+of possible values of $f$. 
+
+1. We can introduce the notion of local and global 
+   maximum or minimum values (local and global extrema).
+1. We can construct the epigraphs, hypographs, sublevel sets,
+   superlevel sets and contours of a function. This allows
+   us to think about the properties of these sets.
+   Of particular interest are functions whose epigraphs
+   are closed or all sublevel sets are closed.
+1. When we discuss limits at some point $a \in \dom f$, we
+   can think in terms of whether the nearby values
+   are above or below $f(a)$. For each deleted neighborhood
+   of $a$, we can find out the largest (supremum) or
+   the smallest (infimum) values. This enables us
+   to introduce the notions of limit superior and
+   limit inferior. Naturally, the limit exists when
+   the limit superior and limit inferior agree.
+1. Similarly, the idea of continuity can be split into
+   continuity from above or below. Accordingly,
+   the functions can be classified into lower and
+   upper continuous functions. Continuous functions
+   are both lower and upper continuous.
+1. All of these notions easily carry over to extended
+   valued functions (with signatures $f: X \to \ERL$).
+
+This section introduces these concepts and focuses
+on the interplay of these concepts. For example
+closedness of functions (the notion that all sublevel sets are closed)
+is equivalent to closed epigraphs or lower semicontinuity.
+
+When we discuss the closedness of the sublevel sets
+and epigraphs of a function, the closedness is with
 respect to the subspace topology of $(S, d)$ 
 where $S = \dom f$.
 
