@@ -154,7 +154,7 @@ a proximal mapping is nonempty.
 ```{prf:theorem} Nonemptiness under closedness and coerciveness
 :label: res-prox-nonemptiness-under-closedness-coerciveness
 
-Let $f : \VV \to \RERL$ be a proper closed function. Assume that 
+Let $f : \VV \to \RERL$ be a proper and closed function. Assume that 
 the function
 
 $$
@@ -192,45 +192,61 @@ $$
 
 ## Proximal Operator
 
+Under suitable conditions, $\prox_f(\bx)$ is always a singleton
+for every $\bx \in \VV$. Then the proximal mapping can be
+thought of as a function $\prox_f : \VV \to \VV$ mapping
+every point in $\VV$ to a proximal point.
+
+
 ```{prf:theorem} First prox theorem
 :label: res-prox-first-prox-theorem
 
-Let $f : \VV \to \RERL$ be a proper, closed and function. Then, $\prox_f(\bx)$ is
-a singleton for any $\bx \in \VV$.  
+Let $f : \VV \to \RERL$ be a proper, closed and convex function. Then, $\prox_f(\bx)$ is
+a singleton for every $\bx \in \VV$.  
 ```
 
 ```{prf:proof}
 Define:
 
 $$
-\tilde{f}(\bu, \bx) \triangleq f(\bu) + \frac{1}{2} \| \bu - \bx \|^2.
+h_{\bx}(\bu) \triangleq f(\bu) + \frac{1}{2} \| \bu - \bx \|^2.
 $$
 
 Then 
 
 $$
-\prox_f(\bx) = \underset{\bu \in \VV}{\argmin} \tilde{f}(\bu, \bx).
+\prox_f(\bx) = \underset{\bu \in \VV}{\argmin} h_{\bx}(\bu).
 $$
 
-Consider $\tilde{f}(\cdot, \bx)$ for a fixed valued of $\bx$:
 
-* $f$ is a closed and convex function.
-* $\frac{1}{2} \| \cdot - \bx \|^2$ is a closed and strongly convex function.
-* Hence, their sum $\tilde{f}(\cdot, \bx)$ is a closed and strongly convex function.
-* Since $f$ is proper, hence $\tilde{f}(\cdot, \bx)$ is also proper.
-* Thus, $\tilde{f}(\cdot, \bx)$ is a proper, closed and strongly convex function.
-* Thus, there exists a unique minimizer for $\tilde{f}(\cdot, \bx)$. 
-* Thus, the set $\prox_f(\bx)$ is a singleton.
+1. $f$ is a closed and convex function.
+1. $d_{\bx}(\bu) = \frac{1}{2} \| \bu - \bx \|^2$ is a closed and strongly convex function
+   ({prf:ref}`res-cvxf-quadratic-strong-convex`).
+1. Hence, their sum $h_{\bx}$ is a closed and strongly convex function
+   ({prf:ref}`res-cvxf-sum-strong-convex-convex`).
+1. Since $f$ is proper, and $d_{\bx}$ is real valued, hence $h_{\bx}$ is also proper.
+1. Thus, $h_{\bx}$ is a proper, closed and strongly convex function.
+1. Due to {prf:ref}`res-cvxf-strong-convex-minimizer`,
+   there exists a unique minimizer for $h_{\bx}$. 
+1. Thus, the set $\prox_f(\bx) = \argmin h_{\bx}(\bu)$ is a singleton.
 ```
+
+With this result, we are ready to introduce the proximal operator.
 
 ```{prf:definition} Proximal operator
 :label: def-prox-proximal-operator
 
-Let $f : \VV \to \RERL$ be a proper closed function. Since 
+Let $f : \VV \to \RERL$ be a proper, closed and convex function. Since 
 the point to set mapping $\prox_f : \VV \to 2^{\VV}$ maps 
-every point in $\VV$ to a singleton subset of $\VV$, we abuse
+every point in $\VV$ to a singleton subset of $\VV$
+due to {prf:ref}`res-prox-first-prox-theorem`, we abuse
 the notation and redefine $\prox_f: \VV \to \VV$ as a point to
 point mapping. We call this mapping as a *proximal operator* of $f$. 
 
 In other words, we write $\prox_f(\bx) = \by$ rather than $\prox_f(\bx) = \{\by\}$.
+
+Thus, for a proper, closed and convex function $f$,
+the operator $\prox_f: \VV \to \VV$ maps each point
+$\bx \in \VV$ to a unique minimizer of the
+function $h_{\bx}(\bu) = f(\bu) + \frac{1}{2} \| \bu - \bx \|^2$.
 ```
