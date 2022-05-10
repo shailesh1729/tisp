@@ -28,6 +28,8 @@ $$
 * The set of *proximal points* may be empty, singleton or have more than one points. 
 ```
 
+### Zero Function
+
 ```{prf:example} Zero function
 :label: ex-prox-zero-function
 
@@ -39,6 +41,8 @@ $$
 $$
 ```
 
+### Constant Value Function
+
 ```{prf:example} Constant value function
 :label: ex-prox-constant-function
 
@@ -49,6 +53,8 @@ $$
 = \{ x\}.
 $$
 ```
+
+### 1D Linear Function I
 
 ```{prf:example} 1D Linear function I
 :label: ex-prox-1d-linear-function-1
@@ -82,6 +88,8 @@ $$
 $$
 ```
 
+### 1D Linear Function II
+
 ```{prf:example} 1D Linear function II
 :label: ex-prox-1d-linear-function-2
 
@@ -113,6 +121,8 @@ $$
 \prox_f(x) = \{ x - \lambda \}.
 $$
 ```
+
+### 1D Affine Function
 
 ```{prf:example} 1D Affine function
 :label: ex-prox-1d-affine-function
@@ -250,3 +260,64 @@ the operator $\prox_f: \VV \to \VV$ maps each point
 $\bx \in \VV$ to a unique minimizer of the
 function $h_{\bx}(\bu) = f(\bu) + \frac{1}{2} \| \bu - \bx \|^2$.
 ```
+
+
+## Simple Examples of Proximal Operators
+
+
+### Affine
+
+```{prf:example} Affine function
+:label: ex-prox-affine
+
+Let $f(\bx) = \langle \bx, \ba \rangle + b$ where $\ba \in \VV$ and $b \in \RR$.
+
+$$
+h_{\bx}(\bu) = \langle \bu, \ba \rangle + b + \frac{1}{2} \| \bu - \bx \|^2.
+$$
+
+1. Differentiating $h_{\bx}$, we get
+   $\nabla h_{\bx}(\bu) = \ba + \bu - \bx$.
+1. Setting it to zero, we see that $\bu = \bx - \ba$ is the minimizer.
+
+Hence
+
+$$
+\prox_f(\bx) = \bx - \ba.
+$$
+```
+
+### Convex Quadratic
+
+
+```{prf:example} Convex quadratic
+:label: ex-prox-convex-quadratic
+
+Let $f : \RR^n \to \RR$ be given by
+$f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c$
+where $\bA \in \SS^n_+$, $\bb \in \RR^n$ and $c \in \RR$.
+
+$$
+h_{\bx}(\bu) = \frac{1}{2} \bu^T \bA \bu + \bb^T \bu + c + \frac{1}{2} \| \bu - \bx \|^2.
+$$
+
+1. Differentiating $h_{\bx}$, we get
+
+   $$
+   \nabla h_{\bx}(\bu) = \bA \bu + \bb + \bu - \bx.
+   $$
+1. Setting this to zero, we see that
+
+   $$
+   & \bA \bu + \bb + \bu - \bx = \bzero\\
+   \iff & (\bA + \bI) \bu = \bx - \bb \\
+   \iff & \bu = (\bA + \bI)^{-1}(\bx - \bb).
+   $$
+
+Hence
+
+$$
+\prox_f(\bx) = (\bA + \bI)^{-1}(\bx - \bb).
+$$
+```
+
