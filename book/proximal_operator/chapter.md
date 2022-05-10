@@ -1,4 +1,4 @@
-# Proximal Operator
+# Proximal Algorithms
 
 
 ## Chapter Objectives
