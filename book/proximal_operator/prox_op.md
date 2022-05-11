@@ -310,7 +310,8 @@ $$
 1. Let 
    
    $$
-   h_x(u) = \begin{cases}
+   h_x(u) = = f_x(u) +  \frac{1}{2} (u - x)^2 
+   = \begin{cases}
    \mu u + \frac{1}{2} (u - x)^2, & u \geq 0; \\
    \infty, & u < 0.
    \end{cases}
@@ -378,6 +379,76 @@ $$
    \prox_f(x) = [|x| - t]_+ \sgn (x).
    $$
 ```
+
+```{prf:example} Scaled cube over $\RR_+$
+:label: ex-prox-scaled-cube-plus
+
+Let $t > 0$.
+Let $f : \RR \to \RERL$ be given by
+
+$$
+f(x) = \begin{cases}
+t x^3, & x \geq 0; \\
+\infty, & x < 0.
+\end{cases}
+$$
+
+The proximal operator is given by
+
+$$
+\prox_f(x) = \frac{-1 + \sqrt{1 + 12 t [x]_+}}{6 t}.
+$$
+
+1. We construct the auxiliary function
+
+   $$
+   h_x(u) = f_x(u) +  \frac{1}{2} (u - x)^2 
+   = \begin{cases}
+   t u^3 +  \frac{1}{2} (u - x)^2, & u \geq 0; \\
+   \infty, & u < 0.
+   \end{cases}
+   $$
+1. $h_x$ is differentiable for $u > 0$.
+1. $h'_x(u) = 3 t u^2 + u - x$ for $u > 0$.
+1. Note that if $x \leq 0$ then
+   $h'_x(u) > 0$ for every $u > 0$.
+1. Hence $h'_x(u) = 0$ does not have a positive
+   root for $x \leq 0$.
+1. For $x > 0$, setting $h_x(u)$ to zero,
+   we get $3 u^2 + u - x = 0$
+   whose positive solution is:
+
+   $$
+   u = \frac{-1 + \sqrt{1 + 12 t x}}{6 t}.
+   $$
+1. We can see that $h'_x(u) = 0$ has a
+   positive solution if and only if $x > 0$.
+1. If $x \leq 0$, then the derivative never
+   vanishes for any $u > 0$.
+1. Hence the minimum of $h_x$ is attained
+   at the only point of nondifferentiability
+   $u=0$.
+1. Thus, the minimizer of $h_x(u)$ for $x \leq 0$
+   is $u=0$.
+1. Hence
+
+   $$
+   \prox_f(x) = \begin{cases}
+   \frac{-1 + \sqrt{1 + 12 t x}}{6 t}, & x > 0 \\
+   0, & x \leq 0.
+   \end{cases}
+   $$
+1. Note that 
+   
+   $$
+   \frac{-1 + \sqrt{1 + 12 t [x]_+}}{6 t}= \begin{cases}
+   \frac{-1 + \sqrt{1 + 12 t x}}{6 t}, & x > 0 \\
+   0, & x \leq 0.
+   \end{cases}
+   $$
+1. This concludes the proof.
+```
+
 
 ## n-dim Examples of Proximal Operators
 
