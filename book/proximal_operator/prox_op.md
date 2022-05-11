@@ -304,6 +304,9 @@ The proximal operator is given by
 $$
 \prox_f(x) = [x - \mu]_+.
 $$
+```
+```{prf:proof}
+.
 
 1. $\dom f = \RR_+$.
 1. $f$ is differentiable over $\RR_{++}$.
@@ -341,7 +344,9 @@ The proximal operator is given by
 $$
 \prox_f(x) = [|x| - t]_+ \sgn (x).
 $$
-
+```
+```{prf:proof}
+.
 
 1. Let
 
@@ -398,6 +403,9 @@ The proximal operator is given by
 $$
 \prox_f(x) = \frac{-1 + \sqrt{1 + 12 t [x]_+}}{6 t}.
 $$
+```
+```{prf:proof}
+.
 
 1. We construct the auxiliary function
 
@@ -447,6 +455,126 @@ $$
    \end{cases}
    $$
 1. This concludes the proof.
+```
+
+```{prf:example} Scaled negative logarithm
+:label: ex-prox-scaled-neg-log
+
+Let $t > 0$.
+Let $f : \RR \to \RERL$ be given by
+
+$$
+f(x) = \begin{cases}
+- t \ln x, & x > 0; \\
+\infty, & x \leq 0.
+\end{cases}
+$$
+
+The proximal operator is given by
+
+$$
+\prox_f(x) = \frac{x + \sqrt{x^2 + 4 t} }{2}.
+$$
+```
+
+```{prf:proof}
+.
+
+1. We construct the auxiliary function
+
+   $$
+   h_x(u) = f_x(u) +  \frac{1}{2} (u - x)^2 
+   = \begin{cases}
+   - t \ln x +  \frac{1}{2} (u - x)^2, & u > 0; \\
+   \infty, & u \leq 0.
+   \end{cases}
+   $$
+1. $h_x$ is differentiable for $u > 0$.
+1. $h'_x(u) = - \frac{t}{u} + (u - x)$ for $u > 0$.
+1. $\tilde{u} > 0$ is a minimizer if
+
+   $$
+   & - \frac{t}{\tilde{u}} + (\tilde{u} - x) = 0 \\
+   & \implies \tilde{u}^2 - x \tilde{u} -t = 0 \\
+   & \implies \tilde{u} = \frac{x + \sqrt{x^2 + 4 t}}{2}.
+   $$
+1. We note that $x + \sqrt{x^2 + 4 t} > 0$ for every $x \in \RR$.
+1. Hence $\tilde{u} > 0$ as desired.
+1. Hence $\prox_f(x) = \frac{x + \sqrt{x^2 + 4 t}}{2}$.
+
+As we can see, $\dom h_x$ is the open set $\RR_{++}$
+and $h_x$ is differentiable at every point in its
+domain. Since $h_x$ must have a unique minimizer,
+hence $h'_x(u) = 0$ must have a unique positive solution.
+```
+
+
+```{prf:example} Indicator function for an interval
+:label: ex-prox-indicator-interval
+
+Let $r \in [0, \infty]$.
+Let $f : \RR \to \RERL$ be given by
+
+$$
+f(x) = I_{[0,r] \cap \RR}(x).
+$$
+
+The proximal operator is given by
+
+$$
+\prox_f(x) = \min \{ \max \{x, 0 \}, r \}.
+$$
+```
+
+```{prf:proof}
+.
+
+1. Let
+
+   $$
+   h_x(u) = I_{[0,r] \cap \RR}(x) +  \frac{1}{2} (u - x)^2.
+   $$
+1. Let $\tilde{u}$ denote the minimizer of $h_x(u)$.
+1. Let $w$ denote the function $w(u) =  \frac{1}{2} (u - x)^2$.
+1. First consider the case where $r < \infty$.
+1. Then $h_x(u) = w(u)$ over $[0, r]$ and $\infty$ otherwise.
+1. $\dom h_x = [0, r]$. $\interior \dom h_x = (0, r)$.
+   The boundary points are $0$ and $r$.
+1. The minimizer of $w(u)$ is $u = x$.
+1. Therefore if $0 \leq x \leq r$, then $\tilde{u} = x$.
+1. For the cases where $x \notin [0, r]$, the minimizer
+   must be one of the boundary points.
+1. If $x < 0$, then $w(u)$ is an increasing function over
+   $[0, r]$.
+1. Hence for $x < 0$, $\tilde{u} = 0$.
+1. If $x > r$, then $w(u)$ is a decreasing function over $[0,r]$.
+1. Hence for $x > r$, $\tilde{u} = r$.
+1. Thus, if $r < \infty$, then the proximal operator
+   is given by
+
+   $$
+   \prox_f(x) = \begin{cases}
+   x, & 0 \leq x \leq r \\
+   0, & x < 0 \\
+   r, & x > r
+   \end{cases}
+   = \min \{ \max \{x, 0 \}, r \}.
+   $$
+1. For $r = \infty$, $f(x) = I_{[0, \infty)}(x)$.
+1. Thus, $h_x(u) = w(u)$ for $u \geq 0$.
+1. Hence the minimizer $\tilde{u} = x$ for $x \geq 0$ and
+   $\tilde{u} = 0$ for $x < 0$.
+1. In other words, 
+
+   $$
+   \prox_f(x) = [x]_+ = \max\{x, 0\}
+   = \min \{ \max \{x, 0 \}, \infty \}.
+   $$
+1. Combining these two cases
+
+   $$
+   \prox_f(x) = \min \{ \max \{x, 0 \}, r \}.
+   $$
 ```
 
 
