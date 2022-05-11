@@ -5,6 +5,14 @@ In this section, we focus on objective functions of type
 $f : \RR^n \to \RR$ which are convex and differentiable.
 Our goal is to minimize $f$ over a convex set $C \subseteq \dom f$.
 
+We also concern ourselves with functions of type $f : \VV \to \RERL$
+where $\VV$ is a Euclidean space and $f$
+is Fréchet differentiable over some open set $C \subseteq \dom f$.
+For those results which concern with Fréchet differentiable
+functions, we request the readers to revise the concepts
+of Gateaux and Fréchet differentiability in
+{ref}`sec:mvc:banach:diff`.
+
 Main references for this section are
 {cite}`beck2014introduction,boyd2004convex`.
 
@@ -266,6 +274,108 @@ In this case, the set of feasible points is $C = \dom f$.
    must hold true for $t > 0$.
 1. This means that $\|  \nabla f(\bx) \|_2 \leq 0$ must be true.
 1. Thus $\nabla f(\bx) = \bzero$ must be true.
+```
+
+### Nondifferentiability at the Boundary 
+
+There are some specific results available for the unconstrained minimization
+of a convex function $f$ is not differentiable everywhere in its domain.
+If $\dom f$ is not open, then $f$ may be differentiable
+at $\interior \dom f$ but is not differentiable
+at the boundary points $(\dom f) \setminus (\interior dom f)$.
+The key questions are 
+
+1. Under what conditions, the minimizer of $f$ is
+   a point of differentiability.
+1. Under what conditions, the minimizer of $f$ may
+   be at a point of nondifferentiability.
+
+
+```{prf:theorem} Zero gradient implies minimizer
+:label: res-cvxopt-diff-zero-grad-minimizer
+
+Let $f: \VV \to \RERL$ with $S = \dom f$ be a
+proper convex function which is differentiable
+over some open set $U \subseteq S$.
+If $\nabla f(\bx) = \bzero$ at some $\bx \in U$, then
+$\bx$ is one of the minimizers for $f$.
+```
+
+```{prf:proof}
+Recall from {prf:ref}`res-cvxf-subdiff-grad` that
+$f$ is differentiable at $\bx$ if and only if
+
+$$
+\partial f(\bx) = \{ \nabla f (\bx) \}.
+$$
+
+1. Assume that $f$ is differentiable at $\bx \in U$
+   and $\nabla f(\bx) = \bzero$.
+1. Then $\nabla f (\bx)$ is the one and only subgradient of
+   $f$ at $\bx$.
+1. Due to subgradient inequality
+
+   $$
+   f(\by) \geq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle \Forall \by \in \VV.
+   $$
+1. Since $\nabla f(\bx) = \bzero$, hence
+
+   $$
+   f(\by) \geq f(\bx) \Forall \by \in \VV.
+   $$
+1. Thus $f$ attains a minimum at $\bx$ and $\bx$ is one of
+   its minimizers.
+```
+
+Next we consider the special case of the
+minimization of a convex function $f$ which is
+differentiable in the interior of its domain
+but the gradient never vanishes. In this
+case, if a minimizer for $f$ exists, it must be
+at the boundary of its domain. 
+
+```{prf:theorem} Minimizers at points of nondifferentiability
+:label: res-cvxopt-minimizer-nondifferentiability
+
+Let $f: \VV \to \RERL$ with $S = \dom f$ be a
+proper convex function which is differentiable
+over some open set $U \subseteq S$
+and not differentiable over $S \setminus U$.
+Assume that $f$ attains its minimum value at
+some $\ba \in S$; i.e., a minimizer of $f$
+exists. If $\nabla f(\bx) \neq \bzero$
+at every $\bx \in U$,
+then the minimizer must be at some point of nondifferentiability.
+In other words, $\ba \in S \setminus U$.
+```
+
+```{prf:proof}
+We are given that there exists a is a minimizer of $f$
+and for every $\bx \in U$, $\nabla f(\bx) \neq \bzero$.
+
+1. Pick any $\bx \in U$. 
+1. We need to show that $\bx$ cannot be a minimizer.
+1. For contradiction, assume that $\bx$ is a minimizer.
+1. By subgradient inequality
+
+   $$
+   f(\by) \geq f(\bx) + \langle \by - \bx, \nabla f(\bx) \rangle \Forall \by \in \VV.
+   $$
+1. Since $\bx$ is a minimizer, hence we must have
+
+   $$
+   \langle \by - \bx, \nabla f(\bx) \rangle \geq 0 \Forall \by \in \VV.
+   $$
+1. Let $\by = \bx - \nabla f(\bx)$.
+1. Then 
+
+   $$
+   \langle \by - \bx, \nabla f(\bx) \rangle 
+   = \langle - \nabla f(\bx), \nabla f(\bx) \rangle
+   = - \| \nabla f(\bx) \|^2 < 0.
+   $$
+1. This contradicts our assumption that $\bx$ is a minimizer.
+1. Hence if $\ba$ is a minimizer of $f$ then $\ba \in S \setminus U$.  
 ```
 
 We next show how the condition in {eq}`eq-cvx-opt-diff-opt-criterion`
