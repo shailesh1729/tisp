@@ -261,8 +261,127 @@ $\bx \in \VV$ to a unique minimizer of the
 function $h_{\bx}(\bu) = f(\bu) + \frac{1}{2} \| \bu - \bx \|^2$.
 ```
 
+## 1-dim Examples of Proximal Operators
 
-## Simple Examples of Proximal Operators
+Some key ideas that will be repeatedly used in the computation 
+of the proximal operator in this section.
+Assume that $f$ is a convex function with $S = \dom f$
+and is differentiable over an open set $U \subseteq S$.
+This happens when $\dom f$ is not an open set,
+$f$ is differentiable in the interior of $\dom f$
+but not at the boundary points.
+
+1. if $f'(u) = 0$ for some $u \in U$, then $u$ must
+   be one of its minimizers 
+   ({prf:ref}`res-cvxopt-diff-zero-grad-minimizer`).
+1. If a minimizer of $f$ exists and is not attained
+   at any point of differentiability, then it
+   must be attained at a point of nondifferentiability
+   ({prf:ref}`res-cvxopt-minimizer-nondifferentiability`).
+1. Since for a convex function $f$, the existence of a
+   unique proximal mapping is guaranteed, hence
+   the minimizer of the function $h_{\bx}$ exists.
+1. Then the minimizer of $h_{\bx}$ is either
+   at a point of differentiability where the
+   gradient vanishes or at the boundary where
+   it is nondifferentiable.
+
+```{prf:example} Linear over $\RR_+$
+:label: ex-prox-linear-rplus
+
+Let $\mu \in \RR$.
+Let $f : \RR \to \RERL$ be given by
+
+$$
+f(x) = \begin{cases}
+\mu x, & x \geq 0; \\
+\infty, & x < 0.
+\end{cases}
+$$
+
+The proximal operator is given by
+
+$$
+\prox_f(x) = [x - \mu]_+.
+$$
+
+1. $\dom f = \RR_+$.
+1. $f$ is differentiable over $\RR_{++}$.
+1. Let 
+   
+   $$
+   h_x(u) = \begin{cases}
+   \mu u + \frac{1}{2} (u - x)^2, & u \geq 0; \\
+   \infty, & u < 0.
+   \end{cases}
+   $$
+1. $h_x$ is a proper convex function with $\dom h_x = \RR_+$.
+1. $h_x$ is differentiable over $\RR_{++}$.
+1. $h'_x(u) = \mu + u - x$ for all $u > 0$.
+1. Setting it to zero, we get $u = x - \mu$.
+1. Thus, if $x > \mu$, then the minimizer is $u = x - \mu$.
+1. Otherwise, $h_x$ obtains its minimum value at $u=0$
+   which is the only point of nondifferentiability in its domain.
+1. Thus, if $x \leq \mu$, then the minimizer is $u=0$.
+```
+
+```{prf:example} Scaled absolute value
+:label: ex-prox-scaled-abs-value
+
+Let $t \in \RR_+$.
+Let $f : \RR \to \RR$ be given by
+
+$$
+f(x) = t | x |.
+$$
+
+The proximal operator is given by
+
+$$
+\prox_f(x) = [|x| - t]_+ \sgn (x).
+$$
+
+
+1. Let
+
+   $$
+   h_x(u) = t | u | +  \frac{1}{2} (u - x)^2.
+   $$
+1. $h_x$ is differentiable everywhere except at $u = 0$.
+1. At $u \neq 0$, $h'_x(u) = \sgn(u) t + u - x$.
+1. If the minimizer is obtained at $u > 0$, then
+   $t + u - x = 0$ giving us $u= x -t$.
+1. Thus, a minimizer at $u > 0$ is attained if $x > t$.
+1. If the minimizer is obtained at $u < 0$, then
+   $-t + u - x = 0$ giving us $u = x + t$.
+1. Thus, a minimizer at $u < 0$ is attained if $x < -t$.
+1. Consequently, if $x \in [-t, t]$, then the
+   minimizer of $h_x$ must be at the only point of
+   nondifferentiability, namely $u=0$.
+1. This gives us
+
+   $$
+   \prox_f(x) = \begin{cases}
+   x - t, & x > t\\
+   x + t, & x < -t \\
+   0, &  -t \leq x \leq t.
+   \end{cases}
+   $$
+1. The conditions $x > t$ and $x < -t$
+   can be combined as $|x| > t$.
+1. The condition $-t \leq x \leq t$ simplifies
+   to $|x| \leq |t|$.
+1. We can see that the three cases for $\prox_f(x)$
+   can be simplified to the expression
+
+   $$
+   \prox_f(x) = [|x| - t]_+ \sgn (x).
+   $$
+```
+
+## n-dim Examples of Proximal Operators
+
+
 
 
 ### Affine
