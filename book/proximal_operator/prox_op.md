@@ -42,6 +42,51 @@ $$
 $$
 ```
 
+### Zero Everywhere Except at $x=0$ Functions
+
+Let us look at real functions which are
+zero everywhere except at $x=0$. 
+There are two possibilities.
+
+
+```{prf:example} Negative value at $x=0$
+Let $t > 0$.
+Let $f: \RR \to \RR$ be given as
+
+$$
+f(x) = \begin{cases}
+0 & x \neq 0;\\
+- t & x = 0.
+\end{cases}
+$$
+
+The proximal mapping is given by
+
+$$
+\prox_f(x) = \begin{cases}
+\{ 0 \}, & |x| < \sqrt{2 t},\\
+\{ x \} & |x| > \sqrt{2 t}, \\
+\{ 0, x \} & | x | = \sqrt {2 t}.
+\end{cases}
+$$
+```
+
+```{prf:proof}
+We start by constructing the function
+
+$$
+h_x(u) = f(u) + \frac{1}{2} (u  - x )^2
+= \begin{cases}
+\frac{1}{2} (u  - x )^2 & u \neq 0;\\
+- t + \frac{1}{2} (u  - x )^2 & u = 0.
+\end{cases}
+$$
+
+
+```
+
+
+
 ### Constant Value Function
 
 ```{prf:example} Constant value function
@@ -784,7 +829,7 @@ $$
 $$
 
 and the multivariate soft-thresholding operator
-$\st_{\gamma} : \RR^n \to \RR$
+$\st_{\gamma} : \RR^n \to \RR^n$
 is defined by the component wise application of
 the univariate soft thresholding operator
 
@@ -815,6 +860,67 @@ $$
 = \st_{\gamma}(\bx).
 $$
 ```
+
+```{prf:example} Scaled $\ell_0$ "norm"
+:label: ex-prox-scaled-l0-norm
+
+Let $\gamma > 0$.
+Let $f : \RR^n \to \RR$ be given by
+
+$$
+f(\bx) = \gamma \| \bx \|_0 = \sum_{i=1}^n  g(x_i)
+$$
+where
+
+$$
+g(x) = \begin{cases}
+\gamma, & x \neq 0;\\
+0, & x = 0.
+\end{cases} 
+$$
+
+Then, the proximal operator is given by
+
+$$
+\prox_f(\bx) = \HHH_{\sqrt{2\gamma}}(x_1) \times \dots 
+\times \HHH_{\sqrt{2\gamma}}(x_n)
+$$
+
+where the univariate hard-thresholding operator 
+$\HHH_{t} : \RR \to 2^{\RR}$
+for any $t > 0$ is defined as
+
+$$
+\HHH_t(x) = \begin{cases}
+ \{ 0 \} & |x| < t \\
+ \{ x \} &  |x| > t \\
+ \{0, x \} & |x| = t
+\end{cases}.
+$$
+```
+Note this this version of hard thresholding
+operator is a point to set mapping. In this
+case, the operator leads to two possible
+values when $|x| = t$.
+The $\ell_0$-"norm" is not a convex function.
+Hence its proximal mapping is not always
+a singleton.
+
+```{prf:proof}
+We note that $g(x) = h(x) + \gamma$
+
+where
+
+$$
+h(x) = \begin{cases}
+0, & x \neq 0;\\
+-\gamma, & x = 0.
+\end{cases} 
+$$
+
+
+```
+
 
 ### Logarithms
 
