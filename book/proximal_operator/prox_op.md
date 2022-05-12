@@ -432,7 +432,7 @@ $$
 1. Let 
    
    $$
-   h_x(u) = = f_x(u) +  \frac{1}{2} (u - x)^2 
+   h_x(u) = = f(u) +  \frac{1}{2} (u - x)^2 
    = \begin{cases}
    \mu u + \frac{1}{2} (u - x)^2, & u \geq 0; \\
    \infty, & u < 0.
@@ -529,7 +529,7 @@ $$
 1. We construct the auxiliary function
 
    $$
-   h_x(u) = f_x(u) +  \frac{1}{2} (u - x)^2 
+   h_x(u) = f(u) +  \frac{1}{2} (u - x)^2 
    = \begin{cases}
    t u^3 +  \frac{1}{2} (u - x)^2, & u \geq 0; \\
    \infty, & u < 0.
@@ -602,9 +602,9 @@ $$
 1. We construct the auxiliary function
 
    $$
-   h_x(u) = f_x(u) +  \frac{1}{2} (u - x)^2 
+   h_x(u) = f(u) +  \frac{1}{2} (u - x)^2 
    = \begin{cases}
-   - t \ln x +  \frac{1}{2} (u - x)^2, & u > 0; \\
+   - t \ln u +  \frac{1}{2} (u - x)^2, & u > 0; \\
    \infty, & u \leq 0.
    \end{cases}
    $$
@@ -813,5 +813,58 @@ By {prf:ref}`res-prox-op-separable-conv-func`,
 $$
 \prox_f(\bx) = (\st_{\gamma}(x_i))_{i=1}^n
 = \st_{\gamma}(\bx).
+$$
+```
+
+### Logarithms
+
+```{prf:example} Negative sum of logs
+:label: ex-prox-neg-sum-log
+
+Let $\gamma > 0$.
+Let $f : \RR^n \to \RERL$ be given by
+
+$$
+f(\bx) = \begin{cases}
+- \gamma\sum_{i=1}^n  \ln x_i & \bx \succ \bzero;\\
+\infty & \text{ otherwise }.
+\end{cases}
+$$
+
+Then, the proximal operator is given by
+
+$$
+\prox_f(\bx) = \left (
+   \frac{x_i + \sqrt{x_i^2 + 4 \gamma} }{2}
+   \right)_{i=1}^n.
+$$
+```
+
+
+```{prf:proof}
+We note that 
+
+$$
+f(\bx) = \sum_{i=1}^n g(x_i)
+$$
+where
+
+$$
+g(x) =  \begin{cases}
+- \gamma \ln x, & x > 0; \\
+\infty, & x \leq 0.
+\end{cases}
+$$
+
+From {prf:ref}`ex-prox-scaled-neg-log`,
+
+$$
+\prox_g(x) = \frac{x + \sqrt{x^2 + 4 t} }{2}.
+$$
+
+By {prf:ref}`res-prox-op-separable-conv-func`,
+
+$$
+\prox_f(\bx) = (\prox_g(x_i))_{i=1}^n.
 $$
 ```
