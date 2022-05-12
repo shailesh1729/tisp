@@ -1,3 +1,4 @@
+(sec:proximal:intro)=
 # Proximal Mappings and Operators
 
 Throughout this section $\VV$ represents a
@@ -261,7 +262,123 @@ $\bx \in \VV$ to a unique minimizer of the
 function $h_{\bx}(\bu) = f(\bu) + \frac{1}{2} \| \bu - \bx \|^2$.
 ```
 
-## 1-dim Examples of Proximal Operators
+Readers are suggested to look at some of the
+examples in the {ref}`sec:proximal:examples` below
+before proceeding with the proximal calculus rules.
+
+## Proximal Calculus
+
+This section deals with the rules which enable
+us to compute the proximal mappings for a function
+if we know the proximal mappings of underlying
+building blocks.
+
+### Separable Functions
+
+```{prf:theorem} Proximal mappings of separable functions
+:label: res-prox-separable-func-mapping
+
+Suppose that $f: \VV_1 \oplus \dots \oplus \VV_m \to \RERL$
+is given by
+
+$$
+f(\bx_1, \dots, \bx_m) = \sum_{i=1}^m f_i(\bx_i) 
+\Forall \bx_i \in \VV_i, \quad i=1,\dots, m.
+$$
+
+Then for every $\bx_1 \in \VV_1, \dots, \bx_m \in \VV_m$,
+
+$$
+\prox_f(\bx_1, \dots, \bx_m)
+= \prox_{f_1}(\bx_1) \times \dots \times \prox_{f_m}(\bx_m).
+$$
+```
+
+Note that the theorem is presented in terms of
+sets. The L.H.S. $\prox_f(\bx_1, \dots, \bx_m)$ is a set.
+Similarly, R.H.S. is a Cartesian product of proximal mappings
+$\prox_{f_i}(\bx_i)$ which are individually sets.
+
+
+```{prf:proof}
+We start with the definition of the proximal mapping
+and expand it in terms of the separable functions.
+We note that the quadratic term
+$\frac{1}{2} \| \cdot - \bx \|^2$ is also separable.
+
+
+$$
+\prox_f(\bx) &= \argmin_{\bu} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&=  \argmin_{\bu_1, \dots, \bu_m} \left \{
+    \sum_{i=1}^m f_i(\bu_i) + 
+    \frac{1}{2} \sum_{i=1}^m \| \bu_i - \bx_i \|^2
+    \right\} \\
+&=  \argmin_{\bu_1, \dots, \bu_m} \left \{
+    \sum_{i=1}^m \left (f_i(\bu_i) + 
+    \frac{1}{2} \| \bu_i - \bx_i \|^2
+     \right ) \right\} \\
+&= \prod_{i=1}^m \argmin_{\bu_i}\left \{
+   f_i(\bu_i) +  \| \bu_i - \bx_i \|^2 
+   \right \}\\
+&= \prod_{i=1}^m \prox_{f_i}(\bx_i).
+$$
+Here the $\prod$ symbol denotes the Cartesian product.
+```
+
+```{prf:corollary} Proximal operator for separable convex functions
+:label: res-prox-op-separable-conv-func
+
+Let $f: \RR^n \to \RERL$ be a proper, closed and convex function.
+Assume that $\RR^n = \RR^{n_1} \oplus \dots \oplus \RR^{n_m}$
+with $n = n_1 + \dots + n_m$.
+
+Let $f$ be separable over $\RR^{n_1} \oplus \dots \oplus \RR^{n_m}$
+and given by
+
+$$
+f(\bx_1, \dots, \bx_m) = \sum_{i=1}^m f_i(\bx_i) 
+\Forall \bx_i \in \RR^{n_i}, \quad i=1,\dots, m.
+$$
+Further assume that $f_i$ are proper, closed and convex
+functions themselves.
+
+Then for every $\bx_1 \in \RR^{n_1}, \dots, \bx_m \in \RR^{n_m}$,
+
+$$
+\prox_f(\bx_1, \dots, \bx_m)
+= (\prox_{f_1}(\bx_1), \dots, \prox_{f_m}(\bx_m)).
+$$
+
+In the special case, where $f$ is separable over each
+coordinate; i.e.
+
+$$
+f(\bx) = \sum_{i=1}^n f_i(x_i)
+$$
+
+then
+
+$$
+\prox_f(\bx) = (\prox_{f_1}(x_1),\dots, \prox_{f_n}(x_n)).
+$$
+```
+
+```{prf:proof}
+Since $f$ and $f_i$ are proper, closed and convex, hence
+due to {prf:ref}`res-prox-first-prox-theorem`,
+the proximal mappings $\prox_f(\bx)$ and
+$\prox_{f_i}(\bx_i)$ are singletons.
+In this case, the Cartesian product reduces
+to the concatenation of coordinates. 
+```
+
+Applications:
+{prf:ref}`ex-prox-scaled-l1-norm`.
+
+(sec:proximal:examples)=
+## Examples
 
 Some key ideas that will be repeatedly used in the computation 
 of the proximal operator in this section.
@@ -285,6 +402,8 @@ but not at the boundary points.
    at a point of differentiability where the
    gradient vanishes or at the boundary where
    it is nondifferentiable.
+
+### 1-dim Examples
 
 ```{prf:example} Linear over $\RR_+$
 :label: ex-prox-linear-rplus
@@ -578,12 +697,7 @@ $$
 ```
 
 
-## n-dim Examples of Proximal Operators
-
-
-
-
-### Affine
+### Affine Functions
 
 ```{prf:example} Affine function
 :label: ex-prox-affine
@@ -605,7 +719,7 @@ $$
 $$
 ```
 
-### Convex Quadratic
+### Convex Quadratic Functions
 
 
 ```{prf:example} Convex quadratic
@@ -639,3 +753,65 @@ $$
 $$
 ```
 
+
+### Norms
+
+```{prf:example} Scaled $\ell_1$ norm
+:label: ex-prox-scaled-l1-norm
+
+Let $\gamma > 0$.
+Let $f : \RR^n \to \RR$ be given by
+
+$$
+f(\bx) = \gamma \| \bx \|_1 = \sum_{i=1}^n \gamma |x_i|.
+$$
+
+Then, the proximal operator is given by
+
+$$
+\prox_f(\bx) = \st_{\gamma}(\bx)
+$$
+
+where the univariate soft-thresholding operator 
+$\st_{\gamma} : \RR \to \RR$ is defined as
+
+$$
+\st_{\gamma}(x) = \begin{cases}
+ x - \gamma & \text{for} & x > \gamma \\
+ x + \gamma & \text{for} & x < -\gamma \\
+ 0 & \text{for} & |x| \le \gamma
+\end{cases}
+$$
+
+and the multivariate soft-thresholding operator
+$\st_{\gamma} : \RR^n \to \RR$
+is defined by the component wise application of
+the univariate soft thresholding operator
+
+$$
+\st_{\gamma}(\bx) = (\st_{\gamma}(x_j))_{j=1}^n.
+$$
+```
+
+```{prf:proof}
+We note that 
+
+$$
+f(\bx) = \sum_{i=1}^n g(x_i)
+$$
+where $g(x) = \gamma | x|$.
+
+By {prf:ref}`ex-prox-scaled-abs-value`,
+
+$$
+\prox_g(x) =  [|x| - \gamma]_+ \sgn (x)
+= \st_{\gamma}(x).
+$$
+
+By {prf:ref}`res-prox-op-separable-conv-func`,
+
+$$
+\prox_f(\bx) = (\st_{\gamma}(x_i))_{i=1}^n
+= \st_{\gamma}(\bx).
+$$
+```
