@@ -42,14 +42,31 @@ $$
 $$
 ```
 
+This is a very simple example. The proximal point
+for every point is the same point. 
+Note that the gradient of the zero function
+is zero everywhere. So every point in the
+domain of $f$ is an optimal point from
+the perspective of maximization or minimization.
+Thus the proximal mapping doesn't need move
+to a different point.
+
 ### Zero Everywhere Except at $x=0$ Functions
 
 Let us look at real functions which are
 zero everywhere except at $x=0$. 
 There are two possibilities.
+$f(x)$ is positive or negative at $x=0$.
+The two examples below illustrate the
+point to set nature of proximal mappings.
+We show different situations where
+the number of proximal points for a given
+point is one, two or zero.
 
 
 ```{prf:example} Negative value at $x=0$
+:label: ex-prox-map-neg-val-at-zero
+
 Let $t > 0$.
 Let $f: \RR \to \RR$ be given as
 
@@ -71,6 +88,12 @@ $$
 $$
 ```
 
+This example clearly demonstrates the point to set mapping
+nature of the proximal mapping. While for most values
+of $x$, the proximal mapping is a singleton, but
+for $|x| = \sqrt{ 2 t}$, the proximal mapping consists
+of a set of two different values.
+
 ```{prf:proof}
 We start by constructing the function
 
@@ -78,11 +101,106 @@ $$
 h_x(u) = f(u) + \frac{1}{2} (u  - x )^2
 = \begin{cases}
 \frac{1}{2} (u  - x )^2 & u \neq 0;\\
-- t + \frac{1}{2} (u  - x )^2 & u = 0.
+- t + \frac{1}{2} x^2 & u = 0.
 \end{cases}
 $$
 
+Consider the case where $x \neq 0$.
 
+1. The minimum value of $\frac{1}{2} (u  - x )^2$ is $0$ attained at $u=x$
+   and it is valid since $u = x \neq 0$.
+1. The value of $- t + \frac{1}{2} x^2$ is attained at $u=0$.
+1. There are three possibilities.
+1. If $0 > - t + \frac{1}{2} x^2$, then the unique minimizer
+   of $h_x$ is at $u=0$.
+   The condition can be written as $|x| < \sqrt{2 t}$ and $x \neq 0$.
+1. If $0 < - t + \frac{1}{2} x^2$, then the unique minimizer
+   of $h_x$ is at $u=x$.
+   The condition can be written as $|x| > \sqrt{2 t}$.
+1. If $0 = - t + \frac{1}{2} x^2$, then $u=0$ and $u=x$ are
+   both minimizers of $h_x$.
+   The condition can be written as $|x| = \sqrt{2 t}$.
+
+Now the case of $x=0$.
+
+1. The term $- t + \frac{1}{2} x^2$ reduces to $-t < 0$ at $u=0$.
+1. The term $\frac{1}{2}(u  - x )^2$ reduces to $\frac{1}{2} u^2 > 0$ for all $u \neq 0$.
+1. Thus, the minimizer is at $u=0$.
+1. We note that the minimizer agrees with the result obtained for the
+   case of $|x| < \sqrt{2 t}$ above where $x \neq 0$.
+
+In conclusion, we see that
+
+1. For $|x | < \sqrt{2 t}$, the minimizer is $u=0$.
+1. For $|x| > \sqrt{2 t}$, the minimizer is $u=x$.
+1. For $|x| = \sqrt{2 t}$, there are two minimizers, $u=0$ and $u=x$.
+```
+
+
+```{prf:example} Positive value at $x=0$
+:label: ex-prox-map-pos-val-at-zero
+
+Let $t > 0$.
+Let $f: \RR \to \RR$ be given as
+
+$$
+f(x) = \begin{cases}
+0 & x \neq 0;\\
+t & x = 0.
+\end{cases}
+$$
+
+The proximal mapping is given by
+
+$$
+\prox_f(x) = \begin{cases}
+\{ x \}, & x \neq 0;\\
+\EmptySet & x = 0.
+\end{cases}
+$$
+```
+
+This example illustrates the fact that the proximal mapping
+may be empty in some cases. In other words, for some points,
+there are no proximal points.
+
+```{prf:proof}
+We start by constructing the function
+
+$$
+h_x(u) = f(u) + \frac{1}{2} (u  - x )^2
+= \begin{cases}
+\frac{1}{2} (u  - x )^2 & u \neq 0;\\
+t + \frac{1}{2} x^2 & u = 0.
+\end{cases}
+$$
+
+Consider the case where $x \neq 0$.
+
+1. The minimum value of $\frac{1}{2} (u  - x )^2$ is $0$ attained at $u=x$
+   and it is valid since $u = x \neq 0$.
+1. The term $t + \frac{1}{2} x^2  > 0$ for $u=0$.
+1. Thus the minimizer is at $u=x$ for all $x \neq 0$.
+
+Now consider the case where $x=0$.
+
+1. The function $h_x$ reduces to
+
+   $$
+   h_x(u) = \begin{cases}
+      \frac{1}{2} u^2 & u \neq 0;\\
+      t & u = 0.
+      \end{cases}
+   $$
+1. We can see that $\inf_{u \in \RR} h_x(u) = 0$.
+1. However, $h_x$ doesn't attain the value $0$ for any $u \in \RR$.
+1. Hence, the set of minimizers is empty.
+
+
+In conclusion, this function 
+
+1. has a unique minimizer $u=x$ for all $x \neq 0$.
+1. has no minimizer for $x=0$.
 ```
 
 
@@ -424,6 +542,15 @@ Applications:
 
 (sec:proximal:examples)=
 ## Examples
+Remainder of this section will be dedicated for the
+computation of proximal mappings or operators
+for different functions. Most of these functions
+are convex (with the exception of a few).
+The proximal mappings will be computed either
+from the first principles (by solving the
+minimization problem of $f(u) + \frac{1}{2}\| \bu - \bx \|^2$)
+or by making use of the proximal calculus rules developed above.
+
 
 Some key ideas that will be repeatedly used in the computation 
 of the proximal operator in this section.
@@ -448,7 +575,9 @@ but not at the boundary points.
    gradient vanishes or at the boundary where
    it is nondifferentiable.
 
-### 1-dim Examples
+## 1-dim Examples
+
+### Linear
 
 ```{prf:example} Linear over $\RR_+$
 :label: ex-prox-linear-rplus
@@ -492,6 +621,8 @@ $$
    which is the only point of nondifferentiability in its domain.
 1. Thus, if $x \leq \mu$, then the minimizer is $u=0$.
 ```
+
+### Absolute Value
 
 ```{prf:example} Scaled absolute value
 :label: ex-prox-scaled-abs-value
@@ -548,6 +679,8 @@ $$
    \prox_f(x) = [|x| - t]_+ \sgn (x).
    $$
 ```
+
+### Cube
 
 ```{prf:example} Scaled cube over $\RR_+$
 :label: ex-prox-scaled-cube-plus
@@ -621,6 +754,9 @@ $$
 1. This concludes the proof.
 ```
 
+
+### Logarithms
+
 ```{prf:example} Scaled negative logarithm
 :label: ex-prox-scaled-neg-log
 
@@ -672,6 +808,7 @@ domain. Since $h_x$ must have a unique minimizer,
 hence $h'_x(u) = 0$ must have a unique positive solution.
 ```
 
+### Indicator Functions
 
 ```{prf:example} Indicator function for an interval
 :label: ex-prox-indicator-interval
@@ -742,7 +879,7 @@ $$
 ```
 
 
-### Affine Functions
+## Affine Functions
 
 ```{prf:example} Affine function
 :label: ex-prox-affine
@@ -764,7 +901,7 @@ $$
 $$
 ```
 
-### Convex Quadratic Functions
+## Convex Quadratic Functions
 
 
 ```{prf:example} Convex quadratic
@@ -799,7 +936,9 @@ $$
 ```
 
 
-### Norms
+## Norms
+
+### $\ell_1$ Norm
 
 ```{prf:example} Scaled $\ell_1$ norm
 :label: ex-prox-scaled-l1-norm
@@ -861,6 +1000,8 @@ $$
 $$
 ```
 
+### $\ell_0$ "Norm"
+
 ```{prf:example} Scaled $\ell_0$ "norm"
 :label: ex-prox-scaled-l0-norm
 
@@ -918,11 +1059,32 @@ h(x) = \begin{cases}
 \end{cases} 
 $$
 
+1. Following {prf:ref}`ex-prox-map-neg-val-at-zero`,
 
+
+   $$
+  \prox_h(x) = \begin{cases}
+  \{ 0 \}, & |x| < \sqrt{2 \gamma},\\
+  \{ x \} & |x| > \sqrt{2 \gamma}, \\
+  \{ 0, x \} & | x | = \sqrt {2 \gamma}.
+  \end{cases}
+  $$
+1. Since the proximal operator is not affected by a constant offset,
+   hence $\prox_g = \prox_h$.
+1. We can see that $\prox_g = \HHH_{\sqrt{2 \gamma}}$.
+1. It is clear that the proximal mappings are not unique.
+1. By {prf:ref}`res-prox-separable-func-mapping`,
+   
+   $$
+   \prox_f(\bx) = \prox_g(x_1) \times \dots \times \prox_g(x_n)
+   = \HHH_{\sqrt{2\gamma}}(x_1) \times \dots 
+    \times \HHH_{\sqrt{2\gamma}}(x_n)
+   $$
+   as desired.
 ```
 
 
-### Logarithms
+## Logarithms
 
 ```{prf:example} Negative sum of logs
 :label: ex-prox-neg-sum-log
