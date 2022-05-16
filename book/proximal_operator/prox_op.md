@@ -726,6 +726,7 @@ from the objective function as and
 when required in the derivation above.
 ```
 
+Applications: {prf:ref}`ex-prox-linear-z-a-interval`.
 
 (sec:proximal:examples)=
 ## Examples
@@ -763,6 +764,77 @@ but not at the boundary points.
    it is nondifferentiable.
 
 ## 1-dim Examples
+
+
+### Indicator Functions
+
+```{prf:example} Indicator function for an interval
+:label: ex-prox-indicator-interval
+
+Let $r \in [0, \infty]$.
+Let $f : \RR \to \RERL$ be given by
+
+$$
+f(x) = I_{[0,r] \cap \RR}(x).
+$$
+
+The proximal operator is given by
+
+$$
+\prox_f(x) = \min \{ \max \{x, 0 \}, r \}.
+$$
+```
+
+```{prf:proof}
+.
+
+1. We construct the objective function
+
+   $$
+   h_x(u) = I_{[0,r] \cap \RR}(x) +  \frac{1}{2} (u - x)^2.
+   $$
+1. Let $\tilde{u}$ denote the minimizer of $h_x(u)$.
+1. Let $w$ denote the function $w(u) =  \frac{1}{2} (u - x)^2$.
+1. First consider the case where $r < \infty$.
+1. Then $h_x(u) = w(u)$ over $[0, r]$ and $\infty$ otherwise.
+1. $\dom h_x = [0, r]$. $\interior \dom h_x = (0, r)$.
+   The boundary points are $0$ and $r$.
+1. The minimizer of $w(u)$ is $u = x$.
+1. Therefore if $0 \leq x \leq r$, then $\tilde{u} = x$.
+1. For the cases where $x \notin [0, r]$, the minimizer
+   must be one of the boundary points.
+1. If $x < 0$, then $w(u)$ is an increasing function over
+   $[0, r]$.
+1. Hence for $x < 0$, $\tilde{u} = 0$.
+1. If $x > r$, then $w(u)$ is a decreasing function over $[0,r]$.
+1. Hence for $x > r$, $\tilde{u} = r$.
+1. Thus, if $r < \infty$, then the proximal operator
+   is given by
+
+   $$
+   \prox_f(x) = \begin{cases}
+   x, & 0 \leq x \leq r \\
+   0, & x < 0 \\
+   r, & x > r
+   \end{cases}
+   = \min \{ \max \{x, 0 \}, r \}.
+   $$
+1. For $r = \infty$, $f(x) = I_{[0, \infty)}(x)$.
+1. Thus, $h_x(u) = w(u)$ for $u \geq 0$.
+1. Hence the minimizer $\tilde{u} = x$ for $x \geq 0$ and
+   $\tilde{u} = 0$ for $x < 0$.
+1. In other words, 
+
+   $$
+   \prox_f(x) = [x]_+ = \max\{x, 0\}
+   = \min \{ \max \{x, 0 \}, \infty \}.
+   $$
+1. Combining these two cases
+
+   $$
+   \prox_f(x) = \min \{ \max \{x, 0 \}, r \}.
+   $$
+```
 
 ### Linear
 
@@ -808,6 +880,54 @@ $$
    which is the only point of nondifferentiability in its domain.
 1. Thus, if $x \leq \mu$, then the minimizer is $u=0$.
 ```
+
+
+```{prf:example} Linear over an interval $[0, a]$
+:label: ex-prox-linear-z-a-interval
+
+Let $\mu \in \RR$ and let $a \in [0, \infty]$.
+Let $f : \RR \to \RERL$ be given by
+
+$$
+f(x) = \begin{cases}
+\mu x, & x \in [0, a]; \\
+\infty, & \text{ otherwise}.
+\end{cases}
+$$
+
+The proximal operator is given by
+
+$$
+\prox_f(x) = \min \{ \max \{x - \mu, 0 \}, a \}.
+$$
+```
+
+```{prf:proof}
+We note that
+
+$$
+f(x) = I_{[0,a] \cap \RR}(x) + \mu x.
+$$
+
+1. From {prf:ref}`ex-prox-indicator-interval`, the proximal operator for the
+   indicator function is given by
+
+   $$
+   \prox_{I_{[0,a] \cap \RR}}(x) = \min \{ \max \{x, 0 \}, a \}.
+   $$
+1. We can write $f$ as a quadratic perturbation of $I_{[0,a] \cap \RR}$ given by
+
+   $$
+   f(x) = I_{[0,a] \cap \RR}(x) + \frac{0}{2} x^2 + \mu x + 0. 
+   $$
+1. Following {prf:ref}`res-prox-quadratic-perturbation`,
+
+   $$
+   \prox_f(x) = \prox_{I_{[0,a] \cap \RR}}(x - \mu)
+   = \min \{ \max \{x - \mu, 0 \}, a \}.
+   $$
+```
+
 
 ### Absolute Value
 
@@ -993,76 +1113,6 @@ As we can see, $\dom h_x$ is the open set $\RR_{++}$
 and $h_x$ is differentiable at every point in its
 domain. Since $h_x$ must have a unique minimizer,
 hence $h'_x(u) = 0$ must have a unique positive solution.
-```
-
-### Indicator Functions
-
-```{prf:example} Indicator function for an interval
-:label: ex-prox-indicator-interval
-
-Let $r \in [0, \infty]$.
-Let $f : \RR \to \RERL$ be given by
-
-$$
-f(x) = I_{[0,r] \cap \RR}(x).
-$$
-
-The proximal operator is given by
-
-$$
-\prox_f(x) = \min \{ \max \{x, 0 \}, r \}.
-$$
-```
-
-```{prf:proof}
-.
-
-1. We construct the objective function
-
-   $$
-   h_x(u) = I_{[0,r] \cap \RR}(x) +  \frac{1}{2} (u - x)^2.
-   $$
-1. Let $\tilde{u}$ denote the minimizer of $h_x(u)$.
-1. Let $w$ denote the function $w(u) =  \frac{1}{2} (u - x)^2$.
-1. First consider the case where $r < \infty$.
-1. Then $h_x(u) = w(u)$ over $[0, r]$ and $\infty$ otherwise.
-1. $\dom h_x = [0, r]$. $\interior \dom h_x = (0, r)$.
-   The boundary points are $0$ and $r$.
-1. The minimizer of $w(u)$ is $u = x$.
-1. Therefore if $0 \leq x \leq r$, then $\tilde{u} = x$.
-1. For the cases where $x \notin [0, r]$, the minimizer
-   must be one of the boundary points.
-1. If $x < 0$, then $w(u)$ is an increasing function over
-   $[0, r]$.
-1. Hence for $x < 0$, $\tilde{u} = 0$.
-1. If $x > r$, then $w(u)$ is a decreasing function over $[0,r]$.
-1. Hence for $x > r$, $\tilde{u} = r$.
-1. Thus, if $r < \infty$, then the proximal operator
-   is given by
-
-   $$
-   \prox_f(x) = \begin{cases}
-   x, & 0 \leq x \leq r \\
-   0, & x < 0 \\
-   r, & x > r
-   \end{cases}
-   = \min \{ \max \{x, 0 \}, r \}.
-   $$
-1. For $r = \infty$, $f(x) = I_{[0, \infty)}(x)$.
-1. Thus, $h_x(u) = w(u)$ for $u \geq 0$.
-1. Hence the minimizer $\tilde{u} = x$ for $x \geq 0$ and
-   $\tilde{u} = 0$ for $x < 0$.
-1. In other words, 
-
-   $$
-   \prox_f(x) = [x]_+ = \max\{x, 0\}
-   = \min \{ \max \{x, 0 \}, \infty \}.
-   $$
-1. Combining these two cases
-
-   $$
-   \prox_f(x) = \min \{ \max \{x, 0 \}, r \}.
-   $$
 ```
 
 
