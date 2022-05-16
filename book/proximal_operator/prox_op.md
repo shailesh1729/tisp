@@ -26,7 +26,16 @@ $$
   minimize the R.H.S..
 * The set of points which minimize the R.H.S. are known as *proximal points*
   for a given $\bx$ w.r.t. the function $f$.
-* The set of *proximal points* may be empty, singleton or have more than one points. 
+* The set of *proximal points* may be empty, singleton or have more than one points.
+* The function $h_{\bx} : \VV \to \RR$ given by
+
+  $$
+  h_{\bx}(\bu) = f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+  $$
+  is the objective function for the computation of the proximal points
+  for a given point $\bx \in \VV$.
+* The proximal points of $\bx$ are the minimizers of the problem
+  of unconstrained minimization of $h_{\bx}$.
 ```
 
 ### Zero Function
@@ -95,7 +104,7 @@ for $|x| = \sqrt{ 2 t}$, the proximal mapping consists
 of a set of two different values.
 
 ```{prf:proof}
-We start by constructing the function
+We start by constructing the objective function
 
 $$
 h_x(u) = f(u) + \frac{1}{2} (u  - x )^2
@@ -607,6 +616,63 @@ $$
 ```
 
 
+```{prf:theorem} Proximal mapping for $t g ( \cdot / t)$
+:label: res-prox-in-out-same-scale
+
+Let $g: \VV \to \RERL$ be a proper function.
+Let $t \neq 0$ be a scaling parameter.
+Define $f: \VV \to \RERL$ as
+
+$$
+f(\bx) = t g\left (\frac{\bx}{t} \right).
+$$
+Then
+
+$$
+\prox_f (\bx) = t \, \prox_{g / t} (\bx / t).
+$$
+```
+
+```{prf:proof}
+Starting from the definition of the proximal mapping
+
+$$
+\prox_f(\bx) &= \argmin_{\bu \in \VV} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&= \argmin_{\bu \in \VV} \left \{
+    t g\left (\frac{\bu}{t} \right ) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\}.
+$$
+
+1. The objective function is
+
+   $$
+   t g(\frac{\bu}{t}) + \frac{1}{2} \| \bu - \bx \|^2.
+   $$
+1. Introduce a change of variable $\bz = \frac{\bu}{t}$.
+1. Then $\bu = t \bz$.
+1. The objective function changes to
+
+   $$
+   & t g(\bz) + \frac{1}{2} \| t \bz - \bx \|^2 \\
+   & = t^2 \left [
+   \frac{g(\bz)}{t} + \frac{1}{2} \left \| \bz - \frac{\bx}{t} \right \|^2
+   \right ].
+   $$
+1. The minimizers of this objective function are given by
+
+   $$
+   \bz \in \prox_{g / t} (\bx / t).
+   $$
+1. The minimizers of the original objective function are then given by
+
+   $$
+   \bu \in t \, \prox_{g / t} (\bx / t).
+   $$
+```
+
+
 
 (sec:proximal:examples)=
 ## Examples
@@ -772,7 +838,7 @@ $$
 ```{prf:proof}
 .
 
-1. We construct the auxiliary function
+1. We construct the objective function
 
    $$
    h_x(u) = f(u) +  \frac{1}{2} (u - x)^2 
@@ -848,7 +914,7 @@ $$
 ```{prf:proof}
 .
 
-1. We construct the auxiliary function
+1. We construct the objective function
 
    $$
    h_x(u) = f(u) +  \frac{1}{2} (u - x)^2 
@@ -898,7 +964,7 @@ $$
 ```{prf:proof}
 .
 
-1. Let
+1. We construct the objective function
 
    $$
    h_x(u) = I_{[0,r] \cap \RR}(x) +  \frac{1}{2} (u - x)^2.
