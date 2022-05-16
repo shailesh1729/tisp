@@ -673,6 +673,59 @@ $$
 ```
 
 
+### Quadratic Perturbation
+
+
+```{prf:theorem} Quadratic perturbation
+:label: res-prox-quadratic-perturbation
+
+Let $g: \VV \to \RERL$ be a proper function.
+Define $f: \VV \to \RERL$ as
+
+$$
+f(\bx) = g(\bx) + \frac{c}{2} \| \bx \|^2 + \langle \bx, \ba \rangle + d
+$$
+where $c > 0$, $\ba \in \VV$ and $d \in \RR$.
+Then
+
+$$
+\prox_f (\bx) = \prox_{\frac{1}{c+1} g} \left ( \frac{\bx - \ba}{ c + 1} \right ).
+$$
+```
+
+```{prf:proof}
+Starting from the definition of the proximal mapping
+
+$$
+\prox_f(\bx) &= \argmin_{\bu \in \VV} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&= \argmin_{\bu \in \VV} \left \{
+    g(\bu) + \frac{c}{2} \| \bu \|^2 + \langle \bu, \ba \rangle + d + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&= \argmin_{\bu \in \VV} \left \{
+    g(\bu) + \frac{c+1}{2} \| \bu \|^2 + \langle \bu, \ba - \bx \rangle + \frac{1}{2} \| \bx \|^2 + d
+    \right\} \\
+&= \argmin_{\bu \in \VV} \left \{
+    g(\bu) + \frac{c+1}{2} \left (\| \bu \|^2 - 
+      2 \left \langle \bu, \frac{\bx - \ba}{c + 1} \right \rangle \right )
+    \right\} \\
+&= \argmin_{\bu \in \VV} \left \{
+    g(\bu) + \frac{c+1}{2} \left \|\bu -  \left (\frac{\bx - \ba}{ c + 1} \right ) \right \|^2
+    \right\}\\
+&= \argmin_{\bu \in \VV} \left \{
+    \left (\frac{1}{c + 1}g \right )(\bu) 
+    + \frac{1}{2} \left \|\bu -  \left (\frac{\bx - \ba}{ c + 1} \right ) \right \|^2
+    \right\}\\
+&= \prox_{\frac{1}{c+1} g} \left ( \frac{\bx - \ba}{ c + 1} \right ).
+$$
+
+Since the quantities $\bx$, $\ba$ and $d$ are constant w.r.t. $\bu$, hence
+we have removed or added terms which solely depend on these quantities
+from the objective function as and
+when required in the derivation above.
+```
+
 
 (sec:proximal:examples)=
 ## Examples
