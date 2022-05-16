@@ -540,6 +540,74 @@ to the concatenation of coordinates.
 Applications:
 {prf:ref}`ex-prox-scaled-l1-norm`.
 
+
+### Scaling and Translation
+
+```{prf:theorem} Scaling and translation of input
+:label: res-prox-input-scale-translate
+
+Let $g: \VV \to \RERL$ be a proper function.
+Let $t \neq 0$ be a scaling parameter and
+$\ba \in \VV$ be a translation parameter.
+Define $f: \VV \to \RERL$ as
+
+$$
+f(\bx) = g(t \bx + \ba).
+$$ 
+
+Then given $\prox_g$, the $\prox_f$ is
+
+$$
+\prox_f(\bx) = \frac{1}{t} [\prox_{t^2 g}(t \bx + \ba) - \ba].
+$$
+```
+
+```{prf:proof}
+Starting from the definition of the proximal mapping
+
+$$
+\prox_f(\bx) &= \argmin_{\bu \in \VV} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&= \argmin_{\bu \in \VV} \left \{
+    g(t \bu + \ba) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\}.
+$$
+1. The objective function of this minimization problem is
+
+   $$
+   g(t \bu + \ba) + \frac{1}{2} \| \bu - \bx \|^2.
+   $$
+1. We introduce a change of variable $\bz = t \bu + \ba$
+   to construct an equivalent minimization problem.
+   See {prf:ref}`res-opt-eq-form-change-variables` for the
+   construction of equivalent optimization problems by change of variable.
+1. Then $\bu = \frac{1}{t}(\bz - \ba)$.
+1. The objective function changes to
+
+   $$
+   & g(\bz) + \frac{1}{2} \left \| \frac{1}{t}(\bz - \ba) - \bx \right \|^2 \\
+   &= \frac{1}{t^2}\left [
+   (t^2 g)(\bz) + \frac{1}{2} \left \| \bz - (t\bx + \ba) \right \|^2
+   \right].
+   $$
+1. The minimizers of this objective function (over $\bz$) are given by
+
+   $$
+   \bz \in \prox_{t^2 g}(t \bx + \ba).
+   $$
+   Note that the scaling term $\frac{1}{t^2}$ in the objective function
+   doesn't impact the set of minimizers. It only impacts the optimal value.
+1. Since $\bu = \frac{1}{t}(\bz - \ba)$,
+   hence minimizers of the original objective function are given by
+
+   $$
+   \bu \in \frac{1}{t} [\prox_{t^2 g}(t \bx + \ba) - \ba].
+   $$
+```
+
+
+
 (sec:proximal:examples)=
 ## Examples
 Remainder of this section will be dedicated for the
