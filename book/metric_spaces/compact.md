@@ -25,6 +25,7 @@ is an *open cover* of $A$ if it covers $A$.
 
 
 ```{prf:theorem} Lindelöf
+:label: res-ms-lindelof  
 
 Every open cover of a subset of $\RR^m$ can be reduced to 
 an at-most countable subcover.
@@ -322,6 +323,8 @@ every sequence in $A$ has a convergent subsequence that converges
 to a point in $A$.
 ```
 ```{prf:observation}
+:label: res-ms-compact-bolzano-weierstrass-prop
+
 A compact set has the Bolzano-Weierstrass property.
 ```
 
@@ -548,6 +551,8 @@ Now, assume that $f$ is bijective too.
 
 
 ```{prf:theorem} Compact domain + Continuity = Uniform continuity
+:label: res-ms-compact-dom-continuity-uniform
+
 Let $f: (X, d) \to (Y, \rho)$ be {prf:ref}`continuous <def-ms-continuous-function>` on $X$.
 If $X$ is compact, then $f$ is 
 {prf:ref}`uniformly continuous <def-ms-uniform-continuity>`.
@@ -723,7 +728,7 @@ $$
 ```
 
 
-```{prf:theorem}
+```{prf:theorem} Compactness implies total boundedness
 :label: res-ms-compact-is-totally-bounded
 
 A compact metric space is totally bounded.
