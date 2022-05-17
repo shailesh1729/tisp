@@ -728,6 +728,60 @@ when required in the derivation above.
 
 Applications: {prf:ref}`ex-prox-linear-z-a-interval`.
 
+
+### Composition with Affine Mapping
+
+```{prf:theorem} Composition with affine mapping
+:label: res-prox-composition-affine
+
+Let $g: \RR^m \to \RERL$ be a proper, closed and convex function.
+Let $f: \VV \to \RERL$ be given by
+
+$$
+f(\bx) = g(\bAAA(\bx) + \bb)
+$$
+where $\bb \in \RR^m$  and $\bAAA : \VV \to \RR^m$ is a linear transformation
+satisfying the property
+
+$$
+\bAAA \circ \bAAA^T = \alpha \bI 
+$$
+for some constant $\alpha > 0$ and $\bI: \VV \to \VV$
+is the identity transformation.
+
+Then for any $\bx \in \VV$,
+
+$$
+\prox_f(\bx) = \bx + \frac{1}{\alpha} \bAAA^T
+(\prox_{\alpha g}(\bAAA(\bx) + \bb) - \bAAA(\bx) - \bb).
+$$ 
+```
+
+```{prf:proof}
+Starting from the definition of the proximal mapping
+
+$$
+\prox_f(\bx) &= \argmin_{\bu \in \VV} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&= \argmin_{\bu \in \VV} \left \{
+    g(\bAAA(\bu) + \bb) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\}.
+$$
+
+1. Introduce a variable $\bz = \bAAA(\bu) + \bb$.
+1. The optimization problem transforms to
+
+   $$
+   & \min_{\bu \in \VV, \bz \in \RR^m} & g(\bz) + \frac{1}{2} \| \bu - \bx \|^2 \\
+   & \text{ subject to } & \bz  = \bAAA(\bu) + \bb$.
+   $$
+1. Since $g$ is proper, closed and convex, hence this problem has a unique solution.
+   TODO. HOW? 
+1. Let the optimal solution be given by $\bz^* \bu^*$. 
+```
+
+
 (sec:proximal:examples)=
 ## Examples
 Remainder of this section will be dedicated for the
