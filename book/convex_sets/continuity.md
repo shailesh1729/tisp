@@ -242,6 +242,25 @@ $$
 
 ## Continuity
 
+Recall from {prf:ref}`def-ms-continuous-function` that
+a function $f: \VV \to \RERL$ is continuous at a point
+$\ba \in \dom f$ if for every $\epsilon > 0$,
+there exists $\delta > 0$
+(depending on $\epsilon$ and $\ba$) such that
+for every $\bx \in \dom f$
+
+$$
+\| \bx - \ba \| < \delta \implies | f(\bx) - f(\ba) | < \epsilon
+$$
+holds true.
+In other words, 
+
+$$
+| f(\bx) - f(\ba) | < \epsilon \text{ for every }
+\bx \in B(\ba, \delta) \cap S.
+$$
+
+
 Convex functions are not necessarily continuous on non-open sets.
 
 ```{prf:example} A convex function which is not continuous
@@ -263,6 +282,129 @@ continuous (from the left) at $x=1$.
 Convex functions are continuous at points in the
 interior of their domain.
 
+### Continuity of Univariate Closed Convex Functions
+
+
+```{prf:theorem} Continuity of closed convex univariate functions
+:label: res-cvxf-convex-closed-univariate
+
+Let $f: \RR \to \RERL$ be a proper closed and convex function.
+Then, $f$ is continuous over $\dom f$.
+```
+
+```{prf:proof}
+Since $f$ is convex, hence its domain is convex. Hence
+$\dom f$ must be an interval $I$. 
+
+1. If $\interior I = \EmptySet$, then $I$ must be a singleton.
+1. In that case $f$ is continuous obviously.
+1. Now consider the case where $\interior I \neq \EmptySet$.
+1. Then, due to {prf:ref}`res-cvxf-convex-local-lipschitz-continuous`,
+   $f$ is continuous at every $x \in \interior I$.
+1. If $I$ is open (i.e., it has no endpoints), then there is
+   nothing more to prove.
+1. We are left with showing the (one sided) continuity of $f$
+   at one of the endpoints of $I$ if it has any.
+1. Since, the argument will be identical for either of the
+   endpoints, without loss of generality, let us assume
+   that $I$ has a left endpoint $a$ and we show the continuity
+   from the right at $a$; i.e. $\lim_{x \to a^+} f(x) = f(a)$.
+1. Pick any $c \in I$ such that $c > a$.
+1. Define a function
+
+   $$
+   g(t) = \frac{f(c -t) - f(c)}{t}.
+   $$
+1. Clearly, $g$ is defined over $(0, c-a]$.
+1. We shall show that $g$ is nondecreasing and upper bounded
+   over $(0, c-a]$.
+1. Pick any $t,s$ satisfying $0 < t \leq s \leq c-a$.
+1. Then,
+
+   $$
+   c - t = \left (1 - \frac{t}{s} \right ) c + \frac{t}{s} (c - s).
+   $$
+1. $\frac{t}{s}$ is well defined and $\frac{t}{s} \in (0, 1]$.
+1. Thus, $c-t$ is a convex combination of $c$ and $c-s$.
+1. Since $f$ is convex, hence
+
+   $$
+   & f(c - t) \leq \left (1 - \frac{t}{s} \right ) f(c) + \frac{t}{s} f(c - s)\\
+   & \iff f(c - t) - f(c) \leq \frac{t}{s} (f(c -s) - f(c)) \\
+   &\iff \frac{f(c - t) - f(c)}{t} \leq \frac{f(c -s) - f(c)}{s}.
+   $$
+1. Thus,
+   
+   $$
+   g(t) \leq g(s) \Forall 0 < t \leq s \leq c-a.
+   $$
+1. Thus, $g$ is nondecreasing over $(0, c-a]$.
+1. Finally $g(c-a) = \frac{f(a) - f(c)}{c - a}$ is finite since both $c,a \in \dom f$.
+1. Since $g$ is nondecreasing, hence
+
+   $$
+   g(t) \leq g(c -a) \Forall t \in (0, c-a].
+   $$
+1. Thus, $g$ is upper bounded.
+1. Since $g$ is nondecreasing and upper bounded,
+   hence due to {prf:ref}`res-bra-rf-monotonic-func-limits`,
+   the left hand limit of $g(t)$ at $c-a$ exists and 
+   is equal to some real number, say, 
+
+   $$
+   \lim_{t \to (c-a)^-} g(t) = \ell.
+   $$
+   Note that we haven't said that $g$ is continuous from the left at $c-a$.
+1. Recall from the definition of $g$ that
+   
+   $$
+   f(c-t) = f(c) + t g(t).
+   $$
+1. Hence
+
+   $$
+   \lim_{t \to (c-a)^-} f(c -t) = f(c) + (c-a) \ell.
+   $$
+1. Replacing $c-t$ by $r$, we get
+
+   $$
+   \lim_{r \to a^+} f(r) = f(c) + (c - a) \ell.
+   $$
+1. We have shown so far that the limit from the right at $a$ exists
+   for $f$ and is equal to $f(c) + (c - a) \ell$.
+1. Using the upper bound on $g$, we can say that
+   
+   $$
+   f(c -t) 
+   &= f(c) + t g(t) \\
+   &\leq f(c) + (c-a) g(c-a) \\
+   &= f(c) + f(a) - f(c) = f(a)
+   $$
+   holds true for every $t \in (0, c-a]$.
+1. Thus,
+
+   $$
+   \lim_{r \to a^+} f(r) = \lim_{t \to (c-a)^-} f(c -t)  \leq f(a).
+   $$
+1. On the other hand, since $f$ is closed, hence it is also
+   lower semicontinuous. This means that
+
+   $$
+   \lim_{r \to a^+} f(r)  \geq f(a).
+   $$
+1. Combining these two inequalities, we get
+
+   $$
+   \lim_{r \to a^+} f(r)  = f(a).
+   $$
+1. Thus, $f$ is indeed continuous from the right at $a$.
+1. Similarly, if $I$ has a right endpoint $b$,
+   then $f$ is continuous from the left at $b$.
+1. Thus, $f$ is continuous at every point in its domain.
+```
+
+
+### Local Lipschitz Continuity
 
 ```{prf:theorem} Local Lipschitz continuity of convex functions
 :label: res-cvxf-convex-local-lipschitz-continuous
@@ -276,6 +418,9 @@ $$
 |f (\bx) - f(\ba)| \leq L \| \bx - \ba \|
 $$
 for every $\bx \in B[\ba, r]$.
+
+In other words, $f$ is locally Lipschitz continuous at
+every interior point of its domain.
 ```
 
 We recall from {prf:ref}`res-cvx-convex-set-empty-interior`
@@ -379,7 +524,7 @@ We now show that $f$ is bounded on $B[\ba, r]$.
    1. Note that
 
       $$
-      \| \bv_i - \ba \| = r \| \bw_i \| 
+      \| \bv_i - \ba \|_{\infty} = r \| \bw_i \|_{\infty} 
       = r_1 \max \{ |w^i_j| \} = r_1.
       $$
    1. Thus, $\bv_i \in \boundary B_{\infty}[\ba, r_1]$.
@@ -534,125 +679,49 @@ point of $S = \dom f$.
 ```
 
 
-### Continuity of Univariate Closed Convex Functions
 
+### Continuity of Proper Convex Functions
 
-```{prf:theorem} Continuity of closed convex univariate functions
-:label: res-cvxf-convex-closed-univariate
+```{prf:theorem} Continuity of proper convex functions
+:label: res-cvxf-proper-convex-continuous-relint
 
-Let $f: \RR \to \RERL$ be a proper closed and convex function.
-Then, $f$ is continuous over $\dom f$.
+Let $\VV$ be an $n$-dim real normed linear space. 
+Let $f: \VV \to \RR$ be a real valued convex function.
+Then it is continuous.
+More generally, if $f : \VV \to \RERL$ is a proper convex function,
+then $f$, restricted to $\dom f$, is continuous over the
+relative interior of $\dom f$.
 ```
+
 
 ```{prf:proof}
-Since $f$ is convex, hence its domain is convex. Hence
-$\dom f$ must be an interval $I$. 
+We will restrict our attention to the affine hull
+of the domain of $f$. We shall assume that origin
+belongs to $\relint \dom f$. We shall use a
+transformation argument as needed.
 
-1. If $\interior I = \EmptySet$, then $I$ must be a singleton.
-1. In that case $f$ is continuous obviously.
-1. Now consider the case where $\interior I \neq \EmptySet$.
-1. Then, due to {prf:ref}`res-cvxf-convex-local-lipschitz-continuous`,
-   $f$ is continuous at every $x \in \interior I$.
-1. If $I$ is open (i.e., it has no endpoints), then there is
-   nothing more to prove.
-1. We are left with showing the (one sided) continuity of $f$
-   at one of the endpoints of $I$ if it has any.
-1. Since, the argument will be identical for either of the
-   endpoints, without loss of generality, let us assume
-   that $I$ has a left endpoint $a$ and we show the continuity
-   from the right at $a$; i.e. $\lim_{x \to a^+} f(x) = f(a)$.
-1. Pick any $c \in I$ such that $c > a$.
-1. Define a function
+1. Let $S = \dom f$.
+1. Let $A = \affine S$.
+1. Let $L$ the linear subspace parallel to $A$.
+1. Let $\ba \in \relint S$.
+   If $\bzero \in \relint S$, we can pick $\ba = \bzero$.
+1. Define the function
 
    $$
-   g(t) = \frac{f(c -t) - f(c)}{t}.
+   g(\bx) = f(\bx + \ba).
    $$
-1. Clearly, $g$ is defined over $(0, c-a]$.
-1. We shall show that $g$ is nondecreasing and upper bounded
-   over $(0, c-a]$.
-1. Pick any $t,s$ satisfying $0 < t \leq s \leq c-a$.
-1. Then,
-
-   $$
-   c - t = \left (1 - \frac{t}{s} \right ) c + \frac{t}{s} (c - s).
-   $$
-1. $\frac{t}{s}$ is well defined and $\frac{t}{s} \in (0, 1]$.
-1. Thus, $c-t$ is a convex combination of $c$ and $c-s$.
-1. Since $f$ is convex, hence
-
-   $$
-   & f(c - t) \leq \left (1 - \frac{t}{s} \right ) f(c) + \frac{t}{s} f(c - s)\\
-   & \iff f(c - t) - f(c) \leq \frac{t}{s} (f(c -s) - f(c)) \\
-   &\iff \frac{f(c - t) - f(c)}{t} \leq \frac{f(c -s) - f(c)}{s}.
-   $$
-1. Thus,
-   
-   $$
-   g(t) \leq g(s) \Forall 0 < t \leq s \leq c-a.
-   $$
-1. Thus, $g$ is nondecreasing over $(0, c-a]$.
-1. Finally $g(c-a) = \frac{f(a) - f(c)}{c - a}$ is finite since both $c,a \in \dom f$.
-1. Since $g$ is nondecreasing, hence
-
-   $$
-   g(t) \leq g(c -a) \Forall t \in (0, c-a].
-   $$
-1. Thus, $g$ is upper bounded.
-1. Since $g$ is nondecreasing and upper bounded,
-   hence due to {prf:ref}`res-bra-rf-monotonic-func-limits`,
-   the left hand limit of $g(t)$ at $c-a$ exists and 
-   is equal to some real number, say, 
-
-   $$
-   \lim_{t \to (c-a)^-} g(t) = \ell.
-   $$
-   Note that we haven't said that $g$ is continuous from the left at $c-a$.
-1. Recall from the definition of $g$ that
-   
-   $$
-   f(c-t) = f(c) + t g(t).
-   $$
-1. Hence
-
-   $$
-   \lim_{t \to (c-a)^-} f(c -t) = f(c) + (c-a) \ell.
-   $$
-1. Replacing $c-t$ by $r$, we get
-
-   $$
-   \lim_{r \to a^+} f(r) = f(c) + (c - a) \ell.
-   $$
-1. We have shown so far that the limit from the right at $a$ exists
-   for $f$ and is equal to $f(c) + (c - a) \ell$.
-1. Using the upper bound on $g$, we can say that
-   
-   $$
-   f(c -t) 
-   &= f(c) + t g(t) \\
-   &\leq f(c) + (c-a) g(c-a) \\
-   &= f(c) + f(a) - f(c) = f(a)
-   $$
-   holds true for every $t \in (0, c-a]$.
-1. Thus,
-
-   $$
-   \lim_{r \to a^+} f(r) = \lim_{t \to (c-a)^-} f(c -t)  \leq f(a).
-   $$
-1. On the other hand, since $f$ is closed, hence it is also
-   lower semicontinuous. This means that
-
-   $$
-   \lim_{r \to a^+} f(r)  \geq f(a).
-   $$
-1. Combining these two inequalities, we get
-
-   $$
-   \lim_{r \to a^+} f(r)  = f(a).
-   $$
-1. Thus, $f$ is indeed continuous from the right at $a$.
-1. Similarly, if $I$ has a right endpoint $b$,
-   then $f$ is continuous from the left at $b$.
-1. Thus, $f$ is continuous at every point in its domain.
+1. Clearly $g(\bzero) = f(\ba)$.
+1. We can see that $\dom g = S - \ba$
+   and $\affine \dom g = L$.
+1. Consider the restriction of $g$ to $L$ defined as
+   $h : L \to \RERL$ given by
+   $h(\bx) = g(\bx)$.
+1. $\dom h = S - \ba$.
+1. We note that relative interior of $S - \ba$ w.r.t. $\VV$
+   is the same as the interior of $S - \ba$ w.r.t. $L$.
+1. By {prf:ref}`res-cvxf-convex-local-lipschitz-continuous`, 
+   $h$ is locally Lipschitz continuous at every interior
+   point of $S - \ba$ (relative to $L$).
+1. Hence $g$ is continuous over the relative interior of $S - \ba$.
+1. Hence $f$ is continuous over the relative interior of $S$. 
 ```
-
-
