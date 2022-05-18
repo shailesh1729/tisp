@@ -260,6 +260,41 @@ Let $C$ be a nonempty, closed and convex set.
 The recession cones of $C$ and $\relint C$ are equal.
 ```
 
+```{prf:proof}
+We need to show that $R_C = R_{\relint C}$.
+We first show that $R_{\relint C} \subseteq R_C$.
+
+1. Recall that since $C$ is nonempty and convex, 
+   hence $\relint C$ is nonempty and convex ({prf:ref}`res-cvx-nonempty-relint`).
+1. Let $\by \in R_{\relint C}$.
+1. Pick some $\bx \in \relint C \subseteq C$.
+1. Then for all $\alpha \geq 0$, 
+   we have $\bx + \alpha \by \in \relint C \subseteq C$.
+1. By {prf:ref}`res-cvx-recession-dir-charac`, $\by$ is also
+   a recession direction for $C$.
+1. Since this applies for every $\by \in R_{\relint C}$,
+   hence $R_{\relint C} \subseteq R_C$.
+
+For the converse, we proceed as follows.
+
+1. Let $\by \in R_C$.
+1. Pick some $\bx \in \relint C$.
+1. Then for any $\alpha \geq 0$, we have $\bx + \alpha \by \in C$.
+1. Hence by line segment principle ({prf:ref}`res-cvx-convex-relint-segment`),
+   $\bx + \alpha \by \in \relint C$ for all $\alpha \geq 0$.
+   1. We have $\bx \in \relint C$.
+   1. Pick any $\beta > \alpha$.
+   1. We also have $\bx + \beta \by \in C = \closure C$.
+   1. Then $\bx + \alpha \by$ lies on the line segment between $\bx$ and $\bx + \beta \by$.
+   1. Hence $\bx + \alpha \by \in \relint C$.
+1. We have established that for any fixed $\bx \in \relint C$ and all $\alpha \geq 0$,
+   $\bx + \alpha \by \in \relint C$.
+1. Hence $\by \in R_{\relint C}$.
+1. Thus $R_C \subseteq R_{\relint C}$.
+
+Together we have $R_C = R_{\relint C}$.
+```
+
 ### Intersection
 
 ```{prf:theorem} Intersection and recession cones
