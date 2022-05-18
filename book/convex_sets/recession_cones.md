@@ -314,3 +314,27 @@ $$
 R_{\bigcap_{i \in I} C_i} = \bigcap_{i \in I}R_{C_i}.
 $$
 ```
+
+```{prf:proof}
+We first show it for two nonempty, closed and convex sets $C$ and $D$
+with nonempty intersection.
+
+1. We can see that $C \cap D$ is also a nonempty, closed and convex set.
+1. Let $\by \in R_{C \cap D}$.
+1. Then for every $\bx \in C \cap D$ and all $\alpha \geq 0$, we have
+   $\bx + \alpha \by \in C \cap D$.
+1. Hence, by {prf:ref}`res-cvx-recession-dir-charac`, $\by \in R_C$
+   and $\by \in R_D$.
+1. Hence $\by \in R_C \cap R_D$.
+1. Hence $R_{C \cap D} \subseteq R_C \cap R_D$.
+1. Conversely, let $\by \in R_C \cap R_D$.
+1. Pick any $\bx \in C \cap D$.
+1. By definition, $\bx + \alpha \by \in C \cap D$ for all $\alpha \geq 0$.
+1. Hence $\by \in R_{C \cap D}$.
+1. Hence $R_C \cap R_D \subseteq R_{C \cap D}$.
+1. Together we have $R_{C \cap D} = R_C \cap R_D$.
+
+
+It is straightforward to generalize this argument for an arbitrary family of
+nonempty closed and convex sets with a nonempty intersection.
+```
