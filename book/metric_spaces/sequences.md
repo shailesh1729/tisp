@@ -340,6 +340,84 @@ $$
 $$
 ```
 
+## Cauchy Sequences
+
+One issue of working with convergence of a sequence
+is that one has to know the limit of convergence
+to show that the sequence indeed converges to
+the limit. This may become problematic.
+We should have some way to qualify sequences
+in which the points are coming closer to
+a limit as the sequence progresses
+without knowing the limit. One way
+is to check if all the points of the
+sequence beyond a certain point are close
+enough to each other. Sequences
+in which the points come closer to each
+other at higher indices are known as
+Cauchy sequences. However it is not 
+necessary that every Cauchy sequence is
+convergent. Yet such sequences are
+of great relevance.
+
+
+```{prf:definition} Cauchy sequence
+:label: def-ms-cauchy-sequence
+
+A sequence $\{x_n\}$ of $X$ is called a *Cauchy sequence* 
+if for every $\epsilon > 0$, there exists $n_0$ 
+(depending on $\epsilon$) such that
+
+$$
+d(x_n, x_m) < \epsilon \text{ for every } n, m > n_0.
+$$
+```
+
+```{prf:proposition}
+:label: res-ms-convergent-is-cauchy
+
+Every convergent sequence is a Cauchy sequence.
+```
+```{prf:proof}
+Let $\{x_n\}$ be a convergent with the limit $\lim x_n = x$.
+Thus, for every $\epsilon > 0$, there exists $n_0$ 
+such that  $d(x_n, x) < \epsilon / 2$ for all $n > n_0$.
+
+Then, for all $m, n > n_0$
+
+$$
+d(x_n, x_m) \leq d(x_n, x) + d(x, x_m) < 
+\frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+$$ 
+
+Thus, $\{ x_n\}$ is a Cauchy sequence.
+```
+
+```{prf:example} Not every Cauchy sequence is convergent
+:label: ex-ms-cauchy-non-convergent-1
+
+
+Consider $X = \RR_{++}$ with metric $d(x,y) = |x-y|$. 
+Consider the sequence $x_n = \frac{1}{n}$.
+The sequence doesn't converge in $X$ 
+(Its limit 0 doesn't belong to $X$).
+At the same time, $\{ x_n \}$ is Cauchy.
+
+1. Let $\epsilon > 0$.
+1. Let $n_0$ be any natural number larger than $\frac{2}{\epsilon}$.
+1. Note that $n_0 > \frac{2}{\epsilon} \iff \epsilon > \frac{2}{n_0}$.
+1. Then, for $m, n > n_0$:
+   
+   $$
+   d(x_n, x_m) = |x_n - x_m | \leq x_n + x_m = \frac{1}{n} + \frac{1}{m}
+   < \frac{1}{n_0} + \frac{1}{n_0} = \frac{2}{n_0} < \epsilon.
+   $$
+1. Thus, for every $\epsilon > 0$, there exists $n_0$ such that
+   for all $m, n > n_0$, $d(x_n, x_m) < \epsilon$.
+1. Hence $\{ x_n\}$ is Cauchy.
+```
+
+
 ## Subsequences
 
 Recall from {prf:ref}`def-st-sub-sequence` that

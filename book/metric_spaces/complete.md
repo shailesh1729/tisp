@@ -3,66 +3,20 @@
 The material in this section is primarily based on
 {cite}`aliprantis1998principles,gopal2020introduction`.
 
-Let $(X,d)$ and $(Y, \rho)$ be metric spaces.
 
+Recall from {ref}`sec:ms:sequences` that
+in a Cauchy sequence, the points become increasingly
+closure to each other. We showed that every
+convergent sequence is a Cauchy sequence. 
+However not every Cauchy sequence is a convergent
+sequence in a general metric space. This is
+an important issue to be examined in this section.
+There are metric spaces where every Cauchy sequence
+is also convergent. Such metric spaces are known
+as complete metric spaces. 
 
-## Cauchy Sequences
-
-```{prf:definition} Cauchy sequence
-:label: def-ms-cauchy-sequence
-
-A sequence $\{x_n\}$ of $X$ is called a *Cauchy sequence* 
-if for every $\epsilon > 0$, there exists $n_0$ 
-(depending on $\epsilon$) such that
-
-$$
-d(x_n, x_m) < \epsilon \text{ for every } n, m > n_0.
-$$
-```
-
-```{prf:proposition}
-:label: res-ms-convergent-is-cauchy
-
-Every convergent sequence is a Cauchy sequence.
-```
-```{prf:proof}
-Let $\{x_n\}$ be a convergent with the limit $\lim x_n = x$.
-Thus, for every $\epsilon > 0$, there exists $n_0$ 
-such that  $d(x_n, x) < \epsilon / 2$ for all $n > n_0$.
-
-Then, for all $m, n > n_0$
-
-$$
-d(x_n, x_m) \leq d(x_n, x) + d(x, x_m) < 
-\frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
-$$ 
-
-Thus, $\{ x_n\}$ is a Cauchy sequence.
-```
-
-```{prf:example} Not every Cauchy sequence is convergent
-:label: ex-ms-cauchy-non-convergent-1
-
-
-Consider $X = \RR_{++}$ with metric $d(x,y) = |x-y|$. 
-Consider the sequence $x_n = \frac{1}{n}$.
-The sequence doesn't converge in $X$ 
-(Its limit 0 doesn't belong to $X$).
-At the same time, $\{ x_n \}$ is Cauchy.
-
-1. Let $\epsilon > 0$.
-1. Let $n_0$ be any natural number larger than $\frac{2}{\epsilon}$.
-1. Note that $n_0 > \frac{2}{\epsilon} \iff \epsilon > \frac{2}{n_0}$.
-1. Then, for $m, n > n_0$:
-   
-   $$
-   d(x_n, x_m) = |x_n - x_m | \leq x_n + x_m = \frac{1}{n} + \frac{1}{m}
-   < \frac{1}{n_0} + \frac{1}{n_0} = \frac{2}{n_0} < \epsilon.
-   $$
-1. Thus, for every $\epsilon > 0$, there exists $n_0$ such that
-   for all $m, n > n_0$, $d(x_n, x_m) < \epsilon$.
-1. Hence $\{ x_n\}$ is Cauchy.
-```
+In the remainder of this section,
+$(X,d)$ and $(Y, \rho)$ shall denote metric spaces.
 
 
 ## Complete Metric Spaces
