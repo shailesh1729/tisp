@@ -499,3 +499,98 @@ Let $\by_1, \by_2 \in L_C$ and $\alpha_1, \alpha_2 \in \RR$ be nonzero scalars.
 1. Hence $L_C$ is closed under linear combinations.
 1. Hence $L_C$ is indeed a linear subspace of $\VV$.
 ```
+
+### Relative Interior
+
+```{prf:theorem} Lineality space of relative interior
+:label: res-cvx-lineality-space-relint
+
+Let $C$ be a nonempty, closed and convex set.
+The lineality spaces of $C$ and $\relint C$ are equal.
+```
+
+```{prf:proof}
+We have
+
+$$
+L_{\relint C} = R_{\relint C} \cap (- R_{\relint C}) 
+= R_C \cap (- R_C) = L_C.
+$$
+We used {prf:ref}`res-cvx-recession-cone-relint`.
+```
+
+### Intersection
+
+```{prf:theorem} Intersection and lineality spaces
+:label: res-cvx-lineality-space-intersect
+
+Let $C$ and $D$ be nonempty, closed and convex sets
+such that $C \cap D \neq \EmptySet$, we have
+
+$$
+L_{C \cap D} = L_C \cap L_D.
+$$
+More generally, for any collection of closed convex sets $\{ C_i \}_{i \in I}$,
+where $I$ is an arbitrary index set and $\bigcap_{i \in I} C_i \neq \EmptySet$,
+we have
+
+$$
+L_{\bigcap_{i \in I} C_i} = \bigcap_{i \in I}L_{C_i}.
+$$
+```
+
+```{prf:proof}
+We have
+
+$$
+L_{\bigcap_{i \in I} C_i} 
+&= R_{\bigcap_{i \in I} C_i} \bigcap (- R_{\bigcap_{i \in I} C_i}) \\
+&= (\bigcap_{i \in I}R_{C_i}) \bigcap (- \bigcap_{i \in I}R_{C_i}) \\
+&= \bigcap_{i \in I} (R_{C_i} \cap (-R_{C_i})) \\
+&= \bigcap_{i \in I} L_{C_i}.
+$$
+We made use of {prf:ref}`res-cvx-recession-cone-intersect`.
+```
+
+
+### Linear Transformations
+
+```{prf:theorem}
+:label: res-cvx-lineality-space-lin-op-inverse-image
+
+Let $\VV$ and $\WW$ be real, finite dimensional, normed linear spaces.
+Let $\bAAA : \VV \to \WW$ be a linear operator.
+Let $C \subseteq \VV$ be a nonempty, closed and convex subset of $\VV$.
+Let $D \subseteq \WW$ be a nonempty, compact and convex subset of $\WW$.
+Consider the set
+
+$$
+E = \{ \bx \in C \ST \bAAA(\bx)  \in D \}.
+$$
+Assume that $E$ is nonempty.
+Then, $E$ is closed and convex and its lineality space is given by
+
+$$
+L_E = L_C \cap (\nullspace \bAAA)
+$$
+where $\nullspace \bAAA$ denotes the null space of the linear operator $\bAAA$.
+Furthermore, $E$ is compact if and only if $R_E = \{ \bzero \}$.
+```
+
+
+```{prf:proof}
+We have
+
+$$
+L_E 
+&= R_E \cap (-R_E) \\
+&= (R_C \cap (\nullspace \bAAA)) \cap (- (R_C \cap (\nullspace \bAAA))) \\
+&= (R_C \cap (\nullspace \bAAA)) \cap ((- R_C) \cap (\nullspace \bAAA))) \\
+&= (R_C \cap (- R_C)) \cap (\nullspace \bAAA)\\
+&= L_C \cap (\nullspace \bAAA).
+$$
+We used {prf:ref}`res-cvx-recession-cone-lin-op-inverse-image`.
+```
+
+
+
