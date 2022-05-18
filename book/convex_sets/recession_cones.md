@@ -251,6 +251,17 @@ does contain a nonzero recession direction.
    a (nonzero) recession direction of $C$.
 ```
 
+```{prf:corollary} Boundedness and recession cone
+:label: res-cvx-recession-cone-bounded
+
+A nonempty, closed and convex set $C$ is bounded if and only if $R_C = \{  \bzero \}$.
+
+Recall that in a finite dimensional ambient vector space,
+closed and bounded sets are compact.
+Hence a nonempty, compact and convex set has a zero recession cone.
+```
+
+
 ### Relative Interior
 
 ```{prf:theorem} Recession cone of relative interior
@@ -337,4 +348,23 @@ with nonempty intersection.
 
 It is straightforward to generalize this argument for an arbitrary family of
 nonempty closed and convex sets with a nonempty intersection.
+```
+
+
+```{prf:corollary} Recession cones and containment
+:label: res-cvx-recession-cone-contain
+
+Let $C$ and $D$ be nonempty, closed and convex sets
+such that $C \subseteq D$.
+Then $R_C \subseteq R_D$.
+```
+
+```{prf:proof}
+We note that $C = C \cap D$.
+Due to {prf:ref}`res-cvx-recession-cone-intersect`,
+
+$$
+R_C = R_{C \cap D} = R_C \cap R_D.
+$$
+Hence $R_C \subseteq R_D$.
 ```
