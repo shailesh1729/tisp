@@ -368,3 +368,134 @@ R_C = R_{C \cap D} = R_C \cap R_D.
 $$
 Hence $R_C \subseteq R_D$.
 ```
+
+
+### Linear Transformations
+
+```{prf:theorem}
+:label: res-cvx-recession-cone-lin-op-inverse-image
+
+Let $\VV$ and $\WW$ be real, finite dimensional, normed linear spaces.
+Let $\bAAA : \VV \to \WW$ be a linear operator.
+Let $C \subseteq \VV$ be a nonempty, closed and convex subset of $\VV$.
+Let $D \subseteq \WW$ be a nonempty, compact and convex subset of $\WW$.
+Consider the set
+
+$$
+E = \{ \bx \in C \ST \bAAA(\bx)  \in D \}.
+$$
+Assume that $E$ is nonempty.
+Then, $E$ is closed and convex and its recession cone is given by
+
+$$
+R_E = R_C \cap (\nullspace \bAAA)
+$$
+where $\nullspace \bAAA$ denotes the null space of the linear operator $\bAAA$.
+Furthermore, $E$ is compact if and only if $R_E = \{ \bzero \}$.
+```
+
+```{prf:proof}
+Consider the set $F = \{ \bx \in \VV \ST \bAAA(\bx)  \in D \}$.
+
+1. $\bAAA$ is a continuous (linear) transformation since both $\VV$ and $\WW$
+   are finite dimensional.
+1. $F$ is the inverse image of a closed and convex set $D$ under $\bAAA$.
+1. Hence $F$ is closed and convex.
+1. We further note that $E = C \cap F$.
+1. Since $E$ is nonempty by hypothesis, hence $F$ is also nonempty.
+1. We can easily show that the recession cone of $F$, is $R_F = \nullspace \bAAA$.
+   1. Let $\by \in \nullspace \bAAA$.
+   1. Pick any fixed $\bx \in F$ and $\alpha \geq 0$.
+   1. Then $\bAAA(\bx + \alpha \by) = \bAAA(\bx) \in D$.
+   1. Hence $\bx + \alpha \by \in F$.
+   1. Hence $\by \in R_F$.
+   1. Hence $\nullspace \bAAA \subseteq R_F$.
+   1. Conversely, for contradiction assume that there exists
+      $\by \in R_F$ such that $\by \notin \nullspace \bAAA$.
+   1. Then $\bz = \bAAA(\by) \neq \bzero$.
+   1. We require that for every $\bx \in F$ and for every $\alpha > 0$,
+      we must have
+
+      $$
+      \bAAA(\bx + \alpha \by)
+      = \bAAA(\bx) + \alpha \bz \in D.
+      $$
+   1. However, this can only happen if $D$ is unbounded.
+   1. Since $D$ is compact, it is bounded, hence we arrive at a contradiction.
+   1. This establishes that $R_F = \nullspace \bAAA$.
+1. Due to {prf:ref}`res-cvx-recession-cone-intersect`,
+   since $E = C \cap F$ and both $C$ and $F$ are nonempty, closed and convex,
+   hence
+
+   $$
+   R_E = R_C \cap R_F = R_C \cap (\nullspace \bAAA).
+   $$
+
+Finally, due to {prf:ref}`res-cvx-recession-cone-bounded`,
+$E$ is compact if and only if $R_C \cap (\nullspace \bAAA) = \{ \bzero \}$.
+```
+
+
+## Lineality Space
+
+```{prf:definition} Lineality space
+:label: def-cvx-lineality-space
+
+Let $C$ be a nonempty and convex set. The *lineality space*
+of $C$, denoted by $L_C$, is the set of directions of recession
+$\by$ whose opposite, $-\by$, is also a direction of recession.
+
+In other words,
+
+$$
+L_C = R_C \cap (- R_C).
+$$
+```
+
+As a consequence of this definition, if $\by \in L_C$, then
+$\bx + \alpha \by \in C$ for every $\alpha \in \RR$.
+In other words, the whole line in the direction of $\by$
+with $\bx$ as one of its points belongs to $C$.
+
+### As a Subspace
+
+For nonempty, closed and convex sets, their lineality space
+is a subspace of the ambient vector space.
+
+```{prf:theorem} Lineality space as a subspace
+Let $\VV$ be an $n$-dim real normed linear space.
+Let $C \subseteq \VV$ be a nonempty, closed and convex subset of $\VV$.
+Then the lineality space of $C$ is a subspace of $\VV$.
+```
+
+```{prf:proof}
+Let $\by_1, \by_2 \in L_C$ and $\alpha_1, \alpha_2 \in \RR$ be nonzero scalars.
+
+1. Then
+
+   $$
+   \alpha_1 \by_1 + \alpha_2 \by_2
+   = |\alpha_1 | (\sgn(\alpha_1)) \by_1 + |\alpha_2 |  (\sgn(\alpha_2)) \by_2.
+   $$
+1. Let $c = |\alpha_1 | + |\alpha_2 |$ and 
+   define $t = \frac{ |\alpha_1 |}{|\alpha_1 | + |\alpha_2 |} = \frac{|\alpha_1 |}{c}$.
+1. We note that $\frac{|\alpha_2 |}{c} = 1 - t$.
+1. Also define $\bz_1 = (\sgn(\alpha_1)) \by_1$ and $\bz_2 = (\sgn(\alpha_2)) \by_2$.
+1. Then
+
+   $$
+   \alpha_1 \by_1 + \alpha_2 \by_2
+   &= |\alpha_1 | (\sgn(\alpha_1)) \by_1 + |\alpha_2 |  (\sgn(\alpha_2)) \by_2 \\
+   &= |\alpha_1 | \bz_1 + |\alpha_2 |  \bz_2 \\ 
+   &=  (|\alpha_1 | + |\alpha_2 |) (t \bz_1 + (1-t) \bz_2) \\ 
+   &= c ( t \bz_1 + (1- t) \bz_2).
+   $$
+1. Since $R_C$ is a convex cone, hence $L_C$ is also a convex cone.
+1. We can see that $\bz_1$ and $\bz_2$ in $L_C$ because
+   $\bz_i$ is either equal to $\by_i$ or equal to $-\by_i$.
+1. By convexity of $L_C$, $\bz = t \bz_1 + (1- t) \bz_2 \in L_C$.
+1. Since $L_C$ is a cone, hence $c \bz \in L_C$.
+1. Hence $\alpha_1 \by_1 + \alpha_2 \by_2  \in L_C$.
+1. Hence $L_C$ is closed under linear combinations.
+1. Hence $L_C$ is indeed a linear subspace of $\VV$.
+```
