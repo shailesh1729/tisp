@@ -725,3 +725,22 @@ transformation argument as needed.
 1. Hence $g$ is continuous over the relative interior of $S - \ba$.
 1. Hence $f$ is continuous over the relative interior of $S$. 
 ```
+
+
+```{prf:corollary} Closedness of real valued convex functions
+:label: res-cvxf-rv-convex-closed
+
+Let $\VV$ be an $n$-dim real normed linear space. 
+A real valued convex function $f: \VV \to \RR$ with $\VV = \dom f$
+is closed.
+```
+
+```{prf:proof}
+By {prf:ref}`res-cvxf-proper-convex-continuous-relint`,
+$f$ is continuous over $\VV$.
+
+1. For real valued convex functions, $\VV = \dom f$.
+1. $\VV$ is a closed set in the topology of $(\VV, \| \cdot \|)$.
+1. By {prf:ref}`res-ms-continuity-closed-domain-closed-func`,
+   continuity and closed domain imply that $f$ is closed.
+```
