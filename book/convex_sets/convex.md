@@ -516,6 +516,8 @@ Some authors prefer to define $\ConvexHull(S)$ as the smallest convex
 set containing $S$. Both definitions are equivalent.
 
 
+### Carathéodory Theorem
+
 ```{prf:theorem} Carathéodory theorem
 :label: res-cvx-conv-hull-caratheodory
 
