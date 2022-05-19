@@ -1,3 +1,4 @@
+(sec:cvx:func:continuity)=
 # Continuity
 
 This section focuses on topological properties of 

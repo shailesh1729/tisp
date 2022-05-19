@@ -1,3 +1,4 @@
+(sec:cvx:func:convexity:preserving)=
 # Convexity Preserving Function Operations
 
 ## Scaling and Addition of Convex Functions

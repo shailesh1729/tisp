@@ -1,3 +1,4 @@
+(sec:cvx:func:differentiability)=
 # Differentiability and Convex Functions
 
 ## First Order Conditions

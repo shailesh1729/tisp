@@ -1,3 +1,4 @@
+(sec:cvx:cone)=
 # Cones
 
 Main references for this section are 

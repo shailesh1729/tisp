@@ -1,3 +1,4 @@
+(sec:cvx:infimal)=
 # Infimal Convolution
 
 

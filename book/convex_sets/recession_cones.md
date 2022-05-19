@@ -1,3 +1,4 @@
+(sec:cvx:recession)=
 # Recession Cones
 
 Main references for this section are {cite}`bertsekas2003convex`.
