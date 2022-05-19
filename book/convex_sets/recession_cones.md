@@ -739,7 +739,7 @@ We now show the converse $S + C \cap S^{\perp} \subseteq C$.
 1. Hence $S + C \cap S^{\perp} \subseteq C$.
 ```
 
-## Nested Intersections of Closed and Convex Sets
+## Nested Sequences of Closed and Convex Sets
 
 Recall that the intersection of a nested sequence
 of compact sets is nonempty and compact.
@@ -749,6 +749,10 @@ $\{ C_k \}$ of nonempty, closed and convex sets.
 We derive a number of conditions under which
 their intersection $\bigcap_{k=1}^{\infty}C_k$
 is nonempty.
+
+A very good example of a nested sequence of
+closed and convex sets is a sequence of
+sublevel sets of a closed and convex function.
 
 
 ```{prf:theorem} General condition for nonempty intersection
@@ -954,3 +958,87 @@ $C = L + \tilde{C} = \tilde{C}$.
 We have already established that $\tilde{C}$
 is both nonempty and compact. 
 ```
+
+
+### Nested Sequence with Linear Inequality Constraints
+
+Consider the problem of minimizing a closed and convex
+function under linear inequality constraints.
+
+1. The sublevel sets form a nested sequence of
+   closed and convex sets.
+1. The solution set of a set of linear inequality
+   constraints is another convex set
+   (an intersection of closed half spaces).
+
+
+```{prf:theorem} Nested sequence with inequality constraints
+:label: res-cvx-rec-nested-seq-closed-inequality-constraints
+
+Let $\VV$ be a Euclidean space.
+Let $\{ C_k \}$ be a sequence of nonempty, closed and convex
+subsets of $\VV$.
+Let $R_k$ and $L_k$ be the recession cone
+and lineality space of $C_k$ respectively for every $k \in \Nat$.
+Further, let
+
+$$
+R = \bigcap_{k=1}^{\infty} R_k
+\text{ and }
+L = \bigcap_{k=1}^{\infty} L_k
+\text{ and }
+C = \bigcap_{k=1}^{\infty} C_k
+$$
+Let $X$ be a subset of $\VV$ specified by
+linear inequality constraints; i.e.,
+
+$$
+X = \{ \bx \in \VV \ST \langle \bx, \ba_i \rangle \leq b_i, i=1,\dots,r \}
+$$
+where $\ba_i \in \VV$ and $b_i \in \RR$.
+Further assume that
+
+1. $C_{k+1} \subseteq C_k$ for all $k$.
+1. The intersection $X \cap C_k$ is nonempty for all $k$.
+1. We have $R_X \cap R \subseteq L$
+   where $R_X$ is the recession cone of $X$.
+
+Then the intersection $X \cap C$ is nonempty. 
+```
+
+### Quadratic Function with Quadratic Constraints
+
+```{prf:theorem} Quadratic function with quadratic constraints
+:label: res-cvx-recession-quad-func-quad-constraints
+
+Let $\{ C_k \}$ be a sequence of subsets of $\RR^n$
+given by
+
+$$
+C_k = \{ \bx \ST \bx^T \bQ \bx + \ba^T \bx + b \leq w_k \}
+$$
+where $\bQ \in \SS^n_+$ is a symmetric positive semidefinite
+matrix, $\ba \in \RR^n$ is a vector, $b  \in \RR$ is a scalar,
+and $\{ w_k \}$ is a nonincreasing sequence of scalars
+that converges to $0$.
+
+Also, let $X$ be a subset of $\RR^n$ of the form
+
+$$
+X = \{ \bx \in \RR^n \ST 
+\bx^T \bQ_j \bx + \ba^T_j \bx + b_j \leq 0, j=1,\dots, r \}
+$$
+where $\bQ_j \in \SS^n_+$, $\ba_j \in \RR^n$ 
+and $b_j \in \RR$.
+
+Assume further that $X \cap C_k \neq \EmptySet$ for all $k$.
+Then, the intersection
+$X \cap (\bigcap_{k=1}^{\infty} C_k)$ is nonempty.
+```
+
+Note that $\bx^T \bQ \bx + \ba^T \bx + b$
+is a quadratic function and $C_k$ are its sublevel sets.
+
+
+
+
