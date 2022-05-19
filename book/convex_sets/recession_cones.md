@@ -592,5 +592,55 @@ $$
 We used {prf:ref}`res-cvx-recession-cone-lin-op-inverse-image`.
 ```
 
+### Decomposition along Lineality Spaces
 
+
+```{prf:theorem} Decomposition of a convex set along subspaces of its lineality space
+:label: res-cvx-lineality-decomposition-subspace
+
+Let $\VV$ be an $n$-dim real inner product space.
+Let $C$ be a nonempty convex subset of $\VV$.
+Let $L_C$ be its lineality space.
+Then for every linear subspace $S \subseteq L_C$,
+we have
+
+$$
+C = S + (C \cap S^{\perp}).
+$$
+```
+
+Note that since $C$ is not required to be closed, hence
+$L_C$ itself may not be a linear subspace.
+
+```{prf:proof}
+Since $\VV$ is finite dimensional, hence it supports
+an orthogonal decomposition ({prf:ref}`res-la-vs-direct-sum-orth-comp`)
+
+$$
+\VV = S + S^{\perp}.
+$$
+
+We first show that $C \subseteq S + C \cap S^{\perp}$.
+
+1. Let $\bx \in C$.
+1. Then $\bx = \by + \bz$ where $\by \in S$ and $\bz \in S^{\perp}$.
+1. Since $\by \in S \subseteq L_C$, hence $\by$ is 
+   a recession direction of $C$ and so is $-\by$.
+1. Hence $\bz = \bx - \by \in C$.
+1. Hence $\bz \in C \cap S^{\perp}$.
+1. Thus for every $\bx \in C$, we have $\bx = \by + \bz$
+   such that $\by \in S$ and $\bz \in C \cap S^{\perp}$.
+1. Hence $C \subseteq S + C \cap S^{\perp}$.
+
+We now show the converse $S + C \cap S^{\perp} \subseteq C$.
+
+1. Let $\bx \in S + C \cap S^{\perp}$.
+1. Then $\bx  = \by + \bz$ such that $\by \in S$
+   and $\bz \in C \cap S^{\perp}$.
+1. Thus $\bz \in C$.
+1. Since $S \subseteq L_C$, hence $\by$ is a recession direction
+   for $C$.
+1. Hence $\bz + \by = \bx \in C$.
+1. Hence $S + C \cap S^{\perp} \subseteq C$.
+```
 
