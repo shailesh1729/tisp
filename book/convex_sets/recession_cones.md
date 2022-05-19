@@ -1,5 +1,7 @@
 # Recession Cones
 
+Main references for this section are {cite}`bertsekas2003convex`.
+
 
 ```{prf:definition} Direction of recession
 :label: def-cvx-recession-direction
@@ -447,7 +449,7 @@ Hence $R_C \subseteq R_D$.
 
 ### Linear Transformations
 
-```{prf:theorem}
+```{prf:theorem} Recession cone of inverse image under linear transformation
 :label: res-cvx-recession-cone-lin-op-inverse-image
 
 Let $\VV$ and $\WW$ be real, finite dimensional, normed linear spaces.
@@ -1041,4 +1043,75 @@ is a quadratic function and $C_k$ are its sublevel sets.
 
 
 
+## Closedness Under Linear Transformations
+
+We address the question of guarantees under which
+the image of a closed and convex set under a linear
+transformation is also closed.
+
+
+```{prf:theorem} Closedness of image under linear transformation
+:label: res-cvx-closedness-image-linear-op-closed-convex
+
+Let $\VV$ and $\WW$ be real, finite dimensional, normed linear spaces.
+Let $\bAAA : \VV \to \WW$ be a linear operator.
+Let $C \subseteq \VV$ be a nonempty, closed and convex subset of $\VV$.
+Let the nullspace of $\bAAA$ be denoted by $\nullspace \bAAA$.
+
+If $R_C \cap \nullspace \bAAA \subseteq L_C$, then
+the set $\bAAA(C)$ is closed.
+```
+
+```{prf:proof}
+We shall show that every converging sequence of $D = \bAAA(C)$
+converges in $D$.
+
+1. Let $\{ \by_k \}$ be a sequence of points in $D$
+   converging to some point $\by \in \WW$.
+1. We introduce the sets
+
+   $$
+   W_k = \{ \bz \in \WW \ST \| \bz - \by \| \leq \| \by_k - \by \| \}.
+   $$
+1. Note that $W_k$ are closed balls centered at
+   $\by$ and with radii $\| \by_k - \by \|$.
+1. Hence $W_k$ are nonempty, closed and convex.
+1. By taking appropriate subsequence of $\{ W_k \}$ if necessary,
+   we can ensure that it is a nested sequence of closed balls.
+1. Further define
+
+   $$
+   C_k = \{ \bx \in C \ST \bAAA(\bx) \in W_k \}.
+   $$
+1. Since $\by_k \in W_k$, hence $C_k$ is nonempty.
+1. Then due to {prf:ref}`res-cvx-recession-cone-lin-op-inverse-image`,
+   $C_k$ is closed and convex.
+1. Since  $\{ W_k \}$ is nested, hence  $\{ C_k \}$ is also
+   a nested sequence of nonempty, closed and convex sets.
+1. We note that every $C_k$ has the same recession cone
+   given by $R = R_C \cap (\nullspace \bAAA)$
+   due to {prf:ref}`res-cvx-recession-cone-lin-op-inverse-image`.
+1. Similarly, every $C_k$ has the same lineality space
+   given by $L = L_C \cap (\nullspace \bAAA)$
+   due to {prf:ref}`res-cvx-lineality-space-lin-op-inverse-image`. 
+1. By hypothesis, $R_C \cap \nullspace \bAAA \subseteq L_C$.
+1. Hence $R_C \cap \nullspace \bAAA \subseteq L_C \cap \nullspace \bAAA$.
+1. In other words, $R \subseteq L$.
+1. By definition $L \subseteq R$.
+1. Hence $R = L$.
+1. Consequently, due to
+   {prf:ref}`res-cvx-recession-nested-nonempty-intersect-gen-cond`,
+   the set $\bigcap_{k=1}^{\infty} C_k$ is nonempty.
+1. Now pick some $\bx \in \bigcap_{k=1}^{\infty} C_k$.
+1. Then $\bx \in C$ since $C_k \subseteq C$ for ever $k$.
+1. Since $\bx \in C_k$ for every $k$, hence $\bAAA(\bx) \in W_k$
+   for every $k$.
+1. Hence, $\bAAA(\bx) \in \bigcap_{k=1}^{\infty} W_k$.
+1. But $\bigcap_{k=1}^{\infty} W_k = \{ \by \}$.
+1. Hence $\bAAA(\bx) = \by$.
+1. Since $\bx \in C$, hence $\by = \bAAA(\bx) \in D = \bAAA(C)$.
+1. Hence the sequence $\{ \by_k \}$ converges in $D$.
+1. Since the sequence was chosen arbitrarily,
+   hence every convergent sequence of $D$ converges in $D$.
+```
 
