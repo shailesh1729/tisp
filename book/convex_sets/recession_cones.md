@@ -938,3 +938,19 @@ We shall now show that $C =\bigcap_{k=1}^{\infty} C_k$ is nonempty.
    $$
 ```
 
+```{prf:corollary} Compactness of the nested intersection
+:label: res-cvx-rec-nested-compact-intersect
+
+Under the assumptions of
+{prf:ref}`res-cvx-recession-nested-nonempty-intersect-gen-cond`,
+if $R = \bigcap_{k=1}^{\infty} R_k = \{ \bzero \}$,
+then the intersection
+$C = \bigcap_{k=1}^{\infty} C_k$ is nonempty and compact.
+```
+
+```{prf:proof}
+Since $L = R = \{ \bzero \}$, hence
+$C = L + \tilde{C} = \tilde{C}$.
+We have already established that $\tilde{C}$
+is both nonempty and compact. 
+```
