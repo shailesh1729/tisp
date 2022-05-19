@@ -743,8 +743,9 @@ We now show the converse $S + C \cap S^{\perp} \subseteq C$.
 
 ## Nested Sequences of Closed and Convex Sets
 
-Recall that the intersection of a nested sequence
-of compact sets is nonempty and compact.
+Recall from {prf:ref}`res-ms-nested-seq-compact-nonempty-intersection`
+that the intersection of a nested sequence
+of nonempty compact sets is nonempty and compact.
 
 In this subsection, we consider a nested sequence
 $\{ C_k \}$ of nonempty, closed and convex sets.
@@ -858,8 +859,8 @@ we have $R_k \cap L^{\perp} = \{ \bzero \}$.
       hence it is compact as $\VV$ is finite dimensional.
 1. Then $\{ E_k \}$ is a sequence of nested compact sets
    since $E_{k + 1} \subseteq E_k$ for every $k$.
-1. Hence $E = \bigcap_{k=1}^{\infty} E_k$ is nonempty.
-   TBD link result.
+1. Hence $E = \bigcap_{k=1}^{\infty} E_k$ is nonempty
+   ({prf:ref}`res-ms-nested-seq-compact-nonempty-intersection`).
 1. But expanding $E$ we see that
 
    $$
@@ -1192,4 +1193,66 @@ converges in $D$.
 1. Since the sequence was chosen arbitrarily,
    hence every convergent sequence of $D$ converges in $D$.
 1. Hence $D$ is closed.
+```
+
+
+### Quadratic Inequality Constraints
+
+```{prf:theorem} Closedness of image of a set specified by quadratic inequality constraints under linear transformation
+:label: res-cvx-closed-im-lin-op-closed-quad-constraints
+
+Let $\bA \in \RR^{m \times n}$.
+Let the nullspace of $\bA$ be denoted by $\nullspace \bA$.
+Let $C$ be a nonempty, closed and convex subset of $\RR^n$
+specified by convex quadratic inequalities
+
+$$
+C = \{ \bx \in \RR^n \ST 
+\bx^T \bQ_j \bx + \ba^T_j \bx + b_j \leq 0, j=1,\dots, r \}
+$$
+where $\bQ_j \in \SS^n_+$ are symmetric positive semidefinite matrices,
+$\ba_j \in \RR^n$ are vectors
+and $b_j \in \RR$ are scalars.
+
+Then the set $\bA C$ is closed.
+```
+
+
+### Vector Sum of Closed Convex Sets
+
+```{prf:theorem} Closedness of vector sum of closed and convex sets
+:label: res-cvx-closedness-vector-sum-closed-convex
+
+Let $\VV$ be an $n$-dim real inner product space.
+Let $C_1, \dots, C_m$ be nonempty, closed and convex subsets of $\VV$
+such that the equality $\by_1 + \dots + \by_m = \bzero$ for 
+vectors $\by_i \in R_{C_i}$ implies that $\by_i = \bzero$ for every
+$i=1,\dots,m$.
+Then the vector sum $C_1 + \dots + C_m$ is a closed set.
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Let $C$ be the Cartesian product $C_1 \times \dots \times C_m$.
+1. Let $\VV^m$ denote the direct sum vector space $\VV \oplus \dots \oplus \VV$.
+1. Then $C \subseteq \VV^m$ is a nonempty, closed and convex subset of $\VV^m$.
+1. Let $\bAAA : \VV^m \to \VV$ be a linear transformation that maps a vector
+   $(\bx_1, \dots, \bx_m) \in \VV^m$ into $\bx_1 + \dots + \bx_m$.
+
+   $$
+   \bAAA(\bx_1, \dots, \bx_m) = \bx_1 + \dots + \bx_m.
+   $$
+1. We have $R_C = R_{C_1} \times \dots \times R_{C_m}$.
+1. The null space of $\bAAA$ is given by
+
+   $$
+   \nullspace \bAAA = \{ (\bx_1, \dots, \bx_m)  \in \VV^m 
+      \ST \bx_1 + \dots + \bx_m = \bzero, \bx_i \in \VV \}.
+   $$
+1. Under the given hypothesis, we have $R_C \cap \nullspace \bAAA = \{ \bzero \}$.
+1. Hence, due to {prf:ref}`res-cvx-recession-nested-nonempty-intersect-gen-cond`,
+   $\bAAA(C)$ is closed.
+1. But $\bAAA(C) = C_1 + \dots + C_m$.
+1. Thus $C_1 + \dots + C_m$ is closed as desired.
 ```
