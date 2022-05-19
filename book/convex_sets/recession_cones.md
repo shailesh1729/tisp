@@ -67,6 +67,81 @@ The set of all directions of recession for $C$ is called its *recession cone*
 and is denoted by $R_C$.
 ```
 
+```{prf:theorem} Recession cone of a linear subspace
+:label: res-cvx-subspace-recession-cone
+
+Let $\VV$ be a real vector space.
+Let $S$ be a linear subspace of $\VV$.
+Then $R_S = S$.
+```
+
+```{prf:proof}
+We first show that $S \subseteq R_S$.
+
+1. Pick some $\by \in S$.
+1. Pick any $\bx \in S$.
+1. Then for all $\alpha \geq 0$, $\bx + \alpha \by \in S$ 
+   since $S$ is a subspace and is closed under
+   scalar multiplication and vector addition.
+1. Hence $\by \in R_S$.
+1. Thus $S \subseteq R_S$.
+
+We now show that $R_S \subseteq S$.
+
+1. Pick some $\by \in R_S$.
+1. Pick some fixed $\bx \in S$.
+1. Since $\by$ is a recession direction, hence for every $\alpha > 0$,
+   $\bx + \alpha \by \in S$.
+1. Let $\bz = \bx + \alpha \by$.
+1. Then $\by = \frac{1}{\alpha}(\bz - \bx)$.
+1. But that means $\by \in S$. 
+1. Hence $R_S \subseteq S$.
+```
+
+```{prf:theorem} Recession cone of an affine subspace
+:label: res-cvx-affine-recession-cone
+
+Let $\VV$ be a real vector space.
+Let $A$ be an affine subspace of $\VV$.
+Let $S$ be the linear subspace parallel to $A$.
+Then $R_A = S$.
+```
+
+```{prf:proof}
+Let $\ba \in A$ be some fixed point.
+Then $S = A - \ba$.
+We first show that $S \subseteq R_A$.
+
+1. Pick any $\by \in S$.
+1. Then $\by = \bu - \ba$ for some $\bu \in A$.
+1. Pick some $\bx \in A$ and let $\alpha \geq 0$.
+1. Then
+
+   $$
+   \bx + \alpha \by = \bx + \alpha (\bu - \ba)
+   = 1 \cdot \bx + \alpha \cdot \bu + (- \alpha) \cdot \ba.
+   $$
+1. Hence $\bx + \alpha \by$ is an affine combination of
+   $\bx, \bu, \ba \in A$.
+1. Hence $\bx + \alpha \by \in A$.
+1. Hence $\by \in R_A$.
+1. Hence $S \subseteq R_A$.
+
+We now show that $R_A \subseteq S$.
+
+1. Pick some $\by \in R_A$.
+1. Pick some fixed $\bx \in A$.
+1. Since $\by$ is a recession direction, hence for every $\alpha > 0$,
+   $\bx + \alpha \by \in A$.
+1. Let $\bz = \bx + \alpha \by - \ba$.
+1. Then $\bz \in S$. And $\bu = \bx - \ba \in S$.
+1. Hence $\bz = \bu + \alpha \by$.
+1. Hence $\by = \frac{1}{\alpha} (\bz - \bu)$.
+1. But that means $\by \in S$. 
+1. Hence $R_A \subseteq S$.
+```
+
+
 The following results describe the properties of
 recession cones for nonempty, closed and convex sets.
 
@@ -96,7 +171,7 @@ is a convex cone. We next prove the closedness.
 1. Hence $R_C$ is closed.
 ```
 
-### Recession Cones for Closed and Convex Sets
+### Recession Directions for Closed and Convex Sets
 
 ```{prf:theorem} Characterization of recession directions
 :label: res-cvx-recession-dir-charac
@@ -463,6 +538,8 @@ For nonempty, closed and convex sets, their lineality space
 is a subspace of the ambient vector space.
 
 ```{prf:theorem} Lineality space as a subspace
+:label: res-cvx-lineality-subspace-closed-convex
+
 Let $\VV$ be an $n$-dim real normed linear space.
 Let $C \subseteq \VV$ be a nonempty, closed and convex subset of $\VV$.
 Then the lineality space of $C$ is a subspace of $\VV$.
@@ -550,6 +627,24 @@ L_{\bigcap_{i \in I} C_i}
 &= \bigcap_{i \in I} L_{C_i}.
 $$
 We made use of {prf:ref}`res-cvx-recession-cone-intersect`.
+```
+
+```{prf:corollary} Lineality spaces and containment
+:label: res-cvx-lineality-space-contain
+
+Let $C$ and $D$ be nonempty, closed and convex sets
+such that $C \subseteq D$.
+Then $L_C \subseteq L_D$.
+```
+
+```{prf:proof}
+We note that $C = C \cap D$.
+Due to {prf:ref}`res-cvx-lineality-space-intersect`,
+
+$$
+L_C = L_{C \cap D} = L_C \cap L_D.
+$$
+Hence $L_C \subseteq L_D$.
 ```
 
 
@@ -642,5 +737,204 @@ We now show the converse $S + C \cap S^{\perp} \subseteq C$.
    for $C$.
 1. Hence $\bz + \by = \bx \in C$.
 1. Hence $S + C \cap S^{\perp} \subseteq C$.
+```
+
+## Nested Intersections of Closed and Convex Sets
+
+Recall that the intersection of a nested sequence
+of compact sets is nonempty and compact.
+
+In this subsection, we consider a nested sequence
+$\{ C_k \}$ of nonempty, closed and convex sets.
+We derive a number of conditions under which
+their intersection $\bigcap_{k=1}^{\infty}C_k$
+is nonempty.
+
+
+```{prf:theorem} General condition for nonempty intersection
+:label: res-cvx-recession-nested-nonempty-intersect-gen-cond
+
+Let $\VV$ be an $n$-dim real inner product space.
+Let $\{ C_k \}$ be a sequence of nonempty, closed and convex subsets
+of $\VV$
+such that $C_{k + 1} \subseteq C_k$ for all $k \in \Nat$.
+Let $R_k$ and $L_k$ be the recession cone
+and lineality space of $C_k$ respectively for every $k \in \Nat$.
+Further, let
+
+$$
+R = \bigcap_{k=1}^{\infty} R_k
+\text{ and }
+L = \bigcap_{k=1}^{\infty} L_k.
+$$
+Assume that $R = L$.
+Then the intersection $C = \bigcap_{k=1}^{\infty} C_k$
+is nonempty and has the form
+
+$$
+C = \bigcap_{k=1}^{\infty} C_k = L + \tilde{C}
+$$
+where $\tilde{C}$ is some nonempty and compact set.
+```
+
+```{prf:proof}
+We note some properties of the sequences $\{ R_k \}$
+and $\{ L_k \}$.
+
+1. Since $C_k$ are nested, hence the recession cones
+   $R_k$ are also nested ({prf:ref}`res-cvx-recession-cone-contain`).
+1. Since $C_k$ are nested, hence the lineality spaces
+   $L_k$ are also nested ({prf:ref}`res-cvx-lineality-space-contain`).
+1. Since $C_k$ are nonempty closed and convex, hence
+   $L_k$ are linear subspaces
+   due to {prf:ref}`res-cvx-lineality-subspace-closed-convex`.
+
+We first show that $L$ is a linear subspace and
+for all sufficiently large $k$, $L_k = L$.
+
+1. Since $L_k$ are nested subspaces,
+   hence $\dim L_{k+1} \leq \dim L_k$ for every $k$.
+1. $L \neq \EmptySet$ since $\bzero \in L_k$ for every $k$.
+   Hence $\bzero \in L$.
+1. We can also see that $L$ must be a linear subspace of $\VV$
+   since it is an (infinite) intersection of linear subspaces.
+1. Since $\VV$ is finite dimensional, it follows that
+   for all $k$ sufficiently large, we have $L_k = L$.
+   In other words, there exists $k_0 \in \Nat$ such that
+   for all $k > k_0$, $L_k = L$. 
+1. Without loss of generality, assume that 
+
+   $$
+   L_k = L, \Forall k.
+   $$
+   We can achieve this by dropping the first $k_0$ terms
+   from the sequence $\{ C_k \}$ for which 
+   $L$ is a proper subset of $L_k$.
+
+We next show that for all sufficiently large $k$,
+we have $R_k \cap L^{\perp} = \{ \bzero \}$.
+
+1. Since $\bzero \in R_k$ for every $R_k$ and
+   $L$ is a linear subspace, hence
+   $\bzero \in R_k \cap L^{\perp}$ for every $k$.
+1. For contradiction, assume that it is not true
+   that there exists $k_0 \in \Nat$ such that
+   for every $k > k_0$,
+   $R_k \cap L^{\perp} = \{ \bzero \}$.
+1. Then, since $R_k$ are nested,
+   hence for each $k$ there exists $\by_k \in R_k \cap L^{\perp}$
+   with $\| \by_k \| = 1$.
+   1. Consider some $k \in \Nat$.
+   1. There exists some $l > k$ such that
+      $R_l \cap L^{\perp} \neq \{ \bzero \}$.
+   1. Then $R_l \cap L^{\perp}$ contains a nonzero vector $\bu$.
+   1. Since $R_l$ is a cone, hence $\bu$ can be scaled
+      to some $\bv$ so that $\| \bv \| = 1$.
+   1. Since $L^{\perp}$ is a linear subspace, hence $\bv \in L^{\perp}$
+      also.
+   1. Hence $\bv \in R_l \cap L^{\perp}$.
+   1. But since $R_l \subseteq R_k$, hence
+      $\bv \in R_k \cap L^{\perp}$.
+1. Now consider the set $D = \{\by \ST \| \by \| = 1 \}$.
+1. Let $E_k = D \cap R_k \cap L^{\perp}$ for every $k$.
+1. Then $E_k$ is nonempty for every $k$.
+1. We note that $E_k$ is also compact.  
+   1. The set $D$ is closed and bounded.
+   1. $R_k$ is closed for every $k$
+      ({prf:ref}`res-cvx-recession-cone-closedness`).
+   1. $L^{\perp}$ is a subspace of a finite dimensional space,
+      hence it is closed.
+   1. $E_k$ is an intersection of
+      closed sets, hence it is closed.
+   1. Since $D$ is bounded, hence $E_k \subseteq D$
+      is also bounded.
+   1. Since $E_k$ is closed and bounded,
+      hence it is compact as $\VV$ is finite dimensional.
+1. Then $\{ E_k \}$ is a sequence of nested compact sets
+   since $E_{k + 1} \subseteq E_k$ for every $k$.
+1. Hence $E = \bigcap_{k=1}^{\infty} E_k$ is nonempty.
+   TBD link result.
+1. But expanding $E$ we see that
+
+   $$
+   E &= \bigcap_{k=1}^{\infty} E_k \\
+   &= \bigcap_{k=1}^{\infty} (D \cap R_k \cap L^{\perp}) \\
+   &= D \cap L^{\perp} \cap \left (\bigcap_{k=1}^{\infty} R_k \right ) \\
+   &= D \cap L^{\perp} \cap R \\
+   &= D \cap L^{\perp} \cap L \\
+   &= D \cap \{ \bzero \} \\
+   &= \EmptySet.
+   $$
+   We used the facts that
+   1. $R = \bigcap_{k=1}^{\infty} R_k$.
+   1. $L = R$ by hypothesis.
+   1. $L^{\perp} \cap L = \{ \bzero \}$ since they are orthogonal
+      complements.
+   1. All members of $D$ are nonzero since they are unit norm.
+1. We have arrived at a contradiction that $E$ must be an empty set.
+1. Hence, we conclude that  $R_k \cap L^{\perp} = \{ \bzero \}$
+   holds true for all sufficiently large $k$.
+1. Again without loss of generality, we shall assume that
+
+   $$
+   R_k \cap L^{\perp} = \{ \bzero \}, \quad \Forall k \in \Nat.
+   $$
+
+We have established so far that
+$L$ is a linear subspace,
+$L_k = L$ and $R_k \cap L^{\perp} = \{ \bzero \}$
+for all $k$ without loss of generality.
+We shall now show that $C =\bigcap_{k=1}^{\infty} C_k$ is nonempty.
+
+1. Note that $C_k \cap L^{\perp}$ is not empty.
+   1. We have $\VV = L \oplus L^{\perp}$.
+   1. Let $\bx \in C_k$.
+   1. Then $\bx = \by + \bz$ where $\by \in L$ and $\bz \in L^{\perp}$.
+   1. But then $\by \in L_k$ since $L \subseteq L_k$.
+   1. Then $\by$ and $-\by$ are recession directions of $C_k$.
+   1. Hence $\bz = \bx - \by \in C_k$.
+   1. Hence $\bz \in C_k \cap L^{\perp}$.
+1. By {prf:ref}`res-cvx-recession-cone-intersect`, the recession cone
+   of $C_k \cap L^{\perp}$ is given by
+
+   $$
+   R_{C_k \cap L^{\perp}} = R_k \cap R_{L^{\perp}}.
+   $$
+1. Since $L^{\perp}$ is a linear subspace of $\VV$, hence
+   due to {prf:ref}`res-cvx-subspace-recession-cone`,
+   $R_{L^{\perp}} = L^{\perp}$.
+1. Hence
+
+   $$
+    R_{C_k \cap L^{\perp}} = R_k \cap L^{\perp} = \{ \bzero \}.
+   $$
+1. Then due to {prf:ref}`res-cvx-recession-dir-nz-unbounded`,
+   $C_k \cap L^{\perp}$ is bounded for ever $k$.
+1. Since $C_k$ is closed and $L^{\perp}$ is closed, hence
+   $C_k \cap L^{\perp}$ is also closed for every $k$.
+1. Hence $C_k \cap L^{\perp}$ is a compact set for every $k$.
+1. Since $\{ C_k \}$ are nested, hence
+   $\{ C_k \cap L^{\perp} \}$ are also a nested sequence
+   of compact sets.
+1. Then their intersection is nonempty and compact. In other words,
+   the set
+
+   $$
+   \tilde{C} = \bigcap_{k=1}^{\infty}
+   \left (C_k \cap L^{\perp} \right )
+   = \left ( \bigcap_{k=1}^{\infty} C_k \right ) \cap L^{\perp}
+   = C \cap L^{\perp}
+   $$
+   is nonempty and compact.
+1. Hence $C$ is also nonempty.
+1. Hence, due to {prf:ref}`res-cvx-lineality-space-intersect`,
+   the lineality space of $C = \bigcap_{k=1}^{\infty} C_k$
+   is given by $L = \bigcap_{k=1}^{\infty} L_k$.
+1. By {prf:ref}`res-cvx-lineality-decomposition-subspace`,
+
+   $$
+   C = L + (C \cap L^{\perp})
+   = L + \tilde{C}.
+   $$
 ```
 
