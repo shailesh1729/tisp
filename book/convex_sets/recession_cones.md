@@ -1047,11 +1047,20 @@ is a quadratic function and $C_k$ are its sublevel sets.
 
 We address the question of guarantees under which
 the image of a closed and convex set under a linear
-transformation is also closed.
+transformation is also closed from the perspective
+of recession cones.
+
+If a set $C$ is closed and bounded, then it is
+compact in a finite dimensional space, the
+linear operator is continuous in a finite
+dimensional space, hence the image of $C$
+is also compact.
+The results in this section are relevant for
+closed and convex sets which are not bounded.
 
 
 ```{prf:theorem} Closedness of image under linear transformation
-:label: res-cvx-closedness-image-linear-op-closed-convex
+:label: res-cvx-closed-im-lin-op-closed
 
 Let $\VV$ and $\WW$ be real, finite dimensional, normed linear spaces.
 Let $\bAAA : \VV \to \WW$ be a linear operator.
@@ -1113,5 +1122,74 @@ converges in $D$.
 1. Hence the sequence $\{ \by_k \}$ converges in $D$.
 1. Since the sequence was chosen arbitrarily,
    hence every convergent sequence of $D$ converges in $D$.
+1. Hence $D$ is closed.
 ```
 
+In the special case where
+the closed and convex set $C$ is bounded, then
+$R_C = L_C = \{ \bzero \}$ and 
+$R_C \cap \nullspace \bAAA = L_C$. Hence
+$\bAAA(C)$ is also closed.
+
+### Linear Inequality Constraints
+
+```{prf:theorem} Closedness of image of a closed and convex set with linear inequality constraints under linear transformation
+:label: res-cvx-closed-im-lin-op-closed-lin-constraints
+
+Let $\VV$ and $\WW$ be real, finite dimensional, normed linear spaces.
+Let $\bAAA : \VV \to \WW$ be a linear operator.
+Let $C \subseteq \VV$ be a nonempty, closed and convex subset of $\VV$.
+Let the nullspace of $\bAAA$ be denoted by $\nullspace \bAAA$.
+
+Let $X$ be a subset of $\VV$ specified by
+linear inequality constraints; i.e.,
+
+$$
+X = \{ \bx \in \VV \ST \langle \bx, \ba_i \rangle \leq b_i, i=1,\dots,r \}
+$$
+where $\ba_i \in \VV$ and $b_i \in \RR$.
+
+If $R_X \cap R_C \cap \nullspace \bAAA \subseteq L_C$,
+then the set $\bAAA(X \cap C)$ is closed.
+```
+
+```{prf:proof}
+
+The argument is similar to {prf:ref}`res-cvx-closed-im-lin-op-closed`
+and uses {prf:ref}`res-cvx-rec-nested-seq-closed-inequality-constraints`
+to establish the nonemptiness of the intersection of the
+nested sequence of closed and convex sets.
+
+Let $D = \bAAA(X \cap C)$.
+We shall show that every converging sequence of $D = \bAAA(C)$
+converges in $D$.
+
+1. Let $\{ \by_k \}$ be a sequence of points in $D$
+   converging to some point $\by \in \WW$.
+1. Let $W_k$ and $C_k$ be defined as in
+   {prf:ref}`res-cvx-closed-im-lin-op-closed`.
+1. By choosing a suitable subsequence, we are guaranteed
+   that $C_k$ are nested.
+1. We have $\by_k \in W_k$. Hence $C_k \subseteq C$ is nonempty.
+1. Also $\by_k \in D = \bAAA(X \cap C)$.
+1. Let $\bu \in C_k$ such that $\bAAA(\bu) = \by_k$.
+1. Then $\bu \in X \cap C$ holds true also.
+1. Hence $(X \cap C) \cap C_k = X \cap C_k$ is not empty for every $k$.
+1. By hypothesis, $R_X \cap R_C \cap \nullspace \bAAA \subseteq L_C$.
+1. Hence $R_X \cap R_C \cap \nullspace \bAAA \subseteq L_C \cap \nullspace \bAAA$.
+1. Following the definition of $R$ and $C$ from the proof
+   of {prf:ref}`res-cvx-closed-im-lin-op-closed`,
+   we have $R_X \cap R \subseteq L$.
+1. Thus, all assumptions of
+   {prf:ref}`res-cvx-rec-nested-seq-closed-inequality-constraints`
+   are satisfied.
+1. Hence the set $X \cap (\bigcap_{k=1}^{\infty} C_k)$ is nonempty.
+1. Pick any point $\bx \in X \cap (\bigcap_{k=1}^{\infty} C_k)$.
+1. Then $\bx \in X$ and $\bx \in C$ with 
+   $\bAAA(\bx) = \by$.
+1. Hence $\by \in \bAAA(X \cap C)$.
+1. Hence the sequence $\{ \by_k \}$ converges in $D$.
+1. Since the sequence was chosen arbitrarily,
+   hence every convergent sequence of $D$ converges in $D$.
+1. Hence $D$ is closed.
+```
