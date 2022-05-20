@@ -127,6 +127,73 @@ of $f$.
    guarantees that all the nonempty sublevel sets
    have an identical recession cone.
 
+### Lineality Space of a Convex Function
+
+We can define the lineality space of a function
+in terms of its recession cone.
+
+```{prf:definition} Lineality space of a convex function
+:label: def-opt-cvx-func-lineality-space
+
+Let $f: \VV \to \RERL$ be a proper, closed and convex function.
+The *lineality space* $L_f$ of the function $f$ is
+the set of all $\by \in \VV$ such that both
+$\by$ and $-\by$ are directions of recession of $f$.
+
+$$
+L_f = R_f \cap (- R_f).
+$$
+```
+
+```{prf:observation} Lineality spaces of sublevel sets
+:label: res-opt-sublevel-sets-lineality-space
+
+Since the recession cone of a nonempty sublevel
+set of a proper, closed and convex function $f$
+is same as $R_f$, hence
+$\by \in L_f$ if and only if
+both $\by$ and $-\by$ are directions of
+recession of the nonempty sublevel sets.
+```
+
+```{prf:theorem} Lineality space and constancy of function
+:label: res-opt-cvx-func-lineality-dir-constant
+
+Let $f: \VV \to \RERL$ be a proper, closed and convex function.
+$\by \in L_f$ if and only if 
+
+$$
+f(\bx + \alpha \by) = f(\bx), \Forall \bx \in \dom f, \Forall \alpha \in \RR.
+$$
+```
+
+```{prf:proof}
+1. Pick some $\bx \in \dom f$. 
+1. Consider the sublevel set $S = \{\bz \in \VV \ST f(\bz) \leq f(\bx) \}$.
+1. We are given that $\by \in L_f$.
+1. Then $\by$ and $-\by$ are both directions of recession of $S$.
+1. Pick some $\alpha > 0$.
+1. Then $\bu = \bx + \alpha \by \in S$ as well as $\bv = \bx - \alpha \by \in S$.
+1. Thus $f(\bu) \leq f(\bx)$ and $f(\bv) \leq f(\bx)$.
+1. Also $\bx = \frac{1}{2} \bu + \frac{1}{2} \bv$.
+1. By convexity of $f$,
+
+   $$
+   f(\bx) \leq \frac{1}{2} f(\bu) + \frac{1}{2} f(\bv)
+   \leq \frac{1}{2} f(\bx) + \frac{1}{2} f(\bx) = f(\bx).
+   $$
+1. This means that the inequalities must be equalities. Hence
+   $2 f(\bx) = f(\bu) + f(\bv)$.
+1. If $f(\bu) < f(\bx)$ then $f(\bv) > f(\bx)$, a contradiction since $\bv \in S$.
+1. If $f(\bv) < f(\bx)$ then $f(\bu) > f(\bx)$, a contradiction since $\bu \in S$.
+1. Hence we require that $f(\bx) = f(\bu) = f(\bv)$.
+1. Since $\bx$ and $\alpha$ were arbitrary, hence
+
+   $$
+   f(\bx + \alpha \by) = f(\bx), \Forall \bx \in \dom f, \Forall \alpha \in \RR.
+   $$
+```
+
 
 ## Existence of Solutions of Convex Programs
 
@@ -237,7 +304,7 @@ sublevel sets of $f$.
    $$ 
 ```
 
-### Minimization over a Convex Set
+### Constrained Minimization: Compact Solution Set
 
 
 ```{prf:theorem} Minimization of a closed convex function over a closed convex set
@@ -340,5 +407,28 @@ We now consider the more general case where $X \neq \VV$.
    $R_f \cap R_X = \{ \bzero \}$. 
 ```
 
+### Constrained Minimization: Unbounded Solution Set
 
+```{div}
+The {prf:ref}`res-opt-const-min-recession-cone-cond`
+provides guarantees under which the problem of
+minimization of a proper, closed and convex function $f$
+over a nonempty, closed and convex set $X$ has nonempty
+as well as compact solution set $X^*$.
+In this subsection, we concern ourselves with the
+more general case where the solution set may be
+unbounded.
+In other words, we are only concerned with the
+conditions under which $X^*$ is nonempty.
 
+1. Let $p^* = \inf_{\bx \in X} f(\bx)$.
+1. Let $\{ t_k \}$ be a sequence of real numbers
+   such that $t_k \downarrow p^*$; i.e., 
+   the sequence reaches the limit $p^*$ from above.
+1. Consider the sublevel sets $V_k = \sublevel(f, t_k)$.
+1. Then the set of minimizers is given by
+   $X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)$.
+1. We shall analyze the problem in terms of the
+   recession cones and the lineality spaces of
+   the constraint set $X$ and the sublevel sets $V_k$. 
+```
