@@ -25,6 +25,10 @@ function decreases monotonically.
 Throughout this section, we shall assume that $\VV$ is
 a Euclidean space unless otherwise specified.
 
+## Recession Cone of a Convex Function
+
+### Recession Cones of Sublevel Sets
+
 ```{prf:theorem} Recession cones of sublevel sets
 :label: res-opt-sublevel-recession-cones
 
@@ -102,4 +106,133 @@ For the converse, we proceed as follows.
    every nonempty sublevel set is compact.
 ```
 
+### Recession Cone of a Convex Function
 
+```{prf:definition} Recession cone of a convex function
+:label: def-opt-cvx-func-recession-cone
+
+Let $f: \VV \to \RERL$ be a proper, closed and convex function.
+The (common) recession cone of its nonempty sublevel sets
+is called the *recession cone* of $f$ and is denoted by
+$R_f$. 
+Each $\by \in R_f$ is called a *direction of recession* 
+of $f$. 
+```
+
+1. The requirement that $f$ be proper guarantees that
+   $f(\bx) < \infty$ for at least one $\bx \in \VV$
+   and hence there exist some nonempty sublevel sets.
+1. Since $f$ is also closed and convex,
+   hence {prf:ref}`res-opt-sublevel-recession-cones`
+   guarantees that all the nonempty sublevel sets
+   have an identical recession cone.
+
+
+## Existence of Solutions of Convex Programs
+
+The recession cone of a function provides
+excellent candidates for descent directions
+for a convex function.
+
+If we start at some $\bx \in \dom f$ and move
+indefinitely along a recession direction
+$\by \in R_f$, then we are guaranteed that
+we stay within the sublevel set $\sublevel(f, f(\bx))$;
+i.e., $f(\bx + \alpha \by) \leq f(\bx)$ for every
+$\alpha \geq 0$. 
+
+```{prf:observation}
+:label: res-opt-recession-dir-non-ascent-dir
+
+A direction of recession of a proper convex function
+$f$ is a direction of continuous non-ascent; i.e.,
+the value of the function never increases in a
+direction of recession.
+
+Conversely, if we start at some $\bx \in \dom f$
+and while moving along a direction $\by \in \VV$,
+encounter a point $\bz = \bx + \alpha \by$
+for some $\alpha > 0$ such that
+$f(\bz) > f(\bx)$, then $\by$ cannot be
+a direction of recession.
+
+A direction that is not a direction of
+recession of $f$ is a direction of
+eventual continuous ascent of $f$.
+```
+
+```{prf:theorem} Continuous ascent on non-recession directions
+:label: res-opt-non-recession-dir-continuous-ascent
+
+Let $f: \VV \to \RERL$ be a proper, closed and convex function.
+Let $\by \notin R_f$ where $R_f$ is the recession cone of $f$.
+Let $\bx \in \dom f$. Then, along the ray starting from $\bx$
+in the direction $\by$, eventually $f$ increases
+monotonically to $\infty$; i.e., for some $t \geq 0$
+and for all $s_1, s_2 \geq t$ with
+$s_1 < s_2$, we have
+
+$$
+f(\bx + s_1 \by) < f(\bx + s_2 \by).
+$$
+```
+
+```{prf:proof}
+We recall that $R_f$ is the recession cone for all nonempty
+sublevel sets of $f$.
+
+1. Let $S_0$ denote the sublevel set $\{ \bz \in \VV \ST f(\bz) \leq f(\bx) \}$.
+1. Then $\by$ is not a recession direction of $S_0$.
+1. Then due to {prf:ref}`res-cvx-recession-dir-charac`,
+   there exists some $t > 0$ such that
+   $\bx + t \by \notin S_0$.
+1. Hence $f(\bx + t \by) > f(\bx)$.
+1. In other words, the point $\bx + t \by$ is outside
+   the relative boundary of $S_0$.
+1. Consider any $s > t$. 
+1. Let $\bu = \bx + t \by$ and $\bv = \bx + s \by$.
+1. Clearly $\bu$ lies on the line segment between $\bx$ and $\bv$.
+1. Let $r = \frac{t}{s}$.
+1. Then
+   
+   $$
+   (1-r) \bx + r \bv = \frac{1}{s}((s -t ) \bx + t (\bx + s \by))
+   = \bx + t \by = \bu.
+   $$
+1. By convexity of $f$
+
+   $$
+   f(\bu) \leq (1-r) f(\bx) + r f(\bv).
+   $$
+1. Hence 
+   
+   $$
+   r f(\bv) \geq f(\bu) - (1-r) f(\bx) > f(\bu) - (1-r) f(\bu) = r f(\bu).
+   $$
+1. Thus $f(\bv) > f(\bu)$.
+1. Thus for every $s > t$, we have
+
+   $$
+   f(\bx + s \by) > f(\bx + t \by).
+   $$
+1. Now pick any $s_1, s_2 \geq t$ with
+   $s_1 < s_2$.
+1. By the previous argument
+
+   $$
+   f(\bx + s_1 \by) \geq f(\bx + t \by).
+   $$
+1. Noting that $\bx + s_1 \by$ lies on the line segment
+   between $\bx$ and $\bx + s_2 \by$, using the previous
+   argument, it is clear that
+
+   $$
+   f(\bx + s_2 \by) > f(\bx + s_1 \by).
+   $$
+1. Since for all $s \geq t$, $f$ is strictly monotonically
+   increasing, hence
+
+   $$
+   \lim_{s \to \infty} f(\bx + s \by) = \infty.
+   $$ 
+```
