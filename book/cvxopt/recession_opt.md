@@ -194,6 +194,15 @@ $$
    $$
 ```
 
+```{prf:remark} Constancy space of a convex function
+:label: rem-opt-cvx-func-constancy-space
+
+As a result of {prf:ref}`res-opt-cvx-func-lineality-dir-constant`,
+any $\by \in L_f$ is a direction along which the function $f$
+is constant.
+Hence $L_f$ is also known as the *constancy space* of $f$.
+```
+
 
 ## Existence of Solutions of Convex Programs
 
