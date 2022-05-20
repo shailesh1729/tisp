@@ -236,3 +236,109 @@ sublevel sets of $f$.
    \lim_{s \to \infty} f(\bx + s \by) = \infty.
    $$ 
 ```
+
+### Minimization over a Convex Set
+
+
+```{prf:theorem} Minimization of a closed convex function over a closed convex set
+:label: res-opt-const-min-recession-cone-cond
+
+Let $f : \VV \to \RERL$ be a proper, closed and convex function.
+Let $X$ be a nonempty, closed and convex subset of $\VV$.
+Assume that $C = X \cap \dom f \neq \EmptySet$.
+Consider the optimization problem:
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in X.
+$$
+Then the set of minimizers of $f$ over $X$ is nonempty and compact
+if and only if $X$ and $f$ have no common nonzero direction of recession;
+i.e.,
+
+$$
+R_f \cap R_X = \{ \bzero \}.
+$$
+```
+
+```{prf:proof}
+Let $X^*$ denote the set of minimizers for this optimization problem.
+Let $p^*$ be the optimal value of the optimization problem.
+
+We first consider the case of unconstrained minimization where
+$X = \VV$. Hence $C = \dom f$. 
+
+1. In this case $R_X = \VV$.
+1. Hence $R_f \cap R_X = \{ \bzero \}$ if and only if $R_f = \{ \bzero \}$.
+1. Assume that $X^*$ is nonempty and compact.
+1. We have $X^* = \{\bx \in \VV \ST f(\bx) \leq p^* \}$.
+1. $X^*$ is a nonempty sublevel set. 
+1. Since $X^*$ is a sublevel set and $f$ is closed and convex, hence $X^*$ is also
+   closed and convex.
+1. Since $X^*$ is compact, it is closed and bounded.
+1. Hence, as per {prf:ref}`res-cvx-recession-dir-nz-unbounded`,
+   its recession cone is $\{ \bzero \}$.
+1. Then due to {prf:ref}`def-opt-cvx-func-recession-cone`, the recession cone of $f$,
+   $R_f =  \{ \bzero \}$.
+1. Conversely if $R_f \cap R_X = \{ \bzero \}$, then $R_f = \{ \bzero \}$.
+1. Then the recession cone of every nonempty sublevel set is $\{ \bzero \}$.
+1. Then due to {prf:ref}`res-cvx-recession-dir-nz-unbounded`, every nonempty
+   sublevel set is closed and bounded, hence compact.
+1. Then due to Weierstrass theorem ({prf:ref}`res-opt-weierstrass-theorem`),
+   $X^*$ is nonempty and compact (since one of the sublevel sets is nonempty
+   and bounded).
+
+We now consider the more general case where $X \neq \VV$.
+
+
+1. Introduce a new function $\tilde{f} : \VV \to \RERL$ given by
+
+   $$
+   \tilde{f}(\bx) = \begin{cases}
+   f(\bx) & \text{ if } \bx \in X;\\
+   \infty & \text{ otherwise }.
+   \end{cases}
+   $$
+1. We can see that $\dom \tilde{f} = X \cap \dom f = C$ which is nonempty
+   by hypothesis.
+1. Hence $\tilde{f}$ is proper.
+1. Since $f$ is convex, hence $\tilde{f}$ (a restriction of $f$ on $X$)
+   is also convex.
+1. Note that for any $t \in \RR$
+   
+   $$
+   \sublevel (\tilde{f}, t) = \sublevel(f, t) \cap X.
+   $$
+1. Since both $\sublevel(f, t)$ and $X$ are closed and convex sets, 
+   hence $\sublevel (\tilde{f}, t)$ is also closed and convex for every $t \in \RR$.
+1. Since all sublevel sets of $\tilde{f}$ are closed, hence $f$ is a closed function.
+1. Thus, $\tilde{f}$ is a proper, closed and convex function.
+1. Furthermore, the set of minimizers for the unconstrained minimization
+   of $\tilde{f}$ is nothing but $X^*$.
+1. Thus, the original constrained minimization program of minimizing
+   $f$ over $X$ is equivalent to the unconstrained minimization
+   of $\tilde{f}$.
+1. By the previous argument, $X^*$ is nonempty and compact
+   if and only if $\tilde{f}$ has no nonzero direction of recession.
+1. The recession cones of $f$ and $\tilde{f}$ are related by
+  
+   $$
+   R_{\tilde{f}} = R_f \cap R_X.
+   $$
+   1. Let $t \in \RR$ be such that $\sublevel (\tilde{f}, t)$ is nonempty.
+   1. Then $R_{\tilde{f}} = R_{\sublevel (\tilde{f}, t)}$.
+   1. But $\sublevel (\tilde{f}, t) = \sublevel(f, t) \cap X$.
+   1. Since both $\sublevel(f, t)$ and $X$ are nonempty, closed and
+      convex and their intersection is nonempty, hence
+      due to {prf:ref}`res-cvx-recession-cone-intersect`,
+
+      $$
+      R_{\sublevel (\tilde{f}, t)} = R_{\sublevel(f, t)} \cap R_X
+      = R_f \cap R_X.
+      $$
+1. Hence $X^*$ is nonempty and compact if and only if
+   $R_f \cap R_X = \{ \bzero \}$. 
+```
+
+
+
