@@ -204,6 +204,53 @@ Hence $L_f$ is also known as the *constancy space* of $f$.
 ```
 
 
+```{prf:example} Recession cone and constancy space of linear functions
+
+Let $f: \RR^n \to \RR$ be given by
+
+$$
+f(\bx) = \bc^T \bx
+$$
+where $\bc \in \RR^n$ is a given vector.
+
+The recession cone is given by
+
+$$
+R_f = \{\by \ST \bc^T \by \leq 0 \}.
+$$
+This is a closed half-space. 
+
+1. Pick some $t \in \RR$.
+1. Consider the set $S_t = \sublevel(f, t)$.
+1. Pick some $\bx \in  S_t$.
+1. Then $\bc^T \bx \leq t$.
+1. For any $\by \in R_f$ and $\alpha \geq 0$ we can see that
+
+   $$
+   f(\bx + \alpha \by) = \bc^T (\bx + \alpha \by)
+   = \bc^T \bx + \alpha (\bc^T \by) \leq t + \alpha 0 = t.
+   $$
+1. Hence $\bx + \alpha \by \in S_t$.
+
+The constancy space is given by
+
+$$
+L_f =  \{\by \ST \bc^T \by = 0 \}.
+$$
+It is a hyperplane passing through origin.
+
+1. For any $\by \in L_f$ and $\alpha \in R$ we can see that
+
+   $$
+   f(\bx + \alpha \by) = \bc^T (\bx + \alpha \by)
+   = \bc^T \bx + \alpha (\bc^T \by)
+   = \bc^T \bx + 0 \leq t.
+   $$
+1. Hence $\bx + \alpha \by \in S_t$.
+```
+
+
+
 ## Existence of Solutions of Convex Programs
 
 The recession cone of a function provides
