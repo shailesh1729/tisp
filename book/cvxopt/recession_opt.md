@@ -205,6 +205,7 @@ Hence $L_f$ is also known as the *constancy space* of $f$.
 
 
 ```{prf:example} Recession cone and constancy space of linear functions
+:label: ex-opt-recession-cone-linear-functional
 
 Let $f: \RR^n \to \RR$ be given by
 
@@ -249,6 +250,30 @@ It is a hyperplane passing through origin.
 1. Hence $\bx + \alpha \by \in S_t$.
 ```
 
+
+```{prf:example} Recession cone and constancy space of quadratic functions
+:label: ex-opt-recession-cone-quadratic-functional
+
+Let $f: \RR^n \to \RR$ be given by
+
+$$
+f(\bx) = \bx^T \bQ  \bx + \bc^T \bx + b
+$$
+where $\bQ$ is a symmetric positive semidefinite matrix,
+$\bc \in \RR^n$ is a vector and $b \in \RR$ is a scalar.
+
+The recession cone is given by
+
+$$
+R_f = \{\by \ST \bQ \by = \bzero,  \bc^T \by \leq 0 \}.
+$$
+
+The constancy space is given by
+
+$$
+L_f = \{\by \ST \bQ \by = \bzero,  \bc^T \by = 0 \}.
+$$
+```
 
 
 ## Existence of Solutions of Convex Programs
