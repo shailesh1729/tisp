@@ -388,8 +388,8 @@ sublevel sets of $f$.
 ### Constrained Minimization: Compact Solution Set
 
 
-```{prf:theorem} Minimization of a closed convex function over a closed convex set
-:label: res-opt-const-min-recession-cone-cond
+```{prf:theorem} Constrained minimization: nonempty and compact minimizer set
+:label: res-opt-const-min-compact-minimizers
 
 Let $f : \VV \to \RERL$ be a proper, closed and convex function.
 Let $X$ be a nonempty, closed and convex subset of $\VV$.
@@ -488,10 +488,10 @@ We now consider the more general case where $X \neq \VV$.
    $R_f \cap R_X = \{ \bzero \}$. 
 ```
 
-### Constrained Minimization: Unbounded Solution Set
+### Constrained Minimization: Existence of Solutions
 
 ```{div}
-The {prf:ref}`res-opt-const-min-recession-cone-cond`
+The {prf:ref}`res-opt-const-min-compact-minimizers`
 provides guarantees under which the problem of
 minimization of a proper, closed and convex function $f$
 over a nonempty, closed and convex set $X$ has nonempty
@@ -501,15 +501,266 @@ more general case where the solution set may be
 unbounded.
 In other words, we are only concerned with the
 conditions under which $X^*$ is nonempty.
+```
+
+```{prf:lemma} Constrained minimization: nested sublevel sets
+:label: res-opt-const-min-nested-sublevel-sets
+
+Let $f : \VV \to \RERL$ be a proper, closed and convex function.
+Let $X$ be a nonempty, closed and convex subset of $\VV$.
+Assume that $X \cap \dom f \neq \EmptySet$.
+Consider the optimization problem:
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in X.
+$$
+Let $p^* = \inf_{\bx \in X} f(\bx)$.
+Let $\{ t_k \}$ be a nonincreasing sequence of real numbers
+such that $t_k \downarrow p^*$; i.e., 
+the sequence reaches the limit $p^*$ from above.
+Consider the sublevel sets $V_k = \sublevel(f, t_k)$.
+
+1. The sublevel sets $V_k$ are nonempty for every $k$.
+1. The sequence $\{ V_k \}$ is a sequence of nested sets.
+1. The set $X \cap V_k$ is nonempty for every $k$.
+1. The set $X \cap V_K$ is closed and convex for every $k$.
+1. The sequence $\{ X \cap V_k \}$ is a sequence of nested sets.
+1. The set of minimizers $X^*$ for the optimization problem
+   is given by
+
+   $$
+   X^* = \bigcap_{k=1}^{\infty} (X \cap V_k).
+   $$
+```
+
+```{prf:proof}
+$t_k \downarrow p^*$ means that
+1. $t_k > p^*$ for every $k$.
+1. $t_{k+1} \leq t_k$ for every $k$.
+1. For every $\epsilon > 0$, there exists a $k$ such that $t_k \leq p^* + \epsilon$.
+
+We are given that $p^*$ is the optimum value.
+Hence for every $\epsilon > 0$, there exists a $\bx \in X \cap \dom f$ such that
+$f(\bx) \leq p^* + \epsilon$.
+
+(1) $V_k$ is nonempty.
+1. Since $t_k > p^*$, hence $\epsilon = t_k - p^* > 0$.
+1. Then there exists $\bx \in X \cap \dom f$ such that
+   $f(\bx) \leq p^* + \epsilon = t_k$.
+1. Hence $V_k = \sublevel(f, t_k) \neq \EmptySet$.
+
+(2) Nested sublevel sets
+1. $V_{k+1} \subseteq V_k$ for every $k$ since $t_{k+1} \leq t_k$ for every $k$.
+1. Hence $\{ V_k \}$ is a sequence of nested sets.
+
+(3) $X \cap V_k$ is nonempty.
+1. We established that there exists $\bx \in X \cap \dom f$ such that
+   $f(\bx) \leq t_k$.
+1. Hence $\bx \in X$ and $\bx \in V_k$.
+1. Hence $X \cap V_k$ is nonempty.
+
+(4) $X \cap V_k$ is closed and convex.
+1. $X$ is closed by hypothesis.
+1. Since $f$ is closed, hence $V_k$ is closed.
+1. Since $X$ and $V_k$ are both closed, hence $X \cap V_k$ is closed.
+1. $X$ is convex by hypothesis.
+1. Since $f$ is convex, hence $V_k$ is convex.
+1. Since $X$ and $V_k$ are both convex, hence $X \cap V_k$ is convex.
+
+(5) $\{ X \cap V_k \}$ is nested.
+1. Since $V_{k+1} \subseteq V_k$,
+   hence $X \cap V_{k+1} \subseteq X \cap V_k$ for every $k$.
+1. Hence $\{ X \cap V_k \}$ is a sequence of nested sets.
+
+(6) Minimizers
+1. Let $\bx \in X^*$.
+1. Then $f(\bx) = p^*$ and $\bx \in X$.
+1. Hence $\bx \in \sublevel(f, t)$ for every $t \geq p^*$ and $\bx \in X$.
+1. Hence $\bx \in X \cap V_k$ for every $k$.
+1. Hence $X^* \subseteq X \cap V_k$ for every $k$.
+1. Hence $X^* \subseteq \bigcap_{k=1}^{\infty} (X \cap V_k)$.
+1. For the converse, let $\bx \in \bigcap_{k=1}^{\infty} (X \cap V_k)$.
+1. Then $\bx \in X$ and $\bx \in V_k$ for every $k$.
+1. Hence $\bx \in X$ and $f(\bx) \leq t_k$ for every $k$.
+1. Then $f(\bx) \leq \lim_{k \to \infty} t_k$.
+1. Hence $f(\bx) \leq p^*$.
+1. But since $p^*$ is the optimal value, hence $f(\bx) = p^*$.
+1. Thus, $\bx \in X$ and $f(\bx) = p^*$.
+1. Hence $\bx \in X^*$.
+1. Hence $\bigcap_{k=1}^{\infty} (X \cap V_k) \subseteq X^*$.
+1. Together $X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)$.
+```
+
+```{prf:theorem} Constrained minimization: existence of solutions
+:label: res-opt-const-min-nonempty-minimizers
+
+Let $f : \VV \to \RERL$ be a proper, closed and convex function.
+Let $X$ be a nonempty, closed and convex subset of $\VV$.
+Assume that $C = X \cap \dom f \neq \EmptySet$.
+Consider the optimization problem:
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in X.
+$$
+Then the set of minimizers of $f$ over $X$ is nonempty
+if
+
+$$
+R_X \cap R_f = L_X \cap L_f.
+$$
+
+In particular, the set of minimizers is of the form
+
+$$
+(L_X \cap L_f) + \tilde{X}
+$$
+where $\tilde{X}$ is some nonempty and compact set.
+```
+
+```{prf:proof}
+.
 
 1. Let $p^* = \inf_{\bx \in X} f(\bx)$.
-1. Let $\{ t_k \}$ be a sequence of real numbers
+1. Let $\{ t_k \}$ be a nonincreasing sequence of real numbers
    such that $t_k \downarrow p^*$; i.e., 
    the sequence reaches the limit $p^*$ from above.
-1. Consider the sublevel sets $V_k = \sublevel(f, t_k)$.
+1. Consider the sublevel sets 
+
+   $$
+   V_k = \sublevel(f, t_k) = \{ \bx \in \VV \ST f(\bx) \leq t_k \}.
+   $$
 1. Then the set of minimizers is given by
    $X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)$.
-1. We shall analyze the problem in terms of the
-   recession cones and the lineality spaces of
-   the constraint set $X$ and the sublevel sets $V_k$. 
+1. The sets $X \cap V_k$ are nonempty, closed, convex and nested
+   due to {prf:ref}`res-opt-const-min-nested-sublevel-sets`.
+1. For every $k$, the recession cone of $X \cap V_k$ is $R = R_X \cap R_f$
+   due to {prf:ref}`res-cvx-recession-cone-intersect`
+   and {prf:ref}`def-opt-cvx-func-recession-cone`.
+1. For every $k$, the lineality space of $X \cap V_k$ is $L = L_X \cap L_f$
+   due to {prf:ref}`res-cvx-lineality-space-intersect`
+   and {prf:ref}`res-opt-sublevel-sets-lineality-space`.
+1. Thus, every $X \cap V_k$ has the same recession cone and lineality space
+   satisfying $R=L$ by hypothesis.
+1. Then due to {prf:ref}`res-cvx-recession-nested-nonempty-intersect-gen-cond`,
+   the nested sequence of nonempty, closed and convex sets
+   $\{ X \cap V_k \}$ has a nonempty intersection and
+   has the form
+
+   $$
+   \bigcap_{k=1}^{\infty} (X \cap V_k) = (L_X \cap L_f) + \tilde{X}
+   $$
+   where $\tilde{X}$ is a nonempty and compact set.
+1. By {prf:ref}`res-opt-const-min-nested-sublevel-sets`,
+   $X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)$.
+1. We are done.
+```
+
+### Minimization with Linear Constraints: Existence of Solutions
+
+```{prf:theorem} Minimization with linear inequality constraints: existence of solutions
+:label: res-opt-min-lin-const-nonempty-minimizers
+
+Let $f : \VV \to \RERL$ be a proper, closed and convex function.
+Let $X$ be a nonempty, closed and convex subset of $\VV$
+specified as a 
+set of linear inequality constraints; i.e.,
+
+$$
+X = \{ \bx \in \VV \ST \langle \bx, \ba_i \rangle \leq b_i, i=1,\dots,r \}
+$$
+where $\ba_i \in \VV$ and $b_i \in \RR$.
+
+Assume that $C = X \cap \dom f \neq \EmptySet$.
+Consider the optimization problem:
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in X.
+$$
+Then the set of minimizers of $f$ over $X$ is nonempty
+if
+
+$$
+R_X \cap R_f \subseteq L_f,
+$$
+``` 
+
+```{prf:proof}
+Following the proof of {prf:ref}`res-opt-const-min-nonempty-minimizers`,
+we choose $\{ t_k \}$ such that $t_k \downarrow p^*$.
+
+1. $X$ is an intersection of closed half-spaces.
+1. Hence $X$ is nonempty, closed and convex.
+1. $\{ V_k \}$ is a nested
+   sequences of nonempty, closed and convex sets.
+1. $X \cap V_k$ is nonempty for all $k$.
+1. Since $V_k$ are nonempty, hence they have the same
+   recession cone $R_f$ and same lineality space $L_f$.
+1. $R_X \cap R_f \subseteq L_f$ by hypothesis.
+1. Hence due to {prf:ref}`res-cvx-rec-nested-seq-closed-inequality-constraints`,
+
+   $$
+   X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)
+   = X \cap \left (\bigcap_{k=1}^{\infty} V_k \right )
+   $$
+   is nonempty.
+```
+
+### Quadratically Constrained Quadratic Minimization
+
+```{prf:theorem} Quadratically constrained quadratic minimization: existence of solutions
+:label: res-opt-qcqp-nonempty-minimizers
+
+Let $f : \RR^n \to \RERL$ be a proper, closed and convex function
+given by
+
+$$
+f(\bx) = \bx^T \bQ \bx + \ba^T \bx
+$$
+where $\bQ \in \SS^n_+$ is a symmetric positive semidefinite
+matrix, $\ba \in \RR^n$ is a vector.
+
+Let $X$ be a nonempty, closed and convex subset of $\VV$ given by
+
+$$
+X = \{ \bx \in \RR^n \ST 
+\bx^T \bQ_j \bx + \ba^T_j \bx + b_j \leq 0, j=1,\dots, r \}
+$$
+where $\bQ_j \in \SS^n_+$, $\ba_j \in \RR^n$ 
+and $b_j \in \RR$.
+Assume that $C = X \cap \dom f \neq \EmptySet$.
+Consider the optimization problem:
+
+$$
+& \text{minimize }  &  & f(\bx) \\
+& \text{subject to } & & \bx \in X.
+$$
+
+Assume that the optimal value for this optimization problem
+$p^* > -\infty$.
+Then the set of minimizers of $f$ over $X$ is nonempty.
+```
+
+```{prf:proof}
+Following the proof of {prf:ref}`res-opt-const-min-nonempty-minimizers`,
+we choose $\{ t_k \}$ such that $t_k \downarrow p^*$.
+
+1. The sets $V_k$ have the form
+
+   $$
+   V_k = \{ \bx \in \RR^n \ST \bx^T \bQ \bx + \ba^T \bx \leq t_k \}
+   $$
+   where $\{ t_k \}$ is a nonincreasing sequence converging to $p^*$
+   which is finite.
+1. $X$ is specified via a set of quadratic inequalities.
+1. $X \cap V_k$ is nonempty for all $k$.
+1. By {prf:ref}`res-cvx-recession-quad-func-quad-constraints`, the set
+
+   $$
+   X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)
+   = X \cap \left (\bigcap_{k=1}^{\infty} V_k \right )
+   $$
+   is nonempty.
 ```
