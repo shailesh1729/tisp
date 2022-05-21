@@ -1,5 +1,15 @@
 (sec:cvx:func:convexity:preserving)=
-# Convexity Preserving Function Operations
+# Function Operations
+
+In this section we discuss various operations
+which generate new functions from a given
+function, a pair of functions or a family
+of functions. We discuss if the properties
+like convexity and closedness are preserved
+under these function operations.
+Such operations include, scaling, sum,
+composition, pointwise supremum, partial minimization,
+etc..
 
 ## Scaling and Addition of Convex Functions
 
@@ -835,6 +845,7 @@ Hence, $f$ is convex ({prf:ref}`res-cvx-ptws-max-n`).
 
 ## Partial Minimization
 
+### Real Valued Convex Functions
 
 ```{prf:theorem} Partial minimization
 :label: res-cvxf-partial-minimization
@@ -917,6 +928,7 @@ In particular $f$ is convex over the subset $\VV \oplus C$.
 Then, by {prf:ref}`res-cvxf-partial-minimization`, $d_C$ is convex.
 ```
 
+### Proper Convex Functions
 
 ```{prf:theorem} Partial minimization for proper convex functions
 :label: res-cvxf-partial-minimization-proper
@@ -1031,3 +1043,64 @@ Combining the two cases, $g$ is convex.
 ```
 
 
+### Extended Valued Convex Functions
+
+```{prf:theorem} Partial minimization for extended valued convex functions
+:label: res-cvxf-partial-minimization-ev
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $f : \VV \oplus \WW \to \ERL$ be a convex function.
+Let $g : \VV \to \ERL$ be defined by
+
+$$
+g(\bx) \triangleq \inf_{\by \in \WW} f(\bx, \by).
+$$
+Then $g$ is convex.
+```
+
+```{prf:proof}
+
+We proceed as follows.
+
+1. If $g(\bx)$ is $\infty$ everywhere then $\epi g$ is empty,
+   and $g$ is convex.
+1. Hence assume that $\epi g \neq \EmptySet$.
+1. If $\dom g$ is singleton, then also $g$ is convex and we are done.
+1. Hence assume the case where $\dom g$ is not a singleton.
+1. Let $(\bx_a, r_a)$ and $(\bx_b, r_b)$ belong to $\epi g$.
+1. Hence $g(\bx_a) \leq r_a$ and $g(\bx_b) \leq r_b$.
+1. By definition of $g$, we must have sequences
+   $\{ \bu_k \}$ and $\{ \bv_k \}$ of $\WW$ so that
+
+   $$
+   f(\bx_a, \bu_k) \to g(\bx_a)
+   \text{ and }
+   f(\bx_b, \bv_k) \to g(\bx_b).
+   $$
+1. Pick some $t \in [0,1]$.
+1. By definition of $g$
+
+   $$
+   g(t \bx_a + (1-t) \bx_b) \leq f(t \bx_a + (1-t) \bx_b, t \bu_k + (1-t) \bv_k) \Forall k.
+   $$
+1. By convexity of $f$
+
+   $$
+   f(t \bx_a + (1-t) \bx_b, t \bu_k + (1-t) \bv_k)
+   \leq t f(\bx_a, \bu_k) + (1-t) f(\bx_b, \bv_k) \Forall k.
+   $$
+1. Hence we have
+ 
+   $$
+   g(t \bx_a + (1-t) \bx_b) \leq t f(\bx_a, \bu_k) + (1-t) f(\bx_b, \bv_k) \Forall k.
+   $$
+1. Taking limit $k \to \infty$ on the R.H.S., we obtain
+
+   $$
+   g(t \bx_a + (1-t) \bx_b) \leq t g(\bx_a) + (1-t) g(\bx_b)
+   \leq t r_a + (1-t) r_b. 
+   $$
+1. Hence the point $(t \bx_a + (1-t) \bx_b, t r_a + (1-t) r_b) \in \epi g$.
+1. Hence $\epi g$ is convex.
+1. Hence $g$ is convex.
+```
