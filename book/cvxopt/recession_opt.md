@@ -722,7 +722,7 @@ $$
 where $\bQ \in \SS^n_+$ is a symmetric positive semidefinite
 matrix, $\ba \in \RR^n$ is a vector.
 
-Let $X$ be a nonempty, closed and convex subset of $\VV$ given by
+Let $X$ be a nonempty, closed and convex subset of $\RR^n$ given by
 
 $$
 X = \{ \bx \in \RR^n \ST 
@@ -763,4 +763,99 @@ we choose $\{ t_k \}$ such that $t_k \downarrow p^*$.
    = X \cap \left (\bigcap_{k=1}^{\infty} V_k \right )
    $$
    is nonempty.
+```
+
+
+### Quadratic Programs
+
+```{prf:theorem} Quadratic minimization with linear inequalities: existence of solutions
+:label: res-opt-qp-lin-ineq-nonempty-minimizers
+
+Let $f : \RR^n \to \RERL$ be a proper, closed and convex function
+given by
+
+$$
+f(\bx) = \bx^T \bQ \bx + \bc^T \bx
+$$
+where $\bQ \in \SS^n_+$ is a symmetric positive semidefinite
+matrix, $\bc \in \RR^n$ is a vector.
+
+Let $X$ be a nonempty set of the form
+
+$$
+X = \{ \bx \in \RR^n \ST \bA \bx \preceq \bb \}
+$$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^n$. 
+The following are equivalent.
+
+1. $f$ attains a minimum over $X$.
+1. The optimum value $p^* > -\infty$.
+1. For all $\by$ such that $\bA \by \preceq \bzero$
+   and $\by \in \nullspace \bQ$, we have
+   $\bc^T \by \geq 0$.
+```
+
+The recession cone of $X$ is given by $\{ \by \ST \bA \by \preceq \bzero \}$.
+
+Recall from {prf:ref}`ex-opt-recession-cone-quadratic-functional` that
+
+$$
+R_f = \{\by \ST \bQ \by = \bzero,  \bc^T \by \leq 0 \}
+\text{ and }
+L_f = \{\by \ST \bQ \by = \bzero,  \bc^T \by = 0 \}.
+$$
+```{prf:proof}
+
+(1) $\implies$ (2) is obvious.
+
+(2) $\implies$ (3)
+
+1. For all $\bx \in X$, $\by \in \nullspace \bQ$ with
+   $\bA \by \preceq \bzero$ and $\alpha \geq 0$, we have
+   1. $\by \in R_X$ since $\bA \by \preceq \bzero$.
+   1. Hence $\bx + \alpha \by \in X$.
+   1. Also
+
+      $$
+      f(\bx + \alpha \by)
+      &= (\bx + \alpha \by)^T \bQ (\bx + \alpha \by)
+      + \bc^T (\bx + \alpha \by) \\
+      &= \bx^T \bQ \bx + \bc^T \bx + \alpha \bc^T \by \\
+      &= f(\bx) + \alpha \bc^T \by.
+      $$
+      We used the hypothesis that $\bQ \by = \by^T \bQ = \bzero$.
+1. If $\bc^T \by < 0$, then $\lim_{\alpha \to \infty} f(\bx + \alpha \by) = -\infty$.
+1. Hence $p^* = -\infty$.
+1. This contradicts the hypothesis that $p^* > -\infty$.
+1. Hence $\bc^T \by \geq 0$ must hold
+   for every $\by \in \nullspace \bQ$ with $\bA \by \preceq \bzero$.
+
+(3) $\implies$ (1)
+
+1. $\by \in R_X$ since $\bA \by \preceq \bzero$.
+1. $R_f = (\nullspace \bQ) \cap \{ \by \ST \bc^T \by \leq 0 \}$.
+1. Hence
+
+   $$
+   R_X \cap R_f = \{ \by \ST \bA \by \preceq \bzero \}
+   \cap (\nullspace \bQ) \cap \{ \by \ST \bc^T \by \leq 0 \}.
+   $$
+1. Then for every $\by \in R_X \cap R_f$, then we  must have $\bc^T \by = 0$.
+   1. Since $\by \in  R_X \cap R_f$, hence $\bA \by \preceq \bzero$
+      and $\by \in \nullspace \bQ$.
+   1. By hypothesis (3), we must have $\bc^T \by \geq 0$.
+   1. But since $\by \in  R_X \cap R_f$, hence we also have $\bc^T \by \leq 0$.
+   1. Together, we must have $\bc^T \by = 0$.
+1. Hence $R_X \cap R_f$ reduces to
+
+   $$
+   R_X \cap R_f = \{ \by \ST \bA \by \preceq \bzero \}
+   \cap (\nullspace \bQ) \cap \{ \by \ST \bc^T \by = 0 \}.
+   $$
+1. Recall that $L_f = \{\by \ST \bQ \by = \bzero,  \bc^T \by = 0 \}$.
+1. Hence $R_X \cap R_f \subseteq L_f$.
+1. We satisfy all the requirements of
+   {prf:ref}`res-opt-min-lin-const-nonempty-minimizers`,
+1. Hence the set of minimizers is nonempty.
+1. $f$ indeed attains a minimum over $X$.
 ```
