@@ -1275,7 +1275,7 @@ of $f$ on $\VV$ are closed.
 
 ### Closedness Conditions I
 
-```{prf:theorem} Partial minimization and closedness
+```{prf:theorem} Partial minimization and closedness I
 :label: res-cvxf-partial-minimization-closedness-1
 
 Let $\VV$ and $\WW$ be Euclidean spaces.
@@ -1403,5 +1403,105 @@ We now show that $g$ is proper.
 1. We have shown that the set of minimizers of $h_{\bx}$
    is nonempty and compact.
 1. Hence $g(\bx) > -\infty$ for every $\bx \in \dom g$.
+1. Hence $g$ is proper.
+```
+
+
+
+### Closedness Conditions II
+
+```{prf:theorem} Partial minimization and closedness II
+:label: res-cvxf-partial-minimization-closedness-2
+
+Let $\VV$ and $\WW$ be Euclidean spaces.
+Let $f : \VV \oplus \WW \to \RERL$ be a proper, closed and convex function.
+
+Let $g : \VV \to \ERL$ be defined by
+
+$$
+g(\bx) \triangleq \inf_{\bz \in \WW} f(\bx, \bz).
+$$
+
+Assume that there exists a vector $\tilde{\bx} \in \VV$ and a scalar $\gamma$
+such that the set
+
+$$
+K = \{ \bz \ST f(\tilde{\bx}, \bz) \leq \gamma \}
+$$
+is nonempty and its recession cone is equal to its lineality space.
+Then $g$ is proper, closed and convex.
+Furthermore, for each $\bx \in \dom g$,
+the set of points that attain the
+infimum of $f(\bx, \cdot)$ over $\WW$
+is nonempty. 
+```
+
+```{prf:proof}
+The proof is along similar lines.
+Due to {prf:ref}`res-cvxf-partial-minimization-ev`,
+$g$ is convex.
+
+We shall denote the sublevel sets of $f$ as
+
+$$
+V_t = \sublevel(f, t) = \{ (\bx, \bz) \ST f(\bx, \bz) \leq t \}.
+$$
+
+1. By hypothesis $\VV_{\gamma}$ is nonempty since there exists
+   a $\bz$ such that $f(\tilde{\bx}, \bz) \leq \gamma$.
+1. Let $(\bzero, \by) \in R_f$ be a direction of recession of $f$.
+1. Then $(\bzero, \by)$ is also a direction of recession of $V_{\gamma}$.
+1. For any $(\tilde{\bx}, \bz) \in V_{\gamma}$,
+   such a direction of recession will satisfy
+
+   $$
+   f(\tilde{\bx}, \bz + \alpha \by) \leq \gamma \Forall \alpha \geq 0.
+   $$
+1. Thus for every $\bz \in K$ and $\alpha \geq 0$, we have
+   $\bz + \alpha \by \in K$.
+1. Then $\by$ is a direction of recession of $K$.
+1. By hypothesis $R_K = L_K$.
+1. Hence $-\by$ is also a direction of recession of $K$.
+1. Thus For any $(\tilde{\bx}, \bz) \in V_{\gamma}$,
+
+   $$
+   f(\tilde{\bx}, \bz - \alpha \by) \leq \gamma \Forall \alpha \geq 0.
+   $$
+1. Thus, $(\bzero, -\by)$ is also a direction of recession for $V_{\gamma}$
+   due to {prf:ref}`res-cvx-recession-dir-charac`.
+1. Hence $(\bzero, -\by) \in R_f$.
+1. Since both $(\bzero, \by) \in R_f$ and $(\bzero, -\by) \in R_f$,
+   hence $(\bzero, \by) \in L_f$. 
+1. Hence $(\bzero, \by)$ is a direction along with $f(\tilde{\bx}, \cdot)$
+   is constant.
+1. Hence for any nonempty sublevel set $V_t$ of $f$,
+   a direction of recession of the form $(\bzero, \by)$ is
+   also in the lineality space of $V_t$.
+
+
+We now show that $g$ is closed.
+
+1. Let $V_t$ be any nonempty sublevel set of $f$.
+1. Let $p$ be the projection operator as defined in the proof of
+   {prf:ref}`res-cvxf-partial-minimization-ev`.
+1. Then $\nullspace p = \{ (\bzero, \by) \ST \by \in \WW \}$.
+1. If $(\bzero, \by) \in R_{V_t}$ then $(\bzero, \by) \in L_{V_t}$
+   by the previous argument.
+1. Hence $R_{V_t} \cap \nullspace p \subseteq  L_{V_t}$.
+1. Hence, due to {prf:ref}`res-cvx-closed-im-lin-op-closed`,
+   the projection of $V_t$ to $\VV$ under $p$ is closed.
+1. Hence $g$ is closed.
+
+
+As before, we define $h_{\bx} : \WW \to \RERL$
+as a projection of $f$ by fixing $\bx$.
+
+1. For every $\bx \in \dom g$, $h_{\bx}$ is proper,
+   closed and convex.
+1. By the previous argument $R_{h_{\bx}} = L_{h_{\bx}}$.
+1. Following the arguments of {prf:ref}`res-opt-const-min-nonempty-minimizers`,
+   the set of minimizers of $h_{\bx}$ is nonempty.
+1. Hence $g(\bx)$ is finite for every $\bx \in \dom g$.
+1. In particular $g(\tilde{\bx}) < \infty$ since $K$ is nonempty.
 1. Hence $g$ is proper.
 ```
