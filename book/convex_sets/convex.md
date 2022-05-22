@@ -1579,6 +1579,7 @@ The generalization for multiple real vector spaces is
 easily verifiable through induction.
 ```
 
+### Projection
 
 ```{prf:theorem} Projection of a direct sum
 :label: res-cvx-convex-set-direct-sum-projection
@@ -1615,6 +1616,46 @@ Consider the case of two vector spaces $\VV$ and $\WW$.
 The argument can be extended by mathematical induction for
 multiple vector spaces.
 ```
+
+
+```{prf:theorem} Projection of a convex set
+:label: res-cvx-convex-set-projection
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $C \subseteq \VV \oplus \WW$ be a convex set of
+$\VV \oplus \WW$.
+
+For every $\bx \in \VV$, define
+
+$$
+D_{\bx} = \{ \by \in \WW \ST  (\bx, \by) \in C \}.
+$$
+
+Then $D_{\bx}$ is convex for every $\bx \in \VV$.
+
+Similarly, if for every $\by \in \WW$, we define
+
+$$
+E_{\by} = \{ \bx \in \VV \ST  (\bx, \by) \in C \}
+$$
+then $E_{\by}$ is convex for every $\by \in \WW$.
+```
+
+```{prf:proof}
+If $D_{\bx}$ is empty then it is convex vacuously.
+Hence assume that $D_{\bx}$ is nonempty. 
+
+1. Then for every $\by \in D_{\bx}$ there exists $(\bx, \by) \in C$.
+1. Let $\bu, \bv \in D_{\bx}$ and $t \in [0,1]$.
+1. Then $(\bx, \bu) \in C$ and $(\bx, \bv) \in C$.
+1. Since $C$ is convex hence $t(\bx, \bu) + (1-t)(\bx, \bv) \in C$.
+1. i.e., $(\bx, t\bu + (1-t)\bv) \in C$.
+1. This implies that $t\bu + (1-t)\bv \in D_{\bx}$.
+1. Hence $D_{\bx}$ is convex.
+
+The argument for the convexity of $E_{\by}$ is identical.
+```
+
 
 ## Extreme Points
 
