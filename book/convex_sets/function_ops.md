@@ -11,6 +11,10 @@ Such operations include, scaling, sum,
 composition, pointwise supremum, partial minimization,
 etc..
 
+
+Main references for this section are
+{cite}`boyd2004convex,bertsekas2003convex`.
+
 ## Scaling and Addition of Convex Functions
 
 Here we show some basic results about operations
@@ -842,6 +846,70 @@ $f$ is a pointwise maximum of $n$ convex functions.
 Hence, $f$ is convex ({prf:ref}`res-cvx-ptws-max-n`).
 ```
 
+## Projection
+
+```{prf:theorem} Projection for extended valued functions
+:label: res-cvxf-projection-ev
+
+Let $\VV$ and $\WW$ be finite dimensional real normed linear spaces.
+Let $f : \VV \oplus \WW \to \ERL$ be a convex function.
+Let $g_{\bx} : \WW \to \ERL$ be defined by
+
+$$
+g_{\bx}(\by)  = f(\bx, \by)
+$$
+
+1. If $f$ is convex, then $g_{\bx}$ is convex.
+1. If $f$ is proper and $f(\bx, \by) < \infty$ for some $\by$,
+   then $g_{\bx}$ is proper.
+1. If $f$ is closed, then $g_{\bx}$ is closed.
+```
+
+```{prf:proof}
+
+Convexity
+
+1. Let $\by_1, \by_2 \in \WW$ and $t \in [0,1]$.
+1. Then
+
+   $$
+   g_{\bx}(t \by_1 + (1-t) \by_2)
+   &= f(\bx, t \by_1 + (1-t) \by_2) \\
+   &= f(t\bx + (1-t) \bx, t \by_1 + (1-t) \by_2) \\
+   &= f(t (\bx, \by_1) + (1-t)(\bx, \by_2)) \\
+   &\leq t f(\bx, \by_1) + (1-t) f(\bx, \by_2) \\
+   &= t g_{\bx}(\by_1) + (1-t) g(\by_2).
+   $$
+1. Hence $g$ is convex.
+
+
+Properness
+
+1. Since $f$ is proper, hence $g_{\bx} > -\infty$ for every $\by$.
+1. Since $f(\bx, \by) < \infty$ for some $\by$, hence
+   $g_{\bx}(\by) < \infty$ for the same $\by$.
+1. Hence $g_{\bx}$ is proper.
+
+
+Closedness
+
+1. Let $G_t = \sublevel(g_{\bx}, t)$ for any $t \in \RR$.
+1. Let $F_t = \sublevel(f, t)$ for any $t \in \RR$.
+1. By hypothesis, $F_t$ is closed for every $t$.
+1. Consider a converging sequence $\{ \by_k \}$ of $G_t$ with $\lim \by_k = \by$.
+1. Then $g_{\bx} (\by_k ) \leq t$ for every $k$.
+1. Thus $f(\bx, \by_k) \leq t$ for every $k$.
+1. Hence $\{ (\bx, \by_k) \}$ is a converging sequence of $F_t$.
+1. Since $F_t$ is closed, hence $\{ (\bx, \by_k) \}$ converges in $F_t$.
+1. Hence $(\bx, \by) \in F_t$.
+1. Hence $f(\bx, \by) \leq t$.
+1. Hence $g_{\bx}(\by) \leq t$.
+1. Hence $\by \in G_t$.
+1. Hence $G_t$ is closed.
+1. Hence all sublevel sets of $g_{\bx}$ are closed.
+1. Hence $g_{\bx}$ is a closed function.
+```
+
 
 ## Partial Minimization
 
@@ -1103,4 +1171,237 @@ We proceed as follows.
 1. Hence the point $(t \bx_a + (1-t) \bx_b, t r_a + (1-t) r_b) \in \epi g$.
 1. Hence $\epi g$ is convex.
 1. Hence $g$ is convex.
+```
+
+
+## Partial Minimization and Closedness
+
+The closedness of a function doesn't imply the closedness
+of its partial minimization. The problem is that the
+projection operation of a closed set to a subspace
+doesn't always preserve the closedness. In this subsection,
+we review specific conditions under which the closedness
+of a function is guaranteed after partial minimization.
+
+The results in this section draw heavily on
+{ref}`sec:cvx:recession`. The reader is
+encouraged to familiarize themselves with the
+concepts of recession cones and lineality spaces
+of convex sets.
+
+
+We first establish the relationship between the sublevel sets
+of the original function and the sublevel sets of its partial
+minimization.
+
+### Sublevel Sets
+
+```{prf:lemma} Partial minimization and sublevel-sets
+:label: res-cvxf-part-min-sublevel-sets
+
+Let $\VV$ and $\WW$ be Euclidean spaces.
+Let $f : \VV \oplus \WW \to \ERL$ be a convex function.
+Let $g : \VV \to \ERL$ be defined by
+
+$$
+g(\bx) \triangleq \inf_{\bz \in \WW} f(\bx, \bz).
+$$
+
+Let $G_t$ denote the set $\sublevel(g, t) = \{ \bx \in \VV \ST g(\bx) \leq t \}$.
+Then
+
+$$
+G_t = \bigcap_{k=1}^{\infty} \{ \bx \in \VV \ST \text{ there exists }  (\bx, \bz) \in \VV \oplus \WW 
+\text{ with } f(\bx, \bz) \leq t_k \} 
+$$
+where $\{ t_k \}$ is any nonincreasing sequence with $t_k \downarrow t$.
+
+We further note that the set on the R.H.S. is the
+projection on $\VV$ of the set $\sublevel(f, t_k)$ where
+the projection is given by $(\bx, \bz) \mapsto \bx$.
+```
+
+```{prf:proof}
+$t_k \downarrow t$ means that
+1. $t_k > t$ for every $k$.
+1. $t_{k+1} \leq t_k$ for every $k$.
+1. For every $\epsilon > 0$, there exists a $k$ such that $t_k \leq t + \epsilon$.
+
+Let $X_t$ denote the set
+
+$$
+X_t = \{ \bx \in \VV \ST \text{ there exists }  (\bx, \bz) \in \VV \oplus \WW 
+\text{ with } f(\bx, \bz) \leq t \}. 
+$$
+
+We first show that $G_t \subseteq \bigcap_{k=1}^{\infty} X_{t_k}$.
+
+1. Let $\bx \in G_t$.
+1. Then $g(\bx) \leq t$.
+1. Thus $\inf_{\bz \in \WW} f(\bx, \bz) \leq t$.
+1. Hence for every $\epsilon > 0$, there exists $\bz$ such that
+   $f(\bx, \bz) \leq t + \epsilon$.
+1. Since $t_k > t$ for every $k$,
+   hence for every $k$, there exists $\bz$ such that $f(\bx, \bz) \leq t_k$.
+1. Hence $\bx \in X_{t_k}$ for every $k$.
+1. Hence $\bx \in \bigcap_{k=1}^{\infty} X_{t_k}$.
+1. Hence $G_t \subseteq \bigcap_{k=1}^{\infty} X_{t_k}$.
+
+Now for the converse,
+
+1. Let $\bx \in \bigcap_{k=1}^{\infty} X_{t_k}$.
+1. Then for every $k$, $\bx \in X_{t_k}$.
+1. Hence for every $k$, there exists $\bz_k$ such that $f(\bx, \bz_k) \leq t_k$.
+1. Also, $g(\bx) \leq f(\bx, \bz_k) \leq t_k$ for every $k$.
+1. Taking the infimum on the R.H.S., we get $g(\bx) \leq t$.
+1. Hence $\bx \in G_t$.
+1. Hence $\bigcap_{k=1}^{\infty} X_{t_k} \subseteq G_t$.
+
+Combining, we get
+
+$$
+G_t = \bigcap_{k=1}^{\infty} X_{t_k}.
+$$
+```
+
+We see that the sublevel set of $g$ is an infinite
+intersection of projections of a nested sequence
+of sublevel sets of $f$. If the projections are
+closed, then the sublevel set of $g$ is also closed.
+Thus, to show that $g$ is closed, it is sufficient
+to show that the projections of the sublevel sets
+of $f$ on $\VV$ are closed.
+
+
+### Closedness Conditions I
+
+```{prf:theorem} Partial minimization and closedness
+:label: res-cvxf-partial-minimization-closedness-1
+
+Let $\VV$ and $\WW$ be Euclidean spaces.
+Let $f : \VV \oplus \WW \to \RERL$ be a proper, closed and convex function.
+
+Let $g : \VV \to \ERL$ be defined by
+
+$$
+g(\bx) \triangleq \inf_{\bz \in \WW} f(\bx, \bz).
+$$
+
+Assume that there exists a vector $\tilde{\bx} \in \VV$ and a scalar $\gamma$
+such that the set
+
+$$
+\{ \bz \ST f(\tilde{\bx}, \bz) \leq \gamma \}
+$$
+is nonempty and compact.
+Then $g$ is proper, closed and convex.
+Furthermore, for each $\bx \in \dom g$,
+the set of points that attain the
+infimum of $f(\bx, \cdot)$ over $\WW$
+is nonempty and compact. 
+```
+
+```{prf:proof}
+Due to {prf:ref}`res-cvxf-partial-minimization-ev`,
+$g$ is convex. However, this result alone doesn't
+guarantee that $g$ is proper or closed.
+
+We shall denote the sublevel sets of $f$ as
+
+$$
+V_t = \sublevel(f, t) = \{ (\bx, \bz) \ST f(\bx, \bz) \leq t \}.
+$$
+We first establish that for any nonempty sublevel set $V_t$, there is no nonzero
+direction of recession of the form $(\bzero, \by)$.
+
+1. By hypothesis $\VV_{\gamma}$ is nonempty since there exists
+   a $\bz$ such that $f(\tilde{\bx}, \bz) \leq \gamma$.
+1. By {prf:ref}`def-cvx-func-recession-cone`, all nonempty sublevel sets
+   of $f$ have the same
+   recession cone given by $R_f$.
+1. Let $(\bzero, \by) \in R_f$ be a direction of recession of $f$.
+1. Then $(\bzero, \by)$ is also a direction of recession of $V_{\gamma}$.
+1. For any $(\tilde{\bx}, \bz) \in V_{\gamma}$,
+   such a direction of recession will satisfy
+
+   $$
+   f(\tilde{\bx}, \bz + \alpha \by) \leq \gamma \Forall \alpha \geq 0.
+   $$
+1. Since, by hypothesis, the set $\{ \bz \ST f(\tilde{\bx}, \bz) \leq \gamma \}$
+   is compact, hence the previous statement can be true only if
+   $\by = \bzero$.
+1. Thus there is no nonzero direction of recession of $V_{\gamma}$ of the
+   form $(\bzero, \by)$.
+1. Since all sublevel sets share the same recession cone, hence
+   for any nonempty sublevel set $V_t$, there is no nonzero direction of recession
+   of the form $(\bzero, \by)$.
+
+We now show that $g$ is a closed function. For this,
+we shall show that the projection of every
+sublevel set of $f$ to $\VV$ is closed.
+
+1. If $V_t$ is an empty sublevel set of $f$ then its projection
+   to $\VV$ is also an empty set which is a closed set. 
+1. Now let $V_t$ be any nonempty sublevel set of $f$.
+1. Let $p : \VV \oplus \WW \to \VV$ denote the projection operator
+   given by
+
+   $$
+   p(\bx, \by) = \bx.
+   $$
+1. Note that $p$ is a linear operator.
+1. The nullspace of this projection operator is the set of vectors of the
+   form $(\bzero, \by)$.
+1. Hence the nullspace of $p$ doesn't contain any nonzero direction of
+   recession of $V_t$. 
+1. Also, $R_{V_t} \cap (\nullspace p) = \{ (\bzero, \bzero) \} \subseteq L_{V_t}$
+   since $(\bzero, \bzero)$ always belongs to the lineality space of $V_t$.
+1. Hence, due to {prf:ref}`res-cvx-closed-im-lin-op-closed`, the projection
+   of $V_t$ to $\VV$ under $p$ is closed.
+1. By {prf:ref}`res-cvxf-part-min-sublevel-sets`,
+   a sublevel set of $g$ is an infinite intersection of projections
+   of a nested sequence of sublevel sets of $f$.
+1. Since projection of every nonempty sublevel set of $f$ is closed,
+   hence an intersection of any sequence of such projections is closed.
+1. Thus every sublevel set of $g$ is closed.
+1. Hence $g$ is closed.
+
+
+We introduce a function $h_{\bx} : \WW \to \RERL$ as
+
+$$
+h_{\bx} (\bz) = f(\bx, \bz) \Forall \bz \in \WW.
+$$
+
+1. For every $\bx \in \dom g$, there exists $\bz \in \WW$
+   such that $f(\bx, \bz) < \infty$.
+1. Hence for every $\bx \in \dom g$, the function
+   $h_{\bx}$ is proper, closed and convex
+   due to {prf:ref}`res-cvxf-projection-ev`.
+1. We can see that 
+
+   $$
+   g(\bx) = \inf_{\bz \in \WW} h_{\bx}(\bz).
+   $$
+1. By our previous argument, the function $h_{\bx}$
+   has no nonzero direction of recession.
+1. Hence the recession cone of every nonempty sublevel
+   set of $h_{\bx}$ is $\{ \bzero \}$.
+1. Then due to {prf:ref}`res-cvx-recession-dir-nz-unbounded`, every nonempty
+   sublevel set is closed and bounded, hence compact.
+1. Then due to Weierstrass theorem ({prf:ref}`res-opt-weierstrass-theorem`),
+   the set of minimizers of $h_{\bx}$ is nonempty and compact
+   (since one of the sublevel sets is nonempty and bounded).
+
+
+We now show that $g$ is proper.
+
+1. $g(\tilde{\bx}) = \inf_{\bz \in \WW} f(\tilde{\bx}, \bz)$.
+1. By hypothesis, there exist $\bz \in \WW$ such that $f(\tilde{\bx}, \bz) \leq \gamma$.
+1. Hence $g(\tilde{\bx}) \leq \gamma < \infty$.
+1. Let $\bx \in \dom g$.
+1. We have shown that the set of minimizers of $h_{\bx}$
+   is nonempty and compact.
+1. Hence $g(\bx) > -\infty$ for every $\bx \in \dom g$.
+1. Hence $g$ is proper.
 ```
