@@ -156,6 +156,57 @@ Thus, $\bx + (1 - t) \by \in H_+$.
 Analogous proofs apply for other types of half spaces.
 ```
 
+
+```{prf:theorem} Convex set as convex combination of itself
+:label: res-cvx-convex-set-self-combination
+
+Let $C$ be a nonempty subset of $\VV$.
+If $C$ is convex then for every $t_1, t_2 \geq 0$, we have
+
+$$
+(t_1 + t_2) C = t_1 C + t_2 C.
+$$
+
+In particular, if $t_1, t_2 \geq 0$ such that $t_1 + t_2 = 1$, then
+
+$$
+C = t_1 C + t_2 C.
+$$
+```
+
+```{prf:proof}
+The statement $(t_1 + t_2) C \subseteq t_1 C + t_2 C$ is valid even for sets which are not convex.
+1. Let $\bx \in t_1 + t_2) C$.
+1. Then there exist $\by \in C$ such that $\bx = t_1 \by + t_2 \by$.
+1. Hence $t_1 \by \in t_1 C$ and $t_2 \by \in t_2 C$.
+1. Hence $\bx = t_1 \by + t_2 \by \in t_1 C + t_2 C$.
+
+
+We now show the converse.
+
+1. Let $\bx \in  t_1 C + t_2 C$.
+1. Then there exist $\bx_1, \bx_2 \in C$ such that
+
+   $$
+   \bx = t_1 \bx_1 + t_2 \bx_2.
+   $$
+1. If $t_1 = t_2 = 0$, then $\bx = 0$ and $\bx \in (0 + 0) C$.
+1. Now assume that $t_1 + t_2 > 0$.
+1. By the convexity of $C$,
+
+   $$
+   \by = \frac{t_1}{t_1 + t_2} \bx_1 + \frac{t_2}{t_1 + t_2} \bx_2 \in C. 
+   $$
+1. Hence  $\bx = (t_1 + t_2) \by \in (t_1 + t_2) C$.
+1. Hence $t_1 C + t_2 C \subseteq (t_1 + t_2) C$.
+
+Together, we have
+
+$$
+(t_1 + t_2) C = t_1 C + t_2 C.
+$$
+```
+
 ## Rays
 
 ```{prf:definition} Ray
