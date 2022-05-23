@@ -207,6 +207,50 @@ $$
 $$
 ```
 
+
+```{prf:theorem} Convex set as union of line segments
+:label: res-cvx-convex-set-union-line-segments
+
+Let $C$ be a convex subset of $\VV$.
+Then $C$ is the union of all the closed line
+segments connecting the points of the set.
+In other words
+
+$$
+C  = \bigcup_{\bx, \by \in C} [\bx, \by].
+$$
+```
+
+```{prf:proof}
+Let $D = \bigcup_{\bx, \by \in C} [\bx, \by]$.
+
+If $C$ is empty, then $D$ is also empty. Hence there is nothing to prove.
+If $C = \{ \bx \}$ is a singleton, then $D$ consists of the union of a single line segment
+
+$$
+[\bx, \bx] = \{ \bx \}.
+$$
+So $C = D$.
+We now consider the case where $C$ consists of more than one point.
+
+We first show that $C \subseteq D$.
+
+1. Let $\bx \in C$.
+1. Then $[\bx, \bx] = \{ \bx \}$ is a line segment of $C$.
+1. Hence $\bx \in [\bx, \bx] \subseteq D$.
+1. Hence $C \subseteq D$.
+
+We now show the converse.
+
+1. Let $\bz \in D$.
+1. Then there exists $\bx, \by \in C$ such that $\bz \in [\bx, \by]$.
+1. Then by convexity of $C$, $[\bx, \by] \subseteq C$.
+1. Hence $\bz \in [\bx, \by] \subseteq C$.
+1. Hence $D \subseteq C$.
+
+Together, $C = D$.
+```
+
 ## Rays
 
 ```{prf:definition} Ray
