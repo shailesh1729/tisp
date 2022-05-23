@@ -8,6 +8,18 @@ Main references for this section are
 Throughout this section, $\VV$ is a real vector space. 
 Some material is specific to $\RR^n$. Rest of the
 material is applicable for any real vector space.
+Wherever necessary, 
+$\VV$ is endowed with a
+{prf:ref}`norm <def-la-norm>` $\| \cdot \| : \VV \to \RR$
+or a {prf:ref}`real inner product <def-la-real-inner-product>`
+$\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$. 
+It is also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$.
+The norm in general is not necessarily induced by the inner product
+(if the vector space is indeed endowed with an inner product).
+
+We start with the basic definition of a cone.
+
+## Cones
 
 ````{prf:definition} Cone
 :label: def-cone
@@ -21,7 +33,8 @@ nonnegative scalar multiplication.
 ````
 
 * By definition we have $\bzero \in C$.
-* Some authors prefer to restrict the definition to $t > 0$
+* Some authors ({cite}`rockafellar2015convex`) prefer to restrict 
+  the definition to $t > 0$
   thus the origin is not included in the cone by default.
 * In our definition, a cone always includes the origin.
 * Thus, a cone is always nonempty.
@@ -34,9 +47,129 @@ nonnegative scalar multiplication.
   and linear subspaces to be cones too.
 * Pointed cones are a special class of cones
   which are discussed {prf:ref}`below <def-pointed-cone>`.
+  An ice-cream cone is a pointed cone.
 
 
+## Properties of Cones
 
+### Intersection
+
+```{prf:property} Intersection of cones
+:label: res-cone-intersection
+
+Let $\{ C_ i \ST i \in I \}$ be a collection of cones.
+Then their intersection $\bigcap_{i \in I} C_i$ is a cone. 
+```
+
+```{prf:proof}
+Let $\bx \in \bigcap_{i \in I} C_i$ and let $t \geq 0$.
+
+1. $\bx \in C_i$ for every $i \in I$.
+1. Hence $t \bx \in C_i$ for every $i \in I$ since every $C_i$ is a cone.
+1. Hence $t \bx \in \bigcap_{i \in I} C_i$.
+1. Hence $\bigcap_{i \in I} C_i$ is a cone.
+```
+
+### Cartesian Product
+
+```{prf:property} Cartesian product of cones
+:label: res-cone-cartesian-product
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $C_1 \subseteq \VV$ and $C_2 \subseteq \WW$ be cones.
+Then their Cartesian product $C_1 \times C_2$ is a cone. 
+```
+
+```{prf:proof}
+Let $\bx \in C_1 \times C_2$ and $t \geq 0$.
+
+1. Then there exist $\by \in C_1$ and $\bz \in C_2$ 
+   such that $\bx = (\by, \bz)$.
+1. Then $t \by \in C_1$ and $t \bz \in C_2$ since both are cones.
+1. Hence $(t \by, t \bz) \in C_1 \times C_2$.
+1. But $(t \by, t \bz)  = t(\by, \bz) = t \bx$.
+1. Hence $t \bx \in C_1 \times C_2$.
+1. Hence $C_1 \times C_2$ is a cone.
+```
+
+
+### Set Addition
+
+
+```{prf:property} Set addition of cones
+:label: res-cone-set-addition
+
+Let $C_1, C_2 \subseteq \VV$ be cones.
+Then their vector sum $C_1 + C_2$ is a cone. 
+```
+
+```{prf:proof}
+Let $\bx \in C_1 + C_2$ and $t \geq 0$.
+
+1. Then there exist $\bx_1 \in C_1$ and $\bx_2 \in C_2$ such that
+   $\bx = \bx_1 + \bx_2$.
+1. Then $t \bx_1 \in C_1$ and $t \bx_2 \in C_2$ since they are cones.
+1. Hence $t \bx = t (\bx_1 + \bx_2) = t \bx_1 + t \bx_2 \in C_1 + C_2$.
+1. Hence $C_1 + C_2$ is a cone.
+```
+
+### Closure
+
+```{prf:property} Closure 
+:label: res-cone-closure
+
+Let $C \subseteq \VV$ be a cone.
+Then its closure $\closure C$ is a cone. 
+```
+
+```{prf:proof}
+Let $\bx \in \closure C$ and $t \geq 0$.
+
+1. Then there exists a sequence $\{ \bx_k \}$ of $C$
+   such that $\bx_k \to \bx$.
+1. Then $t \bx_k \in C$ for every $k$ since $C$ is a cone.
+1. Consider the sequence $\{ t \bx_k \}$ of $C$.
+1. We have $\lim_{k \to \infty} t \bx_k = t \bx$.
+1. Hence $t \bx \in \closure C$.
+1. Hence $\closure C$ is a cone.
+```
+
+
+### Linear Transformation
+
+```{prf:property} Linear transformation 
+:label: res-cone-lin-op
+
+The image and inverse image of a  cone under a linear transformation
+is a cone.
+```
+
+
+```{prf:proof}
+Let $\VV$ and $\WW$ be real vector spaces and
+$\bT : \VV \to \WW$ be a linear transformation.
+
+Image of a cone is a cone.
+
+1. Let $C \in \VV$.
+1. Let $D = \bT(C)$.
+1. Let $\bv \in D$ and $t \geq 0$.
+1. Then there exists $\bu \in C$ such that $\bv = \bT(\bu)$.
+1. Since $C$ is a cone, hence $t \bu \in C$.
+1. Then $\bT(t \bu) = t \bT(\bu) = t \bv \in D$.
+1. Hence $D$ is a cone.
+
+
+Inverse image of a cone is a cone.
+
+1. Let $D \in \WW$.
+1. Let $C = \bT^{-1}(D)$.
+1. Let $\bx \in C$ and $t \geq 0$.
+1. Then $\by = \bT (\bx) \in D$.
+1. Also $\bT (t \bx) =  t \bT (\bx) = t \by \in D$ since $D$ is a cone.
+1. Hence  $t \bx \in C$.
+1. Hence $C$ is a cone.
+```
 
 ## Convex Cones
 
@@ -1488,7 +1621,7 @@ and vector addition. $B$ is a convex cone.
 
 
 
-## Operations Preserving Conic Convexity
+## Properties of Convex Cones
 
 We consider operations on convex cones which
 generate convex cones.
