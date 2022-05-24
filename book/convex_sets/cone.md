@@ -188,10 +188,10 @@ A set $C$ is called a *convex cone* if it is convex and a cone.
 *  Any subspace is a convex cone.
 ````
 
-```{prf:theorem} 
+```{prf:theorem} Subspace as convex cone
 :label: res-cvx-subspace-convex-cone
 
-A subspace is a convex cone.
+A linear subspace is a convex cone.
 ```
 
 ```{prf:proof}
@@ -204,6 +204,41 @@ for every $t \geq 0$ since $V$ is closed
 under scalar multiplication. Thus, $V$ is a cone too.
 Thus, $V$ is a convex cone.
 ```
+
+```{prf:theorem} Half spaces as convex cone
+:label: res-cvx-half-space-convex-cone
+
+Let $\VV$ be a real vector space.
+Let $\ba \in \VV^*$. Consider the set
+
+$$
+H = \{ \bx \in \VV \ST \langle \bx, \ba \rangle \leq 0 \}.
+$$
+Then $H$ is a convex cone.
+```
+
+```{prf:proof}
+Half space as a cone
+
+1. Let $\bx \in H$ and $t \geq 0$.
+1. Then $\langle t \bx, \ba \rangle = t \langle \bx, \ba \rangle \leq 0$.
+1. Hence $t \bx \in H$.
+
+
+Half space as convex
+
+1. Let $\bx, \by \in H$ and $t \in [0,1]$.
+1. Then 
+
+  $$
+  \langle t \bx + (1-t)\by, \ba \rangle = t \langle \bx, \ba \rangle
+  + (1-t)\langle \by, \ba \rangle \leq 0.
+  $$
+1. Hence $H$ is convex.
+```
+
+
+### Characterization
 
 ```{prf:theorem} Convex cone characterization
 :label: res-convex-cone-characterization
@@ -241,6 +276,8 @@ nonnegative scalar multiplication.
 1. Thus, $C$ is convex too. 
 ```
 
+### Intersection of Convex Cones
+
 
 ````{prf:theorem} Intersection of arbitrary collection of convex cones
 :label: res-cvx-convex-cone-inf-intersect
@@ -270,6 +307,8 @@ cone.
 Thus, the solution set of a system of linear equations and
 inequalities is a convex cone if the equations and 
 inequalities are homogeneous.
+
+### Containing and Contained Subspaces
 
 ```{prf:theorem} Containing and contained subspaces
 :label: res-cvx-convex-cone-containing-contained-subspaces
