@@ -585,7 +585,7 @@ $$
 $$
 ````
 
-```{prf:theorem}
+```{prf:property}
 :label: res-cvx-conic-hull-convex
 
 A conic hull is a convex cone.
@@ -605,7 +605,7 @@ Let $C$ be the conic hull of a set $S$.
 1. Thus, $C$ is a convex cone.
 ```
 
-```{prf:theorem}
+```{prf:property}
 :label: res-cvx-conic-hull-smallest
 
 Conic hull of a set is the smallest convex cone that contains the set.
@@ -660,6 +660,38 @@ $H \subseteq K$
 1. Thus, $K$ contains all conic combinations of $C$.
 1. Thus, $H \subseteq K$.
 ```
+
+
+```{prf:property} Conic hull of a convex hull
+Let $S \subseteq \VV$ be a nonempty set. Let $C = \convex S$.
+Then
+
+$$
+\cone S = \cone C.
+$$
+In other words, the conic hull of the convex hull of a set is same
+as the conic hull of the set.
+```
+
+```{prf:proof}
+Since $S \subseteq C$, hence $\cone S \subseteq \cone C$.
+We now prove the converse.
+
+1. Let $\bx \in \cone C$.
+1. Then $\bx$ is a nonnegative combination of some vectors in $C$.
+   There exist a positive integer $p$, $p$ vectors
+   $\bx_1, \dots, \bx_p \in C$ and $p$ scalars 
+   $t_1, \dots, t_p$ such that
+
+   $$
+   \bx = \sum_{i=1}^p t_i \bx_i.
+   $$
+1. Each $\bx_i$ is a convex combination of some vectors in $S$.
+1. Hence $\bx$ is a nonnegative combination of some vectors in $S$.
+1. Hence $\bx \in \cone S$.
+1. Hence $\cone C \subseteq \cone S$.
+```
+
 
 ### Unique Conic Representations
 
