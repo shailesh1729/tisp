@@ -562,7 +562,7 @@ $$
 
 ````
 
-````{prf:theorem}
+````{prf:property} Convexity of convex hull
 :label: res-cvx-convex-hull-convex
 
 The convex hull $\ConvexHull(S)$ of a set $S$ is always convex.
@@ -583,6 +583,42 @@ We need to show that $\bz \in \ConvexHull(S)$.
 1. Hence, $\bz \in \ConvexHull(S)$.
 1. Thus, $\ConvexHull(S)$ is convex.
 ```
+
+```{prf:property} Affine hull of convex hull
+:label: res-cvx-convex-hull-affine-hull
+Let $\VV$ be a finite dimensional real vector space.
+Let $S$ be a nonempty subset of $\VV$. Let $C = \convex(S)$.
+Then
+
+$$
+\affine S = \affine C.
+$$
+
+In other words, the affine hull of a set and its convex hull are identical.
+```
+
+```{prf:proof}
+By using a translation argument if necessary,
+without loss of generality, we assume that $\bzero \in S$.
+
+1. Then both $\affine S$ and $\affine C$ are linear subspaces.
+1. Since $S \subseteq C$, hence  $\affine S \subseteq \affine C$.
+1. For the converse, assume that $m = \affine C$.
+1. Let $\bx_1, \dots, bx_m \in C$ be $m$ linearly independent
+   vectors spanning $\affine C$.
+1. Then for every $\bx \in \affine C$, there exist
+   scalars $t_1, \dots, t_m$ so that
+
+   $$
+   \bx = \sum_{i=1}^m t_i \bx_i.
+   $$
+1. By definition of convex hull, each $\bx_i \in C$ is
+   a convex combination of points in $S$.
+1. Hence every $\bx \in \affine C$ is a linear combination
+   of points in $S$.
+1. Hence $\affine C \subseteq \affine S$.
+```
+
 
 
 
