@@ -1691,7 +1691,7 @@ and vector addition. $B$ is a convex cone.
 We consider operations on convex cones which
 generate convex cones.
 
-```{prf:theorem} Closure under set intersection
+```{prf:property} Closure under set intersection
 :label: res-cvx-convex-cone-closure-intersection
 
 If $K_1$ and $K_2$ are convex cones, then 
@@ -1721,7 +1721,7 @@ Thus, $K$ is closed under nonnegative scalar multiplication
 and vector addition. $K$ is a convex cone.
 ```
 
-```{prf:theorem} Closure under set addition
+```{prf:property} Closure under set addition
 :label: res-cvx-convex-cone-closure-addition
 
 If $K_1$ and $K_2$ are convex cones, then 
@@ -1757,7 +1757,7 @@ We mention that by {prf:ref}`res-cvx-convexity-set-addition`, $K$ is convex.
 Hence, we just needed to show that $K$ is a cone too.
 ```
 
-```{prf:theorem} Positive scalar multiplication
+```{prf:property} Positive scalar multiplication
 :label: res-cvx-convex-cone-scaling-same
 
 Let $K$ be a convex cone. Then
@@ -1783,7 +1783,7 @@ We proceed as follows:
 
 Note that $0K = \{ \bzero \} \neq K$.
 
-```{prf:theorem} Convex hull of the union
+```{prf:property} Convex hull of the union
 :label: res-cvx-cones-union-hull-sum
 
 If $K_1$ and $K_2$ are convex cones, then 
@@ -1824,6 +1824,52 @@ $$
 \left [ (1 - t) K_1 + t K_2 \right ] = K_1 + K_2.
 $$
 ```
+
+
+```{prf:property} Intersection as union
+:label: res-cvx-cones-intersect-union-cvx
+
+If $C_1$ and $C_2$ are convex cones, then 
+
+$$
+C_1 \cap C_2 = \bigcup_{t \in [0,1]} (t C_1 \cap (1 - t) C_2).
+$$
+```
+
+```{prf:proof}
+We first show that for every $t \in (0,1)$
+
+$$
+t C_1 \cap (1 - t) C_2 = C_1 \cap C_2.
+$$
+
+1. Let $\bx \in C_1 \cap C_2$.
+1. Then $\bx \in C_1$ and $\bx \in C_2$.
+1. Since $0 < t < 1$, hence due to {prf:ref}`res-cvx-convex-cone-scaling-same`,
+   $C_1 = t C_1$ and $C_2 = (1-t)C_2$.
+1. Hence $\bx \in t C_1$ and $\bx \in (1-t) C_2$.
+1. Hence $\bx \in t C_1 \cap (1 - t) C_2$.
+1. Hence $C_1 \cap C_2 \subseteq t C_1 \cap (1 - t) C_2$.
+1. Conversely, let $\bx \in t C_1 \cap (1 - t) C_2$.
+1. Then $\bx \in t C_1$ and $\bx \in (1-t) C_2$.
+1. Hence $\bx \in C_1$ and $\bx \in C_2$.
+1. Hence $\bx \in C_1 \cap C_2$.
+1. Hence $t C_1 \cap (1 - t) C_2 \subseteq C_1 \cap C_2$.
+
+If $t=0$ or $t=1$, then
+
+$$
+t C_1 \cap (1 - t) C_2 = \{ \bzero \} \subseteq C_1 \cap C_2
+$$
+since every convex cone contains the origin. Together,
+
+$$
+C_1 \cap C_2 = \bigcup_{t \in [0,1]} (t C_1 \cap (1 - t) C_2).
+$$
+```
+
+
+
 
 ## Polyhedral Cones
 
