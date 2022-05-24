@@ -276,6 +276,32 @@ nonnegative scalar multiplication.
 1. Thus, $C$ is convex too. 
 ```
 
+```{prf:theorem} Set addition characterization
+:label: res-convex-cone-set-addition-charac
+
+A cone $C$ is convex if and only if $C + C \subseteq C$.
+```
+
+```{prf:proof}
+Assume that a cone $C$ satisfies $C + C \subseteq C$.
+
+1. Let $\bx, \by \in C$ and $t \in [0,1]$.
+1. Since $C$ is a cone, hence $t \bx$ and $(1-t) \by$ belong to $C$.
+1. Hence $t \bx + (1-t) \by \in C + C \subseteq C$.
+1. Hence $C$ is convex.
+
+For converse, assume that $C$ is a convex cone.
+
+1. Let $\bx, \by \in C$.
+1. Since $C$ is a cone, hence $2 \bx, 2 \by \in C$.
+1. Since $C$ is convex, hence
+
+   $$
+   \frac{1}{2} 2 \bx + \frac{1}{2} 2 \by = \bx + \by \in C.
+   $$
+1. Hence $C + C \subseteq C$.
+```
+
 ### Intersection of Convex Cones
 
 
