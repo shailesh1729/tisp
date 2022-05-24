@@ -1495,9 +1495,9 @@ We proceed as follows.
 1. Since $a \in H$ is arbitrary, hence $h$ is l.s.c..
 ```
 
-### Composition Rule
+### Composition Rules
 
-```{prf:theorem} Composition rule
+```{prf:theorem} Composition with a continuous function
 :label: res-ms-lsc-cont-composition
 
 Let $(X, d_1)$ and $(Y, d_2)$ be metric spaces.
@@ -1524,6 +1524,64 @@ is lower semicontinuous.
    \liminf_{k \to \infty} g(f(x_k)) \geq g(f(x)).
    $$
 1. Hence $h$ is l.s.c..
+```
+
+
+```{prf:theorem} Composition with a real function
+:label: res-ms-lsc-real-composition
+
+Let $(X, d)$ be a metric space.
+Let $f : X \to \RR$ be a lower semicontinuous function.
+Let $g: \RR \to \RR$ be a lower semicontinuous and
+monotonically nondecreasing function.
+Then their composition $h = g \circ f$
+is lower semicontinuous.
+```
+
+```{prf:proof}
+Assume for contradiction that $h$ is not l.s.c..
+
+1. Then there exists a sequence $\{ x_n \}$ of $\dom h$
+   converging to $x \in \dom h$ such that
+
+   $$
+   \liminf_{k \to \infty} g(f(x_k)) < g(f(x)).
+   $$
+1. Let $\{ x_l \}$ be a subsequence of $\{ x_k \}$ achieving
+   this limit inferior; i.e.
+
+   $$ 
+   \lim_{l \to \infty} g(f(x_l)) = \liminf_{k \to \infty} g(f(x_k)) < g(f(x)).
+   $$
+1. Without loss of generality, we can assume that
+
+   $$
+   g(f(x_l)) < g(f(x)) \Forall l.
+   $$
+   We can achieve this by simply dropping the finitely many terms from the sequence for which 
+   this condition doesn't hold.
+1. Since $g$ is monotonically nondecreasing, hence
+   $g(f(x_l)) < g(f(x))$ implies that $f(x_l) < f(x)$ for every $l$.
+1. Taking limit superior, we have
+
+   $$
+   \limsup_{l \to \infty} f(x_l) \leq f(x).
+   $$
+1. Since $x_l \to x$, hence due to lower semicontinuity of $f$
+
+   $$
+   f(x) \leq \liminf_{l \to \infty} f(x_l) \leq \limsup_{l \to \infty} f(x_l) \leq f(x).
+   $$
+1. Thus $\lim_{l \to \infty}f(x_l) = f(x)$ since limit superior and
+   limit inferior must be identical and equal to $f(x)$.
+1. Since $g$ is lower semicontinuous and $f(x_l) \to f(x)$ hence
+
+   $$
+   \lim_{l \to \infty} g(f(x_l)) = \liminf_{l \to \infty} g(f(x_l)) 
+   \geq g(f(x)).
+   $$
+1. This contradicts our earlier claim that $\lim_{l \to \infty} g(f(x_l)) < g(f(x))$.
+1. Hence $h$ must be lower semicontinuous.
 ```
 
 
