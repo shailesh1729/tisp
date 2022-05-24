@@ -1463,7 +1463,7 @@ the subspace topology.
 ```{prf:theorem} Sum of lower semicontinuous functions
 :label: res-ms-lsc-sum
 
-Let $f: g : X \to \RR$ be lower semicontinuous functions.
+Let $f, g : X \to \RR$ be lower semicontinuous functions.
 Then their sum $h = f + g$ with $\dom h = \dom f \cap \dom g$
 is lower semicontinuous.
 ```
@@ -1494,6 +1494,38 @@ We proceed as follows.
 1. Hence $h$ is l.s.c. at $a$.
 1. Since $a \in H$ is arbitrary, hence $h$ is l.s.c..
 ```
+
+### Composition Rule
+
+```{prf:theorem} Composition rule
+:label: res-ms-lsc-cont-composition
+
+Let $(X, d_1)$ and $(Y, d_2)$ be metric spaces.
+Let $f : X \to Y$ be a continuous function
+and let $g : Y \to \RR$ be a lower semicontinuous
+function. Then their composition $h = g \circ f$
+is lower semicontinuous.
+```
+
+```{prf:proof}
+.
+
+1. Let $\{ x_k \}$ be a sequence of points of $\dom h$ converging to
+   some $x \in \dom h$.
+1. Since $h = g \circ f$,
+   hence $f(x_k) \in \dom g$ for every $k$ and $f(x) \in \dom g$. 
+1. By continuity of $f$, the sequence $\{ f(x_k) \}$ converges
+   to $f(x)$ ({prf:ref}`res-ms-cont-partial-function-charac`).
+1. Note that $\{ f(x_k) \}$ is a sequence of $Y$ converging to
+   $f(x)$.
+1. Since $g$ is l.s.c., hence due to {prf:ref}`res-ms-evf-sc-limit`
+
+   $$
+   \liminf_{k \to \infty} g(f(x_k)) \geq g(f(x)).
+   $$
+1. Hence $h$ is l.s.c..
+```
+
 
 ### Convergent Dominating Sequences
 
