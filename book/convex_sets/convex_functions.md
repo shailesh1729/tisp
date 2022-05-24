@@ -11,6 +11,12 @@ They are also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$
 as needed.
 
 
+We suggest the readers to review the notions
+of graph, epigraph, sublevel sets of real
+valued functions in {ref}`sec:bra:real-valued-functions`.
+Also pay attention to the notion of extended real valued
+functions, their effective domains, graphs and level sets.
+
 ## Convexity of a Function
 
 ````{prf:definition} Convex function
@@ -25,6 +31,14 @@ and $t \in [0, 1]$, we have:
 :label: eq-convexity-inequality
 f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).
 ```
+
+An extended valued function $f : \VV \to \ERL$ is *convex*
+if $\dom f$ is a convex set and for every $\bx_1,\bx_2 \in \VV$, 
+and $t \in [0, 1]$, we have:
+
+$$
+f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).
+$$
 ````
 
 
@@ -564,6 +578,9 @@ $\VV \oplus \RR$ is the
 of $\VV$ and $\RR$ having appropriate vector space 
 structure.
 
+The definition of epigraph also applies for extended
+real valued functions $f: \VV \to \ERL$.
+
 ### Convex Functions
 
 ```{prf:theorem} Function convexity = Epigraph convexity
@@ -572,6 +589,8 @@ structure.
 Let $\VV$ be a real vector space.
 A function $f: \VV \to \RR$ is convex if and only if its epigraph
 $\epi f$ is a convex set.
+
+This statement is also valid for extended real valued functions.
 ```
 
 ```{prf:proof}
@@ -617,6 +636,52 @@ from $\VV \oplus \RR$ to $\VV$.
 Due to {prf:ref}`res-cvx-convex-set-affine-image`,
 $\epi f$ convex implies $\dom f$ convex
 as the projection is a linear operation.
+
+
+```{prf:theorem} Convex function from convex set by minimization
+:label: res-cvxf-func-from-cvx-set-inf
+
+Let $C$ be a nonempty convex set in $\VV \oplus \RR$. 
+Let $f: \VV \to \ERL$ be the function defined by
+
+$$
+f(\bx) = \inf \{ w \in \RR \ST (\bx, w) \in C \} \quad  \Forall \bx \in \VV.
+$$
+Then $f$ is convex.
+```
+
+```{prf:proof}
+We show the convexity of $f$ by showing the convexity of its
+epigraph.
+
+1. Let $(\bx, s)$ and $(\by, t)$ be two points in $\epi f$.
+1. Then $f(\bx) \leq s$ and $f(\by) \leq t$.
+1. By the definition of $f$ (infimum rule),
+   for every $k \in \Nat$, there exists
+   $(\bx, s_k) \in C$ such that $s_k \leq s + \frac{1}{k}$.
+1. Similarly, for every $k \in \Nat$, there exists
+   $(\by, t_k) \in C$ such that $t_k \leq t + \frac{1}{k}$.
+1. Consider the sequences $\{ (\bx, s_k) \}$ and $\{ (\by, t_k) \}$.
+1. By the convexity of $C$, for every $r \in [0,1]$ and every $k$
+
+   $$
+   (r \bx +  (1 -r) \by, r s_k + (1-r) t_k) \in C.
+   $$
+1. Hence for every $k$
+
+   $$
+   f(r \bx +  (1 -r) \by) \leq r s_k + (1-r) t_k.
+   $$
+1. Taking the limit $k \to \infty$, we have
+
+   $$
+   f(r \bx +  (1 -r) \by) \leq r s + (1-r) t.
+   $$
+1. Hence $(r \bx +  (1 -r) \by, r s + (1-r) t) \in \epi f$ for every $r \in [0,1]$.
+1. Hence $\epi f$ is convex.
+1. Hence $f$ is convex.
+```
+
 
 ### Nonnegative Homogeneous Functions
 
@@ -1959,6 +2024,8 @@ The Gauge function is a seminorm.
 
 
 ```{prf:example} Norm as a gauge function
+:label: ex-cvxf-norm-gauge-function
+
 Let $\VV$ be a normed linear space with the norm $\| \cdot \| : \VV \to \RR$.
 
 Let $\overline{B} = \{\bx \in \VV \ST \| \bx \| \leq 1 \}$ be the unit closed ball.
