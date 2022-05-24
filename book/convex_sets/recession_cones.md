@@ -4,6 +4,17 @@
 Main references for this section are {cite}`bertsekas2003convex`.
 
 
+Throughout this section, we assume that $\VV$ is a finite dimensional
+real vector space. Wherever necessary, 
+it is equipped with a
+{prf:ref}`norm <def-la-norm>` $\| \cdot \| : \VV \to \RR$
+or a {prf:ref}`real inner product <def-la-real-inner-product>`
+$\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$. 
+It is also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$.
+The norm in general is not necessarily induced by the inner product
+(if the vector space is indeed endowed with an inner product).
+
+
 ```{prf:definition} Direction of recession
 :label: def-cvx-recession-direction
 
@@ -70,6 +81,8 @@ The set of all directions of recession for $C$ is called its *recession cone*
 and is denoted by $R_C$.
 ```
 
+### Linear Subspaces
+
 ```{prf:theorem} Recession cone of a linear subspace
 :label: res-cvx-subspace-recession-cone
 
@@ -100,6 +113,8 @@ We now show that $R_S \subseteq S$.
 1. But that means $\by \in S$. 
 1. Hence $R_S \subseteq S$.
 ```
+
+### Affine Subspaces
 
 ```{prf:theorem} Recession cone of an affine subspace
 :label: res-cvx-affine-recession-cone
@@ -144,11 +159,43 @@ We now show that $R_A \subseteq S$.
 1. Hence $R_A \subseteq S$.
 ```
 
+### Set Negation
+
+```{prf:property} Recession cone under set negation
+:label: res-cvx-recession-cone-set-negation
+
+Let $C$ be a nonempty and convex set.
+Then
+
+$$
+R_{-C} = -R_{C}.
+$$
+```
+
+```{prf:proof}
+Let $D = -C$. Then $C = -D$.
+
+1. Let $\by \in R_{D}$.
+1. Then for any $\bx \in D$ and every $\alpha \geq 0$,
+
+   $$
+   \bx + \alpha \by \in D
+   $$
+1. Hence for every $\alpha \geq 0$,
+
+   $$
+   (-\bx) + \alpha (-\by) \in C.
+   $$
+1. Since $\bx \in D$, hence $-\bx \in C$.
+1. Hence $-\by \in R_C$.
+1. The argument runs similarly for the converse.
+```
 
 The following results describe the properties of
 recession cones for nonempty, closed and convex sets.
 
-### Closedness
+
+### Closedness of Recession Cone
 
 ```{prf:property} Closedness of recession cone
 :label: res-cvx-recession-cone-closedness
@@ -275,6 +322,56 @@ for every $\beta \geq 0$.
 1. Hence due to previous argument, $\widehat{\bx} + \beta \by \in C$.
 1. This proves that $\by$ is indeed a recession direction of $C$.
 ```
+
+### Closure of Set
+
+```{prf:theorem} Recession cone and set closure
+:label: res-cvx-recession-cone-set-closure
+
+Let $C$ be a nonempty and convex set.
+Then
+
+$$
+R_C \subseteq R_{\closure C}.
+$$
+Also
+
+$$
+\closure R_C \subseteq R_{\closure C}.
+$$
+```
+
+```{prf:proof}
+We first show that $R_C \subseteq R_{\closure C}$.
+
+1. Let $\by \in R_C$.
+1. Then for every $\bx \in C$ and $\alpha \geq 0$, we have
+   $\bx + \alpha \by \in C$.
+1. Since $C \subseteq \closure C$, hence we have
+   for every $\bx \in C$ and $\alpha \geq 0$,
+   $\bx + \alpha \by \in C$.
+1. Since $C$ is nonempty, there is at least one $\bx \in \closure C$
+   such that for every $\alpha \geq 0$, $\bx + \alpha \by \in \closure C$.
+1. Since $\closure C$ is a nonempty, closed and convex set,
+   hence due to {prf:ref}`res-cvx-recession-dir-charac`,
+   $\by$ is a recession direction of $\closure C$.
+1. Hence $\by \in R_{\closure C}$.
+1. Hence $R_C \subseteq R_{\closure C}$.
+
+We now show that $\closure R_C \subseteq R_{\closure C}$.
+
+1. By taking closure on both sides of previous inclusion
+
+   $$
+   \closure R_C \subseteq \closure R_{\closure C}.
+   $$
+1. Since $\closure C$ is nonempty, closed and convex.
+   Hence due to {prf:ref}`res-cvx-recession-cone-closedness`,
+   $R_{\closure C}$ is closed.
+1. Hence $\closure R_{\closure C} = R_{\closure C}$.
+1. Hence $\closure R_C \subseteq R_{\closure C}$.
+```
+
 
 ### Unboundedness
 
@@ -446,6 +543,8 @@ R_C = R_{C \cap D} = R_C \cap R_D.
 $$
 Hence $R_C \subseteq R_D$.
 ```
+
+
 
 
 ### Linear Transformations
@@ -696,7 +795,7 @@ We used {prf:ref}`res-cvx-recession-cone-lin-op-inverse-image`.
 ```{prf:theorem} Decomposition of a convex set along subspaces of its lineality space
 :label: res-cvx-lineality-decomposition-subspace
 
-Let $\VV$ be an $n$-dim real inner product space.
+Let $\VV$ be an $n$-dim real vector space.
 Let $C$ be a nonempty convex subset of $\VV$.
 Let $L_C$ be its lineality space.
 Then for every linear subspace $S \subseteq L_C$,
@@ -762,7 +861,7 @@ sublevel sets of a closed and convex function.
 ```{prf:theorem} General condition for nonempty intersection
 :label: res-cvx-recession-nested-nonempty-intersect-gen-cond
 
-Let $\VV$ be an $n$-dim real inner product space.
+Let $\VV$ be an $n$-dim real vector space.
 Let $\{ C_k \}$ be a sequence of nonempty, closed and convex subsets
 of $\VV$
 such that $C_{k + 1} \subseteq C_k$ for all $k \in \Nat$.
@@ -1224,7 +1323,7 @@ Then the set $\bA C$ is closed.
 ```{prf:theorem} Closedness of vector sum of closed and convex sets
 :label: res-cvx-closedness-vector-sum-closed-convex
 
-Let $\VV$ be an $n$-dim real inner product space.
+Let $\VV$ be an $n$-dim real vector space.
 Let $C_1, \dots, C_m$ be nonempty, closed and convex subsets of $\VV$
 such that the equality $\by_1 + \dots + \by_m = \bzero$ for 
 vectors $\by_i \in R_{C_i}$ implies that $\by_i = \bzero$ for every
@@ -1256,6 +1355,55 @@ We proceed as follows.
    $\bAAA(C)$ is closed.
 1. But $\bAAA(C) = C_1 + \dots + C_m$.
 1. Thus $C_1 + \dots + C_m$ is closed as desired.
+```
+
+
+```{prf:corollary} Closedness of $C_1 - C_2$ via recession cones
+:label: res-cvx-set-sub-closed-recession
+
+Let $\VV$ be an $n$-dim real vector space.
+Let $C_1$ and $C_2$ be nonempty, closed and convex
+subsets of $\VV$. Then $C_1 - C_2$ is closed
+if there is no common nonzero direction of
+recession of $C_1$ and $C_2$; i.e.,
+
+$$
+R_{C_1} \cap R_{C_2} = \{ \bzero \}.
+$$
+```
+
+```{prf:proof}
+1. By {prf:ref}`res-cvx-recession-cone-set-negation`
+
+   $$
+   R_{C_2} = - R_{-C_2}.
+   $$
+1. We are given that $R_{C_1} \cap R_{C_2} = \{ \bzero \}$.
+1. Let $\by_1 \in R_{C_1}$ and $\by_2 \in R_{-C_2}$
+   such that $\by_1 + \by_2 = \bzero$.
+1. But then $\by_3 = - \by_2 \in R_{C_2}$.
+1. Hence $\by_1 - \by_3 = \bzero$.
+1. Hence $\by_1 = \by_3$.
+1. But then $\by_1 = \by_3 = \bzero$ since $R_{C_1} \cap R_{C_2} = \{ \bzero \}$.
+1. Hence $\by_2 = -\by_3 = \bzero$.
+1. Thus $\by_1 + \by_2 = \bzero$ for any
+   $\by_1 \in R_{C_1}$ and $\by_2 \in R_{- C_2}$
+   implies that $\by_1 = \by_2 = \bzero$.
+1. Hence by {prf:ref}`res-cvx-closedness-vector-sum-closed-convex`,
+   $C_1 + (- C_2) = C_1  - C_2$ is a closed set.
+```
+
+```{prf:corollary} Closedness of $C_1 - C_2$ via recession cones and lineality spaces
+:label: res-cvx-set-sub-closed-recession-lineality
+
+Let $\VV$ be an $n$-dim real vector space.
+Let $C_1$ and $C_2$ be nonempty, closed and convex
+subsets of $\VV$. Then $C_1 - C_2$ is closed
+if
+
+$$
+R_{C_1} \cap R_{C_2} = L_{C_1} \cap L_{C_2}.
+$$
 ```
 
 
