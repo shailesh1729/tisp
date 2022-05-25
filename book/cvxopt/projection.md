@@ -113,7 +113,7 @@ $\langle \by - \bz, \bx - \bz \rangle \leq 0 \Forall \by \in C$ holds true.
 1. Thus,
 
    $$
-   \| by - \bx \|^2 \geq  \| \bz - \bx \|^2 \Forall \by \in C.
+   \| \by - \bx \|^2 \geq  \| \bz - \bx \|^2 \Forall \by \in C.
    $$
 1. Thus, $\bz$ is indeed the projection of $\bx$ on $C$.
 

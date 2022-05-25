@@ -711,6 +711,88 @@ Then due to {prf:ref}`res-cvx-strong-sep-1`, $S$ and $T$
 are strongly separated.
 ```
 
+### Strongly Separating Hyperplane
+
+Recall that the (orthogonal) projection of a vector $\bv$ on a convex set $C$
+is the vector $\bx \in C$ which is nearest to $\bv$ under the
+(Euclidean) norm. In particular, if $\bv \in C$ then $\bv$
+is its own projection on $C$. The projection of the
+vector $\bzero$ on a convex set $C$ is this the vector
+of $C$ with the minimum norm.
+See {ref}`sec:opt:pocs` for details.
+
+```{prf:theorem} Strongly separating hyperplane
+:label: res-cvx-strong-sep-hyperplane
+
+Let $\VV$ be an $n$-dimensional real vector space.
+Let $S$ and $T$ be two disjoint nonempty and convex subsets of $\VV$.
+Assume that $S - T$ is closed.
+
+Consider the vector of minimum norm (projection of the origin)
+in $S - T$ given by $\bv = \bs - \bt$ where $\bs \in S$ and $\bt \in T$.
+
+1. Let $\ba = \frac{1}{2} \bv = \frac{1}{2} (\bs - \bt)$.
+1. Let $\bb = \frac{1}{2} (\bs + \bt)$.
+1. Let $c = \langle \bb, \ba \rangle$.
+
+Then the hyperplane $H$ given by
+
+$$
+H = \{ \bx \in \VV \ST \langle \bx, \ba \rangle = c \}
+$$
+strongly separates $S$ and $T$.
+In other words,
+
+$$
+\langle \bx_1, \ba \rangle > c >  
+\langle \bx_2, \ba \rangle \quad \Forall \bx_1 \in S, \bx_2 \in T.
+$$
+```
+
+```{prf:proof}
+.
+
+1. Since $S$ and $T$ are disjoint hence $\bs - \bt \neq \bzero$.
+1. Hence $\ba \neq \bzero$.
+1. $\bs$ is the nearest point in $\closure S$ from $\closure T$.
+1. $\bt$ is the nearest point in $\closure T$ from $\closure S$.
+1. The line segment $[\bs, \bt]$ connects these nearest points.
+1. $\bb$ lies on this line segment.
+1. Accordingly, $\bs$ is projection of $\bb$ in $\closure S$.
+1. Similarly $\bt$ is projection of $\bb$ in $\closure T$.
+1. Then, due to {prf:ref}`res-cvx-projection-characterization`
+   (orthogonal projection characterization),
+   for every $\bx \in S$
+    
+   $$
+   \langle \bx - \bs, \bb - \bs \rangle \leq 0.
+   $$
+1. But
+   
+   $$
+   \bb - \bs 
+   = \frac{1}{2} (\bs + \bt) - \bs 
+   = \frac{1}{2} (\bt - \bs) = -\ba.
+   $$
+1. Hence $\langle \bx - \bs, \ba \rangle \geq 0$.
+1. Hence $\langle \bx, \ba \rangle \geq \langle \bs, \ba \rangle$.
+1. Further
+
+   $$
+   \langle \bs, \ba \rangle
+   &= \langle \bs - \bb + \bb, \ba \rangle \\
+   &= \langle \ba + \bb, \ba \rangle \\
+   &= \| \ba \|_2^2 + \langle \bb, \ba \rangle \\
+   &= \| \ba \|_2^2 + c
+   > c.
+   $$
+   since $\ba \neq \bzero$.
+1. Hence for every $\bx \in S$, we have
+   $\langle \bx, \ba \rangle > c$.
+1. A similar argument shows that for every $\bx \in T$, we have
+   $\langle \bx, \ba \rangle < c$.
+```
+
 
 
 
