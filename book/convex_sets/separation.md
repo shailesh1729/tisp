@@ -127,6 +127,11 @@ This characterization is proved in
 {prf:ref}`res-cvx-proper-sep-charac` below.
 ```
 
+If a convex set has a nonempty interior,
+then it cannot be contained in a hyperplane.
+Two disjoint sets one of which has a
+nonempty interior can indeed be properly
+separated.
 
 ```{prf:definition} Strong separation
 :label: def-cvx-strong-separation
@@ -406,6 +411,9 @@ Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be nonempty convex subsets of $\VV$. There exists
 a hyperplane $H$ that separates $S$ and $T$ *properly*
 if and only if $\relint S \cap \relint T = \EmptySet$.
+
+In other words, two sets are properly separated
+if and only if their relative interiors are disjoint.
 ```
 
 ```{prf:proof}
@@ -892,6 +900,15 @@ Let us assume that $C$ is nonempty and not equal to $\VV$.
 1. Hence, the intersection of all closed halfspaces containing $C$
    is exactly equal to $C$.
 ```
+
+We now have two different characterizations of closed convex sets.
+
+1. From {prf:ref}`res-cvx-closed-closure-line-segments`,
+   a closed and convex set is the closure of the union of
+   all the line segments connecting the points of the set.
+1. From {prf:ref}` res-cvx-closed-convex-halfspace-intersection`,
+   a closed and convex set is the intersection of all the
+   closed half-spaces containing it.
 
 ## Supporting Hyperplanes
 
