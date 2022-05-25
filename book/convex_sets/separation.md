@@ -14,12 +14,49 @@ with a real inner product $\langle \cdot, \cdot \rangle \to \RR$.
 :label: def-cvx-separating-hyperplane
 
 Let $\VV$ be a real $n$-dimensional inner product space.
-For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
+For any two subsets $C$ and $D$ of $\VV$, a hyperplane
 $H$ is said to *separate* $C$ and $D$ if
 $C$ is contained in one of the closed halfspaces
 corresponding to $H$ and $D$ is contained in the other 
 closed halfspace.
 ```
+
+```{div}
+Let $H$ be given by
+
+$$
+H =  \{ \bx \in \VV \ST \langle \bx, \ba \rangle = b \}
+$$
+where $\ba \in \VV^*$ and $b \in \RR$.
+
+If $C$ and $D$ are separated by $H$, then either
+
+$$
+\langle \bx_1, \ba \rangle \leq b \leq \langle \bx_2, \ba \rangle
+\Forall \bx_1 \in C, \bx_2 \in D
+$$
+or
+
+$$
+\langle \bx_2, \ba \rangle \leq b \leq \langle \bx_1, \ba \rangle
+\Forall \bx_1 \in C, \bx_2 \in D
+$$
+holds true.
+
+We can also say that the two sets $C$ and $D$ can
+be separated by a hyperplane or there exists
+a hyperplane separating $C$ and $D$ if there
+exists a nonzero vector $\ba \in \VV^*$ such that
+
+$$
+\sup_{\bx \in C} \langle \bx, \ba \rangle \leq
+\inf_{\bx \in D} \langle \bx, \ba \rangle.
+$$
+Any choice of $b \in [l,u]$ where $l = \sup_{\bx \in C} \langle \bx, \ba \rangle$
+and $u = \inf_{\bx \in D} \langle \bx, \ba \rangle$
+describes a separating hyperplane.
+```
+
 This definition allows for some degenerate possibilities where
 both $C \subseteq H$ and $D \subseteq H$ since the closed
 halfspaces contain $H$ (as their boundary).
@@ -28,7 +65,7 @@ halfspaces contain $H$ (as their boundary).
 :label: def-cvx-proper-separation
 
 Let $\VV$ be a real $n$-dimensional inner product space.
-For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
+For any two subsets $C$ and $D$ of $\VV$, a hyperplane
 $H$ is said to *properly separate* $C$ and $D$ if
 $H$ separates them and both are not entirely contained
 in $H$; i.e., either $C \not\subseteq H$ or $D \not\subseteq H$
@@ -39,11 +76,55 @@ parts of $C$ or $D$ lies inside $H$. But it ensures that
 $C \triangle D \neq \EmptySet$.
 $C \cap D \subseteq H$ is the common part.
 
+```{div}
+If $C$ and $D$ are properly separated by $H$, then
+they are also separated by $H$. Hence
+
+$$
+\langle \bx_1, \ba \rangle \leq b \leq \langle \bx_2, \ba \rangle
+\Forall \bx_1 \in C, \bx_2 \in D
+$$
+or
+
+$$
+\langle \bx_2, \ba \rangle \leq b \leq \langle \bx_1, \ba \rangle
+\Forall \bx_1 \in C, \bx_2 \in D
+$$
+holds true. 
+Also, there exists at least one $\bx_1 \in C$
+and $\bx_2 \in D$ such that at least one of these inequalities
+is a strict inequality thus ensuring that either $C$
+or $D$ or both are not contained entirely in $H$.
+
+
+We can also say that the two sets $C$ and $D$ can
+be properly separated by a hyperplane or there exists
+a hyperplane properly separating $C$ and $D$ if there
+exists a nonzero vector $\ba \in \VV^*$ such that
+
+$$
+\sup_{\bx \in C} \langle \bx, \ba \rangle \leq
+\inf_{\bx \in D} \langle \bx, \ba \rangle.
+$$
+and
+
+$$
+\inf_{\bx \in C} \langle \bx, \ba \rangle <
+\sup_{\bx \in D} \langle \bx, \ba \rangle.
+$$
+Any choice of $b \in [l,u]$ where $l = \sup_{\bx \in C} \langle \bx, \ba \rangle$
+and $u = \inf_{\bx \in D} \langle \bx, \ba \rangle$
+describes a properly separating hyperplane.
+This characterization is proved in
+{prf:ref}`res-cvx-proper-sep-charac` below.
+```
+
+
 ```{prf:definition} Strong separation
 :label: def-cvx-strong-separation
 
 Let $\VV$ be a real $n$-dimensional inner product space.
-For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
+For any two subsets $C$ and $D$ of $\VV$, a hyperplane
 $H$ is said to *strongly separate* $C$ and $D$ if
 there exists an $r > 0$ such that 
 $C + r B$ is contained in one of the open halfspaces
@@ -55,7 +136,24 @@ Under these assumptions, one set lies in the interior of $H_{++}$
 and the other set lies in the interior of $H_{--}$.
 Under strong separation, $C \cap D = \EmptySet$ is guaranteed
 since $H_{++} \cap H_{--} = \EmptySet$.
+
+We can also say that the two sets $C$ and $D$ can
+be strongly separated by a hyperplane or there exists
+a hyperplane strongly separating $C$ and $D$ if there
+exists a nonzero vector $\ba \in \VV^*$ such that
+
+$$
+\sup_{\bx \in C} \langle \bx, \ba \rangle <
+\inf_{\bx \in D} \langle \bx, \ba \rangle.
+$$
+Any choice of $b \in (l,u)$ where $l = \sup_{\bx \in C} \langle \bx, \ba \rangle$
+and $u = \inf_{\bx \in D} \langle \bx, \ba \rangle$
+describes a strongly separating hyperplane.
+
+Strong separation is called as strict separation
+in {cite}`bertsekas2003convex`.
 ```
+
 
 ```{prf:remark}
 :label: rem-cvx-separation-translation-invariance
@@ -432,6 +530,9 @@ Then, applying {prf:ref}`res-cvx-sep-plan-1`, there exists
 a hyperplane that properly separates $S$ and $T$.
 ```
 
+This result is stronger than proposition
+2.4.2 in {cite}`bertsekas2003convex`.
+
 Disjointness of convex sets is not enough for
 strong separation as their closures might meet.
 
@@ -535,6 +636,83 @@ $\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} > 0$.
    the opposite open halfspaces.
 1. Thus, $S$ and $T$ are strongly separated.
 ```
+
+
+## Strong Separation Conditions
+
+We describe several conditions which are sufficient to
+achieve strong separation between two sets.
+See also strict separation theorem (proposition 2.4.3) of {cite}`bertsekas2003convex`.
+
+
+```{prf:theorem} Strong separation: closed subtraction
+:label: res-cvx-strong-sep-1
+
+Let $\VV$ be an $n$-dimensional real inner product space.
+Let $S$ and $T$ be two disjoint nonempty convex subsets of $\VV$.
+There exists a hyperplane $H$ that separates $S$ and $T$ *strongly*
+if $S - T$ is closed.
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Since $S$ and $T$ are disjoint hence $\bzero \notin S-T$.
+1. Since $S-T$ is closed, hence $\bzero \notin \closure (S - T) = S - T$.
+1. By {prf:ref}`res-cvx-strong-sep-charac`, $S$ and $T$ are
+   strongly separated.
+```
+
+```{prf:theorem} Strong separation: closed and compact sets
+:label: res-cvx-strong-sep-2
+
+Let $\VV$ be an $n$-dimensional real inner product space.
+Let $S$ and $T$ be two disjoint nonempty convex subsets of $\VV$.
+There exists a hyperplane $H$ that separates $S$ and $T$ *strongly*
+if $S$ is closed and $T$ is compact.
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Since $S$ and $T$ are disjoint hence $\bzero \notin S-T$.
+1. Since $S-T$ is closed, hence $\bzero \notin \closure (S - T) = S - T$.
+1. By {prf:ref}`res-cvx-strong-sep-charac`, $S$ and $T$ are
+   strongly separated.
+```
+
+
+### Recession Cones
+
+The conditions below are based on the theory
+of recession cones and lineality spaces of convex sets.
+See {ref}`sec:cvx:recession` for a background.
+
+
+```{prf:theorem} Strong separation: recession cones
+:label: res-cvx-strong-sep-rec-cone
+
+Let $\VV$ be an $n$-dimensional real inner product space.
+Let $S$ and $T$ be two disjoint nonempty closed and convex subsets of $\VV$.
+There exists a hyperplane $H$ that separates $S$ and $T$ *strongly*
+if
+
+$$
+R_S \cap R_T  = L_S \cap L_T
+$$
+where $R_X$ denotes the recession cone
+and $L_X$ denotes the lineality space of a set $X$.
+```
+
+```{prf:proof}
+Due to {prf:ref}`res-cvx-set-sub-closed-recession-lineality`,
+$S - T$ is closed.
+Then due to {prf:ref}`res-cvx-strong-sep-1`, $S$ and $T$
+are strongly separated.
+```
+
+
+
 
 
 
