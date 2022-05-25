@@ -1,19 +1,27 @@
+(sec:cvx:separation:theorems)=
 # Separation Theorems
 
+```{div}
 Separation theorems provide us ways to find a separating hyperplane
 between two disjoint convex sets. Hyperplanes
 require the notion of an inner product. 
-This subsection focuses on vector spaces
-which are real, finite dimensional and equipped
-with a real inner product $\langle \cdot, \cdot \rangle \to \RR$.
 
+Throughout this section, we assume that $\VV$ is a finite dimensional
+real vector space
+endowed with
+{prf:ref}`norm <def-la-norm>` $\| \cdot \| : \VV \to \RR$
+and a {prf:ref}`real inner product <def-la-real-inner-product>`
+$\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$. 
+The norm in general is not necessarily induced by the inner product.
+The Euclidean norm is denoted by $\| \cdot \|_2$.
+```
 
 ## Types of Separating Hyperplanes
 
 ```{prf:definition} Separating hyperplane
 :label: def-cvx-separating-hyperplane
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 For any two subsets $C$ and $D$ of $\VV$, a hyperplane
 $H$ is said to *separate* $C$ and $D$ if
 $C$ is contained in one of the closed halfspaces
@@ -64,7 +72,7 @@ halfspaces contain $H$ (as their boundary).
 ```{prf:definition} Proper separation
 :label: def-cvx-proper-separation
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 For any two subsets $C$ and $D$ of $\VV$, a hyperplane
 $H$ is said to *properly separate* $C$ and $D$ if
 $H$ separates them and both are not entirely contained
@@ -123,7 +131,7 @@ This characterization is proved in
 ```{prf:definition} Strong separation
 :label: def-cvx-strong-separation
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 For any two subsets $C$ and $D$ of $\VV$, a hyperplane
 $H$ is said to *strongly separate* $C$ and $D$ if
 there exists an $r > 0$ such that 
@@ -174,7 +182,7 @@ and a relatively open convex set are disjoint.
 ```{prf:theorem} Disjoint affine and relatively open convex sets
 :label: res-cvx-sep-affine-rel-open-convex
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 Let $C$ be a nonempty relatively open convex set of $\VV$.
 Let $M \subseteq \VV$ be an affine subspace such that
 $M \cap C = \EmptySet$. 
@@ -311,7 +319,7 @@ We now elaborate the procedure for finding the line $L$:
 ```{prf:theorem} Characterization of proper separation
 :label: res-cvx-proper-sep-charac
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be nonempty subsets of $\VV$. There exists
 a hyperplane $H$ that separates $S$ and $T$ *properly*
 if and only if there exists a vector $\ba \in \VV$
@@ -394,7 +402,7 @@ some hyperplane $H$.
 :label: res-cvx-sep-plan-1
 
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be nonempty convex subsets of $\VV$. There exists
 a hyperplane $H$ that separates $S$ and $T$ *properly*
 if and only if $\relint S \cap \relint T = \EmptySet$.
@@ -517,7 +525,7 @@ We are done.
 ```{prf:corollary} Separating hyperplane theorem II
 :label: res-cvx-separating-hyperplane
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be nonempty disjoint convex subsets of $\VV$;
 i.e., $S \cap T = \EmptySet$.
 
@@ -543,7 +551,7 @@ strong separation as their closures might meet.
 ```{prf:theorem} Characterization of strong separation
 :label: res-cvx-strong-sep-charac
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be nonempty convex subsets of $\VV$. There exists
 a hyperplane $H$ that separates $S$ and $T$ *strongly*
 if and only if 
@@ -648,7 +656,7 @@ See also strict separation theorem (proposition 2.4.3) of {cite}`bertsekas2003co
 ```{prf:theorem} Strong separation: closed subtraction
 :label: res-cvx-strong-sep-1
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be two disjoint nonempty convex subsets of $\VV$.
 There exists a hyperplane $H$ that separates $S$ and $T$ *strongly*
 if $S - T$ is closed.
@@ -666,7 +674,7 @@ We proceed as follows.
 ```{prf:theorem} Strong separation: closed and compact sets
 :label: res-cvx-strong-sep-2
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be two disjoint nonempty convex subsets of $\VV$.
 There exists a hyperplane $H$ that separates $S$ and $T$ *strongly*
 if $S$ is closed and $T$ is compact.
@@ -692,7 +700,7 @@ See {ref}`sec:cvx:recession` for a background.
 ```{prf:theorem} Strong separation: recession cones
 :label: res-cvx-strong-sep-rec-cone
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be two disjoint nonempty closed and convex subsets of $\VV$.
 There exists a hyperplane $H$ that separates $S$ and $T$ *strongly*
 if
@@ -803,7 +811,7 @@ $$
 ```{prf:theorem} Strict separation theorem
 :label: res-cvxf-cl-convex-set-strict-separation
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 Let $C \subseteq \VV$ be a nonempty closed convex set.
 Let $\by \notin C$. Then, there exists $\bp \in \VV^*$ 
 and $\alpha \in \RR$ such that 
@@ -849,7 +857,7 @@ This is an application of strong separation.
 ```{prf:theorem} Closed Convex = Intersection of Halfspaces
 :label: res-cvx-closed-convex-halfspace-intersection
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 A closed convex set $C$ of $\VV$ is the intersection of
 all the closed halfspaces that contain it.
 ```
@@ -891,7 +899,7 @@ Let us assume that $C$ is nonempty and not equal to $\VV$.
 ```{prf:definition} Supporting hyperplane and halfspaces
 :label: def-cvx-supporting-hyperplane
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 Let $S \subseteq \VV$. Let $\bx_0 \in \boundary S$ be a point
 on its boundary.
 
@@ -919,7 +927,7 @@ set.
 ```{prf:theorem} Supporting hyperplane theorem
 :label: res-cvx-supporting-hyperplane-theorem
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 Let $C$ be a nonempty convex subset of $\VV$. 
 Let $\bx \in \boundary C$ be any point in the boundary of $C$.
 Then, there exists a supporting hyperplane to $C$ at $\bx$.
@@ -957,7 +965,7 @@ Now, assume that $\interior C \neq \EmptySet$.
 ```{prf:corollary}
 :label: res-cvx-closed-convex-intersect-supporting
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 A closed convex set $C$ of $\VV$ is the intersection of
 all the supporting halfspaces that contain it.
 ```
