@@ -832,6 +832,16 @@ $$
 In other words, there exists a separating hyperplane
 such that $C$ is contained in one of its (closed) halfspaces
 and $\by$ is not in that halfspace (i.e., it is in the opposite open halfspace). 
+
+By choosing any $\beta \in (\alpha, \langle \by , \bp \rangle)$,
+we also have
+
+
+$$
+\langle \by , \bp \rangle > \beta
+\text{ and }
+\langle \bx, \bp \rangle < \beta \Forall \bx \in C.
+$$
 ```
 
 ```{prf:proof}
