@@ -916,7 +916,7 @@ We now have two different characterizations of closed convex sets.
 1. From {prf:ref}`res-cvx-closed-closure-line-segments`,
    a closed and convex set is the closure of the union of
    all the line segments connecting the points of the set.
-1. From {prf:ref}` res-cvx-closed-convex-halfspace-intersection`,
+1. From {prf:ref}`res-cvx-closed-convex-halfspace-intersection`,
    a closed and convex set is the intersection of all the
    closed half-spaces containing it.
 

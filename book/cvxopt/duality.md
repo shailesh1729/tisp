@@ -15,12 +15,22 @@ that $\epi f \subseteq \VV \oplus \RR$.
 1. The $\VV$ part forms the horizontal axes for the
 product space $\VV \oplus \RR$.
 1. The $\RR$ part forms the vertical axis.
-1. A hyperplane in $\VV \oplus \RR$ in $\VV \oplus \RR$
+1. We write the vectors in $\VV \oplus \RR$ as $(\bx, t)$
+   where $\bx \in \VV$ and $t \in \RR$.
+1. A hyperplane in $\VV \oplus \RR$
    is associated with a nonzero normal vector of the form $(\ba, b)$
    where $\ba \in \VV$ and $b \in \RR$.
 
    $$
    H = \{ (\bx, t) \in \VV \oplus \RR \ST \langle \bx, \ba \rangle  + t b = c \}.
+   $$
+   Since the normal vector must be nonzero, hence either $\ba$
+   or $b$ or both must be nonzero.
+1. If a specific point $(\bx_0, t_0) \in H$, then
+
+   $$
+   H = \{ (\bx, t) \in \VV \oplus \RR \ST \langle \bx, \ba \rangle  + t b = 
+   \langle \bx_0, \ba \rangle + t_0 b \}.
    $$
 ```
 
@@ -36,8 +46,10 @@ $(\ba, b)$.
 1. The hyperplane is called *nonvertical* if $b \neq 0$.
 ```
 
-```{div}
 Let us see how these definitions can be interpreted.
+```{prf:example} Horizontal hyperplanes
+:label: ex-opt-horizontal-hyperplanes-1
+
 Consider the case where $\ba = \bzero$.
 
 1. The hyperplane description reduces to
@@ -48,17 +60,21 @@ Consider the case where $\ba = \bzero$.
 1. It simplifies to
 
    $$
-   H = \{ (\bx, t) \in \VV \oplus \RR \ST  t = \frac{c}{b} \}
+   H = \left \{ (\bx, t) \in \VV \oplus \RR \ST  t = \frac{c}{b} \right \}
    $$
    since $b$ must be nonzero.
 1. Along the $\VV$ axes, the points in set $H$ can take any value
-   but along the $\RR$ axis, they must take a fixed value given by
+   but along the vertical axis, they must take a fixed value given by
    $\frac{c}{b}$.
 1. We can see that $H$ is a hyperplane which is parallel to $\VV \times \{ 0 \}$.
 1. For the specific case where $c = 0$, $H = \VV \times \{ 0 \}$.
 1. Hence they are called horizontal hyperplanes.
-1. Note that $H$ intersects with the $\RR$ axis at the point
+1. Note that $H$ intersects with the vertical axis at the point
    $(\bzero, \frac{c}{b})$.
+```
+
+```{prf:example} Vertical hyperplanes
+:label: ex-opt-vertical-hyperplanes-1
 
 Now consider the case where $b = 0$.
 
@@ -69,16 +85,18 @@ Now consider the case where $b = 0$.
    $$
 1. The set $H_v = \{ \bx \in \VV \ST  \langle \bx, \ba \rangle = c \}$
    describes a hyperplane of $\VV$.
-1. $H$ is constructed by allowing $H_v$ to slide along the $\RR$ axis
+1. $H$ is constructed by allowing $H_v$ to slide along the vertical axis
    as any value is allowed in the last coordinate (vertical axis). 
 1. Hence this is called a vertical hyperplane.
 ```
 
-```{prf:observation} Intersection of nonvertical hyperplane with $\RR$ axis
-If a hyperplane $H$ with the normal vector $(\ba, b)$ is nonvertical
-(i.e., b \neq 0), then it intersects with the $\RR$ axis at a unique point.
+```{prf:observation} Intersection of nonvertical hyperplane with vertical axis
+:label: res-opt-non-vert-hyperplane-intersection-r-axis
 
-1. Indeed the $\RR$ axis is identified with the set of points 
+If a hyperplane $H$ with the normal vector $(\ba, b)$ is nonvertical
+(i.e., $b \neq 0$), then it intersects with the vertical axis at a unique point.
+
+1. Indeed the vertical axis is identified with the set of points 
 
    $$
    L = \{ (\bx, t) \in \VV \oplus \RR  \ST \bx = \bzero \}.
@@ -160,7 +178,7 @@ Then
     \geq c_i  \}
    $$
    where $I$ is an index set for the family of the hyperplanes
-   that contain $C$ in its closed half spaces above.
+   that contain $\closure C$ in its closed half spaces above.
    Since the hyperplanes are vertical, hence $b_i = 0$ for ever $i \in I$.
 1. Let $(\tilde{\bx}, \tilde{t}) \in \closure C$.
 1. Then the vertical line $\{ (\tilde{\bx}, t)  \ST t \in \RR \}$
@@ -261,6 +279,170 @@ Then
 ```
 
 
+
+```{prf:definition} Upper closed halfspace
+:label: def-opt-upper-closed-halfspace
+
+Let $H$ be a nonvertical hyperplane.
+The closed halfspace of $H$ whose recession cone
+includes the vertical halfline $\{(\bzero, t) \ST t \geq 0 \}$
+is known as its *upper* closed halfspace.
+```
+
+If you are in the upper closed halfspace and keep going up,
+you will stay in the upper closed halfspace. If you go down,
+you will hit the hyperplane.
+
+```{prf:definition} Lower closed halfspace
+:label: def-opt-lower-closed-halfspace
+
+Let $H$ be a nonvertical hyperplane.
+The closed halfspace of $H$ whose recession cone
+includes the vertical halfline $\{(\bzero, t) \ST t \leq 0 \}$
+is known as its *lower* closed halfspace.
+```
+
+If you are in the lower closed halfspace and keep going down,
+you will stay in the lower closed halfspace. If you go up,
+you will hit the hyperplane.
+
+
+## Min Common/Max Crossing Duality
+
+```{div}
+We introduce two simple optimization problems.
+
+1. Consider a set $M$ in $\VV \oplus \RR$.
+1. Assume that $M$ intersects with the vertical axis;
+   i.e., $R = \{ (\bzero, t) \ST t \in \RR \}$.
+1. The *min common point* problem attempts to find
+   the point $\bx \in M \cap R$ whose component
+   along vertical axis is the minimum.
+1. Now consider the set of nonvertical hyperplanes
+   such that $M$ lies in their upper closed
+   halfspaces.
+1. Each such hyperplane intersects with the vertical axis.
+1. Such points are called the crossing points between
+   the nonvertical hyperplane and the vertical axis.
+1. Consider the set of all such crossing points.
+1. The *max crossing point* problem attempts to
+   find the point whose vertical component is
+   the largest (highest).
+1. Let $\bp^*$ be the minimum common point.
+1. Let $\bq^*$ be the maximum crossing point.
+1. Let $p^*$ and $q^*$ denote the component
+   along the vertical axis for $\bp^*$ and
+   $\bq^*$ respectively.
+1. In general, $p^*$ lies above $q^*$. 
+   We shall show this later formally.
+1. We call $p^*$ as minimum common level
+   and $q^*$ as maximum crossing level.
+1. Then $p^* \geq q^*$. This is known as
+   *weak duality*.
+1. The gap $p^* - q^*$ which is a nonnegative
+   quantity is known as the *duality gap*.
+1. Under certain conditions $p^* = q^*$.
+   In other words, if the set $M$ meets specific
+   conditions, then the optimal value for the
+   min common point problem (the primal problem)
+   as well as the max crossing point problem
+   (the dual problem) are identical.
+1. When $p^* = q^*$, then the duality gap
+   is $0$. This is known as *strong duality*.
+1. When strong duality holds, then the min common point
+   problem and the max crossing point problem are
+   equivalent in the sense that they have the same solution.
+```
+
+We are now ready to define these problems formally.
+
+### Min Common Problem
+
+```{prf:definition} Min common problem
+:label: def-opt-min-common-problem
+
+Given a set $M \subseteq \VV \oplus \RR$, the
+*min common problem* is defined as
+
+$$
+& \text{minimize }  &  & p \\
+& \text{subject to } & & (\bzero, p) \in M
+$$
+
+Its optimal value is denoted by $p^*$; i.e.,
+
+$$
+p^* = \inf_{(\bzero, p) \in M} p.
+$$
+```
+
+### Max Crossing Problem
+
+Recall that a nonvertical hyperplane
+has a normal $(\ba, b)$ such that $b \neq 0$.
+Then $(\frac{\ba}{b}, 1)$ is also a normal vector
+for this hyperplane.
+Hence one way to describe the set of
+nonvertical hyperplanes is the set of hyperplanes
+with normal vectors of the form $(\ba, 1)$.
+Following {prf:ref}`res-opt-non-vert-hyperplane-intersection-r-axis`,
+if a nonvertical hyperplane $H$ intersects the vertical axis
+at some $(\bzero, q)$, then
+
+$$
+q = \langle \bx, \ba \rangle + t
+$$
+where $(\bx, t) \in H$.
+Thus, the hyperplane can be characterized by $\ba$ and $q$ as
+
+$$
+H_{\ba, q} = \{ (\bx, t) \ST \langle \bx, \ba \rangle + t = q \}.
+$$
+The corresponding upper closed half halfspace is given by
+
+$$
+H^u_{\ba, q} = \{ (\bx, t) \ST \langle \bx, \ba \rangle + t  \geq q \}
+$$
+since $t \geq q$ for every point on the vertical axis in $H^u_{\ba, q}$.
+The coordinate along the vertical axis for all the points on the vertical axis
+in the upper half space must be more than or equal to $q$.
+
+If the set $M$ lies in the upper closed half space of a hyperplane
+characterized by $\ba$ and $q$, then
+
+$$
+\langle \bx, \ba \rangle + t  \geq q \Forall (\bx, t) \in M. 
+$$
+
+Hence, the maximum crossing level $q$ over all hyperplanes
+$H_{\ba, q}$ with the same normal $(\ba, 1)$ is given by
+
+$$
+q(\ba) = \inf_{(\bx, t) \in M} \{ \langle \bx, \ba \rangle + t \}.
+$$
+
+The problem of maximizing the crossing level over all
+nonvertical hyperplanes is to maximize over all $\ba \in \VV$,
+the maximum crossing level corresponding to $\ba$.
+
+```{prf:definition} Maximum crossing level problem
+:label: def-opt-max-cross-level-problem
+
+Given a set $M \subseteq \VV \oplus \RR$, the
+*max crossing problem* is defined as
+
+$$
+& \text{maximize }  &  & q (\ba) \\
+& \text{subject to } & & \ba \in \VV
+$$
+where $q(\ba) = \inf_{(\bx, t) \in M} \{ \langle \bx, \ba \rangle + t \}$.
+Its optimal value is denoted by $q^*$; i.e.,
+
+$$
+q^* = \sup_{\ba \in \VV} q(\ba).
+$$
+
+```
 
 
 ## Fenchel's Duality Theorem
