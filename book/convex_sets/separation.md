@@ -401,6 +401,63 @@ some hyperplane $H$.
    must be true.
 ```
 
+### Proper Separation : Set and Point
+
+```{prf:remark} Proper separation between a set and a point
+:label: res-cvx-proper-sep-set-point-def
+
+Let $\VV$ be an $n$-dimensional real vector space.
+We consider the case of proper separation between
+a set $S$ and a point $\bp$.
+We can form a set $T = \{ \bp \}$.
+Then the proper separation between $S$ and $\bp$ can be described
+in terms of proper separation between $S$ and $T$.
+
+Then
+
+$$
+\sup \{ \langle \bx, \ba \rangle \ST \bx \in T \}
+= \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \} 
+= \langle \bp, \ba \rangle.
+$$
+
+Hence, $S$ and $\bp$ are properly separated
+if and only if there exists a vector $\ba \in \VV$
+such that
+
+$$
+\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+\geq \langle \bp, \ba \rangle
+\text{ and }
+\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+>  \langle \bp, \ba \rangle.
+$$
+
+
+We now consider a hyperplane
+
+$$
+H  = \{ \bx \in \VV \ST  \langle \bx, \ba \rangle =  \langle \bp, \ba \rangle \}.
+$$
+
+And let $H_+$ denote one of its closed half-spaces
+
+$$
+H_+  = \{ \bx \in \VV \ST  \langle \bx, \ba \rangle  \geq  \langle \bp, \ba \rangle \}.
+$$
+We can clearly see that
+
+1. $\ba \in H$.
+1. $S \subseteq H_+$. $S$ is contained entirely in the closed half-space $H_+$.
+1. $S \not\subseteq H$. $S$ is not contained entirely in $H$.
+
+Thus, if a set and a point are properly separated, then there
+exists a hyperplane that passes through the point, 
+contains the set in one of its half-spaces but does not
+fully contain the set itself.
+```
+
+
 ## Separating Hyperplane Theorems
 
 ```{prf:theorem} Separating hyperplane theorem I
@@ -551,6 +608,42 @@ This result is stronger than proposition
 
 Disjointness of convex sets is not enough for
 strong separation as their closures might meet.
+
+
+```{prf:theorem} Separating hyperplane theorem III
+:label: res-cvx-proper-sep-set-point
+
+
+Let $\VV$ be an $n$-dimensional real vector space.
+Let $S$ be a nonempty convex subset of $\VV$.
+Let $\ba \in \VV$ be a vector.
+There exists
+a hyperplane $H$ that separates $S$ and $\ba$ *properly*
+if and only if $\ba \notin \relint S$.
+
+In other words, a point can be properly separated
+from a convex set if and only if it doesn't belong
+to its relative interior.
+```
+
+```{prf:proof}
+.
+
+1. We form a set $T = \{ \ba \}$.
+1. Then $\relint T = \{ \ba \}$ ({prf:ref}`res-cvx-relint-singleton`).
+1. By {prf:ref}`res-cvx-sep-plan-1`, $S$ and $T$ are properly
+   separated if and only if
+
+   $$
+   \relint S \cap \relint T = \EmptySet.
+   $$
+1. In other words,
+
+   $$
+   \relint S \cap \{ \ba \} = \EmptySet.
+   $$
+1. In other words, $\ba \notin \relint S$.
+```
 
 
 
