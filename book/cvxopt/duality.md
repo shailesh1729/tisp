@@ -521,8 +521,174 @@ $$
 ```
 
 
+### Strong Duality
+
+```{div}
+We are now interested in conditions under which
+there is no duality gap and $p^* = q^*$. 
+We shall assume in general that the min common problem
+is feasible and $p^* < \infty$.
+```
+
+```{prf:remark} Optimal point of min common problem is a closure point
+:label: res-opt-min-common-optimal-closure
+
+Assume that the min common problem is feasible and let
+$p^* < \infty$. Then the point $(\bzero, p^*)$ is a
+closure point of $M$.
+
+1. We have $p^* = \inf_{(\bzero, t) \in M} \{ t \}$.
+1. Thus for every $\epsilon > 0$ there exists
+   $(\bzero, t) \in M$ such that $t < p^* + \epsilon$.
+1. Thus for every $\epsilon > 0$, there exists a point
+   $(\bzero, t) \in M$ such that $\| (\bzero, t) - (\bzero, p^*)\| < \epsilon$.
+1. Hence $(\bzero, p^*)$ is a closure point of $M$.
+```
+
+```{prf:observation} Closed and convex $M$
+:label: res-opt-min-max-strong-duality-closed-convex
+
+If $M$ is closed and convex and admits a nonvertical supporting hyperplane
+at $(\bzero, p^*)$, then the strong duality holds and
+$p^* = q^*$. Also, the optimal values of both the min common problem
+and max crossing problem are attained.
+
+1. Since $M$ is closed, hence $(\bzero, p^*) \in M$
+   since $(\bzero, p^*)$ is a closure point of $M$.
+1. Hence the optimal value of min common problem is attained at
+   $(\bzero, p^*)$.
+1. Let $H$ be the nonvertical supporting hyperplane at $(\bzero, p^*)$.
+1. Then intersection of $H$ with the vertical axis is at $(\bzero, p^*)$.
+1. Hence $q^* \geq p^*$.
+1. But by weak duality $q^* \leq p^*$.
+1. Hence $q^* = p^*$.
+1. Clearly the optimal value of max crossing problem is attained at
+   $(\bzero, p^*)$ for the hyperplane $H$.
+```
+
+This is the most favorable case where strong duality holds
+as well as the optimal values of both problems are attained.
+We next provide a result that provides a necessary and sufficient
+condition for the strong duality however does not address the
+issue of attainment of the optimal values.
 
 
+```{prf:theorem} Min common/max crossing theorem I
+:label: res-opt-min-max-strong-duality-1
+
+Consider the min common and max crossing problems.
+Assume the following:
+
+1. $p^* < \infty$; i.e., the min common problem is feasible.
+1. The set
+
+   $$
+   \overline{M} = \{ (\bx, t) \in \VV \oplus \RR \ST \text{ there exists } 
+   \bar{t} \in \RR \text{ with } 
+   \bar{t} \leq t \text{ and } (\bx, \bar{t}) \in M \}
+   $$
+   is convex.
+
+Then we have $q^* = p^*$ if and only if for every sequence
+$\{ (\bx_k, t_k) \}$ of $M$ with $\bx_k \to \bzero$, there holds
+
+$$
+p^* \leq \liminf_{k \to \infty} t_k.
+$$
+```
+
+The set $\overline{M}$ is an extension of the set $M$ going upwards
+along the vertical axis. In other words, all points above
+$M$ are included in $\overline{M}$. In other words, the direction
+$(\bzero, 1)$ is added to the recession cone.
+$\overline{M}$ is unbounded along the $(\bzero, 1)$ direction.
+
+
+```{prf:proof}
+We first consider the trivial case where $p^* = -\infty$.
+
+1. By weak duality ({prf:ref}`res-opt-min-common-weak-duality`),
+   $q^* \leq p^*$.
+1. Hence $q^* = -\infty$.
+1. Hence $q(\ba) = -\infty$ for every $\ba \in \VV$.
+1. The conclusion follows trivially.
+
+We now consider the general case where $p^* \in \RR$.
+First assume that $p^* \leq \liminf_{k \to \infty} t_k$
+holds for every sequence
+$\{ (\bx_k, t_k) \}$ of $M$ with $\bx_k \to \bzero$.
+
+1. Since $M \subseteq \overline{M}$ and
+   $(\bzero, p^*)$ is a closure point of $M$,
+   hence $(\bzero, p^*)$ is also a closure point of $\overline{M}$.
+1. We first claim that the set $\overline{M}$ doesn't contain any vertical lines.
+   1. For contradiction, assume that $\overline{M}$ contains a vertical line.
+   1. The set $\closure \overline{M}$ also contains a vertical line then.
+   1. Then $(\bzero, -1)$ is a direction of recession of $\closure \overline{M}$.
+   1. Hence $(\bzero, -1)$ is also a direction of recession of $\relint \overline{M}$.
+   1. Since $(\bzero, p^*)$ is a closure point of $\overline{M}$, hence
+      it is also a closure point of $\relint \overline{M}$.
+   1. Hence, there exists a sequence $\{ (\bx_k, t_k) \}$
+      of $\relint \overline{M}$ converging to $(\bzero, p^*)$.
+   1. Since $(\bzero, -1)$ is a direction of recession of $\relint \overline{M}$,
+      hence the sequence $\{ (\bx_k, t_k -1) \}$ belongs to $\relint \overline{M}$.
+   1. Hence its limit $(\bzero, p^* - 1) \in \closure \overline{M}$.
+   1. By definition of $\overline{M}$, for every $k$, 
+      there exists a point $(\bx_k \overline{t_k}) \in M$ 
+      such that $\overline{t_k} \leq t_k - 1$.
+   1. Hence there exists a sequence $\{ (\bx_k, \overline{t_k} ) \}$ of $M$
+      with $\overline{t_k} \leq t_k - 1$ for all $k$ so that
+      $\liminf_{k \to \infty} \overline{t_k} \leq p^* - 1$.
+   1. This contradicts the assumption that  $p^* \leq \liminf_{k \to \infty} t_k$
+      since $\bx_k \to \bzero$.
+1. We next show that the vector $(\bzero, p^* - \epsilon)$
+   does not belong to $\closure \overline{M}$ for any $\epsilon > 0$.
+   1. Assume for contradiction that for some $\epsilon > 0$, 
+      the vector $(\bzero, p^* - \epsilon) \in \closure \overline{M}$.
+   1. Then there is a sequence $\{ (\bx_k, t_k) \}$ of $\overline{M}$
+      converging to $(\bzero, p^* - \epsilon)$.
+   1. By definition of $\overline{M}$, for every $k$, there exists
+      a point  $(\bx_k \overline{t_k}) \in M$ 
+      such that $\overline{t_k} \leq t_k$.
+   1. Hence there exists a sequence $\{ (\bx_k, \overline{t_k} ) \}$ of $M$
+      with $\overline{t_k} \leq t_k$ for all $k$ so that
+      $\liminf_{k \to \infty} \overline{t_k} \leq p^* - \epsilon$.
+   1. This contradicts the assumption that  $p^* \leq \liminf_{k \to \infty} t_k$
+      since $\bx_k \to \bzero$.
+1. Since $\overline{M}$ does not contain any vertical lines and the
+   vector $(\bzero, p^* - \epsilon)$ doesn't belong to $\closure \overline{M}$,
+   hence, due to {prf:ref}`res-opt-cvx-set-non-vert-supp-plane`,
+   there exists a nonvertical hyperplane strongly separating
+   $(\bzero, p^* - \epsilon)$ and $\overline{M}$ for every $\epsilon > 0$.
+1. This hyperplane crosses the vertical axis at a unique vector
+   $(\bzero, \xi)$ which must lie between $(\bzero, p^* - \epsilon)$
+   and $(\bzero, p^*)$; i.e., $p^* - \epsilon \leq \xi \leq p^*$.
+1. By definition of max crossing problem, $\xi \leq q^*$.
+1. Hence we have $p^* - \epsilon \leq q^* \leq p^*$ for every $\epsilon > 0$.
+1. Since $\epsilon$ can be arbitrarily small, it follows that
+   $p^* = q^*$.
+
+Conversely, we assume that the strong duality holds.
+
+1. Let $\{ (\bx_k, t_k) \}$ be any sequence of $M$ such that
+   $\bx_k \to \bzero$.
+1. By definition of $q(\ba)$,
+
+   $$
+   q(\ba) = \inf_{(\bx, t) \in M} \{ \langle \bx, \ba \rangle + t \}
+   \leq \langle \bx_k, \ba \rangle + t_k \Forall k, \Forall \ba \in \VV. 
+   $$
+1. Taking the limit on R.H.S. to $k \to \infty$, we obtain
+
+   $$
+   q(\ba) \leq \liminf_{k \to \infty} t_k \Forall \ba \in \VV.
+   $$
+1. Taking the supremum on the L.H.S. over $\ba \in \VV$, we have
+   
+   $$
+   p^* = q^* = \sup_{\ba \in \VV} q(\ba) \leq \liminf_{k \to \infty} t_k.
+   $$
+```
 
 ## Fenchel's Duality Theorem
 
