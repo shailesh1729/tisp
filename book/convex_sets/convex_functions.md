@@ -1163,7 +1163,7 @@ $$
 C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}.
 $$
 
-The open sublevel sets for a real valued function $f: \VV \to \RR$
+The strict sublevel sets for a real valued function $f: \VV \to \RR$
 can be defined as
 
 $$
@@ -1171,8 +1171,8 @@ O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}.
 $$
 
 
-The closed sublevel sets can be shown to be intersection
-of a set of open sublevel sets.
+The sublevel sets can be shown to be intersection
+of a set of strict sublevel sets.
 
 ```{prf:theorem} Sublevel set as intersection
 :label: res-cvxf-sublevel-set-as-intersection
@@ -1184,15 +1184,13 @@ Let
 $$
 O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}
 $$
-denote the open sublevel set of $f$ for $\alpha$.
-
-
+denote the strict sublevel set of $f$ for $\alpha$.
 Let
 
 $$
 C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}
 $$
-denote the closed sublevel set of $f$ for $\alpha$.
+denote the sublevel set of $f$ for $\alpha$.
 Then,
 
 $$
@@ -1270,11 +1268,11 @@ Its sublevel sets are convex as they are intervals.
 ```
 
 
-```{prf:theorem} Convexity of open sublevel sets
+```{prf:theorem} Convexity of strict sublevel sets
 :label: res-cvxf-convexity-open-sublevel-sets
 
 If $f : \VV \to \RR$ is convex, 
-then its open sublevel sets given by
+then its strict sublevel sets given by
 
 $$
 O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}
@@ -1299,8 +1297,8 @@ Assume $f$ is convex.
 1. Thus, $O_{\alpha}$ is convex.
 ```
 
-An alternate proof for showing the convexity of the closed
-sublevel sets is to show it as an intersection of open sublevel sets.
+An alternate proof for showing the convexity of the
+sublevel sets is to show it as an intersection of strict sublevel sets.
 
 
 ```{prf:theorem} Intersection of sublevel sets of convex functions
@@ -1370,7 +1368,7 @@ Just like function convexity is connected to epigraph convexity,
 similarly function concavity is connected to hypograph convexity.
 
 
-```{prf:theorem} Function concavity = Epigraph convexity
+```{prf:theorem} Function concavity = Hypograph convexity
 :label: res-cvxf-concavity-hypograph
 
 A function $f$ is concave if and only if its hypograph
