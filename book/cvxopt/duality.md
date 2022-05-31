@@ -1,5 +1,5 @@
 (sec:opt:duality)=
-# Duality
+# Basic Duality
 
 
 ## The Geometry of the $\VV \oplus \RR$ Space
@@ -34,6 +34,8 @@ product space $\VV \oplus \RR$.
    $$
 ```
 
+### Different Types of Hyperplanes
+
 
 ```{prf:definition} Vertical, horizontal and nonvertical hyperplanes
 :label: def-opt-vert-horz-hyperplane
@@ -47,6 +49,9 @@ $(\ba, b)$.
 ```
 
 Let us see how these definitions can be interpreted.
+
+### Horizontal Hyperplanes
+
 ```{prf:example} Horizontal hyperplanes
 :label: ex-opt-horizontal-hyperplanes-1
 
@@ -73,6 +78,8 @@ Consider the case where $\ba = \bzero$.
    $(\bzero, \frac{c}{b})$.
 ```
 
+### Vertical Hyperplanes
+
 ```{prf:example} Vertical hyperplanes
 :label: ex-opt-vertical-hyperplanes-1
 
@@ -89,6 +96,8 @@ Now consider the case where $b = 0$.
    as any value is allowed in the last coordinate (vertical axis). 
 1. Hence this is called a vertical hyperplane.
 ```
+
+### Nonvertical Hyperplanes
 
 ```{prf:observation} Intersection of nonvertical hyperplane with vertical axis
 :label: res-opt-non-vert-hyperplane-intersection-r-axis
@@ -124,6 +133,8 @@ If a hyperplane $H$ with the normal vector $(\ba, b)$ is nonvertical
    $$
 ```
 
+### Vertical Lines
+
 ```{prf:definition} Vertical line
 :label: def-opt-vertical-line
 
@@ -139,6 +150,8 @@ is a fixed vector.
 It enables us to wonder if the epigraph of a proper
 function is contained entirely in a closed halfspace
 corresponding to some nonvertical hyperplane.
+
+### Nonvertical Supporting Hyperplanes
 
 ```{prf:theorem} Convex sets and nonvertical supporting hyperplanes
 :label: res-opt-cvx-set-non-vert-supp-plane
@@ -690,54 +703,313 @@ Conversely, we assume that the strong duality holds.
    $$
 ```
 
-## Fenchel's Duality Theorem
+This result doesn't guarantee the attainment of either
+the min common optimal point or the max crossing optimal
+point. The next result includes additional conditions
+which ensures that the optimal point of max crossing problem
+is attained. 
 
-Consider the minimization problem
 
-```{math}
-:label: eq-opt-fenchel-primal
-\inf_{\bx \in \VV} f(\bx) + g(\bx).
+```{prf:theorem} Min common/max crossing theorem II
+:label: res-opt-min-max-strong-duality-2
+
+Consider the min common and max crossing problems.
+Assume the following:
+
+1. $-\infty < p^*$.
+1. The set
+
+   $$
+   \overline{M} = \{ (\bx, t) \in \VV \oplus \RR \ST \text{ there exists } 
+   \bar{t} \in \RR \text{ with } 
+   \bar{t} \leq t \text{ and } (\bx, \bar{t}) \in M \}
+   $$
+   is convex.
+1. The set 
+
+   $$
+   D = \{ \bu  \in \VV \ST \text{ there exists } t \in \RR
+   \text{ with } (\bu, t) \in \overline{M} \}
+   $$
+   contains the origin in its relative interior.
+
+Then $q^* = p^*$ and the optimal solution set of the
+max crossing problem 
+
+$$
+Q^* = \{ \ba \in \VV \ST q(\ba) = q^* \}
+$$
+has the form
+
+$$
+Q^* = (\affine D)^{\perp} + \tilde{Q}
+$$
+where $\tilde{Q}$ is a nonempty, convex and compact set
+and $(\affine D)^{\perp}$ is the orthogonal complement
+of $\affine D$ (which is a subspace by assumption 3 since
+it contains the origin).
+
+Furthermore, $Q^*$ is nonempty and compact if and
+only if $D$ contains the origin in its interior.
 ```
 
-The problem can be rewritten as
+Note that $D$ is the set of all possible horizontal
+coordinates of points in $M$.
+$\bx \in D$ if and only if there exists some $(\bx, t) \in \overline{M}$
+if and only if there exists some $(\bx, s) \in M$ with $s \leq t$.
+Since $\overline{M}$ is convex and $D$ is a projection
+of $\overline{M}$ on $\VV$, hence $D$ is also convex.
 
-$$
-\inf_{\bx, \bz \in \VV} \{ f(\bx) + g(\bz) \ST \bx = \bz \}.
-$$
+```{prf:proof}
+We first show that the strong duality holds and
+$Q^*$ is nonempty, closed and convex.
 
-Construct the Lagrangian for this problem.
+1. Condition (3) implies that there exists
+   some $(\bzero, t) \in \overline{M}$.
+1. By definition of $\overline{M}$,
+   there exists some $(\bzero, \overline{t}) \in M$
+   such that $\overline{t} \leq t$.
+1. Hence $p^* < \infty$.
+1. Then, by condition (1), $p^* \in \RR$;
+   i.e., the min crossing level is a real number.
+1. The vertical axis $\{ (\bzero, t) \ST t \in \RR \}$
+   belongs to $\affine \overline{M}$.
+1. $p^*$ is the optimal min common value.
+1. Hence $(\bzero, p^*)$ is not a relative interior
+   point of $\overline{M}$.
+1. Accordingly, $(\bzero, p^*) \notin \relint \overline{M}$.
 
-$$
-L (\bx, \bx; \by ) &= f(\bx) + g(\bz)  + \langle \bz - \bx, \by \rangle\\
-&= -[\langle \bx, \by \rangle - f(\bx)]  - [\langle \bz, -\by \rangle - g(\bz)].
-$$
+1. By {prf:ref}`res-cvx-proper-sep-set-point`, there exists a hyperplane
+   that separates $\overline{M}$ and the point $(\bzero, p^*)$
+   properly; i.e., it contains the point $(\bzero, p^*)$,
+   contains $\overline{M}$ in one of its half-spaces
+   and doesn't contain $\overline{M}$ fully.
+1. Hence, there exists a vector $(\ba, r)$ such that
 
-The dual objective is constructed by minimizing the Lagrangian with the
-primal variables $\bx, \bz$.
+   $$
+   \langle \bx, \ba \rangle + t r \geq p^* r  \Forall (\bx, t) \in \overline{M} 
+   $$
+   and
 
-$$
-q(\by) = \inf_{\bx, \bz} L(\bx, \bz; \by) = - f^*(\by) - g^*(- \by).
-$$
+   $$
+   \sup_{(\bx, t) \in \overline{M}} \langle \bx, \ba \rangle + t r >  p^* r.
+   $$
+   See {prf:ref}`res-cvx-proper-sep-set-point-def`.
+1. Since for every $(\overline{\bx}, \overline{t}) \in M$, the
+   set $\overline{M}$ contains the half-line
+   $\{ (\overline{\bx}, t) \ST \overline{t} \leq t \}$,
+   it follows from the first inequality that
+   $r \geq 0$ must hold true.
+1. $r = 0$ leads to a contradiction.
+   1. Assume that $r = 0$.
+   1. Then the first inequality reduces to
 
-We thus obtain the following dual problem, known as the *Fenchel's dual*:
+      $$
+      \langle \bx, \ba \rangle \geq 0 \Forall \bx \in D.
+      $$
+   1. The linear functional $\langle \bx, \ba \rangle$ attains
+      its minimum over the set $D$ at $\bzero \in D$ which
+      is a relative interior point of $D$ by condition (3).
+   1. Since $D$ is convex (projection of convex $\overline{M}$
+      on $\VV$), and the linear functional $\langle \bx, \ba \rangle$
+      (a concave function)
+      attains its minimum at a relative interior point,
+      hence, due to {prf:ref}`res-cvxopt-concave-min-relint-const`,
+      the function must be constant over $D$.
+   1. Hence we have
 
-```{math}
-:label: eq-opt-fenchel-dual
-\sup_{\by \in \VV^*} \{ - f^*(\by) - g^*(- \by) \}.
+      $$
+      \langle \bx, \ba \rangle = 0 \Forall \bx \in D.
+      $$
+   1. But this contradicts the second (strict) inequality of the proper separation
+      result since $\overline{M}$ cannot be contained entirely inside the
+      hyperplane.
+   1. We arrive at a contradiction.
+   1. Hence $r \neq 0$ and the separating hyperplane is nonvertical.
+1. By appropriate normalization, if necessary, we can assume that $r=1$.
+1. The proper separation inequalities simplify to
+
+   $$
+   \langle \bx, \ba \rangle + t \geq p^*  \Forall (\bx, t) \in \overline{M} 
+   $$
+   and
+
+   $$
+   \sup_{(\bx, t) \in \overline{M}} \langle \bx, \ba \rangle + t >  p^*.
+   $$
+1. We now note that
+
+   $$
+   p^* &\leq \inf_{(\bx, t) \in \overline{M}} \langle \bx, \ba \rangle + t \\
+   &\leq \inf_{(\bx, t) \in M} \langle \bx, \ba \rangle + t \\
+   &= q(\ba) \\
+   &\leq q^*.
+   $$
+1. Since by weak duality, we always have $q^* \leq p^*$, hence all the inequalities
+   must be equalities in the previous relation.
+1. Thus we have
+
+   $$
+   q(\ba) = q^* = p^*.
+   $$
+1. Hence $Q^*$ is nonempty as $\ba \in Q^*$.
+1. We can also write $Q^*$ as 
+
+   $$
+   Q^* = \{ \ba \in \VV \ST q(\ba) \geq q^* \}.
+   $$
+1. Since $q$ is concave and upper semicontinuous, hence its
+   superlevel sets are closed and convex.
+1. Hence $Q^*$ being a superlevel set of $q$ is convex and closed. 
+
+
+We next show that $Q^* = (\affine D)^{\perp} + \tilde{Q}$.
+
+TBD
 ```
 
-Fenchel's duality theorem provides the conditions under which strong duality
-holds for the pair of problems {eq}`eq-opt-fenchel-primal` and {eq}`eq-opt-fenchel-dual`.
 
-```{prf:theorem} Fenchel's duality theorem
-:label: res-opt-fenchel-duality-theorem
+## Minimax and Maximin Problems
 
-Let $f,g : \VV \to \RERL$ be proper convex functions.
-If $\relint \dom f \cap \relint \dom g \neq \EmptySet$, then 
+We now considers functions of the form
+$\phi : \VV \oplus \WW \to \RR$ with
+$\dom \phi = X \times Z$.
+$\VV$ and $\WW$ are real vector spaces.
+$X \subseteq \VV$ and $Z \subseteq \WW$
+are nonempty sets.
+
+
+A  *minimax* problem takes the form
 
 $$
-\underset{\bx \in \VV}{\inf} \{f(\bx) + g(\bx) \}
-= \underset{\by \in \VV^*}{\sup} \{ - f^*(\by) - g^*(-\by) \}.
+& \text{minimize }  & \sup_{\bz \in Z} \phi(\bx, \bz)\\
+& \text{subject to } & \bx \in X
 $$
-The supremum of R.H.S. (the dual problem) is attained whenever it is finite.
+A *maximin* problem takes the form
+
+
+$$
+& \text{maximize }  & \inf_{\bx \in X} \phi(\bx, \bz)\\
+& \text{subject to } & \bz \in Z.
+$$
+
+### Zero Sum Games
+
+```{prf:example} Zero sum games
+
+We consider a two player game with the following design.
+
+1. Player A can choose one out of $n$ possible moves.
+1. Player B can choose one out of $m$ possible moves.
+1. Both players make their moves simultaneously.
+1. $\bA \in \RR^{n \times m}$ is a payoff matrix.
+1. If move $i$ is selected by player A and
+   move $j$ is selected by player B, then
+   A gives the specified amount $a_{i j}$ to B.
+1. Note that $a_{i j} \in \RR$ can be zero, positive or negative.
+1. The players use mixed strategy.
+1. Player A selects a probability distribution
+   $\bx = (x_1, \dots, x_n)$ over her $n$ possible moves.
+1. Player B selects a probability distribution
+   $\bz = (z_1, \dots, z_m)$ over her $m$ possible moves.
+1. Since the probability of selecting move $i$ by player A
+   and move $j$ by player B is $x_i z_j$, hence the 
+   expected amount to be paid by A to B is
+
+   $$
+   \sum_{i j} x_i a_{i j} z_j = \bx^T \bA \bz.
+   $$
+1. Each player adopts a worst case viewpoint, 
+   whereby she optimizes her choice against the
+   worst possible selection by the other player.
+1. Player A must minimize $\max_{\bz} \bx^T \bA \bz$
+   so that she has to pay as low as possible to B.
+   1. Suppose A selects the strategy $\bx$.
+   1. The amount she has to pay to B for B's selection of strategy $\bz$
+      is $\bx^T \bA \bz$.
+   1. The maximum amount she has to pay across all possible strategies chosen by B is
+      $\max_{\bz} \bx^T \bA \bz$.
+   1. By selecting $\bx$, her goal is to minimize the maximum payoff.
+1. Player B must maximize $\min_{\bx} \bx^T \bA \bz$.
+   1. Suppose B selects a strategy $\bz$.
+   1. Then the payoff she gets by a strategy $\bx$ of A
+      is $\bx^T \bA \bz$.
+   1. The minimum she can get for her choice of $\bz$ is
+      $\min_{\bx} \bx^T \bA \bz$.
+   1. By selecting $\bz$ her goal is to maximize the minimum payoff.
+
+1. Here $X = \Delta_n \subseteq \RR^n$, the unit simplex of $\RR^n$.
+1. Similarly, $Z = \Delta_m \subseteq \RR^m$, the unit simplex of $\RR^m$.
+1. $\phi(\bx, \bz) = \bx^T \bA \bz$.
+1. The worst case pay off for player A is
+
+   $$
+   \inf_{\bx \in X} \sup_{\bz \in Z }\bx^T \bA \bz.
+   $$
+1. The worst case pay off for player B is
+
+   $$
+   \sup_{\bz \in Z} \inf_{\bx \in X }\bx^T \bA \bz.
+   $$
+1. Under suitable conditions, we can guarantee that
+
+   $$
+   \sup_{\bz \in Z} \inf_{\bx \in X }\bx^T \bA \bz 
+   = \inf_{\bx \in X} \sup_{\bz \in Z }\bx^T \bA \bz.
+   $$ 
 ```
+
+### Lagrangian Functions
+
+```{prf:example} Lagrangian functions and duality theory
+
+Consider the optimization problem of the form
+
+$$
+& \text{minimize }   & f(\bx) \\
+& \text{subject to } & g_i(\bx) \leq 0, & \quad i=1,\dots,m
+$$
+where $f, g_1, \dots, g_m : \VV \to \RR$ are given objective
+and inequality constraint functions.
+
+We construct the Lagrangian function
+
+$$
+L (\bx, \bz ) = f(\bx) + \sum_{i=1}^m z_i g_i(\bx)
+$$
+with $\dom L = X \oplus Z$
+where $X = \dom f \cap \dom g_1 \cap \dots \cap \dom g_m$
+and $Z = \RR^m_+$ (the nonnegative orthant where $\bz \succeq \bzero$).
+
+We construct the *primal problem* as below:
+
+$$
+& \text{minimize }   & \sup_{\bz \succeq \bzero } L (\bx, \bz ) \\
+& \text{subject to } & \bx \in X.
+$$
+
+1. Choose any $\bx \in X$.
+1. If any of the constraints $g_i(\bx) \leq 0$ is violated, then
+   $g_i(\bx) > 0$ and hence
+   $\sup_{\bz \succeq \bzero } L (\bx, \bz ) = \infty$.
+   We can easily achieve this by taking $z_i \to \infty$.
+1. If none of the constraints are invalidated, then by picking
+   $\bz = \bzero$, we have
+   $\sup_{\bz \succeq \bzero } L (\bx, \bz ) = f(\bx)$.
+1. Hence the problem is equivalent to the original problem.
+
+
+We can now construct the *dual problem* as below:
+
+$$
+& \text{maximize }   & \inf_{\bx \in X } L (\bx, \bz ) \\
+& \text{subject to } & \bz \succeq \bzero.
+$$
+
+Thus the primal problem is a minimax problem
+and the dual problem is a maximin problem
+with the Lagrangian playing the role of $\phi$.
+
+Under suitable conditions, the two problems have equal optimal value.
+```
+
