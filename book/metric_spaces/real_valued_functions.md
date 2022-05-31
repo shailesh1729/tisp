@@ -1693,19 +1693,19 @@ conditions hold:
 
 A function $f : X \to \ERL$
 is said to be *lower-semicontinuous* 
-at $a \in X$ if for every $\epsilon > 0$, there exists $\delta > 0$
+at $a \in X$ if for every real $t < f(a)$, there exists $\delta > 0$
 such that
 
 $$
-f(a) - \epsilon < f(x) \text{ for every } x \in B(a, \delta).
+t < f(x) \text{ for every } x \in B(a, \delta).
 $$
 
 Similarly, $f$ is said to be *upper-semicontinuous* at $a \in X$
-if for every $\epsilon > 0$, there exists $\delta > 0$
+if for every real $t > f(a)$, there exists $\delta > 0$
 such that
 
 $$
-f(x) < f(a) + \epsilon \text{ for every } x \in B(a, \delta).
+f(x) < t \text{ for every } x \in B(a, \delta).
 $$
 
 We say that $f$ is lower semicontinuous (l.s.c.) if $f$ 
@@ -1766,7 +1766,7 @@ we study the implications of lower semicontinuity under
 the subspace topology.
 
 
-### Sum Rule
+### Sum Rules
 
 ```{prf:theorem} Sum of lower semicontinuous functions
 :label: res-ms-lsc-sum
@@ -1774,6 +1774,10 @@ the subspace topology.
 Let $f, g : X \to \RR$ be lower semicontinuous functions.
 Then their sum $h = f + g$ with $\dom h = \dom f \cap \dom g$
 is lower semicontinuous.
+
+Similarly, if $f, g: X \to \ERL$ are l.s.c., then their sum
+$h = f + g$ is l.s.c. if $h$ is well defined at every $x \in X$
+(i.e., the sum doesn't take any indeterminate form).
 ```
 
 ```{prf:proof}
@@ -1801,7 +1805,73 @@ We proceed as follows.
    for every $x \in B(a, r)$.
 1. Hence $h$ is l.s.c. at $a$.
 1. Since $a \in H$ is arbitrary, hence $h$ is l.s.c..
+
+
+
+The argument for extended valued functions is similar.
+
+1. Let $a \in X$.
+1. We are given that both $f$ and $g$ are l.s.c. at $a$.
+1. Let $t \in \RR$ such that $t < h(a) = f(a) + g(a)$.
+1. Then there exist $t_1, t_2 \in \RR$ such that
+   $t = t_1 + t_2$ and $t_1 < f(a), t_2 < g(a)$.
+1. Since $f$ is l.s.c. at $a$, there exists $r_1 > 0$
+   such that for every $x \in B(a, r_1)$,
+   $t_1 < f(x)$.
+1. Since $g$ is l.s.c. at $a$, there exists $r_2 > 0$
+   such that for every $x \in B(a, r_2)$,
+   $t_2 < g(x)$.
+1. Let $r = \min(r_1, r_2)$. 
+1. Then for every $x \in B(a, r)$
+
+   $$
+   t = t_1 + t_2 < f(x) + g(x) = h(x).
+   $$
+1. In other words, $t < h(x)$
+   for every $x \in B(a, r)$.
+1. Hence $h$ is l.s.c. at $a$.
+1. Since $a \in X$ is arbitrary, hence $h$ is l.s.c..
 ```
+
+```{prf:theorem} Positive combinations
+:label: res-ms-lsc-pos-combination
+
+Let $f_i : X \to \RERL$, $i=1,\dots,m$ be given functions.
+Let $t_1, \dots, t_m$ be positive scalars.
+Consider the function $g: X \to \RERL$ given by
+
+$$
+g(x) = t_1 f_1(x) + \dots + t_m f_m(x) \Forall x \in X.
+$$
+If $f_1, \dots, f_m$ are l.s.c., then $g$ is l.s.c.
+```
+
+```{prf:proof}
+
+We proceed as follows.
+
+1. Pick some $x \in X$.
+1. For every sequence $\{ x_k \}$ converging to $x$,
+   we have
+
+   $$
+   f_i(x) \leq \liminf_{k \to \infty} f_i (x_k)
+   $$
+   for every $i$.
+1. Hence
+
+   $$
+   g(x) 
+   &= t_1 f_1(x) + \dots + t_m f_m(x) \\
+   &\leq  \sum_{i=1}^m t_i \liminf_{k \to \infty} f_i (x_k) \\
+   &\leq \liminf_{k \to \infty} \sum_{i=1}^m t_i f_i (x_k) \\
+   &= \liminf_{k \to \infty} g(x_k).
+   $$
+   This is valid since $t_i > 0$ for every $i$.
+1. Hence $g$ is l.s.c. at $x$.
+1. Since $x$ is arbitrarily chosen, hence $g$ is l.s.c..
+```
+
 
 ### Composition Rules
 
