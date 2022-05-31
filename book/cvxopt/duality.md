@@ -478,6 +478,50 @@ Upper semicontinuity
 ```
 
 
+### Weak Duality
+
+```{prf:theorem} Weak duality theorem
+:label: res-opt-min-common-weak-duality
+
+For the min common and max crossing problems we have
+
+$$
+q^* \leq p^*.
+$$
+```
+
+```{prf:proof}
+
+Recall that
+
+$$
+q(\ba) = \inf_{(\bx, t) \in M} \{ \langle \bx, \ba \rangle + t \}.
+$$
+
+Then
+
+$$
+\inf_{(\bx, t) \in M} \{ \langle \bx, \ba \rangle + t \}
+\leq 
+\inf_{(\bzero, t) \in M} \{ \langle \bzero, \ba \rangle + t \}
+= \inf_{(\bzero, t) \in M} \{ t \}
+= p^*.
+$$
+
+Thus we have
+
+$$
+q(\ba) \leq p^* \Forall \ba \in \VV.
+$$
+Taking the supremum over $\ba \in \VV$ on the L.H.S., we obtain
+
+$$
+q^* = \sup_{\ba \in \VV} q(\ba) \leq p^*.
+$$
+```
+
+
+
 
 
 ## Fenchel's Duality Theorem
