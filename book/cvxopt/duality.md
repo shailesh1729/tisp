@@ -871,7 +871,7 @@ TBD
 
 ## Minimax and Maximin Problems
 
-We now considers functions of the form
+We consider functions of the form
 $\phi : \VV \oplus \WW \to \RR$ with
 $\dom \phi = X \times Z$.
 $\VV$ and $\WW$ are real vector spaces.
@@ -879,12 +879,20 @@ $X \subseteq \VV$ and $Z \subseteq \WW$
 are nonempty sets.
 
 
+```{prf:definition} Minimax problem
+:label: def-minimax-problem
+
 A  *minimax* problem takes the form
 
 $$
 & \text{minimize }  & \sup_{\bz \in Z} \phi(\bx, \bz)\\
 & \text{subject to } & \bx \in X
 $$
+```
+
+```{prf:definition} Maximin problem
+:label: def-maximin-problem
+
 A *maximin* problem takes the form
 
 
@@ -892,6 +900,9 @@ $$
 & \text{maximize }  & \inf_{\bx \in X} \phi(\bx, \bz)\\
 & \text{subject to } & \bz \in Z.
 $$
+```
+
+We next provide a few examples.
 
 ### Zero Sum Games
 
@@ -1012,4 +1023,201 @@ with the Lagrangian playing the role of $\phi$.
 
 Under suitable conditions, the two problems have equal optimal value.
 ```
+
+### Minimax Equality
+
+In the following, we will explore conditions under which
+
+```{math}
+:label: eq-minimax-equality
+
+\sup_{\bz \in Z} \inf_{\bx \in X } \phi(\bx, \bz)
+= \inf_{\bx \in X} \sup_{\bz \in Z } \phi(\bx, \bz)
+```
+and the infimum and the supremum are attained.
+
+The key result is the *saddle point theorem*
+which guarantees the equality in {eq}`eq-minimax-equality`
+as well as the attainment of the infimum/supremum assuming
+convexity/concavity on $\phi$
+and compactness on $X$ and $Z$.
+
+The compactness assumptions are restrictive.
+For example, in the duality theory, the
+Lagrange multipliers $\bz \succeq \bzero$ belong
+to the nonnegative orthant which is not compact.
+
+The *minimax theorem* gives conditions
+guaranteeing the minimax equality {eq}`eq-minimax-equality`,
+although it need not guarantee the attainment of the
+infimum and the supremum.
+
+### Minimax Inequality
+
+````{prf:observation} Minimax inequality
+:label: res-minimax-inequality
+
+We always have
+
+```{math}
+:label: eq-minimax-inequality
+\sup_{\bz \in Z} \inf_{\bx \in X } \phi(\bx, \bz)
+\leq \inf_{\bx \in X} \sup_{\bz \in Z } \phi(\bx, \bz).
+```
+````
+```{prf:proof}
+We note that for every $\bz \in Z$, we have
+
+$$
+\inf_{\bx \in X } \phi(\bx, \bz)
+\leq \inf_{\bx \in X} \sup_{\bz \in Z } \phi(\bx, \bz).
+$$
+
+Taking the supremum on the L.H.S., we obtain the desired
+inequality.
+```
+
+Thus, in order to show {eq}`eq-minimax-equality`, it is
+sufficient to show that the reverse inequality holds.
+
+### Saddle Points
+
+```{prf:definition} Saddle point
+:label: def-minimax-saddle-point
+
+A pair of vectors $\bx^* \in X$ and $\bz^* \in Z$ is called
+a saddle point of $\phi$ if
+
+$$
+\phi(\bx^*, \bz) \leq \phi(\bx^*, \bz^*) \leq \phi(\bx, \bz^*), 
+\quad \Forall \bx \in X, \Forall \bz \in Z.
+$$
+```
+
+```{prf:remark} Saddle point inequalities
+:label: res-minimax-saddle-point-ineq
+
+The pair $(\bx^*, \bz^*) \in \VV \oplus \WW$ is a saddle point
+if and only if $\bx^* \in X$, $\bz^* \in Z$ and 
+
+$$
+\sup_{\bz \in Z} \phi(\bx^*, \bz) = \phi(\bx^*, \bz^*) = \inf_{\bx \in X} \phi(\bx, \bz^*).
+$$
+
+This equality further implies that
+
+$$
+&\inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) \\
+& \leq \sup_{\bz \in Z} \phi(\bx^*, \bz) = \phi(\bx^*, \bz^*) = \inf_{\bx \in X} \phi(\bx, \bz^*) \\
+& \leq \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz).
+$$
+In short
+
+$$
+\inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) 
+\leq \phi(\bx^*, \bz^*)
+\leq  \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz).
+$$
+
+Combined with the minimax inequality {eq}`eq-minimax-inequality`,
+it shows that if a saddle point exists, then the
+minimax equality {eq}`eq-minimax-equality` holds.
+```
+
+
+```{prf:theorem} Saddle point = minimax equality
+A pair $(\bx^*, \bz^*)$ is a saddle point of $\phi$
+if and only if
+the minimax equality {eq}`eq-minimax-equality` holds
+and
+$\bx^*$ is an optimal solution of the
+minimax problem
+
+$$
+& \text{minimize }  & \sup_{\bz \in Z} \phi(\bx, \bz)\\
+& \text{subject to } & \bx \in X
+$$
+while $\bz^*$ is the optimal solution of the maximin
+problem
+
+$$
+& \text{maximize }  & \inf_{\bx \in X} \phi(\bx, \bz)\\
+& \text{subject to } & \bz \in Z.
+$$
+```
+
+```{prf:proof}
+Suppose that $\bx^*$ is the optimal solution of the
+minimax problem and $\bz^*$ is the optimal solution of the maximin
+problem.
+
+1. From the minimax problem we obtain
+
+   $$
+   \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz)
+   = \sup_{\bz \in Z} \phi(\bx^*, \bz)
+   \geq  \phi(\bx^*, \bz^*).
+   $$
+1. From the maximin problem we obtain
+
+   $$
+   \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz)
+   = \inf_{\bx \in X}  \phi(\bx, \bz^*) \leq \phi(\bx^*, \bz^*).
+   $$
+1. Combining these inequalities, we have
+
+   $$
+   & \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz)
+   = \inf_{\bx \in X}  \phi(\bx, \bz^*) \\ 
+   &\leq \phi(\bx^*, \bz^*) \\
+   &\leq \sup_{\bz \in Z} \phi(\bx^*, \bz)
+   = \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz).
+   $$
+1. If the minimax equality {eq}`eq-minimax-equality` holds,
+   then equality holds throughout above giving us
+
+   $$
+   \inf_{\bx \in X}  \phi(\bx, \bz^*) =  \phi(\bx^*, \bz^*)
+   = \sup_{\bz \in Z} \phi(\bx^*, \bz).
+   $$
+1. Hence $(\bx^*, \bz^*)$ is a saddle point of $\phi$
+   as per {prf:ref}`res-minimax-saddle-point-ineq`.
+
+Conversely, assume that
+$(\bx^*, \bz^*)$ is a saddle point of $\phi$.
+
+1. From {prf:ref}`res-minimax-saddle-point-ineq`, 
+   we have
+
+   $$
+   &\inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) \\
+   & \leq \sup_{\bz \in Z} \phi(\bx^*, \bz) 
+   = \phi(\bx^*, \bz^*) 
+   = \inf_{\bx \in X} \phi(\bx, \bz^*) \\
+   & \leq \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz).
+   $$
+1. The minimax inequality {eq}`eq-minimax-inequality` gives
+   us
+
+   $$
+   \sup_{\bz \in Z} \inf_{\bx \in X } \phi(\bx, \bz)
+   \leq \inf_{\bx \in X} \sup_{\bz \in Z } \phi(\bx, \bz).
+   $$
+1. Thus, all the inequalities in the previous relationship
+   must be equalities. We have
+
+   $$
+   &\inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) \\
+   & = \sup_{\bz \in Z} \phi(\bx^*, \bz) 
+   = \phi(\bx^*, \bz^*) 
+   = \inf_{\bx \in X} \phi(\bx, \bz^*) \\
+   & = \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz).
+   $$
+1. Hence the minimax equality holds.
+1. It also implies that $\bx^*$ is an optimal solution of the
+   minimax problem and $\bz^*$ is the 
+   optimal solution of the maximin problem.
+```
+
+
 
