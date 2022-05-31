@@ -441,8 +441,43 @@ Its optimal value is denoted by $q^*$; i.e.,
 $$
 q^* = \sup_{\ba \in \VV} q(\ba).
 $$
-
 ```
+
+The function $q$ is the cost function (objective function)
+of the max crossing problem. It turns out that
+$q$ is concave and upper semicontinuous.
+
+```{prf:theorem} Concavity and upper semicontinuity of $q$
+:label: res-opt-max-crossing-cost-concave
+
+The cost function $q$ of the max crossing problem is
+concave and upper semicontinuous over $\VV$.
+```
+
+
+```{prf:proof}
+Concavity
+
+1. For each $(\bx, t)$, the function $\ba \mapsto \langle \bx, \ba \rangle + t$
+   is an affine function.
+1. Thus $q$ is an infimum of a family of affine functions over $(\bx, t) \in \VV \oplus \RR$.
+1. Hence $q$ is concave.
+
+
+Upper semicontinuity
+
+1. We note that $-q(\ba) = \sup_{(\bx, t) \in M} \{ - \langle \bx, \ba \rangle - t \}$.
+1. Hence $-q$ is a supremum of affine functions.
+1. Affine functions are closed ({prf:ref}`res-cvxf-affine-closed`).
+1. Pointwise supremum of closed functions is closed
+   ({prf:ref}`res-ms-ptws-sup-closed-functions-closed`).
+1. Hence $-q$ is a closed function.
+1. By {prf:ref}`res-ms-func-lsc-closed-func`, $-q$ is lower semicontinuous
+   since it is closed.
+1. Hence $q$ is upper semicontinuous.
+```
+
+
 
 
 ## Fenchel's Duality Theorem
