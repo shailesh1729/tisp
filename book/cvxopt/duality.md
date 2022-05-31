@@ -1126,6 +1126,8 @@ minimax equality {eq}`eq-minimax-equality` holds.
 
 
 ```{prf:theorem} Saddle point = minimax equality
+:label: res-minimax-saddle-point-minimax-equality
+
 A pair $(\bx^*, \bz^*)$ is a saddle point of $\phi$
 if and only if
 the minimax equality {eq}`eq-minimax-equality` holds
@@ -1219,5 +1221,25 @@ $(\bx^*, \bz^*)$ is a saddle point of $\phi$.
    optimal solution of the maximin problem.
 ```
 
+```{prf:observation} Saddle points as a Cartesian product
+:label: res-minimax-saddle-points-product
+
+When the set of saddle points is nonempty, it can be written
+as a Cartesian product $X^* \times Z^*$ where
+$X^*$ is the set of optimal solutions of the minimax problem
+and the $Z^*$ is the set of optimal solutions of the maximin
+problem.
+
+In other words, $\bx*$ and $\bz^*$ can be chosen independently
+from the sets $X^*$ and $Z^*$ respectively to form a
+saddle point.
+This is a direct consequence of
+{prf:ref}`res-minimax-saddle-point-minimax-equality`.
+
+
+If the minimax equality {eq}`eq-minimax-equality` does not
+hold, then there is no saddle point even if the minimax
+and maximin problems have optimal solutions.
+```
 
 
