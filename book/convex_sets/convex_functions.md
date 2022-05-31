@@ -54,6 +54,7 @@ above the graph.
 
 For a convex function, every chord lies above the graph of the function. 
 
+### Strictly Convex Functions
 
 ```{prf:definition} Strictly convex function
 :label: def-strictly-convex-function
@@ -72,6 +73,8 @@ whenever the point $\bx = t \bx_1 + (1-t) \bx_2$ is
 distinct from $\bx_1$ and $\bx_2$ both.
 ```
 
+### Concave Functions
+
 ```{prf:definition} Concave function
 :label: def-concave-function
 
@@ -79,6 +82,7 @@ We say that a function $f$ is *concave* if $-f$ is convex.
 A function $f$ is *strictly concave* if $-f$ is 
 strictly convex.
 ```
+
 
 ```{prf:example} Linear functional
 :label: ex-cvxf-linear-functional
@@ -112,6 +116,7 @@ Thus, $f_{\ba}$ is convex. We can also see that $-f_{\ba}$ is
 convex too. Hence, $f_{\ba}$ is concave too.
 ```
 
+### Arithmetic Mean
 
 ```{prf:example} Arithmetic mean is convex and concave
 :label: ex-cvxf-arithmetic-mean
@@ -140,6 +145,7 @@ $$
 Thus, arithmetic mean is both convex and concave.
 ```
 
+### Affine Function
 
 ```{prf:example} Affine functional
 :label: ex-cvxf-affine-func-1
@@ -199,6 +205,8 @@ f_{\ba, b} (t \bx + (1 - t) \by)
 $$
 ```
 
+### Absolute Value
+
 ```{prf:example} Absolute value is convex
 :label: ex-cvxf-real-abs
 
@@ -233,10 +241,12 @@ $$
 Hence, $f$ is convex.
 ```
 
+### Norms
+
 ```{prf:theorem} All norms are convex
 :label: res-cvxf-norms-convex
 
-Let $\| \cdot \| \to \RR$ be a 
+Let $\| \cdot \| : \VV \to \RR$ be a 
 {prf:ref}`norm <def-la-norm>` on a real vector space $\VV$.
 Then, it satisfies the triangle inequality:
 
@@ -256,6 +266,8 @@ Thus $f$ satisfies the convexity defining inequality
 {eq}`eq-convexity-inequality`. 
 Hence, $f$ is convex.
 ```
+
+### Max Function
 
 ```{prf:example} Max function is convex
 :label: ex-cvxf-euclidean-n-max
@@ -287,6 +299,8 @@ Let $\bx, \by \in \RR^n$ and $t \in [0,1]$.
    $$
 1. Thus, $f$ is convex.
 ```
+
+### Geometric Mean
 
 ```{prf:example} Geometric mean is concave
 :label: ex-cvxf-geom-mean
@@ -340,6 +354,8 @@ $$
    $$
 1. Thus, $f$ is concave.
 ```
+
+### Powers 
 
 ```{prf:example} Powers of absolute value
 :label: ex-cvxf-real-power-absolute-x-p
@@ -403,6 +419,8 @@ Let $x, y \in \RR$ and $s, t \in (0, 1)$ with $s + t= 1$.
 1. Thus, $f$ is convex.
 ```
 
+
+### Empty Function
 
 ```{prf:observation} Empty function is convex
 :label: res-cvxf-empty-func-convex
@@ -1450,6 +1468,72 @@ than the arithmetic mean.
 1. Thus, $A$ is a $0$-super-level set of $g - \alpha a$.
 1. Since $g - \alpha a$ is concave, hence $A$ is convex.
 ```
+
+## Closed Convex Functions
+
+Recall from {ref}`sec:ms:real-valued-functions` that
+a function is closed if all its sublevel sets are closed.
+A function is closed if and only if its epigraph is closed.
+A function is closed if and only if it is lower semicontinuous.
+
+In general, if a function is continuous, then it is lower
+semicontinuous and hence it is closed.
+
+In this subsection, we provide examples of convex functions which
+are closed.
+
+### Affine Functions
+
+```{prf:theorem} Affine functions are closed
+:label: res-cvxf-affine-closed
+
+Let $f: \VV \to \RR$ be given by
+
+$$
+f(\bx) = \langle \bx, \ba \rangle + b
+$$
+where $\ba \in \VV^*$ and $b \in \RR$.
+Then $f$ is closed.
+```
+
+```{prf:proof}
+We prove closedness by showing that the epigraph of $f$ is closed.
+
+1. Let $\{ \bx_k, t_k \}$ be a converging sequence of $\epi f$.
+1. Let $(\bx, t) = \lim_{k \to \infty} (\bx_k, t_k)$.
+1. We have $f(\bx_k) \leq t_k$ for every $k$.
+1. In other words
+
+   $$
+   \langle \bx_k, \ba \rangle + b \leq t_k \Forall k \in \Nat.
+   $$
+1. Taking the limit on both sides, we get
+
+   $$
+   \langle \bx, \ba \rangle + b \leq t.
+   $$
+1. Hence $f(\bx) \leq t$.
+1. Hence $(\bx, t) \in \epi f$.
+1. Hence $\epi f$ is closed.
+```
+
+### Norms
+
+```{prf:theorem} All Norms are closed
+:label: res-cvxf-norm-closed
+
+Let $\| \cdot \|: \VV \to \RR$ be a norm on a real vector space $\VV$. 
+Then $\| \cdot \|$ is closed.
+```
+
+```{prf:proof}
+The sublevel sets are given by $S_t = \{ \bx \in \VV \ST \| \bx \| \leq t \}$.
+They are nothing but the closed balls of radius $t$ around $\bzero$ and
+by definition closed.
+Hence all sublevel sets are closed.
+Thus $\| \cdot \|$ is closed.
+```
+
 
 ## Support Functions
 
