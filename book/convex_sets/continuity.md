@@ -121,6 +121,8 @@ The following conditions are equivalent.
 
 ## Closure
 
+```{index} Convex function; closure
+```
 ```{prf:definition} Closure of a convex function
 :label: def-cvxf-convex-func-closure
 
@@ -167,6 +169,8 @@ Let $g$ be its closure.
 ```
 
 
+```{index} Closed convex function
+```
 ```{prf:definition} Closed convex function
 :label: def-cvx-closed-convex-func
 

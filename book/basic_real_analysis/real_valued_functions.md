@@ -5,6 +5,8 @@
 ## Real Valued Functions
 
 
+```{index} Real valued function
+```
 ```{prf:definition} Real valued function
 :label: def-bra-real-valued-function
 
@@ -14,6 +16,8 @@ from $X$ to $\RR$.
 ```
 
 
+```{index} Set of real valued functions
+```
 ```{prf:definition} The set of real valued total functions
 :label: def-bra-rvf-set
 
@@ -101,6 +105,8 @@ However, there are certain limitations/odd behaviors with the structure.
 
 
 
+```{index} Real valued function; partial order
+```
 ```{prf:definition} Partial order on real valued (total) functions
 :label: def-bra-rv-func-partial-order
 
@@ -123,6 +129,8 @@ $$
 f \preceq g \iff \dom f = \dom g \text{ and } f(x) \leq g(x) \Forall x \in \dom f.
 $$
 
+```{index} Bounded function
+```
 ```{prf:definition} Bounded function
 :label: def-bra-bounded-function
 
@@ -182,6 +190,8 @@ it is bounded from above as well as below.
 
 ## Epigraph
 
+```{index} Epigraph
+```
 ```{prf:definition} Epigraph
 :label: def-bra-epigraph
 
@@ -194,6 +204,8 @@ $$
 ```
 The epigraph lies above (and includes) the graph of a function.
 
+```{index} Strict epigraph
+```
 ```{prf:definition} Strict epigraph
 :label: def-bra-strict-epigraph
 
@@ -282,6 +294,8 @@ The argument for the converse is similar and left as an exercise.
 
 ## Sub-level Sets
 
+```{index} Sublevel set
+```
 ```{prf:definition} Sub-level set
 :label: def-bra-sub-level-set
 
@@ -297,6 +311,8 @@ $$
 
 ## Contours or Level Sets
 
+```{index} Contour
+```
 ```{prf:definition} Contour
 :label: def-bra-contour
 
@@ -312,6 +328,8 @@ $$
 
 ## Hypograph
 
+```{index} Hypograph
+```
 ```{prf:definition} Hypograph
 :label: def-bra-hypograph
 
@@ -327,6 +345,8 @@ The epigraph lies above (and includes) the graph of a function.
 
 ## Super-level Sets
 
+```{index} Superlevel set
+```
 ```{prf:definition} Super-level set
 :label: def-bra-super-level-set
 
@@ -343,6 +363,8 @@ $$
 
 ## Extended Real Valued Functions
 
+```{index} Extended real valued function
+```
 ```{prf:definition} Extended real-valued function
 :label: def-bra-extended-real-valued-function
 
@@ -356,6 +378,8 @@ where $\ERL = \RR \cup \{ -\infty, \infty \}$.
 We also write the codomain as $\ERL = [-\infty, \infty]$.
 ```
 
+```{index} Effective domain
+```
 ```{prf:definition} Effective domain of an extended real valued function
 :label: def-bra-extension-domain
 
@@ -367,6 +391,20 @@ $$
 $$
 ```
 
+```{index} Extended real valued function; graph
+```
+```{index} Extended real valued function; epigraph
+```
+```{index} Extended real valued function; strict epigraph
+```
+```{index} Extended real valued function; sublevel set
+```
+```{index} Extended real valued function; contour
+```
+```{index} Extended real valued function; hypograph
+```
+```{index} Extended real valued function; superlevel set
+```
 ```{prf:definition} Graphs and level sets
 :label: def-bra-extended-value-func-graphs
 
@@ -400,7 +438,8 @@ that $\graph f \subseteq \epi f$.
 
 
 
-
+```{index} Extended value extension
+```
 ```{prf:definition} Extended-value extension
 :label: def-bra-extended-value-extension
 
@@ -423,6 +462,8 @@ as it extends the domain to the whole of $X$.
 
 
 
+```{index} Indicator function
+```
 ```{prf:definition} Indicator functions
 :label: def-bra-indicator-function
 

@@ -21,6 +21,8 @@ We start with the basic definition of a cone.
 
 ## Cones
 
+```{index} Cone
+```
 ````{prf:definition} Cone
 :label: def-cone
 
@@ -173,6 +175,8 @@ Inverse image of a cone is a cone.
 
 ## Convex Cones
 
+```{index} Convex cone
+```
 ````{prf:definition} Convex cone
 :label: def-convex-cone
 
@@ -446,6 +450,8 @@ in $C$ should be contained in $-C$ too.
 
 ## Conic Combinations
 
+```{index} Conic combination
+```
 ````{prf:definition} Conic combination
 :label: def-conic-combination
 
@@ -572,6 +578,8 @@ and integrals.
 
 ## Conic Hulls
 
+```{index} Conic hull
+```
 ````{prf:definition} Conic hull
 :label: def-conic-hull
 
@@ -785,6 +793,8 @@ The proof is similar to Carathéodory theorem.
 
 ## Pointed Cones
 
+```{index} Pointed cone
+```
 ```{prf:definition} Pointed cone
 :label: def-pointed-cone
 
@@ -822,6 +832,8 @@ only if $\bx = \bzero$.
 
 ## Proper Cones
 
+```{index} Proper cone
+```
 ````{prf:definition} Proper cone
 :label: def-proper-cone
 
@@ -857,6 +869,8 @@ $(1,1) \in C_2$ is not on the boundary.
 
 ## Norm Cones
 
+```{index} Norm cone
+```
 ````{prf:definition} Norm cone
 :label: def-cvx-norm-cone
 
@@ -931,6 +945,8 @@ by the functional $\langle \cdot, \bv \rangle$
 ({prf:ref}`res-la-ip-dual-space-isomorphism`).
 ```
 
+```{index} Dual cone
+```
 ```{prf:definition} Dual cone
 :label: def-dual-cone
 Let $\VV$ be a finite dimensional inner product space and $\VV^*$
@@ -1180,6 +1196,8 @@ Thus, $V^* = V^{\perp}$.
 
 ### Self Dual Cones
 
+```{index} Self dual cone
+```
 ```{prf:definition} Self dual cone
 :label: def-self-dual-cone
 
@@ -1261,6 +1279,8 @@ i.e., the positive semi-definite cone is self dual.
 
 ## Polar Cones
 
+```{index} Polar cone
+```
 ```{prf:definition} Polar cone
 :label: def-cvx-polar-cone
 
@@ -1458,6 +1478,8 @@ A contradiction.
 
 ## Normal Cones
 
+```{index} Normal cone; normal vector
+```
 ```{prf:definition} Normal vector
 :label: def-cvx-convex-set-normal-vector
 
@@ -1496,6 +1518,8 @@ Note that $\bb$ points opposite to the direction of the
 halfspace.
 ```
 
+```{index} Normal cone
+```
 ```{prf:definition} Normal cone
 :label: def-cvx-normal-cone
 
@@ -1660,6 +1684,8 @@ $$
 
 ## Barrier Cones
 
+```{index} Barrier cone; barrier vector
+```
 ```{prf:definition} Barrier vector
 :label: def-cvx-convex-set-barrier vector
 
@@ -1674,6 +1700,8 @@ In other words, the set of inner products of points in $C$
 with $\bv$ is bounded from above.
 ```
 
+```{index} Barrier cone
+```
 ```{prf:definition} Barrier cone
 :label: def-cvx-convex-set-barrier-cone
 
@@ -1905,6 +1933,8 @@ $$
 
 ## Polyhedral Cones
 
+```{index} Polyhedral cone
+```
 ```{prf:definition} Polyhedral cone
 :label: def-cvx-polyhedral-cone
 
@@ -2175,6 +2205,8 @@ of the columns of $\bA$.
 
 We can now see that $P$ is nonempty if $\bb \in Q$. 
 
+```{index} Basic feasible solution
+```
 ```{prf:definition} Basic feasible solution
 :label: def-cvx-basic-feasible-solution
 

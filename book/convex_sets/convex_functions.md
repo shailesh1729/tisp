@@ -19,6 +19,8 @@ functions, their effective domains, graphs and level sets.
 
 ## Convexity of a Function
 
+```{index} Convex function
+```
 ````{prf:definition} Convex function
 :label: def-convex-function
 
@@ -56,6 +58,8 @@ For a convex function, every chord lies above the graph of the function.
 
 ### Strictly Convex Functions
 
+```{index} Convex function; strict
+```
 ```{prf:definition} Strictly convex function
 :label: def-strictly-convex-function
 
@@ -75,6 +79,8 @@ distinct from $\bx_1$ and $\bx_2$ both.
 
 ### Concave Functions
 
+```{index} Concave function
+```
 ```{prf:definition} Concave function
 :label: def-concave-function
 
@@ -935,6 +941,8 @@ $f : \VV \to \RR$ with a domain $\dom f \subset \VV$
 to all of $\VV$ by defining it to be $\infty$ 
 outside its domain. 
 
+```{index} Convex function; extended value extension
+```
 ```{prf:definition} Extended value extension
 :label: def-cvxf-extended-value-extension
 
@@ -967,6 +975,8 @@ $$
 1. If either $\bx_1$ or $\bx_2$ is not in $\dom f$, then the R.H.S.
    becomes $\infty$ and the inequality stays valid.
 
+```{index} Convex function; effective domain
+```
 ```{prf:definition} Effective domain
 :label: def-cvxf-effective-domain
 
@@ -1027,6 +1037,8 @@ being treated as their extended value extensions.
 
 ## Proper Functions
 
+```{index} Convex function; proper
+```
 ```{prf:definition} Proper function
 :label: def-cvxf-proper-function
 
@@ -1057,6 +1069,8 @@ to $\RERL$ to clarify that it never takes
 the value $-\infty$.
 
 
+```{index} Convex function; improper
+```
 ```{prf:definition} Improper function
 :label: def-cvxf-improper-function
 
@@ -1535,6 +1549,8 @@ Thus $\| \cdot \|$ is closed.
 
 ## Support Functions
 
+```{index} Support function
+```
 ```{prf:definition} Support function for a set
 :label: def-cvxf-support-function
 
@@ -2019,6 +2035,8 @@ $$
 ## Gauge Functions
 
 
+```{index} Gauge function
+```
 ```{prf:definition} Gauge function for a set
 :label: def-cvxf-gauge-function
 
@@ -2433,6 +2451,8 @@ We proceed as follows.
 ## Quasi-Convex Functions
 
 
+```{index} Quasi convex function
+```
 ```{prf:definition} Quasi convex function
 :label: def-cvxf-quasi-convex-function
 

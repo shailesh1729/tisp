@@ -16,6 +16,8 @@ $\VV^*$ denotes the dual vector space (to $\VV$).
 
 ## Definition and Properties
 
+```{index} Conjugate function
+```
 ```{prf:definition} Conjugate function
 :label: def-cvxf-conjugate-function
 
@@ -226,6 +228,8 @@ then the dual of the dual $\VV^**$
 is isomorphic to $\VV$.
 ```
 
+```{index} Biconjugate
+```
 ```{prf:definition} Biconjugate
 :label: def-cvxf-biconjugate-func
 

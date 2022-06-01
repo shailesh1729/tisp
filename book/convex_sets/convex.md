@@ -12,6 +12,8 @@ It is also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$.
 
 ## Line Segments
 
+```{index} Line segment
+```
 ```{prf:definition} Line segment
 :label: def-line-segment
 
@@ -49,6 +51,8 @@ $$
 ## Convex Sets
 
 
+```{index} Convex set
+```
 ````{prf:definition} Convex set
 :label: def-convex-set
 
@@ -253,6 +257,8 @@ Together, $C = D$.
 
 ## Rays
 
+```{index} Ray
+```
 ```{prf:definition} Ray
 :label: def-convex-ray
 
@@ -383,6 +389,8 @@ $$
 ## Convex Combinations
 
 
+```{index} Convex combination
+```
 ````{prf:definition} Convex combination
 :label: def-convex-combination
 
@@ -549,6 +557,8 @@ is a convex combination of points of $S$.
 
 ## Convex Hull
 
+```{index} Convex hull
+```
 ````{prf:definition} Convex hull
 :label: def-convex-hull
 
@@ -730,6 +740,8 @@ We note that $\bx \in \ConvexHull(S)$.
 
 ## Dimension
 
+```{index} Convex set; dimension
+```
 ```{prf:definition} Dimension of a convex set
 :label: def-cvx-convex-set-dim
 
@@ -775,6 +787,8 @@ affine independent points. The simplex provides
 a powerful coordinate system for the points
 within it in terms of barycentric coordinates.
 
+```{index} Simplex; k-simplex
+```
 ````{prf:definition} $k$-simplex
 :label: def-convex-simplex
 
@@ -842,6 +856,8 @@ Let $C = \ConvexHull\{\bv_0, \bv_1, \dots, \bv_k \}$.
 1. Thus, the representation is unique.
 ```
 
+```{index} Simplex; midpoint
+```
 ```{prf:definition} Simplex midpoint
 :label: def-convex-simplex-midpoint
 
@@ -1790,6 +1806,8 @@ The argument for the convexity of $E_{\by}$ is identical.
 
 ## Extreme Points
 
+```{index} Extreme point
+```
 ```{prf:definition} Extreme points of convex sets
 :label: def-cvx-extreme-point
 
