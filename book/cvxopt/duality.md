@@ -1243,3 +1243,71 @@ and maximin problems have optimal solutions.
 ```
 
 
+## Min Common/Max Crossing Framework for Minimax
+
+Recall that the minimax problem is given by
+
+$$
+\inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz).
+$$
+
+We introduce a linear perturbation to $\phi$ and introduce
+a function $\psi : \WW \to \ERL$ as
+
+$$
+\psi(\bu) = \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \}.
+$$
+
+We can see that
+
+$$
+\psi(\bzero) = \inf_{\bx \in X} \sup{\bz \in Z} \phi(\bx, \bz).
+$$
+
+The linear perturbation term impacts the optimum value of the
+minimax problem.
+If $\psi$ changes in a "regular" manner,
+then the minimax equality is guaranteed.
+
+```{prf:definition} Min common / max crossing framework for minimax problem
+:label: def-minimax-min-common-framework
+
+We define the set $M$ required for the min common/max crossing framework
+as
+
+$$
+M = \epi \psi
+$$
+where $psi : \WW \to \ERL$ is given by
+
+$$
+\psi(\bu) = \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \}.
+$$
+
+1. The min common value $p*$ is given by
+   $p* = \psi(\bzero) = \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz)$.
+1. Since $M$ is an epigraph, hence the sets $M$ and $\overline{M}$ are
+   identical in the min common/max crossing framework.
+1. If $\psi$ is convex, then $M = \epi \psi$ is convex as desired
+   in several results of the min common/max crossing framework.
+
+The corresponding max crossing problem is given by:
+
+$$
+& \text{maximize }  &  & q (\ba) \\
+& \text{subject to } & & \ba \in \WW
+$$
+where 
+
+$$
+q(\ba) 
+&= \inf_{(\bu, t) \in \epi \psi} \{ \langle \bu, \ba \rangle + t \}\\
+&=  \inf_{(\bu, t) \in \psi(\bu) \leq t}  \{ \langle \bu, \ba \rangle + t \} \\
+&= \inf_{\bu \in \WW} \{\psi(\bu) + \langle \bu, \ba \rangle \}.
+$$
+Its optimal value is denoted by $q^*$; i.e.,
+
+$$
+q^* = \sup_{\ba \in \WW} q(\ba).
+$$
+```
