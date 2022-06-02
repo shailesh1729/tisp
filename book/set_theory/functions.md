@@ -1,5 +1,7 @@
 # Functions
 
+```{index} Function; partial
+```
 ````{prf:definition} Function
 :label: def-st-function
 
@@ -23,6 +25,8 @@ See also : {prf:ref}`total function <def-st-total-function>` below.
 ```
 
 
+```{index} Function; value
+```
 ````{prf:definition} Function value or image
 :label: def-st-function-image
 
@@ -34,6 +38,8 @@ We also say that $f$ *attains* or *assumes* the value $y$ at $x$.
 We also sometimes say that $y$ is the *output* of $f$ when the *input* is $x$.
 ````
 
+```{index} Function; domain
+```
 ```{prf:definition} Domain of a function
 :label: def-st-function-domain
 
@@ -46,6 +52,8 @@ $$
 $$ 
 ```
 
+```{index} Function; total
+```
 ```{prf:definition} Total function
 :label: def-st-total-function
 
@@ -55,6 +63,8 @@ A function $f : A \to B$ is called a *total function* if $\dom f = A$.
 The normal set-theoretic definition of a function coincides with the
 definition of *total function* above.
 
+```{index} Function; range
+```
 ```{prf:definition} Range of a function
 :label: def-st-function-range
 
@@ -68,6 +78,8 @@ its range.
 The domain is a subset of $A$ and the range is a subset of $B$.
 
 
+```{index} Function; equality
+```
 ````{prf:definition} Equality of functions
 :label: def-st-function-equal
 
@@ -78,6 +90,8 @@ $f(x) = g(x) \quad \forall x \in \dom f$.
 In words, they map the same elements of $A$ to same elements of $B$.
 ````
 
+```{index} Function; surjective
+```
 ````{prf:definition} Surjective function
 :label: def-st-surjective-function
 
@@ -86,12 +100,16 @@ all of $B$. i.e. for every $y \in B$, there exists (at least one) $x \in A$ such
 $ y = f(x)$.
 ````
 
+```{index} Function; injective
+```
 ````{prf:definition} Injective function
 :label: def-st-injective-function
 
 A function $f : A \to B$ is called *one-one* or *injective* if $x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$.
 ````
 
+```{index} Function; bijective
+```
 ````{prf:definition} Bijective function
 :label: def-st-bijective-function
 
@@ -225,6 +243,8 @@ In summary, for a function $f : A \to B$:
 
 Let $f : X \to Y$ be  a (partial) function.
 
+```{index} Function; set image
+```
 ````{prf:definition} Image of a set under a function
 :label: def-set-set-image-under-function
 
@@ -240,6 +260,8 @@ Note that the definition is valid even if some elements of the subset $A$
 may not belong to $\dom f$.
 
 
+```{index} Function; set inverse image
+```
 ````{prf:definition} Inverse image 
 :label: def-set-set-inverse-image-under-function
 
@@ -301,6 +323,8 @@ $$
 
 ## Function Composition
 
+```{index} Function; composition
+```
 ````{prf:definition} Composition
 :label: def-st-function-composition
 
@@ -384,6 +408,8 @@ $g \circ f$ is bijective.
 ````
 
 
+```{index} Function; composition (total)
+```
 ````{prf:definition} Composition of total functions
 :label: def-st-total-function-composition
 
@@ -400,6 +426,8 @@ composition is well defined over all of $X$.
 
 ## Inverse Function
 
+```{index} Function; inverse
+```
 ````{prf:definition} Inverse function
 :label: def-st-inverse-function
 
@@ -442,6 +470,8 @@ The inverse of an injective (partial) function is injective.
 ```
 
 
+```{index} Function; inverse (total)
+```
 ````{prf:definition} Inverse of a total function
 :label: def-st-inverse-total-function
 
@@ -466,6 +496,8 @@ The total function $f^{-1}$ is called the *inverse* of $f$.
 The inverse of a bijective function is bijective.
 ```
 
+```{index} Function; identity
+```
 ````{prf:definition} Identity function
 :label: def-st-identity-function
 
@@ -547,6 +579,8 @@ and $g$ can serve as a bijection.
 ## Restriction and Extension
 
 
+```{index} Function; restriction
+```
 ```{prf:definition} Restriction of a function
 :label: def-st-function-restriction
 
@@ -575,6 +609,8 @@ This way, the restriction $f|_C$ is also a total function.
 ```
 
 
+```{index} Function; extension
+```
 ```{prf:definition} Extension of a function
 :label: def-st-function-extension
 
@@ -586,6 +622,8 @@ If $g$ is an extension of $f$ then $\dom f \subset \dom g$.
 
 ## Graph
 
+```{index} Function; graph
+```
 ```{prf:definition} Graph of a function
 :label: def-st-function-graph
 
@@ -609,6 +647,8 @@ Cartesian product  $X \times Y$.
 For a set $X$, the notation $2^X$ denotes the
 power set of $X$.
 
+```{index} Set valued function
+```
 ```{prf:definition} Set valued function/operator
 :label: def-st-set-valued-function
 
@@ -649,6 +689,8 @@ $$
 $$
 ```
 
+```{index} Set valued function; set image
+```
 ```{prf:definition} Image of a subset under a set valued function
 :label: def-st-image-subset-under-set-valued-func
 
@@ -661,6 +703,8 @@ A(C) \triangleq \bigcup_{x \in C} A(x).
 $$
 ``` 
 
+```{index} Set valued function; composition
+```
 ```{prf:definition} Composition of set valued functions
 :label: def-st-set-valued-functions-composition
 
@@ -675,6 +719,8 @@ $$
 $$
 ```
 
+```{index} Set valued function; domain
+```
 ```{prf:definition} Domain of a set valued function
 The *domain* of a set valued function $A: X \to 2^Y$ is defined as:
 
@@ -683,6 +729,8 @@ $$
 $$
 ```
 
+```{index} Set valued function; range
+```
 ```{prf:definition} Range of a set valued function
 The *range* of a set valued function $A: X \to 2^Y$ is defined as:
 
@@ -704,6 +752,8 @@ A set valued function $A: X \to 2^Y$ is:
 ```
 
 
+```{index} Set valued function; inverse
+```
 ```{prf:definition} Inverse of a set valued function
 The *inverse* of a set valued function $A: X \to 2^Y$ is defined 
 using its graph as:
@@ -719,6 +769,8 @@ $y \in A(x) \iff x \in A^{-1} (y)$.
 The inverse of a set valued function is a set valued 
 function and it always exists.
 
+```{index} Set valued function; single valued
+```
 ```{prf:definition} Single valued function
 Let $A : X \to 2^Y$ be a set valued function.
 If for every $x \in \dom A$, $A(x)$ is a singleton,
@@ -729,6 +781,8 @@ This can be identified with a partial function.
 ```
 
 
+```{index} Set valued function; selection
+```
 ```{prf:definition} Selection of a set valued function
 Let $A : X \to 2^Y$ be a set valued function.
 A function $f : X \to Y$ is called a *selection* of $A$

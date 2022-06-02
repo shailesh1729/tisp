@@ -4,6 +4,8 @@ In this section, we extend the definition of
 Cartesian product to an arbitrary number of sets.
 
 
+```{index} Cartesian product
+```
 ```{prf:definition} Cartesian product
 :label: def-st-cartesian-product
 
@@ -23,6 +25,8 @@ uncountably infinite.
 Note that we didn't require $A_i$ to be non-empty. This 
 is discussed below.
 
+```{index} Choice function
+```
 ```{prf:definition} Choice function
 :label: def-st-choice-function
 
