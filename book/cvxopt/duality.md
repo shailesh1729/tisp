@@ -1251,7 +1251,7 @@ $$
 \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz).
 $$
 
-We introduce a linear perturbation to $\phi$ and introduce
+We add a linear perturbation to $\phi$ and introduce
 a function $\psi : \WW \to \ERL$ as
 
 $$
@@ -1261,15 +1261,15 @@ $$
 We can see that
 
 $$
-\psi(\bzero) = \inf_{\bx \in X} \sup{\bz \in Z} \phi(\bx, \bz).
+\psi(\bzero) = \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz).
 $$
 
 The linear perturbation term impacts the optimum value of the
 minimax problem.
-If $\psi$ changes in a "regular" manner,
+We shall show that if $\psi$ changes in a "regular" manner,
 then the minimax equality is guaranteed.
 
-```{prf:definition} Min common / max crossing framework for minimax problem
+````{prf:definition} Min common / max crossing framework for minimax problem
 :label: def-minimax-min-common-framework
 
 We define the set $M$ required for the min common/max crossing framework
@@ -1278,14 +1278,28 @@ as
 $$
 M = \epi \psi
 $$
-where $psi : \WW \to \ERL$ is given by
+where $\psi : \WW \to \ERL$ is given by
 
-$$
+```{math}
+:label: eq-minimax-psi
 \psi(\bu) = \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \}.
-$$
+```
 
-1. The min common value $p*$ is given by
-   $p* = \psi(\bzero) = \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz)$.
+1. Recall that min common value is given by
+   
+   $$
+   p^* = \inf_{(\bzero, p) \in M} p.
+   $$
+1. Note that for $\bu = \bzero$, 
+   $M$ contains all the points $(\bzero, t)$ such that
+   $\psi(\bzero) \leq t$.
+1. In particular, $(\bzero, \psi(\bzero)) \in M$
+   and if $(\bzero, t) \in M$ then $\psi(\bzero) \leq t$.
+1. Hence $p^*$ is given by
+   
+   $$
+   p^* = \psi(\bzero) = \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz).
+   $$
 1. Since $M$ is an epigraph, hence the sets $M$ and $\overline{M}$ are
    identical in the min common/max crossing framework.
 1. If $\psi$ is convex, then $M = \epi \psi$ is convex as desired
@@ -1297,17 +1311,104 @@ $$
 & \text{maximize }  &  & q (\ba) \\
 & \text{subject to } & & \ba \in \WW
 $$
-where 
+1. We note that 
+
+   $$
+   q(\ba) 
+   &= \inf_{(\bu, t) \in \epi \psi} \{ \langle \bu, \ba \rangle + t \}\\
+   &=  \inf_{(\bu, t) \in \psi(\bu) \leq t}  \{ \langle \bu, \ba \rangle + t \} \\
+   &= \inf_{\bu \in \WW} \{\psi(\bu) + \langle \bu, \ba \rangle \}.
+   $$
+1. Its optimal value is denoted by $q^*$; i.e.,
+
+   $$
+   q^* = \sup_{\ba \in \WW} q(\ba).
+   $$
+````
+
+```{prf:observation} Connection between minimax equality and min common/max crossing framework
+:label: res-minimax-common-crossing-relation
+
+1. By putting the definition of $\psi(\bu)$ in the expression
+   for $q(\ba)$, we obtain
+
+   $$
+   q(\ba) 
+   &= \inf_{\bu \in \WW} \{\psi(\bu) + \langle \bu, \ba \rangle \} \\
+   &= \inf_{\bu \in \WW} \{
+      \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \} 
+      + \langle \bu, \ba \rangle \} \\
+   &= \inf_{\bu \in \WW} \inf_{\bx \in X} \sup_{\bz \in Z} 
+      \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}.
+   $$
+1. In particular, for ever $\ba \in Z$, if we set $\bz = \ba$ in this relation,
+   we can see that
+
+   $$
+   \inf_{\bx \in X}  \phi(\bx, \ba) \leq q(\ba) \Forall \ba \in Z.
+   $$
+1. From the weak duality principle, we have $q^* \leq p^*$.
+1. We have established that $p^* = \psi(\bzero)$.
+1. We can now see that
+
+   $$
+   \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz)
+   &= \sup_{\ba \in Z} \inf_{\bx \in X} \phi(\bx, \ba)\\
+   & \leq \sup_{\ba \in Z} q(\ba) \\
+   & \leq \sup_{\ba \in \WW} q(\ba) \\
+   &= q^* \\
+   &\leq p^* \\
+   &= \psi(\bzero) \\
+   &= \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz).
+   $$
+1. This is nothing but the minimax inequality {eq}`eq-minimax-inequality`.
+1. We can see that if the minimax equality {eq}`eq-minimax-equality` holds,
+   then all inequalities in the previous relation turn into equalities
+   and we have $q^* = p*$.
+1. In other words, if the minimax equality holds, then the optimal
+   values of the min common and max crossing problems are equal.
+```
+
+
+```{prf:lemma} Convexity of $\phi$ w.r.t. $\bx$
+
+Let $X$ be a nonempty convex subset of $\VV$
+and $Z$ be a nonempty subset of  $\WW$.
+Let $\phi: \VV \oplus \WW \to \RR$ be a function
+with $\dom \phi = X \times Z$.
+Assume that for each $\bz \in Z$, the function
+$\phi(\cdot, \bz) : \VV \to \RR$ is convex.
+Then the function $\psi$ as defined in {eq}`eq-minimax-psi`
+is convex.
+```
+
+```{prf:proof}
+Recall that
 
 $$
-q(\ba) 
-&= \inf_{(\bu, t) \in \epi \psi} \{ \langle \bu, \ba \rangle + t \}\\
-&=  \inf_{(\bu, t) \in \psi(\bu) \leq t}  \{ \langle \bu, \ba \rangle + t \} \\
-&= \inf_{\bu \in \WW} \{\psi(\bu) + \langle \bu, \ba \rangle \}.
+\psi(\bu) = \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \}.
 $$
-Its optimal value is denoted by $q^*$; i.e.,
 
-$$
-q^* = \sup_{\ba \in \WW} q(\ba).
-$$
+1. Fix some $\bz \in Z$.
+1. Consider the function
+   $f_z(\bx, \bu) = \phi(\bx, \bz) - \langle \bz, \bu \rangle$.
+1. Clearly, $f_z$ is convex for each $\bz \in Z$ by hypothesis.
+1. Taking the pointwise supremum over $\bz \in Z$,
+   the function
+
+   $$
+   F (\bx, \bu) = \begin{cases}
+   \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \}
+   & \bx \in X;\\
+   \infty & \bx \notin X.
+   \end{cases}
+   $$
+   is also convex (over $\bx$ and $\bu$).
+1. We now have
+
+   $$
+   \psi(\bu) = \inf_{\bx \in \VV} F (\bx, \bu).
+   $$
+1. Since partial minimization preserves convexity, hence
+   $\psi$ is convex.
 ```
