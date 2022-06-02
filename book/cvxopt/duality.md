@@ -1370,7 +1370,8 @@ $$
 ```
 
 
-```{prf:lemma} Convexity of $\phi$ w.r.t. $\bx$
+```{prf:lemma} Convexity of $\phi$ w.r.t. $\bx$ and $\psi$
+:label: res-minimax-psi-convex-phi-x-convex
 
 Let $X$ be a nonempty convex subset of $\VV$
 and $Z$ be a nonempty subset of  $\WW$.
@@ -1411,4 +1412,89 @@ $$
    $$
 1. Since partial minimization preserves convexity, hence
    $\psi$ is convex.
+```
+
+```{prf:lemma} Closedness and convexity of $-\phi$ w.r.t. $\bz$ and minimax equality
+:label: res-neg-phi-z-convex-closed
+
+Let $X$ be a nonempty convex subset of $\VV$
+and $Z$ be a nonempty subset of  $\WW$.
+Let $\phi: \VV \oplus \WW \to \RR$ be a function
+with $\dom \phi = X \times Z$.
+Assume that for each $\bx \in X$, the function
+$-\phi(\bx, \cdot) \to \RR$ is closed and
+convex.
+Then the function $q : \WW \to \ERL$ given by
+
+$$
+q(\ba) = \inf_{(\bu, t) \in \epi \psi} \{ \langle \bu, \ba \rangle + t \},
+\quad \ba \in \WW,
+$$
+where $\psi$ as defined in {eq}`eq-minimax-psi`, satisfies
+
+$$
+q(\ba) = \begin{cases}
+\inf_{\bx \in  X} \phi (\bx, \ba) & \ba \in Z;\\
+-\infty & \ba \notin Z.
+\end{cases}
+$$
+
+Furthermore, we have $q^* = p^*$ if and only if the
+minimax equality {eq}`eq-minimax-equality` holds.
+```
+
+```{prf:proof}
+We have already established that
+
+$$
+q(\ba) = \inf_{\bu \in \WW} \{\psi(\bu) + \langle \bu, \ba \rangle \}.
+$$
+
+By using the definition of $\psi$, we further established that
+
+$$
+q(\ba) = \inf_{\bu \in \WW} \inf_{\bx \in X} \sup_{\bz \in Z} 
+      \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}.
+$$
+By rearranging the order of infimum operations, we have
+
+$$
+q(\ba) = \inf_{\bx \in X} \inf_{\bu \in \WW} \sup_{\bz \in Z} 
+      \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}.
+$$
+For any $ba \in Z$ we have
+
+$$
+\sup_{\bz \in Z} 
+      \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}
+\geq \phi(\bx, \ba) + \langle \ba - \ba, \bu \rangle
+= \phi(\bx, \ba)
+\quad \Forall \bx \in X, \Forall \bu \in \WW.
+$$
+This in turn implies that
+
+$$
+q(\ba) \geq \inf_{\bx \in X} \phi(\bx, \ba) \Forall \ba \in Z.
+$$
+To establish the result, we also need to
+show that
+
+$$
+q(\ba) \leq \inf_{\bx \in X} \phi(\bx, \ba) \Forall \ba \in Z
+$$
+and
+$q(\ba) = -\infty$ for every $\ba \notin Z$.
+
+Let $r_x : \WW \to \RR$ be given by
+
+$$
+r_x(\bz) = -\phi(\bx, \bz).
+$$
+By hypothesis $r_x$ is closed and convex.
+We first consider the case where $\ba \in Z$.
+1. Fix some $\bx \in X$.
+1. Since $r_x$ is a closed and convex function,
+   hence $\epi r_x$ is a closed and convex set.
+1. Since $\ba \in Z$, hence the point
+   $(\ba, r_x(\ba)) \in \epi r_x$.
 ```
