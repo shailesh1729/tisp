@@ -36,7 +36,12 @@ product space $\VV \oplus \RR$.
 
 ### Different Types of Hyperplanes
 
-
+```{index} Hyperplane; vertical
+```
+```{index} Hyperplane; horizontal
+```
+```{index} Hyperplane; nonvertical
+```
 ```{prf:definition} Vertical, horizontal and nonvertical hyperplanes
 :label: def-opt-vert-horz-hyperplane
 
@@ -135,6 +140,8 @@ If a hyperplane $H$ with the normal vector $(\ba, b)$ is nonvertical
 
 ### Vertical Lines
 
+```{index} Line; vertical
+```
 ```{prf:definition} Vertical line
 :label: def-opt-vertical-line
 
@@ -162,7 +169,7 @@ Then
 
 1. $C$ is contained in a closed halfspace corresponding
    to a nonvertical hyperplane; i.e., there exists
-   a vector $\ba \in \VV$,  a scalar $b \in \RR$,
+   a vector $\ba \in \VV$,  a nonzero scalar $b \in \RR$,
    and a scalar $c \in \RR$ such that 
 
    $$
@@ -293,6 +300,8 @@ Then
 
 
 
+```{index} Halfspace; upper and closed
+```
 ```{prf:definition} Upper closed halfspace
 :label: def-opt-upper-closed-halfspace
 
@@ -306,6 +315,8 @@ If you are in the upper closed halfspace and keep going up,
 you will stay in the upper closed halfspace. If you go down,
 you will hit the hyperplane.
 
+```{index} Halfspace; lower and closed
+```
 ```{prf:definition} Lower closed halfspace
 :label: def-opt-lower-closed-halfspace
 
@@ -371,6 +382,8 @@ We are now ready to define these problems formally.
 
 ### Min Common Problem
 
+```{index} Min common problem
+```
 ```{prf:definition} Min common problem
 :label: def-opt-min-common-problem
 
@@ -438,7 +451,9 @@ The problem of maximizing the crossing level over all
 nonvertical hyperplanes is to maximize over all $\ba \in \VV$,
 the maximum crossing level corresponding to $\ba$.
 
-```{prf:definition} Maximum crossing level problem
+```{index} Max crossing problem
+```
+```{prf:definition} Max crossing problem
 :label: def-opt-max-cross-level-problem
 
 Given a set $M \subseteq \VV \oplus \RR$, the
@@ -473,7 +488,7 @@ Concavity
 
 1. For each $(\bx, t)$, the function $\ba \mapsto \langle \bx, \ba \rangle + t$
    is an affine function.
-1. Thus $q$ is an infimum of a family of affine functions over $(\bx, t) \in \VV \oplus \RR$.
+1. Thus $q$ is an infimum of a family of affine functions over $(\bx, t) \in M$.
 1. Hence $q$ is concave.
 
 
@@ -879,6 +894,8 @@ $X \subseteq \VV$ and $Z \subseteq \WW$
 are nonempty sets.
 
 
+```{index} Minimax problem
+```
 ```{prf:definition} Minimax problem
 :label: def-minimax-problem
 
@@ -890,6 +907,8 @@ $$
 $$
 ```
 
+```{index} Maximin problem
+```
 ```{prf:definition} Maximin problem
 :label: def-maximin-problem
 
@@ -1064,6 +1083,10 @@ We always have
 \sup_{\bz \in Z} \inf_{\bx \in X } \phi(\bx, \bz)
 \leq \inf_{\bx \in X} \sup_{\bz \in Z } \phi(\bx, \bz).
 ```
+
+In other words, the optimal value of the
+maximin problem is less than or equal to
+the optimum value of the minimax problem.
 ````
 ```{prf:proof}
 We note that for every $\bz \in Z$, we have
@@ -1082,6 +1105,8 @@ sufficient to show that the reverse inequality holds.
 
 ### Saddle Points
 
+```{index} Saddle point; minimax
+```
 ```{prf:definition} Saddle point
 :label: def-minimax-saddle-point
 
@@ -1230,7 +1255,7 @@ $X^*$ is the set of optimal solutions of the minimax problem
 and the $Z^*$ is the set of optimal solutions of the maximin
 problem.
 
-In other words, $\bx*$ and $\bz^*$ can be chosen independently
+In other words, $\bx^*$ and $\bz^*$ can be chosen independently
 from the sets $X^*$ and $Z^*$ respectively to form a
 saddle point.
 This is a direct consequence of
@@ -1269,6 +1294,8 @@ minimax problem.
 We shall show that if $\psi$ changes in a "regular" manner,
 then the minimax equality is guaranteed.
 
+```{index} Minimax problem; Min common/max crossing framework
+```
 ````{prf:definition} Min common / max crossing framework for minimax problem
 :label: def-minimax-min-common-framework
 
@@ -1313,12 +1340,13 @@ $$
 $$
 1. We note that 
 
-   $$
+   ```{math}
+   :label: eq-minimax-q-a
    q(\ba) 
    &= \inf_{(\bu, t) \in \epi \psi} \{ \langle \bu, \ba \rangle + t \}\\
    &=  \inf_{(\bu, t) \in \psi(\bu) \leq t}  \{ \langle \bu, \ba \rangle + t \} \\
    &= \inf_{\bu \in \WW} \{\psi(\bu) + \langle \bu, \ba \rangle \}.
-   $$
+   ```
 1. Its optimal value is denoted by $q^*$; i.e.,
 
    $$
@@ -1341,7 +1369,7 @@ $$
    &= \inf_{\bu \in \WW} \inf_{\bx \in X} \sup_{\bz \in Z} 
       \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}.
    $$
-1. In particular, for ever $\ba \in Z$, if we set $\bz = \ba$ in this relation,
+1. In particular, for every $\ba \in Z$, if we set $\bz = \ba$ in this relation,
    we can see that
 
    $$
@@ -1364,13 +1392,13 @@ $$
 1. This is nothing but the minimax inequality {eq}`eq-minimax-inequality`.
 1. We can see that if the minimax equality {eq}`eq-minimax-equality` holds,
    then all inequalities in the previous relation turn into equalities
-   and we have $q^* = p*$.
+   and we have $q^* = p^*$.
 1. In other words, if the minimax equality holds, then the optimal
    values of the min common and max crossing problems are equal.
 ```
 
 
-```{prf:lemma} Convexity of $\phi$ w.r.t. $\bx$ and $\psi$
+```{prf:lemma} Convexity of $\phi$ w.r.t. $\bx$ and convexity of $\psi$
 :label: res-minimax-psi-convex-phi-x-convex
 
 Let $X$ be a nonempty convex subset of $\VV$
@@ -1444,57 +1472,174 @@ minimax equality {eq}`eq-minimax-equality` holds.
 ```
 
 ```{prf:proof}
-We have already established that
+We shall show the following one by one.
 
-$$
-q(\ba) = \inf_{\bu \in \WW} \{\psi(\bu) + \langle \bu, \ba \rangle \}.
-$$
+1. $q(\ba) \geq \inf_{\bx \in X} \phi(\bx, \ba) \Forall \ba \in Z$.
+1. $q(\ba) \leq \inf_{\bx \in X} \phi(\bx, \ba) \Forall \ba \in Z$.
+1. $q(\ba) = -\infty \Forall \ba \notin Z$.
 
-By using the definition of $\psi$, we further established that
 
-$$
-q(\ba) = \inf_{\bu \in \WW} \inf_{\bx \in X} \sup_{\bz \in Z} 
-      \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}.
-$$
-By rearranging the order of infimum operations, we have
+(1)
 
-$$
-q(\ba) = \inf_{\bx \in X} \inf_{\bu \in \WW} \sup_{\bz \in Z} 
-      \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}.
-$$
-For any $ba \in Z$ we have
+1. We have already established in {eq}`eq-minimax-q-a` that
 
-$$
-\sup_{\bz \in Z} 
-      \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}
-\geq \phi(\bx, \ba) + \langle \ba - \ba, \bu \rangle
-= \phi(\bx, \ba)
-\quad \Forall \bx \in X, \Forall \bu \in \WW.
-$$
-This in turn implies that
+   $$
+   q(\ba) = \inf_{\bu \in \WW} \{\psi(\bu) + \langle \bu, \ba \rangle \}.
+   $$
+1. By using the definition of $\psi$, we further established that
 
-$$
-q(\ba) \geq \inf_{\bx \in X} \phi(\bx, \ba) \Forall \ba \in Z.
-$$
-To establish the result, we also need to
-show that
+   $$
+   q(\ba) = \inf_{\bu \in \WW} \inf_{\bx \in X} \sup_{\bz \in Z} 
+         \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}.
+   $$
+1. By rearranging the order of infimum operations, we have
 
-$$
-q(\ba) \leq \inf_{\bx \in X} \phi(\bx, \ba) \Forall \ba \in Z
-$$
-and
-$q(\ba) = -\infty$ for every $\ba \notin Z$.
+   $$
+   q(\ba) = \inf_{\bx \in X} \inf_{\bu \in \WW} \sup_{\bz \in Z} 
+         \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}.
+   $$
+1. For any $\ba \in Z$ we have
 
-Let $r_x : \WW \to \RR$ be given by
+   $$
+   \sup_{\bz \in Z} 
+         \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}
+   &\geq \phi(\bx, \ba) + \langle \ba - \ba, \bu \rangle \\
+   &= \phi(\bx, \ba)
+   \quad \Forall \bx \in X, \Forall \bu \in \WW.
+   $$
+1. This in turn implies that
 
-$$
-r_x(\bz) = -\phi(\bx, \bz).
-$$
-By hypothesis $r_x$ is closed and convex.
-We first consider the case where $\ba \in Z$.
+   $$
+   q(\ba) \geq \inf_{\bx \in X} \phi(\bx, \ba) \Forall \ba \in Z.
+   $$
+
+
+(2)
+
+
+1. Let $r_x : \WW \to \RR$ be given by
+
+   $$
+   r_x(\bz) = -\phi(\bx, \bz).
+   $$
+1. By hypothesis $r_x$ is closed and convex.
+1. Let $\ba \in Z$.
 1. Fix some $\bx \in X$.
 1. Since $r_x$ is a closed and convex function,
    hence $\epi r_x$ is a closed and convex set.
 1. Since $\ba \in Z$, hence the point
    $(\ba, r_x(\ba)) \in \epi r_x$.
+1. For some $\epsilon > 0$, consider the point
+   $(\ba, r_x(\ba) - \epsilon)$.
+1. Clearly $(\ba, r_x(\ba) - \epsilon) \notin \epi r_x$.
+1. By definition of $r_x$, $r_x(\bz)$ is finite for all $\bz \in Z$,
+   $Z$ is nonempty and $\epi r_x$ is closed.
+1. Since $r_x(\bz)$ is finite for all $\bz \in Z$, the
+   epigraph doesn't contain any vertical lines.
+1. Hence, due to {prf:ref}`res-opt-cvx-set-non-vert-supp-plane`,
+   there exists a nonvertical hyperplane that
+   strongly separates the point $(\ba, r_x(\ba) - \epsilon)$
+   from $\epi r_x$.
+1. Hence there exists a normal vector
+   $(\bu, 1)$ and a scalar $c$ such that
+
+   $$
+   \langle \ba, \bu \rangle + (r_x(\ba) - \epsilon)
+   < c < \langle \bz, \bu \rangle + r_x(\bz) \Forall \bz \in Z.
+   $$
+1. Substituting $r_x(\bz) =  -\phi(\bx, \bz)$, we get
+
+   $$
+   \langle \ba, \bu \rangle + (-\phi(\bx, \ba) - \epsilon)
+   < \langle \bz, \bu \rangle - \phi(\bx, \bz). 
+   $$
+1. Rearranging, we get
+
+   $$
+   \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle
+   < \phi(\bx, \ba) + \epsilon \Forall \bz \in Z.
+   $$
+1. Letting $\epsilon \downarrow 0$, we have
+
+   $$
+   \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle
+   \leq \phi(\bx, \ba) \Forall \bz \in Z.
+   $$
+1. We further note that
+
+   $$
+   \inf_{\bu \in \WW} \sup_{\bz \in Z} 
+         \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}
+   \leq \sup_{\bz \in Z} 
+         \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}
+   \leq  \phi(\bx, \ba).     
+   $$
+1. Taking infimum over $\bx \in X$ on the L.H.S., we obtain
+
+   $$
+   q(\ba) = \inf_{\bx \in X} \inf_{\bu \in \WW} \sup_{\bz \in Z} 
+         \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}
+   \leq \inf_{\bx \in X} \phi(\bx, \ba)
+   $$
+   as desired.
+
+(3)
+
+1. Take any $\ba \notin Z$.
+1. Fix an arbitrary $\bx \in X$.
+1. Consider a sequence $\{ t_k \}$ such that $t_k \to \infty$.
+1. Since $\ba \notin Z$, hence $(\ba, t_k) \notin \epi r_x$ for every $k$.
+1. Again applying {prf:ref}`res-opt-cvx-set-non-vert-supp-plane`,
+   for each $k$, there exists a nonvertical hyperplane
+   strongly separating $(\ba, t_k)$ from $\epi r_x$.
+1. Hence for each $k$, there exists a normal vector $(\bu_k , 1)$
+   such that
+
+   $$
+   \langle \ba, \bu_k \rangle + t_k <\langle \bz, \bu_k \rangle - \phi(\bx, \bz) 
+   \Forall \bz \in Z.
+   $$
+1. Rearranging, we have
+
+   $$
+   \phi(\bx, \bz) + \langle \ba - \bz, \bu_k \rangle < -t_k,
+   \quad \Forall \bz \in Z, \Forall k.
+   $$
+1. Thus, we have
+
+   $$
+   \inf_{\bu \in \WW} \sup_{\bz \in Z} 
+         \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}
+   \leq \sup_{\bz \in Z} 
+         \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu_k \rangle \}
+   \leq -t_k \quad \Forall k.
+   $$
+1. Taking the limit on the R.H.S. as $k \to \infty$, we can see that
+
+   $$
+    \inf_{\bu \in \WW} \sup_{\bz \in Z} 
+         \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \} = -\infty
+     \quad \Forall \bx \in X.
+   $$
+1. Finally, taking the infimum over $\bx \in X$, we can see that
+
+   $$
+   q(\ba) = -\infty.
+   $$
+
+By {prf:ref}`res-minimax-common-crossing-relation`,
+if minimax equality holds, then $q^* = p^*$.
+For the converse, we now assume that $q^* = p^*$.
+Then
+
+$$
+& \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) \\
+&= \psi(\bzero)
+=  p^*
+= q^* \\
+&= \sup_{\ba \in \WW} q(\ba)
+= \sup_{\bz \in Z} q(\bz) \\
+&= \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz).
+$$
+Thus the minimax equality holds.
 ```
