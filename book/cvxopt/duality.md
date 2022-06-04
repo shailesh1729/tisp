@@ -600,6 +600,7 @@ We next provide a result that provides a necessary and sufficient
 condition for the strong duality however does not address the
 issue of attainment of the optimal values.
 
+### First Min Common / Max Crossing Theorem
 
 ```{prf:theorem} Min common/max crossing theorem I
 :label: res-opt-min-max-strong-duality-1
@@ -724,6 +725,7 @@ point. The next result includes additional conditions
 which ensures that the optimal point of max crossing problem
 is attained. 
 
+### Second Min Common / Max Crossing Theorem
 
 ```{prf:theorem} Min common/max crossing theorem II
 :label: res-opt-min-max-strong-duality-2
@@ -1294,6 +1296,8 @@ minimax problem.
 We shall show that if $\psi$ changes in a "regular" manner,
 then the minimax equality is guaranteed.
 
+### Framework Definition
+
 ```{index} Minimax problem; Min common/max crossing framework
 ```
 ````{prf:definition} Min common / max crossing framework for minimax problem
@@ -1354,6 +1358,8 @@ $$
    $$
 ````
 
+### Connection
+
 ```{prf:observation} Connection between minimax equality and min common/max crossing framework
 :label: res-minimax-common-crossing-relation
 
@@ -1397,6 +1403,7 @@ $$
    values of the min common and max crossing problems are equal.
 ```
 
+### Convexity of $\psi$
 
 ```{prf:lemma} Convexity of $\phi$ w.r.t. $\bx$ and convexity of $\psi$
 :label: res-minimax-psi-convex-phi-x-convex
@@ -1441,6 +1448,8 @@ $$
 1. Since partial minimization preserves convexity, hence
    $\psi$ is convex.
 ```
+
+### Minimax Equality Strong Duality Equivalence Conditions
 
 ```{prf:lemma} Closedness and convexity of $-\phi$ w.r.t. $\bz$ and minimax equality
 :label: res-neg-phi-z-convex-closed
@@ -1642,4 +1651,93 @@ $$
 &= \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz).
 $$
 Thus the minimax equality holds.
+```
+
+## Minimax Theorems
+
+
+### First Theorem
+
+```{prf:theorem} Minimax theorem I
+:label: res-minimax-theorem-1
+
+Let $X$ be a nonempty convex subset of $\VV$
+and $Z$ be a nonempty subset of  $\WW$.
+Let $\phi: \VV \oplus \WW \to \RR$ be a function
+with $\dom \phi = X \times Z$.
+Assume that for each $\bz \in Z$,
+the function $\phi (\cdot, \bz) : \VV \to \RR$
+is convex, and for each $\bx \in X$, the
+function $-\phi(\bx, \cdot) : \WW \to \RR$
+is closed and convex.
+Assume further that
+
+$$
+\inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) < \infty.
+$$
+Then, the minimax equality {eq}`eq-minimax-equality` holds;
+i.e.,
+
+$$
+\sup_{\bz \in Z} \inf_{\bx \in X } \phi(\bx, \bz)
+= \inf_{\bx \in X} \sup_{\bz \in Z } \phi(\bx, \bz),
+$$
+if and only if the function $\psi$ as defined in {eq}`eq-minimax-psi`
+is lower semicontinuous at $\bu = \bzero$; i.e.,
+
+$$
+\psi(\bzero) \leq \liminf_{k \to \infty} \psi(\bu_k)
+$$
+for every sequence $\{ \bu_k \}$ with $\bu_k \to \bzero$.
+```
+
+```{prf:proof}
+The proof consists of establishing the correspondence
+between the conditions in this result and the conditions
+in the first min common/max crossing theorem
+({prf:ref}`res-opt-min-max-strong-duality-1`).
+
+1. We choose the set $M$ as described in {prf:ref}`def-minimax-min-common-framework`,
+   to be the epigraph of the function $\psi$.
+
+   $$
+   M = \overline{M} =  \epi \psi = \{ (\bu, t) \in \WW \oplus \RR \ST 
+      \psi(\bu) \leq t \}.
+   $$
+1. We have shown in {prf:ref}`def-minimax-min-common-framework`
+   that $p^* = \psi(\bzero) = \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz)$.
+1. By hypothesis, $p^* < \infty$.
+1. Hence the first assumption of {prf:ref}`res-opt-min-max-strong-duality-1`
+   is satisfied.
+1. Following {prf:ref}`res-minimax-psi-convex-phi-x-convex`, $\psi$
+   is convex.
+1. Hence $M = \epi \psi$ is also convex.
+1. Hence the second assumption of {prf:ref}`res-opt-min-max-strong-duality-1`
+   is satisfied.
+1. Finally, the condition
+
+   $$
+   \psi(\bzero) \leq \liminf_{k \to \infty} \psi(\bu_k)
+   $$
+   is equivalent to the condition of {prf:ref}`res-opt-min-max-strong-duality-1`
+   that for every sequence
+   $\{ (\bu_k, t_k) \}$ of $M$ with $\bu_k \to \bzero$.
+
+   $$
+   p^* \leq \liminf_{k \to \infty} t_k
+   $$
+   holds true.
+   1. We have $t_k \geq \psi(\bu_k)$. 
+   1. Hence
+
+      $$
+      \liminf_{k \to \infty} t_k \geq \liminf_{k \to \infty} \psi(\bu_k)
+      \geq \psi(\bzero) = p^*. 
+      $$
+1. Following {prf:ref}`res-opt-min-max-strong-duality-1`, 
+   this condition holds if and only if $p^* = q^*$.
+1. Since $-\phi(\bx, \cdot)$ is closed and convex, hence
+   following {prf:ref}`res-neg-phi-z-convex-closed`,
+   this condition holds if and only if
+   minimax equality holds.
 ```
