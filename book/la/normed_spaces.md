@@ -58,6 +58,8 @@ Thus, the field $\FF$ can be either $\RR$ or $\CC$.
 
 ## Norm
 
+```{index} Norm
+```
 ````{prf:definition} Norm
 :label: def-la-norm
 
@@ -169,6 +171,8 @@ $$
 
 ## Normed Linear Space
 
+```{index} Normed linear space, Normed space
+```
 ````{prf:definition} Normed linear space
 :label: def-la-normed-linear-space
 
@@ -235,6 +239,8 @@ are indeed norms.
 
 ## Normed Space as a Metric Space
 
+```{index} Metric; induced by norm
+```
 ```{prf:definition} Metric induced by a norm
 :label: def-la-norm-induced-metric
 
@@ -276,6 +282,8 @@ We will use the notation $\| \cdot \|$ to denote both the
 norm and the metric induced by the norm.
 ```
 
+```{index} Metric space; from a norm
+```
 ```{prf:definition} Metric space from a norm
 The normed space $\VV$ equipped with the metric 
 induced by the norm as defined in {prf:ref}`def-la-norm-induced-metric`
@@ -346,6 +354,8 @@ and $B_{\| \cdot \|}[\ba,r]$
 to identify the specific norm being used to
 describe the open and closed balls.
 
+```{index} Normed linear space; unit ball 
+```
 ```{prf:definition} Unit ball
 :label: def-la-unit-ball
 
@@ -595,6 +605,8 @@ is the collection of all its closure points.
 ## Continuity
 
 
+```{index} Normed linear space; continuity 
+```
 ```{prf:definition} Continuity in normed linear spaces
 :label: def-la-na-continuous-function
 
@@ -904,6 +916,8 @@ bound for the set $\{ \| \bx \| \ST \bx \in A \}$.
 If there is an upper bound also for the set of norms,
 then the set $A$ is called bounded.
 
+```{index} Normed linear space; bounded set 
+```
 ```{prf:definition} Bounded set
 :label: def-la-ns-bounded-set
 
@@ -958,6 +972,8 @@ Now suppose that $\bzero \in \closure A$.
 
 ## Sequences
 
+```{index} Normed linear space; convergence 
+```
 ```{prf:definition} Convergence in norm
 :label: def-la-ns-convergence-norm
 
@@ -1140,6 +1156,8 @@ Let $\{ \bx_n \}$ be a sequence of a normed space $\VV$.
 
 ### Boundedness
 
+```{index} Linear transformation; bounded
+```
 ````{prf:definition} Bounded linear transformation
 :label: def-la-bounded-lin-map
 
@@ -1444,6 +1462,8 @@ A continuous function is trivially continuous at a point.
 
 ## Equivalent Norms
 
+```{index} Equivalent norms
+```
 ```{prf:definition} Equivalent norms
 :label: def-la-ns-equivalent-norms
 
@@ -1867,6 +1887,8 @@ hence all norms on $\VV$ are equivalent.
 ```
 
 
+```{index} Norm topology
+```
 ```{prf:definition} Norm topology
 :label: def-la-ns-finite-norm-topology
 
@@ -2108,6 +2130,8 @@ Then, by {prf:ref}`res-ms-continuous-function-characterization`
 
 ## Completeness and Banach Spaces
 
+```{index} Banach space
+```
 ```{prf:definition} Banach space
 :label: def-la-banach-space
 

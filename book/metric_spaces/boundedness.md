@@ -4,6 +4,8 @@
 Let $(X, d)$ be a metric space.
 
 
+```{index} Boundedness
+```
 ```{prf:definition} Boundedness of a set
 :label: def-ms-boundedness-set
 
@@ -16,6 +18,8 @@ $$
 ```
 
 
+```{index} Boundedness; metric space
+```
 ```{prf:definition} Boundedness of the metric space
 :label: def-ms-boundedness-space
 
@@ -33,6 +37,8 @@ See {prf:ref}`res-ms-bounded-metric` for details.
 
 ## Diameter
 
+```{index} Diameter
+```
 ```{prf:definition} Diameter
 :label: def-ms-diameter
 

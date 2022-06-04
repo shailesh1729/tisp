@@ -15,6 +15,8 @@ $$
 ```
 ## Open Covers
 
+```{index} Metric space; open cover
+```
 ```{prf:definition} Open cover
 :label: def-ms-open-cover
 
@@ -56,6 +58,8 @@ if every component of $a$ is a rational number.
 ## Compact Sets
 
 
+```{index} Compact set
+```
 ```{prf:definition} Compact set
 :label: def-ms-compact-set
 
@@ -65,6 +69,8 @@ finite subcover.
 ```
 
 
+```{index} Compact metric space
+```
 ```{prf:definition} Compact metric space
 :label: def-ms-compact-metric-space
 
@@ -315,6 +321,8 @@ The following statements are equivalent.
 1. Thus, $A$ is compact.
 ```
 
+```{index} Bolzano-Weierstrass property
+```
 ```{prf:definition} Bolzano-Weierstrass property
 :label: def-ms-bolzano-weierstrass-property
 
@@ -774,6 +782,9 @@ has a convergent subsequence.
 
 
 ## Totally Bounded Metric Spaces
+
+```{index} Totally bounded metric space
+```
 ```{prf:definition} Totally bounded space
 :label: def-ms-totally-bounded-metric-space
 

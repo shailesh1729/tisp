@@ -6,6 +6,8 @@ Let $(X, d)$ be a metric space.
 
 ## Sequences
 
+```{index} Metric space; sequence
+```
 ````{prf:definition}
 :label: def-ms-sequence
 
@@ -30,6 +32,10 @@ entry in the sequence.
 ## Convergence
 
 
+```{index} Metric space; convergence
+```
+```{index} Convergence; metric space
+```
 ````{prf:definition} Convergence
 :label: def-ms-convergence
 
@@ -361,6 +367,8 @@ convergent. Yet such sequences are
 of great relevance.
 
 
+```{index} Metric space; Cauchy sequence
+```
 ```{prf:definition} Cauchy sequence
 :label: def-ms-cauchy-sequence
 

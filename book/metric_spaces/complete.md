@@ -22,6 +22,8 @@ $(X,d)$ and $(Y, \rho)$ shall denote metric spaces.
 ## Complete Metric Spaces
 
 
+```{index} Complete metric space
+```
 ```{prf:definition} Complete metric space
 :label: def-ms-complete-metric-space
 
@@ -195,6 +197,8 @@ We now show that $A$ cannot be empty.
 
 ## Nowhere Dense Sets
 
+```{index} Nowhere dense set
+```
 ```{prf:definition} Nowhere dense/Rare
 :label: def-ms-nowhere-dense-set
 
@@ -323,6 +327,8 @@ hence $\boundary A \subseteq A$ for a closed set.
 
 ## Cantor Set
 
+```{index} Cantor set
+```
 ```{prf:definition} Cantor set
 :label: def-ms-cantor-set
 
@@ -550,6 +556,8 @@ $$
 ## Meager Sets
 
 
+```{index} Meager set
+```
 ```{prf:definition} Meager set
 A union of countably many rare (nowhere dense) sets is said to be
 of *first category* or a *meager* set.
@@ -563,10 +571,14 @@ A = \bigcup_{n=1}^{\infty} A_n.
 $$
 ```
 
+```{index} Co-meager set
+```
 ```{prf:definition} Co-meager set
 The complement of a meager set is called *co-meager*.
 ```
 
+```{index} Non-meager set
+```
 ```{prf:definition} Non-meager set
 A subset that is not meager is said to be *non-meager*
 or of *second category*.
@@ -873,6 +885,8 @@ We prove this using
 
 ## Baire Spaces
 
+```{index} Baire space
+```
 ```{prf:definition} Baire space
 A metric space is called a *Baire space* if every nonempty 
 open set is not a meager set.
@@ -1107,6 +1121,8 @@ We next establish that $f^*$ is uniformly continuous.
 ```
 
 
+```{index} Metric space; completion
+```
 ```{prf:definition} Completion of a metric space
 A complete metric space $(Y, \rho)$ is called
 a *completion* of a metric space $(X, d)$ if there

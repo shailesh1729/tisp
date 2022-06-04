@@ -134,7 +134,7 @@ i.e. the elements which are in $A$ but not in $B$ and the elements which are in 
 
 ## Family of sets
 
-```{index} Set; family
+```{index} Family of sets
 ```
 ````{prf:definition} Family of sets
 :label: def-set-family
@@ -142,7 +142,7 @@ i.e. the elements which are in $A$ but not in $B$ and the elements which are in 
 A *Family of sets* is a nonempty set $\mathcal{F}$ whose members are sets by themselves.
 ````
 
-```{index} Set; family; index set
+```{index} Family of sets; index set
 ```
 ````{prf:definition} Families indexed by an index set
 :label: def-index-set
@@ -185,7 +185,7 @@ $\{ A_i\}_{i \in I}$.
 In other words, a family of sets can index itself. 
 ````
 
-```{index} Set; family; union
+```{index} Family of sets; union
 ```
 ````{prf:definition} Union of families of sets
 :label: def-union-family-of-sets
@@ -199,7 +199,7 @@ $$
 In words, every element of the union exists in one of the members of the family.
 ````
 
-```{index} Set; family; intersection
+```{index} Family of sets; intersection
 ```
 ````{prf:definition} Intersection of families of sets
 :label: def-intersection-family-of-sets
@@ -231,7 +231,7 @@ $$
 ````
 
 
-```{index} Set; family; pairwise disjoint
+```{index} Family of sets; pairwise disjoint
 ```
 ````{prf:definition} Family of pairwise disjoint sets
 :label: def-pairwise-disjoint-sets

@@ -7,6 +7,8 @@ i.e., $X$ is a set endowed with a metric $d : X \times X \to \RR$.
 
 ## Topology
 
+```{index} Topology
+```
 ```{prf:definition} Topology
 :label: def-ms-topology
 
@@ -45,6 +47,8 @@ metric spaces.
 
 ## Balls
 
+```{index} Open ball
+```
 ```{prf:definition} Open ball
 :label: def-ms-open-ball
 
@@ -60,7 +64,8 @@ is called an *open ball* at $x$ with radius $r$ in $X$.
 This definition is a generalization of the concept of
 {prf:ref}`neighborhood <def-bra-neighborhood>` on a real line.
 
-
+```{index} Closed ball
+```
 ```{prf:definition} Closed ball
 :label: def-ms-closed-ball
 
@@ -103,6 +108,8 @@ Closed ball contains open ball.
 
 ## Open Sets
 
+```{index} Open set
+```
 ```{prf:definition} Open sets
 :label: def-ms-open-set
 
@@ -232,6 +239,8 @@ Hence, it is a topology.
 
 ## Closed Sets
 
+```{index} Closed set
+```
 ```{prf:definition} Closed sets
 :label: def-ms-closed-set
 
@@ -340,6 +349,8 @@ We proceed as follows:
 
 ## Interior
 
+```{index} Interior point
+```
 ```{prf:definition} Interior point
 :label: def-ms-interior-point
 
@@ -384,6 +395,8 @@ For the converse, let there be a closed ball $B[x, r] \subseteq A$.
 1. Thus, $x$ is an interior point of $A$.
 ```
 
+```{index} Interior
+```
 ```{prf:definition} Interior
 :label: def-ms-interior
 
@@ -491,6 +504,8 @@ Alternate proof.
 
 ## Closure
 
+```{index} Closure point
+```
 ```{prf:definition} Closure point
 :label: def-ms-closure-point
 
@@ -517,6 +532,8 @@ Thus, $B(x, r) \cap A$ is not empty for every $r > 0$.
 Thus, $x$ is a closure point of $A$.
 ```
 
+```{index} Closure
+```
 ```{prf:definition} Closure
 :label: def-ms-closure
 
@@ -788,6 +805,8 @@ We now seek to prove that $\closure K \subseteq L$.
 
 ## Boundary
 
+```{index} Boundary point
+```
 ```{prf:definition} Boundary point
 :label: def-ms-boundary-point
 
@@ -800,6 +819,8 @@ and $B(x, r) \cap X \setminus A \neq \EmptySet$
 for every $r> 0$. 
 ```
 
+```{index} Boundary
+```
 ```{prf:definition} Boundary
 :label: def-ms-boundary
 
@@ -860,6 +881,8 @@ $$
 ## Frontier
 
 
+```{index} Frontier point
+```
 ```{prf:definition} Frontier point
 :label: def-ms-frontier-point
 
@@ -867,6 +890,8 @@ A *frontier point* of a set $A$ is a boundary point
 that belongs to $A$.
 ```
 
+```{index} Frontier
+```
 ```{prf:definition} Frontier
 :label: def-ms-frontier
 
@@ -925,6 +950,8 @@ boundary of any set is closed.
 
 ## Accumulation
 
+```{index} Deleted neighborhood
+```
 ```{prf:definition} Deleted neighborhood
 :label: def-ms-del-neighborhood
 
@@ -938,6 +965,8 @@ $$
 ```
 
 
+```{index} Accumulation point
+```
 ```{prf:definition} Accumulation point
 :label: def-ms-accumulation-point
 
@@ -967,6 +996,8 @@ Every accumulation point is a closure point.
 
 Although, every closure point need not be an accumulation point.
 
+```{index} Derived set
+```
 ```{prf:definition} Derived set
 :label: def-ms-derived-set
 
@@ -974,6 +1005,8 @@ The set of accumulation points of a set $A$ is called its *derived set*
 and is denoted by $A'$.
 ```
 
+```{index} Isolated point
+```
 ```{prf:definition} Isolated point
 :label: def-ms-isolated-point
 
@@ -1110,6 +1143,8 @@ In this derivation, we have made use of the facts that:
 
 ## Dense Sets
 
+```{index} Dense set
+```
 ```{prf:definition} Dense subsets
 :label: def-ms-dense-set
 
@@ -1177,6 +1212,8 @@ discussed in {prf:ref}`res-ms-dense-sequence-limit`.
 
 ## Equivalent Metrics
 
+```{index} Equivalent metrics
+```
 ```{prf:definition} Equivalent metrics
 :label: def-ms-equivalent-metric
 
@@ -1335,6 +1372,8 @@ Then, $\sim$ is an equivalence relation on the set of metrics $D$.
 ```
 
 
+```{index} Strongly equivalent metrics
+```
 ```{prf:definition} Strongly equivalent metrics
 :label: def-ms-strong-equivalent-metric
 
@@ -1385,6 +1424,8 @@ be two metrics on $X$ which are equivalent.
 
 ## Connectedness
 
+```{index} Connectedness
+```
 ```{prf:definition} Connectedness
 :label: def-ms-connected-space
 
@@ -1400,6 +1441,8 @@ two non-empty disjoint open sets.
 1. $(0,1) \cup (1,2)$ is not connected.
 ```
 
+```{index} Connected subset
+```
 ```{prf:definition} Connected subsets
 :label: def-ms-connected-subset
 

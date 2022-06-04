@@ -67,6 +67,8 @@ for a metric space $(S, d)$
 ## Extreme Values
 
 
+```{index} Local extreme value
+```
 ```{prf:definition} Local extreme value
 :label: res-ms-rv-local-extreme-value
 
@@ -92,6 +94,8 @@ The point $x=a$ is called a *local extreme point* of $f$ or more
 specifically, a *local maximum* or a *local minimum* point of $f$.
 ```
 
+```{index} Global maximum
+```
 ```{prf:definition} Global maximum
 :label: res-ms-rv-global-maximum
 
@@ -103,6 +107,8 @@ f(x) \leq f(a) \Forall x \in \dom f.
 $$
 ```
 
+```{index} Global minimum
+```
 ```{prf:definition} Global minimum
 :label: res-ms-rv-global-minimum
 
@@ -114,6 +120,8 @@ f(x) \geq f(a) \Forall x \in \dom f.
 $$
 ```
 
+```{index} Strict global maximum
+```
 ```{prf:definition} Strict global maximum
 :label: res-ms-rv-strict-global-maximum
 
@@ -125,6 +133,8 @@ f(x) < f(a) \Forall x \in \dom f, x \neq a.
 $$
 ```
 
+```{index} Strict global minimum
+```
 ```{prf:definition} Strict global minimum
 :label: res-ms-rv-strict-global-minimum
 
@@ -215,6 +225,8 @@ a configuration which maximizes the volume.
 
 ## Closed Functions
 
+```{index} Closed function
+```
 ```{prf:definition} Closed function
 :label: def-ms-closed-function
 
@@ -582,6 +594,8 @@ the corresponding sequence $f(x_n)$ doesn't converge to anything?
 
 ## Limit Superiors and Inferiors
 
+```{index} Limit superior, Limit inferior
+```
 ```{prf:definition} Limit superior and limit inferior for functions
 :label: def-ms-limsup-liminf-func
 
@@ -645,6 +659,8 @@ $$
 $$
 ```
 
+```{index} Locally bounded function
+```
 ```{prf:definition} Locally bounded function
 :label: def-ms-locally-bounded-func
 
@@ -1104,6 +1120,8 @@ abbreviations liberally.
 
 
 
+```{index} Lower semicontinuity, Upper semicontinuity, Semicontinuity
+```
 ```{prf:definition} Lower and upper semicontinuity
 :label: def-ms-lower-semicontinuity
 
@@ -1471,6 +1489,8 @@ w.r.t. the topology of $(X, d)$ itself.
 
 ### Proper Functions
 
+```{index} Proper function, Extended real valued function; proper function
+```
 ```{prf:definition} Proper function
 :label: def-ms-proper-function
 
@@ -1498,6 +1518,8 @@ function can be changed from $\ERL$
 to $\RERL$ to clarify that it never takes
 the value $-\infty$.
 
+```{index} Improper function
+```
 ```{prf:definition} Improper function
 :label: def-ms-improper-function
 
@@ -1513,6 +1535,8 @@ For an improper function $f$:
 * $f$ might take a value of $-\infty$ at some $x \in X$.
 
 
+```{index} Indicator function
+```
 ```{prf:definition} Indicator function
 :label: def-ms-indicator-function
 
@@ -1589,6 +1613,10 @@ i.e., $f$ attains its supremum and infimum over the values in $f(K)$.
 
 ### Closed Functions
 
+```{index} Closed function; extended real valued
+```
+```{index} Extended real valued function; closed function
+```
 ```{prf:definition} Closed Extended Real Valued Functions
 :label: def-ms-evf-closed-func
 
@@ -1603,6 +1631,14 @@ We note that $T_{\infty} = X$ is closed.
 ### Limits
 
 
+```{index} Limit superior; extended real valued
+```
+```{index} Limit inferior; extended real valued
+```
+```{index} Extended real valued function; limit superior
+```
+```{index} Extended real valued function; limit inferior
+```
 ```{prf:definition} Limit superior and limit inferior
 :label: def-ms-limsup-liminf-evf
 
@@ -1688,6 +1724,12 @@ conditions hold:
 
 ### Semicontinuity
 
+```{index} Semicontinuity; extended real valued
+```
+```{index} Lower semicontinuity; extended real valued
+```
+```{index} Upper semicontinuity; extended real valued
+```
 ```{prf:definition} Lower and upper semicontinuity
 :label: def-ms-evf-lower-semicontinuity
 
@@ -2176,6 +2218,8 @@ For the converse, assume that $f$ is l.s.c.
 
 ### Lower Semicontinuous Hull
 
+```{index} Lower semicontinuous hull
+```
 ```{prf:definition} Lower semicontinuous hull of a function
 :label: def-lsc-hull-func
 
