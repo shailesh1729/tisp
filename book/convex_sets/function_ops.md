@@ -685,6 +685,9 @@ Moreover,
 $$
 \epi f = \bigcap_{i \in I} \epi f_i.
 $$
+
+Consequently, if $f_i$ are closed and convex for every $i \in I$,
+then $f$ is closed and convex.
 ```
 
 ```{prf:proof}
@@ -722,6 +725,12 @@ $$
 1. Thus, $\epi f$ is a convex set due to {prf:ref}`res-cvx-arbitrary-intersection`.
 1. But then, $f$ is convex
    again due to {prf:ref}`res-cvxf-convexity-epigraph`.
+
+Closedness
+
+1. If $f_i$ are closed for every $i \in I$, then $\epi f_i$ is closed for every $i \in I$.
+1. Consequently, $\epi f$ is closed, since its an intersection of closed sets.
+1. Hence $f$ is a closed function.
 ```
 
 ### Largest Entry
@@ -1174,6 +1183,7 @@ We proceed as follows.
 ```
 
 
+(sec:cvx:func:partial:min:closedness)=
 ## Partial Minimization and Closedness
 
 The closedness of a function doesn't imply the closedness
