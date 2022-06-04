@@ -12,13 +12,20 @@ results are available.
 :label: rem-cvxf-rf-domain
 
 The domain of a convex real function is an interval.
-```
 
-```{prf:proof}
 Let $f: \RR \to \RR$ be convex. Then $\dom f$ is
 convex. But every convex subset of real line
 is an interval.
+
+1. Now let $I = \dom f$ be an interval.
+1. We say $a  = \inf I$ as the left end point of $I$.
+1. We say $b  = \sup I$ as the right end point of $I$.
+1. $a$ and $b$ may or may not belong to $I$.
+1. If both $a$ and $b$ belong to $I$, then $I$ is a closed interval.
+1. If neither $a$ nor $b$ belongs to $I$, then $I$ is an open interval.
 ```
+
+
 
 ### Characterization
 
@@ -186,13 +193,18 @@ real line.
 :label: res-cvxf-rf-convex-osd
 
 Let $f: \RR \to \RR$ with $\dom f = I$ be convex.
-Then, for every $x \in \interior I$, the left hand derivative
+Let $a$ and $b$ be the
+left and right endpoints of the interval $I$.
+Then, for every $x \in \interior I = (a,b)$, the left hand derivative
 $f'_-(x)$ and the right hand derivative $f'_+(x)$ exist.
 
-If $a = \inf I \in I$, then the right hand derivative
-$f'_-(a)$ exists.
-If $b = \sup I \in I$, then the left hand derivative
-$f'_+(b)$ exists.
+If $a \in I$, then the right hand derivative
+$f'_+(a)$ exists.
+If $b \in I$, then the left hand derivative
+$f'_-(b)$ exists.
+
+If $a \in I$, we define $f'_-(a) = -\infty$.
+If $b \in I$, we define $f'_+(b) = \infty$.
 ``` 
 
 
@@ -235,9 +247,15 @@ at the end points.
 :label: res-cvxf-rf-open-domain-continuous
 
 
-Let $f: \RR \to \RR$ with $\dom f = (a,b)$ be convex.
-Then, for every $x \in (a,b)$, 
-Then, $f$ is continuous on $(a,b)$.
+Let $f: \RR \to \RR$ be a real convex function
+with $\dom f = I$. Let $a$ and $b$ be the
+left and right endpoints of the interval $I$.
+Then,
+1. $f$ is continuous at every $x \in (a,b)$.
+1. If $a \in I$, then $f$ is continuous from the right at $a$.
+1. If $b \in I$, then $f$ is continuous from the left at $b$.
+
+In other words, $f$ is continuous on $I$.
 ```
 
 ```{prf:proof}
@@ -268,7 +286,113 @@ We proceed as follows.
    $$
 1. Thus, $f$ is continuous at $x$.
 1. Since $x$ was arbitrary, hence $f$ is continuous on $(a,b)$.
+
+Now consider the case where $a \in I$.
+
+1. By {prf:ref}`res-cvxf-rf-convex-osd`, 
+   the one sided derivative $f'_+(a)$ exists.
+1. Then, by limit arithmetic
+
+   $$
+   \lim_{h \to 0^-} (f(a + h) - f(a)) 
+   = \left ( \lim_{h \to 0^-} \frac{f(a + h) - f(a)}{h} \right )
+   \left ( \lim_{h \to 0^-} h \right) = 0.
+   $$
+1. Hence $f$ is continuous from the right at $a$.
+
+A similar argument holds for continuity from the left at $b$.
 ```
+
+
+### Properties of One Sides Derivatives
+
+```{prf:theorem} Properties of one-sided derivatives
+:label: res-cvxf-rf-one-sided-der-props
+
+Let $f: \RR \to \RR$ be a real convex function
+with $\dom f = I$. Let $a$ and $b$ be the
+left and right endpoints of the interval $I$.
+
+1. We have $f'_-(x) \leq f'_+(x)$ for every $x \in I$.
+1. If $x \in \interior I$ then both
+   $f'_-(x)$ and $f'_+(x)$ are finite.
+1. If $x, z \in I$ and $x < z$, then $f'_+(x) \leq f'_-(z)$.
+1. The functions $f'_-, f'_+ : \RR \to \ERL$ are nondecreasing over $I$.
+1. The function $f'_+$ is right-continuous at every interior point of $I$.
+1. The function $f'_-$ is left-continuous at every interior point of $I$.
+1. If $a \in I$ then $f'_+$ is right-continuous at $a$.
+1. If $b \in I$ then $f'_-$ is left-continuous at $b$.
+1. The function $f'_+$ is upper-semicontinuous at every $x \in I$.
+1. The function $f'_-$ is lower-semicontinuous at every $x \in I$.
+```
+
+```{prf:proof}
+(1)
+
+1. If $a \in I$, then by convention $f'_-(a) = -\infty$. Hence $f'_-(a) \leq f'_+(a)$.
+1. If $b \in I$, then by convention $f'_+(b) = \infty$. Hence $f'_-(b) \leq f'_+(b)$.
+1. Now let $x \in \interior I$.
+1. Then there is $r > 0$ such that $(x-r, x+r) \in I$.
+1. Pick any $h > 0$ such that $h < r$.
+1. Then, using the three points $x - h, x, x + h$, we have
+
+   $$
+   \frac{f(x) - f(x - h)}{h} \leq \frac{f(x + h) - f(x)}{h}
+   $$
+   due to {prf:ref}`res-cvxf-rf-slope-intercept`.
+1. Taking the limit $h \downarrow 0$, we see that
+
+   $$
+   f'_-(x) \leq f'_+(x)
+   $$
+   holds true for every $x \in \interior I$.
+
+(2)
+1. Let $x \in \interior I$.
+1. Let $h > 0$ such that $(x - h, x + h) \subseteq I$.
+1. Then we have
+
+   $$
+   f'_+(x) \leq \frac{f(x+h) - f(x)}{h} < \infty.
+   $$
+1. Similarly, we have
+
+   $$
+   - \infty < \frac{f(x) - f(x -h)}{h} \leq f'_-(x).
+   $$
+1. By (1), we have
+
+   $$
+   -\infty < f'_-(x) \leq f'_+(x) < \infty.
+   $$
+1. Hence both are finite at interior points of $I$.
+
+(3)
+1. Let $y = \frac{x + z}{2}$.
+1. Due to {prf:ref}`res-cvxf-rf-slope-intercept`, we have
+
+   $$
+   \frac{f(y) - f(x)}{y - x} \leq \frac{f(z) - f(y)}{z - y}.
+   $$
+1. We also have
+
+   $$
+   f'_+(x) \leq \frac{f(y) - f(x)}{y - x}
+   \text{ and }
+   \frac{f(z) - f(y)}{z - y} \leq f'_-(z).
+   $$
+1. Combining, we get $f'_+(x)  \leq f'_-(z)$.
+
+(4)
+1. Let $x, z \in I$ such that $x < z$.
+1. From (3), we have $f'_+(x)  \leq f'_-(z)$.
+1. From (1), we have $f'_-(z) \leq f'_+(z)$.
+1. Combining, we have $f'_+(x) \leq f'_+(z)$.
+1. Hence $f'_+$ is nondecreasing.
+1. Similarly, $f'_-(x) \leq f'_+(x) \leq f'_-(z)$.
+1. Hence $f'_-$ is nondecreasing.
+```
+
 
 ## Proper Functions
 
