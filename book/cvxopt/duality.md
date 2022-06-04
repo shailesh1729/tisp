@@ -1741,3 +1741,46 @@ in the first min common/max crossing theorem
    this condition holds if and only if
    minimax equality holds.
 ```
+
+
+### Second Minimax Theorem
+
+We can adapt the argument of first minimax theorem
+to include conditions on the lines of
+the second min common/max crossing theorem
+{prf:ref}`res-opt-min-max-strong-duality-2`.
+
+```{prf:theorem} Minimax theorem II
+:label: res-minimax-theorem-2
+
+Let $X$ be a nonempty convex subset of $\VV$
+and $Z$ be a nonempty subset of  $\WW$.
+Let $\phi: \VV \oplus \WW \to \RR$ be a function
+with $\dom \phi = X \times Z$.
+Assume that for each $\bz \in Z$,
+the function $\phi (\cdot, \bz) : \VV \to \RR$
+is convex, and for each $\bx \in X$, the
+function $-\phi(\bx, \cdot) : \WW \to \RR$
+is closed and convex.
+Assume further that
+
+$$
+-\infty  < \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz)
+$$
+and that $\bzero$ lies in the relative interior of
+the effective domain of the function $\psi$
+as defined in {eq}`eq-minimax-psi`.
+Then, the minimax equality {eq}`eq-minimax-equality` holds;
+i.e.,
+
+$$
+\sup_{\bz \in Z} \inf_{\bx \in X } \phi(\bx, \bz)
+= \inf_{\bx \in X} \sup_{\bz \in Z } \phi(\bx, \bz),
+$$
+and the supremum over $Z$ in the left hand side is finite
+and is attained.
+Furthermore, the set of $\bz \in Z$ attaining this
+supremum is compact if and only if $\bzero$
+lies in the interior of the effective domain
+of $\psi$.
+```
