@@ -1282,7 +1282,7 @@ We add a linear perturbation to $\phi$ and introduce
 a function $\psi : \WW \to \ERL$ as
 
 $$
-\psi(\bu) = \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \}.
+\psi(\bu) = \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bu, \bz \rangle \}.
 $$
 
 We can see that
@@ -1313,7 +1313,7 @@ where $\psi : \WW \to \ERL$ is given by
 
 ```{math}
 :label: eq-minimax-psi
-\psi(\bu) = \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \}.
+\psi(\bu) = \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bu, \bz \rangle \}.
 ```
 
 1. Recall that min common value is given by
@@ -1370,7 +1370,7 @@ $$
    q(\ba) 
    &= \inf_{\bu \in \WW} \{\psi(\bu) + \langle \bu, \ba \rangle \} \\
    &= \inf_{\bu \in \WW} \{
-      \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \} 
+      \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bu, \bz \rangle \} 
       + \langle \bu, \ba \rangle \} \\
    &= \inf_{\bu \in \WW} \inf_{\bx \in X} \sup_{\bz \in Z} 
       \{ \phi(\bx, \bz) + \langle \ba - \bz, \bu \rangle \}.
@@ -1422,19 +1422,19 @@ is convex.
 Recall that
 
 $$
-\psi(\bu) = \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \}.
+\psi(\bu) = \inf_{\bx \in X} \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bu, \bz \rangle \}.
 $$
 
 1. Fix some $\bz \in Z$.
 1. Consider the function
-   $f_z(\bx, \bu) = \phi(\bx, \bz) - \langle \bz, \bu \rangle$.
+   $f_z(\bx, \bu) = \phi(\bx, \bz) - \langle \bu, \bz \rangle$.
 1. Clearly, $f_z$ is convex for each $\bz \in Z$ by hypothesis.
 1. Taking the pointwise supremum over $\bz \in Z$,
    the function
 
    $$
    F (\bx, \bu) = \begin{cases}
-   \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bz, \bu \rangle \}
+   \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bu, \bz \rangle \}
    & \bx \in X;\\
    \infty & \bx \notin X.
    \end{cases}
@@ -1554,13 +1554,13 @@ We shall show the following one by one.
 
    $$
    \langle \ba, \bu \rangle + (r_x(\ba) - \epsilon)
-   < c < \langle \bz, \bu \rangle + r_x(\bz) \Forall \bz \in Z.
+   < c < \langle \bu, \bz \rangle + r_x(\bz) \Forall \bz \in Z.
    $$
 1. Substituting $r_x(\bz) =  -\phi(\bx, \bz)$, we get
 
    $$
    \langle \ba, \bu \rangle + (-\phi(\bx, \ba) - \epsilon)
-   < \langle \bz, \bu \rangle - \phi(\bx, \bz). 
+   < \langle \bu, \bz \rangle - \phi(\bx, \bz). 
    $$
 1. Rearranging, we get
 
@@ -1743,7 +1743,7 @@ in the first min common/max crossing theorem
 ```
 
 
-### Second Minimax Theorem
+### Second Theorem
 
 We can adapt the argument of first minimax theorem
 to include conditions on the lines of
@@ -1784,3 +1784,420 @@ supremum is compact if and only if $\bzero$
 lies in the interior of the effective domain
 of $\psi$.
 ```
+
+## Saddle Point Theorems
+
+```{div}
+1. From the first minimax theorem
+   ({prf:ref}`res-minimax-theorem-1`), we can see that
+   minimax equality is satisfied if and only if
+   the function $\psi$ is lower semicontinuous
+   at $\bu = \bzero$.
+1. If $\psi$ is closed, then it will be
+   lower semicontinuous.
+1. The proof of {prf:ref}`res-minimax-psi-convex-phi-x-convex`
+   shows that $\psi$ can be written as a partial minimization
+   of $F$
+
+   $$
+   \psi(\bu) = \inf_{\bx \in \VV} F (\bx, \bu).
+   $$
+   where $F: \VV \oplus \WW \to \RERL$ is given by
+
+   $$
+   F (\bx, \bu) = \begin{cases}
+   \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bu, \bz \rangle \}
+   & \bx \in X;\\
+   \infty & \bx \notin X.
+   \end{cases}
+   $$
+1. The results in {ref}`sec:cvx:func:partial:min:closedness` can
+   be used to guarantee the closedness of $\psi$.
+1. These results can also guarantee that the infimum of $F$
+   over $\bx$ is attained.
+1. In particular $\psi(\bzero)$ will be finite and hence
+   guaranteeing that the optimal value of the minimax
+   problem is finite. 
+```
+
+
+```{prf:definition} Auxiliary functions for the minimax problem
+:label: def-minimax-aux-funcs
+
+Let $X$ be a nonempty convex subset of $\VV$
+and $Z$ be a nonempty subset of  $\WW$.
+Let $\phi: \VV \oplus \WW \to \RR$ be a function
+with $\dom \phi = X \times Z$.
+
+For each $\bz \in Z$, the function $\eta_z : \VV \to \RERL$ is defined
+as
+
+$$
+\eta_z(\bx) = \begin{cases}
+\phi(\bx, \bz) & \bx \in X;\\
+\infty & \bx \notin X.
+\end{cases}
+$$
+
+
+For each $\bx \in X$, the function $\rho_x : \WW \to \RERL$ is defined
+as
+
+$$
+\rho_x(\bz) = \begin{cases}
+- \phi(\bx, \bz) & \bz \in Z;\\
+\infty & \bz \notin Z.
+\end{cases}
+$$
+
+The function $\eta: \VV \to \RERL$ is defined as
+
+$$
+\eta (\bx) = \sup_{\bz \in Z} \eta_z (\bx), \quad \bx \in \VV.
+$$
+The function $\rho: \WW \to \RERL$ is defined as
+
+$$
+\rho (\bz) = \sup_{\bx \in X} \rho_x (\bz), \quad \bz \in \WW.
+$$
+```
+
+```{div}
+Following remarks are in order.
+
+1. If $\eta_z$ is closed and convex for each $\bz \in Z$,
+   then $\eta$ is closed and convex
+   due to {prf:ref}`res-cvx-ptws-supremum`. 
+1. If $\rho_x$ is closed and convex for each $\bx \in X$,
+   then $\rho$ is closed and convex
+   due to {prf:ref}`res-cvx-ptws-supremum`.
+1. By definition, $\eta(\bx) > -\infty$ for every $\bx \in X$.
+1. $\eta$ can be proper only if $\eta(\bx) < \infty$ for some $\bx \in X$.
+1. Equivalently, for the optimal minimax value
+
+   $$
+   \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) < \infty
+   $$
+   must hold for $\eta$ to be proper.
+1. Similarly, $\rho (\bz) > -\infty$ for every $\bz \in Z$.
+1. $\rho$ can be proper only if $\rho(\bz) < \infty$ for some $\bz \in Z$.
+1. This is possible only if
+
+   $$
+   \inf_{\bz \in Z} \sup_{\bx \in X} (- \phi (\bx, \bz)) < \infty.
+   $$
+1. Equivalently, for the optimal maximin value
+
+   $$
+   -\infty < \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz)
+   $$
+   must hold true.
+1. The set of minimizers of $\eta$ are the optimal points for the
+   minimax problem: $X^*$.
+1. The set of minimizers of $\rho$ are the optimal points of the
+   maximin problem: $Z^*$.
+```
+
+### Minimax Equality and Attainment of Minimax Solution
+
+In the following results, we provide conditions under which
+the minimax equality is attained and the the set of
+optimal solutions for the minimax problem is nonempty.
+
+
+```{prf:theorem} Compact sublevel sets of $\eta$
+:label: res-minimax-exist-compact-sublevel-sets-eta
+
+Assume the following:
+
+1. $\eta_z$ is closed and convex for every $\bz \in Z$.
+1. $\rho_x$ is closed and convex for every $\bx \in X$.
+1. The optimal minimax value is less than infinity
+
+   $$
+   \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) < \infty.
+   $$
+1. The sublevel sets of $\eta$ are compact.
+
+Then the minimax equality {eq}`eq-minimax-equality` holds and
+the set of optimal points for the minimax problem $X^*$ is
+nonempty and compact. 
+```
+
+
+```{prf:proof}
+.
+
+1. Under the assumptions above, the function $\eta$
+   is proper, closed and convex.
+1. By definition $F(\bx, \bu) > -\infty$ for every $\bx, \bu$.
+1. Note that $F(\bx, \bzero) = \eta(\bx)$.
+1. Since $\eta$ is proper, hence
+   there exists $\bx \in X$ such that
+   $F(\bx, \bzero) < \infty$.
+1. Hence $F$ is also proper.
+1. $F$ is also closed and convex.
+
+   1. Fix some $\bz \in Z$.
+   1. Consider the function
+      $f_z(\bx, \bu) = \eta_z(\bx) - \langle \bu, \bz \rangle$.
+   1. $\eta_z$ is closed and convex for every $\bz$ by hypothesis.
+   1. Hence $f_z$ is closed and convex for every $\bz$.
+   1. Taking the pointwise supremum over $\bz \in Z$,
+      $F$ is closed and convex.
+1. The sets
+ 
+   $$
+   \{ \bx \ST F(\bx, \bzero) \leq t \}
+   = \{ \bx \ST \eta(\bx) \leq t \}
+   $$
+   are the sublevel sets of $\eta$ which are compact
+   for every $t$ by hypothesis.
+1. We can easily select a scalar for which the
+   sublevel set of $\eta$ is also nonempty since
+   $\eta$ is proper.
+1. Hence, due to {prf:ref}`res-cvxf-partial-minimization-closedness-1`,
+   the function $\psi$ which is
+   a partial minimization of $F$ over $\bx$
+   is proper, closed and convex.
+1. Since $\psi$ is closed, hence it is lower semicontinuous.
+1. In particular, $\psi$ is l.s.c. at $\bu = \bzero$.
+1. Hence due to {prf:ref}`res-minimax-theorem-1`,
+   the minimax equality holds. 
+1. Since $X^*$ is the set of minimizers of $\eta$,
+   $\eta$ is proper and closed,
+   and the sublevel sets of $\eta$ are compact, 
+   hence $X^*$ is nonempty and compact
+   due to Weierstrass' theorem
+   ({prf:ref}`res-opt-weierstrass-theorem`).
+```
+
+
+```{prf:theorem} Recession and constancy space of $\eta$
+:label: res-minimax-exist-recession-constancy-eta
+
+Assume the following:
+
+1. $\eta_z$ is closed and convex for every $\bz \in Z$.
+1. $\rho_x$ is closed and convex for every $\bx \in X$.
+1. The optimal minimax value is less than infinity
+
+   $$
+   \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) < \infty.
+   $$
+1. The recession cone and constancy space of the function
+   $\eta$ are equal.
+
+Then the minimax equality {eq}`eq-minimax-equality` holds and
+the set of optimal points for the minimax problem $X^*$ is
+nonempty. 
+```
+
+
+
+```{prf:theorem} $F$ domain as a set of linear inequalities
+:label: res-minimax-exist-F-proper-closed-C-lin-ineq
+
+Assume the following:
+
+1. $\eta_z$ is closed and convex for every $\bz \in Z$.
+1. $\rho_x$ is closed and convex for every $\bx \in X$.
+1. The optimal minimax value is less than infinity
+
+   $$
+   \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) < \infty.
+   $$
+1. The function
+
+   $$
+   F (\bx, \bu) = \begin{cases}
+   \sup_{\bz \in Z} \{ \phi(\bx, \bz) - \langle \bu, \bz \rangle \}
+   & \bx \in X;\\
+   \infty & \bx \notin X
+   \end{cases}
+   $$
+   has the form
+
+   $$
+   F (\bx, \bu) = \begin{cases}
+   \overline{F}(\bx, \bu)
+   & (\bx, \bu) \in C;\\
+   \infty & (\bx, \bu) \notin C
+   \end{cases}
+   $$
+   where $\overline{F}$ is a proper, closed, and convex
+   function on $\VV \oplus \WW$ and $C$ is specified
+   by linear inequalities; i.e,
+
+   $$
+   C = \{ (\bx, \bu) \ST \bA \bx + \bB \bu \preceq \bb \},
+   $$
+   where $\bA, \bB$ are matrices and $\bb$ is a vector.
+1. Every common direction of recession of $C$ and $\overline{F}$
+   is a direction along which $\overline{F}$ is constant.
+
+
+Then the minimax equality {eq}`eq-minimax-equality` holds and
+the set of optimal points for the minimax problem $X^*$ is
+nonempty. 
+```
+
+
+```{prf:theorem} Quadratic form $\phi$
+:label: res-minimax-exist-quadratic-form-phi
+
+Assume the following:
+
+1. $\VV = \RR^n$ and $\WW = \RR^m$. 
+1. The function $\phi$ has a quadratic form
+
+   $$
+   \phi(\bx, \bz) = \bx^T \bQ \bx + \bc^T \bx + \bz^T \bM \bx 
+   - \bz^T \bR \bz - \bd^T \bz
+   $$
+   where $\bQ$ and $\bR$ are symmetric matrices,
+   $\bM$ is a matrix, and
+   $c$ and $d$ are vectors.
+1. $Z = \RR^m$.
+1. $X$ is a set of the form
+
+   $$
+   X = \{ \bx \ST \bx^T \bQ_j \bx + \ba^T_j \bx + b_j \leq 0, j=1, \dots, r \}
+   $$
+   where $\bQ_j$ are symmetric positive semidefinite matrices,
+   $\ba_j$ are vectors and $b_j$ are scalars. 
+1. $\eta_z$ is closed and convex for every $\bz \in Z$.
+1. $\rho_x$ is closed and convex for every $\bx \in X$.
+1. The optimal minimax value satisfies
+
+   $$
+   -\infty < \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) < \infty.
+   $$
+
+Then the minimax equality {eq}`eq-minimax-equality` holds and
+the set of optimal points for the minimax problem $X^*$ is
+nonempty. 
+```
+
+### Existence of Saddle Points
+
+```{prf:theorem} Compact sublevel sets of $\eta$ and $\rho$
+:label: res-minimax-saddle-compact-sublevel-eta-rho
+
+Assume the following:
+
+1. $\eta_z$ is closed and convex for every $\bz \in Z$.
+1. $\rho_x$ is closed and convex for every $\bx \in X$.
+1. Assume that either
+
+   $$
+   \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) < \infty
+   $$
+   or
+
+   $$
+   -\infty < \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz)
+   $$
+   holds true.
+1. The sublevel sets of $\eta$ and $\rho$ are compact.
+
+Then the set of saddle points of $\phi$ is nonempty
+and compact. 
+```
+
+```{prf:proof}
+First assume that $\inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) < \infty$.
+
+1. By applying {prf:ref}`res-minimax-exist-compact-sublevel-sets-eta`,
+   minimax equality holds and $X^*$ is nonempty.
+1. Hence $\inf_{\bx \in X} \sup_{\bz \in Z } \phi(\bx, \bz)$ is finite.
+1. Due to minimax equality:
+
+   $$
+   -\infty < \sup_{\bz \in Z} \inf_{\bx \in X } \phi(\bx, \bz)
+   = \inf_{\bx \in X} \sup_{\bz \in Z } \phi(\bx, \bz) < \infty.
+   $$
+1. We reverse the roles of $\bx$ and $\bz$ and the sign of $\phi$
+   and apply {prf:ref}`res-minimax-exist-compact-sublevel-sets-eta`
+   again to show that $Z^*$ is nonempty and compact set.
+1. The set of saddle points is a Cartesian product of $X^*$
+   and $Z^*$.
+1. Since both $X^*$ and $Z^*$ are nonempty and compact,
+   hence $X^* \times Z^*$ is also nonempty and compact.
+
+Now assume that $-\infty < \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz)$.
+1. Then $\inf_{\bz \in Z} \sup_{\bx \in X} (-\phi(\bx, \bz)) < \infty$. 
+1. we can then reverse the role of $\bx$ and $\bz$ in the preceding argument.
+```
+
+
+```{prf:theorem} Recession cones and constancy spaces of $\eta$ and $\rho$
+:label: res-minimax-saddle-recession-constancy-eta-rho
+
+Assume the following:
+
+1. $\eta_z$ is closed and convex for every $\bz \in Z$.
+1. $\rho_x$ is closed and convex for every $\bx \in X$.
+1. Assume that either
+
+   $$
+   \inf_{\bx \in X} \sup_{\bz \in Z} \phi(\bx, \bz) < \infty
+   $$
+   or
+
+   $$
+   -\infty < \sup_{\bz \in Z} \inf_{\bx \in X} \phi(\bx, \bz)
+   $$
+   holds true.
+1. The recession cones and constancy spaces of $\eta$ and $\rho$
+   are equal to each other:
+
+   $$
+   R_{\eta} = L_{\eta} 
+   \text{ and }
+   R_{\rho} = L_{\rho}.
+   $$
+
+Then the set of saddle points of $\phi$ is nonempty. 
+```
+
+
+### Saddle Point Theorem
+
+The analysis in this section culminates into the following result.
+
+```{prf:theorem} Saddle point theorem
+:label: res-minimax-saddle-point-theorem
+
+Assume that
+$\eta_z$ is closed and convex for every $\bz \in Z$
+and $\rho_x$ is closed and convex for every $\bx \in X$.
+Then the set of saddle points of $\phi$ is nonempty
+and compact under any of the following conditions.
+
+1. $X$ and $Z$ are compact.
+1. $Z$ is compact and there exists a vector $\overline{\bz} \in Z$
+   and a scalar $c$ such that the sublevel set
+
+   $$
+   \{ \bx \in X \ST \phi(\bx, \overline{\bz}) \leq c \}
+   $$
+   is nonempty and compact.
+1. $X$ is compact and there exists a vector $\overline{\bx} \in X$
+   and a scalar $c$ such that the superlevel set
+
+   $$
+   \{ \bz \in Z \ST \phi(\overline{\bx}, \bz) \geq c \}
+   $$
+   is nonempty and compact.
+1. There exist vectors $\overline{\bx} \in X$
+   and $\overline{\bz} \in Z$ and a scalar $c$ such that the sets
+
+   $$
+   \{ \bx \in X \ST \phi(\bx, \overline{\bz}) \leq c \}
+   \text{ and }
+   \{ \bz \in Z \ST \phi(\overline{\bx}, \bz) \geq c \}
+   $$
+   are nonempty and compact.
+```
+
