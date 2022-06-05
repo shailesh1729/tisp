@@ -234,7 +234,7 @@ We are given that $f$ is convex over $(a,b)$.
    $F(h_1) \leq F(h_2)$.
 1. Thus, $F$ is a nondecreasing (monotone) function of $h$
    in some interval $(0, \delta)$ where $\delta < r$.
-1. Then, $f'_+(x) = \lim_{h \to 0^+} F(h)$ exists.
+1. Then, $f'_+(x) = \lim_{h \downarrow 0} F(h)$ exists.
 
 A similar argument shows that $f'_-(x)$ also exists.
 Similar arguments apply for the one sided derivatives
@@ -274,15 +274,15 @@ We proceed as follows.
 1. Similarly, 
 
    $$
-   \lim_{h \to 0^+} (f(x + h) - f(x)) 
-   = \left ( \lim_{h \to 0^+} \frac{f(x + h) - f(x)}{h} \right )
-   \left ( \lim_{h \to 0^+} h \right) = 0.
+   \lim_{h \downarrow 0} (f(x + h) - f(x)) 
+   = \left ( \lim_{h \downarrow 0} \frac{f(x + h) - f(x)}{h} \right )
+   \left ( \lim_{h \downarrow 0} h \right) = 0.
    $$
 1. Thus, 
 
    $$
    \lim_{h \to 0^-} (f(x + h) - f(x)) 
-   = \lim_{h \to 0^+} (f(x + h) - f(x)) = 0.
+   = \lim_{h \downarrow 0} (f(x + h) - f(x)) = 0.
    $$
 1. Thus, $f$ is continuous at $x$.
 1. Since $x$ was arbitrary, hence $f$ is continuous on $(a,b)$.
@@ -494,10 +494,7 @@ left and right endpoints of the interval $I$.
 1. The argument is similar to (7).
 ```
 
-
-## Proper Functions
-
-### Directional Derivative
+## Directional Derivatives of Proper Functions
 
 ```{prf:definition} Directional derivative
 :label: def-cvxf-directional-derivative
@@ -508,16 +505,18 @@ Let $\bx \in \interior S$.
 The *directional derivative* at $\bx$ in the direction $\bd \in \VV$ is defined by 
 
 $$
-f'(\bx;\bd) \triangleq \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd) - f(\bx)}{\alpha}.
+f'(\bx;\bd) \triangleq \lim_{\alpha \downarrow 0} \frac{f(\bx + \alpha \bd) - f(\bx)}{\alpha}
 $$
+provided the limit exists.
 ```
 
 ```{div}
-The directional derivative is a scalar quantity ($\in \RR$).
+The directional derivative is a scalar quantity ($\in \RR$)
+if it is defined (i.e., the limit exists).
 When we say that 
 
 $$
-f'(\bx;\bd) = \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t},
+f'(\bx;\bd) = \lim_{t \downarrow 0} \frac{f(\bx + t \bd) - f(\bx)}{t},
 $$
 
 we mean that $f$ is defined over a set
@@ -548,7 +547,7 @@ If $\bd = \bzero$ then, $f'(\bx; \bd) = 0$.
 We can see this from the fact that
 
 $$
-f'(\bx;\bzero) = \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bzero) - f(\bx)}{\alpha} = 0.
+f'(\bx;\bzero) = \lim_{\alpha \downarrow 0} \frac{f(\bx + \alpha \bzero) - f(\bx)}{\alpha} = 0.
 $$
 ```
 
@@ -562,7 +561,469 @@ identifying the interior of the domain for a pointwise
 maximum of a finite set of functions. 
 
 
-### Pointwise Maximum of Finite Set of Functions
+## Differentiability
+
+### Differentiability of Proper Functions
+
+````{prf:definition} Differentiability of proper functions
+:label: def-cvxf-differentiability-proper
+
+Let $f : \VV \to \RERL$ be a proper function with $S = \dom f$.
+Let $\bx \in \interior S$. 
+$f$ is said to be *differentiable* at $\bx$
+if there exists $\bg \in \VV^*$ such that:
+
+```{math}
+:label: eq-cvxf-differentiability
+\underset{\bh \to \bzero}{\lim}
+\frac{f(\bx + \bh) - f(\bx) - \langle \bh, \bg \rangle}{\| \bh \|} = 0.
+```
+The unique vector $\bg$ satisfying this condition is called
+the *gradient* of $f$ at $\bx$ and is denoted by $\nabla f(\bx)$.
+````
+
+
+If $f$ is differentiable at some $\bx \in \interior S$,
+then there is a simple formula to connect the gradient
+and the directional derivatives.
+
+### Gradient and Directional Derivatives
+
+```{prf:theorem} Gradient and directional derivatives
+:label: res-cvxf-grad-dir-der
+
+Let $f : \VV \to \RERL$ be a proper function with $S = \dom f$.
+Let $\bx \in \interior S$. 
+Assume that $f$ is differentiable at $\bx$.
+Then, for any $\bd \in \VV$,
+
+$$
+f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle.
+$$
+In other words, the directional derivative is the projection
+of the gradient in the specified direction.
+```
+
+```{prf:proof}
+For $\bd = \bzero$, the equality is obvious. 
+We shall consider the case where $\bd \neq \bzero$.
+
+1. Since $f$ is differentiable at $\bx$, hence
+
+  $$
+  \underset{\bh \to \bzero}{\lim}
+  \frac{f(\bx + \bh) - f(\bx) - \langle \bh, \nabla f(\bx) \rangle}{\| \bh \|} = 0.
+  $$
+1. In particular, if we take the limit of $\bh$ along the
+   direction of $\bd$ as $t \bd$ where $t > 0$ and $t \to 0^+$, 
+   then
+
+   $$
+   \underset{t \to 0^+}{\lim}
+   \frac{f(\bx + t \bd) - f(\bx) - \langle t \bd, \nabla f(\bx) \rangle}{\| t \bd \|} = 0.
+   $$
+1. Splitting the terms, we get
+
+   $$
+   \underset{t \to 0^+}{\lim}
+   \frac{f(\bx + t \bd) - f(\bx)}{\| t \bd \|} -
+   \underset{t \to 0^+}{\lim}
+   \frac{\langle \bd, \nabla f(\bx) \rangle}{\| \bd \|}
+   = 0.
+   $$
+1. Multiplying with $\| \bd \|$ and simplifying, we get:
+
+   $$
+   \underset{t \to 0^+}{\lim}
+   \frac{f(\bx + t \bd) - f(\bx)}{t} -
+   \underset{t \to 0^+}{\lim} \langle \bd, \nabla f(\bx) \rangle
+   = 0.
+   $$
+1. Thus,
+
+   $$
+   f'(\bx; \bd ) =  \underset{t \to 0^+}{\lim}
+   \frac{f(\bx + t \bd) - f(\bx)}{t} 
+   = \langle \bd, \nabla f(\bx) \rangle.
+   $$
+```
+
+### Gradient in $\RR^n$
+
+```{prf:remark} Gradient in $\RR^n$
+:label: res-cvxf-gradient-r-n
+
+It is imperative to compare the definition of gradients in this section
+with {prf:ref}`def-mvc-point-differentiability`
+(differentiability of functions from $\RR^n$ to $\RR^m$)
+and the notion of the gradient as defined in
+{prf:ref}`def-mvc-gradient`. 
+
+
+To better develop our understanding of gradients, let us
+examine the gradient in the Euclidean space $\RR^n$.
+The standard basis is given by $\BBB = \{\be_1, \dots, \be_n \}$
+which are the coordinate unit vectors.
+The standard inner product is given by the dot product
+
+$$
+\langle \bx, \by \rangle = \by^T \bx  = \bx^T \by.
+$$
+A vector $\bx \in \RR^n$ is written as
+
+$$
+\bx  = \sum_{i=1}^n x_i \be_i.
+$$
+The individual coordinates are obtained via 
+
+$$
+x_i = \langle \be_i, \bx \rangle 
+= \langle \bx, \be_i \rangle 
+= \bx^T \be_i \Forall i \in [1,\dots, n].
+$$
+
+Let $f: \RR^n \to \RERL$ be a proper function. 
+Let $S = \dom f$.
+Let $\bx \in \interior S$. 
+Assume that $f$ is differentiable at $\bx$.
+Let $\bg = \nabla f (\bx)$.
+Let 
+
+$$
+\bg = \sum_i^n g_i \be_i.
+$$
+
+Following the notation in {prf:ref}`res-mvc-f-m-n-jacobian-limit-alt`,
+the derivative of $f$ at $\bx$, denoted by $Df(\bx)$
+is given by
+
+$$
+\underset{\bh \to \bzero}{\lim}
+\frac{\| f(\bx + \bh) - f(\bx) - Df(\bx) \bh \|_2}{\| \bh \|_2} = 0.
+$$
+We don't have to check for $\bx + \bh \in \dom f$ 
+as $f$ is a proper function with a value of $\infty$ at
+points outside its effective domain.
+
+Compare this with {eq}`eq-cvxf-differentiability`.
+For $f : \RR^n \to \RR$, $Df(\bx)$ is a row vector.
+If we let $\tilde{\bg} = Df(\bx)^T$, then
+
+$$
+Df(\bx) \bh = \tilde{\bg}^T \bh = \langle \bh, \tilde{\bg} \rangle.
+$$
+Then, the definition of $\tilde{\bg}$ in the limit above
+is exactly the same as $\bg$ in {eq}`eq-cvxf-differentiability`.
+Thus, $\tilde{\bg} = \bg$.
+We can see that our definition of gradient
+coincides with the definition in
+{prf:ref}`def-mvc-gradient` for $\RR^n$
+with the dot product as standard inner product.
+
+
+Now consider the components of $\bg$.
+
+$$
+g_i = \langle \be_i, \bg \rangle = \langle \be_i, \nabla f (\bx) \rangle.
+$$
+
+By {prf:ref}`res-cvxf-grad-dir-der`, the directional
+derivative in the direction $\be_i$ is given by
+
+$$
+f'(\bx; \be_i) = \langle \be_i, \nabla f(\bx) \rangle
+= \langle \be_i, \bg \rangle = g_i.
+$$
+
+Thus, 
+
+$$
+\frac{\partial f(\bx)}{\partial x_i} = \langle \be_i, \nabla f(\bx) \rangle.
+$$
+The partial derivatives of $f$ at $\bx$ along the
+standard basis vectors are identical to the
+directional derivatives of $f$.
+
+$$
+\nabla f(\bx) = \begin{bmatrix}
+\frac{\partial f(\bx)}{\partial x_1}\\
+\vdots\\
+\frac{\partial f(\bx)}{\partial x_n}
+\end{bmatrix}
+= \begin{bmatrix}
+\langle \be_1, \nabla f(\bx) \rangle\\
+\vdots\\
+\langle \be_n, \nabla f(\bx) \rangle
+\end{bmatrix}.
+$$
+
+Then, for an arbitrary direction 
+$\bd = \sum_{i=1}^n \be_i$, the directional derivative 
+becomes
+
+$$
+f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle
+= \nabla f(\bx)^T \bd
+= \sum_{i=1}^n \frac{\partial f(\bx)}{\partial x_i} d_i.
+$$
+
+Recall from {prf:ref}`def-cvxf-directional-derivative`,
+that the directional derivative is independent 
+on the choice of the inner product. This
+is also clear from the expression
+$\sum_{i=1}^n \frac{\partial f(\bx)}{\partial x_i} d_i$
+as the partial derivatives are independent of the
+choice of the inner product.
+
+However, this means that the gradient itself must
+depend on the choice of inner product. 
+If $\langle \cdot, \cdot \rangle_a$ 
+and $\langle \cdot, \cdot \rangle_b$
+are two different inner products defined on $\RR^n$,
+then the gradients of $f$ at $\bx$ w.r.t. the
+two inner products, denoted by $\nabla_a f(\bx)$
+and $\nabla_b f(\bx)$ must satisfy the relationship
+
+$$
+f'(\bx; \bd) = \langle \bd, \nabla_a f(\bx) \rangle_a
+= \langle \bd, \nabla_b f(\bx) \rangle_b
+\Forall \bd \in \VV.
+$$
+In the following, we shall assume that
+$\nabla f(\bx)$ denotes the gradient
+w.r.t. the dot product.
+
+Consider the inner product given by
+
+$$
+\langle \bx, \by \rangle_H = \bx^T \bH \by
+$$
+where $\bH \in \RR^{n \times n}$ is a symmetric
+positive definite matrix.
+
+Then,
+
+$$
+(\nabla_H f(\bx))_i &= \nabla_H f(\bx)^T \be_i 
+& \text{coordinate in standard basis}\\
+&= \nabla_H f(\bx)^T (\bH \bH^{-1}) \be_i & \text{$\bH$ is invertible}\\
+&= \nabla_H f(\bx)^T \bH (\bH^{-1}\be_i) & \\
+&= \langle \bH^{-1}\be_i, \nabla_H f(\bx) \rangle_H  
+& \text{by definition of this inner product} \\
+&= f'(\bx; \bH^{-1}\be_i)
+& \text{directional derivative w.r.t. this inner product} \\
+&= \nabla f(\bx)^T \bH^{-1}\be_i 
+& \text{directional derivative w.r.t. dot product}\\
+&= (\bH^{-1} \nabla f(\bx))^T \be_i
+& \text{$\bH$ is symmetric}.
+$$
+Thus,
+
+$$
+\nabla_H f(\bx) = \bH^{-1} \nabla f(\bx).
+$$
+
+
+Thus, the gradient w.r.t. the inner product
+$\langle \cdot, \cdot \rangle_H$ is the
+scaled version of the standard gradient
+where the scaling factor is $\bH^{-1}$.
+```
+
+###  Gradient in $\RR^{m \times n}$
+
+```{prf:remark} Gradient in $\RR^{m \times n}$
+:label: res-cvxf-gradient-r-m-n
+
+We next look at the vector space of real matrices.
+The standard basis is a family of unit matrices
+$\{ \bE_{i j} \}_{1 \leq i \leq m, 1 \leq j \leq n}$
+where $\bE_{i j}$ has the $(i,j)$-th entry as 1 and other
+entries as 0.
+
+The standard inner product is given by
+
+$$
+\langle \bX , \bY \rangle =  \Trace(\bY^T \bX )
+\Forall \bX, \bY \in \RR^{m \times n}.
+$$
+
+Let $f : \RR^{m \times n} \to \RR$ be a proper function.
+Let $S = \dom f$.
+Let $\bX \in \interior S$.
+Assume that $f$ is differentiable at $\bX$.
+
+The gradient is given by
+
+$$
+\partial f(\bX) = \left ( 
+  \frac{\partial f(\bX)}{\partial x_{i j}} \right )_{i j }.
+$$
+
+The directional derivative for some direction $\bD \in \RR^{m \times n}$
+is given by
+
+$$
+f(\bX ; \bD) = \langle \bD, \partial f(\bX) \rangle
+= \Trace(\partial f(\bX)^T \bD).
+$$
+
+
+Consider the inner product given by
+
+$$
+\langle \bX, \bY \rangle_H = \Trace(\bX^T \bH \bY)
+$$
+where $\bH \in \RR^{m \times m}$ is a symmetric
+positive definite matrix.
+
+Then,
+
+$$
+(\nabla_H f(\bX))_{i j} &= \Trace(\nabla_H f(\bX)^T \bE_{i j}) 
+& \text{coordinate in standard basis}\\
+&= \Trace(\nabla_H f(\bX)^T (\bH \bH^{-1}) \bE_{i j}) & \text{$\bH$ is invertible}\\
+&= \Trace(\nabla_H f(\bX)^T \bH (\bH^{-1}\bE_{i j}) ) & \\
+&= \langle \bH^{-1}\bE_{i j}, \nabla_H f(\bX) \rangle_H  
+& \text{by definition of this inner product} \\
+&= f'(\bX; \bH^{-1}\bE_{i j})
+& \text{directional derivative w.r.t. this inner product} \\
+&= \Trace(\nabla f(\bX)^T \bH^{-1}\bE_{i j}) 
+& \text{directional derivative w.r.t. standard inner product}\\
+&= (\bH^{-1} \nabla f(\bX))^T \bE_{i j}
+& \text{$\bH$ is symmetric}.
+$$
+Thus,
+
+$$
+\nabla_H f(\bX) = \bH^{-1} \nabla f(\bX).
+$$
+```
+
+
+## Proper Convex Functions
+
+### Existence of Directional Derivatives
+
+```{prf:theorem} Existence of directional derivatives for convex functions.
+:label: res-cvxf-dir-der-exist-convex
+
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $\bx \in \interior S$. 
+Then, for any $\bd \in \VV$, 
+the directional derivative $f'(\bx; \bd)$ exists.
+```
+
+This allows us to consider a mapping from a direction $\bd \in \VV$
+to the directional derivative of $f$ in this direction at $\bx$.
+We can define a directional derivative map
+parameterized by $\bx \in S$ as:
+
+$$
+\bg_x(\bd) \triangleq f'(\bx; \bd) = 
+\lim_{\alpha \downarrow 0} \frac{f(\bx + \alpha \bd) - f(\bx)}{\alpha}.
+$$
+We shall refer to such maps by $\bd \mapsto f'(\bx; \bd)$.
+
+```{prf:theorem} Convexity and homogeneity of $\bd \mapsto f'(\bx; \bd)$
+:label: res-cvxf-dir-der-convex-homo
+
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $\bx \in \interior S$.
+Then, the function $\bd \mapsto f'(\bx; \bd)$ is convex and nonnegative
+homogeneous. 
+
+Nonnegative homogeneity: For any $t \geq 0$ and $\bd \in \VV$,
+
+$$
+f'(\bx; t \bd) = t f'(\bx; \bd).
+$$
+```
+
+```{prf:proof}
+Convexity
+
+1. Let $\bd_1, \bd_2 \in \VV$ and $t \in (0, 1)$.
+1. Let $\bd = t \bd_1 + (1-t) \bd_2$.
+1. Then,
+   
+   $$
+   f'(\bx; \bd) &= f'(\bx; t \bd_1 + (1-t) \bd_2)\\
+   &= \lim_{\alpha \downarrow 0} \frac{f(\bx + \alpha [t \bd_1 + (1-t) \bd_2]) - f(\bx)}{\alpha}\\
+   &= \lim_{\alpha \downarrow 0} 
+   \frac{f(t \bx + \alpha t \bd_1 + (1-t) \bx + \alpha (1-t) \bd_2) - f(\bx)}{\alpha}\\
+   &= \lim_{\alpha \downarrow 0} 
+   \frac{f(t (\bx + \alpha \bd_1) + (1-t) (\bx + \alpha \bd_2)) - f(\bx)}{\alpha}\\
+   &\leq \lim_{\alpha \downarrow 0} 
+   \frac{t f(\bx + \alpha \bd_1) + (1-t) f(\bx + \alpha \bd_2) - t f(\bx) - (1-t)f(\bx)}{\alpha}\\
+   &= t \lim_{\alpha \downarrow 0} \frac{f(\bx + \alpha \bd_1) - f(\bx)}{\alpha} +
+   (1-t) \lim_{\alpha \downarrow 0} \frac{f(\bx + \alpha \bd_2) - f(\bx)}{\alpha}\\
+   &= t f'(\bx; \bd_1) + (1-t) f'(\bx; \bd_2).
+   $$
+   We used the convexity property of $f$ in this derivation.
+1. Thus, $f'(\bx; \bd)$ is convex.
+
+Nonnegative homogeneity
+
+1. For $t=0$,
+
+   $$
+   f'(\bx, 0 \bd) = f'(\bx, \bzero) = 0 = 0 f'(\bx; \bd).
+   $$
+   Thus, the homogeneity property is trivial for $t=0$.
+1. Now consider $t > 0$.
+1. Then, 
+
+   $$
+   f'(\bx; t \bd) &= \lim_{\alpha \downarrow 0} \frac{f(\bx + \alpha t \bd) - f(\bx)}{\alpha}\\
+   &= t \lim_{\alpha \downarrow 0} \frac{f(\bx + \alpha t \bd) - f(\bx)}{\alpha t}\\
+   &= t f'(\bx; \bd).
+   $$
+1. Thus, $f'(\bx; \bd)$ is nonnegative homogeneous.
+```
+
+Directional derivatives are a linear underestimator for convex functions.
+
+### As Linear Underestimator
+
+```{prf:theorem} Directional derivative as linear underestimator
+:label: res-cvxf-dir-der-underestimator
+
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $\bx \in \interior S$.
+Then, for every $\by \in S$
+
+$$
+f(\by) \geq f(\bx) + f'(\bx; \by - \bx).
+$$
+```
+
+```{prf:proof}
+Note that
+
+$$
+f'(\bx; \by - \bx) 
+&= \lim_{\alpha \downarrow 0} \frac{f(\bx + \alpha (\by - \bx)) - f(\bx)}{\alpha}\\
+&= \lim_{\alpha \downarrow 0} \frac{f((1-\alpha) \bx + \alpha \by) - f(\bx)}{\alpha}\\
+&\leq \lim_{\alpha \downarrow 0} \frac{(1-\alpha)f(\bx) + \alpha f(\by) - f(\bx)}{\alpha}\\
+&= \lim_{\alpha \downarrow 0} \frac{\alpha (f(\by) - f(\bx))}{\alpha}\\
+&= \lim_{\alpha \downarrow 0}(f(\by) - f(\bx)) = f(\by) - f(\bx).
+$$
+
+Thus,
+
+$$
+f(\by) \geq f(\bx) + f'(\bx; \by - \bx).
+$$
+```
+
+
+## Pointwise Maximum of Finite Set of Functions
+
+### Directional Derivative
 
 ```{prf:theorem} Directional derivative of a maximum of functions
 :label: res-cvxf-dir-der-max-funcs
@@ -659,139 +1120,18 @@ We can now compute the directional derivative.
    &= \underset{i \in I(\bx)}{\max} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}.
    $$
    We used the fact that $f_i(\bx) = f(\bx)$ for every $i \in I(\bx)$.
-1. Taking the limit $t \to 0^+$,
+1. Taking the limit $t \downarrow 0$,
 
    $$
    f'(\bx; \bd) 
-   &= \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t}\\
-   &= \lim_{t \to 0^+} \underset{i \in I(\bx)}{\max} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}\\
-   &= \underset{i \in I(\bx)}{\max} \lim_{t \to 0^+} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}\\
+   &= \lim_{t \downarrow 0} \frac{f(\bx + t \bd) - f(\bx)}{t}\\
+   &= \lim_{t \downarrow 0} \underset{i \in I(\bx)}{\max} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}\\
+   &= \underset{i \in I(\bx)}{\max} \lim_{t \downarrow 0} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}\\
    &= \underset{i \in I(\bx)}{\max} f'_i(\bx; \bd).
    $$
 ```
 
-
-
-## Proper Convex Functions
-
-### Existence of Directional Derivatives
-
-```{prf:theorem} Existence of directional derivatives for convex functions.
-:label: res-cvxf-dir-der-exist-convex
-
-Let $f: \VV \to \RERL$ be a proper convex function
-with $S = \dom f$.
-Let $\bx \in \interior S$. 
-Then, for any $\bd \in \VV$, 
-the directional derivative $f'(\bx; \bd)$ exists.
-```
-
-This allows us to consider a mapping from a direction $\bd \in \VV$
-to the directional derivative of $f$ in this direction at $\bx$.
-We can define a directional derivative map
-parameterized by $\bx \in S$ as:
-
-$$
-\bg_x(\bd) \triangleq f'(\bx; \bd) = 
-\lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd) - f(\bx)}{\alpha}.
-$$
-We shall refer to such maps by $\bd \mapsto f'(\bx; \bd)$.
-
-```{prf:theorem} Convexity and homogeneity of $\bd \mapsto f'(\bx; \bd)$
-:label: res-cvxf-dir-der-convex-homo
-
-Let $f: \VV \to \RERL$ be a proper convex function
-with $S = \dom f$.
-Let $\bx \in \interior S$.
-Then, the function $\bd \mapsto f'(\bx; \bd)$ is convex and nonnegative
-homogeneous. 
-
-Nonnegative homogeneity: For any $t \geq 0$ and $\bd \in \VV$,
-
-$$
-f'(\bx; t \bd) = t f'(\bx; \bd).
-$$
-```
-
-```{prf:proof}
-Convexity
-
-1. Let $\bd_1, \bd_2 \in \VV$ and $t \in (0, 1)$.
-1. Let $\bd = t \bd_1 + (1-t) \bd_2$.
-1. Then,
-   
-   $$
-   f'(\bx; \bd) &= f'(\bx; t \bd_1 + (1-t) \bd_2)\\
-   &= \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha [t \bd_1 + (1-t) \bd_2]) - f(\bx)}{\alpha}\\
-   &= \lim_{\alpha \to 0^+} 
-   \frac{f(t \bx + \alpha t \bd_1 + (1-t) \bx + \alpha (1-t) \bd_2) - f(\bx)}{\alpha}\\
-   &= \lim_{\alpha \to 0^+} 
-   \frac{f(t (\bx + \alpha \bd_1) + (1-t) (\bx + \alpha \bd_2)) - f(\bx)}{\alpha}\\
-   &\leq \lim_{\alpha \to 0^+} 
-   \frac{t f(\bx + \alpha \bd_1) + (1-t) f(\bx + \alpha \bd_2) - t f(\bx) - (1-t)f(\bx)}{\alpha}\\
-   &= t \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd_1) - f(\bx)}{\alpha} +
-   (1-t) \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd_2) - f(\bx)}{\alpha}\\
-   &= t f'(\bx; \bd_1) + (1-t) f'(\bx; \bd_2).
-   $$
-   We used the convexity property of $f$ in this derivation.
-1. Thus, $f'(\bx; \bd)$ is convex.
-
-Nonnegative homogeneity
-
-1. For $t=0$,
-
-   $$
-   f'(\bx, 0 \bd) = f'(\bx, \bzero) = 0 = 0 f'(\bx; \bd).
-   $$
-   Thus, the homogeneity property is trivial for $t=0$.
-1. Now consider $t > 0$.
-1. Then, 
-
-   $$
-   f'(\bx; t \bd) &= \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha t \bd) - f(\bx)}{\alpha}\\
-   &= t \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha t \bd) - f(\bx)}{\alpha t}\\
-   &= t f'(\bx; \bd).
-   $$
-1. Thus, $f'(\bx; \bd)$ is nonnegative homogeneous.
-```
-
-Directional derivatives are a linear underestimator for convex functions.
-
-### As Linear Underestimator
-
-```{prf:theorem} Directional derivative as linear underestimator
-:label: res-cvxf-dir-der-underestimator
-
-Let $f: \VV \to \RERL$ be a proper convex function
-with $S = \dom f$.
-Let $\bx \in \interior S$.
-Then, for every $\by \in S$
-
-$$
-f(\by) \geq f(\bx) + f'(\bx; \by - \bx).
-$$
-```
-
-```{prf:proof}
-Note that
-
-$$
-f'(\bx; \by - \bx) 
-&= \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha (\by - \bx)) - f(\bx)}{\alpha}\\
-&= \lim_{\alpha \to 0^+} \frac{f((1-\alpha) \bx + \alpha \by) - f(\bx)}{\alpha}\\
-&\leq \lim_{\alpha \to 0^+} \frac{(1-\alpha)f(\bx) + \alpha f(\by) - f(\bx)}{\alpha}\\
-&= \lim_{\alpha \to 0^+} \frac{\alpha (f(\by) - f(\bx))}{\alpha}\\
-&= \lim_{\alpha \to 0^+}(f(\by) - f(\bx)) = f(\by) - f(\bx).
-$$
-
-Thus,
-
-$$
-f(\by) \geq f(\bx) + f'(\bx; \by - \bx).
-$$
-```
-
-### Pointwise Maximum of Finite Set of Convex Functions
+### Finite Set of Convex Functions Case
 
 ```{prf:theorem} Directional derivative of pointwise maximum of convex functions
 :label: res-cvxf-dir-der-max-convex-funcs
