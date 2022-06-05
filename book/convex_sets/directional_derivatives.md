@@ -172,6 +172,7 @@ if $f$ is defined over $[a,b)$, then the
 
 $$
 f'_+(a) = \lim_{x \to a^+} \frac{f(x) - f(a)}{x - a}
+= \lim_{h \downarrow 0} \frac{f(a + h) - f(a)}{h}
 $$
 if the limit exists.
 Similarly, if $f$ is defined over $(c,a]$, then the
@@ -179,6 +180,8 @@ Similarly, if $f$ is defined over $(c,a]$, then the
 
 $$
 f'_-(a) = \lim_{x \to a^-} \frac{f(x) - f(a)}{x - a}
+= \lim_{h \uparrow 0} \frac{f(a + h) - f(a)}{h}
+= \lim_{r \downarrow 0} \frac{f(a) - f(a - r)}{r}
 $$
 if the limit exists.
 
@@ -508,6 +511,10 @@ $$
 f'(\bx;\bd) \triangleq \lim_{\alpha \downarrow 0} \frac{f(\bx + \alpha \bd) - f(\bx)}{\alpha}
 $$
 provided the limit exists.
+
+We say that $f$ is *directionally differentiable* at $\bx$
+if it is directionally differentiable in every direction
+at $\bx$.
 ```
 
 ```{div}
@@ -905,6 +912,11 @@ $$
 
 ### Existence of Directional Derivatives
 
+An important property of directional derivatives
+is that if $f$ is a proper convex function then
+$f$ is directionally differentiable at every
+$\bx \in \interior \dom f$.
+
 ```{prf:theorem} Existence of directional derivatives for convex functions.
 :label: res-cvxf-dir-der-exist-convex
 
@@ -913,6 +925,35 @@ with $S = \dom f$.
 Let $\bx \in \interior S$. 
 Then, for any $\bd \in \VV$, 
 the directional derivative $f'(\bx; \bd)$ exists.
+```
+
+```{prf:proof}
+This is a consequence of the directional differentiability
+of the scalar convex functions.
+
+1. Define the convex function $F : \RR \to \RR$ as
+
+   $$
+   F(t) = f(\bx + t \bd).
+   $$
+1. Let $I = \dom F$.
+1. Then $I$ is an interval of values for which
+   $\bx + t \by \in S$.
+1. Since $\bx \in \interior S$, hence
+   $t=0 \in \interior I$.
+1. We now note that
+
+   $$
+   f'(\bx; \bd) 
+   = \lim_{t \downarrow 0} \frac{f(\bx + t \bd) - f(\bx)}{t}
+   = \lim_{t \downarrow 0} \frac{F(t) - F(0)}{t}
+   = F'_+ (0).
+   $$
+   It is the right hand derivative of $F$ at $t=0$.
+1. By {prf:ref}`res-cvxf-rf-convex-osd`, $F'_+(0)$
+   exists.
+1. Hence $f'(\bx; \bd)$ exists for every $\bx \in \interior S$
+   and every $\bd \in \VV$.
 ```
 
 This allows us to consider a mapping from a direction $\bd \in \VV$
