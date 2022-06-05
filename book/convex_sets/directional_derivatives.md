@@ -319,9 +319,9 @@ left and right endpoints of the interval $I$.
 1. If $x, z \in I$ and $x < z$, then $f'_+(x) \leq f'_-(z)$.
 1. The functions $f'_-, f'_+ : \RR \to \ERL$ are nondecreasing over $I$.
 1. The function $f'_+$ is right-continuous at every interior point of $I$.
+   If $a \in I$ then $f'_+$ is right-continuous at $a$.
 1. The function $f'_-$ is left-continuous at every interior point of $I$.
-1. If $a \in I$ then $f'_+$ is right-continuous at $a$.
-1. If $b \in I$ then $f'_-$ is left-continuous at $b$.
+   If $b \in I$ then $f'_-$ is left-continuous at $b$.
 1. The function $f'_+$ is upper-semicontinuous at every $x \in I$.
 1. The function $f'_-$ is lower-semicontinuous at every $x \in I$.
 ```
@@ -391,6 +391,107 @@ left and right endpoints of the interval $I$.
 1. Hence $f'_+$ is nondecreasing.
 1. Similarly, $f'_-(x) \leq f'_+(x) \leq f'_-(z)$.
 1. Hence $f'_-$ is nondecreasing.
+
+(5)
+
+1. Pick any $x \in I$ such that $x \neq b$ (if $b \in I$).
+1. Then $x < b$.
+1. We can pick $h > 0$ and $r > 0$ such that
+   $x + h + r < b$.
+1. Then $f'_+(x + h) \leq \frac{f(x + h + r) - f(x + h)}{r}$.
+1. We established in {prf:ref}`res-cvxf-rf-open-domain-continuous`
+   that $f$ is continuous.
+1. Taking the limit $h \downarrow 0$, we obtain
+
+   $$
+   \lim_{h \downarrow 0} f'_+(x + h) \leq \frac{f(x + r) - f(x)}{r}.
+   $$
+   This is valid since $f$ is continuous.
+1. Now taking the limit $r \downarrow 0$ on the R.H.S., we obtain
+
+   $$
+   \lim_{h \downarrow 0} f'_+(x + h) \leq f'_+(x).
+   $$
+1. Since $f'_+$ is nondecreasing by claim (4), hence
+
+   $$
+   f'_+(x) \leq \lim_{h \downarrow 0} f'_+(x + h).
+   $$
+1. Together, we must have
+
+   $$
+   f'_+(x) = \lim_{h \downarrow 0} f'_+(x + h).
+   $$
+1. Hence $f'_+$ is right continuous at $x$.
+
+(6)
+1. An argument similar to (5) shows that $f'_-$ is 
+   left continuous at every $x \in I$ except for $x=a$
+   (if $a \in I$).
+
+
+(7) Upper semicontinuity of $f'_+$
+
+1. We need to show that for every $\epsilon > 0$
+   there exists $r > 0$ such that
+
+    $$
+    f'_+(y) < f'_+(x) + \epsilon \text{ for every } y \in (x-r, x+r) \cap I.
+    $$
+1. Pick some $\epsilon > 0$.
+1. Consider any $x \in \interior I$.
+1. By (6) $f'_+$ is right continuous at $x$.
+1. Hence there exists $r_1 > 0$ such that for every $y \in [x, x+r_1)$,
+   we have
+   
+   $$
+   |f'_+(y) - f'_+(x)| < \epsilon.
+   $$
+1. By (4), $f'_+$ is nondecreasing.
+   Hence for every $y \in [x, x+r_1)$
+
+   $$
+   |f'_+(y) - f'_+(x)| = f'_+(y) -  f'_+(x).
+   $$
+1. Hence for every $y \in [x, x+r_1)$, we have
+   
+   $$
+   f'_+(y) -  f'_+(x) < \epsilon
+   \iff f'_+(y) < f'_+(x) + \epsilon.
+   $$
+1. Now, let $r = \min(x - a, r_1)$.
+1. By monotonicity of $f'_+$, for every $y \in (x - r, x)$
+
+   $$
+   f'_+(y) \leq f'_+(x).
+   $$
+1. Hence for every $y \in (x, -r, x)$
+
+   $$
+   f'_+(y) < f'_+(x) + \epsilon.
+   $$
+1. Combining the two, for every $y \in (x - r, x + r)$, we have
+
+   $$
+   f'_+(y) < f'_+(x) + \epsilon.
+   $$
+1. Hence $f'_+$ is u.s.c. at $x$.
+1. Now, if $a \in I$ then let $x = a$.
+1. By right continuity of $f'_+$ at $a$, 
+   there exists $r > 0$ such that
+   for every $y \in [a, a + r)$, we have
+
+   $$
+   f'_+(y) < f'_+(a) + \epsilon.
+   $$
+1. Also $(a - r, a + r) \cap I = [a, a + r)$.
+1. Hence $f'_+$ is u.s.c. at $a$.
+1. If $b \in I$, then by convention $f'_+(b) = \infty$.
+1. Hence $f'_+$ is u.s.c. at $b$.
+
+(8) Lower semicontinuity of $f'_-$
+
+1. The argument is similar to (7).
 ```
 
 
