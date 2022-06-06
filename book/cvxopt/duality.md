@@ -331,6 +331,7 @@ you will stay in the lower closed halfspace. If you go up,
 you will hit the hyperplane.
 
 
+(sec:opt:duality:common:crossing)=
 ## Min Common/Max Crossing Duality
 
 ```{div}

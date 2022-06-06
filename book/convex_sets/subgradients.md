@@ -564,6 +564,156 @@ We have $\dom f = \VV$.
 1. Since this is valid for every $\bx \in \VV$, hence $\dom (\partial f) = \VV$.
 ```
 
+```{prf:theorem} Nonempty, convex and compact subdifferentials for proper convex functions
+:label: res-cvxf-subdiff-proper-convex-interior
+
+Let $f : \VV \to \RERL$ be a proper and convex function.
+Let $\bx \in \interior S$. Then
+$\partial f(\bx)$ is nonempty, convex and compact.
+```
+
+```{prf:proof}
+Let $\bx \in \interior S$.
+
+1. By {prf:ref}`res-cvxf-subdifferential-closed-convex`,
+   $\partial f(\bx)$ is closed and convex.
+1. By {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`,
+   $\partial f(\bx)$ is nonempty and bounded.
+1. Since $\partial f(\bx)$ is closed and bounded, hence
+   it must be compact since $\VV$ is a finite dimensional normed linear space.
+```
+
+We present an alternative proof based on the min common/max crossing
+framework developed in {ref}`sec:opt:duality:common:crossing`.
+This proof can be skipped in first reading.
+
+```{prf:proof}
+This proof is based on 
+the second min common/max crossing theorem
+{prf:ref}`res-opt-min-max-strong-duality-2`.
+
+We fix some $\bx \in \interior S$.
+We construct the set $M$ as
+
+$$
+M = \{ (\bu, t) \ST \bu \in \VV, f(\bx + \bu) \leq t \}. 
+$$
+
+We first consider the min common problem.
+
+1. Note that $(\bzero, f(\bx)) \in M$
+   since $f(\bx + \bzero) \leq f(\bx)$.
+1. Further see that the min common value
+
+   $$
+   p^* = \inf_{(\bzero, p) \in M} p = f(\bx).
+   $$
+1. Hence $p^*$ is finite.
+1. Note that $\overline{M} = M$ where
+
+   $$
+   \overline{M} = \{ (\bx, t) \in \VV \oplus \RR \ST \text{ there exists } 
+   \bar{t} \in \RR \text{ with } 
+   \bar{t} \leq t \text{ and } (\bx, \bar{t}) \in M \}.
+   $$
+1. $M$ is convex.
+   1. Let $(\bu_1, t_1), (\bu_2, t_2) \in M$ and let $r \in (0, 1)$.
+   1. Let $(\bu, t) = r (\bu_1, t_1) + (1-r) (\bu_2, t_2)$.
+   1. We have $f(\bx + \bu_1) \leq t_1$
+      and $f(\bx + \bu_2) \leq t_2$.
+   1. Now
+
+      $$
+      f(\bx + \bu)
+      &= f(\bx + r \bu_1 + (1-r) \bu_2) \\
+      &= f(r (\bx + \bu_1) + (1-r)(\bx + \bu_2)) \\
+      &\leq r f(\bx + \bu_1) + (1-r) f(\bx + \bu_2) \\
+      &\leq r t_1 + (1-r) t_2 = t.
+      $$
+   1. Hence $(\bu, t) \in M$.
+   1. Hence $M$ is convex.
+
+Next consider the max crossing problem and strong duality.
+1. We have 
+   
+   $$
+   q^* = \sup_{\ba \in \VV} q(\ba)
+   $$
+   where
+
+   $$
+   q(\ba) = \inf_{(\bu, t) \in M} \{ \langle \bu, \ba \rangle + t \}.
+   $$
+1. The set of optimal solutions of the max crossing problem
+   is given by
+
+   $$
+   Q^* = \{ \ba \in \VV \ST q(\ba) = q^* \}
+   $$
+1. For some $\ba \in Q^*$, we can attain strong duality with
+
+   $$
+   p^* = q^* = q(\ba)
+   $$
+   if and only if
+
+   $$
+   f(\bx) = \inf_{(\bu, t) \in M} \{ \langle \bu, \ba \rangle + t \}.
+   $$
+1. Equivalently
+
+   $$
+   f(\bx) \leq f(\bx + \bu) + \langle \bu, \ba \rangle \Forall \bu \in \VV.
+   $$
+1. Equivalently
+
+   $$
+   f(\bx + \bu) \geq f(\bx) + \langle \bu, -\ba \rangle \Forall \bu \in \VV.
+   $$
+1. But this is nothing but the subgradient inequality with $-\ba$
+   as the subgradient at $\bx$.
+1. In other words, strong duality is attained at $\ba$ as a solution
+   of the max crossing problem if and only if
+   $-\ba$ is a subgradient of $f$.
+1. Hence $Q^*$ with strong duality
+   is given by $-\partial f(\bx)$.
+
+We next establish the conditions for the
+second min common/max crossing theorem
+{prf:ref}`res-opt-min-max-strong-duality-2`
+
+1. Consider the set
+
+   $$
+   D = \{ \bu \in \VV \ST \text{ there exists } 
+   t \in \RR \text{ with }  (\bu, t) \in M \}.
+   $$
+1. It is easy to see that $D = S - \bx$.
+   1. Consider the set $T = S - \bx$.
+   1. Let $\bu \in T$.
+   1. Then $\bx + \bu \in S$.
+   1. Hence $f(\bx + \bu) \leq f(\bx + \bu)$.
+   1. Hence $(\bu, f(\bx + \bu)) \in M$.
+   1. Hence $\bu \in D$.
+   1. Hence $T = S - \bx \subseteq D$.
+   1. Let $\bu \notin T$.
+   1. Then $\bu + \bx \notin S$.
+   1. Hence $f(\bu + \bx) = \infty$.
+   1. Hence for every $t \in \RR$, $f(\bu + \bx) > t$.
+   1. Hence $(\bu, t) \notin M$ for every $t \in \RR$.
+   1. Hence $\bu \notin D$.
+   1. Hence $D = T = S - \bx$. 
+1. Since $\bx \in \interior S$, hence $\bzero \in \interior D$.
+1. We see that all the conditions of the second min common/max crossing
+   theorem are satisfied.
+   1. $p^*$ is finite.
+   1. $\overline{M} = M$ is convex.
+   1. The set $D$ contains $\bzero$ in its interior.
+1. Hence $-\partial f(\bx)$ is nonempty, convex and compact.
+1. Hence $\partial f(\bx)$ is also nonempty, convex and compact.
+```
+
+
 
 ```{prf:theorem} Subgradients over a compact set are nonempty and bounded
 :label: res-cvxf-subg-compact-nonempty-bounded
