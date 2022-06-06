@@ -32,22 +32,24 @@ is an interval.
 ```{prf:theorem} Characterization of real convex functions
 :label: res-cvxf-rf-convex-charac
 
-Let $f: \RR \to \RR$ be a real function with $\dom f = (a,b)$
-which is an open interval.
+Let $f: \RR \to \RR$ be a real function with $\dom f = I$
+which is an interval (closed or open or semi-open).
+Let $a$ and $b$ be the left and right endpoints of the interval $I$.
+
 The following are equivalent.
 
-1. $f$ is convex.
-1. For every $x_1, x_2, x_3 \in (a, b)$ with $x_1 < x_2 < x_3$,
+1. $f$ is convex over $I$.
+1. For every $x_1, x_2, x_3 \in I$ with $x_1 < x_2 < x_3$,
 
    $$
    \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}.
    $$
-1. For every $x_1, x_2, x_3 \in (a, b)$ with $x_1 < x_2 < x_3$,
+1. For every $x_1, x_2, x_3 \in I$ with $x_1 < x_2 < x_3$,
 
    $$
    \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_2)}{x_3 - x_2}.
    $$
-1. For every $x_1, x_2, x_3 \in (a, b)$ with $x_1 < x_2 < x_3$,
+1. For every $x_1, x_2, x_3 \in I$ with $x_1 < x_2 < x_3$,
 
    $$
    \frac{f(x_3) - f(x_1)}{x_3 - x_1} \leq \frac{f(x_3) - f(x_2)}{x_3 - x_2}.
@@ -89,7 +91,7 @@ Assume that $f$ is convex.
 
 (2) $\implies$ (1)
 
-1. Let $x_1, x_3 \in (a, b)$ and $t \in (0, 1)$.
+1. Let $x_1, x_3 \in I$ and $t \in (0, 1)$.
 1. WLOG, assume that $x_1 < x_3$.
 1. Let $\alpha = t$ and $\beta = (1-t)$.
 1. Let $x_2 =  \alpha x_1 + \beta x_3$.
@@ -109,7 +111,7 @@ Assume that $f$ is convex.
 
 (2) $\iff$ (3)
 
-1. Pick any $x_1, x_2, x_3 \in (a, b)$ with $x_1 < x_2 < x_3$.
+1. Pick any $x_1, x_2, x_3 \in I$ with $x_1 < x_2 < x_3$.
 1. By hypothesis (2)
 
    $$
@@ -127,7 +129,7 @@ Assume that $f$ is convex.
 
 (2) $\iff$ (4)
 
-1. Pick any $x_1, x_2, x_3 \in (a, b)$ with $x_1 < x_2 < x_3$.
+1. Pick any $x_1, x_2, x_3 \in I$ with $x_1 < x_2 < x_3$.
 1. By hypothesis (2)
 
    $$
@@ -142,27 +144,6 @@ Assume that $f$ is convex.
    \iff & \frac{f(x_3) - f(x_1)}{x_3 - x_1} \leq \frac{f(x_3) - f(x_2)} {x_3 - x_2}.
    $$
 ```
-
-The previous result is limited to real convex functions with
-an open interval as domain. We can say something about
-all real convex functions.
-
-```{prf:theorem} Slopes of intercepts on a real convex function
-:label: res-cvxf-rf-slope-intercept
-
-Let $f: \RR \to \RR$ be a real convex function with $I = \dom f$.
-Let $x, y, z \in I$ such that $x < y < z$.
-Then
-
-$$
-\frac{f(y) - f(x)}{y - x} \leq \frac{f(z) - f(x)}{z - x} 
-\leq \frac{f(z) - f(y)}{z - y}.
-$$
-```
-```{prf:proof}
-The proof is similar to the proof of {prf:ref}`res-cvxf-rf-convex-charac`.
-```
-
 
 ### One Sided Derivatives
 
@@ -185,12 +166,83 @@ f'_-(a) = \lim_{x \to a^-} \frac{f(x) - f(a)}{x - a}
 $$
 if the limit exists.
 
+
+We introduce two helper functions
+
+$$
+s_+(x, h) = \frac{f(x + h) - f(x)}{h}
+$$
+and
+
+$$
+s_-(x, h) = \frac{f(x) - f(x-h)}{h}
+$$
+where $h > 0$.
+
+Then
+
+$$
+f'_+(x) = \lim_{h \downarrow 0} s_+(x, h)
+$$
+and
+
+$$
+f'_-(x) = \lim_{h \downarrow 0} s_-(x, h).
+$$
+
 An interesting property of convex functions is that
 the one sided derivatives always exist.
 On the real line, there are only two directions
 to move; left and right. The one sided derivatives
 play the role of directional derivatives on the
 real line.
+
+```{prf:lemma} Monotonicity of $s_+$ and $s_-$ for convex functions
+:label: res-cvxf-rf-s-monotonic
+
+Let $f: \RR \to \RR$ with $\dom f = I$ be convex.
+Let $a$ and $b$ be the
+left and right endpoints of the interval $I$.
+Then $s_+$ and $s_-$ as functions of $h$ are monotonic.
+
+1. $s_+(x, h)$ is a nondecreasing function of $h$.
+1. $s_-(x, h)$ is a nonincreasing function of $h$.
+```
+
+```{prf:proof}
+Monotonicity of $s_+$.
+
+1. Let $x \in I$ such that $x \neq b$.
+1. Let $h_1, h_2 > 0$ such that $h_1 < h_2$ and $x + h_2 \in I$.
+1. Consider the three points $x < x + h_1 < x + h_2$.
+1. Then 
+
+   $$
+   \frac{f(x+h_1) - f(x)}{h_1} \leq \frac{f(x+h_2) - f(x)}{h_2}.
+   $$
+1. Hence $s_+(x, h_1) \leq s_+(x, h_2)$.
+1. Hence $s_+$ is a nondecreasing function of $h$.
+
+The argument for monotonicity of $s_-$ is similar.
+```
+
+```{prf:observation} One sided derivatives as infimum/supremum
+:label: res-cvxf-rf-one-sided-derivative-inf-sup
+
+Due to the monotonicity of $s_+$ over $h$, we have
+
+$$
+f'_+(x) = \lim_{h \downarrow 0} s_+(x, h)
+= \inf_{h > 0}s_+(x, h).
+$$
+
+Similarly, due to the monotonicity of $s_+$ over $h$, we have
+
+$$
+f'_-(x) = \lim_{h \downarrow 0} s_-(x, h)
+= \sup_{h > 0}s_-(x, h).
+$$
+```
 
 ```{prf:theorem} Real convex functions and one sided derivatives
 :label: res-cvxf-rf-convex-osd
@@ -223,7 +275,7 @@ We are given that $f$ is convex over $(a,b)$.
    $$
 1. Let $0 < h_1 < h_2$ such that $h_2 < r$.
 1. Let $x_1 = x$, $x_2 = x + h_1$, $x_3 = x + h_2$.
-1. Since $f$ is convex, hence by {prf:ref}`res-cvxf-rf-slope-intercept`
+1. Since $f$ is convex, hence by {prf:ref}`res-cvxf-rf-convex-charac`
 
    $$
    \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}.
@@ -342,7 +394,7 @@ left and right endpoints of the interval $I$.
    $$
    \frac{f(x) - f(x - h)}{h} \leq \frac{f(x + h) - f(x)}{h}
    $$
-   due to {prf:ref}`res-cvxf-rf-slope-intercept`.
+   due to {prf:ref}`res-cvxf-rf-convex-charac`.
 1. Taking the limit $h \downarrow 0$, we see that
 
    $$
@@ -372,7 +424,7 @@ left and right endpoints of the interval $I$.
 
 (3)
 1. Let $y = \frac{x + z}{2}$.
-1. Due to {prf:ref}`res-cvxf-rf-slope-intercept`, we have
+1. Due to {prf:ref}`res-cvxf-rf-convex-charac`, we have
 
    $$
    \frac{f(y) - f(x)}{y - x} \leq \frac{f(z) - f(y)}{z - y}.
@@ -956,7 +1008,42 @@ of the scalar convex functions.
    and every $\bd \in \VV$.
 ```
 
-This allows us to consider a mapping from a direction $\bd \in \VV$
+```{prf:observation} Relation between the directional derivatives in opposite directions
+:label: res-cvxf-dir-der-opposite
+
+We can see that
+
+$$
+f'(\bx; -\bd) 
+= \lim_{t \downarrow 0} \frac{f(\bx - t \bd) - f(\bx)}{t}
+= \lim_{t \downarrow 0} \frac{F(-t) - F(0)}{t}
+= - \lim_{r \uparrow 0} \frac{F(r) - F(0)}{r}
+= - F'_- (0).
+$$
+Hence
+
+$$
+F'_- (0) = - f'(\bx; -\bd).
+$$
+
+By {prf:ref}`res-cvxf-rf-one-sided-der-props`
+
+$$
+F'_- (0) \leq F'_+(0).
+$$
+
+Hence
+
+$$
+- f'(\bx; -\bd) \leq f'(\bx; \bd) \Forall \bd \in \VV.
+$$
+```
+
+
+### Directional Derivatives Map
+
+The existence of directional derivatives in all directions
+allows us to consider a mapping from a direction $\bd \in \VV$
 to the directional derivative of $f$ in this direction at $\bx$.
 We can define a directional derivative map
 parameterized by $\bx \in S$ as:
@@ -1025,9 +1112,9 @@ Nonnegative homogeneity
 1. Thus, $f'(\bx; \bd)$ is nonnegative homogeneous.
 ```
 
-Directional derivatives are a linear underestimator for convex functions.
-
 ### As Linear Underestimator
+
+Directional derivatives are a linear underestimator for convex functions.
 
 ```{prf:theorem} Directional derivative as linear underestimator
 :label: res-cvxf-dir-der-underestimator
