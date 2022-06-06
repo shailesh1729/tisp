@@ -15,6 +15,8 @@ as needed.
 
 ## Subgradients
 
+```{index} Subgradient
+```
 ````{prf:definition} Subgradient
 :label: def-cvxf-subgradient
 
@@ -90,6 +92,8 @@ more than one subgradients. It is thus natural to introduce
 the notion of the set of all subgradients of $f$ at a specific
 point $\bx \in \dom f$.
 
+```{index} Subdifferential
+```
 ```{prf:definition} Subdifferential set
 :label: def-cvxf-subdifferential
 Let $f : \VV \to \RERL$ be a proper function.
@@ -160,6 +164,8 @@ same as those in $ B_{\| \cdot \|_*}[\bzero, 1]$.
 The subdifferential of a function $f$ may be empty at specific points
 $\bx \in \VV$.
 
+```{index} Subdifferentiability
+```
 ```{prf:definition} Subdifferentiability
 :label: def-cvxf-subdifferentiable
 
@@ -167,6 +173,8 @@ A proper function $f : \VV \to \RERL$ is called *subdifferentiable*
 at some $\bx \in \dom f$ if $\partial f(\bx) \neq \EmptySet$. 
 ```
 
+```{index} Subdifferentiability; domain
+```
 ```{prf:definition} Domain of subdifferentiability
 :label: def-cvxf-domain-subdifferentiable
 

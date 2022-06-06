@@ -551,6 +551,8 @@ left and right endpoints of the interval $I$.
 
 ## Directional Derivatives of Proper Functions
 
+```{index} Directional derivative
+```
 ```{prf:definition} Directional derivative
 :label: def-cvxf-directional-derivative
 
@@ -624,6 +626,8 @@ maximum of a finite set of functions.
 
 ### Differentiability of Proper Functions
 
+```{index} Differentiability; proper function
+```
 ````{prf:definition} Differentiability of proper functions
 :label: def-cvxf-differentiability-proper
 
