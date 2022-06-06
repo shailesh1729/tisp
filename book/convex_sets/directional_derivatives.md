@@ -1039,6 +1039,159 @@ $$
 $$
 ```
 
+```{prf:observation} Directional derivative as infimum
+:label: res-cvxf-dir-der-infimum
+
+Let $f: \VV \to \RERL$ be a proper convex function
+with $S = \dom f$.
+Let $\bx \in \interior S$. 
+Then, for any $\bd \in \VV$, 
+
+$$
+f'(\bx; \bd) = \inf_{t > 0} \frac{f(\bx + t \bd) - f(\bx)}{t}.
+$$
+
+This follows from the fact that
+$F(t) = f(\bx + t \bd)$ is convex
+and due to {prf:ref}`res-cvxf-rf-one-sided-derivative-inf-sup`,
+
+$$
+f'(\bx; \bd) = F'_+(0)
+= \inf_{t > 0} \frac{F(t) - F(0)}{t}
+= \inf_{t > 0} \frac{f(\bx + t \bd) - f(\bx)}{t}.
+$$
+```
+
+### Upper Semicontinuity
+
+The next result generalizes the upper semicontinuity
+property of the right hand derivatives of real convex
+functions.
+
+```{prf:theorem}
+Let $f: \VV \to \RERL$ be a proper convex function
+with $\dom f = S$.
+Assume that $S$ is an open subset of $\VV$.
+Let $\{ f_k \}$ be a sequence of
+proper convex functions $f_k : \VV \to \RERL$
+with $\dom f_k = S$ with the property that
+
+$$
+\lim_{k \to \infty} f_k(\bx_k) = f(\bx)
+$$
+holds true for every $\bx \in S$
+and every sequence $\{ \bx_k \}$ of $S$ that converges to $\bx$.
+Then for any $\bx \in S$ and any direction $\bd \in \VV$
+and any sequences $\{ \bx_k \}$ of $S$
+and $\{ \bd_k \}$ of $\VV$ converging to $\bx$ and $\bd$
+respectively, we have
+
+$$
+\limsup_{k \to \infty} f'_k (\bx_k; \bd_k ) \leq f'(\bx; \bd).
+$$
+Furthermore if $f$ is differentiable over $S$,
+then $f$ is also continuously differentiable over $S$.
+```
+
+```{prf:proof}
+Limit superior
+
+1. Choose any $\epsilon > 0$.
+1. By definition of the directional derivative, there exists a $t > 0$
+   such that
+
+   $$
+   \frac{f(\bx + t \bd) - f(\bx)}{t} < f'(\bx; \bd) + \epsilon.
+   $$
+1. Due to {prf:ref}`res-cvxf-dir-der-infimum`, for every $k$
+   and every $t > 0$, we have
+
+   $$
+   f'_k(\bx_k; \bd_k) \leq \frac{f_k(\bx_k + t \bd_k) - f(\bx_k)}{t}.
+   $$
+1. Now
+
+   $$
+   \lim_{k \to \infty} \frac{f_k(\bx_k + t \bd_k) - f(\bx_k)}{t}
+   = \frac{f(\bx + t \bd) - f(\bx)}{t}.
+   $$
+1. Hence for sufficiently large $k$, we have
+
+   $$
+   f'_k(\bx_k; \bd_k) \leq \frac{f_k(\bx_k + t \bd_k) - f(\bx_k)}{t}
+   < f'(\bx; \bd) + \epsilon.
+   $$
+1. By taking the limit superior on the L.H.S. as $k \to \infty$, we have
+
+   $$
+   \limsup_{k \to \infty} f'_k (\bx_k; \bd_k ) \leq f'(\bx; \bd) + \epsilon.
+   $$
+1. Since this is valid for every $\epsilon > 0$, hence we must have
+
+   $$
+   \limsup_{k \to \infty} f'_k (\bx_k; \bd_k ) \leq f'(\bx; \bd)
+   $$
+   as desired.
+
+
+Continuous differentiability
+
+1. We are given that $f$ is differentiable over $S$.
+1. Then $f$ is also continuous over $S$.
+1. Let $\bx \in S$.
+1. Let $\{ \bx_k \}$ be a sequence of $S$ converging to $\bx$.
+1. Let $\bd \in \VV$ be any nonzero direction.
+1. Due to {prf:ref}`res-cvxf-grad-dir-der`, for every $k$,
+
+   $$
+    f'(\bx_k; \bd) = \langle \bd, \nabla f(\bx_k) \rangle.
+   $$
+1. Hence
+
+   $$
+   \limsup_{k \to \infty} \langle \bd, \nabla f(\bx_k) \rangle
+   &= \limsup_{k \to \infty} f'(\bx_k; \bd)\\
+   &\leq f'(\bx; \bd) \\
+   &= \langle \bd, \nabla f(\bx) \rangle.
+   $$
+1. By replacing $\bd$ with $-\bd$ in the previous argument,
+   we have
+
+   $$
+   - \liminf_{k \to \infty} \langle \bd, \nabla f(\bx_k) \rangle
+   &= \limsup_{k \to \infty} \langle -\bd, \nabla f(\bx_k) \rangle\\
+   &= \limsup_{k \to \infty} f'(\bx_k; -\bd)\\
+   &\leq f'(\bx; -\bd)\\
+   &= -\langle \bd, \nabla f(\bx) \rangle.
+   $$
+1. Hence
+
+   $$
+   \liminf_{k \to \infty} \langle \bd, \nabla f(\bx_k) \rangle
+   \geq \langle \bd, \nabla f(\bx) \rangle.
+   $$
+1. Thus we have
+
+   $$
+   \limsup_{k \to \infty} \langle \bd, \nabla f(\bx_k) \rangle
+   \leq
+   \liminf_{k \to \infty} \langle \bd, \nabla f(\bx_k) \rangle.
+   $$
+1. But then this must be an equality. Hence
+
+   $$
+   \lim_{k \to \infty} \langle \bd, \nabla f(\bx_k) \rangle
+   = \langle \bd, \nabla f(\bx) \rangle.
+   $$
+1. Since this is valid for every nonzero direction $\bd \in \VV$,
+   hence we must have
+
+   $$
+   \lim_{k \to \infty} \nabla f(\bx_k)  = \nabla f(\bx).
+   $$
+1. Hence $\nabla f$ is continuous at every $\bx \in S$.
+1. Hence $f$ is continuously differentiable at every $\bx \in S$.
+```
 
 ### Directional Derivatives Map
 
