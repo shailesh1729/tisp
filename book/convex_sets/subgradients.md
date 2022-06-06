@@ -85,6 +85,61 @@ f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle \Forall \by \in \dom f.
 ```
 ````
 
+### Supporting Hyperplane Interpretation
+
+```{prf:observation} Subgradient and supporting hyperplane
+:label: res-cvxf-subgradient-supporting-hyperplane
+
+Let $f: \VV \to \RERL$ be a proper function.
+Then $\bg$ be a subgradient of $f$ at $\bx$
+if and only if $\epi f$ has a supporting
+hyperplane at $(\bx, f(\bx))$ with
+a normal $(-\bg, 1)$. 
+
+Let $H$ be a supporting hyperplane of $\epi f$ at $(\bx, f(\bx))$
+with the normal $(-\bg, 1)$. 
+
+1. Then
+
+   $$
+   H = \{ (\by, t) \ST \langle \by, -\bg \rangle  + t 
+      =  \langle \bx, -\bg \rangle + f(\bx) \}.
+   $$
+1. For any $(\by, f(\by)) \in \epi f$, we must have
+
+   $$
+   & \langle \by, -\bg \rangle  + f(\by) 
+      \geq  \langle \bx, -\bg \rangle + f(\bx) \\
+   \iff & f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle.
+   $$
+1. Then $\bg$ is a subgradient of $f$ at $\bx$.
+
+Now let $\bg$ be a subgradient of $f$ at $\bx$.
+
+1. Let $(\by, t) \in \epi f$.
+1. Then we have
+
+   $$
+   t \geq f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle.
+   $$
+1. Rearranging the terms, we have
+
+   $$
+   \langle \by, -\bg \rangle + t
+   \geq \langle \bx, -\bg \rangle + f(\bx) 
+   $$
+   for every $(\by, t) \in \epi f$.
+1. Then the hyperplane
+
+   $$
+   H = \{ (\by, t) \ST \langle \by, -\bg \rangle  + t 
+      =  \langle \bx, -\bg \rangle + f(\bx) \}
+   $$
+   is indeed a supporting hyperplane for $\epi f$.
+1. The normal vector for this hyperplane is $(-\bg, 1)$
+   and it passes through the point $(\bx, f(\bx))$.
+```
+
 ## Subdifferential
 
 At a point $\bx \in \dom f$, it is possible that there are
