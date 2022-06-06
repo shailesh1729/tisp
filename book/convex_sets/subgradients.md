@@ -909,6 +909,38 @@ We proceed as follows.
 
 ## Directional Derivatives
 
+The directional derivative of a proper convex function
+is closely linked with its subdifferential.
+To see this, let $\bx \in \interior \dom f$,
+let $\bd \in \VV$ be a nonzero direction
+and $t > 0$.
+Let $\bg \in \partial f(\bx)$
+and consider the subgradient inequality
+
+$$
+f(\bx + t \bd) \geq f(\bx) + \langle t \bd, \bg \rangle.
+$$
+Hence
+
+$$
+\frac{f(\bx + t \bd) - f(\bx)}{t} \geq \langle \bd, \bg \rangle
+$$
+We saw in {prf:ref}`res-cvxf-dir-der-infimum` that
+$\frac{f(\bx + t \bd) - f(\bx)}{t}$ is a nondecreasing
+quantity and
+
+$$
+f'(\bx; \bd) = \inf_{t > 0} \frac{f(\bx + t \bd) - f(\bx)}{t}.
+$$
+This establishes the basic relation
+
+$$
+f'(\bx; \bd) \geq  \langle \bd, \bg \rangle
+$$
+for every $\bg \in \partial f(\bx)$.
+In fact a stronger result is available in the form of
+max formula.
+
 ### Max Formula
 
 The max formula is one of the key results in this section.
