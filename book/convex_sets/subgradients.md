@@ -834,8 +834,14 @@ subspace topology of its affine hull.
 
 Let $f: \VV \to \RERL$ be a proper convex function
 with $S = \dom f$.
-Let $\ba \in \relint S$.
-Then, $\partial f (\ba)$ is nonempty. 
+Let $\bx \in \relint S$.
+Then, $\partial f (\bx)$ is nonempty and has the form
+
+$$
+\partial f(\bx) = L^{\perp} + G
+$$
+where $L$ is the subspace that is parallel to $\affine S$
+and $G$ is a nonempty and compact set.
 
 In other words, for a proper convex function, the subdifferential
 at the relative interior points of its domain is nonempty.
@@ -845,6 +851,66 @@ $$
 \relint \dom f \subseteq \dom (\partial f).
 $$
 ```
+The proof is based on the min common/max crossing
+framework developed in {ref}`sec:opt:duality:common:crossing`.
+It can be skipped in first reading.
+It follows the proof of {prf:ref}`res-cvxf-subdiff-proper-convex-interior`.
+
+```{prf:proof}
+This proof is based on 
+the second min common/max crossing theorem
+{prf:ref}`res-opt-min-max-strong-duality-2`.
+
+We fix some $\bx \in \relint S$.
+We construct the set $M$ as
+
+$$
+M = \{ (\bu, t) \ST \bu \in \VV, f(\bx + \bu) \leq t \}. 
+$$
+We have already established the following in the proof of
+{prf:ref}`res-cvxf-subdiff-proper-convex-interior`:
+1. $M$ is convex.
+1. $\overline{M} = M$.
+1. $p^* = f(\bx)$.
+1. $p^*$ is finite.
+1. $q^* = \sup_{\ba \in \VV} q(\ba)$
+   where
+
+   $$
+   q(\ba) = \inf_{(\bu, t) \in M} \{ \langle \bu, \ba \rangle + t \}.
+   $$
+1. $Q^* = \{ \ba \in \VV \ST q(\ba) = q^* \}$.
+1. When the strong duality holds, then
+
+   $$
+   Q^* = -\partial f(\bx).
+   $$
+1. The set
+
+   $$
+   D = \{ \bu \in \VV \ST \text{ there exists } 
+   t \in \RR \text{ with }  (\bu, t) \in M \}
+   = S - \bx.
+   $$
+
+Continuing further
+
+1. Since $\bx \in \relint S$, hence $\bzero \in \relint D$.
+1. Hence $\affine D = \affine S - \bx = L$.
+1. Hence by the second min common/max crossing theorem
+
+   $$
+   -\partial f(\bx) = Q^* = L^{\perp} + \tilde{Q}
+   $$
+   where $\tilde{Q}$ is a nonempty, convex and compact set.
+1. Negating on both sides, we obtain
+
+   $$
+   \partial f(\bx) = L^{\perp} + G
+   $$
+   where $G$ is a nonempty, convex and compact set.
+```
+
 
 ```{prf:corollary} Existence of points with nonempty subdifferential
 :label: res-cvxf-subdiff-exist-relint
