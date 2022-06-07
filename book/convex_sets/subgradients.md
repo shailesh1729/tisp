@@ -241,7 +241,7 @@ $$
 $$
 ```
 
-### Properties of Subdifferential Set
+### Closedness and Convexity
 
 ```{prf:theorem} Closedness and convexity of the subdifferential set
 :label: res-cvxf-subdifferential-closed-convex
@@ -277,6 +277,8 @@ $$
 Thus,  $\partial f(\bx)$ is an infinite intersection of closed and convex sets.
 Hence $\partial f(\bx)$ is closed and convex.
 ```
+
+### Subdifferentiability and Convex Domain
 
 ```{prf:theorem} Subdifferentiability + Convex domain $\implies$ Convexity
 :label: res-cvxf-subdiff-cvx-dom-cvx
@@ -324,7 +326,7 @@ A convex function need not be subdifferentiable at every point in its domain.
 The problem usually occurs at the boundary points of the domain if the domain
 is not open.
 
-
+### Positive Scaling
 
 ```{prf:theorem} Multiplication by a positive scalar
 :label: res-cvxf-subdiff-scaling
@@ -361,9 +363,9 @@ Let $\bg \in \partial f(\bx)$.
    $$
 ```
 
-### Proper Convex Functions
+## Proper Convex Functions
 
-In this section, we discuss the properties of the
+In this subsection, we discuss the properties of the
 subdifferential sets for proper convex functions.
 
 A proper convex function may not be subdifferentiable
@@ -372,6 +374,7 @@ However, it is indeed subdifferentiable at
 the interior points and relative interior points
 of its domain.
 
+### Nonemptiness and Boundedness at Interior Points
 
 ```{prf:theorem} Nonemptiness and boundedness of the subdifferential at interior points
 :label: res-cvxf-proper-interior-subdiff-nonempty-bounded
@@ -564,6 +567,8 @@ We have $\dom f = \VV$.
 1. Since this is valid for every $\bx \in \VV$, hence $\dom (\partial f) = \VV$.
 ```
 
+### Nonempty, Convex and Compact Subdifferentials
+
 ```{prf:theorem} Nonempty, convex and compact subdifferentials for proper convex functions
 :label: res-cvxf-subdiff-proper-convex-interior
 
@@ -713,7 +718,7 @@ second min common/max crossing theorem
 1. Hence $\partial f(\bx)$ is also nonempty, convex and compact.
 ```
 
-
+### Subgradients over a Compact Set
 
 ```{prf:theorem} Subgradients over a compact set are nonempty and bounded
 :label: res-cvxf-subg-compact-nonempty-bounded
@@ -822,6 +827,7 @@ $$
 It is interior of the convex set w.r.t. the 
 subspace topology of its affine hull.
 
+### Nonempty Subdifferential at Relative Interior Points
 
 ```{prf:theorem} Nonemptiness of the subdifferential at relative interior points
 :label: res-cvxf-relint-subdiff-nonempty
@@ -860,6 +866,7 @@ is convex and nonempty.
    $\partial f(\bx)$ is nonempty.
 ```
 
+### Unbounded Subdifferential
 
 ```{prf:theorem} Unboundedness condition for subdifferential
 :label: res-cvxf-subdiff-relint-unbounded
@@ -934,9 +941,10 @@ f'(\bx; \bd) = \inf_{t > 0} \frac{f(\bx + t \bd) - f(\bx)}{t}.
 $$
 This establishes the basic relation
 
-$$
+```{math}
+:label: eq-cvxf-subg-dir-der-inequality
 f'(\bx; \bd) \geq  \langle \bd, \bg \rangle
-$$
+```
 for every $\bg \in \partial f(\bx)$.
 In fact a stronger result is available in the form of
 max formula.
@@ -1497,6 +1505,167 @@ $$
 $$
 ```
 
+
+###  Linear Transformations
+
+```{div}
+Our interest here is in compositions of the
+form $h = f \circ \bAAA$ where $\bAAA$ is a linear transformation.
+In other words $h (\bx) = f (\bAAA(\bx))$.
+
+If $\bAAA : \VV \to \WW$ is a linear transformation
+then $\bAAA^T : \WW^* \to \VV^*$ is a mapping from 
+$\WW^*$ to $\VV^*$ and satisfies the relationship:
+
+$$
+\langle \bAAA (\bx), \by \rangle = \langle \bx, \bAAA^T (\by) \rangle.
+$$
+
+From the definition of directional derivative, we have
+
+$$
+h'(\bx; \bd) 
+&= \lim_{t \downarrow 0} \frac{h(\bx + t \bd) - h(\bx)}{t} \\
+&= \lim_{t \downarrow 0} \frac{f(\bAAA(\bx + t \bd)) - f(\bAAA(\bx))}{t}\\
+&= \lim_{t \downarrow 0} \frac{f(\bAAA(\bx) + t \bAAA(\bd)) - f(\bAAA(\bx))}{t}\\
+&= f'(\bAAA(\bx); \bAAA(\bd)).
+$$
+```
+
+```{prf:theorem} Weak linear transformation rule of subdifferential calculus
+:label: res-cvxf-subdiff-weak-rule-linear
+
+
+Let $f: \WW \to \RERL$ be a proper function.
+Let $\bAAA : \VV \to \WW$ be a linear transformation.
+Define $h : \VV \to \RERL$ as 
+
+$$
+h (\bx) = f (\bAAA(\bx)).
+$$
+
+Assume that $h$ is proper, i.e. $\dom h$ is not empty: 
+
+$$
+\dom h = \{ \bx \in \VV \ST \bAAA(\bx) \in \dom f\} \neq \EmptySet.
+$$
+
+Then, for any $\bx \in \dom h$
+
+$$
+\bAAA^T (\partial f (\bAAA(\bx))) \subseteq \partial h(\bx).
+$$
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Let $\bx \in \dom h$. 
+1. Let $\bg \in \partial f(\bAAA(\bx))$.
+1. By {prf:ref}`res-cvxf-subg-dir-der-max-formula`,
+   
+   $$
+   \langle \bz, \bg \rangle \leq f'(\bAAA(\bx); \bz)
+   \Forall \bz \in \WW.
+   $$
+1. Choosing $\bz = \bAAA(\bd)$, we have
+
+   $$
+   \langle \bAAA(\bd), \bg \rangle \leq f'(\bAAA(\bx); \bAAA(\bd))
+   \Forall \bd \in \VV.
+   $$
+1. Equivalently
+
+   $$
+   \langle \bd, \bAAA^T(\bg) \rangle \leq h'(\bx; \bd)
+   \Forall \bd \in \VV.
+   $$
+1. Hence $\bAAA^T(\bg) \in \partial h(\bx)$
+   due to {eq}`eq-cvxf-subg-dir-der-inequality`.
+1. Hence $\bAAA^T (\partial f(\bAAA(\bx)) ) \subseteq \partial h(\bx)$.
+```
+
+
+```{prf:theorem} Strong linear transformation rule for subdifferential calculus
+:label: res-cvxf-subdiff-rule-linear
+
+Let $f: \WW \to \RERL$ be a proper convex function.
+Let $\bAAA : \VV \to \WW$ be a linear transformation.
+Define $h : \VV \to \RERL$ as 
+
+$$
+h (\bx) = f (\bAAA(\bx)).
+$$
+
+Assume that $h$ is proper, i.e. $\dom h$ is not empty: 
+
+$$
+\dom h = \{ \bx \in \VV \ST \bAAA(\bx) \in \dom f\} \neq \EmptySet.
+$$
+
+Then, for any $\bx \in \interior \dom h$ such that
+$\bAAA(\bx) \in \interior \dom f$, we have:
+
+$$
+\bAAA^T (\partial f (\bAAA(\bx))) = \partial h(\bx).
+$$
+```
+
+```{prf:proof}
+We showed $\bAAA^T (\partial f (\bAAA(\bx))) \subseteq \partial h(\bx)$
+in {prf:ref}`res-cvxf-subdiff-weak-rule-linear`.
+We show the reverse inclusion by contradiction.
+
+1. Let $\bx \in \interior \dom h$ such that
+   $\bAAA(\bx) \in \interior \dom f$.
+1. Assume that there exists $\bd \in \partial h(\bx)$
+   such that $\bd \notin \bAAA^T (\partial f(\bAAA(\bx)) )$.
+1. By {prf:ref}`res-cvxf-subdiff-proper-convex-interior`,
+   the set $\partial f(\bAAA(\bx))$ is nonempty, convex and compact.
+1. Hence $\bAAA^T (\partial f(\bAAA(\bx)))$ is also
+   nonempty, convex and compact.
+1. By strict separation theorem
+   ({prf:ref}`res-cvxf-cl-convex-set-strict-separation`),
+   there exists a vector $\bp$ and a scalar $c$ such that
+
+   $$
+   \langle \bAAA^T(\bg), \bp \rangle
+   < c < \langle \bd, \bp \rangle \Forall \bg \in \partial f(\bAAA(\bx)).
+   $$
+1. Equivalently
+
+
+   $$
+   \langle \bg, \bAAA(\bp) \rangle
+   < c < \langle \bd, \bp \rangle \Forall \bg \in \partial f(\bAAA(\bx)).
+   $$
+1. Taking the supremum over $ \partial f(\bAAA(\bx))$ on the
+   L.H.S., we obtain
+
+   $$
+   \sup_{\bg \in  \partial f(\bAAA(\bx))}
+   \langle \bg, \bAAA(\bp) \rangle
+   < \langle \bd, \bp \rangle.
+   $$
+1. By the max formula
+
+   $$
+   f'(\bAAA(\bx); \bAAA(\bp)) < \langle \bd, \bp \rangle.
+   $$
+1. But this means that
+
+   $$
+   h'(\bx; \bp) < \langle \bd, \bp \rangle.
+   $$
+1. This contradicts the assumption that $\bd \in \partial h(\bx)$.
+1. Hence we must have
+
+   $$
+   \bAAA^T (\partial f(\bAAA(\bx)) ) = \partial h(\bx).
+   $$
+```
+
+
 ### Affine Transformations
 
 
@@ -1528,17 +1697,12 @@ $$
 
 
 ```{prf:proof}
-Note that $\bAAA^T : \WW^* \to \VV^*$ is a mapping from 
-$\WW^*$ to $\VV^*$ and satisfies the relationship:
-
-$$
-\langle \bAAA (\bx), \by \rangle = \langle \bx, \bAAA^T (\by) \rangle.
-$$
+We proceed as follows.
 
 1. Let $\bx \in \dom h$. 
 1. Then, $\bx' = \bAAA(\bx) + \bb \in \dom f$ such that $h(\bx) = f(\bx')$.
 1. Let $\bg \in \bAAA^T (\partial f (\bx'))$.
-1. Then, there is $\bd \in \WW^*$ such that $\bg = \bAAA^T (\bb)$ with
+1. Then, there is $\bd \in \WW^*$ such that $\bg = \bAAA^T (\bd)$ with
    $\bd \in \partial f(\bx')$.
 1. Let $\by \in \dom h$.
 1. Then, $\by' = \bAAA(\by) + \bb \in \dom f$ such that $h(\by)= f(\by')$.
@@ -1781,6 +1945,10 @@ We are given $\bx \in \VV$ at which $g$ is differentiable and $f$ is convex.
    $$
 
 ````
+
+Applications of this rule are presented later
+in {prf:ref}`ex-cvxf-subdiff-l1-norm-squared`.
+
 
 ### Max Rule
 
