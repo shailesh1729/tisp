@@ -85,7 +85,7 @@ f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle \Forall \by \in \dom f.
 ```
 ````
 
-### Supporting Hyperplane Interpretation
+### Geometric Interpretation
 
 ```{prf:observation} Subgradient and supporting hyperplane
 :label: res-cvxf-subgradient-supporting-hyperplane
@@ -2355,6 +2355,89 @@ a compact set are nonempty and bounded.
    $$
 1. Thus, $f$ is indeed Lipschitz continuous over $X$.
 ```
+
+
+## $\epsilon$-Subgradients
+
+```{index} Approximate subgradient
+```
+````{prf:definition} $\epsilon$-Subgradient
+:label: def-cvxf-e-subgradient
+
+Let $f : \VV \to \RERL$ be a proper function. 
+Let $\bx \in \dom f$. 
+A vector $\bg \in \VV^*$ is called an $\epsilon$-*subgradient*
+of $f$ at $\bx$ 
+if
+```{math}
+:label: eq-cvxf-e-subgradient-inequality
+f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle - \epsilon \Forall \by \in \VV.
+```
+````
+
+### Geometric Interpretation
+
+```{prf:observation} $\epsilon$-subgradient and supporting hyperplane
+:label: res-cvxf-e-subgradient-supporting-hyperplane
+
+Let $f: \VV \to \RERL$ be a proper function.
+Then $\bg$ be an $\epsilon$-subgradient of $f$ at $\bx$
+if and only if $\epi f$ is contained in the positive
+halfspace of the
+hyperplane with a normal $(-\bg, 1)$
+passing through $(\bx, f(\bx) - \epsilon)$. 
+```
+
+```{prf:proof}
+Let $H$ denote the hyperplane
+
+$$
+H = \{
+(\by, t) \ST \langle \by, -\bg \rangle  + t 
+      =  \langle \bx, -\bg \rangle + f(\bx) - \epsilon \}.
+$$
+The positive halfspace of $H$ is given by
+
+$$
+H_+ = \{
+(\by, t) \ST \langle \by, -\bg \rangle  + t 
+      \geq  \langle \bx, -\bg \rangle + f(\bx) - \epsilon \}.
+$$
+
+
+Assume that $\bg$ is an $\epsilon$-subgradient of $f$ at $\bx$.
+1. For any $(\by, t) \in \epi f$, we have
+
+   $$
+   t \geq f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle - \epsilon.
+   $$
+1. This is equivalent to
+
+   $$
+   \langle \by, -\bg \rangle + t  \geq
+   \langle \bx, -\bg \rangle + f(\bx) - \epsilon
+   $$
+   for all $(\by, t) \in \epi f$.
+1. Hence $\epi f \subseteq H_+$.
+
+
+Now assume that $\epi f \subseteq H_+$.
+
+1. Let $(\by, f(\by)) \in \epi f$.
+1. Then we have
+
+   $$
+   \langle \by, -\bg \rangle  + f(\by)  \geq  \langle \bx, -\bg \rangle + f(\bx) - \epsilon.
+   $$
+
+1. Rearranging the terms, we have
+
+   $$
+   f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle - \epsilon \Forall \by \in \VV. 
+   $$
+1. But this means that $\bg$ is an $\epsilon$-subgradient of $f$ at $\bx$.
+```
+
 
 ## Optimality Conditions
 
