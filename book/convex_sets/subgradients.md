@@ -2439,6 +2439,39 @@ Now assume that $\epi f \subseteq H_+$.
 ```
 
 
+### $\epsilon$-Subdifferential
+
+
+```{index} Approximate Subdifferential
+```
+```{prf:definition} $\epsilon$-subdifferential
+:label: def-cvxf-e-subdifferential
+
+Let $f : \VV \to \RERL$ be a proper function.
+The set of all $\epsilon$-subgradients of $f$ at a point $\bx \in \dom f$
+is called the $\epsilon$-*subdifferential* of $f$ at $\bx$ and is denoted by
+$\partial_{\epsilon} f(\bx)$.
+
+$$
+\partial_{\epsilon} f(\bx) \triangleq 
+\{ \bg \in \VV^* \ST f (\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle
+- \epsilon 
+  \Forall \by \in \VV \}.
+$$
+
+For all $\bx \notin \dom f$, we define $\partial_{\epsilon} f(\bx) = \EmptySet$.
+```
+It is easy to see that 
+
+$$
+\partial f(\bx) \subseteq \partial_{\epsilon} f(\bx).
+$$
+Also, if $\epsilon_2 \geq \epsilon_1 > 0$, then
+
+$$
+\partial_{\epsilon_1} f(\bx) \subseteq \partial_{\epsilon_2} f(\bx).
+$$ 
+
 ## Optimality Conditions
 
 A well known result for differentiable functions is that
