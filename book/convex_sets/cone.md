@@ -1587,6 +1587,48 @@ We now show that $C^{\circ} \subseteq (\convex C)^{\circ}$.
 1. Hence $C^{\circ} \subseteq (\convex C)^{\circ}$.
 ```
 
+```{prf:property} Polar cone and conic hull
+:label: res-cvx-polar-cone-conic-hull
+
+For any nonempty set $C$, we have
+
+$$
+C^{\circ} = (\cone C)^{\circ}.
+$$
+```
+
+```{prf:proof}
+We first show that $(\cone C)^{\circ} \subseteq C^{\circ}$.
+
+1. We have $C \subseteq \cone C$.
+1. Hence by {prf:ref}`res-cvx-polar-cone-containment`,
+   
+   $$
+   (\cone C)^{\circ} \subseteq C^{\circ}.
+   $$
+
+We now show that $C^{\circ} \subseteq (\cone C)^{\circ}$.
+
+1. Let $\by \in C^{\circ}$.
+1. Then for every $\bx \in C$, we have $\langle \bx, \by \rangle \leq 0$.
+1. Let $\bx \in \cone C$.
+1. Then there exist $\bx_1, \dots, \bx_k \in C$ and $t_1, \dots t_k \geq 0$
+   such that
+
+   $$
+   \bx = \sum_{i=1}^k t_i \bx_i.
+   $$
+1. Then 
+
+   $$
+   \langle \bx, \by \rangle = \sum_{i=1}^k t_i \langle \bx_i, \by \rangle.
+   $$
+1. But $\langle \bx_i, \by \rangle \leq 0$ since $\bx_i \in C$ for every $i$.
+1. Hence  $\langle \bx, \by \rangle \leq 0$.
+1. Hence for every $\bx \in \cone C$, we have $\langle \bx, \by \rangle \leq 0$.
+1. Hence $\by \in (\cone C)^{\circ}$.
+1. Hence $C^{\circ} \subseteq (\cone C)^{\circ}$.
+```
 
 ## Normal Cones
 
