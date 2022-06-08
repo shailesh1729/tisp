@@ -1630,6 +1630,108 @@ We now show that $C^{\circ} \subseteq (\cone C)^{\circ}$.
 1. Hence $C^{\circ} \subseteq (\cone C)^{\circ}$.
 ```
 
+
+```{prf:theorem} Polar cone theorem
+:label: res-cvx-polar-cone-theorem
+
+For any nonempty cone $C$, we have
+
+$$
+(C^{\circ})^{\circ} = \closure \convex C.
+$$
+
+In particular, if $C$ is closed and convex, we have
+
+$$
+(C^{\circ})^{\circ} = C.
+$$
+```
+
+```{prf:proof}
+First we assume that $C$ is nonempty, closed and convex
+and show that $(C^{\circ})^{\circ} = C$.
+
+1. Pick any $\bx \in C$.
+1. By definition, we have
+   $\langle \bx, \by \rangle \leq 0$ for every $\by \in C^{\circ}$.
+1. Hence $\bx \in (C^{\circ})^{\circ}$.
+1. Hence $C \subseteq (C^{\circ})^{\circ}$.
+1. Now choose any $\bz \in (C^{\circ})^{\circ}$.
+1. Since $C$ is nonempty, closed and convex, hence
+   by projection theorem ({prf:ref}`res-cvx-projection-characterization`),
+   there exists a unique projection of $\bz$ on $C$,
+   denoted by $\widehat{\bz}$ that satisfies
+
+   $$
+   \langle \bx - \widehat{\bz}, \bz - \widehat{\bz} \rangle \leq 0 \Forall \bx \in C.
+   $$
+1. Since $C$ is a cone, hence $\bzero \in C$.
+1. Since $C$ is a cone and $\widehat{\bz} \in C$, hence $2 \widehat{\bz} \in C$.
+1. By putting $\bx = \bzero$, we get
+
+   $$
+   \langle \widehat{\bz}, \bz - \widehat{\bz} \rangle \geq 0.
+   $$
+1. By putting $\bx =2 \widehat{\bz}$, we get
+
+   $$
+   \langle \widehat{\bz}, \bz - \widehat{\bz} \rangle \leq 0.
+   $$
+1. Together, we have
+
+   $$
+   \langle \widehat{\bz}, \bz - \widehat{\bz} \rangle = 0.
+   $$
+1. Putting this back into the projection inequality, we get
+
+   $$
+   \langle \bx, \bz - \widehat{\bz} \rangle \leq 0 \Forall \bx \in C.
+   $$
+1. Hence $\bz - \widehat{\bz} \in C^{\circ}$.
+1. Since $\bz \in (C^{\circ})^{\circ}$, hence
+   $\langle \bz, \bz - \widehat{\bz} \langle \leq 0$.
+1. We also have $-\langle \widehat{\bz}, \bz - \widehat{\bz} \rangle = 0$.
+1. Adding these two, we get
+
+   $$
+   \langle \bz - \widehat{\bz}, \bz - \widehat{\bz} \rangle \leq 0.
+   $$
+1. This means that
+
+   $$
+   \| \bz - \widehat{\bz} \|_2^2 \leq 0.
+   $$
+1. It follows that $\bz  = \widehat{\bz}$.
+1. Hence $\bz \in C$.
+1. Hence $(C^{\circ})^{\circ} \subseteq C$.
+
+We have so far shown that if $C$ is a nonempty, closed and convex cone then
+
+$$
+C = (C^{\circ})^{\circ}.
+$$
+
+Now consider the case where $C$ is just an arbitrary nonempty cone.
+
+1. Then $\closure \convex C$ is a closed convex cone.
+1. By previous argument
+
+   $$
+   \closure \convex C = (\closure \convex C)^{\circ})^{\circ}.
+   $$
+1. But
+
+   $$
+   (\closure \convex C)^{\circ} = (\convex C)^{\circ} = C^{\circ}.
+   $$
+1. Hence
+
+   $$
+   \closure \convex C = (C^{\circ})^{\circ}.
+   $$
+```
+
+
 ## Normal Cones
 
 ```{index} Normal cone; normal vector
