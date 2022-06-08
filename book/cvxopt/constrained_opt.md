@@ -1,4 +1,4 @@
-# Convex Constrained Optimization
+# Constrained Optimization
 
 
 In this section, we present several results
@@ -11,10 +11,13 @@ endowed with an inner product
 $\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$
 and a norm $\| \cdot \| : \VV \to \RR$.
 
+
+## General Constrained Optimization
+
 ````{div}
-Let $f : \VV \to \RERL$ be a proper convex function
+Let $f : \VV \to \RERL$ be a proper function
 with $S = \dom f$.
-Let $C \subseteq \VV$ be a convex set.
+Let $C \subseteq \VV$ be a nonempty set.
 
 We are concerned with the optimization problems
 of the form
@@ -25,6 +28,174 @@ of the form
 & \text{subject to } & & \bx \in C.
 ```
 ````
+
+
+
+## Feasible Directions
+
+At any point in the constraint set $C$, a feasible
+direction is a direction along which if we move slightly,
+then we can stay within $C$.
+
+```{prf:definition} Feasible direction
+:label: def-opt-feasible-direction
+
+Consider the optimization problem {eq}`eq-cvx-const-cvx-opt-form`.
+Given a vector $\bx \in C$, a direction $\bd \in \VV$
+is said to be a *feasible direction* of $C$ at $\bx$ if
+there exists a $\overline{t} > 0$ such that
+
+$$
+\bx + t \bd \in C \text{ for every } t \in [0, \overline{t}].
+$$ 
+The set of all feasible directions of $C$ at $\bx$ is
+denoted by $F_C(\bx)$.
+```
+
+```{prf:observation} The cone of feasible directions
+:label: res-opt-feasible-dir-set-cone
+
+The set of feasible directions at $\bx$ is a cone.
+
+1. We can see that $\bzero \in F_C(\bx)$.
+1. Also, if $\bd \in F_C(\bx)$ then for any $r > 0$,
+   $r \bd \in F_C(\bx)$ also holds true.
+```
+
+## Tangent Cone
+
+
+```{prf:definition} Tangent direction
+:label: def-opt-tangent-direction
+
+Let $C$ be a nonempty subset of $\VV$. 
+Let $\bx \in C$. A vector $\bt \in \VV$
+is called a *tangent* of $C$ at $\bx$
+if either $\bt = \bzero$ or 
+there exists a sequence $\{ \bx_k \}$
+of $C$ such that $\bx_k \neq \bx$ 
+for every $k$, and
+
+$$
+\bx_k \to \bx,
+\frac{\bx_k - \bx}{ \| \bx_k - \bx\|} \to \frac{\bt}{\| \bt \|}.
+$$
+```
+
+1. For a nonzero direction $\bt$, the term 
+   $\frac{\bt}{\| \bt \|}$ is a *normalized direction*.
+1. Since $\bx_k \neq \bx$ for every $k$, hence
+   $\bx_k - \bx \neq \bzero$ for every $k$.
+1. The term $\frac{\bx_k - \bx}{ \| \bx_k - \bx\|}$
+   is also a normalized direction.
+1. Hence the sequence $\{ \frac{\bx_k - \bx}{ \| \bx_k - \bx\|}\}$
+   is a sequence of normalized directions.
+1. Thus a nonzero direction $\bt$ is a tangent at $\bx$
+   if it is possible to approach $\bx$ with a feasible
+   sequence $\{ \bx_k \}$ such that the
+   normalized direction sequence $\{ \frac{\bx_k - \bx}{ \| \bx_k - \bx\|} \}$
+   converges to $\frac{\bt}{\| \bt \|}$.
+
+```{prf:theorem} The cone of tangent directions
+:label: res-opt-tangent-set-cone
+
+Let $C$ be a nonempty subset of $\VV$. 
+Let $\bx \in C$.
+The set of tangent directions of $C$ at $\bx$ is a cone.
+```
+
+```{prf:proof}
+We can see that by definition $\bzero$ is a tangent direction.
+
+1. Let $\bt \neq \bzero$ be a tangent direction.
+1. Let $\alpha > 0$.
+1. Then 
+
+   $$
+   \frac{\alpha \bt }{ \| \alpha \bt \|}
+   = \frac{\bt}{ \| \bt \|}
+   = \frac{\bx_k - \bx}{ \| \bx_k - \bx\|}
+   $$
+   for some sequence $\{ \bx_k \}$ converging to $\bx$
+   with $\bx_k \neq \bx$ for every $k$.
+1. Hence $\alpha \bt$ is also a tangent direction.
+1. Hence the set of tangent directions is a cone.
+```
+
+```{prf:definition} Tangent cone
+:label: def-opt-tangent-cone
+
+Let $C$ be a nonempty subset of $\VV$. 
+Let $\bx \in C$.
+The set of all tangent directions of $C$ at $\bx$
+is called the *tangent cone* of $C$ at $\bx$
+and is denoted by $T_C(\bx)$.
+```
+
+```{prf:theorem} Characterization of tangent directions
+:label: res-opt-tangent-charac
+
+Let $C$ be a nonempty subset of $\VV$. 
+Let $\bx \in C$.
+A vector $\bt \in \VV$ is a tangent of $C$ at $\bx$
+if and only if there exists a sequence
+$\{ \bx_k \}$ of $C$ and a positive scalar sequence
+$\{ r_k \}$ such that $r_k \to 0$ and
+$\frac{\bx_k - \bx}{r_k} \to \bt$.
+```
+
+```{prf:proof}
+Let $\bt$ be a tangent of $C$ at $\bx$.
+
+1. If $\bt = \bzero$, then we can take $\bx_k = \bx$ for every $k$
+   and $r_k = \frac{1}{k}$ for every $k$.
+1. Then $r_k \to 0$ and $\frac{\bx_k - \bx}{r_k} \to \bzero$.
+1. Now consider the case where $\bt \neq \bzero$.
+1. By definition of tangent, there exists a sequence
+   $\{ \bx_k \}$ of $C$ with $\bx_k \neq \bx$,
+   $\bx_k \to \bx$ and
+   $\frac{\bx_k - \bx}{ \| \bx_k - \bx\|} \to \frac{\bt}{\| \bt \|}$.
+1. Let $r_k = \frac{\| \bx_k - \bx \|}{\| \bt \|}$.
+1. Clearly $r_k > 0$ and $r_k \to 0$ since $\bx_k \to \bx$.
+1. Also 
+   
+   $$
+   \frac{\bx_k - \bx}{r_k} = \| \bt \| \frac{\bx_k - \bx}{\| \bx_k - \bx \|}.
+   $$
+1. Since by definition of tangent
+
+   $$
+   \frac{\bx_k - \bx}{ \| \bx_k - \bx\|} \to \frac{\bt}{\| \bt \|},
+   $$
+   hence 
+
+   $$
+   \frac{\bx_k - \bx}{r_k} \to \bt
+   $$
+   as desired.
+
+Conversely, suppose $\bt$ is such that there exist
+sequences $\{ \bx_k \}$ and $\{ r_k \}$ with the given
+properties.
+
+1. If $\bt = \bzero$ then it is a tangent.
+1. Now consider the case where $\bt \neq \bzero$
+1. Since $r_k \to 0$ and $(\bx_k - \bx) / r_k \to \bt$
+   hence we must have $\bx_k \to \bx$.
+1. It is also possible to choose a subsequence of $\{ \bx_k \}$
+   such that $\bx_{k_l} \neq \bx$ for every $k_l$.
+   Otherwise, $(\bx_k - \bx) / r_k \to \bzero$ but we are given
+   that $\bt \neq \bzero$.
+1. WLOG assume that $\bx_k \neq \bx$ for every $k$.
+1. Then 
+
+   $$
+   \frac{\bx_k - \bx}{ \| \bx_k - \bx\|}
+   = \frac{(\bx_k - \bx) / r_k}{ \| \bx_k - \bx\| / r_k}
+   \to \frac{\bt}{ \| \bt \|}.
+   $$
+1. Hence $\bt$ must be a tangent direction.
+```
 
 ## General Optimality Conditions
 
