@@ -1475,6 +1475,42 @@ and hence has an empty interior.
 A contradiction. 
 ```
 
+```{prf:theorem} Polar cone of a subspace
+:label: res-cvx-subspace-polar-cone
+
+The polar cone of a subspace $V \subseteq \VV$ is its
+{prf:ref}`orthogonal complement <def-la-orthogonal-complement>` 
+$V^{\perp}$ defined as:
+
+$$
+V^{\perp} = \{ \by \ST \langle \bv, \by \rangle = 0 \Forall \bv \in V \}.
+$$
+
+More precisely, $V^{\circ}$ is isomorphic to $V^{\perp}$ as
+the polar cone is a subset of $\VV^*$. 
+```
+
+```{prf:proof}
+Let $V^{\circ}$ be the polar cone of $V$. If $\bv \in V^{\perp}$, then
+by definition, $\bv \in V^{\circ}$. Thus, $V^{\perp} \subseteq V^{\circ}$.
+
+Let us now assume that there is a vector 
+$\by \in V^{\circ}$ s.t. $\by \notin V^{\perp}$.
+
+Then, there exists $\bv \in V$ such that  $\langle \bv, \by \rangle < 0$.
+Since $V$ is a subspace, it follows that $-\bv \in V$. 
+But then  
+
+$$
+\langle -\bv, \by \rangle = - \langle \bv, \by \rangle > 0.
+$$
+
+Thus, $\by$ cannot belong to $V^{\circ}$. A contradiction.
+
+Thus, $V^{\circ} = V^{\perp}$.
+```
+
+
 
 ## Normal Cones
 
