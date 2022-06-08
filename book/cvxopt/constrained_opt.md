@@ -396,6 +396,90 @@ If $C$ is convex then $T_C(\bx)$ is convex.
 1. Hence $T_C(\bx)$ is convex.
 ```
 
+### Polar Cone of Tangent Cone
+
+Recall from {prf:ref}`def-cvx-normal-cone`
+that the normal cone to a set $C$ at a point $\ba \in C$
+is given by
+
+$$
+N_C(\ba) = \{ \bv \in \VV^* \ST 
+   \langle \bx - \ba , \bv \rangle \leq 0 
+   \Forall \bx \in C \}.
+$$
+
+```{prf:theorem} Characterization of the polar cone of the tangent cone for a convex set
+
+Let $C$ be a nonempty convex set.
+Then for every $\bx \in C$, we have
+$\bz \in T_C(\bx)^{\circ}$ if and only if
+
+$$
+\langle \by - \bx , \bz \rangle \leq 0 \Forall \by \in C.
+$$
+
+In particular, we have
+
+$$
+T_C(\bx)^{\circ} = N_C(\bx),
+N_C(\bx)^{\circ} = T_C(\bx)
+$$
+where $N_C(\bx)$ is the normal cone of $C$ at $\bx$.
+```
+
+```{prf:proof}
+
+First consider that $\bz \in T_C(\bx)^{\circ}$.
+
+
+
+1. We note that $F_C(\bx) \subseteq T_C(\bx)$.
+1. Since $C$ is convex, hence $\by - \bx \in F_C(\bx)$ for every $\by \in C$.
+1. Hence $\by - \bx \in T_C(\bx)$ for every $\by \in C$.
+1. Hence $\langle \by - \bx, \bz \rangle \leq 0$ for every $\by \in C$
+   from the definition of the polar cone of $T_C(\bx)$.
+
+Now assume that some $\bz \in \VV^*$ satisfies
+
+$$
+\langle \by - \bx , \bz \rangle \leq 0 \Forall \by \in C.
+$$
+1. For contradiction, assume that $\bz \notin T_C(\bx)^{\circ}$.
+1. Then there exists some $\by \in T_C(\bx)$ such that
+   $\langle \by, \bz \rangle > 0$.
+1. Since $\closure F_C(\bx) = T_C(\bx)$, hence there exists
+   a sequence $\{ \by_k \}$ of $F_C(\bx)$ such that $\by_k \to \by$.
+1. $\by_k$ is a feasible direction at $\bx$ for every $k$.
+1. Due to convexity of $C$, $\by_k = r_k (\bx_k - \bx)$ for every $k$
+   where $\bx_k \in C$ and $r_k > 0$.
+1. Since $\langle \by, \bz \rangle > 0$, hence
+   for sufficiently large $k$, we should have
+   $\langle \by_k, \bz \rangle > 0$.
+1. In other words, for sufficiently large $k$, we have
+   $r_k \langle \bx_k - \bx, \bz \rangle > 0$.
+1. Since $r_k > 0$, hence it reduces to
+   $\langle \bx_k - \bx, \bz \rangle > 0$.
+1. But this is a contradiction to the hypothesis.
+1. Hence we must have $\bz \in T_C(\bx)^{\circ}$.
+
+
+This characterization of polar cone of tangent cone implies that
+
+$$
+T_C(\bx)^{\circ} = N_C(\bx).
+$$
+
+Since $T_C(\bx)$ is a closed and convex cone
+for a convex $C$,
+hence due to {prf:ref}`res-cvx-polar-cone-theorem`, we have
+
+$$
+N_C(\bx)^{\circ} = (T_C(\bx)^{\circ})^{\circ} = T_C(\bx).
+$$
+```
+
+
+
 ## General Optimality Conditions
 
 Recall from Fermat's optimality condition
@@ -408,15 +492,6 @@ A similar result can be obtained for the
 constrained optimization problem in terms
 of the subgradients of $f$ and the normal
 cone of $C$.
-Recall from {prf:ref}`def-cvx-normal-cone`
-that the normal cone to a set $C$ at a point $\ba \in C$
-is given by
-
-$$
-N_C(\ba) = \{ \bv \in \VV^* \ST 
-   \langle \bx - \ba , \bv \rangle \leq 0 
-   \Forall \bx \in C \}.
-$$
 
 ```{prf:theorem} Optimality conditions for convex constrained optimization
 :label: res-opt-cvx-const-cvx-optimal
