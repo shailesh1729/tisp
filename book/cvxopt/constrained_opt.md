@@ -37,6 +37,8 @@ At any point in the constraint set $C$, a feasible
 direction is a direction along which if we move slightly,
 then we can stay within $C$.
 
+```{index} Feasible direction
+```
 ```{prf:definition} Feasible direction
 :label: def-opt-feasible-direction
 
@@ -62,9 +64,53 @@ The set of feasible directions at $\bx$ is a cone.
    $r \bd \in F_C(\bx)$ also holds true.
 ```
 
-## Tangent Cone
+### Convexity
+
+```{prf:theorem} Convexity of the cone of feasible directions
+:label: res-opt-feasible-cone-convexity
+
+Let $C$ be a nonempty subset of $\VV$. 
+Let $\bx \in C$.
+If $C$ is convex then $F_C(\bx)$ is convex.
+```
+
+```{prf:proof}
+We are given that $C$ is convex.
+
+1. For any point $\by \in C$, the line segment $[\bx, \by] \in C$.
+1. Hence the set $F_C(\bx)$ consists of all the vectors of the
+   form $t(\by - \bx)$ where $t > 0$ and $\by \in C$.
+1. Let $\bd_1, \bd_2 \in F_C(\bx)$ and $r \in (0,1)$.
+1. Then there exist $\by_1, \by_2 \in C$ and $t_1, t_2 > 0$ such that
+   
+   $$
+   \bd_1 = t_1 (\by_1 - \bx),
+   \bd_2 = t_2 (\by_2 - \bx).
+   $$ 
+1. Then 
+
+   $$
+   \bd = r \bd_1 + (1-r) \bd_2
+   &=  r t_1 (\by_1 - \bx) + (1 - r) t_2 (\by_2 - \bx) \\
+   &= (r t_1 + (1-r) t_2)
+   \left (\frac{r t_1}{r t_1 + (1-r) t_2} \by_1
+   + \frac{ (1- r) t_2}{r t_1 + (1-r) t_2} \by_2 - \bx \right ).
+   $$
+1. Let $s = \frac{r t_1}{r t_1 + (1-r) t_2}$.
+1. Then $s \in (0, 1)$ and $1-s = \frac{ (1- r) t_2}{r t_1 + (1-r) t_2}$.
+1. Hence $\by = s \by_1 + (1-s) \by_2 \in C$ due to convexity of $C$.
+1. Hence $\bd = (r t_1 + (1-r) t_2) (\by - \bx)$.
+1. Hence $\bd$ is a feasible direction.
+1. Hence $F_C(\bx)$ is convex.
+```
 
 
+## Tangent Cones
+
+### Tangent Direction
+
+```{index} Tangent direction
+```
 ```{prf:definition} Tangent direction
 :label: def-opt-tangent-direction
 
@@ -96,6 +142,8 @@ $$
    normalized direction sequence $\{ \frac{\bx_k - \bx}{ \| \bx_k - \bx\|} \}$
    converges to $\frac{\bt}{\| \bt \|}$.
 
+### Tangent Cone
+
 ```{prf:theorem} The cone of tangent directions
 :label: res-opt-tangent-set-cone
 
@@ -122,6 +170,8 @@ We can see that by definition $\bzero$ is a tangent direction.
 1. Hence the set of tangent directions is a cone.
 ```
 
+```{index} Tangent cone
+```
 ```{prf:definition} Tangent cone
 :label: def-opt-tangent-cone
 
@@ -131,6 +181,8 @@ The set of all tangent directions of $C$ at $\bx$
 is called the *tangent cone* of $C$ at $\bx$
 and is denoted by $T_C(\bx)$.
 ```
+
+### Characterization
 
 ```{prf:theorem} Characterization of tangent directions
 :label: res-opt-tangent-charac
@@ -195,6 +247,153 @@ properties.
    \to \frac{\bt}{ \| \bt \|}.
    $$
 1. Hence $\bt$ must be a tangent direction.
+```
+
+### Closedness
+
+```{prf:theorem} Closedness of tangent cone
+:label: res-opt-tangent-cone-closed
+
+Let $C$ be a nonempty subset of $\VV$. 
+Let $\bx \in C$.
+Then $T_C(\bx)$ is closed.
+```
+
+```{prf:proof}
+.
+
+1. Let $\{ \bt_k \}$ be a sequence of $T_C(\bx)$
+   such that $\lim \bt_k = \bt \in \VV$.
+1. If $\bt = \bzero$, then $\bt \in T_C(\bx)$
+   and we are done.
+1. Hence consider the case where $\bt \neq \bzero$.
+1. WLOG, assume that $\bt_k \neq \bzero$ for every $k$.
+1. By the definition of the tangent, for every $k$,
+   there is a sequence $\{ \bx_k^i \}$ of $C$
+   with $\bx_k^i \neq \bx$ such that
+
+   $$
+   \lim_{i \to \infty} \bx_k^i = \bx,
+   \lim_{i \to \infty}
+   \frac{\bx_k^i - \bx}{\| \bx_k^i - \bx \|} = \frac{\bt_k}{\| \bt_k \|}.
+   $$
+1. For each $k$, choose and $i_k$ such that
+   $i_1 < i_2 < \dots < i_k$ and
+
+   $$
+   \lim_{k \to \infty} \bx_k^{i_k} = \bx,
+   \lim_{k \to \infty}
+   \left \| \frac{\bx_k^{i_k} - \bx}{\| \bx_k^{i_k} - \bx \|}  - \frac{\bt_k}{\| \bt_k \|}
+   \right \|.
+   $$
+1. For all $k$, we have
+
+   $$
+   \left \| \frac{\bx_k^{i_k} - \bx}{\| \bx_k^{i_k} - \bx \|}  - \frac{\bt}{\| \bt \|}
+   \right \|
+   \leq    \left \| \frac{\bx_k^{i_k} - \bx}{\| \bx_k^{i_k} - \bx \|}  - \frac{\bt_k}{\| \bt_k \|}
+   \right \|
+   + \left \|
+   \frac{\bt_k}{\| \bt_k \|} - \frac{\bt}{\| \bt \|}
+   \right \|.
+   $$
+1. Taking the limit of $k \to \infty$, we have
+
+   $$
+   \left \| \frac{\bx_k^{i_k} - \bx}{\| \bx_k^{i_k} - \bx \|}  - \frac{\bt}{\| \bt \|}
+   \right \| = 0.
+   $$
+1. Hence $\by \in T_C(\bx)$.
+```
+
+### Feasible Directions and Tangent Cone
+
+
+```{prf:theorem} Feasible cone and tangent cone
+:label: res-opt-feasible-tangent-cone
+
+Let $C$ be a nonempty subset of $\VV$. 
+Let $\bx \in C$.
+The following hold true regarding the
+cone of feasible directions $F_C(\bx)$
+and the tangent cone $T_C(\bx)$.
+
+1. $F_C(\bx) \subseteq T_C(\bx)$.
+1. $\closure F_C(\bx) \subseteq T_C(\bx)$.
+1. If $C$ is convex, then
+
+   $$
+   \closure F_C(\bx) = T_C(\bx).
+   $$
+```
+```{prf:proof}
+(1) Every feasible direction is a tangent direction.
+
+1. Let $\bd$ be a feasible direction.
+1. Then there exists a $\overline{t} > 0$ such that
+
+   $$
+   \bx + t \bd \in C \Forall t \in [0, \overline{t}].
+   $$
+1. Let $r_k = \frac{\overline{t}}{k}$ for every $k \in \Nat$.
+1. Then $r_k > 0$ for every $k$ and $r_k \to 0$.
+1. Let $\bx_k = \bx + r_k \bd$.
+1. Then $\bx_k \in C$, $\bx_k \neq \bx$ for every $k$ and $\bx_k \to \bx$.
+1. Also $\frac{\bx_k - \bx}{r_k} = \bd$ for every $k$.
+1. Hence $\frac{\bx_k - \bx}{r_k} \to \bd$.
+1. Hence $\bd$ is a tangent direction due to
+   {prf:ref}`res-opt-tangent-charac`.
+1. Hence $F_C(\bx) \subseteq T_C(\bx)$.
+
+(2) Closure
+
+1. By {prf:ref}`res-opt-tangent-cone-closed`, $T_C(\bx)$ is closed.
+1. We have shown that $F_C(\bx) \subseteq T_C(\bx)$.
+1. The closure of a set is the smallest closed set containing it.
+1. Hence $\closure F_C(\bx) \subseteq T_C(\bx)$.
+
+(3) Convexity and Closure
+
+1. We are given that $C$ is convex.
+1. By claim (2), we have $\closure F_C(\bx) \subseteq T_C(\bx)$.
+1. It will suffice to show the reverse inclusion
+   $T_C(\bx) \subseteq \closure F_C(\bx)$.
+1. Let $\bd \in T_C(\bx)$.
+1. By {prf:ref}`res-opt-tangent-charac`, there exists a sequence
+   $\{ \bx_k \}$ of $C$ with $\bx_k \to \bx$ and a positive scalar
+   sequence $\{ r_k \}$ with $r_k \to 0$ such that
+   $\frac{\bx_k - \bx}{r_k} \to \bd$.
+1. Since $C$ is convex, hence the direction $\frac{\bx_k - \bx}{r_k}$
+   is a feasible direction of $C$ for every $k$.
+1. Hence $\{\frac{\bx_k - \bx}{r_k} \}$ is a converging sequence
+   of feasible directions.
+1. Hence $\bd \in \closure F_C(\bx)$.
+1. Hence $T_C(\bx) \subseteq \closure F_C(\bx)$. 
+```
+
+### Convexity
+
+```{prf:theorem} Convexity of the tangent cone
+:label: res-opt-tangent-cone-convexity
+
+Let $C$ be a nonempty subset of $\VV$. 
+Let $\bx \in C$.
+If $C$ is convex then $T_C(\bx)$ is convex.
+```
+
+```{prf:proof}
+.
+
+1. By {prf:ref}`res-opt-feasible-cone-convexity`, $F_C(\bx)$ is convex.
+1. By {prf:ref}`res-opt-feasible-tangent-cone`,
+
+   $$
+   T_C(\bx) = \closure F_C(\bx)
+   $$
+   since $C$ is convex.
+1. By {prf:ref}`res-cvx-closure-convex-set-convex`, the
+   closure of a convex set is convex.
+1. Hence $T_C(\bx)$ is convex.
 ```
 
 ## General Optimality Conditions
