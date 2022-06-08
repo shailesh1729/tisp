@@ -1510,6 +1510,40 @@ Thus, $\by$ cannot belong to $V^{\circ}$. A contradiction.
 Thus, $V^{\circ} = V^{\perp}$.
 ```
 
+```{prf:property} Polar cone and closure
+:label: res-cvx-polar-cone-closure
+
+For any nonempty set $C$, we have
+
+$$
+C^{\circ} = (\closure C)^{\circ}.
+$$
+```
+
+```{prf:proof}
+We first show that $(\closure C)^{\circ} \subseteq C^{\circ}$.
+
+1. We have $C \subseteq \closure C$.
+1. Hence by {prf:ref}`res-cvx-polar-cone-containment`,
+   
+   $$
+   (\closure C)^{\circ} \subseteq C^{\circ}.
+   $$
+
+We now show that $C^{\circ} \subseteq (\closure C)^{\circ}$.
+
+1. Let $\by \in C^{\circ}$.
+1. Then for every $\bx \in C$, we have $\langle \bx, \by \rangle \leq 0$.
+1. Let $\bx \in \closure C$.
+1. There exists a sequence $\{ \bx_k \}$ of $C$ such that $\lim \bx_k = \bx$.
+1. But $\langle \bx_k, \by \rangle \leq 0$ for every $k$.
+1. Hence, taking the limit, we have
+   $\langle \bx, \by \rangle \leq 0$.
+1. Hence for every $\bx \in \closure C$, we have $\langle \bx, \by \rangle \leq 0$.
+1. Hence $\by \in  (\closure C)^{\circ}$.
+1. Hence $C^{\circ} \subseteq (\closure C)^{\circ}$.
+```
+
 
 
 ## Normal Cones
