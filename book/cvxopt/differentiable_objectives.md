@@ -1,5 +1,5 @@
 (sec:opt:convex-differentiable-objective)=
-# Differentiable Objective Functions
+# Constrained Optimization I
 
 In this section, we focus on objective functions of type
 $f : \RR^n \to \RR$ which are convex and differentiable.
