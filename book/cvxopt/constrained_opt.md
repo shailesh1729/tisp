@@ -524,6 +524,17 @@ Then
 $$
 \langle \by, \nabla f(\ba) \rangle \geq 0, \Forall \by \in T_C(\ba).
 $$
+
+Equivalently, we must have
+
+$$
+- \nabla f(\ba) \in T_C(\ba)^{\circ};
+$$
+i.e., the negative of the gradient at the local minimum belongs to the
+{prf:ref}`polar cone <def-cvx-polar-cone>`
+of the tangent cone or the gradient at the local minimum belongs to the
+{prf:ref}`dual cone <def-dual-cone>`
+of the tangent cone.
 ```
 This necessary condition means that the the value of function increases
 along every tangent direction in its local neighborhood.
@@ -587,6 +598,15 @@ Let $\bt$ be a nonzero tangent direction at $\ba$.
    $f(\bx_k) < f(\ba)$ for all sufficiently large $k$.
 1. Thus contradictions the local optimality of $\ba$.
 1. Hence we must have $\langle \bt, \nabla f(\ba) \rangle \geq 0$.
+
+An equivalent statement is that
+
+$$
+\langle \by, -\nabla f(\ba) \rangle \leq 0, \Forall \by \in T_C(\ba).
+$$
+This means that $-\nabla f(\ba) \in T_C(\ba)^{\circ}$.
+Since the polar cone is the negative of the dual cone, hence
+$\nabla f(\ba) \in T_C(\ba)^*$.
 ```
 
 
