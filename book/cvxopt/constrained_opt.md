@@ -804,6 +804,44 @@ $$
 $$
 ```
 
+Following is the refinement of {prf:ref}`res-opt-smooth-local-minimum-convex-const`
+for continuously differentiable functions at the global minimum.
+
+```{prf:corollary} Minimization of convex and smooth function on a convex set
+:label: res-opt-cvx-const-cvx-optimal-3
+
+Let $f : \VV \to \RERL$ be a proper and convex
+function. Let $C \subseteq \VV$ be a convex
+set for which $\relint \dom f \cap \relint C \neq \EmptySet$.
+Assume that $f$ is continuously differentiable at a point $\bx^* \in C$.
+
+Then, $\bx^* \in C$ is an optimal solution
+of {eq}`eq-cvx-const-cvx-opt-form` if and only if
+
+$$
+\langle \bx - \bx^*, \nabla f(\bx^*) \rangle \geq 0 \Forall \bx \in C.
+$$
+```
+
+### Sum of Smooth and Convex Functions on an Arbitrary Constraint Set
+
+```{prf:theorem} Minimization of sum of smooth and convex function
+:label: res-opt-min-sum-smooth-convex-constrained
+
+Let $\ba$ be a local minimum of a function $f: \VV \to \RR$
+over a set $C$. Assume that the tangent cone $T_C(\ba)$ is convex.
+Assume that $f$ has the form
+
+$$
+f(\bx) = f_1(\bx) + f_2(\bx)
+$$
+where $f_1 : \VV \to \RR$ is convex and $f_2 : \VV \to \RR$ is smooth.
+Then
+
+$$
+- \nabla f_2(\ba) \in \partial f_1(\ba) + T_C(\ba).
+$$
+```
 
 ### Optimization Over Unit Simplex
 
