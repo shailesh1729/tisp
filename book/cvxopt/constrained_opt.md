@@ -1,9 +1,9 @@
-# Constrained Optimization
+# Constrained Optimization II
 
 
 In this section, we present several results
 for the general problem of optimizing
-a convex function over a convex set.
+a cost function over a constraint set.
 
 Throughout this section, we assume that
 $\VV$ is an $n$-dimensional real vector space
@@ -29,7 +29,29 @@ of the form
 ```
 ````
 
+We provide optimality conditions for three specific type of problems.
 
+1. A continuously differentiable function $f$ over an arbitrary
+   constraint set $C$.
+1. A convex, possibly nonsmooth, cost function $f$ and a convex
+   constraint set $C$.
+1. A cost function consisting of the sum of a smooth (continuously differentiable)
+   function and a convex function and an arbitrary constraint set.
+
+For the development of the results in this section, we will
+need the supporting machinery of the following notions:
+
+* Feasible directions and the cone of feasible directions
+* Tangent directions and tangent cone
+* Normal directions and normal cone
+
+For a nonconvex optimization problem, the optimality
+conditions provide the necessary conditions for a
+feasible point to be a local optimal solution.
+
+For convex problems, the optimality conditions
+provide the necessary and sufficient conditions
+for a feasible point to be a global optimal solution.
 
 ## Feasible Directions
 
@@ -480,7 +502,81 @@ $$
 
 
 
-## General Optimality Conditions
+## Optimality Conditions
+
+### Smooth Functions on an Arbitrary Constraint Set
+
+When the constraint set is nonconvex, then the tangent cone
+can be used as a suitable approximation to the constraint
+set at the point of local optimality. The tangent cone
+provides additional structure of being a cone and being
+closed.
+
+```{prf:theorem} Tangent cone and local optimality
+:label: res-opt-tangent-cone-local-minimum
+
+Let $f: \VV \to \RR$ be a smooth function.
+Let $\ba$ be a local minimum of $f$ over a subset $C$ of $\VV$.
+Then
+
+$$
+\langle \by, \nabla f(\ba) \rangle \geq 0, \Forall \by \in T_C(\ba).
+$$
+```
+This necessary condition means that the the value of function increases
+along every tangent direction.
+
+```{prf:proof}
+For the zero tangent direction at $\ba$,
+the condition is met trivially.
+Let $\bt$ be a nonzero tangent direction at $\ba$.
+
+1. Then there exists a sequence $\{ \bx_k \}$ of $C$
+   and a sequence $\{\br_k \}$ of $\VV$ such that
+   $\bx_k \neq \ba$ for every $k$,
+   $\br_k \to \bzero$, $\bx_k \to \ba$ and
+
+   $$
+   \frac{\bx_k - \ba}{\| \bx_k - \ba \|} =  \frac{\bt}{\| \bt \|} + \br_k.
+   $$
+   The term $\br_k$ is the residual between the $k$-th normalized direction
+   and the normalized tangent direction.
+1. Hence, for every $k$, we have
+
+   $$
+   \bx_k - \ba = \frac{\| \bx_k - \ba \|}{\| \bt \|}(\bt + \| \bt \| \br_k).
+   $$
+1. By mean value theorem, we have
+
+   $$
+   f(\bx_k) = f(\ba) + \langle \bx_k - \ba, \nabla f(\tilde{\bx}_k) \rangle
+   $$
+   where $\tilde{\bx}_k$ lies on the line segment $[\ba, \bx_k]$.
+1. Since $\bx_k \to \ba$, hence $\tilde{\bx}_k \to \ba$ holds too.
+1. Substituting for $\bx_k - \ba$, we get
+
+   $$
+   f(\bx_k)
+   &= f(\ba) + \left \langle \frac{\| \bx_k - \ba \|}{\| \bt \|} \bt_k, 
+   \nabla f(\tilde{\bx}_k) \right \rangle  \\
+   &= f(\ba) +  \frac{\| \bx_k - \ba \|}{\| \bt \|} 
+   \langle \bt_k , \nabla f(\tilde{\bx}_k) \rangle
+   $$
+   where $\bt_k = \bt + \| \bt \| \br_k$.
+1. Note that $\bt_k \to \bt$ since $\br_k \to \bzero$.
+1. Suppose for contradiction that $\langle \bt, \nabla f(\ba) \rangle < 0$.
+1. Since $\tilde{\bx}_k \to \ba$ and $\bt_k \to \bt$, hence it follows that
+   for all sufficiently large $k$, we have
+   $\langle \bt_k, \nabla f(\tilde{\bx}_k) \rangle < 0$.
+1. Hence, from the previous relation, we have
+   $f(\bx_k) < f(\ba)$ for all sufficiently large $k$.
+1. Thus contradictions the local optimality of $\ba$.
+1. Hence we must have $\langle \bt, \nabla f(\ba) \rangle \geq 0$.
+```
+
+
+
+### Convex Functions on a Convex Set
 
 Recall from Fermat's optimality condition
 ({prf:ref}`res-cvxf-subdiff-fermat-optimality`)
