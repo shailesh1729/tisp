@@ -504,7 +504,7 @@ $$
 
 ## Optimality Conditions
 
-### Smooth Functions on an Arbitrary Constraint Set
+### Minimization on an Arbitrary Constraint Set
 
 When the constraint set is nonconvex, then the tangent cone
 can be used as a suitable approximation to the constraint
@@ -515,8 +515,10 @@ closed.
 ```{prf:theorem} Tangent cone and local optimality
 :label: res-opt-tangent-cone-local-minimum
 
-Let $f: \VV \to \RR$ be a smooth function.
-Let $\ba$ be a local minimum of $f$ over a subset $C$ of $\VV$.
+Let $f: \VV \to \RERL$ be a function with $S = \dom f$.
+Let $\ba$ be a local minimum of $f$ over a subset $C$ of $S$.
+Assume that $f$ is continuously differentiable over an open
+set $O$ containing the local minimum $\ba$. Assume that $O \subseteq C$.
 Then
 
 $$
@@ -524,7 +526,15 @@ $$
 $$
 ```
 This necessary condition means that the the value of function increases
-along every tangent direction.
+along every tangent direction in its local neighborhood.
+
+For a smooth $f: \VV \to \RR$ the condition simplifies as follows.
+Let $\ba$ be a local minimum of $f$ over a subset $C$ of $\VV$.
+Then
+
+$$
+\langle \by, \nabla f(\ba) \rangle \geq 0, \Forall \by \in T_C(\ba).
+$$
 
 ```{prf:proof}
 For the zero tangent direction at $\ba$,
@@ -541,11 +551,16 @@ Let $\bt$ be a nonzero tangent direction at $\ba$.
    $$
    The term $\br_k$ is the residual between the $k$-th normalized direction
    and the normalized tangent direction.
-1. Hence, for every $k$, we have
+1. WLOG assume that $\bx_k \in O \Forall k$. Otherwise drop finitely many
+   terms from $\{ \bx_k \}$ to achieve this.
+1. For every $k$, we have
 
    $$
    \bx_k - \ba = \frac{\| \bx_k - \ba \|}{\| \bt \|}(\bt + \| \bt \| \br_k).
    $$
+1. Since $\bx_k \in O$ for every $k$, hence $f$ is continuously
+   differentiable at every $\bx_k$ and at every point on the line
+   segment $[\ba, \bx_k]$.
 1. By mean value theorem, we have
 
    $$
@@ -575,22 +590,27 @@ Let $\bt$ be a nonzero tangent direction at $\ba$.
 ```
 
 
-### Smooth Functions on a Convex Constraint Set
+### Minimization on a Convex Constraint Set
 
 ```{prf:theorem} Local optimality with a convex constraint set
 :label: res-opt-smooth-local-minimum-convex-const
 
-Let $f: \VV \to \RR$ be a smooth function.
-Let $\ba$ be a local minimum of $f$ over a subset $C$ of $\VV$.
+Let $f: \VV \to \RERL$ be a function with $S = \dom f$.
+Let $\ba$ be a local minimum of $f$ over a convex subset $C$ of $S$.
+Assume that $f$ is continuously differentiable over an open
+set $O$ containing the local minimum $\ba$. Assume that $O \subseteq C$.
 Then
 
 $$
 \langle \bx - \ba, \nabla f(\ba) \rangle \geq 0, \Forall \bx \in C.
 $$
-If $C = \VV$, this reduces to $\nabla f(\ba) = \bzero$.
+If $f$ is real valued (with $\dom f = \VV$)
+and $C = \VV$, this reduces to $\nabla f(\ba) = \bzero$.
 ```
 This result is similar to {prf:ref}`res-cvxopt-diff-convex-optimal-criterion`
-however applicable to all smooth functions.
+however applicable to all functions
+that are continuously differentiable in the neighborhood of their local minimum.
+
 
 ```{prf:proof}
 Since $C$ is convex, hence by {prf:ref}`res-opt-feasible-tangent-cone`,
