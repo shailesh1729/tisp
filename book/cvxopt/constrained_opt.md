@@ -575,6 +575,55 @@ Let $\bt$ be a nonzero tangent direction at $\ba$.
 ```
 
 
+### Smooth Functions on a Convex Constraint Set
+
+```{prf:theorem} Local optimality with a convex constraint set
+:label: res-opt-smooth-local-minimum-convex-const
+
+Let $f: \VV \to \RR$ be a smooth function.
+Let $\ba$ be a local minimum of $f$ over a subset $C$ of $\VV$.
+Then
+
+$$
+\langle \bx - \ba, \nabla f(\ba) \rangle \geq 0, \Forall \bx \in C.
+$$
+If $C = \VV$, this reduces to $\nabla f(\ba) = \bzero$.
+```
+This result is similar to {prf:ref}`res-cvxopt-diff-convex-optimal-criterion`
+however applicable to all smooth functions.
+
+```{prf:proof}
+Since $C$ is convex, hence by {prf:ref}`res-opt-feasible-tangent-cone`,
+$\closure F_C(\bx) = T_C(\bx)$ for every $\bx \in C$.
+
+1. By {prf:ref}`res-opt-tangent-cone-local-minimum`, we have
+
+   $$
+   \langle \by, \nabla f(\ba) \rangle \geq 0, \Forall \by \in T_C(\ba).
+   $$
+1. In other words
+
+   $$
+   \langle \by, \nabla f(\ba) \rangle \geq 0, \Forall \by \in \closure F_C(\ba).
+   $$
+1. For any $\bx \in C$, we have $\bx - \ba \in F_C(\ba)$ since $C$ is convex.
+1. Hence
+
+   $$
+   \langle \bx - \ba, \nabla f(\ba) \rangle \geq 0, \Forall \bx \in C.
+   $$
+
+The special case of $C = \VV$ is as follows.
+1. Choose an orthogonal basis $\be_1, \dots, \be_n$ for $\VV$.
+1. By picking $\bx = \ba + \be_i$ and $\bx = \ba - \be_i$, we see that
+   
+   $$
+   \langle \be_i \nabla f(\ba) \rangle = 0 \Forall i.
+   $$
+1. Hence $\nabla f(\ba) = \bzero$.
+```
+
+
 
 ### Convex Functions on a Convex Set
 
