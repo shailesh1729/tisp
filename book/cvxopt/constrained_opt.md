@@ -431,6 +431,7 @@ N_C(\ba) = \{ \bv \in \VV^* \ST
 $$
 
 ```{prf:theorem} Characterization of the polar cone of the tangent cone for a convex set
+:label: res-opt-polar-tangent-cone-normal-cone
 
 Let $C$ be a nonempty convex set.
 Then for every $\bx \in C$, we have
@@ -609,6 +610,29 @@ Since the polar cone is the negative of the dual cone, hence
 $\nabla f(\ba) \in T_C(\ba)^*$.
 ```
 
+```{prf:observation} Local minimum and descent directions
+:label: res-opt-smooth-local-minimum-descent
+
+Recall that a direction $\bd$ that satisfies
+$\langle \bd, \nabla f(\ba) \rangle < 0$ is called a descent
+direction at $\ba$. Recall from {prf:ref}`res-mvc-first-order-approx`
+that
+
+$$
+f(\bx) = f(\ba) + \langle \bx - \ba, \nabla f(\ba) \rangle + o (\| \bx - \ba \|).
+$$
+Thus for some $\bx = \ba + t \bd$ where $t > 0$, we have
+
+$$
+f(\bx) = f(\ba) + t \langle \bd, \nabla f(\ba) \rangle + o (\| \bx - \ba \|).
+$$
+Hence for sufficiently small $t > 0$, we have $f(\bx) < f(\ba)$.
+
+Thus, {prf:ref}`res-opt-tangent-cone-local-minimum` says that
+if $\ba$ is a local minimum of $f$ over $C$, then there is
+no descent direction within the tangent cone $T_C(\ba)$.
+```
+
 
 ### Minimization on a Convex Constraint Set
 
@@ -691,6 +715,12 @@ $$
 \text{ there exists } \bg \in \partial f(\bx^*)
 \text{ for which } - \bg \in N_C(\bx^*).
 $$
+
+Equivalently, $\bx^*$ minimizes $f$ over $C$ if and only if
+
+$$
+\bzero \in \partial f(\bx^*) + T_C(\bx^*)^{\circ}.
+$$
 ```
 
 ```{prf:proof}
@@ -736,6 +766,22 @@ where $I_C$ is the indicator function for the set $C$.
 
    $$
    (- \partial f(\bx^*)) \cap N_C(\bx^*) \neq \EmptySet.
+   $$
+
+For the second part:
+
+1. By {prf:ref}`res-opt-polar-tangent-cone-normal-cone`, we have
+   $N_C(\bx^*) = T_C(\bx^*)^{\circ}$ since $C$ is convex.
+1. By the earlier argument, we have $\bg \in \partial f(\bx^*)$
+   and $\bh \in N_C(\bx^*)$ such that 
+
+   $$
+   \bg + \bh = \bzero.
+   $$
+1. This is equivalent to saying that 
+
+   $$
+   \bzero \in \partial f(\bx^*) + T_C(\bx^*)^{\circ}.
    $$
 ```
 
