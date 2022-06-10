@@ -13,6 +13,9 @@ conditions for the following optimization problems
 1. Necessary optimality conditions for the
    minimization of a smooth cost function
    with linear inequality constraints.
+1. Necessary and sufficient optimality conditions
+   for the minimization of a convex and smooth
+   cost function with linear inequality constraints.
 
 
 ## Gordon's Theorem
@@ -98,7 +101,7 @@ not (1) $\implies$ (2)
 ## Smooth Cost Function, Linear Inequality Constraints
 
 ````{prf:theorem} KKT necessary optimality conditions for linearly constrained problems
-
+:label: res-opt-kkt-smooth-lin-ineq
 
 Consider an optimization problem of the form
 
@@ -232,4 +235,90 @@ We are given that $\bx^*$ is a local minimum point of {eq}`eq-opt-smooth-lin-ine
    \nabla f(\bx^*) + \sum_{i=1}^m t_i \ba_i = \bzero
    $$
    as desired.
+```
+
+
+## Convex and Smooth Cost Function, Linear Inequality Constraints
+
+````{prf:theorem} KKT necessary and sufficient optimality conditions for linearly constrained problems
+:label: res-opt-kkt-smooth-convex-lin-ineq
+
+Consider an optimization problem of the form
+
+$$
+& \text{minimize }  & & f(\bx) & \\
+& \text{subject to } & & \langle \bx, \ba_i \rangle \leq b_i, i=1,\dots,m &.
+$$
+
+where $f$ is a convex continuously differentiable over $\RR^n$,
+$\ba_1, \dots, \ba_m \in \RR^n$ and $b_1, \dots, b_m \in \RR$.
+Let $\bx^*$ be a feasible solution of this optimization problem.
+Then $\bx^*$ is an optimal solution
+if and only if
+there exist nonnegative scalars $t_1, \dots, t_m \geq 0$
+such that 
+
+$$
+\nabla f(\bx^*) + \sum_{i=1}^m t_i \ba_i = \bzero
+$$
+and 
+
+$$
+t_i (\langle \bx^*, \ba_i \rangle - b_i ) = 0, \quad i=1,\dots,m.
+$$
+````
+
+```{prf:proof}
+Assume that $\bx^*$ is an optimal solution.
+Then it is also a local minimizer.
+Then the necessary conditions follow from
+{prf:ref}`res-opt-kkt-smooth-lin-ineq`.
+
+
+For the converse, assume that $\bx^*$ is a feasible solution
+and the conditions for the scalars $t_1, \dots, t_m$ are
+satisfied.
+
+1. Consider any feasible solution $\bx$.
+1. Define a function
+
+   $$
+   h(\bx) = f(\bx) + \sum_{i=1}^m t_i (\langle \bx, \ba_i \rangle - b_i).
+   $$
+1. By differentiating w.r.t. $\bx$, we have
+
+   $$
+   \nabla h(\bx) = \nabla f(\bx) + \sum_{i=1}^m t_i \ba_i.
+   $$
+1. By hypothesis we have, $\nabla h(\bx^*) = 0$.
+1. Since $h$ is convex, hence by
+   {prf:ref}`res-cvxopt-diff-convex-optimal-unconstrained`,
+   $\bx^*$ is a minimizer of $h$ over $\RR^n$.
+1. By hypothesis, we have
+   $t_i (\langle \bx^*, \ba_i \rangle - b_i ) = 0, \quad i=1,\dots,m$.
+1. Hence
+
+   $$
+   \sum_{i=1}^m t_i (\langle \bx^*, \ba_i \rangle - b_i ) = 0.
+   $$
+1. For any feasible point, we have 
+   $\langle \bx, \ba_i \rangle \leq b_i$ for every $i$.
+1. Since by hypothesis $t_i \geq 0$, hence for any feasible point,
+   
+   $$
+   \sum_{i=1}^m t_i (\langle \bx, \ba_i \rangle - b_i ) \leq 0.
+   $$
+1. Hence
+   
+   $$
+   f(\bx^*) 
+   &= f(\bx^*) + \sum_{i=1}^m t_i (\langle \bx^*, \ba_i \rangle - b_i )\\
+   &= h(\bx^*) \\
+   &\leq h(\bx)\\
+   &= f(\bx) + \sum_{i=1}^m t_i (\langle \bx, \ba_i \rangle - b_i )\\
+   &\leq f(\bx).
+   $$
+1. Hence for every feasible solution $\bx$, we have
+   $f(\bx^*) \leq f(\bx)$.
+1. This proves that $\bx^*$ is a global optimal solution.
 ```
