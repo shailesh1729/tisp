@@ -560,3 +560,67 @@ satisfied.
    $f(\bx^*) \leq f(\bx)$.
 1. This proves that $\bx^*$ is a global optimal solution.
 ```
+
+The scalars $t_1, \dots, t_m$ that appear in the
+previous two results are known as the Lagrange
+multipliers.
+
+1. Each multiplier $t_i$ is associated with the corresponding
+   inequality constraint $\langle \bx, \ba_i \rangle \leq b_i$.
+1. Each multiplier is nonnegative.
+1. The conditions in {eq}`eq-opt-smooth-lin-ineq-complementarity`
+   are known as *complementary slackness conditions*.
+1. At the local minimizer, either the constraint is active
+   with $\langle \bx, \ba_i \rangle = b_i$ or $t_i = 0$.
+1. The results can be extended to support linear equality
+   constraints too.
+
+
+## Linear Constraints (Equality and Inequality)
+
+````{prf:theorem} KKT optimality conditions for linearly constrained problems
+:label: res-opt-kkt-smooth-lin-eq-ineq
+
+Consider an optimization problem of the form
+
+```{math}
+:label: eq-opt-smooth-lin-eq-ineq
+& \text{minimize }  & & f(\bx) & \\
+& \text{subject to } & & \langle \bx, \ba_i \rangle \leq b_i, i=1,\dots,m &\\
+& \text{and  } & & \langle \bx, \bc_j \rangle = d_j, j=1,\dots,p &
+```
+where $f$ is continuously differentiable over $\RR^n$,
+$\ba_1, \dots, \ba_m, \bc_1, \dots, \bc_p \in \RR^n$
+and $b_1, \dots, b_m, d_1, \dots, d_p \in \RR$.
+Then we have the following
+
+1. (Necessity of KKT conditions)
+   If $\bx^*$ is a local minimum of this optimization problem,
+   then there exist nonnegative scalars $t_1, \dots, t_m \geq 0$
+   and real scalars $r_1, \dots, r_p \in \RR$
+
+   such that 
+
+   ```{math}
+   :label: eq-opt-smooth-lin-eq-ineq-gradient-eq
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i \ba_i + \sum_{j=1}^p r_j \bc_j = \bzero
+   ```
+   and 
+
+   ```{math}
+   :label: eq-opt-smooth-lin-eq-ineq-complementarity
+   t_i (\langle \bx^*, \ba_i \rangle - b_i ) = 0, \quad i=1,\dots,m.
+   ```
+1. (Sufficiency for convex cost functions)
+   If $f$ is also convex over $\RR^n$ and $\bx^*$ is a feasible
+   point of the problem {eq}`eq-opt-smooth-lin-eq-ineq`
+   for which there exist nonnegative scalars $t_1, \dots, t_m \geq 0$
+   and real scalars $r_1, \dots, r_p \in \RR$ such that
+   {eq}`eq-opt-smooth-lin-eq-ineq-gradient-eq` and
+   {eq}`eq-opt-smooth-lin-eq-ineq-complementarity` are satisfied,
+   then $\bx^*$ is an optimal solution.
+````
+
+The key idea for the proof is convert each linear
+equality constraint to two linear inequality constraints.
+Then we can leverage the previous results.
