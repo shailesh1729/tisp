@@ -7,6 +7,14 @@ We present the optimality conditions in the
 form of special cases of KKT conditions.
 
 
+In the sequel, we present optimality
+conditions for the following optimization problems
+
+1. Necessary optimality conditions for the
+   minimization of a smooth cost function
+   with linear inequality constraints.
+
+
 ## Gordon's Theorem
 
 ```{prf:theorem} Gordon's theorem
@@ -84,4 +92,144 @@ not (1) $\implies$ (2)
 1. Thus, there exists $\bz \neq \bzero$, with $\bz \succeq \bzero$
    such that $\bA^T \bz = \bzero$.
 1. Hence, the system (2) has a solution $\bz$.
+```
+
+
+## Smooth Cost Function, Linear Inequality Constraints
+
+````{prf:theorem} KKT necessary optimality conditions for linearly constrained problems
+
+
+Consider an optimization problem of the form
+
+```{math}
+:label: eq-opt-smooth-lin-ineq
+& \text{minimize }  & & f(\bx) & \\
+& \text{subject to } & & \langle \bx, \ba_i \rangle \leq b_i, i=1,\dots,m &.
+```
+where $f$ is continuously differentiable over $\RR^n$,
+$\ba_1, \dots, \ba_m \in \RR^n$ and $b_1, \dots, b_m \in \RR$.
+Assume that $\bx^*$ is a local minimum of this optimization problem.
+Then there exist nonnegative scalars $t_1, \dots, t_m \geq 0$
+such that 
+
+```{math}
+:label: eq-opt-smooth-lin-ineq-gradient-eq
+\nabla f(\bx^*) + \sum_{i=1}^m t_i \ba_i = \bzero
+```
+and 
+
+```{math}
+:label: eq-opt-smooth-lin-ineq-complementarity
+t_i (\langle \bx^*, \ba_i \rangle - b_i ) = 0, \quad i=1,\dots,m.
+```
+````
+
+```{prf:proof}
+We are given that $\bx^*$ is a local minimum point of {eq}`eq-opt-smooth-lin-ineq`.
+
+1. Let $C$ denote the constraint set
+
+   $$
+   C = \{\bx \in \RR^n \ST  \langle \bx, \ba_i \rangle \leq b_i, i=1,\dots,m \}.
+   $$
+1. By {prf:ref}`res-opt-over-c-local-min-stationary`, $\bx^*$ must
+   be a stationary point.
+1. Hence for every $\bx \in C$, we have
+
+   $$
+   \langle \bx - \bx^* , \nabla f(\bx^*) \rangle \geq 0.
+   $$
+1. Introduce a change of variable $\by = \bx - \bx^*$ in the
+   stationary point criterion.
+1. We must have $\langle \by, \nabla f(\bx^*) \rangle \geq 0$
+   for every $\by$ satisfying $\langle \by + \bx^* , \ba_i \rangle \leq b_i$
+   for every $i=1,\dots,m$.
+1. Equivalently, we must have $\langle \by, \nabla f(\bx^*) \rangle \geq 0$
+   for every $\by$ satisfying
+   
+   $$
+   \langle \by, \ba_i \rangle \leq b_i - \langle \bx^*, \ba_i \rangle,
+   \quad \Forall i=1,\dots,m.
+   $$
+1. The $i$-th linear inequality  constraint is called active at $\bx^*$
+   if $\langle \bx, \ba_i \rangle = b_i$.
+1. The $i$-the constraint is called inactive if
+   $\langle \bx, \ba_i \rangle < b_i$.
+1. Let the set of active constraints be denoted by
+
+   $$
+   I(\bx^*) = \{i \ST \langle \bx^*, \ba_i \rangle = b_i \}.
+   $$
+1. If the $i$-th constraint is active, then
+   $\langle \by + \bx^* , \ba_i \rangle \leq b_i$ is equivalent to
+   $\langle \by, \ba_i \rangle \leq 0$.
+1. If the $i$-th constraint is inactive, then
+   $\langle \by + \bx^* , \ba_i \rangle \leq b_i$ is equivalent to
+   $\langle \by, \ba_i \rangle \leq b_i - \langle \bx^*, \ba_i \rangle$
+   a positive quantity.
+1. Thus, we must have $\langle \by, \nabla f(\bx^*) \rangle \geq 0$
+   whenever $\by$ satisfies
+
+   $$
+   & \langle \by, \ba_i \rangle \leq 0, & i \in I(\bx^*), \\ 
+   & \langle \by, \ba_i \rangle \leq b_i - \langle \bx^*, \ba_i \rangle, 
+   & i \notin I(\bx^*). 
+   $$
+1. We claim that the second set of inequalities are redundant.
+   1. Suppose that we pick a $\by$ such that
+      $\langle \by, \ba_i \rangle \leq 0, \Forall i \in I(\bx^*)$.
+   1. At $\bx^*$, we have $b_i - \langle \bx^*, \ba_i \rangle > 0$
+      for every $i \notin I(\bx^*)$.
+   1. Then it is possible to choose a small enough $\alpha > 0$ such that
+      $\langle \alpha \by, \ba_i \rangle \leq b_i - \langle \bx^*, \ba_i \rangle$
+      for every $i$.
+      1. We can choose an $\alpha_i$ for every $i$ as follows.
+      1. If $\langle \by, \ba_i \rangle \leq 0$, then let $\alpha_i = 1$.
+      1. If $\langle \by, \ba_i \rangle > 0$, then let
+
+         $$
+         \alpha_i = \frac{b_i - \langle \bx^*, \ba_i \rangle}{\langle \by, \ba_i \rangle}.
+         $$
+      1. Let $\alpha = \min\{ \alpha_1, \dots, \alpha_m \}$.
+   1. We can now see that
+
+      $$
+      & \langle \by, \ba_i \rangle \leq 0 \Forall i \in I(\bx^*)\\
+      \implies & \langle \alpha \by, \ba_i \rangle
+      \leq b_i - \langle \bx^*, \ba_i \rangle \Forall i=1,\dots,m.
+      $$
+   1. But then by stationarity of $\bx^*$, we must have
+      $\langle \alpha \by, \nabla f(\bx^*) \rangle \geq 0$.
+   1. Since $\alpha > 0$, hence we must have
+      $\langle \by, \nabla f(\bx^*) \rangle \geq 0$.
+1. Hence, we must have  $\langle \by, \nabla f(\bx^*) \rangle \geq 0$
+   whenever $\by$ satisfies
+
+   $$
+   \langle \by, \ba_i \rangle \leq 0, \quad \Forall i \in I(\bx^*).
+   $$
+1. We are ready to apply the Farkas' lemma {prf:ref}`res-cvx-farkas-lemma`.
+
+   1. Form $\bA$ by combining $-\ba_i$ for every $i \in I(\bx^*)$ as columns.
+   1. Let $\bv = \nabla f(\bx^*)$.
+   1. We have $\bA^T \by \succeq 0 \implies \by^T \bv\geq 0$.
+   1. Hence the system $\bA^T \by \succeq 0, \by^T \bv < 0$ is infeasible.
+   1. Hence there exists $\bt \succeq \bzero$ such that $\bA \bt = \bv$.
+1. Hence there exists $t_i \geq 0$ for every $i \in I(\bx^*)$ such that
+   
+   $$
+   - \nabla f(\bx^*) = \sum_{i \in I(\bx^*)} t_i \ba_i.
+   $$
+1. By defining $t_i = 0$ for every $i \notin I(\bx^*)$, we have
+
+   $$
+   t_i (\langle \bx^*, \ba_i \rangle - b_i) = 0  \quad \Forall i=1,\dots,m
+   $$
+   and
+
+   $$
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i \ba_i = \bzero
+   $$
+   as desired.
 ```
