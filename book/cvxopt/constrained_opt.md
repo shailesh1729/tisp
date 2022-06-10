@@ -638,6 +638,66 @@ that require separate treatment.
 ```
 
 
+```{prf:example} Tangent cone of a closed half space
+:label: ex-opt-tangent-cone-half-space
+
+Consider the set $C \subseteq \VV$ given by
+
+$$
+C = \{ \bx \ST \langle \bx, \ba \rangle \leq b \}.
+$$
+
+There are two possible cases for the points in $C$:
+1. $\bx \in \interior C$.
+1. $\bx \in \boundary C$.
+
+(1) Interior points
+
+1. Let $\bx \in \interior C$.
+1. Then it is easy to see that every direction is a feasible direction
+   along which we can find another point in $C$.
+1. Hence $F_C(\bx) = \VV$.
+1. Then $T_C(\bx) = \closure F_C(\bx) = \VV$.
+
+(2) Boundary points
+
+1. Let $\bx \in \boundary C$.
+1. Then we have $ \langle \bx, \ba \rangle = b$.
+1. Let $\bd \in F_C(\bx)$.
+1. This is equivalent to 
+   
+   $$
+   \langle \bx + t \bd, \ba \rangle \leq b
+   $$
+   for some $t > 0$.
+1. This is equivalent to $\langle \bd, \ba \rangle \leq 0$.
+1. Hence
+
+   $$
+   F_C(\bx) = \{ \bd \ST \langle \bd, \ba \rangle \leq 0 \}.
+   $$
+1. This is also a closed half-space.
+1. Hence $T_C(\bx) = \closure F_C(\bx) = F_C(\bx)$.
+1. We can see that $T_C(\bx)$ is the closed half-space
+   corresponding to the linear subspace parallel
+   to the hyperplane 
+
+   $$
+   H = \{ \bx \ST \langle \bx, \ba \rangle = b \}
+   $$
+   given by
+
+   $$
+   L = \{ \bx \ST \langle \bx, \ba \rangle = 0 \}.
+   $$
+1. In other words,
+
+   $$
+   T_C(\bx) = C - \bz
+   $$
+   where $\bz \in H$.
+```
+
 
 ## Optimality Conditions
 
