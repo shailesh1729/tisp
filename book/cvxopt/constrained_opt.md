@@ -504,6 +504,61 @@ $$
 
 ### Examples
 
+```{prf:example} Tangent cone for a linear system of equations
+:label: ex-opt-tangent-cone-linear-system
+
+
+Let $C = \{ \bx \in \RR^n \ST \bA \bx =  \bb \}$
+where $\bA \in \RR^{m \times n}$ and $\bb \in \RR^m$.
+
+
+Since $C$ is convex, the strategy for computation of tangent cone
+is as follows.
+
+1. Identify the set of all feasible directions at the point.
+1. Compute the closure of the set of feasible directions at the point.
+
+We note that $C$ is an affine subspace.
+
+1. Note that the subspace $L$ parallel to $C$ is given by
+
+   $$
+   L = \{ \bx \in \RR^n \ST \bA \bx =  \bzero \}.
+   $$
+
+1. Let $\bx \in C$.
+1. Every direction in the subspace $L$ is a feasible direction.
+   1. Let $\bd \in L$.
+   1. Then $\bA (\bx + \bd) = \bb$.
+   1. Hence $\bd$ is a feasible direction.
+1. It is easy to see that there are no other feasible directions.
+1. Hence $F_C(\bx) = L$.
+1. Since $\RR^n$ is finite dimensional, hence $L$ is closed.
+1. Since $T_C(\bx) = \closure F_C(\bx)$, hence
+   $T_C(\bx) = L$.
+
+```
+
+```{prf:example} Tangent cone for an affine subspace
+:label: ex-opt-tangent-cone-affine-subspace
+
+Let $A \subseteq \VV$ be an affine subspace.
+
+1. We note that $A$ is closed and convex.
+1. Let $L$ be the linear subspace parallel to $A$.
+1. Pick some $\bx \in A$.
+1. Then for any $\bt \in L$, we have
+   $\bx + \bt \in A$.
+1. Hence every direction in $L$ is a feasible direction.
+1. It is also easy to see that no other direction is a feasible direction.
+1. Hence $F_C(\bx) = L$.
+1. Since $T_C(\bx) = \closure F_C(\bx)$, hence
+   $T_C(\bx) = L$.
+
+The tangent cone at any point in an affine subspace
+is the subspace parallel to the affine subspace.
+```
+
 ```{prf:example} Tangent cone of a closed unit ball
 :label: ex-opt-tangent-cone-unit-ball
 
