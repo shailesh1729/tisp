@@ -619,6 +619,42 @@ Thus, $\by$ cannot belong to $V^{\circ}$. A contradiction.
 Thus, $V^{\circ} = V^{\perp}$.
 ```
 
+```{prf:example} Polar cone of a null space
+:label: ex-cvx-polar-cone-nullspace
+
+Let $\bA \in \RR^{m \times n}$ and 
+$C = \nullspace \bA$.
+
+1. Recall from linear algebra that
+
+   $$
+   (\nullspace \bA)^{\perp} = \range \bA^T.
+   $$
+1. Hence by {prf:ref}`res-cvx-subspace-polar-cone`,
+
+   $$
+   C^{\circ} = C^{\perp} = \range \bA^T.
+   $$
+
+We can verify this result easily.
+
+1. Let $\bv \in \range \bA^T$.
+1. Then there exists $\bu \in \RR^m$ such that
+   $\bv = \bA^T \bu$.
+1. For every $\bx \in \nullspace \bA$, we have $\bA \bx = \bzero$.
+1. Hence
+
+   $$
+   \langle \bx, \bv \rangle
+   = \langle \bx, \bA^T \bu \rangle
+   = \langle \bA \bx, \bu \rangle
+   = \bzero.
+   $$
+1. Hence $\bv \in (\nullspace \bA)^{\circ}$.
+```
+
+
+
 ```{prf:property} Polar cone and closure
 :label: res-cvx-polar-cone-closure
 
