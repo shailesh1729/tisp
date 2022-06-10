@@ -502,6 +502,87 @@ $$
 ```
 
 
+### Examples
+
+```{prf:example} Tangent cone of a closed unit ball
+:label: ex-opt-tangent-cone-unit-ball
+
+Consider the set $C = B[\bzero, 1] \subseteq \VV$ given by
+
+$$
+B[\bzero, 1] = \{ \bx \ST \| \bx \| \leq 1  \}.
+$$
+
+Since $C$ is convex, the strategy for computation of tangent cone
+is as follows.
+
+1. Pick a point.
+1. Identify the set of all feasible directions at the point.
+1. Compute the closure of the set of feasible directions at the point.
+
+There are two possible cases for the points in $C$
+that require separate treatment.
+1. $\bx \in \interior C$.
+1. $\bx \in \boundary C$.
+
+(1) Interior points
+
+1. Let $\bx \in \interior C$.
+1. Then it is easy to see that every direction is a feasible direction
+   along which we can find another point in $C$.
+1. Hence $F_C(\bx) = \VV$.
+1. Then $T_C(\bx) = \closure F_C(\bx) = \VV$.
+
+
+(2) Boundary points
+
+1. Let $\bx \in \boundary C$.
+1. We can see that only those directions are feasible that point
+   towards some point in $C$. Any direction pointing towards
+   the exterior of $C$ is not a feasible direction.
+   1. The directions which make an acute angle with $\bx$
+      point away from the ball.
+   1. The directions which make an obtuse angle with $\bx$
+      point inside the ball.
+1. We shall now formally prove this.
+1. Since $\bx \in \boundary C$, hence $\| \bx \| = 1$.
+1. Let $\by \in F_C(\bx)$.
+1. Then we must have $\bx + t \by \in C$ for sufficiently small
+   $t > 0$.
+1. Hence $\by \in F_C(\bx)$ if and only if there exists
+   a $\overline{t} > 0$ such that for every $t \in (0, \overline{t}]$
+   we have $\| \bx + t \by \| \leq 1$.
+1. Expanding, we have
+
+   $$
+   \| \bx \|^2 + 2 t \langle \bx, \by \rangle + t^2 \| \by \|^2  \leq 1
+   \Forall t \in (0, \overline{t}].
+   $$
+1. Since $\| \bx \| =1$, hence this reduces to
+
+   $$
+   2 t \langle \bx, \by \rangle + t^2 \| \by \|^2  \leq 0
+   \Forall t \in (0, \overline{t}].
+   $$
+1. There are only two possibilities for this relation to hold true
+   since $\| \by \| \geq 0$.
+   1. Either $\by = \bzero$.
+   1. Or $\langle \bx, \by \rangle < 0$ and
+      $t \leq \frac{-2 \langle \bx, \by \rangle}{ \| \by \|^2}$.
+   1. From the second case, we have 
+
+      $$
+      \overline{t} = \frac{-2 \langle \bx, \by \rangle}{ \| \by \|^2}.
+      $$
+1. Hence $F_C(\bx) = \{ \by \ST \langle \bx, \by  \rangle < 0 \} \cup \{ \bzero \}$.
+1. From $T_C(\bx) = \closure F_C(\bx) = \VV$, we have
+
+   $$
+   T_C(\bx) = \{ \by \ST \langle \bx, \by  \rangle \leq 0 \}.
+   $$
+```
+
+
 
 ## Optimality Conditions
 
