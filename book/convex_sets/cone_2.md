@@ -375,6 +375,40 @@ We note that polar cones are just the negative of dual cones.
 Thus, they exhibit similar properties as dual cones.
 
 
+```{prf:example} Polar cone of a ray
+:label: ex-cvx-polar-cone-ray
+
+Let $\bx$ be a given nonzero vector.
+Let 
+
+$$
+C = \cone \{  \bx \}  = \{ t \bx \ST t \geq 0 \}.
+$$
+
+1. Let $\by \in C^{\circ}$.
+1. Then for every $t \geq 0$, we have $\langle t \bx, \by \rangle \leq 0$.
+1. Equivalently, $\langle \bx, \by \rangle \leq 0$ since $t \geq 0$.
+1. Hence
+
+   $$
+   C^{\circ} = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0\}.
+   $$
+1. Also note that $C$ is closed and convex.
+1. We shall show later in {prf:ref}`polar cone theorem <res-cvx-polar-cone-theorem>`
+   that
+
+   $$
+   (C^{\circ})^{\circ} = C.
+   $$
+1. Hence the polar cone of the set 
+   
+   $$
+   \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0\}
+   $$
+   is $\cone \{ \bx \}$.
+```
+
+
 ### Properties
 
 ```{prf:property}
