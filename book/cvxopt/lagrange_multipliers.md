@@ -286,6 +286,80 @@ $$
    $$
 ```
 
+```{div}
+The key issue with Fritz-John conditions is that
+it allows $t_0 = 0$. The case $t_0 = 0$ is
+not particularly useful since it leads to
+
+$$
+\sum_{i \in I(\bx^*)} t_i \nabla f_i(\bx^*) = \bzero.
+$$
+with $t_i \geq 0$ and not all $t_i$ being zero.
+This means that the gradients of the active
+constraints are linearly dependent.
+
+1. The case of linearly dependent gradients has nothing to do with
+   the objective function.
+1. A number of points might satisfy the Fritz-John
+   conditions and yet not be local minimum points.
+1. We can modify the Fritz-John conditions and insist that
+   the gradients of the active constraints be linearly independent.
+1. This leads to what are called the KKIT conditions.
+```
+
+### KKT Conditions
+
+```{prf:theorem} KKT conditions
+:label: res-opt-inequality-kkt
+
+Let $\bx^*$ be a local minimizer of the
+optimization problem
+
+$$
+& \text{minimize }  & & f(\bx) & \\
+& \text{subject to } & & f_i(\bx) \leq 0, i=1,\dots,m &
+$$
+where $f, f_1, \dots, f_m : \VV \to \RR$ are
+continuously differentiable functions over $\VV$.
+Let $I(\bx^*)$ denote the set of active constraints:
+
+$$
+I(\bx^*) = \{ i \ST f_i(\bx^*) = 0 \}.
+$$
+Assume that the gradients of the active constraints
+$\{\nabla f_i(\bx^*) \}_{i \in I(\bx^*)}$ are 
+linearly independent.
+
+
+Then there exist nonnegative scalar multipliers
+$t_1, \dots, t_m \geq 0$ which are not all
+zero such that
+
+$$
+& \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla f_i(\bx^*) = \bzero, \\
+& t_i f_i(\bx^*) = 0, i=1, \dots, m.
+$$
+```
+
+```{prf:proof}
+This is a simple extension of {prf:ref}`res-opt-inequality-fritz-john`.
+
+By Fritz-John conditions, there exist nonnegative scalar multipliers
+$r_0, r_1, \dots, r_m \geq 0$ which are not all
+zero such that
+
+$$
+& r_0 \nabla f(\bx^*) + \sum_{i=1}^m r_i \nabla f_i(\bx^*) = \bzero, \\
+& r_i f_i(\bx^*) = 0, i=1, \dots, m.
+$$
+
+1. If $r_0 = 0$, then the set of gradients of active constraints
+   will become linearly dependent.
+1. Hence, we must have $r_0 > 0$.
+1. Let $t_i = \frac{r_i}{r_0}$ for every $i=1,\dots,m$.
+1. The result follows.
+```
+
 
 ## A Tangent Cones Perspective
 
