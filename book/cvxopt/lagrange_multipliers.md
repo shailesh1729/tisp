@@ -109,6 +109,91 @@ We prove this by contradiction.
    at $\bx^*$.
 ```
 
+### Necessary Optimality Conditions
+
+Revising the problem {eq}`eq-opt-lm-smooth-smooth-ineq`:
+
+1. A constraint $f_i$ is called active at $\bx$ if $f_i(\bx) = 0$.
+1. A constraint $f_i$ is called inactive at $\bx$ if $f_i(\bx) < 0$.
+1. The set of active constraints at a point $\bx$ is denoted by
+
+   $$
+   I(\bx) = \{ i \in 1,\dots,m \ST f_i(\bx) = 0 \}.
+   $$
+
+We first restate the {prf:ref}`res-opt-local-min-feasible-descent-dirs`
+for the minimization with inequality constraints problem
+{eq}`eq-opt-lm-smooth-smooth-ineq`.
+The key idea is the lack of feasible descent directions
+at a local minimizer.
+
+1. $f'(\bx; \bd) < 0$ will indicate that $\bd$ is a feasible
+   direction.
+1. If a constraint is inactive, then it remains valid
+   in the neighborhood of the local minimizer
+   due to continuity of $f_i$.
+1. If a constraint is active, then moving in some
+   directions will lead to invalidation of the constraint
+   while moving in some directions will keep the constraint
+   valid.
+1. In particular, if $f_i'(\bx; \bd) < 0$, then moving
+   along $\bd$ keeps the $i$-th active constraint valid.
+1. Hence, along a feasible descend direction, the directional
+   derivatives of the cost function and the active constraint
+   functions must be negative.
+
+```{prf:lemma} Local minimum and feasible descent directions for inequality constraints
+:label: res-opt-inequality-local-min-feasible-descent-dirs
+
+Let $\bx^*$ be a local minimizer of the
+optimization problem {eq}`eq-opt-lm-smooth-smooth-ineq`:
+
+$$
+& \text{minimize }  & & f(\bx) & \\
+& \text{subject to } & & f_i(\bx) \leq 0, i=1,\dots,m &
+$$
+where $f, f_1, \dots, f_m : \VV \to \RR$ are
+continuously differentiable functions over $\VV$.
+Let $I(\bx^*)$ denote the set of active constraints:
+
+$$
+I(\bx^*) = \{ i \ST f_i(\bx^*) = 0 \}.
+$$
+Then there doesn't exist a vector $\bd \in \VV$
+such that
+
+$$
+& f'(\bx; \bd) < 0,\\
+& f_i'(\bx; \bd) < 0, \quad i \in I(\bx^*).
+$$
+```
+
+```{prf:proof}
+We prove this by contradiction.
+
+1. Let $\bx^*$ be a local minimizer.
+1. Assume that $\bd \neq \bzero$ be a direction
+   satisfying the constraints above.
+1. Then there exists an $\epsilon_0 > 0$
+   such that $f(\bx^* + t \bd) < f(\bx^*)$
+   for every $t \in (0, \epsilon_0)$.
+1. Similarly, there exist $\epsilon_i > 0$
+   such that $f_i(\bx^* + t \bd) < f_i(\bx^*) = 0$
+   for every $t \in (0, \epsilon_i)$ for every $i \in I(\bx^*)$.
+1. Let $\epsilon = \min\{\epsilon_0, \dots, \epsilon_m \}$.
+1. Then for every $t \in (0, \epsilon)$, we have
+   $f(\bx^* + t \bd) < f(\bx^*)$
+   and $f_i (\bx^* + t \bd) < 0$ for every $i \in I(\bx^*)$.
+1. By the continuity of $f_i$ for all $i$, 
+   and the fact that $f_i(\bx^*) < 0$ for every $i \notin I(\bx^*)$,
+   there exists a $\delta > 0$ such that for every $t \in (0, \delta)$,
+   $f_i(\bx^* + t \bd) < 0$ for every $i \notin I(\bx^*)$.
+1. Hence, we conclude that for every $t \in (0, \min(\epsilon, \delta))$,
+   we have $f(\bx^* + t \bd) < f(\bx^*)$
+   and $f_i (\bx^* + t \bd) < 0$ for every $i \in 1,\dots,m$.
+1. But this contradicts the local optimality of $\bx^*$.
+```
+
 
 ## A Tangent Cones Perspective
 
