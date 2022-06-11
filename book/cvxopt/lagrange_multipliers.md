@@ -109,7 +109,7 @@ We prove this by contradiction.
    at $\bx^*$.
 ```
 
-### Necessary Optimality Conditions
+### Necessary Conditions for Local Optimality
 
 Revising the problem {eq}`eq-opt-lm-smooth-smooth-ineq`:
 
@@ -163,10 +163,13 @@ Then there doesn't exist a vector $\bd \in \VV$
 such that
 
 $$
-& f'(\bx; \bd) < 0,\\
-& f_i'(\bx; \bd) < 0, \quad i \in I(\bx^*).
+& \langle \bd, \nabla f(\bx^*) \rangle = f'(\bx^*; \bd) < 0,\\
+& \langle \bd, \nabla f_i(\bx^*) \rangle = f_i'(\bx^*; \bd) < 0, \quad i \in I(\bx^*).
 $$
 ```
+This result states that local optimality
+is equivalent to the infeasibility of
+a certain system of strict inequalities.
 
 ```{prf:proof}
 We prove this by contradiction.
@@ -192,6 +195,95 @@ We prove this by contradiction.
    we have $f(\bx^* + t \bd) < f(\bx^*)$
    and $f_i (\bx^* + t \bd) < 0$ for every $i \in 1,\dots,m$.
 1. But this contradicts the local optimality of $\bx^*$.
+```
+
+### Fritz-John Conditions
+
+Recall that Farkas' and Gordan's theorems
+of the alternative present different pairs
+of systems where if one system is infeasible
+then the other must be feasible and vice versa.
+We can apply Gordan's theorem to the infeasible
+system of strict inequalities in
+{prf:ref}`res-opt-inequality-local-min-feasible-descent-dirs`
+to develop the so-called Fritz-John conditions.
+
+```{prf:theorem} Fritz-John conditions
+:label: res-opt-inequality-fritz-john
+
+Let $\bx^*$ be a local minimizer of the
+optimization problem
+
+$$
+& \text{minimize }  & & f(\bx) & \\
+& \text{subject to } & & f_i(\bx) \leq 0, i=1,\dots,m &
+$$
+where $f, f_1, \dots, f_m : \VV \to \RR$ are
+continuously differentiable functions over $\VV$.
+Then there exist nonnegative scalar multipliers
+$t_0, t_1, \dots, t_m \geq 0$ which are not all
+zero such that
+
+$$
+& t_0 \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla f_i(\bx^*) = \bzero, \\
+& t_i f_i(\bx^*) = 0, i=1, \dots, m.
+$$
+```
+
+```{prf:proof}
+From {prf:ref}`res-opt-inequality-local-min-feasible-descent-dirs`,
+we have that the following system is infeasible.
+
+$$
+& \langle \bd, \nabla f(\bx^*) \rangle < 0,\\
+& \langle \bd, \nabla f_i(\bx^*) \rangle < 0, \quad i \in I(\bx^*).
+$$
+
+1. Let $n = \dim \VV$.
+1. Let there be an isomorphic mapping between $\VV$ and $\RR^n$.
+1. For every $\bx \in \VV$, let $\bx$ also denote the corresponding vector in $\RR^n$.
+1. Assume that there are $k$ active constraints at $\bx^*$.
+1. Construct a $k+1 \times n$ matrix $\bA$ as follows:
+
+   $$
+   \bA  = \begin{bmatrix}
+   \nabla f(\bx^*)^T \\
+   \nabla f_{i_1}(\bx^*)^T \\
+   \vdots \\
+   \nabla f_{i_k}(\bx^*)^T
+   \end{bmatrix}
+   $$
+   where $i_1, \dots, i_k$ denote the indices of active constraints.
+1. Then the above system of strict inequalities can be stated as
+   $\bA \bd \prec \bzero$.
+1. This system of equations is infeasible.
+1. Then by {prf:ref}`Gordan's theorem <res-opt-gordan-theorem>`,
+   the system
+
+   $$
+   \bt \neq \bzero, \bA^T \bt = \bzero, \bt \succeq \bzero
+   $$
+   where $\bt \in \RR^{k+1}$ is feasible.
+1. We write $\bt =(t_0, t_{i_1}, \dots, t_{i_k})$.
+1. The equation $\bA^T \bt = \bzero$ expands to
+
+   $$
+   t_0 \nabla f(\bx^*) + \sum_{i \in I(\bx^*)} t_i \nabla f_i(\bx^*) = \bzero.
+   $$
+1. $\bt \neq \bzero$ means that at least one of $t_0, t_{i_1}, \dots, t_{i_k} \neq 0$.
+1. $\bt \succeq \bzero$ means that  $t_0, t_{i_1}, \dots, t_{i_k} \geq 0$.
+1. Now, let $t_i = 0$ for all remaining $i \notin I(\bx^*)$.
+1. Then for active constraints, we have $f_i(\bx^*) = 0$
+   and for inactive constraints, we have $t_i = 0$.
+1. Hence for all constraints, we have $t_i f_i(\bx^*) = 0$.
+1. Hence there exist nonnegative scalar multipliers
+   $t_0, t_1, \dots, t_m \geq 0$ which are not all
+   zero such that
+
+   $$
+   & t_0 \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla f_i(\bx^*) = \bzero, \\
+   & t_i f_i(\bx^*) = 0, i=1, \dots, m.
+   $$
 ```
 
 
