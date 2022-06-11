@@ -54,7 +54,7 @@ Consider the problem of minimizing a cost function
 $f : \VV \to \RERL$
 over a constraint set $C \subseteq \dom f$.
 A nonzero vector $\bd$ is called a *feasible descent direction*
-at $\bx \in C$ if $f(\bx; \bd) < 0$
+at $\bx \in C$ if $f'(\bx; \bd) < 0$
 and there exists
 $\overline{t} > 0$ such that
 
@@ -73,7 +73,41 @@ and a decent direction.
    $\by \in [\bx, \bx + \overline{t}\bd ] \in C$.
 ```
 
+```{prf:lemma} Local minimum and feasible descent directions
+:label: res-opt-local-min-feasible-descent-dirs
 
+Consider the problem of minimizing a cost function
+$f : \VV \to \RERL$
+over a constraint set $C \subseteq \dom f$.
+If $\bx^*$ is a local minimizer then there are
+no feasible descent directions at $\bx^*$.
+```
+
+```{prf:proof}
+We prove this by contradiction.
+
+1. Let $\bx^*$ be a local minimizer.
+1. Assume that $\bd \neq \bzero$ is a feasible descent direction.
+1. Then there is an $\epsilon_1 > 0$ such that
+   $\bx^* + t \bd \in C$ for every $t \in [0, \epsilon_1]$.
+1. Also, $f'(\bx; \bd) < 0$.
+1. By {prf:ref}`def-cvxf-directional-derivative`,
+   there exists $\epsilon_2 > 0$ such that
+
+   $$
+   \frac{f(\bx^* + t \bd) - f(\bx^*)}{t} < 0
+   \quad \Forall  0 < t < \epsilon_2.
+   $$
+1. Equivalently, $f(\bx^* + t \bd) < f(\bx^*)$
+   for all $0 < t < \epsilon_2$.
+1. Let $\epsilon = \min(\epsilon_1, \epsilon_2)$.
+1. Then for every $t \in (0, \epsilon)$, we have
+   $\bx + t \bd \in C$ and $f(\bx^* + t \bd) < f(\bx^*)$.
+1. This contradicts the hypothesis that $\bx^*$ is a
+   local minimizer.
+1. Hence, there are no feasible descent directions
+   at $\bx^*$.
+```
 
 
 ## A Tangent Cones Perspective
