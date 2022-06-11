@@ -1,6 +1,80 @@
 (sec:opt:lagrange:multipliers)=
 # Lagrange Multipliers
 
+## Inequality Constrained Problems
+
+We start by developing the KKT conditions for the
+problem of minimizing a smooth function over a
+set of inequality constraints.
+
+The problem is given as
+```{math}
+:label: eq-opt-lm-smooth-smooth-ineq
+& \text{minimize }  & & f(\bx) & \\
+& \text{subject to } & & f_i(\bx) \leq 0, i=1,\dots,m &
+```
+where $f, f_1, \dots, f_m : \VV \to \RR$ are
+continuously differentiable functions over $\VV$.
+
+The constraint set is given by
+
+$$
+C = \{\bx \in \VV \ST  f_i(\bx) \leq 0, i=1,\dots,m \}.
+$$
+
+
+### Feasible Descent Directions
+
+Recall from {prf:ref}`def-opt-descent-direction`
+that a descent direction is a direction along
+which the directional derivative of the cost
+function is negative; i.e.,
+$f'(\bx; \bd) < 0$.
+If $f$ is continuously differentiable, this
+translates to
+
+$$
+f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle < 0.
+$$
+Recall from {prf:ref}`def-opt-feasible-direction`
+that given a vector $\bx \in C$, 
+a direction $\bd \in \VV$
+is said to be a *feasible direction* of $C$ at $\bx$ if
+there exists a $\overline{t} > 0$ such that
+
+$$
+\bx + t \bd \in C \text{ for every } t \in [0, \overline{t}].
+$$
+
+We now introduce the notion of a feasible descent direction.
+```{prf:definition} Feasible descent direction
+:label: def-opt-feasible-descent-direction
+
+Consider the problem of minimizing a cost function
+$f : \VV \to \RERL$
+over a constraint set $C \subseteq \dom f$.
+A nonzero vector $\bd$ is called a *feasible descent direction*
+at $\bx \in C$ if $f(\bx; \bd) < 0$
+and there exists
+$\overline{t} > 0$ such that
+
+$$
+\bx + t \bd \in C \text{ for every } t \in [0, \overline{t}].
+$$
+In other words, a feasible descent direction
+at $\bx \in C$ is a feasible direction
+and a decent direction.
+
+1. If $f$ is continuously differentiable then
+   we must have $\langle \bd, \nabla f(\bx) \rangle < 0$.
+1. If $C$ is convex, then we just need to have
+   $\bx + \overline{t}\bd \in C$. By virtual of
+   convexity of $C$, every
+   $\by \in [\bx, \bx + \overline{t}\bd ] \in C$.
+```
+
+
+
 
 ## A Tangent Cones Perspective
 
