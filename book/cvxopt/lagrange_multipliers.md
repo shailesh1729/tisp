@@ -636,6 +636,205 @@ The optimal solution
 ```
 
 
+## The Convex Case
+
+We now restrict our attention to the case where
+the cost and constraint functions are convex.
+In this case, the KKT conditions are also sufficient.
+
+```{prf:theorem} Sufficient KKT conditions for convex problems (smooth and convex cost and inequality constraints, affine equality constraints)
+:label: res-opt-convex-ineq-affine-eq-kkt
+
+Let $\bx^*$ be a feasible solution of the
+optimization problem
+
+$$
+& \text{minimize }   & & f(\bx) \\
+& \text{subject to } & & g_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
+$$
+where $f, g_1, \dots, g_m : \VV \to \RR$ are
+continuously differentiable convex functions over $\VV$
+and $h_1, \dots, h_p : \VV \to \RR$ are affine functions.
+
+Suppose that there exist nonnegative scalar multipliers
+$t_1, \dots, t_m \geq 0$
+and real scalar multipliers $r_1, \dots, r_p \in \RR$
+which are not all zero such that
+
+$$
+& \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*)
++ \sum_{j=1}^p r_j \nabla h_j(\bx^*) = \bzero, \\
+& t_i g_i(\bx^*) = 0, i=1, \dots, m.
+$$
+Then $\bx^*$ is an optimal solution of the minimization problem above.
+```
+
+```{prf:proof}
+We are given that $\bx^*$ is a feasible point satisfying the
+KKT conditions.
+
+1. Define the function
+
+   $$
+   s(\bx) = f(\bx) + \sum_{i=1}^m t_i g_i(\bx) + \sum_{j=1}^p r_j h_j(\bx).
+   $$
+1. Since $f$ and $g_i$ are convex and $h_j$ are affine, hence $s$ is convex.
+1. Since all of them are continuously differentiable, hence $s$ is also
+   continuously differentiable.
+1. We have
+
+   $$
+   \nabla s(\bx) =  \nabla f(\bx) + \sum_{i=1}^m t_i \nabla g_i(\bx)
+   + \sum_{j=1}^p r_j \nabla h_j(\bx).
+   $$
+1. We are given that $\nabla s(\bx^*) = 0$.
+1. By {prf:ref}`res-cvxopt-diff-convex-optimal-unconstrained`,
+   $\bx^*$ is a minimizer of $s$ over $\VV$.
+1. Hence $s(\bx^*) \leq s(\bx)$ for every $\bx \in \VV$.
+1. By hypothesis $t_i g_i(\bx^*) = 0$ for every $i=1,\dots,m$.
+1. Hence $\sum_{i=1}^m t_i g_i(\bx^*) = 0$.
+1. Since $\bx^*$ is a feasible point,
+   hence $h_j(\bx^*) = 0$ for every $j=1,\dots,p$.
+1. Hence $\sum_{j=1}^p h_j(\bx^*) = 0$.
+1. Hence
+
+   $$
+   f(\bx^*) 
+   &= f(\bx^*) + \sum_{i=1}^m t_i g_i(\bx^*)  + \sum_{j=1}^p h_j(\bx^*)\\
+   &= s(\bx^*) \\
+   &\leq s(\bx)\\
+   &= f(\bx) + \sum_{i=1}^m t_i g_i(\bx) + \sum_{j=1}^p r_j h_j(\bx)\\
+   &\leq f(\bx).
+   $$
+   The last inequality comes from the fact that
+   $t_i \geq 0$, $g_i(\bx) \leq 0$ and $h_j(\bx) = 0$ for every
+   feasible $\bx$.
+1. Hence for every feasible $\bx$, we have $f(\bx^*) \leq f(\bx)$.
+1. Hence $\bx^*$ is an optimal point.
+```
+
+### Slater's Conditions
+
+In {prf:ref}`res-opt-ineq-eq-kkt`, we saw that
+KKT conditions become necessary for the local optimality
+of a feasible point only if the feasible point is regular.
+The regularity was a constraint qualification for
+the nonconvex smooth optimization problem.
+
+In the convex case, a different condition than
+regularity can guarantee the necessity of KKT
+conditions. They are known as *Slater's conditions*.
+
+```{prf:definition} Slater's conditions
+:label: def-opt-kkt-slater-condition
+
+Let $g_1, \dots, g_m : \VV \to \RR$ be convex.
+We say that the *Slater's condition* is satisfied for
+a set of convex inequalities
+
+$$
+g_i(\bx) \leq 0, \quad i=1,\dots,m
+$$
+if there exists a point $\widehat{\bx} \in \VV$ such that
+
+$$
+g_i(\widehat{\bx}) < 0, \quad i=1,\dots,m.
+$$
+
+In other words, the Slater's condition requires the
+existence of a point which strictly satisfies all the
+convex inequality constraints.
+```
+
+Slater's condition is much easier to check since it
+requires the existence of a single point which strictly satisfies
+all the convex inequalities.
+
+
+```{prf:theorem} Necessity of KKT conditions under Slater's condition
+:label: res-opt-convex-ineq-slater
+
+Let $\bx^*$ be an optimal solution of the
+optimization problem
+
+$$
+& \text{minimize }   & & f(\bx) \\
+& \text{subject to } & & g_i(\bx) \leq 0, & \quad i=1,\dots,m
+$$
+where $f, g_1, \dots, g_m : \VV \to \RR$ are
+continuously differentiable functions over $\VV$.
+In addition, assume that $g_1, \dots, g_m$ are convex.
+Suppose that there exists a point $\widehat{\bx} \in \VV$ such that
+
+$$
+g_i(\widehat{\bx}) < 0, \quad i=1,\dots,m.
+$$
+
+Then there exist nonnegative scalar multipliers
+$t_1, \dots, t_m \geq 0$
+which are not all zero such that
+
+$$
+& \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*) = \bzero, \\
+& t_i g_i(\bx^*) = 0, i=1, \dots, m.
+$$
+```
+
+```{prf:proof}
+This is also derived from Fritz-John conditions
+{prf:ref}`res-opt-inequality-fritz-john`.
+
+By Fritz-John conditions, there exist nonnegative scalar multipliers
+$r_0, r_1, \dots, r_m \geq 0$ which are not all
+zero such that
+
+$$
+& r_0 \nabla f(\bx^*) + \sum_{i=1}^m r_i \nabla g_i(\bx^*) = \bzero, \\
+& r_i g_i(\bx^*) = 0, i=1, \dots, m.
+$$
+We need to show that $r_0 > 0$. After that
+we can pick $t_i = \frac{r_i}{r_0}$ for every $i=1,\dots,m$
+to get the desired result.
+
+1. For contradiction, assume that $r_0 = 0$.
+1. Then we have
+
+   $$
+   \sum_{i=1}^m r_i \nabla g_i(\bx^*) = \bzero.
+   $$
+1. By the gradient inequality, we have
+
+   $$
+   g_i(\bx) \geq g_i(\bx^*) + \langle \bx - \bx^*, \nabla g_i(\bx^*) \rangle,
+   \quad i=1,\dots,m.
+   $$
+1. Specifically, for the point $\widehat{\bx}$, we have
+
+   $$
+   0 >  g_i(\widehat{\bx}) \geq g_i(\bx^*) + \langle \widehat{\bx} - \bx^*, \nabla g_i(\bx^*) \rangle,
+   \quad i=1,\dots,m.
+   $$
+1. Multiplying the $i$-th inequality by $r_i \geq 0$ and summing over
+   $i=1,\dots,m$, we get
+
+   $$
+   0 > \sum_{i=1}^m r_i g_i(\bx^*) + 
+   \langle \widehat{\bx} - \bx^*, \sum_{i=1}^m r_i \nabla g_i(\bx^*) \rangle.
+   $$
+   This inequality is strict since not all $r_i$ are $0$ and $r_0 = 0$.
+1. Since $\sum_{i=1}^m r_i \nabla g_i(\bx^*) = \bzero$, it reduces to
+
+   $$
+   0 > \sum_{i=1}^m r_i g_i(\bx^*).
+   $$
+1. But $r_i g_i(\bx^*) = 0$ for every $i=1,\dots,m$. Hence we must have
+
+   $$
+   \sum_{i=1}^m r_i g_i(\bx^*) = 0.
+   $$
+1. A contradiction. Hence $r_0 > 0$ must be true.
+```
 
 ## A Tangent Cones Perspective
 
