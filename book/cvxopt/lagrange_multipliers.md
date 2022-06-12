@@ -416,7 +416,7 @@ constraints and equality constraints
 
 ```{math}
 :label: eq-cvx-opt-lm-ineq-eq
-& \text{minimize }   & & f_0(\bx) \\
+& \text{minimize }   & & f(\bx) \\
 & \text{subject to } & & g_i(\bx) \leq 0, & \quad i=1,\dots,m\\
 &                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
 ```
@@ -446,7 +446,7 @@ Let $\bx^*$ be a local minimizer of the
 optimization problem {eq}`eq-cvx-opt-lm-ineq-eq`
 
 $$
-& \text{minimize }   & & f_0(\bx) \\
+& \text{minimize }   & & f(\bx) \\
 & \text{subject to } & & g_i(\bx) \leq 0, & \quad i=1,\dots,m\\
 &                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
 $$
@@ -539,6 +539,101 @@ The notion of regularity is a kind of
 constraint qualification.
 
 
+```{prf:example} Regular points, KKT points, Local minimizers
+:label: ex-opt-lm-sum-2-circle-bd-kkt
+
+Consider the problem:
+
+$$
+& \text{minimize }   & & x_1 + x_2 \\
+& \text{subject to } & & x_1^2 + x_2^2 = 1.
+$$
+
+The problem structure
+
+1. The ambient space is $\RR^2$.
+1. We have the cost function: $f(\bx) = x_1 + x_2$.
+1. The cost function is smooth and convex, in fact linear.
+1. We don't have any inequality constraints.
+1. We have one equality constraint.
+1. The equality constraint function is given by $h(\bx) = x_1^2 + x_2^2 - 1$.
+1. The equality constraint is $h(\bx) = 0$.
+1. $h$ is a smooth function but it is not a convex function.
+1. The constraint set is a contour of $h$.
+1. The set of feasible points is given by $C = \{ \bx \ST h(\bx ) = 0 \}$.
+1. The constraint set is not convex.
+1. Hence, it is not a convex optimization problem.
+1. However, the constraint set is compact.
+1. Hence, due to {prf:ref}`res-ms-compact-real-valued-min-max-attain`,
+   the function $f$ indeed attains a minimum as well as a
+   maximum value on the $C$.
+
+Gradients
+
+1. We have $\nabla f(\bx) = (1, 1)$.
+1. We have $\nabla h(\bx) = (2 x_1, 2 x_2)$.
+
+Irregular points
+
+1. The KKT conditions are applicable only on regular points.
+1. We first identify the points which are irregular.
+1. The irregular points are points at which the gradients
+   of all active inequality constraints and equality constraints
+   are linearly dependent.
+1. Since, we have a single equality constraint, hence
+   the irregular points are those points at which $\nabla h(\bx) = \bzero$.
+1. This is given by a single point $(x_1, x_2) = (0, 0)$.
+1. But $(0, 0) \notin C$ since $h((0,0)) = -1 \neq 0$.
+1. Hence, the constraint set $C$ doesn't contain any irregular points.
+1. In other words, every feasible point is a regular point.
+1. Hence the KKT conditions are necessary for local optimality.
+1. In other words, if a point is a local minimizer then it must be a KKT point.
+
+KKT points
+
+1. To identify the KKT points, we form the Lagrangian
+
+   $$
+   L(\bx, r) = f(\bx) + r h(\bx) = x_1 + x_2 + r (x_1^2 + x_2^2 -1).
+   $$
+1. The KKT conditions are:
+
+   $$
+   & \nabla_x L(\bx, r) = \nabla f(\bx) + r \nabla h(\bx) = 0,\\
+   & h(\bx) = 0.
+   $$
+1. They expand to
+
+   $$
+   & 1 + 2 r x_1 = 0,\\
+   & 1 + 2 r x_2 = 0,\\
+   & x_1^2 + x_2^2 - 1  = 0.
+   $$
+1. From the first two equations, we have $r \neq 0$ and $x_1 = x_2 = \frac{-1}{2r}$.
+1. Plugging it into the third equation, we get
+
+   $$
+   \left ( \frac{-1}{2r} \right )^2 + \left ( \frac{-1}{2r} \right )^2 = 1. 
+   $$
+1. This simplifies to $r^2 = \frac{1}{2}$.
+1. Hence, we have $r = \pm \frac{1}{\sqrt{2}}$.
+1. This gives us two different KKT points
+   $(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}})$
+   and $(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}})$.
+
+The optimal solution
+1. By compactness, we know that the minimizer does exist.
+1. By regularity, we know that the minimizer must be a KKT point.
+1. We have two candidates available.
+1. We have $f((-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}})) = -\sqrt{2}$
+   and $f((\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}})) = \sqrt{2}$.
+1. Hence the minimizer is given by
+
+   $$
+   \bx^* = \left (-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}} \right )
+   $$
+   as it has the smaller value of $f$.
+```
 
 
 
