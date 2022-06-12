@@ -1,6 +1,51 @@
 (sec:opt:lagrange:multipliers)=
 # Lagrange Multipliers
 
+The material in this section builds up on the
+material from previous sections. 
+While the material in {ref}`sec:opt:convex-differentiable-objective`
+and {ref}`sec:opt:constrained:optimization:2`
+doesn't make specific assumptions on the structure
+of the constraint set (beyond say convexity and closedness),
+the material in {ref}`sec:opt:linear:constraints:2`
+deals with a specific structure where the constraint set
+consists of a system of linear inequalities and equalities.
+This section focuses on the case where the constraint set
+consists of a system of smooth inequalities and equalities.
+
+The necessary
+and/or sufficient conditions for the optimization
+problems presented in this section admit the
+existence of a set of nonnegative (for inequality
+constraints) and real (for equality constraints)
+scalars known as Lagrange multipliers satisfying
+a specific system of equations.
+
+1. We generalize the linear
+   inequality and equality constraints
+   in {ref}`sec:opt:linear:constraints:2`
+   to allow for smooth inequality and equality
+   constraints.
+1. We first consider problems involving minimization
+   of a smooth function over a set of smooth
+   inequalities.
+   1. We describe the notion of feasible descent
+      directions.
+   1. We show that at local minimizers, there are no
+      feasible descent directions. 
+   1. We then develop the necessary
+      Fritz-John conditions for the existence of
+      a local minimizer.
+   1. We add further constraint qualifications to
+      develop the necessary KKT conditions for the
+      existence of a local minimizer.
+1. We then consider the problems involving minimization
+   of a smooth function over a set of sooth
+   inequalities and equalities. We present the KKT
+   conditions for the existence of a local minimizer.
+1. We then add convexity in the mix for the cost
+   function and constraint functions.
+
 ## Inequality Constrained Problems
 
 We start by developing the KKT conditions for the
@@ -11,15 +56,15 @@ The problem is given as
 ```{math}
 :label: eq-opt-lm-smooth-smooth-ineq
 & \text{minimize }  & & f(\bx) & \\
-& \text{subject to } & & f_i(\bx) \leq 0, i=1,\dots,m &
+& \text{subject to } & & g_i(\bx) \leq 0, i=1,\dots,m &
 ```
-where $f, f_1, \dots, f_m : \VV \to \RR$ are
+where $f, g_1, \dots, g_m : \VV \to \RR$ are
 continuously differentiable functions over $\VV$.
 
 The constraint set is given by
 
 $$
-C = \{\bx \in \VV \ST  f_i(\bx) \leq 0, i=1,\dots,m \}.
+C = \{\bx \in \VV \ST  g_i(\bx) \leq 0, i=1,\dots,m \}.
 $$
 
 
@@ -113,12 +158,12 @@ We prove this by contradiction.
 
 Revising the problem {eq}`eq-opt-lm-smooth-smooth-ineq`:
 
-1. A constraint $f_i$ is called active at $\bx$ if $f_i(\bx) = 0$.
-1. A constraint $f_i$ is called inactive at $\bx$ if $f_i(\bx) < 0$.
+1. A constraint $g_i$ is called active at $\bx$ if $g_i(\bx) = 0$.
+1. A constraint $g_i$ is called inactive at $\bx$ if $g_i(\bx) < 0$.
 1. The set of active constraints at a point $\bx$ is denoted by
 
    $$
-   I(\bx) = \{ i \in 1,\dots,m \ST f_i(\bx) = 0 \}.
+   I(\bx) = \{ i \in 1,\dots,m \ST g_i(\bx) = 0 \}.
    $$
 
 We first restate the {prf:ref}`res-opt-local-min-feasible-descent-dirs`
@@ -131,12 +176,12 @@ at a local minimizer.
    direction.
 1. If a constraint is inactive, then it remains valid
    in the neighborhood of the local minimizer
-   due to continuity of $f_i$.
+   due to continuity of $g_i$.
 1. If a constraint is active, then moving in some
    directions will lead to invalidation of the constraint
    while moving in some directions will keep the constraint
    valid.
-1. In particular, if $f_i'(\bx; \bd) < 0$, then moving
+1. In particular, if $g_i'(\bx; \bd) < 0$, then moving
    along $\bd$ keeps the $i$-th active constraint valid.
 1. Hence, along a feasible descend direction, the directional
    derivatives of the cost function and the active constraint
@@ -150,21 +195,21 @@ optimization problem {eq}`eq-opt-lm-smooth-smooth-ineq`:
 
 $$
 & \text{minimize }  & & f(\bx) & \\
-& \text{subject to } & & f_i(\bx) \leq 0, i=1,\dots,m &
+& \text{subject to } & & g_i(\bx) \leq 0, i=1,\dots,m &
 $$
-where $f, f_1, \dots, f_m : \VV \to \RR$ are
+where $f, g_1, \dots, g_m : \VV \to \RR$ are
 continuously differentiable functions over $\VV$.
 Let $I(\bx^*)$ denote the set of active constraints:
 
 $$
-I(\bx^*) = \{ i \ST f_i(\bx^*) = 0 \}.
+I(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
 $$
 Then there doesn't exist a vector $\bd \in \VV$
 such that
 
 $$
 & \langle \bd, \nabla f(\bx^*) \rangle = f'(\bx^*; \bd) < 0,\\
-& \langle \bd, \nabla f_i(\bx^*) \rangle = f_i'(\bx^*; \bd) < 0, \quad i \in I(\bx^*).
+& \langle \bd, \nabla g_i(\bx^*) \rangle = g_i'(\bx^*; \bd) < 0, \quad i \in I(\bx^*).
 $$
 ```
 This result states that local optimality
@@ -181,19 +226,19 @@ We prove this by contradiction.
    such that $f(\bx^* + t \bd) < f(\bx^*)$
    for every $t \in (0, \epsilon_0)$.
 1. Similarly, there exist $\epsilon_i > 0$
-   such that $f_i(\bx^* + t \bd) < f_i(\bx^*) = 0$
+   such that $g_i(\bx^* + t \bd) < g_i(\bx^*) = 0$
    for every $t \in (0, \epsilon_i)$ for every $i \in I(\bx^*)$.
 1. Let $\epsilon = \min\{\epsilon_0, \dots, \epsilon_m \}$.
 1. Then for every $t \in (0, \epsilon)$, we have
    $f(\bx^* + t \bd) < f(\bx^*)$
-   and $f_i (\bx^* + t \bd) < 0$ for every $i \in I(\bx^*)$.
-1. By the continuity of $f_i$ for all $i$, 
-   and the fact that $f_i(\bx^*) < 0$ for every $i \notin I(\bx^*)$,
+   and $g_i (\bx^* + t \bd) < 0$ for every $i \in I(\bx^*)$.
+1. By the continuity of $g_i$ for all $i$, 
+   and the fact that $g_i(\bx^*) < 0$ for every $i \notin I(\bx^*)$,
    there exists a $\delta > 0$ such that for every $t \in (0, \delta)$,
-   $f_i(\bx^* + t \bd) < 0$ for every $i \notin I(\bx^*)$.
+   $g_i(\bx^* + t \bd) < 0$ for every $i \notin I(\bx^*)$.
 1. Hence, we conclude that for every $t \in (0, \min(\epsilon, \delta))$,
    we have $f(\bx^* + t \bd) < f(\bx^*)$
-   and $f_i (\bx^* + t \bd) < 0$ for every $i \in 1,\dots,m$.
+   and $g_i (\bx^* + t \bd) < 0$ for every $i \in 1,\dots,m$.
 1. But this contradicts the local optimality of $\bx^*$.
 ```
 
@@ -216,17 +261,17 @@ optimization problem
 
 $$
 & \text{minimize }  & & f(\bx) & \\
-& \text{subject to } & & f_i(\bx) \leq 0, i=1,\dots,m &
+& \text{subject to } & & g_i(\bx) \leq 0, i=1,\dots,m &
 $$
-where $f, f_1, \dots, f_m : \VV \to \RR$ are
+where $f, g_1, \dots, g_m : \VV \to \RR$ are
 continuously differentiable functions over $\VV$.
 Then there exist nonnegative scalar multipliers
 $t_0, t_1, \dots, t_m \geq 0$ which are not all
 zero such that
 
 $$
-& t_0 \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla f_i(\bx^*) = \bzero, \\
-& t_i f_i(\bx^*) = 0, i=1, \dots, m.
+& t_0 \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*) = \bzero, \\
+& t_i g_i(\bx^*) = 0, i=1, \dots, m.
 $$
 ```
 
@@ -236,7 +281,7 @@ we have that the following system is infeasible.
 
 $$
 & \langle \bd, \nabla f(\bx^*) \rangle < 0,\\
-& \langle \bd, \nabla f_i(\bx^*) \rangle < 0, \quad i \in I(\bx^*).
+& \langle \bd, \nabla g_i(\bx^*) \rangle < 0, \quad i \in I(\bx^*).
 $$
 
 1. Let $n = \dim \VV$.
@@ -268,21 +313,21 @@ $$
 1. The equation $\bA^T \bt = \bzero$ expands to
 
    $$
-   t_0 \nabla f(\bx^*) + \sum_{i \in I(\bx^*)} t_i \nabla f_i(\bx^*) = \bzero.
+   t_0 \nabla f(\bx^*) + \sum_{i \in I(\bx^*)} t_i \nabla g_i(\bx^*) = \bzero.
    $$
 1. $\bt \neq \bzero$ means that at least one of $t_0, t_{i_1}, \dots, t_{i_k} \neq 0$.
 1. $\bt \succeq \bzero$ means that  $t_0, t_{i_1}, \dots, t_{i_k} \geq 0$.
 1. Now, let $t_i = 0$ for all remaining $i \notin I(\bx^*)$.
-1. Then for active constraints, we have $f_i(\bx^*) = 0$
+1. Then for active constraints, we have $g_i(\bx^*) = 0$
    and for inactive constraints, we have $t_i = 0$.
-1. Hence for all constraints, we have $t_i f_i(\bx^*) = 0$.
+1. Hence for all constraints, we have $t_i g_i(\bx^*) = 0$.
 1. Hence there exist nonnegative scalar multipliers
    $t_0, t_1, \dots, t_m \geq 0$ which are not all
    zero such that
 
    $$
-   & t_0 \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla f_i(\bx^*) = \bzero, \\
-   & t_i f_i(\bx^*) = 0, i=1, \dots, m.
+   & t_0 \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*) = \bzero, \\
+   & t_i g_i(\bx^*) = 0, i=1, \dots, m.
    $$
 ```
 
@@ -292,7 +337,7 @@ it allows $t_0 = 0$. The case $t_0 = 0$ is
 not particularly useful since it leads to
 
 $$
-\sum_{i \in I(\bx^*)} t_i \nabla f_i(\bx^*) = \bzero.
+\sum_{i \in I(\bx^*)} t_i \nabla g_i(\bx^*) = \bzero.
 $$
 with $t_i \geq 0$ and not all $t_i$ being zero.
 This means that the gradients of the active
@@ -317,17 +362,17 @@ optimization problem
 
 $$
 & \text{minimize }  & & f(\bx) & \\
-& \text{subject to } & & f_i(\bx) \leq 0, i=1,\dots,m &
+& \text{subject to } & & g_i(\bx) \leq 0, i=1,\dots,m &
 $$
-where $f, f_1, \dots, f_m : \VV \to \RR$ are
+where $f, g_1, \dots, g_m : \VV \to \RR$ are
 continuously differentiable functions over $\VV$.
 Let $I(\bx^*)$ denote the set of active constraints:
 
 $$
-I(\bx^*) = \{ i \ST f_i(\bx^*) = 0 \}.
+I(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
 $$
 Assume that the gradients of the active constraints
-$\{\nabla f_i(\bx^*) \}_{i \in I(\bx^*)}$ are 
+$\{\nabla g_i(\bx^*) \}_{i \in I(\bx^*)}$ are 
 linearly independent.
 
 
@@ -336,8 +381,8 @@ $t_1, \dots, t_m \geq 0$ which are not all
 zero such that
 
 $$
-& \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla f_i(\bx^*) = \bzero, \\
-& t_i f_i(\bx^*) = 0, i=1, \dots, m.
+& \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*) = \bzero, \\
+& t_i g_i(\bx^*) = 0, i=1, \dots, m.
 $$
 ```
 
@@ -349,8 +394,8 @@ $r_0, r_1, \dots, r_m \geq 0$ which are not all
 zero such that
 
 $$
-& r_0 \nabla f(\bx^*) + \sum_{i=1}^m r_i \nabla f_i(\bx^*) = \bzero, \\
-& r_i f_i(\bx^*) = 0, i=1, \dots, m.
+& r_0 \nabla f(\bx^*) + \sum_{i=1}^m r_i \nabla g_i(\bx^*) = \bzero, \\
+& r_i g_i(\bx^*) = 0, i=1, \dots, m.
 $$
 
 1. If $r_0 = 0$, then the set of gradients of active constraints
@@ -359,6 +404,77 @@ $$
 1. Let $t_i = \frac{r_i}{r_0}$ for every $i=1,\dots,m$.
 1. The result follows.
 ```
+
+## Inequality and Equality Constrained Problems
+
+We now generalize the KKT conditions to include
+problems of the form which include both inequality
+constraints and equality constraints
+
+```{math}
+:label: eq-cvx-opt-lm-ineq-eq
+& \text{minimize }   & & f_0(\bx) \\
+& \text{subject to } & & g_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
+```
+where $f, g_1, \dots, g_m, h_1, \dots, h_p : \VV \to \RR$ are
+continuously differentiable functions over $\VV$.
+
+The constraint set is given by
+
+$$
+C = \{\bx \in \VV \ST  g_i(\bx) \leq 0, i=1,\dots,m
+\text{ and }  h_j(\bx) = 0, j=1,\dots,p \}.
+$$
+
+1. An equality constraint must always be met at
+   a feasible point. Hence there is no need to
+   distinguish between active and inactive equality
+   constraints. All inequality constraints are active.
+1. A constraint of the form $h_j(\bx) = 0$ can be
+   converted into two inequality constraints
+   $h_j(\bx) \leq 0$ and $-h_j(\bx)\leq 0$.
+
+
+```{prf:theorem} KKT conditions for problems with smooth inequality and equality constraints
+:label: res-opt-ineq-eq-kkt
+
+Let $\bx^*$ be a local minimizer of the
+optimization problem {eq}`eq-cvx-opt-lm-ineq-eq`
+
+$$
+& \text{minimize }   & & f_0(\bx) \\
+& \text{subject to } & & g_i(\bx) \leq 0, & \quad i=1,\dots,m\\
+&                    & & h_j(\bx) = 0,    & \quad j=1,\dots,p
+$$
+where $f, g_1, \dots, g_m, h_1, \dots, h_p : \VV \to \RR$ are
+continuously differentiable functions over $\VV$.
+Let $I(\bx^*)$ denote the set of active inequality constraints:
+
+$$
+I(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
+$$
+Assume that the gradients of the active inequality constraints
+$\{\nabla g_i(\bx^*) \}_{i \in I(\bx^*)}$
+and all the equality constraints
+$\{ \nabla h_j(\bx^*) \}_{j=1,\dots,p}$
+are linearly independent.
+
+Then there exist nonnegative scalar multipliers
+$t_1, \dots, t_m \geq 0$
+and real scalar multipliers $r_1, \dots, r_p \in \RR$
+which are not all zero such that
+
+$$
+& \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*)
++ \sum_{j=1}^p r_j \nabla h_j(\bx^*) = \bzero, \\
+& t_i g_i(\bx^*) = 0, i=1, \dots, m.
+$$
+```
+
+
+
+
 
 
 ## A Tangent Cones Perspective
