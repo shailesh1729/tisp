@@ -1,6 +1,9 @@
 (sec:opt:lagrange:multipliers)=
 # Lagrange Multipliers
 
+Main references for this section are
+{cite}`beck2014introduction,boyd2004convex,bertsekas2003convex`.
+
 The material in this section builds up on the
 material from previous sections. 
 While the material in {ref}`sec:opt:convex-differentiable-objective`
@@ -472,6 +475,68 @@ $$
 $$
 ```
 
+### KKT Points and Regular Points
+
+All the results up to this point define a set of
+necessary conditions in the form of a system of
+equations on the constraint functions and their
+gradients which must be satisfied by every
+local minimizer of the optimization problem.
+Besides the local minimizers, other points may
+also satisfy this system of equations.
+We now introduce the notion of KKT points
+which satisfy these equations.
+
+```{prf:definition} KKT point
+:label: def-opt-kkt-point
+
+Consider the optimization problem {eq}`eq-cvx-opt-lm-ineq-eq`
+where $f, g_1, \dots, g_m, h_1, \dots, h_p : \VV \to \RR$ are
+continuously differentiable functions over $\VV$.
+
+A feasible point $\bx^*$ is called a *KKT point*
+if there exist nonnegative scalar multipliers
+$t_1, \dots, t_m \geq 0$
+and real scalar multipliers $r_1, \dots, r_p \in \RR$
+which are not all zero such that
+
+$$
+& \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*)
++ \sum_{j=1}^p r_j \nabla h_j(\bx^*) = \bzero, \\
+& t_i g_i(\bx^*) = 0, i=1, \dots, m.
+$$
+```
+All the necessary KKT conditions so far can be simply
+restarted as *a local minimizer must be a KKT point*
+if the gradients of active inequality constraints and 
+all equality constraints at the point are
+linearly independent.
+We introduce the notion of *regularity* to capture
+the linear independence aspect.
+
+
+```{prf:definition} Regularity
+:label: def-opt-kkt-regularity
+
+Consider the optimization problem {eq}`eq-cvx-opt-lm-ineq-eq`
+where $f, g_1, \dots, g_m, h_1, \dots, h_p : \VV \to \RR$ are
+continuously differentiable functions over $\VV$.
+
+A feasible point $\bx^*$ is called *regular* if
+the gradients of the active inequality constraints
+$\{\nabla g_i(\bx^*) \}_{i \in I(\bx^*)}$
+and all the equality constraints
+$\{ \nabla h_j(\bx^*) \}_{j=1,\dots,p}$
+are linearly independent.
+```
+
+With the terminology of these definitions,
+{prf:ref}`res-opt-ineq-eq-kkt` reduces to:
+if a regular point is a local minimizer
+then it must be a KKT point.
+
+The notion of regularity is a kind of
+constraint qualification.
 
 
 
