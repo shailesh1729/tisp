@@ -12,6 +12,9 @@ endowed with an inner product
 $\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$
 and a norm $\| \cdot \| : \VV \to \RR$.
 
+Main references for this section are
+{cite}`bertsekas2003convex`.
+
 
 ## General Constrained Optimization
 
@@ -698,6 +701,226 @@ There are two possible cases for the points in $C$:
    $$
    where $\bz \in H$.
 ```
+
+## Normal Cones
+
+{cite}`bertsekas2003convex` introduces a more general
+notion of normal directions. For our purposes, we
+shall call it BNO normal directions.
+
+```{prf:definition} BNO normal direction
+:label: def-opt-bno-normal-dir
+
+Given a nonempty subset $C$ of $\VV$ and a vector $\bx \in C$,
+a vector $\bz \in \VV$ is said to be a *normal* of $C$
+at $\bx$ (in the sense of {cite}`bertsekas2003convex`)
+if there exist sequences
+$\{ \bx_k \}$ of $C$ and $\{ \bz_k \}$ such that
+
+$$
+\bx_k \to \bx, \quad \bz_k \to \bz,
+\quad \bz_k \in T_C(\bx_k)^{\circ} \Forall k.
+$$
+This normal direction shall be called a *BNO normal direction*
+in these notes to distinguish it from
+{prf:ref}`def-cvx-convex-set-normal-vector`.
+```
+Each $\bz$ is chosen from the polar cone of the tangent
+cone at $\bx_k$.
+
+
+```{prf:definition} BNO normal cone
+:label: def-opt-bno-normal-cone
+
+Given a nonempty subset $C$ of $\VV$ and a vector $\bx \in C$,
+the set of all normal directions at $\bx$
+(in the sense of {cite}`bertsekas2003convex`)
+is called the *normal cone* of $C$ at $\bx$
+and is denoted by $\tilde{N}_C(\bx)$.  
+
+This normal cone shall be called a *BNO normal cone*
+in these notes to distinguish it from
+{prf:ref}`def-cvx-normal-cone`.
+```
+The BNO normal cone reduces to the definition
+of normal cones in {prf:ref}`def-cvx-normal-cone`
+for convex sets. The BNO normal cone is useful
+in the analysis of optimality conditions
+for minimization of smooth functions with
+smooth equality and inequality constraints.
+
+### Conic structure
+```{prf:theorem} Conic structure
+:label: res-opt-bno-normal-cone
+
+Let $C$ be a nonempty set and $\bx \in C$.
+Then the BNO normal cone $\tilde{N}_C(\bx)$
+is a cone.
+```
+
+```{prf:proof}
+$\bzero$ being a normal direction.
+
+1. Pick any sequence $\{ \bx_k \}$ such that $\bx_k = \bx$.
+1. Then $\bzero \in T_C(\bx_k)^{\circ}$ since
+   $T_C(\bx_k)^{\circ}$ is a cone.
+1. Hence we can pick $\bz_k  = \bzero$ to form
+   a sequence $\{ \bz_k \}$ such that $\bz_k \to \bzero$
+   and $\bz_k \in T_C(\bx_k)^{\circ}$ for every $k$.
+1. Hence $\bzero$ is a BNO normal direction.
+
+Conic property
+
+1. Let $\bz$ be a BNO normal direction and $t > 0$.
+1. There exists a sequence $\{\bx_k \}$ of $C$
+   and a sequence $\{ \bz_k \}$ such that
+   $\bz_k \in T_C(\bx_k)^{\circ}$ for every $k$ with
+   $\bz_k \to \bz$.
+1. Then $t \bz_k \in T_C(\bx_k)^{\circ}$ for every
+   $k$ since $T_C(\bx_k)^{\circ}$ is a cone.
+1. Also $t \bz_k \to t \bz$.
+1. Hence $t \bz$ is a BNO normal direction.
+
+Hence $\tilde{N}_C(\bx)$ is a cone.
+```
+
+### Polar Cone of Tangent Cone
+
+```{prf:theorem} Polar cone of tangent cone and BNO normal cone
+:label: res-opt-bno-normal-cone-polar-tangent-cone
+
+Let $C$ be a nonempty set and $\bx \in C$.
+Then
+
+$$
+T_C(\bx)^{\circ} \subseteq \tilde{N}_C(\bx).
+$$
+```
+
+```{prf:proof}
+This is straightforward from the definition
+of BNO normal directions.
+
+1. Let $\bz \in T_C(\bx)^{\circ}$.
+1. Consider the sequence $\{ \bx_k \}$ where $\bx_k = \bx$.
+1. Hence $\bx_k \to \bx$.
+1. Then $\bz \in T_C(\bx_k)^{\circ}$ for every $k$.
+1. Consider the sequence $\{ \bz_k \}$ where $\bz_k = \bz$.
+1. Then $\bz_k \to \bz$.
+1. Hence $\bz \in \tilde{N}_C(\bx)$.
+1. Hence $T_C(\bx)^{\circ} \subseteq \tilde{N}_C(\bx)$.
+```
+
+### Closedness
+
+```{prf:theorem} Closedness of BNO normal cone
+:label: res-opt-bno-normal-cone-closedness
+
+Let $C$ be a nonempty set and $\bx \in C$.
+Then the BNO normal cone at $\bx$, $\tilde{N}_C(\bx)$
+is closed.
+```
+
+```{prf:proof}
+Consider a converging sequence $\{\bz_l \}$ of $\tilde{N}_C(\bx)$.
+
+1. Let $\bz_l \to \bz$. We need to show that $\bz \in \tilde{N}_C(\bx)$.
+1. For each $\bz_l$, there exist sequences
+   $\{ \bx_l^m \}$ of $C$ and $\{ \bz_l^m \}$ where
+   $\bz_l^m \in T_X(\bx_l^m)^{\circ}$
+   such that $\bx_l^m \to \bx$
+   and $\bz_l^m \to \bz_l$.
+1. For each $k$
+   1. Let $r = \frac{1}{k}$.
+   1. Pick a $\bz_{l_0}$ from $\{ \bz_l \}$ such that $\| \bz_{l_0} - \bz \| < r$.
+   1. Identify the index $m_0$ such that for all $m > m_0$,
+      we have $\| \bx_{l_0}^m  - \bx \| < r$.
+   1. Pick a $\bz_{l_0}^{m_1}$ from $\{ \bz_{l_0}^m \}$ such that $m_1 > m_0$
+      and $\| \bz_{l_0}^{m_1} - \bz_{l_0} \| < r$.
+   1. Let $\bx_k = \bx_{l_0}^{m_1}$.
+   1. Let $\bz_k = \bz_{l_0}^{m_1}$.
+1. Then we have $\| \bx_k - \bx \| < r = \frac{1}{k}$ for every $k$.
+1. Also $\| \bz_k - \bz \| < 2 r = \frac{2}{k}$ for every $k$.
+1. $\bz_k \in T_X(\bx_k)^{\circ}$.
+1. $\bx_k \to \bx$.
+1. $\bz_k \to \bz$.
+1. Hence $\bz \in \tilde{N}_C(\bx)$.
+
+Hence, every convergent sequence of $\tilde{N}_C(\bx)$
+in $\tilde{N}_C(\bx)$. 
+Hence $\tilde{N}_C(\bx)$ is closed.
+```
+
+
+### Regularity
+
+```{prf:theorem} Regular set
+:label: res-opt-bno-regular-set
+
+Let $C$ be a nonempty set and $\bx \in C$.
+Then $C$ is said to be *regular* at $\bx$
+(in the sense of {cite}`bertsekas2003convex`)
+if
+
+$$
+T_C(\bx)^{\circ} = \tilde{N}_C(\bx).
+$$
+
+In other words, a set is regular at a point
+if the (BNO) normal cone is equal to the polar
+cone of the tangent cone.
+```
+
+```{prf:theorem} Regularity of convex sets
+:label: res-opt-bno-convex-regular
+
+Let $C$ be a nonempty convex set and $\bx \in C$.
+Then $C$ is regular at every $\bx \in C$.
+Moreover,
+
+$$
+T_C(\bx)^{\circ} = \tilde{N}_C(\bx) = N_C(\bx).
+$$
+```
+
+```{prf:proof}
+We show the regularity of $C$ at $\bx$
+by showing that $\tilde{N}_C(\bx) \subseteq T_C(\bx)^{\circ}$.
+
+1. Let $\bz \in \tilde{N}_C(\bx)$.
+1. Then there exist sequences $\{ \bx_k \}$ of $C$
+   and $\{ \bz_k \}$ with $\bz_k \in T_C(\bx_k)^{\circ}$
+   for every $k$ such that $\bx_k \to \bx$ and $\bz_k \to \bz$.
+1. Since $C$ is convex,
+   hence, due to {prf:ref}`res-opt-polar-tangent-cone-normal-cone`,
+   we have, for every $k$,
+
+   $$
+   \langle \by - \bx_k, \bz_k \rangle \leq 0 \Forall \by \in C.
+   $$
+1. By taking limit $k \to \infty$, we obtain
+
+   $$
+   \langle \by - \bx, \bz \rangle \leq 0 \Forall \by \in C.
+   $$
+1. Hence, again due to {prf:ref}`res-opt-polar-tangent-cone-normal-cone`,
+   $\bz \in T_C(\bx)^{\circ}$.
+1. Hence $\tilde{N}_C(\bx) \subseteq T_C(\bx)^{\circ}$.
+
+Combining with {prf:ref}`res-opt-bno-normal-cone-polar-tangent-cone`,
+we have
+
+$$
+T_C(\bx)^{\circ} = \tilde{N}_C(\bx).
+$$
+We also saw in {prf:ref}`res-opt-polar-tangent-cone-normal-cone`
+that $T_C(\bx)^{\circ} = N_C(\bx)$.
+```
+
+This result shows that the definition of
+normal cone in {prf:ref}`def-cvx-normal-cone`
+agrees with the definition in {prf:ref}`def-opt-bno-normal-cone`
+for convex sets.
 
 
 ## Optimality Conditions
