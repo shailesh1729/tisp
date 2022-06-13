@@ -1075,8 +1075,17 @@ to $f$ and $\bx^*$.
    $$
    1. $X$ is convex. Hence $\alpha (\bx - \bx^*)$ for $\alpha > 0$
       is a feasible direction for every $\bx \in X$.
+   1. Hence, if this inequality holds, then
+      {eq}`eq-opt-efj-grad-mult-sum-tan-cone` holds for every
+      $\bd \in F_C(\bx)$.
    1. Since $X$ is convex, hence $\closure F_C(\bx) = T_C(\bx)$.
-   1. Since $X$ is convex and closed, hence $F_C(\bx)$ is also closed.
+   1. If the inequality {eq}`eq-opt-efj-grad-mult-sum-tan-cone`
+      holds for every $\bd \in F_C(\bx)$,
+      then it will also hold for a closure point of $F_C(\bx)$.
+   1. In other words, if $\langle \bx, \ba \rangle \geq 0$
+      for every $\bx \in A$, then for any convergent sequence $\{ \bx_k \}$
+      of $A$, we have $\lim_{k \to \infty} \langle \bx_k, \ba \rangle \geq 0$.
+      Hence the inequality holds for every closure point also.
 1. The Lagrangian stationary condition can also be equivalently
    written as
 
@@ -1090,4 +1099,3 @@ to $f$ and $\bx^*$.
    function must lie in the polar cone of the tangent cone
    of $X$ at $\bx^*$.
  ```
- 

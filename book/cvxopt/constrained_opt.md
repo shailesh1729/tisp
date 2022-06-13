@@ -725,7 +725,7 @@ This normal direction shall be called a *BNO normal direction*
 in these notes to distinguish it from
 {prf:ref}`def-cvx-convex-set-normal-vector`.
 ```
-Each $\bz$ is chosen from the polar cone of the tangent
+Each $\bz_k$ is chosen from the polar cone of the tangent
 cone at $\bx_k$.
 
 
