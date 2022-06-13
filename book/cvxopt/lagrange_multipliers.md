@@ -842,8 +842,8 @@ to get the desired result.
 Consider an optimization problem of the form
 
 $$
-& \text{minimize }  & f(\bx)\\
-& \text{subject to } & h_i(\bx) = 0, i=1,\dots,m.
+& \text{minimize }  & & f(\bx)\\
+& \text{subject to } & & h_i(\bx) = 0, i=1,\dots,m.
 $$
 Assume that $f: \VV \to \RR$ and $h_i : \VV \to \RR$
 for $i=1,\dots,m$
@@ -952,3 +952,142 @@ $$
    if $\bx^*$ is a local minimizer, then the Lagrangian multipliers
    $t_1^*, \dots, t_m^*$ must exist.
 ```
+
+## Enhanced Fritz-John Conditions
+
+We now introduce a more difficult optimization problem
+
+```{math}
+:label: eq-opt-efj-problem
+& \text{minimize }  & & f(\bx)\\
+& \text{subject to } & & \bx \in C
+```
+where the constraint set $C$ consists of equality and
+inequality constraints as well as an additional abstract
+set constraint $X$:
+
+```{math}
+:label: eq-opt-efj-constraints
+C = X \cap \{\bx \ST g_i(\bx) \leq 0, i=1,\dots,m\}
+\cap \{\bx \ST h_j(\bx) = 0, j=1,\dots,p\}.
+```
+We assume that $f$, $g_i$ and $h_j$ are smooth
+functions from $\VV$ to $\RR$
+and $X$ is a nonempty closed set.
+
+```{prf:definition} Lagrangian function
+:label: def-opt-efj-lagrangian-func
+
+For the optimization problem {eq}`eq-opt-efj-problem`,
+the *Lagrangian function* is defined as
+
+$$
+L(\bx, \bt, \br) = f(\bx) + \sum_{i=1}^m t_i g_i(\bx)
++ \sum_{j=1}^p r_j h_j(\bx)
+$$
+where $\bt \in \RR^m$ and $\br \in \RR^p$.
+```
+
+### Lagrange Multiplier Vectors
+
+````{prf:definition} Lagrange multiplier vectors
+:label: def-opt-constraint-set-efj-lm
+
+We say that a constraint set $C$ as defined in
+{eq}`eq-opt-efj-constraints`
+*admits Lagrange multipliers* at a point
+$\bx^* \in C$ if for every smooth cost
+function $f$ for which $\bx^*$ is a local minimum
+of the problem {eq}`eq-opt-efj-problem`, there
+exist vectors $\bt^* = (t_1^*, \dots, t_m^*)$
+and $\br^* = (r_1^*, \dots, r_p^*)$ that
+satisfy the following conditions:
+
+```{math}
+:label: eq-opt-efj-grad-mult-sum-tan-cone
+\left \langle \by, 
+\left ( 
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+\right )
+\right \rangle \geq 0,
+\quad \Forall \by \in T_X(\bx^*),
+```
+
+```{math}
+:label: eq-opt-efj-nng-ineq-mult
+t_i^* \geq 0, \Forall i=1,\dots,m,
+```
+
+```{math}
+:label: eq-opt-efj-comp-slack
+t_i^* = 0,  \Forall i \ST g_i(\bx^* ) < 0.
+```
+A pair $(\bt^*, \br^*)$ satisfying these conditions
+is called a *Lagrange multiplier vector* corresponding
+to $f$ and $\bx^*$.
+````
+
+```{div}
+1. We also call the Lagrange multiplier vector
+   as simply Lagrange multipliers.
+1. The condition {eq}`eq-opt-efj-nng-ineq-mult`
+   is the *nonnegativity condition* of the
+   Lagrangian multipliers for the inequality
+   constraints.
+1. The condition {eq}`eq-opt-efj-comp-slack`
+   is the *complementary slackness* condition.
+1. From {eq}`eq-opt-efj-grad-mult-sum-tan-cone`,
+   we can see that for each $\by \in T_X(\bx^*)$, the set of 
+   Lagrange multiplier vectors corresponding
+   to a given $f$ and $\bx^*$ is a closed half-space.
+1. Hence, the set of 
+   Lagrange multiplier vectors corresponding
+   to a given $f$ and $\bx^*$
+   is an intersection of closed half spaces.
+1. Hence the set of Lagrange multiplier vectors
+   is closed and convex. Although it may possibly
+   be empty.
+1. The condition {eq}`eq-opt-efj-grad-mult-sum-tan-cone`
+   is referred to as the *Lagrangian stationarity condition*.
+1. It can be viewed as the necessary condition for $\bx^*$
+   to be a local minimizer of the function
+   $L(\bx, \bt^*, \br^*)$.
+   See {prf:ref}`res-opt-tangent-cone-local-minimum`.
+1. When $X = \VV$, then $T_X(\bx^*) = \VV$, and this condition
+   reduces to
+
+   $$
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*) = \bzero.
+   $$
+1. When $X$ is convex, then {eq}`eq-opt-efj-grad-mult-sum-tan-cone`
+   reduces to
+
+   $$
+   \left \langle \bx - \bx^*, 
+   \left ( 
+      \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+      + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+   \right )
+   \right \rangle \geq 0,
+   \quad \Forall \bx \in X.
+   $$
+   1. $X$ is convex. Hence $\alpha (\bx - \bx^*)$ for $\alpha > 0$
+      is a feasible direction for every $\bx \in X$.
+   1. Since $X$ is convex, hence $\closure F_C(\bx) = T_C(\bx)$.
+   1. Since $X$ is convex and closed, hence $F_C(\bx)$ is also closed.
+1. The Lagrangian stationary condition can also be equivalently
+   written as
+
+   $$
+   -\left ( 
+      \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+      + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+   \right ) \in T_X(\bx^*)^{\circ}.
+   $$
+   In other words, the negative gradient of the Lagrangian
+   function must lie in the polar cone of the tangent cone
+   of $X$ at $\bx^*$.
+ ```
+ 
