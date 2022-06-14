@@ -1098,4 +1098,377 @@ to $f$ and $\bx^*$.
    In other words, the negative gradient of the Lagrangian
    function must lie in the polar cone of the tangent cone
    of $X$ at $\bx^*$.
- ```
+1. Recall from {prf:ref}`res-opt-bno-normal-cone-polar-tangent-cone` that
+
+   $$
+   T_X(\bx^*)^{\circ} \subseteq \tilde{N}_X(\bx^*)
+   $$
+   where $\tilde{N}_X(\bx^*)$ is the normal cone of $X$ at $\bx^*$
+   (in the sense of {cite}`bertsekas2003convex`).
+1. Hence the negative gradient of the Lagrangian
+   function must be a normal direction
+   ({prf:ref}`def-opt-bno-normal-dir`) at $\bx^*$.
+1. If $X$ is regular at $\bx^*$ ({prf:ref}`res-opt-bno-regular-set`), then
+   we also have
+
+   $$
+   T_X(\bx^*)^{\circ} = \tilde{N}_X(\bx^*).
+   $$
+```
+
+### Enhanced Fritz-John Conditions
+
+We are now ready to present the Enhanced Fritz-John conditions
+as the necessary conditions for the existence of the
+local minimizer of the problem {eq}`eq-opt-efj-problem`.
+
+```{prf:theorem} Enhanced Fritz-John conditions
+:label: res-opt-enhanced-fritz-john-cond
+
+Let $\bx^*$ be a local minimizer of the
+problem {eq}`eq-opt-efj-problem`-{eq}`eq-opt-efj-constraints`.
+Then there exist scalars
+$t_0^*,t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*$
+satisfying the following conditions.
+
+1. The gradients satisfy the relation:
+
+   $$
+   -\left ( 
+      t_0^* \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+      + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+   \right ) \in \tilde{N}_X(\bx^*).
+   $$
+1. Nonnegativity: $t_i^* \geq 0$ for every $i=0,\dots,m$.
+1. The scalars $t_0^*,t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*$ are not equal
+   to $0$.
+1. Complementary violation condition: 
+   If the index set $I \cup J$ is not empty, where
+
+   $$
+   I = \{i > 0 \ST t_i^* > 0 \}, \quad
+   J = \{j  \ST r_j^* \neq 0 \},
+   $$
+   there exists a sequence $\{ \bx_k \}$ of $X$ that converges
+   to $\bx^*$ and is such that for all $k$
+
+   $$
+   & f(\bx_k) < f(\bx^*),\\
+   & t_i^* g_i (\bx_k) > 0 \Forall i \in I,\\
+   & r_j^* h_j(\bx_k) > 0 \Forall j \in J,\\
+   & g_i^+(\bx_k) = o(w(\bx_k)) \Forall i \notin I,\\
+   & |h_j(\bx_k) | = o(w(\bx_k)) \Forall j \notin J,\\
+   $$
+   where $g_i^+(\bx) = \max \{ 0, g_i(\bx) \}$ and
+
+   $$
+   w(\bx) = \min \left \{
+   \min_{i \in I} g_i^+(\bx),
+   \min_{j \in J} |h_j(\bx) |
+      \right \}.
+   $$
+```
+
+```{prf:proof}
+The proof is based on a quadratic penalty function approach.
+For each $k \in \Nat$, we define a penalty function as
+
+$$
+F^k(\bx) = f(\bx) + \frac{k}{2} \sum_{i=1}^m (g_i^+(\bx))^2
++ \frac{k}{2} \sum_{j=1}^p (h_j(\bx))^2 
++ \frac{1}{2} \| \bx - \bx^* \|^2.
+$$
+
+1. At a feasible point $g_i^+(\bx) = 0$ for every $i=1,\dots,m$
+   since $g_i(\bx) \leq 0$.
+1. At a feasible point $h_j(\bx) = 0$ for every $j=1,\dots,p$.
+1. Hence $F^k(\bx) = f(\bx) + \frac{1}{2} \| \bx - \bx^* \|^2$
+   at every feasible point $\bx \in C$.
+1. The term $\frac{1}{2} \| \bx - \bx^* \|^2$ is a quadratic
+   penalty term penalizing how far we are from the local minimum
+   $\bx^*$.
+1. The term $\frac{1}{2} (g_i^+(\bx))^2$ is a penalty term
+   denoting how strongly the $i$-th inequality constraint is violated.
+1. The term $\frac{1}{2} (h_j(\bx))^2$ is a penalty term
+   denoting how strongly the $j$-th equality constraint is violated.
+1. We have $F^k(\bx) \leq f(\bx)$ for every $\bx \in \VV$.
+1. At the local minimizer, we have
+
+   $$
+   F^k(\bx^*) = f(\bx^*).
+   $$
+1. $F^k$ is a continuously differentiable function.
+1. We note that
+
+   $$
+   \nabla (g_i^+(\bx))^2 = 2 g_i^+(\bx) \nabla g_i(\bx);\\
+   \nabla (h_j(\bx))^2  = 2 h_j(\bx) \nabla h_j(\bx).
+   $$
+1. Hence
+
+   $$
+   \nabla F^k(\bx) = \nabla f(\bx) + k \sum_{i=1}^m g_i^+(\bx) \nabla g_i(\bx)
+   + k \sum_{j=1}^p h_j(\bx) \nabla h_j(\bx) 
+   + (\bx - \bx^*).
+   $$
+
+We now introduce the *penalized* problem
+
+$$
+& \text{minimize }  & & F^k(\bx)\\
+& \text{subject to } & & \bx \in X \cap S
+$$
+where
+
+$$
+S = \{ \bx \ST \|\bx - \bx^* \| \leq \epsilon \}
+$$
+and $\epsilon > 0$ is a positive scalar such that
+$f(\bx^*) \leq f(\bx)$ for all feasible $\bx \in C$
+with $\bx \in S$. Such a positive scalar exists
+since $\bx^*$ is a local minimizer of $f$. 
+
+1. The set $S$ is compact and the set $X$ is closed.
+1. Hence $X \cap S$ is compact.
+1. Hence there exists an optimal minimizer of the
+   above problem for every $k$.
+1. Let $\bx^k$ be a minimizer of $F^k(\bx)$
+   over $X \cap S$.
+1. Then we have $F^k(\bx^k) \leq F^k(\bx^*)$ for every $k$
+   since $\bx^* \in X \cap S$.
+1. This is equivalent to
+
+   $$
+   F^k(\bx^k) = f(\bx^k) + \frac{k}{2} \sum_{i=1}^m (g_i^+(\bx^k))^2
+   + \frac{k}{2} \sum_{j=1}^p (h_j(\bx^k))^2 
+   + \frac{1}{2} \| \bx^k - \bx^* \|^2 \leq f(\bx^*)
+   $$
+   for every $k$.
+1. Since $f$ is continuous and $X \cap S$ is compact, hence
+   $f(\bx^k)$ is bounded for every $k$.
+1. It follows that 
+
+   $$
+   & \lim_{k \to \infty} g_i^+(\bx^k) = 0, \quad i=1,\dots,m,\\
+   & \lim_{k \to \infty} |h_j(\bx^k)| = 0, \quad j=1,\dots,p,
+   $$
+   otherwise the term on the L.H.S. of the previous inequality
+   will become unbounded and tend to $\infty$ as $k \to \infty$.
+1. Hence every limit point $\tilde{\bx}$
+   of the sequence $\{ \bx^k \}$ is feasible;
+   i.e., $\tilde{\bx} \in C$.
+1. Also, since $X \cap S$ is compact, hence every limit
+   point $\tilde{\bx}$
+   of the sequence $\{ \bx^k \}$ belongs to $X \cap S$.
+1. From the inequality $F^k(\bx^k) \leq f(\bx^*)$, we can also see
+   that
+
+   $$
+   f(\bx^k) + \frac{1}{2} \| \bx^k - \bx^* \|^2 \leq f(\bx^*)
+   \quad \Forall k.
+   $$
+1. Taking the limit as $k \to \infty$, we obtain
+
+   $$
+   f(\tilde{\bx}) + \frac{1}{2} \| \tilde{\bx} - \bx^* \|^2 \leq f(\bx^*)
+   $$
+   for every limit point $\tilde{\bx}$.
+1. Since $\tilde{\bx} \in S$ (near local minimizer)
+   and $\tilde{\bx} \in C$ (feasible), we have
+
+   $$
+   f(\bx^*) \leq f(\tilde{\bx}).
+   $$
+1. Combining with the previous inequality, it gives us
+   
+   $$
+   \frac{1}{2} \| \tilde{\bx} - \bx^* \|^2  = 0.
+   $$
+1. Hence, we must have $\bx^* = \tilde{\bx}$.
+   Hence, the sequence $\{ \bx_k \}$ has a only one limit point.
+1. Thus, the sequence $\{ \bx^k \}$ converges to $\bx^*$.
+1. By the definition of the closed ball $S$,
+   $\bx^*$ is an interior point of $S$.
+1. Since $\lim \bx^k = \bx^*$ it follows that
+   $\bx^k$ is an interior point of $S$ for every $k$
+   greater than some $k_0$.
+1. Hence, due to {prf:ref}`res-opt-tangent-cone-local-minimum`,
+
+   $$
+   - \nabla F^k(\bx^k) \in T_C(\bx^k)^{\circ}
+   $$
+   holds true for every $k > k_0$.
+1. We can write $\nabla F^k (\bx^k)$ as
+
+   $$
+   \nabla F^k(\bx^k) = \nabla f(\bx^k) + \sum_{i=1}^m \chi^k_i \nabla g_i(\bx^k)
+   + \sum_{j=1}^p \xi^k_j \nabla h_j(\bx^k) 
+   + (\bx^k - \bx^*)
+   $$
+   where $\chi^k_i = k g_i^+(\bx^k)$ and $\xi^k_j = k h_j(\bx^k)$.
+1. Note that by definition $\chi^k_i \geq 0$ for every $i=1,\dots,m$.
+1. Accordingly, we have
+
+   $$
+   - \left ( \nabla f(\bx^k) + \sum_{i=1}^m \chi^k_i \nabla g_i(\bx^k)
+   + \sum_{j=1}^p \xi^k_j \nabla h_j(\bx^k) 
+   + (\bx^k - \bx^*) \right ) \in  T_C(\bx^k)^{\circ}
+   $$
+   for every $k > k_0$.
+1. We define
+
+   $$
+   \delta^k = \sqrt{1 + \sum_{i=1}^m (\chi^k_i)^2 + \sum_{j=1}^p (\xi^k_j)^2 }.
+   $$
+1. By definition $\delta^k \geq 1$.
+1. We now introduce
+
+   $$
+   & t_0^k = \frac{1}{\delta^k},\\
+   & t_i^k = \frac{\chi^k_i}{\delta^k}, i=1,\dots,m,\\
+   & r_j^k = \frac{\xi^k_j}{\delta^k}, j=1,\dots,p.   
+   $$
+1. By dividing by $\delta^k$ in the previous relation, we obtain
+
+   $$
+   \bz^k = - \left ( t_0^k \nabla f(\bx^k) + \sum_{i=1}^m t_i^k \nabla g_i(\bx^k)
+   + \sum_{j=1}^p r_j^k \nabla h_j(\bx^k) 
+   + \frac{1}{\delta_k}(\bx^k - \bx^*) \right ) \in  T_C(\bx^k)^{\circ}
+   $$
+   for every $k > k_0$
+   since $T_C(\bx^k)^{\circ}$ is a cone.
+1. Note that by construction, we have
+
+   $$
+   (t_0^k)^2 + \sum_{i=1}^m (t_i^k)^2 + \sum_{j=1}^p (r_j^k)^2 = 1.
+   $$
+1. Hence the sequence $\{ (t_0^k, t_1^k, \dots, t_m^k, r_1^k, \dots, r_p^k) \}$
+   is a bounded sequence of $\RR^{1 + m + p}$.
+1. Hence, it must have a subsequence that converges to some limit
+   $\{ (t_0^*, t_1^*, \dots, t_m^*, r_1^*, \dots, r_p^*) \}$.
+1. Let  
+
+   $$
+   \bz^* = - \left ( t_0^* \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*) \right ). 
+   $$
+1. Along this subsequence, we have $\bx^k \to \bx^*$,
+   $\bz^k \to \bz^*$ and $\bz^k \in T_X(\bx^k)^{\circ}$
+   for every $k > k_0$.
+1. Hence, following the definition of the normal cone
+   ({prf:ref}`def-opt-bno-normal-cone`),
+   after disregarding the first $k_0$ terms of the sequences,
+   
+   $$
+   \bz^* \in \tilde{N}_X(\bx^*).
+   $$
+
+(2) Nonnegativity
+
+1. Since $\delta^k \geq 1$, hence $0 < t_0^k = \frac{1}{\delta^k} \leq 1$.
+1. Hence $t_0^* \geq 0$.
+1. Since $\chi^k_i \geq 0$ for every $i=1,\dots,m$, hence $t_i^k \geq 0$ for every $i=1,\dots,m$.
+1. Hence $t_i^* \geq 0$ for every $i=1,\dots,m$.
+
+(3) Not all zero
+
+1. We have established that for every $k$, 
+
+   $$
+   (t_0^k)^2 + \sum_{i=1}^m (t_i^k)^2 + \sum_{j=1}^p (r_j^k)^2 = 1.
+   $$
+1. Taking the limit over the subsequence, we have
+
+   $$
+   (t_0^*)^2 + \sum_{i=1}^m (t_i^*)^2 + \sum_{j=1}^p (r_j^*)^2 = 1.
+   $$
+1. Hence, all of them cannot be zero.
+
+
+(4) Complementary violation conditions
+
+1. Assume that $I \cup J$ is not empty.
+1. Let $\bKKK = \{ k_1, k_2, \dots, \}$ denote the index set of
+   the convergent subsequence of $\{ (t_0^k, t_1^k, \dots, t_m^k, r_1^k, \dots, r_p^k) \}$.
+1. Let $i \in I$.
+   1. We have $t_i^* > 0$.
+   1. Then for all sufficient large $k$ in $\bKKK$, we have $t_i^k t_i^* > 0$
+      as $t_i^k$ should be sufficiently close to $t_i^*$.
+   1. From the definitions of $t_i^k$ and $\chi_i^k$, we must have
+       $t_i^k g_i^+(\bx^k) > 0$ for all sufficient large $k$ in $\bKKK$.
+   1. By definition, $g_i^+(\bx^k) \geq 0$ and $g_i^+(\bx^k) > 0$
+      when $g_i(\bx^k) > 0$.
+   1. Hence we must have
+       $t_i^k g_i(\bx^k) > 0$ for all sufficient large $k$ in $\bKKK$.
+1. Let $j \in J$.
+   1. We have $r_j^* \neq 0$.
+   1. Then for all sufficiently large $k$ in $\bKKK$, we have $r_j^k \approx r_j^*$.
+      Hence $r_j^k \neq 0$ and $r_j^k$ has the same sign as $r_j^*$.
+   1. Hence for all sufficiently large $k$ in $\bKKK$, we have
+      $r_j^k r_j^* > 0$.
+   1. from the definitions of $r_j^k$ and $\xi_j^k$, we see that
+      for all sufficiently large $k$ in $\bKKK$, we must have  $r_j^k h_j(\bx^k) > 0$.
+1. Hence for all sufficiently large $k$ in $\bKKK$, we have
+
+   $$
+   t_i^k g_i(\bx^k) > 0 \Forall i \in I
+   \text{ and }
+   r_j^k h_j(\bx^k) > 0 \Forall j \in J.
+   $$
+1. This means that $ g_i^+(\bx^k) > 0$ for every $i \in I$
+   and $h_j(\bx^k) \neq 0$ for every $j \in J$ for all sufficiently large $k$ in $\bKKK$.
+1. This establishes that for all sufficiently large $k$ in $\bKKK$, we have
+   $\bx^k \neq \bx^*$. Otherwise the inequality and equality constraints cannot be violated.
+1. Recall that we established that
+
+   $$
+   F^k(\bx^k) = f(\bx^k) + \frac{k}{2} \sum_{i=1}^m (g_i^+(\bx^k))^2
+   + \frac{k}{2} \sum_{j=1}^p (h_j(\bx^k))^2 
+   + \frac{1}{2} \| \bx^k - \bx^* \|^2 \leq f(\bx^*)
+   $$
+   for every $k$.
+1. Hence for all sufficiently large $k$ in $\bKKK$, we must have
+
+   $$
+   f(\bx^k) < f(\bx^*)
+   $$
+   since at least one of $(g_i^+(\bx^k))^2$ and $(h_j(\bx^k))^2$ is positive for every
+   sufficiently large $k$.
+1. We form the desired sequence $\{ \bx_l \}$ satisfying all the necessary
+   criteria by picking up all the entries corresponding to sufficiently large $k$
+   in $\bKKK$ from $\{ \bx^k \}$.
+1. It remains to show the order property of terms $h_j(\bx^k)$ 
+   and $g_i^+(\bx^k)$.
+1. For the remaining argument, without loss of generality, we shall
+   assume that $\{ \bx^k \}$ is the subsequence chosen above.
+
+TBD the argument below is not complete.
+
+1. We see that
+
+   $$
+   (\delta^k)^2 &= 1 + \sum_{i=1}^m (\chi^k_i)^2 + \sum_{j=1}^p (\xi^k_j)^2 \\
+   &= 1 + \sum_{i=1}^m (k g_i^+(\bx^k))^2 + \sum_{j=1}^p (k h_j(\bx^k))^2 \\
+   & \geq 1 + k w(\bx^k)^2. 
+   $$
+
+1. For every $i \notin I$, we have $t_i^* = 0$.
+1. Hence $\lim_{k \to \infty} t_i^k = 0$.
+1. Hence $\lim_{k \to \infty} \frac{\chi^k_i}{\delta^k} = 0$.
+1. Hence
+
+   $$
+   \lim_{k \to \infty} \frac{(\chi^k_i)^2}{1 + \sum_{i=1}^m (\chi^k_i)^2 + \sum_{j=1}^p (\xi^k_j)^2} = 0.
+   $$
+1. Hence
+
+   $$
+   \lim_{k \to \infty} \frac{(k g_i^+(\bx^k))^2}{1 + \sum_{i=1}^m (k g_i^+(\bx^k))^2 + \sum_{j=1}^p (h_j(\bx^k))^2} = 0.
+   $$
+1. We have
+
+   $$
+   0 \leq \frac{(k g_i^+(\bx^k))^2}{1 + \sum_{i=1}^m (k g_i^+(\bx^k))^2 + \sum_{j=1}^p (h_j(\bx^k))^2}
+   \leq \frac{(k g_i^+(\bx^k))^2}{1 + k w(\bx^k)^2}.
+   $$
+```
