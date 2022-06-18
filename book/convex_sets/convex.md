@@ -569,8 +569,15 @@ $$
     \ConvexHull(S) = \{ \theta_1 \bx_1 + \dots + \theta_k \bx_k | \bx_k \in S, \theta_i \geq 0, i = 1,\dots, k,
     \theta_1 + \dots + \theta_k = 1\}.
 $$
-
 ````
+
+```{figure} images/pic_convex_hull_random_2d_points.png
+---
+name: cvx:set:convex:hull:random:points
+---
+The convex hull of a set of random points on the 2D plane
+```
+
 
 ````{prf:property} Convexity of convex hull
 :label: res-cvx-convex-hull-convex
