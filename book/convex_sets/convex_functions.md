@@ -213,7 +213,7 @@ $$
 
 ### Absolute Value
 
-```{prf:example} Absolute value is convex
+````{prf:example} Absolute value is convex
 :label: ex-cvxf-real-abs
 
 Let $f : \RR \to \RR$ be:
@@ -222,6 +222,12 @@ $$
 f(x) = |x|.
 $$
 with $\dom f = \RR$.
+
+```{figure} images/func_abs_value_1d.png
+---
+name: cvx:func:abs:value
+---
+```
 
 Recall that $|x|$ is a norm on the real line $\RR$. 
 Thus, it satisfies the triangle inequality:
@@ -245,7 +251,7 @@ $$
 f(t x + (1-t) y) \leq t f(x) + (1- t) f(y) \Forall x, y \in \RR.
 $$
 Hence, $f$ is convex.
-```
+````
 
 ### Norms
 
@@ -271,6 +277,32 @@ $$
 Thus $f$ satisfies the convexity defining inequality 
 {eq}`eq-convexity-inequality`. 
 Hence, $f$ is convex.
+```
+
+```{figure} images/func_l2_norm_r2_contour3d.png
+---
+name: cvx:func:l2:norm:contour:3d
+---
+$\ell_2$ norm for $\RR^2$. $\| \cdot \|_2 : \RR^2 \to \RR$ 3D contour plots.
+```
+```{figure} images/func_l2_norm_r2_contour2d.png
+---
+name: cvx:func:l2:norm:contour:2d
+---
+$\ell_2$ norm for $\RR^2$. $\| \cdot \|_2 : \RR^2 \to \RR$ 2D contour plots.
+```
+
+```{figure} images/func_l1_norm_r2_contour3d.png
+---
+name: cvx:func:l1:norm:contour:3d
+---
+$\ell_1$ norm for $\RR^2$. $\| \cdot \|_1 : \RR^2 \to \RR$ 3D contour plots.
+```
+```{figure} images/func_l1_norm_r2_contour2d.png
+---
+name: cvx:func:l1:norm:contour:2d
+---
+$\ell_1$ norm for $\RR^2$. $\| \cdot \|_2 : \RR^1 \to \RR$ 2D contour plots.
 ```
 
 ### Max Function
