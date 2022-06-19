@@ -634,6 +634,14 @@ $\VV \oplus \RR$ is the
 of $\VV$ and $\RR$ having appropriate vector space 
 structure.
 
+```{figure} images/pic_epigraph_x_sqr.png
+---
+name: cvx:func:epigraph:x:sqr
+---
+Epigraph of the function $f(x) = x^2$.
+```
+
+
 The definition of epigraph also applies for extended
 real valued functions $f: \VV \to \ERL$.
 
