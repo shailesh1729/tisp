@@ -70,6 +70,14 @@ The entire vector space  $\VV$ is convex
 since it contains all the line segments between
 any pair of points in the space.
 
+```{figure} images/pic_convex_sets.png
+---
+name: cvx:convex:sets:examples
+---
+Examples of convex sets
+```
+
+
 ```{prf:observation}
 Since a convex set contains the line segment between any
 two points, any line segment is convex by definition.
