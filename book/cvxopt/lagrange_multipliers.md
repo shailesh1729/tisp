@@ -166,7 +166,7 @@ Revising the problem {eq}`eq-opt-lm-smooth-smooth-ineq`:
 1. The set of active constraints at a point $\bx$ is denoted by
 
    $$
-   I(\bx) = \{ i \in 1,\dots,m \ST g_i(\bx) = 0 \}.
+   \AAA(\bx) = \{ i \in 1,\dots,m \ST g_i(\bx) = 0 \}.
    $$
 
 We first restate the {prf:ref}`res-opt-local-min-feasible-descent-dirs`
@@ -202,17 +202,17 @@ $$
 $$
 where $f, g_1, \dots, g_m : \VV \to \RR$ are
 continuously differentiable functions over $\VV$.
-Let $I(\bx^*)$ denote the set of active constraints:
+Let $\AAA(\bx^*)$ denote the set of active constraints:
 
 $$
-I(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
+\AAA(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
 $$
 Then there doesn't exist a vector $\bd \in \VV$
 such that
 
 $$
 & \langle \bd, \nabla f(\bx^*) \rangle = f'(\bx^*; \bd) < 0,\\
-& \langle \bd, \nabla g_i(\bx^*) \rangle = g_i'(\bx^*; \bd) < 0, \quad i \in I(\bx^*).
+& \langle \bd, \nabla g_i(\bx^*) \rangle = g_i'(\bx^*; \bd) < 0, \quad i \in \AAA(\bx^*).
 $$
 ```
 This result states that local optimality
@@ -230,15 +230,15 @@ We prove this by contradiction.
    for every $t \in (0, \epsilon_0)$.
 1. Similarly, there exist $\epsilon_i > 0$
    such that $g_i(\bx^* + t \bd) < g_i(\bx^*) = 0$
-   for every $t \in (0, \epsilon_i)$ for every $i \in I(\bx^*)$.
+   for every $t \in (0, \epsilon_i)$ for every $i \in \AAA(\bx^*)$.
 1. Let $\epsilon = \min\{\epsilon_0, \dots, \epsilon_m \}$.
 1. Then for every $t \in (0, \epsilon)$, we have
    $f(\bx^* + t \bd) < f(\bx^*)$
-   and $g_i (\bx^* + t \bd) < 0$ for every $i \in I(\bx^*)$.
+   and $g_i (\bx^* + t \bd) < 0$ for every $i \in \AAA(\bx^*)$.
 1. By the continuity of $g_i$ for all $i$, 
-   and the fact that $g_i(\bx^*) < 0$ for every $i \notin I(\bx^*)$,
+   and the fact that $g_i(\bx^*) < 0$ for every $i \notin \AAA(\bx^*)$,
    there exists a $\delta > 0$ such that for every $t \in (0, \delta)$,
-   $g_i(\bx^* + t \bd) < 0$ for every $i \notin I(\bx^*)$.
+   $g_i(\bx^* + t \bd) < 0$ for every $i \notin \AAA(\bx^*)$.
 1. Hence, we conclude that for every $t \in (0, \min(\epsilon, \delta))$,
    we have $f(\bx^* + t \bd) < f(\bx^*)$
    and $g_i (\bx^* + t \bd) < 0$ for every $i \in 1,\dots,m$.
@@ -284,7 +284,7 @@ we have that the following system is infeasible.
 
 $$
 & \langle \bd, \nabla f(\bx^*) \rangle < 0,\\
-& \langle \bd, \nabla g_i(\bx^*) \rangle < 0, \quad i \in I(\bx^*).
+& \langle \bd, \nabla g_i(\bx^*) \rangle < 0, \quad i \in \AAA(\bx^*).
 $$
 
 1. Let $n = \dim \VV$.
@@ -316,11 +316,11 @@ $$
 1. The equation $\bA^T \bt = \bzero$ expands to
 
    $$
-   t_0 \nabla f(\bx^*) + \sum_{i \in I(\bx^*)} t_i \nabla g_i(\bx^*) = \bzero.
+   t_0 \nabla f(\bx^*) + \sum_{i \in \AAA(\bx^*)} t_i \nabla g_i(\bx^*) = \bzero.
    $$
 1. $\bt \neq \bzero$ means that at least one of $t_0, t_{i_1}, \dots, t_{i_k} \neq 0$.
 1. $\bt \succeq \bzero$ means that  $t_0, t_{i_1}, \dots, t_{i_k} \geq 0$.
-1. Now, let $t_i = 0$ for all remaining $i \notin I(\bx^*)$.
+1. Now, let $t_i = 0$ for all remaining $i \notin \AAA(\bx^*)$.
 1. Then for active constraints, we have $g_i(\bx^*) = 0$
    and for inactive constraints, we have $t_i = 0$.
 1. Hence for all constraints, we have $t_i g_i(\bx^*) = 0$.
@@ -340,7 +340,7 @@ it allows $t_0 = 0$. The case $t_0 = 0$ is
 not particularly useful since it leads to
 
 $$
-\sum_{i \in I(\bx^*)} t_i \nabla g_i(\bx^*) = \bzero.
+\sum_{i \in \AAA(\bx^*)} t_i \nabla g_i(\bx^*) = \bzero.
 $$
 with $t_i \geq 0$ and not all $t_i$ being zero.
 This means that the gradients of the active
@@ -369,13 +369,13 @@ $$
 $$
 where $f, g_1, \dots, g_m : \VV \to \RR$ are
 continuously differentiable functions over $\VV$.
-Let $I(\bx^*)$ denote the set of active constraints:
+Let $\AAA(\bx^*)$ denote the set of active constraints:
 
 $$
-I(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
+\AAA(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
 $$
 Assume that the gradients of the active constraints
-$\{\nabla g_i(\bx^*) \}_{i \in I(\bx^*)}$ are 
+$\{\nabla g_i(\bx^*) \}_{i \in \AAA(\bx^*)}$ are 
 linearly independent.
 
 
@@ -452,13 +452,13 @@ $$
 $$
 where $f, g_1, \dots, g_m, h_1, \dots, h_p : \VV \to \RR$ are
 continuously differentiable functions over $\VV$.
-Let $I(\bx^*)$ denote the set of active inequality constraints:
+Let $\AAA(\bx^*)$ denote the set of active inequality constraints:
 
 $$
-I(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
+\AAA(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
 $$
 Assume that the gradients of the active inequality constraints
-$\{\nabla g_i(\bx^*) \}_{i \in I(\bx^*)}$
+$\{\nabla g_i(\bx^*) \}_{i \in \AAA(\bx^*)}$
 and all the equality constraints
 $\{ \nabla h_j(\bx^*) \}_{j=1,\dots,p}$
 are linearly independent.
@@ -524,7 +524,7 @@ continuously differentiable functions over $\VV$.
 
 A feasible point $\bx^*$ is called *regular* if
 the gradients of the active inequality constraints
-$\{\nabla g_i(\bx^*) \}_{i \in I(\bx^*)}$
+$\{\nabla g_i(\bx^*) \}_{i \in \AAA(\bx^*)}$
 and all the equality constraints
 $\{ \nabla h_j(\bx^*) \}_{j=1,\dots,p}$
 are linearly independent.
@@ -951,6 +951,12 @@ $$
 1. Thus, if the tangent cone can be represented as above, then
    if $\bx^*$ is a local minimizer, then the Lagrangian multipliers
    $t_1^*, \dots, t_m^*$ must exist.
+1. The *admittance of Lagrange multipliers* at a given $\bx^* \in C$
+   is the property of the constraint set $C$. It is not a property
+   of the optimization problem itself. If $C$ admits Lagrange
+   multipliers at $\bx^*$, then there exists a Lagrange
+   multiplier vector at $\bx^*$ for every smooth
+   cost function $f$ if $\bx^*$ is a local minimizer of $f$.
 ```
 
 ## Enhanced Fritz-John Conditions
@@ -974,6 +980,28 @@ C = X \cap \{\bx \ST g_i(\bx) \leq 0, i=1,\dots,m\}
 We assume that $f$, $g_i$ and $h_j$ are smooth
 functions from $\VV$ to $\RR$
 and $X$ is a nonempty closed set.
+
+We also introduce $g: \VV \to \RR^m$ as
+
+$$
+g(\bx) = (g_1(\bx), \dots, g_m(\bx))
+$$
+and $h : \VV \to \RR^p$ as
+
+$$
+h(\bx) = (h_1(\bx), \dots, h_p(\bx)).
+$$
+
+For every $i=1,\dots,m$, we define
+
+$$
+g_i^+(\bx) = \max \{0, g_i(\bx) \}.
+$$
+Correspondingly, we define
+
+$$
+g^+(\bx) = (g_1^+(\bx), \dots, g_m^+(\bx)).
+$$
 
 ```{prf:definition} Lagrangian function
 :label: def-opt-efj-lagrangian-func
@@ -1050,6 +1078,9 @@ to $f$ and $\bx^*$.
    be empty.
 1. The condition {eq}`eq-opt-efj-grad-mult-sum-tan-cone`
    is referred to as the *Lagrangian stationarity condition*.
+   It states that the gradient of the Lagrangian function
+   is nonnegative along all tangent directions at the
+   local minimizer.
 1. It can be viewed as the necessary condition for $\bx^*$
    to be a local minimizer of the function
    $L(\bx, \bt^*, \br^*)$.
@@ -1437,7 +1468,7 @@ since $\bx^*$ is a local minimizer of $f$.
 1. We form the desired sequence $\{ \bx_l \}$ satisfying all the necessary
    criteria by picking up all the entries corresponding to sufficiently large $k$
    in $\bKKK$ from $\{ \bx^k \}$.
-1. It remains to show the order property of terms $h_j(\bx^k)$ 
+1. It remains to show the magnitude property of terms $h_j(\bx^k)$ 
    and $g_i^+(\bx^k)$.
 1. For the remaining argument, without loss of generality, we shall
    assume that $\{ \bx^k \}$ is the subsequence chosen above.
@@ -1472,3 +1503,335 @@ TBD the argument below is not complete.
    \leq \frac{(k g_i^+(\bx^k))^2}{1 + k w(\bx^k)^2}.
    $$
 ```
+
+```{div}
+The *complementary violation condition* (CV) in (4) is stronger than the
+traditional *complementary slackness* (CS) condition.
+
+1. If $t_i^* > 0$ for some inequality constraint $g_i$, then
+   the inequality $g_i(\bx) \leq 0$ must be violated
+   arbitrarily close to $\bx^*$.
+1. In contrast, the CS condition only states that $g_i(\bx^*) = 0$.
+   It doesn't say anything about the violation of the constraint
+   near the local optimal.
+1. CV states that there exists a sequence of $X$ converging to $\bx^*$
+   such that the equality and inequality constraints are violated
+   at every point in the sequence corresponding to the nonzero
+   Lagrangian multipliers.
+1. This sequence also has the property that the amount of 
+   violation in the constraints corresponding to zero Lagrange
+   multipliers is negligible via the following conditions.
+
+   $$
+   g_i^+(\bx_k) = o(w(\bx_k)) \Forall i \notin I,\\
+   & |h_j(\bx_k) | = o(w(\bx_k)) \Forall j \notin J.\\
+   $$
+```
+
+
+```{prf:corollary} Enhanced Fritz-John conditions regular case
+:label: res-opt-enhanced-fritz-john-cond-regular
+
+In {prf:ref}`res-opt-enhanced-fritz-john-cond`,
+if $X$ is regular at $\bx^*$,
+then
+
+$$
+-\left ( 
+   t_0^* \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+\right ) \in T_X(\bx^*)^{\circ}.
+$$
+
+Equivalently
+
+$$
+\left \langle \by,
+\left (
+   t_0^* \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*) \right)
+\right \rangle \geq 0
+\Forall \by \in T_X(\bx^*).
+$$
+```
+
+### Lagrangian Stationarity
+
+```{prf:observation} Lagrangian stationarity
+:label: res-opt-efj-stationarity
+
+In {prf:ref}`res-opt-enhanced-fritz-john-cond`,
+assume that $X$ is regular at $\bx^*$.
+Further assume that $t_0^* > 0$ is positive.
+
+By normalization of the scalars, the gradient inequality reduces to
+
+
+$$
+-\left ( 
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+\right ) \in T_X(\bx^*)^{\circ}.
+$$
+
+Equivalently
+
+$$
+\left \langle \by,
+   \left ( \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*) \right )
+\right \rangle \geq 0
+\Forall \by \in T_X(\bx^*).
+$$
+
+This is identical to the Lagrangian stationarity condition (1)
+in {prf:ref}`def-opt-constraint-set-efj-lm`.
+
+Hence if $X$ is regular at $\bx^*$ and $t_0^* = 1$,
+then the vector $(\bt^*, \br^*) = \{t_1^*, \dots, t_m^*, r_1^*, \dots, r_m^* \}$
+is a Lagrangian multiplier vector that satisfies the
+CV condition.
+```
+
+### LICQ
+```{prf:observation} Linear independence constraint qualification
+:label: res-opt-efj-licq
+
+In {prf:ref}`res-opt-enhanced-fritz-john-cond`,
+assume that $X = \VV$. Then $X$ is normal
+and $T_X(\bx^*) = \VV$.
+
+1. Condition (1) reduces to
+
+   $$
+   t_0^* \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+      + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*) = \bzero.
+   $$
+1. Further, add the linear independence constraint qualification (LICQ)
+   assumption at $\bx^*$; i.e., the gradients
+   $\nabla g_i(\bx^*), i \in \AAA(\bx^*)$ and $h_j(\bx^*), j=1,\dots,p$
+   are linearly independent;
+1. Then $t_0^* \neq 0$ must be true.
+1. Otherwise, the linear independence condition would be violated.
+1. It follows that Lagrangian stationarity is satisfied and
+   there exists a Lagrangian multiplier vector.
+1. We thus obtain the classical Lagrangian multiplier theorem
+   based on KKT conditions {prf:ref}`res-opt-ineq-eq-kkt`.
+```
+
+## Informative Lagrange Multipliers
+
+Lagrange multiplier vectors may provide a significant amount of
+sensitivity information by indicating which constraints to
+violate in order to effect a reduction in objective function value.
+In general, if the multipliers are informative, then the larger
+the coefficient for a constraint, the more sensitive is the
+objective function to the cost.
+
+```{prf:definition} Informative Lagrange multiplier vector
+:label: def-opt-efj-lmv-informative
+
+A Lagrange multiplier vector (as defined in {prf:ref}`def-opt-constraint-set-efj-lm`
+for the problem {eq}`eq-opt-efj-problem`)
+is called an *informative* multiplier vector
+if it satisfies the complementary violation condition
+of enhanced Fritz-John conditions {prf:ref}`res-opt-enhanced-fritz-john-cond`.
+```
+
+```{prf:definition} Minimal Lagrange multiplier vector
+:label: def-opt-efj-lmv-minimal
+
+Let $\bx^*$ be a local minimum of the problem {eq}`eq-opt-efj-problem`.
+Let $(\bt^*, \br^*)$ be a Lagrange multiplier vector
+(as defined in {prf:ref}`def-opt-constraint-set-efj-lm`).
+Let $I = \{ i \ST t_i^* > 0 \}$ and $J = \{ j \ST r_j \neq 0 \}$.
+Then $(\bt^*, \br^*)$ is called a *minimal* Lagrange multiplier
+vector if there is no other Lagrange multiplier vector
+with a support that is strictly contained in $I \cup J$.
+```
+
+
+
+```{prf:definition} Strong Lagrange multiplier vector
+:label: def-opt-efj-lmv-strong
+
+Let $\bx^*$ be a local minimum of the problem {eq}`eq-opt-efj-problem`.
+Let $(\bt^*, \br^*)$ be a Lagrange multiplier vector
+(as defined in {prf:ref}`def-opt-constraint-set-efj-lm`).
+Let $I = \{ i \ST t_i^* > 0 \}$ and $J = \{ j \ST r_j \neq 0 \}$.
+Then $(\bt^*, \br^*)$ is called a *strong* Lagrange multiplier vector
+if it satisfies the following condition:
+
+If the set $I \cup J$ is nonempty, then there exists a sequence
+$\{ \bx_k \}$ of $X$ such that $\bx_k \to \bx^*$ and
+for all $k$ we have:
+
+$$
+& f(\bx^k) < f(\bx^*); \\
+& t_i^* g_i(\bx^k) > 0, \Forall i \in I; \\
+& r_j^* h_j(\bx^k) > 0, \Forall j \in J.
+$$
+```
+This condition is slightly weaker than the complementary violation
+condition. It makes no provisions for ensuring that the constraints
+corresponding to zero multipliers have negligibly small violation
+at each $\bx^k$.
+
+1. Every informative multiplier vector is a strong multiplier vector.
+1. Every minimal multiplier vector is a strong multiplier vector.
+1. Minimal multipliers are not necessarily informative.
+1. Some multiplier vectors are both informative and minimal.
+
+```{prf:theorem} Existence of informative multipliers
+:label: res-opt-efj-lm-informative-existence
+
+Let $\bx^*$ be a local minimum of the problem {eq}`eq-opt-efj-problem`.
+Assume that the tangent cone $T_X(\bx^*)$ is convex
+and that the set of Lagrange multiplier vectors is nonempty.
+Then
+
+1. The set of informative Lagrange multiplier vectors
+   is nonempty.
+1. The Lagrange multiplier vector which has the minimum norm is informative.
+1. Every minimal Lagrange multiplier vector is strong.
+```
+
+
+## Pseudonormality
+
+```{div}
+The key issue with enhanced Fritz-John conditions is that it allows
+for $t_0^*$ to be zero.
+
+1. We now introduce the notion of pseudonormal points in the
+   constraint set $C$.
+1. We show that if a local minimizer $\bx^*$ is a pseudonormal
+   point, then  $t_0^* \neq 0$.
+1. Hence, at pseudonormal points, the constraint set $C$ admits
+   Lagrange multiplier vectors.
+```
+
+```{prf:definition} Pseudonormal vector
+:label: def-opt-efj-pseudonormal-vector
+
+We say that a feasible vector $\bx^*$ for the problem {eq}`eq-opt-efj-problem`
+is pseudonormal if one cannot find scalars $t_1, \dots, t_m, r_1, \dots, r_p$
+and a sequence $\{\bx_k \}$ of $X$ such that
+
+1. The gradients of constraint functions at $\bx^*$ satisfy:
+   
+   $$
+   -\left(\sum_{i=1}^m t_i \nabla g_i(\bx^*) + \sum_{j=1}^p r_j \nabla h_j(\bx^*) \right ) \in \tilde{N}_X(\bx^*).
+   $$
+1. Inequality multipliers are nonnegative: $t_i \geq 0$ for every $i=1,\dots,m$.
+1. Multipliers for inactive inequality constraints are zero.
+   $t_i = 0$ for every $i \notin \AAA(\bx^*)$
+   where $\AAA(\bx^*)$ denotes the set of active inequality constraints
+   at $\bx^*$;
+
+   $$
+   \AAA(\bx^*) = \{ i \in 1,\dots,m \ST g_i(\bx^*) = 0 \}.
+   $$
+1. The sequence $\{ \bx_k \}$ converges to $\bx^*$ (i.e., $\bx_k \to \bx^*$) and
+   
+   $$
+   \sum_{i=1}^m t_i g_i(\bx_k) + \sum_{j=1}^p r_j h_j(\bx_k) > 0, \quad \Forall k.
+   $$
+```
+
+```{prf:theorem} Pseudonormality and EFJ scalars
+:label: def-opt-efj-pseudonormal-t0-nonzero
+
+Let  $\bx^*$ be a local minimizer for the problem {eq}`eq-opt-efj-problem`.
+Let $t_0^*,t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*$ be the enhanced Fritz-John
+scalars satisfying the conditions in {prf:ref}`res-opt-enhanced-fritz-john-cond`.
+
+If $\bx^*$ is a pseudonormal vector of the constraint set $C$ 
+defined in {eq}`eq-opt-efj-constraints`, then $t_0^* \neq 0$.
+```
+
+```{prf:proof}
+We shall show this by contradiction. 
+
+
+1. Assume that $\bx^*$ is a local minimizer for the problem {eq}`eq-opt-efj-problem`.
+1. Then there exist EFJ scalars
+   $t_0^*,t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*$
+   satisfying the conditions in {prf:ref}`res-opt-enhanced-fritz-john-cond`.
+1. For contradiction assume that $\bx^*$ is a pseudonormal vector
+   and $t_0^* = 0$.
+1. Since $t_0^*,t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*$ are EFJ scalars, hence
+
+   $$
+   -\left ( 
+      \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+      + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+   \right ) \in \tilde{N}_X(\bx^*).
+   $$
+1. $t_i^* \geq 0$ for every $i=1,\dots,m$.
+1. The scalars $t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*$ are not equal to $0$.
+1. Hence the index set $I \cup J$ is not empty, where
+
+   $$
+   I = \{i > 0 \ST t_i^* > 0 \}, \quad
+   J = \{j  \ST r_j^* \neq 0 \}.
+   $$
+1. Hence there exists a sequence $\{ \bx_k \}$ of $X$ that converges
+   to $\bx^*$ and is such that for all $k$
+
+   $$
+   & f(\bx_k) < f(\bx^*),\\
+   & t_i^* g_i (\bx_k) > 0 \Forall i \in I,\\
+   & r_j^* h_j(\bx_k) > 0 \Forall j \in J,\\
+   & g_i^+(\bx_k) = o(w(\bx_k)) \Forall i \notin I,\\
+   & |h_j(\bx_k) | = o(w(\bx_k)) \Forall j \notin J,\\
+   $$
+   where $g_i^+(\bx) = \max \{ 0, g_i(\bx) \}$ and
+
+   $$
+   w(\bx) = \min \left \{
+   \min_{i \in I} g_i^+(\bx),
+   \min_{j \in J} |h_j(\bx) |
+      \right \}.
+   $$
+1. Hence the sequence $\{ \bx_k \}$ with $\bx_k \to \bx$ satisfies
+
+
+   $$
+   \sum_{i=1}^m t_i^* g_i (\bx_k) + \sum_{j=1}^p r_j^* h_j(\bx_k) > 0  \Forall k
+   $$
+   since at least one of these multipliers is nonzero.
+1. Multiplier for every inactive inequality constraint must be zero.
+   Otherwise, the complementary violation condition will be violated.
+1. Hence $t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*$ are the scalars
+   and $\{ \bx_k \}$ is a sequence of $X$ satisfying all the conditions
+   in {prf:ref}`def-opt-efj-pseudonormal-vector`.
+1. Hence $\bx^*$ cannot be a pseudonormal vector of $C$.
+```
+
+
+## Constraint Qualifications
+
+```{div}
+We now introduce different constraint qualifications which ensure
+that a point $\bx^*$ is pseudonormal.
+```
+
+### Linearly Independent Constraint Qualifications
+
+```{prf:criterion} CQ1: linearly independent constraint qualifications
+:label: res-opt-efj-licq
+
+$X = \VV$ and $\bx^*$ satisfies LICQ; i.e., the active inequality
+constraint gradients $\nabla g_i (\bx^*)$ for all $i in \AAA(\bx^*)$
+and the equality constraint gradients $\nabla h_j(\bx^*)$
+for all $j=1,\dots,p$ are linearly independent.
+```
+
+### AHU/MF Constraint Qualifications
+
+
+### Affine Equality and Concave Inequality Constraints
+
+
+
