@@ -42,6 +42,8 @@ where $f$ is differentiable over the convex set $C$.
 We now introduce the notion of stationary points for
 the given optimization problem of minimizing $f$ over $C$.
 
+```{index} Stationary point
+```
 ```{prf:definition} Stationary point for an optimization problem
 :label: def-opt-over-c-stationary-point
 
@@ -725,6 +727,8 @@ $f(\bx_{k+1}) < f(\bx_k)$.
 
 This brings us to the notion of a descent direction.
 
+```{index} Descent direction
+```
 ```{prf:definition} Descent direction
 :label: def-opt-descent-direction
 
