@@ -278,7 +278,18 @@ We shall make the following assumptions in the analysis.
 ````{prf:theorem} Upper bound on the estimation error
 :label: res-sgm-error-upper-bound
 
-After $k$ iterations, we have
+Let $\| \bx^1 - \bx^* \|_2 \leq R$.
+
+After $k$ iterations of the subgradient method, we have
+```{math}
+:label: eq-sgm-error-ub-k-g
+f_{\best}^k - f^* \leq 
+\frac{R^2 + \sum_{i=1}^k t_i^2 \| \bg_i \|_2^2 }{2 \sum_{i=1}^k t_i }.
+```
+
+If the subgradients of $f$ are bounded by $\| \bg \| \leq G$
+for all $\bg \in \partial f(\bx)$ for every $\bx$, then this
+simplifies to:
 
 ```{math}
 :label: eq-sgm-error-ub-k
@@ -306,9 +317,9 @@ $$
 \| \bx^{k+1} - \bx^* \|_2^2
 & = \| \bx^k - t_k \bg^k - \bx^* \|_2^2 \\
 & = \| (\bx^k - \bx^*) - t_k \bg^k \|_2^2 \\
-& = \| (\bx^k - \bx^*) \|_2^2 - 2 t_k \langle \bx^k - \bx^*, \bg^k \rangle
+& = \| \bx^k - \bx^* \|_2^2 - 2 t_k \langle \bx^k - \bx^*, \bg^k \rangle
 + t_k^2 \| \bg^k \|_2^2 \\
-& \leq \| (\bx^k - \bx^*) \|_2^2 - 2 t_k (f(\bx^k) - f^*)
+& \leq \| \bx^k - \bx^* \|_2^2 - 2 t_k (f(\bx^k) - f^*)
 + t_k^2 \| \bg^k \|_2^2.
 $$
 
@@ -316,12 +327,12 @@ Applying this inequality recursively, we get
 
 $$
 \| \bx^{k+1} - \bx^* \|_2^2
-\leq \| (\bx^1 - \bx^*) \|_2^2 - 2 \sum_{i=1}^k t_i (f(\bx^i) - f^*)
+\leq \| \bx^1 - \bx^* \|_2^2 - 2 \sum_{i=1}^k t_i (f(\bx^i) - f^*)
 + \sum_{i=1}^k t_i^2 \| \bg^i \|_2^2.
 $$
 
 Using the fact that $\| \bx^{k+1} - \bx^* \|_2^2 \geq 0$
-and $\| (\bx^1 - \bx^*) \|_2 \leq R$, we have
+and $\| \bx^1 - \bx^* \|_2 \leq R$, we have
 
 $$
 2 \sum_{i=1}^k t_i (f(\bx^i) - f^*) \leq R^2 + \sum_{i=1}^k t_i^2 \| \bg^i \|_2^2.
@@ -341,15 +352,16 @@ $$
 2 \left ( \sum_{i=1}^k t_i \right ) (f_{\best}^k - f^* )
 \leq  R^2 + \sum_{i=1}^k t_i^2 \| \bg^i \|_2^2.
 $$
+This can be rewritten as
+
+$$
+f_{\best}^k - f^* \leq 
+\frac{R^2 + \sum_{i=1}^k t_i^2 \| \bg_i \|_2^2 }{2 \sum_{i=1}^k t_i }
+$$
+as desired.
+
 Applying the upper bound on the subgradient $\| \bg \|_2 \leq G$,
 we have
-
-$$
-2 \left ( \sum_{i=1}^k t_i \right ) (f_{\best}^k - f^* )
-\leq  R^2 +  G^2 \sum_{i=1}^k t_i^2.
-$$
-
-This can be rewritten as
 
 $$
 f_{\best}^k - f^* \leq \frac{R^2 +  G^2 \sum_{i=1}^k t_i^2}{2\sum_{i=1}^k t_i }
@@ -405,4 +417,182 @@ for all $k \geq R^2 / (G^2 t^2)$, we must have
 $$
 f_{\best}^k - f^* \leq G^2 t.
 $$
+```
+
+
+### Constant Step Length
+
+```{prf:corollary} Convergence of subgradient method with constant step length
+:label: res-sgm-error-ub-constant-step-length
+
+Let $c$ be the constant step length for the subgradient method.
+Let $t_k = \frac{c}{\| \bg^k \|_2}$ for every $k$.
+Then we have
+
+$$
+f_{\best}^k - f^* \leq \frac{R^2 + c^2 k}{2 c k / G }.
+$$
+
+The subgradient method converges to within $G c / 2$ of the
+optimal value $f^*$. In other words,
+
+$$
+\lim_{k \to \infty} f_{\best}^k - f^* \leq \frac{G c}{2}.
+$$
+```
+```{prf:proof}
+By putting $t_i = \frac{c}{\| \bg^i \|_2}$ in
+{eq}`eq-sgm-error-ub-k-g`, we see that
+
+$$
+f_{\best}^k - f^* \leq 
+\frac{R^2 + \sum_{i=1}^k c^2 }{2 \sum_{i=1}^k t_i }.
+$$
+Also, note that
+
+$$
+& t_i = \frac{c}{\| \bg^i \|_2}\\
+\implies & t_i \geq \frac{c}{ G} \\
+\implies & \sum_{i=1}^k t_i \geq \frac{c k}{G} \\
+\implies & \frac{1}{\sum_{i=1}^k t_i} \leq \frac{1}{c k / G}.
+$$
+Putting this back, we have
+
+$$
+f_{\best}^k - f^* \leq 
+\frac{R^2 + c^2 k }{2 c k / G }.
+$$
+Taking the limit $k \to \infty$, we see that
+
+$$
+\lim_{k \to \infty} (f_{\best}^k - f^*) \leq \frac{G c}{2}.
+$$
+```
+
+### Square Summable Step Sizes
+
+```{prf:corollary} Convergence of subgradient method with square summable step sizes
+:label: res-sgm-error-ub-sq-sum-step-sizes
+
+Let the step sizes satisfy the rule
+
+$$
+t_k > 0 \Forall k, \quad
+\sum_{k=1}^{\infty} t_k^2 < \infty,
+\sum_{k=1}^{\infty} t_k = \infty.
+$$
+Further, let $T = \sum_{k=1}^{\infty} t_k^2$.
+
+Then we have
+
+$$
+f_{\best}^k - f^* \leq \frac{R^2 + G^2 T}{2 \sum_{i=1}^k t_k}.
+$$
+
+The subgradient method converges to $f^*$.
+```
+
+```{prf:proof}
+By putting the step size constraints into
+{eq}`eq-sgm-error-ub-k`, we obtain
+
+$$
+f_{\best}^k - f^* \leq \frac{R^2 + G^2 T}{2 \sum_{i=1}^k t_i }.
+$$
+
+Taking the limit $k \to \infty$, the denominator grows to $\infty$
+while the numerator converges to $R^2 + G^2 T$.
+Hence
+
+$$
+\lim_{k \to \infty} f_{\best}^k - f^*  = 0.
+$$
+```
+
+### Diminishing Step Sizes
+
+```{prf:corollary} Convergence of subgradient method with diminishing step sizes
+:label: res-sgm-error-ub-diminishing-step-sizes
+
+Let the step sizes satisfy the rule
+
+$$
+t_k > 0 \Forall k, \quad
+\lim_{k \to \infty} t_k = 0, \quad
+\sum_{k=1}^{\infty} t_k = \infty.
+$$
+Then the subgradient method converges to $f^*$.
+```
+
+```{prf:proof}
+We shall show that the R.H.S. of {eq}`eq-sgm-error-ub-k`
+converges to 0 as $k \to \infty$.
+
+1. Let $\epsilon > 0$.
+1. There exists integer $n_1$ such that
+   $t_i \leq \epsilon / G^2$ for all $i > n_1$
+   since $t_k \to 0$.
+1. There also exists an integer $n_2$ such that
+   
+   $$
+   \sum_{i=1}^{n_2} t_i \geq \frac{1}{\epsilon}
+   \left ( R^2 + G^2 \sum_{i=1}^{n_1} t_i^2 \right)
+   $$
+   since $t_i$ is nonsummable.
+1. Let $n = \max\{n_1, n_2 \}$.
+1. Then, for every $k > n$, we have
+
+   $$
+   \frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i}
+   = \frac{R^2 + G^2 \sum_{i=1}^{n_1} t_i^2}{2 \sum_{i=1}^k t_i}
+   + \frac{G^2 \sum_{i=n_1 + 1}^k t_i^2}{2 \sum_{i=1}^{n_1} t_i + 2 \sum_{i=n_1 + 1}^k t_i}.
+   $$
+1. We can see that
+
+   $$
+   \sum_{i=1}^k t_i \geq \sum_{i=1}^{n_2} t_i
+   \geq \frac{1}{\epsilon}
+   \left ( R^2 + G^2 \sum_{i=1}^{n_1} t_i^2 \right).
+   $$
+1. Hence
+
+   $$
+   \frac{R^2 + G^2 \sum_{i=1}^{n_1} t_i^2}{2 \sum_{i=1}^k t_i} \leq
+   \frac{\epsilon}{2}.
+   $$
+1. For every $i > n_1$, we have $t_i < \epsilon / G^2$.
+1. Hence
+
+   $$
+   G^2 \sum_{i=n_1 + 1}^k t_i^2
+   \leq \epsilon \sum_{i=n_1 + 1}^k t_i.
+   $$
+1. We can now see that 
+
+   $$
+   & \frac{G^2 \sum_{i=n_1 + 1}^k t_i^2}{2 \sum_{i=1}^{n_1} t_i + 2 \sum_{i=n_1 + 1}^k t_i}\\
+   & < \frac{G^2 \sum_{i=n_1 + 1}^k t_i^2}{2 \sum_{i=n_1 + 1}^k t_i}\\
+   & \leq \frac{\epsilon \sum_{i=n_1 + 1}^k t_i}{2 \sum_{i=n_1 + 1}^k t_i}\\
+   &= \frac{\epsilon}{2}.
+   $$
+1. Combining, we have
+
+   $$
+   \frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i}
+   < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+   $$
+   for every $k > n$.
+1. Thus, for every $\epsilon > 0$, there exists $n$ such that
+   for all $k > n$, we have
+
+   $$
+   \frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i} < \epsilon.
+   $$
+
+1. Hence 
+
+   $$
+   \lim_{k \to \infty}\frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i} = 0.
+   $$
+1. Hence the subgradient method converges.
 ```
