@@ -246,6 +246,9 @@ the algorithm.
 
 ```{div}
 Our goal is to show that $f_{\best}^k \downarrow f^*$.
+Towards this, we will establish a suboptimality bound
+on the estimate of the optimal value after $k$ iterations.
+
 We shall make the following assumptions in the analysis.
 
 1. $f$ is a real valued convex function.
@@ -275,7 +278,7 @@ We shall make the following assumptions in the analysis.
 ```
 
 
-````{prf:theorem} Upper bound on the estimation error
+````{prf:theorem} Suboptimality bound for subgradient method
 :label: res-sgm-error-upper-bound
 
 Let $\| \bx^1 - \bx^* \|_2 \leq R$.
@@ -643,4 +646,106 @@ $$
    $$
    \lim_{k \to \infty} f_{\best}^k - f^* = 0.
    $$
+```
+
+### On the Suboptimality Bound
+
+If we run the subgradient method for $k$ iterations,
+we get a suboptimality bound given by {eq}`eq-sgm-error-ub-k`.
+
+$$
+f_{\best}^k - f^* \leq \frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i }.
+$$
+A natural question is how tight can this bound be by an appropriate
+selection of step sizes $t_1, \dots, t_k$.
+
+```{div}
+1. Note that the R.H.S. is a convex and symmetric function of $t_1, \dots, t_k$.
+1. Hence, at the optimal value, we must have $t_1 = \dots = t_k$.
+1. Let $t = t_1 = \dots = t_k$.
+1. Then the suboptimality bound reduces to 
+
+   $$
+   \frac{R^2 + G^2 k t^2}{2 k t }.
+   $$
+1. This is minimized at $t = \frac{R}{G \sqrt{k}}$.
+1. In other words, the finite sequence of step-sizes $t_1, \dots, t_k$
+   that minimizes the suboptimality bound in {eq}`eq-sgm-error-ub-k`
+   after exactly $k$ iterations is given by
+
+   $$
+   t_i = \frac{R}{G \sqrt{k}}, \Forall i=1,\dots,k.
+   $$
+1. It must be noted that this suboptimality bound is dependent on the
+   number of iterations.
+1. This choice of constant step size gives us the bound
+
+   $$
+   f_{\best}^k - f^* \leq \frac{RG}{\sqrt{k}}.
+   $$
+```
+
+```{prf:theorem} A bound on the suboptimality bound
+:label: res-sgm-suboptimality-bound-bound
+
+Let $t_1, \dots, t_k$ be any choice of step sizes for the
+subgradient method for $k$ iterations. Then we must have
+
+$$
+\frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i } \geq \frac{RG}{\sqrt{k}}
+$$
+where the L.H.S. is the step-size selection dependent suboptimality bound
+on $f_{\best}^k - f^*$.
+
+Accordingly, the number of steps required to achieve a guaranteed
+accuracy of $f_{\best}^k - f^* \leq \epsilon$ for some $\epsilon > 0$
+is at least $(RG / \epsilon)^2$ as per the suboptimality
+bound {eq}`eq-sgm-error-ub-k` irrespective of the step size selection.
+```
+
+```{prf:proof}
+We have already shown that the suboptimality bound is minimized
+by the constant step size selection where $t_i = \frac{R}{G \sqrt{k}}$
+for every $i=1,\dots,k$
+and is given by $\frac{RG}{\sqrt{k}}$.
+
+1. Let $\epsilon > 0$ be the required guaranteed accuracy.
+1. Then $\epsilon \geq \frac{RG}{\sqrt{k}}$ since
+   $\frac{RG}{\sqrt{k}}$ is the minimum guaranteed suboptimality
+   bound after $k$ iterations as per {eq}`eq-sgm-error-ub-k`.
+1. Hence we have $\sqrt{k} \geq \frac{RG}{\epsilon}$.
+1. Hence we have $k \geq \left ( \frac{RG}{\epsilon} \right )^2$.
+
+We note that the suboptimality bound of $\epsilon$ can be
+guaranteed in $k$ iterations only if we use the constant
+step sizes of $t = \frac{R}{G \sqrt{k}}$.
+```
+
+```{prf:observation} Interpretation of $R G$
+:label: res-sgm-rg-interpretation
+
+Initial uncertainty
+
+1. Assume that $f$ is Lipschitz continuous with the constant $G$.
+1. By Lipschitz continuity, we have
+
+   $$
+   f^1 - f^* \leq  G \| \bx^1 - \bx^* \|_2 \leq R G.
+   $$
+1. Hence $RG$ is an estimate of the initial uncertainty in $f^*$.
+
+
+Reduction in uncertainty
+
+1. If our goal is to achieve $f_{\best}^k - f^* \leq \epsilon$,
+   then $\epsilon$ is an estimate of the final uncertainty in $f^*$.
+1. Hence $RG / \epsilon$ is the ratio of initial uncertainty
+   in $f^*$ to the final uncertainty in $f^*$.
+1. By {prf:ref}`res-sgm-suboptimality-bound-bound`, we require
+   a minimum of $(R G / \epsilon)^2$ iterations to achieve
+   this much reduction in uncertainty.
+
+This analysis shows that the subgradient method is very slow.
+To achieve a 1000x reduction in the uncertainty of $f^*$,
+we need a million iterations at least.
 ```
