@@ -179,13 +179,13 @@ Following are some of the common methods for step size selection.
     t_k = \frac{a}{\sqrt{k}}.
     $$
 1. *Nonsummable diminishing step lengths*: We choose
-    step sizes as $t_k = \frac{c^k}{\| \bg^k \|_2}$
+    step sizes as $t_k = \frac{c_k}{\| \bg^k \|_2}$
     where
 
     $$
-    c^k > 0, \quad
-    \lim_{k \to \infty} c^k = 0,\quad
-    \sum_{k=1}^{\infty} c^k = \infty.
+    c_k > 0, \quad
+    \lim_{k \to \infty} c_k = 0,\quad
+    \sum_{k=1}^{\infty} c_k = \infty.
     $$
 ```
 ### The Subgradient Method
@@ -595,4 +595,52 @@ converges to 0 as $k \to \infty$.
    \lim_{k \to \infty}\frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i} = 0.
    $$
 1. Hence the subgradient method converges.
+```
+
+### Diminishing Step Lengths
+
+```{prf:corollary} Convergence of subgradient method with diminishing step lengths
+:label: res-sgm-error-ub-diminishing-step-length
+
+Let the step sizes $t_k = \frac{c_k}{\| \bg^k \|_2}$
+be chosen such that
+
+$$
+c_k > 0, \quad
+\lim_{k \to \infty} c_k = 0,\quad
+\sum_{k=1}^{\infty} c_k = \infty
+$$
+where $c_k$ is the step length for the $k$-th iteration.
+
+Then the subgradient method converges to $f^*$.
+```
+
+```{prf:proof}
+
+From {eq}`eq-sgm-error-ub-k-g` we have
+
+$$
+f_{\best}^k - f^* \leq 
+\frac{R^2 + \sum_{i=1}^k t_i^2 \| \bg_i \|_2^2 }{2 \sum_{i=1}^k t_i }
+= \frac{R^2 + \sum_{i=1}^k c_i^2}{2 \sum_{i=1}^k t_i}.
+$$
+
+1. We have
+
+   $$
+   \sum_{i=1}^k t_i = \sum_{i=1}^k \frac{c_i}{\| \bg^i \|_2}
+   \geq \sum_{i=1}^k \frac{c_i}{G}.
+   $$
+1. Hence we have
+
+   $$
+   f_{\best}^k - f^* \leq \frac{R^2 + \sum_{i=1}^k c_i^2}{(2/G) \sum_{i=1}^k c_i}.
+   $$
+1. Following an argument similar to the proof of {prf:ref}`res-sgm-error-ub-diminishing-step-sizes`,
+   the R.H.S. converges to 0 as $k \to \infty$.
+1. Hence
+
+   $$
+   \lim_{k \to \infty} f_{\best}^k - f^* = 0.
+   $$
 ```
