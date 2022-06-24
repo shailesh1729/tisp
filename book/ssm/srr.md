@@ -313,3 +313,318 @@ problem can now be written as
 
 This problem can be visualized as a projection of $\bx$ on to
 the set $\Sigma_K$. Hence, it always has a solution.
+
+
+
+ 
+## P-Norms
+ 
+There are some simple and useful results on relationships between 
+different $p$-norms listed in this section. We also discuss
+some interesting properties of $l_1$-norm specifically.
+
+```{index} Sign vector; complex
+```
+````{prf:definition} Complex sign vector
+:label: def:ssm:sign_vector
+
+Let $\bv \in \CC^N$. Let the entries in $\bv$ be represented as
+
+$$
+v_k = r_k \exp (i \theta_k)
+$$
+where $r_k = | v_k |$ with the convention that $\theta_k = 0$
+whenever $r_k = 0$.
+
+The sign vector for $\bv$ denoted by $\sgn(\bv)$ is defined as
+
+$$
+\sgn(\bv)  = \begin{bmatrix}\sgn(v_1) \\ \vdots \\ \sgn(v_N)  \end{bmatrix}
+$$
+where
+
+$$
+\sgn(v_k) = \begin{cases}
+\exp (i \theta_k) & \text{ if } r_k \neq 0;\\
+0 & \text{ if } r_k = 0.
+\end{cases}
+$$
+````
+
+````{prf:lemma} $\ell_1$ norm as product of vector with its sign
+:label: res:ssm:l1_norm_as_inner_product_with_sign_vector
+
+For any $\bv \in \CC^N$: 
+
+$$
+\| \bv \|_1 = \sgn(\bv)^H \bv = \langle \bv , \sgn(\bv) \rangle.
+$$
+````
+````{prf:proof}
+This follows from:
+
+$$
+\| \bv \|_1 = \sum_{k=1}^N r_k 
+= \sum_{k=1}^N \left [r_k e^{i \theta_k} \right ] e^{- i \theta_k} 
+= \sum_{k=1}^N v_k e^{- i \theta_k} = \sgn(\bv)^H \bv.
+$$
+Note that whenever $v_k = 0$,
+corresponding $0$ entry in $\sgn(\bv)$ has no effect on the sum.
+````
+
+````{prf:lemma} Equivalence of $\ell_1$ and $\ell_2$ norms
+:label: lem:ssm:l1_norm_l2_bounds
+
+Suppose $\bv \in \CC^N$.  Then
+
+$$
+\| \bv \|_2 \leq \| \bv\|_1 \leq \sqrt{N} \| \bv \|_2.
+$$
+````
+
+````{prf:proof}
+For the lower bound, we go as follows
+
+$$
+\| \bv \|_2^2 
+= \sum_{i=1}^N | v_i|^2  
+\leq \left ( \sum_{i=1}^N | v_i|^2  + 2 \sum_{i, j, i \neq j} | v_i | | v_j| \right )
+= \left ( \sum_{i=1}^N | v_i| \right )^2 = \| \bv \|_1^2.
+$$
+This gives us
+
+$$
+\| \bv \|_2 \leq \| \bv \|_1.
+$$
+We can write $\ell_1$ norm as
+
+$$
+\| \bv \|_1 = \langle \bv, \sgn (\bv) \rangle.
+$$
+By Cauchy-Schwartz inequality we have
+
+$$
+\langle \bv, \sgn (\bv) \rangle \leq  \| \bv \|_2  \| \sgn (\bv) \|_2. 
+$$ 
+Since $\sgn(\bv)$ can have at most $N$ non-zero values, each with magnitude 1,
+
+$$
+\| \sgn (\bv) \|_2^2 \leq N 
+\implies \| \sgn (\bv) \|_2 \leq \sqrt{N}.
+$$
+Thus, we get
+
+$$
+\| \bv \|_1  \leq \sqrt{N} \| \bv \|_2.
+$$
+````
+
+````{prf:lemma} Equivalence of $\ell_2$ and $\ell_{\infty}$ norms
+:label: res:ssm:l2_upper_bound_max_norm
+
+Let $\bv \in \CC^N$. Then
+
+$$
+\| \bv \|_2 \leq \sqrt{N} \| \bv \|_{\infty}.
+$$
+````
+````{prf:proof}
+This follows from:
+
+$$
+\| \bv \|_2^2 
+= \sum_{i=1}^N | v_i |^2 
+\leq N \underset{1 \leq i \leq N}{\max} ( | v_i |^2) 
+= N \| \bv \|_{\infty}^2.
+$$
+Thus
+
+$$
+\| \bv \|_2 \leq \sqrt{N} \| \bv \|_{\infty}.
+$$
+````
+````{prf:lemma} Relationship between $p$-norms
+:label: res:ssm:p_q_norm_bounds
+
+Let $\bv \in \CC^N$.
+Let $1 \leq p, q \leq \infty$.
+Then
+
+$$
+\| \bv \|_q \leq \| \bv \|_p \text{ whenever } p \leq q.
+$$
+````
+````{prf:proof}
+TBD
+````
+
+````{prf:lemma}
+:label: res:ssm:one_vec_l1_norm
+
+Let $\bone \in \CC^N$ be the vector of all ones; i.e., $\bone = (1, \dots, 1)$.
+Let $\bv \in \CC^N$ be some arbitrary vector.
+Let $| \bv |$ denote the vector of
+absolute values of entries in $\bv$;
+i.e., $|v|_i = |v_i| \Forall 1 \leq i \leq N$.
+Then
+
+$$
+\| \bv \|_1 = \bone^T | \bv | = \bone^H | \bv |.
+$$ 
+````
+````{prf:proof}
+This follows from:
+
+$$
+\bone^T | \bv | = \sum_{i=1}^N  | v |_i =   \sum_{i=1}^N  | v_i | = \| \bv \|_1.
+$$
+Finally since $\bone$ consists only of real entries, hence its transpose and Hermitian 
+transpose are same.
+````
+
+````{prf:lemma}
+:label: res:ssm:ones_matrix_l1_norm
+
+Let $\OneMat \in \CC^{N \times N}$ be a square matrix of all ones. Let $\bv \in \CC^N$ 
+be some arbitrary vector.
+Then
+
+$$
+|\bv|^T \OneMat | \bv | = \| \bv \|_1^2.
+$$
+````
+````{prf:proof}
+We know that
+
+$$
+\OneMat = \bone \bone^T
+$$
+Thus,
+
+$$
+|\bv|^T \OneMat | \bv |  
+= |\bv|^T  \bone \bone^T | \bv |  
+= (\bone^T | \bv | )^T (\bone^T | \bv |) 
+=  \| \bv \|_1 \| \bv \|_1 = \| \bv \|_1^2.
+$$
+We used the fact that $\| \bv \|_1 = \bone^T | \bv |$.
+````
+
+````{prf:theorem} An upper bound on the $k$-th largest value
+:label: res:ssm:k_th_largest_entry_l1_norm
+
+$k$-th largest (magnitude) entry in a vector
+$\bx \in \CC^N$ denoted by $x_{(k)}$ obeys
+
+```{math}
+:label: eq:ssm:k_th_largest_entry_l1_norm
+
+| x_{(k)} | \leq  \frac{\| \bx \|_1}{k}.
+```
+````
+
+````{prf:proof}
+Let $n_1, n_2, \dots, n_N$ be a permutation of $\{ 1, 2, \dots, N \}$ such that
+
+$$
+|x_{n_1} | \geq  | x_{n_2} | \geq \dots \geq  | x_{n_N} |.
+$$
+Thus, the $k$-th largest entry in $\bx$ is $x_{n_k}$.
+It is clear that
+
+$$
+\| \bx \|_1 = \sum_{i=1}^N | x_i | = \sum_{i=1}^N |x_{n_i} |.
+$$
+Obviously
+
+$$
+|x_{n_1} | \leq \sum_{i=1}^N |x_{n_i} | = \| \bx \|_1.
+$$
+Similarly
+
+$$
+k |x_{n_k} | = |x_{n_k} | + \dots + |x_{n_k} |
+\leq |x_{n_1} | + \dots + |x_{n_k} | 
+\leq \sum_{i=1}^N |x_{n_i} | 
+\leq  \| \bx \|_1.
+$$
+Thus
+
+$$
+|x_{n_k} |  \leq \frac{\| \bx \|_1}{k}.
+$$
+````
+
+## Sparse Signals
+
+```{div}
+In this subsection we explore some useful properties of $\Sigma_K$, 
+the set of $K$-sparse signals in standard basis
+for $\CC^N$.
+
+We recall that
+
+$$
+\Sigma_K  = \{ \bx \in \CC^N \ST \| \bx \|_0 \leq K \}.
+$$
+
+We established before that this set is a union of $\binom{N}{K}$ subspaces of $\CC^N$ each of which
+is is constructed by an index set $\Lambda \subset \{1, \dots, N \}$ with $| \Lambda | = K$ choosing
+$K$ specific dimensions of $\CC^N$. 
+
+We first present some lemmas which connect the $l_1$, $l_2$ and $l_{\infty}$ norms of vectors
+in $\Sigma_K$.
+```
+
+````{prf:lemma} Relation between norms of sparse vectors
+:label: lem:u_sigma_k_norms
+
+Suppose $\bu \in \Sigma_K$.
+Then
+
+$$
+\frac{\| \bu\|_1}{\sqrt{K}} \leq \| \bu \|_2 \leq \sqrt{K} \| \bu \|_{\infty}.
+$$
+````
+
+````{prf:proof}
+Due to {prf:ref}`res:ssm:l1_norm_as_inner_product_with_sign_vector`,
+we can write $\ell_1$ norm as
+
+$$
+\| \bu \|_1 = \langle \bu, \sgn (\bu) \rangle.
+$$
+By Cauchy-Schwartz inequality we have
+
+$$
+\langle \bu, \sgn (\bu) \rangle \leq  \| \bu \|_2  \| \sgn (\bu) \|_2 
+$$ 
+Since $\bu \in \Sigma_K$,
+$\sgn(\bu)$ can have at most $K$ non-zero values each with magnitude 1.
+Thus, we have
+
+$$
+\| \sgn (\bu) \|_2^2 \leq K \implies \| \sgn (\bu) \|_2 \leq \sqrt{K}.
+$$
+Thus we get the lower bound
+
+$$
+\| \bu \|_1 \leq \| \bu \|_2 \sqrt{K}
+\implies \frac{\| \bu \|_1}{\sqrt{K}} \leq \| \bu \|_2.
+$$
+
+Now $| u_i | \leq \max(| u_i |) = \| \bu \|_{\infty}$.
+So we have
+
+$$
+\| \bu \|_2^2 = \sum_{i= 1}^{N} | u_i |^2 \leq  K \| \bu \|_{\infty}^2
+$$
+since there are only $K$ non-zero terms in the expansion of $\| \bu \|_2^2$.
+This establishes the upper bound:
+
+$$
+\| \bu \|_2 \leq \sqrt{K} \| \bu \|_{\infty}.
+$$
+````
+
+
