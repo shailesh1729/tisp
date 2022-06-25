@@ -351,7 +351,7 @@ $$
 $$
 ````
 
-````{prf:lemma} $\ell_1$ norm as product of vector with its sign
+````{prf:theorem} $\ell_1$ norm as product of vector with its sign
 :label: res:ssm:l1_norm_as_inner_product_with_sign_vector
 
 For any $\bv \in \CC^N$: 
@@ -372,7 +372,7 @@ Note that whenever $v_k = 0$,
 corresponding $0$ entry in $\sgn(\bv)$ has no effect on the sum.
 ````
 
-````{prf:lemma} Equivalence of $\ell_1$ and $\ell_2$ norms
+````{prf:theorem} Equivalence of $\ell_1$ and $\ell_2$ norms
 :label: lem:ssm:l1_norm_l2_bounds
 
 Suppose $\bv \in \CC^N$.  Then
@@ -419,7 +419,7 @@ $$
 $$
 ````
 
-````{prf:lemma} Equivalence of $\ell_2$ and $\ell_{\infty}$ norms
+````{prf:theorem} Equivalence of $\ell_2$ and $\ell_{\infty}$ norms
 :label: res:ssm:l2_upper_bound_max_norm
 
 Let $\bv \in \CC^N$. Then
@@ -443,7 +443,7 @@ $$
 \| \bv \|_2 \leq \sqrt{N} \| \bv \|_{\infty}.
 $$
 ````
-````{prf:lemma} Relationship between $p$-norms
+````{prf:theorem} Relationship between $p$-norms
 :label: res:ssm:p_q_norm_bounds
 
 Let $\bv \in \CC^N$.
@@ -458,7 +458,7 @@ $$
 TBD
 ````
 
-````{prf:lemma}
+````{prf:theorem}
 :label: res:ssm:one_vec_l1_norm
 
 Let $\bone \in \CC^N$ be the vector of all ones; i.e., $\bone = (1, \dots, 1)$.
@@ -482,7 +482,7 @@ Finally since $\bone$ consists only of real entries, hence its transpose and Her
 transpose are same.
 ````
 
-````{prf:lemma}
+````{prf:theorem}
 :label: res:ssm:ones_matrix_l1_norm
 
 Let $\OneMat \in \CC^{N \times N}$ be a square matrix of all ones. Let $\bv \in \CC^N$ 
@@ -572,11 +572,11 @@ We established before that this set is a union of $\binom{N}{K}$ subspaces of $\
 is is constructed by an index set $\Lambda \subset \{1, \dots, N \}$ with $| \Lambda | = K$ choosing
 $K$ specific dimensions of $\CC^N$. 
 
-We first present some lemmas which connect the $l_1$, $l_2$ and $l_{\infty}$ norms of vectors
+We first present some results which connect the $l_1$, $l_2$ and $l_{\infty}$ norms of vectors
 in $\Sigma_K$.
 ```
 
-````{prf:lemma} Relation between norms of sparse vectors
+````{prf:theorem} Relation between norms of sparse vectors
 :label: lem:u_sigma_k_norms
 
 Suppose $\bu \in \Sigma_K$.
@@ -829,10 +829,10 @@ $K$-term approximation?
 Certainly in order to compare two approximations we need
 some criterion. 
 Let us choose $\ell_p$ norm as the criterion.
-The next lemma gives an interesting result for
+The next result gives an interesting result for
 best $K$-term approximations in $\ell_p$ norm sense.
 
-````{prf:lemma} Best $K$-term approximation for $\ell_p$ norms
+````{prf:theorem} Best $K$-term approximation for $\ell_p$ norms
 :label: lem:ssm:best_k_term_approximation
 
 Let $\bx \in \CC^N$.
@@ -891,7 +891,7 @@ Thus $\bx|_K$ is an optimal solution to
 {eq}`eq:best_k_term_approximation_optimization_problem`.
 ````
 
-This lemma helps us establish that whenever we are looking for a best $K$-term 
+This result helps us establish that whenever we are looking for a best $K$-term 
 approximation of $\bx$ under any $\ell_p$ norm, all we have to do is to pickup
 the $K$-largest entries in $\bx$.
 
@@ -943,7 +943,7 @@ As an abuse of notation, we will use any of the two definitions
 whenever we are referring to $\Phi_T$. The definition 
 being used should be obvious from the context.
 
-````{prf:lemma}
+````{prf:theorem}
 :label: lem:ssm:restriction_simplification_sparse_vector
 
 Let $\supp(\bx) = \Lambda$. Then 
@@ -962,7 +962,7 @@ $$
 = \Phi_{\Lambda} x_{\Lambda}.
 $$
 ````
-The lemma remains valid whether we use
+The result remains valid whether we use
 the restriction or the mask version of $\bx_{\Lambda}$ 
 notation as long as same version is used
 for both $\Phi$ and $\bx$.
@@ -993,7 +993,7 @@ $$
 $$
 ````
 
-````{prf:lemma}
+````{prf:theorem}
 :label: lem:ssm:restriction_on_matrix_vector_product
 
 Let $T$ be any index set. Let $\Phi \in \CC^{M \times N}$
@@ -1032,7 +1032,7 @@ $$
 = \Phi_T^H \by.
 $$
 ````
-The lemma remains valid whether we use
+The result remains valid whether we use
 the restriction or the mask version of $\Phi_T$ 
 notation.
 
@@ -1075,7 +1075,7 @@ if there exists $p \in (0, 1]$ such that
 ```
 ````
 
-````{prf:lemma} $1$-compressible signals
+````{prf:theorem} $1$-compressible signals
 :label: lem:ssm:compressible_p_1
 
 Let $\bx$ be be $p$-compressible  with $p=1$. Then
@@ -1116,7 +1116,7 @@ This completes the proof.
 ````
 We now demonstrate how a compressible signal is well approximated by a sparse signal.
 
-````{prf:lemma} Sparse approximation of compressible signals
+````{prf:theorem} Sparse approximation of compressible signals
 :label: lem:ssm:compressible_p_sparse_approximation
 
 Let $\bx$ be a $p$-compressible signal and let 
