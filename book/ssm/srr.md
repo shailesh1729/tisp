@@ -627,4 +627,568 @@ $$
 $$
 ````
 
+## Compressible Signals
 
+
+In this subsection, we first look at some general results and definitions
+related to $K$-term approximations of arbitrary signals $\bx \in \CC^N$.
+We then define the notion of a compressible signal and study properties related to it.
+
+ 
+### K-term Approximation of General Signals
+
+```{index} Signal; restriction, Signal; mask
+```
+````{prf:definition} Restriction of a signal
+:label: def:ssm:signal_restriction
+
+Let $\bx \in \CC^N$.
+Let $T \subset \{ 1, 2, \dots, N\}$ be any index set.
+Further let
+
+$$
+T = \{t_1, t_2, \dots, t_{|T|}\}
+$$
+such that
+
+$$
+t_1 < t_2 < \dots < t_{|T|}.
+$$
+Let $\bx_T \in \CC^{|T|}$ be defined as 
+
+```{math}
+:label: eq:ssm:signal_restriction
+\bx_T = \begin{pmatrix}
+x_{t_1} & x_{t_2}  & \dots & x_{t_{|T|}}
+\end{pmatrix}.
+```
+Then $\bx_T$ is a *restriction* of the signal $\bx$ on the index set $T$.
+
+Alternatively let $\bx_T \in \CC^N$ be defined as
+
+```{math}
+:label: eq:ssm:signal_mask
+
+\bx_{T}(i) = \begin{cases}
+\bx(i) & \text{ if } i \in T;\\
+0 & \text{ otherwise}.
+\end{cases}
+```
+In other words, $\bx_T \in \CC^N$ keeps the entries in $\bx$
+indexed by $T$ while sets all other entries to 0.
+Then we say  that $\bx_T$ is obtained by *masking* $\bx$ with $T$.
+````
+As an abuse of notation, we will use any of the two definitions
+whenever we are referring to $\bx_T$.
+The definition being used should be obvious from the context.
+
+````{prf:example} Restrictions on index sets
+:label: ex-ssm-signal-restriction-1
+
+$$
+\bx = \begin{pmatrix}
+-1 & 5 & 8 & 0 & 0 & -3 & 0 & 0 & 0 & 0
+\end{pmatrix} \in \CC^{10}.
+$$
+Let
+
+$$
+T = \{ 1, 3, 7, 8\}.
+$$
+Then
+
+$$
+\bx_T = \begin{pmatrix}
+-1 & 0 & 8 & 0 & 0 &  0 & 0 & 0 & 0 & 0
+\end{pmatrix} \in \CC^{10}.
+$$
+Since $|T| = 4$, sometimes we will also write
+
+$$
+\bx = \begin{pmatrix}
+-1 & 8 & 0 & 0
+\end{pmatrix} \in \CC^4.
+$$
+````
+
+```{index} Signal; $K$-term approximation
+```
+````{prf:definition} $K$-term signal approximation
+:label: def:ssm:k_term_signal_approximation
+
+Let $\bx \in \CC^N$ be an arbitrary signal.
+Consider any index set $T \subset \{1, \dots, N \}$
+with $|T| = K$.
+Then $\bx_T$ is a *$K$-term approximation* of $\bx$.
+````
+
+Clearly for any $\bx \in \CC^N$
+there are $\binom{N}{K}$ possible $K$-term approximations of $\bx$.
+
+````{prf:example} $K$-term approximation
+:label: ex-ssm-k-term-approx-1
+
+Let 
+
+$$
+\bx = \begin{pmatrix}
+-1 & 5 & 8 & 0 & 0 & -3 & 0 & 0 & 0 & 0
+\end{pmatrix} \in \CC^{10}.
+$$
+
+Let $T= \{ 1, 6 \}$. Then
+
+$$
+\bx_T = \begin{pmatrix}
+-1 & 0 & 0 & 0 & 0 & -3 & 0 & 0 & 0 & 0
+\end{pmatrix}
+$$
+is a $2$-term approximation of $\bx$. 
+
+If we choose $T= \{7,8,9,10\}$,
+the corresponding $4$-term approximation of $\bx$ is
+
+$$
+ \begin{pmatrix}
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{pmatrix}.
+$$
+````
+
+````{prf:definition} $K$-largest entries approximation
+:label: def:ssm:largest_entries_signal
+
+Let $\bx \in \CC^N$ be an arbitrary signal.
+Let $\lambda_1, \dots, \lambda_N$ be
+indices of entries in $\bx$ such that
+
+$$
+| x_{\lambda_1} | \geq | x_{\lambda_2} | \geq \dots \geq | x_{\lambda_N} |.
+$$
+In case of ties, the order is resolved lexicographically;
+i.e., if $|x_i| = |x_j|$ 
+and $i < j$ then $i$ will appear first in the sequence $\{ \lambda_k \}$.
+
+Consider the index set $\Lambda_K = \{ \lambda_1, \lambda_2, \dots, \lambda_K\}$. 
+The restriction of $\bx$ on $\Lambda_K$ given by $x_{\Lambda_K}$
+contains the $K$ largest entries $\bx$
+while setting all other entries to 0. This is known
+as the *$K$ largest entries approximation* of $\bx$. 
+
+This signal is denoted henceforth as $\bx|_K$; 
+i.e.
+
+```{math}
+:label: eq-ssm-best-k-term-approx
+
+\bx|_K = \bx_{\Lambda_K}
+```
+where $\Lambda_K$ is the index set corresponding
+to $K$ largest entries in $\bx$ (magnitude wise).
+````
+
+````{prf:example} Largest entries approximation
+:label: ex-ssm-k-largest-entries-approx-1
+
+Let 
+
+$$
+\bx  = \begin{pmatrix}
+-1 & 5 & 8 & 0 & 0 & -3 & 0 & 0 & 0 & 0
+\end{pmatrix}.
+$$
+Then
+
+$$
+\bx|_1 = \begin{pmatrix}
+0 & 0 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{pmatrix}.
+$$
+
+$$
+\bx|_2 = \begin{pmatrix}
+0 & 5 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{pmatrix}.
+$$
+
+$$
+\bx|_3 = \begin{pmatrix}
+0 & 5 & 8 & 0 & 0 & -3 & 0 & 0 & 0 & 0
+\end{pmatrix}
+$$
+
+$$
+\bx|_4 = \bx.
+$$
+All further $K$ largest entries approximations are same as $\bx$.
+````
+
+A pertinent question at this point is:
+which $K$-term approximation of $\bx$ is the best 
+$K$-term approximation?
+Certainly in order to compare two approximations we need
+some criterion. 
+Let us choose $\ell_p$ norm as the criterion.
+The next lemma gives an interesting result for
+best $K$-term approximations in $\ell_p$ norm sense.
+
+````{prf:lemma} Best $K$-term approximation for $\ell_p$ norms
+:label: lem:ssm:best_k_term_approximation
+
+Let $\bx \in \CC^N$.
+Let the best $K$ term approximation of $\bx$ be obtained by the
+following optimization program:
+
+```{math}
+:label: eq:best_k_term_approximation_optimization_problem
+
+& \underset{T \subset \{1, \dots, N\}}{\text{maximize}}
+& & \| \bx_T \|_p \\
+& \text{subject to }
+& & |T| = K.
+```
+where $p \in [1, \infty]$.
+
+Let an optimal solution for this optimization problem be denoted by 
+$\bx_{T^*}$. 
+Then
+
+$$
+\| \bx|_K \|_p = \| \bx_{T^*} \|_p;
+$$
+i.e., the $K$-largest entries approximation of $\bx$
+is an optimal solution to 
+{eq}`eq:best_k_term_approximation_optimization_problem`.
+````
+````{prf:proof}
+For $p=\infty$, the result is obvious.
+In the following, we focus on $p \in [1, \infty)$.
+
+We note that maximizing $\| \bx_T \|_p$ is equivalent to maximizing
+$ \| \bx_T \|_p^p$.
+
+Let $\lambda_1, \dots, \lambda_N$ be
+indices of entries in $x$ such that
+
+$$
+| x_{\lambda_1} | \geq | x_{\lambda_2} | \geq \dots \geq | x_{\lambda_N} |.
+$$
+Further let $\{ \omega_1, \dots, \omega_N\}$ be any permutation of $\{1, \dots, N \}$.
+Clearly
+
+$$
+\| \bx|_K \|_p^{p} = \sum_{i=1}^K |\bx_{\lambda_i}|^{p}  \geq \sum_{i=1}^K |\bx_{\omega_i}|^{p}.
+$$
+
+Thus if $T^*$ corresponds to an optimal solution of
+{eq}`eq:best_k_term_approximation_optimization_problem`
+then 
+
+$$
+\| \bx|_K \|_p^{p}  = \| \bx_{T^*} \|_p^{p}.
+$$
+Thus $\bx|_K$ is an optimal solution to
+{eq}`eq:best_k_term_approximation_optimization_problem`.
+````
+
+This lemma helps us establish that whenever we are looking for a best $K$-term 
+approximation of $\bx$ under any $\ell_p$ norm, all we have to do is to pickup
+the $K$-largest entries in $\bx$.
+
+
+````{prf:definition} Restriction of a matrix
+:label: def:ssm:matrix_restriction
+
+Let $\Phi \in \CC^{M \times N}$.
+Let $T \subset \{ 1, 2, \dots, N\}$ be any index set.
+Further let
+
+$$
+T = \{t_1, t_2, \dots, t_{|T|}\}
+$$
+such that
+
+$$
+t_1 < t_2 < \dots < t_{|T|}.
+$$
+Let $\Phi_T \in \CC^{M \times |T|}$ be defined as 
+
+```{math}
+:label: eq:ssm:matrix_restriction
+
+\Phi_T = \begin{bmatrix}
+\phi_{t_1} & \phi_{t_2}  & \dots & \phi_{t_{|T|}}
+\end{bmatrix}.
+```
+Then $\Phi_T$ is a *restriction* of the matrix $\Phi$ on the index set $T$.
+
+Alternatively let $\Phi_T \in \CC^{M \times N}$ be defined as
+
+```{math}
+:label: eq:ssm:matrix_mask
+
+(\Phi_{T})_i = \left\{
+    \begin{array}{ll}
+        \phi_i & \mbox{if $i \in T$};\\
+        \bzero & \mbox{otherwise}.
+    \end{array}
+  \right.
+```
+In other words, $\Phi_T \in \CC^{M \times N}$
+keeps the columns in $\Phi$ 
+indexed by $T$ while sets all other columns to $\bzero$.
+Then we say that $\Phi_T$ is obtained by *masking* $\Phi$ with $T$.
+````
+As an abuse of notation, we will use any of the two definitions
+whenever we are referring to $\Phi_T$. The definition 
+being used should be obvious from the context.
+
+````{prf:lemma}
+:label: lem:ssm:restriction_simplification_sparse_vector
+
+Let $\supp(\bx) = \Lambda$. Then 
+
+$$
+\Phi \bx = \Phi_{\Lambda} \bx_{\Lambda}.
+$$
+````
+
+````{prf:proof}
+This follows from:
+
+$$
+\Phi \bx = \sum_{i=1}^N x_i \phi_i 
+= \sum_{\lambda_i \in \Lambda} x_{\lambda_i} \phi_{\lambda_i}
+= \Phi_{\Lambda} x_{\Lambda}.
+$$
+````
+The lemma remains valid whether we use
+the restriction or the mask version of $\bx_{\Lambda}$ 
+notation as long as same version is used
+for both $\Phi$ and $\bx$.
+
+````{prf:corollary}
+:label: cor:ssm:matrix_vector_product_disjoint_set_seperation
+
+Let $S$ and $T$ be two disjoint index sets such that
+for some $\bx \in \CC^N$
+
+$$
+\bx = x_T + x_S
+$$
+using the mask version of $x_{\Lambda}$ notation.
+Then the following holds
+
+$$
+\Phi \bx = \Phi_T \bx_T + \Phi_S \bx_S.
+$$
+````
+
+````{prf:proof}
+Straightforward application of 
+ {prf:ref}`lem:ssm:restriction_simplification_sparse_vector`:
+
+$$
+\Phi \bx = \Phi \bx_T + \Phi \bx_S = \Phi_T \bx_T + \Phi_S \bx_S.
+$$
+````
+
+````{prf:lemma}
+:label: lem:ssm:restriction_on_matrix_vector_product
+
+Let $T$ be any index set. Let $\Phi \in \CC^{M \times N}$
+and $\by \in \CC^M$.
+Then
+
+$$
+[\Phi^H \by]_T = \Phi_T^H \by.  
+$$
+````
+````{prf:proof}
+Note that
+
+$$
+\Phi^H \by = 
+\begin{bmatrix}
+\langle \phi_1 , \by \rangle\\
+\vdots \\
+\langle \phi_N , \by \rangle\\
+\end{bmatrix}
+$$
+Now let 
+
+$$
+T = \{ t_1, \dots, t_K \}.
+$$
+Then
+
+$$
+[\Phi^H \by]_T = 
+\begin{bmatrix}
+\langle \phi_{t_1} , \by \rangle\\
+\vdots \\
+\langle \phi_{t_K} , \by \rangle\\
+\end{bmatrix}
+= \Phi_T^H \by.
+$$
+````
+The lemma remains valid whether we use
+the restriction or the mask version of $\Phi_T$ 
+notation.
+
+
+ 
+### Compressible Signals
+
+We will now define the notion of a compressible signal in terms of the decay rate
+of magnitude of its entries when sorted in descending order.
+
+```{index} Signal; compressible
+```
+````{prf:definition} Compressible signal
+:label: def:ssm:p_compressible_signal
+
+Let $\bx \in \CC^N$ be an arbitrary signal.
+Let $\lambda_1, \dots, \lambda_N$ be
+indices of entries in $\bx$ such that
+
+$$
+| x_{\lambda_1} | \geq | x_{\lambda_2} | \geq \dots \geq | x_{\lambda_N} |.
+$$
+In case of ties, the order is resolved lexicographically, i.e. if $|x_i| = |x_j|$ 
+and $i < j$ then $i$ will appear first in the sequence $\{ \lambda_k \}$.
+Define
+
+```{math}
+:label: eq:x_sorted_in_magnitude_descending
+
+\widehat{\bx} = (x_{\lambda_1}, x_{\lambda_2}, \dots, x_{\lambda_N}).
+```
+
+The signal $\bx$ is called *$p$-compressible* with magnitude $R$
+if there exists $p \in (0, 1]$ such that
+
+```{math}
+:label: eq:p_compressible_signal_entry
+
+| \widehat{x}_i |\leq R \cdot i^{-\frac{1}{p}} \quad \forall i=1, 2,\dots, N.
+```
+````
+
+````{prf:lemma} $1$-compressible signals
+:label: lem:ssm:compressible_p_1
+
+Let $\bx$ be be $p$-compressible  with $p=1$. Then
+
+$$
+\| \bx \|_1 \leq R (1 + \ln (N)).
+$$
+````
+````{prf:proof}
+Recalling $\widehat{x}$ from
+{eq}`eq:x_sorted_in_magnitude_descending`
+it is straightforward to see that
+
+$$
+\|\bx\|_1 = \|\widehat{\bx}\|_1
+$$
+since the $\ell_1$ norm doesn't depend on the ordering of entries in $\bx$.
+
+Now since $\bx$ is $1$-compressible,
+hence from {eq}`eq:p_compressible_signal_entry` we have
+
+$$
+|\widehat{x}_i | \leq R \frac{1}{i}.
+$$
+This gives us
+
+$$
+\|\widehat{x}\|_1  \leq \sum_{i=1}^N R \frac{1}{i} = R \sum_{i=1}^N \frac{1}{i}.
+$$
+The sum on the R.H.S. is the $N$-th Harmonic number
+(sum of reciprocals of first $N$ natural numbers).
+A simple upper bound on Harmonic numbers is
+
+$$
+H_k \leq 1  + \ln(k).
+$$
+This completes the proof.
+````
+We now demonstrate how a compressible signal is well approximated by a sparse signal.
+
+````{prf:lemma} Sparse approximation of compressible signals
+:label: lem:ssm:compressible_p_sparse_approximation
+
+Let $\bx$ be a $p$-compressible signal and let 
+$\bx|_K$ be its best $K$-term approximation. 
+Then the $\ell_1$ norm of approximation error satisfies 
+
+```{math}
+:label: eq:compressible_p_sparse_approximation_error_l1_norm
+\| \bx - \bx|_K\|_1 \leq C_p \cdot R \cdot K^{1 - \frac{1}{p}}
+```
+with
+
+$$
+C_p = \left (\frac{1}{p} - 1 \right)^{-1}.
+$$
+Moreover the $\ell_2$ norm of approximation error satisfies
+
+```{math}
+:label: eq:compressible_p_sparse_approximation_error_l2_norm
+\| \bx - \bx|_K\|_2 \leq D_p \cdot R \cdot K^{1 - \frac{1}{p}}
+```
+with 
+
+$$
+D_p = \left (\frac{2}{p} - 1 \right )^{-1/2}.
+$$
+````
+````{prf:proof}
+Expanding the $\ell_1$ approximation error
+
+$$
+\| \bx - \bx|_K\|_1 = \sum_{i=K+1}^N |x_{\lambda_i}| 
+\leq R \sum_{i=K+1}^N i^{-\frac{1}{p}}.
+$$
+We now approximate the R.H.S. sum with an integral.
+
+$$
+ \sum_{i=K+1}^N i^{-\frac{1}{p}} 
+ \leq \int_{x=K}^N x^{-\frac{1}{p}} d x
+ \leq  \int_{x=K}^{\infty} x^{-\frac{1}{p}} d x.
+$$
+Now
+
+$$
+\int_{x=K}^{\infty} x^{-\frac{1}{p}} d x = 
+\left [ \frac{x^{1-\frac{1}{p}}}{1-\frac{1}{p}} \right ]_{K}^{\infty}
+= C_p K^{1 - \frac{1}{p}}.
+$$
+We can similarly show the result for $\ell_2$ norm.
+````
+
+```{prf:example} Sparse approximation for $\frac{1}{2}$-compressible signals
+:label: ex-ssm-k-sparse-approx-half-compressible
+
+Let $p = \frac{1}{2}$. Then
+
+$$
+C_p = \left (\frac{1}{p} - 1 \right)^{-1} = 1
+\text{ and }
+D_p = \left (\frac{2}{p} - 1 \right )^{-1/2} = \frac{1}{\sqrt{3}}.
+$$
+
+Hence
+
+$$
+\| \bx - \bx|_K\|_1 \leq \frac{R}{K}
+$$
+and
+
+$$
+\| \bx - \bx|_K\|_2 \leq  \frac{1}{\sqrt{3}} \frac{R}{K}.
+$$
+Both $\ell_1$ and $\ell_2$ approximation error bounds decrease
+as $K$ increases at the same rate.
+```
