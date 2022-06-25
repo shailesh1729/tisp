@@ -124,3 +124,213 @@ which apply for general matrices. We will use
 the symbol $\Phi$ for representing general matrices.
 Whenever the dictionary is 
 an orthonormal basis, we will use the symbol $\Psi$.
+```
+
+(sec:ssm:spark)=
+## Spark
+
+```{index} Dictionary; spark, Matrix; spark
+```
+````{prf:definition} Spark
+:label: def:spark
+
+The *spark* of a given matrix $\Phi$ 
+is the smallest number of columns of $\Phi$ that
+are linearly dependent.
+If all columns are linearly independent, then
+the spark is defined to be number of columns plus one.
+````
+Note that the definition of spark applies to all matrices
+(wide, tall or square). It is not
+restricted to the synthesis matrices for a dictionary.
+
+Correspondingly, the spark of a dictionary is defined as the minimum number of atoms
+which are linearly dependent.
+
+We recall that *rank* of a matrix is defined as the maximum number of columns which
+are linearly independent.
+Definition of spark bears remarkable resemblance yet its very hard 
+to obtain as it requires a combinatorial search over all possible 
+subsets of columns of $\Phi$.
+
+````{prf:example} Spark
+:label: ex-ssm-spark-1
+
+1. Spark of the $3 \times 3$ identity matrix
+
+   $$
+    \begin{pmatrix}
+        1 & 0 & 0\\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+   $$
+   is 4 since all columns are linearly independent.
+1. Spark of the $2 \times 4$ matrix 
+   
+   $$
+    \begin{pmatrix}
+        1 & 0 & -1 & 0\\
+        0 & 1 & 0 & -1
+    \end{pmatrix}
+   $$
+   is 2 since column 1 and 3 are linearly dependent.
+1. If a matrix has a column with all zero entries, 
+   then the spark of such a matrix is 1.
+   This is a trivial case
+   and we will not consider such matrices in the sequel.
+1. In general for an $N \times D$ synthesis matrix, 
+   $\spark(\bDDD) \in [2, N+1]$.
+````
+
+A naive combinatorial algorithm to calculate the spark of a matrix is given below.
+
+````{prf:algorithm} A naive algorithm for computing the spark of a matrix
+:label: alg:ssm:spark_combinatorial_search
+
+Inputs:
+1. $\Phi$: a matrix
+
+Outputs:
+1. $s$: Spark of $\Phi$
+
+Algorithm:
+
+1. Let $R \leftarrow \rank (\Phi)$.
+1. For every $j  \leftarrow 1,\dots, R$:
+   1. Identify $\binom{D}{j}$ ways of choosing $j$ columns
+      from $D$ columns of $\Phi$.
+   1. For every choice of $j$ columns:
+      1. If columns are linearly dependent:
+         1. $s \leftarrow j$.
+         1. Return.
+1. All columns are linearly independent.
+1. $s \leftarrow R  + 1$.
+````
+
+Spark is useful in characterizing the uniqueness of the solution
+of a $(\bDDD, K)$-EXACT-SPARSE problem (see {prf:ref}`def-ssm-d-k-exact-sparse-problem`).
+
+````{prf:remark} Spark and sparsity of null space vectors
+:label: res-ssm-spark-nullspace-vec-sparsity
+
+The $\ell_0$-"norm" of vectors belonging to null space of a matrix
+$\Phi$ is greater than or equal to $\spark(\Phi)$:
+
+$$
+\| \bx \|_0 \geq \spark(\Phi) \Forall \bx \in \NullSpace(\Phi).
+$$
+````
+````{prf:proof}
+We proceed as follows:
+
+1. If $\bx \in \NullSpace(\Phi)$ then $\Phi \bx = \bzero$.
+1. Thus non-zero entries in $\bx$ pick a set of columns in $\Phi$ 
+   which are linearly dependent. 
+1. Clearly $\| \bx \|_0$ indicates the number of columns in the set which are
+   linearly dependent. 
+1. By definition, spark of $\Phi$ indicates the minimum number of columns
+   which are linearly dependent. 
+1. Hence the result:
+
+   $$
+    \| \bx \|_0 \geq \spark(\Phi) \Forall \bx\in \NullSpace(\Phi).
+   $$
+````
+
+We now present a criteria based on spark which characterizes
+the uniqueness of a sparse solution to the problem $\by = \Phi \bx$.
+
+````{prf:theorem} Uniqueness of a sparse solution for an underdetermined system via spark
+:label: thm:ssm:uniqueness_spark
+
+Consider a solution $\bx^*$ to the underdetermined system
+$\by = \Phi \bx$.
+If $\bx^*$ obeys
+
+$$
+\| \bx^* \|_0 < \frac{\spark(\Phi)}{2}
+$$
+then it is necessarily the sparsest solution.
+````
+
+````{prf:proof}
+Let $\bx'$ be some other solution to the problem. Then 
+
+$$
+\Phi \bx' = \Phi \bx^* 
+\implies \Phi (\bx' - \bx^*)  = \bzero 
+\implies (\bx' - \bx^*) \in \NullSpace(\Phi).
+$$
+Due to {prf:ref}`res-ssm-spark-nullspace-vec-sparsity` we have
+
+$$
+\| \bx' - \bx^* \|_0 \geq \spark(\Phi).
+$$
+Now 
+
+$$
+\| \bx' \|_0 + \| \bx^* \|_0 \geq \| \bx' - \bx^* \|_0 \geq \spark(\Phi).
+$$
+Hence, if $\| \bx^* \|_0 < \frac{\spark(\Phi)}{2}$, then we have
+
+$$
+\| \bx' \|_0  > \frac{\spark(\Phi)}{2}
+$$
+for any other solution $\bx'$ to the equation $\by = \Phi \bx$. 
+Thus $\bx^*$ is necessarily the sparsest possible solution.
+````
+
+This result is quite useful as it establishes a global optimality criterion for the
+$(\bDDD, K)$-EXACT-SPARSE problem.
+
+As long as $K < \frac{1}{2}\spark(\Phi)$ this theorem guarantees that
+the solution to  $(\bDDD, K)$-EXACT-SPARSE problem
+is unique.
+This is quite surprising result for a non-convex combinatorial optimization
+problem.
+We are able to guarantee a global uniqueness for the solution based
+on a simple check on the sparsity of the solution.
+
+Note that we are only saying that if a sufficiently sparse solution is found
+then it is unique.
+We are not claiming that it is possible to find such a solution.
+
+Obviously, the larger the spark, we can guarantee uniqueness for signals
+with higher sparsity levels.
+So a natural question is: 
+*How large can spark of a dictionary be*?
+We consider few examples.
+
+````{prf:example} Spark of Gaussian dictionaries
+:label: ex-ssm-spark-gaussian
+
+Consider a dictionary $\bDDD$ whose atoms $\bd_{i}$ are random vectors 
+independently drawn from normal distribution.
+
+1. Since a dictionary requires all its atoms to be unit-norms,
+   hence we divide the each of the random vectors with their norms.
+1. We know that with probability $1$ any set of $N$ independent Gaussian random vectors
+   is linearly independent. 
+1. Also, since $\bd_i \in \RR^N$ hence a set of $N+1$ atoms is always linearly dependent. 
+1. Thus $\spark(\bDDD) = N +1$.
+
+Thus, if a solution to EXACT-SPARSE problem contains $\frac{N}{2}$ or fewer non-zero
+entries then it is necessarily unique with probability 1. 
+````
+
+````{prf:example} Spark of Dirac Fourier basis
+:label: ex-ssm-spark-dirac-fourier
+
+For 
+
+$$
+\bDDD = \begin{bmatrix} \bI  & \bF \end{bmatrix} \in \CC^{N \times 2N} 
+$$ 
+it can be shown that
+
+$$
+\spark(\bDDD) = 2 \sqrt{N}.
+$$
+In this case, the sparsity level of a unique solution must be less than $\sqrt{N}$.
+````
