@@ -879,3 +879,519 @@ $$
 \leq (1 + (K - 1)   \mu)\| \bv \|_2^2. 
 $$
 ````
+
+## Babel Function
+Recalling the definition of coherence, we note that 
+it reflects only the extreme correlations between atoms of dictionary.
+If most of the inner products are small compared to one dominating inner product,
+then the value of coherence is highly misleading.
+
+In {cite}`tropp2004greed`, Tropp introduced *Babel function*,
+which measures the maximum
+total coherence between a fixed atom and a collection of other atoms.
+The *Babel function* quantifies an idea as to how much the atoms of a dictionary are 
+"speaking the same language".
+
+```{index} Babel function
+```
+````{prf:definition} Babel function
+:label: def:babel_function
+
+The *Babel function* for a dictionary $\bDDD$ is defined by
+
+```{math}
+:label: eq:ssm:babel_function
+
+\mu_1(p) \triangleq \underset{|\Lambda| = p}{\max} \; \underset {\psi}{\max} 
+\sum_{\lambda \in \Lambda} | \langle \psi, \bd_{\lambda} \rangle |,
+```
+where the vector $\psi$ ranges over the atoms indexed by $\Omega \setminus \Lambda$.
+We define 
+
+$$
+\mu_1(0) = 0
+$$
+for sparsity level $p=0$.
+````
+Let us dig deeper into what is going on here.
+For each value of $p$ we consider all possible $\binom{D}{p}$ subspaces by choosing $p$
+vectors from $\bDDD$.
+
+Let the atoms spanning one such subspace be identified by an index set
+$\Lambda \subset \Omega$.
+
+All other atoms are indexed by the index set $\Gamma = \Omega \setminus \Lambda$.
+Let 
+
+$$
+\Psi = \{ \psi_{\gamma} \ST \gamma \in \Gamma \}
+$$
+denote the atoms indexed by $\Gamma$.
+We pickup a vector $\psi \in \Psi$ and compute its inner product
+with all atoms indexed by $\Lambda$.
+We compute the sum of absolute value of these inner products over all
+$\{ \bd_{\lambda} : \lambda \in \Lambda\}$.
+
+We run it for every $\psi \in \Psi$ and
+then pickup the maximum value of above sum over all $\psi$.
+
+We finally compute the maximum over all possible $p$-subspaces. 
+This number is considered at the Babel number for sparsity level $p$.
+
+We first make a few observations over the properties of Babel function.
+Babel function is a generalization of coherence. 
+
+````{prf:remark} Babel function for $p=1$
+:label: res-ssm-babel-function-p-1
+
+For $p=1$ we observe that 
+
+$$
+\mu_1(1) = \mu(\bDDD)
+$$
+the coherence of $\bDDD$.
+````
+
+````{prf:theorem} Monotonicity of babel function
+:label: res-ssm-babel-monotonicity
+
+$\mu_1$ is a non-decreasing function of $p$. 
+````
+````{prf:proof}
+This is easy to see since the sum 
+
+$$
+\sum_{\lambda \in \Lambda} | \langle \psi, \bd_{\lambda} \rangle |
+$$
+cannot decrease as $p = | \Lambda|$ increases.
+The following argument provides the details.
+
+1. For some value of $p$ let $\Lambda^p$ and $\psi^p$
+   denote the set and vector for which 
+   the maximum in  {eq}`eq:ssm:babel_function`
+   is attained.
+1. Now pick some column which is not
+   $\psi^p$ and is not indexed by $\Lambda^p$
+   and include it for $\Lambda^{p + 1}$. 
+1. Note that $\Lambda^{p + 1}$ and $\psi^p$ might not be the maximizers
+   for $\mu_1$  for sparsity level $p+1$ in {eq}`eq:ssm:babel_function`.
+1. Clearly
+
+   $$
+    \sum_{\lambda \in \Lambda^{p + 1}} | \langle \psi^p, \bd_{\lambda} \rangle | 
+    \geq \sum_{\lambda \in \Lambda^{p}} | \langle \psi^p, \bd_{\lambda} \rangle |.
+    $$
+1. Hence $\mu_1(p+1)$ cannot be less than $\mu_1(p)$.
+````
+
+````{prf:theorem} An upper bound for Babel function
+:label: lem:ssm:babel_function_upper_bound
+
+Babel function is upper bounded by coherence as per
+
+$$
+\mu_1(p) \leq p \; \mu(\bDDD).
+$$
+````
+````{prf:proof}
+Note that
+
+$$
+\sum_{\lambda \in \Lambda} | \langle \psi, \bd_{\lambda} \rangle | 
+\leq p \; \mu(\bDDD).
+$$
+This leads to 
+
+$$
+\mu_1(p) = \underset{|\Lambda| = p}{\max} \; \underset {\psi}{\max} 
+\sum_{\lambda \in \Lambda} | \langle \psi, \bd_{\lambda} \rangle |
+\leq \underset{|\Lambda| = p}{\max} \; \underset {\psi}{\max} \left (p \; \mu(\bDDD)\right)
+=  p \; \mu(\bDDD).
+$$
+````
+
+### Computation of Babel Function
+It might seem at first that computation of Babel function is combinatorial
+and hence prohibitively expensive.
+But it is not true.
+
+```{prf:example} Procedure for computing the Babel function
+:label: ex-ssm-babel-func-compute-proc
+
+We will demonstrate this through an example in this section.
+Our example synthesis matrix will be
+
+$$
+\bDDD  = 
+\begin{bmatrix}
+0.5 & 0 & 0 & 0.6533 & 1 & 0.5 & -0.2706 & 0\\
+0.5 & 1 & 0 & 0.2706 & 0 & -0.5 & 0.6533 & 0\\
+0.5 & 0 & 1 & -0.2706 & 0 & -0.5 & -0.6533 & 0\\
+0.5 & 0 & 0 & -0.6533 & 0 & 0.5 & 0.2706 & 1
+\end{bmatrix}
+$$
+
+
+From the synthesis matrix $\bDDD$ we first construct its Gram matrix given by
+
+$$
+\bG = \bDDD^H \bDDD.
+$$
+
+We then take absolute value of each entry in $\bG$ to construct $|\bG|$.
+For the running example
+
+$$
+|\bG| = 
+\begin{bmatrix}
+1 & 0.5 & 0.5 & 0 & 0.5 & 0 & 0 & 0.5\\
+0.5 & 1 & 0 & 0.2706 & 0 & 0.5 & 0.6533 & 0\\
+0.5 & 0 & 1 & 0.2706 & 0 & 0.5 & 0.6533 & 0\\
+0 & 0.2706 & 0.2706 & 1 & 0.6533 & 0 & 0 & 0.6533\\
+0.5 & 0 & 0 & 0.6533 & 1 & 0.5 & 0.2706 & 0\\
+0 & 0.5 & 0.5 & 0 & 0.5 & 1 & 0 & 0.5\\
+0 & 0.6533 & 0.6533 & 0 & 0.2706 & 0 & 1 & 0.2706\\
+0.5 & 0 & 0 & 0.6533 & 0 & 0.5 & 0.2706 & 1
+\end{bmatrix}
+$$
+
+We now sort every row in descending order to obtain a 
+new matrix $\bG'$.
+
+$$
+\bG' = 
+\begin{bmatrix}
+1 & 0.5 & 0.5 & 0.5 & 0.5 & 0 & 0 & 0\\
+1 & 0.6533 & 0.5 & 0.5 & 0.2706 & 0 & 0 & 0\\
+1 & 0.6533 & 0.5 & 0.5 & 0.2706 & 0 & 0 & 0\\
+1 & 0.6533 & 0.6533 & 0.2706 & 0.2706 & 0 & 0 & 0\\
+1 & 0.6533 & 0.5 & 0.5 & 0.2706 & 0 & 0 & 0\\
+1 & 0.5 & 0.5 & 0.5 & 0.5 & 0 & 0 & 0\\
+1 & 0.6533 & 0.6533 & 0.2706 & 0.2706 & 0 & 0 & 0\\
+1 & 0.6533 & 0.5 & 0.5 & 0.2706 & 0 & 0 & 0
+\end{bmatrix}
+$$
+
+First entry in each row is now $1$.
+This corresponds to $\langle \bd_i, \bd_i \rangle$ and it doesn't 
+appear in the calculation of $\mu_1(p)$.
+Hence we disregard whole of first column.
+
+Now look at column 2 in $\bG'$.
+In the $i$-th row it is nothing but 
+
+$$
+\underset{j \neq i}{\max} | \langle \bd_i, \bd_j \rangle |.
+$$
+
+Thus, 
+
+$$
+\mu (\bDDD) = \mu_1(1) = \underset{1 \leq j \leq D} {\max} {\bG'}_{j, 2}
+$$
+i.e. the coherence is given by the maximum in the 2nd column of $\bG'$.
+In the running example
+
+$$
+\mu (\bDDD) = \mu_1(1) = 0.6533.
+$$
+Looking carefully we can note that for $\psi = \bd_i$ the 
+maximum value of sum
+
+$$
+\sum_{\Lambda} | \langle \psi, \bd_{\lambda} \rangle |
+$$
+while $| \Lambda| = p$ is given by 
+the sum over elements from 2nd to $(p+1)$-th columns in $i$-th row.
+Thus 
+
+$$
+\mu_1 (p) = \underset{1 \leq i \leq D} {\max} \sum_{j = 2}^{p + 1} G'_{i j}.
+$$
+For the running example the Babel function values are given by
+
+$$
+\begin{pmatrix}
+0.6533 & 1.3066 & 1.6533 & 2 & 2 & 2 & 2
+\end{pmatrix}.
+$$
+
+We see that Babel function stops increasing after $p=4$. Actually $\bDDD$ is
+constructed by shuffling the columns of two orthonormal bases.
+Hence many of the inner products are 0 in $\bG$.
+```
+ 
+### Babel Function and Spark
+We first note that *Babel function* tells something about linear independence
+of the columns of $\bDDD$.
+
+````{prf:theorem} Linear independence of atoms and Babel function
+:label: lem:ssm:babel_linear_independence_condition
+
+Let $\mu_1$ be the *Babel function* for a dictionary $\bDDD$. If
+
+$$
+\mu_1(p) < 1
+$$
+then all selections of $p+1$ columns from $\bDDD$ are linearly independent.
+````
+
+````{prf:proof}
+We recall from the proof of {prf:ref}`lem:ssm:spark_lower_bound_coherence`
+that if
+
+$$
+p + 1 < 1 + \frac{1}{\mu(\bDDD)} \implies p < \frac{1}{\mu(\bDDD)}
+$$
+then every set of $(p+1)$ columns from $\bDDD$ are linearly independent. 
+We also know from {prf:ref}`lem:ssm:babel_function_upper_bound` that
+
+$$
+p \; \mu(\bDDD) \geq \mu_1(p) 
+\implies \mu(\bDDD) \geq \frac{\mu_1(p)}{p} 
+\implies \frac{1}{\mu(\bDDD)} \leq \frac{p} {\mu_1(p)}.
+$$
+Thus if
+
+$$
+p < \frac{p} {\mu_1(p)} 
+\implies 1 < \frac{1} {\mu_1(p)} \implies \mu_1(p) < 1
+$$
+then all selections of $p+1$ columns from $\bDDD$ are linearly independent.
+````
+This leads us to a lower bound on spark from *Babel function*.
+
+````{prf:lemma} Lower bound on spark based on Babel function
+:label: lem:ssm:dict:spark_lower_bound_babel_func
+
+A lower bound of spark of a dictionary $\bDDD$ is given by
+
+$$
+\spark(\bDDD) \geq \underset{1 \leq p \leq N} {\min}\{p \ST \mu_1(p-1)\geq 1\}.
+$$
+````
+````{prf:proof}
+For all $j \leq p-2$ we are given that $\mu_1(j) < 1$.
+Thus all sets of $p-1$ columns from $\bDDD$
+are linearly independent (using {prf:ref}`lem:ssm:babel_linear_independence_condition`).
+
+Finally $\mu_1(p-1) \geq 1$, hence we cannot say definitively
+whether a set of $p$ columns
+from $\bDDD$ is linearly dependent or not.
+This establishes the lower bound on spark.
+````
+An earlier version of this result also appeared in
+{cite}`donoho2003optimally` theorem 6.
+
+### Babel Function and Singular Values
+
+````{prf:theorem} Subdictionary singular value bounds from Babel function
+:label: lem:ssm:subdictionary_singular_value_babel_bounds
+
+Let $\bDDD$ be a dictionary and $\Lambda$ be an index set with $|\Lambda| = K$. 
+The singular values of $\bDDD_{\Lambda}$ are bounded by 
+
+$$
+1  - \mu_1(K - 1) \leq \sigma^2 \leq 1 + \mu_1 (K - 1).
+$$
+````
+````{prf:proof}
+Consider the Gram matrix 
+
+$$
+\bG = \bDDD_{\Lambda}^H \bDDD_{\Lambda}.
+$$
+$G$ is a $K\times K$ square matrix.
+
+Also let 
+
+$$
+\Lambda = \{ \lambda_1, \lambda_2, \dots, \lambda_K\}
+$$
+so that
+
+$$
+\bDDD_{\Lambda} = \begin{bmatrix}
+\bd_{\lambda_1} & \bd_{\lambda_2} & \dots & \bd_{\lambda_K}
+\end{bmatrix}.
+$$
+The Gershgorin Disc Theorem states that every
+eigenvalue of $\bG$ lies in one of the $K$ discs 
+
+$$
+\Delta_k  = \left \{
+z \ST |z -  G_{k k}| \leq \sum_{j \neq k } | G_{j k}| 
+\right \}
+$$
+Since $\bd_i$ are unit norm, hence $G_{k k} = 1$. 
+
+Also we note that
+
+$$
+\sum_{j \neq k } | G_{j k}| 
+= \sum_{j \neq k } | \langle \bd_{\lambda_j},  \bd_{\lambda_k} \rangle | 
+\leq \mu_1(K-1)
+$$
+since there are $K-1$ terms in sum and $\mu_1(K-1)$ is an upper bound on all such sums.
+
+Thus if $z$ is an eigen value of $\bG$ then we have
+
+$$
+\begin{aligned}
+&| z -1 | \leq \mu_1(K-1) \\
+\implies &- \mu_1(K-1)  \leq z - 1 \leq \mu_1(K-1) \\
+\implies &1 - \mu_1(K-1)  \leq z \leq 1 + \mu_1(K-1). 
+\end{aligned}
+$$
+This is OK since $\bG$ is positive semi-definite,
+thus the eigen values of $G$ are real.
+
+But the eigen values of $\bG$ are nothing
+but the squared singular values of $\bDDD_{\Lambda}$.
+Thus we get
+
+$$
+1 - \mu_1(K-1)  \leq \sigma^2 \leq 1 + \mu_1(K-1).
+$$
+````
+````{prf:corollary}
+:label: lem:ssm:babel_singular_value_condition
+
+Let $\bDDD$ be a dictionary and $\Lambda$ be an index set with $|\Lambda| = K$. 
+If  $\mu_1(K-1) < 1$
+then the squared singular values of $\bDDD_{\Lambda}$ exceed $(1 - \mu_1 (K-1))$. 
+````
+````{prf:proof}
+From previous theorem we have
+
+$$
+1 - \mu_1(K-1)  \leq \sigma^2 \leq 1 + \mu_1(K-1).
+$$
+Since the singular values are always non-negative,
+the lower bound is useful only when $\mu_1(K-1) < 1$. 
+When it holds we have 
+
+$$
+\sigma(\bDDD_{\Lambda}) \geq \sqrt{1 - \mu_1(K-1)}.
+$$
+````
+
+````{prf:theorem} Uncertainty principle : Babel function
+:label: res:ssm:babel_uncertainty_principle_K
+
+Let $\mu_1(K -1 ) < 1$.
+If a signal can be written as a linear combination of $k$ atoms,
+then any other exact representation of the signal requires at least $(K - k + 1)$ atoms. 
+````
+````{prf:proof}
+If $\mu_1(K -1 ) < 1$, then the singular values of any sub-matrix of $K$ atoms are non-zero. 
+Thus, the minimum number of atoms required to form a linear dependent set is $K + 1$.
+Let the number of atoms in any other exact representation of the signal be $l$.
+Then
+
+$$
+k + l \geq K + 1 \implies l \geq K - k + 1.
+$$
+````
+### Babel Function and Gram Matrix of Subdictionaries
+
+Let $\Lambda$ index a subdictionary and
+let $\bG = \bDDD_{\Lambda}^H \bDDD_{\Lambda}$ denote the Gram matrix
+of the subdictionary $\bDDD_{\Lambda}$. Assume $K = | \Lambda |$.
+
+````{prf:theorem} A bound on the norms of Gram matrix
+:label: res:ssm:gram_matrix_infty_norm_babel_bound
+
+$$
+\| \bG \|_{\infty} =  \| \bG \|_{1}  \leq 1 + \mu_1(K - 1).
+$$
+````
+````{prf:proof}
+Since $\bG$ is Hermitian, hence the two norms are equal:
+
+$$
+\| \bG \|_{\infty} =  \| \bG^H \|_{1} = \| \bG \|_{1}.
+$$
+1. Now each row consists of a diagonal entry $1$ and $K-1$ off diagonal entries.
+1. The absolute sum of all the off-diagonal entries in a row is 
+   upper bounded by $\mu_1(K -1)$.
+1. Thus, the absolute sum of all the entries in a row is 
+   upper bounded by $1 + \mu_1(K - 1)$. 
+1. $\| \bG \|_{\infty}$ is nothing but the maximum $\ell_1$ norm of rows of $\bG$.
+1. Hence
+   
+   $$
+    \| \bG \|_{\infty} \leq 1 +  \mu_1(K - 1).
+   $$
+````
+
+````{prf:theorem} A bound on the norms of inverse Gram matrix
+:label: res:ssm:inverse_gram_matrix_infty_norm_babel_bound
+
+Suppose that $\mu_1(K - 1) < 1$.
+Then
+
+$$
+\| \bG^{-1} \|_{\infty} = \| \bG^{-1} \|_{1} \leq \frac{1}{1 - \mu_1(K - 1)}.
+$$
+````
+````{prf:proof}
+Since $G$ is Hermitian, hence the two operator norms are equal:
+
+$$
+\| \bG^{-1} \|_{\infty} = \| \bG^{-1} \|_{1}.
+$$
+1. We can write $\bG$ as $\bG = \bI  + \bA$
+   where $\bA$ consists of off-diagonal entries in $\bG$.
+1. Recall that since atoms are unit norm, hence diagonal entries in $\bG$ are 1.
+1. Each row of $\bA$ lists inner products between a fixed atom and $K-1$
+   other atoms (leaving 0 at the diagonal entry). 
+1. Therefore
+   
+   $$
+    \| \bA \|_{\infty} \leq \mu_1(K - 1).
+   $$
+   since $\ell_1$ norm of any row is upper bounded by the babel number $\mu_1(K - 1)$.
+1. Now $\bG^{-1}$ can be written as a  Neumann series 
+   
+   $$
+   \bG^{-1} = \sum_{k=0}^{\infty}(-\bA)^k.
+   $$
+1. Thus
+   
+   $$
+    \| \bG^{-1} \|_{\infty}
+    &= \left \| \sum_{k=0}^{\infty}(-\bA)^k \right \|_{\infty} \\
+    &\leq \sum_{k=0}^{\infty} \| (-\bA)^k \|_{\infty}\\
+    &= \sum_{k=0}^{\infty} \| \bA \|_{\infty}^k\\
+    &= \frac{1}{1 - \| \bA \|_{\infty}}
+   $$
+   since $\| \bA \|_{\infty} < 1$.
+1. Finally
+   
+   $$
+    & \| \bA \|_{\infty} 
+    \leq \mu_1(K - 1)\\ 
+    \iff & 1 - \| \bA \|_{\infty} 
+    \geq 1 - \mu_1(K - 1)\\
+    \iff & \frac{1}{1 - \| \bA \|_{\infty}} 
+    \leq \frac{1}{1 - \mu_1(K - 1)}.
+   $$
+1. Thus
+   
+   $$
+    \| \bG^{-1} \|_{\infty}  \leq \frac{1}{1 - \mu_1(K - 1)}.
+   $$
+````
+
+### Quasi Incoherent Dictionaries
+
+```{index} Quasi incoherent dictionary
+```
+````{prf:definition} Quasi incoherent dictionary
+:label: def:ssm:quasi_incoherent_dictionary
+
+When the *Babel function* of a dictionary grows slowly,
+we say that the dictionary is *quasi-incoherent*.
+````
+
