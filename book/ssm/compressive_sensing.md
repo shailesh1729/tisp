@@ -482,12 +482,13 @@ the distance between two sparse signals shouldn't change by much during sensing.
 They quantified this idea in the form of a *restricted isometric constant* of a matrix
 $\Phi$ as the smallest number $\delta_K$ for which the following holds
 
-$$
+```{math}
+:label: eq:ripbound
 (1 - \delta_K) \| \bx \|_2^2 
 \leq \| \Phi \bx \|_2^2 
 \leq (1 + \delta_K) \| \bx \|_2^2 
 \Forall \bx : \| x \|_0 \leq K.
-$$
+```
 We will study more about this property known as restricted isometry property (RIP) 
 in {prf:ref}`sec:proj:restricted_isometry_property`.
 Here we just sketch the implications of RIP for compressive sensing.
@@ -1021,3 +1022,553 @@ $\Phi$ satisfies NSP of order $2K$.
 ````
 It turns out that NSP of order $2K$ is also sufficient to establish a guarantee of the form
 above for a practical recovery algorithm.
+
+
+
+ 
+## Recovery in Presence of Measurement Noise
+
+````{div}
+Measurement vector in the presence of noise is given by
+
+$$
+\by =\Phi \bx + \be
+$$
+where $\be$ is the measurement noise or error.
+$\| \be \|_2$ is the $\ell_2$ size of measurement error.
+
+Recovery error as usual is given by
+
+$$
+\| \Delta (\by) - \bx \|_2 = \| \Delta (\Phi \bx + \be) - \bx \|_2. 
+$$
+
+*Stability* of a recovery algorithm is characterized by comparing
+variation of recovery error w.r.t. measurement error.
+
+NSP is both necessary and sufficient for establishing guarantees of the form:
+
+$$
+\| \Delta (\Phi \bx) - \bx \|_2 \leq C \frac{\sigma_K (\bx)_1}{\sqrt{K}}.
+$$
+These guarantees do not account for presence of noise during measurement.
+
+We need stronger conditions for handling noise.
+The restricted isometry property for sensing matrices comes to our rescue.
+````
+
+### Restricted Isometry Property
+
+````{div}
+We recall that a matrix $\Phi$ satisfies the *restricted isometry property* (RIP)
+of order $K$  if there exists $\delta_K \in (0,1)$ such that
+
+$$
+(1- \delta_K) \| \bx \|^2_2 
+\leq \| \Phi \bx \|^2_2 
+\leq (1 + \delta_K) \| \bx \|^2_2  
+$$
+holds for every $\bx \in \Sigma_K = \{ \bx \ST \| \bx\|_0 \leq K \}$. 
+
+* If a matrix satisfies RIP of order $K$, then we can see that it *approximately* preserves 
+  the size of a $K$-sparse vector.
+* If a matrix satisfies RIP of order $2K$, then we can see that it  *approximately* preserves the 
+  distance between any two $K$-sparse vectors since difference vectors would be $2K$ sparse
+  (see {prf:ref}`lem:proj:rip_distance_preservation`) . 
+* We say that the matrix is *nearly orthonormal* for sparse vectors.
+* If a matrix satisfies RIP of order $K$ with a constant $\delta_K$,
+  it automatically satisfies
+  RIP of any order $K' < K$ with a constant $\delta_{K'} \leq \delta_{K}$.
+````
+
+### Stability
+
+Informally a recovery algorithm is stable if recovery error is small
+in the presence of small measurement noise.
+
+Is RIP necessary and sufficient for sparse signal recovery from noisy measurements? 
+Let us look at the necessary part. 
+
+We will define a notion of stability of the recovery algorithm.
+
+````{prf:definition} $C$ stable encoder-decoder pair
+:label: def:recovery_algorithm_stability
+
+Let $\Phi : \RR^N \to \RR^M$ be a sensing matrix 
+and $\Delta : \RR^M \to \RR^N$ be a recovery algorithm.
+We say that the pair $(\Phi, \Delta)$ is *$C$-stable* if for any $\bx \in \Sigma_K$
+and any $\be \in \RR^M$ we have that
+
+$$
+\| \Delta(\Phi \bx + \be) - \bx\|_2  \leq C \| \be\|_2. 
+$$
+````
+
+*  Error is added to the measurements.
+*  LHS is $\ell_2$ norm of recovery error.
+*  RHS consists of scaling of the $\ell_2$ norm of measurement error.
+*  The definition says that recovery error is bounded by a
+   multiple of the measurement error.
+*  Thus adding a small amount of measurement noise
+   shouldn't be causing arbitrarily large recovery error.
+
+It turns out that $C$-stability requires $\Phi$ to satisfy RIP.
+
+````{prf:theorem} Necessity of RIP for $C$-stability
+:label: thm:stability_requires_rip
+
+If a pair $(\Phi, \Delta)$ is $C$-stable then
+
+$$
+\frac{1}{C} \| \bx\|_2 \leq \| \Phi \bx  \|_2  
+$$
+for all $\bx \in \Sigma_{2K}$.
+````
+````{prf:proof}
+Remember that any $\bx \in \Sigma_{2K}$ can be written in the form of
+$\bx  = \by - \bz$ where
+$\by, \bz \in \Sigma_K$.
+
+1. Let $\bx \in \Sigma_{2K}$.
+1. Split it in the form of $\bx = \by -\bz$ with $\by, \bz \in \Sigma_{K}$.
+
+1. Define
+   
+   $$
+   \be_y = \frac{\Phi (\bz - \by)}{2} \quad \text{and} \quad \be_z = \frac{\Phi (\by - \bz)}{2}.
+   $$
+
+1. Thus
+   
+   $$
+   \be_y - \be_z = \Phi (\bz - \by) \implies \Phi \by + \be_y = \Phi \bz + \be_z.
+   $$
+1. We have
+   
+   $$
+   \Phi \by + \be_y = \Phi \bz + \be_z = \frac{\Phi (\by + \bz)}{2}.
+   $$
+
+1. Also we have
+   
+   $$
+   \| \be_y \|_2 = \| \be_z \|_2 = \frac{\| \Phi (\by - \bz) \|_2}{2} = \frac{\| \Phi \bx \|_2}{2}.
+   $$
+1. Let 
+   
+   $$
+   \by' = \Delta (\Phi \by + \be_y) = \Delta (\Phi \bz + \be_z).
+   $$
+1. Since $(\Phi, \Delta)$ is $C$-stable, hence we have
+   
+   $$
+   \| \by'- \by\|_2  \leq C \| \be_y\|_2. 
+   $$
+
+1. Also
+   
+   $$
+   \| \by'- \bz\|_2  \leq C \| \be_z\|_2. 
+   $$
+1. Using the triangle inequality
+
+   $$
+   \| \bx \|_2 
+   &= \| \by - \bz\|_2  = \| \by - \by' + \by' - \bz \|_2\\ 
+   &\leq \| \by - \by' \|_2 + \| \by' - \bz\|_2\\
+   &\leq  C \| \be_y \|_2 + C \| \be_z \|_2 
+   = C (\| \be_y \|_2 + \| \be_z \|_2)
+   = C \| \Phi \bx \|_2.
+   $$
+1. Thus we have for every $\bx \in \Sigma_{2K}$ 
+   
+   $$
+   \frac{1}{C}\| \bx \|_2 \leq \| \Phi \bx \|_2. 
+   $$
+````
+
+This theorem gives us the lower bound for RIP property of
+order $2K$ in {eq}`eq:ripbound` with 
+$\delta_{2K} = 1 - \frac{1}{C^2}$
+as a necessary condition for $C$-stable recovery algorithms.
+
+Note that smaller the constant $C$, lower is the bound on recovery error
+(w.r.t. measurement error).
+But as $C \to 1$, $ \delta_{2K} \to 0$,
+thus reducing the impact of measurement noise requires
+sensing matrix $\Phi$ to be designed with tighter RIP constraints.
+
+This result doesn't require an upper bound on the RIP property in {eq}`eq:ripbound`.
+
+It turns out that If $\Phi$ satisfies RIP, 
+then this is also sufficient for a variety of algorithms to be able to successfully recover
+a sparse signal from noisy measurements. We will discuss this later.
+
+### Measurement Bounds
+
+As stated in previous section, for a $(\Phi, \Delta)$ pair to be $C$-stable
+we require that
+$\Phi$ satisfies RIP of order $2K$ with a constant $\delta_{2K}$. 
+Let us ignore $\delta_{2K}$ for the time being and look at relationship between $M$, $N$ and $K$.
+We have a sensing matrix $\Phi$ of size $M\times N$ and expect it to provide RIP of order $2K$. 
+How many measurements $M$ are necessary? 
+We will assume that $K < N / 2$. This assumption is valid for approximately sparse signals.
+
+````{div}
+Before we start figuring out the bounds, let us develop a special subset of $\Sigma_K$ sets.
+Consider the set 
+
+$$
+U = \{ \bx \in \{0, +1, -1\}^N \ST \| \bx\|_0 = K  \}.
+$$
+When we say $ \| \bx\|_0 = K$,
+we mean that exactly $K$ terms in each member of $U$ can be non-zero (i.e. $-1$ or $+1$).
+
+Hence $U$ is a set of signal vectors $\bx$ of length $N$
+where each sample takes values from $\{0, +1, -1\}$ and
+number of allowed non-zero samples is fixed at $K$.
+An example below explains it further. 
+````
+
+````{prf:example} $U$ for $N=6$ and $K=2$
+:label: ex-ssm-cs-u-set-6-2
+
+Each vector in $U$ will have 6 elements out of which $2$ can be non zero.
+There are $\binom{6}{2}$ ways of choosing the non-zero elements.
+Some of those sets are listed below as examples:
+
+$$
+&(+1,+1,0,0,0,0)\\
+&(+1,-1,0,0,0,0)\\
+&(0,-1,0,+1,0,0)\\
+&(0,-1,0,+1,0,0)\\
+&(0,0,0,0,-1,+1)\\
+&(0,0,-1,-1,0,0).
+$$
+````
+````{div}
+Revisiting
+
+$$
+U = \{ \bx \in \{0, +1, -1\}^N \ST \| \bx \|_0 = K \}   
+$$
+It is now obvious that
+
+$$
+\| \bx \|_2^2 = K \Forall \bx \in U.
+$$
+Since there are $\binom{N}{K}$ ways of choosing $K$ non-zero elements
+and each non zero element can take 
+either of the two values $+1$ or $-1$, hence the cardinality of
+set $U$ is given by:
+
+$$
+|U| = \binom{N}{K} 2^K.
+$$
+By definition 
+
+$$
+U \subset \Sigma_K.
+$$
+Further Let $\bx, \by \in U$.  
+Then $\bx - \by$ will have a maximum of $2K$ non-zero elements.
+The non-zero elements would have values in $\{-2,-1,1,2\}$.
+Thus $ \|\bx - \by \|_0 = R \leq 2K$.
+Further $\| \bx - \by \|_2^2 \geq R$.
+Hence
+
+$$
+\| \bx - \by \|_0 \leq \| \bx - \by \|_2^2 \Forall \bx, \by \in U.
+$$
+We now state a result which will help us in getting to the bounds.
+````
+````{prf:lemma}
+:label: lem:rip_bound_X_lemma
+
+Let $K$ and $N$ satisfying $K < \frac{N}{2}$ be given.
+There exists a set $X \subset \Sigma_K$ such that 
+for any $\bx \in X$ we have $\|\bx \|_2 \leq \sqrt{K}$
+and for any $\bx, \by \in X$ with $\bx \neq \by$,
+
+$$
+\| \bx - \by \|_2 \geq \sqrt{\frac{K}{2}}
+$$
+and
+
+$$
+\ln | X | \geq \frac{K}{2} \ln \left( \frac{N}{K} \right).
+$$
+````
+
+````{prf:proof}
+We just need to find one set $X$ which satisfies the requirements of this lemma.
+We have to construct a set $X$ such that
+
+
+1. $\| \bx \|_2 \leq \sqrt{K}  \Forall \bx \in X$.
+1. $\| \bx - \by \|_2 \geq \sqrt{\frac{K}{2}}$ for every $bx, \by \in X$.
+1. $\ln | X | \geq \frac{K}{2} \ln \left( \frac{N}{K} \right)$
+   or equivalently $|X| \geq \left( \frac{N}{K} \right)^{\frac{K}{2}}$.
+
+First condition states that the set $X$ lies in the intersection of
+$\Sigma_K$ and the closed ball $B[\bzero, \sqrt{K}]$.
+Second condition states that the points in $X$ are sufficiently
+distant from each other.
+Third condition states that there are at least a certain number of points
+in $X$.
+
+We will construct $X$ by picking vectors from $U$. Thus $X \subset U$.
+
+1. Since $\bx \in X \subset U$ hence
+   $\| \bx \|_2 = \sqrt{K} \leq \sqrt{K} \Forall \bx \in X$.
+1. Consider any fixed $\bx \in U$.
+1. How many elements $\by$ are there in $U$ such that $\|\bx - \by\|_2^2 < \frac{K}{2}$?
+1. Define
+   
+   $$
+   U_x^2 = \left \{\by \in U \ST \|\bx - \by\|_2^2  < \frac{K}{2} \right \}.
+   $$
+1. Clearly by requirements in the lemma,
+   if $\bx \in X$ then $U_x^2 \cap X = \EmptySet$;
+   i.e., no vector in $U_x^2$ belongs to $X$.
+1. How many elements are there in  $U_x^2$? Let us find an upper bound.
+1. $\Forall \bx, \by \in U$ we have $\|\bx - \by\|_0  \leq \|\bx - \by\|_2^2$.
+1. If $\bx$ and $\by$ differ in $\frac{K}{2}$ or more places, then naturally 
+   $\|\bx - \by\|_2^2 \geq \frac{K}{2}$.
+1. Hence if $\|\bx - \by\|_2^2 < \frac{K}{2}$ then 
+   $\|\bx - \by\|_0 < \frac{K}{2}$
+   hence $\|\bx - \by\|_0 \leq \frac{K}{2}$ for any $\bx, \by \in U_x^2$.
+1. So define
+   
+   $$
+   U_x^0 = \left \{\by \in U \ST \|\bx - \by\|_0 \leq \frac{K}{2} \right \}.  
+   $$
+1. We have 
+   
+   $$
+    U_x^2 \subseteq U_x^0.
+   $$
+
+1. Thus we have an upper bound given by
+   
+   $$
+    | U_x^2 | \leq | U_x^0 |.
+   $$
+1. Let us look at $U_x^0$ carefully. 
+1. We can choose $\frac{K}{2}$ indices where $\bx$ and $\by$ *may* differ
+   in $\binom{N}{\frac{K}{2}}$ ways.
+1. At each of these $\frac{K}{2}$ indices, $y_i$ can take value as one of $(0, +1, -1)$.
+1. Thus we have an upper bound
+   
+   $$
+    | U_x^2 | \leq | U_x^0 | \leq \binom {N}{\frac{K}{2}} 3^{\frac{K}{2}}.
+   $$
+1. We now describe an iterative process for building $X$ from vectors in $U$.
+1. Say we have added $j$ vectors to $X$ namely $x_1, x_2,\dots, x_j$. 
+1. Then
+   
+   $$
+   (U^2_{x_1} \cup U^2_{x_2} \cup \dots  \cup U^2_{x_j}) \cap X = \EmptySet.
+   $$
+1. Number of vectors in $U^2_{x_1} \cup U^2_{x_2} \cup \dots  \cup U^2_{x_j}$
+   is bounded by $j \binom {N}{ \frac{K}{2}} 3^{\frac{K}{2}}$.
+1. Thus we have at least 
+   
+   $$
+    \binom{N}{K} 2^K - j \binom {N}{ \frac{K}{2}} 3^{\frac{K}{2}}  
+   $$
+   vectors left in $U$ to choose from for adding in $X$.
+1. We can keep adding vectors to $X$ till there are no more suitable vectors left.
+1. We can construct a set of size $|X|$ provided
+   
+   ```{math}
+   :label: eq:measure_bound_x_size
+    |X| \binom {N}{ \frac{K}{2}} 3^{\frac{K}{2}} \leq \binom{N}{K} 2^K
+   ```
+1. Now
+   
+   $$
+      \frac{\binom{N}{K}}{\binom{N}{\frac{K}{2}}} 
+      = \frac
+        {\left ( \frac{K}{2} \right ) !  \left (N  - \frac{K}{2} \right ) ! }
+        {K! (N-K)!}
+      = \prod_{i=1}^{\frac{K}{2}}  \frac{N - K + i}{ K/ 2 + i}.
+   $$
+1. Note that $\frac{N - K + i}{ K/ 2 + i}$ is a decreasing function of $i$.
+1. Its minimum value is achieved for $i=\frac{K}{2}$ as $(\frac{N}{K} - \frac{1}{2})$.
+1. So we have
+   
+   $$
+      &\frac{N - K + i}{ K/ 2 + i} \geq \frac{N}{K} - \frac{1}{2}\\
+      &\implies \prod_{i=1}^{\frac{K}{2}}  \frac{N - K + i}{ K/ 2 + i}  \geq  \left ( \frac{N}{K} - \frac{1}{2} \right )^{\frac{K}{2}}\\
+      &\implies \frac{\binom{N}{K}}{\binom{N}{\frac{K}{2}}} \geq \left ( \frac{N}{K} - \frac{1}{2} \right )^{\frac{K}{2}}
+   $$
+1. Rephrasing the bound on $|X$ in {eq}`eq:measure_bound_x_size` we have
+   
+   $$
+    |X| \left( \frac{3}{4} \right )^{\frac{K}{2}} \leq   \frac{\binom{N}{K}}{\binom{N}{\frac{K}{2}}}
+   $$
+1. Hence we can definitely construct a set $X$ with the cardinality satisfying
+   
+   $$
+      |X| \left( \frac{3}{4} \right ) ^{\frac{K}{2}}  \leq \left ( \frac{N}{K} - \frac{1}{2} \right )^{\frac{K}{2}}.
+   $$
+1. Now it is given that $ K < \frac{N}{2}$. So we have:
+
+   $$
+    & K < \frac{N}{2}\\
+    &\implies \frac{N}{K} > 2\\
+    &\implies \frac{N}{4K} > \frac{1}{2}\\
+    &\implies \frac{N}{K} - \frac{N}{4K} < \frac{N}{K} - \frac{1}{2}\\
+    &\implies \frac{3N}{4K} < \frac{N}{K} - \frac{1}{2}\\
+    &\implies \left( \frac{3N}{4K} \right) ^ {\frac{K}{2}}< \left ( \frac{N}{K} - \frac{1}{2} \right )^{\frac{K}{2}}\\
+   $$
+1. Thus we have
+   
+   $$
+    \left( \frac{N}{K} \right) ^ {\frac{K}{2}}   \left( \frac{3}{4} \right) ^ {\frac{K}{2}}  < \frac{\binom{N}{K}}{\binom{N}{\frac{K}{2}}}
+   $$
+1. Choose
+   
+   $$
+      |X| = \left( \frac{N}{K} \right) ^ {\frac{K}{2}} 
+   $$
+1. Clearly this value of $|X|$ satisfies {eq}`eq:measure_bound_x_size`.
+1. Hence $X$ can have at least these many elements.
+1. Thus
+   
+   $$
+      &|X| \geq \left( \frac{N}{K} \right) ^ {\frac{K}{2}}\\
+      &\implies \ln |X| \geq \frac{K}{2} \ln \left( \frac{N}{K} \right) 
+   $$
+   which completes the proof.
+````
+
+
+We can now establish following bound on the required number of measurements to satisfy RIP.
+
+At this moment, we won't worry about exact value of $\delta_{2K}$. We will just assume that
+$\delta_{2K}$ is small in range $(0, \frac{1}{2}]$.
+
+````{prf:theorem} Minimum number of required measurements for RIP of order $2K$
+:label: thm:rip_measurement_bound
+
+Let $\Phi$ be an $M \times N$ matrix that satisfies RIP of order $2K$
+with constant $\delta_{2K} \in (0, \frac{1}{2}]$.
+Then
+
+$$
+M \geq C K \ln \left ( \frac{N}{K} \right ) 
+$$
+where
+
+$$
+C = \frac{1}{2 \ln (\sqrt{24} + 1)} \approx 0.28173.
+$$
+````
+
+````{prf:proof}
+Since $\Phi$ satisfies RIP of order $2K$ we have
+
+$$
+& (1  - \delta_{2K}) \| \bx \|^2_2 
+   \leq \| \Phi \bx \|^2_2 
+   \leq (1 + \delta_{2K}) \| \bx\|^2_2  \Forall \bx \in \Sigma_{2K}\\
+& \implies (1  - \delta_{2K}) \| \bx - \by \|^2_2 
+\leq \| \Phi \bx -  \Phi \by\|^2_2 
+\leq (1 + \delta_{2K}) \| \bx - \by\|^2_2  \Forall \bx, \by \in \Sigma_K.
+$$
+Also
+
+$$
+\delta_{2K} \leq \frac{1}{2}
+\implies 1 - \delta_{2K} \geq 
+\frac{1}{2} \text{ and }  1 + \delta_{2K} \leq \frac{3}{2}.
+$$
+Consider the set $X \subset U \subset \Sigma_K$ developed in {prf:ref}`lem:rip_bound_X_lemma`.
+We have
+
+$$
+&\| \bx - \by\|^2_2 \geq  \frac{K}{2} \Forall \bx, \by \in X\\
+&\implies (1  - \delta_{2K}) \| \bx - \by \|^2_2 \geq  \frac{K}{4}\\
+&\implies \| \Phi \bx -  \Phi \by\|^2_2 \geq  \frac{K}{4}\\
+&\implies \| \Phi \bx -  \Phi \by\|_2 \geq  \sqrt{\frac{K}{4}} \Forall \bx, \by \in X.
+$$
+Also
+
+$$
+&\| \Phi \bx \|^2_2 
+\leq (1 + \delta_{2K}) \| \bx\|^2_2 
+\leq  \frac{3}{2}  \| \bx\|^2_2 
+\Forall \bx \in X \subset \Sigma_K \subset \Sigma_{2K}\\
+&\implies \| \Phi \bx \|_2 
+\leq \sqrt {\frac{3}{2}}  \| \bx\|_2  \leq \sqrt {\frac{3K}{2}} \Forall \bx \in X
+$$
+since $\|\bx\|_2 \leq \sqrt{K} \Forall \bx \in X$.
+So we have a lower bound:
+
+```{math}
+:label: eq:rip_lower_bound_x
+\| \Phi \bx -  \Phi \by\|_2 \geq  \sqrt{\frac{K}{4}} \Forall \bx, \by \in X.
+```
+and an upper bound:
+
+```{math}
+:label: eq:rip_upper_bound_x
+\| \Phi \bx \|_2 \leq \sqrt {\frac{3K}{2}} \Forall \bx \in X.
+```
+What do these bounds mean? Let us start with the lower bound.
+
+$\Phi \bx$ and $\Phi \by$ are projections of $\bx$ and $\by$ in $\RR^M$ (measurement space).
+
+Construct $\ell_2$ balls of radius
+$\sqrt{\frac{K}{4}} / 2= \sqrt{\frac{K}{16}}$ in $\RR^M$ around $\Phi \bx$ and $\Phi \by$.
+
+Lower bound says that these balls are disjoint.
+Since $\bx, \by$ are arbitrary, this applies to every $\bx \in X$.
+
+Upper bound tells us that all vectors $\Phi \bx$ lie in a ball of radius
+$\sqrt {\frac{3K}{2}}$ around origin in $\RR^M$.
+
+Thus the set of all balls lies within a larger ball of radius  $\sqrt {\frac{3K}{2}} + \sqrt{\frac{K}{16}}$  around origin in $\RR^M$.
+
+So we require that the volume of the larger ball MUST be greater than the sum of volumes of $|X|$ individual balls. 
+
+Since volume of an $\ell_2$ ball of radius $r$ is proportional to $r^M$, we have: 
+
+$$
+&\left ( \sqrt {\frac{3K}{2}} + \sqrt{\frac{K}{16}}    \right )^M \geq |X| \left ( \sqrt{\frac{K}{16}} \right )^M\\. 
+& \implies (\sqrt {24} + 1)^M \geq  |X| \\
+& \implies  M \geq \frac{\ln |X| }{\ln (\sqrt {24} + 1) }
+$$
+Again from {prf:ref}`lem:rip_bound_X_lemma` we have
+
+$$
+\ln |X| \geq \frac{K}{2} \ln \left ( \frac{N}{K} \right ).
+$$
+Putting back we get
+
+$$
+M \geq \frac{\frac{K}{2} \ln \left ( \frac{N}{K} \right ) }{\ln (\sqrt {24} + 1) }
+$$
+which establishes a lower bound on the number of measurements $M$.
+````
+
+````{prf:example} Lower bounds on $M$ for RIP of order $2K$
+:label: ex-ssm-cs-lb-m-rip-2k-1000
+
+*  $N=1000, K=100 \implies M \geq 65$.
+*  $N=1000, K=200 \implies M \geq 91$.
+*  $N=1000, K=400 \implies M \geq 104$.
+````
+
+Some remarks are in order:
+
+*  The theorem only establishes a necessary lower bound on $M$. It doesn't mean that if we choose an $M$ larger
+  than the lower bound then $\Phi$ will have RIP of order $2K$ with any constant $\delta_{2K} \in (0, \frac{1}{2}]$.
+*  The restriction $\delta_{2K} \leq \frac{1}{2}$ is arbitrary and is made for convenience. In general, we can work with
+  $0 < \delta_{2K} \leq \delta_{\text{max}} < 1$ and develop the bounds accordingly.
+*  This result fails to capture dependence of $M$ on the RIP constant $\delta_{2K}$ directly. 
+  *Johnson-Lindenstrauss lemma* helps us resolve this which concerns embeddings of finite sets of points in
+  low-dimensional spaces.
+*  We haven't made significant efforts to optimize the constants. Still they are quite reasonable.
