@@ -189,110 +189,8 @@ There are $M$ such sensing vectors in $\CC^N$
 comprising $\Phi$ corresponding to $M$ measurements in the measurement space $\CC^M$.
 ````
 
-## Number of Measurements
-
-
-A fundamental question of compressive sensing framework is:
-*How many measurements are  necessary to acquire $K$-sparse signals*?
-By necessary we mean that $\by$ carries
-enough information about $\bx$ such that $\bx$ can be recovered from $\by$. 
-
-Clearly if $M < K$ then recovery is not possible. 
-
-We further note that the sensing matrix $\Phi$ should not map two different $K$-sparse
-signals to the same measurement vector.
-Thus we will need $M \geq 2K$ and each
-collection of $2K$ columns in $\Phi$ must be non-singular. 
-
-If the $K$-column  sub matrices of $\Phi$ are badly conditioned, then it is possible that
-some sparse signals get mapped to very similar measurement vectors.
-Then it is numerically unstable
-to recover the signal. 
-Moreover, if noise is present, stability further degrades. 
-
-````{div}
-In {cite}`candes2006near` Cand\`es and Tao  showed that the geometry of sparse
-signals should be preserved under the action of a sensing matrix. In particular
-the distance between two sparse signals shouldn't change by much during sensing.
-
-They quantified this idea in the form of a *restricted isometric constant* of a matrix
-$\Phi$ as the smallest number $\delta_K$ for which the following holds
-
-$$
-(1 - \delta_K) \| \bx \|_2^2 
-\leq \| \Phi \bx \|_2^2 
-\leq (1 + \delta_K) \| \bx \|_2^2 
-\Forall \bx : \| x \|_0 \leq K.
-$$
-We will study more about this property known as restricted isometry property (RIP) 
-in {prf:ref}`sec:proj:restricted_isometry_property`.
-Here we just sketch the implications of RIP for compressive sensing.
-
-When $\delta_K < 1$ then the inequalities imply that
-every collection of $K$ columns from $\Phi$ is
-non-singular.
-Since we need every collection of $2K$ columns to be non-singular,
-we actually need $\delta_{2K} < 1$ which is the minimum requirement
-for recovery of $K$ sparse signals. 
-
-Further if $\delta_{2K} \ll 1$ then we note that sensing operator
-very nearly maintains the $\ell_2$ distance between any two $K$ sparse signals.
-As a consequence, it is possible to invert the sensing process stably.
-
-It is now known that many randomly generated matrices have excellent RIP behavior.
-One can show  that if $\delta_{2K} \leq 0.1$, then with 
-
-$$
-M = \bigO{K \ln ^{\ba} N}
-$$
-measurements, one can recover $\bx$ with high probability. 
-
-Some of the typical random matrices which have suitable RIP properties are
-
-*  Gaussian sensing matrices
-*  Partial Fourier matrices
-*  Rademacher sensing matrices
-````
-
-(sec:ssm:sparse:recovery)=
-## Signal Recovery
-
-The second fundamental problem in compressive sensing is:
-*Given the compressive measurements $\by$ how do we recover the signal $\bx$*?
-This problem is known as SPARSE-RECOVERY problem.
-
-````{div}
-A simple formulation of the problem as: 
-minimize $\| \bx \|_0$ subject to $\by = \Phi \bx$ is hopeless
-since it entails a combinatorial explosion of search space.  
-
-Over the years, people have developed
-a number of algorithms to tackle the sparse recovery problem.
-
-The algorithms can be broadly classified into following categories
-
-* [Greedy pursuits] These algorithms attempt to build the approximation of
-  the signal iteratively by making locally optimal choices at each step.
-  Examples of such algorithms include OMP (orthogonal matching pursuit),
-  stage-wise OMP, regularized OMP, CoSaMP (compressive sampling pursuit)
-  and IHT (iterative hard thresholding). 
-* [Convex relaxation] These techniques relax the $\ell_0$ "norm" minimization problem
-  into a suitable  problem which is a convex optimization problem.
-  This relaxation is valid for a large class of signals of interest.
-  Once the problem has been formulated as a convex optimization problem,
-  a number of solutions are available, e.g. 
-  interior point methods, projected gradient methods and iterative thresholding.  
-*  [Combinatorial algorithms] These methods are based on research in group testing
-   and are specifically suited for situations where highly structured measurements
-   of the signal are taken.
-   This class includes algorithms like Fourier sampling, chaining pursuit, and HHS pursuit.
-
-A major emphasis of the following chapters will be the study
-of these sparse recovery algorithms.
-
 In the following we present examples of real life problems
 which can be modeled as compressive sensing problems.
-````
 
 ## Error Correction in Linear Codes
 
@@ -536,4 +434,149 @@ $$
 \widehat{\alpha} = \text{recovery}(\Phi \Psi, \by, K).
 $$
 where $\widehat{\alpha}$ is a $K$-sparse approximation of $\alpha$.
+````
+
+## Number of Measurements
+
+A fundamental question of compressive sensing framework is:
+*How many measurements are  necessary to acquire $K$-sparse signals*?
+By necessary we mean that $\by$ carries
+enough information about $\bx$ such that $\bx$ can be recovered from $\by$. 
+
+Clearly if $M < K$ then recovery is not possible. 
+
+We further note that the sensing matrix $\Phi$ should not map two different $K$-sparse
+signals to the same measurement vector.
+Thus we will need $M \geq 2K$ and each
+collection of $2K$ columns in $\Phi$ must be non-singular. 
+
+If the $K$-column  sub matrices of $\Phi$ are badly conditioned, then it is possible that
+some sparse signals get mapped to very similar measurement vectors.
+Then it is numerically unstable
+to recover the signal. 
+Moreover, if noise is present, stability further degrades. 
+
+````{div}
+In {cite}`candes2006near` Cand\`es and Tao  showed that the geometry of sparse
+signals should be preserved under the action of a sensing matrix. In particular
+the distance between two sparse signals shouldn't change by much during sensing.
+
+They quantified this idea in the form of a *restricted isometric constant* of a matrix
+$\Phi$ as the smallest number $\delta_K$ for which the following holds
+
+$$
+(1 - \delta_K) \| \bx \|_2^2 
+\leq \| \Phi \bx \|_2^2 
+\leq (1 + \delta_K) \| \bx \|_2^2 
+\Forall \bx : \| x \|_0 \leq K.
+$$
+We will study more about this property known as restricted isometry property (RIP) 
+in {prf:ref}`sec:proj:restricted_isometry_property`.
+Here we just sketch the implications of RIP for compressive sensing.
+
+When $\delta_K < 1$ then the inequalities imply that
+every collection of $K$ columns from $\Phi$ is
+non-singular.
+Since we need every collection of $2K$ columns to be non-singular,
+we actually need $\delta_{2K} < 1$ which is the minimum requirement
+for recovery of $K$ sparse signals. 
+
+Further if $\delta_{2K} \ll 1$ then we note that sensing operator
+very nearly maintains the $\ell_2$ distance between any two $K$ sparse signals.
+As a consequence, it is possible to invert the sensing process stably.
+
+It is now known that many randomly generated matrices have excellent RIP behavior.
+One can show  that if $\delta_{2K} \leq 0.1$, then with 
+
+$$
+M = \bigO{K \ln ^{\ba} N}
+$$
+measurements, one can recover $\bx$ with high probability. 
+
+Some of the typical random matrices which have suitable RIP properties are
+
+*  Gaussian sensing matrices
+*  Partial Fourier matrices
+*  Rademacher sensing matrices
+````
+(sec:ssm:sparse:recovery)=
+## Signal Recovery
+
+The second fundamental problem in compressive sensing is:
+*Given the compressive measurements $\by$ how do we recover the signal $\bx$*?
+This problem is known as SPARSE-RECOVERY problem.
+
+````{div}
+A simple formulation of the problem as: 
+minimize $\| \bx \|_0$ subject to $\by = \Phi \bx$ is hopeless
+since it entails a combinatorial explosion of search space.  
+
+Over the years, people have developed
+a number of algorithms to tackle the sparse recovery problem.
+
+The algorithms can be broadly classified into following categories
+
+* [Greedy pursuits] These algorithms attempt to build the approximation of
+  the signal iteratively by making locally optimal choices at each step.
+  Examples of such algorithms include OMP (orthogonal matching pursuit),
+  stage-wise OMP, regularized OMP, CoSaMP (compressive sampling pursuit)
+  and IHT (iterative hard thresholding). 
+* [Convex relaxation] These techniques relax the $\ell_0$ "norm" minimization problem
+  into a suitable  problem which is a convex optimization problem.
+  This relaxation is valid for a large class of signals of interest.
+  Once the problem has been formulated as a convex optimization problem,
+  a number of solutions are available, e.g. 
+  interior point methods, projected gradient methods and iterative thresholding.  
+*  [Combinatorial algorithms] These methods are based on research in group testing
+   and are specifically suited for situations where highly structured measurements
+   of the signal are taken.
+   This class includes algorithms like Fourier sampling, chaining pursuit, and HHS pursuit.
+
+A major emphasis of these notes will be the study
+of these sparse recovery algorithms. We shall provide
+some basic results in this section.
+We shall work under the following framework
+in the remainder of this section.
+
+1. Let $\bx \in \RR^N$ be our signal of interest where $N$ is the number 
+   of signal components or *dimension* of the signal space $\RR^N$.
+1. Let us make $M$ linear measurements of the signal.
+1. The measurements are given by
+
+   $$
+   \by = \Phi \bx.
+   $$
+1. $\by \in \RR^M$ is our measurement vector in the measurement space $\RR^M$
+   and $M$ is the dimension of our measurement space.
+1. $\Phi$ is an $M\times N$ matrix known as the *sensing matrix*.
+1. $M \ll N$, hence $\Phi$ achieves a *dimensionality reduction* over $\bx$.
+1. We assume that measurements are *non-adaptive*; i.e.,
+   the matrix $\Phi$ is predefined and doesn't depend on $\bx$.
+1. The recovery process is denoted by 
+
+   $$
+   \bx' = \Delta \by = \Delta (\Phi \bx) 
+   $$
+   where $\Delta : \RR^M \to \RR^N$ is a (usually nonlinear) recovery algorithm. 
+
+We will look at three kinds of situations:
+
+*  Signals are truly sparse. A signal has up to $K  (K \ll N)$ non-zero values
+   only where $K$ is known in advance.
+   Measurement process is ideal and no noise is introduced during measurement.
+   We will look for guarantees which can ensure exact recovery of signal from
+   $M (K < M \ll N)$ linear measurements.
+*  Signals are not truly sparse but they have few $K (K \ll N)$ values
+   which dominate the signal.
+   Thus if we approximate the signal by these $K$ values,
+   then approximation error is not noticeable.
+   We again assume that there is no measurement noise being introduced.
+   When we recover the signal, it will in general not be exact recovery.
+   We expect the recovery error to be bounded (by approximation error). 
+   Also in special cases where the signal turns out
+   to be $K$-sparse, we expect the recovery algorithm to recover the signal exactly.
+   Such an algorithm with bounded recovery error will be called *robust*.
+*  Signals are not sparse. Also there is measurement noise being introduced.
+   We expect recovery algorithm to minimize error and thus perform *stable* recovery
+   in the presence of measurement noise.
 ````
