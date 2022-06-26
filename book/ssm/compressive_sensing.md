@@ -189,6 +189,24 @@ There are $M$ such sensing vectors in $\CC^N$
 comprising $\Phi$ corresponding to $M$ measurements in the measurement space $\CC^M$.
 ````
 
+```{index} Compressive sensing; embedding
+```
+````{prf:definition} Embedding of a signal
+:label: def:ssm:cs:embedding
+
+Given a signal $\bx \in \RR^N$,
+a vector $\by = \Phi \bx \in \RR^M$
+is called an *embedding* of $\bx$ in the measurement space $\RR^M$. 
+````
+
+```{index} Compressive sensing; explanation
+```
+````{prf:definition} Explanation of a measurement
+:label: def:explanation_signal
+
+A signal $\bx \in \RR^N$ is called an *explanation* of a measurement
+$\by \in \RR^M$ w.r.t. sensing matrix $\Phi$ if $\by = \Phi \bx$. 
+````
 In the following we present examples of real life problems
 which can be modeled as compressive sensing problems.
 
@@ -580,3 +598,426 @@ We will look at three kinds of situations:
    We expect recovery algorithm to minimize error and thus perform *stable* recovery
    in the presence of measurement noise.
 ````
+
+## Exact Recovery of Sparse Signals
+
+````{div}
+The null space of a matrix $\Phi$ is denoted as 
+
+$$
+\NullSpace(\Phi) = \{ \bv \in \RR^N :\Phi \bv = \bzero\}.
+$$
+The set of $K$-sparse signals is defined as 
+
+$$
+\Sigma_K = \{ \bx \in \RR^N :  \|\bx\|_0 \leq K\}.
+$$
+
+````{prf:example} K sparse signals
+:label: ex-ssm-k-sparse-signal-2
+
+Let $N=10$. 
+*  $\bx=(1,2, 1, -1, 2 , -3, 4, -2, 2, -2) \in \RR^{10}$ is not a sparse signal.
+*  $\bx=(0,0,0,0,1,0,0,-1,0,0)\in \RR^{10}$ is a 2-sparse signal. Its also a 4 sparse signal.
+````
+
+
+````{prf:lemma}
+:label: lem:difference_k_sparse_signals
+
+If $\ba$ and $\bb$ are two $K$ sparse signals then $\ba - \bb$ is a $2K$ sparse signal.
+````
+
+````{prf:proof}
+$(a - b)_i$ is non zero only if at least one of $a_i$ and $b_i$ is non-zero.
+Hence number of non-zero components of $\ba - \bb$ cannot exceed $2K$.
+Hence $\ba - \bb$ is a $2K$-sparse signal.
+````
+
+````{prf:example} Difference of K sparse signals
+Let N = 5. 
+
+*  Let $\ba = (0,1,-1,0, 0)$ and $\bb = (0,2,0,-1, 0)$.
+   Then $\ba - \bb = (0,-1,-1,1, 0) $ is a 3 sparse as well as 4 sparse signal.
+*  Let $\ba = (0,1,-1,0, 0)$ and $\bb = (0,2,-1,0, 0)$. 
+   Then $\ba - \bb = (0,-1,-2,0, 0) $ is a 2 sparse as well as 4 sparse signal.
+*  Let $\ba = (0,1,-1,0, 0)$ and $\bb = (0,0,0,1, -1)$.
+   Then $\ba - \bb = (0,1,-1,-1, 1) $ is a 4 sparse signal.
+````
+
+```{prf:definition} Unique embedding of a set
+:label: def-ssm-cs-unique-embeddings
+
+We say that a sensing matrix $\Phi$ uniquely embeds
+a set $C \subseteq \RR^N$ if for any $\ba, \bb \in C$, we have
+
+$$
+\Phi \bb \neq \Phi \bb.
+$$
+```
+
+
+````{prf:theorem} Unique embeddings of $K$ sparse vectors
+:label: lem:k_sparse_unique_representation_requirement
+
+A sensing matrix $\Phi$ uniquely embeds every
+$\bx \in \Sigma_K$ if and only if $\NullSpace(\Phi) \cap \Sigma_{2K} = \EmptySet$;
+i.e., $\NullSpace(\Phi)$ contains no vectors in $\Sigma_{2K}$.
+````  
+
+````{prf:proof}
+We first show that the difference of sparse signals is not in the nullspace.
+1. Let $\ba$ and $\bb$ be two $K$ sparse signals.
+1. Then $\Phi \ba$ and $\Phi \bb$ are corresponding measurements.
+1. Now if $\Phi$ provides unique embedding of all $K$ sparse signals,
+   then $\Phi \ba \neq \Phi \bb$.
+1. Thus  $\Phi (\ba - \bb) \neq \bzero$.
+1. Thus $\ba - \bb \notin \NullSpace(\Phi)$. 
+
+We show the converse by contradiction.
+
+1. Let $\bx \in \NullSpace(\Phi) \cap \Sigma_{2K}$.
+1. Thus $\Phi \bx = \bzero$ and $\|\bx\|_0 \leq 2K$.
+1. Then we can find $\by, \bz \in \Sigma_K$
+   such that $\bx = \bz - \by$.
+1. Thus there exists $\bm \in \RR^M$ such that $\bm = \Phi \bz = \Phi \by$.
+1. But then, $\Phi$ doesn't uniquely embed $\by, \bz \in \Sigma_K$. 
+````
+There are equivalent ways of characterizing this condition.
+In the following, we present a condition based on spark.
+
+### Spark
+We recall from {prf:ref}`def:spark`, that spark of a matrix $\Phi$ is defined as the
+minimum number of columns which are linearly dependent.
+
+
+````{prf:theorem} Unique explanations and spark
+:label: thm:k_sparse_explanation_spark_requirement
+
+For any measurement $\by \in \RR^M$, there exists at most one signal
+$\bx  \in \Sigma_K$ such that
+$\by = \Phi \bx$ if and only if $\spark(\Phi) > 2K$.
+````
+
+````{prf:proof}
+We need to show
+
+*  If for every measurement, there is only one $K$-sparse explanation, then $\spark(\Phi) > 2K$.
+*  If $\spark(\Phi) > 2K$ then for every measurement, there is only one $K$-sparse explanation.
+
+Assume that for every $\by \in \RR^M$
+there exists at most one signal $\bx \in \Sigma_K$ such that $\by = \Phi \bx$.
+
+1. Now assume that $\spark(\Phi) \leq 2K$.
+1. Thus there exists a set of at most $2K$ columns which are linearly dependent. 
+1. Thus there exists $\bv \in \Sigma_{2K}$ such that $ \Phi \bv = \bzero$.
+1. Thus $\bv \in \NullSpace (\Phi)$.  
+1. Thus $\Sigma_{2K} \cap \NullSpace (\Phi) \neq \EmptySet$. 
+1. Hence $\Phi$ doesn't uniquely embed each signal $\bx \in \Sigma_K$.
+   A contradiction.
+1. Hence $\spark(\Phi) > 2K$.
+
+Now suppose that $\spark(\Phi) > 2K$. 
+1. Assume that for some $y$ there exist two different $K$-sparse explanations
+   $\bx, \bx'$ such that $\by = \Phi \bx =\Phi \bx'$.  
+1. Then $\Phi (\bx  - \bx') = \bzero$.
+1. Thus $\bx - \bx' \in \NullSpace (\Phi)$ and $\bx - \bx' \in  \Sigma_{2K}$. 
+1. Hence, there exists a set of at most $2K$ columns in $\Phi$ which is
+   linearly dependent.
+1. Thus $\spark(\Phi) \leq 2K$. A contradiction. 
+1. Hence, for every $\by \in \RR^M$, there exists at most one $\bx \in \Sigma_K$.
+````
+
+Since $\spark(\Phi) \in [2, M+1]$ and we require that
+$\spark(\Phi) > 2K$ hence we require that $M \geq 2K$.
+ 
+## Recovery of Approximately Sparse Signals
+
+Spark is a useful criteria for characterization of sensing matrices for truly sparse signals.
+But this doesn't work well for *approximately* sparse signals.
+We need to have more restrictive criteria on $\Phi$
+for ensuring  recovery of approximately sparse signals from compressed measurements.
+
+In this context we will deal with two types of errors: 
+
+
+Approximation error
+* Let us approximate a signal $\bx$ using only $K$ coefficients. 
+* Let us call the approximation as $\widehat{\bx}$.
+* Thus $\be_a = (\bx - \widehat{\bx})$ is approximation error.
+
+Recovery error
+* Let $\Phi$ be a sensing matrix. 
+* Let $\Delta$ be a recovery algorithm. 
+* Then $\bx'= \Delta(\Phi \bx)$ is the recovered signal vector.
+* The error $\be_r = (\bx - \bx')$ is recovery error.
+
+Ideally, the recovery error should not be too large compared to the
+approximation error.
+
+In this following we will
+
+*  Formalize the notion of null space property (NSP) of a matrix $\Phi$.
+*  Describe a measure for performance of an arbitrary recovery algorithm $\Delta$.
+*  Establish the connection between NSP and performance guarantee for recovery algorithms.
+
+````{div}
+Suppose we approximate $\bx$ by a $K$-sparse signal
+$\widehat{\bx} \in \Sigma_K$, then the minimum error under $\ell_p$ norm is given by
+
+$$
+\sigma_K(\bx)_p = \min_{\widehat{\bx} \in \Sigma_K} \| \bx - \widehat{\bx}\|_p. 
+$$
+
+One specific $\widehat{\bx} \in \Sigma_K$ for which this minimum is achieved
+is the best $K$-term approximation
+({prf:ref}`lem:ssm:best_k_term_approximation`).
+
+In the following, we will need some additional notation.
+1. Let $ I = \{1,2,\dots, N\}$ be the set of indices for signal $\bx \in \RR^N$.
+1. Let $\Lambda \subset I$  be a subset of indices.
+1. Let $\Lambda^c = I \setminus \Lambda$.
+1. $\bx_{\Lambda}$ will denote a signal vector obtained by setting the entries of 
+   $\bx$ indexed by $\Lambda^c$ to zero.
+````
+
+````{prf:example}
+:label: ex-ssm-cs-signal-restriction-1
+
+1. Let N = 4.
+1. Then $I = \{1,2,3,4\}$.
+1. Let $\Lambda = \{1,3\}$. 
+1. Then $\Lambda^c = \{2, 4\}$. 
+1. Now let $\bx = (-1,1,2,-4)$.
+1. Then $\bx_{\Lambda} = (-1, 0, 2, 0)$.
+````
+
+$\Phi_{\Lambda}$ will denote a $M\times N$ matrix obtained by setting the columns of $\Phi$
+indexed by $\Lambda^c$ to zero.
+
+````{prf:example}
+:label: ex-ssm-cs-matrix-restriction-1
+
+1. Let N = 4.
+1. Then $I = \{1,2,3,4\}$.
+1. Let $\Lambda = \{1,3\}$. 
+1. Then $\Lambda^c = \{2, 4\}$. 
+1. Now let $\bx = (-1,1,2,-4)$. 
+1. Then $\bx_{\Lambda} = (-1, 0, 2, -4)$.
+
+1. Now let 
+   
+   $$
+   \Phi = \begin{pmatrix}
+        1 & 0 & -1 & 1\\
+        -1 & -2 & 2 & 3
+      \end{pmatrix}.
+   $$
+
+1. Then 
+    
+    $$
+    \Phi_{\Lambda} = \begin{pmatrix}
+        1 & 0 & -1 & 0\\
+        -1 & 0 & 2 & 0
+      \end{pmatrix}.
+    $$
+````
+
+### Null Space Property
+
+```{index} Null space property
+```
+````{prf:definition} Null space property
+:label: def:null_space_property
+
+A matrix $\Phi$ satisfies the *null space property (NSP)* of order $K$
+if there exists a constant $C > 0$ such that,
+
+
+$$
+\| \bh_{\Lambda}\|_2 \leq C \frac{\| \bh_{{\Lambda}^c}\|_1 }{\sqrt{K}}
+$$
+holds for every $\bh \in \NullSpace (\Phi)$ and for every
+$\Lambda$ such that $|\Lambda| \leq K$.
+````
+
+
+*  Let $\bh$ be $K$ sparse. Thus choosing the indices on which $\bh$ is non-zero, I can
+   construct a $\Lambda$ such that $|\Lambda| \leq K$ and $\bh_{{\Lambda}^c} = 0$. 
+   Thus $\| \bh_{{\Lambda}^c}\|_1$ = 0. Hence above condition is not satisfied. Thus
+   such a vector $\bh$ should not belong to $\NullSpace(\Phi)$ if $\Phi$ satisfies NSP.
+*  Essentially vectors in $\NullSpace (\Phi)$ shouldn't be concentrated in a small subset of indices.
+*  If $\Phi$ satisfies NSP then the only $K$-sparse vector in $\NullSpace(\Phi)$ is $\bh = \bzero$.
+
+
+### Measuring the Performance of a Recovery Algorithm
+
+Let $\Delta : \RR^M \to \RR^N$ represent a recovery method to
+recover approximately sparse $\bx$ from $\by$.
+
+````{div}
+$\ell_2$ recovery error is given by 
+
+$$
+\| \Delta (\Phi \bx) - \bx \|_2.
+$$
+
+The $\ell_1$ error for $K$-term approximation is given by $\sigma_K(\bx)_1$.
+
+We will be interested in guarantees of the form
+
+```{math}
+:label: eq:nspguarantee
+
+\| \Delta (\Phi \bx) - \bx \|_2 \leq C \frac{\sigma_K (\bx)_1}{\sqrt{K}}.
+```
+Why, this recovery guarantee formulation?
+
+*  Exact recovery of K-sparse signals. $\sigma_K (\bx)_1 = 0$ if $\bx \in \Sigma_K$.
+*  Robust recovery of non-sparse signals
+*  Recovery dependent on how well the signals are approximated by $K$-sparse vectors.
+*  Such guarantees are known as *instance optimal* guarantees.
+*  Also known as *uniform* guarantees.
+
+
+Why the specific choice of norms? 
+
+*  Different choices of $\ell_p$ norms lead to different guarantees.
+*  $\ell_2$ norm on the LHS is a typical least squares error.
+*  $\ell_2$ norm on the RHS will require prohibitively large number of measurements.
+*  $\ell_1$ norm on the RHS helps us keep the number of measurements less.
+
+If an algorithm $\Delta$ provides instance optimal guarantees as defined above, what
+kind of requirements does it place on the sensing matrix $\Phi$?
+
+We show that NSP of order $2K$ is a necessary condition for providing uniform guarantees.
+````
+
+### NSP and Instance Optimal Guarantees
+
+````{prf:theorem} NSP and instance optimal guarantees
+:label: thm:nsp_guarantee_requirement
+
+Let $\Phi : \RR^N \to \RR^M$ denote a sensing matrix 
+and $\Delta : \RR^M \to \RR^N$ denote an arbitrary recovery algorithm.
+If the pair $(\Phi, \Delta)$ satisfies instance optimal guarantee
+{eq}`eq:nspguarantee`,
+then  $\Phi$ satisfies NSP of the order $2K$.
+````
+
+````{prf:proof}
+We are given that
+
+*  $(\Phi, \Delta)$ form an encoder-decoder pair.
+*  Together, they satisfy instance optimal guarantee {eq}`eq:nspguarantee`.
+*  Thus they are able to recover all sparse signals exactly.
+*  For non-sparse signals, they are able to recover their $K$-sparse approximation with bounded recovery error.
+
+
+We need to show that if $\bh \in \NullSpace(\Phi)$, then $\bh$ satisfies
+
+$$
+\| \bh_{\Lambda}\|_2 \leq C \frac{\| \bh_{{\Lambda}^c}\|_1 }{\sqrt{2K}}
+$$
+where $\Lambda$ corresponds to $2K$ largest magnitude entries in $\bh$.
+Note that we have used $2K$ in this expression, since we need to show that 
+$\Phi$ satisfies NSP of order $2K$.
+
+1. Let $\bh \in \NullSpace(\Phi)$.
+1. Let $\Lambda$ be the indices corresponding to the $2K$ largest entries of $\bh$.
+1. Then 
+   
+   $$
+    \bh = \bh_{\Lambda}  + \bh_{\Lambda^c}.
+   $$
+1. Split $\Lambda$ into $\Lambda_0$ and $\Lambda_1$
+   such that $|\Lambda_0| = |\Lambda_1| = K$.
+1. We have
+
+   $$
+   \bh_{\Lambda} = \bh_{\Lambda_0} + \bh_{\Lambda_1}.
+   $$
+1. Let
+   
+   $$
+   \bx = \bh_{\Lambda_0} + \bh_{\Lambda^c}.
+   $$
+
+1. Let 
+   
+   $$
+   \bx' = - \bh_{\Lambda_1}.
+   $$
+
+1. Then 
+   
+   $$
+   \bh =  \bx - \bx'.
+   $$
+1. By assumption $\bh \in \NullSpace(\Phi)$.
+1. Thus
+
+   $$
+   \Phi \bh = \Phi(\bx - \bx') = \bzero \implies \Phi \bx = \Phi \bx'.
+   $$
+1. But since $\bx' \in \Sigma_K$ (recall that $\Lambda_1$ indexes only $K$ entries) 
+   and  $\Delta$ is able to recover all $K$-sparse signals exactly, hence
+   
+   $$
+   \bx' = \Delta (\Phi \bx').
+   $$
+1. Thus 
+   
+   $$
+   \Delta (\Phi \bx) = \Delta (\Phi  \bx') = \bx';
+   $$
+   i.e., the recovery algorithm $\Delta$ recovers $\bx'$ for
+   the signal $\bx$.
+1. Certainly $\bx$ is not $K$-sparse since $\Delta$ recovers every
+   $K$-sparse signal uniquely.
+1. Hence $\Lambda^c$ must be nonempty.
+1. Finally we also have
+   
+   $$
+   \| \bh_{\Lambda} \|_2 \leq \| \bh \|_2  = \| \bx  - \bx'\|_2 
+   = \| \bx - \Delta (\Phi \bx)\| _2
+   $$
+   since $\bh$ contains some additional non-zero entries.
+1. But as per instance optimal recovery guarantee {eq}`eq:nspguarantee`
+   for $(\Phi, \Delta)$ pair,  we have
+   
+   $$
+    \| \Delta (\Phi \bx) - \bx \|_2 \leq C \frac{\sigma_K (\bx)_1}{\sqrt{K}}.
+   $$
+1. Thus
+   
+   $$
+    \| \bh_{\Lambda} \|_2 \leq C \frac{\sigma_K (\bx)_1}{\sqrt{K}}.
+   $$
+1. But 
+   
+   $$
+   \sigma_K (\bx)_1 = \min_{\widehat{x} \in \Sigma_K} \|\bx - \widehat{\bx}\|_1. 
+   $$
+1. Recall that $\bx =\bh_{\Lambda_0} + \bh_{\Lambda^c}$
+   where $\Lambda_0$ indexes $K$ entries of $\bh$
+   which are (magnitude wise) larger than all entries indexed by $\Lambda^c$.
+1. Hence the best $\ell_1$-norm $K$ term
+   approximation of $\bx$ is given by  $\bh_{\Lambda_0}$. 
+1. Hence
+
+   $$
+   \sigma_K (\bx)_1  = \|  \bh_{\Lambda^c} \|_1. 
+   $$
+1. Thus we finally have
+   
+   $$
+   \| \bh_{\Lambda} \|_2 \leq C \frac{\|  \bh_{\Lambda^c} \|_1}{\sqrt{K}} 
+   = \sqrt{2}C \frac{\|  \bh_{\Lambda^c} \|_1}{\sqrt{2K}}  
+   \quad \Forall \bh \in \NullSpace(\Phi).
+   $$
+1. Thus $\Phi$ satisfies the NSP of order $2K$.
+````
+It turns out that NSP of order $2K$ is also sufficient to establish a guarantee of the form
+above for a practical recovery algorithm.
