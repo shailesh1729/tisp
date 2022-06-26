@@ -417,3 +417,123 @@ This now becomes the compressive sensing problem. The natural questions are
 These problems are addressed in following chapters as we discuss
 sensing matrices and signal recovery algorithms.
 ````
+
+## Piecewise Cubic Polynomial Signal
+
+````{prf:example} Piecewise cubic polynomial signal
+:label: ex-ssm-cs-piecewise-cubic-polynomial-signal
+
+This example was discussed in {cite}`candRomb2004practical`.
+Our signal of interest is a piecewise cubic polynomial signal
+as shown below.
+```{figure} images/piecewise_polynomial/signal.png
+---
+name: fig:ssm:piecewise_polynomial:signal
+---
+A piecewise cubic polynomials signal
+```
+
+It has a compressible representation in a wavelet basis.
+
+```{figure} images/piecewise_polynomial/representation.png
+---
+name: fig:ssm:piecewise_polynomial:representation
+---
+Compressible representation of signal in wavelet basis
+```
+
+The representation is described by the equation.
+
+$$
+\bx = \Psi \alpha
+$$
+The chosen basis is a Daubechies wavelet basis $\Psi$.
+```{figure} images/piecewise_polynomial/dictionary.png
+---
+name: fig:ssm:piecewise_polynomial:dictionary
+---
+Daubechies-8 wavelet basis
+```
+In this example $N = 2048$. We have $\bx \in \RR^N$.
+$\Psi$ is a complete dictionary of size $N \times N$.
+Thus we have $D = N$ and $\alpha \in \RR^N$.
+
+We can sort the wavelet coefficients by magnitude and plot
+them in descending order to visualize how sparse the 
+representation is.
+```{figure} images/piecewise_polynomial/representation_sorted.png
+---
+name: fig:ssm:piecewise_polynomial:representation_sorted
+---
+Wavelet coefficients sorted by magnitude
+```
+
+Before making compressive measurements, we need to decide
+how many compressive measurements will be sufficient?
+
+Closely examining the coefficients in $\alpha$ we can note that
+$\max(\alpha_i) = 78.0546$.
+Further if we put different thresholds
+over magnitudes of entries in $\alpha$ we can find the number
+of coefficients higher than different thresholds as listed below.
+
+```{div}
+Entries in wavelet representation of piecewise cubic polynomial
+signal higher than a threshold
+
+| Threshold | Entries higher than threshold|
+| --- | --- |
+| 1 | 129|
+| 1E-1 | 173|
+| 1E-2 | 186|
+| 1E-4 | 197|
+| 1E-8 | 199|
+| 1E-12 | 200|
+```
+A choice of $M = 600$ looks quite reasonable given the decay
+of entries in $\alpha$. Later we shall provide theoretical
+bounds for choice of $M$.
+
+A Gaussian random sensing matrix $\Phi$
+is used to generate the compressed measurements.
+```{figure} images/piecewise_polynomial/sensing_matrix.png
+---
+name: fig:ssm:piecewise_polynomial:sensing_matrix
+---
+Gaussian sensing matrix $\Phi$
+```
+The measurement process is described by the equation
+
+$$
+\by = \Phi \bx + \be = \Phi \Psi \alpha + \be
+$$
+with $\bx \in \RR^N$, $\Phi \in \RR^{M \times N}$,
+and measurement vector $\by \in \RR^M$.
+For this example we chose the measurement noise to be $\be = \bzero$. 
+
+The compressed measurements are shown below.
+```{figure} images/piecewise_polynomial/measurements.png
+---
+name: fig:ssm:piecewise_polynomial:measurements
+---
+Measurement vector $\by = \Phi \bx + \be$
+```
+
+
+Finally the product of $\Phi$ and $\Psi$ given by $\Phi \Psi$ 
+will be used for actual recovery of sparse representation
+$\alpha$ from the measurements $\by$.
+```{figure} images/piecewise_polynomial/recovery_matrix.png
+---
+name: fig:ssm:piecewise_polynomial:recovery_matrix
+---
+Recovery matrix $\Phi \Psi$
+```
+
+The sparse signal recovery problem is denoted as
+
+$$
+\widehat{\alpha} = \text{recovery}(\Phi \Psi, \by, K).
+$$
+where $\widehat{\alpha}$ is a $K$-sparse approximation of $\alpha$.
+````
