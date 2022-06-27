@@ -4,6 +4,51 @@ In this section, we will list some important
 vector spaces which occur frequently in analysis
 and optimization.
 
+## The Vector Space of Symmetric Matrices
+
+Recall from {prf:ref}`def-la-symmetric-matrix`
+that the set of real symmetric
+matrices is given by
+
+$$
+\SS^n = \{\bX \in \RR^{n \times n} | \bX = \bX^T\}.
+$$
+
+````{prf:theorem} The vector space of symmetric matrices
+:label: res-la-symmetric-matrix-space
+
+The set $\SS^n$ is a vector space with dimension $\frac{n(n+1)}{2}$.
+````
+
+```{prf:proof}
+It suffices to show that any linear combination of symmetric
+matrices is also symmetric. The dimension of this vector 
+space comes from the number of entries in a symmetric matrix
+which can be independently chosen.
+```
+
+```{prf:definition} Matrix inner product
+:label: def-la-matrix-inner-product
+
+An inner-product on the vector space of $n \times n$ real matrices 
+can be defined as
+
+$$
+\langle \bA, \bB \rangle \triangleq \sum_i \sum_j A_{i,j} B_{i, j} 
+ = \Trace (\bA^T \bB) = \Trace (\bB^T \bA).
+$$
+
+This is known as the *Frobenius inner product*.
+```
+
+```{prf:remark}
+:label: res-la-sn-as-ip-space
+
+Equipped with this inner product as 
+defined in {prf:ref}`def-la-matrix-inner-product`, $\SS^n$ is a
+finite dimensional real inner product space.
+```
+
 ## The Vector Space of Real Valued Functions
 
 ```{prf:definition} The vector space of (total) real valued functions

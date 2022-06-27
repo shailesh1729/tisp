@@ -1,62 +1,8 @@
 (sec:la:symmetric-matrices)=
-# Symmetric Matrices
-
-````{prf:definition} Symmetric matrix
-:label: def-la-symmetric-matrix
-
-A *symmetric matrix* is a matrix $\bX \in \RR^{n \times n}$
-which satisfies $\bX = \bX^T$.
-
-We define the *set of symmetric $n\times n$ matrices* as
-
-$$
-    \SS^n = \{\bX \in \RR^{n \times n} | \bX = \bX^T\}.
-$$
-````
-
-## The Vector Space of Symmetric Matrices
-
-````{prf:theorem} The vector space of symmetric matrices
-:label: res-la-symmetric-matrix-space
-
-The set $\SS^n$ is a vector space with dimension $\frac{n(n+1)}{2}$.
-````
-
-```{prf:proof}
-It suffices to show that any linear combination of symmetric
-matrices is also symmetric. The dimension of this vector 
-space comes from the number of entries in a symmetric matrix
-which can be independently chosen.
-```
-
-```{prf:definition} Matrix inner product
-:label: def-la-matrix-inner-product
-
-An inner-product on the vector space of $n \times n$ real matrices 
-can be defined as
-
-$$
-\langle \bA, \bB \rangle \triangleq \sum_i \sum_j A_{i,j} B_{i, j} 
- = \Trace (\bA^T \bB) = \Trace (\bB^T \bA).
-$$
-
-This is known as the *Frobenius inner product*.
-```
-
-```{prf:remark}
-:label: res-la-sn-as-ip-space
-
-Equipped with this inner product as 
-defined in {prf:ref}`def-la-matrix-inner-product`, $\SS^n$ is a
-finite dimensional real inner product space.
-```
-
-
-## Eigenvalue Decomposition
+# Eigenvalue Decomposition
 
 In this subsection, we discuss the eigenvalue decomposition of
 real symmetric matrices.
-
 
 ## Semidefinite, Definite and Indefinite Matrices
 

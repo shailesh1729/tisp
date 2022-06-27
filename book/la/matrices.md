@@ -263,6 +263,23 @@ $$
 indicating $m$ rows with $\ba_i$ being column vectors whose transposes form the 
 rows of $\bA$.
 
+
+## Symmetric Matrices
+
+````{prf:definition} Symmetric matrix
+:label: def-la-symmetric-matrix
+
+A *symmetric matrix* is a matrix $\bX \in \FF^{n \times n}$
+which satisfies $\bX = \bX^T$.
+
+We define the *set of symmetric $n\times n$ matrices* as
+
+$$
+    \SS^n = \{\bX \in \RR^{n \times n} | \bX = \bX^T\}.
+$$
+````
+
+
 ## Dot Products
 
 The inner product or dot product of two column / row vectors
