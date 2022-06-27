@@ -3,7 +3,8 @@
 
 This section deals with the concepts of vector spaces
 associated with matrices, span, rank, invertible matrices,
-similar matrices, gram matrices and pseudo inverses.
+similar matrices, gram matrices, pseudo inverses,
+traces and determinants.
 
 ## Spaces Associated with a Matrix
 
@@ -292,7 +293,7 @@ Thus $\bB^T$ is inverse of $\bA^T$ and $\bA^T$ is invertible.
 ````{prf:lemma} Invertibility of Hermitian transpose
 :label: lem:mat:invertible_conjugate_transpose
 
-If $A$ is invertible than $A^H$ is invertible.
+If $\bA$ is invertible than $\bA^H$ is invertible.
 ````
 ````{prf:proof}
 Assume $\bA$ is invertible, then there exists a matrix $\bB$ such that
@@ -731,7 +732,7 @@ $$
 We note that
 
 $$
-F = D^{\dag} D = \Diag(f_1, f_2, \dots f_n)
+\bF = \bD^{\dag} \bD = \Diag(f_1, f_2, \dots f_n)
 $$
 is an $n \times n$ matrix where
 
@@ -742,7 +743,7 @@ f_i = \left\{
         0 & \mbox{if $d_i = 0$};\\
         0 & \mbox{if $i > p$}.
     \end{array}
-  \right.
+  \right.   
 $$
 
 $\bG = \bD \bD^{\dag} = \Diag(g_1, g_2, \dots g_n)$ is an $m \times m$ matrix where
@@ -767,7 +768,7 @@ $$
 $$
 
 $\bF = \bD^{\dag} \bD$ and 
-$\bG = \bD \bD^{\dag}$ are both diagonal hence Hermitian matrices.
+$\bG = \bD \bD^{\dag}$ are both real diagonal hence Hermitian matrices.
 ````
 
 
@@ -853,5 +854,263 @@ $$
 = \bA^{\dag} \bA.
 $$
 ````
+## Trace
+````{prf:definition} Trace of a square matrix
+:label: def:mat:trace
+
+The *trace* of a square matrix is defined as the sum of the entries on its main diagonal.
+Let $\bA$ be an $n\times n$ matrix, then
+
+$$
+\Trace (\bA) = \sum_{i=1}^n a_{ii}
+$$
+where $\Trace(\bA)$ denotes the trace of $\bA$.
+````
+
+````{prf:lemma}
+:label: res-mat-trace-transpose
+
+The trace of a square matrix and its transpose are equal.
+
+$$
+\Trace(\bA) = \Trace(\bA^T).
+$$
+````
+
+````{prf:lemma}
+:label: res-mat-trace-mat-sum
+
+Trace of sum of two square matrices is equal to the sum of their traces.
+
+$$
+\Trace(\bA + \bB) = \Trace(\bA) + \Trace(\bB).
+$$
+````
+````{prf:lemma} Trace product rule
+:label: lem:mat:trace_product_rule
+
+Let $\bA$ be an $m \times n$ matrix and $\bB$ be an $n \times m$ matrix.
+Then
+
+$$
+\Trace(\bA \bB) = \Trace(\bB \bA).
+$$
+````
+````{prf:proof}
+Let $\bA \bB = \bC = [c_{ij}]$. Then
+
+$$
+c_{ij} = \sum_{k=1}^n a_{i k} b_{k j}.
+$$
+Thus
+
+$$
+c_{ii} = \sum_{k=1}^n a_{i k} b_{k i}.
+$$
+Now 
+
+$$
+\Trace(\bC)  = \sum_{i=1}^m c_{ii} 
+= \sum_{i=1}^m \sum_{k=1}^n a_{i k} b_{k i} 
+= \sum_{k=1}^n \sum_{i=1}^m a_{i k} b_{k i}
+= \sum_{k=1}^n \sum_{i=1}^m  b_{k i} a_{i k}.
+$$
+Let $\bB \bA = \bD = [d_{ij}]$. Then
+
+$$
+d_{ij} = \sum_{k=1}^m b_{i k} a_{k j}.
+$$
+Thus
+
+$$
+d_{ii} = \sum_{k=1}^m b_{i k} a_{k i}.
+$$
+Hence
+
+$$
+\Trace(D) =  \sum_{i=1}^n d_{ii} 
+=  \sum_{i=1}^n \sum_{k=1}^m b_{i k} a_{k i} 
+= \sum_{i=1}^m \sum_{k=1}^n b_{k i} a_{i k}.
+$$
+This completes the proof.
+````
+
+````{prf:lemma} Trace triple product rule
+:label: lem:mat:trace_triple_product_rule
+
+Let $\bA \in \FF^{m \times n}$, 
+$\bB \in \FF^{n \times p}$, $\bC \in \FF^{p \times m}$ be three matrices.
+Then
+
+$$
+\Trace(\bA \bB \bC) = \Trace(\bB \bC \bA) = \Trace(\bC \bA \bB).
+$$
+````
+````{prf:proof}
+Let $\bA \bB = \bD$. Then
+
+$$
+\Trace(\bA \bB \bC) = \Trace( \bD \bC) = \Trace( \bC \bD) = \Trace(\bC \bA \bB). 
+$$
+Similarly the other result can be proved.
+````
+````{prf:lemma}
+:label: lem:mat:trace_similar_matrices
+
+Trace of similar matrices is equal.
+````
+````{prf:proof}
+Let $\bB$ be similar to $\bA$.
+Thus
+
+$$
+\bB  = \bC^{-1} \bA \bC 
+$$
+for some invertible matrix $\bC$.
+Then
+
+$$
+\Trace(\bB) = \Trace(\bC^{-1} \bA \bC ) 
+= \Trace (\bC \bC^{-1} \bA) = \Trace(\bA).
+$$
+We used {prf:ref}`lem:mat:trace_product_rule`.
+````
+## Determinants
+Following are some results on determinant of a square matrix $\bA$.
+
+````{prf:lemma} Determinant and scalar multiplication
+:label: lem:mat:determinant_scalar_multiplication_rule
+
+$$
+\det(\alpha \bA) = \alpha^n \det(\bA). 
+$$
+````
+
+````{prf:lemma}
+:label: lem:mat:determinant_transpose_rule
+
+Determinant of a square matrix and its transpose are equal.
+
+$$
+\det(\bA)  = \det(\bA^T).
+$$
+````
+
+````{prf:lemma}
+:label: lem:mat:determinant_conjugate_transpose_rule
+
+Let $\bA$ be a complex square matrix. Then
+
+$$
+\det(\bA^H)  = \overline{\det(\bA)}.
+$$
+````
+````{prf:proof}
+We proceed as follows:
+
+$$
+\det(\bA^H) 
+= \det(\overline{\bA}^T) 
+= \det(\overline{\bA}) = \overline{\det(\bA)}.
+$$
+````
 
 
+````{prf:lemma} Determinant product rule
+:label: lem:mat:determinant_product_rule
+
+Let $\bA$ and $\bB$ be two $n\times n$ matrices. Then
+
+$$
+\det (\bA \bB) = \det(\bA) \det(\bB).
+$$
+````
+
+````{prf:lemma} Determinant of inverse
+:label: lem:mat:determinant_inverse_rule
+
+Let $\bA$ be an invertible matrix. Then
+
+$$
+\det(\bA^{-1}) = \frac{1}{\det(\bA)}.
+$$
+````
+
+````{prf:lemma} Determinant power rule
+:label: lem:mat:determinant_power_rule
+
+$$
+\det(\bA^{p}) = \left(\det(\bA) \right)^p.
+$$
+````
+
+````{prf:lemma} Determinant of triangular matrices
+:label: lem:determinant_triangular_matrix_rule
+
+Determinant of a triangular matrix is the product of its diagonal entries;
+i.e., if $\bA$ is upper or lower triangular matrix then
+
+$$
+\det(\bA)  = \prod_{i=1}^n a_{i i}.
+$$
+````
+
+
+````{prf:lemma} Determinant of diagonal matrices
+:label: lem:determinant_diagonal_matrix_rule
+
+Determinant of a diagonal matrix is the product of its diagonal entries;
+ i.e., if $\bA$ is a diagonal matrix then
+
+$$
+\det(\bA)  = \prod_{i=1}^n a_{i i}.
+$$
+````
+
+````{prf:lemma} Determinants of similar matrices
+:label: lem:determinant_simlar_matrix_rule
+
+Determinant of similar matrices is equal.
+````
+````{prf:proof}
+Let $\bB$ be similar to $\bA$.
+Thus
+
+$$
+\bB  = \bC^{-1} \bA \bC 
+$$
+for some invertible matrix $\bC$. Hence
+
+$$
+\det(\bB) = \det(\bC^{-1} \bA \bC ) = \det (\bC^{-1}) \det (\bA) \det(\bC).
+$$
+Now 
+
+$$
+\det (\bC^{-1}) \det (\bA) \det(\bC) 
+= \frac{1}{\det(\bC)} \det (\bA) \det(\bC) = \det(\bA).
+$$
+We used {prf:ref}`lem:mat:determinant_product_rule` and {prf:ref}`lem:mat:determinant_inverse_rule`.
+````
+
+
+
+````{prf:lemma}
+:label: lem:mat:determinant_inner_product_rule
+
+Let $\bu$ and $\bv$ be vectors in $\FF^n$. Then
+
+$$
+\det(\bI + \bu \bv^T) = 1  + \bu^T \bv.
+$$
+````
+
+````{prf:lemma} Determinant of perturbation of an identity matrix
+:label: lem:mat:determinant_perturbation_rule
+
+Let $\bA$ be a square matrix and let $\epsilon \approx 0$. Then 
+
+$$
+\det(\bI + \epsilon \bA ) \approx 1 + \epsilon \Trace(\bA).
+$$
+````
