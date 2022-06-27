@@ -761,7 +761,7 @@ stationary points.
 ## Second Order Conditions
 
 Recall the discussion on semidefinite and definite matrices
-in {ref}`sec:la:symmetric-matrices`.
+in {ref}`sec:la:evd`.
 
 For a twice continuously differentiable function $f$, the Hessian
 is symmetric. The semidefiniteness or definiteness of the Hessian
