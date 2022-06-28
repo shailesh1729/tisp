@@ -1,3 +1,4 @@
+(ch:cvx:sets:functions)=
 # Convex Sets and Functions
 
 We will primarily be considered with functions 
