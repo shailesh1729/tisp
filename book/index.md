@@ -105,15 +105,3 @@ and KKT conditions for the same, Lagrange multipliers,
 constraint qualifications, Lagrangian duality,
 conjugate duality, Fenchel duality theorem,
 linear programming, quadratic programming.
-
-
-## What is New
-
-* {ref}`sec:ms:metric-topology`
-* Linear Algebra and Analysis
-  * {ref}`sec:la:normed-spaces`
-  * {ref}`sec:la:affine_sets`
-* Convex Sets and Functions
-  * {ref}`sec:cvxf:convex-functions`
-  * {ref}`sec:cvx:relint`
-  * {ref}`sec:cvxf:subgradients`
