@@ -1,11 +1,11 @@
-# Optimization for Signal Processing Note Book
+# Topics in Signal Processing
 
 This is a collection of notes describing all the
 necessary mathematics needed for building 
 numerical optimization based algorithms for signal
 processing.
 
-The notes are hosted at [convex.indigits.com](https://convex.indigits.com).
+The notes are hosted at [tisp.indigits.com](https://tisp.indigits.com).
 
 The topics covered include:
 

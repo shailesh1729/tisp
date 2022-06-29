@@ -1,4 +1,4 @@
-# Overview
+# Topics in Signal Processing
 
 These notes aim to provide a solid mathematical background for
 a deeper understanding of signal processing problems.
