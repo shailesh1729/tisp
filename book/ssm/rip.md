@@ -1752,352 +1752,418 @@ $$
    {eq}`eq:proj:rip_orthogonal_projection`.
 ````
 
-
-
- 
-
-
-## RIP for higher orders
-
-
+## RIP for Higher Orders
 
 If $\Phi$ satisfies RIP of order $K$, does it satisfy RIP of some other order $K' > K$? 
 There are some results available to answer this question.
 
 ````{prf:theorem}
 :label: lem:rip:higher_order_rip_constant_bound
-Let $c$ and $k$ be integers and let $\Phi$ satisfy RIP of order $2k$. $\Phi$ 
-satisfies RIP of order $ck$ with a restricted isometry constant 
+
+Let $c$ and $k$ be integers and let $\Phi$ satisfy RIP of order $2 k$.
+$\Phi$ satisfies RIP of order $c k$ with a restricted isometry constant 
+
 $$
-    \delta_{ck} \leq c \delta_{2 k}
+\delta_{ck} \leq c \delta_{2 k}
 $$
 if $c \delta_{2 k} < 1$. 
 ````
-Note that this is only a sufficient condition. Thus if $c \delta_{2 k} \geq 1$ we are not claiming
+Note that this is only a sufficient condition.
+Thus if $c \delta_{2 k} \geq 1$ we are not claiming
 whether $\Phi$ satisfies RIP of order $ck$ or not.
+
 ````{prf:proof}
-For $c=1$, $\delta_k \leq  \delta_{2 k}$. For $c=2$, $\delta_{2 k} \leq 2 \delta_{2 k}$. These two cases
-are trivial.  We now consider the case for $c \geq 3$.
+For $c=1$, $\delta_k \leq  \delta_{2 k}$.
+For $c=2$, $\delta_{2 k} \leq 2 \delta_{2 k}$.
+These two cases are trivial.
+We now consider the case for $c \geq 3$.
 
-Let $S$ be an arbitrary index set of size $ck$. Let
-$$
-    \Delta = \Phi_S^H \Phi_S - I.
-$$
+1. Let $S$ be an arbitrary index set of size $c k$. Let
+   
+   $$
+    \Delta = \Phi_S^H \Phi_S - \bI.
+   $$
+1. From {prf:ref}`lem:proj:rip_gram_matrix_eigen_value_sufficient_condition`,
+   a sufficient condition for $\Phi$ to satisfy RIP of order $c k$ is that 
 
-From {prf:ref}`lem:proj:rip_gram_matrix_eigen_value_sufficient_condition`, a sufficient condition
-for $\Phi$ to satisfy RIP of order $ck$ is that 
-$$
-    \| \Delta \|_2 < 1
-$$
-for all index sets $S$ with $|S|= ck$.
+    $$
+        \| \Delta \|_2 < 1
+    $$
+    for all index sets $S$ with $|S|= c k$.
+1. Thus if we can show that
 
-Thus if we can show that
-$$
-    \| \Delta \|_2 \leq c \delta_{2 k} 
-$$
-we would have shown that $\Phi$ satisfies RIP of order $ck$.
+    $$
+        \| \Delta \|_2 \leq c \delta_{2 k} 
+    $$
+    we would have shown that $\Phi$ satisfies RIP of order $c k$.
+1. We note that $\Phi_S$ is of size $M \times c k$.
+1. Thus $\Delta$ is of size $c k \times c k$.
+1. We partition $\Delta$ into a block matrix of size $c \times c$ 
 
-We note that $\Phi_S$ is of size $M \times ck$ thus $\Delta$ is of size $ck \times ck$.
-We partition $\Delta$ into  a block matrix of size $c \times c$ 
-$$
-    \Delta = \begin{bmatrix}
-    \Delta_{11} & \Delta_{12} & \dots & \Delta_{1 c}\\
-    \Delta_{21} & \Delta_{22} & \dots & \Delta_{2 c}\\
-    \vdots & \vdots & \ddots & \vdots\\
-    \Delta_{c 1} & \Delta_{c 2} & \dots & \Delta_{c c}\\
-    \end{bmatrix}
-$$
-where each entry $\Delta_{i j}$ is a square matrix of size $k \times k$.
+    $$
+        \Delta = \begin{bmatrix}
+        \Delta_{11} & \Delta_{12} & \dots & \Delta_{1 c}\\
+        \Delta_{21} & \Delta_{22} & \dots & \Delta_{2 c}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        \Delta_{c 1} & \Delta_{c 2} & \dots & \Delta_{c c}\\
+        \end{bmatrix}
+    $$
+   where each entry $\Delta_{i j}$ is a square matrix of size $k \times k$.
+1. Each diagonal matrix $\Delta_{i i}$ corresponds to some
+   $\Phi_T^H \Phi_T - \bI$ where $|T| = k$. 
+1. Thus we have (see {prf:ref}`lem:proj:rip:submatrix_eigenvalue_sum_k`)
+    
+    $$
+        \| \Delta_{i i} \|_2 \leq \delta_k.
+    $$
+1. The off-diagonal matrices $\Delta_{i j}$ are
 
-Each diagonal matrix $\Delta_{ii}$ corresponds to some $\Phi_T^H \Phi_T - I$ where $|T| = k$. 
-Thus we have (see {prf:ref}`lem:proj:rip:submatrix_eigenvalue_sum_k`)
-$$
-    \| \Delta_{ii} \|_2 \leq \delta_k.
-$$
-The off-diagonal matrices $\Delta_{i j}$ are
-$$
-    \Delta_{i j} = \Phi_P^H \Phi_Q
-$$
-where $P$ and $Q$ are disjoint index sets with $|P| = |Q| = k$ with $ | P \cup Q | = 2 k$. Thus 
-from the approximate orthogonality condition ({prf:ref}`lem:proj:rip:approximate_orthogonality` ) we have
-$$
-    \| \Delta_{i j} \|_2 \leq \delta_{2 k}.
-$$
-Finally we apply Gershgorin circle theorem for block matrices (see {prf:ref}`col:block_gershgorin_disc_theorem_psd_matrix`). This gives
-us
-$$
-     | \| \Delta \|_2  - \|\Delta_{ii}\|_2| \leq \sum_{j\neq i} \|\Delta_{ij} \| \text{ for some } i \in \{1,2, \dots, n \}.
-$$
-Thus we have
-````{math}
-\begin{aligned}
-&  | \| \Delta \|_2  - \delta_k | \leq \sum_{j\neq i} \delta_{2 k} \\
- \implies & | \| \Delta \|_2  - \delta_k | \leq  (c - 1) \delta_{2 k} \\
- \implies &  \| \Delta \|_2 \leq \delta_k +  (c - 1) \delta_{2 k} \\
- \implies &  \| \Delta \|_2 \leq \delta_{2 k} +  (c - 1) \delta_{2 k} \\
- \implies &  \| \Delta \|_2 \leq  c \delta_{2 k}.
-\end{aligned}
+    $$
+        \Delta_{i j} = \Phi_P^H \Phi_Q
+    $$
+   where $P$ and $Q$ are disjoint index sets with $|P| = |Q| = k$
+   with $ | P \cup Q | = 2 k$.
+1. Thus  from the approximate orthogonality condition
+   ({prf:ref}`lem:proj:rip:approximate_orthogonality` )
+   we have
+
+    $$
+        \| \Delta_{i j} \|_2 \leq \delta_{2 k}.
+    $$
+1. Finally we apply Gershgorin circle theorem for block matrices
+   ({prf:ref}`col:block_gershgorin_disc_theorem_psd_matrix`).
+1. This gives us
+
+    $$
+     | \| \Delta \|_2  - \|\Delta_{ii}\|_2| 
+     \leq \sum_{j, j\neq i} \|\Delta_{i j} \| \text{ for some } i \in \{1,2, \dots, c \}.
+    $$
+1. Thus we have
+
+    $$
+    &  | \| \Delta \|_2  - \delta_k | 
+    \leq \sum_{j, j\neq i} \delta_{2 k} \\
+     \implies & | \| \Delta \|_2  - \delta_k | \leq  (c - 1) \delta_{2 k} \\
+     \implies &  \| \Delta \|_2 \leq \delta_k +  (c - 1) \delta_{2 k} \\
+     \implies &  \| \Delta \|_2 \leq \delta_{2 k} +  (c - 1) \delta_{2 k} \\
+     \implies &  \| \Delta \|_2 \leq  c \delta_{2 k}.
+    $$
+1. We have shown that $\| \Delta \|_2 \leq  c \delta_{2 k} < 1$.
+1. Thus $\delta_{c k} \leq \| \Delta \|_2$.
+1. Hence $\Phi$ indeed satisfies RIP of order $c k$.
 ````
+This theorem helps us extend RIP from an order $K$ to higher orders.
+If $\delta_{2 k}$ isn't sufficiently small, the bound isn't useful.
 
-We have shown that $\| \Delta \|_2 \leq  c \delta_{2 k} < 1$ thus $\delta_{c k} \leq \| \Delta \|_2$, hence
-$\Phi$ indeed satisfies RIP of order $c k$.
-````
-
-This theorem helps us extend RIP from an order $K$ to higher orders. Naturally if $\delta_{2 k}$ isn't sufficiently small, the
-bound isn't useful.
-
-
-## Bounds on norms of embeddings of arbitrary signals
-
-
+## Embeddings of Arbitrary Signals
 
 So far we have considered only sparse signals while analyzing the embedding 
 properties of a RIP satisfying matrix $\Phi$. In this subsection
-we wish to explore bounds on the $l_2$ norm of an arbitrary signal when
-embedded by $\Phi$. This result is adapted from {cite}`needell2009cosamp`.
+we wish to explore bounds on the $\ell_2$ norm of an arbitrary signal when
+embedded by $\Phi$.
+This result is adapted from {cite}`needell2009cosamp`.
 
 
 ````{prf:theorem}
 :label: thm:proj:rip:arbitrary_signal_energy_bound
+
 Let $\Phi$ be an an $M \times N$ matrix satisfying 
-$$
-    :label: eq:rip:arbitrary_signal_energy_bound_rip_upper_bound_condition
 
-    \| \Phi x \|_2 \leq \sqrt{1 + \delta_K} \| x \|_2 \Forall x \in \Sigma_K.
-$$
+```{math}
+:label: eq:rip:arbitrary_signal_energy_bound_rip_upper_bound_condition
 
-Then for every signal $x \in \CC^N$, the following holds:
+\| \Phi \bx \|_2 \leq \sqrt{1 + \delta_K} \| \bx \|_2 \Forall \bx \in \Sigma_K.
+```
+Then for every signal $\bx \in \CC^N$, the following holds:
+
 $$
-    \| \Phi x \|_2 \leq \sqrt{ 1 + \delta_K} \left [  \| x \|_2 + \frac{1}{\sqrt{K}} \| x \|_1 \right ].
+\| \Phi \bx \|_2 
+\leq \sqrt{ 1 + \delta_K} \left [  \| \bx \|_2 + \frac{1}{\sqrt{K}} \| \bx \|_1 \right ].
 $$
 ````
-
 We note that the theorem requires $\Phi$ to satisfy only the upper bound of RIP
-property {eq}`eq:proj:restricted_isometry_property_bound`. The proof is slightly involved.
+property {eq}`eq:proj:restricted_isometry_property_bound`.
+The proof is slightly involved.
 
 ````{prf:proof}
-We note that the bound is trivially true for $x = 0$. Hence in the following we will consider
-only for $x \neq 0$.
+We note that the bound is trivially true for $\bx = \bzero$.
+Hence in the following we will consider only for $\bx \neq \bzero$.
 
-Consider an arbitrary index set $\Lambda \subset \{ 1, 2, \dots, N \}$ such that $| \Lambda | \leq K$.
-Consider the unit ball in the Banach space $l_2(\Lambda)$ given by
-$$
+1. Consider an arbitrary index set 
+   $\Lambda \subset \{ 1, 2, \dots, N \}$ such that $| \Lambda | \leq K$.
+1. Consider the unit ball in the Banach space $\ell_2(\Lambda)$ given by
+
+    ```{math}
     :label: eq:rip:arbitrary_signal_energy_bound_l_2_K_banach_space_unit_ball
+    B_2^{\Lambda} = \{ \bx \in \CC^N \ST \supp(\bx) = \Lambda \text{ and } \| \bx \|_2 \leq 1 \}
+    ```
+    i.e. the set of all signals whose support is $\Lambda$ and
+    whose $\ell_2$ norm is less than or equal to 1.
+1. Now define a convex body 
 
-    B_2^{\Lambda} = \{ x \in \CC^N | \supp(x) = \Lambda \text{ and } \| x \|_2 \leq 1 \}
-$$
-$$
-$$
-i.e. the set of all signals whose support is $\Lambda$ and whose $l_2$ norm
-is less than or equal to 1.
-
-Now define a convex body 
-$$
+    ```{math}
     :label: eq:rip:arbitrary_signal_energy_bound_k_sparse_unit_ball_convex_hull
+    S = \ConvexHull \left \{ \bigcup_{| \Lambda | \leq K}  
+    B_2^{\Lambda} \right \} \subset \CC^N.
+    ```
+1. We recall from {prf:ref}`def-convex-hull` that if
+   $\bx$ and $\by$ belong to $S$ then their
+   convex combination $\theta \bx + (1 - \theta) \by$
+   with $\theta \in [0,1]$ must lie in $S$.
+1. Further it can be verified that $S$ is a compact 
+   convex set with non-empty interior.
+1. Hence it is a convex body.
+1. Consider any $\bx \in B_2^{\Lambda_1}$ and $\by \in B_2^{\Lambda_2}$. 
+1. From {eq}`eq:rip:arbitrary_signal_energy_bound_rip_upper_bound_condition`
+   and 
+   {eq}`eq:rip:arbitrary_signal_energy_bound_l_2_K_banach_space_unit_ball`
+   we have
 
-    S = \ConvexHull \left \{ \bigcup_{| \Lambda | \leq K}  B_2^{\Lambda} \right \} \subset \CC^N.
-$$
+    $$
+    \| \Phi \bx \|_2 \leq  \sqrt{1 + \delta_K} \| \bx \|_2 \leq \sqrt{1 + \delta_K}
+    $$
+    and
 
-We recall from {prf:ref}`def:convex_hull` that if $x$ and $y$ belong to $S$ then their
-convex combination $\theta x + (1 - \theta) y$  with $\theta \in [0,1]$ must lie in $S$.
-Further it can be verified that $S$ is a compact 
-convex set with non-empty interior. Hence its a convex body.
+    $$
+    \| \Phi \by \|_2 \leq  \sqrt{1 + \delta_K} \| \by \|_2 \leq \sqrt{1 + \delta_K}.
+    $$
+1. Now let 
 
-Consider any $x \in B_2^{\Lambda_1}$ and $y \in B_2^{\Lambda_2}$. 
+    $$
+        \bz  = \theta \bx + (1 - \theta ) \by \text{ where } \theta \in [0, 1].
+    $$
+1. Then 
 
-From {eq}`eq:rip:arbitrary_signal_energy_bound_rip_upper_bound_condition` and 
-{eq}`eq:rip:arbitrary_signal_energy_bound_l_2_K_banach_space_unit_ball`
-we have
-$$
-    \| \Phi x \|_2 \leq  \sqrt{1 + \delta_K} \| x \|_2 \leq \sqrt{1 + \delta_K}
-$$
-and
-$$
-    \| \Phi y \|_2 \leq  \sqrt{1 + \delta_K} \| y \|_2 \leq \sqrt{1 + \delta_K}
-$$
+    $$
+        \| \bz \|_2 = \| \theta \bx + (1 - \theta ) \by \|_2 
+        \leq \theta \| \bx \|_2 + (1 - \theta ) \| \by \|_2
+        \leq \theta + (1 - \theta) = 1.
+    $$
+1. Further
 
-Now let 
-$$
-    z  = \theta x + (1 - \theta ) y \text{ where } \theta \in [0, 1].
-$$ 
-Then 
-$$
-    \| z \|_2 = \| \theta x + (1 - \theta ) y \|_2 \leq \theta \|x \|_2 + (1 - \theta ) \| y \|_2
-    \leq \theta + (1 - \theta) = 1.
-$$
-Further
-````{math}
-\begin{aligned}
-\| \Phi z  \|_2 &= \| \Phi ( \theta x + (1 - \theta ) y) \|_2 \\
-&\leq \| \Phi \theta x\|_2  + \| \Phi(1 - \theta ) y \|_2\\
-&= \theta \| \Phi x \|_2 + (1 - \theta) \| \Phi y \|_2 \\
-&\leq \theta \sqrt{1 + \delta_K} + (1  - \theta) \sqrt{1 + \delta_K}\\
-&\leq  \sqrt{1 + \delta_K}.
-\end{aligned}
-````
+    $$
+    \| \Phi \bz  \|_2 &= \| \Phi ( \theta \bx + (1 - \theta ) \by) \|_2 \\
+    &\leq \| \Phi \theta \bx\|_2  + \| \Phi(1 - \theta ) \by \|_2\\
+    &= \theta \| \Phi \bx \|_2 + (1 - \theta) \| \Phi \by \|_2 \\
+    &\leq \theta \sqrt{1 + \delta_K} + (1  - \theta) \sqrt{1 + \delta_K}\\
+    &\leq  \sqrt{1 + \delta_K}.
+    $$
+1. Similarly, it can be shown that for every vector $\bx \in S$ we have
+   $\| \bx\|_2 \leq 1$ and $\| \Phi \bx \|_2 \leq \sqrt{1 + \delta_K}$.
+   1. Let $\bx \in S$.
+   1. Then $\bx = \sum_{i=1}^r t_i \bx_i$ such that
+      $\bx_i \in  B_2^{\Lambda_i}$ where $|\Lambda_i| \leq K$,
+      $t_i \geq 0$ and $\sum t_i = 1$.
+   1. Hence $ \| \bx_i \|_2 \leq 1$ for every $i$.
+   1. Hence 
 
-It can be shown that for every vector $x \in S$ we have
-$\| x\|_2 \leq 1
-$ and
-$\| \Phi x \|_2 \leq \sqrt{1 + \delta_K}$.
+      $$
+      \| \bx \|_2 \leq \sum_{i=1}^r t_i \| \bx_i \|_2 \leq \sum_{i=1}^r t_i = 1.
+      $$
+   1. Similarly $\| \Phi \bx_i \|_2 \leq \sqrt{1 + \delta_K}$.
+   1. Hence 
 
-We now define another convex body 
-$$
+      $$
+      \| \Phi \bx \|_2 
+      \leq  \sum_{i=1}^r t_i \| \Phi \bx_i \|_2
+      \leq \sqrt{1 + \delta_K}.
+      $$
+1. We now define another convex body 
+
+    ```{math}
     :label: eq:rip:arbitrary_signal_energy_bound_convex_body_2
+    \Gamma = \left \{ \bx \ST \| \bx \|_2 + \frac{1}{\sqrt{K}} \| \bx \|_1 
+    \leq 1 \right \} \subset \CC^N.
+    ```
+1. We quickly verify the convexity property.
+   1. Let $\bx, \by \in \Gamma$.
+   1. Let 
+      
+      $$
+      \bz = \theta \bx + (1  - \theta) \by \quad \text{ where }  \theta \in [0,1].
+      $$
+    1. Then 
 
-    \Gamma = \left \{ x : \| x \|_2 + \frac{1}{\sqrt{K}} \| x \|_1 \leq 1 \right \} \subset \CC^N.
-$$
-We quickly verify the convexity property Let $x, y \in \Gamma$. Let 
-$$
-    z = \theta x + (1  - \theta) y \quad \text{ where }  \theta \in [0,1].
-$$
-Then 
-````{math}
-\begin{aligned}
-& \| z \| + \frac{1}{\sqrt{K}} \| z \|_1 \\
-& = \| \theta x + (1  - \theta) y \|_2 + \frac{1}{\sqrt{K}} \| \theta x + (1  - \theta) y \|_1\\
-& \leq \theta \| x \|_2  + (1 - \theta) \| y \|_2 + \frac{\theta}{\sqrt{K}} \| x \|_1 
-+ \frac{(1  - \theta)}{\sqrt{K}} \| y \|_1 \\
-& = \theta \left [ \| x \|_2 + \frac{1}{\sqrt{K}} \| x \|_1  \right ] + 
-(1 - \theta) \left [\| y \|_2 + \frac{1}{\sqrt{K}} \| y \|_1  \right ] \\
-& \leq \theta + (1 - \theta) = 1.
-\end{aligned}
-````
-Thus $z \in \Gamma$. This analysis shows that all convex combinations
-of elements in $\Gamma$ belong to $\Gamma$. Thus $\Gamma$ is convex.
-Further it can be verified that $\Gamma$ is a compact 
-convex set with non-empty interior. Hence its a convex body. For any $x \in \CC^N$
-one can find a $y \in \Gamma$ by simply applying an appropriate nonzero scale $y = c x$
-where the scale factor $c$ depends on $x$.
+        $$
+        & \| \bz \| + \frac{1}{\sqrt{K}} \| \bz \|_1 \\
+        & = \| \theta \bx + (1  - \theta) \by \|_2 
+        + \frac{1}{\sqrt{K}} \| \theta \bx + (1  - \theta) \by \|_1\\
+        & \leq \theta \| \bx \|_2  + (1 - \theta) \| \by \|_2 
+        + \frac{\theta}{\sqrt{K}} \| \bx \|_1 
+        + \frac{(1  - \theta)}{\sqrt{K}} \| \by \|_1 \\
+        & = \theta \left [ \| \bx \|_2 + \frac{1}{\sqrt{K}} \| \bx \|_1  \right ] + 
+        (1 - \theta) \left [\| \by \|_2 + \frac{1}{\sqrt{K}} \| \by \|_1  \right ] \\
+        & \leq \theta + (1 - \theta) = 1.
+        $$
 
+    1. Thus $\bz \in \Gamma$.
+    1. This analysis shows that all convex combinations
+       of elements in $\Gamma$ belong to $\Gamma$.
+    1. Thus $\Gamma$ is convex.
+    1. Further it can be verified that $\Gamma$ is a compact 
+       convex set with non-empty interior. 
+    1. Hence it is a convex body. 
+1. For any $\bx \in \CC^N$
+   one can find a $\by \in \Gamma$
+   by simply applying an appropriate nonzero scale $\by = c \bx$
+   where the scale factor $c$ depends on $\bx$.
+1. For a moment suppose that $\Gamma \subset S$.
+1. Then if $\by \in \Gamma$ the following are true:
 
-For a moment suppose that $\Gamma \subset S$. Then if $y \in \Gamma$ the following are true:
-$$
-    \| y \|_2 + \frac{1}{\sqrt{K}} \| y \|_1 \leq 1
-$$
-and
-$$
-    \| \Phi y \|_2 \leq \sqrt{1 + \delta_K}.
-$$
+   $$
+    \| \by \|_2 + \frac{1}{\sqrt{K}} \| \by \|_1 \leq 1
+   $$
+   and
 
-Now consider an arbitrary nonzero $x \in \CC^N$. Let
-$$
-    \alpha  = \| x \|_2 + \frac{1}{\sqrt{K}} \| x \|_1.
-$$
-Define 
-$$
-    y = \frac{1}{\alpha} x.
-$$
-Then 
-$$
-    \|y \|_2  + \frac{1}{\sqrt{K}} \| y \|_1 = 
-    \frac{1}{\alpha} \left ( \|x \|_2  + \frac{1}{\sqrt{K}} \| x \|_1\right )  = 1. 
-$$
-Thus $y \in \Gamma$ and 
-$$
-    \begin{aligned}
-    & \| \Phi y \|_2 \leq \sqrt{1 + \delta_K}\\
-    \implies & \left \| \Phi \frac{1}{\alpha} x \right \|_2  \leq \sqrt{1 + \delta_K}\\
-    \implies & \| \Phi x \|_2 \leq  \sqrt{1 + \delta_K} \alpha \\
-    \implies & \| \Phi x \|_2 \leq  \sqrt{1 + \delta_K} \left ( \| x \|_2 + \frac{1}{\sqrt{K}} \| x \|_1 \right )
-    \Forall x \in \CC^N
-    \end{aligned}
-$$
-which is our intended result.  Hence
-if we show that $\Gamma \subset S$ holds, we would have proven our theorem.
-We will achieve this by showing that every vector $x \in \Gamma$ can be
+   $$
+    \| \Phi \by \|_2 \leq \sqrt{1 + \delta_K}.
+   $$
+1. Now consider an arbitrary nonzero $\bx \in \CC^N$.
+1. Let
+
+    $$
+    \alpha  = \| \bx \|_2 + \frac{1}{\sqrt{K}} \| \bx \|_1.
+    $$
+1. Define 
+    
+    $$
+    \by = \frac{1}{\alpha} \bx.
+    $$
+1. Then 
+   
+   $$
+    \|\by \|_2  + \frac{1}{\sqrt{K}} \| \by \|_1 = 
+    \frac{1}{\alpha} \left ( \| \bx \|_2  + \frac{1}{\sqrt{K}} \| \bx \|_1\right ) = 1. 
+   $$
+1. Thus $\by \in \Gamma$ and 
+
+    $$
+    & \| \Phi \by \|_2 \leq \sqrt{1 + \delta_K}\\
+    \implies & \left \| \Phi \frac{1}{\alpha} \bx \right \|_2  \leq \sqrt{1 + \delta_K}\\
+    \implies & \| \Phi \bx \|_2 \leq  \sqrt{1 + \delta_K} \alpha \\
+    \implies & \| \Phi \bx \|_2 \leq  \sqrt{1 + \delta_K} 
+    \left ( \| \bx \|_2 + \frac{1}{\sqrt{K}} \| \bx \|_1 \right )
+    \Forall \bx \in \CC^N
+    $$
+    which is our intended result.
+1. Hence if we show that $\Gamma \subset S$ holds, 
+   we would have proven our theorem.
+
+We will achieve this by showing that every vector $\bx \in \Gamma$ can be
 shown to be a convex combination of vectors in $S$.
+1. We start with an arbitrary $\bx \in \Gamma$.
+1. Let $I = \supp(\bx)$.
+1. We partition $I$ into disjoint sets of size $K$.
+1. Let there be $J+1$ such sets given by
 
-
-We start with an arbitrary $x \in \Gamma$. Let $I = \supp(x)$.
-We partition $I$ into disjoint sets of size $K$. Let there be $J+1$ such
-sets given by
-$$
+    $$
     I = \bigcup_{j = 0}^J I_j.
-$$
-Let $I_0$ index the $K$ largest entries in $x$ (magnitude wise). Let $I_1$ be
-next $K$ largest entries and so on. 
-Since $|I|$ may not be a multiple of $K$, hence
-the last index set $I_J$ may not have
-$K$ indices. We define 
-$$
-    x_{I_j}(i) = \left\{
+    $$
+1. Let $I_0$ index the $K$ largest entries in $\bx$ (magnitude wise).
+1. Let $I_1$ be next $K$ largest entries and so on. 
+1. Since $|I|$ may not be a multiple of $K$, hence 
+   the last index set $I_J$ may not have
+   $K$ indices.
+1. We define 
+   
+   $$
+    \bx_{I_j}(i) = \left\{
             \begin{array}{ll}
                 x(i) & \mbox{if $i \in I_j$};\\
                 0 & \mbox{otherwise}.
             \end{array}
           \right.
-$$
-Thus we can write
-$$
-    x = \sum_{j = 0}^J x_{I_j}.
-$$
-Now let 
-$$
-    \theta_j = \| x_{I_j} \|_2 \; \text{ and } \; y_j = \frac{1}{\theta_j} x_{I_j}.
-$$
-We can write
-$$
-    x = \sum_{j = 0}^J \theta_j y_j.
-$$
-In this construction of $x$ we can see that
-$1 \geq \theta_0 \geq \theta_1 \geq \dots \geq \theta_J \geq 0$.
-Also $y_j \in S$ since $y_j$ is a unit norm $K$ sparse vector 
-{eq}`eq:rip:arbitrary_signal_energy_bound_k_sparse_unit_ball_convex_hull`.
+   $$
+1. Thus we can write
 
-We will now show that $\sum_j \theta_j \leq 1$. This will imply that
-$x$ is a convex combination of vectors from $S$. But since $S$ is convex
-hence $x \in S$. This will imply that $K \subset S$. 
-The proof will be complete.
+    $$
+    \bx = \sum_{j = 0}^J \bx_{I_j}.
+    $$
+1. Now let 
 
-Pick any $j \in \{1, \dots, J \}$. Since $x_{I_j}$ is $K$-sparse hence due to 
-{prf:ref}`lem:u_sigma_k_norms` we have
-$$
-    \theta_j = \| x_{I_j} \|_2 \leq \sqrt{K} \| x_{I_j} \|_{\infty}.
-$$
-It is easy to see that $I_{j-1}$ identifies exactly $K$ nonzero entries in $x$
-and each of nonzero entries in $x_{I_{j -1}}$ is larger than the largest entry 
-in $x_{I_j}$ (magnitude wise). Thus we have
-$$
-     \| x_{I_{j-1}} \|_1 = \sum_{ i \in I_{j-1}} | x_i |
-     \geq \sum_{ i \in I_{j-1}} \| x_{I_j} \|_{\infty} = K \| x_{I_j} \|_{\infty}.
-$$
-Thus
-$$
-    \| x_{I_j} \|_{\infty} \leq \frac{1}{K} \| x_{I_{j-1}} \|_1.
-$$
-Combining the two inequalities we get
-$$
-    \theta_j \leq \frac{1}{\sqrt{K}} \| x_{I_{j -1}} \|_1.
-$$
-This lets us write
-$$
-    \sum_{j=1}^{J}\theta_j \leq \sum_{j=1}^{J}\frac{1}{\sqrt{K}} \| x_{I_{j -1}} \|_1 \leq 
-    \frac{1}{\sqrt{K}} \| x \|_1
-$$
-since 
-$$
-    \| x \|_1 = \sum_{j = 0}^J \| x_{I_j} \|_1 \geq \sum_{j = 1}^J \| x_{I_{j-1}} \|_1.
-$$
-Finally 
-$$
-    \theta_0 = \| x_{I_0} \|_2 \leq \| x \|_2.
-$$
-This gives us the inequality 
-$$
-    \sum_{j = 0}^J  \theta_j \leq \| x \|_2 + \frac{1}{\sqrt{K}} \| x \|_1 \leq 1 
-$$
-since  $x\in \Gamma$. Recalling our steps we can express $x$  as
-$$
-    x  = \theta_j y_j 
-$$
-where $y_j \in S$ and $\sum \theta_j \leq 1$ implies that $x \in S$ since $S$
-is convex. Thus $\Gamma \subset S$. This completes the proof.
+    $$
+    \theta_j = \| \bx_{I_j} \|_2 \; \text{ and } \; 
+    \by_j = \frac{1}{\theta_j} \bx_{I_j}.
+    $$
+1. We can write
+
+    $$
+    \bx = \sum_{j = 0}^J \theta_j \by_j.
+    $$
+1. In this construction of $\bx$ we can see that
+   $1 \geq \theta_0 \geq \theta_1 \geq \dots \geq \theta_J \geq 0$.
+1. Also $\by_j \in S$ since $\by_j$ is a unit norm $K$ sparse vector 
+  {eq}`eq:rip:arbitrary_signal_energy_bound_k_sparse_unit_ball_convex_hull`.
+1. We will show that $\sum_j \theta_j \leq 1$ in a short while.
+1. This will imply that $\bx$ is a convex combination of vectors from $S$.
+1. But since $S$ is convex hence $\bx \in S$.
+1. This will imply that $\Gamma \subset S$. 
+1. The proof will be complete.
+
+We now show that $\sum_j \theta_j \leq 1$.
+
+1. Pick any $j \in \{1, \dots, J \}$.
+1. Since $\bx_{I_j}$ is $K$-sparse hence due to 
+   {prf:ref}`lem:u_sigma_k_norms` we have
+
+    $$
+    \theta_j = \| \bx_{I_j} \|_2 \leq \sqrt{K} \| \bx_{I_j} \|_{\infty}.
+    $$
+1. It is easy to see that $I_{j-1}$ identifies exactly $K$ nonzero entries in $\bx$
+   and each of nonzero entries in $\bx_{I_{j -1}}$ is larger than the largest entry 
+   in $\bx_{I_j}$ (magnitude wise).
+1. Thus we have
+
+    $$
+     \| \bx_{I_{j-1}} \|_1 = \sum_{ i \in I_{j-1}} | x_i |
+     \geq \sum_{ i \in I_{j-1}} \| \bx_{I_j} \|_{\infty}
+      = K \| \bx_{I_j} \|_{\infty}.
+    $$
+1. Thus
+
+    $$
+    \| \bx_{I_j} \|_{\infty} \leq \frac{1}{K} \| \bx_{I_{j-1}} \|_1.
+    $$
+1. Combining the two inequalities we get
+
+    $$
+    \theta_j \leq \frac{1}{\sqrt{K}} \| \bx_{I_{j -1}} \|_1.
+    $$
+1. This lets us write
+
+    $$
+    \sum_{j=1}^{J}\theta_j \leq \sum_{j=1}^{J}\frac{1}{\sqrt{K}} \| \bx_{I_{j -1}} \|_1 
+    \leq  \frac{1}{\sqrt{K}} \| \bx \|_1
+    $$
+    since 
+
+    $$
+    \| \bx \|_1 = \sum_{j = 0}^J \| \bx_{I_j} \|_1 
+    \geq \sum_{j = 1}^J \| \bx_{I_{j-1}} \|_1.
+    $$
+1. Finally 
+
+    $$
+    \theta_0 = \| \bx_{I_0} \|_2 \leq \| \bx \|_2.
+    $$
+1. This gives us the inequality 
+
+    $$
+    \sum_{j = 0}^J  \theta_j \leq \| \bx \|_2 
+    + \frac{1}{\sqrt{K}} \| \bx \|_1 \leq 1 
+    $$
+    since  $\bx \in \Gamma$.
+1. Recalling our steps we can express $\bx$  as
+
+    $$
+    \bx  = \theta_j \by_j 
+    $$
+    where $\by_j \in S$ and 
+    $\sum \theta_j \leq 1$ implies that $\bx \in S$ since $S$
+    is convex.
+1. Thus $\Gamma \subset S$.
+1. This completes the proof.
 ````
-
-
-
-
 
 ## A general form of RIP
 
@@ -2148,7 +2214,7 @@ $$
 :label: def:proj:optimal_rip_constant
 ````
 Of course this problem isn't easy to solve.
-In fact it has been shown in {cite}`bandeira2012certifying`
+In fact it has been shown in {cite}`bandeira2013certifying`
 that this problem is NP-hard.
 
 
