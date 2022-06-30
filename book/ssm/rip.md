@@ -2165,18 +2165,20 @@ We now show that $\sum_j \theta_j \leq 1$.
 1. This completes the proof.
 ````
 
-## A general form of RIP
+## A General Form of RIP
 
 
 
-A more general restricted isometry bound can be for an arbitrary matrix $\Phi$ can be as follows
+A more general restricted isometry bound can be for an arbitrary matrix 
+$\Phi$ can be as follows
 
 $$
-        \alpha \| x \|^2_2 \leq \| \Phi x \|^2_2 \leq \beta \| x \|^2_2  
+\alpha \| \bx \|^2_2 \leq \| \Phi \bx \|^2_2 \leq \beta \| \bx \|^2_2  
 $$
 where $0 < \alpha \leq \beta < \infty$.
 
-Its straightforward to scale $\Phi$ to match the bounds in {eq}`eq:proj:restricted_isometry_property_bound`. 
+It is straightforward to scale $\Phi$ to match the bounds in
+{eq}`eq:proj:restricted_isometry_property_bound`. 
 
 Let $\delta_K = \frac{\beta - \alpha}{\alpha + \beta}$. 
 Then $1 - \delta_K = \frac{2\alpha}{\alpha + \beta}$
@@ -2185,77 +2187,93 @@ and $1 + \delta_K = \frac{2\beta}{\alpha + \beta}$.
 Putting in  {eq}`eq:proj:restricted_isometry_property_bound` we get
 
 $$
-    & \frac{2\alpha}{\alpha + \beta} \| x \|^2_2 \leq \| \Phi x \|^2_2 \leq \frac{2\beta}{\alpha + \beta} \| x \|^2_2  \\
-    \implies    & \alpha \| x \|^2_2 \leq \| \sqrt{\frac{\alpha + \beta}{2}} \Phi x \|^2_2 \leq \beta \| x \|^2_2  
+& \frac{2\alpha}{\alpha + \beta} \| \bx \|^2_2 
+\leq \| \Phi \bx \|^2_2 
+\leq \frac{2\beta}{\alpha + \beta} \| \bx \|^2_2  \\
+\implies & \alpha \| \bx \|^2_2 
+\leq \| \sqrt{\frac{\alpha + \beta}{2}} \Phi \bx \|^2_2 
+\leq \beta \| \bx \|^2_2.
 $$
-
-
-Thus by multiplying $\Phi$ with $\sqrt{2/(\alpha + \beta) }$ we can transform the more general bound 
+Thus by multiplying $\Phi$ with $\sqrt{2/(\alpha + \beta)}$
+we can transform the more general bound 
 to the form of {eq}`eq:proj:restricted_isometry_property_bound`.
 
+## Finding out RIP Constants
 
-## Finding out RIP constants
-
-
-
-````{prf:definition}
-The optimal value of RIP constant of $K$-th order $\delta_K$ 
-denoted as $\delta^*_K$
+The optimal value of RIP constant of $K$-th order $\delta_K$
 can be obtained by solving the following optimization problem.
-$$
-    \begin{aligned}
-      & \underset{0 < \delta_K < 1}{\text{minimize}} 
-      & & \delta_K\\
-      & \text{subject to}
-      & &  (1 - \delta_K) \|x\|^2_2 \leq \| \Phi x \|^2_2 \leq (1 + \delta_K) \|x\|^2_2 \Forall x \in \Sigma_K.
-    \end{aligned}
-$$
 
+````{prf:algorithm}
 :label: def:proj:optimal_rip_constant
+
+$$
+& \underset{0 < \delta < 1}{\text{minimize}} 
+& & \delta\\
+& \text{subject to }
+& &  (1 - \delta) \|\bx\|^2_2 
+\leq \| \Phi \bx \|^2_2 
+\leq (1 + \delta) \| \bx\|^2_2 
+\Forall \bx \in \Sigma_K.
+$$
 ````
-Of course this problem isn't easy to solve.
+This problem isn't easy to solve.
 In fact it has been shown in {cite}`bandeira2013certifying`
 that this problem is NP-hard.
 
+## RIP and Coherence
 
-
-## RIP and coherence
-
-
-
-Here we establish a relationship between the RIP constants and coherence of a dictionary.
+Here we establish a relationship between the RIP constants
+and coherence of a dictionary.
 
 Rather than a general matrix $\Phi$, we restrict our attention to a 
-dictionary $\DD \in \CC^{N \times D}$. We assume that the dictionary
-is overcomplete $(D > N)$ and full rank $\Rank(\DD) = N$. Dictionary
-is assumed to satisfy RIP of some order.
+dictionary $\bDDD \in \CC^{N \times D}$
+We assume that the dictionary
+is overcomplete $(D > N)$ and full rank $\Rank(\bDDD) = N$.
+Dictionary is assumed to satisfy RIP of some order.
 
-````{prf:theorem}
+````{prf:theorem} Coherence upper bound for RIP constant
 :label: res:proj:rip_coherence_bound
-Let $\DD$ satisfy RIP of order $K$. Then
+
+Let $\bDDD$ satisfy RIP of order $K$. Then
+
 $$
-    \delta_K \leq (K - 1) \mu (\DD).
+\delta_K \leq (K - 1) \mu (\bDDD).
 $$
 ````
 ````{prf:proof}
 We recall that $\delta_K$ is the smallest constant $\delta$ satisfying
-$$
-    (1 - \delta) \|x\|^2_2 \leq \| \DD x \|^2_2 \leq (1 + \delta) \|x\|^2_2 \; \Forall x \in \Sigma_K.
-$$
-Let $\Lambda$ be any index set with $| \Lambda | = K$. 
-Then
-$$
-     \| \DD x \|^2_2 =  \| \DD_{\Lambda} x_{\Lambda} \|^2_2 \Forall x \in \CC^{\Lambda}.
-$$
-Since $\DD$ satisfies RIP of order K, hence $\DD_{\Lambda}$ is a sub dictionary.
 
-We {ref}`recall <res:ssm:subdict_norm_bound_coherence>` that
 $$
-    (1 - (K - 1)   \mu) \| v \|_2^2 \leq \| \DD_{\Lambda} v \|_2^2 \leq (1 + (K - 1)   \mu)\| v \|_2^2. 
+(1 - \delta) \| \bx\|^2_2 
+\leq \| \bDDD \bx \|^2_2 
+\leq (1 + \delta) \| \bx\|^2_2 \; 
+\Forall \bx \in \Sigma_K.
 $$
-Since $\delta_K$ is smallest possible constant, hence
-$$
-    1 + \delta_K \leq 1 + (K - 1)   \mu \implies \delta_K \leq (K - 1) \mu (\DD).
-$$
+
+1. Let $\Lambda$ be any index set with $| \Lambda | = K$. 
+1. Then
+
+    $$
+     \| \bDDD \bx \|^2_2 
+     =  \| \bDDD_{\Lambda} \bx_{\Lambda} \|^2_2 
+     \Forall \bx \in \CC^{\Lambda}.
+    $$
+1. Since $\bDDD$ satisfies RIP of order $K$, 
+   hence $\bDDD_{\Lambda}$ is a subdictionary
+   (its columns are linearly independent).
+1. Recall from {prf:ref}`res:ssm:subdict_norm_bound_coherence` that
+
+    $$
+    (1 - (K - 1)   \mu) \| \bv \|_2^2 
+    \leq \| \bDDD_{\Lambda} \bv \|_2^2 
+    \leq (1 + (K - 1)   \mu)\| \bv \|_2^2 
+    $$
+    holds true for every $\bv \in \CC^K$.
+1. Since $\delta_K$ is smallest possible constant, hence
+
+    $$
+    1 + \delta_K \leq 1 + (K - 1)   \mu 
+    \implies \delta_K \leq (K - 1) \mu (\bDDD).
+    $$
 ````
 
