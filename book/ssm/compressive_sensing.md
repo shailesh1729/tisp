@@ -490,7 +490,7 @@ $\Phi$ as the smallest number $\delta_K$ for which the following holds
 \Forall \bx : \| x \|_0 \leq K.
 ```
 We will study more about this property known as restricted isometry property (RIP) 
-in {prf:ref}`sec:proj:restricted_isometry_property`.
+in {ref}`sec:ssm:rip`.
 Here we just sketch the implications of RIP for compressive sensing.
 
 When $\delta_K < 1$ then the inequalities imply that
