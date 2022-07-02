@@ -951,3 +951,110 @@ We need to show that it is also a unique solution to
 ````
 
 
+
+We present another result which is based on
+$\mu_{1/2}(\bG)$ {prf:ref}`def:proj:coherence:mu_half_G`
+measure of the Gram matrix of the dictionary.
+This result is due to {cite}`donoho2003optimally`.
+
+
+````{prf:theorem}
+:label: res:bp:general_exact_recovery_mu_half_G
+
+Let $\bx = \bDDD \ba$ and $\| \ba \|_0 < \mu_{1/2}(\bG)$, then
+then $\ba$ is the unique solution of both
+{eq}`eq:bp:exact_sparse_problem` and 
+{eq}`eq:bp:bp_l1_norm_minimization`.
+````
+````{prf:proof}
+Unique solution of {eq}`eq:bp:exact_sparse_problem`.
+
+1. Let $\Lambda = \supp(\ba)$ and $K = |\Lambda|$.
+1. We have $K = \| \ba \|_0 < \mu_{1/2}(\bG)$.
+1. By {prf:ref}`res:proj:coherence:spark_lower_bound_mu_half`
+
+   $$
+   \spark(\bDDD) \geq 2 \mu_{1/2}(G) +1
+   \implies \spark(\bDDD) > 2 K + 1
+   \implies K <  \frac{1}{2}\spark(\bDDD).
+   $$
+1. By {prf:ref}`thm:ssm:uniqueness_spark`, $\ba$
+   is the unique sparsest solution.
+
+Unique solution of {eq}`eq:bp:bp_l1_norm_minimization`
+
+1. We need to show that for any $\ba'$ satisfying
+   $\bx = \bDDD \ba'$, we must have
+   $\| \ba' \|_1 > \| \ba \|_1$.
+1. We will show that any vector in the null space of $\bDDD$
+   exhibits less than $50$% concentration
+   on $\Lambda$; i.e., for every $\bh \in \NullSpace(\bDDD)$
+    
+   $$
+    \sum_{k \in \Lambda} | h_k | < \frac{1}{2} \| \bh \|_1.
+   $$
+1. Now
+   
+   $$
+    \bDDD \bh  = \bzero \implies \bG \bh = \bDDD^H \bDDD \bh  = \bzero.
+   $$
+1. Subtracting both sides with $\bh$ we get
+   
+   $$
+   \bG \bh - \bh = (\bG  - \bI) \bh = -\bh.
+   $$
+1. Let $\bF$ denote an $K \times D$ matrix formed from the rows of $\bG - \bI$
+   corresponding to the indices in $\Lambda$.
+1. Then
+   
+   $$
+    (\bG - \bI) \bh = -\bh 
+    \implies \| \bF \bh \|_1 = \sum_{k \in \Lambda} | h_k |.
+   $$
+   $h_k$ for some $k \in \Lambda$ is the negative of the inner product
+   of some row in $\bF$ with $\bh$.
+1. We know that
+   
+   $$
+    \| \bF \bh \|_1 \leq \| \bF \|_1 \| \bh \|_1
+   $$
+   where $\| \bF \|_1$ is the max-column-sum norm of $\bF$. 
+1. This gives us
+   
+   $$
+    \| \bF \|_1 \| \bh \|_1 \geq \sum_{k \in \Lambda} | h_k |.
+   $$
+1. In any column of $\bF$ the number of entries is $K$. 
+1. One of them is 0 (corresponding to the diagonal entry in $\bG$).
+1. Thus, leaving it the rest of the entries are $K -1$.
+1. By assumption $\mu_{1/2}(G) > K$.
+1. Thus any set of entries in a column which is
+   less than or equal to $K$ entries cannot 
+   have a sum exceeding $\frac{1}{2}$.
+1. This gives an upper bound on the max-column-sum of $\bF$; i.e.,
+   
+   $$
+    \| \bF \|_1 < \frac{1}{2}.
+   $$
+1. Thus, we get
+   
+   $$
+     \sum_{k \in \Lambda} | h_k | \leq \| \bF \|_1 \| \bh \|_1 
+     < \frac{1}{2} \| \bh \|_1
+   $$
+   for every $\bh \in \NullSpace(\bDDD)$.
+1. The rest follows from the fact that for any other $\ba'$
+   such that
+   $\bx = \bDDD \ba' = \bDDD \ba$,
+   we know that
+   
+   $$
+    \| \ba' \|_1 > \| \ba \|_1
+   $$
+   whenever
+   
+   $$
+    \sum_{k \in \Lambda} | h_k |  < \frac{1}{2} \| \bh \|_1
+   $$
+   where $\bh = \ba - \ba'$ (thus $\bDDD \bh = \bzero$).
+````
