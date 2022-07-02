@@ -615,7 +615,7 @@ $$
 ````
 
 There is a direct connection between the largest singular value and $2$-norm
-of a matrix (see {prf:ref}`sec:mat:p_norm`).
+of a matrix (see {ref}`sec:mat:p_norm`).
 ````{prf:corollary}
 :label: res-mat-svd-2-norm-1st-sv
 
@@ -754,7 +754,7 @@ $$
 ````
 ````{prf:proof}
 We have $\Rank(A) = \Rank(\Sigma)$. 
-Also its easy to verify that $\Rank(\bA^{\dag}) = \Rank(\Sigma^{\dag})$.
+Also it is easy to verify that $\Rank(\bA^{\dag}) = \Rank(\Sigma^{\dag})$.
 So using {prf:ref}`cor:mat:sigma_pseudo_inverse_rank` completes the proof.
 ````
 
