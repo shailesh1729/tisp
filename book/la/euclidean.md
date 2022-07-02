@@ -782,3 +782,183 @@ There are several properties emerging from this definition.
 1. $\RR^n$ provides additional features like $\ell_p$ norms.
    Corresponding norms can be induced on $\VV$ by a coordinate mapping.
 ```
+
+
+
+(sec:la:complex:space)=
+## Finite Dimensional Complex Space
+
+In this section we review important features of $n$-dimensional
+complex vector space $\CC^n$. 
+
+````{prf:definition}
+:label: def-la-complex-space
+
+Let $\CC$ denote the field of complex numbers.
+For any positive integer $n$, the set of all $n$-tuples of
+complex numbers forms an $n$-dimensional vector space over $\CC$
+which is denoted as $\CC^n$ and
+sometimes called *complex vector space*.
+````
+
+An element $\bx$ in $\CC^n$ is written as 
+
+$$
+\bx  = (x_1, x_2, \ldots, x_n),
+$$
+where each $x_i$ is a complex number.
+
+Vector space operations on $\CC^n$ are defined by:
+
+$$
+& \bx + \by 
+= (x_1 + y_1, x_2 + y_2, \dots, x_n + y_n), \Forall \bx, \by \in \CC^n.\\
+& \alpha \bx 
+= (\alpha x_1, \alpha x_2, \dots, \alpha x_n) \Forall \bx \in \CC^n, \alpha \in \CC.
+$$
+
+$\CC^n$ comes with the standard ordered basis $\BBB = \{\be_1, \be_2, \dots, \be_n\}$:
+
+```{math}
+:label: eq:la:complex:space:standard:basis
+
+& \be_1  = (1,0,\dots, 0),\\
+& \be_2  = (0,1,\dots, 0),\\
+&\vdots\\
+& \be_n  = (0,0,\dots, 1).
+```
+
+We note that the basis is same as the basis for $n$ dimensional
+real vector space (the Euclidean space).
+
+An arbitrary vector $\bx \in \CC^n$ can be written as
+
+$$
+\bx = \sum_{i=1}^{n}x_i \be_i
+$$
+
+
+### Inner Product
+
+Standard inner product is defined as:
+
+$$
+\langle \bx, \by \rangle = \sum_{i=1}^{n} x_i \overline{y_i} = 
+x_1 \overline{y_1} + x_2 \overline{y_2} + \dots + 
+x_n \overline{y_n} \quad \forall \bx, \by \in \CC^n.
+$$
+where $\overline{y_i}$ denotes the complex conjugate.
+
+This makes $\CC^n$ an *inner product space*.
+
+This satisfies the inner product rule:
+
+$$
+\langle \bx, \by \rangle  = \overline{\langle \by, \bx \rangle}.
+$$
+
+### Standard Norm
+
+The *length* of the vector (a.k.a. $\ell_2$ norm) is defined as:
+
+$$
+\| \bx \| = \sqrt{\langle \bx, \bx \rangle} 
+= \sqrt{\sum_{i=1}^{n} x_i \overline{x_i} }
+= \sqrt{\sum_{i=1}^{n} |x_i|^2 }
+\Forall \bx \in \CC^n.
+$$
+This makes $\CC^n$  a *normed linear space*.
+
+### Standard Distance
+
+The standard distance between two vectors is defined as:
+
+$$
+d(\bx,\by) = \| \bx  - \by \| = \sqrt{\sum_{i=1}^{n} |x_i - y_i|^2}.
+$$
+This makes  $\CC^n$  a *metric space*.
+It reduces to the standard Euclidean distance between real vectors.
+
+###  Norms
+
+In addition to standard norm, 
+we define a family of norms indexed by $p \in [1, \infty]$ known as
+$\ell_p$ norms over $\CC^n$.
+
+````{prf:definition}
+:label: def-la-cn-lp-norm
+
+$\ell_p$ norm is defined as:
+
+```{math}
+:label: eq-la-cn-lp-norm
+
+\| \bx \|_p = \begin{cases}
+ \left ( \sum_{i=1}^{n} | x |_i^p  \right ) ^ {\frac{1}{p}} &  p \in [1, \infty)\\
+\underset{1 \leq i \leq n}{\max} |x_i| &  p = \infty
+\end{cases}
+```
+````
+
+```{div}
+We can see that:
+
+$$
+\| \bx \| = \| \bx \|_2.
+$$
+```
+
+ 
+### $\ell_1$ Norm
+
+From the general definition of $\ell_p$ norms, we have 
+
+$$
+\|\bx\|_1 = \sum_{i=1}^n |x_i|= |x_1| + |x_2| + \dots  + | x_n|.
+$$
+
+We use norms as a measure of strength of a signal or size of an error.
+Different norms signify different aspects of the signal.
+
+ 
+### Quasi-Norms
+
+In some cases it is useful to extend the notion of $\ell_p$ norms
+to the case where $0 < p < 1$. 
+
+In such cases norm as defined in {eq}`eq-la-cn-lp-norm` doesn't 
+satisfy triangle inequality, hence it is not
+a proper norm function.
+We call such functions as *quasi-norms*.
+
+### $\ell_0$ "norm"
+
+Of specific mention is $\ell_0$ "norm".
+It isn't even a quasi-norm.
+Note the use of quotes around the word
+norm to distinguish $\ell_0$ "norm" from usual norms.
+
+````{prf:definition}
+:label: def:linalg:cplx_l_0_norm
+
+The $\ell_0$ "norm" is defined as:
+
+```{math}
+:label: eq:linalg:cplx:l_0_norm
+
+\| \bx \|_0 = | \supp(\bx) |
+```
+where $\supp(\bx) = \{ i \ST x_i \neq 0\}$ denotes the support of $\bx$.
+````
+
+```{div}
+Note that $\| \bx \|_0$ defined above doesn't 
+follow the definition in {eq}`eq-la-cn-lp-norm`. 
+Yet we can show that:
+
+$$
+\lim_{p\to 0} \| \bx \|_p^p = | \supp(\bx) |
+$$
+which justifies the notation.
+```
+
