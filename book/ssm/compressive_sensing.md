@@ -1572,3 +1572,198 @@ Some remarks are in order:
   *Johnson-Lindenstrauss lemma* helps us resolve this which concerns embeddings of finite sets of points in
   low-dimensional spaces.
 *  We haven't made significant efforts to optimize the constants. Still they are quite reasonable.
+
+## RIP and NSP
+
+
+
+RIP and NSP are connected.
+If a matrix $\Phi$ satisfies RIP then it also satisfies NSP
+(under certain conditions). 
+
+Thus RIP is strictly stronger than NSP (under certain conditions).
+
+We will need following lemma which applies to any arbitrary $\bh \in \RR^N$.
+The lemma will be proved later.
+
+````{prf:lemma}
+:label: lem:rip_arbitrary_h
+
+Suppose that $\Phi$ satisfies RIP of order $2K$.
+Let $\bh \in \RR^N, \bh \neq \bzero$ be arbitrary.
+Let  $\Lambda_0$ be any subset of $\{1,2,\dots, N\}$
+such that $|\Lambda_0| \leq K$.
+
+Define $\Lambda_1$ as the index set corresponding to the
+$K$ entries of $h_{\Lambda_0^c}$ with largest magnitude,
+and set $\Lambda = \Lambda_0 \cup \Lambda_1$.
+Then
+
+$$
+\| \bh_{\Lambda} \|_2 \leq 
+\alpha \frac{\| \bh_{\Lambda_0^c} \|_1 }{ \sqrt{K}} 
++ \beta \frac{| \langle \Phi \bh_{\Lambda}, \Phi \bh \rangle | }{\| \bh_{\Lambda} \|_2},
+$$
+where
+
+$$
+\alpha = \frac{\sqrt{2} \delta_{2K}}{ 1 - \delta_{2K}} , 
+\beta = \frac{1}{ 1 - \delta_{2K}}.
+$$
+````
+
+```{div}
+Let us understand this lemma a bit.
+If $\bh \in \NullSpace (\Phi)$,
+then the lemma simplifies to
+
+$$
+\| \bh_{\Lambda} \|_2 \leq \alpha \frac{\| \bh_{\Lambda_0^c} \|_1 }{ \sqrt{K}}
+$$
+
+
+*  $\Lambda_0$ maps to the initial few ($K$ or less) elements we chose.
+*  $\Lambda_0^c$ maps to all other elements.
+*  $\Lambda_1$ maps to largest (in magnitude) $K$ elements of $\Lambda_0^c$.
+*  $h_{\Lambda}$ contains a maximum of $2K$ non-zero elements.
+*  $\Phi$ satisfies RIP of order $2K$.
+*  Thus 
+
+   $$
+   (1 - \delta_{2K}) \| \bh_{\Lambda} \|_2 
+   \leq \| \Phi \bh_{\Lambda} \|_2 
+   \leq (1 + \delta_{2K}) \| \bh_{\Lambda} \|_2.
+   $$
+```
+We now state the connection between RIP and NSP.
+
+````{prf:theorem}
+Suppose that $\Phi$ satisfies RIP of order $2K$ with $\delta_{2K} < \sqrt{2} - 1$.
+Then $\Phi$ satisfies the NSP of order $2K$ with constant 
+
+$$
+C= \frac
+{\sqrt{2} \delta_{2K}}
+{1 - (1 + \sqrt{2})\delta_{2K}}
+$$
+````
+
+````{prf:proof}
+We are given that
+
+$$
+(1- \delta_{2K}) \| \bx \|^2_2 \leq \| \Phi \bx \|^2_2 \leq (1 + \delta_{2K}) \| \bx \|^2_2  
+$$
+holds for all $\bx \in \Sigma_{2K}$ where $\delta_{2K}  < \sqrt{2} - 1$.
+We have to show that:
+
+$$
+\| \bh_{\Lambda}\|_2 \leq C \frac{\| \bh_{{\Lambda}^c}\|_1 }{\sqrt{K}}
+$$
+holds $\Forall \bh \in \NullSpace (\Phi)$
+and $\Forall \Lambda$ such that $|\Lambda| \leq 2K$.
+
+1. Let $\bh \in \NullSpace(\Phi)$.
+1. Then $ \Phi \bh = \bzero$. 
+1. Let $\Lambda_m$ denote the $2K$ largest entries of $\bh$.
+1. Then
+   
+   $$
+    \| \bh_{\Lambda}\|_2  
+    \leq \| \bh_{\Lambda_m}\|_2 \Forall \Lambda \ST |\Lambda| \leq 2K. 
+   $$
+1. Similarly
+   
+   $$
+    \| \bh_{\Lambda^c}\|_1  
+    \geq \| \bh_{\Lambda_m^c}\|_1 \Forall \Lambda \ST |\Lambda| \leq 2K. 
+   $$
+1. Thus if we show that $\Phi$ satisfies NSP of order $2K$ for $\Lambda_m$; i.e.,
+   
+   $$
+    \| \bh_{\Lambda_m}\|_2 \leq C 
+    \frac{\| \bh_{{\Lambda_m}^c}\|_1 }{\sqrt{K}}
+   $$
+   then we would have shown
+   it for all $\Lambda$ such that $|\Lambda| \leq 2K$.
+1. Hence let $\Lambda = \Lambda_m$.
+1. We can divide $\Lambda$ into two components $\Lambda_0$ and $\Lambda_1$ of size $K$ each.
+1. Since $\Lambda$ maps to the largest $2K$ entries in $\bh$,
+   hence whatever entries we choose in
+   $\Lambda_0$, the largest $K$ entries in $\Lambda_0^c$ will be $\Lambda_1$.
+1. Hence as per {prf:ref}`lem:rip_arbitrary_h`
+   above, we have
+   
+   $$
+    \| \bh_{\Lambda} \|_2 \leq \alpha \frac{\| \bh_{\Lambda_0^c}\|_1}{\sqrt{K}}.
+   $$
+
+1. Also 
+   
+   $$
+    \Lambda = \Lambda_0 \cup \Lambda_1 
+    \implies \Lambda_0 = \Lambda \setminus \Lambda_1 = \Lambda \cap \Lambda_1^c
+    \implies \Lambda_0^c = \Lambda_1 \cup \Lambda^c.
+   $$
+1. Thus we have
+   
+   $$
+    \| \bh_{\Lambda_0^c} \|_1 = \| \bh_{\Lambda_1} \|_1 + \| \bh_{\Lambda^c} \|_1. 
+   $$
+1. We have to get rid of $\Lambda_1$.
+1. Since $\bh_{\Lambda_1} \in \Sigma_K$, 
+   by applying {prf:ref}`lem:u_sigma_k_norms` we get
+   
+   $$
+   \| \bh_{\Lambda_1} \|_1 \leq  \sqrt{K} \| \bh_{\Lambda_1} \|_2
+   $$
+1. Hence
+   
+   $$
+    \| \bh_{\Lambda} \|_2 \leq 
+    \alpha \left ( 
+      \| \bh_{\Lambda_1} \|_2 + 
+      \frac{\| \bh_{\Lambda^c} \|_1}{\sqrt{K}} 
+      \right)
+   $$
+1. But since $\Lambda_1 \subset \Lambda$,
+   hence $ \| \bh_{\Lambda_1} \|_2 \leq  \| \bh_{\Lambda} \|_2$.
+1. Hence
+   
+   $$
+    &\| \bh_{\Lambda} \|_2 \leq 
+    \alpha \left ( 
+      \| \bh_{\Lambda} \|_2 + 
+      \frac{\| \bh_{\Lambda^c} \|_1}{\sqrt{K}} 
+      \right)\\
+    \implies &(1 - \alpha) \| \bh_{\Lambda} \|_2 
+    \leq  \alpha \frac{\| \bh_{\Lambda^c} \|_1}{\sqrt{K}}\\
+    \implies &\| \bh_{\Lambda} \|_2 
+    \leq \frac{\alpha}{1 - \alpha} \frac{\| \bh_{\Lambda^c} \|_1}{\sqrt{K}} 
+    \quad \text{ if } \alpha \leq 1.
+   $$
+1. Note that the inequality is also satisfied for $\alpha = 1$ in which case,
+   we don't need to bring $1-\alpha$ to denominator.
+1. Now
+   
+   $$
+    &\alpha \leq 1\\
+    \implies &\frac{\sqrt{2} \delta_{2K}}{ 1 - \delta_{2K}} \leq 1 \\
+    \implies &\sqrt{2} \delta_{2K} \leq 1 - \delta_{2K}\\
+    \implies &(\sqrt{2} + 1) \delta_{2K} \leq 1\\
+    \implies &\delta_{2K} \leq \sqrt{2} - 1. 
+   $$
+1. Putting 
+   
+   $$
+      C = \frac{\alpha}{1 - \alpha}  = \frac
+      {\sqrt{2} \delta_{2K}}
+      {1 - (1 + \sqrt{2})\delta_{2K}}
+   $$
+   we see that $\Phi$ satisfies NSP of order $2K$
+   whenever $\Phi$ satisfies RIP of order $2K$
+   with $\delta_{2K} \leq \sqrt{2} -1$.
+````
+Note that for $\delta_{2K} = \sqrt{2} - 1$, $C=\infty$.
+
+
