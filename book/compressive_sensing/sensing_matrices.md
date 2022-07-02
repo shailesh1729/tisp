@@ -494,3 +494,117 @@ $$
    which completes the proof.
 ````
 
+(sec:sm:gaussian_sensing_matrix)=
+## Gaussian Sensing Matrices
+In this subsection we collect several results related to Gaussian sensing matrices.
+
+
+````{prf:definition}
+:label: def:sm:gaussian_sensing_matrix
+
+A Gaussian sensing matrix $\Phi \in \RR^{M \times N}$ with $M < N$
+is constructed by drawing each
+entry $\phi_{i j}$ independently from a Gaussian random distribution $\Gaussian(0, \frac{1}{M})$.
+````
+We note that 
+
+$$
+\EE(\phi_{i j}) = 0.
+$$
+
+$$
+\EE(\phi_{i j}^2) = \frac{1}{M}.
+$$
+We can write
+
+$$
+\Phi = \begin{bmatrix}
+\phi_1 & \dots & \phi_N
+\end{bmatrix}
+$$
+where $\phi_j \in \RR^M$ is a Gaussian random vector with independent entries.
+We note that
+
+$$
+\EE (\| \phi_j  \|_2^2) 
+= \EE \left ( \sum_{i=1}^M \phi_{i j}^2 \right )
+= \sum_{i=1}^M (\EE (\phi_{i j}^2)) = M \frac{1}{M} = 1.
+$$
+Thus the expected value of squared length of each of the columns in $\Phi$ is $1$. 
+
+### Joint Correlation
+
+Columns of $\Phi$ satisfy a joint correlation property ({cite}`tropp2007signal`)
+which is described in following lemma.
+
+````{prf:lemma}
+:label: lem:sm:gaussian:joint_correlation_property
+
+Let $\{\bu_k\} $ be a sequence of $K$ vectors (where $\bu_k \in \RR^M$)
+whose $\ell_2$ norms do not exceed one.
+Independently  choose $\bz \in \RR^M$ to be a random vector
+with i.i.d. $\Gaussian(0, \frac{1}{M})$ entries.
+Then
+
+$$
+\PP\left(\max_{k} | \langle z,  u_k\rangle |
+\leq \epsilon \right) \geq 1  -  K \exp \left( - \epsilon^2 \frac{M}{2} \right).
+$$
+````
+
+````{prf:proof}
+Let us call  $\gamma = \max_{k} | \langle \bz,  \bu_k\rangle |$.
+
+1. We note that if for any $\bu_k$,
+   $\| \bu_k \|_2 <1 $
+   and we increase the length of $\bu_k$ by scaling it,
+   then $\gamma$ will not decrease and hence
+   $\PP(\gamma \leq \epsilon)$ will not increase.
+1. Thus if we prove the bound for vectors $\bu_k$ with
+   $\| \bu_k\|_2 = 1 \Forall 1 \leq k \leq K$, it will
+   be applicable for all $\bu_k$ whose $\ell_2$ norms do not exceed one.
+1. Hence we will assume that $\| \bu_k \|_2 = 1$.
+1. Now consider $\langle \bz, \bu_k \rangle$.
+1. Since $\bz$ is a Gaussian random vector,
+   hence $\langle \bz, \bu_k \rangle$
+   is a Gaussian random variable.
+1. Since $\| \bu_k \| =1$ hence
+   
+   $$
+   \langle \bz, \bu_k \rangle \sim \Gaussian \left(0, \frac{1}{M} \right).
+   $$
+1. We recall a well known tail bound for Gaussian random variables which states that
+   
+   $$
+    \PP_X ( | x | > \epsilon) \; = \; \sqrt{\frac{2}{\pi}} \int_{\epsilon \sqrt{N}}^{\infty} \exp \left( -\frac{x^2}{2}\right) d x
+    \; \leq \; \exp \left (- \epsilon^2 \frac{M}{2} \right).
+   $$
+1. Now the event 
+   
+   $$
+    \left \{ \max_{k} | \langle \bz,  \bu_k\rangle | > \epsilon \right \}
+    = \bigcup_{ k= 1}^K \{| \langle \bz,  \bu_k\rangle | > \epsilon\}
+   $$
+   i.e. if any of the inner products (absolute value) is greater than $\epsilon$
+   then the maximum is greater.
+1. We recall Boole's inequality which states that
+   
+   $$
+    \PP \left(\bigcup_{i} A_i \right) \leq \sum_{i} \PP(A_i).
+   $$
+1. Thus
+   
+   $$
+    \PP\left(\max_{k} | \langle \bz,  \bu_k\rangle | > \epsilon \right) 
+    \leq  K \exp \left(- \epsilon^2 \frac{M}{2} \right).
+   $$
+1. This gives us
+   
+   $$
+    \begin{aligned}
+    \PP\left(\max_{k} | \langle \bz,  \bu_k\rangle | \leq \epsilon \right) 
+    &= 1 - \PP\left(\max_{k} | \langle \bz,  \bu_k\rangle | > \epsilon \right) \\
+    &\geq 1 - K \exp \left(- \epsilon^2 \frac{M}{2} \right).
+    \end{aligned}
+   $$
+````
