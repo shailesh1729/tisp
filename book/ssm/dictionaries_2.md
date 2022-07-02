@@ -107,6 +107,178 @@ where $\bv_k^{1, *}$ is a solution of the problem {eq}`eq:proj:spark:minimum_l1_
 ````
 
 
+
+ 
+## Coherence
+In this subsection we develop some more bounds using coherence of a dictionary.
+As usual, we will be considering an overcomplete dictionary
+$\bDDD \in \CC^{N \times D}$ consisting
+of $D$ atoms.
+The coherence of $\bDDD$ is denoted by $\mu (\bDDD)$.
+In short we will simply write it as $\mu$.
+A subdictionary will be indexed by an index set $\Lambda$
+consisting of linearly independent atoms. 
+
+````{prf:theorem}
+:label: res:proj:coherence:2_infty_norm_pseudo_inverse_upper_bound
+
+Suppose that $(K - 1) \mu < 1$ and assume that $| \Lambda | \leq K$.
+Then 
+
+$$
+\| \bDDD_{\Lambda}^{\dag} \|_{2 \to \infty} 
+\leq \frac{1}{\sqrt{ 1 - ( K - 1) \mu}}.
+$$
+Equivalently, the rows of $\bDDD_{\Lambda}^{\dag}$ have $\ell_2$ norms
+no greater than $\frac{1}{\sqrt{ 1 - ( K - 1) \mu}}$.
+````
+````{prf:proof}
+We recall that the operator norm $\| \bDDD_{\Lambda}^{\dag} \|_{2 \to \infty}$
+computes the  maximum $\ell_2$ norm among the rows of $\bDDD_{\Lambda}^{\dag}$.
+TODO COMPLETE ITS PROOF.
+````
+
+The following definition is due to {cite}`donoho2003optimally,chen2006theoretical`.
+
+````{prf:definition}
+:label: def:proj:coherence:mu_half_G
+
+Let $\bG = \bDDD^H \bDDD$ be the Gram matrix for dictionary $\bDDD$.
+We define $\mu_{1/2}(\bG)$ as the smallest number $m$
+such that the sum of magnitudes of a
+collection of $m$ off-diagonal entries in a single row
+or column of the Gram matrix $\bG$ is at least $\frac{1}{2}$.
+````
+This quantity was introduced in {cite}`donoho2003optimally` for developing
+more accurate bounds compared to bounds based on coherence. At that
+time the idea of Babel function was not available. A careful examination reveals
+that $\mu_{1/2}(\bG)$ can be related to Babel function.
+
+````{prf:theorem}
+:label: res:mu_half_g_coherence_bound
+
+$$
+\mu_{1/2}(\bG) \geq \frac{1}{2\mu}.
+$$
+````
+````{prf:proof}
+Since $\mu$ is the maximum absolute value of any off diagonal term in
+$\bG = \bDDD^H \bDDD$, hence sum of any $m$ terms, say $T$, is bounded by 
+
+$$
+T \leq m \mu.
+$$
+Thus
+
+$$
+T \geq \frac{1}{2} \implies m \mu \geq \frac{1}{2} \implies m \geq \frac{1}{2\mu}.
+$$
+Since $\mu_{1/2}(\bG)$ is the minimum number of
+off diagonal terms whose sum exceeds $1/2$, hence
+
+$$
+\mu_{1/2}(\bG) \geq \frac{1}{2\mu}.
+$$
+````
+
+The following result is due to {cite}`donoho2003optimally`.
+````{prf:theorem}
+:label: res:proj:coherence:spark_lower_bound_mu_half
+
+$$
+\spark(\bDDD) \geq 2 \mu_{1/2}(G) +1.
+$$
+````
+````{prf:proof}
+We proceed as follows.
+
+1. Let $\bh \in \NullSpace(\bDDD)$.
+1. Then
+   
+   $$
+    \bDDD \bh  = \bzero \implies \bG \bh = \bDDD^H \bDDD \bh  = \bzero.
+   $$
+1. Subtracting both sides with $\bh$ we get
+   
+   $$
+    \bG \bh - \bh = (\bG  - \bI) \bh = -\bh.
+   $$
+1. Let $\Lambda = \supp(\bh)$.
+1. By taking columns indexed by $\Lambda$
+   from $\bG - \bI$ and corresponding entries in $\bh$,
+   we can write:
+   
+   $$
+    (\bG - \bI)_{\Lambda} \bh_{\lambda} = - \bh.
+   $$
+1. Taking $\ell_{\infty}$ norm on both sides we get
+   
+   $$
+    \| \bh \|_{\infty} = \| (\bG - \bI)_{\Lambda} \bh_{\lambda} \|_{\infty}.
+   $$
+1. We know that
+   
+   $$
+    \| (\bG - \bI)_{\Lambda} \bh_{\lambda} \|_{\infty} 
+    \leq \| (\bG - \bI)_{\Lambda} \|_{\infty} \| \bh_{\lambda} \|_{\infty}
+   $$
+1. It is easy to see that:
+   
+   $$
+    \| \bh_{\lambda} \|_{\infty} = \| \bh \|_{\infty}.
+   $$
+1. Thus
+   
+   $$
+    \| \bh \|_{\infty} \leq 
+    \| (\bG - \bI)_{\Lambda} \|_{\infty} \| \bh \|_{\infty}.
+   $$
+1. This gives us
+   
+   $$
+    \| (\bG - \bI)_{\Lambda} \|_{\infty} \geq 1.
+   $$
+1. But $\| (\bG - \bI)_{\Lambda} \|_{\infty}$ is nothing
+   but the maximum sum of magnitudes
+   of off diagonal entries in $\bG$ along a row in $\bG_{\Lambda}$.
+1. Consider any row in $(\bG - \bI)_{\Lambda}$.
+1. One of the entries in the row
+   (on the main diagonal of $\bG - \bI$) is 0.
+1. Thus, there are a maximum of
+   $|\Lambda | - 1$ nonzero entries in the row.
+1. $\Lambda$ is smallest when $|\Lambda | = \spark(\bDDD)$.
+1. For such a $\Lambda$, there exists a row in $\bG$
+   such that the sum of  $\spark(\bDDD) - 1$
+   off diagonal entries in the row exceeds 1.
+1. Let $n$ denote the minimum number of
+   off diagonal elements on a row or
+   a column of $\bG$ such that the sum of their magnitudes exceeds one. 
+1. Clearly
+   
+   $$
+    \spark(\bDDD) - 1 \geq n.
+   $$
+1. It is easy to see that
+   
+   $$
+    n \geq 2 \mu_{1/2} (\bG)
+   $$
+   i.e. minimum number of off diagonal elements summing up to 1 or more
+   is at least twice the minimum number of off diagonal elements 
+   summing up to $\frac{1}{2}$
+   or more on any row (or column due to Hermitian property).
+1. Thus
+   
+   $$
+    \spark(\bDDD) - 1 \geq 2 \mu_{1/2} (G).
+   $$
+1. Rewriting, we get
+  
+   $$
+    \spark(\bDDD) \geq 2 \mu_{1/2} (G) + 1.
+   $$
+````
+
 (sec:dic:dirac_dct_dictionary)=
 ## Dirac-DCT dictionary
 
