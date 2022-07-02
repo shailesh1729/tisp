@@ -703,3 +703,251 @@ $\implies$ the weaker condition
 ````
 
 
+## General Case
+
+We now consider the case where $\bDDD \in \CC^{N \times D}$ is
+an arbitrary (redundant) dictionary.
+We will require that $\bDDD$ is full row rank.
+If $\bDDD$ is not a full row rank  matrix then some of
+its columns (atoms) can be removed to make it so.
+
+We develop sufficient conditions under which solutions of 
+{eq}`eq:bp:exact_sparse_problem` and 
+{eq}`eq:bp:bp_l1_norm_minimization` match for the general case
+{cite}`donoho2003optimally,elad2010sparse`.
+
+````{prf:theorem}
+:label: res:bp:general_exact_recovery_coherence
+
+Let $\bDDD$ be an arbitrary full rank redundant dictionary.
+Let $\bx = \bDDD \ba$, where $\bx$ is known. 
+If a sparse representation $\ba$ exists obeying
+
+```{math}
+:label: eq:bp:general_exact_recovery_coherence
+
+\| \ba \|_0 < \frac{1}{2} \left ( 1 + \frac{1}{\mu} \right ),
+```
+then $\ba$ is the unique solution of both {eq}`eq:bp:exact_sparse_problem` and 
+{eq}`eq:bp:bp_l1_norm_minimization`.
+````
+````{prf:proof}
+Due to {prf:ref}`thm:ssm:uniqueness_coherence`,
+$\ba$ is a unique solution for {eq}`eq:bp:exact_sparse_problem`
+since $\ba$ satisfies {eq}`eq:bp:general_exact_recovery_coherence`.
+We need to show that it is also a unique solution to
+{eq}`eq:bp:bp_l1_norm_minimization`
+
+1. For any other feasible $\bb$ for {eq}`eq:bp:bp_l1_norm_minimization`,
+   we have $\| \bb \|_0 > \| \ba \|_0$ since it is unique
+   sparsest solution of $\bx = \bDDD \ba$.
+1. We start with defining a set of alternative feasible vectors to
+   {eq}`eq:bp:bp_l1_norm_minimization`:
+
+    $$
+    C = \left \{ \bb  \left | 
+    \begin{aligned}
+    \bb \neq \ba \\
+    \| \bb \|_1 \leq \| \ba \|_1\\
+    \| \bb \|_0 > \| \ba \|_0\\
+    \text{ and } \bDDD (\bb - \ba) = \bzero
+    \end{aligned}
+    \right.
+    \right \}.
+    $$
+    This set contains all possible representations that
+    1. are different from $\ba$
+    1. have larger support
+    1. satisfy $\bDDD \bb = \bx$
+    1. have a better (or at least as good) $\ell_1$-norm.
+1. We need to show that if {eq}`eq:bp:general_exact_recovery_coherence` holds,
+   then the set $C$ will be empty.
+1. Otherwise, BP would choose a solution different than $\ba$.
+1. The condition $\| \bb \|_0 > \| \ba \|_0$ is redundant
+   under the assumption {eq}`eq:bp:general_exact_recovery_coherence`.
+1. Following the proof of {prf:ref}`res:bp:two_ortho_exact_recovery_coherence`,
+   we define
+   
+   $$
+    \be = \bb - \ba.
+   $$
+1. We can then rewrite $C$ as 
+   
+   $$
+    C_s = \{\be \ST \be \neq \bzero, 
+        \| \be + \ba \|_1 - \| \ba \|_1 \leq 0, 
+        \text{ and } \bDDD \be = \bzero \}.
+   $$
+1. Again, we will enlarge the set $C_s$ and show that even
+   the larger set is empty
+   when {eq}`eq:bp:general_exact_recovery_coherence` holds. 
+1. We start with the requirement $\| \be + \ba \|_1 - \| \ba \|_1 \leq 0$. 
+1. A simple permutation of columns of $\bDDD$ can bring the nonzero
+   entries in $\ba$ to the beginning.
+1. Thus, without loss of generality,
+   we assume that first $K$ entries in $\ba$
+   are nonzero and the rest are zero.
+1. We can now rewrite the requirement as
+   
+   $$
+    \| \be + \ba \|_1 - \| \ba \|_1 
+    = \sum_{j=1}^K \left ( |e_j + a_j | - | a_j | \right ) 
+    + \sum_{j > K} | e_j | \leq 0.
+   $$
+1. Using the inequality $| x + y | - | y | \geq - | x |$,
+   we can relax above condition as
+   
+   $$
+    - \sum_{j = 1}^K | e_j | + \sum_{j > K} | e_j | \leq 0.
+   $$
+1. Let $\OneVec_K$ denote a vector with $K$ ones
+   at the beginning and rest zeros.
+1. Then, 
+   
+   $$
+    \sum_{j = 1}^K | e_j | = \OneVec_K^T | \be |. 
+   $$
+1. Further,
+   
+   $$
+    \sum_{j > K} | e_j | 
+    = \| \be \|_1 - \sum_{j = 1}^K | e_j |  
+    = \OneVec^T | \be | - \OneVec_K^T | \be |.
+   $$
+1. Thus, we can rewrite above inequality as
+   
+   $$
+     \OneVec^T | \be | - 2 \OneVec_K^T | \be | \leq 0.
+   $$
+1. We can now define 
+   
+   $$
+    C_s^1  = 
+    \{\be \ST \be \neq \bzero, 
+        \OneVec^T | \be | - 2 \OneVec_K^T | \be | \leq 0, 
+        \text{ and } \bDDD \be = \bzero \}.
+   $$
+1. Clearly $C_s \subseteq C_s^1$.
+1. We will now relax the requirement of $\bDDD \be = \bzero$.
+1. Multiplying by $\bDDD^H$, we get
+   
+   $$
+    \bDDD^H \bDDD \be = \bzero.
+   $$
+1. If $\be \in C_s^1$, it will also satisfy this equation.
+1. Moreover, if $\be$ satisfies this, then $\be$
+   belongs to the null space of $\bDDD^H \bDDD$.
+1. Since $\bDDD$ is full rank, hence $\be$ has to be in the
+   null space of $\bDDD$ also.
+1. Thus the two conditions $\bDDD \be = \bzero$ and 
+   $\bDDD^H \bDDD e = \bzero$ are equivalent.
+1. We note that off-diagonal entries in $\bDDD^H \bDDD$ are bounded by $\mu$
+   while the main diagonal consists of all ones.
+1. So, we can write
+   
+   $$
+    & \bDDD^H \bDDD \be = \bzero \\
+    \iff & (\bDDD^H \bDDD - \bI + \bI ) \be = \bzero \\
+    \iff & -\be = (\bDDD^H \bDDD - \bI ) \be.
+   $$
+1. Suppose $\bv = \bG \bu$. Then $v_i = \sum_{j} G_{i j} u_j$.
+1. Thus 
+   
+   $$
+    | v_i | = | \sum_{j} G_{i j} u_j | 
+    \leq \sum_{j} | G_{i j} u_j | = \sum_{j} | G_{i j} | | u_j |.
+   $$
+1. This gives us $| \bv | \preceq | \bG | | \bv |$ 
+   where $\preceq$ indicates component wise inequality. 
+1. Taking an entry-wise absolute value on both sides, we get
+   
+   $$
+    | \be | =  |(\bDDD^H \bDDD - \bI ) \be | 
+    \preceq  |\bDDD^H \bDDD - \bI || \be | 
+    \preceq \mu (\OneMat - \bI) | \be |.
+   $$
+1. The last part is due to the fact that all entries in the vector
+   $| \be | $ and the matrix $ | \bDDD^H \bDDD - \bI |$ 
+   are non-negative and the entries in $| \bDDD^H \bDDD - \bI|$
+   are dominated by $\mu $.
+1. Further,
+   
+   $$
+    & | \be | \preceq 
+    \mu (\OneMat - \bI) | \be |  \\
+    \iff & (1 + \mu) | \be | \preceq \mu \OneMat  | \be | = \mu \| \be \|_1 \OneVec\\
+    \iff & | \be | \preceq \frac{\mu \| \be \|_1}{1 + \mu}  \OneVec.
+   $$
+1. In the above we used the fact that
+   $\OneMat | \be | = \OneVec \OneVec^T | \be | = \OneVec \| \be \|_1$.
+1. We can now define a new set
+   
+   $$
+    C_s^2 = \left \{ 
+    \be \left | 
+    \begin{aligned}
+    & \be \neq \bzero, \\
+    &\OneVec^T | \be | - 2 \OneVec_K^T | \be | \leq 0 \\
+    & \text{ and } | \be | \preceq \frac{\mu \| \be \|_1}{1 + \mu}  \OneVec
+    \end{aligned}
+    \right. \right \}.
+   $$
+1. Clearly, $C_s^1 \subseteq C_s^2$.
+1. We note that $C_s^2$ is unbounded since if $\be \in C_s^2$, then
+   $c \be \in C_s^2 \Forall c \neq 0$.
+1. Thus, in order to study its behavior, it is sufficient
+   to consider the set of vectors with unit norm vectors $\| \be \|_1 = 1$.
+1. We construct the new set as
+   
+   $$
+    C_r = \left \{\be  \left | 
+        \| \be \|_1 = 1,
+        1 - 2 \OneVec_K^T | \be | \leq 0 \text { and } 
+        | \be | \preceq \frac{\mu }{1 + \mu}  \OneVec \right. \right \}.
+   $$
+1. Note that we replaced $\OneVec^T | \be | = \| \be \|_1 = 1$
+   in formulating the description of $C_r$ and
+   the condition $\be \neq \bzero$ is automatically enforced since 
+   $\| \be \|_1 = 1$.
+1. Clearly $C_s^2 = \EmptySet \iff C_r = \EmptySet$.
+1. In order to satisfy the requirement
+   $1 - 2 \OneVec_K^T | \be | \leq 0$,
+   we need to have $\OneVec_K^T | \be |$
+   as large as possible.
+1. Since this quantity only considers first $K$ 
+   entries in $\be$,
+   hence the energy in $\be$ should be concentrated inside the first $K$ entries
+   to maximize this quantity.
+1. However, entries in $\be$ are restricted by the third requirement
+   in $C_r$.
+1. We can maximize it by choosing
+   
+   $$
+    | e_j | = \frac{\mu }{1 + \mu}
+   $$ 
+   for first $K$ entries in $e$.
+1. We then get
+   
+   $$
+    1 - 2 \OneVec_K^T | \be |   = 1 - 2 K \frac{\mu }{1 + \mu} \leq 0.
+   $$
+1. This gives us
+   
+   $$
+    & 1 - 2 K \frac{\mu }{1 + \mu} \leq 0 \\
+    \iff & 1 + \mu \leq 2 K \mu \\
+    \iff & 2K \geq \frac{1 + \mu}{\mu}\\
+    \iff & K \geq \frac{1}{2} \left (  1 + \frac{1}{\mu} \right).
+   $$
+1. This is a necessary condition for $C_r$ to be non-empty.
+1. Thus, if 
+   
+   $$
+    K <  \frac{1}{2} \left (  1 + \frac{1}{\mu} \right)
+   $$
+   then, the requirement $1 - 2 \OneVec_K^T | \be | \leq 0$
+   is not satisfied and $C_r$ is empty.
+1. Consequently, $C$ is empty and the theorem is proved.
+````
+
+
