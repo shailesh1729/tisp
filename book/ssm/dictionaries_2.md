@@ -3,6 +3,110 @@
 This section continues the development of
 dictionaries for sparse and redundant representations.
 
+
+ 
+## Spark
+We present some more results on spark of a dictionary.
+
+### Upper Bounds for Spark
+
+Whenever a set of atoms in a dictionary are linearly dependent,
+the dependence corresponds to some vector in its null space. Thus,
+identifying the spark of a dictionary essentially amounts of
+sifting through the vectors in its null space and finding
+one with smallest $\ell_0$-"norm". 
+This can be cast as an optimization problem:
+
+```{math}
+:label: eq:proj:spark:minimum_l0_nullspace_problem
+
+& \underset{\bv}{\text{minimize}}
+& & \| \bv \|_0 \\
+& \text{subject to }
+& & \bDDD \bv = \bzero.
+```
+````{div}
+Note that the solution $\bv^*$ of this problem is not unique. 
+If $\bv^*$ is a solution that $c \bv^*$ for any $c \neq 0$
+is also a solution.
+Spark is the optimum value of the objective function $\| \bv \|_0$.
+We now define a sequence of optimization problems for $k = 1, \dots, D$
+
+```{math}
+:label: eq:proj:spark:minimum_l0_nullspace_problem_k
+ & \underset{\bv}{\text{minimize}}
+ & & \| \bv \|_0 \\
+ & \text{subject to }
+ & & \bDDD \bv = \bzero, v_k = 1.
+```
+1. The $k$-th problem constrains the solution to choose atom $\bd_k$ 
+   from the dictionary.
+1. Since the minimal set of linearly
+   dependent atoms in $\bDDD$ will contain at least two vectors,
+   hence $\spark(\bDDD)$ would correspond to the optimal value
+   of one (or more) of the problems
+   {eq}`eq:proj:spark:minimum_l0_nullspace_problem_k`.
+1. Formally, if we denote $\bv_k^{0, *}$ as an optimal vector for the problem 
+   {eq}`eq:proj:spark:minimum_l0_nullspace_problem_k`,
+   then
+   
+   $$
+    \spark(\bDDD) = \underset{1 \leq k \leq D}
+    {\text{minimize }}\| \bv_k^{0, *}\|_0.
+   $$
+1. Thus, solving {eq}`eq:proj:spark:minimum_l0_nullspace_problem` is
+   equivalent to solving all $D$ problems specified by
+   {eq}`eq:proj:spark:minimum_l0_nullspace_problem_k` and then
+   finding the minimum $\ell_0$-"norm" among them.
+1. The problems {eq}`eq:proj:spark:minimum_l0_nullspace_problem_k`
+   are still computationally intractable.
+
+We now change each of the $\ell_0$-"norm"
+{eq}`eq:proj:spark:minimum_l0_nullspace_problem_k`
+minimization problems to $\ell_1$-"norm" minimization problems.
+
+```{math}
+:label: eq:proj:spark:minimum_l1_nullspace_problem_k
+ & \underset{\bv}{\text{minimize }}
+ & & \| \bv \|_1 \\
+ & \text{subject to }
+ & & \bDDD \bv = \bzero, v_k = 1.
+```
+1. We have a convex objective and convex (linear)
+   constraints. These are tractable problems.
+1. Let us indicate an optimal solution of
+   {eq}`eq:proj:spark:minimum_l1_nullspace_problem_k`
+    as $\bv_k^{1, *}$.
+1. Since $\bDDD \bv_k^{1, *} = \bzero$,
+   hence $\bv_k^{1, *}$ is
+   feasible for {eq}`eq:proj:spark:minimum_l0_nullspace_problem_k`.
+1. Thus,
+   
+   $$
+   \| \bv_k^{0, *}\|_0 \leq  \| \bv_k^{1, *}\|_0.
+   $$
+1. This gives us the relationship
+   
+   $$
+   \spark(\bDDD) \leq \underset{1 \leq k \leq D}{\text{minimize }}
+   \| \bv_k^{1, *}\|_0.
+   $$
+````
+We formally state the upper bound on $\spark(\bDDD)$ in the following theorem
+{cite}`donoho2003optimally`.
+
+````{prf:theorem}
+:label: res:proj:spark:upper_bound_l1_problems
+
+Let $\bDDD$ be a dictionary. Then
+
+$$
+\spark(\bDDD) \leq \underset{1 \leq k \leq D}{\text{minimize }} \| \bv_k^{1, *}\|_0
+$$
+where $\bv_k^{1, *}$ is a solution of the problem {eq}`eq:proj:spark:minimum_l1_nullspace_problem_k`. 
+````
+
+
 (sec:dic:dirac_dct_dictionary)=
 ## Dirac-DCT dictionary
 
