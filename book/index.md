@@ -1,4 +1,7 @@
-# Topics in Signal Processing
+# Overview
+
+```{image} images/tisp_cover.png
+```
 
 These notes aim to provide a solid mathematical background for
 a deeper understanding of signal processing problems.
