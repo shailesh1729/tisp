@@ -516,6 +516,262 @@ and $\mu_1(\bDDD, K)$ in
 {eq}`eq:proj:babel:b15e1fe8-2589-4ee8-b28c-fb7f49cc1bba`
 are exactly the same.
 
+
+
+ 
+## Exact Recovery Coefficient
+
+we introduce a measure of similarity between a subdictionary and
+the remaining atoms from the dictionary known as
+the exact recovery coefficient.
+
+````{prf:definition}  Exact recovery coefficient
+:label: def:proj:erc
+
+The *Exact Recovery Coefficient*
+{cite}`tropp2004greed, tropp2004just, tropp2006just` for a subdictionary $\bDDD_{\Lambda}$ is defined as
+
+$$
+\ERC(\bDDD_{\Lambda})
+= 1 - \underset{\omega \notin \Lambda}{\max} 
+\|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1.
+$$
+We will also use the notation $\ERC(\Lambda)$
+when the dictionary is clear from context.
+````
+
+The quantity is called exact recovery coefficient
+since for a number of algorithms the criteria $\ERC(\Lambda) > 0$
+is a sufficient condition for exact
+recovery of sparse representations. 
+
+### ERC and Babel Function
+
+We present a lower bound on $\ERC(\Lambda)$ in terms of Babel function.
+
+````{prf:theorem} ERC lower bound: babel function
+:label: res:proj:erc_babel_lower_bound
+
+Suppose that $|\Lambda| = k  \leq K$.
+A lower bound on Exact Recovery Coefficient is 
+
+$$
+\ERC(\Lambda) \geq 
+\frac{1 - \mu_1(K- 1) - \mu_1(K)}{1  - \mu_1(K-1)}.
+$$
+It follows that $\ERC(\Lambda) > 0$ whenever 
+
+$$
+\mu_1(K- 1)  + \mu_1 (K) < 1.
+$$
+````
+````{prf:proof}
+1. Let us expand the pseudo-inverse $\bDDD_{\Lambda}^{\dag}$.
+   
+   $$
+    \underset{\omega \notin \Lambda}{\max} \|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1 
+    &= \underset{\omega \notin \Lambda}{\max} 
+    \left \|\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} 
+    \bDDD_{\Lambda}^H \bd_{\omega} \right \|_1\\
+    &\leq \|\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \|_{1 \to 1} \underset{\omega \notin \Lambda}{\max} \|\bDDD_{\Lambda}^H \bd_{\omega} \|_1.
+   $$
+1. For the Gram matrix $\bG = \bDDD_{\Lambda}^H \bDDD_{\Lambda}$
+   we recall from
+   {prf:ref}`res:ssm:inverse_gram_matrix_infty_norm_babel_bound` that:
+   
+   $$
+    \| \bG^{-1} \|_{1} \leq \frac{1}{1 - \mu_1(k - 1)} \leq \frac{1}{1 - \mu_1(K - 1)} .
+   $$
+1. For the other term we have
+   
+   $$
+    \underset{\omega \notin \Lambda}{\max} \|\bDDD_{\Lambda}^H \bd_{\omega} \|_1 
+    = \underset{\omega \notin \Lambda}{\max} 
+    \sum_{\lambda \in \Lambda}| \langle \bd_{\omega}, \bd_{\lambda} \rangle |
+    \leq \mu_1(k) \leq \mu_1(K).
+   $$
+1. Thus, we get
+   
+   $$
+    \underset{\omega \notin \Lambda}{\max} 
+    \|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1 \leq \frac{\mu_1(K)}{1 - \mu_1(K - 1)}.
+   $$
+1. Putting back in the definition of Exact Recovery Coefficient:
+   
+   $$
+    \ERC(\Lambda) = 1 - \underset{\omega \notin \Lambda}{\max} 
+    \|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1 
+    \geq 1 - \frac{\mu_1(K)}{1 - \mu_1(K - 1)}.
+   $$
+1. This completes the bound on ERC.
+1. Now, we verify the condition for $\ERC(\Lambda) > 0$.
+
+   $$
+    \mu_1(K) + \mu_1(K - 1) < 1
+    &\iff \mu_1(K) < 1 -  \mu_1(K - 1) \\
+    &\iff \frac{\mu_1(K)}{1 - \mu_1(K - 1)} < 1 \\
+    &\iff 1 - \frac{\mu_1(K)}{1 - \mu_1(K - 1)} > 0.
+   $$
+1. Thus, if $\mu_1(K) + \mu_1(K - 1) < 1$, then the lower bound on $\ERC(\Lambda)$
+   is positive leading to $\ERC(\Lambda) > 0$.
+````
+
+### ERC and Coherence
+On the same lines we develop a coherence bound for ERC.
+````{prf:theorem} ERC lower bound: coherence
+:label: res:proj:erc_coherence_lower_bound
+
+Suppose that $|\Lambda| = k  \leq K$.
+A lower bound on Exact Recovery Coefficient is 
+
+$$
+\ERC(\Lambda) \geq \frac{1 - (2K - 1) \mu}{1  - (K - 1)\mu}.
+$$
+It follows that $\ERC(\Lambda) > 0$ whenever 
+
+$$
+K \mu \leq \frac{1}{2}.
+$$
+````
+````{prf:proof}
+.
+
+1. Following the proof of {prf:ref}`res:proj:erc_babel_lower_bound`
+   for the Gram matrix $\bG = \bDDD_{\Lambda}^H \bDDD_{\Lambda}$ have:
+   
+   $$
+    \| \bG^{-1} \|_{1} \leq \frac{1}{1 - \mu_1(K - 1)}
+    \leq \frac{1}{1  - (K - 1)\mu}.
+   $$
+1. For the other term we have
+   
+   $$
+    \underset{\omega \notin \Lambda}{\max} 
+    \|\bDDD_{\Lambda}^H \bd_{\omega} \|_1 
+    \leq \mu_1(K) \leq K \mu.
+   $$
+1. Thus, we get
+   
+   $$
+    \underset{\omega \notin \Lambda}{\max} 
+    \|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1 \leq \frac{K \mu}{1  - (K - 1)\mu}.
+   $$
+1. Putting back in the definition of Exact Recovery Coefficient:
+   
+   $$
+    \ERC(\Lambda) \geq 1 - \frac{K \mu}{1  - (K - 1)\mu}
+    = \frac{1  - (2K - 1)\mu}{1  - (K - 1)\mu}.
+   $$
+1. This completes the bound on ERC.
+1. Now, we verify the condition for $\ERC(\Lambda) > 0$.
+   
+   $$
+    K \mu \leq \frac{1}{2} 
+    \implies 2 K \mu  \leq 1 \implies 1 - 2K \mu \geq 0 \implies 1 - 2K \mu + \mu > 0.
+   $$
+1. And
+   
+   $$
+    K \mu \leq \frac{1}{2}
+    \implies 1 - K \mu \geq \frac{1}{2} 
+    \implies 1 - K \mu  + \mu \geq \frac{1}{2} + \mu.
+   $$
+1. Thus $K \mu \leq \frac{1}{2}$ ensures that both
+   numerator and denominator for the coherence lower bound
+   on $\ERC(\Lambda)$ are positive leading to $\ERC(\Lambda) > 0$. 
+````
+A more accurate bound on $K$ is presented in the next theorem.
+
+````{prf:theorem}
+:label: res:proj:erc_postive_coherence
+
+$\ERC(\Lambda) > 0$ holds whenever 
+
+$$
+K < \frac{1}{2} \left (1 +  \frac{1}{\mu} \right )
+$$
+where $K = | \Lambda| $.
+````
+````{prf:proof}
+.
+
+1. Assuming $1  - (K - 1)\mu > 0$, we have
+   
+   $$
+    &\frac{1 - (2K - 1) \mu}{1  - (K - 1)\mu} > 0 \\
+    \iff & 1 - (2K - 1) \mu > 0\\
+    \iff & 1 > (2K - 1) \mu \\
+    \iff & 2K - 1 < \frac{1}{\mu}\\
+    \iff & K < \frac{1}{2} \left (1 +  \frac{1}{\mu} \right ).
+   $$
+1. From {prf:ref}`res:proj:erc_coherence_lower_bound`, we have
+   
+   $$
+    \ERC(\Lambda) \geq \frac{1 - (2K - 1) \mu}{1  - (K - 1)\mu}.
+   $$ 
+1. Thus under the given conditions, we have
+   
+   $$
+    \ERC(\Lambda) > 0.
+   $$
+1. We also need to show that under these conditions 
+   
+   $$
+    1  - (K - 1)\mu > 0.
+   $$
+1. We can see that:
+
+    $$
+    & 2K - 1 < \frac{1}{\mu} \\
+    \implies  & 2K - 2 < \frac{1}{\mu} - 1\\
+    \implies & 2 (K - 1) \mu < 1 - \mu \\
+    \implies & - (K - 1) \mu > \frac{\mu}{2} - \frac{1}{2}\\
+    \implies &  1 - (K - 1) \mu >  \frac{1}{2} + \frac{\mu}{2}\\
+    \implies & 1 - (K - 1) \mu > 0.
+    $$
+````
+
+### Geometrical Interpretation of ERC
+
+
+````{prf:definition} Antipodal convex hull of a subdictionary
+:label: def:proj:antipodal_convex_hull_subdictionary
+
+The *antipodal convex hull* {cite}`tropp2004just` of a subdictionary $\bDDD_{\Lambda}$
+is defined as the set of signals given by
+
+$$
+\AAA_1 (\Lambda) 
+= \{\bDDD_{\Lambda} \bx \ST \bx \in \CC^{\Lambda}
+\text{ and }  \| \bx \|_1 \leq 1\}.
+$$
+````
+
+````{div}
+It is the smallest convex set that contains every unit multiple of every atom. 
+
+1. We recall that $\bP_{\Lambda} = \bDDD_{\Lambda} \bDDD_{\Lambda}^{\dag}$
+   is the orthogonal projector on to the column space of $\bDDD_{\Lambda}$. 
+1. Therefore $\bc_{\omega} = \bDDD_{\Lambda}^{\dag} \bd_{\omega} \in \CC^{\Lambda}$
+   is a coefficient vector  which can be used to synthesize 
+   this projection.
+1. In other words:
+   
+   $$
+    \bP_{\Lambda} \bd_{\omega}
+    = \bDDD_{\Lambda} \bDDD_{\Lambda}^{\dag} \bd_{\omega}
+    = \bDDD_{\Lambda} \bc_{\omega}.
+   $$
+1. Thus, the quantity $1  - \| \bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1$
+   measures how far the projected atom $\bP_{\Lambda} \bd_{\omega}$
+   lies from the boundary of $\AAA_1 (\Lambda)$. 
+1. If every projected atom lies well within the antipodal convex hull,
+   then it is possible to recover superpositions of atoms from $\Lambda$.
+1. This happens because coefficient associated with an atom outside $\Lambda$
+   must be quite large to represent anything in the span of the subdictionary
+   whenever $\ERC(\Lambda) > 0$.
+````
+
 (sec:dic:dirac_dct_dictionary)=
 ## Dirac-DCT dictionary
 
