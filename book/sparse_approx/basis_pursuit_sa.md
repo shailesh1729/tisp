@@ -1058,3 +1058,147 @@ Unique solution of {eq}`eq:bp:bp_l1_norm_minimization`
    $$
    where $\bh = \ba - \ba'$ (thus $\bDDD \bh = \bzero$).
 ````
+
+## BPIC
+In the subsection, we present a stability guarantee result for BPIC.
+
+````{prf:theorem}
+:label: res:bp:bpic_stability_guarantee
+
+Consider an instance of the {eq}`eq:bp:bpic_l1_norm_minimization` problem
+defined by the triplet $(\bDDD, \bx, \epsilon)$.
+Suppose that a vector $\ba \in \CC^D$ is a feasible
+solution to {eq}`eq:bp:bpic_l1_norm_minimization` satisfying the sparsity constraint
+
+$$
+\| \ba \|_0  < \frac{1}{4} \left (1  + \frac{1}{\mu (\bDDD)} \right). 
+$$
+The solution $\widehat{\ba}$ of {eq}`eq:bp:bpic_l1_norm_minimization`
+must satisfy
+
+$$
+\|\widehat{\ba} - \ba \|_2^2 
+\leq \frac{4 \epsilon^2}{ 1 - \mu (\bDDD) ( 4 \| \ba \|_0 - 1)}.
+$$
+````
+
+````{prf:proof}
+As before, we define $\bb = \widehat{\ba} - \ba$.
+
+1. Then
+
+    $$
+    \| \bDDD \bb \|_2 
+    = \|\bDDD (\widehat{\ba} - \ba) \|_2 
+    = \|\bDDD  \widehat{\ba} - \bx + \bx -\bDDD \ba \|_2  \leq 2 \epsilon.
+    $$
+1. We now rewrite the inequality in terms of the Gram matrix
+   $\bG  = \bDDD^H \bDDD$. 
+
+    $$
+    4 \epsilon^2 \geq  &= \|\bDDD \bb  \|_2^2 = \bb^H \bG \bb\\
+    &= \bb^H (\bG - \bI + \bI) \bb \\
+    &= \| \bb \|_2^2 +\bb^H (\bG - \bI ) \bb.
+    $$
+1. It is easy to show that:
+
+    $$
+    - | \bb |^T | \bA | | \bb | \leq \bb^H \bA \bb \leq | \bb |^T | \bA | | \bb |
+    $$
+    whenever $\bA$ is Hermitian.
+    1. To see this just notice that $\bb^H \bA \bb$ is a real quantity.
+    1. Hence $\bb^H \bA \bb = \pm | \bb^H \bA \bb |$.
+    1. Now, using triangle inequality we can easily show that
+       $| \bb^H \bA \bb | \leq | \bb|^T | \bA | | \bb |$.
+1. Since $\bG- \bI$ is Hermitian, hence
+
+    $$
+    \bb^H (\bG - \bI) \bb \geq - | \bb |^T | \bG - \bI | | \bb |.
+    $$
+1. Now 
+
+    $$
+    | \bb |^T | \bG - \bI | | \bb | 
+    = \sum_{i, j}|b_i | |\bd_i^H \bd_j - \delta_{i j} | | b_j | 
+    \leq \mu (\bDDD) \sum_{i, j, i \neq j} |b_i | | b_j |
+    = \mu (\bDDD) | \bb |^T (\OneMat - \bI) | \bb |.
+    $$
+1. Only the off-diagonal terms of $\bG$ remain in the sum,
+   which are all dominated by $\mu (\bDDD)$.
+1. Thus we get
+    
+    $$
+    4 \epsilon^2 &\geq  \| \bb \|_2^2 - | \bb |^T (\OneMat - \bI) | \bb |\\
+    &= (1 + \mu (\bDDD)) \| \bb \|_2^2 - \mu (\bDDD) | \bb |^T \OneMat | \bb |\\
+    &= (1 + \mu (\bDDD)) \| \bb \|_2^2 - \mu (\bDDD) \| \bb \|_1^2.
+    $$
+    This is valid since $v^H \OneMat \bv = \| \bv \|_1^2$. 
+1. Since $\widehat{\ba}$ is optimal solution of
+   {eq}`eq:bp:bpic_l1_norm_minimization`, hence
+   
+   $$
+    \| \widehat{\ba} \|_1 = \| \bb + \ba \|_1 
+    \leq \| \ba \|_1 \implies 
+    \| \bb + \ba \|_1 - \| \ba \|_1 \leq 0.
+   $$
+1. Let $\Lambda = \supp(\ba)$ and $K = |\Lambda|$. 
+1. By a simple permutation of columns of $\bDDD$,
+   we can bring the entries in $\ba$ 
+   to the first $K$ entries making
+   $\Lambda = \{1, \dots, K\}$.
+1. We will make this assumption going forward without loss of generality.
+1. Let $\OneVec_K$ be corresponding support vector
+   (of ones in first K places and 0 in rest). 
+1. From our previous analysis, we recall that
+   
+   $$
+    \| \bb + \ba \|_1 - \| \ba \|_1 
+    \geq \| \bb \|_1 - 2 \OneVec_K^T | \bb |. 
+   $$
+1. Thus
+   
+   $$
+    \| \bb \|_1 - 2 \OneVec_K^T | \bb |\leq 0
+    \implies \| \bb \|_1 \leq 2 \OneVec_K^T | \bb |.
+   $$
+1. $ \OneVec_K^T | \bb |$ is the sum of first $K$ terms of $|\bb|$. 
+1. Considering $\bb_{\Lambda}$ as a vector $\in \CC^K$ and
+   using the $\ell_1$-$\ell_2$ norm relation
+   $\| \bv \|_1 \leq \sqrt{K} \| \bv \|_2 
+   \Forall \bv \in \CC^N$, we get
+   
+   $$
+    \OneVec_K^T | \bb | = \| \bb_{\Lambda} \|_1
+    \leq \sqrt{K} \| \bb_{\Lambda} \|_2 \leq  \sqrt{K} \| \bb \|_2.
+   $$
+1. Thus,
+   
+   $$
+    \| \bb \|_1 \leq 2 \OneVec_K^T | \bb | \leq 2 \sqrt{K} \| \bb \|_2.
+   $$
+1. Putting this back in the previous inequality
+   
+   $$
+    4 \epsilon^2 
+    &\geq (1 + \mu (\bDDD)) \| \bb \|_2^2 - \mu (\bDDD) \| \bb \|_1^2\\
+    &\geq (1 + \mu (\bDDD)) \| \bb \|_2^2 - \mu (\bDDD) 4 K \| \bb \|_2^2 \\
+    &= (1  - (4 K - 1) \mu (\bDDD)) \| \bb \|_2^2.
+   $$
+1. We note that this inequality is valid only if 
+   
+   $$
+    1  - (4 K - 1) \mu (\bDDD) > 0.
+   $$
+1. This condition can be reformulated as
+   
+   $$
+    \| \ba \|_0  = K < \frac{1}{4} \left (1  + \frac{1}{\mu (\bDDD)} \right). 
+   $$
+1. Rewriting the bound on $\| \bb \|_2^2$ we get
+   
+   $$
+    \| \bb \|_2^2 \leq \frac{4 \epsilon^2}{(1  - (4 K - 1) \mu (\bDDD)) }
+   $$
+   which is the desired result.
+````
+
