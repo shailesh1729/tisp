@@ -1805,3 +1805,93 @@ $$
     \leq \gamma \left [1 - \underset{\omega \notin \Lambda}{\max} \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})\|_1 \right ].
    $$
 ````
+
+### Exact Recovery Coefficient
+
+```{div}
+We recall that {prf:ref}`Exact Recovery Coefficient <def:proj:erc>`
+for a subdictionary is defined as
+
+$$
+\ERC(\Lambda) = 1 - \underset{\omega \notin \Lambda}{\max}
+\|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1.
+$$
+Thus, the sufficient condition can be rewritten as 
+
+$$
+\| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty}
+\leq \gamma \ERC(\Lambda).
+$$
+
+1. Note that the L.H.S. in both sufficient conditions
+   is always non-negative.
+1. Hence, if the R.H.S. is negative (i.e. $\ERC(\Lambda) < 0$),
+   the sufficient condition is useless. 
+1. On the other hand if $\ERC(\Lambda) > 0$,
+   then a sufficiently high $\gamma$ can always be chosen
+   to satisfy the condition in
+   {eq}`eq:6a6bdfe2-48c9-4f66-ab7f-e1645fabaa8f`.
+1. At the same time as $\gamma \to \infty$,
+    the optimum minimizer is $\ba^* = \bzero$. 
+
+How do we interpret the L.H.S.
+$\| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty}$?
+```
+
+````{prf:definition}
+:label: def:bp:maxcor
+
+Given a non-zero signal $\bv$ and a dictionary $\bDDD$, define the function
+
+$$
+\Maxcor(\bv) \triangleq 
+\frac{\underset{\omega \in \Omega}{\max} 
+|\langle \bv, \bd_{\omega} \rangle | }{ \| \bv \|_2}.
+$$
+If $\bv = \bzero$, then define $\Maxcor(\bv) = 0$.
+
+This is known as the *maximum correlation* {cite}`tropp2006just` of a signal with a dictionary.
+````
+Essentially, for any signal we normalize it and then find out
+its maximum inner product (absolute value) with atoms in
+the dictionary $\bDDD$.
+Clearly $0 \leq \Maxcor(\bv) \leq 1$.
+
+````{div}
+We can see that
+
+$$
+    \| \bDDD^H \bv \|_{\infty} = \Maxcor (\bv) \| \bv \|_2.
+$$
+We can now interpret
+
+$$
+\| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty}
+= \Maxcor (\bx - \widehat{\bx}_{\Lambda} ) 
+\| \bx - \widehat{\bx}_{\Lambda} \|_2.
+$$
+Therefore, the sufficient condition in {prf:ref}`res:bp:bpdn_correlation_condition_global_minimizer` is
+strongest when the magnitude of the residual
+$(\bx - \widehat{\bx}_{\Lambda})$ and 
+its maximum correlation with the dictionary are both small.
+
+Since the maximum correlation of the residual never exceeds one,
+hence we obtain following (much weaker result)
+````
+
+````{prf:corollary}
+:label: res:bp:bpdn:recovery:support:erc
+
+Let $\Lambda$ index a subdictionary and let $\bx$ be an input signal. 
+Suppose that the residual vector $\bx - \widehat{\bx}_{\Lambda}$
+satisfies
+
+$$
+ \| \bx - \widehat{\bx}_{\Lambda} \|_2 \leq \gamma \ERC(\Lambda).
+$$
+Then any coefficient vector $\ba^*$ that minimizes the function $L$
+must be supported inside $\Lambda$.
+````
+
+
+
