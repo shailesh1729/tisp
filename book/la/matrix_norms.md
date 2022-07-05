@@ -1,3 +1,4 @@
+(sec:la:matrix:norms)=
 # Matrix Norms
 
 This section reviews various matrix norms on the vector space of

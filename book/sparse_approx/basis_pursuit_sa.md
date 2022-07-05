@@ -1202,3 +1202,606 @@ As before, we define $\bb = \widehat{\ba} - \ba$.
    which is the desired result.
 ````
 
+## BPDN
+
+In this subsection we will examine the $\ell_1$ penalty problem
+{eq}`eq:bp:bpdn_l1_norm_minimization_gamma` more closely.
+
+````{math}
+:label: bp:bpdn:l_1_penalty_problem
+\widehat{\ba} 
+= \text{arg } \underset{\ba \in \CC^D}{\min}
+\frac{1}{2} \| \bx -  \bDDD \ba \|_2^2 + \gamma \| \ba \|_1.
+````
+
+We will focus on following issues:
+
+*  Some results from convex analysis useful for our study
+*  Conditions for the minimization of {eq}`bp:bpdn:l_1_penalty_problem`
+   over coefficients $\ba$ supported on a subdictionary $\bDDD_{\Lambda}$
+*  Conditions under which the unique minimizer for a subdictionary
+   is also the global minimizer for {eq}`bp:bpdn:l_1_penalty_problem`
+*  Application of {eq}`bp:bpdn:l_1_penalty_problem` for sparse signal
+   recovery
+*  Application of {eq}`bp:bpdn:l_1_penalty_problem` for identification
+   of sparse signals in presence of noise
+*  Application of {eq}`bp:bpdn:l_1_penalty_problem` for identification
+   of sparse signals in presence of Gaussian noise
+
+We recall some definitions and results from convex analysis which will help us
+understand the minimizers for {eq}`bp:bpdn:l_1_penalty_problem` problem.
+
+Convex analysis for real valued functions the vector space $(\CC^n, \RR)$
+is developed using the bilinear inner product defined as
+
+$$
+\langle \bx, \by \rangle_B = \Re (\by^H \bx).
+$$
+The subscript $B$ is there to distinguish it from the standard inner
+product for the complex coordinate space $\langle \bx, \by \rangle = \by^H \bx$.
+The two inner products are related as
+
+$$
+\langle \bx, \by \rangle_B = \Re (\langle \bx, \by \rangle).
+$$
+
+We consider real valued functions over the inner product space
+$\XX = (\CC^D, \langle \cdot, \cdot \rangle_B)$.
+Note that the dimension of $\XX$ is $2 D$.
+
+A real valued convex function $f : \XX \to \RR$ satisfies
+the standard convexity inequality
+
+$$
+f (\theta \bx + (1 - \theta) \by ) 
+\leq \theta f (\bx) + (1 - \theta) f(\by) \Forall 0 \leq \theta \leq 1.
+$$
+The objective function for the problem {eq}`bp:bpdn:l_1_penalty_problem` is
+
+```{math}
+:label: bp:bpdn:l_1_penalty_objective_function
+L(\ba) = \frac{1}{2} \| \bx -  \bDDD \ba \|_2^2 + \gamma \| \ba \|_1.
+```
+Clearly, $L$ is a real valued function over $\XX$ and it is easy to so that
+it is a convex function. Moreover  $L(\ba) \geq 0$ always.
+
+We suggest the readers to review the material in {ref}`sec:cvxf:subgradients`.
+For any function $f : \XX \to \RR$, its *subdifferential set* is defined as
+
+$$
+\partial f(\bx) \triangleq 
+\{ \bg \in \XX \ST f(\by) 
+\geq f(\bx) + \langle \by - \bx, \bg \rangle_B \Forall \by \in \XX\}.
+$$
+The elements of subdifferential set are called *subgradients*.
+If $f$ possesses a gradient at $\bx$, then it is the unique subgradient at $\bx$. i.e.
+
+$$
+\partial f(\bx)  = \{\nabla f(\bx) \}
+$$
+where $\nabla f(\bx)$ is the gradient of $f$ at $\bx$. 
+
+For convex function, the subdifferential of a sum
+is the (Minkowski) sum of the subdifferentials
+({prf:ref}`res-cvxf-subdiff-function-sum-convex`); i.e.,
+
+$$
+\partial (f(\bx) + g(\bx)) = \partial f(\bx) + \partial g(\bx)
+= \{\bh_1 + \bh_2 \ST \in \bh_1 \in \partial f(\bx), \bh_2 \in \partial g(\bx) \}.
+$$
+
+By Fermat's optimality condition
+({prf:ref}`res-cvxf-subdiff-fermat-optimality`),
+if $f$ is a closed, proper convex function,
+then $\bx$ is a global minimizer of $f$ if and only if
+$\bzero \in \partial f(\bx)$.  
+
+```{div}
+We would be specifically interested in the subdifferential for the function $\| \ba \|_1$. 
+```
+
+````{prf:theorem}
+:label: res:bp:l1_norm_subdifferential
+
+Let $\bz \in \XX$.
+The vector $\bg \in \XX$ lies in the subdifferential
+$\partial \| \bz \|_1$ if and only if
+
+*  $| g_k | \leq 1 \text{ whenever } z_k = 0$.
+*  $g_k = \sgn (z_k) \text{ whenever } z_k \neq 0$.
+````
+The proof is skipped.
+```{div}
+We recall that the signum function for complex numbers is defined as
+
+$$
+\sgn(r e^{i \theta}) = \left\{
+    \begin{array}{ll}
+        e^{i \theta} & \mbox{if $r > 0$};\\
+        0 & \mbox{if $r = 0$}.
+    \end{array}
+  \right.
+$$
+The subdifferential for $\ell_1$ norm function for $\RR^n$ is
+developed in {prf:ref}`ex-cvxf-subdiff-l1-norm-origin`.
+We note that $\ell_1$ norm is differentiable at nonzero vectors.
+Also, we can see that:
+
+1. $\| \bg \|_{\infty} = 1$ when $\bz \neq \bzero$.
+1. $\| \bg \|_{\infty} \leq 1$ when $\bz = \bzero$.
+```
+
+### Restricted Minimizers
+
+````{div}
+1. Suppose $\Lambda$ index a subdictionary $\bDDD_{\Lambda}$.
+1. $\bDDD_{\Lambda}$ is a linearly independent collection of atoms.
+1. Hence a unique $\ell_2$ best approximation $\widehat{\bx}_{\Lambda}$
+   of $\bx$ using the atoms in $\bDDD_{\Lambda}$
+   can be obtained using the least square techniques.
+1. We define the orthogonal projection operator
+   
+   $$
+    \bP_{\Lambda} = \bDDD_{\Lambda}\bDDD_{\Lambda}^{\dag}.
+   $$
+1. And we get
+   
+   $$
+    \widehat{\bx}_{\Lambda}  = \bP_{\Lambda} \bx.
+   $$
+1. The approximation is orthogonal to the residual;
+   i.e., $(\bx - \widehat{\bx}_{\Lambda}) \perp \widehat{\bx}_{\Lambda}$.
+1. There is a unique coefficient vector $\bc_{\Lambda}$ supported on $\Lambda$
+   that synthesizes the approximation $\widehat{\bx}_{\Lambda}$. 
+   
+   $$
+    \bc_{\Lambda} = \bDDD_{\Lambda}^{\dag} \bx
+    = \bDDD_{\Lambda}^{\dag} \widehat{\bx}_{\Lambda}.
+   $$
+1. We also have
+   
+   $$
+    \widehat{\bx}_{\Lambda} = \bP_{\Lambda} \bx = \bDDD_{\Lambda} \bc_{\Lambda}.
+   $$
+````
+
+````{prf:theorem} Minimization of $L$ over vectors supported on $\Lambda$
+:label: res:bp:bpdn:l1_local_minimizer_condition
+
+Let  $\Lambda$ index a linearly independent collection of atoms in $\bDDD$
+and let $\ba^*$ minimize the objective function $L(\ba)$
+in {eq}`bp:bpdn:l_1_penalty_objective_function`
+over all coefficient vectors
+supported on $\Lambda$ (i.e. $\supp(\ba) \subseteq \Lambda$).
+A necessary and sufficient condition on such a minimizer is that 
+
+```{math}
+:label: eq:d7564ff5-947f-4a93-b563-4b5c18ff05ea
+\bc_{\Lambda} - \ba^*  = \gamma (\bDDD_{\Lambda}^H \bDDD_{\Lambda})^{-1} \bg
+```
+where $\bc_{\Lambda} = \bDDD_{\Lambda}^{\dag} \bx$
+and the vector $\bg$ is drawn from $\partial \| \ba^* \|_1$.
+Moreover, the minimizer $\ba^*$ is unique.
+````
+
+````{prf:proof}
+Since we are restricted $\ba$ to be supported on $\Lambda$ (i.e. $\ba \in \CC^{\Lambda}$),
+hence 
+
+$$
+\bDDD \ba = \bDDD_{\Lambda} \ba_{\Lambda}.
+$$
+The objective function simplifies to
+
+$$
+L(\ba) = \frac{1}{2} \| \bx -  \bDDD_{\Lambda} \ba_{\Lambda} \|_2^2 + 
+\gamma \| \ba_{\Lambda} \|_1.
+$$
+
+1. We define $\widehat{\bx}_{\Lambda}  = \bP_{\Lambda} \bx$.
+1. Now, both $\widehat{\bx}_{\Lambda}$ and $\bDDD_{\Lambda} \ba_{\Lambda}$
+   belong to the column space of $\bDDD_{\Lambda}$
+   while $\bx - \widehat{\bx}_{\Lambda}$ is orthogonal to it.
+1. Hence
+   
+   $$
+    \bx - \widehat{\bx}_{\Lambda} \perp \widehat{\bx}_{\Lambda} - \bDDD \ba.
+   $$
+1. Thus, using the Pythagorean theorem, we get
+   
+   $$
+    \| \bx -  \bDDD \ba \|_2^2 
+    = \| \bx - \widehat{\bx}_{\Lambda} + \widehat{\bx}_{\Lambda} - \bDDD \ba \|_2^2 
+    = \|\bx - \widehat{\bx}_{\Lambda} \|_2^2 + \| \widehat{\bx}_{\Lambda} - \bDDD \ba\|_2^2.
+   $$
+1. We can rewrite $L(\ba)$ as 
+   
+   $$
+    L(\ba) = \frac{1}{2} \|\bx - \widehat{\bx}_{\Lambda} \|_2^2
+    + \frac{1}{2} \| \widehat{\bx}_{\Lambda} - \bDDD \ba\|_2^2 + \gamma \| \ba \|_1.
+   $$
+1. Define
+   
+   $$
+    F(\ba) = \frac{1}{2} \| \widehat{\bx}_{\Lambda} - \bDDD \ba\|_2^2 + \gamma \| \ba \|_1.
+   $$
+1. Then
+   
+   $$
+    L(\ba) = \frac{1}{2} \|\bx - \widehat{\bx}_{\Lambda} \|_2^2 + F(\ba).
+   $$
+1. Note that the term $\|\bx - \widehat{\bx}_{\Lambda} \|_2^2$ is constant.
+   It is the squared norm of the least square error.
+1. Thus, minimizing $L(\ba)$ over the coefficient vectors supported on $\Lambda$
+   is equivalent to minimizing $F(\ba)$ over the same support set.
+1. Note that
+   
+   $$
+    \bDDD \ba = \bDDD_{\Lambda} \ba_{\Lambda}
+    \text{ and } \| \ba \|_1 = \| \ba_{\Lambda} \|_1.
+   $$
+1. We can write $F(\ba)$ as
+   
+   $$
+    F(\ba) = \frac{1}{2} \| \widehat{\bx}_{\Lambda} - \bDDD_{\Lambda} \ba_{\Lambda}\|_2^2
+    + \gamma \| \ba_{\Lambda} \|_1.
+   $$
+1. Note that $F(\ba)$ depends only on entries in $\ba$ which are part of the support $\Lambda$.
+1. We can replace the variable  $\ba_{\Lambda}$ with $\ba \in \CC^{\Lambda}$
+   and rewrite $F(\ba)$ as
+
+   $$
+    F(\ba) = \frac{1}{2} \| \widehat{\bx}_{\Lambda} - \bDDD_{\Lambda} \ba\|_2^2
+    + \gamma \| \ba \|_1 \Forall \ba \in \CC^{\Lambda}.
+   $$
+1. Since atoms indexed by $\Lambda$ are linearly independent,
+   hence $\bDDD_{\Lambda}$ has full column rank.
+1. Thus, the quadratic term $\| \widehat{\bx}_{\Lambda} - \bDDD_{\Lambda} \ba\|_2^2$
+   is strictly convex. 
+1. Since $\| \ba \|_1$ is also convex, $F(\ba)$ therefore is strictly convex
+   and its minimizer is unique. 
+1. Since $F$ is strictly convex and unconstrained,
+   hence $\bzero \in \partial F(\ba^*)$ is a necessary and sufficient
+   condition for the coefficient vector $\ba^*$ to minimize $F(\ba)$.
+1. The gradient of the first (quadratic) term is
+   
+   $$
+    \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right) \ba  - \bDDD_{\Lambda}^H \widehat{\bx}_{\Lambda}.
+   $$
+1. For the second term we have to consider its subdifferential
+   $\partial \| \ba \|_1$.
+1. Thus, at $\ba^*$ it follows that
+   
+   $$
+    \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right) \ba^*  - \bDDD_{\Lambda}^H \widehat{\bx}_{\Lambda} + \gamma \bg = \bzero.
+   $$ 
+   where $\bg$ is some subgradient in $\partial \| \ba^* \|_1$.
+1. Premultiplying with $\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1}$
+   we get
+   
+   $$
+    &\ba^*  - \bDDD_{\Lambda}^{\dag} \widehat{\bx}_{\Lambda}
+    + \gamma \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg  = \bzero\\
+    &\implies \bDDD_{\Lambda}^{\dag} \widehat{\bx}_{\Lambda} - \ba^* = \gamma \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg.
+   $$
+1. Finally, we recall that $\bDDD_{\Lambda}^{\dag} \widehat{\bx}_{\Lambda} = \bc_{\Lambda}$.
+1. Thus, we get the desired result
+   
+   $$
+    \bc_{\Lambda} - \ba^*  = \gamma \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg.
+   $$
+````
+
+
+Some bounds follow as a result of this theorem.
+Readers are suggested to review the material in
+{ref}`sec:la:matrix:norms`.
+
+````{prf:theorem}
+:label: res:bp:norm_upper_bounds_optimal_vs_projector
+
+Suppose that $\Lambda$ index a subdictionary $\bDDD_{\Lambda}$
+and let $\ba^*$ minimize
+the function $L$ over all coefficient vectors
+supported on $\Lambda$.
+Then following bounds are in force:
+
+$$
+\| \bc_{\Lambda} - \ba^* \|_{\infty}
+\leq \gamma \|\left (\bDDD_{\Lambda}^H 
+    \bDDD_{\Lambda} \right)^{-1}\|_{\infty}.
+$$
+
+$$
+\| \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*) \|_2
+\leq \gamma \| \bDDD_{\Lambda}^{\dag} \|_{2 \to 1}.
+$$
+````
+````{prf:proof}
+We start with
+
+```{math}
+:label: eq:2826c54e-96c6-4ef3-8be9-fff688e713b3
+\bc_{\Lambda} - \ba^*  = \gamma 
+\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg.
+```
+1. we take the $\ell_{\infty}$ norm on both sides and
+   apply some norm bounds
+   
+   $$
+    \| \bc_{\Lambda} - \ba^* \|_{\infty} 
+    &= \| \gamma \left 
+    (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg \|_{\infty}\\
+    &\leq \gamma \|\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \|_{\infty} 
+    \| \bg \|_{\infty}\\
+    &\leq \gamma \|\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \|_{\infty}.
+   $$
+   The last inequality is valid since from {prf:ref}`res:bp:l1_norm_subdifferential`
+    we have: $\| \bg \|_{\infty} \leq 1$.
+1. Now let us premultiply {eq}`eq:2826c54e-96c6-4ef3-8be9-fff688e713b3`
+   with $\bDDD_{\Lambda}$ and apply $\ell_2$ norm
+
+   $$
+    \|\bDDD_{\Lambda} ( \bc_{\Lambda} - \ba^*) \|_2 
+    &= \|\gamma \bDDD_{\Lambda} 
+    \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg \|_2\\
+    &= \gamma \|  (\bDDD_{\Lambda}^{\dag})^H \bg \|_2 \\
+    &\leq \|  (\bDDD_{\Lambda}^{\dag})^H \|_{\infty \to 2} \| \bg \|_{\infty} \\
+    &= \|  \bDDD_{\Lambda}^{\dag} \|_{2 \to 1} \| \bg \|_{\infty} \\
+    &\leq \|  \bDDD_{\Lambda}^{\dag} \|_{2 \to 1}.
+   $$
+1. In this derivation we used facts like
+   $\| \bA \|_{p \to q} = \| \bA^H \|_{q' \to p'}$,
+   $\| \bA \bx \|_q \leq \| \bA \|_{p \to q} \| \bx \|_p$
+   and $\| \bg \|_{\infty} \leq 1$.
+````
+
+### The Correlation Condition
+
+So far we have established a condition which
+ensures that $\ba^*$ is a unique minimizer
+of $L$ given that $\ba$ is supported on $\Lambda$. 
+We now establish a sufficient condition under which
+$\ba^*$ is also a global minimizer for $L(\ba)$.
+
+````{prf:theorem} Correlation condition for global minimizer
+:label: res:bp:bpdn_correlation_condition_global_minimizer
+
+Assume that $\Lambda$ indexes a subdictionary.
+Let $\ba^*$ minimize the function $L$
+over all coefficient vectors supported on $\Lambda$.
+Suppose that
+
+```{math}
+:label: eq:897d5134-9f27-4017-a926-9e522045c3ae
+
+\| \bDDD^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty} \leq 
+\gamma \left [ 
+1 - \underset{\omega \notin \Lambda}{\max} |\langle\bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg  \rangle| 
+\right]
+```
+where $\bg \in \partial \| \ba^* \|_1$ is determined by {eq}`eq:d7564ff5-947f-4a93-b563-4b5c18ff05ea`.
+Then $\ba^*$ is the unique global minimizer of $L$.
+Moreover, the condition
+
+```{math}
+:label: eq:6a6bdfe2-48c9-4f66-ab7f-e1645fabaa8f
+\| \bDDD^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty} \leq 
+\gamma \left [ 
+1 - \underset{\omega \notin \Lambda}{\max}\|\bDDD_{\Lambda}^{\dag}  \bd_{\omega}\|_1 
+\right]
+```
+guarantees that $\ba^*$ is the unique global minimizer of $L$.
+````
+
+````{prf:proof}
+Let $\ba^*$ be the unique minimizer of $L$ over
+coefficient vectors supported on $\Lambda$.
+Then, the value of the objective function $L(\ba)$ increases
+if we change any coordinate of $\ba^*$ indexed in $\Lambda$. 
+
+What we need is a condition which ensures that the value of objective function
+also increases if we change any other component of $\ba^*$
+(not indexed by $\Lambda$).
+1. If this happens, then $\ba^*$ will become a local minimizer of $L$.
+1. Further, since $L$ is convex, $\ba^*$ will also be global minimizer. 
+
+
+Towards this, let $\omega$ be some index not in $\Lambda$
+and $\be_{\omega} \in \CC^D$ be corresponding unit vector.
+Let $\delta \be_{\omega}$ be a small perturbation introduced in $\omega$-th coordinate.
+($\delta \in \CC$ is a small scalar, though need not be positive real).
+We need find a condition which ensures
+
+$$
+L (\ba^* + \delta \be_{\omega}) - L (\ba^*) > 0 \Forall \omega \notin \Lambda.
+$$
+
+1. Let us expand the L.H.S. of this inequality:
+
+   $$
+    &L (\ba^* + \delta \be_{\omega}) - L (\ba^*) =\\
+    &\quad \left [ \frac{1}{2} \| \bx -  \bDDD \ba^* - \delta \bd_{\omega}\|_2^2 - \frac{1}{2} \| \bx -  \bDDD \ba^* \|_2^2 \right ] \\
+    &\quad + \gamma\left [\| \ba^*  + \delta \be_{\omega}\|_1 -  \| \ba^* \|_1\right ].
+   $$
+   Here we used the fact that $\bDDD \be_{\omega} = \bd_{\omega}$.
+1. Note that since $\ba^*$ is supported on $\Lambda$ and $\omega \notin \Lambda$, hence
+   
+   $$
+    \| \ba^*  + \delta \be_{\omega}\|_1 = \| \ba^*\|_1  +  \|\delta \be_{\omega}\|_1.
+   $$
+1. Thus
+   
+   $$
+    \| \ba^*  + \delta \be_{\omega}\|_1 -  \| \ba^* \|_1 = |\delta|.
+   $$
+1. We should also simplify the first bracket.
+   
+   $$
+    \| \bx -  \bDDD \ba^* \|_2^2 
+    &= (\bx -  \bDDD \ba^*)^H (\bx -  \bDDD \ba^*) \\
+    &= \bx^H \bx + {\ba^*}^H \bDDD^H \bDDD \ba^* 
+    - \bx^H \bDDD \ba^* -  {\ba^*}^H \bDDD^H \bx.
+   $$
+1. Similarly
+   
+   $$
+    \| \bx -  \bDDD \ba^* - \delta \bd_{\omega}\|_2^2
+    &= (\bx -  \bDDD \ba^* - \delta \bd_{\omega})^H 
+    (\bx -  \bDDD \ba^* - \delta \bd_{\omega})\\
+    &= \bx^H \bx + {\ba^*}^H \bDDD^H \bDDD \ba^* 
+    - \bx^H \bDDD \ba^* -  {\ba^*}^H \bDDD^H \bx\\
+    &- (\bx -  \bDDD \ba^*)^H \delta \bd_{\omega} 
+    - \delta \bd_{\omega}^H (\bx -  \bDDD \ba^*) + \| \delta  \bd_{\omega}\|_2^2.
+   $$
+1. Canceling the like terms we get
+   
+   $$
+    \| \delta  \bd_{\omega}\|_2^2 - 2 \Re (\langle \bx -  \bDDD \ba^*,  \delta \bd_{\omega} \rangle).
+   $$
+1. Thus,
+   
+   $$
+    &L (\ba^* + \delta \be_{\omega}) - L (\ba^*) =\\
+    &\quad \frac{1}{2} \| \delta  \bd_{\omega}\|_2^2 - \Re (\langle \bx -  \bDDD \ba^*,  \delta \bd_{\omega} \rangle) + \gamma |\delta|.
+   $$
+1. Recall that since $\ba^*$ is supported on $\Lambda$,
+   hence $\bDDD \ba^* = \bDDD_{\Lambda} \ba^*$.
+1. We can further split the middle term by adding and subtracting
+   $\bDDD_{\Lambda} \bc_{\Lambda}$.
+   
+   $$
+    \Re (\langle \bx -  \bDDD_{\Lambda} \ba^*,  \delta \bd_{\omega} \rangle) 
+    &= \Re (\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda} + \bDDD_{\Lambda} \bc_{\Lambda} -  \bDDD_{\Lambda} \ba^*,  \delta \bd_{\omega} \rangle)\\
+    &= \Re (\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda},  \delta \bd_{\omega} \rangle)  + 
+    \Re (\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*),  \delta \bd_{\omega} \rangle) 
+   $$
+1. Thus, we can write
+   
+   $$
+    L (\ba^* + \delta \be_{\omega}) - L (\ba^*) = 
+    \frac{1}{2} \| \delta  \bd_{\omega}\|_2^2 - \Re (\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda},  \delta \bd_{\omega} \rangle)  
+    - \Re (\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*),  \delta \bd_{\omega} \rangle) + \gamma |\delta|.
+   $$
+1. The term $\frac{1}{2} \| \delta  \bd_{\omega}\|_2^2$ is strictly positive giving us
+   
+   $$
+    L (\ba^* + \delta \be_{\omega}) - L (\ba^*) >
+    - \Re (\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda},  \delta \bd_{\omega} \rangle)  
+    - \Re (\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*),  \delta \bd_{\omega} \rangle) + \gamma |\delta|.
+   $$
+1. Using lower triangle inequality we can write
+   
+   $$
+    L (\ba^* + \delta \be_{\omega}) - L (\ba^*) >
+    \gamma |\delta|
+    - |\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda},  \delta \bd_{\omega} \rangle|  
+    - |\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*),  \delta \bd_{\omega} \rangle|.
+   $$
+1. Using linearity of inner product, we can take out $|\delta|$:
+   
+   ```{math}
+    :label: eq:e50c94b1-d1c3-47c3-9c36-ac384b1a48da
+
+    L (\ba^* + \delta \be_{\omega}) - L (\ba^*) >
+     |\delta| \left [ \gamma
+    - |\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda},  \bd_{\omega} \rangle|  
+    - |\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*), \bd_{\omega} \rangle| \right ].
+   ```
+1. Let us simplify this expression. Since $\ba^*$ is a unique minimizer over
+   coefficients in $\CC^{\Lambda}$,
+   hence using {prf:ref}`res:bp:bpdn:l1_local_minimizer_condition`
+   
+   $$
+    &\bc_{\Lambda} - \ba^*  = \gamma (\bDDD_{\Lambda}^H \bDDD_{\Lambda})^{-1} \bg\\
+    \iff &\bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*) = \gamma \bDDD_{\Lambda}(\bDDD_{\Lambda}^H \bDDD_{\Lambda})^{-1} \bg
+    = (\bDDD_{\Lambda}^{\dag})^H \bg.
+   $$
+   where $\bg \in \partial \| \ba^*\|_1$.
+1. Thus
+   
+   $$
+    |\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*), \bd_{\omega} \rangle|
+    = \gamma |\langle (\bDDD_{\Lambda}^{\dag})^H \bg, \bd_{\omega} \rangle|
+    = \gamma |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle|
+   $$
+   using the fact that $\langle \bA \bx, \by \rangle = \langle \bx, \bA^H \by \rangle$.
+1. Also, we recall that $\widehat{\bx}_{\Lambda} = \bDDD_{\Lambda} \bc_{\Lambda}$. 
+1. Putting the back in {eq}`eq:e50c94b1-d1c3-47c3-9c36-ac384b1a48da` we obtain:
+   
+   ```{math}
+    :label: eq:183f4aac-4abf-43c1-8d8b-f0196da487fc
+    L (\ba^* + \delta \be_{\omega}) - L (\ba^*) >
+    |\delta| \left [\gamma -  \gamma |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle| 
+    - |\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle|\right ].
+   ```
+1. In {eq}`eq:183f4aac-4abf-43c1-8d8b-f0196da487fc`, the L.H.S. is non-negative
+   (our real goal) whenever the term in the bracket on the R.H.S. is non-negative
+   (since $|\delta|$ is positive).
+1. Therefore we want that
+   
+   $$
+    \gamma -  \gamma |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle| 
+    - |\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle| \geq 0.
+   $$
+1. This can be rewritten as
+   
+   $$
+    |\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle| \leq \gamma \left [ 1 - |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle| \right ].
+   $$
+1. Since this condition should hold for every $\omega \notin \Lambda$,
+   hence we maximize the L.H.S. and minimize the R.H.S. over  $\omega \notin \Lambda$.
+1. We get
+   
+   $$
+    \underset{\omega \notin \Lambda}{\max}|\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle|
+    \leq \underset{\omega \notin \Lambda}{\min} \gamma \left [ 1 - |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle|\right ]
+    = \gamma \left [1 - \underset{\omega \notin \Lambda}{\max}|\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle|\right ].
+   $$
+1. Recall that $ \bx - \widehat{\bx}_{\Lambda}$ is orthogonal to the space spanned
+   by atoms in $\bDDD_{\Lambda}$.
+1. Hence
+   
+   $$
+    \underset{\omega \notin \Lambda}{\max}|\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle| 
+    = \underset{\omega}{\max}|\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle|
+    = \| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty}.
+   $$
+1. This gives us the desired sufficient condition
+   
+   $$
+    \| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty} 
+    \leq \gamma \left [1 - \underset{\omega \notin \Lambda}{\max}|\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle|\right ].
+   $$
+1. This condition still uses $\bg$. We know that $\| \bg \|_{\infty} \leq 1$.
+1. Let us simplify as follows: 
+   
+   $$
+    |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle|
+    &= | (\bDDD_{\Lambda}^{\dag} \bd_{\omega})^H \bg |\\
+    &=  \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})^H \bg \|_{\infty}\\
+    &\leq \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})^H \|_{\infty} \| \bg \|_{\infty}\\
+    &= \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})\|_1 \| \bg \|_{\infty}\\
+    &\leq \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})\|_1.
+   $$
+1. Another way to understand this is as follows. For any vector $\bv \in \CC^D$
+   
+   $$
+    | \langle \bv, \bg \rangle | 
+    &= | \sum_{i=1}^D \overline{g_i} v_i | \\
+    &\leq \sum_{i=1}^D |g_i | | v_i | \\
+    &\leq \left [\sum_{i=1}^D | v_i | \right ] \| \bg \|_{\infty}\\
+    &\leq \| \bv \|_1.
+   $$
+1. Thus
+
+   $$
+    |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle| \leq \|\bDDD_{\Lambda}^{\dag} \bd_{\omega}\|_1.
+   $$
+1. Thus, it is also sufficient that
+   
+   $$
+    \| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty} 
+    \leq \gamma \left [1 - \underset{\omega \notin \Lambda}{\max} \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})\|_1 \right ].
+   $$
+````
