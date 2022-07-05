@@ -1893,5 +1893,234 @@ Then any coefficient vector $\ba^*$ that minimizes the function $L$
 must be supported inside $\Lambda$.
 ````
 
+### Applications of $\ell_1$ Penalization
+
+Having setup the basic results in place,
+we can now study the applications
+of {eq}`bp:bpdn:l_1_penalty_problem`.
+
+````{prf:theorem} BPDN reconstruction guarantees using ERC
+:label: res:bp:l1_penalty_performance_erc
+
+Let $\Lambda$ index a subdictionary $\bDDD_{\Lambda}$ for which 
+$\ERC(\Lambda) \geq 0$. Suppose that $\bx$ is an input signal
+whose $\ell_2$ best approximation over $\Lambda$ satisfies the
+correlation condition
+
+$$
+\| \bDDD_{\Lambda}^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty} 
+\leq \gamma \ERC(\Lambda).
+$$
+Let $\ba^*$ solve the convex program
+{eq}`bp:bpdn:l_1_penalty_problem` with parameter $\gamma$.
+We may conclude that:
+
+1.  Support of $\ba^*$ is contained in $\Lambda$.
+1.  The error between $\ba^*$ and
+    the optimal coefficient vector $\bc_{\Lambda}$ satisfies 
+   
+    $$
+    \| \ba^* - \bc_{\Lambda} \|_{\infty} \leq 
+    \gamma \left \| \left ( 
+        \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} 
+        \right \|_{\infty}.
+   $$
+1.  In particular, $\supp(\ba^*)$ contains every index $\lambda$
+    in $\Lambda$ for which
+   
+    $$
+    | \bc_{\Lambda} (\lambda) | > \gamma \left \| \left ( \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1}
+    \right \|_{\infty}.
+    $$
+1.  Moreover, the minimizer $\ba^*$ is unique.
+````
+````{prf:proof}
+.
+
+1. Since the sufficient condition for correlation condition 
+   {prf:ref}`res:bp:bpdn_correlation_condition_global_minimizer`
+   are satisfied, hence $\ba^*$ which minimizes $L$ over coefficient vectors
+   in $\CC^{\Lambda}$ is also a global minimizer of $L$.
+1. Since $\ba^* \in \CC^{\Lambda}$, hence $\supp(\ba^*) \subseteq \Lambda$.
+1. For claim 2, application of {prf:ref}`res:bp:norm_upper_bounds_optimal_vs_projector`
+   gives us
+   
+   $$
+    \| \bc_{\Lambda} - \ba^* \|_{\infty} \leq 
+    \gamma \|\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \|_{\infty}.
+   $$
+1. Since the convex function $L$  is strictly convex,
+   hence $\ba^*$ is unique global minimizer.
+1. For claim 3, suppose $\ba^*(\lambda) = 0$ for some index
+   $\lambda \in \Lambda$ for which 
+   
+   $$
+    | \bc_{\Lambda} (\lambda) | 
+    > \gamma \left \| \left ( 
+        \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   $$
+1. Then 
+   
+   $$
+    |\ba^*(\lambda) -  \bc_{\Lambda} (\lambda) | 
+    = | \bc_{\Lambda} (\lambda) | 
+    > \gamma \left \| \left ( 
+        \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   $$
+1. But
+   
+   $$
+    \| \ba^* - \bc_{\Lambda} \|_{\infty} 
+    \geq |\ba^*(\lambda) -  \bc_{\Lambda} (\lambda) |.
+   $$
+1. This violates the bound that 
+   
+   $$
+    \| \ba^* - \bc_{\Lambda} \|_{\infty} 
+    \leq \gamma \left \| \left ( 
+        \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   $$
+1. Thus, $\supp(\ba^*)$ contains every index $\lambda \in \Lambda$ for which 
+   
+   $$
+    | \bc_{\Lambda} (\lambda) | 
+    > \gamma \left \| \left ( 
+        \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   $$
+````
+We can formulate a simpler condition in terms of coherence of the dictionary.
+
+````{prf:theorem} BPDN reconstruction guarantees using coherence
+:label: res:bp:l1_penalty_performance_coherence
+
+Suppose that $K \mu \leq \frac{1}{2}$.
+Assume that $| \Lambda | \leq K$ i.e. 
+$\Lambda$ contains at most $K$ indices.
+Suppose that $\bx$ is an input
+signal whose $\ell_2$ best approximation over
+$\Lambda$ denoted by $\widehat{\bx}_{\Lambda}$
+satisfies the correlation condition
+
+$$
+\| \bDDD_{\Lambda}^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty} 
+\leq \gamma  \frac{1 - (2K - 1) \mu}{1 - (K - 1) \mu}.
+$$
+Let $\ba^*$ solve the convex program
+{eq}`bp:bpdn:l_1_penalty_problem` with
+parameter $\gamma$. We may conclude that:
+
+1.  Support of $\ba^*$ is contained in $\Lambda$ and
+1.  The distance between $\ba^*$ and the optimal coefficient vector
+    $\bc_{\Lambda}$ satisfies 
+   
+   $$
+    \| \ba^* - \bc_{\Lambda} \|_{\infty} \leq 
+    \gamma  \frac{1}{1 - (K -1) \mu}.
+   $$
+1. In particular, $\supp(\ba^*)$ contains every index $\lambda$ in $\Lambda$ for which
+   
+   $$
+    | \bc_{\Lambda} (\lambda) | > \gamma \frac{1}{1 - (K -1) \mu}.
+   $$
+1. Moreover, the minimizer $\ba^*$ is unique.
+````
+````{prf:proof}
+.
+
+1. We recall from {prf:ref}`res:proj:erc_coherence_lower_bound`
+   the coherence bounds on ERC as
+   
+   $$
+    \ERC(\Lambda) \geq \frac{1 - (2K - 1) \mu}{1  - (K - 1)\mu}.
+   $$
+1. Thus, 
+   
+   $$
+    \| \bDDD_{\Lambda}^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty} 
+    \leq \gamma  \frac{1 - (2K - 1) \mu}{1 - (K - 1) \mu}
+    \leq \gamma \ERC(\Lambda).
+   $$
+1. A direct application of {prf:ref}`res:bp:l1_penalty_performance_erc`
+   validates claims 1 and 4.
+1. We recall from {prf:ref}`res:ssm:inverse_gram_matrix_infty_norm_babel_bound`
+   the upper bound on norm of inverse Gram matrix of a subdictionary as
+   
+   $$
+    \| G^{-1} \|_{\infty} 
+    = \| G^{-1} \|_{1} 
+    \leq \frac{1}{1 - \mu_1(K - 1)}\leq \frac{1}{1 - (K -1) \mu}.
+   $$
+1. Putting this in {prf:ref}`res:bp:l1_penalty_performance_erc` validates
+   claims 2 and 3.
+````
+
+### Exact Sparse Reconstruction Problem
+
+We now show how one can reconstruct an exactly sparse signal 
+solving the convex program {eq}`bp:bpdn:l_1_penalty_problem`.
+
+````{prf:theorem} BPDN exact sparse recovery guarantee
+:label: res:bp:bpdn:exact_sparse_recovery
+
+Assume that $\Lambda$ indexes a subdictionary for which $\ERC(\Lambda) \geq 0$.
+Choose an arbitrary coefficient vector $\bc_{\text{opt}}$ supported on $\Lambda$.
+Fix an input signal $\bx = \bDDD \bc_{\text{opt}}$.
+Let $\ba^*(\gamma)$ denote the unique minimizer of
+{eq}`bp:bpdn:l_1_penalty_problem` with parameter $\gamma$.
+We may conclude that
+
+1. There is a positive number $\gamma_0$ for which $\gamma < \gamma_0$
+   implies that $\supp(\ba^*(\gamma)) = \Lambda$.
+1. In the limit as $\gamma \to 0$, we have $\ba^*(\gamma) \to \bc_{\text{opt}}$.
+````
+````{prf:proof}
+.
+
+1. Since there is no noise, hence the best $\ell_2$ approximation of
+   $\bx$ over $\Lambda$
+   
+   $$
+    \widehat{\bx}_{\Lambda} = \bx
+   $$
+   itself and the corresponding coefficient vector is
+   
+   $$
+    \bc_{\Lambda} = \bc_{\text{opt}}.
+   $$
+1. Therefore 
+   
+   $$
+    \| \bDDD_{\Lambda}^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty}  = 0 
+    \leq \gamma \ERC(\Lambda).
+   $$
+1. Thus, the correlation condition is in force for every positive value of $\gamma$.
+1. Thus, as per {prf:ref}`res:bp:l1_penalty_performance_erc`,
+   minimizer $\ba^*(\gamma)$ of the convex program {eq}`bp:bpdn:l_1_penalty_problem`
+   must be supported inside $\Lambda$.
+1. Moreover, we have
+   
+   $$
+    \| \ba^*(\gamma) - \bc_{\text{opt}} \|_{\infty} \leq 
+    \gamma \left \| \left ( \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   $$
+1. Clearly, as $\gamma \to 0$, we have $ \ba^*(\gamma)  \to \bc_{\text{opt}}$.
+1. Finally, recall that $\supp(\ba^*(\gamma))$ contains very index $\lambda$
+   in $\Lambda$ for which
+   
+   $$
+    | \bc_{\text{opt}} (\lambda) | > \gamma \left \| \left ( \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   $$
+1. In order for every index in $\Lambda$ to be part of
+   $\supp(\ba^*(\gamma))$, we require
+
+   $$
+    \frac{\underset{\gamma \in \Gamma}{\min} | \bc_{\text{opt}} (\lambda) |}
+    {\left \| \left ( \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}}
+    > \gamma.
+   $$
+1. Choosing the L.H.S. to be $\gamma_0$, we get an explicit value of
+   upper bound on $\gamma$ such that
+   $\gamma < \gamma_0$ leads to complete discovery of support.
+````
 
 
