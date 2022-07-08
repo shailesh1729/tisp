@@ -1,1 +1,1 @@
-# Sparse Approximation
+# Sparse Approximation with Dictionaries
