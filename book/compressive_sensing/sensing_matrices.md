@@ -1,3 +1,4 @@
+(sec:cs:sensing:matrices)=
 # Sensing Matrices
 
 ## Matrices Satisfying RIP

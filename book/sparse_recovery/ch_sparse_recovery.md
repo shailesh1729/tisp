@@ -1,1 +1,1 @@
-# Sparse Recovery with Sensing Matrices
+# Sparse Recovery from Compressive Measurements
