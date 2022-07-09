@@ -951,3 +951,345 @@ to connect it with $\bz^{k-1}$.
     \| \bx  - \bz^{k} \|_2 \leq 2^{-k} \| \bx \|_2 + 15 \| \be \|_2.
     $$
 ````
+
+## CoSaMP Analysis General Case
+
+Having completed the analysis for the sparse case
+(where the signal $\bx$ is $K$-sparse) it is time
+for us to generalize the analysis for the case where
+$\bx$ is assumed to be an arbitrary signal in $\CC^N$.
+Although it may look hard at first sight but there is a
+simple way to transform the problem 
+into the problem of CoSaMP for the sparse case.
+
+1. We decompose $\bx$ into its $K$-sparse
+   approximation and the approximation error.
+1. Further, we absorb the approximation error term
+   into the measurement error term.
+1. Since sparse case analysis is applicable
+   for an arbitrary measurement error,
+   this approach gives us an upper bound on the performance
+   of CoSaMP over arbitrary signals.
+
+---
+
+````{div}
+1. We start with writing
+
+    $$
+    \bx = \bx - \bx|_K + \bx|_K
+    $$
+    where $\bx|_K$ is the best $K$-term approximation of $\bx$
+    ({prf:ref}`lem:ssm:best_k_term_approximation`).
+1. Thus we have
+
+    $$
+    \by =  \Phi \bx + \be  
+    = \Phi (\bx - \bx|_K + \bx|_K)  + \be 
+    = \Phi \bx|_K + \Phi (\bx - \bx|_K)  + \be.
+    $$
+1. We define
+   
+   $$
+    \widehat{\be} = \Phi (\bx - \bx|_K)  + \be.
+   $$
+1. This lets us write
+   
+   $$
+    \by = \Phi \bx|_K  + \widehat{\be}.
+   $$
+1. In this formulation, the problem is equivalent to recovering
+   the $K$-sparse signal $\bx|_K$ from
+   the measurement vector $\by$.
+1. The results of {ref}`sec:greedy:cosamp:sparse_case_analysis`
+   and in particular the iteration invariant 
+   {prf:ref}`thm:greedy:cosamp:iteration_invariant_sparse_case`
+   apply directly.
+1. The remaining problem is to estimate the norm of modified
+   error $\widehat{\be}$.
+1. We have
+
+    $$
+    \| \widehat{\be} \|_2 
+    = \| \Phi (\bx - \bx|_K)  + \be \|_2 
+    \leq \| \Phi (\bx - \bx|_K) \|_2 + \|\be \|_2.
+    $$
+1. Another result for RIP on the energy bound of embedding of
+   arbitrary signals from {prf:ref}`thm:proj:rip:arbitrary_signal_energy_bound` gives us
+
+    $$
+    \|  \Phi (\bx - \bx|_K)\|_2 
+    \leq  \sqrt{ 1 + \delta_K} 
+    \left [  \| \bx - \bx|_K \|_2 + \frac{1}{\sqrt{K}} 
+    \| \bx - \bx|_K \|_1 \right ].
+    $$
+1. Thus we have an upper bound on $\|\widehat{\be} \|_2$ 
+   given by
+
+    $$
+    \| \widehat{\be} \|_2 
+    \leq \sqrt{ 1 + \delta_K} 
+    \left [  \| \bx - \bx|_K \|_2 + \frac{1}{\sqrt{K}} 
+    \| \bx - \bx|_K \|_1 \right ] +  \|\be \|_2.
+    $$
+1. Since we have assumed throughout that $\delta_{4K} \leq 0.1$,
+   it gives us
+
+    $$
+    \| \widehat{\be} \|_2 
+    \leq 1.05 \left [  \| \bx - \bx|_K \|_2 
+    + \frac{1}{\sqrt{K}} \| \bx - \bx|_K \|_1 \right ] 
+    +  \|\be \|_2.
+    $$
+1. This inequality is able to combine measurement error
+   and approximation error into a single expression.
+1. To fix ideas further, we define the notion of
+   unrecoverable energy in CoSaMP.
+````
+
+````{prf:definition} Unrecoverable energy
+:label: def:greedy:cosamp:unrecoverable_energy
+
+The *unrecoverable energy* in CoSaMP algorithm is defined as
+
+$$
+\nu =  \left [  \| \bx - \bx|_K \|_2 + 
+\frac{1}{\sqrt{K}} \| \bx - \bx|_K \|_1 \right ] +  \|\be \|_2.
+$$
+This quantity measures the baseline error in the CoSaMP recovery consisting of measurement error and approximation error.
+````
+
+````{div}
+It is obvious that
+
+$$
+\| \widehat{\be} \|_2 \leq 1.05 \nu.
+$$
+````
+
+We summarize this analysis in following lemma.
+````{prf:lemma}
+:label: lem:greedy:cosamp:reduction_sparse_case
+
+Let $\bx \in \CC^N$ be an arbitrary signal.
+Let $\bx|_K$ be its best $K$-term approximation.
+The measurement vector $\by = \Phi \bx + \be$ 
+can be expressed as $\by = \Phi \bx|_K + \widehat{\be}$
+where
+
+$$
+\| \widehat{\be} \|_2 
+\leq 1.05 \left [  \| \bx - \bx|_K \|_2 
++ \frac{1}{\sqrt{K}} \| \bx - \bx|_K \|_1 \right ] 
++  \|\be \|_2 \leq 1.05 \nu.
+$$
+````
+We now move ahead with the development of the
+iteration invariant for the general case.
+
+````{div}
+
+1. Invoking {prf:ref}`thm:greedy:cosamp:iteration_invariant_sparse_case`
+   for the iteration invariant for recovery of a sparse signal gives us
+    
+    $$
+    \| \bx|_K - \bz^{k} \|_2 
+    \leq \frac{1}{2} \| \bx|_K - \bz^{k-1} \|_2 
+    + 7.5 \|\widehat{\be} \|_2.
+    $$
+1. What remains is to generalize this inequality for the 
+   arbitrary signal $\bx$ itself.
+1. We can write
+
+    $$
+    \| \bx|_K - \bx + \bx - \bz^{k} \|_2 
+    \leq \frac{1}{2} \| \bx|_K  - \bx + \bx - \bz^{k-1} \|_2 
+    + 7.5 \|\widehat{\be} \|_2.
+    $$
+1. We simplify L.H.S. as
+    
+    $$
+    \| \bx|_K - \bx + \bx - \bz^{k} \|_2 
+    = \|(\bx - \bz^{k}) - (\bx - \bx|_K)\|_2 
+    \geq \| \bx - \bz^{k} \|_2 - \|\bx - \bx|_K \|_2.
+    $$
+1. On the R.H.S. we expand as
+
+    $$
+    \| \bx|_K  - \bx + \bx - \bz^{k-1} \|_2 
+    \leq \|  \bx - \bz^{k-1} \|_2 + \|\bx - \bx|_K \|_2.
+    $$
+1. Combining the two we get
+
+    $$
+    \| \bx - \bz^{k} \|_2 
+    \leq 0.5  \|  \bx - \bz^{k-1} \|_2 
+    + 1.5 \|\bx - \bx|_K \|_2 +  7.5 \|\widehat{\be} \|_2.
+    $$
+1. Putting the estimate of $\|\widehat{\be}\|_2$ from
+   {prf:ref}`lem:greedy:cosamp:reduction_sparse_case`
+   we get
+
+    $$
+    \| \bx - \bz^{k} \|_2 
+    \leq 0.5  \|  \bx - \bz^{k-1} \|_2 
+    + 9.375 \|\bx - \bx|_K \|_2 
+    +  \frac{7.875}{\sqrt{K}}\| \bx - \bx|_K \|_1 
+    +  7.5 \|\be \|_2.
+    $$
+1. Now
+
+    $$
+    & 9.375 \|\bx - \bx|_K \|_2 
+    +  \frac{7.875}{\sqrt{K}}\| \bx - \bx|_K \|_1 
+    +  7.5 \|\be \|_2 \\
+    & \leq
+    10 \left (\left [  \| \bx - \bx|_K \|_2 
+        + \frac{1}{\sqrt{K}} \| \bx - \bx|_K \|_1 \right ] 
+        +  \|\be \|_2 \right ).
+    $$
+1. Thus we write a simplified expression
+
+    $$
+    \| \bx - \bz^{k} \|_2 
+    \leq 0.5  \|  \bx - \bz^{k-1} \|_2  + 10 \nu
+    $$
+    where $\nu$ is the unrecoverable energy ({prf:ref}`def:greedy:cosamp:unrecoverable_energy`).
+````
+
+We can summarize the analysis for the general case in the following theorem.
+
+````{prf:theorem} CoSaMP iteration invariant for general signal recovery
+:label: thm:greedy:cosamp:iteration_invariant_general_case
+
+Assume that $\Phi$ satisfies RIP of order $4K$
+with $\delta_{4K} \leq 0.1$.
+For each iteration number $k \geq 1$, the signal estimate
+$\bz^k$ is $K$-sparse and satisfies 
+
+$$
+\| \bx - \bz^{k} \|_2 
+\leq \frac{1}{2} \| \bx - \bz^{k-1} \|_2 + 10 \nu.
+$$
+In particular
+
+```{math}
+:label: eq:greedy:cosamp:iteration_invariant_general_case_invariant
+
+\| \bx  - \bz^{k} \|_2 
+\leq 2^{-k} \| \bx \|_2 + 20 \nu.
+```
+````
+````{prf:proof}
+1st result was developed in the development before the theorem. 
+For the 2nd result in this theorem, we add up the error
+at each stage as 
+
+$$
+(1 + 2^{-1} + 2^{-2} + \dots + 2^{-(k-1)}) 10 \nu 
+\leq 2 \cdot 10 \nu = 20 \nu.
+$$
+At $k=1$ we have $\bz^0 = \bzero$. This gives us the result.
+````
+
+
+ 
+### SNR Analysis
+
+````{div}
+
+1. A sensible though unusual definition of *signal-to-noise ratio*
+   (as proposed in {cite}`needell2009cosamp`)
+   is as follows
+
+    ```{math}
+    :label: eq:greedy:cosamp:snr
+
+    \SNR = 10 \log \left ( \frac{\| \bx \|_2 }{ \nu}\right ).
+    ```
+1. The whole of unrecoverable energy is treated as noise.
+1. The signal $\ell_2$ norm rather than its square is
+   being treated as the measure of its energy.
+   This is the unusual part.
+1. Yet the way $\nu$ has been developed,
+   this definition is quite sensible.
+1. Further we define the *reconstruction SNR* or *recovery SNR*
+   as the ratio between signal energy and recovery error energy.
+
+   ```{math}
+    :label: eq:greedy:cosamp:r-snr
+    \RSNR = 10 \log 
+    \left ( \frac{\| \bx \|_2 }{ \| \bx - \bz \|_2 }\right ).
+    ```
+1. Both $\SNR$ and $\RSNR$ are expressed in dB.
+1. Certainly we have
+   
+   $$
+    \RSNR \leq \SNR.
+   $$
+1. Let us look closely at the iteration invariant 
+
+    $$
+    \| \bx  - \bz^{k} \|_2 \leq 2^{-k} \| \bx \|_2 + 20 \nu.
+    $$
+1. In the initial iterations, 
+   $2^{-k} \| \bx \|_2$ term dominates in the R.H.S. 
+1. Assuming 
+
+    $$
+    2^{-k} \| \bx \|_2 \geq 20 \nu
+    $$
+    we can write
+    
+    $$
+    \| \bx  - \bz^{k} \|_2 \leq 2 \cdot 2^{-k} \| \bx \|_2.
+    $$
+1. This gives us
+
+    ```{math}
+    & \| \bx  - \bz^{k} \|_2 
+    \leq 2^{-k + 1} \| \bx \|_2 \\
+    \implies & \frac{\| \bx \|_2 }{ \| \bx - \bz \|_2 } 
+    \geq 2^{k-1}\\
+    \implies & \RSNR \geq 10 (k-1) \log 2 
+    \geq 3 k - 3.
+    ```
+1. In the later iterations, the $20\nu$ term dominates
+   in the R.H.S. 
+1. Assuming 
+    
+    $$
+    2^{-k} \| \bx \|_2 \leq 20 \nu
+    $$
+    we can write
+    
+    $$
+    \| \bx  - \bz^{k} \|_2 \leq 2 \cdot 20 \nu = 40 \nu.
+    $$
+1. This gives us
+
+    ```{math}
+    & \| \bx  - \bz^{k} \|_2 \leq  40 \nu\\
+    \implies & \frac{\| \bx \|_2 }{ \| \bx - \bz \|_2 } 
+    \geq \frac{1}{40} \frac{\| \bx \|_2 }{ \nu }\\
+    \implies & \RSNR \geq \SNR - 10 \log 40 
+    \geq \SNR - 16 = \SNR - 13 - 3.
+    ```
+1. We combine these two results into the following
+
+    ```{math}
+    :label: eq:greedy:cosamp:r_snr_lower_bound
+
+    \RSNR \geq \min\{ 3 k, \SNR - 13 \} - 3.
+    ```
+1. This result tells us that in the
+   initial iterations the reconstruction SNR keeps
+   improving by $3$dB per iteration till 
+   it hits the noise floor given by $\SNR - 16$ dB.
+1. Thus roughly the number of iterations required
+   for converging to the noise floor is given by
+
+    $$
+    k \approx \frac{\SNR - 13}{3}.
+    $$
+````
