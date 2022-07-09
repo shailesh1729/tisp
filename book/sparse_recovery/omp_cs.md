@@ -610,3 +610,566 @@ random vectors which comprise the columns of $\Phi_{\opt}$).
    is sufficient to reduce the failure probability below $\delta$. 
 ````
 
+(sec:greedy:omp_rip_analysis)=
+## Analysis of OMP using Restricted Isometry Property
+
+In this subsection we present an alternative analysis of 
+OMP algorithm using the Restricted Isometry Property of
+the matrix $\Phi$ {cite}`davenport2010analysis`.  
+
+
+### A re-look at the OMP Algorithm
+
+
+Before we get into the RIP based analysis of OMP, it would be
+useful to get some new insights into the behavior of OMP algorithm.
+These insights will help us a lot in performing the analysis later.
+
+1. We will assume throughout that whenever $| \Lambda | \leq K$, 
+   then $\Phi_{\Lambda}$ is full rank.
+1. The pseudo-inverse is given by
+
+   $$
+    \Phi_{\Lambda}^{\dag}
+    = \left (\Phi_{\Lambda}^H \Phi_{\Lambda} \right )^{-1} \Phi_{\Lambda}^H.
+   $$
+1. The orthogonal projection operator to the column space for
+   $\Phi_{\Lambda}$ is given by
+   
+   $$
+    \bP_{\Lambda}  = \Phi_{\Lambda}\Phi_{\Lambda}^{\dag}.
+   $$
+1. The orthogonal projection operator onto the orthogonal complement of
+   $\ColSpace(\Phi_{\Lambda})$ (column space of $\Phi_{\Lambda}$)
+   is given by
+   
+   $$
+    \bP_{\Lambda}^{\perp} = \bI - \bP_{\Lambda}.
+   $$
+1. Both $\bP_{\Lambda}$ and $\bP_{\Lambda}^{\perp}$
+   satisfy the standard properties like
+   $\bP = \bP^H$ and $\bP^2 = \bP$.
+1. We further define
+   
+   $$
+    \Psi_{\Lambda} = \bP_{\Lambda}^{\perp} \Phi.
+   $$
+1. We are orthogonalizing the atoms in $\Phi$ against
+   $\ColSpace(\Phi_{\Lambda})$,
+   i.e. taking the component of the atom which is  orthogonal
+   to the column space of $\Phi_{\Lambda}$.
+1. The atoms in $\Psi_{\Lambda}$ corresponding
+   to the index set $\Lambda$ would be $\bzero$.
+1. We will make some further observations on the behavior of 
+   OMP algorithm {cite}`davenport2010analysis`.
+1. Recall that the approximation after the $k$-th iteration is given by
+   
+   $$
+    \bx^k_{\Lambda^k}  = \Phi_{\Lambda^k}^{\dag} \by \quad \text{ and } 
+    \quad \bx^k_{{\Lambda^k}^c} = \bzero.
+   $$
+1. The residual after $k$-th iteration is given by
+   
+    $$
+    \br^k  = \by - \Phi \bx^k
+    $$
+    and by construction $\br^k$ is orthogonal to $\Phi_{\Lambda^k}$.
+1. We can write
+   
+   $$
+    \Phi \bx^k  = \Phi_{\Lambda}\bx^k_{\Lambda^k} + 
+    \Phi_{{\Lambda^k}^c} \bx^k_{\Lambda^c} 
+    = \Phi_{\Lambda^k}\bx^k_{\Lambda^k}.
+   $$
+1. Thus,
+
+    ````{math}
+    \br^k  &=  \by - \Phi_{\Lambda^k}\bx^k_{\Lambda^k} \\
+    &= \by - \Phi_{\Lambda^k}\Phi_{\Lambda^k}^{\dag} \by \\
+    &= ( \bI - \bP_{\Lambda^k}) \by = \bP_{\Lambda^k}^{\perp} \by.
+    ````
+1. In summary
+   
+   $$
+    \br^k  = \bP_{\Lambda^k}^{\perp} \by.
+   $$
+1. This shows that it is not actually necessary to compute $\bx^k$
+   in order to find $\br^k$.
+   An equivalent way of writing OMP algorithm could be
+   as in {prf:ref}`alg:omp_rip_variant_a`.
+
+````{prf:algorithm} Sketch of OMP without intermediate $\bx^k$ computation
+:label: alg:omp_rip_variant_a
+
+Algorithm:
+
+1. If halting criteria is satisfied, then break.
+1. $\bh^{k + 1} \leftarrow \Phi^H \br^{k}$ # Match
+1. $\lambda^{k + 1} \leftarrow \underset{j \notin \Lambda^{k}}{\text{arg} \max} | \bh^{k + 1}_j |$ # Identify
+1. $\Lambda^{k + 1} \leftarrow \Lambda^{k} \cup \{ \lambda^{k + 1} \}$ # Update support
+1. $\br^{k + 1} \leftarrow \bP_{\Lambda^{k + 1}}^{\perp} \by$ # Update residual
+1. $k \leftarrow k + 1$.
+1. Go back to step 1.
+
+Finalization:
+1. $\widehat{\bx}_{\Lambda^k}  \leftarrow \Phi_{\Lambda^k}^{\dag} \by$.
+1. $\widehat{\bx}_{{\Lambda^k}^c}  \leftarrow \bzero$.
+````
+
+1. In the matching step, we are correlating $\br^k$ with columns of $\Phi$.
+1. Since $\br^k$ is orthogonal to column space of $\Phi_{\Lambda^k}$, hence
+   this correlation is identical to correlating $\br^k$ with $\Psi_{\Lambda^k}$.
+1. To see this, observe that
+   
+   $$
+    \br^k = \bP_{\Lambda^k}^{\perp} \by 
+    = \bP_{\Lambda^k}^{\perp} \bP_{\Lambda^k}^{\perp} \by
+    = (\bP_{\Lambda^k}^{\perp})^H \bP_{\Lambda^k}^{\perp} \by.
+   $$
+1. Thus,
+   
+   $$
+    \bh^{k + 1 } 
+    &= \Phi^H \br^k \\
+    &=  \Phi^H ( \bP_{\Lambda^k}^{\perp})^H \bP_{\Lambda^k}^{\perp} \by\\
+    &= \left (\bP_{\Lambda^k}^{\perp} \Phi \right )^H  
+    \bP_{\Lambda^k}^{\perp} \by \\
+    &= \left ( \Psi_{\Lambda^k} \right ) ^H \br^k.
+   $$
+1. On similar lines, we can also see that
+   
+   $$
+    \bh^{k + 1} 
+    =  \Phi^H  \br^k 
+    = \Phi^H \bP_{\Lambda^k}^{\perp} \by 
+    = \Phi^H \left ( \bP_{\Lambda^k}^{\perp} \right)^H \by 
+    = \left ( \Psi_{\Lambda^k}\right )^H \by.
+   $$
+1. In other words, we have
+
+    ```{math}
+    :label: eq:greedy:cda31681-9bbd-4406-94da-15cb0f116122
+
+    \bh^{k + 1 } = \left ( \Psi_{\Lambda^k} \right)^H \br^k 
+    = \left ( \Psi_{\Lambda^k} \right )^H \by.
+    ```
+1. Thus, we can observe that OMP can be further simplified and
+   we don't even need to compute $\br^k$ in order to compute $\bh^{k + 1}$. 
+1. There is one catch though.
+   If the halting criterion depends on the need to compute the residual energy,
+   then we certainly need to compute $\br^k$. If the halting criteria is simply
+   the number of $K$ iterations, then we don't need to compute $\br^k$.
+1. The revised OMP algorithm sketch is presented in
+   {prf:ref}`alg:omp_rip_variant_b`.
+
+````{prf:algorithm} Sketch of OMP without intermediate $\bx^k$ computation
+:label: alg:omp_rip_variant_b
+
+Algorithm:
+
+1. If halting criteria is satisfied, then break.
+1. $\bh^{k + 1} \leftarrow \left ( \Psi_{\Lambda^{k}} \right)^H \by$ # Match
+1. $\lambda^{k + 1} \leftarrow \underset{i \notin \Lambda^{k}}{\text{arg} \max} | \bh^{k + 1}_i |$ # Identify
+1. $\Lambda^{k + 1} \leftarrow \Lambda^{k} \cup \{ \lambda^{k + 1} \}$ # Update support
+1. $k \leftarrow k + 1$
+1. Go back to step 1.
+
+
+Finalization:
+1. $\widehat{\bx}_{\Lambda^k}  \leftarrow \Phi_{\Lambda^k}^{\dag} \by $.
+1. $\widehat{\bx}_{{\Lambda^k}^c}  \leftarrow \bzero$.
+````
+With this the OMP algorithm is considerably simplified from the
+perspective of analyzing its recovery guarantees.
+
+````{div}
+1. Coming back to $\bh^{k + 1}$, note that the columns of $\Psi_{\Lambda^k}$
+   indexed by $\Lambda^k$ are all $\bzero$s.
+1. Thus
+   
+   $$
+    h^{k + 1}_j = \bzero \quad \Forall j \in \Lambda^k.
+   $$
+1. This makes it obvious that $\lambda^{k + 1} \notin \Lambda$ and 
+   consequently $|\Lambda^k | = k$ (inductively).
+1. Lastly for the case of noise free model $\by = \Phi \bx$, we may write
+   
+   $$
+    \br^k = \bP_{\Lambda^k}^{\perp} \by 
+    = \bP_{\Lambda^k}^{\perp} \Phi \bx 
+    = \Psi_{\Lambda^k} \bx.
+   $$
+1. Since columns of $\Psi_{\Lambda^k}$ indexed by $\Lambda^k$ are $\bzero$,
+   hence when $\supp(\bx) \subseteq \Lambda^k$, then $\br^k = \bzero$. 
+1. In this case $\bx^k = \bx$ exactly since it is a least squares estimate
+   over $\Phi_{\Lambda^k}$.
+1. For the same reason, if we construct a vector $\widetilde{\bx}^k$
+   by zeroing out the entries indexed by $\Lambda^k$ i.e.
+
+    ```{math}
+    :label: eq:omp:widetilde_alpha_definition
+
+    \widetilde{\bx}^k_{\Lambda^k} = 0  \quad 
+    \text{ and } \quad \widetilde{\bx}_{{\Lambda^k}^c} = \bx_{{\Lambda^k}^c}
+    ```
+    then
+    ```{math}
+    :label: eq:omp:3715a448-7956-43a0-91d5-43447bbdfa7b
+
+    \br^k = \Psi_{\Lambda^k} \widetilde{\bx}^k.
+    ```
+1. If $\| \bx \|_0 = K$, then $\| \widetilde{\bx}^k \|_0 = K - k$.
+1. Lastly putting $\br^k$ back in 
+   {eq}`eq:greedy:cda31681-9bbd-4406-94da-15cb0f116122`, we obtain
+
+    ```{math}
+    :label: eq:omp:3dfc00cb-f266-4876-b7d9-14daeca3056a
+
+    \bh^{k + 1 } = \left ( \Psi_{\Lambda^k} \right)^H \Psi_{\Lambda^k} \widetilde{\bx}^k.
+    ```
+1. In this version, we see that $\bh^{k + 1}$ is computed by applying the
+   matrix $\left ( \Psi_{\Lambda^k} \right)^H \Psi_{\Lambda^k}$ to the
+   $(K - k)$ sparse vector $\widetilde{\bx}^k$.
+1. We are now ready to carry out RIP based analysis of OMP.
+````
+
+### RIP based Analysis of OMP
+
+Our analysis here will focus on the case for
+real signals and real matrices i.e. $\Phi \in \RR^{M \times N}$
+and $\bx \in \RR^N$. We will attack the noise free case. 
+
+Some results for matrices that satisfy RIP will be useful
+in the upcoming analysis.
+Please refer to {ref}`sec:ssm:rip` for an extensive
+treatment of RIP based results.
+
+
+`````{div}
+{prf:ref}`lem:rip:inner_product_upper_bound_2`
+applies to approximate preservation of the inner
+product of sparse signals  $\bu, \bv \in \RR^N$.
+
+Let $\bu, \bv \in \RR^N$ and $K \geq \max( \| \bu + \bv \|_0 , \| \bu - \bv \|_0)$.
+Then 
+
+```{math}
+:label: eq:greedy:ef6701cc-26cb-4293-9f6f-828ce08658c7
+
+| \langle \Phi \bu, \Phi \bv \rangle - \langle \bu, \bv \rangle | 
+\leq \delta_{K} \| \bu \|_2 \| \bv \|_2.
+```
+{prf:ref}`res:proj:rip_orthogonal_projection`
+shows that the matrix  $\Psi_{\Lambda}$ also satisfies 
+a modified version of RIP.
+Let $|\Lambda | < K$. Then
+
+```{math}
+:label: eq:greedy:5774ac7f-1f4b-464f-882b-9795c5996278
+
+\left ( 1 - \frac{\delta_K}{1 - \delta_K} \right )
+\| \by \|_2^2 
+\leq \| \Psi_{\Lambda} \by \|_2^2
+\leq (1 + \delta_K) \| \by \|_2^2
+```
+whenever $\|\by \|_0 \leq K - | \Lambda|$ and 
+$\supp(\by) \cap \Lambda = \EmptySet$.
+
+If $\Phi$ satisfies RIP of order $K$, then $\Psi_{\Lambda}$
+acts as an approximate isometry on every $(K - |\Lambda|)$-sparse vector
+supported on $\Lambda^c$.
+
+From {eq}`eq:omp:3715a448-7956-43a0-91d5-43447bbdfa7b` recall that
+the residual vector $\br^k$ is formed by applying $\Psi_{\Lambda^k}$ 
+to $\widetilde{\bx}^k$ which is a $K - k$ sparse vector supported
+on ${\Lambda^k}^c$.
+
+Our interest is in combining above two results and get some
+bound on the inner products $\bh^{k + 1}_j$. Exactly what kind of bound? 
+When $\Lambda^k$ has been identified, our interest is in ensuring
+that the next index is chosen from the set $\supp(\bx) \setminus \Lambda^k$.
+A useful way to ensure this would be to verify if the entries in $\bh^{k + 1}$
+are close to $\widetilde{\bx}^k$. If they are, then they would be 0 over $\Lambda^k$
+, they would be pretty high over $\supp(\bx) \setminus \Lambda^k$  and lastly,
+very small over $\supp(\bx)^c$ which is what we want. 
+
+The next result 
+develops these bounds around {eq}`eq:omp:3dfc00cb-f266-4876-b7d9-14daeca3056a`.
+`````
+
+````{prf:lemma}
+:label: res:omp:rip:inner_product_upper_bound
+
+Let $\Lambda \subset \{1, \dots, N \}$ and suppose
+$\widetilde{\bx} \in \RR^N$ with
+$\supp(\widetilde{\bx}) \cap \Lambda = \EmptySet$.
+Define 
+
+```{math}
+:label: eq:omp:ec749572-224c-4fe1-8796-a35ef1284d4c
+
+\bh = \Psi_{\Lambda}^T \Psi_{\Lambda} \widetilde{\bx}.
+```
+Then if $\Phi$ satisfies the RIP of order
+$K \geq \| \widetilde{\bx} \|_0 + |\Lambda | + 1$
+with isometry constant $\delta_K$, we have
+
+```{math}
+:label: eq:omp:3dc0c334-dedf-4c86-8c3d-d72d78951ac0
+
+| h_j - \widetilde{x}_j | 
+\leq \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2 
+\Forall j \notin \Lambda.
+```
+````
+Note that $|\Lambda |$ is the number of entries in the the discovered part
+of the support at any iteration in OMP and $\| \widetilde{\bx} \|_0$ 
+is the number of entries in not yet discovered part of the support.
+
+````{prf:proof}
+.
+
+1. We have $|\Lambda | < K$ and $\| \widetilde{\bx} \|_0 < K - |\Lambda |$.
+1. Thus, from {eq}`eq:greedy:5774ac7f-1f4b-464f-882b-9795c5996278`, we obtain
+
+    $$
+    \left ( 1 - \frac{\delta_K}{1 - \delta_K} \right )
+    \| \widetilde{\bx} \|_2^2 
+    \leq \| \Psi_{\Lambda} \widetilde{\bx} \|_2^2
+    \leq (1 + \delta_K) \| \widetilde{\bx} \|_2^2.
+    $$
+1. We can make a statement saying $\Psi_{\Lambda}$ satisfies a RIP of order
+   
+   $$
+   ( \| \widetilde{\bx} \|_0 + |\Lambda | + 1) -  |\Lambda | 
+   =  \| \widetilde{\bx} \|_0  + 1
+   $$
+   with a RIP constant $\frac{\delta_K}{1 - \delta_K}$.
+1. By the definition of $\bh$, we have
+
+   $$
+    h_j = \langle\Psi_{\Lambda} \widetilde{\bx},  \Psi_{\Lambda} \be_j \rangle
+   $$
+   where $h_j$ is the $j$-th entry in $\bh$ and
+   $\be_j$ denotes the $j$-th vector from the identity basis. 
+1. We already know that $h_j = 0$ for all $j \in \Lambda$. 
+1. Consider $j \notin \Lambda$ and take the two vectors $\widetilde{\bx}$
+   and $\be_j$.
+1. We can see that
+   
+   $$
+    \|\widetilde{\bx} \pm \be_j \|_0  \leq \|\widetilde{\bx} \|_0 + 1
+   $$
+   and
+   
+   $$
+    \supp (\widetilde{\bx} \pm \be_j ) \cap \Lambda = \EmptySet.
+   $$
+1. Applying {eq}`eq:greedy:ef6701cc-26cb-4293-9f6f-828ce08658c7`
+   on the two vectors with $\Psi_{\Lambda}$ as our RIP matrix,
+   we see that
+
+   $$
+    | \langle \Psi_{\Lambda} \widetilde{\bx}, 
+    \Psi_{\Lambda} \be_j \rangle - \langle \widetilde{\bx}, \be_j \rangle | 
+    \leq \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2 \| \be_j \|_2.
+   $$
+1. But 
+   
+   $$
+    | \langle \Psi_{\Lambda} \widetilde{\bx}, 
+    \Psi_{\Lambda} \be_j \rangle - \langle \widetilde{\bx}, \be_j \rangle | 
+    = | h_j - \widetilde{x}_j |.
+   $$
+1. Noting that $\| \be_j \|_2 = 1$, we get our desired result.
+````
+
+With this bound in place, we can develop a sufficient condition under which
+the identification step of OMP (which identifies the new index $\lambda^{k + 1}$) 
+will succeed.
+
+The following corollary establishes a lower bound on the largest entry
+in $\widetilde{\bx}$ which will ensure that OMP indeed chooses
+the next index $\lambda^k$ from the support of $\widetilde{\bx}$.
+
+````{prf:corollary}
+:label: res:omp:rip:alpha_lower_bound
+
+Suppose that $\Lambda$, $\Phi$, $\widetilde{\bx}$ meet the assumptions
+in {prf:ref}`res:omp:rip:inner_product_upper_bound`, and let $\bh$ be as
+defined in {eq}`eq:omp:ec749572-224c-4fe1-8796-a35ef1284d4c`.
+If 
+
+```{math}
+:label: eq:omp:47b4e318-f7c1-4f83-be43-dcb2d2011fa2
+
+\| \widetilde{\bx} \|_{\infty} 
+> \frac{2 \delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2,
+```
+we are guaranteed that
+
+$$
+\underset{j \notin \Lambda}{\text{arg} \, \max}|h_j| 
+\in \supp(\widetilde{\bx}).
+$$
+````
+````{prf:proof}
+.
+
+1. If {eq}`eq:omp:3dc0c334-dedf-4c86-8c3d-d72d78951ac0` is satisfied, then
+   for indices $j \notin \supp(\widetilde{\bx})$, we will have
+   
+   $$
+    | h_j | \leq \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2.
+   $$
+1. We already know that $h_j = 0$ for all $j \in \Lambda$.
+1. If {eq}`eq:omp:47b4e318-f7c1-4f83-be43-dcb2d2011fa2` is satisfied, then
+   there exists $j \in \supp(\widetilde{\bx})$ with
+   
+   $$
+    | \widetilde{\bx}_j | 
+    > \frac{2 \delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2.
+   $$
+1. For this particular $j$,
+   applying triangular inequality on
+   {eq}`eq:omp:3dc0c334-dedf-4c86-8c3d-d72d78951ac0`
+   
+   $$
+    \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2  \geq | h_j - \widetilde{x}_j | 
+    \geq | \widetilde{x}_j | - | h_j |.
+   $$
+1. Thus
+    
+    $$
+    | h_j |  &\geq | \widetilde{x}_j | - \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2\\
+    &> \frac{2 \delta_K}{1 - \delta_K} \| 
+    \widetilde{\bx} \|_2 - \frac{\delta_K}{1 - \delta_K} 
+    \| \widetilde{\bx} \|_2\\
+    = \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2.
+   $$
+1. We have established that there exists some 
+   $j \in \supp(\widetilde{\bx})$ for which
+   
+   $$
+    | h_j | > \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2
+   $$
+   and for every $j \notin \supp(\widetilde{\bx})$
+   
+   $$
+    | h_j | \leq \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2.
+   $$
+1. Together, they establish that OMP will indeed choose an index
+   from the correct set.
+````
+
+All we need to do now is to make sure that {eq}`eq:omp:47b4e318-f7c1-4f83-be43-dcb2d2011fa2`
+is satisfied by choosing $\delta_K$ small enough.
+The following result from {cite}`davenport2010analysis`
+guarantees that.
+
+````{prf:theorem}
+:label: res:greedy:omp_rip_bound
+
+Suppose that $\Phi$ satisfies the RIP of order $K + 1$ with
+isometry constant $\delta < \frac{1}{2 \sqrt{K} + 1}$. 
+Then for any $\bx \in \RR^N$ with $\| \bx\|_0 \leq K$,
+OMP will recover $\bx$ exactly from $\by = \Phi \bx$ in 
+$K$ iterations.
+````
+The upper bound on $\delta$ can be simplified  can be
+simplified as $\delta < \frac{1}{3 \sqrt{K}}$. 
+
+````{prf:proof}
+The proof works by induction.
+We show that under the stated conditions, 
+$\lambda^1 \in \supp(\bx)$.
+Then we show that whenever $\lambda^k \in \supp(\bx)$
+then $\lambda^{k + 1}$ also $\in \supp(\bx)$.
+
+1. For the first iteration, we have
+   
+   $$
+    \bh^1 = \Phi^T \Phi \by.
+   $$
+1. Note that $\Phi = \Psi_{\EmptySet}$.
+1. It is given that $\| \bx \|_0 \leq K$.
+1. Thus due to {prf:ref}`lem:u_sigma_k_norms`:
+
+   $$
+    \| \bx \|_{\infty} \geq \frac{\| \bx \|_2}  {\sqrt{K}} .
+   $$
+1. Now $\delta < \frac{1}{3 \sqrt{K}}$
+   or $\delta < \frac{1}{2 \sqrt{K} + 1}$ implies that
+
+    ```{math}
+    :label: eq:omp:2fb934e3-6998-4216-8459-31685c4dd941
+
+    \frac{2 \delta}{1 - \delta} < \frac{1}{\sqrt{K}}.
+    ```
+1. This can be seen as follows. Assuming $K \geq 1$, we have:
+    
+    $$
+    &3 \sqrt{K } \geq 2 \sqrt{K} + 1 \\
+    \implies &\frac{1}{3 \sqrt{K}} \leq \frac{1}{2 \sqrt{K} + 1}\\
+    \implies &\delta < \frac{1}{2 \sqrt{K} + 1}\\
+    \implies &2 \delta \sqrt{K} + \delta < 1 \\
+    \implies &2 \delta \sqrt{K} < 1 - \delta \\
+    \implies &\frac{2 \delta}{1 - \delta} <  \frac{1}{\sqrt{K}}.
+    $$
+1. Therefore
+    
+    $$
+    \| \bx \|_{\infty} > \frac{2 \delta}{1 - \delta} \| \bx \|_2
+    $$
+    and {eq}`eq:omp:47b4e318-f7c1-4f83-be43-dcb2d2011fa2` is satisfied
+    and $\lambda^1$ will indeed be chosen from $\supp(\bx)$ 
+    due to {prf:ref}`res:omp:rip:alpha_lower_bound`.
+1. We now assume that OMP has correctly discovered indices
+   up to $\lambda^1, \dots, \lambda^k$. i.e.
+   
+   $$
+    \Lambda^k \subset \supp(\bx).
+   $$
+1. We have to show that it will also correctly discover $\lambda^{k + 1}$.
+1. From the definition of $\widetilde{\bx}$ in
+   {eq}`eq:omp:widetilde_alpha_definition`,
+   we know that $\supp\left (\widetilde{\bx}^k\right ) \cap \Lambda^k = \EmptySet$.
+1. Thus
+
+    $$
+    \| \widetilde{\bx}^k \|_0 \leq K - k. 
+    $$
+1. We also know that $|\Lambda^k | = k$. By assumption $\Phi$
+   satisfies RIP of order $K + 1 = (K - k) + k + 1 $.
+1. Thus
+   
+   $$
+    K + 1 \geq \| \widetilde{\bx}^k \|_0 + |\Lambda^k | + 1. 
+   $$
+
+1. Also due to {prf:ref}`lem:u_sigma_k_norms`:
+   
+   $$
+    \| \widetilde{\bx}^k \|_{\infty} \geq 
+    \frac{\| \widetilde{\bx}^k \|_2}{\sqrt{K - k}} \geq
+    \frac{\| \widetilde{\bx}^k \|_2}{\sqrt{K}}.
+   $$
+1. Using {eq}`eq:omp:2fb934e3-6998-4216-8459-31685c4dd941`, we get
+   
+   $$
+    \| \widetilde{\bx}^k \|_{\infty} 
+    > \frac{2 \delta}{1 - \delta}\| \widetilde{\bx}^k \|_2.
+   $$
+1. This is the sufficient condition for {prf:ref}`res:omp:rip:alpha_lower_bound`
+   in {eq}`eq:omp:47b4e318-f7c1-4f83-be43-dcb2d2011fa2` giving us
+
+    $$
+    \lambda^{k + 1} = 
+    \underset{j \notin \Lambda^k}{\text{arg} \, \max}| \bh^{k + 1}_j |  
+    \in \supp(\widetilde{\bx}^k).
+    $$
+1. Hence $\Lambda^{ k + 1} \subseteq \supp(\bx)$.
+````
+
+
+
