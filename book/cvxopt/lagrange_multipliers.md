@@ -1820,7 +1820,7 @@ that a point $\bx^*$ is pseudonormal.
 ### Linearly Independent Constraint Qualifications
 
 ```{prf:criterion} CQ1: linearly independent constraint qualifications
-:label: res-opt-efj-licq
+:label: res-opt-efj-licq-cq1
 
 $X = \VV$ and $\bx^*$ satisfies LICQ; i.e., the active inequality
 constraint gradients $\nabla g_i (\bx^*)$ for all $i in \AAA(\bx^*)$

@@ -1,5 +1,5 @@
 (sec:la:matrices)=
-# Matrices I
+# Matrices
 
 This section provides some basic definitions, notation and results on the
 theory of matrices.

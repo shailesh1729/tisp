@@ -80,6 +80,7 @@ A polyhedron thus is the intersection of a finite number of halfspaces ($m$)
 and hyperplanes ($p$).
 
 ````{prf:example} Polyhedra
+:label: ex-cvx-polyhedra-1
 
 *  Affine sets ( subspaces, hyperplanes, lines)
 *  Rays
@@ -141,6 +142,8 @@ Note that $\bb \in \RR^m$, $\bA \in \RR^{m \times n}$, $\bA \bx \in \RR^m$,
 $\bd \in \RR^p$, $\bC \in \RR^{p \times n}$ and $\bC \bx \in \RR^p$.
 
 ````{prf:example} Set of nonnegative numbers
+:label: ex-cvx-non-neg-set-1
+
 Let $\RR_+  = \{ x \in \RR | x \geq 0\}$. $\RR_+$ is a polyhedron
 (a solution set of a single linear inequality). 
 Hence, it is a convex set.
@@ -148,6 +151,8 @@ Moreover, it is a ray and a convex cone.
 ````
 
 ````{prf:example} Nonnegative orthant
+:label: ex-cvx-nng-orthant-1
+
 The nonnegative orthant $\RR_+^n$ 
 is a polyhedron (solution set of
 $n$ linear inequalities). 

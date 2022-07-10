@@ -636,6 +636,8 @@ Hence $\ba - \bb$ is a $2K$-sparse signal.
 ````
 
 ````{prf:example} Difference of K sparse signals
+:label: ex-ssm-diff-k-sparse-sig-1
+
 Let N = 5. 
 
 *  Let $\ba = (0,1,-1,0, 0)$ and $\bb = (0,2,0,-1, 0)$.
