@@ -2,6 +2,8 @@
 
 In this section we will review basic concepts of set theory. 
 
+```{index} Set
+```
 ````{prf:definition} Set
 :label: def-set
 
@@ -22,6 +24,8 @@ It is just a working definition which we will use in this book.
   (a predicate or a condition or a rule).
 
 
+```{index} Set; singleton
+```
 ````{prf:definition} Singleton set
 :label: def-singleton-set
 
@@ -29,6 +33,8 @@ A set with only one element is known as a *singleton* set.
 ````
 
 
+```{index} Set; equality
+```
 ````{prf:definition} Set equality
 :label: def-equal-sets
 
@@ -36,6 +42,8 @@ Two sets $A$ and $B$ are said to be equal ($A=B$) if they have precisely the sam
 if $x \in A$ then $x \in B$ and vice versa. Otherwise, they are not equal ($A \neq B$).
 ````
 
+```{index} Subset
+```
 ````{prf:definition} Subset
 :label: def-subset
 
@@ -49,18 +57,24 @@ This is denoted as $A \subseteq B$. Formally $A \subseteq B \iff (x \in A \impli
 $A = B \iff (A \subseteq B \text{ and } B \subseteq A)$.
 ````
 
+```{index} Subset; proper
+```
 ````{prf:definition} Proper subset
 :label: def-proper-subset
 
 If $A \subseteq B$ and $A \neq B$ then $A$ is called a *proper subset* of $B$ denoted by $A \subset B$.
 ````
 
+```{index} Set; empty
+```
 ````{prf:definition} Empty set
 :label: def-empty-set
 
 A set without any elements is called the *empty* or *void* set. It is denoted by $\EmptySet$.
 ````
 
+```{index} Set; operations
+```
 ````{prf:definition} Set operations
 :label: def-set-operations
 
@@ -85,6 +99,8 @@ $$
 $$
 ````
 
+```{index} Set; disjoint
+```
 ````{prf:definition} Disjoint sets
 :label: def-disjoint-sets
 
@@ -101,6 +117,8 @@ Some useful identities
 *  $(A \cap B) \setminus C = (A \setminus C) \cap (B \setminus C)$.
 
 
+```{index} Set; symmetric difference
+```
 ````{prf:definition} Symmetric difference
 :label: def-symmetric-difference
 
@@ -116,12 +134,16 @@ i.e. the elements which are in $A$ but not in $B$ and the elements which are in 
 
 ## Family of sets
 
+```{index} Family of sets
+```
 ````{prf:definition} Family of sets
 :label: def-set-family
 
 A *Family of sets* is a nonempty set $\mathcal{F}$ whose members are sets by themselves.
 ````
 
+```{index} Family of sets; index set
+```
 ````{prf:definition} Families indexed by an index set
 :label: def-index-set
 
@@ -163,6 +185,8 @@ $\{ A_i\}_{i \in I}$.
 In other words, a family of sets can index itself. 
 ````
 
+```{index} Family of sets; union
+```
 ````{prf:definition} Union of families of sets
 :label: def-union-family-of-sets
 
@@ -175,6 +199,8 @@ $$
 In words, every element of the union exists in one of the members of the family.
 ````
 
+```{index} Family of sets; intersection
+```
 ````{prf:definition} Intersection of families of sets
 :label: def-intersection-family-of-sets
 
@@ -205,6 +231,8 @@ $$
 ````
 
 
+```{index} Family of sets; pairwise disjoint
+```
 ````{prf:definition} Family of pairwise disjoint sets
 :label: def-pairwise-disjoint-sets
 
@@ -213,6 +241,8 @@ if for each pair $i, j \in I$
 the sets $A_i$ and $A_j$  are disjoint i.e. $A_i \cap A_j = \EmptySet$.
 ````
 
+```{index} Power set
+```
 ````{prf:definition} Power set
 :label: def-power-set
 
@@ -230,6 +260,8 @@ Let $X$ be a fixed set. If $P(x)$ is a property well defined for all $x \in X$, 
 the set of all $x$ for which $P(x)$ is true is denoted by $\{x \in X \ST P(x)\}$.
 ````
 
+```{index} Set; complement
+```
 ````{prf:definition} Complement of a set
 :label: def-complement-set
 
@@ -258,6 +290,8 @@ We have the following results:
 We will introduce the notion of *ordered pairs* informally 
 following {cite}`wiki:ordered-pair`.
 
+```{index} Ordered pair
+```
 ```{prf:definition} Ordered pair
 :label: def-st-ordered-pair
 

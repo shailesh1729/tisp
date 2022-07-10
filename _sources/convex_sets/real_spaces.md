@@ -157,7 +157,7 @@ specifically on hyperplanes in a real inner product space.
 A *hyperplane*  is a set of the form
 
 $$
-H_{\ba, b} \triangleq  \{ x \ST \langle \bx, \ba \rangle = b \}
+H_{\ba, b} \triangleq  \{ \bx \ST \langle \bx, \ba \rangle = b \}
 $$
 where $\ba \in \VV^*, \ba \neq \bzero$ and $b \in \RR$.
 The vector $\ba$ is called the *normal vector* to the hyperplane.

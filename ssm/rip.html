@@ -1,0 +1,3514 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12.8. Restricted Isometry Property &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12.9. Dictionaries II" href="dictionaries_2.html" />
+    <link rel="prev" title="12.7. Compressive Sensing" href="compressive_sensing.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ssm/rip.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fssm/rip.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-first-restricted-isometry-constant">
+   12.8.1. The First Restricted Isometry Constant
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sums-and-differences-of-sparse-vectors">
+   12.8.2. Sums and Differences of Sparse Vectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distance-between-sparse-vectors">
+   12.8.3. Distance Between Sparse Vectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-with-unit-length-sparse-vectors">
+   12.8.4. RIP with Unit Length Sparse Vectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#singular-and-eigen-values-of-k-submatrices">
+   12.8.5. Singular and Eigen Values of
+   <span class="math notranslate nohighlight">
+    \(K\)
+   </span>
+   -Submatrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximate-orthogonality">
+   12.8.6. Approximate Orthogonality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#signal-proxy">
+   12.8.7. Signal Proxy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-and-inner-product">
+   12.8.8. RIP and Inner Product
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-and-orthogonal-projection">
+   12.8.9. RIP and Orthogonal Projection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-for-higher-orders">
+   12.8.10. RIP for Higher Orders
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#embeddings-of-arbitrary-signals">
+   12.8.11. Embeddings of Arbitrary Signals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-general-form-of-rip">
+   12.8.12. A General Form of RIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-out-rip-constants">
+   12.8.13. Finding out RIP Constants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-and-coherence">
+   12.8.14. RIP and Coherence
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Restricted Isometry Property</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-first-restricted-isometry-constant">
+   12.8.1. The First Restricted Isometry Constant
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sums-and-differences-of-sparse-vectors">
+   12.8.2. Sums and Differences of Sparse Vectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distance-between-sparse-vectors">
+   12.8.3. Distance Between Sparse Vectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-with-unit-length-sparse-vectors">
+   12.8.4. RIP with Unit Length Sparse Vectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#singular-and-eigen-values-of-k-submatrices">
+   12.8.5. Singular and Eigen Values of
+   <span class="math notranslate nohighlight">
+    \(K\)
+   </span>
+   -Submatrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximate-orthogonality">
+   12.8.6. Approximate Orthogonality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#signal-proxy">
+   12.8.7. Signal Proxy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-and-inner-product">
+   12.8.8. RIP and Inner Product
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-and-orthogonal-projection">
+   12.8.9. RIP and Orthogonal Projection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-for-higher-orders">
+   12.8.10. RIP for Higher Orders
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#embeddings-of-arbitrary-signals">
+   12.8.11. Embeddings of Arbitrary Signals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-general-form-of-rip">
+   12.8.12. A General Form of RIP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-out-rip-constants">
+   12.8.13. Finding out RIP Constants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-and-coherence">
+   12.8.14. RIP and Coherence
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="restricted-isometry-property">
+<span id="sec-ssm-rip"></span><h1><span class="section-number">12.8. </span>Restricted Isometry Property<a class="headerlink" href="#restricted-isometry-property" title="Permalink to this headline">¶</a></h1>
+<p>This section dwells deep into the implications of restricted isometry property.</p>
+<div class="proof definition admonition" id="def:proj:restricted_isometry_property">
+<p class="admonition-title"><span class="caption-number">Definition 12.29 </span> (Restricted isometry property)</p>
+<div class="definition-content section" id="proof-content">
+<p>A matrix <span class="math notranslate nohighlight">\(\Phi \in \CC^{M\times N}\)</span> is said to satisfy the
+<em>RIP (restricted isometry property)</em>
+of order <span class="math notranslate nohighlight">\(K\)</span> with a constant <span class="math notranslate nohighlight">\(\delta \in (0, 1)\)</span>
+if  the following holds:</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-restricted-isometry-property-bound">
+<span class="eqno">(12.42)<a class="headerlink" href="#equation-eq-proj-restricted-isometry-property-bound" title="Permalink to this equation">¶</a></span>\[(1 - \delta) \|\bx\|^2_2 \leq \| \Phi \bx \|^2_2 \leq (1 + \delta) \|\bx\|^2_2\]</div>
+<p>for every <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma_K = \{\bx \in \CC^N : \|\bx\|_0 \leq K \}
+\]</div>
+<p>is the set of all <span class="math notranslate nohighlight">\(K\)</span>-sparse vectors in <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def:proj:rip:restricted_isometry_constant">
+<p class="admonition-title"><span class="caption-number">Definition 12.30 </span> (Restricted isometry constant)</p>
+<div class="definition-content section" id="proof-content">
+<p>If a matrix <span class="math notranslate nohighlight">\(\Phi \in \CC^{M\times N}\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>
+then the smallest value of <span class="math notranslate nohighlight">\(\delta\)</span> (denoted as <span class="math notranslate nohighlight">\(\delta_K\)</span>)
+for which the following holds</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-restricted-isometry-constant-bound-def">
+<span class="eqno">(12.43)<a class="headerlink" href="#equation-eq-proj-restricted-isometry-constant-bound-def" title="Permalink to this equation">¶</a></span>\[(1 - \delta) \|\bx\|^2_2 
+\leq \| \Phi \bx \|^2_2 
+\leq (1 + \delta) \|\bx\|^2_2 \; \Forall \bx \in \Sigma_K\]</div>
+<p>is known as the <span class="math notranslate nohighlight">\(K\)</span>-th <em>restricted isometry constant</em> for <span class="math notranslate nohighlight">\(\Phi\)</span>.
+It is also written in short as <span class="math notranslate nohighlight">\(K\)</span>-th <em>RIP constant</em>.
+We write the bounds as in terms of <span class="math notranslate nohighlight">\(\delta_K\)</span> as</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-restricted-isometry-constant-bound">
+<span class="eqno">(12.44)<a class="headerlink" href="#equation-eq-proj-restricted-isometry-constant-bound" title="Permalink to this equation">¶</a></span>\[(1 - \delta_K) \|\bx\|^2_2 
+\leq \| \Phi \bx \|^2_2 
+\leq (1 + \delta_K) \|\bx\|^2_2 \; \Forall \bx \in \Sigma_K.\]</div>
+</div>
+</div><p>Some remarks are in order.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Phi\)</span> maps a vector <span class="math notranslate nohighlight">\(\bx \in \Sigma_K \subseteq \CC^N\)</span>
+into <span class="math notranslate nohighlight">\(\CC^M\)</span> as a vector <span class="math notranslate nohighlight">\(\Phi \bx\)</span> (usually <span class="math notranslate nohighlight">\(M &lt; N\)</span>).</p></li>
+<li><p>We will call <span class="math notranslate nohighlight">\(\Phi \bx \in \CC^M\)</span> as an <em>embedding</em> of <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> into <span class="math notranslate nohighlight">\(\CC^M\)</span>.</p></li>
+<li><p>RIP quantifies the idea as to how much the squared length of a
+sparse signal changes during this embedding process.</p></li>
+<li><p>We can compare matrices satisfying RIP with orthonormal bases.</p></li>
+<li><p>An orthonormal basis or the corresponding unitary matrix
+preserves the length of a vector exactly.</p></li>
+<li><p>A matrix <span class="math notranslate nohighlight">\(\Phi\)</span> satisfying RIP of order <span class="math notranslate nohighlight">\(K\)</span>
+is able to preserve the length of <span class="math notranslate nohighlight">\(K\)</span> sparse signals approximately
+(the approximation range given by <span class="math notranslate nohighlight">\(\delta_K\)</span>).</p></li>
+<li><p>In this sense we can say that
+<span class="math notranslate nohighlight">\(\Phi\)</span> implements a <em>restricted almost orthonormal system</em> <span id="id1">[<a class="reference internal" href="../bib.html#id33" title="Emmanuel J Candes and Terence Tao. Decoding by linear programming. Information Theory, IEEE Transactions on, 51(12):4203–4215, 2005.">12</a>]</span>.</p></li>
+<li><p>By restricted we mean
+that orthonormality is limited to <span class="math notranslate nohighlight">\(K\)</span>-sparse signals.</p></li>
+<li><p>By almost we mean that
+the squared length is not preserved exactly.
+Rather it is preserved approximately.</p></li>
+<li><p>An arbitrary matrix <span class="math notranslate nohighlight">\(\Phi\)</span> need not satisfy RIP of any order at all.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span> then it is easy to see that
+<span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of any order <span class="math notranslate nohighlight">\(L &lt; K\)</span>
+(since <span class="math notranslate nohighlight">\(\Sigma_L \subset \Sigma_K\)</span> whenever <span class="math notranslate nohighlight">\(L &lt; K\)</span>).</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>,
+then it may or many not satisfy RIP of order <span class="math notranslate nohighlight">\(L &gt; K\)</span>.</p></li>
+<li><p>Restricted isometry constant is a function of sparsity level <span class="math notranslate nohighlight">\(K\)</span>
+of the signal <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>.</p></li>
+</ul>
+<div class="proof example admonition" id="ex-ssm-rip-ex-1">
+<p class="admonition-title"><span class="caption-number">Example 12.35 </span> (Restricted isometry constant)</p>
+<div class="example-content section" id="proof-content">
+<p>As a running example in this section
+we will use following matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Phi = \frac{1}{2}
+\begin{bmatrix}
+ 1  &amp;  -1 &amp;  1 &amp; 1 &amp;  1 &amp; -1 &amp;  1 &amp;  1\\
+-1  &amp;  -1 &amp;  1 &amp; 1 &amp; -1 &amp;  1 &amp;  1 &amp; -1\\
+-1  &amp;  -1 &amp; -1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 &amp;  1\\
+-1  &amp;   1 &amp;  1 &amp; 1 &amp;  1 &amp; -1 &amp; -1 &amp; -1
+\end{bmatrix}
+\in \RR^{4 \times 8}.
+\end{split}\]</div>
+<p>Consider</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = 
+\begin{pmatrix}
+-2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -3 &amp; -1 &amp; 0
+\end{pmatrix}
+\]</div>
+<p>which is a <span class="math notranslate nohighlight">\(3\)</span>-sparse vector in <span class="math notranslate nohighlight">\(\RR^8\)</span>.
+We have</p>
+<div class="math notranslate nohighlight">
+\[
+\by = \Phi \bx =
+\begin{pmatrix}
+0 &amp; -1 &amp; 3 &amp; 3
+\end{pmatrix}
+\]</div>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+\|\bx \|_2^2 = 14, \quad \|\bx \|_2 = 3.7417
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\|\by \|_2^2 = 19, \quad \| \by \|_2 = 4.3589.
+\]</div>
+<p>We note that</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\| \by \|^2_2}{\|\bx \|^2_2} = 1.3571.
+\]</div>
+<p>With this much information, all we can say that
+<span class="math notranslate nohighlight">\(\delta_3 \geq .3571\)</span> for this matrix <span class="math notranslate nohighlight">\(\Phi\)</span>
+if <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(3\)</span>
+since we haven’t examined all possible <span class="math notranslate nohighlight">\(3\)</span>-sparse
+vectors.</p>
+<p>Still what is comforting to note is
+that for this particular example,
+the distance hasn’t increased by a large factor.</p>
+</div>
+</div><p>For a given <span class="math notranslate nohighlight">\(K\)</span>-sparse vector <span class="math notranslate nohighlight">\(\bx\)</span>,
+let <span class="math notranslate nohighlight">\(J\)</span> denote the support of <span class="math notranslate nohighlight">\(\bx\)</span>; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+J  = \{ 1 \leq i \leq N \ST x_i \neq 0 \}.
+\]</div>
+<p>In the running example</p>
+<div class="math notranslate nohighlight">
+\[
+J = \{ 1, 6, 7 \}.
+\]</div>
+<p>We define <span class="math notranslate nohighlight">\(\bx_J \in \CC^K\)</span> to be the vector
+formed by keeping the elements in <span class="math notranslate nohighlight">\(\bx\)</span> indexed
+by <span class="math notranslate nohighlight">\(J\)</span> and dropping of other elements
+(the zero elements).
+Note that the order of elements is preserved.
+In the running example,</p>
+<div class="math notranslate nohighlight">
+\[
+\bx_J = \begin{pmatrix}
+-2 &amp; -3 &amp; -1
+\end{pmatrix}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be the corresponding sub-matrix
+by choosing columns from <span class="math notranslate nohighlight">\(\Phi\)</span> indexed by
+the set <span class="math notranslate nohighlight">\(J\)</span>.
+Note that the order of columns is preserved.
+In the running example</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Phi_J = \frac{1}{2}
+\begin{bmatrix}
+ 1 &amp; -1 &amp;  1\\
+-1 &amp;  1 &amp;  1\\
+-1 &amp; -1 &amp; -1\\
+-1 &amp; -1 &amp; -1
+\end{bmatrix}
+\in \RR^{4 \times 3}.
+\end{split}\]</div>
+<p>It is easy to see that</p>
+<div class="math notranslate nohighlight">
+\[
+\by = \Phi \bx = \Phi_J \bx_J.
+\]</div>
+<p>There are <span class="math notranslate nohighlight">\(\binom{N}{K}\)</span> ways of choosing
+a <span class="math notranslate nohighlight">\(K\)</span>-sparse support for <span class="math notranslate nohighlight">\(\bx\)</span>.
+Thus we have to consider <span class="math notranslate nohighlight">\(\binom{N}{K}\)</span>
+corresponding submatrices  <span class="math notranslate nohighlight">\(\Phi_J\)</span>.</p>
+<p>For each such submatrix <span class="math notranslate nohighlight">\(\Phi_J\)</span>, the RIP bounds can be rewritten as</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-rip-k-sub-matrix-rip-bound">
+<span class="eqno">(12.45)<a class="headerlink" href="#equation-eq-proj-rip-k-sub-matrix-rip-bound" title="Permalink to this equation">¶</a></span>\[(1 - \delta_K) \|\bx\|^2_2 \leq \| \Phi_J \bx \|^2_2 \leq (1 + \delta_K) \|\bx\|^2_2\]</div>
+<p>for every <span class="math notranslate nohighlight">\(\bx \in \CC^K\)</span>.
+Note that</p>
+<div class="math notranslate nohighlight">
+\[
+ \| \Phi_J \bx \|^2_2 = 
+ (\Phi_J \bx)^H (\Phi_J \bx)
+ = \bx^H \Phi_J^H \Phi_J \bx.
+\]</div>
+<div class="proof theorem admonition" id="lem:proj:rip:max_rip_order">
+<p class="admonition-title"><span class="caption-number">Theorem 12.43 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>An <span class="math notranslate nohighlight">\(M \times N\)</span> matrix <span class="math notranslate nohighlight">\(\Phi\)</span> cannot satisfy RIP of order <span class="math notranslate nohighlight">\(K &gt; M\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This comes from the fact that for a wide matrix <span class="math notranslate nohighlight">\(\rank \Phi \leq M\)</span>.</p>
+<ol class="simple">
+<li><p>Since every <span class="math notranslate nohighlight">\(\phi_j \in \CC^M\)</span> hence any set of <span class="math notranslate nohighlight">\(M+1\)</span> columns in <span class="math notranslate nohighlight">\(\Phi\)</span>
+is linearly dependent.</p></li>
+<li><p>Thus there exists a nonzero <span class="math notranslate nohighlight">\(M+1\)</span> sparse signal <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>
+such that <span class="math notranslate nohighlight">\(\Phi \bx = \bzero\)</span> (it belongs to the null space of the chosen <span class="math notranslate nohighlight">\(M+1\)</span> columns).</p></li>
+<li><p>RIP <a class="reference internal" href="#equation-eq-proj-restricted-isometry-property-bound">(12.42)</a>
+requires that a nonzero vector be embedded as a nonzero vector.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\Phi\)</span>  cannot satisfy RIP of order <span class="math notranslate nohighlight">\(M+1\)</span>.</p></li>
+<li><p>The argument can be easily extended for any <span class="math notranslate nohighlight">\(K &gt; M\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="lem:proj:rip:lower_order_rip_satisfaction">
+<p class="admonition-title"><span class="caption-number">Theorem 12.44 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(l\)</span> then it satisfies RIP of order <span class="math notranslate nohighlight">\(k\)</span> where <span class="math notranslate nohighlight">\(k &lt; l\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Every <span class="math notranslate nohighlight">\(k\)</span> sparse signal is also <span class="math notranslate nohighlight">\(l\)</span> sparse signal.
+Thus if <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of
+order <span class="math notranslate nohighlight">\(l\)</span> then it automatically satisfies RIP of order <span class="math notranslate nohighlight">\(k &lt; l\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="lem:proj:rip:non_decreasing_constants">
+<p class="admonition-title"><span class="caption-number">Theorem 12.45 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy RIP of order <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(l\)</span> where <span class="math notranslate nohighlight">\(k &lt; l\)</span>.
+Then <span class="math notranslate nohighlight">\(\delta_k \leq \delta_l\)</span>.
+In other words, restricted isometry constants are non-decreasing.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since every <span class="math notranslate nohighlight">\(k\)</span> sparse signal is also <span class="math notranslate nohighlight">\(l\)</span> sparse signal,
+hence for every <span class="math notranslate nohighlight">\(\bx \in \Sigma_k\)</span> following must be satisfied</p>
+<div class="math notranslate nohighlight">
+\[
+(1 - \delta_k) \|\bx\|^2_2 
+\leq \| \Phi \bx \|^2_2 
+\leq (1 + \delta_k) \|\bx\|^2_2
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+(1 - \delta_l) \|\bx\|^2_2 \leq \| \Phi \bx \|^2_2 \leq (1 + \delta_l) \|\bx\|^2_2.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\delta_k\)</span> is smallest such value for which these inequalities are satisfied
+hence <span class="math notranslate nohighlight">\(\delta_l\)</span> cannot be smaller than <span class="math notranslate nohighlight">\(\delta_k\)</span>.</p>
+</div>
+<div class="section" id="the-first-restricted-isometry-constant">
+<h2><span class="section-number">12.8.1. </span>The First Restricted Isometry Constant<a class="headerlink" href="#the-first-restricted-isometry-constant" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>We consider the simplest case where <span class="math notranslate nohighlight">\(K=1\)</span>.
+We can write <span class="math notranslate nohighlight">\(\Phi\)</span> in terms of its column vectors</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi = \begin{bmatrix}
+\phi_1 &amp; \dots &amp; \phi_N
+\end{bmatrix}.
+\]</div>
+<ol>
+<li><p>Now a <span class="math notranslate nohighlight">\(1\)</span>-sparse vector <span class="math notranslate nohighlight">\(\bx\)</span> consists of only one nonzero entry.</p></li>
+<li><p>Say that <span class="math notranslate nohighlight">\(\bx\)</span> is nonzero at index <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\Phi \bx\)</span> is nothing but <span class="math notranslate nohighlight">\(x_j \phi_j\)</span>.</p></li>
+<li><p>With this the restricted isometry inequality can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+   (1 - \delta_1) |x_j|^2 \leq \| x_j \phi_j \|_2^2 \leq (1 + \delta_1) |x_j|^2.
+   \]</div>
+</li>
+<li><p>Dividing by <span class="math notranslate nohighlight">\(|x_j|^2\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[
+   (1 - \delta_1) \leq \| \phi_j \|_2^2 \leq (1 + \delta_1).
+   \]</div>
+</li>
+</ol>
+</div>
+<p>Let us formalize this in the following theorem.</p>
+<div class="proof theorem admonition" id="lem:proj:rip:phi_columns_length_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.46 </span> (Restricted isometry constants of order 1)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If a matrix <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K \geq 1\)</span> then the
+squared lengths of columns of <span class="math notranslate nohighlight">\(\Phi\)</span>  satisfy the following bounds</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-rip-phi-columns-length-bound">
+<span class="eqno">(12.46)<a class="headerlink" href="#equation-eq-proj-rip-phi-columns-length-bound" title="Permalink to this equation">¶</a></span>\[1 - \delta_1 \leq \| \phi_j \|_2^2 \leq 1 + \delta_1  \; \Forall 1 \leq j \leq N.\]</div>
+</div>
+</div><p>When <span class="math notranslate nohighlight">\(\delta_1 = 0\)</span> then all columns of <span class="math notranslate nohighlight">\(\Phi\)</span> are unit norm.
+Now if columns of <span class="math notranslate nohighlight">\(\Phi\)</span> span <span class="math notranslate nohighlight">\(\CC^M\)</span> then
+<span class="math notranslate nohighlight">\(\Phi\)</span> can also be considered as a dictionary for <span class="math notranslate nohighlight">\(\CC^M\)</span>
+(see <a class="reference internal" href="srr.html#def-ssm-dictionary">Definition 12.3</a>).</p>
+<div class="proof remark admonition" id="res-ssm-dictionary-rip-1">
+<p class="admonition-title"><span class="caption-number">Remark 12.8 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>A dictionary (<a class="reference internal" href="srr.html#def-ssm-dictionary">Definition 12.3</a>) satisfies RIP  of order 1 with
+<span class="math notranslate nohighlight">\(\delta_1 = 0\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="sums-and-differences-of-sparse-vectors">
+<h2><span class="section-number">12.8.2. </span>Sums and Differences of Sparse Vectors<a class="headerlink" href="#sums-and-differences-of-sparse-vectors" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="lem:proj:rip_sum_difference">
+<p class="admonition-title"><span class="caption-number">Theorem 12.47 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx , \by \in \CC^N\)</span> with <span class="math notranslate nohighlight">\(\bx \in  \Sigma_k\)</span> and <span class="math notranslate nohighlight">\(\by \in \Sigma_l\)</span>;
+i.e., <span class="math notranslate nohighlight">\( \| \bx \|_0 \leq k\)</span> and <span class="math notranslate nohighlight">\(\| \by \|_0 \leq l\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+(1 - \delta_{k + l}) \| \bx  \pm \by \|_2^2 
+\leq \| \Phi \bx  \pm  \Phi \by \|_2^2 
+\leq (1 + \delta_{k + l}) \| \bx  \pm \by \|_2^2
+\]</div>
+<p>as long as <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(k + l\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We know that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \pm \by \|_0 \leq \| \bx \|_0 + \| \by \|_0 \leq k + l.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\bx \pm \by \in \Sigma_{k + l}\)</span>. The result follows.</p>
+</div>
+</div>
+<div class="section" id="distance-between-sparse-vectors">
+<h2><span class="section-number">12.8.3. </span>Distance Between Sparse Vectors<a class="headerlink" href="#distance-between-sparse-vectors" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \Sigma_K\)</span>. Then clearly <span class="math notranslate nohighlight">\(\bx - \by \in \Sigma_{2K}\)</span>.</p>
+<p>The <span class="math notranslate nohighlight">\(\ell_2\)</span> distance between vectors is given by</p>
+<div class="math notranslate nohighlight">
+\[
+d(\bx, \by) = \| \bx - \by \|_2 = \sqrt{(\bx  - \by)^H (\bx - \by)}.
+\]</div>
+<p>Now if <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span>
+then we can see that it approximately preserves <span class="math notranslate nohighlight">\(\ell_2\)</span> distances
+between <span class="math notranslate nohighlight">\(K\)</span>-sparse vectors.</p>
+</div>
+<div class="proof theorem admonition" id="lem:proj:rip_distance_preservation">
+<p class="admonition-title"><span class="caption-number">Theorem 12.48 </span> (Approximation preservation of distances)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \Sigma_K \subset \CC^N\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi \bx , \Phi \by \in \CC^M\)</span> be corresponding embeddings.
+If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+(1  - \delta_{2K}) d^2(\bx, \by) 
+\leq d^2 (\Phi \bx, \Phi \by) 
+\leq (1  + \delta_{2K}) d^2(\bx, \by).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span>
+hence for every vector <span class="math notranslate nohighlight">\(\bv \in \Sigma_{2K}\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[
+(1 - \delta_{2K}) \|\bv\|^2_2
+\leq \| \Phi \bv \|^2_2 
+\leq (1 + \delta_{2K}) \|\bv\|^2_2.
+\]</div>
+<p>But then <span class="math notranslate nohighlight">\(\bx - \by \in \Sigma_{2K}\)</span> for every <span class="math notranslate nohighlight">\(\bx, \by \in \Sigma_K\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+d^2 (\bx, \by) = \| \bx - \by \|_2^2
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+d^2 (\Phi \bx, \Phi \by) = \| \Phi \bx - \Phi \by \|_2^2 = \| \Phi (\bx - \by) \|_2^2.
+\]</div>
+<p>Thus we have the result.</p>
+</div>
+</div>
+<div class="section" id="rip-with-unit-length-sparse-vectors">
+<h2><span class="section-number">12.8.4. </span>RIP with Unit Length Sparse Vectors<a class="headerlink" href="#rip-with-unit-length-sparse-vectors" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it is convenient to state RIP in terms of unit length sparse vectors.</p>
+<div class="proof theorem admonition" id="lem:proj:rip_unit_length_sparse_vectors">
+<p class="admonition-title"><span class="caption-number">Theorem 12.49 </span> (RIP for unit length sparse vectors)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx\)</span> be some arbitrary unit length
+(i.e., <span class="math notranslate nohighlight">\(\| \bx \|_2 = 1\)</span>) vector belonging to <span class="math notranslate nohighlight">\(\Sigma_K\)</span>.
+A matrix <span class="math notranslate nohighlight">\(\Phi\)</span> is said to satisfy RIP of order <span class="math notranslate nohighlight">\(K\)</span>
+if and only if the following holds</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-rip-bound-unit-length">
+<span class="eqno">(12.47)<a class="headerlink" href="#equation-eq-proj-rip-bound-unit-length" title="Permalink to this equation">¶</a></span>\[(1 - \delta_K) \leq \| \Phi \bx \|^2_2 \leq (1 + \delta_K)\]</div>
+<p>for every <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span> with <span class="math notranslate nohighlight">\(\| \bx \|_2 = 1\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span> then by putting <span class="math notranslate nohighlight">\(\|\bx \|_2 =1\)</span> in
+<a class="reference internal" href="#equation-eq-proj-restricted-isometry-property-bound">(12.42)</a> we get
+<a class="reference internal" href="#equation-eq-proj-rip-bound-unit-length">(12.47)</a>.</p>
+<p>Now the converse.</p>
+<ol>
+<li><p>We assume <a class="reference internal" href="#equation-eq-proj-rip-bound-unit-length">(12.47)</a> holds for all
+unit norm vectors <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span>.</p></li>
+<li><p>We need to show that <a class="reference internal" href="#equation-eq-proj-restricted-isometry-property-bound">(12.42)</a>
+holds for all <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(\bx = \bzero\)</span> the bounds in
+<a class="reference internal" href="#equation-eq-proj-restricted-isometry-property-bound">(12.42)</a> are trivially satisfied.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span> be some nonzero vector.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\widehat{\bx} = \frac{\bx} {\| \bx \|_2}\)</span>.</p></li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(\widehat{\bx}\)</span> is unit length. Hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; (1 - \delta_K) 
+    \leq \| \Phi \widehat{\bx} \|^2_2 
+    \leq (1 + \delta_K)\\
+    \implies
+    &amp; (1 - \delta_K) \leq 
+    \left \| \Phi \frac{\bx} {\| \bx \|_2} \right \|^2_2 
+    \leq (1 + \delta_K)\\
+    \implies &amp;
+    (1 - \delta_K) \| \bx \|_2^2 
+    \leq \| \Phi \bx\|^2_2 
+    \leq (1 + \delta_K) \| \bx \|_2^2. 
+    \end{split}\]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="singular-and-eigen-values-of-k-submatrices">
+<h2><span class="section-number">12.8.5. </span>Singular and Eigen Values of <span class="math notranslate nohighlight">\(K\)</span>-Submatrices<a class="headerlink" href="#singular-and-eigen-values-of-k-submatrices" title="Permalink to this headline">¶</a></h2>
+<p>Consider any index set <span class="math notranslate nohighlight">\(J \subset \{ 1, \dots, N\}\)</span> with <span class="math notranslate nohighlight">\(|J|=K\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be a sub matrix of <span class="math notranslate nohighlight">\(\Phi\)</span> consisting of columns
+indexed by <span class="math notranslate nohighlight">\(J\)</span>. Assume <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+We define</p>
+<div class="math notranslate nohighlight">
+\[
+\bG \triangleq \Phi_J^H \Phi_J \in \CC^{K \times K}
+\]</div>
+<p>as the Gram matrix for columns of <span class="math notranslate nohighlight">\(\Phi_J\)</span> (see <a class="reference internal" href="../la/matrices_2.html#sec-mat-gram-matrix"><span class="std std-ref">Gram Matrices</span></a>).</p>
+<p>We consider the eigen values of <span class="math notranslate nohighlight">\(\bG\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bG \bx = \lambda \bx 
+\]</div>
+<p>for some <span class="math notranslate nohighlight">\(\bx \in \CC^K\)</span> and <span class="math notranslate nohighlight">\(\bx \neq \bzero\)</span>.
+We will show that eigen values of <span class="math notranslate nohighlight">\(\bG\)</span> are bounded by RIP constant.</p>
+<p>In the running example</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bG = \begin{bmatrix}
+1 &amp; 0 &amp; 0.5\\
+0 &amp; 1 &amp; 0.5\\
+0.5 &amp; 0.5 &amp; 1
+\end{bmatrix}.
+\end{split}\]</div>
+<p>Eigen values of G are <span class="math notranslate nohighlight">\((0.2929,1, 1.7071)\)</span>.</p>
+<div class="proof theorem admonition" id="lem:proj:rip:k_gram_eigen_value_range">
+<p class="admonition-title"><span class="caption-number">Theorem 12.50 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be any sub matrix of <span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(K\)</span> columns.
+Then the eigen values of <span class="math notranslate nohighlight">\(\bG = \Phi_J^H \Phi_J\)</span>
+lie in the range <span class="math notranslate nohighlight">\([1-\delta_K, 1 + \delta_K]\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that <span class="math notranslate nohighlight">\(\bG \in \CC^{K \times K}\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\lambda\)</span> be some eigen value of <span class="math notranslate nohighlight">\(\bG\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^K\)</span> be a corresponding (nonzero) eigenvector.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;\bG \bx = \lambda \bx \\
+    \implies &amp; \bx^H \bG \bx = \bx^H \lambda \bx\\
+    \implies &amp; \bx^H  \Phi_J^H \Phi_J \bx =  \lambda \| \bx \|_2^2\\
+    \implies &amp;\| \Phi_J \bx \|^2_2 = \lambda \| \bx \|_2^2.
+   \end{split}\]</div>
+</li>
+<li><p>From <a class="reference internal" href="#equation-eq-proj-rip-k-sub-matrix-rip-bound">(12.45)</a>
+we recall that <span class="math notranslate nohighlight">\(\delta_K\)</span> RIP bounds apply
+for each vector in <span class="math notranslate nohighlight">\(\bx \in \CC^K\)</span> for a <span class="math notranslate nohighlight">\(K\)</span>-column submatrix <span class="math notranslate nohighlight">\(\Phi_J\)</span>
+given by</p>
+<div class="math notranslate nohighlight">
+\[
+    (1 - \delta_K) \| \bx\|^2_2 
+    \leq \| \Phi_J \bx \|^2_2 
+    \leq (1 + \delta_K) \| \bx\|^2_2.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; (1 - \delta_K) \| \bx\|^2_2 
+    \leq \lambda \| \bx \|_2^2 
+    \leq (1 + \delta_K) \| \bx\|^2_2\\
+    \implies &amp;(1 - \delta_K)  
+    \leq \lambda \leq (1 + \delta_K)
+   \end{split}\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bx \neq \bzero\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="lem:proj:rip:k_gram_invertible">
+<p class="admonition-title"><span class="caption-number">Corollary 12.3 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be any submatrix of
+<span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(K\)</span> columns.
+Then the Gram matrix <span class="math notranslate nohighlight">\(\bG = \Phi_J^H \Phi_J\)</span> is full rank and invertible.
+Moreover <span class="math notranslate nohighlight">\(\bG\)</span> is positive definite.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From <a class="reference internal" href="#lem:proj:rip:k_gram_eigen_value_range">Theorem 12.50</a>,
+the eigen values are in range <span class="math notranslate nohighlight">\([1-\delta_K, 1 + \delta_K]\)</span>.</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>, hence <span class="math notranslate nohighlight">\(\delta_K &lt; 1\)</span>.</p></li>
+<li><p>Hence all eigenvalues of <span class="math notranslate nohighlight">\(\bG\)</span> are positive.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bG\)</span> is positive definite.</p></li>
+<li><p>Hence their product is positive.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\det(\bG)\)</span> is nonzero.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bG\)</span> is invertible.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="lem:proj:rip:k_submatrix_singular_value_range">
+<p class="admonition-title"><span class="caption-number">Theorem 12.51 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be any submatrix of <span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(K\)</span> columns.
+Then all singular values of <span class="math notranslate nohighlight">\(\Phi_J\)</span> are nonzero and they are
+in the range given by</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{1-\delta_K} \leq \sigma \leq \sqrt{1 + \delta_K}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is a singular value of <span class="math notranslate nohighlight">\(\Phi_J\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is straight forward application of
+<a class="reference internal" href="../la/svd.html#lem:mat:singular:aH_a_eigen_values">Lemma 4.75</a> and  <a class="reference internal" href="#lem:proj:rip:k_gram_eigen_value_range">Theorem 12.50</a>.
+Eigen values of <span class="math notranslate nohighlight">\(\Phi_J^H \Phi_J\)</span> are nothing but
+squares of the singular values of <span class="math notranslate nohighlight">\(\Phi_J\)</span>.</p>
+</div>
+<div class="proof corollary admonition" id="cor:proj:rip:k_submatrix_singular_value_range">
+<p class="admonition-title"><span class="caption-number">Corollary 12.4 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be any submatrix of
+<span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(k\)</span> columns where <span class="math notranslate nohighlight">\(k \leq K\)</span>.
+Then the singular values of <span class="math notranslate nohighlight">\(\Phi_J\)</span> are nonzero and they are
+in the range given by</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{1-\delta_K} \leq \sigma \leq \sqrt{1 + \delta_K}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is a singular value of <span class="math notranslate nohighlight">\(\Phi_J\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\sigma\)</span> be a  singular value of <span class="math notranslate nohighlight">\(\Phi_J\)</span>.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>, it also satisfies RIP of order <span class="math notranslate nohighlight">\(k \leq K\)</span>.</p></li>
+<li><p>From <a class="reference internal" href="#lem:proj:rip:k_submatrix_singular_value_range">Theorem 12.51</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \sqrt{1-\delta_k} \leq \sigma \leq \sqrt{1 + \delta_k}.
+    \]</div>
+</li>
+<li><p>From <a class="reference internal" href="#lem:proj:rip:non_decreasing_constants">Theorem 12.45</a>
+we have <span class="math notranslate nohighlight">\(\delta_k \leq \delta_K\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    1 - \delta_K \leq 1 - \delta_k , \quad 1 + \delta_k \leq 1 + \delta_K.
+    \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \sqrt{1-\delta_K} \leq \sigma \leq \sqrt{1 + \delta_K}.
+    \]</div>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="lem:proj:rip:submatrix_eigenvalue_sum_k">
+<p class="admonition-title"><span class="caption-number">Theorem 12.52 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be any submatrix of <span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(k\)</span> columns where <span class="math notranslate nohighlight">\(k \leq K\)</span>.
+Then the eigen values of <span class="math notranslate nohighlight">\(\Phi_J^H \Phi_J + r \bI\)</span> lie in the range</p>
+<div class="math notranslate nohighlight">
+\[
+[1-\delta_K + r, 1 + \delta_K + r].
+\]</div>
+<p>Moreover consider <span class="math notranslate nohighlight">\(\Delta = \Phi_J^H \Phi_J - \bI\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Delta \|_2 \leq \delta_K.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol class="simple">
+<li><p>From <a class="reference internal" href="#lem:proj:rip:k_gram_eigen_value_range">Theorem 12.50</a>
+eigen values of <span class="math notranslate nohighlight">\(\Phi_J^H \Phi_J\)</span> lie in the range
+<span class="math notranslate nohighlight">\([1-\delta_K, 1 + \delta_K]\)</span>.</p></li>
+<li><p>From <a class="reference internal" href="../la/evd.html#lem:mat:eig:lambda_k_sum">Lemma 4.70</a> <span class="math notranslate nohighlight">\(\lambda\)</span> is an eigen value of
+<span class="math notranslate nohighlight">\(\Phi_J^H \Phi_J\)</span> if and only if
+<span class="math notranslate nohighlight">\(\lambda + r\)</span> is an eigen value of  <span class="math notranslate nohighlight">\(\Phi_J^H \Phi_J + r \bI\)</span>.</p></li>
+<li><p>Hence the result.</p></li>
+</ol>
+<p>Now for <span class="math notranslate nohighlight">\(\Delta = \Phi_J^H \Phi_J - \bI\)</span></p>
+<ol>
+<li><p>The eigen values lie in the range <span class="math notranslate nohighlight">\([-\delta_K, \delta_K]\)</span>.</p></li>
+<li><p>Thus for every eigen value of <span class="math notranslate nohighlight">\(\Delta\)</span> we have
+<span class="math notranslate nohighlight">\(|\lambda| \leq \delta_K\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\Delta\)</span> is Hermitian,
+its spectral norm is nothing but its largest eigen value.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Delta \|_2 \leq \delta_K.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>From previous few results we see that bound over eigen values of <span class="math notranslate nohighlight">\(\Phi_J^H \Phi_J\)</span> given by
+<span class="math notranslate nohighlight">\((1 - \delta_K) \leq \lambda \leq (1 + \delta_K)\)</span> is a necessary condition
+for <span class="math notranslate nohighlight">\(\Phi\)</span> to satisfy RIP of order <span class="math notranslate nohighlight">\(K\)</span>.
+We now show that this is also a sufficient condition.</p>
+<div class="proof theorem admonition" id="lem:proj:rip_gram_matrix_eigen_value_sufficient_condition">
+<p class="admonition-title"><span class="caption-number">Theorem 12.53 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> be an <span class="math notranslate nohighlight">\(M \times N\)</span> matrix with <span class="math notranslate nohighlight">\(M \leq N\)</span>.
+Let <span class="math notranslate nohighlight">\(J \subset \{ 1, \dots, N \}\)</span> be any index set
+with <span class="math notranslate nohighlight">\(|J| = K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be the <span class="math notranslate nohighlight">\(K\)</span>-column sub-matrix of <span class="math notranslate nohighlight">\(\Phi\)</span> indexed by <span class="math notranslate nohighlight">\(J\)</span>.
+Let <span class="math notranslate nohighlight">\(\bG = \Phi_J^H \Phi_J\)</span> be the Gram matrix of columns of <span class="math notranslate nohighlight">\(\Phi_J\)</span>.
+Let the eigen values of <span class="math notranslate nohighlight">\(\bG\)</span> be <span class="math notranslate nohighlight">\(\lambda\)</span>.
+If there exists a number <span class="math notranslate nohighlight">\(\delta \in (0,1)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+1  - \delta \leq \lambda \leq 1 + \delta
+\]</div>
+<p>for every eigen value of <span class="math notranslate nohighlight">\(\bG\)</span> for every <span class="math notranslate nohighlight">\(K\)</span> column submatrix of <span class="math notranslate nohighlight">\(\Phi\)</span>, then
+<span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<p>Alternatively, let <span class="math notranslate nohighlight">\(\Delta = \bG - \bI\)</span>.
+If</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Delta \|_2 \leq \delta &lt; 1
+\]</div>
+<p>for every <span class="math notranslate nohighlight">\(K\)</span> column submatrix of <span class="math notranslate nohighlight">\(\Phi\)</span>
+then <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<p>Alternatively, if singular values of <span class="math notranslate nohighlight">\(\Phi_J\)</span> satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{1  - \delta} \leq \sigma \leq \sqrt{1 + \delta}
+\]</div>
+<p>for every <span class="math notranslate nohighlight">\(\Phi_J\)</span> then <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Equivalence of sufficient conditions</p>
+<ol>
+<li><p>We note that eigen values of <span class="math notranslate nohighlight">\(\bG\)</span> are related to eigen values of
+<span class="math notranslate nohighlight">\(\Delta\)</span> by the relation (see <a class="reference internal" href="../la/evd.html#lem:mat:eig:lambda_k_sum">Lemma 4.70</a>)</p>
+<div class="math notranslate nohighlight">
+\[
+    \lambda_G  - 1 = \lambda_{\Delta} \iff \Lambda_G = 1 + \lambda_{\Delta}.
+    \]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Delta \|_2 \leq \delta 
+    \iff  - \delta \leq  \lambda_{\Delta} \leq \delta 
+    \iff 1 - \delta \leq \lambda_G \leq 1 + \delta. 
+    \]</div>
+</li>
+<li><p>Thus the first two sufficient conditions are equivalent.</p></li>
+<li><p>Lastly the eigen values of <span class="math notranslate nohighlight">\(\bG\)</span> are squares of singular values of <span class="math notranslate nohighlight">\(\Phi_J\)</span>.</p></li>
+<li><p>Thus all sufficient conditions are equivalent.</p></li>
+</ol>
+<p>Proof of sufficient condition</p>
+<ol>
+<li><p>Now let <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span> be an arbitrary vector.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(J = \supp(\bx)\)</span>.</p></li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(|J| \leq K\)</span>. If <span class="math notranslate nohighlight">\(|J| &lt; K\)</span> then augment <span class="math notranslate nohighlight">\(J\)</span>
+by adding some indices arbitrarily till we get <span class="math notranslate nohighlight">\(|J| = K\)</span>.</p></li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(\bx_J\)</span> is an arbitrary vector in <span class="math notranslate nohighlight">\(\CC^K\)</span> and
+<span class="math notranslate nohighlight">\(\Phi \bx = \Phi_J \bx_J\)</span>.</p></li>
+<li><p>Now let <span class="math notranslate nohighlight">\(\lambda_1\)</span> be the largest and <span class="math notranslate nohighlight">\(\lambda_k\)</span> be
+the smallest eigen value of <span class="math notranslate nohighlight">\(\bG = \Phi_J^H \Phi_J\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bG\)</span> is Hermitian and all its eigen values are positive,
+hence it is positive definite.</p></li>
+<li><p>From <a class="reference internal" href="../la/evd.html#lem:mat:eig:hermitian_psd_x_h_a_x_range">Lemma 4.69</a> we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \lambda_k  \| \bx\|_2^2 \leq \bx^H \bG \bx 
+    \leq  \lambda_1  \| \bx \|_2^2 \Forall  \bx \in \CC^K.
+   \]</div>
+</li>
+<li><p>Applying the limits on the eigen values and using
+<span class="math notranslate nohighlight">\(\bx^H \bG \bx = \|\Phi_J \bx\|_2^2\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   (1  - \delta)  \| \bx\|_2^2 
+   \leq \|\Phi_J \bx\|_2^2 
+   \leq (1  + \delta)  \|\bx\|_2^2 
+   \Forall  \bx \in \CC^K.
+   \]</div>
+</li>
+<li><p>Since this holds for every index set <span class="math notranslate nohighlight">\(J\)</span>
+with <span class="math notranslate nohighlight">\(|J|=K\)</span> hence an equivalent statement is</p>
+<div class="math notranslate nohighlight">
+\[
+   (1  - \delta)  \| \bx\|_2^2 
+   \leq \|\Phi \bx\|_2^2 
+   \leq (1  + \delta)  \| \bx\|_2^2 \Forall \bx \in \Sigma_K \subset \CC^N.
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\Phi\)</span> indeed satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>
+with some <span class="math notranslate nohighlight">\(\delta_K\)</span> not larger than <span class="math notranslate nohighlight">\(\delta\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="lem:proj:rip:k_submatrix_pseudo_inverse_singular_value_range">
+<p class="admonition-title"><span class="caption-number">Theorem 12.54 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be any submatrix of
+<span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(k\)</span> columns where <span class="math notranslate nohighlight">\(k \leq K\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J^{\dag}\)</span> be its Moore-Penrose pseudo-inverse.
+Then the singular values of <span class="math notranslate nohighlight">\(\Phi_J^{\dag}\)</span> are nonzero and they are
+in the range given by</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{\sqrt{1+\delta_K}} \leq \sigma \leq \frac{1}{\sqrt{1 - \delta_K}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is a singular value of <span class="math notranslate nohighlight">\(\Phi_J^{\dag}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Construction of pseudoinverse of a matrix through
+its singular value decomposition is
+discussed in <a class="reference internal" href="../la/svd.html#lem:mat:singular:matrix_pseudo_inverse">Lemma 4.80</a>.</p>
+<ol>
+<li><p><a class="reference internal" href="../la/svd.html#lem:mat:singular_pseudo_inverse_singular_values">Lemma 4.81</a>
+shows that if <span class="math notranslate nohighlight">\(\sigma\)</span> is a
+nonzero singular value of <span class="math notranslate nohighlight">\(\Phi_J^{\dag}\)</span>
+then <span class="math notranslate nohighlight">\(\frac{1}{\sigma}\)</span> is a nonzero singular value of <span class="math notranslate nohighlight">\(\Phi_J\)</span>.</p></li>
+<li><p>From <a class="reference internal" href="#cor:proj:rip:k_submatrix_singular_value_range">Corollary 12.4</a>
+we have that if <span class="math notranslate nohighlight">\(\frac{1}{\sigma}\)</span> is a singular value of <span class="math notranslate nohighlight">\(\Phi_J\)</span> then,</p>
+<div class="math notranslate nohighlight">
+\[
+    \sqrt{1-\delta_K} \leq \frac{1}{\sigma} \leq \sqrt{1 + \delta_K}
+   \]</div>
+</li>
+<li><p>Inverting the terms in the inequalities we get our result.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-rip-gram-eval-lb">
+<p class="admonition-title"><span class="caption-number">Theorem 12.55 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Eigen values of <span class="math notranslate nohighlight">\(\bG = \Phi_J^H \Phi_J\)</span>
+provide a lower bound on <span class="math notranslate nohighlight">\(\delta_K\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_K \geq \max (1 - \lambda_{\min},
+\lambda_{\max} - 1)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(J\)</span> is some index set choosing <span class="math notranslate nohighlight">\(K\)</span> columns of <span class="math notranslate nohighlight">\(\Phi\)</span> and
+<span class="math notranslate nohighlight">\(\delta_K\)</span> is the <span class="math notranslate nohighlight">\(K\)</span>-th restricted isometry constant for <span class="math notranslate nohighlight">\(\Phi\)</span>.</p>
+<p>In other words, singular values of <span class="math notranslate nohighlight">\(\Phi_J\)</span>
+provide a lower bound on <span class="math notranslate nohighlight">\(\delta_K\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_K \geq \max (1 - \sigma_{\min}^2,
+\sigma_{\max}^2 - 1)
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Obvious.</p>
+</div>
+<p>In the running example, the bounds tell
+us that</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_3 \geq 0.7071.
+\]</div>
+<p>Certainly we have to consider
+all possible <span class="math notranslate nohighlight">\(\binom{N}{K}\)</span> sub-matrices
+<span class="math notranslate nohighlight">\(\Phi_J\)</span> to come up with an overall lower
+bound on <span class="math notranslate nohighlight">\(\delta_K\)</span>.</p>
+<p>This result doesn’t provide us any upper
+bound on <span class="math notranslate nohighlight">\(\delta_K\)</span>.</p>
+<div class="proof theorem admonition" id="lem:proj:rip:phi_phi_H_embedding_l2_norm_upper_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.56 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be any submatrix of
+<span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(k\)</span> columns where <span class="math notranslate nohighlight">\(k \leq K\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Phi_J \bx \|_2 
+\leq  \sqrt{1 + \delta_K} \| \bx \|_2  \Forall \bx \in \CC^k.
+\]</div>
+<p>Moreover</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Phi_J^H \by \|_2 
+\leq  \sqrt{1 + \delta_K} \| \by \|_2 
+\Forall \by \in \CC^M.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that <span class="math notranslate nohighlight">\(\Phi_J\)</span> is an <span class="math notranslate nohighlight">\(M \times k\)</span> matrix.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\sigma_1\)</span> be the largest singular value of <span class="math notranslate nohighlight">\(\Phi_J\)</span>.</p></li>
+<li><p>Then by
+<a class="reference internal" href="../la/svd.html#lem:mat:singular:largest_singular_value_l2_norm_bound_A_A^H">Lemma 4.78</a>
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_J \bx \|_2 \leq \sigma_1 \| \bx \|_2 \Forall \bx \in \CC^k.
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_J^H \by \|_2 \leq \sigma_1 \| \by \|_2 \Forall \by \in \CC^M.
+   \]</div>
+</li>
+<li><p>From <a class="reference internal" href="#lem:proj:rip:k_submatrix_singular_value_range">Theorem 12.51</a> and
+<a class="reference internal" href="#cor:proj:rip:k_submatrix_singular_value_range">Corollary 12.4</a>
+we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \sigma_1  \leq \sqrt{1 + \delta_K}.
+   \]</div>
+</li>
+<li><p>This completes the proof.</p></li>
+</ol>
+</div>
+<p>First inequality is a restatement of restricted isometry property
+in <a class="reference internal" href="#equation-eq-proj-rip-k-sub-matrix-rip-bound">(12.45)</a>.
+Second inequality is interesting.
+In compressive sensing terms, <span class="math notranslate nohighlight">\(\by\)</span> is a measurement vector
+and we are using <span class="math notranslate nohighlight">\(\Phi_J^H\)</span> to project <span class="math notranslate nohighlight">\(\by\)</span> back into <span class="math notranslate nohighlight">\(\CC^N\)</span>
+over a <span class="math notranslate nohighlight">\(k\)</span> sparse support identified by <span class="math notranslate nohighlight">\(J\)</span>.
+The inequality provides an upper bound on how much
+the length can increase during this operation.</p>
+<div class="proof theorem admonition" id="lem:proj:rip:phi_pseudo_inverse_embedding_l2_norm_upper_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.57 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be any submatrix of
+<span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(k\)</span> columns where <span class="math notranslate nohighlight">\(k \leq K\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J^{\dag}\)</span> be its Moore-Penrose pseudo-inverse.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Phi_J^{\dag} \by \|_2 
+\leq  \frac{1}{\sqrt{1 - \delta_K}} \| \by \|_2  \Forall \by \in \CC^M.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that <span class="math notranslate nohighlight">\(\Phi_J^{\dag}\)</span> is an <span class="math notranslate nohighlight">\(k \times M\)</span> matrix.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\sigma_1\)</span> be the largest singular value of <span class="math notranslate nohighlight">\(\Phi_J^{\dag}\)</span>.</p></li>
+<li><p>Then by
+<a class="reference internal" href="../la/svd.html#lem:mat:singular:largest_singular_value_l2_norm_bound_A_A^H">Lemma 4.78</a>
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_J^{\dag} \by \|_2 
+    \leq \sigma_1 \| \by \|_2 \Forall y \in \CC^M.
+   \]</div>
+</li>
+<li><p>From <a class="reference internal" href="#lem:proj:rip:k_submatrix_pseudo_inverse_singular_value_range">Theorem 12.54</a>
+we see that singular values
+of <span class="math notranslate nohighlight">\(\Phi_J^{\dag}\)</span> satisfy the inequalities</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{1}{\sqrt{1+\delta_K}} \leq \sigma \leq \frac{1}{\sqrt{1 - \delta_K}}.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \sigma_1 \leq \frac{1}{\sqrt{1 - \delta_K}}.
+   \]</div>
+</li>
+<li><p>Plugging it in we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \Phi_J^{\dag} \by \|_2 
+   \leq \frac{1}{\sqrt{1 - \delta_K}} \| \by \|_2 
+   \Forall \by \in \CC^M.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>In the previous theorem we saw that back-projection using <span class="math notranslate nohighlight">\(\Phi_J^H\)</span>
+had an upper bound on how
+much the length of measurement vector could increase.
+In this theorem we see another upper bound
+on how much the length of measurement vector can
+increase when back projected using the pseudo inverse
+of <span class="math notranslate nohighlight">\(\Phi_J\)</span>.</p>
+<div class="proof theorem admonition" id="lem:proj:rip:phi_J_gram_embedding_l2_norm_bounds_range">
+<p class="admonition-title"><span class="caption-number">Theorem 12.58 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be any submatrix of
+<span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(k\)</span> columns where <span class="math notranslate nohighlight">\(k \leq K\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+(1 - \delta_K) \| \bx \|_2 
+\leq \| \Phi_J^H \Phi_J \bx \|_2  
+\leq (1 + \delta_K) \| \bx \|_2  \Forall \bx \in \CC^k.
+\]</div>
+<p>Moreover</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{1 + \delta_K} \| \bx \|_2 
+\leq \| \left (\Phi_J^H \Phi_J \right)^{-1} \bx \|_2  
+\leq \frac{1}{1 - \delta_K} \| \bx \|_2  \Forall \bx \in \CC^k.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that <span class="math notranslate nohighlight">\(\Phi_J\)</span> is a full column rank tall matrix.</p>
+<ol>
+<li><p>We recall that all singular values of <span class="math notranslate nohighlight">\(\Phi_J\)</span> are positive
+and are bounded by (<a class="reference internal" href="#cor:proj:rip:k_submatrix_singular_value_range">Corollary 12.4</a>):</p>
+<div class="math notranslate nohighlight">
+\[
+   \sqrt{1-\delta_K} \leq \sigma_k \leq \dots \leq \sigma_1 \leq \sqrt{1 + \delta_K}
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma_1, \dots, \sigma_k\)</span>
+are the singular values of <span class="math notranslate nohighlight">\(\Phi_J\)</span> (in descending order).</p>
+</li>
+<li><p>We note that <span class="math notranslate nohighlight">\(\Phi_J^H \Phi_J\)</span> is an <span class="math notranslate nohighlight">\(k \times k\)</span> matrix
+which is invertible (<a class="reference internal" href="#lem:proj:rip:k_gram_invertible">Corollary 12.3</a>).</p></li>
+<li><p>From
+<a class="reference internal" href="../la/svd.html#lem:mat:singular:full_column_rank_gram_embedding_l2_norm_bound">Lemma 4.84</a>
+we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \sigma_k^2 \| \bx \|_2 
+    \leq \| \Phi_J^H \Phi_J \bx \|_2 
+    \leq \sigma_1^2 \| \bx \|_2  
+    \Forall \bx \in \CC^k.
+   \]</div>
+</li>
+<li><p>Applying the bounds on <span class="math notranslate nohighlight">\(\sigma_i\)</span> we get the result</p>
+<div class="math notranslate nohighlight">
+\[
+    (1 - \delta_K) \| \bx \|_2 
+    \leq \| \Phi_J^H \Phi_J \bx \|_2  
+    \leq (1 + \delta_K) \| \bx \|_2  \Forall \bx \in \CC^k.
+   \]</div>
+</li>
+<li><p>From
+<a class="reference internal" href="../la/svd.html#lem:mat:singular:full_column_rank_inverse_gram_embedding_l2_norm_bound">Lemma 4.86</a>
+we have the bounds for
+<span class="math notranslate nohighlight">\(\left ( \Phi_J^H \Phi_J \right) ^{-1}\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{1}{\sigma_1^2} \| \bx \|_2 
+    \leq \| \left(\Phi_J^H \Phi_J \right)^{-1} \bx \|_2 
+    \leq \frac{1}{\sigma_k^2} \| \bx \|_2  \Forall \bx \in \CC^k.
+   \]</div>
+</li>
+<li><p>Applying the bounds on <span class="math notranslate nohighlight">\(\sigma_i\)</span> we get the result</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{1}{1 + \delta_K} \| \bx \|_2 
+    \leq \| \left (\Phi_J^H \Phi_J \right)^{-1} \bx \|_2
+    \leq \frac{1}{1 - \delta_K} \| \bx \|_2  
+    \Forall \bx \in \CC^k.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>In the sequel we will discuss that <span class="math notranslate nohighlight">\(\Phi^H \Phi \bx\)</span>
+can work as a very good proxy for the signal <span class="math notranslate nohighlight">\(\bx\)</span>. The
+results in this theorem are very comforting in this regard.</p>
+<div class="proof theorem admonition" id="lem:proj:rip:phi_J_gram_minus_I_embedding_l2_norm_upper_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.59 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi_J\)</span> be any sub matrix of
+<span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(k\)</span> columns where <span class="math notranslate nohighlight">\(k \leq K\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| (\Phi_J^H \Phi_J - \bI ) \bx \|_2 
+\leq \delta_K \| \bx \|_2  
+\Forall \bx \in \CC^k.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>From <a class="reference internal" href="#lem:proj:rip:submatrix_eigenvalue_sum_k">Theorem 12.52</a> we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_J^H \Phi_J - \bI \|_2 \leq \delta_k \leq \delta_K.
+   \]</div>
+</li>
+<li><p>Thus since spectral norm is subordinate</p>
+<div class="math notranslate nohighlight">
+\[
+    \| (\Phi_J^H \Phi_J - \bI ) \bx \|_2  
+    \leq \|\Phi_J^H \Phi_J - \bI \|_2 \| \bx \|_2
+    \leq \delta_K \| \bx \|_2  \Forall \bx \in \CC^k.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="approximate-orthogonality">
+<h2><span class="section-number">12.8.6. </span>Approximate Orthogonality<a class="headerlink" href="#approximate-orthogonality" title="Permalink to this headline">¶</a></h2>
+<p>We are going to show that disjoint sets of columns from
+<span class="math notranslate nohighlight">\(\Phi\)</span> span nearly orthogonal
+subspaces.
+This property is proved in <span id="id2">[<a class="reference internal" href="../bib.html#id109" title="Deanna Needell and Joel A Tropp. Cosamp: iterative signal recovery from incomplete and inaccurate samples. Applied and Computational Harmonic Analysis, 26(3):301–321, 2009.">28</a>]</span>.</p>
+<div class="proof theorem admonition" id="lem:proj:rip:approximate_orthogonality">
+<p class="admonition-title"><span class="caption-number">Theorem 12.60 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> denote index sets over the
+columns of <span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(|S| + |T| \leq K\)</span>
+and <span class="math notranslate nohighlight">\(S \cap T = \EmptySet\)</span>.
+In other words, <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are disjoint index sets.
+Let <span class="math notranslate nohighlight">\(\Phi_S\)</span> and <span class="math notranslate nohighlight">\(\Phi_T\)</span> denote corresponding sub-matrices
+consisting of columns indexed by <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> respectively.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Phi_S^H \Phi_T \|_2  \leq \delta_K
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\| \cdot \|_2\)</span> denotes the <span class="math notranslate nohighlight">\(2\)</span>-norm or spectral norm of a matrix.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Define <span class="math notranslate nohighlight">\(R = S \cup T\)</span>.</p>
+<ol>
+<li><p>Consider the sub-matrix <span class="math notranslate nohighlight">\(\Phi_R\)</span>.</p></li>
+<li><p>Construct another matrix
+<span class="math notranslate nohighlight">\(\Psi  = \Phi_R^H \Phi_R - \bI\)</span>.</p></li>
+<li><p>The off-diagonal entries of <span class="math notranslate nohighlight">\(\Psi\)</span> are nothing
+but inner products of columns of <span class="math notranslate nohighlight">\(\Phi_R\)</span>.</p></li>
+<li><p>We note that every entry in the matrix <span class="math notranslate nohighlight">\(\Phi_S^H \Phi_T\)</span>
+is an entry in <span class="math notranslate nohighlight">\(\Psi\)</span>.</p></li>
+<li><p>Moreover, <span class="math notranslate nohighlight">\(\Phi_S^H \Phi_T\)</span> is a submatrix of <span class="math notranslate nohighlight">\(\Psi\)</span>.</p></li>
+<li><p>The spectral norm of a sub-matrix is never greater than
+the spectral norm of the matrix containing it.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_S^H \Phi_T \|_2 \leq \| \Phi_R^H \Phi_R - \bI \|_2.
+   \]</div>
+</li>
+<li><p>From <a class="reference internal" href="#lem:proj:rip:submatrix_eigenvalue_sum_k">Theorem 12.52</a>
+the eigen values of <span class="math notranslate nohighlight">\(\Phi_R^H \Phi_R - \bI\)</span> satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+    1-\delta_K - 1 \leq \lambda \leq  1 + \delta_K -1.
+   \]</div>
+</li>
+<li><p>Thus the spectral norm of <span class="math notranslate nohighlight">\(\Phi_R^H \Phi_R - \bI\)</span>
+which is its largest eigen value
+(see <a class="reference internal" href="../la/matrix_norms.html#thm:mat:2_norm_square_matrices">Theorem 4.147</a>)
+satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_R^H \Phi_R - \bI \|_2 \leq \delta_K.
+   \]</div>
+</li>
+<li><p>Plugging back we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_S^H \Phi_T \|_2  \leq \delta_K.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>This result has a useful corollary. It establishes the approximate
+orthogonality between a set of columns in <span class="math notranslate nohighlight">\(\Phi\)</span> and portion of a
+sparse vector not covered by those columns.</p>
+<div class="proof corollary admonition" id="cor:approximate_orthogonality_submatrix_vector">
+<p class="admonition-title"><span class="caption-number">Corollary 12.5 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K \leq M\)</span>.
+Let <span class="math notranslate nohighlight">\(T \subset \{1, \dots, N \}\)</span> be an index set and
+let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> be some vector.
+Let <span class="math notranslate nohighlight">\(S = \supp(\bx)\)</span>.
+Further let us assume that <span class="math notranslate nohighlight">\(K \geq | T \cup S |\)</span>.
+Define <span class="math notranslate nohighlight">\(R = S \setminus T\)</span>.</p>
+<p>Then the following holds</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Phi_T^H \Phi \bx_R \|_2 \leq \delta_K \| \bx_R \|_2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bx_R\)</span> is obtained by keeping entries in <span class="math notranslate nohighlight">\(\bx\)</span>
+indexed by <span class="math notranslate nohighlight">\(R\)</span> while setting others to 0
+(see <a class="reference internal" href="srr.html#def:ssm:signal_restriction">Definition 12.10</a>).</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The set <span class="math notranslate nohighlight">\(R\)</span> denotes the indices at which <span class="math notranslate nohighlight">\(\bx\)</span>
+is nonzero but not yet covered in <span class="math notranslate nohighlight">\(T\)</span>. In a typical
+sparse recovery algorithm, one has discovered
+a candidate support <span class="math notranslate nohighlight">\(T\)</span> which may not include
+all of <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<ol>
+<li><p>Since</p>
+<div class="math notranslate nohighlight">
+\[
+    \Phi \bx = \sum_{i=1}^N \phi_i x_i
+   \]</div>
+<p>and <span class="math notranslate nohighlight">\(\bx_R\)</span> is zero on entries not indexed by <span class="math notranslate nohighlight">\(R\)</span>, hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \Phi \bx_R = \Phi_R \bx_R
+   \]</div>
+<p>where on the R.H.S. <span class="math notranslate nohighlight">\(\bx_R \in \CC^{|R|}\)</span>
+by dropping the 0 entries from it not indexed by <span class="math notranslate nohighlight">\(R\)</span>
+(see  <a class="reference internal" href="srr.html#def:ssm:signal_restriction">Definition 12.10</a>).</p>
+</li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_T^H \Phi \bx_R \|_2 = \| \Phi_T^H \Phi_R \bx_R \|_2.
+   \]</div>
+</li>
+<li><p>From <a class="reference internal" href="../la/matrix_norms.html#lem:mat:operator_norm_subordinate">Lemma 4.91</a>
+we know that any operator norm is subordinate.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_T^H \Phi_R \bx_R \|_2 
+    \leq \| \Phi_T^H \Phi_R \|_2 \| \bx_R \|_2.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(K \geq | T \cup S |\)</span> hence we have</p>
+<div class="math notranslate nohighlight">
+\[
+    | R | = | S \setminus T | \leq K.
+   \]</div>
+</li>
+<li><p>Further <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(R\)</span> are disjoint and <span class="math notranslate nohighlight">\(| T \cup R | \leq K\)</span>.</p></li>
+<li><p>Applying <a class="reference internal" href="#lem:proj:rip:approximate_orthogonality">Theorem 12.60</a>
+we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_T^H \Phi_R \|_2 \leq \delta_K.
+   \]</div>
+</li>
+<li><p>Putting back, we get our desired result</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_T^H \Phi \bx_R \|_2 \leq \delta_K \| \bx_R \|_2.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="signal-proxy">
+<h2><span class="section-number">12.8.7. </span>Signal Proxy<a class="headerlink" href="#signal-proxy" title="Permalink to this headline">¶</a></h2>
+<p>We can use the results so far to formalize
+the idea of signal proxy.</p>
+<div class="proof theorem admonition" id="lem:proj:rip:signal_proxy_bounds">
+<p class="admonition-title"><span class="caption-number">Theorem 12.61 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx\)</span> be a <span class="math notranslate nohighlight">\(k\)</span>-sparse signal
+Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy the RIP of order <span class="math notranslate nohighlight">\(k + l\)</span> or higher.
+Let <span class="math notranslate nohighlight">\(\bp\)</span> be defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\bp = (\Phi^H \Phi \bx)|_l
+\]</div>
+<p>i.e. <span class="math notranslate nohighlight">\(\bp\)</span> is obtained by keeping the <span class="math notranslate nohighlight">\(l\)</span>
+largest entries in <span class="math notranslate nohighlight">\(\bb = \Phi^H \Phi \bx\)</span>.
+Then the following holds</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bp \|_2 \leq (1 + \delta_l + \delta_{k + l})
+\| \bx \|_2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(A = \supp(\bx)\)</span> and <span class="math notranslate nohighlight">\(B = \supp(\bp)\)</span>.</p>
+<ol>
+<li><p>Then <span class="math notranslate nohighlight">\(|A| \leq k\)</span> and <span class="math notranslate nohighlight">\(|B| \leq l\)</span>.</p></li>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+   \bp = (\Phi^H \Phi \bx)|_l = (\Phi^H \Phi \bx)_B.
+   \]</div>
+</li>
+<li><p>From <a class="reference internal" href="srr.html#lem:ssm:restriction_on_matrix_vector_product">Theorem 12.19</a>
+we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \bp = \Phi_B^H \Phi \bx.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(C  = A \setminus B\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx\)</span> is
+supported on  <span class="math notranslate nohighlight">\(A\)</span> only, hence we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx = \bx_B + \bx_C.
+   \]</div>
+</li>
+<li><p>Thus from <a class="reference internal" href="srr.html#cor:ssm:matrix_vector_product_disjoint_set_seperation">Corollary 12.1</a>
+we get (<span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are disjoint)</p>
+<div class="math notranslate nohighlight">
+\[
+    \Phi \bx = \Phi_B \bx_B + \Phi_C \bx_C.
+   \]</div>
+</li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \bp = \Phi_B^H \Phi_B \bx_B + \Phi_B^H \Phi_C \bx_C.
+   \]</div>
+</li>
+<li><p>Using triangle inequality we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bp \|_2 
+    \leq \|\Phi_B^H \Phi_B \bx_B \|_2 
+    + \| \Phi_B^H \Phi_C \bx_C\|_2.
+   \]</div>
+</li>
+<li><p><a class="reference internal" href="#lem:proj:rip:phi_J_gram_embedding_l2_norm_bounds_range">Theorem 12.58</a> gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \|\Phi_B^H \Phi_B \bx_B \|_2 \leq (1 + \delta_l) \|\bx_B \|_2.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are disjoint, hence
+<a class="reference internal" href="#lem:proj:rip:approximate_orthogonality">Theorem 12.60</a> gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_B^H \Phi_C \bx_C\|_2 \leq \delta_{k +l} \| \bx_C \|_2.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are disjoint, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bx_B \|_2 \leq \| \bx \|_2
+   \text{ and }
+   \| \bx_C \|_2 \leq \| \bx \|_2.
+   \]</div>
+</li>
+<li><p>Finally</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bp \|_2
+    \leq (1 + \delta_l) \|\bx_B \|_2 +  \delta_{k +l} \| \bx_C \|_2
+    \leq (1 + \delta_l + \delta_{k +l}) \| \bx \|_2.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="rip-and-inner-product">
+<h2><span class="section-number">12.8.8. </span>RIP and Inner Product<a class="headerlink" href="#rip-and-inner-product" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\bx'\)</span> be two different vectors in <span class="math notranslate nohighlight">\(\CC^N\)</span>
+such that their support is disjoint.
+i.e. if</p>
+<div class="math notranslate nohighlight">
+\[
+T = \supp(\bx) \subseteq \{ 1 , \dots, N \}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+T' = \supp(\bx') \subseteq \{ 1, \dots, N \}
+\]</div>
+<p>then <span class="math notranslate nohighlight">\(T \cap T' = \EmptySet\)</span>.</p>
+<div class="docutils">
+<p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_0 = |T |
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx' \|_0 = | T' |.
+\]</div>
+<p>Since the support of <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\bx'\)</span> are disjoint
+hence it is straightforward that</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \bx' \rangle = 0.
+\]</div>
+<p>What can we say about the inner product of
+their corresponding embedded vectors <span class="math notranslate nohighlight">\(\Phi \bx \)</span> and <span class="math notranslate nohighlight">\(\Phi \bx'\)</span>?</p>
+</div>
+<p>Following theorem provides an upper bound on the magnitude
+of the inner product when the signal vectors
+<span class="math notranslate nohighlight">\(\bx , \bx'\)</span> belong to the Euclidean space <span class="math notranslate nohighlight">\(\RR^N\)</span>.
+This result is adapted from <span id="id3">[<a class="reference internal" href="../bib.html#id40" title="Emmanuel J Candès. The restricted isometry property and its implications for compressed sensing. Comptes Rendus Mathematique, 346(9):589–592, 2008.">14</a>]</span>.</p>
+<div class="proof theorem admonition" id="lem:rip:inner_product_upper_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.62 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Assume that the sensing matrix <span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span>.
+For all <span class="math notranslate nohighlight">\(\bx, \bx' \in \RR^N\)</span>
+supported on disjoint subsets <span class="math notranslate nohighlight">\(T, T' \subseteq \{1,\dots, N \}\)</span>
+with <span class="math notranslate nohighlight">\( |T| &lt; k\)</span> and
+<span class="math notranslate nohighlight">\(|T| &lt; k'\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+| \langle \Phi \bx, \Phi \bx' \rangle | 
+\leq \delta_{k + k'} \| \bx \|_2 \| \bx' \|_2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\delta_{k + k'}\)</span> is the restricted isometry constant
+for the sparsity level <span class="math notranslate nohighlight">\(k + k'\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\widehat{\bx} = \frac{ \bx}{\| \bx \|_2}\)</span>
+and <span class="math notranslate nohighlight">\(\widehat{\bx'} = \frac{\bx'}{\| \bx' \|_2}\)</span>
+be the corresponding unit norm vectors.</p>
+<ol>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle  \Phi \bx, \Phi \bx' \rangle 
+    = \langle  \Phi \widehat{x}, \Phi \widehat{x'} \rangle
+     \| \bx \|_2 \| \bx' \|_2.
+   \]</div>
+</li>
+<li><p>Hence if we prove the bound for unit norm vectors,
+then it will be straightforward to prove the bound for
+arbitrary vectors.</p></li>
+<li><p>Let us assume without loss of generality that
+<span class="math notranslate nohighlight">\(\bx, \bx'\)</span> are unit norm.</p></li>
+<li><p>We need to show that</p>
+<div class="math notranslate nohighlight">
+\[
+    | \langle \Phi \bx, \Phi \bx' \rangle | 
+    \leq \delta_{k + k'}.
+   \]</div>
+</li>
+<li><p>With the help of parallelogram identity
+(<a class="reference internal" href="../la/inner_product_spaces.html#res-la-parallelogram-identity-2">Theorem 4.95</a>), we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \Phi \bx, \Phi \bx' \rangle  = \frac{1}{4} 
+    \left ( 
+    \|\Phi \bx + \Phi \bx' \|_2^2 - \| \Phi \bx - \Phi \bx' \|_2^2
+    \right ).
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    |\langle \Phi \bx, \Phi \bx' \rangle |  = \frac{1}{4} 
+    \left |
+    \|\Phi \bx + \Phi \bx' \|_2^2 - \| \Phi \bx - \Phi \bx' \|_2^2
+    \right |.
+   \]</div>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx \pm \bx' \|_2^2 
+    = \| \bx\|_2^2 + \| \bx' \|_2^2 
+    \pm 2 \langle \bx, \bx' \rangle 
+    =  \| \bx\|_2^2 + \| \bx' \|_2^2 = 2
+   \]</div>
+<p>since <span class="math notranslate nohighlight">\(\bx , \bx'\)</span> are orthogonal and unit norm.</p>
+</li>
+<li><p>Using <a class="reference internal" href="#lem:proj:rip_sum_difference">Theorem 12.47</a> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;(1 - \delta_{k + k'}) \| \bx  \pm \bx' \|_2^2 
+    \leq \| \Phi \bx  \pm  \Phi \bx' \|_2^2 
+    \leq (1 + \delta_{k + k'}) \| \bx  \pm  \bx' \|_2^2\\
+    \implies &amp;  2 (1 - \delta_{k + k'}) 
+    \leq \| \Phi \bx  \pm  \Phi \bx' \|_2^2 
+    \leq 2 (1 + \delta_{k + k'}).
+   \end{split}\]</div>
+</li>
+<li><p>Hence the maximum value of
+<span class="math notranslate nohighlight">\(\| \Phi \bx  \pm  \Phi \bx' \|_2^2\)</span> can be <span class="math notranslate nohighlight">\(2 (1 + \delta_{k + k'})\)</span>
+while the minimum value of
+<span class="math notranslate nohighlight">\(\| \Phi \bx  \pm \Phi \bx' \|_2^2\)</span> can be <span class="math notranslate nohighlight">\(2 (1 - \delta_{k + k'})\)</span>.</p></li>
+<li><p>This gives us the upper bound</p>
+<div class="math notranslate nohighlight">
+\[
+    |\langle \Phi \bx, \Phi \bx' \rangle | 
+    \leq \frac{1}{4} \left ( 2 (1 + \delta_{k + k'}) - 2 (1 - \delta_{k + k'})\right )
+    =  \delta_{k + k'}.
+   \]</div>
+</li>
+<li><p>Finally when <span class="math notranslate nohighlight">\(\bx, \bx'\)</span> are not unit norm,
+the bound generalizes to</p>
+<div class="math notranslate nohighlight">
+\[
+    |\langle \Phi \bx, \Phi \bx' \rangle | 
+    \leq  \delta_{k + k'} \| \bx \|_2 \| \bx' \|_2.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>A variation of this result is presented below:</p>
+<div class="proof theorem admonition" id="lem:rip:inner_product_upper_bound_2">
+<p class="admonition-title"><span class="caption-number">Theorem 12.63 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Assume that the sensing matrix <span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span>.
+Let <span class="math notranslate nohighlight">\(\bu, \bv \in \RR^N\)</span> be given and let</p>
+<div class="math notranslate nohighlight">
+\[
+K = \max( \| \bu + \bv \|_0 , \| \bu - \bv \|_0). 
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy RIP of order <span class="math notranslate nohighlight">\(K\)</span> with the constant <span class="math notranslate nohighlight">\(\delta_K\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+| \langle \Phi \bu, \Phi \bv \rangle - \langle \bu, \bv \rangle | 
+\leq \delta_{K} \| \bu \|_2 \| \bv \|_2.
+\]</div>
+</div>
+</div><p>This result is more general as it doesn’t require <span class="math notranslate nohighlight">\(\bu, \bv\)</span> to be
+supported on disjoint index sets. All it requires is them
+to be sufficiently sparse.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. As, in the previous result, it is sufficient to prove it
+for the case where <span class="math notranslate nohighlight">\(\| \bu \|_2 = \| \bv \|_2 = 1\)</span>.
+The simplified inequality becomes</p>
+<div class="math notranslate nohighlight">
+\[
+| \langle \Phi \bu, \Phi \bv \rangle - \langle \bu, \bv \rangle | 
+\leq \delta_{K}.
+\]</div>
+<ol>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bu \pm \bv \|_2^2 = \| \bu \|_2^2 + \| \bv \|_2^2 \pm 2 
+    \langle \bu , \bv \rangle
+    = 2 \pm 2 \langle \bu , \bv \rangle. 
+   \]</div>
+</li>
+<li><p>Due to RIP, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    (1 - \delta_K) (2 \pm 2 \langle \bu , \bv \rangle) 
+    \leq \| \Phi (\bu \pm \bv ) \|_2^2
+    \leq (1 + \delta_K)(2 \pm 2 \langle \bu , \bv \rangle).
+   \]</div>
+</li>
+<li><p>From the parallelogram identity, we have</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-33e1bfe4-c5be-47f6-b84e-0d26788ea290">
+<span class="eqno">(12.48)<a class="headerlink" href="#equation-eq-proj-33e1bfe4-c5be-47f6-b84e-0d26788ea290" title="Permalink to this equation">¶</a></span>\[ \langle \Phi \bu , \Phi \bv \rangle 
+ = \frac{1}{4} \left ( 
+ \| \Phi ( \bu + \bv) \|_2^2 - \| \Phi ( \bu - \bv) \|_2^2
+ \right ).\]</div>
+</li>
+<li><p>Taking the upper bound on <span class="math notranslate nohighlight">\(\| \Phi ( \bu + \bv) \|_2^2\)</span>
+and the lower bound on <span class="math notranslate nohighlight">\(\| \Phi ( \bu - \bv) \|_2^2\)</span> in
+<a class="reference internal" href="#equation-eq-proj-33e1bfe4-c5be-47f6-b84e-0d26788ea290">(12.48)</a>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \Phi \bu , \Phi \bv \rangle \leq \frac{1}{2}
+    \left ((1 + \delta_K)(1 +  \langle \bu , \bv \rangle)  
+    - (1 - \delta_K)(1  -  \langle \bu , \bv \rangle) 
+    \right ).
+   \]</div>
+</li>
+<li><p>Simplifying, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \Phi \bu , \Phi \bv \rangle 
+    \leq \langle \bu , \bv \rangle + \delta_K.
+   \]</div>
+</li>
+<li><p>At the same time, taking the lower bound on <span class="math notranslate nohighlight">\(\| \Phi ( \bu + \bv) \|_2^2\)</span>
+and the upper bound on <span class="math notranslate nohighlight">\(\| \Phi ( \bu - \bv) \|_2^2\)</span> in
+<a class="reference internal" href="#equation-eq-proj-33e1bfe4-c5be-47f6-b84e-0d26788ea290">(12.48)</a>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \Phi \bu , \Phi \bv \rangle \geq \frac{1}{2}
+    \left ((1 - \delta_K)(1 +  \langle \bu , \bv \rangle)  
+    - (1 + \delta_K)(1  -  \langle \bu , \bv \rangle) 
+    \right ).
+   \]</div>
+</li>
+<li><p>Simplifying, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \Phi \bu , \Phi \bv \rangle \geq \langle \bu , \bv \rangle - \delta_K.
+   \]</div>
+</li>
+<li><p>Combining the two results, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+    | \langle \Phi \bu , \Phi \bv \rangle - \langle \bu , \bv \rangle | 
+    \leq \delta_K.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>For the complex case, the result can be generalized if we
+choose a bilinear inner product rather than the usual
+sesquilinear  inner product.</p>
+<div class="proof theorem admonition" id="lem:rip:inner_product_upper_bound_2_complex">
+<p class="admonition-title"><span class="caption-number">Theorem 12.64 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bu, \bv \in \CC^N\)</span> be given and let</p>
+<div class="math notranslate nohighlight">
+\[
+K = \max( \| \bu + \bv \|_0 , \| \bu - \bv \|_0). 
+\]</div>
+<p>Let the complex space <span class="math notranslate nohighlight">\(\CC^N\)</span> be equipped with the
+bilinear inner product</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bu, \bv \rangle_B \triangleq \Re (\langle \bu, \bv \rangle)
+\]</div>
+<p>i.e. the real part of the standard inner product.</p>
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy RIP of order <span class="math notranslate nohighlight">\(K\)</span> with the constant <span class="math notranslate nohighlight">\(\delta_K\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+| \langle \Phi \bu, \Phi \bv \rangle_B - \langle \bu, \bv \rangle_B | 
+\leq \delta_{K} \| \bu \|_2 \| \bv \|_2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Recall that the norm induced by the bilinear inner product
+<span class="math notranslate nohighlight">\(\langle \bu, \bv \rangle_B\)</span> is the usual <span class="math notranslate nohighlight">\(\ell_2\)</span> norm since</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bu, \bu \rangle_B  = \Re (\langle \bu, \bu \rangle) 
+= \Re (\| \bu \|_2^2) =\| \bu \|_2^2.  
+\]</div>
+<ol>
+<li><p>Let us just work out the parallelogram identity for the complex case</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \bx \pm \by \|_2^2 
+    &amp;= \langle \bx \pm \by , \bx \pm \by \rangle_B\\
+    &amp;= \langle \bx, \bx \rangle_B 
+    + \langle \by, \by \rangle_B 
+    \pm \langle \bx, \by \rangle_B 
+    \pm \langle \by, \bx \rangle_B\\
+    &amp;= \langle \bx, \bx \rangle_B 
+    + \langle \by, \by \rangle_B \pm 2 \langle \bx, \by \rangle_B
+   \end{split}\]</div>
+<p>due to the bilinearity of the real inner product.</p>
+</li>
+<li><p>We can see that the rest of the proof is identical to the proof of
+<a class="reference internal" href="#lem:rip:inner_product_upper_bound_2">Theorem 12.63</a>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="rip-and-orthogonal-projection">
+<h2><span class="section-number">12.8.9. </span>RIP and Orthogonal Projection<a class="headerlink" href="#rip-and-orthogonal-projection" title="Permalink to this headline">¶</a></h2>
+<p>The first result in this section is presented for real matrices.
+The generalization for complex matrices will be done later.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda \subset \{1, \dots, N \}\)</span>
+be an index set.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span> satisfy RIP of order <span class="math notranslate nohighlight">\(K\)</span>
+with the restricted isometry constant <span class="math notranslate nohighlight">\(\delta_K\)</span>.</p></li>
+<li><p>Assume that the columns of <span class="math notranslate nohighlight">\(\Phi_{\Lambda}\)</span>
+are linearly independent.</p></li>
+<li><p>We can define the pseudo inverse as</p>
+<div class="math notranslate nohighlight">
+\[
+    \Phi_{\Lambda}^{\dag} 
+    = \left (\Phi_{\Lambda}^H \Phi_{\Lambda} \right )^{-1} \Phi_{\Lambda}^H.
+    \]</div>
+</li>
+<li><p>The orthogonal projection operator to the column space for
+<span class="math notranslate nohighlight">\(\Phi_{\Lambda}\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \bP_{\Lambda}  = \Phi_{\Lambda}\Phi_{\Lambda}^{\dag}.
+    \]</div>
+</li>
+<li><p>The orthogonal projection operator onto the orthogonal complement of
+<span class="math notranslate nohighlight">\(\ColSpace(\Phi_{\Lambda})\)</span>
+(column space of <span class="math notranslate nohighlight">\(\Phi_{\Lambda}\)</span>) is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \bP_{\Lambda}^{\perp} = \bI - \bP_{\Lambda}.
+    \]</div>
+</li>
+<li><p>Both <span class="math notranslate nohighlight">\(\bP_{\Lambda}\)</span> and <span class="math notranslate nohighlight">\(\bP_{\Lambda}^{\perp}\)</span>
+satisfy the usual properties like <span class="math notranslate nohighlight">\(\bP = \bP^H\)</span> and <span class="math notranslate nohighlight">\(\bP^2 = \bP\)</span>.</p></li>
+</ol>
+<p>We further define</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi_{\Lambda} = \bP_{\Lambda}^{\perp} \Phi.
+\]</div>
+<ol class="simple">
+<li><p>We are orthogonalizing the columns in <span class="math notranslate nohighlight">\(\Phi\)</span>
+against <span class="math notranslate nohighlight">\(\ColSpace(\Phi_{\Lambda})\)</span>.</p></li>
+<li><p>In other words, keeping the component of the column
+which is orthogonal to the column space
+of <span class="math notranslate nohighlight">\(\Phi_{\Lambda}\)</span>.</p></li>
+<li><p>Obviously the columns in <span class="math notranslate nohighlight">\(\Psi_{\Lambda}\)</span> corresponding
+to the index set <span class="math notranslate nohighlight">\(\Lambda\)</span> would be <span class="math notranslate nohighlight">\(\bzero\)</span>.</p></li>
+</ol>
+<p>We now present a result which shows that
+the matrix <span class="math notranslate nohighlight">\(\Psi_{\Lambda}\)</span>
+satisfies a modified version of RIP <span id="id4">[<a class="reference internal" href="../bib.html#id51" title="Mark A Davenport and Michael B Wakin. Analysis of orthogonal matching pursuit using the restricted isometry property. Information Theory, IEEE Transactions on, 56(9):4395–4401, 2010.">17</a>]</span>.</p>
+<div class="proof theorem admonition" id="res:proj:rip_orthogonal_projection">
+<p class="admonition-title"><span class="caption-number">Theorem 12.65 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies the RIP of order <span class="math notranslate nohighlight">\(K\)</span>
+with isometry constant <span class="math notranslate nohighlight">\(\delta_K\)</span>, and
+<span class="math notranslate nohighlight">\(\Lambda \subset \{1, \dots, N\}\)</span>
+with <span class="math notranslate nohighlight">\(|\Lambda | &lt; K\)</span>,
+then the matrix
+<span class="math notranslate nohighlight">\(\Psi_{\Lambda}\)</span> satisfies the modified
+version of RIP  as</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-rip-orthogonal-projection">
+<span class="eqno">(12.49)<a class="headerlink" href="#equation-eq-proj-rip-orthogonal-projection" title="Permalink to this equation">¶</a></span>\[\left ( 1 - \frac{\delta_K}{1 - \delta_K} \right )
+\| \bx \|_2^2 
+\leq \| \Psi_{\Lambda} \bx \|_2^2
+\leq (1 + \delta_K) \| \bx \|_2^2\]</div>
+<p>for all <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span> such that
+<span class="math notranslate nohighlight">\(\|\bx \|_0 \leq K - | \Lambda|\)</span>
+and <span class="math notranslate nohighlight">\(\supp(\bx) \cap \Lambda = \EmptySet\)</span>.</p>
+</div>
+</div><p>In words, if <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies
+RIP of order <span class="math notranslate nohighlight">\(K\)</span>, then <span class="math notranslate nohighlight">\(\Psi_{\Lambda}\)</span>
+acts as an approximate isometry on every
+<span class="math notranslate nohighlight">\((K - |\Lambda|)\)</span>-sparse vector supported
+on <span class="math notranslate nohighlight">\(\Lambda^c\)</span>.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. From the definition of <span class="math notranslate nohighlight">\(\Psi_{\Lambda}\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi_{\Lambda} \bx = (\bI - \bP_{\Lambda})\Phi \bx
+= \Phi \bx - \bP_{\Lambda} \Phi \bx.
+\]</div>
+<ol>
+<li><p>Alternatively</p>
+<div class="math notranslate nohighlight">
+\[
+     \Phi \bx = \Psi_{\Lambda} \bx + \bP_{\Lambda} \Phi \bx.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bP_{\Lambda}\)</span> is an orthogonal
+projection, hence the vectors
+<span class="math notranslate nohighlight">\(\bP_{\Lambda} \Phi \bx\)</span> and
+<span class="math notranslate nohighlight">\(\Psi_{\Lambda} \bx = \bP_{\Lambda}^{\perp} \Phi \bx\)</span>
+are orthogonal.</p></li>
+<li><p>Thus, we can write</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-43731f7a-f6ad-4e22-a3ac-0b6f9b1edaf4">
+<span class="eqno">(12.50)<a class="headerlink" href="#equation-eq-proj-43731f7a-f6ad-4e22-a3ac-0b6f9b1edaf4" title="Permalink to this equation">¶</a></span>\[ \| \Phi \bx \|_2^2 
+ = \| \bP_{\Lambda} \Phi \bx \|_2^2 
+ + \|\Psi_{\Lambda} \bx \|_2^2.\]</div>
+</li>
+<li><p>We need to show that
+<span class="math notranslate nohighlight">\(\| \Phi \bx \|_2 \approx \|\Psi_{\Lambda} \bx \|_2\)</span>
+or alternatively that <span class="math notranslate nohighlight">\(\| \bP_{\Lambda} \Phi \bx \|_2\)</span>
+is small under the conditions of the theorem.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\( P_{\Lambda} \Phi \bx \)</span> is
+orthogonal to <span class="math notranslate nohighlight">\(\Psi_{\Lambda} \bx\)</span>,
+hence</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-67c2f988-5a17-4f3c-a60f-521d6a7e34c9">
+<span class="eqno">(12.51)<a class="headerlink" href="#equation-eq-proj-67c2f988-5a17-4f3c-a60f-521d6a7e34c9" title="Permalink to this equation">¶</a></span>\[\begin{split} \langle \bP_{\Lambda} \Phi \bx, \Phi \bx \rangle
+ &amp;= \langle \bP_{\Lambda} \Phi \bx, \Psi_{\Lambda} \bx + \bP_{\Lambda} \Phi \bx \rangle \\
+ &amp;=  \langle \bP_{\Lambda} \Phi \bx, \bP_{\Lambda} \Phi \bx \rangle + 
+ \langle \bP_{\Lambda} \Phi \bx, \Psi_{\Lambda} \bx \rangle\\
+ &amp;= \langle \bP_{\Lambda} \Phi \bx, \bP_{\Lambda} \Phi \bx \rangle\\
+ &amp;= \| \bP_{\Lambda} \Phi \bx \|_2^2.\end{split}\]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bP_{\Lambda}\)</span> is a projection onto the
+<span class="math notranslate nohighlight">\(\ColSpace(\Phi_{\Lambda})\)</span>
+(column space of <span class="math notranslate nohighlight">\(\Phi_{\Lambda}\)</span>),
+there exists a vector <span class="math notranslate nohighlight">\(\bz \in \CC^N\)</span>, such that
+<span class="math notranslate nohighlight">\(P_{\Lambda} \Phi \bx =  \Phi \bz\)</span> and <span class="math notranslate nohighlight">\(\supp(\bz) \subseteq \Lambda\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\supp(\bx) \cap \Lambda = \EmptySet\)</span>, hence
+<span class="math notranslate nohighlight">\(\langle \bx, \bz \rangle = 0\)</span>.</p></li>
+<li><p>We also note that <span class="math notranslate nohighlight">\(\| \bx + \bz \|_0 = \| \bx - \bz \|_0 \leq K\)</span>.</p></li>
+<li><p>Invoking <a class="reference internal" href="#lem:rip:inner_product_upper_bound_2">Theorem 12.63</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    | \langle \Phi \bz, \Phi \bx \rangle | 
+    \leq \delta_{K} \| \bz \|_2 \| \bx \|_2.
+   \]</div>
+</li>
+<li><p>Alternatively</p>
+<div class="math notranslate nohighlight">
+\[
+    | \langle \bP_{\Lambda} \Phi \bx, \Phi \bx \rangle | 
+    \leq \delta_{K} \| \bz \|_2 \| \bx \|_2.
+   \]</div>
+</li>
+<li><p>From RIP, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \sqrt{1 - \delta_K} \| \bz \|_2 \leq \| \Phi \bz \|_2
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \sqrt{1 - \delta_K} \| \bx \|_2 \leq \| \Phi \bx \|_2.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    (1 - \delta_K)\| \bz \|_2 \| \bx \|_2 
+    \leq \| \Phi \bz \|_2 \| \Phi \bx \|_2.
+   \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    | \langle \bP_{\Lambda} \Phi \bx, \Phi \bx \rangle | 
+    \leq \frac{\delta_K}{1 - \delta_K} \|  P_{\Lambda} \Phi \bx \|_2 \| \Phi \bx \|_2.
+   \]</div>
+</li>
+<li><p>Applying <a class="reference internal" href="#equation-eq-proj-67c2f988-5a17-4f3c-a60f-521d6a7e34c9">(12.51)</a>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \|  \bP_{\Lambda} \Phi \bx \|_2^2
+    \leq \frac{\delta_K}{1 - \delta_K} \|  \bP_{\Lambda} \Phi \bx \|_2 \| \Phi \bx \|_2.
+   \]</div>
+</li>
+<li><p>Canceling the common term, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \|  \bP_{\Lambda} \Phi \bx \|_2 \leq \frac{\delta_K}{1 - \delta_K} \| \Phi \bx \|_2.
+   \]</div>
+</li>
+<li><p>Trivially, we have <span class="math notranslate nohighlight">\(\|  \bP_{\Lambda} \Phi \bx \|_2 \geq 0\)</span>.</p></li>
+<li><p>Applying these bounds on <a class="reference internal" href="#equation-eq-proj-43731f7a-f6ad-4e22-a3ac-0b6f9b1edaf4">(12.50)</a>,
+we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+    \left ( 1 -  \left ( \frac{\delta_K}{1 - \delta_K}\right )^2 \right )
+    \| \Phi \bx \|_2^2
+    \leq  
+    \|\Psi_{\Lambda} \bx \|_2^2
+    \leq \| \Phi \bx \|_2^2.
+   \]</div>
+</li>
+<li><p>Finally, using the RIP again with</p>
+<div class="math notranslate nohighlight">
+\[
+    (1 - \delta_K) \| \bx \|_2^2 
+    \leq \|\Phi \bx \|_2^2 
+    \leq (1 + \delta_K) \| \bx \|_2^2
+   \]</div>
+<p>we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+    \left ( 1 -  \left ( \frac{\delta_K}{1 - \delta_K}\right )^2 \right )
+    (1 - \delta_K) \| \bx \|_2^2 
+    \leq  
+    \|\Psi_{\Lambda} \bx \|_2^2
+    \leq (1 + \delta_K) \| \bx \|_2^2 .
+   \]</div>
+</li>
+<li><p>Simplifying</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \left ( 1 -  \left ( \frac{\delta_K}{1 - \delta_K}\right )^2 \right )
+    (1 - \delta_K)
+    &amp;= \frac{1 + \delta_K^2 - 2 \delta_K - \delta_K^2}{1 - \delta_K}\\
+    &amp;= \frac{1 - 2 \delta_K }{1 - \delta_K} \\
+    &amp;= 1  - \frac{\delta_K}{1 - \delta_K}.
+   \end{split}\]</div>
+</li>
+<li><p>Thus, we get the intended result in
+<a class="reference internal" href="#equation-eq-proj-rip-orthogonal-projection">(12.49)</a>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="rip-for-higher-orders">
+<h2><span class="section-number">12.8.10. </span>RIP for Higher Orders<a class="headerlink" href="#rip-for-higher-orders" title="Permalink to this headline">¶</a></h2>
+<p>If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>, does it satisfy RIP of some other order <span class="math notranslate nohighlight">\(K' &gt; K\)</span>?
+There are some results available to answer this question.</p>
+<div class="proof theorem admonition" id="lem:rip:higher_order_rip_constant_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.66 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(k\)</span> be integers and let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy RIP of order <span class="math notranslate nohighlight">\(2 k\)</span>.
+<span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(c k\)</span> with a restricted isometry constant</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_{ck} \leq c \delta_{2 k}
+\]</div>
+<p>if <span class="math notranslate nohighlight">\(c \delta_{2 k} &lt; 1\)</span>.</p>
+</div>
+</div><p>Note that this is only a sufficient condition.
+Thus if <span class="math notranslate nohighlight">\(c \delta_{2 k} \geq 1\)</span> we are not claiming
+whether <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(ck\)</span> or not.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. For <span class="math notranslate nohighlight">\(c=1\)</span>, <span class="math notranslate nohighlight">\(\delta_k \leq  \delta_{2 k}\)</span>.
+For <span class="math notranslate nohighlight">\(c=2\)</span>, <span class="math notranslate nohighlight">\(\delta_{2 k} \leq 2 \delta_{2 k}\)</span>.
+These two cases are trivial.
+We now consider the case for <span class="math notranslate nohighlight">\(c \geq 3\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(S\)</span> be an arbitrary index set of size <span class="math notranslate nohighlight">\(c k\)</span>. Let</p>
+<div class="math notranslate nohighlight">
+\[
+    \Delta = \Phi_S^H \Phi_S - \bI.
+   \]</div>
+</li>
+<li><p>From <a class="reference internal" href="#lem:proj:rip_gram_matrix_eigen_value_sufficient_condition">Theorem 12.53</a>,
+a sufficient condition for <span class="math notranslate nohighlight">\(\Phi\)</span> to satisfy RIP of order <span class="math notranslate nohighlight">\(c k\)</span> is that</p>
+<div class="math notranslate nohighlight">
+\[
+        \| \Delta \|_2 &lt; 1
+    \]</div>
+<p>for all index sets <span class="math notranslate nohighlight">\(S\)</span> with <span class="math notranslate nohighlight">\(|S|= c k\)</span>.</p>
+</li>
+<li><p>Thus if we can show that</p>
+<div class="math notranslate nohighlight">
+\[
+        \| \Delta \|_2 \leq c \delta_{2 k} 
+    \]</div>
+<p>we would have shown that <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(c k\)</span>.</p>
+</li>
+<li><p>We note that <span class="math notranslate nohighlight">\(\Phi_S\)</span> is of size <span class="math notranslate nohighlight">\(M \times c k\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\Delta\)</span> is of size <span class="math notranslate nohighlight">\(c k \times c k\)</span>.</p></li>
+<li><p>We partition <span class="math notranslate nohighlight">\(\Delta\)</span> into a block matrix of size <span class="math notranslate nohighlight">\(c \times c\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+        \Delta = \begin{bmatrix}
+        \Delta_{11} &amp; \Delta_{12} &amp; \dots &amp; \Delta_{1 c}\\
+        \Delta_{21} &amp; \Delta_{22} &amp; \dots &amp; \Delta_{2 c}\\
+        \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+        \Delta_{c 1} &amp; \Delta_{c 2} &amp; \dots &amp; \Delta_{c c}\\
+        \end{bmatrix}
+    \end{split}\]</div>
+<p>where each entry <span class="math notranslate nohighlight">\(\Delta_{i j}\)</span> is a square matrix of size <span class="math notranslate nohighlight">\(k \times k\)</span>.</p>
+</li>
+<li><p>Each diagonal matrix <span class="math notranslate nohighlight">\(\Delta_{i i}\)</span> corresponds to some
+<span class="math notranslate nohighlight">\(\Phi_T^H \Phi_T - \bI\)</span> where <span class="math notranslate nohighlight">\(|T| = k\)</span>.</p></li>
+<li><p>Thus we have (see <a class="reference internal" href="#lem:proj:rip:submatrix_eigenvalue_sum_k">Theorem 12.52</a>)</p>
+<div class="math notranslate nohighlight">
+\[
+        \| \Delta_{i i} \|_2 \leq \delta_k.
+    \]</div>
+</li>
+<li><p>The off-diagonal matrices <span class="math notranslate nohighlight">\(\Delta_{i j}\)</span> are</p>
+<div class="math notranslate nohighlight">
+\[
+        \Delta_{i j} = \Phi_P^H \Phi_Q
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> are disjoint index sets with <span class="math notranslate nohighlight">\(|P| = |Q| = k\)</span>
+with <span class="math notranslate nohighlight">\( | P \cup Q | = 2 k\)</span>.</p>
+</li>
+<li><p>Thus  from the approximate orthogonality condition
+(<a class="reference internal" href="#lem:proj:rip:approximate_orthogonality">Theorem 12.60</a> )
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+        \| \Delta_{i j} \|_2 \leq \delta_{2 k}.
+    \]</div>
+</li>
+<li><p>Finally we apply Gershgorin circle theorem for block matrices
+(<a class="reference internal" href="../la/matrix_norms.html#col:block_gershgorin_disc_theorem_psd_matrix">Corollary 4.29</a>).</p></li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+     | \| \Delta \|_2  - \|\Delta_{ii}\|_2| 
+     \leq \sum_{j, j\neq i} \|\Delta_{i j} \| \text{ for some } i \in \{1,2, \dots, c \}.
+    \]</div>
+</li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;  | \| \Delta \|_2  - \delta_k | 
+    \leq \sum_{j, j\neq i} \delta_{2 k} \\
+     \implies &amp; | \| \Delta \|_2  - \delta_k | \leq  (c - 1) \delta_{2 k} \\
+     \implies &amp;  \| \Delta \|_2 \leq \delta_k +  (c - 1) \delta_{2 k} \\
+     \implies &amp;  \| \Delta \|_2 \leq \delta_{2 k} +  (c - 1) \delta_{2 k} \\
+     \implies &amp;  \| \Delta \|_2 \leq  c \delta_{2 k}.
+    \end{split}\]</div>
+</li>
+<li><p>We have shown that <span class="math notranslate nohighlight">\(\| \Delta \|_2 \leq  c \delta_{2 k} &lt; 1\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\delta_{c k} \leq \| \Delta \|_2\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\Phi\)</span> indeed satisfies RIP of order <span class="math notranslate nohighlight">\(c k\)</span>.</p></li>
+</ol>
+</div>
+<p>This theorem helps us extend RIP from an order <span class="math notranslate nohighlight">\(K\)</span> to higher orders.
+If <span class="math notranslate nohighlight">\(\delta_{2 k}\)</span> isn’t sufficiently small, the bound isn’t useful.</p>
+</div>
+<div class="section" id="embeddings-of-arbitrary-signals">
+<h2><span class="section-number">12.8.11. </span>Embeddings of Arbitrary Signals<a class="headerlink" href="#embeddings-of-arbitrary-signals" title="Permalink to this headline">¶</a></h2>
+<p>So far we have considered only sparse signals while analyzing the embedding
+properties of a RIP satisfying matrix <span class="math notranslate nohighlight">\(\Phi\)</span>. In this subsection
+we wish to explore bounds on the <span class="math notranslate nohighlight">\(\ell_2\)</span> norm of an arbitrary signal when
+embedded by <span class="math notranslate nohighlight">\(\Phi\)</span>.
+This result is adapted from <span id="id5">[<a class="reference internal" href="../bib.html#id109" title="Deanna Needell and Joel A Tropp. Cosamp: iterative signal recovery from incomplete and inaccurate samples. Applied and Computational Harmonic Analysis, 26(3):301–321, 2009.">28</a>]</span>.</p>
+<div class="proof theorem admonition" id="thm:proj:rip:arbitrary_signal_energy_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.67 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> be an an <span class="math notranslate nohighlight">\(M \times N\)</span> matrix satisfying</p>
+<div class="math notranslate nohighlight" id="equation-eq-rip-arbitrary-signal-energy-bound-rip-upper-bound-condition">
+<span class="eqno">(12.52)<a class="headerlink" href="#equation-eq-rip-arbitrary-signal-energy-bound-rip-upper-bound-condition" title="Permalink to this equation">¶</a></span>\[\| \Phi \bx \|_2 \leq \sqrt{1 + \delta_K} \| \bx \|_2 \Forall \bx \in \Sigma_K.\]</div>
+<p>Then for every signal <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>, the following holds:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Phi \bx \|_2 
+\leq \sqrt{ 1 + \delta_K} \left [  \| \bx \|_2 + \frac{1}{\sqrt{K}} \| \bx \|_1 \right ].
+\]</div>
+</div>
+</div><p>We note that the theorem requires <span class="math notranslate nohighlight">\(\Phi\)</span> to satisfy only the upper bound of RIP
+property <a class="reference internal" href="#equation-eq-proj-restricted-isometry-property-bound">(12.42)</a>.
+The proof is slightly involved.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. We note that the bound is trivially true for <span class="math notranslate nohighlight">\(\bx = \bzero\)</span>.
+Hence in the following we will consider only for <span class="math notranslate nohighlight">\(\bx \neq \bzero\)</span>.</p>
+<ol>
+<li><p>Consider an arbitrary index set
+<span class="math notranslate nohighlight">\(\Lambda \subset \{ 1, 2, \dots, N \}\)</span> such that <span class="math notranslate nohighlight">\(| \Lambda | \leq K\)</span>.</p></li>
+<li><p>Consider the unit ball in the Banach space <span class="math notranslate nohighlight">\(\ell_2(\Lambda)\)</span> given by</p>
+<div class="math notranslate nohighlight" id="equation-eq-rip-arbitrary-signal-energy-bound-l-2-k-banach-space-unit-ball">
+<span class="eqno">(12.53)<a class="headerlink" href="#equation-eq-rip-arbitrary-signal-energy-bound-l-2-k-banach-space-unit-ball" title="Permalink to this equation">¶</a></span>\[B_2^{\Lambda} = \{ \bx \in \CC^N \ST \supp(\bx) = \Lambda \text{ and } \| \bx \|_2 \leq 1 \}\]</div>
+<p>i.e. the set of all signals whose support is <span class="math notranslate nohighlight">\(\Lambda\)</span> and
+whose <span class="math notranslate nohighlight">\(\ell_2\)</span> norm is less than or equal to 1.</p>
+</li>
+<li><p>Now define a convex body</p>
+<div class="math notranslate nohighlight" id="equation-eq-rip-arbitrary-signal-energy-bound-k-sparse-unit-ball-convex-hull">
+<span class="eqno">(12.54)<a class="headerlink" href="#equation-eq-rip-arbitrary-signal-energy-bound-k-sparse-unit-ball-convex-hull" title="Permalink to this equation">¶</a></span>\[S = \ConvexHull \left \{ \bigcup_{| \Lambda | \leq K}  
+B_2^{\Lambda} \right \} \subset \CC^N.\]</div>
+</li>
+<li><p>We recall from <a class="reference internal" href="../convex_sets/convex.html#def-convex-hull">Definition 8.9</a> that if
+<span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span> belong to <span class="math notranslate nohighlight">\(S\)</span> then their
+convex combination <span class="math notranslate nohighlight">\(\theta \bx + (1 - \theta) \by\)</span>
+with <span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> must lie in <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Further it can be verified that <span class="math notranslate nohighlight">\(S\)</span> is a compact
+convex set with non-empty interior.</p></li>
+<li><p>Hence it is a convex body.</p></li>
+<li><p>Consider any <span class="math notranslate nohighlight">\(\bx \in B_2^{\Lambda_1}\)</span> and <span class="math notranslate nohighlight">\(\by \in B_2^{\Lambda_2}\)</span>.</p></li>
+<li><p>From <a class="reference internal" href="#equation-eq-rip-arbitrary-signal-energy-bound-rip-upper-bound-condition">(12.52)</a>
+and
+<a class="reference internal" href="#equation-eq-rip-arbitrary-signal-energy-bound-l-2-k-banach-space-unit-ball">(12.53)</a>
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi \bx \|_2 \leq  \sqrt{1 + \delta_K} \| \bx \|_2 \leq \sqrt{1 + \delta_K}
+    \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi \by \|_2 \leq  \sqrt{1 + \delta_K} \| \by \|_2 \leq \sqrt{1 + \delta_K}.
+    \]</div>
+</li>
+<li><p>Now let</p>
+<div class="math notranslate nohighlight">
+\[
+        \bz  = \theta \bx + (1 - \theta ) \by \text{ where } \theta \in [0, 1].
+    \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+        \| \bz \|_2 = \| \theta \bx + (1 - \theta ) \by \|_2 
+        \leq \theta \| \bx \|_2 + (1 - \theta ) \| \by \|_2
+        \leq \theta + (1 - \theta) = 1.
+    \]</div>
+</li>
+<li><p>Further</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \Phi \bz  \|_2 &amp;= \| \Phi ( \theta \bx + (1 - \theta ) \by) \|_2 \\
+    &amp;\leq \| \Phi \theta \bx\|_2  + \| \Phi(1 - \theta ) \by \|_2\\
+    &amp;= \theta \| \Phi \bx \|_2 + (1 - \theta) \| \Phi \by \|_2 \\
+    &amp;\leq \theta \sqrt{1 + \delta_K} + (1  - \theta) \sqrt{1 + \delta_K}\\
+    &amp;\leq  \sqrt{1 + \delta_K}.
+    \end{split}\]</div>
+</li>
+<li><p>Similarly, it can be shown that for every vector <span class="math notranslate nohighlight">\(\bx \in S\)</span> we have
+<span class="math notranslate nohighlight">\(\| \bx\|_2 \leq 1\)</span> and <span class="math notranslate nohighlight">\(\| \Phi \bx \|_2 \leq \sqrt{1 + \delta_K}\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in S\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx = \sum_{i=1}^r t_i \bx_i\)</span> such that
+<span class="math notranslate nohighlight">\(\bx_i \in  B_2^{\Lambda_i}\)</span> where <span class="math notranslate nohighlight">\(|\Lambda_i| \leq K\)</span>,
+<span class="math notranslate nohighlight">\(t_i \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum t_i = 1\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\( \| \bx_i \|_2 \leq 1\)</span> for every <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+      \| \bx \|_2 \leq \sum_{i=1}^r t_i \| \bx_i \|_2 \leq \sum_{i=1}^r t_i = 1.
+      \]</div>
+</li>
+<li><p>Similarly <span class="math notranslate nohighlight">\(\| \Phi \bx_i \|_2 \leq \sqrt{1 + \delta_K}\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+      \| \Phi \bx \|_2 
+      \leq  \sum_{i=1}^r t_i \| \Phi \bx_i \|_2
+      \leq \sqrt{1 + \delta_K}.
+      \]</div>
+</li>
+</ol>
+</li>
+<li><p>We now define another convex body</p>
+<div class="math notranslate nohighlight" id="equation-eq-rip-arbitrary-signal-energy-bound-convex-body-2">
+<span class="eqno">(12.55)<a class="headerlink" href="#equation-eq-rip-arbitrary-signal-energy-bound-convex-body-2" title="Permalink to this equation">¶</a></span>\[\Gamma = \left \{ \bx \ST \| \bx \|_2 + \frac{1}{\sqrt{K}} \| \bx \|_1 
+\leq 1 \right \} \subset \CC^N.\]</div>
+</li>
+<li><p>We quickly verify the convexity property.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \Gamma\)</span>.</p></li>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+      \bz = \theta \bx + (1  - \theta) \by \quad \text{ where }  \theta \in [0,1].
+      \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+        &amp; \| \bz \| + \frac{1}{\sqrt{K}} \| \bz \|_1 \\
+        &amp; = \| \theta \bx + (1  - \theta) \by \|_2 
+        + \frac{1}{\sqrt{K}} \| \theta \bx + (1  - \theta) \by \|_1\\
+        &amp; \leq \theta \| \bx \|_2  + (1 - \theta) \| \by \|_2 
+        + \frac{\theta}{\sqrt{K}} \| \bx \|_1 
+        + \frac{(1  - \theta)}{\sqrt{K}} \| \by \|_1 \\
+        &amp; = \theta \left [ \| \bx \|_2 + \frac{1}{\sqrt{K}} \| \bx \|_1  \right ] + 
+        (1 - \theta) \left [\| \by \|_2 + \frac{1}{\sqrt{K}} \| \by \|_1  \right ] \\
+        &amp; \leq \theta + (1 - \theta) = 1.
+        \end{split}\]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bz \in \Gamma\)</span>.</p></li>
+<li><p>This analysis shows that all convex combinations
+of elements in <span class="math notranslate nohighlight">\(\Gamma\)</span> belong to <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\Gamma\)</span> is convex.</p></li>
+<li><p>Further it can be verified that <span class="math notranslate nohighlight">\(\Gamma\)</span> is a compact
+convex set with non-empty interior.</p></li>
+<li><p>Hence it is a convex body.</p></li>
+</ol>
+</li>
+<li><p>For any <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>
+one can find a <span class="math notranslate nohighlight">\(\by \in \Gamma\)</span>
+by simply applying an appropriate nonzero scale <span class="math notranslate nohighlight">\(\by = c \bx\)</span>
+where the scale factor <span class="math notranslate nohighlight">\(c\)</span> depends on <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>For a moment suppose that <span class="math notranslate nohighlight">\(\Gamma \subset S\)</span>.</p></li>
+<li><p>Then if <span class="math notranslate nohighlight">\(\by \in \Gamma\)</span> the following are true:</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \by \|_2 + \frac{1}{\sqrt{K}} \| \by \|_1 \leq 1
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi \by \|_2 \leq \sqrt{1 + \delta_K}.
+   \]</div>
+</li>
+<li><p>Now consider an arbitrary nonzero <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>.</p></li>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+    \alpha  = \| \bx \|_2 + \frac{1}{\sqrt{K}} \| \bx \|_1.
+    \]</div>
+</li>
+<li><p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+    \by = \frac{1}{\alpha} \bx.
+    \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \|\by \|_2  + \frac{1}{\sqrt{K}} \| \by \|_1 = 
+    \frac{1}{\alpha} \left ( \| \bx \|_2  + \frac{1}{\sqrt{K}} \| \bx \|_1\right ) = 1. 
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\by \in \Gamma\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; \| \Phi \by \|_2 \leq \sqrt{1 + \delta_K}\\
+    \implies &amp; \left \| \Phi \frac{1}{\alpha} \bx \right \|_2  \leq \sqrt{1 + \delta_K}\\
+    \implies &amp; \| \Phi \bx \|_2 \leq  \sqrt{1 + \delta_K} \alpha \\
+    \implies &amp; \| \Phi \bx \|_2 \leq  \sqrt{1 + \delta_K} 
+    \left ( \| \bx \|_2 + \frac{1}{\sqrt{K}} \| \bx \|_1 \right )
+    \Forall \bx \in \CC^N
+    \end{split}\]</div>
+<p>which is our intended result.</p>
+</li>
+<li><p>Hence if we show that <span class="math notranslate nohighlight">\(\Gamma \subset S\)</span> holds,
+we would have proven our theorem.</p></li>
+</ol>
+<p>We will achieve this by showing that every vector <span class="math notranslate nohighlight">\(\bx \in \Gamma\)</span> can be
+shown to be a convex combination of vectors in <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<ol>
+<li><p>We start with an arbitrary <span class="math notranslate nohighlight">\(\bx \in \Gamma\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(I = \supp(\bx)\)</span>.</p></li>
+<li><p>We partition <span class="math notranslate nohighlight">\(I\)</span> into disjoint sets of size <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p>Let there be <span class="math notranslate nohighlight">\(J+1\)</span> such sets given by</p>
+<div class="math notranslate nohighlight">
+\[
+    I = \bigcup_{j = 0}^J I_j.
+    \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(I_0\)</span> index the <span class="math notranslate nohighlight">\(K\)</span> largest entries in <span class="math notranslate nohighlight">\(\bx\)</span> (magnitude wise).</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(I_1\)</span> be next <span class="math notranslate nohighlight">\(K\)</span> largest entries and so on.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(|I|\)</span> may not be a multiple of <span class="math notranslate nohighlight">\(K\)</span>, hence
+the last index set <span class="math notranslate nohighlight">\(I_J\)</span> may not have
+<span class="math notranslate nohighlight">\(K\)</span> indices.</p></li>
+<li><p>We define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \bx_{I_j}(i) = \left\{
+            \begin{array}{ll}
+                x(i) &amp; \mbox{if $i \in I_j$};\\
+                0 &amp; \mbox{otherwise}.
+            \end{array}
+          \right.
+   \end{split}\]</div>
+</li>
+<li><p>Thus we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx = \sum_{j = 0}^J \bx_{I_j}.
+    \]</div>
+</li>
+<li><p>Now let</p>
+<div class="math notranslate nohighlight">
+\[
+    \theta_j = \| \bx_{I_j} \|_2 \; \text{ and } \; 
+    \by_j = \frac{1}{\theta_j} \bx_{I_j}.
+    \]</div>
+</li>
+<li><p>We can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx = \sum_{j = 0}^J \theta_j \by_j.
+    \]</div>
+</li>
+<li><p>In this construction of <span class="math notranslate nohighlight">\(\bx\)</span> we can see that
+<span class="math notranslate nohighlight">\(1 \geq \theta_0 \geq \theta_1 \geq \dots \geq \theta_J \geq 0\)</span>.</p></li>
+<li><p>Also <span class="math notranslate nohighlight">\(\by_j \in S\)</span> since <span class="math notranslate nohighlight">\(\by_j\)</span> is a unit norm <span class="math notranslate nohighlight">\(K\)</span> sparse vector
+<a class="reference internal" href="#equation-eq-rip-arbitrary-signal-energy-bound-k-sparse-unit-ball-convex-hull">(12.54)</a>.</p></li>
+<li><p>We will show that <span class="math notranslate nohighlight">\(\sum_j \theta_j \leq 1\)</span> in a short while.</p></li>
+<li><p>This will imply that <span class="math notranslate nohighlight">\(\bx\)</span> is a convex combination of vectors from <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>But since <span class="math notranslate nohighlight">\(S\)</span> is convex hence <span class="math notranslate nohighlight">\(\bx \in S\)</span>.</p></li>
+<li><p>This will imply that <span class="math notranslate nohighlight">\(\Gamma \subset S\)</span>.</p></li>
+<li><p>The proof will be complete.</p></li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(\sum_j \theta_j \leq 1\)</span>.</p>
+<ol>
+<li><p>Pick any <span class="math notranslate nohighlight">\(j \in \{1, \dots, J \}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx_{I_j}\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse hence due to
+<a class="reference internal" href="srr.html#lem:u_sigma_k_norms">Theorem 12.16</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \theta_j = \| \bx_{I_j} \|_2 \leq \sqrt{K} \| \bx_{I_j} \|_{\infty}.
+    \]</div>
+</li>
+<li><p>It is easy to see that <span class="math notranslate nohighlight">\(I_{j-1}\)</span> identifies exactly <span class="math notranslate nohighlight">\(K\)</span> nonzero entries in <span class="math notranslate nohighlight">\(\bx\)</span>
+and each of nonzero entries in <span class="math notranslate nohighlight">\(\bx_{I_{j -1}}\)</span> is larger than the largest entry
+in <span class="math notranslate nohighlight">\(\bx_{I_j}\)</span> (magnitude wise).</p></li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+     \| \bx_{I_{j-1}} \|_1 = \sum_{ i \in I_{j-1}} | x_i |
+     \geq \sum_{ i \in I_{j-1}} \| \bx_{I_j} \|_{\infty}
+      = K \| \bx_{I_j} \|_{\infty}.
+    \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx_{I_j} \|_{\infty} \leq \frac{1}{K} \| \bx_{I_{j-1}} \|_1.
+    \]</div>
+</li>
+<li><p>Combining the two inequalities we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \theta_j \leq \frac{1}{\sqrt{K}} \| \bx_{I_{j -1}} \|_1.
+    \]</div>
+</li>
+<li><p>This lets us write</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{j=1}^{J}\theta_j \leq \sum_{j=1}^{J}\frac{1}{\sqrt{K}} \| \bx_{I_{j -1}} \|_1 
+    \leq  \frac{1}{\sqrt{K}} \| \bx \|_1
+    \]</div>
+<p>since</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx \|_1 = \sum_{j = 0}^J \| \bx_{I_j} \|_1 
+    \geq \sum_{j = 1}^J \| \bx_{I_{j-1}} \|_1.
+    \]</div>
+</li>
+<li><p>Finally</p>
+<div class="math notranslate nohighlight">
+\[
+    \theta_0 = \| \bx_{I_0} \|_2 \leq \| \bx \|_2.
+    \]</div>
+</li>
+<li><p>This gives us the inequality</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{j = 0}^J  \theta_j \leq \| \bx \|_2 
+    + \frac{1}{\sqrt{K}} \| \bx \|_1 \leq 1 
+    \]</div>
+<p>since  <span class="math notranslate nohighlight">\(\bx \in \Gamma\)</span>.</p>
+</li>
+<li><p>Recalling our steps we can express <span class="math notranslate nohighlight">\(\bx\)</span>  as</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx  = \theta_j \by_j 
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(\by_j \in S\)</span> and
+<span class="math notranslate nohighlight">\(\sum \theta_j \leq 1\)</span> implies that <span class="math notranslate nohighlight">\(\bx \in S\)</span> since <span class="math notranslate nohighlight">\(S\)</span>
+is convex.</p>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\Gamma \subset S\)</span>.</p></li>
+<li><p>This completes the proof.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="a-general-form-of-rip">
+<h2><span class="section-number">12.8.12. </span>A General Form of RIP<a class="headerlink" href="#a-general-form-of-rip" title="Permalink to this headline">¶</a></h2>
+<p>A more general restricted isometry bound can be for an arbitrary matrix
+<span class="math notranslate nohighlight">\(\Phi\)</span> can be as follows</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha \| \bx \|^2_2 \leq \| \Phi \bx \|^2_2 \leq \beta \| \bx \|^2_2  
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(0 &lt; \alpha \leq \beta &lt; \infty\)</span>.</p>
+<p>It is straightforward to scale <span class="math notranslate nohighlight">\(\Phi\)</span> to match the bounds in
+<a class="reference internal" href="#equation-eq-proj-restricted-isometry-property-bound">(12.42)</a>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\delta_K = \frac{\beta - \alpha}{\alpha + \beta}\)</span>.
+Then <span class="math notranslate nohighlight">\(1 - \delta_K = \frac{2\alpha}{\alpha + \beta}\)</span>
+and <span class="math notranslate nohighlight">\(1 + \delta_K = \frac{2\beta}{\alpha + \beta}\)</span>.</p>
+<p>Putting in  <a class="reference internal" href="#equation-eq-proj-restricted-isometry-property-bound">(12.42)</a> we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \frac{2\alpha}{\alpha + \beta} \| \bx \|^2_2 
+\leq \| \Phi \bx \|^2_2 
+\leq \frac{2\beta}{\alpha + \beta} \| \bx \|^2_2  \\
+\implies &amp; \alpha \| \bx \|^2_2 
+\leq \| \sqrt{\frac{\alpha + \beta}{2}} \Phi \bx \|^2_2 
+\leq \beta \| \bx \|^2_2.
+\end{split}\]</div>
+<p>Thus by multiplying <span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(\sqrt{2/(\alpha + \beta)}\)</span>
+we can transform the more general bound
+to the form of <a class="reference internal" href="#equation-eq-proj-restricted-isometry-property-bound">(12.42)</a>.</p>
+</div>
+<div class="section" id="finding-out-rip-constants">
+<h2><span class="section-number">12.8.13. </span>Finding out RIP Constants<a class="headerlink" href="#finding-out-rip-constants" title="Permalink to this headline">¶</a></h2>
+<p>The optimal value of RIP constant of <span class="math notranslate nohighlight">\(K\)</span>-th order <span class="math notranslate nohighlight">\(\delta_K\)</span>
+can be obtained by solving the following optimization problem.</p>
+<div class="proof algorithm admonition" id="def:proj:optimal_rip_constant">
+<p class="admonition-title"><span class="caption-number">Algorithm 12.2 </span></p>
+<div class="algorithm-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \underset{0 &lt; \delta &lt; 1}{\text{minimize}} 
+&amp; &amp; \delta\\
+&amp; \text{subject to }
+&amp; &amp;  (1 - \delta) \|\bx\|^2_2 
+\leq \| \Phi \bx \|^2_2 
+\leq (1 + \delta) \| \bx\|^2_2 
+\Forall \bx \in \Sigma_K.
+\end{split}\]</div>
+</div>
+</div><p>This problem isn’t easy to solve.
+In fact it has been shown in <span id="id6">[<a class="reference internal" href="../bib.html#id18" title="Afonso S Bandeira, Edgar Dobriban, Dustin G Mixon, and William F Sawin. Certifying the restricted isometry property is hard. IEEE transactions on information theory, 59(6):3448–3450, 2013.">4</a>]</span>
+that this problem is NP-hard.</p>
+</div>
+<div class="section" id="rip-and-coherence">
+<h2><span class="section-number">12.8.14. </span>RIP and Coherence<a class="headerlink" href="#rip-and-coherence" title="Permalink to this headline">¶</a></h2>
+<p>Here we establish a relationship between the RIP constants
+and coherence of a dictionary.</p>
+<p>Rather than a general matrix <span class="math notranslate nohighlight">\(\Phi\)</span>, we restrict our attention to a
+dictionary <span class="math notranslate nohighlight">\(\bDDD \in \CC^{N \times D}\)</span>
+We assume that the dictionary
+is overcomplete <span class="math notranslate nohighlight">\((D &gt; N)\)</span> and full rank <span class="math notranslate nohighlight">\(\Rank(\bDDD) = N\)</span>.
+Dictionary is assumed to satisfy RIP of some order.</p>
+<div class="proof theorem admonition" id="res:proj:rip_coherence_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.68 </span> (Coherence upper bound for RIP constant)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bDDD\)</span> satisfy RIP of order <span class="math notranslate nohighlight">\(K\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_K \leq (K - 1) \mu (\bDDD).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We recall that <span class="math notranslate nohighlight">\(\delta_K\)</span> is the smallest constant <span class="math notranslate nohighlight">\(\delta\)</span> satisfying</p>
+<div class="math notranslate nohighlight">
+\[
+(1 - \delta) \| \bx\|^2_2 
+\leq \| \bDDD \bx \|^2_2 
+\leq (1 + \delta) \| \bx\|^2_2 \; 
+\Forall \bx \in \Sigma_K.
+\]</div>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda\)</span> be any index set with <span class="math notranslate nohighlight">\(| \Lambda | = K\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+     \| \bDDD \bx \|^2_2 
+     =  \| \bDDD_{\Lambda} \bx_{\Lambda} \|^2_2 
+     \Forall \bx \in \CC^{\Lambda}.
+    \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bDDD\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>,
+hence <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> is a subdictionary
+(its columns are linearly independent).</p></li>
+<li><p>Recall from <a class="reference internal" href="dictionaries.html#res:ssm:subdict_norm_bound_coherence">Theorem 12.29</a> that</p>
+<div class="math notranslate nohighlight">
+\[
+    (1 - (K - 1)   \mu) \| \bv \|_2^2 
+    \leq \| \bDDD_{\Lambda} \bv \|_2^2 
+    \leq (1 + (K - 1)   \mu)\| \bv \|_2^2 
+    \]</div>
+<p>holds true for every <span class="math notranslate nohighlight">\(\bv \in \CC^K\)</span>.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\delta_K\)</span> is smallest possible constant, hence</p>
+<div class="math notranslate nohighlight">
+\[
+    1 + \delta_K \leq 1 + (K - 1)   \mu 
+    \implies \delta_K \leq (K - 1) \mu (\bDDD).
+    \]</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ssm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="compressive_sensing.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">12.7. </span>Compressive Sensing</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="dictionaries_2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12.9. </span>Dictionaries II</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7.2. Convex Optimization &#8212; Optimization for Signal Processing</title>
+    <title>9.1. Convex Optimization &#8212; Topics in Signal Processing</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -44,6 +44,40 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -52,12 +86,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7.3. Projection on Convex Sets" href="projection.html" />
-    <link rel="prev" title="7.1. Mathematical Optimization" href="intro.html" />
+    <link rel="next" title="9.2. Projection on Convex Sets" href="projection.html" />
+    <link rel="prev" title="9. Convex Optimization" href="chapter.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -91,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -101,8 +135,8 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome
+  <a class="reference internal" href="../index.html">
+   Overview
   </a>
  </li>
 </ul>
@@ -237,23 +271,23 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/continuity.html">
-     3.5. Functions and Continuity
+     3.6. Functions and Continuity
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/complete.html">
-     3.6. Completeness
+     3.7. Completeness
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/compact.html">
-     3.7. Compactness
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../metric_spaces/subspaces.html">
-     3.8. Subspace Topology
+     3.8. Compactness
     </a>
    </li>
    <li class="toctree-l2">
@@ -285,7 +319,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../la/matrices.html">
-     4.1. Matrices
+     4.1. Matrices I
     </a>
    </li>
    <li class="toctree-l2">
@@ -294,48 +328,68 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../la/transformations.html">
-     4.3. Linear Transformations
+     4.4. Linear Transformations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../la/normed_spaces.html">
-     4.4. Normed Linear Spaces
+     4.5. Normed Linear Spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../la/inner_product_spaces.html">
-     4.5. Inner Product Spaces
+     4.6. Inner Product Spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../la/dual_spaces.html">
-     4.6. Dual Spaces
+     4.7. Dual Spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../la/euclidean.html">
-     4.7. The Euclidean Space
+     4.8. The Euclidean Space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../la/sym_matrices.html">
-     4.8. Symmetric Matrices
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../la/important_spaces.html">
-     4.9. Important Vector Spaces
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../la/sequence_spaces.html">
-     4.10. Sequence Spaces
+     4.14. Sequence Spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../la/affine.html">
-     4.11. Affine Sets and Transformations
+     4.15. Affine Sets and Transformations
     </a>
    </li>
   </ul>
@@ -362,6 +416,75 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -371,139 +494,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../convex_sets/intro.html">
-   6. Convex Sets and Functions
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
-  <label for="toctree-checkbox-6">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/real_spaces.html">
-     6.1. Real Vector Spaces
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/convex.html">
-     6.2. Convex Sets
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/rn_subsets.html">
-     6.3. Convex Subsets of
-     <span class="math notranslate nohighlight">
-      \(\RR^n\)
-     </span>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/cone.html">
-     6.4. Cones
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
-     6.5. Generalized Inequalities
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/convex_functions.html">
-     6.6. Convex Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/differentiable.html">
-     6.7. Differentiability and Convex Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/function_ops.html">
-     6.8. Convexity Preserving Function Operations
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/relint.html">
-     6.9. Topology of Convex Sets
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/separation.html">
-     6.10. Separation Theorems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/continuity.html">
-     6.11. Continuity
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/subgradients.html">
-     6.12. Subgradients
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
-     6.13. Conjugate Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/smoothness.html">
-     6.14. Smoothness
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="chapter.html">
-   7. Convex Optimization
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
-  <label for="toctree-checkbox-7">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="intro.html">
-     7.1. Mathematical Optimization
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     7.2. Convex Optimization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="projection.html">
-     7.3. Projection on Convex Sets
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="duality.html">
-     7.4. Duality
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="linear_programming.html">
-     7.5. Linear Programming
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="quadratic_programming.html">
-     7.6. Quadratic Programming
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="differentiable_objectives.html">
-     7.7. Differentiable Objective Functions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../proximal_operator/chapter.html">
-   8. Proximal Operator
+   8. Convex Sets and Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -512,31 +503,357 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../proximal_operator/intro.html">
-     8.3. Introduction
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../proximal_operator/summary.html">
-     8.4. Chapter Summary
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../gradient_methods/chapter.html">
-   9. Gradient Descent Methods
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   9. Convex Optimization
   </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../subgradient_methods/chapter.html">
    10. Subgradient Methods
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../selected/chapter.html">
-   11. Selected Functions
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -553,6 +870,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../bib.html">
    Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
   </a>
  </li>
 </ul>
@@ -612,11 +934,11 @@ const thebe_selector_output = ".output, .cell_output"
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fcvxopt/cvxopt.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fcvxopt/cvxopt.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -644,34 +966,34 @@ const thebe_selector_output = ".output, .cell_output"
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#convex-optimization-problems">
-   7.2.1. Convex Optimization Problems
+   9.1.1. Convex Optimization Problems
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#convex-optimization-standard-form">
-     7.2.1.1. Convex Optimization Standard Form
+     9.1.1.1. Convex Optimization Standard Form
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#proper-convex-functions">
-     7.2.1.2. Proper Convex Functions
+     9.1.1.2. Proper Convex Functions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#local-and-global-optima">
-     7.2.1.3. Local and Global Optima
+     9.1.1.3. Local and Global Optima
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#optimal-sets">
-     7.2.1.4. Optimal Sets
+     9.1.1.4. Optimal Sets
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#concave-objective-functions">
-   7.2.2. Concave Objective Functions
+   9.1.2. Concave Objective Functions
   </a>
  </li>
 </ul>
@@ -696,34 +1018,34 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#convex-optimization-problems">
-   7.2.1. Convex Optimization Problems
+   9.1.1. Convex Optimization Problems
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#convex-optimization-standard-form">
-     7.2.1.1. Convex Optimization Standard Form
+     9.1.1.1. Convex Optimization Standard Form
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#proper-convex-functions">
-     7.2.1.2. Proper Convex Functions
+     9.1.1.2. Proper Convex Functions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#local-and-global-optima">
-     7.2.1.3. Local and Global Optima
+     9.1.1.3. Local and Global Optima
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#optimal-sets">
-     7.2.1.4. Optimal Sets
+     9.1.1.4. Optimal Sets
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#concave-objective-functions">
-   7.2.2. Concave Objective Functions
+   9.1.2. Concave Objective Functions
   </a>
  </li>
 </ul>
@@ -736,12 +1058,12 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="convex-optimization">
-<span id="sec-opt-convex-optimization"></span><h1><span class="section-number">7.2. </span>Convex Optimization<a class="headerlink" href="#convex-optimization" title="Permalink to this headline">¶</a></h1>
-<p>Main references for this section are <span id="id1">[<a class="reference internal" href="../bib.html#id10" title="Amir Beck. Introduction to nonlinear optimization: Theory, algorithms, and applications with MATLAB. SIAM, 2014.">3</a>, <a class="reference internal" href="../bib.html#id12" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">5</a>, <a class="reference internal" href="../bib.html#id13" title="Stephen P Boyd and Lieven Vandenberghe. Convex optimization. Cambridge university press, 2004.">7</a>]</span>.</p>
+<span id="sec-opt-convex-optimization"></span><h1><span class="section-number">9.1. </span>Convex Optimization<a class="headerlink" href="#convex-optimization" title="Permalink to this headline">¶</a></h1>
+<p>Main references for this section are <span id="id1">[<a class="reference internal" href="../bib.html#id23" title="Amir Beck. Introduction to nonlinear optimization: Theory, algorithms, and applications with MATLAB. SIAM, 2014.">5</a>, <a class="reference internal" href="../bib.html#id25" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">7</a>, <a class="reference internal" href="../bib.html#id27" title="Stephen P Boyd and Lieven Vandenberghe. Convex optimization. Cambridge university press, 2004.">10</a>]</span>.</p>
 <div class="section" id="convex-optimization-problems">
-<h2><span class="section-number">7.2.1. </span>Convex Optimization Problems<a class="headerlink" href="#convex-optimization-problems" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.1.1. </span>Convex Optimization Problems<a class="headerlink" href="#convex-optimization-problems" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-opt-convex-opt-problem">
-<p class="admonition-title"><span class="caption-number">Definition 7.9 </span> (Convex optimization problem general form)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.1 </span> (Convex optimization problem general form)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real vector space.
 Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a convex function
@@ -787,7 +1109,7 @@ X_{\text{opt}}  = \{ \bx \in C \ST f(\bx) = p^* \}.
 </ol>
 </div>
 <div class="proof remark admonition" id="rem-cvx-cvxopt-general-closed-feasible">
-<p class="admonition-title"><span class="caption-number">Remark 7.5 </span> (Closedness of the feasible set)</p>
+<p class="admonition-title"><span class="caption-number">Remark 9.1 </span> (Closedness of the feasible set)</p>
 <div class="remark-content section" id="proof-content">
 <p>Some authors prefer to define convex optimization as
 the minimization of a convex function over a <em>closed</em> and convex set.</p>
@@ -798,7 +1120,7 @@ general definition of convex optimization problem.</p></li>
 which can provide additional guarantees on the
 existence of an optimal point. We shall introduce it
 whenever needed in the discussion below.</p></li>
-<li><p>Recall from <a class="reference internal" href="../convex_sets/separation.html#res-cvx-closed-convex-halfspace-intersection">Theorem 6.154</a>
+<li><p>Recall from <a class="reference internal" href="../convex_sets/separation.html#res-cvx-closed-convex-halfspace-intersection">Theorem 8.170</a>
 that a closed and convex set <span class="math notranslate nohighlight">\(C\)</span> is an intersection of all the halfspaces
 that contain it. Let <span class="math notranslate nohighlight">\(\{ A_i \}_{i \in I}\)</span> be the set of halfspaces
 that contains <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
@@ -819,14 +1141,14 @@ a functional form where the constraints are expressed in the
 form of sublevel sets of convex functions
 and the level sets of affine functions.</p>
 <div class="section" id="convex-optimization-standard-form">
-<h3><span class="section-number">7.2.1.1. </span>Convex Optimization Standard Form<a class="headerlink" href="#convex-optimization-standard-form" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.1.1.1. </span>Convex Optimization Standard Form<a class="headerlink" href="#convex-optimization-standard-form" title="Permalink to this headline">¶</a></h3>
 <div class="proof definition admonition" id="def-cvx-opt-problem-standard-form">
-<p class="admonition-title"><span class="caption-number">Definition 7.10 </span> (Convex optimization problem standard form)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.2 </span> (Convex optimization problem standard form)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real vector space.
 A mathematical optimization problem of the form</p>
 <div class="math notranslate nohighlight" id="equation-eq-cvx-opt-prob-standard-form">
-<span class="eqno">(7.7)<a class="headerlink" href="#equation-eq-cvx-opt-prob-standard-form" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }   &amp; &amp; f_0(\bx) \\
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-eq-cvx-opt-prob-standard-form" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }   &amp; &amp; f_0(\bx) \\
 &amp; \text{subject to } &amp; &amp; f_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
 &amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p\end{split}\]</div>
 <p>with optimization variable <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> is called
@@ -838,7 +1160,7 @@ a <em>convex optimization problem in standard form</em> if</p>
 </ol>
 </div>
 </div><div class="proof observation admonition" id="rem-cvx-opt-standard-form-discussion">
-<p class="admonition-title"><span class="caption-number">Observation 7.1 </span> (Discussion on the convex optimization standard form)</p>
+<p class="admonition-title"><span class="caption-number">Observation 9.1 </span> (Discussion on the convex optimization standard form)</p>
 <div class="observation-content section" id="proof-content">
 <ol>
 <li><p>The domain of the problem is given by</p>
@@ -864,7 +1186,7 @@ Hence <span class="math notranslate nohighlight">\(\DDD\)</span> is convex.</p><
 </li>
 <li><p>Then, <span class="math notranslate nohighlight">\(f_i^{-1}(-\infty, 0]\)</span> are sublevel sets of convex functions hence they
 are also convex sets.</p></li>
-<li><p>By <a class="reference internal" href="../la/affine.html#res-la-aff-rv-level-set">Theorem 4.177</a>, the level sets of affine functions are affine sets.</p></li>
+<li><p>By <a class="reference internal" href="../la/affine.html#res-la-aff-rv-level-set">Theorem 4.211</a>, the level sets of affine functions are affine sets.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(h_j^{-1}(0)\)</span> is an affine set. Hence, it is a convex set.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is an intersection of convex sets.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is a convex set.</p></li>
@@ -874,12 +1196,12 @@ are also convex sets.</p></li>
    &amp; \text{minimize }  &amp;  &amp; f_0(\bx) \\
    &amp; \text{subject to } &amp; &amp; \bx \in C
    \end{split}\]</div>
-<p>to match with <a class="reference internal" href="#def-opt-convex-opt-problem">Definition 7.9</a>.</p>
+<p>to match with <a class="reference internal" href="#def-opt-convex-opt-problem">Definition 9.1</a>.</p>
 </li>
 </ol>
 </div>
 </div><div class="proof remark admonition" id="rem-cvxopt-standard-closedness-constraints">
-<p class="admonition-title"><span class="caption-number">Remark 7.6 </span> (Adding closedness of objective and constraint functions)</p>
+<p class="admonition-title"><span class="caption-number">Remark 9.2 </span> (Adding closedness of objective and constraint functions)</p>
 <div class="remark-content section" id="proof-content">
 <p>Suppose we add an additional requirement that
 the function <span class="math notranslate nohighlight">\(f_i\)</span> for <span class="math notranslate nohighlight">\(i=0,\dots,m\)</span> are <a class="reference internal" href="../metric_spaces/real_valued_functions.html#def-ms-closed-function">closed</a>.</p>
@@ -894,11 +1216,11 @@ Hence <span class="math notranslate nohighlight">\(h_j^{-1}(0)\)</span>
 is closed for every <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span>.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is an intersection of closed and convex sets.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(C\)</span> is a closed and convex set.</p></li>
-<li><p>Recall from <a class="reference internal" href="../metric_spaces/real_valued_functions.html#res-ms-closed-func-closed-epi">Theorem 3.88</a> that a function is
+<li><p>Recall from <a class="reference internal" href="../metric_spaces/real_valued_functions.html#res-ms-closed-func-closed-epi">Theorem 3.92</a> that a function is
 closed if and only if it has a closed epigraph.</p></li>
-<li><p>Also, recall from <a class="reference internal" href="../metric_spaces/real_valued_functions.html#res-ms-func-lsc-closed-func">Theorem 3.103</a> that
+<li><p>Also, recall from <a class="reference internal" href="../metric_spaces/real_valued_functions.html#res-ms-func-lsc-closed-func">Theorem 3.119</a> that
 a function is closed if and only if it is l.s.c. (lower semicontinuous).</p></li>
-<li><p>Further, recall from <a class="reference internal" href="../convex_sets/continuity.html#res-cvxf-convex-func-closure-convex">Theorem 6.156</a> that
+<li><p>Further, recall from <a class="reference internal" href="../convex_sets/continuity.html#res-cvxf-convex-func-closure-convex">Theorem 8.172</a> that
 every convex function has a closure which is l.s.c. (hence closed)
 given by its lower semicontinuous hull and the closure of a convex
 function is also convex.</p></li>
@@ -909,13 +1231,13 @@ to the standard form for convex optimization.</p></li>
 </ol>
 </div>
 </div><div class="proof remark admonition" id="rem-cvx-opt-std-form-vs-convex-set-form">
-<p class="admonition-title"><span class="caption-number">Remark 7.7 </span> (Comparison of two forms)</p>
+<p class="admonition-title"><span class="caption-number">Remark 9.3 </span> (Comparison of two forms)</p>
 <div class="remark-content section" id="proof-content">
 <p>We have seen two forms of describing convex optimization problems.</p>
 <ol class="simple">
-<li><p><a class="reference internal" href="#def-opt-convex-opt-problem">Definition 7.9</a> describes it as minimizing
+<li><p><a class="reference internal" href="#def-opt-convex-opt-problem">Definition 9.1</a> describes it as minimizing
 a convex function over a convex set.</p></li>
-<li><p><a class="reference internal" href="#def-cvx-opt-problem-standard-form">Definition 7.10</a> describes it in the
+<li><p><a class="reference internal" href="#def-cvx-opt-problem-standard-form">Definition 9.2</a> describes it in the
 form of minimizing a convex objective function with convex
 inequality constraints and affine equality constraints.</p></li>
 <li><p>As seen in comments above, the second form can be converted
@@ -931,12 +1253,12 @@ to solve convex optimization problems in terms of this form.</p></li>
 theoretical results and developing algorithms.</p>
 </div>
 </div><div class="proof definition admonition" id="def-cvx-opt-concave-maximization">
-<p class="admonition-title"><span class="caption-number">Definition 7.11 </span> (Concave function maximization problem)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.3 </span> (Concave function maximization problem)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real vector space.
 A mathematical optimization problem of the form</p>
 <div class="math notranslate nohighlight" id="equation-eq-cvx-opt-concave-maximization">
-<span class="eqno">(7.8)<a class="headerlink" href="#equation-eq-cvx-opt-concave-maximization" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{maximize }   &amp; &amp; f_0(\bx) \\
+<span class="eqno">(9.2)<a class="headerlink" href="#equation-eq-cvx-opt-concave-maximization" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{maximize }   &amp; &amp; f_0(\bx) \\
 &amp; \text{subject to } &amp; &amp; f_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
 &amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p\end{split}\]</div>
 <p>with optimization variable <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> is called
@@ -948,11 +1270,11 @@ a <em>concave maximization problem</em> if</p>
 </ol>
 </div>
 </div><div class="proof remark admonition" id="rem-concave-max-cvxopt-problem">
-<p class="admonition-title"><span class="caption-number">Remark 7.8 </span> (Concave maximization as a convex optimization problem)</p>
+<p class="admonition-title"><span class="caption-number">Remark 9.4 </span> (Concave maximization as a convex optimization problem)</p>
 <div class="remark-content section" id="proof-content">
 <p>We note that maximizing <span class="math notranslate nohighlight">\(f_0\)</span> is same as minimizing <span class="math notranslate nohighlight">\(-f_0\)</span>.
 Further, if <span class="math notranslate nohighlight">\(f_0\)</span> is concave then <span class="math notranslate nohighlight">\(-f_0\)</span> is convex.
-Thus, <a class="reference internal" href="#equation-eq-cvx-opt-concave-maximization">(7.8)</a> is equivalent
+Thus, <a class="reference internal" href="#equation-eq-cvx-opt-concave-maximization">(9.2)</a> is equivalent
 to the problem</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -966,11 +1288,11 @@ program also a convex optimization program.</p>
 </div>
 </div></div>
 <div class="section" id="proper-convex-functions">
-<h3><span class="section-number">7.2.1.2. </span>Proper Convex Functions<a class="headerlink" href="#proper-convex-functions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.1.1.2. </span>Proper Convex Functions<a class="headerlink" href="#proper-convex-functions" title="Permalink to this headline">¶</a></h3>
 <p>It is useful to extend these definitions to proper convex functions
 as objective functions and/or inequality constraint functions.</p>
 <div class="proof definition admonition" id="def-opt-proper-convex-opt-problem">
-<p class="admonition-title"><span class="caption-number">Definition 7.12 </span> (Optimization problem general form for proper convex functions)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.4 </span> (Optimization problem general form for proper convex functions)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real vector space.
 Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper convex function
@@ -1001,12 +1323,12 @@ X_{\text{opt}}  = \{ \bx \in C \ST f(\bx) = p^* \}.
 \]</div>
 </div>
 </div><div class="proof definition admonition" id="def-cvx-opt-proper-problem-standard-form">
-<p class="admonition-title"><span class="caption-number">Definition 7.13 </span> (Convex optimization problem standard form for proper convex functions)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.5 </span> (Convex optimization problem standard form for proper convex functions)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real vector space.
 A mathematical optimization problem of the form</p>
 <div class="math notranslate nohighlight" id="equation-eq-cvx-opt-proper-prob-standard-form">
-<span class="eqno">(7.9)<a class="headerlink" href="#equation-eq-cvx-opt-proper-prob-standard-form" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }   &amp; &amp; f_0(\bx) \\
+<span class="eqno">(9.3)<a class="headerlink" href="#equation-eq-cvx-opt-proper-prob-standard-form" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }   &amp; &amp; f_0(\bx) \\
 &amp; \text{subject to } &amp; &amp; f_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
 &amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p\end{split}\]</div>
 <p>with optimization variable <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> is called
@@ -1024,9 +1346,9 @@ optimal solutions/points, etc. can be easily
 extended by using the effective domains of <span class="math notranslate nohighlight">\(f_0, \dots, f_m\)</span>.</p>
 </div>
 <div class="section" id="local-and-global-optima">
-<h3><span class="section-number">7.2.1.3. </span>Local and Global Optima<a class="headerlink" href="#local-and-global-optima" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.1.1.3. </span>Local and Global Optima<a class="headerlink" href="#local-and-global-optima" title="Permalink to this headline">¶</a></h3>
 <div class="proof theorem admonition" id="res-cvxopt-local-global-minimum">
-<p class="admonition-title"><span class="caption-number">Theorem 7.10 </span> (Local minimum is a global minimum in convex optimization)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 9.1 </span> (Local minimum is a global minimum in convex optimization)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a convex function. Let <span class="math notranslate nohighlight">\(C \subseteq \dom f\)</span>
 be a convex set.
@@ -1070,7 +1392,7 @@ is their convex combination.</p></li>
 </ol>
 </div>
 <div class="proof corollary admonition" id="res-cvxopt-local-global-minimum-proper-convex">
-<p class="admonition-title"><span class="caption-number">Corollary 7.3 </span> (Local minimum is a global minimum in for proper convex functions)</p>
+<p class="admonition-title"><span class="caption-number">Corollary 9.1 </span> (Local minimum is a global minimum in for proper convex functions)</p>
 <div class="corollary-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper convex function.
 Let <span class="math notranslate nohighlight">\(X\)</span> be a convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
@@ -1090,7 +1412,7 @@ Since both <span class="math notranslate nohighlight">\(X\)</span> and <span cla
 <li><p>If <span class="math notranslate nohighlight">\(C = \EmptySet\)</span>,
 then there are no feasible points. Hence, no local/global optima.</p></li>
 <li><p>We now consider the case where <span class="math notranslate nohighlight">\(C \neq \EmptySet\)</span>.</p></li>
-<li><p>Following the argument in <a class="reference internal" href="#res-cvxopt-local-global-minimum">Theorem 7.10</a>,
+<li><p>Following the argument in <a class="reference internal" href="#res-cvxopt-local-global-minimum">Theorem 9.1</a>,
 if <span class="math notranslate nohighlight">\(\bx^*\)</span> is locally optimal for <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(C\)</span>, then it is globally
 optimal for <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
 <li><p>Consequently, it is globally optimal for <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(X\)</span>
@@ -1100,7 +1422,7 @@ as <span class="math notranslate nohighlight">\(f(\bx) = \infty &gt; f(\bx^*)\)<
 <p>The argument can be modified to show that if <span class="math notranslate nohighlight">\(f\)</span> is strictly convex,
 then a locally optimal point for <span class="math notranslate nohighlight">\(f\)</span> is strictly globally optimal point.</p>
 <div class="proof theorem admonition" id="res-cvxopt-strict-local-global-minimum">
-<p class="admonition-title"><span class="caption-number">Theorem 7.11 </span> (Local minimum is strict global minimum for strictly convex functions)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 9.2 </span> (Local minimum is strict global minimum for strictly convex functions)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a strictly convex function. Let <span class="math notranslate nohighlight">\(C \subseteq \dom f\)</span>
 be a convex set. Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be locally optimal for <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(C\)</span>.
@@ -1137,7 +1459,7 @@ is their convex combination.</p></li>
 </ol>
 </div>
 <div class="proof corollary admonition" id="res-cvxopt-proper-strict-local-global-minimum">
-<p class="admonition-title"><span class="caption-number">Corollary 7.4 </span> (Local minimum is strict global minimum for proper strictly convex functions)</p>
+<p class="admonition-title"><span class="caption-number">Corollary 9.2 </span> (Local minimum is strict global minimum for proper strictly convex functions)</p>
 <div class="corollary-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper strictly convex function.
 Let <span class="math notranslate nohighlight">\(X\)</span> be a convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
@@ -1151,10 +1473,10 @@ f(\by) &gt; f(\bx^*) \Forall \by \in X.
 </div>
 </div></div>
 <div class="section" id="optimal-sets">
-<h3><span class="section-number">7.2.1.4. </span>Optimal Sets<a class="headerlink" href="#optimal-sets" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">9.1.1.4. </span>Optimal Sets<a class="headerlink" href="#optimal-sets" title="Permalink to this headline">¶</a></h3>
 <p>The optimal sets of a convex optimization problem are also convex.</p>
 <div class="proof theorem admonition" id="res-cvxopt-convex-optimal-set">
-<p class="admonition-title"><span class="caption-number">Theorem 7.12 </span> (Optimal set is convex for a convex optimization problem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 9.3 </span> (Optimal set is convex for a convex optimization problem)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a convex function. Let <span class="math notranslate nohighlight">\(C \subseteq \dom f\)</span>
 be a convex set.
@@ -1195,7 +1517,7 @@ Now consider the case where <span class="math notranslate nohighlight">\(X_{\tex
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-cvxopt-strict-convex-singleton">
-<p class="admonition-title"><span class="caption-number">Theorem 7.13 </span> (Optimal points for minimization of strictly convex functions)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 9.4 </span> (Optimal points for minimization of strictly convex functions)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a strictly convex function. Let <span class="math notranslate nohighlight">\(C \subseteq \dom f\)</span>
 be a convex set. Then, the minimization problem</p>
@@ -1218,7 +1540,7 @@ p^* = \inf \{ f(\bx) \ST \bx \in C \}.
 X_{\text{opt}}  = \{ \bx \in C \ST f(\bx) = p^* \}.
 \]</div>
 <ol>
-<li><p>By <a class="reference internal" href="#res-cvxopt-local-global-minimum">Theorem 7.10</a>,
+<li><p>By <a class="reference internal" href="#res-cvxopt-local-global-minimum">Theorem 9.1</a>,
 <span class="math notranslate nohighlight">\(X_{\text{opt}}\)</span> is a convex set.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(X_{\text{opt}}\)</span> is empty or a singleton, there is nothing more to prove.</p></li>
 <li><p>For contradiction, assume that there are two distinct points
@@ -1243,9 +1565,9 @@ minimization problem.</p></li>
 </div>
 </div>
 <div class="section" id="concave-objective-functions">
-<h2><span class="section-number">7.2.2. </span>Concave Objective Functions<a class="headerlink" href="#concave-objective-functions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.1.2. </span>Concave Objective Functions<a class="headerlink" href="#concave-objective-functions" title="Permalink to this headline">¶</a></h2>
 <div class="proof theorem admonition" id="res-cvxopt-concave-min-relint-const">
-<p class="admonition-title"><span class="caption-number">Theorem 7.14 </span> (Minimization of concave function and relative interior)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 9.5 </span> (Minimization of concave function and relative interior)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real normed linear space.
 Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a concave function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
@@ -1274,7 +1596,7 @@ X_{\text{opt}} = C.
 <ol>
 <li><p>Let <span class="math notranslate nohighlight">\(\by \in C\)</span> be any vector distinct from <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
 <li><p>Since <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span>, hence
-due to <a class="reference internal" href="../convex_sets/relint.html#res-cvx-relint-line-segment-characterization">Theorem 6.133</a>,
+due to <a class="reference internal" href="../convex_sets/relint.html#res-cvx-relint-line-segment-characterization">Theorem 8.144</a>,
 there exists <span class="math notranslate nohighlight">\(s &gt; 1\)</span> such that
 <span class="math notranslate nohighlight">\(\bz = \bx + (s -1) (\bx - \by) \in C\)</span>.
 <span class="math notranslate nohighlight">\(\bz\)</span> is a point behind <span class="math notranslate nohighlight">\(\bx\)</span> on the line from <span class="math notranslate nohighlight">\(\by\)</span> to <span class="math notranslate nohighlight">\(\bx\)</span>
@@ -1307,7 +1629,7 @@ which in turn implies that <span class="math notranslate nohighlight">\(f(\bx) =
 </ol>
 </div>
 <div class="proof corollary admonition" id="res-cvxopt-linear-min-relbd">
-<p class="admonition-title"><span class="caption-number">Corollary 7.5 </span> (Linear functions attain minimum only at boundary points)</p>
+<p class="admonition-title"><span class="caption-number">Corollary 9.3 </span> (Linear functions attain minimum only at boundary points)</p>
 <div class="corollary-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real normed linear space.
 Let <span class="math notranslate nohighlight">\(f : \VV \to \RR\)</span> be a nonzero linear functional.
@@ -1322,7 +1644,7 @@ of <span class="math notranslate nohighlight">\(C\)</span> (if it does attain a 
 <li><p>Let <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span>.</p></li>
 <li><p>Then, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B(\bx, r) \cap \affine C \subseteq C\)</span>.</p></li>
 <li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is linear, hence <span class="math notranslate nohighlight">\(f\)</span> cannot be constant over <span class="math notranslate nohighlight">\(B(\bx, r) \cap \affine C\)</span>.</p></li>
-<li><p>Thus, by <a class="reference internal" href="#res-cvxopt-concave-min-relint-const">Theorem 7.14</a>, it cannot
+<li><p>Thus, by <a class="reference internal" href="#res-cvxopt-concave-min-relint-const">Theorem 9.5</a>, it cannot
 attain a minimum at <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
 </ol>
 </div>
@@ -1354,17 +1676,17 @@ attain a minimum at <span class="math notranslate nohighlight">\(\bx\)</span>.</
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="chapter.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">7.1. </span>Mathematical Optimization</p>
+            <p class="prev-next-title"><span class="section-number">9. </span>Convex Optimization</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="projection.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7.3. </span>Projection on Convex Sets</p>
+        <p class="prev-next-title"><span class="section-number">9.2. </span>Projection on Convex Sets</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -1377,7 +1699,7 @@ attain a minimum at <span class="math notranslate nohighlight">\(\bx\)</span>.</
     
       By Shailesh Kumar<br/>
     
-        &copy; Copyright 2021.<br/>
+        &copy; Copyright 2021-2022.<br/>
   </p>
 </footer>
 </main>

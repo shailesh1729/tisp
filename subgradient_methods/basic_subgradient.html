@@ -1,0 +1,1931 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10.1. Basic Subgradient Method &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="11. Proximal Algorithms" href="../proximal_operator/chapter.html" />
+    <link rel="prev" title="10. Subgradient Methods" href="chapter.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/subgradient_methods/basic_subgradient.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fsubgradient_methods/basic_subgradient.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unconstrained-minimization">
+   10.1.1. Unconstrained Minimization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#descent-directions">
+     10.1.1.1. Descent Directions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tracking-of-the-best-estimate">
+     10.1.1.2. Tracking of the Best Estimate
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-size-selection">
+     10.1.1.3. Step Size Selection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-subgradient-method">
+     10.1.1.4. The Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convergence-analysis">
+   10.1.2. Convergence Analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constant-step-size">
+     10.1.2.1. Constant Step Size
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constant-step-length">
+     10.1.2.2. Constant Step Length
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#square-summable-step-sizes">
+     10.1.2.3. Square Summable Step Sizes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diminishing-step-sizes">
+     10.1.2.4. Diminishing Step Sizes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diminishing-step-lengths">
+     10.1.2.5. Diminishing Step Lengths
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#on-the-suboptimality-bound">
+     10.1.2.6. On the Suboptimality Bound
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Basic Subgradient Method</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unconstrained-minimization">
+   10.1.1. Unconstrained Minimization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#descent-directions">
+     10.1.1.1. Descent Directions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tracking-of-the-best-estimate">
+     10.1.1.2. Tracking of the Best Estimate
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-size-selection">
+     10.1.1.3. Step Size Selection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-subgradient-method">
+     10.1.1.4. The Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convergence-analysis">
+   10.1.2. Convergence Analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constant-step-size">
+     10.1.2.1. Constant Step Size
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constant-step-length">
+     10.1.2.2. Constant Step Length
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#square-summable-step-sizes">
+     10.1.2.3. Square Summable Step Sizes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diminishing-step-sizes">
+     10.1.2.4. Diminishing Step Sizes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diminishing-step-lengths">
+     10.1.2.5. Diminishing Step Lengths
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#on-the-suboptimality-bound">
+     10.1.2.6. On the Suboptimality Bound
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="basic-subgradient-method">
+<h1><span class="section-number">10.1. </span>Basic Subgradient Method<a class="headerlink" href="#basic-subgradient-method" title="Permalink to this headline">¶</a></h1>
+<p>The theory of subgradients for convex functions
+is discussed in <a class="reference internal" href="../convex_sets/subgradients.html#sec-cvxf-subgradients"><span class="std std-ref">Subgradients</span></a>.
+This section discusses basic subgradient method
+for optimization.
+Primary references for this section are
+<span id="id1">[<a class="reference internal" href="../bib.html#id26" title="Stephen Boyd and Almir Mutapcic. Subgradient methods. 2008.">8</a>]</span>.</p>
+<p>Recall that a vector <span class="math notranslate nohighlight">\(\bg\)</span> is a subgradient of <span class="math notranslate nohighlight">\(f\)</span> at a point <span class="math notranslate nohighlight">\(\bx\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[
+f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle \Forall \by \in \RR^n.
+\]</div>
+<div class="section" id="unconstrained-minimization">
+<h2><span class="section-number">10.1.1. </span>Unconstrained Minimization<a class="headerlink" href="#unconstrained-minimization" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>We start with a simple case of minimizing a convex function <span class="math notranslate nohighlight">\(f: \RR^n \to \RR\)</span>.</p>
+<ol class="simple">
+<li><p>The optimal value shall be denoted by <span class="math notranslate nohighlight">\(f^*\)</span>.</p></li>
+<li><p>We shall assume that the optimal value is finite (i.e., <span class="math notranslate nohighlight">\(f^* &gt; -\infty\)</span>).</p></li>
+<li><p>The set of optimal minimizers shall be denoted by <span class="math notranslate nohighlight">\(X^*\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> attains its optimal value, hence <span class="math notranslate nohighlight">\(X^*\)</span> is nonempty.</p></li>
+<li><p>A global minimizer will be denoted by <span class="math notranslate nohighlight">\(\bx^*\)</span>.</p></li>
+</ol>
+<p>The basic subgradient method uses the following iteration.</p>
+<div class="math notranslate nohighlight" id="equation-eq-sgm-basic-iteration">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-eq-sgm-basic-iteration" title="Permalink to this equation">¶</a></span>\[\bx^{k+1} = \bx^k - t_k \bg^k.\]</div>
+<p>In this iteration</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bx^k\)</span> is the current (<span class="math notranslate nohighlight">\(k\)</span>-th) iterate.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bg^k\)</span> is any subgradient of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(\bx^k\)</span>. We have <span class="math notranslate nohighlight">\(\bg^k \in \partial f(\bx^k)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_k &gt; 0\)</span> is the step size for the <span class="math notranslate nohighlight">\(k\)</span>-th iteration
+in the negative subgradient direction <span class="math notranslate nohighlight">\(- \bg^k\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx^{k+1}\)</span> is the new (<span class="math notranslate nohighlight">\(k+1\)</span>-th) iterate.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\| t_k \bg^k \|_2\)</span> denotes the step-length.</p></li>
+</ol>
+<p>Thus, in each iteration of the subgradient method, we take a step in the
+direction of a negative subgradient.</p>
+</div>
+<div class="section" id="descent-directions">
+<h3><span class="section-number">10.1.1.1. </span>Descent Directions<a class="headerlink" href="#descent-directions" title="Permalink to this headline">¶</a></h3>
+<div class="proof observation admonition" id="res-sgm-neg-subgradient-descent">
+<p class="admonition-title"><span class="caption-number">Observation 10.1 </span> (Negative subgradient need not be a descent direction)</p>
+<div class="observation-content section" id="proof-content">
+<ol>
+<li><p>Recall from <a class="reference internal" href="../cvxopt/differentiable_objectives.html#def-opt-descent-direction">Definition 9.22</a> that
+a descent direction of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span> is a direction
+along which the directional derivative is negative; i.e.,
+<span class="math notranslate nohighlight">\(f'(\bx; \bd) &lt; 0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\bd\)</span> is a descent direction at <span class="math notranslate nohighlight">\(\bx\)</span>, then there exists
+a step size <span class="math notranslate nohighlight">\(t &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    f(\bx + t \bd) &lt; f(\bx).
+    \]</div>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(f\)</span> is a differentiable function and <span class="math notranslate nohighlight">\(\bd = - \nabla f(\bx)\)</span>,
+then</p>
+<div class="math notranslate nohighlight">
+\[
+   f'(\bx; - \nabla f(\bx)) = - \| \nabla f(\bx) \|^2 \leq 0.
+   \]</div>
+</li>
+<li><p>Hence, the negative gradient is always a descent direction
+if the gradient is nonzero.</p></li>
+<li><p>However, for a nondifferentiable function <span class="math notranslate nohighlight">\(f\)</span>, a
+negative subgradient may not be a descent direction.</p></li>
+<li><p>Recall from max formula (<a class="reference internal" href="../convex_sets/subgradients.html#res-cvxf-subg-dir-der-max-formula">Theorem 8.219</a>)
+that</p>
+<div class="math notranslate nohighlight">
+\[
+    f'(\bx;\bd) = \sup \{ \langle \bd, \bg \rangle \ST \bg \in \partial f(\bx) \}.
+    \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\tilde{\bg}\)</span> be the chosen subgradient at an iteration
+of the subgradient method.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    f'(\bx; -\tilde{\bg}) 
+    = \sup_{\bg \in \partial f(\bx)} \{ \langle - \tilde{\bg}, \bg \rangle\}
+    = - \inf_{\bg \in \partial f(\bx)} \{ \langle \tilde{\bg}, \bg \rangle\}.
+    \]</div>
+</li>
+<li><p>It is possible that the quantity <span class="math notranslate nohighlight">\(\langle \tilde{\bg}, \bg \rangle\)</span>
+is negative for some other subgradient <span class="math notranslate nohighlight">\(\bg\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>Hence the directional derivative along <span class="math notranslate nohighlight">\(-\tilde{\bg}\)</span> may be positive.</p></li>
+<li><p>This argument shows that a negative subgradient is not necessarily a
+descent direction.</p></li>
+</ol>
+</div>
+</div></div>
+<div class="section" id="tracking-of-the-best-estimate">
+<h3><span class="section-number">10.1.1.2. </span>Tracking of the Best Estimate<a class="headerlink" href="#tracking-of-the-best-estimate" title="Permalink to this headline">¶</a></h3>
+<ol>
+<li><p>Since the negative subgradient <span class="math notranslate nohighlight">\(-\bg^k\)</span> may not be a descent
+direction, hence it is quite likely that <span class="math notranslate nohighlight">\(f(\bx^{k+1}) &gt; f(\bx^k)\)</span>.</p></li>
+<li><p>Even if the selected <span class="math notranslate nohighlight">\(-\bg^k\)</span> is a descent direction at <span class="math notranslate nohighlight">\(\bx^k\)</span>,
+it is possible that the step size can be such that
+<span class="math notranslate nohighlight">\(f(\bx^{k+1}) &gt; f(\bx^k)\)</span>.</p></li>
+<li><p>This happens since typically there is no local line search
+method invoked to select an appropriate step size in a
+subgradient method.</p></li>
+<li><p>Since the negative subgradient itself may not be a descent direction,
+hence running a local line search will be futile.</p></li>
+<li><p>The alternative is to track the best estimate of the optimal value
+so far using the following rule</p>
+<div class="math notranslate nohighlight">
+\[
+   f_{\best}^k = \min \{f_{\best}^{k-1}, f(\bx^k) \}.
+   \]</div>
+</li>
+<li><p>If the best estimate has decreased, we also update the
+estimate of the local minimizer as <span class="math notranslate nohighlight">\(\bx_{\best}\)</span> to <span class="math notranslate nohighlight">\(\bx^{k+1}\)</span>.</p></li>
+<li><p>It is easy to see that</p>
+<div class="math notranslate nohighlight">
+\[
+   f_{\best}^k = \min \{f(\bx^1), \dots, f(\bx^k) \}.
+   \]</div>
+</li>
+<li><p>We can see that the sequence <span class="math notranslate nohighlight">\(\{ f_{\best}^k \}\)</span> is a nonincreasing
+sequence.</p></li>
+<li><p>Hence it has a limit.</p></li>
+<li><p>The success of the subgradient method depends on whether the
+limit equals the optimal value.</p></li>
+</ol>
+</div>
+<div class="section" id="step-size-selection">
+<h3><span class="section-number">10.1.1.3. </span>Step Size Selection<a class="headerlink" href="#step-size-selection" title="Permalink to this headline">¶</a></h3>
+<div class="docutils">
+<p>In a gradient descent method, one typically uses a line search
+method to select the step size. Hence, it depends on current iterate
+and the function values in its neighborhood.</p>
+<p>In a subgradient method, the step size selection is different.
+Typically, the step sizes (or step lengths) are determined beforehand
+and they don’t depend on the data computed during the execution
+of the algorithm.
+Following are some of the common methods for step size selection.</p>
+<ol>
+<li><p><em>Constant step size</em>. <span class="math notranslate nohighlight">\(t_k = t\)</span> for some positive constant <span class="math notranslate nohighlight">\(t &gt; 0\)</span>
+which is independent of <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><em>Constant step length</em>.</p>
+<div class="math notranslate nohighlight">
+\[
+   t_k = \frac{c}{\| \bg^k \|_2}
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(c &gt; 0\)</span> is a predefined step length.
+Note that with this choice of step size, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bx^{k + 1} - \bx^k \|_2 = \| t_k \bg^k \|_2 = c.
+   \]</div>
+</li>
+<li><p><em>Square summable but not summable</em>. We choose step sizes
+that satisfy the following constraints:</p>
+<div class="math notranslate nohighlight">
+\[
+   t_k &gt; 0 \Forall k, \quad
+   \sum_{k=1}^{\infty} t_k^2 &lt; \infty,
+   \sum_{k=1}^{\infty} t_k = \infty.
+   \]</div>
+<p>As an example, fix some <span class="math notranslate nohighlight">\(a &gt; 0\)</span> and <span class="math notranslate nohighlight">\(b \geq 0\)</span> and let</p>
+<div class="math notranslate nohighlight">
+\[
+   t_k = \frac{a}{b + k}.
+   \]</div>
+</li>
+<li><p><em>Nonsummable diminishing</em>. We choose step sizes
+that satisfy the following constraints:</p>
+<div class="math notranslate nohighlight">
+\[
+    t_k &gt; 0 \Forall k, \quad
+    \lim_{k \to \infty} t_k = 0, \quad
+    \sum_{k=1}^{\infty} t_k = \infty.
+    \]</div>
+<p>As and example, fix some <span class="math notranslate nohighlight">\(a &gt; 0\)</span> and let</p>
+<div class="math notranslate nohighlight">
+\[
+    t_k = \frac{a}{\sqrt{k}}.
+    \]</div>
+</li>
+<li><p><em>Nonsummable diminishing step lengths</em>: We choose
+step sizes as <span class="math notranslate nohighlight">\(t_k = \frac{c_k}{\| \bg^k \|_2}\)</span>
+where</p>
+<div class="math notranslate nohighlight">
+\[
+    c_k &gt; 0, \quad
+    \lim_{k \to \infty} c_k = 0,\quad
+    \sum_{k=1}^{\infty} c_k = \infty.
+    \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="the-subgradient-method">
+<h3><span class="section-number">10.1.1.4. </span>The Subgradient Method<a class="headerlink" href="#the-subgradient-method" title="Permalink to this headline">¶</a></h3>
+<p>We now present the overall template for the subgradient method.</p>
+<div class="proof algorithm admonition" id="alg-sgm-subgradient-method">
+<p class="admonition-title"><span class="caption-number">Algorithm 10.1 </span> (The subgradient method)</p>
+<div class="algorithm-content section" id="proof-content">
+<p>Inputs</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> : function to be minimized</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx^1\)</span>: initial guess for the minimizer</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_1\)</span>: initial step size</p></li>
+</ol>
+<p>Outputs</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{\best}^1\)</span>: Best estimate of minimum value of <span class="math notranslate nohighlight">\(f\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx_{\best}^1\)</span> the best estimate of the minimizer</p></li>
+</ol>
+<p>Initialization</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{\best} = f(\bx^1)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx_{\best} = \bx^1\)</span>.</p></li>
+</ol>
+<p>General iteration: for <span class="math notranslate nohighlight">\(k=1,2,\dots\)</span>, execute the following steps</p>
+<ol class="simple">
+<li><p>Select a subgradient <span class="math notranslate nohighlight">\(\bg^k\)</span> from <span class="math notranslate nohighlight">\(\partial f(\bx^k)\)</span>.</p></li>
+<li><p>Select a step size: <span class="math notranslate nohighlight">\(t_k\)</span>.</p></li>
+<li><p>Update minimizer estimate: <span class="math notranslate nohighlight">\(\bx^{k+1} = \bx^k - t_k \bg^k\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(k = k + 1\)</span>.</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(f(\bx^k)\)</span>.</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(f_{\best}^{k-1} &gt; f(\bx^k)\)</span>:</p>
+<ol class="simple">
+<li><p>Update best estimate of optimal value: <span class="math notranslate nohighlight">\(f_{\best}^k = f(\bx^k)\)</span>.</p></li>
+<li><p>Update best estimate of minimizer: <span class="math notranslate nohighlight">\(\bx_{\best}^k = \bx^k\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Otherwise, retain current values</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{\best}^k = f_{\best}^{k-1}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx_{\best}^k = \bx_{\best}^{k-1}\)</span>.</p></li>
+</ol>
+</li>
+<li><p>If stopping criterion is met, then STOP.</p></li>
+</ol>
+</div>
+</div><p>For a concrete implementation, we shall need the following:</p>
+<ol class="simple">
+<li><p>A way to compute <span class="math notranslate nohighlight">\(f(\bx)\)</span> at every <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>A way to pick a subgradient <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx)\)</span>
+at every <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>A step size selection strategy.</p></li>
+<li><p>A stopping criterion.</p></li>
+</ol>
+<p>Note that there is no need to specify the complete
+subdifferential at every <span class="math notranslate nohighlight">\(\bx\)</span>.
+The stopping criterion will be developed in the
+following as part of the convergence analysis of
+the algorithm.</p>
+</div>
+</div>
+<div class="section" id="convergence-analysis">
+<h2><span class="section-number">10.1.2. </span>Convergence Analysis<a class="headerlink" href="#convergence-analysis" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>Our goal is to show that <span class="math notranslate nohighlight">\(f_{\best}^k \downarrow f^*\)</span>.
+Towards this, we will establish a suboptimality bound
+on the estimate of the optimal value after <span class="math notranslate nohighlight">\(k\)</span> iterations.</p>
+<p>We shall make the following assumptions in the analysis.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is a real valued convex function.</p></li>
+<li><p>The optimal value <span class="math notranslate nohighlight">\(f^*\)</span> is finite and the minimizer <span class="math notranslate nohighlight">\(\bx^*\)</span> exists.</p></li>
+<li><p>The norm of the subgradients is bounded. i.e., there exists <span class="math notranslate nohighlight">\(G &gt; 0\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bg \|_2 \leq G \Forall \bg \in \partial f(\bx) \Forall \bx.
+   \]</div>
+<p>Recall from <a class="reference internal" href="../convex_sets/subgradients.html#res-cvxf-subdiff-bounded-lipschitz-continuous">Theorem 8.232</a>
+that if a convex function is Lipschitz continuous, then its
+subgradients are bounded.</p>
+</li>
+<li><p>A number <span class="math notranslate nohighlight">\(R\)</span> that satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+   R \geq \| \bx^* - \bx^1 \|_2
+   \]</div>
+<p>for some <span class="math notranslate nohighlight">\(\bx^* \in X^*\)</span>
+is known beforehand.
+<span class="math notranslate nohighlight">\(R\)</span> can be interpreted as an upper bound on the distance
+of the initial point to the set of optimal minimizers.</p>
+<div class="math notranslate nohighlight">
+\[
+   R \geq \text{dist}(\bx^1, X^*).
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-sgm-error-upper-bound">
+<p class="admonition-title"><span class="caption-number">Theorem 10.1 </span> (Suboptimality bound for subgradient method)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\| \bx^1 - \bx^* \|_2 \leq R\)</span>.</p>
+<p>After <span class="math notranslate nohighlight">\(k\)</span> iterations of the subgradient method, we have</p>
+<div class="math notranslate nohighlight" id="equation-eq-sgm-error-ub-k-g">
+<span class="eqno">(10.2)<a class="headerlink" href="#equation-eq-sgm-error-ub-k-g" title="Permalink to this equation">¶</a></span>\[f_{\best}^k - f^* \leq 
+\frac{R^2 + \sum_{i=1}^k t_i^2 \| \bg_i \|_2^2 }{2 \sum_{i=1}^k t_i }.\]</div>
+<p>If the subgradients of <span class="math notranslate nohighlight">\(f\)</span> are bounded by <span class="math notranslate nohighlight">\(\| \bg \| \leq G\)</span>
+for all <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx)\)</span> for every <span class="math notranslate nohighlight">\(\bx\)</span>, then this
+simplifies to:</p>
+<div class="math notranslate nohighlight" id="equation-eq-sgm-error-ub-k">
+<span class="eqno">(10.3)<a class="headerlink" href="#equation-eq-sgm-error-ub-k" title="Permalink to this equation">¶</a></span>\[f_{\best}^k - f^* \leq \frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i }.\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a minimizer of <span class="math notranslate nohighlight">\(f\)</span>.
+From the subgradient inequality, we have</p>
+<div class="math notranslate nohighlight">
+\[
+f^* = f(\bx^*) \geq f(\bx^k) + \langle \bx^* - \bx^k, \bg^k \rangle. 
+\]</div>
+<p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx^* - \bx^k, \bg^k \rangle \leq f^* - f(\bx^k).
+\]</div>
+<p>We first develop an upper bound on the distance between
+the <span class="math notranslate nohighlight">\(k+1\)</span>-th iterate and a minimizer.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\| \bx^{k+1} - \bx^* \|_2^2
+&amp; = \| \bx^k - t_k \bg^k - \bx^* \|_2^2 \\
+&amp; = \| (\bx^k - \bx^*) - t_k \bg^k \|_2^2 \\
+&amp; = \| \bx^k - \bx^* \|_2^2 - 2 t_k \langle \bx^k - \bx^*, \bg^k \rangle
++ t_k^2 \| \bg^k \|_2^2 \\
+&amp; \leq \| \bx^k - \bx^* \|_2^2 - 2 t_k (f(\bx^k) - f^*)
++ t_k^2 \| \bg^k \|_2^2.
+\end{split}\]</div>
+<p>Applying this inequality recursively, we get</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx^{k+1} - \bx^* \|_2^2
+\leq \| \bx^1 - \bx^* \|_2^2 - 2 \sum_{i=1}^k t_i (f(\bx^i) - f^*)
++ \sum_{i=1}^k t_i^2 \| \bg^i \|_2^2.
+\]</div>
+<p>Using the fact that <span class="math notranslate nohighlight">\(\| \bx^{k+1} - \bx^* \|_2^2 \geq 0\)</span>
+and <span class="math notranslate nohighlight">\(\| \bx^1 - \bx^* \|_2 \leq R\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+2 \sum_{i=1}^k t_i (f(\bx^i) - f^*) \leq R^2 + \sum_{i=1}^k t_i^2 \| \bg^i \|_2^2.
+\]</div>
+<p>On the L.H.S., we can see that</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^k t_i (f(\bx^i) - f^*)
+\geq \left ( \sum_{i=1}^k t_i \right ) \min_{i=1,\dots,k} (f(\bx^i) - f^*)
+= \left ( \sum_{i=1}^k t_i \right ) (f_{\best}^k - f^* ).
+\]</div>
+<p>Combining this with the previous inequality, we get</p>
+<div class="math notranslate nohighlight">
+\[
+2 \left ( \sum_{i=1}^k t_i \right ) (f_{\best}^k - f^* )
+\leq  R^2 + \sum_{i=1}^k t_i^2 \| \bg^i \|_2^2.
+\]</div>
+<p>This can be rewritten as</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq 
+\frac{R^2 + \sum_{i=1}^k t_i^2 \| \bg_i \|_2^2 }{2 \sum_{i=1}^k t_i }
+\]</div>
+<p>as desired.</p>
+<p>Applying the upper bound on the subgradient <span class="math notranslate nohighlight">\(\| \bg \|_2 \leq G\)</span>,
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq \frac{R^2 +  G^2 \sum_{i=1}^k t_i^2}{2\sum_{i=1}^k t_i }
+\]</div>
+<p>as desired.</p>
+</div>
+<p>Based on this result, we can provide upper bounds on the
+estimation error for different step size selection strategies.</p>
+<div class="section" id="constant-step-size">
+<h3><span class="section-number">10.1.2.1. </span>Constant Step Size<a class="headerlink" href="#constant-step-size" title="Permalink to this headline">¶</a></h3>
+<div class="proof corollary admonition" id="res-sgm-error-ub-constant-step-size">
+<p class="admonition-title"><span class="caption-number">Corollary 10.1 </span> (Convergence of subgradient method with constant step size)</p>
+<div class="corollary-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(t_k = t\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>, then we have</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq \frac{R^2 + G^2 t^2 k}{2 t k }.
+\]</div>
+<p>The subgradient method converges to within <span class="math notranslate nohighlight">\(G^2 t / 2\)</span> of the
+optimal value <span class="math notranslate nohighlight">\(f^*\)</span>. In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{k \to \infty} f_{\best}^k - f^* \leq \frac{G^2 t}{2}.
+\]</div>
+<p>Also, <span class="math notranslate nohighlight">\(f_{\best}^k - f^* \leq G^2 t\)</span> within at most
+<span class="math notranslate nohighlight">\(R^2 / (G^2 t^2)\)</span> steps.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. By putting <span class="math notranslate nohighlight">\(t_k = t\)</span> in <a class="reference internal" href="#equation-eq-sgm-error-ub-k">(10.3)</a>, we obtain
+the desired upper bound. Taking the limit <span class="math notranslate nohighlight">\(k \to \infty\)</span>,
+we see that</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{k \to \infty} (f_{\best}^k - f^*) \leq \frac{G^2 t}{2}.
+\]</div>
+<p>Now,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \frac{R^2 + G^2 t^2 k}{2 t k } \leq G^2 t \\
+\iff &amp; R^2 + G^2 t^2 k \leq 2  G^2 t^2 k \\
+\iff &amp; R^2 \leq G^2 t^2 k \\
+\iff &amp; k \geq \frac{R^2}{G^2 t^2}.
+\end{split}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(f_{\best}^k\)</span> is a nonincreasing sequence, hence
+for all <span class="math notranslate nohighlight">\(k \geq R^2 / (G^2 t^2)\)</span>, we must have</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq G^2 t.
+\]</div>
+</div>
+</div>
+<div class="section" id="constant-step-length">
+<h3><span class="section-number">10.1.2.2. </span>Constant Step Length<a class="headerlink" href="#constant-step-length" title="Permalink to this headline">¶</a></h3>
+<div class="proof corollary admonition" id="res-sgm-error-ub-constant-step-length">
+<p class="admonition-title"><span class="caption-number">Corollary 10.2 </span> (Convergence of subgradient method with constant step length)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(c\)</span> be the constant step length for the subgradient method.
+Let <span class="math notranslate nohighlight">\(t_k = \frac{c}{\| \bg^k \|_2}\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.
+Then we have</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq \frac{R^2 + c^2 k}{2 c k / G }.
+\]</div>
+<p>The subgradient method converges to within <span class="math notranslate nohighlight">\(G c / 2\)</span> of the
+optimal value <span class="math notranslate nohighlight">\(f^*\)</span>. In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{k \to \infty} f_{\best}^k - f^* \leq \frac{G c}{2}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. By putting <span class="math notranslate nohighlight">\(t_i = \frac{c}{\| \bg^i \|_2}\)</span> in
+<a class="reference internal" href="#equation-eq-sgm-error-ub-k-g">(10.2)</a>, we see that</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq 
+\frac{R^2 + \sum_{i=1}^k c^2 }{2 \sum_{i=1}^k t_i }.
+\]</div>
+<p>Also, note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; t_i = \frac{c}{\| \bg^i \|_2}\\
+\implies &amp; t_i \geq \frac{c}{ G} \\
+\implies &amp; \sum_{i=1}^k t_i \geq \frac{c k}{G} \\
+\implies &amp; \frac{1}{\sum_{i=1}^k t_i} \leq \frac{1}{c k / G}.
+\end{split}\]</div>
+<p>Putting this back, we have</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq 
+\frac{R^2 + c^2 k }{2 c k / G }.
+\]</div>
+<p>Taking the limit <span class="math notranslate nohighlight">\(k \to \infty\)</span>, we see that</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{k \to \infty} (f_{\best}^k - f^*) \leq \frac{G c}{2}.
+\]</div>
+</div>
+</div>
+<div class="section" id="square-summable-step-sizes">
+<h3><span class="section-number">10.1.2.3. </span>Square Summable Step Sizes<a class="headerlink" href="#square-summable-step-sizes" title="Permalink to this headline">¶</a></h3>
+<div class="proof corollary admonition" id="res-sgm-error-ub-sq-sum-step-sizes">
+<p class="admonition-title"><span class="caption-number">Corollary 10.3 </span> (Convergence of subgradient method with square summable step sizes)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let the step sizes satisfy the rule</p>
+<div class="math notranslate nohighlight">
+\[
+t_k &gt; 0 \Forall k, \quad
+\sum_{k=1}^{\infty} t_k^2 &lt; \infty,
+\sum_{k=1}^{\infty} t_k = \infty.
+\]</div>
+<p>Further, let <span class="math notranslate nohighlight">\(T = \sum_{k=1}^{\infty} t_k^2\)</span>.</p>
+<p>Then we have</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq \frac{R^2 + G^2 T}{2 \sum_{i=1}^k t_k}.
+\]</div>
+<p>The subgradient method converges to <span class="math notranslate nohighlight">\(f^*\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. By putting the step size constraints into
+<a class="reference internal" href="#equation-eq-sgm-error-ub-k">(10.3)</a>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq \frac{R^2 + G^2 T}{2 \sum_{i=1}^k t_i }.
+\]</div>
+<p>Taking the limit <span class="math notranslate nohighlight">\(k \to \infty\)</span>, the denominator grows to <span class="math notranslate nohighlight">\(\infty\)</span>
+while the numerator converges to <span class="math notranslate nohighlight">\(R^2 + G^2 T\)</span>.
+Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{k \to \infty} f_{\best}^k - f^*  = 0.
+\]</div>
+</div>
+</div>
+<div class="section" id="diminishing-step-sizes">
+<h3><span class="section-number">10.1.2.4. </span>Diminishing Step Sizes<a class="headerlink" href="#diminishing-step-sizes" title="Permalink to this headline">¶</a></h3>
+<div class="proof corollary admonition" id="res-sgm-error-ub-diminishing-step-sizes">
+<p class="admonition-title"><span class="caption-number">Corollary 10.4 </span> (Convergence of subgradient method with diminishing step sizes)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let the step sizes satisfy the rule</p>
+<div class="math notranslate nohighlight">
+\[
+t_k &gt; 0 \Forall k, \quad
+\lim_{k \to \infty} t_k = 0, \quad
+\sum_{k=1}^{\infty} t_k = \infty.
+\]</div>
+<p>Then the subgradient method converges to <span class="math notranslate nohighlight">\(f^*\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We shall show that the R.H.S. of <a class="reference internal" href="#equation-eq-sgm-error-ub-k">(10.3)</a>
+converges to 0 as <span class="math notranslate nohighlight">\(k \to \infty\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>.</p></li>
+<li><p>There exists integer <span class="math notranslate nohighlight">\(n_1\)</span> such that
+<span class="math notranslate nohighlight">\(t_i \leq \epsilon / G^2\)</span> for all <span class="math notranslate nohighlight">\(i &gt; n_1\)</span>
+since <span class="math notranslate nohighlight">\(t_k \to 0\)</span>.</p></li>
+<li><p>There also exists an integer <span class="math notranslate nohighlight">\(n_2\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i=1}^{n_2} t_i \geq \frac{1}{\epsilon}
+   \left ( R^2 + G^2 \sum_{i=1}^{n_1} t_i^2 \right)
+   \]</div>
+<p>since <span class="math notranslate nohighlight">\(t_i\)</span> is nonsummable.</p>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(n = \max\{n_1, n_2 \}\)</span>.</p></li>
+<li><p>Then, for every <span class="math notranslate nohighlight">\(k &gt; n\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i}
+   = \frac{R^2 + G^2 \sum_{i=1}^{n_1} t_i^2}{2 \sum_{i=1}^k t_i}
+   + \frac{G^2 \sum_{i=n_1 + 1}^k t_i^2}{2 \sum_{i=1}^{n_1} t_i + 2 \sum_{i=n_1 + 1}^k t_i}.
+   \]</div>
+</li>
+<li><p>We can see that</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i=1}^k t_i \geq \sum_{i=1}^{n_2} t_i
+   \geq \frac{1}{\epsilon}
+   \left ( R^2 + G^2 \sum_{i=1}^{n_1} t_i^2 \right).
+   \]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{R^2 + G^2 \sum_{i=1}^{n_1} t_i^2}{2 \sum_{i=1}^k t_i} \leq
+   \frac{\epsilon}{2}.
+   \]</div>
+</li>
+<li><p>For every <span class="math notranslate nohighlight">\(i &gt; n_1\)</span>, we have <span class="math notranslate nohighlight">\(t_i &lt; \epsilon / G^2\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   G^2 \sum_{i=n_1 + 1}^k t_i^2
+   \leq \epsilon \sum_{i=n_1 + 1}^k t_i.
+   \]</div>
+</li>
+<li><p>We can now see that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \frac{G^2 \sum_{i=n_1 + 1}^k t_i^2}{2 \sum_{i=1}^{n_1} t_i + 2 \sum_{i=n_1 + 1}^k t_i}\\
+   &amp; &lt; \frac{G^2 \sum_{i=n_1 + 1}^k t_i^2}{2 \sum_{i=n_1 + 1}^k t_i}\\
+   &amp; \leq \frac{\epsilon \sum_{i=n_1 + 1}^k t_i}{2 \sum_{i=n_1 + 1}^k t_i}\\
+   &amp;= \frac{\epsilon}{2}.
+   \end{split}\]</div>
+</li>
+<li><p>Combining, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i}
+   &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+   \]</div>
+<p>for every <span class="math notranslate nohighlight">\(k &gt; n\)</span>.</p>
+</li>
+<li><p>Thus, for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists <span class="math notranslate nohighlight">\(n\)</span> such that
+for all <span class="math notranslate nohighlight">\(k &gt; n\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i} &lt; \epsilon.
+   \]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{k \to \infty}\frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i} = 0.
+   \]</div>
+</li>
+<li><p>Hence the subgradient method converges.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="diminishing-step-lengths">
+<h3><span class="section-number">10.1.2.5. </span>Diminishing Step Lengths<a class="headerlink" href="#diminishing-step-lengths" title="Permalink to this headline">¶</a></h3>
+<div class="proof corollary admonition" id="res-sgm-error-ub-diminishing-step-length">
+<p class="admonition-title"><span class="caption-number">Corollary 10.5 </span> (Convergence of subgradient method with diminishing step lengths)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let the step sizes <span class="math notranslate nohighlight">\(t_k = \frac{c_k}{\| \bg^k \|_2}\)</span>
+be chosen such that</p>
+<div class="math notranslate nohighlight">
+\[
+c_k &gt; 0, \quad
+\lim_{k \to \infty} c_k = 0,\quad
+\sum_{k=1}^{\infty} c_k = \infty
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_k\)</span> is the step length for the <span class="math notranslate nohighlight">\(k\)</span>-th iteration.</p>
+<p>Then the subgradient method converges to <span class="math notranslate nohighlight">\(f^*\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From <a class="reference internal" href="#equation-eq-sgm-error-ub-k-g">(10.2)</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq 
+\frac{R^2 + \sum_{i=1}^k t_i^2 \| \bg_i \|_2^2 }{2 \sum_{i=1}^k t_i }
+= \frac{R^2 + \sum_{i=1}^k c_i^2}{2 \sum_{i=1}^k t_i}.
+\]</div>
+<ol>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i=1}^k t_i = \sum_{i=1}^k \frac{c_i}{\| \bg^i \|_2}
+   \geq \sum_{i=1}^k \frac{c_i}{G}.
+   \]</div>
+</li>
+<li><p>Hence we have</p>
+<div class="math notranslate nohighlight">
+\[
+   f_{\best}^k - f^* \leq \frac{R^2 + \sum_{i=1}^k c_i^2}{(2/G) \sum_{i=1}^k c_i}.
+   \]</div>
+</li>
+<li><p>Following an argument similar to the proof of <a class="reference internal" href="#res-sgm-error-ub-diminishing-step-sizes">Corollary 10.4</a>,
+the R.H.S. converges to 0 as <span class="math notranslate nohighlight">\(k \to \infty\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{k \to \infty} f_{\best}^k - f^* = 0.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="on-the-suboptimality-bound">
+<h3><span class="section-number">10.1.2.6. </span>On the Suboptimality Bound<a class="headerlink" href="#on-the-suboptimality-bound" title="Permalink to this headline">¶</a></h3>
+<p>If we run the subgradient method for <span class="math notranslate nohighlight">\(k\)</span> iterations,
+we get a suboptimality bound given by <a class="reference internal" href="#equation-eq-sgm-error-ub-k">(10.3)</a>.</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\best}^k - f^* \leq \frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i }.
+\]</div>
+<p>A natural question is how tight can this bound be by an appropriate
+selection of step sizes <span class="math notranslate nohighlight">\(t_1, \dots, t_k\)</span>.</p>
+<div class="docutils">
+<ol>
+<li><p>Note that the R.H.S. is a convex and symmetric function of <span class="math notranslate nohighlight">\(t_1, \dots, t_k\)</span>.</p></li>
+<li><p>Hence, at the optimal value, we must have <span class="math notranslate nohighlight">\(t_1 = \dots = t_k\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t = t_1 = \dots = t_k\)</span>.</p></li>
+<li><p>Then the suboptimality bound reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{R^2 + G^2 k t^2}{2 k t }.
+   \]</div>
+</li>
+<li><p>This is minimized at <span class="math notranslate nohighlight">\(t = \frac{R}{G \sqrt{k}}\)</span>.</p></li>
+<li><p>In other words, the finite sequence of step-sizes <span class="math notranslate nohighlight">\(t_1, \dots, t_k\)</span>
+that minimizes the suboptimality bound in <a class="reference internal" href="#equation-eq-sgm-error-ub-k">(10.3)</a>
+after exactly <span class="math notranslate nohighlight">\(k\)</span> iterations is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   t_i = \frac{R}{G \sqrt{k}}, \Forall i=1,\dots,k.
+   \]</div>
+</li>
+<li><p>It must be noted that this suboptimality bound is dependent on the
+number of iterations.</p></li>
+<li><p>This choice of constant step size gives us the bound</p>
+<div class="math notranslate nohighlight">
+\[
+   f_{\best}^k - f^* \leq \frac{RG}{\sqrt{k}}.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-sgm-suboptimality-bound-bound">
+<p class="admonition-title"><span class="caption-number">Theorem 10.2 </span> (A bound on the suboptimality bound)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(t_1, \dots, t_k\)</span> be any choice of step sizes for the
+subgradient method for <span class="math notranslate nohighlight">\(k\)</span> iterations. Then we must have</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{R^2 + G^2 \sum_{i=1}^k t_i^2}{2 \sum_{i=1}^k t_i } \geq \frac{RG}{\sqrt{k}}
+\]</div>
+<p>where the L.H.S. is the step-size selection dependent suboptimality bound
+on <span class="math notranslate nohighlight">\(f_{\best}^k - f^*\)</span>.</p>
+<p>Accordingly, the number of steps required to achieve a guaranteed
+accuracy of <span class="math notranslate nohighlight">\(f_{\best}^k - f^* \leq \epsilon\)</span> for some <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>
+is at least <span class="math notranslate nohighlight">\((RG / \epsilon)^2\)</span> as per the suboptimality
+bound <a class="reference internal" href="#equation-eq-sgm-error-ub-k">(10.3)</a> irrespective of the step size selection.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have already shown that the suboptimality bound is minimized
+by the constant step size selection where <span class="math notranslate nohighlight">\(t_i = \frac{R}{G \sqrt{k}}\)</span>
+for every <span class="math notranslate nohighlight">\(i=1,\dots,k\)</span>
+and is given by <span class="math notranslate nohighlight">\(\frac{RG}{\sqrt{k}}\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> be the required guaranteed accuracy.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\epsilon \geq \frac{RG}{\sqrt{k}}\)</span> since
+<span class="math notranslate nohighlight">\(\frac{RG}{\sqrt{k}}\)</span> is the minimum guaranteed suboptimality
+bound after <span class="math notranslate nohighlight">\(k\)</span> iterations as per <a class="reference internal" href="#equation-eq-sgm-error-ub-k">(10.3)</a>.</p></li>
+<li><p>Hence we have <span class="math notranslate nohighlight">\(\sqrt{k} \geq \frac{RG}{\epsilon}\)</span>.</p></li>
+<li><p>Hence we have <span class="math notranslate nohighlight">\(k \geq \left ( \frac{RG}{\epsilon} \right )^2\)</span>.</p></li>
+</ol>
+<p>We note that the suboptimality bound of <span class="math notranslate nohighlight">\(\epsilon\)</span> can be
+guaranteed in <span class="math notranslate nohighlight">\(k\)</span> iterations only if we use the constant
+step sizes of <span class="math notranslate nohighlight">\(t = \frac{R}{G \sqrt{k}}\)</span>.</p>
+</div>
+<div class="proof observation admonition" id="res-sgm-rg-interpretation">
+<p class="admonition-title"><span class="caption-number">Observation 10.2 </span> (Interpretation of <span class="math notranslate nohighlight">\(R G\)</span>)</p>
+<div class="observation-content section" id="proof-content">
+<p>Initial uncertainty</p>
+<ol>
+<li><p>Assume that <span class="math notranslate nohighlight">\(f\)</span> is Lipschitz continuous with the constant <span class="math notranslate nohighlight">\(G\)</span>.</p></li>
+<li><p>By Lipschitz continuity, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   f^1 - f^* \leq  G \| \bx^1 - \bx^* \|_2 \leq R G.
+   \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(RG\)</span> is an estimate of the initial uncertainty in <span class="math notranslate nohighlight">\(f^*\)</span>.</p></li>
+</ol>
+<p>Reduction in uncertainty</p>
+<ol class="simple">
+<li><p>If our goal is to achieve <span class="math notranslate nohighlight">\(f_{\best}^k - f^* \leq \epsilon\)</span>,
+then <span class="math notranslate nohighlight">\(\epsilon\)</span> is an estimate of the final uncertainty in <span class="math notranslate nohighlight">\(f^*\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(RG / \epsilon\)</span> is the ratio of initial uncertainty
+in <span class="math notranslate nohighlight">\(f^*\)</span> to the final uncertainty in <span class="math notranslate nohighlight">\(f^*\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-sgm-suboptimality-bound-bound">Theorem 10.2</a>, we require
+a minimum of <span class="math notranslate nohighlight">\((R G / \epsilon)^2\)</span> iterations to achieve
+this much reduction in uncertainty.</p></li>
+</ol>
+<p>This analysis shows that the subgradient method is very slow.
+To achieve a 1000x reduction in the uncertainty of <span class="math notranslate nohighlight">\(f^*\)</span>,
+we need a million iterations at least.</p>
+</div>
+</div></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./subgradient_methods"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chapter.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">10. </span>Subgradient Methods</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../proximal_operator/chapter.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Proximal Algorithms</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

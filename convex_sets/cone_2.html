@@ -1,0 +1,2109 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8.5. Cones II &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8.6. Cones III" href="cone_3.html" />
+    <link rel="prev" title="8.4. Cones" href="cone.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/convex_sets/cone_2.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fconvex_sets/cone_2.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dual-cones">
+   8.5.1. Dual Cones
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#properties">
+     8.5.1.1. Properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#self-dual-cones">
+     8.5.1.2. Self Dual Cones
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polar-cones">
+   8.5.2. Polar Cones
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     8.5.2.1. Properties
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#normal-cones">
+   8.5.3. Normal Cones
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Cones II</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dual-cones">
+   8.5.1. Dual Cones
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#properties">
+     8.5.1.1. Properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#self-dual-cones">
+     8.5.1.2. Self Dual Cones
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polar-cones">
+   8.5.2. Polar Cones
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     8.5.2.1. Properties
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#normal-cones">
+   8.5.3. Normal Cones
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="cones-ii">
+<span id="sec-cvx-cone-2"></span><h1><span class="section-number">8.5. </span>Cones II<a class="headerlink" href="#cones-ii" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dual-cones">
+<h2><span class="section-number">8.5.1. </span>Dual Cones<a class="headerlink" href="#dual-cones" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>Dual cones are defined for finite dimensional inner product spaces.
+Dual cones technically belong to the dual space <span class="math notranslate nohighlight">\(\VV^*\)</span>.</p>
+<p>Recall that the
+<a class="reference internal" href="../la/dual_spaces.html#def-la-dual-space">dual space</a>
+<span class="math notranslate nohighlight">\(\VV^*\)</span> of a vector space <span class="math notranslate nohighlight">\(\VV\)</span> is the set
+of all linear functionals on <span class="math notranslate nohighlight">\(\VV\)</span>.
+For finite dimensional spaces, <span class="math notranslate nohighlight">\(\VV\)</span> and
+its dual <span class="math notranslate nohighlight">\(\VV^*\)</span> are isomorphic.
+For an inner product space <span class="math notranslate nohighlight">\(\VV\)</span>
+every linear functional in <span class="math notranslate nohighlight">\(\VV^*\)</span>
+can be identified with a vector <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>
+by the functional <span class="math notranslate nohighlight">\(\langle \cdot, \bv \rangle\)</span>
+(<a class="reference internal" href="../la/dual_spaces.html#res-la-ip-dual-space-isomorphism">Theorem 4.108</a>).</p>
+</div>
+<div class="proof definition admonition" id="def-dual-cone">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Definition 8.32 </span> (Dual cone)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional inner product space and <span class="math notranslate nohighlight">\(\VV^*\)</span>
+be its dual space.</p>
+<p>Let <span class="math notranslate nohighlight">\(C \subset \VV\)</span>. The set</p>
+<div class="math notranslate nohighlight">
+\[
+C^* \triangleq \{ \by \in \VV^* \ST \langle \bx, \by \rangle \geq 0 
+    \Forall \bx \in C \}
+\]</div>
+<p>is called the <em>dual cone</em> of <span class="math notranslate nohighlight">\(C\)</span> in <span class="math notranslate nohighlight">\(\VV^*\)</span>.</p>
+</div>
+</div><div class="docutils">
+<p>In the Euclidean space <span class="math notranslate nohighlight">\(\RR^n\)</span>, the dual cone can be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+C^* \triangleq \{ \by \in \RR^n \ST \langle \bx, \by \rangle \geq 0 
+    \Forall \bx \in C \}.
+\]</div>
+</div>
+<p class="rubric">Geometric interpretation</p>
+<ul class="simple">
+<li><p>For a vector <span class="math notranslate nohighlight">\(\by\)</span>, the set
+<span class="math notranslate nohighlight">\(H_{\by, +} \{ \bx \ST \langle \bx, \by \rangle \geq 0\}\)</span> is
+a <a class="reference internal" href="real_spaces.html#def-halfspace">halfspace</a> passing through origin.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\by\)</span> is the normal vector of the halfspace along
+(in the direction of) the halfspace.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\by\)</span> belongs to the dual cone of <span class="math notranslate nohighlight">\(C\)</span>, then for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>, we have
+<span class="math notranslate nohighlight">\( \langle \bx, \by \rangle \geq 0\)</span>.</p></li>
+<li><p>Thus, the set <span class="math notranslate nohighlight">\(C\)</span> is contained in the halfspace <span class="math notranslate nohighlight">\(H_{\by, +}\)</span>.</p></li>
+<li><p>In particular, if <span class="math notranslate nohighlight">\(C\)</span> is a cone, then it will also touch the boundary of
+the half space <span class="math notranslate nohighlight">\(H_{\by, +}\)</span> as <span class="math notranslate nohighlight">\(C\)</span> contains the origin.</p></li>
+</ul>
+<div class="section" id="properties">
+<h3><span class="section-number">8.5.1.1. </span>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<div class="proof property admonition" id="res-cvx-dual-cone-is-cone">
+<p class="admonition-title"><span class="caption-number">Property 8.16 </span></p>
+<div class="property-content section" id="proof-content">
+<p>Dual cone is a cone.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\by \in C^*\)</span>. Then, by definition,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle \geq 0 \Forall \bx \in C.
+\]</div>
+<p>Thus, for some <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \alpha \by \rangle 
+= \alpha \langle \bx, \by \rangle \geq 0 \Forall \bx \in C.
+\]</div>
+<p>Thus, for every <span class="math notranslate nohighlight">\(\by \in C^*\)</span>, <span class="math notranslate nohighlight">\(\alpha \by \in C^*\)</span> for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(C^*\)</span> is a cone.</p>
+</div>
+<div class="proof property admonition" id="res-cvx-dual-cone-is-convex">
+<p class="admonition-title"><span class="caption-number">Property 8.17 </span></p>
+<div class="property-content section" id="proof-content">
+<p>Dual cone is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\by_1, \by_2 \in C^*\)</span>. Let <span class="math notranslate nohighlight">\(t \in [0, 1]\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+\by = t \by_1 + (1 - t) \by_2.
+\]</div>
+<p>Then for an arbitrary <span class="math notranslate nohighlight">\(\bx \in C\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle 
+= \langle \bx, t \by_1 + (1-t) \by_2 \rangle
+= t \langle \bx, \by_1 \rangle + (1-t) \langle \bx, \by_2\rangle \geq 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\by \in C^*\)</span>.
+Thus, <span class="math notranslate nohighlight">\(C^*\)</span> is convex.</p>
+</div>
+<p>We note that dual cone is a convex cone even if the original set <span class="math notranslate nohighlight">\(C\)</span>
+is neither convex nor a cone.</p>
+<div class="proof property admonition" id="res-cvx-dual-cone-containment">
+<p class="admonition-title"><span class="caption-number">Property 8.18 </span> (Containment reversal in dual cone)</p>
+<div class="property-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be two subsets of <span class="math notranslate nohighlight">\(\VV\)</span> and let
+<span class="math notranslate nohighlight">\(C_1^*\)</span> and <span class="math notranslate nohighlight">\(C_2^*\)</span> be their corresponding dual cones.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+C_1 \subseteq C_2 \implies C_2^* \subseteq C_1^*.
+\]</div>
+</div>
+</div><p>The dual cone of the subset contains the dual cone of the superset.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\by \in C_2^*\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\langle \bx , \by \rangle \geq 0 \Forall \bx \in C_2 \implies 
+\langle \bx , \by \rangle \geq 0 \Forall \bx \in C_1 \implies
+\by \in C_1^*.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(C_2^* \subseteq C_1^*\)</span>.</p>
+</div>
+<div class="proof property admonition" id="res-cvx-dual-cone-closed">
+<p class="admonition-title"><span class="caption-number">Property 8.19 </span> (Closedness)</p>
+<div class="property-content section" id="proof-content">
+<p>A dual cone is a closed set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The dual cone of a set <span class="math notranslate nohighlight">\(C\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+C^* = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \geq 0 
+    \Forall \bx \in C \}
+\]</div>
+<p>Fix a <span class="math notranslate nohighlight">\(\bx \in C\)</span> and consider the set</p>
+<div class="math notranslate nohighlight">
+\[
+H_{\bx} = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \geq 0 \}.
+\]</div>
+<p>The set <span class="math notranslate nohighlight">\(H_{\bx}\)</span> is a closed half space.</p>
+<p>We can now see that</p>
+<div class="math notranslate nohighlight">
+\[
+C^* =  \bigcap_{\bx \in C} H_{\bx}.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(C^*\)</span> is an intersection of closed half spaces.
+An arbitrary intersection of closed sets is closed.
+Hence <span class="math notranslate nohighlight">\(C^*\)</span> is closed.</p>
+</div>
+<div class="proof property admonition" id="res-cvx-dual-cone-interior">
+<p class="admonition-title"><span class="caption-number">Property 8.20 </span> (Interior of dual cone)</p>
+<div class="property-content section" id="proof-content">
+<p>The interior of the dual cone <span class="math notranslate nohighlight">\(C^*\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\interior C^* = \{ \by \in \VV^* \ST \langle \bx , \by \rangle &gt; 0 
+    \Forall \bx \in C \setminus \{ \bzero \} \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let</p>
+<div class="math notranslate nohighlight">
+\[
+A = \{ \by \ST \langle \bx , \by \rangle &gt; 0 \Forall \bx \in C \setminus \{ \bzero \} \}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\by \in A\)</span>. By definition <span class="math notranslate nohighlight">\(\by \in C^*\)</span>;
+i.e., <span class="math notranslate nohighlight">\(A \subseteq C^*\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(\langle \bx , \by \rangle &gt; 0\)</span> for every nonzero <span class="math notranslate nohighlight">\(\bx \in C\)</span>,
+hence <span class="math notranslate nohighlight">\(\langle \bx, \by +\bu  \rangle &gt; 0\)</span> for every nonzero <span class="math notranslate nohighlight">\(\bx \in C\)</span>
+and every sufficiently small <span class="math notranslate nohighlight">\(\bu\)</span>. Hence, <span class="math notranslate nohighlight">\(\by \in \interior C^*\)</span>.
+We have shown that <span class="math notranslate nohighlight">\(A \subseteq \interior C^*\)</span>.</p>
+<p>Now, let <span class="math notranslate nohighlight">\(\by \notin A\)</span> but <span class="math notranslate nohighlight">\(\by \in C^*\)</span>.
+Then, <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle = 0\)</span> for some nonzero <span class="math notranslate nohighlight">\(\bx \in C\)</span>. But then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by - t\bx \rangle 
+= \langle \bx, \by \rangle - t \langle \bx, \bx \rangle &lt; 0
+\]</div>
+<p>for all <span class="math notranslate nohighlight">\(t &gt; 0\)</span>. Thus, <span class="math notranslate nohighlight">\(\by \notin \interior C^*\)</span>.</p>
+<p>Hence, <span class="math notranslate nohighlight">\(A = \interior C^*\)</span>.</p>
+</div>
+<div class="proof property admonition" id="res-cvx-nonempty-pointed-dual-cone">
+<p class="admonition-title"><span class="caption-number">Property 8.21 </span> (Non-empty interior implies pointed dual cone)</p>
+<div class="property-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(C\)</span> has a non-empty interior, then its dual cone <span class="math notranslate nohighlight">\(C^*\)</span> is pointed.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C\)</span> have a non-empty interior and assume that its dual cone <span class="math notranslate nohighlight">\(C^*\)</span>
+is not pointed. Then, there exists a non-zero <span class="math notranslate nohighlight">\(\by \in C^*\)</span> such that
+<span class="math notranslate nohighlight">\(-\by \in C^*\)</span> holds too.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \geq 0\)</span> as well as
+<span class="math notranslate nohighlight">\(\langle \bx, -\by \rangle \geq 0\)</span> for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>,
+i.e, <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle = 0\)</span> for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+But this means that <span class="math notranslate nohighlight">\(C\)</span> lies in a hyperplane <span class="math notranslate nohighlight">\(H_{\by, 0}\)</span>
+and hence has an empty interior.
+A contradiction.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvx-subspace-dual-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 8.60 </span> (Dual cone of a subspace)</p>
+<div class="theorem-content section" id="proof-content">
+<p>The dual cone of a subspace <span class="math notranslate nohighlight">\(V \subseteq \VV\)</span> is its
+<a class="reference internal" href="../la/inner_product_spaces.html#def-la-orthogonal-complement">orthogonal complement</a>
+<span class="math notranslate nohighlight">\(V^{\perp}\)</span> defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+V^{\perp} = \{ \by \ST \langle \bv, \by \rangle = 0 \Forall \bv \in V \}.
+\]</div>
+<p>More precisely, <span class="math notranslate nohighlight">\(V^*\)</span> is isomorphic to <span class="math notranslate nohighlight">\(V^{\perp}\)</span> as
+the dual cone is a subset of <span class="math notranslate nohighlight">\(\VV^*\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(V^*\)</span> be the dual cone of <span class="math notranslate nohighlight">\(V\)</span>. If <span class="math notranslate nohighlight">\(\bv \in V^{\perp}\)</span>, then
+by definition, <span class="math notranslate nohighlight">\(\bv \in V^*\)</span>. Thus, <span class="math notranslate nohighlight">\(V^{\perp} \subseteq V^*\)</span>.</p>
+<p>Let us now assume that there is a vector
+<span class="math notranslate nohighlight">\(\by \in V^*\)</span> s.t. <span class="math notranslate nohighlight">\(\by \notin V^{\perp}\)</span>.</p>
+<p>Then, there exists <span class="math notranslate nohighlight">\(\bv \in V\)</span> such that  <span class="math notranslate nohighlight">\(\langle \bv, \by \rangle &gt; 0\)</span>.
+Since <span class="math notranslate nohighlight">\(V\)</span> is a subspace, it follows that <span class="math notranslate nohighlight">\(-\bv \in V\)</span>.
+But then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle -\bv, \by \rangle = - \langle \bv, \by \rangle &lt; 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\by\)</span> cannot belong to <span class="math notranslate nohighlight">\(V^*\)</span>. A contradiction.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(V^* = V^{\perp}\)</span>.</p>
+</div>
+</div>
+<div class="section" id="self-dual-cones">
+<h3><span class="section-number">8.5.1.2. </span>Self Dual Cones<a class="headerlink" href="#self-dual-cones" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-self-dual-cone">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Definition 8.33 </span> (Self dual cone)</p>
+<div class="definition-content section" id="proof-content">
+<p>A cone <span class="math notranslate nohighlight">\(C\)</span> is called self dual if <span class="math notranslate nohighlight">\(C^* = C\)</span>, i.e., it is its own dual cone.</p>
+<p>By equality, we mean that the dual cone <span class="math notranslate nohighlight">\(C^*\)</span> is isomorphic to <span class="math notranslate nohighlight">\(C\)</span>
+since technically <span class="math notranslate nohighlight">\(C^* \subseteq \VV^*\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="ex-nonnegative-orthant-self-dual">
+<p class="admonition-title"><span class="caption-number">Example 8.15 </span> (Nonnegative orthant)</p>
+<div class="example-content section" id="proof-content">
+<p>The non-negative orthant <span class="math notranslate nohighlight">\(\RR^n_+\)</span> is self dual.</p>
+<p>Let <span class="math notranslate nohighlight">\(C = \RR^n_+\)</span>. For some <span class="math notranslate nohighlight">\(\bu, \bv \in C\)</span>,  <span class="math notranslate nohighlight">\(\langle \bu, \bv \rangle \geq 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\RR^n_+ \subseteq C^*\)</span>.</p>
+<p>Now, for some <span class="math notranslate nohighlight">\(\bv \notin \RR^n_+\)</span>, there is at least one component which is negative.
+Without loss of generality, assume that the first component <span class="math notranslate nohighlight">\(v_1 &lt; 0\)</span>.</p>
+<p>Now consider the vector <span class="math notranslate nohighlight">\(\bu = [1, 0, \dots, 0] \in \RR^n_+\)</span>.
+<span class="math notranslate nohighlight">\(\langle \bv, \bu \rangle &lt; 0\)</span>. Thus, <span class="math notranslate nohighlight">\(\bv \notin C^*\)</span>.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(C^* = \RR^n_+\)</span>. It is self dual.</p>
+</div>
+</div><div class="proof example admonition" id="ex-psd-cone-self-dual">
+<p class="admonition-title"><span class="caption-number">Example 8.16 </span> (Positive semidefinite cone)</p>
+<div class="example-content section" id="proof-content">
+<p>The positive semi-definite cone <span class="math notranslate nohighlight">\(\SS^n_+\)</span> is self dual.</p>
+<p>Let <span class="math notranslate nohighlight">\(C = \SS^n_+\)</span> and <span class="math notranslate nohighlight">\(\bY \in C\)</span>. We first show that <span class="math notranslate nohighlight">\(\bY \in C^*\)</span>.</p>
+<p>Choose an arbitrary <span class="math notranslate nohighlight">\(\bX \in C\)</span>.<br />
+Express <span class="math notranslate nohighlight">\(\bX\)</span> in terms of its eigenvalue
+decomposition as</p>
+<div class="math notranslate nohighlight">
+\[
+\bX = \sum \lambda_i \bq_i \bq_i^T.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\bX\)</span> is PSD, hence, <span class="math notranslate nohighlight">\( \lambda_i \geq 0\)</span>.</p>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\langle \bY, \bX \rangle 
+&amp;= \Trace (\bX \bY) = \Trace (\bY \bX) \\
+&amp;= \Trace \left ( \bY \sum \lambda_i \bq_i \bq_i^T \right )\\
+&amp;= \sum \lambda_i \Trace \left (\bY \bq_i \bq_i^T \right) \\
+&amp;= \sum \lambda_i \Trace \left(\bq_i^T \bY \bq_i \right)\\
+&amp;= \sum \lambda_i (\bq_i^T \bY \bq_i).
+\end{aligned}
+\end{split}\]</div>
+<p>But since <span class="math notranslate nohighlight">\(\bY\)</span> is PSD,
+hence <span class="math notranslate nohighlight">\(\bq_i^T \bY \bq_i \geq 0\)</span>.
+Hence <span class="math notranslate nohighlight">\(\langle \bY, \bX \rangle \geq 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\bY \in C^*\)</span>.</p>
+<p>Now, suppose <span class="math notranslate nohighlight">\(\bY \notin \SS^n_+\)</span>.
+Then there exists a vector <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>
+such that <span class="math notranslate nohighlight">\(\bv^T \bY \bv &lt; 0\)</span>.
+Consider the PSD matrix <span class="math notranslate nohighlight">\(\bV = \bv \bv^T\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bY, \bV \rangle 
+= \Trace(\bV\bY) = \Trace (\bv \bv^T \bY) 
+= \Trace (\bv^T \bY \bv) &lt; 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bY \notin C^*\)</span>.</p>
+<p>This completes the proof that <span class="math notranslate nohighlight">\(C^* = C = \SS^n_+\)</span>,
+i.e., the positive semi-definite cone is self dual.</p>
+</div>
+</div></div>
+</div>
+<div class="section" id="polar-cones">
+<h2><span class="section-number">8.5.2. </span>Polar Cones<a class="headerlink" href="#polar-cones" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvx-polar-cone">
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Definition 8.34 </span> (Polar cone)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional inner product space and <span class="math notranslate nohighlight">\(\VV^*\)</span>
+be its dual space.</p>
+<p>Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span>.
+Then, its polar cone <span class="math notranslate nohighlight">\(C^{\circ}\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+C^{\circ} \triangleq \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0
+\Forall \bx \in C \}.
+\]</div>
+</div>
+</div><p>We note that polar cones are just the negative of dual cones.
+Thus, they exhibit similar properties as dual cones.</p>
+<div class="proof example admonition" id="ex-cvx-polar-cone-ray">
+<p class="admonition-title"><span class="caption-number">Example 8.17 </span> (Polar cone of a ray)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx\)</span> be a given nonzero vector.
+Let</p>
+<div class="math notranslate nohighlight">
+\[
+C = \cone \{  \bx \}  = \{ t \bx \ST t \geq 0 \}.
+\]</div>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span>.</p></li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(t \geq 0\)</span>, we have <span class="math notranslate nohighlight">\(\langle t \bx, \by \rangle \leq 0\)</span>.</p></li>
+<li><p>Equivalently, <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span> since <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   C^{\circ} = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0\}.
+   \]</div>
+</li>
+<li><p>Also note that <span class="math notranslate nohighlight">\(C\)</span> is closed and convex.</p></li>
+<li><p>We shall show later in <a class="reference internal" href="#res-cvx-polar-cone-theorem">polar cone theorem</a>
+that</p>
+<div class="math notranslate nohighlight">
+\[
+   (C^{\circ})^{\circ} = C.
+   \]</div>
+</li>
+<li><p>Hence the polar cone of the set</p>
+<div class="math notranslate nohighlight">
+\[
+   \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0\}
+   \]</div>
+<p>is <span class="math notranslate nohighlight">\(\cone \{ \bx \}\)</span>.</p>
+</li>
+</ol>
+</div>
+</div><div class="section" id="id1">
+<h3><span class="section-number">8.5.2.1. </span>Properties<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="proof property admonition" id="res-cvx-polar-cone-is-cone">
+<p class="admonition-title"><span class="caption-number">Property 8.22 </span></p>
+<div class="property-content section" id="proof-content">
+<p>Polar cone is a cone.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span>. Then, by definition,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle \leq 0 \Forall \bx \in C.
+\]</div>
+<p>Thus, for some <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \alpha \by \rangle 
+= \alpha \langle \bx, \by \rangle \leq 0 \Forall \bx \in C.
+\]</div>
+<p>Thus, for every <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span>,
+<span class="math notranslate nohighlight">\(\alpha \by \in C^{\circ}\)</span> for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(C^{\circ}\)</span> is a cone.</p>
+</div>
+<div class="proof property admonition" id="res-cvx-polar-cone-is-convex">
+<p class="admonition-title"><span class="caption-number">Property 8.23 </span></p>
+<div class="property-content section" id="proof-content">
+<p>Polar cone is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\by_1, \by_2 \in C^{\circ}\)</span>. Let <span class="math notranslate nohighlight">\(t \in [0, 1]\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+\by = t \by_1 + (1 - t) \by_2.
+\]</div>
+<p>Then for an arbitrary <span class="math notranslate nohighlight">\(\bx \in C\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle 
+= \langle \bx, t \by_1 + (1-t) \by_2 \rangle
+= t \langle \bx, \by_1 \rangle + (1-t) \langle \bx, \by_2\rangle \leq 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span>.
+Thus, <span class="math notranslate nohighlight">\(C^{\circ}\)</span> is convex.</p>
+</div>
+<p>We note that polar cone is a convex cone even if the original set <span class="math notranslate nohighlight">\(C\)</span>
+is neither convex nor a cone.</p>
+<div class="proof property admonition" id="res-cvx-polar-cone-containment">
+<p class="admonition-title"><span class="caption-number">Property 8.24 </span> (Containment reversal in polar cone)</p>
+<div class="property-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be two subsets of <span class="math notranslate nohighlight">\(\VV\)</span> and let
+<span class="math notranslate nohighlight">\(C_1^{\circ}\)</span> and <span class="math notranslate nohighlight">\(C_2^{\circ}\)</span> be their corresponding polar cones.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+C_1 \subseteq C_2 \implies C_2^{\circ} \subseteq C_1^{\circ}.
+\]</div>
+</div>
+</div><p>The polar cone of the subset contains the polar cone of the superset.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\by \in C_2^{\circ}\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\langle \bx , \by \rangle \leq 0 \Forall \bx \in C_2 \implies 
+\langle \bx , \by \rangle \leq 0 \Forall \bx \in C_1 \implies
+\by \in C_1^{\circ}.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(C_2^{\circ} \subseteq C_1^{\circ}\)</span>.</p>
+</div>
+<div class="proof property admonition" id="res-cvx-polar-cone-closed">
+<p class="admonition-title"><span class="caption-number">Property 8.25 </span> (Closedness)</p>
+<div class="property-content section" id="proof-content">
+<p>A polar cone is a closed set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The polar cone of a set <span class="math notranslate nohighlight">\(C\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+C^{\circ} = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0 
+    \Forall \bx \in C \}
+\]</div>
+<p>Fix a <span class="math notranslate nohighlight">\(\bx \in C\)</span> and consider the set</p>
+<div class="math notranslate nohighlight">
+\[
+H_{\bx} = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0 \}.
+\]</div>
+<p>The set <span class="math notranslate nohighlight">\(H_{\bx}\)</span> is a closed half space.</p>
+<p>We can now see that</p>
+<div class="math notranslate nohighlight">
+\[
+C^{\circ} =  \bigcap_{\bx \in C} H_{\bx}.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(C^{\circ}\)</span> is an intersection of closed half spaces.
+An arbitrary intersection of closed sets is closed.
+Hence <span class="math notranslate nohighlight">\(C^{\circ}\)</span> is closed.</p>
+</div>
+<div class="proof property admonition" id="res-cvx-polar-cone-interior">
+<p class="admonition-title"><span class="caption-number">Property 8.26 </span> (Interior of polar cone)</p>
+<div class="property-content section" id="proof-content">
+<p>The interior of the polar cone <span class="math notranslate nohighlight">\(C^{\circ}\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\interior C^{\circ} = \{ \by \in \VV^* \ST \langle \bx , \by \rangle &lt; 0 
+    \Forall \bx \in C \setminus \{ \bzero \} \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let</p>
+<div class="math notranslate nohighlight">
+\[
+A = \{ \by \ST \langle \bx , \by \rangle &lt; 0 
+   \Forall \bx \in C \setminus \{ \bzero \} \}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\by \in A\)</span>. By definition <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span>;
+i.e., <span class="math notranslate nohighlight">\(A \subseteq C^{\circ}\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(\langle \bx , \by \rangle &lt; 0\)</span> for every nonzero <span class="math notranslate nohighlight">\(\bx \in C\)</span>,
+hence <span class="math notranslate nohighlight">\(\langle \bx, \by +\bu  \rangle &lt; 0\)</span> for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>
+and every sufficiently small <span class="math notranslate nohighlight">\(\bu\)</span>. Hence, <span class="math notranslate nohighlight">\(\by \in \interior C^{\circ}\)</span>.
+We have shown that <span class="math notranslate nohighlight">\(A \subseteq \interior C^{\circ}\)</span>.</p>
+<p>Now, let <span class="math notranslate nohighlight">\(\by \notin A\)</span> but <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span>.
+Then, <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle = 0\)</span> for some nonzero <span class="math notranslate nohighlight">\(\bx \in C\)</span>. But then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by - t\bx \rangle 
+= \langle \bx, \by \rangle - t \langle \bx, \bx \rangle &gt; 0
+\]</div>
+<p>for all <span class="math notranslate nohighlight">\(t &lt; 0\)</span>. Thus, <span class="math notranslate nohighlight">\(\by \notin \interior C^{\circ}\)</span>.</p>
+<p>Hence, <span class="math notranslate nohighlight">\(A = \interior C^{\circ}\)</span>.</p>
+</div>
+<div class="proof property admonition" id="res-cvx-nonempty-pointed-polar-cone">
+<p class="admonition-title"><span class="caption-number">Property 8.27 </span> (Non-empty interior implies pointed polar cone)</p>
+<div class="property-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(C\)</span> has a non-empty interior, then its polar cone <span class="math notranslate nohighlight">\(C^{\circ}\)</span> is pointed.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(C\)</span> have a non-empty interior and assume that its polar cone <span class="math notranslate nohighlight">\(C^{\circ}\)</span>
+is not pointed. Then, there exists a non-zero <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span> such that
+<span class="math notranslate nohighlight">\(-\by \in C^{\circ}\)</span> holds too.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span> as well as
+<span class="math notranslate nohighlight">\(\langle \bx, -\by \rangle \leq 0\)</span> for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>,
+i.e, <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle = 0\)</span> for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+But this means that <span class="math notranslate nohighlight">\(C\)</span> lies in a hyperplane <span class="math notranslate nohighlight">\(H_{\by, 0}\)</span>
+and hence has an empty interior.
+A contradiction.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvx-subspace-polar-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 8.61 </span> (Polar cone of a subspace)</p>
+<div class="theorem-content section" id="proof-content">
+<p>The polar cone of a subspace <span class="math notranslate nohighlight">\(V \subseteq \VV\)</span> is its
+<a class="reference internal" href="../la/inner_product_spaces.html#def-la-orthogonal-complement">orthogonal complement</a>
+<span class="math notranslate nohighlight">\(V^{\perp}\)</span> defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+V^{\perp} = \{ \by \ST \langle \bv, \by \rangle = 0 \Forall \bv \in V \}.
+\]</div>
+<p>More precisely, <span class="math notranslate nohighlight">\(V^{\circ}\)</span> is isomorphic to <span class="math notranslate nohighlight">\(V^{\perp}\)</span> as
+the polar cone is a subset of <span class="math notranslate nohighlight">\(\VV^*\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(V^{\circ}\)</span> be the polar cone of <span class="math notranslate nohighlight">\(V\)</span>. If <span class="math notranslate nohighlight">\(\bv \in V^{\perp}\)</span>, then
+by definition, <span class="math notranslate nohighlight">\(\bv \in V^{\circ}\)</span>. Thus, <span class="math notranslate nohighlight">\(V^{\perp} \subseteq V^{\circ}\)</span>.</p>
+<p>Let us now assume that there is a vector
+<span class="math notranslate nohighlight">\(\by \in V^{\circ}\)</span> s.t. <span class="math notranslate nohighlight">\(\by \notin V^{\perp}\)</span>.</p>
+<p>Then, there exists <span class="math notranslate nohighlight">\(\bv \in V\)</span> such that  <span class="math notranslate nohighlight">\(\langle \bv, \by \rangle &lt; 0\)</span>.
+Since <span class="math notranslate nohighlight">\(V\)</span> is a subspace, it follows that <span class="math notranslate nohighlight">\(-\bv \in V\)</span>.
+But then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle -\bv, \by \rangle = - \langle \bv, \by \rangle &gt; 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\by\)</span> cannot belong to <span class="math notranslate nohighlight">\(V^{\circ}\)</span>. A contradiction.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(V^{\circ} = V^{\perp}\)</span>.</p>
+</div>
+<div class="proof example admonition" id="ex-cvx-polar-cone-nullspace">
+<p class="admonition-title"><span class="caption-number">Example 8.18 </span> (Polar cone of a null space)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \RR^{m \times n}\)</span> and
+<span class="math notranslate nohighlight">\(C = \nullspace \bA\)</span>.</p>
+<ol>
+<li><p>Recall from linear algebra that</p>
+<div class="math notranslate nohighlight">
+\[
+   (\nullspace \bA)^{\perp} = \range \bA^T.
+   \]</div>
+</li>
+<li><p>Hence by <a class="reference internal" href="#res-cvx-subspace-polar-cone">Theorem 8.61</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   C^{\circ} = C^{\perp} = \range \bA^T.
+   \]</div>
+</li>
+</ol>
+<p>We can verify this result easily.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in \range \bA^T\)</span>.</p></li>
+<li><p>Then there exists <span class="math notranslate nohighlight">\(\bu \in \RR^m\)</span> such that
+<span class="math notranslate nohighlight">\(\bv = \bA^T \bu\)</span>.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(\bx \in \nullspace \bA\)</span>, we have <span class="math notranslate nohighlight">\(\bA \bx = \bzero\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx, \bv \rangle
+   = \langle \bx, \bA^T \bu \rangle
+   = \langle \bA \bx, \bu \rangle
+   = \bzero.
+   \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bv \in (\nullspace \bA)^{\circ}\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof property admonition" id="res-cvx-polar-cone-closure">
+<p class="admonition-title"><span class="caption-number">Property 8.28 </span> (Polar cone and closure)</p>
+<div class="property-content section" id="proof-content">
+<p>For any nonempty set <span class="math notranslate nohighlight">\(C\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+C^{\circ} = (\closure C)^{\circ}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that <span class="math notranslate nohighlight">\((\closure C)^{\circ} \subseteq C^{\circ}\)</span>.</p>
+<ol>
+<li><p>We have <span class="math notranslate nohighlight">\(C \subseteq \closure C\)</span>.</p></li>
+<li><p>Hence by <a class="reference internal" href="#res-cvx-polar-cone-containment">Property 8.24</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   (\closure C)^{\circ} \subseteq C^{\circ}.
+   \]</div>
+</li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(C^{\circ} \subseteq (\closure C)^{\circ}\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span>.</p></li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>, we have <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \closure C\)</span>.</p></li>
+<li><p>There exists a sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span> such that <span class="math notranslate nohighlight">\(\lim \bx_k = \bx\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(\langle \bx_k, \by \rangle \leq 0\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence, taking the limit, we have
+<span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span>.</p></li>
+<li><p>Hence for every <span class="math notranslate nohighlight">\(\bx \in \closure C\)</span>, we have <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in  (\closure C)^{\circ}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(C^{\circ} \subseteq (\closure C)^{\circ}\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof property admonition" id="res-cvx-polar-cone-convex-hull">
+<p class="admonition-title"><span class="caption-number">Property 8.29 </span> (Polar cone and convex hull)</p>
+<div class="property-content section" id="proof-content">
+<p>For any nonempty set <span class="math notranslate nohighlight">\(C\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+C^{\circ} = (\convex C)^{\circ}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that <span class="math notranslate nohighlight">\((\convex C)^{\circ} \subseteq C^{\circ}\)</span>.</p>
+<ol>
+<li><p>We have <span class="math notranslate nohighlight">\(C \subseteq \convex C\)</span>.</p></li>
+<li><p>Hence by <a class="reference internal" href="#res-cvx-polar-cone-containment">Property 8.24</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   (\convex C)^{\circ} \subseteq C^{\circ}.
+   \]</div>
+</li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(C^{\circ} \subseteq (\convex C)^{\circ}\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span>.</p></li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>, we have <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \convex C\)</span>.</p></li>
+<li><p>Then there exist <span class="math notranslate nohighlight">\(\bx_1, \dots, \bx_k \in C\)</span> and <span class="math notranslate nohighlight">\(t_1, \dots t_k \geq 0\)</span>
+with <span class="math notranslate nohighlight">\(t_1 + \dots + t_k = 1\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \sum_{i=1}^k t_i \bx_i.
+   \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx, \by \rangle = \sum_{i=1}^k t_i \langle \bx_i, \by \rangle.
+   \]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(\langle \bx_i, \by \rangle \leq 0\)</span> since <span class="math notranslate nohighlight">\(\bx_i \in C\)</span> for every <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p>Hence  <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span>.</p></li>
+<li><p>Hence for every <span class="math notranslate nohighlight">\(\bx \in \convex C\)</span>, we have <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in (\convex C)^{\circ}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(C^{\circ} \subseteq (\convex C)^{\circ}\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof property admonition" id="res-cvx-polar-cone-conic-hull">
+<p class="admonition-title"><span class="caption-number">Property 8.30 </span> (Polar cone and conic hull)</p>
+<div class="property-content section" id="proof-content">
+<p>For any nonempty set <span class="math notranslate nohighlight">\(C\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+C^{\circ} = (\cone C)^{\circ}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that <span class="math notranslate nohighlight">\((\cone C)^{\circ} \subseteq C^{\circ}\)</span>.</p>
+<ol>
+<li><p>We have <span class="math notranslate nohighlight">\(C \subseteq \cone C\)</span>.</p></li>
+<li><p>Hence by <a class="reference internal" href="#res-cvx-polar-cone-containment">Property 8.24</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   (\cone C)^{\circ} \subseteq C^{\circ}.
+   \]</div>
+</li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(C^{\circ} \subseteq (\cone C)^{\circ}\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span>.</p></li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>, we have <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \cone C\)</span>.</p></li>
+<li><p>Then there exist <span class="math notranslate nohighlight">\(\bx_1, \dots, \bx_k \in C\)</span> and <span class="math notranslate nohighlight">\(t_1, \dots t_k \geq 0\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \sum_{i=1}^k t_i \bx_i.
+   \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx, \by \rangle = \sum_{i=1}^k t_i \langle \bx_i, \by \rangle.
+   \]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(\langle \bx_i, \by \rangle \leq 0\)</span> since <span class="math notranslate nohighlight">\(\bx_i \in C\)</span> for every <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p>Hence  <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span>.</p></li>
+<li><p>Hence for every <span class="math notranslate nohighlight">\(\bx \in \cone C\)</span>, we have <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in (\cone C)^{\circ}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(C^{\circ} \subseteq (\cone C)^{\circ}\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-cvx-polar-cone-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 8.62 </span> (Polar cone theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For any nonempty cone <span class="math notranslate nohighlight">\(C\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+(C^{\circ})^{\circ} = \closure \convex C.
+\]</div>
+<p>In particular, if <span class="math notranslate nohighlight">\(C\)</span> is closed and convex, we have</p>
+<div class="math notranslate nohighlight">
+\[
+(C^{\circ})^{\circ} = C.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. First we assume that <span class="math notranslate nohighlight">\(C\)</span> is nonempty, closed and convex
+and show that <span class="math notranslate nohighlight">\((C^{\circ})^{\circ} = C\)</span>.</p>
+<ol>
+<li><p>Pick any <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>By definition, we have
+<span class="math notranslate nohighlight">\(\langle \bx, \by \rangle \leq 0\)</span> for every <span class="math notranslate nohighlight">\(\by \in C^{\circ}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx \in (C^{\circ})^{\circ}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(C \subseteq (C^{\circ})^{\circ}\)</span>.</p></li>
+<li><p>Now choose any <span class="math notranslate nohighlight">\(\bz \in (C^{\circ})^{\circ}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is nonempty, closed and convex, hence
+by projection theorem (<a class="reference internal" href="../cvxopt/projection.html#res-cvx-projection-characterization">Theorem 9.7</a>),
+there exists a unique projection of <span class="math notranslate nohighlight">\(\bz\)</span> on <span class="math notranslate nohighlight">\(C\)</span>,
+denoted by <span class="math notranslate nohighlight">\(\widehat{\bz}\)</span> that satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx - \widehat{\bz}, \bz - \widehat{\bz} \rangle \leq 0 \Forall \bx \in C.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is a cone, hence <span class="math notranslate nohighlight">\(\bzero \in C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is a cone and <span class="math notranslate nohighlight">\(\widehat{\bz} \in C\)</span>, hence <span class="math notranslate nohighlight">\(2 \widehat{\bz} \in C\)</span>.</p></li>
+<li><p>By putting <span class="math notranslate nohighlight">\(\bx = \bzero\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \widehat{\bz}, \bz - \widehat{\bz} \rangle \geq 0.
+   \]</div>
+</li>
+<li><p>By putting <span class="math notranslate nohighlight">\(\bx =2 \widehat{\bz}\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \widehat{\bz}, \bz - \widehat{\bz} \rangle \leq 0.
+   \]</div>
+</li>
+<li><p>Together, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \widehat{\bz}, \bz - \widehat{\bz} \rangle = 0.
+   \]</div>
+</li>
+<li><p>Putting this back into the projection inequality, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx, \bz - \widehat{\bz} \rangle \leq 0 \Forall \bx \in C.
+   \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bz - \widehat{\bz} \in C^{\circ}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bz \in (C^{\circ})^{\circ}\)</span>, hence
+<span class="math notranslate nohighlight">\(\langle \bz, \bz - \widehat{\bz} \langle \leq 0\)</span>.</p></li>
+<li><p>We also have <span class="math notranslate nohighlight">\(-\langle \widehat{\bz}, \bz - \widehat{\bz} \rangle = 0\)</span>.</p></li>
+<li><p>Adding these two, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bz - \widehat{\bz}, \bz - \widehat{\bz} \rangle \leq 0.
+   \]</div>
+</li>
+<li><p>This means that</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bz - \widehat{\bz} \|_2^2 \leq 0.
+   \]</div>
+</li>
+<li><p>It follows that <span class="math notranslate nohighlight">\(\bz  = \widehat{\bz}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bz \in C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\((C^{\circ})^{\circ} \subseteq C\)</span>.</p></li>
+</ol>
+<p>We have so far shown that if <span class="math notranslate nohighlight">\(C\)</span> is a nonempty, closed and convex cone then</p>
+<div class="math notranslate nohighlight">
+\[
+C = (C^{\circ})^{\circ}.
+\]</div>
+<p>Now consider the case where <span class="math notranslate nohighlight">\(C\)</span> is just an arbitrary nonempty cone.</p>
+<ol>
+<li><p>Then <span class="math notranslate nohighlight">\(\closure \convex C\)</span> is a closed convex cone.</p></li>
+<li><p>By previous argument</p>
+<div class="math notranslate nohighlight">
+\[
+   \closure \convex C = (\closure \convex C)^{\circ})^{\circ}.
+   \]</div>
+</li>
+<li><p>But</p>
+<div class="math notranslate nohighlight">
+\[
+   (\closure \convex C)^{\circ} = (\convex C)^{\circ} = C^{\circ}.
+   \]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \closure \convex C = (C^{\circ})^{\circ}.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="normal-cones">
+<h2><span class="section-number">8.5.3. </span>Normal Cones<a class="headerlink" href="#normal-cones" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvx-convex-set-normal-vector">
+<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Definition 8.35 </span> (Normal vector)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S\)</span> be an arbitrary subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+A vector <span class="math notranslate nohighlight">\(\bv \in \VV^*\)</span> is said to be <em>normal</em>
+to <span class="math notranslate nohighlight">\(S\)</span> at a point <span class="math notranslate nohighlight">\(\ba \in S\)</span>
+if <span class="math notranslate nohighlight">\(\bv\)</span> does not make an acute angle with
+any line segment starting from <span class="math notranslate nohighlight">\(\ba\)</span> and ending at some <span class="math notranslate nohighlight">\(\bx \in S\)</span>;
+i.e., if</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx - \ba, \bv \rangle \leq 0 \Forall \bx \in S.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-cone-normal-vec-1">
+<p class="admonition-title"><span class="caption-number">Example 8.19 </span> (Normal vector)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a half space given by:</p>
+<div class="math notranslate nohighlight">
+\[
+C  = \{ \bx \ST \langle \bx, \bb \rangle \leq s\}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\ba\)</span> be any point on the boundary hyperplane of <span class="math notranslate nohighlight">\(C\)</span>
+given by <span class="math notranslate nohighlight">\(\langle \ba, \bb \rangle = s\)</span>.</p>
+<p>Then, <span class="math notranslate nohighlight">\(\bb\)</span> is normal to <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\ba\)</span> since for any <span class="math notranslate nohighlight">\(\bx \in C\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx - \ba , \bb \rangle 
+= \langle \bx, \bb \rangle - \langle \ba, \bb \rangle
+\leq s - s = 0.
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\bb\)</span> points opposite to the direction of the
+halfspace.</p>
+</div>
+</div><div class="proof definition admonition" id="def-cvx-normal-cone">
+<span id="index-4"></span><p class="admonition-title"><span class="caption-number">Definition 8.36 </span> (Normal cone)</p>
+<div class="definition-content section" id="proof-content">
+<p>The set of all vectors normal to a set <span class="math notranslate nohighlight">\(S\)</span> at
+a point <span class="math notranslate nohighlight">\(\ba \in S\)</span>, denoted by <span class="math notranslate nohighlight">\(N_S(\ba)\)</span>, is called the
+<em>normal cone</em> to <span class="math notranslate nohighlight">\(S\)</span> at <span class="math notranslate nohighlight">\(\ba\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+N_S(\ba) \triangleq \{ \bv \in \VV^* \ST 
+   \langle \bx - \ba , \bv \rangle \leq 0 
+   \Forall \bx \in S \}.
+\]</div>
+<p>We customarily define <span class="math notranslate nohighlight">\(N_S(\ba) = \EmptySet\)</span> for any <span class="math notranslate nohighlight">\(\ba \notin S\)</span>.</p>
+</div>
+</div><div class="proof property admonition" id="res-cvx-normal-cone-convex">
+<p class="admonition-title"><span class="caption-number">Property 8.31 </span></p>
+<div class="property-content section" id="proof-content">
+<p>A normal cone is always a convex cone.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(S\)</span> be a subset of <span class="math notranslate nohighlight">\(\VV\)</span> and let <span class="math notranslate nohighlight">\(\ba \in S\)</span>.
+Let <span class="math notranslate nohighlight">\(N\)</span> denote the set of normal vectors to <span class="math notranslate nohighlight">\(S\)</span> at <span class="math notranslate nohighlight">\(\ba\)</span>.
+We have to show that <span class="math notranslate nohighlight">\(N\)</span> is a convex cone;
+i.e., we have to show that <span class="math notranslate nohighlight">\(N\)</span> contains all its conic combinations.</p>
+<p>For any <span class="math notranslate nohighlight">\(\bx \in S\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx - \ba , \bzero \rangle = 0.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bzero \in N\)</span>.</p>
+<p>Assume <span class="math notranslate nohighlight">\(\bu \in N\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx - \ba, \bu \rangle \leq 0 \Forall \bx \in S.
+\]</div>
+<p>But then for any <span class="math notranslate nohighlight">\(t \geq 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx - \ba, t\bu \rangle 
+= t \langle \bx - \ba, \bu \rangle
+\leq 0 \Forall \bx \in S.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(t \bu \in N\)</span>. Thus, <span class="math notranslate nohighlight">\(N\)</span> is closed under
+nonnegative scalar multiplication.</p>
+<p>Now, let <span class="math notranslate nohighlight">\(\bu, \bv \in N\)</span>.
+Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx - \ba, \bu + \bv \rangle 
+=  \langle \bx - \ba, \bu \rangle
+   + \langle \bx - \ba, \bv \rangle
+\leq 0 \Forall \bx \in S.
+\]</div>
+<p>since sum of two nonpositive quantities is nonpositive.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(\bu + \bv \in N\)</span>.
+Thus, <span class="math notranslate nohighlight">\(N\)</span> is closed under vector addition.</p>
+<p>Combining these two observations, <span class="math notranslate nohighlight">\(N\)</span> is closed
+under conic combinations. Hence, <span class="math notranslate nohighlight">\(N\)</span> is a convex cone.</p>
+</div>
+<div class="proof property admonition" id="res-cvx-normal-cone-closed">
+<p class="admonition-title"><span class="caption-number">Property 8.32 </span></p>
+<div class="property-content section" id="proof-content">
+<p>A normal cone is closed.</p>
+<p>Specifically, if <span class="math notranslate nohighlight">\(N_S(\ba)\)</span> is the normal cone
+to a set <span class="math notranslate nohighlight">\(S\)</span> at a point <span class="math notranslate nohighlight">\(\ba \in S\)</span>,
+then:</p>
+<div class="math notranslate nohighlight">
+\[
+N_S(\ba) 
+= \bigcap_{\bx \in S} 
+\{ \bv \in \VV^* \ST \langle \bx - \ba , \bv \rangle \leq 0 \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For some fixed <span class="math notranslate nohighlight">\(\ba \in S\)</span> and any fixed <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>, define:</p>
+<div class="math notranslate nohighlight">
+\[
+H_{-}(\bx - \ba) = \{ \bv \in \VV^* \ST \langle \bx - \ba , \bv \rangle \leq 0 \}.
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(H_{-}(\bx - \ba)\)</span> is a closed <a class="reference internal" href="real_spaces.html#def-halfspace">half-space</a>
+passing through origin of <span class="math notranslate nohighlight">\(\VV^*\)</span> extending opposite to the direction <span class="math notranslate nohighlight">\(\bx - \ba\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bv \in N_S(\ba)\)</span> be a normal vector to <span class="math notranslate nohighlight">\(S\)</span> at <span class="math notranslate nohighlight">\(\ba\)</span>.</p>
+<ol class="simple">
+<li><p>Then, for every <span class="math notranslate nohighlight">\(\bx \in S\)</span>, <span class="math notranslate nohighlight">\(\langle \bx - \ba, \bv \rangle \leq 0\)</span>.</p></li>
+<li><p>Thus,  for every <span class="math notranslate nohighlight">\(\bx \in S\)</span>, <span class="math notranslate nohighlight">\(\bv \in H_{-}(\bx - \ba)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in \bigcap_{\bx \in S} H_{-}(\bx - \ba)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(N_S(\ba) \subseteq \bigcap_{\bx \in S} H_{-}(\bx - \ba)\)</span>.</p></li>
+</ol>
+<p>Going in the opposite direction:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in \bigcap_{\bx \in S} H_{-}(\bx - \ba)\)</span>.</p></li>
+<li><p>Then, for every <span class="math notranslate nohighlight">\(\bx \in S\)</span>, <span class="math notranslate nohighlight">\(\bv \in H_{-}(\bx - \ba)\)</span>.</p></li>
+<li><p>Thus, for every <span class="math notranslate nohighlight">\(\bx \in S\)</span>, <span class="math notranslate nohighlight">\(\langle \bx - \ba , \bv \rangle \leq 0\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv\)</span> is a normal vector to <span class="math notranslate nohighlight">\(S\)</span> at <span class="math notranslate nohighlight">\(\ba\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bv \in N_S(\ba)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bigcap_{\bx \in S} H_{-}(\bx - \ba) \subseteq N_S(\ba)\)</span>.</p></li>
+</ol>
+<p>Combining, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+N_S(\ba) = \bigcap_{\bx \in S} H_{-}(\bx - \ba).
+\]</div>
+<p>Now, since <span class="math notranslate nohighlight">\(N_S(\ba)\)</span> is an arbitrary intersection of closed
+half spaces which are individually closed sets, hence
+<span class="math notranslate nohighlight">\(N_S(\ba)\)</span> is closed.</p>
+<p>Since each half space is convex and intersection of
+convex sets is convex, hence, as a bonus, this proof also
+shows that <span class="math notranslate nohighlight">\(N_S(\ba)\)</span> is convex.</p>
+</div>
+<div class="proof theorem admonition" id="res-cvx-normal-cone-vec-space">
+<p class="admonition-title"><span class="caption-number">Theorem 8.63 </span> (Normal cone of entire space)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C = \VV\)</span>. We wish to compute the
+normal cone <span class="math notranslate nohighlight">\(N_C(\bx)\)</span> at every <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in N_C(\bx)\)</span>.</p></li>
+<li><p>Then we must have</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \by - \bx, \bv \rangle \leq 0 \Forall \by \in \VV. 
+   \]</div>
+</li>
+<li><p>This is equivalent to</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bz, \bv \rangle \leq 0 \Forall \bz \in \VV.
+   \]</div>
+</li>
+<li><p>The only vector that satisfies this inequality is <span class="math notranslate nohighlight">\(\bv = \bzero\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(N_C(\bx) = \{ \bzero \}\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof theorem admonition" id="res-cvxf-normal-cone-unit-ball">
+<p class="admonition-title"><span class="caption-number">Theorem 8.64 </span> (Normal cone of unit ball)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+N_{B[\bzero, 1]} (\bx) = \{ \by \in \VV^* \ST \| \by \|_* \leq \langle \bx, \by \rangle \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The unit ball at origin is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+S = B[\bzero, 1] = \{\bx \in \VV  \ST \| \bx \| \leq 1 \}.
+\]</div>
+<p>Consider <span class="math notranslate nohighlight">\(\bx \in S\)</span>.
+Then, <span class="math notranslate nohighlight">\(\by \in N_S(\bx)\)</span> if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \langle \bz - \bx , \by \rangle \leq 0 \Forall \bz \in S\\
+&amp; \iff \langle \bz , \by \rangle \leq \langle \bx, \by \rangle \Forall \bz \in S\\
+&amp; \iff \underset{\| \bz \|  \leq 1}{\sup} \langle \bz , \by \rangle
+\leq \langle \bx, \by \rangle \\
+&amp; \iff \| \by \|_* \leq \langle \bx, \by \rangle.
+\end{split}\]</div>
+<p>Therefore, for any <span class="math notranslate nohighlight">\(\bx \in S\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+N_S(\bx) = \{ \by \in \VV^* \ST \| \by \|_* \leq \langle \bx, \by \rangle \}.
+\]</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./convex_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="cone.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">8.4. </span>Cones</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="cone_3.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8.6. </span>Cones III</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

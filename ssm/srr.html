@@ -1,0 +1,2181 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12.5. Sparse and Redundant Representations &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12.6. Dictionaries" href="dictionaries.html" />
+    <link rel="prev" title="12.4. Sparsity in Orthonormal Bases" href="onb_sparsity.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ssm/srr.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fssm/srr.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dictionaries">
+   12.5.1. Dictionaries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#redundant-dictionaries-and-sparse-signals">
+   12.5.2. Redundant Dictionaries and Sparse Signals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sparse-approximation-problem">
+   12.5.3. Sparse Approximation Problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synthesis-and-analysis">
+   12.5.4. Synthesis and Analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#p-norms">
+   12.5.5. P-Norms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sparse-signals">
+   12.5.6. Sparse Signals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compressible-signals">
+   12.5.7. Compressible Signals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-term-approximation-of-general-signals">
+     12.5.7.1. K-term Approximation of General Signals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     12.5.7.2. Compressible Signals
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Sparse and Redundant Representations</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dictionaries">
+   12.5.1. Dictionaries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#redundant-dictionaries-and-sparse-signals">
+   12.5.2. Redundant Dictionaries and Sparse Signals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sparse-approximation-problem">
+   12.5.3. Sparse Approximation Problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synthesis-and-analysis">
+   12.5.4. Synthesis and Analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#p-norms">
+   12.5.5. P-Norms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sparse-signals">
+   12.5.6. Sparse Signals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compressible-signals">
+   12.5.7. Compressible Signals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-term-approximation-of-general-signals">
+     12.5.7.1. K-term Approximation of General Signals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     12.5.7.2. Compressible Signals
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="sparse-and-redundant-representations">
+<span id="sec-ssm-srr"></span><h1><span class="section-number">12.5. </span>Sparse and Redundant Representations<a class="headerlink" href="#sparse-and-redundant-representations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dictionaries">
+<h2><span class="section-number">12.5.1. </span>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-ssm-dictionary">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Definition 12.3 </span> (Dictionary)</p>
+<div class="definition-content section" id="proof-content">
+<p>A <em>dictionary</em> for <span class="math notranslate nohighlight">\(\CC^N\)</span> is a finite collection <span class="math notranslate nohighlight">\(\bDDD\)</span> of unit-norm vectors
+which span the whole space.</p>
+<p>The elements of a dictionary are called <em>atoms</em> and they are denoted by <span class="math notranslate nohighlight">\(\phi_{\omega}\)</span>
+where <span class="math notranslate nohighlight">\(\omega\)</span> is drawn from an index set <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
+<p>The dictionary is written as</p>
+<div class="math notranslate nohighlight">
+\[
+\bDDD = \{\phi_{\omega} : \omega \in \Omega \}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\| \phi_{\omega} \|_2 = 1 \Forall \omega \in \Omega
+\]</div>
+<p>and every signal <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \sum_{\omega \in \Omega} c_{\omega} \phi_{\omega}.
+\]</div>
+<p>We use the letter <span class="math notranslate nohighlight">\(D\)</span> to denote the number of elements in the dictionary; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+D = | \Omega |.
+\]</div>
+</div>
+</div><p>This definition is adapted from <span id="id1">[<a class="reference internal" href="../bib.html#id132" title="Joel A Tropp. Greed is good: algorithmic results for sparse approximation. Information Theory, IEEE Transactions on, 50(10):2231–2242, 2004.">35</a>]</span>.</p>
+<p>The indices may have an interpretation, such as the time-frequency or time-scale localization
+of an atom, or they may simply be labels without any underlying meaning.</p>
+<p>Note that the dictionary need not provide a unique representation for any vector <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>,
+but it provides at least one representation for each <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>.</p>
+<p>When <span class="math notranslate nohighlight">\(D=N\)</span> we have a set of unit norm vectors which span the whole of <span class="math notranslate nohighlight">\(\CC^N\)</span>.
+Thus we have a basis (not-necessarily an orthonormal basis).
+A dictionary cannot have <span class="math notranslate nohighlight">\(D &lt; N\)</span>. The more interesting case is when <span class="math notranslate nohighlight">\(D &gt; N\)</span>.</p>
+</div>
+<div class="section" id="redundant-dictionaries-and-sparse-signals">
+<h2><span class="section-number">12.5.2. </span>Redundant Dictionaries and Sparse Signals<a class="headerlink" href="#redundant-dictionaries-and-sparse-signals" title="Permalink to this headline">¶</a></h2>
+<p>With <span class="math notranslate nohighlight">\(D &gt; N\)</span>, clearly there are more atoms than necessary to provide
+a representation of every signal <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>.
+Thus such a dictionary is able provide multiple representations to same vector <span class="math notranslate nohighlight">\(\bx\)</span>.
+We call such dictionaries <em>redundant dictionaries</em> or <em>over-complete dictionaries</em>.</p>
+<p>In contrast a basis with <span class="math notranslate nohighlight">\(D=N\)</span> is called a <em>complete dictionary</em>.
+A special class of signals is those signals which have a sparse representation in a given
+dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p>
+<div class="proof definition admonition" id="def-ssm-d-k-sparse-signal">
+<p class="admonition-title"><span class="caption-number">Definition 12.4 </span> (<span class="math notranslate nohighlight">\((\bDDD,K)\)</span>-sparse signals)</p>
+<div class="definition-content section" id="proof-content">
+<p>A signal <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> is called <span class="math notranslate nohighlight">\((\bDDD,K)\)</span>-sparse if it can be
+expressed as a linear combination of at-most <span class="math notranslate nohighlight">\(K\)</span> atoms from the dictionary
+<span class="math notranslate nohighlight">\(\bDDD\)</span>.</p>
+</div>
+</div><p>Normally, for sparse signals, we have <span class="math notranslate nohighlight">\(K \ll D\)</span>.
+It is usually expected that <span class="math notranslate nohighlight">\(K \ll N\)</span> also holds.</p>
+<p>Let <span class="math notranslate nohighlight">\(\Lambda \subset \Omega\)</span> be a subset of indices with <span class="math notranslate nohighlight">\(|\Lambda|=K\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bx\)</span> be any signal in <span class="math notranslate nohighlight">\(\CC^N\)</span> such that <span class="math notranslate nohighlight">\(\bx\)</span> can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \sum_{\lambda \in \Lambda} b_{\lambda} \phi_{\lambda} \quad \text{where } b_{\lambda}  \in \CC.
+\]</div>
+<p>Note that this is not the only possible representation of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\bDDD\)</span>. This is
+just one of the possible representations of <span class="math notranslate nohighlight">\(\bx\)</span>. The special feature of this representation
+is that it is <span class="math notranslate nohighlight">\(K\)</span>-sparse i.e. only at most <span class="math notranslate nohighlight">\(K\)</span> atoms from the dictionary are being used.</p>
+<p>Now there are <span class="math notranslate nohighlight">\(\binom{D}{K}\)</span> ways in which we can choose a set of <span class="math notranslate nohighlight">\(K\)</span> atoms from the
+dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p>
+<p>Thus the set of <span class="math notranslate nohighlight">\((\bDDD,K)\)</span>-sparse signals is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma_{(\bDDD,K)} = \{\bx \in \CC^N \ST  
+\bx = \sum_{\lambda \in \Lambda} b_{\lambda} \phi_{\lambda}, 
+\quad \Lambda \subseteq \Omega, | \Lambda | = K \}.
+\]</div>
+<p>This set <span class="math notranslate nohighlight">\(\Sigma_{(\bDDD,K)}\)</span> is dependent on the chosen dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+In the sequel, we will simply refer to it as <span class="math notranslate nohighlight">\(\Sigma_K\)</span>.</p>
+<div class="proof example admonition" id="ex-ssm-k-sparse-signal-set-standard-basis">
+<p class="admonition-title"><span class="caption-number">Example 12.15 </span> (<span class="math notranslate nohighlight">\(K\)</span>-sparse signals for standard basis)</p>
+<div class="example-content section" id="proof-content">
+<p>For the special case where <span class="math notranslate nohighlight">\(\bDDD\)</span> is nothing but the standard basis of <span class="math notranslate nohighlight">\(\CC^N\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma_K = \{ \bx  \in \CC^N \ST \| \bx \|_0 \leq K\};
+\]</div>
+<p>i.e., the set of signals which have <span class="math notranslate nohighlight">\(K\)</span> or less non-zero elements.</p>
+</div>
+</div><div class="proof example admonition" id="ex-ssm-k-sparse-signal-set-onb">
+<p class="admonition-title"><span class="caption-number">Example 12.16 </span> (<span class="math notranslate nohighlight">\(K\)</span>-sparse signals for orthonormal basis)</p>
+<div class="example-content section" id="proof-content">
+<p>In contrast if we choose an orthonormal basis <span class="math notranslate nohighlight">\(\Psi\)</span> such that every
+<span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \Psi \ba
+\]</div>
+<p>then with the dictionary <span class="math notranslate nohighlight">\(\bDDD = \Psi\)</span>, the set of <span class="math notranslate nohighlight">\(K\)</span>-sparse signals is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma_K = \{ \bx = \Psi \ba \ST \| \ba \|_0 \leq K\}.
+\]</div>
+</div>
+</div><p>We also note that for a specific choice of <span class="math notranslate nohighlight">\(\Lambda \subseteq \Omega\)</span>
+with <span class="math notranslate nohighlight">\(|\Lambda| = K\)</span>, the set of vectors</p>
+<div class="math notranslate nohighlight">
+\[
+\{\bx \in \CC^N \ST 
+\bx = \sum_{\lambda \in \Lambda} b_{\lambda} \phi_{\lambda} \}
+= \span \{\phi_{\lambda} \ST \lambda \in \Lambda \} 
+\]</div>
+<p>form a subspace of <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p>
+<p>So we have <span class="math notranslate nohighlight">\(\binom{D}{K}\)</span> <span class="math notranslate nohighlight">\(K\)</span>-sparse subspaces contained in the dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+And the <span class="math notranslate nohighlight">\(K\)</span>-sparse signals lie in the <em>union of these subspaces</em>.</p>
+</div>
+<div class="section" id="sparse-approximation-problem">
+<span id="sec-ssm-sparse-approximation-problem"></span><h2><span class="section-number">12.5.3. </span>Sparse Approximation Problem<a class="headerlink" href="#sparse-approximation-problem" title="Permalink to this headline">¶</a></h2>
+<p>In sparse approximation problem, we attempt to approximate a given signal <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> as
+a linear combination of <span class="math notranslate nohighlight">\(K\)</span> atoms from the dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> where <span class="math notranslate nohighlight">\(K \ll N\)</span> and
+typically <span class="math notranslate nohighlight">\(N \ll D\)</span>;
+i.e., the number of atoms in a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> is typically much larger
+than the ambient signal space dimension <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p>Naturally, we wish to obtain a best possible sparse representation of <span class="math notranslate nohighlight">\(\bx\)</span>
+over the atoms <span class="math notranslate nohighlight">\(\phi_{\omega} \in \bDDD\)</span> which minimizes the approximation error.</p>
+<p>Let <span class="math notranslate nohighlight">\(\Lambda\)</span> denote the index set of atoms which are used to create a <span class="math notranslate nohighlight">\(K\)</span>-sparse
+representation of <span class="math notranslate nohighlight">\(\bx\)</span> where <span class="math notranslate nohighlight">\(\Lambda \subset \Omega\)</span> with <span class="math notranslate nohighlight">\(|\Lambda| = K\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bx_{\Lambda}\)</span> denote an approximation of <span class="math notranslate nohighlight">\(\bx\)</span>
+over the set of atoms indexed by <span class="math notranslate nohighlight">\(\Lambda\)</span>.</p>
+<p>Then we can write  <span class="math notranslate nohighlight">\(\bx_{\Lambda}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bx_{\Lambda} = \sum_{\lambda \in \Lambda} b_{\lambda} \phi_{\lambda} 
+\quad \text{where } b_{\lambda}  \in \CC.
+\]</div>
+<div class="docutils">
+<p>We put all complex valued coefficients <span class="math notranslate nohighlight">\(b_{\lambda}\)</span>  in the sum into a list <span class="math notranslate nohighlight">\(\bb_{\Lambda}\)</span>.
+The approximation error is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\be  = \| \bx - \bx_{\Lambda} \|_2.
+\]</div>
+<p>Clearly we would like to minimize the approximation error over all possible choices of <span class="math notranslate nohighlight">\(K\)</span> atoms
+and corresponding set of coefficients <span class="math notranslate nohighlight">\(\bb_{\Lambda}\)</span>.</p>
+<p>Thus the sparse approximation problem can be cast as a minimization problem given by</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-sparse-approximation">
+<span class="eqno">(12.17)<a class="headerlink" href="#equation-eq-ssm-sparse-approximation" title="Permalink to this equation">¶</a></span>\[\underset{|\Lambda| = K}{\text{min}} \, \underset{\bb_{\Lambda}}{\text{min}} 
+\left \| \bx -  \sum_{\lambda \in \Lambda} b_{\lambda} \phi_{\lambda} \right \|_2.\]</div>
+<p>If we choose a particular <span class="math notranslate nohighlight">\(\Lambda\)</span>, then the inner minimization problem becomes
+a straight-forward least squares problem.
+But there are <span class="math notranslate nohighlight">\(\binom{D}{K}\)</span> possible choices of <span class="math notranslate nohighlight">\(\Lambda\)</span> and solving the
+inner least squares problem for each of them becomes prohibitively expensive.</p>
+<p>We reemphasize here that in this formulation we are using a <em>fixed</em> dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>
+while the vector <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> is <em>arbitrary</em>.</p>
+<p>This problem is known as <span class="math notranslate nohighlight">\((\bDDD, K)\)</span>-SPARSE approximation problem.</p>
+<p>A related problem is known as <span class="math notranslate nohighlight">\((\bDDD, K)\)</span>-EXACT-SPARSE problem
+where it is known a-priori that <span class="math notranslate nohighlight">\(\bx\)</span> is a linear combination of at-most <span class="math notranslate nohighlight">\(K\)</span> atoms
+from the given dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> i.e. <span class="math notranslate nohighlight">\(\bx\)</span> is a <span class="math notranslate nohighlight">\(K\)</span>-sparse signal as
+defined above for the dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p>
+<p>This formulation simplifies the minimization problem <a class="reference internal" href="#equation-eq-ssm-sparse-approximation">(12.17)</a> since
+it is known a priori that for <span class="math notranslate nohighlight">\(K\)</span>-sparse signals, a <span class="math notranslate nohighlight">\(0\)</span> approximation error can be achieved.
+The only problem is to find a set of subspaces from the <span class="math notranslate nohighlight">\(\binom{D}{K}\)</span> possible <span class="math notranslate nohighlight">\(K\)</span>-sparse
+subspaces which are able to provide a <span class="math notranslate nohighlight">\(K\)</span>-sparse representation of <span class="math notranslate nohighlight">\(\bx\)</span> and among them
+choose one. It is imperative to note that even the <span class="math notranslate nohighlight">\(K\)</span>-sparse representation need not
+be unique.</p>
+<p>Clearly the EXACT-SPARSE problem is simpler than the SPARSE approximation problem.
+Thus if EXACT-SPARSE problem is NP-Hard then so is the harder SPARSE-approximation problem.
+It is expected that solving the EXACT-SPARSE problem will provide insights into solving the
+SPARSE problem.</p>
+<p>In <a class="reference internal" href="onb_sparsity.html#res-ssm-sparse-unique-2onb">Theorem 12.8</a> we identified conditions
+under which a sparse representation for a given vector <span class="math notranslate nohighlight">\(\bx\)</span> in a two-ortho-basis is unique.
+It would be useful to get similar conditions for general dictionaries. such conditions
+would help us guarantee the uniqueness of EXACT-SPARSE problem.</p>
+</div>
+</div>
+<div class="section" id="synthesis-and-analysis">
+<h2><span class="section-number">12.5.4. </span>Synthesis and Analysis<a class="headerlink" href="#synthesis-and-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The atoms of a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> can be organized into a <span class="math notranslate nohighlight">\(N \times D\)</span> matrix as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi \triangleq \begin{bmatrix}
+\phi_{\omega_1} &amp; \phi_{\omega_2} &amp; \dots &amp; \phi_{\omega_D}
+\end{bmatrix}.
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega = \{\omega_1, \omega_2, \dots, \omega_N\}\)</span> is the index set for the atoms
+of <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+We recall that <span class="math notranslate nohighlight">\(\phi_{\omega} \in \CC^N\)</span>, hence they have a column
+vector representation in the standard basis for <span class="math notranslate nohighlight">\(\CC^N\)</span>.
+The order of columns doesn’t matter as long as it remains fixed once chosen.</p>
+<p>Thus in matrix terminology a representation of <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> in the dictionary can
+be written as</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx = \Phi \bb
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bb \in \CC^D\)</span> is a vector of coefficients to produce a superposition <span class="math notranslate nohighlight">\(\bx\)</span>
+from the atoms of dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+Clearly with <span class="math notranslate nohighlight">\(D &gt; N\)</span>, <span class="math notranslate nohighlight">\(\bb\)</span> is not unique.
+Rather for every vector
+<span class="math notranslate nohighlight">\(\bz \in \NullSpace(\Phi)\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi (\bb + \bz) = \Phi \bb + \Phi \bz = \bx + \bzero = \bx.
+\]</div>
+<div class="proof definition admonition" id="def:ssm:dictionary:synthesis_matrix">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Definition 12.5 </span> (Synthesis matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>The matrix <span class="math notranslate nohighlight">\(\Phi\)</span> is called a <em>synthesis matrix</em> since <span class="math notranslate nohighlight">\(\bx\)</span>
+is synthesized from the columns of
+<span class="math notranslate nohighlight">\(\Phi\)</span> with the coefficient vector <span class="math notranslate nohighlight">\(\bb\)</span>.</p>
+</div>
+</div><p>We can also view the synthesis matrix <span class="math notranslate nohighlight">\(\Phi\)</span> as a linear operator from <span class="math notranslate nohighlight">\(\CC^D\)</span> to <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p>
+<p>There is another way to look at <span class="math notranslate nohighlight">\(\bx\)</span> through <span class="math notranslate nohighlight">\(\Phi\)</span>.</p>
+<div class="proof definition admonition" id="def-ssm-dict-analysis-matrix">
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Definition 12.6 </span> (Analysis matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>The conjugate transpose <span class="math notranslate nohighlight">\(\Phi^H\)</span> of the synthesis matrix <span class="math notranslate nohighlight">\(\Phi\)</span> is called the <em>analysis matrix</em>.
+It maps a given vector <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> to a list of inner products with the dictionary:</p>
+<div class="math notranslate nohighlight">
+\[
+\bc = \Phi^H \bx 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bc \in \CC^D\)</span>.</p>
+</div>
+</div><p>Note that in general <span class="math notranslate nohighlight">\(\bx \neq \Phi (\Phi^H \bx)\)</span> unless <span class="math notranslate nohighlight">\(\bDDD\)</span> is an orthonormal basis.</p>
+<div class="proof definition admonition" id="def-ssm-d-k-exact-sparse-problem">
+<p class="admonition-title"><span class="caption-number">Definition 12.7 </span> (<span class="math notranslate nohighlight">\((\bDDD, K)\)</span> EXACT SPARSE problem)</p>
+<div class="definition-content section" id="proof-content">
+<p>With the help of synthesis matrix <span class="math notranslate nohighlight">\(\Phi\)</span>, the <span class="math notranslate nohighlight">\((\bDDD, K)\)</span> EXACT SPARSE problem
+can now be written as</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-d-k-exact-sparse-problem">
+<span class="eqno">(12.18)<a class="headerlink" href="#equation-eq-ssm-d-k-exact-sparse-problem" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{\ba}{\text{minimize}} 
+&amp; &amp;  \| \ba \|_0 \\
+&amp; \text{subject to }
+&amp; &amp;  \bx = \Phi \ba\\
+&amp; \text{and }
+&amp; &amp;  \| \ba \|_0 \leq K\end{split}\]</div>
+</div>
+</div><p>If <span class="math notranslate nohighlight">\(\bx \notin \Sigma_K\)</span>, then the EXACT SPARSE problem is infeasible.
+Otherwise, we are looking to find the sparsest possible solution.</p>
+<div class="proof definition admonition" id="def-ssm-d-k-sparse-approx-prob">
+<p class="admonition-title"><span class="caption-number">Definition 12.8 </span> (<span class="math notranslate nohighlight">\((\bDDD, K)\)</span> SPARSE approximation problem)</p>
+<div class="definition-content section" id="proof-content">
+<p>With the help of synthesis matrix <span class="math notranslate nohighlight">\(\Phi\)</span>, the <span class="math notranslate nohighlight">\((\bDDD, K)\)</span> SPARSE approximation
+problem can now be written as</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-d-k-sparse-approx-problem">
+<span class="eqno">(12.19)<a class="headerlink" href="#equation-eq-ssm-d-k-sparse-approx-problem" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{\ba}{\text{minimize}} 
+&amp; &amp;  \| \bx - \Phi \ba \|_2 \\
+&amp; \text{subject to }
+&amp; &amp;  \| \ba \|_0 \leq K.\end{split}\]</div>
+</div>
+</div><p>This problem can be visualized as a projection of <span class="math notranslate nohighlight">\(\bx\)</span> on to
+the set <span class="math notranslate nohighlight">\(\Sigma_K\)</span>. Hence, it always has a solution.</p>
+</div>
+<div class="section" id="p-norms">
+<h2><span class="section-number">12.5.5. </span>P-Norms<a class="headerlink" href="#p-norms" title="Permalink to this headline">¶</a></h2>
+<p>There are some simple and useful results on relationships between
+different <span class="math notranslate nohighlight">\(p\)</span>-norms listed in this section. We also discuss
+some interesting properties of <span class="math notranslate nohighlight">\(l_1\)</span>-norm specifically.</p>
+<div class="proof definition admonition" id="def:ssm:sign_vector">
+<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Definition 12.9 </span> (Complex sign vector)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bv \in \CC^N\)</span>. Let the entries in <span class="math notranslate nohighlight">\(\bv\)</span> be represented as</p>
+<div class="math notranslate nohighlight">
+\[
+v_k = r_k \exp (i \theta_k)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(r_k = | v_k |\)</span> with the convention that <span class="math notranslate nohighlight">\(\theta_k = 0\)</span>
+whenever <span class="math notranslate nohighlight">\(r_k = 0\)</span>.</p>
+<p>The sign vector for <span class="math notranslate nohighlight">\(\bv\)</span> denoted by <span class="math notranslate nohighlight">\(\sgn(\bv)\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\sgn(\bv)  = \begin{bmatrix}\sgn(v_1) \\ \vdots \\ \sgn(v_N)  \end{bmatrix}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\sgn(v_k) = \begin{cases}
+\exp (i \theta_k) &amp; \text{ if } r_k \neq 0;\\
+0 &amp; \text{ if } r_k = 0.
+\end{cases}
+\end{split}\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res:ssm:l1_norm_as_inner_product_with_sign_vector">
+<p class="admonition-title"><span class="caption-number">Theorem 12.9 </span> (<span class="math notranslate nohighlight">\(\ell_1\)</span> norm as product of vector with its sign)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For any <span class="math notranslate nohighlight">\(\bv \in \CC^N\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_1 = \sgn(\bv)^H \bv = \langle \bv , \sgn(\bv) \rangle.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This follows from:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_1 = \sum_{k=1}^N r_k 
+= \sum_{k=1}^N \left [r_k e^{i \theta_k} \right ] e^{- i \theta_k} 
+= \sum_{k=1}^N v_k e^{- i \theta_k} = \sgn(\bv)^H \bv.
+\]</div>
+<p>Note that whenever <span class="math notranslate nohighlight">\(v_k = 0\)</span>,
+corresponding <span class="math notranslate nohighlight">\(0\)</span> entry in <span class="math notranslate nohighlight">\(\sgn(\bv)\)</span> has no effect on the sum.</p>
+</div>
+<div class="proof theorem admonition" id="lem:ssm:l1_norm_l2_bounds">
+<p class="admonition-title"><span class="caption-number">Theorem 12.10 </span> (Equivalence of <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> norms)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(\bv \in \CC^N\)</span>.  Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_2 \leq \| \bv\|_1 \leq \sqrt{N} \| \bv \|_2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For the lower bound, we go as follows</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_2^2 
+= \sum_{i=1}^N | v_i|^2  
+\leq \left ( \sum_{i=1}^N | v_i|^2  + 2 \sum_{i, j, i \neq j} | v_i | | v_j| \right )
+= \left ( \sum_{i=1}^N | v_i| \right )^2 = \| \bv \|_1^2.
+\]</div>
+<p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_2 \leq \| \bv \|_1.
+\]</div>
+<p>We can write <span class="math notranslate nohighlight">\(\ell_1\)</span> norm as</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_1 = \langle \bv, \sgn (\bv) \rangle.
+\]</div>
+<p>By Cauchy-Schwartz inequality we have</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bv, \sgn (\bv) \rangle \leq  \| \bv \|_2  \| \sgn (\bv) \|_2. 
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\sgn(\bv)\)</span> can have at most <span class="math notranslate nohighlight">\(N\)</span> non-zero values, each with magnitude 1,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \sgn (\bv) \|_2^2 \leq N 
+\implies \| \sgn (\bv) \|_2 \leq \sqrt{N}.
+\]</div>
+<p>Thus, we get</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_1  \leq \sqrt{N} \| \bv \|_2.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res:ssm:l2_upper_bound_max_norm">
+<p class="admonition-title"><span class="caption-number">Theorem 12.11 </span> (Equivalence of <span class="math notranslate nohighlight">\(\ell_2\)</span> and <span class="math notranslate nohighlight">\(\ell_{\infty}\)</span> norms)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bv \in \CC^N\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_2 \leq \sqrt{N} \| \bv \|_{\infty}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This follows from:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_2^2 
+= \sum_{i=1}^N | v_i |^2 
+\leq N \underset{1 \leq i \leq N}{\max} ( | v_i |^2) 
+= N \| \bv \|_{\infty}^2.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_2 \leq \sqrt{N} \| \bv \|_{\infty}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res:ssm:p_q_norm_bounds">
+<p class="admonition-title"><span class="caption-number">Theorem 12.12 </span> (Relationship between <span class="math notranslate nohighlight">\(p\)</span>-norms)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bv \in \CC^N\)</span>.
+Let <span class="math notranslate nohighlight">\(1 \leq p, q \leq \infty\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_q \leq \| \bv \|_p \text{ whenever } p \leq q.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. TBD</p>
+</div>
+<div class="proof theorem admonition" id="res:ssm:one_vec_l1_norm">
+<p class="admonition-title"><span class="caption-number">Theorem 12.13 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bone \in \CC^N\)</span> be the vector of all ones; i.e., <span class="math notranslate nohighlight">\(\bone = (1, \dots, 1)\)</span>.
+Let <span class="math notranslate nohighlight">\(\bv \in \CC^N\)</span> be some arbitrary vector.
+Let <span class="math notranslate nohighlight">\(| \bv |\)</span> denote the vector of
+absolute values of entries in <span class="math notranslate nohighlight">\(\bv\)</span>;
+i.e., <span class="math notranslate nohighlight">\(|v|_i = |v_i| \Forall 1 \leq i \leq N\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_1 = \bone^T | \bv | = \bone^H | \bv |.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This follows from:</p>
+<div class="math notranslate nohighlight">
+\[
+\bone^T | \bv | = \sum_{i=1}^N  | v |_i =   \sum_{i=1}^N  | v_i | = \| \bv \|_1.
+\]</div>
+<p>Finally since <span class="math notranslate nohighlight">\(\bone\)</span> consists only of real entries, hence its transpose and Hermitian
+transpose are same.</p>
+</div>
+<div class="proof theorem admonition" id="res:ssm:ones_matrix_l1_norm">
+<p class="admonition-title"><span class="caption-number">Theorem 12.14 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\OneMat \in \CC^{N \times N}\)</span> be a square matrix of all ones. Let <span class="math notranslate nohighlight">\(\bv \in \CC^N\)</span>
+be some arbitrary vector.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+|\bv|^T \OneMat | \bv | = \| \bv \|_1^2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We know that</p>
+<div class="math notranslate nohighlight">
+\[
+\OneMat = \bone \bone^T
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+|\bv|^T \OneMat | \bv |  
+= |\bv|^T  \bone \bone^T | \bv |  
+= (\bone^T | \bv | )^T (\bone^T | \bv |) 
+=  \| \bv \|_1 \| \bv \|_1 = \| \bv \|_1^2.
+\]</div>
+<p>We used the fact that <span class="math notranslate nohighlight">\(\| \bv \|_1 = \bone^T | \bv |\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res:ssm:k_th_largest_entry_l1_norm">
+<p class="admonition-title"><span class="caption-number">Theorem 12.15 </span> (An upper bound on the <span class="math notranslate nohighlight">\(k\)</span>-th largest value)</p>
+<div class="theorem-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(k\)</span>-th largest (magnitude) entry in a vector
+<span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> denoted by <span class="math notranslate nohighlight">\(x_{(k)}\)</span> obeys</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-k-th-largest-entry-l1-norm">
+<span class="eqno">(12.20)<a class="headerlink" href="#equation-eq-ssm-k-th-largest-entry-l1-norm" title="Permalink to this equation">¶</a></span>\[| x_{(k)} | \leq  \frac{\| \bx \|_1}{k}.\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(n_1, n_2, \dots, n_N\)</span> be a permutation of <span class="math notranslate nohighlight">\(\{ 1, 2, \dots, N \}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+|x_{n_1} | \geq  | x_{n_2} | \geq \dots \geq  | x_{n_N} |.
+\]</div>
+<p>Thus, the <span class="math notranslate nohighlight">\(k\)</span>-th largest entry in <span class="math notranslate nohighlight">\(\bx\)</span> is <span class="math notranslate nohighlight">\(x_{n_k}\)</span>.
+It is clear that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_1 = \sum_{i=1}^N | x_i | = \sum_{i=1}^N |x_{n_i} |.
+\]</div>
+<p>Obviously</p>
+<div class="math notranslate nohighlight">
+\[
+|x_{n_1} | \leq \sum_{i=1}^N |x_{n_i} | = \| \bx \|_1.
+\]</div>
+<p>Similarly</p>
+<div class="math notranslate nohighlight">
+\[
+k |x_{n_k} | = |x_{n_k} | + \dots + |x_{n_k} |
+\leq |x_{n_1} | + \dots + |x_{n_k} | 
+\leq \sum_{i=1}^N |x_{n_i} | 
+\leq  \| \bx \|_1.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+|x_{n_k} |  \leq \frac{\| \bx \|_1}{k}.
+\]</div>
+</div>
+</div>
+<div class="section" id="sparse-signals">
+<h2><span class="section-number">12.5.6. </span>Sparse Signals<a class="headerlink" href="#sparse-signals" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>In this subsection we explore some useful properties of <span class="math notranslate nohighlight">\(\Sigma_K\)</span>,
+the set of <span class="math notranslate nohighlight">\(K\)</span>-sparse signals in standard basis
+for <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p>
+<p>We recall that</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma_K  = \{ \bx \in \CC^N \ST \| \bx \|_0 \leq K \}.
+\]</div>
+<p>We established before that this set is a union of <span class="math notranslate nohighlight">\(\binom{N}{K}\)</span> subspaces of <span class="math notranslate nohighlight">\(\CC^N\)</span> each of which
+is is constructed by an index set <span class="math notranslate nohighlight">\(\Lambda \subset \{1, \dots, N \}\)</span> with <span class="math notranslate nohighlight">\(| \Lambda | = K\)</span> choosing
+<span class="math notranslate nohighlight">\(K\)</span> specific dimensions of <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p>
+<p>We first present some results which connect the <span class="math notranslate nohighlight">\(l_1\)</span>, <span class="math notranslate nohighlight">\(l_2\)</span> and <span class="math notranslate nohighlight">\(l_{\infty}\)</span> norms of vectors
+in <span class="math notranslate nohighlight">\(\Sigma_K\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="lem:u_sigma_k_norms">
+<p class="admonition-title"><span class="caption-number">Theorem 12.16 </span> (Relation between norms of sparse vectors)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(\bu \in \Sigma_K\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\| \bu\|_1}{\sqrt{K}} \leq \| \bu \|_2 \leq \sqrt{K} \| \bu \|_{\infty}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Due to <a class="reference internal" href="#res:ssm:l1_norm_as_inner_product_with_sign_vector">Theorem 12.9</a>,
+we can write <span class="math notranslate nohighlight">\(\ell_1\)</span> norm as</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bu \|_1 = \langle \bu, \sgn (\bu) \rangle.
+\]</div>
+<p>By Cauchy-Schwartz inequality we have</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bu, \sgn (\bu) \rangle \leq  \| \bu \|_2  \| \sgn (\bu) \|_2 
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\bu \in \Sigma_K\)</span>,
+<span class="math notranslate nohighlight">\(\sgn(\bu)\)</span> can have at most <span class="math notranslate nohighlight">\(K\)</span> non-zero values each with magnitude 1.
+Thus, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \sgn (\bu) \|_2^2 \leq K \implies \| \sgn (\bu) \|_2 \leq \sqrt{K}.
+\]</div>
+<p>Thus we get the lower bound</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bu \|_1 \leq \| \bu \|_2 \sqrt{K}
+\implies \frac{\| \bu \|_1}{\sqrt{K}} \leq \| \bu \|_2.
+\]</div>
+<p>Now <span class="math notranslate nohighlight">\(| u_i | \leq \max(| u_i |) = \| \bu \|_{\infty}\)</span>.
+So we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bu \|_2^2 = \sum_{i= 1}^{N} | u_i |^2 \leq  K \| \bu \|_{\infty}^2
+\]</div>
+<p>since there are only <span class="math notranslate nohighlight">\(K\)</span> non-zero terms in the expansion of <span class="math notranslate nohighlight">\(\| \bu \|_2^2\)</span>.
+This establishes the upper bound:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bu \|_2 \leq \sqrt{K} \| \bu \|_{\infty}.
+\]</div>
+</div>
+</div>
+<div class="section" id="compressible-signals">
+<h2><span class="section-number">12.5.7. </span>Compressible Signals<a class="headerlink" href="#compressible-signals" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection, we first look at some general results and definitions
+related to <span class="math notranslate nohighlight">\(K\)</span>-term approximations of arbitrary signals <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>.
+We then define the notion of a compressible signal and study properties related to it.</p>
+<div class="section" id="k-term-approximation-of-general-signals">
+<h3><span class="section-number">12.5.7.1. </span>K-term Approximation of General Signals<a class="headerlink" href="#k-term-approximation-of-general-signals" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def:ssm:signal_restriction">
+<span id="index-4"></span><p class="admonition-title"><span class="caption-number">Definition 12.10 </span> (Restriction of a signal)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>.
+Let <span class="math notranslate nohighlight">\(T \subset \{ 1, 2, \dots, N\}\)</span> be any index set.
+Further let</p>
+<div class="math notranslate nohighlight">
+\[
+T = \{t_1, t_2, \dots, t_{|T|}\}
+\]</div>
+<p>such that</p>
+<div class="math notranslate nohighlight">
+\[
+t_1 &lt; t_2 &lt; \dots &lt; t_{|T|}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bx_T \in \CC^{|T|}\)</span> be defined as</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-signal-restriction">
+<span class="eqno">(12.21)<a class="headerlink" href="#equation-eq-ssm-signal-restriction" title="Permalink to this equation">¶</a></span>\[\bx_T = \begin{pmatrix}
+x_{t_1} &amp; x_{t_2}  &amp; \dots &amp; x_{t_{|T|}}
+\end{pmatrix}.\]</div>
+<p>Then <span class="math notranslate nohighlight">\(\bx_T\)</span> is a <em>restriction</em> of the signal <span class="math notranslate nohighlight">\(\bx\)</span> on the index set <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>Alternatively let <span class="math notranslate nohighlight">\(\bx_T \in \CC^N\)</span> be defined as</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-signal-mask">
+<span class="eqno">(12.22)<a class="headerlink" href="#equation-eq-ssm-signal-mask" title="Permalink to this equation">¶</a></span>\[\begin{split}\bx_{T}(i) = \begin{cases}
+\bx(i) &amp; \text{ if } i \in T;\\
+0 &amp; \text{ otherwise}.
+\end{cases}\end{split}\]</div>
+<p>In other words, <span class="math notranslate nohighlight">\(\bx_T \in \CC^N\)</span> keeps the entries in <span class="math notranslate nohighlight">\(\bx\)</span>
+indexed by <span class="math notranslate nohighlight">\(T\)</span> while sets all other entries to 0.
+Then we say  that <span class="math notranslate nohighlight">\(\bx_T\)</span> is obtained by <em>masking</em> <span class="math notranslate nohighlight">\(\bx\)</span> with <span class="math notranslate nohighlight">\(T\)</span>.</p>
+</div>
+</div><p>As an abuse of notation, we will use any of the two definitions
+whenever we are referring to <span class="math notranslate nohighlight">\(\bx_T\)</span>.
+The definition being used should be obvious from the context.</p>
+<div class="proof example admonition" id="ex-ssm-signal-restriction-1">
+<p class="admonition-title"><span class="caption-number">Example 12.17 </span> (Restrictions on index sets)</p>
+<div class="example-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\bx = \begin{pmatrix}
+-1 &amp; 5 &amp; 8 &amp; 0 &amp; 0 &amp; -3 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix} \in \CC^{10}.
+\]</div>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+T = \{ 1, 3, 7, 8\}.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+\bx_T = \begin{pmatrix}
+-1 &amp; 0 &amp; 8 &amp; 0 &amp; 0 &amp;  0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix} \in \CC^{10}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(|T| = 4\)</span>, sometimes we will also write</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \begin{pmatrix}
+-1 &amp; 8 &amp; 0 &amp; 0
+\end{pmatrix} \in \CC^4.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def:ssm:k_term_signal_approximation">
+<span id="index-5"></span><p class="admonition-title"><span class="caption-number">Definition 12.11 </span> (<span class="math notranslate nohighlight">\(K\)</span>-term signal approximation)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> be an arbitrary signal.
+Consider any index set <span class="math notranslate nohighlight">\(T \subset \{1, \dots, N \}\)</span>
+with <span class="math notranslate nohighlight">\(|T| = K\)</span>.
+Then <span class="math notranslate nohighlight">\(\bx_T\)</span> is a <em><span class="math notranslate nohighlight">\(K\)</span>-term approximation</em> of <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</div>
+</div><p>Clearly for any <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>
+there are <span class="math notranslate nohighlight">\(\binom{N}{K}\)</span> possible <span class="math notranslate nohighlight">\(K\)</span>-term approximations of <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<div class="proof example admonition" id="ex-ssm-k-term-approx-1">
+<p class="admonition-title"><span class="caption-number">Example 12.18 </span> (<span class="math notranslate nohighlight">\(K\)</span>-term approximation)</p>
+<div class="example-content section" id="proof-content">
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \begin{pmatrix}
+-1 &amp; 5 &amp; 8 &amp; 0 &amp; 0 &amp; -3 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix} \in \CC^{10}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(T= \{ 1, 6 \}\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\bx_T = \begin{pmatrix}
+-1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -3 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}
+\]</div>
+<p>is a <span class="math notranslate nohighlight">\(2\)</span>-term approximation of <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<p>If we choose <span class="math notranslate nohighlight">\(T= \{7,8,9,10\}\)</span>,
+the corresponding <span class="math notranslate nohighlight">\(4\)</span>-term approximation of <span class="math notranslate nohighlight">\(\bx\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+ \begin{pmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def:ssm:largest_entries_signal">
+<p class="admonition-title"><span class="caption-number">Definition 12.12 </span> (<span class="math notranslate nohighlight">\(K\)</span>-largest entries approximation)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> be an arbitrary signal.
+Let <span class="math notranslate nohighlight">\(\lambda_1, \dots, \lambda_N\)</span> be
+indices of entries in <span class="math notranslate nohighlight">\(\bx\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+| x_{\lambda_1} | \geq | x_{\lambda_2} | \geq \dots \geq | x_{\lambda_N} |.
+\]</div>
+<p>In case of ties, the order is resolved lexicographically;
+i.e., if <span class="math notranslate nohighlight">\(|x_i| = |x_j|\)</span>
+and <span class="math notranslate nohighlight">\(i &lt; j\)</span> then <span class="math notranslate nohighlight">\(i\)</span> will appear first in the sequence <span class="math notranslate nohighlight">\(\{ \lambda_k \}\)</span>.</p>
+<p>Consider the index set <span class="math notranslate nohighlight">\(\Lambda_K = \{ \lambda_1, \lambda_2, \dots, \lambda_K\}\)</span>.
+The restriction of <span class="math notranslate nohighlight">\(\bx\)</span> on <span class="math notranslate nohighlight">\(\Lambda_K\)</span> given by <span class="math notranslate nohighlight">\(x_{\Lambda_K}\)</span>
+contains the <span class="math notranslate nohighlight">\(K\)</span> largest entries <span class="math notranslate nohighlight">\(\bx\)</span>
+while setting all other entries to 0. This is known
+as the <em><span class="math notranslate nohighlight">\(K\)</span> largest entries approximation</em> of <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<p>This signal is denoted henceforth as <span class="math notranslate nohighlight">\(\bx|_K\)</span>;
+i.e.</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-best-k-term-approx">
+<span class="eqno">(12.23)<a class="headerlink" href="#equation-eq-ssm-best-k-term-approx" title="Permalink to this equation">¶</a></span>\[\bx|_K = \bx_{\Lambda_K}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Lambda_K\)</span> is the index set corresponding
+to <span class="math notranslate nohighlight">\(K\)</span> largest entries in <span class="math notranslate nohighlight">\(\bx\)</span> (magnitude wise).</p>
+</div>
+</div><div class="proof example admonition" id="ex-ssm-k-largest-entries-approx-1">
+<p class="admonition-title"><span class="caption-number">Example 12.19 </span> (Largest entries approximation)</p>
+<div class="example-content section" id="proof-content">
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+\bx  = \begin{pmatrix}
+-1 &amp; 5 &amp; 8 &amp; 0 &amp; 0 &amp; -3 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+\bx|_1 = \begin{pmatrix}
+0 &amp; 0 &amp; 8 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\bx|_2 = \begin{pmatrix}
+0 &amp; 5 &amp; 8 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\bx|_3 = \begin{pmatrix}
+0 &amp; 5 &amp; 8 &amp; 0 &amp; 0 &amp; -3 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\bx|_4 = \bx.
+\]</div>
+<p>All further <span class="math notranslate nohighlight">\(K\)</span> largest entries approximations are same as <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</div>
+</div><p>A pertinent question at this point is:
+which <span class="math notranslate nohighlight">\(K\)</span>-term approximation of <span class="math notranslate nohighlight">\(\bx\)</span> is the best
+<span class="math notranslate nohighlight">\(K\)</span>-term approximation?
+Certainly in order to compare two approximations we need
+some criterion.
+Let us choose <span class="math notranslate nohighlight">\(\ell_p\)</span> norm as the criterion.
+The next result gives an interesting result for
+best <span class="math notranslate nohighlight">\(K\)</span>-term approximations in <span class="math notranslate nohighlight">\(\ell_p\)</span> norm sense.</p>
+<div class="proof theorem admonition" id="lem:ssm:best_k_term_approximation">
+<p class="admonition-title"><span class="caption-number">Theorem 12.17 </span> (Best <span class="math notranslate nohighlight">\(K\)</span>-term approximation for <span class="math notranslate nohighlight">\(\ell_p\)</span> norms)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>.
+Let the best <span class="math notranslate nohighlight">\(K\)</span> term approximation of <span class="math notranslate nohighlight">\(\bx\)</span> be obtained by the
+following optimization program:</p>
+<div class="math notranslate nohighlight" id="equation-eq-best-k-term-approximation-optimization-problem">
+<span class="eqno">(12.24)<a class="headerlink" href="#equation-eq-best-k-term-approximation-optimization-problem" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{T \subset \{1, \dots, N\}}{\text{maximize}}
+&amp; &amp; \| \bx_T \|_p \\
+&amp; \text{subject to }
+&amp; &amp; |T| = K.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p \in [1, \infty]\)</span>.</p>
+<p>Let an optimal solution for this optimization problem be denoted by
+<span class="math notranslate nohighlight">\(\bx_{T^*}\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx|_K \|_p = \| \bx_{T^*} \|_p;
+\]</div>
+<p>i.e., the <span class="math notranslate nohighlight">\(K\)</span>-largest entries approximation of <span class="math notranslate nohighlight">\(\bx\)</span>
+is an optimal solution to
+<a class="reference internal" href="#equation-eq-best-k-term-approximation-optimization-problem">(12.24)</a>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For <span class="math notranslate nohighlight">\(p=\infty\)</span>, the result is obvious.
+In the following, we focus on <span class="math notranslate nohighlight">\(p \in [1, \infty)\)</span>.</p>
+<p>We note that maximizing <span class="math notranslate nohighlight">\(\| \bx_T \|_p\)</span> is equivalent to maximizing
+<span class="math notranslate nohighlight">\( \| \bx_T \|_p^p\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\lambda_1, \dots, \lambda_N\)</span> be
+indices of entries in <span class="math notranslate nohighlight">\(x\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+| x_{\lambda_1} | \geq | x_{\lambda_2} | \geq \dots \geq | x_{\lambda_N} |.
+\]</div>
+<p>Further let <span class="math notranslate nohighlight">\(\{ \omega_1, \dots, \omega_N\}\)</span> be any permutation of <span class="math notranslate nohighlight">\(\{1, \dots, N \}\)</span>.
+Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx|_K \|_p^{p} = \sum_{i=1}^K |\bx_{\lambda_i}|^{p}  \geq \sum_{i=1}^K |\bx_{\omega_i}|^{p}.
+\]</div>
+<p>Thus if <span class="math notranslate nohighlight">\(T^*\)</span> corresponds to an optimal solution of
+<a class="reference internal" href="#equation-eq-best-k-term-approximation-optimization-problem">(12.24)</a>
+then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx|_K \|_p^{p}  = \| \bx_{T^*} \|_p^{p}.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\bx|_K\)</span> is an optimal solution to
+<a class="reference internal" href="#equation-eq-best-k-term-approximation-optimization-problem">(12.24)</a>.</p>
+</div>
+<p>This result helps us establish that whenever we are looking for a best <span class="math notranslate nohighlight">\(K\)</span>-term
+approximation of <span class="math notranslate nohighlight">\(\bx\)</span> under any <span class="math notranslate nohighlight">\(\ell_p\)</span> norm, all we have to do is to pickup
+the <span class="math notranslate nohighlight">\(K\)</span>-largest entries in <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<div class="proof definition admonition" id="def:ssm:matrix_restriction">
+<p class="admonition-title"><span class="caption-number">Definition 12.13 </span> (Restriction of a matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi \in \CC^{M \times N}\)</span>.
+Let <span class="math notranslate nohighlight">\(T \subset \{ 1, 2, \dots, N\}\)</span> be any index set.
+Further let</p>
+<div class="math notranslate nohighlight">
+\[
+T = \{t_1, t_2, \dots, t_{|T|}\}
+\]</div>
+<p>such that</p>
+<div class="math notranslate nohighlight">
+\[
+t_1 &lt; t_2 &lt; \dots &lt; t_{|T|}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\Phi_T \in \CC^{M \times |T|}\)</span> be defined as</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-matrix-restriction">
+<span class="eqno">(12.25)<a class="headerlink" href="#equation-eq-ssm-matrix-restriction" title="Permalink to this equation">¶</a></span>\[\Phi_T = \begin{bmatrix}
+\phi_{t_1} &amp; \phi_{t_2}  &amp; \dots &amp; \phi_{t_{|T|}}
+\end{bmatrix}.\]</div>
+<p>Then <span class="math notranslate nohighlight">\(\Phi_T\)</span> is a <em>restriction</em> of the matrix <span class="math notranslate nohighlight">\(\Phi\)</span> on the index set <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>Alternatively let <span class="math notranslate nohighlight">\(\Phi_T \in \CC^{M \times N}\)</span> be defined as</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-matrix-mask">
+<span class="eqno">(12.26)<a class="headerlink" href="#equation-eq-ssm-matrix-mask" title="Permalink to this equation">¶</a></span>\[\begin{split}(\Phi_{T})_i = \left\{
+    \begin{array}{ll}
+        \phi_i &amp; \mbox{if $i \in T$};\\
+        \bzero &amp; \mbox{otherwise}.
+    \end{array}
+  \right.\end{split}\]</div>
+<p>In other words, <span class="math notranslate nohighlight">\(\Phi_T \in \CC^{M \times N}\)</span>
+keeps the columns in <span class="math notranslate nohighlight">\(\Phi\)</span>
+indexed by <span class="math notranslate nohighlight">\(T\)</span> while sets all other columns to <span class="math notranslate nohighlight">\(\bzero\)</span>.
+Then we say that <span class="math notranslate nohighlight">\(\Phi_T\)</span> is obtained by <em>masking</em> <span class="math notranslate nohighlight">\(\Phi\)</span> with <span class="math notranslate nohighlight">\(T\)</span>.</p>
+</div>
+</div><p>As an abuse of notation, we will use any of the two definitions
+whenever we are referring to <span class="math notranslate nohighlight">\(\Phi_T\)</span>. The definition
+being used should be obvious from the context.</p>
+<div class="proof theorem admonition" id="lem:ssm:restriction_simplification_sparse_vector">
+<p class="admonition-title"><span class="caption-number">Theorem 12.18 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\supp(\bx) = \Lambda\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi \bx = \Phi_{\Lambda} \bx_{\Lambda}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This follows from:</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi \bx = \sum_{i=1}^N x_i \phi_i 
+= \sum_{\lambda_i \in \Lambda} x_{\lambda_i} \phi_{\lambda_i}
+= \Phi_{\Lambda} x_{\Lambda}.
+\]</div>
+</div>
+<p>The result remains valid whether we use
+the restriction or the mask version of <span class="math notranslate nohighlight">\(\bx_{\Lambda}\)</span>
+notation as long as same version is used
+for both <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<div class="proof corollary admonition" id="cor:ssm:matrix_vector_product_disjoint_set_seperation">
+<p class="admonition-title"><span class="caption-number">Corollary 12.1 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> be two disjoint index sets such that
+for some <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\bx = x_T + x_S
+\]</div>
+<p>using the mask version of <span class="math notranslate nohighlight">\(x_{\Lambda}\)</span> notation.
+Then the following holds</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi \bx = \Phi_T \bx_T + \Phi_S \bx_S.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Straightforward application of
+<a class="reference internal" href="#lem:ssm:restriction_simplification_sparse_vector">Theorem 12.18</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi \bx = \Phi \bx_T + \Phi \bx_S = \Phi_T \bx_T + \Phi_S \bx_S.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="lem:ssm:restriction_on_matrix_vector_product">
+<p class="admonition-title"><span class="caption-number">Theorem 12.19 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(T\)</span> be any index set. Let <span class="math notranslate nohighlight">\(\Phi \in \CC^{M \times N}\)</span>
+and <span class="math notranslate nohighlight">\(\by \in \CC^M\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+[\Phi^H \by]_T = \Phi_T^H \by.  
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Phi^H \by = 
+\begin{bmatrix}
+\langle \phi_1 , \by \rangle\\
+\vdots \\
+\langle \phi_N , \by \rangle\\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Now let</p>
+<div class="math notranslate nohighlight">
+\[
+T = \{ t_1, \dots, t_K \}.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+[\Phi^H \by]_T = 
+\begin{bmatrix}
+\langle \phi_{t_1} , \by \rangle\\
+\vdots \\
+\langle \phi_{t_K} , \by \rangle\\
+\end{bmatrix}
+= \Phi_T^H \by.
+\end{split}\]</div>
+</div>
+<p>The result remains valid whether we use
+the restriction or the mask version of <span class="math notranslate nohighlight">\(\Phi_T\)</span>
+notation.</p>
+</div>
+<div class="section" id="id2">
+<h3><span class="section-number">12.5.7.2. </span>Compressible Signals<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>We will now define the notion of a compressible signal in terms of the decay rate
+of magnitude of its entries when sorted in descending order.</p>
+<div class="proof definition admonition" id="def:ssm:p_compressible_signal">
+<span id="index-6"></span><p class="admonition-title"><span class="caption-number">Definition 12.14 </span> (Compressible signal)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> be an arbitrary signal.
+Let <span class="math notranslate nohighlight">\(\lambda_1, \dots, \lambda_N\)</span> be
+indices of entries in <span class="math notranslate nohighlight">\(\bx\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+| x_{\lambda_1} | \geq | x_{\lambda_2} | \geq \dots \geq | x_{\lambda_N} |.
+\]</div>
+<p>In case of ties, the order is resolved lexicographically, i.e. if <span class="math notranslate nohighlight">\(|x_i| = |x_j|\)</span>
+and <span class="math notranslate nohighlight">\(i &lt; j\)</span> then <span class="math notranslate nohighlight">\(i\)</span> will appear first in the sequence <span class="math notranslate nohighlight">\(\{ \lambda_k \}\)</span>.
+Define</p>
+<div class="math notranslate nohighlight" id="equation-eq-x-sorted-in-magnitude-descending">
+<span class="eqno">(12.27)<a class="headerlink" href="#equation-eq-x-sorted-in-magnitude-descending" title="Permalink to this equation">¶</a></span>\[\widehat{\bx} = (x_{\lambda_1}, x_{\lambda_2}, \dots, x_{\lambda_N}).\]</div>
+<p>The signal <span class="math notranslate nohighlight">\(\bx\)</span> is called <em><span class="math notranslate nohighlight">\(p\)</span>-compressible</em> with magnitude <span class="math notranslate nohighlight">\(R\)</span>
+if there exists <span class="math notranslate nohighlight">\(p \in (0, 1]\)</span> such that</p>
+<div class="math notranslate nohighlight" id="equation-eq-p-compressible-signal-entry">
+<span class="eqno">(12.28)<a class="headerlink" href="#equation-eq-p-compressible-signal-entry" title="Permalink to this equation">¶</a></span>\[| \widehat{x}_i |\leq R \cdot i^{-\frac{1}{p}} \quad \forall i=1, 2,\dots, N.\]</div>
+</div>
+</div><div class="proof theorem admonition" id="lem:ssm:compressible_p_1">
+<p class="admonition-title"><span class="caption-number">Theorem 12.20 </span> (<span class="math notranslate nohighlight">\(1\)</span>-compressible signals)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx\)</span> be be <span class="math notranslate nohighlight">\(p\)</span>-compressible  with <span class="math notranslate nohighlight">\(p=1\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_1 \leq R (1 + \ln (N)).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Recalling <span class="math notranslate nohighlight">\(\widehat{x}\)</span> from
+<a class="reference internal" href="#equation-eq-x-sorted-in-magnitude-descending">(12.27)</a>
+it is straightforward to see that</p>
+<div class="math notranslate nohighlight">
+\[
+\|\bx\|_1 = \|\widehat{\bx}\|_1
+\]</div>
+<p>since the <span class="math notranslate nohighlight">\(\ell_1\)</span> norm doesn’t depend on the ordering of entries in <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<p>Now since <span class="math notranslate nohighlight">\(\bx\)</span> is <span class="math notranslate nohighlight">\(1\)</span>-compressible,
+hence from <a class="reference internal" href="#equation-eq-p-compressible-signal-entry">(12.28)</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+|\widehat{x}_i | \leq R \frac{1}{i}.
+\]</div>
+<p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+\|\widehat{x}\|_1  \leq \sum_{i=1}^N R \frac{1}{i} = R \sum_{i=1}^N \frac{1}{i}.
+\]</div>
+<p>The sum on the R.H.S. is the <span class="math notranslate nohighlight">\(N\)</span>-th Harmonic number
+(sum of reciprocals of first <span class="math notranslate nohighlight">\(N\)</span> natural numbers).
+A simple upper bound on Harmonic numbers is</p>
+<div class="math notranslate nohighlight">
+\[
+H_k \leq 1  + \ln(k).
+\]</div>
+<p>This completes the proof.</p>
+</div>
+<p>We now demonstrate how a compressible signal is well approximated by a sparse signal.</p>
+<div class="proof theorem admonition" id="lem:ssm:compressible_p_sparse_approximation">
+<p class="admonition-title"><span class="caption-number">Theorem 12.21 </span> (Sparse approximation of compressible signals)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx\)</span> be a <span class="math notranslate nohighlight">\(p\)</span>-compressible signal and let
+<span class="math notranslate nohighlight">\(\bx|_K\)</span> be its best <span class="math notranslate nohighlight">\(K\)</span>-term approximation.
+Then the <span class="math notranslate nohighlight">\(\ell_1\)</span> norm of approximation error satisfies</p>
+<div class="math notranslate nohighlight" id="equation-eq-compressible-p-sparse-approximation-error-l1-norm">
+<span class="eqno">(12.29)<a class="headerlink" href="#equation-eq-compressible-p-sparse-approximation-error-l1-norm" title="Permalink to this equation">¶</a></span>\[\| \bx - \bx|_K\|_1 \leq C_p \cdot R \cdot K^{1 - \frac{1}{p}}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+C_p = \left (\frac{1}{p} - 1 \right)^{-1}.
+\]</div>
+<p>Moreover the <span class="math notranslate nohighlight">\(\ell_2\)</span> norm of approximation error satisfies</p>
+<div class="math notranslate nohighlight" id="equation-eq-compressible-p-sparse-approximation-error-l2-norm">
+<span class="eqno">(12.30)<a class="headerlink" href="#equation-eq-compressible-p-sparse-approximation-error-l2-norm" title="Permalink to this equation">¶</a></span>\[\| \bx - \bx|_K\|_2 \leq D_p \cdot R \cdot K^{1 - \frac{1}{p}}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+D_p = \left (\frac{2}{p} - 1 \right )^{-1/2}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding the <span class="math notranslate nohighlight">\(\ell_1\)</span> approximation error</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \bx|_K\|_1 = \sum_{i=K+1}^N |x_{\lambda_i}| 
+\leq R \sum_{i=K+1}^N i^{-\frac{1}{p}}.
+\]</div>
+<p>We now approximate the R.H.S. sum with an integral.</p>
+<div class="math notranslate nohighlight">
+\[
+ \sum_{i=K+1}^N i^{-\frac{1}{p}} 
+ \leq \int_{x=K}^N x^{-\frac{1}{p}} d x
+ \leq  \int_{x=K}^{\infty} x^{-\frac{1}{p}} d x.
+\]</div>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{x=K}^{\infty} x^{-\frac{1}{p}} d x = 
+\left [ \frac{x^{1-\frac{1}{p}}}{1-\frac{1}{p}} \right ]_{K}^{\infty}
+= C_p K^{1 - \frac{1}{p}}.
+\]</div>
+<p>We can similarly show the result for <span class="math notranslate nohighlight">\(\ell_2\)</span> norm.</p>
+</div>
+<div class="proof example admonition" id="ex-ssm-k-sparse-approx-half-compressible">
+<p class="admonition-title"><span class="caption-number">Example 12.20 </span> (Sparse approximation for <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>-compressible signals)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(p = \frac{1}{2}\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+C_p = \left (\frac{1}{p} - 1 \right)^{-1} = 1
+\text{ and }
+D_p = \left (\frac{2}{p} - 1 \right )^{-1/2} = \frac{1}{\sqrt{3}}.
+\]</div>
+<p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \bx|_K\|_1 \leq \frac{R}{K}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \bx|_K\|_2 \leq  \frac{1}{\sqrt{3}} \frac{R}{K}.
+\]</div>
+<p>Both <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> approximation error bounds decrease
+as <span class="math notranslate nohighlight">\(K\)</span> increases at the same rate.</p>
+</div>
+</div></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ssm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="onb_sparsity.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">12.4. </span>Sparsity in Orthonormal Bases</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="dictionaries.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12.6. </span>Dictionaries</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

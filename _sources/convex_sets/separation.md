@@ -1,25 +1,70 @@
+(sec:cvx:separation:theorems)=
 # Separation Theorems
 
+```{div}
 Separation theorems provide us ways to find a separating hyperplane
 between two disjoint convex sets. Hyperplanes
 require the notion of an inner product. 
-This subsection focuses on vector spaces
-which are real, finite dimensional and equipped
-with a real inner product $\langle \cdot, \cdot \rangle \to \RR$.
 
+Throughout this section, we assume that $\VV$ is a finite dimensional
+real vector space
+endowed with
+{prf:ref}`norm <def-la-norm>` $\| \cdot \| : \VV \to \RR$
+and a {prf:ref}`real inner product <def-la-real-inner-product>`
+$\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$. 
+The norm in general is not necessarily induced by the inner product.
+The Euclidean norm is denoted by $\| \cdot \|_2$.
+```
 
 ## Types of Separating Hyperplanes
 
 ```{prf:definition} Separating hyperplane
 :label: def-cvx-separating-hyperplane
 
-Let $\VV$ be a real $n$-dimensional inner product space.
-For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
+Let $\VV$ be a real $n$-dimensional vector space.
+For any two subsets $C$ and $D$ of $\VV$, a hyperplane
 $H$ is said to *separate* $C$ and $D$ if
 $C$ is contained in one of the closed halfspaces
 corresponding to $H$ and $D$ is contained in the other 
 closed halfspace.
 ```
+
+```{div}
+Let $H$ be given by
+
+$$
+H =  \{ \bx \in \VV \ST \langle \bx, \ba \rangle = b \}
+$$
+where $\ba \in \VV^*$ and $b \in \RR$.
+
+If $C$ and $D$ are separated by $H$, then either
+
+$$
+\langle \bx_1, \ba \rangle \leq b \leq \langle \bx_2, \ba \rangle
+\Forall \bx_1 \in C, \bx_2 \in D
+$$
+or
+
+$$
+\langle \bx_2, \ba \rangle \leq b \leq \langle \bx_1, \ba \rangle
+\Forall \bx_1 \in C, \bx_2 \in D
+$$
+holds true.
+
+We can also say that the two sets $C$ and $D$ can
+be separated by a hyperplane or there exists
+a hyperplane separating $C$ and $D$ if there
+exists a nonzero vector $\ba \in \VV^*$ such that
+
+$$
+\sup_{\bx \in C} \langle \bx, \ba \rangle \leq
+\inf_{\bx \in D} \langle \bx, \ba \rangle.
+$$
+Any choice of $b \in [l,u]$ where $l = \sup_{\bx \in C} \langle \bx, \ba \rangle$
+and $u = \inf_{\bx \in D} \langle \bx, \ba \rangle$
+describes a separating hyperplane.
+```
+
 This definition allows for some degenerate possibilities where
 both $C \subseteq H$ and $D \subseteq H$ since the closed
 halfspaces contain $H$ (as their boundary).
@@ -27,8 +72,8 @@ halfspaces contain $H$ (as their boundary).
 ```{prf:definition} Proper separation
 :label: def-cvx-proper-separation
 
-Let $\VV$ be a real $n$-dimensional inner product space.
-For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
+Let $\VV$ be a real $n$-dimensional vector space.
+For any two subsets $C$ and $D$ of $\VV$, a hyperplane
 $H$ is said to *properly separate* $C$ and $D$ if
 $H$ separates them and both are not entirely contained
 in $H$; i.e., either $C \not\subseteq H$ or $D \not\subseteq H$
@@ -39,11 +84,60 @@ parts of $C$ or $D$ lies inside $H$. But it ensures that
 $C \triangle D \neq \EmptySet$.
 $C \cap D \subseteq H$ is the common part.
 
+```{div}
+If $C$ and $D$ are properly separated by $H$, then
+they are also separated by $H$. Hence
+
+$$
+\langle \bx_1, \ba \rangle \leq b \leq \langle \bx_2, \ba \rangle
+\Forall \bx_1 \in C, \bx_2 \in D
+$$
+or
+
+$$
+\langle \bx_2, \ba \rangle \leq b \leq \langle \bx_1, \ba \rangle
+\Forall \bx_1 \in C, \bx_2 \in D
+$$
+holds true. 
+Also, there exists at least one $\bx_1 \in C$
+and $\bx_2 \in D$ such that at least one of these inequalities
+is a strict inequality thus ensuring that either $C$
+or $D$ or both are not contained entirely in $H$.
+
+
+We can also say that the two sets $C$ and $D$ can
+be properly separated by a hyperplane or there exists
+a hyperplane properly separating $C$ and $D$ if there
+exists a nonzero vector $\ba \in \VV^*$ such that
+
+$$
+\sup_{\bx \in C} \langle \bx, \ba \rangle \leq
+\inf_{\bx \in D} \langle \bx, \ba \rangle.
+$$
+and
+
+$$
+\inf_{\bx \in C} \langle \bx, \ba \rangle <
+\sup_{\bx \in D} \langle \bx, \ba \rangle.
+$$
+Any choice of $b \in [l,u]$ where $l = \sup_{\bx \in C} \langle \bx, \ba \rangle$
+and $u = \inf_{\bx \in D} \langle \bx, \ba \rangle$
+describes a properly separating hyperplane.
+This characterization is proved in
+{prf:ref}`res-cvx-proper-sep-charac` below.
+```
+
+If a convex set has a nonempty interior,
+then it cannot be contained in a hyperplane.
+Two disjoint sets one of which has a
+nonempty interior can indeed be properly
+separated.
+
 ```{prf:definition} Strong separation
 :label: def-cvx-strong-separation
 
-Let $\VV$ be a real $n$-dimensional inner product space.
-For any two convex subsets $C$ and $D$ of $\VV$, a hyperplane
+Let $\VV$ be a real $n$-dimensional vector space.
+For any two subsets $C$ and $D$ of $\VV$, a hyperplane
 $H$ is said to *strongly separate* $C$ and $D$ if
 there exists an $r > 0$ such that 
 $C + r B$ is contained in one of the open halfspaces
@@ -55,7 +149,24 @@ Under these assumptions, one set lies in the interior of $H_{++}$
 and the other set lies in the interior of $H_{--}$.
 Under strong separation, $C \cap D = \EmptySet$ is guaranteed
 since $H_{++} \cap H_{--} = \EmptySet$.
+
+We can also say that the two sets $C$ and $D$ can
+be strongly separated by a hyperplane or there exists
+a hyperplane strongly separating $C$ and $D$ if there
+exists a nonzero vector $\ba \in \VV^*$ such that
+
+$$
+\sup_{\bx \in C} \langle \bx, \ba \rangle <
+\inf_{\bx \in D} \langle \bx, \ba \rangle.
+$$
+Any choice of $b \in (l,u)$ where $l = \sup_{\bx \in C} \langle \bx, \ba \rangle$
+and $u = \inf_{\bx \in D} \langle \bx, \ba \rangle$
+describes a strongly separating hyperplane.
+
+Strong separation is called as strict separation
+in {cite}`bertsekas2003convex`.
 ```
+
 
 ```{prf:remark}
 :label: rem-cvx-separation-translation-invariance
@@ -76,7 +187,7 @@ and a relatively open convex set are disjoint.
 ```{prf:theorem} Disjoint affine and relatively open convex sets
 :label: res-cvx-sep-affine-rel-open-convex
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 Let $C$ be a nonempty relatively open convex set of $\VV$.
 Let $M \subseteq \VV$ be an affine subspace such that
 $M \cap C = \EmptySet$. 
@@ -213,7 +324,7 @@ We now elaborate the procedure for finding the line $L$:
 ```{prf:theorem} Characterization of proper separation
 :label: res-cvx-proper-sep-charac
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be nonempty subsets of $\VV$. There exists
 a hyperplane $H$ that separates $S$ and $T$ *properly*
 if and only if there exists a vector $\ba \in \VV$
@@ -290,16 +401,76 @@ some hyperplane $H$.
    must be true.
 ```
 
+### Proper Separation : Set and Point
+
+```{prf:remark} Proper separation between a set and a point
+:label: res-cvx-proper-sep-set-point-def
+
+Let $\VV$ be an $n$-dimensional real vector space.
+We consider the case of proper separation between
+a set $S$ and a point $\bp$.
+We can form a set $T = \{ \bp \}$.
+Then the proper separation between $S$ and $\bp$ can be described
+in terms of proper separation between $S$ and $T$.
+
+Then
+
+$$
+\sup \{ \langle \bx, \ba \rangle \ST \bx \in T \}
+= \inf \{ \langle \bx, \ba \rangle \ST \bx \in T \} 
+= \langle \bp, \ba \rangle.
+$$
+
+Hence, $S$ and $\bp$ are properly separated
+if and only if there exists a vector $\ba \in \VV$
+such that
+
+$$
+\inf \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+\geq \langle \bp, \ba \rangle
+\text{ and }
+\sup \{ \langle \bx, \ba \rangle \ST \bx \in S \} 
+>  \langle \bp, \ba \rangle.
+$$
+
+
+We now consider a hyperplane
+
+$$
+H  = \{ \bx \in \VV \ST  \langle \bx, \ba \rangle =  \langle \bp, \ba \rangle \}.
+$$
+
+And let $H_+$ denote one of its closed half-spaces
+
+$$
+H_+  = \{ \bx \in \VV \ST  \langle \bx, \ba \rangle  \geq  \langle \bp, \ba \rangle \}.
+$$
+We can clearly see that
+
+1. $\ba \in H$.
+1. $S \subseteq H_+$. $S$ is contained entirely in the closed half-space $H_+$.
+1. $S \not\subseteq H$. $S$ is not contained entirely in $H$.
+
+Thus, if a set and a point are properly separated, then there
+exists a hyperplane that passes through the point, 
+contains the set in one of its half-spaces but does not
+fully contain the set itself.
+```
+
+
 ## Separating Hyperplane Theorems
 
 ```{prf:theorem} Separating hyperplane theorem I
 :label: res-cvx-sep-plan-1
 
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be nonempty convex subsets of $\VV$. There exists
 a hyperplane $H$ that separates $S$ and $T$ *properly*
 if and only if $\relint S \cap \relint T = \EmptySet$.
+
+In other words, two sets are properly separated
+if and only if their relative interiors are disjoint.
 ```
 
 ```{prf:proof}
@@ -419,7 +590,7 @@ We are done.
 ```{prf:corollary} Separating hyperplane theorem II
 :label: res-cvx-separating-hyperplane
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be nonempty disjoint convex subsets of $\VV$;
 i.e., $S \cap T = \EmptySet$.
 
@@ -432,8 +603,47 @@ Then, applying {prf:ref}`res-cvx-sep-plan-1`, there exists
 a hyperplane that properly separates $S$ and $T$.
 ```
 
+This result is stronger than proposition
+2.4.2 in {cite}`bertsekas2003convex`.
+
 Disjointness of convex sets is not enough for
 strong separation as their closures might meet.
+
+
+```{prf:theorem} Separating hyperplane theorem III
+:label: res-cvx-proper-sep-set-point
+
+
+Let $\VV$ be an $n$-dimensional real vector space.
+Let $S$ be a nonempty convex subset of $\VV$.
+Let $\ba \in \VV$ be a vector.
+There exists
+a hyperplane $H$ that separates $S$ and $\ba$ *properly*
+if and only if $\ba \notin \relint S$.
+
+In other words, a point can be properly separated
+from a convex set if and only if it doesn't belong
+to its relative interior.
+```
+
+```{prf:proof}
+.
+
+1. We form a set $T = \{ \ba \}$.
+1. Then $\relint T = \{ \ba \}$ ({prf:ref}`res-cvx-relint-singleton`).
+1. By {prf:ref}`res-cvx-sep-plan-1`, $S$ and $T$ are properly
+   separated if and only if
+
+   $$
+   \relint S \cap \relint T = \EmptySet.
+   $$
+1. In other words,
+
+   $$
+   \relint S \cap \{ \ba \} = \EmptySet.
+   $$
+1. In other words, $\ba \notin \relint S$.
+```
 
 
 
@@ -442,7 +652,7 @@ strong separation as their closures might meet.
 ```{prf:theorem} Characterization of strong separation
 :label: res-cvx-strong-sep-charac
 
-Let $\VV$ be an $n$-dimensional real inner product space.
+Let $\VV$ be an $n$-dimensional real vector space.
 Let $S$ and $T$ be nonempty convex subsets of $\VV$. There exists
 a hyperplane $H$ that separates $S$ and $T$ *strongly*
 if and only if 
@@ -537,13 +747,172 @@ $\inf \{ \| \bx - \by \| \ST \bx \in S, \by \in T \} > 0$.
 ```
 
 
+## Strong Separation Conditions
+
+We describe several conditions which are sufficient to
+achieve strong separation between two sets.
+See also strict separation theorem (proposition 2.4.3) of {cite}`bertsekas2003convex`.
+
+
+```{prf:theorem} Strong separation: closed subtraction
+:label: res-cvx-strong-sep-1
+
+Let $\VV$ be an $n$-dimensional real vector space.
+Let $S$ and $T$ be two disjoint nonempty convex subsets of $\VV$.
+There exists a hyperplane $H$ that separates $S$ and $T$ *strongly*
+if $S - T$ is closed.
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Since $S$ and $T$ are disjoint hence $\bzero \notin S-T$.
+1. Since $S-T$ is closed, hence $\bzero \notin \closure (S - T) = S - T$.
+1. By {prf:ref}`res-cvx-strong-sep-charac`, $S$ and $T$ are
+   strongly separated.
+```
+
+```{prf:theorem} Strong separation: closed and compact sets
+:label: res-cvx-strong-sep-2
+
+Let $\VV$ be an $n$-dimensional real vector space.
+Let $S$ and $T$ be two disjoint nonempty convex subsets of $\VV$.
+There exists a hyperplane $H$ that separates $S$ and $T$ *strongly*
+if $S$ is closed and $T$ is compact.
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Since $S$ and $T$ are disjoint hence $\bzero \notin S-T$.
+1. Since $S-T$ is closed, hence $\bzero \notin \closure (S - T) = S - T$.
+1. By {prf:ref}`res-cvx-strong-sep-charac`, $S$ and $T$ are
+   strongly separated.
+```
+
+
+### Recession Cones
+
+The conditions below are based on the theory
+of recession cones and lineality spaces of convex sets.
+See {ref}`sec:cvx:recession` for a background.
+
+
+```{prf:theorem} Strong separation: recession cones
+:label: res-cvx-strong-sep-rec-cone
+
+Let $\VV$ be an $n$-dimensional real vector space.
+Let $S$ and $T$ be two disjoint nonempty closed and convex subsets of $\VV$.
+There exists a hyperplane $H$ that separates $S$ and $T$ *strongly*
+if
+
+$$
+R_S \cap R_T  = L_S \cap L_T
+$$
+where $R_X$ denotes the recession cone
+and $L_X$ denotes the lineality space of a set $X$.
+```
+
+```{prf:proof}
+Due to {prf:ref}`res-cvx-set-sub-closed-recession-lineality`,
+$S - T$ is closed.
+Then due to {prf:ref}`res-cvx-strong-sep-1`, $S$ and $T$
+are strongly separated.
+```
+
+### Strongly Separating Hyperplane
+
+Recall that the (orthogonal) projection of a vector $\bv$ on a convex set $C$
+is the vector $\bx \in C$ which is nearest to $\bv$ under the
+(Euclidean) norm. In particular, if $\bv \in C$ then $\bv$
+is its own projection on $C$. The projection of the
+vector $\bzero$ on a convex set $C$ is this the vector
+of $C$ with the minimum norm.
+See {ref}`sec:opt:pocs` for details.
+
+```{prf:theorem} Strongly separating hyperplane
+:label: res-cvx-strong-sep-hyperplane
+
+Let $\VV$ be an $n$-dimensional real vector space.
+Let $S$ and $T$ be two disjoint nonempty and convex subsets of $\VV$.
+Assume that $S - T$ is closed.
+
+Consider the vector of minimum norm (projection of the origin)
+in $S - T$ given by $\bv = \bs - \bt$ where $\bs \in S$ and $\bt \in T$.
+
+1. Let $\ba = \frac{1}{2} \bv = \frac{1}{2} (\bs - \bt)$.
+1. Let $\bb = \frac{1}{2} (\bs + \bt)$.
+1. Let $c = \langle \bb, \ba \rangle$.
+
+Then the hyperplane $H$ given by
+
+$$
+H = \{ \bx \in \VV \ST \langle \bx, \ba \rangle = c \}
+$$
+strongly separates $S$ and $T$.
+In other words,
+
+$$
+\langle \bx_1, \ba \rangle > c >  
+\langle \bx_2, \ba \rangle \quad \Forall \bx_1 \in S, \bx_2 \in T.
+$$
+```
+
+```{prf:proof}
+.
+
+1. Since $S$ and $T$ are disjoint hence $\bs - \bt \neq \bzero$.
+1. Hence $\ba \neq \bzero$.
+1. $\bs$ is the nearest point in $\closure S$ from $\closure T$.
+1. $\bt$ is the nearest point in $\closure T$ from $\closure S$.
+1. The line segment $[\bs, \bt]$ connects these nearest points.
+1. $\bb$ lies on this line segment.
+1. Accordingly, $\bs$ is projection of $\bb$ in $\closure S$.
+1. Similarly $\bt$ is projection of $\bb$ in $\closure T$.
+1. Then, due to {prf:ref}`res-cvx-projection-characterization`
+   (orthogonal projection characterization),
+   for every $\bx \in S$
+    
+   $$
+   \langle \bx - \bs, \bb - \bs \rangle \leq 0.
+   $$
+1. But
+   
+   $$
+   \bb - \bs 
+   = \frac{1}{2} (\bs + \bt) - \bs 
+   = \frac{1}{2} (\bt - \bs) = -\ba.
+   $$
+1. Hence $\langle \bx - \bs, \ba \rangle \geq 0$.
+1. Hence $\langle \bx, \ba \rangle \geq \langle \bs, \ba \rangle$.
+1. Further
+
+   $$
+   \langle \bs, \ba \rangle
+   &= \langle \bs - \bb + \bb, \ba \rangle \\
+   &= \langle \ba + \bb, \ba \rangle \\
+   &= \| \ba \|_2^2 + \langle \bb, \ba \rangle \\
+   &= \| \ba \|_2^2 + c
+   > c.
+   $$
+   since $\ba \neq \bzero$.
+1. Hence for every $\bx \in S$, we have
+   $\langle \bx, \ba \rangle > c$.
+1. A similar argument shows that for every $\bx \in T$, we have
+   $\langle \bx, \ba \rangle < c$.
+```
+
+
+
+
+
 
 ## Closed Convex Sets
 
 ```{prf:theorem} Strict separation theorem
 :label: res-cvxf-cl-convex-set-strict-separation
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 Let $C \subseteq \VV$ be a nonempty closed convex set.
 Let $\by \notin C$. Then, there exists $\bp \in \VV^*$ 
 and $\alpha \in \RR$ such that 
@@ -556,6 +925,16 @@ $$
 In other words, there exists a separating hyperplane
 such that $C$ is contained in one of its (closed) halfspaces
 and $\by$ is not in that halfspace (i.e., it is in the opposite open halfspace). 
+
+By choosing any $\beta \in (\alpha, \langle \by , \bp \rangle)$,
+we also have
+
+
+$$
+\langle \by , \bp \rangle > \beta
+\text{ and }
+\langle \bx, \bp \rangle < \beta \Forall \bx \in C.
+$$
 ```
 
 ```{prf:proof}
@@ -589,7 +968,7 @@ This is an application of strong separation.
 ```{prf:theorem} Closed Convex = Intersection of Halfspaces
 :label: res-cvx-closed-convex-halfspace-intersection
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 A closed convex set $C$ of $\VV$ is the intersection of
 all the closed halfspaces that contain it.
 ```
@@ -625,13 +1004,22 @@ Let us assume that $C$ is nonempty and not equal to $\VV$.
    is exactly equal to $C$.
 ```
 
+We now have two different characterizations of closed convex sets.
+
+1. From {prf:ref}`res-cvx-closed-closure-line-segments`,
+   a closed and convex set is the closure of the union of
+   all the line segments connecting the points of the set.
+1. From {prf:ref}`res-cvx-closed-convex-halfspace-intersection`,
+   a closed and convex set is the intersection of all the
+   closed half-spaces containing it.
+
 ## Supporting Hyperplanes
 
 
 ```{prf:definition} Supporting hyperplane and halfspaces
 :label: def-cvx-supporting-hyperplane
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 Let $S \subseteq \VV$. Let $\bx_0 \in \boundary S$ be a point
 on its boundary.
 
@@ -659,7 +1047,7 @@ set.
 ```{prf:theorem} Supporting hyperplane theorem
 :label: res-cvx-supporting-hyperplane-theorem
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 Let $C$ be a nonempty convex subset of $\VV$. 
 Let $\bx \in \boundary C$ be any point in the boundary of $C$.
 Then, there exists a supporting hyperplane to $C$ at $\bx$.
@@ -697,8 +1085,7 @@ Now, assume that $\interior C \neq \EmptySet$.
 ```{prf:corollary}
 :label: res-cvx-closed-convex-intersect-supporting
 
-Let $\VV$ be a real $n$-dimensional inner product space.
+Let $\VV$ be a real $n$-dimensional vector space.
 A closed convex set $C$ of $\VV$ is the intersection of
 all the supporting halfspaces that contain it.
 ```
-

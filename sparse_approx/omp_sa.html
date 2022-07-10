@@ -1,0 +1,2083 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>14.3. Orthogonal Matching Pursuit &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="15. Sparse Recovery from Compressive Measurements" href="../sparse_recovery/ch_sparse_recovery.html" />
+    <link rel="prev" title="14.2. Basis Pursuit" href="basis_pursuit_sa.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/sparse_approx/omp_sa.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fsparse_approx/omp_sa.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-algorithm">
+   14.3.1. The Algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-recovery-conditions">
+   14.3.2. Exact Recovery Conditions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#babel-function-estimates">
+   14.3.3. Babel Function Estimates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sparse-approximation-conditions">
+   14.3.4. Sparse Approximation Conditions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Orthogonal Matching Pursuit</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-algorithm">
+   14.3.1. The Algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-recovery-conditions">
+   14.3.2. Exact Recovery Conditions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#babel-function-estimates">
+   14.3.3. Babel Function Estimates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sparse-approximation-conditions">
+   14.3.4. Sparse Approximation Conditions
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="orthogonal-matching-pursuit">
+<span id="sec-sa-omp"></span><h1><span class="section-number">14.3. </span>Orthogonal Matching Pursuit<a class="headerlink" href="#orthogonal-matching-pursuit" title="Permalink to this headline">¶</a></h1>
+<p><em>Orthogonal Matching Pursuit</em> is a greedy algorithm for
+computing sparse approximations of a signal in a suitable
+dictionary.
+The goal of this algorithm is to select a small number of
+atoms from the dictionary which can provide a representation
+for the signal with low error.
+The algorithm is iterative in structure.
+In each step we greedily select one new atom from the
+dictionary which can maximally reduce the representation error.
+Once we have enough atoms selected such that the representation
+error is below an acceptable bound, we stop.
+The algorithm is presented in <a class="reference internal" href="#alg-sa-omp">Algorithm 14.1</a>.</p>
+<div class="proof algorithm admonition" id="alg-sa-omp">
+<p class="admonition-title"><span class="caption-number">Algorithm 14.1 </span> (Orthogonal matching pursuit for sparse approximation)</p>
+<div class="algorithm-content section" id="proof-content">
+<p>Inputs:</p>
+<ul class="simple">
+<li><p>Signal dictionary <span class="math notranslate nohighlight">\(\bDDD \in \CC^{N \times D}\)</span> with <span class="math notranslate nohighlight">\(\spark(\bDDD) &gt; 2K \ll D\)</span></p></li>
+<li><p>Threshold <span class="math notranslate nohighlight">\(\epsilon_0\)</span></p></li>
+<li><p>Signal <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span></p></li>
+</ul>
+<p>Outputs:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(K\)</span>-sparse approximate representation <span class="math notranslate nohighlight">\(\ba \in \Sigma_{K} \subseteq \CC^D\)</span>
+satisfying <span class="math notranslate nohighlight">\(\|\bx - \bDDD \ba\|_2 \leq \epsilon_0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S\)</span> support for sparse solution identified by the algorithm</p></li>
+</ul>
+<p>Initialization:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(k \leftarrow 0\)</span> # Iteration counter</p></li>
+<li><p><span class="math notranslate nohighlight">\(\ba^0 \leftarrow \bzero\)</span> # Solution vector <span class="math notranslate nohighlight">\(\ba \in \CC^D\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\br^0 \leftarrow \bx - \bDDD \ba^0 = \bx\)</span> # Residual <span class="math notranslate nohighlight">\(\br \in \CC^N\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S^0 \leftarrow \EmptySet\)</span> # Solution support <span class="math notranslate nohighlight">\(S = \supp(\ba)\)</span></p></li>
+</ol>
+<p>Algorithm:</p>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(\| \br^k \|_2 \leq \epsilon_0\)</span> break.</p></li>
+<li><p><span class="math notranslate nohighlight">\(k \leftarrow k + 1\)</span> # Next iteration</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bz \leftarrow \bDDD^H \br^{k - 1}\)</span> # Sweep</p></li>
+<li><p>Update support</p>
+<ol class="simple">
+<li><p>Find <span class="math notranslate nohighlight">\(j_0\)</span> that maximizes <span class="math notranslate nohighlight">\(|z_j| \Forall j \notin S^{k-1}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S^{k} \leftarrow S^{k - 1} \cup \{ j_0\}\)</span></p></li>
+</ol>
+</li>
+<li><p>Update provisional solution</p>
+<div class="math notranslate nohighlight">
+\[
+   \ba^k \leftarrow \underset{\ba}{\text{minimize}}\, \| \bDDD \ba - \bx \|^2_2
+   \quad \text{ subject to }\quad \supp(\ba) = S^{k}.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\br^k \leftarrow \bx - \bDDD \ba^k = \bx - \bDDD_{S^k} \ba^k_{S^k}\)</span> # Update residual</p></li>
+<li><p>Go to step 1.</p></li>
+</ol>
+</div>
+</div><div class="section" id="the-algorithm">
+<h2><span class="section-number">14.3.1. </span>The Algorithm<a class="headerlink" href="#the-algorithm" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<ul class="simple">
+<li><p>We start with the initial estimate of solution <span class="math notranslate nohighlight">\(\ba=\bzero\)</span>.</p></li>
+<li><p>We also maintain the support of <span class="math notranslate nohighlight">\(\ba\)</span>; i.e., the set of indices for which <span class="math notranslate nohighlight">\(\ba\)</span> is non-zero.</p></li>
+<li><p>We start with an empty support.</p></li>
+<li><p>In each (<span class="math notranslate nohighlight">\(k\)</span>-th) iteration we attempt to reduce the difference between the actual signal <span class="math notranslate nohighlight">\(\bx\)</span>
+and the approximate signal based on current solution <span class="math notranslate nohighlight">\(\ba^{k-1}\)</span>
+given by <span class="math notranslate nohighlight">\(\br^{k-1} = \bx - \bDDD \ba^{k-1}\)</span>.</p></li>
+<li><p>We do this by choosing a new index in <span class="math notranslate nohighlight">\(\ba\)</span> given by <span class="math notranslate nohighlight">\(j_0\)</span> for the column <span class="math notranslate nohighlight">\(\bd_{j_0}\)</span>
+which most closely matches our current residual.</p></li>
+<li><p>We include this to our support for <span class="math notranslate nohighlight">\(\ba\)</span> and estimate new solution vector <span class="math notranslate nohighlight">\(\ba^k\)</span>.</p></li>
+<li><p>We then compute the new residual <span class="math notranslate nohighlight">\(\br^k\)</span>.</p></li>
+<li><p>We stop when the residual magnitude is below a threshold <span class="math notranslate nohighlight">\(\epsilon_0\)</span> defined by us.</p></li>
+</ul>
+<p>Each iteration of algorithm consists of following stages:</p>
+<ol>
+<li><p>[Sweep] We try to find the best matching atom from the dictionary with the current residual.</p>
+<ol>
+<li><p>The best matching atom is selected using the least square error principle.</p></li>
+<li><p>For each column <span class="math notranslate nohighlight">\(\bd_j\)</span> in our dictionary,
+we measure the projection of residual from previous iteration <span class="math notranslate nohighlight">\(\br^{k-1}\)</span>
+on the column</p></li>
+<li><p>We compute the magnitude of error between the projection and residual.</p></li>
+<li><p>The square of minimum error for <span class="math notranslate nohighlight">\(\bd_j\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+      \epsilon^2(j) = \| \br^{k-1}\|_2^2 - |\bd_j^H \br^{k-1}|^2.
+      \]</div>
+</li>
+<li><p>We can also note that minimizing over <span class="math notranslate nohighlight">\(\epsilon(j)\)</span> is equivalent to
+maximizing over the inner product of <span class="math notranslate nohighlight">\(\bd_j\)</span> with <span class="math notranslate nohighlight">\(\br^{k-1}\)</span>.</p></li>
+</ol>
+</li>
+<li><p>[Update support] Ignoring the columns which have already been included in the support,
+we pick up the column which most closely resembles the residual of previous stage;
+i.e., the magnitude of error is minimum.
+We include the index of this column <span class="math notranslate nohighlight">\(j_0\)</span> in the support set <span class="math notranslate nohighlight">\(S^{k}\)</span>.</p></li>
+<li><p>[Update provisional solution]</p>
+<ol>
+<li><p>In this step we find the solution of minimizing <span class="math notranslate nohighlight">\(\| \bDDD \ba - \bx \|^2\)</span>
+over the support <span class="math notranslate nohighlight">\(S^k\)</span> as our next candidate solution vector.</p></li>
+<li><p>By keeping <span class="math notranslate nohighlight">\(a_i = 0\)</span> for <span class="math notranslate nohighlight">\(i \notin S^k\)</span> we are leaving out corresponding
+columns <span class="math notranslate nohighlight">\(\bd_i\)</span> from our calculations.</p></li>
+<li><p>Thus we pickup up only the columns specified by <span class="math notranslate nohighlight">\(S^k\)</span> from <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p></li>
+<li><p>Let us call this subdictionary as <span class="math notranslate nohighlight">\(\bDDD_{S^k}\)</span>.</p></li>
+<li><p>The size of this subdictionary is <span class="math notranslate nohighlight">\(N \times | S^k | = N \times k\)</span>.</p></li>
+<li><p>Let us call corresponding sub vector as <span class="math notranslate nohighlight">\(\ba_{S^k}\)</span>.</p>
+<blockquote>
+<div><p>Suppose <span class="math notranslate nohighlight">\(D=4\)</span>, then
+<span class="math notranslate nohighlight">\(\bDDD = \begin{bmatrix} \bd_1 &amp; \bd_2 &amp; \bd_3 &amp; \bd_4 \end{bmatrix}\)</span>.
+Let <span class="math notranslate nohighlight">\(S^k = \{1, 4\}\)</span>.
+Then <span class="math notranslate nohighlight">\(\bDDD_{S^k} = \begin{bmatrix} \bd_1 &amp; \bd_4 \end{bmatrix}\)</span>
+and <span class="math notranslate nohighlight">\(\ba_{S^k} = (a_1, a_4)\)</span>.</p>
+</div></blockquote>
+</li>
+<li><p>Our minimization problem then reduces to minimizing <span class="math notranslate nohighlight">\(\|\bDDD_{S^k} \ba_{S^k} - \bx \|_2\)</span>.</p></li>
+<li><p>We use standard least squares estimate for getting the coefficients
+for <span class="math notranslate nohighlight">\(\ba_{S^k}\)</span> over these indices.</p></li>
+<li><p>We put back <span class="math notranslate nohighlight">\(\ba_{S^k}\)</span> to obtain our new solution estimate <span class="math notranslate nohighlight">\(\ba^k\)</span>.</p>
+<blockquote>
+<div><p>In the running example after obtaining the values <span class="math notranslate nohighlight">\(a_1\)</span> and <span class="math notranslate nohighlight">\(a_4\)</span>,
+we will have <span class="math notranslate nohighlight">\(\ba^k = (a_1, 0 , 0, a_4)\)</span>.</p>
+</div></blockquote>
+</li>
+<li><p>The solution to this minimization problem is given by</p>
+<div class="math notranslate nohighlight">
+\[
+      \bDDD_{S^k}^H ( \bDDD_{S^k}\ba_{S^k} - \bx ) = \bzero 
+      \implies \ba_{S^k} = ( \bDDD_{S^k}^H \bDDD_{S^k} )^{-1} \bDDD_{S^k}^H \bx.
+      \]</div>
+</li>
+<li><p>Interestingly we note that <span class="math notranslate nohighlight">\(\br^k = \bx - \bDDD \ba^k = \bx - \bDDD_{S^k} \ba_{S^k}\)</span>, thus</p>
+<div class="math notranslate nohighlight">
+\[
+      \bDDD_{S^k}^H \br^k = \bzero
+      \]</div>
+<p>which means that columns in <span class="math notranslate nohighlight">\(\bDDD_{S^k}\)</span> which are part of support <span class="math notranslate nohighlight">\(S^k\)</span>
+are necessarily orthogonal to the residual <span class="math notranslate nohighlight">\(\br^k\)</span>.</p>
+</li>
+<li><p>This implies that these columns will not be considered in the coming iterations
+for extending the support.</p></li>
+<li><p>This orthogonality is the reason behind the name of the algorithm as OMP.</p></li>
+</ol>
+</li>
+<li><p>[Update residual] We finally update the residual vector to <span class="math notranslate nohighlight">\(\br^k\)</span>
+based on new solution vector estimate.</p></li>
+</ol>
+</div>
+<div class="proof example admonition" id="example-1">
+<p class="admonition-title"><span class="caption-number">Example 14.1 </span> (<span class="math notranslate nohighlight">\((\bDDD, K)\)</span>-EXACT-SPARSE reconstruction with OMP)</p>
+<div class="example-content section" id="proof-content">
+<p>Let us consider a dictionary of size <span class="math notranslate nohighlight">\(10 \times 20\)</span>.
+Thus <span class="math notranslate nohighlight">\(N=10\)</span> and <span class="math notranslate nohighlight">\(D=20\)</span>. In order to fit into the display, we will
+present the matrix in two 10 column parts.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\bDDD_a = \frac{1}{\sqrt{10}}
+\begin{bmatrix}
+-1 &amp; -1 &amp; -1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; 1\\
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; -1 &amp; -1\\
+-1 &amp; -1 &amp; -1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1\\
+1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 &amp; 1 &amp; 1\\
+1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; 1\\
+1 &amp; -1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 &amp; 1 &amp; -1 &amp; 1 &amp; -1\\
+-1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 &amp; -1 &amp; 1 &amp; -1\\
+1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 &amp; 1\\
+-1 &amp; 1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 &amp; 1 &amp; 1\\
+1 &amp; 1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; 1
+\end{bmatrix}\\
+\bDDD_b = \frac{1}{\sqrt{10}}
+\begin{bmatrix}
+1 &amp; -1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; -1\\
+1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 &amp; -1 &amp; -1 &amp; -1 &amp; 1\\
+-1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 &amp; -1\\
+1 &amp; -1 &amp; 1 &amp; -1 &amp; 1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; -1\\
+1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 &amp; 1 &amp; -1\\
+-1 &amp; 1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; 1\\
+-1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 &amp; 1 &amp; 1\\
+1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; -1 &amp; 1\\
+1 &amp; 1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; 1 &amp; -1\\
+-1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\bDDD = \begin{bmatrix}\bDDD_a &amp; \bDDD_b \end{bmatrix}\)</span>.</p>
+<ol>
+<li><p>You may verify that each column is unit norm.</p></li>
+<li><p>It is known that <span class="math notranslate nohighlight">\(\Rank(\bDDD) = 10\)</span> and <span class="math notranslate nohighlight">\(\spark(\bDDD)= 6\)</span>.</p></li>
+<li><p>Thus if a signal <span class="math notranslate nohighlight">\(\bx\)</span> has a <span class="math notranslate nohighlight">\(2\)</span> sparse representation in <span class="math notranslate nohighlight">\(\bDDD\)</span>
+then the representation is necessarily unique.</p></li>
+<li><p>We now consider a signal <span class="math notranslate nohighlight">\(\bx\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\bx = \begin{pmatrix}
+4.74342 &amp; -4.74342 &amp; 1.58114 &amp; -4.74342 &amp; -1.58114 \\
+1.58114 &amp; -4.74342 &amp; -1.58114 &amp; -4.74342 &amp; -4.74342
+\end{pmatrix}.\end{split}\]</div>
+<p>For saving space, we have written it as an <span class="math notranslate nohighlight">\(n\)</span>-tuple over two rows.
+You should treat it as a column vector of size <span class="math notranslate nohighlight">\(10 \times 1\)</span>.</p>
+</li>
+<li><p>It is known that the vector has a two sparse representation in <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p></li>
+<li><p>Let us go through the steps of OMP and see how it works.</p></li>
+<li><p>In step 0, <span class="math notranslate nohighlight">\(\br^0= \bx\)</span>, <span class="math notranslate nohighlight">\(\ba^0 = \bzero\)</span>, and <span class="math notranslate nohighlight">\(S^0  = \EmptySet\)</span>.</p></li>
+<li><p>We now compute absolute value of inner product of <span class="math notranslate nohighlight">\(\br^0\)</span> with each of the columns.
+They are given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{pmatrix}
+    4 &amp; 4 &amp; 4 &amp; 7 &amp; 3 &amp; 1 &amp; 11 &amp; 1 &amp; 2 &amp; 1 \\ 
+    2 &amp; 1 &amp; 7 &amp; 0 &amp; 2 &amp; 4 &amp; 0 &amp; 2 &amp; 1 &amp; 3
+    \end{pmatrix}.
+    \end{split}\]</div>
+</li>
+<li><p>We quickly note that the maximum occurs at index 7 with value 11.</p></li>
+<li><p>We modify our support to <span class="math notranslate nohighlight">\(S^1 = \{ 7 \}\)</span>.</p></li>
+<li><p>We now solve the least squares problem</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{minimize} \left \| \bx - [\bd_7] a_7 \right \|_2^2.
+   \]</div>
+</li>
+<li><p>The solution gives us <span class="math notranslate nohighlight">\(a_7 = 11.00\)</span>.</p></li>
+<li><p>Thus we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \ba^1 = \begin{pmatrix}
+    0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 11 &amp; 0 &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+    \end{pmatrix}.
+    \end{split}\]</div>
+<p>Again note that to save space we have presented <span class="math notranslate nohighlight">\(\ba\)</span> over two rows.
+You should consider it as a <span class="math notranslate nohighlight">\(20 \times 1\)</span> column vector.</p>
+</li>
+<li><p>This leaves us the residual as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \br^1 = \bx - \bDDD \ba^1 = 
+    \begin{pmatrix}
+    1.26491 &amp; -1.26491 &amp; -1.89737 &amp; -1.26491 &amp; 1.89737 \\
+    -1.89737 &amp; -1.26491 &amp; 1.89737 &amp; -1.26491 &amp; -1.26491
+    \end{pmatrix}.
+    \end{split}\]</div>
+</li>
+<li><p>We can cross check that the residual is indeed orthogonal to the columns already selected,
+for</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \br^1 , \bd_7 \rangle  = 0.
+    \]</div>
+</li>
+<li><p>Next we compute inner product of <span class="math notranslate nohighlight">\(\br^1\)</span> with all the columns in <span class="math notranslate nohighlight">\(\bDDD\)</span>
+and take absolute values.</p></li>
+<li><p>They are given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{pmatrix}
+    0.4 &amp; 0.4 &amp; 0.4 &amp; 0.4 &amp; 0.8 &amp; 1.2 &amp; 0 &amp; 1.2 &amp; 2 &amp; 1.2 \\
+    2.4 &amp; 3.2 &amp; 4.8 &amp; 0 &amp; 2 &amp; 0.4 &amp; 0 &amp; 2 &amp; 1.2 &amp; 0.8
+    \end{pmatrix}
+    \end{split}\]</div>
+</li>
+<li><p>We quickly note that the maximum occurs at index 13 with value <span class="math notranslate nohighlight">\(4.8\)</span>.</p></li>
+<li><p>We modify our support to <span class="math notranslate nohighlight">\(S^1 = \{ 7, 13 \}\)</span>.</p></li>
+<li><p>We now solve the least squares problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \text{minimize} 
+    \left \| \bx - \begin{bmatrix} \bd_7 &amp; \bd_{13} \end{bmatrix}  
+    \begin{bmatrix}  a_7  \\ a_{13} \end{bmatrix}  \right \|_2^2.
+    \end{split}\]</div>
+</li>
+<li><p>This gives us <span class="math notranslate nohighlight">\(a_7 = 10\)</span> and <span class="math notranslate nohighlight">\(a_{13} = -5\)</span>.</p></li>
+<li><p>Thus we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \ba^2 = \begin{pmatrix}
+    0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 10 &amp; 0 &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; -5 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+    \end{pmatrix}
+    \end{split}\]</div>
+</li>
+<li><p>Finally the residual we get at step 2 is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \br^2 = \bx - \bDDD \ba^2 = 
+    10^{-14} \begin{pmatrix}
+    0 &amp; 0 &amp; -0.111022 &amp; 0 &amp; 0.111022 \\
+    -0.111022 &amp; 0 &amp; 0.111022 &amp; 0 &amp; 0
+    \end{pmatrix}
+    \end{split}\]</div>
+</li>
+<li><p>The magnitude of residual is very small.</p></li>
+<li><p>We conclude that our OMP algorithm has converged and we have been able
+to recover the exact 2 sparse representation of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p></li>
+</ol>
+</div>
+</div></div>
+<div class="section" id="exact-recovery-conditions">
+<h2><span class="section-number">14.3.2. </span>Exact Recovery Conditions<a class="headerlink" href="#exact-recovery-conditions" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>In this subsection, following <span id="id1">[<a class="reference internal" href="../bib.html#id132" title="Joel A Tropp. Greed is good: algorithmic results for sparse approximation. Information Theory, IEEE Transactions on, 50(10):2231–2242, 2004.">35</a>]</span>, we will closely look at some conditions
+under which OMP is guaranteed to recover the solution for <span class="math notranslate nohighlight">\((\mathcal{D}, K)\)</span>-EXACT-SPARSE
+<a class="reference internal" href="../ssm/srr.html#def-ssm-d-k-exact-sparse-problem">problem</a>.</p>
+<ol>
+<li><p>It is given that <span class="math notranslate nohighlight">\(\bx = \bDDD \ba\)</span> where <span class="math notranslate nohighlight">\(\ba\)</span> contains at most <span class="math notranslate nohighlight">\(K\)</span> non-zero entries.</p></li>
+<li><p>Both the support and entries of <span class="math notranslate nohighlight">\(\ba\)</span> are known
+and can be used to verify the correctness of OMP.
+Note that <span class="math notranslate nohighlight">\(\ba\)</span> itself won’t be given to OMP.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda_{\opt} = \supp(\ba)\)</span>; i.e., the set of indices at which
+optimal representation <span class="math notranslate nohighlight">\(\ba\)</span> has non-zero entries.</p></li>
+<li><p>Then we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx  = \sum_{i \in \Lambda} a_i \bd_i.
+    \]</div>
+</li>
+<li><p>From the dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> we can extract a <span class="math notranslate nohighlight">\(N \times K\)</span> matrix <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span>
+whose columns are indexed by <span class="math notranslate nohighlight">\(\Lambda_{\opt}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    \bDDD_{\opt} \triangleq \begin{bmatrix} \bd_{\lambda_1} &amp; \dots &amp; \bd_{\lambda_K} \end{bmatrix} 
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_i \in \Lambda_{\opt}\)</span>.</p>
+</li>
+<li><p>Thus we can also write</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx  = \bDDD_{\opt}  \ba_{\opt}
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(\ba_{\opt} \in \CC^K\)</span> is a vector of <span class="math notranslate nohighlight">\(K\)</span> complex entries.</p>
+</li>
+<li><p>The columns of optimum <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span> are linearly independent.
+Hence <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span> has full column rank.</p></li>
+<li><p>We define another matrix <span class="math notranslate nohighlight">\(\bHHH_{\opt}\)</span> whose columns are the remaining <span class="math notranslate nohighlight">\(D - K\)</span> columns of <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bHHH_{\opt}\)</span> consists of atoms or columns which do not participate
+in the optimum representation of <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>OMP starts with an empty support.</p></li>
+<li><p>At every step, it picks up one column from <span class="math notranslate nohighlight">\(\bDDD\)</span> and adds to the
+support of approximation.</p></li>
+<li><p>If we can ensure that it never selects any column from <span class="math notranslate nohighlight">\(\bHHH_{\opt}\)</span>
+we will be guaranteed that correct <span class="math notranslate nohighlight">\(K\)</span> sparse representation is recovered.</p></li>
+<li><p>We will use mathematical induction and assume that OMP has succeeded in its first <span class="math notranslate nohighlight">\(k\)</span> steps
+and has chosen <span class="math notranslate nohighlight">\(k\)</span> columns from <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span> so far.</p></li>
+<li><p>At this point it is left with the residual <span class="math notranslate nohighlight">\(\br^k\)</span>.</p></li>
+<li><p>In <span class="math notranslate nohighlight">\((k+1)\)</span>-th iteration, we compute inner product of <span class="math notranslate nohighlight">\(\br^k\)</span> with all columns in <span class="math notranslate nohighlight">\(\bDDD\)</span>
+and choose the column which has highest inner product.</p></li>
+<li><p>We note that the maximum value of inner product of <span class="math notranslate nohighlight">\(\br^k\)</span> with any of the columns in
+<span class="math notranslate nohighlight">\(\bHHH_{\opt}\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bHHH_{\opt}^H \br^k \|_{\infty}.
+   \]</div>
+</li>
+<li><p>Correspondingly, the maximum value of inner product of <span class="math notranslate nohighlight">\(\br^k\)</span> with any of the columns in <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span>
+is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bDDD_{\opt}^H \br^k \|_{\infty}.
+   \]</div>
+</li>
+<li><p>since we have shown that <span class="math notranslate nohighlight">\(\br^k\)</span> is orthogonal to the columns already chosen,
+hence they will not contribute to this term.</p></li>
+<li><p>In order to make sure that none of the columns in <span class="math notranslate nohighlight">\(\bHHH_{\opt}\)</span> is selected,
+we need</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bHHH_{\opt}^H \br^k \|_{\infty} &lt; \| \bDDD_{\opt}^H \br^k \|_{\infty}.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof definition admonition" id="def:greedy:omp:greedy_selection_ratio">
+<p class="admonition-title"><span class="caption-number">Definition 14.3 </span> (Greedy selection ratio)</p>
+<div class="definition-content section" id="proof-content">
+<p>We define a ratio</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-omp-greedy-selection-ratio">
+<span class="eqno">(14.23)<a class="headerlink" href="#equation-eq-greedy-omp-greedy-selection-ratio" title="Permalink to this equation">¶</a></span>\[\rho(\br^k) \triangleq 
+\frac{\| \bHHH_{\opt}^H \br^k \|_{\infty}}
+{\| \bDDD_{\opt}^H \br^k \|_{\infty}}.\]</div>
+<p>This ratio is known as <em>greedy selection ratio</em>.</p>
+</div>
+</div><ol class="simple">
+<li><p>We can see that as long as <span class="math notranslate nohighlight">\(\rho(\br^k) &lt; 1\)</span>,
+OMP will make a right decision at <span class="math notranslate nohighlight">\((k+1)\)</span>-th stage.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\rho(\br^k) = 1\)</span> then
+there is no guarantee that OMP will make the right decision.</p></li>
+<li><p>We will assume pessimistically that OMP makes wrong decision in such situations.</p></li>
+</ol>
+<p>We note that this definition of <span class="math notranslate nohighlight">\(\rho(\br^k)\)</span> looks very similar to matrix <span class="math notranslate nohighlight">\(p\)</span>-norms defined
+in  <a class="reference internal" href="../la/matrix_norms.html#def:mat:p_matrix_norm">Definition 4.163</a>.
+It is suggested to review the properties of <span class="math notranslate nohighlight">\(p\)</span>-norms for matrices at this point.</p>
+<p>We now present a condition which guarantees that <span class="math notranslate nohighlight">\(\rho(\br^k) &lt; 1\)</span> is always satisfied.</p>
+<div class="proof theorem admonition" id="thm:greedy:omp_exact_recovery_sufficient_condition">
+<p class="admonition-title"><span class="caption-number">Theorem 14.17 </span> (A sufficient condition for exact recovery using OMP)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A sufficient condition for Orthogonal Matching Pursuit
+to resolve <span class="math notranslate nohighlight">\(\bx\)</span> completely in <span class="math notranslate nohighlight">\(K\)</span> steps is that</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-omp-exact-recovery-sufficient-condition">
+<span class="eqno">(14.24)<a class="headerlink" href="#equation-eq-greedy-omp-exact-recovery-sufficient-condition" title="Permalink to this equation">¶</a></span>\[\underset{\bh}{\max} \| \bDDD_{\opt}^{\dag} \bh \|_1 &lt; 1,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bh\)</span> ranges over columns in <span class="math notranslate nohighlight">\(\bHHH_{\opt}\)</span>.</p>
+<p>Moreover, Orthogonal Matching Pursuit is a correct algorithm for
+the <span class="math notranslate nohighlight">\((\mathcal{D}, K)\)</span>-EXACT-SPARSE problem
+whenever the condition holds for every superposition of <span class="math notranslate nohighlight">\(K\)</span> atoms from <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>In  <a class="reference internal" href="#equation-eq-greedy-omp-exact-recovery-sufficient-condition">(14.24)</a>,
+<span class="math notranslate nohighlight">\(\bDDD_{\opt}^{\dag}\)</span> is the pseudo-inverse of <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    \bDDD_{\opt}^{\dag} = (\bDDD_{\opt}^H \bDDD_{\opt})^{-1} \bDDD_{\opt}^H.
+   \]</div>
+</li>
+<li><p>What we need to show is if <a class="reference internal" href="#equation-eq-greedy-omp-exact-recovery-sufficient-condition">(14.24)</a>
+holds true then <span class="math notranslate nohighlight">\(\rho(\br^k)\)</span> will always be less than 1.</p></li>
+<li><p>We note that the projection operator for the column span of <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \bDDD_{\opt} (\bDDD_{\opt}^H \bDDD_{\opt})^{-1} \bDDD_{\opt}^H
+    = (\bDDD_{\opt}^{\dag})^H \bDDD_{\opt}^H.
+   \]</div>
+</li>
+<li><p>We also note that by assumption since <span class="math notranslate nohighlight">\(\bx \in \ColSpace(\bDDD_{\opt})\)</span> and
+the approximation at the <span class="math notranslate nohighlight">\(k\)</span>-th step, <span class="math notranslate nohighlight">\(\bx^k = \bDDD \ba^k  \in \ColSpace(\bDDD_{\opt})\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\br^k = \bx - \bx^k\)</span> also belongs to <span class="math notranslate nohighlight">\(\ColSpace(\bDDD_{\opt})\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+   \br^k = (\bDDD_{\opt}^{\dag})^H \bDDD_{\opt}^H \br^k
+   \]</div>
+<p>i.e. applying the projection operator for <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span> on <span class="math notranslate nohighlight">\(\br^k\)</span> doesn’t change it.</p>
+</li>
+<li><p>Using this we can rewrite <span class="math notranslate nohighlight">\(\rho(\br^k)\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho(\br^k) 
+    = \frac{\| \bHHH_{\opt}^H \br^k \|_{\infty}}{\| \bDDD_{\opt}^H \br^k \|_{\infty}}
+    = \frac{\| \bHHH_{\opt}^H (\bDDD_{\opt}^{\dag})^H \bDDD_{\opt}^H \br^k \|_{\infty}}
+    {\| \bDDD_{\opt}^H \br^k \|_{\infty}}.
+   \]</div>
+</li>
+<li><p>We see the term <span class="math notranslate nohighlight">\(\bDDD_{\opt}^H \br^k\)</span> appearing both in numerator and denominator.</p></li>
+<li><p>Now consider the matrix <span class="math notranslate nohighlight">\(\bHHH_{\opt}^H (\bDDD_{\opt}^{\dag})^H\)</span>
+and recall the definition of matrix <span class="math notranslate nohighlight">\(\infty\)</span>-norm from <a class="reference internal" href="../la/matrix_norms.html#def:mat:p_matrix_norm">Definition 4.163</a></p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA\|_{\infty}
+    = \underset{\bx \neq 0}{\max } \frac{\| \bA \bx \|_{\infty}}{\| \bx \|_{\infty}} 
+    \geq  \frac{\| \bA \bx \|_{\infty}}{\| \bx \|_{\infty}} \Forall \bx \neq \bzero.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bHHH_{\opt}^H (\bDDD_{\opt}^{\dag})^H \|_{\infty} \geq \frac{\| \bHHH_{\opt}^H (\bDDD_{\opt}^{\dag})^H \bDDD_{\opt}^H \br^k \|_{\infty}}
+    {\| \bDDD_{\opt}^H \br^k \|_{\infty}}
+   \]</div>
+<p>which gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho(\br^k)  \leq \| \bHHH_{\opt}^H (\bDDD_{\opt}^{\dag})^H \|_{\infty} 
+    = \| \left ( \bDDD_{\opt}^{\dag} \bHHH_{\opt} \right )^H \|_{\infty}.
+   \]</div>
+</li>
+<li><p>We recall that <span class="math notranslate nohighlight">\(\| \bA\|_{\infty}\)</span> is max row sum norm while
+<span class="math notranslate nohighlight">\(\| \bA\|_1\)</span> is max column sum norm.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA\|_{\infty} = \| \bA^T \|_1= \| \bA^H \|_1
+   \]</div>
+<p>which means</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \left ( \bDDD_{\opt}^{\dag} \bHHH_{\opt} \right )^H \|_{\infty} 
+    = \| \bDDD_{\opt}^{\dag} \bHHH_{\opt} \|_1.
+   \]</div>
+</li>
+<li><p>Thus we have:</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho(\br^k) \leq \| \bDDD_{\opt}^{\dag} \bHHH_{\opt} \|_1.
+   \]</div>
+</li>
+<li><p>Now the columns of <span class="math notranslate nohighlight">\(\bDDD_{\opt}^{\dag} \bHHH_{\opt}\)</span>  are nothing but
+<span class="math notranslate nohighlight">\(\bDDD_{\opt}^{\dag} \bh\)</span> where <span class="math notranslate nohighlight">\(\bh\)</span> ranges over columns of <span class="math notranslate nohighlight">\(\bHHH_{\opt}\)</span>.</p></li>
+<li><p>Thus in terms of max column sum norm</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho(\br^k) \leq \underset{\bh}{\max} \| \bDDD_{\opt}^{\dag} \bh \|_1.
+   \]</div>
+</li>
+<li><p>Thus assuming that OMP has made <span class="math notranslate nohighlight">\(k\)</span> correct decision and <span class="math notranslate nohighlight">\(\br^k\)</span>
+lies in <span class="math notranslate nohighlight">\(\ColSpace( \bDDD_{\opt})\)</span>, <span class="math notranslate nohighlight">\(\rho(\br^k) &lt; 1\)</span> whenever</p>
+<div class="math notranslate nohighlight">
+\[
+    \underset{\bh}{\max} \| \bDDD_{\opt}^{\dag} \bh \|_1 &lt; 1.
+   \]</div>
+</li>
+<li><p>The initial residual <span class="math notranslate nohighlight">\(\br^0 = \bx\)</span> which always lies in column space of <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span>.</p></li>
+<li><p>By above logic, OMP will always select an optimal column in each step.</p></li>
+<li><p>Since the residual is always orthogonal to the columns already selected,
+hence it will never select the same column twice.</p></li>
+<li><p>Thus in <span class="math notranslate nohighlight">\(K\)</span> steps it will retrieve all <span class="math notranslate nohighlight">\(K\)</span> atoms which comprise <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="babel-function-estimates">
+<h2><span class="section-number">14.3.3. </span>Babel Function Estimates<a class="headerlink" href="#babel-function-estimates" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>There is a small problem with <a class="reference internal" href="#thm:greedy:omp_exact_recovery_sufficient_condition">Theorem 14.17</a>.
+Since we don’t know the support of <span class="math notranslate nohighlight">\(\ba\)</span> a-priori hence its not possible to verify that</p>
+<div class="math notranslate nohighlight">
+\[
+ \underset{\bh}{\max} \| \bDDD_{\opt}^{\dag} \bh \|_1 &lt; 1
+\]</div>
+<p>holds.
+Verifying this for all <span class="math notranslate nohighlight">\(K\)</span> column sub-matrices is computationally prohibitive.</p>
+<p>It turns out that Babel function (recall <a class="reference internal" href="../ssm/dictionaries.html#def:babel_function">Definition 12.21</a>)
+can be used to relax the sufficient condition in a manner so that it becomes
+computationally tractable.
+We show how Babel function guarantees that exact recovery condition for OMP holds.</p>
+</div>
+<div class="proof theorem admonition" id="thm:greedy:omp_exact_recovery_babel_function">
+<p class="admonition-title"><span class="caption-number">Theorem 14.18 </span> (Babel function based guarantee for exact recovery using OMP)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(\mu_1\)</span> is the Babel function for a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+The exact recovery condition holds whenever</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-omp-exact-recovery-babel-function">
+<span class="eqno">(14.25)<a class="headerlink" href="#equation-eq-greedy-omp-exact-recovery-babel-function" title="Permalink to this equation">¶</a></span>\[\mu_1 (K - 1) + \mu_1(K) &lt; 1.\]</div>
+<p>Thus, Orthogonal Matching Pursuit is a correct algorithm for
+the <span class="math notranslate nohighlight">\((\mathcal{D}, K)\)</span>-EXACT-SPARSE problem
+whenever <a class="reference internal" href="#equation-eq-greedy-omp-exact-recovery-babel-function">(14.25)</a> holds.</p>
+<p>In other words, for sufficiently small <span class="math notranslate nohighlight">\(K\)</span> for which
+<a class="reference internal" href="#equation-eq-greedy-omp-exact-recovery-babel-function">(14.25)</a> holds,
+OMP will recover any arbitrary superposition of <span class="math notranslate nohighlight">\(K\)</span> atoms from <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>We can write</p>
+<div class="math notranslate nohighlight">
+\[
+     \underset{\bh}{\max} \| \bDDD_{\opt}^{\dag} \bh \|_1 
+     =  \underset{\bh}{\max} \| (\bDDD_{\opt}^H \bDDD_{\opt})^{-1} \bDDD_{\opt}^H \bh \|_1 
+   \]</div>
+</li>
+<li><p>We recall from <a class="reference internal" href="../la/matrix_norms.html#lem:mat:operator_norm_subordinate">Lemma 4.91</a>
+that operator-norm is subordinate; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \bx \|_1 \leq \| \bA \|_1 \| \bx \|_1.
+   \]</div>
+</li>
+<li><p>Thus with <span class="math notranslate nohighlight">\(\bA = (\bDDD_{\opt}^H \bDDD_{\opt})^{-1}\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| (\bDDD_{\opt}^H \bDDD_{\opt})^{-1} \bDDD_{\opt}^H \bh \|_1
+    \leq  \| (\bDDD_{\opt}^H \bDDD_{\opt})^{-1} \|_1 \| \bDDD_{\opt}^H \bh \|_1.
+   \]</div>
+</li>
+<li><p>With this we have</p>
+<div class="math notranslate nohighlight">
+\[
+     \underset{\bh}{\max} \| \bDDD_{\opt}^{\dag} \bh \|_1  \leq 
+     \| (\bDDD_{\opt}^H \bDDD_{\opt})^{-1} \|_1 \underset{\bh}{\max} \| \bDDD_{\opt}^H \bh \|_1.
+   \]</div>
+</li>
+<li><p>Now let us look at <span class="math notranslate nohighlight">\(\| \bDDD_{\opt}^H \bh \|_1\)</span> closely.</p></li>
+<li><p>There are <span class="math notranslate nohighlight">\(K\)</span> columns in  <span class="math notranslate nohighlight">\( \bDDD_{\opt}\)</span>.</p></li>
+<li><p>For each column we compute its inner product with <span class="math notranslate nohighlight">\(\bh\)</span>
+and then absolute sum of the inner product.</p></li>
+<li><p>Also recall the definition of Babel function:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mu_1(K) = \underset{|\Lambda| = K}{\max} \; \underset {\bh}{\max} 
+    \sum_{\Lambda} | \langle \bh, \bd_{\lambda} \rangle |.
+   \]</div>
+</li>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+    \underset{\bh}{\max} \| \bDDD_{\opt}^H \bh \|_1 
+    = \underset{\bh}{\max}  \sum_{\Lambda_{\opt}} | \langle \bh, \bd_{\lambda_i} \rangle | 
+    \leq \mu_1(K). 
+    \]</div>
+</li>
+<li><p>We also need to provide a bound on
+<span class="math notranslate nohighlight">\( \| (\bDDD_{\opt}^H \bDDD_{\opt})^{-1} \|_1\)</span> which
+requires more work.</p></li>
+<li><p>First note that since all columns in <span class="math notranslate nohighlight">\(\bDDD\)</span> are unit norm,
+hence the diagonal of <span class="math notranslate nohighlight">\(\bDDD_{\opt}^H \bDDD_{\opt}\)</span> contains unit entries.</p></li>
+<li><p>Thus we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \bDDD_{\opt}^H \bDDD_{\opt} = \bI_K + \bA
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bA\)</span> contains the off diagonal terms in <span class="math notranslate nohighlight">\(\bDDD_{\opt}^H \bDDD_{\opt}\)</span>.</p>
+</li>
+<li><p>Looking carefully , each column of <span class="math notranslate nohighlight">\(\bA\)</span> lists the inner products between
+one atom of <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span> and the remaining <span class="math notranslate nohighlight">\(K-1\)</span> atoms.</p></li>
+<li><p>By definition of Babel function</p>
+<div class="math notranslate nohighlight">
+\[
+    \|\bA \|_1 
+    = \max_{k=1}^K \sum_{j, j \neq k} | \langle \bd_{\lambda_k} \bd_{\lambda_j} \rangle | 
+    \leq \mu_1(K -1).
+   \]</div>
+</li>
+<li><p>Whenever <span class="math notranslate nohighlight">\(\| \bA \|_1 &lt; 1\)</span> then the Von Neumann series
+<span class="math notranslate nohighlight">\(\sum(-\bA)^k\)</span> converges to the inverse
+<span class="math notranslate nohighlight">\((\bI_K + \bA)^{-1}\)</span>.</p></li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| (\bDDD_{\opt}^H \bDDD_{\opt})^{-1} \|_1 &amp;= \| ( \bI_K + \bA )^{-1} \|_1 \\
+    &amp;= \| \sum_{ k = 0}^{\infty} (-\bA)^k \|_1\\
+    &amp; \leq \sum_{ k = 0}^{\infty}  \| \bA\|^k_1 \\
+    &amp;= \frac{1}{1 - \| \bA \|_1}\\
+    &amp; \leq \frac{1}{1 - \mu_1(K-1)}.
+   \end{split}\]</div>
+</li>
+<li><p>Putting things together we get</p>
+<div class="math notranslate nohighlight">
+\[
+     \underset{\bh}{\max} \| \bDDD_{\opt}^{\dag} \bh \|_1  
+     \leq \frac{\mu_1(K)}{1  - \mu_1(K-1)}.
+   \]</div>
+</li>
+<li><p>Thus whenever <span class="math notranslate nohighlight">\(\mu_1 (K - 1) + \mu_1(K) &lt; 1\)</span> holds,<br />
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \underset{\bh}{\max} \| \bDDD_{\opt}^{\dag} \bh \|_1   &lt; 1.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="sparse-approximation-conditions">
+<h2><span class="section-number">14.3.4. </span>Sparse Approximation Conditions<a class="headerlink" href="#sparse-approximation-conditions" title="Permalink to this headline">¶</a></h2>
+<p>We now remove the assumption that <span class="math notranslate nohighlight">\(\bx\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse in <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+This is indeed true for all real life signals as they are not truly sparse.</p>
+<p>In this subsection we will look at conditions under which
+OMP can successfully solve the <span class="math notranslate nohighlight">\((\mathcal{D}, K)\)</span>-SPARSE approximation
+problem as described in <a class="reference internal" href="../ssm/srr.html#def-ssm-d-k-sparse-approx-prob">Definition 12.8</a>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx\)</span> be an arbitrary signal.</p></li>
+<li><p>Suppose that <span class="math notranslate nohighlight">\(\ba_{\opt}\)</span> is
+an optimal <span class="math notranslate nohighlight">\(K\)</span>-term approximation representation of <span class="math notranslate nohighlight">\(\bx\)</span>; i.e.,
+<span class="math notranslate nohighlight">\(\ba_{\opt}\)</span>  is a solution to <a class="reference internal" href="../ssm/srr.html#equation-eq-ssm-d-k-sparse-approx-problem">(12.19)</a>
+and the optimal <span class="math notranslate nohighlight">\(K\)</span>-term approximation of <span class="math notranslate nohighlight">\(\bx\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx_{\opt} = \bDDD \ba_{\opt}.
+   \]</div>
+<p>We note that <span class="math notranslate nohighlight">\(\ba_{\opt}\)</span>  may not be unique.</p>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda_{\opt}\)</span> be the support of <span class="math notranslate nohighlight">\(\ba_{\opt}\)</span> which
+identifies the atoms in <span class="math notranslate nohighlight">\(\bDDD\)</span> that participate
+in the <span class="math notranslate nohighlight">\(K\)</span>-term approximation of <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span> be the subdictionary consisting of columns
+of <span class="math notranslate nohighlight">\(\bDDD\)</span> indexed by  <span class="math notranslate nohighlight">\(\Lambda_{\opt}\)</span>.</p></li>
+<li><p>We assume that columns in <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span> are linearly independent.
+This is easily established since if any atom in this set were
+linearly dependent on other atoms, we could always find a sparser
+solution which would contradict the fact that <span class="math notranslate nohighlight">\(\ba_{\opt}\)</span> is optimal.</p></li>
+<li><p>Again let <span class="math notranslate nohighlight">\(\bHHH_{\opt}\)</span> be the matrix of <span class="math notranslate nohighlight">\((D - K)\)</span> columns which
+are not indexed by <span class="math notranslate nohighlight">\(\Lambda_{\opt}\)</span>.</p></li>
+<li><p>We note that if <span class="math notranslate nohighlight">\(\Lambda_{\opt}\)</span> is identified then finding
+<span class="math notranslate nohighlight">\(\ba_{\opt}\)</span> is a straightforward least squares problem.</p></li>
+</ol>
+<p>We now present a condition under which Orthogonal Matching Pursuit is able
+to recover the optimal atoms.</p>
+<div class="proof theorem admonition" id="thm:greedy:omp:general_recovery">
+<p class="admonition-title"><span class="caption-number">Theorem 14.19 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Assume that <span class="math notranslate nohighlight">\(\mu_1(K) &lt; \frac{1}{2}\)</span>, and suppose that at <span class="math notranslate nohighlight">\(k\)</span>-th
+iteration, the support <span class="math notranslate nohighlight">\(S^k\)</span> for <span class="math notranslate nohighlight">\(\ba^k\)</span> consists only of atoms from
+an optimal <span class="math notranslate nohighlight">\(k\)</span>-term approximation of the signal <span class="math notranslate nohighlight">\(\bx\)</span>.
+At step <span class="math notranslate nohighlight">\((k+1)\)</span>, Orthogonal Matching Pursuit will recover another atom
+indexed by <span class="math notranslate nohighlight">\(\Lambda_{\opt}\)</span> whenever</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-omp-general-recovery">
+<span class="eqno">(14.26)<a class="headerlink" href="#equation-eq-greedy-omp-general-recovery" title="Permalink to this equation">¶</a></span>\[\| \bx - \bDDD \ba^k \|_2 &gt; \sqrt{1 + \frac{K ( 1 - \mu_1(K))}{(1 - 2 \mu_1(K))^2} } \;
+\| \bx - \bDDD \ba_{\opt}\|_2.\]</div>
+</div>
+</div><p>A few remarks are in order.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\| \bx - \bDDD \ba^k \|_2\)</span> is the approximation error norm at
+<span class="math notranslate nohighlight">\(k\)</span>-th iteration.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\| \bx - \bDDD \ba_{\opt}\|_2\)</span> is the optimum approximation
+error after <span class="math notranslate nohighlight">\(K\)</span> iterations.</p></li>
+<li><p>The theorem says that OMP makes absolute progress whenever the current
+approximation error is larger than the optimum error by a factor.</p></li>
+<li><p>As a result of this theorem, we note that every optimal <span class="math notranslate nohighlight">\(K\)</span>-term
+approximation of <span class="math notranslate nohighlight">\(\bx\)</span> contains the same kernel of atoms.</p></li>
+<li><p>The optimum error is always independent of choice of atoms in
+<span class="math notranslate nohighlight">\(K\)</span> term approximation (since it is optimum).</p></li>
+<li><p>Initial error is also independent of choice of atoms (since initial support is empty).</p></li>
+<li><p>OMP always selects the same set of atoms by design.</p></li>
+</ol>
+<div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>Let us assume that after <span class="math notranslate nohighlight">\(k\)</span> steps, OMP has recovered an approximation <span class="math notranslate nohighlight">\(\bx^k\)</span>
+given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx^k = \bDDD_{S^k} \ba^k
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(S^k = \supp(\ba^k)\)</span> chooses <span class="math notranslate nohighlight">\(k\)</span> columns from <span class="math notranslate nohighlight">\(\bDDD\)</span>
+all of which belong to <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span>.</p>
+</li>
+<li><p>Let the residual at <span class="math notranslate nohighlight">\(k\)</span>-th stage be</p>
+<div class="math notranslate nohighlight">
+\[
+    \br^k = \bx - \bx^k =  \bx - \bDDD_{S^k} \ba^k.
+   \]</div>
+</li>
+<li><p>Recalling from previous section, a sufficient condition for
+recovering another optimal atom is</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho(\br^k) 
+    = \frac{\| \bHHH_{\opt}^H \br^k \|_{\infty}}{\| \bDDD_{\opt}^H \br^k \|_{\infty}} &lt; 1.
+   \]</div>
+</li>
+<li><p>One difference from previous section is that <span class="math notranslate nohighlight">\(\br^k \notin \ColSpace(\bDDD_{\opt})\)</span>.</p></li>
+<li><p>We can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \br^k = \bx - \bx^k = (\bx  - \bx_{\opt}) + (\bx_{\opt} - \bx^k).
+   \]</div>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\((\bx  - \bx_{\opt})\)</span> is nothing but the residual left after
+<span class="math notranslate nohighlight">\(K\)</span> iterations.</p></li>
+<li><p>We also note that since residual in OMP is always orthogonal to already selected
+columns, hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \bDDD_{\opt}^H (\bx  - \bx_{\opt}) = \bzero.
+   \]</div>
+</li>
+<li><p>We will now use these expressions to simplify <span class="math notranslate nohighlight">\(\rho(\br^k)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \rho(\br^k) 
+    &amp;= \frac{\| \bHHH_{\opt}^H \br^k \|_{\infty}}
+    {\| \bDDD_{\opt}^H \br^k \|_{\infty}}\\
+    &amp;=  \frac{\| \bHHH_{\opt}^H (\bx - \bx_{\opt}) + \bHHH_{\opt}^H (\bx_{\opt} - \bx^k)\|_{\infty}}
+    {\| \bDDD_{\opt}^H (\bx - \bx_{\opt})  + \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \|_{\infty}}\\
+    &amp; = \frac{\| \bHHH_{\opt}^H (\bx - \bx_{\opt}) + \bHHH_{\opt}^H (\bx_{\opt} - \bx^k)\|_{\infty}}
+    {\| \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \|_{\infty}}\\
+    &amp;\leq \frac{\| \bHHH_{\opt}^H (\bx - \bx_{\opt})\|_{\infty}}
+    {\| \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \|_{\infty}}
+    + \frac{\| \bHHH_{\opt}^H (\bx_{\opt} - \bx^k)\|_{\infty}}
+    {\| \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \|_{\infty}}
+   \end{split}\]</div>
+</li>
+<li><p>We now define two new terms</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho_{\text{err}}(\br^k) \triangleq \frac{\| \bHHH_{\opt}^H (\bx - \bx_{\opt})\|_{\infty}}
+    {\| \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \|_{\infty}}
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho_{\opt}(\br^k) \triangleq  \frac{\| \bHHH_{\opt}^H (\bx_{\opt} - \bx^k)\|_{\infty}}
+    {\| \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \|_{\infty}}.
+   \]</div>
+</li>
+<li><p>With these we have</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-omp-rho-r-k-sparse-opt-err-breakup">
+<span class="eqno">(14.27)<a class="headerlink" href="#equation-eq-greedy-omp-rho-r-k-sparse-opt-err-breakup" title="Permalink to this equation">¶</a></span>\[ \rho(\br^k) \leq \rho_{\opt}(\br^k) + \rho_{\text{err}}(\br^k)\]</div>
+</li>
+<li><p>Now <span class="math notranslate nohighlight">\(\bx_{\opt}\)</span> has an exact <span class="math notranslate nohighlight">\(K\)</span>-term representation in <span class="math notranslate nohighlight">\(\bDDD\)</span> given by
+<span class="math notranslate nohighlight">\(\ba_{\opt}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\rho_{\opt}(\br^k)\)</span> is nothing
+but <span class="math notranslate nohighlight">\(\rho(\br^k)\)</span> for corresponding EXACT-SPARSE problem.</p></li>
+<li><p>From the proof of <a class="reference internal" href="#thm:greedy:omp_exact_recovery_babel_function">Theorem 14.18</a> we recall</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho_{\opt}(\br^k) \leq \frac{\mu_1(K)}{1 - \mu_1(K-1)} 
+    \leq \frac{\mu_1(K)}{1 - \mu_1(K)}
+   \]</div>
+<p>since</p>
+<div class="math notranslate nohighlight">
+\[
+    \mu_1(K-1) \leq \mu_1(K) \implies 1 - \mu_1(K-1) \geq 1 - \mu_1(K).
+   \]</div>
+</li>
+<li><p>The remaining problem is <span class="math notranslate nohighlight">\(\rho_{\text{err}}(\br^k)\)</span>.</p></li>
+<li><p>Let us look at its numerator and denominator one by one.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\| \bHHH_{\opt}^H (\bx - \bx_{\opt})\|_{\infty}\)</span>
+is the maximum (absolute) inner product between
+any column in <span class="math notranslate nohighlight">\(\bHHH_{\opt}\)</span> with <span class="math notranslate nohighlight">\(\bx - \bx_{\opt}\)</span>.</p></li>
+<li><p>We can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bHHH_{\opt}^H (\bx - \bx_{\opt})\|_{\infty} 
+    \leq \underset{\bh}{\max} | \bh^H (\bx - \bx_{\opt}) |
+    \leq \underset{\bh}{\max} \|\bh \|_2 \| \bx - \bx_{\opt}\|_2
+    = \| \bx - \bx_{\opt}\|_2
+   \]</div>
+<p>since all columns in <span class="math notranslate nohighlight">\(\bDDD\)</span> are unit norm.
+In between we used Cauchy-Schwartz inequality.</p>
+</li>
+<li><p>Now look at denominator <span class="math notranslate nohighlight">\(\| \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \|_{\infty}\)</span>
+where <span class="math notranslate nohighlight">\((\bx_{\opt} - \bx^k) \in \CC^N\)</span>
+and  <span class="math notranslate nohighlight">\(\bDDD_{\opt} \in \CC^{N \times K}\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \in \CC^{K}.
+   \]</div>
+</li>
+<li><p>Now for every <span class="math notranslate nohighlight">\(\bv \in \CC^K\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bv \|_2 \leq \sqrt{K} \| \bv\|_{\infty}.
+   \]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \|_{\infty}
+    \geq K^{-1/2} \| \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \|_2.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span> has full column rank, hence its singular values
+are non-zero.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bDDD_{\opt}^H  (\bx_{\opt} - \bx^k) \|_2 
+    \geq \sigma_{\text{min}}(\bDDD_{\opt}) \| \bx_{\opt} - \bx^k \|_2.
+   \]</div>
+</li>
+<li><p>From  <a class="reference internal" href="../ssm/dictionaries.html#lem:ssm:babel_singular_value_condition">Corollary 12.2</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \sigma_{\text{min}}(\bDDD_{\opt}) \geq \sqrt{1 - \mu_1(K-1)} \geq \sqrt{1 - \mu_1(K)}.
+   \]</div>
+</li>
+<li><p>Combining these observations we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho_{\text{err}}(\br^k) \leq 
+    \frac{\sqrt{K} \| \bx - \bx_{\opt}\|_2}
+    {\sqrt{1 - \mu_1(K)} \| \bx_{\opt} - \bx^k \|_2}.
+   \]</div>
+</li>
+<li><p>Now from <a class="reference internal" href="#equation-eq-greedy-omp-rho-r-k-sparse-opt-err-breakup">(14.27)</a>
+<span class="math notranslate nohighlight">\(\rho(\br^k) &lt;1\)</span> whenever <span class="math notranslate nohighlight">\(\rho_{\opt}(\br^k) + \rho_{\text{err}}(\br^k) &lt; 1\)</span>.</p></li>
+<li><p>Thus a sufficient condition for <span class="math notranslate nohighlight">\(\rho(\br^k) &lt;1\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\mu_1(K)}{1 - \mu_1(K)} + 
+    \frac{\sqrt{K} \| \bx - \bx_{\opt}\|_2}
+    {\sqrt{1 - \mu_1(K)} \| \bx_{\opt} - \bx^k \|_2} &lt; 1.
+   \]</div>
+</li>
+<li><p>We need to simplify this expression a bit.
+Multiplying by <span class="math notranslate nohighlight">\((1 - \mu_1(K))\)</span> on both sides we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;\mu_1(K) + \frac{\sqrt{K} \sqrt{1 - \mu_1(K)} \| \bx - \bx_{\opt}\|_2}
+    { \| \bx_{\opt} - \bx^k \|_2} &lt; 1 - \mu_1(K)\\
+    \implies &amp; \frac{\sqrt{K(1 - \mu_1(K)}) \| \bx - \bx_{\opt}\|_2}
+    { \| \bx_{\opt} - \bx^k \|_2} &lt; 1  - 2 \mu_1(K)\\
+    \implies &amp; \| \bx_{\opt} - \bx^k \|_2 &gt; \frac{\sqrt{K(1 - \mu_1(K)})} {1  - 2 \mu_1(K)}\| \bx - \bx_{\opt}\|_2.
+   \end{split}\]</div>
+<p>We assumed <span class="math notranslate nohighlight">\(\mu_1(K) &lt; \frac{1}{2}\)</span> thus <span class="math notranslate nohighlight">\(1 - 2 \mu_1(K) &gt; 0\)</span> which validates the
+steps above.</p>
+</li>
+<li><p>We recall that <span class="math notranslate nohighlight">\((\bx  - \bx_{\opt}) \perp \ColSpace(\bDDD_{\opt})\)</span> and
+<span class="math notranslate nohighlight">\((\bx_{\opt} - \bx^k) \in \ColSpace(\bDDD_{\opt})\)</span> thus <span class="math notranslate nohighlight">\((\bx  - \bx_{\opt})\)</span>
+and <span class="math notranslate nohighlight">\((\bx_{\opt} - \bx^k)\)</span> are orthogonal to each other.</p></li>
+<li><p>Thus by applying Pythagorean theorem we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bx^k\|_2^2 
+    = \| \bx  - \bx_{\opt} \|_2^2 + \| \bx_{\opt} - \bx^k \|_2^2.
+   \]</div>
+</li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bx^k\|_2^2 
+    &gt; \frac{K(1 - \mu_1(K))} {(1  - 2 \mu_1(K))^2}
+    \| \bx - \bx_{\opt}\|_2^2 + \| \bx - \bx_{\opt}\|_2^2.
+   \]</div>
+</li>
+<li><p>This gives us a sufficient condition</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-9c009833-7f6d-4609-9543-6110fdcc8461">
+<span class="eqno">(14.28)<a class="headerlink" href="#equation-eq-greedy-9c009833-7f6d-4609-9543-6110fdcc8461" title="Permalink to this equation">¶</a></span>\[ \| \bx - \bx^k\|_2 
+ &gt; \sqrt{1 + \frac{K(1 - \mu_1(K))} {(1  - 2 \mu_1(K))^2}}
+ \| \bx - \bx_{\opt}\|_2.\]</div>
+</li>
+<li><p>In other words, whenever <a class="reference internal" href="#equation-eq-greedy-9c009833-7f6d-4609-9543-6110fdcc8461">(14.28)</a> holds true,
+we have <span class="math notranslate nohighlight">\(\rho(\br^k) &lt; 1\)</span> which leads to OMP making a correct choice
+and choosing an atom from the optimal set.</p></li>
+<li><p>Putting <span class="math notranslate nohighlight">\(\bx^k = \bDDD \ba^k\)</span> and <span class="math notranslate nohighlight">\(\bx_{\opt} = \bDDD \ba_{\opt}\)</span> we get back
+<a class="reference internal" href="#equation-eq-greedy-omp-general-recovery">(14.26)</a> which is the desired result.</p></li>
+</ol>
+</div>
+<p><a class="reference internal" href="#thm:greedy:omp:general_recovery">Theorem 14.19</a> establishes that
+as long as <a class="reference internal" href="#equation-eq-greedy-omp-general-recovery">(14.26)</a> holds for each of the
+steps from 1 to <span class="math notranslate nohighlight">\(K\)</span>, OMP will recover a <span class="math notranslate nohighlight">\(K\)</span> term optimum approximation <span class="math notranslate nohighlight">\(\bx_{\opt}\)</span>.
+If <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> is completely arbitrary, then it may not be possible that
+<a class="reference internal" href="#equation-eq-greedy-omp-general-recovery">(14.26)</a> holds for all the <span class="math notranslate nohighlight">\(K\)</span> iterations. In this
+situation, a question arises as to what is the worst <span class="math notranslate nohighlight">\(K\)</span>-term approximation error that
+OMP will incur if <a class="reference internal" href="#equation-eq-greedy-omp-general-recovery">(14.26)</a> doesn’t hold true all the way.</p>
+<p>This is answered in following corollary of <a class="reference internal" href="#thm:greedy:omp:general_recovery">Theorem 14.19</a>.</p>
+<div class="proof corollary admonition" id="res-omp-sa-worst-k-term-approx-error">
+<p class="admonition-title"><span class="caption-number">Corollary 14.2 </span> (An estimate for the worst case <span class="math notranslate nohighlight">\(K\)</span>-term approximation error by OMP)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Assume that <span class="math notranslate nohighlight">\(\mu_1(K)  &lt; \frac{1}{2}\)</span> and let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> be a completely arbitrary
+signal.
+Orthogonal Matching Pursuit produces a <span class="math notranslate nohighlight">\(K\)</span>-term approximation <span class="math notranslate nohighlight">\(\bx^K\)</span> which
+satisfies</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-omp-worst-k-term-approximation-error">
+<span class="eqno">(14.29)<a class="headerlink" href="#equation-eq-greedy-omp-worst-k-term-approximation-error" title="Permalink to this equation">¶</a></span>\[\| \bx  - \bx^K \|_2 \leq \sqrt{1 + C(\bDDD, K)} \| \bx - \bx_{\opt} \|_2\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bx_{\opt}\)</span> is the optimum <span class="math notranslate nohighlight">\(K\)</span>-term approximation of <span class="math notranslate nohighlight">\(\bx\)</span> in dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>
+(i.e. <span class="math notranslate nohighlight">\(\bx_{\opt} = \bDDD \ba_{\opt}\)</span> where <span class="math notranslate nohighlight">\(\ba_{\opt}\)</span>
+is an optimal solution of <a class="reference internal" href="../ssm/srr.html#equation-eq-ssm-d-k-sparse-approx-problem">(12.19)</a>).
+<span class="math notranslate nohighlight">\(C(\bDDD, K)\)</span> is a constant depending upon the dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> and
+the desired sparsity level <span class="math notranslate nohighlight">\(K\)</span>. An estimate of <span class="math notranslate nohighlight">\(C(\bDDD, K)\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+C(\bDDD, K) \leq \frac{K ( 1 - \mu_1(K))}{(1 - 2 \mu_1(K))^2}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>Suppose that OMP runs fine for first <span class="math notranslate nohighlight">\(p\)</span> steps where <span class="math notranslate nohighlight">\(p &lt; K\)</span>.</p></li>
+<li><p>Thus <a class="reference internal" href="#equation-eq-greedy-omp-general-recovery">(14.26)</a>  keeps holding for first <span class="math notranslate nohighlight">\(p\)</span> steps.</p></li>
+<li><p>We now assume that <a class="reference internal" href="#equation-eq-greedy-omp-general-recovery">(14.26)</a>  breaks
+at step <span class="math notranslate nohighlight">\(p+1\)</span> and OMP is no longer guaranteed to make an
+optimal choice of column from <span class="math notranslate nohighlight">\(\bDDD_{\opt}\)</span>.</p></li>
+<li><p>Thus at step <span class="math notranslate nohighlight">\(p+1\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bx^p \|_2  
+    \leq \sqrt{1 + \frac{K(1 - \mu_1(K))} {(1  - 2 \mu_1(K))^2}} 
+    \| \bx - \bx_{\opt} \|_2.
+   \]</div>
+</li>
+<li><p>Any further iterations of OMP will only reduce the error further
+(although not in an optimal way).</p></li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx  - \bx^K \|_2 
+    \leq \| \bx - \bx^p \|_2  \leq \sqrt{1 + \frac{K(1 - \mu_1(K))} {(1  - 2 \mu_1(K))^2}} \| \bx - \bx_{\opt} \|_2.
+   \]</div>
+</li>
+<li><p>Choosing</p>
+<div class="math notranslate nohighlight">
+\[
+    C(\bDDD, K) = \frac{K ( 1 - \mu_1(K))}{(1 - 2 \mu_1(K))^2}
+   \]</div>
+<p>we can rewrite this as</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx  - \bx^K \|_2 \leq \sqrt{1 + C(\bDDD, K)} \| \bx - \bx_{\opt} \|_2.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="docutils">
+<p>This is a very useful result.
+It establishes that even if OMP is not able to recover the optimum <span class="math notranslate nohighlight">\(K\)</span>-term
+representation of <span class="math notranslate nohighlight">\(\bx\)</span>, it always constructs an approximation whose error lies
+within a constant factor of optimum approximation error
+where the constant factor is given by <span class="math notranslate nohighlight">\(\sqrt{1 + C(\bDDD, K)}\)</span>.</p>
+<ol class="simple">
+<li><p>If the optimum approximation error <span class="math notranslate nohighlight">\(\| \bx - \bx_{\opt} \|_2\)</span> is small then
+<span class="math notranslate nohighlight">\(\| \bx  - \bx^K \|_2\)</span> will also be not too large.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\| \bx - \bx_{\opt} \|_2\)</span> is moderate, then the OMP may inflate the
+approximation error to a higher value.
+But in this case, probably sparse approximation is not the right tool for signal
+representation over the dictionary.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./sparse_approx"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="basis_pursuit_sa.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">14.2. </span>Basis Pursuit</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../sparse_recovery/ch_sparse_recovery.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Sparse Recovery from Compressive Measurements</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,2293 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>15.3. Orthogonal Matching Pursuit &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="15.4. Compressive Sampling Matching Pursuit" href="cosamp_cs.html" />
+    <link rel="prev" title="15.2. Basis Pursuit" href="basis_pursuit_sr.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/sparse_recovery/omp_cs.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fsparse_recovery/omp_cs.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-algorithm">
+   15.3.1. The Algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-recovery-using-omp-with-random-sensing-matrices">
+   15.3.2. Exact Recovery using OMP with Random Sensing Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#signal-recovery-guarantees-with-omp">
+   15.3.3. Signal Recovery Guarantees with OMP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-omp-using-restricted-isometry-property">
+   15.3.4. Analysis of OMP using Restricted Isometry Property
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-re-look-at-the-omp-algorithm">
+     15.3.4.1. A re-look at the OMP Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rip-based-analysis-of-omp">
+     15.3.4.2. RIP based Analysis of OMP
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Orthogonal Matching Pursuit</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-algorithm">
+   15.3.1. The Algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-recovery-using-omp-with-random-sensing-matrices">
+   15.3.2. Exact Recovery using OMP with Random Sensing Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#signal-recovery-guarantees-with-omp">
+   15.3.3. Signal Recovery Guarantees with OMP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-omp-using-restricted-isometry-property">
+   15.3.4. Analysis of OMP using Restricted Isometry Property
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-re-look-at-the-omp-algorithm">
+     15.3.4.1. A re-look at the OMP Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rip-based-analysis-of-omp">
+     15.3.4.2. RIP based Analysis of OMP
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="orthogonal-matching-pursuit">
+<h1><span class="section-number">15.3. </span>Orthogonal Matching Pursuit<a class="headerlink" href="#orthogonal-matching-pursuit" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we consider the application of Orthogonal Matching Pursuit (OMP)
+for the problem of recovering a signal from its compressive measurements.
+This section is largely based on <span id="id1">[<a class="reference internal" href="../bib.html#id138" title="Joel A Tropp and Anna C Gilbert. Signal recovery from random measurements via orthogonal matching pursuit. Information Theory, IEEE Transactions on, 53(12):4655–4666, 2007.">38</a>]</span>.</p>
+<p>Please review the notation of compressing
+sensing process from <a class="reference internal" href="../ssm/compressive_sensing.html#def:ssm:compressed_sensing">Definition 12.23</a>.</p>
+<p>We will restrict our attention to the <span class="math notranslate nohighlight">\(N\)</span> dimensional Euclidean space
+as our signal space for the moment.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span> is a signal vector.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span> is the real sensing matrix with <span class="math notranslate nohighlight">\(M \ll N\)</span>.</p></li>
+<li><p>The measurement vector <span class="math notranslate nohighlight">\(\by \in \RR^M \)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \by = \Phi \bx
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\RR^M\)</span> is our measurement space.</p>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\by\)</span> is known, <span class="math notranslate nohighlight">\(\Phi\)</span> is known while <span class="math notranslate nohighlight">\(\bx\)</span> is unknown
+to the recovery algorithm.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx\)</span> is assumed to be either <span class="math notranslate nohighlight">\(K\)</span>-sparse or <span class="math notranslate nohighlight">\(K\)</span>-compressible.</p></li>
+</ol>
+<p>The sparse recovery problem can be written as</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-omp-sparse-recovery-problem">
+<span class="eqno">(15.5)<a class="headerlink" href="#equation-eq-greedy-omp-sparse-recovery-problem" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{x}{\text{minimize }} 
+&amp; &amp;  \| \by - \Phi \bx \|_2 \\
+&amp; \text{subject to}
+&amp; &amp;  \| \bx \|_0 \leq K.\end{split}\]</div>
+<p>Though the problem looks similar to <span class="math notranslate nohighlight">\((\mathcal{D}, K)\)</span>-SPARSE approximation problem,
+but there are  differences since <span class="math notranslate nohighlight">\(\Phi\)</span> is not a dictionary
+(see <a class="reference internal" href="../compressive_sensing/sensing_matrices.html#sec-cs-sensing-matrices"><span class="std std-ref">Sensing Matrices</span></a>).
+In particular, we don’t require each column to be unit norm.</p>
+<p>We will adapt OMP algorithm studied in
+<a class="reference internal" href="../sparse_approx/omp_sa.html#sec-sa-omp"><span class="std std-ref">Orthogonal Matching Pursuit</span></a> for the problem of
+sparse recovery in compressed sensing framework.
+In the analysis of OMP for CS We will address following questions:</p>
+<ul class="simple">
+<li><p>How many measurements are required to recover <span class="math notranslate nohighlight">\(\bx\)</span> from <span class="math notranslate nohighlight">\(\by\)</span> exactly
+if <span class="math notranslate nohighlight">\(\bx\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse?</p></li>
+<li><p>What kind of sensing matrices are admissible for OMP to work in CS framework?</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\bx\)</span> is not <span class="math notranslate nohighlight">\(K\)</span>-sparse, then how much maximum error is incurred?</p></li>
+</ul>
+<div class="section" id="the-algorithm">
+<h2><span class="section-number">15.3.1. </span>The Algorithm<a class="headerlink" href="#the-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>OMP algorithm adapted to CS is presented in <a class="reference internal" href="#alg:greedy:omp_cs">Algorithm 15.1</a>.</p>
+<div class="proof algorithm admonition" id="alg:greedy:omp_cs">
+<p class="admonition-title"><span class="caption-number">Algorithm 15.1 </span> (Orthogonal matching pursuit for sparse recovery from compressive measurements)</p>
+<div class="algorithm-content section" id="proof-content">
+<p>Inputs:</p>
+<ul class="simple">
+<li><p>Sensing matrix <span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span></p></li>
+<li><p>Measurement vector <span class="math notranslate nohighlight">\(\by \in \RR^M\)</span></p></li>
+<li><p>Desired sparsity level <span class="math notranslate nohighlight">\(K\)</span></p></li>
+</ul>
+<p>Outputs:</p>
+<ul class="simple">
+<li><p>A <span class="math notranslate nohighlight">\(K\)</span>-sparse estimate <span class="math notranslate nohighlight">\(\widehat{\bx} \in \Sigma_{K} \subseteq \RR^N\)</span>
+for the ideal signal <span class="math notranslate nohighlight">\(\bx\)</span></p></li>
+<li><p>An index set <span class="math notranslate nohighlight">\(\Lambda^K \subset \{1,\dots, N\}\)</span>
+identifying the support of <span class="math notranslate nohighlight">\(\widehat{\bx}\)</span></p></li>
+<li><p>An approximation <span class="math notranslate nohighlight">\(\by^K \in \RR^M\)</span> of <span class="math notranslate nohighlight">\(\by\)</span></p></li>
+<li><p>A  residual <span class="math notranslate nohighlight">\(\br^K = \by  - \by^K \in \RR^M\)</span></p></li>
+</ul>
+<p>Initialization:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(k \leftarrow 0\)</span> # Iteration counter</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx^0 \leftarrow \bzero\)</span> # Initial Estimate of <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\by^0 \leftarrow \Phi \bx^0 = \bzero\)</span> # Approximation of <span class="math notranslate nohighlight">\(\by\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\br^0 \leftarrow \by - \by^0 =\by\)</span> # Residual <span class="math notranslate nohighlight">\(\br \in \RR^M\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Lambda^0 \leftarrow \EmptySet\)</span> # Solution support <span class="math notranslate nohighlight">\(\Lambda = \supp(\widehat{\bx})\)</span></p></li>
+</ol>
+<p>Algorithm:</p>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(k == K\)</span> or <span class="math notranslate nohighlight">\(\br^k == \bzero\)</span>: break.</p></li>
+<li><p>Increase the iteration count</p>
+<div class="math notranslate nohighlight">
+\[
+   k \leftarrow k + 1.
+   \]</div>
+</li>
+<li><p>Sweep (find column with largest inner product)</p>
+<div class="math notranslate nohighlight">
+\[
+   \lambda_k  = \text{arg} \; \underset{1 \leq j \leq N}{\max}
+   |\langle \br^{k-1}, \phi_j \rangle|.
+   \]</div>
+</li>
+<li><p>Update support</p>
+<div class="math notranslate nohighlight">
+\[
+   \Lambda^{k} \leftarrow \Lambda^{k - 1} \cup \{ \lambda_k\}.
+   \]</div>
+</li>
+<li><p>Update provisional solution</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx^k \leftarrow \underset{\bx}{\argmin}\, 
+   \| \Phi \bx - \by \|^2_2
+   \]</div>
+<p>subject to <span class="math notranslate nohighlight">\(\supp(\bx) = \Lambda^{k}\)</span>.</p>
+</li>
+<li><p>Update residual</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \by^k \leftarrow \Phi \bx^k; \\
+   &amp; \br^k \leftarrow \by - \by^k.
+   \end{split}\]</div>
+</li>
+<li><p>Go to step 1.</p></li>
+</ol>
+<p>Finalization:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\widehat{\bx} \leftarrow \bx^k\)</span>.</p></li>
+</ul>
+</div>
+</div><p>Some remarks are in order</p>
+<ol>
+<li><p>The algorithm returns a <span class="math notranslate nohighlight">\(K\)</span>-term approximation of <span class="math notranslate nohighlight">\(\bx\)</span> given by <span class="math notranslate nohighlight">\(\widehat{\bx}\)</span>.</p></li>
+<li><p>Each step of algorithm is identified by the iteration counter <span class="math notranslate nohighlight">\(k\)</span> which runs from 0 to <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p>At each step <span class="math notranslate nohighlight">\(\bx^k\)</span>, <span class="math notranslate nohighlight">\(\by^k\)</span> and <span class="math notranslate nohighlight">\(\br^k\)</span> are computed
+where <span class="math notranslate nohighlight">\(\bx^k\)</span> is the <span class="math notranslate nohighlight">\(k\)</span>-term estimate of <span class="math notranslate nohighlight">\(\bx\)</span>,
+<span class="math notranslate nohighlight">\(\by^k\)</span> is corresponding measurement vector and <span class="math notranslate nohighlight">\(\br^k\)</span>
+is the residual between actual measurement
+vector <span class="math notranslate nohighlight">\(\by\)</span> and the estimated measurement vector <span class="math notranslate nohighlight">\(\by^k\)</span>.</p></li>
+<li><p>The support for <span class="math notranslate nohighlight">\(\widehat{\bx}\)</span> is maintained in an index set <span class="math notranslate nohighlight">\(\Lambda\)</span>.</p></li>
+<li><p>At each iteration we add one more new index <span class="math notranslate nohighlight">\(\lambda_k\)</span> to <span class="math notranslate nohighlight">\(\Lambda^{k-1}\)</span> giving us <span class="math notranslate nohighlight">\(\Lambda^k\)</span>.</p></li>
+<li><p>We will use <span class="math notranslate nohighlight">\(\Phi_{\Lambda^k} \in \RR^{M \times k}\)</span> to denote the submatrix constructed
+from the columns indexed by <span class="math notranslate nohighlight">\(\Lambda^k\)</span>.
+In other words, if <span class="math notranslate nohighlight">\(\Lambda^k = \{ \lambda_1, \dots, \lambda_k\}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+    \Phi_{\Lambda^k} = \begin{bmatrix}
+    \phi_{\lambda_1} &amp; \dots &amp; \phi_{\lambda_k}
+    \end{bmatrix}.
+   \]</div>
+</li>
+<li><p>Similarly we will denote a vector <span class="math notranslate nohighlight">\(\bx^k _{\Lambda^k} \in \RR^k\)</span>
+to denote a vector consisting of only
+<span class="math notranslate nohighlight">\(k\)</span> non-zero entries in <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>We note that <span class="math notranslate nohighlight">\(\br^k\)</span> is orthogonal to <span class="math notranslate nohighlight">\(\Phi_{\Lambda^k}\)</span>.
+This is true due to <span class="math notranslate nohighlight">\(\bx^k\)</span> being the least squares
+solution in the update provisional solution step.</p></li>
+<li><p>This also ensures that in each iteration a new column from <span class="math notranslate nohighlight">\(\Phi\)</span>
+indexed by <span class="math notranslate nohighlight">\(\lambda_k\)</span> will be chosen.
+OMP will never choose the same column again.</p></li>
+<li><p>In case <span class="math notranslate nohighlight">\(\bx\)</span> has a sparsity level less than <span class="math notranslate nohighlight">\(K\)</span> then <span class="math notranslate nohighlight">\(\br^k\)</span>
+will become zero in the middle.
+At that point we halt. There is no point going forward.</p></li>
+<li><p>An equivalent formulation of the least squares step is</p>
+<div class="math notranslate nohighlight">
+\[
+   \bz \leftarrow \text{arg } \underset{\bv \in \RR^k}{\min}\, \| \Phi_{\Lambda^k}  \bv - \by \|^2_2
+   \]</div>
+<p>followed by</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx^k_{\Lambda^k}  \leftarrow \bz.
+   \]</div>
+</li>
+<li><p>We solve the least squares problem for columns of <span class="math notranslate nohighlight">\(\Phi\)</span> indexed by <span class="math notranslate nohighlight">\(\Lambda^k\)</span>
+and then assign the <span class="math notranslate nohighlight">\(k\)</span> entries in the resultant <span class="math notranslate nohighlight">\(\bz\)</span> to the entries in <span class="math notranslate nohighlight">\(\bx^k\)</span>
+indexed by <span class="math notranslate nohighlight">\(\Lambda^k\)</span> while keeping other entries as 0.</p></li>
+<li><p>Least squares can be accelerated by using <span class="math notranslate nohighlight">\(\bx^{k-1}\)</span> as the starting estimate of
+<span class="math notranslate nohighlight">\(\bx^k\)</span> and carrying out a descent like Richardson’s iteration from there.</p></li>
+</ol>
+</div>
+<div class="section" id="exact-recovery-using-omp-with-random-sensing-matrices">
+<h2><span class="section-number">15.3.2. </span>Exact Recovery using OMP with Random Sensing Matrices<a class="headerlink" href="#exact-recovery-using-omp-with-random-sensing-matrices" title="Permalink to this headline">¶</a></h2>
+<p>The objective of this subsection is to prove theoretically that OMP can recover
+sparse signals from a small set of random linear measurements. In this
+subsection we discuss the conditions on the random sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span>
+under which they are suitable for signal recovery through OMP.</p>
+<div class="proof definition admonition" id="def:greedy:omp:admissible_sensing_matrix">
+<p class="admonition-title"><span class="caption-number">Definition 15.1 </span> (Admissible sensing matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>An <em>admissible sensing matrix</em> for <span class="math notranslate nohighlight">\(K\)</span>-sparse signals in <span class="math notranslate nohighlight">\(\RR^M\)</span> is an <span class="math notranslate nohighlight">\(M \times N\)</span>
+random matrix <span class="math notranslate nohighlight">\(\Phi\)</span> with following properties.</p>
+<ul>
+<li><p>[M0] <em>Independence</em>: The columns of <span class="math notranslate nohighlight">\(\Phi\)</span> are stochastically independent.</p></li>
+<li><p>[M1] <em>Normalization</em>: <span class="math notranslate nohighlight">\(\EE(\| \phi_j \|_2^2) = 1\)</span> for <span class="math notranslate nohighlight">\(j = 1, \dots, N\)</span>.</p></li>
+<li><p>[M2] <em>Joint correlation</em>:</p>
+<ul>
+<li><p>Let <span class="math notranslate nohighlight">\(\{\bu_k \}\)</span> be a sequence of <span class="math notranslate nohighlight">\(K\)</span> vectors
+whose <span class="math notranslate nohighlight">\(\ell_2\)</span> norms do not exceed one.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\phi\)</span> be a column of <span class="math notranslate nohighlight">\(\Phi\)</span> that is independent from this sequence.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+        \PP(\max_{k} | \langle \phi,  \bu_k \rangle | \leq \epsilon) \geq 
+        1  - 2 K \exp (- c \epsilon^2 M).
+      \]</div>
+</li>
+</ul>
+</li>
+<li><p>[M3] <em>Smallest singular value</em>: Given any
+<span class="math notranslate nohighlight">\(M \times K\)</span> (<span class="math notranslate nohighlight">\(K &lt; M\)</span>) submatrix <span class="math notranslate nohighlight">\(\bZ\)</span> from <span class="math notranslate nohighlight">\(\Phi\)</span>,
+the smallest (<span class="math notranslate nohighlight">\(K\)</span>-th largest) singular value
+<span class="math notranslate nohighlight">\(\sigma_{\min}(\bZ)\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP (\sigma_{\min}(\bZ) \geq 0.5) \geq 1 - \exp(-c M).
+  \]</div>
+</li>
+</ul>
+<p><span class="math notranslate nohighlight">\(c &gt; 0\)</span> is some positive constant.</p>
+</div>
+</div><p>It can be shown Rademacher sensing matrices (<a class="reference internal" href="../compressive_sensing/sensing_matrices.html#sec-sm-rademacher-sensing-matrix"><span class="std std-ref">Rademacher Sensing Matrices</span></a>)
+and Gaussian sensing matrices (<a class="reference internal" href="../compressive_sensing/sensing_matrices.html#sec-sm-gaussian-sensing-matrix"><span class="std std-ref">Gaussian Sensing Matrices</span></a>)
+satisfy all the requirements of admissible sensing matrices
+for sparse recovery using OMP.
+Some of the proofs are included in the book.
+You may want to review corresponding sections.</p>
+<p>Some remarks are in order to further explain the definition
+of admissible sensing matrices.</p>
+<div class="docutils">
+<ol class="simple">
+<li><p>Typically all the columns of a sensing matrix are drawn from the same distribution.
+But (M0) doesn’t require so.
+It allows different columns of <span class="math notranslate nohighlight">\(\Phi\)</span> to be drawn from different distributions.</p></li>
+<li><p>The joint correlation property (M2) depends on the decay of random variables
+<span class="math notranslate nohighlight">\(\| \phi_j \|_2\)</span>. i.e. it needs the tails of  <span class="math notranslate nohighlight">\(\| \phi_j \|_2\)</span> to be small.</p></li>
+<li><p>A bound on the smallest (non-zero) singular value of <span class="math notranslate nohighlight">\(M \times K\)</span>-sub-matrices (M3) controls
+how much the sensing matrix can shrink <span class="math notranslate nohighlight">\(K\)</span>-sparse vectors.</p></li>
+<li><p>I guess that the idea of admissible matrices came as follows.
+First OMP signal recovery guarantees were developed for Gaussian and Rademacher sensing matrices.
+Then the proofs were analyzed to identify the minimum requirements
+they imposed on the structure of random sensing matrices.
+This was extracted in the form of notion of admissible matrices.
+Finally the proof was reorganized to work for all random matrices which satisfy the
+admissibility criteria.
+It is important to understand this process of abstraction otherwise
+we just get surprised as to how the ideas like admissible matrices came out of the blue.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="signal-recovery-guarantees-with-omp">
+<h2><span class="section-number">15.3.3. </span>Signal Recovery Guarantees with OMP<a class="headerlink" href="#signal-recovery-guarantees-with-omp" title="Permalink to this headline">¶</a></h2>
+<p>We now show that OMP can be used to recover the original signal with high probability if the random measurements are taken using an
+admissible sensing matrix as described above.</p>
+<p>Here we consider the case where <span class="math notranslate nohighlight">\(\bx\)</span> is known to be <span class="math notranslate nohighlight">\(K\)</span>-sparse.</p>
+<div class="proof theorem admonition" id="thm:greedy:omp:cs_recovery_guarantee">
+<p class="admonition-title"><span class="caption-number">Theorem 15.2 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Fix some <span class="math notranslate nohighlight">\(\delta \in (0,1)\)</span>, and choose
+<span class="math notranslate nohighlight">\(M \geq C K \ln \left(\frac{N}{\delta} \right)\)</span>
+where <span class="math notranslate nohighlight">\(C\)</span> is an absolute constant.
+Suppose that <span class="math notranslate nohighlight">\(\bx\)</span> is an arbitrary <span class="math notranslate nohighlight">\(K\)</span>-sparse signal in <span class="math notranslate nohighlight">\(\RR^N\)</span>
+and draw an <span class="math notranslate nohighlight">\(M \times N\)</span> admissible sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span>
+independent from <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<p>Given the measurement vector <span class="math notranslate nohighlight">\(\by = \Phi \bx \in \RR^M\)</span>,
+Orthogonal Matching Pursuit can reconstruct
+the signal with probability exceeding <span class="math notranslate nohighlight">\(1 - \delta\)</span>.</p>
+</div>
+</div><p>Some remarks are in order.
+Specifically we compare OMP here with basis pursuit (BP).</p>
+<ol class="simple">
+<li><p>The theorem provides probabilistic guarantees.</p></li>
+<li><p>The theorem actually requires more measurements than the results for BP.</p></li>
+<li><p>The biggest advantage is that OMP is a much simpler algorithm
+than BP and works very fast.</p></li>
+<li><p>Results for BP show that a single random sensing matrix
+can be used for recovering all sparse signals.</p></li>
+<li><p>This theorem says that any sparse signal independent from the sensing matrix
+can be recovered.</p></li>
+<li><p>Thus this theorem is weaker than the results for BP.
+It can be argued that for practical situations,
+this limitation doesn’t matter much.</p></li>
+</ol>
+<div class="proof admonition" id="proof">
+<p>Proof. The main challenge here is to handle the issues that arise
+due to random nature of <span class="math notranslate nohighlight">\(\Phi\)</span>.
+We start with setting up some notation for this proof.</p>
+<ol class="simple">
+<li><p>We note that the columns that OMP chooses do not depend on the order
+in which they are stacked in <span class="math notranslate nohighlight">\(\Phi\)</span>.</p></li>
+<li><p>Thus without loss of generality we can assume that the first
+<span class="math notranslate nohighlight">\(K\)</span> entries of <span class="math notranslate nohighlight">\(\bx\)</span> are non-zero and rest are zero.</p></li>
+<li><p>If OMP picks up the first <span class="math notranslate nohighlight">\(K\)</span> columns,
+then OMP has succeeded otherwise it has failed.</p></li>
+<li><p>With this, support of <span class="math notranslate nohighlight">\(\bx\)</span> given by <span class="math notranslate nohighlight">\(\Lambda_{\opt} = \{ 1, \dots, K\}\)</span>.</p></li>
+</ol>
+<p>We now partition the sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi = \begin{bmatrix}
+\Phi_{\opt} &amp; | &amp; \Psi 
+\end{bmatrix}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span> consists of first <span class="math notranslate nohighlight">\(K\)</span> columns of <span class="math notranslate nohighlight">\(\Phi\)</span> which
+correspond to <span class="math notranslate nohighlight">\(\Lambda_{\opt}\)</span>.
+<span class="math notranslate nohighlight">\(\Psi\)</span> consists of remaining <span class="math notranslate nohighlight">\((N - K)\)</span>
+columns of <span class="math notranslate nohighlight">\(\Phi\)</span>.</p>
+<p>We recall from the proof of <a class="reference internal" href="../sparse_approx/omp_sa.html#thm:greedy:omp_exact_recovery_sufficient_condition">Theorem 14.17</a>
+that in order for OMP to make absolute progress at step <span class="math notranslate nohighlight">\(k+1\)</span> we require
+the <em>greedy selection ratio</em> <span class="math notranslate nohighlight">\(\rho(\br^k) &lt; 1\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[
+\rho(\br^k) = \frac{\| \Psi^H \br^k \|_{\infty}}{\| \Phi_{\opt}^H \br^k \|_{\infty}} 
+= \frac{\underset{\psi \in \Psi}{\max} | \langle \psi, \br^k \rangle |}{\| \Phi_{\opt}^H \br^k \|_{\infty}}.
+\]</div>
+<p>The proof is organized as follows:</p>
+<ol class="simple">
+<li><p>We first construct a thought experiment in which <span class="math notranslate nohighlight">\(\Psi\)</span>
+is not present and OMP is run
+only with <span class="math notranslate nohighlight">\(\by\)</span> and <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span>.</p></li>
+<li><p>We then run OMP with <span class="math notranslate nohighlight">\(\Psi\)</span> present under the condition <span class="math notranslate nohighlight">\(\rho(\br^k) &lt;1\)</span>.</p></li>
+<li><p>We show that the sequence of columns chosen and residual obtained
+in both cases is exactly the same.</p></li>
+<li><p>We show that the residuals obtained in the thought experiment
+are stochastically independent from the columns of <span class="math notranslate nohighlight">\(\Psi\)</span>.</p></li>
+<li><p>We then describe the success of OMP as an event in terms of these residuals.</p></li>
+<li><p>We compute a lower bound on the probability of the event of OMP success.</p></li>
+</ol>
+<p>For a moment suppose that there was no <span class="math notranslate nohighlight">\(\Psi\)</span> and OMP is run with <span class="math notranslate nohighlight">\(\by\)</span>
+and <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span> as input for <span class="math notranslate nohighlight">\(K\)</span> iterations.
+Naturally OMP will choose <span class="math notranslate nohighlight">\(K\)</span> columns in <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span> one by one.</p>
+<ol class="simple">
+<li><p>Let the columns it picks up in each step be indexed by
+<span class="math notranslate nohighlight">\(\omega_1, \omega_2, \dots, \omega_K\)</span>.</p></li>
+<li><p>Let the residuals before each step be
+<span class="math notranslate nohighlight">\(\bq^0, \bq^1, \bq^2, \dots, \bq^{K-1}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in \ColSpace(\Phi_{\opt})\)</span>,
+hence the residual after <span class="math notranslate nohighlight">\(K\)</span> iterations <span class="math notranslate nohighlight">\(\bq^K = \bzero\)</span>.</p></li>
+<li><p>Since OMP is a deterministic algorithm, hence the two sequences
+are simply functions of <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span>.</p></li>
+<li><p>Clearly, we can say that the residual <span class="math notranslate nohighlight">\(\bq^k\)</span> are stochastically independent
+of the columns in <span class="math notranslate nohighlight">\(\Psi\)</span>
+(since columns of <span class="math notranslate nohighlight">\(\Psi\)</span> are independent of the columns of <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span>).</p></li>
+<li><p>We also know that <span class="math notranslate nohighlight">\(\bq^k \in \ColSpace(\Phi_{\opt})\)</span>.</p></li>
+</ol>
+<p>In this thought experiment we made no assumptions about
+<span class="math notranslate nohighlight">\(\rho(\bq^k)\)</span> since <span class="math notranslate nohighlight">\(\Psi\)</span> is not present.
+We now consider the full matrix <span class="math notranslate nohighlight">\(\Phi\)</span> and execute OMP with <span class="math notranslate nohighlight">\(\by\)</span>.</p>
+<ol>
+<li><p>The actual sequence of residuals before each step is
+<span class="math notranslate nohighlight">\(\br^0, \br^1, \dots, \br^{K-1}\)</span>.</p></li>
+<li><p>The actual sequence of column indices is <span class="math notranslate nohighlight">\(\lambda_1, \dots, \lambda_K\)</span>.</p></li>
+<li><p>OMP succeeds in recovering <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(K\)</span> steps
+if and only if it selects the first <span class="math notranslate nohighlight">\(K\)</span> columns of <span class="math notranslate nohighlight">\(\Phi\)</span>
+in some order.</p></li>
+<li><p>This can happen if and only if <span class="math notranslate nohighlight">\(\rho(\br^k) &lt; 1\)</span> holds.</p></li>
+<li><p>We are going to show inductively that this can happen
+if and only if <span class="math notranslate nohighlight">\(\lambda_k = \omega_k\)</span> and
+<span class="math notranslate nohighlight">\(\bq^k = \br^k\)</span>.</p></li>
+<li><p>At the beginning of step 1,
+we have <span class="math notranslate nohighlight">\(\br^0 = \bq^0 = \by\)</span>.</p></li>
+<li><p>Now OMP selects one column from <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span> if and only if
+<span class="math notranslate nohighlight">\(\rho(\br^0) &lt;1\)</span> which is identical to <span class="math notranslate nohighlight">\(\rho(\bq^0) &lt;1\)</span>.</p></li>
+<li><p>So it remains to show at step 1 that <span class="math notranslate nohighlight">\(\lambda_1 = \omega_1\)</span>.</p></li>
+<li><p>Because <span class="math notranslate nohighlight">\(\rho(\br^0) &lt; 1\)</span>, the algorithm selects the index <span class="math notranslate nohighlight">\(\lambda_1\)</span>
+of the column from <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span> whose inner product with <span class="math notranslate nohighlight">\(\br^0\)</span> is the
+largest (in absolute value).</p></li>
+<li><p>Also since <span class="math notranslate nohighlight">\(\rho(\bq^0) &lt; 1\)</span> with <span class="math notranslate nohighlight">\(\br^0 = \bq^0\)</span>, <span class="math notranslate nohighlight">\(\omega_1\)</span> is the index
+of column in <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span> whose inner product with <span class="math notranslate nohighlight">\(\bq^0\)</span> is largest.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\omega_1 = \lambda_1\)</span>.</p></li>
+<li><p>We now assume that for the first <span class="math notranslate nohighlight">\(k\)</span> iterations, real OMP chooses
+the same columns as our imaginary thought experiment.</p></li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \lambda_j = \omega_j \Forall 1 \leq j \leq k
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \br^j = \bq^j \Forall 0 \leq j \leq k.
+   \]</div>
+<p>This is valid since the residuals at each step depend solely on the set
+of columns chosen so far and input <span class="math notranslate nohighlight">\(\by\)</span> which are same for both cases.</p>
+</li>
+<li><p>OMP chooses a column in <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span> at <span class="math notranslate nohighlight">\((k+1)\)</span>-th step
+if and only if <span class="math notranslate nohighlight">\(\rho(\br^k) &lt; 1\)</span> which is same as <span class="math notranslate nohighlight">\(\rho(\bq^k) &lt; 1\)</span>.</p></li>
+<li><p>Moreover since <span class="math notranslate nohighlight">\(\br^k = \bq^k\)</span> hence the column chosen by maximizing
+the inner product is same for both situations.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \lambda_{k + 1} = \omega_{k + 1}.
+   \]</div>
+</li>
+<li><p>Therefore the criteria for success of OMP can be stated as
+<span class="math notranslate nohighlight">\(\rho(\bq^k) &lt; 1\)</span> for all <span class="math notranslate nohighlight">\(0 \leq k \leq K-1\)</span>.</p></li>
+</ol>
+<p>We now recall that <span class="math notranslate nohighlight">\(\bq^k\)</span> is actually a random variable (depending upon the
+random vectors which comprise the columns of <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span>).</p>
+<ol>
+<li><p>Thus the event on which the algorithm succeeds in sparse recovery of <span class="math notranslate nohighlight">\(\bx\)</span>
+from <span class="math notranslate nohighlight">\(\by\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    E_{\succ} \triangleq 
+    \left \{ \underset{0 \leq k &lt; K}{\max} \rho(\bq^k)  &lt; 1 \right \}.
+   \]</div>
+</li>
+<li><p>In a particular instance of OMP execution if the event <span class="math notranslate nohighlight">\(E_{\succ}\)</span> happens,
+then OMP successfully recovers <span class="math notranslate nohighlight">\(\bx\)</span> from <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+<li><p>Otherwise OMP fails.</p></li>
+<li><p>Hence the probability of success of OMP is same as the
+probability of event <span class="math notranslate nohighlight">\(E_{\succ}\)</span>.</p></li>
+<li><p>We will be looking for some sort of a lower bound on <span class="math notranslate nohighlight">\(\PP(E_{\succ})\)</span>.</p></li>
+<li><p>We note that we have <span class="math notranslate nohighlight">\(\{ \bq^k \}\)</span> as a sequence of random vectors in the
+column span of <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span> and
+they are stochastically independent from columns of <span class="math notranslate nohighlight">\(\Psi\)</span>.</p></li>
+<li><p>It is difficult to compute <span class="math notranslate nohighlight">\(\PP(E_{\succ})\)</span> directly.</p></li>
+<li><p>We consider another event</p>
+<div class="math notranslate nohighlight">
+\[
+   \Gamma = \{ \sigma_{\min} (\Phi_{\opt}) \geq 0.5 \}.
+   \]</div>
+</li>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP(E_{\succ}) 
+    \geq \PP \left (  \underset{0 \leq k &lt; K}{\max} \rho(\bq^k)  &lt; 1
+    \; \text{ and } \;
+    \Gamma
+    \right ).
+   \]</div>
+</li>
+<li><p>Using conditional probability we can rewrite</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP(E_{\succ}) \geq 
+    \PP \left (  \underset{0 \leq k &lt; K}{\max} \rho(\bq^k)  &lt; 1 | \Gamma \right ) \PP (\Gamma).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\Phi\)</span> is an admissible matrix hence it satisfies (M3)
+which gives us</p>
+<div class="math notranslate nohighlight">
+\[
+     \PP (\Gamma) \geq 1 - \exp(-c M).
+    \]</div>
+</li>
+<li><p>We just need a lower bound on the conditional probability.</p></li>
+<li><p>We assume that <span class="math notranslate nohighlight">\(\Gamma\)</span> occurs.</p></li>
+<li><p>For each step index <span class="math notranslate nohighlight">\(k = 0, 1, \dots, K-1\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho(\bq^k) 
+    = \frac{ \max_{\psi} | \langle \psi, \bq^k \rangle |}{\| \Phi_{\opt}^H \bq^k \|_{\infty}}.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\( \Phi_{\opt}^H \bq^k \in \RR^K\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \sqrt{K} \| \Phi_{\opt}^H \bq^k \|_{\infty} \geq  \| \Phi_{\opt}^H \bq^k \|_2.
+   \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho(\bq^k) \leq 
+    \frac{ \sqrt{K} \max_{\psi } | \langle \psi, \bq^k \rangle | }{ \| \Phi_{\opt}^H \bq^k \|_2 }.
+    \]</div>
+</li>
+<li><p>To simplify this expression, we define a vector</p>
+<div class="math notranslate nohighlight">
+\[
+    \bu^k \triangleq \frac{0.5 \bq^k} {\| \Phi_{\opt}^H \bq^k \|_2}.
+    \]</div>
+</li>
+<li><p>This lets us write</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho(\bq^k) \leq 2 \sqrt{K} \max_{\psi } | \langle \psi, \bu^k \rangle |.
+    \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP(\rho(\bq^k) &lt; 1 | \Gamma) \geq \PP (2 \sqrt{K} \max_{\psi } | \langle \psi, \bu^k \rangle | &lt; 1 | \Gamma) 
+    = \PP \left (\max_{\psi } | \langle \psi, \bu^k \rangle | &lt; \frac{1}{2 \sqrt{K}}  | \Gamma \right ).
+    \]</div>
+</li>
+<li><p>From the basic properties of singular values we recall that</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\| \Phi_{\opt}^H \bq \|_2}{ \|\bq \|_2} 
+    \geq \sigma_{\min} (\Phi_{\opt}) \geq 0.5
+    \]</div>
+<p>for all vectors <span class="math notranslate nohighlight">\(\bq\)</span> in the range of <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span>.</p>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{ 0.5 \|\bq \|_2}  {\| \Phi_{\opt}^H \bq \|_2} \leq 1.
+    \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bq^k\)</span> is in the column space of <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span>,
+for <span class="math notranslate nohighlight">\(\bu^k\)</span> defined above we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bu^k \|_2 \leq 1.
+    \]</div>
+<p>This is valid under the assumption that the event <span class="math notranslate nohighlight">\(\Gamma\)</span> has happened.</p>
+</li>
+<li><p>From the above we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP\left (\max_k \rho(\bq^k) &lt; 1  | \Gamma \right) \geq 
+    \PP \left ( \max_k \max_{\psi } | \langle \psi, \bu^k \rangle | &lt; \frac{1}{2 \sqrt{K}}  | \Gamma \right )
+    \]</div>
+</li>
+<li><p>In the R.H.S. we can exchange the order of two maxima. This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP \left ( \max_k \max_{\psi } | \langle \psi, \bu^k \rangle | &lt; \frac{1}{2 \sqrt{K}}  | \Gamma \right ) 
+    =  \PP \left ( \max_{\psi } \max_k | \langle \psi, \bu^k \rangle | &lt; \frac{1}{2 \sqrt{K}}  | \Gamma \right ).
+    \]</div>
+</li>
+<li><p>We also note that columns of <span class="math notranslate nohighlight">\(\Psi\)</span> are independent.</p></li>
+<li><p>Thus in above we require that for each column of <span class="math notranslate nohighlight">\(\Psi\)</span>
+<span class="math notranslate nohighlight">\(\max_k | \langle \psi, \bu^k \rangle | &lt; \frac{1}{2 \sqrt{K}}\)</span>
+should hold independently.</p></li>
+<li><p>Hence we can say</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP \left ( \max_{\psi } \max_k | \langle \psi, \bu^k \rangle | &lt; \frac{1}{2 \sqrt{K}}  | \Gamma \right )
+    = \prod_{\psi}\PP \left ( \max_k | \langle \psi, \bu^k \rangle | &lt; \frac{1}{2 \sqrt{K}}  | \Gamma \right ).
+    \]</div>
+</li>
+<li><p>We recall that event <span class="math notranslate nohighlight">\(\Gamma\)</span> depends only on columns of <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span>.</p></li>
+<li><p>Hence columns of <span class="math notranslate nohighlight">\(\Psi\)</span> are independent of <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \prod_{\psi}\PP \left ( \max_k | \langle \psi, \bu^k \rangle | &lt; \frac{1}{2 \sqrt{K}}  | \Gamma \right )
+    = \prod_{\psi}\PP \left ( \max_k | \langle \psi, \bu^k \rangle | &lt; \frac{1}{2 \sqrt{K}} \right ).
+    \]</div>
+</li>
+<li><p>Since the sequence <span class="math notranslate nohighlight">\(\{\bu^k \}\)</span> depends only on columns of <span class="math notranslate nohighlight">\(\Phi_{\opt}\)</span>,
+hence columns of <span class="math notranslate nohighlight">\(\Psi\)</span> are independent of <span class="math notranslate nohighlight">\(\{\bu^k \}\)</span>.</p></li>
+<li><p>Thus we can take help of (M2) to get</p>
+<div class="math notranslate nohighlight">
+\[
+    \prod_{\psi}\PP \left ( \max_k | \langle \psi, \bu^k \rangle | &lt; \frac{1}{2 \sqrt{K}} \right )
+    \geq  \left (1 - 2 K \exp\left(- \frac{c M}{4 K} \right) \right )^{N - K}.
+    \]</div>
+</li>
+<li><p>This gives us the lower bound</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP\left (\max_k \rho(\bq^k) &lt; 1  | \Gamma \right) \geq 
+    \left (1 - 2 K \exp\left(- \frac{c M}{4 K} \right) \right )^{N - K}.
+    \]</div>
+</li>
+<li><p>Finally plugging in the lower bound for <span class="math notranslate nohighlight">\(\PP(\Gamma)\)</span> we get</p>
+<div class="math notranslate nohighlight" id="equation-eq-7237821a-ba2a-4820-ad4c-74433f7efa5f">
+<span class="eqno">(15.6)<a class="headerlink" href="#equation-eq-7237821a-ba2a-4820-ad4c-74433f7efa5f" title="Permalink to this equation">¶</a></span>\[\PP(E_{\succ}) \geq \left (1 - 2 K \exp\left(- \frac{c M}{4 K} \right) \right )^{N - K} (1 - \exp(-c M)).\]</div>
+<p>All that is remaining now is to simplify this expression.</p>
+</li>
+<li><p>We recall that we assumed in the theorem statement</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; M \geq C K \ln \left(\frac{N}{\delta} \right)\\
+    \implies &amp; \frac{M}{C K} \geq  \ln \left(\frac{N}{\delta} \right)\\
+    \implies &amp; \exp \left  ( \frac{M}{C K} \right ) \geq \frac{N}{\delta} \\
+    \implies &amp; \frac{\delta}{N} \geq \exp \left  ( - \frac{M}{C K} \right ) \\
+    \implies &amp; \delta \geq N \exp \left  ( - \frac{M}{C K} \right ).
+    \end{split}\]</div>
+</li>
+<li><p>But we assumed that <span class="math notranslate nohighlight">\(0 &lt; \delta &lt; 1\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    N \exp \left  ( - \frac{M}{C K} \right ) &lt; 1.
+    \]</div>
+</li>
+<li><p>If we choose <span class="math notranslate nohighlight">\(C  \geq \frac{4}{c}\)</span> then</p>
+<div class="math notranslate nohighlight" id="equation-eq-cfc76c94-6c53-429b-91be-020e5258cc2a">
+<span class="eqno">(15.7)<a class="headerlink" href="#equation-eq-cfc76c94-6c53-429b-91be-020e5258cc2a" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; - \frac{1}{C} \geq - \frac{c}{4}\\
+\implies &amp; - \frac{M}{CK} \geq - \frac{cM}{4K}\\
+\implies &amp; \exp\left ( - \frac{M}{CK} \right) \geq \exp \left( - \frac{cM}{4K} \right ) \\
+\implies &amp; N \exp\left ( - \frac{M}{CK} \right) \geq 2K \exp \left( - \frac{cM}{4K} \right ) \\
+\implies &amp; 1 &gt; \delta \geq 2K \exp \left( - \frac{cM}{4K} \right ) \\\end{split}\]</div>
+<p>where we assumed that <span class="math notranslate nohighlight">\(N \gg 2 K\)</span>.</p>
+</li>
+<li><p>We recall that</p>
+<div class="math notranslate nohighlight">
+\[
+    (1 - x)^k \geq 1 - k x \text{ if } k \geq 1 \text{ and } x \leq 1.
+    \]</div>
+</li>
+<li><p>Applying on <a class="reference internal" href="#equation-eq-7237821a-ba2a-4820-ad4c-74433f7efa5f">(15.6)</a> we get</p>
+<div class="math notranslate nohighlight" id="equation-eq-09bfc9be-b2cb-419d-a0ba-1dffb2ba12f6">
+<span class="eqno">(15.8)<a class="headerlink" href="#equation-eq-09bfc9be-b2cb-419d-a0ba-1dffb2ba12f6" title="Permalink to this equation">¶</a></span>\[\PP(E_{\succ}) \geq 1 - 2 K (N - K) \exp\left(- \frac{c M}{4 K} \right) - \exp(-c M).\]</div>
+<p>We ignored the 4-th term in this expansion.</p>
+</li>
+<li><p>Now we can safely assume that <span class="math notranslate nohighlight">\(K(N -K) \geq \frac{N^2}{4}\)</span> giving us</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP(E_{\succ}) \geq 1 - \frac{N^2}{2} \exp\left(- \frac{c M}{4 K} \right) - \exp(-c M).
+    \]</div>
+</li>
+<li><p>If we choose <span class="math notranslate nohighlight">\(C  \geq \frac{8}{c}\)</span> then following
+<a class="reference internal" href="#equation-eq-cfc76c94-6c53-429b-91be-020e5258cc2a">(15.7)</a>
+we can get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; N \exp\left ( - \frac{M}{CK} \right) \geq N \exp \left( - \frac{cM}{8K} \right )\\
+    \implies &amp; \delta \geq N \exp \left( - \frac{cM}{8K} \right )\\
+    \implies &amp; \delta^2 \geq N^2 \exp \left( - \frac{cM}{4K} \right )\\
+    \implies &amp; 1 - \frac{\delta^2}{2} \leq 1  - \frac{N^2}{2} \exp\left(- \frac{c M}{4 K} \right).
+    \end{split}\]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP(E_{\succ}) \geq 1 - \frac{\delta^2}{2} - \exp(-c M).
+    \]</div>
+</li>
+<li><p>Some further simplification can give us</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP(E_{\succ}) \geq 1 - \delta.
+    \]</div>
+</li>
+<li><p>Thus with a suitable choice of the constant <span class="math notranslate nohighlight">\(C\)</span>, a choice of
+<span class="math notranslate nohighlight">\(M \geq C K \ln \left(\frac{N}{\delta} \right)\)</span> with <span class="math notranslate nohighlight">\(\delta \in (0,1)\)</span>
+is sufficient to reduce the failure probability below <span class="math notranslate nohighlight">\(\delta\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="analysis-of-omp-using-restricted-isometry-property">
+<span id="sec-greedy-omp-rip-analysis"></span><h2><span class="section-number">15.3.4. </span>Analysis of OMP using Restricted Isometry Property<a class="headerlink" href="#analysis-of-omp-using-restricted-isometry-property" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection we present an alternative analysis of
+OMP algorithm using the Restricted Isometry Property of
+the matrix <span class="math notranslate nohighlight">\(\Phi\)</span> <span id="id2">[<a class="reference internal" href="../bib.html#id51" title="Mark A Davenport and Michael B Wakin. Analysis of orthogonal matching pursuit using the restricted isometry property. Information Theory, IEEE Transactions on, 56(9):4395–4401, 2010.">17</a>]</span>.</p>
+<div class="section" id="a-re-look-at-the-omp-algorithm">
+<h3><span class="section-number">15.3.4.1. </span>A re-look at the OMP Algorithm<a class="headerlink" href="#a-re-look-at-the-omp-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>Before we get into the RIP based analysis of OMP, it would be
+useful to get some new insights into the behavior of OMP algorithm.
+These insights will help us a lot in performing the analysis later.</p>
+<ol>
+<li><p>We will assume throughout that whenever <span class="math notranslate nohighlight">\(| \Lambda | \leq K\)</span>,
+then <span class="math notranslate nohighlight">\(\Phi_{\Lambda}\)</span> is full rank.</p></li>
+<li><p>The pseudo-inverse is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \Phi_{\Lambda}^{\dag}
+    = \left (\Phi_{\Lambda}^H \Phi_{\Lambda} \right )^{-1} \Phi_{\Lambda}^H.
+   \]</div>
+</li>
+<li><p>The orthogonal projection operator to the column space for
+<span class="math notranslate nohighlight">\(\Phi_{\Lambda}\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \bP_{\Lambda}  = \Phi_{\Lambda}\Phi_{\Lambda}^{\dag}.
+   \]</div>
+</li>
+<li><p>The orthogonal projection operator onto the orthogonal complement of
+<span class="math notranslate nohighlight">\(\ColSpace(\Phi_{\Lambda})\)</span> (column space of <span class="math notranslate nohighlight">\(\Phi_{\Lambda}\)</span>)
+is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \bP_{\Lambda}^{\perp} = \bI - \bP_{\Lambda}.
+   \]</div>
+</li>
+<li><p>Both <span class="math notranslate nohighlight">\(\bP_{\Lambda}\)</span> and <span class="math notranslate nohighlight">\(\bP_{\Lambda}^{\perp}\)</span>
+satisfy the standard properties like
+<span class="math notranslate nohighlight">\(\bP = \bP^H\)</span> and <span class="math notranslate nohighlight">\(\bP^2 = \bP\)</span>.</p></li>
+<li><p>We further define</p>
+<div class="math notranslate nohighlight">
+\[
+    \Psi_{\Lambda} = \bP_{\Lambda}^{\perp} \Phi.
+   \]</div>
+</li>
+<li><p>We are orthogonalizing the atoms in <span class="math notranslate nohighlight">\(\Phi\)</span> against
+<span class="math notranslate nohighlight">\(\ColSpace(\Phi_{\Lambda})\)</span>,
+i.e. taking the component of the atom which is  orthogonal
+to the column space of <span class="math notranslate nohighlight">\(\Phi_{\Lambda}\)</span>.</p></li>
+<li><p>The atoms in <span class="math notranslate nohighlight">\(\Psi_{\Lambda}\)</span> corresponding
+to the index set <span class="math notranslate nohighlight">\(\Lambda\)</span> would be <span class="math notranslate nohighlight">\(\bzero\)</span>.</p></li>
+<li><p>We will make some further observations on the behavior of
+OMP algorithm <span id="id3">[<a class="reference internal" href="../bib.html#id51" title="Mark A Davenport and Michael B Wakin. Analysis of orthogonal matching pursuit using the restricted isometry property. Information Theory, IEEE Transactions on, 56(9):4395–4401, 2010.">17</a>]</span>.</p></li>
+<li><p>Recall that the approximation after the <span class="math notranslate nohighlight">\(k\)</span>-th iteration is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx^k_{\Lambda^k}  = \Phi_{\Lambda^k}^{\dag} \by \quad \text{ and } 
+    \quad \bx^k_{{\Lambda^k}^c} = \bzero.
+   \]</div>
+</li>
+<li><p>The residual after <span class="math notranslate nohighlight">\(k\)</span>-th iteration is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \br^k  = \by - \Phi \bx^k
+    \]</div>
+<p>and by construction <span class="math notranslate nohighlight">\(\br^k\)</span> is orthogonal to <span class="math notranslate nohighlight">\(\Phi_{\Lambda^k}\)</span>.</p>
+</li>
+<li><p>We can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \Phi \bx^k  = \Phi_{\Lambda}\bx^k_{\Lambda^k} + 
+    \Phi_{{\Lambda^k}^c} \bx^k_{\Lambda^c} 
+    = \Phi_{\Lambda^k}\bx^k_{\Lambda^k}.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\br^k  &amp;=  \by - \Phi_{\Lambda^k}\bx^k_{\Lambda^k} \\
+&amp;= \by - \Phi_{\Lambda^k}\Phi_{\Lambda^k}^{\dag} \by \\
+&amp;= ( \bI - \bP_{\Lambda^k}) \by = \bP_{\Lambda^k}^{\perp} \by.\end{split}\]</div>
+</li>
+<li><p>In summary</p>
+<div class="math notranslate nohighlight">
+\[
+    \br^k  = \bP_{\Lambda^k}^{\perp} \by.
+   \]</div>
+</li>
+<li><p>This shows that it is not actually necessary to compute <span class="math notranslate nohighlight">\(\bx^k\)</span>
+in order to find <span class="math notranslate nohighlight">\(\br^k\)</span>.
+An equivalent way of writing OMP algorithm could be
+as in <a class="reference internal" href="#alg:omp_rip_variant_a">Algorithm 15.2</a>.</p></li>
+</ol>
+<div class="proof algorithm admonition" id="alg:omp_rip_variant_a">
+<p class="admonition-title"><span class="caption-number">Algorithm 15.2 </span> (Sketch of OMP without intermediate <span class="math notranslate nohighlight">\(\bx^k\)</span> computation)</p>
+<div class="algorithm-content section" id="proof-content">
+<p>Algorithm:</p>
+<ol class="simple">
+<li><p>If halting criteria is satisfied, then break.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bh^{k + 1} \leftarrow \Phi^H \br^{k}\)</span> # Match</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda^{k + 1} \leftarrow \underset{j \notin \Lambda^{k}}{\text{arg} \max} | \bh^{k + 1}_j |\)</span> # Identify</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Lambda^{k + 1} \leftarrow \Lambda^{k} \cup \{ \lambda^{k + 1} \}\)</span> # Update support</p></li>
+<li><p><span class="math notranslate nohighlight">\(\br^{k + 1} \leftarrow \bP_{\Lambda^{k + 1}}^{\perp} \by\)</span> # Update residual</p></li>
+<li><p><span class="math notranslate nohighlight">\(k \leftarrow k + 1\)</span>.</p></li>
+<li><p>Go back to step 1.</p></li>
+</ol>
+<p>Finalization:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\widehat{\bx}_{\Lambda^k}  \leftarrow \Phi_{\Lambda^k}^{\dag} \by\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\widehat{\bx}_{{\Lambda^k}^c}  \leftarrow \bzero\)</span>.</p></li>
+</ol>
+</div>
+</div><ol>
+<li><p>In the matching step, we are correlating <span class="math notranslate nohighlight">\(\br^k\)</span> with columns of <span class="math notranslate nohighlight">\(\Phi\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\br^k\)</span> is orthogonal to column space of <span class="math notranslate nohighlight">\(\Phi_{\Lambda^k}\)</span>, hence
+this correlation is identical to correlating <span class="math notranslate nohighlight">\(\br^k\)</span> with <span class="math notranslate nohighlight">\(\Psi_{\Lambda^k}\)</span>.</p></li>
+<li><p>To see this, observe that</p>
+<div class="math notranslate nohighlight">
+\[
+    \br^k = \bP_{\Lambda^k}^{\perp} \by 
+    = \bP_{\Lambda^k}^{\perp} \bP_{\Lambda^k}^{\perp} \by
+    = (\bP_{\Lambda^k}^{\perp})^H \bP_{\Lambda^k}^{\perp} \by.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \bh^{k + 1 } 
+    &amp;= \Phi^H \br^k \\
+    &amp;=  \Phi^H ( \bP_{\Lambda^k}^{\perp})^H \bP_{\Lambda^k}^{\perp} \by\\
+    &amp;= \left (\bP_{\Lambda^k}^{\perp} \Phi \right )^H  
+    \bP_{\Lambda^k}^{\perp} \by \\
+    &amp;= \left ( \Psi_{\Lambda^k} \right ) ^H \br^k.
+   \end{split}\]</div>
+</li>
+<li><p>On similar lines, we can also see that</p>
+<div class="math notranslate nohighlight">
+\[
+    \bh^{k + 1} 
+    =  \Phi^H  \br^k 
+    = \Phi^H \bP_{\Lambda^k}^{\perp} \by 
+    = \Phi^H \left ( \bP_{\Lambda^k}^{\perp} \right)^H \by 
+    = \left ( \Psi_{\Lambda^k}\right )^H \by.
+   \]</div>
+</li>
+<li><p>In other words, we have</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-cda31681-9bbd-4406-94da-15cb0f116122">
+<span class="eqno">(15.9)<a class="headerlink" href="#equation-eq-greedy-cda31681-9bbd-4406-94da-15cb0f116122" title="Permalink to this equation">¶</a></span>\[\bh^{k + 1 } = \left ( \Psi_{\Lambda^k} \right)^H \br^k 
+= \left ( \Psi_{\Lambda^k} \right )^H \by.\]</div>
+</li>
+<li><p>Thus, we can observe that OMP can be further simplified and
+we don’t even need to compute <span class="math notranslate nohighlight">\(\br^k\)</span> in order to compute <span class="math notranslate nohighlight">\(\bh^{k + 1}\)</span>.</p></li>
+<li><p>There is one catch though.
+If the halting criterion depends on the need to compute the residual energy,
+then we certainly need to compute <span class="math notranslate nohighlight">\(\br^k\)</span>. If the halting criteria is simply
+the number of <span class="math notranslate nohighlight">\(K\)</span> iterations, then we don’t need to compute <span class="math notranslate nohighlight">\(\br^k\)</span>.</p></li>
+<li><p>The revised OMP algorithm sketch is presented in
+<a class="reference internal" href="#alg:omp_rip_variant_b">Algorithm 15.3</a>.</p></li>
+</ol>
+<div class="proof algorithm admonition" id="alg:omp_rip_variant_b">
+<p class="admonition-title"><span class="caption-number">Algorithm 15.3 </span> (Sketch of OMP without intermediate <span class="math notranslate nohighlight">\(\bx^k\)</span> computation)</p>
+<div class="algorithm-content section" id="proof-content">
+<p>Algorithm:</p>
+<ol class="simple">
+<li><p>If halting criteria is satisfied, then break.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bh^{k + 1} \leftarrow \left ( \Psi_{\Lambda^{k}} \right)^H \by\)</span> # Match</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda^{k + 1} \leftarrow \underset{i \notin \Lambda^{k}}{\text{arg} \max} | \bh^{k + 1}_i |\)</span> # Identify</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Lambda^{k + 1} \leftarrow \Lambda^{k} \cup \{ \lambda^{k + 1} \}\)</span> # Update support</p></li>
+<li><p><span class="math notranslate nohighlight">\(k \leftarrow k + 1\)</span></p></li>
+<li><p>Go back to step 1.</p></li>
+</ol>
+<p>Finalization:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\widehat{\bx}_{\Lambda^k}  \leftarrow \Phi_{\Lambda^k}^{\dag} \by \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\widehat{\bx}_{{\Lambda^k}^c}  \leftarrow \bzero\)</span>.</p></li>
+</ol>
+</div>
+</div><p>With this the OMP algorithm is considerably simplified from the
+perspective of analyzing its recovery guarantees.</p>
+<div class="docutils">
+<ol>
+<li><p>Coming back to <span class="math notranslate nohighlight">\(\bh^{k + 1}\)</span>, note that the columns of <span class="math notranslate nohighlight">\(\Psi_{\Lambda^k}\)</span>
+indexed by <span class="math notranslate nohighlight">\(\Lambda^k\)</span> are all <span class="math notranslate nohighlight">\(\bzero\)</span>s.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    h^{k + 1}_j = \bzero \quad \Forall j \in \Lambda^k.
+   \]</div>
+</li>
+<li><p>This makes it obvious that <span class="math notranslate nohighlight">\(\lambda^{k + 1} \notin \Lambda\)</span> and
+consequently <span class="math notranslate nohighlight">\(|\Lambda^k | = k\)</span> (inductively).</p></li>
+<li><p>Lastly for the case of noise free model <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span>, we may write</p>
+<div class="math notranslate nohighlight">
+\[
+    \br^k = \bP_{\Lambda^k}^{\perp} \by 
+    = \bP_{\Lambda^k}^{\perp} \Phi \bx 
+    = \Psi_{\Lambda^k} \bx.
+   \]</div>
+</li>
+<li><p>Since columns of <span class="math notranslate nohighlight">\(\Psi_{\Lambda^k}\)</span> indexed by <span class="math notranslate nohighlight">\(\Lambda^k\)</span> are <span class="math notranslate nohighlight">\(\bzero\)</span>,
+hence when <span class="math notranslate nohighlight">\(\supp(\bx) \subseteq \Lambda^k\)</span>, then <span class="math notranslate nohighlight">\(\br^k = \bzero\)</span>.</p></li>
+<li><p>In this case <span class="math notranslate nohighlight">\(\bx^k = \bx\)</span> exactly since it is a least squares estimate
+over <span class="math notranslate nohighlight">\(\Phi_{\Lambda^k}\)</span>.</p></li>
+<li><p>For the same reason, if we construct a vector <span class="math notranslate nohighlight">\(\widetilde{\bx}^k\)</span>
+by zeroing out the entries indexed by <span class="math notranslate nohighlight">\(\Lambda^k\)</span> i.e.</p>
+<div class="math notranslate nohighlight" id="equation-eq-omp-widetilde-alpha-definition">
+<span class="eqno">(15.10)<a class="headerlink" href="#equation-eq-omp-widetilde-alpha-definition" title="Permalink to this equation">¶</a></span>\[\widetilde{\bx}^k_{\Lambda^k} = 0  \quad 
+\text{ and } \quad \widetilde{\bx}_{{\Lambda^k}^c} = \bx_{{\Lambda^k}^c}\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight" id="equation-eq-omp-3715a448-7956-43a0-91d5-43447bbdfa7b">
+<span class="eqno">(15.11)<a class="headerlink" href="#equation-eq-omp-3715a448-7956-43a0-91d5-43447bbdfa7b" title="Permalink to this equation">¶</a></span>\[\br^k = \Psi_{\Lambda^k} \widetilde{\bx}^k.\]</div>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(\| \bx \|_0 = K\)</span>, then <span class="math notranslate nohighlight">\(\| \widetilde{\bx}^k \|_0 = K - k\)</span>.</p></li>
+<li><p>Lastly putting <span class="math notranslate nohighlight">\(\br^k\)</span> back in
+<a class="reference internal" href="#equation-eq-greedy-cda31681-9bbd-4406-94da-15cb0f116122">(15.9)</a>, we obtain</p>
+<div class="math notranslate nohighlight" id="equation-eq-omp-3dfc00cb-f266-4876-b7d9-14daeca3056a">
+<span class="eqno">(15.12)<a class="headerlink" href="#equation-eq-omp-3dfc00cb-f266-4876-b7d9-14daeca3056a" title="Permalink to this equation">¶</a></span>\[\bh^{k + 1 } = \left ( \Psi_{\Lambda^k} \right)^H \Psi_{\Lambda^k} \widetilde{\bx}^k.\]</div>
+</li>
+<li><p>In this version, we see that <span class="math notranslate nohighlight">\(\bh^{k + 1}\)</span> is computed by applying the
+matrix <span class="math notranslate nohighlight">\(\left ( \Psi_{\Lambda^k} \right)^H \Psi_{\Lambda^k}\)</span> to the
+<span class="math notranslate nohighlight">\((K - k)\)</span> sparse vector <span class="math notranslate nohighlight">\(\widetilde{\bx}^k\)</span>.</p></li>
+<li><p>We are now ready to carry out RIP based analysis of OMP.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="rip-based-analysis-of-omp">
+<h3><span class="section-number">15.3.4.2. </span>RIP based Analysis of OMP<a class="headerlink" href="#rip-based-analysis-of-omp" title="Permalink to this headline">¶</a></h3>
+<p>Our analysis here will focus on the case for
+real signals and real matrices i.e. <span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span>
+and <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span>. We will attack the noise free case.</p>
+<p>Some results for matrices that satisfy RIP will be useful
+in the upcoming analysis.
+Please refer to <a class="reference internal" href="../ssm/rip.html#sec-ssm-rip"><span class="std std-ref">Restricted Isometry Property</span></a> for an extensive
+treatment of RIP based results.</p>
+<div class="docutils">
+<p><a class="reference internal" href="../ssm/rip.html#lem:rip:inner_product_upper_bound_2">Theorem 12.63</a>
+applies to approximate preservation of the inner
+product of sparse signals  <span class="math notranslate nohighlight">\(\bu, \bv \in \RR^N\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bu, \bv \in \RR^N\)</span> and <span class="math notranslate nohighlight">\(K \geq \max( \| \bu + \bv \|_0 , \| \bu - \bv \|_0)\)</span>.
+Then</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-ef6701cc-26cb-4293-9f6f-828ce08658c7">
+<span class="eqno">(15.13)<a class="headerlink" href="#equation-eq-greedy-ef6701cc-26cb-4293-9f6f-828ce08658c7" title="Permalink to this equation">¶</a></span>\[| \langle \Phi \bu, \Phi \bv \rangle - \langle \bu, \bv \rangle | 
+\leq \delta_{K} \| \bu \|_2 \| \bv \|_2.\]</div>
+<p><a class="reference internal" href="../ssm/rip.html#res:proj:rip_orthogonal_projection">Theorem 12.65</a>
+shows that the matrix  <span class="math notranslate nohighlight">\(\Psi_{\Lambda}\)</span> also satisfies
+a modified version of RIP.
+Let <span class="math notranslate nohighlight">\(|\Lambda | &lt; K\)</span>. Then</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-5774ac7f-1f4b-464f-882b-9795c5996278">
+<span class="eqno">(15.14)<a class="headerlink" href="#equation-eq-greedy-5774ac7f-1f4b-464f-882b-9795c5996278" title="Permalink to this equation">¶</a></span>\[\left ( 1 - \frac{\delta_K}{1 - \delta_K} \right )
+\| \by \|_2^2 
+\leq \| \Psi_{\Lambda} \by \|_2^2
+\leq (1 + \delta_K) \| \by \|_2^2\]</div>
+<p>whenever <span class="math notranslate nohighlight">\(\|\by \|_0 \leq K - | \Lambda|\)</span> and
+<span class="math notranslate nohighlight">\(\supp(\by) \cap \Lambda = \EmptySet\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>, then <span class="math notranslate nohighlight">\(\Psi_{\Lambda}\)</span>
+acts as an approximate isometry on every <span class="math notranslate nohighlight">\((K - |\Lambda|)\)</span>-sparse vector
+supported on <span class="math notranslate nohighlight">\(\Lambda^c\)</span>.</p>
+<p>From <a class="reference internal" href="#equation-eq-omp-3715a448-7956-43a0-91d5-43447bbdfa7b">(15.11)</a> recall that
+the residual vector <span class="math notranslate nohighlight">\(\br^k\)</span> is formed by applying <span class="math notranslate nohighlight">\(\Psi_{\Lambda^k}\)</span>
+to <span class="math notranslate nohighlight">\(\widetilde{\bx}^k\)</span> which is a <span class="math notranslate nohighlight">\(K - k\)</span> sparse vector supported
+on <span class="math notranslate nohighlight">\({\Lambda^k}^c\)</span>.</p>
+<p>Our interest is in combining above two results and get some
+bound on the inner products <span class="math notranslate nohighlight">\(\bh^{k + 1}_j\)</span>. Exactly what kind of bound?
+When <span class="math notranslate nohighlight">\(\Lambda^k\)</span> has been identified, our interest is in ensuring
+that the next index is chosen from the set <span class="math notranslate nohighlight">\(\supp(\bx) \setminus \Lambda^k\)</span>.
+A useful way to ensure this would be to verify if the entries in <span class="math notranslate nohighlight">\(\bh^{k + 1}\)</span>
+are close to <span class="math notranslate nohighlight">\(\widetilde{\bx}^k\)</span>. If they are, then they would be 0 over <span class="math notranslate nohighlight">\(\Lambda^k\)</span>
+, they would be pretty high over <span class="math notranslate nohighlight">\(\supp(\bx) \setminus \Lambda^k\)</span>  and lastly,
+very small over <span class="math notranslate nohighlight">\(\supp(\bx)^c\)</span> which is what we want.</p>
+<p>The next result
+develops these bounds around <a class="reference internal" href="#equation-eq-omp-3dfc00cb-f266-4876-b7d9-14daeca3056a">(15.12)</a>.</p>
+</div>
+<div class="proof lemma admonition" id="res:omp:rip:inner_product_upper_bound">
+<p class="admonition-title"><span class="caption-number">Lemma 15.1 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Lambda \subset \{1, \dots, N \}\)</span> and suppose
+<span class="math notranslate nohighlight">\(\widetilde{\bx} \in \RR^N\)</span> with
+<span class="math notranslate nohighlight">\(\supp(\widetilde{\bx}) \cap \Lambda = \EmptySet\)</span>.
+Define</p>
+<div class="math notranslate nohighlight" id="equation-eq-omp-ec749572-224c-4fe1-8796-a35ef1284d4c">
+<span class="eqno">(15.15)<a class="headerlink" href="#equation-eq-omp-ec749572-224c-4fe1-8796-a35ef1284d4c" title="Permalink to this equation">¶</a></span>\[\bh = \Psi_{\Lambda}^T \Psi_{\Lambda} \widetilde{\bx}.\]</div>
+<p>Then if <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies the RIP of order
+<span class="math notranslate nohighlight">\(K \geq \| \widetilde{\bx} \|_0 + |\Lambda | + 1\)</span>
+with isometry constant <span class="math notranslate nohighlight">\(\delta_K\)</span>, we have</p>
+<div class="math notranslate nohighlight" id="equation-eq-omp-3dc0c334-dedf-4c86-8c3d-d72d78951ac0">
+<span class="eqno">(15.16)<a class="headerlink" href="#equation-eq-omp-3dc0c334-dedf-4c86-8c3d-d72d78951ac0" title="Permalink to this equation">¶</a></span>\[| h_j - \widetilde{x}_j | 
+\leq \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2 
+\Forall j \notin \Lambda.\]</div>
+</div>
+</div><p>Note that <span class="math notranslate nohighlight">\(|\Lambda |\)</span> is the number of entries in the the discovered part
+of the support at any iteration in OMP and <span class="math notranslate nohighlight">\(\| \widetilde{\bx} \|_0\)</span>
+is the number of entries in not yet discovered part of the support.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>We have <span class="math notranslate nohighlight">\(|\Lambda | &lt; K\)</span> and <span class="math notranslate nohighlight">\(\| \widetilde{\bx} \|_0 &lt; K - |\Lambda |\)</span>.</p></li>
+<li><p>Thus, from <a class="reference internal" href="#equation-eq-greedy-5774ac7f-1f4b-464f-882b-9795c5996278">(15.14)</a>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+    \left ( 1 - \frac{\delta_K}{1 - \delta_K} \right )
+    \| \widetilde{\bx} \|_2^2 
+    \leq \| \Psi_{\Lambda} \widetilde{\bx} \|_2^2
+    \leq (1 + \delta_K) \| \widetilde{\bx} \|_2^2.
+    \]</div>
+</li>
+<li><p>We can make a statement saying <span class="math notranslate nohighlight">\(\Psi_{\Lambda}\)</span> satisfies a RIP of order</p>
+<div class="math notranslate nohighlight">
+\[
+   ( \| \widetilde{\bx} \|_0 + |\Lambda | + 1) -  |\Lambda | 
+   =  \| \widetilde{\bx} \|_0  + 1
+   \]</div>
+<p>with a RIP constant <span class="math notranslate nohighlight">\(\frac{\delta_K}{1 - \delta_K}\)</span>.</p>
+</li>
+<li><p>By the definition of <span class="math notranslate nohighlight">\(\bh\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    h_j = \langle\Psi_{\Lambda} \widetilde{\bx},  \Psi_{\Lambda} \be_j \rangle
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(h_j\)</span> is the <span class="math notranslate nohighlight">\(j\)</span>-th entry in <span class="math notranslate nohighlight">\(\bh\)</span> and
+<span class="math notranslate nohighlight">\(\be_j\)</span> denotes the <span class="math notranslate nohighlight">\(j\)</span>-th vector from the identity basis.</p>
+</li>
+<li><p>We already know that <span class="math notranslate nohighlight">\(h_j = 0\)</span> for all <span class="math notranslate nohighlight">\(j \in \Lambda\)</span>.</p></li>
+<li><p>Consider <span class="math notranslate nohighlight">\(j \notin \Lambda\)</span> and take the two vectors <span class="math notranslate nohighlight">\(\widetilde{\bx}\)</span>
+and <span class="math notranslate nohighlight">\(\be_j\)</span>.</p></li>
+<li><p>We can see that</p>
+<div class="math notranslate nohighlight">
+\[
+    \|\widetilde{\bx} \pm \be_j \|_0  \leq \|\widetilde{\bx} \|_0 + 1
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \supp (\widetilde{\bx} \pm \be_j ) \cap \Lambda = \EmptySet.
+   \]</div>
+</li>
+<li><p>Applying <a class="reference internal" href="#equation-eq-greedy-ef6701cc-26cb-4293-9f6f-828ce08658c7">(15.13)</a>
+on the two vectors with <span class="math notranslate nohighlight">\(\Psi_{\Lambda}\)</span> as our RIP matrix,
+we see that</p>
+<div class="math notranslate nohighlight">
+\[
+    | \langle \Psi_{\Lambda} \widetilde{\bx}, 
+    \Psi_{\Lambda} \be_j \rangle - \langle \widetilde{\bx}, \be_j \rangle | 
+    \leq \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2 \| \be_j \|_2.
+   \]</div>
+</li>
+<li><p>But</p>
+<div class="math notranslate nohighlight">
+\[
+    | \langle \Psi_{\Lambda} \widetilde{\bx}, 
+    \Psi_{\Lambda} \be_j \rangle - \langle \widetilde{\bx}, \be_j \rangle | 
+    = | h_j - \widetilde{x}_j |.
+   \]</div>
+</li>
+<li><p>Noting that <span class="math notranslate nohighlight">\(\| \be_j \|_2 = 1\)</span>, we get our desired result.</p></li>
+</ol>
+</div>
+<p>With this bound in place, we can develop a sufficient condition under which
+the identification step of OMP (which identifies the new index <span class="math notranslate nohighlight">\(\lambda^{k + 1}\)</span>)
+will succeed.</p>
+<p>The following corollary establishes a lower bound on the largest entry
+in <span class="math notranslate nohighlight">\(\widetilde{\bx}\)</span> which will ensure that OMP indeed chooses
+the next index <span class="math notranslate nohighlight">\(\lambda^k\)</span> from the support of <span class="math notranslate nohighlight">\(\widetilde{\bx}\)</span>.</p>
+<div class="proof corollary admonition" id="res:omp:rip:alpha_lower_bound">
+<p class="admonition-title"><span class="caption-number">Corollary 15.1 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(\Lambda\)</span>, <span class="math notranslate nohighlight">\(\Phi\)</span>, <span class="math notranslate nohighlight">\(\widetilde{\bx}\)</span> meet the assumptions
+in <a class="reference internal" href="#res:omp:rip:inner_product_upper_bound">Lemma 15.1</a>, and let <span class="math notranslate nohighlight">\(\bh\)</span> be as
+defined in <a class="reference internal" href="#equation-eq-omp-ec749572-224c-4fe1-8796-a35ef1284d4c">(15.15)</a>.
+If</p>
+<div class="math notranslate nohighlight" id="equation-eq-omp-47b4e318-f7c1-4f83-be43-dcb2d2011fa2">
+<span class="eqno">(15.17)<a class="headerlink" href="#equation-eq-omp-47b4e318-f7c1-4f83-be43-dcb2d2011fa2" title="Permalink to this equation">¶</a></span>\[\| \widetilde{\bx} \|_{\infty} 
+&gt; \frac{2 \delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2,\]</div>
+<p>we are guaranteed that</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{j \notin \Lambda}{\text{arg} \, \max}|h_j| 
+\in \supp(\widetilde{\bx}).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>If <a class="reference internal" href="#equation-eq-omp-3dc0c334-dedf-4c86-8c3d-d72d78951ac0">(15.16)</a> is satisfied, then
+for indices <span class="math notranslate nohighlight">\(j \notin \supp(\widetilde{\bx})\)</span>, we will have</p>
+<div class="math notranslate nohighlight">
+\[
+    | h_j | \leq \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2.
+   \]</div>
+</li>
+<li><p>We already know that <span class="math notranslate nohighlight">\(h_j = 0\)</span> for all <span class="math notranslate nohighlight">\(j \in \Lambda\)</span>.</p></li>
+<li><p>If <a class="reference internal" href="#equation-eq-omp-47b4e318-f7c1-4f83-be43-dcb2d2011fa2">(15.17)</a> is satisfied, then
+there exists <span class="math notranslate nohighlight">\(j \in \supp(\widetilde{\bx})\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[
+    | \widetilde{\bx}_j | 
+    &gt; \frac{2 \delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2.
+   \]</div>
+</li>
+<li><p>For this particular <span class="math notranslate nohighlight">\(j\)</span>,
+applying triangular inequality on
+<a class="reference internal" href="#equation-eq-omp-3dc0c334-dedf-4c86-8c3d-d72d78951ac0">(15.16)</a></p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2  \geq | h_j - \widetilde{x}_j | 
+    \geq | \widetilde{x}_j | - | h_j |.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    | h_j |  &amp;\geq | \widetilde{x}_j | - \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2\\
+    &amp;&gt; \frac{2 \delta_K}{1 - \delta_K} \| 
+    \widetilde{\bx} \|_2 - \frac{\delta_K}{1 - \delta_K} 
+    \| \widetilde{\bx} \|_2\\
+    = \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2.
+   \end{split}\]</div>
+</li>
+<li><p>We have established that there exists some
+<span class="math notranslate nohighlight">\(j \in \supp(\widetilde{\bx})\)</span> for which</p>
+<div class="math notranslate nohighlight">
+\[
+    | h_j | &gt; \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2
+   \]</div>
+<p>and for every <span class="math notranslate nohighlight">\(j \notin \supp(\widetilde{\bx})\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+    | h_j | \leq \frac{\delta_K}{1 - \delta_K} \| \widetilde{\bx} \|_2.
+   \]</div>
+</li>
+<li><p>Together, they establish that OMP will indeed choose an index
+from the correct set.</p></li>
+</ol>
+</div>
+<p>All we need to do now is to make sure that <a class="reference internal" href="#equation-eq-omp-47b4e318-f7c1-4f83-be43-dcb2d2011fa2">(15.17)</a>
+is satisfied by choosing <span class="math notranslate nohighlight">\(\delta_K\)</span> small enough.
+The following result from <span id="id4">[<a class="reference internal" href="../bib.html#id51" title="Mark A Davenport and Michael B Wakin. Analysis of orthogonal matching pursuit using the restricted isometry property. Information Theory, IEEE Transactions on, 56(9):4395–4401, 2010.">17</a>]</span>
+guarantees that.</p>
+<div class="proof theorem admonition" id="res:greedy:omp_rip_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 15.3 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies the RIP of order <span class="math notranslate nohighlight">\(K + 1\)</span> with
+isometry constant <span class="math notranslate nohighlight">\(\delta &lt; \frac{1}{2 \sqrt{K} + 1}\)</span>.
+Then for any <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span> with <span class="math notranslate nohighlight">\(\| \bx\|_0 \leq K\)</span>,
+OMP will recover <span class="math notranslate nohighlight">\(\bx\)</span> exactly from <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span> in
+<span class="math notranslate nohighlight">\(K\)</span> iterations.</p>
+</div>
+</div><p>The upper bound on <span class="math notranslate nohighlight">\(\delta\)</span> can be simplified  can be
+simplified as <span class="math notranslate nohighlight">\(\delta &lt; \frac{1}{3 \sqrt{K}}\)</span>.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. The proof works by induction.
+We show that under the stated conditions,
+<span class="math notranslate nohighlight">\(\lambda^1 \in \supp(\bx)\)</span>.
+Then we show that whenever <span class="math notranslate nohighlight">\(\lambda^k \in \supp(\bx)\)</span>
+then <span class="math notranslate nohighlight">\(\lambda^{k + 1}\)</span> also <span class="math notranslate nohighlight">\(\in \supp(\bx)\)</span>.</p>
+<ol>
+<li><p>For the first iteration, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \bh^1 = \Phi^T \Phi \by.
+   \]</div>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\Phi = \Psi_{\EmptySet}\)</span>.</p></li>
+<li><p>It is given that <span class="math notranslate nohighlight">\(\| \bx \|_0 \leq K\)</span>.</p></li>
+<li><p>Thus due to <a class="reference internal" href="../ssm/srr.html#lem:u_sigma_k_norms">Theorem 12.16</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx \|_{\infty} \geq \frac{\| \bx \|_2}  {\sqrt{K}} .
+   \]</div>
+</li>
+<li><p>Now <span class="math notranslate nohighlight">\(\delta &lt; \frac{1}{3 \sqrt{K}}\)</span>
+or <span class="math notranslate nohighlight">\(\delta &lt; \frac{1}{2 \sqrt{K} + 1}\)</span> implies that</p>
+<div class="math notranslate nohighlight" id="equation-eq-omp-2fb934e3-6998-4216-8459-31685c4dd941">
+<span class="eqno">(15.18)<a class="headerlink" href="#equation-eq-omp-2fb934e3-6998-4216-8459-31685c4dd941" title="Permalink to this equation">¶</a></span>\[\frac{2 \delta}{1 - \delta} &lt; \frac{1}{\sqrt{K}}.\]</div>
+</li>
+<li><p>This can be seen as follows. Assuming <span class="math notranslate nohighlight">\(K \geq 1\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;3 \sqrt{K } \geq 2 \sqrt{K} + 1 \\
+    \implies &amp;\frac{1}{3 \sqrt{K}} \leq \frac{1}{2 \sqrt{K} + 1}\\
+    \implies &amp;\delta &lt; \frac{1}{2 \sqrt{K} + 1}\\
+    \implies &amp;2 \delta \sqrt{K} + \delta &lt; 1 \\
+    \implies &amp;2 \delta \sqrt{K} &lt; 1 - \delta \\
+    \implies &amp;\frac{2 \delta}{1 - \delta} &lt;  \frac{1}{\sqrt{K}}.
+    \end{split}\]</div>
+</li>
+<li><p>Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx \|_{\infty} &gt; \frac{2 \delta}{1 - \delta} \| \bx \|_2
+    \]</div>
+<p>and <a class="reference internal" href="#equation-eq-omp-47b4e318-f7c1-4f83-be43-dcb2d2011fa2">(15.17)</a> is satisfied
+and <span class="math notranslate nohighlight">\(\lambda^1\)</span> will indeed be chosen from <span class="math notranslate nohighlight">\(\supp(\bx)\)</span>
+due to <a class="reference internal" href="#res:omp:rip:alpha_lower_bound">Corollary 15.1</a>.</p>
+</li>
+<li><p>We now assume that OMP has correctly discovered indices
+up to <span class="math notranslate nohighlight">\(\lambda^1, \dots, \lambda^k\)</span>. i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+    \Lambda^k \subset \supp(\bx).
+   \]</div>
+</li>
+<li><p>We have to show that it will also correctly discover <span class="math notranslate nohighlight">\(\lambda^{k + 1}\)</span>.</p></li>
+<li><p>From the definition of <span class="math notranslate nohighlight">\(\widetilde{\bx}\)</span> in
+<a class="reference internal" href="#equation-eq-omp-widetilde-alpha-definition">(15.10)</a>,
+we know that <span class="math notranslate nohighlight">\(\supp\left (\widetilde{\bx}^k\right ) \cap \Lambda^k = \EmptySet\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \widetilde{\bx}^k \|_0 \leq K - k. 
+    \]</div>
+</li>
+<li><p>We also know that <span class="math notranslate nohighlight">\(|\Lambda^k | = k\)</span>. By assumption <span class="math notranslate nohighlight">\(\Phi\)</span>
+satisfies RIP of order <span class="math notranslate nohighlight">\(K + 1 = (K - k) + k + 1 \)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    K + 1 \geq \| \widetilde{\bx}^k \|_0 + |\Lambda^k | + 1. 
+   \]</div>
+</li>
+<li><p>Also due to <a class="reference internal" href="../ssm/srr.html#lem:u_sigma_k_norms">Theorem 12.16</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \widetilde{\bx}^k \|_{\infty} \geq 
+    \frac{\| \widetilde{\bx}^k \|_2}{\sqrt{K - k}} \geq
+    \frac{\| \widetilde{\bx}^k \|_2}{\sqrt{K}}.
+   \]</div>
+</li>
+<li><p>Using <a class="reference internal" href="#equation-eq-omp-2fb934e3-6998-4216-8459-31685c4dd941">(15.18)</a>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \widetilde{\bx}^k \|_{\infty} 
+    &gt; \frac{2 \delta}{1 - \delta}\| \widetilde{\bx}^k \|_2.
+   \]</div>
+</li>
+<li><p>This is the sufficient condition for <a class="reference internal" href="#res:omp:rip:alpha_lower_bound">Corollary 15.1</a>
+in <a class="reference internal" href="#equation-eq-omp-47b4e318-f7c1-4f83-be43-dcb2d2011fa2">(15.17)</a> giving us</p>
+<div class="math notranslate nohighlight">
+\[
+    \lambda^{k + 1} = 
+    \underset{j \notin \Lambda^k}{\text{arg} \, \max}| \bh^{k + 1}_j |  
+    \in \supp(\widetilde{\bx}^k).
+    \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\Lambda^{ k + 1} \subseteq \supp(\bx)\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./sparse_recovery"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="basis_pursuit_sr.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">15.2. </span>Basis Pursuit</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="cosamp_cs.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">15.4. </span>Compressive Sampling Matching Pursuit</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

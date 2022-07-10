@@ -1,0 +1,3136 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.8. Lagrange Multipliers &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9.9. Lagrangian Duality" href="lagrangian_duality.html" />
+    <link rel="prev" title="9.7. Constrained Optimization II" href="constrained_opt.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   9. Convex Optimization
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/cvxopt/lagrange_multipliers.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fcvxopt/lagrange_multipliers.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inequality-constrained-problems">
+   9.8.1. Inequality Constrained Problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#feasible-descent-directions">
+     9.8.1.1. Feasible Descent Directions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#necessary-conditions-for-local-optimality">
+     9.8.1.2. Necessary Conditions for Local Optimality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fritz-john-conditions">
+     9.8.1.3. Fritz-John Conditions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kkt-conditions">
+     9.8.1.4. KKT Conditions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inequality-and-equality-constrained-problems">
+   9.8.2. Inequality and Equality Constrained Problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kkt-points-and-regular-points">
+     9.8.2.1. KKT Points and Regular Points
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-convex-case">
+   9.8.3. The Convex Case
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slater-s-conditions">
+     9.8.3.1. Slater’s Conditions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-tangent-cones-perspective">
+   9.8.4. A Tangent Cones Perspective
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enhanced-fritz-john-conditions">
+   9.8.5. Enhanced Fritz-John Conditions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lagrange-multiplier-vectors">
+     9.8.5.1. Lagrange Multiplier Vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     9.8.5.2. Enhanced Fritz-John Conditions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lagrangian-stationarity">
+     9.8.5.3. Lagrangian Stationarity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#licq">
+     9.8.5.4. LICQ
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#informative-lagrange-multipliers">
+   9.8.6. Informative Lagrange Multipliers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pseudonormality">
+   9.8.7. Pseudonormality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constraint-qualifications">
+   9.8.8. Constraint Qualifications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linearly-independent-constraint-qualifications">
+     9.8.8.1. Linearly Independent Constraint Qualifications
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ahu-mf-constraint-qualifications">
+     9.8.8.2. AHU/MF Constraint Qualifications
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-equality-and-concave-inequality-constraints">
+     9.8.8.3. Affine Equality and Concave Inequality Constraints
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Lagrange Multipliers</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inequality-constrained-problems">
+   9.8.1. Inequality Constrained Problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#feasible-descent-directions">
+     9.8.1.1. Feasible Descent Directions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#necessary-conditions-for-local-optimality">
+     9.8.1.2. Necessary Conditions for Local Optimality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fritz-john-conditions">
+     9.8.1.3. Fritz-John Conditions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kkt-conditions">
+     9.8.1.4. KKT Conditions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inequality-and-equality-constrained-problems">
+   9.8.2. Inequality and Equality Constrained Problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kkt-points-and-regular-points">
+     9.8.2.1. KKT Points and Regular Points
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-convex-case">
+   9.8.3. The Convex Case
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slater-s-conditions">
+     9.8.3.1. Slater’s Conditions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-tangent-cones-perspective">
+   9.8.4. A Tangent Cones Perspective
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enhanced-fritz-john-conditions">
+   9.8.5. Enhanced Fritz-John Conditions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lagrange-multiplier-vectors">
+     9.8.5.1. Lagrange Multiplier Vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     9.8.5.2. Enhanced Fritz-John Conditions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lagrangian-stationarity">
+     9.8.5.3. Lagrangian Stationarity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#licq">
+     9.8.5.4. LICQ
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#informative-lagrange-multipliers">
+   9.8.6. Informative Lagrange Multipliers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pseudonormality">
+   9.8.7. Pseudonormality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constraint-qualifications">
+   9.8.8. Constraint Qualifications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linearly-independent-constraint-qualifications">
+     9.8.8.1. Linearly Independent Constraint Qualifications
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ahu-mf-constraint-qualifications">
+     9.8.8.2. AHU/MF Constraint Qualifications
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-equality-and-concave-inequality-constraints">
+     9.8.8.3. Affine Equality and Concave Inequality Constraints
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="lagrange-multipliers">
+<span id="sec-opt-lagrange-multipliers"></span><h1><span class="section-number">9.8. </span>Lagrange Multipliers<a class="headerlink" href="#lagrange-multipliers" title="Permalink to this headline">¶</a></h1>
+<p>Main references for this section are
+<span id="id1">[<a class="reference internal" href="../bib.html#id23" title="Amir Beck. Introduction to nonlinear optimization: Theory, algorithms, and applications with MATLAB. SIAM, 2014.">5</a>, <a class="reference internal" href="../bib.html#id25" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">7</a>, <a class="reference internal" href="../bib.html#id27" title="Stephen P Boyd and Lieven Vandenberghe. Convex optimization. Cambridge university press, 2004.">10</a>]</span>.</p>
+<p>The material in this section builds up on the
+material from previous sections.
+While the material in <a class="reference internal" href="differentiable_objectives.html#sec-opt-convex-differentiable-objective"><span class="std std-ref">Constrained Optimization I</span></a>
+and <a class="reference internal" href="constrained_opt.html#sec-opt-constrained-optimization-2"><span class="std std-ref">Constrained Optimization II</span></a>
+doesn’t make specific assumptions on the structure
+of the constraint set (beyond say convexity and closedness),
+the material in <a class="reference internal" href="linear_constraints.html#sec-opt-linear-constraints-2"><span class="std std-ref">Linear Constraints</span></a>
+deals with a specific structure where the constraint set
+consists of a system of linear inequalities and equalities.
+This section focuses on the case where the constraint set
+consists of a system of smooth inequalities and equalities.</p>
+<p>The necessary
+and/or sufficient conditions for the optimization
+problems presented in this section admit the
+existence of a set of nonnegative (for inequality
+constraints) and real (for equality constraints)
+scalars known as Lagrange multipliers satisfying
+a specific system of equations.</p>
+<ol class="simple">
+<li><p>We generalize the linear
+inequality and equality constraints
+in <a class="reference internal" href="linear_constraints.html#sec-opt-linear-constraints-2"><span class="std std-ref">Linear Constraints</span></a>
+to allow for smooth inequality and equality
+constraints.</p></li>
+<li><p>We first consider problems involving minimization
+of a smooth function over a set of smooth
+inequalities.</p>
+<ol class="simple">
+<li><p>We describe the notion of feasible descent
+directions.</p></li>
+<li><p>We show that at local minimizers, there are no
+feasible descent directions.</p></li>
+<li><p>We then develop the necessary
+Fritz-John conditions for the existence of
+a local minimizer.</p></li>
+<li><p>We add further constraint qualifications to
+develop the necessary KKT conditions for the
+existence of a local minimizer.</p></li>
+</ol>
+</li>
+<li><p>We then consider the problems involving minimization
+of a smooth function over a set of sooth
+inequalities and equalities. We present the KKT
+conditions for the existence of a local minimizer.</p></li>
+<li><p>We then add convexity in the mix for the cost
+function and constraint functions.</p></li>
+</ol>
+<div class="section" id="inequality-constrained-problems">
+<h2><span class="section-number">9.8.1. </span>Inequality Constrained Problems<a class="headerlink" href="#inequality-constrained-problems" title="Permalink to this headline">¶</a></h2>
+<p>We start by developing the KKT conditions for the
+problem of minimizing a smooth function over a
+set of inequality constraints.</p>
+<p>The problem is given as</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-lm-smooth-smooth-ineq">
+<span class="eqno">(9.18)<a class="headerlink" href="#equation-eq-opt-lm-smooth-smooth-ineq" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }  &amp; &amp; f(\bx) &amp; \\
+&amp; \text{subject to } &amp; &amp; g_i(\bx) \leq 0, i=1,\dots,m &amp;\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f, g_1, \dots, g_m : \VV \to \RR\)</span> are
+continuously differentiable functions over <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>The constraint set is given by</p>
+<div class="math notranslate nohighlight">
+\[
+C = \{\bx \in \VV \ST  g_i(\bx) \leq 0, i=1,\dots,m \}.
+\]</div>
+<div class="section" id="feasible-descent-directions">
+<h3><span class="section-number">9.8.1.1. </span>Feasible Descent Directions<a class="headerlink" href="#feasible-descent-directions" title="Permalink to this headline">¶</a></h3>
+<p>Recall from <a class="reference internal" href="differentiable_objectives.html#def-opt-descent-direction">Definition 9.22</a>
+that a descent direction is a direction along
+which the directional derivative of the cost
+function is negative; i.e.,
+<span class="math notranslate nohighlight">\(f'(\bx; \bd) &lt; 0\)</span>.
+If <span class="math notranslate nohighlight">\(f\)</span> is continuously differentiable, this
+translates to</p>
+<div class="math notranslate nohighlight">
+\[
+f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle &lt; 0.
+\]</div>
+<p>Recall from <a class="reference internal" href="constrained_opt.html#def-opt-feasible-direction">Definition 9.23</a>
+that given a vector <span class="math notranslate nohighlight">\(\bx \in C\)</span>,
+a direction <span class="math notranslate nohighlight">\(\bd \in \VV\)</span>
+is said to be a <em>feasible direction</em> of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span> if
+there exists a <span class="math notranslate nohighlight">\(\overline{t} &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\bx + t \bd \in C \text{ for every } t \in [0, \overline{t}].
+\]</div>
+<p>We now introduce the notion of a feasible descent direction.</p>
+<div class="proof definition admonition" id="def-opt-feasible-descent-direction">
+<p class="admonition-title"><span class="caption-number">Definition 9.28 </span> (Feasible descent direction)</p>
+<div class="definition-content section" id="proof-content">
+<p>Consider the problem of minimizing a cost function
+<span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span>
+over a constraint set <span class="math notranslate nohighlight">\(C \subseteq \dom f\)</span>.
+A nonzero vector <span class="math notranslate nohighlight">\(\bd\)</span> is called a <em>feasible descent direction</em>
+at <span class="math notranslate nohighlight">\(\bx \in C\)</span> if <span class="math notranslate nohighlight">\(f'(\bx; \bd) &lt; 0\)</span>
+and there exists
+<span class="math notranslate nohighlight">\(\overline{t} &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\bx + t \bd \in C \text{ for every } t \in [0, \overline{t}].
+\]</div>
+<p>In other words, a feasible descent direction
+at <span class="math notranslate nohighlight">\(\bx \in C\)</span> is a feasible direction
+and a decent direction.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(f\)</span> is continuously differentiable then
+we must have <span class="math notranslate nohighlight">\(\langle \bd, \nabla f(\bx) \rangle &lt; 0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(C\)</span> is convex, then we just need to have
+<span class="math notranslate nohighlight">\(\bx + \overline{t}\bd \in C\)</span>. By virtual of
+convexity of <span class="math notranslate nohighlight">\(C\)</span>, every
+<span class="math notranslate nohighlight">\(\by \in [\bx, \bx + \overline{t}\bd ] \in C\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof lemma admonition" id="res-opt-local-min-feasible-descent-dirs">
+<p class="admonition-title"><span class="caption-number">Lemma 9.7 </span> (Local minimum and feasible descent directions)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Consider the problem of minimizing a cost function
+<span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span>
+over a constraint set <span class="math notranslate nohighlight">\(C \subseteq \dom f\)</span>.
+If <span class="math notranslate nohighlight">\(\bx^*\)</span> is a local minimizer then there are
+no feasible descent directions at <span class="math notranslate nohighlight">\(\bx^*\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We prove this by contradiction.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimizer.</p></li>
+<li><p>Assume that <span class="math notranslate nohighlight">\(\bd \neq \bzero\)</span> is a feasible descent direction.</p></li>
+<li><p>Then there is an <span class="math notranslate nohighlight">\(\epsilon_1 &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(\bx^* + t \bd \in C\)</span> for every <span class="math notranslate nohighlight">\(t \in [0, \epsilon_1]\)</span>.</p></li>
+<li><p>Also, <span class="math notranslate nohighlight">\(f'(\bx; \bd) &lt; 0\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="../convex_sets/directional_derivatives.html#def-cvxf-directional-derivative">Definition 8.70</a>,
+there exists <span class="math notranslate nohighlight">\(\epsilon_2 &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{f(\bx^* + t \bd) - f(\bx^*)}{t} &lt; 0
+   \quad \Forall  0 &lt; t &lt; \epsilon_2.
+   \]</div>
+</li>
+<li><p>Equivalently, <span class="math notranslate nohighlight">\(f(\bx^* + t \bd) &lt; f(\bx^*)\)</span>
+for all <span class="math notranslate nohighlight">\(0 &lt; t &lt; \epsilon_2\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\epsilon = \min(\epsilon_1, \epsilon_2)\)</span>.</p></li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(t \in (0, \epsilon)\)</span>, we have
+<span class="math notranslate nohighlight">\(\bx + t \bd \in C\)</span> and <span class="math notranslate nohighlight">\(f(\bx^* + t \bd) &lt; f(\bx^*)\)</span>.</p></li>
+<li><p>This contradicts the hypothesis that <span class="math notranslate nohighlight">\(\bx^*\)</span> is a
+local minimizer.</p></li>
+<li><p>Hence, there are no feasible descent directions
+at <span class="math notranslate nohighlight">\(\bx^*\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="necessary-conditions-for-local-optimality">
+<h3><span class="section-number">9.8.1.2. </span>Necessary Conditions for Local Optimality<a class="headerlink" href="#necessary-conditions-for-local-optimality" title="Permalink to this headline">¶</a></h3>
+<p>Revising the problem <a class="reference internal" href="#equation-eq-opt-lm-smooth-smooth-ineq">(9.18)</a>:</p>
+<ol>
+<li><p>A constraint <span class="math notranslate nohighlight">\(g_i\)</span> is called active at <span class="math notranslate nohighlight">\(\bx\)</span> if <span class="math notranslate nohighlight">\(g_i(\bx) = 0\)</span>.</p></li>
+<li><p>A constraint <span class="math notranslate nohighlight">\(g_i\)</span> is called inactive at <span class="math notranslate nohighlight">\(\bx\)</span> if <span class="math notranslate nohighlight">\(g_i(\bx) &lt; 0\)</span>.</p></li>
+<li><p>The set of active constraints at a point <span class="math notranslate nohighlight">\(\bx\)</span> is denoted by</p>
+<div class="math notranslate nohighlight">
+\[
+   \AAA(\bx) = \{ i \in 1,\dots,m \ST g_i(\bx) = 0 \}.
+   \]</div>
+</li>
+</ol>
+<p>We first restate the <a class="reference internal" href="#res-opt-local-min-feasible-descent-dirs">Lemma 9.7</a>
+for the minimization with inequality constraints problem
+<a class="reference internal" href="#equation-eq-opt-lm-smooth-smooth-ineq">(9.18)</a>.
+The key idea is the lack of feasible descent directions
+at a local minimizer.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f'(\bx; \bd) &lt; 0\)</span> will indicate that <span class="math notranslate nohighlight">\(\bd\)</span> is a feasible
+direction.</p></li>
+<li><p>If a constraint is inactive, then it remains valid
+in the neighborhood of the local minimizer
+due to continuity of <span class="math notranslate nohighlight">\(g_i\)</span>.</p></li>
+<li><p>If a constraint is active, then moving in some
+directions will lead to invalidation of the constraint
+while moving in some directions will keep the constraint
+valid.</p></li>
+<li><p>In particular, if <span class="math notranslate nohighlight">\(g_i'(\bx; \bd) &lt; 0\)</span>, then moving
+along <span class="math notranslate nohighlight">\(\bd\)</span> keeps the <span class="math notranslate nohighlight">\(i\)</span>-th active constraint valid.</p></li>
+<li><p>Hence, along a feasible descend direction, the directional
+derivatives of the cost function and the active constraint
+functions must be negative.</p></li>
+</ol>
+<div class="proof lemma admonition" id="res-opt-inequality-local-min-feasible-descent-dirs">
+<p class="admonition-title"><span class="caption-number">Lemma 9.8 </span> (Local minimum and feasible descent directions for inequality constraints)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimizer of the
+optimization problem <a class="reference internal" href="#equation-eq-opt-lm-smooth-smooth-ineq">(9.18)</a>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }  &amp; &amp; f(\bx) &amp; \\
+&amp; \text{subject to } &amp; &amp; g_i(\bx) \leq 0, i=1,\dots,m &amp;
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f, g_1, \dots, g_m : \VV \to \RR\)</span> are
+continuously differentiable functions over <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\AAA(\bx^*)\)</span> denote the set of active constraints:</p>
+<div class="math notranslate nohighlight">
+\[
+\AAA(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
+\]</div>
+<p>Then there doesn’t exist a vector <span class="math notranslate nohighlight">\(\bd \in \VV\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \langle \bd, \nabla f(\bx^*) \rangle = f'(\bx^*; \bd) &lt; 0,\\
+&amp; \langle \bd, \nabla g_i(\bx^*) \rangle = g_i'(\bx^*; \bd) &lt; 0, \quad i \in \AAA(\bx^*).
+\end{split}\]</div>
+</div>
+</div><p>This result states that local optimality
+is equivalent to the infeasibility of
+a certain system of strict inequalities.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. We prove this by contradiction.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimizer.</p></li>
+<li><p>Assume that <span class="math notranslate nohighlight">\(\bd \neq \bzero\)</span> be a direction
+satisfying the constraints above.</p></li>
+<li><p>Then there exists an <span class="math notranslate nohighlight">\(\epsilon_0 &gt; 0\)</span>
+such that <span class="math notranslate nohighlight">\(f(\bx^* + t \bd) &lt; f(\bx^*)\)</span>
+for every <span class="math notranslate nohighlight">\(t \in (0, \epsilon_0)\)</span>.</p></li>
+<li><p>Similarly, there exist <span class="math notranslate nohighlight">\(\epsilon_i &gt; 0\)</span>
+such that <span class="math notranslate nohighlight">\(g_i(\bx^* + t \bd) &lt; g_i(\bx^*) = 0\)</span>
+for every <span class="math notranslate nohighlight">\(t \in (0, \epsilon_i)\)</span> for every <span class="math notranslate nohighlight">\(i \in \AAA(\bx^*)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\epsilon = \min\{\epsilon_0, \dots, \epsilon_m \}\)</span>.</p></li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(t \in (0, \epsilon)\)</span>, we have
+<span class="math notranslate nohighlight">\(f(\bx^* + t \bd) &lt; f(\bx^*)\)</span>
+and <span class="math notranslate nohighlight">\(g_i (\bx^* + t \bd) &lt; 0\)</span> for every <span class="math notranslate nohighlight">\(i \in \AAA(\bx^*)\)</span>.</p></li>
+<li><p>By the continuity of <span class="math notranslate nohighlight">\(g_i\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>,
+and the fact that <span class="math notranslate nohighlight">\(g_i(\bx^*) &lt; 0\)</span> for every <span class="math notranslate nohighlight">\(i \notin \AAA(\bx^*)\)</span>,
+there exists a <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that for every <span class="math notranslate nohighlight">\(t \in (0, \delta)\)</span>,
+<span class="math notranslate nohighlight">\(g_i(\bx^* + t \bd) &lt; 0\)</span> for every <span class="math notranslate nohighlight">\(i \notin \AAA(\bx^*)\)</span>.</p></li>
+<li><p>Hence, we conclude that for every <span class="math notranslate nohighlight">\(t \in (0, \min(\epsilon, \delta))\)</span>,
+we have <span class="math notranslate nohighlight">\(f(\bx^* + t \bd) &lt; f(\bx^*)\)</span>
+and <span class="math notranslate nohighlight">\(g_i (\bx^* + t \bd) &lt; 0\)</span> for every <span class="math notranslate nohighlight">\(i \in 1,\dots,m\)</span>.</p></li>
+<li><p>But this contradicts the local optimality of <span class="math notranslate nohighlight">\(\bx^*\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="fritz-john-conditions">
+<h3><span class="section-number">9.8.1.3. </span>Fritz-John Conditions<a class="headerlink" href="#fritz-john-conditions" title="Permalink to this headline">¶</a></h3>
+<p>Recall that Farkas’ and Gordan’s theorems
+of the alternative present different pairs
+of systems where if one system is infeasible
+then the other must be feasible and vice versa.
+We can apply Gordan’s theorem to the infeasible
+system of strict inequalities in
+<a class="reference internal" href="#res-opt-inequality-local-min-feasible-descent-dirs">Lemma 9.8</a>
+to develop the so-called Fritz-John conditions.</p>
+<div class="proof theorem admonition" id="res-opt-inequality-fritz-john">
+<p class="admonition-title"><span class="caption-number">Theorem 9.77 </span> (Fritz-John conditions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimizer of the
+optimization problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }  &amp; &amp; f(\bx) &amp; \\
+&amp; \text{subject to } &amp; &amp; g_i(\bx) \leq 0, i=1,\dots,m &amp;
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f, g_1, \dots, g_m : \VV \to \RR\)</span> are
+continuously differentiable functions over <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then there exist nonnegative scalar multipliers
+<span class="math notranslate nohighlight">\(t_0, t_1, \dots, t_m \geq 0\)</span> which are not all
+zero such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; t_0 \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*) = \bzero, \\
+&amp; t_i g_i(\bx^*) = 0, i=1, \dots, m.
+\end{split}\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From <a class="reference internal" href="#res-opt-inequality-local-min-feasible-descent-dirs">Lemma 9.8</a>,
+we have that the following system is infeasible.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \langle \bd, \nabla f(\bx^*) \rangle &lt; 0,\\
+&amp; \langle \bd, \nabla g_i(\bx^*) \rangle &lt; 0, \quad i \in \AAA(\bx^*).
+\end{split}\]</div>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(n = \dim \VV\)</span>.</p></li>
+<li><p>Let there be an isomorphic mapping between <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\RR^n\)</span>.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>, let <span class="math notranslate nohighlight">\(\bx\)</span> also denote the corresponding vector in <span class="math notranslate nohighlight">\(\RR^n\)</span>.</p></li>
+<li><p>Assume that there are <span class="math notranslate nohighlight">\(k\)</span> active constraints at <span class="math notranslate nohighlight">\(\bx^*\)</span>.</p></li>
+<li><p>Construct a <span class="math notranslate nohighlight">\(k+1 \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \bA  = \begin{bmatrix}
+   \nabla f(\bx^*)^T \\
+   \nabla f_{i_1}(\bx^*)^T \\
+   \vdots \\
+   \nabla f_{i_k}(\bx^*)^T
+   \end{bmatrix}
+   \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(i_1, \dots, i_k\)</span> denote the indices of active constraints.</p>
+</li>
+<li><p>Then the above system of strict inequalities can be stated as
+<span class="math notranslate nohighlight">\(\bA \bd \prec \bzero\)</span>.</p></li>
+<li><p>This system of equations is infeasible.</p></li>
+<li><p>Then by <a class="reference internal" href="linear_constraints.html#res-opt-gordan-theorem">Gordan's theorem</a>,
+the system</p>
+<div class="math notranslate nohighlight">
+\[
+   \bt \neq \bzero, \bA^T \bt = \bzero, \bt \succeq \bzero
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bt \in \RR^{k+1}\)</span> is feasible.</p>
+</li>
+<li><p>We write <span class="math notranslate nohighlight">\(\bt =(t_0, t_{i_1}, \dots, t_{i_k})\)</span>.</p></li>
+<li><p>The equation <span class="math notranslate nohighlight">\(\bA^T \bt = \bzero\)</span> expands to</p>
+<div class="math notranslate nohighlight">
+\[
+   t_0 \nabla f(\bx^*) + \sum_{i \in \AAA(\bx^*)} t_i \nabla g_i(\bx^*) = \bzero.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\bt \neq \bzero\)</span> means that at least one of <span class="math notranslate nohighlight">\(t_0, t_{i_1}, \dots, t_{i_k} \neq 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bt \succeq \bzero\)</span> means that  <span class="math notranslate nohighlight">\(t_0, t_{i_1}, \dots, t_{i_k} \geq 0\)</span>.</p></li>
+<li><p>Now, let <span class="math notranslate nohighlight">\(t_i = 0\)</span> for all remaining <span class="math notranslate nohighlight">\(i \notin \AAA(\bx^*)\)</span>.</p></li>
+<li><p>Then for active constraints, we have <span class="math notranslate nohighlight">\(g_i(\bx^*) = 0\)</span>
+and for inactive constraints, we have <span class="math notranslate nohighlight">\(t_i = 0\)</span>.</p></li>
+<li><p>Hence for all constraints, we have <span class="math notranslate nohighlight">\(t_i g_i(\bx^*) = 0\)</span>.</p></li>
+<li><p>Hence there exist nonnegative scalar multipliers
+<span class="math notranslate nohighlight">\(t_0, t_1, \dots, t_m \geq 0\)</span> which are not all
+zero such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; t_0 \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*) = \bzero, \\
+   &amp; t_i g_i(\bx^*) = 0, i=1, \dots, m.
+   \end{split}\]</div>
+</li>
+</ol>
+</div>
+<div class="docutils">
+<p>The key issue with Fritz-John conditions is that
+it allows <span class="math notranslate nohighlight">\(t_0 = 0\)</span>. The case <span class="math notranslate nohighlight">\(t_0 = 0\)</span> is
+not particularly useful since it leads to</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i \in \AAA(\bx^*)} t_i \nabla g_i(\bx^*) = \bzero.
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(t_i \geq 0\)</span> and not all <span class="math notranslate nohighlight">\(t_i\)</span> being zero.
+This means that the gradients of the active
+constraints are linearly dependent.</p>
+<ol class="simple">
+<li><p>The case of linearly dependent gradients has nothing to do with
+the objective function.</p></li>
+<li><p>A number of points might satisfy the Fritz-John
+conditions and yet not be local minimum points.</p></li>
+<li><p>We can modify the Fritz-John conditions and insist that
+the gradients of the active constraints be linearly independent.</p></li>
+<li><p>This leads to what are called the KKIT conditions.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="kkt-conditions">
+<h3><span class="section-number">9.8.1.4. </span>KKT Conditions<a class="headerlink" href="#kkt-conditions" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-inequality-kkt">
+<p class="admonition-title"><span class="caption-number">Theorem 9.78 </span> (KKT conditions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimizer of the
+optimization problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }  &amp; &amp; f(\bx) &amp; \\
+&amp; \text{subject to } &amp; &amp; g_i(\bx) \leq 0, i=1,\dots,m &amp;
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f, g_1, \dots, g_m : \VV \to \RR\)</span> are
+continuously differentiable functions over <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\AAA(\bx^*)\)</span> denote the set of active constraints:</p>
+<div class="math notranslate nohighlight">
+\[
+\AAA(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
+\]</div>
+<p>Assume that the gradients of the active constraints
+<span class="math notranslate nohighlight">\(\{\nabla g_i(\bx^*) \}_{i \in \AAA(\bx^*)}\)</span> are
+linearly independent.</p>
+<p>Then there exist nonnegative scalar multipliers
+<span class="math notranslate nohighlight">\(t_1, \dots, t_m \geq 0\)</span> which are not all
+zero such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*) = \bzero, \\
+&amp; t_i g_i(\bx^*) = 0, i=1, \dots, m.
+\end{split}\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is a simple extension of <a class="reference internal" href="#res-opt-inequality-fritz-john">Theorem 9.77</a>.</p>
+<p>By Fritz-John conditions, there exist nonnegative scalar multipliers
+<span class="math notranslate nohighlight">\(r_0, r_1, \dots, r_m \geq 0\)</span> which are not all
+zero such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; r_0 \nabla f(\bx^*) + \sum_{i=1}^m r_i \nabla g_i(\bx^*) = \bzero, \\
+&amp; r_i g_i(\bx^*) = 0, i=1, \dots, m.
+\end{split}\]</div>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(r_0 = 0\)</span>, then the set of gradients of active constraints
+will become linearly dependent.</p></li>
+<li><p>Hence, we must have <span class="math notranslate nohighlight">\(r_0 &gt; 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t_i = \frac{r_i}{r_0}\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>.</p></li>
+<li><p>The result follows.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="inequality-and-equality-constrained-problems">
+<h2><span class="section-number">9.8.2. </span>Inequality and Equality Constrained Problems<a class="headerlink" href="#inequality-and-equality-constrained-problems" title="Permalink to this headline">¶</a></h2>
+<p>We now generalize the KKT conditions to include
+problems of the form which include both inequality
+constraints and equality constraints</p>
+<div class="math notranslate nohighlight" id="equation-eq-cvx-opt-lm-ineq-eq">
+<span class="eqno">(9.19)<a class="headerlink" href="#equation-eq-cvx-opt-lm-ineq-eq" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }   &amp; &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; g_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f, g_1, \dots, g_m, h_1, \dots, h_p : \VV \to \RR\)</span> are
+continuously differentiable functions over <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>The constraint set is given by</p>
+<div class="math notranslate nohighlight">
+\[
+C = \{\bx \in \VV \ST  g_i(\bx) \leq 0, i=1,\dots,m
+\text{ and }  h_j(\bx) = 0, j=1,\dots,p \}.
+\]</div>
+<ol class="simple">
+<li><p>An equality constraint must always be met at
+a feasible point. Hence there is no need to
+distinguish between active and inactive equality
+constraints. All inequality constraints are active.</p></li>
+<li><p>A constraint of the form <span class="math notranslate nohighlight">\(h_j(\bx) = 0\)</span> can be
+converted into two inequality constraints
+<span class="math notranslate nohighlight">\(h_j(\bx) \leq 0\)</span> and <span class="math notranslate nohighlight">\(-h_j(\bx)\leq 0\)</span>.</p></li>
+</ol>
+<div class="proof theorem admonition" id="res-opt-ineq-eq-kkt">
+<p class="admonition-title"><span class="caption-number">Theorem 9.79 </span> (KKT conditions for problems with smooth inequality and equality constraints)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimizer of the
+optimization problem <a class="reference internal" href="#equation-eq-cvx-opt-lm-ineq-eq">(9.19)</a></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }   &amp; &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; g_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f, g_1, \dots, g_m, h_1, \dots, h_p : \VV \to \RR\)</span> are
+continuously differentiable functions over <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\AAA(\bx^*)\)</span> denote the set of active inequality constraints:</p>
+<div class="math notranslate nohighlight">
+\[
+\AAA(\bx^*) = \{ i \ST g_i(\bx^*) = 0 \}.
+\]</div>
+<p>Assume that the gradients of the active inequality constraints
+<span class="math notranslate nohighlight">\(\{\nabla g_i(\bx^*) \}_{i \in \AAA(\bx^*)}\)</span>
+and all the equality constraints
+<span class="math notranslate nohighlight">\(\{ \nabla h_j(\bx^*) \}_{j=1,\dots,p}\)</span>
+are linearly independent.</p>
+<p>Then there exist nonnegative scalar multipliers
+<span class="math notranslate nohighlight">\(t_1, \dots, t_m \geq 0\)</span>
+and real scalar multipliers <span class="math notranslate nohighlight">\(r_1, \dots, r_p \in \RR\)</span>
+which are not all zero such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*)
++ \sum_{j=1}^p r_j \nabla h_j(\bx^*) = \bzero, \\
+&amp; t_i g_i(\bx^*) = 0, i=1, \dots, m.
+\end{split}\]</div>
+</div>
+</div><div class="section" id="kkt-points-and-regular-points">
+<h3><span class="section-number">9.8.2.1. </span>KKT Points and Regular Points<a class="headerlink" href="#kkt-points-and-regular-points" title="Permalink to this headline">¶</a></h3>
+<p>All the results up to this point define a set of
+necessary conditions in the form of a system of
+equations on the constraint functions and their
+gradients which must be satisfied by every
+local minimizer of the optimization problem.
+Besides the local minimizers, other points may
+also satisfy this system of equations.
+We now introduce the notion of KKT points
+which satisfy these equations.</p>
+<div class="proof definition admonition" id="def-opt-kkt-point">
+<p class="admonition-title"><span class="caption-number">Definition 9.29 </span> (KKT point)</p>
+<div class="definition-content section" id="proof-content">
+<p>Consider the optimization problem <a class="reference internal" href="#equation-eq-cvx-opt-lm-ineq-eq">(9.19)</a>
+where <span class="math notranslate nohighlight">\(f, g_1, \dots, g_m, h_1, \dots, h_p : \VV \to \RR\)</span> are
+continuously differentiable functions over <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>A feasible point <span class="math notranslate nohighlight">\(\bx^*\)</span> is called a <em>KKT point</em>
+if there exist nonnegative scalar multipliers
+<span class="math notranslate nohighlight">\(t_1, \dots, t_m \geq 0\)</span>
+and real scalar multipliers <span class="math notranslate nohighlight">\(r_1, \dots, r_p \in \RR\)</span>
+which are not all zero such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*)
++ \sum_{j=1}^p r_j \nabla h_j(\bx^*) = \bzero, \\
+&amp; t_i g_i(\bx^*) = 0, i=1, \dots, m.
+\end{split}\]</div>
+</div>
+</div><p>All the necessary KKT conditions so far can be simply
+restarted as <em>a local minimizer must be a KKT point</em>
+if the gradients of active inequality constraints and
+all equality constraints at the point are
+linearly independent.
+We introduce the notion of <em>regularity</em> to capture
+the linear independence aspect.</p>
+<div class="proof definition admonition" id="def-opt-kkt-regularity">
+<p class="admonition-title"><span class="caption-number">Definition 9.30 </span> (Regularity)</p>
+<div class="definition-content section" id="proof-content">
+<p>Consider the optimization problem <a class="reference internal" href="#equation-eq-cvx-opt-lm-ineq-eq">(9.19)</a>
+where <span class="math notranslate nohighlight">\(f, g_1, \dots, g_m, h_1, \dots, h_p : \VV \to \RR\)</span> are
+continuously differentiable functions over <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+<p>A feasible point <span class="math notranslate nohighlight">\(\bx^*\)</span> is called <em>regular</em> if
+the gradients of the active inequality constraints
+<span class="math notranslate nohighlight">\(\{\nabla g_i(\bx^*) \}_{i \in \AAA(\bx^*)}\)</span>
+and all the equality constraints
+<span class="math notranslate nohighlight">\(\{ \nabla h_j(\bx^*) \}_{j=1,\dots,p}\)</span>
+are linearly independent.</p>
+</div>
+</div><p>With the terminology of these definitions,
+<a class="reference internal" href="#res-opt-ineq-eq-kkt">Theorem 9.79</a> reduces to:
+if a regular point is a local minimizer
+then it must be a KKT point.</p>
+<p>The notion of regularity is a kind of
+constraint qualification.</p>
+<div class="proof example admonition" id="ex-opt-lm-sum-2-circle-bd-kkt">
+<p class="admonition-title"><span class="caption-number">Example 9.15 </span> (Regular points, KKT points, Local minimizers)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }   &amp; &amp; x_1 + x_2 \\
+&amp; \text{subject to } &amp; &amp; x_1^2 + x_2^2 = 1.
+\end{split}\]</div>
+<p>The problem structure</p>
+<ol class="simple">
+<li><p>The ambient space is <span class="math notranslate nohighlight">\(\RR^2\)</span>.</p></li>
+<li><p>We have the cost function: <span class="math notranslate nohighlight">\(f(\bx) = x_1 + x_2\)</span>.</p></li>
+<li><p>The cost function is smooth and convex, in fact linear.</p></li>
+<li><p>We don’t have any inequality constraints.</p></li>
+<li><p>We have one equality constraint.</p></li>
+<li><p>The equality constraint function is given by <span class="math notranslate nohighlight">\(h(\bx) = x_1^2 + x_2^2 - 1\)</span>.</p></li>
+<li><p>The equality constraint is <span class="math notranslate nohighlight">\(h(\bx) = 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h\)</span> is a smooth function but it is not a convex function.</p></li>
+<li><p>The constraint set is a contour of <span class="math notranslate nohighlight">\(h\)</span>.</p></li>
+<li><p>The set of feasible points is given by <span class="math notranslate nohighlight">\(C = \{ \bx \ST h(\bx ) = 0 \}\)</span>.</p></li>
+<li><p>The constraint set is not convex.</p></li>
+<li><p>Hence, it is not a convex optimization problem.</p></li>
+<li><p>However, the constraint set is compact.</p></li>
+<li><p>Hence, due to <a class="reference internal" href="../metric_spaces/compact.html#res-ms-compact-real-valued-min-max-attain">Theorem 3.85</a>,
+the function <span class="math notranslate nohighlight">\(f\)</span> indeed attains a minimum as well as a
+maximum value on the <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+</ol>
+<p>Gradients</p>
+<ol class="simple">
+<li><p>We have <span class="math notranslate nohighlight">\(\nabla f(\bx) = (1, 1)\)</span>.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(\nabla h(\bx) = (2 x_1, 2 x_2)\)</span>.</p></li>
+</ol>
+<p>Irregular points</p>
+<ol class="simple">
+<li><p>The KKT conditions are applicable only on regular points.</p></li>
+<li><p>We first identify the points which are irregular.</p></li>
+<li><p>The irregular points are points at which the gradients
+of all active inequality constraints and equality constraints
+are linearly dependent.</p></li>
+<li><p>Since, we have a single equality constraint, hence
+the irregular points are those points at which <span class="math notranslate nohighlight">\(\nabla h(\bx) = \bzero\)</span>.</p></li>
+<li><p>This is given by a single point <span class="math notranslate nohighlight">\((x_1, x_2) = (0, 0)\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\((0, 0) \notin C\)</span> since <span class="math notranslate nohighlight">\(h((0,0)) = -1 \neq 0\)</span>.</p></li>
+<li><p>Hence, the constraint set <span class="math notranslate nohighlight">\(C\)</span> doesn’t contain any irregular points.</p></li>
+<li><p>In other words, every feasible point is a regular point.</p></li>
+<li><p>Hence the KKT conditions are necessary for local optimality.</p></li>
+<li><p>In other words, if a point is a local minimizer then it must be a KKT point.</p></li>
+</ol>
+<p>KKT points</p>
+<ol>
+<li><p>To identify the KKT points, we form the Lagrangian</p>
+<div class="math notranslate nohighlight">
+\[
+   L(\bx, r) = f(\bx) + r h(\bx) = x_1 + x_2 + r (x_1^2 + x_2^2 -1).
+   \]</div>
+</li>
+<li><p>The KKT conditions are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \nabla_x L(\bx, r) = \nabla f(\bx) + r \nabla h(\bx) = 0,\\
+   &amp; h(\bx) = 0.
+   \end{split}\]</div>
+</li>
+<li><p>They expand to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; 1 + 2 r x_1 = 0,\\
+   &amp; 1 + 2 r x_2 = 0,\\
+   &amp; x_1^2 + x_2^2 - 1  = 0.
+   \end{split}\]</div>
+</li>
+<li><p>From the first two equations, we have <span class="math notranslate nohighlight">\(r \neq 0\)</span> and <span class="math notranslate nohighlight">\(x_1 = x_2 = \frac{-1}{2r}\)</span>.</p></li>
+<li><p>Plugging it into the third equation, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \left ( \frac{-1}{2r} \right )^2 + \left ( \frac{-1}{2r} \right )^2 = 1. 
+   \]</div>
+</li>
+<li><p>This simplifies to <span class="math notranslate nohighlight">\(r^2 = \frac{1}{2}\)</span>.</p></li>
+<li><p>Hence, we have <span class="math notranslate nohighlight">\(r = \pm \frac{1}{\sqrt{2}}\)</span>.</p></li>
+<li><p>This gives us two different KKT points
+<span class="math notranslate nohighlight">\((\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}})\)</span>
+and <span class="math notranslate nohighlight">\((-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}})\)</span>.</p></li>
+</ol>
+<p>The optimal solution</p>
+<ol>
+<li><p>By compactness, we know that the minimizer does exist.</p></li>
+<li><p>By regularity, we know that the minimizer must be a KKT point.</p></li>
+<li><p>We have two candidates available.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(f((-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}})) = -\sqrt{2}\)</span>
+and <span class="math notranslate nohighlight">\(f((\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}})) = \sqrt{2}\)</span>.</p></li>
+<li><p>Hence the minimizer is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx^* = \left (-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}} \right )
+   \]</div>
+<p>as it has the smaller value of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</li>
+</ol>
+</div>
+</div></div>
+</div>
+<div class="section" id="the-convex-case">
+<h2><span class="section-number">9.8.3. </span>The Convex Case<a class="headerlink" href="#the-convex-case" title="Permalink to this headline">¶</a></h2>
+<p>We now restrict our attention to the case where
+the cost and constraint functions are convex.
+In this case, the KKT conditions are also sufficient.</p>
+<div class="proof theorem admonition" id="res-opt-convex-ineq-affine-eq-kkt">
+<p class="admonition-title"><span class="caption-number">Theorem 9.80 </span> (Sufficient KKT conditions for convex problems (smooth and convex cost and inequality constraints, affine equality constraints))</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a feasible solution of the
+optimization problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }   &amp; &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; g_i(\bx) \leq 0, &amp; \quad i=1,\dots,m\\
+&amp;                    &amp; &amp; h_j(\bx) = 0,    &amp; \quad j=1,\dots,p
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f, g_1, \dots, g_m : \VV \to \RR\)</span> are
+continuously differentiable convex functions over <span class="math notranslate nohighlight">\(\VV\)</span>
+and <span class="math notranslate nohighlight">\(h_1, \dots, h_p : \VV \to \RR\)</span> are affine functions.</p>
+<p>Suppose that there exist nonnegative scalar multipliers
+<span class="math notranslate nohighlight">\(t_1, \dots, t_m \geq 0\)</span>
+and real scalar multipliers <span class="math notranslate nohighlight">\(r_1, \dots, r_p \in \RR\)</span>
+which are not all zero such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*)
++ \sum_{j=1}^p r_j \nabla h_j(\bx^*) = \bzero, \\
+&amp; t_i g_i(\bx^*) = 0, i=1, \dots, m.
+\end{split}\]</div>
+<p>Then <span class="math notranslate nohighlight">\(\bx^*\)</span> is an optimal solution of the minimization problem above.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We are given that <span class="math notranslate nohighlight">\(\bx^*\)</span> is a feasible point satisfying the
+KKT conditions.</p>
+<ol>
+<li><p>Define the function</p>
+<div class="math notranslate nohighlight">
+\[
+   s(\bx) = f(\bx) + \sum_{i=1}^m t_i g_i(\bx) + \sum_{j=1}^p r_j h_j(\bx).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g_i\)</span> are convex and <span class="math notranslate nohighlight">\(h_j\)</span> are affine, hence <span class="math notranslate nohighlight">\(s\)</span> is convex.</p></li>
+<li><p>Since all of them are continuously differentiable, hence <span class="math notranslate nohighlight">\(s\)</span> is also
+continuously differentiable.</p></li>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla s(\bx) =  \nabla f(\bx) + \sum_{i=1}^m t_i \nabla g_i(\bx)
+   + \sum_{j=1}^p r_j \nabla h_j(\bx).
+   \]</div>
+</li>
+<li><p>We are given that <span class="math notranslate nohighlight">\(\nabla s(\bx^*) = 0\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="differentiable_objectives.html#res-cvxopt-diff-convex-optimal-unconstrained">Theorem 9.48</a>,
+<span class="math notranslate nohighlight">\(\bx^*\)</span> is a minimizer of <span class="math notranslate nohighlight">\(s\)</span> over <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(s(\bx^*) \leq s(\bx)\)</span> for every <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>.</p></li>
+<li><p>By hypothesis <span class="math notranslate nohighlight">\(t_i g_i(\bx^*) = 0\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\sum_{i=1}^m t_i g_i(\bx^*) = 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx^*\)</span> is a feasible point,
+hence <span class="math notranslate nohighlight">\(h_j(\bx^*) = 0\)</span> for every <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\sum_{j=1}^p h_j(\bx^*) = 0\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   f(\bx^*) 
+   &amp;= f(\bx^*) + \sum_{i=1}^m t_i g_i(\bx^*)  + \sum_{j=1}^p h_j(\bx^*)\\
+   &amp;= s(\bx^*) \\
+   &amp;\leq s(\bx)\\
+   &amp;= f(\bx) + \sum_{i=1}^m t_i g_i(\bx) + \sum_{j=1}^p r_j h_j(\bx)\\
+   &amp;\leq f(\bx).
+   \end{split}\]</div>
+<p>The last inequality comes from the fact that
+<span class="math notranslate nohighlight">\(t_i \geq 0\)</span>, <span class="math notranslate nohighlight">\(g_i(\bx) \leq 0\)</span> and <span class="math notranslate nohighlight">\(h_j(\bx) = 0\)</span> for every
+feasible <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</li>
+<li><p>Hence for every feasible <span class="math notranslate nohighlight">\(\bx\)</span>, we have <span class="math notranslate nohighlight">\(f(\bx^*) \leq f(\bx)\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx^*\)</span> is an optimal point.</p></li>
+</ol>
+</div>
+<div class="section" id="slater-s-conditions">
+<h3><span class="section-number">9.8.3.1. </span>Slater’s Conditions<a class="headerlink" href="#slater-s-conditions" title="Permalink to this headline">¶</a></h3>
+<p>In <a class="reference internal" href="#res-opt-ineq-eq-kkt">Theorem 9.79</a>, we saw that
+KKT conditions become necessary for the local optimality
+of a feasible point only if the feasible point is regular.
+The regularity was a constraint qualification for
+the nonconvex smooth optimization problem.</p>
+<p>In the convex case, a different condition than
+regularity can guarantee the necessity of KKT
+conditions. They are known as <em>Slater’s conditions</em>.</p>
+<div class="proof definition admonition" id="def-opt-kkt-slater-condition">
+<p class="admonition-title"><span class="caption-number">Definition 9.31 </span> (Slater’s conditions)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(g_1, \dots, g_m : \VV \to \RR\)</span> be convex.
+We say that the <em>Slater’s condition</em> is satisfied for
+a set of convex inequalities</p>
+<div class="math notranslate nohighlight">
+\[
+g_i(\bx) \leq 0, \quad i=1,\dots,m
+\]</div>
+<p>if there exists a point <span class="math notranslate nohighlight">\(\widehat{\bx} \in \VV\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+g_i(\widehat{\bx}) &lt; 0, \quad i=1,\dots,m.
+\]</div>
+<p>In other words, the Slater’s condition requires the
+existence of a point which strictly satisfies all the
+convex inequality constraints.</p>
+</div>
+</div><p>Slater’s condition is much easier to check since it
+requires the existence of a single point which strictly satisfies
+all the convex inequalities.</p>
+<div class="proof theorem admonition" id="res-opt-convex-ineq-slater">
+<p class="admonition-title"><span class="caption-number">Theorem 9.81 </span> (Necessity of KKT conditions under Slater’s condition)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be an optimal solution of the
+optimization problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }   &amp; &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; g_i(\bx) \leq 0, &amp; \quad i=1,\dots,m
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f, g_1, \dots, g_m : \VV \to \RR\)</span> are
+continuously differentiable functions over <span class="math notranslate nohighlight">\(\VV\)</span>.
+In addition, assume that <span class="math notranslate nohighlight">\(g_1, \dots, g_m\)</span> are convex.
+Suppose that there exists a point <span class="math notranslate nohighlight">\(\widehat{\bx} \in \VV\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+g_i(\widehat{\bx}) &lt; 0, \quad i=1,\dots,m.
+\]</div>
+<p>Then there exist nonnegative scalar multipliers
+<span class="math notranslate nohighlight">\(t_1, \dots, t_m \geq 0\)</span>
+which are not all zero such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \nabla f(\bx^*) + \sum_{i=1}^m t_i \nabla g_i(\bx^*) = \bzero, \\
+&amp; t_i g_i(\bx^*) = 0, i=1, \dots, m.
+\end{split}\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is also derived from Fritz-John conditions
+<a class="reference internal" href="#res-opt-inequality-fritz-john">Theorem 9.77</a>.</p>
+<p>By Fritz-John conditions, there exist nonnegative scalar multipliers
+<span class="math notranslate nohighlight">\(r_0, r_1, \dots, r_m \geq 0\)</span> which are not all
+zero such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; r_0 \nabla f(\bx^*) + \sum_{i=1}^m r_i \nabla g_i(\bx^*) = \bzero, \\
+&amp; r_i g_i(\bx^*) = 0, i=1, \dots, m.
+\end{split}\]</div>
+<p>We need to show that <span class="math notranslate nohighlight">\(r_0 &gt; 0\)</span>. After that
+we can pick <span class="math notranslate nohighlight">\(t_i = \frac{r_i}{r_0}\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>
+to get the desired result.</p>
+<ol>
+<li><p>For contradiction, assume that <span class="math notranslate nohighlight">\(r_0 = 0\)</span>.</p></li>
+<li><p>Then we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i=1}^m r_i \nabla g_i(\bx^*) = \bzero.
+   \]</div>
+</li>
+<li><p>By the gradient inequality, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   g_i(\bx) \geq g_i(\bx^*) + \langle \bx - \bx^*, \nabla g_i(\bx^*) \rangle,
+   \quad i=1,\dots,m.
+   \]</div>
+</li>
+<li><p>Specifically, for the point <span class="math notranslate nohighlight">\(\widehat{\bx}\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   0 &gt;  g_i(\widehat{\bx}) \geq g_i(\bx^*) + \langle \widehat{\bx} - \bx^*, \nabla g_i(\bx^*) \rangle,
+   \quad i=1,\dots,m.
+   \]</div>
+</li>
+<li><p>Multiplying the <span class="math notranslate nohighlight">\(i\)</span>-th inequality by <span class="math notranslate nohighlight">\(r_i \geq 0\)</span> and summing over
+<span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   0 &gt; \sum_{i=1}^m r_i g_i(\bx^*) + 
+   \langle \widehat{\bx} - \bx^*, \sum_{i=1}^m r_i \nabla g_i(\bx^*) \rangle.
+   \]</div>
+<p>This inequality is strict since not all <span class="math notranslate nohighlight">\(r_i\)</span> are <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(r_0 = 0\)</span>.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\sum_{i=1}^m r_i \nabla g_i(\bx^*) = \bzero\)</span>, it reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+   0 &gt; \sum_{i=1}^m r_i g_i(\bx^*).
+   \]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(r_i g_i(\bx^*) = 0\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>. Hence we must have</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i=1}^m r_i g_i(\bx^*) = 0.
+   \]</div>
+</li>
+<li><p>A contradiction. Hence <span class="math notranslate nohighlight">\(r_0 &gt; 0\)</span> must be true.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="a-tangent-cones-perspective">
+<h2><span class="section-number">9.8.4. </span>A Tangent Cones Perspective<a class="headerlink" href="#a-tangent-cones-perspective" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>Consider an optimization problem of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }  &amp; &amp; f(\bx)\\
+&amp; \text{subject to } &amp; &amp; h_i(\bx) = 0, i=1,\dots,m.
+\end{split}\]</div>
+<p>Assume that <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span> and <span class="math notranslate nohighlight">\(h_i : \VV \to \RR\)</span>
+for <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>
+are smooth functions.</p>
+<p>The constraint set can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+C = \{ \bx \ST  h_i(\bx) = 0, i=1,\dots,m \}.
+\]</div>
+<ol>
+<li><p>Assume that <span class="math notranslate nohighlight">\(\bx^*\)</span> is a minimizer of this problem.</p></li>
+<li><p>By <a class="reference internal" href="constrained_opt.html#res-opt-tangent-cone-local-minimum">Theorem 9.72</a>,
+we must have</p>
+<div class="math notranslate nohighlight">
+\[
+   - \nabla f(\bx^*) \in T_C(\bx^*)^{\circ}.
+   \]</div>
+</li>
+</ol>
+<p>Let us now motivate the Lagrange multipliers
+using a simple problem of linear inequalities.</p>
+<ol>
+<li><p>Consider the specific case where</p>
+<div class="math notranslate nohighlight">
+\[
+   h_i(\bx) = \langle \bx, \ba_i \rangle - b_i.
+   \]</div>
+</li>
+<li><p>Consider a matrix <span class="math notranslate nohighlight">\(\bA\)</span> which consists of
+<span class="math notranslate nohighlight">\(\ba_1^T, \dots, \ba_m^T\)</span> as rows.</p></li>
+<li><p>Put together <span class="math notranslate nohighlight">\(b_1, \dots, b_m\)</span> as a vector <span class="math notranslate nohighlight">\(\bb\)</span>.</p></li>
+<li><p>Then the constraint set can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[
+   C = \{ \bx \ST \bA \bx = \bb \}.
+   \]</div>
+</li>
+<li><p>Assume that <span class="math notranslate nohighlight">\(\bx^* \in C\)</span> is the local minimizer of <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="constrained_opt.html#ex-opt-tangent-cone-linear-system">Example 9.10</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   T_C(\bx^*) = \{ \bx \ST \bA \bx = \bzero \}
+   \]</div>
+<p>which is the nullspace of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</li>
+<li><p>By <a class="reference internal" href="../convex_sets/cone_2.html#ex-cvx-polar-cone-nullspace">Example 8.18</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   T_C(\bx^*)^{\circ} = T_C(\bx^*)^{\perp} =  \range \bA^T.
+   \]</div>
+</li>
+<li><p>Hence, by the optimality condition, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   - \nabla f(\bx^*) \in \range \bA^T.
+   \]</div>
+</li>
+<li><p>Hence, there exists <span class="math notranslate nohighlight">\(\bt^* \in \RR^m\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla f(\bx^*) + \bA^T \bt^* = 0.
+   \]</div>
+</li>
+<li><p>This is equivalent to</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \ba_i = 0.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\nabla h_i (\bx^*) = \ba_i\)</span>, hence this is equivalent to</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla h_i (\bx^*) = 0.
+   \]</div>
+</li>
+</ol>
+<p>This motivates us to define the Lagrangian of <span class="math notranslate nohighlight">\(f\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+L(\bx, \bt) = f(\bx) + \sum_{i=1}^m t_i h_i(\bx).
+\]</div>
+<p>The basic Lagrangian theorem states that under
+suitable conditions, if <span class="math notranslate nohighlight">\(\bx^*\)</span> is a
+local minimum of <span class="math notranslate nohighlight">\(f\)</span> under the constraint set <span class="math notranslate nohighlight">\(C\)</span>
+then there exist scalars <span class="math notranslate nohighlight">\(t_1^*, \dots, t_m^*\)</span>
+called <em>Lagrangian multipliers</em> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla h_i (\bx^*) = 0.
+\]</div>
+<ol>
+<li><p>There are <span class="math notranslate nohighlight">\(n\)</span> unknowns in <span class="math notranslate nohighlight">\(\bx^*\)</span> and <span class="math notranslate nohighlight">\(m\)</span> unknowns in <span class="math notranslate nohighlight">\(\bt^*\)</span>.</p></li>
+<li><p>Thus, we have a total of <span class="math notranslate nohighlight">\(m + n\)</span> unknowns.</p></li>
+<li><p>The relation above gives us a system of <span class="math notranslate nohighlight">\(n\)</span> equations.</p></li>
+<li><p>Together with the <span class="math notranslate nohighlight">\(m\)</span> equalities <span class="math notranslate nohighlight">\(h_i(\bx^*) = 0\)</span>,
+we have a system of <span class="math notranslate nohighlight">\(m + n\)</span> equations with <span class="math notranslate nohighlight">\(m + n\)</span> unknowns.</p></li>
+<li><p>Thus, the problem of solving a constrained optimization
+problem is transformed into a problem of solving a system
+of nonlinear equations.</p></li>
+<li><p>Now, suppose that the tangent cone at <span class="math notranslate nohighlight">\(\bx^*\)</span> can be written
+as</p>
+<div class="math notranslate nohighlight">
+\[
+   T_C(\bx^*) = \{\bx \ST \langle \bx, \nabla h_i(\bx^*) \rangle = 0,
+   i=1,\dots,m \}.
+   \]</div>
+</li>
+<li><p>Letting <span class="math notranslate nohighlight">\(\ba_i = \nabla h_i(\bx^*)\)</span> and following the argument
+above, we must have</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla h_i (\bx^*) = 0.
+   \]</div>
+</li>
+<li><p>Thus, if the tangent cone can be represented as above, then
+if <span class="math notranslate nohighlight">\(\bx^*\)</span> is a local minimizer, then the Lagrangian multipliers
+<span class="math notranslate nohighlight">\(t_1^*, \dots, t_m^*\)</span> must exist.</p></li>
+<li><p>The <em>admittance of Lagrange multipliers</em> at a given <span class="math notranslate nohighlight">\(\bx^* \in C\)</span>
+is the property of the constraint set <span class="math notranslate nohighlight">\(C\)</span>. It is not a property
+of the optimization problem itself. If <span class="math notranslate nohighlight">\(C\)</span> admits Lagrange
+multipliers at <span class="math notranslate nohighlight">\(\bx^*\)</span>, then there exists a Lagrange
+multiplier vector at <span class="math notranslate nohighlight">\(\bx^*\)</span> for every smooth
+cost function <span class="math notranslate nohighlight">\(f\)</span> if <span class="math notranslate nohighlight">\(\bx^*\)</span> is a local minimizer of <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="enhanced-fritz-john-conditions">
+<h2><span class="section-number">9.8.5. </span>Enhanced Fritz-John Conditions<a class="headerlink" href="#enhanced-fritz-john-conditions" title="Permalink to this headline">¶</a></h2>
+<p>We now introduce a more difficult optimization problem</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-efj-problem">
+<span class="eqno">(9.20)<a class="headerlink" href="#equation-eq-opt-efj-problem" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }  &amp; &amp; f(\bx)\\
+&amp; \text{subject to } &amp; &amp; \bx \in C\end{split}\]</div>
+<p>where the constraint set <span class="math notranslate nohighlight">\(C\)</span> consists of equality and
+inequality constraints as well as an additional abstract
+set constraint <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-efj-constraints">
+<span class="eqno">(9.21)<a class="headerlink" href="#equation-eq-opt-efj-constraints" title="Permalink to this equation">¶</a></span>\[C = X \cap \{\bx \ST g_i(\bx) \leq 0, i=1,\dots,m\}
+\cap \{\bx \ST h_j(\bx) = 0, j=1,\dots,p\}.\]</div>
+<p>We assume that <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(g_i\)</span> and <span class="math notranslate nohighlight">\(h_j\)</span> are smooth
+functions from <span class="math notranslate nohighlight">\(\VV\)</span> to <span class="math notranslate nohighlight">\(\RR\)</span>
+and <span class="math notranslate nohighlight">\(X\)</span> is a nonempty closed set.</p>
+<p>We also introduce <span class="math notranslate nohighlight">\(g: \VV \to \RR^m\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+g(\bx) = (g_1(\bx), \dots, g_m(\bx))
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(h : \VV \to \RR^p\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+h(\bx) = (h_1(\bx), \dots, h_p(\bx)).
+\]</div>
+<p>For every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>, we define</p>
+<div class="math notranslate nohighlight">
+\[
+g_i^+(\bx) = \max \{0, g_i(\bx) \}.
+\]</div>
+<p>Correspondingly, we define</p>
+<div class="math notranslate nohighlight">
+\[
+g^+(\bx) = (g_1^+(\bx), \dots, g_m^+(\bx)).
+\]</div>
+<div class="proof definition admonition" id="def-opt-efj-lagrangian-func">
+<p class="admonition-title"><span class="caption-number">Definition 9.32 </span> (Lagrangian function)</p>
+<div class="definition-content section" id="proof-content">
+<p>For the optimization problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>,
+the <em>Lagrangian function</em> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+L(\bx, \bt, \br) = f(\bx) + \sum_{i=1}^m t_i g_i(\bx)
++ \sum_{j=1}^p r_j h_j(\bx)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bt \in \RR^m\)</span> and <span class="math notranslate nohighlight">\(\br \in \RR^p\)</span>.</p>
+</div>
+</div><div class="section" id="lagrange-multiplier-vectors">
+<h3><span class="section-number">9.8.5.1. </span>Lagrange Multiplier Vectors<a class="headerlink" href="#lagrange-multiplier-vectors" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-opt-constraint-set-efj-lm">
+<p class="admonition-title"><span class="caption-number">Definition 9.33 </span> (Lagrange multiplier vectors)</p>
+<div class="definition-content section" id="proof-content">
+<p>We say that a constraint set <span class="math notranslate nohighlight">\(C\)</span> as defined in
+<a class="reference internal" href="#equation-eq-opt-efj-constraints">(9.21)</a>
+<em>admits Lagrange multipliers</em> at a point
+<span class="math notranslate nohighlight">\(\bx^* \in C\)</span> if for every smooth cost
+function <span class="math notranslate nohighlight">\(f\)</span> for which <span class="math notranslate nohighlight">\(\bx^*\)</span> is a local minimum
+of the problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>, there
+exist vectors <span class="math notranslate nohighlight">\(\bt^* = (t_1^*, \dots, t_m^*)\)</span>
+and <span class="math notranslate nohighlight">\(\br^* = (r_1^*, \dots, r_p^*)\)</span> that
+satisfy the following conditions:</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-efj-grad-mult-sum-tan-cone">
+<span class="eqno">(9.22)<a class="headerlink" href="#equation-eq-opt-efj-grad-mult-sum-tan-cone" title="Permalink to this equation">¶</a></span>\[\left \langle \by, 
+\left ( 
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+\right )
+\right \rangle \geq 0,
+\quad \Forall \by \in T_X(\bx^*),\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-opt-efj-nng-ineq-mult">
+<span class="eqno">(9.23)<a class="headerlink" href="#equation-eq-opt-efj-nng-ineq-mult" title="Permalink to this equation">¶</a></span>\[t_i^* \geq 0, \Forall i=1,\dots,m,\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-opt-efj-comp-slack">
+<span class="eqno">(9.24)<a class="headerlink" href="#equation-eq-opt-efj-comp-slack" title="Permalink to this equation">¶</a></span>\[t_i^* = 0,  \Forall i \ST g_i(\bx^* ) &lt; 0.\]</div>
+<p>A pair <span class="math notranslate nohighlight">\((\bt^*, \br^*)\)</span> satisfying these conditions
+is called a <em>Lagrange multiplier vector</em> corresponding
+to <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(\bx^*\)</span>.</p>
+</div>
+</div><div class="docutils">
+<ol>
+<li><p>We also call the Lagrange multiplier vector
+as simply Lagrange multipliers.</p></li>
+<li><p>The condition <a class="reference internal" href="#equation-eq-opt-efj-nng-ineq-mult">(9.23)</a>
+is the <em>nonnegativity condition</em> of the
+Lagrangian multipliers for the inequality
+constraints.</p></li>
+<li><p>The condition <a class="reference internal" href="#equation-eq-opt-efj-comp-slack">(9.24)</a>
+is the <em>complementary slackness</em> condition.</p></li>
+<li><p>From <a class="reference internal" href="#equation-eq-opt-efj-grad-mult-sum-tan-cone">(9.22)</a>,
+we can see that for each <span class="math notranslate nohighlight">\(\by \in T_X(\bx^*)\)</span>, the set of
+Lagrange multiplier vectors corresponding
+to a given <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(\bx^*\)</span> is a closed half-space.</p></li>
+<li><p>Hence, the set of
+Lagrange multiplier vectors corresponding
+to a given <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(\bx^*\)</span>
+is an intersection of closed half spaces.</p></li>
+<li><p>Hence the set of Lagrange multiplier vectors
+is closed and convex. Although it may possibly
+be empty.</p></li>
+<li><p>The condition <a class="reference internal" href="#equation-eq-opt-efj-grad-mult-sum-tan-cone">(9.22)</a>
+is referred to as the <em>Lagrangian stationarity condition</em>.
+It states that the gradient of the Lagrangian function
+is nonnegative along all tangent directions at the
+local minimizer.</p></li>
+<li><p>It can be viewed as the necessary condition for <span class="math notranslate nohighlight">\(\bx^*\)</span>
+to be a local minimizer of the function
+<span class="math notranslate nohighlight">\(L(\bx, \bt^*, \br^*)\)</span>.
+See <a class="reference internal" href="constrained_opt.html#res-opt-tangent-cone-local-minimum">Theorem 9.72</a>.</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(X = \VV\)</span>, then <span class="math notranslate nohighlight">\(T_X(\bx^*) = \VV\)</span>, and this condition
+reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*) = \bzero.
+   \]</div>
+</li>
+<li><p>When <span class="math notranslate nohighlight">\(X\)</span> is convex, then <a class="reference internal" href="#equation-eq-opt-efj-grad-mult-sum-tan-cone">(9.22)</a>
+reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+   \left \langle \bx - \bx^*, 
+   \left ( 
+      \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+      + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+   \right )
+   \right \rangle \geq 0,
+   \quad \Forall \bx \in X.
+   \]</div>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is convex. Hence <span class="math notranslate nohighlight">\(\alpha (\bx - \bx^*)\)</span> for <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>
+is a feasible direction for every <span class="math notranslate nohighlight">\(\bx \in X\)</span>.</p></li>
+<li><p>Hence, if this inequality holds, then
+<a class="reference internal" href="#equation-eq-opt-efj-grad-mult-sum-tan-cone">(9.22)</a> holds for every
+<span class="math notranslate nohighlight">\(\bd \in F_C(\bx)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(X\)</span> is convex, hence <span class="math notranslate nohighlight">\(\closure F_C(\bx) = T_C(\bx)\)</span>.</p></li>
+<li><p>If the inequality <a class="reference internal" href="#equation-eq-opt-efj-grad-mult-sum-tan-cone">(9.22)</a>
+holds for every <span class="math notranslate nohighlight">\(\bd \in F_C(\bx)\)</span>,
+then it will also hold for a closure point of <span class="math notranslate nohighlight">\(F_C(\bx)\)</span>.</p></li>
+<li><p>In other words, if <span class="math notranslate nohighlight">\(\langle \bx, \ba \rangle \geq 0\)</span>
+for every <span class="math notranslate nohighlight">\(\bx \in A\)</span>, then for any convergent sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span>
+of <span class="math notranslate nohighlight">\(A\)</span>, we have <span class="math notranslate nohighlight">\(\lim_{k \to \infty} \langle \bx_k, \ba \rangle \geq 0\)</span>.
+Hence the inequality holds for every closure point also.</p></li>
+</ol>
+</li>
+<li><p>The Lagrangian stationary condition can also be equivalently
+written as</p>
+<div class="math notranslate nohighlight">
+\[
+   -\left ( 
+      \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+      + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+   \right ) \in T_X(\bx^*)^{\circ}.
+   \]</div>
+<p>In other words, the negative gradient of the Lagrangian
+function must lie in the polar cone of the tangent cone
+of <span class="math notranslate nohighlight">\(X\)</span> at <span class="math notranslate nohighlight">\(\bx^*\)</span>.</p>
+</li>
+<li><p>Recall from <a class="reference internal" href="constrained_opt.html#res-opt-bno-normal-cone-polar-tangent-cone">Theorem 9.68</a> that</p>
+<div class="math notranslate nohighlight">
+\[
+   T_X(\bx^*)^{\circ} \subseteq \tilde{N}_X(\bx^*)
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{N}_X(\bx^*)\)</span> is the normal cone of <span class="math notranslate nohighlight">\(X\)</span> at <span class="math notranslate nohighlight">\(\bx^*\)</span>
+(in the sense of <span id="id2">[<a class="reference internal" href="../bib.html#id25" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">7</a>]</span>).</p>
+</li>
+<li><p>Hence the negative gradient of the Lagrangian
+function must be a normal direction
+(<a class="reference internal" href="constrained_opt.html#def-opt-bno-normal-dir">Definition 9.26</a>) at <span class="math notranslate nohighlight">\(\bx^*\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> is regular at <span class="math notranslate nohighlight">\(\bx^*\)</span> (<a class="reference internal" href="constrained_opt.html#res-opt-bno-regular-set">Theorem 9.70</a>), then
+we also have</p>
+<div class="math notranslate nohighlight">
+\[
+   T_X(\bx^*)^{\circ} = \tilde{N}_X(\bx^*).
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id3">
+<h3><span class="section-number">9.8.5.2. </span>Enhanced Fritz-John Conditions<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>We are now ready to present the Enhanced Fritz-John conditions
+as the necessary conditions for the existence of the
+local minimizer of the problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>.</p>
+<div class="proof theorem admonition" id="res-opt-enhanced-fritz-john-cond">
+<p class="admonition-title"><span class="caption-number">Theorem 9.82 </span> (Enhanced Fritz-John conditions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimizer of the
+problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>-<a class="reference internal" href="#equation-eq-opt-efj-constraints">(9.21)</a>.
+Then there exist scalars
+<span class="math notranslate nohighlight">\(t_0^*,t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*\)</span>
+satisfying the following conditions.</p>
+<ol>
+<li><p>The gradients satisfy the relation:</p>
+<div class="math notranslate nohighlight">
+\[
+   -\left ( 
+      t_0^* \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+      + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+   \right ) \in \tilde{N}_X(\bx^*).
+   \]</div>
+</li>
+<li><p>Nonnegativity: <span class="math notranslate nohighlight">\(t_i^* \geq 0\)</span> for every <span class="math notranslate nohighlight">\(i=0,\dots,m\)</span>.</p></li>
+<li><p>The scalars <span class="math notranslate nohighlight">\(t_0^*,t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*\)</span> are not equal
+to <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<li><p>Complementary violation condition:
+If the index set <span class="math notranslate nohighlight">\(I \cup J\)</span> is not empty, where</p>
+<div class="math notranslate nohighlight">
+\[
+   I = \{i &gt; 0 \ST t_i^* &gt; 0 \}, \quad
+   J = \{j  \ST r_j^* \neq 0 \},
+   \]</div>
+<p>there exists a sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(X\)</span> that converges
+to <span class="math notranslate nohighlight">\(\bx^*\)</span> and is such that for all <span class="math notranslate nohighlight">\(k\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; f(\bx_k) &lt; f(\bx^*),\\
+   &amp; t_i^* g_i (\bx_k) &gt; 0 \Forall i \in I,\\
+   &amp; r_j^* h_j(\bx_k) &gt; 0 \Forall j \in J,\\
+   &amp; g_i^+(\bx_k) = o(w(\bx_k)) \Forall i \notin I,\\
+   &amp; |h_j(\bx_k) | = o(w(\bx_k)) \Forall j \notin J,\\
+   \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(g_i^+(\bx) = \max \{ 0, g_i(\bx) \}\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+   w(\bx) = \min \left \{
+   \min_{i \in I} g_i^+(\bx),
+   \min_{j \in J} |h_j(\bx) |
+      \right \}.
+   \]</div>
+</li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The proof is based on a quadratic penalty function approach.
+For each <span class="math notranslate nohighlight">\(k \in \Nat\)</span>, we define a penalty function as</p>
+<div class="math notranslate nohighlight">
+\[
+F^k(\bx) = f(\bx) + \frac{k}{2} \sum_{i=1}^m (g_i^+(\bx))^2
++ \frac{k}{2} \sum_{j=1}^p (h_j(\bx))^2 
++ \frac{1}{2} \| \bx - \bx^* \|^2.
+\]</div>
+<ol>
+<li><p>At a feasible point <span class="math notranslate nohighlight">\(g_i^+(\bx) = 0\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>
+since <span class="math notranslate nohighlight">\(g_i(\bx) \leq 0\)</span>.</p></li>
+<li><p>At a feasible point <span class="math notranslate nohighlight">\(h_j(\bx) = 0\)</span> for every <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(F^k(\bx) = f(\bx) + \frac{1}{2} \| \bx - \bx^* \|^2\)</span>
+at every feasible point <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2} \| \bx - \bx^* \|^2\)</span> is a quadratic
+penalty term penalizing how far we are from the local minimum
+<span class="math notranslate nohighlight">\(\bx^*\)</span>.</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2} (g_i^+(\bx))^2\)</span> is a penalty term
+denoting how strongly the <span class="math notranslate nohighlight">\(i\)</span>-th inequality constraint is violated.</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2} (h_j(\bx))^2\)</span> is a penalty term
+denoting how strongly the <span class="math notranslate nohighlight">\(j\)</span>-th equality constraint is violated.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(F^k(\bx) \leq f(\bx)\)</span> for every <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>.</p></li>
+<li><p>At the local minimizer, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   F^k(\bx^*) = f(\bx^*).
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(F^k\)</span> is a continuously differentiable function.</p></li>
+<li><p>We note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \nabla (g_i^+(\bx))^2 = 2 g_i^+(\bx) \nabla g_i(\bx);\\
+   \nabla (h_j(\bx))^2  = 2 h_j(\bx) \nabla h_j(\bx).
+   \end{split}\]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla F^k(\bx) = \nabla f(\bx) + k \sum_{i=1}^m g_i^+(\bx) \nabla g_i(\bx)
+   + k \sum_{j=1}^p h_j(\bx) \nabla h_j(\bx) 
+   + (\bx - \bx^*).
+   \]</div>
+</li>
+</ol>
+<p>We now introduce the <em>penalized</em> problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }  &amp; &amp; F^k(\bx)\\
+&amp; \text{subject to } &amp; &amp; \bx \in X \cap S
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+S = \{ \bx \ST \|\bx - \bx^* \| \leq \epsilon \}
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> is a positive scalar such that
+<span class="math notranslate nohighlight">\(f(\bx^*) \leq f(\bx)\)</span> for all feasible <span class="math notranslate nohighlight">\(\bx \in C\)</span>
+with <span class="math notranslate nohighlight">\(\bx \in S\)</span>. Such a positive scalar exists
+since <span class="math notranslate nohighlight">\(\bx^*\)</span> is a local minimizer of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<ol>
+<li><p>The set <span class="math notranslate nohighlight">\(S\)</span> is compact and the set <span class="math notranslate nohighlight">\(X\)</span> is closed.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(X \cap S\)</span> is compact.</p></li>
+<li><p>Hence there exists an optimal minimizer of the
+above problem for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx^k\)</span> be a minimizer of <span class="math notranslate nohighlight">\(F^k(\bx)\)</span>
+over <span class="math notranslate nohighlight">\(X \cap S\)</span>.</p></li>
+<li><p>Then we have <span class="math notranslate nohighlight">\(F^k(\bx^k) \leq F^k(\bx^*)\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>
+since <span class="math notranslate nohighlight">\(\bx^* \in X \cap S\)</span>.</p></li>
+<li><p>This is equivalent to</p>
+<div class="math notranslate nohighlight">
+\[
+   F^k(\bx^k) = f(\bx^k) + \frac{k}{2} \sum_{i=1}^m (g_i^+(\bx^k))^2
+   + \frac{k}{2} \sum_{j=1}^p (h_j(\bx^k))^2 
+   + \frac{1}{2} \| \bx^k - \bx^* \|^2 \leq f(\bx^*)
+   \]</div>
+<p>for every <span class="math notranslate nohighlight">\(k\)</span>.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is continuous and <span class="math notranslate nohighlight">\(X \cap S\)</span> is compact, hence
+<span class="math notranslate nohighlight">\(f(\bx^k)\)</span> is bounded for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>It follows that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \lim_{k \to \infty} g_i^+(\bx^k) = 0, \quad i=1,\dots,m,\\
+   &amp; \lim_{k \to \infty} |h_j(\bx^k)| = 0, \quad j=1,\dots,p,
+   \end{split}\]</div>
+<p>otherwise the term on the L.H.S. of the previous inequality
+will become unbounded and tend to <span class="math notranslate nohighlight">\(\infty\)</span> as <span class="math notranslate nohighlight">\(k \to \infty\)</span>.</p>
+</li>
+<li><p>Hence every limit point <span class="math notranslate nohighlight">\(\tilde{\bx}\)</span>
+of the sequence <span class="math notranslate nohighlight">\(\{ \bx^k \}\)</span> is feasible;
+i.e., <span class="math notranslate nohighlight">\(\tilde{\bx} \in C\)</span>.</p></li>
+<li><p>Also, since <span class="math notranslate nohighlight">\(X \cap S\)</span> is compact, hence every limit
+point <span class="math notranslate nohighlight">\(\tilde{\bx}\)</span>
+of the sequence <span class="math notranslate nohighlight">\(\{ \bx^k \}\)</span> belongs to <span class="math notranslate nohighlight">\(X \cap S\)</span>.</p></li>
+<li><p>From the inequality <span class="math notranslate nohighlight">\(F^k(\bx^k) \leq f(\bx^*)\)</span>, we can also see
+that</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx^k) + \frac{1}{2} \| \bx^k - \bx^* \|^2 \leq f(\bx^*)
+   \quad \Forall k.
+   \]</div>
+</li>
+<li><p>Taking the limit as <span class="math notranslate nohighlight">\(k \to \infty\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\tilde{\bx}) + \frac{1}{2} \| \tilde{\bx} - \bx^* \|^2 \leq f(\bx^*)
+   \]</div>
+<p>for every limit point <span class="math notranslate nohighlight">\(\tilde{\bx}\)</span>.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\tilde{\bx} \in S\)</span> (near local minimizer)
+and <span class="math notranslate nohighlight">\(\tilde{\bx} \in C\)</span> (feasible), we have</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx^*) \leq f(\tilde{\bx}).
+   \]</div>
+</li>
+<li><p>Combining with the previous inequality, it gives us</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{1}{2} \| \tilde{\bx} - \bx^* \|^2  = 0.
+   \]</div>
+</li>
+<li><p>Hence, we must have <span class="math notranslate nohighlight">\(\bx^* = \tilde{\bx}\)</span>.
+Hence, the sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> has a only one limit point.</p></li>
+<li><p>Thus, the sequence <span class="math notranslate nohighlight">\(\{ \bx^k \}\)</span> converges to <span class="math notranslate nohighlight">\(\bx^*\)</span>.</p></li>
+<li><p>By the definition of the closed ball <span class="math notranslate nohighlight">\(S\)</span>,
+<span class="math notranslate nohighlight">\(\bx^*\)</span> is an interior point of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\lim \bx^k = \bx^*\)</span> it follows that
+<span class="math notranslate nohighlight">\(\bx^k\)</span> is an interior point of <span class="math notranslate nohighlight">\(S\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>
+greater than some <span class="math notranslate nohighlight">\(k_0\)</span>.</p></li>
+<li><p>Hence, due to <a class="reference internal" href="constrained_opt.html#res-opt-tangent-cone-local-minimum">Theorem 9.72</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   - \nabla F^k(\bx^k) \in T_C(\bx^k)^{\circ}
+   \]</div>
+<p>holds true for every <span class="math notranslate nohighlight">\(k &gt; k_0\)</span>.</p>
+</li>
+<li><p>We can write <span class="math notranslate nohighlight">\(\nabla F^k (\bx^k)\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla F^k(\bx^k) = \nabla f(\bx^k) + \sum_{i=1}^m \chi^k_i \nabla g_i(\bx^k)
+   + \sum_{j=1}^p \xi^k_j \nabla h_j(\bx^k) 
+   + (\bx^k - \bx^*)
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi^k_i = k g_i^+(\bx^k)\)</span> and <span class="math notranslate nohighlight">\(\xi^k_j = k h_j(\bx^k)\)</span>.</p>
+</li>
+<li><p>Note that by definition <span class="math notranslate nohighlight">\(\chi^k_i \geq 0\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>.</p></li>
+<li><p>Accordingly, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   - \left ( \nabla f(\bx^k) + \sum_{i=1}^m \chi^k_i \nabla g_i(\bx^k)
+   + \sum_{j=1}^p \xi^k_j \nabla h_j(\bx^k) 
+   + (\bx^k - \bx^*) \right ) \in  T_C(\bx^k)^{\circ}
+   \]</div>
+<p>for every <span class="math notranslate nohighlight">\(k &gt; k_0\)</span>.</p>
+</li>
+<li><p>We define</p>
+<div class="math notranslate nohighlight">
+\[
+   \delta^k = \sqrt{1 + \sum_{i=1}^m (\chi^k_i)^2 + \sum_{j=1}^p (\xi^k_j)^2 }.
+   \]</div>
+</li>
+<li><p>By definition <span class="math notranslate nohighlight">\(\delta^k \geq 1\)</span>.</p></li>
+<li><p>We now introduce</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; t_0^k = \frac{1}{\delta^k},\\
+   &amp; t_i^k = \frac{\chi^k_i}{\delta^k}, i=1,\dots,m,\\
+   &amp; r_j^k = \frac{\xi^k_j}{\delta^k}, j=1,\dots,p.   
+   \end{split}\]</div>
+</li>
+<li><p>By dividing by <span class="math notranslate nohighlight">\(\delta^k\)</span> in the previous relation, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+   \bz^k = - \left ( t_0^k \nabla f(\bx^k) + \sum_{i=1}^m t_i^k \nabla g_i(\bx^k)
+   + \sum_{j=1}^p r_j^k \nabla h_j(\bx^k) 
+   + \frac{1}{\delta_k}(\bx^k - \bx^*) \right ) \in  T_C(\bx^k)^{\circ}
+   \]</div>
+<p>for every <span class="math notranslate nohighlight">\(k &gt; k_0\)</span>
+since <span class="math notranslate nohighlight">\(T_C(\bx^k)^{\circ}\)</span> is a cone.</p>
+</li>
+<li><p>Note that by construction, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   (t_0^k)^2 + \sum_{i=1}^m (t_i^k)^2 + \sum_{j=1}^p (r_j^k)^2 = 1.
+   \]</div>
+</li>
+<li><p>Hence the sequence <span class="math notranslate nohighlight">\(\{ (t_0^k, t_1^k, \dots, t_m^k, r_1^k, \dots, r_p^k) \}\)</span>
+is a bounded sequence of <span class="math notranslate nohighlight">\(\RR^{1 + m + p}\)</span>.</p></li>
+<li><p>Hence, it must have a subsequence that converges to some limit
+<span class="math notranslate nohighlight">\(\{ (t_0^*, t_1^*, \dots, t_m^*, r_1^*, \dots, r_p^*) \}\)</span>.</p></li>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+   \bz^* = - \left ( t_0^* \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*) \right ). 
+   \]</div>
+</li>
+<li><p>Along this subsequence, we have <span class="math notranslate nohighlight">\(\bx^k \to \bx^*\)</span>,
+<span class="math notranslate nohighlight">\(\bz^k \to \bz^*\)</span> and <span class="math notranslate nohighlight">\(\bz^k \in T_X(\bx^k)^{\circ}\)</span>
+for every <span class="math notranslate nohighlight">\(k &gt; k_0\)</span>.</p></li>
+<li><p>Hence, following the definition of the normal cone
+(<a class="reference internal" href="constrained_opt.html#def-opt-bno-normal-cone">Definition 9.27</a>),
+after disregarding the first <span class="math notranslate nohighlight">\(k_0\)</span> terms of the sequences,</p>
+<div class="math notranslate nohighlight">
+\[
+   \bz^* \in \tilde{N}_X(\bx^*).
+   \]</div>
+</li>
+</ol>
+<p>(2) Nonnegativity</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(\delta^k \geq 1\)</span>, hence <span class="math notranslate nohighlight">\(0 &lt; t_0^k = \frac{1}{\delta^k} \leq 1\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(t_0^* \geq 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\chi^k_i \geq 0\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>, hence <span class="math notranslate nohighlight">\(t_i^k \geq 0\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(t_i^* \geq 0\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>.</p></li>
+</ol>
+<p>(3) Not all zero</p>
+<ol>
+<li><p>We have established that for every <span class="math notranslate nohighlight">\(k\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   (t_0^k)^2 + \sum_{i=1}^m (t_i^k)^2 + \sum_{j=1}^p (r_j^k)^2 = 1.
+   \]</div>
+</li>
+<li><p>Taking the limit over the subsequence, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   (t_0^*)^2 + \sum_{i=1}^m (t_i^*)^2 + \sum_{j=1}^p (r_j^*)^2 = 1.
+   \]</div>
+</li>
+<li><p>Hence, all of them cannot be zero.</p></li>
+</ol>
+<p>(4) Complementary violation conditions</p>
+<ol>
+<li><p>Assume that <span class="math notranslate nohighlight">\(I \cup J\)</span> is not empty.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bKKK = \{ k_1, k_2, \dots, \}\)</span> denote the index set of
+the convergent subsequence of <span class="math notranslate nohighlight">\(\{ (t_0^k, t_1^k, \dots, t_m^k, r_1^k, \dots, r_p^k) \}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i \in I\)</span>.</p>
+<ol class="simple">
+<li><p>We have <span class="math notranslate nohighlight">\(t_i^* &gt; 0\)</span>.</p></li>
+<li><p>Then for all sufficient large <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\bKKK\)</span>, we have <span class="math notranslate nohighlight">\(t_i^k t_i^* &gt; 0\)</span>
+as <span class="math notranslate nohighlight">\(t_i^k\)</span> should be sufficiently close to <span class="math notranslate nohighlight">\(t_i^*\)</span>.</p></li>
+<li><p>From the definitions of <span class="math notranslate nohighlight">\(t_i^k\)</span> and <span class="math notranslate nohighlight">\(\chi_i^k\)</span>, we must have
+<span class="math notranslate nohighlight">\(t_i^k g_i^+(\bx^k) &gt; 0\)</span> for all sufficient large <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\bKKK\)</span>.</p></li>
+<li><p>By definition, <span class="math notranslate nohighlight">\(g_i^+(\bx^k) \geq 0\)</span> and <span class="math notranslate nohighlight">\(g_i^+(\bx^k) &gt; 0\)</span>
+when <span class="math notranslate nohighlight">\(g_i(\bx^k) &gt; 0\)</span>.</p></li>
+<li><p>Hence we must have
+<span class="math notranslate nohighlight">\(t_i^k g_i(\bx^k) &gt; 0\)</span> for all sufficient large <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\bKKK\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(j \in J\)</span>.</p>
+<ol class="simple">
+<li><p>We have <span class="math notranslate nohighlight">\(r_j^* \neq 0\)</span>.</p></li>
+<li><p>Then for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\bKKK\)</span>, we have <span class="math notranslate nohighlight">\(r_j^k \approx r_j^*\)</span>.
+Hence <span class="math notranslate nohighlight">\(r_j^k \neq 0\)</span> and <span class="math notranslate nohighlight">\(r_j^k\)</span> has the same sign as <span class="math notranslate nohighlight">\(r_j^*\)</span>.</p></li>
+<li><p>Hence for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\bKKK\)</span>, we have
+<span class="math notranslate nohighlight">\(r_j^k r_j^* &gt; 0\)</span>.</p></li>
+<li><p>from the definitions of <span class="math notranslate nohighlight">\(r_j^k\)</span> and <span class="math notranslate nohighlight">\(\xi_j^k\)</span>, we see that
+for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\bKKK\)</span>, we must have  <span class="math notranslate nohighlight">\(r_j^k h_j(\bx^k) &gt; 0\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Hence for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\bKKK\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   t_i^k g_i(\bx^k) &gt; 0 \Forall i \in I
+   \text{ and }
+   r_j^k h_j(\bx^k) &gt; 0 \Forall j \in J.
+   \]</div>
+</li>
+<li><p>This means that <span class="math notranslate nohighlight">\( g_i^+(\bx^k) &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(i \in I\)</span>
+and <span class="math notranslate nohighlight">\(h_j(\bx^k) \neq 0\)</span> for every <span class="math notranslate nohighlight">\(j \in J\)</span> for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\bKKK\)</span>.</p></li>
+<li><p>This establishes that for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\bKKK\)</span>, we have
+<span class="math notranslate nohighlight">\(\bx^k \neq \bx^*\)</span>. Otherwise the inequality and equality constraints cannot be violated.</p></li>
+<li><p>Recall that we established that</p>
+<div class="math notranslate nohighlight">
+\[
+   F^k(\bx^k) = f(\bx^k) + \frac{k}{2} \sum_{i=1}^m (g_i^+(\bx^k))^2
+   + \frac{k}{2} \sum_{j=1}^p (h_j(\bx^k))^2 
+   + \frac{1}{2} \| \bx^k - \bx^* \|^2 \leq f(\bx^*)
+   \]</div>
+<p>for every <span class="math notranslate nohighlight">\(k\)</span>.</p>
+</li>
+<li><p>Hence for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\bKKK\)</span>, we must have</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx^k) &lt; f(\bx^*)
+   \]</div>
+<p>since at least one of <span class="math notranslate nohighlight">\((g_i^+(\bx^k))^2\)</span> and <span class="math notranslate nohighlight">\((h_j(\bx^k))^2\)</span> is positive for every
+sufficiently large <span class="math notranslate nohighlight">\(k\)</span>.</p>
+</li>
+<li><p>We form the desired sequence <span class="math notranslate nohighlight">\(\{ \bx_l \}\)</span> satisfying all the necessary
+criteria by picking up all the entries corresponding to sufficiently large <span class="math notranslate nohighlight">\(k\)</span>
+in <span class="math notranslate nohighlight">\(\bKKK\)</span> from <span class="math notranslate nohighlight">\(\{ \bx^k \}\)</span>.</p></li>
+<li><p>It remains to show the magnitude property of terms <span class="math notranslate nohighlight">\(h_j(\bx^k)\)</span>
+and <span class="math notranslate nohighlight">\(g_i^+(\bx^k)\)</span>.</p></li>
+<li><p>For the remaining argument, without loss of generality, we shall
+assume that <span class="math notranslate nohighlight">\(\{ \bx^k \}\)</span> is the subsequence chosen above.</p></li>
+</ol>
+<p>TBD the argument below is not complete.</p>
+<ol>
+<li><p>We see that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   (\delta^k)^2 &amp;= 1 + \sum_{i=1}^m (\chi^k_i)^2 + \sum_{j=1}^p (\xi^k_j)^2 \\
+   &amp;= 1 + \sum_{i=1}^m (k g_i^+(\bx^k))^2 + \sum_{j=1}^p (k h_j(\bx^k))^2 \\
+   &amp; \geq 1 + k w(\bx^k)^2. 
+   \end{split}\]</div>
+</li>
+<li><p>For every <span class="math notranslate nohighlight">\(i \notin I\)</span>, we have <span class="math notranslate nohighlight">\(t_i^* = 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\lim_{k \to \infty} t_i^k = 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\lim_{k \to \infty} \frac{\chi^k_i}{\delta^k} = 0\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{k \to \infty} \frac{(\chi^k_i)^2}{1 + \sum_{i=1}^m (\chi^k_i)^2 + \sum_{j=1}^p (\xi^k_j)^2} = 0.
+   \]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{k \to \infty} \frac{(k g_i^+(\bx^k))^2}{1 + \sum_{i=1}^m (k g_i^+(\bx^k))^2 + \sum_{j=1}^p (h_j(\bx^k))^2} = 0.
+   \]</div>
+</li>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[
+   0 \leq \frac{(k g_i^+(\bx^k))^2}{1 + \sum_{i=1}^m (k g_i^+(\bx^k))^2 + \sum_{j=1}^p (h_j(\bx^k))^2}
+   \leq \frac{(k g_i^+(\bx^k))^2}{1 + k w(\bx^k)^2}.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="docutils">
+<p>The <em>complementary violation condition</em> (CV) in (4) is stronger than the
+traditional <em>complementary slackness</em> (CS) condition.</p>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(t_i^* &gt; 0\)</span> for some inequality constraint <span class="math notranslate nohighlight">\(g_i\)</span>, then
+the inequality <span class="math notranslate nohighlight">\(g_i(\bx) \leq 0\)</span> must be violated
+arbitrarily close to <span class="math notranslate nohighlight">\(\bx^*\)</span>.</p></li>
+<li><p>In contrast, the CS condition only states that <span class="math notranslate nohighlight">\(g_i(\bx^*) = 0\)</span>.
+It doesn’t say anything about the violation of the constraint
+near the local optimal.</p></li>
+<li><p>CV states that there exists a sequence of <span class="math notranslate nohighlight">\(X\)</span> converging to <span class="math notranslate nohighlight">\(\bx^*\)</span>
+such that the equality and inequality constraints are violated
+at every point in the sequence corresponding to the nonzero
+Lagrangian multipliers.</p></li>
+<li><p>This sequence also has the property that the amount of
+violation in the constraints corresponding to zero Lagrange
+multipliers is negligible via the following conditions.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   g_i^+(\bx_k) = o(w(\bx_k)) \Forall i \notin I,\\
+   &amp; |h_j(\bx_k) | = o(w(\bx_k)) \Forall j \notin J.\\
+   \end{split}\]</div>
+</li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="res-opt-enhanced-fritz-john-cond-regular">
+<p class="admonition-title"><span class="caption-number">Corollary 9.6 </span> (Enhanced Fritz-John conditions regular case)</p>
+<div class="corollary-content section" id="proof-content">
+<p>In <a class="reference internal" href="#res-opt-enhanced-fritz-john-cond">Theorem 9.82</a>,
+if <span class="math notranslate nohighlight">\(X\)</span> is regular at <span class="math notranslate nohighlight">\(\bx^*\)</span>,
+then</p>
+<div class="math notranslate nohighlight">
+\[
+-\left ( 
+   t_0^* \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+\right ) \in T_X(\bx^*)^{\circ}.
+\]</div>
+<p>Equivalently</p>
+<div class="math notranslate nohighlight">
+\[
+\left \langle \by,
+\left (
+   t_0^* \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*) \right)
+\right \rangle \geq 0
+\Forall \by \in T_X(\bx^*).
+\]</div>
+</div>
+</div></div>
+<div class="section" id="lagrangian-stationarity">
+<h3><span class="section-number">9.8.5.3. </span>Lagrangian Stationarity<a class="headerlink" href="#lagrangian-stationarity" title="Permalink to this headline">¶</a></h3>
+<div class="proof observation admonition" id="res-opt-efj-stationarity">
+<p class="admonition-title"><span class="caption-number">Observation 9.10 </span> (Lagrangian stationarity)</p>
+<div class="observation-content section" id="proof-content">
+<p>In <a class="reference internal" href="#res-opt-enhanced-fritz-john-cond">Theorem 9.82</a>,
+assume that <span class="math notranslate nohighlight">\(X\)</span> is regular at <span class="math notranslate nohighlight">\(\bx^*\)</span>.
+Further assume that <span class="math notranslate nohighlight">\(t_0^* &gt; 0\)</span> is positive.</p>
+<p>By normalization of the scalars, the gradient inequality reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+-\left ( 
+   \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+\right ) \in T_X(\bx^*)^{\circ}.
+\]</div>
+<p>Equivalently</p>
+<div class="math notranslate nohighlight">
+\[
+\left \langle \by,
+   \left ( \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+   + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*) \right )
+\right \rangle \geq 0
+\Forall \by \in T_X(\bx^*).
+\]</div>
+<p>This is identical to the Lagrangian stationarity condition (1)
+in <a class="reference internal" href="#def-opt-constraint-set-efj-lm">Definition 9.33</a>.</p>
+<p>Hence if <span class="math notranslate nohighlight">\(X\)</span> is regular at <span class="math notranslate nohighlight">\(\bx^*\)</span> and <span class="math notranslate nohighlight">\(t_0^* = 1\)</span>,
+then the vector <span class="math notranslate nohighlight">\((\bt^*, \br^*) = \{t_1^*, \dots, t_m^*, r_1^*, \dots, r_m^* \}\)</span>
+is a Lagrangian multiplier vector that satisfies the
+CV condition.</p>
+</div>
+</div></div>
+<div class="section" id="licq">
+<h3><span class="section-number">9.8.5.4. </span>LICQ<a class="headerlink" href="#licq" title="Permalink to this headline">¶</a></h3>
+<div class="proof observation admonition" id="res-opt-efj-licq">
+<p class="admonition-title"><span class="caption-number">Observation 9.11 </span> (Linear independence constraint qualification)</p>
+<div class="observation-content section" id="proof-content">
+<p>In <a class="reference internal" href="#res-opt-enhanced-fritz-john-cond">Theorem 9.82</a>,
+assume that <span class="math notranslate nohighlight">\(X = \VV\)</span>. Then <span class="math notranslate nohighlight">\(X\)</span> is normal
+and <span class="math notranslate nohighlight">\(T_X(\bx^*) = \VV\)</span>.</p>
+<ol>
+<li><p>Condition (1) reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+   t_0^* \nabla f(\bx^*) + \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+      + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*) = \bzero.
+   \]</div>
+</li>
+<li><p>Further, add the linear independence constraint qualification (LICQ)
+assumption at <span class="math notranslate nohighlight">\(\bx^*\)</span>; i.e., the gradients
+<span class="math notranslate nohighlight">\(\nabla g_i(\bx^*), i \in \AAA(\bx^*)\)</span> and <span class="math notranslate nohighlight">\(h_j(\bx^*), j=1,\dots,p\)</span>
+are linearly independent;</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(t_0^* \neq 0\)</span> must be true.</p></li>
+<li><p>Otherwise, the linear independence condition would be violated.</p></li>
+<li><p>It follows that Lagrangian stationarity is satisfied and
+there exists a Lagrangian multiplier vector.</p></li>
+<li><p>We thus obtain the classical Lagrangian multiplier theorem
+based on KKT conditions <a class="reference internal" href="#res-opt-ineq-eq-kkt">Theorem 9.79</a>.</p></li>
+</ol>
+</div>
+</div></div>
+</div>
+<div class="section" id="informative-lagrange-multipliers">
+<h2><span class="section-number">9.8.6. </span>Informative Lagrange Multipliers<a class="headerlink" href="#informative-lagrange-multipliers" title="Permalink to this headline">¶</a></h2>
+<p>Lagrange multiplier vectors may provide a significant amount of
+sensitivity information by indicating which constraints to
+violate in order to effect a reduction in objective function value.
+In general, if the multipliers are informative, then the larger
+the coefficient for a constraint, the more sensitive is the
+objective function to the cost.</p>
+<div class="proof definition admonition" id="def-opt-efj-lmv-informative">
+<p class="admonition-title"><span class="caption-number">Definition 9.34 </span> (Informative Lagrange multiplier vector)</p>
+<div class="definition-content section" id="proof-content">
+<p>A Lagrange multiplier vector (as defined in <a class="reference internal" href="#def-opt-constraint-set-efj-lm">Definition 9.33</a>
+for the problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>)
+is called an <em>informative</em> multiplier vector
+if it satisfies the complementary violation condition
+of enhanced Fritz-John conditions <a class="reference internal" href="#res-opt-enhanced-fritz-john-cond">Theorem 9.82</a>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-opt-efj-lmv-minimal">
+<p class="admonition-title"><span class="caption-number">Definition 9.35 </span> (Minimal Lagrange multiplier vector)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimum of the problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>.
+Let <span class="math notranslate nohighlight">\((\bt^*, \br^*)\)</span> be a Lagrange multiplier vector
+(as defined in <a class="reference internal" href="#def-opt-constraint-set-efj-lm">Definition 9.33</a>).
+Let <span class="math notranslate nohighlight">\(I = \{ i \ST t_i^* &gt; 0 \}\)</span> and <span class="math notranslate nohighlight">\(J = \{ j \ST r_j \neq 0 \}\)</span>.
+Then <span class="math notranslate nohighlight">\((\bt^*, \br^*)\)</span> is called a <em>minimal</em> Lagrange multiplier
+vector if there is no other Lagrange multiplier vector
+with a support that is strictly contained in <span class="math notranslate nohighlight">\(I \cup J\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def-opt-efj-lmv-strong">
+<p class="admonition-title"><span class="caption-number">Definition 9.36 </span> (Strong Lagrange multiplier vector)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimum of the problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>.
+Let <span class="math notranslate nohighlight">\((\bt^*, \br^*)\)</span> be a Lagrange multiplier vector
+(as defined in <a class="reference internal" href="#def-opt-constraint-set-efj-lm">Definition 9.33</a>).
+Let <span class="math notranslate nohighlight">\(I = \{ i \ST t_i^* &gt; 0 \}\)</span> and <span class="math notranslate nohighlight">\(J = \{ j \ST r_j \neq 0 \}\)</span>.
+Then <span class="math notranslate nohighlight">\((\bt^*, \br^*)\)</span> is called a <em>strong</em> Lagrange multiplier vector
+if it satisfies the following condition:</p>
+<p>If the set <span class="math notranslate nohighlight">\(I \cup J\)</span> is nonempty, then there exists a sequence
+<span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(\bx_k \to \bx^*\)</span> and
+for all <span class="math notranslate nohighlight">\(k\)</span> we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; f(\bx^k) &lt; f(\bx^*); \\
+&amp; t_i^* g_i(\bx^k) &gt; 0, \Forall i \in I; \\
+&amp; r_j^* h_j(\bx^k) &gt; 0, \Forall j \in J.
+\end{split}\]</div>
+</div>
+</div><p>This condition is slightly weaker than the complementary violation
+condition. It makes no provisions for ensuring that the constraints
+corresponding to zero multipliers have negligibly small violation
+at each <span class="math notranslate nohighlight">\(\bx^k\)</span>.</p>
+<ol class="simple">
+<li><p>Every informative multiplier vector is a strong multiplier vector.</p></li>
+<li><p>Every minimal multiplier vector is a strong multiplier vector.</p></li>
+<li><p>Minimal multipliers are not necessarily informative.</p></li>
+<li><p>Some multiplier vectors are both informative and minimal.</p></li>
+</ol>
+<div class="proof theorem admonition" id="res-opt-efj-lm-informative-existence">
+<p class="admonition-title"><span class="caption-number">Theorem 9.83 </span> (Existence of informative multipliers)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimum of the problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>.
+Assume that the tangent cone <span class="math notranslate nohighlight">\(T_X(\bx^*)\)</span> is convex
+and that the set of Lagrange multiplier vectors is nonempty.
+Then</p>
+<ol class="simple">
+<li><p>The set of informative Lagrange multiplier vectors
+is nonempty.</p></li>
+<li><p>The Lagrange multiplier vector which has the minimum norm is informative.</p></li>
+<li><p>Every minimal Lagrange multiplier vector is strong.</p></li>
+</ol>
+</div>
+</div></div>
+<div class="section" id="pseudonormality">
+<h2><span class="section-number">9.8.7. </span>Pseudonormality<a class="headerlink" href="#pseudonormality" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>The key issue with enhanced Fritz-John conditions is that it allows
+for <span class="math notranslate nohighlight">\(t_0^*\)</span> to be zero.</p>
+<ol class="simple">
+<li><p>We now introduce the notion of pseudonormal points in the
+constraint set <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>We show that if a local minimizer <span class="math notranslate nohighlight">\(\bx^*\)</span> is a pseudonormal
+point, then  <span class="math notranslate nohighlight">\(t_0^* \neq 0\)</span>.</p></li>
+<li><p>Hence, at pseudonormal points, the constraint set <span class="math notranslate nohighlight">\(C\)</span> admits
+Lagrange multiplier vectors.</p></li>
+</ol>
+</div>
+<div class="proof definition admonition" id="def-opt-efj-pseudonormal-vector">
+<p class="admonition-title"><span class="caption-number">Definition 9.37 </span> (Pseudonormal vector)</p>
+<div class="definition-content section" id="proof-content">
+<p>We say that a feasible vector <span class="math notranslate nohighlight">\(\bx^*\)</span> for the problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>
+is pseudonormal if one cannot find scalars <span class="math notranslate nohighlight">\(t_1, \dots, t_m, r_1, \dots, r_p\)</span>
+and a sequence <span class="math notranslate nohighlight">\(\{\bx_k \}\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that</p>
+<ol>
+<li><p>The gradients of constraint functions at <span class="math notranslate nohighlight">\(\bx^*\)</span> satisfy:</p>
+<div class="math notranslate nohighlight">
+\[
+   -\left(\sum_{i=1}^m t_i \nabla g_i(\bx^*) + \sum_{j=1}^p r_j \nabla h_j(\bx^*) \right ) \in \tilde{N}_X(\bx^*).
+   \]</div>
+</li>
+<li><p>Inequality multipliers are nonnegative: <span class="math notranslate nohighlight">\(t_i \geq 0\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>.</p></li>
+<li><p>Multipliers for inactive inequality constraints are zero.
+<span class="math notranslate nohighlight">\(t_i = 0\)</span> for every <span class="math notranslate nohighlight">\(i \notin \AAA(\bx^*)\)</span>
+where <span class="math notranslate nohighlight">\(\AAA(\bx^*)\)</span> denotes the set of active inequality constraints
+at <span class="math notranslate nohighlight">\(\bx^*\)</span>;</p>
+<div class="math notranslate nohighlight">
+\[
+   \AAA(\bx^*) = \{ i \in 1,\dots,m \ST g_i(\bx^*) = 0 \}.
+   \]</div>
+</li>
+<li><p>The sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> converges to <span class="math notranslate nohighlight">\(\bx^*\)</span> (i.e., <span class="math notranslate nohighlight">\(\bx_k \to \bx^*\)</span>) and</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i=1}^m t_i g_i(\bx_k) + \sum_{j=1}^p r_j h_j(\bx_k) &gt; 0, \quad \Forall k.
+   \]</div>
+</li>
+</ol>
+</div>
+</div><div class="proof theorem admonition" id="def-opt-efj-pseudonormal-t0-nonzero">
+<p class="admonition-title"><span class="caption-number">Theorem 9.84 </span> (Pseudonormality and EFJ scalars)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let  <span class="math notranslate nohighlight">\(\bx^*\)</span> be a local minimizer for the problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>.
+Let <span class="math notranslate nohighlight">\(t_0^*,t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*\)</span> be the enhanced Fritz-John
+scalars satisfying the conditions in <a class="reference internal" href="#res-opt-enhanced-fritz-john-cond">Theorem 9.82</a>.</p>
+<p>If <span class="math notranslate nohighlight">\(\bx^*\)</span> is a pseudonormal vector of the constraint set <span class="math notranslate nohighlight">\(C\)</span>
+defined in <a class="reference internal" href="#equation-eq-opt-efj-constraints">(9.21)</a>, then <span class="math notranslate nohighlight">\(t_0^* \neq 0\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We shall show this by contradiction.</p>
+<ol>
+<li><p>Assume that <span class="math notranslate nohighlight">\(\bx^*\)</span> is a local minimizer for the problem <a class="reference internal" href="#equation-eq-opt-efj-problem">(9.20)</a>.</p></li>
+<li><p>Then there exist EFJ scalars
+<span class="math notranslate nohighlight">\(t_0^*,t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*\)</span>
+satisfying the conditions in <a class="reference internal" href="#res-opt-enhanced-fritz-john-cond">Theorem 9.82</a>.</p></li>
+<li><p>For contradiction assume that <span class="math notranslate nohighlight">\(\bx^*\)</span> is a pseudonormal vector
+and <span class="math notranslate nohighlight">\(t_0^* = 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(t_0^*,t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*\)</span> are EFJ scalars, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   -\left ( 
+      \sum_{i=1}^m t_i^* \nabla g_i(\bx^*)
+      + \sum_{j=1}^p r_j^* \nabla h_j(\bx^*)
+   \right ) \in \tilde{N}_X(\bx^*).
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(t_i^* \geq 0\)</span> for every <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>.</p></li>
+<li><p>The scalars <span class="math notranslate nohighlight">\(t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*\)</span> are not equal to <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<li><p>Hence the index set <span class="math notranslate nohighlight">\(I \cup J\)</span> is not empty, where</p>
+<div class="math notranslate nohighlight">
+\[
+   I = \{i &gt; 0 \ST t_i^* &gt; 0 \}, \quad
+   J = \{j  \ST r_j^* \neq 0 \}.
+   \]</div>
+</li>
+<li><p>Hence there exists a sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(X\)</span> that converges
+to <span class="math notranslate nohighlight">\(\bx^*\)</span> and is such that for all <span class="math notranslate nohighlight">\(k\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; f(\bx_k) &lt; f(\bx^*),\\
+   &amp; t_i^* g_i (\bx_k) &gt; 0 \Forall i \in I,\\
+   &amp; r_j^* h_j(\bx_k) &gt; 0 \Forall j \in J,\\
+   &amp; g_i^+(\bx_k) = o(w(\bx_k)) \Forall i \notin I,\\
+   &amp; |h_j(\bx_k) | = o(w(\bx_k)) \Forall j \notin J,\\
+   \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(g_i^+(\bx) = \max \{ 0, g_i(\bx) \}\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+   w(\bx) = \min \left \{
+   \min_{i \in I} g_i^+(\bx),
+   \min_{j \in J} |h_j(\bx) |
+      \right \}.
+   \]</div>
+</li>
+<li><p>Hence the sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> with <span class="math notranslate nohighlight">\(\bx_k \to \bx\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i=1}^m t_i^* g_i (\bx_k) + \sum_{j=1}^p r_j^* h_j(\bx_k) &gt; 0  \Forall k
+   \]</div>
+<p>since at least one of these multipliers is nonzero.</p>
+</li>
+<li><p>Multiplier for every inactive inequality constraint must be zero.
+Otherwise, the complementary violation condition will be violated.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(t_1^*, \dots, t_m^*, r_1^*,\dots, r_p^*\)</span> are the scalars
+and <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> is a sequence of <span class="math notranslate nohighlight">\(X\)</span> satisfying all the conditions
+in <a class="reference internal" href="#def-opt-efj-pseudonormal-vector">Definition 9.37</a>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx^*\)</span> cannot be a pseudonormal vector of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="constraint-qualifications">
+<h2><span class="section-number">9.8.8. </span>Constraint Qualifications<a class="headerlink" href="#constraint-qualifications" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>We now introduce different constraint qualifications which ensure
+that a point <span class="math notranslate nohighlight">\(\bx^*\)</span> is pseudonormal.</p>
+</div>
+<div class="section" id="linearly-independent-constraint-qualifications">
+<h3><span class="section-number">9.8.8.1. </span>Linearly Independent Constraint Qualifications<a class="headerlink" href="#linearly-independent-constraint-qualifications" title="Permalink to this headline">¶</a></h3>
+<div class="proof criterion admonition" id="res-opt-efj-licq">
+<p class="admonition-title"><span class="caption-number">Criterion 9.1 </span> (CQ1: linearly independent constraint qualifications)</p>
+<div class="criterion-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(X = \VV\)</span> and <span class="math notranslate nohighlight">\(\bx^*\)</span> satisfies LICQ; i.e., the active inequality
+constraint gradients <span class="math notranslate nohighlight">\(\nabla g_i (\bx^*)\)</span> for all <span class="math notranslate nohighlight">\(i in \AAA(\bx^*)\)</span>
+and the equality constraint gradients <span class="math notranslate nohighlight">\(\nabla h_j(\bx^*)\)</span>
+for all <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span> are linearly independent.</p>
+</div>
+</div></div>
+<div class="section" id="ahu-mf-constraint-qualifications">
+<h3><span class="section-number">9.8.8.2. </span>AHU/MF Constraint Qualifications<a class="headerlink" href="#ahu-mf-constraint-qualifications" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="affine-equality-and-concave-inequality-constraints">
+<h3><span class="section-number">9.8.8.3. </span>Affine Equality and Concave Inequality Constraints<a class="headerlink" href="#affine-equality-and-concave-inequality-constraints" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./cvxopt"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="constrained_opt.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">9.7. </span>Constrained Optimization II</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="lagrangian_duality.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.9. </span>Lagrangian Duality</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

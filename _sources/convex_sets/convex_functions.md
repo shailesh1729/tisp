@@ -11,8 +11,16 @@ They are also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$
 as needed.
 
 
+We suggest the readers to review the notions
+of graph, epigraph, sublevel sets of real
+valued functions in {ref}`sec:bra:real-valued-functions`.
+Also pay attention to the notion of extended real valued
+functions, their effective domains, graphs and level sets.
+
 ## Convexity of a Function
 
+```{index} Convex function
+```
 ````{prf:definition} Convex function
 :label: def-convex-function
 
@@ -25,6 +33,14 @@ and $t \in [0, 1]$, we have:
 :label: eq-convexity-inequality
 f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).
 ```
+
+An extended valued function $f : \VV \to \ERL$ is *convex*
+if $\dom f$ is a convex set and for every $\bx_1,\bx_2 \in \VV$, 
+and $t \in [0, 1]$, we have:
+
+$$
+f(t \bx_1 + (1-t) \bx_2) \leq t f(\bx_1) + (1-t) f(\bx_2).
+$$
 ````
 
 
@@ -40,7 +56,10 @@ above the graph.
 
 For a convex function, every chord lies above the graph of the function. 
 
+### Strictly Convex Functions
 
+```{index} Convex function; strict
+```
 ```{prf:definition} Strictly convex function
 :label: def-strictly-convex-function
 
@@ -58,6 +77,10 @@ whenever the point $\bx = t \bx_1 + (1-t) \bx_2$ is
 distinct from $\bx_1$ and $\bx_2$ both.
 ```
 
+### Concave Functions
+
+```{index} Concave function
+```
 ```{prf:definition} Concave function
 :label: def-concave-function
 
@@ -65,6 +88,7 @@ We say that a function $f$ is *concave* if $-f$ is convex.
 A function $f$ is *strictly concave* if $-f$ is 
 strictly convex.
 ```
+
 
 ```{prf:example} Linear functional
 :label: ex-cvxf-linear-functional
@@ -98,6 +122,7 @@ Thus, $f_{\ba}$ is convex. We can also see that $-f_{\ba}$ is
 convex too. Hence, $f_{\ba}$ is concave too.
 ```
 
+### Arithmetic Mean
 
 ```{prf:example} Arithmetic mean is convex and concave
 :label: ex-cvxf-arithmetic-mean
@@ -126,6 +151,7 @@ $$
 Thus, arithmetic mean is both convex and concave.
 ```
 
+### Affine Function
 
 ```{prf:example} Affine functional
 :label: ex-cvxf-affine-func-1
@@ -185,7 +211,9 @@ f_{\ba, b} (t \bx + (1 - t) \by)
 $$
 ```
 
-```{prf:example} Absolute value is convex
+### Absolute Value
+
+````{prf:example} Absolute value is convex
 :label: ex-cvxf-real-abs
 
 Let $f : \RR \to \RR$ be:
@@ -194,6 +222,12 @@ $$
 f(x) = |x|.
 $$
 with $\dom f = \RR$.
+
+```{figure} images/func_abs_value_1d.png
+---
+name: cvx:func:abs:value
+---
+```
 
 Recall that $|x|$ is a norm on the real line $\RR$. 
 Thus, it satisfies the triangle inequality:
@@ -217,12 +251,14 @@ $$
 f(t x + (1-t) y) \leq t f(x) + (1- t) f(y) \Forall x, y \in \RR.
 $$
 Hence, $f$ is convex.
-```
+````
+
+### Norms
 
 ```{prf:theorem} All norms are convex
 :label: res-cvxf-norms-convex
 
-Let $\| \cdot \| \to \RR$ be a 
+Let $\| \cdot \| : \VV \to \RR$ be a 
 {prf:ref}`norm <def-la-norm>` on a real vector space $\VV$.
 Then, it satisfies the triangle inequality:
 
@@ -242,6 +278,34 @@ Thus $f$ satisfies the convexity defining inequality
 {eq}`eq-convexity-inequality`. 
 Hence, $f$ is convex.
 ```
+
+```{figure} images/func_l2_norm_r2_contour3d.png
+---
+name: cvx:func:l2:norm:contour:3d
+---
+$\ell_2$ norm for $\RR^2$. $\| \cdot \|_2 : \RR^2 \to \RR$ 3D contour plots.
+```
+```{figure} images/func_l2_norm_r2_contour2d.png
+---
+name: cvx:func:l2:norm:contour:2d
+---
+$\ell_2$ norm for $\RR^2$. $\| \cdot \|_2 : \RR^2 \to \RR$ 2D contour plots.
+```
+
+```{figure} images/func_l1_norm_r2_contour3d.png
+---
+name: cvx:func:l1:norm:contour:3d
+---
+$\ell_1$ norm for $\RR^2$. $\| \cdot \|_1 : \RR^2 \to \RR$ 3D contour plots.
+```
+```{figure} images/func_l1_norm_r2_contour2d.png
+---
+name: cvx:func:l1:norm:contour:2d
+---
+$\ell_1$ norm for $\RR^2$. $\| \cdot \|_2 : \RR^1 \to \RR$ 2D contour plots.
+```
+
+### Max Function
 
 ```{prf:example} Max function is convex
 :label: ex-cvxf-euclidean-n-max
@@ -273,6 +337,8 @@ Let $\bx, \by \in \RR^n$ and $t \in [0,1]$.
    $$
 1. Thus, $f$ is convex.
 ```
+
+### Geometric Mean
 
 ```{prf:example} Geometric mean is concave
 :label: ex-cvxf-geom-mean
@@ -326,6 +392,8 @@ $$
    $$
 1. Thus, $f$ is concave.
 ```
+
+### Powers 
 
 ```{prf:example} Powers of absolute value
 :label: ex-cvxf-real-power-absolute-x-p
@@ -389,6 +457,8 @@ Let $x, y \in \RR$ and $s, t \in (0, 1)$ with $s + t= 1$.
 1. Thus, $f$ is convex.
 ```
 
+
+### Empty Function
 
 ```{prf:observation} Empty function is convex
 :label: res-cvxf-empty-func-convex
@@ -564,6 +634,17 @@ $\VV \oplus \RR$ is the
 of $\VV$ and $\RR$ having appropriate vector space 
 structure.
 
+```{figure} images/pic_epigraph_x_sqr.png
+---
+name: cvx:func:epigraph:x:sqr
+---
+Epigraph of the function $f(x) = x^2$.
+```
+
+
+The definition of epigraph also applies for extended
+real valued functions $f: \VV \to \ERL$.
+
 ### Convex Functions
 
 ```{prf:theorem} Function convexity = Epigraph convexity
@@ -572,6 +653,8 @@ structure.
 Let $\VV$ be a real vector space.
 A function $f: \VV \to \RR$ is convex if and only if its epigraph
 $\epi f$ is a convex set.
+
+This statement is also valid for extended real valued functions.
 ```
 
 ```{prf:proof}
@@ -617,6 +700,52 @@ from $\VV \oplus \RR$ to $\VV$.
 Due to {prf:ref}`res-cvx-convex-set-affine-image`,
 $\epi f$ convex implies $\dom f$ convex
 as the projection is a linear operation.
+
+
+```{prf:theorem} Convex function from convex set by minimization
+:label: res-cvxf-func-from-cvx-set-inf
+
+Let $C$ be a nonempty convex set in $\VV \oplus \RR$. 
+Let $f: \VV \to \ERL$ be the function defined by
+
+$$
+f(\bx) = \inf \{ w \in \RR \ST (\bx, w) \in C \} \quad  \Forall \bx \in \VV.
+$$
+Then $f$ is convex.
+```
+
+```{prf:proof}
+We show the convexity of $f$ by showing the convexity of its
+epigraph.
+
+1. Let $(\bx, s)$ and $(\by, t)$ be two points in $\epi f$.
+1. Then $f(\bx) \leq s$ and $f(\by) \leq t$.
+1. By the definition of $f$ (infimum rule),
+   for every $k \in \Nat$, there exists
+   $(\bx, s_k) \in C$ such that $s_k \leq s + \frac{1}{k}$.
+1. Similarly, for every $k \in \Nat$, there exists
+   $(\by, t_k) \in C$ such that $t_k \leq t + \frac{1}{k}$.
+1. Consider the sequences $\{ (\bx, s_k) \}$ and $\{ (\by, t_k) \}$.
+1. By the convexity of $C$, for every $r \in [0,1]$ and every $k$
+
+   $$
+   (r \bx +  (1 -r) \by, r s_k + (1-r) t_k) \in C.
+   $$
+1. Hence for every $k$
+
+   $$
+   f(r \bx +  (1 -r) \by) \leq r s_k + (1-r) t_k.
+   $$
+1. Taking the limit $k \to \infty$, we have
+
+   $$
+   f(r \bx +  (1 -r) \by) \leq r s + (1-r) t.
+   $$
+1. Hence $(r \bx +  (1 -r) \by, r s + (1-r) t) \in \epi f$ for every $r \in [0,1]$.
+1. Hence $\epi f$ is convex.
+1. Hence $f$ is convex.
+```
+
 
 ### Nonnegative Homogeneous Functions
 
@@ -852,6 +981,8 @@ $f : \VV \to \RR$ with a domain $\dom f \subset \VV$
 to all of $\VV$ by defining it to be $\infty$ 
 outside its domain. 
 
+```{index} Convex function; extended value extension
+```
 ```{prf:definition} Extended value extension
 :label: def-cvxf-extended-value-extension
 
@@ -884,6 +1015,8 @@ $$
 1. If either $\bx_1$ or $\bx_2$ is not in $\dom f$, then the R.H.S.
    becomes $\infty$ and the inequality stays valid.
 
+```{index} Convex function; effective domain
+```
 ```{prf:definition} Effective domain
 :label: def-cvxf-effective-domain
 
@@ -944,6 +1077,8 @@ being treated as their extended value extensions.
 
 ## Proper Functions
 
+```{index} Convex function; proper
+```
 ```{prf:definition} Proper function
 :label: def-cvxf-proper-function
 
@@ -974,6 +1109,8 @@ to $\RERL$ to clarify that it never takes
 the value $-\infty$.
 
 
+```{index} Convex function; improper
+```
 ```{prf:definition} Improper function
 :label: def-cvxf-improper-function
 
@@ -1080,7 +1217,7 @@ $$
 C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}.
 $$
 
-The open sublevel sets for a real valued function $f: \VV \to \RR$
+The strict sublevel sets for a real valued function $f: \VV \to \RR$
 can be defined as
 
 $$
@@ -1088,8 +1225,8 @@ O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}.
 $$
 
 
-The closed sublevel sets can be shown to be intersection
-of a set of open sublevel sets.
+The sublevel sets can be shown to be intersection
+of a set of strict sublevel sets.
 
 ```{prf:theorem} Sublevel set as intersection
 :label: res-cvxf-sublevel-set-as-intersection
@@ -1101,15 +1238,13 @@ Let
 $$
 O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}
 $$
-denote the open sublevel set of $f$ for $\alpha$.
-
-
+denote the strict sublevel set of $f$ for $\alpha$.
 Let
 
 $$
 C_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) \leq \alpha \}
 $$
-denote the closed sublevel set of $f$ for $\alpha$.
+denote the sublevel set of $f$ for $\alpha$.
 Then,
 
 $$
@@ -1187,11 +1322,11 @@ Its sublevel sets are convex as they are intervals.
 ```
 
 
-```{prf:theorem} Convexity of open sublevel sets
+```{prf:theorem} Convexity of strict sublevel sets
 :label: res-cvxf-convexity-open-sublevel-sets
 
 If $f : \VV \to \RR$ is convex, 
-then its open sublevel sets given by
+then its strict sublevel sets given by
 
 $$
 O_{\alpha} = \{ \bx \in \dom f \,|\, f(\bx) < \alpha \}
@@ -1216,8 +1351,8 @@ Assume $f$ is convex.
 1. Thus, $O_{\alpha}$ is convex.
 ```
 
-An alternate proof for showing the convexity of the closed
-sublevel sets is to show it as an intersection of open sublevel sets.
+An alternate proof for showing the convexity of the
+sublevel sets is to show it as an intersection of strict sublevel sets.
 
 
 ```{prf:theorem} Intersection of sublevel sets of convex functions
@@ -1287,7 +1422,7 @@ Just like function convexity is connected to epigraph convexity,
 similarly function concavity is connected to hypograph convexity.
 
 
-```{prf:theorem} Function concavity = Epigraph convexity
+```{prf:theorem} Function concavity = Hypograph convexity
 :label: res-cvxf-concavity-hypograph
 
 A function $f$ is concave if and only if its hypograph
@@ -1386,8 +1521,76 @@ than the arithmetic mean.
 1. Since $g - \alpha a$ is concave, hence $A$ is convex.
 ```
 
+## Closed Convex Functions
+
+Recall from {ref}`sec:ms:real-valued-functions` that
+a function is closed if all its sublevel sets are closed.
+A function is closed if and only if its epigraph is closed.
+A function is closed if and only if it is lower semicontinuous.
+
+In general, if a function is continuous, then it is lower
+semicontinuous and hence it is closed.
+
+In this subsection, we provide examples of convex functions which
+are closed.
+
+### Affine Functions
+
+```{prf:theorem} Affine functions are closed
+:label: res-cvxf-affine-closed
+
+Let $f: \VV \to \RR$ be given by
+
+$$
+f(\bx) = \langle \bx, \ba \rangle + b
+$$
+where $\ba \in \VV^*$ and $b \in \RR$.
+Then $f$ is closed.
+```
+
+```{prf:proof}
+We prove closedness by showing that the epigraph of $f$ is closed.
+
+1. Let $\{ \bx_k, t_k \}$ be a converging sequence of $\epi f$.
+1. Let $(\bx, t) = \lim_{k \to \infty} (\bx_k, t_k)$.
+1. We have $f(\bx_k) \leq t_k$ for every $k$.
+1. In other words
+
+   $$
+   \langle \bx_k, \ba \rangle + b \leq t_k \Forall k \in \Nat.
+   $$
+1. Taking the limit on both sides, we get
+
+   $$
+   \langle \bx, \ba \rangle + b \leq t.
+   $$
+1. Hence $f(\bx) \leq t$.
+1. Hence $(\bx, t) \in \epi f$.
+1. Hence $\epi f$ is closed.
+```
+
+### Norms
+
+```{prf:theorem} All Norms are closed
+:label: res-cvxf-norm-closed
+
+Let $\| \cdot \|: \VV \to \RR$ be a norm on a real vector space $\VV$. 
+Then $\| \cdot \|$ is closed.
+```
+
+```{prf:proof}
+The sublevel sets are given by $S_t = \{ \bx \in \VV \ST \| \bx \| \leq t \}$.
+They are nothing but the closed balls of radius $t$ around $\bzero$ and
+by definition closed.
+Hence all sublevel sets are closed.
+Thus $\| \cdot \|$ is closed.
+```
+
+
 ## Support Functions
 
+```{index} Support function
+```
 ```{prf:definition} Support function for a set
 :label: def-cvxf-support-function
 
@@ -1407,6 +1610,20 @@ $$
 $$
 ```
 
+```{prf:example} Finite sets
+:label: ex-cvxf-support-finite-set
+
+Let $C = \{ \bb_1, \dots, \bb_m \}$ be a finite subset of $\VV$.
+Then,
+
+$$
+\sigma_C (\bx) = \max \{ \langle \bx, \bb_1\rangle, \dots, \langle \bx, \bb_m\rangle \}.
+$$
+This follows directly from the definition.
+```
+
+
+### Convexity
 
 ```{prf:theorem} Convexity of support function
 :label: res-cvxf-support-fun-convex
@@ -1433,6 +1650,8 @@ By {prf:ref}`res-cvx-ptws-supremum`, $\sigma_C$ is convex.
 
 We note that the convexity of the support function $\sigma_C$
 has nothing to do with the convexity of the underlying set $C$.
+
+### Closedness
 
 ```{prf:theorem} Closedness of support function
 :label: res-cvxf-support-fun-closed
@@ -1473,6 +1692,7 @@ Recall that a function is closed if all its sublevel sets are closed.
 1. Thus, $\sigma_C$ is closed.
 ```
 
+### Equality of Underlying Sets
 
 ```{prf:theorem} Equality of underlying sets for support functions
 :label: res-cvxf-support-func-equality-convex
@@ -1513,6 +1733,8 @@ Now, assume that $\sigma_A = \sigma_B$.
    are identical.
 1. Thus, $A = B$ must hold.
 ```
+
+### Closure and Convex Hull
 
 The next result shows that support function
 for a set and its closure or its convex hull
@@ -1596,6 +1818,8 @@ Now, consider the case of convex hull.
    $\sigma_A = \sigma_{\convex A}$.
 ```
 
+### Arithmetic Properties
+
 Following properties of support functions are useful in
 several applications.
 
@@ -1674,10 +1898,185 @@ $$
 $$
 ```
 
+### Cones
+
+Recall from {prf:ref}`def-cone` that a set $C$ is called a cone
+if for every $\bx \in C$ and every $t \geq 0$, $t \bx \in C$.
+Also, recall from {prf:ref}`def-cvx-polar-cone` that the polar
+cone of a set $C$ is given by
+
+$$
+C^{\circ} = \{ \by \in \VV^* \ST \langle \bx, \by \rangle \leq 0
+\Forall \bx \in C \}.
+$$
+
+```{prf:theorem} Support function of a cone
+:label: res-cvxf-support-cone
+
+Let $C$ be a given cone.
+Then, 
+
+$$
+\sigma_C(\by) = I_{C^{\circ}} (\by) \Forall \by \in \VV^*.
+$$
+In words, the support function of a cone $C$ is the
+indicator function of the polar cone of $C$.
+```
+
+```{prf:proof}
+We proceed as follows
+
+1. Assume that $\by \in C^{\circ}$.
+1. Then, $\langle \bx, \by \rangle \leq 0 \Forall \bx \in C$.
+1. In particular, $\bzero \in C$ since $C$ is a cone.
+1. Accordingly, $\langle \bzero, \by \rangle = 0$.
+1. Thus,
+
+   $$
+   \sigma_C(\by) = \sup_{\bx \in C} \langle \bx, \by \rangle = 0.
+   $$
+1. Now consider $\by \notin C^{\circ}$.
+1. Then, there exists $\bu \in C$ such that $\langle \bu, \by \rangle > 0$.
+1. Since $C$ is a cone, hence $t \bu \in C$ for all $t \geq 0$.
+1. Accordingly,
+
+   $$
+   \sigma_C(\by) = \sup_{\bx \in C} \langle \bx, \by \rangle
+   \geq \langle t \bu, \by \rangle \Forall t \geq 0.
+   $$
+1. Taking the limit $t \to \infty$, we see that
+
+   $$
+   \sigma_C(\by)  = \infty.
+   $$
+1. Thus, $\sigma_C(\by) = 0$ for all $\by \in C^{\circ}$
+   and $\sigma_C(\by)  = \infty$ otherwise.
+1. Thus, $\sigma_C = I_{C^{\circ}}$.
+```
+
+```{prf:example} Support function of nonnegative orthant
+:label: res-cvxf-support-nng-orthant
+
+Let $\VV = \RR^n$ and $C = \RR^n_+$. $C$ is the
+nonnegative orthant which is a closed convex cone.
+Its polar cone is given by
+
+$$
+C^{\circ} = \RR^n_-
+$$
+which is the nonpositive orthant $\{\bx \in \RR^n \ST \bx \preceq \bzero \}$.
+By {prf:ref}`res-cvxf-support-cone`,
+
+$$
+\sigma_{\RR^n_+} (\by) = I_{\RR^n_-} (\by).
+$$
+```
+
+### Affine Sets
+
+```{prf:theorem} Support function for an affine set
+:label: res-cvxf-support-affine-set
+
+Let $\BB \in \RR^{m \times n}$ and $\bb \in \RR^m$.
+Define the set $C \subseteq \RR^n$ as
+
+$$
+C = \{\bx \in \RR^n \ST \bB \bx = \bb \}.
+$$
+Assume that $C$ is nonempty and let $\bx_0 \in C$
+be one of the solutions of the system of equations $\bB \bx = \bb$.
+Then
+
+$$
+\sigma_C(\by) = \langle \bx_0, \by \rangle + I_{\range (\bB^T)} (\by).
+$$
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. By definition of support function
+
+   $$
+   \sigma_C(\by) = \sup \{  \langle \bx, \by \rangle \ST \bB \bx  = \bb \}.
+   $$
+1. Introduce a variable $\bz = \bx - \bx_0$.
+1. Then $\bx = \bz + \bx_0$.
+1. Accordingly
+
+   $$
+   \sigma_C(\by) &= \sup \{  \langle \bz + \bx_0, \by \rangle 
+      \ST \bB (\bz + \bx_0)  = \bb \} \\
+   &= \langle \bx_0, \by \rangle  
+   + \sup \{  \langle \bz, \by \rangle \ST \bB \bz = \bzero \} \\
+   &= \langle \bx_0, \by \rangle  + \sigma_D (\by)
+   $$
+   where $D = \{\bx \ST \bB \bx = \bzero \}$.
+1. We note that the statement $\bB \bx = \bzero$ is equivalent to
+   $\bB \bx \succeq \bzero$ and $\bB \bx \preceq \bzero$.
+1. In other words, $D = \{ \bx \in \RR^n \ST \bA \bx \preceq \bzero \}$
+   where $\bA = \begin{bmatrix}\bB \\ - \bB \end{bmatrix}$.
+1. The set $D$ is a convex polyhedral cone.
+1. By {prf:ref}`res-cvxf-support-cone`, the support function
+   of a cone is the indicator function of its polar cone.
+1. By {prf:ref}`res-cvx-polar-polyhedral-cone`, the 
+   polar cone is given by
+
+   $$
+   D^{\circ} = \{ \bB^T \bt_1 - \bB^T \bt_2 \ST \bt_1, \bt_2 \succeq \bzero \}.
+   $$
+1. It is easy to see that $D^{\circ}  = \range (\bB^T)$.
+   1. Every vector $\bt \in \RR^m$ can be split into two vectors 
+      $\bt_1, \bt_2 \in \RR^m_+$
+      such that $\bt = \bt_1 - \bt_2$.
+   1. Accordingly $\bB^T \bt = \bB^T \bt_1 - \bB^T \bt_2$.
+1. This gives us
+
+   $$
+   \sigma_C(\by) = \langle \bx_0, \by \rangle  + I_{D^{\circ}} (\by).
+   $$
+```
+
+
+### Norm Balls
+
+```{prf:theorem} Support functions for unit balls
+:label: res-cvxf-support-unit-ball
+
+Let $\VV$ be a real vector space endowed with a norm
+$\| \cdot \|: \VV \to \RR$.
+Consider the (closed) unit ball given by
+
+$$
+C = B_{\| \cdot \|}[\bzero, 1] = \{\bx \in \VV \ST \| \bx\| \leq 1 \}.
+$$
+
+Then, the support function is given by
+
+$$
+\sigma_C (\by) = \| \by \|_*
+$$
+
+where $\| \cdot \|_*: \VV \to \RR$ represents the dual norm.
+```
+
+
+```{prf:proof}
+This flows directly from the definitions
+of support function and {prf:ref}`dual norm <res-la-rip-dual-norm>`.
+
+$$
+\sigma_C (\by) = \sup\{ \langle \bx, \by \rangle \ST \bx \in C \}
+= \sup\{ \langle \bx, \by \rangle \ST \| \bx \| \leq 1 \}
+= \| \by \|_*.
+$$
+```
 
 ## Gauge Functions
 
 
+```{index} Gauge function
+```
 ```{prf:definition} Gauge function for a set
 :label: def-cvxf-gauge-function
 
@@ -1765,6 +2164,8 @@ The Gauge function is a seminorm.
 
 
 ```{prf:example} Norm as a gauge function
+:label: ex-cvxf-norm-gauge-function
+
 Let $\VV$ be a normed linear space with the norm $\| \cdot \| : \VV \to \RR$.
 
 Let $\overline{B} = \{\bx \in \VV \ST \| \bx \| \leq 1 \}$ be the unit closed ball.
@@ -1924,172 +2325,12 @@ We are done.
 
 
 
-## Convex Real Functions
-
-For real functions $f : \RR \to \RR$, several useful
-results are available.
-
-
-```{prf:theorem} Characterization of real convex functions
-:label: res-cvxf-rf-convex-charac
-
-Let $f: \RR \to \RR$ be a real function with $\dom f = (a,b)$
-which is an open interval.
-The following are equivalent.
-
-1. $f$ is convex.
-1. For every $x_1, x_2, x_3 \in (a, b)$ with $x_1 < x_2 < x_3$,
-
-   $$
-   \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}.
-   $$
-1. For every $x_1, x_2, x_3 \in (a, b)$ with $x_1 < x_2 < x_3$,
-
-   $$
-   \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_2)}{x_3 - x_2}.
-   $$
-```
-
-
-```{prf:proof}
-
-(1) $\implies$ (2) 
-Assume that $f$ is convex.
-
-1. Let 
-
-   $$
-   \alpha = \frac{x_3 - x_2}{x_3 - x_1}, 
-   \beta = \frac{x_2 - x_1}{x_3 - x_1}.
-   $$
-1. Then, $\alpha + \beta = 1$ and $\alpha , \beta \in (0,1)$.
-1. Also, verify that
-
-   $$
-   x_2 = \alpha x_1 + \beta x_3.
-   $$
-1. Thus,
-
-   $$
-   & f(x_2) \leq \alpha f(x_1) + \beta f(x_3) \\
-   & \iff f(x_2) \leq \frac{x_3 - x_2}{x_3 - x_1} f(x_1)
-   + \frac{x_2 - x_1}{x_3 - x_1} f(x_3)\\
-   & \iff (x_3 - x_1) f(x_2) \leq (x_3 - x_2) f(x_1)
-      + (x_2 - x_1) f(x_3)\\
-   & \iff (x_3 - x_1) f(x_2) \leq ((x_3 - x_1) - (x_2 - x_1)) f(x_1)
-      + (x_2 - x_1) f(x_3)\\
-   & \iff (x_3 - x_1) (f(x_2) - f(x_1)) \leq
-    (x_2 - x_1) (f(x_3) - f(x_1))\\
-   & \iff \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}. 
-   $$
-
-(2) $\implies$ (1)
-
-1. Let $x_1, x_3 \in (a, b)$ and $t \in (0, 1)$.
-1. WLOG, assume that $x_1 < x_3$.
-1. Let $\alpha = t$ and $\beta = (1-t)$.
-1. Let $x_2 =  \alpha x_1 + \beta x_3$.
-1. Then, $x_1 < x_2 < x_3$.
-1. From the hypothesis, we have
-
-   $$
-   \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}.
-   $$
-1. Using the previous argument backwards, this implies
-
-   $$
-   f(x_2) \leq \alpha f(x_1) + \beta f(x_3) = t f(x_1) + (1-t) f(x_3).
-   $$
-1. Thus, $f$ is convex.
-
-
-We can prove the rest similarly.
-```
-
-
-
-```{prf:theorem} Real convex functions and one sided derivatives
-:label: res-cvxf-rf-convex-osd
-
-Let $f: \RR \to \RR$ with $\dom f = (a,b)$ be convex.
-Then, for every $x \in (a,b)$, the left hand derivative
-$f'_-(x)$ and the right hand derivative $f'_+(x)$ exist.
-``` 
-
-
-```{prf:proof}
-We are given that $f$ is convex over $(a,b)$.
-
-1. Let $x \in (a,b)$.
-1. For $h > 0$, define
-
-   $$
-   F(h) = \frac{f(x + h) - f(x)}{h}.
-   $$
-1. Let $0 < h_1 < h_2$ such that $x + h_2 < b$.
-1. Let $x_1 = x$, $x_2 = x + h_1$, $x_3 = x + h_2$.
-1. Since $f$ is convex, hence by {prf:ref}`res-cvxf-rf-convex-charac`
-
-   $$
-   \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}.
-   $$
-1. But that means 
-
-  $$
-  \frac{f(x + h_1) - f(x)}{h_1} \leq \frac{f(x + h_2) - f(x)}{h_2}.
-  $$
-1. Thus, whenever $h_1 < h_2$ (up to $h_2 < b - x$),
-   $F(h_1) \leq F(h_2)$.
-1. Thus, $F$ is a nondecreasing (monotone) function of $h$
-   in some interval $(0, \delta)$ where $\delta < b - x$.
-1. Then, $f'_+(x) = \lim_{h \to 0^+} F(h)$ exists.
-
-A similar argument shows that $f'_-(x)$ also exists.
-```
-
-```{prf:theorem} Convex real function is continuous
-:label: res-cvxf-rf-open-domain-continuous
-
-
-Let $f: \RR \to \RR$ with $\dom f = (a,b)$ be convex.
-Then, for every $x \in (a,b)$, 
-Then, $f$ is continuous on $(a,b)$.
-```
-
-```{prf:proof}
-We proceed as follows.
-
-1. Let $x \in (a,b)$.
-1. By {prf:ref}`res-cvxf-rf-convex-osd`, 
-   the one sided derivatives $f'_+(x)$ and $f'_-(x)$ exist.
-1. Then, by limit arithmetic
-
-   $$
-   \lim_{h \to 0^-} (f(x + h) - f(x)) 
-   = \left ( \lim_{h \to 0^-} \frac{f(x + h) - f(x)}{h} \right )
-   \left ( \lim_{h \to 0^-} h \right) = 0.
-   $$
-1. Similarly, 
-
-   $$
-   \lim_{h \to 0^+} (f(x + h) - f(x)) 
-   = \left ( \lim_{h \to 0^+} \frac{f(x + h) - f(x)}{h} \right )
-   \left ( \lim_{h \to 0^+} h \right) = 0.
-   $$
-1. Thus, 
-
-   $$
-   \lim_{h \to 0^-} (f(x + h) - f(x)) 
-   = \lim_{h \to 0^+} (f(x + h) - f(x)) = 0.
-   $$
-1. Thus, $f$ is continuous at $x$.
-1. Since $x$ was arbitrary, hence $f$ is continuous on $(a,b)$.
-```
-
 
 ## Quasi-Convex Functions
 
 
+```{index} Quasi convex function
+```
 ```{prf:definition} Quasi convex function
 :label: def-cvxf-quasi-convex-function
 

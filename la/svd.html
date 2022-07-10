@@ -1,0 +1,2197 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.11. Singular Values &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.12. Important Vector Spaces" href="important_spaces.html" />
+    <link rel="prev" title="4.10. Eigen Values" href="evd.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   4. Linear Algebra
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/la/svd.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fla/svd.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#singular-value">
+   4.11.1. Singular value
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-largest-singular-value">
+   4.11.2. The Largest Singular Value
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#svd-and-pseudo-inverse">
+   4.11.3. SVD and Pseudo Inverse
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-column-rank-matrices">
+   4.11.4. Full Column Rank Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#low-rank-approximation-of-a-matrix">
+   4.11.5. Low Rank Approximation of a Matrix
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Singular Values</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#singular-value">
+   4.11.1. Singular value
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-largest-singular-value">
+   4.11.2. The Largest Singular Value
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#svd-and-pseudo-inverse">
+   4.11.3. SVD and Pseudo Inverse
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-column-rank-matrices">
+   4.11.4. Full Column Rank Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#low-rank-approximation-of-a-matrix">
+   4.11.5. Low Rank Approximation of a Matrix
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="singular-values">
+<span id="sec-la-svd"></span><h1><span class="section-number">4.11. </span>Singular Values<a class="headerlink" href="#singular-values" title="Permalink to this headline">¶</a></h1>
+<p>In previous section we saw diagonalization of square matrices
+which resulted in an eigen value
+decomposition of the matrix.
+This matrix factorization is very useful yet it is not applicable
+in all situations.
+In particular, the eigen value decomposition is useless if the square matrix
+is not diagonalizable or if the matrix is not square at all.
+Moreover, the decomposition
+is particularly useful only for real symmetric or Hermitian matrices
+where the diagonalizing
+matrix is an <span class="math notranslate nohighlight">\(\FF\)</span>-unitary matrix
+(see <a class="reference internal" href="matrices_3.html#def:mat:f_unitary_matrix">Definition 4.128</a>).
+Otherwise, one has to consider the inverse of the diagonalizing matrix also.</p>
+<p>Fortunately there happens to be another decomposition which applies to all matrices and
+it involves just <span class="math notranslate nohighlight">\(\FF\)</span>-unitary matrices.</p>
+<div class="section" id="singular-value">
+<h2><span class="section-number">4.11.1. </span>Singular value<a class="headerlink" href="#singular-value" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def:mat:singular_value">
+<p class="admonition-title"><span class="caption-number">Definition 4.148 </span> (Singular value)</p>
+<div class="definition-content section" id="proof-content">
+<p>A non-negative real number <span class="math notranslate nohighlight">\(\sigma\)</span> is a <em>singular value</em>
+for a matrix <span class="math notranslate nohighlight">\(\bA \in \FF^{m \times n}\)</span> if and only if
+there exist unit-length vectors <span class="math notranslate nohighlight">\(\bu \in \FF^m\)</span> and <span class="math notranslate nohighlight">\(\bv \in \FF^n\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bv = \sigma \bu 
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^H \bu = \sigma \bv
+\]</div>
+<p>hold.
+The vectors <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span> are called <em>left-singular</em>
+and <em>right-singular</em> vectors for <span class="math notranslate nohighlight">\(\sigma\)</span> respectively.</p>
+</div>
+</div><p>We first present the basic result of singular value decomposition.
+We will not prove this
+result completely although we will present proofs of some aspects.</p>
+<div class="proof theorem admonition" id="thm:mat:singular_value_decomposition">
+<p class="admonition-title"><span class="caption-number">Theorem 4.140 </span> (Existence of singular values)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For every <span class="math notranslate nohighlight">\(\bA \in \FF^{m \times n}\)</span> with <span class="math notranslate nohighlight">\(k = \min(m , n)\)</span>,
+there exist two <span class="math notranslate nohighlight">\(\FF\)</span>-unitary matrices <span class="math notranslate nohighlight">\(\bU \in \FF^{m \times m}\)</span><br />
+and <span class="math notranslate nohighlight">\(\bV \in \FF^{n \times n}\)</span> and a sequence of real numbers</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_k \geq 0
+\]</div>
+<p>such that</p>
+<div class="math notranslate nohighlight" id="equation-eq-mat-svd-equation-form-1">
+<span class="eqno">(4.16)<a class="headerlink" href="#equation-eq-mat-svd-equation-form-1" title="Permalink to this equation">¶</a></span>\[\bU^H \bA \bV = \Sigma \]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma = \Diag(\sigma_1, \sigma_2, \dots, \sigma_k) \in \FF^{ m \times n}.
+\]</div>
+<p>The non-negative real numbers <span class="math notranslate nohighlight">\(\sigma_i\)</span> are the <em>singular values</em> of <span class="math notranslate nohighlight">\(\bA\)</span>
+as per <a class="reference internal" href="#def:mat:singular_value">Definition 4.148</a>.</p>
+<p>The sequence of real numbers <span class="math notranslate nohighlight">\(\sigma_i\)</span> doesn’t depend on the
+particular choice of <span class="math notranslate nohighlight">\(\bU\)</span> and <span class="math notranslate nohighlight">\(\bV\)</span>.</p>
+</div>
+</div><p><span class="math notranslate nohighlight">\(\Sigma\)</span> is rectangular with the same size as <span class="math notranslate nohighlight">\(\bA\)</span>.
+The singular values of <span class="math notranslate nohighlight">\(\bA\)</span> lie
+on the principle diagonal of <span class="math notranslate nohighlight">\(\Sigma\)</span>.
+All other entries in <span class="math notranslate nohighlight">\(\Sigma\)</span> are zero.</p>
+<p>It is certainly possible that some of the singular values are 0 themselves.</p>
+<div class="proof remark admonition" id="rem-mat-svd-form-2">
+<p class="admonition-title"><span class="caption-number">Remark 4.22 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Since <span class="math notranslate nohighlight">\(\bU^H \bA \bV = \Sigma \)</span> hence</p>
+<div class="math notranslate nohighlight" id="equation-eq-mat-svd-equation-form-2">
+<span class="eqno">(4.17)<a class="headerlink" href="#equation-eq-mat-svd-equation-form-2" title="Permalink to this equation">¶</a></span>\[\bA = \bU \Sigma \bV^H.\]</div>
+</div>
+</div><div class="proof definition admonition" id="def:mat:singular_value_decomposition">
+<p class="admonition-title"><span class="caption-number">Definition 4.149 </span> (Singular value decomposition)</p>
+<div class="definition-content section" id="proof-content">
+<p>The decomposition of a matrix <span class="math notranslate nohighlight">\(\bA \in \FF^{m \times n}\)</span> given by</p>
+<div class="math notranslate nohighlight" id="equation-eq-mat-singular-value-decomposition">
+<span class="eqno">(4.18)<a class="headerlink" href="#equation-eq-mat-singular-value-decomposition" title="Permalink to this equation">¶</a></span>\[\bA = \bU \Sigma \bV^H\]</div>
+<p>is known as its <em>singular value decomposition</em>.</p>
+</div>
+</div><div class="proof remark admonition" id="rem-mat-svd-form-real">
+<p class="admonition-title"><span class="caption-number">Remark 4.23 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>When <span class="math notranslate nohighlight">\(\FF\)</span> is <span class="math notranslate nohighlight">\(\RR\)</span> then the decomposition simplifies to</p>
+<div class="math notranslate nohighlight" id="equation-eq-mat-svd-equation-form-3">
+<span class="eqno">(4.19)<a class="headerlink" href="#equation-eq-mat-svd-equation-form-3" title="Permalink to this equation">¶</a></span>\[\bU^T \bA \bV = \Sigma \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \bU \Sigma \bV^T.
+\]</div>
+</div>
+</div><div class="proof remark admonition" id="rem-mat-svd-max-singular-values">
+<p class="admonition-title"><span class="caption-number">Remark 4.24 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>There can be at most <span class="math notranslate nohighlight">\(k= \min(m , n)\)</span> distinct singular values of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</div>
+</div><div class="proof remark admonition" id="rem-mat-svd-form-4">
+<p class="admonition-title"><span class="caption-number">Remark 4.25 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>We can also write</p>
+<div class="math notranslate nohighlight" id="equation-eq-mat-svd-equation-form-4">
+<span class="eqno">(4.20)<a class="headerlink" href="#equation-eq-mat-svd-equation-form-4" title="Permalink to this equation">¶</a></span>\[\bA \bV = \bU \Sigma.\]</div>
+</div>
+</div><div class="proof remark admonition" id="rem-mat-svd-rank-1-sum">
+<p class="admonition-title"><span class="caption-number">Remark 4.26 </span> (SVD as a sum of rank 1 matrices)</p>
+<div class="remark-content section" id="proof-content">
+<p>Let us expand</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bA = \bU \Sigma \bV^H
+= 
+\begin{bmatrix}
+\bu_1 &amp; \bu_2 &amp; \dots &amp; \bu_m
+\end{bmatrix}
+ \begin{bmatrix}
+ \sigma_{ij}
+\end{bmatrix}
+\begin{bmatrix}
+\bv_1^H \\ \bv_2^H \\ \vdots \\ \bv_n^H
+\end{bmatrix}
+=  
+\sum_{i=1}^m \sum_{j=1}^n \sigma_{i j} \bu_i  \bv_j^H.
+\end{split}\]</div>
+</div>
+</div><div class="proof remark admonition" id="rem-mat-svd-expand-2">
+<p class="admonition-title"><span class="caption-number">Remark 4.27 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Alternatively, let us expand</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Sigma = \bU^H \bA \bV  
+= 
+ \begin{bmatrix}
+\bu_1^H \\ \bu_2^H \\ \vdots \\ \bu_m^H
+\end{bmatrix}
+\bA
+\begin{bmatrix}
+\bv_1 &amp; \bv_2 &amp; \dots &amp; \bv_m
+\end{bmatrix}
+=  \begin{bmatrix} \bu_i^H \bA \bv_j \end{bmatrix}
+\end{split}\]</div>
+<p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{i j} = \bu_i^H \bA \bv_j.
+\]</div>
+</div>
+</div><p>Following lemma verifies that <span class="math notranslate nohighlight">\(\Sigma\)</span> indeed consists of singular values of <span class="math notranslate nohighlight">\(\bA\)</span>
+as per <a class="reference internal" href="#def:mat:singular_value">Definition 4.148</a>.</p>
+<div class="proof lemma admonition" id="res-mat-svd-just-singular-vals">
+<p class="admonition-title"><span class="caption-number">Lemma 4.71 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA = \bU \Sigma \bV^H\)</span> be a singular value decomposition of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Then the main diagonal entries of <span class="math notranslate nohighlight">\(\Sigma\)</span> are singular values.
+The first <span class="math notranslate nohighlight">\(k = \min(m, n)\)</span> column vectors in
+<span class="math notranslate nohighlight">\(\bU\)</span> and <span class="math notranslate nohighlight">\(\bV\)</span> are left and right singular vectors of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bV = \bU \Sigma.
+\]</div>
+<ol>
+<li><p>Let us expand R.H.S.</p>
+<div class="math notranslate nohighlight">
+\[
+        \bU \Sigma = 
+        \begin{bmatrix}\sum_{j=1}^m \bu_{i j} \sigma_{j k} \end{bmatrix}
+        = [u_{i k} \sigma_k]
+        = \begin{bmatrix}
+        \sigma_1 \bu_1 &amp; \sigma_2 \bu_2 &amp; \dots &amp; \sigma_k \bu_k &amp; \bzero &amp; \dots &amp; \bzero
+        \end{bmatrix}
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bzero\)</span> columns in the end appear <span class="math notranslate nohighlight">\(n - k\)</span> times.</p>
+</li>
+<li><p>Expanding the L.H.S. we get</p>
+<div class="math notranslate nohighlight">
+\[
+        \bA \bV  = \begin{bmatrix}
+        \bA \bv_1 &amp; \bA \bv_2 &amp; \dots &amp; \bA \bv_n
+        \end{bmatrix}.
+    \]</div>
+</li>
+<li><p>Thus by comparing both sides we get</p>
+<div class="math notranslate nohighlight">
+\[
+        \bA \bv_i = \sigma_i \bu_i \; \text{ for } \; 1 \leq i \leq k
+    \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+        \bA \bv_i = \bzero \text{ for } k &lt; i \leq n.
+    \]</div>
+</li>
+<li><p>Now let us start with</p>
+<div class="math notranslate nohighlight">
+\[
+    \bA = \bU \Sigma \bV^H 
+    \implies  \bA^H = \bV \Sigma^H \bU^H 
+    \implies  \bA^H \bU  = \bV \Sigma^H.
+   \]</div>
+</li>
+<li><p>Let us expand R.H.S.</p>
+<div class="math notranslate nohighlight">
+\[
+    \bV \Sigma^H = 
+    \begin{bmatrix}\sum_{j=1}^n v_{i j} \sigma_{j k} \end{bmatrix}
+    = [v_{i k} \sigma_k]
+    = \begin{bmatrix}
+    \sigma_1 \bv_1 &amp; \sigma_2 \bv_2 &amp; \dots &amp; \sigma_k \bv_k &amp; \bzero &amp; \dots &amp; \bzero
+    \end{bmatrix}
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bzero\)</span> columns appear <span class="math notranslate nohighlight">\(m - k\)</span> times.</p>
+</li>
+<li><p>Expanding the L.H.S. we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \bA^H \bU   = \begin{bmatrix}
+    \bA^H \bu_1 &amp; \bA^H \bu_2 &amp; \dots &amp; \bA^H \bu_m
+    \end{bmatrix}.
+    \]</div>
+</li>
+<li><p>Thus by comparing both sides we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \bA^H \bu_i = \sigma_i \bv_i \; \text{ for } \; 1 \leq i \leq k
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \bA^H \bu_i = \bzero \text{ for } k &lt; i \leq m.
+   \]</div>
+</li>
+</ol>
+<p>We now consider the three cases.</p>
+<ol>
+<li><p>For <span class="math notranslate nohighlight">\(m = n\)</span>, we have <span class="math notranslate nohighlight">\(k = m =n\)</span>.  And we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \bA \bv_i = \sigma_i \bu_i,  
+    \bA^H \bu_i = \sigma_i \bv_i \; \text{ for } \; 1 \leq i \leq m.
+   \]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\sigma_i\)</span> is a singular value of <span class="math notranslate nohighlight">\(\bA\)</span> and
+<span class="math notranslate nohighlight">\(\bu_i\)</span> is a left singular vector while
+<span class="math notranslate nohighlight">\(\bv_i\)</span> is a right singular vector.</p>
+</li>
+<li><p>For <span class="math notranslate nohighlight">\(m &lt; n\)</span>, we have <span class="math notranslate nohighlight">\(k = m\)</span>. We get for first <span class="math notranslate nohighlight">\(m\)</span> vectors in <span class="math notranslate nohighlight">\(\bV\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bv_i = \sigma_i \bu_i,  
+   \bA^H \bu_i = \sigma_i \bv_i \; \text{ for } \; 1 \leq i \leq m.
+   \]</div>
+<p>Finally for remaining <span class="math notranslate nohighlight">\(n-m\)</span> vectors in <span class="math notranslate nohighlight">\(\bV\)</span>, we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \bA \bv_i = \bzero.
+   \]</div>
+<p>They belong to the null space of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</li>
+<li><p>For <span class="math notranslate nohighlight">\(m &gt; n\)</span>, we have <span class="math notranslate nohighlight">\(k = n\)</span>. We get for first <span class="math notranslate nohighlight">\(n\)</span> vectors in <span class="math notranslate nohighlight">\(\bU\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bv_i = \sigma_i \bu_i,  
+   \bA^H \bu_i = \sigma_i \bv_i \; \text{ for } \; 1 \leq i \leq n.
+   \]</div>
+<p>Finally for remaining <span class="math notranslate nohighlight">\(m - n\)</span> vectors in <span class="math notranslate nohighlight">\(\bU\)</span>, we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \bA^H \bu_i = \bzero.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof lemma admonition" id="res-mat-svd-sig-sqr-1">
+<p class="admonition-title"><span class="caption-number">Lemma 4.72 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\Sigma \Sigma^H\)</span> is an <span class="math notranslate nohighlight">\(m \times m\)</span> matrix given by</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma \Sigma^H =  \Diag(\sigma_1^2, \sigma_2^2, \dots, \sigma_k^{2}, 0, 0,\dots, 0)
+\]</div>
+<p>where the number of <span class="math notranslate nohighlight">\(0\)</span>’s following <span class="math notranslate nohighlight">\(\sigma_k^{2}\)</span> is <span class="math notranslate nohighlight">\(m  - k\)</span>.</p>
+</div>
+</div><div class="proof lemma admonition" id="res-mat-svd-sig-sqr-2">
+<p class="admonition-title"><span class="caption-number">Lemma 4.73 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\Sigma^H \Sigma\)</span> is an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix given by</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma^H \Sigma =  \Diag(\sigma_1^2, \sigma_2^2, \dots, \sigma_k^{2}, 0, 0,\dots, 0)
+\]</div>
+<p>where the number of <span class="math notranslate nohighlight">\(0\)</span>’s following <span class="math notranslate nohighlight">\(\sigma_k^{2}\)</span> is <span class="math notranslate nohighlight">\(n  - k\)</span>.</p>
+</div>
+</div><div class="proof lemma admonition" id="lem:mat:singular:rank_svd">
+<p class="admonition-title"><span class="caption-number">Lemma 4.74 </span> (Rank from singular value decomposition)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \FF^{m \times n}\)</span> have a singular value decomposition given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \bU \Sigma \bV^H.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+r = \Rank(A) = \Rank(\Sigma).
+\]</div>
+<p>In other words, the rank of <span class="math notranslate nohighlight">\(\bA\)</span> is number of nonzero singular values of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Since the singular values are ordered in descending order in <span class="math notranslate nohighlight">\(\bA\)</span> hence,
+the first <span class="math notranslate nohighlight">\(r\)</span> singular values <span class="math notranslate nohighlight">\(\sigma_1, \dots, \sigma_r\)</span> are nonzero.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is a straight forward application of
+<a class="reference internal" href="matrices_2.html#lem:mat:rank:full_rank_post_multiplier">Lemma 4.5</a>
+and <a class="reference internal" href="matrices_2.html#lem:mat:rank:full_rank_pre_multiplier">Lemma 4.6</a>.
+Further since only nonzero values in <span class="math notranslate nohighlight">\(\Sigma\)</span> appear
+on its main diagonal hence its rank
+is number of nonzero singular values <span class="math notranslate nohighlight">\(\sigma_i\)</span>.</p>
+</div>
+<div class="proof corollary admonition" id="cor:mat:singular:svd_block_matrix">
+<p class="admonition-title"><span class="caption-number">Corollary 4.24 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(r = \Rank(\bA)\)</span>. Then <span class="math notranslate nohighlight">\(\Sigma\)</span> can be split as a block matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Sigma = 
+\left [
+\begin{array}{c | c}
+\Sigma_r &amp; \ZERO\\
+\hline
+\ZERO &amp; \ZERO
+\end{array}
+\right ]
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Sigma_r\)</span> is an <span class="math notranslate nohighlight">\(r \times r\)</span> diagonal matrix of the nonzero singular values
+<span class="math notranslate nohighlight">\(\Diag(\sigma_1, \sigma_2, \dots, \sigma_r)\)</span>.
+All other sub-matrices in <span class="math notranslate nohighlight">\(\Sigma\)</span> are <span class="math notranslate nohighlight">\(\ZERO\)</span>.</p>
+</div>
+</div><div class="proof lemma admonition" id="lem:mat:singular:aH_a_eigen_values">
+<p class="admonition-title"><span class="caption-number">Lemma 4.75 </span> (Eigen values of the Gram matrix)</p>
+<div class="lemma-content section" id="proof-content">
+<p>The eigen values of Hermitian matrix <span class="math notranslate nohighlight">\(\bA^H \bA \in \FF^{n \times n}\)</span> are
+<span class="math notranslate nohighlight">\(\sigma_1^2, \sigma_2^2, \dots, \sigma_k^{2}, 0, 0,\dots, 0\)</span> with <span class="math notranslate nohighlight">\(n - k\)</span> <span class="math notranslate nohighlight">\(0\)</span>’s after <span class="math notranslate nohighlight">\(\sigma_k^{2}\)</span>.
+Moreover the eigen vectors are the columns of <span class="math notranslate nohighlight">\(\bV\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding the Gram matrix:</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^H \bA 
+= \left ( \bU \Sigma \bV^H \right)^H \bU \Sigma \bV^H  
+= \bV \Sigma^H \bU^H \bU \Sigma \bV^H = \bV \Sigma^H \Sigma \bV^H.
+\]</div>
+<ol>
+<li><p>We note that <span class="math notranslate nohighlight">\(\bA^H \bA\)</span> is Hermitian.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(A^HA\)</span> is diagonalized by <span class="math notranslate nohighlight">\(\bV\)</span>.</p></li>
+<li><p>The diagonalization of <span class="math notranslate nohighlight">\(\bA^H \bA\)</span>
+is <span class="math notranslate nohighlight">\(\Sigma^H \Sigma\)</span>.</p></li>
+<li><p>Thus the eigen values of <span class="math notranslate nohighlight">\(\bA^H \bA\)</span>  are
+<span class="math notranslate nohighlight">\(\sigma_1^2, \sigma_2^2, \dots, \sigma_k^{2}, 0, 0,\dots, 0\)</span>
+with <span class="math notranslate nohighlight">\(n - k\)</span> <span class="math notranslate nohighlight">\(0\)</span>’s after <span class="math notranslate nohighlight">\(\sigma_k^{2}\)</span>.</p></li>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+    (\bA^H \bA) \bV = \bV (\Sigma^H \Sigma).
+   \]</div>
+</li>
+<li><p>Thus columns of <span class="math notranslate nohighlight">\(\bV\)</span> are the eigen vectors of <span class="math notranslate nohighlight">\(\bA^H \bA\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof lemma admonition" id="lem:mat:singular:a_aH_eigen_values">
+<p class="admonition-title"><span class="caption-number">Lemma 4.76 </span> (Eigen values of the frame operator)</p>
+<div class="lemma-content section" id="proof-content">
+<p>The eigen values of Hermitian matrix <span class="math notranslate nohighlight">\(\bA \bA^H \in \FF^{m \times m}\)</span>
+are <span class="math notranslate nohighlight">\(\sigma_1^2, \sigma_2^2, \dots, \sigma_k^{2}, 0, 0,\dots, 0\)</span>
+with <span class="math notranslate nohighlight">\(m - k\)</span> <span class="math notranslate nohighlight">\(0\)</span>’s after <span class="math notranslate nohighlight">\(\sigma_k^{2}\)</span>.
+Moreover the eigen vectors are the columns of <span class="math notranslate nohighlight">\(\bV\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding the frame operator:</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bA^H 
+= \bU \Sigma \bV^H \left ( \bU \Sigma \bV^H \right)^H 
+= \bU \Sigma \bV^H \bV \Sigma^H \bU^H 
+= \bU \Sigma \Sigma^H \bU^H.
+\]</div>
+<ol>
+<li><p>We note that <span class="math notranslate nohighlight">\(\bA^H \bA\)</span> is Hermitian.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bA^H \bA\)</span> is diagonalized by <span class="math notranslate nohighlight">\(\bV\)</span>.</p></li>
+<li><p>The diagonalization of <span class="math notranslate nohighlight">\(\bA^H \bA\)</span> is <span class="math notranslate nohighlight">\(\Sigma^H \Sigma\)</span>.</p></li>
+<li><p>Thus the eigen values of <span class="math notranslate nohighlight">\(\bA^H \bA\)</span>  are
+<span class="math notranslate nohighlight">\(\sigma_1^2, \sigma_2^2, \dots, \sigma_k^{2}, 0, 0,\dots, 0\)</span>
+with <span class="math notranslate nohighlight">\(m - k\)</span> <span class="math notranslate nohighlight">\(0\)</span>’s after <span class="math notranslate nohighlight">\(\sigma_k^{2}\)</span>.</p></li>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+    (\bA \bA^H) \bU = \bU (\Sigma \Sigma^H).
+   \]</div>
+</li>
+<li><p>Thus columns of <span class="math notranslate nohighlight">\(\bU\)</span> are the eigen vectors of <span class="math notranslate nohighlight">\(\bA \bA^H\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof observation admonition" id="rem-mat-svd-gram-frame-evals">
+<p class="admonition-title"><span class="caption-number">Observation 4.8 </span></p>
+<div class="observation-content section" id="proof-content">
+<p>The Gram matrices <span class="math notranslate nohighlight">\(\bA \bA^H\)</span> and <span class="math notranslate nohighlight">\(\bA^H \bA\)</span>
+share the same eigen values except for some extra <span class="math notranslate nohighlight">\(0\)</span>s.
+Their eigen values are the squares of singular values of <span class="math notranslate nohighlight">\(\bA\)</span> and some extra <span class="math notranslate nohighlight">\(0\)</span>s.
+In other words singular values of <span class="math notranslate nohighlight">\(\bA\)</span> are the square roots of nonzero
+eigen values of the Gram matrices
+<span class="math notranslate nohighlight">\(\bA \bA^H\)</span> or <span class="math notranslate nohighlight">\(\bA^H \bA\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="the-largest-singular-value">
+<h2><span class="section-number">4.11.2. </span>The Largest Singular Value<a class="headerlink" href="#the-largest-singular-value" title="Permalink to this headline">¶</a></h2>
+<div class="proof lemma admonition" id="lem:mat:singular:largest_singular_value_norm_bound_sigma">
+<p class="admonition-title"><span class="caption-number">Lemma 4.77 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>For every <span class="math notranslate nohighlight">\(\bu \in \FF^n\)</span> the following holds</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Sigma \bu \|_2 \leq  \sigma_1 \| \bu \|_2.
+\]</div>
+<p>Also for every <span class="math notranslate nohighlight">\(\bu \in \FF^m\)</span> the following holds</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Sigma^H \bu \|_2 \leq  \sigma_1 \| \bu \|_2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let us expand the term <span class="math notranslate nohighlight">\(\Sigma \bu\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+\sigma_1 &amp; 0 &amp; \dots &amp; \dots &amp; 0 \\
+0 &amp; \sigma_2 &amp; \dots &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \dots &amp; 0\\
+0 &amp; \vdots &amp; \sigma_k &amp; \dots &amp; 0 \\
+0 &amp; 0 &amp; \vdots &amp; \dots &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+u_1 \\
+u_2 \\
+\vdots \\
+u_k \\
+\vdots \\
+u_n
+\end{bmatrix}
+= \begin{bmatrix}
+\sigma_1 u_1 \\
+\sigma_2 u_2 \\
+\vdots \\
+\sigma_k u_k \\
+0 \\
+\vdots \\
+0
+\end{bmatrix}
+\end{split}\]</div>
+<p>Now since <span class="math notranslate nohighlight">\(\sigma_1\)</span> is the largest singular value, hence</p>
+<div class="math notranslate nohighlight">
+\[
+|\sigma_i u_i| \leq |\sigma_1 u_i| \Forall 1 \leq i \leq k.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^n |\sigma_1 u_i|^2  \geq \sum_{i=1}^n |\sigma_i u_i|^2
+\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_1^2 \| \bu \|_2^2 \geq \| \Sigma \bu \|_2^2.
+\]</div>
+<p>The result follows.</p>
+<p>A simpler representation of <span class="math notranslate nohighlight">\(\Sigma \bu\)</span> can be given using
+the block representation of <span class="math notranslate nohighlight">\(\Sigma\)</span> in
+<a class="reference internal" href="#cor:mat:singular:svd_block_matrix">Corollary 4.24</a>.</p>
+<p>Let <span class="math notranslate nohighlight">\(r = \Rank(\bA)\)</span>.  Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Sigma = 
+\left [
+\begin{array}{c | c}
+\Sigma_r &amp; \ZERO\\
+\hline
+\ZERO &amp; \ZERO
+\end{array}
+\right ].
+\end{split}\]</div>
+<p>We split entries in <span class="math notranslate nohighlight">\(\bu\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bu = [(u_1, \dots, u_r )( u_{r + 1} \dots u_n)]^T.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Sigma \bu = 
+\left [
+\begin{array}{c}
+\Sigma_r 
+\begin{bmatrix}
+u_1 &amp;
+\dots&amp;
+u_r
+\end{bmatrix}^T\\
+\ZERO \begin{bmatrix}
+u_{r + 1} &amp;
+\dots&amp;
+u_n
+\end{bmatrix}^T
+\end{array}
+\right ]
+= 
+\begin{bmatrix}
+\sigma_1 u_1 &amp; \sigma_2 u_2 &amp; \dots &amp; \sigma_r u_r &amp; 0 &amp; \dots &amp; 0 
+\end{bmatrix}^T
+\end{split}\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Sigma \bu \|_2^2
+= \sum_{i=1}^r |\sigma_i u_i |^2 
+\leq \sigma_1 \sum_{i=1}^r |u_i |^2 
+\leq \sigma_1 \|\bu\|_2^2.
+\]</div>
+<p>2nd result can also be proven similarly.</p>
+</div>
+<div class="proof lemma admonition" id="lem:mat:singular:largest_singular_value_l2_norm_bound_A_A^H">
+<p class="admonition-title"><span class="caption-number">Lemma 4.78 </span> (Upper bounds on norms of matrix vector product)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\sigma_1\)</span> be the largest singular value of an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bx \|_2 \leq \sigma_1 \| \bx \|_2 \Forall \bx \in \FF^n.
+\]</div>
+<p>Moreover</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA^H \bx \|_2 \leq \sigma_1 \| \bx \|_2 \Forall \bx \in \FF^m.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bx \|_2 = \|  \bU \Sigma \bV^H \bx \|_2  = \| \Sigma \bV^H \bx \|_2
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bU\)</span> is unitary.
+Now from previous result we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Sigma \bV^H \bx \|_2 
+\leq  \sigma_1 \| \bV^H \bx \|_2 =  \sigma_1 \| \bx \|_2
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bV^H\)</span> also unitary.
+Thus we get the result</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bx \|_2  \leq \sigma_1 \| \bx \|_2 \Forall \bx \in \FF^n.
+\]</div>
+<p>Similarly</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA^H \bx \|_2 = \|  \bV \Sigma^H \bU^H  \bx \|_2  
+= \| \Sigma^H \bU^H \bx \|_2
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bV\)</span> is unitary.
+Now from previous result we have</p>
+<div class="math notranslate nohighlight">
+\[
+\|  \Sigma^H \bU^H \bx \|_2 \leq  
+\sigma_1 \| \bU^H \bx \|_2 =  \sigma_1 \| \bx \|_2
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bU^H\)</span> also unitary. Thus we get the result</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA^H \bx \|_2  \leq \sigma_1 \| \bx \|_2 \Forall \bx \in \FF^m.
+\]</div>
+</div>
+<p>There is a direct connection between the largest singular value and <span class="math notranslate nohighlight">\(2\)</span>-norm
+of a matrix (see <a class="reference internal" href="matrix_norms.html#sec-mat-p-norm"><span class="std std-ref">p-norm for Matrices</span></a>).</p>
+<div class="proof corollary admonition" id="res-mat-svd-2-norm-1st-sv">
+<p class="admonition-title"><span class="caption-number">Corollary 4.25 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>The largest singular value of <span class="math notranslate nohighlight">\(\bA\)</span> is nothing but its <span class="math notranslate nohighlight">\(2\)</span>-norm; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_1 = \underset{\| \bu \|_2 = 1}{\max} \| \bA \bu \|_2.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="svd-and-pseudo-inverse">
+<h2><span class="section-number">4.11.3. </span>SVD and Pseudo Inverse<a class="headerlink" href="#svd-and-pseudo-inverse" title="Permalink to this headline">¶</a></h2>
+<div class="proof lemma admonition" id="lem:mat:singular:sigma_pseudo_inverse">
+<p class="admonition-title"><span class="caption-number">Lemma 4.79 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA = \bU \Sigma \bV^H\)</span> and let
+<span class="math notranslate nohighlight">\(r  = \Rank (\bA)\)</span>.
+Let <span class="math notranslate nohighlight">\(\sigma_1, \dots, \sigma_r\)</span> be
+the <span class="math notranslate nohighlight">\(r\)</span> nonzero singular values of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Then the Moore-Penrose pseudo-inverse of
+<span class="math notranslate nohighlight">\(\Sigma\)</span> is an <span class="math notranslate nohighlight">\(n \times m\)</span> matrix <span class="math notranslate nohighlight">\(\Sigma^{\dag}\)</span>
+given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Sigma^{\dag} = 
+\left [
+\begin{array}{c | c}
+\Sigma_r^{-1} &amp; \ZERO\\
+\hline
+\ZERO &amp; \ZERO
+\end{array}
+\right ]
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Sigma_r = \Diag(\sigma_1, \dots, \sigma_r)\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\Sigma^{\dag}\)</span> is obtained by transposing <span class="math notranslate nohighlight">\(\Sigma\)</span> and inverting
+all its nonzero (positive real) values.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Straight forward application of
+<a class="reference internal" href="matrices_2.html#lem:mat:moore_penrose_rectangular_diagonal_pseudo_inverse">Lemma 4.25</a>.</p>
+</div>
+<div class="proof corollary admonition" id="cor:mat:sigma_pseudo_inverse_rank">
+<p class="admonition-title"><span class="caption-number">Corollary 4.26 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>The rank of <span class="math notranslate nohighlight">\(\Sigma\)</span> and its pseudoinverse <span class="math notranslate nohighlight">\(\Sigma^{\dag}\)</span> are same; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\Rank (\Sigma) = \Rank(\Sigma^{\dag}).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The number of nonzero diagonal entries in <span class="math notranslate nohighlight">\(\Sigma\)</span> and <span class="math notranslate nohighlight">\(\Sigma^{\dag}\)</span> are same.</p>
+</div>
+<div class="proof lemma admonition" id="lem:mat:singular:matrix_pseudo_inverse">
+<p class="admonition-title"><span class="caption-number">Lemma 4.80 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix and let <span class="math notranslate nohighlight">\(\bA = \bU \Sigma \bV^H\)</span> be its
+singular value decomposition.
+Let <span class="math notranslate nohighlight">\(\Sigma^{\dag}\)</span> be the pseudoinverse
+of <span class="math notranslate nohighlight">\(\Sigma\)</span> as per <a class="reference internal" href="#lem:mat:singular:sigma_pseudo_inverse">Lemma 4.79</a>.
+Then the Moore-Penrose pseudo-inverse of <span class="math notranslate nohighlight">\(\bA\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^{\dag} = \bV \Sigma^{\dag} \bU^H.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. As usual we verify the requirements for a Moore-Penrose pseudo-inverse
+as per <a class="reference internal" href="matrices_2.html#def:mat:moore_penrose_pseudo_inverse">Definition 4.59</a>. We note that
+since <span class="math notranslate nohighlight">\(\Sigma^{\dag}\)</span> is the pseudo-inverse of <span class="math notranslate nohighlight">\(\Sigma\)</span> it already
+satisfies necessary criteria.</p>
+<p>First requirement:</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bA^{\dag} \bA = \bU \Sigma \bV^H  \bV \Sigma^{\dag} \bU^H \bU \Sigma \bV^H
+= \bU \Sigma \Sigma^{\dag} \Sigma \bV^H = \bU \Sigma \bV^H = \bA.
+\]</div>
+<p>Second requirement:</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^{\dag} \bA \bA^{\dag}
+= \bV \Sigma^{\dag} \bU^H  \bU \Sigma \bV^H  \bV \Sigma^{\dag} \bU^H
+= \bV  \Sigma^{\dag} \Sigma \Sigma^{\dag} \bU^H 
+= \bV \Sigma^{\dag} \bU^H = \bA^{\dag}.
+\]</div>
+<p>We now consider</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bA^{\dag} = \bU \Sigma \bV^H  \bV \Sigma^{\dag} \bU^H 
+= \bU \Sigma \Sigma^{\dag} \bU^H.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\left ( \bA \bA^{\dag} \right )^H 
+= \left ( \bU \Sigma \Sigma^{\dag} \bU^H \right )^H
+= \bU \left ( \Sigma \Sigma^{\dag} \right )^H \bU^H 
+= \bU \Sigma \Sigma^{\dag} \bU^H = \bA \bA^{\dag}
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\Sigma \Sigma^{\dag}\)</span> is Hermitian.
+Finally we consider</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^{\dag} \bA = \bV \Sigma^{\dag} \bU^H \bU \Sigma \bV^H  
+= \bV \Sigma^{\dag}  \Sigma \bV^H.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\left ( \bA^{\dag} \bA  \right )^H 
+= \left ( \bV \Sigma^{\dag}  \Sigma \bV^H\right )^H 
+= \bV \left ( \Sigma^{\dag}  \Sigma \right )^H \bV^H 
+= \bV \Sigma^{\dag}  \Sigma \bV^H = \bA^{\dag} \bA
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\Sigma^{\dag}  \Sigma\)</span> is also Hermitian.
+This completes the proof.</p>
+</div>
+<p>Finally we can connect the singular values of <span class="math notranslate nohighlight">\(A\)</span> with the
+singular values of its pseudo-inverse.</p>
+<div class="proof corollary admonition" id="cor:mat:singular_matrix_pseudo_inverse_rank">
+<p class="admonition-title"><span class="caption-number">Corollary 4.27 </span> (Rank of pseudoinverse)</p>
+<div class="corollary-content section" id="proof-content">
+<p>The rank of any <span class="math notranslate nohighlight">\(m \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA\)</span> and its
+pseudoinverse <span class="math notranslate nohighlight">\(\bA^{\dag}\)</span> are same. i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\Rank (\bA) = \Rank(\bA^{\dag}).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have <span class="math notranslate nohighlight">\(\Rank(A) = \Rank(\Sigma)\)</span>.
+Also it is easy to verify that <span class="math notranslate nohighlight">\(\Rank(\bA^{\dag}) = \Rank(\Sigma^{\dag})\)</span>.
+So using <a class="reference internal" href="#cor:mat:sigma_pseudo_inverse_rank">Corollary 4.26</a> completes the proof.</p>
+</div>
+<div class="proof lemma admonition" id="lem:mat:singular_pseudo_inverse_singular_values">
+<p class="admonition-title"><span class="caption-number">Lemma 4.81 </span> (Singular values of the pseudoinverse)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix and let <span class="math notranslate nohighlight">\(\bA^{\dag}\)</span>  be its <span class="math notranslate nohighlight">\(n \times m\)</span>
+pseudoinverse as per <a class="reference internal" href="#lem:mat:singular:matrix_pseudo_inverse">Lemma 4.80</a>.
+Let <span class="math notranslate nohighlight">\(r = \Rank(\bA)\)</span>.
+Let <span class="math notranslate nohighlight">\(k = \min(m, n)\)</span> denote the number of singular values
+while <span class="math notranslate nohighlight">\(r\)</span> denote the number of nonzero singular values of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Let <span class="math notranslate nohighlight">\(\sigma_1, \dots, \sigma_r\)</span> be the nonzero singular values of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Then the number of singular values of <span class="math notranslate nohighlight">\(\bA^{\dag}\)</span> is same as that
+of <span class="math notranslate nohighlight">\(\bA\)</span> and the nonzero singular values of <span class="math notranslate nohighlight">\(\bA^{\dag}\)</span> are</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{\sigma_1} , \dots, \frac{1}{\sigma_r}
+\]</div>
+<p>while all other <span class="math notranslate nohighlight">\(k - r\)</span> singular values of <span class="math notranslate nohighlight">\(\bA^{\dag}\)</span> are zero.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(k= \min(m, n)\)</span> denotes the number of singular values for both
+<span class="math notranslate nohighlight">\(\bA\)</span> and  <span class="math notranslate nohighlight">\(\bA^{\dag}\)</span>.</p>
+<ol>
+<li><p>Since rank of <span class="math notranslate nohighlight">\(\bA\)</span> and  <span class="math notranslate nohighlight">\(\bA^{\dag}\)</span>  are same, hence the number of
+nonzero singular values is same.</p></li>
+<li><p>Now look at</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA^{\dag}  = \bV \Sigma^{\dag} \bU^H
+   \]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \Sigma^{\dag} = 
+    \left [
+    \begin{array}{c | c}
+    \Sigma_r^{-1} &amp; \ZERO\\
+    \hline
+    \ZERO &amp; \ZERO
+    \end{array}
+    \right ].
+    \end{split}\]</div>
+</li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(\Sigma_r^{-1} = \Diag(\frac{1}{\sigma_1} , \dots, \frac{1}{\sigma_r})\)</span>.</p></li>
+<li><p>Thus expanding the R.H.S. we can get</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA^{\dag} = \sum_{i=1}^r \frac{1}{\sigma_{i}} \bv_i  \bu_i^H
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bv_i\)</span> and <span class="math notranslate nohighlight">\(\bu_i\)</span> are first <span class="math notranslate nohighlight">\(r\)</span> columns of <span class="math notranslate nohighlight">\(\bV\)</span> and <span class="math notranslate nohighlight">\(\bU\)</span> respectively.</p>
+</li>
+<li><p>If we reverse the order of first <span class="math notranslate nohighlight">\(r\)</span> columns of <span class="math notranslate nohighlight">\(\bU\)</span> and <span class="math notranslate nohighlight">\(\bV\)</span> and reverse
+the first <span class="math notranslate nohighlight">\(r\)</span> diagonal entries of <span class="math notranslate nohighlight">\(\Sigma^{\dag}\)</span>
+, the R.H.S. remains the same while we are able to express <span class="math notranslate nohighlight">\(\bA^{\dag}\)</span> in
+the standard singular value decomposition form.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\frac{1}{\sigma_1} , \dots, \frac{1}{\sigma_r}\)</span> are indeed
+the nonzero singular values of <span class="math notranslate nohighlight">\(\bA^{\dag}\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="full-column-rank-matrices">
+<span id="sec-mat-sngular-full-column-rank-matrices"></span><h2><span class="section-number">4.11.4. </span>Full Column Rank Matrices<a class="headerlink" href="#full-column-rank-matrices" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection we consider some specific results related to
+the singular value decomposition of a full column rank matrix.</p>
+<ol>
+<li><p>We will consider <span class="math notranslate nohighlight">\(\bA\)</span> to be an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix in <span class="math notranslate nohighlight">\(\FF^{m \times n}\)</span>
+with <span class="math notranslate nohighlight">\(m \geq n\)</span> and <span class="math notranslate nohighlight">\(\Rank(\bA) = n\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bA = \bU \Sigma \bV^H\)</span> be its singular value decomposition.</p></li>
+<li><p>From <a class="reference internal" href="#lem:mat:singular:rank_svd">Lemma 4.74</a> we observe that
+there are <span class="math notranslate nohighlight">\(n\)</span> nonzero singular values of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+<li><p>We will call these singular values as <span class="math notranslate nohighlight">\(\sigma_1, \sigma_2, \dots, \sigma_n\)</span>.</p></li>
+<li><p>We will define</p>
+<div class="math notranslate nohighlight">
+\[
+   \Sigma_n = \Diag(\sigma_1, \sigma_2, \dots, \sigma_n).
+   \]</div>
+</li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(\Sigma\)</span> is an <span class="math notranslate nohighlight">\(2\times 1\)</span> block matrix given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \Sigma = 
+    \left [
+    \begin{array}{c}
+    \Sigma_n\\
+    \hline
+    \ZERO
+    \end{array}
+    \right ]
+    \end{split}\]</div>
+<p>where the lower <span class="math notranslate nohighlight">\(\ZERO\)</span> is an <span class="math notranslate nohighlight">\((m - n) \times n\)</span> zero matrix.</p>
+</li>
+<li><p>From here we obtain that <span class="math notranslate nohighlight">\(\Sigma^H \Sigma\)</span> is an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \Sigma^H \Sigma = \Sigma_n^2
+   \]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+    \Sigma_n^2 = \Diag(\sigma_1^2, \sigma_2^2, \dots, \sigma_n^2).
+   \]</div>
+</li>
+</ol>
+<div class="proof lemma admonition" id="lem:mat:singular:full_column_rank_sigma_h_sigma_invertible">
+<p class="admonition-title"><span class="caption-number">Lemma 4.82 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a full column rank matrix with singular value decomposition
+<span class="math notranslate nohighlight">\(\bA = \bU \Sigma \bV^H\)</span>.
+Then <span class="math notranslate nohighlight">\(\Sigma^H \Sigma = \Sigma_n^2 = \Diag(\sigma_1^2, \sigma_2^2, \dots, \sigma_n^2)\)</span>
+and <span class="math notranslate nohighlight">\(\Sigma^H \Sigma\)</span> is invertible.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since all singular values are nonzero hence <span class="math notranslate nohighlight">\(\Sigma_n^2\)</span> is invertible. Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\left (\Sigma^H \Sigma \right )^{-1} 
+= \left ( \Sigma_n^2  \right )^{-1}
+=  \Diag\left(\frac{1}{\sigma_1^2}, \frac{1}{\sigma_2^2}, 
+    \dots, \frac{1}{\sigma_n^2} \right).
+\]</div>
+</div>
+<div class="proof lemma admonition" id="res-mat-svd-fcr-sigma-norm-proj-bounds">
+<p class="admonition-title"><span class="caption-number">Lemma 4.83 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a full column rank matrix with singular value decomposition
+<span class="math notranslate nohighlight">\(\bA = \bU \Sigma \bV^H\)</span>.
+Let <span class="math notranslate nohighlight">\(\sigma_1\)</span> be its largest singular value and
+<span class="math notranslate nohighlight">\(\sigma_n\)</span> be its smallest singular value.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_n^2 \| \bx \|_2 \leq 
+\| \Sigma^H \Sigma \bx \|_2 \leq \sigma_1^2 \| \bx \|_2  \Forall \bx \in \FF^n.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bx \in \FF^n\)</span>.</p>
+<ol>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[
+     \| \Sigma^H \Sigma \bx \|_2^2 
+     = \| \Sigma_n^2 \bx \|_2^2 = \sum_{i=1}^n |\sigma_i^2 x_i|^2.
+   \]</div>
+</li>
+<li><p>Now since</p>
+<div class="math notranslate nohighlight">
+\[
+    \sigma_n \leq \sigma_i \leq \sigma_1;
+   \]</div>
+</li>
+<li><p>hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \sigma_n^4  \sum_{i=1}^n |x_i|^2 
+    \leq \sum_{i=1}^n |\sigma_i^2 x_i|^2 
+    \leq \sigma_1^4 \sum_{i=1}^n |x_i|^2.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \sigma_n^4 \| \bx \|_2^2 
+    \leq  \| \Sigma^H \Sigma \bx \|_2^2 
+    \leq \sigma_1^4 \| \bx \|_2^2.
+   \]</div>
+</li>
+<li><p>Applying square roots, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \sigma_n^2 \| \bx \|_2 
+    \leq  \| \Sigma^H \Sigma \bx \|_2 
+    \leq \sigma_1^2 \| \bx \|_2  
+    \Forall \bx \in \FF^n.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>We recall from <a class="reference internal" href="matrices_2.html#cor:mat:gram_full_column_rank_invertible">Corollary 4.7</a>
+that the Gram matrix of its column vectors <span class="math notranslate nohighlight">\(\bG = \bA^H \bA\)</span> is
+full rank and invertible.</p>
+<div class="proof lemma admonition" id="lem:mat:singular:full_column_rank_gram_embedding_l2_norm_bound">
+<p class="admonition-title"><span class="caption-number">Lemma 4.84 </span> (Norm bounds for Gram matrix vector product)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a full column rank matrix with
+singular value decomposition <span class="math notranslate nohighlight">\(\bA = \bU \Sigma \bV^H\)</span>.
+Let <span class="math notranslate nohighlight">\(\sigma_1\)</span> be its largest singular value and
+<span class="math notranslate nohighlight">\(\sigma_n\)</span> be its smallest singular value.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_n^2 \| \bx \|_2 
+\leq \| \bA^H \bA \bx \|_2 
+\leq \sigma_1^2 \| \bx \|_2  \Forall \bx \in \FF^n.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding the Gram matrix</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^H \bA = (\bU \Sigma \bV^H)^H (\bU \Sigma \bV^H) = \bV \Sigma^H \Sigma \bV^H. 
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \FF^n\)</span>. Let</p>
+<div class="math notranslate nohighlight">
+\[
+\bu = \bV^H \bx  \implies \| \bu \|_2 = \| \bx \|_2.
+\]</div>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+\bw = \Sigma^H \Sigma \bu.
+\]</div>
+<p>Then from previous lemma we have</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_n^2 \| \bu \|_2 
+\leq  \| \Sigma^H \Sigma \bu \|_2 = \|\bw \|_2 \leq \sigma_1^2 \| \bu \|_2 .
+\]</div>
+<p>Finally</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^ H \bA \bx = \bV \Sigma^H \Sigma \bV^H \bx = \bV \bw.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA^H \bA \bx \|_2  = \| \bw \|_2.
+\]</div>
+<p>Substituting we get</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_n^2 \|\bx \|_2 
+\leq \| \bA^H \bA \bx \|_2 
+\leq \sigma_1^2 \| \bx \|_2  \Forall \bx \in \FF^n.
+\]</div>
+</div>
+<p>There are bounds for the inverse of Gram matrix also.
+First let us establish the inverse of Gram matrix.</p>
+<div class="proof lemma admonition" id="lem:mat:singular:full_column_rank_inverse_gram_matrix">
+<p class="admonition-title"><span class="caption-number">Lemma 4.85 </span> (SVD of inverse Gram matrix)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a full column rank matrix with singular value decomposition
+<span class="math notranslate nohighlight">\(\bA = \bU \Sigma \bV^H\)</span>.
+Let the singular values of <span class="math notranslate nohighlight">\(\bA\)</span> be <span class="math notranslate nohighlight">\(\sigma_1, \dots, \sigma_n\)</span>.
+Let the Gram matrix of columns of <span class="math notranslate nohighlight">\(\bA\)</span> be <span class="math notranslate nohighlight">\(\bG = \bA^H \bA\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\bG^{-1} = \bV \Psi \bV^H
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi = \Diag \left(\frac{1}{\sigma_1^2}, \frac{1}{\sigma_2^2}, 
+    \dots, \frac{1}{\sigma_n^2} \right).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have</p>
+<div class="math notranslate nohighlight">
+\[
+\bG = \bV \Sigma^H \Sigma \bV^H.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\bG^{-1} 
+= \left (\bV \Sigma^H \Sigma \bV^H \right )^{-1} 
+= \left ( \bV^H \right )^{-1} \left ( \Sigma^H \Sigma \right )^{-1} \bV^{-1} 
+= \bV  \left ( \Sigma^H \Sigma \right )^{-1}  \bV^H.
+\]</div>
+<p>From <a class="reference internal" href="#lem:mat:singular:full_column_rank_sigma_h_sigma_invertible">Lemma 4.82</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi = \left ( \Sigma^H \Sigma \right )^{-1} 
+= \Diag \left (\frac{1}{\sigma_1^2}, \frac{1}{\sigma_2^2}, 
+    \dots, \frac{1}{\sigma_n^2} \right).
+\]</div>
+<p>This completes the proof.</p>
+</div>
+<p>We can now state the bounds:</p>
+<div class="proof lemma admonition" id="lem:mat:singular:full_column_rank_inverse_gram_embedding_l2_norm_bound">
+<p class="admonition-title"><span class="caption-number">Lemma 4.86 </span> (Norm bounds for inverse Gram matrix vector product)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a full column rank matrix with singular value decomposition
+<span class="math notranslate nohighlight">\(\bA = \bU \Sigma \bV^H\)</span>.
+Let <span class="math notranslate nohighlight">\(\sigma_1\)</span> be its largest singular value and
+<span class="math notranslate nohighlight">\(\sigma_n\)</span> be its smallest singular value.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{\sigma_1^2} \| \bx \|_2 \leq \| \left(\bA^H \bA \right)^{-1} \bx \|_2
+\leq \frac{1}{\sigma_n^2} \| \bx \|_2  \Forall \bx \in \FF^n.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From <a class="reference internal" href="#lem:mat:singular:full_column_rank_inverse_gram_matrix">Lemma 4.85</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\bG^{-1} = \left ( \bA^H \bA \right)^{-1} = \bV \Psi \bV^H
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi = \Diag \left(\frac{1}{\sigma_1^2}, \frac{1}{\sigma_2^2}, 
+    \dots, \frac{1}{\sigma_n^2} \right).
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \FF^n\)</span>. Let</p>
+<div class="math notranslate nohighlight">
+\[
+\bu = \bV^H \bx  \implies \| \bu \|_2 = \| \bx \|_2.
+\]</div>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+\bw = \Psi \bu.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bw \|_2^2 = \sum_{i=1}^n \left | \frac{1}{\sigma_i^2} u_i \right |^2.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{\sigma_1^2} \| \bu \|_2 
+\leq  \| \Psi \bu \|_2 
+= \|\bw \|_2 
+\leq \frac{1}{\sigma_n^2} \| \bu \|_2 .
+\]</div>
+<p>Finally</p>
+<div class="math notranslate nohighlight">
+\[
+\left (\bA^ H \bA \right)^{-1} \bx = \bV \Psi \bV^H \bx = \bV \bw.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\| \left (\bA^ H \bA \right)^{-1} \bx \|_2  = \|\bw \|_2.
+\]</div>
+<p>Substituting we get the result.</p>
+</div>
+</div>
+<div class="section" id="low-rank-approximation-of-a-matrix">
+<span id="sec-mat-low-rank-approximation"></span><h2><span class="section-number">4.11.5. </span>Low Rank Approximation of a Matrix<a class="headerlink" href="#low-rank-approximation-of-a-matrix" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def:mat:low_rank_matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.150 </span> (Low rank matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>An <span class="math notranslate nohighlight">\(m \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA\)</span> is called <em>low rank</em> if</p>
+<div class="math notranslate nohighlight">
+\[
+\Rank(\bA) \ll \min (m, n).
+\]</div>
+</div>
+</div><p>A matrix is low rank if the number of nonzero singular values
+for the matrix is much smaller than its dimensions.</p>
+<p>Following is a simple procedure for making a low rank approximation
+of a given matrix <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+<ul class="simple">
+<li><p>Perform the singular value decomposition of <span class="math notranslate nohighlight">\(\bA\)</span> given by
+<span class="math notranslate nohighlight">\(\bA = \bU \Sigma \bV^H\)</span>.</p></li>
+<li><p>Identify the singular values of <span class="math notranslate nohighlight">\(\bA\)</span> in <span class="math notranslate nohighlight">\(\Sigma\)</span>.</p></li>
+<li><p>Keep the first <span class="math notranslate nohighlight">\(r\)</span> singular values (where <span class="math notranslate nohighlight">\(r \ll \min(m, n)\)</span>
+is the rank of the approximation).</p></li>
+<li><p>Set all other singular values to 0 to obtain <span class="math notranslate nohighlight">\(\widehat{\Sigma}\)</span>.</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(\widehat{A} = U \widehat{\Sigma} V^H\)</span>.</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./la"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="evd.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4.10. </span>Eigen Values</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="important_spaces.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.12. </span>Important Vector Spaces</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,2583 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12.6. Dictionaries &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12.7. Compressive Sensing" href="compressive_sensing.html" />
+    <link rel="prev" title="12.5. Sparse and Redundant Representations" href="srr.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ssm/dictionaries.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fssm/dictionaries.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subdictionaries">
+   12.6.1. Subdictionaries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spark">
+   12.6.2. Spark
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spark-and-nullspace">
+     12.6.2.1. Spark and Nullspace
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uniqueness-spark">
+     12.6.2.2. Uniqueness-Spark
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coherence">
+   12.6.3. Coherence
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lower-bounds-for-spark">
+     12.6.3.1. Lower Bounds for Spark
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uniqueness-coherence">
+     12.6.3.2. Uniqueness-Coherence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#singular-values-of-subdictionaries">
+     12.6.3.3. Singular Values of Subdictionaries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#embeddings-using-subdictionaries">
+     12.6.3.4. Embeddings using Subdictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#babel-function">
+   12.6.4. Babel Function
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computation-of-babel-function">
+     12.6.4.1. Computation of Babel Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#babel-function-and-spark">
+     12.6.4.2. Babel Function and Spark
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#babel-function-and-singular-values">
+     12.6.4.3. Babel Function and Singular Values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#babel-function-and-gram-matrix-of-subdictionaries">
+     12.6.4.4. Babel Function and Gram Matrix of Subdictionaries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quasi-incoherent-dictionaries">
+     12.6.4.5. Quasi Incoherent Dictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Dictionaries</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subdictionaries">
+   12.6.1. Subdictionaries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spark">
+   12.6.2. Spark
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spark-and-nullspace">
+     12.6.2.1. Spark and Nullspace
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uniqueness-spark">
+     12.6.2.2. Uniqueness-Spark
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coherence">
+   12.6.3. Coherence
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lower-bounds-for-spark">
+     12.6.3.1. Lower Bounds for Spark
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uniqueness-coherence">
+     12.6.3.2. Uniqueness-Coherence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#singular-values-of-subdictionaries">
+     12.6.3.3. Singular Values of Subdictionaries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#embeddings-using-subdictionaries">
+     12.6.3.4. Embeddings using Subdictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#babel-function">
+   12.6.4. Babel Function
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computation-of-babel-function">
+     12.6.4.1. Computation of Babel Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#babel-function-and-spark">
+     12.6.4.2. Babel Function and Spark
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#babel-function-and-singular-values">
+     12.6.4.3. Babel Function and Singular Values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#babel-function-and-gram-matrix-of-subdictionaries">
+     12.6.4.4. Babel Function and Gram Matrix of Subdictionaries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quasi-incoherent-dictionaries">
+     12.6.4.5. Quasi Incoherent Dictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="dictionaries">
+<span id="sec-ssm-dictionaries"></span><h1><span class="section-number">12.6. </span>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h1>
+<p>In this section we review various properties associated with a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> which are
+useful in understanding the behavior and capabilities of a dictionary.</p>
+<div class="docutils">
+<p>We recall that a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> consists of a finite number of unit norm vectors in <span class="math notranslate nohighlight">\(\CC^N\)</span> called
+atoms  which span the signal space <span class="math notranslate nohighlight">\(\CC^N\)</span>.
+Atoms of the dictionary are indexed by an index set <span class="math notranslate nohighlight">\(\Omega\)</span>; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\bDDD = \{ \bd_{\omega} : \omega \in \Omega \}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(|\Omega| = D\)</span> and <span class="math notranslate nohighlight">\(N \leq D\)</span>
+with <span class="math notranslate nohighlight">\(\| d_{\omega} \|_2 = 1\)</span> for every atom.</p>
+<p>The vectors <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> can be represented by a synthesis matrix consisting of
+the atoms of <span class="math notranslate nohighlight">\(\bDDD\)</span> by a vector <span class="math notranslate nohighlight">\(\ba \in \CC^D\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \bDDD \ba.
+\]</div>
+<p>Note that we are using the same symbol <span class="math notranslate nohighlight">\(\bDDD\)</span> to represent the dictionary
+as a set of atoms as well as the corresponding synthesis matrix.
+We can write the matrix <span class="math notranslate nohighlight">\(\bDDD\)</span> consisting of its columns as</p>
+<div class="math notranslate nohighlight">
+\[
+\bDDD = 
+\begin{bmatrix}
+\bd_1 &amp; \dots &amp; \bd_D
+\end{bmatrix}
+\]</div>
+<p>This shouldn’t be causing any confusion.
+When we write the subscript as <span class="math notranslate nohighlight">\(\bd_{\omega}\)</span>
+where <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>
+we are referring to the atoms of the dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>
+indexed by the set <span class="math notranslate nohighlight">\(\Omega\)</span>, while
+when we write the subscript as <span class="math notranslate nohighlight">\(\bd_i\)</span>
+we are referring to a column of corresponding synthesis matrix.
+In this case, <span class="math notranslate nohighlight">\(\Omega\)</span> will simply mean
+the index set <span class="math notranslate nohighlight">\(\{ 1, \dots, D \}\)</span>.
+Obviously <span class="math notranslate nohighlight">\(|\Omega| = D\)</span> holds still.</p>
+<p>Often, we will be working with a subset of atoms in a dictionary.
+Usually such a subset
+of atoms will be indexed by an index set <span class="math notranslate nohighlight">\(\Lambda \subseteq \Omega\)</span>. <span class="math notranslate nohighlight">\(\Lambda\)</span> will take the form of
+<span class="math notranslate nohighlight">\(\Lambda \subseteq \{\omega_1, \dots, \omega_D\}\)</span> or
+<span class="math notranslate nohighlight">\(\Lambda \subseteq \{1, \dots, D\}\)</span> depending upon
+whether we are talking about
+the subset of atoms in the dictionary
+or a subset of columns from the corresponding
+synthesis matrix.</p>
+<p>Often we will need the notion of a subdictionary <span id="id1">[<a class="reference internal" href="../bib.html#id137" title="Joel A Tropp. Just relax: convex programming methods for identifying sparse signals in noise. Information Theory, IEEE Transactions on, 52(3):1030–1051, 2006.">37</a>]</span> described below.</p>
+</div>
+<div class="section" id="subdictionaries">
+<h2><span class="section-number">12.6.1. </span>Subdictionaries<a class="headerlink" href="#subdictionaries" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def:ssm:subdictionary">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Definition 12.15 </span> (Subdictionary)</p>
+<div class="definition-content section" id="proof-content">
+<p>A subdictionary is a linearly independent collection of atoms.
+Let <span class="math notranslate nohighlight">\(\Lambda \subset \{\omega_1, \dots, \omega_D\}\)</span>
+be the index set for the
+atoms in the subdictionary.
+We denote the subdictionary as <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>.
+We also use <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>
+to denote the corresponding matrix with
+<span class="math notranslate nohighlight">\(\Lambda \subset \{1, \dots, D\}\)</span>.</p>
+</div>
+</div><div class="proof remark admonition" id="res-ssm-subdictionary-rank">
+<p class="admonition-title"><span class="caption-number">Remark 12.5 </span> (Rank of subdictionary)</p>
+<div class="remark-content section" id="proof-content">
+<p>A subdictionary is full rank.</p>
+</div>
+</div><p>This is obvious since it is a collection of linearly independent atoms.</p>
+<p>For subdictionaries, often we will say
+<span class="math notranslate nohighlight">\(K = | \Lambda |\)</span> and
+<span class="math notranslate nohighlight">\(\bG = \bDDD_{\Lambda}^H \bDDD_{\Lambda}\)</span> as its
+Gram matrix.
+Sometimes, we will also be considering <span class="math notranslate nohighlight">\(\bG^{-1}\)</span>.
+<span class="math notranslate nohighlight">\(\bG^{-1}\)</span> has a useful interpretation
+in terms of the <em>dual vectors</em> for the atoms in
+<span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> <span id="id2">[<a class="reference internal" href="../bib.html#id133" title="Joel A Tropp. Just relax: convex programming methods for subset selection and sparse approximation. ICES report, 2004.">36</a>]</span>.</p>
+<div class="docutils">
+<p>Let <span class="math notranslate nohighlight">\(\{ \bd_{\lambda} \}_{\lambda \in \Lambda}\)</span>
+denote the atoms in <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>.
+Let <span class="math notranslate nohighlight">\(\{ \bc_{\lambda} \}_{\lambda \in \Lambda}\)</span>
+be chosen such that</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bd_{\lambda} , \bc_{\lambda} \rangle = 1
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bd_{\lambda} , \bc_{\omega} \rangle = 0
+\text { for } \lambda, \omega \in \Lambda, \lambda \neq \omega.
+\]</div>
+<p>Each dual vector <span class="math notranslate nohighlight">\(\bc_{\lambda}\)</span> is orthogonal to atoms in the subdictionary at different indices
+and is long enough so that
+its inner product with <span class="math notranslate nohighlight">\(\bd_{\lambda}\)</span> is one.
+The dual system somehow
+inverts the sub-dictionary.
+In fact the dual vectors are nothing but the columns of the
+matrix <span class="math notranslate nohighlight">\(\bB = (\bDDD_{\Lambda}^{\dag})^H\)</span>.
+Now, a simple calculation shows that:</p>
+<div class="math notranslate nohighlight">
+\[
+\bB^H \bB 
+= (\bDDD_{\Lambda}^{\dag}) (\bDDD_{\Lambda}^{\dag})^H 
+= (\bDDD_{\Lambda}^H \bDDD_{\Lambda})^{-1} \bDDD_{\Lambda}^H \bDDD_{\Lambda} (\bDDD_{\Lambda}^H \bDDD_{\Lambda})^{-1} 
+= (\bDDD_{\Lambda}^H \bDDD_{\Lambda})^{-1} = \bG^{-1}.
+\]</div>
+<p>Therefore, the inverse Gram matrix lists the inner products
+between the dual vectors.</p>
+<p>Sometimes we will be discussing tools
+which apply for general matrices. We will use
+the symbol <span class="math notranslate nohighlight">\(\Phi\)</span> for representing general matrices.
+Whenever the dictionary is
+an orthonormal basis, we will use the symbol <span class="math notranslate nohighlight">\(\Psi\)</span>.</p>
+</div>
+</div>
+<div class="section" id="spark">
+<span id="sec-ssm-spark"></span><h2><span class="section-number">12.6.2. </span>Spark<a class="headerlink" href="#spark" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def:spark">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Definition 12.16 </span> (Spark)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>spark</em> of a given matrix <span class="math notranslate nohighlight">\(\Phi\)</span>
+is the smallest number of columns of <span class="math notranslate nohighlight">\(\Phi\)</span> that
+are linearly dependent.
+If all columns are linearly independent, then
+the spark is defined to be number of columns plus one.</p>
+</div>
+</div><p>Note that the definition of spark applies to all matrices
+(wide, tall or square). It is not
+restricted to the synthesis matrices for a dictionary.</p>
+<p>Correspondingly, the spark of a dictionary is defined as the minimum number of atoms
+which are linearly dependent.</p>
+<p>We recall that <em>rank</em> of a matrix is defined as the maximum number of columns which
+are linearly independent.
+Definition of spark bears remarkable resemblance yet its very hard
+to obtain as it requires a combinatorial search over all possible
+subsets of columns of <span class="math notranslate nohighlight">\(\Phi\)</span>.</p>
+<div class="proof example admonition" id="ex-ssm-spark-1">
+<p class="admonition-title"><span class="caption-number">Example 12.21 </span> (Spark)</p>
+<div class="example-content section" id="proof-content">
+<ol>
+<li><p>Spark of the <span class="math notranslate nohighlight">\(3 \times 3\)</span> identity matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{pmatrix}
+        1 &amp; 0 &amp; 0\\
+        0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 1
+    \end{pmatrix}
+   \end{split}\]</div>
+<p>is 4 since all columns are linearly independent.</p>
+</li>
+<li><p>Spark of the <span class="math notranslate nohighlight">\(2 \times 4\)</span> matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{pmatrix}
+        1 &amp; 0 &amp; -1 &amp; 0\\
+        0 &amp; 1 &amp; 0 &amp; -1
+    \end{pmatrix}
+   \end{split}\]</div>
+<p>is 2 since column 1 and 3 are linearly dependent.</p>
+</li>
+<li><p>If a matrix has a column with all zero entries,
+then the spark of such a matrix is 1.
+This is a trivial case
+and we will not consider such matrices in the sequel.</p></li>
+<li><p>In general for an <span class="math notranslate nohighlight">\(N \times D\)</span> synthesis matrix,
+<span class="math notranslate nohighlight">\(\spark(\bDDD) \in [2, N+1]\)</span>.</p></li>
+</ol>
+</div>
+</div><p>A naive combinatorial algorithm to calculate the spark of a matrix is given below.</p>
+<div class="proof algorithm admonition" id="alg:ssm:spark_combinatorial_search">
+<p class="admonition-title"><span class="caption-number">Algorithm 12.1 </span> (A naive algorithm for computing the spark of a matrix)</p>
+<div class="algorithm-content section" id="proof-content">
+<p>Inputs:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Phi\)</span>: a matrix</p></li>
+</ol>
+<p>Outputs:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(s\)</span>: Spark of <span class="math notranslate nohighlight">\(\Phi\)</span></p></li>
+</ol>
+<p>Algorithm:</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(R \leftarrow \rank (\Phi)\)</span>.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(j  \leftarrow 1,\dots, R\)</span>:</p>
+<ol class="simple">
+<li><p>Identify <span class="math notranslate nohighlight">\(\binom{D}{j}\)</span> ways of choosing <span class="math notranslate nohighlight">\(j\)</span> columns
+from <span class="math notranslate nohighlight">\(D\)</span> columns of <span class="math notranslate nohighlight">\(\Phi\)</span>.</p></li>
+<li><p>For every choice of <span class="math notranslate nohighlight">\(j\)</span> columns:</p>
+<ol class="simple">
+<li><p>If columns are linearly dependent:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(s \leftarrow j\)</span>.</p></li>
+<li><p>Return.</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>All columns are linearly independent.</p></li>
+<li><p><span class="math notranslate nohighlight">\(s \leftarrow R  + 1\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="section" id="spark-and-nullspace">
+<h3><span class="section-number">12.6.2.1. </span>Spark and Nullspace<a class="headerlink" href="#spark-and-nullspace" title="Permalink to this headline">¶</a></h3>
+<div class="proof remark admonition" id="res-ssm-spark-nullspace-vec-sparsity">
+<p class="admonition-title"><span class="caption-number">Remark 12.6 </span> (Spark and sparsity of null space vectors)</p>
+<div class="remark-content section" id="proof-content">
+<p>The <span class="math notranslate nohighlight">\(\ell_0\)</span>-“norm” of vectors belonging to null space of a matrix
+<span class="math notranslate nohighlight">\(\Phi\)</span> is greater than or equal to <span class="math notranslate nohighlight">\(\spark(\Phi)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_0 \geq \spark(\Phi) \Forall \bx \in \NullSpace(\Phi).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(\bx \in \NullSpace(\Phi)\)</span> then <span class="math notranslate nohighlight">\(\Phi \bx = \bzero\)</span>.</p></li>
+<li><p>Thus non-zero entries in <span class="math notranslate nohighlight">\(\bx\)</span> pick a set of columns in <span class="math notranslate nohighlight">\(\Phi\)</span>
+which are linearly dependent.</p></li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(\| \bx \|_0\)</span> indicates the number of columns in the set which are
+linearly dependent.</p></li>
+<li><p>By definition, spark of <span class="math notranslate nohighlight">\(\Phi\)</span> indicates the minimum number of columns
+which are linearly dependent.</p></li>
+<li><p>Hence the result:</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx \|_0 \geq \spark(\Phi) \Forall \bx\in \NullSpace(\Phi).
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="uniqueness-spark">
+<h3><span class="section-number">12.6.2.2. </span>Uniqueness-Spark<a class="headerlink" href="#uniqueness-spark" title="Permalink to this headline">¶</a></h3>
+<p>Spark is useful in characterizing the uniqueness of the solution
+of a <span class="math notranslate nohighlight">\((\bDDD, K)\)</span>-EXACT-SPARSE problem (see <a class="reference internal" href="srr.html#def-ssm-d-k-exact-sparse-problem">Definition 12.7</a>).
+We now present a criteria based on spark which characterizes
+the uniqueness of a sparse solution to the problem <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span>.</p>
+<div class="proof theorem admonition" id="thm:ssm:uniqueness_spark">
+<p class="admonition-title"><span class="caption-number">Theorem 12.22 </span> (Uniqueness of a sparse solution for an underdetermined system via spark)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Consider a solution <span class="math notranslate nohighlight">\(\bx^*\)</span> to the underdetermined system
+<span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span>.
+If <span class="math notranslate nohighlight">\(\bx^*\)</span> obeys</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx^* \|_0 &lt; \frac{\spark(\Phi)}{2}
+\]</div>
+<p>then it is necessarily the sparsest solution.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bx'\)</span> be some other solution to the problem. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi \bx' = \Phi \bx^* 
+\implies \Phi (\bx' - \bx^*)  = \bzero 
+\implies (\bx' - \bx^*) \in \NullSpace(\Phi).
+\]</div>
+<p>Due to <a class="reference internal" href="#res-ssm-spark-nullspace-vec-sparsity">Remark 12.6</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx' - \bx^* \|_0 \geq \spark(\Phi).
+\]</div>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx' \|_0 + \| \bx^* \|_0 \geq \| \bx' - \bx^* \|_0 \geq \spark(\Phi).
+\]</div>
+<p>Hence, if <span class="math notranslate nohighlight">\(\| \bx^* \|_0 &lt; \frac{\spark(\Phi)}{2}\)</span>, then we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx' \|_0  &gt; \frac{\spark(\Phi)}{2}
+\]</div>
+<p>for any other solution <span class="math notranslate nohighlight">\(\bx'\)</span> to the equation <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span>.
+Thus <span class="math notranslate nohighlight">\(\bx^*\)</span> is necessarily the sparsest possible solution.</p>
+</div>
+<p>This result is quite useful as it establishes a global optimality criterion for the
+<span class="math notranslate nohighlight">\((\bDDD, K)\)</span>-EXACT-SPARSE problem.</p>
+<p>As long as <span class="math notranslate nohighlight">\(K &lt; \frac{1}{2}\spark(\Phi)\)</span> this theorem guarantees that
+the solution to  <span class="math notranslate nohighlight">\((\bDDD, K)\)</span>-EXACT-SPARSE problem
+is unique.
+This is quite surprising result for a non-convex combinatorial optimization
+problem.
+We are able to guarantee a global uniqueness for the solution based
+on a simple check on the sparsity of the solution.</p>
+<p>Note that we are only saying that if a sufficiently sparse solution is found
+then it is unique.
+We are not claiming that it is possible to find such a solution.</p>
+<p>Obviously, the larger the spark, we can guarantee uniqueness for signals
+with higher sparsity levels.
+So a natural question is:
+<em>How large can spark of a dictionary be</em>?
+We consider few examples.</p>
+<div class="proof example admonition" id="ex-ssm-spark-gaussian">
+<p class="admonition-title"><span class="caption-number">Example 12.22 </span> (Spark of Gaussian dictionaries)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> whose atoms <span class="math notranslate nohighlight">\(\bd_{i}\)</span> are random vectors
+independently drawn from normal distribution.</p>
+<ol class="simple">
+<li><p>Since a dictionary requires all its atoms to be unit-norms,
+hence we divide the each of the random vectors with their norms.</p></li>
+<li><p>We know that with probability <span class="math notranslate nohighlight">\(1\)</span> any set of <span class="math notranslate nohighlight">\(N\)</span> independent Gaussian random vectors
+is linearly independent.</p></li>
+<li><p>Also, since <span class="math notranslate nohighlight">\(\bd_i \in \RR^N\)</span> hence a set of <span class="math notranslate nohighlight">\(N+1\)</span> atoms is always linearly dependent.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\spark(\bDDD) = N +1\)</span>.</p></li>
+</ol>
+<p>Thus, if a solution to EXACT-SPARSE problem contains <span class="math notranslate nohighlight">\(\frac{N}{2}\)</span> or fewer non-zero
+entries then it is necessarily unique with probability 1.</p>
+</div>
+</div><div class="proof example admonition" id="ex-ssm-spark-dirac-fourier">
+<p class="admonition-title"><span class="caption-number">Example 12.23 </span> (Spark of Dirac Fourier basis)</p>
+<div class="example-content section" id="proof-content">
+<p>For</p>
+<div class="math notranslate nohighlight">
+\[
+\bDDD = \begin{bmatrix} \bI  &amp; \bF \end{bmatrix} \in \CC^{N \times 2N} 
+\]</div>
+<p>it can be shown that</p>
+<div class="math notranslate nohighlight">
+\[
+\spark(\bDDD) = 2 \sqrt{N}.
+\]</div>
+<p>In this case, the sparsity level of a unique solution must be less than <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>.</p>
+</div>
+</div></div>
+</div>
+<div class="section" id="coherence">
+<h2><span class="section-number">12.6.3. </span>Coherence<a class="headerlink" href="#coherence" title="Permalink to this headline">¶</a></h2>
+<p>Finding out the spark of a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> is NP-hard since it involves considering combinatorially
+large number of selections of columns from <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+In this section we consider
+the <em>coherence</em> of a dictionary which is computationally tractable and quite useful
+in characterizing the solutions of sparse approximation problems.</p>
+<div class="proof definition admonition" id="def:ssm:coherence">
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Definition 12.17 </span> (Coherence of a dictionary)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>coherence</em> of a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> is defined as
+the maximum absolute inner product between two distinct atoms in the dictionary:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu = \underset{j \neq k}{\max} | \langle \bd_{\omega_j}, \bd_{\omega_k} \rangle |
+= \underset{j \neq k}{\max} | (\bDDD^H \bDDD)_{j k} |.
+\]</div>
+</div>
+</div><p>If the dictionary consists of two orthonormal bases,
+then coherence is also known as <em>mutual coherence</em>
+or <em>proximity</em>; see <a class="reference internal" href="onb_sparsity.html#def-ssm-mutual-coherence-two-ortho-bases">Definition 12.1</a>.</p>
+<p>We note that <span class="math notranslate nohighlight">\(d_{\omega_i}\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>-th column of synthesis matrix <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+Also <span class="math notranslate nohighlight">\(\bDDD^H \bDDD\)</span> is the <em>Gram matrix</em> for <span class="math notranslate nohighlight">\(\bDDD\)</span> whose elements are nothing
+but the inner-products of columns of <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p>
+<div class="docutils">
+<p>We note that by definition <span class="math notranslate nohighlight">\(\| d_{\omega} \|_2 = 1\)</span> hence
+<span class="math notranslate nohighlight">\(\mu \leq 1\)</span> and since absolute values are considered hence <span class="math notranslate nohighlight">\(\mu \geq 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(0 \leq \mu \leq 1\)</span>.</p>
+<p>For an orthonormal basis <span class="math notranslate nohighlight">\(\Psi\)</span> all atoms are orthogonal to each other, hence</p>
+<div class="math notranslate nohighlight">
+\[
+| \langle \psi_{\omega_j}, \psi_{\omega_k} \rangle |= 0 \text{ whenever } j \neq k.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\mu = 0\)</span> for an orthonormal basis.</p>
+<p>In the following, we will use the notation <span class="math notranslate nohighlight">\(|\bA|\)</span> to denote a matrix consisting
+of absolute values of entries in a matrix <span class="math notranslate nohighlight">\(\bA\)</span>; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+|  \bA |_{i j}  = |  \bA _{i j} |.
+\]</div>
+<p>The off-diagonal entries of the Gram matrix are captured by the
+matrix <span class="math notranslate nohighlight">\(\bDDD^H \bDDD - I\)</span>.
+Note that all diagonal entries in <span class="math notranslate nohighlight">\(\bDDD^H \bDDD - I\)</span>
+are zero since atoms of <span class="math notranslate nohighlight">\(\bDDD\)</span> are unit norm.
+Moreover, each of the entries in <span class="math notranslate nohighlight">\( | \bDDD^H \bDDD - I |\)</span>
+is dominated by <span class="math notranslate nohighlight">\(\mu(\bDDD)\)</span>.</p>
+<p>The inner product between any two atoms
+<span class="math notranslate nohighlight">\(| \langle \bd_{\omega_j}, \bd_{\omega_k} \rangle |\)</span>
+is a measure of how much they look alike or how much they are correlated.
+Coherence just picks up the two vectors
+which are most alike and returns their correlation.
+In a way <span class="math notranslate nohighlight">\(\mu\)</span> is quite a blunt measure of the quality of a dictionary,
+yet it is quite useful.</p>
+<p>If a dictionary is uniform in the sense that there is not much variation in
+<span class="math notranslate nohighlight">\(| \langle \bd_{\omega_j}, \bd_{\omega_k} \rangle |\)</span>, then <span class="math notranslate nohighlight">\(\mu\)</span> captures
+the behavior of the dictionary quite well.</p>
+</div>
+<div class="proof definition admonition" id="def:ssm:incoherent_dictionary">
+<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Definition 12.18 </span> (Incoherent dictionary)</p>
+<div class="definition-content section" id="proof-content">
+<p>We say that a dictionary is <em>incoherent</em> if the coherence of the dictionary is small.</p>
+</div>
+</div><p>We are looking for dictionaries which are incoherent. In the sequel we will see how
+incoherence plays a role in sparse approximation.</p>
+<div class="proof example admonition" id="ex-ssm-coherence-2-onb-2">
+<p class="admonition-title"><span class="caption-number">Example 12.24 </span> (Coherence of two ortho bases)</p>
+<div class="example-content section" id="proof-content">
+<p>We established in <a class="reference internal" href="onb_sparsity.html#res-ssm-2-onb-coherence-bounds">Theorem 12.3</a> that
+coherence of two ortho-bases is bounded by</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{\sqrt{N}} \leq \mu \leq 1.
+\]</div>
+<p>In particular we showed in <a class="reference internal" href="onb_sparsity.html#res-ssm-coherence-dirac-fourier">Theorem 12.4</a> that
+coherence of Dirac Fourier basis is <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{N}}\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="ex-ssm-coherence-multi-onb">
+<p class="admonition-title"><span class="caption-number">Example 12.25 </span> (Coherence: Multi-ONB dictionary)</p>
+<div class="example-content section" id="proof-content">
+<p>A dictionary of concatenated orthonormal bases is called a multi-ONB.
+For some <span class="math notranslate nohighlight">\(N\)</span>, it is
+possible to build a multi-ONB which contains <span class="math notranslate nohighlight">\(N\)</span> or even <span class="math notranslate nohighlight">\(N+1\)</span> bases yet retains
+the minimal coherence <span class="math notranslate nohighlight">\(\mu = \frac{1}{\sqrt{N}}\)</span> possible.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-ssm-coherence-lb">
+<p class="admonition-title"><span class="caption-number">Theorem 12.23 </span> (Coherence lower bound)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A lower bound on the coherence of a general dictionary is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\mu \geq \sqrt{\frac{D-N}{N(D-1)}}.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def:ssm:grassmannian_frame">
+<span id="index-4"></span><p class="admonition-title"><span class="caption-number">Definition 12.19 </span> (Grassmannian frame)</p>
+<div class="definition-content section" id="proof-content">
+<p>If each atomic inner product meets this bound,
+the dictionary is  called an <em>optimal Grassmannian frame</em>.</p>
+</div>
+</div><p>The definition of coherence can be extended to arbitrary matrices
+<span class="math notranslate nohighlight">\(\Phi \in \CC^{N \times D}\)</span>.</p>
+<div class="proof definition admonition" id="def:ssm:coherence_matrix">
+<span id="index-5"></span><p class="admonition-title"><span class="caption-number">Definition 12.20 </span> (Coherence for arbitrary matrices)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>coherence</em> of a matrix <span class="math notranslate nohighlight">\(\Phi \in \CC^{N \times D}\)</span> is defined as
+the maximum absolute <em>normalized</em> inner product between
+two distinct columns in the matrix.
+Let</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi = \begin{bmatrix} \phi_1 &amp; \phi_2 &amp; \dots &amp; \phi_D \end{bmatrix}.
+\]</div>
+<p>Then coherence of <span class="math notranslate nohighlight">\(\Phi\)</span> is given by</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-dict-coherence-arbitrary-matrix">
+<span class="eqno">(12.31)<a class="headerlink" href="#equation-eq-ssm-dict-coherence-arbitrary-matrix" title="Permalink to this equation">¶</a></span>\[\mu(\Phi) = \underset{j \neq k}{\text{max}} \frac{ | \langle \phi_j, \phi_k \rangle |} {\| \phi_j \|_2  \| \phi_k \|_2}\]</div>
+<p>It is assumed that none of the columns in <span class="math notranslate nohighlight">\(\Phi\)</span> is a zero vector.</p>
+</div>
+</div><div class="section" id="lower-bounds-for-spark">
+<h3><span class="section-number">12.6.3.1. </span>Lower Bounds for Spark<a class="headerlink" href="#lower-bounds-for-spark" title="Permalink to this headline">¶</a></h3>
+<p>Coherence of a matrix is easy to compute.
+More interestingly it also provides a lower bound on the
+spark of a matrix.</p>
+<div class="proof theorem admonition" id="lem:ssm:spark_lower_bound_coherence">
+<p class="admonition-title"><span class="caption-number">Theorem 12.24 </span> (Lower bound on spark in terms of coherence)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For any matrix <span class="math notranslate nohighlight">\(\Phi \in \CC^{N \times D}\)</span> (with non-zero columns)
+the following relationship holds</p>
+<div class="math notranslate nohighlight">
+\[
+\spark(\Phi) \geq 1 + \frac{1}{\mu(\Phi)}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that scaling of a column of <span class="math notranslate nohighlight">\(\Phi\)</span> doesn’t change either the spark
+or coherence of <span class="math notranslate nohighlight">\(\Phi\)</span>.
+Therefore, we assume that the columns of <span class="math notranslate nohighlight">\(\Phi\)</span> are normalized.</p>
+<ol>
+<li><p>We now construct the Gram matrix of <span class="math notranslate nohighlight">\(\Phi\)</span> given by <span class="math notranslate nohighlight">\(\bG = \Phi^H \Phi\)</span>.</p></li>
+<li><p>We note that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bG_{k k} = 1 \quad  \Forall 1 \leq k \leq D
+   \]</div>
+<p>since each column of <span class="math notranslate nohighlight">\(\Phi\)</span> is unit norm.</p>
+</li>
+<li><p>Also</p>
+<div class="math notranslate nohighlight">
+\[
+   |G_{k j}| \leq \mu(\Phi)  \quad \Forall 1 \leq k, j \leq D , k \neq j.
+   \]</div>
+</li>
+<li><p>Consider any <span class="math notranslate nohighlight">\(p\)</span> columns from <span class="math notranslate nohighlight">\(\Phi\)</span> and construct its Gram matrix.</p></li>
+<li><p>This is nothing but a leading minor of size <span class="math notranslate nohighlight">\(p \times p\)</span> from the matrix <span class="math notranslate nohighlight">\(\bG\)</span>.</p></li>
+<li><p>From the Gershgorin disk theorem, if this minor is diagonally dominant, i.e. if</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{j \neq i} |G_{i j}| &lt; | G_{i i}| \Forall i
+   \]</div>
+<p>then this sub-matrix of <span class="math notranslate nohighlight">\(\bG\)</span> is positive definite and
+so corresponding <span class="math notranslate nohighlight">\(p\)</span> columns from <span class="math notranslate nohighlight">\(\Phi\)</span> are linearly independent.</p>
+</li>
+<li><p>But</p>
+<div class="math notranslate nohighlight">
+\[
+   |G_{i i}| = 1
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{j \neq i} |G_{i j}| \leq (p-1) \mu(\Phi) 
+   \]</div>
+<p>for the minor under consideration.</p>
+</li>
+<li><p>Hence for <span class="math notranslate nohighlight">\(p\)</span> columns to be linearly independent
+the following condition is sufficient</p>
+<div class="math notranslate nohighlight">
+\[
+    (p-1) \mu (\Phi) &lt; 1.
+   \]</div>
+</li>
+<li><p>Thus if</p>
+<div class="math notranslate nohighlight">
+\[
+    p &lt; 1 + \frac{1}{\mu(\Phi)},
+   \]</div>
+<p>then every set of <span class="math notranslate nohighlight">\(p\)</span> columns from <span class="math notranslate nohighlight">\(\Phi\)</span> is linearly independent.</p>
+</li>
+<li><p>Hence, the smallest possible set of linearly dependent columns must satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+   p \geq 1 + \frac{1}{\mu(\Phi)}.
+   \]</div>
+</li>
+<li><p>This establishes the lower bound that</p>
+<div class="math notranslate nohighlight">
+\[
+    \spark(\Phi) \geq 1 + \frac{1}{\mu(\Phi)}.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>This bound on spark doesn’t make any assumptions on the structure of the dictionary.
+In fact, imposing additional structure on the dictionary can give better bounds.
+Let us look at an example for a two ortho-basis  <span id="id3">[<a class="reference internal" href="../bib.html#id57" title="David L Donoho and Michael Elad. Optimally sparse representation in general (nonorthogonal) dictionaries via $l_1$ minimization. Proceedings of the National Academy of Sciences, 100(5):2197–2202, 2003.">18</a>]</span>.</p>
+<div class="proof theorem admonition" id="res:ssm:spark_lower_bound_two_ortho_basis">
+<p class="admonition-title"><span class="caption-number">Theorem 12.25 </span> (Lower bound on spark for two ortho bases)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bDDD\)</span> be a two ortho-basis. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\spark (\bDDD) \geq \frac{2}{\mu(\bDDD)}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From <a class="reference internal" href="onb_sparsity.html#res-ssm-2onb-nullspace-vec-sparsity">Theorem 12.6</a> we know that for any
+vector <span class="math notranslate nohighlight">\(\bv \in \NullSpace(\bDDD)\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_0 \geq \frac{2}{\mu(\bDDD)}.
+\]</div>
+<p>But</p>
+<div class="math notranslate nohighlight">
+\[
+\spark(\bDDD) = \underset{\bv \in \NullSpace(\bDDD)} {\min}( \| \bv \|_0).
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\spark(\bDDD) \geq \frac{2}{\mu(\bDDD)}.
+\]</div>
+</div>
+<p>For maximally incoherent two orthonormal bases, we know that <span class="math notranslate nohighlight">\(\mu = \frac{1}{\sqrt{N}}\)</span>.
+A perfect example is the pair of Dirac and Fourier bases. In this case
+<span class="math notranslate nohighlight">\(\spark(\bDDD) \geq 2 \sqrt{N}\)</span>.</p>
+</div>
+<div class="section" id="uniqueness-coherence">
+<h3><span class="section-number">12.6.3.2. </span>Uniqueness-Coherence<a class="headerlink" href="#uniqueness-coherence" title="Permalink to this headline">¶</a></h3>
+<p>We can now establish a uniqueness condition for sparse solution of <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span>.</p>
+<div class="proof theorem admonition" id="thm:ssm:uniqueness_coherence">
+<p class="admonition-title"><span class="caption-number">Theorem 12.26 </span> (Uniqueness of a sparse solution of an underdetermined system via coherence)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Consider a solution <span class="math notranslate nohighlight">\(\bx^*\)</span> to the under-determined system <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span>.
+If <span class="math notranslate nohighlight">\(\bx^*\)</span> obeys</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx^* \|_0 &lt; \frac{1}{2} \left (1 + \frac{1}{\mu(\Phi)} \right )
+\]</div>
+<p>then it is necessarily the sparsest solution.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is a straightforward application of <a class="reference internal" href="#thm:ssm:uniqueness_spark">Theorem 12.22</a>
+and <a class="reference internal" href="#lem:ssm:spark_lower_bound_coherence">Theorem 12.24</a>.</p>
+</div>
+<p>It is interesting to compare the two uniqueness theorems:
+<a class="reference internal" href="#thm:ssm:uniqueness_spark">Theorem 12.22</a>
+and <a class="reference internal" href="#thm:ssm:uniqueness_coherence">Theorem 12.26</a>.</p>
+<p><a class="reference internal" href="#thm:ssm:uniqueness_spark">Theorem 12.22</a> uses spark, is sharp and is far more powerful
+than <a class="reference internal" href="#thm:ssm:uniqueness_coherence">Theorem 12.26</a>.</p>
+<div class="docutils">
+<p>Coherence can never be smaller than <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{N}}\)</span>, therefore the bound on
+<span class="math notranslate nohighlight">\(\| \bx^* \|_0\)</span> in  <a class="reference internal" href="#thm:ssm:uniqueness_coherence">Theorem 12.26</a> can never be larger than
+<span class="math notranslate nohighlight">\(\frac{\sqrt{N} + 1}{2}\)</span>.</p>
+<p>However, spark can be easily as large as <span class="math notranslate nohighlight">\(N\)</span> and then bound on <span class="math notranslate nohighlight">\(\| \bx^* \|_0\)</span> can
+be as large as <span class="math notranslate nohighlight">\(\frac{N}{2}\)</span>.</p>
+<p>We recall from <a class="reference internal" href="onb_sparsity.html#res-ssm-sparse-unique-2onb">Theorem 12.8</a> that the bound for
+sparsity level of sparest solution in two-ortho basis
+<span class="math notranslate nohighlight">\(\Eta = \begin{bmatrix}\Psi &amp; \Chi \end{bmatrix}\)</span>  is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx^* \|_0 &lt; \frac{1}{\mu(\Eta)}
+\]</div>
+<p>which is a larger bound than <a class="reference internal" href="#thm:ssm:uniqueness_coherence">Theorem 12.26</a>
+for general dictionaries by a factor of 2.</p>
+<p>Thus, we note that coherence gives a weaker bound than spark for
+supportable sparsity levels
+of unique solutions.
+The advantage that coherence has is that it is easily computable and
+doesn’t require any special structure on the dictionary (two ortho basis has a special structure).</p>
+</div>
+</div>
+<div class="section" id="singular-values-of-subdictionaries">
+<h3><span class="section-number">12.6.3.3. </span>Singular Values of Subdictionaries<a class="headerlink" href="#singular-values-of-subdictionaries" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res:ssm:subdictionary_eigenvalue_coherence">
+<p class="admonition-title"><span class="caption-number">Theorem 12.27 </span> (Singular values of subdictionaries and coherence)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bDDD\)</span> be a dictionary and <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> be a subdictionary.
+Let <span class="math notranslate nohighlight">\(\mu\)</span> be the coherence of <span class="math notranslate nohighlight">\(\bDDD\)</span>. Let <span class="math notranslate nohighlight">\(K = | \Lambda |\)</span>.
+Then
+the eigen values of <span class="math notranslate nohighlight">\(\bG = \bDDD_{\Lambda}^H \bDDD_{\Lambda}\)</span> satisfy:</p>
+<div class="math notranslate nohighlight">
+\[
+1 - (K - 1)   \mu  \leq \lambda \leq 1 + (K - 1)   \mu.
+\]</div>
+<p>Moreover, the singular values of the sub-dictionary <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{1 - (K - 1)   \mu}  \leq \sigma (\bDDD_{\Lambda}) \leq \sqrt{1 + (K - 1)   \mu}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We recall from Gershgorin’s circle theorem that for
+any square matrix <span class="math notranslate nohighlight">\(\bA \in \CC^{K \times K}\)</span>,
+every eigen value <span class="math notranslate nohighlight">\(\lambda\)</span> of <span class="math notranslate nohighlight">\(\bA\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+| \lambda  - a_{ii} | 
+\leq \sum_{j \neq i} |a_{i j}| \text{ for some } i \in \{ 1, \dots, K\}.
+\]</div>
+<ol>
+<li><p>Now consider the matrix <span class="math notranslate nohighlight">\(\bG =  \bDDD_{\Lambda}^H \bDDD_{\Lambda}\)</span>
+with diagonal elements equal to 1
+and off diagonal elements bounded by the coherence <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    | \lambda  - 1 | \leq \sum_{j \neq i} |G_{i j}|  \leq \sum_{j \neq i} \mu = (K - 1) \mu.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    - (K - 1) \mu  
+    \leq \lambda  - 1 \leq (K - 1) \mu \iff  1 - (K - 1)   \mu  
+    \leq \lambda \leq 1 + (K - 1)   \mu.
+   \]</div>
+</li>
+<li><p>This gives us a lower bound on the smallest eigen value.</p>
+<div class="math notranslate nohighlight">
+\[
+    \lambda_{\min} (\bG) \geq 1 - (K - 1) \mu.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bG\)</span> is positive definite (<span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> is full-rank),
+hence its eigen values
+are positive. Thus, the above lower bound is useful only if</p>
+<div class="math notranslate nohighlight">
+\[
+   1 - (K - 1) \mu &gt; 0 \iff 1 &gt;  (K - 1) \mu \iff \mu &lt; \frac{1}{K - 1}.
+   \]</div>
+</li>
+<li><p>We also get an upper bound on the eigen values of <span class="math notranslate nohighlight">\(\bG\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \lambda_{\max} (G) \leq 1 + (K - 1) \mu.
+   \]</div>
+</li>
+<li><p>The bounds on singular values of <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> are obtained as a
+straight-forward extension by taking square roots on the expressions.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="embeddings-using-subdictionaries">
+<h3><span class="section-number">12.6.3.4. </span>Embeddings using Subdictionaries<a class="headerlink" href="#embeddings-using-subdictionaries" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res:ssm:real_dict_norm_bound_coherence">
+<p class="admonition-title"><span class="caption-number">Theorem 12.28 </span> (Norm bounds for embeddings with real dictionaries)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bDDD\)</span> be a real dictionary and <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> be a subdictionary
+with <span class="math notranslate nohighlight">\(K = |\Lambda|\)</span>.
+Let <span class="math notranslate nohighlight">\(\mu\)</span> be the coherence of <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+Let <span class="math notranslate nohighlight">\(\bv \in \RR^K\)</span> be an
+arbitrary vector.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+| \bv |^T [I - \mu (\OneMat - I)] | \bv | 
+\leq \| \bDDD_{\Lambda} \bv \|_2^2 
+\leq | \bv |^T [I + \mu (\OneMat - I)] | \bv |
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\OneMat\)</span> is a <span class="math notranslate nohighlight">\(K\times K\)</span> matrix of all ones.
+Moreover</p>
+<div class="math notranslate nohighlight">
+\[
+(1 - (K - 1)   \mu) \| \bv \|_2^2 
+\leq \| \bDDD_{\Lambda} \bv \|_2^2 
+\leq (1 + (K - 1)   \mu)\| \bv \|_2^2. 
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We can see that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bDDD_{\Lambda} \bv \|_2^2 =  \bv^T \bDDD_{\Lambda}^T \bDDD_{\Lambda} \bv.
+\]</div>
+<ol>
+<li><p>Expanding we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \bv^T \bDDD_{\Lambda}^T \bDDD_{\Lambda} \bv 
+    = \sum_{i=1}^K \sum_{j=1}^K v_i  \bd_{\lambda_i}^T \bd_{\lambda_j} v_j.
+   \]</div>
+</li>
+<li><p>The terms in the R.H.S. for <span class="math notranslate nohighlight">\(i = j\)</span> are given by</p>
+<div class="math notranslate nohighlight">
+\[
+    v_i  \bd_{\lambda_i}^T \bd_{\lambda_i} v_i  = | v_i |^2. 
+   \]</div>
+</li>
+<li><p>Summing over <span class="math notranslate nohighlight">\(i = 1, \dots, K\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{i=1}^K | v_i |^2 = \| \bv \|_2^2 = \bv^T \bv 
+    = | \bv |^T | \bv | = | \bv |^T \bI | \bv |.
+   \]</div>
+</li>
+<li><p>We are now left with <span class="math notranslate nohighlight">\(K^2 - K\)</span> off diagonal terms.</p></li>
+<li><p>Each of these terms is bounded by</p>
+<div class="math notranslate nohighlight">
+\[
+    - \mu |v_i| |v_j | 
+    \leq v_i \bd_{\lambda_i}^T \bd_{\lambda_j} v_j \leq \mu |v_i| |v_j |.
+   \]</div>
+</li>
+<li><p>Summing over the <span class="math notranslate nohighlight">\(K^2 - K\)</span> off-diagonal terms we get:</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i \neq j}  |v_i| |v_j | 
+   = \sum_{i, j}  |v_i| |v_j | - \sum_{i = j}  |v_i| |v_j | 
+   =  | \bv |^T(\OneMat - \bI ) | \bv |. 
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+     - \mu | \bv |^T (\OneMat - \bI ) | \bv | \leq 
+     \sum_{i \neq j} v_i  \bd_{\lambda_i}^T \bd_{\lambda_j} v_j 
+     \leq  \mu | \bv |^T (\OneMat - \bI ) | \bv |.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    | \bv |^T \bI | \bv |- \mu | \bv |^T (\OneMat - \bI ) | \bv | 
+    \leq \bv^T \bDDD_{\Lambda}^T \bDDD_{\Lambda} \bv
+    \leq | \bv |^T \bI | \bv |+ \mu | \bv |^T (\OneMat - \bI )| \bv |.
+   \]</div>
+</li>
+<li><p>We get the result by slight reordering of terms:</p>
+<div class="math notranslate nohighlight">
+\[
+    | \bv |^T [\bI - \mu (\OneMat - \bI)] | \bv | 
+    \leq \| \bDDD_{\Lambda} \bv \|_2^2 
+    \leq | \bv |^T [\bI + \mu (\OneMat - \bI)] | \bv |.
+   \]</div>
+</li>
+<li><p>We note that due to <a class="reference internal" href="srr.html#res:ssm:ones_matrix_l1_norm">Theorem 12.14</a></p>
+<div class="math notranslate nohighlight">
+\[
+    | \bv |^T \OneMat | \bv | =  \| \bv \|_1^2.
+   \]</div>
+</li>
+<li><p>Thus, the inequalities can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+    (1 + \mu) \|\bv \|_2^2 - \mu \| \bv \|_1^2 
+    \leq \| \bDDD_{\Lambda} \bv \|_2^2 
+    \leq (1 - \mu) \| \bv \|_2^2 + \mu \| \bv \|_1^2.
+   \]</div>
+</li>
+<li><p>Alternatively,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bv \|_2^2  - \mu \left (\| \bv \|_1^2 - \| \bv \|_2^2 \right ) 
+    \leq \| \bDDD_{\Lambda} \bv \|_2^2 
+    \leq 
+    \| \bv \|_2^2  + \mu \left (\| \bv \|_1^2 - \| \bv \|_2^2\right ) .
+   \]</div>
+</li>
+<li><p>Finally, due to <a class="reference internal" href="srr.html#lem:ssm:l1_norm_l2_bounds">Theorem 12.10</a></p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bv \|_1^2 \leq K \| \bv \|_2^2 
+    \implies \| \bv \|_1^2 - \| \bv \|_2^2 \leq (K - 1) \| \bv \|_2^2.
+   \]</div>
+</li>
+<li><p>This gives  us</p>
+<div class="math notranslate nohighlight">
+\[
+    ( 1- (K - 1) \mu ) \| \bv \|_2^2 
+    \leq \| \bDDD_{\Lambda} \bv \|_2^2 
+    \leq ( 1 + (K - 1) \mu ) \| \bv \|_2^2 .
+   \]</div>
+</li>
+</ol>
+</div>
+<p>We now present the above theorem for the complex case. The proof is
+based on singular values. This proof is simpler and more general
+than the one presented above.</p>
+<div class="proof theorem admonition" id="res:ssm:subdict_norm_bound_coherence">
+<p class="admonition-title"><span class="caption-number">Theorem 12.29 </span> (Norm bounds for embeddings with complex dictionaries)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bDDD\)</span> be a dictionary and <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> be a sub-dictionary
+with <span class="math notranslate nohighlight">\(K = |\Lambda|\)</span>.
+Let <span class="math notranslate nohighlight">\(\mu\)</span> be the coherence of <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+Let <span class="math notranslate nohighlight">\(\bv \in \CC^K\)</span> be an
+arbitrary vector.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+(1 - (K - 1)   \mu) \| \bv \|_2^2 
+\leq \| \bDDD_{\Lambda} \bv \|_2^2 
+\leq (1 + (K - 1)   \mu)\| \bv \|_2^2. 
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Recall that</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{\min}^2(\bDDD_{\Lambda}) \| \bv \|_2^2  
+\leq \| \bDDD_{\Lambda} \bv \|_2^2 \leq 
+\sigma_{\max}^2(\bDDD_{\Lambda}) \| \bv \|_2^2.
+\]</div>
+<p>The <a class="reference internal" href="#res:ssm:subdictionary_eigenvalue_coherence">Theorem 12.27</a> tells us:</p>
+<div class="math notranslate nohighlight">
+\[
+1 - (K - 1)   \mu  \leq \sigma^2 (\bDDD_{\Lambda}) \leq 1 + (K - 1)   \mu.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{\min}^2(\bDDD_{\Lambda}) \| \bv \|_2^2  
+\geq (1 - (K - 1)   \mu) \| \bv \|_2^2
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{\max}^2(\bDDD_{\Lambda}) \| \bv \|_2^2 \leq (1 + (K - 1)   \mu)\| \bv \|_2^2.
+\]</div>
+<p>This gives us the result</p>
+<div class="math notranslate nohighlight">
+\[
+(1 - (K - 1)   \mu) \| \bv \|_2^2 
+\leq \| \bDDD_{\Lambda} \bv \|_2^2 
+\leq (1 + (K - 1)   \mu)\| \bv \|_2^2. 
+\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="babel-function">
+<h2><span class="section-number">12.6.4. </span>Babel Function<a class="headerlink" href="#babel-function" title="Permalink to this headline">¶</a></h2>
+<p>Recalling the definition of coherence, we note that
+it reflects only the extreme correlations between atoms of dictionary.
+If most of the inner products are small compared to one dominating inner product,
+then the value of coherence is highly misleading.</p>
+<p>In <span id="id4">[<a class="reference internal" href="../bib.html#id132" title="Joel A Tropp. Greed is good: algorithmic results for sparse approximation. Information Theory, IEEE Transactions on, 50(10):2231–2242, 2004.">35</a>]</span>, Tropp introduced <em>Babel function</em>,
+which measures the maximum
+total coherence between a fixed atom and a collection of other atoms.
+The <em>Babel function</em> quantifies an idea as to how much the atoms of a dictionary are
+“speaking the same language”.</p>
+<div class="proof definition admonition" id="def:babel_function">
+<span id="index-6"></span><p class="admonition-title"><span class="caption-number">Definition 12.21 </span> (Babel function)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>Babel function</em> for a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> is defined by</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-babel-function">
+<span class="eqno">(12.32)<a class="headerlink" href="#equation-eq-ssm-babel-function" title="Permalink to this equation">¶</a></span>\[\mu_1(p) \triangleq \underset{|\Lambda| = p}{\max} \; \underset {\psi}{\max} 
+\sum_{\lambda \in \Lambda} | \langle \psi, \bd_{\lambda} \rangle |,\]</div>
+<p>where the vector <span class="math notranslate nohighlight">\(\psi\)</span> ranges over the atoms indexed by <span class="math notranslate nohighlight">\(\Omega \setminus \Lambda\)</span>.
+We define</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_1(0) = 0
+\]</div>
+<p>for sparsity level <span class="math notranslate nohighlight">\(p=0\)</span>.</p>
+</div>
+</div><p>Let us dig deeper into what is going on here.
+For each value of <span class="math notranslate nohighlight">\(p\)</span> we consider all possible <span class="math notranslate nohighlight">\(\binom{D}{p}\)</span> subspaces by choosing <span class="math notranslate nohighlight">\(p\)</span>
+vectors from <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p>
+<p>Let the atoms spanning one such subspace be identified by an index set
+<span class="math notranslate nohighlight">\(\Lambda \subset \Omega\)</span>.</p>
+<p>All other atoms are indexed by the index set <span class="math notranslate nohighlight">\(\Gamma = \Omega \setminus \Lambda\)</span>.
+Let</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi = \{ \psi_{\gamma} \ST \gamma \in \Gamma \}
+\]</div>
+<p>denote the atoms indexed by <span class="math notranslate nohighlight">\(\Gamma\)</span>.
+We pickup a vector <span class="math notranslate nohighlight">\(\psi \in \Psi\)</span> and compute its inner product
+with all atoms indexed by <span class="math notranslate nohighlight">\(\Lambda\)</span>.
+We compute the sum of absolute value of these inner products over all
+<span class="math notranslate nohighlight">\(\{ \bd_{\lambda} : \lambda \in \Lambda\}\)</span>.</p>
+<p>We run it for every <span class="math notranslate nohighlight">\(\psi \in \Psi\)</span> and
+then pickup the maximum value of above sum over all <span class="math notranslate nohighlight">\(\psi\)</span>.</p>
+<p>We finally compute the maximum over all possible <span class="math notranslate nohighlight">\(p\)</span>-subspaces.
+This number is considered at the Babel number for sparsity level <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p>We first make a few observations over the properties of Babel function.
+Babel function is a generalization of coherence.</p>
+<div class="proof remark admonition" id="res-ssm-babel-function-p-1">
+<p class="admonition-title"><span class="caption-number">Remark 12.7 </span> (Babel function for <span class="math notranslate nohighlight">\(p=1\)</span>)</p>
+<div class="remark-content section" id="proof-content">
+<p>For <span class="math notranslate nohighlight">\(p=1\)</span> we observe that</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_1(1) = \mu(\bDDD)
+\]</div>
+<p>the coherence of <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-ssm-babel-monotonicity">
+<p class="admonition-title"><span class="caption-number">Theorem 12.30 </span> (Monotonicity of babel function)</p>
+<div class="theorem-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\mu_1\)</span> is a non-decreasing function of <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is easy to see since the sum</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{\lambda \in \Lambda} | \langle \psi, \bd_{\lambda} \rangle |
+\]</div>
+<p>cannot decrease as <span class="math notranslate nohighlight">\(p = | \Lambda|\)</span> increases.
+The following argument provides the details.</p>
+<ol>
+<li><p>For some value of <span class="math notranslate nohighlight">\(p\)</span> let <span class="math notranslate nohighlight">\(\Lambda^p\)</span> and <span class="math notranslate nohighlight">\(\psi^p\)</span>
+denote the set and vector for which
+the maximum in  <a class="reference internal" href="#equation-eq-ssm-babel-function">(12.32)</a>
+is attained.</p></li>
+<li><p>Now pick some column which is not
+<span class="math notranslate nohighlight">\(\psi^p\)</span> and is not indexed by <span class="math notranslate nohighlight">\(\Lambda^p\)</span>
+and include it for <span class="math notranslate nohighlight">\(\Lambda^{p + 1}\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\Lambda^{p + 1}\)</span> and <span class="math notranslate nohighlight">\(\psi^p\)</span> might not be the maximizers
+for <span class="math notranslate nohighlight">\(\mu_1\)</span>  for sparsity level <span class="math notranslate nohighlight">\(p+1\)</span> in <a class="reference internal" href="#equation-eq-ssm-babel-function">(12.32)</a>.</p></li>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{\lambda \in \Lambda^{p + 1}} | \langle \psi^p, \bd_{\lambda} \rangle | 
+    \geq \sum_{\lambda \in \Lambda^{p}} | \langle \psi^p, \bd_{\lambda} \rangle |.
+    \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\mu_1(p+1)\)</span> cannot be less than <span class="math notranslate nohighlight">\(\mu_1(p)\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="lem:ssm:babel_function_upper_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.31 </span> (An upper bound for Babel function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Babel function is upper bounded by coherence as per</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_1(p) \leq p \; \mu(\bDDD).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Note that</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{\lambda \in \Lambda} | \langle \psi, \bd_{\lambda} \rangle | 
+\leq p \; \mu(\bDDD).
+\]</div>
+<p>This leads to</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_1(p) = \underset{|\Lambda| = p}{\max} \; \underset {\psi}{\max} 
+\sum_{\lambda \in \Lambda} | \langle \psi, \bd_{\lambda} \rangle |
+\leq \underset{|\Lambda| = p}{\max} \; \underset {\psi}{\max} \left (p \; \mu(\bDDD)\right)
+=  p \; \mu(\bDDD).
+\]</div>
+</div>
+<div class="section" id="computation-of-babel-function">
+<h3><span class="section-number">12.6.4.1. </span>Computation of Babel Function<a class="headerlink" href="#computation-of-babel-function" title="Permalink to this headline">¶</a></h3>
+<p>It might seem at first that computation of Babel function is combinatorial
+and hence prohibitively expensive.
+But it is not true.</p>
+<div class="proof example admonition" id="ex-ssm-babel-func-compute-proc">
+<p class="admonition-title"><span class="caption-number">Example 12.26 </span> (Procedure for computing the Babel function)</p>
+<div class="example-content section" id="proof-content">
+<p>We will demonstrate this through an example in this section.
+Our example synthesis matrix will be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bDDD  = 
+\begin{bmatrix}
+0.5 &amp; 0 &amp; 0 &amp; 0.6533 &amp; 1 &amp; 0.5 &amp; -0.2706 &amp; 0\\
+0.5 &amp; 1 &amp; 0 &amp; 0.2706 &amp; 0 &amp; -0.5 &amp; 0.6533 &amp; 0\\
+0.5 &amp; 0 &amp; 1 &amp; -0.2706 &amp; 0 &amp; -0.5 &amp; -0.6533 &amp; 0\\
+0.5 &amp; 0 &amp; 0 &amp; -0.6533 &amp; 0 &amp; 0.5 &amp; 0.2706 &amp; 1
+\end{bmatrix}
+\end{split}\]</div>
+<p>From the synthesis matrix <span class="math notranslate nohighlight">\(\bDDD\)</span> we first construct its Gram matrix given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bG = \bDDD^H \bDDD.
+\]</div>
+<p>We then take absolute value of each entry in <span class="math notranslate nohighlight">\(\bG\)</span> to construct <span class="math notranslate nohighlight">\(|\bG|\)</span>.
+For the running example</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+|\bG| = 
+\begin{bmatrix}
+1 &amp; 0.5 &amp; 0.5 &amp; 0 &amp; 0.5 &amp; 0 &amp; 0 &amp; 0.5\\
+0.5 &amp; 1 &amp; 0 &amp; 0.2706 &amp; 0 &amp; 0.5 &amp; 0.6533 &amp; 0\\
+0.5 &amp; 0 &amp; 1 &amp; 0.2706 &amp; 0 &amp; 0.5 &amp; 0.6533 &amp; 0\\
+0 &amp; 0.2706 &amp; 0.2706 &amp; 1 &amp; 0.6533 &amp; 0 &amp; 0 &amp; 0.6533\\
+0.5 &amp; 0 &amp; 0 &amp; 0.6533 &amp; 1 &amp; 0.5 &amp; 0.2706 &amp; 0\\
+0 &amp; 0.5 &amp; 0.5 &amp; 0 &amp; 0.5 &amp; 1 &amp; 0 &amp; 0.5\\
+0 &amp; 0.6533 &amp; 0.6533 &amp; 0 &amp; 0.2706 &amp; 0 &amp; 1 &amp; 0.2706\\
+0.5 &amp; 0 &amp; 0 &amp; 0.6533 &amp; 0 &amp; 0.5 &amp; 0.2706 &amp; 1
+\end{bmatrix}
+\end{split}\]</div>
+<p>We now sort every row in descending order to obtain a
+new matrix <span class="math notranslate nohighlight">\(\bG'\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bG' = 
+\begin{bmatrix}
+1 &amp; 0.5 &amp; 0.5 &amp; 0.5 &amp; 0.5 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 0.6533 &amp; 0.5 &amp; 0.5 &amp; 0.2706 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 0.6533 &amp; 0.5 &amp; 0.5 &amp; 0.2706 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 0.6533 &amp; 0.6533 &amp; 0.2706 &amp; 0.2706 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 0.6533 &amp; 0.5 &amp; 0.5 &amp; 0.2706 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 0.5 &amp; 0.5 &amp; 0.5 &amp; 0.5 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 0.6533 &amp; 0.6533 &amp; 0.2706 &amp; 0.2706 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 0.6533 &amp; 0.5 &amp; 0.5 &amp; 0.2706 &amp; 0 &amp; 0 &amp; 0
+\end{bmatrix}
+\end{split}\]</div>
+<p>First entry in each row is now <span class="math notranslate nohighlight">\(1\)</span>.
+This corresponds to <span class="math notranslate nohighlight">\(\langle \bd_i, \bd_i \rangle\)</span> and it doesn’t
+appear in the calculation of <span class="math notranslate nohighlight">\(\mu_1(p)\)</span>.
+Hence we disregard whole of first column.</p>
+<p>Now look at column 2 in <span class="math notranslate nohighlight">\(\bG'\)</span>.
+In the <span class="math notranslate nohighlight">\(i\)</span>-th row it is nothing but</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{j \neq i}{\max} | \langle \bd_i, \bd_j \rangle |.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\mu (\bDDD) = \mu_1(1) = \underset{1 \leq j \leq D} {\max} {\bG'}_{j, 2}
+\]</div>
+<p>i.e. the coherence is given by the maximum in the 2nd column of <span class="math notranslate nohighlight">\(\bG'\)</span>.
+In the running example</p>
+<div class="math notranslate nohighlight">
+\[
+\mu (\bDDD) = \mu_1(1) = 0.6533.
+\]</div>
+<p>Looking carefully we can note that for <span class="math notranslate nohighlight">\(\psi = \bd_i\)</span> the
+maximum value of sum</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{\Lambda} | \langle \psi, \bd_{\lambda} \rangle |
+\]</div>
+<p>while <span class="math notranslate nohighlight">\(| \Lambda| = p\)</span> is given by
+the sum over elements from 2nd to <span class="math notranslate nohighlight">\((p+1)\)</span>-th columns in <span class="math notranslate nohighlight">\(i\)</span>-th row.
+Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_1 (p) = \underset{1 \leq i \leq D} {\max} \sum_{j = 2}^{p + 1} G'_{i j}.
+\]</div>
+<p>For the running example the Babel function values are given by</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{pmatrix}
+0.6533 &amp; 1.3066 &amp; 1.6533 &amp; 2 &amp; 2 &amp; 2 &amp; 2
+\end{pmatrix}.
+\]</div>
+<p>We see that Babel function stops increasing after <span class="math notranslate nohighlight">\(p=4\)</span>. Actually <span class="math notranslate nohighlight">\(\bDDD\)</span> is
+constructed by shuffling the columns of two orthonormal bases.
+Hence many of the inner products are 0 in <span class="math notranslate nohighlight">\(\bG\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="babel-function-and-spark">
+<h3><span class="section-number">12.6.4.2. </span>Babel Function and Spark<a class="headerlink" href="#babel-function-and-spark" title="Permalink to this headline">¶</a></h3>
+<p>We first note that <em>Babel function</em> tells something about linear independence
+of the columns of <span class="math notranslate nohighlight">\(\bDDD\)</span>.</p>
+<div class="proof theorem admonition" id="lem:ssm:babel_linear_independence_condition">
+<p class="admonition-title"><span class="caption-number">Theorem 12.32 </span> (Linear independence of atoms and Babel function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mu_1\)</span> be the <em>Babel function</em> for a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>. If</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_1(p) &lt; 1
+\]</div>
+<p>then all selections of <span class="math notranslate nohighlight">\(p+1\)</span> columns from <span class="math notranslate nohighlight">\(\bDDD\)</span> are linearly independent.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We recall from the proof of <a class="reference internal" href="#lem:ssm:spark_lower_bound_coherence">Theorem 12.24</a>
+that if</p>
+<div class="math notranslate nohighlight">
+\[
+p + 1 &lt; 1 + \frac{1}{\mu(\bDDD)} \implies p &lt; \frac{1}{\mu(\bDDD)}
+\]</div>
+<p>then every set of <span class="math notranslate nohighlight">\((p+1)\)</span> columns from <span class="math notranslate nohighlight">\(\bDDD\)</span> are linearly independent.
+We also know from <a class="reference internal" href="#lem:ssm:babel_function_upper_bound">Theorem 12.31</a> that</p>
+<div class="math notranslate nohighlight">
+\[
+p \; \mu(\bDDD) \geq \mu_1(p) 
+\implies \mu(\bDDD) \geq \frac{\mu_1(p)}{p} 
+\implies \frac{1}{\mu(\bDDD)} \leq \frac{p} {\mu_1(p)}.
+\]</div>
+<p>Thus if</p>
+<div class="math notranslate nohighlight">
+\[
+p &lt; \frac{p} {\mu_1(p)} 
+\implies 1 &lt; \frac{1} {\mu_1(p)} \implies \mu_1(p) &lt; 1
+\]</div>
+<p>then all selections of <span class="math notranslate nohighlight">\(p+1\)</span> columns from <span class="math notranslate nohighlight">\(\bDDD\)</span> are linearly independent.</p>
+</div>
+<p>This leads us to a lower bound on spark from <em>Babel function</em>.</p>
+<div class="proof lemma admonition" id="lem:ssm:dict:spark_lower_bound_babel_func">
+<p class="admonition-title"><span class="caption-number">Lemma 12.1 </span> (Lower bound on spark based on Babel function)</p>
+<div class="lemma-content section" id="proof-content">
+<p>A lower bound of spark of a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\spark(\bDDD) \geq \underset{1 \leq p \leq N} {\min}\{p \ST \mu_1(p-1)\geq 1\}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For all <span class="math notranslate nohighlight">\(j \leq p-2\)</span> we are given that <span class="math notranslate nohighlight">\(\mu_1(j) &lt; 1\)</span>.
+Thus all sets of <span class="math notranslate nohighlight">\(p-1\)</span> columns from <span class="math notranslate nohighlight">\(\bDDD\)</span>
+are linearly independent (using <a class="reference internal" href="#lem:ssm:babel_linear_independence_condition">Theorem 12.32</a>).</p>
+<p>Finally <span class="math notranslate nohighlight">\(\mu_1(p-1) \geq 1\)</span>, hence we cannot say definitively
+whether a set of <span class="math notranslate nohighlight">\(p\)</span> columns
+from <span class="math notranslate nohighlight">\(\bDDD\)</span> is linearly dependent or not.
+This establishes the lower bound on spark.</p>
+</div>
+<p>An earlier version of this result also appeared in
+<span id="id5">[<a class="reference internal" href="../bib.html#id57" title="David L Donoho and Michael Elad. Optimally sparse representation in general (nonorthogonal) dictionaries via $l_1$ minimization. Proceedings of the National Academy of Sciences, 100(5):2197–2202, 2003.">18</a>]</span> theorem 6.</p>
+</div>
+<div class="section" id="babel-function-and-singular-values">
+<h3><span class="section-number">12.6.4.3. </span>Babel Function and Singular Values<a class="headerlink" href="#babel-function-and-singular-values" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="lem:ssm:subdictionary_singular_value_babel_bounds">
+<p class="admonition-title"><span class="caption-number">Theorem 12.33 </span> (Subdictionary singular value bounds from Babel function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bDDD\)</span> be a dictionary and <span class="math notranslate nohighlight">\(\Lambda\)</span> be an index set with <span class="math notranslate nohighlight">\(|\Lambda| = K\)</span>.
+The singular values of <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> are bounded by</p>
+<div class="math notranslate nohighlight">
+\[
+1  - \mu_1(K - 1) \leq \sigma^2 \leq 1 + \mu_1 (K - 1).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider the Gram matrix</p>
+<div class="math notranslate nohighlight">
+\[
+\bG = \bDDD_{\Lambda}^H \bDDD_{\Lambda}.
+\]</div>
+<p><span class="math notranslate nohighlight">\(G\)</span> is a <span class="math notranslate nohighlight">\(K\times K\)</span> square matrix.</p>
+<p>Also let</p>
+<div class="math notranslate nohighlight">
+\[
+\Lambda = \{ \lambda_1, \lambda_2, \dots, \lambda_K\}
+\]</div>
+<p>so that</p>
+<div class="math notranslate nohighlight">
+\[
+\bDDD_{\Lambda} = \begin{bmatrix}
+\bd_{\lambda_1} &amp; \bd_{\lambda_2} &amp; \dots &amp; \bd_{\lambda_K}
+\end{bmatrix}.
+\]</div>
+<p>The Gershgorin Disc Theorem states that every
+eigenvalue of <span class="math notranslate nohighlight">\(\bG\)</span> lies in one of the <span class="math notranslate nohighlight">\(K\)</span> discs</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta_k  = \left \{
+z \ST |z -  G_{k k}| \leq \sum_{j \neq k } | G_{j k}| 
+\right \}
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\bd_i\)</span> are unit norm, hence <span class="math notranslate nohighlight">\(G_{k k} = 1\)</span>.</p>
+<p>Also we note that</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{j \neq k } | G_{j k}| 
+= \sum_{j \neq k } | \langle \bd_{\lambda_j},  \bd_{\lambda_k} \rangle | 
+\leq \mu_1(K-1)
+\]</div>
+<p>since there are <span class="math notranslate nohighlight">\(K-1\)</span> terms in sum and <span class="math notranslate nohighlight">\(\mu_1(K-1)\)</span> is an upper bound on all such sums.</p>
+<p>Thus if <span class="math notranslate nohighlight">\(z\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bG\)</span> then we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;| z -1 | \leq \mu_1(K-1) \\
+\implies &amp;- \mu_1(K-1)  \leq z - 1 \leq \mu_1(K-1) \\
+\implies &amp;1 - \mu_1(K-1)  \leq z \leq 1 + \mu_1(K-1). 
+\end{aligned}
+\end{split}\]</div>
+<p>This is OK since <span class="math notranslate nohighlight">\(\bG\)</span> is positive semi-definite,
+thus the eigen values of <span class="math notranslate nohighlight">\(G\)</span> are real.</p>
+<p>But the eigen values of <span class="math notranslate nohighlight">\(\bG\)</span> are nothing
+but the squared singular values of <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>.
+Thus we get</p>
+<div class="math notranslate nohighlight">
+\[
+1 - \mu_1(K-1)  \leq \sigma^2 \leq 1 + \mu_1(K-1).
+\]</div>
+</div>
+<div class="proof corollary admonition" id="lem:ssm:babel_singular_value_condition">
+<p class="admonition-title"><span class="caption-number">Corollary 12.2 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bDDD\)</span> be a dictionary and <span class="math notranslate nohighlight">\(\Lambda\)</span> be an index set with <span class="math notranslate nohighlight">\(|\Lambda| = K\)</span>.
+If  <span class="math notranslate nohighlight">\(\mu_1(K-1) &lt; 1\)</span>
+then the squared singular values of <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> exceed <span class="math notranslate nohighlight">\((1 - \mu_1 (K-1))\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From previous theorem we have</p>
+<div class="math notranslate nohighlight">
+\[
+1 - \mu_1(K-1)  \leq \sigma^2 \leq 1 + \mu_1(K-1).
+\]</div>
+<p>Since the singular values are always non-negative,
+the lower bound is useful only when <span class="math notranslate nohighlight">\(\mu_1(K-1) &lt; 1\)</span>.
+When it holds we have</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma(\bDDD_{\Lambda}) \geq \sqrt{1 - \mu_1(K-1)}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res:ssm:babel_uncertainty_principle_K">
+<p class="admonition-title"><span class="caption-number">Theorem 12.34 </span> (Uncertainty principle : Babel function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mu_1(K -1 ) &lt; 1\)</span>.
+If a signal can be written as a linear combination of <span class="math notranslate nohighlight">\(k\)</span> atoms,
+then any other exact representation of the signal requires at least <span class="math notranslate nohighlight">\((K - k + 1)\)</span> atoms.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. If <span class="math notranslate nohighlight">\(\mu_1(K -1 ) &lt; 1\)</span>, then the singular values of any sub-matrix of <span class="math notranslate nohighlight">\(K\)</span> atoms are non-zero.
+Thus, the minimum number of atoms required to form a linear dependent set is <span class="math notranslate nohighlight">\(K + 1\)</span>.
+Let the number of atoms in any other exact representation of the signal be <span class="math notranslate nohighlight">\(l\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+k + l \geq K + 1 \implies l \geq K - k + 1.
+\]</div>
+</div>
+</div>
+<div class="section" id="babel-function-and-gram-matrix-of-subdictionaries">
+<h3><span class="section-number">12.6.4.4. </span>Babel Function and Gram Matrix of Subdictionaries<a class="headerlink" href="#babel-function-and-gram-matrix-of-subdictionaries" title="Permalink to this headline">¶</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(\Lambda\)</span> index a subdictionary and
+let <span class="math notranslate nohighlight">\(\bG = \bDDD_{\Lambda}^H \bDDD_{\Lambda}\)</span> denote the Gram matrix
+of the subdictionary <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>. Assume <span class="math notranslate nohighlight">\(K = | \Lambda |\)</span>.</p>
+<div class="proof theorem admonition" id="res:ssm:gram_matrix_infty_norm_babel_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.35 </span> (A bound on the norms of Gram matrix)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\| \bG \|_{\infty} =  \| \bG \|_{1}  \leq 1 + \mu_1(K - 1).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\bG\)</span> is Hermitian, hence the two norms are equal:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bG \|_{\infty} =  \| \bG^H \|_{1} = \| \bG \|_{1}.
+\]</div>
+<ol>
+<li><p>Now each row consists of a diagonal entry <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(K-1\)</span> off diagonal entries.</p></li>
+<li><p>The absolute sum of all the off-diagonal entries in a row is
+upper bounded by <span class="math notranslate nohighlight">\(\mu_1(K -1)\)</span>.</p></li>
+<li><p>Thus, the absolute sum of all the entries in a row is
+upper bounded by <span class="math notranslate nohighlight">\(1 + \mu_1(K - 1)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\| \bG \|_{\infty}\)</span> is nothing but the maximum <span class="math notranslate nohighlight">\(\ell_1\)</span> norm of rows of <span class="math notranslate nohighlight">\(\bG\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bG \|_{\infty} \leq 1 +  \mu_1(K - 1).
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res:ssm:inverse_gram_matrix_infty_norm_babel_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.36 </span> (A bound on the norms of inverse Gram matrix)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(\mu_1(K - 1) &lt; 1\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bG^{-1} \|_{\infty} = \| \bG^{-1} \|_{1} \leq \frac{1}{1 - \mu_1(K - 1)}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(G\)</span> is Hermitian, hence the two operator norms are equal:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bG^{-1} \|_{\infty} = \| \bG^{-1} \|_{1}.
+\]</div>
+<ol>
+<li><p>We can write <span class="math notranslate nohighlight">\(\bG\)</span> as <span class="math notranslate nohighlight">\(\bG = \bI  + \bA\)</span>
+where <span class="math notranslate nohighlight">\(\bA\)</span> consists of off-diagonal entries in <span class="math notranslate nohighlight">\(\bG\)</span>.</p></li>
+<li><p>Recall that since atoms are unit norm, hence diagonal entries in <span class="math notranslate nohighlight">\(\bG\)</span> are 1.</p></li>
+<li><p>Each row of <span class="math notranslate nohighlight">\(\bA\)</span> lists inner products between a fixed atom and <span class="math notranslate nohighlight">\(K-1\)</span>
+other atoms (leaving 0 at the diagonal entry).</p></li>
+<li><p>Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \|_{\infty} \leq \mu_1(K - 1).
+   \]</div>
+<p>since <span class="math notranslate nohighlight">\(\ell_1\)</span> norm of any row is upper bounded by the babel number <span class="math notranslate nohighlight">\(\mu_1(K - 1)\)</span>.</p>
+</li>
+<li><p>Now <span class="math notranslate nohighlight">\(\bG^{-1}\)</span> can be written as a  Neumann series</p>
+<div class="math notranslate nohighlight">
+\[
+   \bG^{-1} = \sum_{k=0}^{\infty}(-\bA)^k.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \bG^{-1} \|_{\infty}
+    &amp;= \left \| \sum_{k=0}^{\infty}(-\bA)^k \right \|_{\infty} \\
+    &amp;\leq \sum_{k=0}^{\infty} \| (-\bA)^k \|_{\infty}\\
+    &amp;= \sum_{k=0}^{\infty} \| \bA \|_{\infty}^k\\
+    &amp;= \frac{1}{1 - \| \bA \|_{\infty}}
+   \end{split}\]</div>
+<p>since <span class="math notranslate nohighlight">\(\| \bA \|_{\infty} &lt; 1\)</span>.</p>
+</li>
+<li><p>Finally</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; \| \bA \|_{\infty} 
+    \leq \mu_1(K - 1)\\ 
+    \iff &amp; 1 - \| \bA \|_{\infty} 
+    \geq 1 - \mu_1(K - 1)\\
+    \iff &amp; \frac{1}{1 - \| \bA \|_{\infty}} 
+    \leq \frac{1}{1 - \mu_1(K - 1)}.
+   \end{split}\]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bG^{-1} \|_{\infty}  \leq \frac{1}{1 - \mu_1(K - 1)}.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="quasi-incoherent-dictionaries">
+<h3><span class="section-number">12.6.4.5. </span>Quasi Incoherent Dictionaries<a class="headerlink" href="#quasi-incoherent-dictionaries" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def:ssm:quasi_incoherent_dictionary">
+<span id="index-7"></span><p class="admonition-title"><span class="caption-number">Definition 12.22 </span> (Quasi incoherent dictionary)</p>
+<div class="definition-content section" id="proof-content">
+<p>When the <em>Babel function</em> of a dictionary grows slowly,
+we say that the dictionary is <em>quasi-incoherent</em>.</p>
+</div>
+</div></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ssm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="srr.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">12.5. </span>Sparse and Redundant Representations</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="compressive_sensing.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12.7. </span>Compressive Sensing</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

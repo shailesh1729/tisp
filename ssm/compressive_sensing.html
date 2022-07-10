@@ -1,0 +1,2909 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12.7. Compressive Sensing &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12.8. Restricted Isometry Property" href="rip.html" />
+    <link rel="prev" title="12.6. Dictionaries" href="dictionaries.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ssm/compressive_sensing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fssm/compressive_sensing.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   12.7.1. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-sensing-matrix">
+   12.7.2. The Sensing Matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#error-correction-in-linear-codes">
+   12.7.3. Error Correction in Linear Codes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#piecewise-cubic-polynomial-signal">
+   12.7.4. Piecewise Cubic Polynomial Signal
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#number-of-measurements">
+   12.7.5. Number of Measurements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#signal-recovery">
+   12.7.6. Signal Recovery
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-recovery-of-sparse-signals">
+   12.7.7. Exact Recovery of Sparse Signals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spark">
+     12.7.7.1. Spark
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recovery-of-approximately-sparse-signals">
+   12.7.8. Recovery of Approximately Sparse Signals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#null-space-property">
+     12.7.8.1. Null Space Property
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#measuring-the-performance-of-a-recovery-algorithm">
+     12.7.8.2. Measuring the Performance of a Recovery Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nsp-and-instance-optimal-guarantees">
+     12.7.8.3. NSP and Instance Optimal Guarantees
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recovery-in-presence-of-measurement-noise">
+   12.7.9. Recovery in Presence of Measurement Noise
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#restricted-isometry-property">
+     12.7.9.1. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stability">
+     12.7.9.2. Stability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#measurement-bounds">
+     12.7.9.3. Measurement Bounds
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-and-nsp">
+   12.7.10. RIP and NSP
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Compressive Sensing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   12.7.1. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-sensing-matrix">
+   12.7.2. The Sensing Matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#error-correction-in-linear-codes">
+   12.7.3. Error Correction in Linear Codes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#piecewise-cubic-polynomial-signal">
+   12.7.4. Piecewise Cubic Polynomial Signal
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#number-of-measurements">
+   12.7.5. Number of Measurements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#signal-recovery">
+   12.7.6. Signal Recovery
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-recovery-of-sparse-signals">
+   12.7.7. Exact Recovery of Sparse Signals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spark">
+     12.7.7.1. Spark
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recovery-of-approximately-sparse-signals">
+   12.7.8. Recovery of Approximately Sparse Signals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#null-space-property">
+     12.7.8.1. Null Space Property
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#measuring-the-performance-of-a-recovery-algorithm">
+     12.7.8.2. Measuring the Performance of a Recovery Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nsp-and-instance-optimal-guarantees">
+     12.7.8.3. NSP and Instance Optimal Guarantees
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recovery-in-presence-of-measurement-noise">
+   12.7.9. Recovery in Presence of Measurement Noise
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#restricted-isometry-property">
+     12.7.9.1. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stability">
+     12.7.9.2. Stability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#measurement-bounds">
+     12.7.9.3. Measurement Bounds
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rip-and-nsp">
+   12.7.10. RIP and NSP
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="compressive-sensing">
+<span id="sec-ssm-compressive-sensing"></span><h1><span class="section-number">12.7. </span>Compressive Sensing<a class="headerlink" href="#compressive-sensing" title="Permalink to this headline">¶</a></h1>
+<p>In this section we formally define the problem of compressive sensing.</p>
+<p><em>Compressive sensing</em> refers to the idea that for sparse or compressible signals,
+a small number of nonadaptive measurements carry sufficient information
+to approximate the signal well.
+In the literature it is also known as
+<em>compressed sensing</em> and <em>compressive sampling</em>.
+Different authors seem to prefer different names.</p>
+<div class="docutils">
+<p>In this section we will represent a signal dictionary
+as well as its synthesis matrix as <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+We recall the definition of sparse signals from <a class="reference internal" href="srr.html#def-ssm-d-k-sparse-signal">Definition 12.4</a>.</p>
+<p>A signal <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse in <span class="math notranslate nohighlight">\(\bDDD\)</span>
+if there exists a representation <span class="math notranslate nohighlight">\(\ba\)</span> for <span class="math notranslate nohighlight">\(\bx\)</span> which
+has at most <span class="math notranslate nohighlight">\(K\)</span> non-zero entries; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \bDDD \ba
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_0 \leq K.
+\]</div>
+<p>The dictionary could be standard basis, Fourier basis, wavelet basis,
+a wavelet packet dictionary,
+a multi-ONB or even a randomly generated dictionary.</p>
+<p>Real life signals are not sparse, yet they are compressible in the sense that
+entries in the signal decay rapidly when sorted by magnitude.
+As a result compressible signals are well
+approximated by sparse signals.
+Note that we are talking about the sparsity or compressibility
+of the signal in a suitable dictionary.
+Thus we mean that the signal <span class="math notranslate nohighlight">\(\bx\)</span> has a representation
+<span class="math notranslate nohighlight">\(\ba\)</span> in <span class="math notranslate nohighlight">\(\bDDD\)</span> in which the coefficients decay rapidly when sorted by magnitude.</p>
+</div>
+<div class="section" id="definition">
+<h2><span class="section-number">12.7.1. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/srr_cs.png" src="../_images/srr_cs.png" />
+<span class="target" id="index-0"></span><div class="proof definition admonition" id="def:ssm:compressed_sensing">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Definition 12.23 </span> (Compressive sensing)</p>
+<div class="definition-content section" id="proof-content">
+<p>In compressive sensing, a <em>measurement</em> is a linear functional applied to a signal</p>
+<div class="math notranslate nohighlight">
+\[
+y = \langle \bx, \bf \rangle.
+\]</div>
+<p>The compressive sensor makes multiple such linear measurements.
+This can best be represented by the action of a <em>sensing matrix</em> <span class="math notranslate nohighlight">\(\Phi\)</span>
+on the signal <span class="math notranslate nohighlight">\(\bx\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+\by = \Phi \bx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi \in \CC^{M \times N}\)</span> represents <span class="math notranslate nohighlight">\(M\)</span> different measurements
+made on the signal <span class="math notranslate nohighlight">\(\bx\)</span>
+by the sensing process.
+Each row of <span class="math notranslate nohighlight">\(\Phi\)</span> represents one linear measurement.</p>
+<p>The vector <span class="math notranslate nohighlight">\(\by \in \CC^M\)</span> is known as <em>measurement vector</em>.</p>
+<p><span class="math notranslate nohighlight">\(\CC^N\)</span> forms the <em>signal space</em> while <span class="math notranslate nohighlight">\(\CC^M\)</span> forms the <em>measurement space</em>.
+We also note that above can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+\by  = \Phi \bx = \Phi \bDDD \ba = (\Phi \bDDD) \ba.
+\]</div>
+<p>It is assumed that the signal <span class="math notranslate nohighlight">\(\bx\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse or <span class="math notranslate nohighlight">\(K\)</span>-compressible in
+<span class="math notranslate nohighlight">\(\bDDD\)</span> and <span class="math notranslate nohighlight">\(K \ll N\)</span>.</p>
+<p>The objective is to recover <span class="math notranslate nohighlight">\(\bx\)</span> from <span class="math notranslate nohighlight">\(\by\)</span> given that <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\bDDD\)</span> are known.</p>
+<p>We do this by first recovering the sparse representation <span class="math notranslate nohighlight">\(\ba\)</span> from <span class="math notranslate nohighlight">\(\by\)</span>
+and then computing <span class="math notranslate nohighlight">\(\bx = \bDDD \ba\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(M \geq N\)</span> then the problem is a straight forward least squares problem.
+So we don’t consider it here.</p>
+<p>The more interesting case is when <span class="math notranslate nohighlight">\(K &lt; M \ll N\)</span>;
+i.e., the number of measurements is much less
+than the dimension of the ambient signal space
+while more than the sparsity level of signal namely <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<p>We note that given <span class="math notranslate nohighlight">\(\ba\)</span> is found, finding <span class="math notranslate nohighlight">\(\bx\)</span> is straightforward.<br />
+We therefore can remove the dictionary from our consideration and look at
+the simplified problem given as:</p>
+<p>Recover <span class="math notranslate nohighlight">\(\bx\)</span> from <span class="math notranslate nohighlight">\(\by\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[
+\by = \Phi \bx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> itself is assumed to be <span class="math notranslate nohighlight">\(K\)</span>-sparse or <span class="math notranslate nohighlight">\(K\)</span>-compressible
+and <span class="math notranslate nohighlight">\(\Phi \in \CC^{M \times N}\)</span> is the sensing matrix.</p>
+</div>
+</div></div>
+<div class="section" id="the-sensing-matrix">
+<span id="sec-ssm-sensing-matrix"></span><h2><span class="section-number">12.7.2. </span>The Sensing Matrix<a class="headerlink" href="#the-sensing-matrix" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>There are two ways to look at the sensing matrix.
+First view is in terms of its columns</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-sensing-matrix-column-view">
+<span class="eqno">(12.33)<a class="headerlink" href="#equation-eq-ssm-sensing-matrix-column-view" title="Permalink to this equation">¶</a></span>\[\Phi = \begin{bmatrix}
+\phi_1 &amp; \phi_2 &amp; \dots &amp; \phi_N
+\end{bmatrix}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi_i \in \CC^M\)</span> are the columns of sensing matrix.
+In this view we see that</p>
+<div class="math notranslate nohighlight">
+\[
+\by = \sum_{i=1}^{N} x_i \phi_i;
+\]</div>
+<p>i.e., <span class="math notranslate nohighlight">\(\by\)</span> belongs to the column span of <span class="math notranslate nohighlight">\(\Phi\)</span> and one representation of
+<span class="math notranslate nohighlight">\(\by\)</span> in <span class="math notranslate nohighlight">\(\Phi\)</span> is given by <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>This view looks very similar to a dictionary and its atoms but there is a difference.
+In a dictionary, we require each atom to be unit norm.
+We don’t require columns of the sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span> to be unit norm.</p>
+<p>The second view of sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span> is in terms of its columns. We write</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-sensing-matrix-row-view">
+<span class="eqno">(12.34)<a class="headerlink" href="#equation-eq-ssm-sensing-matrix-row-view" title="Permalink to this equation">¶</a></span>\[\begin{split}\Phi = \begin{bmatrix}
+\bf_1^H \\
+\bf_2^H \\
+\vdots \\
+\bf_M^H
+\end{bmatrix}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bf_i \in \CC^N\)</span> are conjugate transposes of rows of <span class="math notranslate nohighlight">\(\Phi\)</span>.
+This view gives us following expression:</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-cs-row-linear-measurements">
+<span class="eqno">(12.35)<a class="headerlink" href="#equation-eq-ssm-cs-row-linear-measurements" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{bmatrix}
+y_1\\
+y_2 \\
+\vdots\\
+y_M
+\end{bmatrix}
+= \begin{bmatrix}
+\bf_1^H \\
+\bf_2^H \\
+\vdots \\
+\bf_M^H
+\end{bmatrix}
+\bx
+= \begin{bmatrix}
+\bf_1^H \bx\\
+\bf_2^H \bx\\
+\vdots \\
+\bf_M^H \bx
+\end{bmatrix}
+= \begin{bmatrix}
+\langle \bx , \bf_1 \rangle \\
+\langle \bx , \bf_2 \rangle \\
+\vdots \\
+\langle \bx , \bf_M \rangle \\
+\end{bmatrix}\end{split}\]</div>
+<p>In this view <span class="math notranslate nohighlight">\(y_i\)</span> is a measurement given by the inner product of
+<span class="math notranslate nohighlight">\(\bx\)</span> with <span class="math notranslate nohighlight">\(\bf_i\)</span>
+<span class="math notranslate nohighlight">\(( \langle \bx , \bf_i \rangle = \bf_i^H \bx)\)</span>.</p>
+<p>We will call <span class="math notranslate nohighlight">\(\bf_i\)</span> as a <em>sensing vector</em>.
+There are <span class="math notranslate nohighlight">\(M\)</span> such sensing vectors in <span class="math notranslate nohighlight">\(\CC^N\)</span>
+comprising <span class="math notranslate nohighlight">\(\Phi\)</span> corresponding to <span class="math notranslate nohighlight">\(M\)</span> measurements in the measurement space <span class="math notranslate nohighlight">\(\CC^M\)</span>.</p>
+</div>
+<div class="proof definition admonition" id="def:ssm:cs:embedding">
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Definition 12.24 </span> (Embedding of a signal)</p>
+<div class="definition-content section" id="proof-content">
+<p>Given a signal <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span>,
+a vector <span class="math notranslate nohighlight">\(\by = \Phi \bx \in \RR^M\)</span>
+is called an <em>embedding</em> of <span class="math notranslate nohighlight">\(\bx\)</span> in the measurement space <span class="math notranslate nohighlight">\(\RR^M\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def:explanation_signal">
+<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Definition 12.25 </span> (Explanation of a measurement)</p>
+<div class="definition-content section" id="proof-content">
+<p>A signal <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span> is called an <em>explanation</em> of a measurement
+<span class="math notranslate nohighlight">\(\by \in \RR^M\)</span> w.r.t. sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span> if <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span>.</p>
+</div>
+</div><p>In the following we present examples of real life problems
+which can be modeled as compressive sensing problems.</p>
+</div>
+<div class="section" id="error-correction-in-linear-codes">
+<h2><span class="section-number">12.7.3. </span>Error Correction in Linear Codes<a class="headerlink" href="#error-correction-in-linear-codes" title="Permalink to this headline">¶</a></h2>
+<p>The classical error correction problem was discussed in one of the
+seminal founding papers on compressive sensing <span id="id1">[<a class="reference internal" href="../bib.html#id33" title="Emmanuel J Candes and Terence Tao. Decoding by linear programming. Information Theory, IEEE Transactions on, 51(12):4203–4215, 2005.">12</a>]</span>.</p>
+<div class="proof example admonition" id="ex-ssm-cs-error-correction-linear-codes">
+<p class="admonition-title"><span class="caption-number">Example 12.27 </span> (Error correction in linear codes as a compressive sensing problem)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bf \in \RR^N\)</span> be a “plaintext” message being sent over a communication channel.</p>
+<p>In order to make the message robust against errors in communication channel, we encode
+the error with an error correcting code.</p>
+<p>We consider <span class="math notranslate nohighlight">\(\bA \in \RR^{D \times N}\)</span> with <span class="math notranslate nohighlight">\(D &gt; N\)</span> as a <em>linear code</em>.
+<span class="math notranslate nohighlight">\(\bA\)</span> is essentially a collection of code words given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \begin{bmatrix}
+\ba_1 &amp; \ba_2 &amp; \dots &amp; \ba_N 
+\end{bmatrix}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ba_i \in \RR^D\)</span> are the code words.</p>
+<p>We construct the “ciphertext”</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \bA \bf
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bx \in \RR^D\)</span> is sent over the communication channel.
+Clearly <span class="math notranslate nohighlight">\(\bx\)</span> is a redundant representation of <span class="math notranslate nohighlight">\(\bf\)</span>
+which is expected to be robust against  small errors during transmission.</p>
+<p><span class="math notranslate nohighlight">\(\bA\)</span> is assumed to be full column rank.
+Thus <span class="math notranslate nohighlight">\(\bA^T \bA\)</span> is invertible and we can easily see that</p>
+<div class="math notranslate nohighlight">
+\[
+\bf = \bA^{\dag} \bx 
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^{\dag} = (\bA^T \bA)^{-1}\bA^T
+\]</div>
+<p>is the left pseudo inverse of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+<p>The communication channel is going to add some error.
+What we actually receive is</p>
+<div class="math notranslate nohighlight">
+\[
+\by = \bx + \be = \bA \bf + \be
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\be \in \RR^D\)</span> is the error being introduced by the channel.</p>
+<p>The least squares solution by minimizing the error <span class="math notranslate nohighlight">\(\ell_2\)</span> norm is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bf' = \bA^{\dag} \by = \bA^{\dag} (\bA \bf + \be) = \bf + \bA^{\dag} \be.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\bA^{\dag} \be\)</span> is usually non-zero
+(we cannot assume that <span class="math notranslate nohighlight">\(\bA^{\dag}\)</span> will annihilate <span class="math notranslate nohighlight">\(\be\)</span>),
+hence <span class="math notranslate nohighlight">\(\bf'\)</span> is not an exact replica of <span class="math notranslate nohighlight">\(\bf\)</span>.</p>
+<p>What is needed is an exact reconstruction of <span class="math notranslate nohighlight">\(\bf\)</span>.
+To achieve this,  a common assumption in literature is that
+error vector <span class="math notranslate nohighlight">\(\be\)</span> is in fact sparse. i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\| \be \|_0 \leq K \ll D.
+\]</div>
+<p>To reconstruct <span class="math notranslate nohighlight">\(\bf\)</span> it is sufficient to reconstruct <span class="math notranslate nohighlight">\(\be\)</span>
+since once <span class="math notranslate nohighlight">\(\be\)</span> is known we can get</p>
+<div class="math notranslate nohighlight">
+\[
+\bx  = \by - \be
+\]</div>
+<p>and from there <span class="math notranslate nohighlight">\(\bf\)</span> can be faithfully reconstructed.</p>
+<p>The question is: for a given sparsity level <span class="math notranslate nohighlight">\(K\)</span> for the error vector <span class="math notranslate nohighlight">\(\be\)</span>
+can one reconstruct
+<span class="math notranslate nohighlight">\(\be\)</span> via practical algorithms?
+By practical we mean algorithms which are of polynomial
+time w.r.t. the length of “ciphertext” (<span class="math notranslate nohighlight">\(D\)</span>).</p>
+<p>The approach in <span id="id2">[<a class="reference internal" href="../bib.html#id33" title="Emmanuel J Candes and Terence Tao. Decoding by linear programming. Information Theory, IEEE Transactions on, 51(12):4203–4215, 2005.">12</a>]</span> is as follows.
+We construct a matrix <span class="math notranslate nohighlight">\(\bF \in \RR^{M \times D}\)</span> which can annihilate <span class="math notranslate nohighlight">\(\bA\)</span>;
+i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\bF \bA  = \ZERO.
+\]</div>
+<p>We then apply <span class="math notranslate nohighlight">\(\bF\)</span> to <span class="math notranslate nohighlight">\(\by\)</span> giving us</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde{\by} = \bF (\bA \bf + \be) = \bF\be.
+\]</div>
+<p>Therefore the decoding problem is reduced to that of reconstructing
+a sparse vector <span class="math notranslate nohighlight">\(\be \in \RR^D\)</span>
+from the measurements <span class="math notranslate nohighlight">\(\bF \be \in \RR^M\)</span> where we would like to have <span class="math notranslate nohighlight">\(M \ll D\)</span>.</p>
+<p>With this the problem of finding <span class="math notranslate nohighlight">\(\be\)</span> can be cast
+as problem of finding a sparse solution
+for the under-determined system given by</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-error-correction-k-sparse-error">
+<span class="eqno">(12.36)<a class="headerlink" href="#equation-eq-ssm-error-correction-k-sparse-error" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{\be \in \Sigma_K}{\text{minimize}} 
+&amp; &amp;  \| \be \|_0 \\
+&amp; \text{subject to }
+&amp; &amp;  \tilde{\by} = \bF \be.\end{split}\]</div>
+<p>This now becomes the compressive sensing problem. The natural questions are</p>
+<ul class="simple">
+<li><p>How many measurements <span class="math notranslate nohighlight">\(M\)</span> are necessary (in <span class="math notranslate nohighlight">\(\bF\)</span>) to be able to recover <span class="math notranslate nohighlight">\(\be\)</span> exactly?</p></li>
+<li><p>How should <span class="math notranslate nohighlight">\(\bF\)</span> be constructed?</p></li>
+<li><p>How do we recover <span class="math notranslate nohighlight">\(\be\)</span> from <span class="math notranslate nohighlight">\(\tilde{\by}\)</span>?</p></li>
+</ul>
+<p>These problems are addressed in following chapters as we discuss
+sensing matrices and signal recovery algorithms.</p>
+</div>
+</div></div>
+<div class="section" id="piecewise-cubic-polynomial-signal">
+<h2><span class="section-number">12.7.4. </span>Piecewise Cubic Polynomial Signal<a class="headerlink" href="#piecewise-cubic-polynomial-signal" title="Permalink to this headline">¶</a></h2>
+<div class="proof example admonition" id="ex-ssm-cs-piecewise-cubic-polynomial-signal">
+<p class="admonition-title"><span class="caption-number">Example 12.28 </span> (Piecewise cubic polynomial signal)</p>
+<div class="example-content section" id="proof-content">
+<p>This example was discussed in <span id="id3">[<a class="reference internal" href="../bib.html#id32" title="Emmanuel J Candes and Justin Romberg. Practical signal recovery from random projections. Wavelet Applications in Signal and Image Processing XI Proc. SPIE Conf. 5914., 2004.">11</a>]</span>.
+Our signal of interest is a piecewise cubic polynomial signal
+as shown below.</p>
+<div class="figure align-default" id="fig-ssm-piecewise-polynomial-signal">
+<img alt="../_images/signal.png" src="../_images/signal.png" />
+<p class="caption"><span class="caption-number">Fig. 12.5 </span><span class="caption-text">A piecewise cubic polynomials signal</span><a class="headerlink" href="#fig-ssm-piecewise-polynomial-signal" title="Permalink to this image">¶</a></p>
+</div>
+<p>It has a compressible representation in a wavelet basis.</p>
+<div class="figure align-default" id="fig-ssm-piecewise-polynomial-representation">
+<img alt="../_images/representation.png" src="../_images/representation.png" />
+<p class="caption"><span class="caption-number">Fig. 12.6 </span><span class="caption-text">Compressible representation of signal in wavelet basis</span><a class="headerlink" href="#fig-ssm-piecewise-polynomial-representation" title="Permalink to this image">¶</a></p>
+</div>
+<p>The representation is described by the equation.</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \Psi \alpha
+\]</div>
+<p>The chosen basis is a Daubechies wavelet basis <span class="math notranslate nohighlight">\(\Psi\)</span>.</p>
+<div class="figure align-default" id="fig-ssm-piecewise-polynomial-dictionary">
+<img alt="../_images/dictionary.png" src="../_images/dictionary.png" />
+<p class="caption"><span class="caption-number">Fig. 12.7 </span><span class="caption-text">Daubechies-8 wavelet basis</span><a class="headerlink" href="#fig-ssm-piecewise-polynomial-dictionary" title="Permalink to this image">¶</a></p>
+</div>
+<p>In this example <span class="math notranslate nohighlight">\(N = 2048\)</span>. We have <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span>.
+<span class="math notranslate nohighlight">\(\Psi\)</span> is a complete dictionary of size <span class="math notranslate nohighlight">\(N \times N\)</span>.
+Thus we have <span class="math notranslate nohighlight">\(D = N\)</span> and <span class="math notranslate nohighlight">\(\alpha \in \RR^N\)</span>.</p>
+<p>We can sort the wavelet coefficients by magnitude and plot
+them in descending order to visualize how sparse the
+representation is.</p>
+<div class="figure align-default" id="fig-ssm-piecewise-polynomial-representation-sorted">
+<img alt="../_images/representation_sorted.png" src="../_images/representation_sorted.png" />
+<p class="caption"><span class="caption-number">Fig. 12.8 </span><span class="caption-text">Wavelet coefficients sorted by magnitude</span><a class="headerlink" href="#fig-ssm-piecewise-polynomial-representation-sorted" title="Permalink to this image">¶</a></p>
+</div>
+<p>Before making compressive measurements, we need to decide
+how many compressive measurements will be sufficient?</p>
+<p>Closely examining the coefficients in <span class="math notranslate nohighlight">\(\alpha\)</span> we can note that
+<span class="math notranslate nohighlight">\(\max(\alpha_i) = 78.0546\)</span>.
+Further if we put different thresholds
+over magnitudes of entries in <span class="math notranslate nohighlight">\(\alpha\)</span> we can find the number
+of coefficients higher than different thresholds as listed below.</p>
+<div class="docutils">
+<p>Entries in wavelet representation of piecewise cubic polynomial
+signal higher than a threshold</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Threshold</p></th>
+<th class="head"><p>Entries higher than threshold</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>129</p></td>
+</tr>
+<tr class="row-odd"><td><p>1E-1</p></td>
+<td><p>173</p></td>
+</tr>
+<tr class="row-even"><td><p>1E-2</p></td>
+<td><p>186</p></td>
+</tr>
+<tr class="row-odd"><td><p>1E-4</p></td>
+<td><p>197</p></td>
+</tr>
+<tr class="row-even"><td><p>1E-8</p></td>
+<td><p>199</p></td>
+</tr>
+<tr class="row-odd"><td><p>1E-12</p></td>
+<td><p>200</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A choice of <span class="math notranslate nohighlight">\(M = 600\)</span> looks quite reasonable given the decay
+of entries in <span class="math notranslate nohighlight">\(\alpha\)</span>. Later we shall provide theoretical
+bounds for choice of <span class="math notranslate nohighlight">\(M\)</span>.</p>
+<p>A Gaussian random sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span>
+is used to generate the compressed measurements.</p>
+<div class="figure align-default" id="fig-ssm-piecewise-polynomial-sensing-matrix">
+<img alt="../_images/sensing_matrix.png" src="../_images/sensing_matrix.png" />
+<p class="caption"><span class="caption-number">Fig. 12.9 </span><span class="caption-text">Gaussian sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span></span><a class="headerlink" href="#fig-ssm-piecewise-polynomial-sensing-matrix" title="Permalink to this image">¶</a></p>
+</div>
+<p>The measurement process is described by the equation</p>
+<div class="math notranslate nohighlight">
+\[
+\by = \Phi \bx + \be = \Phi \Psi \alpha + \be
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span>, <span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span>,
+and measurement vector <span class="math notranslate nohighlight">\(\by \in \RR^M\)</span>.
+For this example we chose the measurement noise to be <span class="math notranslate nohighlight">\(\be = \bzero\)</span>.</p>
+<p>The compressed measurements are shown below.</p>
+<div class="figure align-default" id="fig-ssm-piecewise-polynomial-measurements">
+<img alt="../_images/measurements.png" src="../_images/measurements.png" />
+<p class="caption"><span class="caption-number">Fig. 12.10 </span><span class="caption-text">Measurement vector <span class="math notranslate nohighlight">\(\by = \Phi \bx + \be\)</span></span><a class="headerlink" href="#fig-ssm-piecewise-polynomial-measurements" title="Permalink to this image">¶</a></p>
+</div>
+<p>Finally the product of <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Psi\)</span> given by <span class="math notranslate nohighlight">\(\Phi \Psi\)</span>
+will be used for actual recovery of sparse representation
+<span class="math notranslate nohighlight">\(\alpha\)</span> from the measurements <span class="math notranslate nohighlight">\(\by\)</span>.</p>
+<div class="figure align-default" id="fig-ssm-piecewise-polynomial-recovery-matrix">
+<img alt="../_images/recovery_matrix.png" src="../_images/recovery_matrix.png" />
+<p class="caption"><span class="caption-number">Fig. 12.11 </span><span class="caption-text">Recovery matrix <span class="math notranslate nohighlight">\(\Phi \Psi\)</span></span><a class="headerlink" href="#fig-ssm-piecewise-polynomial-recovery-matrix" title="Permalink to this image">¶</a></p>
+</div>
+<p>The sparse signal recovery problem is denoted as</p>
+<div class="math notranslate nohighlight">
+\[
+\widehat{\alpha} = \text{recovery}(\Phi \Psi, \by, K).
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\widehat{\alpha}\)</span> is a <span class="math notranslate nohighlight">\(K\)</span>-sparse approximation of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="number-of-measurements">
+<h2><span class="section-number">12.7.5. </span>Number of Measurements<a class="headerlink" href="#number-of-measurements" title="Permalink to this headline">¶</a></h2>
+<p>A fundamental question of compressive sensing framework is:
+<em>How many measurements are  necessary to acquire <span class="math notranslate nohighlight">\(K\)</span>-sparse signals</em>?
+By necessary we mean that <span class="math notranslate nohighlight">\(\by\)</span> carries
+enough information about <span class="math notranslate nohighlight">\(\bx\)</span> such that <span class="math notranslate nohighlight">\(\bx\)</span> can be recovered from <span class="math notranslate nohighlight">\(\by\)</span>.</p>
+<p>Clearly if <span class="math notranslate nohighlight">\(M &lt; K\)</span> then recovery is not possible.</p>
+<p>We further note that the sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span> should not map two different <span class="math notranslate nohighlight">\(K\)</span>-sparse
+signals to the same measurement vector.
+Thus we will need <span class="math notranslate nohighlight">\(M \geq 2K\)</span> and each
+collection of <span class="math notranslate nohighlight">\(2K\)</span> columns in <span class="math notranslate nohighlight">\(\Phi\)</span> must be non-singular.</p>
+<p>If the <span class="math notranslate nohighlight">\(K\)</span>-column  sub matrices of <span class="math notranslate nohighlight">\(\Phi\)</span> are badly conditioned, then it is possible that
+some sparse signals get mapped to very similar measurement vectors.
+Then it is numerically unstable
+to recover the signal.
+Moreover, if noise is present, stability further degrades.</p>
+<div class="docutils">
+<p>In <span id="id4">[<a class="reference internal" href="../bib.html#id35" title="Emmanuel J Candes and Terence Tao. Near-optimal signal recovery from random projections: universal encoding strategies? Information Theory, IEEE Transactions on, 52(12):5406–5425, 2006.">13</a>]</span> Cand`es and Tao  showed that the geometry of sparse
+signals should be preserved under the action of a sensing matrix. In particular
+the distance between two sparse signals shouldn’t change by much during sensing.</p>
+<p>They quantified this idea in the form of a <em>restricted isometric constant</em> of a matrix
+<span class="math notranslate nohighlight">\(\Phi\)</span> as the smallest number <span class="math notranslate nohighlight">\(\delta_K\)</span> for which the following holds</p>
+<div class="math notranslate nohighlight" id="equation-eq-ripbound">
+<span class="eqno">(12.37)<a class="headerlink" href="#equation-eq-ripbound" title="Permalink to this equation">¶</a></span>\[(1 - \delta_K) \| \bx \|_2^2 
+\leq \| \Phi \bx \|_2^2 
+\leq (1 + \delta_K) \| \bx \|_2^2 
+\Forall \bx : \| x \|_0 \leq K.\]</div>
+<p>We will study more about this property known as restricted isometry property (RIP)
+in <a class="reference internal" href="rip.html#sec-ssm-rip"><span class="std std-ref">Restricted Isometry Property</span></a>.
+Here we just sketch the implications of RIP for compressive sensing.</p>
+<p>When <span class="math notranslate nohighlight">\(\delta_K &lt; 1\)</span> then the inequalities imply that
+every collection of <span class="math notranslate nohighlight">\(K\)</span> columns from <span class="math notranslate nohighlight">\(\Phi\)</span> is
+non-singular.
+Since we need every collection of <span class="math notranslate nohighlight">\(2K\)</span> columns to be non-singular,
+we actually need <span class="math notranslate nohighlight">\(\delta_{2K} &lt; 1\)</span> which is the minimum requirement
+for recovery of <span class="math notranslate nohighlight">\(K\)</span> sparse signals.</p>
+<p>Further if <span class="math notranslate nohighlight">\(\delta_{2K} \ll 1\)</span> then we note that sensing operator
+very nearly maintains the <span class="math notranslate nohighlight">\(\ell_2\)</span> distance between any two <span class="math notranslate nohighlight">\(K\)</span> sparse signals.
+As a consequence, it is possible to invert the sensing process stably.</p>
+<p>It is now known that many randomly generated matrices have excellent RIP behavior.
+One can show  that if <span class="math notranslate nohighlight">\(\delta_{2K} \leq 0.1\)</span>, then with</p>
+<div class="math notranslate nohighlight">
+\[
+M = \bigO{K \ln ^{\ba} N}
+\]</div>
+<p>measurements, one can recover <span class="math notranslate nohighlight">\(\bx\)</span> with high probability.</p>
+<p>Some of the typical random matrices which have suitable RIP properties are</p>
+<ul class="simple">
+<li><p>Gaussian sensing matrices</p></li>
+<li><p>Partial Fourier matrices</p></li>
+<li><p>Rademacher sensing matrices</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="signal-recovery">
+<span id="sec-ssm-sparse-recovery"></span><h2><span class="section-number">12.7.6. </span>Signal Recovery<a class="headerlink" href="#signal-recovery" title="Permalink to this headline">¶</a></h2>
+<p>The second fundamental problem in compressive sensing is:
+<em>Given the compressive measurements <span class="math notranslate nohighlight">\(\by\)</span> how do we recover the signal <span class="math notranslate nohighlight">\(\bx\)</span></em>?
+This problem is known as SPARSE-RECOVERY problem.</p>
+<div class="docutils">
+<p>A simple formulation of the problem as:
+minimize <span class="math notranslate nohighlight">\(\| \bx \|_0\)</span> subject to <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span> is hopeless
+since it entails a combinatorial explosion of search space.</p>
+<p>Over the years, people have developed
+a number of algorithms to tackle the sparse recovery problem.</p>
+<p>The algorithms can be broadly classified into following categories</p>
+<ul class="simple">
+<li><p>[Greedy pursuits] These algorithms attempt to build the approximation of
+the signal iteratively by making locally optimal choices at each step.
+Examples of such algorithms include OMP (orthogonal matching pursuit),
+stage-wise OMP, regularized OMP, CoSaMP (compressive sampling pursuit)
+and IHT (iterative hard thresholding).</p></li>
+<li><p>[Convex relaxation] These techniques relax the <span class="math notranslate nohighlight">\(\ell_0\)</span> “norm” minimization problem
+into a suitable  problem which is a convex optimization problem.
+This relaxation is valid for a large class of signals of interest.
+Once the problem has been formulated as a convex optimization problem,
+a number of solutions are available, e.g.
+interior point methods, projected gradient methods and iterative thresholding.</p></li>
+<li><p>[Combinatorial algorithms] These methods are based on research in group testing
+and are specifically suited for situations where highly structured measurements
+of the signal are taken.
+This class includes algorithms like Fourier sampling, chaining pursuit, and HHS pursuit.</p></li>
+</ul>
+<p>A major emphasis of these notes will be the study
+of these sparse recovery algorithms. We shall provide
+some basic results in this section.
+We shall work under the following framework
+in the remainder of this section.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span> be our signal of interest where <span class="math notranslate nohighlight">\(N\)</span> is the number
+of signal components or <em>dimension</em> of the signal space <span class="math notranslate nohighlight">\(\RR^N\)</span>.</p></li>
+<li><p>Let us make <span class="math notranslate nohighlight">\(M\)</span> linear measurements of the signal.</p></li>
+<li><p>The measurements are given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \by = \Phi \bx.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\by \in \RR^M\)</span> is our measurement vector in the measurement space <span class="math notranslate nohighlight">\(\RR^M\)</span>
+and <span class="math notranslate nohighlight">\(M\)</span> is the dimension of our measurement space.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Phi\)</span> is an <span class="math notranslate nohighlight">\(M\times N\)</span> matrix known as the <em>sensing matrix</em>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(M \ll N\)</span>, hence <span class="math notranslate nohighlight">\(\Phi\)</span> achieves a <em>dimensionality reduction</em> over <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>We assume that measurements are <em>non-adaptive</em>; i.e.,
+the matrix <span class="math notranslate nohighlight">\(\Phi\)</span> is predefined and doesn’t depend on <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>The recovery process is denoted by</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx' = \Delta \by = \Delta (\Phi \bx) 
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta : \RR^M \to \RR^N\)</span> is a (usually nonlinear) recovery algorithm.</p>
+</li>
+</ol>
+<p>We will look at three kinds of situations:</p>
+<ul class="simple">
+<li><p>Signals are truly sparse. A signal has up to <span class="math notranslate nohighlight">\(K  (K \ll N)\)</span> non-zero values
+only where <span class="math notranslate nohighlight">\(K\)</span> is known in advance.
+Measurement process is ideal and no noise is introduced during measurement.
+We will look for guarantees which can ensure exact recovery of signal from
+<span class="math notranslate nohighlight">\(M (K &lt; M \ll N)\)</span> linear measurements.</p></li>
+<li><p>Signals are not truly sparse but they have few <span class="math notranslate nohighlight">\(K (K \ll N)\)</span> values
+which dominate the signal.
+Thus if we approximate the signal by these <span class="math notranslate nohighlight">\(K\)</span> values,
+then approximation error is not noticeable.
+We again assume that there is no measurement noise being introduced.
+When we recover the signal, it will in general not be exact recovery.
+We expect the recovery error to be bounded (by approximation error).
+Also in special cases where the signal turns out
+to be <span class="math notranslate nohighlight">\(K\)</span>-sparse, we expect the recovery algorithm to recover the signal exactly.
+Such an algorithm with bounded recovery error will be called <em>robust</em>.</p></li>
+<li><p>Signals are not sparse. Also there is measurement noise being introduced.
+We expect recovery algorithm to minimize error and thus perform <em>stable</em> recovery
+in the presence of measurement noise.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="exact-recovery-of-sparse-signals">
+<h2><span class="section-number">12.7.7. </span>Exact Recovery of Sparse Signals<a class="headerlink" href="#exact-recovery-of-sparse-signals" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>The null space of a matrix <span class="math notranslate nohighlight">\(\Phi\)</span> is denoted as</p>
+<div class="math notranslate nohighlight">
+\[
+\NullSpace(\Phi) = \{ \bv \in \RR^N :\Phi \bv = \bzero\}.
+\]</div>
+<p>The set of <span class="math notranslate nohighlight">\(K\)</span>-sparse signals is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma_K = \{ \bx \in \RR^N :  \|\bx\|_0 \leq K\}.
+\]</div>
+<div class="proof example admonition" id="ex-ssm-k-sparse-signal-2">
+<p class="admonition-title"><span class="caption-number">Example 12.29 </span> (K sparse signals)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(N=10\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bx=(1,2, 1, -1, 2 , -3, 4, -2, 2, -2) \in \RR^{10}\)</span> is not a sparse signal.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx=(0,0,0,0,1,0,0,-1,0,0)\in \RR^{10}\)</span> is a 2-sparse signal. Its also a 4 sparse signal.</p></li>
+</ul>
+</div>
+</div></div>
+<div class="proof lemma admonition" id="lem:difference_k_sparse_signals">
+<p class="admonition-title"><span class="caption-number">Lemma 12.2 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(\bb\)</span> are two <span class="math notranslate nohighlight">\(K\)</span> sparse signals then <span class="math notranslate nohighlight">\(\ba - \bb\)</span> is a <span class="math notranslate nohighlight">\(2K\)</span> sparse signal.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\((a - b)_i\)</span> is non zero only if at least one of <span class="math notranslate nohighlight">\(a_i\)</span> and <span class="math notranslate nohighlight">\(b_i\)</span> is non-zero.
+Hence number of non-zero components of <span class="math notranslate nohighlight">\(\ba - \bb\)</span> cannot exceed <span class="math notranslate nohighlight">\(2K\)</span>.
+Hence <span class="math notranslate nohighlight">\(\ba - \bb\)</span> is a <span class="math notranslate nohighlight">\(2K\)</span>-sparse signal.</p>
+</div>
+<div class="proof example admonition" id="example-7">
+<p class="admonition-title"><span class="caption-number">Example 12.30 </span> (Difference of K sparse signals)</p>
+<div class="example-content section" id="proof-content">
+<p>Let N = 5.</p>
+<ul class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\ba = (0,1,-1,0, 0)\)</span> and <span class="math notranslate nohighlight">\(\bb = (0,2,0,-1, 0)\)</span>.
+Then <span class="math notranslate nohighlight">\(\ba - \bb = (0,-1,-1,1, 0) \)</span> is a 3 sparse as well as 4 sparse signal.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\ba = (0,1,-1,0, 0)\)</span> and <span class="math notranslate nohighlight">\(\bb = (0,2,-1,0, 0)\)</span>.
+Then <span class="math notranslate nohighlight">\(\ba - \bb = (0,-1,-2,0, 0) \)</span> is a 2 sparse as well as 4 sparse signal.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\ba = (0,1,-1,0, 0)\)</span> and <span class="math notranslate nohighlight">\(\bb = (0,0,0,1, -1)\)</span>.
+Then <span class="math notranslate nohighlight">\(\ba - \bb = (0,1,-1,-1, 1) \)</span> is a 4 sparse signal.</p></li>
+</ul>
+</div>
+</div><div class="proof definition admonition" id="def-ssm-cs-unique-embeddings">
+<p class="admonition-title"><span class="caption-number">Definition 12.26 </span> (Unique embedding of a set)</p>
+<div class="definition-content section" id="proof-content">
+<p>We say that a sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span> uniquely embeds
+a set <span class="math notranslate nohighlight">\(C \subseteq \RR^N\)</span> if for any <span class="math notranslate nohighlight">\(\ba, \bb \in C\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi \bb \neq \Phi \bb.
+\]</div>
+</div>
+</div><div class="proof theorem admonition" id="lem:k_sparse_unique_representation_requirement">
+<p class="admonition-title"><span class="caption-number">Theorem 12.37 </span> (Unique embeddings of <span class="math notranslate nohighlight">\(K\)</span> sparse vectors)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span> uniquely embeds every
+<span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span> if and only if <span class="math notranslate nohighlight">\(\NullSpace(\Phi) \cap \Sigma_{2K} = \EmptySet\)</span>;
+i.e., <span class="math notranslate nohighlight">\(\NullSpace(\Phi)\)</span> contains no vectors in <span class="math notranslate nohighlight">\(\Sigma_{2K}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that the difference of sparse signals is not in the nullspace.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(\bb\)</span> be two <span class="math notranslate nohighlight">\(K\)</span> sparse signals.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\Phi \ba\)</span> and <span class="math notranslate nohighlight">\(\Phi \bb\)</span> are corresponding measurements.</p></li>
+<li><p>Now if <span class="math notranslate nohighlight">\(\Phi\)</span> provides unique embedding of all <span class="math notranslate nohighlight">\(K\)</span> sparse signals,
+then <span class="math notranslate nohighlight">\(\Phi \ba \neq \Phi \bb\)</span>.</p></li>
+<li><p>Thus  <span class="math notranslate nohighlight">\(\Phi (\ba - \bb) \neq \bzero\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\ba - \bb \notin \NullSpace(\Phi)\)</span>.</p></li>
+</ol>
+<p>We show the converse by contradiction.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \NullSpace(\Phi) \cap \Sigma_{2K}\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\Phi \bx = \bzero\)</span> and <span class="math notranslate nohighlight">\(\|\bx\|_0 \leq 2K\)</span>.</p></li>
+<li><p>Then we can find <span class="math notranslate nohighlight">\(\by, \bz \in \Sigma_K\)</span>
+such that <span class="math notranslate nohighlight">\(\bx = \bz - \by\)</span>.</p></li>
+<li><p>Thus there exists <span class="math notranslate nohighlight">\(\bm \in \RR^M\)</span> such that <span class="math notranslate nohighlight">\(\bm = \Phi \bz = \Phi \by\)</span>.</p></li>
+<li><p>But then, <span class="math notranslate nohighlight">\(\Phi\)</span> doesn’t uniquely embed <span class="math notranslate nohighlight">\(\by, \bz \in \Sigma_K\)</span>.</p></li>
+</ol>
+</div>
+<p>There are equivalent ways of characterizing this condition.
+In the following, we present a condition based on spark.</p>
+<div class="section" id="spark">
+<h3><span class="section-number">12.7.7.1. </span>Spark<a class="headerlink" href="#spark" title="Permalink to this headline">¶</a></h3>
+<p>We recall from <a class="reference internal" href="dictionaries.html#def:spark">Definition 12.16</a>, that spark of a matrix <span class="math notranslate nohighlight">\(\Phi\)</span> is defined as the
+minimum number of columns which are linearly dependent.</p>
+<div class="proof theorem admonition" id="thm:k_sparse_explanation_spark_requirement">
+<p class="admonition-title"><span class="caption-number">Theorem 12.38 </span> (Unique explanations and spark)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For any measurement <span class="math notranslate nohighlight">\(\by \in \RR^M\)</span>, there exists at most one signal
+<span class="math notranslate nohighlight">\(\bx  \in \Sigma_K\)</span> such that
+<span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span> if and only if <span class="math notranslate nohighlight">\(\spark(\Phi) &gt; 2K\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We need to show</p>
+<ul class="simple">
+<li><p>If for every measurement, there is only one <span class="math notranslate nohighlight">\(K\)</span>-sparse explanation, then <span class="math notranslate nohighlight">\(\spark(\Phi) &gt; 2K\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\spark(\Phi) &gt; 2K\)</span> then for every measurement, there is only one <span class="math notranslate nohighlight">\(K\)</span>-sparse explanation.</p></li>
+</ul>
+<p>Assume that for every <span class="math notranslate nohighlight">\(\by \in \RR^M\)</span>
+there exists at most one signal <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span> such that <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span>.</p>
+<ol class="simple">
+<li><p>Now assume that <span class="math notranslate nohighlight">\(\spark(\Phi) \leq 2K\)</span>.</p></li>
+<li><p>Thus there exists a set of at most <span class="math notranslate nohighlight">\(2K\)</span> columns which are linearly dependent.</p></li>
+<li><p>Thus there exists <span class="math notranslate nohighlight">\(\bv \in \Sigma_{2K}\)</span> such that <span class="math notranslate nohighlight">\( \Phi \bv = \bzero\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bv \in \NullSpace (\Phi)\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\Sigma_{2K} \cap \NullSpace (\Phi) \neq \EmptySet\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\Phi\)</span> doesn’t uniquely embed each signal <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span>.
+A contradiction.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\spark(\Phi) &gt; 2K\)</span>.</p></li>
+</ol>
+<p>Now suppose that <span class="math notranslate nohighlight">\(\spark(\Phi) &gt; 2K\)</span>.</p>
+<ol class="simple">
+<li><p>Assume that for some <span class="math notranslate nohighlight">\(y\)</span> there exist two different <span class="math notranslate nohighlight">\(K\)</span>-sparse explanations
+<span class="math notranslate nohighlight">\(\bx, \bx'\)</span> such that <span class="math notranslate nohighlight">\(\by = \Phi \bx =\Phi \bx'\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\Phi (\bx  - \bx') = \bzero\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bx - \bx' \in \NullSpace (\Phi)\)</span> and <span class="math notranslate nohighlight">\(\bx - \bx' \in  \Sigma_{2K}\)</span>.</p></li>
+<li><p>Hence, there exists a set of at most <span class="math notranslate nohighlight">\(2K\)</span> columns in <span class="math notranslate nohighlight">\(\Phi\)</span> which is
+linearly dependent.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\spark(\Phi) \leq 2K\)</span>. A contradiction.</p></li>
+<li><p>Hence, for every <span class="math notranslate nohighlight">\(\by \in \RR^M\)</span>, there exists at most one <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span>.</p></li>
+</ol>
+</div>
+<p>Since <span class="math notranslate nohighlight">\(\spark(\Phi) \in [2, M+1]\)</span> and we require that
+<span class="math notranslate nohighlight">\(\spark(\Phi) &gt; 2K\)</span> hence we require that <span class="math notranslate nohighlight">\(M \geq 2K\)</span>.</p>
+</div>
+</div>
+<div class="section" id="recovery-of-approximately-sparse-signals">
+<h2><span class="section-number">12.7.8. </span>Recovery of Approximately Sparse Signals<a class="headerlink" href="#recovery-of-approximately-sparse-signals" title="Permalink to this headline">¶</a></h2>
+<p>Spark is a useful criteria for characterization of sensing matrices for truly sparse signals.
+But this doesn’t work well for <em>approximately</em> sparse signals.
+We need to have more restrictive criteria on <span class="math notranslate nohighlight">\(\Phi\)</span>
+for ensuring  recovery of approximately sparse signals from compressed measurements.</p>
+<p>In this context we will deal with two types of errors:</p>
+<p>Approximation error</p>
+<ul class="simple">
+<li><p>Let us approximate a signal <span class="math notranslate nohighlight">\(\bx\)</span> using only <span class="math notranslate nohighlight">\(K\)</span> coefficients.</p></li>
+<li><p>Let us call the approximation as <span class="math notranslate nohighlight">\(\widehat{\bx}\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\be_a = (\bx - \widehat{\bx})\)</span> is approximation error.</p></li>
+</ul>
+<p>Recovery error</p>
+<ul class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> be a sensing matrix.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Delta\)</span> be a recovery algorithm.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx'= \Delta(\Phi \bx)\)</span> is the recovered signal vector.</p></li>
+<li><p>The error <span class="math notranslate nohighlight">\(\be_r = (\bx - \bx')\)</span> is recovery error.</p></li>
+</ul>
+<p>Ideally, the recovery error should not be too large compared to the
+approximation error.</p>
+<p>In this following we will</p>
+<ul class="simple">
+<li><p>Formalize the notion of null space property (NSP) of a matrix <span class="math notranslate nohighlight">\(\Phi\)</span>.</p></li>
+<li><p>Describe a measure for performance of an arbitrary recovery algorithm <span class="math notranslate nohighlight">\(\Delta\)</span>.</p></li>
+<li><p>Establish the connection between NSP and performance guarantee for recovery algorithms.</p></li>
+</ul>
+<div class="docutils">
+<p>Suppose we approximate <span class="math notranslate nohighlight">\(\bx\)</span> by a <span class="math notranslate nohighlight">\(K\)</span>-sparse signal
+<span class="math notranslate nohighlight">\(\widehat{\bx} \in \Sigma_K\)</span>, then the minimum error under <span class="math notranslate nohighlight">\(\ell_p\)</span> norm is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_K(\bx)_p = \min_{\widehat{\bx} \in \Sigma_K} \| \bx - \widehat{\bx}\|_p. 
+\]</div>
+<p>One specific <span class="math notranslate nohighlight">\(\widehat{\bx} \in \Sigma_K\)</span> for which this minimum is achieved
+is the best <span class="math notranslate nohighlight">\(K\)</span>-term approximation
+(<a class="reference internal" href="srr.html#lem:ssm:best_k_term_approximation">Theorem 12.17</a>).</p>
+<p>In the following, we will need some additional notation.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\( I = \{1,2,\dots, N\}\)</span> be the set of indices for signal <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda \subset I\)</span>  be a subset of indices.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda^c = I \setminus \Lambda\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx_{\Lambda}\)</span> will denote a signal vector obtained by setting the entries of
+<span class="math notranslate nohighlight">\(\bx\)</span> indexed by <span class="math notranslate nohighlight">\(\Lambda^c\)</span> to zero.</p></li>
+</ol>
+</div>
+<div class="proof example admonition" id="ex-ssm-cs-signal-restriction-1">
+<p class="admonition-title"><span class="caption-number">Example 12.31 </span></p>
+<div class="example-content section" id="proof-content">
+<ol class="simple">
+<li><p>Let N = 4.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(I = \{1,2,3,4\}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda = \{1,3\}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\Lambda^c = \{2, 4\}\)</span>.</p></li>
+<li><p>Now let <span class="math notranslate nohighlight">\(\bx = (-1,1,2,-4)\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx_{\Lambda} = (-1, 0, 2, 0)\)</span>.</p></li>
+</ol>
+</div>
+</div><p><span class="math notranslate nohighlight">\(\Phi_{\Lambda}\)</span> will denote a <span class="math notranslate nohighlight">\(M\times N\)</span> matrix obtained by setting the columns of <span class="math notranslate nohighlight">\(\Phi\)</span>
+indexed by <span class="math notranslate nohighlight">\(\Lambda^c\)</span> to zero.</p>
+<div class="proof example admonition" id="ex-ssm-cs-matrix-restriction-1">
+<p class="admonition-title"><span class="caption-number">Example 12.32 </span></p>
+<div class="example-content section" id="proof-content">
+<ol>
+<li><p>Let N = 4.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(I = \{1,2,3,4\}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda = \{1,3\}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\Lambda^c = \{2, 4\}\)</span>.</p></li>
+<li><p>Now let <span class="math notranslate nohighlight">\(\bx = (-1,1,2,-4)\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx_{\Lambda} = (-1, 0, 2, -4)\)</span>.</p></li>
+<li><p>Now let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \Phi = \begin{pmatrix}
+        1 &amp; 0 &amp; -1 &amp; 1\\
+        -1 &amp; -2 &amp; 2 &amp; 3
+      \end{pmatrix}.
+   \end{split}\]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \Phi_{\Lambda} = \begin{pmatrix}
+        1 &amp; 0 &amp; -1 &amp; 0\\
+        -1 &amp; 0 &amp; 2 &amp; 0
+      \end{pmatrix}.
+    \end{split}\]</div>
+</li>
+</ol>
+</div>
+</div><div class="section" id="null-space-property">
+<h3><span class="section-number">12.7.8.1. </span>Null Space Property<a class="headerlink" href="#null-space-property" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def:null_space_property">
+<span id="index-4"></span><p class="admonition-title"><span class="caption-number">Definition 12.27 </span> (Null space property)</p>
+<div class="definition-content section" id="proof-content">
+<p>A matrix <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies the <em>null space property (NSP)</em> of order <span class="math notranslate nohighlight">\(K\)</span>
+if there exists a constant <span class="math notranslate nohighlight">\(C &gt; 0\)</span> such that,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bh_{\Lambda}\|_2 \leq C \frac{\| \bh_{{\Lambda}^c}\|_1 }{\sqrt{K}}
+\]</div>
+<p>holds for every <span class="math notranslate nohighlight">\(\bh \in \NullSpace (\Phi)\)</span> and for every
+<span class="math notranslate nohighlight">\(\Lambda\)</span> such that <span class="math notranslate nohighlight">\(|\Lambda| \leq K\)</span>.</p>
+</div>
+</div><ul class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bh\)</span> be <span class="math notranslate nohighlight">\(K\)</span> sparse. Thus choosing the indices on which <span class="math notranslate nohighlight">\(\bh\)</span> is non-zero, I can
+construct a <span class="math notranslate nohighlight">\(\Lambda\)</span> such that <span class="math notranslate nohighlight">\(|\Lambda| \leq K\)</span> and <span class="math notranslate nohighlight">\(\bh_{{\Lambda}^c} = 0\)</span>.
+Thus <span class="math notranslate nohighlight">\(\| \bh_{{\Lambda}^c}\|_1\)</span> = 0. Hence above condition is not satisfied. Thus
+such a vector <span class="math notranslate nohighlight">\(\bh\)</span> should not belong to <span class="math notranslate nohighlight">\(\NullSpace(\Phi)\)</span> if <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies NSP.</p></li>
+<li><p>Essentially vectors in <span class="math notranslate nohighlight">\(\NullSpace (\Phi)\)</span> shouldn’t be concentrated in a small subset of indices.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies NSP then the only <span class="math notranslate nohighlight">\(K\)</span>-sparse vector in <span class="math notranslate nohighlight">\(\NullSpace(\Phi)\)</span> is <span class="math notranslate nohighlight">\(\bh = \bzero\)</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="measuring-the-performance-of-a-recovery-algorithm">
+<h3><span class="section-number">12.7.8.2. </span>Measuring the Performance of a Recovery Algorithm<a class="headerlink" href="#measuring-the-performance-of-a-recovery-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(\Delta : \RR^M \to \RR^N\)</span> represent a recovery method to
+recover approximately sparse <span class="math notranslate nohighlight">\(\bx\)</span> from <span class="math notranslate nohighlight">\(\by\)</span>.</p>
+<div class="docutils">
+<p><span class="math notranslate nohighlight">\(\ell_2\)</span> recovery error is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Delta (\Phi \bx) - \bx \|_2.
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(\ell_1\)</span> error for <span class="math notranslate nohighlight">\(K\)</span>-term approximation is given by <span class="math notranslate nohighlight">\(\sigma_K(\bx)_1\)</span>.</p>
+<p>We will be interested in guarantees of the form</p>
+<div class="math notranslate nohighlight" id="equation-eq-nspguarantee">
+<span class="eqno">(12.38)<a class="headerlink" href="#equation-eq-nspguarantee" title="Permalink to this equation">¶</a></span>\[\| \Delta (\Phi \bx) - \bx \|_2 \leq C \frac{\sigma_K (\bx)_1}{\sqrt{K}}.\]</div>
+<p>Why, this recovery guarantee formulation?</p>
+<ul class="simple">
+<li><p>Exact recovery of K-sparse signals. <span class="math notranslate nohighlight">\(\sigma_K (\bx)_1 = 0\)</span> if <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span>.</p></li>
+<li><p>Robust recovery of non-sparse signals</p></li>
+<li><p>Recovery dependent on how well the signals are approximated by <span class="math notranslate nohighlight">\(K\)</span>-sparse vectors.</p></li>
+<li><p>Such guarantees are known as <em>instance optimal</em> guarantees.</p></li>
+<li><p>Also known as <em>uniform</em> guarantees.</p></li>
+</ul>
+<p>Why the specific choice of norms?</p>
+<ul class="simple">
+<li><p>Different choices of <span class="math notranslate nohighlight">\(\ell_p\)</span> norms lead to different guarantees.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\ell_2\)</span> norm on the LHS is a typical least squares error.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\ell_2\)</span> norm on the RHS will require prohibitively large number of measurements.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\ell_1\)</span> norm on the RHS helps us keep the number of measurements less.</p></li>
+</ul>
+<p>If an algorithm <span class="math notranslate nohighlight">\(\Delta\)</span> provides instance optimal guarantees as defined above, what
+kind of requirements does it place on the sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span>?</p>
+<p>We show that NSP of order <span class="math notranslate nohighlight">\(2K\)</span> is a necessary condition for providing uniform guarantees.</p>
+</div>
+</div>
+<div class="section" id="nsp-and-instance-optimal-guarantees">
+<h3><span class="section-number">12.7.8.3. </span>NSP and Instance Optimal Guarantees<a class="headerlink" href="#nsp-and-instance-optimal-guarantees" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="thm:nsp_guarantee_requirement">
+<p class="admonition-title"><span class="caption-number">Theorem 12.39 </span> (NSP and instance optimal guarantees)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi : \RR^N \to \RR^M\)</span> denote a sensing matrix
+and <span class="math notranslate nohighlight">\(\Delta : \RR^M \to \RR^N\)</span> denote an arbitrary recovery algorithm.
+If the pair <span class="math notranslate nohighlight">\((\Phi, \Delta)\)</span> satisfies instance optimal guarantee
+<a class="reference internal" href="#equation-eq-nspguarantee">(12.38)</a>,
+then  <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies NSP of the order <span class="math notranslate nohighlight">\(2K\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We are given that</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((\Phi, \Delta)\)</span> form an encoder-decoder pair.</p></li>
+<li><p>Together, they satisfy instance optimal guarantee <a class="reference internal" href="#equation-eq-nspguarantee">(12.38)</a>.</p></li>
+<li><p>Thus they are able to recover all sparse signals exactly.</p></li>
+<li><p>For non-sparse signals, they are able to recover their <span class="math notranslate nohighlight">\(K\)</span>-sparse approximation with bounded recovery error.</p></li>
+</ul>
+<p>We need to show that if <span class="math notranslate nohighlight">\(\bh \in \NullSpace(\Phi)\)</span>, then <span class="math notranslate nohighlight">\(\bh\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bh_{\Lambda}\|_2 \leq C \frac{\| \bh_{{\Lambda}^c}\|_1 }{\sqrt{2K}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Lambda\)</span> corresponds to <span class="math notranslate nohighlight">\(2K\)</span> largest magnitude entries in <span class="math notranslate nohighlight">\(\bh\)</span>.
+Note that we have used <span class="math notranslate nohighlight">\(2K\)</span> in this expression, since we need to show that
+<span class="math notranslate nohighlight">\(\Phi\)</span> satisfies NSP of order <span class="math notranslate nohighlight">\(2K\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bh \in \NullSpace(\Phi)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda\)</span> be the indices corresponding to the <span class="math notranslate nohighlight">\(2K\)</span> largest entries of <span class="math notranslate nohighlight">\(\bh\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \bh = \bh_{\Lambda}  + \bh_{\Lambda^c}.
+   \]</div>
+</li>
+<li><p>Split <span class="math notranslate nohighlight">\(\Lambda\)</span> into <span class="math notranslate nohighlight">\(\Lambda_0\)</span> and <span class="math notranslate nohighlight">\(\Lambda_1\)</span>
+such that <span class="math notranslate nohighlight">\(|\Lambda_0| = |\Lambda_1| = K\)</span>.</p></li>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[
+   \bh_{\Lambda} = \bh_{\Lambda_0} + \bh_{\Lambda_1}.
+   \]</div>
+</li>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \bh_{\Lambda_0} + \bh_{\Lambda^c}.
+   \]</div>
+</li>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx' = - \bh_{\Lambda_1}.
+   \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \bh =  \bx - \bx'.
+   \]</div>
+</li>
+<li><p>By assumption <span class="math notranslate nohighlight">\(\bh \in \NullSpace(\Phi)\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+   \Phi \bh = \Phi(\bx - \bx') = \bzero \implies \Phi \bx = \Phi \bx'.
+   \]</div>
+</li>
+<li><p>But since <span class="math notranslate nohighlight">\(\bx' \in \Sigma_K\)</span> (recall that <span class="math notranslate nohighlight">\(\Lambda_1\)</span> indexes only <span class="math notranslate nohighlight">\(K\)</span> entries)
+and  <span class="math notranslate nohighlight">\(\Delta\)</span> is able to recover all <span class="math notranslate nohighlight">\(K\)</span>-sparse signals exactly, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx' = \Delta (\Phi \bx').
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+   \Delta (\Phi \bx) = \Delta (\Phi  \bx') = \bx';
+   \]</div>
+<p>i.e., the recovery algorithm <span class="math notranslate nohighlight">\(\Delta\)</span> recovers <span class="math notranslate nohighlight">\(\bx'\)</span> for
+the signal <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</li>
+<li><p>Certainly <span class="math notranslate nohighlight">\(\bx\)</span> is not <span class="math notranslate nohighlight">\(K\)</span>-sparse since <span class="math notranslate nohighlight">\(\Delta\)</span> recovers every
+<span class="math notranslate nohighlight">\(K\)</span>-sparse signal uniquely.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\Lambda^c\)</span> must be nonempty.</p></li>
+<li><p>Finally we also have</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bh_{\Lambda} \|_2 \leq \| \bh \|_2  = \| \bx  - \bx'\|_2 
+   = \| \bx - \Delta (\Phi \bx)\| _2
+   \]</div>
+<p>since <span class="math notranslate nohighlight">\(\bh\)</span> contains some additional non-zero entries.</p>
+</li>
+<li><p>But as per instance optimal recovery guarantee <a class="reference internal" href="#equation-eq-nspguarantee">(12.38)</a>
+for <span class="math notranslate nohighlight">\((\Phi, \Delta)\)</span> pair,  we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Delta (\Phi \bx) - \bx \|_2 \leq C \frac{\sigma_K (\bx)_1}{\sqrt{K}}.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bh_{\Lambda} \|_2 \leq C \frac{\sigma_K (\bx)_1}{\sqrt{K}}.
+   \]</div>
+</li>
+<li><p>But</p>
+<div class="math notranslate nohighlight">
+\[
+   \sigma_K (\bx)_1 = \min_{\widehat{x} \in \Sigma_K} \|\bx - \widehat{\bx}\|_1. 
+   \]</div>
+</li>
+<li><p>Recall that <span class="math notranslate nohighlight">\(\bx =\bh_{\Lambda_0} + \bh_{\Lambda^c}\)</span>
+where <span class="math notranslate nohighlight">\(\Lambda_0\)</span> indexes <span class="math notranslate nohighlight">\(K\)</span> entries of <span class="math notranslate nohighlight">\(\bh\)</span>
+which are (magnitude wise) larger than all entries indexed by <span class="math notranslate nohighlight">\(\Lambda^c\)</span>.</p></li>
+<li><p>Hence the best <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm <span class="math notranslate nohighlight">\(K\)</span> term
+approximation of <span class="math notranslate nohighlight">\(\bx\)</span> is given by  <span class="math notranslate nohighlight">\(\bh_{\Lambda_0}\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \sigma_K (\bx)_1  = \|  \bh_{\Lambda^c} \|_1. 
+   \]</div>
+</li>
+<li><p>Thus we finally have</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bh_{\Lambda} \|_2 \leq C \frac{\|  \bh_{\Lambda^c} \|_1}{\sqrt{K}} 
+   = \sqrt{2}C \frac{\|  \bh_{\Lambda^c} \|_1}{\sqrt{2K}}  
+   \quad \Forall \bh \in \NullSpace(\Phi).
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies the NSP of order <span class="math notranslate nohighlight">\(2K\)</span>.</p></li>
+</ol>
+</div>
+<p>It turns out that NSP of order <span class="math notranslate nohighlight">\(2K\)</span> is also sufficient to establish a guarantee of the form
+above for a practical recovery algorithm.</p>
+</div>
+</div>
+<div class="section" id="recovery-in-presence-of-measurement-noise">
+<h2><span class="section-number">12.7.9. </span>Recovery in Presence of Measurement Noise<a class="headerlink" href="#recovery-in-presence-of-measurement-noise" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>Measurement vector in the presence of noise is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\by =\Phi \bx + \be
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\be\)</span> is the measurement noise or error.
+<span class="math notranslate nohighlight">\(\| \be \|_2\)</span> is the <span class="math notranslate nohighlight">\(\ell_2\)</span> size of measurement error.</p>
+<p>Recovery error as usual is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Delta (\by) - \bx \|_2 = \| \Delta (\Phi \bx + \be) - \bx \|_2. 
+\]</div>
+<p><em>Stability</em> of a recovery algorithm is characterized by comparing
+variation of recovery error w.r.t. measurement error.</p>
+<p>NSP is both necessary and sufficient for establishing guarantees of the form:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Delta (\Phi \bx) - \bx \|_2 \leq C \frac{\sigma_K (\bx)_1}{\sqrt{K}}.
+\]</div>
+<p>These guarantees do not account for presence of noise during measurement.</p>
+<p>We need stronger conditions for handling noise.
+The restricted isometry property for sensing matrices comes to our rescue.</p>
+</div>
+<div class="section" id="restricted-isometry-property">
+<h3><span class="section-number">12.7.9.1. </span>Restricted Isometry Property<a class="headerlink" href="#restricted-isometry-property" title="Permalink to this headline">¶</a></h3>
+<div class="docutils">
+<p>We recall that a matrix <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies the <em>restricted isometry property</em> (RIP)
+of order <span class="math notranslate nohighlight">\(K\)</span>  if there exists <span class="math notranslate nohighlight">\(\delta_K \in (0,1)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+(1- \delta_K) \| \bx \|^2_2 
+\leq \| \Phi \bx \|^2_2 
+\leq (1 + \delta_K) \| \bx \|^2_2  
+\]</div>
+<p>holds for every <span class="math notranslate nohighlight">\(\bx \in \Sigma_K = \{ \bx \ST \| \bx\|_0 \leq K \}\)</span>.</p>
+<ul class="simple">
+<li><p>If a matrix satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span>, then we can see that it <em>approximately</em> preserves
+the size of a <span class="math notranslate nohighlight">\(K\)</span>-sparse vector.</p></li>
+<li><p>If a matrix satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span>, then we can see that it  <em>approximately</em> preserves the
+distance between any two <span class="math notranslate nohighlight">\(K\)</span>-sparse vectors since difference vectors would be <span class="math notranslate nohighlight">\(2K\)</span> sparse
+(see <a class="reference internal" href="rip.html#lem:proj:rip_distance_preservation">Theorem 12.48</a>) .</p></li>
+<li><p>We say that the matrix is <em>nearly orthonormal</em> for sparse vectors.</p></li>
+<li><p>If a matrix satisfies RIP of order <span class="math notranslate nohighlight">\(K\)</span> with a constant <span class="math notranslate nohighlight">\(\delta_K\)</span>,
+it automatically satisfies
+RIP of any order <span class="math notranslate nohighlight">\(K' &lt; K\)</span> with a constant <span class="math notranslate nohighlight">\(\delta_{K'} \leq \delta_{K}\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="stability">
+<h3><span class="section-number">12.7.9.2. </span>Stability<a class="headerlink" href="#stability" title="Permalink to this headline">¶</a></h3>
+<p>Informally a recovery algorithm is stable if recovery error is small
+in the presence of small measurement noise.</p>
+<p>Is RIP necessary and sufficient for sparse signal recovery from noisy measurements?
+Let us look at the necessary part.</p>
+<p>We will define a notion of stability of the recovery algorithm.</p>
+<div class="proof definition admonition" id="def:recovery_algorithm_stability">
+<p class="admonition-title"><span class="caption-number">Definition 12.28 </span> (<span class="math notranslate nohighlight">\(C\)</span> stable encoder-decoder pair)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi : \RR^N \to \RR^M\)</span> be a sensing matrix
+and <span class="math notranslate nohighlight">\(\Delta : \RR^M \to \RR^N\)</span> be a recovery algorithm.
+We say that the pair <span class="math notranslate nohighlight">\((\Phi, \Delta)\)</span> is <em><span class="math notranslate nohighlight">\(C\)</span>-stable</em> if for any <span class="math notranslate nohighlight">\(\bx \in \Sigma_K\)</span>
+and any <span class="math notranslate nohighlight">\(\be \in \RR^M\)</span> we have that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Delta(\Phi \bx + \be) - \bx\|_2  \leq C \| \be\|_2. 
+\]</div>
+</div>
+</div><ul class="simple">
+<li><p>Error is added to the measurements.</p></li>
+<li><p>LHS is <span class="math notranslate nohighlight">\(\ell_2\)</span> norm of recovery error.</p></li>
+<li><p>RHS consists of scaling of the <span class="math notranslate nohighlight">\(\ell_2\)</span> norm of measurement error.</p></li>
+<li><p>The definition says that recovery error is bounded by a
+multiple of the measurement error.</p></li>
+<li><p>Thus adding a small amount of measurement noise
+shouldn’t be causing arbitrarily large recovery error.</p></li>
+</ul>
+<p>It turns out that <span class="math notranslate nohighlight">\(C\)</span>-stability requires <span class="math notranslate nohighlight">\(\Phi\)</span> to satisfy RIP.</p>
+<div class="proof theorem admonition" id="thm:stability_requires_rip">
+<p class="admonition-title"><span class="caption-number">Theorem 12.40 </span> (Necessity of RIP for <span class="math notranslate nohighlight">\(C\)</span>-stability)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If a pair <span class="math notranslate nohighlight">\((\Phi, \Delta)\)</span> is <span class="math notranslate nohighlight">\(C\)</span>-stable then</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{C} \| \bx\|_2 \leq \| \Phi \bx  \|_2  
+\]</div>
+<p>for all <span class="math notranslate nohighlight">\(\bx \in \Sigma_{2K}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Remember that any <span class="math notranslate nohighlight">\(\bx \in \Sigma_{2K}\)</span> can be written in the form of
+<span class="math notranslate nohighlight">\(\bx  = \by - \bz\)</span> where
+<span class="math notranslate nohighlight">\(\by, \bz \in \Sigma_K\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \Sigma_{2K}\)</span>.</p></li>
+<li><p>Split it in the form of <span class="math notranslate nohighlight">\(\bx = \by -\bz\)</span> with <span class="math notranslate nohighlight">\(\by, \bz \in \Sigma_{K}\)</span>.</p></li>
+<li><p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+   \be_y = \frac{\Phi (\bz - \by)}{2} \quad \text{and} \quad \be_z = \frac{\Phi (\by - \bz)}{2}.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+   \be_y - \be_z = \Phi (\bz - \by) \implies \Phi \by + \be_y = \Phi \bz + \be_z.
+   \]</div>
+</li>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[
+   \Phi \by + \be_y = \Phi \bz + \be_z = \frac{\Phi (\by + \bz)}{2}.
+   \]</div>
+</li>
+<li><p>Also we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \be_y \|_2 = \| \be_z \|_2 = \frac{\| \Phi (\by - \bz) \|_2}{2} = \frac{\| \Phi \bx \|_2}{2}.
+   \]</div>
+</li>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+   \by' = \Delta (\Phi \by + \be_y) = \Delta (\Phi \bz + \be_z).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\((\Phi, \Delta)\)</span> is <span class="math notranslate nohighlight">\(C\)</span>-stable, hence we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \by'- \by\|_2  \leq C \| \be_y\|_2. 
+   \]</div>
+</li>
+<li><p>Also</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \by'- \bz\|_2  \leq C \| \be_z\|_2. 
+   \]</div>
+</li>
+<li><p>Using the triangle inequality</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \| \bx \|_2 
+   &amp;= \| \by - \bz\|_2  = \| \by - \by' + \by' - \bz \|_2\\ 
+   &amp;\leq \| \by - \by' \|_2 + \| \by' - \bz\|_2\\
+   &amp;\leq  C \| \be_y \|_2 + C \| \be_z \|_2 
+   = C (\| \be_y \|_2 + \| \be_z \|_2)
+   = C \| \Phi \bx \|_2.
+   \end{split}\]</div>
+</li>
+<li><p>Thus we have for every <span class="math notranslate nohighlight">\(\bx \in \Sigma_{2K}\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{1}{C}\| \bx \|_2 \leq \| \Phi \bx \|_2. 
+   \]</div>
+</li>
+</ol>
+</div>
+<p>This theorem gives us the lower bound for RIP property of
+order <span class="math notranslate nohighlight">\(2K\)</span> in <a class="reference internal" href="#equation-eq-ripbound">(12.37)</a> with
+<span class="math notranslate nohighlight">\(\delta_{2K} = 1 - \frac{1}{C^2}\)</span>
+as a necessary condition for <span class="math notranslate nohighlight">\(C\)</span>-stable recovery algorithms.</p>
+<p>Note that smaller the constant <span class="math notranslate nohighlight">\(C\)</span>, lower is the bound on recovery error
+(w.r.t. measurement error).
+But as <span class="math notranslate nohighlight">\(C \to 1\)</span>, <span class="math notranslate nohighlight">\( \delta_{2K} \to 0\)</span>,
+thus reducing the impact of measurement noise requires
+sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span> to be designed with tighter RIP constraints.</p>
+<p>This result doesn’t require an upper bound on the RIP property in <a class="reference internal" href="#equation-eq-ripbound">(12.37)</a>.</p>
+<p>It turns out that If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP,
+then this is also sufficient for a variety of algorithms to be able to successfully recover
+a sparse signal from noisy measurements. We will discuss this later.</p>
+</div>
+<div class="section" id="measurement-bounds">
+<h3><span class="section-number">12.7.9.3. </span>Measurement Bounds<a class="headerlink" href="#measurement-bounds" title="Permalink to this headline">¶</a></h3>
+<p>As stated in previous section, for a <span class="math notranslate nohighlight">\((\Phi, \Delta)\)</span> pair to be <span class="math notranslate nohighlight">\(C\)</span>-stable
+we require that
+<span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span> with a constant <span class="math notranslate nohighlight">\(\delta_{2K}\)</span>.
+Let us ignore <span class="math notranslate nohighlight">\(\delta_{2K}\)</span> for the time being and look at relationship between <span class="math notranslate nohighlight">\(M\)</span>, <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(K\)</span>.
+We have a sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span> of size <span class="math notranslate nohighlight">\(M\times N\)</span> and expect it to provide RIP of order <span class="math notranslate nohighlight">\(2K\)</span>.
+How many measurements <span class="math notranslate nohighlight">\(M\)</span> are necessary?
+We will assume that <span class="math notranslate nohighlight">\(K &lt; N / 2\)</span>. This assumption is valid for approximately sparse signals.</p>
+<div class="docutils">
+<p>Before we start figuring out the bounds, let us develop a special subset of <span class="math notranslate nohighlight">\(\Sigma_K\)</span> sets.
+Consider the set</p>
+<div class="math notranslate nohighlight">
+\[
+U = \{ \bx \in \{0, +1, -1\}^N \ST \| \bx\|_0 = K  \}.
+\]</div>
+<p>When we say <span class="math notranslate nohighlight">\( \| \bx\|_0 = K\)</span>,
+we mean that exactly <span class="math notranslate nohighlight">\(K\)</span> terms in each member of <span class="math notranslate nohighlight">\(U\)</span> can be non-zero (i.e. <span class="math notranslate nohighlight">\(-1\)</span> or <span class="math notranslate nohighlight">\(+1\)</span>).</p>
+<p>Hence <span class="math notranslate nohighlight">\(U\)</span> is a set of signal vectors <span class="math notranslate nohighlight">\(\bx\)</span> of length <span class="math notranslate nohighlight">\(N\)</span>
+where each sample takes values from <span class="math notranslate nohighlight">\(\{0, +1, -1\}\)</span> and
+number of allowed non-zero samples is fixed at <span class="math notranslate nohighlight">\(K\)</span>.
+An example below explains it further.</p>
+</div>
+<div class="proof example admonition" id="ex-ssm-cs-u-set-6-2">
+<p class="admonition-title"><span class="caption-number">Example 12.33 </span> (<span class="math notranslate nohighlight">\(U\)</span> for <span class="math notranslate nohighlight">\(N=6\)</span> and <span class="math notranslate nohighlight">\(K=2\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>Each vector in <span class="math notranslate nohighlight">\(U\)</span> will have 6 elements out of which <span class="math notranslate nohighlight">\(2\)</span> can be non zero.
+There are <span class="math notranslate nohighlight">\(\binom{6}{2}\)</span> ways of choosing the non-zero elements.
+Some of those sets are listed below as examples:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp;(+1,+1,0,0,0,0)\\
+&amp;(+1,-1,0,0,0,0)\\
+&amp;(0,-1,0,+1,0,0)\\
+&amp;(0,-1,0,+1,0,0)\\
+&amp;(0,0,0,0,-1,+1)\\
+&amp;(0,0,-1,-1,0,0).
+\end{split}\]</div>
+</div>
+</div><div class="docutils">
+<p>Revisiting</p>
+<div class="math notranslate nohighlight">
+\[
+U = \{ \bx \in \{0, +1, -1\}^N \ST \| \bx \|_0 = K \}   
+\]</div>
+<p>It is now obvious that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_2^2 = K \Forall \bx \in U.
+\]</div>
+<p>Since there are <span class="math notranslate nohighlight">\(\binom{N}{K}\)</span> ways of choosing <span class="math notranslate nohighlight">\(K\)</span> non-zero elements
+and each non zero element can take
+either of the two values <span class="math notranslate nohighlight">\(+1\)</span> or <span class="math notranslate nohighlight">\(-1\)</span>, hence the cardinality of
+set <span class="math notranslate nohighlight">\(U\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+|U| = \binom{N}{K} 2^K.
+\]</div>
+<p>By definition</p>
+<div class="math notranslate nohighlight">
+\[
+U \subset \Sigma_K.
+\]</div>
+<p>Further Let <span class="math notranslate nohighlight">\(\bx, \by \in U\)</span>.<br />
+Then <span class="math notranslate nohighlight">\(\bx - \by\)</span> will have a maximum of <span class="math notranslate nohighlight">\(2K\)</span> non-zero elements.
+The non-zero elements would have values in <span class="math notranslate nohighlight">\(\{-2,-1,1,2\}\)</span>.
+Thus <span class="math notranslate nohighlight">\( \|\bx - \by \|_0 = R \leq 2K\)</span>.
+Further <span class="math notranslate nohighlight">\(\| \bx - \by \|_2^2 \geq R\)</span>.
+Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \by \|_0 \leq \| \bx - \by \|_2^2 \Forall \bx, \by \in U.
+\]</div>
+<p>We now state a result which will help us in getting to the bounds.</p>
+</div>
+<div class="proof lemma admonition" id="lem:rip_bound_X_lemma">
+<p class="admonition-title"><span class="caption-number">Lemma 12.3 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(N\)</span> satisfying <span class="math notranslate nohighlight">\(K &lt; \frac{N}{2}\)</span> be given.
+There exists a set <span class="math notranslate nohighlight">\(X \subset \Sigma_K\)</span> such that
+for any <span class="math notranslate nohighlight">\(\bx \in X\)</span> we have <span class="math notranslate nohighlight">\(\|\bx \|_2 \leq \sqrt{K}\)</span>
+and for any <span class="math notranslate nohighlight">\(\bx, \by \in X\)</span> with <span class="math notranslate nohighlight">\(\bx \neq \by\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \by \|_2 \geq \sqrt{\frac{K}{2}}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\ln | X | \geq \frac{K}{2} \ln \left( \frac{N}{K} \right).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We just need to find one set <span class="math notranslate nohighlight">\(X\)</span> which satisfies the requirements of this lemma.
+We have to construct a set <span class="math notranslate nohighlight">\(X\)</span> such that</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\| \bx \|_2 \leq \sqrt{K}  \Forall \bx \in X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\| \bx - \by \|_2 \geq \sqrt{\frac{K}{2}}\)</span> for every <span class="math notranslate nohighlight">\(bx, \by \in X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\ln | X | \geq \frac{K}{2} \ln \left( \frac{N}{K} \right)\)</span>
+or equivalently <span class="math notranslate nohighlight">\(|X| \geq \left( \frac{N}{K} \right)^{\frac{K}{2}}\)</span>.</p></li>
+</ol>
+<p>First condition states that the set <span class="math notranslate nohighlight">\(X\)</span> lies in the intersection of
+<span class="math notranslate nohighlight">\(\Sigma_K\)</span> and the closed ball <span class="math notranslate nohighlight">\(B[\bzero, \sqrt{K}]\)</span>.
+Second condition states that the points in <span class="math notranslate nohighlight">\(X\)</span> are sufficiently
+distant from each other.
+Third condition states that there are at least a certain number of points
+in <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>We will construct <span class="math notranslate nohighlight">\(X\)</span> by picking vectors from <span class="math notranslate nohighlight">\(U\)</span>. Thus <span class="math notranslate nohighlight">\(X \subset U\)</span>.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in X \subset U\)</span> hence
+<span class="math notranslate nohighlight">\(\| \bx \|_2 = \sqrt{K} \leq \sqrt{K} \Forall \bx \in X\)</span>.</p></li>
+<li><p>Consider any fixed <span class="math notranslate nohighlight">\(\bx \in U\)</span>.</p></li>
+<li><p>How many elements <span class="math notranslate nohighlight">\(\by\)</span> are there in <span class="math notranslate nohighlight">\(U\)</span> such that <span class="math notranslate nohighlight">\(\|\bx - \by\|_2^2 &lt; \frac{K}{2}\)</span>?</p></li>
+<li><p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+   U_x^2 = \left \{\by \in U \ST \|\bx - \by\|_2^2  &lt; \frac{K}{2} \right \}.
+   \]</div>
+</li>
+<li><p>Clearly by requirements in the lemma,
+if <span class="math notranslate nohighlight">\(\bx \in X\)</span> then <span class="math notranslate nohighlight">\(U_x^2 \cap X = \EmptySet\)</span>;
+i.e., no vector in <span class="math notranslate nohighlight">\(U_x^2\)</span> belongs to <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>How many elements are there in  <span class="math notranslate nohighlight">\(U_x^2\)</span>? Let us find an upper bound.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Forall \bx, \by \in U\)</span> we have <span class="math notranslate nohighlight">\(\|\bx - \by\|_0  \leq \|\bx - \by\|_2^2\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span> differ in <span class="math notranslate nohighlight">\(\frac{K}{2}\)</span> or more places, then naturally
+<span class="math notranslate nohighlight">\(\|\bx - \by\|_2^2 \geq \frac{K}{2}\)</span>.</p></li>
+<li><p>Hence if <span class="math notranslate nohighlight">\(\|\bx - \by\|_2^2 &lt; \frac{K}{2}\)</span> then
+<span class="math notranslate nohighlight">\(\|\bx - \by\|_0 &lt; \frac{K}{2}\)</span>
+hence <span class="math notranslate nohighlight">\(\|\bx - \by\|_0 \leq \frac{K}{2}\)</span> for any <span class="math notranslate nohighlight">\(\bx, \by \in U_x^2\)</span>.</p></li>
+<li><p>So define</p>
+<div class="math notranslate nohighlight">
+\[
+   U_x^0 = \left \{\by \in U \ST \|\bx - \by\|_0 \leq \frac{K}{2} \right \}.  
+   \]</div>
+</li>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[
+    U_x^2 \subseteq U_x^0.
+   \]</div>
+</li>
+<li><p>Thus we have an upper bound given by</p>
+<div class="math notranslate nohighlight">
+\[
+    | U_x^2 | \leq | U_x^0 |.
+   \]</div>
+</li>
+<li><p>Let us look at <span class="math notranslate nohighlight">\(U_x^0\)</span> carefully.</p></li>
+<li><p>We can choose <span class="math notranslate nohighlight">\(\frac{K}{2}\)</span> indices where <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span> <em>may</em> differ
+in <span class="math notranslate nohighlight">\(\binom{N}{\frac{K}{2}}\)</span> ways.</p></li>
+<li><p>At each of these <span class="math notranslate nohighlight">\(\frac{K}{2}\)</span> indices, <span class="math notranslate nohighlight">\(y_i\)</span> can take value as one of <span class="math notranslate nohighlight">\((0, +1, -1)\)</span>.</p></li>
+<li><p>Thus we have an upper bound</p>
+<div class="math notranslate nohighlight">
+\[
+    | U_x^2 | \leq | U_x^0 | \leq \binom {N}{\frac{K}{2}} 3^{\frac{K}{2}}.
+   \]</div>
+</li>
+<li><p>We now describe an iterative process for building <span class="math notranslate nohighlight">\(X\)</span> from vectors in <span class="math notranslate nohighlight">\(U\)</span>.</p></li>
+<li><p>Say we have added <span class="math notranslate nohighlight">\(j\)</span> vectors to <span class="math notranslate nohighlight">\(X\)</span> namely <span class="math notranslate nohighlight">\(x_1, x_2,\dots, x_j\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   (U^2_{x_1} \cup U^2_{x_2} \cup \dots  \cup U^2_{x_j}) \cap X = \EmptySet.
+   \]</div>
+</li>
+<li><p>Number of vectors in <span class="math notranslate nohighlight">\(U^2_{x_1} \cup U^2_{x_2} \cup \dots  \cup U^2_{x_j}\)</span>
+is bounded by <span class="math notranslate nohighlight">\(j \binom {N}{ \frac{K}{2}} 3^{\frac{K}{2}}\)</span>.</p></li>
+<li><p>Thus we have at least</p>
+<div class="math notranslate nohighlight">
+\[
+    \binom{N}{K} 2^K - j \binom {N}{ \frac{K}{2}} 3^{\frac{K}{2}}  
+   \]</div>
+<p>vectors left in <span class="math notranslate nohighlight">\(U\)</span> to choose from for adding in <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</li>
+<li><p>We can keep adding vectors to <span class="math notranslate nohighlight">\(X\)</span> till there are no more suitable vectors left.</p></li>
+<li><p>We can construct a set of size <span class="math notranslate nohighlight">\(|X|\)</span> provided</p>
+<div class="math notranslate nohighlight" id="equation-eq-measure-bound-x-size">
+<span class="eqno">(12.39)<a class="headerlink" href="#equation-eq-measure-bound-x-size" title="Permalink to this equation">¶</a></span>\[ |X| \binom {N}{ \frac{K}{2}} 3^{\frac{K}{2}} \leq \binom{N}{K} 2^K\]</div>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+      \frac{\binom{N}{K}}{\binom{N}{\frac{K}{2}}} 
+      = \frac
+        {\left ( \frac{K}{2} \right ) !  \left (N  - \frac{K}{2} \right ) ! }
+        {K! (N-K)!}
+      = \prod_{i=1}^{\frac{K}{2}}  \frac{N - K + i}{ K/ 2 + i}.
+   \]</div>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\frac{N - K + i}{ K/ 2 + i}\)</span> is a decreasing function of <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p>Its minimum value is achieved for <span class="math notranslate nohighlight">\(i=\frac{K}{2}\)</span> as <span class="math notranslate nohighlight">\((\frac{N}{K} - \frac{1}{2})\)</span>.</p></li>
+<li><p>So we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      &amp;\frac{N - K + i}{ K/ 2 + i} \geq \frac{N}{K} - \frac{1}{2}\\
+      &amp;\implies \prod_{i=1}^{\frac{K}{2}}  \frac{N - K + i}{ K/ 2 + i}  \geq  \left ( \frac{N}{K} - \frac{1}{2} \right )^{\frac{K}{2}}\\
+      &amp;\implies \frac{\binom{N}{K}}{\binom{N}{\frac{K}{2}}} \geq \left ( \frac{N}{K} - \frac{1}{2} \right )^{\frac{K}{2}}
+   \end{split}\]</div>
+</li>
+<li><p>Rephrasing the bound on <span class="math notranslate nohighlight">\(|X\)</span> in <a class="reference internal" href="#equation-eq-measure-bound-x-size">(12.39)</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+    |X| \left( \frac{3}{4} \right )^{\frac{K}{2}} \leq   \frac{\binom{N}{K}}{\binom{N}{\frac{K}{2}}}
+   \]</div>
+</li>
+<li><p>Hence we can definitely construct a set <span class="math notranslate nohighlight">\(X\)</span> with the cardinality satisfying</p>
+<div class="math notranslate nohighlight">
+\[
+      |X| \left( \frac{3}{4} \right ) ^{\frac{K}{2}}  \leq \left ( \frac{N}{K} - \frac{1}{2} \right )^{\frac{K}{2}}.
+   \]</div>
+</li>
+<li><p>Now it is given that <span class="math notranslate nohighlight">\( K &lt; \frac{N}{2}\)</span>. So we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; K &lt; \frac{N}{2}\\
+    &amp;\implies \frac{N}{K} &gt; 2\\
+    &amp;\implies \frac{N}{4K} &gt; \frac{1}{2}\\
+    &amp;\implies \frac{N}{K} - \frac{N}{4K} &lt; \frac{N}{K} - \frac{1}{2}\\
+    &amp;\implies \frac{3N}{4K} &lt; \frac{N}{K} - \frac{1}{2}\\
+    &amp;\implies \left( \frac{3N}{4K} \right) ^ {\frac{K}{2}}&lt; \left ( \frac{N}{K} - \frac{1}{2} \right )^{\frac{K}{2}}\\
+   \end{split}\]</div>
+</li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \left( \frac{N}{K} \right) ^ {\frac{K}{2}}   \left( \frac{3}{4} \right) ^ {\frac{K}{2}}  &lt; \frac{\binom{N}{K}}{\binom{N}{\frac{K}{2}}}
+   \]</div>
+</li>
+<li><p>Choose</p>
+<div class="math notranslate nohighlight">
+\[
+      |X| = \left( \frac{N}{K} \right) ^ {\frac{K}{2}} 
+   \]</div>
+</li>
+<li><p>Clearly this value of <span class="math notranslate nohighlight">\(|X|\)</span> satisfies <a class="reference internal" href="#equation-eq-measure-bound-x-size">(12.39)</a>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(X\)</span> can have at least these many elements.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      &amp;|X| \geq \left( \frac{N}{K} \right) ^ {\frac{K}{2}}\\
+      &amp;\implies \ln |X| \geq \frac{K}{2} \ln \left( \frac{N}{K} \right) 
+   \end{split}\]</div>
+<p>which completes the proof.</p>
+</li>
+</ol>
+</div>
+<p>We can now establish following bound on the required number of measurements to satisfy RIP.</p>
+<p>At this moment, we won’t worry about exact value of <span class="math notranslate nohighlight">\(\delta_{2K}\)</span>. We will just assume that
+<span class="math notranslate nohighlight">\(\delta_{2K}\)</span> is small in range <span class="math notranslate nohighlight">\((0, \frac{1}{2}]\)</span>.</p>
+<div class="proof theorem admonition" id="thm:rip_measurement_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.41 </span> (Minimum number of required measurements for RIP of order <span class="math notranslate nohighlight">\(2K\)</span>)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> be an <span class="math notranslate nohighlight">\(M \times N\)</span> matrix that satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span>
+with constant <span class="math notranslate nohighlight">\(\delta_{2K} \in (0, \frac{1}{2}]\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+M \geq C K \ln \left ( \frac{N}{K} \right ) 
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+C = \frac{1}{2 \ln (\sqrt{24} + 1)} \approx 0.28173.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; (1  - \delta_{2K}) \| \bx \|^2_2 
+   \leq \| \Phi \bx \|^2_2 
+   \leq (1 + \delta_{2K}) \| \bx\|^2_2  \Forall \bx \in \Sigma_{2K}\\
+&amp; \implies (1  - \delta_{2K}) \| \bx - \by \|^2_2 
+\leq \| \Phi \bx -  \Phi \by\|^2_2 
+\leq (1 + \delta_{2K}) \| \bx - \by\|^2_2  \Forall \bx, \by \in \Sigma_K.
+\end{split}\]</div>
+<p>Also</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_{2K} \leq \frac{1}{2}
+\implies 1 - \delta_{2K} \geq 
+\frac{1}{2} \text{ and }  1 + \delta_{2K} \leq \frac{3}{2}.
+\]</div>
+<p>Consider the set <span class="math notranslate nohighlight">\(X \subset U \subset \Sigma_K\)</span> developed in <a class="reference internal" href="#lem:rip_bound_X_lemma">Lemma 12.3</a>.
+We have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp;\| \bx - \by\|^2_2 \geq  \frac{K}{2} \Forall \bx, \by \in X\\
+&amp;\implies (1  - \delta_{2K}) \| \bx - \by \|^2_2 \geq  \frac{K}{4}\\
+&amp;\implies \| \Phi \bx -  \Phi \by\|^2_2 \geq  \frac{K}{4}\\
+&amp;\implies \| \Phi \bx -  \Phi \by\|_2 \geq  \sqrt{\frac{K}{4}} \Forall \bx, \by \in X.
+\end{split}\]</div>
+<p>Also</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp;\| \Phi \bx \|^2_2 
+\leq (1 + \delta_{2K}) \| \bx\|^2_2 
+\leq  \frac{3}{2}  \| \bx\|^2_2 
+\Forall \bx \in X \subset \Sigma_K \subset \Sigma_{2K}\\
+&amp;\implies \| \Phi \bx \|_2 
+\leq \sqrt {\frac{3}{2}}  \| \bx\|_2  \leq \sqrt {\frac{3K}{2}} \Forall \bx \in X
+\end{split}\]</div>
+<p>since <span class="math notranslate nohighlight">\(\|\bx\|_2 \leq \sqrt{K} \Forall \bx \in X\)</span>.
+So we have a lower bound:</p>
+<div class="math notranslate nohighlight" id="equation-eq-rip-lower-bound-x">
+<span class="eqno">(12.40)<a class="headerlink" href="#equation-eq-rip-lower-bound-x" title="Permalink to this equation">¶</a></span>\[\| \Phi \bx -  \Phi \by\|_2 \geq  \sqrt{\frac{K}{4}} \Forall \bx, \by \in X.\]</div>
+<p>and an upper bound:</p>
+<div class="math notranslate nohighlight" id="equation-eq-rip-upper-bound-x">
+<span class="eqno">(12.41)<a class="headerlink" href="#equation-eq-rip-upper-bound-x" title="Permalink to this equation">¶</a></span>\[\| \Phi \bx \|_2 \leq \sqrt {\frac{3K}{2}} \Forall \bx \in X.\]</div>
+<p>What do these bounds mean? Let us start with the lower bound.</p>
+<p><span class="math notranslate nohighlight">\(\Phi \bx\)</span> and <span class="math notranslate nohighlight">\(\Phi \by\)</span> are projections of <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\by\)</span> in <span class="math notranslate nohighlight">\(\RR^M\)</span> (measurement space).</p>
+<p>Construct <span class="math notranslate nohighlight">\(\ell_2\)</span> balls of radius
+<span class="math notranslate nohighlight">\(\sqrt{\frac{K}{4}} / 2= \sqrt{\frac{K}{16}}\)</span> in <span class="math notranslate nohighlight">\(\RR^M\)</span> around <span class="math notranslate nohighlight">\(\Phi \bx\)</span> and <span class="math notranslate nohighlight">\(\Phi \by\)</span>.</p>
+<p>Lower bound says that these balls are disjoint.
+Since <span class="math notranslate nohighlight">\(\bx, \by\)</span> are arbitrary, this applies to every <span class="math notranslate nohighlight">\(\bx \in X\)</span>.</p>
+<p>Upper bound tells us that all vectors <span class="math notranslate nohighlight">\(\Phi \bx\)</span> lie in a ball of radius
+<span class="math notranslate nohighlight">\(\sqrt {\frac{3K}{2}}\)</span> around origin in <span class="math notranslate nohighlight">\(\RR^M\)</span>.</p>
+<p>Thus the set of all balls lies within a larger ball of radius  <span class="math notranslate nohighlight">\(\sqrt {\frac{3K}{2}} + \sqrt{\frac{K}{16}}\)</span>  around origin in <span class="math notranslate nohighlight">\(\RR^M\)</span>.</p>
+<p>So we require that the volume of the larger ball MUST be greater than the sum of volumes of <span class="math notranslate nohighlight">\(|X|\)</span> individual balls.</p>
+<p>Since volume of an <span class="math notranslate nohighlight">\(\ell_2\)</span> ball of radius <span class="math notranslate nohighlight">\(r\)</span> is proportional to <span class="math notranslate nohighlight">\(r^M\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp;\left ( \sqrt {\frac{3K}{2}} + \sqrt{\frac{K}{16}}    \right )^M \geq |X| \left ( \sqrt{\frac{K}{16}} \right )^M\\. 
+&amp; \implies (\sqrt {24} + 1)^M \geq  |X| \\
+&amp; \implies  M \geq \frac{\ln |X| }{\ln (\sqrt {24} + 1) }
+\end{split}\]</div>
+<p>Again from <a class="reference internal" href="#lem:rip_bound_X_lemma">Lemma 12.3</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\ln |X| \geq \frac{K}{2} \ln \left ( \frac{N}{K} \right ).
+\]</div>
+<p>Putting back we get</p>
+<div class="math notranslate nohighlight">
+\[
+M \geq \frac{\frac{K}{2} \ln \left ( \frac{N}{K} \right ) }{\ln (\sqrt {24} + 1) }
+\]</div>
+<p>which establishes a lower bound on the number of measurements <span class="math notranslate nohighlight">\(M\)</span>.</p>
+</div>
+<div class="proof example admonition" id="ex-ssm-cs-lb-m-rip-2k-1000">
+<p class="admonition-title"><span class="caption-number">Example 12.34 </span> (Lower bounds on <span class="math notranslate nohighlight">\(M\)</span> for RIP of order <span class="math notranslate nohighlight">\(2K\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(N=1000, K=100 \implies M \geq 65\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(N=1000, K=200 \implies M \geq 91\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(N=1000, K=400 \implies M \geq 104\)</span>.</p></li>
+</ul>
+</div>
+</div><p>Some remarks are in order:</p>
+<ul class="simple">
+<li><p>The theorem only establishes a necessary lower bound on <span class="math notranslate nohighlight">\(M\)</span>. It doesn’t mean that if we choose an <span class="math notranslate nohighlight">\(M\)</span> larger
+than the lower bound then <span class="math notranslate nohighlight">\(\Phi\)</span> will have RIP of order <span class="math notranslate nohighlight">\(2K\)</span> with any constant <span class="math notranslate nohighlight">\(\delta_{2K} \in (0, \frac{1}{2}]\)</span>.</p></li>
+<li><p>The restriction <span class="math notranslate nohighlight">\(\delta_{2K} \leq \frac{1}{2}\)</span> is arbitrary and is made for convenience. In general, we can work with
+<span class="math notranslate nohighlight">\(0 &lt; \delta_{2K} \leq \delta_{\text{max}} &lt; 1\)</span> and develop the bounds accordingly.</p></li>
+<li><p>This result fails to capture dependence of <span class="math notranslate nohighlight">\(M\)</span> on the RIP constant <span class="math notranslate nohighlight">\(\delta_{2K}\)</span> directly.
+<em>Johnson-Lindenstrauss lemma</em> helps us resolve this which concerns embeddings of finite sets of points in
+low-dimensional spaces.</p></li>
+<li><p>We haven’t made significant efforts to optimize the constants. Still they are quite reasonable.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="rip-and-nsp">
+<h2><span class="section-number">12.7.10. </span>RIP and NSP<a class="headerlink" href="#rip-and-nsp" title="Permalink to this headline">¶</a></h2>
+<p>RIP and NSP are connected.
+If a matrix <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP then it also satisfies NSP
+(under certain conditions).</p>
+<p>Thus RIP is strictly stronger than NSP (under certain conditions).</p>
+<p>We will need following lemma which applies to any arbitrary <span class="math notranslate nohighlight">\(\bh \in \RR^N\)</span>.
+The lemma will be proved later.</p>
+<div class="proof lemma admonition" id="lem:rip_arbitrary_h">
+<p class="admonition-title"><span class="caption-number">Lemma 12.4 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span>.
+Let <span class="math notranslate nohighlight">\(\bh \in \RR^N, \bh \neq \bzero\)</span> be arbitrary.
+Let  <span class="math notranslate nohighlight">\(\Lambda_0\)</span> be any subset of <span class="math notranslate nohighlight">\(\{1,2,\dots, N\}\)</span>
+such that <span class="math notranslate nohighlight">\(|\Lambda_0| \leq K\)</span>.</p>
+<p>Define <span class="math notranslate nohighlight">\(\Lambda_1\)</span> as the index set corresponding to the
+<span class="math notranslate nohighlight">\(K\)</span> entries of <span class="math notranslate nohighlight">\(h_{\Lambda_0^c}\)</span> with largest magnitude,
+and set <span class="math notranslate nohighlight">\(\Lambda = \Lambda_0 \cup \Lambda_1\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bh_{\Lambda} \|_2 \leq 
+\alpha \frac{\| \bh_{\Lambda_0^c} \|_1 }{ \sqrt{K}} 
++ \beta \frac{| \langle \Phi \bh_{\Lambda}, \Phi \bh \rangle | }{\| \bh_{\Lambda} \|_2},
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha = \frac{\sqrt{2} \delta_{2K}}{ 1 - \delta_{2K}} , 
+\beta = \frac{1}{ 1 - \delta_{2K}}.
+\]</div>
+</div>
+</div><div class="docutils">
+<p>Let us understand this lemma a bit.
+If <span class="math notranslate nohighlight">\(\bh \in \NullSpace (\Phi)\)</span>,
+then the lemma simplifies to</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bh_{\Lambda} \|_2 \leq \alpha \frac{\| \bh_{\Lambda_0^c} \|_1 }{ \sqrt{K}}
+\]</div>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\Lambda_0\)</span> maps to the initial few (<span class="math notranslate nohighlight">\(K\)</span> or less) elements we chose.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Lambda_0^c\)</span> maps to all other elements.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Lambda_1\)</span> maps to largest (in magnitude) <span class="math notranslate nohighlight">\(K\)</span> elements of <span class="math notranslate nohighlight">\(\Lambda_0^c\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h_{\Lambda}\)</span> contains a maximum of <span class="math notranslate nohighlight">\(2K\)</span> non-zero elements.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+   (1 - \delta_{2K}) \| \bh_{\Lambda} \|_2 
+   \leq \| \Phi \bh_{\Lambda} \|_2 
+   \leq (1 + \delta_{2K}) \| \bh_{\Lambda} \|_2.
+   \]</div>
+</li>
+</ul>
+</div>
+<p>We now state the connection between RIP and NSP.</p>
+<div class="proof theorem admonition" id="theorem-22">
+<p class="admonition-title"><span class="caption-number">Theorem 12.42 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span> with <span class="math notranslate nohighlight">\(\delta_{2K} &lt; \sqrt{2} - 1\)</span>.
+Then <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies the NSP of order <span class="math notranslate nohighlight">\(2K\)</span> with constant</p>
+<div class="math notranslate nohighlight">
+\[
+C= \frac
+{\sqrt{2} \delta_{2K}}
+{1 - (1 + \sqrt{2})\delta_{2K}}
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We are given that</p>
+<div class="math notranslate nohighlight">
+\[
+(1- \delta_{2K}) \| \bx \|^2_2 \leq \| \Phi \bx \|^2_2 \leq (1 + \delta_{2K}) \| \bx \|^2_2  
+\]</div>
+<p>holds for all <span class="math notranslate nohighlight">\(\bx \in \Sigma_{2K}\)</span> where <span class="math notranslate nohighlight">\(\delta_{2K}  &lt; \sqrt{2} - 1\)</span>.
+We have to show that:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bh_{\Lambda}\|_2 \leq C \frac{\| \bh_{{\Lambda}^c}\|_1 }{\sqrt{K}}
+\]</div>
+<p>holds <span class="math notranslate nohighlight">\(\Forall \bh \in \NullSpace (\Phi)\)</span>
+and <span class="math notranslate nohighlight">\(\Forall \Lambda\)</span> such that <span class="math notranslate nohighlight">\(|\Lambda| \leq 2K\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bh \in \NullSpace(\Phi)\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\( \Phi \bh = \bzero\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda_m\)</span> denote the <span class="math notranslate nohighlight">\(2K\)</span> largest entries of <span class="math notranslate nohighlight">\(\bh\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bh_{\Lambda}\|_2  
+    \leq \| \bh_{\Lambda_m}\|_2 \Forall \Lambda \ST |\Lambda| \leq 2K. 
+   \]</div>
+</li>
+<li><p>Similarly</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bh_{\Lambda^c}\|_1  
+    \geq \| \bh_{\Lambda_m^c}\|_1 \Forall \Lambda \ST |\Lambda| \leq 2K. 
+   \]</div>
+</li>
+<li><p>Thus if we show that <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies NSP of order <span class="math notranslate nohighlight">\(2K\)</span> for <span class="math notranslate nohighlight">\(\Lambda_m\)</span>; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bh_{\Lambda_m}\|_2 \leq C 
+    \frac{\| \bh_{{\Lambda_m}^c}\|_1 }{\sqrt{K}}
+   \]</div>
+<p>then we would have shown
+it for all <span class="math notranslate nohighlight">\(\Lambda\)</span> such that <span class="math notranslate nohighlight">\(|\Lambda| \leq 2K\)</span>.</p>
+</li>
+<li><p>Hence let <span class="math notranslate nohighlight">\(\Lambda = \Lambda_m\)</span>.</p></li>
+<li><p>We can divide <span class="math notranslate nohighlight">\(\Lambda\)</span> into two components <span class="math notranslate nohighlight">\(\Lambda_0\)</span> and <span class="math notranslate nohighlight">\(\Lambda_1\)</span> of size <span class="math notranslate nohighlight">\(K\)</span> each.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\Lambda\)</span> maps to the largest <span class="math notranslate nohighlight">\(2K\)</span> entries in <span class="math notranslate nohighlight">\(\bh\)</span>,
+hence whatever entries we choose in
+<span class="math notranslate nohighlight">\(\Lambda_0\)</span>, the largest <span class="math notranslate nohighlight">\(K\)</span> entries in <span class="math notranslate nohighlight">\(\Lambda_0^c\)</span> will be <span class="math notranslate nohighlight">\(\Lambda_1\)</span>.</p></li>
+<li><p>Hence as per <a class="reference internal" href="#lem:rip_arbitrary_h">Lemma 12.4</a>
+above, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bh_{\Lambda} \|_2 \leq \alpha \frac{\| \bh_{\Lambda_0^c}\|_1}{\sqrt{K}}.
+   \]</div>
+</li>
+<li><p>Also</p>
+<div class="math notranslate nohighlight">
+\[
+    \Lambda = \Lambda_0 \cup \Lambda_1 
+    \implies \Lambda_0 = \Lambda \setminus \Lambda_1 = \Lambda \cap \Lambda_1^c
+    \implies \Lambda_0^c = \Lambda_1 \cup \Lambda^c.
+   \]</div>
+</li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bh_{\Lambda_0^c} \|_1 = \| \bh_{\Lambda_1} \|_1 + \| \bh_{\Lambda^c} \|_1. 
+   \]</div>
+</li>
+<li><p>We have to get rid of <span class="math notranslate nohighlight">\(\Lambda_1\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bh_{\Lambda_1} \in \Sigma_K\)</span>,
+by applying <a class="reference internal" href="srr.html#lem:u_sigma_k_norms">Theorem 12.16</a> we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bh_{\Lambda_1} \|_1 \leq  \sqrt{K} \| \bh_{\Lambda_1} \|_2
+   \]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bh_{\Lambda} \|_2 \leq 
+    \alpha \left ( 
+      \| \bh_{\Lambda_1} \|_2 + 
+      \frac{\| \bh_{\Lambda^c} \|_1}{\sqrt{K}} 
+      \right)
+   \]</div>
+</li>
+<li><p>But since <span class="math notranslate nohighlight">\(\Lambda_1 \subset \Lambda\)</span>,
+hence <span class="math notranslate nohighlight">\( \| \bh_{\Lambda_1} \|_2 \leq  \| \bh_{\Lambda} \|_2\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;\| \bh_{\Lambda} \|_2 \leq 
+    \alpha \left ( 
+      \| \bh_{\Lambda} \|_2 + 
+      \frac{\| \bh_{\Lambda^c} \|_1}{\sqrt{K}} 
+      \right)\\
+    \implies &amp;(1 - \alpha) \| \bh_{\Lambda} \|_2 
+    \leq  \alpha \frac{\| \bh_{\Lambda^c} \|_1}{\sqrt{K}}\\
+    \implies &amp;\| \bh_{\Lambda} \|_2 
+    \leq \frac{\alpha}{1 - \alpha} \frac{\| \bh_{\Lambda^c} \|_1}{\sqrt{K}} 
+    \quad \text{ if } \alpha \leq 1.
+   \end{split}\]</div>
+</li>
+<li><p>Note that the inequality is also satisfied for <span class="math notranslate nohighlight">\(\alpha = 1\)</span> in which case,
+we don’t need to bring <span class="math notranslate nohighlight">\(1-\alpha\)</span> to denominator.</p></li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;\alpha \leq 1\\
+    \implies &amp;\frac{\sqrt{2} \delta_{2K}}{ 1 - \delta_{2K}} \leq 1 \\
+    \implies &amp;\sqrt{2} \delta_{2K} \leq 1 - \delta_{2K}\\
+    \implies &amp;(\sqrt{2} + 1) \delta_{2K} \leq 1\\
+    \implies &amp;\delta_{2K} \leq \sqrt{2} - 1. 
+   \end{split}\]</div>
+</li>
+<li><p>Putting</p>
+<div class="math notranslate nohighlight">
+\[
+      C = \frac{\alpha}{1 - \alpha}  = \frac
+      {\sqrt{2} \delta_{2K}}
+      {1 - (1 + \sqrt{2})\delta_{2K}}
+   \]</div>
+<p>we see that <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies NSP of order <span class="math notranslate nohighlight">\(2K\)</span>
+whenever <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(2K\)</span>
+with <span class="math notranslate nohighlight">\(\delta_{2K} \leq \sqrt{2} -1\)</span>.</p>
+</li>
+</ol>
+</div>
+<p>Note that for <span class="math notranslate nohighlight">\(\delta_{2K} = \sqrt{2} - 1\)</span>, <span class="math notranslate nohighlight">\(C=\infty\)</span>.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ssm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="dictionaries.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">12.6. </span>Dictionaries</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="rip.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12.8. </span>Restricted Isometry Property</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

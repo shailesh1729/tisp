@@ -1,0 +1,3145 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.10. Eigen Values &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.11. Singular Values" href="svd.html" />
+    <link rel="prev" title="4.9. Matrices III" href="matrices_3.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   4. Linear Algebra
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/la/evd.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fla/evd.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   4.10.1. Eigen Values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eigen-space">
+   4.10.2. Eigen Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#characteristic-polynomial">
+   4.10.3. Characteristic Polynomial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-zero-eigen-value">
+   4.10.4. The Zero Eigen Value
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transpose">
+   4.10.5. Transpose
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#powers-and-inverses">
+   4.10.6. Powers and Inverses
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#invariant-subspaces">
+   4.10.7. Invariant Subspaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#triangular-matrices">
+   4.10.8. Triangular Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#similar-matrices">
+   4.10.9. Similar Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-independence-of-eigenvectors">
+   4.10.10. Linear Independence of Eigenvectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagonalization">
+   4.10.11. Diagonalization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-symmetric-matrices">
+   4.10.12. Real Symmetric Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hermitian-matrices">
+   4.10.13. Hermitian Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#miscellaneous-properties">
+   4.10.14. Miscellaneous Properties
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#semidefinite-definite-and-indefinite-matrices">
+   4.10.15. Semidefinite, Definite and Indefinite Matrices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#positive-semidefinite-matrices">
+     4.10.15.1. Positive Semidefinite Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#positive-definite-matrices">
+     4.10.15.2. Positive Definite Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#negative-semidefinite-matrices">
+     4.10.15.3. Negative Semidefinite Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#negative-definite-matrices">
+     4.10.15.4. Negative Definite Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indefinite-matrices">
+     4.10.15.5. Indefinite Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eigenvalue-decomposition">
+     4.10.15.6. Eigenvalue Decomposition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trace-and-determinant">
+     4.10.15.7. Trace and Determinant
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagonally-dominant-matrices">
+   4.10.16. Diagonally Dominant Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gershgorin-s-theorem">
+   4.10.17. Gershgorin’s Theorem
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Eigen Values</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   4.10.1. Eigen Values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eigen-space">
+   4.10.2. Eigen Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#characteristic-polynomial">
+   4.10.3. Characteristic Polynomial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-zero-eigen-value">
+   4.10.4. The Zero Eigen Value
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transpose">
+   4.10.5. Transpose
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#powers-and-inverses">
+   4.10.6. Powers and Inverses
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#invariant-subspaces">
+   4.10.7. Invariant Subspaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#triangular-matrices">
+   4.10.8. Triangular Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#similar-matrices">
+   4.10.9. Similar Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-independence-of-eigenvectors">
+   4.10.10. Linear Independence of Eigenvectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagonalization">
+   4.10.11. Diagonalization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-symmetric-matrices">
+   4.10.12. Real Symmetric Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hermitian-matrices">
+   4.10.13. Hermitian Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#miscellaneous-properties">
+   4.10.14. Miscellaneous Properties
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#semidefinite-definite-and-indefinite-matrices">
+   4.10.15. Semidefinite, Definite and Indefinite Matrices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#positive-semidefinite-matrices">
+     4.10.15.1. Positive Semidefinite Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#positive-definite-matrices">
+     4.10.15.2. Positive Definite Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#negative-semidefinite-matrices">
+     4.10.15.3. Negative Semidefinite Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#negative-definite-matrices">
+     4.10.15.4. Negative Definite Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indefinite-matrices">
+     4.10.15.5. Indefinite Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eigenvalue-decomposition">
+     4.10.15.6. Eigenvalue Decomposition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trace-and-determinant">
+     4.10.15.7. Trace and Determinant
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagonally-dominant-matrices">
+   4.10.16. Diagonally Dominant Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gershgorin-s-theorem">
+   4.10.17. Gershgorin’s Theorem
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="eigen-values">
+<span id="sec-la-evd"></span><h1><span class="section-number">4.10. </span>Eigen Values<a class="headerlink" href="#eigen-values" title="Permalink to this headline">¶</a></h1>
+<p>In this subsection, we discuss the eigenvalues and eigenvectors of square matrices.
+Much of the discussion in this section will be equally applicable to real
+as well as complex square matrices. We will use the complex notation mostly and
+make specific remarks for real matrices wherever needed.
+Of specific interest is the eigenvalue decomposition of real symmetric matrices.</p>
+<div class="section" id="id1">
+<h2><span class="section-number">4.10.1. </span>Eigen Values<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def:mat:eigen_value">
+<p class="admonition-title"><span class="caption-number">Definition 4.129 </span> (Eigen value)</p>
+<div class="definition-content section" id="proof-content">
+<p>A scalar <span class="math notranslate nohighlight">\(\lambda\)</span> is an <em>eigen value</em> of an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA = [ a_{i j} ]\)</span>
+if there exists a nonzero vector <span class="math notranslate nohighlight">\(\bx\)</span> such that</p>
+<div class="math notranslate nohighlight" id="equation-eq-mat-eigen-value">
+<span class="eqno">(4.11)<a class="headerlink" href="#equation-eq-mat-eigen-value" title="Permalink to this equation">¶</a></span>\[\bA \bx = \lambda \bx.\]</div>
+<p>A nonzero vector <span class="math notranslate nohighlight">\(\bx\)</span> which satisfies this equation is called an <em>eigen vector</em>
+of <span class="math notranslate nohighlight">\(\bA\)</span> for the eigen value <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>An eigen value is also known as a <em>characteristic value</em>, <em>proper value</em>
+or a <em>latent value</em>.</p>
+</div>
+</div><p>We note that <a class="reference internal" href="#equation-eq-mat-eigen-value">(4.11)</a> can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bx  = \lambda \bI_n \bx \iff  (\bA - \lambda \bI_n) \bx  = \bzero.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\lambda\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span> if and only if the matrix <span class="math notranslate nohighlight">\(\bA - \lambda \bI\)</span>
+is singular.</p>
+<div class="proof definition admonition" id="def:mat:spectrum">
+<p class="admonition-title"><span class="caption-number">Definition 4.130 </span> (Spectrum of eigen values)</p>
+<div class="definition-content section" id="proof-content">
+<p>The set comprising of eigen values of a matrix <span class="math notranslate nohighlight">\(\bA\)</span> is known as its <em>spectrum</em>.</p>
+</div>
+</div><div class="proof remark admonition" id="res-mat-unique-ev-ev">
+<p class="admonition-title"><span class="caption-number">Remark 4.13 </span> (Uniqueness of eigen value for an eigen vector)</p>
+<div class="remark-content section" id="proof-content">
+<p>For each eigen vector <span class="math notranslate nohighlight">\(\bx\)</span> for a matrix <span class="math notranslate nohighlight">\(\bA\)</span>, the corresponding eigen value <span class="math notranslate nohighlight">\(\lambda\)</span> is
+unique.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We show this by contradiction.</p>
+<ol>
+<li><p>Assume that for <span class="math notranslate nohighlight">\(\bx\)</span> there are two eigen values <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bx = \lambda_1 \bx = \lambda_2 \bx 
+   \implies (\lambda_1 - \lambda_2 ) \bx = \bzero.
+   \]</div>
+</li>
+<li><p>This can happen only when either <span class="math notranslate nohighlight">\(\bx = \bzero\)</span> or <span class="math notranslate nohighlight">\(\lambda_1 = \lambda_2\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx\)</span> is an eigen vector, it cannot be <span class="math notranslate nohighlight">\(\bzero\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\lambda_1 = \lambda_2\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof remark admonition" id="res-mat-eval-from-evec">
+<p class="admonition-title"><span class="caption-number">Remark 4.14 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\bx\)</span> is an eigen vector for <span class="math notranslate nohighlight">\(\bA\)</span>, then the corresponding eigen value is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda = \frac{\bx^H \bA \bx }{\bx^H \bx}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bx = \lambda \bx 
+\implies \bx^H \bA \bx = \lambda \bx^H \bx 
+\implies \lambda = \frac{\bx^H \bA \bx }{\bx^H \bx}.
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bx\)</span> is nonzero.</p>
+</div>
+<div class="proof remark admonition" id="res-mat-evec-nullspace">
+<p class="admonition-title"><span class="caption-number">Remark 4.15 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>An eigen vector <span class="math notranslate nohighlight">\(\bx\)</span> of <span class="math notranslate nohighlight">\(\bA\)</span> for eigen value <span class="math notranslate nohighlight">\(\lambda\)</span>
+belongs to the nullspace of <span class="math notranslate nohighlight">\(\bA - \lambda \bI\)</span>;
+i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\bx \in \NullSpace(\bA - \lambda \bI).
+\]</div>
+<p>In other words <span class="math notranslate nohighlight">\(\bx\)</span> is a nontrivial solution
+to the homogeneous system of linear equations given by</p>
+<div class="math notranslate nohighlight">
+\[
+(\bA - \lambda \bI) \bz = \bzero.
+\]</div>
+</div>
+</div><p>We can put together eigen vectors of a matrix into another matrix by itself. This
+can be very useful tool. We start with a simple idea.</p>
+<div class="proof lemma admonition" id="res-mat-evec-mat">
+<p class="admonition-title"><span class="caption-number">Lemma 4.51 </span> (Matrix of eigen vectors)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix.
+Let <span class="math notranslate nohighlight">\(\bu_1, \bu_2, \dots, \bu_r\)</span> be <span class="math notranslate nohighlight">\(r\)</span> nonzero vectors from <span class="math notranslate nohighlight">\(\FF^n\)</span>.
+Let us construct an <span class="math notranslate nohighlight">\(n \times r\)</span> matrix</p>
+<div class="math notranslate nohighlight">
+\[
+\bU = \begin{bmatrix} \bu_1 &amp; \bu_2 &amp; \dots &amp; \bu_r \end{bmatrix}.
+\]</div>
+<p>Then all the <span class="math notranslate nohighlight">\(r\)</span> vectors are eigen vectors of <span class="math notranslate nohighlight">\(\bA\)</span> if and only if
+there exists a diagonal matrix <span class="math notranslate nohighlight">\(\bD = \Diag(d_1, \dots, d_r)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bU  = \bU \bD.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding the equation, we can write</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{bmatrix} \bA \bu_1 &amp; \bA \bu_2 &amp; \dots &amp; \bA \bu_r \end{bmatrix}
+=
+\begin{bmatrix} d_1 \bu_1 &amp; d_2 \bu_2 &amp; \dots &amp; d_r \bu_r \end{bmatrix}.
+\]</div>
+<p>Clearly we want</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bu_i = d_i \bu_i
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bu_i\)</span> are nonzero.
+This is possible only when <span class="math notranslate nohighlight">\(d_i\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bu_i\)</span> is
+an eigen vector for <span class="math notranslate nohighlight">\(d_i\)</span>.</p>
+<p>Converse: Assume that <span class="math notranslate nohighlight">\(\bu_i\)</span> are eigen vectors. Choose <span class="math notranslate nohighlight">\(d_i\)</span> to be
+corresponding eigen values. Then the equation holds.</p>
+</div>
+<p>This idea will be extended further in building the eigen value
+decomposition of matrices.</p>
+<div class="proof observation admonition" id="rem-mat-eval-ax-x-angle">
+<p class="admonition-title"><span class="caption-number">Observation 4.5 </span></p>
+<div class="observation-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \RR^{n \times n}\)</span>.
+Let <span class="math notranslate nohighlight">\(\lambda\)</span> be a nonzero real eigen value of <span class="math notranslate nohighlight">\(\bA\)</span>
+and <span class="math notranslate nohighlight">\(\bx \in \RR^n\)</span> be an eigenvector of <span class="math notranslate nohighlight">\(\bA\)</span> for <span class="math notranslate nohighlight">\(\lambda\)</span>.
+Then <span class="math notranslate nohighlight">\(\bA \bx\)</span> and <span class="math notranslate nohighlight">\(\bx\)</span> are collinear.</p>
+<p>In other words the angle between <span class="math notranslate nohighlight">\(\bA \bx\)</span> and <span class="math notranslate nohighlight">\(\bx\)</span> is either <span class="math notranslate nohighlight">\(0^{\circ}\)</span>
+when <span class="math notranslate nohighlight">\(\lambda\)</span> is positive and is <span class="math notranslate nohighlight">\(180^{\circ}\)</span> when <span class="math notranslate nohighlight">\(\lambda\)</span> is
+negative. Let us look at the inner product:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bA \bx, \bx \rangle = \bx^T \bA \bx = \bx^H \lambda \bx = \lambda \| \bx\|_2^2.
+\]</div>
+<p>Meanwhile</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bx \|_2 = \| \lambda \bx \|_2 = |\lambda| \| \bx \|_2. 
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+|\langle \bA \bx, \bx \rangle |  = \| \bA \bx \|_2 \| \bx \|_2.
+\]</div>
+<p>The angle <span class="math notranslate nohighlight">\(\theta\)</span> between <span class="math notranslate nohighlight">\(\bA \bx\)</span> and <span class="math notranslate nohighlight">\(\bx\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\cos \theta = \frac{\langle \bA \bx, \bx \rangle}{\| \bA \bx \|_2 \| \bx \|_2} 
+= \frac{\lambda \| \bx \|_2^2}{|\lambda| \| \bx \|_2^2} = \pm 1.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="eigen-space">
+<h2><span class="section-number">4.10.2. </span>Eigen Space<a class="headerlink" href="#eigen-space" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def:mat:eigen_space">
+<p class="admonition-title"><span class="caption-number">Definition 4.131 </span> (Eigen space)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\lambda\)</span> be an eigen value for a square matrix <span class="math notranslate nohighlight">\(\bA\)</span>.
+Then its <em>eigen space</em> is the nullspace of <span class="math notranslate nohighlight">\(\bA - \lambda \bI\)</span>
+i.e. <span class="math notranslate nohighlight">\(\NullSpace(\bA - \lambda \bI)\)</span>.</p>
+</div>
+</div><div class="proof remark admonition" id="res-mat-evecs-for-eval">
+<p class="admonition-title"><span class="caption-number">Remark 4.16 </span> (Eigen vectors for an eigen value)</p>
+<div class="remark-content section" id="proof-content">
+<p>The set comprising all the eigen vectors of <span class="math notranslate nohighlight">\(\bA\)</span> for an
+eigen value <span class="math notranslate nohighlight">\(\lambda\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\NullSpace(\bA - \lambda \bI) \setminus \{ \bzero \}
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bzero\)</span> cannot be an eigen vector.</p>
+</div>
+</div><div class="proof definition admonition" id="def:mat:eigen:geometric_multiplicity">
+<p class="admonition-title"><span class="caption-number">Definition 4.132 </span> (Geometric multiplicity)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\lambda\)</span> be an eigen value for a square matrix <span class="math notranslate nohighlight">\(\bA\)</span>.
+The dimension of its eigen space <span class="math notranslate nohighlight">\(\NullSpace(\bA - \lambda \bI)\)</span>
+is known as the <em>geometric multiplicity</em> of the eigen value <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+</div>
+</div><p>We can see that</p>
+<div class="math notranslate nohighlight" id="equation-eq-mat-rank-nullity-eigenspace">
+<span class="eqno">(4.12)<a class="headerlink" href="#equation-eq-mat-rank-nullity-eigenspace" title="Permalink to this equation">¶</a></span>\[\dim (\NullSpace(\bA - \lambda \bI)) = n - \Rank(\bA - \lambda \bI).\]</div>
+</div>
+<div class="section" id="characteristic-polynomial">
+<h2><span class="section-number">4.10.3. </span>Characteristic Polynomial<a class="headerlink" href="#characteristic-polynomial" title="Permalink to this headline">¶</a></h2>
+<div class="proof remark admonition" id="res-mat-singular-a-min-ev-i">
+<p class="admonition-title"><span class="caption-number">Remark 4.17 </span> (Singularity of <span class="math notranslate nohighlight">\(\bA - \lambda \bI\)</span>)</p>
+<div class="remark-content section" id="proof-content">
+<p>A scalar <span class="math notranslate nohighlight">\(\lambda\)</span> can be an eigen value of a square matrix <span class="math notranslate nohighlight">\(\bA\)</span>
+if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\det (\bA - \lambda \bI) = 0.
+\]</div>
+</div>
+</div><p><span class="math notranslate nohighlight">\(\det (\bA - \lambda \bI)\)</span> is a polynomial in <span class="math notranslate nohighlight">\(\lambda\)</span> of degree <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="proof observation admonition" id="res-mat-evals-zeros-polynomial">
+<p class="admonition-title"><span class="caption-number">Observation 4.6 </span> (Eigenvalues as zeros of a polynomial)</p>
+<div class="observation-content section" id="proof-content">
+<p>We can write the determinant as a polynomial:</p>
+<div class="math notranslate nohighlight">
+\[
+\det (\bA - \lambda \bI) 
+= p(\lambda) = \alpha^n \lambda^n + \alpha^{n-1} \lambda^{n-1} + \dots 
++ \alpha^1 \lambda + \alpha_0
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_i\)</span> depend on entries in <span class="math notranslate nohighlight">\(\bA\)</span>.
+In this sense, an eigenvalue of <span class="math notranslate nohighlight">\(\bA\)</span> is a root of the equation</p>
+<div class="math notranslate nohighlight">
+\[
+p(\lambda) = 0.
+\]</div>
+<p>It is easy to show that <span class="math notranslate nohighlight">\(\alpha^n = (-1)^n\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="def:mat:characteristic_polynomial">
+<p class="admonition-title"><span class="caption-number">Definition 4.133 </span> (Characteristic polynomial)</p>
+<div class="definition-content section" id="proof-content">
+<p>For any square matrix <span class="math notranslate nohighlight">\(\bA\)</span>, the polynomial given by</p>
+<div class="math notranslate nohighlight">
+\[
+p(\lambda) = \det(\bA - \lambda \bI)
+\]</div>
+<p>is known as its <em>characteristic polynomial</em>.
+The equation give by</p>
+<div class="math notranslate nohighlight">
+\[
+p(\lambda) = 0
+\]</div>
+<p>is known as its <em>characteristic equation</em>.
+The eigen values of <span class="math notranslate nohighlight">\(\bA\)</span> are the roots of its characteristic polynomial or
+solutions of its characteristic equation.</p>
+</div>
+</div><div class="proof observation admonition" id="res-mat-factors-charac-poly">
+<p class="admonition-title"><span class="caption-number">Observation 4.7 </span> (Factors of characteristic polynomial)</p>
+<div class="observation-content section" id="proof-content">
+<p>For real square matrices, if we restrict eigen values to real values, then
+the characteristic polynomial can be factored as</p>
+<div class="math notranslate nohighlight" id="equation-eq-mat-eig-charac-poly-real-factors">
+<span class="eqno">(4.13)<a class="headerlink" href="#equation-eq-mat-eig-charac-poly-real-factors" title="Permalink to this equation">¶</a></span>\[p(\lambda) = (-1)^n (\lambda - \lambda_1)^{r_1} \dots (\lambda - \lambda_k)^{r_k} q(\lambda).\]</div>
+<p>The polynomial has <span class="math notranslate nohighlight">\(k\)</span> distinct real roots.
+For each root <span class="math notranslate nohighlight">\(\lambda_i\)</span>, <span class="math notranslate nohighlight">\(r_i\)</span> is a positive
+integer indicating how many times the root appears.
+<span class="math notranslate nohighlight">\(q(\lambda)\)</span> is a polynomial that has no real roots.
+The following is true</p>
+<div class="math notranslate nohighlight">
+\[
+r_1 + \dots + r_k + \mathrm{deg}(q(\lambda)) = n.
+\]</div>
+<p>Clearly <span class="math notranslate nohighlight">\(k \leq n\)</span>.</p>
+<p>For complex square matrices where eigen values can be complex (including real square matrices),
+the characteristic polynomial can be factored as</p>
+<div class="math notranslate nohighlight" id="equation-eq-mat-eig-charac-poly-complex-factors">
+<span class="eqno">(4.14)<a class="headerlink" href="#equation-eq-mat-eig-charac-poly-complex-factors" title="Permalink to this equation">¶</a></span>\[p(\lambda) = (-1)^n (\lambda - \lambda_1)^{r_1} \dots (\lambda - \lambda_k)^{r_k}.\]</div>
+<p>The polynomial can be completely factorized into first degree polynomials.
+There are <span class="math notranslate nohighlight">\(k\)</span> distinct roots or eigen values. The following is true</p>
+<div class="math notranslate nohighlight">
+\[
+r_1 + \dots + r_k = n.
+\]</div>
+<p>Thus, including the duplicates there are exactly <span class="math notranslate nohighlight">\(n\)</span> eigen values for a complex square matrix.</p>
+</div>
+</div><p>It is quite possible that a real square matrix doesn’t have any real eigen values.</p>
+<div class="proof definition admonition" id="def:mat:eigen:algebraic_multiplicity">
+<p class="admonition-title"><span class="caption-number">Definition 4.134 </span> (Algebraic multiplicity)</p>
+<div class="definition-content section" id="proof-content">
+<p>The number of times an eigen value appears in the factorization of the characteristic polynomial
+of a square matrix <span class="math notranslate nohighlight">\(\bA\)</span> is known as its <em>algebraic multiplicity</em>.
+In other words,
+<span class="math notranslate nohighlight">\(r_i\)</span> is the algebraic multiplicity for <span class="math notranslate nohighlight">\(\lambda_i\)</span> in the factorization
+<a class="reference internal" href="#equation-eq-mat-eig-charac-poly-real-factors">(4.13)</a>
+and <a class="reference internal" href="#equation-eq-mat-eig-charac-poly-complex-factors">(4.14)</a>.</p>
+</div>
+</div><div class="proof theorem admonition" id="thm:mat:eig_geometric_algebraic_multiplicity">
+<p class="admonition-title"><span class="caption-number">Theorem 4.121 </span> (Geometric and algebraic multiplicities)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\lambda\)</span> be an eigen value of a square matrix <span class="math notranslate nohighlight">\(\bA\)</span>.
+Then the geometric multiplicity
+of <span class="math notranslate nohighlight">\(\lambda\)</span> is less than or equal to its algebraic multiplicity.</p>
+</div>
+</div><div class="proof corollary admonition" id="res-mat-eig-distinct-multiplicity">
+<p class="admonition-title"><span class="caption-number">Corollary 4.16 </span> (Distinct eigen values and multiplicity)</p>
+<div class="corollary-content section" id="proof-content">
+<p>If an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA\)</span> has <span class="math notranslate nohighlight">\(n\)</span> distinct eigen values,
+then each of them has a geometric (and algebraic) multiplicity of <span class="math notranslate nohighlight">\(1\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The algebraic multiplicity of an eigen value is greater than or equal to 1.
+But the sum cannot exceed <span class="math notranslate nohighlight">\(n\)</span>.
+Since there are <span class="math notranslate nohighlight">\(n\)</span> distinct eigen values,
+thus each of them has algebraic multiplicity of <span class="math notranslate nohighlight">\(1\)</span>.
+Further, geometric multiplicity of an eigen value is greater than equal to 1
+and less than equal to its algebraic multiplicity.</p>
+</div>
+<div class="proof corollary admonition" id="res-mat-eig-alg-geom-mult-2">
+<p class="admonition-title"><span class="caption-number">Corollary 4.17 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA\)</span> has <span class="math notranslate nohighlight">\(k\)</span> distinct eigen values
+<span class="math notranslate nohighlight">\(\lambda_1, \lambda_2, \dots, \lambda_k\)</span>
+with algebraic multiplicities
+<span class="math notranslate nohighlight">\(r_1, r_2, \dots, r_k\)</span>
+and geometric multiplicities <span class="math notranslate nohighlight">\(g_1, g_2, \dots g_k\)</span>
+respectively.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^k g_k \leq \sum_{i=1}^k r_k \leq n. 
+\]</div>
+<p>Moreover if</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^k g_i = \sum_{i=1}^k r_i
+\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight">
+\[
+g_i = r_i \Forall i=1,\dots,k.
+\]</div>
+</div>
+</div><div class="proof remark admonition" id="res-mat-charac-roots-spectrum">
+<p class="admonition-title"><span class="caption-number">Remark 4.18 </span> (Spectrum from roots of characteristic polynomial)</p>
+<div class="remark-content section" id="proof-content">
+<p>In the factorization <a class="reference internal" href="#equation-eq-mat-eig-charac-poly-complex-factors">(4.14)</a>
+of the characteristic polynomial <span class="math notranslate nohighlight">\(p(\lambda)\)</span>,
+the set <span class="math notranslate nohighlight">\(\{\lambda_1, \dots, \lambda_k\}\)</span> forms the spectrum of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</div>
+</div><p>Let us consider the sum of <span class="math notranslate nohighlight">\(r_i\)</span> which gives the count of total number of roots
+of <span class="math notranslate nohighlight">\(p(\lambda)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+m = \sum_{i=1}^k r_i.
+\]</div>
+<p>With this there are <span class="math notranslate nohighlight">\(m\)</span> not-necessarily distinct roots of <span class="math notranslate nohighlight">\(p(\lambda)\)</span>.
+Let us write <span class="math notranslate nohighlight">\(p(\lambda)\)</span> from <a class="reference internal" href="#equation-eq-mat-eig-charac-poly-real-factors">(4.13)</a> as</p>
+<div class="math notranslate nohighlight">
+\[
+p(\lambda) = (-1)^n (\lambda - c_1) (\lambda - c_2)\dots (\lambda - c_m)q(\lambda).
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_1, c_2, \dots, c_m\)</span> are <span class="math notranslate nohighlight">\(m\)</span> scalars (not necessarily distinct) of which
+<span class="math notranslate nohighlight">\(r_1\)</span> scalars are <span class="math notranslate nohighlight">\(\lambda_1\)</span>, <span class="math notranslate nohighlight">\(r_2\)</span> are <span class="math notranslate nohighlight">\(\lambda_2\)</span> and so on.
+For the complex case, we have <span class="math notranslate nohighlight">\(q(\lambda)=1\)</span>.</p>
+<p>We will refer to the set (allowing repetitions)
+<span class="math notranslate nohighlight">\(\{c_1, c_2, \dots, c_m \}\)</span> as the eigen values of the
+matrix <span class="math notranslate nohighlight">\(\bA\)</span> where <span class="math notranslate nohighlight">\(c_i\)</span> are not necessarily distinct.
+In contrast the spectrum of <span class="math notranslate nohighlight">\(\bA\)</span> refers to the set of distinct eigen values of <span class="math notranslate nohighlight">\(\bA\)</span>.
+The symbol <span class="math notranslate nohighlight">\(c\)</span> has been chosen based on the other name for eigen values
+(the characteristic values).</p>
+</div>
+<div class="section" id="the-zero-eigen-value">
+<h2><span class="section-number">4.10.4. </span>The Zero Eigen Value<a class="headerlink" href="#the-zero-eigen-value" title="Permalink to this headline">¶</a></h2>
+<div class="proof lemma admonition" id="res-mat-0-ev">
+<p class="admonition-title"><span class="caption-number">Lemma 4.52 </span> (<span class="math notranslate nohighlight">\(0\)</span> as an eigen value)</p>
+<div class="lemma-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(0\)</span> is an eigen value of a square matrix <span class="math notranslate nohighlight">\(\bA\)</span> if and only if <span class="math notranslate nohighlight">\(\bA\)</span> is singular.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(0\)</span> be an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+<ol>
+<li><p>Then there exists <span class="math notranslate nohighlight">\(\bu \neq \bzero\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bu = 0 \bu = \bzero.
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bu\)</span> is a non-trivial solution of the homogeneous linear system <span class="math notranslate nohighlight">\(\bA \bx = \bzero\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bA\)</span> is singular.</p></li>
+</ol>
+<p>Converse:</p>
+<ol>
+<li><p>Assume that <span class="math notranslate nohighlight">\(\bA\)</span> is singular.</p></li>
+<li><p>Then there exists <span class="math notranslate nohighlight">\(\bu \neq \bzero\)</span> s.t.</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bu = \bzero = 0 \bu.
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(0\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof lemma admonition" id="res-mat-0-eval-eigenspace">
+<p class="admonition-title"><span class="caption-number">Lemma 4.53 </span> (Eigenspace of the zero eigen value)</p>
+<div class="lemma-content section" id="proof-content">
+<p>If a square matrix <span class="math notranslate nohighlight">\(\bA\)</span> is singular,
+then <span class="math notranslate nohighlight">\(\NullSpace(\bA)\)</span> is the eigen space for the eigen value <span class="math notranslate nohighlight">\(\lambda = 0\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is straight forward from the definition of eigen space (see <a class="reference internal" href="#def:mat:eigen_space">Definition 4.131</a>).</p>
+</div>
+<div class="proof remark admonition" id="res-mat-0-eval-geometric-multiplicity">
+<p class="admonition-title"><span class="caption-number">Remark 4.19 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Clearly the geometric multiplicity of <span class="math notranslate nohighlight">\(\lambda=0\)</span> equals <span class="math notranslate nohighlight">\(\Nullity(\bA) = n  - \Rank(\bA)\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="transpose">
+<h2><span class="section-number">4.10.5. </span>Transpose<a class="headerlink" href="#transpose" title="Permalink to this headline">¶</a></h2>
+<div class="proof lemma admonition" id="res-mat-eval-transpose">
+<p class="admonition-title"><span class="caption-number">Lemma 4.54 </span> (Eigen values of the transpose)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a square matrix. Then <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bA^T\)</span> have same eigen values.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The eigen values of <span class="math notranslate nohighlight">\(\bA^T\)</span> are given by</p>
+<div class="math notranslate nohighlight">
+\[
+\det (\bA^T - \lambda \bI) = 0.
+\]</div>
+<p>But</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^T - \lambda \bI = \bA^T - (\lambda \bI )^T = (\bA - \lambda \bI)^T.
+\]</div>
+<p>Hence (using <a class="reference internal" href="matrices_2.html#lem:mat:determinant_transpose_rule">Lemma 4.34</a>)</p>
+<div class="math notranslate nohighlight">
+\[
+\det (\bA^T - \lambda \bI)
+= \det \left (  (\bA - \lambda \bI)^T \right )
+= \det (\bA - \lambda \bI).
+\]</div>
+<p>Thus the characteristic polynomials of <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bA^T\)</span> are same.
+Hence the eigen values are same.
+In other words the spectrum of <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bA^T\)</span> are same.</p>
+</div>
+</div>
+<div class="section" id="powers-and-inverses">
+<h2><span class="section-number">4.10.6. </span>Powers and Inverses<a class="headerlink" href="#powers-and-inverses" title="Permalink to this headline">¶</a></h2>
+<div class="proof lemma admonition" id="lem:mat:eigen:power_rule">
+<p class="admonition-title"><span class="caption-number">Lemma 4.55 </span> (Power rule)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a square matrix and <span class="math notranslate nohighlight">\(\lambda\)</span> be an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Let <span class="math notranslate nohighlight">\(p \in \Nat\)</span>. Then <span class="math notranslate nohighlight">\(\lambda^p\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA^{p}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We prove this by mathematical induction.</p>
+<ol>
+<li><p>For <span class="math notranslate nohighlight">\(p=1\)</span> the statement holds trivially since <span class="math notranslate nohighlight">\(\lambda^1\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA^1\)</span>.</p></li>
+<li><p>Assume that the statement holds for some value of <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Thus let <span class="math notranslate nohighlight">\(\lambda^p\)</span> be an eigen
+value of <span class="math notranslate nohighlight">\(\bA^{p}\)</span> and let <span class="math notranslate nohighlight">\(\bu\)</span> be corresponding eigen vector.</p></li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA^{p + 1} \bu 
+   = \bA^p ( \bA \bu) = \bA^{p} \lambda \bu  = \lambda \bA^{p} \bu 
+   = \lambda \lambda^p \bu 
+   = \lambda^{p + 1} \bu.
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\lambda^{p + 1}\)</span> is an eigen value for <span class="math notranslate nohighlight">\(\bA^{p + 1}\)</span>
+with the same eigen vector <span class="math notranslate nohighlight">\(\bu\)</span>.</p></li>
+<li><p>With the principle of mathematical induction, the proof is complete.</p></li>
+</ol>
+</div>
+<div class="proof lemma admonition" id="res-mat-inverse-eval">
+<p class="admonition-title"><span class="caption-number">Lemma 4.56 </span> (Eigenvalue of the inverse)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let a square matrix <span class="math notranslate nohighlight">\(\bA\)</span> be non singular and
+let <span class="math notranslate nohighlight">\(\lambda \neq 0\)</span> be some eigen value of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Then <span class="math notranslate nohighlight">\(\lambda^{-1}\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA^{-1}\)</span>.
+Moreover, all eigen values of <span class="math notranslate nohighlight">\(\bA^{-1}\)</span> are obtained
+by taking inverses of eigen values of <span class="math notranslate nohighlight">\(\bA\)</span>;
+i.e., if <span class="math notranslate nohighlight">\(\mu \neq 0\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA^{-1}\)</span>
+then <span class="math notranslate nohighlight">\(\frac{1}{\mu}\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span> also.
+Also, <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bA^{-1}\)</span> share the same set of eigen vectors.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\bA\)</span> is invertible, hence all its eigenvalues are nonzero.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu \neq \bzero\)</span> be an eigen vector of <span class="math notranslate nohighlight">\(\bA\)</span> for the eigen value <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bu = \lambda \bu 
+   \implies \bu = \bA^{-1} \lambda \bu 
+   \implies \frac{1}{\lambda} \bu = \bA^{-1} \bu.
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bu\)</span> is also an eigen vector of <span class="math notranslate nohighlight">\(\bA^{-1}\)</span>
+for the eigen value <span class="math notranslate nohighlight">\(\frac{1}{\lambda}\)</span>.</p></li>
+<li><p>Now let <span class="math notranslate nohighlight">\(\bB = \bA^{-1}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bB^{-1} = \bA\)</span>.</p></li>
+<li><p>Thus if <span class="math notranslate nohighlight">\(\mu\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bB\)</span>
+then <span class="math notranslate nohighlight">\(\frac{1}{\mu}\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bB^{-1} = \bA\)</span>.</p></li>
+<li><p>Thus if <span class="math notranslate nohighlight">\(\bA\)</span> is invertible then eigen values of
+<span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bA^{-1}\)</span> have one to one correspondence (being reciprocal).</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="invariant-subspaces">
+<h2><span class="section-number">4.10.7. </span>Invariant Subspaces<a class="headerlink" href="#invariant-subspaces" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def:mat:invariant_subspace">
+<p class="admonition-title"><span class="caption-number">Definition 4.135 </span> (Invariant subspace)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a square <span class="math notranslate nohighlight">\(n\times n\)</span> matrix and let <span class="math notranslate nohighlight">\(\WW\)</span> be a linear subspace
+of <span class="math notranslate nohighlight">\(\FF^n\)</span>.
+Then <span class="math notranslate nohighlight">\(\WW\)</span> is <em>invariant</em> relative
+to <span class="math notranslate nohighlight">\(\bA\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bw \in \WW \Forall \bw \in \WW.
+\]</div>
+<p>In other words, <span class="math notranslate nohighlight">\(\bA (\WW) \subseteq \WW\)</span>
+or for every vector <span class="math notranslate nohighlight">\(\bw \in \WW\)</span> its mapping
+<span class="math notranslate nohighlight">\(\bA \bw\)</span> is also in <span class="math notranslate nohighlight">\(\WW\)</span>.
+Thus action of <span class="math notranslate nohighlight">\(\bA\)</span> on <span class="math notranslate nohighlight">\(\WW\)</span> doesn’t take us outside of <span class="math notranslate nohighlight">\(\WW\)</span>.</p>
+<p>We also say that <span class="math notranslate nohighlight">\(\WW\)</span> is <span class="math notranslate nohighlight">\(\bA\)</span>-<em>invariant</em>.</p>
+</div>
+</div><p>Eigen vectors are generators of invariant subspaces.</p>
+<div class="proof lemma admonition" id="lem:mat:span_of_eigenvectors_invariant">
+<p class="admonition-title"><span class="caption-number">Lemma 4.57 </span> (Spans of eigenvectors are invariant)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix.
+Let <span class="math notranslate nohighlight">\(\bx_1, \bx_2, \dots, \bx_r\)</span> be <span class="math notranslate nohighlight">\(r\)</span> eigen vectors of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Let us construct an <span class="math notranslate nohighlight">\(n \times r\)</span> matrix</p>
+<div class="math notranslate nohighlight">
+\[
+\bX = \begin{bmatrix} \bx_1 &amp; \bx_2 &amp; \dots &amp; \bx_r \end{bmatrix}.
+\]</div>
+<p>Then the column space of <span class="math notranslate nohighlight">\(\bX\)</span>;
+i.e., <span class="math notranslate nohighlight">\(\ColSpace(\bX)\)</span> is invariant relative to <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let us assume that <span class="math notranslate nohighlight">\(c_1, c_2, \dots, c_r\)</span> are the eigen values
+corresponding to <span class="math notranslate nohighlight">\(\bx_1, \bx_2, \dots, \bx_r\)</span> (not necessarily distinct).</p>
+<p>Let any vector <span class="math notranslate nohighlight">\(\bx \in \ColSpace(\bX)\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \sum_{i=1}^r \alpha_i \bx_i.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \bx =  \bA \sum_{i=1}^r \alpha_i \bx_i 
+= \sum_{i=1}^r \alpha_i \bA \bx_i 
+= \sum_{i=1}^r \alpha_i c_i \bx_i.
+\]</div>
+<p>Clearly <span class="math notranslate nohighlight">\(\bA \bx\)</span> is also a linear combination of <span class="math notranslate nohighlight">\(\bx_i\)</span>.
+Hence it belongs to <span class="math notranslate nohighlight">\(\ColSpace(\bX)\)</span>.
+Thus <span class="math notranslate nohighlight">\(\ColSpace(\bX)\)</span> is invariant relative to <span class="math notranslate nohighlight">\(\bA\)</span>
+or <span class="math notranslate nohighlight">\(\ColSpace(\bX)\)</span> is <span class="math notranslate nohighlight">\(\bA\)</span>-invariant.</p>
+</div>
+</div>
+<div class="section" id="triangular-matrices">
+<h2><span class="section-number">4.10.8. </span>Triangular Matrices<a class="headerlink" href="#triangular-matrices" title="Permalink to this headline">¶</a></h2>
+<div class="proof lemma admonition" id="lem:mat:eig:triangular_matrix_diagonal">
+<p class="admonition-title"><span class="caption-number">Lemma 4.58 </span> (Eigenvalues of triangular matrices)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(n\times n\)</span> upper or lower triangular matrix.
+Then its eigen values are the entries on its main diagonal.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We are given that <span class="math notranslate nohighlight">\(\bA\)</span> is triangular.</p>
+<ol>
+<li><p>Then <span class="math notranslate nohighlight">\(\bA - \lambda \bI\)</span> is also triangular
+with its diagonal entries being <span class="math notranslate nohighlight">\((a_{i i} - \lambda)\)</span>.</p></li>
+<li><p>Using  <a class="reference internal" href="matrices_2.html#lem:determinant_triangular_matrix_rule">Lemma 4.39</a>,
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+   p(\lambda) = \det (\bA - \lambda \bI) 
+   = \prod_{i=1}^n (a_{i i} - \lambda).
+   \]</div>
+</li>
+<li><p>Clearly the roots of characteristic polynomial are <span class="math notranslate nohighlight">\(a_{i i}\)</span>.</p></li>
+</ol>
+</div>
+<p>Several small results follow from this lemma.</p>
+<div class="proof corollary admonition" id="lem:mat:eig:triangular_matrix_diagonal-2">
+<p class="admonition-title"><span class="caption-number">Corollary 4.18 </span> (Eigenvalues of triangular matrices)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA = [a_{i j}]\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> triangular matrix.</p>
+<ul>
+<li><p>The characteristic polynomial of <span class="math notranslate nohighlight">\(\bA\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+   p(\lambda) = (-1)^n (\lambda - a_{i i}).
+   \]</div>
+</li>
+<li><p>A scalar <span class="math notranslate nohighlight">\(\lambda\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span>
+iff it is one of the diagonal entries of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+<li><p>The algebraic multiplicity of an eigen value <span class="math notranslate nohighlight">\(\lambda\)</span>
+is equal to the number of times
+it appears on the main diagonal of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+<li><p>The spectrum of <span class="math notranslate nohighlight">\(\bA\)</span> is given by the distinct entries
+on the main diagonal of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+</ul>
+</div>
+</div><p>A diagonal matrix is naturally both an upper triangular matrix
+as well as a lower triangular matrix.
+Similar results hold for the eigen values of a diagonal matrix also.</p>
+<div class="proof lemma admonition" id="lem:mat:eig:diagonal_matrix_diagonal">
+<p class="admonition-title"><span class="caption-number">Lemma 4.59 </span> (Eigenvalues of diagonal matrices)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA = [a_{i j}]\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> diagonal matrix.</p>
+<ul>
+<li><p>Its eigen values are the entries on its main diagonal.</p></li>
+<li><p>The characteristic polynomial of <span class="math notranslate nohighlight">\(\bA\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+   p(\lambda) = (-1)^n (\lambda - a_{i i}).
+   \]</div>
+</li>
+<li><p>A scalar <span class="math notranslate nohighlight">\(\lambda\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span>
+iff it is one of the diagonal entries of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>The algebraic multiplicity of an eigen value <span class="math notranslate nohighlight">\(\lambda\)</span>
+is equal to the number of times
+it appears on the main diagonal of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+<li><p>The spectrum of <span class="math notranslate nohighlight">\(\bA\)</span> is given by the distinct entries
+on the main diagonal of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+</ul>
+</div>
+</div><p>There is also a result for the geometric multiplicity of eigen values
+for a diagonal matrix.</p>
+<div class="proof lemma admonition" id="res-mat-diagonal-mat-eval-geom-mult">
+<p class="admonition-title"><span class="caption-number">Lemma 4.60 </span> (Geometric multiplicity of eigenvalues for diagonal matrices)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA = [a_{i j}]\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> diagonal matrix.
+The geometric multiplicity of an eigen value <span class="math notranslate nohighlight">\(\lambda\)</span>
+is equal to the number of times
+it appears on the main diagonal of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The unit vectors <span class="math notranslate nohighlight">\(\be_i\)</span> are eigen vectors for <span class="math notranslate nohighlight">\(\bA\)</span> since</p>
+<div class="math notranslate nohighlight">
+\[
+\bA \be_i = a_{i i } \be_i.
+\]</div>
+<ol class="simple">
+<li><p>They are linearly independent.</p></li>
+<li><p>Thus if a particular eigen value appears <span class="math notranslate nohighlight">\(r\)</span> number of times, then
+there are <span class="math notranslate nohighlight">\(r\)</span> linearly independent eigen vectors for the eigen value.</p></li>
+<li><p>Thus its geometric multiplicity is equal to the algebraic multiplicity.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="similar-matrices">
+<h2><span class="section-number">4.10.9. </span>Similar Matrices<a class="headerlink" href="#similar-matrices" title="Permalink to this headline">¶</a></h2>
+<p>Some very useful results are available for similar matrices.</p>
+<div class="proof lemma admonition" id="lem:mat:eig:simlar_matrix_spectrum">
+<p class="admonition-title"><span class="caption-number">Lemma 4.61 </span> (Characteristic polynomial of similar matrices)</p>
+<div class="lemma-content section" id="proof-content">
+<p>The characteristic polynomial and spectrum of similar matrices is same.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bB\)</span> be similar to <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+<ol>
+<li><p>Then there exists an invertible matrix <span class="math notranslate nohighlight">\(\bC\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bB   = \bC^{-1} \bA \bC.
+   \]</div>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \bB - \lambda \bI 
+   &amp;= \bC^{-1} \bA \bC - \lambda \bI \\
+   &amp;= \bC^{-1} \bA \bC - \lambda \bC^{-1} \bC \\
+   &amp;=  \bC^{-1}  ( \bA \bC - \lambda \bC) \\
+   &amp;=  \bC^{-1} (\bA - \lambda \bI) \bC.
+   \end{split}\]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bB - \lambda \bI\)</span> is similar to <span class="math notranslate nohighlight">\(\bA - \lambda \bI\)</span>.</p></li>
+<li><p>Hence due to
+<a class="reference internal" href="matrices_2.html#lem:determinant_simlar_matrix_rule">Lemma 4.41</a>,
+their determinant is equal.</p></li>
+<li><p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+   \det(\bB - \lambda \bI ) = \det (\bA - \lambda \bI).
+   \]</div>
+</li>
+<li><p>This means that the characteristic polynomials of <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bB\)</span> are same.</p></li>
+<li><p>Since eigen values are nothing but
+roots of the characteristic polynomial,
+hence they are same too.</p></li>
+<li><p>This means that the spectrum (the set of
+distinct eigen values) is same.</p></li>
+</ol>
+</div>
+<p>This result is very useful. Since if it can be shown that a matrix <span class="math notranslate nohighlight">\(\bA\)</span>
+is similar to a diagonal or a triangular matrix whose eigen values are easy
+to obtain then determination of the eigen values of <span class="math notranslate nohighlight">\(\bA\)</span> becomes straight forward.</p>
+<div class="proof corollary admonition" id="lem:mat:eig:evals-similar-mat">
+<p class="admonition-title"><span class="caption-number">Corollary 4.19 </span> (Eigenvalues of similar matrices)</p>
+<div class="corollary-content section" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bB\)</span> are similar to each other then</p>
+<ul class="simple">
+<li><p>An eigen value has same algebraic and geometric multiplicity
+for both <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bB\)</span>.</p></li>
+<li><p>The (not necessarily distinct) eigen values of <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bB\)</span> are same.</p></li>
+</ul>
+</div>
+</div><p>Although the eigen values are same, but the eigen vectors are different.</p>
+<div class="proof lemma admonition" id="lem:mat:eig:similar_matrix_eigen_value">
+<p class="admonition-title"><span class="caption-number">Lemma 4.62 </span> (Eigenvectors of similar matrices)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bB\)</span> be similar with</p>
+<div class="math notranslate nohighlight">
+\[
+\bB   = \bC^{-1} \bA \bC
+\]</div>
+<p>for some invertible matrix <span class="math notranslate nohighlight">\(\bC\)</span>.
+If <span class="math notranslate nohighlight">\(\bu\)</span> is an eigenvector of <span class="math notranslate nohighlight">\(\bA\)</span>
+for an eigenvalue <span class="math notranslate nohighlight">\(\lambda\)</span>,
+then <span class="math notranslate nohighlight">\(C^{-1} \bu\)</span>
+is an eigen vector of <span class="math notranslate nohighlight">\(\bB\)</span> for the same eigen value.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We are given that <span class="math notranslate nohighlight">\(\bu\)</span> is an eigen vector of <span class="math notranslate nohighlight">\(\bA\)</span>
+for an eigen value <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<ol>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \bA \bu  = \lambda \bu.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+   \bB \bC^{-1} \bu  
+   = \bC^{-1} \bA \bC  \bC^{-1} \bu 
+   = \bC^{-1} \bA \bu 
+   = \bC^{-1} \lambda \bu = \lambda \bC^{-1} \bu.
+   \]</div>
+</li>
+<li><p>Now <span class="math notranslate nohighlight">\(\bu \neq \bzero\)</span> and <span class="math notranslate nohighlight">\(\bC^{-1}\)</span> is non singular.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bC^{-1} \bu \neq \bzero\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bC^{-1} \bu\)</span> is an eigen vector of <span class="math notranslate nohighlight">\(\bB\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="linear-independence-of-eigenvectors">
+<h2><span class="section-number">4.10.10. </span>Linear Independence of Eigenvectors<a class="headerlink" href="#linear-independence-of-eigenvectors" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="thm:mat:eig:independence_distinc_eigen_values">
+<p class="admonition-title"><span class="caption-number">Theorem 4.122 </span> (Linear independence of eigenvectors with distinct eigenvalues)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(n\times n\)</span> square matrix.
+Let <span class="math notranslate nohighlight">\(\bx_1, \bx_2, \dots , \bx_k\)</span> be any <span class="math notranslate nohighlight">\(k\)</span> eigen vectors
+of <span class="math notranslate nohighlight">\(A\)</span> for distinct eigen values
+<span class="math notranslate nohighlight">\(\lambda_1, \lambda_2, \dots, \lambda_k\)</span> respectively.
+Then <span class="math notranslate nohighlight">\(\bx_1, \bx_2, \dots , \bx_k\)</span>  are linearly independent.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first prove the simpler case with 2 eigen vectors
+<span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> and corresponding eigen values
+<span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span> respectively.</p>
+<ol>
+<li><p>Let there be a linear relationship between <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \alpha_1 \bx_1 + \alpha_2 \bx_2 = \bzero.
+   \]</div>
+</li>
+<li><p>Multiplying both sides with <span class="math notranslate nohighlight">\((\bA - \lambda_1 \bI)\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \alpha_1 (\bA - \lambda_1 \bI) \bx_1 
+   + \alpha_2(\bA - \lambda_1 \bI) \bx_2  = \bzero\\
+   \implies &amp; \alpha_1 (\lambda_1 - \lambda_1) \bx_1 
+   + \alpha_2(\lambda_2  - \lambda_1) \bx_2 = \bzero \\
+   \implies &amp; \alpha_2(\lambda_2 - \lambda_1) \bx_2 = \bzero.
+   \end{split}\]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\lambda_1 \neq \lambda_2\)</span> and <span class="math notranslate nohighlight">\(\bx_2 \neq \bzero\)</span>,
+hence <span class="math notranslate nohighlight">\(\alpha_2 = 0\)</span>.</p></li>
+<li><p>Similarly by multiplying with <span class="math notranslate nohighlight">\((\bA - \lambda_2 \bI)\)</span>
+on both sides, we can show that <span class="math notranslate nohighlight">\(\alpha_1 = 0\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> are linearly independent.</p></li>
+<li><p>Now for the general case, consider a linear relationship
+between <span class="math notranslate nohighlight">\(\bx_1, \bx_2, \dots , \bx_k\)</span>  given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \alpha_1 \bx_1 + \alpha_2 \bx_2 + \dots \alpha_k \bx_k = \bzero.
+   \]</div>
+</li>
+<li><p>Multiplying by
+<span class="math notranslate nohighlight">\(\prod_{i \neq j, i=1}^k (\bA - \lambda_i \bI)\)</span>
+and using the fact that <span class="math notranslate nohighlight">\(\lambda_i \neq \lambda_j\)</span> if <span class="math notranslate nohighlight">\(i \neq j\)</span>,
+we get <span class="math notranslate nohighlight">\(\alpha_j = 0\)</span>.</p></li>
+<li><p>Thus the only linear relationship is the trivial relationship.</p></li>
+<li><p>This completes the proof.</p></li>
+</ol>
+</div>
+<p>For eigen values with geometric multiplicity greater than <span class="math notranslate nohighlight">\(1\)</span>
+there are multiple eigenvectors corresponding
+to the eigen value which are linearly independent.
+In this context, above theorem can be generalized further.</p>
+<div class="proof theorem admonition" id="thm:mat:eig:independence_distinc_eigen_values_general">
+<p class="admonition-title"><span class="caption-number">Theorem 4.123 </span> (Linear independence of eigenvectors from different eigen spaces)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\lambda_1, \lambda_2, \dots, \lambda_k\)</span> be <span class="math notranslate nohighlight">\(k\)</span> distinct eigen values of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Let <span class="math notranslate nohighlight">\(\{\bx_1^j, \bx_2^j, \dots \bx_{g_j}^j\}\)</span>
+be any <span class="math notranslate nohighlight">\(\bg_j\)</span> linearly independent eigen vectors from
+the eigen space of <span class="math notranslate nohighlight">\(\lambda_j\)</span>
+where <span class="math notranslate nohighlight">\(g_j\)</span> is the geometric multiplicity of <span class="math notranslate nohighlight">\(\lambda_j\)</span>.
+Then the combined set of eigen vectors given by</p>
+<div class="math notranslate nohighlight">
+\[
+\{\bx_1^1, \dots, \bx_{g_1}^1, 
+\dots, \bx_1^k, \dots, \bx_{g_k}^k\}
+\]</div>
+<p>consisting of <span class="math notranslate nohighlight">\(\sum_{j=1}^k g_j\)</span>
+eigen vectors is linearly independent.</p>
+</div>
+</div><p>This result puts an upper limit on the number of
+linearly independent eigen vectors of a square matrix.</p>
+<div class="proof lemma admonition" id="res-mat-eig-upper-limit-lin-ind-evecs">
+<p class="admonition-title"><span class="caption-number">Lemma 4.63 </span> (Maximum number of linearly independent eigenvectors)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{ \lambda_1, \dots, \lambda_k \}\)</span> represents the spectrum of an
+<span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA\)</span>.
+Let <span class="math notranslate nohighlight">\(g_1, \dots, g_k\)</span> be the geometric multiplicities of
+<span class="math notranslate nohighlight">\(\lambda_1, \dots \lambda_k\)</span> respectively.
+Then the number of linearly independent eigen vectors for <span class="math notranslate nohighlight">\(\bA\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^k g_i.
+\]</div>
+<p>Moreover if</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^k g_i = n
+\]</div>
+<p>then a set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent eigen vectors of <span class="math notranslate nohighlight">\(\bA\)</span>
+can be found which forms a basis for <span class="math notranslate nohighlight">\(\FF^n\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="diagonalization">
+<h2><span class="section-number">4.10.11. </span>Diagonalization<a class="headerlink" href="#diagonalization" title="Permalink to this headline">¶</a></h2>
+<p>Diagonalization is one of the fundamental operations in linear algebra.
+This section discusses diagonalization of square matrices in depth.</p>
+<div class="proof definition admonition" id="def:mat:diagonalizable">
+<p class="admonition-title"><span class="caption-number">Definition 4.136 </span> (diagonalizable matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>An <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA\)</span> is said to be <em>diagonalizable</em>
+if it is <em>similar</em> to a diagonal matrix.
+In other words there exists an
+<span class="math notranslate nohighlight">\(n\times n\)</span> non-singular matrix <span class="math notranslate nohighlight">\(\bP\)</span>
+such that <span class="math notranslate nohighlight">\(\bD = \bP^{-1} \bA \bP\)</span> is a diagonal matrix.
+If this happens then we say that <span class="math notranslate nohighlight">\(\bP\)</span> <em>diagonalizes</em> <span class="math notranslate nohighlight">\(\bA\)</span>
+or <span class="math notranslate nohighlight">\(\bA\)</span> is diagonalized by <span class="math notranslate nohighlight">\(\bP\)</span>.</p>
+</div>
+</div><div class="proof remark admonition" id="rem-mat-diagonalizable-1">
+<p class="admonition-title"><span class="caption-number">Remark 4.20 </span></p>
+<div class="remark-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\bD =  \bP^{-1} \bA \bP \iff \bP \bD = \bA \bP 
+\iff \bP \bD \bP^{-1} = \bA.
+\]</div>
+</div>
+</div><p>We note that if we restrict to real matrices, then <span class="math notranslate nohighlight">\(\bU\)</span> and <span class="math notranslate nohighlight">\(\bD\)</span> should also be real.
+If <span class="math notranslate nohighlight">\(\bA \in \CC^{n \times n}\)</span> (it may still be real)
+then <span class="math notranslate nohighlight">\(\bP\)</span> and <span class="math notranslate nohighlight">\(\bD\)</span> can be complex.</p>
+<p>In other words, if <span class="math notranslate nohighlight">\(\bA \in \RR^{n \times n}\)</span> is diagonalizable
+then both <span class="math notranslate nohighlight">\(\bP\)</span> and <span class="math notranslate nohighlight">\(\bD\)</span> must be real.</p>
+<p>The next theorem is the culmination of a variety of results studied so far.</p>
+<div class="proof theorem admonition" id="thm:mat:diagonalizable_matrix_properties">
+<p class="admonition-title"><span class="caption-number">Theorem 4.124 </span> (Properties of diagonalizable matrices)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a diagonalizable matrix with <span class="math notranslate nohighlight">\(\bD = \bP^{-1} \bA \bP\)</span>
+being its diagonalization.
+Let <span class="math notranslate nohighlight">\(\bD =  \Diag(d_1, d_2, \dots, d_n)\)</span>.
+Then the following hold</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\Rank(\bA) = \Rank(\bD)\)</span> which equals the number of nonzero entries
+on the main diagonal of <span class="math notranslate nohighlight">\(\bD\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\det(\bA) = d_1 d_2 \dots d_n\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Trace(\bA) = d_1 + d_2 + \dots d_n\)</span>.</p></li>
+<li><p>The characteristic polynomial of <span class="math notranslate nohighlight">\(\bA\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+   p(\lambda) = (-1)^n (\lambda - d_1) (\lambda -d_2) \dots (\lambda - d_n).
+   \]</div>
+</li>
+<li><p>The spectrum of <span class="math notranslate nohighlight">\(\bA\)</span> comprises the distinct scalars
+on the diagonal entries in <span class="math notranslate nohighlight">\(\bD\)</span>.</p></li>
+<li><p>The (not necessarily distinct) eigenvalues of <span class="math notranslate nohighlight">\(\bA\)</span>
+are the diagonal elements of <span class="math notranslate nohighlight">\(\bD\)</span>.</p></li>
+<li><p>The columns of <span class="math notranslate nohighlight">\(\bP\)</span> are (linearly independent) eigenvectors of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+<li><p>The algebraic and geometric multiplicities of an eigenvalue <span class="math notranslate nohighlight">\(\lambda\)</span> of <span class="math notranslate nohighlight">\(\bA\)</span>
+equal the number of diagonal elements of <span class="math notranslate nohighlight">\(\bD\)</span> that equal <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+</ul>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From <a class="reference internal" href="#def:mat:diagonalizable">Definition 4.136</a> we note that <span class="math notranslate nohighlight">\(\bD\)</span> and <span class="math notranslate nohighlight">\(\bA\)</span> are similar.</p>
+<ol>
+<li><p>Due to <a class="reference internal" href="matrices_2.html#lem:determinant_simlar_matrix_rule">Lemma 4.41</a></p>
+<div class="math notranslate nohighlight">
+\[
+    \det(\bA) = \det(\bD).
+   \]</div>
+</li>
+<li><p>Due to <a class="reference internal" href="matrices_2.html#lem:determinant_diagonal_matrix_rule">Lemma 4.40</a></p>
+<div class="math notranslate nohighlight">
+\[
+    \det(\bD) = \prod_{i=1}^n d_i.
+   \]</div>
+</li>
+<li><p>Now due to <a class="reference internal" href="matrices_2.html#lem:mat:trace_similar_matrices">Lemma 4.32</a></p>
+<div class="math notranslate nohighlight">
+\[
+    \Trace(\bA) = \Trace(\bD) = \sum_{i=1}^n d_i.
+   \]</div>
+</li>
+<li><p>Further due to <a class="reference internal" href="#lem:mat:eig:simlar_matrix_spectrum">Lemma 4.61</a>
+the characteristic polynomial and spectrum of <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bD\)</span> are same.</p></li>
+<li><p>Due to <a class="reference internal" href="#lem:mat:eig:diagonal_matrix_diagonal">Lemma 4.59</a> the eigen values of <span class="math notranslate nohighlight">\(\bD\)</span>
+are nothing but its diagonal entries.</p></li>
+<li><p>Hence they are also the eigen values of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+<li><p>We recall that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bD = \bP^{-1} \bA \bP \implies \bA \bP = \bP \bD.
+   \]</div>
+</li>
+<li><p>Now writing</p>
+<div class="math notranslate nohighlight">
+\[
+   \bP  = \begin{bmatrix}
+    \bp_1 &amp; \bp_2 &amp; \dots &amp; \bp_n
+    \end{bmatrix}
+   \]</div>
+<p>we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bP  = \begin{bmatrix}
+    \bA \bp_1 &amp; \bA \bp_2 &amp; \dots &amp; \bA \bp_n
+    \end{bmatrix}
+   =  \bP \bD =
+    \begin{bmatrix}
+    d_1 \bp_1 &amp; d_2 \bp_2 &amp; \dots &amp; d_n \bp_n
+    \end{bmatrix}.
+   \]</div>
+</li>
+<li><p>Matching columns, we see that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bp_i = d_i \bp_i \Forall i=1,\dots,n.
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bp_i\)</span> are eigen vectors of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bP\)</span> is invertible, hence its columns are linearly independent.</p></li>
+<li><p>Hence all the eigenvectors of <span class="math notranslate nohighlight">\(\bA\)</span> are linearly independent.</p></li>
+<li><p>Since the characteristic polynomials of <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bD\)</span> are same,
+hence the algebraic multiplicities of eigen values are same.</p></li>
+<li><p>From <a class="reference internal" href="#lem:mat:eig:similar_matrix_eigen_value">Lemma 4.62</a>
+we get that there is a one to one correspondence between
+the eigen vectors of <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bD\)</span> through
+the change of basis given by <span class="math notranslate nohighlight">\(\bP\)</span>.</p></li>
+<li><p>Thus the linear independence relationships
+between the eigen vectors remain the same.</p></li>
+<li><p>Hence the geometric multiplicities
+of individual eigenvalues are also the same.</p></li>
+<li><p>This completes the proof.</p></li>
+</ol>
+</div>
+<p>So far we have verified various results which are available if
+a matrix <span class="math notranslate nohighlight">\(\bA\)</span> is diagonalizable. We haven’t yet identified the
+conditions under which <span class="math notranslate nohighlight">\(\bA\)</span> is diagonalizable. We note that
+not every matrix is diagonalizable. The following theorem
+gives necessary and sufficient conditions under which
+a matrix is diagonalizable.</p>
+<div class="proof theorem admonition" id="thm:mat:eig:necessary_condition_diagonalizability">
+<p class="admonition-title"><span class="caption-number">Theorem 4.125 </span> (Diagonalizability: necessary and sufficient conditions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>An <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA\)</span> is diagonalizable by an <span class="math notranslate nohighlight">\(n \times n\)</span>
+nonsingular matrix
+<span class="math notranslate nohighlight">\(\bP\)</span> if and only if the columns of <span class="math notranslate nohighlight">\(\bP\)</span> are (linearly independent)
+eigenvectors of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that since <span class="math notranslate nohighlight">\(\bP\)</span> is nonsingular
+hence columns of <span class="math notranslate nohighlight">\(\bP\)</span> have to be linearly independent.</p>
+<p>The necessary condition part was proven in <a class="reference internal" href="#thm:mat:diagonalizable_matrix_properties">Theorem 4.124</a>.
+We now show that if <span class="math notranslate nohighlight">\(\bP\)</span> consists of
+<span class="math notranslate nohighlight">\(n\)</span> linearly independent eigen vectors of <span class="math notranslate nohighlight">\(\bA\)</span>
+then <span class="math notranslate nohighlight">\(\bA\)</span> is diagonalizable.</p>
+<ol>
+<li><p>Let the columns of <span class="math notranslate nohighlight">\(\bP\)</span> be
+<span class="math notranslate nohighlight">\(\bp_1, \bp_2, \dots, \bp_n\)</span>
+and corresponding (not necessarily distinct) eigen values
+be <span class="math notranslate nohighlight">\(d_1, d_2, \dots , d_n\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bp_i = d_i \bp_i.
+   \]</div>
+</li>
+<li><p>Thus by letting <span class="math notranslate nohighlight">\(\bD = \Diag (d_1, d_2, \dots, d_n)\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bP = \bP \bD.
+   \]</div>
+</li>
+<li><p>Since columns of <span class="math notranslate nohighlight">\(\bP\)</span> are linearly independent,
+hence <span class="math notranslate nohighlight">\(\bP\)</span> is invertible.</p></li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+   \bD = \bP^{-1} \bA \bP. 
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bA\)</span> is similar to a diagonal matrix <span class="math notranslate nohighlight">\(\bD\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bA\)</span> is diagonalizable.</p></li>
+<li><p>This validates the sufficient condition.</p></li>
+</ol>
+</div>
+<p>A corollary follows.</p>
+<div class="proof corollary admonition" id="res-mat-eig-diagonalizable-lin-ind-evec">
+<p class="admonition-title"><span class="caption-number">Corollary 4.20 </span> (Diagonalizability and linear independence of eigen vectors)</p>
+<div class="corollary-content section" id="proof-content">
+<p>An <span class="math notranslate nohighlight">\(n \times n\)</span> matrix is diagonalizable if and only if there exists a linearly
+independent set of <span class="math notranslate nohighlight">\(n\)</span> eigenvectors of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</div>
+</div><p>Now we know that geometric multiplicities of eigen values of <span class="math notranslate nohighlight">\(\bA\)</span>
+provide us information about the number of
+linearly independent eigenvectors of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+<div class="proof corollary admonition" id="res-mat-eig-diagonalizable-geom-mult">
+<p class="admonition-title"><span class="caption-number">Corollary 4.21 </span> (Diagonalizability and geometric multiplicities)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix.
+Let <span class="math notranslate nohighlight">\(\lambda_1, \lambda_2, \dots, \lambda_k\)</span> be
+its <span class="math notranslate nohighlight">\(k\)</span> distinct eigen values (comprising its spectrum).
+Let <span class="math notranslate nohighlight">\(g_j\)</span> be the geometric multiplicity of <span class="math notranslate nohighlight">\(\lambda_j\)</span>.
+Then <span class="math notranslate nohighlight">\(\bA\)</span> is diagonalizable if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^n g_i = n.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="real-symmetric-matrices">
+<h2><span class="section-number">4.10.12. </span>Real Symmetric Matrices<a class="headerlink" href="#real-symmetric-matrices" title="Permalink to this headline">¶</a></h2>
+<p>This subsection is focused on real symmetric matrices.</p>
+<p>Following is a fundamental property of real symmetric matrices.</p>
+<div class="proof theorem admonition" id="thm:mat:eig_real_symmetric_eigenvalue_guarantee">
+<p class="admonition-title"><span class="caption-number">Theorem 4.126 </span> (Existence of eigenvalues)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every real symmetric matrix has an eigen value.</p>
+</div>
+</div><p>The proof of this result is beyond the scope of this book.</p>
+<div class="proof lemma admonition" id="thm:mat:eig:symmetric_orthogonal">
+<p class="admonition-title"><span class="caption-number">Lemma 4.64 </span> (Orthogonality of eigenvectors for distinct eigenvalues)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> real symmetric matrix.
+Let <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span> be any two distinct
+eigen values of <span class="math notranslate nohighlight">\(\bA\)</span> and
+let <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> be any two corresponding eigen vectors.
+Then <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> are orthogonal.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. By definition we have
+<span class="math notranslate nohighlight">\(\bA \bx_1 = \lambda_1 \bx_1\)</span> and <span class="math notranslate nohighlight">\(\bA \bx_2 = \lambda_2 \bx_2\)</span>.
+Thus</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \bx_2^T \bA \bx_1 = \lambda_1 \bx_2^T \bx_1\\
+\implies &amp; \bx_1^T \bA^T \bx_2 = \lambda_1 \bx_1^T \bx_2 \\
+\implies &amp; \bx_1^T \bA \bx_2 = \lambda_1 \bx_1^T \bx_2\\
+\implies &amp; \bx_1^T \lambda_2 \bx_2 = \lambda_1 \bx_1^T \bx_2\\
+\implies &amp; (\lambda_1 - \lambda_2) \bx_1^T \bx_2 = 0 \\
+\implies &amp; \bx_1^T \bx_2 = 0.
+\end{split}\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> are orthogonal.
+In between we took transpose on both sides,
+used the fact that <span class="math notranslate nohighlight">\(\bA= \bA^T\)</span>
+and <span class="math notranslate nohighlight">\(\lambda_1 - \lambda_2 \neq 0\)</span>.</p>
+</div>
+<div class="proof definition admonition" id="def:mat:orthogonally_diagonalizable_matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.137 </span> (Orthogonally diagonalizable matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>A real <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> is said to be <em>orthogonally diagonalizable</em> if
+there exists an orthogonal matrix <span class="math notranslate nohighlight">\(\bU\)</span> which can diagonalize <span class="math notranslate nohighlight">\(\bA\)</span>; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\bD = \bU^T \bA \bU 
+\]</div>
+<p>is a real diagonal matrix.</p>
+</div>
+</div><div class="proof lemma admonition" id="res-mat-orth-diag-symmetric">
+<p class="admonition-title"><span class="caption-number">Lemma 4.65 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Every orthogonally diagonalizable matrix <span class="math notranslate nohighlight">\(\bA\)</span> is symmetric.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have a diagonal matrix <span class="math notranslate nohighlight">\(\bD\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \bU \bD \bU^T. 
+\]</div>
+<p>Taking transpose on both sides we get</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^T = \bU \bD^T \bU^T = \bU \bD \bU^T = \bA.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\bA\)</span> is symmetric.</p>
+</div>
+<div class="proof theorem admonition" id="thm:mat:eig:symmetric_orthogonal_sufficient_condition">
+<p class="admonition-title"><span class="caption-number">Theorem 4.127 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Every symmetric matrix <span class="math notranslate nohighlight">\(\bA\)</span> is orthogonally diagonalizable.</p>
+</div>
+</div><p>We skip the proof of this theorem.</p>
+</div>
+<div class="section" id="hermitian-matrices">
+<h2><span class="section-number">4.10.13. </span>Hermitian Matrices<a class="headerlink" href="#hermitian-matrices" title="Permalink to this headline">¶</a></h2>
+<p>Following is a fundamental property of Hermitian matrices.</p>
+<div class="proof theorem admonition" id="thm:mat:eig_hermitian_eigenvalue_guarantee">
+<p class="admonition-title"><span class="caption-number">Theorem 4.128 </span> (Existence of eigen values for Hermitian matrices)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every Hermitian matrix has an eigen value.</p>
+</div>
+</div><p>The proof of this result is beyond the scope of this book.</p>
+<div class="proof lemma admonition" id="lem:mat:eig:hermitian_eigenvalues_real">
+<p class="admonition-title"><span class="caption-number">Lemma 4.66 </span> (Real eigen values for Hermitian matrices)</p>
+<div class="lemma-content section" id="proof-content">
+<p>The eigenvalues of a Hermitian matrix are real.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bA\)</span> be a Hermitian matrix and
+let <span class="math notranslate nohighlight">\(\lambda\)</span> be an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Let <span class="math notranslate nohighlight">\(\bu\)</span> be a corresponding eigen vector.
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \bA \bu = \lambda \bu\\
+\implies &amp; \bu^H \bA^H = \bu^H \overline{\lambda} \\
+\implies &amp; \bu^H \bA^H \bu = \bu^H \overline{\lambda} \bu\\
+\implies &amp; \bu^H \bA \bu = \overline{\lambda} \bu^H \bu \\
+\implies &amp; \bu^H \lambda \bu = \overline{\lambda} \bu^H \bu \\
+\implies &amp;\|u\|_2^2 (\lambda - \overline{\lambda}) = 0\\
+\implies &amp; \lambda = \overline{\lambda}.
+\end{split}\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\lambda\)</span> is real.
+We used the facts that <span class="math notranslate nohighlight">\(\bA = \bA^H\)</span> and <span class="math notranslate nohighlight">\(\bu \neq \bzero \implies \|\bu\|_2 \neq 0\)</span>.</p>
+</div>
+<div class="proof lemma admonition" id="thm:mat:eig:hermitiaan_orthogonal">
+<p class="admonition-title"><span class="caption-number">Lemma 4.67 </span> (Orthogonality of eigenvectors for distinct eigenvalues)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> complex Hermitian matrix.
+Let <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span> be any two distinct
+eigen values of <span class="math notranslate nohighlight">\(\bA\)</span> and let
+<span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> be any two corresponding eigen vectors.
+Then <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> are orthogonal.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. By definition we have
+<span class="math notranslate nohighlight">\(\bA \bx_1 = \lambda_1 \bx_1\)</span> and <span class="math notranslate nohighlight">\(\bA \bx_2 = \lambda_2 \bx_2\)</span>.
+Thus</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \bx_2^H \bA \bx_1 = \lambda_1 \bx_2^H \bx_1\\
+\implies &amp; \bx_1^H \bA^H \bx_2 = \lambda_1 \bx_1^H \bx_2 \\
+\implies &amp; \bx_1^H \bA \bx_2 = \lambda_1 \bx_1^H \bx_2\\
+\implies &amp; \bx_1^H \lambda_2 \bx_2 = \lambda_1 \bx_1^H \bx_2\\
+\implies &amp; (\lambda_1 - \lambda_2) \bx_1^H \bx_2 = 0 \\
+\implies &amp; \bx_1^H \bx_2 = 0.
+\end{split}\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\bx_1\)</span> and <span class="math notranslate nohighlight">\(\bx_2\)</span> are orthogonal.
+In between we took conjugate transpose on both sides,
+used the fact that <span class="math notranslate nohighlight">\(\bA= \bA^H\)</span>
+and <span class="math notranslate nohighlight">\(\lambda_1 - \lambda_2 \neq 0\)</span>.</p>
+</div>
+<div class="proof definition admonition" id="def:mat:unitary_diagonalizable_matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.138 </span> (Unitary diagonalizable matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>A complex <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(\bA\)</span> is said to be <em>unitary diagonalizable</em> if
+there exists a unitary matrix <span class="math notranslate nohighlight">\(\bU\)</span> which can diagonalize <span class="math notranslate nohighlight">\(\bA\)</span>; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\bD = \bU^H \bA \bU 
+\]</div>
+<p>is a complex diagonal matrix.</p>
+</div>
+</div><div class="proof lemma admonition" id="res-mat-eig-complex-a-unit-diag-real-hermitian">
+<p class="admonition-title"><span class="caption-number">Lemma 4.68 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a unitary diagonalizable matrix
+whose diagonalization <span class="math notranslate nohighlight">\(\bD\)</span> is real. Then <span class="math notranslate nohighlight">\(\bA\)</span>
+is Hermitian.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have a real diagonal matrix <span class="math notranslate nohighlight">\(\bD\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \bU \bD \bU^H. 
+\]</div>
+<p>Taking conjugate transpose on both sides we get</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^H = \bU \bD^H \bU^H = \bU \bD \bU^H = \bA.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\bA\)</span> is Hermitian.
+We used the fact that <span class="math notranslate nohighlight">\(\bD^H = \bD\)</span> since <span class="math notranslate nohighlight">\(\bD\)</span> is real.</p>
+</div>
+<div class="proof theorem admonition" id="thm:mat:eig:hermitian_unitary_sufficient_condition">
+<p class="admonition-title"><span class="caption-number">Theorem 4.129 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Every Hermitian matrix <span class="math notranslate nohighlight">\(\bA\)</span> is unitary diagonalizable.</p>
+</div>
+</div><p>We skip the proof of this theorem.
+The theorem means that if <span class="math notranslate nohighlight">\(\bA\)</span> is Hermitian
+then <span class="math notranslate nohighlight">\(\bA = \bU \Lambda \bU^H\)</span> where <span class="math notranslate nohighlight">\(\Lambda\)</span> is a real diagonal matrix.</p>
+<div class="proof definition admonition" id="def:mat:eig:evd_hermitian_matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.139 </span> (Eigen value decomposition of a Hermitian matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> Hermitian matrix.
+Let <span class="math notranslate nohighlight">\(\lambda_1, \dots \lambda_n\)</span> be its eigen values
+such that <span class="math notranslate nohighlight">\(|\lambda_1| \geq |\lambda_2| \geq \dots \geq |\lambda_n |\)</span>.
+Let</p>
+<div class="math notranslate nohighlight">
+\[
+\Lambda = \Diag(\lambda_1, \dots, \lambda_n).
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bU\)</span> be a unit matrix consisting of orthonormal
+eigen vectors corresponding to
+<span class="math notranslate nohighlight">\(\lambda_1, \dots, \lambda_n\)</span>.
+Then the <em>eigen value decomposition</em> of <span class="math notranslate nohighlight">\(\bA\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \bU \Lambda \bU^H.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\lambda_i\)</span> are distinct, then the decomposition is unique.</p>
+</div>
+</div><div class="proof remark admonition" id="res-mat-evd-norm-bounds-eigen-nng">
+<p class="admonition-title"><span class="caption-number">Remark 4.21 </span></p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Lambda\)</span> be a diagonal matrix as in
+<a class="reference internal" href="#def:mat:eig:evd_hermitian_matrix">Definition 4.139</a>.
+Consider some vector <span class="math notranslate nohighlight">\(\bx \in \CC^n\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\bx^H \Lambda \bx = \sum_{i=1}^n \lambda_i | x_i |^2.
+\]</div>
+<p>Now if <span class="math notranslate nohighlight">\(\lambda_i \geq 0\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[
+\bx^H \Lambda \bx  
+\leq \lambda_1 \sum_{i=1}^n  | x_i |^2 = \lambda_1 \| \bx \|_2^2.
+\]</div>
+<p>Also</p>
+<div class="math notranslate nohighlight">
+\[
+\bx^H \Lambda \bx
+\geq \lambda_n \sum_{i=1}^n | x_i |^2 = \lambda_n \| \bx \|_2^2.
+\]</div>
+</div>
+</div><div class="proof lemma admonition" id="lem:mat:eig:hermitian_psd_x_h_a_x_range">
+<p class="admonition-title"><span class="caption-number">Lemma 4.69 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a Hermitian matrix with non-negative eigen values.
+Let <span class="math notranslate nohighlight">\(\lambda_1\)</span> be its largest
+and <span class="math notranslate nohighlight">\(\lambda_n\)</span> be its smallest eigen values.</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_n  \|\bx\|_2^2 \leq \bx^H \bA \bx 
+\leq  \lambda_1  \|\bx \|_2^2 \Forall  \bx \in \CC^n.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(\bA\)</span> has an eigen value decomposition given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \bU \Lambda \bU^H.
+\]</div>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^n\)</span> and let <span class="math notranslate nohighlight">\(\bv = U^H \bx\)</span>.</p></li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(\| \bx \|_2 = \| \bv \|_2\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx^H \bA \bx = \bx^H \bU \Lambda \bU^H \bx = \bv^H \Lambda \bv.
+   \]</div>
+</li>
+<li><p>From previous remark we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \lambda_n \| \bv \|_2^2 \leq \bv^H \Lambda \bv 
+    \leq \lambda_1 \| \bv \|_2^2.
+   \]</div>
+</li>
+<li><p>Thus we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \lambda_n \| \bx \|_2^2 \leq \bx^H \bA \bx 
+    \leq \lambda_1 \| \bx \|_2^2.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="miscellaneous-properties">
+<h2><span class="section-number">4.10.14. </span>Miscellaneous Properties<a class="headerlink" href="#miscellaneous-properties" title="Permalink to this headline">¶</a></h2>
+<p>This subsection lists some miscellaneous properties of eigen values of a square matrix.</p>
+<div class="proof lemma admonition" id="lem:mat:eig:lambda_k_sum">
+<p class="admonition-title"><span class="caption-number">Lemma 4.70 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\lambda\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span>
+if and only if <span class="math notranslate nohighlight">\(\lambda + k\)</span> is an eigen value
+of <span class="math notranslate nohighlight">\(\bA + k \bI\)</span>.
+Moreover <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bA + k \bI\)</span> share the same eigen vectors.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We can see that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \bA \bx = \lambda \bx \\
+\iff &amp; \bA \bx  + \bk \bx = \lambda \bx + k \bx \\
+\iff &amp; (\bA + k \bI ) \bx = (\lambda + k) \bx.
+\end{split}\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\lambda\)</span> is an eigen value of <span class="math notranslate nohighlight">\(\bA\)</span> with an eigen vector <span class="math notranslate nohighlight">\(\bx\)</span>
+if and only if
+<span class="math notranslate nohighlight">\(\lambda + k\)</span> is an eigen vector of <span class="math notranslate nohighlight">\(\bA + k\bI\)</span> with an eigen vector <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</div>
+</div>
+<div class="section" id="semidefinite-definite-and-indefinite-matrices">
+<h2><span class="section-number">4.10.15. </span>Semidefinite, Definite and Indefinite Matrices<a class="headerlink" href="#semidefinite-definite-and-indefinite-matrices" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="positive-semidefinite-matrices">
+<h3><span class="section-number">4.10.15.1. </span>Positive Semidefinite Matrices<a class="headerlink" href="#positive-semidefinite-matrices" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-la-psd-matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.140 </span> (Positive semidefinite matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>A symmetric matrix <span class="math notranslate nohighlight">\(\bX \in \SS^n\)</span> is called <em>positive semi-definite</em> if
+<span class="math notranslate nohighlight">\(\bv^T \bX \bv \geq 0\)</span> for all <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>.</p>
+<p>The notation <span class="math notranslate nohighlight">\(\bX \succeq \ZERO\)</span> means <span class="math notranslate nohighlight">\(\bv^T \bX \bv \geq 0 \Forall \bv \in \RR^n\)</span>
+or the matrix <span class="math notranslate nohighlight">\(\bX\)</span> is positive semi-definite.</p>
+<p>We define the <em>set of symmetric positive semidefinite matrices</em> as</p>
+<div class="math notranslate nohighlight">
+\[
+\SS_+^n = \{\bX \in \SS^n \ST \bX \succeq \ZERO \}.
+\]</div>
+<p>“positive semidefinite” is often abbreviated as “p.s.d.”.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-ata-as-psd-matrix">
+<p class="admonition-title"><span class="caption-number">Theorem 4.130 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \RR^{m \times n}\)</span> be an arbitrary matrix.
+Then, <span class="math notranslate nohighlight">\(\bA^T \bA\)</span> is a p.s.d. matrix in <span class="math notranslate nohighlight">\(\SS^n\)</span> and
+<span class="math notranslate nohighlight">\(\bA \bA^T\)</span> is a p.s.d. matrix in <span class="math notranslate nohighlight">\(\SS^m\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We shall just prove this for <span class="math notranslate nohighlight">\(\bA^T \bA\)</span>.</p>
+<ol>
+<li><p>We note that</p>
+<div class="math notranslate nohighlight">
+\[
+   (\bA^T \bA)^T = \bA^T \bA.
+   \]</div>
+<p>Thus,  <span class="math notranslate nohighlight">\(\bA^T \bA\)</span> is symmetric.</p>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\bA^T \bA \in \RR^{n \times n}\)</span>. Since it is symmetric, hence <span class="math notranslate nohighlight">\(\bA^T \bA \in \SS^n\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+   \bv^T \bA^T \bA \bv  = (\bA \bv)^T (\bA \bv) 
+   = \| \bA \bv \|^2 \geq 0
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> is the norm induced by the dot product on
+<span class="math notranslate nohighlight">\(\RR^n\)</span>.</p>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bA^T \bA\)</span> is p.s.d..</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-la-psd-diag-nng">
+<p class="admonition-title"><span class="caption-number">Theorem 4.131 </span> (Non-negativity of the diagonal elements of p.s.d. matrices)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \RR^{n \times n}\)</span> be positive semidefinite.
+Then, its diagonal elements are non-negative.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bA \in \SS_+^n\)</span>.</p>
+<ol class="simple">
+<li><p>Then, for every nonzero <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>, <span class="math notranslate nohighlight">\(\bv^T \bA \bv \geq 0\)</span>.</p></li>
+<li><p>In particular, this is true for standard unit vectors.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(\be_i^T \bA \be_i = A_{i,i}\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(A_{i,i} \geq 0\)</span> must be true.</p></li>
+</ol>
+</div>
+<div class="proof definition admonition" id="def-la-psd-square-root">
+<p class="admonition-title"><span class="caption-number">Definition 4.141 </span> (Square root of a positive semidefinite matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \SS^n\)</span> be a positive semidefinite matrix. The
+<em>square root</em> of <span class="math notranslate nohighlight">\(\bA\)</span>, denoted by <span class="math notranslate nohighlight">\(\bA^{\frac{1}{2}}\)</span> is defined
+as follows.</p>
+<p>Let <span class="math notranslate nohighlight">\(\bA = \bU \bD \bU^T\)</span> be the eigenvalue decomposition of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Let <span class="math notranslate nohighlight">\(d_1,\dots,d_n\)</span> be the diagonal elements of <span class="math notranslate nohighlight">\(\bD\)</span>.
+Let <span class="math notranslate nohighlight">\(\bE = \Diag(\sqrt{d_1}, \dots, \sqrt{d_n})\)</span>. Then,</p>
+<div class="math notranslate nohighlight">
+\[
+\bA^{\frac{1}{2}} \triangleq \bU \bE \bU^T.
+\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(\bU \bE \bU^T\)</span> is known as the <em>positive semidefinite square root</em>.</p>
+</div>
+</div><p>The definition of <span class="math notranslate nohighlight">\(\bE\)</span> is justified since <span class="math notranslate nohighlight">\(d_i \geq 0\)</span> for a p.s.d. matrix.</p>
+<p>We can see that</p>
+<div class="math notranslate nohighlight">
+\[
+ç \bA^{\frac{1}{2}} = 
+\bU \bE \bU^T \bU \bE \bU^T
+= \bU \bE \bE \bU^T = \bU \bD \bU^T = \bA.
+\]</div>
+</div>
+<div class="section" id="positive-definite-matrices">
+<h3><span class="section-number">4.10.15.2. </span>Positive Definite Matrices<a class="headerlink" href="#positive-definite-matrices" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-la-pd-matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.142 </span> (Positive definite matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>A symmetric matrix <span class="math notranslate nohighlight">\(\bX \in \SS^n\)</span> is called <em>positive definite</em> if
+<span class="math notranslate nohighlight">\(\bv^T \bX \bv &gt; 0\)</span> for all nonzero <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>.</p>
+<p>The notation <span class="math notranslate nohighlight">\(\bX \succ \ZERO\)</span> means <span class="math notranslate nohighlight">\(\bv^T \bX \bv  &gt; 0 \Forall \bv \in \RR^n, \bv \neq 0\)</span>
+or the matrix <span class="math notranslate nohighlight">\(\bX\)</span> is positive definite.</p>
+<p>We define the <em>set of symmetric positive definite matrices</em> as</p>
+<div class="math notranslate nohighlight">
+\[
+\SS_{++}^n = \{\bX \in \SS^n \ST \bX \succ 0 \}.
+\]</div>
+<p>“positive definite” is often abbreviated as “p.d.”.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-la-pd-diag-positive">
+<p class="admonition-title"><span class="caption-number">Theorem 4.132 </span> (Positivity of the diagonal elements of p.d. matrices)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \RR^{n \times n}\)</span> be positive definite.
+Then, its diagonal elements are positive.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bA \in \SS_{++}^n\)</span>.</p>
+<ol class="simple">
+<li><p>Then, for every nonzero <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>, <span class="math notranslate nohighlight">\(\bv^T \bA \bv &gt; 0\)</span>.</p></li>
+<li><p>In particular, this is true for standard unit vectors.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(\be_i^T \bA \be_i = A_{i,i}\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(A_{i,i} &gt; 0\)</span> must be true.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-la-pd-principal-minors-criterion">
+<p class="admonition-title"><span class="caption-number">Theorem 4.133 </span> (Principal minors criterion)</p>
+<div class="theorem-content section" id="proof-content">
+<p>A matrix <span class="math notranslate nohighlight">\(\bA \in \SS^n\)</span> is positive definite if and only if
+the determinants of all the principal minors are positive.</p>
+<p>In other words, <span class="math notranslate nohighlight">\(D_1(\bA) &gt; 0, D_2(\bA) &gt; 0, \dots, D_n(\bA) &gt; 0\)</span>
+where <span class="math notranslate nohighlight">\(D_i(\bA)\)</span> denotes the determinant of the upper left <span class="math notranslate nohighlight">\(i \times i\)</span>
+submatrix (the <span class="math notranslate nohighlight">\(i\)</span>-th principal minor).</p>
+</div>
+</div></div>
+<div class="section" id="negative-semidefinite-matrices">
+<h3><span class="section-number">4.10.15.3. </span>Negative Semidefinite Matrices<a class="headerlink" href="#negative-semidefinite-matrices" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-la-nsd-matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.143 </span> (Negative semidefinite matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>A symmetric matrix <span class="math notranslate nohighlight">\(\bX \in \SS^n\)</span> is called <em>negative semi-definite</em> if
+<span class="math notranslate nohighlight">\(\bv^T \bX \bv \leq 0\)</span> for all <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>.</p>
+<p>The notation <span class="math notranslate nohighlight">\(\bX \preceq \ZERO\)</span> means <span class="math notranslate nohighlight">\(\bv^T \bX \bv \leq 0 \Forall \bv \in \RR^n\)</span>
+or the matrix <span class="math notranslate nohighlight">\(\bX\)</span> is negative semi-definite.</p>
+<p>We define the <em>set of symmetric negative semidefinite matrices</em> as</p>
+<div class="math notranslate nohighlight">
+\[
+    \SS_-^n = \{\bX \in \SS^n \ST \bX \preceq \ZERO \}.
+\]</div>
+<p>“negative semidefinite” is sometimes abbreviated as “n.s.d.”.</p>
+</div>
+</div></div>
+<div class="section" id="negative-definite-matrices">
+<h3><span class="section-number">4.10.15.4. </span>Negative Definite Matrices<a class="headerlink" href="#negative-definite-matrices" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-la-nd-matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.144 </span> (Negative definite matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>A symmetric matrix <span class="math notranslate nohighlight">\(\bX \in \SS^n\)</span> is called <em>negative definite</em> if
+<span class="math notranslate nohighlight">\(\bv^T \bX \bv &lt; 0\)</span> for all nonzero <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>.</p>
+<p>The notation <span class="math notranslate nohighlight">\(\bX \prec \ZERO\)</span> means <span class="math notranslate nohighlight">\(\bv^T \bX \bv  &lt; 0 \Forall \bv \in \RR^n, \bv \neq 0\)</span>
+or the matrix <span class="math notranslate nohighlight">\(\bX\)</span> is negative definite.</p>
+<p>We define the <em>set of symmetric negative definite matrices</em> as</p>
+<div class="math notranslate nohighlight">
+\[
+\SS_{--}^n = \{\bX \in \SS^n \ST \bX \prec 0 \}.
+\]</div>
+<p>“negative definite” is sometimes abbreviated as “n.d.”.</p>
+</div>
+</div></div>
+<div class="section" id="indefinite-matrices">
+<h3><span class="section-number">4.10.15.5. </span>Indefinite Matrices<a class="headerlink" href="#indefinite-matrices" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-la-indefinite-matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.145 </span> (Indefinite matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>A symmetric matrix <span class="math notranslate nohighlight">\(\bA \in \SS^n\)</span> is called <em>indefinite</em> if
+there exist <span class="math notranslate nohighlight">\(\bx, \by \in \RR^n\)</span> such that
+<span class="math notranslate nohighlight">\(\bx^T \bA \bx &lt; 0\)</span> and <span class="math notranslate nohighlight">\(\by^T \bA \by &gt; 0\)</span>.</p>
+</div>
+</div><p>Indefinite matrices are neither positive semidefinite nor negative semidefinite.</p>
+<div class="proof theorem admonition" id="res-la-diag-indefinite">
+<p class="admonition-title"><span class="caption-number">Theorem 4.134 </span> (Diagonal elements and indefiniteness)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \SS^n\)</span>. If the diagonal elements of <span class="math notranslate nohighlight">\(\bA\)</span> are both
+positive and negative, then <span class="math notranslate nohighlight">\(\bA\)</span> is indefinite.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Each diagonal element corresponds to <span class="math notranslate nohighlight">\(\be_i^T \bA \be_i\)</span> for a
+unit vector <span class="math notranslate nohighlight">\(\be_i\)</span>.
+If the diagonal elements are both positive and negative, then
+there exist unit vectors <span class="math notranslate nohighlight">\(\be_i\)</span> and <span class="math notranslate nohighlight">\(\be_j\)</span> such that
+<span class="math notranslate nohighlight">\(\be_i^T \bA \be_i &lt; 0\)</span> and <span class="math notranslate nohighlight">\(\be_j^T \bA \be_j &gt; 0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\bA\)</span> is indefinite.</p>
+</div>
+</div>
+<div class="section" id="eigenvalue-decomposition">
+<h3><span class="section-number">4.10.15.6. </span>Eigenvalue Decomposition<a class="headerlink" href="#eigenvalue-decomposition" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-la-evd-definiteness-charac">
+<p class="admonition-title"><span class="caption-number">Theorem 4.135 </span> (Eigenvalue characterization theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \SS^n\)</span> be an <span class="math notranslate nohighlight">\(n\times n\)</span> symmetric matrix.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bA\)</span> is positive definite if and only if all its eigenvalues are positive.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bA\)</span> is positive semidefinite if and only if all its eigenvalues are nonnegative.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bA\)</span> is negative definite if and only if all its eigenvalues are negative.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bA\)</span> is negative semidefinite if and only if all its eigenvalues are nonpositive.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bA\)</span> is indefinite if and only if at least one eigenvalue is positive and
+at least one eigenvalue is negative.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let the eigenvalue decomposition of <span class="math notranslate nohighlight">\(\bA\)</span> be given by
+<span class="math notranslate nohighlight">\(\bA = \bU \bD \bU^T\)</span>.</p>
+<p>We prove (1).</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv \in \RR^n\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \bv^T \bA \bv = \bv^T \bU \bD \bU^T \bv
+   = \bw^T \bD \bw = \sum_{i=1}^n d_i w_i^2.
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bw = \bU^T \bv\)</span>.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bU\)</span> is nonsingular, hence <span class="math notranslate nohighlight">\(\bv^T \bA \bv &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(\bv \neq \bzero\)</span>
+if and only if <span class="math notranslate nohighlight">\(\sum_{i=1}^n d_i w_i^2 &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(\bw \neq \bzero\)</span>.</p></li>
+<li><p>Plugging <span class="math notranslate nohighlight">\(\be_i\)</span> for <span class="math notranslate nohighlight">\(\bw\)</span>, we see that <span class="math notranslate nohighlight">\(d_i &gt; 0\)</span> is a necessary condition.</p></li>
+<li><p>Also, if <span class="math notranslate nohighlight">\(d_i &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(i\)</span>, then, the sum is positive for every nonzero <span class="math notranslate nohighlight">\(\bw\)</span>
+since at least one <span class="math notranslate nohighlight">\(w_i \neq 0\)</span>.
+Hence, it is a sufficient condition.</p></li>
+</ol>
+<p>Similar arguments apply for other statements.</p>
+</div>
+</div>
+<div class="section" id="trace-and-determinant">
+<h3><span class="section-number">4.10.15.7. </span>Trace and Determinant<a class="headerlink" href="#trace-and-determinant" title="Permalink to this headline">¶</a></h3>
+<div class="proof corollary admonition" id="res-la-pd-trace-det">
+<p class="admonition-title"><span class="caption-number">Corollary 4.22 </span> (Trace and determinant of positive definite matrices)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a symmetric positive definite matrix. Then, <span class="math notranslate nohighlight">\(\Trace (\bA)\)</span> and <span class="math notranslate nohighlight">\(\det (\bA)\)</span>
+are positive.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Trace is the sum of eigenvalues. Determinant is the product of eigenvalues.
+If <span class="math notranslate nohighlight">\(\bA\)</span> is symmetric positive definite, then its eigenvalues are positive.
+Hence, trace and determinant are positive.</p>
+</div>
+<div class="proof corollary admonition" id="res-la-psd-trace-det">
+<p class="admonition-title"><span class="caption-number">Corollary 4.23 </span> (Trace and determinant of positive semidefinite matrices)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a symmetric positive definite matrix. Then, <span class="math notranslate nohighlight">\(\Trace (\bA)\)</span> and <span class="math notranslate nohighlight">\(\det (\bA)\)</span>
+are nonnegative.</p>
+</div>
+</div></div>
+</div>
+<div class="section" id="diagonally-dominant-matrices">
+<span id="sec-mat-diagonally-dominant-matrix"></span><h2><span class="section-number">4.10.16. </span>Diagonally Dominant Matrices<a class="headerlink" href="#diagonally-dominant-matrices" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-la-sym-diagonally-dominant-matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.146 </span> (Diagonally dominant matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \FF^{n \times n}\)</span> with <span class="math notranslate nohighlight">\(\bA = [a_{i j}]\)</span>.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\bA\)</span> is called <em>diagonally dominant</em> if</p>
+<div class="math notranslate nohighlight">
+\[
+   | a_{i i} | \geq \sum_{j, j \neq i} | a_{i j} | 
+   \]</div>
+<p>for every <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>.
+In other words, the absolute value of the diagonal entry in a row
+is greater than or equal to the sum of absolute values of non diagonal entries in the row.</p>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\bA\)</span> is called <em>strictly diagonally dominant</em> if</p>
+<div class="math notranslate nohighlight">
+\[
+   | a_{i i} | &gt; \sum_{j, j \neq i} | a_{i j} | 
+   \]</div>
+<p>for every <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>.
+In other words, the absolute value
+of the diagonal element is bigger than the sum of absolute values
+of all the off diagonal elements on that row.</p>
+</li>
+</ol>
+</div>
+</div><div class="proof example admonition" id="ex-mat-diag-dominate-1">
+<p class="admonition-title"><span class="caption-number">Example 4.29 </span> (Strictly diagonally dominant matrix)</p>
+<div class="example-content section" id="proof-content">
+<p>Let us consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bA = \begin{bmatrix}
+-4 &amp; -2 &amp; -1 &amp; 0\\
+-4 &amp; 7 &amp; 2 &amp; 0\\
+3 &amp; -4 &amp; 9 &amp; 1\\
+2 &amp; -1 &amp; -3 &amp; 15
+\end{bmatrix}.
+\end{split}\]</div>
+<p>We can see that the strict diagonal dominance condition is satisfied for each row as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{ row 1}: \quad &amp; |-4| &gt; |-2| + |-1| + |0| = 3 \\
+&amp; \text{ row 2}: \quad &amp; |7| &gt; |-4| + |2| + |0| = 6 \\
+&amp; \text{ row 3}: \quad &amp; |9| &gt; |3| + |-4| + |1| = 8 \\
+&amp; \text{ row 4}: \quad &amp; |15| &gt; |2| + |-1| + |-3| = 6.
+\end{split}\]</div>
+</div>
+</div><div class="proof theorem admonition" id="res-la-sym-ddm-psd">
+<p class="admonition-title"><span class="caption-number">Theorem 4.136 </span> (Positive semidefiniteness of diagonally dominant matrices)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \SS^n\)</span> be a real symmetric matrix.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\bA\)</span> is diagonally dominant whose diagonal entries are nonnegative then
+<span class="math notranslate nohighlight">\(\bA\)</span> is positive semidefinite.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\bA\)</span> is strictly diagonally dominant whose diagonal entries are positive
+then <span class="math notranslate nohighlight">\(\bA\)</span> is positive definite.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume that <span class="math notranslate nohighlight">\(\bA\)</span> is diagonally dominant with nonnegative diagonal entries.</p>
+<ol>
+<li><p>For contradiction, assume that <span class="math notranslate nohighlight">\(\bA\)</span> is not positive semidefinite.</p></li>
+<li><p>Then, there is an eigen value <span class="math notranslate nohighlight">\(\lambda &lt; 0\)</span> and corresponding eigenvector <span class="math notranslate nohighlight">\(\bu\)</span>.</p></li>
+<li><p>Consider the absolute values of entries of <span class="math notranslate nohighlight">\(\bu\)</span> given by <span class="math notranslate nohighlight">\((|u_1|, \dots, |u_n|)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i \in 1,\dots,n\)</span> denote the index of the largest absolute value entry of <span class="math notranslate nohighlight">\(\bu\)</span>.</p></li>
+<li><p>We also have <span class="math notranslate nohighlight">\(\bA \bu = \lambda \bu\)</span>.</p></li>
+<li><p>For the <span class="math notranslate nohighlight">\(i\)</span>-th row, we get the equality</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \sum_{j = 1}^n A_{i j} u_j = \lambda u_i \\
+   &amp; \iff \sum_{j \neq i} A_{i j} u_j = \lambda u_i - A_{i i} u_i \\
+   &amp; \implies \left | \sum_{j \neq i} A_{i j} u_j \right | 
+   = | \lambda - A_{i i} | |u_i | \\
+   &amp; \implies  | \lambda - A_{i i} | |u_i | 
+   \leq \left ( \sum_{j \neq i} | A_{i j} | \right ) | u_i |
+   \leq |A_{ i i} | |u_i |.
+   \end{split}\]</div>
+</li>
+<li><p>Thus,  <span class="math notranslate nohighlight">\(| \lambda - A_{i i} |  = |A_{ i i} - \lambda | \leq |A_{ i i} |\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(A_{i i}\)</span> is nonnegative and <span class="math notranslate nohighlight">\(\lambda\)</span> is negative, hence this reduces to
+<span class="math notranslate nohighlight">\(A_{ i i} - \lambda \leq A_{i i}\)</span> or <span class="math notranslate nohighlight">\(\lambda \geq 0\)</span>.</p></li>
+<li><p>We have arrived at a contradiction.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bA\)</span> must be positive semidefinite.</p></li>
+</ol>
+<p>Now, assume that <span class="math notranslate nohighlight">\(\bA\)</span> is strictly diagonally dominant with positive diagonal entries.</p>
+<ol>
+<li><p>By first part, it is clear that <span class="math notranslate nohighlight">\(\bA\)</span> is p.s.d..</p></li>
+<li><p>We just need to show that all eigenvalues are positive. There are no zero eigenvalues.</p></li>
+<li><p>For contradiction, assume that <span class="math notranslate nohighlight">\(0\)</span> is indeed an eigenvalue of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu \neq \bzero\)</span> be corresponding eigenvector satisfying
+<span class="math notranslate nohighlight">\(\bA \bu = \bzero\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i \in 1,\dots,n\)</span> denote the index of the largest absolute value entry of <span class="math notranslate nohighlight">\(\bu\)</span>.</p></li>
+<li><p>Following the earlier argument</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   | A_{i i}| |u_i | &amp;= \left | \sum_{j \neq i} A_{i j} u_j  \right | \\
+   &amp;\leq \left ( \sum_{j \neq i} | A_{i j} | \right ) |u_i| \\
+   &amp;&lt; | A_{i i} | |u_i|.
+   \end{split}\]</div>
+</li>
+<li><p>This is impossible. Hence, <span class="math notranslate nohighlight">\(\bA\)</span> must be positive definite.</p></li>
+</ol>
+</div>
+<p>Strictly diagonally dominant matrices have a very special property. They are
+always non-singular. The following result is valid for both real
+and complex strictly diagonally dominant matrices.</p>
+<div class="proof theorem admonition" id="thm:mat:strictly_diagonally_dominant_matrix_nonsingularity">
+<p class="admonition-title"><span class="caption-number">Theorem 4.137 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Strictly diagonally dominant matrices are non-singular.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For contradiction, suppose that <span class="math notranslate nohighlight">\(\bA\)</span> is strictly diagonally dominant and singular.</p>
+<ol>
+<li><p>Then there exists a vector
+<span class="math notranslate nohighlight">\(u \in \CC^n\)</span> with <span class="math notranslate nohighlight">\(\bu \neq \bzero\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bA \bu = \bzero.
+   \]</div>
+</li>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+   \bu = \begin{pmatrix} u_1 &amp; u_2 &amp; \dots &amp; u_n \end{pmatrix}.
+   \]</div>
+</li>
+<li><p>We first show that every entry in <span class="math notranslate nohighlight">\(\bu\)</span> cannot be equal in magnitude.</p></li>
+<li><p>For contradiction, let us assume that there exists <span class="math notranslate nohighlight">\(c &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   c = | u_1 | = | u_2 | = \dots = | u_n|.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bu \neq \bzero\)</span> hence <span class="math notranslate nohighlight">\(c \neq 0\)</span>.</p></li>
+<li><p>We can write <span class="math notranslate nohighlight">\(u_j = c \exp(i \theta_j)\)</span> for every <span class="math notranslate nohighlight">\(j=1,\dots,n\)</span>.</p></li>
+<li><p>Now for any row <span class="math notranslate nohighlight">\(i\)</span> in <span class="math notranslate nohighlight">\(\bA \bu = \bzero\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \sum_{j=1}^n a_{ij} u_j = 0\\
+   \implies &amp;  \sum_{j=1}^n a_{ij} c \exp(i \theta_j) = 0\\
+   \implies &amp; \sum_{j=1}^n  a_{ij} \exp(i \theta_j) = 0\\
+   \implies &amp; - a_{ii} \exp(i \theta_j) = \sum_{j \neq i} a_{ij} \exp(i \theta_j)\\
+   \implies &amp;  |a_{ii}| = \left| \sum_{j \neq i} a_{ij} \exp(i \theta_j) \right |\\
+   \implies &amp;  |a_{ii}| \leq \sum_{j \neq i} |a_{ij}|
+   \end{split}\]</div>
+<p>by triangle inequality.</p>
+</li>
+<li><p>But this contradicts our assumption that <span class="math notranslate nohighlight">\(\bA\)</span> is strictly diagonally dominant.</p></li>
+<li><p>Thus all entries in <span class="math notranslate nohighlight">\(\bu\)</span> are not equal in magnitude.</p></li>
+<li><p>Let us now assume that
+the largest entry in <span class="math notranslate nohighlight">\(\bu\)</span> lies at index <span class="math notranslate nohighlight">\(i\)</span> with <span class="math notranslate nohighlight">\(|u_i| = c\)</span>.</p></li>
+<li><p>Without loss of generality we can scale down <span class="math notranslate nohighlight">\(\bu\)</span> by <span class="math notranslate nohighlight">\(c\)</span> to get
+another vector in which all entries are less than or equal to 1 in magnitude
+while <span class="math notranslate nohighlight">\(i\)</span>-th entry has a magnitude of <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+<li><p>In other words, <span class="math notranslate nohighlight">\(|u_i| = 1\)</span>
+and <span class="math notranslate nohighlight">\(|u_j| \leq 1\)</span> for all other entries.</p></li>
+<li><p>From <span class="math notranslate nohighlight">\(\bA \bu = \bzero\)</span> we get for the <span class="math notranslate nohighlight">\(i\)</span>-th row</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \sum_{j=1}^n a_{ij} u_j = 0\\\
+   \implies &amp; - a_{ii} u_i = \sum_{j \neq i} u_j a_{ij}\\
+   \implies &amp; | a_{ii} u_i | = \left | \sum_{j \neq i} u_j a_{ij} \right |\\
+   \implies &amp; |a_{ii}| \leq \sum_{j \neq i} |u_j a_{ij}| 
+   \leq \sum_{j \neq i} |a_{ij}|
+   \end{split}\]</div>
+<p>which again contradicts our assumption that <span class="math notranslate nohighlight">\(\bA\)</span> is strictly diagonally dominant.</p>
+</li>
+<li><p>Hence strictly diagonally dominant matrices are non-singular.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="gershgorin-s-theorem">
+<h2><span class="section-number">4.10.17. </span>Gershgorin’s Theorem<a class="headerlink" href="#gershgorin-s-theorem" title="Permalink to this headline">¶</a></h2>
+<p>We are now ready to examine Gershgorin’ theorem
+which provides very useful bounds on the
+spectrum of a square matrix.</p>
+<div class="proof theorem admonition" id="thm:mat:gershgorin_circle_theorem:a">
+<p class="admonition-title"><span class="caption-number">Theorem 4.138 </span> (Gershgorin’s circle theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every eigen value <span class="math notranslate nohighlight">\(\lambda\)</span> of a square matrix <span class="math notranslate nohighlight">\(\bA \in \CC^{n\times n}\)</span> satisfies</p>
+<div class="math notranslate nohighlight" id="equation-eq-mat-gershgorin-circle-theorem-a">
+<span class="eqno">(4.15)<a class="headerlink" href="#equation-eq-mat-gershgorin-circle-theorem-a" title="Permalink to this equation">¶</a></span>\[| \lambda - a_{ii}| 
+\leq \sum_{j, j\neq i} |a_{ij}|
+\text{ for some } i \in \{1,2, \dots, n \}.\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The proof is a straight forward application of non-singularity of
+diagonally dominant matrices.</p>
+<ol>
+<li><p>We know that for an eigen value <span class="math notranslate nohighlight">\(\lambda\)</span>,
+<span class="math notranslate nohighlight">\(\det(\lambda \bI  - \bA) = 0\)</span></p></li>
+<li><p>In other words, the matrix <span class="math notranslate nohighlight">\((\lambda \bI  - \bA)\)</span> is singular.</p></li>
+<li><p>Hence it cannot be strictly diagonally dominant
+due to <a class="reference internal" href="#thm:mat:strictly_diagonally_dominant_matrix_nonsingularity">Theorem 4.137</a>.</p></li>
+<li><p>Thus looking at each row <span class="math notranslate nohighlight">\(i\)</span> of <span class="math notranslate nohighlight">\((\lambda \bI  - \bA)\)</span> we can say that</p>
+<div class="math notranslate nohighlight">
+\[
+    | \lambda - a_{ii}| &gt; \sum_{j, j\neq i} |a_{i j}|
+   \]</div>
+<p>cannot be true for all rows simultaneously.</p>
+</li>
+<li><p>In other words, this condition must fail at least for one row.</p></li>
+<li><p>This means that there exists at least one row <span class="math notranslate nohighlight">\(i\)</span> for which</p>
+<div class="math notranslate nohighlight">
+\[
+   | \lambda - a_{ii}| \leq \sum_{j, j\neq i} |a_{i j}|
+   \]</div>
+<p>holds true.</p>
+</li>
+</ol>
+</div>
+<p>What this theorem means is pretty simple.</p>
+<ol class="simple">
+<li><p>Consider a disc in the complex plane
+for the <span class="math notranslate nohighlight">\(i\)</span>-th row of <span class="math notranslate nohighlight">\(\bA\)</span> whose center is given by <span class="math notranslate nohighlight">\(a_{ii}\)</span> and whose
+radius is given by <span class="math notranslate nohighlight">\(r = \sum_{j\neq i} |a_{i j}|\)</span> i.e. the sum of
+magnitudes of all non-diagonal entries in <span class="math notranslate nohighlight">\(i\)</span>-th row.</p></li>
+<li><p>There are <span class="math notranslate nohighlight">\(n\)</span> such discs corresponding to <span class="math notranslate nohighlight">\(n\)</span> rows in <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+<li><p><a class="reference internal" href="#equation-eq-mat-gershgorin-circle-theorem-a">(4.15)</a> means that every eigen value
+must lie within the union of these discs. It cannot lie outside.</p></li>
+</ol>
+<p>This idea is crystallized in following definition.</p>
+<div class="proof definition admonition" id="def:mat:gershgorin_disk">
+<p class="admonition-title"><span class="caption-number">Definition 4.147 </span> (Gershgorin’s disc)</p>
+<div class="definition-content section" id="proof-content">
+<p>For <span class="math notranslate nohighlight">\(i\)</span>-th row of the square matrix <span class="math notranslate nohighlight">\(\bA\)</span>
+we define the radius <span class="math notranslate nohighlight">\(r_i = \sum_{j, j\neq i} |a_{i j}|\)</span>
+and the center <span class="math notranslate nohighlight">\(c_i = a_{ii}\)</span>.
+Then the set given by</p>
+<div class="math notranslate nohighlight">
+\[
+D_i = \{z \in \CC \ST  |z - a_{ii}| \leq r_i \}
+\]</div>
+<p>is called the <span class="math notranslate nohighlight">\(i\)</span>-th <em>Gershgorin’s disc</em> of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</div>
+</div><p>We note that the definition is equally valid for real as well as complex matrices.
+For real matrices, the centers of disks lie on the real line.
+For complex matrices, the centers may lie anywhere in the complex plane.</p>
+<p>Clearly there is nothing extraordinary about the rows of <span class="math notranslate nohighlight">\(\bA\)</span>.
+We can as well consider the columns of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+<div class="proof theorem admonition" id="thm:mat:gershgorin_circle_theorem:b">
+<p class="admonition-title"><span class="caption-number">Theorem 4.139 </span> (Gershgorin’s circle theorem for columns)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Every eigen value of a matrix <span class="math notranslate nohighlight">\(\bA\)</span> must lie in a
+Gershgorin disc corresponding to the
+columns of <span class="math notranslate nohighlight">\(\bA\)</span> where the  Gershgorin disc for <span class="math notranslate nohighlight">\(j\)</span>-th column is given by</p>
+<div class="math notranslate nohighlight">
+\[
+D_j = \{z \in \CC \ST  | z - a_{j j} | \leq r_j \}
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+r_j =  \sum_{i, i \neq j} |a_{i j}|
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We know that eigen values of <span class="math notranslate nohighlight">\(\bA\)</span> are same as eigen values of <span class="math notranslate nohighlight">\(\bA^T\)</span> and
+columns of <span class="math notranslate nohighlight">\(\bA\)</span> are nothing but rows of <span class="math notranslate nohighlight">\(\bA^T\)</span>. Hence eigen values of <span class="math notranslate nohighlight">\(\bA\)</span>
+must satisfy conditions in <a class="reference internal" href="#thm:mat:gershgorin_circle_theorem:a">Theorem 4.138</a>
+w.r.t. the matrix <span class="math notranslate nohighlight">\(\bA^T\)</span>. This completes the proof.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./la"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="matrices_3.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4.9. </span>Matrices III</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="svd.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.11. </span>Singular Values</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,2736 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11.3. Proximal Mappings and Operators &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12. Sparse Signal Models" href="../ssm/chapter_ssm.html" />
+    <link rel="prev" title="11. Proximal Algorithms" href="chapter.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/proximal_operator/prox_op.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fproximal_operator/prox_op.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proximal-mapping">
+   11.3.1. Proximal Mapping
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zero-function">
+     11.3.1.1. Zero Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zero-everywhere-except-at-x-0-functions">
+     11.3.1.2. Zero Everywhere Except at
+     <span class="math notranslate nohighlight">
+      \(x=0\)
+     </span>
+     Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constant-value-function">
+     11.3.1.3. Constant Value Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-linear-function-i">
+     11.3.1.4. 1D Linear Function I
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-linear-function-ii">
+     11.3.1.5. 1D Linear Function II
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-affine-function">
+     11.3.1.6. 1D Affine Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nonemptiness-conditions">
+     11.3.1.7. Nonemptiness Conditions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proximal-operator">
+   11.3.2. Proximal Operator
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proximal-calculus">
+   11.3.3. Proximal Calculus
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#separable-functions">
+     11.3.3.1. Separable Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling-and-translation">
+     11.3.3.2. Scaling and Translation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-perturbation">
+     11.3.3.3. Quadratic Perturbation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#composition-with-affine-mapping">
+     11.3.3.4. Composition with Affine Mapping
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   11.3.4. Examples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dim-examples">
+   11.3.5. 1-dim Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indicator-functions">
+     11.3.5.1. Indicator Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear">
+     11.3.5.2. Linear
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#absolute-value">
+     11.3.5.3. Absolute Value
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cube">
+     11.3.5.4. Cube
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logarithms">
+     11.3.5.5. Logarithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#affine-functions">
+   11.3.6. Affine Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convex-quadratic-functions">
+   11.3.7. Convex Quadratic Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#norms">
+   11.3.8. Norms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ell-1-norm">
+     11.3.8.1.
+     <span class="math notranslate nohighlight">
+      \(\ell_1\)
+     </span>
+     Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ell-0-norm">
+     11.3.8.2.
+     <span class="math notranslate nohighlight">
+      \(\ell_0\)
+     </span>
+     “Norm”
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   11.3.9. Logarithms
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Proximal Mappings and Operators</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proximal-mapping">
+   11.3.1. Proximal Mapping
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zero-function">
+     11.3.1.1. Zero Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zero-everywhere-except-at-x-0-functions">
+     11.3.1.2. Zero Everywhere Except at
+     <span class="math notranslate nohighlight">
+      \(x=0\)
+     </span>
+     Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constant-value-function">
+     11.3.1.3. Constant Value Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-linear-function-i">
+     11.3.1.4. 1D Linear Function I
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-linear-function-ii">
+     11.3.1.5. 1D Linear Function II
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-affine-function">
+     11.3.1.6. 1D Affine Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nonemptiness-conditions">
+     11.3.1.7. Nonemptiness Conditions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proximal-operator">
+   11.3.2. Proximal Operator
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proximal-calculus">
+   11.3.3. Proximal Calculus
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#separable-functions">
+     11.3.3.1. Separable Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling-and-translation">
+     11.3.3.2. Scaling and Translation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-perturbation">
+     11.3.3.3. Quadratic Perturbation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#composition-with-affine-mapping">
+     11.3.3.4. Composition with Affine Mapping
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   11.3.4. Examples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dim-examples">
+   11.3.5. 1-dim Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indicator-functions">
+     11.3.5.1. Indicator Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear">
+     11.3.5.2. Linear
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#absolute-value">
+     11.3.5.3. Absolute Value
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cube">
+     11.3.5.4. Cube
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logarithms">
+     11.3.5.5. Logarithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#affine-functions">
+   11.3.6. Affine Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convex-quadratic-functions">
+   11.3.7. Convex Quadratic Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#norms">
+   11.3.8. Norms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ell-1-norm">
+     11.3.8.1.
+     <span class="math notranslate nohighlight">
+      \(\ell_1\)
+     </span>
+     Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ell-0-norm">
+     11.3.8.2.
+     <span class="math notranslate nohighlight">
+      \(\ell_0\)
+     </span>
+     “Norm”
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   11.3.9. Logarithms
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="proximal-mappings-and-operators">
+<span id="sec-proximal-intro"></span><h1><span class="section-number">11.3. </span>Proximal Mappings and Operators<a class="headerlink" href="#proximal-mappings-and-operators" title="Permalink to this headline">¶</a></h1>
+<p>Throughout this section <span class="math notranslate nohighlight">\(\VV\)</span> represents a
+<a class="reference internal" href="../la/euclidean.html#def-la-gen-euclidean-space">Euclidean space</a>;
+i.e., an <span class="math notranslate nohighlight">\(n\)</span>-dimensional space endowed with
+an inner product <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle\)</span>
+and the Euclidean norm <span class="math notranslate nohighlight">\(\| \cdot \| = \sqrt{\langle \cdot, \cdot \rangle}\)</span>.</p>
+<div class="section" id="proximal-mapping">
+<h2><span class="section-number">11.3.1. </span>Proximal Mapping<a class="headerlink" href="#proximal-mapping" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-prox-proximal-mapping">
+<p class="admonition-title"><span class="caption-number">Definition 11.1 </span> (Proximal mapping)</p>
+<div class="definition-content section" id="proof-content">
+<p>For a function <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span>, the <em>proximal mapping</em> of <span class="math notranslate nohighlight">\(f\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) \triangleq \underset{\bu \in \VV}{\argmin} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \Forall \bx \in \VV.
+\]</div>
+<ul>
+<li><p>It is a point to set mapping.</p></li>
+<li><p>It maps each point <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> to a subset of points in <span class="math notranslate nohighlight">\(\VV\)</span> which
+minimize the R.H.S..</p></li>
+<li><p>The set of points which minimize the R.H.S. are known as <em>proximal points</em>
+for a given <span class="math notranslate nohighlight">\(\bx\)</span> w.r.t. the function <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+<li><p>The set of <em>proximal points</em> may be empty, singleton or have more than one points.</p></li>
+<li><p>The function <span class="math notranslate nohighlight">\(h_{\bx} : \VV \to \RR\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+  h_{\bx}(\bu) = f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+  \]</div>
+<p>is the objective function for the computation of the proximal points
+for a given point <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>.</p>
+</li>
+<li><p>The proximal points of <span class="math notranslate nohighlight">\(\bx\)</span> are the minimizers of the problem
+of unconstrained minimization of <span class="math notranslate nohighlight">\(h_{\bx}\)</span>.</p></li>
+</ul>
+</div>
+</div><div class="section" id="zero-function">
+<h3><span class="section-number">11.3.1.1. </span>Zero Function<a class="headerlink" href="#zero-function" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-zero-function">
+<p class="admonition-title"><span class="caption-number">Example 11.1 </span> (Zero function)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> defined as <span class="math notranslate nohighlight">\(f(x) = 0\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = \underset{u \in \RR}{\argmin} \left \{ 0 + \frac{1}{2} | u  - x |^2  \right \} 
+= \{ x\}.
+\]</div>
+</div>
+</div><p>This is a very simple example. The proximal point
+for every point is the same point.
+Note that the gradient of the zero function
+is zero everywhere. So every point in the
+domain of <span class="math notranslate nohighlight">\(f\)</span> is an optimal point from
+the perspective of maximization or minimization.
+Thus the proximal mapping doesn’t need move
+to a different point.</p>
+</div>
+<div class="section" id="zero-everywhere-except-at-x-0-functions">
+<h3><span class="section-number">11.3.1.2. </span>Zero Everywhere Except at <span class="math notranslate nohighlight">\(x=0\)</span> Functions<a class="headerlink" href="#zero-everywhere-except-at-x-0-functions" title="Permalink to this headline">¶</a></h3>
+<p>Let us look at real functions which are
+zero everywhere except at <span class="math notranslate nohighlight">\(x=0\)</span>.
+There are two possibilities.
+<span class="math notranslate nohighlight">\(f(x)\)</span> is positive or negative at <span class="math notranslate nohighlight">\(x=0\)</span>.
+The two examples below illustrate the
+point to set nature of proximal mappings.
+We show different situations where
+the number of proximal points for a given
+point is one, two or zero.</p>
+<div class="proof example admonition" id="ex-prox-map-neg-val-at-zero">
+<p class="admonition-title"><span class="caption-number">Example 11.2 </span> (Negative value at <span class="math notranslate nohighlight">\(x=0\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.
+Let <span class="math notranslate nohighlight">\(f: \RR \to \RR\)</span> be given as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+0 &amp; x \neq 0;\\
+- t &amp; x = 0.
+\end{cases}
+\end{split}\]</div>
+<p>The proximal mapping is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\prox_f(x) = \begin{cases}
+\{ 0 \}, &amp; |x| &lt; \sqrt{2 t},\\
+\{ x \} &amp; |x| &gt; \sqrt{2 t}, \\
+\{ 0, x \} &amp; | x | = \sqrt {2 t}.
+\end{cases}
+\end{split}\]</div>
+</div>
+</div><p>This example clearly demonstrates the point to set mapping
+nature of the proximal mapping. While for most values
+of <span class="math notranslate nohighlight">\(x\)</span>, the proximal mapping is a singleton, but
+for <span class="math notranslate nohighlight">\(|x| = \sqrt{ 2 t}\)</span>, the proximal mapping consists
+of a set of two different values.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. We start by constructing the objective function</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+h_x(u) = f(u) + \frac{1}{2} (u  - x )^2
+= \begin{cases}
+\frac{1}{2} (u  - x )^2 &amp; u \neq 0;\\
+- t + \frac{1}{2} x^2 &amp; u = 0.
+\end{cases}
+\end{split}\]</div>
+<p>Consider the case where <span class="math notranslate nohighlight">\(x \neq 0\)</span>.</p>
+<ol class="simple">
+<li><p>The minimum value of <span class="math notranslate nohighlight">\(\frac{1}{2} (u  - x )^2\)</span> is <span class="math notranslate nohighlight">\(0\)</span> attained at <span class="math notranslate nohighlight">\(u=x\)</span>
+and it is valid since <span class="math notranslate nohighlight">\(u = x \neq 0\)</span>.</p></li>
+<li><p>The value of <span class="math notranslate nohighlight">\(- t + \frac{1}{2} x^2\)</span> is attained at <span class="math notranslate nohighlight">\(u=0\)</span>.</p></li>
+<li><p>There are three possibilities.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(0 &gt; - t + \frac{1}{2} x^2\)</span>, then the unique minimizer
+of <span class="math notranslate nohighlight">\(h_x\)</span> is at <span class="math notranslate nohighlight">\(u=0\)</span>.
+The condition can be written as <span class="math notranslate nohighlight">\(|x| &lt; \sqrt{2 t}\)</span> and <span class="math notranslate nohighlight">\(x \neq 0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(0 &lt; - t + \frac{1}{2} x^2\)</span>, then the unique minimizer
+of <span class="math notranslate nohighlight">\(h_x\)</span> is at <span class="math notranslate nohighlight">\(u=x\)</span>.
+The condition can be written as <span class="math notranslate nohighlight">\(|x| &gt; \sqrt{2 t}\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(0 = - t + \frac{1}{2} x^2\)</span>, then <span class="math notranslate nohighlight">\(u=0\)</span> and <span class="math notranslate nohighlight">\(u=x\)</span> are
+both minimizers of <span class="math notranslate nohighlight">\(h_x\)</span>.
+The condition can be written as <span class="math notranslate nohighlight">\(|x| = \sqrt{2 t}\)</span>.</p></li>
+</ol>
+<p>Now the case of <span class="math notranslate nohighlight">\(x=0\)</span>.</p>
+<ol class="simple">
+<li><p>The term <span class="math notranslate nohighlight">\(- t + \frac{1}{2} x^2\)</span> reduces to <span class="math notranslate nohighlight">\(-t &lt; 0\)</span> at <span class="math notranslate nohighlight">\(u=0\)</span>.</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2}(u  - x )^2\)</span> reduces to <span class="math notranslate nohighlight">\(\frac{1}{2} u^2 &gt; 0\)</span> for all <span class="math notranslate nohighlight">\(u \neq 0\)</span>.</p></li>
+<li><p>Thus, the minimizer is at <span class="math notranslate nohighlight">\(u=0\)</span>.</p></li>
+<li><p>We note that the minimizer agrees with the result obtained for the
+case of <span class="math notranslate nohighlight">\(|x| &lt; \sqrt{2 t}\)</span> above where <span class="math notranslate nohighlight">\(x \neq 0\)</span>.</p></li>
+</ol>
+<p>In conclusion, we see that</p>
+<ol class="simple">
+<li><p>For <span class="math notranslate nohighlight">\(|x | &lt; \sqrt{2 t}\)</span>, the minimizer is <span class="math notranslate nohighlight">\(u=0\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(|x| &gt; \sqrt{2 t}\)</span>, the minimizer is <span class="math notranslate nohighlight">\(u=x\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(|x| = \sqrt{2 t}\)</span>, there are two minimizers, <span class="math notranslate nohighlight">\(u=0\)</span> and <span class="math notranslate nohighlight">\(u=x\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof example admonition" id="ex-prox-map-pos-val-at-zero">
+<p class="admonition-title"><span class="caption-number">Example 11.3 </span> (Positive value at <span class="math notranslate nohighlight">\(x=0\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.
+Let <span class="math notranslate nohighlight">\(f: \RR \to \RR\)</span> be given as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+0 &amp; x \neq 0;\\
+t &amp; x = 0.
+\end{cases}
+\end{split}\]</div>
+<p>The proximal mapping is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\prox_f(x) = \begin{cases}
+\{ x \}, &amp; x \neq 0;\\
+\EmptySet &amp; x = 0.
+\end{cases}
+\end{split}\]</div>
+</div>
+</div><p>This example illustrates the fact that the proximal mapping
+may be empty in some cases. In other words, for some points,
+there are no proximal points.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. We start by constructing the function</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+h_x(u) = f(u) + \frac{1}{2} (u  - x )^2
+= \begin{cases}
+\frac{1}{2} (u  - x )^2 &amp; u \neq 0;\\
+t + \frac{1}{2} x^2 &amp; u = 0.
+\end{cases}
+\end{split}\]</div>
+<p>Consider the case where <span class="math notranslate nohighlight">\(x \neq 0\)</span>.</p>
+<ol class="simple">
+<li><p>The minimum value of <span class="math notranslate nohighlight">\(\frac{1}{2} (u  - x )^2\)</span> is <span class="math notranslate nohighlight">\(0\)</span> attained at <span class="math notranslate nohighlight">\(u=x\)</span>
+and it is valid since <span class="math notranslate nohighlight">\(u = x \neq 0\)</span>.</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\(t + \frac{1}{2} x^2  &gt; 0\)</span> for <span class="math notranslate nohighlight">\(u=0\)</span>.</p></li>
+<li><p>Thus the minimizer is at <span class="math notranslate nohighlight">\(u=x\)</span> for all <span class="math notranslate nohighlight">\(x \neq 0\)</span>.</p></li>
+</ol>
+<p>Now consider the case where <span class="math notranslate nohighlight">\(x=0\)</span>.</p>
+<ol>
+<li><p>The function <span class="math notranslate nohighlight">\(h_x\)</span> reduces to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   h_x(u) = \begin{cases}
+      \frac{1}{2} u^2 &amp; u \neq 0;\\
+      t &amp; u = 0.
+      \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p>We can see that <span class="math notranslate nohighlight">\(\inf_{u \in \RR} h_x(u) = 0\)</span>.</p></li>
+<li><p>However, <span class="math notranslate nohighlight">\(h_x\)</span> doesn’t attain the value <span class="math notranslate nohighlight">\(0\)</span> for any <span class="math notranslate nohighlight">\(u \in \RR\)</span>.</p></li>
+<li><p>Hence, the set of minimizers is empty.</p></li>
+</ol>
+<p>In conclusion, this function</p>
+<ol class="simple">
+<li><p>has a unique minimizer <span class="math notranslate nohighlight">\(u=x\)</span> for all <span class="math notranslate nohighlight">\(x \neq 0\)</span>.</p></li>
+<li><p>has no minimizer for <span class="math notranslate nohighlight">\(x=0\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="constant-value-function">
+<h3><span class="section-number">11.3.1.3. </span>Constant Value Function<a class="headerlink" href="#constant-value-function" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-constant-function">
+<p class="admonition-title"><span class="caption-number">Example 11.4 </span> (Constant value function)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> defined as <span class="math notranslate nohighlight">\(f(x) = c\)</span> where <span class="math notranslate nohighlight">\(c \in \RR\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = \underset{u \in \RR}{\argmin} \left \{ c + \frac{1}{2} | u  - x |^2  \right \} 
+= \{ x\}.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="d-linear-function-i">
+<h3><span class="section-number">11.3.1.4. </span>1D Linear Function I<a class="headerlink" href="#d-linear-function-i" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-1d-linear-function-1">
+<p class="admonition-title"><span class="caption-number">Example 11.5 </span> (1D Linear function I)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be given as <span class="math notranslate nohighlight">\(f(x) = x\)</span>.</p>
+<p>Define:</p>
+<div class="math notranslate nohighlight">
+\[
+g(u) =  f(u) + \frac{1}{2} | u  - x |^2 = u + \frac{1}{2} (u  - x)^2. 
+\]</div>
+<p>Differentiating, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+g'(u) = 1 + (u - x).
+\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(g'(u) = 0\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+1 + u - x = 0 \implies u = x - 1.
+\]</div>
+<p>The second derivative <span class="math notranslate nohighlight">\(g''(u) = 1\)</span> confirms that it is indeed the minimizer.</p>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = \{ x - 1 \}.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="d-linear-function-ii">
+<h3><span class="section-number">11.3.1.5. </span>1D Linear Function II<a class="headerlink" href="#d-linear-function-ii" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-1d-linear-function-2">
+<p class="admonition-title"><span class="caption-number">Example 11.6 </span> (1D Linear function II)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be given as <span class="math notranslate nohighlight">\(f(x) = \lambda x\)</span> with <span class="math notranslate nohighlight">\(\lambda \in \RR\)</span>.</p>
+<p>Define:</p>
+<div class="math notranslate nohighlight">
+\[
+g(u) =  f(u) + \frac{1}{2} | u  - x |^2 = \lambda u + \frac{1}{2} (u  - x)^2. 
+\]</div>
+<p>Differentiating, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+g'(u) = \lambda + (u - x).
+\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(g'(u) = 0\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda + u - x = 0 \implies u = x - \lambda.
+\]</div>
+<p>The second derivative <span class="math notranslate nohighlight">\(g''(u) = 1\)</span> confirms that it is indeed the minimizer.</p>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = \{ x - \lambda \}.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="d-affine-function">
+<h3><span class="section-number">11.3.1.6. </span>1D Affine Function<a class="headerlink" href="#d-affine-function" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-1d-affine-function">
+<p class="admonition-title"><span class="caption-number">Example 11.7 </span> (1D Affine function)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be given as <span class="math notranslate nohighlight">\(f(x) = \alpha x + \beta\)</span> with <span class="math notranslate nohighlight">\(\alpha, \beta \in \RR\)</span>.</p>
+<p>Define:</p>
+<div class="math notranslate nohighlight">
+\[
+g(u) =  f(u) + \frac{1}{2} | u  - x |^2 = \alpha u + \beta + \frac{1}{2} (u  - x)^2. 
+\]</div>
+<p>Differentiating, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+g'(u) = \alpha + (u - x).
+\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(g'(u) = 0\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha + u - x = 0 \implies u = x - \alpha.
+\]</div>
+<p>The second derivative <span class="math notranslate nohighlight">\(g''(u) = 1\)</span> confirms that it is indeed the minimizer.</p>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = \{ x - \alpha \}.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="nonemptiness-conditions">
+<h3><span class="section-number">11.3.1.7. </span>Nonemptiness Conditions<a class="headerlink" href="#nonemptiness-conditions" title="Permalink to this headline">¶</a></h3>
+<p>It is imperative to identify conditions under which
+a proximal mapping is nonempty.</p>
+<div class="proof theorem admonition" id="res-prox-nonemptiness-under-closedness-coerciveness">
+<p class="admonition-title"><span class="caption-number">Theorem 11.1 </span> (Nonemptiness under closedness and coerciveness)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper and closed function. Assume that
+the function</p>
+<div class="math notranslate nohighlight">
+\[
+\bu \mapsto f(\bu) +  \frac{1}{2} \| \bu - \bx \|^2
+\]</div>
+<p>for any <span class="math notranslate nohighlight">\(\bx \in \VV\)</span> is coercive.</p>
+<p>Then the set <span class="math notranslate nohighlight">\(\prox_f(\bx)\)</span> is nonempty and compact for any <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>.</p>
+</div>
+</div><p>Recall from <a class="reference internal" href="../num_opt/opt_intro.html#def-opt-coercive-function">Definition 7.8</a> that
+a function <span class="math notranslate nohighlight">\(h\)</span> is coercive if for every sequence <span class="math notranslate nohighlight">\(\{ \bx_n \}\)</span>
+such that <span class="math notranslate nohighlight">\( \lim_{k \to \infty} \| \bx_k \| = \infty\)</span>,
+we have <span class="math notranslate nohighlight">\(\lim_{k \to \infty} h(\bx_k) = \infty\)</span>.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Define:</p>
+<div class="math notranslate nohighlight">
+\[
+h(\bu) \triangleq f(\bu) +  \frac{1}{2} \| \bu - \bx \|^2.
+\]</div>
+<ol class="simple">
+<li><p>Then <span class="math notranslate nohighlight">\(\prox_f(\bx) = \underset{\bu \in \VV}{\argmin} h(\bu)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h\)</span> is a sum of two closed functions. Hence <span class="math notranslate nohighlight">\(h\)</span> is a closed function
+due to <a class="reference internal" href="../metric_spaces/real_valued_functions.html#res-ms-sum-closed-functions">Theorem 3.95</a>.</p></li>
+<li><p>It is given that <span class="math notranslate nohighlight">\(h\)</span> is coercive.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h\)</span> is proper since <span class="math notranslate nohighlight">\(f\)</span> is proper and <span class="math notranslate nohighlight">\(\frac{1}{2} \| \bu - \bx \|^2\)</span>
+is real valued.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(h\)</span> is proper, closed and coercive.</p></li>
+<li><p>Due to the Weierstrass’ theorem (<a class="reference internal" href="../num_opt/opt_intro.html#res-opt-weierstrass-theorem">Theorem 7.9</a>),
+a proper, closed and coercive function <span class="math notranslate nohighlight">\(g\)</span> has a nonempty
+and compact set of minimizers.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="proximal-operator">
+<h2><span class="section-number">11.3.2. </span>Proximal Operator<a class="headerlink" href="#proximal-operator" title="Permalink to this headline">¶</a></h2>
+<p>Under suitable conditions, <span class="math notranslate nohighlight">\(\prox_f(\bx)\)</span> is always a singleton
+for every <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>. Then the proximal mapping can be
+thought of as a function <span class="math notranslate nohighlight">\(\prox_f : \VV \to \VV\)</span> mapping
+every point in <span class="math notranslate nohighlight">\(\VV\)</span> to a proximal point.</p>
+<div class="proof theorem admonition" id="res-prox-first-prox-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 11.2 </span> (First prox theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper, closed and convex function. Then, <span class="math notranslate nohighlight">\(\prox_f(\bx)\)</span> is
+a singleton for every <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Define:</p>
+<div class="math notranslate nohighlight">
+\[
+h_{\bx}(\bu) \triangleq f(\bu) + \frac{1}{2} \| \bu - \bx \|^2.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = \underset{\bu \in \VV}{\argmin} h_{\bx}(\bu).
+\]</div>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is a closed and convex function.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_{\bx}(\bu) = \frac{1}{2} \| \bu - \bx \|^2\)</span> is a closed and strongly convex function
+(<a class="reference internal" href="../convex_sets/smoothness.html#res-cvxf-quadratic-strong-convex">Theorem 8.268</a>).</p></li>
+<li><p>Hence, their sum <span class="math notranslate nohighlight">\(h_{\bx}\)</span> is a closed and strongly convex function
+(<a class="reference internal" href="../convex_sets/smoothness.html#res-cvxf-sum-strong-convex-convex">Theorem 8.270</a>).</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is proper, and <span class="math notranslate nohighlight">\(d_{\bx}\)</span> is real valued, hence <span class="math notranslate nohighlight">\(h_{\bx}\)</span> is also proper.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(h_{\bx}\)</span> is a proper, closed and strongly convex function.</p></li>
+<li><p>Due to <a class="reference internal" href="../convex_sets/smoothness.html#res-cvxf-strong-convex-minimizer">Theorem 8.272</a>,
+there exists a unique minimizer for <span class="math notranslate nohighlight">\(h_{\bx}\)</span>.</p></li>
+<li><p>Thus, the set <span class="math notranslate nohighlight">\(\prox_f(\bx) = \argmin h_{\bx}(\bu)\)</span> is a singleton.</p></li>
+</ol>
+</div>
+<p>With this result, we are ready to introduce the proximal operator.</p>
+<div class="proof definition admonition" id="def-prox-proximal-operator">
+<p class="admonition-title"><span class="caption-number">Definition 11.2 </span> (Proximal operator)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper, closed and convex function. Since
+the point to set mapping <span class="math notranslate nohighlight">\(\prox_f : \VV \to 2^{\VV}\)</span> maps
+every point in <span class="math notranslate nohighlight">\(\VV\)</span> to a singleton subset of <span class="math notranslate nohighlight">\(\VV\)</span>
+due to <a class="reference internal" href="#res-prox-first-prox-theorem">Theorem 11.2</a>, we abuse
+the notation and redefine <span class="math notranslate nohighlight">\(\prox_f: \VV \to \VV\)</span> as a point to
+point mapping. We call this mapping as a <em>proximal operator</em> of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>In other words, we write <span class="math notranslate nohighlight">\(\prox_f(\bx) = \by\)</span> rather than <span class="math notranslate nohighlight">\(\prox_f(\bx) = \{\by\}\)</span>.</p>
+<p>Thus, for a proper, closed and convex function <span class="math notranslate nohighlight">\(f\)</span>,
+the operator <span class="math notranslate nohighlight">\(\prox_f: \VV \to \VV\)</span> maps each point
+<span class="math notranslate nohighlight">\(\bx \in \VV\)</span> to a unique minimizer of the
+function <span class="math notranslate nohighlight">\(h_{\bx}(\bu) = f(\bu) + \frac{1}{2} \| \bu - \bx \|^2\)</span>.</p>
+</div>
+</div><p>Readers are suggested to look at some of the
+examples in the <a class="reference internal" href="#sec-proximal-examples"><span class="std std-ref">Examples</span></a> below
+before proceeding with the proximal calculus rules.</p>
+</div>
+<div class="section" id="proximal-calculus">
+<h2><span class="section-number">11.3.3. </span>Proximal Calculus<a class="headerlink" href="#proximal-calculus" title="Permalink to this headline">¶</a></h2>
+<p>This section deals with the rules which enable
+us to compute the proximal mappings for a function
+if we know the proximal mappings of underlying
+building blocks.</p>
+<div class="section" id="separable-functions">
+<h3><span class="section-number">11.3.3.1. </span>Separable Functions<a class="headerlink" href="#separable-functions" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-prox-separable-func-mapping">
+<p class="admonition-title"><span class="caption-number">Theorem 11.3 </span> (Proximal mappings of separable functions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(f: \VV_1 \oplus \dots \oplus \VV_m \to \RERL\)</span>
+is given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx_1, \dots, \bx_m) = \sum_{i=1}^m f_i(\bx_i) 
+\Forall \bx_i \in \VV_i, \quad i=1,\dots, m.
+\]</div>
+<p>Then for every <span class="math notranslate nohighlight">\(\bx_1 \in \VV_1, \dots, \bx_m \in \VV_m\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx_1, \dots, \bx_m)
+= \prox_{f_1}(\bx_1) \times \dots \times \prox_{f_m}(\bx_m).
+\]</div>
+</div>
+</div><p>Note that the theorem is presented in terms of
+sets. The L.H.S. <span class="math notranslate nohighlight">\(\prox_f(\bx_1, \dots, \bx_m)\)</span> is a set.
+Similarly, R.H.S. is a Cartesian product of proximal mappings
+<span class="math notranslate nohighlight">\(\prox_{f_i}(\bx_i)\)</span> which are individually sets.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. We start with the definition of the proximal mapping
+and expand it in terms of the separable functions.
+We note that the quadratic term
+<span class="math notranslate nohighlight">\(\frac{1}{2} \| \cdot - \bx \|^2\)</span> is also separable.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\prox_f(\bx) &amp;= \argmin_{\bu} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&amp;=  \argmin_{\bu_1, \dots, \bu_m} \left \{
+    \sum_{i=1}^m f_i(\bu_i) + 
+    \frac{1}{2} \sum_{i=1}^m \| \bu_i - \bx_i \|^2
+    \right\} \\
+&amp;=  \argmin_{\bu_1, \dots, \bu_m} \left \{
+    \sum_{i=1}^m \left (f_i(\bu_i) + 
+    \frac{1}{2} \| \bu_i - \bx_i \|^2
+     \right ) \right\} \\
+&amp;= \prod_{i=1}^m \argmin_{\bu_i}\left \{
+   f_i(\bu_i) +  \| \bu_i - \bx_i \|^2 
+   \right \}\\
+&amp;= \prod_{i=1}^m \prox_{f_i}(\bx_i).
+\end{split}\]</div>
+<p>Here the <span class="math notranslate nohighlight">\(\prod\)</span> symbol denotes the Cartesian product.</p>
+</div>
+<div class="proof corollary admonition" id="res-prox-op-separable-conv-func">
+<p class="admonition-title"><span class="caption-number">Corollary 11.1 </span> (Proximal operator for separable convex functions)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \RR^n \to \RERL\)</span> be a proper, closed and convex function.
+Assume that <span class="math notranslate nohighlight">\(\RR^n = \RR^{n_1} \oplus \dots \oplus \RR^{n_m}\)</span>
+with <span class="math notranslate nohighlight">\(n = n_1 + \dots + n_m\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be separable over <span class="math notranslate nohighlight">\(\RR^{n_1} \oplus \dots \oplus \RR^{n_m}\)</span>
+and given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx_1, \dots, \bx_m) = \sum_{i=1}^m f_i(\bx_i) 
+\Forall \bx_i \in \RR^{n_i}, \quad i=1,\dots, m.
+\]</div>
+<p>Further assume that <span class="math notranslate nohighlight">\(f_i\)</span> are proper, closed and convex
+functions themselves.</p>
+<p>Then for every <span class="math notranslate nohighlight">\(\bx_1 \in \RR^{n_1}, \dots, \bx_m \in \RR^{n_m}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx_1, \dots, \bx_m)
+= (\prox_{f_1}(\bx_1), \dots, \prox_{f_m}(\bx_m)).
+\]</div>
+<p>In the special case, where <span class="math notranslate nohighlight">\(f\)</span> is separable over each
+coordinate; i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \sum_{i=1}^n f_i(x_i)
+\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = (\prox_{f_1}(x_1),\dots, \prox_{f_n}(x_n)).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f_i\)</span> are proper, closed and convex, hence
+due to <a class="reference internal" href="#res-prox-first-prox-theorem">Theorem 11.2</a>,
+the proximal mappings <span class="math notranslate nohighlight">\(\prox_f(\bx)\)</span> and
+<span class="math notranslate nohighlight">\(\prox_{f_i}(\bx_i)\)</span> are singletons.
+In this case, the Cartesian product reduces
+to the concatenation of coordinates.</p>
+</div>
+<p>Applications:
+<a class="reference internal" href="#ex-prox-scaled-l1-norm">Example 11.16</a>.</p>
+</div>
+<div class="section" id="scaling-and-translation">
+<h3><span class="section-number">11.3.3.2. </span>Scaling and Translation<a class="headerlink" href="#scaling-and-translation" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-prox-input-scale-translate">
+<p class="admonition-title"><span class="caption-number">Theorem 11.4 </span> (Scaling and translation of input)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(g: \VV \to \RERL\)</span> be a proper function.
+Let <span class="math notranslate nohighlight">\(t \neq 0\)</span> be a scaling parameter and
+<span class="math notranslate nohighlight">\(\ba \in \VV\)</span> be a translation parameter.
+Define <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = g(t \bx + \ba).
+\]</div>
+<p>Then given <span class="math notranslate nohighlight">\(\prox_g\)</span>, the <span class="math notranslate nohighlight">\(\prox_f\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = \frac{1}{t} [\prox_{t^2 g}(t \bx + \ba) - \ba].
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Starting from the definition of the proximal mapping</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\prox_f(\bx) &amp;= \argmin_{\bu \in \VV} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&amp;= \argmin_{\bu \in \VV} \left \{
+    g(t \bu + \ba) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\}.
+\end{split}\]</div>
+<ol>
+<li><p>The objective function of this minimization problem is</p>
+<div class="math notranslate nohighlight">
+\[
+   g(t \bu + \ba) + \frac{1}{2} \| \bu - \bx \|^2.
+   \]</div>
+</li>
+<li><p>We introduce a change of variable <span class="math notranslate nohighlight">\(\bz = t \bu + \ba\)</span>
+to construct an equivalent minimization problem.
+See <a class="reference internal" href="../num_opt/opt_intro.html#res-opt-eq-form-change-variables">Proposition 7.2</a> for the
+construction of equivalent optimization problems by change of variable.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bu = \frac{1}{t}(\bz - \ba)\)</span>.</p></li>
+<li><p>The objective function changes to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; g(\bz) + \frac{1}{2} \left \| \frac{1}{t}(\bz - \ba) - \bx \right \|^2 \\
+   &amp;= \frac{1}{t^2}\left [
+   (t^2 g)(\bz) + \frac{1}{2} \left \| \bz - (t\bx + \ba) \right \|^2
+   \right].
+   \end{split}\]</div>
+</li>
+<li><p>The minimizers of this objective function (over <span class="math notranslate nohighlight">\(\bz\)</span>) are given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \bz \in \prox_{t^2 g}(t \bx + \ba).
+   \]</div>
+<p>Note that the scaling term <span class="math notranslate nohighlight">\(\frac{1}{t^2}\)</span> in the objective function
+doesn’t impact the set of minimizers. It only impacts the optimal value.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bu = \frac{1}{t}(\bz - \ba)\)</span>,
+hence minimizers of the original objective function are given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \bu \in \frac{1}{t} [\prox_{t^2 g}(t \bx + \ba) - \ba].
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-prox-in-out-same-scale">
+<p class="admonition-title"><span class="caption-number">Theorem 11.5 </span> (Proximal mapping for <span class="math notranslate nohighlight">\(t g ( \cdot / t)\)</span>)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(g: \VV \to \RERL\)</span> be a proper function.
+Let <span class="math notranslate nohighlight">\(t \neq 0\)</span> be a scaling parameter.
+Define <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = t g\left (\frac{\bx}{t} \right).
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f (\bx) = t \, \prox_{g / t} (\bx / t).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Starting from the definition of the proximal mapping</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\prox_f(\bx) &amp;= \argmin_{\bu \in \VV} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&amp;= \argmin_{\bu \in \VV} \left \{
+    t g\left (\frac{\bu}{t} \right ) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\}.
+\end{split}\]</div>
+<ol>
+<li><p>The objective function is</p>
+<div class="math notranslate nohighlight">
+\[
+   t g(\frac{\bu}{t}) + \frac{1}{2} \| \bu - \bx \|^2.
+   \]</div>
+</li>
+<li><p>Introduce a change of variable <span class="math notranslate nohighlight">\(\bz = \frac{\bu}{t}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bu = t \bz\)</span>.</p></li>
+<li><p>The objective function changes to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; t g(\bz) + \frac{1}{2} \| t \bz - \bx \|^2 \\
+   &amp; = t^2 \left [
+   \frac{g(\bz)}{t} + \frac{1}{2} \left \| \bz - \frac{\bx}{t} \right \|^2
+   \right ].
+   \end{split}\]</div>
+</li>
+<li><p>The minimizers of this objective function are given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \bz \in \prox_{g / t} (\bx / t).
+   \]</div>
+</li>
+<li><p>The minimizers of the original objective function are then given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \bu \in t \, \prox_{g / t} (\bx / t).
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="quadratic-perturbation">
+<h3><span class="section-number">11.3.3.3. </span>Quadratic Perturbation<a class="headerlink" href="#quadratic-perturbation" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-prox-quadratic-perturbation">
+<p class="admonition-title"><span class="caption-number">Theorem 11.6 </span> (Quadratic perturbation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(g: \VV \to \RERL\)</span> be a proper function.
+Define <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = g(\bx) + \frac{c}{2} \| \bx \|^2 + \langle \bx, \ba \rangle + d
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(c &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> and <span class="math notranslate nohighlight">\(d \in \RR\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f (\bx) = \prox_{\frac{1}{c+1} g} \left ( \frac{\bx - \ba}{ c + 1} \right ).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Starting from the definition of the proximal mapping</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\prox_f(\bx) &amp;= \argmin_{\bu \in \VV} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&amp;= \argmin_{\bu \in \VV} \left \{
+    g(\bu) + \frac{c}{2} \| \bu \|^2 + \langle \bu, \ba \rangle + d + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&amp;= \argmin_{\bu \in \VV} \left \{
+    g(\bu) + \frac{c+1}{2} \| \bu \|^2 + \langle \bu, \ba - \bx \rangle + \frac{1}{2} \| \bx \|^2 + d
+    \right\} \\
+&amp;= \argmin_{\bu \in \VV} \left \{
+    g(\bu) + \frac{c+1}{2} \left (\| \bu \|^2 - 
+      2 \left \langle \bu, \frac{\bx - \ba}{c + 1} \right \rangle \right )
+    \right\} \\
+&amp;= \argmin_{\bu \in \VV} \left \{
+    g(\bu) + \frac{c+1}{2} \left \|\bu -  \left (\frac{\bx - \ba}{ c + 1} \right ) \right \|^2
+    \right\}\\
+&amp;= \argmin_{\bu \in \VV} \left \{
+    \left (\frac{1}{c + 1}g \right )(\bu) 
+    + \frac{1}{2} \left \|\bu -  \left (\frac{\bx - \ba}{ c + 1} \right ) \right \|^2
+    \right\}\\
+&amp;= \prox_{\frac{1}{c+1} g} \left ( \frac{\bx - \ba}{ c + 1} \right ).
+\end{split}\]</div>
+<p>Since the quantities <span class="math notranslate nohighlight">\(\bx\)</span>, <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(d\)</span> are constant w.r.t. <span class="math notranslate nohighlight">\(\bu\)</span>, hence
+we have removed or added terms which solely depend on these quantities
+from the objective function as and
+when required in the derivation above.</p>
+</div>
+<p>Applications: <a class="reference internal" href="#ex-prox-linear-z-a-interval">Example 11.10</a>.</p>
+</div>
+<div class="section" id="composition-with-affine-mapping">
+<h3><span class="section-number">11.3.3.4. </span>Composition with Affine Mapping<a class="headerlink" href="#composition-with-affine-mapping" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-prox-composition-affine">
+<p class="admonition-title"><span class="caption-number">Theorem 11.7 </span> (Composition with affine mapping)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(g: \RR^m \to \RERL\)</span> be a proper, closed and convex function.
+Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = g(\bAAA(\bx) + \bb)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bb \in \RR^m\)</span>  and <span class="math notranslate nohighlight">\(\bAAA : \VV \to \RR^m\)</span> is a linear transformation
+satisfying the property</p>
+<div class="math notranslate nohighlight">
+\[
+\bAAA \circ \bAAA^T = \alpha \bI 
+\]</div>
+<p>for some constant <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\bI: \VV \to \VV\)</span>
+is the identity transformation.</p>
+<p>Then for any <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = \bx + \frac{1}{\alpha} \bAAA^T
+(\prox_{\alpha g}(\bAAA(\bx) + \bb) - \bAAA(\bx) - \bb).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Starting from the definition of the proximal mapping</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\prox_f(\bx) &amp;= \argmin_{\bu \in \VV} \left \{
+    f(\bu) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\} \\
+&amp;= \argmin_{\bu \in \VV} \left \{
+    g(\bAAA(\bu) + \bb) + \frac{1}{2} \| \bu - \bx \|^2
+    \right\}.
+\end{split}\]</div>
+<ol>
+<li><p>Introduce a variable <span class="math notranslate nohighlight">\(\bz = \bAAA(\bu) + \bb\)</span>.</p></li>
+<li><p>The optimization problem transforms to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \min_{\bu \in \VV, \bz \in \RR^m} &amp; g(\bz) + \frac{1}{2} \| \bu - \bx \|^2 \\
+   &amp; \text{ subject to } &amp; \bz  = \bAAA(\bu) + \bb$.
+   \end{split}\]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(g\)</span> is proper, closed and convex, hence this problem has a unique solution.
+TODO. HOW?</p></li>
+<li><p>Let the optimal solution be given by <span class="math notranslate nohighlight">\(\bz^* \bu^*\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<span id="sec-proximal-examples"></span><h2><span class="section-number">11.3.4. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Remainder of this section will be dedicated for the
+computation of proximal mappings or operators
+for different functions. Most of these functions
+are convex (with the exception of a few).
+The proximal mappings will be computed either
+from the first principles (by solving the
+minimization problem of <span class="math notranslate nohighlight">\(f(u) + \frac{1}{2}\| \bu - \bx \|^2\)</span>)
+or by making use of the proximal calculus rules developed above.</p>
+<p>Some key ideas that will be repeatedly used in the computation
+of the proximal operator in this section.
+Assume that <span class="math notranslate nohighlight">\(f\)</span> is a convex function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>
+and is differentiable over an open set <span class="math notranslate nohighlight">\(U \subseteq S\)</span>.
+This happens when <span class="math notranslate nohighlight">\(\dom f\)</span> is not an open set,
+<span class="math notranslate nohighlight">\(f\)</span> is differentiable in the interior of <span class="math notranslate nohighlight">\(\dom f\)</span>
+but not at the boundary points.</p>
+<ol class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(f'(u) = 0\)</span> for some <span class="math notranslate nohighlight">\(u \in U\)</span>, then <span class="math notranslate nohighlight">\(u\)</span> must
+be one of its minimizers
+(<a class="reference internal" href="../cvxopt/differentiable_objectives.html#res-cvxopt-diff-zero-grad-minimizer">Theorem 9.49</a>).</p></li>
+<li><p>If a minimizer of <span class="math notranslate nohighlight">\(f\)</span> exists and is not attained
+at any point of differentiability, then it
+must be attained at a point of nondifferentiability
+(<a class="reference internal" href="../cvxopt/differentiable_objectives.html#res-cvxopt-minimizer-nondifferentiability">Theorem 9.50</a>).</p></li>
+<li><p>Since for a convex function <span class="math notranslate nohighlight">\(f\)</span>, the existence of a
+unique proximal mapping is guaranteed, hence
+the minimizer of the function <span class="math notranslate nohighlight">\(h_{\bx}\)</span> exists.</p></li>
+<li><p>Then the minimizer of <span class="math notranslate nohighlight">\(h_{\bx}\)</span> is either
+at a point of differentiability where the
+gradient vanishes or at the boundary where
+it is nondifferentiable.</p></li>
+</ol>
+</div>
+<div class="section" id="dim-examples">
+<h2><span class="section-number">11.3.5. </span>1-dim Examples<a class="headerlink" href="#dim-examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="indicator-functions">
+<h3><span class="section-number">11.3.5.1. </span>Indicator Functions<a class="headerlink" href="#indicator-functions" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-indicator-interval">
+<p class="admonition-title"><span class="caption-number">Example 11.8 </span> (Indicator function for an interval)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(r \in [0, \infty]\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR \to \RERL\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = I_{[0,r] \cap \RR}(x).
+\]</div>
+<p>The proximal operator is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = \min \{ \max \{x, 0 \}, r \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>We construct the objective function</p>
+<div class="math notranslate nohighlight">
+\[
+   h_x(u) = I_{[0,r] \cap \RR}(x) +  \frac{1}{2} (u - x)^2.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\tilde{u}\)</span> denote the minimizer of <span class="math notranslate nohighlight">\(h_x(u)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(w\)</span> denote the function <span class="math notranslate nohighlight">\(w(u) =  \frac{1}{2} (u - x)^2\)</span>.</p></li>
+<li><p>First consider the case where <span class="math notranslate nohighlight">\(r &lt; \infty\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(h_x(u) = w(u)\)</span> over <span class="math notranslate nohighlight">\([0, r]\)</span> and <span class="math notranslate nohighlight">\(\infty\)</span> otherwise.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\dom h_x = [0, r]\)</span>. <span class="math notranslate nohighlight">\(\interior \dom h_x = (0, r)\)</span>.
+The boundary points are <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
+<li><p>The minimizer of <span class="math notranslate nohighlight">\(w(u)\)</span> is <span class="math notranslate nohighlight">\(u = x\)</span>.</p></li>
+<li><p>Therefore if <span class="math notranslate nohighlight">\(0 \leq x \leq r\)</span>, then <span class="math notranslate nohighlight">\(\tilde{u} = x\)</span>.</p></li>
+<li><p>For the cases where <span class="math notranslate nohighlight">\(x \notin [0, r]\)</span>, the minimizer
+must be one of the boundary points.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x &lt; 0\)</span>, then <span class="math notranslate nohighlight">\(w(u)\)</span> is an increasing function over
+<span class="math notranslate nohighlight">\([0, r]\)</span>.</p></li>
+<li><p>Hence for <span class="math notranslate nohighlight">\(x &lt; 0\)</span>, <span class="math notranslate nohighlight">\(\tilde{u} = 0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x &gt; r\)</span>, then <span class="math notranslate nohighlight">\(w(u)\)</span> is a decreasing function over <span class="math notranslate nohighlight">\([0,r]\)</span>.</p></li>
+<li><p>Hence for <span class="math notranslate nohighlight">\(x &gt; r\)</span>, <span class="math notranslate nohighlight">\(\tilde{u} = r\)</span>.</p></li>
+<li><p>Thus, if <span class="math notranslate nohighlight">\(r &lt; \infty\)</span>, then the proximal operator
+is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \prox_f(x) = \begin{cases}
+   x, &amp; 0 \leq x \leq r \\
+   0, &amp; x &lt; 0 \\
+   r, &amp; x &gt; r
+   \end{cases}
+   = \min \{ \max \{x, 0 \}, r \}.
+   \end{split}\]</div>
+</li>
+<li><p>For <span class="math notranslate nohighlight">\(r = \infty\)</span>, <span class="math notranslate nohighlight">\(f(x) = I_{[0, \infty)}(x)\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(h_x(u) = w(u)\)</span> for <span class="math notranslate nohighlight">\(u \geq 0\)</span>.</p></li>
+<li><p>Hence the minimizer <span class="math notranslate nohighlight">\(\tilde{u} = x\)</span> for <span class="math notranslate nohighlight">\(x \geq 0\)</span> and
+<span class="math notranslate nohighlight">\(\tilde{u} = 0\)</span> for <span class="math notranslate nohighlight">\(x &lt; 0\)</span>.</p></li>
+<li><p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+   \prox_f(x) = [x]_+ = \max\{x, 0\}
+   = \min \{ \max \{x, 0 \}, \infty \}.
+   \]</div>
+</li>
+<li><p>Combining these two cases</p>
+<div class="math notranslate nohighlight">
+\[
+   \prox_f(x) = \min \{ \max \{x, 0 \}, r \}.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="linear">
+<h3><span class="section-number">11.3.5.2. </span>Linear<a class="headerlink" href="#linear" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-linear-rplus">
+<p class="admonition-title"><span class="caption-number">Example 11.9 </span> (Linear over <span class="math notranslate nohighlight">\(\RR_+\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mu \in \RR\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR \to \RERL\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+\mu x, &amp; x \geq 0; \\
+\infty, &amp; x &lt; 0.
+\end{cases}
+\end{split}\]</div>
+<p>The proximal operator is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = [x - \mu]_+.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\dom f = \RR_+\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is differentiable over <span class="math notranslate nohighlight">\(\RR_{++}\)</span>.</p></li>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   h_x(u) = = f(u) +  \frac{1}{2} (u - x)^2 
+   = \begin{cases}
+   \mu u + \frac{1}{2} (u - x)^2, &amp; u \geq 0; \\
+   \infty, &amp; u &lt; 0.
+   \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(h_x\)</span> is a proper convex function with <span class="math notranslate nohighlight">\(\dom h_x = \RR_+\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h_x\)</span> is differentiable over <span class="math notranslate nohighlight">\(\RR_{++}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h'_x(u) = \mu + u - x\)</span> for all <span class="math notranslate nohighlight">\(u &gt; 0\)</span>.</p></li>
+<li><p>Setting it to zero, we get <span class="math notranslate nohighlight">\(u = x - \mu\)</span>.</p></li>
+<li><p>Thus, if <span class="math notranslate nohighlight">\(x &gt; \mu\)</span>, then the minimizer is <span class="math notranslate nohighlight">\(u = x - \mu\)</span>.</p></li>
+<li><p>Otherwise, <span class="math notranslate nohighlight">\(h_x\)</span> obtains its minimum value at <span class="math notranslate nohighlight">\(u=0\)</span>
+which is the only point of nondifferentiability in its domain.</p></li>
+<li><p>Thus, if <span class="math notranslate nohighlight">\(x \leq \mu\)</span>, then the minimizer is <span class="math notranslate nohighlight">\(u=0\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof example admonition" id="ex-prox-linear-z-a-interval">
+<p class="admonition-title"><span class="caption-number">Example 11.10 </span> (Linear over an interval <span class="math notranslate nohighlight">\([0, a]\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mu \in \RR\)</span> and let <span class="math notranslate nohighlight">\(a \in [0, \infty]\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR \to \RERL\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+\mu x, &amp; x \in [0, a]; \\
+\infty, &amp; \text{ otherwise}.
+\end{cases}
+\end{split}\]</div>
+<p>The proximal operator is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = \min \{ \max \{x - \mu, 0 \}, a \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = I_{[0,a] \cap \RR}(x) + \mu x.
+\]</div>
+<ol>
+<li><p>From <a class="reference internal" href="#ex-prox-indicator-interval">Example 11.8</a>, the proximal operator for the
+indicator function is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \prox_{I_{[0,a] \cap \RR}}(x) = \min \{ \max \{x, 0 \}, a \}.
+   \]</div>
+</li>
+<li><p>We can write <span class="math notranslate nohighlight">\(f\)</span> as a quadratic perturbation of <span class="math notranslate nohighlight">\(I_{[0,a] \cap \RR}\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+   f(x) = I_{[0,a] \cap \RR}(x) + \frac{0}{2} x^2 + \mu x + 0. 
+   \]</div>
+</li>
+<li><p>Following <a class="reference internal" href="#res-prox-quadratic-perturbation">Theorem 11.6</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \prox_f(x) = \prox_{I_{[0,a] \cap \RR}}(x - \mu)
+   = \min \{ \max \{x - \mu, 0 \}, a \}.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="absolute-value">
+<h3><span class="section-number">11.3.5.3. </span>Absolute Value<a class="headerlink" href="#absolute-value" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-scaled-abs-value">
+<p class="admonition-title"><span class="caption-number">Example 11.11 </span> (Scaled absolute value)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(t \in \RR_+\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR \to \RR\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = t | x |.
+\]</div>
+<p>The proximal operator is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = [|x| - t]_+ \sgn (x).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+   h_x(u) = t | u | +  \frac{1}{2} (u - x)^2.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(h_x\)</span> is differentiable everywhere except at <span class="math notranslate nohighlight">\(u = 0\)</span>.</p></li>
+<li><p>At <span class="math notranslate nohighlight">\(u \neq 0\)</span>, <span class="math notranslate nohighlight">\(h'_x(u) = \sgn(u) t + u - x\)</span>.</p></li>
+<li><p>If the minimizer is obtained at <span class="math notranslate nohighlight">\(u &gt; 0\)</span>, then
+<span class="math notranslate nohighlight">\(t + u - x = 0\)</span> giving us <span class="math notranslate nohighlight">\(u= x -t\)</span>.</p></li>
+<li><p>Thus, a minimizer at <span class="math notranslate nohighlight">\(u &gt; 0\)</span> is attained if <span class="math notranslate nohighlight">\(x &gt; t\)</span>.</p></li>
+<li><p>If the minimizer is obtained at <span class="math notranslate nohighlight">\(u &lt; 0\)</span>, then
+<span class="math notranslate nohighlight">\(-t + u - x = 0\)</span> giving us <span class="math notranslate nohighlight">\(u = x + t\)</span>.</p></li>
+<li><p>Thus, a minimizer at <span class="math notranslate nohighlight">\(u &lt; 0\)</span> is attained if <span class="math notranslate nohighlight">\(x &lt; -t\)</span>.</p></li>
+<li><p>Consequently, if <span class="math notranslate nohighlight">\(x \in [-t, t]\)</span>, then the
+minimizer of <span class="math notranslate nohighlight">\(h_x\)</span> must be at the only point of
+nondifferentiability, namely <span class="math notranslate nohighlight">\(u=0\)</span>.</p></li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \prox_f(x) = \begin{cases}
+   x - t, &amp; x &gt; t\\
+   x + t, &amp; x &lt; -t \\
+   0, &amp;  -t \leq x \leq t.
+   \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p>The conditions <span class="math notranslate nohighlight">\(x &gt; t\)</span> and <span class="math notranslate nohighlight">\(x &lt; -t\)</span>
+can be combined as <span class="math notranslate nohighlight">\(|x| &gt; t\)</span>.</p></li>
+<li><p>The condition <span class="math notranslate nohighlight">\(-t \leq x \leq t\)</span> simplifies
+to <span class="math notranslate nohighlight">\(|x| \leq |t|\)</span>.</p></li>
+<li><p>We can see that the three cases for <span class="math notranslate nohighlight">\(\prox_f(x)\)</span>
+can be simplified to the expression</p>
+<div class="math notranslate nohighlight">
+\[
+   \prox_f(x) = [|x| - t]_+ \sgn (x).
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="cube">
+<h3><span class="section-number">11.3.5.4. </span>Cube<a class="headerlink" href="#cube" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-scaled-cube-plus">
+<p class="admonition-title"><span class="caption-number">Example 11.12 </span> (Scaled cube over <span class="math notranslate nohighlight">\(\RR_+\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR \to \RERL\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+t x^3, &amp; x \geq 0; \\
+\infty, &amp; x &lt; 0.
+\end{cases}
+\end{split}\]</div>
+<p>The proximal operator is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = \frac{-1 + \sqrt{1 + 12 t [x]_+}}{6 t}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>We construct the objective function</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   h_x(u) = f(u) +  \frac{1}{2} (u - x)^2 
+   = \begin{cases}
+   t u^3 +  \frac{1}{2} (u - x)^2, &amp; u \geq 0; \\
+   \infty, &amp; u &lt; 0.
+   \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(h_x\)</span> is differentiable for <span class="math notranslate nohighlight">\(u &gt; 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h'_x(u) = 3 t u^2 + u - x\)</span> for <span class="math notranslate nohighlight">\(u &gt; 0\)</span>.</p></li>
+<li><p>Note that if <span class="math notranslate nohighlight">\(x \leq 0\)</span> then
+<span class="math notranslate nohighlight">\(h'_x(u) &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(u &gt; 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(h'_x(u) = 0\)</span> does not have a positive
+root for <span class="math notranslate nohighlight">\(x \leq 0\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(x &gt; 0\)</span>, setting <span class="math notranslate nohighlight">\(h_x(u)\)</span> to zero,
+we get <span class="math notranslate nohighlight">\(3 u^2 + u - x = 0\)</span>
+whose positive solution is:</p>
+<div class="math notranslate nohighlight">
+\[
+   u = \frac{-1 + \sqrt{1 + 12 t x}}{6 t}.
+   \]</div>
+</li>
+<li><p>We can see that <span class="math notranslate nohighlight">\(h'_x(u) = 0\)</span> has a
+positive solution if and only if <span class="math notranslate nohighlight">\(x &gt; 0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x \leq 0\)</span>, then the derivative never
+vanishes for any <span class="math notranslate nohighlight">\(u &gt; 0\)</span>.</p></li>
+<li><p>Hence the minimum of <span class="math notranslate nohighlight">\(h_x\)</span> is attained
+at the only point of nondifferentiability
+<span class="math notranslate nohighlight">\(u=0\)</span>.</p></li>
+<li><p>Thus, the minimizer of <span class="math notranslate nohighlight">\(h_x(u)\)</span> for <span class="math notranslate nohighlight">\(x \leq 0\)</span>
+is <span class="math notranslate nohighlight">\(u=0\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \prox_f(x) = \begin{cases}
+   \frac{-1 + \sqrt{1 + 12 t x}}{6 t}, &amp; x &gt; 0 \\
+   0, &amp; x \leq 0.
+   \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p>Note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \frac{-1 + \sqrt{1 + 12 t [x]_+}}{6 t}= \begin{cases}
+   \frac{-1 + \sqrt{1 + 12 t x}}{6 t}, &amp; x &gt; 0 \\
+   0, &amp; x \leq 0.
+   \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p>This concludes the proof.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="logarithms">
+<h3><span class="section-number">11.3.5.5. </span>Logarithms<a class="headerlink" href="#logarithms" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-scaled-neg-log">
+<p class="admonition-title"><span class="caption-number">Example 11.13 </span> (Scaled negative logarithm)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR \to \RERL\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+- t \ln x, &amp; x &gt; 0; \\
+\infty, &amp; x \leq 0.
+\end{cases}
+\end{split}\]</div>
+<p>The proximal operator is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(x) = \frac{x + \sqrt{x^2 + 4 t} }{2}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>We construct the objective function</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   h_x(u) = f(u) +  \frac{1}{2} (u - x)^2 
+   = \begin{cases}
+   - t \ln u +  \frac{1}{2} (u - x)^2, &amp; u &gt; 0; \\
+   \infty, &amp; u \leq 0.
+   \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(h_x\)</span> is differentiable for <span class="math notranslate nohighlight">\(u &gt; 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h'_x(u) = - \frac{t}{u} + (u - x)\)</span> for <span class="math notranslate nohighlight">\(u &gt; 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tilde{u} &gt; 0\)</span> is a minimizer if</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; - \frac{t}{\tilde{u}} + (\tilde{u} - x) = 0 \\
+   &amp; \implies \tilde{u}^2 - x \tilde{u} -t = 0 \\
+   &amp; \implies \tilde{u} = \frac{x + \sqrt{x^2 + 4 t}}{2}.
+   \end{split}\]</div>
+</li>
+<li><p>We note that <span class="math notranslate nohighlight">\(x + \sqrt{x^2 + 4 t} &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(x \in \RR\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\tilde{u} &gt; 0\)</span> as desired.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\prox_f(x) = \frac{x + \sqrt{x^2 + 4 t}}{2}\)</span>.</p></li>
+</ol>
+<p>As we can see, <span class="math notranslate nohighlight">\(\dom h_x\)</span> is the open set <span class="math notranslate nohighlight">\(\RR_{++}\)</span>
+and <span class="math notranslate nohighlight">\(h_x\)</span> is differentiable at every point in its
+domain. Since <span class="math notranslate nohighlight">\(h_x\)</span> must have a unique minimizer,
+hence <span class="math notranslate nohighlight">\(h'_x(u) = 0\)</span> must have a unique positive solution.</p>
+</div>
+</div>
+</div>
+<div class="section" id="affine-functions">
+<h2><span class="section-number">11.3.6. </span>Affine Functions<a class="headerlink" href="#affine-functions" title="Permalink to this headline">¶</a></h2>
+<div class="proof example admonition" id="ex-prox-affine">
+<p class="admonition-title"><span class="caption-number">Example 11.14 </span> (Affine function)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f(\bx) = \langle \bx, \ba \rangle + b\)</span> where <span class="math notranslate nohighlight">\(\ba \in \VV\)</span> and <span class="math notranslate nohighlight">\(b \in \RR\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+h_{\bx}(\bu) = \langle \bu, \ba \rangle + b + \frac{1}{2} \| \bu - \bx \|^2.
+\]</div>
+<ol class="simple">
+<li><p>Differentiating <span class="math notranslate nohighlight">\(h_{\bx}\)</span>, we get
+<span class="math notranslate nohighlight">\(\nabla h_{\bx}(\bu) = \ba + \bu - \bx\)</span>.</p></li>
+<li><p>Setting it to zero, we see that <span class="math notranslate nohighlight">\(\bu = \bx - \ba\)</span> is the minimizer.</p></li>
+</ol>
+<p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = \bx - \ba.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="convex-quadratic-functions">
+<h2><span class="section-number">11.3.7. </span>Convex Quadratic Functions<a class="headerlink" href="#convex-quadratic-functions" title="Permalink to this headline">¶</a></h2>
+<div class="proof example admonition" id="ex-prox-convex-quadratic">
+<p class="admonition-title"><span class="caption-number">Example 11.15 </span> (Convex quadratic)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by
+<span class="math notranslate nohighlight">\(f(\bx) = \frac{1}{2} \bx^T \bA \bx + \bb^T \bx + c\)</span>
+where <span class="math notranslate nohighlight">\(\bA \in \SS^n_+\)</span>, <span class="math notranslate nohighlight">\(\bb \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(c \in \RR\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+h_{\bx}(\bu) = \frac{1}{2} \bu^T \bA \bu + \bb^T \bu + c + \frac{1}{2} \| \bu - \bx \|^2.
+\]</div>
+<ol>
+<li><p>Differentiating <span class="math notranslate nohighlight">\(h_{\bx}\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla h_{\bx}(\bu) = \bA \bu + \bb + \bu - \bx.
+   \]</div>
+</li>
+<li><p>Setting this to zero, we see that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \bA \bu + \bb + \bu - \bx = \bzero\\
+   \iff &amp; (\bA + \bI) \bu = \bx - \bb \\
+   \iff &amp; \bu = (\bA + \bI)^{-1}(\bx - \bb).
+   \end{split}\]</div>
+</li>
+</ol>
+<p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = (\bA + \bI)^{-1}(\bx - \bb).
+\]</div>
+</div>
+</div></div>
+<div class="section" id="norms">
+<h2><span class="section-number">11.3.8. </span>Norms<a class="headerlink" href="#norms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ell-1-norm">
+<h3><span class="section-number">11.3.8.1. </span><span class="math notranslate nohighlight">\(\ell_1\)</span> Norm<a class="headerlink" href="#ell-1-norm" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-scaled-l1-norm">
+<p class="admonition-title"><span class="caption-number">Example 11.16 </span> (Scaled <span class="math notranslate nohighlight">\(\ell_1\)</span> norm)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \gamma \| \bx \|_1 = \sum_{i=1}^n \gamma |x_i|.
+\]</div>
+<p>Then, the proximal operator is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = \st_{\gamma}(\bx)
+\]</div>
+<p>where the univariate soft-thresholding operator
+<span class="math notranslate nohighlight">\(\st_{\gamma} : \RR \to \RR\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\st_{\gamma}(x) = \begin{cases}
+ x - \gamma &amp; \text{for} &amp; x &gt; \gamma \\
+ x + \gamma &amp; \text{for} &amp; x &lt; -\gamma \\
+ 0 &amp; \text{for} &amp; |x| \le \gamma
+\end{cases}
+\end{split}\]</div>
+<p>and the multivariate soft-thresholding operator
+<span class="math notranslate nohighlight">\(\st_{\gamma} : \RR^n \to \RR^n\)</span>
+is defined by the component wise application of
+the univariate soft thresholding operator</p>
+<div class="math notranslate nohighlight">
+\[
+\st_{\gamma}(\bx) = (\st_{\gamma}(x_j))_{j=1}^n.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \sum_{i=1}^n g(x_i)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(g(x) = \gamma | x|\)</span>.</p>
+<p>By <a class="reference internal" href="#ex-prox-scaled-abs-value">Example 11.11</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_g(x) =  [|x| - \gamma]_+ \sgn (x)
+= \st_{\gamma}(x).
+\]</div>
+<p>By <a class="reference internal" href="#res-prox-op-separable-conv-func">Corollary 11.1</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = (\st_{\gamma}(x_i))_{i=1}^n
+= \st_{\gamma}(\bx).
+\]</div>
+</div>
+</div>
+<div class="section" id="ell-0-norm">
+<h3><span class="section-number">11.3.8.2. </span><span class="math notranslate nohighlight">\(\ell_0\)</span> “Norm”<a class="headerlink" href="#ell-0-norm" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-prox-scaled-l0-norm">
+<p class="admonition-title"><span class="caption-number">Example 11.17 </span> (Scaled <span class="math notranslate nohighlight">\(\ell_0\)</span> “norm”)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \gamma \| \bx \|_0 = \sum_{i=1}^n  g(x_i)
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g(x) = \begin{cases}
+\gamma, &amp; x \neq 0;\\
+0, &amp; x = 0.
+\end{cases} 
+\end{split}\]</div>
+<p>Then, the proximal operator is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = \HHH_{\sqrt{2\gamma}}(x_1) \times \dots 
+\times \HHH_{\sqrt{2\gamma}}(x_n)
+\]</div>
+<p>where the univariate hard-thresholding operator
+<span class="math notranslate nohighlight">\(\HHH_{t} : \RR \to 2^{\RR}\)</span>
+for any <span class="math notranslate nohighlight">\(t &gt; 0\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\HHH_t(x) = \begin{cases}
+ \{ 0 \} &amp; |x| &lt; t \\
+ \{ x \} &amp;  |x| &gt; t \\
+ \{0, x \} &amp; |x| = t
+\end{cases}.
+\end{split}\]</div>
+</div>
+</div><p>Note this this version of hard thresholding
+operator is a point to set mapping. In this
+case, the operator leads to two possible
+values when <span class="math notranslate nohighlight">\(|x| = t\)</span>.
+The <span class="math notranslate nohighlight">\(\ell_0\)</span>-“norm” is not a convex function.
+Hence its proximal mapping is not always
+a singleton.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. We note that <span class="math notranslate nohighlight">\(g(x) = h(x) + \gamma\)</span></p>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+h(x) = \begin{cases}
+0, &amp; x \neq 0;\\
+-\gamma, &amp; x = 0.
+\end{cases} 
+\end{split}\]</div>
+<ol>
+<li><p>Following <a class="reference internal" href="#ex-prox-map-neg-val-at-zero">Example 11.2</a>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \prox_h(x) = \begin{cases}
+  \{ 0 \}, &amp; |x| &lt; \sqrt{2 \gamma},\\
+  \{ x \} &amp; |x| &gt; \sqrt{2 \gamma}, \\
+  \{ 0, x \} &amp; | x | = \sqrt {2 \gamma}.
+  \end{cases}
+  \end{split}\]</div>
+</li>
+<li><p>Since the proximal operator is not affected by a constant offset,
+hence <span class="math notranslate nohighlight">\(\prox_g = \prox_h\)</span>.</p></li>
+<li><p>We can see that <span class="math notranslate nohighlight">\(\prox_g = \HHH_{\sqrt{2 \gamma}}\)</span>.</p></li>
+<li><p>It is clear that the proximal mappings are not unique.</p></li>
+<li><p>By <a class="reference internal" href="#res-prox-separable-func-mapping">Theorem 11.3</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \prox_f(\bx) = \prox_g(x_1) \times \dots \times \prox_g(x_n)
+   = \HHH_{\sqrt{2\gamma}}(x_1) \times \dots 
+    \times \HHH_{\sqrt{2\gamma}}(x_n)
+   \]</div>
+<p>as desired.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">11.3.9. </span>Logarithms<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="proof example admonition" id="ex-prox-neg-sum-log">
+<p class="admonition-title"><span class="caption-number">Example 11.18 </span> (Negative sum of logs)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>.
+Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RERL\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(\bx) = \begin{cases}
+- \gamma\sum_{i=1}^n  \ln x_i &amp; \bx \succ \bzero;\\
+\infty &amp; \text{ otherwise }.
+\end{cases}
+\end{split}\]</div>
+<p>Then, the proximal operator is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = \left (
+   \frac{x_i + \sqrt{x_i^2 + 4 \gamma} }{2}
+   \right)_{i=1}^n.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \sum_{i=1}^n g(x_i)
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g(x) =  \begin{cases}
+- \gamma \ln x, &amp; x &gt; 0; \\
+\infty, &amp; x \leq 0.
+\end{cases}
+\end{split}\]</div>
+<p>From <a class="reference internal" href="#ex-prox-scaled-neg-log">Example 11.13</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_g(x) = \frac{x + \sqrt{x^2 + 4 t} }{2}.
+\]</div>
+<p>By <a class="reference internal" href="#res-prox-op-separable-conv-func">Corollary 11.1</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+\prox_f(\bx) = (\prox_g(x_i))_{i=1}^n.
+\]</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./proximal_operator"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chapter.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">11. </span>Proximal Algorithms</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../ssm/chapter_ssm.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Sparse Signal Models</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

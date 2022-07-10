@@ -5,6 +5,8 @@
 ## Real Valued Functions
 
 
+```{index} Real valued function
+```
 ```{prf:definition} Real valued function
 :label: def-bra-real-valued-function
 
@@ -14,6 +16,8 @@ from $X$ to $\RR$.
 ```
 
 
+```{index} Set of real valued functions
+```
 ```{prf:definition} The set of real valued total functions
 :label: def-bra-rvf-set
 
@@ -101,6 +105,8 @@ However, there are certain limitations/odd behaviors with the structure.
 
 
 
+```{index} Real valued function; partial order
+```
 ```{prf:definition} Partial order on real valued (total) functions
 :label: def-bra-rv-func-partial-order
 
@@ -123,6 +129,8 @@ $$
 f \preceq g \iff \dom f = \dom g \text{ and } f(x) \leq g(x) \Forall x \in \dom f.
 $$
 
+```{index} Bounded function
+```
 ```{prf:definition} Bounded function
 :label: def-bra-bounded-function
 
@@ -182,6 +190,8 @@ it is bounded from above as well as below.
 
 ## Epigraph
 
+```{index} Epigraph
+```
 ```{prf:definition} Epigraph
 :label: def-bra-epigraph
 
@@ -189,28 +199,137 @@ The *epigraph* of a real valued function $f: X \to \RR$ is
 defined as:
 
 $$
-\epi f \triangleq \{ (x,t) \in X \times \RR \, | \, x \in \dom f, f(x) \leq t \}.
+\epi f \triangleq \{ (x,t) \in X \times \RR \ST x \in \dom f, f(x) \leq t \}.
 $$ 
 ```
 The epigraph lies above (and includes) the graph of a function.
 
+```{index} Strict epigraph
+```
+```{prf:definition} Strict epigraph
+:label: def-bra-strict-epigraph
+
+The *strict epigraph* of a real valued function $f: X \to \RR$ is
+defined as:
+
+$$
+\epi_s f \triangleq \{ (x,t) \in X \times \RR \ST x \in \dom f, f(x) < t \}.
+$$ 
+```
+The strict epigraph lies above the graph of a function.
+
+
+```{prf:theorem} Epigraph of pointwise maximum of two functions
+:label: res-bra-epigraph-intersection
+
+
+Let $f, g : X \to \RR$ be two different real valued functions.
+Let $h : X \to \RR$ with $\dom h = \dom f \cap \dom g$  be defined as
+
+$$
+h(x) = \max(f(x), g(x)) \Forall x \in \dom h
+$$
+
+Then
+
+$$
+\epi h = \epi f \cap \epi g.
+$$
+```
+
+```{prf:proof}
+
+We first show that $\epi h \subseteq \epi f \cap \epi g$.
+
+1. Let $(x, t) \in \epi h$.
+1. Then $x \in \dom h$ and $h(x) \leq t$.
+1. Hence $x \in \dom f$, $x \in \dom g$, $f(x) \leq t$ and $g(x) \leq t$.
+1. Hence $(x,t) \in \epi f$ and $(x, t) \in \epi g$.
+1. Hence $(x, t) \in \epi f \cap \epi g$.
+
+
+For the converse, we show that  $\epi f \cap \epi g \subseteq \epi h$.
+
+1. Let $(x, t) \in \epi f \cap \epi g$.
+1. Then $(x, t) \in \epi f$ and $(x, t) \in \epi g$.
+1. Thus $x \in \dom f$, $f(x) \leq t$, $x \in \dom g$ and $g(x) \leq t$.
+1. Thus $x \in \dom f \cap \dom g = \dom h$.
+1. Also, $h(x) = \max(f(x), g(x)) \leq t$.
+1. Hence $(x, t) \in \epi h$.
+```
+
+This result can be generalized for an arbitrary family of functions.
+
+```{prf:theorem} Epigraph of pointwise maximum of a family of functions
+:label: res-bra-epigraph-intersection-family
+
+
+Let $\{ f_i : X \to \RR \}_{i \in I}$ be a family of real valued functions
+indexed by $I$.
+Let $h : X \to \RR$ with $\dom h = \bigcap_{i \in I} \dom f_i$  be defined as
+
+$$
+h(x) = \max \{f_i(x) \ST i \in I \} \Forall x \in \dom h
+$$
+
+Then
+
+$$
+\epi h = \bigcap_{i \in I}  \epi f_i.
+$$
+```
+
+```{prf:proof}
+We first show that $\epi h \subseteq \bigcap_{i \in I}  \epi f_i$.
+
+1. Let $(x, t) \in \epi h$.
+1. Then $x \in \dom h$ and $h(x) \leq t$.
+1. Hence $x \in \dom f_i$  and $f_i(x) \leq t$ for every $i  \in I$.
+1. Hence $(x,t) \in \epi f_i$ for every $i \in I$.
+1. Hence $(x, t) \in  \bigcap_{i \in I}   \epi f_i$.
+
+The argument for the converse is similar and left as an exercise.
+```
+
+
 ## Sub-level Sets
 
+```{index} Sublevel set
+```
 ```{prf:definition} Sub-level set
 :label: def-bra-sub-level-set
 
 For a real valued function $f: X \to \RR$, the sublevel set
 for some $\alpha \in \RR$,
-denoted by $C_{\alpha}$,
+denoted by $\sublevel(f, \alpha)$,
 is defined as 
 
 $$
-C_{\alpha} \triangleq \{ x \in \dom f \,|\, f(x) \leq \alpha \}.
+\sublevel(f, \alpha) \triangleq \{ x \in \dom f \,|\, f(x) \leq \alpha \}.
+$$
+```
+
+## Contours or Level Sets
+
+```{index} Contour
+```
+```{prf:definition} Contour
+:label: def-bra-contour
+
+For a real valued function $f: X \to \RR$, the contour
+for some $\alpha \in \RR$,
+denoted by $\contour(f, \alpha)$,
+is defined as 
+
+$$
+\contour(f, \alpha) \triangleq \{ x \in \dom f \,|\, f(x) = \alpha \}.
 $$
 ```
 
 ## Hypograph
 
+```{index} Hypograph
+```
 ```{prf:definition} Hypograph
 :label: def-bra-hypograph
 
@@ -218,7 +337,7 @@ The *hypograph* of a real valued function $f: X \to \RR$ is
 defined as:
 
 $$
-\hypo f \triangleq \{ (x,t) \in X \times \RR \, | \, x \in \dom f, t \leq f(x) \}.
+\hypo f \triangleq \{ (x,t) \in X \times \RR \ST x \in \dom f, t \leq f(x) \}.
 $$ 
 ```
 The epigraph lies above (and includes) the graph of a function.
@@ -226,22 +345,26 @@ The epigraph lies above (and includes) the graph of a function.
 
 ## Super-level Sets
 
+```{index} Superlevel set
+```
 ```{prf:definition} Super-level set
 :label: def-bra-super-level-set
 
 For a real valued function $f: X \to \RR$, the super-level set
 for some $\alpha \in \RR$,
-denoted by $D_{\alpha}$,
+denoted by $\superlevel(f, \alpha)$,
 is defined as 
 
 $$
-D_{\alpha} \triangleq \{ x \in \dom f \,|\, f(x) \geq \alpha \}.
+\superlevel(f, \alpha) \triangleq \{ x \in \dom f \,|\, f(x) \geq \alpha \}.
 $$
 ```
 
 
 ## Extended Real Valued Functions
 
+```{index} Extended real valued function
+```
 ```{prf:definition} Extended real-valued function
 :label: def-bra-extended-real-valued-function
 
@@ -255,6 +378,68 @@ where $\ERL = \RR \cup \{ -\infty, \infty \}$.
 We also write the codomain as $\ERL = [-\infty, \infty]$.
 ```
 
+```{index} Effective domain
+```
+```{prf:definition} Effective domain of an extended real valued function
+:label: def-bra-extension-domain
+
+For an extended valued function $\tilde{f} : X \to \ERL$, its 
+*effective domain* is defined as:
+
+$$
+\dom \tilde{f} \triangleq \{ x \in X \ST \tilde{f}(x) < \infty \}.
+$$
+```
+
+```{index} Extended real valued function; graph
+```
+```{index} Extended real valued function; epigraph
+```
+```{index} Extended real valued function; strict epigraph
+```
+```{index} Extended real valued function; sublevel set
+```
+```{index} Extended real valued function; contour
+```
+```{index} Extended real valued function; hypograph
+```
+```{index} Extended real valued function; superlevel set
+```
+```{prf:definition} Graphs and level sets
+:label: def-bra-extended-value-func-graphs
+
+The epigraph, hypograph, 
+sublevel, superlevel and contour sets of an extended valued
+function are defined in an identical manner.
+However, the graph is defined slightly differently.
+
+$$
+& \graph f \triangleq \{ (x,t) \in X \times \ERL \ST x \in \dom f, f(x) = t \};\\
+& \epi f \triangleq \{ (x,t) \in X \times \RR \ST x \in \dom f, f(x) \leq t \};\\
+& \epi_s f \triangleq \{ (x,t) \in X \times \RR \ST x \in \dom f, f(x) < t \};\\
+& \sublevel(f, \alpha) \triangleq \{ x \in \dom f \,|\, f(x) \leq \alpha \}; \\
+& \contour(f, \alpha) \triangleq \{ x \in \dom f \,|\, f(x) = \alpha \};\\
+& \hypo f \triangleq \{ (x,t) \in X \times \RR \ST x \in \dom f, t \leq f(x) \};\\
+& \superlevel(f, \alpha) \triangleq \{ x \in \dom f \,|\, f(x) \geq \alpha \}.
+$$ 
+```
+
+```{div}
+For an extended valued function, it is not necessary
+that $\graph f \subseteq \epi f$.
+
+1. If $f(x) = \infty$, then $(x, \infty) \in \graph f$.
+   However, $(x, \infty) \notin \epi f$. 
+   At the same time $(x, t) \notin \epi f$ for every $\RR$.
+1. If $f(x) = -\infty$ then $(x, -\infty) \in \graph f$.
+   However $(x, -\infty) \notin \epi f$.
+   But $(x, t) \in \epi f$ for every $\RR$.
+```
+
+
+
+```{index} Extended value extension
+```
 ```{prf:definition} Extended-value extension
 :label: def-bra-extended-value-extension
 
@@ -274,19 +459,11 @@ $$
 The extension is pretty useful in analysis and optimization
 as it extends the domain to the whole of $X$.
 
-```{prf:definition} Domain of an extended real valued function
-:label: def-bra-extension-domain
 
-For an extended valued function $\tilde{f} : X \to \ERL$, its 
-*effective domain* is defined as:
 
-$$
-\dom \tilde{f} \triangleq \{ x \in X \ST \tilde{f}(x) < \infty \}.
-$$
+
+```{index} Indicator function
 ```
-
-
-
 ```{prf:definition} Indicator functions
 :label: def-bra-indicator-function
 

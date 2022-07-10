@@ -85,7 +85,31 @@ $$
 $$
 
 
-## Closure
+## Closed Convex Sets
+
+```{prf:theorem} Closed convex set = Closure of the union of line segments
+:label: res-cvx-closed-closure-line-segments
+
+Let $\VV$ be a real normed linear space.
+Let $C$ be a closed convex set of $\VV$.
+Then $C$ is the closure of the union of all the line
+segments connecting the points of the set.
+```
+
+```{prf:proof}
+Let $D = \bigcup_{\bx, \by \in C} [\bx, \by]$.
+By {prf:ref}`res-cvx-convex-set-union-line-segments`,
+$C = D$. Since $C$ is closed, hence $D$ is closed,
+hence $\closure D = D = C$.
+```
+
+A dual description of a closed convex set is that it
+is the intersection of all closed half spaces
+containing the set.
+This is shown in {prf:ref}`res-cvx-closed-convex-halfspace-intersection`.
+
+
+### Closure
 
 
 ```{prf:theorem} Closure of a convex set
@@ -124,6 +148,8 @@ therefore convex. Now, assume $C$ to be nonempty.
    and $t \in (0, 1)$, $ t \bx + (1-t) \by \in \closure C$.
 1. Thus, $\closure C$ is convex.
 ```
+
+
 
 ## Interior
 

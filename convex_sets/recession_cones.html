@@ -1,0 +1,3015 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8.14. Recession Cones &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8.15. Directional Derivatives" href="directional_derivatives.html" />
+    <link rel="prev" title="8.13. Continuity" href="continuity.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/convex_sets/recession_cones.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fconvex_sets/recession_cones.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recession-cone">
+   8.14.1. Recession Cone
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-subspaces">
+     8.14.1.1. Linear Subspaces
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-subspaces">
+     8.14.1.2. Affine Subspaces
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-negation">
+     8.14.1.3. Set Negation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#closedness-of-recession-cone">
+     8.14.1.4. Closedness of Recession Cone
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recession-directions-for-closed-and-convex-sets">
+     8.14.1.5. Recession Directions for Closed and Convex Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#closure-of-set">
+     8.14.1.6. Closure of Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unboundedness">
+     8.14.1.7. Unboundedness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relative-interior">
+     8.14.1.8. Relative Interior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intersection">
+     8.14.1.9. Intersection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-transformations">
+     8.14.1.10. Linear Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lineality-space">
+   8.14.2. Lineality Space
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#as-a-subspace">
+     8.14.2.1. As a Subspace
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     8.14.2.2. Relative Interior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     8.14.2.3. Intersection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     8.14.2.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decomposition-along-lineality-spaces">
+     8.14.2.5. Decomposition along Lineality Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nested-sequences-of-closed-and-convex-sets">
+   8.14.3. Nested Sequences of Closed and Convex Sets
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nested-sequence-with-linear-inequality-constraints">
+     8.14.3.1. Nested Sequence with Linear Inequality Constraints
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-function-with-quadratic-constraints">
+     8.14.3.2. Quadratic Function with Quadratic Constraints
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closedness-under-linear-transformations">
+   8.14.4. Closedness Under Linear Transformations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-inequality-constraints">
+     8.14.4.1. Linear Inequality Constraints
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-inequality-constraints">
+     8.14.4.2. Quadratic Inequality Constraints
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vector-sum-of-closed-convex-sets">
+     8.14.4.3. Vector Sum of Closed Convex Sets
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convex-functions">
+   8.14.5. Convex Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recession-cones-of-sublevel-sets">
+     8.14.5.1. Recession Cones of Sublevel Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recession-cone-of-a-convex-function">
+     8.14.5.2. Recession Cone of a Convex Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lineality-space-of-a-convex-function">
+     8.14.5.3. Lineality Space of a Convex Function
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Recession Cones</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recession-cone">
+   8.14.1. Recession Cone
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-subspaces">
+     8.14.1.1. Linear Subspaces
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-subspaces">
+     8.14.1.2. Affine Subspaces
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-negation">
+     8.14.1.3. Set Negation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#closedness-of-recession-cone">
+     8.14.1.4. Closedness of Recession Cone
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recession-directions-for-closed-and-convex-sets">
+     8.14.1.5. Recession Directions for Closed and Convex Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#closure-of-set">
+     8.14.1.6. Closure of Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unboundedness">
+     8.14.1.7. Unboundedness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relative-interior">
+     8.14.1.8. Relative Interior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intersection">
+     8.14.1.9. Intersection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-transformations">
+     8.14.1.10. Linear Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lineality-space">
+   8.14.2. Lineality Space
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#as-a-subspace">
+     8.14.2.1. As a Subspace
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     8.14.2.2. Relative Interior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     8.14.2.3. Intersection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     8.14.2.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decomposition-along-lineality-spaces">
+     8.14.2.5. Decomposition along Lineality Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nested-sequences-of-closed-and-convex-sets">
+   8.14.3. Nested Sequences of Closed and Convex Sets
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nested-sequence-with-linear-inequality-constraints">
+     8.14.3.1. Nested Sequence with Linear Inequality Constraints
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-function-with-quadratic-constraints">
+     8.14.3.2. Quadratic Function with Quadratic Constraints
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closedness-under-linear-transformations">
+   8.14.4. Closedness Under Linear Transformations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-inequality-constraints">
+     8.14.4.1. Linear Inequality Constraints
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-inequality-constraints">
+     8.14.4.2. Quadratic Inequality Constraints
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vector-sum-of-closed-convex-sets">
+     8.14.4.3. Vector Sum of Closed Convex Sets
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convex-functions">
+   8.14.5. Convex Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recession-cones-of-sublevel-sets">
+     8.14.5.1. Recession Cones of Sublevel Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recession-cone-of-a-convex-function">
+     8.14.5.2. Recession Cone of a Convex Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lineality-space-of-a-convex-function">
+     8.14.5.3. Lineality Space of a Convex Function
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="recession-cones">
+<span id="sec-cvx-recession"></span><h1><span class="section-number">8.14. </span>Recession Cones<a class="headerlink" href="#recession-cones" title="Permalink to this headline">¶</a></h1>
+<p>Main references for this section are <span id="id1">[<a class="reference internal" href="../bib.html#id25" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">7</a>]</span>.</p>
+<p>Throughout this section, we assume that <span class="math notranslate nohighlight">\(\VV\)</span> is a finite dimensional
+real vector space. Wherever necessary,
+it is equipped with a
+<a class="reference internal" href="../la/normed_spaces.html#def-la-norm">norm</a> <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>
+or a <a class="reference internal" href="../la/inner_product_spaces.html#def-la-real-inner-product">real inner product</a>
+<span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR\)</span>.
+It is also equipped with a metric <span class="math notranslate nohighlight">\(d(\bx, \by) = \| \bx - \by \|\)</span>.
+The norm in general is not necessarily induced by the inner product
+(if the vector space is indeed endowed with an inner product).</p>
+<div class="proof definition admonition" id="def-cvx-recession-direction">
+<p class="admonition-title"><span class="caption-number">Definition 8.65 </span> (Direction of recession)</p>
+<div class="definition-content section" id="proof-content">
+<p>Given a nonempty convex set <span class="math notranslate nohighlight">\(C\)</span>, we say that a vector <span class="math notranslate nohighlight">\(\by\)</span> is
+in the <em>direction of recession</em> of <span class="math notranslate nohighlight">\(C\)</span> if <span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span>
+for all <span class="math notranslate nohighlight">\(\bx \in C\)</span> and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p>
+<p>In words, starting from any point <span class="math notranslate nohighlight">\(\bx \in C\)</span> and going
+indefinitely along the direction <span class="math notranslate nohighlight">\(\by\)</span>, we always stay inside <span class="math notranslate nohighlight">\(C\)</span>.
+We never cross the relative boundary of <span class="math notranslate nohighlight">\(C\)</span> to a point outside <span class="math notranslate nohighlight">\(C\)</span>.</p>
+</div>
+</div><div class="section" id="recession-cone">
+<h2><span class="section-number">8.14.1. </span>Recession Cone<a class="headerlink" href="#recession-cone" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="res-cvx-recession-dir-set-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 8.176 </span> (Recession cone)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex set.
+The set of all directions of recession for <span class="math notranslate nohighlight">\(C\)</span> is a convex cone.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(R\)</span> be the set of recession directions of <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<ol class="simple">
+<li><p>Note that <span class="math notranslate nohighlight">\(\bx + \alpha \bzero = \bx \in C\)</span> for every <span class="math notranslate nohighlight">\(\bx \in C\)</span> and every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bzero \in R\)</span>.</p></li>
+<li><p>Now assume <span class="math notranslate nohighlight">\(\bu \in R\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv = t \bu\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx + \alpha \bv = \bx + (\alpha t) \bu \in C\)</span>
+since <span class="math notranslate nohighlight">\(\alpha t \geq 0\)</span> and <span class="math notranslate nohighlight">\(\bu\)</span> is a recession direction.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bv\)</span> is also a recession direction.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(R\)</span> is a cone.</p></li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(R\)</span> is in fact a convex cone.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(t_1, t_2 \geq 0\)</span> such that <span class="math notranslate nohighlight">\(t_1 + t_2 = 1\)</span> and let <span class="math notranslate nohighlight">\(\bu, \bv \in R\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bw = t_1 \bu + t_2 \bv\)</span> be a convex combination of <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in C\)</span> and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \bx + \alpha \bw &amp;= (t_1 + t_2) \bx + \alpha (t_1 \bu + t_2 \bv) \\
+   &amp;= t_1(\bx + \alpha \bu) + t_2(\bx + \alpha \bv).
+   \end{split}\]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bu, \bv \in R\)</span>, hence <span class="math notranslate nohighlight">\(\by = \bx + \alpha \bu, \bz = \bx + \alpha \bv \in C\)</span>.</p></li>
+<li><p>But then <span class="math notranslate nohighlight">\(t_1 \by + t_2 \bz\)</span> is a convex combination of <span class="math notranslate nohighlight">\(\by, \bz\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(t_1 \by + t_2 \bz \in C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx + \alpha \bw \in C\)</span> for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span> and every <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bw \in R\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R\)</span> is convex.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(R\)</span> is also a cone, hence <span class="math notranslate nohighlight">\(R\)</span> is a convex cone.</p></li>
+</ol>
+</div>
+<div class="proof definition admonition" id="def-cvx-recession-cone">
+<p class="admonition-title"><span class="caption-number">Definition 8.66 </span> (Recession cone)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex set.
+The set of all directions of recession for <span class="math notranslate nohighlight">\(C\)</span> is called its <em>recession cone</em>
+and is denoted by <span class="math notranslate nohighlight">\(R_C\)</span>.</p>
+</div>
+</div><div class="section" id="linear-subspaces">
+<h3><span class="section-number">8.14.1.1. </span>Linear Subspaces<a class="headerlink" href="#linear-subspaces" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-subspace-recession-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 8.177 </span> (Recession cone of a linear subspace)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real vector space.
+Let <span class="math notranslate nohighlight">\(S\)</span> be a linear subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then <span class="math notranslate nohighlight">\(R_S = S\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that <span class="math notranslate nohighlight">\(S \subseteq R_S\)</span>.</p>
+<ol class="simple">
+<li><p>Pick some <span class="math notranslate nohighlight">\(\by \in S\)</span>.</p></li>
+<li><p>Pick any <span class="math notranslate nohighlight">\(\bx \in S\)</span>.</p></li>
+<li><p>Then for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, <span class="math notranslate nohighlight">\(\bx + \alpha \by \in S\)</span>
+since <span class="math notranslate nohighlight">\(S\)</span> is a subspace and is closed under
+scalar multiplication and vector addition.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in R_S\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(S \subseteq R_S\)</span>.</p></li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(R_S \subseteq S\)</span>.</p>
+<ol class="simple">
+<li><p>Pick some <span class="math notranslate nohighlight">\(\by \in R_S\)</span>.</p></li>
+<li><p>Pick some fixed <span class="math notranslate nohighlight">\(\bx \in S\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\by\)</span> is a recession direction, hence for every <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>,
+<span class="math notranslate nohighlight">\(\bx + \alpha \by \in S\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz = \bx + \alpha \by\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\by = \frac{1}{\alpha}(\bz - \bx)\)</span>.</p></li>
+<li><p>But that means <span class="math notranslate nohighlight">\(\by \in S\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_S \subseteq S\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="affine-subspaces">
+<h3><span class="section-number">8.14.1.2. </span>Affine Subspaces<a class="headerlink" href="#affine-subspaces" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-affine-recession-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 8.178 </span> (Recession cone of an affine subspace)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a real vector space.
+Let <span class="math notranslate nohighlight">\(A\)</span> be an affine subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(S\)</span> be the linear subspace parallel to <span class="math notranslate nohighlight">\(A\)</span>.
+Then <span class="math notranslate nohighlight">\(R_A = S\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\ba \in A\)</span> be some fixed point.
+Then <span class="math notranslate nohighlight">\(S = A - \ba\)</span>.
+We first show that <span class="math notranslate nohighlight">\(S \subseteq R_A\)</span>.</p>
+<ol>
+<li><p>Pick any <span class="math notranslate nohighlight">\(\by \in S\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\by = \bu - \ba\)</span> for some <span class="math notranslate nohighlight">\(\bu \in A\)</span>.</p></li>
+<li><p>Pick some <span class="math notranslate nohighlight">\(\bx \in A\)</span> and let <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \alpha \by = \bx + \alpha (\bu - \ba)
+   = 1 \cdot \bx + \alpha \cdot \bu + (- \alpha) \cdot \ba.
+   \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx + \alpha \by\)</span> is an affine combination of
+<span class="math notranslate nohighlight">\(\bx, \bu, \ba \in A\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx + \alpha \by \in A\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in R_A\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(S \subseteq R_A\)</span>.</p></li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(R_A \subseteq S\)</span>.</p>
+<ol class="simple">
+<li><p>Pick some <span class="math notranslate nohighlight">\(\by \in R_A\)</span>.</p></li>
+<li><p>Pick some fixed <span class="math notranslate nohighlight">\(\bx \in A\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\by\)</span> is a recession direction, hence for every <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>,
+<span class="math notranslate nohighlight">\(\bx + \alpha \by \in A\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz = \bx + \alpha \by - \ba\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bz \in S\)</span>. And <span class="math notranslate nohighlight">\(\bu = \bx - \ba \in S\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bz = \bu + \alpha \by\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by = \frac{1}{\alpha} (\bz - \bu)\)</span>.</p></li>
+<li><p>But that means <span class="math notranslate nohighlight">\(\by \in S\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_A \subseteq S\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="set-negation">
+<h3><span class="section-number">8.14.1.3. </span>Set Negation<a class="headerlink" href="#set-negation" title="Permalink to this headline">¶</a></h3>
+<div class="proof property admonition" id="res-cvx-recession-cone-set-negation">
+<p class="admonition-title"><span class="caption-number">Property 8.38 </span> (Recession cone under set negation)</p>
+<div class="property-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty and convex set.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+R_{-C} = -R_{C}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(D = -C\)</span>. Then <span class="math notranslate nohighlight">\(C = -D\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in R_{D}\)</span>.</p></li>
+<li><p>Then for any <span class="math notranslate nohighlight">\(\bx \in D\)</span> and every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \alpha \by \in D
+   \]</div>
+</li>
+<li><p>Hence for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   (-\bx) + \alpha (-\by) \in C.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in D\)</span>, hence <span class="math notranslate nohighlight">\(-\bx \in C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(-\by \in R_C\)</span>.</p></li>
+<li><p>The argument runs similarly for the converse.</p></li>
+</ol>
+</div>
+<p>The following results describe the properties of
+recession cones for nonempty, closed and convex sets.</p>
+</div>
+<div class="section" id="closedness-of-recession-cone">
+<h3><span class="section-number">8.14.1.4. </span>Closedness of Recession Cone<a class="headerlink" href="#closedness-of-recession-cone" title="Permalink to this headline">¶</a></h3>
+<div class="proof property admonition" id="res-cvx-recession-cone-closedness">
+<p class="admonition-title"><span class="caption-number">Property 8.39 </span> (Closedness of recession cone)</p>
+<div class="property-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty, closed and convex set.
+Then the recession cone <span class="math notranslate nohighlight">\(R_C\)</span> is a closed and convex cone.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We established in <a class="reference internal" href="#res-cvx-recession-dir-set-cone">Theorem 8.176</a> that <span class="math notranslate nohighlight">\(R_C\)</span>
+is a convex cone. We next prove the closedness.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\{ \by_k \}\)</span> be a convergent sequence of <span class="math notranslate nohighlight">\(R_C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by = \lim_{k \to \infty} \by_k\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(\bx \in C\)</span> and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, we have
+<span class="math notranslate nohighlight">\(\bz_k = \bx + \alpha \by_k \in C\)</span> since <span class="math notranslate nohighlight">\(\by_k\)</span> is a recession direction.</p></li>
+<li><p>Now let <span class="math notranslate nohighlight">\(\bz = \lim \bz_k = \bx + \alpha \by\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is closed, hence <span class="math notranslate nohighlight">\(\bz \in C\)</span>.</p></li>
+<li><p>Thus, for any <span class="math notranslate nohighlight">\(\bx \in C\)</span> and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,
+<span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by\)</span> is a recession direction of <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\by \in R_C\)</span>.</p></li>
+<li><p>Thus every convergent sequence of <span class="math notranslate nohighlight">\(R_C\)</span> converges in <span class="math notranslate nohighlight">\(R_C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_C\)</span> is closed.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="recession-directions-for-closed-and-convex-sets">
+<h3><span class="section-number">8.14.1.5. </span>Recession Directions for Closed and Convex Sets<a class="headerlink" href="#recession-directions-for-closed-and-convex-sets" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-recession-dir-charac">
+<p class="admonition-title"><span class="caption-number">Theorem 8.179 </span> (Characterization of recession directions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty, closed and convex set.
+A vector <span class="math notranslate nohighlight">\(\by\)</span> belongs to <span class="math notranslate nohighlight">\(R_C\)</span> if and only if there exists
+a vector <span class="math notranslate nohighlight">\(\bx \in C\)</span> such that <span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span> for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Suppose <span class="math notranslate nohighlight">\(\by \in R_C\)</span>.
+Then by definition, for every <span class="math notranslate nohighlight">\(\bx \in C\)</span> and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,
+<span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span>.</p>
+<p>Now, for the converse, let <span class="math notranslate nohighlight">\(\by \in \VV\)</span> and
+assume that there exists a vector <span class="math notranslate nohighlight">\(\bx \in C\)</span> such that
+for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, <span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span>.
+If <span class="math notranslate nohighlight">\(\by = \bzero\)</span>, then there is nothing to prove as <span class="math notranslate nohighlight">\(\bzero \in R_C\)</span>
+always. Hence, assume that <span class="math notranslate nohighlight">\(\by \neq \bzero\)</span>.
+Let <span class="math notranslate nohighlight">\(\widehat{\bx} \in C\)</span> be arbitrary.
+We shall first show that <span class="math notranslate nohighlight">\(\widehat{\bx} + \by \in C\)</span>.
+We shall do this by building a converging sequence <span class="math notranslate nohighlight">\(\{ \by_k \}\)</span>
+that converges to <span class="math notranslate nohighlight">\(\by\)</span> and showing that for sufficiently
+large <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(\widehat{\bx} + \by_k \in C\)</span>, hence
+<span class="math notranslate nohighlight">\(\{ \widehat{\bx} + \by_k \}\)</span> is a converging sequence of <span class="math notranslate nohighlight">\(C\)</span>
+converging in <span class="math notranslate nohighlight">\(C\)</span> due to closedness of <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<ol>
+<li><p>By hypothesis, <span class="math notranslate nohighlight">\(\bz_k = \bx + k \by \in C\)</span>, where <span class="math notranslate nohighlight">\(k \in \Nat\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\widehat{x} = \bz_k\)</span> for some <span class="math notranslate nohighlight">\(k\)</span>, then
+<span class="math notranslate nohighlight">\(\widehat{\bx} + \by = \bx + (k+1) \by \in C\)</span> and we are done.</p></li>
+<li><p>Let us then consider the case where <span class="math notranslate nohighlight">\(\widehat{\bx} \neq \bz_k\)</span>
+for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+   \by_k = \frac{\bz_k - \widehat{\bx}}{\| \bz_k - \widehat{\bx} \|} \| \by \|.
+   \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \widehat{\bx} + \by_k
+   = \frac{\| \by \|}{\| \bz_k - \widehat{\bx} \|} \bz_k
+   + \frac{\| \bz_k - \widehat{\bx} \| - \| \by \|}{\| \bz_k - \widehat{\bx} \|} \widehat{\bx}.
+   \]</div>
+</li>
+<li><p>We can see that <span class="math notranslate nohighlight">\(\widehat{\bx} + \by_k\)</span> lies on a line that starts
+at <span class="math notranslate nohighlight">\(\widehat{\bx}\)</span> and passes through <span class="math notranslate nohighlight">\(\bz_k\)</span>
+since <span class="math notranslate nohighlight">\(\widehat{\bx} + \by_k\)</span> is an affine combination of
+<span class="math notranslate nohighlight">\(\widehat{\bx}\)</span> and <span class="math notranslate nohighlight">\(\bz_k\)</span>.</p></li>
+<li><p>Also, note that <span class="math notranslate nohighlight">\(\widehat{\bx} + \by_k\)</span> lies between
+<span class="math notranslate nohighlight">\(\widehat{\bx}\)</span> and <span class="math notranslate nohighlight">\(\bz_k\)</span> for all <span class="math notranslate nohighlight">\(k\)</span> for which
+<span class="math notranslate nohighlight">\(\| \bz_k - \widehat{\bx} \| &gt; \| \by \|\)</span>.</p></li>
+<li><p>Hence, there exists <span class="math notranslate nohighlight">\(k_0 \in \Nat\)</span> such that for all <span class="math notranslate nohighlight">\(k &gt; k_0\)</span>,
+<span class="math notranslate nohighlight">\(\widehat{\bx} + \by_k \in C\)</span> due to convexity of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \frac{\by_k}{\| \by \|} 
+   &amp;= \frac{\bz_k - \widehat{\bx}}{\| \bz_k - \widehat{\bx} \|}\\
+   &amp;= \frac{\bz_k - \bx}{\| \bz_k - \widehat{\bx} \|}
+   + \frac{\bx - \widehat{\bx}}{\| \bz_k - \widehat{\bx} \|}\\
+   &amp;=  \frac{\| \bz_k - \bx \|}{\| \bz_k - \widehat{\bx} \|}
+   \frac{\bz_k - \bx}{\| \bz_k - \bx \|}
+   + \frac{\bx - \widehat{\bx}}{\| \bz_k - \widehat{\bx} \|}\\
+   &amp;=  \frac{\| \bz_k - \bx \|}{\| \bz_k - \widehat{\bx} \|}
+   \frac{\by}{\| \by \|}
+   + \frac{\bx - \widehat{\bx}}{\| \bz_k - \widehat{\bx} \|}\\
+   \end{split}\]</div>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\{ \bz_k \}\)</span> is an unbounded sequence.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\| \bz_k - \widehat{\bx} \| \to \infty\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\| \bz_k - \bx \|}{\| \bz_k - \widehat{\bx} \|} \to 1,
+   \quad
+   \frac{\bx - \widehat{\bx}}{\| \bz_k - \widehat{\bx} \|} \to \bzero
+   \]</div>
+<p>as <span class="math notranslate nohighlight">\(k \to \infty\)</span>.</p>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by_k \to \by\)</span> as <span class="math notranslate nohighlight">\(k \to \infty\)</span>.</p></li>
+<li><p>After dropping the first <span class="math notranslate nohighlight">\(k_0\)</span> terms, the sequence
+<span class="math notranslate nohighlight">\(\{\widehat{\bx} + \by_k \}\)</span> is a sequence of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\widehat{\bx} + \by_k \to \widehat{\bx} + \by\)</span> as
+<span class="math notranslate nohighlight">\(k \to \infty\)</span>, hence <span class="math notranslate nohighlight">\(\{\widehat{\bx} + \by_k \}\)</span>
+is a converging sequence of <span class="math notranslate nohighlight">\(C\)</span> (after the first <span class="math notranslate nohighlight">\(k_0\)</span> terms).</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is closed, hence <span class="math notranslate nohighlight">\( \widehat{\bx} + \by \in C\)</span>.</p></li>
+</ol>
+<p>We have established that
+for every <span class="math notranslate nohighlight">\(\widehat{\bx} \in C\)</span>, <span class="math notranslate nohighlight">\(\widehat{\bx} + \by \in C\)</span>.
+We now need to show that <span class="math notranslate nohighlight">\(\widehat{\bx} + \beta \by \in C\)</span>
+for every <span class="math notranslate nohighlight">\(\beta \geq 0\)</span>.</p>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(\beta = 0\)</span> then <span class="math notranslate nohighlight">\(\widehat{\bx} \in C\)</span>.
+Hence assume that <span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>.</p></li>
+<li><p>Consider the vector <span class="math notranslate nohighlight">\(\beta \by\)</span>.</p></li>
+<li><p>For ever <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + \alpha (\beta \by) = \bx + (\alpha \beta) \by \in C.
+   \]</div>
+</li>
+<li><p>Hence due to previous argument, <span class="math notranslate nohighlight">\(\widehat{\bx} + \beta \by \in C\)</span>.</p></li>
+<li><p>This proves that <span class="math notranslate nohighlight">\(\by\)</span> is indeed a recession direction of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="closure-of-set">
+<h3><span class="section-number">8.14.1.6. </span>Closure of Set<a class="headerlink" href="#closure-of-set" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-recession-cone-set-closure">
+<p class="admonition-title"><span class="caption-number">Theorem 8.180 </span> (Recession cone and set closure)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty and convex set.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+R_C \subseteq R_{\closure C}.
+\]</div>
+<p>Also</p>
+<div class="math notranslate nohighlight">
+\[
+\closure R_C \subseteq R_{\closure C}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that <span class="math notranslate nohighlight">\(R_C \subseteq R_{\closure C}\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in R_C\)</span>.</p></li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(\bx \in C\)</span> and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, we have
+<span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C \subseteq \closure C\)</span>, hence we have
+for every <span class="math notranslate nohighlight">\(\bx \in C\)</span> and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,
+<span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is nonempty, there is at least one <span class="math notranslate nohighlight">\(\bx \in \closure C\)</span>
+such that for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, <span class="math notranslate nohighlight">\(\bx + \alpha \by \in \closure C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\closure C\)</span> is a nonempty, closed and convex set,
+hence due to <a class="reference internal" href="#res-cvx-recession-dir-charac">Theorem 8.179</a>,
+<span class="math notranslate nohighlight">\(\by\)</span> is a recession direction of <span class="math notranslate nohighlight">\(\closure C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in R_{\closure C}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_C \subseteq R_{\closure C}\)</span>.</p></li>
+</ol>
+<p>We now show that <span class="math notranslate nohighlight">\(\closure R_C \subseteq R_{\closure C}\)</span>.</p>
+<ol>
+<li><p>By taking closure on both sides of previous inclusion</p>
+<div class="math notranslate nohighlight">
+\[
+   \closure R_C \subseteq \closure R_{\closure C}.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\closure C\)</span> is nonempty, closed and convex.
+Hence due to <a class="reference internal" href="#res-cvx-recession-cone-closedness">Property 8.39</a>,
+<span class="math notranslate nohighlight">\(R_{\closure C}\)</span> is closed.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\closure R_{\closure C} = R_{\closure C}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\closure R_C \subseteq R_{\closure C}\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="unboundedness">
+<h3><span class="section-number">8.14.1.7. </span>Unboundedness<a class="headerlink" href="#unboundedness" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-recession-dir-nz-unbounded">
+<p class="admonition-title"><span class="caption-number">Theorem 8.181 </span> (Unboundedness = Nonzero recession directions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty, closed and convex set.
+Its recession cone <span class="math notranslate nohighlight">\(R_C\)</span> contains a nonzero direction if and only if <span class="math notranslate nohighlight">\(C\)</span> is unbounded.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. It is easy to show that <span class="math notranslate nohighlight">\(C\)</span> must be unbounded to have
+a nonzero recession direction.
+We now show that if <span class="math notranslate nohighlight">\(C\)</span> is unbounded, then <span class="math notranslate nohighlight">\(R_C\)</span>
+does contain a nonzero recession direction.</p>
+<ol>
+<li><p>Assume that <span class="math notranslate nohighlight">\(C\)</span> is unbounded.</p></li>
+<li><p>Pick some <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\{ \bz_k \}\)</span> be an unbounded sequence of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Consider the sequence <span class="math notranslate nohighlight">\(\{ \by_k \}\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[
+   \by_k = \frac{\bz_k - \bx}{\| \bz_k - \bx \|}.
+   \]</div>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\{ \by_k \}\)</span> is a bounded sequence since <span class="math notranslate nohighlight">\(\| \by_k \| = 1\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by\)</span> be a limit point of <span class="math notranslate nohighlight">\(\{ \by_k \}\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\by\)</span> must be a nonzero vector since it is a limit point of
+<span class="math notranslate nohighlight">\(\{ \by_k \}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span> and consider the vector <span class="math notranslate nohighlight">\(\bx + \alpha \by_k\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \bx + \alpha \by_k &amp;= \bx + \alpha  \frac{\bz_k - \bx}{\| \bz_k - \bx \|} \\
+   &amp;=  \frac{\alpha}{\| \bz_k - \bx \|}\bz_k 
+   + \frac{\| \bz_k - \bx \| - \alpha}{\| \bz_k - \bx \|} \bx.
+   \end{split}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\bx + \alpha \by_k\)</span> is an affine combination of <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\bz_k\)</span>.
+Hence it lies on the line starting from <span class="math notranslate nohighlight">\(\bx\)</span> passing through <span class="math notranslate nohighlight">\(\bz_k\)</span>.</p></li>
+<li><p>Also since <span class="math notranslate nohighlight">\(\{ \bz_k \}\)</span> is unbounded, hence there exists
+<span class="math notranslate nohighlight">\(k_0 \in \Nat\)</span> such that for all <span class="math notranslate nohighlight">\(k &gt; k_0\)</span>,
+the inequality <span class="math notranslate nohighlight">\(\| \bz_k - \bx \| &gt; \alpha\)</span> holds true.</p></li>
+<li><p>Hence for all <span class="math notranslate nohighlight">\(k &gt; k_0\)</span>,  the point <span class="math notranslate nohighlight">\(\bx + \alpha \by_k\)</span>
+lies on the line segment between <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\bz_k\)</span>.</p></li>
+<li><p>Due to convexity of <span class="math notranslate nohighlight">\(C\)</span>, for all <span class="math notranslate nohighlight">\(k &gt; k_0\)</span>,
+we have <span class="math notranslate nohighlight">\(\bx + \alpha \by_k \in C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx + \alpha \by\)</span> is a limit point of <span class="math notranslate nohighlight">\(\{ \bx + \alpha \by_k \}\)</span>
+and <span class="math notranslate nohighlight">\(C\)</span> is closed, hence <span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span>.</p></li>
+<li><p>Thus for a given <span class="math notranslate nohighlight">\(\bx \in C\)</span>
+there exists a nonzero <span class="math notranslate nohighlight">\(\by\)</span> such that for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,
+we have <span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvx-recession-dir-charac">Theorem 8.179</a>, <span class="math notranslate nohighlight">\(\by\)</span> must be
+a (nonzero) recession direction of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="res-cvx-recession-cone-bounded">
+<p class="admonition-title"><span class="caption-number">Corollary 8.13 </span> (Boundedness and recession cone)</p>
+<div class="corollary-content section" id="proof-content">
+<p>A nonempty, closed and convex set <span class="math notranslate nohighlight">\(C\)</span> is bounded if and only if <span class="math notranslate nohighlight">\(R_C = \{  \bzero \}\)</span>.</p>
+<p>Recall that in a finite dimensional ambient vector space,
+closed and bounded sets are compact.
+Hence a nonempty, compact and convex set has a zero recession cone.</p>
+</div>
+</div></div>
+<div class="section" id="relative-interior">
+<h3><span class="section-number">8.14.1.8. </span>Relative Interior<a class="headerlink" href="#relative-interior" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-recession-cone-relint">
+<p class="admonition-title"><span class="caption-number">Theorem 8.182 </span> (Recession cone of relative interior)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty, closed and convex set.
+The recession cones of <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\relint C\)</span> are equal.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We need to show that <span class="math notranslate nohighlight">\(R_C = R_{\relint C}\)</span>.
+We first show that <span class="math notranslate nohighlight">\(R_{\relint C} \subseteq R_C\)</span>.</p>
+<ol class="simple">
+<li><p>Recall that since <span class="math notranslate nohighlight">\(C\)</span> is nonempty and convex,
+hence <span class="math notranslate nohighlight">\(\relint C\)</span> is nonempty and convex (<a class="reference internal" href="relint.html#res-cvx-nonempty-relint">Theorem 8.142</a>).</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in R_{\relint C}\)</span>.</p></li>
+<li><p>Pick some <span class="math notranslate nohighlight">\(\bx \in \relint C \subseteq C\)</span>.</p></li>
+<li><p>Then for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,
+we have <span class="math notranslate nohighlight">\(\bx + \alpha \by \in \relint C \subseteq C\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvx-recession-dir-charac">Theorem 8.179</a>, <span class="math notranslate nohighlight">\(\by\)</span> is also
+a recession direction for <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Since this applies for every <span class="math notranslate nohighlight">\(\by \in R_{\relint C}\)</span>,
+hence <span class="math notranslate nohighlight">\(R_{\relint C} \subseteq R_C\)</span>.</p></li>
+</ol>
+<p>For the converse, we proceed as follows.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in R_C\)</span>.</p></li>
+<li><p>Pick some <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span>.</p></li>
+<li><p>Then for any <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, we have <span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span>.</p></li>
+<li><p>Hence by line segment principle (<a class="reference internal" href="relint.html#res-cvx-convex-relint-segment">Theorem 8.143</a>),
+<span class="math notranslate nohighlight">\(\bx + \alpha \by \in \relint C\)</span> for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p>
+<ol class="simple">
+<li><p>We have <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span>.</p></li>
+<li><p>Pick any <span class="math notranslate nohighlight">\(\beta &gt; \alpha\)</span>.</p></li>
+<li><p>We also have <span class="math notranslate nohighlight">\(\bx + \beta \by \in C = \closure C\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx + \alpha \by\)</span> lies on the line segment between <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\bx + \beta \by\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx + \alpha \by \in \relint C\)</span>.</p></li>
+</ol>
+</li>
+<li><p>We have established that for any fixed <span class="math notranslate nohighlight">\(\bx \in \relint C\)</span> and all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>,
+<span class="math notranslate nohighlight">\(\bx + \alpha \by \in \relint C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in R_{\relint C}\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(R_C \subseteq R_{\relint C}\)</span>.</p></li>
+</ol>
+<p>Together we have <span class="math notranslate nohighlight">\(R_C = R_{\relint C}\)</span>.</p>
+</div>
+</div>
+<div class="section" id="intersection">
+<h3><span class="section-number">8.14.1.9. </span>Intersection<a class="headerlink" href="#intersection" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-recession-cone-intersect">
+<p class="admonition-title"><span class="caption-number">Theorem 8.183 </span> (Intersection and recession cones)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> be nonempty, closed and convex sets
+such that <span class="math notranslate nohighlight">\(C \cap D \neq \EmptySet\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+R_{C \cap D} = R_C \cap R_D.
+\]</div>
+<p>More generally, for any collection of closed convex sets <span class="math notranslate nohighlight">\(\{ C_i \}_{i \in I}\)</span>,
+where <span class="math notranslate nohighlight">\(I\)</span> is an arbitrary index set and <span class="math notranslate nohighlight">\(\bigcap_{i \in I} C_i \neq \EmptySet\)</span>,
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+R_{\bigcap_{i \in I} C_i} = \bigcap_{i \in I}R_{C_i}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show it for two nonempty, closed and convex sets <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span>
+with nonempty intersection.</p>
+<ol class="simple">
+<li><p>We can see that <span class="math notranslate nohighlight">\(C \cap D\)</span> is also a nonempty, closed and convex set.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in R_{C \cap D}\)</span>.</p></li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(\bx \in C \cap D\)</span> and all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, we have
+<span class="math notranslate nohighlight">\(\bx + \alpha \by \in C \cap D\)</span>.</p></li>
+<li><p>Hence, by <a class="reference internal" href="#res-cvx-recession-dir-charac">Theorem 8.179</a>, <span class="math notranslate nohighlight">\(\by \in R_C\)</span>
+and <span class="math notranslate nohighlight">\(\by \in R_D\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in R_C \cap R_D\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_{C \cap D} \subseteq R_C \cap R_D\)</span>.</p></li>
+<li><p>Conversely, let <span class="math notranslate nohighlight">\(\by \in R_C \cap R_D\)</span>.</p></li>
+<li><p>Pick any <span class="math notranslate nohighlight">\(\bx \in C \cap D\)</span>.</p></li>
+<li><p>By definition, <span class="math notranslate nohighlight">\(\bx + \alpha \by \in C \cap D\)</span> for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in R_{C \cap D}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_C \cap R_D \subseteq R_{C \cap D}\)</span>.</p></li>
+<li><p>Together we have <span class="math notranslate nohighlight">\(R_{C \cap D} = R_C \cap R_D\)</span>.</p></li>
+</ol>
+<p>It is straightforward to generalize this argument for an arbitrary family of
+nonempty closed and convex sets with a nonempty intersection.</p>
+</div>
+<div class="proof corollary admonition" id="res-cvx-recession-cone-contain">
+<p class="admonition-title"><span class="caption-number">Corollary 8.14 </span> (Recession cones and containment)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> be nonempty, closed and convex sets
+such that <span class="math notranslate nohighlight">\(C \subseteq D\)</span>.
+Then <span class="math notranslate nohighlight">\(R_C \subseteq R_D\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that <span class="math notranslate nohighlight">\(C = C \cap D\)</span>.
+Due to <a class="reference internal" href="#res-cvx-recession-cone-intersect">Theorem 8.183</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+R_C = R_{C \cap D} = R_C \cap R_D.
+\]</div>
+<p>Hence <span class="math notranslate nohighlight">\(R_C \subseteq R_D\)</span>.</p>
+</div>
+</div>
+<div class="section" id="linear-transformations">
+<h3><span class="section-number">8.14.1.10. </span>Linear Transformations<a class="headerlink" href="#linear-transformations" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-recession-cone-lin-op-inverse-image">
+<p class="admonition-title"><span class="caption-number">Theorem 8.184 </span> (Recession cone of inverse image under linear transformation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be real, finite dimensional, normed linear spaces.
+Let <span class="math notranslate nohighlight">\(\bAAA : \VV \to \WW\)</span> be a linear operator.
+Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(D \subseteq \WW\)</span> be a nonempty, compact and convex subset of <span class="math notranslate nohighlight">\(\WW\)</span>.
+Consider the set</p>
+<div class="math notranslate nohighlight">
+\[
+E = \{ \bx \in C \ST \bAAA(\bx)  \in D \}.
+\]</div>
+<p>Assume that <span class="math notranslate nohighlight">\(E\)</span> is nonempty.
+Then, <span class="math notranslate nohighlight">\(E\)</span> is closed and convex and its recession cone is given by</p>
+<div class="math notranslate nohighlight">
+\[
+R_E = R_C \cap (\nullspace \bAAA)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\nullspace \bAAA\)</span> denotes the null space of the linear operator <span class="math notranslate nohighlight">\(\bAAA\)</span>.
+Furthermore, <span class="math notranslate nohighlight">\(E\)</span> is compact if and only if <span class="math notranslate nohighlight">\(R_E = \{ \bzero \}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider the set <span class="math notranslate nohighlight">\(F = \{ \bx \in \VV \ST \bAAA(\bx)  \in D \}\)</span>.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\bAAA\)</span> is a continuous (linear) transformation since both <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span>
+are finite dimensional.</p></li>
+<li><p><span class="math notranslate nohighlight">\(F\)</span> is the inverse image of a closed and convex set <span class="math notranslate nohighlight">\(D\)</span> under <span class="math notranslate nohighlight">\(\bAAA\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(F\)</span> is closed and convex.</p></li>
+<li><p>We further note that <span class="math notranslate nohighlight">\(E = C \cap F\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(E\)</span> is nonempty by hypothesis, hence <span class="math notranslate nohighlight">\(F\)</span> is also nonempty.</p></li>
+<li><p>We can easily show that the recession cone of <span class="math notranslate nohighlight">\(F\)</span>, is <span class="math notranslate nohighlight">\(R_F = \nullspace \bAAA\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in \nullspace \bAAA\)</span>.</p></li>
+<li><p>Pick any fixed <span class="math notranslate nohighlight">\(\bx \in F\)</span> and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bAAA(\bx + \alpha \by) = \bAAA(\bx) \in D\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx + \alpha \by \in F\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in R_F\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\nullspace \bAAA \subseteq R_F\)</span>.</p></li>
+<li><p>Conversely, for contradiction assume that there exists
+<span class="math notranslate nohighlight">\(\by \in R_F\)</span> such that <span class="math notranslate nohighlight">\(\by \notin \nullspace \bAAA\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bz = \bAAA(\by) \neq \bzero\)</span>.</p></li>
+<li><p>We require that for every <span class="math notranslate nohighlight">\(\bx \in F\)</span> and for every <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>,
+we must have</p>
+<div class="math notranslate nohighlight">
+\[
+      \bAAA(\bx + \alpha \by)
+      = \bAAA(\bx) + \alpha \bz \in D.
+      \]</div>
+</li>
+<li><p>However, this can only happen if <span class="math notranslate nohighlight">\(D\)</span> is unbounded.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(D\)</span> is compact, it is bounded, hence we arrive at a contradiction.</p></li>
+<li><p>This establishes that <span class="math notranslate nohighlight">\(R_F = \nullspace \bAAA\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Due to <a class="reference internal" href="#res-cvx-recession-cone-intersect">Theorem 8.183</a>,
+since <span class="math notranslate nohighlight">\(E = C \cap F\)</span> and both <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(F\)</span> are nonempty, closed and convex,
+hence</p>
+<div class="math notranslate nohighlight">
+\[
+   R_E = R_C \cap R_F = R_C \cap (\nullspace \bAAA).
+   \]</div>
+</li>
+</ol>
+<p>Finally, due to <a class="reference internal" href="#res-cvx-recession-cone-bounded">Corollary 8.13</a>,
+<span class="math notranslate nohighlight">\(E\)</span> is compact if and only if <span class="math notranslate nohighlight">\(R_C \cap (\nullspace \bAAA) = \{ \bzero \}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="lineality-space">
+<h2><span class="section-number">8.14.2. </span>Lineality Space<a class="headerlink" href="#lineality-space" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def-cvx-lineality-space">
+<p class="admonition-title"><span class="caption-number">Definition 8.67 </span> (Lineality space)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty and convex set. The <em>lineality space</em>
+of <span class="math notranslate nohighlight">\(C\)</span>, denoted by <span class="math notranslate nohighlight">\(L_C\)</span>, is the set of directions of recession
+<span class="math notranslate nohighlight">\(\by\)</span> whose opposite, <span class="math notranslate nohighlight">\(-\by\)</span>, is also a direction of recession.</p>
+<p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+L_C = R_C \cap (- R_C).
+\]</div>
+</div>
+</div><p>As a consequence of this definition, if <span class="math notranslate nohighlight">\(\by \in L_C\)</span>, then
+<span class="math notranslate nohighlight">\(\bx + \alpha \by \in C\)</span> for every <span class="math notranslate nohighlight">\(\alpha \in \RR\)</span>.
+In other words, the whole line in the direction of <span class="math notranslate nohighlight">\(\by\)</span>
+with <span class="math notranslate nohighlight">\(\bx\)</span> as one of its points belongs to <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<div class="section" id="as-a-subspace">
+<h3><span class="section-number">8.14.2.1. </span>As a Subspace<a class="headerlink" href="#as-a-subspace" title="Permalink to this headline">¶</a></h3>
+<p>For nonempty, closed and convex sets, their lineality space
+is a subspace of the ambient vector space.</p>
+<div class="proof theorem admonition" id="res-cvx-lineality-subspace-closed-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 8.185 </span> (Lineality space as a subspace)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dim real normed linear space.
+Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then the lineality space of <span class="math notranslate nohighlight">\(C\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\by_1, \by_2 \in L_C\)</span> and <span class="math notranslate nohighlight">\(\alpha_1, \alpha_2 \in \RR\)</span> be nonzero scalars.</p>
+<ol>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \alpha_1 \by_1 + \alpha_2 \by_2
+   = |\alpha_1 | (\sgn(\alpha_1)) \by_1 + |\alpha_2 |  (\sgn(\alpha_2)) \by_2.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(c = |\alpha_1 | + |\alpha_2 |\)</span> and
+define <span class="math notranslate nohighlight">\(t = \frac{ |\alpha_1 |}{|\alpha_1 | + |\alpha_2 |} = \frac{|\alpha_1 |}{c}\)</span>.</p></li>
+<li><p>We note that <span class="math notranslate nohighlight">\(\frac{|\alpha_2 |}{c} = 1 - t\)</span>.</p></li>
+<li><p>Also define <span class="math notranslate nohighlight">\(\bz_1 = (\sgn(\alpha_1)) \by_1\)</span> and <span class="math notranslate nohighlight">\(\bz_2 = (\sgn(\alpha_2)) \by_2\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \alpha_1 \by_1 + \alpha_2 \by_2
+   &amp;= |\alpha_1 | (\sgn(\alpha_1)) \by_1 + |\alpha_2 |  (\sgn(\alpha_2)) \by_2 \\
+   &amp;= |\alpha_1 | \bz_1 + |\alpha_2 |  \bz_2 \\ 
+   &amp;=  (|\alpha_1 | + |\alpha_2 |) (t \bz_1 + (1-t) \bz_2) \\ 
+   &amp;= c ( t \bz_1 + (1- t) \bz_2).
+   \end{split}\]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(R_C\)</span> is a convex cone, hence <span class="math notranslate nohighlight">\(L_C\)</span> is also a convex cone.</p></li>
+<li><p>We can see that <span class="math notranslate nohighlight">\(\bz_1\)</span> and <span class="math notranslate nohighlight">\(\bz_2\)</span> in <span class="math notranslate nohighlight">\(L_C\)</span> because
+<span class="math notranslate nohighlight">\(\bz_i\)</span> is either equal to <span class="math notranslate nohighlight">\(\by_i\)</span> or equal to <span class="math notranslate nohighlight">\(-\by_i\)</span>.</p></li>
+<li><p>By convexity of <span class="math notranslate nohighlight">\(L_C\)</span>, <span class="math notranslate nohighlight">\(\bz = t \bz_1 + (1- t) \bz_2 \in L_C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(L_C\)</span> is a cone, hence <span class="math notranslate nohighlight">\(c \bz \in L_C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\alpha_1 \by_1 + \alpha_2 \by_2  \in L_C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(L_C\)</span> is closed under linear combinations.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(L_C\)</span> is indeed a linear subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="id2">
+<h3><span class="section-number">8.14.2.2. </span>Relative Interior<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-lineality-space-relint">
+<p class="admonition-title"><span class="caption-number">Theorem 8.186 </span> (Lineality space of relative interior)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty, closed and convex set.
+The lineality spaces of <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\relint C\)</span> are equal.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have</p>
+<div class="math notranslate nohighlight">
+\[
+L_{\relint C} = R_{\relint C} \cap (- R_{\relint C}) 
+= R_C \cap (- R_C) = L_C.
+\]</div>
+<p>We used <a class="reference internal" href="#res-cvx-recession-cone-relint">Theorem 8.182</a>.</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h3><span class="section-number">8.14.2.3. </span>Intersection<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-lineality-space-intersect">
+<p class="admonition-title"><span class="caption-number">Theorem 8.187 </span> (Intersection and lineality spaces)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> be nonempty, closed and convex sets
+such that <span class="math notranslate nohighlight">\(C \cap D \neq \EmptySet\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+L_{C \cap D} = L_C \cap L_D.
+\]</div>
+<p>More generally, for any collection of closed convex sets <span class="math notranslate nohighlight">\(\{ C_i \}_{i \in I}\)</span>,
+where <span class="math notranslate nohighlight">\(I\)</span> is an arbitrary index set and <span class="math notranslate nohighlight">\(\bigcap_{i \in I} C_i \neq \EmptySet\)</span>,
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+L_{\bigcap_{i \in I} C_i} = \bigcap_{i \in I}L_{C_i}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L_{\bigcap_{i \in I} C_i} 
+&amp;= R_{\bigcap_{i \in I} C_i} \bigcap (- R_{\bigcap_{i \in I} C_i}) \\
+&amp;= (\bigcap_{i \in I}R_{C_i}) \bigcap (- \bigcap_{i \in I}R_{C_i}) \\
+&amp;= \bigcap_{i \in I} (R_{C_i} \cap (-R_{C_i})) \\
+&amp;= \bigcap_{i \in I} L_{C_i}.
+\end{split}\]</div>
+<p>We made use of <a class="reference internal" href="#res-cvx-recession-cone-intersect">Theorem 8.183</a>.</p>
+</div>
+<div class="proof corollary admonition" id="res-cvx-lineality-space-contain">
+<p class="admonition-title"><span class="caption-number">Corollary 8.15 </span> (Lineality spaces and containment)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> be nonempty, closed and convex sets
+such that <span class="math notranslate nohighlight">\(C \subseteq D\)</span>.
+Then <span class="math notranslate nohighlight">\(L_C \subseteq L_D\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that <span class="math notranslate nohighlight">\(C = C \cap D\)</span>.
+Due to <a class="reference internal" href="#res-cvx-lineality-space-intersect">Theorem 8.187</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+L_C = L_{C \cap D} = L_C \cap L_D.
+\]</div>
+<p>Hence <span class="math notranslate nohighlight">\(L_C \subseteq L_D\)</span>.</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h3><span class="section-number">8.14.2.4. </span>Linear Transformations<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-lineality-space-lin-op-inverse-image">
+<p class="admonition-title"><span class="caption-number">Theorem 8.188 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be real, finite dimensional, normed linear spaces.
+Let <span class="math notranslate nohighlight">\(\bAAA : \VV \to \WW\)</span> be a linear operator.
+Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(D \subseteq \WW\)</span> be a nonempty, compact and convex subset of <span class="math notranslate nohighlight">\(\WW\)</span>.
+Consider the set</p>
+<div class="math notranslate nohighlight">
+\[
+E = \{ \bx \in C \ST \bAAA(\bx)  \in D \}.
+\]</div>
+<p>Assume that <span class="math notranslate nohighlight">\(E\)</span> is nonempty.
+Then, <span class="math notranslate nohighlight">\(E\)</span> is closed and convex and its lineality space is given by</p>
+<div class="math notranslate nohighlight">
+\[
+L_E = L_C \cap (\nullspace \bAAA)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\nullspace \bAAA\)</span> denotes the null space of the linear operator <span class="math notranslate nohighlight">\(\bAAA\)</span>.
+Furthermore, <span class="math notranslate nohighlight">\(E\)</span> is compact if and only if <span class="math notranslate nohighlight">\(R_E = \{ \bzero \}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L_E 
+&amp;= R_E \cap (-R_E) \\
+&amp;= (R_C \cap (\nullspace \bAAA)) \cap (- (R_C \cap (\nullspace \bAAA))) \\
+&amp;= (R_C \cap (\nullspace \bAAA)) \cap ((- R_C) \cap (\nullspace \bAAA))) \\
+&amp;= (R_C \cap (- R_C)) \cap (\nullspace \bAAA)\\
+&amp;= L_C \cap (\nullspace \bAAA).
+\end{split}\]</div>
+<p>We used <a class="reference internal" href="#res-cvx-recession-cone-lin-op-inverse-image">Theorem 8.184</a>.</p>
+</div>
+</div>
+<div class="section" id="decomposition-along-lineality-spaces">
+<h3><span class="section-number">8.14.2.5. </span>Decomposition along Lineality Spaces<a class="headerlink" href="#decomposition-along-lineality-spaces" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-lineality-decomposition-subspace">
+<p class="admonition-title"><span class="caption-number">Theorem 8.189 </span> (Decomposition of a convex set along subspaces of its lineality space)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dim real vector space.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(L_C\)</span> be its lineality space.
+Then for every linear subspace <span class="math notranslate nohighlight">\(S \subseteq L_C\)</span>,
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+C = S + (C \cap S^{\perp}).
+\]</div>
+</div>
+</div><p>Note that since <span class="math notranslate nohighlight">\(C\)</span> is not required to be closed, hence
+<span class="math notranslate nohighlight">\(L_C\)</span> itself may not be a linear subspace.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional, hence it supports
+an orthogonal decomposition (<a class="reference internal" href="../la/inner_product_spaces.html#res-la-vs-direct-sum-orth-comp">Theorem 4.88</a>)</p>
+<div class="math notranslate nohighlight">
+\[
+\VV = S + S^{\perp}.
+\]</div>
+<p>We first show that <span class="math notranslate nohighlight">\(C \subseteq S + C \cap S^{\perp}\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx = \by + \bz\)</span> where <span class="math notranslate nohighlight">\(\by \in S\)</span> and <span class="math notranslate nohighlight">\(\bz \in S^{\perp}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\by \in S \subseteq L_C\)</span>, hence <span class="math notranslate nohighlight">\(\by\)</span> is
+a recession direction of <span class="math notranslate nohighlight">\(C\)</span> and so is <span class="math notranslate nohighlight">\(-\by\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bz = \bx - \by \in C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bz \in C \cap S^{\perp}\)</span>.</p></li>
+<li><p>Thus for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>, we have <span class="math notranslate nohighlight">\(\bx = \by + \bz\)</span>
+such that <span class="math notranslate nohighlight">\(\by \in S\)</span> and <span class="math notranslate nohighlight">\(\bz \in C \cap S^{\perp}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(C \subseteq S + C \cap S^{\perp}\)</span>.</p></li>
+</ol>
+<p>We now show the converse <span class="math notranslate nohighlight">\(S + C \cap S^{\perp} \subseteq C\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in S + C \cap S^{\perp}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx  = \by + \bz\)</span> such that <span class="math notranslate nohighlight">\(\by \in S\)</span>
+and <span class="math notranslate nohighlight">\(\bz \in C \cap S^{\perp}\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bz \in C\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(S \subseteq L_C\)</span>, hence <span class="math notranslate nohighlight">\(\by\)</span> is a recession direction
+for <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bz + \by = \bx \in C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(S + C \cap S^{\perp} \subseteq C\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="nested-sequences-of-closed-and-convex-sets">
+<h2><span class="section-number">8.14.3. </span>Nested Sequences of Closed and Convex Sets<a class="headerlink" href="#nested-sequences-of-closed-and-convex-sets" title="Permalink to this headline">¶</a></h2>
+<p>Recall from <a class="reference internal" href="../metric_spaces/compact.html#res-ms-nested-seq-compact-nonempty-intersection">Theorem 3.77</a>
+that the intersection of a nested sequence
+of nonempty compact sets is nonempty and compact.</p>
+<p>In this subsection, we consider a nested sequence
+<span class="math notranslate nohighlight">\(\{ C_k \}\)</span> of nonempty, closed and convex sets.
+We derive a number of conditions under which
+their intersection <span class="math notranslate nohighlight">\(\bigcap_{k=1}^{\infty}C_k\)</span>
+is nonempty.</p>
+<p>A very good example of a nested sequence of
+closed and convex sets is a sequence of
+sublevel sets of a closed and convex function.</p>
+<div class="proof theorem admonition" id="res-cvx-recession-nested-nonempty-intersect-gen-cond">
+<p class="admonition-title"><span class="caption-number">Theorem 8.190 </span> (General condition for nonempty intersection)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dim real vector space.
+Let <span class="math notranslate nohighlight">\(\{ C_k \}\)</span> be a sequence of nonempty, closed and convex subsets
+of <span class="math notranslate nohighlight">\(\VV\)</span>
+such that <span class="math notranslate nohighlight">\(C_{k + 1} \subseteq C_k\)</span> for all <span class="math notranslate nohighlight">\(k \in \Nat\)</span>.
+Let <span class="math notranslate nohighlight">\(R_k\)</span> and <span class="math notranslate nohighlight">\(L_k\)</span> be the recession cone
+and lineality space of <span class="math notranslate nohighlight">\(C_k\)</span> respectively for every <span class="math notranslate nohighlight">\(k \in \Nat\)</span>.
+Further, let</p>
+<div class="math notranslate nohighlight">
+\[
+R = \bigcap_{k=1}^{\infty} R_k
+\text{ and }
+L = \bigcap_{k=1}^{\infty} L_k.
+\]</div>
+<p>Assume that <span class="math notranslate nohighlight">\(R = L\)</span>.
+Then the intersection <span class="math notranslate nohighlight">\(C = \bigcap_{k=1}^{\infty} C_k\)</span>
+is nonempty and has the form</p>
+<div class="math notranslate nohighlight">
+\[
+C = \bigcap_{k=1}^{\infty} C_k = L + \tilde{C}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{C}\)</span> is some nonempty and compact set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note some properties of the sequences <span class="math notranslate nohighlight">\(\{ R_k \}\)</span>
+and <span class="math notranslate nohighlight">\(\{ L_k \}\)</span>.</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(C_k\)</span> are nested, hence the recession cones
+<span class="math notranslate nohighlight">\(R_k\)</span> are also nested (<a class="reference internal" href="#res-cvx-recession-cone-contain">Corollary 8.14</a>).</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C_k\)</span> are nested, hence the lineality spaces
+<span class="math notranslate nohighlight">\(L_k\)</span> are also nested (<a class="reference internal" href="#res-cvx-lineality-space-contain">Corollary 8.15</a>).</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C_k\)</span> are nonempty closed and convex, hence
+<span class="math notranslate nohighlight">\(L_k\)</span> are linear subspaces
+due to <a class="reference internal" href="#res-cvx-lineality-subspace-closed-convex">Theorem 8.185</a>.</p></li>
+</ol>
+<p>We first show that <span class="math notranslate nohighlight">\(L\)</span> is a linear subspace and
+for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(L_k = L\)</span>.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(L_k\)</span> are nested subspaces,
+hence <span class="math notranslate nohighlight">\(\dim L_{k+1} \leq \dim L_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(L \neq \EmptySet\)</span> since <span class="math notranslate nohighlight">\(\bzero \in L_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.
+Hence <span class="math notranslate nohighlight">\(\bzero \in L\)</span>.</p></li>
+<li><p>We can also see that <span class="math notranslate nohighlight">\(L\)</span> must be a linear subspace of <span class="math notranslate nohighlight">\(\VV\)</span>
+since it is an (infinite) intersection of linear subspaces.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional, it follows that
+for all <span class="math notranslate nohighlight">\(k\)</span> sufficiently large, we have <span class="math notranslate nohighlight">\(L_k = L\)</span>.
+In other words, there exists <span class="math notranslate nohighlight">\(k_0 \in \Nat\)</span> such that
+for all <span class="math notranslate nohighlight">\(k &gt; k_0\)</span>, <span class="math notranslate nohighlight">\(L_k = L\)</span>.</p></li>
+<li><p>Without loss of generality, assume that</p>
+<div class="math notranslate nohighlight">
+\[
+   L_k = L, \Forall k.
+   \]</div>
+<p>We can achieve this by dropping the first <span class="math notranslate nohighlight">\(k_0\)</span> terms
+from the sequence <span class="math notranslate nohighlight">\(\{ C_k \}\)</span> for which
+<span class="math notranslate nohighlight">\(L\)</span> is a proper subset of <span class="math notranslate nohighlight">\(L_k\)</span>.</p>
+</li>
+</ol>
+<p>We next show that for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span>,
+we have <span class="math notranslate nohighlight">\(R_k \cap L^{\perp} = \{ \bzero \}\)</span>.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(\bzero \in R_k\)</span> for every <span class="math notranslate nohighlight">\(R_k\)</span> and
+<span class="math notranslate nohighlight">\(L\)</span> is a linear subspace, hence
+<span class="math notranslate nohighlight">\(\bzero \in R_k \cap L^{\perp}\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>For contradiction, assume that it is not true
+that there exists <span class="math notranslate nohighlight">\(k_0 \in \Nat\)</span> such that
+for every <span class="math notranslate nohighlight">\(k &gt; k_0\)</span>,
+<span class="math notranslate nohighlight">\(R_k \cap L^{\perp} = \{ \bzero \}\)</span>.</p></li>
+<li><p>Then, since <span class="math notranslate nohighlight">\(R_k\)</span> are nested,
+hence for each <span class="math notranslate nohighlight">\(k\)</span> there exists <span class="math notranslate nohighlight">\(\by_k \in R_k \cap L^{\perp}\)</span>
+with <span class="math notranslate nohighlight">\(\| \by_k \| = 1\)</span>.</p>
+<ol class="simple">
+<li><p>Consider some <span class="math notranslate nohighlight">\(k \in \Nat\)</span>.</p></li>
+<li><p>There exists some <span class="math notranslate nohighlight">\(l &gt; k\)</span> such that
+<span class="math notranslate nohighlight">\(R_l \cap L^{\perp} \neq \{ \bzero \}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(R_l \cap L^{\perp}\)</span> contains a nonzero vector <span class="math notranslate nohighlight">\(\bu\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(R_l\)</span> is a cone, hence <span class="math notranslate nohighlight">\(\bu\)</span> can be scaled
+to some <span class="math notranslate nohighlight">\(\bv\)</span> so that <span class="math notranslate nohighlight">\(\| \bv \| = 1\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(L^{\perp}\)</span> is a linear subspace, hence <span class="math notranslate nohighlight">\(\bv \in L^{\perp}\)</span>
+also.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bv \in R_l \cap L^{\perp}\)</span>.</p></li>
+<li><p>But since <span class="math notranslate nohighlight">\(R_l \subseteq R_k\)</span>, hence
+<span class="math notranslate nohighlight">\(\bv \in R_k \cap L^{\perp}\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Now consider the set <span class="math notranslate nohighlight">\(D = \{\by \ST \| \by \| = 1 \}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(E_k = D \cap R_k \cap L^{\perp}\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(E_k\)</span> is nonempty for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>We note that <span class="math notranslate nohighlight">\(E_k\)</span> is also compact.</p>
+<ol class="simple">
+<li><p>The set <span class="math notranslate nohighlight">\(D\)</span> is closed and bounded.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_k\)</span> is closed for every <span class="math notranslate nohighlight">\(k\)</span>
+(<a class="reference internal" href="#res-cvx-recession-cone-closedness">Property 8.39</a>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(L^{\perp}\)</span> is a subspace of a finite dimensional space,
+hence it is closed.</p></li>
+<li><p><span class="math notranslate nohighlight">\(E_k\)</span> is an intersection of
+closed sets, hence it is closed.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(D\)</span> is bounded, hence <span class="math notranslate nohighlight">\(E_k \subseteq D\)</span>
+is also bounded.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(E_k\)</span> is closed and bounded,
+hence it is compact as <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional.</p></li>
+</ol>
+</li>
+<li><p>Then <span class="math notranslate nohighlight">\(\{ E_k \}\)</span> is a sequence of nested compact sets
+since <span class="math notranslate nohighlight">\(E_{k + 1} \subseteq E_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(E = \bigcap_{k=1}^{\infty} E_k\)</span> is nonempty
+(<a class="reference internal" href="../metric_spaces/compact.html#res-ms-nested-seq-compact-nonempty-intersection">Theorem 3.77</a>).</p></li>
+<li><p>But expanding <span class="math notranslate nohighlight">\(E\)</span> we see that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   E &amp;= \bigcap_{k=1}^{\infty} E_k \\
+   &amp;= \bigcap_{k=1}^{\infty} (D \cap R_k \cap L^{\perp}) \\
+   &amp;= D \cap L^{\perp} \cap \left (\bigcap_{k=1}^{\infty} R_k \right ) \\
+   &amp;= D \cap L^{\perp} \cap R \\
+   &amp;= D \cap L^{\perp} \cap L \\
+   &amp;= D \cap \{ \bzero \} \\
+   &amp;= \EmptySet.
+   \end{split}\]</div>
+<p>We used the facts that</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(R = \bigcap_{k=1}^{\infty} R_k\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(L = R\)</span> by hypothesis.</p></li>
+<li><p><span class="math notranslate nohighlight">\(L^{\perp} \cap L = \{ \bzero \}\)</span> since they are orthogonal
+complements.</p></li>
+<li><p>All members of <span class="math notranslate nohighlight">\(D\)</span> are nonzero since they are unit norm.</p></li>
+</ol>
+</li>
+<li><p>We have arrived at a contradiction that <span class="math notranslate nohighlight">\(E\)</span> must be an empty set.</p></li>
+<li><p>Hence, we conclude that  <span class="math notranslate nohighlight">\(R_k \cap L^{\perp} = \{ \bzero \}\)</span>
+holds true for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Again without loss of generality, we shall assume that</p>
+<div class="math notranslate nohighlight">
+\[
+   R_k \cap L^{\perp} = \{ \bzero \}, \quad \Forall k \in \Nat.
+   \]</div>
+</li>
+</ol>
+<p>We have established so far that
+<span class="math notranslate nohighlight">\(L\)</span> is a linear subspace,
+<span class="math notranslate nohighlight">\(L_k = L\)</span> and <span class="math notranslate nohighlight">\(R_k \cap L^{\perp} = \{ \bzero \}\)</span>
+for all <span class="math notranslate nohighlight">\(k\)</span> without loss of generality.
+We shall now show that <span class="math notranslate nohighlight">\(C =\bigcap_{k=1}^{\infty} C_k\)</span> is nonempty.</p>
+<ol>
+<li><p>Note that <span class="math notranslate nohighlight">\(C_k \cap L^{\perp}\)</span> is not empty.</p>
+<ol class="simple">
+<li><p>We have <span class="math notranslate nohighlight">\(\VV = L \oplus L^{\perp}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in C_k\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx = \by + \bz\)</span> where <span class="math notranslate nohighlight">\(\by \in L\)</span> and <span class="math notranslate nohighlight">\(\bz \in L^{\perp}\)</span>.</p></li>
+<li><p>But then <span class="math notranslate nohighlight">\(\by \in L_k\)</span> since <span class="math notranslate nohighlight">\(L \subseteq L_k\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\by\)</span> and <span class="math notranslate nohighlight">\(-\by\)</span> are recession directions of <span class="math notranslate nohighlight">\(C_k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bz = \bx - \by \in C_k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bz \in C_k \cap L^{\perp}\)</span>.</p></li>
+</ol>
+</li>
+<li><p>By <a class="reference internal" href="#res-cvx-recession-cone-intersect">Theorem 8.183</a>, the recession cone
+of <span class="math notranslate nohighlight">\(C_k \cap L^{\perp}\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   R_{C_k \cap L^{\perp}} = R_k \cap R_{L^{\perp}}.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(L^{\perp}\)</span> is a linear subspace of <span class="math notranslate nohighlight">\(\VV\)</span>, hence
+due to <a class="reference internal" href="#res-cvx-subspace-recession-cone">Theorem 8.177</a>,
+<span class="math notranslate nohighlight">\(R_{L^{\perp}} = L^{\perp}\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+    R_{C_k \cap L^{\perp}} = R_k \cap L^{\perp} = \{ \bzero \}.
+   \]</div>
+</li>
+<li><p>Then due to <a class="reference internal" href="#res-cvx-recession-dir-nz-unbounded">Theorem 8.181</a>,
+<span class="math notranslate nohighlight">\(C_k \cap L^{\perp}\)</span> is bounded for ever <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C_k\)</span> is closed and <span class="math notranslate nohighlight">\(L^{\perp}\)</span> is closed, hence
+<span class="math notranslate nohighlight">\(C_k \cap L^{\perp}\)</span> is also closed for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(C_k \cap L^{\perp}\)</span> is a compact set for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\{ C_k \}\)</span> are nested, hence
+<span class="math notranslate nohighlight">\(\{ C_k \cap L^{\perp} \}\)</span> are also a nested sequence
+of compact sets.</p></li>
+<li><p>Then their intersection is nonempty and compact. In other words,
+the set</p>
+<div class="math notranslate nohighlight">
+\[
+   \tilde{C} = \bigcap_{k=1}^{\infty}
+   \left (C_k \cap L^{\perp} \right )
+   = \left ( \bigcap_{k=1}^{\infty} C_k \right ) \cap L^{\perp}
+   = C \cap L^{\perp}
+   \]</div>
+<p>is nonempty and compact.</p>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(C\)</span> is also nonempty.</p></li>
+<li><p>Hence, due to <a class="reference internal" href="#res-cvx-lineality-space-intersect">Theorem 8.187</a>,
+the lineality space of <span class="math notranslate nohighlight">\(C = \bigcap_{k=1}^{\infty} C_k\)</span>
+is given by <span class="math notranslate nohighlight">\(L = \bigcap_{k=1}^{\infty} L_k\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-cvx-lineality-decomposition-subspace">Theorem 8.189</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   C = L + (C \cap L^{\perp})
+   = L + \tilde{C}.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="res-cvx-rec-nested-compact-intersect">
+<p class="admonition-title"><span class="caption-number">Corollary 8.16 </span> (Compactness of the nested intersection)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Under the assumptions of
+<a class="reference internal" href="#res-cvx-recession-nested-nonempty-intersect-gen-cond">Theorem 8.190</a>,
+if <span class="math notranslate nohighlight">\(R = \bigcap_{k=1}^{\infty} R_k = \{ \bzero \}\)</span>,
+then the intersection
+<span class="math notranslate nohighlight">\(C = \bigcap_{k=1}^{\infty} C_k\)</span> is nonempty and compact.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(L = R = \{ \bzero \}\)</span>, hence
+<span class="math notranslate nohighlight">\(C = L + \tilde{C} = \tilde{C}\)</span>.
+We have already established that <span class="math notranslate nohighlight">\(\tilde{C}\)</span>
+is both nonempty and compact.</p>
+</div>
+<div class="section" id="nested-sequence-with-linear-inequality-constraints">
+<h3><span class="section-number">8.14.3.1. </span>Nested Sequence with Linear Inequality Constraints<a class="headerlink" href="#nested-sequence-with-linear-inequality-constraints" title="Permalink to this headline">¶</a></h3>
+<p>Consider the problem of minimizing a closed and convex
+function under linear inequality constraints.</p>
+<ol class="simple">
+<li><p>The sublevel sets form a nested sequence of
+closed and convex sets.</p></li>
+<li><p>The solution set of a set of linear inequality
+constraints is another convex set
+(an intersection of closed half spaces).</p></li>
+</ol>
+<div class="proof theorem admonition" id="res-cvx-rec-nested-seq-closed-inequality-constraints">
+<p class="admonition-title"><span class="caption-number">Theorem 8.191 </span> (Nested sequence with inequality constraints)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a Euclidean space.
+Let <span class="math notranslate nohighlight">\(\{ C_k \}\)</span> be a sequence of nonempty, closed and convex
+subsets of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(R_k\)</span> and <span class="math notranslate nohighlight">\(L_k\)</span> be the recession cone
+and lineality space of <span class="math notranslate nohighlight">\(C_k\)</span> respectively for every <span class="math notranslate nohighlight">\(k \in \Nat\)</span>.
+Further, let</p>
+<div class="math notranslate nohighlight">
+\[
+R = \bigcap_{k=1}^{\infty} R_k
+\text{ and }
+L = \bigcap_{k=1}^{\infty} L_k
+\text{ and }
+C = \bigcap_{k=1}^{\infty} C_k
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a subset of <span class="math notranslate nohighlight">\(\VV\)</span> specified by
+linear inequality constraints; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+X = \{ \bx \in \VV \ST \langle \bx, \ba_i \rangle \leq b_i, i=1,\dots,r \}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ba_i \in \VV\)</span> and <span class="math notranslate nohighlight">\(b_i \in \RR\)</span>.
+Further assume that</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_{k+1} \subseteq C_k\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>The intersection <span class="math notranslate nohighlight">\(X \cap C_k\)</span> is nonempty for all <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(R_X \cap R \subseteq L\)</span>
+where <span class="math notranslate nohighlight">\(R_X\)</span> is the recession cone of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+</ol>
+<p>Then the intersection <span class="math notranslate nohighlight">\(X \cap C\)</span> is nonempty.</p>
+</div>
+</div></div>
+<div class="section" id="quadratic-function-with-quadratic-constraints">
+<h3><span class="section-number">8.14.3.2. </span>Quadratic Function with Quadratic Constraints<a class="headerlink" href="#quadratic-function-with-quadratic-constraints" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-recession-quad-func-quad-constraints">
+<p class="admonition-title"><span class="caption-number">Theorem 8.192 </span> (Quadratic function with quadratic constraints)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{ C_k \}\)</span> be a sequence of subsets of <span class="math notranslate nohighlight">\(\RR^n\)</span>
+given by</p>
+<div class="math notranslate nohighlight">
+\[
+C_k = \{ \bx \ST \bx^T \bQ \bx + \ba^T \bx + b \leq w_k \}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bQ \in \SS^n_+\)</span> is a symmetric positive semidefinite
+matrix, <span class="math notranslate nohighlight">\(\ba \in \RR^n\)</span> is a vector, <span class="math notranslate nohighlight">\(b  \in \RR\)</span> is a scalar,
+and <span class="math notranslate nohighlight">\(\{ w_k \}\)</span> is a nonincreasing sequence of scalars
+that converges to <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>Also, let <span class="math notranslate nohighlight">\(X\)</span> be a subset of <span class="math notranslate nohighlight">\(\RR^n\)</span> of the form</p>
+<div class="math notranslate nohighlight">
+\[
+X = \{ \bx \in \RR^n \ST 
+\bx^T \bQ_j \bx + \ba^T_j \bx + b_j \leq 0, j=1,\dots, r \}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bQ_j \in \SS^n_+\)</span>, <span class="math notranslate nohighlight">\(\ba_j \in \RR^n\)</span>
+and <span class="math notranslate nohighlight">\(b_j \in \RR\)</span>.</p>
+<p>Assume further that <span class="math notranslate nohighlight">\(X \cap C_k \neq \EmptySet\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>.
+Then, the intersection
+<span class="math notranslate nohighlight">\(X \cap (\bigcap_{k=1}^{\infty} C_k)\)</span> is nonempty.</p>
+</div>
+</div><p>Note that <span class="math notranslate nohighlight">\(\bx^T \bQ \bx + \ba^T \bx + b\)</span>
+is a quadratic function and <span class="math notranslate nohighlight">\(C_k\)</span> are its sublevel sets.</p>
+</div>
+</div>
+<div class="section" id="closedness-under-linear-transformations">
+<h2><span class="section-number">8.14.4. </span>Closedness Under Linear Transformations<a class="headerlink" href="#closedness-under-linear-transformations" title="Permalink to this headline">¶</a></h2>
+<p>We address the question of guarantees under which
+the image of a closed and convex set under a linear
+transformation is also closed from the perspective
+of recession cones.</p>
+<p>If a set <span class="math notranslate nohighlight">\(C\)</span> is closed and bounded, then it is
+compact in a finite dimensional space, the
+linear operator is continuous in a finite
+dimensional space, hence the image of <span class="math notranslate nohighlight">\(C\)</span>
+is also compact.
+The results in this section are relevant for
+closed and convex sets which are not bounded.</p>
+<div class="proof theorem admonition" id="res-cvx-closed-im-lin-op-closed">
+<p class="admonition-title"><span class="caption-number">Theorem 8.193 </span> (Closedness of image under linear transformation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be real, finite dimensional, normed linear spaces.
+Let <span class="math notranslate nohighlight">\(\bAAA : \VV \to \WW\)</span> be a linear operator.
+Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let the nullspace of <span class="math notranslate nohighlight">\(\bAAA\)</span> be denoted by <span class="math notranslate nohighlight">\(\nullspace \bAAA\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(R_C \cap \nullspace \bAAA \subseteq L_C\)</span>, then
+the set <span class="math notranslate nohighlight">\(\bAAA(C)\)</span> is closed.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We shall show that every converging sequence of <span class="math notranslate nohighlight">\(D = \bAAA(C)\)</span>
+converges in <span class="math notranslate nohighlight">\(D\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\{ \by_k \}\)</span> be a sequence of points in <span class="math notranslate nohighlight">\(D\)</span>
+converging to some point <span class="math notranslate nohighlight">\(\by \in \WW\)</span>.</p></li>
+<li><p>We introduce the sets</p>
+<div class="math notranslate nohighlight">
+\[
+   W_k = \{ \bz \in \WW \ST \| \bz - \by \| \leq \| \by_k - \by \| \}.
+   \]</div>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(W_k\)</span> are closed balls centered at
+<span class="math notranslate nohighlight">\(\by\)</span> and with radii <span class="math notranslate nohighlight">\(\| \by_k - \by \|\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(W_k\)</span> are nonempty, closed and convex.</p></li>
+<li><p>By taking appropriate subsequence of <span class="math notranslate nohighlight">\(\{ W_k \}\)</span> if necessary,
+we can ensure that it is a nested sequence of closed balls.</p></li>
+<li><p>Further define</p>
+<div class="math notranslate nohighlight">
+\[
+   C_k = \{ \bx \in C \ST \bAAA(\bx) \in W_k \}.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\by_k \in W_k\)</span>, hence <span class="math notranslate nohighlight">\(C_k\)</span> is nonempty.</p></li>
+<li><p>Then due to <a class="reference internal" href="#res-cvx-recession-cone-lin-op-inverse-image">Theorem 8.184</a>,
+<span class="math notranslate nohighlight">\(C_k\)</span> is closed and convex.</p></li>
+<li><p>Since  <span class="math notranslate nohighlight">\(\{ W_k \}\)</span> is nested, hence  <span class="math notranslate nohighlight">\(\{ C_k \}\)</span> is also
+a nested sequence of nonempty, closed and convex sets.</p></li>
+<li><p>We note that every <span class="math notranslate nohighlight">\(C_k\)</span> has the same recession cone
+given by <span class="math notranslate nohighlight">\(R = R_C \cap (\nullspace \bAAA)\)</span>
+due to <a class="reference internal" href="#res-cvx-recession-cone-lin-op-inverse-image">Theorem 8.184</a>.</p></li>
+<li><p>Similarly, every <span class="math notranslate nohighlight">\(C_k\)</span> has the same lineality space
+given by <span class="math notranslate nohighlight">\(L = L_C \cap (\nullspace \bAAA)\)</span>
+due to <a class="reference internal" href="#res-cvx-lineality-space-lin-op-inverse-image">Theorem 8.188</a>.</p></li>
+<li><p>By hypothesis, <span class="math notranslate nohighlight">\(R_C \cap \nullspace \bAAA \subseteq L_C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_C \cap \nullspace \bAAA \subseteq L_C \cap \nullspace \bAAA\)</span>.</p></li>
+<li><p>In other words, <span class="math notranslate nohighlight">\(R \subseteq L\)</span>.</p></li>
+<li><p>By definition <span class="math notranslate nohighlight">\(L \subseteq R\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R = L\)</span>.</p></li>
+<li><p>Consequently, due to
+<a class="reference internal" href="#res-cvx-recession-nested-nonempty-intersect-gen-cond">Theorem 8.190</a>,
+the set <span class="math notranslate nohighlight">\(\bigcap_{k=1}^{\infty} C_k\)</span> is nonempty.</p></li>
+<li><p>Now pick some <span class="math notranslate nohighlight">\(\bx \in \bigcap_{k=1}^{\infty} C_k\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx \in C\)</span> since <span class="math notranslate nohighlight">\(C_k \subseteq C\)</span> for ever <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in C_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>, hence <span class="math notranslate nohighlight">\(\bAAA(\bx) \in W_k\)</span>
+for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\bAAA(\bx) \in \bigcap_{k=1}^{\infty} W_k\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(\bigcap_{k=1}^{\infty} W_k = \{ \by \}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bAAA(\bx) = \by\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in C\)</span>, hence <span class="math notranslate nohighlight">\(\by = \bAAA(\bx) \in D = \bAAA(C)\)</span>.</p></li>
+<li><p>Hence the sequence <span class="math notranslate nohighlight">\(\{ \by_k \}\)</span> converges in <span class="math notranslate nohighlight">\(D\)</span>.</p></li>
+<li><p>Since the sequence was chosen arbitrarily,
+hence every convergent sequence of <span class="math notranslate nohighlight">\(D\)</span> converges in <span class="math notranslate nohighlight">\(D\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(D\)</span> is closed.</p></li>
+</ol>
+</div>
+<p>In the special case where
+the closed and convex set <span class="math notranslate nohighlight">\(C\)</span> is bounded, then
+<span class="math notranslate nohighlight">\(R_C = L_C = \{ \bzero \}\)</span> and
+<span class="math notranslate nohighlight">\(R_C \cap \nullspace \bAAA = L_C\)</span>. Hence
+<span class="math notranslate nohighlight">\(\bAAA(C)\)</span> is also closed.</p>
+<div class="section" id="linear-inequality-constraints">
+<h3><span class="section-number">8.14.4.1. </span>Linear Inequality Constraints<a class="headerlink" href="#linear-inequality-constraints" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-closed-im-lin-op-closed-lin-constraints">
+<p class="admonition-title"><span class="caption-number">Theorem 8.194 </span> (Closedness of image of a closed and convex set with linear inequality constraints under linear transformation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> and <span class="math notranslate nohighlight">\(\WW\)</span> be real, finite dimensional, normed linear spaces.
+Let <span class="math notranslate nohighlight">\(\bAAA : \VV \to \WW\)</span> be a linear operator.
+Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let the nullspace of <span class="math notranslate nohighlight">\(\bAAA\)</span> be denoted by <span class="math notranslate nohighlight">\(\nullspace \bAAA\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a subset of <span class="math notranslate nohighlight">\(\VV\)</span> specified by
+linear inequality constraints; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+X = \{ \bx \in \VV \ST \langle \bx, \ba_i \rangle \leq b_i, i=1,\dots,r \}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ba_i \in \VV\)</span> and <span class="math notranslate nohighlight">\(b_i \in \RR\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(R_X \cap R_C \cap \nullspace \bAAA \subseteq L_C\)</span>,
+then the set <span class="math notranslate nohighlight">\(\bAAA(X \cap C)\)</span> is closed.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The argument is similar to <a class="reference internal" href="#res-cvx-closed-im-lin-op-closed">Theorem 8.193</a>
+and uses <a class="reference internal" href="#res-cvx-rec-nested-seq-closed-inequality-constraints">Theorem 8.191</a>
+to establish the nonemptiness of the intersection of the
+nested sequence of closed and convex sets.</p>
+<p>Let <span class="math notranslate nohighlight">\(D = \bAAA(X \cap C)\)</span>.
+We shall show that every converging sequence of <span class="math notranslate nohighlight">\(D = \bAAA(C)\)</span>
+converges in <span class="math notranslate nohighlight">\(D\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\{ \by_k \}\)</span> be a sequence of points in <span class="math notranslate nohighlight">\(D\)</span>
+converging to some point <span class="math notranslate nohighlight">\(\by \in \WW\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(W_k\)</span> and <span class="math notranslate nohighlight">\(C_k\)</span> be defined as in
+<a class="reference internal" href="#res-cvx-closed-im-lin-op-closed">Theorem 8.193</a>.</p></li>
+<li><p>By choosing a suitable subsequence, we are guaranteed
+that <span class="math notranslate nohighlight">\(C_k\)</span> are nested.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(\by_k \in W_k\)</span>. Hence <span class="math notranslate nohighlight">\(C_k \subseteq C\)</span> is nonempty.</p></li>
+<li><p>Also <span class="math notranslate nohighlight">\(\by_k \in D = \bAAA(X \cap C)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu \in C_k\)</span> such that <span class="math notranslate nohighlight">\(\bAAA(\bu) = \by_k\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bu \in X \cap C\)</span> holds true also.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\((X \cap C) \cap C_k = X \cap C_k\)</span> is not empty for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>By hypothesis, <span class="math notranslate nohighlight">\(R_X \cap R_C \cap \nullspace \bAAA \subseteq L_C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_X \cap R_C \cap \nullspace \bAAA \subseteq L_C \cap \nullspace \bAAA\)</span>.</p></li>
+<li><p>Following the definition of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(C\)</span> from the proof
+of <a class="reference internal" href="#res-cvx-closed-im-lin-op-closed">Theorem 8.193</a>,
+we have <span class="math notranslate nohighlight">\(R_X \cap R \subseteq L\)</span>.</p></li>
+<li><p>Thus, all assumptions of
+<a class="reference internal" href="#res-cvx-rec-nested-seq-closed-inequality-constraints">Theorem 8.191</a>
+are satisfied.</p></li>
+<li><p>Hence the set <span class="math notranslate nohighlight">\(X \cap (\bigcap_{k=1}^{\infty} C_k)\)</span> is nonempty.</p></li>
+<li><p>Pick any point <span class="math notranslate nohighlight">\(\bx \in X \cap (\bigcap_{k=1}^{\infty} C_k)\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx \in X\)</span> and <span class="math notranslate nohighlight">\(\bx \in C\)</span> with
+<span class="math notranslate nohighlight">\(\bAAA(\bx) = \by\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in \bAAA(X \cap C)\)</span>.</p></li>
+<li><p>Hence the sequence <span class="math notranslate nohighlight">\(\{ \by_k \}\)</span> converges in <span class="math notranslate nohighlight">\(D\)</span>.</p></li>
+<li><p>Since the sequence was chosen arbitrarily,
+hence every convergent sequence of <span class="math notranslate nohighlight">\(D\)</span> converges in <span class="math notranslate nohighlight">\(D\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(D\)</span> is closed.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="quadratic-inequality-constraints">
+<h3><span class="section-number">8.14.4.2. </span>Quadratic Inequality Constraints<a class="headerlink" href="#quadratic-inequality-constraints" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-closed-im-lin-op-closed-quad-constraints">
+<p class="admonition-title"><span class="caption-number">Theorem 8.195 </span> (Closedness of image of a set specified by quadratic inequality constraints under linear transformation)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \RR^{m \times n}\)</span>.
+Let the nullspace of <span class="math notranslate nohighlight">\(\bA\)</span> be denoted by <span class="math notranslate nohighlight">\(\nullspace \bA\)</span>.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\RR^n\)</span>
+specified by convex quadratic inequalities</p>
+<div class="math notranslate nohighlight">
+\[
+C = \{ \bx \in \RR^n \ST 
+\bx^T \bQ_j \bx + \ba^T_j \bx + b_j \leq 0, j=1,\dots, r \}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bQ_j \in \SS^n_+\)</span> are symmetric positive semidefinite matrices,
+<span class="math notranslate nohighlight">\(\ba_j \in \RR^n\)</span> are vectors
+and <span class="math notranslate nohighlight">\(b_j \in \RR\)</span> are scalars.</p>
+<p>Then the set <span class="math notranslate nohighlight">\(\bA C\)</span> is closed.</p>
+</div>
+</div></div>
+<div class="section" id="vector-sum-of-closed-convex-sets">
+<h3><span class="section-number">8.14.4.3. </span>Vector Sum of Closed Convex Sets<a class="headerlink" href="#vector-sum-of-closed-convex-sets" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-closedness-vector-sum-closed-convex">
+<p class="admonition-title"><span class="caption-number">Theorem 8.196 </span> (Closedness of vector sum of closed and convex sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dim real vector space.
+Let <span class="math notranslate nohighlight">\(C_1, \dots, C_m\)</span> be nonempty, closed and convex subsets of <span class="math notranslate nohighlight">\(\VV\)</span>
+such that the equality <span class="math notranslate nohighlight">\(\by_1 + \dots + \by_m = \bzero\)</span> for
+vectors <span class="math notranslate nohighlight">\(\by_i \in R_{C_i}\)</span> implies that <span class="math notranslate nohighlight">\(\by_i = \bzero\)</span> for every
+<span class="math notranslate nohighlight">\(i=1,\dots,m\)</span>.
+Then the vector sum <span class="math notranslate nohighlight">\(C_1 + \dots + C_m\)</span> is a closed set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(C\)</span> be the Cartesian product <span class="math notranslate nohighlight">\(C_1 \times \dots \times C_m\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\VV^m\)</span> denote the direct sum vector space <span class="math notranslate nohighlight">\(\VV \oplus \dots \oplus \VV\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(C \subseteq \VV^m\)</span> is a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\VV^m\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bAAA : \VV^m \to \VV\)</span> be a linear transformation that maps a vector
+<span class="math notranslate nohighlight">\((\bx_1, \dots, \bx_m) \in \VV^m\)</span> into <span class="math notranslate nohighlight">\(\bx_1 + \dots + \bx_m\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+   \bAAA(\bx_1, \dots, \bx_m) = \bx_1 + \dots + \bx_m.
+   \]</div>
+</li>
+<li><p>We have <span class="math notranslate nohighlight">\(R_C = R_{C_1} \times \dots \times R_{C_m}\)</span>.</p></li>
+<li><p>The null space of <span class="math notranslate nohighlight">\(\bAAA\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \nullspace \bAAA = \{ (\bx_1, \dots, \bx_m)  \in \VV^m 
+      \ST \bx_1 + \dots + \bx_m = \bzero, \bx_i \in \VV \}.
+   \]</div>
+</li>
+<li><p>Under the given hypothesis, we have <span class="math notranslate nohighlight">\(R_C \cap \nullspace \bAAA = \{ \bzero \}\)</span>.</p></li>
+<li><p>Hence, due to <a class="reference internal" href="#res-cvx-recession-nested-nonempty-intersect-gen-cond">Theorem 8.190</a>,
+<span class="math notranslate nohighlight">\(\bAAA(C)\)</span> is closed.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(\bAAA(C) = C_1 + \dots + C_m\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(C_1 + \dots + C_m\)</span> is closed as desired.</p></li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="res-cvx-set-sub-closed-recession">
+<p class="admonition-title"><span class="caption-number">Corollary 8.17 </span> (Closedness of <span class="math notranslate nohighlight">\(C_1 - C_2\)</span> via recession cones)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dim real vector space.
+Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be nonempty, closed and convex
+subsets of <span class="math notranslate nohighlight">\(\VV\)</span>. Then <span class="math notranslate nohighlight">\(C_1 - C_2\)</span> is closed
+if there is no common nonzero direction of
+recession of <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span>; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+R_{C_1} \cap R_{C_2} = \{ \bzero \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. 1. By <a class="reference internal" href="#res-cvx-recession-cone-set-negation">Property 8.38</a></p>
+<div class="math notranslate nohighlight">
+\[
+   R_{C_2} = - R_{-C_2}.
+   \]</div>
+<ol class="simple">
+<li><p>We are given that <span class="math notranslate nohighlight">\(R_{C_1} \cap R_{C_2} = \{ \bzero \}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by_1 \in R_{C_1}\)</span> and <span class="math notranslate nohighlight">\(\by_2 \in R_{-C_2}\)</span>
+such that <span class="math notranslate nohighlight">\(\by_1 + \by_2 = \bzero\)</span>.</p></li>
+<li><p>But then <span class="math notranslate nohighlight">\(\by_3 = - \by_2 \in R_{C_2}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by_1 - \by_3 = \bzero\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by_1 = \by_3\)</span>.</p></li>
+<li><p>But then <span class="math notranslate nohighlight">\(\by_1 = \by_3 = \bzero\)</span> since <span class="math notranslate nohighlight">\(R_{C_1} \cap R_{C_2} = \{ \bzero \}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by_2 = -\by_3 = \bzero\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\by_1 + \by_2 = \bzero\)</span> for any
+<span class="math notranslate nohighlight">\(\by_1 \in R_{C_1}\)</span> and <span class="math notranslate nohighlight">\(\by_2 \in R_{- C_2}\)</span>
+implies that <span class="math notranslate nohighlight">\(\by_1 = \by_2 = \bzero\)</span>.</p></li>
+<li><p>Hence by <a class="reference internal" href="#res-cvx-closedness-vector-sum-closed-convex">Theorem 8.196</a>,
+<span class="math notranslate nohighlight">\(C_1 + (- C_2) = C_1  - C_2\)</span> is a closed set.</p></li>
+</ol>
+</div>
+<div class="proof corollary admonition" id="res-cvx-set-sub-closed-recession-lineality">
+<p class="admonition-title"><span class="caption-number">Corollary 8.18 </span> (Closedness of <span class="math notranslate nohighlight">\(C_1 - C_2\)</span> via recession cones and lineality spaces)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an <span class="math notranslate nohighlight">\(n\)</span>-dim real vector space.
+Let <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> be nonempty, closed and convex
+subsets of <span class="math notranslate nohighlight">\(\VV\)</span>. Then <span class="math notranslate nohighlight">\(C_1 - C_2\)</span> is closed
+if</p>
+<div class="math notranslate nohighlight">
+\[
+R_{C_1} \cap R_{C_2} = L_{C_1} \cap L_{C_2}.
+\]</div>
+</div>
+</div></div>
+</div>
+<div class="section" id="convex-functions">
+<h2><span class="section-number">8.14.5. </span>Convex Functions<a class="headerlink" href="#convex-functions" title="Permalink to this headline">¶</a></h2>
+<p>We now develop the concept of recession cones
+and lineality spaces for proper, closed and convex functions.
+We develop these concepts along the following lines.</p>
+<ol class="simple">
+<li><p>All sublevel sets are closed and convex.</p></li>
+<li><p>All nonempty sublevel sets share the same
+recession cone.</p></li>
+<li><p>The shared recession cone of all nonempty
+sublevel sets is defined as the recession
+cone of the function itself.</p></li>
+<li><p>Similarly, all nonempty sublevel sets
+share the same lineality space and
+the same is defined as the lineality space
+of the function itself.</p></li>
+<li><p>Along any direction in the lineality space
+of a proper, closed and convex function,
+the function doesn’t change its value.</p></li>
+<li><p>Hence such directions are also known as
+directions of constancy of the function.</p></li>
+<li><p>Accordingly, the lineality space of
+a proper, closed and convex function
+is also known as its constancy space.</p></li>
+</ol>
+<p>Throughout this subsection, we shall assume that <span class="math notranslate nohighlight">\(\VV\)</span> is
+a Euclidean space unless otherwise specified.</p>
+<div class="section" id="recession-cones-of-sublevel-sets">
+<h3><span class="section-number">8.14.5.1. </span>Recession Cones of Sublevel Sets<a class="headerlink" href="#recession-cones-of-sublevel-sets" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-cvx-sublevel-recession-cones">
+<p class="admonition-title"><span class="caption-number">Theorem 8.197 </span> (Recession cones of sublevel sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be a proper, closed and convex function.
+Consider the sublevel sets <span class="math notranslate nohighlight">\(S_t = \{ \bx \in \VV \ST f(\bx) \leq t \}\)</span>
+where <span class="math notranslate nohighlight">\(t \in \RR\)</span>.
+Then</p>
+<ol>
+<li><p>All the nonempty sublevel sets <span class="math notranslate nohighlight">\(S_t\)</span> have the same
+recession cone given by</p>
+<div class="math notranslate nohighlight">
+\[
+   R_{S_t} = \{ \by \in \VV \ST (\by, 0) \in R_{\epi f} \}
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(R_{\epi f}\)</span> is the recession cone of the epigraph of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</li>
+<li><p>If one nonempty sublevel set <span class="math notranslate nohighlight">\(S_t\)</span> is compact, then all of the
+sublevel sets <span class="math notranslate nohighlight">\(\sublevel(f, t)\)</span> are compact.</p></li>
+</ol>
+</div>
+</div><p>We mention that <span class="math notranslate nohighlight">\((\bzero, 0) \in R_{\epi f}\)</span>.
+Consequently, <span class="math notranslate nohighlight">\(\bzero \in R_{S_t}\)</span>.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. (1) Recession cone for sublevel sets</p>
+<ol class="simple">
+<li><p>Pick some <span class="math notranslate nohighlight">\(t \in \RR\)</span> such that <span class="math notranslate nohighlight">\(S_t\)</span> is nonempty.
+Since <span class="math notranslate nohighlight">\(f\)</span> is proper, hence such <span class="math notranslate nohighlight">\(t\)</span> exists.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by\)</span> be a direction of recession of <span class="math notranslate nohighlight">\(S_t\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in S_t\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(f(\bx) \leq t\)</span>. Hence <span class="math notranslate nohighlight">\((\bx, t) \in \epi f\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\by\)</span> is a recession direction,
+we have <span class="math notranslate nohighlight">\(f(\bx + \alpha \by) \leq t\)</span>
+for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\((\bx + \alpha \by, t) \in \epi f\)</span> for all <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Rewriting <span class="math notranslate nohighlight">\((\bx, t) + \alpha (\by, 0) \in \epi f\)</span>
+for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\epi f\)</span> is a nonempty, closed and convex set,
+and there exists one <span class="math notranslate nohighlight">\((\bx, t) \in \epi f\)</span> such that
+for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, the point <span class="math notranslate nohighlight">\((\bx, t) + \alpha (\by, 0) \in \epi f\)</span>,
+hence due to <a class="reference internal" href="#res-cvx-recession-dir-charac">Theorem 8.179</a>,
+<span class="math notranslate nohighlight">\((\by, 0) \in R_{\epi f}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\by\)</span> was arbitrary element of <span class="math notranslate nohighlight">\(R_{S_t}\)</span>, hence
+for every <span class="math notranslate nohighlight">\(\by \in R_{S_t}\)</span>, <span class="math notranslate nohighlight">\((\by, 0) \in R_{\epi f}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_{S_t} \subseteq \{ \by \in \VV \ST (\by, 0) \in R_{\epi f} \}\)</span>.</p></li>
+</ol>
+<p>For the converse, we proceed as follows.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\((\by, 0) \in R_{\epi f}\)</span>.</p></li>
+<li><p>Pick some vector <span class="math notranslate nohighlight">\((\bx, t) \in \epi f\)</span>.</p></li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, we have
+<span class="math notranslate nohighlight">\((\bx + \alpha \by, t) \in \epi f\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(f(\bx + \alpha \by) \leq t\)</span>  for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx + \alpha \by \in S_t\)</span> for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is closed, hence <span class="math notranslate nohighlight">\(S_t\)</span> is closed.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(S_t\)</span> is a nonempty, closed and convex set, <span class="math notranslate nohighlight">\(\bx \in S_t\)</span>
+and for every <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, we have <span class="math notranslate nohighlight">\(\bx + \alpha \by \in S_t\)</span>,
+hence by <a class="reference internal" href="#res-cvx-recession-dir-charac">Theorem 8.179</a>,
+<span class="math notranslate nohighlight">\(\by \in R_{S_t}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_{S_t} \supseteq \{ \by \in \VV \ST (\by, 0) \in R_{\epi f} \}\)</span>.</p></li>
+</ol>
+<p>(2) Compactness of sublevel sets.</p>
+<ol class="simple">
+<li><p>We are given that for some <span class="math notranslate nohighlight">\(t\)</span>, the nonempty, closed and convex set
+<span class="math notranslate nohighlight">\(S_t\)</span> is compact.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(S_t\)</span> is bounded.</p></li>
+<li><p>Then due to <a class="reference internal" href="#res-cvx-recession-dir-nz-unbounded">Theorem 8.181</a>,
+<span class="math notranslate nohighlight">\(R_{S_t} = \{ \bzero \}\)</span>.</p></li>
+<li><p>By previous argument, all nonempty sublevel sets have the
+same recession cone.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\{ \bzero \}\)</span> is the recession cone of every nonempty sublevel set.</p></li>
+<li><p>Hence by <a class="reference internal" href="#res-cvx-recession-dir-nz-unbounded">Theorem 8.181</a>
+every nonempty sublevel set is bounded.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is closed, hence every nonempty sublevel set is closed.</p></li>
+<li><p>Since every nonempty sublevel set is closed and bounded and
+<span class="math notranslate nohighlight">\(\VV\)</span> is Euclidean (finite dimensional), hence
+every nonempty sublevel set is compact.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="recession-cone-of-a-convex-function">
+<h3><span class="section-number">8.14.5.2. </span>Recession Cone of a Convex Function<a class="headerlink" href="#recession-cone-of-a-convex-function" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-cvx-func-recession-cone">
+<p class="admonition-title"><span class="caption-number">Definition 8.68 </span> (Recession cone of a convex function)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be a proper, closed and convex function.
+The (common) recession cone of its nonempty sublevel sets
+is called the <em>recession cone</em> of <span class="math notranslate nohighlight">\(f\)</span> and is denoted by
+<span class="math notranslate nohighlight">\(R_f\)</span>.
+Each <span class="math notranslate nohighlight">\(\by \in R_f\)</span> is called a <em>direction of recession</em>
+of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</div>
+</div><ol class="simple">
+<li><p>The requirement that <span class="math notranslate nohighlight">\(f\)</span> be proper guarantees that
+<span class="math notranslate nohighlight">\(f(\bx) &lt; \infty\)</span> for at least one <span class="math notranslate nohighlight">\(\bx \in \VV\)</span>
+and hence there exist some nonempty sublevel sets.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is also closed and convex,
+hence <a class="reference internal" href="#res-cvx-sublevel-recession-cones">Theorem 8.197</a>
+guarantees that all the nonempty sublevel sets
+have an identical recession cone.</p></li>
+</ol>
+</div>
+<div class="section" id="lineality-space-of-a-convex-function">
+<h3><span class="section-number">8.14.5.3. </span>Lineality Space of a Convex Function<a class="headerlink" href="#lineality-space-of-a-convex-function" title="Permalink to this headline">¶</a></h3>
+<p>We can define the lineality space of a function
+in terms of its recession cone.</p>
+<div class="proof definition admonition" id="def-cvx-func-lineality-space">
+<p class="admonition-title"><span class="caption-number">Definition 8.69 </span> (Lineality space of a convex function)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be a proper, closed and convex function.
+The <em>lineality space</em> <span class="math notranslate nohighlight">\(L_f\)</span> of the function <span class="math notranslate nohighlight">\(f\)</span> is
+the set of all <span class="math notranslate nohighlight">\(\by \in \VV\)</span> such that both
+<span class="math notranslate nohighlight">\(\by\)</span> and <span class="math notranslate nohighlight">\(-\by\)</span> are directions of recession of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+L_f = R_f \cap (- R_f).
+\]</div>
+</div>
+</div><div class="proof observation admonition" id="res-cvx-sublevel-sets-lineality-space">
+<p class="admonition-title"><span class="caption-number">Observation 8.5 </span> (Lineality spaces of sublevel sets)</p>
+<div class="observation-content section" id="proof-content">
+<p>Since the recession cone of a nonempty sublevel
+set of a proper, closed and convex function <span class="math notranslate nohighlight">\(f\)</span>
+is same as <span class="math notranslate nohighlight">\(R_f\)</span>, hence
+<span class="math notranslate nohighlight">\(\by \in L_f\)</span> if and only if
+both <span class="math notranslate nohighlight">\(\by\)</span> and <span class="math notranslate nohighlight">\(-\by\)</span> are directions of
+recession of the nonempty sublevel sets.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-cvx-func-lineality-dir-constant">
+<p class="admonition-title"><span class="caption-number">Theorem 8.198 </span> (Lineality space and constancy of function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be a proper, closed and convex function.
+<span class="math notranslate nohighlight">\(\by \in L_f\)</span> if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx + \alpha \by) = f(\bx), \Forall \bx \in \dom f, \Forall \alpha \in \RR.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. 1. Pick some <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span>.</p>
+<ol>
+<li><p>Consider the sublevel set <span class="math notranslate nohighlight">\(S = \{\bz \in \VV \ST f(\bz) \leq f(\bx) \}\)</span>.</p></li>
+<li><p>We are given that <span class="math notranslate nohighlight">\(\by \in L_f\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\by\)</span> and <span class="math notranslate nohighlight">\(-\by\)</span> are both directions of recession of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Pick some <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bu = \bx + \alpha \by \in S\)</span> as well as <span class="math notranslate nohighlight">\(\bv = \bx - \alpha \by \in S\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(f(\bu) \leq f(\bx)\)</span> and <span class="math notranslate nohighlight">\(f(\bv) \leq f(\bx)\)</span>.</p></li>
+<li><p>Also <span class="math notranslate nohighlight">\(\bx = \frac{1}{2} \bu + \frac{1}{2} \bv\)</span>.</p></li>
+<li><p>By convexity of <span class="math notranslate nohighlight">\(f\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx) \leq \frac{1}{2} f(\bu) + \frac{1}{2} f(\bv)
+   \leq \frac{1}{2} f(\bx) + \frac{1}{2} f(\bx) = f(\bx).
+   \]</div>
+</li>
+<li><p>This means that the inequalities must be equalities. Hence
+<span class="math notranslate nohighlight">\(2 f(\bx) = f(\bu) + f(\bv)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(\bu) &lt; f(\bx)\)</span> then <span class="math notranslate nohighlight">\(f(\bv) &gt; f(\bx)\)</span>, a contradiction since <span class="math notranslate nohighlight">\(\bv \in S\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(\bv) &lt; f(\bx)\)</span> then <span class="math notranslate nohighlight">\(f(\bu) &gt; f(\bx)\)</span>, a contradiction since <span class="math notranslate nohighlight">\(\bu \in S\)</span>.</p></li>
+<li><p>Hence we require that <span class="math notranslate nohighlight">\(f(\bx) = f(\bu) = f(\bv)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\alpha\)</span> were arbitrary, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx + \alpha \by) = f(\bx), \Forall \bx \in \dom f, \Forall \alpha \in \RR.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof remark admonition" id="rem-cvx-func-constancy-space">
+<p class="admonition-title"><span class="caption-number">Remark 8.12 </span> (Constancy space of a convex function)</p>
+<div class="remark-content section" id="proof-content">
+<p>As a result of <a class="reference internal" href="#res-cvx-func-lineality-dir-constant">Theorem 8.198</a>,
+any <span class="math notranslate nohighlight">\(\by \in L_f\)</span> is a direction along which the function <span class="math notranslate nohighlight">\(f\)</span>
+is constant.
+Hence <span class="math notranslate nohighlight">\(L_f\)</span> is also known as the <em>constancy space</em> of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="ex-cvx-recession-cone-linear-functional">
+<p class="admonition-title"><span class="caption-number">Example 8.64 </span> (Recession cone and constancy space of linear functions)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \RR^n \to \RR\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \bc^T \bx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bc \in \RR^n\)</span> is a given vector.</p>
+<p>The recession cone is given by</p>
+<div class="math notranslate nohighlight">
+\[
+R_f = \{\by \ST \bc^T \by \leq 0 \}.
+\]</div>
+<p>This is a closed half-space.</p>
+<ol>
+<li><p>Pick some <span class="math notranslate nohighlight">\(t \in \RR\)</span>.</p></li>
+<li><p>Consider the set <span class="math notranslate nohighlight">\(S_t = \sublevel(f, t)\)</span>.</p></li>
+<li><p>Pick some <span class="math notranslate nohighlight">\(\bx \in  S_t\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bc^T \bx \leq t\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(\by \in R_f\)</span> and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span> we can see that</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx + \alpha \by) = \bc^T (\bx + \alpha \by)
+   = \bc^T \bx + \alpha (\bc^T \by) \leq t + \alpha 0 = t.
+   \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx + \alpha \by \in S_t\)</span>.</p></li>
+</ol>
+<p>The constancy space is given by</p>
+<div class="math notranslate nohighlight">
+\[
+L_f =  \{\by \ST \bc^T \by = 0 \}.
+\]</div>
+<p>It is a hyperplane passing through origin.</p>
+<ol>
+<li><p>For any <span class="math notranslate nohighlight">\(\by \in L_f\)</span> and <span class="math notranslate nohighlight">\(\alpha \in R\)</span> we can see that</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx + \alpha \by) = \bc^T (\bx + \alpha \by)
+   = \bc^T \bx + \alpha (\bc^T \by)
+   = \bc^T \bx + 0 \leq t.
+   \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx + \alpha \by \in S_t\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof example admonition" id="ex-cvx-recession-cone-quadratic-functional">
+<p class="admonition-title"><span class="caption-number">Example 8.65 </span> (Recession cone and constancy space of quadratic functions)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \RR^n \to \RR\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \bx^T \bQ  \bx + \bc^T \bx + b
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bQ\)</span> is a symmetric positive semidefinite matrix,
+<span class="math notranslate nohighlight">\(\bc \in \RR^n\)</span> is a vector and <span class="math notranslate nohighlight">\(b \in \RR\)</span> is a scalar.</p>
+<p>The recession cone is given by</p>
+<div class="math notranslate nohighlight">
+\[
+R_f = \{\by \ST \bQ \by = \bzero,  \bc^T \by \leq 0 \}.
+\]</div>
+<p>The constancy space is given by</p>
+<div class="math notranslate nohighlight">
+\[
+L_f = \{\by \ST \bQ \by = \bzero,  \bc^T \by = 0 \}.
+\]</div>
+</div>
+</div></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./convex_sets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="continuity.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">8.13. </span>Continuity</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="directional_derivatives.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8.15. </span>Directional Derivatives</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

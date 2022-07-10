@@ -1,0 +1,1745 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>13.1. Sensing Matrices &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="14. Sparse Approximation with Dictionaries" href="../sparse_approx/ch_sparse_approx.html" />
+    <link rel="prev" title="13. Compressive Sensing" href="chapter_compressive_sensing.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/compressive_sensing/sensing_matrices.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fcompressive_sensing/sensing_matrices.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrices-satisfying-rip">
+   13.1.1. Matrices Satisfying RIP
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conditions-on-random-distribution-for-rip">
+     13.1.1.1. Conditions on Random Distribution for RIP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sub-gaussian-matrices-satisfy-the-rip">
+     13.1.1.2. Sub Gaussian Matrices satisfy the RIP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advantages-of-random-construction">
+     13.1.1.3. Advantages of Random Construction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rademacher-sensing-matrices">
+   13.1.2. Rademacher Sensing Matrices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#joint-correlation">
+     13.1.2.1. Joint Correlation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#coherence">
+     13.1.2.2. Coherence
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-sensing-matrices">
+   13.1.3. Gaussian Sensing Matrices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     13.1.3.1. Joint Correlation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Sensing Matrices</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrices-satisfying-rip">
+   13.1.1. Matrices Satisfying RIP
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conditions-on-random-distribution-for-rip">
+     13.1.1.1. Conditions on Random Distribution for RIP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sub-gaussian-matrices-satisfy-the-rip">
+     13.1.1.2. Sub Gaussian Matrices satisfy the RIP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advantages-of-random-construction">
+     13.1.1.3. Advantages of Random Construction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rademacher-sensing-matrices">
+   13.1.2. Rademacher Sensing Matrices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#joint-correlation">
+     13.1.2.1. Joint Correlation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#coherence">
+     13.1.2.2. Coherence
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-sensing-matrices">
+   13.1.3. Gaussian Sensing Matrices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     13.1.3.1. Joint Correlation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="sensing-matrices">
+<span id="sec-cs-sensing-matrices"></span><h1><span class="section-number">13.1. </span>Sensing Matrices<a class="headerlink" href="#sensing-matrices" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="matrices-satisfying-rip">
+<h2><span class="section-number">13.1.1. </span>Matrices Satisfying RIP<a class="headerlink" href="#matrices-satisfying-rip" title="Permalink to this headline">¶</a></h2>
+<p>This section provides basic results about construction of matrices which can satisfy
+restricted isometry property.</p>
+<p>The goal of designing an <span class="math notranslate nohighlight">\(M \times N\)</span> sensing matrix involves:</p>
+<ul class="simple">
+<li><p>Stable embedding for signals with has high sparsity as possible (high <span class="math notranslate nohighlight">\(K\)</span>)</p></li>
+<li><p>As few measurements as possible (low <span class="math notranslate nohighlight">\(M\)</span>)</p></li>
+</ul>
+<p>There are two different approaches</p>
+<ul class="simple">
+<li><p>Deterministic approach</p></li>
+<li><p>Randomized approach</p></li>
+</ul>
+<p>Known deterministic approaches so far tend to require <span class="math notranslate nohighlight">\(M\)</span> to be very large(<span class="math notranslate nohighlight">\(O(K^2 \ln N)\)</span>
+or <span class="math notranslate nohighlight">\(O(KN^{\alpha}\)</span>).
+We can overcome this limitation by randomizing matrix construction.</p>
+<p>Construction process:</p>
+<ul class="simple">
+<li><p>Input <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+<li><p>Generate <span class="math notranslate nohighlight">\(\Phi\)</span> by choosing <span class="math notranslate nohighlight">\(\Phi_{i j}\)</span> as independent realizations
+from some probability distribution.</p></li>
+</ul>
+<p>Suppose that <span class="math notranslate nohighlight">\(\Phi\)</span> is drawn from normal distribution.</p>
+<p>It can be shown that the rank of <span class="math notranslate nohighlight">\(\Phi\)</span> is <span class="math notranslate nohighlight">\(M\)</span> with probability <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<div class="proof example admonition" id="ex-cs-sm-random-mat-full-rank">
+<p class="admonition-title"><span class="caption-number">Example 13.1 </span> (Random matrices are full rank.)</p>
+<div class="example-content section" id="proof-content">
+<p>We can verify this fact by doing a small computer simulation.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"></span>
+<span class="n">N</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"></span>
+<span class="n">trials</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span><span class="w"></span>
+<span class="n">numFullRankMatrices</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">trials</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Create a random matrix of size M x N</span><span class="w"></span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Obtain its rank</span><span class="w"></span>
+<span class="w">    </span><span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">rank</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Check whether the rank equals M or not</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">M</span><span class="w"></span>
+<span class="w">        </span><span class="n">numFullRankMatrices</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">numFullRankMatrices</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Number of trials: %d\n&#39;</span><span class="p">,</span><span class="n">trials</span><span class="p">);</span><span class="w"></span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Number of full rank matrices: %d\n&#39;</span><span class="p">,</span><span class="n">numFullRankMatrices</span><span class="p">);</span><span class="w"></span>
+<span class="n">percentage</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">numFullRankMatrices</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">trials</span><span class="p">;</span><span class="w"></span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Percentage of full rank matrices: %.2f %%\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">percentage</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This program generates a number of random matrices and measures
+their ranks. It verifies whether they are full rank or not.</p>
+<p>Here is a sample output:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">demoRandomMatrixRank</span><span class="w"></span>
+<span class="n">Number</span><span class="w"> </span><span class="s">of</span><span class="w"> </span><span class="s">trials:</span><span class="w"> </span><span class="s">10000</span><span class="w"></span>
+<span class="n">Number</span><span class="w"> </span><span class="s">of</span><span class="w"> </span><span class="s">full</span><span class="w"> </span><span class="s">rank</span><span class="w"> </span><span class="s">matrices:</span><span class="w"> </span><span class="s">10000</span><span class="w"></span>
+<span class="n">Percentage</span><span class="w"> </span><span class="s">of</span><span class="w"> </span><span class="s">full</span><span class="w"> </span><span class="s">rank</span><span class="w"> </span><span class="s">matrices:</span><span class="w"> </span><span class="s">100.00</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+</div><p>Thus if we choose <span class="math notranslate nohighlight">\(M=2K\)</span>,
+any subset of <span class="math notranslate nohighlight">\(2K\)</span> columns will be linearly independent.
+Thus the matrix with satisfy RIP with some <span class="math notranslate nohighlight">\(\delta_{2K} &gt; 0\)</span>.
+But this construction doesn’t tell us exact value of <span class="math notranslate nohighlight">\(\delta_{2K}\)</span>.
+In order to find out <span class="math notranslate nohighlight">\(\delta_{2K}\)</span>, we must consider all possible <span class="math notranslate nohighlight">\(K\)</span>-dimensional
+subspaces of <span class="math notranslate nohighlight">\(\RR^N\)</span>.
+This is computationally impossible for reasonably large <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(K\)</span>.
+What is the alternative?</p>
+<p>We can start with a chosen value of <span class="math notranslate nohighlight">\(\delta_{2K}\)</span> and
+try to construct a matrix which matches it.</p>
+<p>Before we proceed further, we should take a
+detour and review sub-Gaussian distributions in
+<a class="reference internal" href="../randomness/subgaussian.html#sec-randomness-subgaussian"><span class="std std-ref">Subgaussian Distributions</span></a>.</p>
+<p>We now state the main theorem of this section.</p>
+<div class="proof theorem admonition" id="res-cs-subgaussian-norm-bounds">
+<p class="admonition-title"><span class="caption-number">Theorem 13.1 </span> (Norm bounds on subgaussian vectors)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(X = [X_1, X_2, \dots, X_M]\)</span> where each <span class="math notranslate nohighlight">\(X_i\)</span> is i.i.d. with <span class="math notranslate nohighlight">\(X_i \sim \Sub (c^2)\)</span> and
+<span class="math notranslate nohighlight">\(\EE (X_i^2) = \sigma^2\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\EE (\| X\|_2^2) = M \sigma^2 
+\]</div>
+<p>Moreover, for any <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> and for any
+<span class="math notranslate nohighlight">\(\beta \in [c^2/\sigma^2, \beta_{\text{max}}\)</span>, there exists
+a constant <span class="math notranslate nohighlight">\(\kappa^* \geq 4\)</span> depending only on  <span class="math notranslate nohighlight">\(\beta_{\text{max}}\)</span> and the ratio <span class="math notranslate nohighlight">\(\sigma^2/c^2\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\PP(\| X\|_2^2 \leq \alpha M \sigma^2) \leq \exp \left  ( -\frac{M(1-\alpha)^2}{\kappa^*} \right ) 
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\PP(\| X\|_2^2 \geq \beta M \sigma^2) \leq \exp \left  ( -\frac{M(\beta-1)^2}{\kappa^*} \right ) 
+\]</div>
+</div>
+</div><div class="section" id="conditions-on-random-distribution-for-rip">
+<h3><span class="section-number">13.1.1.1. </span>Conditions on Random Distribution for RIP<a class="headerlink" href="#conditions-on-random-distribution-for-rip" title="Permalink to this headline">¶</a></h3>
+<p>Let us get back to our business of constructing a matrix <span class="math notranslate nohighlight">\(\Phi\)</span>
+using random distributions which satisfies RIP with a given <span class="math notranslate nohighlight">\(\delta\)</span>.
+We will impose some conditions on the random distribution.</p>
+<ul>
+<li><p>We require that the distribution will yield a matrix that is norm-preserving.
+This requires that</p>
+<div class="math notranslate nohighlight" id="equation-eq-rip-subgaussian-variance">
+<span class="eqno">(13.1)<a class="headerlink" href="#equation-eq-rip-subgaussian-variance" title="Permalink to this equation">¶</a></span>\[\EE (\Phi_{i j}^2) = \frac{1}{M}\]</div>
+<p>Hence variance of distribution should be <span class="math notranslate nohighlight">\(\frac{1}{M}\)</span>.</p>
+</li>
+<li><p>We require that distribution is a sub-Gaussian distribution;
+i.e., there exists a constant <span class="math notranslate nohighlight">\(c &gt; 0\)</span>
+such that</p>
+<div class="math notranslate nohighlight" id="equation-eq-rip-subgaussian-mgf">
+<span class="eqno">(13.2)<a class="headerlink" href="#equation-eq-rip-subgaussian-mgf" title="Permalink to this equation">¶</a></span>\[ \EE(\exp(\Phi_{i j} t)) \leq \exp \left (\frac{c^2 t^2}{2} \right )\]</div>
+</li>
+</ul>
+<p>This says that the moment generating function of the distribution
+is dominated by a Gaussian distribution.<br />
+In other words, tails of the distribution decay at least as fast as the tails of a Gaussian distribution.</p>
+<ul>
+<li><p>We will further assume that entries of <span class="math notranslate nohighlight">\(\Phi\)</span> are strictly sub-Gaussian.
+i.e., they must satisfy
+<a class="reference internal" href="#equation-eq-rip-subgaussian-mgf">(13.2)</a> with</p>
+<div class="math notranslate nohighlight">
+\[
+  c^2 = \EE (\Phi_{i j}^2) = \frac{1}{M}.
+  \]</div>
+</li>
+</ul>
+<p>Under these conditions we have the following result.</p>
+<div class="proof corollary admonition" id="res-cs-subgaussian-rip-2">
+<p class="admonition-title"><span class="caption-number">Corollary 13.1 </span> (Norm bounds on subgaussian matrix vector product)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(\Phi\)</span> is an <span class="math notranslate nohighlight">\(M\times N\)</span> matrix whose entries <span class="math notranslate nohighlight">\(\Phi_{i j}\)</span> are i.i.d. with
+<span class="math notranslate nohighlight">\(\Phi_{i j}\)</span> drawn according to a strictly sub-Gaussian distribution with <span class="math notranslate nohighlight">\(c^2 = \frac{1}{M^2}\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(Y = \Phi x\)</span> for <span class="math notranslate nohighlight">\(x \in \RR^N\)</span>. Then for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> and any <span class="math notranslate nohighlight">\(x \in \RR^N\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\EE ( \| Y \|_2^2) = \| x \|_2^2
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\PP ( \| Y \|^2_2 - \| x \|_2^2 \geq \epsilon \| x \|_2^2 ) 
+\leq 2 \exp \left ( - \frac{M \epsilon^2}{\kappa^*} \right) 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\kappa^* = \frac{2}{1 - \ln(2)} \approx 6.5178\)</span>.</p>
+</div>
+</div><p>This means that the norm of a sub-Gaussian random vector strongly concentrates about its mean.</p>
+</div>
+<div class="section" id="sub-gaussian-matrices-satisfy-the-rip">
+<h3><span class="section-number">13.1.1.2. </span>Sub Gaussian Matrices satisfy the RIP<a class="headerlink" href="#sub-gaussian-matrices-satisfy-the-rip" title="Permalink to this headline">¶</a></h3>
+<p>Using this result we now state that sub-Gaussian matrices satisfy the RIP.</p>
+<div class="proof theorem admonition" id="res-cs-subgaussian-rip-3">
+<p class="admonition-title"><span class="caption-number">Theorem 13.2 </span> (Lower bound on required number of measurements)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Fix <span class="math notranslate nohighlight">\(\delta \in (0,1)\)</span>.
+Let <span class="math notranslate nohighlight">\(\Phi\)</span> be an <span class="math notranslate nohighlight">\(M\times N\)</span> random matrix whose entries
+<span class="math notranslate nohighlight">\(\Phi_{i j}\)</span> are i.i.d. with
+<span class="math notranslate nohighlight">\(\Phi_{i j}\)</span> drawn according to a
+strictly sub-Gaussian distribution with <span class="math notranslate nohighlight">\(c^2 = \frac{1}{M}\)</span>.
+If</p>
+<div class="math notranslate nohighlight">
+\[
+M \geq \kappa_1 K \ln \left ( \frac{N}{K} \right ),
+\]</div>
+<p>then <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies the RIP of order <span class="math notranslate nohighlight">\(K\)</span> with the prescribed <span class="math notranslate nohighlight">\(\delta\)</span>
+with probability exceeding  <span class="math notranslate nohighlight">\(1 - 2e^{-\kappa_2 M}\)</span>, where <span class="math notranslate nohighlight">\(\kappa_1\)</span> is arbitrary and</p>
+<div class="math notranslate nohighlight">
+\[
+\kappa_2 = \frac{\delta^2 }{2 \kappa^*} 
+- \frac{1}{\kappa_1} \ln \left ( \frac{42 e}{\delta} \right ) 
+\]</div>
+</div>
+</div><p>We note that this theorem achieves <span class="math notranslate nohighlight">\(M\)</span> of the same order as the lower bound
+obtained in  <a class="reference internal" href="../ssm/compressive_sensing.html#thm:rip_measurement_bound">Theorem 12.41</a> up to a constant.</p>
+<p>This is much better than deterministic approaches.</p>
+</div>
+<div class="section" id="advantages-of-random-construction">
+<h3><span class="section-number">13.1.1.3. </span>Advantages of Random Construction<a class="headerlink" href="#advantages-of-random-construction" title="Permalink to this headline">¶</a></h3>
+<p>There are a number of advantages of the random sensing matrix construction approach:</p>
+<ul>
+<li><p>One can show that for random construction, the measurements are <em>democratic</em>.
+This means that all measurements are equal in importance and it is possible to recover the
+signal from any sufficiently large subset of the measurements.</p>
+<p>Thus by using random <span class="math notranslate nohighlight">\(\Phi\)</span> one can be robust to the loss of loss or corruption of a small fraction
+of measurements.</p>
+</li>
+<li><p>In general we are more interested in <span class="math notranslate nohighlight">\(x\)</span> which is sparse in some basis <span class="math notranslate nohighlight">\(\Psi\)</span>. In this setting,
+we require that <span class="math notranslate nohighlight">\(\Phi \Psi\)</span> satisfy the RIP.</p>
+<p>Deterministic construction would explicitly require taking <span class="math notranslate nohighlight">\(\Psi\)</span> into account.</p>
+<p>But if <span class="math notranslate nohighlight">\(\Phi\)</span> is random, we can avoid this issue.</p>
+<p>If <span class="math notranslate nohighlight">\(\Phi\)</span> is Gaussian and <span class="math notranslate nohighlight">\(\Psi\)</span> is an orthonormal basis, then one can easily show that <span class="math notranslate nohighlight">\(\Phi \Psi\)</span> will also
+have a Gaussian distribution.</p>
+<p>Thus if <span class="math notranslate nohighlight">\(M\)</span> is high, <span class="math notranslate nohighlight">\(\Phi \Psi\)</span> will also satisfy RIP with very high probability.</p>
+<p>Similar results hold for other sub-Gaussian distributions as well.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="rademacher-sensing-matrices">
+<span id="sec-sm-rademacher-sensing-matrix"></span><h2><span class="section-number">13.1.2. </span>Rademacher Sensing Matrices<a class="headerlink" href="#rademacher-sensing-matrices" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection, we collect several results
+related to Rademacher sensing matrices.</p>
+<div class="proof definition admonition" id="def:sm:rademacher_sensing_matrix">
+<p class="admonition-title"><span class="caption-number">Definition 13.1 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A Rademacher sensing matrix <span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span> with <span class="math notranslate nohighlight">\(M &lt; N\)</span>
+is constructed by drawing each
+entry <span class="math notranslate nohighlight">\(\phi_{i j}\)</span> independently from a Rademacher random distribution
+given by</p>
+<div class="math notranslate nohighlight" id="equation-eq-sm-scaled-rademacher-distribution">
+<span class="eqno">(13.3)<a class="headerlink" href="#equation-eq-sm-scaled-rademacher-distribution" title="Permalink to this equation">¶</a></span>\[\PP_X(x) = \frac{1}{2}\delta\left(x-\frac{1}{\sqrt{M}}\right)
++ \frac{1}{2}\delta\left(x+\frac{1}{\sqrt{M}}\right).\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\phi_{i j}\)</span> takes a value <span class="math notranslate nohighlight">\(\pm \frac{1}{\sqrt{M}}\)</span> with equal probability.</p>
+</div>
+</div><p>We can remove the scale factor <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{M}}\)</span>
+out of the matrix <span class="math notranslate nohighlight">\(\Phi\)</span> writing</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi = \frac{1}{\sqrt{M}} \Chi
+\]</div>
+<p>With that we can draw individual entries of <span class="math notranslate nohighlight">\(\Chi\)</span>
+from a simpler Rademacher distribution given by</p>
+<div class="math notranslate nohighlight" id="equation-eq-sm-standard-rademacher-distribution">
+<span class="eqno">(13.4)<a class="headerlink" href="#equation-eq-sm-standard-rademacher-distribution" title="Permalink to this equation">¶</a></span>\[\PP_X(x) = \frac{1}{2}\delta(x-1) + \frac{1}{2}\delta(x + 1).\]</div>
+<p>Thus entries in <span class="math notranslate nohighlight">\(\Chi\)</span> take values of <span class="math notranslate nohighlight">\(\pm 1\)</span> with equal probability.</p>
+<p>This construction is useful since it allows us to implement the multiplication
+with  <span class="math notranslate nohighlight">\(\Phi\)</span> in terms of just additions and subtractions.
+The scaling can be implemented towards the end in the signal processing chain.</p>
+<div class="docutils">
+<p>We note that</p>
+<div class="math notranslate nohighlight">
+\[
+\EE(\phi_{i j}) = 0.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\EE(\phi_{i j}^2) = \frac{1}{M}.
+\]</div>
+<p>Actually we have a better result with</p>
+<div class="math notranslate nohighlight">
+\[
+\phi_{i j}^2 = \frac{1}{M}.
+\]</div>
+<p>We can write</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi = \begin{bmatrix}
+\phi_1 &amp; \dots &amp; \phi_N
+\end{bmatrix}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi_j \in \RR^M\)</span> is a Rademacher random vector with independent entries.
+We note that</p>
+<div class="math notranslate nohighlight">
+\[
+\EE (\| \phi_j  \|_2^2) 
+= \EE \left ( \sum_{i=1}^M \phi_{i j}^2 \right ) 
+= \sum_{i=1}^M (\EE (\phi_{i j}^2)) = M \frac{1}{M} = 1.
+\]</div>
+<p>In this case we also have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \phi_j  \|_2^2 = 1.
+\]</div>
+</div>
+<p>Thus the squared length of each of the columns in <span class="math notranslate nohighlight">\(\Phi\)</span> is <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<div class="proof lemma admonition" id="lem:sm:rademacher:random_vector_tail_bound">
+<p class="admonition-title"><span class="caption-number">Lemma 13.1 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bz \in \RR^M\)</span> be a Rademacher random vector
+with i.i.d entries <span class="math notranslate nohighlight">\(z_i\)</span>
+that take a value <span class="math notranslate nohighlight">\(\pm \frac{1}{\sqrt{M}}\)</span> with equal probability.
+Let <span class="math notranslate nohighlight">\(\bu \in \RR^M\)</span> be an arbitrary unit norm vector.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\PP \left ( | \langle \bz, \bu \rangle | &gt; \epsilon \right ) 
+\leq 2 \exp \left (- \epsilon^2 \frac{M}{2} \right ).
+\]</div>
+</div>
+</div><p>Representative values of this bound are plotted below.</p>
+<div class="figure align-default" id="fig-sm-rademacher-random-vector-tail-bound">
+<img alt="../_images/img_rademacher_rand_vec_tail_bound.png" src="../_images/img_rademacher_rand_vec_tail_bound.png" />
+<p class="caption"><span class="caption-number">Fig. 13.1 </span><span class="caption-text">Tail bound for the probability of inner product of a
+Rademacher random vector with a  unit norm vector</span><a class="headerlink" href="#fig-sm-rademacher-random-vector-tail-bound" title="Permalink to this image">¶</a></p>
+</div>
+<div class="proof admonition" id="proof">
+<p>Proof. This can be proven using Hoeffding’s inequality. To be elaborated later.</p>
+</div>
+<p>A particular application of this lemma is when <span class="math notranslate nohighlight">\(\bu\)</span> itself is another (independently chosen) unit norm Rademacher random vector.</p>
+<p>The lemma establishes that the probability of inner product of two independent unit norm
+Rademacher random vectors being large is very very small.
+In other words, independently chosen unit norm Rademacher random vectors are
+incoherent with high probability.
+This is a very useful result
+as we will see later in measurement of coherence of Rademacher sensing matrices.</p>
+<div class="section" id="joint-correlation">
+<h3><span class="section-number">13.1.2.1. </span>Joint Correlation<a class="headerlink" href="#joint-correlation" title="Permalink to this headline">¶</a></h3>
+<p>Columns of <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy a joint correlation property (<span id="id1">[<a class="reference internal" href="../bib.html#id138" title="Joel A Tropp and Anna C Gilbert. Signal recovery from random measurements via orthogonal matching pursuit. Information Theory, IEEE Transactions on, 53(12):4655–4666, 2007.">38</a>]</span>)
+which is described in following lemma.</p>
+<div class="proof lemma admonition" id="lem:sm:ramemacher:joint_correlation_property">
+<p class="admonition-title"><span class="caption-number">Lemma 13.2 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{\bu_k\} \)</span> be a sequence of <span class="math notranslate nohighlight">\(K\)</span> vectors (where <span class="math notranslate nohighlight">\(\bu_k \in \RR^M\)</span>)
+whose <span class="math notranslate nohighlight">\(\ell_2\)</span> norms do not exceed one. Independently
+choose <span class="math notranslate nohighlight">\(\bz \in \RR^M\)</span> to be a random vector with i.i.d. entries
+<span class="math notranslate nohighlight">\(z_i\)</span>  that take a value <span class="math notranslate nohighlight">\(\pm \frac{1}{\sqrt{M}}\)</span> with equal probability.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\PP\left(\max_{k} | \langle \bz,  \bu_k\rangle | \leq \epsilon \right) 
+\geq 1  - 2 K \exp \left( - \epsilon^2 \frac{M}{2} \right).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let us call  <span class="math notranslate nohighlight">\(\gamma = \max_{k} | \langle \bz,  \bu_k\rangle |\)</span>.</p>
+<ol>
+<li><p>We note that if for any <span class="math notranslate nohighlight">\(\bu_k\)</span>,
+<span class="math notranslate nohighlight">\(\| \bu_k \|_2 &lt;1\)</span> and we increase the length of <span class="math notranslate nohighlight">\(\bu_k\)</span> by scaling it,
+then <span class="math notranslate nohighlight">\(\gamma\)</span> will not decrease and hence
+<span class="math notranslate nohighlight">\(\PP(\gamma \leq \epsilon)\)</span> will not increase.</p></li>
+<li><p>Thus if we prove the bound for vectors <span class="math notranslate nohighlight">\(\bu_k\)</span> with
+<span class="math notranslate nohighlight">\(\| \bu_k\|_2 = 1 \Forall 1 \leq k \leq K\)</span>, it will
+be applicable for all <span class="math notranslate nohighlight">\(\bu_k\)</span> whose <span class="math notranslate nohighlight">\(\ell_2\)</span> norms
+do not exceed one.</p></li>
+<li><p>Hence we will assume that <span class="math notranslate nohighlight">\(\| \bu_k \|_2 = 1\)</span>.</p></li>
+<li><p>From <a class="reference internal" href="#lem:sm:rademacher:random_vector_tail_bound">Lemma 13.1</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP \left ( | \langle z, u_k \rangle | &gt; \epsilon \right ) 
+    \leq 2 \exp \left (- \epsilon^2 \frac{M}{2} \right ).
+   \]</div>
+</li>
+<li><p>Now the event</p>
+<div class="math notranslate nohighlight">
+\[
+    \left \{ \max_{k} | \langle z,  u_k\rangle | &gt; \epsilon \right \} 
+    = \bigcup_{ k= 1}^K \{| \langle z,  u_k\rangle | &gt; \epsilon\}
+    \]</div>
+<p>i.e. if any of the inner products (absolute value) is greater than
+<span class="math notranslate nohighlight">\(\epsilon\)</span> then the maximum is greater.</p>
+</li>
+<li><p>We recall Boole’s inequality which states that</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP \left(\bigcup_{i} A_i \right) \leq \sum_{i} \PP(A_i).
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP\left(\max_{k} | \langle \bz,  \bu_k\rangle | &gt; \epsilon \right) 
+    \leq  2 K \exp \left (- \epsilon^2 \frac{M}{2} \right ).
+   \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \PP\left(\max_{k} | \langle \bz,  \bu_k\rangle | \leq \epsilon \right) 
+    &amp;= 1 - \PP\left(\max_{k} | \langle \bz,  \bu_k\rangle | &gt; \epsilon \right) \\
+    &amp;\geq 1 - 2 K \exp \left(- \epsilon^2 \frac{M}{2} \right).
+   \end{split}\]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="coherence">
+<h3><span class="section-number">13.1.2.2. </span>Coherence<a class="headerlink" href="#coherence" title="Permalink to this headline">¶</a></h3>
+<p>We show that coherence of Rademacher sensing matrix is fairly small
+with high probability (adapted from <span id="id2">[<a class="reference internal" href="../bib.html#id138" title="Joel A Tropp and Anna C Gilbert. Signal recovery from random measurements via orthogonal matching pursuit. Information Theory, IEEE Transactions on, 53(12):4655–4666, 2007.">38</a>]</span>).</p>
+<div class="proof lemma admonition" id="lem:sm:rademacher:coherence">
+<p class="admonition-title"><span class="caption-number">Lemma 13.3 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Fix <span class="math notranslate nohighlight">\(\delta \in (0,1)\)</span>.
+For an <span class="math notranslate nohighlight">\(M \times N\)</span> Rademacher sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span>
+as defined in <a class="reference internal" href="#def:sm:rademacher_sensing_matrix">Definition 13.1</a>,
+the coherence statistic</p>
+<div class="math notranslate nohighlight">
+\[
+\mu \leq \sqrt{ \frac{4}{M} \ln \left( \frac{N}{\delta}\right)}
+\]</div>
+<p>with probability exceeding <span class="math notranslate nohighlight">\(1 - \delta\)</span>.</p>
+</div>
+</div><div class="figure align-default" id="fig-sm-rademacher-coherence-bound">
+<img alt="../_images/img_rademacher_coherence_bound.png" src="../_images/img_rademacher_coherence_bound.png" />
+<p class="caption"><span class="caption-number">Fig. 13.2 </span><span class="caption-text">Coherence bounds for Rademacher sensing matrices</span><a class="headerlink" href="#fig-sm-rademacher-coherence-bound" title="Permalink to this image">¶</a></p>
+</div>
+<div class="proof admonition" id="proof">
+<p>Proof. We recall the definition of coherence as</p>
+<div class="math notranslate nohighlight">
+\[
+\mu = \underset{j \neq k}{\max} | \langle \phi_j, \phi_k \rangle |
+= \underset{j &lt; k}{\max} | \langle \phi_j, \phi_k \rangle |.
+\]</div>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(\Phi\)</span> is a Rademacher sensing matrix hence each column of <span class="math notranslate nohighlight">\(\Phi\)</span>
+is unit norm column.</p></li>
+<li><p>Consider some <span class="math notranslate nohighlight">\(1 \leq j &lt; k \leq N\)</span> identifying columns
+<span class="math notranslate nohighlight">\(\phi_j\)</span> and <span class="math notranslate nohighlight">\(\phi_k\)</span>.</p></li>
+<li><p>We note that they are independent of each other.</p></li>
+<li><p>Thus from  <a class="reference internal" href="#lem:sm:rademacher:random_vector_tail_bound">Lemma 13.1</a>
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP \left ( |\langle \phi_j, \phi_k \rangle | &gt; \epsilon \right  )
+    \leq 2 \exp \left (- \epsilon^2 \frac{M}{2} \right ).
+   \]</div>
+</li>
+<li><p>Now there are <span class="math notranslate nohighlight">\(\frac{N(N-1)}{2}\)</span> such pairs of <span class="math notranslate nohighlight">\((j, k)\)</span>.</p></li>
+<li><p>Hence by applying Boole’s inequality</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP \left ( \underset{j &lt; k} {\max} |\langle \phi_j, \phi_k \rangle | &gt; \epsilon \right  )  
+    \leq 2 \frac{N(N-1)}{2} \exp \left (- \epsilon^2 \frac{M}{2} \right )
+    \leq N^2 \exp \left (- \epsilon^2 \frac{M}{2} \right ).
+   \]</div>
+</li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP \left ( \mu &gt; \epsilon \right )
+    \leq N^2 \exp \left (- \epsilon^2 \frac{M}{2} \right ).
+   \]</div>
+</li>
+<li><p>What we need to do now is to choose a suitable value of <span class="math notranslate nohighlight">\(\epsilon\)</span>
+so that the R.H.S. of this inequality is simplified.</p></li>
+<li><p>We choose</p>
+<div class="math notranslate nohighlight">
+\[
+    \epsilon^2 = \frac{4}{M} \ln \left ( \frac{N}{\delta}\right ).
+   \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \epsilon^2 \frac{M}{2} = 2 \ln \left ( \frac{N}{\delta}\right )
+    \implies \exp \left (- \epsilon^2 \frac{M}{2} \right ) 
+    =  \left ( \frac{\delta}{N} \right)^2.
+   \]</div>
+</li>
+<li><p>Putting back we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP \left ( \mu &gt; \epsilon \right )\leq N^2 \left ( \frac{\delta}{N} \right)^2 
+    \leq \delta^2.
+   \]</div>
+</li>
+<li><p>This justifies why we need <span class="math notranslate nohighlight">\(\delta \in (0,1)\)</span>.</p></li>
+<li><p>Finally</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP \left ( \mu \leq   \sqrt{ \frac{4}{M} \ln \left( \frac{N}{\delta}\right)} \right )
+    = \PP (\mu \leq \epsilon)  = 1 - \PP (\mu &gt; \epsilon)
+    &gt; 1 - \delta^2 
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    1 - \delta^2 &gt; 1 - \delta
+   \]</div>
+<p>which completes the proof.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="gaussian-sensing-matrices">
+<span id="sec-sm-gaussian-sensing-matrix"></span><h2><span class="section-number">13.1.3. </span>Gaussian Sensing Matrices<a class="headerlink" href="#gaussian-sensing-matrices" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection we collect several results related to Gaussian sensing matrices.</p>
+<div class="proof definition admonition" id="def:sm:gaussian_sensing_matrix">
+<p class="admonition-title"><span class="caption-number">Definition 13.2 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>A Gaussian sensing matrix <span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span> with <span class="math notranslate nohighlight">\(M &lt; N\)</span>
+is constructed by drawing each
+entry <span class="math notranslate nohighlight">\(\phi_{i j}\)</span> independently from a Gaussian random distribution <span class="math notranslate nohighlight">\(\Gaussian(0, \frac{1}{M})\)</span>.</p>
+</div>
+</div><p>We note that</p>
+<div class="math notranslate nohighlight">
+\[
+\EE(\phi_{i j}) = 0.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\EE(\phi_{i j}^2) = \frac{1}{M}.
+\]</div>
+<p>We can write</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi = \begin{bmatrix}
+\phi_1 &amp; \dots &amp; \phi_N
+\end{bmatrix}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi_j \in \RR^M\)</span> is a Gaussian random vector with independent entries.
+We note that</p>
+<div class="math notranslate nohighlight">
+\[
+\EE (\| \phi_j  \|_2^2) 
+= \EE \left ( \sum_{i=1}^M \phi_{i j}^2 \right )
+= \sum_{i=1}^M (\EE (\phi_{i j}^2)) = M \frac{1}{M} = 1.
+\]</div>
+<p>Thus the expected value of squared length of each of the columns in <span class="math notranslate nohighlight">\(\Phi\)</span> is <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<div class="section" id="id3">
+<h3><span class="section-number">13.1.3.1. </span>Joint Correlation<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Columns of <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy a joint correlation property (<span id="id4">[<a class="reference internal" href="../bib.html#id138" title="Joel A Tropp and Anna C Gilbert. Signal recovery from random measurements via orthogonal matching pursuit. Information Theory, IEEE Transactions on, 53(12):4655–4666, 2007.">38</a>]</span>)
+which is described in following lemma.</p>
+<div class="proof lemma admonition" id="lem:sm:gaussian:joint_correlation_property">
+<p class="admonition-title"><span class="caption-number">Lemma 13.4 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{\bu_k\} \)</span> be a sequence of <span class="math notranslate nohighlight">\(K\)</span> vectors (where <span class="math notranslate nohighlight">\(\bu_k \in \RR^M\)</span>)
+whose <span class="math notranslate nohighlight">\(\ell_2\)</span> norms do not exceed one.
+Independently  choose <span class="math notranslate nohighlight">\(\bz \in \RR^M\)</span> to be a random vector
+with i.i.d. <span class="math notranslate nohighlight">\(\Gaussian(0, \frac{1}{M})\)</span> entries.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\PP\left(\max_{k} | \langle z,  u_k\rangle |
+\leq \epsilon \right) \geq 1  -  K \exp \left( - \epsilon^2 \frac{M}{2} \right).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let us call  <span class="math notranslate nohighlight">\(\gamma = \max_{k} | \langle \bz,  \bu_k\rangle |\)</span>.</p>
+<ol>
+<li><p>We note that if for any <span class="math notranslate nohighlight">\(\bu_k\)</span>,
+<span class="math notranslate nohighlight">\(\| \bu_k \|_2 &lt;1 \)</span>
+and we increase the length of <span class="math notranslate nohighlight">\(\bu_k\)</span> by scaling it,
+then <span class="math notranslate nohighlight">\(\gamma\)</span> will not decrease and hence
+<span class="math notranslate nohighlight">\(\PP(\gamma \leq \epsilon)\)</span> will not increase.</p></li>
+<li><p>Thus if we prove the bound for vectors <span class="math notranslate nohighlight">\(\bu_k\)</span> with
+<span class="math notranslate nohighlight">\(\| \bu_k\|_2 = 1 \Forall 1 \leq k \leq K\)</span>, it will
+be applicable for all <span class="math notranslate nohighlight">\(\bu_k\)</span> whose <span class="math notranslate nohighlight">\(\ell_2\)</span> norms do not exceed one.</p></li>
+<li><p>Hence we will assume that <span class="math notranslate nohighlight">\(\| \bu_k \|_2 = 1\)</span>.</p></li>
+<li><p>Now consider <span class="math notranslate nohighlight">\(\langle \bz, \bu_k \rangle\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bz\)</span> is a Gaussian random vector,
+hence <span class="math notranslate nohighlight">\(\langle \bz, \bu_k \rangle\)</span>
+is a Gaussian random variable.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\| \bu_k \| =1\)</span> hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bz, \bu_k \rangle \sim \Gaussian \left(0, \frac{1}{M} \right).
+   \]</div>
+</li>
+<li><p>We recall a well known tail bound for Gaussian random variables which states that</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP_X ( | x | &gt; \epsilon) \; = \; \sqrt{\frac{2}{\pi}} \int_{\epsilon \sqrt{N}}^{\infty} \exp \left( -\frac{x^2}{2}\right) d x
+    \; \leq \; \exp \left (- \epsilon^2 \frac{M}{2} \right).
+   \]</div>
+</li>
+<li><p>Now the event</p>
+<div class="math notranslate nohighlight">
+\[
+    \left \{ \max_{k} | \langle \bz,  \bu_k\rangle | &gt; \epsilon \right \}
+    = \bigcup_{ k= 1}^K \{| \langle \bz,  \bu_k\rangle | &gt; \epsilon\}
+   \]</div>
+<p>i.e. if any of the inner products (absolute value) is greater than <span class="math notranslate nohighlight">\(\epsilon\)</span>
+then the maximum is greater.</p>
+</li>
+<li><p>We recall Boole’s inequality which states that</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP \left(\bigcup_{i} A_i \right) \leq \sum_{i} \PP(A_i).
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \PP\left(\max_{k} | \langle \bz,  \bu_k\rangle | &gt; \epsilon \right) 
+    \leq  K \exp \left(- \epsilon^2 \frac{M}{2} \right).
+   \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+    \PP\left(\max_{k} | \langle \bz,  \bu_k\rangle | \leq \epsilon \right) 
+    &amp;= 1 - \PP\left(\max_{k} | \langle \bz,  \bu_k\rangle | &gt; \epsilon \right) \\
+    &amp;\geq 1 - K \exp \left(- \epsilon^2 \frac{M}{2} \right).
+    \end{aligned}
+   \end{split}\]</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./compressive_sensing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chapter_compressive_sensing.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">13. </span>Compressive Sensing</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../sparse_approx/ch_sparse_approx.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Sparse Approximation with Dictionaries</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,5 +1,7 @@
 # Sequences
 
+```{index} Sequence
+```
 ````{prf:definition} Sequence
 :label: def-st-sequence
 
@@ -39,6 +41,8 @@ mean that there exists a $k \in \Nat$ such that
 $x$ is the k-th element of the sequence $X = \{ x_n \}$.
 ```
 
+```{index} Sequence; eventual satisfaction
+```
 ````{prf:definition} Eventually
 :label: def-st-sequence-eventual-satisfaction
 
@@ -55,6 +59,8 @@ For all $n > 1000$, it satisfies the property that
 $x_n < 1$.
 ```
 
+```{index} Subsequence
+```
 ````{prf:definition} Subsequence
 :label: def-st-sub-sequence
 

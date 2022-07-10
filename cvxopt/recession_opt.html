@@ -1,0 +1,1744 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.3. Directions of Recession &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9.4. Basic Duality" href="duality.html" />
+    <link rel="prev" title="9.2. Projection on Convex Sets" href="projection.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   9. Convex Optimization
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/cvxopt/recession_opt.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fcvxopt/recession_opt.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#existence-of-solutions-of-convex-programs">
+   9.3.1. Existence of Solutions of Convex Programs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constrained-minimization-compact-solution-set">
+     9.3.1.1. Constrained Minimization: Compact Solution Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constrained-minimization-existence-of-solutions">
+     9.3.1.2. Constrained Minimization: Existence of Solutions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimization-with-linear-constraints-existence-of-solutions">
+     9.3.1.3. Minimization with Linear Constraints: Existence of Solutions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratically-constrained-quadratic-minimization">
+     9.3.1.4. Quadratically Constrained Quadratic Minimization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-programs">
+     9.3.1.5. Quadratic Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Directions of Recession</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#existence-of-solutions-of-convex-programs">
+   9.3.1. Existence of Solutions of Convex Programs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constrained-minimization-compact-solution-set">
+     9.3.1.1. Constrained Minimization: Compact Solution Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constrained-minimization-existence-of-solutions">
+     9.3.1.2. Constrained Minimization: Existence of Solutions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimization-with-linear-constraints-existence-of-solutions">
+     9.3.1.3. Minimization with Linear Constraints: Existence of Solutions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratically-constrained-quadratic-minimization">
+     9.3.1.4. Quadratically Constrained Quadratic Minimization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-programs">
+     9.3.1.5. Quadratic Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="directions-of-recession">
+<h1><span class="section-number">9.3. </span>Directions of Recession<a class="headerlink" href="#directions-of-recession" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we analyze the question of
+existence of optimal solutions of a convex
+optimization problem from the perspective
+of the theory of recession cones developed
+in <a class="reference internal" href="../convex_sets/recession_cones.html#sec-cvx-recession"><span class="std std-ref">Recession Cones</span></a>.</p>
+<p>Main references for this section are <span id="id1">[<a class="reference internal" href="../bib.html#id25" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">7</a>]</span>.</p>
+<p>Recall from <a class="reference internal" href="../convex_sets/convex_functions.html#res-cvxf-convexity-epigraph">Theorem 8.71</a> that
+the epigraph of a convex function is convex.
+Recall from <a class="reference internal" href="../metric_spaces/real_valued_functions.html#res-ms-closed-func-closed-epi">Theorem 3.92</a>
+that the epigraph of a closed function is closed.
+Also the epigraph of a proper function is nonempty.
+Hence, the epigraph of a proper, closed and convex function
+is nonempty, closed and convex.
+Also, it is easy to see that the epigraph is also unbounded.</p>
+<p>The key idea is that the recession cone of the epigraph
+can be used to obtain the directions along which the
+function decreases monotonically.</p>
+<p>Throughout this section, we shall assume that <span class="math notranslate nohighlight">\(\VV\)</span> is
+a Euclidean space unless otherwise specified.</p>
+<div class="section" id="existence-of-solutions-of-convex-programs">
+<h2><span class="section-number">9.3.1. </span>Existence of Solutions of Convex Programs<a class="headerlink" href="#existence-of-solutions-of-convex-programs" title="Permalink to this headline">¶</a></h2>
+<p>The recession cone of a function provides
+excellent candidates for descent directions
+for a convex function.</p>
+<p>If we start at some <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span> and move
+indefinitely along a recession direction
+<span class="math notranslate nohighlight">\(\by \in R_f\)</span>, then we are guaranteed that
+we stay within the sublevel set <span class="math notranslate nohighlight">\(\sublevel(f, f(\bx))\)</span>;
+i.e., <span class="math notranslate nohighlight">\(f(\bx + \alpha \by) \leq f(\bx)\)</span> for every
+<span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p>
+<div class="proof observation admonition" id="res-opt-recession-dir-non-ascent-dir">
+<p class="admonition-title"><span class="caption-number">Observation 9.2 </span></p>
+<div class="observation-content section" id="proof-content">
+<p>A direction of recession of a proper convex function
+<span class="math notranslate nohighlight">\(f\)</span> is a direction of continuous non-ascent; i.e.,
+the value of the function never increases in a
+direction of recession.</p>
+<p>Conversely, if we start at some <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span>
+and while moving along a direction <span class="math notranslate nohighlight">\(\by \in \VV\)</span>,
+encounter a point <span class="math notranslate nohighlight">\(\bz = \bx + \alpha \by\)</span>
+for some <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(f(\bz) &gt; f(\bx)\)</span>, then <span class="math notranslate nohighlight">\(\by\)</span> cannot be
+a direction of recession.</p>
+<p>A direction that is not a direction of
+recession of <span class="math notranslate nohighlight">\(f\)</span> is a direction of
+eventual continuous ascent of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-opt-non-recession-dir-continuous-ascent">
+<p class="admonition-title"><span class="caption-number">Theorem 9.24 </span> (Continuous ascent on non-recession directions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be a proper, closed and convex function.
+Let <span class="math notranslate nohighlight">\(\by \notin R_f\)</span> where <span class="math notranslate nohighlight">\(R_f\)</span> is the recession cone of <span class="math notranslate nohighlight">\(f\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in \dom f\)</span>. Then, along the ray starting from <span class="math notranslate nohighlight">\(\bx\)</span>
+in the direction <span class="math notranslate nohighlight">\(\by\)</span>, eventually <span class="math notranslate nohighlight">\(f\)</span> increases
+monotonically to <span class="math notranslate nohighlight">\(\infty\)</span>; i.e., for some <span class="math notranslate nohighlight">\(t \geq 0\)</span>
+and for all <span class="math notranslate nohighlight">\(s_1, s_2 \geq t\)</span> with
+<span class="math notranslate nohighlight">\(s_1 &lt; s_2\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx + s_1 \by) &lt; f(\bx + s_2 \by).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We recall that <span class="math notranslate nohighlight">\(R_f\)</span> is the recession cone for all nonempty
+sublevel sets of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(S_0\)</span> denote the sublevel set <span class="math notranslate nohighlight">\(\{ \bz \in \VV \ST f(\bz) \leq f(\bx) \}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\by\)</span> is not a recession direction of <span class="math notranslate nohighlight">\(S_0\)</span>.</p></li>
+<li><p>Then due to <a class="reference internal" href="../convex_sets/recession_cones.html#res-cvx-recession-dir-charac">Theorem 8.179</a>,
+there exists some <span class="math notranslate nohighlight">\(t &gt; 0\)</span> such that
+<span class="math notranslate nohighlight">\(\bx + t \by \notin S_0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(f(\bx + t \by) &gt; f(\bx)\)</span>.</p></li>
+<li><p>In other words, the point <span class="math notranslate nohighlight">\(\bx + t \by\)</span> is outside
+the relative boundary of <span class="math notranslate nohighlight">\(S_0\)</span>.</p></li>
+<li><p>Consider any <span class="math notranslate nohighlight">\(s &gt; t\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bu = \bx + t \by\)</span> and <span class="math notranslate nohighlight">\(\bv = \bx + s \by\)</span>.</p></li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(\bu\)</span> lies on the line segment between <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r = \frac{t}{s}\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   (1-r) \bx + r \bv = \frac{1}{s}((s -t ) \bx + t (\bx + s \by))
+   = \bx + t \by = \bu.
+   \]</div>
+</li>
+<li><p>By convexity of <span class="math notranslate nohighlight">\(f\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bu) \leq (1-r) f(\bx) + r f(\bv).
+   \]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   r f(\bv) \geq f(\bu) - (1-r) f(\bx) &gt; f(\bu) - (1-r) f(\bu) = r f(\bu).
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(f(\bv) &gt; f(\bu)\)</span>.</p></li>
+<li><p>Thus for every <span class="math notranslate nohighlight">\(s &gt; t\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx + s \by) &gt; f(\bx + t \by).
+   \]</div>
+</li>
+<li><p>Now pick any <span class="math notranslate nohighlight">\(s_1, s_2 \geq t\)</span> with
+<span class="math notranslate nohighlight">\(s_1 &lt; s_2\)</span>.</p></li>
+<li><p>By the previous argument</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx + s_1 \by) \geq f(\bx + t \by).
+   \]</div>
+</li>
+<li><p>Noting that <span class="math notranslate nohighlight">\(\bx + s_1 \by\)</span> lies on the line segment
+between <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\bx + s_2 \by\)</span>, using the previous
+argument, it is clear that</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx + s_2 \by) &gt; f(\bx + s_1 \by).
+   \]</div>
+</li>
+<li><p>Since for all <span class="math notranslate nohighlight">\(s \geq t\)</span>, <span class="math notranslate nohighlight">\(f\)</span> is strictly monotonically
+increasing, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{s \to \infty} f(\bx + s \by) = \infty.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="section" id="constrained-minimization-compact-solution-set">
+<h3><span class="section-number">9.3.1.1. </span>Constrained Minimization: Compact Solution Set<a class="headerlink" href="#constrained-minimization-compact-solution-set" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-const-min-compact-minimizers">
+<p class="admonition-title"><span class="caption-number">Theorem 9.25 </span> (Constrained minimization: nonempty and compact minimizer set)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper, closed and convex function.
+Let <span class="math notranslate nohighlight">\(X\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Assume that <span class="math notranslate nohighlight">\(C = X \cap \dom f \neq \EmptySet\)</span>.
+Consider the optimization problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }  &amp;  &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; \bx \in X.
+\end{split}\]</div>
+<p>Then the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(X\)</span> is nonempty and compact
+if and only if <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(f\)</span> have no common nonzero direction of recession;
+i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+R_f \cap R_X = \{ \bzero \}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(X^*\)</span> denote the set of minimizers for this optimization problem.
+Let <span class="math notranslate nohighlight">\(p^*\)</span> be the optimal value of the optimization problem.</p>
+<p>We first consider the case of unconstrained minimization where
+<span class="math notranslate nohighlight">\(X = \VV\)</span>. Hence <span class="math notranslate nohighlight">\(C = \dom f\)</span>.</p>
+<ol class="simple">
+<li><p>In this case <span class="math notranslate nohighlight">\(R_X = \VV\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_f \cap R_X = \{ \bzero \}\)</span> if and only if <span class="math notranslate nohighlight">\(R_f = \{ \bzero \}\)</span>.</p></li>
+<li><p>Assume that <span class="math notranslate nohighlight">\(X^*\)</span> is nonempty and compact.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(X^* = \{\bx \in \VV \ST f(\bx) \leq p^* \}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X^*\)</span> is a nonempty sublevel set.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(X^*\)</span> is a sublevel set and <span class="math notranslate nohighlight">\(f\)</span> is closed and convex, hence <span class="math notranslate nohighlight">\(X^*\)</span> is also
+closed and convex.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(X^*\)</span> is compact, it is closed and bounded.</p></li>
+<li><p>Hence, as per <a class="reference internal" href="../convex_sets/recession_cones.html#res-cvx-recession-dir-nz-unbounded">Theorem 8.181</a>,
+its recession cone is <span class="math notranslate nohighlight">\(\{ \bzero \}\)</span>.</p></li>
+<li><p>Then due to <a class="reference internal" href="../convex_sets/recession_cones.html#def-cvx-func-recession-cone">Definition 8.68</a>, the recession cone of <span class="math notranslate nohighlight">\(f\)</span>,
+<span class="math notranslate nohighlight">\(R_f =  \{ \bzero \}\)</span>.</p></li>
+<li><p>Conversely if <span class="math notranslate nohighlight">\(R_f \cap R_X = \{ \bzero \}\)</span>, then <span class="math notranslate nohighlight">\(R_f = \{ \bzero \}\)</span>.</p></li>
+<li><p>Then the recession cone of every nonempty sublevel set is <span class="math notranslate nohighlight">\(\{ \bzero \}\)</span>.</p></li>
+<li><p>Then due to <a class="reference internal" href="../convex_sets/recession_cones.html#res-cvx-recession-dir-nz-unbounded">Theorem 8.181</a>, every nonempty
+sublevel set is closed and bounded, hence compact.</p></li>
+<li><p>Then due to Weierstrass theorem (<a class="reference internal" href="../num_opt/opt_intro.html#res-opt-weierstrass-theorem">Theorem 7.9</a>),
+<span class="math notranslate nohighlight">\(X^*\)</span> is nonempty and compact (since one of the sublevel sets is nonempty
+and bounded).</p></li>
+</ol>
+<p>We now consider the more general case where <span class="math notranslate nohighlight">\(X \neq \VV\)</span>.</p>
+<ol>
+<li><p>Introduce a new function <span class="math notranslate nohighlight">\(\tilde{f} : \VV \to \RERL\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \tilde{f}(\bx) = \begin{cases}
+   f(\bx) &amp; \text{ if } \bx \in X;\\
+   \infty &amp; \text{ otherwise }.
+   \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p>We can see that <span class="math notranslate nohighlight">\(\dom \tilde{f} = X \cap \dom f = C\)</span> which is nonempty
+by hypothesis.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\tilde{f}\)</span> is proper.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is convex, hence <span class="math notranslate nohighlight">\(\tilde{f}\)</span> (a restriction of <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\(X\)</span>)
+is also convex.</p></li>
+<li><p>Note that for any <span class="math notranslate nohighlight">\(t \in \RR\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   \sublevel (\tilde{f}, t) = \sublevel(f, t) \cap X.
+   \]</div>
+</li>
+<li><p>Since both <span class="math notranslate nohighlight">\(\sublevel(f, t)\)</span> and <span class="math notranslate nohighlight">\(X\)</span> are closed and convex sets,
+hence <span class="math notranslate nohighlight">\(\sublevel (\tilde{f}, t)\)</span> is also closed and convex for every <span class="math notranslate nohighlight">\(t \in \RR\)</span>.</p></li>
+<li><p>Since all sublevel sets of <span class="math notranslate nohighlight">\(\tilde{f}\)</span> are closed, hence <span class="math notranslate nohighlight">\(f\)</span> is a closed function.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\tilde{f}\)</span> is a proper, closed and convex function.</p></li>
+<li><p>Furthermore, the set of minimizers for the unconstrained minimization
+of <span class="math notranslate nohighlight">\(\tilde{f}\)</span> is nothing but <span class="math notranslate nohighlight">\(X^*\)</span>.</p></li>
+<li><p>Thus, the original constrained minimization program of minimizing
+<span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(X\)</span> is equivalent to the unconstrained minimization
+of <span class="math notranslate nohighlight">\(\tilde{f}\)</span>.</p></li>
+<li><p>By the previous argument, <span class="math notranslate nohighlight">\(X^*\)</span> is nonempty and compact
+if and only if <span class="math notranslate nohighlight">\(\tilde{f}\)</span> has no nonzero direction of recession.</p></li>
+<li><p>The recession cones of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(\tilde{f}\)</span> are related by</p>
+<div class="math notranslate nohighlight">
+\[
+   R_{\tilde{f}} = R_f \cap R_X.
+   \]</div>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(t \in \RR\)</span> be such that <span class="math notranslate nohighlight">\(\sublevel (\tilde{f}, t)\)</span> is nonempty.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(R_{\tilde{f}} = R_{\sublevel (\tilde{f}, t)}\)</span>.</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(\sublevel (\tilde{f}, t) = \sublevel(f, t) \cap X\)</span>.</p></li>
+<li><p>Since both <span class="math notranslate nohighlight">\(\sublevel(f, t)\)</span> and <span class="math notranslate nohighlight">\(X\)</span> are nonempty, closed and
+convex and their intersection is nonempty, hence
+due to <a class="reference internal" href="../convex_sets/recession_cones.html#res-cvx-recession-cone-intersect">Theorem 8.183</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+      R_{\sublevel (\tilde{f}, t)} = R_{\sublevel(f, t)} \cap R_X
+      = R_f \cap R_X.
+      \]</div>
+</li>
+</ol>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(X^*\)</span> is nonempty and compact if and only if
+<span class="math notranslate nohighlight">\(R_f \cap R_X = \{ \bzero \}\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="constrained-minimization-existence-of-solutions">
+<h3><span class="section-number">9.3.1.2. </span>Constrained Minimization: Existence of Solutions<a class="headerlink" href="#constrained-minimization-existence-of-solutions" title="Permalink to this headline">¶</a></h3>
+<div class="docutils">
+<p>The <a class="reference internal" href="#res-opt-const-min-compact-minimizers">Theorem 9.25</a>
+provides guarantees under which the problem of
+minimization of a proper, closed and convex function <span class="math notranslate nohighlight">\(f\)</span>
+over a nonempty, closed and convex set <span class="math notranslate nohighlight">\(X\)</span> has nonempty
+as well as compact solution set <span class="math notranslate nohighlight">\(X^*\)</span>.
+In this subsection, we concern ourselves with the
+more general case where the solution set may be
+unbounded.
+In other words, we are only concerned with the
+conditions under which <span class="math notranslate nohighlight">\(X^*\)</span> is nonempty.</p>
+</div>
+<div class="proof lemma admonition" id="res-opt-const-min-nested-sublevel-sets">
+<p class="admonition-title"><span class="caption-number">Lemma 9.1 </span> (Constrained minimization: nested sublevel sets)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper, closed and convex function.
+Let <span class="math notranslate nohighlight">\(X\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Assume that <span class="math notranslate nohighlight">\(X \cap \dom f \neq \EmptySet\)</span>.
+Consider the optimization problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }  &amp;  &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; \bx \in X.
+\end{split}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(p^* = \inf_{\bx \in X} f(\bx)\)</span>.
+Let <span class="math notranslate nohighlight">\(\{ t_k \}\)</span> be a nonincreasing sequence of real numbers
+such that <span class="math notranslate nohighlight">\(t_k \downarrow p^*\)</span>; i.e.,
+the sequence reaches the limit <span class="math notranslate nohighlight">\(p^*\)</span> from above.
+Consider the sublevel sets <span class="math notranslate nohighlight">\(V_k = \sublevel(f, t_k)\)</span>.</p>
+<ol>
+<li><p>The sublevel sets <span class="math notranslate nohighlight">\(V_k\)</span> are nonempty for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>The sequence <span class="math notranslate nohighlight">\(\{ V_k \}\)</span> is a sequence of nested sets.</p></li>
+<li><p>The set <span class="math notranslate nohighlight">\(X \cap V_k\)</span> is nonempty for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>The set <span class="math notranslate nohighlight">\(X \cap V_K\)</span> is closed and convex for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>The sequence <span class="math notranslate nohighlight">\(\{ X \cap V_k \}\)</span> is a sequence of nested sets.</p></li>
+<li><p>The set of minimizers <span class="math notranslate nohighlight">\(X^*\)</span> for the optimization problem
+is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   X^* = \bigcap_{k=1}^{\infty} (X \cap V_k).
+   \]</div>
+</li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(t_k \downarrow p^*\)</span> means that</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(t_k &gt; p^*\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_{k+1} \leq t_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists a <span class="math notranslate nohighlight">\(k\)</span> such that <span class="math notranslate nohighlight">\(t_k \leq p^* + \epsilon\)</span>.</p></li>
+</ol>
+<p>We are given that <span class="math notranslate nohighlight">\(p^*\)</span> is the optimum value.
+Hence for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists a <span class="math notranslate nohighlight">\(\bx \in X \cap \dom f\)</span> such that
+<span class="math notranslate nohighlight">\(f(\bx) \leq p^* + \epsilon\)</span>.</p>
+<p>(1) <span class="math notranslate nohighlight">\(V_k\)</span> is nonempty.</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(t_k &gt; p^*\)</span>, hence <span class="math notranslate nohighlight">\(\epsilon = t_k - p^* &gt; 0\)</span>.</p></li>
+<li><p>Then there exists <span class="math notranslate nohighlight">\(\bx \in X \cap \dom f\)</span> such that
+<span class="math notranslate nohighlight">\(f(\bx) \leq p^* + \epsilon = t_k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(V_k = \sublevel(f, t_k) \neq \EmptySet\)</span>.</p></li>
+</ol>
+<p>(2) Nested sublevel sets</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(V_{k+1} \subseteq V_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span> since <span class="math notranslate nohighlight">\(t_{k+1} \leq t_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\{ V_k \}\)</span> is a sequence of nested sets.</p></li>
+</ol>
+<p>(3) <span class="math notranslate nohighlight">\(X \cap V_k\)</span> is nonempty.</p>
+<ol class="simple">
+<li><p>We established that there exists <span class="math notranslate nohighlight">\(\bx \in X \cap \dom f\)</span> such that
+<span class="math notranslate nohighlight">\(f(\bx) \leq t_k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx \in X\)</span> and <span class="math notranslate nohighlight">\(\bx \in V_k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(X \cap V_k\)</span> is nonempty.</p></li>
+</ol>
+<p>(4) <span class="math notranslate nohighlight">\(X \cap V_k\)</span> is closed and convex.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is closed by hypothesis.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is closed, hence <span class="math notranslate nohighlight">\(V_k\)</span> is closed.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(V_k\)</span> are both closed, hence <span class="math notranslate nohighlight">\(X \cap V_k\)</span> is closed.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is convex by hypothesis.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is convex, hence <span class="math notranslate nohighlight">\(V_k\)</span> is convex.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(V_k\)</span> are both convex, hence <span class="math notranslate nohighlight">\(X \cap V_k\)</span> is convex.</p></li>
+</ol>
+<p>(5) <span class="math notranslate nohighlight">\(\{ X \cap V_k \}\)</span> is nested.</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(V_{k+1} \subseteq V_k\)</span>,
+hence <span class="math notranslate nohighlight">\(X \cap V_{k+1} \subseteq X \cap V_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\{ X \cap V_k \}\)</span> is a sequence of nested sets.</p></li>
+</ol>
+<p>(6) Minimizers</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in X^*\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(f(\bx) = p^*\)</span> and <span class="math notranslate nohighlight">\(\bx \in X\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx \in \sublevel(f, t)\)</span> for every <span class="math notranslate nohighlight">\(t \geq p^*\)</span> and <span class="math notranslate nohighlight">\(\bx \in X\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx \in X \cap V_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(X^* \subseteq X \cap V_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(X^* \subseteq \bigcap_{k=1}^{\infty} (X \cap V_k)\)</span>.</p></li>
+<li><p>For the converse, let <span class="math notranslate nohighlight">\(\bx \in \bigcap_{k=1}^{\infty} (X \cap V_k)\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx \in X\)</span> and <span class="math notranslate nohighlight">\(\bx \in V_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx \in X\)</span> and <span class="math notranslate nohighlight">\(f(\bx) \leq t_k\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(f(\bx) \leq \lim_{k \to \infty} t_k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(f(\bx) \leq p^*\)</span>.</p></li>
+<li><p>But since <span class="math notranslate nohighlight">\(p^*\)</span> is the optimal value, hence <span class="math notranslate nohighlight">\(f(\bx) = p^*\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in X\)</span> and <span class="math notranslate nohighlight">\(f(\bx) = p^*\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx \in X^*\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bigcap_{k=1}^{\infty} (X \cap V_k) \subseteq X^*\)</span>.</p></li>
+<li><p>Together <span class="math notranslate nohighlight">\(X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res-opt-const-min-nonempty-minimizers">
+<p class="admonition-title"><span class="caption-number">Theorem 9.26 </span> (Constrained minimization: existence of solutions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper, closed and convex function.
+Let <span class="math notranslate nohighlight">\(X\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Assume that <span class="math notranslate nohighlight">\(C = X \cap \dom f \neq \EmptySet\)</span>.
+Consider the optimization problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }  &amp;  &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; \bx \in X.
+\end{split}\]</div>
+<p>Then the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(X\)</span> is nonempty
+if</p>
+<div class="math notranslate nohighlight">
+\[
+R_X \cap R_f = L_X \cap L_f.
+\]</div>
+<p>In particular, the set of minimizers is of the form</p>
+<div class="math notranslate nohighlight">
+\[
+(L_X \cap L_f) + \tilde{X}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{X}\)</span> is some nonempty and compact set.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(p^* = \inf_{\bx \in X} f(\bx)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\{ t_k \}\)</span> be a nonincreasing sequence of real numbers
+such that <span class="math notranslate nohighlight">\(t_k \downarrow p^*\)</span>; i.e.,
+the sequence reaches the limit <span class="math notranslate nohighlight">\(p^*\)</span> from above.</p></li>
+<li><p>Consider the sublevel sets</p>
+<div class="math notranslate nohighlight">
+\[
+   V_k = \sublevel(f, t_k) = \{ \bx \in \VV \ST f(\bx) \leq t_k \}.
+   \]</div>
+</li>
+<li><p>Then the set of minimizers is given by
+<span class="math notranslate nohighlight">\(X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)\)</span>.</p></li>
+<li><p>The sets <span class="math notranslate nohighlight">\(X \cap V_k\)</span> are nonempty, closed, convex and nested
+due to <a class="reference internal" href="#res-opt-const-min-nested-sublevel-sets">Lemma 9.1</a>.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(k\)</span>, the recession cone of <span class="math notranslate nohighlight">\(X \cap V_k\)</span> is <span class="math notranslate nohighlight">\(R = R_X \cap R_f\)</span>
+due to <a class="reference internal" href="../convex_sets/recession_cones.html#res-cvx-recession-cone-intersect">Theorem 8.183</a>
+and <a class="reference internal" href="../convex_sets/recession_cones.html#def-cvx-func-recession-cone">Definition 8.68</a>.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(k\)</span>, the lineality space of <span class="math notranslate nohighlight">\(X \cap V_k\)</span> is <span class="math notranslate nohighlight">\(L = L_X \cap L_f\)</span>
+due to <a class="reference internal" href="../convex_sets/recession_cones.html#res-cvx-lineality-space-intersect">Theorem 8.187</a>
+and <a class="reference internal" href="../convex_sets/recession_cones.html#res-cvx-sublevel-sets-lineality-space">Observation 8.5</a>.</p></li>
+<li><p>Thus, every <span class="math notranslate nohighlight">\(X \cap V_k\)</span> has the same recession cone and lineality space
+satisfying <span class="math notranslate nohighlight">\(R=L\)</span> by hypothesis.</p></li>
+<li><p>Then due to <a class="reference internal" href="../convex_sets/recession_cones.html#res-cvx-recession-nested-nonempty-intersect-gen-cond">Theorem 8.190</a>,
+the nested sequence of nonempty, closed and convex sets
+<span class="math notranslate nohighlight">\(\{ X \cap V_k \}\)</span> has a nonempty intersection and
+has the form</p>
+<div class="math notranslate nohighlight">
+\[
+   \bigcap_{k=1}^{\infty} (X \cap V_k) = (L_X \cap L_f) + \tilde{X}
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{X}\)</span> is a nonempty and compact set.</p>
+</li>
+<li><p>By <a class="reference internal" href="#res-opt-const-min-nested-sublevel-sets">Lemma 9.1</a>,
+<span class="math notranslate nohighlight">\(X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)\)</span>.</p></li>
+<li><p>We are done.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="minimization-with-linear-constraints-existence-of-solutions">
+<h3><span class="section-number">9.3.1.3. </span>Minimization with Linear Constraints: Existence of Solutions<a class="headerlink" href="#minimization-with-linear-constraints-existence-of-solutions" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-min-lin-const-nonempty-minimizers">
+<p class="admonition-title"><span class="caption-number">Theorem 9.27 </span> (Minimization with linear inequality constraints: existence of solutions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper, closed and convex function.
+Let <span class="math notranslate nohighlight">\(X\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\VV\)</span>
+specified as a
+set of linear inequality constraints; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+X = \{ \bx \in \VV \ST \langle \bx, \ba_i \rangle \leq b_i, i=1,\dots,r \}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ba_i \in \VV\)</span> and <span class="math notranslate nohighlight">\(b_i \in \RR\)</span>.</p>
+<p>Assume that <span class="math notranslate nohighlight">\(C = X \cap \dom f \neq \EmptySet\)</span>.
+Consider the optimization problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }  &amp;  &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; \bx \in X.
+\end{split}\]</div>
+<p>Then the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(X\)</span> is nonempty
+if</p>
+<div class="math notranslate nohighlight">
+\[
+R_X \cap R_f \subseteq L_f,
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Following the proof of <a class="reference internal" href="#res-opt-const-min-nonempty-minimizers">Theorem 9.26</a>,
+we choose <span class="math notranslate nohighlight">\(\{ t_k \}\)</span> such that <span class="math notranslate nohighlight">\(t_k \downarrow p^*\)</span>.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is an intersection of closed half-spaces.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(X\)</span> is nonempty, closed and convex.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{ V_k \}\)</span> is a nested
+sequences of nonempty, closed and convex sets.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X \cap V_k\)</span> is nonempty for all <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(V_k\)</span> are nonempty, hence they have the same
+recession cone <span class="math notranslate nohighlight">\(R_f\)</span> and same lineality space <span class="math notranslate nohighlight">\(L_f\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_X \cap R_f \subseteq L_f\)</span> by hypothesis.</p></li>
+<li><p>Hence due to <a class="reference internal" href="../convex_sets/recession_cones.html#res-cvx-rec-nested-seq-closed-inequality-constraints">Theorem 8.191</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)
+   = X \cap \left (\bigcap_{k=1}^{\infty} V_k \right )
+   \]</div>
+<p>is nonempty.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="quadratically-constrained-quadratic-minimization">
+<h3><span class="section-number">9.3.1.4. </span>Quadratically Constrained Quadratic Minimization<a class="headerlink" href="#quadratically-constrained-quadratic-minimization" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-qcqp-nonempty-minimizers">
+<p class="admonition-title"><span class="caption-number">Theorem 9.28 </span> (Quadratically constrained quadratic minimization: existence of solutions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RERL\)</span> be a proper, closed and convex function
+given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \bx^T \bQ \bx + \ba^T \bx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bQ \in \SS^n_+\)</span> is a symmetric positive semidefinite
+matrix, <span class="math notranslate nohighlight">\(\ba \in \RR^n\)</span> is a vector.</p>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a nonempty, closed and convex subset of <span class="math notranslate nohighlight">\(\RR^n\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+X = \{ \bx \in \RR^n \ST 
+\bx^T \bQ_j \bx + \ba^T_j \bx + b_j \leq 0, j=1,\dots, r \}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bQ_j \in \SS^n_+\)</span>, <span class="math notranslate nohighlight">\(\ba_j \in \RR^n\)</span>
+and <span class="math notranslate nohighlight">\(b_j \in \RR\)</span>.
+Assume that <span class="math notranslate nohighlight">\(C = X \cap \dom f \neq \EmptySet\)</span>.
+Consider the optimization problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \text{minimize }  &amp;  &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; \bx \in X.
+\end{split}\]</div>
+<p>Assume that the optimal value for this optimization problem
+<span class="math notranslate nohighlight">\(p^* &gt; -\infty\)</span>.
+Then the set of minimizers of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(X\)</span> is nonempty.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Following the proof of <a class="reference internal" href="#res-opt-const-min-nonempty-minimizers">Theorem 9.26</a>,
+we choose <span class="math notranslate nohighlight">\(\{ t_k \}\)</span> such that <span class="math notranslate nohighlight">\(t_k \downarrow p^*\)</span>.</p>
+<ol>
+<li><p>The sets <span class="math notranslate nohighlight">\(V_k\)</span> have the form</p>
+<div class="math notranslate nohighlight">
+\[
+   V_k = \{ \bx \in \RR^n \ST \bx^T \bQ \bx + \ba^T \bx \leq t_k \}
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\{ t_k \}\)</span> is a nonincreasing sequence converging to <span class="math notranslate nohighlight">\(p^*\)</span>
+which is finite.</p>
+</li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is specified via a set of quadratic inequalities.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X \cap V_k\)</span> is nonempty for all <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="../convex_sets/recession_cones.html#res-cvx-recession-quad-func-quad-constraints">Theorem 8.192</a>, the set</p>
+<div class="math notranslate nohighlight">
+\[
+   X^* = \bigcap_{k=1}^{\infty} (X \cap V_k)
+   = X \cap \left (\bigcap_{k=1}^{\infty} V_k \right )
+   \]</div>
+<p>is nonempty.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="quadratic-programs">
+<h3><span class="section-number">9.3.1.5. </span>Quadratic Programs<a class="headerlink" href="#quadratic-programs" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-qp-lin-ineq-nonempty-minimizers">
+<p class="admonition-title"><span class="caption-number">Theorem 9.29 </span> (Quadratic minimization with linear inequalities: existence of solutions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RERL\)</span> be a proper, closed and convex function
+given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = \bx^T \bQ \bx + \bc^T \bx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bQ \in \SS^n_+\)</span> is a symmetric positive semidefinite
+matrix, <span class="math notranslate nohighlight">\(\bc \in \RR^n\)</span> is a vector.</p>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a nonempty set of the form</p>
+<div class="math notranslate nohighlight">
+\[
+X = \{ \bx \in \RR^n \ST \bA \bx \preceq \bb \}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bA \in \RR^{m \times n}\)</span> and <span class="math notranslate nohighlight">\(\bb \in \RR^n\)</span>.
+The following are equivalent.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> attains a minimum over <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>The optimum value <span class="math notranslate nohighlight">\(p^* &gt; -\infty\)</span>.</p></li>
+<li><p>For all <span class="math notranslate nohighlight">\(\by\)</span> such that <span class="math notranslate nohighlight">\(\bA \by \preceq \bzero\)</span>
+and <span class="math notranslate nohighlight">\(\by \in \nullspace \bQ\)</span>, we have
+<span class="math notranslate nohighlight">\(\bc^T \by \geq 0\)</span>.</p></li>
+</ol>
+</div>
+</div><p>The recession cone of <span class="math notranslate nohighlight">\(X\)</span> is given by <span class="math notranslate nohighlight">\(\{ \by \ST \bA \by \preceq \bzero \}\)</span>.</p>
+<p>Recall from <a class="reference internal" href="../convex_sets/recession_cones.html#ex-cvx-recession-cone-quadratic-functional">Example 8.65</a> that</p>
+<div class="math notranslate nohighlight">
+\[
+R_f = \{\by \ST \bQ \by = \bzero,  \bc^T \by \leq 0 \}
+\text{ and }
+L_f = \{\by \ST \bQ \by = \bzero,  \bc^T \by = 0 \}.
+\]</div>
+<div class="proof admonition" id="proof">
+<p>Proof. (1) <span class="math notranslate nohighlight">\(\implies\)</span> (2) is obvious.</p>
+<p>(2) <span class="math notranslate nohighlight">\(\implies\)</span> (3)</p>
+<ol>
+<li><p>For all <span class="math notranslate nohighlight">\(\bx \in X\)</span>, <span class="math notranslate nohighlight">\(\by \in \nullspace \bQ\)</span> with
+<span class="math notranslate nohighlight">\(\bA \by \preceq \bzero\)</span> and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, we have</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\by \in R_X\)</span> since <span class="math notranslate nohighlight">\(\bA \by \preceq \bzero\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx + \alpha \by \in X\)</span>.</p></li>
+<li><p>Also</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      f(\bx + \alpha \by)
+      &amp;= (\bx + \alpha \by)^T \bQ (\bx + \alpha \by)
+      + \bc^T (\bx + \alpha \by) \\
+      &amp;= \bx^T \bQ \bx + \bc^T \bx + \alpha \bc^T \by \\
+      &amp;= f(\bx) + \alpha \bc^T \by.
+      \end{split}\]</div>
+<p>We used the hypothesis that <span class="math notranslate nohighlight">\(\bQ \by = \by^T \bQ = \bzero\)</span>.</p>
+</li>
+</ol>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(\bc^T \by &lt; 0\)</span>, then <span class="math notranslate nohighlight">\(\lim_{\alpha \to \infty} f(\bx + \alpha \by) = -\infty\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(p^* = -\infty\)</span>.</p></li>
+<li><p>This contradicts the hypothesis that <span class="math notranslate nohighlight">\(p^* &gt; -\infty\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bc^T \by \geq 0\)</span> must hold
+for every <span class="math notranslate nohighlight">\(\by \in \nullspace \bQ\)</span> with <span class="math notranslate nohighlight">\(\bA \by \preceq \bzero\)</span>.</p></li>
+</ol>
+<p>(3) <span class="math notranslate nohighlight">\(\implies\)</span> (1)</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\by \in R_X\)</span> since <span class="math notranslate nohighlight">\(\bA \by \preceq \bzero\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_f = (\nullspace \bQ) \cap \{ \by \ST \bc^T \by \leq 0 \}\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   R_X \cap R_f = \{ \by \ST \bA \by \preceq \bzero \}
+   \cap (\nullspace \bQ) \cap \{ \by \ST \bc^T \by \leq 0 \}.
+   \]</div>
+</li>
+<li><p>Then for every <span class="math notranslate nohighlight">\(\by \in R_X \cap R_f\)</span>, then we  must have <span class="math notranslate nohighlight">\(\bc^T \by = 0\)</span>.</p>
+<ol class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(\by \in  R_X \cap R_f\)</span>, hence <span class="math notranslate nohighlight">\(\bA \by \preceq \bzero\)</span>
+and <span class="math notranslate nohighlight">\(\by \in \nullspace \bQ\)</span>.</p></li>
+<li><p>By hypothesis (3), we must have <span class="math notranslate nohighlight">\(\bc^T \by \geq 0\)</span>.</p></li>
+<li><p>But since <span class="math notranslate nohighlight">\(\by \in  R_X \cap R_f\)</span>, hence we also have <span class="math notranslate nohighlight">\(\bc^T \by \leq 0\)</span>.</p></li>
+<li><p>Together, we must have <span class="math notranslate nohighlight">\(\bc^T \by = 0\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_X \cap R_f\)</span> reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+   R_X \cap R_f = \{ \by \ST \bA \by \preceq \bzero \}
+   \cap (\nullspace \bQ) \cap \{ \by \ST \bc^T \by = 0 \}.
+   \]</div>
+</li>
+<li><p>Recall that <span class="math notranslate nohighlight">\(L_f = \{\by \ST \bQ \by = \bzero,  \bc^T \by = 0 \}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(R_X \cap R_f \subseteq L_f\)</span>.</p></li>
+<li><p>We satisfy all the requirements of
+<a class="reference internal" href="#res-opt-min-lin-const-nonempty-minimizers">Theorem 9.27</a>,</p></li>
+<li><p>Hence the set of minimizers is nonempty.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> indeed attains a minimum over <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./cvxopt"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="projection.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">9.2. </span>Projection on Convex Sets</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="duality.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.4. </span>Basic Duality</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,1971 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12.9. Dictionaries II &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="13. Compressive Sensing" href="../compressive_sensing/chapter_compressive_sensing.html" />
+    <link rel="prev" title="12.8. Restricted Isometry Property" href="rip.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ssm/dictionaries_2.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fssm/dictionaries_2.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spark">
+   12.9.1. Spark
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#upper-bounds-for-spark">
+     12.9.1.1. Upper Bounds for Spark
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coherence">
+   12.9.2. Coherence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#babel-function">
+   12.9.3. Babel function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#p-babel-function">
+   12.9.4. p-Babel Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-recovery-coefficient">
+   12.9.5. Exact Recovery Coefficient
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#erc-and-babel-function">
+     12.9.5.1. ERC and Babel Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#erc-and-coherence">
+     12.9.5.2. ERC and Coherence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#geometrical-interpretation-of-erc">
+     12.9.5.3. Geometrical Interpretation of ERC
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dirac-dct-dictionary">
+   12.9.6. Dirac-DCT dictionary
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Dictionaries II</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spark">
+   12.9.1. Spark
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#upper-bounds-for-spark">
+     12.9.1.1. Upper Bounds for Spark
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coherence">
+   12.9.2. Coherence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#babel-function">
+   12.9.3. Babel function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#p-babel-function">
+   12.9.4. p-Babel Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-recovery-coefficient">
+   12.9.5. Exact Recovery Coefficient
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#erc-and-babel-function">
+     12.9.5.1. ERC and Babel Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#erc-and-coherence">
+     12.9.5.2. ERC and Coherence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#geometrical-interpretation-of-erc">
+     12.9.5.3. Geometrical Interpretation of ERC
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dirac-dct-dictionary">
+   12.9.6. Dirac-DCT dictionary
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="dictionaries-ii">
+<h1><span class="section-number">12.9. </span>Dictionaries II<a class="headerlink" href="#dictionaries-ii" title="Permalink to this headline">¶</a></h1>
+<p>This section continues the development of
+dictionaries for sparse and redundant representations.</p>
+<div class="section" id="spark">
+<h2><span class="section-number">12.9.1. </span>Spark<a class="headerlink" href="#spark" title="Permalink to this headline">¶</a></h2>
+<p>We present some more results on spark of a dictionary.</p>
+<div class="section" id="upper-bounds-for-spark">
+<h3><span class="section-number">12.9.1.1. </span>Upper Bounds for Spark<a class="headerlink" href="#upper-bounds-for-spark" title="Permalink to this headline">¶</a></h3>
+<p>Whenever a set of atoms in a dictionary are linearly dependent,
+the dependence corresponds to some vector in its null space. Thus,
+identifying the spark of a dictionary essentially amounts of
+sifting through the vectors in its null space and finding
+one with smallest <span class="math notranslate nohighlight">\(\ell_0\)</span>-“norm”.
+This can be cast as an optimization problem:</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-spark-minimum-l0-nullspace-problem">
+<span class="eqno">(12.56)<a class="headerlink" href="#equation-eq-proj-spark-minimum-l0-nullspace-problem" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{\bv}{\text{minimize}}
+&amp; &amp; \| \bv \|_0 \\
+&amp; \text{subject to }
+&amp; &amp; \bDDD \bv = \bzero.\end{split}\]</div>
+<div class="docutils">
+<p>Note that the solution <span class="math notranslate nohighlight">\(\bv^*\)</span> of this problem is not unique.
+If <span class="math notranslate nohighlight">\(\bv^*\)</span> is a solution that <span class="math notranslate nohighlight">\(c \bv^*\)</span> for any <span class="math notranslate nohighlight">\(c \neq 0\)</span>
+is also a solution.
+Spark is the optimum value of the objective function <span class="math notranslate nohighlight">\(\| \bv \|_0\)</span>.
+We now define a sequence of optimization problems for <span class="math notranslate nohighlight">\(k = 1, \dots, D\)</span></p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-spark-minimum-l0-nullspace-problem-k">
+<span class="eqno">(12.57)<a class="headerlink" href="#equation-eq-proj-spark-minimum-l0-nullspace-problem-k" title="Permalink to this equation">¶</a></span>\[\begin{split} &amp; \underset{\bv}{\text{minimize}}
+ &amp; &amp; \| \bv \|_0 \\
+ &amp; \text{subject to }
+ &amp; &amp; \bDDD \bv = \bzero, v_k = 1.\end{split}\]</div>
+<ol>
+<li><p>The <span class="math notranslate nohighlight">\(k\)</span>-th problem constrains the solution to choose atom <span class="math notranslate nohighlight">\(\bd_k\)</span>
+from the dictionary.</p></li>
+<li><p>Since the minimal set of linearly
+dependent atoms in <span class="math notranslate nohighlight">\(\bDDD\)</span> will contain at least two vectors,
+hence <span class="math notranslate nohighlight">\(\spark(\bDDD)\)</span> would correspond to the optimal value
+of one (or more) of the problems
+<a class="reference internal" href="#equation-eq-proj-spark-minimum-l0-nullspace-problem-k">(12.57)</a>.</p></li>
+<li><p>Formally, if we denote <span class="math notranslate nohighlight">\(\bv_k^{0, *}\)</span> as an optimal vector for the problem
+<a class="reference internal" href="#equation-eq-proj-spark-minimum-l0-nullspace-problem-k">(12.57)</a>,
+then</p>
+<div class="math notranslate nohighlight">
+\[
+    \spark(\bDDD) = \underset{1 \leq k \leq D}
+    {\text{minimize }}\| \bv_k^{0, *}\|_0.
+   \]</div>
+</li>
+<li><p>Thus, solving <a class="reference internal" href="#equation-eq-proj-spark-minimum-l0-nullspace-problem">(12.56)</a> is
+equivalent to solving all <span class="math notranslate nohighlight">\(D\)</span> problems specified by
+<a class="reference internal" href="#equation-eq-proj-spark-minimum-l0-nullspace-problem-k">(12.57)</a> and then
+finding the minimum <span class="math notranslate nohighlight">\(\ell_0\)</span>-“norm” among them.</p></li>
+<li><p>The problems <a class="reference internal" href="#equation-eq-proj-spark-minimum-l0-nullspace-problem-k">(12.57)</a>
+are still computationally intractable.</p></li>
+</ol>
+<p>We now change each of the <span class="math notranslate nohighlight">\(\ell_0\)</span>-“norm”
+<a class="reference internal" href="#equation-eq-proj-spark-minimum-l0-nullspace-problem-k">(12.57)</a>
+minimization problems to <span class="math notranslate nohighlight">\(\ell_1\)</span>-“norm” minimization problems.</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-spark-minimum-l1-nullspace-problem-k">
+<span class="eqno">(12.58)<a class="headerlink" href="#equation-eq-proj-spark-minimum-l1-nullspace-problem-k" title="Permalink to this equation">¶</a></span>\[\begin{split} &amp; \underset{\bv}{\text{minimize }}
+ &amp; &amp; \| \bv \|_1 \\
+ &amp; \text{subject to }
+ &amp; &amp; \bDDD \bv = \bzero, v_k = 1.\end{split}\]</div>
+<ol>
+<li><p>We have a convex objective and convex (linear)
+constraints. These are tractable problems.</p></li>
+<li><p>Let us indicate an optimal solution of
+<a class="reference internal" href="#equation-eq-proj-spark-minimum-l1-nullspace-problem-k">(12.58)</a>
+as <span class="math notranslate nohighlight">\(\bv_k^{1, *}\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bDDD \bv_k^{1, *} = \bzero\)</span>,
+hence <span class="math notranslate nohighlight">\(\bv_k^{1, *}\)</span> is
+feasible for <a class="reference internal" href="#equation-eq-proj-spark-minimum-l0-nullspace-problem-k">(12.57)</a>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bv_k^{0, *}\|_0 \leq  \| \bv_k^{1, *}\|_0.
+   \]</div>
+</li>
+<li><p>This gives us the relationship</p>
+<div class="math notranslate nohighlight">
+\[
+   \spark(\bDDD) \leq \underset{1 \leq k \leq D}{\text{minimize }}
+   \| \bv_k^{1, *}\|_0.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>We formally state the upper bound on <span class="math notranslate nohighlight">\(\spark(\bDDD)\)</span> in the following theorem
+<span id="id1">[<a class="reference internal" href="../bib.html#id57" title="David L Donoho and Michael Elad. Optimally sparse representation in general (nonorthogonal) dictionaries via $l_1$ minimization. Proceedings of the National Academy of Sciences, 100(5):2197–2202, 2003.">18</a>]</span>.</p>
+<div class="proof theorem admonition" id="res:proj:spark:upper_bound_l1_problems">
+<p class="admonition-title"><span class="caption-number">Theorem 12.69 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bDDD\)</span> be a dictionary. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\spark(\bDDD) \leq \underset{1 \leq k \leq D}{\text{minimize }} \| \bv_k^{1, *}\|_0
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bv_k^{1, *}\)</span> is a solution of the problem <a class="reference internal" href="#equation-eq-proj-spark-minimum-l1-nullspace-problem-k">(12.58)</a>.</p>
+</div>
+</div></div>
+</div>
+<div class="section" id="coherence">
+<h2><span class="section-number">12.9.2. </span>Coherence<a class="headerlink" href="#coherence" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection we develop some more bounds using coherence of a dictionary.
+As usual, we will be considering an overcomplete dictionary
+<span class="math notranslate nohighlight">\(\bDDD \in \CC^{N \times D}\)</span> consisting
+of <span class="math notranslate nohighlight">\(D\)</span> atoms.
+The coherence of <span class="math notranslate nohighlight">\(\bDDD\)</span> is denoted by <span class="math notranslate nohighlight">\(\mu (\bDDD)\)</span>.
+In short we will simply write it as <span class="math notranslate nohighlight">\(\mu\)</span>.
+A subdictionary will be indexed by an index set <span class="math notranslate nohighlight">\(\Lambda\)</span>
+consisting of linearly independent atoms.</p>
+<div class="proof theorem admonition" id="res:proj:coherence:2_infty_norm_pseudo_inverse_upper_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.70 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\((K - 1) \mu &lt; 1\)</span> and assume that <span class="math notranslate nohighlight">\(| \Lambda | \leq K\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bDDD_{\Lambda}^{\dag} \|_{2 \to \infty} 
+\leq \frac{1}{\sqrt{ 1 - ( K - 1) \mu}}.
+\]</div>
+<p>Equivalently, the rows of <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}^{\dag}\)</span> have <span class="math notranslate nohighlight">\(\ell_2\)</span> norms
+no greater than <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{ 1 - ( K - 1) \mu}}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We recall that the operator norm <span class="math notranslate nohighlight">\(\| \bDDD_{\Lambda}^{\dag} \|_{2 \to \infty}\)</span>
+computes the  maximum <span class="math notranslate nohighlight">\(\ell_2\)</span> norm among the rows of <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}^{\dag}\)</span>.
+TODO COMPLETE ITS PROOF.</p>
+</div>
+<p>The following definition is due to <span id="id2">[<a class="reference internal" href="../bib.html#id43" title="Jie Chen and Xiaoming Huo. Theoretical results on sparse representations of multiple-measurement vectors. Signal Processing, IEEE Transactions on, 54(12):4634–4643, 2006.">15</a>, <a class="reference internal" href="../bib.html#id57" title="David L Donoho and Michael Elad. Optimally sparse representation in general (nonorthogonal) dictionaries via $l_1$ minimization. Proceedings of the National Academy of Sciences, 100(5):2197–2202, 2003.">18</a>]</span>.</p>
+<div class="proof definition admonition" id="def:proj:coherence:mu_half_G">
+<p class="admonition-title"><span class="caption-number">Definition 12.31 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bG = \bDDD^H \bDDD\)</span> be the Gram matrix for dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+We define <span class="math notranslate nohighlight">\(\mu_{1/2}(\bG)\)</span> as the smallest number <span class="math notranslate nohighlight">\(m\)</span>
+such that the sum of magnitudes of a
+collection of <span class="math notranslate nohighlight">\(m\)</span> off-diagonal entries in a single row
+or column of the Gram matrix <span class="math notranslate nohighlight">\(\bG\)</span> is at least <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>.</p>
+</div>
+</div><p>This quantity was introduced in <span id="id3">[<a class="reference internal" href="../bib.html#id57" title="David L Donoho and Michael Elad. Optimally sparse representation in general (nonorthogonal) dictionaries via $l_1$ minimization. Proceedings of the National Academy of Sciences, 100(5):2197–2202, 2003.">18</a>]</span> for developing
+more accurate bounds compared to bounds based on coherence. At that
+time the idea of Babel function was not available. A careful examination reveals
+that <span class="math notranslate nohighlight">\(\mu_{1/2}(\bG)\)</span> can be related to Babel function.</p>
+<div class="proof theorem admonition" id="res:mu_half_g_coherence_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.71 </span></p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\mu_{1/2}(\bG) \geq \frac{1}{2\mu}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(\mu\)</span> is the maximum absolute value of any off diagonal term in
+<span class="math notranslate nohighlight">\(\bG = \bDDD^H \bDDD\)</span>, hence sum of any <span class="math notranslate nohighlight">\(m\)</span> terms, say <span class="math notranslate nohighlight">\(T\)</span>, is bounded by</p>
+<div class="math notranslate nohighlight">
+\[
+T \leq m \mu.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+T \geq \frac{1}{2} \implies m \mu \geq \frac{1}{2} \implies m \geq \frac{1}{2\mu}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\mu_{1/2}(\bG)\)</span> is the minimum number of
+off diagonal terms whose sum exceeds <span class="math notranslate nohighlight">\(1/2\)</span>, hence</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_{1/2}(\bG) \geq \frac{1}{2\mu}.
+\]</div>
+</div>
+<p>The following result is due to <span id="id4">[<a class="reference internal" href="../bib.html#id57" title="David L Donoho and Michael Elad. Optimally sparse representation in general (nonorthogonal) dictionaries via $l_1$ minimization. Proceedings of the National Academy of Sciences, 100(5):2197–2202, 2003.">18</a>]</span>.</p>
+<div class="proof theorem admonition" id="res:proj:coherence:spark_lower_bound_mu_half">
+<p class="admonition-title"><span class="caption-number">Theorem 12.72 </span></p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\spark(\bDDD) \geq 2 \mu_{1/2}(G) +1.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We proceed as follows.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bh \in \NullSpace(\bDDD)\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \bDDD \bh  = \bzero \implies \bG \bh = \bDDD^H \bDDD \bh  = \bzero.
+   \]</div>
+</li>
+<li><p>Subtracting both sides with <span class="math notranslate nohighlight">\(\bh\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \bG \bh - \bh = (\bG  - \bI) \bh = -\bh.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda = \supp(\bh)\)</span>.</p></li>
+<li><p>By taking columns indexed by <span class="math notranslate nohighlight">\(\Lambda\)</span>
+from <span class="math notranslate nohighlight">\(\bG - \bI\)</span> and corresponding entries in <span class="math notranslate nohighlight">\(\bh\)</span>,
+we can write:</p>
+<div class="math notranslate nohighlight">
+\[
+    (\bG - \bI)_{\Lambda} \bh_{\lambda} = - \bh.
+   \]</div>
+</li>
+<li><p>Taking <span class="math notranslate nohighlight">\(\ell_{\infty}\)</span> norm on both sides we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bh \|_{\infty} = \| (\bG - \bI)_{\Lambda} \bh_{\lambda} \|_{\infty}.
+   \]</div>
+</li>
+<li><p>We know that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| (\bG - \bI)_{\Lambda} \bh_{\lambda} \|_{\infty} 
+    \leq \| (\bG - \bI)_{\Lambda} \|_{\infty} \| \bh_{\lambda} \|_{\infty}
+   \]</div>
+</li>
+<li><p>It is easy to see that:</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bh_{\lambda} \|_{\infty} = \| \bh \|_{\infty}.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bh \|_{\infty} \leq 
+    \| (\bG - \bI)_{\Lambda} \|_{\infty} \| \bh \|_{\infty}.
+   \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| (\bG - \bI)_{\Lambda} \|_{\infty} \geq 1.
+   \]</div>
+</li>
+<li><p>But <span class="math notranslate nohighlight">\(\| (\bG - \bI)_{\Lambda} \|_{\infty}\)</span> is nothing
+but the maximum sum of magnitudes
+of off diagonal entries in <span class="math notranslate nohighlight">\(\bG\)</span> along a row in <span class="math notranslate nohighlight">\(\bG_{\Lambda}\)</span>.</p></li>
+<li><p>Consider any row in <span class="math notranslate nohighlight">\((\bG - \bI)_{\Lambda}\)</span>.</p></li>
+<li><p>One of the entries in the row
+(on the main diagonal of <span class="math notranslate nohighlight">\(\bG - \bI\)</span>) is 0.</p></li>
+<li><p>Thus, there are a maximum of
+<span class="math notranslate nohighlight">\(|\Lambda | - 1\)</span> nonzero entries in the row.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Lambda\)</span> is smallest when <span class="math notranslate nohighlight">\(|\Lambda | = \spark(\bDDD)\)</span>.</p></li>
+<li><p>For such a <span class="math notranslate nohighlight">\(\Lambda\)</span>, there exists a row in <span class="math notranslate nohighlight">\(\bG\)</span>
+such that the sum of  <span class="math notranslate nohighlight">\(\spark(\bDDD) - 1\)</span>
+off diagonal entries in the row exceeds 1.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(n\)</span> denote the minimum number of
+off diagonal elements on a row or
+a column of <span class="math notranslate nohighlight">\(\bG\)</span> such that the sum of their magnitudes exceeds one.</p></li>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+    \spark(\bDDD) - 1 \geq n.
+   \]</div>
+</li>
+<li><p>It is easy to see that</p>
+<div class="math notranslate nohighlight">
+\[
+    n \geq 2 \mu_{1/2} (\bG)
+   \]</div>
+<p>i.e. minimum number of off diagonal elements summing up to 1 or more
+is at least twice the minimum number of off diagonal elements
+summing up to <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>
+or more on any row (or column due to Hermitian property).</p>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \spark(\bDDD) - 1 \geq 2 \mu_{1/2} (G).
+   \]</div>
+</li>
+<li><p>Rewriting, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \spark(\bDDD) \geq 2 \mu_{1/2} (G) + 1.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="babel-function">
+<span id="sec-proj-babel"></span><h2><span class="section-number">12.9.3. </span>Babel function<a class="headerlink" href="#babel-function" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection, we provide a more general development
+of Babel function for a pair of dictionaries.</p>
+<ol>
+<li><p>When we consider a single dictionary, we will use <span class="math notranslate nohighlight">\(\bDDD\)</span>
+as the dictionary.</p></li>
+<li><p>When considering a pair of dictionaries of equal size,
+we would typically label them as <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Psi\)</span> with
+both <span class="math notranslate nohighlight">\(\Phi, \Psi \in \CC^{N \times D}\)</span>.</p></li>
+<li><p>We will  assume that the dictionaries are full rank as they
+span the signal space <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p></li>
+<li><p>Why a pair of dictionaries?</p>
+<ol>
+<li><p>We consider <span class="math notranslate nohighlight">\(\Phi\)</span> as a modeling dictionary from which the sparse signals</p>
+<div class="math notranslate nohighlight">
+\[
+      \bx \approx \Phi \ba
+      \]</div>
+<p>are built.</p>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\Psi\)</span> on the other hand is the sensing dictionary which
+will be used to compute correlations with the signal <span class="math notranslate nohighlight">\(\bx\)</span>
+and try to estimate the approximation <span class="math notranslate nohighlight">\(\ba\)</span>.</p></li>
+<li><p>Ideally, <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Psi\)</span> should be same.</p></li>
+<li><p>But in real life, we may not know <span class="math notranslate nohighlight">\(\Phi\)</span> correctly.</p></li>
+<li><p>Hence, <span class="math notranslate nohighlight">\(\Psi\)</span> would be a dictionary slightly different from <span class="math notranslate nohighlight">\(\Phi\)</span>.</p></li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="p-babel-function">
+<h2><span class="section-number">12.9.4. </span>p-Babel Function<a class="headerlink" href="#p-babel-function" title="Permalink to this headline">¶</a></h2>
+<p>See <span id="id5">[<a class="reference internal" href="../bib.html#id87" title="Rémi Gribonval, Holger Rauhut, Karin Schnass, and Pierre Vandergheynst. Atoms of all channels, unite! average case analysis of multi-channel sparse recovery using greedy algorithms. Journal of Fourier analysis and Applications, 14(5-6):655–687, 2008.">24</a>]</span> for reference.</p>
+<div class="proof definition admonition" id="def:proj:babel:p_babel_function">
+<p class="admonition-title"><span class="caption-number">Definition 12.32 </span> (<span class="math notranslate nohighlight">\(p\)</span>-Babel function over <span class="math notranslate nohighlight">\(\Lambda\)</span>)</p>
+<div class="definition-content section" id="proof-content">
+<p>Consider an index set <span class="math notranslate nohighlight">\(\Lambda \subset \{1, \dots, D \}\)</span> indexing
+a subset of atoms in <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Psi\)</span>.
+The <em><span class="math notranslate nohighlight">\(p\)</span>-Babel function</em>  over <span class="math notranslate nohighlight">\({\Lambda}\)</span> is defined as</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-e1817ba8-e5b2-448b-a3e5-e793f5d9bf3c">
+<span class="eqno">(12.59)<a class="headerlink" href="#equation-eq-proj-e1817ba8-e5b2-448b-a3e5-e793f5d9bf3c" title="Permalink to this equation">¶</a></span>\[\mu_p(\Phi, \Psi, \Lambda) \triangleq 
+\underset{l \notin \Lambda}{\sup}
+\left (\sum_{j \in \Lambda} 
+    |\langle \phi_j, \psi_l \rangle |^p \right )^{\frac{1}{p}}.\]</div>
+</div>
+</div><p>What is going on here?</p>
+<div class="docutils">
+<ol>
+<li><p>Consider the row vector</p>
+<div class="math notranslate nohighlight">
+\[
+    \bv^l  = \psi_l^H \Phi_{\Lambda}.
+   \]</div>
+</li>
+<li><p>This vector contains inner products of modeling atoms in
+<span class="math notranslate nohighlight">\(\Phi\)</span> indexed by <span class="math notranslate nohighlight">\(\Lambda\)</span> with the sensing atom <span class="math notranslate nohighlight">\(\psi_l\)</span>.</p></li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bv^l \|_p = 
+    \left ( \sum_{i} | v^l_i |^p \right )^{\frac{1}{p}}
+    =  \left ( \sum_{j \in \Lambda} 
+        | \langle \phi_j, \psi_l \rangle |^p \right )^{\frac{1}{p}}
+   \]</div>
+</li>
+<li><p>This is the term in
+<a class="reference internal" href="#equation-eq-proj-e1817ba8-e5b2-448b-a3e5-e793f5d9bf3c">(12.59)</a>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \mu_p(\Phi, \Psi, \Lambda) 
+    = \underset{l \notin \Lambda}{\sup} \| v^l \|_p.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\| v^l \|_p\)</span> is a measure of the correlation of the sensing atom
+<span class="math notranslate nohighlight">\(\psi_l\)</span> with a group of modeling atoms in <span class="math notranslate nohighlight">\(\Phi\)</span>
+indexed by <span class="math notranslate nohighlight">\(\Lambda\)</span> using the <span class="math notranslate nohighlight">\(p\)</span>-norm.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_p(\Phi, \Psi, \Lambda)\)</span> attempts to find out a
+sensing atom from <span class="math notranslate nohighlight">\(\Psi\)</span> outside the index set <span class="math notranslate nohighlight">\(\Lambda\)</span>
+which is most correlated to the group of modeling atoms
+in <span class="math notranslate nohighlight">\(\Phi\)</span> indexed by <span class="math notranslate nohighlight">\(\Lambda\)</span> and returns the maximum
+correlation value.</p></li>
+<li><p>Different choices of <span class="math notranslate nohighlight">\(p\)</span>-norm lead to different correlation values.</p></li>
+</ol>
+<p>We can also measure a correlation of sensing and modeling
+atoms inside the index set <span class="math notranslate nohighlight">\(\Lambda\)</span>.</p>
+<div class="proof definition admonition" id="def:proj:babel:complementary_p_babel_function">
+<p class="admonition-title"><span class="caption-number">Definition 12.33 </span> (Complementary <span class="math notranslate nohighlight">\(p\)</span>-Babel function over <span class="math notranslate nohighlight">\(\Lambda\)</span>)</p>
+<div class="definition-content section" id="proof-content">
+<p>A complement to the <span class="math notranslate nohighlight">\(p\)</span>-Babel function measures the amount of correlation between atoms <em>inside</em> the support <span class="math notranslate nohighlight">\(\Lambda\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-2337484b-4a0b-4946-9d65-6f935f8e46c5">
+<span class="eqno">(12.60)<a class="headerlink" href="#equation-eq-proj-2337484b-4a0b-4946-9d65-6f935f8e46c5" title="Permalink to this equation">¶</a></span>\[\mu_p^{\text{in}}(\Phi, \Psi, \Lambda) \triangleq 
+\underset{i \in \Lambda}{\sup} \, \mu_p 
+\left (\Phi_{\Lambda}, \Psi_{\Lambda}, \Lambda \setminus \{i \} \right). \]</div>
+</div>
+</div></div>
+<p><span class="math notranslate nohighlight">\(\mu_p(\Phi_{\Lambda}, \Psi_{\Lambda}, \Lambda \setminus \{i \})\)</span>
+computes the correlation of <span class="math notranslate nohighlight">\(i\)</span>-th sensing atom in <span class="math notranslate nohighlight">\(\Psi\)</span> with the
+modeling atoms in <span class="math notranslate nohighlight">\(\Phi\)</span> indexed by <span class="math notranslate nohighlight">\(\Lambda \setminus \{i \}\)</span> i.e.
+all modeling atoms in <span class="math notranslate nohighlight">\(\Lambda\)</span> except the <span class="math notranslate nohighlight">\(i\)</span>-th modeling atom.</p>
+<p>Finally <span class="math notranslate nohighlight">\(\mu_p^{\text{in}}(\Phi, \Psi, \Lambda)\)</span> finds the maximum
+correlation of any sensing atom inside <span class="math notranslate nohighlight">\(\Lambda\)</span> with modeling
+atoms inside <span class="math notranslate nohighlight">\(\Lambda\)</span> (leaving the corresponding modeling atom).</p>
+<p>So far, we have focused our attention to a specific index set <span class="math notranslate nohighlight">\(\Lambda\)</span>.
+We now consider all index sets with <span class="math notranslate nohighlight">\(|\Lambda | \leq K\)</span>.</p>
+<div class="proof definition admonition" id="def:proj:babel:p_babel_function_K">
+<p class="admonition-title"><span class="caption-number">Definition 12.34 </span> (<span class="math notranslate nohighlight">\(p\)</span> Babel function)</p>
+<div class="definition-content section" id="proof-content">
+<p>The Babel function for a pair of dictionaries <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Psi\)</span>
+as a function of the sparsity level <span class="math notranslate nohighlight">\(K\)</span> is defined as</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-p-babel-function-k">
+<span class="eqno">(12.61)<a class="headerlink" href="#equation-eq-proj-babel-p-babel-function-k" title="Permalink to this equation">¶</a></span>\[\mu_p(\Phi, \Psi, K) \triangleq
+\underset{|\Lambda| \leq K}{\sup}\, 
+\mu_p(\Phi, \Psi, \Lambda).\]</div>
+<p>Correspondingly, the complement of Babel function is defined as</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-p-babel-function-k-complement">
+<span class="eqno">(12.62)<a class="headerlink" href="#equation-eq-proj-babel-p-babel-function-k-complement" title="Permalink to this equation">¶</a></span>\[\mu_p^{\text{in}}(\Phi, \Psi, K) \triangleq 
+\underset{|\Lambda| \leq K}{\sup}\, 
+\mu_p^{\text{in}}(\Phi, \Psi, \Lambda).\]</div>
+</div>
+</div><div class="docutils">
+<p>It is straightforward to see that</p>
+<div class="math notranslate nohighlight" id="equation-eq-f44d0438-9436-4d05-9635-9b2d2a5b8e33">
+<span class="eqno">(12.63)<a class="headerlink" href="#equation-eq-f44d0438-9436-4d05-9635-9b2d2a5b8e33" title="Permalink to this equation">¶</a></span>\[\mu_p^{\text{in}}(\Phi, \Psi, K) \leq \mu_p(\Phi, \Psi, K-1). \]</div>
+</div>
+<p>Now consider the special case where <span class="math notranslate nohighlight">\(\bDDD=\Phi=\Psi\)</span>.
+In other words, the sensing and modeling dictionaries are same.</p>
+<p>We obtain</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-f90d30fc-6bd1-484d-ad33-254daf19ce67">
+<span class="eqno">(12.64)<a class="headerlink" href="#equation-eq-proj-babel-f90d30fc-6bd1-484d-ad33-254daf19ce67" title="Permalink to this equation">¶</a></span>\[\mu_p(\bDDD, \Lambda) = \underset{l \notin \Lambda}{\sup}
+\left (\sum_{j \in \Lambda} |\langle \bd_j, \bd_l \rangle |^p \right )^{\frac{1}{p}}.\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-6d675f22-e08b-4125-aed4-1480714efea1">
+<span class="eqno">(12.65)<a class="headerlink" href="#equation-eq-proj-babel-6d675f22-e08b-4125-aed4-1480714efea1" title="Permalink to this equation">¶</a></span>\[\mu_p^{\text{in}}(\bDDD, \Lambda) =  
+\underset{i \in \Lambda}{\sup} \, 
+\mu_p \left (\bDDD_{\Lambda}, \Lambda \setminus \{i \} \right). \]</div>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-26acec65-b64e-4572-afc6-a0fa59b5e1d9">
+<span class="eqno">(12.66)<a class="headerlink" href="#equation-eq-proj-babel-26acec65-b64e-4572-afc6-a0fa59b5e1d9" title="Permalink to this equation">¶</a></span>\[\mu_p(\bDDD, K) = \underset{|\Lambda| \leq K}{\sup}\, \mu_p(\bDDD, \Lambda).\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-6e58b448-6e90-495b-87ec-f97f5752d0bf">
+<span class="eqno">(12.67)<a class="headerlink" href="#equation-eq-proj-babel-6e58b448-6e90-495b-87ec-f97f5752d0bf" title="Permalink to this equation">¶</a></span>\[\mu_p^{\text{in}}(\bDDD, K) = 
+\underset{|\Lambda| \leq K}{\sup}\, 
+\mu_p^{\text{in}}(\bDDD, \Lambda).\]</div>
+<p>Further by choosing <span class="math notranslate nohighlight">\(p=1\)</span>, we get</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-4b31df5c-4096-47fc-84dc-e9f51bb503c5">
+<span class="eqno">(12.68)<a class="headerlink" href="#equation-eq-proj-babel-4b31df5c-4096-47fc-84dc-e9f51bb503c5" title="Permalink to this equation">¶</a></span>\[\mu_1(\bDDD, \Lambda) = \underset{l \notin \Lambda}{\sup}
+\left (\sum_{j \in \Lambda} |\langle \bd_j, \bd_l \rangle | \right ).\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-74e456e6-4d82-48df-ae1a-27f5e89411a6">
+<span class="eqno">(12.69)<a class="headerlink" href="#equation-eq-proj-babel-74e456e6-4d82-48df-ae1a-27f5e89411a6" title="Permalink to this equation">¶</a></span>\[\mu_1^{\text{in}}(\bDDD, \Lambda) =  
+\underset{i \in \Lambda}{\sup} \, 
+\mu_1 \left ( \bDDD_{\Lambda}, \Lambda \setminus \{i \} \right). \]</div>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-b15e1fe8-2589-4ee8-b28c-fb7f49cc1bba">
+<span class="eqno">(12.70)<a class="headerlink" href="#equation-eq-proj-babel-b15e1fe8-2589-4ee8-b28c-fb7f49cc1bba" title="Permalink to this equation">¶</a></span>\[\mu_1(\bDDD, K) = \underset{|\Lambda| \leq K}{\sup}\, \mu_1(\bDDD, \Lambda).\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-3e6b3ee3-1ec2-4f61-98aa-2f49aaa1e8ff">
+<span class="eqno">(12.71)<a class="headerlink" href="#equation-eq-proj-babel-3e6b3ee3-1ec2-4f61-98aa-2f49aaa1e8ff" title="Permalink to this equation">¶</a></span>\[\mu_1^{\text{in}}(\bDDD, K) = 
+\underset{|\Lambda| \leq K}{\sup}\, 
+\mu_1^{\text{in}}(\bDDD, \Lambda).\]</div>
+<p>Finally compare this definition of <span class="math notranslate nohighlight">\(\mu_1(\bDDD, K)\)</span> with the
+standard definition of <a class="reference internal" href="dictionaries.html#def:babel_function">Babel function</a>
+as</p>
+<div class="math notranslate nohighlight" id="equation-eq-proj-babel-2eb9efae-0c57-485b-92aa-94e93a1b943f">
+<span class="eqno">(12.72)<a class="headerlink" href="#equation-eq-proj-babel-2eb9efae-0c57-485b-92aa-94e93a1b943f" title="Permalink to this equation">¶</a></span>\[\mu_1(K) = \underset{|\Lambda| = K}{\max} \; \underset {\psi}{\max} 
+\sum_{\Lambda} | \langle \psi, \bd_{\lambda} \rangle |,\]</div>
+<p>where the vector <span class="math notranslate nohighlight">\(\psi\)</span> ranges over the atoms indexed by
+<span class="math notranslate nohighlight">\(\Omega \setminus \Lambda\)</span>.</p>
+<p>We also know that <span class="math notranslate nohighlight">\(\mu_1(K)\)</span> is an increasing function of <span class="math notranslate nohighlight">\(K\)</span>.
+Thus,  replacing <span class="math notranslate nohighlight">\(|\Lambda| = K\)</span> with <span class="math notranslate nohighlight">\(|\Lambda| \leq K\)</span>
+doesn’t make any difference to the value of <span class="math notranslate nohighlight">\(\mu_1(K)\)</span>.</p>
+<p>Careful observation shows that the definitions of
+<span class="math notranslate nohighlight">\(\mu_1(K)\)</span> in <a class="reference internal" href="#equation-eq-proj-babel-2eb9efae-0c57-485b-92aa-94e93a1b943f">(12.72)</a>
+and <span class="math notranslate nohighlight">\(\mu_1(\bDDD, K)\)</span> in
+<a class="reference internal" href="#equation-eq-proj-babel-b15e1fe8-2589-4ee8-b28c-fb7f49cc1bba">(12.70)</a>
+are exactly the same.</p>
+</div>
+<div class="section" id="exact-recovery-coefficient">
+<h2><span class="section-number">12.9.5. </span>Exact Recovery Coefficient<a class="headerlink" href="#exact-recovery-coefficient" title="Permalink to this headline">¶</a></h2>
+<p>we introduce a measure of similarity between a subdictionary and
+the remaining atoms from the dictionary known as
+the exact recovery coefficient.</p>
+<div class="proof definition admonition" id="def:proj:erc">
+<p class="admonition-title"><span class="caption-number">Definition 12.35 </span> (Exact recovery coefficient)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>Exact Recovery Coefficient</em>
+<span id="id6">[<a class="reference internal" href="../bib.html#id132" title="Joel A Tropp. Greed is good: algorithmic results for sparse approximation. Information Theory, IEEE Transactions on, 50(10):2231–2242, 2004.">35</a>, <a class="reference internal" href="../bib.html#id133" title="Joel A Tropp. Just relax: convex programming methods for subset selection and sparse approximation. ICES report, 2004.">36</a>, <a class="reference internal" href="../bib.html#id137" title="Joel A Tropp. Just relax: convex programming methods for identifying sparse signals in noise. Information Theory, IEEE Transactions on, 52(3):1030–1051, 2006.">37</a>]</span> for a subdictionary <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\ERC(\bDDD_{\Lambda})
+= 1 - \underset{\omega \notin \Lambda}{\max} 
+\|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1.
+\]</div>
+<p>We will also use the notation <span class="math notranslate nohighlight">\(\ERC(\Lambda)\)</span>
+when the dictionary is clear from context.</p>
+</div>
+</div><p>The quantity is called exact recovery coefficient
+since for a number of algorithms the criteria <span class="math notranslate nohighlight">\(\ERC(\Lambda) &gt; 0\)</span>
+is a sufficient condition for exact
+recovery of sparse representations.</p>
+<div class="section" id="erc-and-babel-function">
+<h3><span class="section-number">12.9.5.1. </span>ERC and Babel Function<a class="headerlink" href="#erc-and-babel-function" title="Permalink to this headline">¶</a></h3>
+<p>We present a lower bound on <span class="math notranslate nohighlight">\(\ERC(\Lambda)\)</span> in terms of Babel function.</p>
+<div class="proof theorem admonition" id="res:proj:erc_babel_lower_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.73 </span> (ERC lower bound: babel function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(|\Lambda| = k  \leq K\)</span>.
+A lower bound on Exact Recovery Coefficient is</p>
+<div class="math notranslate nohighlight">
+\[
+\ERC(\Lambda) \geq 
+\frac{1 - \mu_1(K- 1) - \mu_1(K)}{1  - \mu_1(K-1)}.
+\]</div>
+<p>It follows that <span class="math notranslate nohighlight">\(\ERC(\Lambda) &gt; 0\)</span> whenever</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_1(K- 1)  + \mu_1 (K) &lt; 1.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. 1. Let us expand the pseudo-inverse <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}^{\dag}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \underset{\omega \notin \Lambda}{\max} \|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1 
+    &amp;= \underset{\omega \notin \Lambda}{\max} 
+    \left \|\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} 
+    \bDDD_{\Lambda}^H \bd_{\omega} \right \|_1\\
+    &amp;\leq \|\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \|_{1 \to 1} \underset{\omega \notin \Lambda}{\max} \|\bDDD_{\Lambda}^H \bd_{\omega} \|_1.
+   \end{split}\]</div>
+<ol>
+<li><p>For the Gram matrix <span class="math notranslate nohighlight">\(\bG = \bDDD_{\Lambda}^H \bDDD_{\Lambda}\)</span>
+we recall from
+<a class="reference internal" href="dictionaries.html#res:ssm:inverse_gram_matrix_infty_norm_babel_bound">Theorem 12.36</a> that:</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bG^{-1} \|_{1} \leq \frac{1}{1 - \mu_1(k - 1)} \leq \frac{1}{1 - \mu_1(K - 1)} .
+   \]</div>
+</li>
+<li><p>For the other term we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \underset{\omega \notin \Lambda}{\max} \|\bDDD_{\Lambda}^H \bd_{\omega} \|_1 
+    = \underset{\omega \notin \Lambda}{\max} 
+    \sum_{\lambda \in \Lambda}| \langle \bd_{\omega}, \bd_{\lambda} \rangle |
+    \leq \mu_1(k) \leq \mu_1(K).
+   \]</div>
+</li>
+<li><p>Thus, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \underset{\omega \notin \Lambda}{\max} 
+    \|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1 \leq \frac{\mu_1(K)}{1 - \mu_1(K - 1)}.
+   \]</div>
+</li>
+<li><p>Putting back in the definition of Exact Recovery Coefficient:</p>
+<div class="math notranslate nohighlight">
+\[
+    \ERC(\Lambda) = 1 - \underset{\omega \notin \Lambda}{\max} 
+    \|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1 
+    \geq 1 - \frac{\mu_1(K)}{1 - \mu_1(K - 1)}.
+   \]</div>
+</li>
+<li><p>This completes the bound on ERC.</p></li>
+<li><p>Now, we verify the condition for <span class="math notranslate nohighlight">\(\ERC(\Lambda) &gt; 0\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \mu_1(K) + \mu_1(K - 1) &lt; 1
+    &amp;\iff \mu_1(K) &lt; 1 -  \mu_1(K - 1) \\
+    &amp;\iff \frac{\mu_1(K)}{1 - \mu_1(K - 1)} &lt; 1 \\
+    &amp;\iff 1 - \frac{\mu_1(K)}{1 - \mu_1(K - 1)} &gt; 0.
+   \end{split}\]</div>
+</li>
+<li><p>Thus, if <span class="math notranslate nohighlight">\(\mu_1(K) + \mu_1(K - 1) &lt; 1\)</span>, then the lower bound on <span class="math notranslate nohighlight">\(\ERC(\Lambda)\)</span>
+is positive leading to <span class="math notranslate nohighlight">\(\ERC(\Lambda) &gt; 0\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="erc-and-coherence">
+<h3><span class="section-number">12.9.5.2. </span>ERC and Coherence<a class="headerlink" href="#erc-and-coherence" title="Permalink to this headline">¶</a></h3>
+<p>On the same lines we develop a coherence bound for ERC.</p>
+<div class="proof theorem admonition" id="res:proj:erc_coherence_lower_bound">
+<p class="admonition-title"><span class="caption-number">Theorem 12.74 </span> (ERC lower bound: coherence)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(|\Lambda| = k  \leq K\)</span>.
+A lower bound on Exact Recovery Coefficient is</p>
+<div class="math notranslate nohighlight">
+\[
+\ERC(\Lambda) \geq \frac{1 - (2K - 1) \mu}{1  - (K - 1)\mu}.
+\]</div>
+<p>It follows that <span class="math notranslate nohighlight">\(\ERC(\Lambda) &gt; 0\)</span> whenever</p>
+<div class="math notranslate nohighlight">
+\[
+K \mu \leq \frac{1}{2}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>Following the proof of <a class="reference internal" href="#res:proj:erc_babel_lower_bound">Theorem 12.73</a>
+for the Gram matrix <span class="math notranslate nohighlight">\(\bG = \bDDD_{\Lambda}^H \bDDD_{\Lambda}\)</span> have:</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bG^{-1} \|_{1} \leq \frac{1}{1 - \mu_1(K - 1)}
+    \leq \frac{1}{1  - (K - 1)\mu}.
+   \]</div>
+</li>
+<li><p>For the other term we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \underset{\omega \notin \Lambda}{\max} 
+    \|\bDDD_{\Lambda}^H \bd_{\omega} \|_1 
+    \leq \mu_1(K) \leq K \mu.
+   \]</div>
+</li>
+<li><p>Thus, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \underset{\omega \notin \Lambda}{\max} 
+    \|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1 \leq \frac{K \mu}{1  - (K - 1)\mu}.
+   \]</div>
+</li>
+<li><p>Putting back in the definition of Exact Recovery Coefficient:</p>
+<div class="math notranslate nohighlight">
+\[
+    \ERC(\Lambda) \geq 1 - \frac{K \mu}{1  - (K - 1)\mu}
+    = \frac{1  - (2K - 1)\mu}{1  - (K - 1)\mu}.
+   \]</div>
+</li>
+<li><p>This completes the bound on ERC.</p></li>
+<li><p>Now, we verify the condition for <span class="math notranslate nohighlight">\(\ERC(\Lambda) &gt; 0\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    K \mu \leq \frac{1}{2} 
+    \implies 2 K \mu  \leq 1 \implies 1 - 2K \mu \geq 0 \implies 1 - 2K \mu + \mu &gt; 0.
+   \]</div>
+</li>
+<li><p>And</p>
+<div class="math notranslate nohighlight">
+\[
+    K \mu \leq \frac{1}{2}
+    \implies 1 - K \mu \geq \frac{1}{2} 
+    \implies 1 - K \mu  + \mu \geq \frac{1}{2} + \mu.
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(K \mu \leq \frac{1}{2}\)</span> ensures that both
+numerator and denominator for the coherence lower bound
+on <span class="math notranslate nohighlight">\(\ERC(\Lambda)\)</span> are positive leading to <span class="math notranslate nohighlight">\(\ERC(\Lambda) &gt; 0\)</span>.</p></li>
+</ol>
+</div>
+<p>A more accurate bound on <span class="math notranslate nohighlight">\(K\)</span> is presented in the next theorem.</p>
+<div class="proof theorem admonition" id="res:proj:erc_postive_coherence">
+<p class="admonition-title"><span class="caption-number">Theorem 12.75 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\ERC(\Lambda) &gt; 0\)</span> holds whenever</p>
+<div class="math notranslate nohighlight">
+\[
+K &lt; \frac{1}{2} \left (1 +  \frac{1}{\mu} \right )
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(K = | \Lambda| \)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>Assuming <span class="math notranslate nohighlight">\(1  - (K - 1)\mu &gt; 0\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;\frac{1 - (2K - 1) \mu}{1  - (K - 1)\mu} &gt; 0 \\
+    \iff &amp; 1 - (2K - 1) \mu &gt; 0\\
+    \iff &amp; 1 &gt; (2K - 1) \mu \\
+    \iff &amp; 2K - 1 &lt; \frac{1}{\mu}\\
+    \iff &amp; K &lt; \frac{1}{2} \left (1 +  \frac{1}{\mu} \right ).
+   \end{split}\]</div>
+</li>
+<li><p>From <a class="reference internal" href="#res:proj:erc_coherence_lower_bound">Theorem 12.74</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \ERC(\Lambda) \geq \frac{1 - (2K - 1) \mu}{1  - (K - 1)\mu}.
+   \]</div>
+</li>
+<li><p>Thus under the given conditions, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \ERC(\Lambda) &gt; 0.
+   \]</div>
+</li>
+<li><p>We also need to show that under these conditions</p>
+<div class="math notranslate nohighlight">
+\[
+    1  - (K - 1)\mu &gt; 0.
+   \]</div>
+</li>
+<li><p>We can see that:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; 2K - 1 &lt; \frac{1}{\mu} \\
+    \implies  &amp; 2K - 2 &lt; \frac{1}{\mu} - 1\\
+    \implies &amp; 2 (K - 1) \mu &lt; 1 - \mu \\
+    \implies &amp; - (K - 1) \mu &gt; \frac{\mu}{2} - \frac{1}{2}\\
+    \implies &amp;  1 - (K - 1) \mu &gt;  \frac{1}{2} + \frac{\mu}{2}\\
+    \implies &amp; 1 - (K - 1) \mu &gt; 0.
+    \end{split}\]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="geometrical-interpretation-of-erc">
+<h3><span class="section-number">12.9.5.3. </span>Geometrical Interpretation of ERC<a class="headerlink" href="#geometrical-interpretation-of-erc" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def:proj:antipodal_convex_hull_subdictionary">
+<p class="admonition-title"><span class="caption-number">Definition 12.36 </span> (Antipodal convex hull of a subdictionary)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>antipodal convex hull</em> <span id="id7">[<a class="reference internal" href="../bib.html#id133" title="Joel A Tropp. Just relax: convex programming methods for subset selection and sparse approximation. ICES report, 2004.">36</a>]</span> of a subdictionary <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>
+is defined as the set of signals given by</p>
+<div class="math notranslate nohighlight">
+\[
+\AAA_1 (\Lambda) 
+= \{\bDDD_{\Lambda} \bx \ST \bx \in \CC^{\Lambda}
+\text{ and }  \| \bx \|_1 \leq 1\}.
+\]</div>
+</div>
+</div><div class="docutils">
+<p>It is the smallest convex set that contains every unit multiple of every atom.</p>
+<ol>
+<li><p>We recall that <span class="math notranslate nohighlight">\(\bP_{\Lambda} = \bDDD_{\Lambda} \bDDD_{\Lambda}^{\dag}\)</span>
+is the orthogonal projector on to the column space of <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>.</p></li>
+<li><p>Therefore <span class="math notranslate nohighlight">\(\bc_{\omega} = \bDDD_{\Lambda}^{\dag} \bd_{\omega} \in \CC^{\Lambda}\)</span>
+is a coefficient vector  which can be used to synthesize
+this projection.</p></li>
+<li><p>In other words:</p>
+<div class="math notranslate nohighlight">
+\[
+    \bP_{\Lambda} \bd_{\omega}
+    = \bDDD_{\Lambda} \bDDD_{\Lambda}^{\dag} \bd_{\omega}
+    = \bDDD_{\Lambda} \bc_{\omega}.
+   \]</div>
+</li>
+<li><p>Thus, the quantity <span class="math notranslate nohighlight">\(1  - \| \bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1\)</span>
+measures how far the projected atom <span class="math notranslate nohighlight">\(\bP_{\Lambda} \bd_{\omega}\)</span>
+lies from the boundary of <span class="math notranslate nohighlight">\(\AAA_1 (\Lambda)\)</span>.</p></li>
+<li><p>If every projected atom lies well within the antipodal convex hull,
+then it is possible to recover superpositions of atoms from <span class="math notranslate nohighlight">\(\Lambda\)</span>.</p></li>
+<li><p>This happens because coefficient associated with an atom outside <span class="math notranslate nohighlight">\(\Lambda\)</span>
+must be quite large to represent anything in the span of the subdictionary
+whenever <span class="math notranslate nohighlight">\(\ERC(\Lambda) &gt; 0\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="dirac-dct-dictionary">
+<span id="sec-dic-dirac-dct-dictionary"></span><h2><span class="section-number">12.9.6. </span>Dirac-DCT dictionary<a class="headerlink" href="#dirac-dct-dictionary" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def:dic:dirac_dct_dictionary">
+<p class="admonition-title"><span class="caption-number">Definition 12.37 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>The Dirac-DCT dictionary is a two-ortho dictionary consisting of
+the union of the Dirac and the DCT bases.</p>
+</div>
+</div><p>This dictionary is suitable for real signals since both
+Dirac and DCT are totally real bases <span class="math notranslate nohighlight">\(\in \RR^{N \times N}\)</span>.</p>
+<p>The dictionary is obtained by combining the <span class="math notranslate nohighlight">\(N \times N\)</span> identity matrix
+(Dirac basis)
+with the <span class="math notranslate nohighlight">\(N \times N\)</span> DCT matrix for signals in <span class="math notranslate nohighlight">\(\RR^N\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\Psi_{\text{DCT}, N}\)</span> denote the DCT matrix for <span class="math notranslate nohighlight">\(\RR^N\)</span>.
+Let <span class="math notranslate nohighlight">\(\bI_N\)</span> denote the identity matrix for <span class="math notranslate nohighlight">\(\RR^N\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\bDDD_{\text{DCT}} = \begin{bmatrix}
+\bI_N &amp; \Psi_{\text{DCT}, N}
+\end{bmatrix}.
+\]</div>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi_{\text{DCT}, N} = \begin{bmatrix}
+\psi_1 &amp; \psi_2 &amp; \dots &amp; \psi_N
+\end{bmatrix}
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(k\)</span>-th column of <span class="math notranslate nohighlight">\(\Psi_{\text{DCT}, N}\)</span> is given by</p>
+<div class="math notranslate nohighlight" id="equation-eq-dict-dct-matrix-kth-column">
+<span class="eqno">(12.73)<a class="headerlink" href="#equation-eq-dict-dct-matrix-kth-column" title="Permalink to this equation">¶</a></span>\[\psi_k(n) = \sqrt{\frac{2}{N}} \Omega_k \cos \left (\frac{\pi}{2 N} (2 n - 1) (k - 1) \right ), n = 1, \dots, N,\]</div>
+<p>with <span class="math notranslate nohighlight">\(\Omega_k = \frac{1}{\sqrt{2}}\)</span> for <span class="math notranslate nohighlight">\(k=1\)</span>
+and <span class="math notranslate nohighlight">\(\Omega_k = 1\)</span> for <span class="math notranslate nohighlight">\(2 \leq k \leq N\)</span>.</p>
+<p>Note that for <span class="math notranslate nohighlight">\(k=1\)</span>, the entries become</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{\frac{2}{N}} \frac{1}{\sqrt{2}} \cos 0 = \sqrt{\frac{1}{N}}.
+\]</div>
+<p>Thus, the <span class="math notranslate nohighlight">\(\ell_2\)</span> norm of <span class="math notranslate nohighlight">\(\psi_1\)</span> is 1.
+We can similarly verify the <span class="math notranslate nohighlight">\(\ell_2\)</span> norm of other columns also.
+They are all one.</p>
+<div class="proof theorem admonition" id="res:dic:dirac_dct_dictionary_coherence">
+<p class="admonition-title"><span class="caption-number">Theorem 12.76 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The Dirac-DCT dictionary has coherence <span class="math notranslate nohighlight">\(\sqrt{\frac{2}{N}}\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The coherence of a two ortho basis where one basis is Dirac basis is given by the
+magnitude of the largest entry in the other basis.</p>
+<ol>
+<li><p>For <span class="math notranslate nohighlight">\(\Psi_{\text{DCT}, N}\)</span>, the largest value is obtained when <span class="math notranslate nohighlight">\(\Omega_k = 1\)</span>
+and the <span class="math notranslate nohighlight">\(\cos\)</span> term evaluates to 1.</p></li>
+<li><p>Clearly,</p>
+<div class="math notranslate nohighlight">
+\[
+    \mu (\bDDD_{\text{DCT}}) = \sqrt{\frac{2}{N}}.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res:dic:dirac_dct_dictionary_babel">
+<p class="admonition-title"><span class="caption-number">Theorem 12.77 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The <span class="math notranslate nohighlight">\(p\)</span>-Babel function for Dirac-DCT dictionary is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_p(k) = k^{\frac{1}{p}} \mu \Forall 1\leq k \leq N.
+\]</div>
+<p>In particular, the standard Babel function
+is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_1(k) = k\mu
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. TODO prove it.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ssm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="rip.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">12.8. </span>Restricted Isometry Property</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../compressive_sensing/chapter_compressive_sensing.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Compressive Sensing</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

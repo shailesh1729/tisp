@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4.5. Inner Product Spaces &#8212; Optimization for Signal Processing</title>
+    <title>4.6. Inner Product Spaces &#8212; Topics in Signal Processing</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -44,6 +44,40 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -52,12 +86,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\, | \\,", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4.6. Dual Spaces" href="dual_spaces.html" />
-    <link rel="prev" title="4.4. Normed Linear Spaces" href="normed_spaces.html" />
+    <link rel="next" title="4.7. Dual Spaces" href="dual_spaces.html" />
+    <link rel="prev" title="4.5. Normed Linear Spaces" href="normed_spaces.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -91,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">Optimization for Signal Processing</h1>
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -101,8 +135,8 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome
+  <a class="reference internal" href="../index.html">
+   Overview
   </a>
  </li>
 </ul>
@@ -237,23 +271,23 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/continuity.html">
-     3.5. Functions and Continuity
+     3.6. Functions and Continuity
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/complete.html">
-     3.6. Completeness
+     3.7. Completeness
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../metric_spaces/compact.html">
-     3.7. Compactness
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../metric_spaces/subspaces.html">
-     3.8. Subspace Topology
+     3.8. Compactness
     </a>
    </li>
    <li class="toctree-l2">
@@ -285,7 +319,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="matrices.html">
-     4.1. Matrices
+     4.1. Matrices I
     </a>
    </li>
    <li class="toctree-l2">
@@ -294,48 +328,68 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="transformations.html">
-     4.3. Linear Transformations
+     4.4. Linear Transformations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="normed_spaces.html">
-     4.4. Normed Linear Spaces
+     4.5. Normed Linear Spaces
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     4.5. Inner Product Spaces
+     4.6. Inner Product Spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dual_spaces.html">
-     4.6. Dual Spaces
+     4.7. Dual Spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="euclidean.html">
-     4.7. The Euclidean Space
+     4.8. The Euclidean Space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="sym_matrices.html">
-     4.8. Symmetric Matrices
+    <a class="reference internal" href="matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="svd.html">
+     4.11. Singular Values
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="important_spaces.html">
-     4.9. Important Vector Spaces
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrix_norms.html">
+     4.13. Matrix Norms
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="sequence_spaces.html">
-     4.10. Sequence Spaces
+     4.14. Sequence Spaces
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="affine.html">
-     4.11. Affine Sets and Transformations
+     4.15. Affine Sets and Transformations
     </a>
    </li>
   </ul>
@@ -362,6 +416,75 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -371,139 +494,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../convex_sets/intro.html">
-   6. Convex Sets and Functions
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
-  <label for="toctree-checkbox-6">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/real_spaces.html">
-     6.1. Real Vector Spaces
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/convex.html">
-     6.2. Convex Sets
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/rn_subsets.html">
-     6.3. Convex Subsets of
-     <span class="math notranslate nohighlight">
-      \(\RR^n\)
-     </span>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/cone.html">
-     6.4. Cones
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
-     6.5. Generalized Inequalities
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/convex_functions.html">
-     6.6. Convex Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/differentiable.html">
-     6.7. Differentiability and Convex Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/function_ops.html">
-     6.8. Convexity Preserving Function Operations
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/relint.html">
-     6.9. Topology of Convex Sets
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/separation.html">
-     6.10. Separation Theorems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/continuity.html">
-     6.11. Continuity
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/subgradients.html">
-     6.12. Subgradients
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
-     6.13. Conjugate Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../convex_sets/smoothness.html">
-     6.14. Smoothness
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../cvxopt/chapter.html">
-   7. Convex Optimization
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
-  <label for="toctree-checkbox-7">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../cvxopt/intro.html">
-     7.1. Mathematical Optimization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../cvxopt/cvxopt.html">
-     7.2. Convex Optimization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../cvxopt/projection.html">
-     7.3. Projection on Convex Sets
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../cvxopt/duality.html">
-     7.4. Duality
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../cvxopt/linear_programming.html">
-     7.5. Linear Programming
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
-     7.6. Quadratic Programming
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
-     7.7. Differentiable Objective Functions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../proximal_operator/chapter.html">
-   8. Proximal Operator
+   8. Convex Sets and Functions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -512,31 +503,357 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../proximal_operator/intro.html">
-     8.3. Introduction
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../proximal_operator/summary.html">
-     8.4. Chapter Summary
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../gradient_methods/chapter.html">
-   9. Gradient Descent Methods
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../subgradient_methods/chapter.html">
    10. Subgradient Methods
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../selected/chapter.html">
-   11. Selected Functions
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -553,6 +870,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../bib.html">
    Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
   </a>
  </li>
 </ul>
@@ -612,11 +934,11 @@ const thebe_selector_output = ".output, .cell_output"
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/shailesh1729/cvx-opt-book"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/shailesh1729/cvx-opt-book/issues/new?title=Issue%20on%20page%20%2Fla/inner_product_spaces.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fla/inner_product_spaces.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -644,62 +966,62 @@ const thebe_selector_output = ".output, .cell_output"
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inner-product">
-   4.5.1. Inner Product
+   4.6.1. Inner Product
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#real-inner-product">
-   4.5.2. Real Inner Product
+   4.6.2. Real Inner Product
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inner-product-space">
-   4.5.3. Inner Product Space
+   4.6.3. Inner Product Space
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#orthogonality">
-   4.5.4. Orthogonality
+   4.6.4. Orthogonality
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#norm-induced-by-inner-product">
-   4.5.5. Norm Induced by Inner Product
+   4.6.5. Norm Induced by Inner Product
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hilbert-spaces">
-   4.5.6. Hilbert Spaces
+   4.6.6. Hilbert Spaces
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#orthonormality">
-   4.5.7. Orthonormality
+   4.6.7. Orthonormality
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-gram-schmidt-algorithm">
-   4.5.8. The Gram-Schmidt Algorithm
+   4.6.8. The Gram-Schmidt Algorithm
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#orthogonal-complements">
-   4.5.9. Orthogonal Complements
+   4.6.9. Orthogonal Complements
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#orthogonal-projection">
-   4.5.10. Orthogonal Projection
+   4.6.10. Orthogonal Projection
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#parallelogram-identity">
-   4.5.11. Parallelogram Identity
+   4.6.11. Parallelogram Identity
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#polarization-identity">
-   4.5.12. Polarization identity
+   4.6.12. Polarization identity
   </a>
  </li>
 </ul>
@@ -724,62 +1046,62 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inner-product">
-   4.5.1. Inner Product
+   4.6.1. Inner Product
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#real-inner-product">
-   4.5.2. Real Inner Product
+   4.6.2. Real Inner Product
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inner-product-space">
-   4.5.3. Inner Product Space
+   4.6.3. Inner Product Space
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#orthogonality">
-   4.5.4. Orthogonality
+   4.6.4. Orthogonality
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#norm-induced-by-inner-product">
-   4.5.5. Norm Induced by Inner Product
+   4.6.5. Norm Induced by Inner Product
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hilbert-spaces">
-   4.5.6. Hilbert Spaces
+   4.6.6. Hilbert Spaces
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#orthonormality">
-   4.5.7. Orthonormality
+   4.6.7. Orthonormality
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-gram-schmidt-algorithm">
-   4.5.8. The Gram-Schmidt Algorithm
+   4.6.8. The Gram-Schmidt Algorithm
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#orthogonal-complements">
-   4.5.9. Orthogonal Complements
+   4.6.9. Orthogonal Complements
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#orthogonal-projection">
-   4.5.10. Orthogonal Projection
+   4.6.10. Orthogonal Projection
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#parallelogram-identity">
-   4.5.11. Parallelogram Identity
+   4.6.11. Parallelogram Identity
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#polarization-identity">
-   4.5.12. Polarization identity
+   4.6.12. Polarization identity
   </a>
  </li>
 </ul>
@@ -792,14 +1114,14 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="inner-product-spaces">
-<span id="sec-la-inner-product-spaces"></span><h1><span class="section-number">4.5. </span>Inner Product Spaces<a class="headerlink" href="#inner-product-spaces" title="Permalink to this headline">¶</a></h1>
+<span id="sec-la-inner-product-spaces"></span><h1><span class="section-number">4.6. </span>Inner Product Spaces<a class="headerlink" href="#inner-product-spaces" title="Permalink to this headline">¶</a></h1>
 <p>Inner products are a generalization of the notion of dot product.
 We restrict our attention to real vector spaces and complex vector spaces.
 Thus, the field <span class="math notranslate nohighlight">\(\FF\)</span> can be either <span class="math notranslate nohighlight">\(\RR\)</span> or <span class="math notranslate nohighlight">\(\CC\)</span>.</p>
 <div class="section" id="inner-product">
-<h2><span class="section-number">4.5.1. </span>Inner Product<a class="headerlink" href="#inner-product" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.1. </span>Inner Product<a class="headerlink" href="#inner-product" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-la-inner-product">
-<p class="admonition-title"><span class="caption-number">Definition 4.67 </span> (Inner product)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.88 </span> (Inner product)</p>
 <div class="definition-content section" id="proof-content">
 <p>An <em>inner product</em> over an <span class="math notranslate nohighlight">\(\FF\)</span>-vector space <span class="math notranslate nohighlight">\(\VV\)</span> is any map
 <span class="math notranslate nohighlight">\(\langle, \rangle : \VV \times \VV \to \FF\)</span>
@@ -832,7 +1154,7 @@ satisfying following properties:</p>
 </ul>
 </div>
 </div><div class="proof theorem admonition" id="res-la-ip-scaling-second">
-<p class="admonition-title"><span class="caption-number">Theorem 4.70 </span> (Scaling in second argument)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.72 </span> (Scaling in second argument)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF\)</span> be an inner product.
 Then</p>
@@ -852,7 +1174,7 @@ Then</p>
 \]</div>
 </div>
 <div class="proof theorem admonition" id="res-la-ip-dist-second">
-<p class="admonition-title"><span class="caption-number">Theorem 4.71 </span> (Distribution in second argument)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.73 </span> (Distribution in second argument)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF\)</span> be an inner product.
 Then for any <span class="math notranslate nohighlight">\(\bv, \bx, \by \in \VV\)</span>:</p>
@@ -872,7 +1194,7 @@ Then for any <span class="math notranslate nohighlight">\(\bv, \bx, \by \in \VV\
 \]</div>
 </div>
 <div class="proof theorem admonition" id="res-la-ip-product-with-zero">
-<p class="admonition-title"><span class="caption-number">Theorem 4.72 </span> (Inner product with zero)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.74 </span> (Inner product with zero)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF\)</span> be an inner product.
 Then,</p>
@@ -915,7 +1237,7 @@ Then,</p>
 \left \langle \bv, \sum \alpha_i \bw_i \right \rangle = \sum \overline{\alpha_i} \langle \bv, \bw_i \rangle.
 \]</div>
 <div class="proof example admonition" id="ex-la-standard-inner-product-rn-1">
-<p class="admonition-title"><span class="caption-number">Example 4.20 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 4.21 </span></p>
 <div class="example-content section" id="proof-content">
 <p>The standard inner product on <span class="math notranslate nohighlight">\(\RR^n\)</span> is defined as:</p>
 <div class="math notranslate nohighlight">
@@ -925,7 +1247,7 @@ Then,</p>
 <p>This is often called the <em>dot product</em> or <em>scalar product</em>.</p>
 </div>
 </div><div class="proof example admonition" id="ex-la-standard-inner-product-cn-1">
-<p class="admonition-title"><span class="caption-number">Example 4.21 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 4.22 </span></p>
 <div class="example-content section" id="proof-content">
 <p>The standard inner product on <span class="math notranslate nohighlight">\(\CC^n\)</span> is defined as:</p>
 <div class="math notranslate nohighlight">
@@ -934,7 +1256,7 @@ Then,</p>
 \]</div>
 </div>
 </div><div class="proof example admonition" id="ex-la-inner-product-r2-2">
-<p class="admonition-title"><span class="caption-number">Example 4.22 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 4.23 </span></p>
 <div class="example-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\bx, \by \in \RR^2\)</span>. Define:</p>
 <div class="math notranslate nohighlight">
@@ -970,7 +1292,7 @@ Its trace is <span class="math notranslate nohighlight">\(5\)</span> and its det
 Its eigen values are <span class="math notranslate nohighlight">\(4.303, 0.697\)</span>.</p>
 </div>
 </div><div class="proof example admonition" id="ex-la-sq-complex-matrix-inner-product-1">
-<p class="admonition-title"><span class="caption-number">Example 4.23 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 4.24 </span></p>
 <div class="example-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\CC^{n \times n}\)</span> be the space of <span class="math notranslate nohighlight">\(n \times n\)</span> matrices.
 For any <span class="math notranslate nohighlight">\(\bA = (a_{ij})\)</span> and <span class="math notranslate nohighlight">\(\bB = (b_{ij})\)</span> in <span class="math notranslate nohighlight">\(\CC^{n \times n}\)</span>,
@@ -988,7 +1310,7 @@ we define the inner product as:</p>
 the trace of a matrix (sum of its diagonal values).</p>
 </div>
 </div><div class="proof example admonition" id="ex-la-cn-invertible-mat-ip-1">
-<p class="admonition-title"><span class="caption-number">Example 4.24 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 4.25 </span></p>
 <div class="example-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\CC^{n \times 1}\)</span> be the space of column vectors.
 Let <span class="math notranslate nohighlight">\(\bQ\)</span> be an arbitrary <span class="math notranslate nohighlight">\(n \times n\)</span> invertible matrix over <span class="math notranslate nohighlight">\(\CC\)</span>.</p>
@@ -1007,7 +1329,7 @@ single entry as a complex number <span class="math notranslate nohighlight">\(\C
 <p>This is the <em>standard inner product</em> on the space of column vectors.</p>
 </div>
 </div><div class="proof theorem admonition" id="res-la-ip-complex-real-part">
-<p class="admonition-title"><span class="caption-number">Theorem 4.73 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.75 </span></p>
 <div class="theorem-content section" id="proof-content">
 <p>For complex inner products, the inner product is determined identified
 by its real part.</p>
@@ -1050,13 +1372,13 @@ too; but using different inputs. See below.</p>
 </div>
 </div>
 <div class="section" id="real-inner-product">
-<h2><span class="section-number">4.5.2. </span>Real Inner Product<a class="headerlink" href="#real-inner-product" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.2. </span>Real Inner Product<a class="headerlink" href="#real-inner-product" title="Permalink to this headline">¶</a></h2>
 <p>From the perspective of convex analysis, the general inner product is not very useful.
 We prefer a special class of inner products whose value is always real.
 This is applicable on vector spaces where the field of scalars is
 <span class="math notranslate nohighlight">\(\RR\)</span>.</p>
 <div class="proof definition admonition" id="def-la-real-inner-product">
-<p class="admonition-title"><span class="caption-number">Definition 4.68 </span> (Real inner product)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.89 </span> (Real inner product)</p>
 <div class="definition-content section" id="proof-content">
 <p>A <em>real inner product</em> over an <span class="math notranslate nohighlight">\(\RR\)</span>-vector space <span class="math notranslate nohighlight">\(\VV\)</span> is any map
 <span class="math notranslate nohighlight">\(\langle, \rangle : \VV \times \VV \to \RR\)</span>
@@ -1099,7 +1421,7 @@ it is linear in second argument too.</p></li>
 \left \langle \bv, \sum \alpha_i \bw_i \right \rangle = \sum \alpha_i \langle \bv, \bw_i \rangle.
 \]</div>
 <div class="proof example admonition" id="ex-la-real-ip-cn-over-r">
-<p class="admonition-title"><span class="caption-number">Example 4.25 </span> (A real inner product for <span class="math notranslate nohighlight">\(\CC^n\)</span> over <span class="math notranslate nohighlight">\(\RR\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Example 4.26 </span> (A real inner product for <span class="math notranslate nohighlight">\(\CC^n\)</span> over <span class="math notranslate nohighlight">\(\RR\)</span>)</p>
 <div class="example-content section" id="proof-content">
 <p>In this example, we are dealing with <span class="math notranslate nohighlight">\(n\)</span>-tuples of complex numbers
 in <span class="math notranslate nohighlight">\(\CC^n\)</span> with the field of scalars being <span class="math notranslate nohighlight">\(\RR\)</span>.
@@ -1138,9 +1460,9 @@ general conjugate symmetric inner product, it will be easy to
 extrapolate the results for the special case of real inner products.</p>
 </div>
 <div class="section" id="inner-product-space">
-<h2><span class="section-number">4.5.3. </span>Inner Product Space<a class="headerlink" href="#inner-product-space" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.3. </span>Inner Product Space<a class="headerlink" href="#inner-product-space" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-la-pre-hilbert-space">
-<p class="admonition-title"><span class="caption-number">Definition 4.69 </span> (Inner product space / Pre-Hilbert space)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.90 </span> (Inner product space / Pre-Hilbert space)</p>
 <div class="definition-content section" id="proof-content">
 <p>An <span class="math notranslate nohighlight">\(\FF\)</span>-vector space <span class="math notranslate nohighlight">\(\VV\)</span> equipped with an inner product
 <span class="math notranslate nohighlight">\(\langle, \rangle : \VV \times \VV \to \FF\)</span> is known
@@ -1148,18 +1470,18 @@ as an <em>inner product space</em> or a <em>pre-Hilbert space</em>.</p>
 </div>
 </div></div>
 <div class="section" id="orthogonality">
-<h2><span class="section-number">4.5.4. </span>Orthogonality<a class="headerlink" href="#orthogonality" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.4. </span>Orthogonality<a class="headerlink" href="#orthogonality" title="Permalink to this headline">¶</a></h2>
 <p>Orthogonality is the generalization of the notion of
 perpendicularity from elementary geometry.</p>
 <div class="proof definition admonition" id="def-la-orthogonal-pair">
-<p class="admonition-title"><span class="caption-number">Definition 4.70 </span> (Orthogonal vectors)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.91 </span> (Orthogonal vectors)</p>
 <div class="definition-content section" id="proof-content">
 <p>Any two vectors <span class="math notranslate nohighlight">\(\bu , \bv \in \VV\)</span> are called <em>orthogonal</em> to each other
 if  <span class="math notranslate nohighlight">\(\langle \bu, \bv \rangle = 0\)</span>.</p>
 <p>We write <span class="math notranslate nohighlight">\(\bu \perp \bv\)</span> if <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span> are orthogonal to each other.</p>
 </div>
 </div><div class="proof definition admonition" id="def-la-orthogonal-vectors">
-<p class="admonition-title"><span class="caption-number">Definition 4.71 </span> (Set of orthogonal vectors)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.92 </span> (Set of orthogonal vectors)</p>
 <div class="definition-content section" id="proof-content">
 <p>A set of non-zero vectors <span class="math notranslate nohighlight">\(\{\bv_1, \dots, \bv_p\}\)</span> is called <em>orthogonal</em>
 or <em>pairwise orthogonal</em> if</p>
@@ -1169,7 +1491,7 @@ or <em>pairwise orthogonal</em> if</p>
 \]</div>
 </div>
 </div><div class="proof theorem admonition" id="res-la-ip-orthogonal-independent">
-<p class="admonition-title"><span class="caption-number">Theorem 4.74 </span> (Orthogonality implies independence)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.76 </span> (Orthogonality implies independence)</p>
 <div class="theorem-content section" id="proof-content">
 <p>A set of orthogonal vectors is linearly independent.</p>
 </div>
@@ -1195,9 +1517,9 @@ Thus, the vectors are linearly independent.</p>
 </div>
 </div>
 <div class="section" id="norm-induced-by-inner-product">
-<h2><span class="section-number">4.5.5. </span>Norm Induced by Inner Product<a class="headerlink" href="#norm-induced-by-inner-product" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.5. </span>Norm Induced by Inner Product<a class="headerlink" href="#norm-induced-by-inner-product" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-la-ip-induced-norm">
-<p class="admonition-title"><span class="caption-number">Definition 4.72 </span> (Norm induced by inner product)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.93 </span> (Norm induced by inner product)</p>
 <div class="definition-content section" id="proof-content">
 <p>Every inner product <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF\)</span>
 on a vector space <span class="math notranslate nohighlight">\(\VV\)</span>
@@ -1221,7 +1543,7 @@ i.e., <span class="math notranslate nohighlight">\(\| \bzero \| = 0\)</span> and
 = |\alpha| \sqrt{\langle \bv, \bv \rangle} = |\alpha| \| \bv \|.
 \]</div>
 <div class="proof theorem admonition" id="res-la-ip-pythagoras">
-<p class="admonition-title"><span class="caption-number">Theorem 4.75 </span> (Pythagoras theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.77 </span> (Pythagoras theorem)</p>
 <div class="theorem-content section" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(\bu \perp \bv\)</span> then</p>
 <div class="math notranslate nohighlight">
@@ -1241,7 +1563,7 @@ i.e., <span class="math notranslate nohighlight">\(\| \bzero \| = 0\)</span> and
 since  <span class="math notranslate nohighlight">\(\bu \perp \bv\)</span>.</p>
 </div>
 <div class="proof theorem admonition" id="res-la-ip-cauchy-chwartz-inequality">
-<p class="admonition-title"><span class="caption-number">Theorem 4.76 </span> (Cauchy Schwartz inequality)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.78 </span> (Cauchy Schwartz inequality)</p>
 <div class="theorem-content section" id="proof-content">
 <p>For any <span class="math notranslate nohighlight">\(\bu, \bv \in \VV\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -1320,11 +1642,11 @@ In particular <span class="math notranslate nohighlight">\(\bv \neq \bzero\)</sp
 <p>giving us <span class="math notranslate nohighlight">\(\bu - \bw = \bzero\)</span>. Hence, the equality holds.</p>
 </div>
 <div class="proof theorem admonition" id="res-la-ip-induced-norm-valid">
-<p class="admonition-title"><span class="caption-number">Theorem 4.77 </span> (Inner product induced norm justification)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.79 </span> (Inner product induced norm justification)</p>
 <div class="theorem-content section" id="proof-content">
 <p>The function <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span> induced by the inner product
 <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \FF\)</span> as defined in
-<a class="reference internal" href="#def-la-ip-induced-norm">Definition 4.72</a> is indeed a norm.</p>
+<a class="reference internal" href="#def-la-ip-induced-norm">Definition 4.93</a> is indeed a norm.</p>
 </div>
 </div><div class="proof admonition" id="proof">
 <p>Proof. We need to verify that <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> so defined is indeed a norm.
@@ -1353,7 +1675,7 @@ Cauchy Schwartz inequality shown above:</p>
 </div>
 <p>We recap the sequence of results to emphasize the logical flow:</p>
 <ol class="simple">
-<li><p>We started with just the definition of <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> in <a class="reference internal" href="#def-la-ip-induced-norm">Definition 4.72</a>.</p></li>
+<li><p>We started with just the definition of <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> in <a class="reference internal" href="#def-la-ip-induced-norm">Definition 4.93</a>.</p></li>
 <li><p>We proved positive definiteness from the definition itself.</p></li>
 <li><p>We proved positive homogeneity also from the definition itself.</p></li>
 <li><p>We proved Pythagoras theorem utilizing previously established results for inner products.</p></li>
@@ -1362,7 +1684,7 @@ positive homogeneity and Pythagoras theorem.</p></li>
 <li><p>We proved triangle inequality using Cauchy Schwartz inequality.</p></li>
 </ol>
 <div class="proof theorem admonition" id="res-la-ip-implies-norm-metric">
-<p class="admonition-title"><span class="caption-number">Theorem 4.78 </span> (Inner product space to metric space)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.80 </span> (Inner product space to metric space)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Every inner product space is a normed space. Hence it is also a metric space.</p>
 </div>
@@ -1372,9 +1694,9 @@ A norm induces a metric which makes the vector space a metric space.</p>
 </div>
 </div>
 <div class="section" id="hilbert-spaces">
-<h2><span class="section-number">4.5.6. </span>Hilbert Spaces<a class="headerlink" href="#hilbert-spaces" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.6. </span>Hilbert Spaces<a class="headerlink" href="#hilbert-spaces" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-la-ip-hilbert-space">
-<p class="admonition-title"><span class="caption-number">Definition 4.73 </span> (Hilbert space)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.94 </span> (Hilbert space)</p>
 <div class="definition-content section" id="proof-content">
 <p>An inner product space <span class="math notranslate nohighlight">\(\VV\)</span> that is
 <a class="reference internal" href="../metric_spaces/complete.html#def-ms-complete-metric-space">complete</a>
@@ -1386,9 +1708,9 @@ every Cauchy sequence of <span class="math notranslate nohighlight">\(\VV\)</spa
 </div>
 </div></div>
 <div class="section" id="orthonormality">
-<h2><span class="section-number">4.5.7. </span>Orthonormality<a class="headerlink" href="#orthonormality" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.7. </span>Orthonormality<a class="headerlink" href="#orthonormality" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-la-orthonormal-vectors">
-<p class="admonition-title"><span class="caption-number">Definition 4.74 </span> (Set of orthonormal vectors)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.95 </span> (Set of orthonormal vectors)</p>
 <div class="definition-content section" id="proof-content">
 <p>A set of non-zero vectors <span class="math notranslate nohighlight">\(\{\be_1, \dots, \be_p\}\)</span> is called <em>orthonormal</em> if</p>
 <div class="math notranslate nohighlight">
@@ -1404,12 +1726,12 @@ pairwise orthogonal (<span class="math notranslate nohighlight">\(\be_i \perp \b
 </div>
 </div><p>Since orthonormal vectors are orthogonal, hence they are linearly independent.</p>
 <div class="proof definition admonition" id="def-la-orthonormal-basis">
-<p class="admonition-title"><span class="caption-number">Definition 4.75 </span> (Orthonormal basis)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.96 </span> (Orthonormal basis)</p>
 <div class="definition-content section" id="proof-content">
 <p>A set of orthonormal vectors form an <em>orthonormal basis</em> for their span.</p>
 </div>
 </div><div class="proof theorem admonition" id="res-la-ip-onb-expansion">
-<p class="admonition-title"><span class="caption-number">Theorem 4.79 </span> (Expansion of a vector in an orthonormal basis)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.81 </span> (Expansion of a vector in an orthonormal basis)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\{\be_1, \dots, \be_n\}\)</span>  be an orthonormal basis for <span class="math notranslate nohighlight">\(\VV\)</span>.
 Then, any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> can be written as:</p>
@@ -1439,7 +1761,7 @@ hence the above reduces to:</p>
 \]</div>
 </div>
 <div class="proof theorem admonition" id="res-la-ip-onb-norm">
-<p class="admonition-title"><span class="caption-number">Theorem 4.80 </span> (Norm of a vector in an orthonormal basis)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.82 </span> (Norm of a vector in an orthonormal basis)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\{\be_1, \dots, \be_n\}\)</span>  be an orthonormal basis for <span class="math notranslate nohighlight">\(\VV\)</span>.
 For any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span>, let its expansion in the orthonormal basis be:</p>
@@ -1475,7 +1797,7 @@ We provide a constructive answer by the Gram-Schmidt algorithm described
 in the next section.</p>
 </div>
 <div class="section" id="the-gram-schmidt-algorithm">
-<h2><span class="section-number">4.5.8. </span>The Gram-Schmidt Algorithm<a class="headerlink" href="#the-gram-schmidt-algorithm" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.8. </span>The Gram-Schmidt Algorithm<a class="headerlink" href="#the-gram-schmidt-algorithm" title="Permalink to this headline">¶</a></h2>
 <p>The Gram-Schmidt algorithm (described below) can construct
 an orthonormal basis from an arbitrary basis for the
 span of the basis.</p>
@@ -1496,7 +1818,7 @@ span of the basis.</p>
 </ol>
 </div>
 </div><div class="proof theorem admonition" id="res-la-gram-schmidt-correctness">
-<p class="admonition-title"><span class="caption-number">Theorem 4.81 </span> (Justification for Gram-Schmidt algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.83 </span> (Justification for Gram-Schmidt algorithm)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\bv_1, \bv_2, \dots, \bv_n\)</span> be linearly independent.
 The Gram-Schmidt algorithm described above generates a set of orthonormal vectors.</p>
@@ -1568,7 +1890,7 @@ since <span class="math notranslate nohighlight">\(\be_j\)</span> is just scaled
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-la-ip-finite-onb-existence">
-<p class="admonition-title"><span class="caption-number">Theorem 4.82 </span> (Existence of orthonormal basis)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.84 </span> (Existence of orthonormal basis)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Every finite dimensional inner product space has an orthonormal basis.</p>
 </div>
@@ -1582,15 +1904,15 @@ the <a class="reference internal" href="#res-la-gram-schmidt-correctness">Gram-S
 </ol>
 </div>
 <div class="proof corollary admonition" id="res-la-ip-finite-subspace-onb-existence">
-<p class="admonition-title"><span class="caption-number">Corollary 4.8 </span></p>
+<p class="admonition-title"><span class="caption-number">Corollary 4.13 </span></p>
 <div class="corollary-content section" id="proof-content">
 <p>Every finite dimensional subspace of an inner product space has an orthonormal basis.</p>
 </div>
 </div></div>
 <div class="section" id="orthogonal-complements">
-<h2><span class="section-number">4.5.9. </span>Orthogonal Complements<a class="headerlink" href="#orthogonal-complements" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.9. </span>Orthogonal Complements<a class="headerlink" href="#orthogonal-complements" title="Permalink to this headline">¶</a></h2>
 <div class="proof definition admonition" id="def-la-orthogonal-complement">
-<p class="admonition-title"><span class="caption-number">Definition 4.76 </span> (Orthogonal complement)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.97 </span> (Orthogonal complement)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S\)</span> be a subset of an inner product space <span class="math notranslate nohighlight">\(\VV\)</span>.
 The <em>orthogonal complement</em> of <span class="math notranslate nohighlight">\(S\)</span> is the set of all vectors in <span class="math notranslate nohighlight">\(\VV\)</span> that are
@@ -1601,7 +1923,7 @@ S^{\perp} \triangleq \{\bv \in \VV \ST \bv \perp \bs \Forall \bs \in S \}.
 \]</div>
 </div>
 </div><div class="proof definition admonition" id="def-la-orthogonal-complement-vector">
-<p class="admonition-title"><span class="caption-number">Definition 4.77 </span> (Orthogonal complement of a vector)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.98 </span> (Orthogonal complement of a vector)</p>
 <div class="definition-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\ba \in \VV\)</span>.
 The <em>orthogonal complement</em> of <span class="math notranslate nohighlight">\(\ba\)</span> is
@@ -1623,7 +1945,7 @@ It is denoted by <span class="math notranslate nohighlight">\(\ba^{\perp}\)</spa
 \]</div>
 </div>
 </div><div class="proof theorem admonition" id="res-la-ip-orth-comp-subspace">
-<p class="admonition-title"><span class="caption-number">Theorem 4.83 </span> (Orthogonal complement is a linear subspace)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.85 </span> (Orthogonal complement is a linear subspace)</p>
 <div class="theorem-content section" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(\VV\)</span> is an inner product space and <span class="math notranslate nohighlight">\(S \subseteq \VV\)</span>, then
 <span class="math notranslate nohighlight">\(S^{\perp}\)</span> is a subspace.</p>
@@ -1664,7 +1986,7 @@ containing just the zero vector.</p>
 \]</div>
 </div>
 </div><div class="proof theorem admonition" id="res-la-ip-orth-comp-perp-basis">
-<p class="admonition-title"><span class="caption-number">Theorem 4.84 </span> (Orthogonal complement and basis)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.86 </span> (Orthogonal complement and basis)</p>
 <div class="theorem-content section" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(S\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>, then to show that some vector
 <span class="math notranslate nohighlight">\(\bu \in S^{\perp}\)</span>, it is sufficient to show that <span class="math notranslate nohighlight">\(\bu\)</span> is
@@ -1732,7 +2054,7 @@ S^{\perp} = T = \{\bx \ST \bx \perp \bv_i, i=1,\dots,m \}.
 \]</div>
 </div>
 <div class="proof theorem admonition" id="res-la-orthogonal-decomposition">
-<p class="admonition-title"><span class="caption-number">Theorem 4.85 </span> (Orthogonal decomposition)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.87 </span> (Orthogonal decomposition)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be an inner product space and <span class="math notranslate nohighlight">\(S\)</span> be a finite dimensional subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.
 Then, every <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> can be written uniquely in the form:</p>
@@ -1746,7 +2068,7 @@ Then, every <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> ca
 <p>Proof. Let <span class="math notranslate nohighlight">\(\be_1, \dots, \be_p\)</span> be an orthonormal basis for <span class="math notranslate nohighlight">\(S\)</span>.</p>
 <p>Define:</p>
 <div class="math notranslate nohighlight" id="equation-eq-la-orth-dec-parallel">
-<span class="eqno">(4.3)<a class="headerlink" href="#equation-eq-la-orth-dec-parallel" title="Permalink to this equation">¶</a></span>\[\bv_{\parallel} \triangleq \sum_{i=1}^p \langle \bv, \be_i \rangle \be_i.\]</div>
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-eq-la-orth-dec-parallel" title="Permalink to this equation">¶</a></span>\[\bv_{\parallel} \triangleq \sum_{i=1}^p \langle \bv, \be_i \rangle \be_i.\]</div>
 <p>And</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1802,7 +2124,7 @@ Consequently, <span class="math notranslate nohighlight">\(\bu_{\perp} = \bv_{\p
 <p>is a unique decomposition.</p>
 </div>
 <div class="proof corollary admonition" id="res-la-intersect-subspace-complement">
-<p class="admonition-title"><span class="caption-number">Corollary 4.9 </span> (Intersection between a subspace and its complement)</p>
+<p class="admonition-title"><span class="caption-number">Corollary 4.14 </span> (Intersection between a subspace and its complement)</p>
 <div class="corollary-content section" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(S\)</span> is a finite dimensional subspace of an inner product space <span class="math notranslate nohighlight">\(\VV\)</span>, then</p>
 <div class="math notranslate nohighlight">
@@ -1813,7 +2135,7 @@ S \cap S^{\perp} = \{ \bzero \}.
 is the zero vector.</p>
 </div>
 </div><div class="proof theorem admonition" id="res-la-vs-direct-sum-orth-comp">
-<p class="admonition-title"><span class="caption-number">Theorem 4.86 </span> (Vector space as direct sum)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.88 </span> (Vector space as direct sum)</p>
 <div class="theorem-content section" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(S\)</span> is a finite dimensional subspace of an inner product space <span class="math notranslate nohighlight">\(\VV\)</span>, then</p>
 <div class="math notranslate nohighlight">
@@ -1824,12 +2146,12 @@ is the zero vector.</p>
 orthogonal complement.</p>
 </div>
 </div><div class="proof admonition" id="proof">
-<p>Proof. From <a class="reference internal" href="#res-la-intersect-subspace-complement">Corollary 4.9</a>, the
+<p>Proof. From <a class="reference internal" href="#res-la-intersect-subspace-complement">Corollary 4.14</a>, the
 intersection between <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(S^{\perp}\)</span> is the zero vector.
-Thus, by <a class="reference internal" href="vector_spaces.html#def-vs-direct-sum-subspaces">Definition 4.38</a>,
+Thus, by <a class="reference internal" href="vector_spaces.html#def-vs-direct-sum-subspaces">Definition 4.47</a>,
 the direct sum between the two spaces
 <span class="math notranslate nohighlight">\(S \oplus S^{\perp}\)</span> is well defined.</p>
-<p>By <a class="reference internal" href="#res-la-orthogonal-decomposition">Theorem 4.85</a>,
+<p>By <a class="reference internal" href="#res-la-orthogonal-decomposition">Theorem 4.87</a>,
 every vector <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> can be uniquely
 decomposed as</p>
 <div class="math notranslate nohighlight">
@@ -1846,7 +2168,7 @@ subspaces of <span class="math notranslate nohighlight">\(\VV\)</span>, hence</p
 \]</div>
 </div>
 <div class="proof theorem admonition" id="res-la-vs-dim-dir-sum-orth-comp">
-<p class="admonition-title"><span class="caption-number">Theorem 4.87 </span> (Dimension of vector space as direct sum)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.89 </span> (Dimension of vector space as direct sum)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional inner product space.
 If <span class="math notranslate nohighlight">\(S\)</span> is a subspace of <span class="math notranslate nohighlight">\(\VV\)</span>, then</p>
@@ -1859,7 +2181,7 @@ If <span class="math notranslate nohighlight">\(S\)</span> is a subspace of <spa
 <p>Proof. Since <span class="math notranslate nohighlight">\(\VV\)</span> is finite dimensional, hence
 both <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(S^{\perp}\)</span> are finite dimensional
 subspaces of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
-<p>By <a class="reference internal" href="#res-la-vs-direct-sum-orth-comp">Theorem 4.86</a></p>
+<p>By <a class="reference internal" href="#res-la-vs-direct-sum-orth-comp">Theorem 4.88</a></p>
 <div class="math notranslate nohighlight">
 \[
 \VV = S \oplus S^{\perp}.
@@ -1871,7 +2193,7 @@ subspaces of <span class="math notranslate nohighlight">\(\VV\)</span>.</p>
 \]</div>
 </div>
 <div class="proof theorem admonition" id="res-la-orth-comp-orth-comp">
-<p class="admonition-title"><span class="caption-number">Theorem 4.88 </span> (Orthogonal complement of orthogonal complement)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.90 </span> (Orthogonal complement of orthogonal complement)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional inner product space.
 Let <span class="math notranslate nohighlight">\(S\)</span> be a subspace of <span class="math notranslate nohighlight">\(\VV\)</span> and let <span class="math notranslate nohighlight">\(S^{\perp}\)</span>
@@ -1905,7 +2227,7 @@ both <span class="math notranslate nohighlight">\(S\)</span> and <span class="ma
 <p>We now show that <span class="math notranslate nohighlight">\(\left (S^{\perp} \right )^{\perp} \subseteq S\)</span>.</p>
 <ol class="simple">
 <li><p>Let <span class="math notranslate nohighlight">\(\bu \in \left (S^{\perp} \right )^{\perp}\)</span>.</p></li>
-<li><p>By <a class="reference internal" href="#res-la-vs-direct-sum-orth-comp">Theorem 4.86</a>, <span class="math notranslate nohighlight">\(\VV = S \oplus S^{\perp}\)</span>
+<li><p>By <a class="reference internal" href="#res-la-vs-direct-sum-orth-comp">Theorem 4.88</a>, <span class="math notranslate nohighlight">\(\VV = S \oplus S^{\perp}\)</span>
 since <span class="math notranslate nohighlight">\(S\)</span> is a finite dimensional subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(\bu = \bv + \bw\)</span> such that <span class="math notranslate nohighlight">\(\bv \in S\)</span> and <span class="math notranslate nohighlight">\(\bw \in S^{\perp}\)</span>.</p></li>
 <li><p>Since <span class="math notranslate nohighlight">\(\bu - \bv = \bw\)</span>, hence <span class="math notranslate nohighlight">\(\bu - \bv \in S^{\perp}\)</span>.</p></li>
@@ -1915,7 +2237,7 @@ Hence <span class="math notranslate nohighlight">\(\bv \in \left (S^{\perp} \rig
 since both <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span> belong to <span class="math notranslate nohighlight">\(\left (S^{\perp} \right )^{\perp}\)</span>.</p></li>
 <li><p>Thus, <span class="math notranslate nohighlight">\(\bu - \bv \in \left (S^{\perp} \right )^{\perp} \cap S^{\perp}\)</span>
 as <span class="math notranslate nohighlight">\(\bw \in S^{\perp}\)</span> by orthogonal decomposition above.</p></li>
-<li><p>But, by <a class="reference internal" href="#res-la-intersect-subspace-complement">Corollary 4.9</a>
+<li><p>But, by <a class="reference internal" href="#res-la-intersect-subspace-complement">Corollary 4.14</a>
 <span class="math notranslate nohighlight">\(S^{\perp} \cap \left (S^{\perp} \right )^{\perp} = \{ \bzero \}\)</span>
 since <span class="math notranslate nohighlight">\(\left (S^{\perp} \right )^{\perp}\)</span> is the
 orthogonal complement of <span class="math notranslate nohighlight">\(S^{\perp}\)</span> and <span class="math notranslate nohighlight">\(S^{\perp}\)</span> is
@@ -1934,7 +2256,7 @@ hence <span class="math notranslate nohighlight">\(\left (S^{\perp} \right )^{\p
 \]</div>
 </div>
 <div class="proof theorem admonition" id="res-la-vs-hyper-subspace-expression">
-<p class="admonition-title"><span class="caption-number">Theorem 4.89 </span> (n-1 dimensional subspaces)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.91 </span> (n-1 dimensional subspaces)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\VV\)</span> be a finite dimensional inner product space
 with <span class="math notranslate nohighlight">\(\dim \VV = n\)</span>.
@@ -1950,7 +2272,7 @@ where <span class="math notranslate nohighlight">\(\bb \neq \bzero\)</span>.</p>
 </div>
 </div><div class="proof admonition" id="proof">
 <p>Proof. Let <span class="math notranslate nohighlight">\(S\)</span> be <span class="math notranslate nohighlight">\(n-1\)</span> dimensional.
-Then, from <a class="reference internal" href="#res-la-vs-dim-dir-sum-orth-comp">Theorem 4.87</a></p>
+Then, from <a class="reference internal" href="#res-la-vs-dim-dir-sum-orth-comp">Theorem 4.89</a></p>
 <div class="math notranslate nohighlight">
 \[
 \dim \VV = \dim S + \dim S^{\perp}.
@@ -1972,7 +2294,7 @@ S =  \{ \bx \in \VV \ST \bx \perp \bb \}.
 </div>
 </div>
 <div class="section" id="orthogonal-projection">
-<h2><span class="section-number">4.5.10. </span>Orthogonal Projection<a class="headerlink" href="#orthogonal-projection" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.10. </span>Orthogonal Projection<a class="headerlink" href="#orthogonal-projection" title="Permalink to this headline">¶</a></h2>
 <p>Recall that a <a class="reference internal" href="transformations.html#def-la-projection">projection</a>
 operator <span class="math notranslate nohighlight">\(P : \VV \to \VV\)</span>
 is an operator which satisfies <span class="math notranslate nohighlight">\(P^2 = P\)</span>.</p>
@@ -1987,7 +2309,7 @@ is an operator which satisfies <span class="math notranslate nohighlight">\(P^2 
 \NullSpace(P) = \{ \bv \in \VV | P \bv = \bzero\}.
 \]</div>
 <div class="proof definition admonition" id="def-la-orthogonal-projector">
-<p class="admonition-title"><span class="caption-number">Definition 4.78 </span> (Orthogonal projection operator)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.99 </span> (Orthogonal projection operator)</p>
 <div class="definition-content section" id="proof-content">
 <p>A projection operator <span class="math notranslate nohighlight">\(P : \VV \to \VV\)</span>
 over an inner product space <span class="math notranslate nohighlight">\(\VV\)</span>
@@ -2001,7 +2323,7 @@ i.e.</p>
 \]</div>
 </div>
 </div><div class="proof theorem admonition" id="res-la-ip-subspace-orth-proj">
-<p class="admonition-title"><span class="caption-number">Theorem 4.90 </span> (Orthogonal projection operator for a subspace)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.92 </span> (Orthogonal projection operator for a subspace)</p>
 <div class="theorem-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S\)</span> be a finite dimensional subspace of <span class="math notranslate nohighlight">\(\VV\)</span>.
 Let <span class="math notranslate nohighlight">\(\{\be_1, \dots, \be_p\}\)</span> be an orthonormal basis of <span class="math notranslate nohighlight">\(S\)</span>.
@@ -2016,7 +2338,7 @@ P_S \bv \triangleq \bv_{\parallel}
 \bv = \bv_{\parallel} + \bv_{\perp}
 \]</div>
 <p>is the unique orthogonal decomposition of <span class="math notranslate nohighlight">\(\bv\)</span> w.r.t. the subspace <span class="math notranslate nohighlight">\(S\)</span>
-as defined in <a class="reference internal" href="#res-la-orthogonal-decomposition">Theorem 4.85</a>.
+as defined in <a class="reference internal" href="#res-la-orthogonal-decomposition">Theorem 4.87</a>.
 Then,</p>
 <ol>
 <li><p><span class="math notranslate nohighlight">\(P_S \bv = \sum_{i=1}^p \langle \bv, \be_i \rangle \be_i\)</span>.</p></li>
@@ -2040,12 +2362,12 @@ i.e., <span class="math notranslate nohighlight">\(P_S \bs = \bs \Forall \bs \in
 </div>
 </div><div class="proof admonition" id="proof">
 <p>Proof. For the sake of brevity, we abbreviate <span class="math notranslate nohighlight">\(P = P_S\)</span>.</p>
-<p>Following <a class="reference internal" href="#equation-eq-la-orth-dec-parallel">(4.3)</a>, indeed:</p>
+<p>Following <a class="reference internal" href="#equation-eq-la-orth-dec-parallel">(4.5)</a>, indeed:</p>
 <div class="math notranslate nohighlight">
 \[
 P = \sum_{i=1}^p \langle \bv, \be_i \rangle \be_i.
 \]</div>
-<p>For any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> (due to <a class="reference internal" href="#res-la-orthogonal-decomposition">Theorem 4.85</a>):</p>
+<p>For any <span class="math notranslate nohighlight">\(\bv \in \VV\)</span> (due to <a class="reference internal" href="#res-la-orthogonal-decomposition">Theorem 4.87</a>):</p>
 <div class="math notranslate nohighlight">
 \[
 \bv - P \bv = \bv - \bv_{\parallel} = \bv_{\perp}.
@@ -2142,12 +2464,12 @@ that:</p>
 </ol>
 </div>
 <div class="proof theorem admonition" id="res-la-ip-orth-proj-adjoint">
-<p class="admonition-title"><span class="caption-number">Theorem 4.91 </span> (Orthogonal projectors are adjoint)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.93 </span> (Orthogonal projectors are adjoint)</p>
 <div class="theorem-content section" id="proof-content">
 <p>A projection operator is orthogonal if and only if it is self adjoint.</p>
 </div>
 </div><div class="proof example admonition" id="ex-la-orth-proj-line">
-<p class="admonition-title"><span class="caption-number">Example 4.26 </span> (Orthogonal projection on a line)</p>
+<p class="admonition-title"><span class="caption-number">Example 4.27 </span> (Orthogonal projection on a line)</p>
 <div class="example-content section" id="proof-content">
 <p>Consider a unit norm vector <span class="math notranslate nohighlight">\(\bu \in \RR^N\)</span>.<br />
 Thus <span class="math notranslate nohighlight">\(\bu^T \bu = 1\)</span>.</p>
@@ -2199,7 +2521,7 @@ P_{\bu} \bx = \bu \bu^T \bx_{\parallel} + \bu \bu^T \bx_{\perp} = \bx_{\parallel
 <p>Thus <span class="math notranslate nohighlight">\(P_{\bu}\)</span> retains the projection of <span class="math notranslate nohighlight">\(\bx\)</span> on <span class="math notranslate nohighlight">\(\bu\)</span> given by <span class="math notranslate nohighlight">\(\bx_{\parallel}\)</span>.</p>
 </div>
 </div><div class="proof example admonition" id="ex-la-orth-proj-column-space-matrix">
-<p class="admonition-title"><span class="caption-number">Example 4.27 </span> (Projections over the column space of a matrix)</p>
+<p class="admonition-title"><span class="caption-number">Example 4.28 </span> (Projections over the column space of a matrix)</p>
 <div class="example-content section" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\bA \in \RR^{M \times N}\)</span>  with <span class="math notranslate nohighlight">\(N \leq M\)</span> be a matrix given by</p>
 <div class="math notranslate nohighlight">
@@ -2235,9 +2557,9 @@ P_{\bA}^T = (\bA (\bA^T \bA)^{-1} \bA^T)^T = \bA ((\bA^T \bA)^{-1} )^T \bA^T = \
 </div>
 </div></div>
 <div class="section" id="parallelogram-identity">
-<h2><span class="section-number">4.5.11. </span>Parallelogram Identity<a class="headerlink" href="#parallelogram-identity" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.11. </span>Parallelogram Identity<a class="headerlink" href="#parallelogram-identity" title="Permalink to this headline">¶</a></h2>
 <div class="proof theorem admonition" id="res-la-parallelogram-identity">
-<p class="admonition-title"><span class="caption-number">Theorem 4.92 </span> (Parallelogram identity)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.94 </span> (Parallelogram identity)</p>
 <div class="theorem-content section" id="proof-content">
 <div class="math notranslate nohighlight">
 \[
@@ -2266,7 +2588,7 @@ P_{\bA}^T = (\bA (\bA^T \bA)^{-1} \bA^T)^T = \bA ((\bA^T \bA)^{-1} )^T \bA^T = \
 </div>
 <p>When inner product is a real number following identity is quite useful.</p>
 <div class="proof theorem admonition" id="res-la-parallelogram-identity-2">
-<p class="admonition-title"><span class="caption-number">Theorem 4.93 </span> (Parallelogram identity for real inner product)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.95 </span> (Parallelogram identity for real inner product)</p>
 <div class="theorem-content section" id="proof-content">
 <div class="math notranslate nohighlight">
 \[
@@ -2302,10 +2624,10 @@ P_{\bA}^T = (\bA (\bA^T \bA)^{-1} \bA^T)^T = \bA ((\bA^T \bA)^{-1} )^T \bA^T = \
 </div>
 </div>
 <div class="section" id="polarization-identity">
-<h2><span class="section-number">4.5.12. </span>Polarization identity<a class="headerlink" href="#polarization-identity" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6.12. </span>Polarization identity<a class="headerlink" href="#polarization-identity" title="Permalink to this headline">¶</a></h2>
 <p>When inner product is a complex number, polarization identity is quite useful.</p>
 <div class="proof theorem admonition" id="res-la-polarization-identity">
-<p class="admonition-title"><span class="caption-number">Theorem 4.94 </span> (Polarization identity for complex inner product)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.96 </span> (Polarization identity for complex inner product)</p>
 <div class="theorem-content section" id="proof-content">
 <div class="math notranslate nohighlight">
 \[
@@ -2380,13 +2702,13 @@ P_{\bA}^T = (\bA (\bA^T \bA)^{-1} \bA^T)^T = \bA ((\bA^T \bA)^{-1} )^T \bA^T = \
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">4.4. </span>Normed Linear Spaces</p>
+            <p class="prev-next-title"><span class="section-number">4.5. </span>Normed Linear Spaces</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="dual_spaces.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4.6. </span>Dual Spaces</p>
+        <p class="prev-next-title"><span class="section-number">4.7. </span>Dual Spaces</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -2399,7 +2721,7 @@ P_{\bA}^T = (\bA (\bA^T \bA)^{-1} \bA^T)^T = \bA ((\bA^T \bA)^{-1} )^T \bA^T = \
     
       By Shailesh Kumar<br/>
     
-        &copy; Copyright 2021.<br/>
+        &copy; Copyright 2021-2022.<br/>
   </p>
 </footer>
 </main>

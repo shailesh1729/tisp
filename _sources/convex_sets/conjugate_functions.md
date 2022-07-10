@@ -16,6 +16,8 @@ $\VV^*$ denotes the dual vector space (to $\VV$).
 
 ## Definition and Properties
 
+```{index} Conjugate function
+```
 ```{prf:definition} Conjugate function
 :label: def-cvxf-conjugate-function
 
@@ -37,6 +39,9 @@ the support function of a set $C$ is given by
 $$
 \sigma_C (\bx) =  \sup_{\bz \in C} \langle \bz, \bx \rangle.
 $$
+
+
+### Indicator Functions
 
 ```{prf:theorem} Conjugate of an indicator function
 :label: res-cvxf-conjugate-indicator-func
@@ -75,6 +80,8 @@ Let $\by \in \VV*$ be arbitrary.
    $$
    The result follows.
 ```
+
+### Fenchel's Inequality
 
 ```{prf:theorem} Fenchel's inequality
 :label: res-cvxf-conjugate-fenchel
@@ -122,6 +129,8 @@ We proceed as follows.
    $$
 ```
 
+### Convexity and Closedness
+
 ```{prf:theorem} Convexity and closedness
 :label: res-cvxf-conjugate-convex-closed
 
@@ -154,10 +163,10 @@ convex even if the original function is not
 convex or not closed.
 
 
-
+### Properness
 
 ```{prf:theorem} Properness of conjugates of proper convex functions
-:label: res-cvxf-proper-func-conjuate-proper
+:label: res-cvxf-proper-func-conjugate-proper
 
 Let $f : \VV \to \RERL$ be a proper convex function.
 Then, its conjugate $f^*$ is proper. 
@@ -219,6 +228,8 @@ then the dual of the dual $\VV^**$
 is isomorphic to $\VV$.
 ```
 
+```{index} Biconjugate
+```
 ```{prf:definition} Biconjugate
 :label: def-cvxf-biconjugate-func
 
@@ -230,6 +241,8 @@ f^{**} (\bx) = \underset{\by \in \VV^*}{\sup}
 \{ \langle \bx, \by \rangle - f^*(\by)  \}, \quad \bx \in \VV.
 $$
 ```
+
+###  As Underestimators
 
 ```{prf:theorem} Biconjugate is an underestimator
 :label: res-cvxf-biconjugate-underestimator
@@ -267,6 +280,8 @@ Thus, the biconjugate of $f$ is always a lower bound for $f$.
 Naturally, one is interested in conditions under which
 biconjugate of $f$ equals $f$.
 
+### Proper Closed and Convex Functions
+
 ```{prf:theorem} Biconjugate for proper closed and convex functions
 :label: res-cvxf-biconjugate-proper-closed-convex
 
@@ -276,6 +291,10 @@ Then,
 $$
 f(\bx) = f^{**} (\bx) \Forall x \in \VV. 
 $$
+
+In other words, $f^{**} = f$. Or the biconjugate
+of a proper closed and convex function is the function
+itself.
 ```
 
 ```{prf:proof}
@@ -297,7 +316,7 @@ holds true when $f$ is proper, closed and convex.
    $$
    \langle (\bx, s), (\by, t) \rangle
    \triangleq \langle \bx, \by \rangle + st.
-   $$ s
+   $$
 1. Since $f$ is proper, hence $\epi f$ is nonempty.
 1. Since $f$ is closed, hence $\epi f$ is closed.
 1. Since $f$ is convex, hence $\epi f$ is convex.
@@ -664,74 +683,15 @@ h^*(\by) &= \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - h(\bx) \} & \\
 $$
 ```
 
-## Useful Results
-
-```{rubric} Fenchel's duality theorem
-```
-
-```{div}
-Let $f,g : \VV \to \RERL$ be proper convex function.
-If $\relint \dom f \cap \relint \dom g \neq \EmptySet$, then 
-
-$$
-\underset{\bx \in \VV}{\sup} \{f(\bx) + g(\bx) \}
-= \underset{\by \in \VV^*}{\sup} \{ - f^*(\by) - g^*(-\by) \}.
-$$
-The supremum of R.H.S. is attained whenever it is finite.
-```
-
-```{rubric} Infimal Convolution
-```
-
-```{div}
-Recall that the *infimal convolution* of two functions
-$f,g : \VV \to \ERL$ is defined as:
-
-$$
-(f \square g)(\bx) \triangleq 
-\underset{\by \in \VV}{\inf} (f(\bx - \by) + g(\by)). 
-$$
-
-For two proper functions 
-$h_1, h_2: \VV \to \RERL$, it holds that:
-
-$$
-(h_1 \square h_2)^*  = h_1^*  + h_2^*.
-$$
-
-Let $h_1 : \VV \to \RERL$ be a proper convex
-function and $h_2 : \VV \to \RR$ be a real valued
-convex function. Then
-
-$$
-(h_1 + h_2)^* = h_1^* \square h_2^*.
-$$
-
-Let $h_1 : \VV \to \RERL$ be a proper closed convex
-function and $h_2 : \VV \to \RR$ be a real valued
-convex function. Then
-
-$$
-h_1 + h_2 = (h_1^* \square h_2^*)^*.
-$$
-
-Let $h_1 : \VV \to \RERL$ be a proper convex
-function and $h_2 : \VV \to \RR$ be a real valued
-convex function. Suppose $h_1 \square h_2$ is 
-a real valued function. Then
+## Subgradients
 
 
-$$
-h_1 \square h_2 = (h_1^* + h_2^*)^*.
-$$
-```
 
-```{rubric} Conjugate subgradient theorem
-```
+```{prf:theorem} Conjugate subgradient theorem
+:label: res-cvxf-conjugate-subgradient
 
-```{div}
 Let $f : \VV \to \RERL$ be proper and convex. 
-The following claims are equivalent for any $\bx \in \VV$
+The following statements are equivalent for any $\bx \in \VV$
 and $\by \in \VV^*$:
 
 1. $\langle \by, \bx \rangle = f(\bx) + f^*(\by)$.
@@ -739,8 +699,213 @@ and $\by \in \VV^*$:
 
 If $f$ is closed, then 1 and 2 are equivalent to:
 
-3. $\bx \in \partial f^*(\by)$.
+3.. $\bx \in \partial f^*(\by)$.
 ```
+
+```{prf:proof}
+$\by \in \partial f(\bx)$ is true if and only if
+
+$$
+f(\bz) \geq f(\bx) + \langle \bz - \bx , \by \rangle 
+\Forall \bz \in \VV.
+$$
+This is equivalent to
+
+$$
+\langle \bx , \by \rangle  - f(\bx) \geq 
+\langle \bz , \by \rangle  - f(\bz)
+\Forall \bz \in \VV.
+$$
+Taking this supremum over $\bz$ on the R.H.S.,
+we see that this is equivalent to
+
+$$
+\langle \bx , \by \rangle  - f(\bx) \geq f^*(\by).
+$$
+By Fenchel's inequality {prf:ref}`res-cvxf-conjugate-fenchel`,
+
+$$
+f(\bx) + f^*(\by) \geq \langle \bx, \by \rangle.
+$$
+
+Thus, the previous inequality must be an equality, giving us
+
+$$
+f(\bx) + f^*(\by) = \langle \bx, \by \rangle.
+$$
+
+This establishes the equivalence between (1) and (2).
+
+We now assume that $f$ is closed. 
+Thus $f$ is proper, closed and convex.
+Due to {prf:ref}`res-cvxf-biconjugate-proper-closed-convex`
+
+$$
+f^{**} = f.
+$$
+
+Then (1) is equivalent to 
+
+$$
+g^*(\bx) + g(\by) = \langle \bx, \by \rangle.
+$$
+where $g = f^*$.
+
+Then applying the equivalence between (1)
+and (2) for the function $g$, we see that
+
+$$
+\bx \in \partial g(\by) = \partial f^*(\by).
+$$
+```
+
+
+```{prf:corollary} Conjugate subgradient theorem - second formulation
+:label: res-cvxf-conjugate-subgradient-2
+
+Let $f : \VV \to \RERL$ be a proper, closed and convex function. 
+Then for any $\bx \in \VV$ and $\by \in \VV^*$:
+
+$$
+\partial f(\bx) = \argmax_{\bu \in \VV^*} 
+\{ \langle \bx, \bu \rangle - f^*(\bu) \}
+$$
+
+and 
+
+$$
+\partial f^*(\by) = \argmax_{\bv \in \VV} 
+\{ \langle \bv, \by \rangle - f(\bv) \}.
+$$
+```
+
+```{prf:proof}
+
+We proceed as follows.
+
+1. Let $\by \in \dom \partial f^*$ and $\bx \in \partial f^*(\by)$.
+1. Then by {prf:ref}`res-cvxf-conjugate-subgradient`,
+   it is equivalent to
+   
+   $$
+   f^*(\by) = \langle \bx, \by \rangle - f(\bx).
+   $$
+1. By definition of the conjugate function
+
+   $$
+   f^*(\by) = \sup_{\bv \in \VV} \{ \langle \bv, \by \rangle  - f(\bv) \}.
+   $$
+1. since the supremum is attained at $\bx$, hence this is equivalent to
+
+   $$
+   \bx \in \argmax_{\bv \in \VV} \{ \langle \bv, \by \rangle  - f(\bv) \}.
+   $$
+1. Hence
+
+   $$
+   \partial f^*(\by) = \argmax_{\bv \in \VV} \{ \langle \bv, \by \rangle  - f(\bv) \}.
+   $$
+1. Similarly, let $\bx \in \partial f$ and $\by \in \partial f(\bx)$.
+1. Following similar argument, this is equivalent to
+
+   $$
+   \by \in \argmax_{\bu \in \VV^*} \{ \langle \bx, \bu \rangle  - f^*(\bu) \}.
+   $$
+1. Hence
+
+   $$
+   \partial f(\bx) = \argmax_{\bu \in \VV^*} \{ \langle \bx, \bu \rangle  - f^*(\bu) \}.
+   $$
+```
+
+### Lipschitz Continuity
+
+Recall that {prf:ref}`res-cvxf-subdiff-bounded-lipschitz-continuous`
+shows the equivalence between the boundedness of the subgradients
+of a function $f$ over a set $X$ and the Lipschitz continuity
+of $f$ over $X$.
+A similar result is available in terms of the boundedness
+of the domain of the conjugate.
+
+```{prf:theorem} Lipschitz continuity and boundedness of the domain of the conjugate
+:label: res-cvxf-lipschitz-cont-bounded-conjugate
+
+Let $f: \VV \to \RR$ be convex. Then the following statements are equivalent
+for a constant $L > 0$.
+
+1. $| f(\bx) - f(\by) | \leq L \| \bx - \by \|$ for any $\bx, \by \in \VV$.
+1. $ \| \bg \|_* \leq L$ for any $\bg \in \partial f(\bx)$ where $\bx \in \VV$.
+1. $\dom f^* \subseteq B_{\| \cdot \|_*} [\bzero, L]$.
+```
+
+```{prf:proof}
+The equivalence between (1) and (2) follows from
+{prf:ref}`res-cvxf-subdiff-bounded-lipschitz-continuous`.
+
+We first show that (3) $\implies$ (2)
+
+1. Assume that (3) holds true.
+1. By conjugate subgradient theorem ({prf:ref}`res-cvxf-conjugate-subgradient-2`),
+   for any $\bx \in \VV$,
+
+   $$
+   \partial f(\bx) = \argmax_{\by \in \VV^*} 
+   \{ \langle \bx, \by \rangle - f^*(\by) \}.
+   $$
+1. The maximum on the R.H.S. can be attained only at points where $f^*(\by) < \infty$.
+1. Thus if $\by \in \partial f(\bx)$ then $f^*(\by) < \infty$ must hold true.
+1. Thus $\partial f(\bx) \subseteq \dom f^*$ for every $\bx \in \VV$.
+1. By hypothesis (3) $\partial f(\bx) \subseteq B_{\| \cdot \|_*} [\bzero, L]$
+   for every $\bx \in \VV$.
+1. Hence $\bg \in B_{\| \cdot \|_*} [\bzero, L]$ for every $\bg \in \partial f(\bx)$
+   for every $\bx \in \VV$.
+1. Hence $\| \bg \|_* \leq L$ for every $\bg \in \partial f(\bx)$
+   for every $\bx \in \VV$..
+
+In the reverse direction, we will show that (1) $\implies$ (3)
+
+1. Towards this, we shall show that if (1) is true then
+   for any $\bz \in \VV^*$, 
+   if $\| \bz \|_* > L$ then $\bz \notin \dom f^*$.
+1. By hypothesis (1), for every $\bx \in \VV$,
+
+   $$
+   f(\bx) - f(\bzero) \leq |f(\bx) - f(\bzero) | \leq L \| \bx \|.
+   $$
+1. Rearranging
+
+   $$
+   -f(\bx) \geq - f(\bzero) - L \| \bx \|
+   $$
+   holds true for every $\bx \in \VV$.
+1. Then for any $\by \in \VV^*$
+
+   $$
+   f^*(\by) &= \sup_{\bx \in \VV} \{\langle \bx, \by \rangle - f(\bx) \} \\
+   &\geq \sup_{\bx \in \VV} \{\langle \bx, \by \rangle - f(\bzero) - L \| \bx \| \}.
+   $$
+1. Pick any $\bz \in \VV^*$ satisfying $\| \bz \|_* > L$.
+1. Pick a vector $\bu \in \VV$ such that $\| \bu \| = 1$ and 
+   $\langle \bu, \bz \rangle = \| \bz \|_*$. 
+   Such a vector exists by definition of dual norm.
+1. Consider the ray $C = \{ t \bu \ST t \geq 0 \} \subseteq \VV$.
+1. Continuing with the inequality for $f^*$ for $\by = \bz$ 
+
+   $$
+   f^*(\bz) &\geq \sup_{\bx \in \VV} \{\langle \bx, \bz \rangle - f(\bzero) - L \| \bx \| \}\\
+   &\geq \sup_{\bx \in C} \{\langle \bx, \bz \rangle - f(\bzero) - L \| \bx \| \}\\
+   &= \sup_{t \geq 0} \{\langle t \bu, \bz \rangle - f(\bzero) - L t \| \bu \| \}\\
+   &= \sup_{t \geq 0} \{t \| \bz \|_* - f(\bzero) - L t \}\\
+   &= \sup_{t \geq 0} \{t (\| \bz \|_* - L)  - f(\bzero) \}\\
+   &= \infty
+   $$
+   since $\| \bz \|_* > L$.
+1. Hence $\bz \notin \dom f^*$.
+1. Hence for any $\by \in \dom f^*$ we have $\| \by \|_* \leq L$.
+1. Hence $\dom f^* \subseteq B_{\| \cdot \|_*} [\bzero, L]$ as desired.
+```
+
+
 
 
 
@@ -1023,6 +1188,7 @@ To see this, we proceed as follows:
 
 ## n-dim functions
 
+### Quadratics
 
 
 ```{prf:theorem} Strictly convex quadratic
@@ -1135,11 +1301,12 @@ $$
 1. Thus, $\dom f^* = \range \bA + \bb$.
 ```
 
+### Entropy
 
 ```{prf:theorem} Negative entropy
 :label: res-cvxf-conjugate-negative-entropy
 
-Let $f : \RR^n \to \RR$ be given by:
+Let $f : \RR^n \to \RERL$ be given by:
 
 $$
 f(\bx) \triangleq \begin{cases}
@@ -1200,7 +1367,7 @@ $$
 ```{prf:theorem} Negative sum of logs
 :label: res-cvx-conjugate-neg-sum-logs
 
-Let $f : \RR^n \to \RR$ be given by:
+Let $f : \RR^n \to \RERL$ be given by:
 
 $$
 f(\bx) \triangleq \begin{cases}
@@ -1263,11 +1430,11 @@ For $\by \succeq \bzero$, one of the $g^*(y_i) = \infty$. Hence, $f^*(\by) = \in
 ```{prf:theorem} Negative entropy over unit simplex
 :label: res-cvxf-conjugate-neg-entropy-unit-simplex
 
-Let $f : \RR^n \to \RR$ be given by:
+Let $f : \RR^n \to \RERL$ be given by:
 
 $$
 f(\bx) \triangleq \begin{cases}
-\sum_{i=1}^n x_i \ln (x_i) & \bx \in \Delta_n\\
+\sum_{i=1}^n x_i \ln x_i & \bx \in \Delta_n\\
 \infty & \text{ otherwise }
 \end{cases}.
 $$
@@ -1300,14 +1467,30 @@ f^*(\by) &= \sup_{\bx}  \{ \langle \bx, \by \rangle - f(\bx)\}\\
 &= \sup_{\bx} \left \{ \sum_{i=1}^n y_i x_i - \sum_{i=1}^n x_i \ln x_i \ST
 \sum_{i=1}^n x_i = 1, x_1, \dots, x_n \geq 0 \right \}.
 $$
+
+This maximization problem is equivalent to the
+minimization problem discussed later in
+{prf:ref}`ex-opt-unit-simplex-1`.
+The optimal solution is given by
+
+$$
+x_i^* = \frac{e^{y_i}}{\sum_{j=1}^n e^{y_j}} \Forall i = 1,\dots,n.
+$$
+Accordingly, the optimal (supremum) value
+(following {prf:ref}`ex-opt-unit-simplex-1`) is
+
+$$
+f^*(\by) = \ln \left ( \sum_{i=1}^n e^{y_i} \right ).
+$$
+In other words, the conjugate of the negative entropy
+function is the log-sum-exp function.
 ```
 
 
 
-```{rubric} Log sum exp
-```
+```{prf:theorem} Log sum exp
+:label: res-cvxf-conjugate-log-sum-exp
 
-```{div}
 Let $f : \RR^n \to \RR$ be given by:
 
 $$
@@ -1319,34 +1502,49 @@ The conjugate is:
 
 $$
 f^*(\by) =  \begin{cases}
-\sum_{i=1}^n y_i \ln (y_i) & \by \in \Delta_n\\
+\sum_{i=1}^n y_i \ln y_i & \by \in \Delta_n\\
 \infty & \text{ otherwise }
 \end{cases}.
 $$
 ```
 
+```{prf:proof}
+Following {prf:ref}`res-cvxf-conjugate-neg-entropy-unit-simplex`,
+$f = g^*$ where $g$ is the negative entropy over the
+unit simplex function.
+Since $g$ is proper, closed and convex, hence
+due to {prf:ref}`res-cvxf-biconjugate-proper-closed-convex`,
+
+$$
+f^* = g^{**} = g.
+$$
+```
+
+
 Log-sum-exp and negative entropy over simplex and conjugate
 of each other.
 
 
+### Norms
 
-```{rubric} Norm
-```
 
-```{div}
+```{prf:theorem} Norm
+:label: res-cvxf-conjugate-norm
+
 Let $f : \VV \to \RR$ be given by
 
 $$
 f(\bx) = \| \bx \|
 $$
 
-Then, the conjugate $f^* : \VV^* \to \ERL$ for any $\by \in \VV^*$
+Then, the conjugate $f^* : \VV^* \to \RERL$ for any $\by \in \VV^*$
 is given by:
 
 $$
-f^*(\by) = \begin{cases}
+f^*(\by) = I_{B_{\| \cdot \|_*}[\bzero, 1]}
+= \begin{cases}
 0 & \| \by \|_* \leq 1 \\
-\infty & \text{ otherwise }
+\infty & \text{ otherwise }.
 \end{cases}
 $$
 
@@ -1354,74 +1552,268 @@ In other words, it is the indicator function for the unit ball
 w.r.t. the dual norm $\| \cdot \|_*$.
 ```
 
-```{rubric} Ball-Pen
+```{prf:proof}
+We proceed as follows.
+
+1. By {prf:ref}`res-cvxf-support-unit-ball`, the support
+   function for a closed unit ball of a norm is its dual
+   norm.
+1. Thus,
+
+   $$
+   \sigma_{B_{\| \cdot \|_*}[\bzero, 1]} = \| \cdot \| = f.
+   $$
+   Here, we have used the fact that the dual norm of the dual norm
+   is the norm itself.
+1. By {prf:ref}`ex-cvxf-biconjucate-indicator-support`,
+   for a nonempty, closed and convex set $C \subseteq \VV$, 
+
+   $$
+   \sigma^*_C = I_C.
+   $$
+1. The set $B_{\| \cdot \|_*}[\bzero, 1]$ is nonempty,
+   closed and convex.
+1. Hence,
+ 
+   $$
+   f^* = \sigma^*_{B_{\| \cdot \|_*}[\bzero, 1]}
+   = I_{B_{\| \cdot \|_*}[\bzero, 1]}.
+   $$
 ```
 
-```{div}
-Let $f : \VV \to \RERL$ be given by
+```{prf:theorem} Squared norm
+:label: res-cvxf-conjugate-squared-norm
 
-$$
-f(\bx) \triangleq \begin{cases}
-- \sqrt{1 - \| x \|^2} & \| x \| \leq 1\\
-\infty & \text{ otherwise }
-\end{cases}.
-$$
-
-Then, the conjugate $f^* : \VV^* \to \ERL$ for any $\by \in \VV^*$
-is given by:
-
-$$
-f^*(\by) = \sqrt{\| y \|_*^2 + 1}.
-$$
-
-Let $f_{\alpha}$ for some $\alpha > 0$ be defined as
-
-$$
-f_{\alpha}(\bx) \triangleq \begin{cases}
-- \sqrt{\alpha^2 - \| x \|^2} & \| x \| \leq \alpha\\
-\infty & \text{ otherwise }
-\end{cases}.
-$$
-
-The conjugate:
-
-$$
-f_{\alpha}^*(\by) = \alpha \sqrt{\| y \|_*^2 + 1}.
-$$
-
-
-In the reverse direction, let $g_{\alpha} : \VV \to \RR$ 
-for some $\alpha > 0$ be given by:
-
-$$
-g_{\alpha} (\bx) = \sqrt{\alpha^2 + \| x \|^2}.
-$$
-
-Then the conjugate is:
-
-$$
-g_{\alpha}^*(\by) = \begin{cases}
--\alpha \sqrt{1 - \| y \|_*^2} & \| y \|_* \leq 1\\
-\infty & \text{ otherwise }
-\end{cases}.
-$$
-```
-
-
-```{rubric} Squared Norm
-```
-
-```{div}
 Let $f : \VV \to \RR$ be given by
 
 $$
 f(\bx) = \frac{1}{2}\| \bx \|^2
 $$
 
-Then, the conjugate $f^* : \VV^* \to \ERL$ for any $\by \in \VV^*$
+Then, the conjugate $f^* : \VV^* \to \RERL$ for any $\by \in \VV^*$
 is given by:
 
 $$
 f^*(\by) = \frac{1}{2} \| \by \|_*^2.
 $$
 ```
+
+```{prf:proof}
+We proceed as follows
+
+1. By definition of the conjugate
+
+   $$
+   f^*(\by) =  \sup_{\bx \in \VV}\left \{ 
+      \langle \bx, \by \rangle - \frac{1}{2}\| \bx \|^2 \right \}.
+   $$
+1. Consider the set $S_t = \{ \bx \in \RR \ST \| \bx \|  = t \}$.
+1. Then, we can write $\VV = \bigcup_{t \geq 0} S_t$.
+1. Define 
+  
+  $$
+  g_t(\by) = \sup_{\bx \in S_t}\left \{ 
+   \langle \bx, \by \rangle - \frac{1}{2}\| \bx \|^2 \right \}
+  = \sup_{\bx \ST \| \bx \|  = t} \left \{ 
+   \langle \bx, \by \rangle - \frac{1}{2}t^2 \right \}.
+  $$
+
+1. Then it is easy to see that
+
+   $$
+   f^*(\by) = \sup_{t \geq 0}g_t(\by).
+   $$
+1. In other words, we transform the maximization (for conjugate)
+   into a double maximization as
+
+   $$
+   f^*(\by) = \sup_{t \geq 0} \sup_{\bx \ST \| \bx \| = t}
+   \left \{ \langle \bx, \by \rangle - \frac{1}{2}t^2 \right \}.
+   $$
+1.  Now
+
+    $$
+    g_t(\by) &= \sup_{\bx \ST \| \bx \|  = t}
+    \left \{ \langle \bx, \by \rangle - \frac{1}{2}t^2 \right \}\\
+    &= \sup_{\bx \ST \| \bx \|  = t}
+    \{ \langle \bx, \by \rangle \} - \frac{1}{2}t^2 \\
+    &= t \| \by \|_* - \frac{1}{2}t^2.
+    $$
+1. Hence
+
+   $$
+   f^*(\by) = \sup_{t \geq 0}g_t(\by)
+   = \sup_{t \geq 0} \left ( t \| \by \|_* - \frac{1}{2}t^2 \right ).
+   $$
+1. Differentiating $g_t(\by)$ w.r.t. $t$ and setting it to zero,
+   we obtain
+
+   $$
+   \| \by \|_* - t^* = 0
+   $$
+1. Evaluating $g_t(\by)$ at $t^* = \| \by \|_*$, we get
+
+   $$
+   f^*(\by) = \| \by \|_*^2 -  \frac{1}{2} \| \by \|_*^2 
+   = \frac{1}{2} \| \by \|_*^2.
+   $$
+```
+
+
+
+```{prf:theorem} Ball-pen
+:label: res-cvxf-conjugate-ball-pen
+
+Let $f : \VV \to \RERL$ be given by
+
+$$
+f(\bx) \triangleq \begin{cases}
+- \sqrt{1 - \| x \|^2} & \| x \| \leq 1\\
+\infty & \text{ otherwise }.
+\end{cases}
+$$
+
+Then, the conjugate $f^* : \VV^* \to \RERL$ for any $\by \in \VV^*$
+is given by:
+
+$$
+f^*(\by) = \sqrt{\| y \|_*^2 + 1}.
+$$
+
+Generalizing further, let $f_{\alpha}$ for some $\alpha > 0$ be defined as
+
+$$
+f_{\alpha}(\bx) \triangleq \begin{cases}
+- \sqrt{\alpha^2 - \| x \|^2} & \| x \| \leq \alpha\\
+\infty & \text{ otherwise }.
+\end{cases}
+$$
+
+The conjugate is given by:
+
+$$
+f_{\alpha}^*(\by) = \alpha \sqrt{\| y \|_*^2 + 1}.
+$$
+```
+
+```{prf:proof}
+We shall use the double maximization approach here.
+
+
+$$
+f^*(\by) &= \sup \left \{
+   \langle \bx, \by \rangle + \sqrt{1 - \| x \|^2} \ST \| \bx \| \leq 1 
+   \right \} \\
+&= \sup_{t \in [0,1]} \sup_{\bx \ST \| \bx \| = t}
+\left \{ \langle \bx, \by \rangle + \sqrt{1 - t^2} \right \} \\
+&= \sup_{t \in [0,1]} \left \{ 
+   t \| \by \|_* + \sqrt{1 - t^2}
+   \right \}.
+$$
+
+Introduce
+
+$$
+g(t) = t \| \by \|_* + \sqrt{1 - t^2}.
+$$
+
+Differentiating w.r.t. $t$ and setting the derivative to 0, we get
+
+$$
+& \| \by \|_* - \frac{ t }{\sqrt{1-t^2}} = 0 \\
+\implies & \| \by \|_* = \frac{ t }{\sqrt{1-t^2}} \\
+\implies & \| \by \|_*^2 = \frac{ t^2 }{1-t^2} \\
+\implies & 1 + \| \by \|_*^2 = \frac{1 }{1-t^2} \\
+\implies & \frac{1}{1 + \| \by \|_*^2} = 1-t^2 \\
+\implies & 1 - \frac{1}{1 + \| \by \|_*^2} = t^2 \\
+\implies & \frac{\| \by \|_*^2}{1 + \| \by \|_*^2} = t^2 \\
+\implies & t^* = \frac{\| \by \|_*}{\sqrt{1 + \| \by \|_*^2}}.
+$$
+Since $t \in [0,1]$ hence only the positive square root is considered.
+It is easy to see that $t^* \in [0,1]$.
+
+Putting back the value of $t^*$ into $f^*(\by)$,
+
+$$
+f^*(\by) &=
+ \frac{\| \by \|_*^2}{\sqrt{1 + \| \by \|_*^2}}
+   + \sqrt{1 - \frac{\| \by \|_*^2}{1 + \| \by \|_*^2}} \\
+&=  \frac{\| \by \|_*^2}{\sqrt{1 + \| \by \|_*^2}} + 
+\frac{1}{\sqrt{1 + \| \by \|_*^2}} \\
+&= \frac{1 + \| \by \|_*^2}{\sqrt{1 + \| \by \|_*^2}} \\
+&= \sqrt{1 + \| \by \|_*^2}.
+$$
+
+Next, we note that
+
+$$
+f_{\alpha} (\bx) = \alpha f\left ( \frac{\bx}{\alpha} \right ).
+$$
+
+Applying {prf:ref}`res-cvxf-conjugate-scaling`,
+
+$$
+f^*_{\alpha} (\bx) = \alpha f^*(\by) = \alpha \sqrt{1 + \| \by \|_*^2}.
+$$
+```
+
+
+
+```{prf:theorem} $\sqrt{t^2 + \| \cdot \|^2}$
+:label: res-cvxf-conjugate-ball-pen-ext
+
+Let $g_t : \VV \to \RR$  for some $\alpha > 0$ be given by:
+
+$$
+g_t (\bx) = \sqrt{t^2 + \| x \|^2}.
+$$
+
+Then the conjugate is given by:
+
+$$
+g_{t}^*(\by) = \begin{cases}
+-t \sqrt{1 - \| y \|_*^2} & \| y \|_* \leq 1\\
+\infty & \text{ otherwise }
+\end{cases}.
+$$
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Define $g(\bx) = \sqrt{1 + \|\bx \|^2}$.
+1. We can see that $g_t(\bx) = t g \left ( \frac{\bx}{t} \right)$.
+1. By {prf:ref}`res-cvxf-conjugate-ball-pen`,
+   $g = f^*$ where $f$ is the ball-pen function given by
+
+   $$
+   f(\by) = \begin{cases}
+   - \sqrt{1 - \| \by \|_*^2} & \| \by \|_* \leq 1\\
+   \infty & \text{ otherwise }.
+   \end{cases}
+   $$
+1. We note that $f$ is proper, closed and convex function.
+1. By {prf:ref}`res-cvxf-biconjugate-proper-closed-convex`
+
+   $$
+   g^* = f^{**} = f.
+   $$
+1. Thus,
+
+   $$
+   g^* (\by) = \begin{cases}
+   - \sqrt{1 - \| \by \|_*^2} & \| \by \|_* \leq 1\\
+   \infty & \text{ otherwise }.
+   \end{cases}
+   $$
+1. Applying {prf:ref}`res-cvxf-conjugate-scaling`,
+
+   $$
+   g_t^*(\by) = t g^*(\by) = \begin{cases}
+   - t \sqrt{1 - \| \by \|_*^2} & \| \by \|_* \leq 1\\
+   \infty & \text{ otherwise }.
+   \end{cases}
+   $$
+```
+
+

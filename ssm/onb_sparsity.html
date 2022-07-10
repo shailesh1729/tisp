@@ -1,0 +1,2208 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12.4. Sparsity in Orthonormal Bases &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12.5. Sparse and Redundant Representations" href="srr.html" />
+    <link rel="prev" title="12.3. Underdetermined Linear Systems" href="underdetermined.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ssm/onb_sparsity.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fssm/onb_sparsity.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthonormal-bases-and-orthogonal-transforms">
+   12.4.1. Orthonormal Bases and Orthogonal Transforms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fourier-basis-and-sparse-signals">
+   12.4.2. Fourier Basis and Sparse Signals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-uncertainty-principle">
+   12.4.3. An Uncertainty Principle
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-combinations-of-impulses-and-sinusoids">
+   12.4.4. Linear Combinations of Impulses and Sinusoids
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dirac-fourier-basis">
+   12.4.5. Dirac Fourier Basis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-ortho-basis">
+   12.4.6. Two-Ortho Basis
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Sparsity in Orthonormal Bases</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthonormal-bases-and-orthogonal-transforms">
+   12.4.1. Orthonormal Bases and Orthogonal Transforms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fourier-basis-and-sparse-signals">
+   12.4.2. Fourier Basis and Sparse Signals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-uncertainty-principle">
+   12.4.3. An Uncertainty Principle
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-combinations-of-impulses-and-sinusoids">
+   12.4.4. Linear Combinations of Impulses and Sinusoids
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dirac-fourier-basis">
+   12.4.5. Dirac Fourier Basis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-ortho-basis">
+   12.4.6. Two-Ortho Basis
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="sparsity-in-orthonormal-bases">
+<span id="sec-ssm-sparsity-onb"></span><h1><span class="section-number">12.4. </span>Sparsity in Orthonormal Bases<a class="headerlink" href="#sparsity-in-orthonormal-bases" title="Permalink to this headline">¶</a></h1>
+<p>We start this section with a quick review of orthonormal bases and
+orthogonal transforms for finite dimensional
+signals <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>. We look at several examples of sparse signals
+in different orthonormal bases. We then demonstrate that
+while an orthonormal bases is a complete representation of all signals
+<span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> yet, it is not a good tool for exploiting the sparsity
+in <span class="math notranslate nohighlight">\(\bx\)</span> adequately.</p>
+<p>We present an uncertainty principle which explains why a pair of
+orthonormal bases (like Dirac and Fourier basis) cannot have sparse
+representation of the same signal simultaneously.</p>
+<p>We then demonstrate that a combination of two orthonormal bases can be
+quite useful  in creating a redundant yet sparse representation of
+a larger class of signals which could not be sparsely represented
+in either of the two bases individually.</p>
+<p>This motivates us to discuss more general over-complete signal dictionaries in
+the next section.</p>
+<div class="section" id="orthonormal-bases-and-orthogonal-transforms">
+<h2><span class="section-number">12.4.1. </span>Orthonormal Bases and Orthogonal Transforms<a class="headerlink" href="#orthonormal-bases-and-orthogonal-transforms" title="Permalink to this headline">¶</a></h2>
+<p>In signal processing, we often convert a finite length time domain signal into a different domain
+using finite length transforms. Some of the most common transforms are
+<em>discrete Fourier transform</em>,
+the <em>discrete cosine transform</em>, and the <em>Haar transform</em>.
+They all belong to the class of transforms called orthogonal transforms.</p>
+<div class="docutils">
+<p>Orthogonal transforms are characterized by a pair of equations</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-onb-synthesis">
+<span class="eqno">(12.5)<a class="headerlink" href="#equation-eq-ssm-onb-synthesis" title="Permalink to this equation">¶</a></span>\[\bx  = \Psi \ba\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-onb-analysis">
+<span class="eqno">(12.6)<a class="headerlink" href="#equation-eq-ssm-onb-analysis" title="Permalink to this equation">¶</a></span>\[\ba  = \Psi^H \bx\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Psi\)</span> is an <em>orthonormal basis</em> for the complex vector space <span class="math notranslate nohighlight">\(\CC^N\)</span>.
+In particular, the columns of <span class="math notranslate nohighlight">\(\Psi\)</span> are unit norm, and orthogonal to each other.
+Thus if we write</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi = \begin{bmatrix} \psi_1 &amp; \psi_2 &amp; \dots &amp; \psi_N \end{bmatrix}
+\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \psi_i, \psi_j  \rangle  = \delta(i-j).
+\]</div>
+<p>In other words:</p>
+<div class="math notranslate nohighlight">
+\[
+    \Psi^{-1} = \Psi^H.
+\]</div>
+<p>Eq. <a class="reference internal" href="#equation-eq-ssm-onb-synthesis">(12.5)</a> is known as
+the synthesis equation (<span class="math notranslate nohighlight">\(\bx\)</span> is synthesized by columns of <span class="math notranslate nohighlight">\(\Psi\)</span>).
+Eq. <a class="reference internal" href="#equation-eq-ssm-onb-analysis">(12.6)</a> is  known as
+the analysis equation as we compute the coefficients in <span class="math notranslate nohighlight">\(\ba\)</span> by taking
+the inner product of <span class="math notranslate nohighlight">\(\bx\)</span> with columns of <span class="math notranslate nohighlight">\(\Psi\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\Psi\)</span> is known as synthesis operator while <span class="math notranslate nohighlight">\(\Psi^H\)</span> is known as analysis operator.
+Orthogonal transforms preserve the norm of the signal:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_2^2 = \| \ba \|_2^2.
+\]</div>
+<p>This result is commonly known as <em>Parseval’s identity</em> in signal processing community.</p>
+<p>More generally, orthogonal transforms preserve inner products:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle =\langle \Psi \bx, \Psi \by \rangle  \Forall \bx, \by \in \CC^N.
+\]</div>
+</div>
+<div class="proof example admonition" id="ex-ssm-dirac-basis-sparsity">
+<p class="admonition-title"><span class="caption-number">Example 12.7 </span> (Dirac basis and sparse signals)</p>
+<div class="example-content section" id="proof-content">
+<p>The simplest orthogonal transform is the identity basis or the standard ordered
+basis for <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi = \bI_N.
+\]</div>
+<p>We have</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi^{-1} = \Psi^H = \bI_N^H = \bI_N. 
+\]</div>
+<p>In this basis</p>
+<div class="math notranslate nohighlight">
+\[
+\bx  = \bI_N \ba = \ba.
+\]</div>
+<p>We will drop <span class="math notranslate nohighlight">\(N\)</span> from suffix for convenience and refer to the matrix as <span class="math notranslate nohighlight">\(\bI\)</span> only.</p>
+<p>This basis is also known as <em>Dirac basis</em>. The name <em>Dirac</em> comes from the
+Dirac delta functions used in signal analysis in continuous time domain.</p>
+<p>The basis consists of finite length impulses denoted by <span class="math notranslate nohighlight">\(\be_i\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; \be_1  = (1,0,\dots, 0),\\
+&amp; \be_2  = (0,1,\dots, 0),\\
+&amp;\vdots\\
+&amp; \be_N  = (0,0,\dots, 1)
+\end{split}\]</div>
+<p>If a signal <span class="math notranslate nohighlight">\(\bx\)</span> consists of a linear combination of few <span class="math notranslate nohighlight">\(K \ll N\)</span> impulses, then it is
+a sparse signal in this basis. For example the signal</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = (3, 4 , 0, 0, -2, 0, 0, \dots, 0 , 0, 0)
+\]</div>
+<p>is <span class="math notranslate nohighlight">\(3\)</span>-sparse in Dirac basis since</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = 3 \be_1 + 4 \be_2  - 2 \be_5
+\]</div>
+<p>can be expressed as a linear combination of just 3 impulses.</p>
+<p>In contrast if we consider a complex sinusoid in <span class="math notranslate nohighlight">\(\CC^N\)</span>, there is no way we can
+find a sparse representation for it in the Dirac basis.</p>
+</div>
+</div></div>
+<div class="section" id="fourier-basis-and-sparse-signals">
+<h2><span class="section-number">12.4.2. </span>Fourier Basis and Sparse Signals<a class="headerlink" href="#fourier-basis-and-sparse-signals" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>The most popular finite length orthogonal transform is DFT (Discrete Fourier Transform).</p>
+<p>We define the <span class="math notranslate nohighlight">\(N\)</span>-th root of unity as</p>
+<div class="math notranslate nohighlight">
+\[
+\omega = \exp\left(\frac{i 2 \pi }{N} \right).
+\]</div>
+<p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+\omega^N  = \exp (i 2 \pi) = 1.
+\]</div>
+<p>We define the synthesis matrix of DFT as</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi = \bF_N 
+= \frac{1}{\sqrt{N}} 
+\begin{bmatrix} \omega^{kn} \end{bmatrix} \Forall 0 \leq k \leq N-1, 0 \leq n \leq N-1
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\omega^{kn}  = \exp\left(\frac{i 2 \pi  kn }{N}\right).
+\]</div>
+<p><span class="math notranslate nohighlight">\(k\)</span> iterates over rows of <span class="math notranslate nohighlight">\(\bF_N\)</span> while <span class="math notranslate nohighlight">\(n\)</span> iterates over columns of <span class="math notranslate nohighlight">\(\bF_N\)</span>.</p>
+<p>The definition is symmetric. Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\bF_N = \bF_N^T.
+\]</div>
+<p>Note that we have multiplied with
+<span class="math notranslate nohighlight">\(\frac{1}{\sqrt{N}}\)</span> to make sure that columns of <span class="math notranslate nohighlight">\(\bF_N\)</span> are unit norm.</p>
+<p>The columns of <span class="math notranslate nohighlight">\(\bF_N\)</span> form the <em>Fourier basis</em> for signals in <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p>
+</div>
+<div class="proof example admonition" id="ex-ssm-fourier-basis-2">
+<p class="admonition-title"><span class="caption-number">Example 12.8 </span> (Fourier basis for <span class="math notranslate nohighlight">\(N=2\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>2nd root of unity is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\omega = \exp(i \pi) = -1.
+\]</div>
+<p>Hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bF_2 = 
+\frac{1}{\sqrt{2}}
+\begin{bmatrix}
+\omega^0 &amp; \omega^0\\
+\omega^0 &amp; \omega^1\\
+\end{bmatrix}
+=
+\frac{1}{\sqrt{2}}
+\begin{bmatrix}
+1 &amp; 1\\
+1 &amp; -1\\
+\end{bmatrix}
+\end{split}\]</div>
+<p>In this case</p>
+<div class="math notranslate nohighlight">
+\[
+\bF_2^H = \bF_2.
+\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-ssm-fourier-basis-3">
+<p class="admonition-title"><span class="caption-number">Example 12.9 </span> (Fourier basis for <span class="math notranslate nohighlight">\(N=3\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>3rd root of unity is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\omega = \exp\left(\frac{i 2\pi}{3}\right) = -0.5 + 0.866 i.
+\]</div>
+<p>Hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bF_3 = 
+\frac{1}{\sqrt{3}}
+\begin{bmatrix}
+\omega^0 &amp; \omega^0 &amp; \omega^0\\
+\omega^0 &amp; \omega^1 &amp; \omega^2\\
+\omega^0 &amp; \omega^2 &amp; \omega^4
+\end{bmatrix}
+=
+\frac{1}{\sqrt{3}}
+\begin{bmatrix}
+1 &amp; 1 &amp; 1\\
+1 &amp; -0.5  + 0.866 i &amp; -0.5  - 0.866 i\\
+1 &amp; -0.5 - 0.866 i &amp; -0.5 + 0.866 i
+\end{bmatrix}
+\end{split}\]</div>
+<p>In this case</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bF_3^H = 
+\frac{1}{\sqrt{3}}
+\begin{bmatrix}
+1 &amp; 1 &amp; 1\\
+1 &amp; -0.5  - 0.866 i &amp; -0.5  + 0.866 i\\
+1 &amp; -0.5 + 0.866 i &amp; -0.5 - 0.866 i
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+</div><div class="proof example admonition" id="ex-ssm-fourier-basis-4">
+<p class="admonition-title"><span class="caption-number">Example 12.10 </span> (Fourier basis for <span class="math notranslate nohighlight">\(N=4\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>4th root of unity is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\omega = \exp\left(\frac{i 2\pi}{4}\right) =  i.
+\]</div>
+<p>Hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bF_4 = 
+\frac{1}{2}
+\begin{bmatrix}
+\omega^0 &amp; \omega^0 &amp; \omega^0 &amp; \omega^0\\
+\omega^0 &amp; \omega^1 &amp; \omega^2 &amp; \omega^3\\
+\omega^0 &amp; \omega^2 &amp; \omega^4 &amp; \omega^6\\
+\omega^0 &amp; \omega^3 &amp; \omega^6 &amp; \omega^9
+\end{bmatrix}
+=
+\frac{1}{2}
+\begin{bmatrix}
+\omega^0 &amp; \omega^0 &amp; \omega^0 &amp; \omega^0\\
+\omega^0 &amp; \omega^1 &amp; \omega^2 &amp; \omega^3\\
+\omega^0 &amp; \omega^2 &amp; 1 &amp; \omega^2\\
+\omega^0 &amp; \omega^3 &amp; \omega^2 &amp; \omega^1
+\end{bmatrix}
+=
+\frac{1}{2}
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1\\
+1 &amp; i &amp; -1 &amp; -i \\
+1 &amp; -1 &amp; 1 &amp; -1\\
+1 &amp; -i &amp; -1 &amp; i
+\end{bmatrix}
+\end{split}\]</div>
+<p>In this case</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bF_4^H = 
+\frac{1}{2}
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1\\
+1 &amp; -i &amp; -1 &amp; i \\
+1 &amp; -1 &amp; 1 &amp; -1\\
+1 &amp; i &amp; -1 &amp; -i
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+</div><p>We drop the suffix <span class="math notranslate nohighlight">\(N\)</span> wherever convenient and simply refer to the synthesis matrix as <span class="math notranslate nohighlight">\(\bF\)</span>.</p>
+<p>If a signal <span class="math notranslate nohighlight">\(\bx\)</span> is a linear combination of only a few (<span class="math notranslate nohighlight">\(K \ll N\)</span>) complex sinusoids,
+then <span class="math notranslate nohighlight">\(\bx\)</span> has a sparse representation in the DFT basis <span class="math notranslate nohighlight">\(\bF\)</span>.</p>
+<div class="proof example admonition" id="ex-ssm-fourier-basis-sparse-signals">
+<p class="admonition-title"><span class="caption-number">Example 12.11 </span> (Sparse signals in <span class="math notranslate nohighlight">\(\bF\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the following signal</p>
+<div class="math notranslate nohighlight">
+\[
+\bx  = \begin{pmatrix}
+ -0.5 &amp;  0.5 - i &amp; 1.5  &amp; 0.5 + i
+\end{pmatrix}
+\]</div>
+<p>Its representation in <span class="math notranslate nohighlight">\(\bF_4\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\ba = \bF_4^H \bx = \begin{pmatrix}1 &amp; -2 &amp; 0 &amp; 0\end{pmatrix}.
+\]</div>
+<p>Clearly the signal is <span class="math notranslate nohighlight">\(2\)</span>-sparse in <span class="math notranslate nohighlight">\(\bF_4\)</span>.</p>
+<p>Now consider a signal <span class="math notranslate nohighlight">\(\be_2\)</span> which is sparse in the Dirac basis</p>
+<div class="math notranslate nohighlight">
+\[
+\be_2 = \begin{pmatrix}
+ 0 &amp; 1 &amp; 0 &amp; 0
+\end{pmatrix}.
+\]</div>
+<p>Its representation in <span class="math notranslate nohighlight">\(\bF_4\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\ba = \bF_4^H \be_2 =  \begin{pmatrix}
+ 0.5 &amp; 0.5 i &amp; -0.5 &amp; 0.5 i
+\end{pmatrix}.
+\]</div>
+<p>Thus we see that while <span class="math notranslate nohighlight">\(\be_2\)</span> is sparse in <span class="math notranslate nohighlight">\(\bI_4\)</span>, it is
+not at all sparse in <span class="math notranslate nohighlight">\(\bF_4\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="an-uncertainty-principle">
+<h2><span class="section-number">12.4.3. </span>An Uncertainty Principle<a class="headerlink" href="#an-uncertainty-principle" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>As we noted, Dirac basis can give sparse representations for impulses but
+not for complex sinusoids. Vice versa Fourier basis can give sparse
+representations for complex sinusoids but not impulses.</p>
+<p>Can we claim that a signal cannot be simultaneously represented
+both in time (Dirac basis) and in frequency domain (Fourier basis)?</p>
+<p>More generally, let <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> be any two arbitrary orthonormal bases for <span class="math notranslate nohighlight">\(\CC^N\)</span>.
+For some <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>, let</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \Psi \ba = \Chi \bb
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(\bb\)</span> are representations of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> respectively.
+Can we claim something for the relationship between sparsity levels <span class="math notranslate nohighlight">\(\| \ba \|_0\)</span> and <span class="math notranslate nohighlight">\(\| \bb \|_0\)</span>?</p>
+<p>The answer turns out to be yes, but it depends on how much the two bases are similar or close to each other.
+The results in this section were originally developed in <span id="id1">[<a class="reference internal" href="../bib.html#id70" title="Michael Elad and Alfred M Bruckstein. A generalized uncertainty principle and sparse representation in pairs of bases. Information Theory, IEEE Transactions on, 48(9):2558–2567, 2002.">20</a>]</span>.</p>
+</div>
+<div class="proof definition admonition" id="def-ssm-mutual-coherence-two-ortho-bases">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Definition 12.1 </span> (Proximity/Mutual coherence)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>proximity</em> between two orthonormal bases <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi = \begin{bmatrix}
+\psi_1 &amp; \dots &amp; \psi_N
+\end{bmatrix}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\Chi = \begin{bmatrix}
+\chi_1 &amp; \dots &amp; \chi_N
+\end{bmatrix}
+\]</div>
+<p>is defined as the maximum absolute value of inner products between the columns of these two bases:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu (\Psi, \Chi) = \underset{1 \leq i, j \leq N}{\max} | \langle \psi_i, \chi_j \rangle |.
+\]</div>
+<p>This is also known as <em>mutual coherence</em> of the two orthonormal bases.</p>
+</div>
+</div><p>If the two bases are identical, then clearly <span class="math notranslate nohighlight">\(\mu = 1\)</span>. If any vector in <span class="math notranslate nohighlight">\(\Psi\)</span> is very close
+to some vector in <span class="math notranslate nohighlight">\(\Chi\)</span> then we will have a very high value of <span class="math notranslate nohighlight">\(\mu\)</span> (close to 1).</p>
+<p>If the vectors in <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> are highly dissimilar, then we will have very low
+value of <span class="math notranslate nohighlight">\(\mu\)</span> close to 0.</p>
+<div class="proof example admonition" id="ex-ssm-proximity-dirac-fourier-bases">
+<p class="admonition-title"><span class="caption-number">Example 12.12 </span> (Proximity or mutual coherence of Dirac and Fourier bases)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the mutual coherence between Dirac and Fourier bases.</p>
+<p>For some small values of <span class="math notranslate nohighlight">\(N\)</span> (the dimension of ambient space <span class="math notranslate nohighlight">\(\CC^N\)</span>) the values are tabulated in
+below.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>N</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\mu\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0.7071</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>0.5000</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>0.4082</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>0.3536</p></td>
+</tr>
+</tbody>
+</table>
+<p>For larger values of <span class="math notranslate nohighlight">\(N\)</span> we can see the variation of <span class="math notranslate nohighlight">\(\mu\)</span> in the plot below.</p>
+<div class="figure align-default" id="fig-ssm-coherence-dirac-fourier-bases">
+<img alt="../_images/coherence_dirac_fourier_bases.png" src="../_images/coherence_dirac_fourier_bases.png" />
+<p class="caption"><span class="caption-number">Fig. 12.4 </span><span class="caption-text">Mutual coherence for Dirac and Fourier bases</span><a class="headerlink" href="#fig-ssm-coherence-dirac-fourier-bases" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div><p>We present some results related to mutual coherence of two orthonormal bases.</p>
+<div class="proof theorem admonition" id="res-ssm-product-two-ortho-bases">
+<p class="admonition-title"><span class="caption-number">Theorem 12.2 </span> (Product of orthonormal bases)</p>
+<div class="theorem-content section" id="proof-content">
+<p>The product of two orthonormal bases <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> for <span class="math notranslate nohighlight">\(\CC^N\)</span> given by
+<span class="math notranslate nohighlight">\(\Psi^H \Chi\)</span> forms an orthonormal basis by itself.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider the matrix <span class="math notranslate nohighlight">\(\Psi^H \Chi\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Psi^H \Chi = 
+\begin{bmatrix}
+\psi_1^H \\ \dots \\ \psi_N^H
+\end{bmatrix} 
+\begin{bmatrix}
+\chi_1 &amp;  \dots &amp;  \chi_N
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\psi_1^H \chi_1 &amp; \psi_1^H \chi_2 &amp; \dots &amp; \psi_1^H \chi_N\\
+\psi_2^H \chi_1 &amp; \psi_2^H \chi_2 &amp; \dots &amp; \psi_2^H \chi_N\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
+\psi_N^H \chi_1 &amp; \psi_N^H \chi_2 &amp; \dots &amp; \psi_N^H \chi_N
+\end{bmatrix}
+\end{split}\]</div>
+<p>Any column of the product matrix is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+\psi_1^H \chi_i \\ 
+\psi_2^H \chi_i \\ 
+\vdots &amp; \vdots \\
+\psi_N^H \chi_i 
+\end{bmatrix}
+= \Psi^H \chi_i
+\end{split}\]</div>
+<p>But then <span class="math notranslate nohighlight">\(\Psi\)</span> preserves norms, hence</p>
+<div class="math notranslate nohighlight">
+\[
+\| \Psi^H \chi_i \|_2 = \| \chi_i \|_2  = 1. 
+\]</div>
+<p>Thus each column of the product <span class="math notranslate nohighlight">\(\Psi^H \Chi\)</span> is itself a unit norm vector.</p>
+<p>Consider the inner product of two columns of <span class="math notranslate nohighlight">\(\Psi^H \Chi\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\langle \Psi^H \chi_i, \Psi^H \chi_j \rangle = \chi_j^H \Psi \Psi^H \chi_i = \chi_j^H \chi_i = \delta(i - j).
+\]</div>
+<p>Thus, the columns of <span class="math notranslate nohighlight">\(\Psi^H \Chi\)</span> are orthogonal to each other.</p>
+<p>Hence <span class="math notranslate nohighlight">\(\Psi^H \Chi\)</span> forms an orthonormal basis.</p>
+</div>
+<div class="proof remark admonition" id="rem-ssm-onb-group">
+<p class="admonition-title"><span class="caption-number">Remark 12.3 </span> (The group of orthonormal bases)</p>
+<div class="remark-content section" id="proof-content">
+<p>A more general result would be to show that the set of orthonormal bases forms a group
+under the matrix multiplication operation.
+The identity element is the Dirac basis. The inverse of an orthonormal basis is
+also an orthonormal basis. The product of two orthonormal bases is also an orthonormal basis.
+The matrix multiplication satisfies associative law.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-ssm-2-onb-coherence-bounds">
+<p class="admonition-title"><span class="caption-number">Theorem 12.3 </span> (Mutual coherence bounds)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Mutual coherence of two orthonormal bases <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> for the complex
+vector space <span class="math notranslate nohighlight">\(\CC^N\)</span> is bounded by</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-bound-two-ortho-basis-mutual-coherence">
+<span class="eqno">(12.7)<a class="headerlink" href="#equation-eq-ssm-bound-two-ortho-basis-mutual-coherence" title="Permalink to this equation">¶</a></span>\[\frac{1}{\sqrt{N}} \leq \mu(\Psi, \Chi) \leq 1.\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since columns of both <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> are unit norm,
+hence <span class="math notranslate nohighlight">\(|\langle \psi_i, \chi_j \rangle |\)</span>
+cannot be greater than 1.</p>
+<p>Now if <span class="math notranslate nohighlight">\(\Psi = \Chi\)</span> then we have <span class="math notranslate nohighlight">\(\mu(\Psi, \Chi) = 1\)</span>. This proves the upper bound.</p>
+<p>Now consider the matrix <span class="math notranslate nohighlight">\(\Psi^H \Chi\)</span> which forms an orthonormal basis by itself.
+Consider any column of this matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+\psi_1^H \chi_i \\ 
+\psi_2^H \chi_i \\ 
+\vdots &amp; \vdots \\
+\psi_N^H \chi_i 
+\end{bmatrix}
+= \Psi^H \chi_i
+\end{split}\]</div>
+<p>Since the column is unit norm, hence some of squares of the absolute values of entries of the column is 1.
+Thus the absolute value of each of the entries cannot be simultaneously less than <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{N}}\)</span>.</p>
+<p>Hence there exists an entry (in each column) such that</p>
+<div class="math notranslate nohighlight">
+\[
+|\psi_j^H \chi_i | \geq  \frac{1}{\sqrt{N}}.
+\]</div>
+<p>Hence we get the lower bound on mutual coherence of <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+\mu (\Psi, \Chi) \geq \frac{1}{\sqrt{N}}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-ssm-coherence-dirac-fourier">
+<p class="admonition-title"><span class="caption-number">Theorem 12.4 </span> (Mutual coherence of Dirac and Fourier bases)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Mutual coherence of Dirac and Fourier bases is <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{N}}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\mu(\bI_N, \bF_N) = \frac{1}{\sqrt{N}}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <a class="reference internal" href="#res-ssm-2-onb-coherence-bounds">Theorem 12.3</a> shows that</p>
+<div class="math notranslate nohighlight">
+\[
+\mu(\bI_N, \bF_N) \geq \frac{1}{\sqrt{N}}.
+\]</div>
+<p>We just need to show that its in fact an equality.</p>
+<p>Consider <span class="math notranslate nohighlight">\(i\)</span>-th column of <span class="math notranslate nohighlight">\(\bI\)</span> as <span class="math notranslate nohighlight">\(\be_i\)</span>.</p>
+<p>Consider <span class="math notranslate nohighlight">\(j\)</span>-th column of <span class="math notranslate nohighlight">\(\bF\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bf_j = 
+\frac{1}{\sqrt{N}}
+\begin{bmatrix}
+\omega^{0} \\ 
+\omega^{j}  \\
+\omega^{2 j} \\
+\vdots \\
+\omega^{(N-1)j}
+\end{bmatrix}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega\)</span> is the <span class="math notranslate nohighlight">\(N\)</span>-th root of unity.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \be_i,  \bf_j \rangle = \frac{1}{\sqrt{N}} \omega^{-(i-1)j}
+\implies |\langle e_i,  f_j \rangle| = \frac{1}{\sqrt{N}}.
+\]</div>
+<p>This doesn’t depend on the choice of <span class="math notranslate nohighlight">\(i\)</span>-th column of <span class="math notranslate nohighlight">\(\bI_N\)</span> and <span class="math notranslate nohighlight">\(j\)</span>-th column of
+<span class="math notranslate nohighlight">\(\bF_N\)</span>.
+Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\mu(\bI_N, \bF_N) = \frac{1}{\sqrt{N}}.
+\]</div>
+</div>
+<p>With basic properties of mutual coherence in place, we are now ready to state
+an uncertainty principle on the sparsity levels of representations of same signal
+<span class="math notranslate nohighlight">\(x\)</span> in two different orthonormal bases:</p>
+<div class="proof theorem admonition" id="res-ssm-uncertainty-principle-2-onb-mu">
+<p class="admonition-title"><span class="caption-number">Theorem 12.5 </span> (Uncertainty principle)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For any arbitrary pair of orthonormal bases <span class="math notranslate nohighlight">\(\Psi\)</span>, <span class="math notranslate nohighlight">\(\Chi\)</span> with mutual coherence
+<span class="math notranslate nohighlight">\(\mu(\Psi, \Chi)\)</span>, and for any arbitrary non-zero vector <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> with representations
+<span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(\bb\)</span> respectively, the following inequality holds true:</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-l0-uncertainty-mu-2-onb">
+<span class="eqno">(12.8)<a class="headerlink" href="#equation-eq-ssm-l0-uncertainty-mu-2-onb" title="Permalink to this equation">¶</a></span>\[\| \ba \|_0 + \| \bb \|_0 \geq \frac{2}{\mu(\Psi, \Chi)}.\]</div>
+<p>Moreover for unit-length <span class="math notranslate nohighlight">\(\bx\)</span> we have:</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-l1-uncertainty-principle-coherence-two-ortho-basis">
+<span class="eqno">(12.9)<a class="headerlink" href="#equation-eq-ssm-l1-uncertainty-principle-coherence-two-ortho-basis" title="Permalink to this equation">¶</a></span>\[\| \ba \|_1 + \| \bb \|_1 \geq \frac{2}{\sqrt{\mu(\Psi, \Chi)}}.\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Dividing <span class="math notranslate nohighlight">\(\bx\)</span> by <span class="math notranslate nohighlight">\(\| \bx \|_2\)</span> doesn’t change <span class="math notranslate nohighlight">\(\ell_0\)</span> “norm” of <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(\bb\)</span>. i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\left \| \frac{\ba}{\| \bx \|_2} \right \|_0 = \| \ba \|_0. 
+\]</div>
+<p>Hence without loss of
+generality, we will assume that <span class="math notranslate nohighlight">\(\| \bx \|_2 = 1\)</span>.</p>
+<p>We are given that <span class="math notranslate nohighlight">\(\bx^H \bx = 1\)</span>, <span class="math notranslate nohighlight">\(\bx = \Psi \ba\)</span> and <span class="math notranslate nohighlight">\(\bx = \Chi \bb\)</span>.
+Since <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> are orthonormal bases hence <span class="math notranslate nohighlight">\(\| \ba \|_2 = \| \bb \|_2 = 1\)</span> also.</p>
+<p>We can write</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+1 &amp;= \bx^H \bx\\
+&amp;= (\Psi \ba)^H (\Chi \bb) = \ba ^H \Psi^H \Chi \bb\\
+&amp;= \sum_{i=1}^N \sum_{j=1}^N \overline{a_i} b_j \psi_i^H \chi_j\\
+&amp;= \left | \sum_{i=1}^N \sum_{j=1}^N \overline{a_i} b_j \psi_i^H \chi_j \right |\\
+&amp;\leq \sum_{i=1}^N \sum_{j=1}^N |a_i | |b_j | |\psi_i^H \chi_j |\\
+&amp;\leq \mu(\Psi, \Chi)\sum_{i=1}^N \sum_{j=1}^N | a_i | |b_j | \\
+&amp;= \mu(\Psi, \Chi) \| \ba \|_1 \| \bb \|_1
+\end{split}\]</div>
+<p>where we note that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_1 \| \bb \|_1 = \left (\sum_{i=1}^N |a_i | \right) \left (\sum_{j=1}^N |b_j | \right)
+= \sum_{i=1}^N \sum_{j=1}^N | a_i | |b_j |
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\mu(\Psi, \Chi)  \geq |\psi_i^H \chi_j |.
+\]</div>
+<p>Hence we get the inequality</p>
+<div class="math notranslate nohighlight">
+\[
+\mu(\Psi, \Chi) \| \ba \|_1 \| \bb \|_1 \geq 1
+\]</div>
+<p>Using the inequality between algebraic mean and geometric mean</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{ab} \leq \frac{a + b}{2} \Forall a, b \geq 0
+\]</div>
+<p>we get</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_1 + \| \bb \|_1 \geq 2 \sqrt{\| \ba \|_1 \| \bb \|_1} \geq \frac{2}{\sqrt{\mu(\Psi, \Chi)}}.
+\]</div>
+<p>This is an uncertainty principle for the <span class="math notranslate nohighlight">\(\ell_1\)</span> norms of the two representations.
+We still have to get the uncertainty principle for <span class="math notranslate nohighlight">\(\ell_0\)</span> case.
+Let</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_0  = A 
+\text{ and }
+\| \bb \|_0 = B
+\]</div>
+<p>Consider the sets</p>
+<div class="math notranslate nohighlight">
+\[
+X_A = \{ \by \ST \by = \Psi \bu  \text{ and }  \| \bu \|_0 = A, \|\bu\|_2 = 1\}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+X_B = \{ \by : \by = \Chi \bv  \text{ and }  \| \bv \|_0 = B, \|\bv\|_2 = 1\}.
+\]</div>
+<p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+\bx \in X_A \cap X_B.
+\]</div>
+<p>The representations <span class="math notranslate nohighlight">\(\bu\)</span> for vectors <span class="math notranslate nohighlight">\(\by\)</span> in <span class="math notranslate nohighlight">\(X_A\)</span> have exactly <span class="math notranslate nohighlight">\(A\)</span> non-zero entries and
+are all unit norm representations.
+Which of them would have the longest <span class="math notranslate nohighlight">\(\ell_1\)</span> norm <span class="math notranslate nohighlight">\(\| \bu \|_1\)</span>?</p>
+<p>This can be written as an optimization problem of the form</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-uncertainty-opt-prob-a-psi">
+<span class="eqno">(12.10)<a class="headerlink" href="#equation-eq-ssm-uncertainty-opt-prob-a-psi" title="Permalink to this equation">¶</a></span>\[\underset{\by \in X_A}{\text{maximize}} 
+\| \bu \|_1 \text{ where } \bu = \Psi^H \by.\]</div>
+<p>Let the optimal solution for this problem be <span class="math notranslate nohighlight">\(\bv_a\)</span>
+with corresponding representation <span class="math notranslate nohighlight">\(\ba^* = \Psi^H \bv_a\)</span>. Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba^* \|_1 \geq \| \ba \|_1.
+\]</div>
+<p>Similarly from the set <span class="math notranslate nohighlight">\(X_B\)</span> let us find the vector <span class="math notranslate nohighlight">\(\bv_b\)</span> with maximum
+<span class="math notranslate nohighlight">\(\ell_1\)</span> norm representation in <span class="math notranslate nohighlight">\(\Chi\)</span></p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-uncertainty-opt-prob-a-chi">
+<span class="eqno">(12.11)<a class="headerlink" href="#equation-eq-ssm-uncertainty-opt-prob-a-chi" title="Permalink to this equation">¶</a></span>\[\underset{\by \in X_B}{\text{maximize}} 
+\| \bv \|_1 \text{ where } \bv = \Chi^H \by.\]</div>
+<p>Let the optimal solution for this problem be <span class="math notranslate nohighlight">\(\bv_b\)</span>
+with corresponding representation <span class="math notranslate nohighlight">\(\bb^* = \Chi^H \bv_b\)</span>.
+Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bb^* \|_1 \geq \| \bb \|_1.
+\]</div>
+<p>Returning back to the inequality</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_1 \| \bb \|_1 \geq \frac{1}{\mu(\Psi, \Chi)}
+\]</div>
+<p>we can write</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba^* \|_1 \| \bb^* \|_1 \geq \frac{1}{\mu(\Psi, \Chi)}.
+\]</div>
+<p>An equivalent formulation of the optimization problem
+<a class="reference internal" href="#equation-eq-ssm-uncertainty-opt-prob-a-psi">(12.10)</a>is</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-uncertainty-opt-prob-b-psi">
+<span class="eqno">(12.12)<a class="headerlink" href="#equation-eq-ssm-uncertainty-opt-prob-b-psi" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{a}{\text{maximize}} 
+&amp; &amp;  \| \ba \|_1 \\
+&amp; \text{subject to }
+&amp; &amp;  \| \ba \|_2^2 = \ba^H \ba = 1\\
+&amp; \text{and }
+&amp; &amp; \|\ba \|_0 = A.\end{split}\]</div>
+<p>This formulation doesn’t require any specific mention of the basis <span class="math notranslate nohighlight">\(\Psi\)</span>.
+Let the optimal value for this problem be given by</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba^* \|_1 = g(A) = g(\| \ba \|_0)
+\]</div>
+<p>Here we consider the optimization problem to be parameterized by the <span class="math notranslate nohighlight">\(\ell_0\)</span>-“norm” of <span class="math notranslate nohighlight">\(\ba\)</span>;
+i.e.,
+<span class="math notranslate nohighlight">\(\| \ba \|_0 = A\)</span> and we write the optimal value as a function <span class="math notranslate nohighlight">\(g\)</span> of the parameter <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Then by symmetry, optimal value for the problem <a class="reference internal" href="#equation-eq-ssm-uncertainty-opt-prob-a-chi">(12.11)</a> is</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bb^* \|_1 = g(B) = g(\| \bb \|_0)
+\]</div>
+<p>Thus we can write</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-intermediate-bound-l0-norm-products">
+<span class="eqno">(12.13)<a class="headerlink" href="#equation-eq-ssm-intermediate-bound-l0-norm-products" title="Permalink to this equation">¶</a></span>\[g(\| \ba \|_0) g(\| \bb \|_0) \geq  \frac{1}{\mu(\Psi, \Chi)}.\]</div>
+<p>This is our intended result since we have been able to write the inequality as
+a function of <span class="math notranslate nohighlight">\(\ell_0\)</span> “norm”s of the representations <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(\bb\)</span>.</p>
+<p>In order to complete the result, we need to find the solution of the
+optimization problem <a class="reference internal" href="#equation-eq-ssm-uncertainty-opt-prob-b-psi">(12.12)</a> given
+by the function <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<p>Without loss of generality, let us assume that the <span class="math notranslate nohighlight">\(A\)</span> non-zero entries
+in the optimization variable <span class="math notranslate nohighlight">\(\ba\)</span> appear in its first <span class="math notranslate nohighlight">\(A\)</span> entries and rest are zero.
+This is fine since changing the
+order of entries in <span class="math notranslate nohighlight">\(\ba\)</span> doesn’t affect any of the norms of concern <span class="math notranslate nohighlight">\(\| \ba \|_0\)</span>, <span class="math notranslate nohighlight">\(\| \ba \|_1\)</span>
+and <span class="math notranslate nohighlight">\(\| \ba \|_2\)</span>.</p>
+<p>Let us further assume that all non-zero entries of <span class="math notranslate nohighlight">\(\ba\)</span> are strictly positive real numbers.
+This assumption is valid since only absolute values are used in this problem. Specifically
+for any <span class="math notranslate nohighlight">\(\ba\)</span> with non-zero complex entries <span class="math notranslate nohighlight">\((a_1, a_2, \dots, a_A, 0, \dots, 0)\)</span> there
+exists <span class="math notranslate nohighlight">\(\ba'\)</span> with positive entries <span class="math notranslate nohighlight">\((|a_1|, |a_2|, \dots, |a_A|, 0, \dots, 0)\)</span> such that
+<span class="math notranslate nohighlight">\(\|\ba\|_0 = \|\ba'\|_0\)</span>, <span class="math notranslate nohighlight">\(\|\ba\|_1 = \|\ba'\|_1\)</span> and <span class="math notranslate nohighlight">\(\|\ba\|_2 = \|\ba'\|_2\)</span>,
+hence solving the optimization
+problem for complex <span class="math notranslate nohighlight">\(\ba\)</span> is same as solving the optimization problem for
+<span class="math notranslate nohighlight">\(\ba\)</span> with strictly positive first <span class="math notranslate nohighlight">\(A\)</span> entries.</p>
+<p>Using Lagrange multipliers, the <span class="math notranslate nohighlight">\(\ell_0\)</span> constraint vanishes (since the assumptions
+mentioned above allow us to focus on only the first <span class="math notranslate nohighlight">\(A\)</span> coordinates of <span class="math notranslate nohighlight">\(\ba\)</span>), and
+we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+\LLL(\ba) = \sum_{i=1}^{A} a_i + \lambda \left(1 - \sum_{i=1}^A a_i^2\right).
+\]</div>
+<p>Differentiating w.r.t. <span class="math notranslate nohighlight">\(a_i\)</span> and equating to 0 we get</p>
+<div class="math notranslate nohighlight">
+\[
+1 - 2 \lambda a_i = 0 \implies a_i = \frac{1}{2\lambda}.
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(\ell_2\)</span> constraint requires</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^A a_i^2 = A \frac{1}{4 \lambda^2} = 1 \implies \lambda = \frac{\sqrt{A}}{2 }
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+a_i = \frac{1}{\sqrt{A}}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_1 = \sum_{i=1}^A |a_i| = \sqrt{A}.
+\]</div>
+<p>Thus the optimal value of the optimization problem <a class="reference internal" href="#equation-eq-ssm-uncertainty-opt-prob-b-psi">(12.12)</a> is</p>
+<div class="math notranslate nohighlight">
+\[
+g(A) = \sqrt{A} = \sqrt{\|\ba \|_0}.
+\]</div>
+<p>Similarly</p>
+<div class="math notranslate nohighlight">
+\[
+g(B) = \sqrt{B} = \sqrt{\|\bb \|_0}.
+\]</div>
+<p>Putting back in <a class="reference internal" href="#equation-eq-ssm-intermediate-bound-l0-norm-products">(12.13)</a> we get</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{\| \ba \|_0 \| \bb \|_0} \geq  \frac{1}{\mu(\Psi, \Chi)}.
+\]</div>
+<p>Applying the algebraic mean-geometric mean inequality we get the desired result</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_0 + \| \bb \|_0 \geq \frac{2}{\mu(\Psi, \Chi)}.
+\]</div>
+</div>
+<p>This  theorem suggests that if two orthonormal bases have low mutual coherence then</p>
+<ul class="simple">
+<li><p>the two representations for <span class="math notranslate nohighlight">\(\bx\)</span> cannot be jointly <span class="math notranslate nohighlight">\(l_1\)</span>-short and</p></li>
+<li><p>the two representations for <span class="math notranslate nohighlight">\(\bx\)</span> cannot be jointly sparse.</p></li>
+</ul>
+<div class="admonition-challenge admonition">
+<p class="admonition-title">Challenge</p>
+<p>Can we show that the above result is sharp? i.e. For a pair of orthonormal bases
+<span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span>, it is always possible to find a non-zero vector <span class="math notranslate nohighlight">\(\bx\)</span> with corresponding
+representations <span class="math notranslate nohighlight">\(\bx = \Psi \ba\)</span> and <span class="math notranslate nohighlight">\(\bx = \Chi \bb\)</span> which satisfies the lower bound</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_0 + \| \bb \|_0 = \frac{2}{\mu(\Psi, \Chi)}?
+\]</div>
+</div>
+<div class="proof example admonition" id="ex-ssm-dirac-fourier-sparse-rep-2">
+<p class="admonition-title"><span class="caption-number">Example 12.13 </span> (Sparse representations with Dirac and Fourier bases)</p>
+<div class="example-content section" id="proof-content">
+<p>We showed in <a class="reference internal" href="#res-ssm-coherence-dirac-fourier">Theorem 12.4</a>
+that</p>
+<div class="math notranslate nohighlight">
+\[
+\mu(\bI, \bF) = \frac{1}{\sqrt{N}}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>. Let its representation in <span class="math notranslate nohighlight">\(\bF\)</span> be given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \bF \ba.
+\]</div>
+<p>Applying <a class="reference internal" href="#res-ssm-uncertainty-principle-2-onb-mu">Theorem 12.5</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_0 + \| \ba \|_0 \geq \frac{2}{\mu(\Psi, \Chi)} = 2 \sqrt{N}.
+\]</div>
+<p>This tells us that a signal cannot have fewer than <span class="math notranslate nohighlight">\(2 \sqrt{N}\)</span> non-zeros in
+time and frequency domain together.</p>
+</div>
+</div></div>
+<div class="section" id="linear-combinations-of-impulses-and-sinusoids">
+<h2><span class="section-number">12.4.4. </span>Linear Combinations of Impulses and Sinusoids<a class="headerlink" href="#linear-combinations-of-impulses-and-sinusoids" title="Permalink to this headline">¶</a></h2>
+<p>What happens if a signal <span class="math notranslate nohighlight">\(\bx\)</span> is a linear combination of few complex sinusoids
+and few impulses?</p>
+<p>The set of sinusoids and impulses involved in the construction of <span class="math notranslate nohighlight">\(\bx\)</span> actually
+specifies the degrees of freedom of <span class="math notranslate nohighlight">\(\bx\)</span>. This is the indicator of inherent
+sparsity of <span class="math notranslate nohighlight">\(\bx\)</span> provided this set of component signals of <span class="math notranslate nohighlight">\(\bx\)</span> is known
+a priori.</p>
+<p>In absence of prior knowledge of component signals of <span class="math notranslate nohighlight">\(\bx\)</span>, we attempt to
+look for a sparse representation of <span class="math notranslate nohighlight">\(\bx\)</span> in one of the well understood
+orthonormal bases. Here we are specifically looking at the two bases
+Dirac and Fourier.</p>
+<p>While the Dirac basis can provide sparse representation for impulses,
+sinusoids have dense representation in Dirac basis. Vice versa,
+in Fourier basis, complex sinusoids have sparse representation, yet
+impulses have dense representations. Thus neither of the two bases
+is capable of providing a sparse representation for a combination
+of impulses and sinusoids.</p>
+<p>The natural question arises if there is a way to come up with a sparse
+representation for such signals by combining the Dirac and Fourier basis?</p>
+</div>
+<div class="section" id="dirac-fourier-basis">
+<span id="sec-ssm-dirac-fourier-basis"></span><h2><span class="section-number">12.4.5. </span>Dirac Fourier Basis<a class="headerlink" href="#dirac-fourier-basis" title="Permalink to this headline">¶</a></h2>
+<p>Now we develop a representation of signals <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>
+in terms of a combination of Dirac basis <span class="math notranslate nohighlight">\(\bI\)</span> and Fourier
+basis <span class="math notranslate nohighlight">\(\bF\)</span>.</p>
+<p>We define a new synthesis matrix</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-dirac-fourier-synthesis-matrix">
+<span class="eqno">(12.14)<a class="headerlink" href="#equation-eq-ssm-dirac-fourier-synthesis-matrix" title="Permalink to this equation">¶</a></span>\[\bH = \begin{bmatrix}
+\bI &amp; \bF
+\end{bmatrix}
+\in \CC^{N \times 2 N}.\]</div>
+<p>We can write <span class="math notranslate nohighlight">\(\bI\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bI = \begin{bmatrix}
+\be_1 &amp;\dots &amp; \be_N
+\end{bmatrix}
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(\bF\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bF = \begin{bmatrix}
+\bf_1 &amp;\dots &amp; \bf_N
+\end{bmatrix}.
+\]</div>
+<p>This enables us to write <span class="math notranslate nohighlight">\(\bH\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bH = \begin{bmatrix}
+\be_1 &amp;\dots &amp; \be_N &amp; \bf_1 &amp;\dots &amp; \bf_N
+\end{bmatrix}.
+\]</div>
+<p>We will look for a representation of <span class="math notranslate nohighlight">\(\bx\)</span>
+using the synthesis matrix <span class="math notranslate nohighlight">\(\bH\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bx  = \bH \ba
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ba \in \CC^{2N}\)</span>.</p>
+<p>Since this representation is under-determined and <span class="math notranslate nohighlight">\(\ColSpace (\bH ) = \CC^N\)</span> hence
+there are always infinitely many possible representations of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\bH\)</span>.</p>
+<p>We would prefer to choose the sparsest representation which can be stated as an
+optimization problem</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-df-sparse-rep-prob">
+<span class="eqno">(12.15)<a class="headerlink" href="#equation-eq-ssm-df-sparse-rep-prob" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{\ba}{\text{minimize}} 
+&amp; &amp;  \| \ba \|_0 \\
+&amp; \text{subject to }
+&amp; &amp;  \bx = \bH \ba.\end{split}\]</div>
+<div class="proof example admonition" id="ex-ssm-sparse-rep-with-df-basis">
+<p class="admonition-title"><span class="caption-number">Example 12.14 </span> (Sparse representation using Dirac Fourier Basis)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(N=4\)</span>.
+Then the Dirac Fourier basis is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bH = 
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; .5 &amp; .5 &amp; .5 &amp; .5\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; .5 &amp; .5 i &amp; -.5 &amp; -.5 i \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; .5 &amp; -.5 &amp; .5 &amp; -.5\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; .5 &amp; -.5 i &amp; -.5 &amp; .5 i
+\end{bmatrix}
+\end{split}\]</div>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = 3 \be_1  - 2 \bf_2 = 
+\begin{pmatrix}
+2  &amp; -i &amp; 1 &amp; i
+\end{pmatrix}.
+\]</div>
+<p>A sparse representation of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\bH\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\ba = \begin{pmatrix}
+3 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -2 &amp; 0 &amp; 0
+\end{pmatrix}.
+\]</div>
+<p>This representation is <span class="math notranslate nohighlight">\(2\)</span>-sparse.</p>
+<p>Thus we see that Dirac Fourier basis is able to provide a sparser representation
+of a linear combination of impulses and sinusoids compared to individual
+orthonormal bases (the Dirac basis and the Fourier basis).</p>
+</div>
+</div><p>This gives us motivation to consider such combination of bases which help us
+provide a sparse representation to a larger class of signals. This is the
+objective of the next section.</p>
+<p>In due course we will revisit the Dirac Fourier basis further in several examples.</p>
+</div>
+<div class="section" id="two-ortho-basis">
+<h2><span class="section-number">12.4.6. </span>Two-Ortho Basis<a class="headerlink" href="#two-ortho-basis" title="Permalink to this headline">¶</a></h2>
+<p>Before we leave this section, let us define general two-ortho bases.</p>
+<div class="proof definition admonition" id="def-ssm-two-ortho-basis">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Definition 12.2 </span> (Two ortho basis)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> be any two <span class="math notranslate nohighlight">\(\CC^{N \times N}\)</span> matrices
+whose columns vectors form orthonormal bases
+for the complex vector space <span class="math notranslate nohighlight">\(\CC^N\)</span> individually.</p>
+<p>We define</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-two-ortho-synthesis-matrix">
+<span class="eqno">(12.16)<a class="headerlink" href="#equation-eq-ssm-two-ortho-synthesis-matrix" title="Permalink to this equation">¶</a></span>\[\Eta = \begin{bmatrix}
+\Psi &amp; \Chi
+\end{bmatrix}
+\in \CC^{N \times 2 N}.\]</div>
+<p>The columns of <span class="math notranslate nohighlight">\(\Eta\)</span> form a <em>two-ortho basis</em> for <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p>
+</div>
+</div><p>Clearly columns of <span class="math notranslate nohighlight">\(\Eta\)</span> span <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p>
+<div class="proof remark admonition" id="remark-15">
+<p class="admonition-title"><span class="caption-number">Remark 12.4 </span> (Coherence of a two ortho basis)</p>
+<div class="remark-content section" id="proof-content">
+<p>The <em>coherence</em> of a two ortho basis is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\mu (\Eta )  = \mu( \Psi, \Chi).
+\]</div>
+<p>It is the magnitude of the largest inner product between
+columns of <span class="math notranslate nohighlight">\(\Eta\)</span>.</p>
+</div>
+</div><p>We present a very interesting result about the null space of <span class="math notranslate nohighlight">\(\Eta\)</span>.</p>
+<div class="proof theorem admonition" id="res-ssm-2onb-nullspace-vec-sparsity">
+<p class="admonition-title"><span class="caption-number">Theorem 12.6 </span> (Denseness of vectors in null space of two ortho bases)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For a two ortho basis <span class="math notranslate nohighlight">\(\Eta = \begin{bmatrix}\Psi &amp; \Chi \end{bmatrix}\)</span> with low coherence,
+the non-zero vectors in the null space of <span class="math notranslate nohighlight">\(\Eta\)</span> are not sparse.</p>
+<p>Concretely</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_0 \geq \frac{2}{\mu(\Eta)} \Forall \bv \in \NullSpace(\Eta).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bv \in \NullSpace(\Eta)\)</span> be some non-zero vector.</p>
+<p>Now let <span class="math notranslate nohighlight">\(\bv_{\psi}\)</span> and <span class="math notranslate nohighlight">\(\bv_{\chi}\)</span> be first N and last N entries of <span class="math notranslate nohighlight">\(\bv\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+\Psi &amp; \Chi
+\end{bmatrix}
+\begin{bmatrix}
+\bv_{\psi}\\
+\bv_{\chi}
+\end{bmatrix}
+= \bzero
+\implies 
+\Psi \bv_{\psi} = - \Chi \bv_{\chi} = \by \neq \bzero.
+\end{split}\]</div>
+<p>If <span class="math notranslate nohighlight">\(\by\)</span> were <span class="math notranslate nohighlight">\(\bzero\)</span>,
+then both <span class="math notranslate nohighlight">\(\bv_{\psi}\)</span> and <span class="math notranslate nohighlight">\(\bv_{\chi}\)</span> would have to be <span class="math notranslate nohighlight">\(\bzero\)</span> which is not
+the case since by assumption <span class="math notranslate nohighlight">\(\bv \neq \bzero\)</span>.</p>
+<p>We note that <span class="math notranslate nohighlight">\(\bv_{\psi}\)</span> and <span class="math notranslate nohighlight">\(-\bv_{\chi}\)</span> are representations of same vector <span class="math notranslate nohighlight">\(\by\)</span> in two different
+orthonormal bases <span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Chi\)</span> respectively, and <span class="math notranslate nohighlight">\(\| -\bv_{\chi}\|_0 = \| \bv_{\chi} \|_0\)</span>.</p>
+<p>Applying <a class="reference internal" href="#res-ssm-uncertainty-principle-2-onb-mu">Theorem 12.5</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_0 = \| \bv_{\psi} \|_0 + \| \bv_{\chi} \|_0 \geq \frac{2}{\mu(\Eta)}.
+\]</div>
+<p>We also note that since the orthonormal bases preserve norm, hence</p>
+<div class="math notranslate nohighlight">
+\[
+\| \by \|_2 = \| \bv_{\psi} \|_2 =  \| \bv_{\chi} \|_2.
+\]</div>
+<p>This shows us that the energy of a null space vector is evenly distributed in the two
+components corresponding to each orthonormal basis.</p>
+</div>
+<div class="admonition-challenge admonition">
+<p class="admonition-title">Challenge</p>
+<p>For a two-ortho basis <span class="math notranslate nohighlight">\(\Eta = \begin{bmatrix}\Psi &amp; \Chi \end{bmatrix}\)</span>
+is it possible to find a null space vector <span class="math notranslate nohighlight">\(\bv\)</span> satisfying the lower bound</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bv \|_0 = \frac{2}{\mu(\Eta)}?
+\]</div>
+</div>
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> be any arbitrary signal.
+Then its representation in <span class="math notranslate nohighlight">\(\Eta\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \Eta \ba.
+\]</div>
+<p>Obviously for every <span class="math notranslate nohighlight">\(\bz \in \NullSpace(\Eta)\)</span>,
+the vector <span class="math notranslate nohighlight">\(\ba + \bz\)</span> is also a representation of <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<p>What we are particularly interested in are sparse representations of <span class="math notranslate nohighlight">\(\bx\)</span>. A key
+concern for us is to ensure that a sparse representation of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\Eta\)</span> is unique.
+Under what conditions such is possible?</p>
+<p>Formally, let <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(\bb\)</span> be two different representations of <span class="math notranslate nohighlight">\(\bx\)</span> in
+<span class="math notranslate nohighlight">\(\Eta\)</span>. Can we say that if <span class="math notranslate nohighlight">\(\ba\)</span> is sparse then <span class="math notranslate nohighlight">\(\bb\)</span> won’t be sparse?</p>
+<p>This is established in the next uncertainty principle.</p>
+<div class="proof theorem admonition" id="res-ssm-uncertainty-principle-distinct-reps-2onb">
+<p class="admonition-title"><span class="caption-number">Theorem 12.7 </span> (Uncertainty principle for representations in two ortho basis)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> be any signal and let <span class="math notranslate nohighlight">\(\Eta\)</span> be a two ortho basis defined in
+<a class="reference internal" href="#equation-eq-ssm-two-ortho-synthesis-matrix">(12.16)</a>.
+Let <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(\bb\)</span> be two distinct representations of
+<span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\Eta\)</span> i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = \Eta \ba  = \Eta \bb.
+\]</div>
+<p>Then the following holds</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_0 + \| \bb \|_0 \geq \frac{2}{\mu(\Eta)}.
+\]</div>
+<p>This is an uncertainty principle for the sparsity of distinct representations in two ortho basis.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let</p>
+<div class="math notranslate nohighlight">
+\[
+\be = \ba - \bb
+\]</div>
+<p>be the difference vector of representations of <span class="math notranslate nohighlight">\(\bx\)</span>.
+Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+\Eta \be  = \Eta \ba - \Eta \bb = \bx - \bx = \bzero.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\be \in \NullSpace(\Eta)\)</span>.
+Applying <a class="reference internal" href="#res-ssm-2onb-nullspace-vec-sparsity">Theorem 12.6</a>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+\| \be \|_0 \geq \frac{2}{\mu(\Eta)}.
+\]</div>
+<p>But since <span class="math notranslate nohighlight">\(\be = \ba - \bb\)</span> hence we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba  \|_0 + \| \bb \|_0 \geq \| \be \|_0 \geq \frac{2}{\mu(\Eta)}.
+\]</div>
+</div>
+<div class="admonition-challenge admonition">
+<p class="admonition-title">Challenge</p>
+<p>For a two-ortho basis <span class="math notranslate nohighlight">\(\Eta = \begin{bmatrix}\Psi &amp; \Chi \end{bmatrix}\)</span>
+is it possible to find a vector <span class="math notranslate nohighlight">\(\bx\)</span> with two alternative
+representations <span class="math notranslate nohighlight">\(\ba\)</span> and <span class="math notranslate nohighlight">\(\bb\)</span> satisfying the lower bound</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_0 + \| \bb \|_0 = \frac{2}{\mu(\Eta)} ?
+\]</div>
+</div>
+<p>This theorem suggests as that if <span class="math notranslate nohighlight">\(\mu(\Eta)\)</span> is small (i.e. the coherence
+between the two orthonormal bases is small) then two representations of <span class="math notranslate nohighlight">\(\bx\)</span>
+cannot be simultaneously sparse.</p>
+<p>Rather if a representation is sufficiently sparse, then all other representations
+of <span class="math notranslate nohighlight">\(\bx\)</span> are guaranteed to be non-sparse providing the uniqueness of sparse representation.</p>
+<p>This is stated formally in the following <em>uniqueness</em> theorem.</p>
+<div class="proof theorem admonition" id="res-ssm-sparse-unique-2onb">
+<p class="admonition-title"><span class="caption-number">Theorem 12.8 </span> (Uniqueness of sparse representation in two ortho basis)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If a representation of <span class="math notranslate nohighlight">\(\bx\)</span> in the two ortho basis
+<span class="math notranslate nohighlight">\(\Eta = \begin{bmatrix}\Psi &amp; \Chi \end{bmatrix}\)</span>
+has fewer than <span class="math notranslate nohighlight">\(\frac{1}{\mu(\Eta)}\)</span> non-zero entries,
+then it is necessarily the sparsest one possible, and any other representation must be denser.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\ba\)</span> be a candidate representation with</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_0 &lt; \frac{1}{\mu(\Eta)}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\bb\)</span> be any other candidate representation.
+By applying <a class="reference internal" href="#res-ssm-uncertainty-principle-distinct-reps-2onb">Theorem 12.7</a>
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba  \|_0 + \| \bb \|_0  \geq \frac{2}{\mu(\Eta)}.
+\]</div>
+<p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bb \|_0 \geq \frac{2}{\mu(\Eta)} - \| \ba  \|_0 
+\implies \| \bb \|_0  &gt; \frac{1}{\mu(\Eta)}.
+\]</div>
+<p>Thus we find that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bb \|_0 &gt; \| \ba  \|_0
+\]</div>
+<p>which is true for every representation <span class="math notranslate nohighlight">\(\bb\)</span> of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\Eta\)</span> other than
+<span class="math notranslate nohighlight">\(\ba\)</span>.</p>
+<p>Hence <span class="math notranslate nohighlight">\(\ba\)</span> is the sparsest possible representation of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\Eta\)</span>.</p>
+</div>
+<p>We note here that any arbitrary choice of two bases may not be helpful
+in coming up with a two ortho basis which can provide us sparse
+representations for our signals of interest. In next few sections, we will
+explore this issue further in the more general context of signal dictionaries.</p>
+<div class="admonition-challenge admonition">
+<p class="admonition-title">Challenge</p>
+<p>Clearly, are signals for which a sufficiently sparse (and unique) representation
+doesn’t exist in a given two-ortho basis. What kind of relationships may exist
+between different (insufficiently) sparse representations of such signals?</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ssm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="underdetermined.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">12.3. </span>Underdetermined Linear Systems</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="srr.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12.5. </span>Sparse and Redundant Representations</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

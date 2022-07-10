@@ -10,6 +10,8 @@ In other words, if there exists a {prf:ref}`bijective <def-st-bijective-function
 function $f : A \to B$, we say that $A$ and $B$ have same number of
 elements.
 
+```{index} Equivalent sets
+```
 ````{prf:definition} Equivalent sets
 :label: def-st-equivalent-sets
 
@@ -77,6 +79,8 @@ $ h = g \circ f$. Since
 
 We now look closely at the set of natural numbers $\Nat = \{1,2,3,\dots\}$.
 
+```{index} Natural numbers; segment
+```
 ````{prf:definition}
 :label: def-st-segment-natural-numbers
 
@@ -94,6 +98,8 @@ only if $m= n$.
 
 Thus, a proper subset of a segment cannot be equivalent to the segment.
 
+```{index} Finite set
+```
 ````{prf:definition}
 :label: def-finite-set
 
@@ -110,6 +116,8 @@ number of elements in the segment.
 The empty set $\EmptySet$ is also considered to be finite with zero elements.
 ````
 
+```{index} Infinite set
+```
 ````{prf:definition}
 :label: def-st-infinite-set
 
@@ -119,6 +127,8 @@ A set that is not finite is called an *infinite set*.
 It should be noted that so far we have defined number of elements only
 for sets which are equivalent to a segment.
     
+```{index} Countable set
+```
 ````{prf:definition}
 :label: def-st-countable-sets
 
@@ -127,6 +137,8 @@ i.e., if there exists a bijective correspondence of $\Nat$ with the
 elements of $A$.
 ````
 
+```{index} Enumeration
+```
 ````{prf:definition}
 :label: def-st-enumeration
 
@@ -136,6 +148,8 @@ natural numbers $\Nat$.
 This notation is also known as the *enumeration* of $A$.
 ````
 
+```{index} Uncountable set
+```
 ````{prf:definition}
 :label: def-st-uncountable-set
 
@@ -363,6 +377,8 @@ The set of all finite subsets of a countable set is countable.
 
 ## Partial Order for Cardinality
 
+```{index} Subset equivalence
+```
 ````{prf:definition} Equivalence with subset
 :label: def-st-equivalence-with-subset-partial-order
 
@@ -434,6 +450,8 @@ Next we show that $A \nsim \Power (A)$:
 
 We now introduce a general definition for cardinality.
 
+```{index} Cardinal number
+```
 ````{prf:definition} Cardinal numbers
 :label: def-st-cardinality
 
@@ -503,6 +521,8 @@ $\Power(\Nat) \to \RR$
 1. $h$ is an injective mapping.
 ```
 
+```{index} Infinite cardinal number
+```
 ````{prf:definition} Infinite cardinal number
 :label: def-st-infinite-cardinal-number
 
@@ -510,6 +530,8 @@ A cardinal number $a$ satisfying $\aleph_0 \leq a$
 is known as *infinite cardinal number*.
 ````
 
+```{index} Cardinality of the continuum
+```
 ````{prf:definition} Cardinality of the continuum
 :label: def-cardinality-continuum 
 

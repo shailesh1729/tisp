@@ -1,6 +1,7 @@
 (sec:cvxf:subgradients)=
 # Subgradients
-Primary references for this section are {cite}`beck2017first`.
+Primary references for this section are
+{cite}`bertsekas2003convex,beck2017first`.
 
 Throughout this section, we assume that $\VV, \WW$ are 
 finite dimensional real vector spaces. Wherever necessary, 
@@ -14,6 +15,8 @@ as needed.
 
 ## Subgradients
 
+```{index} Subgradient
+```
 ````{prf:definition} Subgradient
 :label: def-cvxf-subgradient
 
@@ -82,6 +85,61 @@ f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle \Forall \by \in \dom f.
 ```
 ````
 
+### Geometric Interpretation
+
+```{prf:observation} Subgradient and supporting hyperplane
+:label: res-cvxf-subgradient-supporting-hyperplane
+
+Let $f: \VV \to \RERL$ be a proper function.
+Then $\bg$ be a subgradient of $f$ at $\bx$
+if and only if $\epi f$ has a supporting
+hyperplane at $(\bx, f(\bx))$ with
+a normal $(-\bg, 1)$. 
+
+Let $H$ be a supporting hyperplane of $\epi f$ at $(\bx, f(\bx))$
+with the normal $(-\bg, 1)$. 
+
+1. Then
+
+   $$
+   H = \{ (\by, t) \ST \langle \by, -\bg \rangle  + t 
+      =  \langle \bx, -\bg \rangle + f(\bx) \}.
+   $$
+1. For any $(\by, f(\by)) \in \epi f$, we must have
+
+   $$
+   & \langle \by, -\bg \rangle  + f(\by) 
+      \geq  \langle \bx, -\bg \rangle + f(\bx) \\
+   \iff & f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle.
+   $$
+1. Then $\bg$ is a subgradient of $f$ at $\bx$.
+
+Now let $\bg$ be a subgradient of $f$ at $\bx$.
+
+1. Let $(\by, t) \in \epi f$.
+1. Then we have
+
+   $$
+   t \geq f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle.
+   $$
+1. Rearranging the terms, we have
+
+   $$
+   \langle \by, -\bg \rangle + t
+   \geq \langle \bx, -\bg \rangle + f(\bx) 
+   $$
+   for every $(\by, t) \in \epi f$.
+1. Then the hyperplane
+
+   $$
+   H = \{ (\by, t) \ST \langle \by, -\bg \rangle  + t 
+      =  \langle \bx, -\bg \rangle + f(\bx) \}
+   $$
+   is indeed a supporting hyperplane for $\epi f$.
+1. The normal vector for this hyperplane is $(-\bg, 1)$
+   and it passes through the point $(\bx, f(\bx))$.
+```
+
 ## Subdifferential
 
 At a point $\bx \in \dom f$, it is possible that there are
@@ -89,6 +147,8 @@ more than one subgradients. It is thus natural to introduce
 the notion of the set of all subgradients of $f$ at a specific
 point $\bx \in \dom f$.
 
+```{index} Subdifferential
+```
 ```{prf:definition} Subdifferential set
 :label: def-cvxf-subdifferential
 Let $f : \VV \to \RERL$ be a proper function.
@@ -159,6 +219,8 @@ same as those in $ B_{\| \cdot \|_*}[\bzero, 1]$.
 The subdifferential of a function $f$ may be empty at specific points
 $\bx \in \VV$.
 
+```{index} Subdifferentiability
+```
 ```{prf:definition} Subdifferentiability
 :label: def-cvxf-subdifferentiable
 
@@ -166,6 +228,8 @@ A proper function $f : \VV \to \RERL$ is called *subdifferentiable*
 at some $\bx \in \dom f$ if $\partial f(\bx) \neq \EmptySet$. 
 ```
 
+```{index} Subdifferentiability; domain
+```
 ```{prf:definition} Domain of subdifferentiability
 :label: def-cvxf-domain-subdifferentiable
 
@@ -177,7 +241,7 @@ $$
 $$
 ```
 
-### Properties of Subdifferential Set
+### Closedness and Convexity
 
 ```{prf:theorem} Closedness and convexity of the subdifferential set
 :label: res-cvxf-subdifferential-closed-convex
@@ -213,6 +277,8 @@ $$
 Thus,  $\partial f(\bx)$ is an infinite intersection of closed and convex sets.
 Hence $\partial f(\bx)$ is closed and convex.
 ```
+
+### Subdifferentiability and Convex Domain
 
 ```{prf:theorem} Subdifferentiability + Convex domain $\implies$ Convexity
 :label: res-cvxf-subdiff-cvx-dom-cvx
@@ -260,7 +326,7 @@ A convex function need not be subdifferentiable at every point in its domain.
 The problem usually occurs at the boundary points of the domain if the domain
 is not open.
 
-
+### Positive Scaling
 
 ```{prf:theorem} Multiplication by a positive scalar
 :label: res-cvxf-subdiff-scaling
@@ -297,9 +363,9 @@ Let $\bg \in \partial f(\bx)$.
    $$
 ```
 
-### Proper Convex Functions
+## Proper Convex Functions
 
-In this section, we discuss the properties of the
+In this subsection, we discuss the properties of the
 subdifferential sets for proper convex functions.
 
 A proper convex function may not be subdifferentiable
@@ -308,6 +374,7 @@ However, it is indeed subdifferentiable at
 the interior points and relative interior points
 of its domain.
 
+### Nonemptiness and Boundedness at Interior Points
 
 ```{prf:theorem} Nonemptiness and boundedness of the subdifferential at interior points
 :label: res-cvxf-proper-interior-subdiff-nonempty-bounded
@@ -500,6 +567,158 @@ We have $\dom f = \VV$.
 1. Since this is valid for every $\bx \in \VV$, hence $\dom (\partial f) = \VV$.
 ```
 
+### Nonempty, Convex and Compact Subdifferentials
+
+```{prf:theorem} Nonempty, convex and compact subdifferentials for proper convex functions
+:label: res-cvxf-subdiff-proper-convex-interior
+
+Let $f : \VV \to \RERL$ be a proper and convex function.
+Let $\bx \in \interior S$. Then
+$\partial f(\bx)$ is nonempty, convex and compact.
+```
+
+```{prf:proof}
+Let $\bx \in \interior S$.
+
+1. By {prf:ref}`res-cvxf-subdifferential-closed-convex`,
+   $\partial f(\bx)$ is closed and convex.
+1. By {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`,
+   $\partial f(\bx)$ is nonempty and bounded.
+1. Since $\partial f(\bx)$ is closed and bounded, hence
+   it must be compact since $\VV$ is a finite dimensional normed linear space.
+```
+
+We present an alternative proof based on the min common/max crossing
+framework developed in {ref}`sec:opt:duality:common:crossing`.
+This proof can be skipped in first reading.
+
+```{prf:proof}
+This proof is based on 
+the second min common/max crossing theorem
+{prf:ref}`res-opt-min-max-strong-duality-2`.
+
+We fix some $\bx \in \interior S$.
+We construct the set $M$ as
+
+$$
+M = \{ (\bu, t) \ST \bu \in \VV, f(\bx + \bu) \leq t \}. 
+$$
+
+We first consider the min common problem.
+
+1. Note that $(\bzero, f(\bx)) \in M$
+   since $f(\bx + \bzero) \leq f(\bx)$.
+1. Further see that the min common value
+
+   $$
+   p^* = \inf_{(\bzero, p) \in M} p = f(\bx).
+   $$
+1. Hence $p^*$ is finite.
+1. Note that $\overline{M} = M$ where
+
+   $$
+   \overline{M} = \{ (\bx, t) \in \VV \oplus \RR \ST \text{ there exists } 
+   \bar{t} \in \RR \text{ with } 
+   \bar{t} \leq t \text{ and } (\bx, \bar{t}) \in M \}.
+   $$
+1. $M$ is convex.
+   1. Let $(\bu_1, t_1), (\bu_2, t_2) \in M$ and let $r \in (0, 1)$.
+   1. Let $(\bu, t) = r (\bu_1, t_1) + (1-r) (\bu_2, t_2)$.
+   1. We have $f(\bx + \bu_1) \leq t_1$
+      and $f(\bx + \bu_2) \leq t_2$.
+   1. Now
+
+      $$
+      f(\bx + \bu)
+      &= f(\bx + r \bu_1 + (1-r) \bu_2) \\
+      &= f(r (\bx + \bu_1) + (1-r)(\bx + \bu_2)) \\
+      &\leq r f(\bx + \bu_1) + (1-r) f(\bx + \bu_2) \\
+      &\leq r t_1 + (1-r) t_2 = t.
+      $$
+   1. Hence $(\bu, t) \in M$.
+   1. Hence $M$ is convex.
+
+Next consider the max crossing problem and strong duality.
+1. We have 
+   
+   $$
+   q^* = \sup_{\ba \in \VV} q(\ba)
+   $$
+   where
+
+   $$
+   q(\ba) = \inf_{(\bu, t) \in M} \{ \langle \bu, \ba \rangle + t \}.
+   $$
+1. The set of optimal solutions of the max crossing problem
+   is given by
+
+   $$
+   Q^* = \{ \ba \in \VV \ST q(\ba) = q^* \}
+   $$
+1. For some $\ba \in Q^*$, we can attain strong duality with
+
+   $$
+   p^* = q^* = q(\ba)
+   $$
+   if and only if
+
+   $$
+   f(\bx) = \inf_{(\bu, t) \in M} \{ \langle \bu, \ba \rangle + t \}.
+   $$
+1. Equivalently
+
+   $$
+   f(\bx) \leq f(\bx + \bu) + \langle \bu, \ba \rangle \Forall \bu \in \VV.
+   $$
+1. Equivalently
+
+   $$
+   f(\bx + \bu) \geq f(\bx) + \langle \bu, -\ba \rangle \Forall \bu \in \VV.
+   $$
+1. But this is nothing but the subgradient inequality with $-\ba$
+   as the subgradient at $\bx$.
+1. In other words, strong duality is attained at $\ba$ as a solution
+   of the max crossing problem if and only if
+   $-\ba$ is a subgradient of $f$.
+1. Hence $Q^*$ with strong duality
+   is given by $-\partial f(\bx)$.
+
+We next establish the conditions for the
+second min common/max crossing theorem
+{prf:ref}`res-opt-min-max-strong-duality-2`
+
+1. Consider the set
+
+   $$
+   D = \{ \bu \in \VV \ST \text{ there exists } 
+   t \in \RR \text{ with }  (\bu, t) \in M \}.
+   $$
+1. It is easy to see that $D = S - \bx$.
+   1. Consider the set $T = S - \bx$.
+   1. Let $\bu \in T$.
+   1. Then $\bx + \bu \in S$.
+   1. Hence $f(\bx + \bu) \leq f(\bx + \bu)$.
+   1. Hence $(\bu, f(\bx + \bu)) \in M$.
+   1. Hence $\bu \in D$.
+   1. Hence $T = S - \bx \subseteq D$.
+   1. Let $\bu \notin T$.
+   1. Then $\bu + \bx \notin S$.
+   1. Hence $f(\bu + \bx) = \infty$.
+   1. Hence for every $t \in \RR$, $f(\bu + \bx) > t$.
+   1. Hence $(\bu, t) \notin M$ for every $t \in \RR$.
+   1. Hence $\bu \notin D$.
+   1. Hence $D = T = S - \bx$. 
+1. Since $\bx \in \interior S$, hence $\bzero \in \interior D$.
+1. We see that all the conditions of the second min common/max crossing
+   theorem are satisfied.
+   1. $p^*$ is finite.
+   1. $\overline{M} = M$ is convex.
+   1. The set $D$ contains $\bzero$ in its interior.
+1. Hence $-\partial f(\bx)$ is nonempty, convex and compact.
+1. Hence $\partial f(\bx)$ is also nonempty, convex and compact.
+```
+
+### Subgradients over a Compact Set
 
 ```{prf:theorem} Subgradients over a compact set are nonempty and bounded
 :label: res-cvxf-subg-compact-nonempty-bounded
@@ -608,14 +827,21 @@ $$
 It is interior of the convex set w.r.t. the 
 subspace topology of its affine hull.
 
+### Nonempty Subdifferential at Relative Interior Points
 
 ```{prf:theorem} Nonemptiness of the subdifferential at relative interior points
 :label: res-cvxf-relint-subdiff-nonempty
 
 Let $f: \VV \to \RERL$ be a proper convex function
 with $S = \dom f$.
-Let $\ba \in \relint S$.
-Then, $\partial f (\ba)$ is nonempty. 
+Let $\bx \in \relint S$.
+Then, $\partial f (\bx)$ is nonempty and has the form
+
+$$
+\partial f(\bx) = L^{\perp} + G
+$$
+where $L$ is the subspace that is parallel to $\affine S$
+and $G$ is a nonempty and compact set.
 
 In other words, for a proper convex function, the subdifferential
 at the relative interior points of its domain is nonempty.
@@ -625,6 +851,66 @@ $$
 \relint \dom f \subseteq \dom (\partial f).
 $$
 ```
+The proof is based on the min common/max crossing
+framework developed in {ref}`sec:opt:duality:common:crossing`.
+It can be skipped in first reading.
+It follows the proof of {prf:ref}`res-cvxf-subdiff-proper-convex-interior`.
+
+```{prf:proof}
+This proof is based on 
+the second min common/max crossing theorem
+{prf:ref}`res-opt-min-max-strong-duality-2`.
+
+We fix some $\bx \in \relint S$.
+We construct the set $M$ as
+
+$$
+M = \{ (\bu, t) \ST \bu \in \VV, f(\bx + \bu) \leq t \}. 
+$$
+We have already established the following in the proof of
+{prf:ref}`res-cvxf-subdiff-proper-convex-interior`:
+1. $M$ is convex.
+1. $\overline{M} = M$.
+1. $p^* = f(\bx)$.
+1. $p^*$ is finite.
+1. $q^* = \sup_{\ba \in \VV} q(\ba)$
+   where
+
+   $$
+   q(\ba) = \inf_{(\bu, t) \in M} \{ \langle \bu, \ba \rangle + t \}.
+   $$
+1. $Q^* = \{ \ba \in \VV \ST q(\ba) = q^* \}$.
+1. When the strong duality holds, then
+
+   $$
+   Q^* = -\partial f(\bx).
+   $$
+1. The set
+
+   $$
+   D = \{ \bu \in \VV \ST \text{ there exists } 
+   t \in \RR \text{ with }  (\bu, t) \in M \}
+   = S - \bx.
+   $$
+
+Continuing further
+
+1. Since $\bx \in \relint S$, hence $\bzero \in \relint D$.
+1. Hence $\affine D = \affine S - \bx = L$.
+1. Hence by the second min common/max crossing theorem
+
+   $$
+   -\partial f(\bx) = Q^* = L^{\perp} + \tilde{Q}
+   $$
+   where $\tilde{Q}$ is a nonempty, convex and compact set.
+1. Negating on both sides, we obtain
+
+   $$
+   \partial f(\bx) = L^{\perp} + G
+   $$
+   where $G$ is a nonempty, convex and compact set.
+```
+
 
 ```{prf:corollary} Existence of points with nonempty subdifferential
 :label: res-cvxf-subdiff-exist-relint
@@ -646,6 +932,7 @@ is convex and nonempty.
    $\partial f(\bx)$ is nonempty.
 ```
 
+### Unbounded Subdifferential
 
 ```{prf:theorem} Unboundedness condition for subdifferential
 :label: res-cvxf-subdiff-relint-unbounded
@@ -695,330 +982,38 @@ We proceed as follows.
 
 ## Directional Derivatives
 
-### Proper Functions
-
-```{prf:definition} Directional derivative
-:label: def-cvxf-directional-derivative
-
-Let $f : \VV \to \RERL$ be a proper function
-with $S = \dom f$.
-Let $\bx \in \interior S$. 
-The *directional derivative* at $\bx$ in the direction $\bd \in \VV$ is defined by 
+The directional derivative of a proper convex function
+is closely linked with its subdifferential.
+To see this, let $\bx \in \interior \dom f$,
+let $\bd \in \VV$ be a nonzero direction
+and $t > 0$.
+Let $\bg \in \partial f(\bx)$
+and consider the subgradient inequality
 
 $$
-f'(\bx;\bd) \triangleq \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd) - f(\bx)}{\alpha}.
+f(\bx + t \bd) \geq f(\bx) + \langle t \bd, \bg \rangle.
 $$
+Hence
+
+$$
+\frac{f(\bx + t \bd) - f(\bx)}{t} \geq \langle \bd, \bg \rangle
+$$
+We saw in {prf:ref}`res-cvxf-dir-der-infimum` that
+$\frac{f(\bx + t \bd) - f(\bx)}{t}$ is a nondecreasing
+quantity and
+
+$$
+f'(\bx; \bd) = \inf_{t > 0} \frac{f(\bx + t \bd) - f(\bx)}{t}.
+$$
+This establishes the basic relation
+
+```{math}
+:label: eq-cvxf-subg-dir-der-inequality
+f'(\bx; \bd) \geq  \langle \bd, \bg \rangle
 ```
-
-```{div}
-The directional derivative is a scalar quantity ($\in \RR$).
-When we say that 
-
-$$
-f'(\bx;\bd) = \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t},
-$$
-
-we mean that $f$ is defined over a set
-$\{ \bv \ST \bv = \bx + t \bd, 0 < t < t_{\max} \}$
-and for every $\epsilon > 0$, there exists
-$\delta > 0$ such that
-
-$$
-\left | \frac{f(\bx + t \bd) - f(\bx)}{t} - f'(\bx;\bd) \right | < \epsilon
-\text{ whenever }
-0 < t < \delta.
-$$
-
-Since $\bx \in \interior S$, hence there exists $r > 0$
-such that $B(\bx, r) \subseteq S$.
-
-With $\bv \in B(\bx, r)$, we need $\| t \bd \| < r$.
-Thus, a $t_{\max} = \frac{r}{\| \bd \|}$ is a suitable
-range of allowed values for $t$.
-Accordingly, $0 < \delta < t_{\max}$ can be chosen.
-```
-
-```{prf:remark} Directional derivative for zero vector
-:label: rem-cvxf-dir-der-zero
-
-If $\bd = \bzero$ then, $f'(\bx; \bd) = 0$.
-
-We can see this from the fact that
-
-$$
-f'(\bx;\bzero) = \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bzero) - f(\bx)}{\alpha} = 0.
-$$
-```
-
-A useful result is for computing the directional derivative of a function
-which is the pointwise maximum of a finite number of proper functions.
-
-We recall from {prf:ref}`res-ms-int-intersect-int` that
-the interior of a finite intersection of sets is the 
-intersection of their interiors. This is useful in
-identifying the interior of the domain for a pointwise
-maximum of a finite set of functions. 
-
-```{prf:theorem} Directional derivative of a maximum of functions
-:label: res-cvxf-dir-der-max-funcs
-
-Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be proper functions.
-Let $f : \VV \to \RERL$ be defined as
-
-$$
-f(\bx) = \max\{f_1(\bx), \dots, f_m(\bx) \}
-$$
-with $\dom f = \bigcap_{i=1}^m \dom f_i$.
-
-Let $\bx \in \interior \dom f = \bigcap_{i=1}^m \interior \dom f_i$
-and $\bd \in \VV$.
-Assume that $f'(\bx; \bd)$ exists for every $i \in 1,\dots,m$.
-
-Let $I(\bx) = \{i \in 1,\dots,m \ST f_i(\bx) = f(\bx) \}$ be the set
-of indices of functions whose value at $\bx$ equals $f(\bx)$.
-Then,
-
-$$
-f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'(\bx; \bd).
-$$
-
-In other words, the directional derivative of a pointwise maximum
-of functions equals the maximum of directional directives of functions
-which attain the pointwise maximum at a specific point.
-```
-
-```{prf:proof}
-The key idea here is that for computing the
-directional derivative $f'(\bx; \bd)$, 
-only those functions are relevant for which
-$f_i(\bx) = f(\bx)$. We need to show this first.
-
-1. Since $\bx \in \interior \dom f$, there
-   exists $B(\bx, r)$ such that
-   $f$ and $f_i$ are all defined over this open ball.
-1. Let $s = \frac{r}{\| \bd \|}$.
-1. For every $i \in 1,\dots,m$, 
-   let $g_i : \RR \to \RR$ be defined as 
-
-   $$
-   g_i(t) = f_i(\bx + t \bd)
-   $$
-   with $\dom g_i = [0, s)$.
-   $\| s \bd \| = r$. Thus, $\bx + t \bd \in B(\bx, r)$.
-   Hence, $g_i$ are well defined.
-1. Then,
-
-   $$
-   \lim_{t \to 0+} g_i(t) 
-   &= \lim_{t \to 0+} f_i(\bx + t \bd) \\
-   &= \lim_{t \to 0+} [(f_i(\bx + t \bd) - f_i(\bx)) + f_i(\bx)]\\
-   &= \lim_{t \to 0+}\left [
-   t \frac{f_i(\bx + t \bd) - f_i(\bx)}{t} + f_i(\bx) 
-   \right] \\
-   &= 0 \cdot f'_i(\bx; \bd) + f_i(\bx)\\
-   &= f_i(\bx) = g_i(0).
-   $$
-   We used the fact that $f'_i(\bx; \bd)$ exists
-   for every $f_i$.
-1. Thus, $g_i$ is continuous from the right at $t=0$
-   for every $i \in 1,\dots, m$.
-1. Let $i \in I(\bx)$ and $j \notin I(\bx)$.
-1. Then, $f_i(\bx) > f_j (\bx)$. Alternatively $g_i(0) > g_j(0)$.
-1. Since $g_i, g_j$ are continuous from the right, hence
-   there exists $\epsilon_{i j} > 0$ such that
-   $g_i(t) > g_j(t)$ for every $t \in [0, \epsilon_{i j}]$.
-1. Minimizing $\epsilon_{ij}$ over all pairs of 
-   $i \in I(\bx)$ and $j \notin I(\bx)$,
-   there exists $\epsilon > 0$ such that
-   for any $i \in I(\bx)$ and $j \notin I(\bx)$,
-
-   $$
-   f_i(\bx + t \bd) = g_i(t) > g_j(t) = f_j(\bx + t \bd) 
-   \Forall t \in [0, \epsilon].
-   $$
-
-We can now compute the directional derivative.
-
-1. For every $t \in [0, \epsilon]$, 
-
-   $$
-   f(\bx + t \bd) = \underset{i=1,\dots,m}{\max} f_i(\bx + t \bd)
-   = \underset{i \in I(\bx)}{\max} f_i(\bx + t \bd).
-   $$
-1. Consequently, for any $t \in (0, \epsilon]$
-
-   $$
-   \frac{f(\bx + t \bd) - f(\bx)}{t}
-   &= \frac{\underset{i \in I(\bx)}{\max} f_i(\bx + t \bd) - f(\bx)}{t}\\
-   &= \frac{\underset{i \in I(\bx)}{\max} (f_i(\bx + t \bd) - f_i(\bx))}{t}\\
-   &= \underset{i \in I(\bx)}{\max} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}.
-   $$
-   We used the fact that $f_i(\bx) = f(\bx)$ for every $i \in I(\bx)$.
-1. Taking the limit $t \to 0^+$,
-
-   $$
-   f'(\bx; \bd) 
-   &= \lim_{t \to 0^+} \frac{f(\bx + t \bd) - f(\bx)}{t}\\
-   &= \lim_{t \to 0^+} \underset{i \in I(\bx)}{\max} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}\\
-   &= \underset{i \in I(\bx)}{\max} \lim_{t \to 0^+} \frac{f_i(\bx + t \bd) - f_i(\bx)}{t}\\
-   &= \underset{i \in I(\bx)}{\max} f'_i(\bx; \bd).
-   $$
-```
-
-
-
-### Proper Convex Functions
-
-
-```{prf:theorem} Existence of directional derivatives for convex functions.
-:label: res-cvxf-dir-der-exist-convex
-
-Let $f: \VV \to \RERL$ be a proper convex function
-with $S = \dom f$.
-Let $\bx \in \interior S$. 
-Then, for any $\bd \in \VV$, 
-the directional derivative $f'(\bx; \bd)$ exists.
-```
-
-This allows us to consider a mapping from a direction $\bd \in \VV$
-to the directional derivative of $f$ in this direction at $\bx$.
-We can define a directional derivative map
-parameterized by $\bx \in S$ as:
-
-$$
-\bg_x(\bd) \triangleq f'(\bx; \bd) = 
-\lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd) - f(\bx)}{\alpha}.
-$$
-We shall refer to such maps by $\bd \mapsto f'(\bx; \bd)$.
-
-```{prf:theorem} Convexity and homogeneity of $\bd \mapsto f'(\bx; \bd)$
-:label: res-cvxf-dir-der-convex-homo
-
-Let $f: \VV \to \RERL$ be a proper convex function
-with $S = \dom f$.
-Let $\bx \in \interior S$.
-Then, the function $\bd \mapsto f'(\bx; \bd)$ is convex and nonnegative
-homogeneous. 
-
-Nonnegative homogeneity: For any $t \geq 0$ and $\bd \in \VV$,
-
-$$
-f'(\bx; t \bd) = t f'(\bx; \bd).
-$$
-```
-
-```{prf:proof}
-Convexity
-
-1. Let $\bd_1, \bd_2 \in \VV$ and $t \in (0, 1)$.
-1. Let $\bd = t \bd_1 + (1-t) \bd_2$.
-1. Then,
-   
-   $$
-   f'(\bx; \bd) &= f'(\bx; t \bd_1 + (1-t) \bd_2)\\
-   &= \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha [t \bd_1 + (1-t) \bd_2]) - f(\bx)}{\alpha}\\
-   &= \lim_{\alpha \to 0^+} 
-   \frac{f(t \bx + \alpha t \bd_1 + (1-t) \bx + \alpha (1-t) \bd_2) - f(\bx)}{\alpha}\\
-   &= \lim_{\alpha \to 0^+} 
-   \frac{f(t (\bx + \alpha \bd_1) + (1-t) (\bx + \alpha \bd_2)) - f(\bx)}{\alpha}\\
-   &\leq \lim_{\alpha \to 0^+} 
-   \frac{t f(\bx + \alpha \bd_1) + (1-t) f(\bx + \alpha \bd_2) - t f(\bx) - (1-t)f(\bx)}{\alpha}\\
-   &= t \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd_1) - f(\bx)}{\alpha} +
-   (1-t) \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha \bd_2) - f(\bx)}{\alpha}\\
-   &= t f'(\bx; \bd_1) + (1-t) f'(\bx; \bd_2).
-   $$
-   We used the convexity property of $f$ in this derivation.
-1. Thus, $f'(\bx; \bd)$ is convex.
-
-Nonnegative homogeneity
-
-1. For $t=0$,
-
-   $$
-   f'(\bx, 0 \bd) = f'(\bx, \bzero) = 0 = 0 f'(\bx; \bd).
-   $$
-   Thus, the homogeneity property is trivial for $t=0$.
-1. Now consider $t > 0$.
-1. Then, 
-
-   $$
-   f'(\bx; t \bd) &= \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha t \bd) - f(\bx)}{\alpha}\\
-   &= t \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha t \bd) - f(\bx)}{\alpha t}\\
-   &= t f'(\bx; \bd).
-   $$
-1. Thus, $f'(\bx; \bd)$ is nonnegative homogeneous.
-```
-
-Directional derivatives are a linear underestimator for convex functions.
-
-
-```{prf:theorem} Directional derivative as linear underestimator
-:label: res-cvxf-dir-der-underestimator
-
-Let $f: \VV \to \RERL$ be a proper convex function
-with $S = \dom f$.
-Let $\bx \in \interior S$.
-Then, for every $\by \in S$
-
-$$
-f(\by) \geq f(\bx) + f'(\bx; \by - \bx).
-$$
-```
-
-```{prf:proof}
-Note that
-
-$$
-f'(\bx; \by - \bx) 
-&= \lim_{\alpha \to 0^+} \frac{f(\bx + \alpha (\by - \bx)) - f(\bx)}{\alpha}\\
-&= \lim_{\alpha \to 0^+} \frac{f((1-\alpha) \bx + \alpha \by) - f(\bx)}{\alpha}\\
-&\leq \lim_{\alpha \to 0^+} \frac{(1-\alpha)f(\bx) + \alpha f(\by) - f(\bx)}{\alpha}\\
-&= \lim_{\alpha \to 0^+} \frac{\alpha (f(\by) - f(\bx))}{\alpha}\\
-&= \lim_{\alpha \to 0^+}(f(\by) - f(\bx)) = f(\by) - f(\bx).
-$$
-
-Thus,
-
-$$
-f(\by) \geq f(\bx) + f'(\bx; \by - \bx).
-$$
-```
-
-
-```{prf:theorem} Directional derivative of pointwise maximum of convex functions
-:label: res-cvxf-dir-der-max-convex-funcs
-
-Let $f_1, f_2, \dots, f_m : \VV \to \RERL$ be proper convex functions.
-Let $f : \VV \to \RERL$ be defined as
-
-$$
-f(\bx) = \max\{f_1(\bx), \dots, f_m(\bx) \}
-$$
-with $\dom f = \bigcap_{i=1}^m \dom f_i$.
-
-Let $\bx \in \interior \dom f$ and $\bd \in \VV$.
-Then,
-
-$$
-f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'(\bx; \bd).
-$$
-where $I(\bx) = \{i \in 1,\dots,m \ST f_i(\bx) = f(\bx) \}$.
-```
-
-```{prf:proof}
-Since $f_i$ are proper convex, hence their pointwise maximum $f$ is proper convex.
-
-By {prf:ref}`res-cvxf-dir-der-exist-convex`,
-the directional derivatives $f'(\bx; \bd)$ and
-$f'_i(\bx; \bd)$ for $i=1,\dots,m$ exist.
-
-By {prf:ref}`res-cvxf-dir-der-max-funcs`,
-
-$$
-f'(\bx; \bd) = \underset{i \in I(\bx)}{\max} f'(\bx; \bd).
-$$
-where $I(\bx) = \{i \in 1,\dots,m \ST f_i(\bx) = f(\bx) \}$.
-```
+for every $\bg \in \partial f(\bx)$.
+In fact a stronger result is available in the form of
+max formula.
 
 ### Max Formula
 
@@ -1170,334 +1165,6 @@ $$
 
 ## Differentiability
 
-````{prf:definition} Differentiability of proper functions
-:label: def-cvxf-differentiability-proper
-
-Let $f : \VV \to \RERL$ be a proper function with $S = \dom f$.
-Let $\bx \in \interior S$. 
-$f$ is said to be *differentiable* at $\bx$
-if there exists $\bg \in \VV^*$ such that:
-
-```{math}
-:label: eq-cvxf-differentiability
-\underset{\bh \to \bzero}{\lim}
-\frac{f(\bx + \bh) - f(\bx) - \langle \bh, \bg \rangle}{\| \bh \|} = 0.
-```
-The unique vector $\bg$ satisfying this condition is called
-the *gradient* of $f$ at $\bx$ and is denoted by $\nabla f(\bx)$.
-````
-
-
-If $f$ is differentiable at some $\bx \in \interior S$,
-then there is a simple formula to connect the gradient
-and the directional derivatives.
-
-```{prf:theorem} Gradient and directional derivatives
-:label: res-cvxf-grad-dir-der
-
-Let $f : \VV \to \RERL$ be a proper function with $S = \dom f$.
-Let $\bx \in \interior S$. 
-Assume that $f$ is differentiable at $\bx$.
-Then, for any $\bd \in \VV$,
-
-$$
-f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle.
-$$
-In other words, the directional derivative is the projection
-of the gradient in the specified direction.
-```
-
-```{prf:proof}
-For $\bd = \bzero$, the equality is obvious. 
-We shall consider the case where $\bd \neq \bzero$.
-
-1. Since $f$ is differentiable at $\bx$, hence
-
-  $$
-  \underset{\bh \to \bzero}{\lim}
-  \frac{f(\bx + \bh) - f(\bx) - \langle \bh, \nabla f(\bx) \rangle}{\| \bh \|} = 0.
-  $$
-1. In particular, if we take the limit of $\bh$ along the
-   direction of $\bd$ as $t \bd$ where $t > 0$ and $t \to 0^+$, 
-   then
-
-   $$
-   \underset{t \to 0^+}{\lim}
-   \frac{f(\bx + t \bd) - f(\bx) - \langle t \bd, \nabla f(\bx) \rangle}{\| t \bd \|} = 0.
-   $$
-1. Splitting the terms, we get
-
-   $$
-   \underset{t \to 0^+}{\lim}
-   \frac{f(\bx + t \bd) - f(\bx)}{\| t \bd \|} -
-   \underset{t \to 0^+}{\lim}
-   \frac{\langle \bd, \nabla f(\bx) \rangle}{\| \bd \|}
-   = 0.
-   $$
-1. Multiplying with $\| \bd \|$ and simplifying, we get:
-
-   $$
-   \underset{t \to 0^+}{\lim}
-   \frac{f(\bx + t \bd) - f(\bx)}{t} -
-   \underset{t \to 0^+}{\lim} \langle \bd, \nabla f(\bx) \rangle
-   = 0.
-   $$
-1. Thus,
-
-   $$
-   f'(\bx; \bd ) =  \underset{t \to 0^+}{\lim}
-   \frac{f(\bx + t \bd) - f(\bx)}{t} 
-   = \langle \bd, \nabla f(\bx) \rangle.
-   $$
-```
-
-```{prf:remark} Gradient in $\RR^n$
-:label: res-cvxf-gradient-r-n
-
-It is imperative to compare the definition of gradients in this section
-with {prf:ref}`def-mvc-point-differentiability`
-(differentiability of functions from $\RR^n$ to $\RR^m$)
-and the notion of the gradient as defined in
-{prf:ref}`def-mvc-gradient`. 
-
-
-To better develop our understanding of gradients, let us
-examine the gradient in the Euclidean space $\RR^n$.
-The standard basis is given by $\BBB = \{\be_1, \dots, \be_n \}$
-which are the coordinate unit vectors.
-The standard inner product is given by the dot product
-
-$$
-\langle \bx, \by \rangle = \by^T \bx  = \bx^T \by.
-$$
-A vector $\bx \in \RR^n$ is written as
-
-$$
-\bx  = \sum_{i=1}^n x_i \be_i.
-$$
-The individual coordinates are obtained via 
-
-$$
-x_i = \langle \be_i, \bx \rangle 
-= \langle \bx, \be_i \rangle 
-= \bx^T \be_i \Forall i \in [1,\dots, n].
-$$
-
-Let $f: \RR^n \to \RERL$ be a proper function. 
-Let $S = \dom f$.
-Let $\bx \in \interior S$. 
-Assume that $f$ is differentiable at $\bx$.
-Let $\bg = \nabla f (\bx)$.
-Let 
-
-$$
-\bg = \sum_i^n g_i \be_i.
-$$
-
-Following the notation in {prf:ref}`res-mvc-f-m-n-jacobian-limit-alt`,
-the derivative of $f$ at $\bx$, denoted by $Df(\bx)$
-is given by
-
-$$
-\underset{\bh \to \bzero}{\lim}
-\frac{\| f(\bx + \bh) - f(\bx) - Df(\bx) \bh \|_2}{\| \bh \|_2} = 0.
-$$
-We don't have to check for $\bx + \bh \in \dom f$ 
-as $f$ is a proper function with a value of $\infty$ at
-points outside its effective domain.
-
-Compare this with {eq}`eq-cvxf-differentiability`.
-For $f : \RR^n \to \RR$, $Df(\bx)$ is a row vector.
-If we let $\tilde{\bg} = Df(\bx)^T$, then
-
-$$
-Df(\bx) \bh = \tilde{\bg}^T \bh = \langle \bh, \tilde{\bg} \rangle.
-$$
-Then, the definition of $\tilde{\bg}$ in the limit above
-is exactly the same as $\bg$ in {eq}`eq-cvxf-differentiability`.
-Thus, $\tilde{\bg} = \bg$.
-We can see that our definition of gradient
-coincides with the definition in
-{prf:ref}`def-mvc-gradient` for $\RR^n$
-with the dot product as standard inner product.
-
-
-Now consider the components of $\bg$.
-
-$$
-g_i = \langle \be_i, \bg \rangle = \langle \be_i, \nabla f (\bx) \rangle.
-$$
-
-By {prf:ref}`res-cvxf-grad-dir-der`, the directional
-derivative in the direction $\be_i$ is given by
-
-$$
-f'(\bx; \be_i) = \langle \be_i, \nabla f(\bx) \rangle
-= \langle \be_i, \bg \rangle = g_i.
-$$
-
-Thus, 
-
-$$
-\frac{\partial f(\bx)}{\partial x_i} = \langle \be_i, \nabla f(\bx) \rangle.
-$$
-The partial derivatives of $f$ at $\bx$ along the
-standard basis vectors are identical to the
-directional derivatives of $f$.
-
-$$
-\nabla f(\bx) = \begin{bmatrix}
-\frac{\partial f(\bx)}{\partial x_1}\\
-\vdots\\
-\frac{\partial f(\bx)}{\partial x_n}
-\end{bmatrix}
-= \begin{bmatrix}
-\langle \be_1, \nabla f(\bx) \rangle\\
-\vdots\\
-\langle \be_n, \nabla f(\bx) \rangle
-\end{bmatrix}.
-$$
-
-Then, for an arbitrary direction 
-$\bd = \sum_{i=1}^n \be_i$, the directional derivative 
-becomes
-
-$$
-f'(\bx; \bd) = \langle \bd, \nabla f(\bx) \rangle
-= \nabla f(\bx)^T \bd
-= \sum_{i=1}^n \frac{\partial f(\bx)}{\partial x_i} d_i.
-$$
-
-Recall from {prf:ref}`def-cvxf-directional-derivative`,
-that the directional derivative is independent 
-on the choice of the inner product. This
-is also clear from the expression
-$\sum_{i=1}^n \frac{\partial f(\bx)}{\partial x_i} d_i$
-as the partial derivatives are independent of the
-choice of the inner product.
-
-However, this means that the gradient itself must
-depend on the choice of inner product. 
-If $\langle \cdot, \cdot \rangle_a$ 
-and $\langle \cdot, \cdot \rangle_b$
-are two different inner products defined on $\RR^n$,
-then the gradients of $f$ at $\bx$ w.r.t. the
-two inner products, denoted by $\nabla_a f(\bx)$
-and $\nabla_b f(\bx)$ must satisfy the relationship
-
-$$
-f'(\bx; \bd) = \langle \bd, \nabla_a f(\bx) \rangle_a
-= \langle \bd, \nabla_b f(\bx) \rangle_b
-\Forall \bd \in \VV.
-$$
-In the following, we shall assume that
-$\nabla f(\bx)$ denotes the gradient
-w.r.t. the dot product.
-
-Consider the inner product given by
-
-$$
-\langle \bx, \by \rangle_H = \bx^T \bH \by
-$$
-where $\bH \in \RR^{n \times n}$ is a symmetric
-positive definite matrix.
-
-Then,
-
-$$
-(\nabla_H f(\bx))_i &= \nabla_H f(\bx)^T \be_i 
-& \text{coordinate in standard basis}\\
-&= \nabla_H f(\bx)^T (\bH \bH^{-1}) \be_i & \text{$\bH$ is invertible}\\
-&= \nabla_H f(\bx)^T \bH (\bH^{-1}\be_i) & \\
-&= \langle \bH^{-1}\be_i, \nabla_H f(\bx) \rangle_H  
-& \text{by definition of this inner product} \\
-&= f'(\bx; \bH^{-1}\be_i)
-& \text{directional derivative w.r.t. this inner product} \\
-&= \nabla f(\bx)^T \bH^{-1}\be_i 
-& \text{directional derivative w.r.t. dot product}\\
-&= (\bH^{-1} \nabla f(\bx))^T \be_i
-& \text{$\bH$ is symmetric}.
-$$
-Thus,
-
-$$
-\nabla_H f(\bx) = \bH^{-1} \nabla f(\bx).
-$$
-
-
-Thus, the gradient w.r.t. the inner product
-$\langle \cdot, \cdot \rangle_H$ is the
-scaled version of the standard gradient
-where the scaling factor is $\bH^{-1}$.
-```
-
-```{prf:remark} Gradient in $\RR^{m \times n}$
-:label: res-cvxf-gradient-r-m-n
-
-We next look at the vector space of real matrices.
-The standard basis is a family of unit matrices
-$\{ \bE_{i j} \}_{1 \leq i \leq m, 1 \leq j \leq n}$
-where $\bE_{i j}$ has the $(i,j)$-th entry as 1 and other
-entries as 0.
-
-The standard inner product is given by
-
-$$
-\langle \bX , \bY \rangle =  \Trace(\bY^T \bX )
-\Forall \bX, \bY \in \RR^{m \times n}.
-$$
-
-Let $f : \RR^{m \times n} \to \RR$ be a proper function.
-Let $S = \dom f$.
-Let $\bX \in \interior S$.
-Assume that $f$ is differentiable at $\bX$.
-
-The gradient is given by
-
-$$
-\partial f(\bX) = \left ( 
-  \frac{\partial f(\bX)}{\partial x_{i j}} \right )_{i j }.
-$$
-
-The directional derivative for some direction $\bD \in \RR^{m \times n}$
-is given by
-
-$$
-f(\bX ; \bD) = \langle \bD, \partial f(\bX) \rangle
-= \Trace(\partial f(\bX)^T \bD).
-$$
-
-
-Consider the inner product given by
-
-$$
-\langle \bX, \bY \rangle_H = \Trace(\bX^T \bH \bY)
-$$
-where $\bH \in \RR^{m \times m}$ is a symmetric
-positive definite matrix.
-
-Then,
-
-$$
-(\nabla_H f(\bX))_{i j} &= \Trace(\nabla_H f(\bX)^T \bE_{i j}) 
-& \text{coordinate in standard basis}\\
-&= \Trace(\nabla_H f(\bX)^T (\bH \bH^{-1}) \bE_{i j}) & \text{$\bH$ is invertible}\\
-&= \Trace(\nabla_H f(\bX)^T \bH (\bH^{-1}\bE_{i j}) ) & \\
-&= \langle \bH^{-1}\bE_{i j}, \nabla_H f(\bX) \rangle_H  
-& \text{by definition of this inner product} \\
-&= f'(\bX; \bH^{-1}\bE_{i j})
-& \text{directional derivative w.r.t. this inner product} \\
-&= \Trace(\nabla f(\bX)^T \bH^{-1}\bE_{i j}) 
-& \text{directional derivative w.r.t. standard inner product}\\
-&= (\bH^{-1} \nabla f(\bX))^T \bE_{i j}
-& \text{$\bH$ is symmetric}.
-$$
-Thus,
-
-$$
-\nabla_H f(\bX) = \bH^{-1} \nabla f(\bX).
-$$
-```
 
 ### Subdifferential and gradient
 
@@ -1904,6 +1571,167 @@ $$
 $$
 ```
 
+
+###  Linear Transformations
+
+```{div}
+Our interest here is in compositions of the
+form $h = f \circ \bAAA$ where $\bAAA$ is a linear transformation.
+In other words $h (\bx) = f (\bAAA(\bx))$.
+
+If $\bAAA : \VV \to \WW$ is a linear transformation
+then $\bAAA^T : \WW^* \to \VV^*$ is a mapping from 
+$\WW^*$ to $\VV^*$ and satisfies the relationship:
+
+$$
+\langle \bAAA (\bx), \by \rangle = \langle \bx, \bAAA^T (\by) \rangle.
+$$
+
+From the definition of directional derivative, we have
+
+$$
+h'(\bx; \bd) 
+&= \lim_{t \downarrow 0} \frac{h(\bx + t \bd) - h(\bx)}{t} \\
+&= \lim_{t \downarrow 0} \frac{f(\bAAA(\bx + t \bd)) - f(\bAAA(\bx))}{t}\\
+&= \lim_{t \downarrow 0} \frac{f(\bAAA(\bx) + t \bAAA(\bd)) - f(\bAAA(\bx))}{t}\\
+&= f'(\bAAA(\bx); \bAAA(\bd)).
+$$
+```
+
+```{prf:theorem} Weak linear transformation rule of subdifferential calculus
+:label: res-cvxf-subdiff-weak-rule-linear
+
+
+Let $f: \WW \to \RERL$ be a proper function.
+Let $\bAAA : \VV \to \WW$ be a linear transformation.
+Define $h : \VV \to \RERL$ as 
+
+$$
+h (\bx) = f (\bAAA(\bx)).
+$$
+
+Assume that $h$ is proper, i.e. $\dom h$ is not empty: 
+
+$$
+\dom h = \{ \bx \in \VV \ST \bAAA(\bx) \in \dom f\} \neq \EmptySet.
+$$
+
+Then, for any $\bx \in \dom h$
+
+$$
+\bAAA^T (\partial f (\bAAA(\bx))) \subseteq \partial h(\bx).
+$$
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Let $\bx \in \dom h$. 
+1. Let $\bg \in \partial f(\bAAA(\bx))$.
+1. By {prf:ref}`res-cvxf-subg-dir-der-max-formula`,
+   
+   $$
+   \langle \bz, \bg \rangle \leq f'(\bAAA(\bx); \bz)
+   \Forall \bz \in \WW.
+   $$
+1. Choosing $\bz = \bAAA(\bd)$, we have
+
+   $$
+   \langle \bAAA(\bd), \bg \rangle \leq f'(\bAAA(\bx); \bAAA(\bd))
+   \Forall \bd \in \VV.
+   $$
+1. Equivalently
+
+   $$
+   \langle \bd, \bAAA^T(\bg) \rangle \leq h'(\bx; \bd)
+   \Forall \bd \in \VV.
+   $$
+1. Hence $\bAAA^T(\bg) \in \partial h(\bx)$
+   due to {eq}`eq-cvxf-subg-dir-der-inequality`.
+1. Hence $\bAAA^T (\partial f(\bAAA(\bx)) ) \subseteq \partial h(\bx)$.
+```
+
+
+```{prf:theorem} Strong linear transformation rule for subdifferential calculus
+:label: res-cvxf-subdiff-rule-linear
+
+Let $f: \WW \to \RERL$ be a proper convex function.
+Let $\bAAA : \VV \to \WW$ be a linear transformation.
+Define $h : \VV \to \RERL$ as 
+
+$$
+h (\bx) = f (\bAAA(\bx)).
+$$
+
+Assume that $h$ is proper, i.e. $\dom h$ is not empty: 
+
+$$
+\dom h = \{ \bx \in \VV \ST \bAAA(\bx) \in \dom f\} \neq \EmptySet.
+$$
+
+Then, for any $\bx \in \interior \dom h$ such that
+$\bAAA(\bx) \in \interior \dom f$, we have:
+
+$$
+\bAAA^T (\partial f (\bAAA(\bx))) = \partial h(\bx).
+$$
+```
+
+```{prf:proof}
+We showed $\bAAA^T (\partial f (\bAAA(\bx))) \subseteq \partial h(\bx)$
+in {prf:ref}`res-cvxf-subdiff-weak-rule-linear`.
+We show the reverse inclusion by contradiction.
+
+1. Let $\bx \in \interior \dom h$ such that
+   $\bAAA(\bx) \in \interior \dom f$.
+1. Assume that there exists $\bd \in \partial h(\bx)$
+   such that $\bd \notin \bAAA^T (\partial f(\bAAA(\bx)) )$.
+1. By {prf:ref}`res-cvxf-subdiff-proper-convex-interior`,
+   the set $\partial f(\bAAA(\bx))$ is nonempty, convex and compact.
+1. Hence $\bAAA^T (\partial f(\bAAA(\bx)))$ is also
+   nonempty, convex and compact.
+1. By strict separation theorem
+   ({prf:ref}`res-cvxf-cl-convex-set-strict-separation`),
+   there exists a vector $\bp$ and a scalar $c$ such that
+
+   $$
+   \langle \bAAA^T(\bg), \bp \rangle
+   < c < \langle \bd, \bp \rangle \Forall \bg \in \partial f(\bAAA(\bx)).
+   $$
+1. Equivalently
+
+
+   $$
+   \langle \bg, \bAAA(\bp) \rangle
+   < c < \langle \bd, \bp \rangle \Forall \bg \in \partial f(\bAAA(\bx)).
+   $$
+1. Taking the supremum over $ \partial f(\bAAA(\bx))$ on the
+   L.H.S., we obtain
+
+   $$
+   \sup_{\bg \in  \partial f(\bAAA(\bx))}
+   \langle \bg, \bAAA(\bp) \rangle
+   < \langle \bd, \bp \rangle.
+   $$
+1. By the max formula
+
+   $$
+   f'(\bAAA(\bx); \bAAA(\bp)) < \langle \bd, \bp \rangle.
+   $$
+1. But this means that
+
+   $$
+   h'(\bx; \bp) < \langle \bd, \bp \rangle.
+   $$
+1. This contradicts the assumption that $\bd \in \partial h(\bx)$.
+1. Hence we must have
+
+   $$
+   \bAAA^T (\partial f(\bAAA(\bx)) ) = \partial h(\bx).
+   $$
+```
+
+
 ### Affine Transformations
 
 
@@ -1935,17 +1763,12 @@ $$
 
 
 ```{prf:proof}
-Note that $\bAAA^T : \WW^* \to \VV^*$ is a mapping from 
-$\WW^*$ to $\VV^*$ and satisfies the relationship:
-
-$$
-\langle \bAAA (\bx), \by \rangle = \langle \bx, \bAAA^T (\by) \rangle.
-$$
+We proceed as follows.
 
 1. Let $\bx \in \dom h$. 
 1. Then, $\bx' = \bAAA(\bx) + \bb \in \dom f$ such that $h(\bx) = f(\bx')$.
 1. Let $\bg \in \bAAA^T (\partial f (\bx'))$.
-1. Then, there is $\bd \in \WW^*$ such that $\bg = \bAAA^T (\bb)$ with
+1. Then, there is $\bd \in \WW^*$ such that $\bg = \bAAA^T (\bd)$ with
    $\bd \in \partial f(\bx')$.
 1. Let $\by \in \dom h$.
 1. Then, $\by' = \bAAA(\by) + \bb \in \dom f$ such that $h(\by)= f(\by')$.
@@ -2188,6 +2011,10 @@ We are given $\bx \in \VV$ at which $g$ is differentiable and $f$ is convex.
    $$
 
 ````
+
+Applications of this rule are presented later
+in {prf:ref}`ex-cvxf-subdiff-l1-norm-squared`.
+
 
 ### Max Rule
 
@@ -2595,6 +2422,122 @@ a compact set are nonempty and bounded.
 1. Thus, $f$ is indeed Lipschitz continuous over $X$.
 ```
 
+
+## $\epsilon$-Subgradients
+
+```{index} Approximate subgradient
+```
+````{prf:definition} $\epsilon$-Subgradient
+:label: def-cvxf-e-subgradient
+
+Let $f : \VV \to \RERL$ be a proper function. 
+Let $\bx \in \dom f$. 
+A vector $\bg \in \VV^*$ is called an $\epsilon$-*subgradient*
+of $f$ at $\bx$ 
+if
+```{math}
+:label: eq-cvxf-e-subgradient-inequality
+f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle - \epsilon \Forall \by \in \VV.
+```
+````
+
+### Geometric Interpretation
+
+```{prf:observation} $\epsilon$-subgradient and supporting hyperplane
+:label: res-cvxf-e-subgradient-supporting-hyperplane
+
+Let $f: \VV \to \RERL$ be a proper function.
+Then $\bg$ be an $\epsilon$-subgradient of $f$ at $\bx$
+if and only if $\epi f$ is contained in the positive
+halfspace of the
+hyperplane with a normal $(-\bg, 1)$
+passing through $(\bx, f(\bx) - \epsilon)$. 
+```
+
+```{prf:proof}
+Let $H$ denote the hyperplane
+
+$$
+H = \{
+(\by, t) \ST \langle \by, -\bg \rangle  + t 
+      =  \langle \bx, -\bg \rangle + f(\bx) - \epsilon \}.
+$$
+The positive halfspace of $H$ is given by
+
+$$
+H_+ = \{
+(\by, t) \ST \langle \by, -\bg \rangle  + t 
+      \geq  \langle \bx, -\bg \rangle + f(\bx) - \epsilon \}.
+$$
+
+
+Assume that $\bg$ is an $\epsilon$-subgradient of $f$ at $\bx$.
+1. For any $(\by, t) \in \epi f$, we have
+
+   $$
+   t \geq f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle - \epsilon.
+   $$
+1. This is equivalent to
+
+   $$
+   \langle \by, -\bg \rangle + t  \geq
+   \langle \bx, -\bg \rangle + f(\bx) - \epsilon
+   $$
+   for all $(\by, t) \in \epi f$.
+1. Hence $\epi f \subseteq H_+$.
+
+
+Now assume that $\epi f \subseteq H_+$.
+
+1. Let $(\by, f(\by)) \in \epi f$.
+1. Then we have
+
+   $$
+   \langle \by, -\bg \rangle  + f(\by)  \geq  \langle \bx, -\bg \rangle + f(\bx) - \epsilon.
+   $$
+
+1. Rearranging the terms, we have
+
+   $$
+   f(\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle - \epsilon \Forall \by \in \VV. 
+   $$
+1. But this means that $\bg$ is an $\epsilon$-subgradient of $f$ at $\bx$.
+```
+
+
+### $\epsilon$-Subdifferential
+
+
+```{index} Approximate Subdifferential
+```
+```{prf:definition} $\epsilon$-subdifferential
+:label: def-cvxf-e-subdifferential
+
+Let $f : \VV \to \RERL$ be a proper function.
+The set of all $\epsilon$-subgradients of $f$ at a point $\bx \in \dom f$
+is called the $\epsilon$-*subdifferential* of $f$ at $\bx$ and is denoted by
+$\partial_{\epsilon} f(\bx)$.
+
+$$
+\partial_{\epsilon} f(\bx) \triangleq 
+\{ \bg \in \VV^* \ST f (\by) \geq f(\bx) + \langle \by - \bx, \bg \rangle
+- \epsilon 
+  \Forall \by \in \VV \}.
+$$
+
+For all $\bx \notin \dom f$, we define $\partial_{\epsilon} f(\bx) = \EmptySet$.
+```
+It is easy to see that 
+
+$$
+\partial f(\bx) \subseteq \partial_{\epsilon} f(\bx).
+$$
+Also, if $\epsilon_2 \geq \epsilon_1 > 0$, then
+
+$$
+\partial_{\epsilon_1} f(\bx) \subseteq \partial_{\epsilon_2} f(\bx).
+$$ 
+
 ## Optimality Conditions
 
 A well known result for differentiable functions is that
@@ -2651,6 +2594,23 @@ For the converse, assume that $\ba \in \argmin \{ f(\bx) \ST \bx \in \VV \}$.
    $$
    holds true for every $\bx \in \VV$.
 1. This implies that $\bzero \in \partial f(\ba)$.
+```
+
+## Mean Value Theorem
+
+The following result is from {cite}`hiriart2013convex`.
+
+```{prf:theorem} A subgradients based mean value theorem for 1D functions
+:label: res-cvxf-convex-subdiff-mvt
+
+Let $f : \RR \to \RERL$ be a proper closed convex function.
+Let $[a,b] \subseteq \dom f$ with $a < b$. Then,
+
+$$
+f(b) - f(a) = \int_a^b h(t) d t
+$$
+where $h : (a, b) \to \RR$ satisfies $h(t) \in \partial f(t)$
+for every $t \in (a, b)$.
 ```
 
 
@@ -3153,7 +3113,7 @@ The subdifferential of indicator function for a nonempty set $S \subset \VV$
 at any point $\bx \in S$ is given by
 
 $$
-\partial \delta_S (\bx) = N_S (\bx).
+\partial I_S (\bx) = N_S (\bx).
 $$
 
 where $N_S (\bx)$ is the 
@@ -3443,23 +3403,6 @@ $$
 \bA^T \blambda = \bzero \text{ and }
 \lambda_j (\ba_j^T \bx + b_j - f(\bx^*)) = 0, j=1,\dots,m.
 $$
-```
-
-## Mean Value Theorem
-
-The following result is from {cite}`hiriart2013convex`.
-
-```{prf:theorem} A subgradients based mean value theorem for 1D functions
-:label: res-cvxf-convex-subdiff-mvt
-
-Let $f : \RR \to \RERL$ be a proper closed convex function.
-Let $[a,b] \subseteq \dom f$ with $a < b$. Then,
-
-$$
-f(b) - f(a) = \int_a^b h(t) d t
-$$
-where $h : (a, b) \to \RR$ satisfies $h(t) \in \partial f(t)$
-for every $t \in (a, b)$.
 ```
 
 ## Minimization Problems

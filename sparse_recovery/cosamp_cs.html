@@ -1,0 +1,2518 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>15.4. Compressive Sampling Matching Pursuit &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="16. Dictionary Learning" href="../diclearn/ch_diclearn.html" />
+    <link rel="prev" title="15.3. Orthogonal Matching Pursuit" href="omp_cs.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/sparse_recovery/cosamp_cs.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fsparse_recovery/cosamp_cs.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithm">
+   15.4.1. Algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-signal-proxy">
+     15.4.1.1. The Signal Proxy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#core-of-algorithm">
+     15.4.1.2. Core of Algorithm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cosamp-analysis-sparse-case">
+   15.4.2. CoSaMP Analysis Sparse Case
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#identification">
+     15.4.2.1. Identification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#support-merger">
+     15.4.2.2. Support Merger
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimation">
+     15.4.2.3. Estimation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pruning">
+     15.4.2.4. Pruning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-cosamp-iteration-invariant">
+     15.4.2.5. The CoSaMP Iteration Invariant
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cosamp-analysis-general-case">
+   15.4.3. CoSaMP Analysis General Case
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#snr-analysis">
+     15.4.3.1. SNR Analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Compressive Sampling Matching Pursuit</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithm">
+   15.4.1. Algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-signal-proxy">
+     15.4.1.1. The Signal Proxy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#core-of-algorithm">
+     15.4.1.2. Core of Algorithm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cosamp-analysis-sparse-case">
+   15.4.2. CoSaMP Analysis Sparse Case
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#identification">
+     15.4.2.1. Identification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#support-merger">
+     15.4.2.2. Support Merger
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimation">
+     15.4.2.3. Estimation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pruning">
+     15.4.2.4. Pruning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-cosamp-iteration-invariant">
+     15.4.2.5. The CoSaMP Iteration Invariant
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cosamp-analysis-general-case">
+   15.4.3. CoSaMP Analysis General Case
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#snr-analysis">
+     15.4.3.1. SNR Analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="compressive-sampling-matching-pursuit">
+<span id="sec-cosamp"></span><h1><span class="section-number">15.4. </span>Compressive Sampling Matching Pursuit<a class="headerlink" href="#compressive-sampling-matching-pursuit" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we look at an algorithm named CoSaMP
+(Compressive Sampling Matching Pursuit)
+developed in <span id="id1">[<a class="reference internal" href="../bib.html#id109" title="Deanna Needell and Joel A Tropp. Cosamp: iterative signal recovery from incomplete and inaccurate samples. Applied and Computational Harmonic Analysis, 26(3):301–321, 2009.">28</a>]</span>.
+This algorithm follows in the tradition of
+orthogonal matching pursuit while bringing
+in other ideas from many recent developments in the field leading to
+an algorithm which is much more robust, fast and provides much stronger
+guarantees.</p>
+<p>This algorithm has many impressive features:</p>
+<ul class="simple">
+<li><p>It can work with a variety of sensing matrices.</p></li>
+<li><p>It works with minimal number of measurements (c.f. basis pursuit).</p></li>
+<li><p>It is robust against presence of measurement noise
+(OMP does not have such a claim).</p></li>
+<li><p>It provides optimal error guarantees for every signal
+(sparse signals, compressible signals, completely arbitrary signals).</p></li>
+<li><p>The algorithm is quite efficient in terms of resource (memory, CPU)
+requirements.</p></li>
+</ul>
+<p>As we move along in this section, we will understand the algorithm
+and validate all of these claims.
+Hopefully through this process we will have a very
+good understanding of how to evaluate the quality of signal recovery algorithm.</p>
+<div class="section" id="algorithm">
+<h2><span class="section-number">15.4.1. </span>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h2>
+<p>The algorithm itself is presented in
+<a class="reference internal" href="#alg:greedy:cosamp:core_algorithm">Algorithm 15.4</a>.</p>
+<div class="proof algorithm admonition" id="alg:greedy:cosamp:core_algorithm">
+<p class="admonition-title"><span class="caption-number">Algorithm 15.4 </span> (CoSaMP for iterative sparse signal recovery)</p>
+<div class="algorithm-content section" id="proof-content">
+<p>Inputs:</p>
+<ul class="simple">
+<li><p>Sensing matrix <span class="math notranslate nohighlight">\(\Phi \in \CC^{M \times N}\)</span></p></li>
+<li><p>Measurement vector: <span class="math notranslate nohighlight">\(\by \in \CC^M\)</span> where <span class="math notranslate nohighlight">\(\by = \Phi \bx + \be\)</span></p></li>
+<li><p>Sparsity level: <span class="math notranslate nohighlight">\(K\)</span></p></li>
+</ul>
+<p>Outputs:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bz\)</span>: a <span class="math notranslate nohighlight">\(K\)</span>-sparse approximation of the signal:<span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span></p></li>
+</ul>
+<p>Initialization:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bz^0 \leftarrow \bzero\)</span> # Initial approximation</p></li>
+<li><p><span class="math notranslate nohighlight">\(\br^0 \leftarrow \by\)</span> # Residual <span class="math notranslate nohighlight">\(\by - \Phi \bz\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(k \leftarrow 0\)</span> # Iteration counter</p></li>
+</ol>
+<p>Algorithm:</p>
+<ol class="simple">
+<li><p>If halting criteria is satisfied: break.</p></li>
+<li><p><span class="math notranslate nohighlight">\(k \leftarrow k + 1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bp \leftarrow \Phi^H \br^{k-1}\)</span> # Form signal proxy</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Omega = \supp(\bp|_{2K})\)</span> # Identify <span class="math notranslate nohighlight">\(2K\)</span> large components</p></li>
+<li><p><span class="math notranslate nohighlight">\(T \leftarrow \Omega \cup \supp(\bz^{k-1})\)</span> # Merge supports</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bb_T \leftarrow \Phi_T^{\dag} \by\)</span> # Estimation by least-squares</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bb_{T^c} \leftarrow \bzero\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bz^k \leftarrow \bb|_K\)</span>  # Prune to obtain next approximation</p></li>
+<li><p><span class="math notranslate nohighlight">\(\br^k \leftarrow \by - \Phi \bz^k\)</span> # Update residual</p></li>
+<li><p>Go to step 1.</p></li>
+</ol>
+</div>
+</div><p>Let us set out the notation before proceeding further.
+Most of the things are as usual, with few minor updates.</p>
+<div class="docutils">
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> represents the signal which is to be
+estimated through the algorithm.
+<span class="math notranslate nohighlight">\(\bx\)</span> is unknown to us within the algorithm.</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span> is the dimension of ambient signal space,
+<span class="math notranslate nohighlight">\(K \ll N\)</span> is the sparsity level of of the approximation of
+<span class="math notranslate nohighlight">\(\bx\)</span> that we are estimating
+and <span class="math notranslate nohighlight">\(M\)</span> is the dimension of measurement space (number of measurements <span class="math notranslate nohighlight">\(K &lt; M \ll N\)</span>).</p></li>
+<li><p>We note that <span class="math notranslate nohighlight">\(\bx\)</span> itself may not be <span class="math notranslate nohighlight">\(K\)</span>-sparse.</p></li>
+<li><p>Our algorithm is designed to estimate a <span class="math notranslate nohighlight">\(K\)</span>-sparse approximation of <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Phi \in \CC^{M \times N}\)</span> represents the sensing matrix. It is known to the algorithm.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\by = \Phi \bx + \be\)</span> represents the measurement vector belonging to <span class="math notranslate nohighlight">\(\CC^M\)</span>.
+This is known to the algorithm.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\be \in \CC^M\)</span> represents the measurement noise which is unknown to us
+within the algorithm.</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span> represents the iteration (or step) counter within the algorithm.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bz \in \CC^N\)</span> represents our estimate of <span class="math notranslate nohighlight">\(\bx\)</span>. <span class="math notranslate nohighlight">\(\bz\)</span> is updated iteratively.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bz^k\)</span> represents the estimate of <span class="math notranslate nohighlight">\(\bx\)</span> at the end of <span class="math notranslate nohighlight">\(k\)</span>-th iteration.</p></li>
+<li><p>We start with <span class="math notranslate nohighlight">\(\bz^0=\bzero\)</span> and update it in each iteration.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bp \in \CC^N\)</span> represents a proxy for <span class="math notranslate nohighlight">\(\bx- \bz^{k-1}\)</span>.
+We will explain it shortly.</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span>, <span class="math notranslate nohighlight">\(\Omega\)</span> etc. represent index sets (subsets of <span class="math notranslate nohighlight">\(\{1,2,\dots, N\}\)</span>).</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(\bv \in \CC^N\)</span> and any index set <span class="math notranslate nohighlight">\(T \subseteq \{1,2,\dots, N\}\)</span>,
+<span class="math notranslate nohighlight">\(\bv_T\)</span> can mean either of the two things:</p>
+<ul>
+<li><p>A vector in <span class="math notranslate nohighlight">\(\CC^{|T|}\)</span> consisting of only those entries in <span class="math notranslate nohighlight">\(\bv\)</span> which are
+indexed by <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
+<li><p>A vector in <span class="math notranslate nohighlight">\(\CC^N\)</span> whose entries indexed by <span class="math notranslate nohighlight">\(T\)</span> are same as that of <span class="math notranslate nohighlight">\(\bv\)</span> while
+entries indexed by <span class="math notranslate nohighlight">\(\{1,2,\dots, N\} \setminus T\)</span> are set all to zero.</p>
+<div class="math notranslate nohighlight" id="equation-eq-96451a22-d91b-44ba-a209-34010fb150ab">
+<span class="eqno">(15.19)<a class="headerlink" href="#equation-eq-96451a22-d91b-44ba-a209-34010fb150ab" title="Permalink to this equation">¶</a></span>\[\begin{split}v_{T}(i) = \left\{
+        \begin{array}{ll}
+            v(i) &amp; \mbox{if $i \in T$};\\
+            0 &amp; \mbox{otherwise}.
+        \end{array}
+      \right.\end{split}\]</div>
+</li>
+</ul>
+</li>
+<li><p>For any <span class="math notranslate nohighlight">\(\bv \in \CC^N\)</span> and any integer <span class="math notranslate nohighlight">\(1 \leq n \leq N\)</span>, <span class="math notranslate nohighlight">\(\bv|_n\)</span> means
+a vector in <span class="math notranslate nohighlight">\(\CC^N\)</span> which consists of the <span class="math notranslate nohighlight">\(n\)</span> largest (in magnitude) entries
+of <span class="math notranslate nohighlight">\(\bv\)</span> (at the corresponding indices) while rest of the entries in <span class="math notranslate nohighlight">\(\bv|_n\)</span> are 0.</p></li>
+<li><p>With an index set <span class="math notranslate nohighlight">\(T\)</span>, <span class="math notranslate nohighlight">\(\Phi_T\)</span> means an <span class="math notranslate nohighlight">\(M \times |T|\)</span> matrix consisting of
+selected columns of <span class="math notranslate nohighlight">\(\Phi\)</span> indexed by <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\br \in \CC^M\)</span> represents the difference between the actual measurement vector
+<span class="math notranslate nohighlight">\(\by\)</span> and estimated measurement vector <span class="math notranslate nohighlight">\(\Phi \bz\)</span>.</p></li>
+<li><p>Ideal estimate of <span class="math notranslate nohighlight">\(\br\)</span> would be <span class="math notranslate nohighlight">\(\be\)</span> itself.
+But that won’t be possible to achieve in general.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx|_K\)</span> is the best <span class="math notranslate nohighlight">\(K\)</span>-sparse approximation of <span class="math notranslate nohighlight">\(\bx\)</span> which can
+be estimated by our algorithm (<a class="reference internal" href="../ssm/srr.html#def:ssm:largest_entries_signal">Definition 12.12</a>).</p></li>
+</ul>
+</div>
+<div class="proof example admonition" id="res-sr-cosamp-ex-1">
+<p class="admonition-title"><span class="caption-number">Example 15.1 </span> (Clarifying the notation in CoSaMP)</p>
+<div class="example-content section" id="proof-content">
+<ol>
+<li><p>Let us consider</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx = (-1, 5, 8, 0, 0, -3, 0, 0, 0, 0)
+    \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx|_2 = (0, 5, 8, 0, 0, 0, 0, 0, 0, 0)
+    \]</div>
+</li>
+<li><p>Also</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx|_4 = \bx
+    \]</div>
+<p>since <span class="math notranslate nohighlight">\(\bx\)</span> happens to be <span class="math notranslate nohighlight">\(4\)</span>-sparse.</p>
+</li>
+<li><p>For <span class="math notranslate nohighlight">\(\Lambda = \{1,2,3,4\}\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    x_{\{1,2,3,4\}} = (-1, 5, 8, 0, 0, 0, 0, 0, 0, 0)
+    \]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[
+    x_{\{1,2,3,4\}} = (-1, 5, 8, 0)
+    \]</div>
+<p>in different contexts.</p>
+</li>
+</ol>
+</div>
+</div><div class="section" id="the-signal-proxy">
+<h3><span class="section-number">15.4.1.1. </span>The Signal Proxy<a class="headerlink" href="#the-signal-proxy" title="Permalink to this headline">¶</a></h3>
+<p>As we have learnt by now that the most challenging part in a signal recovery
+algorithm is to identify the support of the <span class="math notranslate nohighlight">\(K\)</span>-sparse approximation.
+OMP identifies one index in the support at each iteration and hopes that it
+never makes any mistakes.
+It ends up taking <span class="math notranslate nohighlight">\(K\)</span> iterations and solving <span class="math notranslate nohighlight">\(K\)</span> least squares problems.
+If there could be a simple way which could identify
+the support quickly (even if roughly), that can help in tremendously
+accelerating the algorithm.
+The fundamental innovation in CoSaMP is to identify the support
+through the signal proxy.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\bx\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse and <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP
+(see <a class="reference internal" href="../ssm/rip.html#sec-ssm-rip"><span class="std std-ref">Restricted Isometry Property</span></a>)
+of order <span class="math notranslate nohighlight">\(K\)</span> with the restricted isometry constant <span class="math notranslate nohighlight">\(\delta_K \ll 1\)</span>
+then it can be argued that <span class="math notranslate nohighlight">\(\bp = \Phi^H \Phi \bx\)</span>
+can serve as a proxy for the signal <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>In particular the largest <span class="math notranslate nohighlight">\(K\)</span> entries of <span class="math notranslate nohighlight">\(\bp\)</span> point towards the largest
+<span class="math notranslate nohighlight">\(K\)</span> entries of <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>Although we don’t know <span class="math notranslate nohighlight">\(\bx\)</span> inside the algorithm,
+yet we have access to <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span>
+(assuming error to be <span class="math notranslate nohighlight">\(\bzero\)</span>),
+the proxy can be easily estimated by computing <span class="math notranslate nohighlight">\(\bp = \Phi^H \by\)</span>.</p></li>
+</ol>
+<p>This is the key idea in CoSaMP.</p>
+<ol class="simple">
+<li><p>Rather than identifying just one new index in support of <span class="math notranslate nohighlight">\(\bx\)</span>,
+it tries to identify whole of support by picking up the largest <span class="math notranslate nohighlight">\(2K\)</span>
+entries of <span class="math notranslate nohighlight">\(\bp\)</span>.</p></li>
+<li><p>It then solves a least squares problem around the columns of <span class="math notranslate nohighlight">\(\Phi\)</span>
+indexed by this support set.</p></li>
+<li><p>It keeps only the <span class="math notranslate nohighlight">\(K\)</span> largest entries from the least squares solution
+as an estimate of <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>Of course there is no guarantee that in a single attempt
+the support of <span class="math notranslate nohighlight">\(\bx\)</span> will be  recovered completely.</p></li>
+<li><p>Hence the residual between actual measurement vector <span class="math notranslate nohighlight">\(\by\)</span>
+and estimated measurement vector <span class="math notranslate nohighlight">\(\Phi \bz\)</span> is computed
+and it is used to identify other indices of <span class="math notranslate nohighlight">\(\supp(\bx)\)</span> iteratively.</p></li>
+</ol>
+</div>
+<div class="section" id="core-of-algorithm">
+<h3><span class="section-number">15.4.1.2. </span>Core of Algorithm<a class="headerlink" href="#core-of-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>There are two things which are estimated in each iteration of algorithm</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(K\)</span>-sparse estimate of <span class="math notranslate nohighlight">\(\bx\)</span> at <span class="math notranslate nohighlight">\(k\)</span>-th step: <span class="math notranslate nohighlight">\(\bz^k\)</span>.</p></li>
+<li><p>Residual at <span class="math notranslate nohighlight">\(k\)</span>-th step: <span class="math notranslate nohighlight">\(\br^k\)</span>.</p></li>
+</ol>
+<p>Residual and proxy:</p>
+<ol>
+<li><p>We start with a trivial estimate <span class="math notranslate nohighlight">\(\bz^0 = \bzero\)</span>
+and improve it in each iteration.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\br^0\)</span> is nothing but the measurement vector <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+<li><p>As explained before <span class="math notranslate nohighlight">\(\br^k\)</span> is the difference between
+actual measurement vector <span class="math notranslate nohighlight">\(\by\)</span> and the estimated
+measurement vector <span class="math notranslate nohighlight">\(\Phi \bz^k\)</span>.</p></li>
+<li><p>This <span class="math notranslate nohighlight">\(\br^k\)</span> is used for computing the signal proxy at <span class="math notranslate nohighlight">\(k\)</span>-th step.</p></li>
+<li><p>Concretely assuming <span class="math notranslate nohighlight">\(\be=\bzero\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+    \bp = \Phi^H \br^k 
+    = \Phi^H (\by - \Phi \bz^k) 
+    = \Phi^H \Phi (\bx - \bz^k).
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bp\)</span> is the proxy of the difference between
+the original signal and the estimated signal.</p></li>
+</ol>
+<p>During each iteration, the algorithm performs following tasks</p>
+<ol class="simple">
+<li><p>[Identification] The algorithm forms a proxy of the residual
+<span class="math notranslate nohighlight">\(\br^{k-1}\)</span> and locates the <span class="math notranslate nohighlight">\(2K\)</span> largest entries of the proxy.</p></li>
+<li><p>[Support merger] The set of newly identified indices is merged with
+the set of indices that appear in the current approximation
+<span class="math notranslate nohighlight">\(\bz^{k-1}\)</span> (i.e. <span class="math notranslate nohighlight">\(\supp(\bz^{k-1})\)</span>).</p></li>
+<li><p>[Estimation] The algorithm solves a least squares problem
+to approximate the signal <span class="math notranslate nohighlight">\(\bx\)</span> on the merged set of indices.</p></li>
+<li><p>[Pruning] The algorithm produces a new approximation <span class="math notranslate nohighlight">\(\bz^k\)</span>
+by retaining only the largest <span class="math notranslate nohighlight">\(K\)</span> entries in the least squares solution.</p></li>
+<li><p>[Residual update] Finally the new residual <span class="math notranslate nohighlight">\(\br^k\)</span> between original
+measurement vector <span class="math notranslate nohighlight">\(\by\)</span> and estimated measurement vector
+<span class="math notranslate nohighlight">\(\Phi \bz^k\)</span> is computed.</p></li>
+</ol>
+<p>The steps are repeated until the halting criteria is reached.
+We will discuss the halting criteria in detail later.
+A possible halting criteria is when the norm of residual <span class="math notranslate nohighlight">\(\br^k\)</span>
+reaches a very small value.</p>
+</div>
+</div>
+<div class="section" id="cosamp-analysis-sparse-case">
+<span id="sec-greedy-cosamp-sparse-case-analysis"></span><h2><span class="section-number">15.4.2. </span>CoSaMP Analysis Sparse Case<a class="headerlink" href="#cosamp-analysis-sparse-case" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection, we will carry out a detailed theoretical analysis of
+CoSaMP algorithm for sparse signal recovery.</p>
+<p>We will make following assumptions in the analysis:</p>
+<ul class="simple">
+<li><p>The sparsity level <span class="math notranslate nohighlight">\(K\)</span> is fixed and known in advance.</p></li>
+<li><p>The signal <span class="math notranslate nohighlight">\(\bx\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse (i.e. <span class="math notranslate nohighlight">\(\bx \in \Sigma_K \subseteq \CC^N\)</span>).</p></li>
+<li><p>The sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(4K\)</span> with <span class="math notranslate nohighlight">\(\delta_{4K} \leq 0.1\)</span>.</p></li>
+<li><p>Measurement error <span class="math notranslate nohighlight">\(\be \in \CC^M\)</span> is arbitrary.</p></li>
+</ul>
+<div class="docutils">
+<p>For each iteration, we need to define one more quantity: <em>recovery error</em></p>
+<div class="math notranslate nohighlight">
+\[
+\bd^k = \bx - \bz^k.
+\]</div>
+<p>The quantity <span class="math notranslate nohighlight">\(\bd^k\)</span> captures the difference between actual signal <span class="math notranslate nohighlight">\(\bx\)</span>
+and estimated signal <span class="math notranslate nohighlight">\(\bz^k\)</span> at the end of <span class="math notranslate nohighlight">\(k\)</span>-th iteration.</p>
+<ol>
+<li><p>Under ideal recovery, <span class="math notranslate nohighlight">\(\bd^k\)</span> should become <span class="math notranslate nohighlight">\(\bzero\)</span> as <span class="math notranslate nohighlight">\(k\)</span> increases.</p></li>
+<li><p>Since we don’t know <span class="math notranslate nohighlight">\(\bx\)</span> within the algorithm,
+we cannot see <span class="math notranslate nohighlight">\(\bd^k\)</span> directly.</p></li>
+<li><p>We do have following equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \br^k &amp;= \by - \Phi \bz^k\\
+    &amp;= \Phi \bx + \be - \Phi \bz^k \\ 
+    &amp;= \Phi (\bx - \bz^k)  + \be  \\
+    &amp;= \Phi \bd^k + \be.
+   \end{split}\]</div>
+</li>
+<li><p>We will show that in each iteration, CoSaMP reduces the recovery
+error by a constant factor while adding a small multiple of the
+measurement noise <span class="math notranslate nohighlight">\(\|\be\|_2\)</span>.</p></li>
+<li><p>As a result, when recovery error is large compared to measurement noise,
+the algorithm makes substantial progress in each step.</p></li>
+<li><p>The algorithm stops making progress when recovery error
+is of the order of measurement noise.</p></li>
+</ol>
+<p>We will consider some iteration <span class="math notranslate nohighlight">\(k \geq 1\)</span> and
+analyze the behavior of each of the steps:
+identification, support merger, estimation, pruning and residual update one by one.</p>
+<ol>
+<li><p>At the beginning of the iteration we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \br^{k-1} = \Phi (\bx - \bz^{k - 1}) + \be 
+    = \Phi \bd^{k - 1} + \be.
+    \]</div>
+</li>
+<li><p>The quantities of interest are
+<span class="math notranslate nohighlight">\(\bz^{k-1}\)</span>, <span class="math notranslate nohighlight">\(\br^{k-1}\)</span> and <span class="math notranslate nohighlight">\(\bd^{k-1}\)</span>
+out of which <span class="math notranslate nohighlight">\(\bd^{k-1}\)</span> is unknowable.</p></li>
+<li><p>In order to simplify the equations below we will write</p>
+<div class="math notranslate nohighlight">
+\[
+    \br = \br^{k-1}, \; \bz = \bz^{k-1} \; \text{ and } \bd = \bd^{k-1}.
+   \]</div>
+</li>
+</ol>
+</div>
+<table class="table" id="id3">
+<caption><span class="caption-number">Table 15.1 </span><span class="caption-text">Terms used in analysis</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Details</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\bx\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(K\)</span> sparse signal</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\Phi\)</span></p></td>
+<td><p>Sensing matrix</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\be\)</span></p></td>
+<td><p>Measurement noise</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\by\)</span></p></td>
+<td><p>Measurement vector</p></td>
+<td><p><span class="math notranslate nohighlight">\(\by  = \Phi \bx + \be\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\bz\)</span></p></td>
+<td><p>A <span class="math notranslate nohighlight">\(K\)</span> sparse estimate of <span class="math notranslate nohighlight">\(\bx\)</span> at the beginning of the iteration</p></td>
+<td><p><span class="math notranslate nohighlight">\(\bz = \bz^{k-1} = \bb|_K\)</span>, <span class="math notranslate nohighlight">\(\bb_T = \Phi_T^{\dag} \by\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\br\)</span></p></td>
+<td><p>Residual at the beginning of the iteration</p></td>
+<td><p><span class="math notranslate nohighlight">\(\br = \br^{k -1} = \by - \Phi \bz^{k - 1}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\bd\)</span></p></td>
+<td><p>Recovery error at the beginning of the iteration</p></td>
+<td><p><span class="math notranslate nohighlight">\(\bd = \bd^{k-1} = \bx  - \bz^{k-1}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\bp\)</span></p></td>
+<td><p>The proxy for <span class="math notranslate nohighlight">\(\bd\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\bp - \Phi^H \br = \Phi^H (\Phi \bd^{k-1} + \be)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\Omega\)</span></p></td>
+<td><p>The index set of largest <span class="math notranslate nohighlight">\(2K\)</span> entries in <span class="math notranslate nohighlight">\(\bp\)</span></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="identification">
+<h3><span class="section-number">15.4.2.1. </span>Identification<a class="headerlink" href="#identification" title="Permalink to this headline">¶</a></h3>
+<p>We start our analysis with the identification step in the main loop of CoSaMP
+(<a class="reference internal" href="#alg:greedy:cosamp:core_algorithm">Algorithm 15.4</a>).</p>
+<div class="docutils">
+<ol>
+<li><p>We compute <span class="math notranslate nohighlight">\(\bp = \Phi^H \br\)</span> and consider
+<span class="math notranslate nohighlight">\(\Omega = \supp(\bp|_{2K})\)</span> as the index
+set of largest <span class="math notranslate nohighlight">\(2K\)</span> indices in <span class="math notranslate nohighlight">\(\bp\)</span>.</p></li>
+<li><p>We will show that most of the energy in <span class="math notranslate nohighlight">\(\bd\)</span> (the recovery error)
+is concentrated in the entries indexed by <span class="math notranslate nohighlight">\(\Omega\)</span>.</p></li>
+<li><p>In other words, we will be looking for a bound of the form</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bd_{\Omega^c} \|_{2} \ll \| \bd \|_2.
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse and <span class="math notranslate nohighlight">\(\bz\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse hence <span class="math notranslate nohighlight">\(\bd\)</span> is
+<span class="math notranslate nohighlight">\(2K\)</span>-sparse.</p>
+<ol class="simple">
+<li><p>In first iteration where <span class="math notranslate nohighlight">\(\bz^0 = \bzero\)</span>,
+support of <span class="math notranslate nohighlight">\(\bd^0\)</span> is same as support of <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>In later iterations it may include more indices.</p></li>
+</ol>
+</li>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+    \Gamma = \supp(\bd).
+   \]</div>
+</li>
+<li><p>We remind that <span class="math notranslate nohighlight">\(\Omega\)</span> is known to us while <span class="math notranslate nohighlight">\(\Gamma\)</span> is unknown to us.</p></li>
+<li><p>Ideal case would be when <span class="math notranslate nohighlight">\(\Gamma \subseteq \Omega\)</span>.</p></li>
+<li><p>Then we would have recovered whole of support of <span class="math notranslate nohighlight">\(\bx\)</span>;
+recovering <span class="math notranslate nohighlight">\(\bx\)</span> would therefore be easier.</p></li>
+<li><p>Let us examine what are the differences between the two sets.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(|\Omega| \leq 2K\)</span> and <span class="math notranslate nohighlight">\(|\Gamma| \leq 2K\)</span>.</p></li>
+<li><p>Moreover, <span class="math notranslate nohighlight">\(\Omega\)</span> indexes <span class="math notranslate nohighlight">\(2K\)</span> largest entries in <span class="math notranslate nohighlight">\(\bp\)</span>.</p></li>
+<li><p>Thus we have (due to <a class="reference internal" href="../ssm/srr.html#lem:ssm:best_k_term_approximation">Theorem 12.17</a>)</p>
+<div class="math notranslate nohighlight" id="equation-eq-e8c6dc0f-4262-4911-a973-7c52b312762e">
+<span class="eqno">(15.20)<a class="headerlink" href="#equation-eq-e8c6dc0f-4262-4911-a973-7c52b312762e" title="Permalink to this equation">¶</a></span>\[ \| \bp_{\Gamma} \|_2 \leq \| \bp_{\Omega} \|_2\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bp_{\Gamma},  \bp_{\Omega} \in \CC^N\)</span>
+are obtained from <span class="math notranslate nohighlight">\(\bp\)</span> as per <a class="reference internal" href="../ssm/srr.html#def:ssm:signal_restriction">Definition 12.10</a>.</p>
+</li>
+<li><p>Squaring <a class="reference internal" href="#equation-eq-e8c6dc0f-4262-4911-a973-7c52b312762e">(15.20)</a>
+on both sides and expanding we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{\gamma \in \Gamma} |p_{\gamma}|^2  
+    \leq \sum_{\omega \in \Omega} |p_{\omega}|^2.
+    \]</div>
+</li>
+<li><p>Now we do hope that some of the entries are common in both sides.
+Those entries are indexed by <span class="math notranslate nohighlight">\(\Gamma \cap \Omega\)</span>.</p></li>
+<li><p>The remaining entries on L.H.S. are indexed by <span class="math notranslate nohighlight">\(\Gamma \setminus \Omega\)</span>
+and on the R.H.S. are indexed by <span class="math notranslate nohighlight">\(\Omega \setminus \Gamma\)</span>.</p></li>
+<li><p>Hence we have</p>
+<div class="math notranslate nohighlight" id="equation-eq-d10d1d93-e8fb-4092-909c-c623b19b7928">
+<span class="eqno">(15.21)<a class="headerlink" href="#equation-eq-d10d1d93-e8fb-4092-909c-c623b19b7928" title="Permalink to this equation">¶</a></span>\[\| \bp_{\Gamma \setminus \Omega} \|_2^2 
+\leq \| \bp_{\Omega \setminus \Gamma} \|_2^2
+\implies \| \bp_{\Gamma \setminus \Omega} \|_2 
+\leq \| \bp_{\Omega \setminus \Gamma} \|_2.\]</div>
+</li>
+<li><p>For both <span class="math notranslate nohighlight">\(\Gamma \setminus \Omega\)</span> and <span class="math notranslate nohighlight">\(\Omega \setminus \Gamma\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[
+    | \Gamma \setminus \Omega | 
+    \leq 2 K \; \text{ and } \; 
+    |\Omega \setminus \Gamma| \leq 2 K.
+    \]</div>
+</li>
+<li><p>The worst case happens when both sets are totally disjoint.</p></li>
+<li><p>Let us first examine the R.H.S and find an upper bound for it.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \| \bp_{\Omega \setminus \Gamma} \|_2 
+     &amp;= \| \Phi_{\Omega \setminus \Gamma}^H \br \|_2  \\
+     &amp;= \| \Phi_{\Omega \setminus \Gamma}^H (\Phi \bd + \be) \|_2\\
+    &amp; \leq \| \Phi_{\Omega \setminus \Gamma}^H \Phi \bd \|_2 
+    + \| \Phi_{\Omega \setminus \Gamma}^H \be \|_2.
+    \end{split}\]</div>
+<p>At this juncture, its worthwhile to scan various results in
+<a class="reference internal" href="../ssm/rip.html#sec-ssm-rip"><span class="std std-ref">Restricted Isometry Property</span></a> since we are going to need
+many of them in the following steps.</p>
+</li>
+<li><p>Let us look at the term <span class="math notranslate nohighlight">\(\| \Phi_{\Omega \setminus \Gamma}^H \Phi \bd \|_2\)</span>.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\( |\Omega \setminus \Gamma| \leq 2K\)</span>.</p></li>
+<li><p>Further <span class="math notranslate nohighlight">\(\bd\)</span> is <span class="math notranslate nohighlight">\(2K\)</span> sparse and sits over <span class="math notranslate nohighlight">\(\Gamma\)</span>
+which is disjoint with  <span class="math notranslate nohighlight">\(\Omega \setminus \Gamma\)</span>.</p></li>
+<li><p>Together <span class="math notranslate nohighlight">\(|\Gamma \cup \Omega| \leq 4K\)</span>.</p></li>
+<li><p>A straightforward application of
+<a class="reference internal" href="../ssm/rip.html#cor:approximate_orthogonality_submatrix_vector">Corollary 12.5</a> gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_{\Omega \setminus \Gamma}^H \Phi \bd \|_2 
+    \leq \delta_{4K} \|  \bd  \|_2.
+   \]</div>
+</li>
+<li><p>Similarly using
+<a class="reference internal" href="../ssm/rip.html#lem:proj:rip:phi_phi_H_embedding_l2_norm_upper_bound">Theorem 12.56</a>
+we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_{\Omega \setminus \Gamma}^H \be \|_2 
+    \leq \sqrt{1 + \delta_{2K}} \| \be \|_2.
+    \]</div>
+</li>
+<li><p>Combining the two we get</p>
+<div class="math notranslate nohighlight" id="equation-eq-2d13b94b-2f02-4404-9808-e7484d697dae">
+<span class="eqno">(15.22)<a class="headerlink" href="#equation-eq-2d13b94b-2f02-4404-9808-e7484d697dae" title="Permalink to this equation">¶</a></span>\[\| \bp_{\Omega \setminus \Gamma} \|_2 
+\leq  \delta_{4K} \|  \bd  \|_2 + \sqrt{1 + \delta_{2K}} \| \be \|_2.\]</div>
+</li>
+<li><p>We now look at L.H.S. and find a lower bound for it.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \bp_{\Gamma \setminus \Omega} \|_2  
+    &amp;= \|  \Phi_{\Gamma \setminus \Omega}^H \br \|_2 \\
+     &amp;= \| \Phi_{\Gamma \setminus \Omega}^H (\Phi \bd + \be) \|_2.
+    \end{split}\]</div>
+</li>
+<li><p>We will split  <span class="math notranslate nohighlight">\(\bd\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+    \bd = \bd_{\Gamma \setminus \Omega} + \bd_{\Omega}.
+    \]</div>
+</li>
+<li><p>Further we will use a form of triangular inequality as</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba + \bb \| \geq \|\ba \| - \| \bb \|.
+    \]</div>
+</li>
+<li><p>We  expand L.H.S.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \| \Phi_{\Gamma \setminus \Omega}^H (\Phi \bd + \be) \|_2 
+    &amp;=  \| \Phi_{\Gamma \setminus \Omega}^H \left (\Phi \left ( \bd_{\Gamma \setminus \Omega} + \bd_{\Omega} \right) + \be \right) \|_2\\
+    &amp;\geq  \| \Phi_{\Gamma \setminus \Omega}^H \Phi \bd_{\Gamma \setminus \Omega} \|_2
+    - \| \Phi_{\Gamma \setminus \Omega}^H \Phi \bd_{\Omega} \|_2
+    - \| \Phi_{\Gamma \setminus \Omega}^H \be \|_2.
+    \end{split}\]</div>
+</li>
+<li><p>As before</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_{\Gamma \setminus \Omega}^H \Phi \bd_{\Gamma \setminus \Omega} \|_2 
+    = \| \Phi_{\Gamma \setminus \Omega}^H \Phi_{\Gamma \setminus \Omega} \bd_{\Gamma \setminus \Omega} \|_2.
+    \]</div>
+</li>
+<li><p>We can use the lower bound from
+<a class="reference internal" href="../ssm/rip.html#lem:proj:rip:phi_J_gram_embedding_l2_norm_bounds_range">Theorem 12.58</a>
+to give us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_{\Gamma \setminus \Omega}^H \Phi_{\Gamma \setminus \Omega} \bd_{\Gamma \setminus \Omega} \|_2 
+    \geq (1 - \delta_{2K}) \| \bd_{\Gamma \setminus \Omega} \|_2 
+    \]</div>
+<p>since <span class="math notranslate nohighlight">\(|\Gamma \setminus \Omega| \leq 2K \)</span>.</p>
+</li>
+<li><p>For the other two terms we need to find their upper bounds
+since they appear in negative sign.</p></li>
+<li><p>Applying <a class="reference internal" href="../ssm/rip.html#cor:approximate_orthogonality_submatrix_vector">Corollary 12.5</a> we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_{\Gamma \setminus \Omega}^H \Phi \bd_{\Omega} \|_2 
+    \leq \delta_{2K} \|  \bd\|_2.
+    \]</div>
+</li>
+<li><p>Again using <a class="reference internal" href="../ssm/rip.html#lem:proj:rip:phi_phi_H_embedding_l2_norm_upper_bound">Theorem 12.56</a>
+we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \Phi_{\Gamma \setminus \Omega}^H \be \|_2 
+    \leq \sqrt{1 + \delta_{2K}} \| \be \|_2.
+    \]</div>
+</li>
+<li><p>Putting the three bounds together, we get a lower bound for L.H.S.</p>
+<div class="math notranslate nohighlight" id="equation-eq-a8af1455-5b2b-4896-bfa5-b2861bfa28d0">
+<span class="eqno">(15.23)<a class="headerlink" href="#equation-eq-a8af1455-5b2b-4896-bfa5-b2861bfa28d0" title="Permalink to this equation">¶</a></span>\[\| \bp_{\Gamma \setminus \Omega} \|_2 
+\geq (1 - \delta_{2K}) \| \bd_{\Gamma \setminus \Omega} \|_2
+-  \delta_{2K} \|  \bd\|_2 - \sqrt{1 + \delta_{2K}} \| \be \|_2.\]</div>
+</li>
+<li><p>Finally plugging the upper bound from
+<a class="reference internal" href="#equation-eq-2d13b94b-2f02-4404-9808-e7484d697dae">(15.22)</a>
+and lower bound from <a class="reference internal" href="#equation-eq-a8af1455-5b2b-4896-bfa5-b2861bfa28d0">(15.23)</a>
+into <a class="reference internal" href="#equation-eq-d10d1d93-e8fb-4092-909c-c623b19b7928">(15.21)</a> we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; (1 - \delta_{2K}) \| \bd_{\Gamma \setminus \Omega} \|_2
+    -  \delta_{2K} \|  \bd\|_2 - \sqrt{1 + \delta_{2K}} \| \be \|_2 
+    \; \leq \; \delta_{4K} \|  \bd  \|_2 + \sqrt{1 + \delta_{2K}} \| \be \|_2\\
+    \implies &amp;  (1 - \delta_{2K}) \| \bd_{\Gamma \setminus \Omega} \|_2
+    \leq \left ( \delta_{2K} +   \delta_{4K} \right )\|  \bd  \|_2  
+    + 2 \sqrt{1 + \delta_{2K}} \| \be \|_2\\
+    \implies &amp;  \| \bd_{\Gamma \setminus \Omega} \|_2 \leq 
+    \frac{\left ( \delta_{2K} +   \delta_{4K} \right )\|  \bd  \|_2  
+    + 2 \sqrt{1 + \delta_{2K}} \| \be \|_2}
+    {1 - \delta_{2K}}.
+    \end{split}\]</div>
+</li>
+<li><p>This result is nice but there is a small problem.
+We would like to get rid of
+<span class="math notranslate nohighlight">\(\Gamma\)</span> from L.H.S. and get <span class="math notranslate nohighlight">\(\bd_{\Omega^c}\)</span> instead.</p></li>
+<li><p>Recall that</p>
+<div class="math notranslate nohighlight">
+\[
+    \Omega^c = (\Gamma \cap \Omega^c) \cup (\Gamma^c \cap \Omega^c)
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(\Gamma \cap \Omega^c\)</span> and <span class="math notranslate nohighlight">\(\Gamma^c \cap \Omega^c\)</span> are disjoint.</p>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \bd_{\Omega^c} = \bd_{\Gamma \cap \Omega^c} + \bd_{\Gamma^c \cap \Omega^c}.
+    \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bd\)</span> is <span class="math notranslate nohighlight">\(\bzero\)</span> on <span class="math notranslate nohighlight">\(\Gamma^c\)</span> (recall that <span class="math notranslate nohighlight">\(\Gamma = \supp(\bd)\)</span>), hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \bd_{\Gamma^c \cap \Omega^c} = \bzero.
+    \]</div>
+</li>
+<li><p>As a result</p>
+<div class="math notranslate nohighlight">
+\[
+    \bd_{\Omega^c} = \bd_{\Gamma \cap \Omega^c} = \bd_{\Gamma \setminus \Omega}.
+    \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight" id="equation-eq-4ed9419b-2635-4f10-b3c0-7cbb69928420">
+<span class="eqno">(15.24)<a class="headerlink" href="#equation-eq-4ed9419b-2635-4f10-b3c0-7cbb69928420" title="Permalink to this equation">¶</a></span>\[\| \bd_{\Omega^c} \|_2 
+\leq \frac{\left ( \delta_{2K} +   \delta_{4K} \right )\|  \bd  \|_2  
++ 2 \sqrt{1 + \delta_{2K}} \| \be \|_2}
+{1 - \delta_{2K}}.\]</div>
+</li>
+<li><p>Let us simplify this equation by using <span class="math notranslate nohighlight">\(\delta_{2K} \leq \delta_{4K} \leq 0.1\)</span>
+assumed at the beginning of the analysis.</p></li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    1 - \delta_{2K} \geq 0.9,\; 
+    \delta_{2K} + \delta_{4K} \leq 0.2, \; 
+    2 \sqrt{1 + \delta_{2K}} \leq 2 \sqrt{1.1} = 2.098.
+    \]</div>
+</li>
+<li><p>Thus we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bd_{\Omega^c} \|_2 \leq \frac{ 0.2\|  \bd  \|_2  + 2.098 \| \be \|_2}{.9}.
+    \]</div>
+</li>
+<li><p>Simplifying</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-cosamp-identification-analysis-recovery-error-bound">
+<span class="eqno">(15.25)<a class="headerlink" href="#equation-eq-greedy-cosamp-identification-analysis-recovery-error-bound" title="Permalink to this equation">¶</a></span>\[\| \bd_{\Omega^c} \|_2 \leq  0.223 \|  \bd  \|_2  + 2.331 \| \be \|_2.\]</div>
+</li>
+<li><p>This result tells us that in the absence of measurement noise, at least 78%
+of energy in the recovery error is indeed concentrated in the entries
+indexed by <span class="math notranslate nohighlight">\(\Omega\)</span>.</p></li>
+<li><p>Moreover, if the measurement noise is small compared to
+the size of recovery error, then
+this concentration continues to hold.</p></li>
+<li><p>Thus even if we don’t know <span class="math notranslate nohighlight">\(\Gamma\)</span> directly,
+<span class="math notranslate nohighlight">\(\Omega\)</span> is a close approximation for <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p></li>
+</ol>
+</div>
+<p>We summarize the analysis for the <em>identification</em> step in the following lemma.</p>
+<div class="proof lemma admonition" id="lem:greedy:cosamp:identification_proxy_support_energy_bound">
+<p class="admonition-title"><span class="caption-number">Lemma 15.2 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy RIP of order <span class="math notranslate nohighlight">\(4K\)</span> with <span class="math notranslate nohighlight">\(\delta_{4K} \leq 0.1\)</span>.
+At every iteration <span class="math notranslate nohighlight">\(k\)</span> in CoSaMP algorithm, let
+<span class="math notranslate nohighlight">\(\bd^{k - 1} = (\bx - \bz^{k - 1})\)</span> be the recovery error and
+<span class="math notranslate nohighlight">\(\bp  = \Phi^H \br^{k - 1}\)</span> be the signal proxy.
+The set <span class="math notranslate nohighlight">\(\Omega =  \supp(\bp|_{2K})\)</span>  contains at most <span class="math notranslate nohighlight">\(2K\)</span> indices and</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-cosamp-identification-proxy-support-energy-bound">
+<span class="eqno">(15.26)<a class="headerlink" href="#equation-eq-greedy-cosamp-identification-proxy-support-energy-bound" title="Permalink to this equation">¶</a></span>\[\| \bd^{k - 1}_{\Omega^c} \|_2 
+\leq  0.223 \|  \bd^{k - 1}  \|_2  + 2.331 \| \be \|_2.\]</div>
+<p>In other words, most of the energy in <span class="math notranslate nohighlight">\(\bd^{k - 1}\)</span> is concentrated
+in the entries indexed by <span class="math notranslate nohighlight">\(\Omega\)</span>
+when measurement noise is small.</p>
+</div>
+</div></div>
+<div class="section" id="support-merger">
+<h3><span class="section-number">15.4.2.2. </span>Support Merger<a class="headerlink" href="#support-merger" title="Permalink to this headline">¶</a></h3>
+<p>The next step in a CoSaMP iteration is support merger.
+Recalling from <a class="reference internal" href="#alg:greedy:cosamp:core_algorithm">Algorithm 15.4</a>,
+the step involves computing</p>
+<div class="math notranslate nohighlight">
+\[
+T = \Omega \cup \supp(\bz)
+\]</div>
+<p>i.e. we merge the support of current signal estimate <span class="math notranslate nohighlight">\(\bz\)</span> with the
+newly identified set of indices <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
+<div class="docutils">
+<p>In previous lemma we were able to show how well the recovery error
+is concentrated over the index set <span class="math notranslate nohighlight">\(\Omega\)</span>. But we didn’t establish
+anything concrete about how <span class="math notranslate nohighlight">\(\bx\)</span> is concentrated. In the support merger
+step, we will be able to show that <span class="math notranslate nohighlight">\(\bx\)</span> is highly concentrated over
+the index set <span class="math notranslate nohighlight">\(T\)</span>. For this we will need to find an upper bound
+on <span class="math notranslate nohighlight">\(\|\bx_{T^c}\|_2\)</span> i.e. the energy of entries in <span class="math notranslate nohighlight">\(\bx\)</span> which are
+not covered by <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<ol>
+<li><p>We recall that <span class="math notranslate nohighlight">\(|\Omega| \leq 2K\)</span> and since <span class="math notranslate nohighlight">\(\bz\)</span> is a
+<span class="math notranslate nohighlight">\(K\)</span>-sparse estimate of <span class="math notranslate nohighlight">\(\bx\)</span> hence
+<span class="math notranslate nohighlight">\(|\supp(\bz)| \leq K\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    |T | \leq 3K.
+    \]</div>
+</li>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+    T^c = \Omega^c \cap \supp(\bz)^c \subseteq \Omega^c.
+    \]</div>
+</li>
+<li><p>Further since <span class="math notranslate nohighlight">\(\supp(\bz) \subseteq T\)</span> hence <span class="math notranslate nohighlight">\(\bz_{T^c} = \bzero\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx_{T^c} =  (\bx - \bz)_{T^c} = \bd_{T^c}.
+    \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(T^c \subseteq \Omega^c\)</span> hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bd_{T^c} \|_2 \leq \| \bd_{\Omega^c} \|_2.
+    \]</div>
+</li>
+<li><p>Combining these facts we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx_{T^c} \|_2 = \| \bd_{T^c} \|_2 \leq \| \bd_{\Omega^c} \|_2.
+    \]</div>
+</li>
+<li><p>We summarize this analysis in following lemma.</p></li>
+</ol>
+<div class="proof lemma admonition" id="lem:greedy:cosamp:support_merger_x_omega_c_energy_bound">
+<p class="admonition-title"><span class="caption-number">Lemma 15.3 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Omega\)</span> be a set of at most <span class="math notranslate nohighlight">\(2K\)</span> entries.
+The set <span class="math notranslate nohighlight">\(T = \Omega \cup \supp(\bz^{k-1})\)</span> contains
+at most <span class="math notranslate nohighlight">\(3K\)</span> entries, and</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-cosamp-support-merger-x-omega-c-energy-bound">
+<span class="eqno">(15.27)<a class="headerlink" href="#equation-eq-greedy-cosamp-support-merger-x-omega-c-energy-bound" title="Permalink to this equation">¶</a></span>\[\| \bx_{T^c} \|_2 \leq \| \bd_{\Omega^c} \|_2.\]</div>
+</div>
+</div></div>
+<div class="docutils">
+<p>Note that this inequality says nothing about how <span class="math notranslate nohighlight">\(\Omega\)</span> is chosen.
+But we can use an
+upper bound on <span class="math notranslate nohighlight">\(\| \bd_{\Omega^c} \|_2\)</span>
+from <a class="reference internal" href="#lem:greedy:cosamp:identification_proxy_support_energy_bound">Lemma 15.2</a>
+to get an upper bound on <span class="math notranslate nohighlight">\(\| \bx_{T^c} \|_2\)</span>.</p>
+</div>
+</div>
+<div class="section" id="estimation">
+<h3><span class="section-number">15.4.2.3. </span>Estimation<a class="headerlink" href="#estimation" title="Permalink to this headline">¶</a></h3>
+<p>The next step is a least square estimate of <span class="math notranslate nohighlight">\(\bx\)</span> over the columns indexed by <span class="math notranslate nohighlight">\(T\)</span>. Recalling from <a class="reference internal" href="#alg:greedy:cosamp:core_algorithm">Algorithm 15.4</a>
+we compute</p>
+<div class="math notranslate nohighlight">
+\[
+\bb_T = \Phi_T^{\dag} \by =  \Phi_T^{\dag} (\Phi \bx + \be). 
+\]</div>
+<div class="docutils">
+<ol>
+<li><p>We also set <span class="math notranslate nohighlight">\(\bb_{T^c} = \bzero\)</span>.</p></li>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[
+    \bb = \bb_T + \bb_{T^c} = \bb_T.
+    \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(|T| \leq 3K\)</span>, <span class="math notranslate nohighlight">\(\bb\)</span> is a <span class="math notranslate nohighlight">\(3K\)</span>-sparse approximation of <span class="math notranslate nohighlight">\(\bx\)</span>.</p></li>
+<li><p>What we need here is a bound over the approximation error <span class="math notranslate nohighlight">\(\| \bx - \bb \|_2\)</span>.</p></li>
+<li><p>We have already obtained a bound on  <span class="math notranslate nohighlight">\(\| \bx_{T^c} \|_2\)</span>.</p></li>
+<li><p>If an upper bound on <span class="math notranslate nohighlight">\(\| \bx - \bb \|_2\)</span> depends on <span class="math notranslate nohighlight">\(\| \bx_{T^c} \|_2\)</span>
+and measurement noise <span class="math notranslate nohighlight">\(\|\be \|_2\)</span> that would be quite reasonable.</p></li>
+<li><p>We start with splitting <span class="math notranslate nohighlight">\(\bx\)</span> over <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(T^c\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx = \bx_T + \bx_{T^c}.
+    \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\supp(\bb) \subseteq T\)</span> hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx - \bb = \bx_T + \bx_{T^c} - \bb_T = (\bx_T - \bb_T) + \bx_{T^c}.
+    \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bb \|_2 \leq \| \bx_T - \bb_T \|_2 + \| \bx_{T^c} \|_2.
+    \]</div>
+</li>
+<li><p>We will now expand the term <span class="math notranslate nohighlight">\(\| \bx_T - \bb_T \|_2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx_T - \bb_T \|_2 = \| \bx_T -  \Phi_T^{\dag} (\Phi \bx + \be) \|_2
+    = \| \bx_T -  \Phi_T^{\dag} (\Phi \bx_T + \Phi \bx_{T^c} + \be) \|_2
+    \]</div>
+</li>
+<li><p>Now since <span class="math notranslate nohighlight">\(\Phi_T\)</span> is full column rank (since <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(3K\)</span>)
+hence <span class="math notranslate nohighlight">\(\Phi_T^{\dag} \Phi_T = \bI\)</span>.</p></li>
+<li><p>Also <span class="math notranslate nohighlight">\(\Phi \bx_T = \Phi_T \bx_T\)</span> (since column columns indexed by <span class="math notranslate nohighlight">\(T\)</span> are involved).</p></li>
+<li><p>This helps us cancel <span class="math notranslate nohighlight">\(\bx_T  - \Phi_T^{\dag} \Phi \bx_T\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx_T - \bb_T \|_2 
+    =   \| \Phi_T^{\dag} (\Phi \bx_{T^c} + \be) \|_2
+    \leq \| (\Phi_T^H \Phi_T)^{-1} \Phi_T^H \Phi \bx_{T^c} \|_2 
+    + \|  \Phi_T^{\dag} \be \|_2.
+    \]</div>
+</li>
+<li><p>Let us look at the terms on R.H.S. one by one.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv  = \Phi_T^H \Phi \bx_{T^c}\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \| (\Phi_T^H \Phi_T)^{-1} \Phi_T^H \Phi \bx_{T^c} \|_2 
+    = \| (\Phi_T^H \Phi_T)^{-1} \bv \|_2.
+    \]</div>
+</li>
+<li><p>This perfectly fits
+<a class="reference internal" href="../ssm/rip.html#lem:proj:rip:phi_J_gram_embedding_l2_norm_bounds_range">Theorem 12.58</a>
+with <span class="math notranslate nohighlight">\(|T| \leq 3K\)</span> giving us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| (\Phi_T^H \Phi_T)^{-1} \Phi_T \Phi \bx_{T^c} \|_2 
+    \leq \frac{1}{1 - \delta_{3K}} \|  \Phi_T^H \Phi \bx_{T^c}\|_2.
+    \]</div>
+</li>
+<li><p>Further, applying <a class="reference internal" href="../ssm/rip.html#cor:approximate_orthogonality_submatrix_vector">Corollary 12.5</a> we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \|  \Phi_T^H \Phi \bx_{T^c}\|_2 \leq \delta_{4K} \| \bx_{T^c}\|_2
+    \]</div>
+<p>since <span class="math notranslate nohighlight">\(|T \cup \supp(\bx)| \leq 4K\)</span>.</p>
+</li>
+<li><p>For the measurement noise term, applying
+<a class="reference internal" href="../ssm/rip.html#lem:proj:rip:phi_pseudo_inverse_embedding_l2_norm_upper_bound">Theorem 12.57</a>
+we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \|  \Phi_T^{\dag} \be \|_2 \leq \frac{1}{\sqrt{1 - \delta_{3K}}} \|\be \|_2.
+    \]</div>
+</li>
+<li><p>Combining the above inequalities we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bb \|_2 
+    \leq \left [1 +  \frac{\delta_{4K}}{1 - \delta_{3K}} \right ]  
+    \| \bx_{T^c}\|_2 +  \frac{1}{\sqrt{1 - \delta_{3K}}} \|\be \|_2.
+    \]</div>
+</li>
+<li><p>Recalling our assumption that <span class="math notranslate nohighlight">\(\delta_{3K} \leq \delta_{4K} \leq 0.1\)</span>
+we can simplify the constants to get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bb \|_2 \leq 1.112 \| \bx_{T^c}\|_2  + 1.0541 \| \be \|_2.
+    \]</div>
+</li>
+</ol>
+</div>
+<p>We summarize the analysis in this step in the following lemma.</p>
+<div class="proof lemma admonition" id="lem:greedy:cosamp:estimation_x_omega_c_energy_bound">
+<p class="admonition-title"><span class="caption-number">Lemma 15.4 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(T\)</span> be a set of at most <span class="math notranslate nohighlight">\(3K\)</span> indices,
+and define the least squares signal estimate <span class="math notranslate nohighlight">\(\bb\)</span> by the formula</p>
+<div class="math notranslate nohighlight">
+\[
+    \bb_T = \Phi_T^{\dag} \by 
+    =  \Phi_T^{\dag} (\Phi \bx + \be) \; \text{ and } 
+    \bb_{T^c} = \bzero. 
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(4K\)</span> with <span class="math notranslate nohighlight">\(\delta_{4K} \leq 0.1\)</span>
+then the following holds</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \bb \|_2 \leq 1.112 \| \bx_{T^c}\|_2  + 1.0541 \| \be \|_2.
+\]</div>
+</div>
+</div><p>Note that the lemma doesn’t make any assumptions about
+how <span class="math notranslate nohighlight">\(T\)</span> is arrived at except that <span class="math notranslate nohighlight">\(|T| \leq 3K\)</span>.
+Also, this analysis assumes that the least squares solution
+is of infinite precision given by <span class="math notranslate nohighlight">\(\Phi_T^{\dag} \by\)</span>.
+The approximation error in an iterative least squares solution
+needs to be separately analyzed to identify
+the number of required steps so that the least squares error is negligible.</p>
+</div>
+<div class="section" id="pruning">
+<h3><span class="section-number">15.4.2.4. </span>Pruning<a class="headerlink" href="#pruning" title="Permalink to this headline">¶</a></h3>
+<p>The last step in the main loop of CoSaMP
+(<a class="reference internal" href="#alg:greedy:cosamp:core_algorithm">Algorithm 15.4</a>) is pruning.</p>
+<div class="docutils">
+<p>We compute</p>
+<div class="math notranslate nohighlight">
+\[
+\bz^k = \bb|_K
+\]</div>
+<p>as the next estimate of <span class="math notranslate nohighlight">\(\bx\)</span> by picking the <span class="math notranslate nohighlight">\(K\)</span> largest entries in <span class="math notranslate nohighlight">\(\bb\)</span>.</p>
+<ol>
+<li><p>We note that both <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\bb|_K\)</span> can be
+regarded as <span class="math notranslate nohighlight">\(K\)</span> term approximations of <span class="math notranslate nohighlight">\(\bb\)</span>.</p></li>
+<li><p>As established in <a class="reference internal" href="../ssm/srr.html#lem:ssm:best_k_term_approximation">Theorem 12.17</a>,
+<span class="math notranslate nohighlight">\(\bb|_K\)</span> is the best <span class="math notranslate nohighlight">\(K\)</span>-term approximation of <span class="math notranslate nohighlight">\(\bb\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bb - \bb|_K \|_2 \leq \|\bb - \bx \|_2.
+    \]</div>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx  - \bz^k \|_2 = \| \bx -\bb + \bb -  \bb|_K \|_2 
+    \leq \| \bx - \bb \|_2 +   \| \bb - \bb|_K \|_2 \leq  2 \| \bx - \bb \|_2.
+    \]</div>
+</li>
+<li><p>This helps us establish that although the <span class="math notranslate nohighlight">\(3K\)</span>-sparse approximation
+<span class="math notranslate nohighlight">\(\bb\)</span> is closer to <span class="math notranslate nohighlight">\(\bx\)</span> compared to
+<span class="math notranslate nohighlight">\(\bb|_K\)</span>, but <span class="math notranslate nohighlight">\(\bb|_K\)</span> is also not too bad approximation of <span class="math notranslate nohighlight">\(\bx\)</span>
+while using only <span class="math notranslate nohighlight">\(K\)</span> entries at most.</p></li>
+</ol>
+</div>
+<p>We summarize it in following lemma.</p>
+<div class="proof lemma admonition" id="lem:greedy:cosamp:pruning_bound">
+<p class="admonition-title"><span class="caption-number">Lemma 15.5 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>The pruned estimate <span class="math notranslate nohighlight">\(\bz^k = \bb|_K\)</span> satisfies</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-cosamp-pruning-bound">
+<span class="eqno">(15.28)<a class="headerlink" href="#equation-eq-greedy-cosamp-pruning-bound" title="Permalink to this equation">¶</a></span>\[\| \bx - \bz^k \|_2 = \| \bx - \bb|_K \|_2 \leq 2 \| \bx  - \bb \|_2.\]</div>
+</div>
+</div></div>
+<div class="section" id="the-cosamp-iteration-invariant">
+<h3><span class="section-number">15.4.2.5. </span>The CoSaMP Iteration Invariant<a class="headerlink" href="#the-cosamp-iteration-invariant" title="Permalink to this headline">¶</a></h3>
+<p>Having analyzed each of the steps in the main loop of CoSaMP algorithm,
+it is time  for us to combine the analysis.
+Concretely, we wish to establish how much
+progress CoSaMP makes in each iteration.
+Following theorem provides an upper bound
+on how the recovery error changes from one iteration to next iteration.
+This  theorem is known as the iteration invariant for the sparse case.</p>
+<div class="proof theorem admonition" id="thm:greedy:cosamp:iteration_invariant_sparse_case">
+<p class="admonition-title"><span class="caption-number">Theorem 15.4 </span> (CoSaMP iteration invariant for exact sparse recovery)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Assume that <span class="math notranslate nohighlight">\(\bx\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse.
+Assume that <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(4K\)</span> with <span class="math notranslate nohighlight">\(\delta_{4K} \leq 0.1\)</span>.
+For each iteration number <span class="math notranslate nohighlight">\(k \geq 1\)</span>, the signal estimate
+<span class="math notranslate nohighlight">\(\bz^k\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse and satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \bz^{k} \|_2 \leq \frac{1}{2} \| \bx - \bz^{k-1} \|_2 + 7.5 \|\be \|_2.
+\]</div>
+<p>In particular</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx  - \bz^{k} \|_2 \leq 2^{-k} \| \bx \|_2 + 15 \| \be \|_2.
+\]</div>
+</div>
+</div><p>This theorem helps us establish that if measurement noise is small,
+then the algorithm makes substantial progress in each iteration.
+The proof makes use of the lemmas developed above.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. We run the proof in backtracking mode.
+We start from <span class="math notranslate nohighlight">\(\bz^{k}\)</span> and go back step by step
+through pruning, estimation, support merger, and identification
+to connect it with <span class="math notranslate nohighlight">\(\bz^{k-1}\)</span>.</p>
+<ol>
+<li><p>From <a class="reference internal" href="#lem:greedy:cosamp:pruning_bound">Lemma 15.5</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bz^k \|_2  = \| \bx - \bb|_K \|_2 \leq 2 \| \bx  - \bb \|_2.
+    \]</div>
+</li>
+<li><p>Applying <a class="reference internal" href="#lem:greedy:cosamp:estimation_x_omega_c_energy_bound">Lemma 15.4</a>
+for the least squares estimation step gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    2 \| \bx - \bb \|_2 \leq 2 \cdot (1.112 \| \bx_{T^c}\|_2  + 1.0541 \| \be \|_2)
+    = 2.224 \| \bx_{T^c}\|_2  + 2.1082 \| \be \|_2.
+    \]</div>
+</li>
+<li><p><a class="reference internal" href="#lem:greedy:cosamp:support_merger_x_omega_c_energy_bound">Lemma 15.3</a> (Support merger)
+tells us that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx_{T^c} \|_2 \leq \| \bd^{k - 1}_{\Omega^c} \|_2.
+    \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bz^k \|_2 
+    \leq 2.224  \| \bd^{k - 1}_{\Omega^c} \|_2  + 2.1082 \| \be \|_2.
+    \]</div>
+</li>
+<li><p>From identification step we have
+<a class="reference internal" href="#lem:greedy:cosamp:identification_proxy_support_energy_bound">Lemma 15.2</a></p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bd^{k - 1}_{\Omega^c} \|_2 
+    \leq  0.223 \|  \bd^{k - 1}  \|_2  + 2.331 \| \be \|_2.
+    \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \bx - \bz^k \|_2  
+    &amp;\leq 2.224  \left ( 0.223 \|  \bd^{k - 1}  \|_2  
+        + 2.331 \| \be \|_2 \right )   + 2.1082 \| \be \|_2\\
+    &amp;\leq 0.5 \|  \bd^{k - 1}  \|_2 + 7.5 \| \be \|_2\\
+    &amp;= \frac{1}{2} \|  \bx - \bz^{k - 1}  \|_2 + 7.5 \| \be \|_2.
+    \end{split}\]</div>
+<p>The constants have been simplified to make them look better.</p>
+</li>
+<li><p>For the 2nd result in this theorem, we add up the error at each stage as</p>
+<div class="math notranslate nohighlight">
+\[
+    (1 + 2^{-1} + 2^{-2} + \dots + 2^{-(k-1)}) 7.5 \| \be \|_2 
+    \leq 2 \cdot 7.5 \| \be\|_2 = 15 \| \be \|_2.
+    \]</div>
+</li>
+<li><p>At <span class="math notranslate nohighlight">\(k=1\)</span> we have <span class="math notranslate nohighlight">\(\bz^0 = \bzero\)</span>.</p></li>
+<li><p>This gives us the result</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx  - \bz^{k} \|_2 \leq 2^{-k} \| \bx \|_2 + 15 \| \be \|_2.
+    \]</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="cosamp-analysis-general-case">
+<h2><span class="section-number">15.4.3. </span>CoSaMP Analysis General Case<a class="headerlink" href="#cosamp-analysis-general-case" title="Permalink to this headline">¶</a></h2>
+<p>Having completed the analysis for the sparse case
+(where the signal <span class="math notranslate nohighlight">\(\bx\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse) it is time
+for us to generalize the analysis for the case where
+<span class="math notranslate nohighlight">\(\bx\)</span> is assumed to be an arbitrary signal in <span class="math notranslate nohighlight">\(\CC^N\)</span>.
+Although it may look hard at first sight but there is a
+simple way to transform the problem
+into the problem of CoSaMP for the sparse case.</p>
+<ol class="simple">
+<li><p>We decompose <span class="math notranslate nohighlight">\(\bx\)</span> into its <span class="math notranslate nohighlight">\(K\)</span>-sparse
+approximation and the approximation error.</p></li>
+<li><p>Further, we absorb the approximation error term
+into the measurement error term.</p></li>
+<li><p>Since sparse case analysis is applicable
+for an arbitrary measurement error,
+this approach gives us an upper bound on the performance
+of CoSaMP over arbitrary signals.</p></li>
+</ol>
+<hr class="docutils" />
+<div class="docutils">
+<ol>
+<li><p>We start with writing</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx = \bx - \bx|_K + \bx|_K
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bx|_K\)</span> is the best <span class="math notranslate nohighlight">\(K\)</span>-term approximation of <span class="math notranslate nohighlight">\(\bx\)</span>
+(<a class="reference internal" href="../ssm/srr.html#lem:ssm:best_k_term_approximation">Theorem 12.17</a>).</p>
+</li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \by =  \Phi \bx + \be  
+    = \Phi (\bx - \bx|_K + \bx|_K)  + \be 
+    = \Phi \bx|_K + \Phi (\bx - \bx|_K)  + \be.
+    \]</div>
+</li>
+<li><p>We define</p>
+<div class="math notranslate nohighlight">
+\[
+    \widehat{\be} = \Phi (\bx - \bx|_K)  + \be.
+   \]</div>
+</li>
+<li><p>This lets us write</p>
+<div class="math notranslate nohighlight">
+\[
+    \by = \Phi \bx|_K  + \widehat{\be}.
+   \]</div>
+</li>
+<li><p>In this formulation, the problem is equivalent to recovering
+the <span class="math notranslate nohighlight">\(K\)</span>-sparse signal <span class="math notranslate nohighlight">\(\bx|_K\)</span> from
+the measurement vector <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+<li><p>The results of <a class="reference internal" href="#sec-greedy-cosamp-sparse-case-analysis"><span class="std std-ref">CoSaMP Analysis Sparse Case</span></a>
+and in particular the iteration invariant
+<a class="reference internal" href="#thm:greedy:cosamp:iteration_invariant_sparse_case">Theorem 15.4</a>
+apply directly.</p></li>
+<li><p>The remaining problem is to estimate the norm of modified
+error <span class="math notranslate nohighlight">\(\widehat{\be}\)</span>.</p></li>
+<li><p>We have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \widehat{\be} \|_2 
+    = \| \Phi (\bx - \bx|_K)  + \be \|_2 
+    \leq \| \Phi (\bx - \bx|_K) \|_2 + \|\be \|_2.
+    \]</div>
+</li>
+<li><p>Another result for RIP on the energy bound of embedding of
+arbitrary signals from <a class="reference internal" href="../ssm/rip.html#thm:proj:rip:arbitrary_signal_energy_bound">Theorem 12.67</a> gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \|  \Phi (\bx - \bx|_K)\|_2 
+    \leq  \sqrt{ 1 + \delta_K} 
+    \left [  \| \bx - \bx|_K \|_2 + \frac{1}{\sqrt{K}} 
+    \| \bx - \bx|_K \|_1 \right ].
+    \]</div>
+</li>
+<li><p>Thus we have an upper bound on <span class="math notranslate nohighlight">\(\|\widehat{\be} \|_2\)</span>
+given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \widehat{\be} \|_2 
+    \leq \sqrt{ 1 + \delta_K} 
+    \left [  \| \bx - \bx|_K \|_2 + \frac{1}{\sqrt{K}} 
+    \| \bx - \bx|_K \|_1 \right ] +  \|\be \|_2.
+    \]</div>
+</li>
+<li><p>Since we have assumed throughout that <span class="math notranslate nohighlight">\(\delta_{4K} \leq 0.1\)</span>,
+it gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \widehat{\be} \|_2 
+    \leq 1.05 \left [  \| \bx - \bx|_K \|_2 
+    + \frac{1}{\sqrt{K}} \| \bx - \bx|_K \|_1 \right ] 
+    +  \|\be \|_2.
+    \]</div>
+</li>
+<li><p>This inequality is able to combine measurement error
+and approximation error into a single expression.</p></li>
+<li><p>To fix ideas further, we define the notion of
+unrecoverable energy in CoSaMP.</p></li>
+</ol>
+</div>
+<div class="proof definition admonition" id="def:greedy:cosamp:unrecoverable_energy">
+<p class="admonition-title"><span class="caption-number">Definition 15.2 </span> (Unrecoverable energy)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <em>unrecoverable energy</em> in CoSaMP algorithm is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\nu =  \left [  \| \bx - \bx|_K \|_2 + 
+\frac{1}{\sqrt{K}} \| \bx - \bx|_K \|_1 \right ] +  \|\be \|_2.
+\]</div>
+<p>This quantity measures the baseline error in the CoSaMP recovery consisting of measurement error and approximation error.</p>
+</div>
+</div><div class="docutils">
+<p>It is obvious that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \widehat{\be} \|_2 \leq 1.05 \nu.
+\]</div>
+</div>
+<p>We summarize this analysis in following lemma.</p>
+<div class="proof lemma admonition" id="lem:greedy:cosamp:reduction_sparse_case">
+<p class="admonition-title"><span class="caption-number">Lemma 15.6 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> be an arbitrary signal.
+Let <span class="math notranslate nohighlight">\(\bx|_K\)</span> be its best <span class="math notranslate nohighlight">\(K\)</span>-term approximation.
+The measurement vector <span class="math notranslate nohighlight">\(\by = \Phi \bx + \be\)</span>
+can be expressed as <span class="math notranslate nohighlight">\(\by = \Phi \bx|_K + \widehat{\be}\)</span>
+where</p>
+<div class="math notranslate nohighlight">
+\[
+\| \widehat{\be} \|_2 
+\leq 1.05 \left [  \| \bx - \bx|_K \|_2 
++ \frac{1}{\sqrt{K}} \| \bx - \bx|_K \|_1 \right ] 
++  \|\be \|_2 \leq 1.05 \nu.
+\]</div>
+</div>
+</div><p>We now move ahead with the development of the
+iteration invariant for the general case.</p>
+<div class="docutils">
+<ol>
+<li><p>Invoking <a class="reference internal" href="#thm:greedy:cosamp:iteration_invariant_sparse_case">Theorem 15.4</a>
+for the iteration invariant for recovery of a sparse signal gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx|_K - \bz^{k} \|_2 
+    \leq \frac{1}{2} \| \bx|_K - \bz^{k-1} \|_2 
+    + 7.5 \|\widehat{\be} \|_2.
+    \]</div>
+</li>
+<li><p>What remains is to generalize this inequality for the
+arbitrary signal <span class="math notranslate nohighlight">\(\bx\)</span> itself.</p></li>
+<li><p>We can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx|_K - \bx + \bx - \bz^{k} \|_2 
+    \leq \frac{1}{2} \| \bx|_K  - \bx + \bx - \bz^{k-1} \|_2 
+    + 7.5 \|\widehat{\be} \|_2.
+    \]</div>
+</li>
+<li><p>We simplify L.H.S. as</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx|_K - \bx + \bx - \bz^{k} \|_2 
+    = \|(\bx - \bz^{k}) - (\bx - \bx|_K)\|_2 
+    \geq \| \bx - \bz^{k} \|_2 - \|\bx - \bx|_K \|_2.
+    \]</div>
+</li>
+<li><p>On the R.H.S. we expand as</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx|_K  - \bx + \bx - \bz^{k-1} \|_2 
+    \leq \|  \bx - \bz^{k-1} \|_2 + \|\bx - \bx|_K \|_2.
+    \]</div>
+</li>
+<li><p>Combining the two we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bz^{k} \|_2 
+    \leq 0.5  \|  \bx - \bz^{k-1} \|_2 
+    + 1.5 \|\bx - \bx|_K \|_2 +  7.5 \|\widehat{\be} \|_2.
+    \]</div>
+</li>
+<li><p>Putting the estimate of <span class="math notranslate nohighlight">\(\|\widehat{\be}\|_2\)</span> from
+<a class="reference internal" href="#lem:greedy:cosamp:reduction_sparse_case">Lemma 15.6</a>
+we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bz^{k} \|_2 
+    \leq 0.5  \|  \bx - \bz^{k-1} \|_2 
+    + 9.375 \|\bx - \bx|_K \|_2 
+    +  \frac{7.875}{\sqrt{K}}\| \bx - \bx|_K \|_1 
+    +  7.5 \|\be \|_2.
+    \]</div>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; 9.375 \|\bx - \bx|_K \|_2 
+    +  \frac{7.875}{\sqrt{K}}\| \bx - \bx|_K \|_1 
+    +  7.5 \|\be \|_2 \\
+    &amp; \leq
+    10 \left (\left [  \| \bx - \bx|_K \|_2 
+        + \frac{1}{\sqrt{K}} \| \bx - \bx|_K \|_1 \right ] 
+        +  \|\be \|_2 \right ).
+    \end{split}\]</div>
+</li>
+<li><p>Thus we write a simplified expression</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx - \bz^{k} \|_2 
+    \leq 0.5  \|  \bx - \bz^{k-1} \|_2  + 10 \nu
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(\nu\)</span> is the unrecoverable energy (<a class="reference internal" href="#def:greedy:cosamp:unrecoverable_energy">Definition 15.2</a>).</p>
+</li>
+</ol>
+</div>
+<p>We can summarize the analysis for the general case in the following theorem.</p>
+<div class="proof theorem admonition" id="thm:greedy:cosamp:iteration_invariant_general_case">
+<p class="admonition-title"><span class="caption-number">Theorem 15.5 </span> (CoSaMP iteration invariant for general signal recovery)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Assume that <span class="math notranslate nohighlight">\(\Phi\)</span> satisfies RIP of order <span class="math notranslate nohighlight">\(4K\)</span>
+with <span class="math notranslate nohighlight">\(\delta_{4K} \leq 0.1\)</span>.
+For each iteration number <span class="math notranslate nohighlight">\(k \geq 1\)</span>, the signal estimate
+<span class="math notranslate nohighlight">\(\bz^k\)</span> is <span class="math notranslate nohighlight">\(K\)</span>-sparse and satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx - \bz^{k} \|_2 
+\leq \frac{1}{2} \| \bx - \bz^{k-1} \|_2 + 10 \nu.
+\]</div>
+<p>In particular</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-cosamp-iteration-invariant-general-case-invariant">
+<span class="eqno">(15.29)<a class="headerlink" href="#equation-eq-greedy-cosamp-iteration-invariant-general-case-invariant" title="Permalink to this equation">¶</a></span>\[\| \bx  - \bz^{k} \|_2 
+\leq 2^{-k} \| \bx \|_2 + 20 \nu.\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. 1st result was developed in the development before the theorem.
+For the 2nd result in this theorem, we add up the error
+at each stage as</p>
+<div class="math notranslate nohighlight">
+\[
+(1 + 2^{-1} + 2^{-2} + \dots + 2^{-(k-1)}) 10 \nu 
+\leq 2 \cdot 10 \nu = 20 \nu.
+\]</div>
+<p>At <span class="math notranslate nohighlight">\(k=1\)</span> we have <span class="math notranslate nohighlight">\(\bz^0 = \bzero\)</span>. This gives us the result.</p>
+</div>
+<div class="section" id="snr-analysis">
+<h3><span class="section-number">15.4.3.1. </span>SNR Analysis<a class="headerlink" href="#snr-analysis" title="Permalink to this headline">¶</a></h3>
+<div class="docutils">
+<ol>
+<li><p>A sensible though unusual definition of <em>signal-to-noise ratio</em>
+(as proposed in <span id="id2">[<a class="reference internal" href="../bib.html#id109" title="Deanna Needell and Joel A Tropp. Cosamp: iterative signal recovery from incomplete and inaccurate samples. Applied and Computational Harmonic Analysis, 26(3):301–321, 2009.">28</a>]</span>)
+is as follows</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-cosamp-snr">
+<span class="eqno">(15.30)<a class="headerlink" href="#equation-eq-greedy-cosamp-snr" title="Permalink to this equation">¶</a></span>\[\SNR = 10 \log \left ( \frac{\| \bx \|_2 }{ \nu}\right ).\]</div>
+</li>
+<li><p>The whole of unrecoverable energy is treated as noise.</p></li>
+<li><p>The signal <span class="math notranslate nohighlight">\(\ell_2\)</span> norm rather than its square is
+being treated as the measure of its energy.
+This is the unusual part.</p></li>
+<li><p>Yet the way <span class="math notranslate nohighlight">\(\nu\)</span> has been developed,
+this definition is quite sensible.</p></li>
+<li><p>Further we define the <em>reconstruction SNR</em> or <em>recovery SNR</em>
+as the ratio between signal energy and recovery error energy.</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-cosamp-r-snr">
+<span class="eqno">(15.31)<a class="headerlink" href="#equation-eq-greedy-cosamp-r-snr" title="Permalink to this equation">¶</a></span>\[ \RSNR = 10 \log 
+ \left ( \frac{\| \bx \|_2 }{ \| \bx - \bz \|_2 }\right ).\]</div>
+</li>
+<li><p>Both <span class="math notranslate nohighlight">\(\SNR\)</span> and <span class="math notranslate nohighlight">\(\RSNR\)</span> are expressed in dB.</p></li>
+<li><p>Certainly we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \RSNR \leq \SNR.
+   \]</div>
+</li>
+<li><p>Let us look closely at the iteration invariant</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx  - \bz^{k} \|_2 \leq 2^{-k} \| \bx \|_2 + 20 \nu.
+    \]</div>
+</li>
+<li><p>In the initial iterations,
+<span class="math notranslate nohighlight">\(2^{-k} \| \bx \|_2\)</span> term dominates in the R.H.S.</p></li>
+<li><p>Assuming</p>
+<div class="math notranslate nohighlight">
+\[
+    2^{-k} \| \bx \|_2 \geq 20 \nu
+    \]</div>
+<p>we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx  - \bz^{k} \|_2 \leq 2 \cdot 2^{-k} \| \bx \|_2.
+    \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp; \| \bx  - \bz^{k} \|_2 
+\leq 2^{-k + 1} \| \bx \|_2 \\
+\implies &amp; \frac{\| \bx \|_2 }{ \| \bx - \bz \|_2 } 
+\geq 2^{k-1}\\
+\implies &amp; \RSNR \geq 10 (k-1) \log 2 
+\geq 3 k - 3.\end{split}\]</div>
+</li>
+<li><p>In the later iterations, the <span class="math notranslate nohighlight">\(20\nu\)</span> term dominates
+in the R.H.S.</p></li>
+<li><p>Assuming</p>
+<div class="math notranslate nohighlight">
+\[
+    2^{-k} \| \bx \|_2 \leq 20 \nu
+    \]</div>
+<p>we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx  - \bz^{k} \|_2 \leq 2 \cdot 20 \nu = 40 \nu.
+    \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp; \| \bx  - \bz^{k} \|_2 \leq  40 \nu\\
+\implies &amp; \frac{\| \bx \|_2 }{ \| \bx - \bz \|_2 } 
+\geq \frac{1}{40} \frac{\| \bx \|_2 }{ \nu }\\
+\implies &amp; \RSNR \geq \SNR - 10 \log 40 
+\geq \SNR - 16 = \SNR - 13 - 3.\end{split}\]</div>
+</li>
+<li><p>We combine these two results into the following</p>
+<div class="math notranslate nohighlight" id="equation-eq-greedy-cosamp-r-snr-lower-bound">
+<span class="eqno">(15.32)<a class="headerlink" href="#equation-eq-greedy-cosamp-r-snr-lower-bound" title="Permalink to this equation">¶</a></span>\[\RSNR \geq \min\{ 3 k, \SNR - 13 \} - 3.\]</div>
+</li>
+<li><p>This result tells us that in the
+initial iterations the reconstruction SNR keeps
+improving by <span class="math notranslate nohighlight">\(3\)</span>dB per iteration till
+it hits the noise floor given by <span class="math notranslate nohighlight">\(\SNR - 16\)</span> dB.</p></li>
+<li><p>Thus roughly the number of iterations required
+for converging to the noise floor is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    k \approx \frac{\SNR - 13}{3}.
+    \]</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./sparse_recovery"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="omp_cs.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">15.3. </span>Orthogonal Matching Pursuit</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../diclearn/ch_diclearn.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Dictionary Learning</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

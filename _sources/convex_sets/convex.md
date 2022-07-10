@@ -12,6 +12,8 @@ It is also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$.
 
 ## Line Segments
 
+```{index} Line segment
+```
 ```{prf:definition} Line segment
 :label: def-line-segment
 
@@ -49,6 +51,8 @@ $$
 ## Convex Sets
 
 
+```{index} Convex set
+```
 ````{prf:definition} Convex set
 :label: def-convex-set
 
@@ -65,6 +69,14 @@ The empty set is vacuously convex.
 The entire vector space  $\VV$ is convex
 since it contains all the line segments between
 any pair of points in the space.
+
+```{figure} images/pic_convex_sets.png
+---
+name: cvx:convex:sets:examples
+---
+Examples of convex sets
+```
+
 
 ```{prf:observation}
 Since a convex set contains the line segment between any
@@ -156,8 +168,105 @@ Thus, $\bx + (1 - t) \by \in H_+$.
 Analogous proofs apply for other types of half spaces.
 ```
 
+
+```{prf:theorem} Convex set as convex combination of itself
+:label: res-cvx-convex-set-self-combination
+
+Let $C$ be a nonempty subset of $\VV$.
+If $C$ is convex then for every $t_1, t_2 \geq 0$, we have
+
+$$
+(t_1 + t_2) C = t_1 C + t_2 C.
+$$
+
+In particular, if $t_1, t_2 \geq 0$ such that $t_1 + t_2 = 1$, then
+
+$$
+C = t_1 C + t_2 C.
+$$
+```
+
+```{prf:proof}
+The statement $(t_1 + t_2) C \subseteq t_1 C + t_2 C$ is valid even for sets which are not convex.
+1. Let $\bx \in t_1 + t_2) C$.
+1. Then there exist $\by \in C$ such that $\bx = t_1 \by + t_2 \by$.
+1. Hence $t_1 \by \in t_1 C$ and $t_2 \by \in t_2 C$.
+1. Hence $\bx = t_1 \by + t_2 \by \in t_1 C + t_2 C$.
+
+
+We now show the converse.
+
+1. Let $\bx \in  t_1 C + t_2 C$.
+1. Then there exist $\bx_1, \bx_2 \in C$ such that
+
+   $$
+   \bx = t_1 \bx_1 + t_2 \bx_2.
+   $$
+1. If $t_1 = t_2 = 0$, then $\bx = 0$ and $\bx \in (0 + 0) C$.
+1. Now assume that $t_1 + t_2 > 0$.
+1. By the convexity of $C$,
+
+   $$
+   \by = \frac{t_1}{t_1 + t_2} \bx_1 + \frac{t_2}{t_1 + t_2} \bx_2 \in C. 
+   $$
+1. Hence  $\bx = (t_1 + t_2) \by \in (t_1 + t_2) C$.
+1. Hence $t_1 C + t_2 C \subseteq (t_1 + t_2) C$.
+
+Together, we have
+
+$$
+(t_1 + t_2) C = t_1 C + t_2 C.
+$$
+```
+
+
+```{prf:theorem} Convex set as union of line segments
+:label: res-cvx-convex-set-union-line-segments
+
+Let $C$ be a convex subset of $\VV$.
+Then $C$ is the union of all the closed line
+segments connecting the points of the set.
+In other words
+
+$$
+C  = \bigcup_{\bx, \by \in C} [\bx, \by].
+$$
+```
+
+```{prf:proof}
+Let $D = \bigcup_{\bx, \by \in C} [\bx, \by]$.
+
+If $C$ is empty, then $D$ is also empty. Hence there is nothing to prove.
+If $C = \{ \bx \}$ is a singleton, then $D$ consists of the union of a single line segment
+
+$$
+[\bx, \bx] = \{ \bx \}.
+$$
+So $C = D$.
+We now consider the case where $C$ consists of more than one point.
+
+We first show that $C \subseteq D$.
+
+1. Let $\bx \in C$.
+1. Then $[\bx, \bx] = \{ \bx \}$ is a line segment of $C$.
+1. Hence $\bx \in [\bx, \bx] \subseteq D$.
+1. Hence $C \subseteq D$.
+
+We now show the converse.
+
+1. Let $\bz \in D$.
+1. Then there exists $\bx, \by \in C$ such that $\bz \in [\bx, \by]$.
+1. Then by convexity of $C$, $[\bx, \by] \subseteq C$.
+1. Hence $\bz \in [\bx, \by] \subseteq C$.
+1. Hence $D \subseteq C$.
+
+Together, $C = D$.
+```
+
 ## Rays
 
+```{index} Ray
+```
 ```{prf:definition} Ray
 :label: def-convex-ray
 
@@ -288,6 +397,8 @@ $$
 ## Convex Combinations
 
 
+```{index} Convex combination
+```
 ````{prf:definition} Convex combination
 :label: def-convex-combination
 
@@ -454,6 +565,8 @@ is a convex combination of points of $S$.
 
 ## Convex Hull
 
+```{index} Convex hull
+```
 ````{prf:definition} Convex hull
 :label: def-convex-hull
 
@@ -464,10 +577,17 @@ $$
     \ConvexHull(S) = \{ \theta_1 \bx_1 + \dots + \theta_k \bx_k | \bx_k \in S, \theta_i \geq 0, i = 1,\dots, k,
     \theta_1 + \dots + \theta_k = 1\}.
 $$
-
 ````
 
-````{prf:theorem}
+```{figure} images/pic_convex_hull_random_2d_points.png
+---
+name: cvx:set:convex:hull:random:points
+---
+The convex hull of a set of random points on the 2D plane
+```
+
+
+````{prf:property} Convexity of convex hull
 :label: res-cvx-convex-hull-convex
 
 The convex hull $\ConvexHull(S)$ of a set $S$ is always convex.
@@ -488,6 +608,42 @@ We need to show that $\bz \in \ConvexHull(S)$.
 1. Hence, $\bz \in \ConvexHull(S)$.
 1. Thus, $\ConvexHull(S)$ is convex.
 ```
+
+```{prf:property} Affine hull of convex hull
+:label: res-cvx-convex-hull-affine-hull
+Let $\VV$ be a finite dimensional real vector space.
+Let $S$ be a nonempty subset of $\VV$. Let $C = \convex(S)$.
+Then
+
+$$
+\affine S = \affine C.
+$$
+
+In other words, the affine hull of a set and its convex hull are identical.
+```
+
+```{prf:proof}
+By using a translation argument if necessary,
+without loss of generality, we assume that $\bzero \in S$.
+
+1. Then both $\affine S$ and $\affine C$ are linear subspaces.
+1. Since $S \subseteq C$, hence  $\affine S \subseteq \affine C$.
+1. For the converse, assume that $m = \affine C$.
+1. Let $\bx_1, \dots, bx_m \in C$ be $m$ linearly independent
+   vectors spanning $\affine C$.
+1. Then for every $\bx \in \affine C$, there exist
+   scalars $t_1, \dots, t_m$ so that
+
+   $$
+   \bx = \sum_{i=1}^m t_i \bx_i.
+   $$
+1. By definition of convex hull, each $\bx_i \in C$ is
+   a convex combination of points in $S$.
+1. Hence every $\bx \in \affine C$ is a linear combination
+   of points in $S$.
+1. Hence $\affine C \subseteq \affine S$.
+```
+
 
 
 
@@ -515,6 +671,8 @@ that $\ConvexHull(S)$ contains all convex combinations of $S$.
 Some authors prefer to define $\ConvexHull(S)$ as the smallest convex
 set containing $S$. Both definitions are equivalent.
 
+
+### Carathéodory Theorem
 
 ```{prf:theorem} Carathéodory theorem
 :label: res-cvx-conv-hull-caratheodory
@@ -597,6 +755,8 @@ We note that $\bx \in \ConvexHull(S)$.
 
 ## Dimension
 
+```{index} Convex set; dimension
+```
 ```{prf:definition} Dimension of a convex set
 :label: def-cvx-convex-set-dim
 
@@ -642,6 +802,8 @@ affine independent points. The simplex provides
 a powerful coordinate system for the points
 within it in terms of barycentric coordinates.
 
+```{index} Simplex; k-simplex
+```
 ````{prf:definition} $k$-simplex
 :label: def-convex-simplex
 
@@ -709,6 +871,8 @@ Let $C = \ConvexHull\{\bv_0, \bv_1, \dots, \bv_k \}$.
 1. Thus, the representation is unique.
 ```
 
+```{index} Simplex; midpoint
+```
 ```{prf:definition} Simplex midpoint
 :label: def-convex-simplex-midpoint
 
@@ -1577,6 +1741,7 @@ The generalization for multiple real vector spaces is
 easily verifiable through induction.
 ```
 
+### Projection
 
 ```{prf:theorem} Projection of a direct sum
 :label: res-cvx-convex-set-direct-sum-projection
@@ -1614,8 +1779,50 @@ The argument can be extended by mathematical induction for
 multiple vector spaces.
 ```
 
+
+```{prf:theorem} Projection of a convex set
+:label: res-cvx-convex-set-projection
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $C \subseteq \VV \oplus \WW$ be a convex set of
+$\VV \oplus \WW$.
+
+For every $\bx \in \VV$, define
+
+$$
+D_{\bx} = \{ \by \in \WW \ST  (\bx, \by) \in C \}.
+$$
+
+Then $D_{\bx}$ is convex for every $\bx \in \VV$.
+
+Similarly, if for every $\by \in \WW$, we define
+
+$$
+E_{\by} = \{ \bx \in \VV \ST  (\bx, \by) \in C \}
+$$
+then $E_{\by}$ is convex for every $\by \in \WW$.
+```
+
+```{prf:proof}
+If $D_{\bx}$ is empty then it is convex vacuously.
+Hence assume that $D_{\bx}$ is nonempty. 
+
+1. Then for every $\by \in D_{\bx}$ there exists $(\bx, \by) \in C$.
+1. Let $\bu, \bv \in D_{\bx}$ and $t \in [0,1]$.
+1. Then $(\bx, \bu) \in C$ and $(\bx, \bv) \in C$.
+1. Since $C$ is convex hence $t(\bx, \bu) + (1-t)(\bx, \bv) \in C$.
+1. i.e., $(\bx, t\bu + (1-t)\bv) \in C$.
+1. This implies that $t\bu + (1-t)\bv \in D_{\bx}$.
+1. Hence $D_{\bx}$ is convex.
+
+The argument for the convexity of $E_{\by}$ is identical.
+```
+
+
 ## Extreme Points
 
+```{index} Extreme point
+```
 ```{prf:definition} Extreme points of convex sets
 :label: def-cvx-extreme-point
 

@@ -1,0 +1,2814 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.7. Constrained Optimization II &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9.8. Lagrange Multipliers" href="lagrange_multipliers.html" />
+    <link rel="prev" title="9.6. Linear Constraints" href="linear_constraints.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   9. Convex Optimization
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/cvxopt/constrained_opt.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fcvxopt/constrained_opt.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-constrained-optimization">
+   9.7.1. General Constrained Optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feasible-directions">
+   9.7.2. Feasible Directions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convexity">
+     9.7.2.1. Convexity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tangent-cones">
+   9.7.3. Tangent Cones
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tangent-direction">
+     9.7.3.1. Tangent Direction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tangent-cone">
+     9.7.3.2. Tangent Cone
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#characterization">
+     9.7.3.3. Characterization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#closedness">
+     9.7.3.4. Closedness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#feasible-directions-and-tangent-cone">
+     9.7.3.5. Feasible Directions and Tangent Cone
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     9.7.3.6. Convexity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polar-cone-of-tangent-cone">
+     9.7.3.7. Polar Cone of Tangent Cone
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples">
+     9.7.3.8. Examples
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#normal-cones">
+   9.7.4. Normal Cones
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conic-structure">
+     9.7.4.1. Conic structure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     9.7.4.2. Polar Cone of Tangent Cone
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     9.7.4.3. Closedness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularity">
+     9.7.4.4. Regularity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimality-conditions">
+   9.7.5. Optimality Conditions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimization-on-an-arbitrary-constraint-set">
+     9.7.5.1. Minimization on an Arbitrary Constraint Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimization-on-a-convex-constraint-set">
+     9.7.5.2. Minimization on a Convex Constraint Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convex-functions-on-a-convex-set">
+     9.7.5.3. Convex Functions on a Convex Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sum-of-smooth-and-convex-functions-on-an-arbitrary-constraint-set">
+     9.7.5.4. Sum of Smooth and Convex Functions on an Arbitrary Constraint Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimization-over-unit-simplex">
+     9.7.5.5. Optimization Over Unit Simplex
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Constrained Optimization II</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-constrained-optimization">
+   9.7.1. General Constrained Optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feasible-directions">
+   9.7.2. Feasible Directions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convexity">
+     9.7.2.1. Convexity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tangent-cones">
+   9.7.3. Tangent Cones
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tangent-direction">
+     9.7.3.1. Tangent Direction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tangent-cone">
+     9.7.3.2. Tangent Cone
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#characterization">
+     9.7.3.3. Characterization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#closedness">
+     9.7.3.4. Closedness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#feasible-directions-and-tangent-cone">
+     9.7.3.5. Feasible Directions and Tangent Cone
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     9.7.3.6. Convexity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polar-cone-of-tangent-cone">
+     9.7.3.7. Polar Cone of Tangent Cone
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples">
+     9.7.3.8. Examples
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#normal-cones">
+   9.7.4. Normal Cones
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conic-structure">
+     9.7.4.1. Conic structure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     9.7.4.2. Polar Cone of Tangent Cone
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     9.7.4.3. Closedness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularity">
+     9.7.4.4. Regularity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimality-conditions">
+   9.7.5. Optimality Conditions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimization-on-an-arbitrary-constraint-set">
+     9.7.5.1. Minimization on an Arbitrary Constraint Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimization-on-a-convex-constraint-set">
+     9.7.5.2. Minimization on a Convex Constraint Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convex-functions-on-a-convex-set">
+     9.7.5.3. Convex Functions on a Convex Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sum-of-smooth-and-convex-functions-on-an-arbitrary-constraint-set">
+     9.7.5.4. Sum of Smooth and Convex Functions on an Arbitrary Constraint Set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimization-over-unit-simplex">
+     9.7.5.5. Optimization Over Unit Simplex
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="constrained-optimization-ii">
+<span id="sec-opt-constrained-optimization-2"></span><h1><span class="section-number">9.7. </span>Constrained Optimization II<a class="headerlink" href="#constrained-optimization-ii" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we present several results
+for the general problem of optimizing
+a cost function over a constraint set.</p>
+<p>Throughout this section, we assume that
+<span class="math notranslate nohighlight">\(\VV\)</span> is an <span class="math notranslate nohighlight">\(n\)</span>-dimensional real vector space
+endowed with an inner product
+<span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR\)</span>
+and a norm <span class="math notranslate nohighlight">\(\| \cdot \| : \VV \to \RR\)</span>.</p>
+<p>Main references for this section are
+<span id="id1">[<a class="reference internal" href="../bib.html#id25" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">7</a>]</span>.</p>
+<div class="section" id="general-constrained-optimization">
+<h2><span class="section-number">9.7.1. </span>General Constrained Optimization<a class="headerlink" href="#general-constrained-optimization" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper function
+with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a nonempty set.</p>
+<p>We are concerned with the optimization problems
+of the form</p>
+<div class="math notranslate nohighlight" id="equation-eq-cvx-const-cvx-opt-form">
+<span class="eqno">(9.15)<a class="headerlink" href="#equation-eq-cvx-const-cvx-opt-form" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }  &amp;  &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; \bx \in C.\end{split}\]</div>
+</div>
+<p>We provide optimality conditions for three specific type of problems.</p>
+<ol class="simple">
+<li><p>A continuously differentiable function <span class="math notranslate nohighlight">\(f\)</span> over an arbitrary
+constraint set <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>A convex, possibly nonsmooth, cost function <span class="math notranslate nohighlight">\(f\)</span> and a convex
+constraint set <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>A cost function consisting of the sum of a smooth (continuously differentiable)
+function and a convex function and an arbitrary constraint set.</p></li>
+</ol>
+<p>For the development of the results in this section, we will
+need the supporting machinery of the following notions:</p>
+<ul class="simple">
+<li><p>Feasible directions and the cone of feasible directions</p></li>
+<li><p>Tangent directions and tangent cone</p></li>
+<li><p>Normal directions and normal cone</p></li>
+</ul>
+<p>For a nonconvex optimization problem, the optimality
+conditions provide the necessary conditions for a
+feasible point to be a local optimal solution.</p>
+<p>For convex problems, the optimality conditions
+provide the necessary and sufficient conditions
+for a feasible point to be a global optimal solution.</p>
+</div>
+<div class="section" id="feasible-directions">
+<h2><span class="section-number">9.7.2. </span>Feasible Directions<a class="headerlink" href="#feasible-directions" title="Permalink to this headline">¶</a></h2>
+<p>At any point in the constraint set <span class="math notranslate nohighlight">\(C\)</span>, a feasible
+direction is a direction along which if we move slightly,
+then we can stay within <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<div class="proof definition admonition" id="def-opt-feasible-direction">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Definition 9.23 </span> (Feasible direction)</p>
+<div class="definition-content section" id="proof-content">
+<p>Consider the optimization problem <a class="reference internal" href="#equation-eq-cvx-const-cvx-opt-form">(9.15)</a>.
+Given a vector <span class="math notranslate nohighlight">\(\bx \in C\)</span>, a direction <span class="math notranslate nohighlight">\(\bd \in \VV\)</span>
+is said to be a <em>feasible direction</em> of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span> if
+there exists a <span class="math notranslate nohighlight">\(\overline{t} &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\bx + t \bd \in C \text{ for every } t \in [0, \overline{t}].
+\]</div>
+<p>The set of all feasible directions of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span> is
+denoted by <span class="math notranslate nohighlight">\(F_C(\bx)\)</span>.</p>
+</div>
+</div><div class="proof observation admonition" id="res-opt-feasible-dir-set-cone">
+<p class="admonition-title"><span class="caption-number">Observation 9.8 </span> (The cone of feasible directions)</p>
+<div class="observation-content section" id="proof-content">
+<p>The set of feasible directions at <span class="math notranslate nohighlight">\(\bx\)</span> is a cone.</p>
+<ol class="simple">
+<li><p>We can see that <span class="math notranslate nohighlight">\(\bzero \in F_C(\bx)\)</span>.</p></li>
+<li><p>Also, if <span class="math notranslate nohighlight">\(\bd \in F_C(\bx)\)</span> then for any <span class="math notranslate nohighlight">\(r &gt; 0\)</span>,
+<span class="math notranslate nohighlight">\(r \bd \in F_C(\bx)\)</span> also holds true.</p></li>
+</ol>
+</div>
+</div><div class="section" id="convexity">
+<h3><span class="section-number">9.7.2.1. </span>Convexity<a class="headerlink" href="#convexity" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-feasible-cone-convexity">
+<p class="admonition-title"><span class="caption-number">Theorem 9.60 </span> (Convexity of the cone of feasible directions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+If <span class="math notranslate nohighlight">\(C\)</span> is convex then <span class="math notranslate nohighlight">\(F_C(\bx)\)</span> is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We are given that <span class="math notranslate nohighlight">\(C\)</span> is convex.</p>
+<ol>
+<li><p>For any point <span class="math notranslate nohighlight">\(\by \in C\)</span>, the line segment <span class="math notranslate nohighlight">\([\bx, \by] \in C\)</span>.</p></li>
+<li><p>Hence the set <span class="math notranslate nohighlight">\(F_C(\bx)\)</span> consists of all the vectors of the
+form <span class="math notranslate nohighlight">\(t(\by - \bx)\)</span> where <span class="math notranslate nohighlight">\(t &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\by \in C\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bd_1, \bd_2 \in F_C(\bx)\)</span> and <span class="math notranslate nohighlight">\(r \in (0,1)\)</span>.</p></li>
+<li><p>Then there exist <span class="math notranslate nohighlight">\(\by_1, \by_2 \in C\)</span> and <span class="math notranslate nohighlight">\(t_1, t_2 &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bd_1 = t_1 (\by_1 - \bx),
+   \bd_2 = t_2 (\by_2 - \bx).
+   \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \bd = r \bd_1 + (1-r) \bd_2
+   &amp;=  r t_1 (\by_1 - \bx) + (1 - r) t_2 (\by_2 - \bx) \\
+   &amp;= (r t_1 + (1-r) t_2)
+   \left (\frac{r t_1}{r t_1 + (1-r) t_2} \by_1
+   + \frac{ (1- r) t_2}{r t_1 + (1-r) t_2} \by_2 - \bx \right ).
+   \end{split}\]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(s = \frac{r t_1}{r t_1 + (1-r) t_2}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(s \in (0, 1)\)</span> and <span class="math notranslate nohighlight">\(1-s = \frac{ (1- r) t_2}{r t_1 + (1-r) t_2}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by = s \by_1 + (1-s) \by_2 \in C\)</span> due to convexity of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bd = (r t_1 + (1-r) t_2) (\by - \bx)\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bd\)</span> is a feasible direction.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(F_C(\bx)\)</span> is convex.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="tangent-cones">
+<h2><span class="section-number">9.7.3. </span>Tangent Cones<a class="headerlink" href="#tangent-cones" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tangent-direction">
+<h3><span class="section-number">9.7.3.1. </span>Tangent Direction<a class="headerlink" href="#tangent-direction" title="Permalink to this headline">¶</a></h3>
+<div class="proof definition admonition" id="def-opt-tangent-direction">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Definition 9.24 </span> (Tangent direction)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>. A vector <span class="math notranslate nohighlight">\(\bt \in \VV\)</span>
+is called a <em>tangent</em> of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>
+if either <span class="math notranslate nohighlight">\(\bt = \bzero\)</span> or
+there exists a sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span>
+of <span class="math notranslate nohighlight">\(C\)</span> such that <span class="math notranslate nohighlight">\(\bx_k \neq \bx\)</span>
+for every <span class="math notranslate nohighlight">\(k\)</span>, and</p>
+<div class="math notranslate nohighlight">
+\[
+\bx_k \to \bx,
+\frac{\bx_k - \bx}{ \| \bx_k - \bx\|} \to \frac{\bt}{\| \bt \|}.
+\]</div>
+</div>
+</div><ol class="simple">
+<li><p>For a nonzero direction <span class="math notranslate nohighlight">\(\bt\)</span>, the term
+<span class="math notranslate nohighlight">\(\frac{\bt}{\| \bt \|}\)</span> is a <em>normalized direction</em>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx_k \neq \bx\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>, hence
+<span class="math notranslate nohighlight">\(\bx_k - \bx \neq \bzero\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{\bx_k - \bx}{ \| \bx_k - \bx\|}\)</span>
+is also a normalized direction.</p></li>
+<li><p>Hence the sequence <span class="math notranslate nohighlight">\(\{ \frac{\bx_k - \bx}{ \| \bx_k - \bx\|}\}\)</span>
+is a sequence of normalized directions.</p></li>
+<li><p>Thus a nonzero direction <span class="math notranslate nohighlight">\(\bt\)</span> is a tangent at <span class="math notranslate nohighlight">\(\bx\)</span>
+if it is possible to approach <span class="math notranslate nohighlight">\(\bx\)</span> with a feasible
+sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> such that the
+normalized direction sequence <span class="math notranslate nohighlight">\(\{ \frac{\bx_k - \bx}{ \| \bx_k - \bx\|} \}\)</span>
+converges to <span class="math notranslate nohighlight">\(\frac{\bt}{\| \bt \|}\)</span>.</p></li>
+</ol>
+</div>
+<div class="section" id="tangent-cone">
+<h3><span class="section-number">9.7.3.2. </span>Tangent Cone<a class="headerlink" href="#tangent-cone" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-tangent-set-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 9.61 </span> (The cone of tangent directions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+The set of tangent directions of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span> is a cone.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We can see that by definition <span class="math notranslate nohighlight">\(\bzero\)</span> is a tangent direction.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bt \neq \bzero\)</span> be a tangent direction.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\alpha \bt }{ \| \alpha \bt \|}
+   = \frac{\bt}{ \| \bt \|}
+   = \frac{\bx_k - \bx}{ \| \bx_k - \bx\|}
+   \]</div>
+<p>for some sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> converging to <span class="math notranslate nohighlight">\(\bx\)</span>
+with <span class="math notranslate nohighlight">\(\bx_k \neq \bx\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\alpha \bt\)</span> is also a tangent direction.</p></li>
+<li><p>Hence the set of tangent directions is a cone.</p></li>
+</ol>
+</div>
+<div class="proof definition admonition" id="def-opt-tangent-cone">
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Definition 9.25 </span> (Tangent cone)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+The set of all tangent directions of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>
+is called the <em>tangent cone</em> of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>
+and is denoted by <span class="math notranslate nohighlight">\(T_C(\bx)\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="characterization">
+<h3><span class="section-number">9.7.3.3. </span>Characterization<a class="headerlink" href="#characterization" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-tangent-charac">
+<p class="admonition-title"><span class="caption-number">Theorem 9.62 </span> (Characterization of tangent directions)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+A vector <span class="math notranslate nohighlight">\(\bt \in \VV\)</span> is a tangent of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>
+if and only if there exists a sequence
+<span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span> and a positive scalar sequence
+<span class="math notranslate nohighlight">\(\{ r_k \}\)</span> such that <span class="math notranslate nohighlight">\(r_k \to 0\)</span> and
+<span class="math notranslate nohighlight">\(\frac{\bx_k - \bx}{r_k} \to \bt\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bt\)</span> be a tangent of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(\bt = \bzero\)</span>, then we can take <span class="math notranslate nohighlight">\(\bx_k = \bx\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>
+and <span class="math notranslate nohighlight">\(r_k = \frac{1}{k}\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(r_k \to 0\)</span> and <span class="math notranslate nohighlight">\(\frac{\bx_k - \bx}{r_k} \to \bzero\)</span>.</p></li>
+<li><p>Now consider the case where <span class="math notranslate nohighlight">\(\bt \neq \bzero\)</span>.</p></li>
+<li><p>By definition of tangent, there exists a sequence
+<span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span> with <span class="math notranslate nohighlight">\(\bx_k \neq \bx\)</span>,
+<span class="math notranslate nohighlight">\(\bx_k \to \bx\)</span> and
+<span class="math notranslate nohighlight">\(\frac{\bx_k - \bx}{ \| \bx_k - \bx\|} \to \frac{\bt}{\| \bt \|}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(r_k = \frac{\| \bx_k - \bx \|}{\| \bt \|}\)</span>.</p></li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(r_k &gt; 0\)</span> and <span class="math notranslate nohighlight">\(r_k \to 0\)</span> since <span class="math notranslate nohighlight">\(\bx_k \to \bx\)</span>.</p></li>
+<li><p>Also</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\bx_k - \bx}{r_k} = \| \bt \| \frac{\bx_k - \bx}{\| \bx_k - \bx \|}.
+   \]</div>
+</li>
+<li><p>Since by definition of tangent</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\bx_k - \bx}{ \| \bx_k - \bx\|} \to \frac{\bt}{\| \bt \|},
+   \]</div>
+<p>hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\bx_k - \bx}{r_k} \to \bt
+   \]</div>
+<p>as desired.</p>
+</li>
+</ol>
+<p>Conversely, suppose <span class="math notranslate nohighlight">\(\bt\)</span> is such that there exist
+sequences <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> and <span class="math notranslate nohighlight">\(\{ r_k \}\)</span> with the given
+properties.</p>
+<ol>
+<li><p>If <span class="math notranslate nohighlight">\(\bt = \bzero\)</span> then it is a tangent.</p></li>
+<li><p>Now consider the case where <span class="math notranslate nohighlight">\(\bt \neq \bzero\)</span></p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(r_k \to 0\)</span> and <span class="math notranslate nohighlight">\((\bx_k - \bx) / r_k \to \bt\)</span>
+hence we must have <span class="math notranslate nohighlight">\(\bx_k \to \bx\)</span>.</p></li>
+<li><p>It is also possible to choose a subsequence of <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span>
+such that <span class="math notranslate nohighlight">\(\bx_{k_l} \neq \bx\)</span> for every <span class="math notranslate nohighlight">\(k_l\)</span>.
+Otherwise, <span class="math notranslate nohighlight">\((\bx_k - \bx) / r_k \to \bzero\)</span> but we are given
+that <span class="math notranslate nohighlight">\(\bt \neq \bzero\)</span>.</p></li>
+<li><p>WLOG assume that <span class="math notranslate nohighlight">\(\bx_k \neq \bx\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\bx_k - \bx}{ \| \bx_k - \bx\|}
+   = \frac{(\bx_k - \bx) / r_k}{ \| \bx_k - \bx\| / r_k}
+   \to \frac{\bt}{ \| \bt \|}.
+   \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bt\)</span> must be a tangent direction.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="closedness">
+<h3><span class="section-number">9.7.3.4. </span>Closedness<a class="headerlink" href="#closedness" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-tangent-cone-closed">
+<p class="admonition-title"><span class="caption-number">Theorem 9.63 </span> (Closedness of tangent cone)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+Then <span class="math notranslate nohighlight">\(T_C(\bx)\)</span> is closed.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\{ \bt_k \}\)</span> be a sequence of <span class="math notranslate nohighlight">\(T_C(\bx)\)</span>
+such that <span class="math notranslate nohighlight">\(\lim \bt_k = \bt \in \VV\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\bt = \bzero\)</span>, then <span class="math notranslate nohighlight">\(\bt \in T_C(\bx)\)</span>
+and we are done.</p></li>
+<li><p>Hence consider the case where <span class="math notranslate nohighlight">\(\bt \neq \bzero\)</span>.</p></li>
+<li><p>WLOG, assume that <span class="math notranslate nohighlight">\(\bt_k \neq \bzero\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>By the definition of the tangent, for every <span class="math notranslate nohighlight">\(k\)</span>,
+there is a sequence <span class="math notranslate nohighlight">\(\{ \bx_k^i \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span>
+with <span class="math notranslate nohighlight">\(\bx_k^i \neq \bx\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{i \to \infty} \bx_k^i = \bx,
+   \lim_{i \to \infty}
+   \frac{\bx_k^i - \bx}{\| \bx_k^i - \bx \|} = \frac{\bt_k}{\| \bt_k \|}.
+   \]</div>
+</li>
+<li><p>For each <span class="math notranslate nohighlight">\(k\)</span>, choose and <span class="math notranslate nohighlight">\(i_k\)</span> such that
+<span class="math notranslate nohighlight">\(i_1 &lt; i_2 &lt; \dots &lt; i_k\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+   \lim_{k \to \infty} \bx_k^{i_k} = \bx,
+   \lim_{k \to \infty}
+   \left \| \frac{\bx_k^{i_k} - \bx}{\| \bx_k^{i_k} - \bx \|}  - \frac{\bt_k}{\| \bt_k \|}
+   \right \|.
+   \]</div>
+</li>
+<li><p>For all <span class="math notranslate nohighlight">\(k\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \left \| \frac{\bx_k^{i_k} - \bx}{\| \bx_k^{i_k} - \bx \|}  - \frac{\bt}{\| \bt \|}
+   \right \|
+   \leq    \left \| \frac{\bx_k^{i_k} - \bx}{\| \bx_k^{i_k} - \bx \|}  - \frac{\bt_k}{\| \bt_k \|}
+   \right \|
+   + \left \|
+   \frac{\bt_k}{\| \bt_k \|} - \frac{\bt}{\| \bt \|}
+   \right \|.
+   \]</div>
+</li>
+<li><p>Taking the limit of <span class="math notranslate nohighlight">\(k \to \infty\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \left \| \frac{\bx_k^{i_k} - \bx}{\| \bx_k^{i_k} - \bx \|}  - \frac{\bt}{\| \bt \|}
+   \right \| = 0.
+   \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in T_C(\bx)\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="feasible-directions-and-tangent-cone">
+<h3><span class="section-number">9.7.3.5. </span>Feasible Directions and Tangent Cone<a class="headerlink" href="#feasible-directions-and-tangent-cone" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-feasible-tangent-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 9.64 </span> (Feasible cone and tangent cone)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+The following hold true regarding the
+cone of feasible directions <span class="math notranslate nohighlight">\(F_C(\bx)\)</span>
+and the tangent cone <span class="math notranslate nohighlight">\(T_C(\bx)\)</span>.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(F_C(\bx) \subseteq T_C(\bx)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\closure F_C(\bx) \subseteq T_C(\bx)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(C\)</span> is convex, then</p>
+<div class="math notranslate nohighlight">
+\[
+   \closure F_C(\bx) = T_C(\bx).
+   \]</div>
+</li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. (1) Every feasible direction is a tangent direction.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bd\)</span> be a feasible direction.</p></li>
+<li><p>Then there exists a <span class="math notranslate nohighlight">\(\overline{t} &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx + t \bd \in C \Forall t \in [0, \overline{t}].
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(r_k = \frac{\overline{t}}{k}\)</span> for every <span class="math notranslate nohighlight">\(k \in \Nat\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(r_k &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(r_k \to 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx_k = \bx + r_k \bd\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bx_k \in C\)</span>, <span class="math notranslate nohighlight">\(\bx_k \neq \bx\)</span> for every <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(\bx_k \to \bx\)</span>.</p></li>
+<li><p>Also <span class="math notranslate nohighlight">\(\frac{\bx_k - \bx}{r_k} = \bd\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\frac{\bx_k - \bx}{r_k} \to \bd\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bd\)</span> is a tangent direction due to
+<a class="reference internal" href="#res-opt-tangent-charac">Theorem 9.62</a>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(F_C(\bx) \subseteq T_C(\bx)\)</span>.</p></li>
+</ol>
+<p>(2) Closure</p>
+<ol class="simple">
+<li><p>By <a class="reference internal" href="#res-opt-tangent-cone-closed">Theorem 9.63</a>, <span class="math notranslate nohighlight">\(T_C(\bx)\)</span> is closed.</p></li>
+<li><p>We have shown that <span class="math notranslate nohighlight">\(F_C(\bx) \subseteq T_C(\bx)\)</span>.</p></li>
+<li><p>The closure of a set is the smallest closed set containing it.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\closure F_C(\bx) \subseteq T_C(\bx)\)</span>.</p></li>
+</ol>
+<p>(3) Convexity and Closure</p>
+<ol class="simple">
+<li><p>We are given that <span class="math notranslate nohighlight">\(C\)</span> is convex.</p></li>
+<li><p>By claim (2), we have <span class="math notranslate nohighlight">\(\closure F_C(\bx) \subseteq T_C(\bx)\)</span>.</p></li>
+<li><p>It will suffice to show the reverse inclusion
+<span class="math notranslate nohighlight">\(T_C(\bx) \subseteq \closure F_C(\bx)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bd \in T_C(\bx)\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-opt-tangent-charac">Theorem 9.62</a>, there exists a sequence
+<span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span> with <span class="math notranslate nohighlight">\(\bx_k \to \bx\)</span> and a positive scalar
+sequence <span class="math notranslate nohighlight">\(\{ r_k \}\)</span> with <span class="math notranslate nohighlight">\(r_k \to 0\)</span> such that
+<span class="math notranslate nohighlight">\(\frac{\bx_k - \bx}{r_k} \to \bd\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is convex, hence the direction <span class="math notranslate nohighlight">\(\frac{\bx_k - \bx}{r_k}\)</span>
+is a feasible direction of <span class="math notranslate nohighlight">\(C\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\{\frac{\bx_k - \bx}{r_k} \}\)</span> is a converging sequence
+of feasible directions.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bd \in \closure F_C(\bx)\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(T_C(\bx) \subseteq \closure F_C(\bx)\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="id2">
+<h3><span class="section-number">9.7.3.6. </span>Convexity<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-tangent-cone-convexity">
+<p class="admonition-title"><span class="caption-number">Theorem 9.65 </span> (Convexity of the tangent cone)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty subset of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+If <span class="math notranslate nohighlight">\(C\)</span> is convex then <span class="math notranslate nohighlight">\(T_C(\bx)\)</span> is convex.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>By <a class="reference internal" href="#res-opt-feasible-cone-convexity">Theorem 9.60</a>, <span class="math notranslate nohighlight">\(F_C(\bx)\)</span> is convex.</p></li>
+<li><p>By <a class="reference internal" href="#res-opt-feasible-tangent-cone">Theorem 9.64</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+   T_C(\bx) = \closure F_C(\bx)
+   \]</div>
+<p>since <span class="math notranslate nohighlight">\(C\)</span> is convex.</p>
+</li>
+<li><p>By <a class="reference internal" href="../convex_sets/relint.html#res-cvx-closure-convex-set-convex">Theorem 8.123</a>, the
+closure of a convex set is convex.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(T_C(\bx)\)</span> is convex.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="polar-cone-of-tangent-cone">
+<h3><span class="section-number">9.7.3.7. </span>Polar Cone of Tangent Cone<a class="headerlink" href="#polar-cone-of-tangent-cone" title="Permalink to this headline">¶</a></h3>
+<p>Recall from <a class="reference internal" href="../convex_sets/cone_2.html#def-cvx-normal-cone">Definition 8.36</a>
+that the normal cone to a set <span class="math notranslate nohighlight">\(C\)</span> at a point <span class="math notranslate nohighlight">\(\ba \in C\)</span>
+is given by</p>
+<div class="math notranslate nohighlight">
+\[
+N_C(\ba) = \{ \bv \in \VV^* \ST 
+   \langle \bx - \ba , \bv \rangle \leq 0 
+   \Forall \bx \in C \}.
+\]</div>
+<div class="proof theorem admonition" id="res-opt-polar-tangent-cone-normal-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 9.66 </span> (Characterization of the polar cone of the tangent cone for a convex set)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex set.
+Then for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>, we have
+<span class="math notranslate nohighlight">\(\bz \in T_C(\bx)^{\circ}\)</span> if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \by - \bx , \bz \rangle \leq 0 \Forall \by \in C.
+\]</div>
+<p>In particular, we have</p>
+<div class="math notranslate nohighlight">
+\[
+T_C(\bx)^{\circ} = N_C(\bx),
+N_C(\bx)^{\circ} = T_C(\bx)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(N_C(\bx)\)</span> is the normal cone of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. First consider that <span class="math notranslate nohighlight">\(\bz \in T_C(\bx)^{\circ}\)</span>.</p>
+<ol class="simple">
+<li><p>We note that <span class="math notranslate nohighlight">\(F_C(\bx) \subseteq T_C(\bx)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is convex, hence <span class="math notranslate nohighlight">\(\by - \bx \in F_C(\bx)\)</span> for every <span class="math notranslate nohighlight">\(\by \in C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by - \bx \in T_C(\bx)\)</span> for every <span class="math notranslate nohighlight">\(\by \in C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\langle \by - \bx, \bz \rangle \leq 0\)</span> for every <span class="math notranslate nohighlight">\(\by \in C\)</span>
+from the definition of the polar cone of <span class="math notranslate nohighlight">\(T_C(\bx)\)</span>.</p></li>
+</ol>
+<p>Now assume that some <span class="math notranslate nohighlight">\(\bz \in \VV^*\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \by - \bx , \bz \rangle \leq 0 \Forall \by \in C.
+\]</div>
+<ol class="simple">
+<li><p>For contradiction, assume that <span class="math notranslate nohighlight">\(\bz \notin T_C(\bx)^{\circ}\)</span>.</p></li>
+<li><p>Then there exists some <span class="math notranslate nohighlight">\(\by \in T_C(\bx)\)</span> such that
+<span class="math notranslate nohighlight">\(\langle \by, \bz \rangle &gt; 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\closure F_C(\bx) = T_C(\bx)\)</span>, hence there exists
+a sequence <span class="math notranslate nohighlight">\(\{ \by_k \}\)</span> of <span class="math notranslate nohighlight">\(F_C(\bx)\)</span> such that <span class="math notranslate nohighlight">\(\by_k \to \by\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\by_k\)</span> is a feasible direction at <span class="math notranslate nohighlight">\(\bx\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Due to convexity of <span class="math notranslate nohighlight">\(C\)</span>, <span class="math notranslate nohighlight">\(\by_k = r_k (\bx_k - \bx)\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>
+where <span class="math notranslate nohighlight">\(\bx_k \in C\)</span> and <span class="math notranslate nohighlight">\(r_k &gt; 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\langle \by, \bz \rangle &gt; 0\)</span>, hence
+for sufficiently large <span class="math notranslate nohighlight">\(k\)</span>, we should have
+<span class="math notranslate nohighlight">\(\langle \by_k, \bz \rangle &gt; 0\)</span>.</p></li>
+<li><p>In other words, for sufficiently large <span class="math notranslate nohighlight">\(k\)</span>, we have
+<span class="math notranslate nohighlight">\(r_k \langle \bx_k - \bx, \bz \rangle &gt; 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(r_k &gt; 0\)</span>, hence it reduces to
+<span class="math notranslate nohighlight">\(\langle \bx_k - \bx, \bz \rangle &gt; 0\)</span>.</p></li>
+<li><p>But this is a contradiction to the hypothesis.</p></li>
+<li><p>Hence we must have <span class="math notranslate nohighlight">\(\bz \in T_C(\bx)^{\circ}\)</span>.</p></li>
+</ol>
+<p>This characterization of polar cone of tangent cone implies that</p>
+<div class="math notranslate nohighlight">
+\[
+T_C(\bx)^{\circ} = N_C(\bx).
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(T_C(\bx)\)</span> is a closed and convex cone
+for a convex <span class="math notranslate nohighlight">\(C\)</span>,
+hence due to <a class="reference internal" href="../convex_sets/cone_2.html#res-cvx-polar-cone-theorem">Theorem 8.62</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+N_C(\bx)^{\circ} = (T_C(\bx)^{\circ})^{\circ} = T_C(\bx).
+\]</div>
+</div>
+</div>
+<div class="section" id="examples">
+<h3><span class="section-number">9.7.3.8. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<div class="proof example admonition" id="ex-opt-tangent-cone-linear-system">
+<p class="admonition-title"><span class="caption-number">Example 9.10 </span> (Tangent cone for a linear system of equations)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C = \{ \bx \in \RR^n \ST \bA \bx =  \bb \}\)</span>
+where <span class="math notranslate nohighlight">\(\bA \in \RR^{m \times n}\)</span> and <span class="math notranslate nohighlight">\(\bb \in \RR^m\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(C\)</span> is convex, the strategy for computation of tangent cone
+is as follows.</p>
+<ol class="simple">
+<li><p>Identify the set of all feasible directions at the point.</p></li>
+<li><p>Compute the closure of the set of feasible directions at the point.</p></li>
+</ol>
+<p>We note that <span class="math notranslate nohighlight">\(C\)</span> is an affine subspace.</p>
+<ol>
+<li><p>Note that the subspace <span class="math notranslate nohighlight">\(L\)</span> parallel to <span class="math notranslate nohighlight">\(C\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   L = \{ \bx \in \RR^n \ST \bA \bx =  \bzero \}.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p></li>
+<li><p>Every direction in the subspace <span class="math notranslate nohighlight">\(L\)</span> is a feasible direction.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bd \in L\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bA (\bx + \bd) = \bb\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bd\)</span> is a feasible direction.</p></li>
+</ol>
+</li>
+<li><p>It is easy to see that there are no other feasible directions.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(F_C(\bx) = L\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\RR^n\)</span> is finite dimensional, hence <span class="math notranslate nohighlight">\(L\)</span> is closed.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(T_C(\bx) = \closure F_C(\bx)\)</span>, hence
+<span class="math notranslate nohighlight">\(T_C(\bx) = L\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof example admonition" id="ex-opt-tangent-cone-affine-subspace">
+<p class="admonition-title"><span class="caption-number">Example 9.11 </span> (Tangent cone for an affine subspace)</p>
+<div class="example-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq \VV\)</span> be an affine subspace.</p>
+<ol class="simple">
+<li><p>We note that <span class="math notranslate nohighlight">\(A\)</span> is closed and convex.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(L\)</span> be the linear subspace parallel to <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Pick some <span class="math notranslate nohighlight">\(\bx \in A\)</span>.</p></li>
+<li><p>Then for any <span class="math notranslate nohighlight">\(\bt \in L\)</span>, we have
+<span class="math notranslate nohighlight">\(\bx + \bt \in A\)</span>.</p></li>
+<li><p>Hence every direction in <span class="math notranslate nohighlight">\(L\)</span> is a feasible direction.</p></li>
+<li><p>It is also easy to see that no other direction is a feasible direction.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(F_C(\bx) = L\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(T_C(\bx) = \closure F_C(\bx)\)</span>, hence
+<span class="math notranslate nohighlight">\(T_C(\bx) = L\)</span>.</p></li>
+</ol>
+<p>The tangent cone at any point in an affine subspace
+is the subspace parallel to the affine subspace.</p>
+</div>
+</div><div class="proof example admonition" id="ex-opt-tangent-cone-unit-ball">
+<p class="admonition-title"><span class="caption-number">Example 9.12 </span> (Tangent cone of a closed unit ball)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the set <span class="math notranslate nohighlight">\(C = B[\bzero, 1] \subseteq \VV\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+B[\bzero, 1] = \{ \bx \ST \| \bx \| \leq 1  \}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(C\)</span> is convex, the strategy for computation of tangent cone
+is as follows.</p>
+<ol class="simple">
+<li><p>Pick a point.</p></li>
+<li><p>Identify the set of all feasible directions at the point.</p></li>
+<li><p>Compute the closure of the set of feasible directions at the point.</p></li>
+</ol>
+<p>There are two possible cases for the points in <span class="math notranslate nohighlight">\(C\)</span>
+that require separate treatment.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bx \in \interior C\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx \in \boundary C\)</span>.</p></li>
+</ol>
+<p>(1) Interior points</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \interior C\)</span>.</p></li>
+<li><p>Then it is easy to see that every direction is a feasible direction
+along which we can find another point in <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(F_C(\bx) = \VV\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(T_C(\bx) = \closure F_C(\bx) = \VV\)</span>.</p></li>
+</ol>
+<p>(2) Boundary points</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \boundary C\)</span>.</p></li>
+<li><p>We can see that only those directions are feasible that point
+towards some point in <span class="math notranslate nohighlight">\(C\)</span>. Any direction pointing towards
+the exterior of <span class="math notranslate nohighlight">\(C\)</span> is not a feasible direction.</p>
+<ol class="simple">
+<li><p>The directions which make an acute angle with <span class="math notranslate nohighlight">\(\bx\)</span>
+point away from the ball.</p></li>
+<li><p>The directions which make an obtuse angle with <span class="math notranslate nohighlight">\(\bx\)</span>
+point inside the ball.</p></li>
+</ol>
+</li>
+<li><p>We shall now formally prove this.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \in \boundary C\)</span>, hence <span class="math notranslate nohighlight">\(\| \bx \| = 1\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\by \in F_C(\bx)\)</span>.</p></li>
+<li><p>Then we must have <span class="math notranslate nohighlight">\(\bx + t \by \in C\)</span> for sufficiently small
+<span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\by \in F_C(\bx)\)</span> if and only if there exists
+a <span class="math notranslate nohighlight">\(\overline{t} &gt; 0\)</span> such that for every <span class="math notranslate nohighlight">\(t \in (0, \overline{t}]\)</span>
+we have <span class="math notranslate nohighlight">\(\| \bx + t \by \| \leq 1\)</span>.</p></li>
+<li><p>Expanding, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bx \|^2 + 2 t \langle \bx, \by \rangle + t^2 \| \by \|^2  \leq 1
+   \Forall t \in (0, \overline{t}].
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\| \bx \| =1\)</span>, hence this reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+   2 t \langle \bx, \by \rangle + t^2 \| \by \|^2  \leq 0
+   \Forall t \in (0, \overline{t}].
+   \]</div>
+</li>
+<li><p>There are only two possibilities for this relation to hold true
+since <span class="math notranslate nohighlight">\(\| \by \| \geq 0\)</span>.</p>
+<ol>
+<li><p>Either <span class="math notranslate nohighlight">\(\by = \bzero\)</span>.</p></li>
+<li><p>Or <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle &lt; 0\)</span> and
+<span class="math notranslate nohighlight">\(t \leq \frac{-2 \langle \bx, \by \rangle}{ \| \by \|^2}\)</span>.</p></li>
+<li><p>From the second case, we have</p>
+<div class="math notranslate nohighlight">
+\[
+      \overline{t} = \frac{-2 \langle \bx, \by \rangle}{ \| \by \|^2}.
+      \]</div>
+</li>
+</ol>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(F_C(\bx) = \{ \by \ST \langle \bx, \by  \rangle &lt; 0 \} \cup \{ \bzero \}\)</span>.</p></li>
+<li><p>From <span class="math notranslate nohighlight">\(T_C(\bx) = \closure F_C(\bx) = \VV\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   T_C(\bx) = \{ \by \ST \langle \bx, \by  \rangle \leq 0 \}.
+   \]</div>
+</li>
+</ol>
+</div>
+</div><div class="proof example admonition" id="ex-opt-tangent-cone-half-space">
+<p class="admonition-title"><span class="caption-number">Example 9.13 </span> (Tangent cone of a closed half space)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the set <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+C = \{ \bx \ST \langle \bx, \ba \rangle \leq b \}.
+\]</div>
+<p>There are two possible cases for the points in <span class="math notranslate nohighlight">\(C\)</span>:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bx \in \interior C\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx \in \boundary C\)</span>.</p></li>
+</ol>
+<p>(1) Interior points</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \interior C\)</span>.</p></li>
+<li><p>Then it is easy to see that every direction is a feasible direction
+along which we can find another point in <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(F_C(\bx) = \VV\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(T_C(\bx) = \closure F_C(\bx) = \VV\)</span>.</p></li>
+</ol>
+<p>(2) Boundary points</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx \in \boundary C\)</span>.</p></li>
+<li><p>Then we have <span class="math notranslate nohighlight">\( \langle \bx, \ba \rangle = b\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bd \in F_C(\bx)\)</span>.</p></li>
+<li><p>This is equivalent to</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx + t \bd, \ba \rangle \leq b
+   \]</div>
+<p>for some <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
+</li>
+<li><p>This is equivalent to <span class="math notranslate nohighlight">\(\langle \bd, \ba \rangle \leq 0\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   F_C(\bx) = \{ \bd \ST \langle \bd, \ba \rangle \leq 0 \}.
+   \]</div>
+</li>
+<li><p>This is also a closed half-space.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(T_C(\bx) = \closure F_C(\bx) = F_C(\bx)\)</span>.</p></li>
+<li><p>We can see that <span class="math notranslate nohighlight">\(T_C(\bx)\)</span> is the closed half-space
+corresponding to the linear subspace parallel
+to the hyperplane</p>
+<div class="math notranslate nohighlight">
+\[
+   H = \{ \bx \ST \langle \bx, \ba \rangle = b \}
+   \]</div>
+<p>given by</p>
+<div class="math notranslate nohighlight">
+\[
+   L = \{ \bx \ST \langle \bx, \ba \rangle = 0 \}.
+   \]</div>
+</li>
+<li><p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+   T_C(\bx) = C - \bz
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bz \in H\)</span>.</p>
+</li>
+</ol>
+</div>
+</div></div>
+</div>
+<div class="section" id="normal-cones">
+<h2><span class="section-number">9.7.4. </span>Normal Cones<a class="headerlink" href="#normal-cones" title="Permalink to this headline">¶</a></h2>
+<p><span id="id3">[<a class="reference internal" href="../bib.html#id25" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">7</a>]</span> introduces a more general
+notion of normal directions. For our purposes, we
+shall call it BNO normal directions.</p>
+<div class="proof definition admonition" id="def-opt-bno-normal-dir">
+<p class="admonition-title"><span class="caption-number">Definition 9.26 </span> (BNO normal direction)</p>
+<div class="definition-content section" id="proof-content">
+<p>Given a nonempty subset <span class="math notranslate nohighlight">\(C\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span> and a vector <span class="math notranslate nohighlight">\(\bx \in C\)</span>,
+a vector <span class="math notranslate nohighlight">\(\bz \in \VV\)</span> is said to be a <em>normal</em> of <span class="math notranslate nohighlight">\(C\)</span>
+at <span class="math notranslate nohighlight">\(\bx\)</span> (in the sense of <span id="id4">[<a class="reference internal" href="../bib.html#id25" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">7</a>]</span>)
+if there exist sequences
+<span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\{ \bz_k \}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\bx_k \to \bx, \quad \bz_k \to \bz,
+\quad \bz_k \in T_C(\bx_k)^{\circ} \Forall k.
+\]</div>
+<p>This normal direction shall be called a <em>BNO normal direction</em>
+in these notes to distinguish it from
+<a class="reference internal" href="../convex_sets/cone_2.html#def-cvx-convex-set-normal-vector">Definition 8.35</a>.</p>
+</div>
+</div><p>Each <span class="math notranslate nohighlight">\(\bz_k\)</span> is chosen from the polar cone of the tangent
+cone at <span class="math notranslate nohighlight">\(\bx_k\)</span>.</p>
+<div class="proof definition admonition" id="def-opt-bno-normal-cone">
+<p class="admonition-title"><span class="caption-number">Definition 9.27 </span> (BNO normal cone)</p>
+<div class="definition-content section" id="proof-content">
+<p>Given a nonempty subset <span class="math notranslate nohighlight">\(C\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span> and a vector <span class="math notranslate nohighlight">\(\bx \in C\)</span>,
+the set of all normal directions at <span class="math notranslate nohighlight">\(\bx\)</span>
+(in the sense of <span id="id5">[<a class="reference internal" href="../bib.html#id25" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">7</a>]</span>)
+is called the <em>normal cone</em> of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>
+and is denoted by <span class="math notranslate nohighlight">\(\tilde{N}_C(\bx)\)</span>.</p>
+<p>This normal cone shall be called a <em>BNO normal cone</em>
+in these notes to distinguish it from
+<a class="reference internal" href="../convex_sets/cone_2.html#def-cvx-normal-cone">Definition 8.36</a>.</p>
+</div>
+</div><p>The BNO normal cone reduces to the definition
+of normal cones in <a class="reference internal" href="../convex_sets/cone_2.html#def-cvx-normal-cone">Definition 8.36</a>
+for convex sets. The BNO normal cone is useful
+in the analysis of optimality conditions
+for minimization of smooth functions with
+smooth equality and inequality constraints.</p>
+<div class="section" id="conic-structure">
+<h3><span class="section-number">9.7.4.1. </span>Conic structure<a class="headerlink" href="#conic-structure" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-bno-normal-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 9.67 </span> (Conic structure)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty set and <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+Then the BNO normal cone <span class="math notranslate nohighlight">\(\tilde{N}_C(\bx)\)</span>
+is a cone.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <span class="math notranslate nohighlight">\(\bzero\)</span> being a normal direction.</p>
+<ol class="simple">
+<li><p>Pick any sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> such that <span class="math notranslate nohighlight">\(\bx_k = \bx\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bzero \in T_C(\bx_k)^{\circ}\)</span> since
+<span class="math notranslate nohighlight">\(T_C(\bx_k)^{\circ}\)</span> is a cone.</p></li>
+<li><p>Hence we can pick <span class="math notranslate nohighlight">\(\bz_k  = \bzero\)</span> to form
+a sequence <span class="math notranslate nohighlight">\(\{ \bz_k \}\)</span> such that <span class="math notranslate nohighlight">\(\bz_k \to \bzero\)</span>
+and <span class="math notranslate nohighlight">\(\bz_k \in T_C(\bx_k)^{\circ}\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bzero\)</span> is a BNO normal direction.</p></li>
+</ol>
+<p>Conic property</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bz\)</span> be a BNO normal direction and <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p></li>
+<li><p>There exists a sequence <span class="math notranslate nohighlight">\(\{\bx_k \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span>
+and a sequence <span class="math notranslate nohighlight">\(\{ \bz_k \}\)</span> such that
+<span class="math notranslate nohighlight">\(\bz_k \in T_C(\bx_k)^{\circ}\)</span> for every <span class="math notranslate nohighlight">\(k\)</span> with
+<span class="math notranslate nohighlight">\(\bz_k \to \bz\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(t \bz_k \in T_C(\bx_k)^{\circ}\)</span> for every
+<span class="math notranslate nohighlight">\(k\)</span> since <span class="math notranslate nohighlight">\(T_C(\bx_k)^{\circ}\)</span> is a cone.</p></li>
+<li><p>Also <span class="math notranslate nohighlight">\(t \bz_k \to t \bz\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(t \bz\)</span> is a BNO normal direction.</p></li>
+</ol>
+<p>Hence <span class="math notranslate nohighlight">\(\tilde{N}_C(\bx)\)</span> is a cone.</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3><span class="section-number">9.7.4.2. </span>Polar Cone of Tangent Cone<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-bno-normal-cone-polar-tangent-cone">
+<p class="admonition-title"><span class="caption-number">Theorem 9.68 </span> (Polar cone of tangent cone and BNO normal cone)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty set and <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+T_C(\bx)^{\circ} \subseteq \tilde{N}_C(\bx).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is straightforward from the definition
+of BNO normal directions.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bz \in T_C(\bx)^{\circ}\)</span>.</p></li>
+<li><p>Consider the sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> where <span class="math notranslate nohighlight">\(\bx_k = \bx\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bx_k \to \bx\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bz \in T_C(\bx_k)^{\circ}\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Consider the sequence <span class="math notranslate nohighlight">\(\{ \bz_k \}\)</span> where <span class="math notranslate nohighlight">\(\bz_k = \bz\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\bz_k \to \bz\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bz \in \tilde{N}_C(\bx)\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(T_C(\bx)^{\circ} \subseteq \tilde{N}_C(\bx)\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="id7">
+<h3><span class="section-number">9.7.4.3. </span>Closedness<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-bno-normal-cone-closedness">
+<p class="admonition-title"><span class="caption-number">Theorem 9.69 </span> (Closedness of BNO normal cone)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty set and <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+Then the BNO normal cone at <span class="math notranslate nohighlight">\(\bx\)</span>, <span class="math notranslate nohighlight">\(\tilde{N}_C(\bx)\)</span>
+is closed.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Consider a converging sequence <span class="math notranslate nohighlight">\(\{\bz_l \}\)</span> of <span class="math notranslate nohighlight">\(\tilde{N}_C(\bx)\)</span>.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bz_l \to \bz\)</span>. We need to show that <span class="math notranslate nohighlight">\(\bz \in \tilde{N}_C(\bx)\)</span>.</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(\bz_l\)</span>, there exist sequences
+<span class="math notranslate nohighlight">\(\{ \bx_l^m \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\{ \bz_l^m \}\)</span> where
+<span class="math notranslate nohighlight">\(\bz_l^m \in T_X(\bx_l^m)^{\circ}\)</span>
+such that <span class="math notranslate nohighlight">\(\bx_l^m \to \bx\)</span>
+and <span class="math notranslate nohighlight">\(\bz_l^m \to \bz_l\)</span>.</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(k\)</span></p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(r = \frac{1}{k}\)</span>.</p></li>
+<li><p>Pick a <span class="math notranslate nohighlight">\(\bz_{l_0}\)</span> from <span class="math notranslate nohighlight">\(\{ \bz_l \}\)</span> such that <span class="math notranslate nohighlight">\(\| \bz_{l_0} - \bz \| &lt; r\)</span>.</p></li>
+<li><p>Identify the index <span class="math notranslate nohighlight">\(m_0\)</span> such that for all <span class="math notranslate nohighlight">\(m &gt; m_0\)</span>,
+we have <span class="math notranslate nohighlight">\(\| \bx_{l_0}^m  - \bx \| &lt; r\)</span>.</p></li>
+<li><p>Pick a <span class="math notranslate nohighlight">\(\bz_{l_0}^{m_1}\)</span> from <span class="math notranslate nohighlight">\(\{ \bz_{l_0}^m \}\)</span> such that <span class="math notranslate nohighlight">\(m_1 &gt; m_0\)</span>
+and <span class="math notranslate nohighlight">\(\| \bz_{l_0}^{m_1} - \bz_{l_0} \| &lt; r\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx_k = \bx_{l_0}^{m_1}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz_k = \bz_{l_0}^{m_1}\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Then we have <span class="math notranslate nohighlight">\(\| \bx_k - \bx \| &lt; r = \frac{1}{k}\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Also <span class="math notranslate nohighlight">\(\| \bz_k - \bz \| &lt; 2 r = \frac{2}{k}\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bz_k \in T_X(\bx_k)^{\circ}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx_k \to \bx\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bz_k \to \bz\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bz \in \tilde{N}_C(\bx)\)</span>.</p></li>
+</ol>
+<p>Hence, every convergent sequence of <span class="math notranslate nohighlight">\(\tilde{N}_C(\bx)\)</span>
+in <span class="math notranslate nohighlight">\(\tilde{N}_C(\bx)\)</span>.
+Hence <span class="math notranslate nohighlight">\(\tilde{N}_C(\bx)\)</span> is closed.</p>
+</div>
+</div>
+<div class="section" id="regularity">
+<h3><span class="section-number">9.7.4.4. </span>Regularity<a class="headerlink" href="#regularity" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-bno-regular-set">
+<p class="admonition-title"><span class="caption-number">Theorem 9.70 </span> (Regular set)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty set and <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+Then <span class="math notranslate nohighlight">\(C\)</span> is said to be <em>regular</em> at <span class="math notranslate nohighlight">\(\bx\)</span>
+(in the sense of <span id="id8">[<a class="reference internal" href="../bib.html#id25" title="Dimitri Bertsekas, Angelia Nedic, and Asuman Ozdaglar. Convex analysis and optimization. Volume 1. Athena Scientific, 2003.">7</a>]</span>)
+if</p>
+<div class="math notranslate nohighlight">
+\[
+T_C(\bx)^{\circ} = \tilde{N}_C(\bx).
+\]</div>
+<p>In other words, a set is regular at a point
+if the (BNO) normal cone is equal to the polar
+cone of the tangent cone.</p>
+</div>
+</div><div class="proof theorem admonition" id="res-opt-bno-convex-regular">
+<p class="admonition-title"><span class="caption-number">Theorem 9.71 </span> (Regularity of convex sets)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(C\)</span> be a nonempty convex set and <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+Then <span class="math notranslate nohighlight">\(C\)</span> is regular at every <span class="math notranslate nohighlight">\(\bx \in C\)</span>.
+Moreover,</p>
+<div class="math notranslate nohighlight">
+\[
+T_C(\bx)^{\circ} = \tilde{N}_C(\bx) = N_C(\bx).
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We show the regularity of <span class="math notranslate nohighlight">\(C\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>
+by showing that <span class="math notranslate nohighlight">\(\tilde{N}_C(\bx) \subseteq T_C(\bx)^{\circ}\)</span>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz \in \tilde{N}_C(\bx)\)</span>.</p></li>
+<li><p>Then there exist sequences <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span>
+and <span class="math notranslate nohighlight">\(\{ \bz_k \}\)</span> with <span class="math notranslate nohighlight">\(\bz_k \in T_C(\bx_k)^{\circ}\)</span>
+for every <span class="math notranslate nohighlight">\(k\)</span> such that <span class="math notranslate nohighlight">\(\bx_k \to \bx\)</span> and <span class="math notranslate nohighlight">\(\bz_k \to \bz\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(C\)</span> is convex,
+hence, due to <a class="reference internal" href="#res-opt-polar-tangent-cone-normal-cone">Theorem 9.66</a>,
+we have, for every <span class="math notranslate nohighlight">\(k\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \by - \bx_k, \bz_k \rangle \leq 0 \Forall \by \in C.
+   \]</div>
+</li>
+<li><p>By taking limit <span class="math notranslate nohighlight">\(k \to \infty\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \by - \bx, \bz \rangle \leq 0 \Forall \by \in C.
+   \]</div>
+</li>
+<li><p>Hence, again due to <a class="reference internal" href="#res-opt-polar-tangent-cone-normal-cone">Theorem 9.66</a>,
+<span class="math notranslate nohighlight">\(\bz \in T_C(\bx)^{\circ}\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\tilde{N}_C(\bx) \subseteq T_C(\bx)^{\circ}\)</span>.</p></li>
+</ol>
+<p>Combining with <a class="reference internal" href="#res-opt-bno-normal-cone-polar-tangent-cone">Theorem 9.68</a>,
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+T_C(\bx)^{\circ} = \tilde{N}_C(\bx).
+\]</div>
+<p>We also saw in <a class="reference internal" href="#res-opt-polar-tangent-cone-normal-cone">Theorem 9.66</a>
+that <span class="math notranslate nohighlight">\(T_C(\bx)^{\circ} = N_C(\bx)\)</span>.</p>
+</div>
+<p>This result shows that the definition of
+normal cone in <a class="reference internal" href="../convex_sets/cone_2.html#def-cvx-normal-cone">Definition 8.36</a>
+agrees with the definition in <a class="reference internal" href="#def-opt-bno-normal-cone">Definition 9.27</a>
+for convex sets.</p>
+</div>
+</div>
+<div class="section" id="optimality-conditions">
+<h2><span class="section-number">9.7.5. </span>Optimality Conditions<a class="headerlink" href="#optimality-conditions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="minimization-on-an-arbitrary-constraint-set">
+<h3><span class="section-number">9.7.5.1. </span>Minimization on an Arbitrary Constraint Set<a class="headerlink" href="#minimization-on-an-arbitrary-constraint-set" title="Permalink to this headline">¶</a></h3>
+<p>When the constraint set is nonconvex, then the tangent cone
+can be used as a suitable approximation to the constraint
+set at the point of local optimality. The tangent cone
+provides additional structure of being a cone and being
+closed.</p>
+<div class="proof theorem admonition" id="res-opt-tangent-cone-local-minimum">
+<p class="admonition-title"><span class="caption-number">Theorem 9.72 </span> (Tangent cone and local optimality)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be a function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Let <span class="math notranslate nohighlight">\(\ba\)</span> be a local minimum of <span class="math notranslate nohighlight">\(f\)</span> over a subset <span class="math notranslate nohighlight">\(C\)</span> of <span class="math notranslate nohighlight">\(S\)</span>.
+Assume that <span class="math notranslate nohighlight">\(f\)</span> is continuously differentiable over an open
+set <span class="math notranslate nohighlight">\(O\)</span> containing the local minimum <span class="math notranslate nohighlight">\(\ba\)</span>. Assume that <span class="math notranslate nohighlight">\(O \subseteq C\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \by, \nabla f(\ba) \rangle \geq 0, \Forall \by \in T_C(\ba).
+\]</div>
+<p>Equivalently, we must have</p>
+<div class="math notranslate nohighlight">
+\[
+- \nabla f(\ba) \in T_C(\ba)^{\circ};
+\]</div>
+<p>i.e., the negative of the gradient at the local minimum belongs to the
+<a class="reference internal" href="../convex_sets/cone_2.html#def-cvx-polar-cone">polar cone</a>
+of the tangent cone or the gradient at the local minimum belongs to the
+<a class="reference internal" href="../convex_sets/cone_2.html#def-dual-cone">dual cone</a>
+of the tangent cone.</p>
+</div>
+</div><p>This necessary condition means that the the value of function increases
+along every tangent direction in its local neighborhood.</p>
+<p>For a smooth <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span> the condition simplifies as follows.
+Let <span class="math notranslate nohighlight">\(\ba\)</span> be a local minimum of <span class="math notranslate nohighlight">\(f\)</span> over a subset <span class="math notranslate nohighlight">\(C\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \by, \nabla f(\ba) \rangle \geq 0, \Forall \by \in T_C(\ba).
+\]</div>
+<div class="proof admonition" id="proof">
+<p>Proof. For the zero tangent direction at <span class="math notranslate nohighlight">\(\ba\)</span>,
+the condition is met trivially.
+Let <span class="math notranslate nohighlight">\(\bt\)</span> be a nonzero tangent direction at <span class="math notranslate nohighlight">\(\ba\)</span>.</p>
+<ol>
+<li><p>Then there exists a sequence <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> of <span class="math notranslate nohighlight">\(C\)</span>
+and a sequence <span class="math notranslate nohighlight">\(\{\br_k \}\)</span> of <span class="math notranslate nohighlight">\(\VV\)</span> such that
+<span class="math notranslate nohighlight">\(\bx_k \neq \ba\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>,
+<span class="math notranslate nohighlight">\(\br_k \to \bzero\)</span>, <span class="math notranslate nohighlight">\(\bx_k \to \ba\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\bx_k - \ba}{\| \bx_k - \ba \|} =  \frac{\bt}{\| \bt \|} + \br_k.
+   \]</div>
+<p>The term <span class="math notranslate nohighlight">\(\br_k\)</span> is the residual between the <span class="math notranslate nohighlight">\(k\)</span>-th normalized direction
+and the normalized tangent direction.</p>
+</li>
+<li><p>WLOG assume that <span class="math notranslate nohighlight">\(\bx_k \in O \Forall k\)</span>. Otherwise drop finitely many
+terms from <span class="math notranslate nohighlight">\(\{ \bx_k \}\)</span> to achieve this.</p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(k\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx_k - \ba = \frac{\| \bx_k - \ba \|}{\| \bt \|}(\bt + \| \bt \| \br_k).
+   \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx_k \in O\)</span> for every <span class="math notranslate nohighlight">\(k\)</span>, hence <span class="math notranslate nohighlight">\(f\)</span> is continuously
+differentiable at every <span class="math notranslate nohighlight">\(\bx_k\)</span> and at every point on the line
+segment <span class="math notranslate nohighlight">\([\ba, \bx_k]\)</span>.</p></li>
+<li><p>By mean value theorem, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx_k) = f(\ba) + \langle \bx_k - \ba, \nabla f(\tilde{\bx}_k) \rangle
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{\bx}_k\)</span> lies on the line segment <span class="math notranslate nohighlight">\([\ba, \bx_k]\)</span>.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx_k \to \ba\)</span>, hence <span class="math notranslate nohighlight">\(\tilde{\bx}_k \to \ba\)</span> holds too.</p></li>
+<li><p>Substituting for <span class="math notranslate nohighlight">\(\bx_k - \ba\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   f(\bx_k)
+   &amp;= f(\ba) + \left \langle \frac{\| \bx_k - \ba \|}{\| \bt \|} \bt_k, 
+   \nabla f(\tilde{\bx}_k) \right \rangle  \\
+   &amp;= f(\ba) +  \frac{\| \bx_k - \ba \|}{\| \bt \|} 
+   \langle \bt_k , \nabla f(\tilde{\bx}_k) \rangle
+   \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bt_k = \bt + \| \bt \| \br_k\)</span>.</p>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\bt_k \to \bt\)</span> since <span class="math notranslate nohighlight">\(\br_k \to \bzero\)</span>.</p></li>
+<li><p>Suppose for contradiction that <span class="math notranslate nohighlight">\(\langle \bt, \nabla f(\ba) \rangle &lt; 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\tilde{\bx}_k \to \ba\)</span> and <span class="math notranslate nohighlight">\(\bt_k \to \bt\)</span>, hence it follows that
+for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span>, we have
+<span class="math notranslate nohighlight">\(\langle \bt_k, \nabla f(\tilde{\bx}_k) \rangle &lt; 0\)</span>.</p></li>
+<li><p>Hence, from the previous relation, we have
+<span class="math notranslate nohighlight">\(f(\bx_k) &lt; f(\ba)\)</span> for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Thus contradictions the local optimality of <span class="math notranslate nohighlight">\(\ba\)</span>.</p></li>
+<li><p>Hence we must have <span class="math notranslate nohighlight">\(\langle \bt, \nabla f(\ba) \rangle \geq 0\)</span>.</p></li>
+</ol>
+<p>An equivalent statement is that</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \by, -\nabla f(\ba) \rangle \leq 0, \Forall \by \in T_C(\ba).
+\]</div>
+<p>This means that <span class="math notranslate nohighlight">\(-\nabla f(\ba) \in T_C(\ba)^{\circ}\)</span>.
+Since the polar cone is the negative of the dual cone, hence
+<span class="math notranslate nohighlight">\(\nabla f(\ba) \in T_C(\ba)^*\)</span>.</p>
+</div>
+<div class="proof observation admonition" id="res-opt-smooth-local-minimum-descent">
+<p class="admonition-title"><span class="caption-number">Observation 9.9 </span> (Local minimum and descent directions)</p>
+<div class="observation-content section" id="proof-content">
+<p>Recall that a direction <span class="math notranslate nohighlight">\(\bd\)</span> that satisfies
+<span class="math notranslate nohighlight">\(\langle \bd, \nabla f(\ba) \rangle &lt; 0\)</span> is called a descent
+direction at <span class="math notranslate nohighlight">\(\ba\)</span>. Recall from <a class="reference internal" href="../mv_calculus/differentiation.html#res-mvc-first-order-approx">Theorem 5.1</a>
+that</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = f(\ba) + \langle \bx - \ba, \nabla f(\ba) \rangle + o (\| \bx - \ba \|).
+\]</div>
+<p>Thus for some <span class="math notranslate nohighlight">\(\bx = \ba + t \bd\)</span> where <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = f(\ba) + t \langle \bd, \nabla f(\ba) \rangle + o (\| \bx - \ba \|).
+\]</div>
+<p>Hence for sufficiently small <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, we have <span class="math notranslate nohighlight">\(f(\bx) &lt; f(\ba)\)</span>.</p>
+<p>Thus, <a class="reference internal" href="#res-opt-tangent-cone-local-minimum">Theorem 9.72</a> says that
+if <span class="math notranslate nohighlight">\(\ba\)</span> is a local minimum of <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(C\)</span>, then there is
+no descent direction within the tangent cone <span class="math notranslate nohighlight">\(T_C(\ba)\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="minimization-on-a-convex-constraint-set">
+<h3><span class="section-number">9.7.5.2. </span>Minimization on a Convex Constraint Set<a class="headerlink" href="#minimization-on-a-convex-constraint-set" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-smooth-local-minimum-convex-const">
+<p class="admonition-title"><span class="caption-number">Theorem 9.73 </span> (Local optimality with a convex constraint set)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: \VV \to \RERL\)</span> be a function with <span class="math notranslate nohighlight">\(S = \dom f\)</span>.
+Let <span class="math notranslate nohighlight">\(\ba\)</span> be a local minimum of <span class="math notranslate nohighlight">\(f\)</span> over a convex subset <span class="math notranslate nohighlight">\(C\)</span> of <span class="math notranslate nohighlight">\(S\)</span>.
+Assume that <span class="math notranslate nohighlight">\(f\)</span> is continuously differentiable over an open
+set <span class="math notranslate nohighlight">\(O\)</span> containing the local minimum <span class="math notranslate nohighlight">\(\ba\)</span>. Assume that <span class="math notranslate nohighlight">\(O \subseteq C\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx - \ba, \nabla f(\ba) \rangle \geq 0, \Forall \bx \in C.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is real valued (with <span class="math notranslate nohighlight">\(\dom f = \VV\)</span>)
+and <span class="math notranslate nohighlight">\(C = \VV\)</span>, this reduces to <span class="math notranslate nohighlight">\(\nabla f(\ba) = \bzero\)</span>.</p>
+</div>
+</div><p>This result is similar to <a class="reference internal" href="differentiable_objectives.html#res-cvxopt-diff-convex-optimal-criterion">Theorem 9.47</a>
+however applicable to all functions
+that are continuously differentiable in the neighborhood of their local minimum.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Since <span class="math notranslate nohighlight">\(C\)</span> is convex, hence by <a class="reference internal" href="#res-opt-feasible-tangent-cone">Theorem 9.64</a>,
+<span class="math notranslate nohighlight">\(\closure F_C(\bx) = T_C(\bx)\)</span> for every <span class="math notranslate nohighlight">\(\bx \in C\)</span>.</p>
+<ol>
+<li><p>By <a class="reference internal" href="#res-opt-tangent-cone-local-minimum">Theorem 9.72</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \by, \nabla f(\ba) \rangle \geq 0, \Forall \by \in T_C(\ba).
+   \]</div>
+</li>
+<li><p>In other words</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \by, \nabla f(\ba) \rangle \geq 0, \Forall \by \in \closure F_C(\ba).
+   \]</div>
+</li>
+<li><p>For any <span class="math notranslate nohighlight">\(\bx \in C\)</span>, we have <span class="math notranslate nohighlight">\(\bx - \ba \in F_C(\ba)\)</span> since <span class="math notranslate nohighlight">\(C\)</span> is convex.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \bx - \ba, \nabla f(\ba) \rangle \geq 0, \Forall \bx \in C.
+   \]</div>
+</li>
+</ol>
+<p>The special case of <span class="math notranslate nohighlight">\(C = \VV\)</span> is as follows.</p>
+<ol>
+<li><p>Choose an orthogonal basis <span class="math notranslate nohighlight">\(\be_1, \dots, \be_n\)</span> for <span class="math notranslate nohighlight">\(\VV\)</span>.</p></li>
+<li><p>By picking <span class="math notranslate nohighlight">\(\bx = \ba + \be_i\)</span> and <span class="math notranslate nohighlight">\(\bx = \ba - \be_i\)</span>, we see that</p>
+<div class="math notranslate nohighlight">
+\[
+   \langle \be_i \nabla f(\ba) \rangle = 0 \Forall i.
+   \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\nabla f(\ba) = \bzero\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="convex-functions-on-a-convex-set">
+<h3><span class="section-number">9.7.5.3. </span>Convex Functions on a Convex Set<a class="headerlink" href="#convex-functions-on-a-convex-set" title="Permalink to this headline">¶</a></h3>
+<p>Recall from Fermat’s optimality condition
+(<a class="reference internal" href="../convex_sets/subgradients.html#res-cvxf-subdiff-fermat-optimality">Theorem 8.233</a>)
+that for the unconstrained minimization problem,
+<span class="math notranslate nohighlight">\(\ba\)</span> is a minimizer of <span class="math notranslate nohighlight">\(f\)</span> if and only if
+<span class="math notranslate nohighlight">\(\bzero\)</span> is a subgradient of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(\ba\)</span>.</p>
+<p>A similar result can be obtained for the
+constrained optimization problem in terms
+of the subgradients of <span class="math notranslate nohighlight">\(f\)</span> and the normal
+cone of <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<div class="proof theorem admonition" id="res-opt-cvx-const-cvx-optimal">
+<p class="admonition-title"><span class="caption-number">Theorem 9.74 </span> (Optimality conditions for convex constrained optimization)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper and convex
+function. Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a convex
+set for which <span class="math notranslate nohighlight">\(\relint \dom f \cap \relint C \neq \EmptySet\)</span>.
+Then, <span class="math notranslate nohighlight">\(\bx^* \in C\)</span> is an optimal solution
+of <a class="reference internal" href="#equation-eq-cvx-const-cvx-opt-form">(9.15)</a> if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\text{ there exists } \bg \in \partial f(\bx^*)
+\text{ for which } - \bg \in N_C(\bx^*).
+\]</div>
+<p>Equivalently, <span class="math notranslate nohighlight">\(\bx^*\)</span> minimizes <span class="math notranslate nohighlight">\(f\)</span> over <span class="math notranslate nohighlight">\(C\)</span> if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\bzero \in \partial f(\bx^*) + T_C(\bx^*)^{\circ}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The problem in <a class="reference internal" href="#equation-eq-cvx-const-cvx-opt-form">(9.15)</a>
+can be rephrased as</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\bx \in \VV} f(\bx) + I_C(\bx)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(I_C\)</span> is the indicator function for the set <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(\relint \dom f \cap \relint C \neq \EmptySet\)</span>,
+hence due to the sum rule of subdifferential calculus
+(<a class="reference internal" href="../convex_sets/subgradients.html#res-cvxf-subdiff-sum-rule-proper-convex">Corollary 8.23</a>):</p>
+<div class="math notranslate nohighlight">
+\[
+   \partial (f + I_C) (\bx) = \partial f(\bx) + \partial I_C(\bx).
+   \]</div>
+</li>
+<li><p>Recall from <a class="reference internal" href="../convex_sets/subgradients.html#res-cvxf-subdifferential-indicator">Theorem 8.235</a> that</p>
+<div class="math notranslate nohighlight">
+\[
+   \partial I_C(\bx) = N_C(\bx).
+   \]</div>
+</li>
+<li><p>Hence for any <span class="math notranslate nohighlight">\(\bx \in \VV\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   \partial (f + \delta_C) (\bx) = \partial f(\bx) + N_C(\bx).
+   \]</div>
+</li>
+<li><p>Invoking Fermat’s optimality condition
+(<a class="reference internal" href="../convex_sets/subgradients.html#res-cvxf-subdiff-fermat-optimality">Theorem 8.233</a>),
+<span class="math notranslate nohighlight">\(\bx^* \in C\)</span> is an optimal solution of <a class="reference internal" href="#equation-eq-cvx-const-cvx-opt-form">(9.15)</a>
+if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+   \bzero \in \partial f(\bx^*) + N_C(\bx^*).
+   \]</div>
+</li>
+<li><p>In other words, there exists <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx^*)\)</span>
+and <span class="math notranslate nohighlight">\(\bh \in N_C(\bx^*)\)</span> such that <span class="math notranslate nohighlight">\(\bg + \bh = \bzero\)</span>.</p></li>
+<li><p>This is equivalent to saying that there exists a vector
+<span class="math notranslate nohighlight">\(\bg \in \partial f(\bx^*)\)</span> such that <span class="math notranslate nohighlight">\(-\bg \in N_C(\bx^*)\)</span>.</p></li>
+<li><p>This is same as the condition</p>
+<div class="math notranslate nohighlight">
+\[
+   (- \partial f(\bx^*)) \cap N_C(\bx^*) \neq \EmptySet.
+   \]</div>
+</li>
+</ol>
+<p>For the second part:</p>
+<ol>
+<li><p>By <a class="reference internal" href="#res-opt-polar-tangent-cone-normal-cone">Theorem 9.66</a>, we have
+<span class="math notranslate nohighlight">\(N_C(\bx^*) = T_C(\bx^*)^{\circ}\)</span> since <span class="math notranslate nohighlight">\(C\)</span> is convex.</p></li>
+<li><p>By the earlier argument, we have <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx^*)\)</span>
+and <span class="math notranslate nohighlight">\(\bh \in N_C(\bx^*)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bg + \bh = \bzero.
+   \]</div>
+</li>
+<li><p>This is equivalent to saying that</p>
+<div class="math notranslate nohighlight">
+\[
+   \bzero \in \partial f(\bx^*) + T_C(\bx^*)^{\circ}.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>By using the definition of the normal cone, we can provide an alternative
+specification of the necessary and sufficient optimality condition in
+a more explicit manner.</p>
+<div class="proof corollary admonition" id="res-opt-cvx-const-cvx-optimal-2">
+<p class="admonition-title"><span class="caption-number">Corollary 9.4 </span> (Optimality conditions for convex constrained optimization second version)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper and convex
+function. Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a convex
+set for which <span class="math notranslate nohighlight">\(\relint \dom f \cap \relint C \neq \EmptySet\)</span>.
+Then, <span class="math notranslate nohighlight">\(\bx^* \in C\)</span> is an optimal solution
+of <a class="reference internal" href="#equation-eq-cvx-const-cvx-opt-form">(9.15)</a> if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\text{ there exists } \bg \in \partial f(\bx^*)
+\text{ for which } \langle \bx - \bx^*, \bg \rangle \geq 0 \Forall \bx \in C.
+\]</div>
+</div>
+</div><p>Following is the refinement of <a class="reference internal" href="#res-opt-smooth-local-minimum-convex-const">Theorem 9.73</a>
+for continuously differentiable functions at the global minimum.</p>
+<div class="proof corollary admonition" id="res-opt-cvx-const-cvx-optimal-3">
+<p class="admonition-title"><span class="caption-number">Corollary 9.5 </span> (Minimization of convex and smooth function on a convex set)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \VV \to \RERL\)</span> be a proper and convex
+function. Let <span class="math notranslate nohighlight">\(C \subseteq \VV\)</span> be a convex
+set for which <span class="math notranslate nohighlight">\(\relint \dom f \cap \relint C \neq \EmptySet\)</span>.
+Assume that <span class="math notranslate nohighlight">\(f\)</span> is continuously differentiable at a point <span class="math notranslate nohighlight">\(\bx^* \in C\)</span>.</p>
+<p>Then, <span class="math notranslate nohighlight">\(\bx^* \in C\)</span> is an optimal solution
+of <a class="reference internal" href="#equation-eq-cvx-const-cvx-opt-form">(9.15)</a> if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx - \bx^*, \nabla f(\bx^*) \rangle \geq 0 \Forall \bx \in C.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="sum-of-smooth-and-convex-functions-on-an-arbitrary-constraint-set">
+<h3><span class="section-number">9.7.5.4. </span>Sum of Smooth and Convex Functions on an Arbitrary Constraint Set<a class="headerlink" href="#sum-of-smooth-and-convex-functions-on-an-arbitrary-constraint-set" title="Permalink to this headline">¶</a></h3>
+<div class="proof theorem admonition" id="res-opt-min-sum-smooth-convex-constrained">
+<p class="admonition-title"><span class="caption-number">Theorem 9.75 </span> (Minimization of sum of smooth and convex function)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\ba\)</span> be a local minimum of a function <span class="math notranslate nohighlight">\(f: \VV \to \RR\)</span>
+over a set <span class="math notranslate nohighlight">\(C\)</span>. Assume that the tangent cone <span class="math notranslate nohighlight">\(T_C(\ba)\)</span> is convex.
+Assume that <span class="math notranslate nohighlight">\(f\)</span> has the form</p>
+<div class="math notranslate nohighlight">
+\[
+f(\bx) = f_1(\bx) + f_2(\bx)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_1 : \VV \to \RR\)</span> is convex and <span class="math notranslate nohighlight">\(f_2 : \VV \to \RR\)</span> is smooth.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+- \nabla f_2(\ba) \in \partial f_1(\ba) + T_C(\ba).
+\]</div>
+</div>
+</div></div>
+<div class="section" id="optimization-over-unit-simplex">
+<h3><span class="section-number">9.7.5.5. </span>Optimization Over Unit Simplex<a class="headerlink" href="#optimization-over-unit-simplex" title="Permalink to this headline">¶</a></h3>
+<p>In this section, we consider the problem of minimizing a function
+over the unit simplex <span class="math notranslate nohighlight">\(\Delta_n\)</span>.</p>
+<p>Recall from <a class="reference internal" href="../convex_sets/rn_subsets.html#def-convex-unit-simplex">Definition 8.17</a> that the unit
+simplex is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta_n = \{\bx \in \RR^n 
+    \ST \langle \bx, \bone \rangle = 1, \bx \succeq \bzero \}.
+\]</div>
+<p>In other words, for every <span class="math notranslate nohighlight">\(\bx \in \Delta_n\)</span>, every component
+is nonnegative and their sum is 1.</p>
+<div class="proof theorem admonition" id="res-opt-cond-cvx-over-unit-simplex">
+<p class="admonition-title"><span class="caption-number">Theorem 9.76 </span> (Optimality conditions over unit simplex)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f : \RR^n \to \RERL\)</span> be a proper and convex
+function.</p>
+<p>Consider the optimization problem</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-cvx-unit-simplex-prob">
+<span class="eqno">(9.16)<a class="headerlink" href="#equation-eq-opt-cvx-unit-simplex-prob" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \text{minimize }  &amp;  &amp; f(\bx) \\
+&amp; \text{subject to } &amp; &amp; \bx \in \Delta_n.\end{split}\]</div>
+<p>Assume that <span class="math notranslate nohighlight">\(\relint \dom f \cap \relint \Delta_n \neq \EmptySet\)</span>.
+Then, <span class="math notranslate nohighlight">\(\bx^* \in \Delta_n\)</span> is an optimal solution
+if and only if there exists <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx^*)\)</span>
+and <span class="math notranslate nohighlight">\(\mu \in \RR\)</span> such that</p>
+<div class="math notranslate nohighlight" id="equation-eq-opt-cvx-unit-simplex-cond">
+<span class="eqno">(9.17)<a class="headerlink" href="#equation-eq-opt-cvx-unit-simplex-cond" title="Permalink to this equation">¶</a></span>\[\begin{split}g_i \begin{cases}
+ = \mu, &amp; x_i^* &gt; 0;\\
+ \geq \mu, &amp; x_i^* = 0.
+\end{cases}\end{split}\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume that for some <span class="math notranslate nohighlight">\(\bx^* \in \Delta_n\)</span>,
+there exists a <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx^*)\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span>
+satisfying <a class="reference internal" href="#equation-eq-opt-cvx-unit-simplex-cond">(9.17)</a>.</p>
+<ol>
+<li><p>Note that <span class="math notranslate nohighlight">\(\sum_{i=1}^n \bx_i^* = 1\)</span> simplifies to <span class="math notranslate nohighlight">\(\sum_{i \ST x_i &gt; 0} x_i^* = 1\)</span>.</p></li>
+<li><p>Now, for any <span class="math notranslate nohighlight">\(\bx \in \Delta_n\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \bg^T(\bx - \bx^*) 
+    &amp;= \sum_{i=1}^n g_i (x_i - x_i^*) \\
+    &amp;= \sum_{i \ST x_i^* &gt; 0} g_i (x_i - x_i^*) + \sum_{i \ST x_i^* = 0} g_i x_i \\
+    &amp;\geq \sum_{i \ST x_i^* &gt; 0} \mu (x_i - x_i^*) + \sum_{i \ST x_i^* = 0} \mu x_i \\
+    &amp;= \mu \sum_{i=1}^n x_i - \mu \sum_{i \ST x_i^* &gt; 0} x_i^* \\
+    &amp;= \mu 1  - \mu 1 = \mu - \mu = 0.
+    \end{split}\]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    \bg^T(\bx - \bx^*)\geq 0 \Forall \bx \in \Delta_n.
+    \]</div>
+</li>
+<li><p>Thus, due to <a class="reference internal" href="#res-opt-cvx-const-cvx-optimal-2">Corollary 9.4</a>,
+<span class="math notranslate nohighlight">\(\bx^*\)</span> is indeed an optimal point.</p></li>
+</ol>
+<p>For the converse, assume that <span class="math notranslate nohighlight">\(\bx^*\)</span> is an optimal point.</p>
+<ol>
+<li><p>Then, due to <a class="reference internal" href="#res-opt-cvx-const-cvx-optimal-2">Corollary 9.4</a>,
+there exists <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx^*)\)</span>
+such that <span class="math notranslate nohighlight">\(\bg^T(\bx - \bx^*)\geq 0 \Forall \bx \in \Delta_n\)</span>.</p></li>
+<li><p>We need to find a value of <span class="math notranslate nohighlight">\(\mu\)</span> such that <span class="math notranslate nohighlight">\(\bg\)</span>
+satisfies <a class="reference internal" href="#equation-eq-opt-cvx-unit-simplex-cond">(9.17)</a>.</p></li>
+<li><p>We consider the following three cases.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bx^* = \bzero\)</span>.</p></li>
+<li><p>Only one entry in <span class="math notranslate nohighlight">\(\bx^*\)</span> is nonzero and others are zero.</p></li>
+<li><p>Two or more entries in <span class="math notranslate nohighlight">\(\bx^*\)</span> are nonzero.</p></li>
+</ol>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(\bx^* = \bzero\)</span> then we can choose <span class="math notranslate nohighlight">\(\mu = \min \{ g_1, \dots, g_n \}\)</span>
+satisfying <a class="reference internal" href="#equation-eq-opt-cvx-unit-simplex-cond">(9.17)</a>.</p></li>
+<li><p>Suppose that only the <span class="math notranslate nohighlight">\(i\)</span>-th entry of <span class="math notranslate nohighlight">\(\bx^*\)</span> is nonzero and remaining
+entries are zero.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx^* \in \Delta_n\)</span> hence <span class="math notranslate nohighlight">\(\sum_{j=1}^n x_j^* = 1\)</span> implies that
+<span class="math notranslate nohighlight">\(x_i^* = 1\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\mu = g_i\)</span>.</p></li>
+<li><p>Pick any <span class="math notranslate nohighlight">\(j \in \{1,\dots,n \}\)</span> such that <span class="math notranslate nohighlight">\(j \neq i\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx = \be_j\)</span>; i.e., the unit vector whose <span class="math notranslate nohighlight">\(j\)</span>-th component is 1
+and other components are zero.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      &amp; \bg^T (\bx - \bx^*) \geq 0 \\
+      \implies &amp; \bg^T \bx - \bg^T \bx^* \geq 0 \\
+      \implies &amp;  g_j - g_i \geq 0 \\
+      \implies &amp; g_j \geq g_i = \mu.
+      \end{split}\]</div>
+</li>
+<li><p>Thus, with <span class="math notranslate nohighlight">\(\mu = g_i\)</span>, <a class="reference internal" href="#equation-eq-opt-cvx-unit-simplex-cond">(9.17)</a> is satisfied.</p></li>
+</ol>
+</li>
+<li><p>For the third case, let <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> denote two different indices
+for which <span class="math notranslate nohighlight">\(x_i^* &gt; 0\)</span> and <span class="math notranslate nohighlight">\(x_j^* &gt; 0\)</span>.</p>
+<ol>
+<li><p>Pick a vector <span class="math notranslate nohighlight">\(\bx \in \Delta_n\)</span> satisfying</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      x_k = \begin{cases}
+      x_k^*, &amp; k \notin \{i, j \}; \\
+      x_i^* - \frac{x_i^*}{2}, &amp; k = i ; \\
+      x_j^* + \frac{x_i^*}{2}, &amp; k = j .
+      \end{cases}
+      \end{split}\]</div>
+<p>We can verify that <span class="math notranslate nohighlight">\(\bx \in \Delta_n\)</span>.</p>
+</li>
+<li><p>Then, the inequality <span class="math notranslate nohighlight">\(\bg^T(\bx - \bx^*) \geq 0\)</span>
+simplifies to</p>
+<div class="math notranslate nohighlight">
+\[
+      - \frac{x_i^*}{2} g_i  + \frac{x_i^*}{2} g_j \geq 0.
+      \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(x_i^* &gt; 0\)</span>, hence this simplifies to <span class="math notranslate nohighlight">\(g_i \leq g_j\)</span>.</p></li>
+<li><p>Switching the role of <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> and following an identical
+argument, we get <span class="math notranslate nohighlight">\(g_i \geq g_j\)</span>.</p></li>
+<li><p>This means that <span class="math notranslate nohighlight">\(g_i = g_j\)</span> must hold true.</p></li>
+<li><p>The argument is independent of the choice of <span class="math notranslate nohighlight">\(i,j\)</span> for which
+<span class="math notranslate nohighlight">\(x_i^*, x_j^* &gt; 0\)</span>.</p></li>
+<li><p>Thus <span class="math notranslate nohighlight">\(g_i = g_j\)</span> holds true
+for every <span class="math notranslate nohighlight">\(i,j\)</span> such that <span class="math notranslate nohighlight">\(x_i^*, x_j^* &gt; 0\)</span>..</p></li>
+<li><p>This implies that all the components of <span class="math notranslate nohighlight">\(\bg\)</span> corresponding
+to the positive components of <span class="math notranslate nohighlight">\(\bx^*\)</span> must have the same
+value.</p></li>
+<li><p>Let this common value be <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p>In other words, <span class="math notranslate nohighlight">\(g_i = \mu\)</span> for all <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span> such that <span class="math notranslate nohighlight">\(x_i^* &gt; 0\)</span>.</p></li>
+<li><p>Now consider some <span class="math notranslate nohighlight">\(k \in \{1,\dots,n\}\)</span> such that <span class="math notranslate nohighlight">\(x_k = 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx = \be_k\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\sum_{i=1}^n \bx_i^* = 1\)</span> simplifies to <span class="math notranslate nohighlight">\(\sum_{i \ST x_i &gt; 0} x_i^* = 1\)</span>.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      &amp; \bg^T (\bx - \bx^* ) \geq 0 \\
+      \implies &amp; \bg^T \bx - \bg^T \bx^* \geq 0 \\
+      \implies &amp; g_k - \sum_{i \ST x_i^* &gt; 0} g_i x_i^*  \geq 0\\  
+      \implies &amp; g_k - \mu \sum_{i \ST x_i^* &gt; 0} x_i^*  \geq 0\\  
+      \implies &amp; g_k - \mu \geq 0\\ 
+      \implies &amp; g_k \geq \mu.
+      \end{split}\]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(g_i \geq \mu\)</span> for all <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span> such that <span class="math notranslate nohighlight">\(x^*_i = 0\)</span>.</p></li>
+<li><p>Thus, we have established that <span class="math notranslate nohighlight">\(\bg\)</span> indeed satisfies <a class="reference internal" href="#equation-eq-opt-cvx-unit-simplex-cond">(9.17)</a>.</p></li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="proof example admonition" id="ex-opt-unit-simplex-1">
+<p class="admonition-title"><span class="caption-number">Example 9.14 </span> (Optimization over the unit simplex)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider the function <span class="math notranslate nohighlight">\(f : \RR^n \to \RERL\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(\bx) = \begin{cases}
+\sum_{i=1}^n x_i \ln x_i - \sum_{i=1}^n y_i x_i, &amp; \bx \succeq \bzero;\\
+\infty &amp; \text{ otherwise}.
+\end{cases}
+\end{split}\]</div>
+<p>The vector <span class="math notranslate nohighlight">\(\by = (y_1, \dots, y_n) \in \RR^n\)</span> is fixed.
+Consider the optimization problem</p>
+<div class="math notranslate nohighlight">
+\[
+\min \{ f(\bx) \ST \bx \in \Delta_n \}.
+\]</div>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is a proper convex function.</p></li>
+<li><p>We can see that <span class="math notranslate nohighlight">\(\dom f = \RR^n_+\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\interior \dom f = \relint \dom f = \RR^n_{++}\)</span>.</p></li>
+<li><p>It is easy to see that <span class="math notranslate nohighlight">\(\relint \dom f \cap \relint \Delta_n \neq \EmptySet\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is differentiable at <span class="math notranslate nohighlight">\(\bx \in \interior \dom f\)</span>.</p></li>
+<li><p>The partial derivatives of <span class="math notranslate nohighlight">\(f\)</span> are given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\partial f}{\partial x_i} (\bx) = 1 + \ln x_i - y_i.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\partial f(\bx) = \{ \nabla f(\bx) \}\)</span> at every <span class="math notranslate nohighlight">\(\bx \succ \bzero\)</span>.</p></li>
+<li><p>Assume that there is an optimal solution satisfying <span class="math notranslate nohighlight">\(\bx^* \succ \bzero\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="#res-opt-cond-cvx-over-unit-simplex">Theorem 9.76</a>, there exists <span class="math notranslate nohighlight">\(\bg \in \partial f(\bx^*)\)</span>
+and <span class="math notranslate nohighlight">\(\mu \in \RR\)</span>
+satisfying <a class="reference internal" href="#equation-eq-opt-cvx-unit-simplex-cond">(9.17)</a>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx \succ \bzero\)</span>, <a class="reference internal" href="#equation-eq-opt-cvx-unit-simplex-cond">(9.17)</a>
+simplifies to <span class="math notranslate nohighlight">\(g_i = \mu\)</span> for all <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(f\)</span> is differentiable, hence the only subgradient is <span class="math notranslate nohighlight">\(\nabla f(\bx^*)\)</span>.</p></li>
+<li><p>Thus, there exists <span class="math notranslate nohighlight">\(\mu \in \RR\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\partial f}{\partial x_i} (\bx^*) = \mu.
+   \]</div>
+</li>
+<li><p>This implies</p>
+<div class="math notranslate nohighlight">
+\[
+   1 + \ln x_i^* - y_i = \mu.
+   \]</div>
+</li>
+<li><p>Therefore, for every <span class="math notranslate nohighlight">\(i\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   x_i^* = e^{\mu - 1 + y_i} = \alpha e^{y_i}
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha = e^{\mu - 1}\)</span>.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bx^* \in \Delta_n\)</span>, hence <span class="math notranslate nohighlight">\(\sum_{i=1}^n x_i^* = 1\)</span>.</p></li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; \sum_{i=1}^n \alpha e^{y_i} = 1 \\
+   \iff &amp; \alpha = \frac{1}{\sum_{i=1}^n e^{y_i}}.
+   \end{split}\]</div>
+</li>
+<li><p>Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+   x_i^* = \frac{e^{y_i}}{\sum_{j=1}^n e^{y_j}} \Forall i = 1,\dots,n.
+   \]</div>
+</li>
+<li><p>We note that <span class="math notranslate nohighlight">\(\bx^*\)</span> obtained above satisfies all the conditions
+in <a class="reference internal" href="#res-opt-cond-cvx-over-unit-simplex">Theorem 9.76</a>.</p></li>
+<li><p>Since these conditions are also sufficient, hence <span class="math notranslate nohighlight">\(\bx^*\)</span> is indeed
+the optimal solution for this minimization problem.</p></li>
+<li><p>Let us compute the optimal value of the minimization problem.</p></li>
+<li><p>We note that</p>
+<div class="math notranslate nohighlight">
+\[
+   \ln x_i^* = \mu - 1 + y_i.
+   \]</div>
+</li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   &amp; f(\bx^*) = \sum_{i=1}^n x_i^* \ln x_i^* - \sum_{i=1}^n y_i x_i^* \\
+   &amp;= \sum_{i=1}^n x_i^* ( \mu - 1 + y_i) - \sum_{i=1}^n y_i x_i^* \\
+   &amp;= \sum_{i=1}^n x_i^* ( \mu - 1) \\
+   &amp;= ( \mu - 1)  \sum_{i=1}^n x_i^* \\
+   &amp; = \mu -1.
+   \end{split}\]</div>
+</li>
+<li><p>In terms of <span class="math notranslate nohighlight">\(\by\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   f(\bx^*) = \mu -1 = \ln \alpha
+   = - \ln \left ( \sum_{i=1}^n e^{y_i} \right ).
+   \]</div>
+</li>
+<li><p>The optimal value is the negative of the log-sum-exp of <span class="math notranslate nohighlight">\(\by\)</span>.</p></li>
+</ol>
+<p>This optimization problem is used in the
+computation of the conjugate function for the
+negative entropy function.
+See <a class="reference internal" href="../convex_sets/conjugate_functions.html#res-cvxf-conjugate-neg-entropy-unit-simplex">Theorem 8.257</a>.</p>
+</div>
+</div></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./cvxopt"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="linear_constraints.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">9.6. </span>Linear Constraints</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="lagrange_multipliers.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.8. </span>Lagrange Multipliers</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

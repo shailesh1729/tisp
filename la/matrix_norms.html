@@ -1,0 +1,2862 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.13. Matrix Norms &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.14. Sequence Spaces" href="sequence_spaces.html" />
+    <link rel="prev" title="4.12. Important Vector Spaces" href="important_spaces.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter.html">
+   4. Linear Algebra
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/la/matrix_norms.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fla/matrix_norms.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#norms-like-ell-p-on-complex-vector-space">
+   4.13.1. Norms like
+   <span class="math notranslate nohighlight">
+    \(\ell_p\)
+   </span>
+   on Complex Vector Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties-of-frobenius-norm">
+   4.13.2. Properties of Frobenius Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#consistency-of-a-matrix-norm">
+   4.13.3. Consistency of a Matrix Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subordinate-matrix-norm">
+   4.13.4. Subordinate Matrix Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operator-norm">
+   4.13.5. Operator Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#p-norm-for-matrices">
+   4.13.6.
+   <span class="math notranslate nohighlight">
+    \(p\)
+   </span>
+   -norm for Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-2-norm">
+   4.13.7. The
+   <span class="math notranslate nohighlight">
+    \(2\)
+   </span>
+   -norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unitary-invariant-norms">
+   4.13.8. Unitary Invariant Norms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-properties-of-operator-norms">
+   4.13.9. More Properties of Operator Norms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#row-column-norms">
+   4.13.10. Row Column Norms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#block-diagonally-dominant-matrices-and-generalized-gershgorin-circle-theorem">
+   4.13.11. Block Diagonally Dominant Matrices and Generalized Gershgorin Circle Theorem
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Matrix Norms</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#norms-like-ell-p-on-complex-vector-space">
+   4.13.1. Norms like
+   <span class="math notranslate nohighlight">
+    \(\ell_p\)
+   </span>
+   on Complex Vector Space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties-of-frobenius-norm">
+   4.13.2. Properties of Frobenius Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#consistency-of-a-matrix-norm">
+   4.13.3. Consistency of a Matrix Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subordinate-matrix-norm">
+   4.13.4. Subordinate Matrix Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operator-norm">
+   4.13.5. Operator Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#p-norm-for-matrices">
+   4.13.6.
+   <span class="math notranslate nohighlight">
+    \(p\)
+   </span>
+   -norm for Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-2-norm">
+   4.13.7. The
+   <span class="math notranslate nohighlight">
+    \(2\)
+   </span>
+   -norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unitary-invariant-norms">
+   4.13.8. Unitary Invariant Norms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-properties-of-operator-norms">
+   4.13.9. More Properties of Operator Norms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#row-column-norms">
+   4.13.10. Row Column Norms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#block-diagonally-dominant-matrices-and-generalized-gershgorin-circle-theorem">
+   4.13.11. Block Diagonally Dominant Matrices and Generalized Gershgorin Circle Theorem
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="matrix-norms">
+<span id="sec-la-matrix-norms"></span><h1><span class="section-number">4.13. </span>Matrix Norms<a class="headerlink" href="#matrix-norms" title="Permalink to this headline">¶</a></h1>
+<p>This section reviews various matrix norms on the vector space of
+complex matrices over the field of complex numbers <span class="math notranslate nohighlight">\((\CC^{m \times n}, \CC)\)</span>.</p>
+<p>We know <span class="math notranslate nohighlight">\((\CC^{m \times n}, \CC)\)</span> is a finite dimensional vector space with
+dimension <span class="math notranslate nohighlight">\(m n\)</span>. We will usually refer to it as <span class="math notranslate nohighlight">\(\CC^{m \times n}\)</span>.</p>
+<p>Matrix norms will follow the usual definition of norms for a vector space.</p>
+<div class="proof definition admonition" id="def:mat:matrix_norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.156 </span> (Matrix norm)</p>
+<div class="definition-content section" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(\| \cdot \| : \CC^{m \times n} \to \RR\)</span> is called a <em>matrix norm</em> on
+<span class="math notranslate nohighlight">\(\CC^{m \times n}\)</span> if for all <span class="math notranslate nohighlight">\(\bA, \bB \in \CC^{m \times n}\)</span> and all <span class="math notranslate nohighlight">\(\alpha \in \CC\)</span>
+it satisfies the following</p>
+<ul>
+<li><p>[Positivity]</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \| \geq 0 
+   \]</div>
+<p>with <span class="math notranslate nohighlight">\(\| \bA \| = 0 \iff \bA  = \ZERO\)</span>.</p>
+</li>
+<li><p>[Homogeneity]</p>
+<div class="math notranslate nohighlight">
+\[
+        \| \alpha \bA \| = | \alpha | \| \bA \|.
+    \]</div>
+</li>
+<li><p>[Triangle inequality]</p>
+<div class="math notranslate nohighlight">
+\[
+        \| \bA + \bB \| \leq \| \bA \| + \| \bB \|.
+    \]</div>
+</li>
+</ul>
+</div>
+</div><p>We recall some of the standard results on finite dimensional normed vector spaces.</p>
+<p>All matrix norms are equivalent. Let <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> and <span class="math notranslate nohighlight">\(\| \cdot \|'\)</span>
+be two different matrix norms on  <span class="math notranslate nohighlight">\(\CC^{m \times n}\)</span>. Then
+there exist two constants <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> such that the following holds</p>
+<div class="math notranslate nohighlight">
+\[
+a \| \bA \| \leq \| \bA \|' \leq b \|A \|  \Forall \bA \in \CC^{m \times n}.
+\]</div>
+<p>A matrix norm is a continuous function <span class="math notranslate nohighlight">\(\| \cdot \| : \CC^{m \times n} \to \RR\)</span>.</p>
+<div class="section" id="norms-like-ell-p-on-complex-vector-space">
+<h2><span class="section-number">4.13.1. </span>Norms like <span class="math notranslate nohighlight">\(\ell_p\)</span> on Complex Vector Space<a class="headerlink" href="#norms-like-ell-p-on-complex-vector-space" title="Permalink to this headline">¶</a></h2>
+<p>Following norms are quite like <span class="math notranslate nohighlight">\(\ell_p\)</span> norms on
+finite dimensional complex vector space <span class="math notranslate nohighlight">\(\CC^n\)</span>.
+They are developed
+by the fact that the matrix vector space <span class="math notranslate nohighlight">\(\CC^{m\times n}\)</span>
+has one to one correspondence with the complex vector space <span class="math notranslate nohighlight">\(\CC^{m n}\)</span>.</p>
+<div class="proof definition admonition" id="def:mat:sum_norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.157 </span> (Sum norm)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \CC^{m\times n}\)</span> and <span class="math notranslate nohighlight">\(\bA  = [a_{i j}]\)</span>.</p>
+<p>Matrix <em>sum norm</em> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_S  = \sum_{i=1}^{m} \sum_{j=1}^n | a_{i j} |
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def:mat:frobenius_norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.158 </span> (Frobenius norm)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \CC^{m\times n}\)</span> and <span class="math notranslate nohighlight">\(\bA  = [a_{i j}]\)</span>.</p>
+<p>Matrix <em>Frobenius norm</em> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_F  = \left ( \sum_{i=1}^{m} \sum_{j=1}^n | a_{i j} |^2 \right )^{\frac{1}{2}}.
+\]</div>
+</div>
+</div><div class="proof definition admonition" id="def:mat:max_norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.159 </span> (Max norm)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \CC^{m\times n}\)</span> and <span class="math notranslate nohighlight">\(\bA  = [a_{i j}]\)</span>.</p>
+<p>Matrix <em>Max norm</em> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\| \bA \|_M  = \underset{\substack{
+1 \leq i \leq m \\ 1 \leq j \leq n}}{\max} | a_{i j} |.
+\end{split}\]</div>
+</div>
+</div></div>
+<div class="section" id="properties-of-frobenius-norm">
+<h2><span class="section-number">4.13.2. </span>Properties of Frobenius Norm<a class="headerlink" href="#properties-of-frobenius-norm" title="Permalink to this headline">¶</a></h2>
+<p>We now prove some elementary properties of Frobenius norm.</p>
+<div class="proof lemma admonition" id="lem:mat:frobenius_norm_hermitian_transpose">
+<p class="admonition-title"><span class="caption-number">Lemma 4.87 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>The Frobenius norm of a matrix is equal to the Frobenius norm of its Hermitian transpose.</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA^H \|_F = \| \bA \|_F.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This is valid since the norm involves only the absolute values of entries
+in the matrix.</p>
+<ol>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+        \bA = [a_{i j}].
+    \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+        \bA^H = [\overline{a_{j i}}]
+    \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+        \| \bA^H \|_F^2 
+        = \left ( \sum_{j=1}^n \sum_{i=1}^{m} | \overline{a_{i j}} |^2 \right )
+        = \left ( \sum_{i=1}^{m} \\ \sum_{j=1}^n | a_{i j} |^2 \right )
+        = \| \bA \|_F^2.
+    \end{split}\]</div>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA^H \|_F^2 = \| \bA \|_F^2 \implies \| \bA^H \|_F = \| \bA \|_F.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof lemma admonition" id="lem:mat:frob_norm_column_vectors">
+<p class="admonition-title"><span class="caption-number">Lemma 4.88 </span> (Expansion in squared norms of columns)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \CC^{m \times n}\)</span> be written as a row of column vectors</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \begin{bmatrix}
+\ba_1 &amp; \dots &amp; \ba_n
+\end{bmatrix}.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_F^2 = \sum_{j=1}^{n} \| \ba_j \|_2^2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba_j \|_2^2 = \sum_{i=1}^m \| a_{i j} \|_2^2.
+\]</div>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_F^2 = \left ( \sum_{i=1}^{m} \sum_{j=1}^n | a_{i j} |^2 \right )
+= \left ( \sum_{j=1}^n \left ( \sum_{i=1}^{m}  | a_{i j} |^2  \right ) \right )
+= \left (\sum_{j=1}^n  \| \ba_j \|_2^2 \right).
+\]</div>
+</div>
+<p>We thus showed that that the square of the Frobenius norm of a matrix
+is nothing but the sum of squares of <span class="math notranslate nohighlight">\(\ell_2\)</span> norms of its columns.</p>
+<div class="proof lemma admonition" id="lem:mat:frob_norm_row_vectors">
+<p class="admonition-title"><span class="caption-number">Lemma 4.89 </span></p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \CC^{m \times n}\)</span> be written as a column of row vectors</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bA = \begin{bmatrix}
+\underline{\ba}^1 \\
+\vdots \\
+\underline{\ba}^m
+\end{bmatrix}.
+\end{split}\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_F^2 = \sum_{i=1}^{m} \| \underline{\ba}^i \|_2^2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \underline{\ba}^i \|_2^2 = \sum_{j=1}^n \| a_{i j} \|_2^2.
+\]</div>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_F^2 = \left ( \sum_{i=1}^{m} \sum_{j=1}^n | a_{i j} |^2 \right )
+= \sum_{i=1}^{m} \| \underline{\ba}^i \|_2^2.
+\]</div>
+</div>
+<p>We now consider how the Frobenius norm is affected with the action of unitary matrices.</p>
+<ol class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be any arbitrary matrix in <span class="math notranslate nohighlight">\(\CC^{m \times n}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bU\)</span> be some unitary matrices in <span class="math notranslate nohighlight">\(\CC^{m \times m}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bV\)</span> be some unitary matrices in <span class="math notranslate nohighlight">\(\CC^{n \times n}\)</span>.</p></li>
+</ol>
+<p>We present our first result that multiplication with unitary matrices
+doesn’t change Frobenius norm of a matrix.</p>
+<div class="proof theorem admonition" id="thm:mat:frobenius_norm_unitary_matrix_invariant">
+<p class="admonition-title"><span class="caption-number">Theorem 4.143 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The Frobenius norm of a matrix is invariant to
+pre or post multiplication by a unitary matrix. i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bU \bA \|_F = \| \bA \|_F
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bV \|_F = \| \bA \|_F.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We can write <span class="math notranslate nohighlight">\(\bA\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \begin{bmatrix}
+\ba_1 &amp; \dots &amp; \ba_n
+\end{bmatrix}.
+\]</div>
+<p>So</p>
+<div class="math notranslate nohighlight">
+\[
+\bU \bA = \begin{bmatrix}
+\bU \ba_1 &amp; \dots &amp; \bU \ba_n
+\end{bmatrix}.
+\]</div>
+<p>Then applying <a class="reference internal" href="#lem:mat:frob_norm_column_vectors">Lemma 4.88</a> clearly</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bU \bA \|_F^2 =  \sum_{j=1}^{n} \|\bU \ba_j \|_2^2.
+\]</div>
+<p>But we know that unitary matrices are norm preserving. Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\|\bU \ba_j \|_2^2 = \| \ba_j \|_2^2.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bU \bA \|_F^2 = \sum_{j=1}^{n} \|\ba_j \|_2^2 = \| \bA \|_F^2
+\]</div>
+<p>which implies</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bU \bA \|_F = \| \bA \|_F.
+\]</div>
+<p>Similarly writing <span class="math notranslate nohighlight">\(\bA\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bA = \begin{bmatrix}
+\br_1 \\
+\vdots \\
+\br_m
+\end{bmatrix}.
+\end{split}\]</div>
+<p>we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bA \bV = \begin{bmatrix}
+\br_1  \bV\\
+\vdots \\
+\br_m \bV
+\end{bmatrix}.
+\end{split}\]</div>
+<p>Then applying <a class="reference internal" href="#lem:mat:frob_norm_row_vectors">Lemma 4.89</a> clearly</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bV \|_F^2 = \sum_{i=1}^{m} \| \br_i \bV \|_2^2.
+\]</div>
+<p>But we know that unitary matrices are norm preserving. Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\|\br_i \bV \|_2^2 = \|\br_i \|_2^2.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bV \|_F^2 = \sum_{i=1}^{m} \| \br_i \|_2^2 =  \| \bA \|_F^2
+\]</div>
+<p>which implies</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bV \|_F = \| \bA \|_F.
+\]</div>
+<p>An alternative approach for the 2nd part of the proof using the first part is just one line</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bV \|_F 
+= \| (\bA \bV)^H \|_F = \| \bV^H \bA^H \|_F = \| \bA^H \|_F = \| \bA \|_F.
+\]</div>
+<p>In above we use <a class="reference internal" href="#lem:mat:frobenius_norm_hermitian_transpose">Lemma 4.87</a>
+and the fact that <span class="math notranslate nohighlight">\(\bV\)</span> is a unitary matrix implies that <span class="math notranslate nohighlight">\(\bV^H\)</span> is also a unitary matrix.
+We have already shown that pre multiplication by a unitary matrix preserves Frobenius norm.</p>
+</div>
+<div class="proof theorem admonition" id="thm:mat:frobenius_norm_consistency">
+<p class="admonition-title"><span class="caption-number">Theorem 4.144 </span> (Consistency of Frobenius norm)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \CC^{m \times n}\)</span> and <span class="math notranslate nohighlight">\(\bB \in \CC^{n \times p}\)</span> be two matrices.
+Then the Frobenius norm of their product is less than
+or equal to the product of Frobenius norms
+of the matrices themselves. i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bB \|_F \leq \| \bA \|_F \| \bB \|_F.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We can write <span class="math notranslate nohighlight">\(\bA\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bA = \begin{bmatrix}
+\ba_1^T \\
+\vdots \\
+\ba_m^T
+\end{bmatrix}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ba_i\)</span> are <span class="math notranslate nohighlight">\(m\)</span> column vectors corresponding to rows of <span class="math notranslate nohighlight">\(\bA\)</span>.
+Similarly we can write  <span class="math notranslate nohighlight">\(\bB\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bB = \begin{bmatrix}
+\bb_1 &amp;
+\dots &amp;
+\bb_p
+\end{bmatrix}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bb_i\)</span> are column vectors corresponding to columns of <span class="math notranslate nohighlight">\(\bB\)</span>.</p>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bA \bB = 
+\begin{bmatrix}
+\ba_1^T \\
+\vdots \\
+\ba_m^T
+\end{bmatrix}
+\begin{bmatrix}
+\bb_1 &amp;
+\dots &amp;
+\bb_p
+\end{bmatrix}
+=  \begin{bmatrix}
+\ba_1^T \bb_1 &amp; \dots &amp; \ba_1^T \bb_p\\
+\vdots  &amp; \ddots &amp; \vdots \\
+\ba_m^T \bb_1 &amp; \dots &amp; \ba_m^T \bb_p
+\end{bmatrix}
+= \begin{bmatrix}
+\ba_i^T \bb_j
+\end{bmatrix}
+.
+\end{split}\]</div>
+<p>Now looking carefully</p>
+<div class="math notranslate nohighlight">
+\[
+\ba_i^T \bb_j = \langle \ba_i, \overline{\bb_j} \rangle.
+\]</div>
+<p>Applying the Cauchy-Schwartz inequality we have</p>
+<div class="math notranslate nohighlight">
+\[
+| \langle \ba_i, \overline{\bb_j} \rangle |^2 
+\leq \| \ba_i \|_2^2 \| \overline{\bb_j} \|_2^2 
+ =  \| \ba_i \|_2^2 \| \bb_j \|_2^2. 
+\]</div>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\| \bA \bB \|_F^2 
+&amp;= \sum_{i=1}^{m} \sum_{j=1}^{p} | \ba_i^T \bb_j |^2\\
+&amp;\leq \sum_{i=1}^{m} \sum_{j=1}^{p} \| \ba_i \|_2^2 \| \bb_j \|_2^2\\
+&amp;= \left ( \sum_{i=1}^{m} \| \ba_i \|_2^2 \right ) \left ( \sum_{j=1}^{p}  \| \bb_j \|_2^2\right )\\
+&amp;= \| \bA \|_F^2  \| \bB \|_F^2 
+\end{split}\]</div>
+<p>which implies</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bB \|_F \leq \| \bA \|_F \| \bB \|_F
+\]</div>
+<p>by taking square roots on both sides.</p>
+</div>
+<div class="proof corollary admonition" id="cor:mat:frobenius_norm_subordinate_euclidean_norm">
+<p class="admonition-title"><span class="caption-number">Corollary 4.28 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \CC^{m \times n}\)</span> and let <span class="math notranslate nohighlight">\(\bx \in \CC^n\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bx \|_2 \leq \| \bA \|_F \| \bx \|_2.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that Frobenius norm for a column matrix is same as
+<span class="math notranslate nohighlight">\(\ell_2\)</span> norm for corresponding column vector. i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_F = \| \bx \|_2 \Forall \bx \in \CC^n.
+\]</div>
+<p>Now applying  <a class="reference internal" href="#thm:mat:frobenius_norm_consistency">Theorem 4.144</a> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bx \|_2 
+= \| \bA \bx \|_F \leq \| \bA \|_F \| \bx \|_F 
+=  \| \bA \|_F \| \bx \|_2 \Forall \bx \in \CC^n.
+\]</div>
+</div>
+<p>It turns out that Frobenius norm is intimately related to the
+singular value decomposition
+of a matrix.</p>
+<div class="proof lemma admonition" id="res:mat:frobenius_norm_sum_of_singular_values">
+<p class="admonition-title"><span class="caption-number">Lemma 4.90 </span> (Frobenius norm and singular values)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \CC^{m \times n}\)</span>. Let the singular value decomposition of <span class="math notranslate nohighlight">\(\bA\)</span>
+be given by</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \bU \Sigma \bV^H.
+\]</div>
+<p>Let the singular values of <span class="math notranslate nohighlight">\(\bA\)</span> be <span class="math notranslate nohighlight">\(\sigma_1, \dots, \sigma_k\)</span>
+where <span class="math notranslate nohighlight">\(k = \min(m, n)\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_F = \sqrt {\sum_{i=1}^k \sigma_i^2}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This comes from the invariance of Frobenius norm with unitary
+transformations.</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \bU \Sigma \bV^H \implies \|A \|_F = \| \bU \Sigma \bV^H \|_F.
+\]</div>
+<p>But</p>
+<div class="math notranslate nohighlight">
+\[
+ \| \bU \Sigma \bV^H \|_F = \| \Sigma \bV^H \|_F = \| \Sigma \|_F
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\bU\)</span> and <span class="math notranslate nohighlight">\(\bV\)</span> are unitary matrices (see <a class="reference internal" href="#thm:mat:frobenius_norm_unitary_matrix_invariant">Theorem 4.143</a>
+).
+Now the only nonzero terms in <span class="math notranslate nohighlight">\(\Sigma\)</span> are the singular values.  Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_F = \| \Sigma \|_F = \sqrt {\sum_{i=1}^k \sigma_i^2}.
+\]</div>
+</div>
+</div>
+<div class="section" id="consistency-of-a-matrix-norm">
+<h2><span class="section-number">4.13.3. </span>Consistency of a Matrix Norm<a class="headerlink" href="#consistency-of-a-matrix-norm" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def:mat:consistent_matrix_norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.160 </span> (Consistent matrix norm)</p>
+<div class="definition-content section" id="proof-content">
+<p>A matrix norm <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> is called <em>consistent</em> on <span class="math notranslate nohighlight">\(\CC^{n \times n}\)</span> if</p>
+<div class="math notranslate nohighlight" id="equation-eq-consistent-matrix-norm-equation">
+<span class="eqno">(4.21)<a class="headerlink" href="#equation-eq-consistent-matrix-norm-equation" title="Permalink to this equation">¶</a></span>\[\| \bA \bB \| \leq \| \bA \| \| \bB \| \]</div>
+<p>holds true for all <span class="math notranslate nohighlight">\(\bA, \bB \in \CC^{n \times n}\)</span>.
+A matrix norm <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> is called  <em>consistent</em> if it is defined on <span class="math notranslate nohighlight">\(\CC^{m \times n}\)</span>
+for all <span class="math notranslate nohighlight">\(m, n \in \Nat\)</span> and
+<a class="reference internal" href="#equation-eq-consistent-matrix-norm-equation">(4.21)</a> holds for all matrices
+<span class="math notranslate nohighlight">\(\bA, \bB\)</span> for which the product <span class="math notranslate nohighlight">\(\bA \bB\)</span> is defined.</p>
+<p>A consistent matrix norm is also known as a <em>sub-multiplicative norm</em>.</p>
+</div>
+</div><p>With this definition and results in <a class="reference internal" href="#thm:mat:frobenius_norm_consistency">Theorem 4.144</a> we can
+see that Frobenius norm is consistent.</p>
+</div>
+<div class="section" id="subordinate-matrix-norm">
+<h2><span class="section-number">4.13.4. </span>Subordinate Matrix Norm<a class="headerlink" href="#subordinate-matrix-norm" title="Permalink to this headline">¶</a></h2>
+<p>A matrix operates on vectors from one space to generate vectors in another space.
+It is interesting to explore the connection between the norm of a matrix
+and norms of vectors in the domain and co-domain of a matrix.</p>
+<div class="proof definition admonition" id="def:mat:subordinate_matrix_norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.161 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(m, n \in \Nat\)</span> be given. Let <span class="math notranslate nohighlight">\(\| \cdot \|_{\alpha}\)</span>  be some norm on <span class="math notranslate nohighlight">\(\CC^m\)</span> and
+<span class="math notranslate nohighlight">\(\| \cdot \|_{\beta}\)</span>  be some norm on <span class="math notranslate nohighlight">\(\CC^n\)</span>.
+Let <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> be some norm on
+matrices in <span class="math notranslate nohighlight">\(\CC^{m \times n}\)</span>.
+We say that <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> is <em>subordinate</em>
+to the vector norms <span class="math notranslate nohighlight">\(\| \cdot \|_{\alpha}\)</span> and <span class="math notranslate nohighlight">\(\| \cdot \|_{\beta}\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bx \|_{\alpha} \leq \| \bA \| \| \bx \|_{\beta}
+\]</div>
+<p>for all <span class="math notranslate nohighlight">\(\bA \in \CC^{m \times n}\)</span> and for all <span class="math notranslate nohighlight">\(\bx \in \CC^n\)</span>.
+In other words the length of the vector doesn’t increase by the operation of <span class="math notranslate nohighlight">\(\bA\)</span>
+beyond a factor given by the norm of the matrix itself.</p>
+<p>If <span class="math notranslate nohighlight">\(\| \cdot \|_{\alpha}\)</span> and <span class="math notranslate nohighlight">\(\| \cdot \|_{\beta}\)</span> are same then we say that
+<span class="math notranslate nohighlight">\(\| \cdot \|\)</span> is <em>subordinate</em> to the vector norm <span class="math notranslate nohighlight">\(\| \cdot \|_{\alpha}\)</span>.</p>
+</div>
+</div><p>We have shown earlier in <a class="reference internal" href="#cor:mat:frobenius_norm_subordinate_euclidean_norm">Corollary 4.28</a>
+that Frobenius norm is subordinate to Euclidean norm.</p>
+</div>
+<div class="section" id="operator-norm">
+<h2><span class="section-number">4.13.5. </span>Operator Norm<a class="headerlink" href="#operator-norm" title="Permalink to this headline">¶</a></h2>
+<p>We now consider the maximum factor by which a matrix <span class="math notranslate nohighlight">\(\bA\)</span> can increase the
+length of a vector.</p>
+<div class="proof definition admonition" id="def:mat:operator_norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.162 </span> (Operator norm)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(m, n \in \Nat\)</span> be given.
+Let <span class="math notranslate nohighlight">\(\| \cdot \|_{\alpha}\)</span>  be some norm on <span class="math notranslate nohighlight">\(\CC^n\)</span> and
+<span class="math notranslate nohighlight">\(\| \cdot \|_{\beta}\)</span>  be some norm on <span class="math notranslate nohighlight">\(\CC^m\)</span>.
+For <span class="math notranslate nohighlight">\(\bA \in \CC^{m \times n}\)</span> we define</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \| \triangleq \| \bA \|_{\alpha \to \beta} 
+\triangleq \underset{\bx \neq 0}{\max }
+\frac{\| \bA \bx \|_{\beta}}{\| \bx \|_{\alpha}}.
+\]</div>
+<p>The term <span class="math notranslate nohighlight">\(\frac{\| \bA \bx \|_{\beta}}{\| \bx \|_{\alpha}}\)</span>
+represents the factor with which the length of <span class="math notranslate nohighlight">\(\bx\)</span> increased by
+operation of <span class="math notranslate nohighlight">\(\bA\)</span>.
+We simply pick up the maximum value of such scaling factors over all nonzero <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<p>The norm as defined above is known as <span class="math notranslate nohighlight">\((\alpha \to \beta)\)</span> <em>operator norm</em>,
+the <span class="math notranslate nohighlight">\((\alpha \to \beta)\)</span>-norm,
+or simply the <span class="math notranslate nohighlight">\(\alpha\)</span>-norm if <span class="math notranslate nohighlight">\(\alpha = \beta\)</span>.</p>
+</div>
+</div><div class="docutils">
+<p>We need to verify that this definition satisfies all properties of a norm.</p>
+<p>Nonnegativity</p>
+<ol class="simple">
+<li><p>Clearly if <span class="math notranslate nohighlight">\(\bA = \ZERO\)</span> then <span class="math notranslate nohighlight">\(\bA \bx = \bzero\)</span> always, hence <span class="math notranslate nohighlight">\(\| \bA \| = 0\)</span>.</p></li>
+<li><p>Conversely, if <span class="math notranslate nohighlight">\(\| \bA \| = 0\)</span> then <span class="math notranslate nohighlight">\(\| \bA \bx \|_{\beta} = 0 \Forall \bx \in \CC^n\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bA \bx = \bzero\)</span> for every <span class="math notranslate nohighlight">\(\bx \in \CC^n\)</span>.</p></li>
+<li><p>In particular this is true for the unit vectors <span class="math notranslate nohighlight">\(\be_i \in \CC^n\)</span>.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(i\)</span>-th column of <span class="math notranslate nohighlight">\(\bA\)</span> is given by
+<span class="math notranslate nohighlight">\(\bA \be_i\)</span> which is <span class="math notranslate nohighlight">\(\bzero\)</span>.</p></li>
+<li><p>Thus each column in <span class="math notranslate nohighlight">\(\bA\)</span> is <span class="math notranslate nohighlight">\(\bzero\)</span>.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bA = \ZERO\)</span>.</p></li>
+</ol>
+<p>Homogeneity</p>
+<ol>
+<li><p>Consider <span class="math notranslate nohighlight">\(c \in \CC\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \| c \bA \| = \underset{\bx \neq 0}{\max } \frac{\| c \bA \bx \|_{\beta}}{\| \bx \|_{\alpha}} 
+    = | c | \underset{\bx \neq 0}{\max } \frac{\| \bA \bx \|_{\beta}}{\| \bx \|_{\alpha}} 
+    = | c | \| \bA \|.
+    \]</div>
+</li>
+</ol>
+<p>We now present some useful observations on operator norm before we can prove triangle
+inequality for operator norm.</p>
+<ol>
+<li><p>For any <span class="math notranslate nohighlight">\(\bx \in \Kernel(\bA)\)</span>,
+<span class="math notranslate nohighlight">\(\bA \bx = \bzero\)</span> hence we only need to consider vectors which don’t belong
+to the kernel of <span class="math notranslate nohighlight">\(\bA\)</span>.</p></li>
+<li><p>Thus we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \|_{\alpha \to \beta} 
+    = \underset{\bx \notin \Kernel(\bA)} {\max } 
+    \frac{\| \bA \bx \|_{\beta}}{\| \bx \|_{\alpha}}.
+   \]</div>
+</li>
+<li><p>We also note that</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\| \bA c \bx \|_{\beta}}{\| c \bx \|_{\alpha}} 
+    = \frac{| c | \| \bA \bx \|_{\beta}}{ | c | \| \bx \|_{\alpha}}
+    = \frac{\| \bA \bx \|_{\beta}}{\| \bx \|_{\alpha}}  
+    \Forall c \neq 0,  \bx \neq \bzero.
+   \]</div>
+</li>
+<li><p>Thus, it is sufficient to find the maximum on unit norm vectors:</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \|_{\alpha \to \beta} 
+    = \underset{\| \bx \|_{\alpha} = 1} {\max } \| \bA \bx \|_{\beta}.
+   \]</div>
+</li>
+<li><p>Note that since <span class="math notranslate nohighlight">\(\|\bx \|_{\alpha} = 1\)</span> hence the term in denominator goes away.</p></li>
+</ol>
+</div>
+<div class="proof lemma admonition" id="lem:mat:operator_norm_subordinate">
+<p class="admonition-title"><span class="caption-number">Lemma 4.91 </span> (Operator norm is subordinate)</p>
+<div class="lemma-content section" id="proof-content">
+<p>The <span class="math notranslate nohighlight">\((\alpha \to \beta)\)</span>-operator norm is subordinate to vector norms <span class="math notranslate nohighlight">\(\| \cdot \|_{\alpha}\)</span>
+and <span class="math notranslate nohighlight">\(\| \cdot \|_{\beta}\)</span>. i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bx \|_{\beta} \leq \| \bA \|_{\alpha \to \beta } \| \bx \|_{\alpha}. 
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. For <span class="math notranslate nohighlight">\(\bx = \bzero\)</span> the inequality is trivially satisfied.
+For <span class="math notranslate nohighlight">\(\bx \neq \bzero\)</span>, by definition, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{\alpha \to \beta } \geq 
+\frac{\| \bA \bx \|_{\beta}}{\| \bx \|_{\alpha}} 
+\implies \| \bA \|_{\alpha \to \beta } \| \bx \|_{\alpha} 
+\geq \| \bA \bx \|_{\beta}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res-mat-operator-norm-maximizer-exist">
+<p class="admonition-title"><span class="caption-number">Theorem 4.145 </span> (Existence of the maximizer for operator norm)</p>
+<div class="theorem-content section" id="proof-content">
+<p>There exists a vector <span class="math notranslate nohighlight">\(\bx^* \in \CC^{n}\)</span>
+with unit norm (<span class="math notranslate nohighlight">\(\| \bx^* \|_{\alpha} = 1\)</span>) such that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{\alpha \to \beta} = \| \bA \bx^* \|_{\beta}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Recall that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{\alpha \to \beta} 
+= \underset{\| \bx \|_{\alpha} = 1} {\max } \| \bA \bx \|_{\beta}.
+\]</div>
+<ol class="simple">
+<li><p>The norm function <span class="math notranslate nohighlight">\(\| \cdot \|_{\beta}\)</span> is continuous on <span class="math notranslate nohighlight">\(\CC^m\)</span>.</p></li>
+<li><p>The mapping <span class="math notranslate nohighlight">\(\bx \mapsto \bA \bx\)</span> is continuous.</p></li>
+<li><p>Hence the function <span class="math notranslate nohighlight">\(\bx \mapsto \| \bA \bx \|_{\beta}\)</span> is continuous.</p></li>
+<li><p>The set <span class="math notranslate nohighlight">\(\{ \bx \in \CC^n \ST \| \bx \|_{\alpha} = 1\}\)</span> is compact.</p></li>
+<li><p>Hence, the function attains a supremum value over this set.</p></li>
+</ol>
+</div>
+<p>We are now ready to prove triangle inequality for operator norm.</p>
+<div class="proof lemma admonition" id="lem:mat:operator_norm_triangular_inequality">
+<p class="admonition-title"><span class="caption-number">Lemma 4.92 </span> (Triangle inequality for operator norm)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Operator norm as defined in <a class="reference internal" href="#def:mat:operator_norm">Definition 4.162</a> satisfies triangle inequality.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bB\)</span> be some matrices in <span class="math notranslate nohighlight">\(\CC^{m \times n}\)</span>.</p>
+<ol>
+<li><p>Consider the operator norm of matrix <span class="math notranslate nohighlight">\(\bA + \bB\)</span>.</p></li>
+<li><p>From previous remarks, there exists some vector
+<span class="math notranslate nohighlight">\(\bx^* \in \CC^n\)</span> with <span class="math notranslate nohighlight">\(\| \bx^* \|_{\alpha} = 1\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA + \bB \| = \| (\bA + \bB) \bx^* \|_{\beta}.
+   \]</div>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+    \| (\bA + \bB) \bx^* \|_{\beta}
+    = \| \bA \bx^* + \bB \bx^* \|_{\beta} 
+    \leq \| \bA \bx^*\|_{\beta} + \| \bB \bx^*\|_{\beta}. 
+   \]</div>
+</li>
+<li><p>From subordinate property of operator norm, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \bx^*\|_{\beta}  \leq \| \bA \| \|\bx^*\|_{\alpha} = \| \bA \|
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bB \bx^*\|_{\beta}  \leq \| \bB \| \|\bx^*\|_{\alpha} = \|B \|
+   \]</div>
+<p>since <span class="math notranslate nohighlight">\(\| \bx^* \|_{\alpha} = 1\)</span>.</p>
+</li>
+<li><p>Hence we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA + \bB \| \leq \| \bA \| + \| \bB \|.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>It turns out that operator norm is also consistent under certain conditions.</p>
+<div class="proof lemma admonition" id="lem:mat:p_matrix_norms_are_consistent">
+<p class="admonition-title"><span class="caption-number">Lemma 4.93 </span> (Consistency of operator norm)</p>
+<div class="lemma-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\| \cdot \|_{\alpha}\)</span> be defined over all <span class="math notranslate nohighlight">\(m \in \Nat\)</span>.
+Let <span class="math notranslate nohighlight">\(\| \cdot \|_{\beta} = \| \cdot \|_{\alpha}\)</span>.
+Then the operator norm</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{\alpha} 
+= \underset{\bx \neq \bzero}{\max } \frac{\| \bA \bx \|_{\alpha}}{\| \bx \|_{\alpha}}
+\]</div>
+<p>is consistent.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We need to show that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bB \|_{\alpha} \leq \| \bA \|_{\alpha} \| \bB \|_{\alpha}.
+\]</div>
+<ol>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \bB \|_{\alpha} 
+    = \underset{\bx \neq \bzero}{\max } \frac{\| \bA \bB \bx \|_{\alpha}}{\| \bx \|_{\alpha}}.
+   \]</div>
+</li>
+<li><p>We note that if <span class="math notranslate nohighlight">\(\bB \bx = \bzero\)</span>, then <span class="math notranslate nohighlight">\(\bA \bB \bx = \bzero\)</span>.</p></li>
+<li><p>Hence we can rewrite as</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \bB \|_{\alpha} 
+    = \underset{\bB \bx \neq \bzero}{\max } 
+    \frac{\| \bA \bB \bx \|_{\alpha}}{\| \bx \|_{\alpha}}.
+   \]</div>
+</li>
+<li><p>Now if <span class="math notranslate nohighlight">\(\bB \bx \neq \bzero\)</span> then <span class="math notranslate nohighlight">\( \| \bB \bx \|_{\alpha} \neq 0\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\| \bA \bB \bx \|_{\alpha}}{\| \bx \|_{\alpha}} 
+    = \frac{\| \bA \bB \bx \|_{\alpha}}{\|\bB \bx \|_{\alpha}} 
+    \frac{\| \bB \bx \|_{\alpha}}{\| \bx \|_{\alpha}}
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+     \underset{\bB \bx \neq \bzero}{\max }
+     \frac{\| \bA \bB \bx \|_{\alpha}}{\| \bx \|_{\alpha}} \leq 
+     \underset{\bB \bx \neq \bzero}{\max } 
+     \frac{\| \bA \bB \bx \|_{\alpha}}{\|\bB \bx \|_{\alpha}} 
+     \underset{\bB \bx \neq \bzero}{\max } 
+     \frac{\| \bB \bx \|_{\alpha}}{\| \bx \|_{\alpha}}.
+   \]</div>
+</li>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bB \|_{\alpha} 
+    = \underset{\bB \bx \neq \bzero}{\max } 
+    \frac{\| \bB \bx \|_{\alpha}}{\| \bx \|_{\alpha}}.
+   \]</div>
+</li>
+<li><p>Furthermore</p>
+<div class="math notranslate nohighlight">
+\[
+     \underset{\bB \bx \neq \bzero}{\max }
+     \frac{\| \bA \bB \bx \|_{\alpha}}{\|\bB \bx \|_{\alpha}} 
+     \leq
+      \underset{\by \neq \bzero}{\max }
+      \frac{\| \bA \by \|_{\alpha}}{\| \by \|_{\alpha}} 
+      = \|\bA \|_{\alpha}.
+   \]</div>
+</li>
+<li><p>Thus we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \bB \|_{\alpha} \leq \| \bA \|_{\alpha} \| \bB \|_{\alpha}.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="p-norm-for-matrices">
+<span id="sec-mat-p-norm"></span><h2><span class="section-number">4.13.6. </span><span class="math notranslate nohighlight">\(p\)</span>-norm for Matrices<a class="headerlink" href="#p-norm-for-matrices" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>We recall the definition of <span class="math notranslate nohighlight">\(\ell_p\)</span> norms for vectors <span class="math notranslate nohighlight">\(\bx \in \CC^n\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\| \bx \|_p = \begin{cases}
+\left ( \sum_{i=1}^{n} | \bx |_i^p  \right ) ^ {\frac{1}{p}} &amp;  p \in [1, \infty)\\
+\underset{1 \leq i \leq n}{\max} |x_i| &amp;  p = \infty
+\end{cases}.
+\end{split}\]</div>
+<p>The operator norms <span class="math notranslate nohighlight">\(\| \cdot \|_p\)</span> defined from <span class="math notranslate nohighlight">\(\ell_p\)</span> vector norms
+are of specific interest.</p>
+<div class="proof definition admonition" id="def:mat:p_matrix_norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.163 </span> (Matrix <span class="math notranslate nohighlight">\(p\)</span>-norm)</p>
+<div class="definition-content section" id="proof-content">
+<p>The <span class="math notranslate nohighlight">\(p\)</span>-norm for a matrix <span class="math notranslate nohighlight">\(\bA \in \CC^{m \times n}\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_p \triangleq \underset{\bx \neq \bzero}{\max }
+\frac{\| \bA \bx \|_p}{\| \bx \|_p} 
+= \underset{\| \bx \|_p = 1}{\max } \| \bA \bx \|_p
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\| \bx \|_p\)</span> is the standard <span class="math notranslate nohighlight">\(\ell_p\)</span> norm for vectors in <span class="math notranslate nohighlight">\(\CC^m\)</span> and <span class="math notranslate nohighlight">\(\CC^n\)</span>.</p>
+</div>
+</div></div>
+<p>As per <a class="reference internal" href="#lem:mat:p_matrix_norms_are_consistent">Lemma 4.93</a> <span class="math notranslate nohighlight">\(p\)</span>-norms
+for matrices are consistent norms.
+They are also sub-ordinate to <span class="math notranslate nohighlight">\(\ell_p\)</span> vector norms.</p>
+<p>Special cases are considered for <span class="math notranslate nohighlight">\(p=1,2\)</span>  and <span class="math notranslate nohighlight">\(\infty\)</span>.</p>
+<div class="proof theorem admonition" id="thm:mat:closed_form_p_norms">
+<p class="admonition-title"><span class="caption-number">Theorem 4.146 </span> (Max column sum, max row sum, spectral norms)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \CC^{m \times n}\)</span>.</p>
+<p>For <span class="math notranslate nohighlight">\(p=1\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_1 = \underset{1\leq j \leq n}{\max} \sum_{i=1}^m | a_{i j}|.
+\]</div>
+<p>This is also known as <em>max column sum norm</em>.</p>
+<p>For <span class="math notranslate nohighlight">\(p=\infty\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{\infty} = \underset{1\leq i \leq m}{\max} \sum_{j=1}^n | a_{i j}|.
+\]</div>
+<p>This is also known as <em>max row sum norm</em>.</p>
+<p>Finally for <span class="math notranslate nohighlight">\(p=2\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_2 = \sigma_1
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma_1\)</span> is the largest singular value of <span class="math notranslate nohighlight">\(\bA\)</span>.
+This is also known as <em>spectral norm</em>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Max column sum norm:</p>
+<ol>
+<li><p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+    \bA = \begin{bmatrix}
+    \ba^1 &amp; \dots, &amp; \ba^n
+    \end{bmatrix}.
+    \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+    \| \bA \bx \|_1 
+    &amp;= \left \| \sum_{j=1}^n x_j \ba^j \right \|_1 \\
+    &amp;\leq \sum_{j=1}^n \left \|  x_j \ba^j \right \|_1 \\
+    &amp;= \sum_{j=1}^n |x_j|  \left \| \ba^j \right \|_1 \\
+    &amp;\leq \underset{1 \leq j \leq n}{\max}\| \ba^j \|_1 \sum_{j=1}^n |x_j| \\
+    &amp;= \underset{1 \leq j \leq n}{\max}\| \ba^j \|_1 \| \bx \|_1.
+    \end{aligned}
+    \end{split}\]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \|_1 = \underset{\bx \neq \bzero}{\max } \frac{\| \bA \bx \|_1}{\| \bx \|_1}
+    \leq \underset{1 \leq j \leq n}{\max}\| \ba^j \|_1
+    \]</div>
+<p>which the maximum column sum.</p>
+</li>
+<li><p>We need to show that this upper bound is indeed an equality.</p></li>
+<li><p>Indeed for any <span class="math notranslate nohighlight">\(\bx=\be_j\)</span> where <span class="math notranslate nohighlight">\(\be_j\)</span> is a unit vector
+with <span class="math notranslate nohighlight">\(1\)</span> in <span class="math notranslate nohighlight">\(j\)</span>-th entry and 0 elsewhere,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \be_j \|_1 = \| \ba^j \|_1.
+    \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \|_1 \geq \| \ba^j \|_1 \quad \Forall 1 \leq j \leq n.
+    \]</div>
+</li>
+<li><p>Combining the two, we see that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \|_1 = \underset{1 \leq j \leq n}{\max}\| \ba^j \|_1.
+    \]</div>
+</li>
+</ol>
+<p>Max row sum norm:</p>
+<ol>
+<li><p>For <span class="math notranslate nohighlight">\(p=\infty\)</span>, we proceed as follows.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+    \| \bA \bx \|_{\infty} &amp;= \underset{1 \leq i \leq m}{\max}
+    \left | \sum_{j=1}^n a_{i j } x_j \right | \\
+    &amp; \leq  \underset{1 \leq i \leq m}{\max}
+    \sum_{j=1}^n | a_{i j } | | x_j |\\
+    &amp; \leq \underset{1 \leq j \leq n}{\max} | x_j | 
+    \underset{1 \leq i \leq m}{\max} \sum_{j=1}^n | a_{i j } |\\
+    &amp;= \| \bx \|_{\infty} 
+    \underset{1 \leq i \leq m}{\max}\| \underline{\ba}^i \|_1
+    \end{aligned}
+    \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\underline{\ba}^i\)</span> are the rows of <span class="math notranslate nohighlight">\(\bA\)</span>.</p>
+</li>
+<li><p>This shows that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \bx \|_{\infty} \leq \underset{1 \leq i \leq m}{\max}\| \underline{\ba}^i \|_1.
+    \]</div>
+</li>
+<li><p>We need to show that this is indeed an equality.</p></li>
+<li><p>Fix an <span class="math notranslate nohighlight">\(i = k\)</span> and choose <span class="math notranslate nohighlight">\(\bx\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    x_j = \sgn (a_{k j}).
+    \]</div>
+</li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(\| \bx \|_{\infty} = 1\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+    \| \bA \bx \|_{\infty} &amp;= \underset{1 \leq i \leq m}{\max}
+    \left | \sum_{j=1}^n a_{i j } x_j \right | \\
+    &amp;\geq \left | \sum_{j=1}^n a_{k j } x_j \right | \\
+    &amp;= \left |  \sum_{j=1}^n | a_{k j } |   \right | \\
+    &amp;= \sum_{j=1}^n | a_{k j } |\\
+    &amp;= \| \underline{\ba}^k \|_1.
+    \end{aligned}
+    \end{split}\]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \|_{\infty} \geq \underset{1 \leq i \leq m}{\max}\| \underline{\ba}^i \|_1.
+    \]</div>
+</li>
+<li><p>Combining the two inequalities we get:</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \|_{\infty} = \underset{1 \leq i \leq m}{\max}\| \underline{\ba}^i \|_1.
+    \]</div>
+</li>
+</ol>
+<p>Spectral norm:</p>
+<ol>
+<li><p>Remaining case is for <span class="math notranslate nohighlight">\(p=2\)</span>.</p></li>
+<li><p>For any vector <span class="math notranslate nohighlight">\(\bx\)</span> with <span class="math notranslate nohighlight">\(\| \bx \|_2 = 1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \bx \|_2  = \| \bU \Sigma \bV^H \bx \|_2 
+    = \| \bU (\Sigma \bV^H \bx )\|_2  = \| \Sigma \bV^H \bx \|_2
+    \]</div>
+<p>since <span class="math notranslate nohighlight">\(\ell_2\)</span> norm is invariant to unitary transformations.</p>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bv = \bV^H \bx\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\|\bv\|_2 = \| \bV^H \bx \|_2 = \| \bx \|_2 = 1\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(k = \min(m, n)\)</span>.</p></li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \bA \bx \|_2 &amp;= \| \Sigma \bv \|_2\\ 
+    &amp;= \left ( \sum_{j=1}^k | \sigma_j v_j |^2 \right )^{\frac{1}{2}}\\
+    &amp;\leq  \sigma_1 \left ( \sum_{j=1}^k | v_j |^2 \right )^{\frac{1}{2}}\\
+    &amp;= \sigma_1 \| \bv \|_2 = \sigma_1.
+    \end{split}\]</div>
+</li>
+<li><p>This shows that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \|_2 \leq \sigma_1.
+    \]</div>
+</li>
+<li><p>Now consider some vector <span class="math notranslate nohighlight">\(\bx\)</span> such that <span class="math notranslate nohighlight">\(\bv = (1, 0, \dots, 0)\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \bx \|_2 = \| \Sigma \bv \|_2 = \sigma_1.
+    \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \|_2 \geq \sigma_1.
+    \]</div>
+</li>
+<li><p>Combining the two, we get that <span class="math notranslate nohighlight">\(\| \bA \|_2 = \sigma_1\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="the-2-norm">
+<span id="sec-mat-2-norm-matrix"></span><h2><span class="section-number">4.13.7. </span>The <span class="math notranslate nohighlight">\(2\)</span>-norm<a class="headerlink" href="#the-2-norm" title="Permalink to this headline">¶</a></h2>
+<div class="proof theorem admonition" id="thm:mat:2_norm_square_matrices">
+<p class="admonition-title"><span class="caption-number">Theorem 4.147 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA \in \CC^{n \times n}\)</span> have singular values
+<span class="math notranslate nohighlight">\(\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_n\)</span>.
+Let the eigen values for <span class="math notranslate nohighlight">\(\bA\)</span> be
+<span class="math notranslate nohighlight">\(\lambda_1, \lambda_2, \dots, \lambda_n\)</span>
+with <span class="math notranslate nohighlight">\(|\lambda_1| \geq |\lambda_2| \geq \dots \geq |\lambda_n|\)</span>.
+Then the following hold</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_2 = \sigma_1 
+\]</div>
+<p>and if <span class="math notranslate nohighlight">\(\bA\)</span> is nonsingular, then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA^{-1} \|_2 = \frac{1}{\sigma_n}. 
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\bA\)</span> is symmetric and positive definite, then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_2 = \lambda_1 
+\]</div>
+<p>and if <span class="math notranslate nohighlight">\(\bA\)</span> is nonsingular, then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA^{-1} \|_2 = \frac{1}{\lambda_n}.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\bA\)</span> is normal then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_2 = |\lambda_1|
+\]</div>
+<p>and if <span class="math notranslate nohighlight">\(\bA\)</span> is nonsingular, then</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA^{-1} \|_2 = \frac{1}{|\lambda_n|}.
+\]</div>
+</div>
+</div></div>
+<div class="section" id="unitary-invariant-norms">
+<h2><span class="section-number">4.13.8. </span>Unitary Invariant Norms<a class="headerlink" href="#unitary-invariant-norms" title="Permalink to this headline">¶</a></h2>
+<div class="proof definition admonition" id="def:mat:unitary_invariant_matrix_norms">
+<p class="admonition-title"><span class="caption-number">Definition 4.164 </span> (Unitary invariant norm)</p>
+<div class="definition-content section" id="proof-content">
+<p>A matrix norm <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> on <span class="math notranslate nohighlight">\(\CC^{m \times n}\)</span> is called <em>unitary invariant</em> if
+<span class="math notranslate nohighlight">\(\| \bU \bA \bV \| = \| \bA \|\)</span> for any <span class="math notranslate nohighlight">\(\bA \in \CC^{m \times n}\)</span>
+and any unitary matrices
+<span class="math notranslate nohighlight">\(\bU \in \CC^{m \times m}\)</span> and <span class="math notranslate nohighlight">\(\bV \in \CC^{n \times n}\)</span>.</p>
+</div>
+</div><p>We have already seen in <a class="reference internal" href="#thm:mat:frobenius_norm_unitary_matrix_invariant">Theorem 4.143</a>
+that Frobenius norm is unitary invariant.</p>
+<p>It turns out that spectral norm is also unitary invariant.</p>
+</div>
+<div class="section" id="more-properties-of-operator-norms">
+<h2><span class="section-number">4.13.9. </span>More Properties of Operator Norms<a class="headerlink" href="#more-properties-of-operator-norms" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>In this section we will focus on operator norms connecting
+normed linear spaces <span class="math notranslate nohighlight">\((\CC^n, \| \cdot \|_{p})\)</span> and
+<span class="math notranslate nohighlight">\((\CC^m, \| \cdot \|_{q})\)</span>.
+Typical values of <span class="math notranslate nohighlight">\(p, q\)</span> would be in <span class="math notranslate nohighlight">\(\{1, 2, \infty\}\)</span>.</p>
+<p>We recall that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{p \to q } 
+= \underset{\bx \neq \bzero}{\max} \frac{\| \bA \bx \|_q}{\| \bx \|_p}
+= \underset{ \| \bx \|_p = 1}{\max} \| \bA \bx \|_q 
+= \underset{\| \bx \|_p \leq 1}{\max} \| \bA \bx \|_q.
+\]</div>
+<p>The table below <span id="id1">[<a class="reference internal" href="../bib.html#id133" title="Joel A Tropp. Just relax: convex programming methods for subset selection and sparse approximation. ICES report, 2004.">36</a>]</span> shows how to compute
+different <span class="math notranslate nohighlight">\((p, q)\)</span> norms.
+Some can be computed easily while others are NP-hard to compute.</p>
+</div>
+<table class="table" id="tbl-mat-calculation-p-q-operator-norms">
+<caption><span class="caption-number">Table 4.1 </span><span class="caption-text">Typical <span class="math notranslate nohighlight">\((p \to q)\)</span> norms</span><a class="headerlink" href="#tbl-mat-calculation-p-q-operator-norms" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(p\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(q\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\| \bA \|_{p \to q}\)</span></p></th>
+<th class="head"><p>Calculation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(\| \bA \|_{1 }\)</span></p></td>
+<td><p>Maximum <span class="math notranslate nohighlight">\(l_1\)</span> norm of a column</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\| \bA \|_{1  \to 2}\)</span></p></td>
+<td><p>Maximum <span class="math notranslate nohighlight">\(l_2\)</span> norm of a column</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(\infty\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\| \bA \|_{1  \to \infty}\)</span></p></td>
+<td><p>Maximum absolute entry of a matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(\| \bA \|_{2 \to 1}\)</span></p></td>
+<td><p>NP hard</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\| \bA \|_{2}\)</span></p></td>
+<td><p>Maximum singular value</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\infty\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\| \bA \|_{2  \to \infty}\)</span></p></td>
+<td><p>Maximum <span class="math notranslate nohighlight">\(l_2\)</span> norm of a row</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\infty\)</span></p></td>
+<td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(\| \bA \|_{\infty  \to 1}\)</span></p></td>
+<td><p>NP hard</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\infty\)</span></p></td>
+<td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\| \bA \|_{\infty  \to 2}\)</span></p></td>
+<td><p>NP hard</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\infty\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\infty\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\| \bA \|_{\infty}\)</span></p></td>
+<td><p>Maximum <span class="math notranslate nohighlight">\(l_1\)</span>-norm of a row</p></td>
+</tr>
+</tbody>
+</table>
+<p>The topological dual of the finite dimensional normed linear space
+<span class="math notranslate nohighlight">\((\CC^n, \| \cdot \|_{p})\)</span>
+is the normed linear space <span class="math notranslate nohighlight">\((\CC^n, \| \cdot \|_{p'})\)</span>
+where</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{p} + \frac{1}{p'} = 1.
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\ell_2\)</span>-norm is dual of <span class="math notranslate nohighlight">\(l_2\)</span>-norm. It is a self dual.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\ell_1\)</span> norm and <span class="math notranslate nohighlight">\(\ell_{\infty}\)</span>-norm are dual of each other.</p></li>
+</ul>
+<div class="docutils">
+<p>When a matrix <span class="math notranslate nohighlight">\(\bA\)</span> maps from the space <span class="math notranslate nohighlight">\((\CC^n, \| \cdot \|_{p})\)</span> to
+the space <span class="math notranslate nohighlight">\((\CC^m, \| \cdot \|_{q})\)</span>, we can view its
+conjugate transpose <span class="math notranslate nohighlight">\(\bA^H\)</span>
+as a mapping from the space <span class="math notranslate nohighlight">\((\CC^m, \| \cdot \|_{q'})\)</span>
+to <span class="math notranslate nohighlight">\((\CC^n, \| \cdot \|_{p'})\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res:mat:operator_norm_conjugate_transpose">
+<p class="admonition-title"><span class="caption-number">Theorem 4.148 </span> (Operator norm and conjugate transpose)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Operator norm of a matrix always equals the operator norm of its conjugate transpose.
+In other words</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{p \to q} = \| \bA^H \|_{q' \to p'}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{p} + \frac{1}{p'} = 1, \frac{1}{q} + \frac{1}{q'} = 1.
+\]</div>
+</div>
+</div><div class="docutils">
+<p>Specific applications of this result are:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_2 = \| \bA^H \|_2.
+\]</div>
+<p>This is obvious since the maximum singular value of a matrix and its conjugate
+transpose are same.</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_1 = \| \bA^H \|_{\infty}, \quad \| \bA \|_{\infty} = \| \bA^H \|_1.
+\]</div>
+<p>This is also obvious since max column sum of <span class="math notranslate nohighlight">\(\bA\)</span> is same as
+the max row sum norm of <span class="math notranslate nohighlight">\(\bA^H\)</span> and vice versa.</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to \infty} = \| \bA^H \|_{1 \to \infty}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to 2} = \| \bA^H \|_{2 \to \infty}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{\infty \to 2} = \| \bA^H \|_{2 \to 1}.
+\]</div>
+</div>
+<p>We now need to show the result for the general case (arbitrary <span class="math notranslate nohighlight">\(1 \leq p, q \leq \infty\)</span>).</p>
+<div class="proof admonition" id="proof">
+<p>Proof. TODO</p>
+</div>
+<div class="proof theorem admonition" id="res:mat:1_to_p_operator_norm">
+<p class="admonition-title"><span class="caption-number">Theorem 4.149 </span> (<span class="math notranslate nohighlight">\(1 \to p\)</span> norm)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to p} = \underset{1 \leq j \leq n}{\max}\| \ba^j \|_p.
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\bA = \begin{bmatrix}
+\ba^1 &amp; \dots, &amp; \ba^n
+\end{bmatrix}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Expanding:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\| \bA \bx \|_p 
+&amp;= \left \| \sum_{j=1}^n x_j \ba^j \right \|_p \\
+&amp;\leq \sum_{j=1}^n \left \|  x_j \ba^j \right \|_p \\
+&amp;= \sum_{j=1}^n |x_j|  \left \|   \ba^j \right \|_p \\
+&amp;\leq \underset{1 \leq j \leq n}{\max}\| \ba^j \|_p \sum_{j=1}^n |x_j| \\
+&amp;= \underset{1 \leq j \leq n}{\max}\| \ba^j \|_p \| \bx \|_1.
+\end{split}\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to p} = \underset{\bx \neq \bzero}{\max } 
+\frac{\| \bA \bx \|_p}{\| \bx \|_1}
+\leq \underset{1 \leq j \leq n}{\max}\| \ba^j \|_p.
+\]</div>
+<p>We need to show that this upper bound is indeed an equality.</p>
+<p>Indeed for any <span class="math notranslate nohighlight">\(\bx=\be_j\)</span> where <span class="math notranslate nohighlight">\(\be_j\)</span> is a unit vector
+with <span class="math notranslate nohighlight">\(1\)</span> in <span class="math notranslate nohighlight">\(j\)</span>-th entry and 0 elsewhere,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \be_j \|_p = \| \ba^j \|_p.
+\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to p} \geq \| \ba^j \|_p \quad \Forall 1 \leq j \leq n.
+\]</div>
+<p>Combining the two, we see that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to p} = \underset{1 \leq j \leq n}{\max}\| \ba^j \|_p.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res:mat:p_to_infty_operator_norm">
+<p class="admonition-title"><span class="caption-number">Theorem 4.150 </span> (<span class="math notranslate nohighlight">\(p \to \infty\)</span> norm)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{p \to \infty} = \underset{1 \leq i \leq m}{\max}\| \underline{\ba}^i \|_q
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{p} + \frac{1}{q} = 1.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Using <a class="reference internal" href="#res:mat:operator_norm_conjugate_transpose">Theorem 4.148</a>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{p \to \infty} = \| \bA^H \|_{1 \to q}.
+\]</div>
+<p>Using <a class="reference internal" href="#res:mat:1_to_p_operator_norm">Theorem 4.149</a>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA^H \|_{1 \to q} = \underset{1 \leq i \leq m}{\max}\| \underline{\ba}^i \|_q.
+\]</div>
+<p>This completes the proof.</p>
+</div>
+<div class="proof theorem admonition" id="res:mat:p_q_norm_consistency">
+<p class="admonition-title"><span class="caption-number">Theorem 4.151 </span> (Consistency of <span class="math notranslate nohighlight">\(p \to q\)</span> norms)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For two matrices <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bB\)</span> with <span class="math notranslate nohighlight">\(p,q,s \geq 1\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bB \|_{p \to q} \leq 
+ \| \bB \|_{p \to s} \| \bA \|_{s \to q}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We start with</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bB \|_{p \to q}  = 
+\underset{\| \bx \|_p = 1}{\max} \| \bA ( \bB \bx) \|_q.
+\]</div>
+<p>From <a class="reference internal" href="#lem:mat:operator_norm_subordinate">Lemma 4.91</a>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA ( \bB \bx) \|_q \leq 
+\| \bA \|_{s \to q} \| ( \bB \bx) \|_s.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bB \|_{p \to q}  \leq  \| \bA \|_{s \to q}
+\underset{\| \bx \|_p = 1}{\max} \| ( \bB \bx) \|_s
+= \| \bA \|_{s \to q} \| \bB \|_{p \to s}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res:mat:p_infty_norm_consistency">
+<p class="admonition-title"><span class="caption-number">Theorem 4.152 </span> (Consistency of <span class="math notranslate nohighlight">\(p \to \infty\)</span> norms)</p>
+<div class="theorem-content section" id="proof-content">
+<p>For two matrices <span class="math notranslate nohighlight">\(\bA\)</span> and <span class="math notranslate nohighlight">\(\bB\)</span> and <span class="math notranslate nohighlight">\(p \geq 1\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bB \|_{p \to \infty} \leq 
+\| \bA \|_{\infty} \| \bB \|_{p \to \infty}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We start with</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bB \|_{p \to \infty}  = 
+\underset{\| \bx \|_p = 1}{\max} \| \bA ( \bB \bx) \|_{\infty}.
+\]</div>
+<p>From <a class="reference internal" href="#lem:mat:operator_norm_subordinate">Lemma 4.91</a>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA ( \bB \bx) \|_{\infty} \leq 
+\| \bA \|_{\infty \to \infty} \| ( \bB \bx) \|_{\infty}.
+\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \bB \|_{p \to \infty}  \leq  \| \bA \|_{\infty \to \infty}
+\underset{\| \bx \|_p = 1}{\max} \| ( \bB \bx) \|_{\infty}
+= \| \bA \|_{\infty} \| \bB \|_{p \to \infty}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res:mat:dominance_p_infty_p_norm">
+<p class="admonition-title"><span class="caption-number">Theorem 4.153 </span> (Dominance of <span class="math notranslate nohighlight">\(p\)</span>-norm on <span class="math notranslate nohighlight">\(p \to \infty\)</span> norm)</p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{p \to \infty} \leq \| \bA \|_{p}.
+\]</div>
+<p>In particular</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to \infty} \leq  \| \bA \|_{1}.
+\]</div>
+<p>Also:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{2 \to \infty} \leq  \| \bA \|_{2}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Choosing <span class="math notranslate nohighlight">\(q = \infty\)</span> and <span class="math notranslate nohighlight">\(s = p\)</span> and
+applying <a class="reference internal" href="#res:mat:p_q_norm_consistency">Theorem 4.151</a></p>
+<div class="math notranslate nohighlight">
+\[
+\| \bI \bA \|_{p \to \infty} \leq 
+ \| \bA \|_{p \to p} \| \bI \|_{p \to \infty}.
+\]</div>
+<p>But <span class="math notranslate nohighlight">\(\| \bI \|_{p \to \infty}\)</span> is the maximum <span class="math notranslate nohighlight">\(\ell_p\)</span>
+norm of any row of <span class="math notranslate nohighlight">\(\bI\)</span> which is <span class="math notranslate nohighlight">\(1\)</span>.
+Thus</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{p \to \infty} \leq  \| \bA \|_{p \to p}.
+\]</div>
+</div>
+<div class="docutils">
+<p>Consider the expression</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\underset{ \substack{\bz \in \ColSpace(\bA^H) \\ \bz \neq \bzero}}{\min} 
+\frac{\| \bA \bz \|_{q}}{\| \bz \|_p}. 
+\end{split}\]</div>
+<p>The constraint <span class="math notranslate nohighlight">\(\bz \in  \ColSpace(\bA^H), \bz \neq \bzero\)</span>
+means there exists some vector <span class="math notranslate nohighlight">\(\bu \notin \Kernel(\bA^H)\)</span> such that
+<span class="math notranslate nohighlight">\(\bz = \bA^H \bu\)</span>.</p>
+<p>This expression measures the factor by which the non-singular part of <span class="math notranslate nohighlight">\(\bA\)</span>
+can change the length of a vector.</p>
+</div>
+<div class="proof theorem admonition" id="res:mat:bound_range_A_H_p_q_norm_pseudoinverse">
+<p class="admonition-title"><span class="caption-number">Theorem 4.154 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>The following bound holds for every matrix <span class="math notranslate nohighlight">\(\bA\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\underset{\substack{\bz \in \ColSpace(\bA^H)\\ \bz \neq \bzero}}{\min}
+\frac{\| \bA \bz \|_{q}}{\| \bz \|_p}
+\geq \| \bA^{\dag}\|_{q \to p}^{-1}.
+\end{split}\]</div>
+<p>If <span class="math notranslate nohighlight">\(\bA\)</span> is surjective (onto), then the equality holds.
+When <span class="math notranslate nohighlight">\(\bA\)</span> is bijective (one-one onto, square, invertible),
+then the result implies</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\underset{\substack{\bz \in \ColSpace(\bA^H) \\ \bz \neq \bzero}}{\min} 
+\frac{\| \bA \bz \|_{q}}{\| \bz \|_p}
+= \| \bA^{-1}\|_{q \to p}^{-1}.
+\end{split}\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The spaces <span class="math notranslate nohighlight">\(\ColSpace(\bA^H)\)</span> and <span class="math notranslate nohighlight">\(\ColSpace(\bA)\)</span>
+have same dimensions given by <span class="math notranslate nohighlight">\(\Rank(\bA)\)</span>.</p>
+<ol>
+<li><p>We recall that <span class="math notranslate nohighlight">\(\bA^{\dag} \bA\)</span> is a projector onto the column space of <span class="math notranslate nohighlight">\(\bA^H\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    \bw = \bA \bz \iff \bz = \bA^{\dag} \bw 
+    = \bA^{\dag} \bA \bz \Forall \bz \in \ColSpace (\bA^H).
+   \]</div>
+</li>
+<li><p>As a result we can write</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\| \bz \|_p}{ \| \bA \bz \|_q} =  \frac{\| \bA^{\dag} \bw \|_p}{ \| \bw \|_q} 
+   \]</div>
+<p>whenever <span class="math notranslate nohighlight">\(\bz \in \ColSpace(\bA^H)\)</span> and <span class="math notranslate nohighlight">\(\bz \neq \bzero\)</span>.</p>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \left [ 
+     \underset{\substack{\bz \in \ColSpace(\bA^H)\\ \bz \neq \bzero}}{\min} 
+     \frac{\| \bA \bz \|_q}{\| \bz \|_p}\right ]^{-1}
+    = \underset{\substack{\bz \in \ColSpace(\bA^H)\\ \bz \neq \bzero}}{\max} 
+    \frac{\| \bz \|_p}{ \| \bA \bz \|_q}
+    = \underset{\substack{\bw \in \ColSpace(\bA) \\ \bw \neq \bzero}}{\max} 
+    \frac{\| \bA^{\dag} \bw \|_p}{ \| \bw \|_q} 
+    \leq \underset{\bw \neq \bzero}{\max} \frac{\| \bA^{\dag} \bw \|_p}{ \| \bw \|_q}.
+   \end{split}\]</div>
+</li>
+<li><p>When <span class="math notranslate nohighlight">\(\bA\)</span> is surjective, then <span class="math notranslate nohighlight">\(\ColSpace(\bA) = \CC^m\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \underset{\substack{\bw \in \ColSpace(\bA)\\ \bw \neq \bzero}}{\max} 
+    \frac{\| \bA^{\dag} \bw \|_p}{ \| \bw \|_q} 
+    = \underset{\bw \neq \bzero}{\max} \frac{\| \bA^{\dag} \bw \|_p}{ \| \bw \|_q}.
+   \end{split}\]</div>
+</li>
+<li><p>Thus, the inequality changes into equality.</p></li>
+<li><p>Finally</p>
+<div class="math notranslate nohighlight">
+\[
+    \underset{\bw \neq \bzero}{\max} 
+    \frac{\| \bA^{\dag} \bw \|_p}{ \| \bw \|_q} = \| \bA^{\dag} \|_{q \to p}
+   \]</div>
+<p>which completes the proof.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="row-column-norms">
+<h2><span class="section-number">4.13.10. </span>Row Column Norms<a class="headerlink" href="#row-column-norms" title="Permalink to this headline">¶</a></h2>
+<p>A common way of measuring the norm of a matrix is to compute the
+<span class="math notranslate nohighlight">\(\ell_p\)</span> norm for each row and then compute the <span class="math notranslate nohighlight">\(\ell_q\)</span> norm
+of the resultant column vector. Such norms are known as
+row column norms.</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(p=q=2\)</span>, then the resultant norm is same as the Frobenius norm.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(p=q=1\)</span>, then the resultant norm is same as the sum norm.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(p=q=\infty\)</span>, then the resultant norm is same as the max norm.</p></li>
+</ol>
+<p>Thus, one can think of the row column norms as a generalization of
+these norms.</p>
+<div class="proof definition admonition" id="def:mat:row_column_norm">
+<p class="admonition-title"><span class="caption-number">Definition 4.165 </span> (Row-column norms)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix with rows <span class="math notranslate nohighlight">\(\underline{\ba}^i\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bA = \begin{bmatrix}
+\underline{\ba}^1\\
+\vdots \\
+\underline{\ba}^m
+\end{bmatrix}
+\end{split}\]</div>
+<p>Then we define</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{p, \infty} 
+\triangleq \underset{1 \leq i \leq m}{\max} \| \underline{\ba}^i \|_p
+= \underset{1 \leq i \leq m}{\max} 
+\left ( \sum_{j=1}^n |\underline{a}^i_j |^p \right )^{\frac{1}{p}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(1 \leq p &lt; \infty\)</span>.
+In other words, we take <span class="math notranslate nohighlight">\(\ell_p\)</span>-norms of all row vectors and then find the maximum.</p>
+<p>We define</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{\infty, \infty} = \underset{i, j}{\max} |a_{i j}|. 
+\]</div>
+<p>This is equivalent to taking <span class="math notranslate nohighlight">\(\ell_{\infty}\)</span> norm on each row and then taking
+the maximum of all the norms.</p>
+<p>For <span class="math notranslate nohighlight">\(1 \leq p , q &lt; \infty\)</span>, we define the norm</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{p, q} 
+\triangleq \left [ \sum_{i=1}^m 
+\left ( \| \underline{\ba}^i \|_p \right )^q \right ]^{\frac{1}{q}}.
+\]</div>
+<p>In other words, we compute <span class="math notranslate nohighlight">\(\ell_p\)</span>-norm of all the row vectors to form another vector
+and then take <span class="math notranslate nohighlight">\(\ell_q\)</span>-norm of that vector.</p>
+</div>
+</div><div class="docutils">
+<p>Note that the norm <span class="math notranslate nohighlight">\(\| \bA \|_{p, \infty}\)</span>
+is different from the operator norm <span class="math notranslate nohighlight">\(\| \bA \|_{p \to \infty}\)</span>.
+Similarly <span class="math notranslate nohighlight">\(\| \bA \|_{p, q}\)</span> is different from <span class="math notranslate nohighlight">\(\| \bA \|_{p \to q}\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res:row_col_norm_p_infty_norm">
+<p class="admonition-title"><span class="caption-number">Theorem 4.155 </span></p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{p, \infty}  = \| \bA \|_{q \to \infty}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{p} + \frac{1}{q} = 1.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. From <a class="reference internal" href="#res:mat:p_to_infty_operator_norm">Theorem 4.150</a> we get</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{q \to \infty} = \underset{1 \leq i \leq m}{\max}\| \underline{\ba}^i \|_p.
+\]</div>
+<p>This is exactly the definition of <span class="math notranslate nohighlight">\(\| \bA \|_{p, \infty}\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res:row_col_norm_1_p_norm">
+<p class="admonition-title"><span class="caption-number">Theorem 4.156 </span></p>
+<div class="theorem-content section" id="proof-content">
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to p} = \| \bA^H \|_{p, \infty}. 
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We note that:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to p} = \| \bA^H \|_{q \to \infty}.
+\]</div>
+<p>From <a class="reference internal" href="#res:row_col_norm_p_infty_norm">Theorem 4.155</a></p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA^H \|_{q \to \infty} = \| \bA^H \|_{p, \infty}.
+\]</div>
+</div>
+<div class="proof theorem admonition" id="res:mat:consistency_p_infty_row_col_norm">
+<p class="admonition-title"><span class="caption-number">Theorem 4.157 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>For any two matrices <span class="math notranslate nohighlight">\(\bA, \bB\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\| \bA \bB \|_{p, \infty}}{\| \bB \|_{p, \infty}} 
+\leq \| \bA \|_{\infty \to \infty}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(q\)</span> be such that <span class="math notranslate nohighlight">\(\frac{1}{p} + \frac{1}{q} = 1\)</span>.</p>
+<ol>
+<li><p>From <a class="reference internal" href="#res:mat:p_infty_norm_consistency">Theorem 4.152</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+        \| \bA \bB \|_{q \to \infty} \leq 
+        \| \bA \|_{\infty \to \infty} \| \bB \|_{q \to \infty}.
+    \]</div>
+</li>
+<li><p>From <a class="reference internal" href="#res:row_col_norm_p_infty_norm">Theorem 4.155</a></p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \bB \|_{q \to \infty} = \| \bA \bB\|_{p, \infty}
+    \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bB \|_{q \to \infty} = \| \bB \|_{p, \infty}.
+    \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bA \bB\|_{p, \infty} \leq \| \bA \|_{\infty \to \infty} \| \bB \|_{p, \infty}.
+    \]</div>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res:mat:p_q_p_to_q_relations">
+<p class="admonition-title"><span class="caption-number">Theorem 4.158 </span> (Relations between <span class="math notranslate nohighlight">\((p,q)\)</span> and <span class="math notranslate nohighlight">\((p \to q)\)</span> norms)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Relations between <span class="math notranslate nohighlight">\((p, q)\)</span> norms and <span class="math notranslate nohighlight">\((p \to q)\)</span> norms</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1, \infty}  = \| \bA \|_{\infty \to \infty}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{2, \infty}  = \| \bA \|_{2 \to \infty}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{\infty, \infty}  = \| \bA \|_{1 \to \infty}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to 1} = \| \bA^H \|_{1, \infty}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\| \bA \|_{1 \to 2} = \| \bA^H \|_{2, \infty}
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The first three are straight forward applications of
+<a class="reference internal" href="#res:row_col_norm_p_infty_norm">Theorem 4.155</a>.
+The next two are applications of <a class="reference internal" href="#res:row_col_norm_1_p_norm">Theorem 4.156</a>.
+See also <a class="reference internal" href="#tbl-mat-calculation-p-q-operator-norms"><span class="std std-numref">Table 4.1</span></a>.</p>
+</div>
+</div>
+<div class="section" id="block-diagonally-dominant-matrices-and-generalized-gershgorin-circle-theorem">
+<h2><span class="section-number">4.13.11. </span>Block Diagonally Dominant Matrices and Generalized Gershgorin Circle Theorem<a class="headerlink" href="#block-diagonally-dominant-matrices-and-generalized-gershgorin-circle-theorem" title="Permalink to this headline">¶</a></h2>
+<p>In <span id="id2">[<a class="reference internal" href="../bib.html#id78" title="David G Feingold, Richard S Varga, and others. Block diagonally dominant matrices and generalizations of the gerschgorin circle theorem. Pacific J. Math, 12(4):1241–1250, 1962.">22</a>]</span> the idea of diagonally dominant matrices
+(see <a class="reference internal" href="evd.html#sec-mat-diagonally-dominant-matrix"><span class="std std-ref">Diagonally Dominant Matrices</span></a>)
+has been generalized to block matrices using matrix norms.
+We consider the specific case with spectral norm.</p>
+<div class="proof definition admonition" id="def:mat:block_diagonally_dominant_matrix">
+<p class="admonition-title"><span class="caption-number">Definition 4.166 </span> (Block diagonally dominant matrix)</p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a square matrix in <span class="math notranslate nohighlight">\(\CC^{n \times n}\)</span> which is partitioned in following manner</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bA = \begin{bmatrix}
+\bA_{11} &amp; \bA_{12} &amp; \dots &amp; \bA_{1 k}\\
+\bA_{21} &amp; \bA_{22} &amp; \dots &amp; \bA_{2 k}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+\bA_{k 1} &amp; \bA_{k 2} &amp; \dots &amp; \bA_{k k}\\
+\end{bmatrix}
+\end{split}\]</div>
+<p>where each of the submatrices <span class="math notranslate nohighlight">\(\bA_{i j}\)</span>
+is a square matrix of size <span class="math notranslate nohighlight">\(m \times m\)</span>.
+Thus <span class="math notranslate nohighlight">\(n = k m \)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\bA\)</span> is called <em>block diagonally dominant</em> if</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bA_{ii}\|_2 \geq \sum_{j, j \neq i } \|\bA_{i j} \|_2. 
+\]</div>
+<p>holds true for all <span class="math notranslate nohighlight">\(1 \leq i \leq k\)</span>.</p>
+<p>If the inequality satisfies strictly for all <span class="math notranslate nohighlight">\(i\)</span>, then <span class="math notranslate nohighlight">\(\bA\)</span> is called
+<em>block strictly diagonally dominant matrix</em>.</p>
+</div>
+</div><div class="proof theorem admonition" id="thm:mat:block_diagonally_dominant_matrix_nonsingular">
+<p class="admonition-title"><span class="caption-number">Theorem 4.159 </span> (Nonsingularity of block strictly diagonally dominant matrices)</p>
+<div class="theorem-content section" id="proof-content">
+<p>If the partitioned matrix <span class="math notranslate nohighlight">\(\bA\)</span> of <a class="reference internal" href="#def:mat:block_diagonally_dominant_matrix">Definition 4.166</a> is
+block strictly diagonally dominant matrix, then it is nonsingular.</p>
+</div>
+</div><p>For proof see <span id="id3">[<a class="reference internal" href="../bib.html#id78" title="David G Feingold, Richard S Varga, and others. Block diagonally dominant matrices and generalizations of the gerschgorin circle theorem. Pacific J. Math, 12(4):1241–1250, 1962.">22</a>]</span>.</p>
+<p>This leads to the generalized Gershgorin disc theorem.</p>
+<div class="proof theorem admonition" id="thm:block_gershgorin_disc_theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 4.160 </span> (Generalized Gershgorin disc theorem)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a square matrix in <span class="math notranslate nohighlight">\(\CC^{n \times n}\)</span>
+which is partitioned in following manner</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bA = \begin{bmatrix}
+\bA_{11} &amp; \bA_{12} &amp; \dots &amp; \bA_{1 k}\\
+\bA_{21} &amp; \bA_{22} &amp; \dots &amp; \bA_{2 k}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+\bA_{k 1} &amp; \bA_{k 2} &amp; \dots &amp; \bA_{k k}\\
+\end{bmatrix}
+\end{split}\]</div>
+<p>where each of the submatrices <span class="math notranslate nohighlight">\(\bA_{i j}\)</span>
+is a square matrix of size <span class="math notranslate nohighlight">\(m \times m\)</span>.</p>
+<p>Then each eigenvalue <span class="math notranslate nohighlight">\(\lambda\)</span> of <span class="math notranslate nohighlight">\(\bA\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\| \lambda \bI  - \bA_{ii}\|_2 
+\leq \sum_{j, j\neq i} \|\bA_{ij} \|_2 \text{ for some } i \in \{1,2, \dots, k\}.
+\]</div>
+</div>
+</div><p>For proof see <span id="id4">[<a class="reference internal" href="../bib.html#id78" title="David G Feingold, Richard S Varga, and others. Block diagonally dominant matrices and generalizations of the gerschgorin circle theorem. Pacific J. Math, 12(4):1241–1250, 1962.">22</a>]</span>.</p>
+<p>Since the <span class="math notranslate nohighlight">\(2\)</span>-norm of a positive semidefinite matrix
+is nothing but its largest eigen value, the theorem
+directly leads to the following result.</p>
+<div class="proof corollary admonition" id="col:block_gershgorin_disc_theorem_psd_matrix">
+<p class="admonition-title"><span class="caption-number">Corollary 4.29 </span> (<span class="math notranslate nohighlight">\(2\)</span> norm of a Hermitian positive semidefinite matrix)</p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bA\)</span> be a Hermitian positive semidefinite matrix.
+Let <span class="math notranslate nohighlight">\(\bA\)</span> be partitioned as in <a class="reference internal" href="#thm:block_gershgorin_disc_theorem">Theorem 4.160</a>.
+Then its <span class="math notranslate nohighlight">\(2\)</span>-norm  <span class="math notranslate nohighlight">\(\| \bA \|_2\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\left | \| \bA \|_2  - \| \bA_{ii}\|_2 \right | 
+\leq \sum_{j, j\neq i} \|\bA_{i j} \|_2 \text{ for some } i \in \{1,2, \dots, k \}.
+\]</div>
+</div>
+</div></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./la"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="important_spaces.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4.12. </span>Important Vector Spaces</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="sequence_spaces.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.14. </span>Sequence Spaces</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

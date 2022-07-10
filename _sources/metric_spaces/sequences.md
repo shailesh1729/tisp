@@ -6,19 +6,36 @@ Let $(X, d)$ be a metric space.
 
 ## Sequences
 
+```{index} Metric space; sequence
+```
 ````{prf:definition}
 :label: def-ms-sequence
 
 A {prf:ref}`sequence <def-st-sequence>` in a metric space $(X,d)$ is a 
-function $f : \Nat \to X$.
+function $x : \Nat \to X$. It maps every natural number to
+an element in the set $X$.
+
+If $A$ is a subset of $X$, then a sequence of $A$ means
+a function $x: \Nat \to A$. 
 ````
+
 A sequence can be thought of as an ordered (countable) list of 
-points in $X$.
+points in $X$. We often write a sequence $x : \Nat \to X$ as
+$\{ x_n \}$ which means the list $\{x_1, x_2, x_3, \dots \}$
+where $x_n = x(n)$. In this sense, $x_n$ denotes the $n$-th
+entry in the sequence.
+
+1. A sequence need not enumerate all elements of $X$.
+1. An element may be repeated multiple times in a sequence.
 
 
 ## Convergence
 
 
+```{index} Metric space; convergence
+```
+```{index} Convergence; metric space
+```
 ````{prf:definition} Convergence
 :label: def-ms-convergence
 
@@ -44,6 +61,7 @@ $\{ y_n \}$ where $y_n = d(x_n, x)$.
 Thus, $\{ x_n \}$ converges if $\lim d(x_n, x) = 0$.
 ````
 
+### Limit Uniqueness
 
 ````{prf:theorem} Sequence Limit Uniqueness
 :label: res-ms-sequence-limit-uniqueness
@@ -73,6 +91,128 @@ This means that $x = y$ (Identity of indiscernibles).
 This result and proof is adapted from 
 {prf:ref}`res-bra-sequence-limit-uniqueness`.
 
+
+### Choice of Metric
+
+Let $X$ be a set and $d_1$ and $d_2$ be two different
+metrics defined on $X$. A sequence which converges
+in the metric space $(X, d_1)$ may not converge
+in the metric space $(X, d_2)$ unless the metrics
+are equivalent.
+
+```{prf:example} Sequence convergence on different metrics
+:label: ex-ms-seq-converge-two-metrics
+
+Consider the space of all continuous real valued
+functions defined on the interval $[0,1]$
+denoted by $C[0,1]$.
+
+We introduce two different metrics on $C[0,1]$.
+
+1. The metric $d_1$ is defined as
+
+   $$
+   d_1(f, g) = \int_0^1 |f(x) - g(x)| d x.
+   $$
+1. The metric $d_{\infty}$ is defined as
+
+   $$
+   d_{\infty}(f, g) = \sup_{x \in [0,1]} \{|f(x) - g(x)| \}.
+   $$
+
+We now introduce a sequence which converges
+in $(C[0,1], d_1)$ but doesn't in $(C[0,1], d_{\infty})$.
+
+1. Consider the sequence of functions $\{ f_n \}$
+   where $f_n(x) = e^{-n x}$.
+1. It is clear that $f_n \in C[0,1]$.
+1. The sequence of functions converges point-wise
+   to a function $f_p$ given by
+
+   $$
+   f_p(x) = \begin{cases}
+   0 & x \neq 0 ; \\
+   1 & x = 0.
+   \end{cases}
+   $$
+1. As we can see that $f_p \notin C[0,1]$
+   as the function is not continuous (from the right)
+   at $x=0$.
+1. We introduce the zero function
+   $\bzero : [0,1] \to \RR$ defined as 
+
+   $$
+   \bzero(x) = 0 \quad \Forall x \in [0,1].
+   $$
+1. Clearly $\bzero \in C[0,1]$.
+1. Note that 
+
+   $$
+   d_1(f_n, \bzero) = \int_0^1 |f_n(x) - 0| d x
+   = \int_0^1 e^{-n x} d x
+   = \frac{1 - e^{-n}}{n}.
+   $$
+1. Clearly $d_1(f_n, \bzero) \to 0$ as $n \to \infty$.
+1. Hence $\{ f_n \}$ converges to $\bzero$ in $(X, d_1)$.
+
+We now show that $\{ f_n \}$ doesn't converge to
+any function in $(C[0,1], d_{\infty})$.
+
+1. We first note that
+
+   $$
+    d_{\infty} (f_n, \bzero)
+    = \sup_{x \in [0, 1]}\{ |f_n(x) - 0 | \}
+    = \sup_{x \in [0, 1]}\{ e^{-n x} \}
+    = 1.
+   $$
+1. Hence $\{ f_n \}$ doesn't converge to $\bzero$.
+1. For contradiction, let $f$ be the limit of  $\{ f_n \}$.
+1. Since $f$ is not identically zero and is continuous,
+   hence it must be non-zero throughout an open interval
+   $(c,d)$.
+1. Thus $|f(x)| \geq M \Forall x \in (c,d)$ for some $M > 0$.
+1. Since for any fixed $x \in (c,d)$, 
+   $\lim e^{-n x} = 0$, hence there exists $n_1 \in \Nat$ 
+   such that $|e^{-n x}| < M $ for every $x \in (c, d)$.
+1. Now,
+
+   $$
+   |f(x) - e^{-n x}| \geq | |f(x)| - |e^{-nx}| |.
+   $$
+1. For $n > n_1$, we get 
+
+   $$
+   |f(x) - e^{-n x}| \geq |f(x)| - e^{-nx}.
+   $$
+1. Therefore
+
+   $$
+   \sup_{x \in (c,d)} \{ |f(x) - e^{-n x}| \}
+   \geq M - e^{- n c} \Forall n > n_1.
+   $$
+1. Taking the limit
+
+   $$
+   \lim_{n \to \infty}\sup_{x \in (c,d)} \{ |f(x) - e^{-n x}| \}
+   \geq M.
+   $$
+1. Therefore
+
+   $$
+   \lim_{n \to \infty} d_{\infty} (f_n , f)
+   = \lim_{n \to \infty}\sup_{x \in (c,d)} \{ |f(x) - f_n(x) | \}
+   \geq M.
+   $$
+1. We arrive at a contradiction as the distance doesn't approach
+   the limit to 0.
+1. Thus the sequence $\{ f_n \}$ doesn't converge to
+   any function $f \in C[0, 1]$.
+```
+
+
+
+### Closure Points
 
 ```{prf:theorem} Characterization of closure points as limits
 :label: res-ms-closure-point-as-limit
@@ -105,7 +245,9 @@ Assume a sequence $\{x_n\}$ of $A$ converges to $x$.
 If $x \in A$, we can simply pick the constant sequence $\{ x_n = x \}$.
 It's more challenging only when $x \in \closure A \setminus A$.
 
-```{prf:theorem}
+### Accumulation Points
+
+```{prf:theorem} Accumulation point and distinct sequences
 :label: res-ms-accum-point-distinct-sequence
  
 Let $x$ be an accumulation point of $A$. 
@@ -129,7 +271,9 @@ We assume that $x$ is an accumulation point of $A$.
 1. Thus, the sequence converges to $x$.
 ```
 
-```{prf:theorem}
+### Closedness
+
+```{prf:theorem} Closedness = Convergence of sequences
 :label: res-ms-closure-convergence
 
 Let $A$ be a subset of $X$. $A$ is closed if and only if 
@@ -157,7 +301,9 @@ Assume that every convergent sequence of $A$ converges in $A$.
 1. Hence, $A$ is closed.
 ```
 
-```{prf:theorem}
+### Distance between Sequences
+
+```{prf:theorem} Sequence distance in the limit
 :label: res-ms-sequence-distance-limit
 
 If $\lim x_n = x $ and $\lim y_n = y$, then
@@ -200,7 +346,107 @@ $$
 $$
 ```
 
+## Cauchy Sequences
+
+One issue of working with convergence of a sequence
+is that one has to know the limit of convergence
+to show that the sequence indeed converges to
+the limit. This may become problematic.
+We should have some way to qualify sequences
+in which the points are coming closer to
+a limit as the sequence progresses
+without knowing the limit. One way
+is to check if all the points of the
+sequence beyond a certain point are close
+enough to each other. Sequences
+in which the points come closer to each
+other at higher indices are known as
+Cauchy sequences. However it is not 
+necessary that every Cauchy sequence is
+convergent. Yet such sequences are
+of great relevance.
+
+
+```{index} Metric space; Cauchy sequence
+```
+```{prf:definition} Cauchy sequence
+:label: def-ms-cauchy-sequence
+
+A sequence $\{x_n\}$ of $X$ is called a *Cauchy sequence* 
+if for every $\epsilon > 0$, there exists $n_0$ 
+(depending on $\epsilon$) such that
+
+$$
+d(x_n, x_m) < \epsilon \text{ for every } n, m > n_0.
+$$
+```
+
+```{prf:proposition}
+:label: res-ms-convergent-is-cauchy
+
+Every convergent sequence is a Cauchy sequence.
+```
+```{prf:proof}
+Let $\{x_n\}$ be a convergent with the limit $\lim x_n = x$.
+Thus, for every $\epsilon > 0$, there exists $n_0$ 
+such that  $d(x_n, x) < \epsilon / 2$ for all $n > n_0$.
+
+Then, for all $m, n > n_0$
+
+$$
+d(x_n, x_m) \leq d(x_n, x) + d(x, x_m) < 
+\frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+$$ 
+
+Thus, $\{ x_n\}$ is a Cauchy sequence.
+```
+
+```{prf:example} Not every Cauchy sequence is convergent
+:label: ex-ms-cauchy-non-convergent-1
+
+
+Consider $X = \RR_{++}$ with metric $d(x,y) = |x-y|$. 
+Consider the sequence $x_n = \frac{1}{n}$.
+The sequence doesn't converge in $X$ 
+(Its limit 0 doesn't belong to $X$).
+At the same time, $\{ x_n \}$ is Cauchy.
+
+1. Let $\epsilon > 0$.
+1. Let $n_0$ be any natural number larger than $\frac{2}{\epsilon}$.
+1. Note that $n_0 > \frac{2}{\epsilon} \iff \epsilon > \frac{2}{n_0}$.
+1. Then, for $m, n > n_0$:
+   
+   $$
+   d(x_n, x_m) = |x_n - x_m | \leq x_n + x_m = \frac{1}{n} + \frac{1}{m}
+   < \frac{1}{n_0} + \frac{1}{n_0} = \frac{2}{n_0} < \epsilon.
+   $$
+1. Thus, for every $\epsilon > 0$, there exists $n_0$ such that
+   for all $m, n > n_0$, $d(x_n, x_m) < \epsilon$.
+1. Hence $\{ x_n\}$ is Cauchy.
+```
+
+
 ## Subsequences
+
+Recall from {prf:ref}`def-st-sub-sequence` that
+a subsequence of a sequence $\{ x_n \}$
+is a sequence $\{ y_n \}$ for which there exists 
+a strictly increasing sequence
+$\{ k_n \}$ of natural numbers 
+(i.e. $1 \leq k_1 < k_2  < k_3 < \ldots)$
+such that $y_n = x_{k_n}$ holds for each $n$.
+
+A natural question that arises is that
+if a subsequence converges then does the
+sequence also converge. Alternatively,
+if a sequence converges then do all of its
+subsequences converge? 
+
+It turns out that if a subsequence converges
+then it is not necessary that the sequence
+itself will converge. However, if a sequence
+converges, then all its subsequences
+converge to the same limit.
 
 ````{prf:theorem} Subsequence convergence
 :label: res-ms-subsequence-convergence

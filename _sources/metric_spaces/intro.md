@@ -3,6 +3,8 @@
 
 ## Distance Functions
 
+```{index} Metric, Distance
+```
 ```{prf:definition} Distance function/Metric
 :label: def-ms-distance-function
 
@@ -37,6 +39,8 @@ following properties for any elements $x,y,z \in X$:
 
 ## Metric Spaces
 
+```{index} Metric space
+```
 ```{prf:definition} Metric space
 :label: def-ms-metric-space
 
@@ -101,6 +105,8 @@ $$
 
 ## Metric Subspaces
 
+```{index} Metric subspace
+```
 ```{prf:definition} Metric subspace
 :label: def-ms-metric-subspace
 
@@ -237,6 +243,8 @@ with $d_p$ as the standard metric.
 
 ## Products of Metric Spaces
 
+```{index} Metric space; finite product
+```
 ```{prf:definition} Finite products of metric spaces
 :label: def-ms-finite-product-spaces
 
@@ -257,6 +265,8 @@ $(X, \rho)$ is called the *product* of metric spaces $(X_i, d_i)$.
 
 ## Distance between Sets and Points
 
+```{index} Distance; point and set
+```
 ```{prf:definition} Distance between a point and a set
 :label: def-ms-point-set-distance
 
@@ -302,6 +312,8 @@ See {prf:ref}`res-ms-set-accumulation-point-distance`.
 
 ## Distance between Sets
 
+```{index} Distance; set and set
+```
 ```{prf:definition} Distance between sets
 :label: def-ms-set-set-distance
 

@@ -11,8 +11,40 @@ Unless otherwise specified, $f : X \to \RR$ is a partial real
 valued function from $X$ to $\RR$
 with $\dom f \subseteq X$.
 
-We shall be discussing closedness of the sublevel sets
-and epigraphs of a function. The closedness is with
+When the codomain of a function is $\RR$, it provides
+an additional structure of total order on the range
+of possible values of $f$. 
+
+1. We can introduce the notion of local and global 
+   maximum or minimum values (local and global extrema).
+1. We can construct the epigraphs, hypographs, sublevel sets,
+   superlevel sets and contours of a function. This allows
+   us to think about the properties of these sets.
+   Of particular interest are functions whose epigraphs
+   are closed or all sublevel sets are closed.
+1. When we discuss limits at some point $a \in \dom f$, we
+   can think in terms of whether the nearby values
+   are above or below $f(a)$. For each deleted neighborhood
+   of $a$, we can find out the largest (supremum) or
+   the smallest (infimum) values. This enables us
+   to introduce the notions of limit superior and
+   limit inferior. Naturally, the limit exists when
+   the limit superior and limit inferior agree.
+1. Similarly, the idea of continuity can be split into
+   continuity from above or below. Accordingly,
+   the functions can be classified into lower and
+   upper continuous functions. Continuous functions
+   are both lower and upper continuous.
+1. All of these notions easily carry over to extended
+   valued functions (with signatures $f: X \to \ERL$).
+
+This section introduces these concepts and focuses
+on the interplay of these concepts. For example
+closedness of functions (the notion that all sublevel sets are closed)
+is equivalent to closed epigraphs or lower semicontinuity.
+
+When we discuss the closedness of the sublevel sets
+and epigraphs of a function, the closedness is with
 respect to the subspace topology of $(S, d)$ 
 where $S = \dom f$.
 
@@ -35,6 +67,8 @@ for a metric space $(S, d)$
 ## Extreme Values
 
 
+```{index} Local extreme value
+```
 ```{prf:definition} Local extreme value
 :label: res-ms-rv-local-extreme-value
 
@@ -60,6 +94,8 @@ The point $x=a$ is called a *local extreme point* of $f$ or more
 specifically, a *local maximum* or a *local minimum* point of $f$.
 ```
 
+```{index} Global maximum
+```
 ```{prf:definition} Global maximum
 :label: res-ms-rv-global-maximum
 
@@ -71,6 +107,8 @@ f(x) \leq f(a) \Forall x \in \dom f.
 $$
 ```
 
+```{index} Global minimum
+```
 ```{prf:definition} Global minimum
 :label: res-ms-rv-global-minimum
 
@@ -82,6 +120,8 @@ f(x) \geq f(a) \Forall x \in \dom f.
 $$
 ```
 
+```{index} Strict global maximum
+```
 ```{prf:definition} Strict global maximum
 :label: res-ms-rv-strict-global-maximum
 
@@ -93,6 +133,8 @@ f(x) < f(a) \Forall x \in \dom f, x \neq a.
 $$
 ```
 
+```{index} Strict global minimum
+```
 ```{prf:definition} Strict global minimum
 :label: res-ms-rv-strict-global-minimum
 
@@ -183,6 +225,8 @@ a configuration which maximizes the volume.
 
 ## Closed Functions
 
+```{index} Closed function
+```
 ```{prf:definition} Closed function
 :label: def-ms-closed-function
 
@@ -197,7 +241,13 @@ is closed for every $\alpha \in \RR$
 in the subspace topology $(S,d)$.
 ```
 
-### Closed Functions on Non-Open Domains
+### Closed Functions on Non-Closed Domains
+
+Although every sublevel set of a closed function is closed,
+it doesn't imply that the domain of the function itself is
+closed. We can very well have functions which are closed
+but their domain is open or semi-open or neither open nor
+closed.
 
 ```{prf:example} A closed function need not have closed domain
 :label: ex-ms-closed-func-not-closed-domain
@@ -206,12 +256,12 @@ Let $f: \RR \to \RR$ be defined as $f(x) = \frac{1}{x}$
 with $S = \dom f = (0, \infty)$.
 
 1. The domain of $f$ is an open set.
-1. Let $S_{\alpha} = \{ x \in S \ST f(x) \leq \alpha \}$ denote the sublevel set for $\alpha$.
-1. Then, $S_{\alpha} = [\frac{1}{\alpha}, \infty)$ for every $\alpha > 0$.
+1. Let $\sublevel(f, \alpha)= \{ x \in S \ST f(x) \leq \alpha \}$ denote the sublevel set for $\alpha$.
+1. Then, $\sublevel(f, \alpha) = [\frac{1}{\alpha}, \infty)$ for every $\alpha > 0$.
    Thus, it is closed.
-1. $S_{\alpha} = \EmptySet$ for every $\alpha \leq 0$ since $f(x)$ is always positive.
+1. $\sublevel(f, \alpha) = \EmptySet$ for every $\alpha \leq 0$ since $f(x)$ is always positive.
    Thus, it is closed.
-1. Thus, $S_{\alpha}$ is closed for every $\alpha \in \RR$.
+1. Thus, $\sublevel(f, \alpha)$ is closed for every $\alpha \in \RR$.
 1. Thus, $f$ is a closed function.
 
 We have shown a counter example where the function is closed but
@@ -351,7 +401,8 @@ is closed.
 ```
 
 ```{prf:proof}
-Recall that the epigraph of maximum of two functions is the intersection
+Recall from {prf:ref}`res-bra-epigraph-intersection-family`
+that the epigraph of maximum of two functions is the intersection
 of epigraphs.
 
 1. Since $f_i$ are closed, hence $\epi f_i$ are closed for every $i \in I$.
@@ -360,27 +411,191 @@ of epigraphs.
    $$
    \epi f = \bigcap_{i \in I} \epi f_i.
    $$
-1. Since $\epi f_i$ are closed, hence $\epi f$ is closed.
+1. Since $\epi f_i$ are closed, hence $\epi f$ is closed
+   due to {prf:ref}`res-ms-intersection-closed-sets`.
 1. Since $\epi f$ is closed, hence $f$ is closed
    due to {prf:ref}`res-ms-closed-func-closed-epi`.
+```
+
+### Nonnegative Scaling
+
+```{prf:theorem} Nonnegative scaling of closed function
+
+Let $f: X \to \RR$ be a closed function. 
+Let $t \geq 0$.
+Then a function $g : X \to \RR$ given by 
+
+$$
+g(x) =  t f(x)
+$$
+is closed.
+```
+
+```{prf:proof}
+Note that $\dom g = \dom f$.
+Consider first the case of $t=0$.
+
+1. Then $g(x) = 0$ for every $x \in \dom f$.
+1. Thus for any $s  \geq 0$, $\sublevel(g, s) = \dom f$.
+1. And for $s < 0$, $\sublevel(g, s) = \EmptySet$.
+1. Both $\dom f$ and $\EmptySet$ are closed set 
+   w.r.t. the subspace topology of $\dom f$.
+1. Hence $g$ is closed.
+
+Now consider the case where $t > 0$.
+
+1. Pick any $s \in \RR$.
+1. Then
+
+   $$ 
+   \sublevel(g, s) &= \{ x \in \dom g \ST g(x) \leq s \}\\
+   &= \{ x \in \dom f \ST t f(x) \leq s \} \\
+   &= \{ x \in \dom f \ST f(x) \leq \frac{s}{t} \} \\
+   &= \sublevel(f, \frac{s}{t}).
+   $$
+1. Since $f$ is closed, hence $\sublevel(f, \frac{s}{t})$
+   is closed, hence $\sublevel(g, s)$ is closed.
+1. Since this is true for every $s \in \RR$, hence $g$ is closed.
+```
+
+### Sum Rule
+
+```{prf:theorem} Sum of closed functions
+:label: res-ms-sum-closed-functions
+
+Let $f, g: X \to \RR$ be closed functions.
+Then $h = f + g$ with $\dom h = \dom f \cap \dom g$
+is also a closed function.
+```
+
+
+```{prf:proof}
+
+We make use of the fact that closed functions
+are lower semicontinuous. See later
+in {prf:ref}`res-ms-func-lsc-closed-func`.
+
+1. Since $f$ and $g$ are closed,
+   hence due to {prf:ref}`res-ms-func-lsc-closed-func`
+   they are l.s.c..
+1. By {prf:ref}`res-ms-lsc-sum`, 
+   $h = f + g$ is l.s.c..
+1. Again due to {prf:ref}`res-ms-func-lsc-closed-func`, $h$ is closed.
 ```
 
 
 ### Continuous Functions
 
-```{prf:proposition}
+```{prf:theorem} Continuity + closed domain implies closedness
+:label: res-ms-continuity-closed-domain-closed-func
+
 If $f: X \to \RR$ is continuous and $\dom f$ is closed, then 
 $f$ is closed.
 ```
 
-```{prf:proposition}
+```{prf:proof}
+We shall prove this by showing that the sublevel sets are closed.
+
+1. Let $S = \dom f$.
+1. Pick $t \in \RR$.
+1. Let $T = \sublevel(f, t)$.
+1. By definition, $T \subseteq S$.
+1. Let $\{ x_n \}$ be a convergent sequence of $T$.
+1. Let $x = \lim x_n$.
+1. Since $S$ is closed, hence $\{ x_n \}$ converges in $S$.
+1. Hence $x \in S$ and $f(x)$ is well defined.
+1. Since $\lim x_n = x$ and $f$ is continuous, hence
+   due to {prf:ref}`res-ms-continuous-function-characterization` (3),
+   $\lim f(x_n) = f(x)$.
+1. By sublevel property of $T$, $f(x_n) \leq t$ for every every $n$.
+1. Consequently,
+
+   $$
+   f(x) = \lim_{n \to \infty} f(x_n)  \leq t.
+   $$
+1. Since $f(x) \leq t$, hence $x \in T$.
+1. Thus every convergent sequence of $T$ converges in $T$.
+1. Hence $T$ is closed.
+1. Since $t$ was arbitrarily chosen, hence every sublevel set of $f$ is closed.
+1. Hence $f$ is a closed function.
+```
+
+
+
+```{prf:theorem} Closedness conditions for continuity + open domain
+:label: res-ms-continuity-open-domain-closedness
+
 If $f: X \to \RR$ is continuous and $\dom f$ is open, then
 $f$ is closed if and only if $f$ converges to $\infty$ along
 every sequence converging to a boundary point of $\dom f$. 
 ```
 
+```{prf:proof}
+
+To show that a function is closed, we need to show that all its
+sublevel sets are closed. To show that a sublevel set is closed
+we need to show that every convergent sequence of a sublevel set
+converges in the set itself.
+
+1. Let $S = \dom f$.
+1. Let $C = \closure S$.
+1. It is given that $S$ is open. Hence $S = \interior C$.
+1. Let $B = \boundary S = C \setminus \interior C$.
+1. Then $B = C \setminus S$. In other words, $B \cap S = \EmptySet$.
+1. Let $\{ x_n \}$ be a convergent sequence of $S$.
+1. Then $x = \lim x_n \in C$.
+1. So either $x \in S$ or $x \in B$.
+1. If $x \in S$ then $f(x)$ is well defined.
+   If $x \in B$ then $f(x)$ is not defined.
+
+Assume that $f$ converges to infinity along
+any sequence converging to $B$.
+
+1. Pick $t \in \RR$.
+1. Let $T = \sublevel (f, t)$.
+1. Suppose $\{ x_n \}$ is a convergent sequence of $T$ with $x = \lim x_n$.
+1. Then $f(x_n) \leq t$ for every $n$.
+1. For contradiction, assume that $x \in B$.
+1. Then $\lim f(x_n) = \infty$.
+1. But then there exists $n_0$ such that for every $n > n_0$, $f(x_n) > t$.
+1. This contradicts the assumption that $f(x_n) \leq t$ for every $n$.
+1. Hence $x \in S$.
+1. But then $f(x)$ is well defined.
+1. By continuity of $f$, $f(x) = \lim f(x_n) \leq t$.
+1. Hence $x \in T$.
+1. Hence $T$ is closed.
+1. Since every sublevel set is closed, hence $f$ is closed.
+
+Now for the converse, assume that $f$ does not converge to
+infinity along some sequence converging to $B$.
+
+1. Let $\{ x_n \}$ be such a convergent sequence such that
+   $x = \lim x_n \in B$ and
+   $\lim f(x_n) = r \in \RR$.
+1. Pick some $\epsilon > 0$.
+1. Then there exists $n_0$ such that for all $n > n_0$,
+   $| r - f(x_n)| < \epsilon.
+1. Thus for all $n > n_0$, $f(x_n) < r + \epsilon$.
+1. Consider the sublevel set $R = \sublevel(f, r+\epsilon)$.
+1. By dropping the first $n_0$ points of $\{ x_n \}$, 
+   the remaining sequence $\{ y_n \}$ where $y_n = x_{n + n_0}$
+   belongs to $R$.
+1. Thus we have a convergent sequence of $R$ which doesn't converge
+   in $R$ since $R \subseteq S$, $x = \lim y_n \in B$
+   and $B \setminus R = \EmptySet$.
+1. Thus $R$ is not closed.
+1. Since there are sublevel sets of $f$ which are not closed, hence
+   $f$ is not closed.
+
+TODO, is it possible that for a convergent sequence $\{ x_n \}$,
+the corresponding sequence $f(x_n)$ doesn't converge to anything?
+```
+
+
 ## Limit Superiors and Inferiors
 
+```{index} Limit superior, Limit inferior
+```
 ```{prf:definition} Limit superior and limit inferior for functions
 :label: def-ms-limsup-liminf-func
 
@@ -444,6 +659,8 @@ $$
 $$
 ```
 
+```{index} Locally bounded function
+```
 ```{prf:definition} Locally bounded function
 :label: def-ms-locally-bounded-func
 
@@ -903,6 +1120,8 @@ abbreviations liberally.
 
 
 
+```{index} Lower semicontinuity, Upper semicontinuity, Semicontinuity
+```
 ```{prf:definition} Lower and upper semicontinuity
 :label: def-ms-lower-semicontinuity
 
@@ -1249,12 +1468,545 @@ if $\lim x_n = a$, then $\liminf_{n \to \infty} f(x_n) \geq f(a)$.
 A similar argument can be used for limit superior.
 ```
 
+
+## Extended Real Valued Functions
+
+
+Often, it is easier to work with extended real valued
+functions $f : X \to \ERL$. In this case, $f$ is
+defined at every $x \in X$ with $f$ taking the
+value of $\infty$ or $-\infty$ outside its effective
+domain. 
+
+$$
+\dom f = \{x \in X \ST f(x) \in \RR \}.
+$$
+
+We don't have to think in terms of subspace topology 
+w.r.t. $(S, d)$ where $S$ is the effective domain.
+All the definitions and results can be presented
+w.r.t. the topology of $(X, d)$ itself.
+
+### Proper Functions
+
+```{index} Proper function, Extended real valued function; proper function
+```
+```{prf:definition} Proper function
+:label: def-ms-proper-function
+
+Let $(X, d)$ be a metric space.
+An extended real-valued function 
+$f : X \to \ERL$ is called *proper*
+if its domain is nonempty, it never
+takes the value $-\infty$ and is
+not identically equal to $\infty$.
+
+$$
+\exists x \in X \text{ such that } f(x) < \infty
+\text{ and }
+f(x) > -\infty \Forall x \in X.
+$$
+``` 
+Putting another way, a proper function
+is obtained by taking a real valued function $f$
+defined on a nonempty set $C \subseteq X$
+and then extending it to all of $X$ by 
+setting $f(x) = +\infty$ for all $x \notin C$.
+
+It is easy to see that the codomain for a proper
+function can be changed from $\ERL$
+to $\RERL$ to clarify that it never takes
+the value $-\infty$.
+
+```{index} Improper function
+```
+```{prf:definition} Improper function
+:label: def-ms-improper-function
+
+Let $(X, d)$ be a metric space.
+An extended real-valued function 
+$f : X \to \ERL$ is called *improper*
+if it is not proper.
+```
+
+For an improper function $f$:
+
+* $\dom f$ may be empty. 
+* $f$ might take a value of $-\infty$ at some $x \in X$.
+
+
+```{index} Indicator function
+```
+```{prf:definition} Indicator function
+:label: def-ms-indicator-function
+
+Let $(X, d)$ be a metric space.
+Let $C \subseteq X$. Then, its 
+*indicator function* is given by
+$I_C(x) = 0 \Forall x \in C$. 
+Here, $\dom I_C = C$.
+
+The extended value extension of an indicator
+function is given by:
+
+$$
+\tilde{I_C}(x) \triangleq \begin{cases} 
+0 & \text{for} & x \in C \\
+\infty & \text{for} & x \notin C.
+\end{cases}
+$$
+```
+
+
+
+### Extreme Values
+
+Let $f : X \to \ERL$ be an extended real valued function
+with $S = \dom f$.
+
+1. For some $a \in \dom f$, 
+   $f(a)$ is a *local maximum value* of $f$ if for some $\delta > 0$:
+
+   $$
+   f(x) \leq f(a) \Forall x \in B(a, \delta).
+   $$ 
+1. For some $a \in \dom f$,
+   $f(a)$ is a *local minimum value* of $f$ if for some $\delta > 0$:
+
+   $$
+   f(x) \geq f(a) \Forall x \in B(a, \delta).
+   $$ 
+1. We say that $f$ attains a *global maximum*
+   at some $a \in \dom f$, if:
+
+   $$
+   f(x) \leq f(a) \Forall x \in X.
+   $$
+1. We say that $f$ attains a *global minimum*
+   at some $a \in \dom f$, if:
+
+   $$
+   f(x) \geq f(a) \Forall x \in X.
+   $$
+1. We say that $f$ attains a *strict global maximum*
+   at some $a \in \dom f$, if:
+
+   $$
+   f(x) < f(a) \Forall x \in X, x \neq a.
+   $$
+1. We say that $f$ attains a *strict global minimum*
+   at some $a \in \dom f$, if:
+
+   $$
+   f(x) > f(a) \Forall x \in X, x \neq a.
+   $$
+
+Let $f : X \to \ERL$ be continuous. 
+Let $K$ be a nonempty compact subset of $X$. 
+Then, the set $f(K)$ is closed and bounded.
+Also, there exists $a$ and $b$ in $K$ such that
+
+$$
+f(a) = \inf f(K) \text{ and } f(b) = \sup f(K);
+$$
+i.e., $f$ attains its supremum and infimum over the values in $f(K)$.
+
+### Closed Functions
+
+```{index} Closed function; extended real valued
+```
+```{index} Extended real valued function; closed function
+```
+```{prf:definition} Closed Extended Real Valued Functions
+:label: def-ms-evf-closed-func
+
+$f : X \to \ERL$ is closed if for each $\alpha \in \RR$, the
+sublevel set
+$T_{\alpha} = \{ x \in X \ST f(x) \leq \alpha \}$
+is closed. 
+```
+We note that $T_{\infty} = X$ is closed.
+
+
+### Limits
+
+
+```{index} Limit superior; extended real valued
+```
+```{index} Limit inferior; extended real valued
+```
+```{index} Extended real valued function; limit superior
+```
+```{index} Extended real valued function; limit inferior
+```
+```{prf:definition} Limit superior and limit inferior
+:label: def-ms-limsup-liminf-evf
+
+Let $f : X \to \ERL$.
+Let $a$ be an accumulation point of $X$. 
+
+For some $\delta > 0$, let
+
+$$
+u_{\delta} = \sup_{x \in B_d(a,r)} f(x).
+$$
+Then, the *limit superior of the function* $f$ at $a$ is defined by
+
+$$
+\limsup_{x \to a } f(x) = \inf_{\delta > 0} u_{\delta}
+= \inf_{\delta > 0} \sup_{x \in B_d(a,r)} f(x).
+$$
+
+
+Similarly, let
+
+$$
+l_{\delta} = \inf_{x \in B_d(a,r)} f(x).
+$$
+Then, the *limit inferior of the function* $f$ at $a$ is defined by
+
+$$
+\liminf_{x \to a } f(x) \triangleq \sup_{\delta > 0} l_{\delta}
+= \sup_{\delta > 0} \inf_{x \in B_d(a,r)} f(x).
+$$
+```
+
+
+* Even if $a \notin \dom f$, the $\limsup_{x \to a} f(x)$
+  and $\liminf_{x \to a} f(x)$ may still be finite
+  as long as there is a deleted neighborhood of $a$ which
+  is entirely contained in $\dom f$.
+* If there is a deleted neighborhood at $a$ such that
+  $B_d(a, \delta) \cap \dom f = \EmptySet$, then 
+  both limits will diverge.
+
+```{prf:theorem} Characterization of function limit superior
+:label: res-ms-evf-limsup-charac
+
+Let $f : X \to \ERL$.
+Let $a$ be an accumulation point of $X$.
+Then, $u = \limsup_{x \to a} f(x)$ if and only if the following two
+conditions hold:
+
+1. For every $\epsilon > 0$, there exists $\delta > 0$ such that
+
+   $$
+   f(x) < u + \epsilon \Forall x \in B_d(a, \delta).
+   $$
+1. For every $\epsilon > 0$ and for every $\delta > 0$, there
+   exists $x_{\delta} \in B_d(a, \delta)$ such that
+
+   $$
+   u - \epsilon < f(x_{\delta}).
+   $$
+```
+
+```{prf:theorem} Characterization of function limit inferior
+:label: res-ms-evf-liminf-charac
+
+Let $f : X \to \ERL$.
+Let $a$ be an accumulation point of $X$.
+Then, $l = \liminf_{x \to a} f(x)$ if and only if the following two
+conditions hold:
+
+1. For every $\epsilon > 0$, there exists $\delta > 0$ such that
+
+   $$
+   l - \epsilon < f(x) \Forall x \in B_d(a, \delta).
+   $$
+1. For every $\epsilon > 0$ and for every $\delta > 0$, there
+   exists $x_{\delta} \in B_d(a, \delta)$ such that
+
+   $$
+   f(x_{\delta}) < l + \epsilon.
+   $$
+```
+
+### Semicontinuity
+
+```{index} Semicontinuity; extended real valued
+```
+```{index} Lower semicontinuity; extended real valued
+```
+```{index} Upper semicontinuity; extended real valued
+```
+```{prf:definition} Lower and upper semicontinuity
+:label: def-ms-evf-lower-semicontinuity
+
+A function $f : X \to \ERL$
+is said to be *lower-semicontinuous* 
+at $a \in X$ if for every real $t < f(a)$, there exists $\delta > 0$
+such that
+
+$$
+t < f(x) \text{ for every } x \in B(a, \delta).
+$$
+
+Similarly, $f$ is said to be *upper-semicontinuous* at $a \in X$
+if for every real $t > f(a)$, there exists $\delta > 0$
+such that
+
+$$
+f(x) < t \text{ for every } x \in B(a, \delta).
+$$
+
+We say that $f$ is lower semicontinuous (l.s.c.) if $f$ 
+is l.s.c. at every point of $X$.
+
+Similarly, we say that $f$ is upper semicontinuous (u.s.c.) if $f$ 
+is u.s.c. at every point of $X$.
+```
+
+
+```{prf:theorem} Semicontinuity and function limits
+:label: res-ms-evf-sc-limit
+
+Let $f : X \to \ERL$.
+Let $a \in X$ be an accumulation point of $X$.
+Then, $f$ is lower semicontinuous at $a$
+if and only if 
+
+$$
+\liminf_{x \to a} f(x) \geq f(a).
+$$
+
+Similarly, $f$ is upper semicontinuous at $a$
+if and only if
+
+$$
+\limsup_{x \to a}f(x) \leq f(a).
+$$
+```
+
+```{prf:theorem} Semicontinuity and converging sequences
+:label: res-ms-evf-sc-seq-converge
+
+Let $f : X \to \ERL$.
+Let $a \in X$.
+Then, $f$ is l.s.c. at $a$
+if and only if for every sequence $\{x_n \}$
+that converges to $a$,
+
+$$
+\liminf_{n \to \infty} f(x_n) \geq f(a).
+$$
+
+Similarly, $f$ is upper semicontinuous at $a$
+if and only if every sequence $\{x_k \}$
+that converges to $a$,
+
+$$
+\limsup_{n \to \infty}f(x_n) \leq f(a).
+$$
+```
+
 ##  Lower Semicontinuity
 
 The topological properties of convex sets can be studied
 in terms of *lower semicontinuity*. In this subsection,
 we study the implications of lower semicontinuity under
 the subspace topology.
+
+
+### Sum Rules
+
+```{prf:theorem} Sum of lower semicontinuous functions
+:label: res-ms-lsc-sum
+
+Let $f, g : X \to \RR$ be lower semicontinuous functions.
+Then their sum $h = f + g$ with $\dom h = \dom f \cap \dom g$
+is lower semicontinuous.
+
+Similarly, if $f, g: X \to \ERL$ are l.s.c., then their sum
+$h = f + g$ is l.s.c. if $h$ is well defined at every $x \in X$
+(i.e., the sum doesn't take any indeterminate form).
+```
+
+```{prf:proof}
+We proceed as follows.
+
+1. Let $F = \dom f$, $G = \dom g$ and $H = \dom h$.
+1. Then $H = F \cap G$.
+1. Let $a \in H$.
+1. Since $a \in F$ and $x \in G$ hence both $f$ and $g$
+   are l.s.c. at $a$.
+1. Choose $\epsilon > 0$.
+1. Since $f$ is l.s.c. at $a$, there exists $r_1 > 0$
+   such that for every $x \in B(a, r_1)$,
+   $f(a) - \epsilon < f(x)$.
+1. Since $g$ is l.s.c. at $a$, there exists $r_2 > 0$
+   such that for every $x \in B(a, r_2)$,
+   $g(a) - \epsilon < g(x)$.
+1. Let $r = \min(r_1, r_2)$. 
+1. Then for every $x \in B(a, r)$
+
+   $$
+   f(a) + g(a) - 2\epsilon < f(x) + g(x).
+   $$
+1. In other words, $h(a) - 2 \epsilon < h(x)$
+   for every $x \in B(a, r)$.
+1. Hence $h$ is l.s.c. at $a$.
+1. Since $a \in H$ is arbitrary, hence $h$ is l.s.c..
+
+
+
+The argument for extended valued functions is similar.
+
+1. Let $a \in X$.
+1. We are given that both $f$ and $g$ are l.s.c. at $a$.
+1. Let $t \in \RR$ such that $t < h(a) = f(a) + g(a)$.
+1. Then there exist $t_1, t_2 \in \RR$ such that
+   $t = t_1 + t_2$ and $t_1 < f(a), t_2 < g(a)$.
+1. Since $f$ is l.s.c. at $a$, there exists $r_1 > 0$
+   such that for every $x \in B(a, r_1)$,
+   $t_1 < f(x)$.
+1. Since $g$ is l.s.c. at $a$, there exists $r_2 > 0$
+   such that for every $x \in B(a, r_2)$,
+   $t_2 < g(x)$.
+1. Let $r = \min(r_1, r_2)$. 
+1. Then for every $x \in B(a, r)$
+
+   $$
+   t = t_1 + t_2 < f(x) + g(x) = h(x).
+   $$
+1. In other words, $t < h(x)$
+   for every $x \in B(a, r)$.
+1. Hence $h$ is l.s.c. at $a$.
+1. Since $a \in X$ is arbitrary, hence $h$ is l.s.c..
+```
+
+```{prf:theorem} Positive combinations
+:label: res-ms-lsc-pos-combination
+
+Let $f_i : X \to \RERL$, $i=1,\dots,m$ be given functions.
+Let $t_1, \dots, t_m$ be positive scalars.
+Consider the function $g: X \to \RERL$ given by
+
+$$
+g(x) = t_1 f_1(x) + \dots + t_m f_m(x) \Forall x \in X.
+$$
+If $f_1, \dots, f_m$ are l.s.c., then $g$ is l.s.c.
+```
+
+```{prf:proof}
+
+We proceed as follows.
+
+1. Pick some $x \in X$.
+1. For every sequence $\{ x_k \}$ converging to $x$,
+   we have
+
+   $$
+   f_i(x) \leq \liminf_{k \to \infty} f_i (x_k)
+   $$
+   for every $i$.
+1. Hence
+
+   $$
+   g(x) 
+   &= t_1 f_1(x) + \dots + t_m f_m(x) \\
+   &\leq  \sum_{i=1}^m t_i \liminf_{k \to \infty} f_i (x_k) \\
+   &\leq \liminf_{k \to \infty} \sum_{i=1}^m t_i f_i (x_k) \\
+   &= \liminf_{k \to \infty} g(x_k).
+   $$
+   This is valid since $t_i > 0$ for every $i$.
+1. Hence $g$ is l.s.c. at $x$.
+1. Since $x$ is arbitrarily chosen, hence $g$ is l.s.c..
+```
+
+
+### Composition Rules
+
+```{prf:theorem} Composition with a continuous function
+:label: res-ms-lsc-cont-composition
+
+Let $(X, d_1)$ and $(Y, d_2)$ be metric spaces.
+Let $f : X \to Y$ be a continuous function
+and let $g : Y \to \RR$ be a lower semicontinuous
+function. Then their composition $h = g \circ f$
+is lower semicontinuous.
+```
+
+```{prf:proof}
+.
+
+1. Let $\{ x_k \}$ be a sequence of points of $\dom h$ converging to
+   some $x \in \dom h$.
+1. Since $h = g \circ f$,
+   hence $f(x_k) \in \dom g$ for every $k$ and $f(x) \in \dom g$. 
+1. By continuity of $f$, the sequence $\{ f(x_k) \}$ converges
+   to $f(x)$ ({prf:ref}`res-ms-cont-partial-function-charac`).
+1. Note that $\{ f(x_k) \}$ is a sequence of $Y$ converging to
+   $f(x)$.
+1. Since $g$ is l.s.c., hence due to {prf:ref}`res-ms-evf-sc-limit`
+
+   $$
+   \liminf_{k \to \infty} g(f(x_k)) \geq g(f(x)).
+   $$
+1. Hence $h$ is l.s.c..
+```
+
+
+```{prf:theorem} Composition with a real function
+:label: res-ms-lsc-real-composition
+
+Let $(X, d)$ be a metric space.
+Let $f : X \to \RR$ be a lower semicontinuous function.
+Let $g: \RR \to \RR$ be a lower semicontinuous and
+monotonically nondecreasing function.
+Then their composition $h = g \circ f$
+is lower semicontinuous.
+```
+
+```{prf:proof}
+Assume for contradiction that $h$ is not l.s.c..
+
+1. Then there exists a sequence $\{ x_n \}$ of $\dom h$
+   converging to $x \in \dom h$ such that
+
+   $$
+   \liminf_{k \to \infty} g(f(x_k)) < g(f(x)).
+   $$
+1. Let $\{ x_l \}$ be a subsequence of $\{ x_k \}$ achieving
+   this limit inferior; i.e.
+
+   $$ 
+   \lim_{l \to \infty} g(f(x_l)) = \liminf_{k \to \infty} g(f(x_k)) < g(f(x)).
+   $$
+1. Without loss of generality, we can assume that
+
+   $$
+   g(f(x_l)) < g(f(x)) \Forall l.
+   $$
+   We can achieve this by simply dropping the finitely many terms from the sequence for which 
+   this condition doesn't hold.
+1. Since $g$ is monotonically nondecreasing, hence
+   $g(f(x_l)) < g(f(x))$ implies that $f(x_l) < f(x)$ for every $l$.
+1. Taking limit superior, we have
+
+   $$
+   \limsup_{l \to \infty} f(x_l) \leq f(x).
+   $$
+1. Since $x_l \to x$, hence due to lower semicontinuity of $f$
+
+   $$
+   f(x) \leq \liminf_{l \to \infty} f(x_l) \leq \limsup_{l \to \infty} f(x_l) \leq f(x).
+   $$
+1. Thus $\lim_{l \to \infty}f(x_l) = f(x)$ since limit superior and
+   limit inferior must be identical and equal to $f(x)$.
+1. Since $g$ is lower semicontinuous and $f(x_l) \to f(x)$ hence
+
+   $$
+   \lim_{l \to \infty} g(f(x_l)) = \liminf_{l \to \infty} g(f(x_l)) 
+   \geq g(f(x)).
+   $$
+1. This contradicts our earlier claim that $\lim_{l \to \infty} g(f(x_l)) < g(f(x))$.
+1. Hence $h$ must be lower semicontinuous.
+```
+
+
+### Convergent Dominating Sequences
+
 
 ```{prf:theorem} Lower semicontinuity and convergent dominating sequence
 :label: res-ms-lsc-converge-dominating-seq
@@ -1269,7 +2021,7 @@ $\mu \geq f(a)$ whenever $\mu = \lim \mu_n$ and $a = \lim a_n$.
 
 ```{prf:proof}
 
-Assume that $f$ is l.s.c. and   $\mu = \lim \mu_n$ and $a = \lim a_n$.
+Assume that $f$ is l.s.c. at $a$ and   $\mu = \lim \mu_n$ and $a = \lim a_n$.
 
 1. Then, due to {prf:ref}`res-ms-semicont-seq-converge`,
 
@@ -1296,12 +2048,12 @@ for any sequence $\{ x_n \}$ converging to $a$,
 and any sequence $\{ \mu_n \}$ with $\mu_n \geq f(x_n)$
 converging to $\mu$, we have $\mu \geq f(a)$.
 
-1. Let $a \in S$.
 1. Pick a sequence $\{ a_n \}$ such that $\lim a_n = a$.
 1. Pick a convergent sequence $ \{ s_n \}$ such that $s_n \geq f(a_n)$.
 1. By hypothesis $s = \lim s_n \geq f(a)$.
 1. By way of contradiction, assume that $f$ is not l.s.c. at $a$.
-1. Thus, $\liminf_{n \to \infty} f(a_n) < f(a)$.
+1. Then $\liminf_{n \to \infty} f(a_n) < f(a)$
+   due to {prf:ref}`res-ms-semicont-func-limit`.
 1. Let $\liminf_{n \to \infty} f(a_n) = f(a) - r$ for some $r > 0$.
 1. Since $\{ s_n \}$ is convergent, hence it is bounded
    (see {prf:ref}`res-bra-convergent-bounded`).
@@ -1324,10 +2076,9 @@ converging to $\mu$, we have $\mu \geq f(a)$.
 1. Since $\{a_n \}$ converges to $a$, hence $\{b_n \}$ converges to $a$.
 1. Now, choose $t_n = f(b_n)$. This is by definition a convergent sequence
    satisfying $t_n \geq f(b_n)$.
-1. But then, $t = \lim t_n = f(b) - r < f(b)$.
+1. But then, $t = \lim t_n = f(a) - r < f(a)$.
 1. This contradicts the hypothesis that $t \geq f(a)$.
 1. Thus, $f$ must be l.s.c. at $a$.
-1. Since $a$ was arbitrary, hence $f$ is l.s.c. at every $a \in S$.
 ```
 
 
@@ -1467,6 +2218,8 @@ For the converse, assume that $f$ is l.s.c.
 
 ### Lower Semicontinuous Hull
 
+```{index} Lower semicontinuous hull
+```
 ```{prf:definition} Lower semicontinuous hull of a function
 :label: def-lsc-hull-func
 
@@ -1566,309 +2319,3 @@ $$
 ```
 
 
-## Extended Real Valued Functions
-
-
-Often, it is easier to work with extended real valued
-functions $f : X \to \ERL$. In this case, $f$ is
-defined at every $x \in X$ with $f$ taking the
-value of $\infty$ or $-\infty$ outside its effective
-domain. 
-
-$$
-\dom f = \{x \in X \ST f(x) \in \RR \}.
-$$
-
-We don't have to think in terms of subspace topology 
-w.r.t. $(S, d)$ where $S$ is the effective domain.
-All the definitions and results can be presented
-w.r.t. the topology of $(X, d)$ itself.
-
-### Proper Functions
-
-```{prf:definition} Proper function
-:label: def-ms-proper-function
-
-Let $(X, d)$ be a metric space.
-An extended real-valued function 
-$f : X \to \ERL$ is called *proper*
-if its domain is nonempty, it never
-takes the value $-\infty$ and is
-not identically equal to $\infty$.
-
-$$
-\exists x \in X \text{ such that } f(x) < \infty
-\text{ and }
-f(x) > -\infty \Forall x \in X.
-$$
-``` 
-Putting another way, a proper function
-is obtained by taking a real valued function $f$
-defined on a nonempty set $C \subseteq X$
-and then extending it to all of $X$ by 
-setting $f(x) = +\infty$ for all $x \notin C$.
-
-It is easy to see that the codomain for a proper
-function can be changed from $\ERL$
-to $\RERL$ to clarify that it never takes
-the value $-\infty$.
-
-```{prf:definition} Improper function
-:label: def-ms-improper-function
-
-Let $(X, d)$ be a metric space.
-An extended real-valued function 
-$f : X \to \ERL$ is called *improper*
-if it is not proper.
-```
-
-For an improper function $f$:
-
-* $\dom f$ may be empty. 
-* $f$ might take a value of $-\infty$ at some $x \in X$.
-
-
-```{prf:definition} Indicator function
-:label: def-ms-indicator-function
-
-Let $(X, d)$ be a metric space.
-Let $C \subseteq X$. Then, its 
-*indicator function* is given by
-$I_C(x) = 0 \Forall x \in C$. 
-Here, $\dom I_C = C$.
-
-The extended value extension of an indicator
-function is given by:
-
-$$
-\tilde{I_C}(x) \triangleq \begin{cases} 
-0 & \text{for} & x \in C \\
-\infty & \text{for} & x \notin C.
-\end{cases}
-$$
-```
-
-
-
-### Extreme Values
-
-Let $f : X \to \ERL$ be an extended real valued function
-with $S = \dom f$.
-
-1. For some $a \in \dom f$, 
-   $f(a)$ is a *local maximum value* of $f$ if for some $\delta > 0$:
-
-   $$
-   f(x) \leq f(a) \Forall x \in B(a, \delta).
-   $$ 
-1. For some $a \in \dom f$,
-   $f(a)$ is a *local minimum value* of $f$ if for some $\delta > 0$:
-
-   $$
-   f(x) \geq f(a) \Forall x \in B(a, \delta).
-   $$ 
-1. We say that $f$ attains a *global maximum*
-   at some $a \in \dom f$, if:
-
-   $$
-   f(x) \leq f(a) \Forall x \in X.
-   $$
-1. We say that $f$ attains a *global minimum*
-   at some $a \in \dom f$, if:
-
-   $$
-   f(x) \geq f(a) \Forall x \in X.
-   $$
-1. We say that $f$ attains a *strict global maximum*
-   at some $a \in \dom f$, if:
-
-   $$
-   f(x) < f(a) \Forall x \in X, x \neq a.
-   $$
-1. We say that $f$ attains a *strict global minimum*
-   at some $a \in \dom f$, if:
-
-   $$
-   f(x) > f(a) \Forall x \in X, x \neq a.
-   $$
-
-Let $f : X \to \ERL$ be continuous. 
-Let $K$ be a nonempty compact subset of $X$. 
-Then, the set $f(K)$ is closed and bounded.
-Also, there exists $a$ and $b$ in $K$ such that
-
-$$
-f(a) = \inf f(K) \text{ and } f(b) = \sup f(K);
-$$
-i.e., $f$ attains its supremum and infimum over the values in $f(K)$.
-
-### Closed Functions
-
-```{prf:definition} Closed Extended Real Valued Functions
-:label: def-ms-evf-closed-func
-
-$f : X \to \ERL$ is closed if for each $\alpha \in \ERL$, the
-sublevel set
-$T_{\alpha} = \{ x \in X \ST f(x) \leq \alpha \}$
-is closed. 
-```
-We note that $T_{\infty} = X$ is closed.
-
-
-### Limits
-
-
-```{prf:definition} Limit superior and limit inferior
-:label: def-ms-limsup-liminf-evf
-
-Let $f : X \to \ERL$.
-Let $a$ be an accumulation point of $X$. 
-
-For some $\delta > 0$, let
-
-$$
-u_{\delta} = \sup_{x \in B_d(a,r)} f(x).
-$$
-Then, the *limit superior of the function* $f$ at $a$ is defined by
-
-$$
-\limsup_{x \to a } f(x) = \inf_{\delta > 0} u_{\delta}
-= \inf_{\delta > 0} \sup_{x \in B_d(a,r)} f(x).
-$$
-
-
-Similarly, let
-
-$$
-l_{\delta} = \inf_{x \in B_d(a,r)} f(x).
-$$
-Then, the *limit inferior of the function* $f$ at $a$ is defined by
-
-$$
-\liminf_{x \to a } f(x) \triangleq \sup_{\delta > 0} l_{\delta}
-= \sup_{\delta > 0} \inf_{x \in B_d(a,r)} f(x).
-$$
-```
-
-
-* Even if $a \notin \dom f$, the $\limsup_{x \to a} f(x)$
-  and $\liminf_{x \to a} f(x)$ may still be finite
-  as long as there is a deleted neighborhood of $a$ which
-  is entirely contained in $\dom f$.
-* If there is a deleted neighborhood at $a$ such that
-  $B_d(a, \delta) \cap \dom f = \EmptySet$, then 
-  both limits will diverge.
-
-```{prf:theorem} Characterization of function limit superior
-:label: res-ms-evf-limsup-charac
-
-Let $f : X \to \ERL$.
-Let $a$ be an accumulation point of $X$.
-Then, $u = \limsup_{x \to a} f(x)$ if and only if the following two
-conditions hold:
-
-1. For every $\epsilon > 0$, there exists $\delta > 0$ such that
-
-   $$
-   f(x) < u + \epsilon \Forall x \in B_d(a, \delta).
-   $$
-1. For every $\epsilon > 0$ and for every $\delta > 0$, there
-   exists $x_{\delta} \in B_d(a, \delta)$ such that
-
-   $$
-   u - \epsilon < f(x_{\delta}).
-   $$
-```
-
-```{prf:theorem} Characterization of function limit inferior
-:label: res-ms-evf-liminf-charac
-
-Let $f : X \to \ERL$.
-Let $a$ be an accumulation point of $X$.
-Then, $l = \liminf_{x \to a} f(x)$ if and only if the following two
-conditions hold:
-
-1. For every $\epsilon > 0$, there exists $\delta > 0$ such that
-
-   $$
-   l - \epsilon < f(x) \Forall x \in B_d(a, \delta).
-   $$
-1. For every $\epsilon > 0$ and for every $\delta > 0$, there
-   exists $x_{\delta} \in B_d(a, \delta)$ such that
-
-   $$
-   f(x_{\delta}) < l + \epsilon.
-   $$
-```
-
-### Semicontinuity
-
-```{prf:definition} Lower and upper semicontinuity
-:label: def-ms-evf-lower-semicontinuity
-
-A function $f : X \to \ERL$
-is said to be *lower-semicontinuous* 
-at $a \in X$ if for every $\epsilon > 0$, there exists $\delta > 0$
-such that
-
-$$
-f(a) - \epsilon < f(x) \text{ for every } x \in B(a, \delta).
-$$
-
-Similarly, $f$ is said to be *upper-semicontinuous* at $a \in X$
-if for every $\epsilon > 0$, there exists $\delta > 0$
-such that
-
-$$
-f(x) < f(a) + \epsilon \text{ for every } x \in B(a, \delta).
-$$
-
-We say that $f$ is lower semicontinuous (l.s.c.) if $f$ 
-is l.s.c. at every point of $X$.
-
-Similarly, we say that $f$ is upper semicontinuous (u.s.c.) if $f$ 
-is u.s.c. at every point of $X$.
-```
-
-
-```{prf:theorem} Semicontinuity and function limits
-:label: res-ms-evf-sc-limit
-
-Let $f : X \to \ERL$.
-Let $a \in X$ be an accumulation point of $X$.
-Then, $f$ is lower semicontinuous at $a$
-if and only if 
-
-$$
-\liminf_{x \to a} f(x) \geq f(a).
-$$
-
-Similarly, $f$ is upper semicontinuous at $a$
-if and only if
-
-$$
-\limsup_{x \to a}f(x) \leq f(a).
-$$
-```
-
-```{prf:theorem} Semicontinuity and converging sequences
-:label: res-ms-evf-sc-seq-converge
-
-Let $f : X \to \ERL$.
-Let $a \in X$.
-Then, $f$ is l.s.c. at $a$
-if and only if for every sequence $\{x_n \}$
-that converges to $a$,
-
-$$
-\liminf_{n \to \infty} f(x_n) \geq f(a).
-$$
-
-Similarly, $f$ is upper semicontinuous at $a$
-if and only if every sequence $\{x_k \}$
-that converges to $a$,
-
-$$
-\limsup_{n \to \infty}f(x_n) \leq f(a).
-$$
-```

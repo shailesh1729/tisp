@@ -1,0 +1,3372 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>14.2. Basis Pursuit &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="14.3. Orthogonal Matching Pursuit" href="omp_sa.html" />
+    <link rel="prev" title="14.1. Stability of the Sparsest Solution" href="stability.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ssm/chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/underdetermined.html">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ssm/dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/sparse_approx/basis_pursuit_sa.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fsparse_approx/basis_pursuit_sa.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   14.2.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-ortho-case">
+   14.2.2. Two-Ortho-Case
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-case">
+   14.2.3. General Case
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bpic">
+   14.2.4. BPIC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bpdn">
+   14.2.5. BPDN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#restricted-minimizers">
+     14.2.5.1. Restricted Minimizers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-correlation-condition">
+     14.2.5.2. The Correlation Condition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exact-recovery-coefficient">
+     14.2.5.3. Exact Recovery Coefficient
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applications-of-ell-1-penalization">
+     14.2.5.4. Applications of
+     <span class="math notranslate nohighlight">
+      \(\ell_1\)
+     </span>
+     Penalization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exact-sparse-reconstruction-problem">
+     14.2.5.5. Exact Sparse Reconstruction Problem
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Basis Pursuit</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   14.2.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-ortho-case">
+   14.2.2. Two-Ortho-Case
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-case">
+   14.2.3. General Case
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bpic">
+   14.2.4. BPIC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bpdn">
+   14.2.5. BPDN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#restricted-minimizers">
+     14.2.5.1. Restricted Minimizers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-correlation-condition">
+     14.2.5.2. The Correlation Condition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exact-recovery-coefficient">
+     14.2.5.3. Exact Recovery Coefficient
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applications-of-ell-1-penalization">
+     14.2.5.4. Applications of
+     <span class="math notranslate nohighlight">
+      \(\ell_1\)
+     </span>
+     Penalization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exact-sparse-reconstruction-problem">
+     14.2.5.5. Exact Sparse Reconstruction Problem
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="basis-pursuit">
+<h1><span class="section-number">14.2. </span>Basis Pursuit<a class="headerlink" href="#basis-pursuit" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2><span class="section-number">14.2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>We recall following sparse approximation problems.
+Given a signal <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> which is known to have a sparse representation
+in a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>,
+the exact-sparse recovery problem is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-exact-sparse-problem">
+<span class="eqno">(14.4)<a class="headerlink" href="#equation-eq-bp-exact-sparse-problem" title="Permalink to this equation">¶</a></span>\[\widehat{\ba} = \text{arg } \underset{\ba \in \CC^D}{\min} 
+\| \ba \|_0 \text{ subject to } \bx = \bDDD \ba.\]</div>
+<p>When <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> doesn’t have a sparse representation in <span class="math notranslate nohighlight">\(\bDDD\)</span>,
+a <span class="math notranslate nohighlight">\(K\)</span>-sparse approximation of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\bDDD\)</span>
+can be obtained by solving the following problem:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-sparse-recovery-sparsity-bound">
+<span class="eqno">(14.5)<a class="headerlink" href="#equation-eq-bp-sparse-recovery-sparsity-bound" title="Permalink to this equation">¶</a></span>\[\widehat{\ba} = \text{arg } \underset{\ba \in \CC^D}{\min}
+\| \bx - \bDDD \ba \|_2\text{ subject to }  \| \ba \|_0 \leq K.\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\bx\)</span> is modeled as <span class="math notranslate nohighlight">\(\bx = \bDDD \ba + \be\)</span> where <span class="math notranslate nohighlight">\(\ba\)</span> denotes
+a sparse representation of <span class="math notranslate nohighlight">\(\bx\)</span> and <span class="math notranslate nohighlight">\(\be\)</span> denotes the approximation error.</p>
+<div class="docutils">
+<p>A different way to formulate the approximation problem is to provide an upper bound
+to the acceptable approximation error <span class="math notranslate nohighlight">\(\|\be\|_2 \leq \epsilon\)</span>
+and try to find sparsest possible representation
+within this approximation error bound as</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-sparse-recovery-error-bound">
+<span class="eqno">(14.6)<a class="headerlink" href="#equation-eq-bp-sparse-recovery-error-bound" title="Permalink to this equation">¶</a></span>\[\widehat{\ba} = \text{arg } \underset{\ba \in \CC^D}{\min} 
+\| \ba \|_0 \text{ subject to }  \| \bx - \bDDD \ba \|_2 \leq \epsilon.\]</div>
+</div>
+<div class="docutils">
+<p><em>Basis Pursuit</em> (BP) <span id="id1">[<a class="reference internal" href="../bib.html#id42" title="Scott Shaobing Chen, David L Donoho, and Michael A Saunders. Atomic decomposition by basis pursuit. SIAM journal on scientific computing, 20(1):33–61, 1998.">16</a>]</span> suggests the convex relaxation of
+<a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a>
+by replacing <span class="math notranslate nohighlight">\(\ell_0\)</span>-``norm” with <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm.</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-bp-l1-norm-minimization">
+<span class="eqno">(14.7)<a class="headerlink" href="#equation-eq-bp-bp-l1-norm-minimization" title="Permalink to this equation">¶</a></span>\[\widehat{\ba} = \text{arg } \underset{\ba \in \CC^D}{\min} 
+\| \ba \|_1 \text{ subject to } x = \bDDD \ba.\]</div>
+<p>For real signals, it can be implemented as a linear program.
+For complex signals, it can be implemented
+as a second order cone program.</p>
+<p>In the presence of approximation error <a class="reference internal" href="#equation-eq-bp-sparse-recovery-error-bound">(14.6)</a>,
+where <span class="math notranslate nohighlight">\(\bx = \bDDD \ba + \be\)</span> with <span class="math notranslate nohighlight">\(\ba\)</span> being
+a <span class="math notranslate nohighlight">\(K\)</span>-sparse approximate representation of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\bDDD\)</span>
+we can formulate corresponding <span class="math notranslate nohighlight">\(\ell_1\)</span>-minimization problem as:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-bpic-l1-norm-minimization">
+<span class="eqno">(14.8)<a class="headerlink" href="#equation-eq-bp-bpic-l1-norm-minimization" title="Permalink to this equation">¶</a></span>\[\widehat{\ba} = \text{arg } \underset{\ba \in \CC^D}{\min} 
+\| \ba \|_1 \text{ subject to } \| \bx - \bDDD \ba \|_2 \leq \epsilon\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon \geq \| \be \|_2\)</span> provides an upper bound on the approximation error.
+This version is known as <em>basis pursuit with inequality constraints</em> (BPIC).</p>
+<p>The dual problem constructed using Lagrange multipliers is</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-bpdn-l1-norm-minimization">
+<span class="eqno">(14.9)<a class="headerlink" href="#equation-eq-bp-bpdn-l1-norm-minimization" title="Permalink to this equation">¶</a></span>\[\widehat{\ba} = \text{arg } \underset{\ba \in \CC^D}{\min} 
+\| \ba \|_1 + \lambda \| \bx -  \bDDD \ba \|_2^2.\]</div>
+<p>This is known as <em>basis pursuit denoising</em>(BPDN).
+With appropriate choice of <span class="math notranslate nohighlight">\(\lambda\)</span>, the
+two problems BPIC and BPDN are equivalent.
+This formulation attempts to minimize the
+<span class="math notranslate nohighlight">\(\ell_1\)</span>-norm subject to a penalty term over the approximation error.
+The Lagrangian  constant <span class="math notranslate nohighlight">\(\lambda\)</span> controls
+how large the penalty due to approximation error will be.</p>
+<p>Note that the constraint <span class="math notranslate nohighlight">\(\|\bx - \bDDD \ba \|_2 \leq \epsilon\)</span>
+is equivalent to
+<span class="math notranslate nohighlight">\(\|\bx - \bDDD \ba \|_2^2 \leq \epsilon^2\)</span>. We have used the squared version to
+construct the dual BPDN problem since the term <span class="math notranslate nohighlight">\(\| x - \bDDD \ba \|_2^2\)</span> is easier to
+differentiate and work with.</p>
+<p>Efficient solvers are available to solve
+BP, BPIC, BPDN problems using convex optimization techniques. They are usually polynomial time
+and involve sophisticated algorithms for implementation. The good part is a guarantee that
+a globally unique solution can be found (since the problem is convex). The not so good part is
+that convex optimization methods are still quite computationally intensive.</p>
+<p>An alternative formulation of BPDN is as follows.</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-bpdn-l1-norm-minimization-gamma">
+<span class="eqno">(14.10)<a class="headerlink" href="#equation-eq-bp-bpdn-l1-norm-minimization-gamma" title="Permalink to this equation">¶</a></span>\[\widehat{\ba} = \text{arg } \underset{\ba \in \CC^D}{\min} 
+\frac{1}{2}\| \bx -  \bDDD \ba \|_2^2 + \gamma \| \ba \|_1.\]</div>
+<p>The difference in the two formulations is essentially with which term the Lagrangian constant (<span class="math notranslate nohighlight">\(\lambda\)</span> or <span class="math notranslate nohighlight">\(\gamma\)</span>)
+is placed.
+By choosing <span class="math notranslate nohighlight">\(\lambda = 1/ (2 \gamma)\)</span>,
+the two formulations are essentially the same (with a scale factor
+in the objective function).
+This formulation attempts to minimize the approximation error
+subject to an <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm penalty.
+Thus, the two formulations differentiate w.r.t. which
+term is minimized and which term is considered as penalty.</p>
+<p>Basis pursuit is not an algorithm but a principle which says that for most real life problems,
+the solution of <span class="math notranslate nohighlight">\(\ell_0\)</span>-minimization problem is same as the solution of
+the corresponding <span class="math notranslate nohighlight">\(\ell_1\)</span>-minimization problem.
+Actual algorithms for solving the basis pursuit formulation of sparse recovery
+problem come from convex optimization literature.</p>
+</div>
+<p>We start our discussion with the analysis of exact-sparse case.</p>
+<p>As part of our theoretical analysis, we would like to explore conditions under which
+the problems <a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a> and
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a> are equivalent i.e. there exists
+a unique solution to both of them and the solution is identical.
+Under such conditions, the NP-hard problem <a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a>
+can be easily replaced with a tractable <a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>
+problem which is convex and solvable in polynomial time.</p>
+</div>
+<div class="section" id="two-ortho-case">
+<h2><span class="section-number">14.2.2. </span>Two-Ortho-Case<a class="headerlink" href="#two-ortho-case" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>Further simplifying, we consider the case where the dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>
+is a two-ortho-basis</p>
+<div class="math notranslate nohighlight">
+\[
+\bDDD = \begin{bmatrix} \Psi &amp; \Phi \end{bmatrix}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\Psi\)</span> and  <span class="math notranslate nohighlight">\(\Phi\)</span>  both being orthonormal bases for <span class="math notranslate nohighlight">\(\CC^N\)</span>.</p>
+<ol>
+<li><p>Clearly, <span class="math notranslate nohighlight">\(\bDDD \in \CC^{N \times 2N}\)</span> and <span class="math notranslate nohighlight">\(D = 2N\)</span>.</p></li>
+<li><p>We denote</p>
+<div class="math notranslate nohighlight">
+\[
+    \Omega = \{ 1, 2, \dots, 2N \}
+    \]</div>
+<p>as the index set for the representation vectors <span class="math notranslate nohighlight">\(\ba\)</span>.</p>
+</li>
+<li><p>The representation <span class="math notranslate nohighlight">\(\ba\)</span> of a signal <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(\bDDD\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \bx = \bDDD \ba 
+    = \begin{bmatrix} \Psi &amp; \Phi \end{bmatrix} 
+    \begin{bmatrix} \ba^p \\ \ba^q \end{bmatrix}
+    = \Psi \ba^p + \Phi \ba^q.
+    \end{split}\]</div>
+</li>
+<li><p>We can assign</p>
+<div class="math notranslate nohighlight">
+\[
+    k_p = \| \ba^{p} \|_0  \quad \text{and} \quad k_q  = \| \ba^{q} \|_0.
+    \]</div>
+</li>
+<li><p>Total sparsity of <span class="math notranslate nohighlight">\(\ba\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    K = \| \ba \|_0 = k_p + k_q.
+    \]</div>
+</li>
+<li><p>Whenever <span class="math notranslate nohighlight">\(K \ll N\)</span>, we have a sparse representation.</p></li>
+<li><p>Further, let <span class="math notranslate nohighlight">\(S_p \subseteq \{ 1 , \dots, N \}\)</span>
+be the support corresponding to <span class="math notranslate nohighlight">\(\ba^p\)</span> part of <span class="math notranslate nohighlight">\(\ba\)</span>
+(i.e. <span class="math notranslate nohighlight">\(S_p = \supp (\ba^p)\)</span>)
+and <span class="math notranslate nohighlight">\(S_q \subseteq \{ 1 , \dots, N \}\)</span>
+be the support corresponding to <span class="math notranslate nohighlight">\(\ba^q\)</span> part of <span class="math notranslate nohighlight">\(\ba\)</span>
+(i.e. <span class="math notranslate nohighlight">\(S_q = \supp (\ba^q))\)</span>.</p></li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\(|S_p| = k_p\)</span> and <span class="math notranslate nohighlight">\(|S_q | = k_q\)</span>.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(S_p\)</span> and <span class="math notranslate nohighlight">\(S_q\)</span> need not be disjoint.</p></li>
+<li><p>But, <span class="math notranslate nohighlight">\(S_p\)</span> and <span class="math notranslate nohighlight">\(S_q + N\)</span> are disjoint.</p></li>
+<li><p>In fact, <span class="math notranslate nohighlight">\(\supp(\ba) = S_p \cup (S_q + N)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\OneVec_p \in \CC^N\)</span> will denote the indicator vector for <span class="math notranslate nohighlight">\(S_p\)</span>;
+i.e., <span class="math notranslate nohighlight">\(\OneVec_p(i) = 0 \Forall i \notin S_p\)</span>
+and <span class="math notranslate nohighlight">\(\OneVec_p(i) = 1 \Forall i \in S_p\)</span>.</p></li>
+<li><p>Similarly, <span class="math notranslate nohighlight">\(\OneVec_q \in \CC^N\)</span> will denote
+the indicator  vector for <span class="math notranslate nohighlight">\(S_q\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\OneVec \in \CC^N\)</span> will denote the vector <span class="math notranslate nohighlight">\(\{ 1, \dots, 1 \}\)</span>.</p></li>
+<li><p>Also, <span class="math notranslate nohighlight">\(\OneMat \in \CC^{N \times N}\)</span> will denote a square matrix of all ones.</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(\OneMat = \OneVec \cdot \OneVec^T\)</span>.</p></li>
+</ol>
+<p>We now state our main result for equivalence of solutions of
+<a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a> and
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a> for the two ortho-case.
+Going forward,
+we will simply use <span class="math notranslate nohighlight">\(\mu\)</span> to refer to the coherence of <span class="math notranslate nohighlight">\(\bDDD\)</span> (i.e. <span class="math notranslate nohighlight">\(\mu (\bDDD)\)</span>).</p>
+</div>
+<div class="proof theorem admonition" id="res:bp:two_ortho_exact_recovery_coherence">
+<p class="admonition-title"><span class="caption-number">Theorem 14.6 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bDDD\)</span> be a two-ortho-basis dictionary
+<span class="math notranslate nohighlight">\(\bDDD = \begin{bmatrix} \Psi &amp; \Phi \end{bmatrix}\)</span>.
+Let <span class="math notranslate nohighlight">\(\bx = \bDDD \ba\)</span>, where <span class="math notranslate nohighlight">\(\bx\)</span> is known.
+If a <span class="math notranslate nohighlight">\(K\)</span>-sparse representation <span class="math notranslate nohighlight">\(\ba\)</span> exists
+with <span class="math notranslate nohighlight">\(k_p \geq k_q\)</span> such that (<span class="math notranslate nohighlight">\(k_p, k_q\)</span>) obey</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-bp-exact-sparse-two-ortho-case-condition">
+<span class="eqno">(14.11)<a class="headerlink" href="#equation-eq-bp-bp-exact-sparse-two-ortho-case-condition" title="Permalink to this equation">¶</a></span>\[2 \mu^2 k_p k_q  + \mu k_p - 1 &lt; 0;\]</div>
+<p>then <span class="math notranslate nohighlight">\(\ba\)</span> is the unique solution of both problems
+<a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a> and
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>.</p>
+<p>A weaker condition is:
+If</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-two-ortho-exact-recovery-coherence-simple">
+<span class="eqno">(14.12)<a class="headerlink" href="#equation-eq-bp-two-ortho-exact-recovery-coherence-simple" title="Permalink to this equation">¶</a></span>\[\| \ba \|_0 = K  = k_p + k_q &lt; \frac{\sqrt{2} - 0.5}{\mu};\]</div>
+<p>then <span class="math notranslate nohighlight">\(\ba\)</span> is a unique (<span class="math notranslate nohighlight">\(K\)</span>-sparse) solution to both
+<a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a> and
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We first show that <span class="math notranslate nohighlight">\(\ba\)</span> is a unique solution of <a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a>.</p>
+<ol>
+<li><p>Towards the end of this proof, we show that
+<a class="reference internal" href="#equation-eq-bp-bp-exact-sparse-two-ortho-case-condition">(14.11)</a> <span class="math notranslate nohighlight">\(\implies\)</span>
+<a class="reference internal" href="#equation-eq-bp-two-ortho-exact-recovery-coherence-simple">(14.12)</a>.</p></li>
+<li><p>Due to <a class="reference internal" href="#equation-eq-bp-two-ortho-exact-recovery-coherence-simple">(14.12)</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba \|_0 = K = k_p + k_q &lt; \frac{\sqrt{2} - 0.5}{\mu} 
+    = \frac{0.414}{\mu} &lt; \frac{1}{\mu}.
+   \]</div>
+</li>
+<li><p>Thus, if <span class="math notranslate nohighlight">\(\ba\)</span> satisfies <a class="reference internal" href="#equation-eq-bp-bp-exact-sparse-two-ortho-case-condition">(14.11)</a>,
+then it is necessarily the sparsest possible representation
+of <span class="math notranslate nohighlight">\(\bx\)</span> in <span class="math notranslate nohighlight">\(\bDDD\)</span>
+due to <a class="reference internal" href="../ssm/onb_sparsity.html#res-ssm-sparse-unique-2onb">Theorem 12.8</a>.</p></li>
+<li><p>All other representations are denser
+(i.e. have more non-zero entries).</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\ba\)</span> is a unique solution of <a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a>.</p></li>
+</ol>
+<p>We next show that <span class="math notranslate nohighlight">\(\ba\)</span> is also a unique solution of
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>.</p>
+<ol>
+<li><p><span class="math notranslate nohighlight">\(\ba\)</span> is a feasible vector to <a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>
+since <span class="math notranslate nohighlight">\(\bx = \bDDD \ba\)</span>
+though it need not be an optimal solution.</p></li>
+<li><p>We have to find criteria under which <span class="math notranslate nohighlight">\(\ba\)</span> is optimal
+and no other feasible vector <span class="math notranslate nohighlight">\(\bb\)</span> is optimal.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\ba\)</span> is the unique solution to <a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a>,
+hence <span class="math notranslate nohighlight">\(\| \bb \|_0 &gt; \| \ba \|_0\)</span> for every other
+feasible <span class="math notranslate nohighlight">\(\bb\)</span> for <a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>.</p></li>
+<li><p>We consider the set of alternative feasible vectors
+to <a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a> given by</p>
+<div class="math notranslate nohighlight">
+\[
+    C = \left \{ \bb \ST \bb \neq \ba, \| \bb \|_1 
+        \leq \| \ba \|_1, \| \bb \|_0 &gt; \| \ba \|_0 \text{ and } 
+        \bDDD (\ba - \bb) = \bzero 
+    \right \}.
+   \]</div>
+<p>This set contains all feasible vectors to
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a> which are</p>
+<ol class="simple">
+<li><p>different from <span class="math notranslate nohighlight">\(\ba\)</span></p></li>
+<li><p>have larger support (larger <span class="math notranslate nohighlight">\(\ell_0\)</span>-“norm”)</p></li>
+<li><p>satisfy the linear system of equations <span class="math notranslate nohighlight">\(\bx = \bDDD \ba\)</span></p></li>
+<li><p>have <span class="math notranslate nohighlight">\(\ell_1\)</span> norm less than or equal to <span class="math notranslate nohighlight">\(\ba\)</span>.</p></li>
+</ol>
+</li>
+<li><p>If this set is nonempty, then there exists a solution to basis pursuit
+which is not same as <span class="math notranslate nohighlight">\(\ba\)</span>.</p></li>
+<li><p>If this set is empty, then the solutions of
+<a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a> and
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>  coincide
+and are both unique.</p></li>
+<li><p>Writing <span class="math notranslate nohighlight">\(\be = \bb - \ba \iff \bb = \be + \ba\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bb \|_1 \leq \| \ba \|_1 \iff  \| \be + \ba \|_1 - \| \ba \|_1 \leq 0.
+   \]</div>
+</li>
+<li><p>Thus, we can rewrite <span class="math notranslate nohighlight">\(C\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+   C_s = \{ \be \ST \be \neq \bzero,
+    \| \be + \ba \|_1 - \| \ba \|_1 \leq 0 \text{ and } \bDDD \be = \bzero\}.
+   \]</div>
+</li>
+<li><p>In order to show that <span class="math notranslate nohighlight">\(C\)</span> is empty,
+we will show that a larger set containing <span class="math notranslate nohighlight">\(C_s\)</span>
+is also empty.</p></li>
+<li><p>Essentially, we wish to consider a larger set whose emptiness can be
+checked easily against <a class="reference internal" href="#equation-eq-bp-bp-exact-sparse-two-ortho-case-condition">(14.11)</a>.</p></li>
+<li><p>If that larger set is empty due to
+<a class="reference internal" href="#equation-eq-bp-bp-exact-sparse-two-ortho-case-condition">(14.11)</a>,
+then <span class="math notranslate nohighlight">\(C\)</span> would also be empty and we would have completed the proof.</p></li>
+</ol>
+<p>Emptiness of <span class="math notranslate nohighlight">\(C_s\)</span></p>
+<ol>
+<li><p>We start by the requirement <span class="math notranslate nohighlight">\(\| \be + \ba \|_1 - \| \ba \|_1 \leq 0\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\ba = \begin{bmatrix} {\ba^p} \\ {\ba^q} \end{bmatrix}\)</span>
+and <span class="math notranslate nohighlight">\(\be = \begin{bmatrix} {\be^p} \\ {\be^q} \end{bmatrix}\)</span> ,
+where <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> refer to parts corresponding to the orthonormal bases
+<span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span> respectively
+(as described at the beginning of this section).</p></li>
+<li><p>Note that even if <span class="math notranslate nohighlight">\(\ba^p\)</span> and <span class="math notranslate nohighlight">\(\ba^q\)</span> are sparse,
+<span class="math notranslate nohighlight">\(\be^p\)</span> and <span class="math notranslate nohighlight">\(\be^q\)</span> need not be.</p></li>
+<li><p>In fact, support of <span class="math notranslate nohighlight">\(\be^p\)</span> and <span class="math notranslate nohighlight">\(\be^q\)</span> could be very different from
+<span class="math notranslate nohighlight">\(S_p\)</span> and <span class="math notranslate nohighlight">\(S_q\)</span>.</p></li>
+<li><p>We can now write</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    0 \geq \| \be + \ba \|_1 - \| \ba \|_1 
+    &amp;= \left ( \sum_{i=1}^N |e^p_i + a^p_i | - | a^p_i | \right )
+    + \left ( \sum_{i=1}^N |e^q_i + a^q_i | - | a^q_i | \right ) \\
+    &amp;= \sum_{i \notin S_p} |e^p_i | + \sum_{i \notin S_q} |e^q_i | \\
+    &amp;+  \left ( \sum_{i \in S_p} |e^p_i + a^p_i | - | a^p_i | \right )
+    + \left ( \sum_{i \in S_q} |e^q_i + a^q_i | - | a^q_i | \right ).
+   \end{split}\]</div>
+<p>We are splitting the sum as follows.</p>
+<ol class="simple">
+<li><p>We first split the sum into <span class="math notranslate nohighlight">\(\be^p, \ba^p\)</span> and <span class="math notranslate nohighlight">\(\be^q, \ba^q\)</span> parts.</p></li>
+<li><p>We split the sum on the <span class="math notranslate nohighlight">\(p\)</span> part to sum over indices in <span class="math notranslate nohighlight">\(S_p\)</span>
+and indices not in <span class="math notranslate nohighlight">\(S_p\)</span>.</p></li>
+<li><p>We split the sum on the <span class="math notranslate nohighlight">\(q\)</span> part to sum over indices in <span class="math notranslate nohighlight">\(S_q\)</span>
+and indices not in <span class="math notranslate nohighlight">\(S_q\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(i \notin S_p\)</span>, <span class="math notranslate nohighlight">\(a^p_i = 0\)</span> leading to
+<span class="math notranslate nohighlight">\(|e^p_i + \ba^p_i | - | \ba^p_i | = |e^p_i |\)</span>.</p></li>
+<li><p>Ditto for <span class="math notranslate nohighlight">\(i \notin S_q\)</span>.</p></li>
+</ol>
+</li>
+<li><p>We recall from triangle inequality on complex numbers that</p>
+<div class="math notranslate nohighlight">
+\[
+   |x + y | \geq |y| - |x| \Forall x, y \in \CC
+   \]</div>
+<p>which implies <span class="math notranslate nohighlight">\(|x + y| - |y|  \geq - |x|\)</span>.</p>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+     |e^p_i + a^p_i | - | a^p_i | \geq - | e^p_i  |  \Forall i \in S_p
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+     |e^q_i + a^q_i | - | a^q_i | \geq - | e^q_i  |  \Forall i \in S_q.
+   \]</div>
+</li>
+<li><p>With this, the above condition can be relaxed as</p>
+<div class="math notranslate nohighlight">
+\[
+    0 \geq \| \be + \ba \|_1 - \| \ba \|_1
+    \geq \sum_{i \notin S_p} |e^p_i | + \sum_{i \notin S_q} |e^q_i| 
+    - \sum_{i \in S_p} |e^p_i | - \sum_{i \in S_q} |e^q_i|.
+   \]</div>
+</li>
+<li><p>Every <span class="math notranslate nohighlight">\(\be\)</span> satisfying this inequality will also satisfy the condition
+<span class="math notranslate nohighlight">\(\| \be + \ba \|_1 - \| \ba \|_1 \leq 0\)</span>.</p></li>
+<li><p>To simplify notation we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{i \in S_p} |e^p_i | = \OneVec_p^T | \be^p | 
+    \text{ and } 
+    \sum_{i \in S_q} |e^q_i|  = \OneVec_q^T | \be^q |.
+   \]</div>
+</li>
+<li><p>Then we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \|\be^p \|_1 = \sum_{i \in S_p} |e^p_i | + \sum_{i \notin S_p} |e^p_i |
+    \iff \sum_{i \notin S_p} |e^p_i |
+    = \|\be^p \|_1 - \sum_{i \in S_p} |e^p_i | = \|\be^p \|_1  - \OneVec_p^T | \be^p |.
+   \]</div>
+</li>
+<li><p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{i \notin S_q} |e^q_i | =  \|\be^q \|_1  - \OneVec_q^T | \be^q |.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{i \notin S_p} |e^p_i | + \sum_{i \notin S_q} |e^q_i| 
+    - \sum_{i \in S_p} |e^p_i | - \sum_{i \in S_q} |e^q_i| 
+    = \|\be^p \|_1  - 2 \OneVec_p^T | \be^p |
+    + \|\be^q \|_1  - 2 \OneVec_q^T | \be^q |.
+   \]</div>
+</li>
+<li><p>We can now define the set</p>
+<div class="math notranslate nohighlight">
+\[
+    C_s^1  = \{ \be \ST \be \neq \bzero,
+        \|\be^p \|_1 + \|\be^q \|_1 - 2 \OneVec_p^T | \be^p |
+      - 2 \OneVec_q^T | \be^q | \leq 0  \text{ and } \bDDD \be = \bzero\}.
+   \]</div>
+</li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\(C_s \subseteq C_s^1\)</span> and
+if <span class="math notranslate nohighlight">\(C_s^1\)</span> is empty, then <span class="math notranslate nohighlight">\(C_s\)</span> will also be empty.</p></li>
+<li><p>Note that this formulation of <span class="math notranslate nohighlight">\(C_s^1\)</span> is dependent only on the support of
+<span class="math notranslate nohighlight">\(\ba\)</span> and not on values in <span class="math notranslate nohighlight">\(\ba\)</span>.</p></li>
+<li><p>We now turn back to the requirement <span class="math notranslate nohighlight">\(\bDDD \be = \bzero\)</span> and relax it further.</p></li>
+<li><p>We note that,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \bDDD \be 
+    = \begin{bmatrix} \Psi &amp; \Phi \end{bmatrix} 
+    \begin{bmatrix} \be^p \\ \be^q \end{bmatrix} 
+    = \Psi \be^p 
+    + \Phi \be^q = \bzero.
+   \end{split}\]</div>
+</li>
+<li><p>Multiplying by <span class="math notranslate nohighlight">\(\Psi^H\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \be^p + \Psi^H \Phi \be^q = \bzero \iff  \be^p = - \Psi^H \Phi \be^q
+   \]</div>
+<p>since <span class="math notranslate nohighlight">\(\Psi^H \Psi = \bI\)</span> (unitary matrix).</p>
+</li>
+<li><p>Similarly multiplying with <span class="math notranslate nohighlight">\(\Phi^H\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+    \Phi^H \Psi \be^p + \be^q = \bzero \iff \be^q = - \Phi^H \Psi \be^p.
+   \]</div>
+</li>
+<li><p>Note that entries in <span class="math notranslate nohighlight">\(\Psi^H \Phi\)</span> and <span class="math notranslate nohighlight">\(\Phi^H \Psi\)</span> are
+inner products between columns of <span class="math notranslate nohighlight">\(\bDDD\)</span>, hence their magnitudes
+are upper bounded by <span class="math notranslate nohighlight">\(\mu\)</span> (coherence).</p></li>
+<li><p>Denote <span class="math notranslate nohighlight">\(\bB = \Psi^H \Phi\)</span>
+and consider the product <span class="math notranslate nohighlight">\(\bv = \Psi^H \Phi \be^q = \bB \be^q\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    v_i = \sum_{j = 1}^N B_{i j} e^q_j.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    | v_i | = \left | \sum_{j = 1}^N B_{i j} e^q_j \right | 
+    \leq \sum_{j = 1}^N | B_{i j} e^q_j | 
+    \leq \mu \sum_{j = 1}^N  | e^q_j | 
+    = \mu\OneVec^T | \be^q |.
+   \]</div>
+</li>
+<li><p>Applying this result on <span class="math notranslate nohighlight">\(\be^p\)</span> we get,</p>
+<div class="math notranslate nohighlight">
+\[
+    | \be^p  | = | \Psi^H \Phi \be^q | \preceq \mu \OneMat | \be^q |.
+   \]</div>
+</li>
+<li><p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[
+    | \be^q  | = | \Phi^H \Psi \be^p | \preceq \mu \OneMat | \be^p |.
+   \]</div>
+</li>
+<li><p>Note that since <span class="math notranslate nohighlight">\(\OneMat = \OneVec \cdot \OneVec^T\)</span>, it is a rank-1 matrix.</p></li>
+<li><p>We now construct a set <span class="math notranslate nohighlight">\(C_s^2\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    C_s^2 = \left \{ \be  \left |  
+    \begin{aligned}
+    \be \neq \bzero\\
+    \|\be^p \|_1 + \|\be^q \|_1 - 2 \OneVec_p^T | \be^p |
+      - 2 \OneVec_q^T | \be^q | \leq 0\\
+    | \be^p  | \preceq \mu \OneMat | \be^q |\\
+    \text { and }| \be^q  | \preceq \mu \OneMat | \be^p |
+    \end{aligned}
+    \right.
+    \right \}.
+   \end{split}\]</div>
+</li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\(C_s^1 \subseteq C_s^2\)</span>
+since for every <span class="math notranslate nohighlight">\(\be \in C_s^1\)</span>,
+<span class="math notranslate nohighlight">\(\bDDD \be = \bzero \implies \be \in C_s^2\)</span>.</p></li>
+<li><p>We now define <span class="math notranslate nohighlight">\(\bf^p = | \be^p | \)</span> and <span class="math notranslate nohighlight">\(\bf^q = | \be^q |\)</span>
+as the absolute value vectors.</p></li>
+<li><p>Correspondingly, let us define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \bf = | \be | = \begin{bmatrix} \bf^p \\ \bf^q \end{bmatrix}.
+   \end{split}\]</div>
+</li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\( \| \be^p \|_1 = \OneVec^T \bf^p\)</span>
+and <span class="math notranslate nohighlight">\( \| \be^q \|_1 = \OneVec^T \bf^q\)</span>.</p></li>
+<li><p>Further <span class="math notranslate nohighlight">\(\bf^p \succeq \ZeroVec\)</span>; i.e., every entry in <span class="math notranslate nohighlight">\(\bf^p\)</span> is nonnegative.</p></li>
+<li><p>Similarly, <span class="math notranslate nohighlight">\(\bf^q \succeq \ZeroVec\)</span>.</p></li>
+<li><p>We can then introduce a set <span class="math notranslate nohighlight">\(C_f\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    C_f = \left \{ \bf  \left | 
+    \begin{aligned}
+    \bf \neq \bzero\\
+    \OneVec^T \bf^p + \OneVec^T \bf^q - 2 \OneVec_p^T \bf^p
+      - 2 \OneVec_q^T \bf^q \leq 0\\
+    \bf^p \preceq \mu \OneMat \bf^q\\
+    \bf^q \preceq \mu \OneMat \bf^p\\
+    \text { and } \bf^p \succeq \ZeroVec, \bf^q \succeq \ZeroVec
+    \end{aligned}
+    \right.
+    \right \}.
+   \end{split}\]</div>
+</li>
+<li><p>It is easy to see that if <span class="math notranslate nohighlight">\(\be \in C_s^2\)</span> then <span class="math notranslate nohighlight">\(\bf = |\be| \in C_f\)</span>.</p></li>
+<li><p>Thus, if <span class="math notranslate nohighlight">\(C_f\)</span> is empty, then <span class="math notranslate nohighlight">\(C_s^2\)</span> should be empty too.</p></li>
+<li><p>We note that if <span class="math notranslate nohighlight">\(\bf \in C_f\)</span>, then for all <span class="math notranslate nohighlight">\(c &gt; 0\)</span>,
+<span class="math notranslate nohighlight">\(c \bf \in C_f\)</span>.</p></li>
+<li><p>Thus, in order to study (the emptiness of) <span class="math notranslate nohighlight">\(C_f\)</span>, it is
+sufficient to study unit <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm vectors <span class="math notranslate nohighlight">\(\bf \in C_f\)</span>;
+i.e., there is no unit <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm vector in <span class="math notranslate nohighlight">\(C_f\)</span>, if and only if
+<span class="math notranslate nohighlight">\(C_f\)</span> is empty.</p></li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bf \|_1 = \OneVec^T \bf  = \OneVec^T \bf^p + \OneVec^T \bf^q
+   \]</div>
+<p>since <span class="math notranslate nohighlight">\(\bf \succeq \ZeroVec\)</span>.</p>
+</li>
+<li><p>This leads to:</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bf \|_1 =  1 \iff \OneVec^T \bf^p + \OneVec^T \bf^q = 1.
+   \]</div>
+</li>
+<li><p>We construct the new set of unit <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm vectors</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    C_r = \left \{ f  \left | 
+    \begin{aligned}
+    \bf \neq \bzero\\
+    1 - 2 \OneVec_p^T \bf^p
+      - 2 \OneVec_q^T \bf^q \leq 0\\
+    \bf^p \preceq \mu \OneMat \bf^q\\
+    \bf^q \preceq \mu \OneMat \bf^p\\
+    \OneVec^T \bf^p + \OneVec^T \bf^q = 1 \\
+    \text { and } \bf^p \succeq \ZeroVec, \bf^q \succeq \ZeroVec
+    \end{aligned}
+    \right.
+    \right \}.
+   \end{split}\]</div>
+</li>
+<li><p>We have <span class="math notranslate nohighlight">\(C_r = \EmptySet \iff C_f = \EmptySet\)</span>.</p></li>
+<li><p>Note that the constraint
+<span class="math notranslate nohighlight">\(1 - 2 \OneVec_p^T \bf^p - 2 \OneVec_q^T \bf^q \leq 0\)</span>
+can be rewritten as</p>
+<div class="math notranslate nohighlight">
+\[
+    \OneVec_p^T \bf^p + \OneVec_q^T \bf^q \geq \frac{1}{2}.
+   \]</div>
+</li>
+<li><p>The set <span class="math notranslate nohighlight">\(C_r\)</span> is much easier to analyze since</p>
+<ul class="simple">
+<li><p>If has no explicit dependency on <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+<span class="math notranslate nohighlight">\(\bDDD\)</span> is represented only by a single parameter, its coherence <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p>All constraints are simple linear constraints. Thus finding
+the elements of <span class="math notranslate nohighlight">\(C_f\)</span> can be formulated as a
+linear programming (feasibility) problem.</p></li>
+<li><p>The order of non-zero entries inside <span class="math notranslate nohighlight">\(\bf^p\)</span> and <span class="math notranslate nohighlight">\(\bf^q\)</span> doesn’t have
+any influence on the requirements for <span class="math notranslate nohighlight">\(\bf\)</span> to belong to <span class="math notranslate nohighlight">\(C_r\)</span>.
+Thus, without loss of generality,
+we can focus on vectors for which the first
+<span class="math notranslate nohighlight">\(k_p\)</span> entries are non-zero in <span class="math notranslate nohighlight">\(\bf^p\)</span> and first <span class="math notranslate nohighlight">\(k_q\)</span> entries are
+non-zero in <span class="math notranslate nohighlight">\(\bf^q\)</span> respectively.</p></li>
+</ul>
+</li>
+<li><p>We next verify that <span class="math notranslate nohighlight">\(C_r\)</span> must be empty under
+<a class="reference internal" href="#equation-eq-bp-bp-exact-sparse-two-ortho-case-condition">(14.11)</a>.</p></li>
+</ol>
+<p>Emptiness of <span class="math notranslate nohighlight">\(C_r\)</span></p>
+<ol>
+<li><p>In order to find vectors in <span class="math notranslate nohighlight">\(C_r\)</span>, we can solve the following linear program.</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-bp-exact-matching-linear-program">
+<span class="eqno">(14.13)<a class="headerlink" href="#equation-eq-bp-bp-exact-matching-linear-program" title="Permalink to this equation">¶</a></span>\[\begin{split} &amp; \underset{\bf^p, \bf^q}{\text{maximize }}
+ &amp; &amp; \OneVec_p^T \bf^p + \OneVec_q^T \bf^q \\
+ &amp; \text{subject to }
+ &amp; &amp; \bf^p \preceq \mu \OneMat \bf^q\\
+ &amp; &amp; &amp; \bf^q \preceq \mu \OneMat \bf^p\\
+ &amp; &amp; &amp; \OneVec^T (\bf^p + \bf^q) = 1\\
+ &amp; &amp; &amp; \bf^p \succeq \ZeroVec, \bf^q \succeq \ZeroVec.\end{split}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\bf = \bzero\)</span> is a feasible vector for this linear program,
+hence a solution does exist for this program.</p></li>
+<li><p>What is interesting is the value of the objective function for the optimal solution.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\({\bf^p}^*, {\bf^q}^*\)</span> be (an) optimal solution for this linear
+program.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\OneVec_p^T {\bf^p}^* + \OneVec_q^T {\bf^q}^* \geq \frac{1}{2}\)</span>,
+then <span class="math notranslate nohighlight">\(\bf^*\)</span> satisfies all the requirements of <span class="math notranslate nohighlight">\(C_r\)</span> and <span class="math notranslate nohighlight">\(C_r\)</span> is indeed
+not empty.</p></li>
+<li><p>This doesn’t guarantee that <span class="math notranslate nohighlight">\(C\)</span> will also be non-empty though.</p></li>
+<li><p>On the contrary, if <span class="math notranslate nohighlight">\(\OneVec_p^T {\bf^p}^* + \OneVec_q^T {\bf^q}^* &lt; \frac{1}{2}\)</span>,
+then <span class="math notranslate nohighlight">\(C_r\)</span> is indeed empty (as one of the requirements cannot be met).</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(C_f\)</span> is also empty leading to <span class="math notranslate nohighlight">\(C \subset C_f\)</span> being empty too.</p></li>
+<li><p>Thus, a condition which leads to</p>
+<div class="math notranslate nohighlight">
+\[
+   \OneVec_p^T {\bf^p}^* + \OneVec_q^T {\bf^q}^* &lt; \frac{1}{2}
+   \]</div>
+<p>is a sufficient condition for equivalence of <a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a>
+and <a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>.</p>
+</li>
+<li><p>Consider a feasible <span class="math notranslate nohighlight">\(\bf\)</span> for
+<a class="reference internal" href="#equation-eq-bp-bp-exact-matching-linear-program">(14.13)</a>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\| \bf^p \|_1 = \OneVec^T \bf^p = c \)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\OneVec^T (\bf^p + \bf^q) = 1\)</span>,
+hence <span class="math notranslate nohighlight">\(\| \bf^q \|_1 = \OneVec^T \bf^q = 1 - c\)</span>.</p></li>
+<li><p>We note that</p>
+<div class="math notranslate nohighlight">
+\[
+    \OneMat \bf^p = \OneVec \cdot \OneVec^T \bf^p 
+    = \| \bf^p \|_1 \OneVec  = c \OneVec.
+   \]</div>
+</li>
+<li><p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[
+    \OneMat \bf^q = (1 - c ) \OneVec. 
+   \]</div>
+</li>
+<li><p>Thus, the first two constraints change into</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \bf^p  \preceq  ( 1 - c) \mu \OneVec \\
+    \bf^q  \preceq  c \mu \OneVec.
+   \end{split}\]</div>
+</li>
+<li><p>Since the objective is to maximize
+<span class="math notranslate nohighlight">\(\OneVec_p^T \bf^p + \OneVec_q^T \bf^q\)</span>,
+it is natural to maximize non-zero entries in
+<span class="math notranslate nohighlight">\(\bf^p\)</span> and <span class="math notranslate nohighlight">\(\bf^q\)</span> corresponding to <span class="math notranslate nohighlight">\(S_p\)</span> and <span class="math notranslate nohighlight">\(S_q\)</span>.</p></li>
+<li><p>A straight-forward option is to choose first <span class="math notranslate nohighlight">\(k_p\)</span> entries in
+<span class="math notranslate nohighlight">\(\bf^p\)</span> to be <span class="math notranslate nohighlight">\((1 - c) \mu\)</span> and first <span class="math notranslate nohighlight">\(k_q\)</span> entries in <span class="math notranslate nohighlight">\(\bf^q\)</span>
+to be <span class="math notranslate nohighlight">\(c \mu\)</span>.</p></li>
+<li><p>Other entries can be chosen  arbitrarily to meet the requirement that
+<span class="math notranslate nohighlight">\(\OneVec^T (\bf^p + \bf^q) = 1\)</span>.</p></li>
+<li><p>With this choice, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \OneVec_p^T \bf^p + \OneVec_q^T \bf^q
+    = k_p (1 - c ) \mu + k_q c \mu 
+    = \mu (k_p  - c (k_p - k_q)).
+   \]</div>
+</li>
+<li><p>We recall that we have chosen <span class="math notranslate nohighlight">\(k_p \geq k_q\)</span>.</p></li>
+<li><p>Thus, the expression is maximized if <span class="math notranslate nohighlight">\(c\)</span> is chosen to be as small as possible.</p></li>
+<li><p>The choice of <span class="math notranslate nohighlight">\(c\)</span> must meet following conditions on <span class="math notranslate nohighlight">\(\ell_1\)</span>-norms.
+(Basically the sum of first <span class="math notranslate nohighlight">\(k_p\)</span> terms of <span class="math notranslate nohighlight">\(\bf_p\)</span>
+must not be more than the <span class="math notranslate nohighlight">\(\ell_1\)</span> norm of <span class="math notranslate nohighlight">\(\bf^p\)</span>.
+Same for <span class="math notranslate nohighlight">\(\bf^q\)</span>).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \bf^p \|_1  = \OneVec^T \bf^p = c \geq k_p (1 - c ) \mu \\
+    \| \bf^q \|_1  = \OneVec^T \bf^q = 1 - c \geq  k_q c \mu.
+    \end{split}\]</div>
+</li>
+<li><p>Simplifying these inequalities we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    c \geq k_p (1 - c ) \mu \implies c \geq \frac{k_p \mu}{ 1 + k_p \mu}\\
+    1 - c \geq  k_q c \mu \implies c \leq \frac{1}{ 1 + k_q \mu}.
+   \end{split}\]</div>
+</li>
+<li><p>Since these two conditions must be satisfied,
+hence we require <span class="math notranslate nohighlight">\(k_p, k_q\)</span> to meet</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{k_p \mu}{ 1 + k_p \mu} 
+    \leq \frac{1}{ 1 + k_q \mu} \implies k_p k_q \leq \frac{1}{\mu^2}.
+   \]</div>
+</li>
+<li><p>We will verify later that this condition is met if
+<a class="reference internal" href="#equation-eq-bp-bp-exact-sparse-two-ortho-case-condition">(14.11)</a> holds.</p></li>
+<li><p>Assuming the condition is met, obviously the smallest possible value of <span class="math notranslate nohighlight">\(c\)</span>
+is given by <span class="math notranslate nohighlight">\(\frac{k_p \mu}{ 1 + k_p \mu}\)</span>.</p></li>
+<li><p>The maximum value of objective function then becomes</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \OneVec_p^T \bf^p + \OneVec_q^T \bf^q 
+    &amp;=  \mu (k_p  - c (k_p - k_q)) \\
+    &amp;=  \mu \left (k_p  - \frac{k_p \mu}{ 1 + k_p \mu} (k_p - k_q)\right )\\
+    &amp;= \frac{k_p \mu + k_p k_q \mu^2}{ 1 + k_p \mu}.
+   \end{split}\]</div>
+</li>
+<li><p>Finally, for BP to succeed, we require this expression to be strictly less than half.</p></li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{k_p \mu + k_p k_q \mu^2}{ 1 + k_p \mu} &lt; \frac{1}{2}
+    \implies 2 k_p k_q \mu^2 + k_p \mu - 1 &lt; 0
+   \]</div>
+<p>which is the sufficient condition for BP to succeed in the theorem.</p>
+</li>
+</ol>
+<p>We now show that <a class="reference internal" href="#equation-eq-bp-bp-exact-sparse-two-ortho-case-condition">(14.11)</a>
+<span class="math notranslate nohighlight">\(\implies\)</span> the weaker condition
+<a class="reference internal" href="#equation-eq-bp-two-ortho-exact-recovery-coherence-simple">(14.12)</a>.</p>
+<ol>
+<li><p>From <a class="reference internal" href="#equation-eq-bp-bp-exact-sparse-two-ortho-case-condition">(14.11)</a> we can write <span class="math notranslate nohighlight">\(k_q\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+    2 k_p k_q \mu^2 + k_p \mu - 1 &lt; 0 \implies 2 k_p k_q \mu^2 &lt; 1 - k_p \mu
+    \implies k_q &lt; \frac{1 - k_p \mu}{2 k_p \mu^2}.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \ba \|_0 = k_p + k_q &amp;&lt; k_p + \frac{1 - k_p \mu}{2 k_p \mu^2} \\
+    &amp;= \frac{2 \mu^2 k_p^2 + 1 - \mu k_p}{2 \mu^2 k_p}\\
+    &amp;= \frac{1}{\mu} \cdot \frac{2 \mu^2 k_p^2 + 1 - \mu k_p}{2 \mu k_p}.
+   \end{split}\]</div>
+</li>
+<li><p>We define <span class="math notranslate nohighlight">\(u = \mu k_p\)</span> and rewrite above as</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba \|_0 &lt; \frac{1}{\mu} \frac{2 u^2 - u + 1}{2 u}.
+   \]</div>
+</li>
+<li><p>The weaker condition can now be obtained by minimizing
+the upper bound on R.H.S. of this equation.</p></li>
+<li><p>We define</p>
+<div class="math notranslate nohighlight">
+\[
+    f(u)  = \frac{2 u^2 - u + 1}{2 u}.
+   \]</div>
+</li>
+<li><p>Differentiating and equating with 0, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    f'(u) = \frac{2 u^2 - 1}{ 2 u^2} = 0.
+   \]</div>
+</li>
+<li><p>The optimal value is obtained when <span class="math notranslate nohighlight">\(u  = \pm \sqrt{0.5}\)</span>.</p></li>
+<li><p>Since both <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(k_p\)</span> are positive quantities,
+hence the negative value for <span class="math notranslate nohighlight">\(u\)</span> is rejected and we get <span class="math notranslate nohighlight">\(u = \sqrt{0.5}\)</span>.</p></li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba \|_0 &lt;  \frac{1}{\mu} \frac{2  - \sqrt{0.5}}{2 \sqrt{0.5}}
+    = \frac{\sqrt{2}- 0.5}{\mu}.
+   \]</div>
+</li>
+<li><p>Lastly, the property that arithmetic mean is greater than or equal to
+geometric mean gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    k_p k_q \leq \frac{(k_p + k_q)^2}{4} 
+    &lt; \frac{(\sqrt{2}- 0.5)^2}{4\mu^2} &lt; \frac{1}{\mu^2}.
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="general-case">
+<h2><span class="section-number">14.2.3. </span>General Case<a class="headerlink" href="#general-case" title="Permalink to this headline">¶</a></h2>
+<p>We now consider the case where <span class="math notranslate nohighlight">\(\bDDD \in \CC^{N \times D}\)</span> is
+an arbitrary (redundant) dictionary.
+We will require that <span class="math notranslate nohighlight">\(\bDDD\)</span> is full row rank.
+If <span class="math notranslate nohighlight">\(\bDDD\)</span> is not a full row rank  matrix then some of
+its columns (atoms) can be removed to make it so.</p>
+<p>We develop sufficient conditions under which solutions of
+<a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a> and
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a> match for the general case
+<span id="id2">[<a class="reference internal" href="../bib.html#id57" title="David L Donoho and Michael Elad. Optimally sparse representation in general (nonorthogonal) dictionaries via $l_1$ minimization. Proceedings of the National Academy of Sciences, 100(5):2197–2202, 2003.">18</a>, <a class="reference internal" href="../bib.html#id71" title="Michael Elad. Sparse and redundant representations. Springer, 2010.">19</a>]</span>.</p>
+<div class="proof theorem admonition" id="res:bp:general_exact_recovery_coherence">
+<p class="admonition-title"><span class="caption-number">Theorem 14.7 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bDDD\)</span> be an arbitrary full rank redundant dictionary.
+Let <span class="math notranslate nohighlight">\(\bx = \bDDD \ba\)</span>, where <span class="math notranslate nohighlight">\(\bx\)</span> is known.
+If a sparse representation <span class="math notranslate nohighlight">\(\ba\)</span> exists obeying</p>
+<div class="math notranslate nohighlight" id="equation-eq-bp-general-exact-recovery-coherence">
+<span class="eqno">(14.14)<a class="headerlink" href="#equation-eq-bp-general-exact-recovery-coherence" title="Permalink to this equation">¶</a></span>\[\| \ba \|_0 &lt; \frac{1}{2} \left ( 1 + \frac{1}{\mu} \right ),\]</div>
+<p>then <span class="math notranslate nohighlight">\(\ba\)</span> is the unique solution of both <a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a> and
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Due to <a class="reference internal" href="../ssm/dictionaries.html#thm:ssm:uniqueness_coherence">Theorem 12.26</a>,
+<span class="math notranslate nohighlight">\(\ba\)</span> is a unique solution for <a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a>
+since <span class="math notranslate nohighlight">\(\ba\)</span> satisfies <a class="reference internal" href="#equation-eq-bp-general-exact-recovery-coherence">(14.14)</a>.
+We need to show that it is also a unique solution to
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a></p>
+<ol>
+<li><p>For any other feasible <span class="math notranslate nohighlight">\(\bb\)</span> for <a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>,
+we have <span class="math notranslate nohighlight">\(\| \bb \|_0 &gt; \| \ba \|_0\)</span> since it is unique
+sparsest solution of <span class="math notranslate nohighlight">\(\bx = \bDDD \ba\)</span>.</p></li>
+<li><p>We start with defining a set of alternative feasible vectors to
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    C = \left \{ \bb  \left | 
+    \begin{aligned}
+    \bb \neq \ba \\
+    \| \bb \|_1 \leq \| \ba \|_1\\
+    \| \bb \|_0 &gt; \| \ba \|_0\\
+    \text{ and } \bDDD (\bb - \ba) = \bzero
+    \end{aligned}
+    \right.
+    \right \}.
+    \end{split}\]</div>
+<p>This set contains all possible representations that</p>
+<ol class="simple">
+<li><p>are different from <span class="math notranslate nohighlight">\(\ba\)</span></p></li>
+<li><p>have larger support</p></li>
+<li><p>satisfy <span class="math notranslate nohighlight">\(\bDDD \bb = \bx\)</span></p></li>
+<li><p>have a better (or at least as good) <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm.</p></li>
+</ol>
+</li>
+<li><p>We need to show that if <a class="reference internal" href="#equation-eq-bp-general-exact-recovery-coherence">(14.14)</a> holds,
+then the set <span class="math notranslate nohighlight">\(C\)</span> will be empty.</p></li>
+<li><p>Otherwise, BP would choose a solution different than <span class="math notranslate nohighlight">\(\ba\)</span>.</p></li>
+<li><p>The condition <span class="math notranslate nohighlight">\(\| \bb \|_0 &gt; \| \ba \|_0\)</span> is redundant
+under the assumption <a class="reference internal" href="#equation-eq-bp-general-exact-recovery-coherence">(14.14)</a>.</p></li>
+<li><p>Following the proof of <a class="reference internal" href="#res:bp:two_ortho_exact_recovery_coherence">Theorem 14.6</a>,
+we define</p>
+<div class="math notranslate nohighlight">
+\[
+    \be = \bb - \ba.
+   \]</div>
+</li>
+<li><p>We can then rewrite <span class="math notranslate nohighlight">\(C\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+    C_s = \{\be \ST \be \neq \bzero, 
+        \| \be + \ba \|_1 - \| \ba \|_1 \leq 0, 
+        \text{ and } \bDDD \be = \bzero \}.
+   \]</div>
+</li>
+<li><p>Again, we will enlarge the set <span class="math notranslate nohighlight">\(C_s\)</span> and show that even
+the larger set is empty
+when <a class="reference internal" href="#equation-eq-bp-general-exact-recovery-coherence">(14.14)</a> holds.</p></li>
+<li><p>We start with the requirement <span class="math notranslate nohighlight">\(\| \be + \ba \|_1 - \| \ba \|_1 \leq 0\)</span>.</p></li>
+<li><p>A simple permutation of columns of <span class="math notranslate nohighlight">\(\bDDD\)</span> can bring the nonzero
+entries in <span class="math notranslate nohighlight">\(\ba\)</span> to the beginning.</p></li>
+<li><p>Thus, without loss of generality,
+we assume that first <span class="math notranslate nohighlight">\(K\)</span> entries in <span class="math notranslate nohighlight">\(\ba\)</span>
+are nonzero and the rest are zero.</p></li>
+<li><p>We can now rewrite the requirement as</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \be + \ba \|_1 - \| \ba \|_1 
+    = \sum_{j=1}^K \left ( |e_j + a_j | - | a_j | \right ) 
+    + \sum_{j &gt; K} | e_j | \leq 0.
+   \]</div>
+</li>
+<li><p>Using the inequality <span class="math notranslate nohighlight">\(| x + y | - | y | \geq - | x |\)</span>,
+we can relax above condition as</p>
+<div class="math notranslate nohighlight">
+\[
+    - \sum_{j = 1}^K | e_j | + \sum_{j &gt; K} | e_j | \leq 0.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\OneVec_K\)</span> denote a vector with <span class="math notranslate nohighlight">\(K\)</span> ones
+at the beginning and rest zeros.</p></li>
+<li><p>Then,</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{j = 1}^K | e_j | = \OneVec_K^T | \be |. 
+   \]</div>
+</li>
+<li><p>Further,</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{j &gt; K} | e_j | 
+    = \| \be \|_1 - \sum_{j = 1}^K | e_j |  
+    = \OneVec^T | \be | - \OneVec_K^T | \be |.
+   \]</div>
+</li>
+<li><p>Thus, we can rewrite above inequality as</p>
+<div class="math notranslate nohighlight">
+\[
+     \OneVec^T | \be | - 2 \OneVec_K^T | \be | \leq 0.
+   \]</div>
+</li>
+<li><p>We can now define</p>
+<div class="math notranslate nohighlight">
+\[
+    C_s^1  = 
+    \{\be \ST \be \neq \bzero, 
+        \OneVec^T | \be | - 2 \OneVec_K^T | \be | \leq 0, 
+        \text{ and } \bDDD \be = \bzero \}.
+   \]</div>
+</li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(C_s \subseteq C_s^1\)</span>.</p></li>
+<li><p>We will now relax the requirement of <span class="math notranslate nohighlight">\(\bDDD \be = \bzero\)</span>.</p></li>
+<li><p>Multiplying by <span class="math notranslate nohighlight">\(\bDDD^H\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \bDDD^H \bDDD \be = \bzero.
+   \]</div>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(\be \in C_s^1\)</span>, it will also satisfy this equation.</p></li>
+<li><p>Moreover, if <span class="math notranslate nohighlight">\(\be\)</span> satisfies this, then <span class="math notranslate nohighlight">\(\be\)</span>
+belongs to the null space of <span class="math notranslate nohighlight">\(\bDDD^H \bDDD\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bDDD\)</span> is full rank, hence <span class="math notranslate nohighlight">\(\be\)</span> has to be in the
+null space of <span class="math notranslate nohighlight">\(\bDDD\)</span> also.</p></li>
+<li><p>Thus the two conditions <span class="math notranslate nohighlight">\(\bDDD \be = \bzero\)</span> and
+<span class="math notranslate nohighlight">\(\bDDD^H \bDDD e = \bzero\)</span> are equivalent.</p></li>
+<li><p>We note that off-diagonal entries in <span class="math notranslate nohighlight">\(\bDDD^H \bDDD\)</span> are bounded by <span class="math notranslate nohighlight">\(\mu\)</span>
+while the main diagonal consists of all ones.</p></li>
+<li><p>So, we can write</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; \bDDD^H \bDDD \be = \bzero \\
+    \iff &amp; (\bDDD^H \bDDD - \bI + \bI ) \be = \bzero \\
+    \iff &amp; -\be = (\bDDD^H \bDDD - \bI ) \be.
+   \end{split}\]</div>
+</li>
+<li><p>Suppose <span class="math notranslate nohighlight">\(\bv = \bG \bu\)</span>. Then <span class="math notranslate nohighlight">\(v_i = \sum_{j} G_{i j} u_j\)</span>.</p></li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    | v_i | = | \sum_{j} G_{i j} u_j | 
+    \leq \sum_{j} | G_{i j} u_j | = \sum_{j} | G_{i j} | | u_j |.
+   \]</div>
+</li>
+<li><p>This gives us <span class="math notranslate nohighlight">\(| \bv | \preceq | \bG | | \bv |\)</span>
+where <span class="math notranslate nohighlight">\(\preceq\)</span> indicates component wise inequality.</p></li>
+<li><p>Taking an entry-wise absolute value on both sides, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    | \be | =  |(\bDDD^H \bDDD - \bI ) \be | 
+    \preceq  |\bDDD^H \bDDD - \bI || \be | 
+    \preceq \mu (\OneMat - \bI) | \be |.
+   \]</div>
+</li>
+<li><p>The last part is due to the fact that all entries in the vector
+<span class="math notranslate nohighlight">\(| \be | \)</span> and the matrix <span class="math notranslate nohighlight">\( | \bDDD^H \bDDD - \bI |\)</span>
+are non-negative and the entries in <span class="math notranslate nohighlight">\(| \bDDD^H \bDDD - \bI|\)</span>
+are dominated by <span class="math notranslate nohighlight">\(\mu \)</span>.</p></li>
+<li><p>Further,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; | \be | \preceq 
+    \mu (\OneMat - \bI) | \be |  \\
+    \iff &amp; (1 + \mu) | \be | \preceq \mu \OneMat  | \be | = \mu \| \be \|_1 \OneVec\\
+    \iff &amp; | \be | \preceq \frac{\mu \| \be \|_1}{1 + \mu}  \OneVec.
+   \end{split}\]</div>
+</li>
+<li><p>In the above we used the fact that
+<span class="math notranslate nohighlight">\(\OneMat | \be | = \OneVec \OneVec^T | \be | = \OneVec \| \be \|_1\)</span>.</p></li>
+<li><p>We can now define a new set</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    C_s^2 = \left \{ 
+    \be \left | 
+    \begin{aligned}
+    &amp; \be \neq \bzero, \\
+    &amp;\OneVec^T | \be | - 2 \OneVec_K^T | \be | \leq 0 \\
+    &amp; \text{ and } | \be | \preceq \frac{\mu \| \be \|_1}{1 + \mu}  \OneVec
+    \end{aligned}
+    \right. \right \}.
+   \end{split}\]</div>
+</li>
+<li><p>Clearly, <span class="math notranslate nohighlight">\(C_s^1 \subseteq C_s^2\)</span>.</p></li>
+<li><p>We note that <span class="math notranslate nohighlight">\(C_s^2\)</span> is unbounded since if <span class="math notranslate nohighlight">\(\be \in C_s^2\)</span>, then
+<span class="math notranslate nohighlight">\(c \be \in C_s^2 \Forall c \neq 0\)</span>.</p></li>
+<li><p>Thus, in order to study its behavior, it is sufficient
+to consider the set of vectors with unit norm vectors <span class="math notranslate nohighlight">\(\| \be \|_1 = 1\)</span>.</p></li>
+<li><p>We construct the new set as</p>
+<div class="math notranslate nohighlight">
+\[
+    C_r = \left \{\be  \left | 
+        \| \be \|_1 = 1,
+        1 - 2 \OneVec_K^T | \be | \leq 0 \text { and } 
+        | \be | \preceq \frac{\mu }{1 + \mu}  \OneVec \right. \right \}.
+   \]</div>
+</li>
+<li><p>Note that we replaced <span class="math notranslate nohighlight">\(\OneVec^T | \be | = \| \be \|_1 = 1\)</span>
+in formulating the description of <span class="math notranslate nohighlight">\(C_r\)</span> and
+the condition <span class="math notranslate nohighlight">\(\be \neq \bzero\)</span> is automatically enforced since
+<span class="math notranslate nohighlight">\(\| \be \|_1 = 1\)</span>.</p></li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(C_s^2 = \EmptySet \iff C_r = \EmptySet\)</span>.</p></li>
+<li><p>In order to satisfy the requirement
+<span class="math notranslate nohighlight">\(1 - 2 \OneVec_K^T | \be | \leq 0\)</span>,
+we need to have <span class="math notranslate nohighlight">\(\OneVec_K^T | \be |\)</span>
+as large as possible.</p></li>
+<li><p>Since this quantity only considers first <span class="math notranslate nohighlight">\(K\)</span>
+entries in <span class="math notranslate nohighlight">\(\be\)</span>,
+hence the energy in <span class="math notranslate nohighlight">\(\be\)</span> should be concentrated inside the first <span class="math notranslate nohighlight">\(K\)</span> entries
+to maximize this quantity.</p></li>
+<li><p>However, entries in <span class="math notranslate nohighlight">\(\be\)</span> are restricted by the third requirement
+in <span class="math notranslate nohighlight">\(C_r\)</span>.</p></li>
+<li><p>We can maximize it by choosing</p>
+<div class="math notranslate nohighlight">
+\[
+    | e_j | = \frac{\mu }{1 + \mu}
+   \]</div>
+<p>for first <span class="math notranslate nohighlight">\(K\)</span> entries in <span class="math notranslate nohighlight">\(e\)</span>.</p>
+</li>
+<li><p>We then get</p>
+<div class="math notranslate nohighlight">
+\[
+    1 - 2 \OneVec_K^T | \be |   = 1 - 2 K \frac{\mu }{1 + \mu} \leq 0.
+   \]</div>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp; 1 - 2 K \frac{\mu }{1 + \mu} \leq 0 \\
+    \iff &amp; 1 + \mu \leq 2 K \mu \\
+    \iff &amp; 2K \geq \frac{1 + \mu}{\mu}\\
+    \iff &amp; K \geq \frac{1}{2} \left (  1 + \frac{1}{\mu} \right).
+   \end{split}\]</div>
+</li>
+<li><p>This is a necessary condition for <span class="math notranslate nohighlight">\(C_r\)</span> to be non-empty.</p></li>
+<li><p>Thus, if</p>
+<div class="math notranslate nohighlight">
+\[
+    K &lt;  \frac{1}{2} \left (  1 + \frac{1}{\mu} \right)
+   \]</div>
+<p>then, the requirement <span class="math notranslate nohighlight">\(1 - 2 \OneVec_K^T | \be | \leq 0\)</span>
+is not satisfied and <span class="math notranslate nohighlight">\(C_r\)</span> is empty.</p>
+</li>
+<li><p>Consequently, <span class="math notranslate nohighlight">\(C\)</span> is empty and the theorem is proved.</p></li>
+</ol>
+</div>
+<p>We present another result which is based on
+<span class="math notranslate nohighlight">\(\mu_{1/2}(\bG)\)</span> <a class="reference internal" href="../ssm/dictionaries_2.html#def:proj:coherence:mu_half_G">Definition 12.31</a>
+measure of the Gram matrix of the dictionary.
+This result is due to <span id="id3">[<a class="reference internal" href="../bib.html#id57" title="David L Donoho and Michael Elad. Optimally sparse representation in general (nonorthogonal) dictionaries via $l_1$ minimization. Proceedings of the National Academy of Sciences, 100(5):2197–2202, 2003.">18</a>]</span>.</p>
+<div class="proof theorem admonition" id="res:bp:general_exact_recovery_mu_half_G">
+<p class="admonition-title"><span class="caption-number">Theorem 14.8 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bx = \bDDD \ba\)</span> and <span class="math notranslate nohighlight">\(\| \ba \|_0 &lt; \mu_{1/2}(\bG)\)</span>, then
+then <span class="math notranslate nohighlight">\(\ba\)</span> is the unique solution of both
+<a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a> and
+<a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Unique solution of <a class="reference internal" href="#equation-eq-bp-exact-sparse-problem">(14.4)</a>.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda = \supp(\ba)\)</span> and <span class="math notranslate nohighlight">\(K = |\Lambda|\)</span>.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(K = \| \ba \|_0 &lt; \mu_{1/2}(\bG)\)</span>.</p></li>
+<li><p>By <a class="reference internal" href="../ssm/dictionaries_2.html#res:proj:coherence:spark_lower_bound_mu_half">Theorem 12.72</a></p>
+<div class="math notranslate nohighlight">
+\[
+   \spark(\bDDD) \geq 2 \mu_{1/2}(G) +1
+   \implies \spark(\bDDD) &gt; 2 K + 1
+   \implies K &lt;  \frac{1}{2}\spark(\bDDD).
+   \]</div>
+</li>
+<li><p>By <a class="reference internal" href="../ssm/dictionaries.html#thm:ssm:uniqueness_spark">Theorem 12.22</a>, <span class="math notranslate nohighlight">\(\ba\)</span>
+is the unique sparsest solution.</p></li>
+</ol>
+<p>Unique solution of <a class="reference internal" href="#equation-eq-bp-bp-l1-norm-minimization">(14.7)</a></p>
+<ol>
+<li><p>We need to show that for any <span class="math notranslate nohighlight">\(\ba'\)</span> satisfying
+<span class="math notranslate nohighlight">\(\bx = \bDDD \ba'\)</span>, we must have
+<span class="math notranslate nohighlight">\(\| \ba' \|_1 &gt; \| \ba \|_1\)</span>.</p></li>
+<li><p>We will show that any vector in the null space of <span class="math notranslate nohighlight">\(\bDDD\)</span>
+exhibits less than <span class="math notranslate nohighlight">\(50\)</span>% concentration
+on <span class="math notranslate nohighlight">\(\Lambda\)</span>; i.e., for every <span class="math notranslate nohighlight">\(\bh \in \NullSpace(\bDDD)\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{k \in \Lambda} | h_k | &lt; \frac{1}{2} \| \bh \|_1.
+   \]</div>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+    \bDDD \bh  = \bzero \implies \bG \bh = \bDDD^H \bDDD \bh  = \bzero.
+   \]</div>
+</li>
+<li><p>Subtracting both sides with <span class="math notranslate nohighlight">\(\bh\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[
+   \bG \bh - \bh = (\bG  - \bI) \bh = -\bh.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bF\)</span> denote an <span class="math notranslate nohighlight">\(K \times D\)</span> matrix formed from the rows of <span class="math notranslate nohighlight">\(\bG - \bI\)</span>
+corresponding to the indices in <span class="math notranslate nohighlight">\(\Lambda\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    (\bG - \bI) \bh = -\bh 
+    \implies \| \bF \bh \|_1 = \sum_{k \in \Lambda} | h_k |.
+   \]</div>
+<p><span class="math notranslate nohighlight">\(h_k\)</span> for some <span class="math notranslate nohighlight">\(k \in \Lambda\)</span> is the negative of the inner product
+of some row in <span class="math notranslate nohighlight">\(\bF\)</span> with <span class="math notranslate nohighlight">\(\bh\)</span>.</p>
+</li>
+<li><p>We know that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bF \bh \|_1 \leq \| \bF \|_1 \| \bh \|_1
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\| \bF \|_1\)</span> is the max-column-sum norm of <span class="math notranslate nohighlight">\(\bF\)</span>.</p>
+</li>
+<li><p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bF \|_1 \| \bh \|_1 \geq \sum_{k \in \Lambda} | h_k |.
+   \]</div>
+</li>
+<li><p>In any column of <span class="math notranslate nohighlight">\(\bF\)</span> the number of entries is <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p>One of them is 0 (corresponding to the diagonal entry in <span class="math notranslate nohighlight">\(\bG\)</span>).</p></li>
+<li><p>Thus, leaving it the rest of the entries are <span class="math notranslate nohighlight">\(K -1\)</span>.</p></li>
+<li><p>By assumption <span class="math notranslate nohighlight">\(\mu_{1/2}(G) &gt; K\)</span>.</p></li>
+<li><p>Thus any set of entries in a column which is
+less than or equal to <span class="math notranslate nohighlight">\(K\)</span> entries cannot
+have a sum exceeding <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>.</p></li>
+<li><p>This gives an upper bound on the max-column-sum of <span class="math notranslate nohighlight">\(\bF\)</span>; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bF \|_1 &lt; \frac{1}{2}.
+   \]</div>
+</li>
+<li><p>Thus, we get</p>
+<div class="math notranslate nohighlight">
+\[
+     \sum_{k \in \Lambda} | h_k | \leq \| \bF \|_1 \| \bh \|_1 
+     &lt; \frac{1}{2} \| \bh \|_1
+   \]</div>
+<p>for every <span class="math notranslate nohighlight">\(\bh \in \NullSpace(\bDDD)\)</span>.</p>
+</li>
+<li><p>The rest follows from the fact that for any other <span class="math notranslate nohighlight">\(\ba'\)</span>
+such that
+<span class="math notranslate nohighlight">\(\bx = \bDDD \ba' = \bDDD \ba\)</span>,
+we know that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba' \|_1 &gt; \| \ba \|_1
+   \]</div>
+<p>whenever</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{k \in \Lambda} | h_k |  &lt; \frac{1}{2} \| \bh \|_1
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bh = \ba - \ba'\)</span> (thus <span class="math notranslate nohighlight">\(\bDDD \bh = \bzero\)</span>).</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="bpic">
+<h2><span class="section-number">14.2.4. </span>BPIC<a class="headerlink" href="#bpic" title="Permalink to this headline">¶</a></h2>
+<p>In the subsection, we present a stability guarantee result for BPIC.</p>
+<div class="proof theorem admonition" id="res:bp:bpic_stability_guarantee">
+<p class="admonition-title"><span class="caption-number">Theorem 14.9 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Consider an instance of the <a class="reference internal" href="#equation-eq-bp-bpic-l1-norm-minimization">(14.8)</a> problem
+defined by the triplet <span class="math notranslate nohighlight">\((\bDDD, \bx, \epsilon)\)</span>.
+Suppose that a vector <span class="math notranslate nohighlight">\(\ba \in \CC^D\)</span> is a feasible
+solution to <a class="reference internal" href="#equation-eq-bp-bpic-l1-norm-minimization">(14.8)</a> satisfying the sparsity constraint</p>
+<div class="math notranslate nohighlight">
+\[
+\| \ba \|_0  &lt; \frac{1}{4} \left (1  + \frac{1}{\mu (\bDDD)} \right). 
+\]</div>
+<p>The solution <span class="math notranslate nohighlight">\(\widehat{\ba}\)</span> of <a class="reference internal" href="#equation-eq-bp-bpic-l1-norm-minimization">(14.8)</a>
+must satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+\|\widehat{\ba} - \ba \|_2^2 
+\leq \frac{4 \epsilon^2}{ 1 - \mu (\bDDD) ( 4 \| \ba \|_0 - 1)}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. As before, we define <span class="math notranslate nohighlight">\(\bb = \widehat{\ba} - \ba\)</span>.</p>
+<ol>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bDDD \bb \|_2 
+    = \|\bDDD (\widehat{\ba} - \ba) \|_2 
+    = \|\bDDD  \widehat{\ba} - \bx + \bx -\bDDD \ba \|_2  \leq 2 \epsilon.
+    \]</div>
+</li>
+<li><p>We now rewrite the inequality in terms of the Gram matrix
+<span class="math notranslate nohighlight">\(\bG  = \bDDD^H \bDDD\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    4 \epsilon^2 \geq  &amp;= \|\bDDD \bb  \|_2^2 = \bb^H \bG \bb\\
+    &amp;= \bb^H (\bG - \bI + \bI) \bb \\
+    &amp;= \| \bb \|_2^2 +\bb^H (\bG - \bI ) \bb.
+    \end{split}\]</div>
+</li>
+<li><p>It is easy to show that:</p>
+<div class="math notranslate nohighlight">
+\[
+    - | \bb |^T | \bA | | \bb | \leq \bb^H \bA \bb \leq | \bb |^T | \bA | | \bb |
+    \]</div>
+<p>whenever <span class="math notranslate nohighlight">\(\bA\)</span> is Hermitian.</p>
+<ol class="simple">
+<li><p>To see this just notice that <span class="math notranslate nohighlight">\(\bb^H \bA \bb\)</span> is a real quantity.</p></li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\bb^H \bA \bb = \pm | \bb^H \bA \bb |\)</span>.</p></li>
+<li><p>Now, using triangle inequality we can easily show that
+<span class="math notranslate nohighlight">\(| \bb^H \bA \bb | \leq | \bb|^T | \bA | | \bb |\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bG- \bI\)</span> is Hermitian, hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \bb^H (\bG - \bI) \bb \geq - | \bb |^T | \bG - \bI | | \bb |.
+    \]</div>
+</li>
+<li><p>Now</p>
+<div class="math notranslate nohighlight">
+\[
+    | \bb |^T | \bG - \bI | | \bb | 
+    = \sum_{i, j}|b_i | |\bd_i^H \bd_j - \delta_{i j} | | b_j | 
+    \leq \mu (\bDDD) \sum_{i, j, i \neq j} |b_i | | b_j |
+    = \mu (\bDDD) | \bb |^T (\OneMat - \bI) | \bb |.
+    \]</div>
+</li>
+<li><p>Only the off-diagonal terms of <span class="math notranslate nohighlight">\(\bG\)</span> remain in the sum,
+which are all dominated by <span class="math notranslate nohighlight">\(\mu (\bDDD)\)</span>.</p></li>
+<li><p>Thus we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    4 \epsilon^2 &amp;\geq  \| \bb \|_2^2 - | \bb |^T (\OneMat - \bI) | \bb |\\
+    &amp;= (1 + \mu (\bDDD)) \| \bb \|_2^2 - \mu (\bDDD) | \bb |^T \OneMat | \bb |\\
+    &amp;= (1 + \mu (\bDDD)) \| \bb \|_2^2 - \mu (\bDDD) \| \bb \|_1^2.
+    \end{split}\]</div>
+<p>This is valid since <span class="math notranslate nohighlight">\(v^H \OneMat \bv = \| \bv \|_1^2\)</span>.</p>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\(\widehat{\ba}\)</span> is optimal solution of
+<a class="reference internal" href="#equation-eq-bp-bpic-l1-norm-minimization">(14.8)</a>, hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \widehat{\ba} \|_1 = \| \bb + \ba \|_1 
+    \leq \| \ba \|_1 \implies 
+    \| \bb + \ba \|_1 - \| \ba \|_1 \leq 0.
+   \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\Lambda = \supp(\ba)\)</span> and <span class="math notranslate nohighlight">\(K = |\Lambda|\)</span>.</p></li>
+<li><p>By a simple permutation of columns of <span class="math notranslate nohighlight">\(\bDDD\)</span>,
+we can bring the entries in <span class="math notranslate nohighlight">\(\ba\)</span>
+to the first <span class="math notranslate nohighlight">\(K\)</span> entries making
+<span class="math notranslate nohighlight">\(\Lambda = \{1, \dots, K\}\)</span>.</p></li>
+<li><p>We will make this assumption going forward without loss of generality.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\OneVec_K\)</span> be corresponding support vector
+(of ones in first K places and 0 in rest).</p></li>
+<li><p>From our previous analysis, we recall that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bb + \ba \|_1 - \| \ba \|_1 
+    \geq \| \bb \|_1 - 2 \OneVec_K^T | \bb |. 
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bb \|_1 - 2 \OneVec_K^T | \bb |\leq 0
+    \implies \| \bb \|_1 \leq 2 \OneVec_K^T | \bb |.
+   \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\( \OneVec_K^T | \bb |\)</span> is the sum of first <span class="math notranslate nohighlight">\(K\)</span> terms of <span class="math notranslate nohighlight">\(|\bb|\)</span>.</p></li>
+<li><p>Considering <span class="math notranslate nohighlight">\(\bb_{\Lambda}\)</span> as a vector <span class="math notranslate nohighlight">\(\in \CC^K\)</span> and
+using the <span class="math notranslate nohighlight">\(\ell_1\)</span>-<span class="math notranslate nohighlight">\(\ell_2\)</span> norm relation
+<span class="math notranslate nohighlight">\(\| \bv \|_1 \leq \sqrt{K} \| \bv \|_2 
+\Forall \bv \in \CC^N\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \OneVec_K^T | \bb | = \| \bb_{\Lambda} \|_1
+    \leq \sqrt{K} \| \bb_{\Lambda} \|_2 \leq  \sqrt{K} \| \bb \|_2.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bb \|_1 \leq 2 \OneVec_K^T | \bb | \leq 2 \sqrt{K} \| \bb \|_2.
+   \]</div>
+</li>
+<li><p>Putting this back in the previous inequality</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    4 \epsilon^2 
+    &amp;\geq (1 + \mu (\bDDD)) \| \bb \|_2^2 - \mu (\bDDD) \| \bb \|_1^2\\
+    &amp;\geq (1 + \mu (\bDDD)) \| \bb \|_2^2 - \mu (\bDDD) 4 K \| \bb \|_2^2 \\
+    &amp;= (1  - (4 K - 1) \mu (\bDDD)) \| \bb \|_2^2.
+   \end{split}\]</div>
+</li>
+<li><p>We note that this inequality is valid only if</p>
+<div class="math notranslate nohighlight">
+\[
+    1  - (4 K - 1) \mu (\bDDD) &gt; 0.
+   \]</div>
+</li>
+<li><p>This condition can be reformulated as</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba \|_0  = K &lt; \frac{1}{4} \left (1  + \frac{1}{\mu (\bDDD)} \right). 
+   \]</div>
+</li>
+<li><p>Rewriting the bound on <span class="math notranslate nohighlight">\(\| \bb \|_2^2\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bb \|_2^2 \leq \frac{4 \epsilon^2}{(1  - (4 K - 1) \mu (\bDDD)) }
+   \]</div>
+<p>which is the desired result.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="bpdn">
+<h2><span class="section-number">14.2.5. </span>BPDN<a class="headerlink" href="#bpdn" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection we will examine the <span class="math notranslate nohighlight">\(\ell_1\)</span> penalty problem
+<a class="reference internal" href="#equation-eq-bp-bpdn-l1-norm-minimization-gamma">(14.10)</a> more closely.</p>
+<div class="math notranslate nohighlight" id="equation-bp-bpdn-l-1-penalty-problem">
+<span class="eqno">(14.15)<a class="headerlink" href="#equation-bp-bpdn-l-1-penalty-problem" title="Permalink to this equation">¶</a></span>\[\widehat{\ba} 
+= \text{arg } \underset{\ba \in \CC^D}{\min}
+\frac{1}{2} \| \bx -  \bDDD \ba \|_2^2 + \gamma \| \ba \|_1.\]</div>
+<p>We will focus on following issues:</p>
+<ul class="simple">
+<li><p>Some results from convex analysis useful for our study</p></li>
+<li><p>Conditions for the minimization of <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a>
+over coefficients <span class="math notranslate nohighlight">\(\ba\)</span> supported on a subdictionary <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span></p></li>
+<li><p>Conditions under which the unique minimizer for a subdictionary
+is also the global minimizer for <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a></p></li>
+<li><p>Application of <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a> for sparse signal
+recovery</p></li>
+<li><p>Application of <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a> for identification
+of sparse signals in presence of noise</p></li>
+<li><p>Application of <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a> for identification
+of sparse signals in presence of Gaussian noise</p></li>
+</ul>
+<p>We recall some definitions and results from convex analysis which will help us
+understand the minimizers for <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a> problem.</p>
+<p>Convex analysis for real valued functions the vector space <span class="math notranslate nohighlight">\((\CC^n, \RR)\)</span>
+is developed using the bilinear inner product defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle_B = \Re (\by^H \bx).
+\]</div>
+<p>The subscript <span class="math notranslate nohighlight">\(B\)</span> is there to distinguish it from the standard inner
+product for the complex coordinate space <span class="math notranslate nohighlight">\(\langle \bx, \by \rangle = \by^H \bx\)</span>.
+The two inner products are related as</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \bx, \by \rangle_B = \Re (\langle \bx, \by \rangle).
+\]</div>
+<p>We consider real valued functions over the inner product space
+<span class="math notranslate nohighlight">\(\XX = (\CC^D, \langle \cdot, \cdot \rangle_B)\)</span>.
+Note that the dimension of <span class="math notranslate nohighlight">\(\XX\)</span> is <span class="math notranslate nohighlight">\(2 D\)</span>.</p>
+<p>A real valued convex function <span class="math notranslate nohighlight">\(f : \XX \to \RR\)</span> satisfies
+the standard convexity inequality</p>
+<div class="math notranslate nohighlight">
+\[
+f (\theta \bx + (1 - \theta) \by ) 
+\leq \theta f (\bx) + (1 - \theta) f(\by) \Forall 0 \leq \theta \leq 1.
+\]</div>
+<p>The objective function for the problem <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a> is</p>
+<div class="math notranslate nohighlight" id="equation-bp-bpdn-l-1-penalty-objective-function">
+<span class="eqno">(14.16)<a class="headerlink" href="#equation-bp-bpdn-l-1-penalty-objective-function" title="Permalink to this equation">¶</a></span>\[L(\ba) = \frac{1}{2} \| \bx -  \bDDD \ba \|_2^2 + \gamma \| \ba \|_1.\]</div>
+<p>Clearly, <span class="math notranslate nohighlight">\(L\)</span> is a real valued function over <span class="math notranslate nohighlight">\(\XX\)</span> and it is easy to so that
+it is a convex function. Moreover  <span class="math notranslate nohighlight">\(L(\ba) \geq 0\)</span> always.</p>
+<p>We suggest the readers to review the material in <a class="reference internal" href="../convex_sets/subgradients.html#sec-cvxf-subgradients"><span class="std std-ref">Subgradients</span></a>.
+For any function <span class="math notranslate nohighlight">\(f : \XX \to \RR\)</span>, its <em>subdifferential set</em> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\partial f(\bx) \triangleq 
+\{ \bg \in \XX \ST f(\by) 
+\geq f(\bx) + \langle \by - \bx, \bg \rangle_B \Forall \by \in \XX\}.
+\]</div>
+<p>The elements of subdifferential set are called <em>subgradients</em>.
+If <span class="math notranslate nohighlight">\(f\)</span> possesses a gradient at <span class="math notranslate nohighlight">\(\bx\)</span>, then it is the unique subgradient at <span class="math notranslate nohighlight">\(\bx\)</span>. i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\partial f(\bx)  = \{\nabla f(\bx) \}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\nabla f(\bx)\)</span> is the gradient of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<p>For convex function, the subdifferential of a sum
+is the (Minkowski) sum of the subdifferentials
+(<a class="reference internal" href="../convex_sets/subgradients.html#res-cvxf-subdiff-function-sum-convex">Theorem 8.222</a>); i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\partial (f(\bx) + g(\bx)) = \partial f(\bx) + \partial g(\bx)
+= \{\bh_1 + \bh_2 \ST \in \bh_1 \in \partial f(\bx), \bh_2 \in \partial g(\bx) \}.
+\]</div>
+<p>By Fermat’s optimality condition
+(<a class="reference internal" href="../convex_sets/subgradients.html#res-cvxf-subdiff-fermat-optimality">Theorem 8.233</a>),
+if <span class="math notranslate nohighlight">\(f\)</span> is a closed, proper convex function,
+then <span class="math notranslate nohighlight">\(\bx\)</span> is a global minimizer of <span class="math notranslate nohighlight">\(f\)</span> if and only if
+<span class="math notranslate nohighlight">\(\bzero \in \partial f(\bx)\)</span>.</p>
+<div class="docutils">
+<p>We would be specifically interested in the subdifferential for the function <span class="math notranslate nohighlight">\(\| \ba \|_1\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="res:bp:l1_norm_subdifferential">
+<p class="admonition-title"><span class="caption-number">Theorem 14.10 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bz \in \XX\)</span>.
+The vector <span class="math notranslate nohighlight">\(\bg \in \XX\)</span> lies in the subdifferential
+<span class="math notranslate nohighlight">\(\partial \| \bz \|_1\)</span> if and only if</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(| g_k | \leq 1 \text{ whenever } z_k = 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(g_k = \sgn (z_k) \text{ whenever } z_k \neq 0\)</span>.</p></li>
+</ul>
+</div>
+</div><p>The proof is skipped.</p>
+<div class="docutils">
+<p>We recall that the signum function for complex numbers is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\sgn(r e^{i \theta}) = \left\{
+    \begin{array}{ll}
+        e^{i \theta} &amp; \mbox{if $r &gt; 0$};\\
+        0 &amp; \mbox{if $r = 0$}.
+    \end{array}
+  \right.
+\end{split}\]</div>
+<p>The subdifferential for <span class="math notranslate nohighlight">\(\ell_1\)</span> norm function for <span class="math notranslate nohighlight">\(\RR^n\)</span> is
+developed in <a class="reference internal" href="../convex_sets/subgradients.html#ex-cvxf-subdiff-l1-norm-origin">Example 8.67</a>.
+We note that <span class="math notranslate nohighlight">\(\ell_1\)</span> norm is differentiable at nonzero vectors.
+Also, we can see that:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\| \bg \|_{\infty} = 1\)</span> when <span class="math notranslate nohighlight">\(\bz \neq \bzero\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\| \bg \|_{\infty} \leq 1\)</span> when <span class="math notranslate nohighlight">\(\bz = \bzero\)</span>.</p></li>
+</ol>
+</div>
+<div class="section" id="restricted-minimizers">
+<h3><span class="section-number">14.2.5.1. </span>Restricted Minimizers<a class="headerlink" href="#restricted-minimizers" title="Permalink to this headline">¶</a></h3>
+<div class="docutils">
+<ol>
+<li><p>Suppose <span class="math notranslate nohighlight">\(\Lambda\)</span> index a subdictionary <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> is a linearly independent collection of atoms.</p></li>
+<li><p>Hence a unique <span class="math notranslate nohighlight">\(\ell_2\)</span> best approximation <span class="math notranslate nohighlight">\(\widehat{\bx}_{\Lambda}\)</span>
+of <span class="math notranslate nohighlight">\(\bx\)</span> using the atoms in <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>
+can be obtained using the least square techniques.</p></li>
+<li><p>We define the orthogonal projection operator</p>
+<div class="math notranslate nohighlight">
+\[
+    \bP_{\Lambda} = \bDDD_{\Lambda}\bDDD_{\Lambda}^{\dag}.
+   \]</div>
+</li>
+<li><p>And we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \widehat{\bx}_{\Lambda}  = \bP_{\Lambda} \bx.
+   \]</div>
+</li>
+<li><p>The approximation is orthogonal to the residual;
+i.e., <span class="math notranslate nohighlight">\((\bx - \widehat{\bx}_{\Lambda}) \perp \widehat{\bx}_{\Lambda}\)</span>.</p></li>
+<li><p>There is a unique coefficient vector <span class="math notranslate nohighlight">\(\bc_{\Lambda}\)</span> supported on <span class="math notranslate nohighlight">\(\Lambda\)</span>
+that synthesizes the approximation <span class="math notranslate nohighlight">\(\widehat{\bx}_{\Lambda}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    \bc_{\Lambda} = \bDDD_{\Lambda}^{\dag} \bx
+    = \bDDD_{\Lambda}^{\dag} \widehat{\bx}_{\Lambda}.
+   \]</div>
+</li>
+<li><p>We also have</p>
+<div class="math notranslate nohighlight">
+\[
+    \widehat{\bx}_{\Lambda} = \bP_{\Lambda} \bx = \bDDD_{\Lambda} \bc_{\Lambda}.
+   \]</div>
+</li>
+</ol>
+</div>
+<div class="proof theorem admonition" id="res:bp:bpdn:l1_local_minimizer_condition">
+<p class="admonition-title"><span class="caption-number">Theorem 14.11 </span> (Minimization of <span class="math notranslate nohighlight">\(L\)</span> over vectors supported on <span class="math notranslate nohighlight">\(\Lambda\)</span>)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let  <span class="math notranslate nohighlight">\(\Lambda\)</span> index a linearly independent collection of atoms in <span class="math notranslate nohighlight">\(\bDDD\)</span>
+and let <span class="math notranslate nohighlight">\(\ba^*\)</span> minimize the objective function <span class="math notranslate nohighlight">\(L(\ba)\)</span>
+in <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-objective-function">(14.16)</a>
+over all coefficient vectors
+supported on <span class="math notranslate nohighlight">\(\Lambda\)</span> (i.e. <span class="math notranslate nohighlight">\(\supp(\ba) \subseteq \Lambda\)</span>).
+A necessary and sufficient condition on such a minimizer is that</p>
+<div class="math notranslate nohighlight" id="equation-eq-d7564ff5-947f-4a93-b563-4b5c18ff05ea">
+<span class="eqno">(14.17)<a class="headerlink" href="#equation-eq-d7564ff5-947f-4a93-b563-4b5c18ff05ea" title="Permalink to this equation">¶</a></span>\[\bc_{\Lambda} - \ba^*  = \gamma (\bDDD_{\Lambda}^H \bDDD_{\Lambda})^{-1} \bg\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bc_{\Lambda} = \bDDD_{\Lambda}^{\dag} \bx\)</span>
+and the vector <span class="math notranslate nohighlight">\(\bg\)</span> is drawn from <span class="math notranslate nohighlight">\(\partial \| \ba^* \|_1\)</span>.
+Moreover, the minimizer <span class="math notranslate nohighlight">\(\ba^*\)</span> is unique.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Since we are restricted <span class="math notranslate nohighlight">\(\ba\)</span> to be supported on <span class="math notranslate nohighlight">\(\Lambda\)</span> (i.e. <span class="math notranslate nohighlight">\(\ba \in \CC^{\Lambda}\)</span>),
+hence</p>
+<div class="math notranslate nohighlight">
+\[
+\bDDD \ba = \bDDD_{\Lambda} \ba_{\Lambda}.
+\]</div>
+<p>The objective function simplifies to</p>
+<div class="math notranslate nohighlight">
+\[
+L(\ba) = \frac{1}{2} \| \bx -  \bDDD_{\Lambda} \ba_{\Lambda} \|_2^2 + 
+\gamma \| \ba_{\Lambda} \|_1.
+\]</div>
+<ol>
+<li><p>We define <span class="math notranslate nohighlight">\(\widehat{\bx}_{\Lambda}  = \bP_{\Lambda} \bx\)</span>.</p></li>
+<li><p>Now, both <span class="math notranslate nohighlight">\(\widehat{\bx}_{\Lambda}\)</span> and <span class="math notranslate nohighlight">\(\bDDD_{\Lambda} \ba_{\Lambda}\)</span>
+belong to the column space of <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>
+while <span class="math notranslate nohighlight">\(\bx - \widehat{\bx}_{\Lambda}\)</span> is orthogonal to it.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx - \widehat{\bx}_{\Lambda} \perp \widehat{\bx}_{\Lambda} - \bDDD \ba.
+   \]</div>
+</li>
+<li><p>Thus, using the Pythagorean theorem, we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bx -  \bDDD \ba \|_2^2 
+    = \| \bx - \widehat{\bx}_{\Lambda} + \widehat{\bx}_{\Lambda} - \bDDD \ba \|_2^2 
+    = \|\bx - \widehat{\bx}_{\Lambda} \|_2^2 + \| \widehat{\bx}_{\Lambda} - \bDDD \ba\|_2^2.
+   \]</div>
+</li>
+<li><p>We can rewrite <span class="math notranslate nohighlight">\(L(\ba)\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+    L(\ba) = \frac{1}{2} \|\bx - \widehat{\bx}_{\Lambda} \|_2^2
+    + \frac{1}{2} \| \widehat{\bx}_{\Lambda} - \bDDD \ba\|_2^2 + \gamma \| \ba \|_1.
+   \]</div>
+</li>
+<li><p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+    F(\ba) = \frac{1}{2} \| \widehat{\bx}_{\Lambda} - \bDDD \ba\|_2^2 + \gamma \| \ba \|_1.
+   \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    L(\ba) = \frac{1}{2} \|\bx - \widehat{\bx}_{\Lambda} \|_2^2 + F(\ba).
+   \]</div>
+</li>
+<li><p>Note that the term <span class="math notranslate nohighlight">\(\|\bx - \widehat{\bx}_{\Lambda} \|_2^2\)</span> is constant.
+It is the squared norm of the least square error.</p></li>
+<li><p>Thus, minimizing <span class="math notranslate nohighlight">\(L(\ba)\)</span> over the coefficient vectors supported on <span class="math notranslate nohighlight">\(\Lambda\)</span>
+is equivalent to minimizing <span class="math notranslate nohighlight">\(F(\ba)\)</span> over the same support set.</p></li>
+<li><p>Note that</p>
+<div class="math notranslate nohighlight">
+\[
+    \bDDD \ba = \bDDD_{\Lambda} \ba_{\Lambda}
+    \text{ and } \| \ba \|_1 = \| \ba_{\Lambda} \|_1.
+   \]</div>
+</li>
+<li><p>We can write <span class="math notranslate nohighlight">\(F(\ba)\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+    F(\ba) = \frac{1}{2} \| \widehat{\bx}_{\Lambda} - \bDDD_{\Lambda} \ba_{\Lambda}\|_2^2
+    + \gamma \| \ba_{\Lambda} \|_1.
+   \]</div>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(F(\ba)\)</span> depends only on entries in <span class="math notranslate nohighlight">\(\ba\)</span> which are part of the support <span class="math notranslate nohighlight">\(\Lambda\)</span>.</p></li>
+<li><p>We can replace the variable  <span class="math notranslate nohighlight">\(\ba_{\Lambda}\)</span> with <span class="math notranslate nohighlight">\(\ba \in \CC^{\Lambda}\)</span>
+and rewrite <span class="math notranslate nohighlight">\(F(\ba)\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+    F(\ba) = \frac{1}{2} \| \widehat{\bx}_{\Lambda} - \bDDD_{\Lambda} \ba\|_2^2
+    + \gamma \| \ba \|_1 \Forall \ba \in \CC^{\Lambda}.
+   \]</div>
+</li>
+<li><p>Since atoms indexed by <span class="math notranslate nohighlight">\(\Lambda\)</span> are linearly independent,
+hence <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> has full column rank.</p></li>
+<li><p>Thus, the quadratic term <span class="math notranslate nohighlight">\(\| \widehat{\bx}_{\Lambda} - \bDDD_{\Lambda} \ba\|_2^2\)</span>
+is strictly convex.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\| \ba \|_1\)</span> is also convex, <span class="math notranslate nohighlight">\(F(\ba)\)</span> therefore is strictly convex
+and its minimizer is unique.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(F\)</span> is strictly convex and unconstrained,
+hence <span class="math notranslate nohighlight">\(\bzero \in \partial F(\ba^*)\)</span> is a necessary and sufficient
+condition for the coefficient vector <span class="math notranslate nohighlight">\(\ba^*\)</span> to minimize <span class="math notranslate nohighlight">\(F(\ba)\)</span>.</p></li>
+<li><p>The gradient of the first (quadratic) term is</p>
+<div class="math notranslate nohighlight">
+\[
+    \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right) \ba  - \bDDD_{\Lambda}^H \widehat{\bx}_{\Lambda}.
+   \]</div>
+</li>
+<li><p>For the second term we have to consider its subdifferential
+<span class="math notranslate nohighlight">\(\partial \| \ba \|_1\)</span>.</p></li>
+<li><p>Thus, at <span class="math notranslate nohighlight">\(\ba^*\)</span> it follows that</p>
+<div class="math notranslate nohighlight">
+\[
+    \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right) \ba^*  - \bDDD_{\Lambda}^H \widehat{\bx}_{\Lambda} + \gamma \bg = \bzero.
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\bg\)</span> is some subgradient in <span class="math notranslate nohighlight">\(\partial \| \ba^* \|_1\)</span>.</p>
+</li>
+<li><p>Premultiplying with <span class="math notranslate nohighlight">\(\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1}\)</span>
+we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;\ba^*  - \bDDD_{\Lambda}^{\dag} \widehat{\bx}_{\Lambda}
+    + \gamma \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg  = \bzero\\
+    &amp;\implies \bDDD_{\Lambda}^{\dag} \widehat{\bx}_{\Lambda} - \ba^* = \gamma \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg.
+   \end{split}\]</div>
+</li>
+<li><p>Finally, we recall that <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}^{\dag} \widehat{\bx}_{\Lambda} = \bc_{\Lambda}\)</span>.</p></li>
+<li><p>Thus, we get the desired result</p>
+<div class="math notranslate nohighlight">
+\[
+    \bc_{\Lambda} - \ba^*  = \gamma \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>Some bounds follow as a result of this theorem.
+Readers are suggested to review the material in
+<a class="reference internal" href="../la/matrix_norms.html#sec-la-matrix-norms"><span class="std std-ref">Matrix Norms</span></a>.</p>
+<div class="proof theorem admonition" id="res:bp:norm_upper_bounds_optimal_vs_projector">
+<p class="admonition-title"><span class="caption-number">Theorem 14.12 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(\Lambda\)</span> index a subdictionary <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>
+and let <span class="math notranslate nohighlight">\(\ba^*\)</span> minimize
+the function <span class="math notranslate nohighlight">\(L\)</span> over all coefficient vectors
+supported on <span class="math notranslate nohighlight">\(\Lambda\)</span>.
+Then following bounds are in force:</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bc_{\Lambda} - \ba^* \|_{\infty}
+\leq \gamma \|\left (\bDDD_{\Lambda}^H 
+    \bDDD_{\Lambda} \right)^{-1}\|_{\infty}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\| \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*) \|_2
+\leq \gamma \| \bDDD_{\Lambda}^{\dag} \|_{2 \to 1}.
+\]</div>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We start with</p>
+<div class="math notranslate nohighlight" id="equation-eq-2826c54e-96c6-4ef3-8be9-fff688e713b3">
+<span class="eqno">(14.18)<a class="headerlink" href="#equation-eq-2826c54e-96c6-4ef3-8be9-fff688e713b3" title="Permalink to this equation">¶</a></span>\[\bc_{\Lambda} - \ba^*  = \gamma 
+\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg.\]</div>
+<ol>
+<li><p>we take the <span class="math notranslate nohighlight">\(\ell_{\infty}\)</span> norm on both sides and
+apply some norm bounds</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \bc_{\Lambda} - \ba^* \|_{\infty} 
+    &amp;= \| \gamma \left 
+    (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg \|_{\infty}\\
+    &amp;\leq \gamma \|\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \|_{\infty} 
+    \| \bg \|_{\infty}\\
+    &amp;\leq \gamma \|\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \|_{\infty}.
+   \end{split}\]</div>
+<p>The last inequality is valid since from <a class="reference internal" href="#res:bp:l1_norm_subdifferential">Theorem 14.10</a>
+we have: <span class="math notranslate nohighlight">\(\| \bg \|_{\infty} \leq 1\)</span>.</p>
+</li>
+<li><p>Now let us premultiply <a class="reference internal" href="#equation-eq-2826c54e-96c6-4ef3-8be9-fff688e713b3">(14.18)</a>
+with <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> and apply <span class="math notranslate nohighlight">\(\ell_2\)</span> norm</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \|\bDDD_{\Lambda} ( \bc_{\Lambda} - \ba^*) \|_2 
+    &amp;= \|\gamma \bDDD_{\Lambda} 
+    \left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \bg \|_2\\
+    &amp;= \gamma \|  (\bDDD_{\Lambda}^{\dag})^H \bg \|_2 \\
+    &amp;\leq \|  (\bDDD_{\Lambda}^{\dag})^H \|_{\infty \to 2} \| \bg \|_{\infty} \\
+    &amp;= \|  \bDDD_{\Lambda}^{\dag} \|_{2 \to 1} \| \bg \|_{\infty} \\
+    &amp;\leq \|  \bDDD_{\Lambda}^{\dag} \|_{2 \to 1}.
+   \end{split}\]</div>
+</li>
+<li><p>In this derivation we used facts like
+<span class="math notranslate nohighlight">\(\| \bA \|_{p \to q} = \| \bA^H \|_{q' \to p'}\)</span>,
+<span class="math notranslate nohighlight">\(\| \bA \bx \|_q \leq \| \bA \|_{p \to q} \| \bx \|_p\)</span>
+and <span class="math notranslate nohighlight">\(\| \bg \|_{\infty} \leq 1\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="the-correlation-condition">
+<h3><span class="section-number">14.2.5.2. </span>The Correlation Condition<a class="headerlink" href="#the-correlation-condition" title="Permalink to this headline">¶</a></h3>
+<p>So far we have established a condition which
+ensures that <span class="math notranslate nohighlight">\(\ba^*\)</span> is a unique minimizer
+of <span class="math notranslate nohighlight">\(L\)</span> given that <span class="math notranslate nohighlight">\(\ba\)</span> is supported on <span class="math notranslate nohighlight">\(\Lambda\)</span>.
+We now establish a sufficient condition under which
+<span class="math notranslate nohighlight">\(\ba^*\)</span> is also a global minimizer for <span class="math notranslate nohighlight">\(L(\ba)\)</span>.</p>
+<div class="proof theorem admonition" id="res:bp:bpdn_correlation_condition_global_minimizer">
+<p class="admonition-title"><span class="caption-number">Theorem 14.13 </span> (Correlation condition for global minimizer)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Assume that <span class="math notranslate nohighlight">\(\Lambda\)</span> indexes a subdictionary.
+Let <span class="math notranslate nohighlight">\(\ba^*\)</span> minimize the function <span class="math notranslate nohighlight">\(L\)</span>
+over all coefficient vectors supported on <span class="math notranslate nohighlight">\(\Lambda\)</span>.
+Suppose that</p>
+<div class="math notranslate nohighlight" id="equation-eq-897d5134-9f27-4017-a926-9e522045c3ae">
+<span class="eqno">(14.19)<a class="headerlink" href="#equation-eq-897d5134-9f27-4017-a926-9e522045c3ae" title="Permalink to this equation">¶</a></span>\[\| \bDDD^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty} \leq 
+\gamma \left [ 
+1 - \underset{\omega \notin \Lambda}{\max} |\langle\bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg  \rangle| 
+\right]\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bg \in \partial \| \ba^* \|_1\)</span> is determined by <a class="reference internal" href="#equation-eq-d7564ff5-947f-4a93-b563-4b5c18ff05ea">(14.17)</a>.
+Then <span class="math notranslate nohighlight">\(\ba^*\)</span> is the unique global minimizer of <span class="math notranslate nohighlight">\(L\)</span>.
+Moreover, the condition</p>
+<div class="math notranslate nohighlight" id="equation-eq-6a6bdfe2-48c9-4f66-ab7f-e1645fabaa8f">
+<span class="eqno">(14.20)<a class="headerlink" href="#equation-eq-6a6bdfe2-48c9-4f66-ab7f-e1645fabaa8f" title="Permalink to this equation">¶</a></span>\[\| \bDDD^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty} \leq 
+\gamma \left [ 
+1 - \underset{\omega \notin \Lambda}{\max}\|\bDDD_{\Lambda}^{\dag}  \bd_{\omega}\|_1 
+\right]\]</div>
+<p>guarantees that <span class="math notranslate nohighlight">\(\ba^*\)</span> is the unique global minimizer of <span class="math notranslate nohighlight">\(L\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\ba^*\)</span> be the unique minimizer of <span class="math notranslate nohighlight">\(L\)</span> over
+coefficient vectors supported on <span class="math notranslate nohighlight">\(\Lambda\)</span>.
+Then, the value of the objective function <span class="math notranslate nohighlight">\(L(\ba)\)</span> increases
+if we change any coordinate of <span class="math notranslate nohighlight">\(\ba^*\)</span> indexed in <span class="math notranslate nohighlight">\(\Lambda\)</span>.</p>
+<p>What we need is a condition which ensures that the value of objective function
+also increases if we change any other component of <span class="math notranslate nohighlight">\(\ba^*\)</span>
+(not indexed by <span class="math notranslate nohighlight">\(\Lambda\)</span>).</p>
+<ol class="simple">
+<li><p>If this happens, then <span class="math notranslate nohighlight">\(\ba^*\)</span> will become a local minimizer of <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+<li><p>Further, since <span class="math notranslate nohighlight">\(L\)</span> is convex, <span class="math notranslate nohighlight">\(\ba^*\)</span> will also be global minimizer.</p></li>
+</ol>
+<p>Towards this, let <span class="math notranslate nohighlight">\(\omega\)</span> be some index not in <span class="math notranslate nohighlight">\(\Lambda\)</span>
+and <span class="math notranslate nohighlight">\(\be_{\omega} \in \CC^D\)</span> be corresponding unit vector.
+Let <span class="math notranslate nohighlight">\(\delta \be_{\omega}\)</span> be a small perturbation introduced in <span class="math notranslate nohighlight">\(\omega\)</span>-th coordinate.
+(<span class="math notranslate nohighlight">\(\delta \in \CC\)</span> is a small scalar, though need not be positive real).
+We need find a condition which ensures</p>
+<div class="math notranslate nohighlight">
+\[
+L (\ba^* + \delta \be_{\omega}) - L (\ba^*) &gt; 0 \Forall \omega \notin \Lambda.
+\]</div>
+<ol>
+<li><p>Let us expand the L.H.S. of this inequality:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;L (\ba^* + \delta \be_{\omega}) - L (\ba^*) =\\
+    &amp;\quad \left [ \frac{1}{2} \| \bx -  \bDDD \ba^* - \delta \bd_{\omega}\|_2^2 - \frac{1}{2} \| \bx -  \bDDD \ba^* \|_2^2 \right ] \\
+    &amp;\quad + \gamma\left [\| \ba^*  + \delta \be_{\omega}\|_1 -  \| \ba^* \|_1\right ].
+   \end{split}\]</div>
+<p>Here we used the fact that <span class="math notranslate nohighlight">\(\bDDD \be_{\omega} = \bd_{\omega}\)</span>.</p>
+</li>
+<li><p>Note that since <span class="math notranslate nohighlight">\(\ba^*\)</span> is supported on <span class="math notranslate nohighlight">\(\Lambda\)</span> and <span class="math notranslate nohighlight">\(\omega \notin \Lambda\)</span>, hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba^*  + \delta \be_{\omega}\|_1 = \| \ba^*\|_1  +  \|\delta \be_{\omega}\|_1.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba^*  + \delta \be_{\omega}\|_1 -  \| \ba^* \|_1 = |\delta|.
+   \]</div>
+</li>
+<li><p>We should also simplify the first bracket.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \bx -  \bDDD \ba^* \|_2^2 
+    &amp;= (\bx -  \bDDD \ba^*)^H (\bx -  \bDDD \ba^*) \\
+    &amp;= \bx^H \bx + {\ba^*}^H \bDDD^H \bDDD \ba^* 
+    - \bx^H \bDDD \ba^* -  {\ba^*}^H \bDDD^H \bx.
+   \end{split}\]</div>
+</li>
+<li><p>Similarly</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \| \bx -  \bDDD \ba^* - \delta \bd_{\omega}\|_2^2
+    &amp;= (\bx -  \bDDD \ba^* - \delta \bd_{\omega})^H 
+    (\bx -  \bDDD \ba^* - \delta \bd_{\omega})\\
+    &amp;= \bx^H \bx + {\ba^*}^H \bDDD^H \bDDD \ba^* 
+    - \bx^H \bDDD \ba^* -  {\ba^*}^H \bDDD^H \bx\\
+    &amp;- (\bx -  \bDDD \ba^*)^H \delta \bd_{\omega} 
+    - \delta \bd_{\omega}^H (\bx -  \bDDD \ba^*) + \| \delta  \bd_{\omega}\|_2^2.
+   \end{split}\]</div>
+</li>
+<li><p>Canceling the like terms we get</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \delta  \bd_{\omega}\|_2^2 - 2 \Re (\langle \bx -  \bDDD \ba^*,  \delta \bd_{\omega} \rangle).
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;L (\ba^* + \delta \be_{\omega}) - L (\ba^*) =\\
+    &amp;\quad \frac{1}{2} \| \delta  \bd_{\omega}\|_2^2 - \Re (\langle \bx -  \bDDD \ba^*,  \delta \bd_{\omega} \rangle) + \gamma |\delta|.
+   \end{split}\]</div>
+</li>
+<li><p>Recall that since <span class="math notranslate nohighlight">\(\ba^*\)</span> is supported on <span class="math notranslate nohighlight">\(\Lambda\)</span>,
+hence <span class="math notranslate nohighlight">\(\bDDD \ba^* = \bDDD_{\Lambda} \ba^*\)</span>.</p></li>
+<li><p>We can further split the middle term by adding and subtracting
+<span class="math notranslate nohighlight">\(\bDDD_{\Lambda} \bc_{\Lambda}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \Re (\langle \bx -  \bDDD_{\Lambda} \ba^*,  \delta \bd_{\omega} \rangle) 
+    &amp;= \Re (\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda} + \bDDD_{\Lambda} \bc_{\Lambda} -  \bDDD_{\Lambda} \ba^*,  \delta \bd_{\omega} \rangle)\\
+    &amp;= \Re (\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda},  \delta \bd_{\omega} \rangle)  + 
+    \Re (\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*),  \delta \bd_{\omega} \rangle) 
+   \end{split}\]</div>
+</li>
+<li><p>Thus, we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    L (\ba^* + \delta \be_{\omega}) - L (\ba^*) = 
+    \frac{1}{2} \| \delta  \bd_{\omega}\|_2^2 - \Re (\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda},  \delta \bd_{\omega} \rangle)  
+    - \Re (\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*),  \delta \bd_{\omega} \rangle) + \gamma |\delta|.
+   \]</div>
+</li>
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2} \| \delta  \bd_{\omega}\|_2^2\)</span> is strictly positive giving us</p>
+<div class="math notranslate nohighlight">
+\[
+    L (\ba^* + \delta \be_{\omega}) - L (\ba^*) &gt;
+    - \Re (\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda},  \delta \bd_{\omega} \rangle)  
+    - \Re (\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*),  \delta \bd_{\omega} \rangle) + \gamma |\delta|.
+   \]</div>
+</li>
+<li><p>Using lower triangle inequality we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    L (\ba^* + \delta \be_{\omega}) - L (\ba^*) &gt;
+    \gamma |\delta|
+    - |\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda},  \delta \bd_{\omega} \rangle|  
+    - |\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*),  \delta \bd_{\omega} \rangle|.
+   \]</div>
+</li>
+<li><p>Using linearity of inner product, we can take out <span class="math notranslate nohighlight">\(|\delta|\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-e50c94b1-d1c3-47c3-9c36-ac384b1a48da">
+<span class="eqno">(14.21)<a class="headerlink" href="#equation-eq-e50c94b1-d1c3-47c3-9c36-ac384b1a48da" title="Permalink to this equation">¶</a></span>\[ L (\ba^* + \delta \be_{\omega}) - L (\ba^*) &gt;
+  |\delta| \left [ \gamma
+ - |\langle \bx - \bDDD_{\Lambda} \bc_{\Lambda},  \bd_{\omega} \rangle|  
+ - |\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*), \bd_{\omega} \rangle| \right ].\]</div>
+</li>
+<li><p>Let us simplify this expression. Since <span class="math notranslate nohighlight">\(\ba^*\)</span> is a unique minimizer over
+coefficients in <span class="math notranslate nohighlight">\(\CC^{\Lambda}\)</span>,
+hence using <a class="reference internal" href="#res:bp:bpdn:l1_local_minimizer_condition">Theorem 14.11</a></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    &amp;\bc_{\Lambda} - \ba^*  = \gamma (\bDDD_{\Lambda}^H \bDDD_{\Lambda})^{-1} \bg\\
+    \iff &amp;\bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*) = \gamma \bDDD_{\Lambda}(\bDDD_{\Lambda}^H \bDDD_{\Lambda})^{-1} \bg
+    = (\bDDD_{\Lambda}^{\dag})^H \bg.
+   \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bg \in \partial \| \ba^*\|_1\)</span>.</p>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    |\langle \bDDD_{\Lambda} (\bc_{\Lambda} - \ba^*), \bd_{\omega} \rangle|
+    = \gamma |\langle (\bDDD_{\Lambda}^{\dag})^H \bg, \bd_{\omega} \rangle|
+    = \gamma |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle|
+   \]</div>
+<p>using the fact that <span class="math notranslate nohighlight">\(\langle \bA \bx, \by \rangle = \langle \bx, \bA^H \by \rangle\)</span>.</p>
+</li>
+<li><p>Also, we recall that <span class="math notranslate nohighlight">\(\widehat{\bx}_{\Lambda} = \bDDD_{\Lambda} \bc_{\Lambda}\)</span>.</p></li>
+<li><p>Putting the back in <a class="reference internal" href="#equation-eq-e50c94b1-d1c3-47c3-9c36-ac384b1a48da">(14.21)</a> we obtain:</p>
+<div class="math notranslate nohighlight" id="equation-eq-183f4aac-4abf-43c1-8d8b-f0196da487fc">
+<span class="eqno">(14.22)<a class="headerlink" href="#equation-eq-183f4aac-4abf-43c1-8d8b-f0196da487fc" title="Permalink to this equation">¶</a></span>\[ L (\ba^* + \delta \be_{\omega}) - L (\ba^*) &gt;
+ |\delta| \left [\gamma -  \gamma |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle| 
+ - |\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle|\right ].\]</div>
+</li>
+<li><p>In <a class="reference internal" href="#equation-eq-183f4aac-4abf-43c1-8d8b-f0196da487fc">(14.22)</a>, the L.H.S. is non-negative
+(our real goal) whenever the term in the bracket on the R.H.S. is non-negative
+(since <span class="math notranslate nohighlight">\(|\delta|\)</span> is positive).</p></li>
+<li><p>Therefore we want that</p>
+<div class="math notranslate nohighlight">
+\[
+    \gamma -  \gamma |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle| 
+    - |\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle| \geq 0.
+   \]</div>
+</li>
+<li><p>This can be rewritten as</p>
+<div class="math notranslate nohighlight">
+\[
+    |\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle| \leq \gamma \left [ 1 - |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle| \right ].
+   \]</div>
+</li>
+<li><p>Since this condition should hold for every <span class="math notranslate nohighlight">\(\omega \notin \Lambda\)</span>,
+hence we maximize the L.H.S. and minimize the R.H.S. over  <span class="math notranslate nohighlight">\(\omega \notin \Lambda\)</span>.</p></li>
+<li><p>We get</p>
+<div class="math notranslate nohighlight">
+\[
+    \underset{\omega \notin \Lambda}{\max}|\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle|
+    \leq \underset{\omega \notin \Lambda}{\min} \gamma \left [ 1 - |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle|\right ]
+    = \gamma \left [1 - \underset{\omega \notin \Lambda}{\max}|\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle|\right ].
+   \]</div>
+</li>
+<li><p>Recall that <span class="math notranslate nohighlight">\( \bx - \widehat{\bx}_{\Lambda}\)</span> is orthogonal to the space spanned
+by atoms in <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span>.</p></li>
+<li><p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+    \underset{\omega \notin \Lambda}{\max}|\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle| 
+    = \underset{\omega}{\max}|\langle \bx - \widehat{\bx}_{\Lambda},  \bd_{\omega} \rangle|
+    = \| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty}.
+   \]</div>
+</li>
+<li><p>This gives us the desired sufficient condition</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty} 
+    \leq \gamma \left [1 - \underset{\omega \notin \Lambda}{\max}|\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle|\right ].
+   \]</div>
+</li>
+<li><p>This condition still uses <span class="math notranslate nohighlight">\(\bg\)</span>. We know that <span class="math notranslate nohighlight">\(\| \bg \|_{\infty} \leq 1\)</span>.</p></li>
+<li><p>Let us simplify as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle|
+    &amp;= | (\bDDD_{\Lambda}^{\dag} \bd_{\omega})^H \bg |\\
+    &amp;=  \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})^H \bg \|_{\infty}\\
+    &amp;\leq \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})^H \|_{\infty} \| \bg \|_{\infty}\\
+    &amp;= \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})\|_1 \| \bg \|_{\infty}\\
+    &amp;\leq \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})\|_1.
+   \end{split}\]</div>
+</li>
+<li><p>Another way to understand this is as follows. For any vector <span class="math notranslate nohighlight">\(\bv \in \CC^D\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    | \langle \bv, \bg \rangle | 
+    &amp;= | \sum_{i=1}^D \overline{g_i} v_i | \\
+    &amp;\leq \sum_{i=1}^D |g_i | | v_i | \\
+    &amp;\leq \left [\sum_{i=1}^D | v_i | \right ] \| \bg \|_{\infty}\\
+    &amp;\leq \| \bv \|_1.
+   \end{split}\]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    |\langle \bDDD_{\Lambda}^{\dag} \bd_{\omega}, \bg \rangle| \leq \|\bDDD_{\Lambda}^{\dag} \bd_{\omega}\|_1.
+   \]</div>
+</li>
+<li><p>Thus, it is also sufficient that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty} 
+    \leq \gamma \left [1 - \underset{\omega \notin \Lambda}{\max} \| (\bDDD_{\Lambda}^{\dag} \bd_{\omega})\|_1 \right ].
+   \]</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="exact-recovery-coefficient">
+<h3><span class="section-number">14.2.5.3. </span>Exact Recovery Coefficient<a class="headerlink" href="#exact-recovery-coefficient" title="Permalink to this headline">¶</a></h3>
+<div class="docutils">
+<p>We recall that <a class="reference internal" href="../ssm/dictionaries_2.html#def:proj:erc">Exact Recovery Coefficient</a>
+for a subdictionary is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\ERC(\Lambda) = 1 - \underset{\omega \notin \Lambda}{\max}
+\|\bDDD_{\Lambda}^{\dag} \bd_{\omega} \|_1.
+\]</div>
+<p>Thus, the sufficient condition can be rewritten as</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty}
+\leq \gamma \ERC(\Lambda).
+\]</div>
+<ol class="simple">
+<li><p>Note that the L.H.S. in both sufficient conditions
+is always non-negative.</p></li>
+<li><p>Hence, if the R.H.S. is negative (i.e. <span class="math notranslate nohighlight">\(\ERC(\Lambda) &lt; 0\)</span>),
+the sufficient condition is useless.</p></li>
+<li><p>On the other hand if <span class="math notranslate nohighlight">\(\ERC(\Lambda) &gt; 0\)</span>,
+then a sufficiently high <span class="math notranslate nohighlight">\(\gamma\)</span> can always be chosen
+to satisfy the condition in
+<a class="reference internal" href="#equation-eq-6a6bdfe2-48c9-4f66-ab7f-e1645fabaa8f">(14.20)</a>.</p></li>
+<li><p>At the same time as <span class="math notranslate nohighlight">\(\gamma \to \infty\)</span>,
+the optimum minimizer is <span class="math notranslate nohighlight">\(\ba^* = \bzero\)</span>.</p></li>
+</ol>
+<p>How do we interpret the L.H.S.
+<span class="math notranslate nohighlight">\(\| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty}\)</span>?</p>
+</div>
+<div class="proof definition admonition" id="def:bp:maxcor">
+<p class="admonition-title"><span class="caption-number">Definition 14.2 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>Given a non-zero signal <span class="math notranslate nohighlight">\(\bv\)</span> and a dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>, define the function</p>
+<div class="math notranslate nohighlight">
+\[
+\Maxcor(\bv) \triangleq 
+\frac{\underset{\omega \in \Omega}{\max} 
+|\langle \bv, \bd_{\omega} \rangle | }{ \| \bv \|_2}.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\bv = \bzero\)</span>, then define <span class="math notranslate nohighlight">\(\Maxcor(\bv) = 0\)</span>.</p>
+<p>This is known as the <em>maximum correlation</em> <span id="id4">[<a class="reference internal" href="../bib.html#id137" title="Joel A Tropp. Just relax: convex programming methods for identifying sparse signals in noise. Information Theory, IEEE Transactions on, 52(3):1030–1051, 2006.">37</a>]</span> of a signal with a dictionary.</p>
+</div>
+</div><p>Essentially, for any signal we normalize it and then find out
+its maximum inner product (absolute value) with atoms in
+the dictionary <span class="math notranslate nohighlight">\(\bDDD\)</span>.
+Clearly <span class="math notranslate nohighlight">\(0 \leq \Maxcor(\bv) \leq 1\)</span>.</p>
+<div class="docutils">
+<p>We can see that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bDDD^H \bv \|_{\infty} = \Maxcor (\bv) \| \bv \|_2.
+\]</div>
+<p>We can now interpret</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bDDD^H (  \bx - \widehat{\bx}_{\Lambda}) \|_{\infty}
+= \Maxcor (\bx - \widehat{\bx}_{\Lambda} ) 
+\| \bx - \widehat{\bx}_{\Lambda} \|_2.
+\]</div>
+<p>Therefore, the sufficient condition in <a class="reference internal" href="#res:bp:bpdn_correlation_condition_global_minimizer">Theorem 14.13</a> is
+strongest when the magnitude of the residual
+<span class="math notranslate nohighlight">\((\bx - \widehat{\bx}_{\Lambda})\)</span> and
+its maximum correlation with the dictionary are both small.</p>
+<p>Since the maximum correlation of the residual never exceeds one,
+hence we obtain following (much weaker result)</p>
+</div>
+<div class="proof corollary admonition" id="res:bp:bpdn:recovery:support:erc">
+<p class="admonition-title"><span class="caption-number">Corollary 14.1 </span></p>
+<div class="corollary-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Lambda\)</span> index a subdictionary and let <span class="math notranslate nohighlight">\(\bx\)</span> be an input signal.
+Suppose that the residual vector <span class="math notranslate nohighlight">\(\bx - \widehat{\bx}_{\Lambda}\)</span>
+satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+ \| \bx - \widehat{\bx}_{\Lambda} \|_2 \leq \gamma \ERC(\Lambda).
+\]</div>
+<p>Then any coefficient vector <span class="math notranslate nohighlight">\(\ba^*\)</span> that minimizes the function <span class="math notranslate nohighlight">\(L\)</span>
+must be supported inside <span class="math notranslate nohighlight">\(\Lambda\)</span>.</p>
+</div>
+</div></div>
+<div class="section" id="applications-of-ell-1-penalization">
+<h3><span class="section-number">14.2.5.4. </span>Applications of <span class="math notranslate nohighlight">\(\ell_1\)</span> Penalization<a class="headerlink" href="#applications-of-ell-1-penalization" title="Permalink to this headline">¶</a></h3>
+<p>Having setup the basic results in place,
+we can now study the applications
+of <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a>.</p>
+<div class="proof theorem admonition" id="res:bp:l1_penalty_performance_erc">
+<p class="admonition-title"><span class="caption-number">Theorem 14.14 </span> (BPDN reconstruction guarantees using ERC)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Lambda\)</span> index a subdictionary <span class="math notranslate nohighlight">\(\bDDD_{\Lambda}\)</span> for which
+<span class="math notranslate nohighlight">\(\ERC(\Lambda) \geq 0\)</span>. Suppose that <span class="math notranslate nohighlight">\(\bx\)</span> is an input signal
+whose <span class="math notranslate nohighlight">\(\ell_2\)</span> best approximation over <span class="math notranslate nohighlight">\(\Lambda\)</span> satisfies the
+correlation condition</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bDDD_{\Lambda}^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty} 
+\leq \gamma \ERC(\Lambda).
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\ba^*\)</span> solve the convex program
+<a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a> with parameter <span class="math notranslate nohighlight">\(\gamma\)</span>.
+We may conclude that:</p>
+<ol>
+<li><p>Support of <span class="math notranslate nohighlight">\(\ba^*\)</span> is contained in <span class="math notranslate nohighlight">\(\Lambda\)</span>.</p></li>
+<li><p>The error between <span class="math notranslate nohighlight">\(\ba^*\)</span> and
+the optimal coefficient vector <span class="math notranslate nohighlight">\(\bc_{\Lambda}\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba^* - \bc_{\Lambda} \|_{\infty} \leq 
+    \gamma \left \| \left ( 
+        \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} 
+        \right \|_{\infty}.
+   \]</div>
+</li>
+<li><p>In particular, <span class="math notranslate nohighlight">\(\supp(\ba^*)\)</span> contains every index <span class="math notranslate nohighlight">\(\lambda\)</span>
+in <span class="math notranslate nohighlight">\(\Lambda\)</span> for which</p>
+<div class="math notranslate nohighlight">
+\[
+    | \bc_{\Lambda} (\lambda) | &gt; \gamma \left \| \left ( \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1}
+    \right \|_{\infty}.
+    \]</div>
+</li>
+<li><p>Moreover, the minimizer <span class="math notranslate nohighlight">\(\ba^*\)</span> is unique.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>Since the sufficient condition for correlation condition
+<a class="reference internal" href="#res:bp:bpdn_correlation_condition_global_minimizer">Theorem 14.13</a>
+are satisfied, hence <span class="math notranslate nohighlight">\(\ba^*\)</span> which minimizes <span class="math notranslate nohighlight">\(L\)</span> over coefficient vectors
+in <span class="math notranslate nohighlight">\(\CC^{\Lambda}\)</span> is also a global minimizer of <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\ba^* \in \CC^{\Lambda}\)</span>, hence <span class="math notranslate nohighlight">\(\supp(\ba^*) \subseteq \Lambda\)</span>.</p></li>
+<li><p>For claim 2, application of <a class="reference internal" href="#res:bp:norm_upper_bounds_optimal_vs_projector">Theorem 14.12</a>
+gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bc_{\Lambda} - \ba^* \|_{\infty} \leq 
+    \gamma \|\left (\bDDD_{\Lambda}^H \bDDD_{\Lambda} \right)^{-1} \|_{\infty}.
+   \]</div>
+</li>
+<li><p>Since the convex function <span class="math notranslate nohighlight">\(L\)</span>  is strictly convex,
+hence <span class="math notranslate nohighlight">\(\ba^*\)</span> is unique global minimizer.</p></li>
+<li><p>For claim 3, suppose <span class="math notranslate nohighlight">\(\ba^*(\lambda) = 0\)</span> for some index
+<span class="math notranslate nohighlight">\(\lambda \in \Lambda\)</span> for which</p>
+<div class="math notranslate nohighlight">
+\[
+    | \bc_{\Lambda} (\lambda) | 
+    &gt; \gamma \left \| \left ( 
+        \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   \]</div>
+</li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    |\ba^*(\lambda) -  \bc_{\Lambda} (\lambda) | 
+    = | \bc_{\Lambda} (\lambda) | 
+    &gt; \gamma \left \| \left ( 
+        \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   \]</div>
+</li>
+<li><p>But</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba^* - \bc_{\Lambda} \|_{\infty} 
+    \geq |\ba^*(\lambda) -  \bc_{\Lambda} (\lambda) |.
+   \]</div>
+</li>
+<li><p>This violates the bound that</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba^* - \bc_{\Lambda} \|_{\infty} 
+    \leq \gamma \left \| \left ( 
+        \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   \]</div>
+</li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\supp(\ba^*)\)</span> contains every index <span class="math notranslate nohighlight">\(\lambda \in \Lambda\)</span> for which</p>
+<div class="math notranslate nohighlight">
+\[
+    | \bc_{\Lambda} (\lambda) | 
+    &gt; \gamma \left \| \left ( 
+        \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   \]</div>
+</li>
+</ol>
+</div>
+<p>We can formulate a simpler condition in terms of coherence of the dictionary.</p>
+<div class="proof theorem admonition" id="res:bp:l1_penalty_performance_coherence">
+<p class="admonition-title"><span class="caption-number">Theorem 14.15 </span> (BPDN reconstruction guarantees using coherence)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(K \mu \leq \frac{1}{2}\)</span>.
+Assume that <span class="math notranslate nohighlight">\(| \Lambda | \leq K\)</span> i.e.
+<span class="math notranslate nohighlight">\(\Lambda\)</span> contains at most <span class="math notranslate nohighlight">\(K\)</span> indices.
+Suppose that <span class="math notranslate nohighlight">\(\bx\)</span> is an input
+signal whose <span class="math notranslate nohighlight">\(\ell_2\)</span> best approximation over
+<span class="math notranslate nohighlight">\(\Lambda\)</span> denoted by <span class="math notranslate nohighlight">\(\widehat{\bx}_{\Lambda}\)</span>
+satisfies the correlation condition</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bDDD_{\Lambda}^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty} 
+\leq \gamma  \frac{1 - (2K - 1) \mu}{1 - (K - 1) \mu}.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\ba^*\)</span> solve the convex program
+<a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a> with
+parameter <span class="math notranslate nohighlight">\(\gamma\)</span>. We may conclude that:</p>
+<ol class="simple">
+<li><p>Support of <span class="math notranslate nohighlight">\(\ba^*\)</span> is contained in <span class="math notranslate nohighlight">\(\Lambda\)</span> and</p></li>
+<li><p>The distance between <span class="math notranslate nohighlight">\(\ba^*\)</span> and the optimal coefficient vector
+<span class="math notranslate nohighlight">\(\bc_{\Lambda}\)</span> satisfies</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba^* - \bc_{\Lambda} \|_{\infty} \leq 
+    \gamma  \frac{1}{1 - (K -1) \mu}.
+   \]</div>
+<ol>
+<li><p>In particular, <span class="math notranslate nohighlight">\(\supp(\ba^*)\)</span> contains every index <span class="math notranslate nohighlight">\(\lambda\)</span> in <span class="math notranslate nohighlight">\(\Lambda\)</span> for which</p>
+<div class="math notranslate nohighlight">
+\[
+    | \bc_{\Lambda} (\lambda) | &gt; \gamma \frac{1}{1 - (K -1) \mu}.
+   \]</div>
+</li>
+<li><p>Moreover, the minimizer <span class="math notranslate nohighlight">\(\ba^*\)</span> is unique.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>We recall from <a class="reference internal" href="../ssm/dictionaries_2.html#res:proj:erc_coherence_lower_bound">Theorem 12.74</a>
+the coherence bounds on ERC as</p>
+<div class="math notranslate nohighlight">
+\[
+    \ERC(\Lambda) \geq \frac{1 - (2K - 1) \mu}{1  - (K - 1)\mu}.
+   \]</div>
+</li>
+<li><p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bDDD_{\Lambda}^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty} 
+    \leq \gamma  \frac{1 - (2K - 1) \mu}{1 - (K - 1) \mu}
+    \leq \gamma \ERC(\Lambda).
+   \]</div>
+</li>
+<li><p>A direct application of <a class="reference internal" href="#res:bp:l1_penalty_performance_erc">Theorem 14.14</a>
+validates claims 1 and 4.</p></li>
+<li><p>We recall from <a class="reference internal" href="../ssm/dictionaries.html#res:ssm:inverse_gram_matrix_infty_norm_babel_bound">Theorem 12.36</a>
+the upper bound on norm of inverse Gram matrix of a subdictionary as</p>
+<div class="math notranslate nohighlight">
+\[
+    \| G^{-1} \|_{\infty} 
+    = \| G^{-1} \|_{1} 
+    \leq \frac{1}{1 - \mu_1(K - 1)}\leq \frac{1}{1 - (K -1) \mu}.
+   \]</div>
+</li>
+<li><p>Putting this in <a class="reference internal" href="#res:bp:l1_penalty_performance_erc">Theorem 14.14</a> validates
+claims 2 and 3.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="exact-sparse-reconstruction-problem">
+<h3><span class="section-number">14.2.5.5. </span>Exact Sparse Reconstruction Problem<a class="headerlink" href="#exact-sparse-reconstruction-problem" title="Permalink to this headline">¶</a></h3>
+<p>We now show how one can reconstruct an exactly sparse signal
+solving the convex program <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a>.</p>
+<div class="proof theorem admonition" id="res:bp:bpdn:exact_sparse_recovery">
+<p class="admonition-title"><span class="caption-number">Theorem 14.16 </span> (BPDN exact sparse recovery guarantee)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Assume that <span class="math notranslate nohighlight">\(\Lambda\)</span> indexes a subdictionary for which <span class="math notranslate nohighlight">\(\ERC(\Lambda) \geq 0\)</span>.
+Choose an arbitrary coefficient vector <span class="math notranslate nohighlight">\(\bc_{\text{opt}}\)</span> supported on <span class="math notranslate nohighlight">\(\Lambda\)</span>.
+Fix an input signal <span class="math notranslate nohighlight">\(\bx = \bDDD \bc_{\text{opt}}\)</span>.
+Let <span class="math notranslate nohighlight">\(\ba^*(\gamma)\)</span> denote the unique minimizer of
+<a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a> with parameter <span class="math notranslate nohighlight">\(\gamma\)</span>.
+We may conclude that</p>
+<ol class="simple">
+<li><p>There is a positive number <span class="math notranslate nohighlight">\(\gamma_0\)</span> for which <span class="math notranslate nohighlight">\(\gamma &lt; \gamma_0\)</span>
+implies that <span class="math notranslate nohighlight">\(\supp(\ba^*(\gamma)) = \Lambda\)</span>.</p></li>
+<li><p>In the limit as <span class="math notranslate nohighlight">\(\gamma \to 0\)</span>, we have <span class="math notranslate nohighlight">\(\ba^*(\gamma) \to \bc_{\text{opt}}\)</span>.</p></li>
+</ol>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. .</p>
+<ol>
+<li><p>Since there is no noise, hence the best <span class="math notranslate nohighlight">\(\ell_2\)</span> approximation of
+<span class="math notranslate nohighlight">\(\bx\)</span> over <span class="math notranslate nohighlight">\(\Lambda\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+    \widehat{\bx}_{\Lambda} = \bx
+   \]</div>
+<p>itself and the corresponding coefficient vector is</p>
+<div class="math notranslate nohighlight">
+\[
+    \bc_{\Lambda} = \bc_{\text{opt}}.
+   \]</div>
+</li>
+<li><p>Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \bDDD_{\Lambda}^H (\bx - \widehat{\bx}_{\Lambda}) \|_{\infty}  = 0 
+    \leq \gamma \ERC(\Lambda).
+   \]</div>
+</li>
+<li><p>Thus, the correlation condition is in force for every positive value of <span class="math notranslate nohighlight">\(\gamma\)</span>.</p></li>
+<li><p>Thus, as per <a class="reference internal" href="#res:bp:l1_penalty_performance_erc">Theorem 14.14</a>,
+minimizer <span class="math notranslate nohighlight">\(\ba^*(\gamma)\)</span> of the convex program <a class="reference internal" href="#equation-bp-bpdn-l-1-penalty-problem">(14.15)</a>
+must be supported inside <span class="math notranslate nohighlight">\(\Lambda\)</span>.</p></li>
+<li><p>Moreover, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \| \ba^*(\gamma) - \bc_{\text{opt}} \|_{\infty} \leq 
+    \gamma \left \| \left ( \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   \]</div>
+</li>
+<li><p>Clearly, as <span class="math notranslate nohighlight">\(\gamma \to 0\)</span>, we have <span class="math notranslate nohighlight">\( \ba^*(\gamma)  \to \bc_{\text{opt}}\)</span>.</p></li>
+<li><p>Finally, recall that <span class="math notranslate nohighlight">\(\supp(\ba^*(\gamma))\)</span> contains very index <span class="math notranslate nohighlight">\(\lambda\)</span>
+in <span class="math notranslate nohighlight">\(\Lambda\)</span> for which</p>
+<div class="math notranslate nohighlight">
+\[
+    | \bc_{\text{opt}} (\lambda) | &gt; \gamma \left \| \left ( \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}.
+   \]</div>
+</li>
+<li><p>In order for every index in <span class="math notranslate nohighlight">\(\Lambda\)</span> to be part of
+<span class="math notranslate nohighlight">\(\supp(\ba^*(\gamma))\)</span>, we require</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\underset{\gamma \in \Gamma}{\min} | \bc_{\text{opt}} (\lambda) |}
+    {\left \| \left ( \bDDD_{\Lambda}^H \bDDD_{\Lambda} \right )^{-1} \right \|_{\infty}}
+    &gt; \gamma.
+   \]</div>
+</li>
+<li><p>Choosing the L.H.S. to be <span class="math notranslate nohighlight">\(\gamma_0\)</span>, we get an explicit value of
+upper bound on <span class="math notranslate nohighlight">\(\gamma\)</span> such that
+<span class="math notranslate nohighlight">\(\gamma &lt; \gamma_0\)</span> leads to complete discovery of support.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./sparse_approx"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="stability.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">14.1. </span>Stability of the Sparsest Solution</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="omp_sa.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">14.3. </span>Orthogonal Matching Pursuit</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -12,6 +12,8 @@ $$
 In other words, $X \times X$ is the collection of all possible 
 ordered pairs of elements of $X$.
 
+```{index} Relation; binary
+```
 ````{prf:definition} Binary relation
 :label: def-st-binary-relation
 
@@ -32,6 +34,8 @@ When $X \neq Y$, then the relation is called a *heterogeneous relation*.
 
 ## Types of relations
 
+```{index} Relation; injective
+```
 ```{prf:definition} Injective relation
 :label: def-st-injective-relation
 
@@ -47,6 +51,8 @@ we are saying that each woman can have at most one husband.
 A man may have multiple wives. 
 Some men or women may be unmarried too.
 
+```{index} Relation; functional
+```
 ```{prf:definition} Functional relation
 :label: def-st-functional-relation
 
@@ -61,6 +67,8 @@ We are saying that each man can have at most one wife.
 A woman may have multiple husbands. 
 Some men or women may be unmarried too.
 
+```{index} Relation; one-to-one
+```
 ```{prf:definition} One-to-one relation
 :label: def-st-one-one-relation
 
@@ -72,6 +80,8 @@ and each man can have at most one wife.
 
 Some men or women may still be unmarried.
 
+```{index} Relation; one-to-many
+```
 ```{prf:definition} One-to-many relation
 :label: def-st-one-many-relation
 
@@ -83,6 +93,8 @@ have multiple wives.
 
 Some men or women may still be unmarried.
 
+```{index} Relation; many-to-one
+```
 ```{prf:definition} Many-to-one relation
 :label: def-st-many-one-relation
 
@@ -94,6 +106,8 @@ who have multiple husbands.
 
 Some men or women may still be unmarried.
 
+```{index} Relation; many-to-many
+```
 ```{prf:definition} Many-to-many relation
 :label: def-st-many-many-relation
 
@@ -102,6 +116,8 @@ A relation is called *many-to-many* if it is neither injective nor functional.
 
 No spouse, one spouse, multiple spouses, all are permitted.
 
+```{index} Relation; serial
+```
 ```{prf:definition} Serial relation
 :label: def-st-serial-relation
 
@@ -113,6 +129,8 @@ Every man has at least one wife.
 
 Some women may still be unmarried. 
 
+```{index} Relation; surjective
+```
 ```{prf:definition} Surjective relation
 :label: def-st-surjective-relation
 
@@ -128,6 +146,8 @@ Some men may still be unmarried.
 
 Let $R$ and $S$ be relations over sets $X$ and $Y$.
 
+```{index} Relation; union
+```
 ```{prf:definition} Union of relations
 :label: def-st-relation-union
 
@@ -136,6 +156,8 @@ R \cup S = \{(x, y) \ST x R y \text{ or } x S y\}.
 $$
 ```
 
+```{index} Relation; intersection
+```
 ```{prf:definition} Intersection of relations
 :label: def-st-relation-intersection
 
@@ -144,6 +166,8 @@ R \cap S = \{(x, y) \ST x R y \text{ and } x S y\}.
 $$
 ```
 
+```{index} Relation; composition
+```
 ```{prf:definition} Composition of relations
 :label: def-st-relation-composition
 
@@ -160,6 +184,8 @@ $$
 
 An interesting type of relations are equivalence relations over a set $X$.
 
+```{index} Equivalence relation
+```
 ````{prf:definition}  Equivalence relation
 :label: def-st-equivalence-relation
 
@@ -173,6 +199,8 @@ A relation $\mathcal{R}$ on a set $X$ is said to be an
 
 We can now introduce equivalence classes on a set.
 
+```{index} Equivalence class
+```
 ````{prf:definition}  Equivalence class
 :label: def-st-equivalence-class
 
@@ -222,6 +250,8 @@ $\{A_i\}_{i \in I}$ of pairwise disjoint sets (a family of
 equivalence classes) such that $X = \cup_{i \in I} A_i$.
 ````
 
+```{index} Set partition
+```
 ````{prf:definition} Partition
 :label: def-st-partition
 
@@ -265,6 +295,8 @@ set $A_i$ in the family of sets $\{A_i\}$ such that both $x$ and $y$ belong to $
 
 Another important type of relation is an order relation over a set $X$.
 
+```{index} Partial order
+```
 ````{prf:definition} Partial order
 :label: def-st-partial-order
 
@@ -279,6 +311,8 @@ if it satisfies the following properties:
 
 An alternative notation for $x \leq y$ is $y \geq x$.
 
+```{index} Partially ordered set
+```
 ````{prf:definition} Partially ordered set
 :label: def-st-partially-ordered-set
 
@@ -310,6 +344,8 @@ Thus the relation $\mathcal{R}$ defines a partial order on the power set $X$.
 
 We can look at how elements are ordered within a set a bit more closely.
 
+```{index} Chain
+```
 ````{prf:definition} Chain
 :label: def-st-chain
 
@@ -343,6 +379,8 @@ Hence $Y$ is a chain or a totally ordered set within $X$.
 ````
 
 
+```{index} Total order
+```
 ```{prf:definition} Total order
 :label: def-st-total-order
 
@@ -354,6 +392,9 @@ if it satisfies the following properties:
 *  If $x \leq y$ and $y \leq x$, then $x = y$ (antisymmetry).
 *  If $x \leq y$ and $y \leq z$, then $x \leq z$ (transitivity).
 *  $x \leq y$ or $y \leq x$ holds for every $x, y \in X$ (strongly connected).
+```
+
+```{index} Totally ordered set
 ```
 ```{prf:definition} Totally ordered set
 :label: def-st-totally-ordered-set
@@ -387,6 +428,8 @@ set in the complex plane.
 
 We can now define the notion of upper bounds in a partially ordered set.
 
+```{index} Partial order; upper bound
+```
 ````{prf:definition} Upper bound
 :label: def-st-upper-bound
 
@@ -398,6 +441,8 @@ $u$ is called an *upper bound* of $Y$.
 Note that there can be more than one upper bounds of $Y$. Upper bound
 is not required to be unique.
 
+```{index} Partial order; maximal element
+```
 ````{prf:definition} Maximal element
 :label: def-st-maximal-element
 
@@ -456,6 +501,8 @@ has a maximal element.
 
 Following is corresponding notion of lower bounds.
 
+```{index} Partial order; lower bound
+```
 ````{prf:definition} Lower bound
 :label: def-st-lower-bound
 
@@ -465,6 +512,8 @@ $u$ is called an *lower bound* of $Y$.
 ````
 
 
+```{index} Partial order; minimal element
+```
 ````{prf:definition} Minimal element
 :label: def-st-minimal-element
 

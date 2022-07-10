@@ -1,0 +1,1782 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12.3. Underdetermined Linear Systems &#8212; Topics in Signal Processing</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "shailesh1729/tisp");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"AA": "\\mathbb{A}", "BB": "\\mathbb{B}", "CC": "\\mathbb{C}", "DD": "\\mathbb{D}", "EE": "\\mathbb{E}", "FF": "\\mathbb{F}", "GG": "\\mathbb{G}", "HH": "\\mathbb{H}", "II": "\\mathbb{I}", "JJ": "\\mathbb{J}", "KK": "\\mathbb{K}", "NN": "\\mathbb{N}", "Nat": "\\mathbb{N}", "PP": "\\mathbb{P}", "QQ": "\\mathbb{Q}", "RR": "\\mathbb{R}", "RRMN": "\\mathbb{R}^{M \\times N}", "SS": "\\mathbb{S}", "TT": "\\mathbb{T}", "UU": "\\mathbb{U}", "VV": "\\mathbb{V}", "WW": "\\mathbb{W}", "XX": "\\mathbb{X}", "YY": "\\mathbb{Y}", "ZZ": "\\mathbb{Z}", "ZERO": "\\mathbf{O}", "ERL": "\\overline{\\mathbb{R}}", "RERL": "(-\\infty, \\infty]", "LERL": "[-\\infty, \\infty)", "AAA": "\\mathcal{A}", "BBB": "\\mathcal{B}", "CCC": "\\mathcal{C}", "DDD": "\\mathcal{D}", "EEE": "\\mathcal{E}", "FFF": "\\mathcal{F}", "GGG": "\\mathcal{G}", "HHH": "\\mathcal{H}", "III": "\\mathcal{I}", "JJJ": "\\mathcal{J}", "KKK": "\\mathcal{K}", "LLL": "\\mathcal{L}", "MMM": "\\mathcal{M}", "NNN": "\\mathcal{N}", "OOO": "\\mathcal{O}", "PPP": "\\mathcal{P}", "QQQ": "\\mathcal{Q}", "RRR": "\\mathcal{R}", "SSS": "\\mathcal{S}", "TTT": "\\mathcal{T}", "UUU": "\\mathcal{U}", "VVV": "\\mathcal{V}", "WWW": "\\mathcal{W}", "XXX": "\\mathcal{X}", "YYY": "\\mathcal{Y}", "ZZZ": "\\mathcal{Z}", "Tau": "\\mathbf{\\mathcal{T}}", "Chi": "\\mathbf{\\mathcal{X}}", "Eta": "\\mathbf{\\mathcal{H}}", "Re": "\\operatorname{Re}", "Im": "\\operatorname{Im}", "bigO": "\\mathcal{O}", "smallO": "\\mathcal{o}", "NullSpace": "\\mathcal{N}", "ColSpace": "\\mathcal{C}", "RowSpace": "\\mathcal{R}", "Power": "\\mathop{\\mathcal{P}}", "LinTSpace": "\\mathcal{L}", "Range": "\\mathrm{R}", "Image": "\\mathrm{im}", "Kernel": "\\mathrm{ker}", "Span": "\\mathrm{span}", "Nullity": "\\mathrm{nullity}", "Dim": "\\mathrm{dim}", "Rank": "\\mathrm{rank}", "Trace": "\\mathrm{tr}", "Diag": "\\mathrm{diag}", "diag": "\\mathrm{diag}", "sgn": "\\mathrm{sgn}", "dom": "\\mathrm{dom}\\,", "range": "\\mathrm{range}\\,", "image": "\\mathrm{im}\\,", "nullspace": "\\mathrm{null}\\,", "epi": "\\mathrm{epi}\\,", "hypo": "\\mathrm{hypo}\\,", "sublevel": "\\mathrm{sublevel}", "superlevel": "\\mathrm{superlevel}", "contour": "\\mathrm{contour}", "supp": "\\mathrm{supp}", "dist": "\\mathrm{dist}", "opt": "\\mathrm{opt}", "succ": "\\mathrm{succ}", "SNR": "\\mathrm{SNR}", "RSNR": "\\mbox{R-SNR}", "rowsupp": "\\mathop{\\mathrm{rowsupp}}", "abs": "\\mathop{\\mathrm{abs}}", "erf": "\\mathop{\\mathrm{erf}}", "erfc": "\\mathop{\\mathrm{erfc}}", "Sub": "\\mathop{\\mathrm{Sub}}", "SSub": "\\mathop{\\mathrm{SSub}}", "Var": "\\mathop{\\mathrm{Var}}", "Cov": "\\mathop{\\mathrm{Cov}}", "AffineHull": "\\mathop{\\mathrm{aff}}", "ConvexHull": "\\mathop{\\mathrm{conv}}", "ConicHull": "\\mathop{\\mathrm{cone}}", "argmin": "\\mathrm{arg}\\,\\mathrm{min}", "argmax": "\\mathrm{arg}\\,\\mathrm{max}", "EmptySet": "\\varnothing", "card": "\\mathrm{card}\\,", "Forall": "\\; \\forall \\;", "ST": "\\: | \\:", "Gaussian": "\\mathcal{N}", "spark": "\\mathop{\\mathrm{spark}}", "ERC": "\\mathop{\\mathrm{ERC}}", "Maxcor": "\\mathop{\\mathrm{maxcor}}", "dag": "\\dagger", "Bracket": "\\left [ \\; \\right ]", "infimal": "\\;\\square\\;", "OneVec": "\\mathbf{1}", "ZeroVec": "\\mathbf{0}", "OneMat": "\\mathbb{1}", "Interior": ["\\mathring{#1}", 1], "Closure": ["\\overline{#1}", 1], "interior": "\\mathrm{int}\\,", "closure": "\\mathrm{cl}\\,", "boundary": "\\mathrm{bd}\\,", "frontier": "\\mathrm{fr}\\,", "diam": "\\mathrm{diam}\\,", "relint": "\\mathrm{ri}\\,", "relbd": "\\mathrm{relbd}\\,", "extreme": "\\mathrm{ext}\\,", "span": "\\mathrm{span}\\,", "affine": "\\mathrm{aff}\\,", "cone": "\\mathrm{cone}\\,", "convex": "\\mathrm{conv}\\,", "graph": "\\mathrm{gra}\\,", "kernel": "\\mathrm{ker}\\,", "dim": "\\mathrm{dim}\\,", "codim": "\\mathrm{codim}\\,", "nullity": "\\mathrm{nullity}\\,", "rank": "\\mathrm{rank}\\,", "prox": "\\mathrm{prox}", "best": "\\mathrm{best}", "ainterior": "\\mathrm{int}", "aclosure": "\\mathrm{cl}", "aboundary": "\\mathrm{bd}", "afrontier": "\\mathrm{fr}", "aextreme": "\\mathrm{ext}", "st": "\\mathrm{ST}", "ht": "\\mathrm{HT}", "bzero": "\\mathbf{0}", "bone": "\\mathbf{1}", "ba": "\\mathbf{a}", "bb": "\\mathbf{b}", "bc": "\\mathbf{c}", "bd": "\\mathbf{d}", "be": "\\mathbf{e}", "bf": "\\mathbf{f}", "bg": "\\mathbf{g}", "bh": "\\mathbf{h}", "bi": "\\mathbf{i}", "bj": "\\mathbf{j}", "bk": "\\mathbf{k}", "bl": "\\mathbf{l}", "bm": "\\mathbf{m}", "bn": "\\mathbf{n}", "bo": "\\mathbf{o}", "bp": "\\mathbf{p}", "bq": "\\mathbf{q}", "br": "\\mathbf{r}", "bs": "\\mathbf{s}", "bt": "\\mathbf{t}", "bu": "\\mathbf{u}", "bv": "\\mathbf{v}", "bw": "\\mathbf{w}", "bx": "\\mathbf{x}", "by": "\\mathbf{y}", "bz": "\\mathbf{z}", "bA": "\\mathbf{A}", "bB": "\\mathbf{B}", "bC": "\\mathbf{C}", "bD": "\\mathbf{D}", "bE": "\\mathbf{E}", "bF": "\\mathbf{F}", "bG": "\\mathbf{G}", "bH": "\\mathbf{H}", "bI": "\\mathbf{I}", "bJ": "\\mathbf{J}", "bK": "\\mathbf{K}", "bL": "\\mathbf{L}", "bM": "\\mathbf{M}", "bN": "\\mathbf{N}", "bO": "\\mathbf{O}", "bP": "\\mathbf{P}", "bQ": "\\mathbf{Q}", "bR": "\\mathbf{R}", "bS": "\\mathbf{S}", "bT": "\\mathbf{T}", "bU": "\\mathbf{U}", "bV": "\\mathbf{V}", "bW": "\\mathbf{W}", "bX": "\\mathbf{X}", "bY": "\\mathbf{Y}", "bZ": "\\mathbf{Z}", "bAAA": "\\mathbf{\\mathcal{A}}", "bBBB": "\\mathbf{\\mathcal{B}}", "bCCC": "\\mathbf{\\mathcal{C}}", "bDDD": "\\mathbf{\\mathcal{D}}", "bEEE": "\\mathbf{\\mathcal{E}}", "bFFF": "\\mathbf{\\mathcal{F}}", "bGGG": "\\mathbf{\\mathcal{G}}", "bHHH": "\\mathbf{\\mathcal{H}}", "bIII": "\\mathbf{\\mathcal{I}}", "bJJJ": "\\mathbf{\\mathcal{J}}", "bKKK": "\\mathbf{\\mathcal{K}}", "bLLL": "\\mathbf{\\mathcal{L}}", "bMMM": "\\mathbf{\\mathcal{M}}", "bNNN": "\\mathbf{\\mathcal{N}}", "bOOO": "\\mathbf{\\mathcal{O}}", "bPPP": "\\mathbf{\\mathcal{P}}", "bQQQ": "\\mathbf{\\mathcal{Q}}", "bRRR": "\\mathbf{\\mathcal{R}}", "bSSS": "\\mathbf{\\mathcal{S}}", "bTTT": "\\mathbf{\\mathcal{T}}", "bUUU": "\\mathbf{\\mathcal{U}}", "bVVV": "\\mathbf{\\mathcal{V}}", "bWWW": "\\mathbf{\\mathcal{W}}", "bXXX": "\\mathbf{\\mathcal{X}}", "bYYY": "\\mathbf{\\mathcal{Y}}", "bZZZ": "\\mathbf{\\mathcal{Z}}", "blambda": "\\pmb{\\lambda}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12.4. Sparsity in Orthonormal Bases" href="onb_sparsity.html" />
+    <link rel="prev" title="12. Sparse Signal Models" href="chapter_ssm.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-214289683-2', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Topics in Signal Processing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../set_theory/intro.html">
+   1. Set Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sets.html">
+     1.1. Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/relations.html">
+     1.2. Relations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/functions.html">
+     1.3. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cardinality.html">
+     1.4. Cardinality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/sequences.html">
+     1.5. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../set_theory/cartesian.html">
+     1.6. General Cartesian Product
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic_real_analysis/chapter.html">
+   2. Elementary Real Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_line.html">
+     2.1. Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/topology.html">
+     2.2. Topology of Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/sequences.html">
+     2.3. Sequences and Series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/erl.html">
+     2.4. The Extended Real Line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_valued_functions.html">
+     2.5. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/real_functions.html">
+     2.6. Real Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/differentiability.html">
+     2.7. Differentiable Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic_real_analysis/inequalities.html">
+     2.8. Some Important Inequalities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../metric_spaces/chapter.html">
+   3. Metric Spaces
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/intro.html">
+     3.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topology.html">
+     3.2. Metric Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/boundedness.html">
+     3.3. Boundedness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/sequences.html">
+     3.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/subspaces.html">
+     3.5. Subspace Topology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/continuity.html">
+     3.6. Functions and Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/complete.html">
+     3.7. Completeness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/compact.html">
+     3.8. Compactness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/real_valued_functions.html">
+     3.9. Real Valued Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/discrete_space.html">
+     3.10. Discrete Metric Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../metric_spaces/topics.html">
+     3.11. Special Topics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../la/chapter.html">
+   4. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices.html">
+     4.1. Matrices I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/vector_spaces.html">
+     4.2. Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_2.html">
+     4.3. Matrices II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/transformations.html">
+     4.4. Linear Transformations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/normed_spaces.html">
+     4.5. Normed Linear Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/inner_product_spaces.html">
+     4.6. Inner Product Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/dual_spaces.html">
+     4.7. Dual Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/euclidean.html">
+     4.8. The Euclidean Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrices_3.html">
+     4.9. Matrices III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/evd.html">
+     4.10. Eigen Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/svd.html">
+     4.11. Singular Values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/important_spaces.html">
+     4.12. Important Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/matrix_norms.html">
+     4.13. Matrix Norms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/sequence_spaces.html">
+     4.14. Sequence Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../la/affine.html">
+     4.15. Affine Sets and Transformations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mv_calculus/chapter.html">
+   5. Multivariate Calculus
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/differentiation.html">
+     5.1. Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mv_calculus/frechet.html">
+     5.2. Differentiation in Banach Spaces
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../randomness/chapter_prob.html">
+   6. Probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_variables.html">
+     6.1. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/univariate_distributions.html">
+     6.2. Univariate Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/inequalities.html">
+     6.3. Basic Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/two_vars.html">
+     6.4. Two Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/expectation.html">
+     6.5. Expectation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/random_vectors.html">
+     6.6. Random Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/gaussian_vec.html">
+     6.7. Multivariate Gaussian Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../randomness/subgaussian.html">
+     6.8. Subgaussian Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../num_opt/chapter.html">
+   7. Numerical Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../num_opt/opt_intro.html">
+     7.1. Mathematical Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Convexity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../convex_sets/intro.html">
+   8. Convex Sets and Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/real_spaces.html">
+     8.1. Real Vector Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex.html">
+     8.2. Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/rn_subsets.html">
+     8.3. Convex Subsets of
+     <span class="math notranslate nohighlight">
+      \(\RR^n\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone.html">
+     8.4. Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_2.html">
+     8.5. Cones II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/cone_3.html">
+     8.6. Cones III
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/generalized_inequality.html">
+     8.7. Generalized Inequalities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/convex_functions.html">
+     8.8. Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/differentiable.html">
+     8.9. Differentiability and Convex Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/function_ops.html">
+     8.10. Function Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/relint.html">
+     8.11. Topology of Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/separation.html">
+     8.12. Separation Theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/continuity.html">
+     8.13. Continuity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/recession_cones.html">
+     8.14. Recession Cones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/directional_derivatives.html">
+     8.15. Directional Derivatives
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/subgradients.html">
+     8.16. Subgradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/conjugate_functions.html">
+     8.17. Conjugate Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/smoothness.html">
+     8.18. Smoothness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../convex_sets/infimal.html">
+     8.19. Infimal Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cvxopt/chapter.html">
+   9. Convex Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/cvxopt.html">
+     9.1. Convex Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/projection.html">
+     9.2. Projection on Convex Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/recession_opt.html">
+     9.3. Directions of Recession
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/duality.html">
+     9.4. Basic Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/differentiable_objectives.html">
+     9.5. Constrained Optimization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_constraints.html">
+     9.6. Linear Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/constrained_opt.html">
+     9.7. Constrained Optimization II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrange_multipliers.html">
+     9.8. Lagrange Multipliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/lagrangian_duality.html">
+     9.9. Lagrangian Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/conjugate_duality.html">
+     9.10. Conjugate Duality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/linear_programming.html">
+     9.11. Linear Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cvxopt/quadratic_programming.html">
+     9.12. Quadratic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../subgradient_methods/chapter.html">
+   10. Subgradient Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../subgradient_methods/basic_subgradient.html">
+     10.1. Basic Subgradient Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../proximal_operator/chapter.html">
+   11. Proximal Algorithms
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../proximal_operator/prox_op.html">
+     11.3. Proximal Mappings and Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Sparsity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter_ssm.html">
+   12. Sparse Signal Models
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     12.3. Underdetermined Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="onb_sparsity.html">
+     12.4. Sparsity in Orthonormal Bases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="srr.html">
+     12.5. Sparse and Redundant Representations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries.html">
+     12.6. Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compressive_sensing.html">
+     12.7. Compressive Sensing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rip.html">
+     12.8. Restricted Isometry Property
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dictionaries_2.html">
+     12.9. Dictionaries II
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../compressive_sensing/chapter_compressive_sensing.html">
+   13. Compressive Sensing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../compressive_sensing/sensing_matrices.html">
+     13.1. Sensing Matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_approx/ch_sparse_approx.html">
+   14. Sparse Approximation with Dictionaries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/stability.html">
+     14.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/basis_pursuit_sa.html">
+     14.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_approx/omp_sa.html">
+     14.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sparse_recovery/ch_sparse_recovery.html">
+   15. Sparse Recovery from Compressive Measurements
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/stability_sr.html">
+     15.1. Stability of the Sparsest Solution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/basis_pursuit_sr.html">
+     15.2. Basis Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/omp_cs.html">
+     15.3. Orthogonal Matching Pursuit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sparse_recovery/cosamp_cs.html">
+     15.4. Compressive Sampling Matching Pursuit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diclearn/ch_diclearn.html">
+   16. Dictionary Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../diclearn/intro_diclearn.html">
+     16.1. Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notation.html">
+   Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bib.html">
+   Bibliographic Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ssm/underdetermined.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/shailesh1729/tisp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/shailesh1729/tisp/issues/new?title=Issue%20on%20page%20%2Fssm/underdetermined.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regularization">
+   12.3.1. Regularization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ell-2-regularization">
+   12.3.2.
+   <span class="math notranslate nohighlight">
+    \(\ell_2\)
+   </span>
+   Regularization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convexity">
+     12.3.2.1. Convexity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ell-1-regularization">
+   12.3.3.
+   <span class="math notranslate nohighlight">
+    \(\ell_1\)
+   </span>
+   Regularization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ell-1-norm-minimization-as-a-linear-programming-problem">
+   12.3.4.
+   <span class="math notranslate nohighlight">
+    \(\ell_1\)
+   </span>
+   Norm Minimization as a Linear Programming Problem
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Underdetermined Linear Systems</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regularization">
+   12.3.1. Regularization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ell-2-regularization">
+   12.3.2.
+   <span class="math notranslate nohighlight">
+    \(\ell_2\)
+   </span>
+   Regularization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convexity">
+     12.3.2.1. Convexity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ell-1-regularization">
+   12.3.3.
+   <span class="math notranslate nohighlight">
+    \(\ell_1\)
+   </span>
+   Regularization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ell-1-norm-minimization-as-a-linear-programming-problem">
+   12.3.4.
+   <span class="math notranslate nohighlight">
+    \(\ell_1\)
+   </span>
+   Norm Minimization as a Linear Programming Problem
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="underdetermined-linear-systems">
+<span id="sec-ssm-underdetermined"></span><h1><span class="section-number">12.3. </span>Underdetermined Linear Systems<a class="headerlink" href="#underdetermined-linear-systems" title="Permalink to this headline">¶</a></h1>
+<p>The discussion in this section is primarily based on
+chapter 1 of <span id="id1">[<a class="reference internal" href="../bib.html#id71" title="Michael Elad. Sparse and redundant representations. Springer, 2010.">19</a>]</span>.</p>
+<ol>
+<li><p>Consider a matrix <span class="math notranslate nohighlight">\(\Phi \in \CC^{M \times N}\)</span> with <span class="math notranslate nohighlight">\(M &lt; N\)</span>.</p></li>
+<li><p>Define an under-determined system of linear equations:</p>
+<div class="math notranslate nohighlight">
+\[
+   \Phi \bx = \by
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\by \in \CC^M\)</span> is known and <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span> is unknown.</p>
+</li>
+<li><p>This system has <span class="math notranslate nohighlight">\(N\)</span> unknowns and <span class="math notranslate nohighlight">\(M\)</span> linear equations.</p></li>
+<li><p>There are more unknowns than equations.</p></li>
+<li><p>Let the columns of <span class="math notranslate nohighlight">\(\Phi\)</span> be given by <span class="math notranslate nohighlight">\(\phi_1, \phi_2, \dots, \phi_N\)</span>.</p></li>
+<li><p>Column space of <span class="math notranslate nohighlight">\(\Phi\)</span> (vector space spanned by all columns of <span class="math notranslate nohighlight">\(\Phi\)</span>)
+is denoted by <span class="math notranslate nohighlight">\(\ColSpace(\Phi)\)</span>; i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+    \ColSpace(\Phi) = \sum_{i=1}^{N} c_i \phi_i, \quad c_i \in \CC.
+    \]</div>
+</li>
+<li><p>We know that <span class="math notranslate nohighlight">\(\ColSpace(\Phi) \subset \CC^M\)</span>.</p></li>
+<li><p>Clearly <span class="math notranslate nohighlight">\(\Phi \bx \in \ColSpace(\Phi)\)</span> for every <span class="math notranslate nohighlight">\(\bx \in \CC^N\)</span>.</p></li>
+<li><p>Thus if <span class="math notranslate nohighlight">\(\by \notin \ColSpace(\Phi)\)</span> then we have no solution.</p></li>
+<li><p>But, if <span class="math notranslate nohighlight">\(\by \in \ColSpace(\Phi)\)</span> then we have infinite number of solutions.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\NullSpace(\Phi)\)</span> represent the null space of <span class="math notranslate nohighlight">\(\Phi\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \NullSpace(\Phi) = \{ \bx \in \CC^N : \Phi \bx = \bzero \}.
+    \]</div>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(\widehat{\bx}\)</span> be a solution of <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\bz \in \NullSpace(\Phi)\)</span>.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+    \Phi (\widehat{\bx} + \bz) = \Phi \widehat{\bx} + \Phi \bz = \by + \bzero  = \by.
+    \]</div>
+</li>
+<li><p>Hence <span class="math notranslate nohighlight">\(\widehat{\bx} + \bz\)</span> is also a solution of of the system <span class="math notranslate nohighlight">\(\Phi \bx = \by\)</span>.</p></li>
+<li><p>Thus the set <span class="math notranslate nohighlight">\(\widehat{x} + \NullSpace(\Phi)\)</span>
+forms the complete set of infinite solutions to the
+problem <span class="math notranslate nohighlight">\(\by = \Phi \bx\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[
+    \widehat{\bx} + \NullSpace(\Phi) = \{\widehat{\bx} + \bz \ST \bz \in \NullSpace(\Phi)\}.
+    \]</div>
+</li>
+</ol>
+<div class="proof example admonition" id="ex-ssm-underdetermined-system-1">
+<p class="admonition-title"><span class="caption-number">Example 12.2 </span> (An under-determined system)</p>
+<div class="example-content section" id="proof-content">
+<p>As a running example in this section,
+we will consider a simple under-determined system
+in <span class="math notranslate nohighlight">\(\RR^2\)</span>.</p>
+<p>The system is specified by</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi  = 
+\begin{bmatrix}
+3 &amp; 4
+\end{bmatrix}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bx = \begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix}
+\end{split}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi \bx = y = 12.
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bx\)</span> is unknown and <span class="math notranslate nohighlight">\(y\)</span> is known.
+Alternatively</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+3 &amp; 4
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix}
+= 12
+\end{split}\]</div>
+<p>or more simply</p>
+<div class="math notranslate nohighlight">
+\[
+3 x_1 + 4 x_2 = 12.
+\]</div>
+<p>The solution space of this system is a line in <span class="math notranslate nohighlight">\(\RR^2\)</span>.</p>
+<div class="figure align-default" id="fig-ssm-ex-underdetermined-system">
+<img alt="../_images/underdetermined_system.png" src="../_images/underdetermined_system.png" />
+<p class="caption"><span class="caption-number">Fig. 12.1 </span><span class="caption-text">An underdetermined system</span><a class="headerlink" href="#fig-ssm-ex-underdetermined-system" title="Permalink to this image">¶</a></p>
+</div>
+<p>Specification of the under-determined system as above,
+doesn’t give us any reason to pick one
+particular point on the line as the preferred solution.</p>
+<p>Two specific solutions are of interest</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\((x_1, x_2) = (4,0)\)</span> lies on the <span class="math notranslate nohighlight">\(x_1\)</span> axis.</p></li>
+<li><p><span class="math notranslate nohighlight">\((x_1, x_2) = (0,3)\)</span> lies on the <span class="math notranslate nohighlight">\(x_2\)</span> axis.</p></li>
+</ol>
+<p>In both of these solutions, one component is 0,
+thus leading these solutions to be sparse.</p>
+<p>It is easy to visualize sparsity in this simplified 2-dimensional setup
+but situation becomes
+more difficult when we are looking at high dimensional signal spaces.
+We need well defined criteria to promote sparse solutions.</p>
+</div>
+</div><div class="section" id="regularization">
+<h2><span class="section-number">12.3.1. </span>Regularization<a class="headerlink" href="#regularization" title="Permalink to this headline">¶</a></h2>
+<p>Are all these solutions equivalent or can we say  that one solution
+is better than the other in some sense?
+In order to suggest that some solution is better than other solutions,
+we need to define a criteria for comparing two solutions.</p>
+<p>In optimization theory, this idea is known as <em>regularization</em>.</p>
+<p>We define a cost function <span class="math notranslate nohighlight">\(J(x) : \CC^N \to \RR\)</span> which defines the <em>desirability</em>
+of a given solution <span class="math notranslate nohighlight">\(x\)</span> out
+of infinitely possible solutions.
+The higher the cost, lower is the desirability of the solution.</p>
+<p>Thus the goal of the optimization problem is to find a desired <span class="math notranslate nohighlight">\(\bx\)</span>
+with minimum possible cost.</p>
+<p>We can write this optimization problem as</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-cost-function-minimization-problem">
+<span class="eqno">(12.1)<a class="headerlink" href="#equation-eq-ssm-cost-function-minimization-problem" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{\bx}{\text{minimize}} 
+&amp; &amp;  J(\bx) \\
+&amp; \text{subject to }
+&amp; &amp;  \by = \Phi \bx.\end{split}\]</div>
+<p>If <span class="math notranslate nohighlight">\(J(\bx)\)</span> is convex, then its possible to find a global minimum cost solution
+over the solution set.</p>
+<p>If <span class="math notranslate nohighlight">\(J(\bx)\)</span> is not convex, then it may not be possible to find a
+global minimum, we may have to settle with a local minimum.</p>
+<p>A variety of such cost function based criteria can be considered.</p>
+</div>
+<div class="section" id="ell-2-regularization">
+<h2><span class="section-number">12.3.2. </span><span class="math notranslate nohighlight">\(\ell_2\)</span> Regularization<a class="headerlink" href="#ell-2-regularization" title="Permalink to this headline">¶</a></h2>
+<p>One of the most common criteria is to choose a solution with the smallest <span class="math notranslate nohighlight">\(\ell_2\)</span> norm.</p>
+<div class="docutils">
+<p>The problem can then be reformulated as an optimization problem</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-l2-norm-minimization-problem">
+<span class="eqno">(12.2)<a class="headerlink" href="#equation-eq-ssm-l2-norm-minimization-problem" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{\bx}{\text{minimize}} 
+&amp; &amp;  \| \bx \|_2 \\
+&amp; \text{subject to }
+&amp; &amp;  \by = \Phi \bx.\end{split}\]</div>
+<p>We can see that minimizing <span class="math notranslate nohighlight">\(\| \bx \|_2\)</span> is same as minimizing its square
+<span class="math notranslate nohighlight">\(\| \bx \|_2^2 = \bx^H \bx\)</span>; i.e., both functions have exactly the
+same minimizer under the given constraints.</p>
+<p>Hence an equivalent formulation is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp; \underset{\bx}{\text{minimize}} 
+&amp; &amp;  \bx^H \bx \\
+&amp; \text{subject to }
+&amp; &amp;  \by = \Phi \bx.\end{split}\]</div>
+</div>
+<div class="proof example admonition" id="ex-ssm-underdetermined-system-l2-min">
+<p class="admonition-title"><span class="caption-number">Example 12.3 </span> (Minimum <span class="math notranslate nohighlight">\(\ell_2\)</span> norm solution for an under-determined system)</p>
+<div class="example-content section" id="proof-content">
+<p>We continue with our running example.</p>
+<p>We can write <span class="math notranslate nohighlight">\(\bx_2\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bx_2 = 3 - \frac{3}{4} \bx_1.
+\]</div>
+<p>With this definition the squared <span class="math notranslate nohighlight">\(\ell_2\)</span> norm of <span class="math notranslate nohighlight">\(x\)</span> becomes</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\| \bx \|_2^2 = x_1^2 + x_2^2
+&amp;=  x_1^2 + \left ( 
+3 - \frac{3}{4} x_1 \right )^2\\
+&amp; = \frac{25}{16} x_1^2 - \frac{9}{2} x_1 + 9.
+\end{split}\]</div>
+<p>Minimizing  <span class="math notranslate nohighlight">\(\| \bx \|_2^2\)</span> over all <span class="math notranslate nohighlight">\(\bx\)</span> is same as minimizing over all <span class="math notranslate nohighlight">\(x_1\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(\| \bx \|_2^2\)</span> is a quadratic function of <span class="math notranslate nohighlight">\(x_1\)</span>,
+we can simply differentiate
+it and equate to 0 giving us</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{25}{8} x_1 -  \frac{9}{2} = 0  \implies x_1  = \frac{36}{25} = 1.44.
+\]</div>
+<p>This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+x_2 = \frac{48}{25} = 1.92.
+\]</div>
+<p>Thus the optimal <span class="math notranslate nohighlight">\(\ell_2\)</span> norm solution is obtained at <span class="math notranslate nohighlight">\((x_1, x_2) = (1.44, 1.92)\)</span>.</p>
+<p>We note that the minimum <span class="math notranslate nohighlight">\(\ell_2\)</span> norm at this solution is</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_2 = \frac{12}{5} = 2.4.
+\]</div>
+<p>It is instructive to note that the <span class="math notranslate nohighlight">\(\ell_2\)</span> norm cost function prefers
+a non-sparse solution to the optimization problem.</p>
+<p>We can view this solution graphically by drawing <span class="math notranslate nohighlight">\(\ell_2\)</span> norm balls of different radii.
+The ball which just touches the solution space line (i.e. the line is tangent to the ball)
+gives us the optimal solution.</p>
+<div class="figure align-default" id="fig-ssm-ex-underdetermined-system-min-l2-norm">
+<img alt="../_images/underdetermined_system_l2_balls.png" src="../_images/underdetermined_system_l2_balls.png" />
+<p class="caption"><span class="caption-number">Fig. 12.2 </span><span class="caption-text">Minimum <span class="math notranslate nohighlight">\(\ell_2\)</span> norm solution for the under-determined system <span class="math notranslate nohighlight">\(3 x_1  + 4 x_2 = 12\)</span>}</span><a class="headerlink" href="#fig-ssm-ex-underdetermined-system-min-l2-norm" title="Permalink to this image">¶</a></p>
+</div>
+<p>All other norm balls either don’t touch the solution line at all, or they cross it at
+exactly two points.</p>
+</div>
+</div><div class="proof remark admonition" id="res-ssm-underdetermined-l2-min-lm">
+<p class="admonition-title"><span class="caption-number">Remark 12.1 </span> (Least squares via Lagrangian multipliers)</p>
+<div class="remark-content section" id="proof-content">
+<p>A formal solution to <span class="math notranslate nohighlight">\(\ell_2\)</span> norm minimization problem can be easily obtained using
+Lagrange multipliers.</p>
+<p>We define the Lagrangian</p>
+<div class="math notranslate nohighlight">
+\[
+\LLL(x) = \|\bx\|_2^2 + \lambda^H (\Phi \bx  - \by)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\lambda \in \CC^M\)</span> being the Lagrange multipliers for the (equality) constraint set.</p>
+<p>Differentiating <span class="math notranslate nohighlight">\(\LLL(\bx)\)</span> w.r.t. <span class="math notranslate nohighlight">\(\bx\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \LLL(\bx)} {\partial \bx} = 2 \bx + \Phi^H \lambda.
+\]</div>
+<p>By equating the derivative to <span class="math notranslate nohighlight">\(\bzero\)</span> we obtain the optimal value of <span class="math notranslate nohighlight">\(\bx\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\bx^* = - \frac{1}{2} \Phi^H \lambda.
+\]</div>
+<p>Plugging this solution back into the constraint <span class="math notranslate nohighlight">\(\Phi \bx = \by\)</span> gives us</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi \bx^* = - \frac{1}{2} (\Phi \Phi^H) \lambda
+= \by
+\implies \lambda = -2(\Phi \Phi^H)^{-1} \by.
+\]</div>
+<p>In above we are implicitly assuming that <span class="math notranslate nohighlight">\(\Phi\)</span> is a full rank matrix.
+Hence <span class="math notranslate nohighlight">\(\Phi \Phi^H\)</span> is invertible and positive definite.</p>
+<p>Putting <span class="math notranslate nohighlight">\(\lambda\)</span> back in the expression for <span class="math notranslate nohighlight">\(\bx^*\)</span> we obtain
+the well known closed form least squares solution using pseudo-inverse solution</p>
+<div class="math notranslate nohighlight">
+\[
+\bx^* = \Phi^H (\Phi \Phi^H)^{-1} \by = \Phi^{\dag} \by.
+\]</div>
+<p>We would like to mention that there are several iterative approaches to solve the
+<span class="math notranslate nohighlight">\(\ell_2\)</span> norm minimization
+problem (like gradient descent and conjugate descent).  For large systems, they are more effective
+than computing the pseudo-inverse.</p>
+<p>The beauty of <span class="math notranslate nohighlight">\(\ell_2\)</span> norm minimization lies in its simplicity and availability of closed form
+analytical solutions. This has led to its prevalence in various fields of science and engineering.
+But <span class="math notranslate nohighlight">\(\ell_2\)</span> norm is by no means the only suitable cost function. Rather the simplicity of <span class="math notranslate nohighlight">\(\ell_2\)</span> norm
+often drives engineers away from trying other possible cost functions. In the following, we will
+look at various other possible cost functions.</p>
+</div>
+</div><div class="section" id="convexity">
+<h3><span class="section-number">12.3.2.1. </span>Convexity<a class="headerlink" href="#convexity" title="Permalink to this headline">¶</a></h3>
+<div class="docutils">
+<p>Convex optimization problems have a unique feature that it is possible to
+find the global optimal solution if such a solution exists.</p>
+<p>The solution space  <span class="math notranslate nohighlight">\( \Omega = \{\bx : \Phi \bx = \by\}\)</span> is convex.
+Thus the feasible set of solutions for the optimization problem
+<a class="reference internal" href="#equation-eq-ssm-cost-function-minimization-problem">(12.1)</a>
+is also convex.
+All it remains is to make sure that we choose a cost function
+<span class="math notranslate nohighlight">\(J(x)\)</span> which happens to be convex.
+This will ensure that a global minimum can be found through
+convex optimization techniques.
+Moreover, if <span class="math notranslate nohighlight">\(J(x)\)</span> is strictly convex, then it is guaranteed
+that the global minimum solution is <em>unique</em>.
+Thus even though, we may not have
+a nice looking closed form expression for the solution of
+a strictly convex cost function minimization problem,
+the guarantee of the existence and uniqueness of solution
+as well as well developed algorithms
+for solving the problem make it very appealing to choose cost functions which are convex.</p>
+<p>We recall that all <span class="math notranslate nohighlight">\(\ell_p\)</span> norms with <span class="math notranslate nohighlight">\(p \geq 1\)</span> are convex functions.
+In particular <span class="math notranslate nohighlight">\(\ell_{\infty}\)</span> and <span class="math notranslate nohighlight">\(\ell_1\)</span> norms are very interesting and popular where</p>
+<div class="math notranslate nohighlight">
+\[
+\| x \|_{\infty} = \max\{ |x_i| \ST i=1,\dots,N \}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+ \| \bx \|_1 = \sum_{i=1}^{N} |x_i|.
+\]</div>
+<p>In the following section we will attempt to find a unique solution to our
+optimization problem <a class="reference internal" href="#equation-eq-ssm-cost-function-minimization-problem">(12.1)</a> using <span class="math notranslate nohighlight">\(\ell_1\)</span> norm.</p>
+</div>
+</div>
+</div>
+<div class="section" id="ell-1-regularization">
+<h2><span class="section-number">12.3.3. </span><span class="math notranslate nohighlight">\(\ell_1\)</span> Regularization<a class="headerlink" href="#ell-1-regularization" title="Permalink to this headline">¶</a></h2>
+<div class="docutils">
+<p>In this subsection we will restrict our attention to the
+Euclidean space case where <span class="math notranslate nohighlight">\(\bx \in \RR^N\)</span>,
+<span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span> and <span class="math notranslate nohighlight">\(\by \in \RR^M\)</span>.</p>
+<p>We choose our cost function <span class="math notranslate nohighlight">\(J(\bx) = \| \bx \|_1\)</span>.
+The cost minimization problem can be reformulated as</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-l1-norm-min-underdetermined">
+<span class="eqno">(12.3)<a class="headerlink" href="#equation-eq-ssm-l1-norm-min-underdetermined" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{\bx}{\text{minimize}} 
+&amp; &amp;  \| \bx \|_1 \\
+&amp; \text{subject to }
+&amp; &amp;  \Phi \bx = \by.\end{split}\]</div>
+</div>
+<div class="proof example admonition" id="ex-ssm-underdetermined-system-l1-min">
+<p class="admonition-title"><span class="caption-number">Example 12.4 </span> (Minimum <span class="math notranslate nohighlight">\(\ell_1\)</span> norm solution for an under-determined system)</p>
+<div class="example-content section" id="proof-content">
+<p>We continue with our running example.
+we can view this solution graphically by drawing <span class="math notranslate nohighlight">\(\ell_1\)</span> norm balls of different radii.
+The ball which just touches the solution space line
+gives us the optimal solution.</p>
+<div class="figure align-default" id="fig-ssm-ex-underdetermined-system-min-l1-norm">
+<img alt="../_images/underdetermined_system_l1_balls.png" src="../_images/underdetermined_system_l1_balls.png" />
+<p class="caption"><span class="caption-number">Fig. 12.3 </span><span class="caption-text">Minimum <span class="math notranslate nohighlight">\(\ell_1\)</span> norm solution for the under-determined system <span class="math notranslate nohighlight">\(3 x_1  + 4 x_2 = 12\)</span></span><a class="headerlink" href="#fig-ssm-ex-underdetermined-system-min-l1-norm" title="Permalink to this image">¶</a></p>
+</div>
+<p>As we can see from the figure the minimum <span class="math notranslate nohighlight">\(\ell_1\)</span> norm solution is given by <span class="math notranslate nohighlight">\((x_1,x_2)  = (0,3)\)</span>.</p>
+<p>It is interesting to note that <span class="math notranslate nohighlight">\(\ell_1\)</span> norm solution promotes sparser solutions while
+<span class="math notranslate nohighlight">\(\ell_2\)</span> norm solution promotes solutions in which signal energy is distributed among
+all of its components.</p>
+</div>
+</div><div class="docutils">
+<p>It is time to have a closer look at our cost function <span class="math notranslate nohighlight">\(J(x) = \| \bx \|_1\)</span>.
+This function is convex yet not strictly convex.</p>
+</div>
+<div class="proof example admonition" id="ex-ssm-l1-norm-not-strict-convex">
+<p class="admonition-title"><span class="caption-number">Example 12.5 </span> (<span class="math notranslate nohighlight">\(| x|_1\)</span> is not strictly convex)</p>
+<div class="example-content section" id="proof-content">
+<p>Consider again <span class="math notranslate nohighlight">\(\bx \in \RR^2\)</span>. For <span class="math notranslate nohighlight">\(\bx \in \RR_+^2\)</span> (the first quadrant),</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_1 = x_1 + x_2.
+\]</div>
+<p>Hence for any <span class="math notranslate nohighlight">\(c_1, c_2 \geq 0\)</span> and <span class="math notranslate nohighlight">\(\bx, \by \in \RR_+^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\|(c_1 \bx + c_2 \by)\|_1 =  (c_1 \bx + c_2 \by)_1 + (c_1 \bx + c_2 \by)_2 = c_1 \| \bx\|_1 + c_2 \| \by \|_1.
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm is not strictly convex.
+Consequently, a unique solution may not exist for <span class="math notranslate nohighlight">\(\ell_1\)</span> norm minimization problem.</p>
+<p>As an example consider the under-determined system</p>
+<div class="math notranslate nohighlight">
+\[
+3 x_1 + 3 x_2 = 12.
+\]</div>
+<ol class="simple">
+<li><p>We can easily visualize that the solution line will pass through points <span class="math notranslate nohighlight">\((0,4)\)</span> and
+<span class="math notranslate nohighlight">\((4,0)\)</span>.</p></li>
+<li><p>Moreover, it will be clearly parallel with <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm ball of radius <span class="math notranslate nohighlight">\(4\)</span> in
+the first quadrant.</p></li>
+<li><p>This gives us infinitely possible solutions to the minimization problem
+<a class="reference internal" href="#equation-eq-ssm-l1-norm-min-underdetermined">(12.3)</a>.</p></li>
+</ol>
+<p>We can still observe that</p>
+<ul class="simple">
+<li><p>these solutions are gathered in a small line segment that
+is bounded (a bounded convex set) and</p></li>
+<li><p>There exist two solutions <span class="math notranslate nohighlight">\((4,0)\)</span> and <span class="math notranslate nohighlight">\((0,4)\)</span> among these solutions which have
+only 1 non-zero component.</p></li>
+</ul>
+</div>
+</div><p>For the <span class="math notranslate nohighlight">\(\ell_1\)</span> norm minimization problem since <span class="math notranslate nohighlight">\(J(\bx)\)</span> is not strictly convex,
+hence a unique solution may not be guaranteed. In specific cases, there may be
+infinitely many solutions. Yet what we can claim is</p>
+<ul class="simple">
+<li><p>these solutions are gathered in a set that is bounded and convex, and</p></li>
+<li><p>among these solutions, there exists at least one solution with at most
+<span class="math notranslate nohighlight">\(M\)</span> non-zeros (as the number of constraints in <span class="math notranslate nohighlight">\(\Phi \bx = \by\)</span>).</p></li>
+</ul>
+<div class="proof theorem admonition" id="res-ssm-l1-norm-min-sparse-solution-guarantee">
+<p class="admonition-title"><span class="caption-number">Theorem 12.1 </span> (Existence of a sparse solution for <span class="math notranslate nohighlight">\(\ell_1\)</span> minimization)</p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S\)</span> denote the solution set of
+<span class="math notranslate nohighlight">\(\ell_1\)</span> norm minimization problem <a class="reference internal" href="#equation-eq-ssm-l1-norm-min-underdetermined">(12.3)</a>.
+<span class="math notranslate nohighlight">\(S\)</span> contains at least one solution <span class="math notranslate nohighlight">\(\widehat{x}\)</span> with <span class="math notranslate nohighlight">\(\| \widehat{x} \|_0 = M\)</span>.</p>
+</div>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We have the following facts</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(S\)</span> is  convex and bounded.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Phi \bx^* = \by \, \Forall \bx^* \in S\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span> is full rank and <span class="math notranslate nohighlight">\(M &lt; N\)</span>, hence <span class="math notranslate nohighlight">\(\rank \Phi = M\)</span>.</p></li>
+</ul>
+<p>We proceed as follows.</p>
+<ol>
+<li><p>Let <span class="math notranslate nohighlight">\(\bx^* \in S\)</span> be an optimal solution with <span class="math notranslate nohighlight">\(\| \bx^* \|_0 = L &gt; M\)</span>.</p></li>
+<li><p>Consider the <span class="math notranslate nohighlight">\(L\)</span> columns of <span class="math notranslate nohighlight">\(\Phi\)</span> which correspond to <span class="math notranslate nohighlight">\(\supp(\bx^*)\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(L &gt; M\)</span> and <span class="math notranslate nohighlight">\(\rank \Phi = M\)</span> hence these columns linearly dependent.</p></li>
+<li><p>Thus there exists a nonzero vector <span class="math notranslate nohighlight">\(\bh \in \RR^N\)</span> with <span class="math notranslate nohighlight">\(\supp(\bh) \subseteq \supp(\bx^*)\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[
+   \Phi \bh = \bzero.
+   \]</div>
+</li>
+<li><p>Note that since we are only considering those columns of <span class="math notranslate nohighlight">\(\Phi\)</span> which correspond to
+<span class="math notranslate nohighlight">\(\supp(\bx)\)</span>, hence we require <span class="math notranslate nohighlight">\(h_i = 0\)</span> whenever <span class="math notranslate nohighlight">\(\bx^*_i = 0\)</span>.</p></li>
+<li><p>Consider a new vector</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx = \bx^* + \epsilon \bh
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is small enough such that every element in <span class="math notranslate nohighlight">\(\bx\)</span> has the same sign as <span class="math notranslate nohighlight">\(\bx^*\)</span>.
+As long as</p>
+<div class="math notranslate nohighlight">
+\[
+   |\epsilon| \leq \underset{i \in \supp(\bh)}{\min} \frac{|\bx^*_i|}{|h_i|} = \epsilon_0
+   \]</div>
+<p>such an <span class="math notranslate nohighlight">\(\bx\)</span> can be constructed.</p>
+</li>
+<li><p>Note that <span class="math notranslate nohighlight">\(x_i = 0\)</span> whenever <span class="math notranslate nohighlight">\(x^*_i = 0\)</span>.</p></li>
+<li><p>Clearly</p>
+<div class="math notranslate nohighlight">
+\[
+   \Phi \bx = \Phi (\bx^* + \epsilon \bh) = \by + \epsilon \bzero = \by.
+   \]</div>
+</li>
+<li><p>Thus <span class="math notranslate nohighlight">\(\bx\)</span> is a feasible solution to the problem <a class="reference internal" href="#equation-eq-ssm-l1-norm-min-underdetermined">(12.3)</a>
+though it need not be an optimal solution.</p></li>
+<li><p>But since <span class="math notranslate nohighlight">\(\bx^*\)</span> is optimal hence, we must assume that <span class="math notranslate nohighlight">\(\ell_1\)</span> norm of <span class="math notranslate nohighlight">\(\bx\)</span> is
+greater than or equal to the <span class="math notranslate nohighlight">\(\ell_1\)</span> norm of <span class="math notranslate nohighlight">\(\bx^*\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bx \|_1 = \|\bx^* + \epsilon \bh \|_1  \geq \| \bx^* \|_1 \Forall |\epsilon| \leq \epsilon_0.
+   \]</div>
+</li>
+<li><p>Now look at <span class="math notranslate nohighlight">\(\|\bx \|_1\)</span> as a function of <span class="math notranslate nohighlight">\(\epsilon\)</span> in the region <span class="math notranslate nohighlight">\(|\epsilon| \leq \epsilon_0\)</span>.</p></li>
+<li><p>In this region, <span class="math notranslate nohighlight">\(\ell_1\)</span> function is continuous and differentiable (w.r.t. <span class="math notranslate nohighlight">\(\epsilon\)</span>) since
+all vectors <span class="math notranslate nohighlight">\(\bx^* + \epsilon \bh\)</span> have the same sign pattern.</p></li>
+<li><p>If we define <span class="math notranslate nohighlight">\(\by^* = | \bx^* |\)</span> (the vector of absolute values), then</p>
+<div class="math notranslate nohighlight">
+\[
+   \| \bx^* \|_1 = \| \by^* \|_1 = \sum_{i=1}^N y^*_i.
+   \]</div>
+</li>
+<li><p>Since the sign patterns don’t change, hence</p>
+<div class="math notranslate nohighlight">
+\[
+   |x_i| = |x^*_i   + \epsilon h_i | = y^*_i + \epsilon h_i \sgn(x^*_i).
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \|\bx \|_1 &amp;= \sum_{i=1}^N |x_i| \\
+   &amp;= \sum_{i=1}^N \left (y^*_i + \epsilon h_i \sgn(x^*_i) \right) \\
+   &amp;= \| \bx^* \|_1 + \epsilon \sum_{i=1}^N h_i \sgn(x^*_i)\\
+   &amp;= \| \bx^* \|_1 + \epsilon \bh^T \sgn(\bx^*).
+   \end{split}\]</div>
+</li>
+<li><p>The quantity <span class="math notranslate nohighlight">\(\bh^T \sgn(\bx^*)\)</span> is a constant.</p></li>
+<li><p>The inequality <span class="math notranslate nohighlight">\(\|\bx \|_1 \geq \| \bx^* \|_1\)</span>
+applies to both positive and negative values of <span class="math notranslate nohighlight">\(\epsilon\)</span> in the region
+<span class="math notranslate nohighlight">\(|\epsilon | \leq \epsilon_0\)</span>.</p></li>
+<li><p>This is possible only when inequality is in fact an equality.</p></li>
+<li><p>This implies that the addition / subtraction of <span class="math notranslate nohighlight">\(\epsilon \bh\)</span> under these conditions
+does not change the <span class="math notranslate nohighlight">\(\ell_1\)</span> length of the solution.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\bx \in S\)</span> is also an optimal solution.</p></li>
+<li><p>This can happen only if</p>
+<div class="math notranslate nohighlight">
+\[
+   \bh^T \sgn(\bx^*) = 0.
+   \]</div>
+</li>
+<li><p>We now wish to tune <span class="math notranslate nohighlight">\(\epsilon\)</span> such that one entry in <span class="math notranslate nohighlight">\(x^*\)</span> gets zeroed while keeping
+the solutions <span class="math notranslate nohighlight">\(\ell_1\)</span> length.</p></li>
+<li><p>We choose <span class="math notranslate nohighlight">\(i\)</span> corresponding to <span class="math notranslate nohighlight">\(\epsilon_0\)</span> (defined above) and pick</p>
+<div class="math notranslate nohighlight">
+\[
+   \epsilon = \frac{-x^*_i}{h_i}.
+   \]</div>
+</li>
+<li><p>Clearly for the corresponding</p>
+<div class="math notranslate nohighlight">
+\[
+   \bx  = \bx^* + \epsilon \bh
+   \]</div>
+<p>the <span class="math notranslate nohighlight">\(i\)</span>-th entry is zeroed while others keep their sign and the <span class="math notranslate nohighlight">\(\ell_1\)</span> norm is also preserved.</p>
+</li>
+<li><p>Thus, we have got a new optimal solution with <span class="math notranslate nohighlight">\(L-1\)</span> non-zeros at the most.</p></li>
+<li><p>It is possible that more than 1 entries get zeroed during this operation.</p></li>
+<li><p>We can repeat this procedure till we are left with <span class="math notranslate nohighlight">\(M\)</span> non-zero elements.</p></li>
+<li><p>Beyond this we may not proceed since <span class="math notranslate nohighlight">\(\rank \Phi = M\)</span>.
+Hence we cannot say that corresponding columns of <span class="math notranslate nohighlight">\(\Phi\)</span> are linearly dependent.</p></li>
+</ol>
+</div>
+<p>We thus note that <span class="math notranslate nohighlight">\(\ell_1\)</span> norm has a tendency to prefer sparse solutions. This is a
+well known and fundamental property of linear programming.</p>
+</div>
+<div class="section" id="ell-1-norm-minimization-as-a-linear-programming-problem">
+<h2><span class="section-number">12.3.4. </span><span class="math notranslate nohighlight">\(\ell_1\)</span> Norm Minimization as a Linear Programming Problem<a class="headerlink" href="#ell-1-norm-minimization-as-a-linear-programming-problem" title="Permalink to this headline">¶</a></h2>
+<p>We now show that <a class="reference internal" href="#equation-eq-ssm-l1-norm-min-underdetermined">(12.3)</a> in <span class="math notranslate nohighlight">\(\RR^N\)</span>
+is in fact a linear programming problem.</p>
+<p>Recalling the problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp; \underset{x \in \RR^N}{\text{minimize}} 
+&amp; &amp;  \| x \|_1 \\
+&amp; \text{subject to }
+&amp; &amp;  y = \Phi x.\end{split}\]</div>
+<p>Let us write <span class="math notranslate nohighlight">\(\bx\)</span> as <span class="math notranslate nohighlight">\(\bu  - \bv\)</span>  where <span class="math notranslate nohighlight">\(\bu, \bv \in \RR^N\)</span> are both non-negative vectors such that
+<span class="math notranslate nohighlight">\(\bu\)</span> takes all positive entries in <span class="math notranslate nohighlight">\(\bx\)</span> while <span class="math notranslate nohighlight">\(\bv\)</span> takes all the negative entries in <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
+<div class="proof example admonition" id="ex-ssm-split-vec-pos-neg-entries">
+<p class="admonition-title"><span class="caption-number">Example 12.6 </span> (<span class="math notranslate nohighlight">\(\bx = \bu - \bv\)</span>)</p>
+<div class="example-content section" id="proof-content">
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+\bx = (-1, 0 , 0 , 2, 0 , 0, 0, 4, 0, 0, -3, 0 , 0 , 0 , 0, 2 , 10).
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+\bu = (0, 0 , 0 , 2, 0 , 0, 0, 4, 0, 0, 0, 0 , 0 , 0 , 0, 2 , 10).
+\]</div>
+<p>And</p>
+<div class="math notranslate nohighlight">
+\[
+\bv = (1, 0 , 0 , 0, 0 , 0, 0, 0, 0, 0, 3, 0 , 0 , 0 , 0, 0 , 0).
+\]</div>
+<p>Clearly <span class="math notranslate nohighlight">\(\bx  = \bu - \bv\)</span>.</p>
+</div>
+</div><div class="docutils">
+<p>We note here that by definition</p>
+<div class="math notranslate nohighlight">
+\[
+\supp(\bu) \cap \supp(\bv) = \EmptySet
+\]</div>
+<p>i.e., support of <span class="math notranslate nohighlight">\(\bu\)</span> and <span class="math notranslate nohighlight">\(\bv\)</span> are disjoint.</p>
+<p>We now construct a vector</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bz = \begin{bmatrix}
+\bu \\ \bv
+\end{bmatrix} \in \RR^{2N}.
+\end{split}\]</div>
+<p>We can now verify that</p>
+<div class="math notranslate nohighlight">
+\[
+\| \bx \|_1 = \|\bu\|_1 + \| \bv \|_1 = \bone^T \bz.
+\]</div>
+<p>Also</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Phi \bx = \Phi (\bu - \bv) 
+= \Phi \bu - \Phi \bv = 
+\begin{bmatrix}
+\Phi &amp; -\Phi
+\end{bmatrix}
+\begin{bmatrix}
+\bu \\ \bv
+\end{bmatrix}
+= \begin{bmatrix}
+\Phi &amp; -\Phi
+\end{bmatrix} \bz 
+\end{split}\]</div>
+<p>where  <span class="math notranslate nohighlight">\(\bz \succeq \bzero\)</span>.</p>
+</div>
+<p>Hence the optimization problem <a class="reference internal" href="#equation-eq-ssm-l1-norm-min-underdetermined">(12.3)</a> can be recast as</p>
+<div class="math notranslate nohighlight" id="equation-eq-ssm-l1-norm-min-underdetermined-as-lp">
+<span class="eqno">(12.4)<a class="headerlink" href="#equation-eq-ssm-l1-norm-min-underdetermined-as-lp" title="Permalink to this equation">¶</a></span>\[\begin{split}&amp; \underset{\bz \in \RR^{2N}}{\text{minimize}} 
+&amp; &amp;  \bone^T \bz \\
+&amp; \text{subject to }
+&amp; &amp;  \begin{bmatrix} \Phi &amp; -\Phi \end{bmatrix} \bz = \by\\
+&amp; \text{and }
+&amp; &amp; \bz \succeq \bzero.\end{split}\]</div>
+<p>This optimization problem has the classic Linear Programming structure since the
+objective function is affine as well as constraints are affine.</p>
+<div class="proof remark admonition" id="res-ssm-l1-min-lin-prog-just">
+<p class="admonition-title"><span class="caption-number">Remark 12.2 </span> (Justification for the equivalence of the linear program)</p>
+<div class="remark-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\bz^* =\begin{bmatrix} \bu^* \\ \bv^* \end{bmatrix}\)</span> be an optimal solution
+of the linear program <a class="reference internal" href="#equation-eq-ssm-l1-norm-min-underdetermined-as-lp">(12.4)</a>.</p>
+<p>In order to show that the two optimization problems are equivalent, we need
+to verify that our assumption about the decomposition of <span class="math notranslate nohighlight">\(\bx\)</span> into positive entries in <span class="math notranslate nohighlight">\(\bu\)</span>
+and negative entries in <span class="math notranslate nohighlight">\(\bv\)</span> is indeed satisfied by the optimal solution <span class="math notranslate nohighlight">\(\bu^*\)</span> and <span class="math notranslate nohighlight">\(\bv^*\)</span>.
+i.e., the support of <span class="math notranslate nohighlight">\(\bu^*\)</span> and <span class="math notranslate nohighlight">\(\bv^*\)</span> do not overlap.</p>
+<ol>
+<li><p>Since <span class="math notranslate nohighlight">\(\bz \succeq \bzero\)</span>,
+hence <span class="math notranslate nohighlight">\(\langle \bu^* , \bv^* \rangle  \geq \bzero\)</span>.</p></li>
+<li><p>If support of <span class="math notranslate nohighlight">\(\bu^*\)</span> and <span class="math notranslate nohighlight">\(\bv^*\)</span>  don’t overlap,
+then we  have <span class="math notranslate nohighlight">\(\langle \bu^* , \bv^* \rangle = \bzero\)</span>.</p></li>
+<li><p>And if they overlap then <span class="math notranslate nohighlight">\(\langle \bu^* , \bv^* \rangle &gt; 0\)</span>.</p></li>
+<li><p>Now for the sake of contradiction, let us assume that support of
+<span class="math notranslate nohighlight">\(\bu^*\)</span> and <span class="math notranslate nohighlight">\(\bv^*\)</span> do overlap for the optimal solution <span class="math notranslate nohighlight">\(\bz^*\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(k\)</span> be one of the indices at which both <span class="math notranslate nohighlight">\(u_k \neq 0\)</span> and <span class="math notranslate nohighlight">\(v_k \neq 0\)</span>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\bz \succeq \bzero\)</span>, hence <span class="math notranslate nohighlight">\(u_k &gt; 0\)</span> and <span class="math notranslate nohighlight">\(v_k &gt; 0\)</span>.</p></li>
+<li><p>Without loss of generality let us assume that <span class="math notranslate nohighlight">\(u_k &gt; v_k &gt; 0\)</span>.</p></li>
+<li><p>In the equality constraint</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{bmatrix} \Phi &amp; -\Phi \end{bmatrix} \begin{bmatrix} \bu \\ \bv \end{bmatrix} = \by
+   \end{split}\]</div>
+<p>both of these coefficients multiply the same column of <span class="math notranslate nohighlight">\(\Phi\)</span>
+with opposite signs giving us a term</p>
+<div class="math notranslate nohighlight">
+\[
+    \phi_k (u_k - v_k). 
+   \]</div>
+</li>
+<li><p>Now if we replace the two entries in <span class="math notranslate nohighlight">\(\bz^*\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[
+    u_k'  = u_k - v_k
+   \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    v_k' = 0
+   \]</div>
+<p>to obtain an new vector <span class="math notranslate nohighlight">\(\bz'\)</span>,
+we see that there is no impact in the equality constraint since</p>
+<div class="math notranslate nohighlight">
+\[
+    \begin{bmatrix} \Phi &amp; -\Phi \end{bmatrix} \bz' = \by.
+   \]</div>
+</li>
+<li><p>Also the nonnegativity constraint</p>
+<div class="math notranslate nohighlight">
+\[
+    \bz \succeq \bzero
+   \]</div>
+<p>is satisfied for <span class="math notranslate nohighlight">\(\bz'\)</span>.</p>
+</li>
+<li><p>This means that <span class="math notranslate nohighlight">\(\bz'\)</span> is a feasible solution.</p></li>
+<li><p>On the other hand the objective function <span class="math notranslate nohighlight">\(\bone^T \bz\)</span> value reduces by
+<span class="math notranslate nohighlight">\(2 v_k\)</span> for <span class="math notranslate nohighlight">\(\bz'\)</span>.</p></li>
+<li><p>This contradicts our assumption that <span class="math notranslate nohighlight">\(\bz^*\)</span> is the optimal solution.</p></li>
+<li><p>Hence for the optimal solution of <a class="reference internal" href="#equation-eq-ssm-l1-norm-min-underdetermined-as-lp">(12.4)</a>
+we must have</p>
+<div class="math notranslate nohighlight">
+\[
+    \supp(\bu^*) \cap \supp(\bv^*) = \EmptySet.
+   \]</div>
+</li>
+<li><p>Thus</p>
+<div class="math notranslate nohighlight">
+\[
+    \bx^* = \bu^* - \bv^*
+   \]</div>
+<p>is indeed the desired solution for the optimization problem
+<a class="reference internal" href="#equation-eq-ssm-l1-norm-min-underdetermined">(12.3)</a>.</p>
+</li>
+</ol>
+</div>
+</div></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ssm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chapter_ssm.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">12. </span>Sparse Signal Models</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="onb_sparsity.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12.4. </span>Sparsity in Orthonormal Bases</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shailesh Kumar<br/>
+    
+        &copy; Copyright 2021-2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

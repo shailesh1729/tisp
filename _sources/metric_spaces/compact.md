@@ -15,6 +15,8 @@ $$
 ```
 ## Open Covers
 
+```{index} Metric space; open cover
+```
 ```{prf:definition} Open cover
 :label: def-ms-open-cover
 
@@ -25,6 +27,7 @@ is an *open cover* of $A$ if it covers $A$.
 
 
 ```{prf:theorem} Lindelöf
+:label: res-ms-lindelof  
 
 Every open cover of a subset of $\RR^m$ can be reduced to 
 an at-most countable subcover.
@@ -55,6 +58,8 @@ if every component of $a$ is a rational number.
 ## Compact Sets
 
 
+```{index} Compact set
+```
 ```{prf:definition} Compact set
 :label: def-ms-compact-set
 
@@ -64,6 +69,8 @@ finite subcover.
 ```
 
 
+```{index} Compact metric space
+```
 ```{prf:definition} Compact metric space
 :label: def-ms-compact-metric-space
 
@@ -314,6 +321,8 @@ The following statements are equivalent.
 1. Thus, $A$ is compact.
 ```
 
+```{index} Bolzano-Weierstrass property
+```
 ```{prf:definition} Bolzano-Weierstrass property
 :label: def-ms-bolzano-weierstrass-property
 
@@ -322,6 +331,8 @@ every sequence in $A$ has a convergent subsequence that converges
 to a point in $A$.
 ```
 ```{prf:observation}
+:label: res-ms-compact-bolzano-weierstrass-prop
+
 A compact set has the Bolzano-Weierstrass property.
 ```
 
@@ -373,6 +384,65 @@ Yet, it has closed and bounded sets which are not compact.
 In the specific case of Euclidean spaces, all closed and
 bounded sets are compact too. 
 See {prf:ref}`Heine-Borel theorem <res-ms-heine-borel-euclidean>` below.
+
+
+## Nested Sequence of Compact Sets
+
+```{prf:theorem} Nonempty nested intersection property
+:label: res-ms-nested-seq-compact-nonempty-intersection
+
+
+Let $\{ A_n \}$ be a nested sequence of nonempty compact subsets
+of $(X, d)$ such that
+
+$$
+S_1 \supseteq S_2 \supseteq S_3 \supseteq \dots
+$$
+
+Then their intersection is nonempty; i.e.,
+
+$$
+\bigcap_{n=1}^{\infty} S_n \neq \EmptySet.
+$$
+```
+
+```{prf:proof}
+We prove this result by way of contradiction.
+
+1. Assume for contradiction that $\bigcap_{n=1}^{\infty} S_n = \EmptySet$.
+1. Let $V_n = X \setminus S_n$ for every $n \in \Nat$.
+1. Since $S_{n +1 } \subseteq S_n$ for every $n$
+   hence $V_n \subseteq V_{n+1}$ for every $n$.
+1. Then $V = \{ V_n  \ST n \in \Nat \}$ is a collection of open sets.
+1. Since $\bigcap_{n=1}^{\infty} S_n = \EmptySet$, hence
+
+   $$
+   X &= X \setminus \EmptySet \\ 
+   &= X \setminus \left ( \bigcap_{n=1}^{\infty} S_n \right ) \\
+   &= \bigcup_{n=1}^{\infty}(X \setminus S_n) \\
+   &= \bigcup_{n=1}^{\infty} V_n.
+   $$
+1. Hence $V$ is an open cover for every $S_n$
+   as $S_n \subseteq X = \bigcup_{n=1}^{\infty} V_n$.
+1. In particular, $V$ is an open cover for $S_1$.
+1. Since $S_1$ is compact, hence there exists a
+   finite subcover of $S_1$ indexed by a finite
+   set of natural numbers $I$.
+1. Let $I = \{ i_1, i_2, \dots, i_k \}$ and the
+   finite subcover be $F_k = \{ V_i \in V \ST i \in I \}$.
+1. Since $I$ is a finite set, it has a maximum element.
+1. Let $m = \max I = \max \{ i_1, i_2, \dots, i_k \}$.
+1. Then $F_m = \{ V_1, \dots, V_m \}$ is also a finite
+   subcover of $S_1$ since $F_k \subseteq F_m$.
+1. But then $\bigcup_{k=1}^m V_k = V_m$
+   since $V_n \subseteq V_{n+1}$ for every $n$.
+1. Hence $S_1 \subseteq V_m$.
+1. Then $S_m \subseteq S_1 \subseteq V_m$.
+1. But $V_m = X \setminus S_m$, hence $V_m \cap S_m = \EmptySet$
+   a contradiction.
+1. Hence, the intersection of the nested compact sets must be nonempty.
+```
+
 
 
 ## Continuity
@@ -548,6 +618,8 @@ Now, assume that $f$ is bijective too.
 
 
 ```{prf:theorem} Compact domain + Continuity = Uniform continuity
+:label: res-ms-compact-dom-continuity-uniform
+
 Let $f: (X, d) \to (Y, \rho)$ be {prf:ref}`continuous <def-ms-continuous-function>` on $X$.
 If $X$ is compact, then $f$ is 
 {prf:ref}`uniformly continuous <def-ms-uniform-continuity>`.
@@ -710,6 +782,9 @@ has a convergent subsequence.
 
 
 ## Totally Bounded Metric Spaces
+
+```{index} Totally bounded metric space
+```
 ```{prf:definition} Totally bounded space
 :label: def-ms-totally-bounded-metric-space
 
@@ -723,7 +798,7 @@ $$
 ```
 
 
-```{prf:theorem}
+```{prf:theorem} Compactness implies total boundedness
 :label: res-ms-compact-is-totally-bounded
 
 A compact metric space is totally bounded.

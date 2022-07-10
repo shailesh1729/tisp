@@ -1,3 +1,4 @@
+(sec:cvx:cone)=
 # Cones
 
 Main references for this section are 
@@ -7,7 +8,21 @@ Main references for this section are
 Throughout this section, $\VV$ is a real vector space. 
 Some material is specific to $\RR^n$. Rest of the
 material is applicable for any real vector space.
+Wherever necessary, 
+$\VV$ is endowed with a
+{prf:ref}`norm <def-la-norm>` $\| \cdot \| : \VV \to \RR$
+or a {prf:ref}`real inner product <def-la-real-inner-product>`
+$\langle \cdot, \cdot \rangle : \VV \times \VV \to \RR$. 
+It is also equipped with a metric $d(\bx, \by) = \| \bx - \by \|$.
+The norm in general is not necessarily induced by the inner product
+(if the vector space is indeed endowed with an inner product).
 
+We start with the basic definition of a cone.
+
+## Cones
+
+```{index} Cone
+```
 ````{prf:definition} Cone
 :label: def-cone
 
@@ -20,7 +35,8 @@ nonnegative scalar multiplication.
 ````
 
 * By definition we have $\bzero \in C$.
-* Some authors prefer to restrict the definition to $t > 0$
+* Some authors ({cite}`rockafellar2015convex`) prefer to restrict 
+  the definition to $t > 0$
   thus the origin is not included in the cone by default.
 * In our definition, a cone always includes the origin.
 * Thus, a cone is always nonempty.
@@ -33,12 +49,134 @@ nonnegative scalar multiplication.
   and linear subspaces to be cones too.
 * Pointed cones are a special class of cones
   which are discussed {prf:ref}`below <def-pointed-cone>`.
+  An ice-cream cone is a pointed cone.
 
 
+## Properties of Cones
 
+### Intersection
+
+```{prf:property} Intersection of cones
+:label: res-cone-intersection
+
+Let $\{ C_ i \ST i \in I \}$ be a collection of cones.
+Then their intersection $\bigcap_{i \in I} C_i$ is a cone. 
+```
+
+```{prf:proof}
+Let $\bx \in \bigcap_{i \in I} C_i$ and let $t \geq 0$.
+
+1. $\bx \in C_i$ for every $i \in I$.
+1. Hence $t \bx \in C_i$ for every $i \in I$ since every $C_i$ is a cone.
+1. Hence $t \bx \in \bigcap_{i \in I} C_i$.
+1. Hence $\bigcap_{i \in I} C_i$ is a cone.
+```
+
+### Cartesian Product
+
+```{prf:property} Cartesian product of cones
+:label: res-cone-cartesian-product
+
+Let $\VV$ and $\WW$ be real vector spaces.
+Let $C_1 \subseteq \VV$ and $C_2 \subseteq \WW$ be cones.
+Then their Cartesian product $C_1 \times C_2$ is a cone. 
+```
+
+```{prf:proof}
+Let $\bx \in C_1 \times C_2$ and $t \geq 0$.
+
+1. Then there exist $\by \in C_1$ and $\bz \in C_2$ 
+   such that $\bx = (\by, \bz)$.
+1. Then $t \by \in C_1$ and $t \bz \in C_2$ since both are cones.
+1. Hence $(t \by, t \bz) \in C_1 \times C_2$.
+1. But $(t \by, t \bz)  = t(\by, \bz) = t \bx$.
+1. Hence $t \bx \in C_1 \times C_2$.
+1. Hence $C_1 \times C_2$ is a cone.
+```
+
+
+### Set Addition
+
+
+```{prf:property} Set addition of cones
+:label: res-cone-set-addition
+
+Let $C_1, C_2 \subseteq \VV$ be cones.
+Then their vector sum $C_1 + C_2$ is a cone. 
+```
+
+```{prf:proof}
+Let $\bx \in C_1 + C_2$ and $t \geq 0$.
+
+1. Then there exist $\bx_1 \in C_1$ and $\bx_2 \in C_2$ such that
+   $\bx = \bx_1 + \bx_2$.
+1. Then $t \bx_1 \in C_1$ and $t \bx_2 \in C_2$ since they are cones.
+1. Hence $t \bx = t (\bx_1 + \bx_2) = t \bx_1 + t \bx_2 \in C_1 + C_2$.
+1. Hence $C_1 + C_2$ is a cone.
+```
+
+### Closure
+
+```{prf:property} Closure 
+:label: res-cone-closure
+
+Let $C \subseteq \VV$ be a cone.
+Then its closure $\closure C$ is a cone. 
+```
+
+```{prf:proof}
+Let $\bx \in \closure C$ and $t \geq 0$.
+
+1. Then there exists a sequence $\{ \bx_k \}$ of $C$
+   such that $\bx_k \to \bx$.
+1. Then $t \bx_k \in C$ for every $k$ since $C$ is a cone.
+1. Consider the sequence $\{ t \bx_k \}$ of $C$.
+1. We have $\lim_{k \to \infty} t \bx_k = t \bx$.
+1. Hence $t \bx \in \closure C$.
+1. Hence $\closure C$ is a cone.
+```
+
+
+### Linear Transformation
+
+```{prf:property} Linear transformation 
+:label: res-cone-lin-op
+
+The image and inverse image of a  cone under a linear transformation
+is a cone.
+```
+
+
+```{prf:proof}
+Let $\VV$ and $\WW$ be real vector spaces and
+$\bT : \VV \to \WW$ be a linear transformation.
+
+Image of a cone is a cone.
+
+1. Let $C \in \VV$.
+1. Let $D = \bT(C)$.
+1. Let $\bv \in D$ and $t \geq 0$.
+1. Then there exists $\bu \in C$ such that $\bv = \bT(\bu)$.
+1. Since $C$ is a cone, hence $t \bu \in C$.
+1. Then $\bT(t \bu) = t \bT(\bu) = t \bv \in D$.
+1. Hence $D$ is a cone.
+
+
+Inverse image of a cone is a cone.
+
+1. Let $D \in \WW$.
+1. Let $C = \bT^{-1}(D)$.
+1. Let $\bx \in C$ and $t \geq 0$.
+1. Then $\by = \bT (\bx) \in D$.
+1. Also $\bT (t \bx) =  t \bT (\bx) = t \by \in D$ since $D$ is a cone.
+1. Hence  $t \bx \in C$.
+1. Hence $C$ is a cone.
+```
 
 ## Convex Cones
 
+```{index} Convex cone
+```
 ````{prf:definition} Convex cone
 :label: def-convex-cone
 
@@ -54,10 +192,10 @@ A set $C$ is called a *convex cone* if it is convex and a cone.
 *  Any subspace is a convex cone.
 ````
 
-```{prf:theorem} 
+```{prf:theorem} Subspace as convex cone
 :label: res-cvx-subspace-convex-cone
 
-A subspace is a convex cone.
+A linear subspace is a convex cone.
 ```
 
 ```{prf:proof}
@@ -70,6 +208,41 @@ for every $t \geq 0$ since $V$ is closed
 under scalar multiplication. Thus, $V$ is a cone too.
 Thus, $V$ is a convex cone.
 ```
+
+```{prf:theorem} Half spaces as convex cone
+:label: res-cvx-half-space-convex-cone
+
+Let $\VV$ be a real vector space.
+Let $\ba \in \VV^*$. Consider the set
+
+$$
+H = \{ \bx \in \VV \ST \langle \bx, \ba \rangle \leq 0 \}.
+$$
+Then $H$ is a convex cone.
+```
+
+```{prf:proof}
+Half space as a cone
+
+1. Let $\bx \in H$ and $t \geq 0$.
+1. Then $\langle t \bx, \ba \rangle = t \langle \bx, \ba \rangle \leq 0$.
+1. Hence $t \bx \in H$.
+
+
+Half space as convex
+
+1. Let $\bx, \by \in H$ and $t \in [0,1]$.
+1. Then 
+
+  $$
+  \langle t \bx + (1-t)\by, \ba \rangle = t \langle \bx, \ba \rangle
+  + (1-t)\langle \by, \ba \rangle \leq 0.
+  $$
+1. Hence $H$ is convex.
+```
+
+
+### Characterization
 
 ```{prf:theorem} Convex cone characterization
 :label: res-convex-cone-characterization
@@ -107,6 +280,34 @@ nonnegative scalar multiplication.
 1. Thus, $C$ is convex too. 
 ```
 
+```{prf:theorem} Set addition characterization
+:label: res-convex-cone-set-addition-charac
+
+A cone $C$ is convex if and only if $C + C \subseteq C$.
+```
+
+```{prf:proof}
+Assume that a cone $C$ satisfies $C + C \subseteq C$.
+
+1. Let $\bx, \by \in C$ and $t \in [0,1]$.
+1. Since $C$ is a cone, hence $t \bx$ and $(1-t) \by$ belong to $C$.
+1. Hence $t \bx + (1-t) \by \in C + C \subseteq C$.
+1. Hence $C$ is convex.
+
+For converse, assume that $C$ is a convex cone.
+
+1. Let $\bx, \by \in C$.
+1. Since $C$ is a cone, hence $2 \bx, 2 \by \in C$.
+1. Since $C$ is convex, hence
+
+   $$
+   \frac{1}{2} 2 \bx + \frac{1}{2} 2 \by = \bx + \by \in C.
+   $$
+1. Hence $C + C \subseteq C$.
+```
+
+### Intersection of Convex Cones
+
 
 ````{prf:theorem} Intersection of arbitrary collection of convex cones
 :label: res-cvx-convex-cone-inf-intersect
@@ -136,6 +337,8 @@ cone.
 Thus, the solution set of a system of linear equations and
 inequalities is a convex cone if the equations and 
 inequalities are homogeneous.
+
+### Containing and Contained Subspaces
 
 ```{prf:theorem} Containing and contained subspaces
 :label: res-cvx-convex-cone-containing-contained-subspaces
@@ -247,6 +450,8 @@ in $C$ should be contained in $-C$ too.
 
 ## Conic Combinations
 
+```{index} Conic combination
+```
 ````{prf:definition} Conic combination
 :label: def-conic-combination
 
@@ -373,6 +578,8 @@ and integrals.
 
 ## Conic Hulls
 
+```{index} Conic hull
+```
 ````{prf:definition} Conic hull
 :label: def-conic-hull
 
@@ -386,7 +593,7 @@ $$
 $$
 ````
 
-```{prf:theorem}
+```{prf:property}
 :label: res-cvx-conic-hull-convex
 
 A conic hull is a convex cone.
@@ -406,7 +613,7 @@ Let $C$ be the conic hull of a set $S$.
 1. Thus, $C$ is a convex cone.
 ```
 
-```{prf:theorem}
+```{prf:property}
 :label: res-cvx-conic-hull-smallest
 
 Conic hull of a set is the smallest convex cone that contains the set.
@@ -461,6 +668,38 @@ $H \subseteq K$
 1. Thus, $K$ contains all conic combinations of $C$.
 1. Thus, $H \subseteq K$.
 ```
+
+
+```{prf:property} Conic hull of a convex hull
+Let $S \subseteq \VV$ be a nonempty set. Let $C = \convex S$.
+Then
+
+$$
+\cone S = \cone C.
+$$
+In other words, the conic hull of the convex hull of a set is same
+as the conic hull of the set.
+```
+
+```{prf:proof}
+Since $S \subseteq C$, hence $\cone S \subseteq \cone C$.
+We now prove the converse.
+
+1. Let $\bx \in \cone C$.
+1. Then $\bx$ is a nonnegative combination of some vectors in $C$.
+   There exist a positive integer $p$, $p$ vectors
+   $\bx_1, \dots, \bx_p \in C$ and $p$ scalars 
+   $t_1, \dots, t_p$ such that
+
+   $$
+   \bx = \sum_{i=1}^p t_i \bx_i.
+   $$
+1. Each $\bx_i$ is a convex combination of some vectors in $S$.
+1. Hence $\bx$ is a nonnegative combination of some vectors in $S$.
+1. Hence $\bx \in \cone S$.
+1. Hence $\cone C \subseteq \cone S$.
+```
+
 
 ### Unique Conic Representations
 
@@ -551,7 +790,546 @@ The proof is similar to Carathéodory theorem.
    are linearly independent, hence $k \leq n$.
 ```
 
-### Linear System with Nonnegativity Constraints
+
+## Pointed Cones
+
+```{index} Pointed cone
+```
+```{prf:definition} Pointed cone
+:label: def-pointed-cone
+
+A cone $C \subset \VV$ is called pointed if 
+$\bx \in C$ and $-\bx \in C$ implies $\bx = \bzero$. 
+```
+In other words, a pointed cone, doesn't contain a line.
+
+```{prf:example} The nonnegative orthant is a pointed convex cone
+:label: ex-cone-nng-orthant-pointed
+
+Recall from {prf:ref}`def-convex-nonnegative-orthant`
+that the nonnegative orthant is defined as:
+
+$$
+\RR_+^n = \{ \bx \in \RR^n \ST x_i \geq 0, \Forall 1 \leq i \leq n \}.
+$$
+In other words, for $\bx \in \RR^n_+$, every component is non-negative.
+
+Let $\bx, \by \in \RR^n_+$. Let $\alpha, \beta \geq 0$ and consider their 
+conic combination
+
+$$
+\bz = \alpha \bx + \beta \by.
+$$
+
+It is obvious that all components of $\bz$ are also nonnegative. Hence
+$\bz \in \RR^n_+$. Thus, $\RR^n_+$ is closed under conic combinations.
+Hence, $\RR^n_+$ is a convex cone.
+
+Finally, $\RR^n_+$ is pointed as 
+$\bx \in \RR^n_+$ and $-\bx \in \RR^n_+$ both hold true
+only if $\bx = \bzero$.
+```
+
+## Proper Cones
+
+```{index} Proper cone
+```
+````{prf:definition} Proper cone
+:label: def-proper-cone
+
+A cone $K \in \VV$ is called a *proper cone* if it satisfies the following:
+
+*  $K$ is *convex*.
+*  $K$ is *closed*.
+*  $K$ is *solid*; i.e., it has a nonempty interior.
+*  $K$ is *pointed*.
+````
+
+```{prf:example} Non-empty interior
+:label: ex-cone-non-empty-interior-proper
+
+Consider the following sets in $\RR^2$:
+
+$$
+C_1 = \{ (x_1, x_2) \ST x_1 \geq 0, x_2 = 0\}
+$$
+
+$$
+C_2 = \{ (x_1, x_2) \ST x_1, x_2 \geq 0\}
+$$
+
+Both are closed convex cones. 
+$C_1$ doesn't have an interior. All points in $C_1$ are on the 
+boundary of $C_1$. 
+
+$C_2$ has a non-empty interior; e.g., the point 
+$(1,1) \in C_2$ is not on the boundary.
+```
+
+
+## Norm Cones
+
+```{index} Norm cone
+```
+````{prf:definition} Norm cone
+:label: def-cvx-norm-cone
+
+Let $\|  \cdot \| : \VV \to \RR$ be any norm on $\VV$.
+The *norm cone* associated with the norm $\| \cdot \|$ is given by the set
+
+$$
+C \triangleq \{ (\bx,t) \ST \| \bx \| \leq t \}
+$$
+$C$ lies in the product space $\VV \times \RR$.
+````
+
+If $\VV = \RR^n$, then a norm cone belongs to $\RR^{n+1}$.
+
+ ````{prf:theorem}
+ :label: res-cvx-norm-cone-is-convex
+
+A norm cone is convex. Moreover, it is a convex cone.
+````
+
+
+````{prf:example} Second order cone
+:label: ex-cvx-second-order-cone
+
+The second order cone is the norm cone for the Euclidean norm
+in the Euclidean space $\RR^n$, i.e.
+
+$$
+C  = \{(\bx,t) \ST \| \bx \|_2 \leq t \}.
+$$
+From definition, $C  \subseteq \RR^{n+1}$.
+
+This can be rewritten as
+
+$$
+C = \left \{
+\begin{bmatrix}
+\bx \\ t
+\end{bmatrix}
+\middle |
+\begin{bmatrix}
+\bx \\ t
+\end{bmatrix}^T
+\begin{bmatrix}
+I & 0 \\
+0 & -1
+\end{bmatrix}
+\begin{bmatrix}
+\bx \\ t
+\end{bmatrix}
+\leq 0 , t \geq 0
+\right \}
+$$
+````
+
+
+## Barrier Cones
+
+```{index} Barrier cone; barrier vector
+```
+```{prf:definition} Barrier vector
+:label: def-cvx-convex-set-barrier vector
+
+Let $C$ be a convex set of $\VV$. 
+A vector $\bv \in \VV^*$ is called a
+*barrier* vector to $C$ if for some $\beta \in \RR$,
+
+$$
+\langle \bx , \bv \rangle \leq \beta \Forall \bx \in C.
+$$
+In other words, the set of inner products of points in $C$
+with $\bv$ is bounded from above.
+```
+
+```{index} Barrier cone
+```
+```{prf:definition} Barrier cone
+:label: def-cvx-convex-set-barrier-cone
+
+The set of all barrier vectors to a convex set $C$
+is called its *barrier cone*.
+```
+
+```{prf:theorem}
+:label: res-cvx-barrier-cone-convex
+
+The barrier cone of a convex set is convex.
+```
+
+```{prf:proof}
+Let $C$ be a convex set and let $B$ be its barrier cone.
+Let $\bu, \bv \in B$. Let $t \geq 0$.
+
+$$
+\langle \bx , \bzero \rangle = 0 \leq 0 \Forall \bx \in C.
+$$
+Thus, $\bzero \in B$.
+
+$$
+\langle \bx , \bu \rangle \leq \alpha
+\implies \langle \bx , t\bu \rangle \leq t\alpha \Forall \bx \in C.
+$$
+Thus, the set of inner products with $t \bu$ is bounded
+from above by $t \alpha$. Thus, $t \bu \in B$.
+
+$$
+\langle \bx , \bu \rangle \leq \alpha 
+\text{ and }
+\langle \bx , \bv \rangle \leq \beta 
+\implies \langle \bx , \bu + \bv \rangle \leq \alpha + \beta \Forall \bx \in C.
+$$
+Thus, the set of inner products with $\bu + \bv$ is bounded
+from above by $\alpha + \beta$. Thus, $\bu + \bv \in B$.
+
+Thus, $B$ is closed under nonnegative scalar multiplication
+and vector addition. $B$ is a convex cone.
+```
+
+
+
+## Properties of Convex Cones
+
+We consider operations on convex cones which
+generate convex cones.
+
+```{prf:property} Closure under set intersection
+:label: res-cvx-convex-cone-closure-intersection
+
+If $K_1$ and $K_2$ are convex cones, then 
+$K = K_1 \cap K_2$ is convex cone.
+```
+
+```{prf:proof}
+We show that $K$ is closed under nonnegative scalar multiplication.
+
+1. Let $\bx \in K$ and $t \geq 0$. 
+1. Then, $\bx \in K_1$ and $\bx \in K_2$.
+1. Hence, $t \bx \in K_1$ and $t \bx \in K_2$ since
+   both are closed under nonnegative scalar multiplication.
+1. Thus, $t\bx \in K$.
+1. Hence, $K$ is closed under nonnegative scalar multiplication.  
+
+We show that $K$ is closed under vector addition too.
+
+1. Let $\bx, \by \in K$.
+1. Then, $\bx, \by \in K_1$ and $\bx, \by \in K_2$.
+1. But then, $\bx + \by \in K_1$ and $\bx + \by \in K_2$
+   since both are closed under vector addition.
+1. Thus, $\bx + \by \in K$.
+1. Hence, $K$ is closed under vector addition.
+
+Thus, $K$ is closed under nonnegative scalar multiplication
+and vector addition. $K$ is a convex cone.
+```
+
+```{prf:property} Closure under set addition
+:label: res-cvx-convex-cone-closure-addition
+
+If $K_1$ and $K_2$ are convex cones, then 
+$K = K_1 + K_2$ is convex cone.
+```
+
+```{prf:proof}
+We show that $K$ is closed under nonnegative scalar multiplication.
+
+1. Let $\bx \in K$ and $t \geq 0$.
+1. Then, $\bx = \bx_1 + \bx_2$ where $\bx_1 \in K_1$, and $\bx_2 \in K_2$.
+1. Then, $t \bx_1 \in K_1$ and $t \bx_2 \in K_2$ since $K_1$ and $K_2$ are cone.
+1. Then, $ t \bx = t(\bx_1 + \bx_2) = t \bx_1 + t \bx_2 \in K$.
+1. Thus, $K$ is closed under nonnegative scalar multiplication.
+
+We show that $K$ is closed under vector addition too.
+
+1. Let $\bx, \by \in K$. 
+1. Then, $\bx = \bx_1 + \bx_2$ with some $\bx_1 \in K_1$ and $\bx_2 \in K_2$.
+1. And, $\by = \by_1 + \by_2$ with some $\by_1 \in K_1$ and $\by_2 \in K_2$.
+1. Then, $\bx + \by = (\bx_1 + \by_1) + (\bx_2 + \by_2)$.
+1. Now, $\bx_1 + \by_1 \in K_1$ and $\bx_2 + \by_2 \in K_2$ since
+   $K_1$ and $K_2$ are closed under addition (they are convex cones).
+1. Thus, $\bx + \by \in K$.
+1. Thus, $K$ is closed under vector addition.
+
+
+Thus, $K$ is closed under nonnegative scalar multiplication
+and vector addition. $K$ is a convex cone.
+
+
+We mention that by {prf:ref}`res-cvx-convexity-set-addition`, $K$ is convex.
+Hence, we just needed to show that $K$ is a cone too.
+```
+
+```{prf:property} Positive scalar multiplication
+:label: res-cvx-convex-cone-scaling-same
+
+Let $K$ be a convex cone. Then
+
+$$
+t K = K \Forall t > 0.
+$$
+```
+```{prf:proof}
+We proceed as follows:
+
+
+1. Let $t > 0$.
+1. Let $\bx \in t K$. 
+1. Then, $\frac{1}{t} \bx \in K$. 
+1. But then, $t \frac{1}{t}\bx = \bx \in K$ too 
+   since $K$ is closed under nonnegative scalar multiplication.
+1. Thus, $t K \subseteq K$.
+1. Similarly, $\bx \in K$ implies $\bx \in tK$.
+1. Thus, $K \subseteq t K$.
+1. Hence, $K = t K$ for all $t > 0$.
+```
+
+Note that $0K = \{ \bzero \} \neq K$.
+
+```{prf:property} Convex hull of the union
+:label: res-cvx-cones-union-hull-sum
+
+If $K_1$ and $K_2$ are convex cones, then 
+
+$$
+K_1 + K_2 = \ConvexHull (K_1 \cup K_2).
+$$
+```
+
+```{prf:proof}
+By {prf:ref}`res-cvx-hull-union-cvx-combs`,
+
+$$
+\ConvexHull (K_1 \cup K_2) = \bigcup_{t \in [0,1]} 
+\left [ (1 - t) K_1 + t K_2 \right ].
+$$
+
+Now for $t \in (0,1)$, 
+by {prf:ref}`res-cvx-convex-cone-scaling-same`,
+$(1-t)K_1 = K_1$ and $t K_2 = K_2$.
+
+Thus, for $t \in (0,1)$:
+
+$$
+(1 - t) K_1 + t K_2 = K_1 + K_2.
+$$
+
+For, $t=0$ we are left with $K_1$ and for
+$t=1$, we are left with $K_2$.
+
+Since $\bzero \in K_1$ and $\bzero \in K_2$,
+hence  $K_1 \subseteq K_1 + K_2$ 
+and $K_2 \subseteq K_1 + K_2$.
+Thus,
+
+$$
+\ConvexHull (K_1 \cup K_2) = \bigcup_{t \in [0,1]} 
+\left [ (1 - t) K_1 + t K_2 \right ] = K_1 + K_2.
+$$
+```
+
+
+```{prf:property} Intersection as union
+:label: res-cvx-cones-intersect-union-cvx
+
+If $C_1$ and $C_2$ are convex cones, then 
+
+$$
+C_1 \cap C_2 = \bigcup_{t \in [0,1]} (t C_1 \cap (1 - t) C_2).
+$$
+```
+
+```{prf:proof}
+We first show that for every $t \in (0,1)$
+
+$$
+t C_1 \cap (1 - t) C_2 = C_1 \cap C_2.
+$$
+
+1. Let $\bx \in C_1 \cap C_2$.
+1. Then $\bx \in C_1$ and $\bx \in C_2$.
+1. Since $0 < t < 1$, hence due to {prf:ref}`res-cvx-convex-cone-scaling-same`,
+   $C_1 = t C_1$ and $C_2 = (1-t)C_2$.
+1. Hence $\bx \in t C_1$ and $\bx \in (1-t) C_2$.
+1. Hence $\bx \in t C_1 \cap (1 - t) C_2$.
+1. Hence $C_1 \cap C_2 \subseteq t C_1 \cap (1 - t) C_2$.
+1. Conversely, let $\bx \in t C_1 \cap (1 - t) C_2$.
+1. Then $\bx \in t C_1$ and $\bx \in (1-t) C_2$.
+1. Hence $\bx \in C_1$ and $\bx \in C_2$.
+1. Hence $\bx \in C_1 \cap C_2$.
+1. Hence $t C_1 \cap (1 - t) C_2 \subseteq C_1 \cap C_2$.
+
+If $t=0$ or $t=1$, then
+
+$$
+t C_1 \cap (1 - t) C_2 = \{ \bzero \} \subseteq C_1 \cap C_2
+$$
+since every convex cone contains the origin. Together,
+
+$$
+C_1 \cap C_2 = \bigcup_{t \in [0,1]} (t C_1 \cap (1 - t) C_2).
+$$
+```
+
+## Cone Generated by a Convex Set
+
+The direct sum vector space $\VV \oplus \RR$ has
+been described in {prf:ref}`def-cvx-real-vector-space-r-prod`.
+
+```{prf:observation} Convex sets as cross sections of cones
+:label: res-cvx-convex-cross-section-cone
+
+A convex set $C \subseteq \VV$ can be regarded as a 
+cross section of some convex cone
+$K \subseteq \VV \oplus \RR$. 
+
+Let $K$ be conic hull of points $(\bx, 1) \in \VV \oplus \RR$ such that $\bx \in C$.
+Then, 
+
+$$
+K = \{ (t \bx, t) \in \VV \oplus \RR \ST \bx \in C, t \geq 0 \}.
+$$
+
+Now consider the hyperplane in $\VV \oplus \RR$ given by:
+
+$$
+H = \{ (\by, t) \in \VV \oplus \RR \ST t = 1 \}.
+$$
+
+The intersection of $H$ with $K$ can be regarded as $C$.
+
+$$
+H \cap K = \{(t\bx, t) \in \VV \oplus \RR \ST \bx \in C, t=1\}
+= \{ (\bx, 1) \in \VV \oplus \RR \ST \bx \in C\}.
+$$
+The projection of $H \cap K$ on $\VV$ is given by $C$
+(by dropping the last coordinate).
+```
+
+
+```{prf:remark}
+:label: rem-cvx-uniqueness-generated-cone
+
+For every convex set $C \subseteq \VV$, there is
+precisely one convex cone $K \subseteq \VV \oplus \RR$ 
+generated by the set $\{(\bx, 1) \in \VV \oplus \RR \ST \bx \in C \}$
+(its conic hull).
+
+These convex cones have only $(\bzero, 0)$ in common
+with the half space $\{(\bx, t) \in \VV \oplus \RR \ST t \leq 0 \}$.
+
+We shall call this class of convex cones in $\VV \oplus \RR$
+generated by the convex sets in $\VV$ as $\CCC$.
+```
+
+An operation that is closed under the class $\CCC$ 
+corresponds to an operation on the convex sets in $\VV$;
+e.g., if $C_1$ and $C_2$ are convex sets with corresponding
+cones $K_1$ and $K_2$, then $C_1 \cap C_2$ is another
+convex set corresponding to a different convex cone $K_3$.
+It is natural to ask if there is a way to construct
+$K_3$ from $K_1$ and $K_2$ directly in $\VV \oplus \RR$.
+
+Each vector $(\bx, t) \in \VV \oplus \RR$
+can be split as a direct sum with $\bx \in \VV$ and $t \in \RR$.
+Thus, it is possible to define different kinds of 
+{prf:ref}`partial sums <res-cvx-convex-set-partial-addition>`
+on $\VV \oplus \RR$. 
+Recall that partial sums on convex sets preserve the convexity.
+It turns out that they can do more. We can define
+partial sums which are closed under the family $\CCC$ of
+convex cones in $\VV \oplus \RR$ generated by 
+the convex sets in $\VV$.
+
+We can define four types of partial sums:
+
+1. Addition in $\VV$, intersection in $\RR$.
+1. Addition in $\VV$, addition in $\RR$.
+1. Intersection in $\VV$, intersection in $\RR$.
+1. Intersection in $\VV$, addition in $\RR$.
+
+Suppose that $K_1$ and $K_2$ are convex cones 
+generated by the convex sets $C_1$ and $C_2$ respectively.
+Let $K$ be their partial sum. Let us find out
+what is the corresponding convex set $C$ in $\VV$ 
+based on the type of partial sum in $\VV \oplus \RR$.
+
+[Addition in $\VV$, intersection in $\RR$.]
+
+1. In this case, $(\bx, 1) \in K$ if and only if 
+   $\bx = \bx_1 + \bx_2$ for some $(\bx_1, 1) \in K_1$ and
+   $(\bx_2, 1) \in K_2$.
+1. Thus, the convex set corresponding to $K$ is $C = C_1 + C_2$.
+
+[Addition in $\VV$, addition in $\RR$.]
+
+1. $(\bx, 1) \in K$ if and only if $\bx = \bx_1 + \bx_2$
+   and $1 = t_1 + t_2$ with $t_1 \geq 0$ and $t_2 \geq 0$
+   for some $(\bx_1, t_1) \in K_1$ and $(\bx_2, t_2) \in K_2$.
+1. Thus, $C$ is the union of the sets $t_1 C_1 + t_2 C_2$ over
+   $t_1 \geq 0$, $t_2 \geq 0$ and $t_1 + t_2 = 1$.
+1. But, this is same as $C = \ConvexHull (C_1 \cup C_2)$
+   as per {prf:ref}`res-cvx-arb-cvx-un-cvx-comb`. 
+
+[TODO] Clarify this further. It is not obvious.
+
+
+[Intersection in $\VV$, intersection in $\RR$]
+
+1. $(\bx, 1) \in K$ if and only if $(\bx, 1) \in K_1$
+   as well as $(\bx, 1) \in K_2$.
+1. Thus, $C = C_1 \cap C_2$.
+
+
+[Intersection in $\VV$, addition in $\RR$]
+
+1. $(\bx, 1) \in K$ if and only if $(\bx, t_1) \in K_1$
+   and $(\bx, t_2) \in K_2$ for some $t_1, t_2 \geq 0$
+   with $t_1 + t_2 = 1$.
+1. In this case, we can write $C$ as:
+
+   $$
+   C &= \bigcup \{ t_1 C_1 \cap t_2 C_2 \ST t_1, t_2 \geq 0, t_1 + t_2 =1 \}\\
+   &= \bigcup \{ (1 - t) C_1 \cap t C_2 \ST t \in [0, 1]\}. 
+   $$
+
+[TODO] Clarify this further. It is not obvious.
+
+
+## Positive Semidefinite Cone
+
+````{prf:theorem} The convex cone of positive semidefinite matrices
+:label: res-cvx-psd-cone
+
+The set of positive semidefinite matrices $\SS_+^n$ is a convex cone.
+````
+
+````{prf:proof}
+Let $\bA, \bB \in \SS_+^n$ and $\theta_1, \theta_2 \geq 0$. We have to show that
+$\theta_1 \bA + \theta_2 \bB \in \SS_+^n$.
+
+$$
+\bA \in \SS_+^n \implies \bv^T \bA \bv \geq 0 \Forall \bv \in \RR^n.
+$$
+
+$$
+\bB \in \SS_+^n \implies \bv^T \bB \bv \geq 0 \Forall \bv \in \RR^n.
+$$
+
+Now
+
+$$
+\bv^T (\theta_1 \bA + \theta_2 \bB) \bv 
+= \theta_1 \bv^T \bA \bv + \theta_2 \bv^T \bB \bv \geq 0 
+\Forall \bv \in \RR^n.
+$$
+
+Hence $\theta_1 \bA + \theta_2 \bB \in \SS_+^n$.
+````
+
+## Linear System with Nonnegativity Constraints
 
 Consider the system
 
@@ -584,6 +1362,8 @@ of the columns of $\bA$.
 
 We can now see that $P$ is nonempty if $\bb \in Q$. 
 
+```{index} Basic feasible solution
+```
 ```{prf:definition} Basic feasible solution
 :label: def-cvx-basic-feasible-solution
 
@@ -730,999 +1510,4 @@ For the converse, assume that $\bv$ is an extreme point of $P$.
 1. Thus, $\bv$ must be a basic feasible solution.
 ```
 
-
-## Pointed Cones
-
-```{prf:definition} Pointed cone
-:label: def-pointed-cone
-
-A cone $C \subset \VV$ is called pointed if 
-$\bx \in C$ and $-\bx \in C$ implies $\bx = \bzero$. 
-```
-In other words, a pointed cone, doesn't contain a line.
-
-```{prf:example} The nonnegative orthant is a pointed convex cone
-:label: ex-cone-nng-orthant-pointed
-
-Recall from {prf:ref}`def-convex-nonnegative-orthant`
-that the nonnegative orthant is defined as:
-
-$$
-\RR_+^n = \{ \bx \in \RR^n \ST x_i \geq 0, \Forall 1 \leq i \leq n \}.
-$$
-In other words, for $\bx \in \RR^n_+$, every component is non-negative.
-
-Let $\bx, \by \in \RR^n_+$. Let $\alpha, \beta \geq 0$ and consider their 
-conic combination
-
-$$
-\bz = \alpha \bx + \beta \by.
-$$
-
-It is obvious that all components of $\bz$ are also nonnegative. Hence
-$\bz \in \RR^n_+$. Thus, $\RR^n_+$ is closed under conic combinations.
-Hence, $\RR^n_+$ is a convex cone.
-
-Finally, $\RR^n_+$ is pointed as 
-$\bx \in \RR^n_+$ and $-\bx \in \RR^n_+$ both hold true
-only if $\bx = \bzero$.
-```
-
-## Proper Cones
-
-````{prf:definition} Proper cone
-:label: def-proper-cone
-
-A cone $K \in \VV$ is called a *proper cone* if it satisfies the following:
-
-*  $K$ is *convex*.
-*  $K$ is *closed*.
-*  $K$ is *solid*; i.e., it has a nonempty interior.
-*  $K$ is *pointed*.
-````
-
-```{prf:example} Non-empty interior
-:label: ex-cone-non-empty-interior-proper
-
-Consider the following sets in $\RR^2$:
-
-$$
-C_1 = \{ (x_1, x_2) \ST x_1 \geq 0, x_2 = 0\}
-$$
-
-$$
-C_2 = \{ (x_1, x_2) \ST x_1, x_2 \geq 0\}
-$$
-
-Both are closed convex cones. 
-$C_1$ doesn't have an interior. All points in $C_1$ are on the 
-boundary of $C_1$. 
-
-$C_2$ has a non-empty interior; e.g., the point 
-$(1,1) \in C_2$ is not on the boundary.
-```
-
-
-## Norm Cones
-
-````{prf:definition} Norm cone
-:label: def-cvx-norm-cone
-
-Let $\|  \cdot \| : \VV \to \RR$ be any norm on $\VV$.
-The *norm cone* associated with the norm $\| \cdot \|$ is given by the set
-
-$$
-C \triangleq \{ (\bx,t) \ST \| \bx \| \leq t \}
-$$
-$C$ lies in the product space $\VV \times \RR$.
-````
-
-If $\VV = \RR^n$, then a norm cone belongs to $\RR^{n+1}$.
-
- ````{prf:theorem}
- :label: res-cvx-norm-cone-is-convex
-
-A norm cone is convex. Moreover, it is a convex cone.
-````
-
-
-````{prf:example} Second order cone
-:label: ex-cvx-second-order-cone
-
-The second order cone is the norm cone for the Euclidean norm
-in the Euclidean space $\RR^n$, i.e.
-
-$$
-C  = \{(\bx,t) \ST \| \bx \|_2 \leq t \}.
-$$
-From definition, $C  \subseteq \RR^{n+1}$.
-
-This can be rewritten as
-
-$$
-C = \left \{
-\begin{bmatrix}
-\bx \\ t
-\end{bmatrix}
-\middle |
-\begin{bmatrix}
-\bx \\ t
-\end{bmatrix}^T
-\begin{bmatrix}
-I & 0 \\
-0 & -1
-\end{bmatrix}
-\begin{bmatrix}
-\bx \\ t
-\end{bmatrix}
-\leq 0 , t \geq 0
-\right \}
-$$
-````
-
-## Dual Cones
-
-```{div}
-Dual cones are defined for finite dimensional inner product spaces.
-Dual cones technically belong to the dual space $\VV^*$.
-
-Recall that the 
-{prf:ref}`dual space <def-la-dual-space>`
-$\VV^*$ of a vector space $\VV$ is the set
-of all linear functionals on $\VV$.
-For finite dimensional spaces, $\VV$ and 
-its dual $\VV^*$ are isomorphic.
-For an inner product space $\VV$ 
-every linear functional in $\VV^*$ 
-can be identified with a vector $\bv \in \VV$
-by the functional $\langle \cdot, \bv \rangle$
-({prf:ref}`res-la-ip-dual-space-isomorphism`).
-```
-
-```{prf:definition} Dual cone
-:label: def-dual-cone
-Let $\VV$ be a finite dimensional inner product space and $\VV^*$
-be its dual space.
-
-Let $C \subset \VV$. The set 
-
-$$
-C^* \triangleq \{ \by \in \VV^* \ST \langle \bx, \by \rangle \geq 0 
-    \Forall \bx \in C \}
-$$
-is called the *dual cone* of $C$ in $\VV^*$. 
-```
-
-```{div}
-In the Euclidean space $\RR^n$, the dual cone can be written as:
-
-$$
-C^* \triangleq \{ \by \in \RR^n \ST \langle \bx, \by \rangle \geq 0 
-    \Forall \bx \in C \}.
-$$
-```
-
-
-```{rubric} Geometric interpretation
-```
-
-* For a vector $\by$, the set 
-  $H_{\by, +} \{ \bx \ST \langle \bx, \by \rangle \geq 0\}$ is 
-  a {prf:ref}`halfspace <def-halfspace>` passing through origin.
-* $\by$ is the normal vector of the halfspace along 
-  (in the direction of) the halfspace.
-* If $\by$ belongs to the dual cone of $C$, then for every $\bx \in C$, we have
-  $ \langle \bx, \by \rangle \geq 0$. 
-* Thus, the set $C$ is contained in the halfspace $H_{\by, +}$.
-* In particular, if $C$ is a cone, then it will also touch the boundary of 
-  the half space $H_{\by, +}$ as $C$ contains the origin.
-
-### Properties
-
-```{prf:property}
-:label: res-cvx-dual-cone-is-cone
-
-Dual cone is a cone.
-```
-
-```{prf:proof}
-
-Let $\by \in C^*$. Then, by definition, 
-
-$$
-\langle \bx, \by \rangle \geq 0 \Forall \bx \in C.
-$$
-
-Thus, for some $\alpha \geq 0$, 
-
-$$
-\langle \bx, \alpha \by \rangle 
-= \alpha \langle \bx, \by \rangle \geq 0 \Forall \bx \in C.
-$$
-
-Thus, for every $\by \in C^*$, $\alpha \by \in C^*$ for all $\alpha \geq 0$.
-Thus, $C^*$ is a cone.
-```
-
-```{prf:property}
-:label: res-cvx-dual-cone-is-convex
-
-Dual cone is convex.
-```
-
-```{prf:proof}
-
-Let $\by_1, \by_2 \in C^*$. Let $t \in [0, 1]$ and
-
-$$
-\by = t \by_1 + (1 - t) \by_2.
-$$
-
-Then for an arbitrary $\bx \in C$,
-
-$$
-\langle \bx, \by \rangle 
-= \langle \bx, t \by_1 + (1-t) \by_2 \rangle
-= t \langle \bx, \by_1 \rangle + (1-t) \langle \bx, \by_2\rangle \geq 0.
-$$
-
-Thus, $\by \in C^*$.
-Thus, $C^*$ is convex. 
-```
-
-We note that dual cone is a convex cone even if the original set $C$
-is neither convex nor a cone.
-
-```{prf:property} Containment reversal in dual cone
-:label: res-cvx-dual-cone-containment
-
-Let $C_1$ and $C_2$ be two subsets of $\VV$ and let 
-$C_1^*$ and $C_2^*$ be their corresponding dual cones.
-Then,
-
-$$
-C_1 \subseteq C_2 \implies C_2^* \subseteq C_1^*.
-$$
-```
-The dual cone of the subset contains the dual cone of the superset. 
-
-```{prf:proof}
-Let $\by \in C_2^*$. Then 
-
-$$
-
-\langle \bx , \by \rangle \Forall \bx \in C_2 \implies 
-\langle \bx , \by \rangle \Forall \bx \in C_1 \implies
-\by \in C_1^*.
-$$ 
-
-Thus, $C_2^* \subseteq C_1^*$.
-```
-
-```{prf:property} Interior of dual cone
-:label: res-cvx-dual-cone-interior
-
-The interior of the dual cone $C^*$ is given by
-
-$$
-\interior C^* = \{ \by \in \VV^* \ST \langle \bx , \by \rangle > 0 
-    \Forall \bx \in C \}.
-$$
-```
-
-```{prf:proof}
-Let 
-
-$$
-A = \{ \by \ST \langle \bx , \by \rangle > 0 \Forall \bx \in C \}.
-$$
-
-Let $\by \in A$. By definition $\by \in C^*$. i.e., $A \subseteq C^*$.
-
-Since $\langle \bx , \by \rangle > 0$ for every $\bx \in C$, 
-hence $\langle \bx, \by +\bu  \rangle > 0$ for every $\bx \in C$ 
-and every sufficiently small $\bu$. Hence, $\by \in \interior C^*$.
-We have shown that $A \subseteq \interior C^*$.
-
-Now, let $\by \notin A$ but $\by \in C^*$.
-Then, $\langle \bx, \by \rangle = 0$ for some $\bx \in C$. But then
-
-$$
-\langle \bx, \by - t\bx \rangle 
-= \langle \bx, \by \rangle - t \langle \bx, \bx \rangle < 0
-$$
-for all $t < 0$. Thus, $\by \notin \interior C^*$. 
-
-Hence, $A = \interior C^*$.
-```
-
-```{prf:property} Non-empty interior implies pointed dual cone
-:label: res-cvx-nonempty-pointed-dual-cone
-
-If $C$ has a non-empty interior, then its dual cone $C^*$ is pointed.
-```
-
-```{prf:proof}
-Let $C$ have a non-empty interior and assume that its dual cone $C^*$ 
-is not pointed. Then, there exists a non-zero $\by \in C^*$ such that
-$-\by \in C^*$ holds too.
-
-Thus, $\langle \bx, \by \rangle \geq 0$ as well as 
-$\langle \bx, -\by \rangle \geq 0$ for every $\bx \in C$,
-i.e, $\langle \bx, \by \rangle = 0$ for every $\bx \in C$.
-But this means that $C$ lies in a hyperplane $H_{\by, 0}$
-and hence has an empty interior. 
-A contradiction. 
-```
-
-
-```{prf:theorem} Dual cone of a subspace
-:label: res-cvx-subspace-dual-cone
-
-The dual cone of a subspace $V \subseteq \VV$ is its
-{prf:ref}`orthogonal complement <def-la-orthogonal-complement>` 
-$V^{\perp}$ defined as:
-
-$$
-V^{\perp} = \{ \by \ST \langle \bv, \by \rangle = 0 \Forall \bv \in V \}.
-$$
-
-More precisely, $V^*$ is isomorphic to $V^{\perp}$ as
-the dual cone is a subset of $\VV^*$. 
-```
-
-```{prf:proof}
-Let $V^*$ be the dual cone of $V$. If $\bv \in V^{\perp}$, then
-by definition, $\bv \in V^*$. Thus, $V^{\perp} \subseteq V^*$.
-
-Let us now assume that there is a vector 
-$\by \in V^*$ s.t. $\by \notin V^{\perp}$.
-
-Then, there exists $\bv \in V$ such that  $\langle \bv, \by \rangle > 0$.
-Since $V$ is a subspace, it follows that $-\bv \in V$. 
-But then  
-
-$$
-\langle -\bv, \by \rangle = - \langle \bv, \by \rangle < 0.
-$$
-
-Thus, $\by$ cannot belong to $V^*$. A contradiction.
-
-Thus, $V^* = V^{\perp}$.
-```
-
-### Self Dual Cones
-
-```{prf:definition} Self dual cone
-:label: def-self-dual-cone
-
-A cone $C$ is called self dual if $C^* = C$, i.e., it is its own dual cone.
-
-By equality, we mean that the dual cone $C^*$ is isomorphic to $C$
-since technically $C^* \subseteq \VV^*$.
-```
-
-```{prf:example} Nonnegative orthant
-:label: ex-nonnegative-orthant-self-dual
-
-The non-negative orthant $\RR^n_+$ is self dual.
-
-Let $C = \RR^n_+$. For some $\bu, \bv \in C$,  $\langle \bu, \bv \rangle \geq 0$. 
-Thus, $\RR^n_+ \subseteq C^*$.
-
-Now, for some $\bv \notin \RR^n_+$, there is at least one component which is negative.
-Without loss of generality, assume that the first component $v_1 < 0$. 
-
-Now consider the vector $\bu = [1, 0, \dots, 0] \in \RR^n_+$. 
-$\langle \bv, \bu \rangle < 0$. Thus, $\bv \notin C^*$. 
-
-Thus, $C^* = \RR^n_+$. It is self dual.
-```
-
-
-```{prf:example} Positive semidefinite cone
-:label: ex-psd-cone-self-dual
-
-The positive semi-definite cone $\SS^n_+$ is self dual.
-
-Let $C = \SS^n_+$ and $\bY \in C$. We first show that $\bY \in C^*$.
-
-Choose an arbitrary $\bX \in C$.  
-Express $\bX$ in terms of its eigenvalue 
-decomposition as 
-
-$$
-\bX = \sum \lambda_i \bq_i \bq_i^T.
-$$  
-
-Since $\bX$ is PSD, hence, $ \lambda_i \geq 0$. 
-
-Then, 
-
-$$
-\begin{aligned}
-\langle \bY, \bX \rangle 
-&= \Trace (\bX \bY) = \Trace (\bY \bX) \\
-&= \Trace \left ( \bY \sum \lambda_i \bq_i \bq_i^T \right )\\
-&= \sum \lambda_i \Trace \left (\bY \bq_i \bq_i^T \right) \\
-&= \sum \lambda_i \Trace \left(\bq_i^T \bY \bq_i \right)\\
-&= \sum \lambda_i (\bq_i^T \bY \bq_i).
-\end{aligned}
-$$
-
-But since $\bY$ is PSD, 
-hence $\bq_i^T \bY \bq_i \geq 0$. 
-Hence $\langle \bY, \bX \rangle \geq 0$.
-Thus, $\bY \in C^*$.
-
-Now, suppose $\bY \notin \SS^n_+$. 
-Then there exists a vector $\bv \in \RR^n$
-such that $\bv^T \bY \bv < 0$. 
-Consider the PSD matrix $\bV = \bv \bv^T$. 
-
-$$
-\langle \bY, \bV \rangle 
-= \Trace(\bV\bY) = \Trace (\bv \bv^T \bY) 
-= \Trace (\bv^T \bY \bv) < 0.
-$$
-
-Thus, $\bY \notin C^*$.
-
-This completes the proof that $C^* = C = \SS^n_+$,
-i.e., the positive semi-definite cone is self dual.
-```
-
-
-## Normal Cones
-
-```{prf:definition} Normal vector
-:label: def-cvx-convex-set-normal-vector
-
-Let $S$ be an arbitrary subset of $\VV$.
-A vector $\bv \in \VV^*$ is said to be *normal*
-to $S$ at a point $\ba \in S$
-if $\bv$ does not make an acute angle with
-any line segment starting from $\ba$ and ending at some $\bx \in S$;
-i.e., if
-
-$$
-\langle \bx - \ba, \bv \rangle \leq 0 \Forall \bx \in S.
-$$ 
-```
-
-```{prf:example} Normal vector
-:label: ex-cone-normal-vec-1
-
-Let $C$ be a half space given by:
-
-$$
-C  = \{ \bx \ST \langle \bx, \bb \rangle \leq s\}.
-$$
-
-Let $\ba$ be any point on the boundary hyperplane of $C$
-given by $\langle \ba, \bb \rangle = s$.
-
-Then, $\bb$ is normal to $C$ at $\ba$ since for any $\bx \in C$
-
-$$
-\langle \bx - \ba , \bb \rangle 
-= \langle \bx, \bb \rangle - \langle \ba, \bb \rangle
-\leq s - s = 0.
-$$
-Note that $\bb$ points opposite to the direction of the
-halfspace.
-```
-
-```{prf:definition} Normal cone
-:label: def-cvx-normal-cone
-
-The set of all vectors normal to a set $S$ at 
-a point $\ba \in S$, denoted by $N_S(\ba)$, is called the
-*normal cone* to $S$ at $\ba$. 
-
-$$
-N_S(\ba) \triangleq \{ \bv \in \VV^* \ST 
-   \langle \bx - \ba , \bv \rangle \leq 0 
-   \Forall \bx \in S \}.
-$$
-
-We customarily define $N_S(\ba) = \EmptySet$ for any $\ba \notin S$.
-```
-
-
-```{prf:property}
-:label: res-cvx-normal-cone-convex
-
-A normal cone is always a convex cone.
-```
-
-```{prf:proof}
-Let $S$ be a subset of $\VV$ and let $\ba \in S$.
-Let $N$ denote the set of normal vectors to $S$ at $\ba$.
-We have to show that $N$ is a convex cone;
-i.e., we have to show that $N$ contains all its conic combinations.
-
-For any $\bx \in S$:
-
-$$
-\langle \bx - \ba , \bzero \rangle = 0.
-$$
-
-Thus, $\bzero \in N$.
-
-Assume $\bu \in N$. 
-Then, 
-
-$$
-\langle \bx - \ba, \bu \rangle \leq 0 \Forall \bx \in S.
-$$
-
-But then for any $t \geq 0$,
-
-$$
-\langle \bx - \ba, t\bu \rangle 
-= t \langle \bx - \ba, \bu \rangle
-\leq 0 \Forall \bx \in S.
-$$
-Thus, $t \bu \in N$. Thus, $N$ is closed under
-nonnegative scalar multiplication.
-
-Now, let $\bu, \bv \in N$. 
-Then,
-
-$$
-\langle \bx - \ba, \bu + \bv \rangle 
-=  \langle \bx - \ba, \bu \rangle
-   + \langle \bx - \ba, \bv \rangle
-\leq 0 \Forall \bx \in S.
-$$
-since sum of two nonpositive quantities is nonpositive. 
-
-Thus, $\bu + \bv \in N$.
-Thus, $N$ is closed under vector addition.
-
-Combining these two observations, $N$ is closed
-under conic combinations. Hence, $N$ is a convex cone.
-```
-
-```{prf:property}
-:label: res-cvx-normal-cone-closed
-
-A normal cone is closed.
-
-
-Specifically, if $N_S(\ba)$ is the normal cone 
-to a set $S$ at a point $\ba \in S$,
-then:
-
-$$
-N_S(\ba) 
-= \bigcap_{\bx \in S} 
-\{ \bv \in \VV^* \ST \langle \bx - \ba , \bv \rangle \leq 0 \}.
-$$
-```
-
-```{prf:proof}
-For some fixed $\ba \in S$ and any fixed $\bx \in \VV$, define:
-
-$$
-H_{-}(\bx - \ba) = \{ \bv \in \VV^* \ST \langle \bx - \ba , \bv \rangle \leq 0 \}.
-$$
-Note that $H_{-}(\bx - \ba)$ is a closed {prf:ref}`half-space <def-halfspace>`
-passing through origin of $\VV^*$ extending opposite to the direction $\bx - \ba$.
-
-Let $\bv \in N_S(\ba)$ be a normal vector to $S$ at $\ba$.
-
-1. Then, for every $\bx \in S$, $\langle \bx - \ba, \bv \rangle \leq 0$.
-1. Thus,  for every $\bx \in S$, $\bv \in H_{-}(\bx - \ba)$.
-1. Thus, $\bv \in \bigcap_{\bx \in S} H_{-}(\bx - \ba)$.
-1. Thus, $N_S(\ba) \subseteq \bigcap_{\bx \in S} H_{-}(\bx - \ba)$.
-
-Going in the opposite direction:
-
-1. Let $\bv \in \bigcap_{\bx \in S} H_{-}(\bx - \ba)$.
-1. Then, for every $\bx \in S$, $\bv \in H_{-}(\bx - \ba)$.
-1. Thus, for every $\bx \in S$, $\langle \bx - \ba , \bv \rangle \leq 0$.
-1. Thus, $\bv$ is a normal vector to $S$ at $\ba$.
-1. Thus, $\bv \in N_S(\ba)$.
-1. Thus, $\bigcap_{\bx \in S} H_{-}(\bx - \ba) \subseteq N_S(\ba)$.
-
-Combining, we get:
-
-$$
-N_S(\ba) = \bigcap_{\bx \in S} H_{-}(\bx - \ba).
-$$
-
-Now, since $N_S(\ba)$ is an arbitrary intersection of closed
-half spaces which are individually closed sets, hence
-$N_S(\ba)$ is closed.
-
-Since each half space is convex and intersection of 
-convex sets is convex, hence, as a bonus, this proof also
-shows that $N_S(\ba)$ is convex.
-```
-
-```{prf:theorem} Normal cone of unit ball
-:label: res-cvxf-normal-cone-unit-ball
-
-$$
-N_{B[\bzero, 1]} (\bx) = \{ \by \in \VV^* \ST \| \by \|_* \leq \langle \bx, \by \rangle \}.
-$$
-```
-
-```{prf:proof}
-The unit ball at origin is given by:
-
-$$
-S = B[\bzero, 1] = \{\bx \in \VV  \ST \| \bx \| \leq 1 \}.
-$$
-
-Consider $\bx \in S$.
-Then, $\by \in N_S(\bx)$ if and only if
-
-$$
-& \langle \bz - \bx , \by \rangle \leq 0 \Forall \bz \in S\\
-& \iff \langle \bz , \by \rangle \leq \langle \bx, \by \rangle \Forall \bz \in S\\
-& \iff \underset{\| \bz \|  \leq 1}{\sup} \langle \bz , \by \rangle
-\leq \langle \bx, \by \rangle \\
-& \iff \| \by \|_* \leq \langle \bx, \by \rangle.
-$$
-
-Therefore, for any $\bx \in S$:
-
-$$
-N_S(\bx) = \{ \by \in \VV^* \ST \| \by \|_* \leq \langle \bx, \by \rangle \}.
-$$
-```
-
-## Barrier Cones
-
-```{prf:definition} Barrier vector
-:label: def-cvx-convex-set-barrier vector
-
-Let $C$ be a convex set of $\VV$. 
-A vector $\bv \in \VV^*$ is called a
-*barrier* vector to $C$ if for some $\beta \in \RR$,
-
-$$
-\langle \bx , \bv \rangle \leq \beta \Forall \bx \in C.
-$$
-In other words, the set of inner products of points in $C$
-with $\bv$ is bounded from above.
-```
-
-```{prf:definition} Barrier cone
-:label: def-cvx-convex-set-barrier-cone
-
-The set of all barrier vectors to a convex set $C$
-is called its *barrier cone*.
-```
-
-```{prf:theorem}
-:label: res-cvx-barrier-cone-convex
-
-The barrier cone of a convex set is convex.
-```
-
-```{prf:proof}
-Let $C$ be a convex set and let $B$ be its barrier cone.
-Let $\bu, \bv \in B$. Let $t \geq 0$.
-
-$$
-\langle \bx , \bzero \rangle = 0 \leq 0 \Forall \bx \in C.
-$$
-Thus, $\bzero \in B$.
-
-$$
-\langle \bx , \bu \rangle \leq \alpha
-\implies \langle \bx , t\bu \rangle \leq t\alpha \Forall \bx \in C.
-$$
-Thus, the set of inner products with $t \bu$ is bounded
-from above by $t \alpha$. Thus, $t \bu \in B$.
-
-$$
-\langle \bx , \bu \rangle \leq \alpha 
-\text{ and }
-\langle \bx , \bv \rangle \leq \beta 
-\implies \langle \bx , \bu + \bv \rangle \leq \alpha + \beta \Forall \bx \in C.
-$$
-Thus, the set of inner products with $\bu + \bv$ is bounded
-from above by $\alpha + \beta$. Thus, $\bu + \bv \in B$.
-
-Thus, $B$ is closed under nonnegative scalar multiplication
-and vector addition. $B$ is a convex cone.
-```
-
-## Operations Preserving Conic Convexity
-
-We consider operations on convex cones which
-generate convex cones.
-
-```{prf:theorem} Closure under set intersection
-:label: res-cvx-convex-cone-closure-intersection
-
-If $K_1$ and $K_2$ are convex cones, then 
-$K = K_1 \cap K_2$ is convex cone.
-```
-
-```{prf:proof}
-We show that $K$ is closed under nonnegative scalar multiplication.
-
-1. Let $\bx \in K$ and $t \geq 0$. 
-1. Then, $\bx \in K_1$ and $\bx \in K_2$.
-1. Hence, $t \bx \in K_1$ and $t \bx \in K_2$ since
-   both are closed under nonnegative scalar multiplication.
-1. Thus, $t\bx \in K$.
-1. Hence, $K$ is closed under nonnegative scalar multiplication.  
-
-We show that $K$ is closed under vector addition too.
-
-1. Let $\bx, \by \in K$.
-1. Then, $\bx, \by \in K_1$ and $\bx, \by \in K_2$.
-1. But then, $\bx + \by \in K_1$ and $\bx + \by \in K_2$
-   since both are closed under vector addition.
-1. Thus, $\bx + \by \in K$.
-1. Hence, $K$ is closed under vector addition.
-
-Thus, $K$ is closed under nonnegative scalar multiplication
-and vector addition. $K$ is a convex cone.
-```
-
-```{prf:theorem} Closure under set addition
-:label: res-cvx-convex-cone-closure-addition
-
-If $K_1$ and $K_2$ are convex cones, then 
-$K = K_1 + K_2$ is convex cone.
-```
-
-```{prf:proof}
-We show that $K$ is closed under nonnegative scalar multiplication.
-
-1. Let $\bx \in K$ and $t \geq 0$.
-1. Then, $\bx = \bx_1 + \bx_2$ where $\bx_1 \in K_1$, and $\bx_2 \in K_2$.
-1. Then, $t \bx_1 \in K_1$ and $t \bx_2 \in K_2$ since $K_1$ and $K_2$ are cone.
-1. Then, $ t \bx = t(\bx_1 + \bx_2) = t \bx_1 + t \bx_2 \in K$.
-1. Thus, $K$ is closed under nonnegative scalar multiplication.
-
-We show that $K$ is closed under vector addition too.
-
-1. Let $\bx, \by \in K$. 
-1. Then, $\bx = \bx_1 + \bx_2$ with some $\bx_1 \in K_1$ and $\bx_2 \in K_2$.
-1. And, $\by = \by_1 + \by_2$ with some $\by_1 \in K_1$ and $\by_2 \in K_2$.
-1. Then, $\bx + \by = (\bx_1 + \by_1) + (\bx_2 + \by_2)$.
-1. Now, $\bx_1 + \by_1 \in K_1$ and $\bx_2 + \by_2 \in K_2$ since
-   $K_1$ and $K_2$ are closed under addition (they are convex cones).
-1. Thus, $\bx + \by \in K$.
-1. Thus, $K$ is closed under vector addition.
-
-
-Thus, $K$ is closed under nonnegative scalar multiplication
-and vector addition. $K$ is a convex cone.
-
-
-We mention that by {prf:ref}`res-cvx-convexity-set-addition`, $K$ is convex.
-Hence, we just needed to show that $K$ is a cone too.
-```
-
-```{prf:theorem} Positive scalar multiplication
-:label: res-cvx-convex-cone-scaling-same
-
-Let $K$ be a convex cone. Then
-
-$$
-t K = K \Forall t > 0.
-$$
-```
-```{prf:proof}
-We proceed as follows:
-
-
-1. Let $t > 0$.
-1. Let $\bx \in t K$. 
-1. Then, $\frac{1}{t} \bx \in K$. 
-1. But then, $t \frac{1}{t}\bx = \bx \in K$ too 
-   since $K$ is closed under nonnegative scalar multiplication.
-1. Thus, $t K \subseteq K$.
-1. Similarly, $\bx \in K$ implies $\bx \in tK$.
-1. Thus, $K \subseteq t K$.
-1. Hence, $K = t K$ for all $t > 0$.
-```
-
-Note that $0K = \{ \bzero \} \neq K$.
-
-```{prf:theorem} Convex hull of the union
-:label: res-cvx-cones-union-hull-sum
-
-If $K_1$ and $K_2$ are convex cones, then 
-
-$$
-K_1 + K_2 = \ConvexHull (K_1 \cup K_2).
-$$
-```
-
-```{prf:proof}
-By {prf:ref}`res-cvx-hull-union-cvx-combs`,
-
-$$
-\ConvexHull (K_1 \cup K_2) = \bigcup_{t \in [0,1]} 
-\left [ (1 - t) K_1 + t K_2 \right ].
-$$
-
-Now for $t \in (0,1)$, 
-by {prf:ref}`res-cvx-convex-cone-scaling-same`,
-$(1-t)K_1 = K_1$ and $t K_2 = K_2$.
-
-Thus, for $t \in (0,1)$:
-
-$$
-(1 - t) K_1 + t K_2 = K_1 + K_2.
-$$
-
-For, $t=0$ we are left with $K_1$ and for
-$t=1$, we are left with $K_2$.
-
-Since $\bzero \in K_1$ and $\bzero \in K_2$,
-hence  $K_1 \subseteq K_1 + K_2$ 
-and $K_2 \subseteq K_1 + K_2$.
-Thus,
-
-$$
-\ConvexHull (K_1 \cup K_2) = \bigcup_{t \in [0,1]} 
-\left [ (1 - t) K_1 + t K_2 \right ] = K_1 + K_2.
-$$
-```
-
-## Cone Generated by a Convex Set
-
-The direct sum vector space $\VV \oplus \RR$ has
-been described in {prf:ref}`def-cvx-real-vector-space-r-prod`.
-
-```{prf:observation} Convex sets as cross sections of cones
-:label: res-cvx-convex-cross-section-cone
-
-A convex set $C \subseteq \VV$ can be regarded as a 
-cross section of some convex cone
-$K \subseteq \VV \oplus \RR$. 
-
-Let $K$ be conic hull of points $(\bx, 1) \in \VV \oplus \RR$ such that $\bx \in C$.
-Then, 
-
-$$
-K = \{ (t \bx, t) \in \VV \oplus \RR \ST \bx \in C, t \geq 0 \}.
-$$
-
-Now consider the hyperplane in $\VV \oplus \RR$ given by:
-
-$$
-H = \{ (\by, t) \in \VV \oplus \RR \ST t = 1 \}.
-$$
-
-The intersection of $H$ with $K$ can be regarded as $C$.
-
-$$
-H \cap K = \{(t\bx, t) \in \VV \oplus \RR \ST \bx \in C, t=1\}
-= \{ (\bx, 1) \in \VV \oplus \RR \ST \bx \in C\}.
-$$
-The projection of $H \cap K$ on $\VV$ is given by $C$
-(by dropping the last coordinate).
-```
-
-
-```{prf:remark}
-For every convex set $C \subseteq \VV$, there is
-precisely one convex cone $K \subseteq \VV \oplus \RR$ 
-generated by the set $\{(\bx, 1) \in \VV \oplus \RR \ST \bx \in C \}$
-(its conic hull).
-
-These convex cones have only $(\bzero, 0)$ in common
-with the half space $\{(\bx, t) \in \VV \oplus \RR \ST t \leq 0 \}$.
-
-We shall call this class of convex cones in $\VV \oplus \RR$
-generated by the convex sets in $\VV$ as $\CCC$.
-```
-
-An operation that is closed under the class $\CCC$ 
-corresponds to an operation on the convex sets in $\VV$;
-e.g., if $C_1$ and $C_2$ are convex sets with corresponding
-cones $K_1$ and $K_2$, then $C_1 \cap C_2$ is another
-convex set corresponding to a different convex cone $K_3$.
-It is natural to ask if there is a way to construct
-$K_3$ from $K_1$ and $K_2$ directly in $\VV \oplus \RR$.
-
-Each vector $(\bx, t) \in \VV \oplus \RR$
-can be split as a direct sum with $\bx \in \VV$ and $t \in \RR$.
-Thus, it is possible to define different kinds of 
-{prf:ref}`partial sums <res-cvx-convex-set-partial-addition>`
-on $\VV \oplus \RR$. 
-Recall that partial sums on convex sets preserve the convexity.
-It turns out that they can do more. We can define
-partial sums which are closed under the family $\CCC$ of
-convex cones in $\VV \oplus \RR$ generated by 
-the convex sets in $\VV$.
-
-We can define four types of partial sums:
-
-1. Addition in $\VV$, intersection in $\RR$.
-1. Addition in $\VV$, addition in $\RR$.
-1. Intersection in $\VV$, intersection in $\RR$.
-1. Intersection in $\VV$, addition in $\RR$.
-
-Suppose that $K_1$ and $K_2$ are convex cones 
-generated by the convex sets $C_1$ and $C_2$ respectively.
-Let $K$ be their partial sum. Let us find out
-what is the corresponding convex set $C$ in $\VV$ 
-based on the type of partial sum in $\VV \oplus \RR$.
-
-[Addition in $\VV$, intersection in $\RR$.]
-
-1. In this case, $(\bx, 1) \in K$ if and only if 
-   $\bx = \bx_1 + \bx_2$ for some $(\bx_1, 1) \in K_1$ and
-   $(\bx_2, 1) \in K_2$.
-1. Thus, the convex set corresponding to $K$ is $C = C_1 + C_2$.
-
-[Addition in $\VV$, addition in $\RR$.]
-
-1. $(\bx, 1) \in K$ if and only if $\bx = \bx_1 + \bx_2$
-   and $1 = t_1 + t_2$ with $t_1 \geq 0$ and $t_2 \geq 0$
-   for some $(\bx_1, t_1) \in K_1$ and $(\bx_2, t_2) \in K_2$.
-1. Thus, $C$ is the union of the sets $t_1 C_1 + t_2 C_2$ over
-   $t_1 \geq 0$, $t_2 \geq 0$ and $t_1 + t_2 = 1$.
-1. But, this is same as $C = \ConvexHull (C_1 \cup C_2)$
-   as per {prf:ref}`res-cvx-arb-cvx-un-cvx-comb`. 
-
-[TODO] Clarify this further. It is not obvious.
-
-
-[Intersection in $\VV$, intersection in $\RR$]
-
-1. $(\bx, 1) \in K$ if and only if $(\bx, 1) \in K_1$
-   as well as $(\bx, 1) \in K_2$.
-1. Thus, $C = C_1 \cap C_2$.
-
-
-[Intersection in $\VV$, addition in $\RR$]
-
-1. $(\bx, 1) \in K$ if and only if $(\bx, t_1) \in K_1$
-   and $(\bx, t_2) \in K_2$ for some $t_1, t_2 \geq 0$
-   with $t_1 + t_2 = 1$.
-1. In this case, we can write $C$ as:
-
-   $$
-   C &= \bigcup \{ t_1 C_1 \cap t_2 C_2 \ST t_1, t_2 \geq 0, t_1 + t_2 =1 \}\\
-   &= \bigcup \{ (1 - t) C_1 \cap t C_2 \ST t \in [0, 1]\}. 
-   $$
-
-[TODO] Clarify this further. It is not obvious.
-
-
-## Positive semi-definite cone
-
-````{prf:theorem} The convex cone of positive semidefinite matrices
-:label: res-cvx-psd-cone
-
-The set of positive semidefinite matrices $\SS_+^n$ is a convex cone.
-````
-
-````{prf:proof}
-Let $\bA, \bB \in \SS_+^n$ and $\theta_1, \theta_2 \geq 0$. We have to show that
-$\theta_1 \bA + \theta_2 \bB \in \SS_+^n$.
-
-$$
-\bA \in \SS_+^n \implies \bv^T \bA \bv \geq 0 \Forall \bv \in \RR^n.
-$$
-
-$$
-\bB \in \SS_+^n \implies \bv^T \bB \bv \geq 0 \Forall \bv \in \RR^n.
-$$
-
-Now
-
-$$
-\bv^T (\theta_1 \bA + \theta_2 \bB) \bv 
-= \theta_1 \bv^T \bA \bv + \theta_2 \bv^T \bB \bv \geq 0 
-\Forall \bv \in \RR^n.
-$$
-
-Hence $\theta_1 \bA + \theta_2 \bB \in \SS_+^n$.
-````
 

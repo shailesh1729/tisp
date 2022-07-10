@@ -517,6 +517,8 @@ f(t \bx + (1 - t)\by) \leq t f(\bx)
 ```
 ````
 
+### Strong Convexity $\implies$ Convexity
+
 Strongly convex functions are convex. In fact,
 we have a stronger result available.
 
@@ -577,6 +579,7 @@ if and only if $g$ is convex.
    which is nothing but the $\sigma$-strong convexity condition of $f$.
 ```
 
+### Quadratic Functions
 
 ```{prf:theorem} Strong convexity of quadratic functions
 :label: res-cvxf-quadratic-strong-convex
@@ -611,6 +614,69 @@ is convex.
 1. This is equivalent to $\sigma \leq \lambda_{\min}(\bA)$.
 ```
 
+### Coerciveness
+
+```{prf:theorem} Strong convexity and coerciveness
+:label: res-cvx-strong-convexity-coerciveness
+
+Assume that the ambient space $\VV$ is
+{prf:ref}`Euclidean <def-la-gen-euclidean-space>`.
+Assume that $f: \VV \to \RERL$ is a Fréchet-differentiable function.
+If $f$ is $\sigma$-strongly convex,
+then it is coercive.
+```
+
+```{prf:proof}
+
+We proceed as follows.
+
+1. Define 
+
+   $$
+   g(\bx) = f(\bx) - \frac{\sigma}{2} \| \bx \|^2.
+   $$
+1. By {prf:ref}`res-cvx-strong-convexity-convexity`, $g$ is convex.
+1. Since $f$ is differentiable, hence $g$ is also differentiable.
+1. Specifically, $\nabla g(\bx) = \nabla f(\bx) - \sigma \bx$.
+1. Fix some $\bx \in \interior \dom f$.
+1. Then $\partial g(\bx) = \{ \nabla g(\bx) \}$.
+1. By subgradient inequality, for any $\by \in \VV$,
+
+   $$
+   g(\by) \geq g(\bx) + \langle \by - \bx, \nabla g(\bx) \rangle.
+   $$
+1. Expanding $g$ and $\nabla g$:
+
+   $$
+   f(\by) - \frac{\sigma}{2} \| \by \|^2 \geq 
+   f(\bx) - \frac{\sigma}{2} \| \bx \|^2 + 
+   \langle \by - \bx, \nabla f(\bx) - \sigma \bx \rangle.
+   $$
+1. Let $\bv = f(\bx) - \sigma \bx$.
+1. Rearranging terms
+
+   $$
+   f(\by) \geq  \frac{\sigma}{2} \| \by \|^2  + \langle \by, \bv \rangle
+   + K_{\bx}
+   $$
+   where $K_{\bx} = f(\bx) - \frac{\sigma}{2} \| \bx \|^2 - \langle \bx, \bv \rangle$.
+1. We note that the term $K_{\bx}$ depends solely on $\bx$ which is fixed.
+   Hence $K_{\bx}$ is a fixed quantity.
+1. By Cauchy-Schwarz inequality
+
+   $$
+    \langle \by, \bv \rangle \geq - \| \bv \| \| \by \|.
+   $$
+1. Hence
+
+   $$
+   f(\by) \geq  \frac{\sigma}{2} \| \by \|^2  - \| \bv \| \| \by \| + K_{\bx}.
+   $$
+1. It is easy to see that, the R.H.S. goes to $\infty$
+   as $\| \by \| \to \infty$.
+1. Hence $f$ is coercive.
+```
+
 
 ### Sum Rule
 
@@ -618,7 +684,7 @@ is convex.
 :label: res-cvxf-sum-strong-convex-convex
 
 Let $f$ be $\sigma$-strongly convex and $g$ be convex. Then 
-$f+g$ is strongly convex.
+$f+g$ is $\sigma$-strongly convex.
 ```
 
 ```{prf:proof}
@@ -972,3 +1038,443 @@ $(2) \implies (1)$, $(1) \implies (3)$, $(3) \implies (2)$.
    which is the desired result.
 ```
 
+### Minimization
+
+```{prf:theorem} Existence and uniqueness of a a minimizer of closed strongly convex function
+:label: res-cvxf-strong-convex-minimizer
+
+Let $f: \VV \to \RERL$ be a proper, closed and $\sigma$-strongly convex
+function with $\sigma > 0$. Then,
+
+1. $f$ has a unique minimizer $\ba \in \dom f$ such that
+   $f(\bx) > f(\ba)$ for every $\bx \in \dom f$ and $\bx \neq \ba$.
+1. The increase in the value of $f$ w.r.t. its minimum satisfies
+
+   $$
+   f(\bx) - f(\ba) \geq \frac{\sigma}{2} \| \bx - \ba \|^2
+   $$
+   where $\ba \in \dom f$ is the unique minimizer of $f$.
+```
+
+
+```{prf:proof}
+
+(1) Existence of the minimizer
+
+1. Since $f$ is proper and convex, hence $\dom f$ is nonempty and convex.
+1. Since $\dom f$ is nonempty and convex, hence its relative interior
+   is nonempty ({prf:ref}`res-cvx-nonempty-relint`).
+1. Pick $\by \in \relint \dom f$.
+1. By {prf:ref}`res-cvxf-proper-interior-subdiff-nonempty-bounded`, $\partial f(\by)$
+   is nonempty.
+1. Pick some $\bg \in \partial f(\by)$.
+1. Then, by property 2 of {prf:ref}`res-cvxf-strong-convexity-charac-first-order`,
+   
+   $$
+   f(\bx) \geq f(\by) + \langle \bx - \by, \bg \rangle + \frac{\sigma}{2} \| \bx - \by \|^2
+   $$
+   holds true for every $\bx \in \VV$.
+1. Let $\| \cdot \|_2 \triangleq \sqrt{\langle \cdot, \cdot \rangle}$
+   denote the Euclidean norm associated with the inner product of the
+   space $\VV$. This might be different from the endowed norm $\| \cdot \|$.
+1. Since all norms in a finite dimensional space are equivalent, 
+   hence, there exists a constant $C > 0$ such that 
+
+   $$
+   \| \bz \| \geq \sqrt{C} \| \bz \|_2
+   $$
+   for every $\bz \in \VV$.
+1. Therefore,
+
+   $$
+   f(\bx) \geq f(\by) + \langle \bx - \by, \bg \rangle + \frac{\sigma C}{2} \| \bx - \by \|_2^2
+   \Forall \bx \in \VV.
+   $$
+1. This in turn is same as
+
+   $$
+   f(\bx) \geq f(\by) - \frac{1}{2 C \sigma} \| \bg \|_2^2 
+   + \frac{C \sigma}{2} 
+   \left \| \bx - \left (\by - \frac{1}{C \sigma} \bg \right )
+   \right \|_2^2
+   \Forall \bx \in \VV.
+   $$
+1. Let $S_t$ denote the sublevel set $\{ \bx \ST f(\bx) \leq t \}$.
+1. Consider the sublevel set $S_{f(\by)}$.
+1. Let $\bx \in S_{f(\by)}$. 
+1. Then, $f(\bx) = f(\by) - r$ for some $r \geq 0$.
+1. But then
+
+   $$
+   f(\by) - r \geq f(\by) - \frac{1}{2 C \sigma} \| \bg \|_2^2 
+   + \frac{C \sigma}{2} 
+   \left \| \bx - \left (\by - \frac{1}{C \sigma} \bg \right )
+   \right \|_2^2.
+   $$
+1. This simplifies to
+
+   $$
+   r \leq \frac{1}{2 C \sigma} \| \bg \|_2^2 
+   - \frac{C \sigma}{2} 
+   \left \| \bx - \left (\by - \frac{1}{C \sigma} \bg \right )
+   \right \|_2^2.
+   $$
+1. Since $r$ must be nonnegative, hence the R.H.S. must be nonnegative
+   also. 
+1. Thus, we require that
+
+   $$
+   \frac{1}{2 C \sigma} \| \bg \|_2^2 
+   \geq \frac{C \sigma}{2} 
+   \left \| \bx - \left (\by - \frac{1}{C \sigma} \bg \right )
+   \right \|_2^2.
+   $$
+1. This simplifies to
+
+   $$
+   \left \| \bx - \left (\by - \frac{1}{C \sigma} \bg \right )
+   \right \|_2 \leq \frac{1}{C \sigma} \| \bg \|_2.
+   $$
+1. In other words, $\bx$ must belong to an $\ell_2$ closed ball given by
+
+   $$
+   B_{\| \cdot \|_2}\left [ \by - \frac{1}{C \sigma} \bg, 
+      \frac{1}{C \sigma} \| \bg \|_2 \right ].
+   $$
+1. Since this is valid for every $\bx \in S_{f(\by)}$, hence
+
+   $$
+   S_{f(\by)} \subseteq B_{\| \cdot \|_2}\left [ \by - \frac{1}{C \sigma} \bg, 
+      \frac{1}{C \sigma} \| \bg \|_2 \right ].
+   $$
+1. Since $f$ is closed, hence all its sublevel sets are closed.
+1. since $S_{f(\by)}$ is contained in a ball, hence $S_{f(\by)}$ is bounded.
+1. Thus, $S_{f(\by)}$ is closed and bounded. 
+1. Since $\VV$ is finite dimensional, hence $S_{f(\by)}$ is compact.
+1. $S_{f(\by)}$ is also nonempty since $\by \in S_{f(\by)}$.
+1. Thus, the problem of minimizing $f$ over $\dom f$ reduces
+   to the problem of minimizing $f$ over the nonempty compact set $S_{f(\by)}$.
+1. Since $f$ is closed, it is also lower semicontinuous.
+1. By {prf:ref}`res-ms-func-lsc-min-compact`, $f$ attains a minimum
+   on $S_{f(\by)}$ at some point $\ba \in S_{f(\by)}$.
+1. Thus, we have established the existence of a minimizer of $f$
+   at some $\ba \in S_{f(\by)} \subseteq \dom f$.
+
+(1) Uniqueness of the minimizer
+
+1. To show the uniqueness, for contradiction, assume that
+   $\bu$ and $\bv$ are two different minimizers of $f$
+   with $f(\bu) = f(\bv) = p^*$, the optimal value.
+1. Let $\bw = \frac{1}{2} \bu + \frac{1}{2} \bv$.
+1. We must have $f(\bw) \geq p^*$.
+1. By strong convexity of $f$,
+
+   $$
+   f(\bw) \leq \frac{1}{2} f(\bu) + \frac{1}{2} f(\bv) - 
+   \frac{\sigma}{2}\frac{1}{2}\frac{1}{2} \| \bu - \bv \|^2
+   = p^* - \frac{\sigma}{8}\| \bu - \bv \|^2.
+   $$
+1. If $\bu \neq \bv$, then $f(\bw) < p^*$; a contradiction.
+1. Hence, the minimizer must be unique.
+
+
+(2) Increase in value of $f$
+
+1. Let $\ba$ be the unique minimizer of $f$.
+1. By Fermat's optimality condition $\bzero \in \partial f(\ba)$.
+1. Since $f$ is $\sigma$-strongly convex,
+   hence by property (2) in the {prf:ref}`res-cvxf-strong-convexity-charac-first-order`,
+
+   $$
+   f(\bx) - f(\ba) \geq \langle \bx - \ba, \bzero \rangle 
+   + \frac{\sigma}{2} \| \bx - \ba \|^2
+   = \frac{\sigma}{2} \| \bx - \ba \|^2
+   $$
+   holds true for any $\bx \in \dom f$.
+```
+
+
+## Smoothness and Strong Convexity
+
+### The Conjugate Correspondence Theorem
+
+The idea of smoothness and strong convexity is connected.
+Roughly speaking, a function is strongly convex 
+if and only if its conjugate is smooth.
+
+```{prf:theorem} Conjugate correspondence theorem
+:label: res-cvxf-conjugate-correspondence
+
+Let $\sigma > 0$. Then
+
+1. If $f : \VV \to \RR$ is a $\frac{1}{\sigma}$-smooth convex function, then
+   $f^*$ is $\sigma$-strongly convex w.r.t. the dual norm $\| \cdot \|_*$.
+1. If $f: \VV \to \RERL$ is a proper, closed $\sigma$-strongly convex
+   function, then $f^* : \VV^* \to \RR$ is $\frac{1}{\sigma}$-smooth.  
+```
+
+```{prf:proof}
+(1) Smooth convex to strongly convex conjugate
+
+1. We are given that $f: \VV \to \RR$ is a $\frac{1}{\sigma}$-smooth convex function.
+1. Due to {prf:ref}`res-cvxf-conjugate-convex-closed`, $f^*$ is closed and convex.
+1. Since $f$ is proper and convex, hence due to {prf:ref}`res-cvxf-proper-func-conjugate-proper`,
+   $f^*$ is proper.
+1. Thus $f^*$ is a proper, closed and convex function.
+1. Pick any $\by_1, \by_2 \in \dom (\partial f^*)$.
+1. Let $\bv_1 \in \partial f^*(\by_1)$ and $\bv_2 \in \partial f^*(\by_2)$.
+1. Since $f$ is proper and convex, hence by conjugate subgradient theorem
+   ({prf:ref}`res-cvxf-conjugate-subgradient`)
+
+   $$
+   \by_1 \in \partial f(\bv_1) \text{ and }
+   \by_2 \in \partial f(\bv_2).
+   $$
+1. Since $f$ is smooth, hence it is differentiable.
+   Hence due to {prf:ref}`res-cvxf-subdiff-grad`,
+
+   $$
+   \by_1 = \nabla f(\bv_1) \text{ and } 
+   \by_2 = \nabla f(\bv_2).
+   $$
+1. Following characterization of smoothness ({prf:ref}`res-cvxf-smoothness-charac`),
+   by its property 4,
+
+   $$
+   \langle \bv_1 - \bv_2, \by_1 - \by_2 \rangle \geq \sigma \| \by_1 - \by_2 \|^2_*.
+   $$
+1. Since the last inequality holds for any $\by_1, \by_2 \in \dom (\partial f^*)$
+   and any $\bv_1 \in \partial f^*(\by_1), \bv_2 \in \partial f^*(\bv_2)$,
+   hence following the first order characterization of strong convexity in
+   {prf:ref}`res-cvxf-strong-convexity-charac-first-order`, 
+   $f^*$ is a $\sigma$-strongly convex function.
+
+
+(2) Strongly convex  to smooth conjugate
+
+1. We are given that $f$ is proper, closed and $\sigma$-strongly convex.
+1. Pick any $\by \in \VV^*$.
+1. The conjugate is given by
+
+   $$
+   f^*(\by) = \sup_{\bx \in \VV} \{ \langle \bx, \by \rangle - f(\by) \}.
+   $$
+1. Define $g(\bx)  = f(\bx) - \langle \bx, \by \rangle$.
+1. We can see that 
+
+   $$
+   f^*(\by) = - \inf_{\bx \in \VV} g(\bx).
+   $$
+1. Due to the sum rule ({prf:ref}`res-cvxf-sum-strong-convex-convex`), $g$
+   is $\sigma$-strongly convex.
+1. Due to {prf:ref}`res-cvxf-strong-convex-minimizer`, $g$ has 
+   a unique minimizer.
+1. Hence $f^*(\by)$ is finite.
+1. Since this is valid for any $\by \in \VV^*$, hence $\dom f^* = \VV^*$.
+1. This justifies the signature for $f^*$ as $f^* : \VV^* \to \RR$ being
+   real valued.
+1. Let's continue with any $\by$.
+1. Since $\dom f^* = \VV^*$, hence $\by \in \interior \dom f^*$.
+1. Now, by the second formulation of conjugate subgradient theorem
+   ({prf:ref}`res-cvxf-conjugate-subgradient-2`), 
+
+   $$
+   \partial f^*(\by) = \argmax_{\bx \in \VV} 
+   \{ \langle \bx, \by \rangle - f(\bx) \}.
+   $$
+1. We can see that
+
+   $$
+   \partial f^*(\by) = - \argmin_{\bx \in \VV} g(\bx).
+   $$
+1. Since $g$ has a unique minimizer, hence $\partial f^*(\by)$ is a singleton.
+1. Due to {prf:ref}`res-cvxf-subdiff-grad`, $f^*$ is differentiable
+   at $\by$.
+1. Since $\by$ is arbitrary, hence $f^*$ is differentiable over entire $\VV^*$.
+1. We now pickup two points $\by_1, \by_2 \in \VV^*$ and denote
+   $\bv_1 = \nabla f^*(\by_1), \bv_2 = \nabla f^*(\by_2)$.
+1. By conjugate subgradient theorem ({prf:ref}`res-cvxf-conjugate-subgradient`),
+   this is equivalent to $\by_1 \in \partial f(\bv_1)$ and
+   $\by_2 \in \partial f(\bv_2)$.
+1. Following the first order characterization of strong convexity in
+   {prf:ref}`res-cvxf-strong-convexity-charac-first-order`, 
+
+   $$
+   \langle \bv_1 - \bv_2, \by_1  - \by_2 \rangle \geq \sigma \| \bv_1 - \bv_2 \|^2.
+   $$
+1. In other words
+
+   $$
+   \langle \nabla f^*(\by_1) - \nabla f^*(\by_2), \by_1  - \by_2 \rangle 
+   \geq \sigma \| \nabla f^*(\by_1) - \nabla f^*(\by_2) \|^2.
+   $$
+1. By generalized Cauchy Schwartz inequality ({prf:ref}`res-la-ip-gen-cs-ineq`)
+
+   $$
+    \langle \nabla f^*(\by_1) - \nabla f^*(\by_2), \by_1  - \by_2 \rangle  \leq
+    \| \nabla f^*(\by_1) - \nabla f^*(\by_2) \| \|  \by_1  - \by_2 \|_*.
+   $$
+1. Thus the previous inequality simplifies to
+
+   $$
+   \| \nabla f^*(\by_1) - \nabla f^*(\by_2) \| \leq \frac{1}{\sigma}\|  \by_1  - \by_2 \|_*.
+   $$
+1. This establishes that $f^*$ is $\frac{1}{\sigma}$-smooth.
+```
+
+
+
+## Examples
+
+
+```{prf:example} Smoothness of $\sqrt{1 + \| \cdot \|_2^2}$
+:label: ex-cvxf-smoothness-norm-sqr-plus-1-sqrt
+
+Let $f : \RR^n \to \RR$ be given by
+
+$$
+f(\bx) = \sqrt{1 + \| \bx \|_2^2}.
+$$
+$f$ is 1-smooth w.r.t. the $\ell_2$-norm.
+
+1. Note that for any $\bx \in \RR^n$, the gradient is given by
+
+   $$
+   \nabla f(\bx) = \frac{\bx}{ \sqrt{1 + \| \bx \|_2^2}}.
+   $$
+1. The Hessian is given by
+
+   $$
+   \nabla^f (\bx)= \frac{\bI}{ \sqrt{1 + \| \bx \|_2^2}}
+   - \frac{\bx \bx^T}{ (1 + \| \bx \|_2^2)^{\frac{3}{2}}}
+   \preceq \frac{\bI}{ \sqrt{1 + \| \bx \|_2^2}} \preceq \bI.
+   $$
+1. Therefore, $\lambda_{\max}( \nabla^2 f(\bx)) \leq 1$ for every $\bx \in \RR^n$.
+1. Hence, by {prf:ref}`res-cvxf-l-smoothness-twice-diff-max-eigen-hessian`,
+   $f$ is 1-smooth w.r.t. the $\ell_2$-norm.
+```
+
+### Log-Sum-Exp
+
+```{prf:example} Smoothness of log-sum-exp
+:label: ex-cvxf-smoothness-log-sum-exp
+
+Consider the log-sum-exp function $f : \RR^n \to \RR$ given by
+
+$$
+f(\bx) = \ln \left ( \sum_{i=1}^n e^{x_i}\right ).
+$$
+$f$ is 1-smooth w.r.t. $\ell_2$ and $\ell_{\infty}$ norms.
+
+Smoothness w.r.t. $\ell_2$ norm
+
+1. The partial derivatives of $f$ are
+
+   $$
+   \frac{\partial f}{\partial x_i} (\bx)
+   = \frac{e^{x_i}}{\sum_{k=1}^n e^{x_k} }.
+   $$
+1. The second order partial derivatives are
+
+   $$
+   \frac{\partial^2 f}{\partial x_i \partial x_j} (\bx) = \begin{cases}
+   - \frac{e^{x_i} e^{x_j}}{\left (\sum_{k=1}^n e^{x_k} \right )^2},
+   & i \neq j; \\
+   - \frac{e^{x_i} e^{x_i}}{\left (\sum_{k=1}^n e^{x_k} \right )^2}
+   +  \frac{e^{x_i}}{\sum_{k=1}^n e^{x_k}}, 
+   & i = j.  
+   \end{cases}
+   $$
+1. The Hessian can be written as
+
+   $$
+   \nabla^2 f(\bx) = \diag (\bw) - \bw \bw^T 
+   $$
+   where $w_i = \frac{e^{x_i}}{\sum_{k=1}^n e^{x_k}}$.
+1. We can now see that
+
+   $$
+   \nabla^2 f(\bx) = \diag (\bw) - \bw \bw^T  \preceq \diag (\bw) 
+   \preceq \bI.
+   $$
+1. Hence $\lambda_{\max}( \nabla^2 f(\bx)) \leq 1$ for every $\bx \in \RR^n$.
+1. Hence, by {prf:ref}`res-cvxf-l-smoothness-twice-diff-max-eigen-hessian`,
+   $f$ is 1-smooth w.r.t. the $\ell_2$-norm.
+
+
+Smoothness w.r.t. $\ell_{\infty}$ norm
+
+1. We first show that for any $\bv \in \VV$
+
+   $$
+   \bv^T \nabla^2 f(\bx) \bv \leq \| \bv \|_{\infty}^2.
+   $$
+1. To see this, we expand the L.H.S. as
+
+   $$
+   \bv^T \nabla^2 f(\bx) \bv 
+   &= \bv^T (\diag (\bw) - \bw \bw^T) \bv \\
+   &= \bv^T \diag (\bw) \bv  - (\bw^T \bv)^2 \\
+   &\leq  \bv^T \diag (\bw) \bv\\
+   &= \sum_{i=1}^n w_i v_i^2 \\
+   &\leq  \| \bv \|_{\infty}^2 \sum_{i=1}^n w_i \\
+   &=  \| \bv \|_{\infty}^2.
+   $$
+1. Since $f$ is twice differentiable over $\RR^n$, hence
+   by linear approximation theorem ({prf:ref}`res-mvc-linear-approx-theorem`),
+   for any $\bx, \by \in \RR^n$, there exists $\bz \in [\bx, \by]$
+   such that
+
+   $$
+   f(\by) - f(\bx) = \nabla f(\bx)^T (\by - \bx)
+   + \frac{1}{2} (\by - \bx)^T \nabla^2 f(\bz) (\by - \bx).
+   $$
+1. Let $\bv = \by - \bx$.
+1. Then from above,
+ 
+   $$
+   (\by - \bx)^T \nabla^2 f(\bz) (\by - \bx) \leq  \| \bv \|_{\infty}^2.
+   $$
+1. Putting this back in the approximation, we have
+
+   $$
+   f(\by) \leq  f (\bx) + \nabla f(\bx)^T (\by - \bx)
+   + \frac{1}{2}  \| \by - \bx \|_{\infty}^2.
+   $$
+1. Following characterization of smoothness ({prf:ref}`res-cvxf-smoothness-charac`),
+   $f$ is indeed 1-smooth w.r.t. the $\ell_{\infty}$-norm. 
+```
+
+
+
+
+
+### Negative Entropy 
+
+```{prf:example} Strong convexity of negative entropy over the unit simplex
+:label: ex-cvxf-neg-ent-unit-simplex-strong-convexity
+
+Let $f : \RR^n \to \RERL$ be given by:
+
+$$
+f(\bx) \triangleq \begin{cases}
+\sum_{i=1}^n x_i \ln x_i & \bx \in \Delta_n\\
+\infty & \text{ otherwise }
+\end{cases}.
+$$
+$f$ is 1-strongly convex for both $\ell_1$ and $\ell_2$ norms.
+
+1. By {prf:ref}`res-cvxf-conjugate-neg-entropy-unit-simplex`,
+   its conjugate is given by
+
+   $$
+   f^*(\by) =  \ln \left ( \sum_{j=1}^n e^{y_j}
+       \right )
+   $$
+   which is the log sum exp function.
+1. By {prf:ref}`ex-cvxf-smoothness-log-sum-exp`, the log-sum-exp
+   function is 1-smooth w.r.t. both $\ell_2$ and $\ell_{\infty}$ norms.
+1. Hence by conjugate correspondence theorem
+   {prf:ref}`res-cvxf-conjugate-correspondence`,
+   $f$ is 1-strongly convex for both $\ell_1$ and $\ell_2$ norms.
+```

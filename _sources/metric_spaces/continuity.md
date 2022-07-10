@@ -324,10 +324,132 @@ at any $x \in X$.
    For if $\rho(f(a), f(x)) \geq \epsilon$ then $f(x) \in C$ then $x \in f^{-1}(C)$.
 1. Thus, $x \in B_X(a, \delta)$ implies that $f(x) \in B_Y(f(a), \epsilon)$.
 1. Thus, for every $\epsilon > 0$, there exists $\delta > 0$ such that
-   $d(x, a) < delta$ implies $\rho(f(x), f(a)) < \epsilon$.
+   $d(x, a) < \delta$ implies $\rho(f(x), f(a)) < \epsilon$.
 1. Thus, $f$ is continuous at $a$.
 1. Since $a$ is arbitrary, hence $f$ is continuous on $X$.
 ```
+
+### Continuity Characterization for Partial Functions
+
+We can extend the characterization in {prf:ref}`res-ms-continuous-function-characterization`
+for partial functions with slight changes.
+The primary change is that on the function domain side
+we have to work with the subspace topology.
+Readers may skip this subsection on first reading.
+
+```{prf:theorem} Characterization of continuity for partial functions
+:label: res-ms-cont-partial-function-charac
+
+Let $f: (X,d) \to (Y, \rho)$ be a partial function between two metric spaces
+with $S = \dom f \subseteq X$.
+Let $(S, d)$ denote the metric subspace with the distance function
+$d$ restricted to $S \times S$.
+
+The following statements are equivalent:
+
+1. $f$ is continuous on $S$.
+1. $f^{-1}(\OOO)$ is open relative to $(S,d)$ whenever $\OOO$ is an open set of $Y$.
+1. If $\lim x_n = x$ holds in $S$, then $\lim f(x_n) = f(x)$ holds in $Y$.
+1. $f(\closure A) \subseteq \closure f(A)$ holds for every subset $A$ of $S$
+   where $\closure A$ means closure of $A$ relative to the subspace $(S,d)$.
+1. $f^{-1}(C)$ is a closed in $(S,d)$ whenever $C$ is a closed subset of $(Y, \rho)$.
+```
+
+```{prf:proof}
+
+(1) $\implies$ (2). We prove this by showing that 
+every point in  $f^{-1}(\OOO)$ is its interior point
+relative to $(S, d)$.
+
+1. Let $\OOO$ be open in $Y$. Let $a \in f^{-1}(\OOO)$.
+1. Thus, $f(a) \in \OOO$. 
+1. Since $\OOO$ is open, there exists $r > 0$ such that $B_Y(f(a), r) \subseteq \OOO$.
+1. Since $f$ is continuous at $a$, there exists $\delta > 0$ (depending on $r$)
+   such that for every $x \in S$
+
+   $$
+   d(x, a) < \delta \implies \rho(f(x), f(a)) < r.
+   $$
+1. In other words, for every $x \in B_X(a, \delta) \cap S$, 
+   $f(x) \in B_Y(f(a), r) \subseteq \OOO$.
+1. Thus, $x \in f^{-1}(\OOO)$ for every $x \in B_X(a, \delta) \cap S$.
+1. This means that $B_X(a, \delta) \cap S \subseteq f^{-1}(\OOO)$.
+1. Thus, $a$ is an interior point of $f^{-1}(\OOO)$ relative to $(S, d)$.
+1. Since every point in $f^{-1}(\OOO)$ is its interior point, 
+   hence $f^{-1}(\OOO)$ is open in $(S, d)$.
+
+
+(2) $\implies$ (3)
+
+1. Let $\lim x_n = x$ in $S$ and $r > 0$.
+1. Let $\OOO = B_Y(f(x), r)$.
+1. By (2), $f^{-1}(\OOO)$ is open in $(S, d)$.
+1. Since $x \in f^{-1}(\OOO)$, there exists some $\delta > 0$ 
+   such that $B_X(x, \delta) \cap S \subseteq f^{-1}(\OOO)$.
+1. Since $\lim x_n = x$, there exists $k \in \Nat$ such that
+   $x_n \in B_X(x, \delta) \cap S$ for all $n > k$.
+1. Thus, $x_n \in f^{-1}(\OOO)$ for all $n > k$.
+1. Thus, $f(x_n) \in \OOO$ for all $n > k$.
+1. i.e., for every $r > 0$, there exists $k \in \Nat$ such that
+   $f(x_n) \in B_Y(f(x), r)$ for all $n > k$.
+1. Thus, $\lim f(x_n) = f(x)$.
+
+
+(3) $\implies$ (4). We will show that every point in $f(\closure A)$
+belongs to $\closure f(A)$.
+
+1. Let $A$ be a subset of $S$.
+1. Let $y \in f(\closure A)$.
+1. Then, there exists $x \in \closure A$ such that $y = f(x)$.
+1. Since $x$ is a closure point of $A$, 
+   there exists a sequence $\{ x_n \}$ of $A$ that converges to $x$.
+1. Since $x_n \in A$, hence $f(x_n) \in f(A)$.
+1. Thus, $\{ f(x_n) \}$ is a sequence of $f(A)$.
+1. Since $\lim x_n = x$, hence, by (3), $\lim f(x_n) = f(x) = y$.
+1. Thus, $y$ is a closure point of $f(A)$.
+1. Thus, $y \in f(\closure A) \implies y \in \closure f(A)$.
+1. Thus, $f(\closure A) \subseteq \closure f(A)$.
+
+
+(4) $\implies$ (5)
+
+1. Let $C$ be a closed subset of $Y$.
+1. Thus, $C = \closure C$.
+1. Let $A = f^{-1}(C)$.
+1. Using (4), $f(\closure A) \subseteq \closure f(A) = \closure C = C$.
+1. Thus, $\closure A \subseteq f^{-1}(C) = A$. 
+1. Since $A \subseteq \closure A$ always, hence $A = \closure A$.
+1. Thus, $A = f^{-1}(C)$ is a closed subset of $S$.
+
+(5) $\implies$ (1). We will show that $f$ is continuous 
+at every $x \in S$.
+
+1. Let $a \in S$. Let $\epsilon > 0$.
+1. Consider the open ball $B_Y(f(a), \epsilon)$.
+1. Consider the closed set $C = Y \setminus B_Y(f(a), \epsilon)$.
+1. $C$ can be written as:
+
+   $$
+   C = \{y \in Y \ST \rho(f(a), y) \geq \epsilon \}.
+   $$
+1. Using (5), $f^{-1}(C)$ is closed in $(S, d)$.
+1. Since $f(a) \notin C$, hence $a \notin f^{-1}(C)$.
+1. Thus, $a \in S \setminus f^{-1}(C)$ which is an open subset of $(S, d)$.
+1. Thus, there exists $\delta > 0$ such that 
+   $B_X(a, \delta) \cap S \subseteq S \setminus f^{-1}(C)$.
+1. Note that $x \in S \setminus f^{-1}(C)$ implies that 
+   $\rho(f(a), f(x)) < \epsilon$. 
+   For if $\rho(f(a), f(x)) \geq \epsilon$ then $f(x) \in C$ then $x \in f^{-1}(C)$.
+1. Thus, $x \in B_X(a, \delta) \cap S$ implies that $f(x) \in B_Y(f(a), \epsilon)$.
+1. Thus, for every $\epsilon > 0$, there exists $\delta > 0$ such that
+   for every $x \in S$,
+   $d(x, a) < \delta$ implies $\rho(f(x), f(a)) < \epsilon$.
+1. Thus, $f$ is continuous at $a$.
+1. Since $a$ is arbitrary, hence $f$ is continuous on $S$.
+```
+
+
+
 
 ### Closures
 
