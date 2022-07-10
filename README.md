@@ -94,7 +94,7 @@ directory, so you can open `index.html` from there to view the local build.
 
 `GitHub-Pages` is an alternative deployment of the book.
 The alternative deployment is hosted at
-[indigits.com/cvx-opt-book](https://www.indigits.com/cvx-opt-book).
+[indigits.com/tisp](https://www.indigits.com/tisp).
 
 
 This section is relevant only for active contributors.
