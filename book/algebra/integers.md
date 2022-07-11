@@ -2,7 +2,7 @@
 
 We provide an axiomatic description of integers and natural numbers.
 We introduce the set of integers denoted by $\ZZ$ as a set which
-is equipped with two functions 
+is equipped with two functions
 
 * addition ($+ : \ZZ \times \ZZ \to \ZZ$)
 * multiplication ($- : \ZZ \times \ZZ \to \ZZ$)
@@ -10,6 +10,8 @@ is equipped with two functions
 which satisfy the axioms described below.
 
 ## Arithmetic Axioms
+
+### Closure
 
 ```{prf:axiom} Closure laws
 :label: ax-integer-closure
@@ -26,6 +28,8 @@ a \cdot b \in \ZZ.
 $$
 ```
 
+### Commutativity
+
 ```{prf:axiom} Commutative laws
 :label: ax-integer-commutativity
 
@@ -40,6 +44,8 @@ $$
 a \cdot b = b \cdot a.
 $$
 ```
+
+###  Associativity
 
 ```{prf:axiom} Associative laws
 :label: ax-integer-associativity
@@ -56,6 +62,8 @@ $$
 $$
 ```
 
+### Distributive Law
+
 ```{prf:axiom} Distributive law
 :label: ax-integer-distributive
 
@@ -70,6 +78,8 @@ $$
 (a + b) \cdot c = a \cdot c + b \cdot c.
 $$
 ```
+
+### Identity
 
 ```{prf:axiom} Additive identity
 :label: ax-integer-additive-identity
@@ -93,6 +103,8 @@ a \cdot 1 = 1 \cdot a = a
 $$
 for every $a \in \ZZ$.
 ```
+
+### Inverse
 
 ```{prf:axiom} Additive inverse
 :label: ax-integer-additive-inverse
@@ -166,6 +178,30 @@ $$
 $$
 ```
 
+We can now see that
+
+$$
+(- a) \cdot b 
+&= ((-1) \cdot a) \cdot b = (-1) \cdot (a \cdot b)\\
+&= - (a \cdot b). 
+$$
+
+Similarly
+
+$$
+a \cdot (-b) 
+&= a \cdot ((-1) \cdot b) =  a \cdot (b \cdot (-1))\\
+&= (a \cdot b) \cdot (-1) = (-1) \cdot (a \cdot b)\\
+&= - (a \cdot b). 
+$$
+
+Hence
+
+$$
+(- a) \cdot b = - (a \cdot b) = a \cdot (-b).
+$$
+
+
 ```{prf:theorem}
 :label: res-integer-mult-min-1-min-1
 
@@ -194,6 +230,19 @@ $$
 $$
 ```
 
+We can now see that
+
+$$
+(-a) \cdot (- b)
+&= (-1) \cdot (a \cdot (-b))
+= (-1) \cdot ( (-1) \cdot (a \cdot b) ) \\
+&= ((-1) \cdot (-1)) \cdot (a \cdot b)
+= 1 \cdot (a \cdot b)\\
+= a \cdot b.
+$$
+
+### Subtraction
+
 ```{prf:definition} Subtraction
 :label: def-integer-subtraction
 
@@ -204,6 +253,30 @@ $$
 a - b = a + (-b).
 $$
 ```
+We can see that
+
+$$
+& a - b = 0\\
+& \iff a + (-b) = 0 \\
+& \iff (a + (-b)) + b = 0 + b \\
+& \iff a + ((-b) + b) = b \\
+& \iff a + 0 = b \\
+& \iff a = b.
+$$
+In short $a - b = 0 \iff a = b$.
+
+Similarly we can see that
+
+$$
+a \cdot c - b \cdot c
+&= a \cdot c + (- (b \cdot c)) \\
+&= a \cdot c + ((- b) \cdot c) \\
+&= (a + (- b)) \cdot c \\
+&= (a - b) \cdot c.
+$$
+In short $a \cdot c - b \cdot c = (a - b) \cdot c$.
+Similarly, $a \cdot b - a \cdot c = a \cdot (b - c)$.
+
 
 ## Natural Numbers
 
@@ -211,12 +284,16 @@ We introduce the natural numbers,
 denoted as $\Nat$ as a subset of integers
 that satisfy the following two axioms.
 
+### Closure
+
 ```{prf:axiom} Closure axiom of natural numbers
 :label: ax-integer-closure-nat
 
 If $a, b \in \Nat$, then $a + b \in \Nat$
 and $a \cdot b \in \Nat$.
 ```
+
+### Trichotomy
 
 ```{prf:axiom} Law of trichotomy
 :label: ax-integer-trichotomy
@@ -230,7 +307,10 @@ a \in \Nat
 \text{ or } a = 0.
 $$
 ```
-The law of trichotomy implies that for every
+The law of trichotomy states that $0$ is
+not a natural number.
+
+The law of trichotomy also implies that for every
 nonzero integer, its additive inverse is
 distinct from it since either $a \in \Nat$
 or $-a \in \Nat$ but not both.
@@ -290,9 +370,37 @@ $$
 $$
 Hence $1 > 0$.
 ```
+```{prf:theorem}
+:label: res-integer-nat-gt-zero
 
+Let $a \in \Nat$. Then $a > 0$.
+```
 
+```{prf:proof}
+Since $a \in \Nat$ hence
 
+$$
+a - 0  = a + (-0) = a + 0  = a \in \Nat.
+$$
+Hence $a > 0$.
+```
+
+```{prf:theorem}
+:label: res-integer-nat-sum-gt-parts
+
+Let $a, b \in \Nat$. Let $c = a + b$.
+Then $c > a$ and $c > b$.
+```
+
+```{prf:proof}
+We have
+
+$$
+c - a =  (a + b) - a = (b + a) + (-a) = b + (a + (-a)) = b + 0 = b. 
+$$
+Hence $c - a = b \in \Nat$. Hence $c > a$.
+Similarly $c > b$.
+```
 
 ## Construction of Integers
 
@@ -368,8 +476,321 @@ of integers. Without these laws, there are several other
 sets which can satisfy the axioms {prf:ref}`ax-integer-closure`
 through {prf:ref}`ax-integer-additive-inverse` with an
 appropriate choice of addition and multiplication functions.
-But only the set of integers can satisfy the additional
-axioms of closure and trichotomy.
+```
+
+## Zero Divisor
+
+```{index} Zero divisor
+```
+```{prf:definition} Zero divisor
+:label: def-integer-zero-divisor
+
+We say that an integer $a$ is a *zero divisor*
+or *divisor of zero* if and only if $a \neq 0$
+and there exists an integer $b \neq 0$ such
+that $a \cdot b = 0$.
+```
+
+We now show that $\ZZ$ doesn't contain any zero divisors.
+
+```{prf:theorem} No zero divisors
+:label: res-integer-no-zero-divisors
+
+If $a, b \in \ZZ$ and $a \cdot b = 0$ then either
+$a = 0$ or $b = 0$ or both.
+
+In other words, the set of integers contains no zero divisors.
+```
+
+```{prf:proof}
+Suppose that $a, b \in \ZZ$ and $a \cdot b = 0$.
+For contradiction assume that $a \neq 0$ and $b \neq 0$.
+
+1. By law of trichotomy either $a \in \Nat$ or $-a \in \Nat$.
+1. Similarly either $b \in \Nat$ or $-b \in \Nat$.
+1. Thus, we have 4 possible cases.
+
+We recall that
+
+$$
+a \cdot b = (-a) \cdot (-b)
+\text{ and}
+- (a \cdot b) = (-a) \cdot b = a \cdot (-b).
+$$
+We shall consider the four possible cases and
+arrive at contradiction for each case.
+
+1. $a, b \in \Nat$. Then by closure $0 = a \cdot b \in \Nat$.
+   A contradiction.
+1. $a \in \Nat$ and $-b \in \Nat$.
+   Then $a \cdot (-b) = - (a \cdot b) = - 0 = 0 \in \Nat$.
+   A contradiction.
+1. $-a \in \Nat$ and $b \in \Nat$
+   Then $(-a) \cdot b = - (a \cdot b) = -0 = 0 \in \Nat$.
+   A contradiction.
+1. $-a \in \Nat$ and $-b \in \Nat$.
+   Then $(-a) \cdot (-b) = - (a \cdot b) = - 0 = 0 \in \Nat$.
+   A contradiction.
+
+Therefore we must have either $a = 0$ or $b = 0$
+whenever $a \cdot b = 0$.
+```
+
+
+```{note}
+The idea of zero divisors becomes important
+in the theory of groups. While the set
+of integers doesn't contain any zero divisors
+other groups do contain zero divisors.
+```
+
+### Cancellation Law
+
+```{prf:theorem} Cancellation law
+:label: res-integer-cancellation-law
+
+Let $a, b, c \in \ZZ$ such that $c \neq 0$.
+If $a \cdot c  = b \cdot c$ then $a = b$.
+```
+
+```{prf:proof}
+We note that
+
+$$
+& a \cdot c  = b \cdot c \\
+\iff & a \cdot c + (- b \cdot c) = b \cdot c + (- b \cdot c) = 0\\
+\iff & a \cdot c + ((- b) \cdot c) = 0 \\
+\iff & (a + (- b)) \cdot c = 0 \\
+\iff & (a - b) \cdot c = 0.
+$$
+Since $c \neq 0$ hence by cancellation law $a - b = 0$.
+Which means that $a = b$.
+```
+
+## Partial Order
+
+Recall from {prf:ref}`def-st-partial-order`
+that a relation, denoted by $\leq$, on a set $X$ is said to be a
+*partial order* for $X$ (or that $X$ is partially ordered by $\leq$)
+if it satisfies the following properties:
+
+*  $x \leq x$ holds for every $x \in X$ (reflexivity).
+*  If $x \leq y$ and $y \leq x$, then $x = y$ (antisymmetry).
+*  If $x \leq y$ and $y \leq z$, then $x \leq z$ (transitivity).
+
+```{prf:definition} Partial order on the set of integers
+:label: def-integer-partial-order
+
+For any $a, b \in \ZZ$, we say that $a \leq b$
+if and only if $a  < b$ or $a = b$.
+
+This relation is a *partial order* on the set of integers.
+```
+
+```{prf:proof}
+Since $a = a$ for every $a \in \ZZ$, hence reflexivity holds.
+
+
+Antisymmetry
+
+1. Let $a \leq b$ and $b \leq a$.
+1. Assume that $a \neq b$.
+1. Then, $a < b$ and $b < a$.
+1. This means $b -a \in \Nat$ and $a - b \in \Nat$.
+1. But $- (b - a) = a - b$.
+1. Hence, they both cannot be in $\Nat$.
+1. Hence we must have $a = b$.
+
+Transitivity
+
+1. Let $a \leq b$ and $b \leq c$.
+1. Then $b -a = 0$ or $b - a \in \Nat$.
+1. Similarly, $c - b = 0$ or $c - b \in \Nat$.
+1. We have $c -a  = (c - b) + (b - a)$.
+1. If $c -b = 0$ and $b - a = 0$ then $c - a = 0$.
+1. In all other cases, we have $c -a \in \Nat$.
+1. Hence $c-a =0$ or $c - a \in \Nat$.
+1. Hence $c = a$ or $a < c$.
+1. Hence $a \leq c$.
+```
+
+
+```{prf:theorem} Total order
+:label: res-integer-total-order
+
+The relation $\leq$ defines a total order on $\ZZ$.
+In other words, for every $a, b \in \ZZ$, we must have
+either $a \leq b$ or $b \leq a$.
+```
+
+```{prf:proof}
+Let $a, b \in \ZZ$. 
+
+1. If $a \leq b$ then there is nothing more to say.
+1. Suppose that $a \not\leq b$.
+1. Then neither $a = b$ nor $a < b$.
+1. Hence $b - a \notin \Nat$ and $b - a \neq 0$.
+1. Hence $-(b -a) = a - b \in \Nat$.
+1. Hence $b < a$.
+1. Hence $b \leq a$.
+1. Hence $\leq$ is a total order.
+```
+
+```{prf:theorem} Implications of order relation
+:label: res-integer-order-implications
+
+Let $a,b,c,d \in \ZZ$. Then
+
+1. If $a < b$, then $a \pm c \leq b \pm c$.
+1. If $a < b$ and $c > 0$ then $a \cdot c < b \cdot c$.
+1. If $a < b$ and $c < 0$ then $a \cdot c > b \cdot c$.
+1. If $0 < a < b$ and $0 < c < d$ then $a \cdot c  < b \cdot d$.
+1. If $a \in \ZZ$ and $a \neq 0$ then $a^2 > 0$.
+```
+
+## Well Ordering Principle
+
+There are some issues still left with the construction of
+integers. We don't know if there is any integer
+between $0$ and $1$. The nonexistence of any
+integer between $0$ and $1$ cannot be established
+based on the arithmetic and natural number axioms
+established so far. Readers can check that the
+set of rational numbers also satisfy all the
+axioms stated so far. 
+
+This requires another axiom known as the
+*well ordering principle*.
+
+```{prf:axiom} Well ordering principle
+:label: ax-integer-well-ordering-principle
+
+If $B$ is a nonempty subset of $\ZZ$ which is bounded below;
+i.e., there exists an $n \in \ZZ$ such that 
+$n \leq b$ for every $b \in B$, then $B$ has a smallest
+element; i.e., there exists $b_0 \in B$ such that
+$b_0 < b$ for every $b \in B, b \neq b_0$. 
+```
+
+As a consequence every nonempty subset of integers
+that is bounded above has a largest element.
+
+```{prf:theorem} Well ordering principle for natural numbers
+:label: res-integer-nat-well-ordering-principle
+
+Every nonempty set of natural numbers has a least element.
+```
+```{prf:proof}
+Let $A \subseteq \Nat$.
+1. Since for every $a \in A$, we have $0 < a$, hence
+   $A$ is bounded below by $0$.
+1. Hence by well ordering principle, it has a least element. 
+```
+
+```{prf:theorem}
+:label: res-integer-0-1-gap
+
+There is no integer $n$ satisfying $0 < n < 1$.
+```
+
+```{prf:proof}
+Let 
+
+$$
+B = \{ n \ST n \in \ZZ, \text{ and } 0 < n < 1 \}.
+$$
+
+1. Assume for contradiction that $B$ is not empty.
+1. $B$ is bounded below by $0$.
+1. By well ordering principle, $B$ has a least element.
+1. Let $m$ be the least element of $B$.
+1. Then we have $0 < m < 1$.
+1. Since $m$ is an integer hence $m^2 = m \cdot m$ is also an integer.
+1. Since $m < 1$, hence $m^2 < m$.
+1. Since $0 < m$, hence $0 < m^2$.
+1. We have $0 < m^2 < m < 1$.
+1. Hence $m^2 \in B$.
+1. But this contradicts the fact that $m$ is the smallest
+   element in $B$.
+1. A contradiction. Hence, $B$ must be empty.
+```
+
+### Odd and Even Numbers
+
+```{prf:definition} Odd and even numbers
+:label: def-integer-odd-even
+
+If $n \in \ZZ$, then we say that $n$ is *even*
+if and only if there exists an integer $k \in \ZZ$
+such that $n = 2 k$.
+
+We say that $n$ is *odd* if and only if there
+exists $k \in \ZZ$ such that $n = 2 k + 1$.
+```
+
+
+```{prf:theorem}
+:label: res-integer-odd-even
+
+Every integer is either even or odd.
+```
+```{prf:proof}
+For contradiction, assume that there is an integer $m$
+that is neither even nor odd.
+
+1. Define the set
+   
+   $$
+   B = \{n \in \ZZ \ST n \text{ is even or odd and } n \leq m \}.
+   $$
+1. Then $B \neq \EmptySet$ and $B$ is bounded above by $m$.
+1. Hence $B$ by well ordering principle, $B$ has a largest element.
+1. Let $p \in B$ be the largest element of $B$.
+1. Since $p$ is either even or odd and $p \leq m$ hence $p < m$.
+1. If $p$ is even then $p+1$ is odd. Since $p$ is the largest
+   element of $B$, we must have $p < m < p + 1$.
+1. If $p$ is odd then $p+1$ is even. Since $p$ is the largest
+   element of $B$, we must have $p < m < p + 1$.
+1. Thus, in both cases, we have
+
+   $$
+   p < m < p + 1.
+   $$
+1. Subtracting $p$ from this inequality, we get
+   
+   $$
+   0 < m - p < 1.
+   $$
+1. Since $m$ and $p$ are both integers. Hence $m - p$ must be
+   an integer too.
+1. But due to {prf:ref}`res-integer-0-1-gap` there is no
+   integer between $0$ and $1$. A contradiction.
+1. Therefore every integer must be either odd or even.
+```
+
+```{prf:theorem} Distinctness of odd and even integers
+:label: res-integer-odd-even-distinct
+
+There is no integer which is even or odd.
+```
+
+```{prf:proof}
+Let $a \in \ZZ$ be an integer which is both even and odd.
+
+1. Then there exist $k, l \in \ZZ$ such that
+   $a = 2 k$ and $a = 2 l + 1$.
+1. Therefore $2 k = 2 l + 1$.
+1. Hence $2 (k - l) = 1$.
+1. Since $1 > 0$ hence by law of trichotomy, $k -1 > 0$.
+1. Since $2 = 1 + 1 > 1 + 0 = 1$, hence
+
+   $$
+   1 = 2 ( k - l) > 1 (k - l ) = k - l.
+   $$
+1. Therefore, we have $0 < k - l < 1$.
+1. But due to {prf:ref}`res-integer-0-1-gap` there is no
+   integer between $0$ and $1$. A contradiction.
+1. Hence $a$ cannot be odd and even simultaneously.
 ```
 
 ## Informal Definitions
@@ -378,6 +799,8 @@ We end this section with the casual descriptions
 of the set of integers and natural numbers
 with which we are normally familiar.
 
+```{index} Integer
+```
 ```{prf:definition} Integers
 :label: def-alg-integer
 
@@ -388,6 +811,8 @@ $$
 $$
 ```
 
+```{index} Natural number
+```
 ```{prf:definition} Natural numbers
 :label: def-alg-natural-number
 
@@ -397,4 +822,5 @@ $$
 \Nat = \{1,2,3, \dots \}.
 $$
 ```
+
 
