@@ -306,7 +306,7 @@ where $M$ denotes the dimension of ambient space.
 1. However, they are not essential outputs of the subspace clustering algorithms.
 1. Some subspace clustering algorithms may not calculate them, 
    yet they are useful in the analysis of the algorithm. 
-1. See {ref}`sec:data_clustering` for a quick review of
+1. See {ref}`ch:ml:clustering` for a quick review of
    data clustering terminology.
 ````
 
