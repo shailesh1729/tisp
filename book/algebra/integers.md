@@ -539,9 +539,9 @@ whenever $a \cdot b = 0$.
 
 ```{note}
 The idea of zero divisors becomes important
-in the theory of groups. While the set
+in the theory of rings. While the set
 of integers doesn't contain any zero divisors
-other groups do contain zero divisors.
+other rings do contain zero divisors.
 ```
 
 ### Cancellation Law
