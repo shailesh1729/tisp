@@ -21,7 +21,7 @@ Once the graph has been built, the following steps are performed.
    with the degrees $\{ d_s \}_{s =1 }^S$.
 1. The unnormalized graph Laplacian is defined
    as $\LLL = D - W$.
-1. The normalized graph Laplacian is defined as [^laplacian]
+1. The normalized graph Laplacian [^laplacian] is defined as
 
     $$
     \LLL_{\text{rw}} \triangleq D^{-1} \LLL = I - D^{-1} W
@@ -122,10 +122,8 @@ of number of clusters is involved and slow but it allows us to pick the
 labels very quickly.
 ````
 
-````{div}
 
 [^laplacian]: We specifically use the random walk version of normalized
 Graph Laplacian as defined in {cite}`von2007tutorial`.
 There are other ways to define normalized graph Laplacian.
 
-````

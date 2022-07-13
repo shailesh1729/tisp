@@ -333,18 +333,6 @@ where $M$ denotes the dimension of ambient space.
 ```
 
 
-````{div}
-[^pca]: PCA can also be viewed as a statistical model. 
-When the data points are independent samples drawn from 
-a Gaussian distribution, the geometric formulation of PCA
-coincides with its statistical formulation.
-
-[^union]: We would use the
-terms arrangement and union interchangeably. 
-For more discussion see {ref}`sec:algebraic_geometry`.
-````
-
-
 (sec:sscl:linear:algebra)=
 ## Linear Algebra
 
@@ -645,3 +633,13 @@ Half-spaces
 1. In particular, the smallest principal angle is given by
    $\cos \theta = \sigma_1$, the largest singular value.
 ````
+
+[^pca]: PCA can also be viewed as a statistical model. 
+When the data points are independent samples drawn from 
+a Gaussian distribution, the geometric formulation of PCA
+coincides with its statistical formulation.
+
+[^union]: We would use the
+terms arrangement and union interchangeably. 
+For more discussion see {ref}`sec:algebraic_geometry`.
+
