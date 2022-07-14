@@ -1231,3 +1231,184 @@ Clearly, are signals for which a sufficiently sparse (and unique) representation
 doesn't exist in a given two-ortho basis. What kind of relationships may exist
 between different (insufficiently) sparse representations of such signals?
 ```
+
+(sec:ssm:dirac:dct:basis)=
+## Dirac-DCT Basis
+
+Dirac Fourier 2-ortho-basis is optimal in the sense that
+it has the smallest mutual coherence between the two bases.
+However, one problem with the Dirac Fourier basis is
+that it requires us to work with complex numbers. 
+A close second is the Dirac DCT basis which consists
+of the Dirac basis and the DCT basis both of which are
+real.
+
+````{prf:definition} Dirac DCT basis
+:label: def:ssm:dirac:dct:basis
+
+The Dirac-DCT basis is a two-ortho basis consisting of 
+the union of the Dirac and the DCT bases.
+````
+This two ortho basis is suitable for real signals since both
+Dirac and DCT are totally real bases $\in \RR^{N \times N}$. 
+
+The two ortho basis is obtained by combining the
+$N \times N$ identity matrix (Dirac basis)
+with the $N \times N$ DCT matrix for signals in $\RR^N$.
+
+Let $\Psi_{\text{DCT}, N}$ denote the DCT matrix for $\RR^N$.
+Let $\bI_N$ denote the identity matrix for $\RR^N$. 
+Then
+
+$$
+\bDDD_{\text{DCT}} = \begin{bmatrix}
+\bI_N & \Psi_{\text{DCT}, N}
+\end{bmatrix}.
+$$
+Let
+
+$$
+\Psi_{\text{DCT}, N} = \begin{bmatrix}
+\psi_1 & \psi_2 & \dots & \psi_N
+\end{bmatrix}
+$$
+The $k$-th column of $\Psi_{\text{DCT}, N}$ is given by
+
+```{math}
+:label: eq:dict:dct_matrix_kth_column
+
+\psi_k(n) 
+= \sqrt{\frac{2}{N}} \Omega_k \cos 
+\left (\frac{\pi}{2 N} (2 n - 1) (k - 1) \right ), n = 1, \dots, N,
+```
+with $\Omega_k = \frac{1}{\sqrt{2}}$ for $k=1$
+and $\Omega_k = 1$ for $2 \leq k \leq N$. 
+
+Note that for $k=1$, the entries become
+
+$$
+\sqrt{\frac{2}{N}} \frac{1}{\sqrt{2}} \cos 0 = \sqrt{\frac{1}{N}}.
+$$
+Thus, the $\ell_2$ norm of $\psi_1$ is 1.
+We can similarly verify the $\ell_2$ norm of other columns also.
+They are all one.
+
+### Example
+
+We show how a mixture signal consisting of impulses
+and sinusoids has a sparse representation in a
+Dirac DCT basis.
+
+```{figure} images/dirac_dct/dct_256.png
+---
+name: fig:ssm:dct:basis:256
+---
+A DCT basis for $N=256$
+``` 
+
+```{figure} images/dirac_dct/dirac_dct_256.png
+---
+name: fig:ssm:dirac:dct:basis:256
+---
+A Dirac DCT basis for $N=256$ and $D=512$.
+```
+
+```{figure} images/dirac_dct/impulse_cosine_combination_signal.png
+---
+name: fig:ssm:impulse:cosine:comb:256
+---
+An $N=256$ length signal consisting of a mixture of $3$ impulses
+and $2$ cosine signals.
+```
+
+```{figure} images/dirac_dct/impulse_cosine_dct_basis.png
+---
+name: fig:ssm:dct:impulse:cosine:comb:256
+---
+Representation of the same mixture signal in DCT basis.
+Notice the two large magnitude components. They correspond
+to the two sinusoidal components in the original time domain signal.
+The three impulses in the time domain signal have been distributed
+among all the frequencies.
+```
+
+```{figure} images/dirac_dct/impulse_cosine_dirac_dct.png
+---
+name: fig:ssm:dirac:dct:impulse:cosine:comb:256
+---
+A sparse representation of the same mixture signal in
+the two ortho Dirac-DCT basis.
+The three impulses from the original signal appear
+on the left half (corresponding to the Dirac basis part).
+The two cosine sinusoids appear
+on the right half (corresponding to the DCT basis part).
+Indeed the representation is not unique. But it is
+the unique sparsest possible representation. All other
+representations have far more nonzero components.
+```
+
+### Coherence
+
+````{prf:theorem}
+:label: res:ssm:dirac:dct:basis:coherence
+
+The Dirac-DCT basis has the mutual coherence of $\sqrt{\frac{2}{N}}$.
+````
+````{prf:proof}
+The mutual coherence of a two ortho basis where one basis is Dirac basis
+is given by the magnitude of the largest entry in the other basis.
+
+1. For $\Psi_{\text{DCT}, N}$, the largest value is obtained when $\Omega_k = 1$
+    and the $\cos$ term evaluates to 1. 
+1. Clearly, 
+   
+   $$
+    \mu (\bDDD_{\text{DCT}}) = \sqrt{\frac{2}{N}}.
+   $$
+````
+
+### Construction of Sparse Representation
+
+We use sparse recovery/reconstruction algorithms to
+construct a sparse representation of a given signal
+in a two ortho basis. The algorithms will be discussed
+in later chapters. We give the time domain signal
+(e.g. the mixture signal above) and the two ortho basis
+to a sparse reconstruction algorithm. The algorithm attempts
+to construct a sparsest possible representation of the
+signal in the given two ortho basis. We reconstructed
+this mixture signal in Dirac DCT basis using three different
+algorithms:
+
+- Basis Pursuit
+- Matching Pursuit
+- Orthogonal Matching Pursuit
+
+
+```{figure} images/dirac_dct/dirac_dct_l_1_solution.png
+---
+name: fig:ssm:dct:impulse:cosine:comb:bp:sol
+---
+Construction of the sparse representation of the mixture
+signal using the basis pursuit algorithm. 
+```
+
+
+```{figure} images/dirac_dct/dirac_dct_mp_solution.png
+---
+name: fig:ssm:dct:impulse:cosine:comb:mp:sol
+---
+Construction of the sparse representation of the mixture
+signal using the matching pursuit algorithm.
+```
+
+```{figure} images/dirac_dct/dirac_dct_omp_solution.png
+---
+name: fig:ssm:dct:impulse:cosine:comb:omp:sol
+---
+Construction of the sparse representation of the mixture
+signal using the orthogonal matching pursuit algorithm. 
+```
+
+
+
