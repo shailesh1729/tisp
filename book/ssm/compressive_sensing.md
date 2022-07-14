@@ -108,6 +108,16 @@ where $\bx \in \CC^N$ itself is assumed to be $K$-sparse or $K$-compressible
 and $\Phi \in \CC^{M \times N}$ is the sensing matrix.
 ````
 
+```{figure} images/comp_sense/gaussian_matrix.png
+---
+name: fig:ssm:gaussian:sensing:matrix
+---
+A Gaussian sensing matrix of shape $64 \times 256$.
+The sensing matrix maps signals from the space
+$\RR^{256}$ to the measurement space $\RR^{64}$.
+```
+
+
 (sec:ssm:sensing_matrix)=
 ## The Sensing Matrix
 
@@ -134,6 +144,19 @@ $\by$ in $\Phi$ is given by $x$.
 This view looks very similar to a dictionary and its atoms but there is a difference.
 In a dictionary, we require each atom to be unit norm.
 We don't require columns of the sensing matrix $\Phi$ to be unit norm.
+
+```{figure} images/comp_sense/guassian_sensing_matrix_histogram.png
+---
+name: fig:ssm:gaussian:sensing:matrix:norms
+---
+A histogram of the norms of the columns of a Gaussian
+sensing matrix. Although the histogram is strongly
+concentrated around $1$, yet there is significant
+variation in norm between $0.75$ and $1.3$.
+Compare this with the two ortho bases type
+dictionaries where by design all columns are unit norm.
+```
+
 
 The second view of sensing matrix $\Phi$ is in terms of its columns. We write
 
@@ -207,6 +230,67 @@ is called an *embedding* of $\bx$ in the measurement space $\RR^M$.
 A signal $\bx \in \RR^N$ is called an *explanation* of a measurement
 $\by \in \RR^M$ w.r.t. sensing matrix $\Phi$ if $\by = \Phi \bx$. 
 ````
+
+
+```{index} Compressive sensing; measurement noise
+```
+````{prf:definition} Measurement noise
+:label: def-ssm-cs-measurement-noise
+
+In real life, the measurement is not error free. It is
+affected by the presence of noise during measurement.
+This is modeled by the following equation:
+
+$$
+\by = \Phi \bx + \be
+$$
+where $\be \in \RR^M$ is the *measurement noise*.
+````
+
+````{prf:example} Compressive measurements of a synthetic sparse signal 
+:label: ex-ssm-cs-gaussian-measure-synth-k-sparse
+
+In this example we show:
+
+* A synthetic sparse signal
+* Its measurements using a Gaussian sensing matrix
+* Addition of noise during the measurement process.
+
+
+```{figure} images/comp_sense/k_sparse_biuniform_signal.png
+---
+name: fig:ssm:cs:k-sparse-biuniform
+---
+A $4$-sparse signal of length $256$. The signal
+is assumed to be sparse in itself. Thus, we
+don't require an orthonormal basis or a dictionary
+in which the signal has a sparse representation.
+We have $N=256$ and $K=4$.
+```
+
+```{figure} images/comp_sense/measurement_vector_biuniform.png
+---
+name: fig:ssm:cs:k-sparse-biuni-measurements
+---
+Measurements made by a Gaussian sensing matrix
+$\by = \Phi \bx$. The measurements are random.
+The original sparse structure is not clear by
+visual inspection.  
+```
+
+```{figure} images/comp_sense/measurement_vector_biuniform_noisy.png
+---
+name: fig:ssm:cs:k-sparse-biuni-measurements-noisy
+---
+Addition of measurement noise at an SNR of $15$dB.
+```
+
+In {prf:ref}`ex-ssm-cs-rec-noisy-synth-gaussian`,
+we show the reconstruction of the sparse signal
+from its measurements.
+````
+
+
 In the following we present examples of real life problems
 which can be modeled as compressive sensing problems.
 
@@ -598,6 +682,67 @@ We will look at three kinds of situations:
 *  Signals are not sparse. Also there is measurement noise being introduced.
    We expect recovery algorithm to minimize error and thus perform *stable* recovery
    in the presence of measurement noise.
+````
+
+
+````{prf:example} Reconstruction of the synthetic sparse signal from its noisy measurements
+:label: ex-ssm-cs-rec-noisy-synth-gaussian
+
+Continuing from {prf:ref}`ex-ssm-cs-gaussian-measure-synth-k-sparse`,
+we show the approximation reconstruction of the synthetic sparse signal
+using 3 different algorithms.
+
+* Basis pursuit ($\ell_1$ minimization) algorithm
+* Matching pursuit algorithm
+* Orthogonal matching pursuit algorithm
+
+The reconstructions are not exact due to the presence of
+measurement noise.
+
+```{figure} images/comp_sense/cs_l_1_minimization_solution.png
+---
+name: fig:ssm:cs:k-sparse-biuni-rec-bp
+---
+Reconstruction of the sparse signal using $\ell_1$
+minimization (basis pursuit). If we compare with
+the original signal in {numref}`fig:ssm:cs:k-sparse-biuniform`,
+we can see that the algorithm has been able to recover
+the large nonzero entries pretty closely. However,
+there is still some amount of reconstruction error
+at other indices outside the support of the original signal
+due to the presence of measurement noise. 
+```
+
+```{figure} images/comp_sense/cs_matching_pursuit_solution.png
+---
+name: fig:ssm:cs:k-sparse-biuni-rec-mp
+---
+Reconstruction of the sparse signal using matching pursuit.
+The support of the original signal has been identified correctly
+but matching pursuit hasn't been able to get the magnitude
+of these components correctly. Some energy seems to have
+been transferred between the nearby second and third
+nonzero components.
+This is clear from the large magnitude in the recovery
+error at the second and third components.
+The presence of measurement noise
+affects simple algorithms like matching pursuit severely.
+```
+
+```{figure} images/comp_sense/cs_orthogonal_matching_pursuit_solution.png
+---
+name: fig:ssm:cs:k-sparse-biuni-rec-omp
+---
+Reconstruction of the sparse signal using orthogonal matching pursuit.
+The support has been identified correctly and the
+magnitude of the nonzero components in the
+reconstructed signal is close to the original signal.
+The reconstruction error is primarily due to the presence
+of measurement noise. It is roughly evenly distributed between
+all the nonzero entries since orthogonal matching pursuit
+computes a least squares solution over the selected indices
+in the support.
+```
 ````
 
 ## Exact Recovery of Sparse Signals
