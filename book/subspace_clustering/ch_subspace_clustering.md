@@ -103,6 +103,16 @@ of each person form one low dimensional subspace and the face clustering
 problem reduces to clustering the collection of images to 
 multiple subspaces. 
 
+```{figure} images/yaleb/yale_faces_sample.png
+---
+name: fig-sscl-yale-faces-sample
+---
+A sample of faces from the Extended Yale Faces
+dataset B {cite}`georghiades2001few`.
+It contains 16128 images of 28 human subjects under
+9 poses and 64 illumination conditions.
+```
+
 As the examples above suggest, a typical hybrid model 
 for a mixed data set consists of multiple primitive models
 where each primitive is a (low dimensional) subspace. 
