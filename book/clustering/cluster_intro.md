@@ -131,10 +131,10 @@ been drawn.
 Mathematically, the dataset is
 a collection of $n$ data points (or objects),
 each of which is described by $d$ attributes,
-denoted by $D$ as
+denoted by $\bX$ as
 
 $$
-D = \{ \bx_1, \dots, \bx_n \}
+\bX = \{ \bx_1, \dots, \bx_n \}
 $$
 where each
 
@@ -148,7 +148,14 @@ of the $i$-th object.
 The *dimensionality* of the dataset is the
 number of attributes $d$.
 ```
+We shall often abuse the notation and say that
+$\bX$ also represents the $d \times n$ data-matrix
 
+$$
+\bX = \begin{bmatrix}
+\bx_1 & \bx_2 & \dots & \bx_n
+\end{bmatrix}.
+$$
 
 ### Distance and Similarity
 
@@ -175,7 +182,7 @@ a particular metric depends heavily on a particular application.
 
 Distances and similarities are essentially reciprocal concepts.
 In distance based clustering, we group the points
-into $K$ clusters such that the distance among points in the
+into $k$ clusters such that the distance among points in the
 same group is significantly smaller than those between clusters.
 
 In similarity based clustering, 
@@ -249,7 +256,7 @@ very weak.
 ### Distance Metrics
 
 Simplest distance measure is the standard Euclidean distance measure.
-The Euclidean distance between two points $\bx, \by \in D$
+The Euclidean distance between two points $\bx, \by \in \bX$
 is given by
 
 $$
@@ -320,16 +327,6 @@ In the 2-D/3-D visualizations of the data points, we can often
 see empty space between different clusters if the data is amenable
 to clustering.
 
-```{figure} images/intro/4-clusters-high-variance.png
-
-Careful visual inspection suggests that the data seems
-to have 4 different clusters. However, there are no
-clear boundaries between different clusters as there
-is not enough empty space around them. It is very
-difficult to decide how to place the data in the boundary
-regions into different clusters.
-```
-
 ```{prf:definition} Compact cluster
 :label: def-ml-compact-cluster
 
@@ -356,5 +353,149 @@ than other data points outside the cluster.
 The two rings in {numref}`fig-ml-cl-intro-2-rings-clusters`
 are very good examples of chained clusters.
 
-### Center
+### Hard vs Soft Clustering
 
+So far we have discussed clustering in a way where
+each object in the dataset is assigned to exactly
+one cluster. This approach is called *hard clustering*.
+
+```{figure} images/intro/4-clusters-high-variance.png
+---
+name: fig-ml-cl-4-clusters-high-var
+---
+
+Careful visual inspection suggests that the data seems
+to have 4 different clusters. However, there are no
+clear boundaries between different clusters as there
+is not enough empty space around them. It is very
+difficult to decide how to place the data in the boundary
+regions into different clusters.
+```
+
+A more nuanced approach is to allow for fuzzy or
+probabilistic membership to different clusters.
+
+1. We postulate that the dataset consists of $k$
+   cluster.
+1. We say that the $i$-th data point belongs to
+   the $j$-th cluster with a probability $u_{i j}$.
+1. We require that $u_{i j} \geq 0$ for every $i$ and $j$.
+1. We require that 
+
+   $$
+   \sum_{j=1}^k u_{i j} = 1.
+   $$
+   In other words, $\{u_{i 1}, \dots, u_{i k} \}$
+   form a probability distribution of membership of
+   the $i$-th object to different clusters.
+1. We also require that
+
+   $$
+   \sum_{i=1}^n u_{i j} > 0.
+   $$
+   In other words, every cluster has at least some
+   soft membership from some data points.
+
+This type of clustering assignment is known as
+*soft clustering*.
+
+We can put together all the membership values $u_{i j}$
+into an $n \times k$ matrix
+
+```{math}
+:label: eq-ml-cl-soft-clustering-math
+
+
+\bU = \begin{bmatrix}
+u_{1 1} & u_{1 2} & \dots & u_{1 k} \\
+u_{2 1} & u_{2 2} & \dots & u_{1 k} \\
+\vdots &  \vdots & \ddots & \vdots \\
+u_{n 1} & u_{n 2} & \dots & u_{n k}
+\end{bmatrix}.
+```
+
+We can see that hard clustering is a special case of soft
+clustering where we require that $u_{i j} \in \{ 0, 1 \}$
+for every $i$ and every $j$.
+
+The matrix $\bU$ is often known as a $k$-partition.
+In hard clutering, it is known as a *hard* $k$-partition.
+In soft clustering, it is known as a *fuzzy* $k$-partition.
+
+```{prf:definition} $k$ partition
+:label: def-ml-cl-k-partition
+
+Let $\bX$ be a dataset of $n$ points.
+Assume that $\bX$ is clustered into
+$k$ clusters given by an $n \times k$ matrix $\bU$.
+Then the matrix $\bU$ is called a $k$-*partition*
+of the dataset $\bX$.
+
+If it is a hard clustering where each object belongs
+to exactly one cluster, then $\bU$ is called a
+*hard* $k$-partition.
+If a soft clustering has been applied such that
+every data item can belong to different clusters
+in a probabilistic manner, then the 
+matrix $\bU$ is called a *fuzzy* $k$ partition of $\bX$.
+```
+
+
+Soft clustering relaxes the constraint that every object
+belongs to exactly one cluster and allows the flexibility
+of partial memberships into different clusters.
+
+Looking back at {numref}`fig-ml-cl-4-clusters-high-var`,
+we can see that a soft clustering approach may be more
+sensible for this kind of dataset where the boundaries
+between clusters are not clear. It also clarifies that
+while for many points near the centers of the clusters
+we can be fairly certain about which clusters they belong
+to, it is the points around the boundaries between the
+clusters which benefit a lot from the soft assignments.
+
+
+## Clustering Algorithms
+
+There are two general classes of clustering algorithms
+
+* Hierarchical algorithms
+* Partitioning algorithms
+
+### Hierarchical Algorithms
+
+There are two types of hierarchical algorithms.
+
+- Divisive algorithms
+- Agglomerative algorithms
+
+
+In a divisive algorithm, one proceeds from
+top to bottom, starting with one large
+cluster containing the entire data set
+and then splitting the clusters recursively
+till there there is no further need to split more.
+
+In an agglomerative algorithm, one starts with
+one cluster per data point and then keeps merging
+clusters till the time further merging of clusters
+doesn't make sense.
+
+Hierarchical algorithms typically consume
+$\bigO(n^2)$ memory and $\bigO(n^3)$ CPU time
+where $n$ is the number of data points.
+Hence, they tend to become impractical for large
+datasets unless special techniques are employed
+to mitigate the excessive resource requirements.
+
+### Partitioning Algorithms
+
+Unlike hierarchical algorithms, the partitioning
+algorithms directly split the data into a suitable
+number of clusters.
+
+Some of the popular algorithms are
+
+- $k$-means clustering
+- spectral clustering
+- expectation maximization
