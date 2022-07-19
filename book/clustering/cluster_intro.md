@@ -95,7 +95,7 @@ are being clustered.
 
 In order to mathematically analyze the data, it is
 important to map the data into some high dimensional Euclidean space
-$\RR^d$. Then individual objects/things get represented
+$\RR^m$. Then individual objects/things get represented
 as data points in the Euclidean space. The clustering
 problem then reduces to group points which are similar
 to each other. 
@@ -130,7 +130,7 @@ been drawn.
 
 Mathematically, the dataset is
 a collection of $n$ data points (or objects),
-each of which is described by $d$ attributes,
+each of which is described by $m$ attributes,
 denoted by $\bX$ as
 
 $$
@@ -139,17 +139,17 @@ $$
 where each
 
 $$
-\bx_i = (x_{i 1}, \dots, x_{i d})
+\bx_i = (x_{i 1}, \dots, x_{i m})
 $$
 for $i=1,\dots,n$ is a vector denoting the
 $i$-th object.
 $x_{i j}$ is the $j$-th scalar component (attribute)
 of the $i$-th object.
 The *dimensionality* of the dataset is the
-number of attributes $d$.
+number of attributes $m$.
 ```
 We shall often abuse the notation and say that
-$\bX$ also represents the $d \times n$ data-matrix
+$\bX$ also represents the $m \times n$ data-matrix
 
 $$
 \bX = \begin{bmatrix}
@@ -166,7 +166,7 @@ look distinct from each other. In order to
 give this idea a concrete shape, we need to
 introduce some means to measure the similarity
 between objects. Since the objects are represented
-using points in the Euclidean space $\RR^d$, hence
+using points in the Euclidean space $\RR^m$, hence
 one natural way to measure similarity is to measure
 the distance between the points. The closer the
 points are to each other, the more similar they are.
@@ -287,15 +287,13 @@ important.
   and height. As age increases, height also increases.
 - The correlation in age and height is superfluous information
   and is not really useful in the clustering objective.  
-```
 
-````{div}
 This can be improved by adopting a statistical model for data in each cluster.
 We assume that the data in $k$-th cluster is sampled
 from a probability distribution with mean $\mu_k$ and covariance
 $\Sigma_k$. An appropriate distance measure from the mean of a 
 distribution which is invariant of the
-choice of basis is the *Mahanalobis distance*:
+choice of basis is the *Mahalanobis distance*:
 
 $$
 d^2 (\bx_s, \mu_k) 
