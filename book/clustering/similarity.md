@@ -257,6 +257,14 @@ is given by
 = \sum_{j=1}^k \sum_{i \in C_j} (\bx_i - \bz_j) (\bx_i - \bz_j)^T.
 ```
 
+The *within-cluster* scatter is the trace of this matrix given by
+
+```{math}
+:label: eq-ml-cl-within-cluster-scatter
+\Trace (\bM_w(\CCC)) =
+\sum_{j=1}^k \sum_{i \in C_j} (\bx_i - \bz_j)^T (\bx_i - \bz_j) 
+```
+
 The *between-cluster* scatter matrix for the partition $\CCC$ is
 given by
 
