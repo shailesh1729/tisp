@@ -1,7 +1,7 @@
-# Combinatorics
+# Enumerative Combinatorics
 
 Main references for this section are
-{cite}`van2001course,flajolet2009analytic,morris2017combinatorics,`
+{cite}`van2001course,flajolet2009analytic,morris2017combinatorics`.
 
 ## Basic Counting
 
@@ -468,6 +468,82 @@ set is also known. This technique is known
 as the *bijective technique*. 
 
 
+We use this technique to provide a proof
+for the number of subsets of a finite set.
+
+```{prf:theorem} Number of subsets of a finite set
+:label: res-comb-finite-set-subsets-count
+
+Let $A$ be a set of $n$ elements. Then the
+number of subsets of $A$ is $2^n$.
+```
+
+````{prf:proof}
+We develop a bijection between subsets
+of $A$ and binary strings of length $n$.
+
+1. Let $A = \{a_1, \dots, a_n \}$.
+1. Let each bit of a binary string $b_1 b_2 \dots b_n$
+   correspond to an element of $A$ ($a_i \to b_i$).
+1. For each subset $X$ of $A$, the let the corresponding
+   binary string be formed as follows:
+   1. If $a_i \in X$, then $b_i = 1$.
+   1. Otherwise, $b_i = 0$.
+1. It is easy to see that this is a bijection between
+   the set of subsets of $A$ and the set of binary
+   strings of length $n$.
+1. The number of possible binary strings of length $n$
+   is $2^n$ since each bit can take exactly $2$ values.
+1. Hence, due to the equivalence of the two sets, the
+   number of subsets of $A$ is $2^n$.
+
+Following is an example of mapping between
+subsets of the set $\{ x, y, z \}$ and 
+binary strings of length $3$.
+
+```{list-table}
+:header-rows: 1
+
+* - subset
+  - $b_1$
+  - $b_2$
+  - $b_3$
+* - $\EmptySet$
+  - 0
+  - 0
+  - 0
+* - $\{ x \}$
+  - 1
+  - 0
+  - 0
+* - $\{ y \}$
+  - 0
+  - 1
+  - 0
+* - $\{ z \}$
+  - 0
+  - 0
+  - 1
+* - $\{ x, y \}$
+  - 1
+  - 1
+  - 0
+* - $\{ y, z \}$
+  - 0
+  - 1
+  - 1
+* - $\{ x, z \}$
+  - 1
+  - 0
+  - 1
+* - $\{ x, y, z \}$
+  - 1
+  - 1
+  - 1
+``` 
+````
+
+
 ## Combinatorial Proofs
 
 ```{index} Combinatorial proof
@@ -527,5 +603,226 @@ a set of $n$ objects.
 1. Choosing $r$ objects from a set of $n$ objects
    is equivalent to leaving the remaining $n-r$ objects
    from the set. 
+1. The number of ways to leave $n-r$ objects out of $n$ objects
+   is $n \choose n - r$.
+1. Hence we have the combinatorial identity
+
+   $$
+    {n \choose r} = {n \choose n - r}.
+   $$
 ```
 
+```{prf:example}
+:label: ex-comb-ncr-sum-2-pow-n
+
+For every natural number $n$, we have
+
+$$
+\sum_{r=0}^n {n \choose r} = 2^n.
+$$
+
+We already showed this result in {prf:ref}`res-comb-binomial-theorem`.
+Let us look at a combinatorial proof.
+
+1. By {prf:ref}`res-comb-finite-set-subsets-count`, 
+   the number of subsets of a set of $n$ elements is $2^n$.
+1. Another way of counting the number of subsets of $n$
+   elements is as follows.
+   1. Each subset has $r$ elements where $0 \leq r \leq n$.
+   1. The number of subsets of $r$ elements is $n \choose r$.
+   1. Hence total number of subsets is
+      $\sum_{r=0}^n {n \choose r}$.
+1. By {prf:ref}`res-comb-combinatorial-proof`, the two must
+   be equal.
+```
+
+```{prf:example}
+:label: ex-comb-n-n-least-1
+
+Consider two sets $A$ and $B$ each of which
+consist of $n$ objects. Assume that
+the sets $A$ and $B$ are disjoint.
+We wish to select $r$ objects from $A$ and $B$ together
+with the condition that at least $1$ object
+must be chosen from the set $B$.
+Following are different ways of counting.
+
+Method 1
+
+1. There are $2 n \choose r$ ways of choosing
+   $r$ objects out of the $2 n$ objects we have.
+1. There are $n \choose r$ ways in which
+   no object from the set $B$ has been selected.
+1. Hence, the number of ways to select at least
+   one object from $B$ is given by
+
+   $$
+   {2 n \choose r} - {n \choose r}.
+   $$
+
+Method 2
+1. We can consider the following $r$ different cases.
+   $i$ objects from the set $B$ have been chosen
+   where $1 \leq i \leq r$.
+1. For the $i$-th case, the total number of ways
+   to choose $i$ objects from the set $B$ and
+   the remaining $r-i$ objects from the set $A$
+   is given by
+
+   $$
+   {n \choose i}{n \choose r -i}.
+   $$
+1. Hence, the total number of ways of choosing $r$
+   objects from $A$ and $B$ with at least one object
+   from $B$ is
+
+   $$
+   \sum_{i=1}^r {n \choose i}{n \choose r -i}.
+   $$
+1. By {prf:ref}`res-comb-combinatorial-proof`, 
+   we get the combinatorial identity
+
+   $$
+   \sum_{i=1}^r {n \choose i}{n \choose r -i}
+   = {2 n \choose r} - {n \choose r}.
+   $$
+```
+
+
+```{prf:example} Recursive rule for computing $r$-combinations
+:label: ex-comb-recursive-rule-r-comb
+
+Consider the problem of choosing $r$ objects from
+a set of $n$ objects.
+By definition, the number of ways we can choose
+$r$ objects is $n \choose r$.
+Following is another way to count the same.
+
+1. Let us label the objects as $1,2, \dots, n$.
+1. We consider $n$ different cases as follows.
+1. Each subset can be identified by the largest
+   label inside it.
+1. In the $k$-th case, we consider all the subsets
+   where the largest label is $k$.
+1. Since this object is decided, the number of ways
+   of choosing the remaining $r-1$ objects from the
+   $k-1$ objects whose labels are smaller than $k$
+   is given by $k - 1 \choose r - 1$.
+1. Since any such subset must have at least $r$ objects,
+   hence the minimum possible value of $k$ is $r$.
+1. The maximum possible value of $k$ is $n$.
+1. Hence, the total number of elements is given by
+
+   $$
+   \sum_{k=r}^n {k - 1 \choose r - 1}.
+   $$
+1. We get the identity
+
+   $$
+   {n \choose r} = \sum_{k=r}^n {k - 1 \choose r - 1}.
+   $$
+1. By replacing $k-1$ with $i$, we get another version
+
+   $$
+   {n \choose r} = \sum_{i=r-1}^{n-1} {i \choose r - 1}.
+   $$
+
+This identity enables us to compute $n \choose r$
+if $i \choose r - 1$ is known for all values of
+$r-1 \leq i \leq n-1$.
+```
+
+## Counting with Repetitions
+
+We now consider a different type of problem.
+Rather than selecting objects from a given
+set of $n$ distinct objects, we assume that there
+are $n$ types of objects available and
+we are free to choose as many objects
+of a particular type as we want.
+Thus, we allow for the repetition of objects
+of the same type.
+
+```{prf:example} Two digit numbers
+:label: ex-comb-rep-1
+
+How many 2 digit numbers are possible?
+
+1. On the first digit, we can have one of the nine nonzero digits.
+1. On the second digit, we can have any of the ten digits.
+1. Hence, total number of two digit numbers is:
+
+   $$
+   9 \times 10 = 90.
+   $$
+1. Readers can verify that this includes all the numbers from
+   $10$ to $99$.
+1. We allow for repetition (e.g. $11, 22, 33$).
+```
+
+```{prf:example} Four digit pins
+:label: ex-comb-rep-pins
+
+We often use $4$ digit pins for different applications.
+In this case, $0$ may be allowed as the first digit.
+Then the number of possible $4$ digit pins is
+$10^4 = 10,000$.
+```
+
+
+### Combinations with Repetitions
+
+```{prf:theorem} $r$-combinations with repetitions
+:label: res-comb-r-comb-rep
+
+The number of ways of choosing $r$ objects from
+$n$ types of objects (with replacement or repetition)
+is
+
+$$
+n + r - 1 \choose r.
+$$
+```
+
+```{prf:proof}
+
+The $n$ categories of objects can be separated
+by $n-1$ bars like below
+
+$$
+a_1 | a_2 | \dots | a_{n-1} | a_{n}.
+$$
+
+1. We have $n$ slots (or urns) for the $n$ categories.
+1. There are $n-1$ bars between them.
+1. Suppose that $r$ objects that have been chosen
+   can be split as $r_1$ objects of the category $a_1$,
+   $r_2$ objects of categories $a_2$ and so on.
+1. Then we have
+
+   $$
+   r = r_1 + r_2 + \dots + r_n.
+   $$
+1. Note that some of the $r_i$ may be zero also.
+1. Let each object be represented by the symbol $-$ (dash).
+1. Then the arrangement may look something like
+
+   $$
+   -- | - | | --- | - | \dots | | | | ----| --
+   $$
+1. $r_1$ dashes followed by a bar, then $r_2$ dashes
+   followed by a bar and so on.
+1. Different arrangements of $r$ dashes and $n-1$
+   bars lead to different ways of selecting $r$
+   objects from $n$ categories of objects.
+1. We can think of the arrangement as a string
+   of dashes and bars.
+1. Then, the problem is equivalent to the counting
+   the number of strings consisting of $r$ dashes
+   and $n-1$ bars.
+1. The total length of such strings is $n + r - 1$.
+1. The number of strings with $r$ dashes is
+   $n + r -1 \choose r$.
+1. This is also same as the number of strings
+   with $n-1$ bars which is $n + r - 1 \choose n - 1$.
+```
