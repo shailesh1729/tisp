@@ -826,3 +826,72 @@ $$
 1. This is also same as the number of strings
    with $n-1$ bars which is $n + r - 1 \choose n - 1$.
 ```
+
+
+### Multiset Permutations
+
+```{prf:theorem} Multiset permutations
+:label: res-comb-multiset-permutation
+
+Let $A$ be a multiset of $n$ objects of $m$ types.
+Assume that $A$ contains $r_1$ objects of type $1$,
+$r_2$ objects of type $2$ and so on. Accordingly
+
+$$
+n = r_1 + r_2 + \dots + r_m.
+$$
+
+Then, the number of permutations of these $n$ objects
+is 
+
+$$
+\frac{n!}{r_1! r_2 ! \dots r_m!}.
+$$
+```
+
+```{prf:proof}
+Approach 1
+
+1. If all $n$ objects were distinct, then the number of
+   permutations will have been $n!$.
+1. Now, when $r_1$ of these objects are indistinguishable
+   from each other, then all $r_1!$ permutations of these
+   $r_1$ objects are identical.
+1. Hence, making the $r_1$ objects indistinguishable reduces
+   the number of arrangements to $\frac{n!}{r_1!}$.
+1. Similarly, making the next $r_2$ objects indistinguishable
+   from each other reduces
+   the number of arrangements to $\frac{n!}{r_1! r_2!}$.
+1. Continuing in the fashion, making the last $r_m$ objects
+   indistinguishable from each other reduces
+   the number of arrangements to $\frac{n!}{r_1! r_2 ! \dots r_m!}$.
+
+
+Approach 2
+
+1. In any arrangement of $n$ objects, there are $n$ slots.
+1. The number of ways we can choose $r_1$ slots to place
+   first $r_1$ objects of type $1$ (which are indistinguishable)
+   is given by $n \choose r_1$.
+1. The number of ways we can choose the next $r_2$ slots to
+   place next $r_2$ objects of type $2$ (which are indistinguishable)
+   is given by $n - r_1 \choose r_2$.
+1. Continuing in the same manner, the number of ways to choose
+   the last $r_m$ slots to place the last $r_m$ objects of type $m$
+   (which are indistinguishable) is given by
+   $n - r_1 - \dots - r_{m - 1} \choose r_m$.
+1. By the product rule, the total number of ways is
+
+   $$
+   {n \choose r_1}{n - r_1 \choose r_2}\dots {n - r_1 - \dots - r_{m - 1} \choose r_m}.
+   $$
+1. This expands to
+
+   $$
+   & \frac{n!}{r_1! (n-r_1)!}
+   \frac{(n - r_1)!}{r_2! (n-r_1 - r_2)!}
+   \dots   
+   \frac{(n - r_1 - \dots - r_{m-1})!}{r_m! 0!}\\
+   & = \frac{n!}{r_1! r_2 ! \dots r_m!}.
+   $$
+```
