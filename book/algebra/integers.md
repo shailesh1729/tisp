@@ -917,6 +917,51 @@ In a proof by mathematical induction:
    the *inductive hypothesis*.
 ```
 
+See {ref}`sec:alg:combinatorics` for a number of
+applications of the principle of mathematical induction.
+
+Sometimes we need a stronger form of mathematical induction.
+
+
+````{prf:theorem} Strong mathematical induction
+:label: res-int-strong-induction
+
+Let $P(n)$ be an assertion about the integer $n$.
+Assume the following:
+
+1. The assertion $P(n_0)$ is true for some
+   integer $n_0$.
+1. For any integer $k \geq n_0$, if $P(i)$ is true
+   for every $i \in \{n_0, \dots, k \}$;
+   then $P(k+1)$ must also be true.
+
+Then $P(n)$ is true for every integer $n \geq n_0$.
+````
+
+We can call the induction described in {prf:ref}`res-int-math-ind-v2`
+as the weak form of mathematical induction.
+
+```{prf:proof}
+We shall prove this result by forming an equivalent
+problem for which weak induction applies.
+
+1. Let $Q(n)$ be the assertion that
+   for every $i$ with $n_0 \leq i \leq n$, $P(n)$ is true.
+1. By hypothesis, $Q(n_0)$ is true since $P(n_0)$ is true.
+1. Assume that for some $k \geq n_0$, $Q(k)$ is true.
+1. Then by definition of $Q$, $P(i)$ is true
+   for every $i$ with $n_0 \leq i \leq k$.
+1. Then by hypothesis $P(k+1)$ is also true.
+1. But $Q(k+1)$ is true if $P(i)$ is true
+   for every $i$ with $n_0 \leq i \leq k+1$.
+1. Hence $Q(k+1)$ is also true.
+1. Thus, for every $k \geq n_0$, $Q(k) \implies Q(k+1)$. 
+1. Then by principle of induction ({prf:ref}`res-int-math-ind-v2`),
+   $Q(n)$ is true for every $n \geq n_0$.
+1. Since $Q(n)$ is true for every $n \geq n_0$, hence
+   $P(n)$ is also true for every $n \geq n_0$.
+```
+
 ## Informal Definitions
 
 We end this section with the casual descriptions

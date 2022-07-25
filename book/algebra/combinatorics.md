@@ -1,3 +1,4 @@
+(sec:alg:combinatorics)=
 # Enumerative Combinatorics
 
 Main references for this section are
@@ -1105,7 +1106,7 @@ the following types of problems:
    on the value of $t_n$.
 
 
-### Induction
+## Induction
 
 The principle of mathematical induction plays a major
 role in many important results in enumerative combinatorics.
@@ -1193,3 +1194,46 @@ using mathematical induction.
 1. We can see that the equality holds for $n+1$ also.
 1. Hence, by mathematical induction, it holds for all $n \geq 1$.
 ```
+
+
+```{prf:example}
+:label: ex-comb-ind-2-pow-n
+
+Consider the sequence $\{ t_n \}$ defined as follows:
+
+1. $t_1 = 2$.
+1. For every $n \geq 2$,
+
+   $$
+   t_n = \sum_{i=1}^{n-1} t_i.
+   $$
+
+We can see that
+
+1. $t_2 = t_1 = 2$.
+1. $t_3 = t_1 + t_2 = 2 + 2 = 4$.
+1. $t_4 = t_1 + t_2 + t_3 = 2 + 2 + 4 = 4 + 4 = 8$.
+
+We now claim that $t_n = 2^{n-1}$ for every $n \geq 2$.
+We shall use the strong induction principle
+({prf:ref}`res-int-strong-induction`).
+
+1. We are given that $t_1 = 2$.
+1. By strong induction hypothesis, let us assume that
+   $t_i = 2^{i  - 1}$ for every $i$ with $2 \leq i \leq k$.
+1. By the recursive relation, we have
+
+   $$
+   t_{k + 1} &= \sum_{i=1}^k t_i \\
+   &= t_1 + \sum_{i=2}^k t_i  \\
+   &= 2 + \sum_{i=2}^k 2^{i-1} \\
+   &= 1 + 2^0 + \sum_{i=1}^{k-1} 2^i\\
+   &= 1 + \sum_{i=0}^{k-1} 2^i\\
+   &= 1 + 2^k - 1\\
+   &= 2^k.
+   $$
+1. Thus, the equality is true for $k+1$ also.
+1. Hence, by principle of strong induction, it is true
+   for every $n \geq 2$.
+```
+
