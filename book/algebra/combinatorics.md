@@ -1093,3 +1093,103 @@ The sequence is attributed to the Italian mathematician
 Leonardo Pisano ("Fibonacci") of the 13th century.
 However, it has been known to Indian mathematicians
 as early as the 6th century.
+
+For recursive sequences, we aim to solve
+the following types of problems:
+
+1. Devise a formula for $t_n$ such that one
+   doesn't have to compute every term in the
+   recursion to compute $t_n$.
+1. If such a closed form solution is not possible,
+   then develop some upper or lower bounds
+   on the value of $t_n$.
+
+
+### Induction
+
+The principle of mathematical induction plays a major
+role in many important results in enumerative combinatorics.
+This is especially relevant for recursively defined
+sequences.
+We suggest the readers to review the definitions and results
+in {ref}`sec:int:math:induction`. 
+
+
+```{prf:example}
+:label: res-comb-fact-n-2-power-ineq
+
+We shall show that
+
+$$
+n! \geq 2^n - 2
+$$
+for every integer $n \geq 2$.
+
+1. Base case: for $n=2$ we have $2! = 2 = 2^2 - 2$.
+1. Inductive hypothesis: assume that the statement is
+   true for some $k \geq 2$; i.e.,
+
+   $$
+   k! \geq 2^k - 2.
+   $$
+1. Inductive step:
+   1. For $k+1$, we have
+
+      $$
+      (k+1)! = (k+1) k! \geq (k + 1) (2^k - 2).
+      $$
+   1. Since $k \geq 2$, hence $k+1 \geq 3$.
+   1. Hence
+      
+      $$
+      (k+1)! \geq 3 (2^k - 2)
+      = 2 \cdot 2^k + 2^k - 6
+      = 2^{k+1} + 2^k - 6.
+      $$
+   1. Since $k \geq 2$, hence $2^k \geq 4$.
+   1. Hence $2^k -6 \geq 4 - 6 = -2$.
+   1. Hence
+
+      $$
+      (k+1)! \geq 2^{k+1} + 2^k - 6
+      \geq 2^{k+1} - 2.
+      $$
+   1. Thus, the inequality is true for $k+1$ also.
+1. Hence, by mathematical induction, the inequality
+   holds for every $n \geq 2$.
+```
+
+
+```{prf:example} Sum of first $n$ natural numbers
+:label: ex-comb-sum-first-n
+
+The sum for first $n$ natural numbers is given by
+
+$$
+1 + 2 + \dots + n = \frac{n (n + 1)}{2}.
+$$
+We show this equality using a recursively
+defined sequence.
+
+1. Let $s_1 = 1$.
+1. Let $s_n = s_{n - 1} + n$ for every $n \geq 2$.
+1. We can see that $\{ s_n \}$ is a recursively
+   defined sequence where the $n$-th term represents
+   the sum of first $n$ natural numbers.
+
+We now prove that $s_n =  \frac{n (n + 1)}{2}$
+using mathematical induction.
+
+1. For $n=1$, $s_1 = 1 = \frac{1 \cdot 2}{2}$.
+1. Assume that the equality is true for some $n$.
+1. Then for $n+1$, we have
+
+   $$
+   s_{n + 1} = s_n + (n+1)
+   &= \frac{n (n + 1)}{2} + n + 1 \\
+   &= \frac{n (n + 1) + 2 (n + 1)}{2} \\
+   &= \frac{(n + 1)(n + 2)}{2}.
+   $$
+1. We can see that the equality holds for $n+1$ also.
+1. Hence, by mathematical induction, it holds for all $n \geq 1$.
+```
