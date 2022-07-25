@@ -716,32 +716,6 @@ $$
 ```
 
 
-### Principle of Mathematical Induction
-
-Well ordering principle is equivalent to the principle of 
-mathematical induction. 
-
-````{prf:theorem} Principle of mathematical induction
-:label: res-st-principle-mathematical-induction
-
-If a subset $S$ of $\Nat$ satisfies the following properties:
-
-*  $1 \in S$ and
-*  $n \in S \implies n + 1 \in S$,
-
-then $S = \Nat$.
-````
-
-The principle of mathematical induction is applied as follows.
-We consider a set $S \triangleq \{ n \in \Nat \ST n \text{ satisfies } P \}$ 
-where $P$ is some property that the members of this set satisfy. 
-We then show that $1$ satisfies the property $P$. Further, we
-show that if $n$ satisfies property $P$, then $n + 1$ also 
-has to satisfy $P$. 
-Then, applying the principle of mathematical
-induction, we claim that $S = \Nat$ i.e. every number $n \in \Nat$
-satisfies the property $P$.
-
 ### Odd and Even Numbers
 
 ```{prf:definition} Odd and even numbers
@@ -818,6 +792,129 @@ Let $a \in \ZZ$ be an integer which is both even and odd.
 1. But due to {prf:ref}`res-integer-0-1-gap` there is no
    integer between $0$ and $1$. A contradiction.
 1. Hence $a$ cannot be odd and even simultaneously.
+```
+
+(sec:int:math:induction)=
+### Principle of Mathematical Induction
+
+Well ordering principle is equivalent to the principle of 
+mathematical induction. 
+
+````{prf:theorem} Principle of mathematical induction
+:label: res-st-principle-mathematical-induction
+
+If a subset $S$ of $\Nat$ satisfies the following properties:
+
+*  $1 \in S$ and
+*  $n \in S \implies n + 1 \in S$,
+
+then $S = \Nat$.
+````
+
+```{prf:proof}
+We prove this by contradiction.
+
+1. Assume that $S \neq \Nat$.
+1. Consider the set $T = \Nat \setminus S$.
+1. Since $S \neq \Nat$, hence $T$ is nonempty.
+1. By definition $T$ is a subset of natural numbers.
+1. By the well ordering principle
+   {prf:ref}`res-integer-nat-well-ordering-principle`,
+   $T$ has a smallest number.
+   Let it be $t$.
+1. A lower bound on $\Nat$ is $1$.
+1. Hence $1$ is also a lower bound of $T$.
+1. By hypothesis, $1 \in S$.
+1. Hence $1 \notin T$.
+1. Hence $t$ is of the form $k+1$ where
+   $k \in \Nat$.
+1. Since $t$ is the smallest element of $T$,
+   hence $k \notin T$.
+1. Hence $k \in S$ as by definition $\Nat = S \cup T$
+   (a disjoint union).
+1. But by hypothesis $k \in S$ implies $t = k+1 \in S$.
+1. We arrive at a contradiction that $t$ belongs to
+   both $T$ and $S$ but the two sets are disjoint.
+```
+
+The principle of mathematical induction is applied as follows.
+1. We consider a set
+   
+   $$
+   S \triangleq \{ n \in \Nat \ST n \text{ satisfies } P \}
+   $$
+   where $P$ is some property that the members of this set satisfy. 
+1. We then show that $1$ satisfies the property $P$.
+1. Further, we show that if $n$ satisfies property $P$,
+   then $n + 1$ also has to satisfy $P$. 
+1. Then, applying the principle of mathematical induction, 
+   we claim that $S = \Nat$.
+1. In other words, every number $n \in \Nat$ satisfies the property $P$.
+
+
+The following is a different version of the principle
+of mathematical induction.
+
+```{prf:theorem} Principle of mathematical induction
+:label: res-int-math-ind-v2
+
+Let $P(n)$ be an assertion about the integer $n$.
+Assume the following:
+
+1. The assertion $P(n_0)$ is true for some
+   integer $n_0$.
+1. For any integer $k \geq n_0$, if $P(k)$ is true
+   then $P(k+1)$ must also be true.
+
+Then $P(n)$ is true for every integer $n \geq n_0$.
+```
+
+```{prf:proof}
+Consider the set $S$ defined as follows.
+
+$$
+S = \{n \in \Nat \ST P(n + n_0 -1) \text{ is true } \}.
+$$
+
+1. By hypothesis, $P(n_0)$ is true.
+1. $P(n_0) = P(1 + n_0 - 1)$.
+1. Hence $1 \in S$.
+1. Assume that $n \in S$.
+1. Then $P(n + n_0 -1)$ is true.
+1. Since $n \in \Nat$, hence $k = n + n_0 -1 \geq n_0$.
+1. By hypothesis $P(k + 1) = P(n + n_0)$ is also true.
+1. Hence $n + 1 \in S$ also holds.
+1. Hence by {prf:ref}`res-st-principle-mathematical-induction`,
+   $S = \Nat$.
+1. Now, let $n$ be some integer with $n \geq n_0$.
+1. Then $n - n_0 \geq 0$.
+1. Hence $n - n_0 + 1 \geq 1$.
+1. Hence $n - n_0 + 1 \in S = \Nat$.
+1. Hence $P((n - n_0 + 1) + n_0 - 1) = P(n)$ is true.
+
+We are done.
+```
+
+```{index} Induction; base case, Induction; inductive step
+```
+```{index} Induction; inductive hypothesis
+```
+```{prf:definition} Proof by mathematical induction
+:label: def-int-math-ind-terms
+
+Let $P$ be some assertion which is defined for every integer
+and is either false or true for each integer.
+
+In a proof by mathematical induction:
+
+1. Some particular integer $n_0$ for which 
+   the assertion $P(n_0)$ is true is known
+   as the *base case*.
+1. Proving the statement that $P(n) \implies P(n + 1)$
+   for every $n \geq n_0$ is called the *inductive step*.
+1. The assumption in the inductive step that $P(n)$
+   is true for some arbitrary $k \geq n_0$ is called
+   the *inductive hypothesis*.
 ```
 
 ## Informal Definitions
