@@ -1053,3 +1053,43 @@ We now consider the general case.
    as per the definition of the
    {prf:ref}`multinomial coefficient <def-comb-multinomial-coefficient>`.
 ```
+
+## Recursion
+
+```{index} Recursively defined sequence
+```
+```{prf:definition} Recursively defined sequence
+:label: def-comb-recursive-sequence
+
+We say that a sequence $\{t_n \} = t_1, t_2, \dots, t_n, \dots$
+is *recursively defined* if for every integer $n$ greater than
+or equal to some bound $b \geq 0$, the value of $t_n$ depends
+on at least some of the values $t_1, \dots, t_{n -1}$.
+The values for $t_1, \dots, t_{b-1}$ are given explicitly.
+These are referred to as the *initial conditions* for the
+recursively defined sequence. The equation that defines
+$t_n$ from $t_1, \dots, t_{n-1}$ is called a
+*recursive relation*. 
+```
+
+```{index} Fibonacci sequence
+```
+```{prf:definition} Fibonacci sequence
+:label: def-comb-fibonacci-sequence
+
+The famous *Fibonacci sequence*,
+denoted by $f_0, f_1, f_2, \dots$,
+is defined as follows:
+
+1. $f_0 = 1$.
+1. $f_1 = 1$.
+1. for every $n \geq 2$, we have
+
+   $$
+   f_n = f_{n-1} + f_{n - 2}.
+   $$
+```
+The sequence is attributed to the Italian mathematician
+Leonardo Pisano ("Fibonacci") of the 13th century.
+However, it has been known to Indian mathematicians
+as early as the 6th century.
