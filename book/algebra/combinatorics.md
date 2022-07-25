@@ -364,7 +364,7 @@ Here is a third approach.
 ```{prf:theorem} Binomial theorem
 :label: res-comb-binomial-theorem
 
-For any $a$ and $b$ and any natural number $n$, we have
+For any $a$ and $b$ and any nonnegative integer $n$, we have
 
 $$
 (a + b)^n = \sum_{r=0}^n \binom{n}{r} a^r b^{n - r}.
@@ -385,12 +385,22 @@ $$
 ```
 
 ```{prf:proof}
-We can write
+Consider the simpler cases first:
 
-$$
-(a + b)^n  = (a + b) \dots (a + b).
-$$
+1. For $n=0$, both L.H.S. and R.H.S. reduce to $1$.
+1. For $n=1$, the L.H.S. is $a + b$. The R.H.S. is
 
+   $$
+   {1 \choose 0}b + {1 \choose 1}a  = b + a = a + b.
+   $$
+
+We now consider the general case.
+
+1. We can write
+
+   $$
+   (a + b)^n  = (a + b) \dots (a + b).
+   $$
 1. There are $n$ factors of $(a + b)$ on the R.H.S..
 1. Consider the term $a^r b^{n - r}$.
 1. This is attained by choosing $a$ from $r$
@@ -780,7 +790,7 @@ $n$ types of objects (with replacement or repetition)
 is
 
 $$
-n + r - 1 \choose r.
+{n + r - 1 \choose r}.
 $$
 ```
 
@@ -894,4 +904,152 @@ Approach 2
    \frac{(n - r_1 - \dots - r_{m-1})!}{r_m! 0!}\\
    & = \frac{n!}{r_1! r_2 ! \dots r_m!}.
    $$
+```
+
+
+
+```{prf:example} Volunteer selection
+:label: ex-comb-volunteer selection
+
+You have 3 projects A, B and C. You have a team of
+20 volunteers available.
+
+- Project A needs 3 people.
+- Project B needs 5 people.
+- Project C needs 9 people.
+
+How many ways, can you assign volunteers to
+projects?
+
+
+1. We can introduce a fourth category D of 
+   volunteers who are not assigned to
+   any project.
+1. The D category has $20 - 3 - 5 - 9 = 3$ volunteers.
+1. Thus, we need to split 20 volunteers into
+   4 groups of sizes 3,5,9, and 3 respectively.
+1. A particular assignment might look like
+
+   $$
+   AAABBBBBCCCCCCCCCDDD.
+   $$
+1. Another assignment might look like
+
+   $$
+   CDCABCABCCBBCCCDADCB.
+   $$
+1. We can see that the assignment consists of
+   permutations of 20 labels which are of 4 types
+   (A, B, C, D).
+1. Hence the number of permutations is given by
+
+   $$
+   \frac{20!}{3! 5! 9! 3!}.
+   $$
+```
+
+
+### Multinomial Theorem
+
+```{prf:definition} Multinomial coefficient
+:label: def-comb-multinomial-coefficient
+
+For nonnegative integers $r_1, r_2, \dots, r_m$
+such that $\sum_{i=1}^m r_i = n$, the multinomial
+coefficient is defined as
+
+$$
+{n \choose r_1, r_2, \dots, r_m}
+= \frac{n!}{r_1! r_2 ! \dots r_m!}.
+$$
+```
+
+It is clear that the multinomial coefficient is
+equal to the number of permutations of $n$
+objects of $m$ types where $r_1$ objects are of type $1$,
+$r_2$ objects are of type $2$ and so on.
+
+Also note that for $n=0$, we have $r_i=0$ and
+the multinomial coefficient becomes
+
+$$
+\frac{0!}{0! 0! \dots 0!} = 1.
+$$
+
+````{prf:theorem} Multinomial theorem
+:label: res-comb-multinomial-theorem
+
+For arbitrary $x_1, x_2, \dots, x_m$ and some nonnegative integer
+$n$, we have
+
+```{math}
+:label: eq-comb-multinomial-theorem
+(x_1 + x_2 + \dots + x_m)^n 
+= \sum_{k_1 + k_2 + \dots + k_m  = n}
+{n \choose k_1, k_2, \dots, k_m}
+\prod_{1 \leq r  \leq m}x_r^{k_r}.
+```
+The number of terms of the sum on the R.H.S. is given by
+
+$$
+{n + m - 1 \choose n}.
+$$
+````
+
+```{prf:proof}
+Consider the basic cases first.
+
+1. For $m=1$, the result is trivial as there is exactly one
+   term on the R.H.S. given by $x_1^n$.
+1. For $m=2$, {eq}`eq-comb-multinomial-theorem` reduces to
+
+   $$
+   (x_1 + x_2)^n 
+   &= \sum_{k_1 + k_2 = n}{n \choose k_1, k_2}x_1^{k_1} x_2^{k_2}\\
+   &= \sum_{k=0}^n {n \choose k}x_1^k x_2^{n - k}.
+   $$
+   We replaced $k_1$ by $k$ and $k_2$ by $n-k$.
+1. This is the binomial theorem already proven in
+   {prf:ref}`res-comb-binomial-theorem`.
+1. For $n=0$, both L.H.S. and R.H.S. reduce to $1$.
+
+We now consider the general case.
+1. Each term on the R.H.S. is of the form
+
+   $$
+   C \prod_{1 \leq r  \leq m}x_r^{k_r}
+   $$
+   such that $k_1 + \dots + k_m = n$
+   and $C$ is some coefficient.
+1. There are $m$ types of variables $x_1, \dots, x_m$.
+1. In the product, there are total $n$ variables.
+1. The number of ways $n$ objects of $m$ types can
+   be selected is given by
+
+   $$
+   n + m - 1 \choose n
+   $$
+   due to {prf:ref}`res-comb-r-comb-rep`.
+1. This establishes the number of terms on the R.H.S..
+1. It remains to calculate $C$.
+1. We can see that $\prod_{1 \leq r  \leq m}x_r^{k_r}$
+   arises on the R.H.S. from the different permutations
+   of $r_1$ variables of type $x_1$,
+   $r_2$ variables of type $x_2$ and so on
+   up to $r_m$ variables of type $x_m$.
+1. The number of permutations of $n$ variables of $m$
+   types $x_1, \dots, x_m$ with counts
+   $r_1, \dots, r_m$ is given by
+
+   $$
+   \frac{n!}{r_1! r_2 ! \dots r_m!}
+   $$
+   due to {prf:ref}`res-comb-multiset-permutation`.
+1. Hence
+
+   $$
+   C = {n \choose r_1, r_2, \dots, r_m}
+   $$
+   as per the definition of the
+   {prf:ref}`multinomial coefficient <def-comb-multinomial-coefficient>`.
 ```
