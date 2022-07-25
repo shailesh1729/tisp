@@ -159,41 +159,6 @@ An infinite set which is not countable is called an *uncountable set*.
 With the definitions in place, we are now ready to study the connections
 between countable, uncountable and finite sets.
 
-## Well Ordering Principle
-
-We recall some properties of natural numbers which will be 
-used later.
-
-````{prf:property} Well ordering principle
-:label: res-st-well-ordering-principle
-
-Every nonempty subset of $\Nat$ has a least element.
-````
-
-Well ordering principle is equivalent to the principle of 
-mathematical induction. 
-
-````{prf:theorem} Principle of mathematical induction
-:label: res-st-principle-mathematical-induction
-
-If a subset $S$ of $\Nat$ satisfies the following properties:
-
-*  $1 \in S$ and
-*  $n \in S \implies n + 1 \in S$,
-
-then $S = \Nat$.
-````
-
-The principle of mathematical induction is applied as follows.
-We consider a set $S \triangleq \{ n \in \Nat \ST n \text{ satisfies } P \}$ 
-where $P$ is some property that the members of this set satisfy. 
-We then show that $1$ satisfies the property $P$. Further, we
-show that if $n$ satisfies property $P$, then $n + 1$ also 
-has to satisfy $P$. 
-Then, applying the principle of mathematical
-induction, we claim that $S = \Nat$ i.e. every number $n \in \Nat$
-satisfies the property $P$.
-
 ## Infinite Sets
 
 ````{prf:theorem}
@@ -237,7 +202,7 @@ Thus, $B$ is equivalent to a subset of $\Nat$.
 Without loss of generality, let us assume that $B$ is a subset of $\Nat$.
 We now construct a mapping $f : \Nat \to B$ as follows. Let $b_1$ be the
 least element of $B$ (which exists due to the 
-    {prf:ref}`well ordering principle <res-st-well-ordering-principle>`).
+{prf:ref}`well ordering principle <res-integer-nat-well-ordering-principle>`).
 We assign $f(1) = b_1$.
 Now, let $b_2$ be the least element of $B \setminus \{ b_1\}$. 
 We assign $f(2) = b_2$. 
@@ -245,7 +210,7 @@ Similarly, assuming that $f(1) = b_1, f(2) = b_2, \dots , f(n) = b_n$ has
 been assigned, 
 we assign $f(n+1) = $ the least element of $B \setminus \{b_1, \dots, b_n\}$. 
 This least element again exists due to the 
-{prf:ref}`well ordering principle <res-st-well-ordering-principle>`.
+{prf:ref}`well ordering principle <res-integer-nat-well-ordering-principle>`.
 This completes the definition of $f$ using the 
 {prf:ref}`principle of mathematical induction <res-st-principle-mathematical-induction>`. 
 It is easy to show that the function is bijective.  
@@ -275,7 +240,7 @@ For some $a \in A$, consider $f^{-1}(a) = \{ b \in \Nat \ST f(b) = a \}$.
 Since $f$ is onto, hence $f^{-1}(a)$ is nonempty. 
 Since $f^{-1}(a)$ is a subset of natural numbers, 
 it has a least element due to the
-{prf:ref}`well ordering principle <res-st-well-ordering-principle>`.
+{prf:ref}`well ordering principle <res-integer-nat-well-ordering-principle>`.
 Further, if $a_1, a_2 \in A$ are distinct, then $f^{-1}(a_1)$
 and $f^{-1}(a_2)$ are disjoint and the corresponding least elements are distinct.
 Assign $g(a) = \text{ least element of } f^{-1}(a) \Forall a \in A$. 

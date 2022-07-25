@@ -715,6 +715,33 @@ $$
 1. A contradiction. Hence, $B$ must be empty.
 ```
 
+
+### Principle of Mathematical Induction
+
+Well ordering principle is equivalent to the principle of 
+mathematical induction. 
+
+````{prf:theorem} Principle of mathematical induction
+:label: res-st-principle-mathematical-induction
+
+If a subset $S$ of $\Nat$ satisfies the following properties:
+
+*  $1 \in S$ and
+*  $n \in S \implies n + 1 \in S$,
+
+then $S = \Nat$.
+````
+
+The principle of mathematical induction is applied as follows.
+We consider a set $S \triangleq \{ n \in \Nat \ST n \text{ satisfies } P \}$ 
+where $P$ is some property that the members of this set satisfy. 
+We then show that $1$ satisfies the property $P$. Further, we
+show that if $n$ satisfies property $P$, then $n + 1$ also 
+has to satisfy $P$. 
+Then, applying the principle of mathematical
+induction, we claim that $S = \Nat$ i.e. every number $n \in \Nat$
+satisfies the property $P$.
+
 ### Odd and Even Numbers
 
 ```{prf:definition} Odd and even numbers
