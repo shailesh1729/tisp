@@ -1237,3 +1237,44 @@ We shall use the strong induction principle
    for every $n \geq 2$.
 ```
 
+```{prf:example} Stacking $n$ disks
+
+You are given $n$ disks. You need to arrange them
+into a single tower of disks. You can make small
+individual towers of disks and then stack one tower
+on top of the some other one.
+You are free to make as many towers of disks as you need. 
+Each move consists of stacking one tower over the other.
+Once a tower has been formed, you are not allowed to
+break it. How many moves will it take to
+form the single tower?
+
+We claim that it will take $n-1$ moves.
+
+1. Base case: for $n=1$, there is a single disk and it is
+   the tower in itself. Hence nothing more is to be done.
+   Number of moves required is $0$.
+1. Strong induction hypothesis: Assume that
+   for some $n=k$, you can make the tower of $i$ disks in $i-1$
+   moves for every $i \in 1,\dots,k$.
+1. Induction step: Consider the problem of stacking $k+1$ disks.
+   1. We can see that the last step consists of stacking
+      the last remaining two towers into a single tower.
+   1. Assume that the two remaining towers $A$ and $B$ have $j$ and
+      $k+1 - j$ disks respectively.
+   1. Both towers consist of at least $1$ disk.
+   1. Hence neither tower can have $k+1$ disks.
+   1. Clearly, $j \leq k$ and $k + 1 - j \leq k$.
+   1. It will take $j-1$ moves to form the tower $A$ by induction hypothesis.
+   1. It will take $k - j$ moves to form the tower
+      $B$ by induction hypothesis.
+   1. It will take $1$ more move to stack $A$ and $B$ together.
+   1. Hence total number of moves required is
+
+      $$
+      j - 1 + k - j + 1 = k.
+      $$
+   1. Hence to stack a tower of $k+1$ disks, we need $k$ moves.
+1. We can see that by strong induction, for every $n$, it takes
+   $n-1$ moves to stack the $n$ disks into a single tower.
+```
