@@ -117,7 +117,7 @@ $\{ \bx_1, \dots, \bx_n \}$. Then the
 *similarity matrix* for $\bX$ is defined as
 
 $$
-\bM_{\sim}(\bX) = \begin{bmatrix}
+\bM_{\simf}(\bX) = \begin{bmatrix}
 1 & s_{1 2} & \dots & s_{1 n}\\
 s_{2 1} & 1 & \dots & s_{2 n} \\
 \vdots & \vdots & \ddots & \vdots \\
