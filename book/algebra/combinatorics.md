@@ -362,6 +362,25 @@ Here is a third approach.
 
 ## Binomial Theorem
 
+```{index} Binomial coefficient
+```
+```{prf:definition} Binomial coefficient
+:label: def-comb-binom-coef
+
+For any nonnegative $n$ and any integer
+$r$ with $0 \leq r \leq n$, the
+*binomial coefficient* is defined as
+
+$$
+{n \choose r} = \frac{n!}{r! (n-r)!}.
+$$
+```
+This is another name for the number of $r$-combinations
+of $n$ objects.
+
+
+```{index} Binomial theorem
+```
 ```{prf:theorem} Binomial theorem
 :label: res-comb-binomial-theorem
 
@@ -1195,6 +1214,10 @@ using mathematical induction.
 1. Hence, by mathematical induction, it holds for all $n \geq 1$.
 ```
 
+### Strong Induction
+
+The following examples require the principle
+of strong induction ({prf:ref}`res-int-strong-induction`).
 
 ```{prf:example}
 :label: ex-comb-ind-2-pow-n
@@ -1278,3 +1301,143 @@ We claim that it will take $n-1$ moves.
 1. We can see that by strong induction, for every $n$, it takes
    $n-1$ moves to stack the $n$ disks into a single tower.
 ```
+
+## Generating Functions
+
+A generating function is a way of encoding an
+infinite sequence of numbers $\{ t_n \}$ by
+treating them as the coefficients of a formal
+power series.
+
+
+```{prf:definition} Ordinary generating function
+:label: def-comb-ogf
+
+The *ordinary generating function* of a sequence
+$t_0, t_1, \dots, t_n, \dots$ is given by
+
+$$
+G(t_n; x) \triangleq \sum_{n=0}^{\infty} t_n x^n
+= t_0 + t_1 x^1 + t_2 x^2 + \dots + t_n x^n + \dots.
+$$
+```
+
+A generating function is not evaluated for any specific
+value of $x$. It is a formal structure which enables
+us to manipulate the sequences more conveniently.
+
+```{prf:definition} Exponential generating function
+:label: def-comb-egf
+
+The *exponential generating function* of a sequence
+$t_0, t_1, \dots, t_n, \dots$ is given by
+
+$$
+E(t_n; x) \triangleq \sum_{n=0}^{\infty} t_n \frac{x^n}{n!}.
+$$
+```
+
+### Generalized Binomial Theorem
+
+Recall from {prf:ref}`res-comb-binomial-theorem`
+that for a nonnegative integer $n$, we have
+
+$$
+(1 + x)^n = \sum_{r=0}^n \binom{n}{r} x^r.
+$$
+We now wish to generalize it for negative $n$ also.
+
+
+```{index} Generalized binomial coefficient
+```
+```{prf:definition} Generalized binomial coefficient
+:label: def-comb-gen-binom-coef
+
+For any real $n$ and any nonnegative integer $r$, the
+*generalized binomial coefficient* is defined as
+
+$$
+{n \choose r} = \frac{n (n-1) \dots (n - r + 1)}{r!}.
+$$
+```
+Note that for a nonnegative $n$ and $r \leq n$, the
+definition agrees with the binomial coefficient
+as defined in {prf:ref}`def-comb-binom-coef`.
+
+
+```{prf:theorem} Binomial coefficient for negative integers
+:label: res-comb-neg-binom-ceof
+
+If $n$ is a positive integer, then
+
+$$
+{-n \choose r} = (-1)^r {n + r - 1 \choose r}.
+$$
+```
+
+```{prf:proof}
+We have
+
+$$
+{-n \choose r} = \frac{-n (-n-1) \dots (-n - r + 1)}{r!}.
+$$
+1. Factoring $-1$ out of each term in the R.H.S. numerator
+   gives us
+
+   $$
+   & (-1)^r \frac{n (n+1) \dots (n + r - 1)}{r!} \\
+   &= (-1)^r \frac{(n + r - 1) \dots  (n+1)  n }{r!}\\
+   &= (-1)^r \frac{(n + r - 1) \dots  (n+1)  n (n-1) \dots 1 }{r! (n-1)!}\\
+   &= (-1)^r \frac{(n +r - 1)!}{r! (n-1)!} \\
+   &= (-1)^r {n + r - 1 \choose r}.
+   $$
+```
+
+```{prf:theorem} Generalized binomial theorem
+:label: res-comb-gen-binom-thm
+
+For any $n \in \RR$, we have
+
+$$
+(1 + x)^n = \sum_{r=0}^{\infty} {n \choose r} x^r.
+$$
+```
+
+```{prf:example}
+:label: ex-comb-gen-func-1
+
+We shall show that
+
+$$
+(1-x)^{-1} = 1 + x + x^2 + \dots.
+$$
+
+
+1. Let $y = -x$.
+1. Then $(1-x)^{-1} = (1 + y)^{-1}$.
+1. By {prf:ref}`res-comb-gen-binom-thm`,
+
+   $$
+   (1 + y)^{-1} = \sum_{r=0}^{\infty} {-1 \choose r} y^r
+   $$
+1. By {prf:ref}`res-comb-neg-binom-ceof`
+
+   $$
+   {-1 \choose r} = (-1)^r {1 + r - 1 \choose r}
+   = (-1)^r  { r \choose r} = (-1)^r.
+   $$
+1. Hence
+
+   $$
+   (1 + y)^{-1} = \sum_{r=0}^{\infty} (-1)^r y^r.
+   $$
+1. But $y^r = (-x)^r = (-1)^r x^r$.
+1. Putting back, we get
+
+   $$
+   (1 - x)^{-1} = \sum_{r=0}^{\infty} (-1)^r (-1)^r x^r
+   = \sum_{r=0}^{\infty} x^r.
+   $$
+```
+
+
