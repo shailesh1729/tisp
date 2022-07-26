@@ -51,50 +51,6 @@ $(\mu - \sqrt{2} \sigma, \mu + \sqrt{2} \sigma)$.
 
 This is also known as union bound.
 
-````{prf:theorem}
-:label: res:prob:boole_inequality
-
-For a countable set of events $A_1, A_2, \dots$, we have
-
-$$
-\PP \left ( \bigcup_{i}  A_i \right) \leq \sum_{i} \PP \left ( A_i \right).
-$$
-````
-````{prf:proof}
-We first prove it for a finite collection of events using induction.
-For $n=1$, obviously
-
-$$
-\PP (A_1) \leq \PP (A_1).
-$$
-Assume the inequality is true for the set of $n$ events. i.e.
-
-$$
-\PP \left ( \bigcup_{i=1}^n  A_i \right) \leq \sum_{i=1}^n \PP \left ( A_i \right).
-$$
-Since 
-
-$$
-\PP (A \cup B ) = \PP (A) + \PP(B) - \PP (A \cap B),
-$$
-hence
-
-$$
-\PP \left ( \bigcup_{i=1}^{n + 1}  A_i \right)  = \PP \left ( \bigcup_{i=1}^n  A_i \right) 
-+ \PP (A_{n + 1}) - \PP \left ( \bigcup_{i=1}^n  A_i \bigcap A_{n +1} \right  ). 
-$$
-Since
-
-$$
-\PP \left ( \bigcup_{i=1}^n  A_i \bigcap A_{n +1} \right  ) \geq 0,
-$$
-hence
-
-$$
-\PP \left ( \bigcup_{i=1}^{n + 1}  A_i \right) \leq  \PP \left ( \bigcup_{i=1}^n  A_i \right) + \PP (A_{n + 1}) 
-\leq \sum_{i=1}^{n + 1} \PP \left ( A_i \right).
-$$
-````
 ## Fano's inequality
 
 ## Cramér–Rao inequality
