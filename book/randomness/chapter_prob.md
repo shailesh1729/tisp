@@ -1,5 +1,8 @@
 # Probability
 
+Main references for this chapter include
+{cite}`kolmogorov2018foundations,papoulis2002probability,stark2012probability,feller1968introduction,ross2014first,ross2014introduction`.
+
 
 The step function and sign function relation:
 

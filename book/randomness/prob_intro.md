@@ -312,7 +312,7 @@ We next establish some basic facts about a probability measure.
 :label: res-prob-prob-measure-props
 
 Let $(\Omega, \FFF, \PP)$ be a probability space.
-Then for the events drawn from $\FFF$ satisfy
+Then for the events contained in $\FFF$ satisfy
 the following properties. 
 
 1. Probability of null event: $\PP(\EmptySet) = 0$.
@@ -453,7 +453,7 @@ a singleton event.
 
 In the following, we shall assume that a
 probability space $(\Omega, \FFF, \PP)$ has
-been given and all events are drawn from $\FFF$.
+been given and all events are contained in $\FFF$.
 
 
 ```{prf:theorem} Union of three events
@@ -493,6 +493,52 @@ Define $D = B \cup C$.
    &= \PP(A) + \PP(B) + \PP(C) - \PP(AB) - \PP(BC) - \PP(AC) + \PP(ABC).
    $$
 ```
+
+### Inclusion-Exclusion Principle
+
+{prf:ref}`res-prob-union-3-events` can be extended
+to the union of $n$ events. This is known
+as the inclusion-exclusion principle.
+
+```{index} Inclusion-exclusion principle
+```
+```{prf:theorem} Inclusion-exclusion principle
+:label: res-prob-inc-ex
+
+Let $A_1, A_2, \dots, A_n$ be $n$ events
+in a probability space $(\Omega, \FFF, \PP)$.
+Then
+
+$$
+\PP \left( \bigcup_{i=1}^n A_i \right )
+&= S_1 - S_2 + S_3 - \dots + (-1)^{n + 1} S_n\\
+&= \sum_{k=1}^n (-1)^{k+1}S_k
+$$
+where $S_k$ is the sum of the probability of all $k$-cardinality
+intersections among the sets $A_1, \dots, A_n$.
+In particular,
+
+$$
+& S_1 = \sum_{i=1}^n \PP(A_i) \\
+& S_2 = \sum_{1 \leq i < j \leq n} \PP(A_i A_j) \\
+& S_3 = \sum_{1 \leq i < j < k \leq n} \PP(A_i A_j A_k)\\
+& \vdots\\
+& S_n = \PP(A_1 A_2 \dots A_n).
+$$
+In general for every $k \in 1,\dots,n$, we can write:
+
+$$
+S_k = \sum_{1 \leq i_1 < i_2 <  \dots < i_k \leq n} \PP(A_{i_1} A_{i_2} \dots  A_{i_k}).
+$$
+```
+It is known as inclusion-exclusion principle since $S_1$ is
+included then $S_2$ is excluded, then $S_3$ is included and
+so on.
+
+```{prf:proof}
+The proof is based on mathematical induction.
+```
+
 
 ### Boole's Inequality
 
@@ -547,6 +593,196 @@ We prove it using induction.
     \leq \sum_{i=1}^{n + 1} \PP \left ( A_i \right).
     $$
 ````
+
+## Joint and Conditional Probability
+
+### Joint Probability
+
+```{index} Joint probability
+```
+```{prf:definition} Joint probability
+:label: def-prob-joint-probability
+
+Let $A$ and $B$ be two different events. Then
+the *joint probability* of the events $A$
+and $B$ is the probability that the two events
+occur together and is given by $\PP(A B)$.
+
+Similarly, let $\{A_i \}_{i \in I}$ be a collection
+of events indexed by the set $I$. Then their *joint probability*
+is given by
+
+$$
+\PP \left (\bigcap_{i \in I} A_i \right ).
+$$
+In other words, it is the probability of every event
+happening together.
+```
+
+
+### Conditional Probability
+
+```{index} Conditional probability
+```
+```{prf:definition} Conditional probability
+:label: def-prob-conditional-probability
+
+Let $A$ and $B$ be two events.
+Assume that $\PP(A) > 0$.
+The *conditional probability* of the event $B$
+given that the event $A$ has happened is denoted by
+$\PP(B | A)$. It is defined as
+
+$$
+\PP(B | A) \triangleq \frac{\PP(AB)}{\PP(A)}
+\text{ if } \PP(A) > 0.
+$$
+```
+
+By definition, we can see that
+
+$$
+\PP(A B) = \PP(B | A) \PP(A) = \PP(A | B) \PP(B).
+$$
+
+
+### Independence
+
+```{index} Independence
+```
+```{prf:definition} Independence of two events
+:label: def-prob-independence-2
+
+Let $A$ and $B$ be two events
+with $\PP(A) > 0$ and $\PP(B) > 0$.
+We say that $A$ and $B$ are *independent* if and only if
+
+$$
+\PP(A B) = \PP(A) \PP(B).
+$$
+```
+
+It follows that for independent events
+
+$$
+\PP(B | A) = \PP(B)
+\text{ and }
+\PP(A | B) = \PP(A).
+$$
+
+```{prf:definition} Independence of three events
+:label: def-prob-independence-3
+
+Let $A, B$ and $C$ be three events
+with nonzero probabilities.
+We say that $A, B$ and $C$ are *jointly independent* if and only if
+
+$$
+& \PP(A B C) = \PP(A) \PP(B) \PP(C)\\
+& \PP(A B) = \PP(A) \PP(B)\\
+& \PP(B C) = \PP(B) \PP(C)\\
+& \PP(A C) = \PP(A) \PP(C).
+$$
+```
+
+
+```{prf:definition} Independence of $n$ events
+:label: def-prob-independence-n
+
+Let $A_1, A_2, \dots, A_n$ be $n$ events contained in $\FFF$.
+We say that $A_1, A_2, \dots, A_n$ are *jointly independent*
+if and only if
+
+$$
+& \PP(A_{i_1} A_{i_2}) = \PP(A_{i_1}) \PP(A_{i_2})\\ 
+& \PP(A_{i_1} A_{i_2} A_{i_3}) = \PP(A_{i_1}) \PP(A_{i_2}) \PP(A_{i_3})\\ 
+& \vdots\\
+& \PP(A_{i_1} A_{i_2} A_{i_3} \dots A_{i_k}) 
+= \PP(A_{i_1}) \PP(A_{i_2}) \PP(A_{i_3}) \dots \PP(A_{i_k})\\ 
+& \vdots\\
+& \PP(A_1 A_2 \dots A_n) = \PP(A_1) \PP(A_2) \dots \PP(A_n)
+$$
+for all combinations of indices such that $1 \leq i_1 < i_2 < \dots < i_k \leq n$.
+```
+
+## Compound Experiments
+
+Often we need to examine the outcomes of different experiments together.
+Here are some examples:
+
+- Tossing a coin and throwing a dice
+- Tossing a coin twice in succession (first and second tosses are separate experiments)
+
+Two or more experiments together form a compound experiment.
+Repeated trials are an example of a compound experiment.
+
+```{index} Compound experiment
+```
+```{prf:definition} Compound experiment
+:label: def-prob-compound-experiment
+
+Let $A$ and $B$ be two different experiments.
+Let $\Omega_1$ be the sample space of $A$
+and $\Omega_2$ be the sample space of $B$.
+Then the sample space of the *compound experiment*
+is given by the Cartesian product $\Omega_1 \times \Omega_2$.
+Let $E_1$ be an event associated with experiment $A$
+and $E_2$ be an event associated with experiment $B$.
+Then $E = E_1 \times E_2$ is a *compound event* associated with
+the compound experiment.
+
+$$
+E_1 \times E_2 = \{\zeta = (\zeta_1, \zeta_2) \ST \zeta_1 \in E_1, \zeta_2 \in E_2 \}.
+$$
+```
+
+```{index} Independent experiments
+```
+```{prf:definition} Independent experiments
+:label: def-prob-independent-experiment
+
+Two experiments are called *independent*
+if the outcome of one experiment doesn't
+depend on the (past, present or future) outcomes
+of the other experiment.
+In that case, for every product event $E = E_1 \times E_2$, 
+we can write
+
+$$
+\PP(E) = \PP(E_1) \PP(E_2).
+$$
+```
+
+```{prf:example} Repeated coin tosses
+:label: ex-prob-repeated-coin-tosses
+
+Consider tossing a coin $n$ times.
+1. Assume that the each toss is an independent random experiment.
+1. The outcomes of each experiment are $H$ (head) and $T$ (tail).
+1. Let $\PP(H) = p$ and $\PP(T) = q = 1 - p$.
+1. The outcome of $n$ tosses can be described as a string
+   of $n$ letters each of which is $H$ or $T$.
+1. There are $2^n$ possible strings. They form the sample space
+   of the compound experiment.
+1. Let a particular string have $k$ heads and $n-k$ tails. 
+1. Then the probability of this string is given by
+
+    $$
+    \PP(\zeta_1, \dots, \zeta_n) = \prod_{i=1}^n \PP(\{ \zeta_i \})
+    = p^k q^{n - k}.
+    $$
+1. There are $n \choose k$ strings which consist of $k$ heads and
+   $n-k$ tails.
+1. Each of these strings (singleton events) are mutually exclusive
+   of each other.
+1. Hence, by the additivity axiom, the probability of having $k$
+   heads and $n-k$ tails in $n$ trials is given by
+
+   $$
+   {n \choose k} p^k q^{n - k}.
+   $$
+```
+
 
 ## Countable Additivity
 
