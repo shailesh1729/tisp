@@ -1302,6 +1302,137 @@ We claim that it will take $n-1$ moves.
    $n-1$ moves to stack the $n$ disks into a single tower.
 ```
 
+## Pigeonhole Principle
+
+Pigeonhole principle is one of the most powerful
+counting arguments.
+
+```{index} Pigeonhole principle
+```
+```{prf:theorem} Pigeonhole principle
+:label: res-comb-pigeonhole-principle
+
+If there are $n$ objects that fall into $m$ different
+categories and $n > m$, then at least two of the objects
+fall into the same category.
+```
+
+If there are $m$ pigeonholes and $n$ pigeons with
+$n > m$, then at least one pigeonhole must hold more
+than one pigeons. The name of this principle comes
+from the example of pigeons as objects and pigeonholes
+as categories.
+
+```{prf:proof}
+We argue as follows.
+
+1. Consider the first $m$ objects.
+1. If any two of these objects belong to the same
+   category, then we are done.
+1. Otherwise, there is exactly one object for each of
+   the $m$ categories from this set of first $m$ objects.
+1. There are $n - m > 0$ objects still left. Hence
+   there is at least one more object.
+1. This object must fall into one of the $m$ categories.
+1. This category will then have at least $2$ items.
+```
+
+
+```{prf:example} Sock-picking
+:label: ex-comb-pigeonhole-sock-picking
+
+Assume that a drawer contains socks
+of two colors (blue and black). 
+The socks can be worn on either foot.
+We are pulling the socks from the
+drawer without looking at them.
+What is the minimum number of socks
+we need to pull so that we are
+guaranteed to have a pair of same color?
+
+1. Socks are the objects.
+1. Each color can be considered as a category.
+1. There are thus $m=2$ categories.
+1. We need more than one sock in at least one category.
+1. If $n > m = 2$, then we have at least one color
+   for which we have two or more socks.
+1. Minimum value of $n$ satisfying $n > m$ is $3$.
+1. Thus, we need to draw at least $3$ socks to
+   guarantee that we have one pair of same color.
+```
+
+```{prf:example} Hand-shaking
+:label: ex-comb-pigeonhole-hand-shaking
+
+Let there be $n$ people in a room with $n >1$
+They are shaking hands with each other.
+Then there is always a pair of people who
+will shake hands with the same number of people.
+
+1. One person can shake hands with
+   at the minimum $0$ number of people
+   and at the maximum $n-1$ number of people.
+1. We define the categories as the number of
+   people to which one has shaken hands.
+1. Thus, the categories are labeled $0,1,2,\dots,n-1$.
+1. We can see that there are $n$ categories and $n$ people.
+1. However, the category $0$ and category $n-1$ cannot both
+   have a person simultaneously. 
+   1. Suppose there is someone who has shaken hands with no one.
+   1. Then there cannot be anyone who has shaken hands with everyone.
+   1. Hence if category $0$ is nonempty, then category $n-1$ must be empty.
+   1. Now suppose there is someone who has shaken hands with everyone.
+   1. Then there cannot be anyone who has shaken hands with no one.
+   1. Hence if category $n-1$ is nonempty, then category $0$ must be empty.
+1. Thus, either $0$ or $n-1$ or both must be empty.
+1. Hence the $n$ people must be fitted into at most $n-1$ categories.
+1. By pigeonhole principle, at least one of these categories must have
+   more than one person.
+```
+
+```{prf:example} Hair counting
+:label: ex-comb-pigeonhole-hair-count
+
+At any given time there live at least two people in California
+with the same number of hairs on their heads.
+
+
+1. The current population of California is around $40$ million.
+1. Typical human head has an average of about $150,000$ hairs.
+1. An upper bound on the number of hairs on human head is $1$ million.
+1. Hence by pigeonhole principle, there must be people in California
+   with the same number of hairs on their heads.
+```
+
+```{prf:example} Subset sum
+:label: ex-comb-pigeonhole-subset-sum
+
+Consider the set $S = \{1,2,3,4,5,6,7,8,9 \}$. 
+We claim that every $6$ element subset of $S$
+must contain at least two numbers whose sum is $10$.
+
+1. Let us first identify which pairs of numbers sum to $10$.
+1. We can see that $1+9=2+8=3+7=4+6=10$. There are $4$ such pairs.
+1. We now split the $9$ numbers to $5$ categories as follows:
+   1. $1,9 \to A$
+   2. $2,8 \to B$
+   3. $3,7 \to C$
+   4. $4,6 \to D$
+   5. $5 \to E$.
+1. Consider any subset of $S$ of $6$ elements. 
+1. Let its members be $\{ n_1, n_2, n_3, n_4, n_5, n_6 \}$.
+1. Put these numbers into the $5$ categories above
+   based on rule that a number should go into the category mapped for it.
+1. There are $5$ categories and $6$ numbers.
+1. By pigeonhole principle, at least one of the categories should have
+   more than one number.
+1. Category $E$ cannot have two numbers. It can only have $5$.
+1. Hence, at least one of $A, B, C, D$ has two numbers.
+1. But each of these categories consist of two numbers whose sum is $10$.
+1. Hence every $6$ element subset of $S$
+   must contain at least two numbers whose sum is $10$.
+```
+
 ## Generating Functions
 
 A generating function is a way of encoding an
