@@ -1433,6 +1433,53 @@ must contain at least two numbers whose sum is $10$.
    must contain at least two numbers whose sum is $10$.
 ```
 
+
+```{prf:example} Same color rectangle
+:label: ex-comb-pigeonhole-same-color-rectangle
+
+Let there be $n$ given colors. Assume that
+each point of the plane has been assigned one
+of these $n$ colors. Then there exists
+a rectangle whose four corners have the
+same color.
+
+To prove this, we need to discretize the problem first
+so that we can apply the pigeonhole principle.
+We can do this by creating a grid of points. 
+
+1. Consider an $r \times c$ grid of points.
+1. If there are enough number of rows, then we
+   can guarantee that some of points in each
+   column have same color.
+1. Similarly, if there are enough number of columns,
+   we can guarantee that some of the points in each
+   row have same color.
+1. If we can guarantee that two rows and two columns
+   contain points of same color, we have found a
+   rectangle of same color corners.
+1. How many rows and columns do we need?
+1. We consider a grid of points with $n+1$
+   rows and $n {n + 1 \choose 2} + 1$ columns.
+1. Let $p = {n + 1 \choose 2}$. Hence, we have $n p + 1$ columns.
+1. Let us first examine the points each column.
+1. There are $n+1$ points in each column.
+1. There are only $n$ colors which can be assigned to point.
+1. Hence, in each column, there exists a pair of points
+   which has the same color.
+1. Now examine the pair of points in each column.
+1. Since there are $n+1$ points, hence there are $p = n + 1 \choose 2$
+   pairs of points in each column.
+1. There are $p$ pairs of points and $n$ colors.
+1. Hence there are $n p$ ways of choosing a unique pair of points
+   and a unique color.
+1. Thus, in at most $n p $ columns, a pair of points doesn't appear
+   at the same location with the same color.
+1. Hence if we have $n p + 1$ columns, then there exist a pair of
+   columns such that the same color occupies the same two locations
+   in both the columns.
+1. These four points form a rectangle whose points have the same color.
+```
+
 ## Generating Functions
 
 A generating function is a way of encoding an
