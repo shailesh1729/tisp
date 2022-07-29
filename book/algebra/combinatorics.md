@@ -657,6 +657,8 @@ a set of $n$ objects.
    $$
 ```
 
+### Sum of Binomial Coefficients
+
 ```{prf:example}
 :label: ex-comb-ncr-sum-2-pow-n
 
@@ -827,6 +829,36 @@ We shall use a combinatorial double counting proof.
    $$
 1. Hence, L.H.S. an R.H.S. must be identical.
 ```
+
+
+```{prf:corollary}
+:label: res-comb-vandermonde-identity-2
+
+For any nonnegative integer $n$, we have
+
+$$
+{2 n \choose n } = \sum_{k = 0}^n {n \choose k}^2.
+$$
+```
+```{prf:proof}
+In {prf:ref}`res-comb-vandermonde-identity`,
+Let $m=n$ and $r=n$. Then we have
+
+$$
+{2 n \choose n } = \sum_{k = 0}^n {n \choose k}{n \choose n - k}.
+$$
+However
+
+$$
+{n \choose k} = {n \choose n - k}
+$$
+for every $k$. Hence
+
+$$
+{2 n \choose n } = \sum_{k = 0}^n {n \choose k}^2.
+$$
+```
+
 
 ### More Identities
 
