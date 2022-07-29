@@ -786,6 +786,48 @@ Consider the set of $n+1$ numbers $S = \{ 0,2,\dots, n\}$.
    can be chosen from $S$.
 ```
 
+
+### Vandermonde's Identity
+
+```{prf:theorem} Vandermonde's identity
+:label: res-comb-vandermonde-identity
+
+For any nonnegative integers $r, m, n$, we have
+
+$$
+{m + n \choose r } = \sum_{k = 0}^r {m \choose k}{n \choose r - k}
+$$
+```
+
+```{prf:proof}
+We shall use a combinatorial double counting proof.
+
+1. Let $S$ be a set of $m + n$ objects which can be split
+   into two disjoint subsets $A$ of $m$ objects and $B$ of $n$ objects.
+1. For example, a committee of $m + n$ people can be split into
+   subgroups of $m$ men and $n$ women.
+1. The number of ways to select $r$ objects from $S$ is given by
+   $m + n \choose r$.
+1. Each selection of $r$ objects consists of $k$ objects from the
+   subset $A$ and the remaining $r - k$ objects from the subset $B$
+   where $0 \leq k \leq r$.
+1. There are $m \choose k$ ways of selecting $k$ objects from $A$.
+1. There are $n \choose r - k$ ways of selecting $r - k$ objects from $B$.
+1. Hence, by the product rule, there are
+   
+   $$
+   {m \choose k}{n \choose r - k}
+   $$
+   ways of selecting $k$ objects from $A$ and $r - k$ objects from $B$.
+1. By the sum rule over possible values of $k$, the number of ways
+   of choosing $r$ objects from $S$ is given by
+
+   $$
+   \sum_{k = 0}^r {m \choose k}{n \choose r - k}.
+   $$
+1. Hence, L.H.S. an R.H.S. must be identical.
+```
+
 ### More Identities
 
 ```{prf:example}
