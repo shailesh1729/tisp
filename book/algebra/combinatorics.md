@@ -1771,7 +1771,111 @@ is a sum of $n \choose k$ terms.
 ```
 
 
+```{prf:proof}
+We prove this result by mathematical induction.
 
+1. Base case: The statement is true for $n=1$, since
+
+   $$
+   | A_1 | = S_1 = | A_1|.
+   $$
+1. Inductive hypothesis: Assume that the statement is true for some $n$.
+1. We shall now prove it for $n+1$.
+1. Let $\AAA = \{ A_1, \dots, A_{n+1}\}$ be a family of $n+1$ sets.
+1. Let $A = A_1 \cup A_2 \cup \dots \cup A_n$.
+1. Then $A_1 \cup A_2 \cup \dots \cup A_n \cup A_{n+1} = A \cup A_{n + 1}$.
+1. By {prf:ref}`res-comb-inc-ex-2-sets`, we have
+
+   $$
+   | A \cup A_{n+1} | = |A | + | A_{n+1} | - | A \cap A_{n+1} |.
+   $$
+1. By inductive hypothesis:
+
+   $$
+   |A| = \sum_{k=1}^n (-1)^{k+1}S_k 
+   $$
+   where
+
+   $$
+   S_k = \sum_{1 \leq i_1 < i_2 <  \dots < i_k \leq n}
+   | A_{i_1} \cap A_{i_2} \cap \dots  \cap A_{i_k} |.
+   $$
+1. Let $B_i = A_i \cap A_{n+1}$ for $i=1,\dots,n$.
+1. Then $A \cap A_{n+1} = B_1 \cup B_2 \cup \dots \cup B_n$.
+1. By inductive hypothesis:
+
+   $$
+   |A \cap A_{n+1}| = \sum_{l=1}^n (-1)^{l+1}T_l 
+   $$
+   where
+
+   $$
+   T_l &= \sum_{1 \leq i_1 < i_2 <  \dots < i_l \leq n}
+   | B_{i_1} \cap B_{i_2} \cap \dots  \cap B_{i_l} | \\
+   &= \sum_{1 \leq i_1 < i_2 <  \dots < i_l \leq n}
+   | A_{i_1} \cap A_{i_2} \cap \dots  \cap A_{i_l} \cap A_{n+1}|.
+   $$
+1. We can now write
+
+   $$
+   &| A_1 \cup A_2 \cup \dots \cup A_n \cup A_{n+1} | \\
+   &= |A | + | A_{n+1} | - | A \cap A_{n+1} |\\
+   &= \sum_{k=1}^n (-1)^{k+1}S_k  + | A_{n+1} |
+   - \left ( \sum_{l=1}^n (-1)^{l+1}T_l \right) \\
+   &= S_1 + | A_{n+1} | + \sum_{k=2}^n (-1)^{k+1}S_k
+   + \sum_{l=1}^{n-1} (-1)^{l+2} T_l + (-1)^{n + 2} T_n\\
+   &= S_1 + | A_{n+1} | + \sum_{k=2}^n (-1)^{k+1} (S_k + T_{k -1}) + (-1)^{n + 2} T_n.
+   $$
+1. We now define $U_j$ for $j=1,\dots,n+1$ as follows:
+
+   1. For $j=1$ we define
+
+      $$
+      U_1 = S_1 + | A_{n+1} | = |A_1 | + |A_2| + \dots + |A_n| + | A_{n+1} |.
+      $$
+   1. For $j=2,\dots,n$ we define
+
+      $$
+      U_j &= S_j + T_{j -1} \\
+      &= \sum_{1 \leq i_1 < i_2 <  \dots < i_j \leq n}
+      | A_{i_1} \cap A_{i_2} \cap \dots  \cap A_{i_j} |\\
+      &+ \sum_{1 \leq i_1 < i_2 <  \dots < i_{j-1} \leq n}
+      | A_{i_1} \cap A_{i_2} \cap \dots  \cap A_{i_{j-1}} \cap A_{n+1}| \\
+      &= \sum_{1 \leq i_1 < i_2 <  \dots < i_j \leq n+1}
+      | A_{i_1} \cap A_{i_2} \cap \dots  \cap A_{i_j} |.
+      $$
+      1. We can see that the terms in $S_j$
+         are the intersections of $j$ sets from $\AAA$
+         not including $A_{n + 1}$
+      1. The terms in $T_{j-1}$ are intersections
+         of $j$ sets from $\AAA$ including $A_{n+1}$.
+      1. Hence the terms in $U_j$ are the intersections
+         of $j$ sets from $\AAA$.
+      1. $U_j$ is indeed the sum of cardinalities of all $j$-set
+         intersections of $\AAA$.
+   1. For $j=n+1$ we define
+
+      $$
+      U_{n+1} = T_n = | A_1 \cap A_2 \cap \dots  \cap A_n \cap A_{n+1}|.
+      $$
+      This is nothing but the one and only intersection of all sets in
+      $\AAA$.
+1. We can see that 
+
+   $$
+   | A_1 \cup A_2 \cup \dots \cup A_n \cup A_{n+1} |
+   = \sum_{j=1}^{n+1} (-1)^{j+1}U_j
+   $$
+   where
+
+   $$
+   U_j = \sum_{1 \leq i_1 < i_2 <  \dots < i_j \leq n+1}
+      | A_{i_1} \cap A_{i_2} \cap \dots  \cap A_{i_j} |.
+   $$
+1. Hence the inclusion-exclusion principle statement is true for $n+1$ also.
+1. Hence by mathematical induction, the statement is true
+   for all $n$.
+```
 
 
 
