@@ -6,6 +6,10 @@ Main references for this section are
 
 ## Basic Counting
 
+There are two basic principles of counting: the sum rule
+and the product rule. The sum rule is derived from the
+cardinality of union of disjoint sets. The product
+rule is derived from the Cartesian product of two sets.
 
 ### Product Rule
 
@@ -67,6 +71,17 @@ outcomes is
 
 $$
 n = n_1 + n_2 + \dots + n_k = \sum_{i=1}^k n_i.
+$$
+```
+
+```{prf:remark} sum rule for sets
+:label: rem-comb-sum-rule-sets
+
+The sum rule in set theory is as follows.
+If $A$ and $B$ are finite and disjoint sets, then
+
+$$
+| A \cup B|  = |A | + |B|.
 $$
 ```
 
@@ -588,7 +603,7 @@ $n$ objects, then $f(n) =  g(n)$ for every $n$.
 
 ```{index} Combinatorial identity
 ```
-```{prf:theorem} Combinatorial identity
+```{prf:definition} Combinatorial identity
 :label: def-comb-combinatorial-identity
 
 Let there be two functions $f, g : \ZZ_+ \to \ZZ$.
@@ -666,6 +681,113 @@ Let us look at a combinatorial proof.
    be equal.
 ```
 
+### Pascal's Identity
+
+```{index} Pascal's identity
+```
+```{prf:theorem} Pascal's identity
+:label: res-comb-pascal-identity
+
+For integers $n$ and $k$, we have
+
+$$
+{n \choose k} = {n -1 \choose k - 1} + {n - 1 \choose k}.
+$$
+```
+```{prf:proof}
+Let there be $n$ objects.
+
+1. The L.H.S. is the number of ways of choosing $k$ objects from $n$ object.
+1. Fix some object $x$.
+1. In a selection of $k$ objects, either $x$ is selected or it is not selected.
+1. If $x$ is selected, then there are $n -1 \choose k - 1$ ways of selecting
+   the remaining $k-1$ objects.
+1. If $x$ is not selected, then all the $k$ objects must be selected from the
+   remaining $n-1$ objects.
+1. The two cases are mutually exclusive and add up to
+
+   $$
+   {n -1 \choose k - 1} + {n - 1 \choose k}
+   $$
+   on the R.H.S..
+```
+
+
+
+### Hockey Stick Identity
+
+```{prf:example} Recursive rule for computing $r$-combinations
+:label: ex-comb-recursive-rule-r-comb
+
+Consider the problem of choosing $r$ objects from
+a set of $n$ objects.
+By definition, the number of ways we can choose
+$r$ objects is $n \choose r$.
+Following is another way to count the same.
+
+1. Let us label the objects as $1,2, \dots, n$.
+1. We consider $n$ different cases as follows.
+1. Each subset can be identified by the largest
+   label inside it.
+1. In the $k$-th case, we consider all the subsets
+   where the largest label is $k$.
+1. Since this object is decided, the number of ways
+   of choosing the remaining $r-1$ objects from the
+   $k-1$ objects whose labels are smaller than $k$
+   is given by $k - 1 \choose r - 1$.
+1. Since any such subset must have at least $r$ objects,
+   hence the minimum possible value of $k$ is $r$.
+1. The maximum possible value of $k$ is $n$.
+1. Hence, the total number of elements is given by
+
+   $$
+   \sum_{k=r}^n {k - 1 \choose r - 1}.
+   $$
+1. We get the identity
+
+   $$
+   {n \choose r} = \sum_{k=r}^n {k - 1 \choose r - 1}.
+   $$
+1. By replacing $k-1$ with $i$, we get another version
+
+   $$
+   {n \choose r} = \sum_{i=r-1}^{n-1} {i \choose r - 1}.
+   $$
+
+This identity enables us to compute $n \choose r$
+if $i \choose r - 1$ is known for all values of
+$r-1 \leq i \leq n-1$.
+```
+
+```{prf:theorem} Hockey stick identity
+:label: res-comb-hockey-stick-identity
+
+$$
+\sum_{t = 0}^n {t \choose k} = {n + 1 \choose k + 1}.
+$$
+```
+Note that for $0 \leq t < k$, $t \choose k = 0$.
+
+```{prf:proof}
+Consider the set of $n+1$ numbers $S = \{ 0,2,\dots, n\}$.
+
+1. The R.H.S. is the number of ways of choosing $k+1$ numbers
+   from $S$.
+1. For any $t \in S$, consider the ways of choosing $k+1$ numbers
+   from $S$ such that $t$ is the highest number in the subset. 
+1. Since $t$ is already chosen and all other numbers must be
+   less than $t$, hence there are $t \choose k$ ways of
+   choosing remaining $k$ numbers.
+1. $t$ can vary from $0$ to $n$.
+1. Each term on the L.H.S. is the number of ways of choosing
+   $k+1$ numbers so that $t$ is the highest number.
+1. These are mutually exclusive cases.
+1. Hence, L.H.S. is also the number of ways $k+1$ numbers
+   can be chosen from $S$.
+```
+
+### More Identities
+
 ```{prf:example}
 :label: ex-comb-n-n-least-1
 
@@ -718,49 +840,6 @@ Method 2
    $$
 ```
 
-
-```{prf:example} Recursive rule for computing $r$-combinations
-:label: ex-comb-recursive-rule-r-comb
-
-Consider the problem of choosing $r$ objects from
-a set of $n$ objects.
-By definition, the number of ways we can choose
-$r$ objects is $n \choose r$.
-Following is another way to count the same.
-
-1. Let us label the objects as $1,2, \dots, n$.
-1. We consider $n$ different cases as follows.
-1. Each subset can be identified by the largest
-   label inside it.
-1. In the $k$-th case, we consider all the subsets
-   where the largest label is $k$.
-1. Since this object is decided, the number of ways
-   of choosing the remaining $r-1$ objects from the
-   $k-1$ objects whose labels are smaller than $k$
-   is given by $k - 1 \choose r - 1$.
-1. Since any such subset must have at least $r$ objects,
-   hence the minimum possible value of $k$ is $r$.
-1. The maximum possible value of $k$ is $n$.
-1. Hence, the total number of elements is given by
-
-   $$
-   \sum_{k=r}^n {k - 1 \choose r - 1}.
-   $$
-1. We get the identity
-
-   $$
-   {n \choose r} = \sum_{k=r}^n {k - 1 \choose r - 1}.
-   $$
-1. By replacing $k-1$ with $i$, we get another version
-
-   $$
-   {n \choose r} = \sum_{i=r-1}^{n-1} {i \choose r - 1}.
-   $$
-
-This identity enables us to compute $n \choose r$
-if $i \choose r - 1$ is known for all values of
-$r-1 \leq i \leq n-1$.
-```
 
 ## Counting with Repetitions
 
@@ -1467,18 +1546,193 @@ We can do this by creating a grid of points.
 1. Hence, in each column, there exists a pair of points
    which has the same color.
 1. Now examine the pair of points in each column.
-1. Since there are $n+1$ points, hence there are $p = n + 1 \choose 2$
+1. Since there are $n+1$ points, hence there are $p = {n + 1 \choose 2}$
    pairs of points in each column.
 1. There are $p$ pairs of points and $n$ colors.
 1. Hence there are $n p$ ways of choosing a unique pair of points
    and a unique color.
 1. Thus, in at most $n p $ columns, a pair of points doesn't appear
    at the same location with the same color.
-1. Hence if we have $n p + 1$ columns, then there exist a pair of
+1. Hence if we have $n p + 1$ columns, then there exist at least two
    columns such that the same color occupies the same two locations
    in both the columns.
 1. These four points form a rectangle whose points have the same color.
 ```
+
+### Generalized Pigeonhole Principle
+
+```{index} Generalized pigeonhole principle
+```
+```{prf:theorem} Generalized pigeonhole principle
+:label: res-comb-gen-pigeonhole-principle
+
+If there are $n$ objects that fall into $m$ different
+categories and $n > k m$, for some positive integer $k$,
+then at least $k+1$ of the objects fall into the same category.
+```
+```{prf:proof}
+.
+
+1. Consider the first $km$ objects.
+1. If $k+1$ of them fall into the same category,
+   we are done.
+1. Otherwise, exactly $k$ of them must fall
+   into the each category.
+1. Since $n > km$, hence there is one more object.
+1. This object must fall into one of these $m$ categories.
+1. Since every category already has $k$ objects, hence
+   there will be $k+1$ objects in the category
+   to which the $km + 1$-th object falls.
+```
+
+We show the application of the generalized pigeonhole principle
+to prove Erdős–Szekeres theorem.
+
+```{prf:theorem} Erdős–Szekeres theorem
+:label: def-comb-erdos–szekeres 
+
+For every pair of integers $a,b \geq 1$, if $S$
+is a sequence of $ab + 1$ distinct real numbers,
+then there is either an increasing subsequence
+of length $a + 1$ or a decreasing subsequence
+of length $b + 1$ in $S$.
+```
+
+```{prf:proof}
+Let $n = a b + 1$.
+Define a function $f$ which maps every element $x \in S$
+to the length of the longest increasing subsequence that
+begins with $x$.
+
+1. If there exists some $x \in S$ such that $f(x) \geq a + 1$
+   then we are done.
+1. Otherwise, we have that $f(x) \leq a$ for every $x \in S$.
+1. We note that for every $x \in S$, there exists an increasing
+   subsequence of length $1$.
+1. Hence $f(x) \geq 1$ for every $x \in S$.
+1. Hence we have $1 \leq f(x) \leq a$ for every $x \in S$.
+1. Hence, there are $a$ possible values of $f(x)$.
+1. Since $n > a b$, hence there exists at least $b + 1$
+   values of $S$ which have the same value of $f(x)$
+   due to the generalized pigeonhole principle.
+1. Let $T = \{t_1, t_2, \dots, t_{b+1} \}$ be a subsequence
+   of $S$ such that $f(x)$ is identical for every $x \in T$.
+1. We now claim that $T$ is a decreasing subsequence of $S$.
+1. Let $x, y \in T$ such that $x$ appears before $y$ in $S$.
+1. Since all values in $S$ are distinct, hence $x \neq y$.
+1. Assume that $x < y$.
+1. Then by taking $x$ and the increasing subsequence of $S$ of length
+   $f(y)$ starting at $y$, we can form a subsequence of length $f(y) + 1$
+   starting from $x$.
+1. This contradicts the fact that $f(x) = f(y)$.
+1. Hence $x > y$ must hold.
+1. Hence for every $t_i, t_j \in T$, such that $i < j$, we have $t_i > t_j$.
+1. Hence we have $t_1 > t_2 > \dots > t_{b + 1}$.
+1. Hence there exists a decreasing subsequence of length $b + 1$.  
+```
+
+
+## Inclusion Exclusion Principle
+
+Recall from {prf:ref}`rem-comb-sum-rule-sets`
+that for finitely many mutually disjoint finite sets, the number of
+elements of their union is equal to the sum
+of the number of elements of individual sets.
+
+Inclusion-exclusion principle is a way of counting the number
+of elements of unions of finite sets which may be overlapping.
+
+1. For two sets, we add the counts of individual sets, then
+   subtract the count of their intersection.
+1. For three sets:
+   - Add the counts of individual sets
+   - Subtract the counts of their pairwise intersections
+   - Add the count of their triple intersection.
+1. For four sets:
+   - Add individual counts
+   - Subtract pairwise intersection counts
+   - Add counts of intersections of every selection of three sets
+   - Subtract the count of the intersection of all sets.
+1. And so on.
+
+
+```{prf:theorem} Inclusion-exclusion principle for 2 sets
+:label: res-comb-inc-ex-2-sets
+
+Let $A$ and $B$ be two finite sets. Then
+
+$$
+| A \cup B | = |A | + |B | - | A \cap B |.
+$$
+```
+
+```{prf:proof}
+.
+
+1. Recall that $A \setminus B$ and $A \cap B$ are disjoint and
+
+   $$
+   A = (A \setminus B) \cup (A \cap B). 
+   $$
+1. Hence $|A| = |A \setminus B| + |A \cap B|$.
+1. Similarly $|B| = |B \setminus A| + |A \cap B|$.
+1. Also recall that
+
+   $$
+   A \cup B = (A \setminus B) \cup (B \setminus A) \cup (A \cap B)
+   $$
+   and these three sets are disjoint.
+1. Hence $|A \cup B | = |A \setminus B|  + |B \setminus A| + |A \cap B|$.
+1. Substituting from previous identities
+
+   $$
+   |A \cup B | =  |A| - |A \cap B| + |B| - |A \cap B| + |A \cap B|
+   = |A | + |B | - | A \cap B |
+   $$
+   as desired.
+```
+
+We can now generalize the principle for a finite number of sets
+
+```{prf:theorem} Inclusion-exclusion principle for $n$ sets
+:label: res-comb-inc-ex-principle
+
+Let $\AAA = \{ A_1, A_2, \dots, A_n \}$ be a family of $n$ finite sets
+which are not necessarily disjoint.
+Then the size (cardinality) of their union is given by:
+
+$$
+| A_1 \cup A_2 \cup \dots \cup A_n | 
+&= S_1 - S_2 + S_3 - \dots + (-1)^{n + 1} S_n\\
+&= \sum_{k=1}^n (-1)^{k+1}S_k
+$$
+where $S_k$ is the sum of the cardinalities of all $k$-set intersections
+among the sets $A_1, \dots, A_n$.
+In particular,
+
+$$
+& S_1 = \sum_{i=1}^n | A_i| \\
+& S_2 = \sum_{1 \leq i < j \leq n} | A_i \cap A_j | \\
+& S_3 = \sum_{1 \leq i < j < k \leq n} | A_i \cap A_j \cap A_k |\\
+& \vdots\\
+& S_n = | A_1 A_2 \dots A_n |.
+$$
+In general for every $k \in 1,\dots,n$, we can write:
+
+$$
+S_k = \sum_{1 \leq i_1 < i_2 <  \dots < i_k \leq n}
+| A_{i_1} \cap A_{i_2} \cap \dots  \cap A_{i_k} |.
+$$
+One can see that there are $n \choose k$ ways of choosing $k$
+sets from the family $\AAA$ of $n$ sets. Hence, each $S_k$
+is a sum of $n \choose k$ terms.
+```
+
+
+
+
+
+
 
 ## Generating Functions
 
