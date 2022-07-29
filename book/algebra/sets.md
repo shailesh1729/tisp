@@ -97,6 +97,9 @@ $$
 $$
             A \setminus B  = \{ x \ST x \in A \text{ and } x \notin B\}.
 $$
+
+Note that, we often use the notation $A B$ for the intersection of
+$A$ and $B$.
 ````
 
 ```{index} Set; disjoint
