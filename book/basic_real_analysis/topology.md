@@ -40,6 +40,8 @@ It is a {prf:ref}`metric <def-ms-distance-function>`.
 
 ## Neighborhoods or Balls
 
+```{index} Neighborhood; real line, Open ball; real line
+```
 ````{prf:definition} Neighborhood
 :label: def-bra-neighborhood
 
@@ -57,7 +59,9 @@ In other words, $V_{\epsilon}(x) = (x - \epsilon, x + \epsilon)$.
 A neighborhood is an open interval.
 
 
-````{prf:definition} Closed Neighborhood
+```{index} Closed neighborhood; real line, Closed ball; real line
+```
+````{prf:definition} Closed neighborhood
 :label: def-bra-closed-neighborhood
 
 Given a real number $x \in \RR$ and $\epsilon > 0$, the set
@@ -73,6 +77,8 @@ It is also called a *closed ball*.
 In other words, $C_{\epsilon}(x) = [x - \epsilon, x + \epsilon]$.
 A closed neighborhood/ball is a closed interval.
 
+```{index} Deleted neighborhood; real line
+```
 ````{prf:definition} Deleted neighborhood
 :label: def-bra-deleted-neighborhood
 
@@ -103,6 +109,56 @@ We claim without proving:
 1. Finite intersections of open sets are open sets.
 1. Every open interval is an open set.
 
+
+See {ref}`sec:ms:metric-topology` for proofs.
+
+There is one interesting result specific to real lines
+which we prove here.
+
+```{prf:theorem}
+:label: res-rl-open-set-countable-union
+
+Let $E \subseteq \RR$ be an open set. Then there exist
+countably many disjoint open intervals $I_j, j=1,2,\dots$
+such that
+
+$$
+E = \bigcup_{j=1}^{\infty} I_j.
+$$
+```
+```{prf:proof}
+We prove this result by establishing an equivalence relation
+on the set $E$.
+
+1. If $a, b \in E$, we say that $a \sim b$ if the entire
+   open interval $(a, b)$ is contained in $E$; i.e.,
+   $(a,b) \subseteq E$.
+1. Readers can verify that it is indeed an equivalence relation.
+1. This equivalence relation partitions $E$ into a disjoint
+   union of equivalence classes.
+1. Let each class be labeled as $I_j$ for $j \in J$ where $J$
+   is an arbitrary index set. We don't yet know that $J$ is
+   countable.
+1. We can see that $I_j$ must be an
+   {prf:ref}`interval <def-rl-interval>` for every $j \in J$.
+   1. Let $a_j, b_j \in I_j$, with $a_j < b_j$.
+   1. Then $a_j \sim b_j$.
+   1. Hence $(a_j, b_j) \subseteq I_j$.
+   1. Since this is true for every $a_j, b_j \in I_j$, hence
+      $I_j$ must be an interval.
+1. We next show that $I_j$ must be open for every $j \in J$.
+   1. Let $x \in I_j$ be arbitrary.
+   1. Since $x \in E$ and $E$ is open, hence there exists
+      $\epsilon > 0$ such that $(x - \epsilon, x + \epsilon) \subseteq E$.
+   1. Then $a \sim x$ for every $a \in (x - \epsilon, x + \epsilon)$.
+   1. Hence $(x - \epsilon, x + \epsilon) \subseteq I_j$.
+   1. Hence $I_j$ must be open.
+1. We next show that $J$ (index set) must be finite or countable.
+   1. Since each $I_j$ is an open interval, hence it must contain
+      at least one rational number ({prf:ref}`res-rl-rational-existence`).
+   1. Since there are countably many rational numbers, hence
+      there can be at most countably many $I_j$.
+```
 
 ## Closed Sets
 

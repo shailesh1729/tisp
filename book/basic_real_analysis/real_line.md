@@ -247,6 +247,8 @@ $| a  - b | < \epsilon$. Hence $a  = b$.
 
 ## Intervals
 
+```{index} Interval
+```
 ```{prf:definition} Interval
 :label: def-rl-interval
 
