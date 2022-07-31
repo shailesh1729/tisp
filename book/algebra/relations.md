@@ -250,7 +250,7 @@ $\{A_i\}_{i \in I}$ of pairwise disjoint sets (a family of
 equivalence classes) such that $X = \cup_{i \in I} A_i$.
 ````
 
-```{index} Set partition
+```{index} Set partition, Partition; set
 ```
 ````{prf:definition} Partition
 :label: def-st-partition

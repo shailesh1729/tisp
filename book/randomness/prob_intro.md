@@ -1,7 +1,19 @@
 (sec:prob:intro)=
-# Introduction
+# Probability Spaces
 
 Our notes will be based on the axiomatic treatment of probability.
+The foundations of modern probability theory are rooted in
+the measure theory which is a study of measures.
+A measure is a generalization of geometric notions like
+length, area and volume. The probability of a set is
+also a measure.
+Although we don't provide extensive coverage of
+measure theory in these notes,
+we cover some fundamental concepts like $\sigma$-algebra
+in our introduction to probability theory.
+For a comprehensive measure theoretic treatment,
+see {cite}`billingsley2012probability`.
+
 
 ```{index} Random experiment
 ```
@@ -29,84 +41,350 @@ We shall often denote the sample space by the symbol
 $\Omega$. Individual outcomes shall often be denoted
 by $\zeta$.
 
-### Sigma Fields
+## Sigma Algebras and Fields
 
-```{index} Field; probability
+```{index} Field; probability, Algebra; probability
 ```
-```{prf:definition} Field
+```{prf:definition} Field, Algebra
 :label: def-prob-field
 
-Consider the sample space $\Omega$
+Consider a sample space $\Omega$
 and a certain collection of subsets of $\Omega$ denoted by $\FFF$.
-Let $E$ and $F$ be arbitrary members of $\FFF$.
-
-We say that $\FFF$ forms a *field* if meets the following
-constraints:
+We say that $\FFF$ forms an *algebra* (in the set theoretic sense)
+over $\Omega$ if meets the following rules:
 
 1. $\EmptySet \in \FFF$.
-1. $\Omega \in \FFF$.
-1. If $E, F \in \FFF$ then $E \cup F \in \FFF$ and $E \cap F \in \FFF$.
+1. If $A, B \in \FFF$ then $A \cup B \in \FFF$ and $A \cap B \in \FFF$.
 1. If $E \in \FFF$ then $\Omega \setminus E = E^c \in \FFF$.
 
 In other words,
-$\FFF$ contains the empty set and the sample space,
-$\FFF$ is closed under finite union and intersection,
-and $\FFF$ is closed under complement.
+$\FFF$ contains the empty set,
+$\FFF$ is closed under union, intersection, complement operations.
+The pair $(\Omega, \FFF)$ is known as a *field*.
 ```
 
 ```{note}
-The notion of field here is different from the notion
-of algebraic fields (e.g. $\RR$ and $\CC$).
+The term *algebra* is used here in the sense of Boolean
+algebra from set theory whose operations include
+union, intersection and complement.
+The notion of *field* here is different from the notion
+of fields (e.g. $\RR$ and $\CC$)
+in ring theory.
+Similarly the term algebra over $\Omega$ should not
+be confused with algebras over fields or rings in ring theory.
 ```
 
-Often, we need to work with infinite set of outcomes
-and events. We have to deal with situations which
-involve countable unions and intersections of sets.
+
+```{prf:example} trivial algebra
+:label: ex-prob-algebra-1
+
+Let $\Omega$ be an arbitrary sample space.
+Then, $\{ \EmptySet, \Omega \}$ is a trivial algebra over $\Omega$.
+```
+
+```{prf:example} algebras over a set of 4 elements
+:label: ex-prob-algebra-4
+
+Let $\Omega = \{ 1, 2, 3, 4 \}$.
+
+1. $\{\EmptySet,  \{ 1, 2, 3, 4 \} \}$ is an algebra.
+1. $\{\EmptySet, \{ 1, 2\}, \{3, 4 \}, \{ 1, 2, 3, 4 \} \}$ is an algebra.
+1. $\{\EmptySet, \{ 1\}, \{2, 3, 4 \}, \{ 1, 2, 3, 4 \} \}$ is an algebra.
+1. The power set consisting of all subsets of $\Omega$ is an algebra.
+```
+
+
+```{prf:theorem} Properties of an algebra
+:label: res-prob-algebra-props
+
+Let $\FFF$ be an algebra over $\Omega$. Then
+
+1. $\Omega \in \FFF$.
+1. If $A_1, \dots, A_n \in \FFF$, then $A_1 \cup \dots \cup A_n \in \FFF$.
+1. If $A_1, \dots, A_n \in \FFF$, then $A_1 \cap \dots \cap A_n \in \FFF$.
+1. If $A, B \in \FFF$ then $A \setminus B \in \FFF$.
+```
+
+$\FFF$ includes the sample space.
+$\FFF$ is closed under finite unions and finite intersections.
+$\FFF$ is closed under set difference.
+
+```{prf:proof}
+(1) Sample space
+1. $\EmptySet \in \FFF$.
+1. $\Omega = \EmptySet^c$.
+1. Hence $\Omega \in \FFF$.
+
+(2) Closure under finite union by mathematical induction
+
+1. Base case: for $n=2$ is trivial.
+1. Assume that the statement is true for some $n \geq 2$.
+1. Let $A_1, \dots, A_n, A_{n+1} \in \FFF$.
+1. By inductive hypothesis $A = A_1 \cup \dots \cup A_n \in \FFF$.
+1. Then
+   
+   $$
+   A_1 \cup \dots \cup A_n \cup A_{n + 1}
+   = (A_1 \cup \dots \cup A_n) \cup A_{n + 1}
+   = A \cup A_{n + 1}.
+   $$
+1. Since both $A, A_{n + 1} \in \FFF$, hence there union
+   is also in $\FFF$.
+1. Hence by mathematical induction, $\FFF$ is closed under
+   all finite unions.
+
+(3) Closure under finite intersection
+
+1. We note that
+
+   $$
+   A_1 \cap \dots \cap A_n = (A_1^c \cup \dots \cup A_n^c)^c.
+   $$
+1. Since $A_i \in \FFF$, hence $A_i^c \in \FFF$ for $i=1,\dots,n$.
+1. Then $A = A_1^c \cup \dots \cup A_n^c \in \FFF$ due to (2).
+1. Then $A_1 \cap \dots \cap A_n = A^c \in \FFF$.
+
+(4) Set difference
+
+1. We note that $A \setminus B = A \cap B^c$.
+1. Since $B \in \FFF$, hence $B^c \in \FFF$.
+1. Since $A, B^c \in \FFF$, hence $A \cap B^c \in \FFF$.
+```
+
+```{prf:example} Algebra from a partition
+:label: ex-prob-algebra-from-partition
+
+Let $\Omega$ be a sample space. Let
+$A = \{ A_1, \dots, A_n \}$ be a (finite) partition of $\Omega$.
+In other words, $A_i$ are pairwise disjoint and their
+union is $\Omega$. Then the collection $\FFF$
+consisting of all unions of the sets $A_i$
+(including the empty set which is the union of zero sets)
+forms an algebra.
+
+1. Since there are $n$ sets in the partition $A$, hence
+   number of elements of $\FFF$ is $2^n$.
+1. By definition $\EmptySet$ and $\Omega$ are in $\FFF$.
+1. Let $X, Y \in \FFF$. Then both $X$ and $Y$ are unions
+   of some members of $A$.
+1. Hence $X \cup Y$ is also a union of some members of $A$.
+1. Hence $\FFF$ is closed under union.
+1. If $X$ and $Y$ are disjoint then $X \cap Y \in \FFF$.
+1. Otherwise, $X \cap Y$ is the union of some members of $A$
+   which are common in both $X$ and $Y$.
+   Hence $X \cap Y \in \FFF$.
+1. Hence $\FFF$ is closed under intersection.
+1. Let $X \in \FFF$. Then $X$ is union of some members of $A$.
+1. Then $\Omega \setminus X$ is the union of remaining members of $A$.
+1. Hence $\Omega \setminus X \in \FFF$.
+1. Hence $\FFF$ is closed under complement.
+1. Hence $\FFF$ is an algebra.
+```
+
+Often, the sample space $\Omega$ is an infinite set (e.g., $\RR$)
+and the field of subsets of $\Omega$ is also infinite.
+For example, the Borel field defined over $\RR$ contains
+all the open and closed intervals in $\RR$.
+We have to deal with situations which
+involve countable unions and intersections of sets in the field.
+Mathematical induction shows that a field is
+closed under finite unions and intersections
+but it is not enough to prove that it is also
+closed under countable unions.
 To handle such cases, we need to extend the
-definition of field.
+definition of a field.
 
 ```{index} $\sigma$ field, $\sigma$ algebra
 ```
-```{prf:definition} $\sigma$ field
+```{prf:definition} $\sigma$-field, $\sigma$-algebra
 :label: def-prob-sigma-field
 
 Consider an infinite sample space $\Omega$
 and a certain collection of subsets of $\Omega$ denoted by $\FFF$.
-We say that $\FFF$ is a $\sigma$-*field* if
-it is a field and it is closed
-under countable unions, intersections and complements.
-This is also known as a $\sigma$-*algebra*.
+We say that $\FFF$ is a $\sigma$-*algebra* over $\Omega$ if
+it is an algebra over $\Omega$ and it is closed
+under countable unions.
+In other words, if $A_1, A_2, \dots$ is a countable
+collection of sets in $\FFF$, then, their union
+
+$$
+\bigcup_{i=1}^{\infty} A_i \in \FFF.
+$$
+The pair $(\Omega, \FFF)$ is known as a $\sigma$-*field*.
+```
+
+When the sample space is obvious from the context, we will
+often call $\FFF$ also as a field or a $\sigma$-field
+as appropriate.
+
+```{prf:example} Power set
+:label: ex-prob-power-set-field
+
+Let $\Omega$ be an arbitrary sample space.
+Then its power set $\PPP(\Omega)$ is a $\sigma$-algebra.
 ```
 
 
-```{prf:definition} Field generated by a collection of sets
+```{prf:theorem} Countable intersection
+:label: res-prob-sigma-algebra-countable-intersection
+
+Let $\FFF$ be a $\sigma$-algebra over $\Omega$.
+Then $\FFF$ is closed under countable intersection.
+In other words, if $A_1, A_2, \dots$ is a countable
+collection of sets in $\FFF$, then, their intersection
+
+$$
+\bigcap_{i=1}^{\infty} A_i \in \FFF.
+$$
+```
+```{prf:proof}
+We use the complement property.
+
+1. Let  $A_1, A_2, \dots$ be subsets in $\FFF$.
+1. Then $A_1^c, A_2^c, \dots$ are also in $\FFF$.
+1. Then their countable union:
+
+   $$
+   \bigcup_{i=1}^{\infty} A_i^c \in \FFF.
+   $$
+1. Taking complement, we get
+
+   $$
+   \bigcap_{i=1}^{\infty} A_i \in \FFF
+   $$
+   as desired.
+```
+
+
+```{prf:remark}
+:label: rem-prob-sigma-field-bounds
+
+Any $\sigma$-algebra $\FFF$ of subsets of a sample space $\Omega$
+likes between the two extremes:
+
+$$
+\{ \EmptySet, \Omega \} \subseteq \FFF \subseteq \PPP(\Omega).
+$$
+```
+
+
+
+
+### Generated $\sigma$ Algebra
+
+```{index} Atom; $\sigma$-algebra
+```
+```{prf:definition} atom
+:label: def-prob-atom
+
+An *atom* of $\FFF$ is a set $A \in \FFF$ such that
+the only subsets of $A$ which are also in $\FFF$
+are the empty set $\EmptySet$ and $A$ itself.
+```
+
+```{prf:theorem} Intersection of $\sigma$-algebras
+:label: res-prob-intersection-sigma-algebras
+
+Let $\GGG = \{ \GGG_i \}_{i \in I}$
+be a nonempty collection of $\sigma$-algebras over $\Omega$
+where $I$ is some index set.
+Then their intersection $\bigcap_{i \in I} \GGG_i$ is
+also a $\sigma$-algebra.
+```
+
+```{prf:proof}
+Denote $\FFF = \bigcap_{i \in I} \GGG_i$. We shall
+verify all the properties of a $\sigma$-algebra.
+
+Empty Set
+
+1. Since $\EmptySet \in \GGG_i$ for every $i$, hence
+   $\EmptySet \in \FFF$.
+
+Union
+
+1. Let $A, B \in \FFF$.
+1. Then $A, B \in \GGG_i$ for every $i$.
+1. Hence $A \cup B \in \GGG_i$ for every $i$.
+1. Hence $A \cup B \in \FFF$.
+
+Intersection
+
+1. Let $A, B \in \FFF$.
+1. Then $A, B \in \GGG_i$ for every $i$.
+1. Hence $A \cap B \in \GGG_i$ for every $i$.
+1. Hence $A \cap B \in \FFF$.
+
+Countable union
+1. Let $A_1, A_2, \dots$ be a countable collection of subsets
+   in $\FFF$.
+1. Then $A_1, A_2, \dots \in \GGG_i$ for every $i$.
+1. Since each $\GGG_i$ is a $\sigma$-algebra, hence
+   $\bigcup_{j=1}^{\infty} A_j \in \GGG_i$ for every $i$.
+1. Hence $\bigcup_{j=1}^{\infty} A_j \in \FFF$.
+```
+
+```{index} Generated sigma algebra
+```
+```{prf:definition} $\sigma$-algebra generated by a collection of sets
 :label: res-prob-generated-field
 
-Let $\{ A_i \}_{i \in I}$ be a collection of subsets of $\Omega$
+Let $\AAA = \{ A_i \}_{i \in I}$ be a collection of subsets of $\Omega$
 where $I$ is an index set.
-Let $\FFF$ be the smallest $\sigma$-field such that
+Let $\FFF$ be the smallest $\sigma$-algebra such that
 $A_i \in \FFF$ for every $i \in I$.
-Then $\FFF$ is called the $\sigma$-field generated
-by $\{ A_i \}$.
+Then $\FFF$ is called the $\sigma$-*algebra generated by* $\AAA$
+and is denoted by $\sigma(\AAA)$.
 ```
 
-1. Here by smallest, we mean that if there is any other $\sigma$-field
+1. Here by smallest, we mean that if there is any other $\sigma$-algebra
    $\GGG$ such that $A_i \in \GGG$ for every $i \in I$, then
    $\FFF \subseteq \GGG$.
-1. It is possible that there is no $\sigma$-field $\FFF$ such that
-   $A_i \in \FFF$ for every $i \in I$.
-1. If the index set $I$ is finite, then the generated field doesn't
-   require closure under countable union/intersection. Closure under
-   finite union and intersection is sufficient.
+1. Since the power set $\PPP(\Omega)$ is a $\sigma$ algebra
+   and it contains all subsets of $\Omega$ (including $\AAA$)
+   hence there is always a $\sigma$-algebra containing a given
+   collection of sets.
 1. It may not be possible to visualize every member of $\FFF$ easily
    from the descriptions of $A_i$. 
 
-```{prf:example} Field generated by 2 sets
-:label: ex-prob-gen-field-2-sets
+We next show that a smallest $\sigma$-algebra exists
+for every collection $\AAA$.
+
+```{prf:theorem} Existence of the generated $\sigma$-algebra
+Let $\AAA$ be a collection of subsets of $\FFF$. Then
+there exists a smallest $\sigma$-algebra containing $\AAA$.
+In other words, there is a $\sigma$-algebra generated by $\AAA$.
+```
+
+```{prf:proof}
+The main issue is to verify that if there is any other
+$\sigma$-algebra, it contains the smallest one.
+We provide a constructive proof.
+
+1. Let $\GGG = \{ \GGG_j \}_{j \in J}$
+   be the collection of all $\sigma$-algebras
+   containing all sets of $\AAA$.
+1. We can see that $\GGG$ is nonempty since $\PPP(\Omega) \in \GGG$.
+1. By {prf:ref}`res-prob-intersection-sigma-algebras`,
+   $\FFF = \bigcap_{j \in J} \GGG_j$ is a $\sigma$-algebra.
+1. We claim that $\sigma (\AAA) = \FFF$.
+1. Since $\AAA \subseteq \GGG_j$ for every $j \in J$, hence
+   $\AAA \subseteq \FFF$.
+1. By construction $\FFF \subseteq \GGG_j$ for every $j \in J$.
+   In other words, $\FFF$ is contained in every $\sigma$-algebra
+   containing $\AAA$.
+1. Hence $\FFF$ is indeed the $\sigma$-algebra generated by $\AAA$.
+
+We note that if $\AAA$ itself is a $\sigma$-algebra, then
+of course $\sigma(\AAA) = \AAA$.
+```
+
+```{prf:example} Algebra generated by 2 sets
+:label: ex-prob-gen-algebra-2-sets
 
 Let $\Omega$ be an arbitrary sample space. Let $A$ and $B$
 be two subsets of $\Omega$ which are not necessarily disjoint.
-We shall construct the field $\FFF$ generated by $A$ and $B$.
+We shall construct the algebra $\FFF$ generated by $A$ and $B$.
 
 1. Since $A \in \FFF$, hence $A^c \in \FFF$.
 1. Similarly, $B^c \in \FFF$.
@@ -120,6 +398,11 @@ We shall construct the field $\FFF$ generated by $A$ and $B$.
    $$
    \Omega = E \cup F \cup G \cup H.
    $$
+1. We now have a partition of $\Omega$ into $4$ disjoint sets.
+   We can follow the lead from {prf:ref}`ex-prob-algebra-from-partition`
+   to construct an algebra
+   by constructing all the unions of $0$ or more sets from the
+   collection $\{ E, F, G, H \}$.
 1. The empty set $\EmptySet$ doesn't contain any of these sets ${4 \choose 0}$.
 1. There are ${4 \choose 1} = 4$ of these disjoint subsets. 
 1. There are ${4 \choose 2} = 6$ pair-wise unions of these $4$ sets.
@@ -128,23 +411,294 @@ We shall construct the field $\FFF$ generated by $A$ and $B$.
 1. A total of $1 + 4 + 6 + 4 + 1 = 16 = 2^4$ possible subsets are formed.
 1. In particular, note that $A = E \cup F$, $B = E \cup G$,
    $A^c = G \cup H$ and $B^c  = F \cup H$.
-
-We claim that this collection of $16$ subsets of $\Omega$ is
-the field $\FFF$. To show this, we need to show that
-this collection of $16$ sets is closed under union, intersection
-and complement.
-
-1. Unions of these $16$ sets are trivially in $\FFF$.
-1. Since $\Omega = E \cup F \cup G \cup H$, hence complements
-   of $E, F, G, H$ are the four triple unions of the remaining sets
-   which are already included.
-1. Similarly, since any set is composed of the union of a few of $E, F, G, H$, hence
-   its complement is composed of the union of remaining sets.
-   Hence, this collection is closed under complement.
-1. Intersections of these $16$ events are also some unions of $E,F,G, H$
-   Hence, the collection is closed under intersection also.
-1. Hence this must be $\FFF$.
+1. We can see that this collection of $16$ subsets of $\Omega$ is
+   an algebra following {prf:ref}`ex-prob-algebra-from-partition`.
+1. This is indeed the smallest algebra containing
+   $A$ and $B$ as any other algebra must contain $\FFF$.
+1. Hence it is the algebra generated by $A$ and $B$.
+1. We can see that $E, F, G, H$ are the atoms of the algebra $\FFF$.
 ```
+
+### Dynkin $\pi-\lambda$ theorem
+
+When constructing probability measures
+(see {ref}`sec:prob:probability:measure`),
+it is generally impossible to assign
+a probability to each subset in a $\sigma$-algebra.
+The Carathéodory extension theorem allows
+us to define a measure explicitly for only a small
+collection of simple sets, which may or may not
+form a $\sigma$-algebra (e.g. the atoms inside
+a $\sigma$-algebra) and automatically extend
+the measure to all other sets in the algebra.
+The uniqueness claim in the extension theorem
+makes use of Dynkin $\pi-\lambda$ theorem
+(below). Readers may skip this subsection
+in the first reading.
+
+```{index} Pi system
+```
+```{prf:definition} $\pi$ system
+:label: def-prob-pi-system
+
+Let $\Omega$ be a sample space. A collection $P$
+of subsets of $\Omega$ is a $\pi$-*system* if
+$P$ is closed under finite intersections.
+In other words, if $A, B \in P$, then $A \cap B \in P$.
+```
+
+```{index} Lambda system
+```
+```{prf:definition} $\lambda$ system
+:label: def-prob-lambda-system
+
+Let $\Omega$ be a sample space. A collection $L$
+of subsets of $\Omega$ is a $\lambda$-*system* if
+1. $L$ contains the empty set $\EmptySet$
+1. $L$ is closed under complements:
+   if $A \in L$ then $A^c \in L$
+1. $L$ is closed under countable *disjoint* union:
+   if $A_1, A_2, \dots \in L$ and $A_i \cap A_j = \EmptySet$
+   for every $i \neq j$, then $\bigcup_{i=1}^{\infty} A_i \in L$.
+```
+
+```{prf:theorem} Dynkin $\pi-\lambda$ theorem
+:label: res-prob-dynkin-pi-lambda
+
+If $P$ is a $\pi$ system and $L$ a $\lambda$-system
+of subsets of $\Omega$ with $P \subseteq L$ then
+
+$$
+\sigma(P) \subseteq L.
+$$
+In other words, the $\sigma$-algebra generated by $P$
+is contained in $L$.
+```
+
+The proof of this result is involved.
+The overall strategy works as follows:
+
+1. We shall construct a $\sigma$-algebra
+   that lies between $P$ and $L$.
+1. In particular, we shall construct the
+   set $l(P)$ which is the intersection
+   of all $\lambda$-systems containing $P$.
+1. We then show that $l(P)$ is a $\lambda$-system. 
+1. We then show that $l(P)$ is also a $\pi$-system.
+1. We show that a collection which is both a $\lambda$-system
+   and a $\pi$-system is also a $\sigma$-algebra.
+1. Thus, we claim that $l(P)$ is a $\sigma$-algebra.
+1. We finally show that $\sigma(P) \subseteq l(P) \subseteq L$.
+
+In order to prove this result, we first prove
+some of the intermediate steps individually.
+
+
+```{prf:lemma} Closedness under proper differences
+:label: res-prob-lambda-sys-proper-diff
+
+A $\lambda$-system is closed under proper differences.
+In other words, if $A, B \in L$ where $L$ is a
+$\lambda$-system and $A \subseteq B$ then the difference
+$B \setminus A$ is also in $L$.
+```
+
+```{prf:proof}
+We note that $B \setminus A = B \cap A^c$. We shall show
+this as a complement of the disjoint union of sets.
+
+1. Since $B \in L$, hence $B^c \in L$.
+1. Since $A \subseteq B$, hence $A$ and $B^c$ are disjoint.
+1. Hence $D = A \cup B^c \in L$ since it is a disjoint union.
+1. Hence $D^c = A^c \cap B$ in $L$.
+1. But $B \setminus A = B \cap A^c = D^c$.
+1. Hence $B \setminus A \in L$. 
+```
+
+```{prf:lemma} $\pi + \lambda \implies \sigma$
+:label: res-prob-pi-lambda-sigma
+
+A family of subsets of $\Omega$ which is both a $\pi$-system
+and a $\lambda$-system is a $\sigma$-algebra.
+```
+
+```{prf:proof}
+Let $S$ be a family of subsets of $\Omega$ which is
+both a $\pi$-system and a $\lambda$-system.
+
+1. $\EmptySet \in S$ since it is a $\lambda$-system.
+1. $S$ is closed under finite intersections since it is a
+   $\pi$-system.
+
+We just need to show that it is closed under countable
+unions of (not necessarily disjoint) sets.
+
+1. Let $A_1, A_2, \dots \in S$.
+1. We shall write $\bigcup_{i=1}^{\infty} A_i$ as a
+   countable union of disjoint sets.
+1. Let $B_1 = A_1$.
+1. For $n \geq 2$, let
+
+   $$
+   B_n = A_n \setminus (A_1 \cup A_2 \cup \dots \cup A_{n-1})
+   = A_n \cap A_1^c \cap A_2^c \cap \dots \cap A_{n-1}^c.
+   $$
+   In other words, $B_n$ consists of all elements of $A_n$
+   which don't appear in any of the sets $A_1, \dots, A_{n-1}$.
+1. Then $B_1, B_2, \dots$ is a sequence of disjoint sets.
+1. We can also see that $A_1 \cup \dots \cup A_n = B_1 \cup \dots \cup B_n$
+   for every $n$.
+1. Hence $\bigcup_{i=1}^{\infty} A_i = \bigcup_{i=1}^{\infty} B_i$.
+1. Since $S$ is a $\lambda$-system, hence $A_i^c \in S$ for every $i$.
+1. Since $S$ is a $\pi$-system, hence $B_i \in S$ for every $i$.
+1. Hence  $\bigcup_{i=1}^{\infty} B_i \in S$ as it is a countable
+   union of disjoint sets.
+```
+
+```{prf:lemma} $\lambda$-co-systems
+:label: res-prob-dynkin-lem-3
+
+Suppose $L'$ is a $\lambda$-system of subsets of $\Omega$.
+For any set $A \in L'$, let $S_A$ be the set of all
+$B \in \Omega$ for which $A \cap B \in L'$.
+Then $S_A$ is a $\lambda$-system.
+```
+
+```{prf:proof}
+Empty set
+
+1. Since $\EmptySet = A \cap \EmptySet \in L'$, hence
+   $\EmptySet \in S_A$.
+
+Countable union of disjoint sets
+1. Let $B_1, B_2, \dots \in S_A$ be a sequence of
+   disjoint subsets in $S_A$.
+1. Then $A \cap B_i \in L'$ for every $i$.
+1. Then $\bigcup (A \cap B_i) \in L'$
+   since $A \cap B_i$ are also disjoint.
+1. Also $\bigcup (A \cap B_i) = A \cap (\bigcup B_i)$.
+1. Since $A \cap (\bigcup B_i) \in L'$, hence
+   $\bigcup B_i \in S_A$.
+1. Hence $S_A$ is closed under countable union of disjoint sets.
+
+Complements
+
+1. Let $B \in S_A$. Then $A \cap B \in L'$.
+1. Now $A \cap B^c = A \setminus B = A \setminus (A \cap B)$.
+1. Since $A \in L'$ and $A \cap B \in L'$
+   and $A \cap B \subseteq A$, hence
+   due to {prf:ref}`res-prob-lambda-sys-proper-diff`,
+   $A \setminus (A \cap B) \in L'$.
+1. Since $A \cap B^c \in L'$ hence $B^c \in S_A$.
+1. Hence $S_A$ is closed under complements.
+
+Thus, $S_A$ is indeed a $\lambda$-system.
+```
+
+```{prf:lemma}
+:label: res-prob-dynkin-lem-4
+
+Let $l(P)$ be the intersection of all $\lambda$-systems
+containing $P$. Then $l(P)$ is a $\lambda$-system.
+```
+```{prf:proof}
+We can easily verify that $l(P)$ satisfies all the properties
+of a $\lambda$-system.
+
+1. Let $\LLL = \{L_i \}$ be the collection of all $\lambda$-systems
+   containing $P$.
+1. Then $l(P) = \bigcap L_i$.
+1. Since $\EmptySet \in L_i$ for every $i$, hence
+   $\EmptySet \in l(P)$.
+1. Let $A \in l(P)$.
+1. Then $A \in L_i$ for every $i$.
+1. Hence $A^c \in L_i$ for every $i$.
+1. Hence $A^c \in l(P)$.
+1. Let $A_1,A_2, \dots \in l(P)$ be a collection
+   of pairwise disjoint sets.
+1. Then $A_1,A_2,\dots \in L_i$ for every $i$.
+1. Hence $\bigcup A_i \in L_i$ for every $i$.
+1. Hence $\bigcup A_i \in l(P)$.
+```
+
+```{prf:lemma}
+:label: res-prob-dynkin-lem-5
+
+Let $l(P)$ be the intersection of all $\lambda$-systems
+containing $P$. Then $l(P)$ is a $\pi$-system.
+```
+```{prf:proof}
+The proof uses a *bootstrap* argument often used in
+measure theory.
+
+We first show that for any $A \in P$ and $B \in l(P)$,
+$A \cap B \in l(P)$.
+
+1. Let $A \in P$.
+1. Then $A \in l(P)$.
+1. Let $S_A$ be the set of all sets $B \subseteq \Omega$
+   such that $A \cap B \in l(P)$.
+1. By {prf:ref}`res-prob-dynkin-lem-3`, $S_A$
+   is a $\lambda$-system.
+1. Let $B \in P$. Then $A \cap B \in P$ since $P$ is a $\pi$-system.
+1. But $P \subseteq l(P)$.
+1. Hence $A \cap B \in l(P)$.
+1. Hence $B \in S_A$.
+1. Hence $P \subseteq S_A$.
+1. Thus, $S_A$ is a $\lambda$-system containing $P$.
+1. Hence $l(P) \subseteq S_A$ as $l(P)$ is the intersection
+   of all $\lambda$-systems containing $P$.
+1. Thus, for any $A \in P$ and for any $B \in l(P)$, 
+   the intersection $A \cap B \in l(P)$.
+   1. $B \in l(P) \implies B \in S_A$.
+   1. $B \in S_A \implies A \cap B \in l(P)$.
+
+We now show that for any $A, B \in l(P)$,
+$A \cap B \in l(P)$.
+
+1. Consider any $B \in l(P)$.
+1. Let $S_B$ be the set of all sets $C \subseteq \Omega$
+   such that $B \cap C \in l(P)$.
+1. By preceding argument $P \subseteq S_B$.
+   1. Let $A \in P$.
+   1. Since $A \in P$ and $B \in l(P)$
+      hence $A \cap B \in l(P)$.
+   1. Hence $A \in S_B$.
+   1. Hence $P \subseteq S_B$.
+1. By {prf:ref}`res-prob-dynkin-lem-3`, $S_B$
+   is a $\lambda$-system.
+1. Therefore $l(P) \subseteq S_B$.
+1. This means that for any $A \in l(P)$, the intersection
+   $A \cap B \in l(P)$.
+   1. $A \in l(P) \implies A \in S_B$.
+   1. $A \in S_B \implies B \cap A \in l(P)$.
+
+Thus, $l(P)$ is closed under intersections and
+is indeed a $\pi$-system.
+```
+
+We are now ready to prove the Dynkin $\pi-\lambda$ theorem
+({prf:ref}`res-prob-dynkin-pi-lambda`).
+
+```{prf:proof}
+Let $l(P)$ be the intersection of all $\lambda$-systems
+containing $P$.
+
+1. By hypothesis $L$ is a $\lambda$-system
+   containing $P$.
+1. By definition $l(P) \subseteq L$.
+1. By {prf:ref}`res-prob-dynkin-lem-4`,
+   $l(P)$ is a $\lambda$-system.
+1. By {prf:ref}`res-prob-dynkin-lem-5`,
+   $l(P)$ is a $\pi$-system.
+1. By {prf:ref}`res-prob-pi-lambda-sigma`,
+   $l(P)$ is a $\sigma$-algebra.
+1. By definition $\sigma(P)$ is the smallest
+   $\sigma$-algebra containing $P$.
+1. Hence $P \subseteq \sigma(P) \subseteq l(P) \subseteq L$.
+```
+
+### Borel Field
 
 ```{index} Borel field
 ```
@@ -161,7 +715,7 @@ included in the Borel field. However, they don't
 happen to be of much engineering and scientific
 interest. 
 
-### Events
+## Events
 
 ```{index} Event; probability
 ```
@@ -232,7 +786,9 @@ Let $E$ and $F$ be two events. If $E$ and $F$ are disjoint sets
 then we say that the two events are mutually exclusive.
 ```
 
-## Probability Measure
+
+(sec:prob:probability:measure)=
+## Probability Measure and Space
 
 We next provide an axiomatic definition of a probability measure.
 
@@ -285,6 +841,8 @@ $$
 \PP(E \cup F) = \PP(E) + \PP(F).
 $$
 ```
+
+### Probability Space
 
 ```{index} Probability space
 ```
@@ -725,7 +1283,7 @@ Let $A$ and $B$ be two different experiments.
 Let $\Omega_1$ be the sample space of $A$
 and $\Omega_2$ be the sample space of $B$.
 Then the sample space of the *compound experiment*
-is given by the Cartesian product $\Omega_1 \times \Omega_2$.
+is given by the Cartesian product $\Omega = \Omega_1 \times \Omega_2$.
 Let $E_1$ be an event associated with experiment $A$
 and $E_2$ be an event associated with experiment $B$.
 Then $E = E_1 \times E_2$ is a *compound event* associated with
@@ -734,6 +1292,38 @@ the compound experiment.
 $$
 E_1 \times E_2 = \{\zeta = (\zeta_1, \zeta_2) \ST \zeta_1 \in E_1, \zeta_2 \in E_2 \}.
 $$
+More generally, a *compound event* can be written
+as a finite disjoint union of cartesian product events
+from the two experiments:
+
+$$
+E = \bigup_{i=1}^k E_{1, i} \times E_{2, i}
+$$
+where $E_{1,i}$ and $E_{2, i}$ are events in
+$\Omega_1$ and $\Omega_2$ respectively.
+```
+
+```{prf:example} Compound events as union of product events
+:label: ex-prob-compound-exp-union-products
+
+1. Consider two experiments each of which consists
+   of throwing a die.
+1. The sample space for both experiments is
+   
+   $$
+   \Omega_1 = \Omega_2 = \{ 1,2,3,4,5,6 \}.
+   $$
+1. There are $36$ possible outcomes in the compound experiment.
+1. The compound sample space is given by
+
+   $$
+   \Omega = \Omega_1 \times \Omega_2 = \{
+   (1,1), (1,2), \dots, (1,6),
+   (2,1), \dots, (2,6),
+   \dots,
+   (6,1), \dots, (6,6) 
+   \}.
+   $$
 ```
 
 ```{index} Independent experiments
