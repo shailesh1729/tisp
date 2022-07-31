@@ -1378,10 +1378,11 @@ given that the event $A$ has happened is denoted by
 $\PP(B | A)$. It is defined as
 
 $$
-\PP(B | A) \triangleq \frac{\PP(AB)}{\PP(A)}
-\text{ if } \PP(A) > 0.
+\PP(B | A) \triangleq \frac{\PP(AB)}{\PP(A)}.
 $$
 ```
+Note that the conditional probability is not
+defined if $\PP(A) = 0$.
 
 By definition, we can see that
 
@@ -1389,6 +1390,56 @@ $$
 \PP(A B) = \PP(B | A) \PP(A) = \PP(A | B) \PP(B).
 $$
 
+```{prf:example}
+:label: ex-prob-cond-prob-1-toss
+
+Consider an experiment of tossing a coin 3 times.
+
+1. The sample space is
+
+   $$
+   \Omega = 
+   \{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\}.
+   $$
+1. Assume that all the outcomes are equally likely.
+   Each each outcome has the probability $\frac{1}{8}$.
+1. Let $A$ denote the event that the first toss is
+   a head. We have
+
+   $$
+   A = \{ HHH, HHT, HTH, HTT \}.
+   $$
+1. We can see that $\PP(A) = \frac{1}{2}$.
+1. Let $B$ be the event that more heads than tails
+   come up in the three tosses. We have
+
+   $$
+   B = \{HHH, HHT, HTH, THH \}.
+   $$
+1. We can see that $\PP(B) = \frac{1}{2}$.
+1. If the first outcome is a head, then the probability
+   that more heads than tails come will increase.
+1. Let us first check the event $A \cap B$. We have
+
+   $$
+   A \cap B = \{ HHH, HHT, HTH \}.
+   $$
+1. Hence $\PP(A B) = \frac{3}{8}$.
+1. Then the probability that more heads than tails
+   come up given that first toss is a head is
+   given by
+
+   $$
+   \PP(B | A) = \frac{3 / 8}{ 1/2} = \frac{3}{4}.
+   $$
+1. We can also compute the probability that the
+   first toss is a head given that more heads
+   than tails come up as
+
+   $$
+   \PP(A | B) = \frac{3 / 8}{ 1/2} = \frac{3}{4}.
+   $$   
+```
 
 We should verify that the conditional probability
 as defined above satisfies the axioms of probability.
@@ -1429,6 +1480,13 @@ $$
 
 The argument for countable additivity is similar.
 ```
+We note that
+
+$$
+\PP(A | A)  = \frac{\PP(AA)}{\PP(A)}
+= \frac{\PP(A)}{\PP(A)} = 1.
+$$
+
 Since $\PP(B | A)$ is a valid probability measure,
 all the properties of a probability measure are
 applicable for the conditional probability also.
@@ -1456,14 +1514,23 @@ Then the following properties hold:
    \PP\left ( \bigcup_{i=1}^n E_i | A \right) = \sum_{i=1}^n \PP(E_i | A)
    $$
    if $E_1, E_2, \dots, E_n$ are pairwise disjoint events.
-```
-The proofs are similar to {prf:ref}`res-prob-prob-measure-props`.
-We note that
+1. Union of three events
 
-$$
-\PP(A | A)  = \frac{\PP(AA)}{\PP(A)}
-= \frac{\PP(A)}{\PP(A)} = 1.
-$$
+   $$ 
+   \PP(B \cup C \cup D | A ) 
+   &= \PP(B | A) + \PP(C | A) + \PP(D | A) \\
+   &- \PP(BC | A) - \PP(CD | A) - \PP(BD | A)  + \PP(BCD | A).
+   $$
+1. Let  $B_1, B_2, \dots, B_n$ be a finite collection of events.
+   Then we have
+
+   $$
+   \PP \left ( \bigcup_{i=1}^n  B_i  | A \right) 
+   \leq \sum_{i=1}^n \PP \left ( B_i | A \right).
+   $$
+```
+The proofs are similar to {prf:ref}`res-prob-prob-measure-props`
+and other results in the following.
 
 ```{note}
 Since $\PP(A | A) = 1$, one can see that all
@@ -1473,6 +1540,7 @@ discard the outcomes in $A^c$ and treat the
 conditional probabilities as a probability
 measure on the new sample space $A$.
 ```
+
 
 ```{index} Marginal probability
 ```
