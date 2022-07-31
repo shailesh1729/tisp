@@ -1,7 +1,43 @@
 (sec:prob:intro)=
 # Probability Spaces
 
+Probability measures the amount of uncertainty in an event.
+Typically, the probability of an event is expressed
+as a nonnegative real number ranging between $0$ and $1$.
+
+1. When an event has a probability $1$, we are certain that
+   the event will occur.
+1. When an event has a probability $0$, we are certain that
+   the event will not occur.
+1. When we toss a coin, we are not certain whether it will
+   turn heads (H) or tails (T). We normally assign
+   a probability of $0.5$ to both H and T outcomes as
+   we believe that both outcomes are equally likely.
+1. When we throw a die, then the possible outcomes are
+   $\{ 1, 2, 3, 4, 5, 6 \}$. If we believe that each
+   outcome is equally likely, then we can assign
+   a probability of $\frac{1}{6}$ to each outcome.
+1. If we have a fairly reliable digital communication
+   channel, then the probability of error may be
+   as low as $1e-6$. In other words, there is a
+   one in a million chance of a transmitted bit
+   flipping during the transmission.
+
+Given a sample space of outcomes, there are two main
+activities involved:
+
+1. Assigning a probability to different outcomes or
+   events in a manner that the probabilities
+   are sensible.
+1. Use the laws of probability theory to infer
+   the probabilities of other outcomes or events.
+
 Our notes will be based on the axiomatic treatment of probability.
+We describe the rules for assigning sensible probabilities
+to different events. We then develop the theory for computing with
+the probabilities. We leave out the task of estimating the
+probabilities of individual events which is covered extensively
+in statistics.
 The foundations of modern probability theory are rooted in
 the measure theory which is a study of measures.
 A measure is a generalization of geometric notions like
@@ -858,6 +894,22 @@ can be assigned probabilities and are
 events.
 ```
 
+We can translate the set-theoretic language
+to the language of events as follows.
+Let $A, B$ be two different events.
+
+1. $A$ doesn't occur is denoted by $A^c$.
+1. Either $A$ or $B$ occur is denoted by $A \cup B$.
+1. Both $A$ and $B$ occur is denoted by $A B$.
+1. $A$ occurs and $B$ doesn't occur is denoted by $A \setminus B$.
+   This can also be denoted as $A B^c$.
+1. The events $A$ and $B$ are *exhaustive* if
+   $\Omega = A \cup B$.
+   In particular $A \cup A^c = \Omega$.
+1. $A$ and $B$ events are exclusive if $A B = \EmptySet$.
+
+
+
 ```{index} Singleton event, Elementary event
 ```
 ```{prf:definition} Elementary event
@@ -902,6 +954,9 @@ then we say that the two events are mutually exclusive.
 ## Probability Measure and Space
 
 We next provide an axiomatic definition of a probability measure.
+Note that we will often write a joint event (intersection of two
+events)
+as $A B$ rather than $A \cap B$.
 
 ```{index} Probability measure
 ```
@@ -917,7 +972,7 @@ $\PP(E)$ called the probability of the event $E$ satisfying
 the following rules:
 
 1. Nonnegativity: $\PP(E) \geq 0$.
-1. Unit measure: $\PP(\Omega) = 1$.
+1. Unit measure or normalization: $\PP(\Omega) = 1$.
 1. Additivity: $\PP(E \cup F) = \PP(E) + \PP(F)$ if $E F = \EmptySet$.
 ```
 
@@ -1263,6 +1318,26 @@ We prove it using induction.
     $$
 ````
 
+### Countable Additivity
+
+Often, we need to work with problems where we need to estimate
+the probability of a countable union of events. The basic
+axioms of a probability measure are unable to handle
+this. We need one more axiom that a probability measure
+must satisfy.
+
+
+```{prf:axiom} Fourth axiom: countable additivity
+:label: ax-prob-countable-additivity
+
+Let $E_1, E_2, \dots$ be a (countable) sequence of mutually exclusive
+events (disjoint sets). Then
+
+$$
+\PP\left ( \bigcup_{i=1}^{\infty} E_i \right) = \sum_{i=1}^{\infty} \PP(E_i).
+$$
+```
+
 ## Joint and Conditional Probability
 
 ### Joint Probability
@@ -1314,6 +1389,101 @@ $$
 \PP(A B) = \PP(B | A) \PP(A) = \PP(A | B) \PP(B).
 $$
 
+
+We should verify that the conditional probability
+as defined above satisfies the axioms of probability.
+
+```{prf:theorem}
+:label: res-prob-cond-prob-measure
+
+The conditional probability is a probability measure.
+```
+```{prf:proof}
+
+(Nonnegativity)
+By definition, it is a ratio of nonnegative quantities.
+Hence, it is nonnegative.
+
+
+(Normalization)
+We can see that
+
+$$
+\PP(\Omega | A) = \frac{\PP(A \Omega)}{\PP(A)}
+= \frac{\PP(A)}{\PP(A)} = 1.
+$$
+
+(Additivity)
+
+1. Let $B_1$ and $B_2$ be disjoint events.
+1. Then $A B_1$ and $A B_2$ are also disjoint events.
+1. Hence
+
+   $$
+   \PP(B_1 \cup B_2 | A) &= \frac{\PP(A (B_1 \cup B_2 ))}{\PP(A)}\\
+   &= \frac{\PP(A B_1 \cup A B_2 ))}{\PP(A)}\\
+   &= \frac{\PP(A B_1) + \PP(A B_2 ))}{\PP(A)}\\
+   &= \frac{\PP(A B_1))}{\PP(A)} + \frac{\PP(A B_2 ))}{\PP(A)}\\
+   &= \PP(B_1 | A) + \PP(B_2 | A).
+   $$
+
+The argument for countable additivity is similar.
+```
+Since $\PP(B | A)$ is a valid probability measure,
+all the properties of a probability measure are
+applicable for the conditional probability also.
+
+```{prf:theorem} Properties of a conditional probability measure
+:label: res-prob-cond-prob-measure-props
+
+Let $(\Omega, \FFF, \PP)$ be a probability space.
+Let all probabilities be conditioned on an event $A$.
+Then the following properties hold:
+
+1. $\PP(\EmptySet | A) = 0$.
+1. $\PP(A | A) = 1$.
+1. $\PP(E F^c | A) = \PP(E | A) - \PP(EF | A)$.
+1. $\PP(E | A) = 1 - \PP(E^c | A)$.
+1. $\PP(E \cup F | A) = \PP(E | A) + \PP(F | A) - \PP(EF | A)$.
+1. If $E \subseteq F$, then 
+
+   $$
+   \PP (E | A)\leq \PP(F | A).
+   $$
+1. For any positive integer $n$, we have
+
+   $$
+   \PP\left ( \bigcup_{i=1}^n E_i | A \right) = \sum_{i=1}^n \PP(E_i | A)
+   $$
+   if $E_1, E_2, \dots, E_n$ are pairwise disjoint events.
+```
+The proofs are similar to {prf:ref}`res-prob-prob-measure-props`.
+We note that
+
+$$
+\PP(A | A)  = \frac{\PP(AA)}{\PP(A)}
+= \frac{\PP(A)}{\PP(A)} = 1.
+$$
+
+```{note}
+Since $\PP(A | A) = 1$, one can see that all
+of the conditional probability is concentrated
+on the outcomes in $A$. Thus, we might as well
+discard the outcomes in $A^c$ and treat the
+conditional probabilities as a probability
+measure on the new sample space $A$.
+```
+
+```{index} Marginal probability
+```
+```{prf:definition} Marginal probability
+:label: def-prob-marginal-probability
+
+Let $A$ and $B$ be two events.
+The *marginal probability* of the event $A$
+is the probability $\PP(A)$ which is not
+conditioned on the event $B$.
+```
 
 ### Independence
 
@@ -1524,23 +1694,14 @@ Consider tossing a coin $n$ times.
    $$
 ```
 
+Let $E$ be a compound event of two independent
+experiments given as a disjoint union of product events.
+Then the probability measure for the compound event
+is given by
 
-## Countable Additivity
-
-Often, we need to work with problems where we need to estimate
-the probability of a countable union of events. The basic
-axioms of a probability measure are unable to handle
-this.
-
-
-```{prf:axiom} Fourth axiom: countable additivity
-:label: ax-prob-countable-additivity
-
-Let $E_1, E_2, \dots$ be a (countable) sequence of mutually exclusive
-events (disjoint sets). Then
-
-$$
-\PP\left ( \bigcup_{i=1}^{\infty} E_i \right) = \sum_{i=1}^{\infty} \PP(E_i).
-$$
+```{math}
+:label: eq-prob-compound-event-prob-measure-1
+\PP(E) = \sum_{i=1}^k \PP(E_{1, i}) \PP(E_{2, i}).
 ```
+
 
