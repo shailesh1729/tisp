@@ -1801,50 +1801,356 @@ Bayes' rule is a key tool in the field of
 
 ## Independence
 
+The conditional probability $\PP(A | B)$
+captures the information that occurrence
+of the event $B$ provides about the event $A$.
+In many cases, it may happen that observing $B$
+provides us no information about the event $A$.
+Consequently, the probability $\PP(A)$ is
+not altered when conditioning on the event $B$.
+Then, we say that the events $A$ and $B$ are
+independent.
+
 ```{index} Independence
 ```
 ```{prf:definition} Independence of two events
 :label: def-prob-independence-2
 
-Let $A$ and $B$ be two events
-with $\PP(A) > 0$ and $\PP(B) > 0$.
-We say that $A$ and $B$ are *independent* if and only if
+Let $A$ and $B$ be two events.
+We say that $A$ and $B$ are *independent* if
 
 $$
 \PP(A B) = \PP(A) \PP(B).
 $$
 ```
+Independence is a symmetric property. We can
+see that if $A$ is independent of $B$ then
+$B$ is independent of $A$.
 
 It follows that for independent events
 
-$$
-\PP(B | A) = \PP(B)
-\text{ and }
-\PP(A | B) = \PP(A).
-$$
+1. If $\PP(A) > 0$ then 
 
-```{prf:definition} Independence of three events
-:label: def-prob-independence-3
+   $$
+   \PP(B | A) = \PP(B).
+   $$
+1. And if $\PP(B) > 0$ then
 
-Let $A, B$ and $C$ be three events
-with nonzero probabilities.
-We say that $A, B$ and $C$ are *jointly independent* if and only if
+   $$
+   \PP(A | B) = \PP(A).
+   $$
+
+
+```{prf:example}
+Consider the problem of rolling a $4$-sided dice
+twice. Assume that all outcomes are equally likely.
+
+1. Let $A$ be the event that the first roll is $1$.
+1. Let $B$ be the event that the sum of two rolls is $5$.
+1. We have $A = \{(1,1), (1,2), (1,3), (1,4) \}$.
+1. We have $B = \{(1, 4), (2, 3), (3, 2), (4, 1) \}$.
+1. Number of outcomes is $16$.
+1. $\PP(A) = \frac{1}{4}$.
+1. $\PP(B) = \frac{1}{4}$.
+1. We can see that $A B = \{(1, 4)\}$.
+1. Then $\PP(A B) = \frac{1}{16}$.
+1. We can see that $\PP(A B) = \PP(A) \PP(B)$.
+1. The two events $A$ and $B$ are independent.
+1. On the surface, it may seem that there should
+   be dependence between the events $A$ and $B$
+   but it is not so.
+1. Since the outcomes in the event $B$ are equally
+   likely, we can carefully examine the list of
+   outcomes in the event $B$ to see that observing the event $B$
+   gives us no additional information about whether the
+   first roll will give us $1$.
+
+Now consider the problem of rolling a $6$-sided
+dice twice with the same events as before.
+
+1. We have $A = \{(1,1), (1,2), (1,3), (1,4), (1,5), (1,6) \}$.
+1. We have $B = \{(1, 4), (2, 3), (3, 2), (4, 1) \}$.
+1. Number of outcomes is $36$.
+1. $\PP(A) = \frac{1}{6}$.
+1. $\PP(B) = \frac{1}{9}$.
+1. We can see that $A B = \{(1, 4)\}$.
+1. Then $\PP(A B) = \frac{1}{36}$.
+1. Clearly, $\PP(A B) \neq \PP(A) \PP(B)$.
+1. The two events are dependent.
+1. In fact $\PP(A | B) = \frac{1}{4}$
+   In other words, the probability of $A$ increases
+   given that $B$ has been observed.
+1. Looking at the outcomes in $B$ we can see that
+   observance of $B$ eliminates the possibility of
+   $5$ and $6$ from the first roll.
+1. This leads to the increase in the probability of $1$
+   in the first roll.
+1. We can also see that $\PP(B | A) = \frac{1}{6}$.
+1. The probability of $B$ given $A$ has also increased.
+```
+
+### Conditional Independence
+
+Recall that the conditional probability is a probability
+measure in itself. This enables us to introduce the
+notion of conditional independence.
+
+```{index} Conditional independence
+```
+```{prf:definition} Conditional independence
+:label: def-prob-conditional-independence
+
+Given an event $C$, two events $A$ and $B$ are
+called *conditionally independent* if
 
 $$
-& \PP(A B C) = \PP(A) \PP(B) \PP(C)\\
-& \PP(A B) = \PP(A) \PP(B)\\
-& \PP(B C) = \PP(B) \PP(C)\\
-& \PP(A C) = \PP(A) \PP(C).
+\PP (A B | C) = \PP (A | C) \PP (B | C).
 $$
 ```
 
+```{prf:theorem}
+:label: res-prob-cond-ind-charac
 
+Let $A, B, C$ be three different events.
+Assume that $\PP(B C) > 0$.
+Given that $C$ has occurred, $A$ and $B$ are
+conditionally independent if and only if
+
+$$
+\PP(A | B C) = \PP (A | C).
+$$
+```
+
+```{prf:proof}
+Note that $\PP(B C) > 0$ implies that
+$\PP(B) > 0$, $\PP(C) > 0$, 
+$\PP(B | C) > 0$ and $\PP(C | B) > 0$.
+
+1. By conditional probability definition and
+   multiplication rule, we have
+
+   $$
+   \PP (A B | C) &= \frac{\PP (A B C)}{\PP(C)}\\
+   &= \frac{\PP(C) \PP(B | C) \PP (A | B C )}{\PP(C)}\\
+   &= \PP(B | C) \PP (A | B C ).
+   $$
+1. Comparing this with the expression of conditional
+   independence, we have
+
+   $$
+   \PP(B | C) \PP (A | B C ) = \PP (A | C) \PP (B | C).
+   $$
+1. Eliminating the common term, we have
+
+   $$
+   \PP (A | B C ) = \PP (A | C).
+   $$
+```
+
+It is important to note that
+
+1. Unconditional independence of $A$ and $B$
+   doesn't imply conditional independence given $C$.
+1. Conditional independence of $A$ and $B$ given $C$
+   doesn't imply unconditional independence.
+
+
+```{prf:example}
+:label: ex-prob-cond-prob-counter-1
+
+Consider tossing a fair coin twice.
+Assume that all outcomes are equally likely.
+
+1. $\Omega = \{ HH, HT, TH, TT \}$.
+1. Let $A$ be the event that the first toss is a head.
+   $A = \{ HH, HT \}$.
+1. Let $B$ be the event that the second toss is a head.
+   $B = \{TH, HH \}$.
+1. It is easy to see that $A$ and $B$ are independent.
+1. Let $C$ be the event that the two tosses have
+   different results.
+   $C = \{TH, HT \}$.
+1. $\PP (A | C) = \frac{1}{2}$.
+1. $\PP (B | C) = \frac{1}{2}$.
+1. $\PP (A B | C) = 0$.
+1. Clearly, the two events are not conditionally
+   independent.
+```
+
+
+```{prf:example}
+:label: ex-prob-cond-prob-counter-2
+
+Let there be two coins. The first coin
+is fair while the second coin is unfair
+with the probability of head being $0.9$.
+Assume that a coin can be chosen at random
+with equal probability and then it is
+tossed twice (the two tosses being independent).
+
+1. Let $C$ be the event that the second (unfair) coin
+   was chosen.
+1. Let $H_i$ be the event that the $i$-th toss
+   resulted in heads.
+1. Given the choice of the coin, the two events
+   $H_1$ and $H_2$ are independent.
+1. $\PP(H_1 | C) = 0.9$.
+1. $\PP(H_2 | C) = 0.9$.
+1. $\PP(H_1 H_2 | C) = 0.81$.
+1. However, the two events $H_1$ and $H_2$ are
+   not independent unconditionally.
+1. If the first toss is a head, then the probability
+   that the coin is unfair increases. 
+   Consequently, the probability that the second
+   toss will also be a head increases.
+1. From total probability theorem, we have
+
+   $$
+   \PP(H_1) = \PP(C)\PP(H_1 | C)
+   + \PP(C^c)\PP(H_1 | C^c)
+   = 0.5 \cdot 0.9 + 0.5 \cdot 0.5
+   = 0.7.
+   $$
+1. Similarly $\PP(H_2) = 0.7$.
+1. However, 
+
+   $$
+   \PP(H_1 H_2) = \PP(C)\PP(H_1 H_2 | C)
+   + \PP(C^c)\PP(H_1 H_2 | C^c)
+   = 0.5 \cdot 0.81 + 0.5 \cdot 0.25
+   = 0.53.
+   $$
+1. $\PP(H_1) \PP(H_2) = 0.7 \cdot 0.7 = 0.49 \neq \PP(H_1 H_2)$.
+```
+
+### Three Events
+Naturally, we are interested in extending the notion of
+independence for multiple events. However this is a bit
+tricky. We start with the simpler case of three events
+which can explain the issues involved.
+Independence means that occurrence or non-occurrence of
+any event or any pair of events should not provide
+any information about the occurrence of any other
+event or pair of events.
+
+```{index} Independence; 3 events
+```
+```{prf:definition} Independence of three events
+:label: def-prob-independence-3
+
+Let $A, B$ and $C$ be three events.
+We say that $A, B$ and $C$ are *jointly independent* if
+
+$$
+& \PP(A B) = \PP(A) \PP(B)\\
+& \PP(B C) = \PP(B) \PP(C)\\
+& \PP(A C) = \PP(A) \PP(C)\\
+& \PP(A B C) = \PP(A) \PP(B) \PP(C).
+$$
+```
+The first three conditions establish the
+*pairwise independence* of the three sets. However, the
+fourth condition is necessary and it doesn't follow
+from the first three conditions.
+Conversely, the fourth condition doesn't imply the first
+three conditions.
+
+Let us look at some counter examples.
+
+```{prf:example}
+:label: ex-prob-3-event-pw-ind-no-ind
+
+Consider the experiment of tossing a fair coin twice
+with equally likely outcomes.
+
+1. $\Omega = \{ HH, HT, TH, TT \}$.
+1. Let $H_i$ be the event that $i$-th toss is a head.
+1. Let $A$ be the event that the two tosses have
+   different results.
+1. $H_1 = \{ HT, HH \}$.
+1. $H_2 = \{TH, HH \}$.
+1. $A = \{HT, TH \}$.
+1. $A H_1 = \{HT \}$.
+1. $A H_2 = \{TH \}$.
+1. $H_1 H_2 = \{ HH \}$.
+1. $\PP(H_1) = \PP(H_2) = \PP(A) = \frac{1}{2}$.
+1. $\PP(A H_1) = \PP (A H_2) = \PP (H_1 H_2) = \frac{1}{4}$.
+1. We can see that $A, H_1, H_2$ are pairwise independent.
+1. However $A H_1 H_2 = \EmptySet$ since occurrence of $A$
+   makes $H_1$ and $H_2$ mutually exclusive.
+1. Hence $\PP (A H_1 H_2) = 0 \neq  \PP(A) \PP(H_1) \PP(H_2)$.
+1. Hence $A, H_1,H_2$ are not independent.
+```
+
+```{prf:example}
+:label: ex-prob-3-event-3-ind-no-pw-ind
+
+Consider the experiment of tossing a fair dice twice
+with equally likely outcomes.
+
+1. The sample space has $36$ possible outcomes.
+1. Let $A$ be the event that the first roll has
+   the outcomes $1$, $2$, or $3$.
+1. Let $B$ be the event that the first roll has
+   the outcomes $3$, $4$, or $5$.
+1. Let $C$ be the event that the sum of two
+   rolls is $9$.
+1. We can see that
+
+   $$
+   C = \{ (3,6), (4,5), (5,4), (6,3) \}.
+   $$
+1. We have
+
+   $$
+   \PP(A) = \frac{1}{2},
+   \PP(B) = \frac{1}{2},
+   \PP(C) = \frac{1}{9}.
+   $$
+1. We can see that
+
+   $$
+   A B C = \{ (3,6) \}.
+   $$
+1. Hence $\PP(ABC) = \frac{1}{36}$.
+1. Clearly,
+
+   $$
+   \PP(A B C) = \PP(A) \PP(B) \PP(C).
+   $$
+1. Now $A B$ is the event that the first roll is $3$.
+1. $B C = \{ (3,6), (4,5), (5,4) \}$.
+1. $A C = \{ (3,6)\}$.
+1. Hence, we have
+
+   $$
+   \PP(A B) = \frac{1}{6},
+   \PP(B C) = \frac{1}{12},
+   \PP(A C) = \frac{1}{36}.
+   $$
+1. None of $A, B, C$ are pairwise
+   independent.
+1. Hence $A,B,C$ are not independent.
+```
+
+### $n$ Events
+
+We are now ready to generalize the
+notion of independence to any finite
+number of events. The key idea is that
+information about occurrence or non-occurrence
+of any subset of events should not provide
+any information about the occurrence or
+non-occurrence of the remaining events.
+
+```{index} Independence; n events
+```
 ```{prf:definition} Independence of $n$ events
 :label: def-prob-independence-n
 
 Let $A_1, A_2, \dots, A_n$ be $n$ events contained in $\FFF$.
 We say that $A_1, A_2, \dots, A_n$ are *jointly independent*
-if and only if
+if
 
 $$
 & \PP(A_{i_1} A_{i_2}) = \PP(A_{i_1}) \PP(A_{i_2})\\ 
@@ -1856,7 +2162,115 @@ $$
 & \PP(A_1 A_2 \dots A_n) = \PP(A_1) \PP(A_2) \dots \PP(A_n)
 $$
 for all combinations of indices such that $1 \leq i_1 < i_2 < \dots < i_k \leq n$.
+
+
+In other words, $A_1, A_2, \dots, A_n$ are *independent* if
+
+$$
+\PP (\bigcup_{i \in S}A_i) = \prod_{i \in S} \PP(A_i)
+$$
+for every (nonempty) subset $S$ of $\{1,2,\dots, n\}$.
 ```
+
+### Independent Trials
+
+```{index} Independent trials
+```
+```{prf:definition} Independent trials
+:label: def-prob-independent-trials
+
+If an experiment involves a sequence of
+independent but identical stages, we say
+that we have a sequence of *independent trials*.
+```
+
+```{index} Bernoulli trials
+```
+```{prf:definition} Bernoulli trials
+:label: def-prob-bernoulli-trials
+
+If every stage in a sequence of independent trials
+has only two possible outcomes, we say that
+we have a sequence of *Bernoulli trials*.
+```
+
+It is customary to denote the two outcomes
+of a Bernoulli trial by $H$ and $T$
+with the probabilities $p$ and $q=1-p$
+respectively.
+
+```{prf:example} Repeated coin tosses
+:label: ex-prob-repeated-coin-tosses
+
+Consider tossing a coin $n$ times
+as a sequence of Bernoulli trials.
+
+1. The outcomes of each experiment are $H$ (head) and $T$ (tail).
+1. Let $\PP(H) = p$ and $\PP(T) = q = 1 - p$.
+1. The outcome of $n$ tosses can be described as a string
+   of $n$ letters each of which is $H$ or $T$.
+1. There are $2^n$ possible strings. They form the sample space
+   of the compound experiment.
+1. Let a particular string have $k$ heads and $n-k$ tails. 
+1. Then the probability of this string is given by
+
+    $$
+    \PP(\zeta_1, \dots, \zeta_n) = \prod_{i=1}^n \PP(\{ \zeta_i \})
+    = p^k q^{n - k}.
+    $$
+1. There are $n \choose k$ strings which consist of $k$ heads and
+   $n-k$ tails.
+1. Each of these strings (singleton events) are mutually exclusive
+   of each other.
+1. Hence, by the additivity axiom, the probability of having $k$
+   heads and $n-k$ tails in $n$ trials is given by
+
+   $$
+   {n \choose k} p^k q^{n - k}.
+   $$
+```
+
+```{prf:definition} Binomial probability
+:label: def-prob-k-n-binomial-prob
+
+The probability of $k$ heads in a sequence of $n$
+Bernoulli trials, denoted by $p(k)$,
+is known as *binomial probability* and
+is given by
+
+$$
+p(k) = {n \choose k} p^k (1-p)^{n - k}
+$$
+where ${n \choose k}$ is a binomial coefficients
+and $p$ is the probability of head.
+```
+See {ref}`sec:alg:combinatorics` for a quick review
+of binomial coefficients.
+
+
+```{prf:theorem} Sum of binomial probabilities
+:label: res-prob-sum-binomial-probs
+
+$$
+\sum_{k=0}^n p(k) = 1.
+$$
+```
+```{prf:proof}
+Recall from {prf:ref}`res-comb-binomial-theorem`
+that
+
+$$
+(a + b)^n = \sum_{k=0}^n \binom{n}{k} a^k b^{n - k}.
+$$
+
+Putting $a = p$ and $b=1-p$, we get
+
+$$
+1 = \sum_{k=0}^n \binom{n}{k} p^k (1-p)^{n - k}
+= \sum_{k=0}^n p(k).
+$$
+```
+
 
 (sec:prob:compound:experiment)=
 ## Compound Experiments
@@ -1978,35 +2392,6 @@ $$
 $$
 ```
 
-```{prf:example} Repeated coin tosses
-:label: ex-prob-repeated-coin-tosses
-
-Consider tossing a coin $n$ times.
-1. Assume that the each toss is an independent random experiment.
-1. The outcomes of each experiment are $H$ (head) and $T$ (tail).
-1. Let $\PP(H) = p$ and $\PP(T) = q = 1 - p$.
-1. The outcome of $n$ tosses can be described as a string
-   of $n$ letters each of which is $H$ or $T$.
-1. There are $2^n$ possible strings. They form the sample space
-   of the compound experiment.
-1. Let a particular string have $k$ heads and $n-k$ tails. 
-1. Then the probability of this string is given by
-
-    $$
-    \PP(\zeta_1, \dots, \zeta_n) = \prod_{i=1}^n \PP(\{ \zeta_i \})
-    = p^k q^{n - k}.
-    $$
-1. There are $n \choose k$ strings which consist of $k$ heads and
-   $n-k$ tails.
-1. Each of these strings (singleton events) are mutually exclusive
-   of each other.
-1. Hence, by the additivity axiom, the probability of having $k$
-   heads and $n-k$ tails in $n$ trials is given by
-
-   $$
-   {n \choose k} p^k q^{n - k}.
-   $$
-```
 
 Let $E$ be a compound event of two independent
 experiments given as a disjoint union of product events.
