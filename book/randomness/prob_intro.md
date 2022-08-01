@@ -47,9 +47,13 @@ Although we don't provide extensive coverage of
 measure theory in these notes,
 we cover some fundamental concepts like $\sigma$-algebra
 in our introduction to probability theory.
+
+For an introduction to probability theory, see
+{cite}`ross2014introduction,ross2014first,bertsekas2008introduction,papoulis2002probability`.
+For engineering applications, see
+{cite}`stark2012probability`.
 For a comprehensive measure theoretic treatment,
 see {cite}`billingsley2012probability`.
-
 
 ```{index} Random experiment
 ```
