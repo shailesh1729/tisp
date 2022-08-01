@@ -1342,9 +1342,7 @@ $$
 $$
 ```
 
-## Joint and Conditional Probability
-
-### Joint Probability
+## Joint Probability
 
 ```{index} Joint probability
 ```
@@ -1368,7 +1366,36 @@ happening together.
 ```
 
 
-### Conditional Probability
+## Conditional Probability
+
+Conditional probability provides us the means
+to reason about experiments with partial information.
+If an event is known to have happened, then
+the probabilities of other events associated
+with an experiment change. 
+Here are some examples:
+
+1. If a cancer test is 90% reliable and it turns positive for
+   a person then the probability of the person
+   having cancer increases dramatically.
+1. One can analyze a corpus of English literature to
+   estimate the probabilities of a letter coming after
+   another. Given that a letter $t$ has appeared
+   as the first letter of the word, the probability
+   that the next letter will be $h$ is higher than
+   the general probability of $h$ being the second
+   letter of a word.
+1. If a die is rolled twice successively and we
+   are told that the sum of two rolls is $7$, then
+   the probability that the first roll is $1$ is
+   $0.5$.
+
+One point to note that conditional probability
+doesn't establish any chronological order between
+events. It merely describes how the probabilities
+change based on partial information about an
+experiment.
+
 
 ```{index} Conditional probability
 ```
@@ -1491,6 +1518,8 @@ $$
 = \frac{\PP(A)}{\PP(A)} = 1.
 $$
 
+### Properties
+
 Since $\PP(B | A)$ is a valid probability measure,
 all the properties of a probability measure are
 applicable for the conditional probability also.
@@ -1545,6 +1574,95 @@ conditional probabilities as a probability
 measure on the new sample space $A$.
 ```
 
+### Multiplication Rule
+
+```{prf:theorem} Multiplication rule
+:label: res-prob-cond-multiplication-rule
+
+Let $A_1, A_2, \dots, A_n$ be a finite collection
+of events and let $A$ be an event which occurs
+if and only if each of these events occur.
+In other words,
+
+$$
+A = A_1 A_2 \dots A_n.
+$$
+
+Then
+
+$$
+\PP(A) = \PP(A_1) \PP(A_2 | A_1) \PP(A_3 | A_1 A_2)
+\dots
+\PP(A_n | A_1 A_2 \dots A_{n-1}). 
+$$
+```
+```{prf:proof}
+We can see that
+
+$$
+\PP(A) &= \PP(A_1 A_2 \dots A_n) \\
+&= \PP(A_1) \frac{\PP(A_1 A_2 \dots A_n)}{\PP(A_1)} \\
+&= \PP(A_1) \frac{\PP(A_1 A_2)}{\PP(A_1)} 
+\frac{\PP(A_1 A_2 \dots A_n)}{\PP(A_1 A_2)} \\
+&= \PP(A_1) \frac{\PP(A_1 A_2)}{\PP(A_1)}\frac{\PP(A_1 A_2 A_3)}{\PP(A_1 A_2)} 
+\frac{\PP(A_1 A_2 \dots A_n)}{\PP(A_1 A_2 A_3)} \\
+&= \PP(A_1) \frac{\PP(A_1 A_2)}{\PP(A_1)}\frac{\PP(A_1 A_2 A_3)}{\PP(A_1 A_2)} \dots
+\frac{\PP(A_1 A_2 \dots A_n)}{\PP(A_1 A_2 A_3 \dots A_{n-1})} \\
+&= \PP(A_1) \PP(A_2 | A_1) \PP(A_3 | A_1 A_2)
+\dots
+\PP(A_n | A_1 A_2 \dots A_{n-1}).
+$$
+```
+
+```{prf:example}
+:label: ex-prob-cond-mult-1
+
+Draw 4 cards from a deck of 52 cards.
+What is the probability that none of them
+is a spade?
+
+1. Define $A_i$ as the event that the $i$-th card
+   is not a spade.
+1. Our event of interest is $A = A_1 A_2 A_3 A_4$.
+1. There are 13 cards of the suit spade.
+   There are 39 other cards.
+1. $\PP(A_1) = \frac{39}{52}$.
+1. Given that $A_1$ has happened (i.e. the first card
+   is not a spade), we are left with 51 cards out of
+   which 38 are not spade.
+1. Hence $\PP(A_2 | A_1) = \frac{38}{51}$.
+1. The probability that the third card is not a spade is
+   $\PP(A_3 | A_1 A_2) = \frac{37}{50}$.
+1. The probability that the fourth card is not a spade is
+   $\PP(A_4 | A_1 A_2 A_3) = \frac{36}{49}$.
+1. Applying the multiplication rule
+
+   $$
+   \PP(A) = \PP(A_1 A_2 A_3 A_4)
+   &= \PP(A_1) \PP(A_2 | A_1) \PP(A_3 | A_1 A_2)
+   \PP(A_4 | A_1 A_2 A_3) \\
+   &= \frac{39}{52}\frac{38}{51}\frac{37}{50}\frac{36}{49}.
+   $$
+
+Another way to calculate this is through counting
+the number of ways four cards can be chosen.
+
+1. Total number of ways four cards can be chosen
+   is $52 \choose 4$.
+1. Total number of ways four cards can be chosen which
+   are not spades are $39 \choose 4$.
+1. Hence the probability that none of the four cards
+   are spades is
+
+   $$
+   \frac{39 \choose 4}{52 \choose 4}
+   = \frac{39!}{4! 35!}\frac{4! 48!}{52!}
+   = \frac{39 \cdot 38 \cdot 37 \cdot 36}{52 \cdot 51 \cdot 50 \cdot 49}.
+   $$
+```
+
+
+### Marginal Probability
 
 ```{index} Marginal probability
 ```
@@ -1557,7 +1675,131 @@ is the probability $\PP(A)$ which is not
 conditioned on the event $B$.
 ```
 
-### Independence
+
+### Total Probability Theorem
+
+```{prf:theorem} Total probability theorem
+:label: res-prob-total-prob
+
+Let $A_1, \dots, A_n$ be disjoint events that
+form a partition of the sample space $\Omega$.
+Assume that $\PP(A_i) > 0$ for every $i$.
+Then for any event $B$ we have
+
+$$
+\PP(B) 
+= \PP(A_1 B) + \dots + \PP(A_n B)
+= \PP(A_1)\PP(B | A_1) + \dots + \PP(A_n)\PP(B | A_n).
+$$
+```
+
+```{prf:proof}
+.
+
+1. Since $A_1, \dots, A_n$ are disjoint, hence
+   so are $A_1 B, \dots, A_n B$.
+1. We have
+
+   $$
+   B = A_1 B \cup \dots \cup A_n B.
+   $$
+1. Applying additivity axiom, 
+
+   $$
+   \PP(B) = \PP(A_1 B) + \dots + \PP(A_n B).
+   $$
+1. Applying conditional probability definition, we have
+
+   $$
+   \PP(B) = \PP(A_1)\PP(B | A_1) + \dots + \PP(A_n)\PP(B | A_n).
+   $$
+```
+
+## Bayes Rule
+
+The most famous application of total probability theorem
+is the Bayes rule. It relates the conditional probabilities
+of the form $\PP(A | B)$
+with conditional probabilities of the form $\PP(B | A)$
+in which the order of conditioning is reversed.
+
+
+```{prf:theorem} Bayes rule
+:label: res-prob-bayes-rule
+
+Let $A_1, \dots, A_n$ be disjoint events that
+form a partition of the sample space $\Omega$.
+Assume that $\PP(A_i) > 0$ for every $i$.
+Let $B$ be another event such that $\PP(B) > 0$.
+Then we have
+
+$$
+\PP(A_i | B) 
+&= \frac{\PP(A_i) \PP(B | A_i)}{\PP(B)} \\
+&= \frac{\PP(A_i) \PP(B | A_i)}
+{\PP(A_1)\PP(B | A_1) + \dots + \PP(A_n)\PP(B | A_n)}.
+$$
+```
+
+```{prf:proof}
+.
+
+1. By definition of conditional probability, we have
+
+   $$
+   \PP (A_i B) = \PP(A_i | B)  \PP(B)
+   $$
+   and
+
+   $$
+   \PP (A_i B) = \PP(B | A_i)  \PP(A_i).
+   $$
+1. Hence
+
+   $$
+   \PP(A_i | B)  \PP(B) = \PP(B | A_i)  \PP(A_i).
+   $$
+1. Dividing both sides with $\PP(B)$, we get
+
+   $$
+   \PP(A_i | B) = \frac{\PP(A_i) \PP(B | A_i)}{\PP(B)}.
+   $$
+1. Expanding $\PP(B)$ via
+   {prf:ref}`total probability theorem <res-prob-total-prob>`,
+   we get the desired result.
+```
+
+```{prf:remark} Statistical inference
+:label: rem-prob-bayes-inference
+
+Bayes' rule is a key tool in the field of
+*statistical inference*.
+
+1. We conduct an experiment where can observe an
+   *effect* which may be due to a number of *causes*.
+1. The events $A_1, \dots, A_n$ denote the causes
+   which may not be observable directly.
+1. The event $B$ is the effect which can be observed.
+1. The probability $\PP(B | A_i)$ models the relationship
+   between the cause $A_i$ and the effect $B$.
+   It represents the likelihood of $B$ happening
+   given that $A_i$ has happened.
+1. We are often interested in knowing the probability
+   of $A_i$ given that $B$ has been observed.
+1. This is an *inference* since the events $A_i$ cannot be
+   observed directly.
+1. The probability $\PP(A_i | B)$ is known as
+   the *posterior probability* of the event $A_i$
+   given that $B$ has happened.
+1. This is distinguished from the unconditional/marginal
+   probability $\PP(A_i)$ which is the probability
+   of the event $A_i$ without any information about
+   the event $B$.
+1. $\PP(A_i)$ is known as the *prior* probability of
+   $A_i$.
+```
+
+## Independence
 
 ```{index} Independence
 ```
